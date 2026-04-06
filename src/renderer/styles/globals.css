@@ -1,0 +1,400 @@
+/* ─── BoltBerry Design System  ·  Brand System v1 ───────────────────────────── */
+/*     70% dark neutrals · 20% text+neutral · 7% blue · 3% yellow-orange        */
+
+:root {
+  /* ── Backgrounds  (three depth layers per spec) ──────────────────────────── */
+  --bg-base:       #0D1015;   /* Near Black  – global canvas                    */
+  --bg-surface:    #121722;   /* Dark Navy   – panels, sidebars, shell           */
+  --bg-elevated:   #182130;   /* Panel Blue  – nested cards, elevated surfaces   */
+  --bg-overlay:    #1E2A3E;   /* Derived     – hover states, dropdown bg         */
+
+  --border:        #283550;
+  --border-subtle: #1B263A;
+
+  /* ── Text ─────────────────────────────────────────────────────────────────── */
+  --text-primary:  #F4F6FA;   /* Soft White  – main working text                 */
+  --text-secondary:#94A0B2;   /* Cool Gray   – metadata, helper labels           */
+  --text-muted:    #50607A;   /* Derived     – timestamps, placeholders          */
+  --text-inverse:  #0D1015;   /* Used on Bolt Yellow buttons                     */
+
+  /* ── Bolt Yellow – Primary action  (≤3% of UI surface) ──────────────────── */
+  --accent:        #FFC62E;
+  --accent-hover:  #FF9A1F;   /* transitions to Bolt Orange = logo gradient feel */
+  --accent-light:  #FFD966;
+  --accent-dim:    rgba(255, 198, 46, 0.12);
+
+  /* ── Bolt Orange – Secondary energy / companion accent ──────────────────── */
+  --accent-orange: #FF9A1F;
+
+  /* ── Berry Blue – Structure, selection, navigation  (≤7% of UI) ─────────── */
+  --accent-blue:       #2F6BFF;
+  --accent-blue-light: #4A86FF;
+  --accent-blue-dim:   rgba(47, 107, 255, 0.12);
+
+  /* ── Semantic  (must stay separate from brand accents) ───────────────────── */
+  --success:       #22c55e;
+  --warning:       #f59e0b;
+  --danger:        #ef4444;
+  --info:          #2F6BFF;   /* = Berry Blue */
+
+  /* ── HP bar ──────────────────────────────────────────────────────────────── */
+  --hp-high:       #22c55e;
+  --hp-mid:        #f59e0b;
+  --hp-low:        #ef4444;
+
+  /* ── Canvas / FoW ────────────────────────────────────────────────────────── */
+  --fog-color:     rgba(0, 0, 0, 0.92);
+  --grid-color:    rgba(255, 255, 255, 0.12);
+
+  /* ── Spacing  (8px base · 8/12/16/24/32/48 increments) ──────────────────── */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-12: 48px;
+
+  /* ── Typography  (Inter – clean, neutral, legible) ───────────────────────── */
+  --font:         'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+  --text-xs:      11px;
+  --text-sm:      13px;
+  --text-base:    14px;
+  --text-md:      16px;
+  --text-lg:      18px;
+  --text-xl:      22px;
+
+  /* ── Radius  (friendly precision per spec) ───────────────────────────────── */
+  --radius-sm:    4px;    /* tags, tiny badges                                   */
+  --radius:       10px;   /* buttons, inputs, dropdowns                          */
+  --radius-md:    12px;   /* cards, inner panels                                 */
+  --radius-lg:    16px;   /* large surfaces, modals, sidebars top-level          */
+
+  /* ── Transitions  (120–220 ms per brand spec) ────────────────────────────── */
+  --transition:      150ms ease;
+  --transition-slow: 200ms ease;
+
+  /* ── Layout dimensions ───────────────────────────────────────────────────── */
+  --sidebar-left:  220px;
+  --sidebar-right: 280px;
+  --toolbar-h:     48px;
+  --statusbar-h:   28px;
+}
+
+/* Light Theme Override */
+[data-theme='light'] {
+  --bg-base:       #EFF1F7;
+  --bg-surface:    #FFFFFF;
+  --bg-elevated:   #E5E9F4;
+  --bg-overlay:    #D8DEEE;
+  --border:        #C0CADF;
+  --border-subtle: #D8DEEE;
+  --text-primary:  #0D1015;
+  --text-secondary:#3D4F68;
+  --text-muted:    #627592;
+  --text-inverse:  #FFFFFF;
+  --accent-dim:      rgba(255, 198, 46, 0.12);
+  --accent-blue-dim: rgba(47, 107, 255, 0.10);
+}
+
+/* ─── Reset ───────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font);
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  background: var(--bg-base);
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Focus  (Berry Blue per brand spec Section 7.4) ──────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ─── Layout primitives ──────────────────────────────────────────────────────── */
+.app-layout {
+  display: grid;
+  grid-template-rows: var(--toolbar-h) 1fr var(--statusbar-h);
+  grid-template-columns: var(--sidebar-left) 1fr var(--sidebar-right);
+  grid-template-areas:
+    "toolbar toolbar toolbar"
+    "sidebar-left canvas sidebar-right"
+    "statusbar statusbar statusbar";
+  height: 100%;
+  overflow: hidden;
+}
+
+.sidebar-left-collapsed .app-layout {
+  grid-template-columns: 0 1fr var(--sidebar-right);
+}
+.sidebar-right-collapsed .app-layout {
+  grid-template-columns: var(--sidebar-left) 1fr 0;
+}
+
+/* ─── Toolbar ────────────────────────────────────────────────────────────────── */
+.toolbar {
+  grid-area: toolbar;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 0 var(--sp-4);
+  -webkit-app-region: drag;
+}
+
+.toolbar > * { -webkit-app-region: no-drag; }
+
+/* ─── Sidebars ───────────────────────────────────────────────────────────────── */
+.sidebar {
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-right {
+  border-right: none;
+  border-left: 1px solid var(--border);
+  grid-area: sidebar-right;
+}
+
+.sidebar-left { grid-area: sidebar-left; }
+
+.sidebar-section {
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.sidebar-section-title {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: var(--sp-2);
+}
+
+/* ─── Canvas area ────────────────────────────────────────────────────────────── */
+.canvas-area {
+  grid-area: canvas;
+  background: var(--bg-base);
+  overflow: hidden;
+  position: relative;
+}
+
+/* ─── Status bar ─────────────────────────────────────────────────────────────── */
+.statusbar {
+  grid-area: statusbar;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--sp-4);
+  gap: var(--sp-6);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.statusbar-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+.statusbar-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+.statusbar-dot.connected    { background: var(--success); }
+.statusbar-dot.disconnected { background: var(--danger); }
+
+/* ─── Buttons ────────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+  white-space: nowrap;
+}
+
+/* Ghost – lowest visual weight, tertiary actions only */
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: transparent;
+}
+.btn-ghost:hover { background: var(--bg-overlay); color: var(--text-primary); }
+
+/* Primary – Bolt Yellow CTA, dark text (WCAG AA compliant on #FFC62E) */
+.btn-primary {
+  background: var(--accent);
+  color: var(--text-inverse);
+  font-weight: 600;
+}
+.btn-primary:hover {
+  background: var(--accent-hover);           /* yellow → bolt orange */
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Secondary – Berry Blue border, for structural secondary actions */
+.btn-secondary {
+  background: transparent;
+  color: var(--accent-blue-light);
+  border-color: var(--accent-blue);
+}
+.btn-secondary:hover {
+  background: var(--accent-blue-dim);
+  color: var(--accent-blue-light);
+}
+
+/* Danger */
+.btn-danger {
+  background: transparent;
+  color: var(--danger);
+  border-color: var(--danger);
+}
+.btn-danger:hover { background: rgba(239,68,68,0.1); }
+
+/* Icon-only */
+.btn-icon {
+  padding: var(--sp-2);
+  width: 32px;
+  height: 32px;
+  justify-content: center;
+}
+
+/* Active/selected toggle state – Berry Blue (selection, not action) */
+.btn-active {
+  background: var(--accent-blue-dim) !important;
+  color: var(--accent-blue-light) !important;
+  border-color: var(--accent-blue) !important;
+}
+
+/* ─── Tool button (toolbar) ──────────────────────────────────────────────────── */
+.tool-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background var(--transition);
+  font-size: 18px;
+}
+.tool-btn:hover { background: var(--bg-overlay); color: var(--text-primary); }
+.tool-btn.active {
+  background: var(--accent-blue-dim);
+  border-color: var(--accent-blue);
+  color: var(--accent-blue-light);
+  /* No glow – brand spec Section 9: no electricity effects in working UI */
+}
+.tool-btn[title] { position: relative; }
+
+/* ─── Inputs ─────────────────────────────────────────────────────────────────── */
+.input {
+  background: var(--bg-base);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  padding: var(--sp-2) var(--sp-3);
+  width: 100%;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+/* Berry Blue focus ring per spec Section 7.4 */
+.input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px var(--accent-blue-dim);
+}
+.input::placeholder { color: var(--text-muted); }
+
+/* ─── Tags / Badges ──────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  border-radius: 999px;   /* capsule per spec */
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+/* ─── Divider ────────────────────────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: var(--sp-3) 0;
+}
+
+/* ─── Empty state ────────────────────────────────────────────────────────────── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3);
+  padding: var(--sp-8);
+  color: var(--text-muted);
+  text-align: center;
+  height: 100%;
+}
+.empty-state-icon  { font-size: 48px; opacity: 0.4; }
+.empty-state-title { font-size: var(--text-md); font-weight: 600; color: var(--text-secondary); }
+.empty-state-desc  { font-size: var(--text-sm); max-width: 280px; line-height: 1.5; }
+
+/* ─── Overlay (blackout) ─────────────────────────────────────────────────────── */
+.blackout-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 9999;
+  transition: opacity var(--transition-slow);
+}
+
+/* ─── Animations ─────────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 200ms ease forwards; }

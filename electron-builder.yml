@@ -1,0 +1,81 @@
+appId: com.boltberry.boltberry
+productName: BoltBerry
+copyright: Copyright © 2026 BoltBerry
+
+directories:
+  output: release
+  buildResources: resources
+
+files:
+  - dist/**/*
+  - node_modules/**/*
+  - package.json
+  - "!node_modules/**/{CHANGELOG.md,README.md,README,readme.md,readme}"
+  - "!node_modules/**/{test,__tests__,tests,powered-test,example,examples}"
+  - "!node_modules/.bin"
+  - "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}"
+
+asarUnpack:
+  # better-sqlite3 contains native binaries – must be outside asar
+  - node_modules/better-sqlite3/**/*
+
+# ─── Windows ──────────────────────────────────────────────────────────────────
+win:
+  target:
+    - target: nsis
+      arch: [x64, ia32]
+  icon: resources/icon.ico
+  # Sign with signtool if certificate env vars are present
+  # certificateFile: ${env.WIN_CERT_FILE}
+  # certificatePassword: ${env.WIN_CERT_PASSWORD}
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  installerIcon: resources/icon.ico
+  uninstallerIcon: resources/icon.ico
+  installerHeaderIcon: resources/icon.ico
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: BoltBerry
+  runAfterFinish: true
+
+# ─── macOS ────────────────────────────────────────────────────────────────────
+mac:
+  target:
+    - target: dmg
+      arch: [x64, arm64]
+    - target: zip
+      arch: [x64, arm64]
+  icon: resources/icon.icns
+  category: public.app-category.entertainment
+  # notarize: true  # requires APPLE_ID + APPLE_ID_PASSWORD env vars
+
+dmg:
+  icon: resources/icon.icns
+  iconSize: 80
+  contents:
+    - x: 130
+      y: 220
+    - x: 410
+      y: 220
+      type: link
+      path: /Applications
+
+# ─── Linux ───────────────────────────────────────────────────────────────────
+linux:
+  target:
+    - target: AppImage
+      arch: [x64]
+    - target: deb
+      arch: [x64]
+  icon: resources/icons
+  category: Game
+  description: Lokale Virtual-Tabletop-App für Pen-and-Paper-Runden
+
+# ─── Auto-Updater (GitHub Releases) ──────────────────────────────────────────
+publish:
+  provider: github
+  owner: boltberry
+  repo: boltberry
+  releaseType: release
