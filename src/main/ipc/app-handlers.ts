@@ -1,5 +1,5 @@
 import { ipcMain, dialog, app } from 'electron'
-import { join, extname } from 'path'
+import { join, extname, relative } from 'path'
 import { copyFileSync, existsSync, mkdirSync, statSync, writeFileSync, readFileSync } from 'fs'
 import { IPC } from '../../shared/ipc-types'
 import {
@@ -8,7 +8,7 @@ import {
   getAvailableDisplays,
   setPlayerDisplayId,
 } from '../windows'
-import { getDb } from '../db/database'
+import { getDb, getCustomUserDataPath } from '../db/database'
 
 const ASSET_EXTENSIONS = {
   map: ['.png', '.jpg', '.jpeg', '.webp'],
@@ -18,7 +18,8 @@ const ASSET_EXTENSIONS = {
 }
 
 function getAssetDir(type: string): string {
-  const dir = join(app.getPath('userData'), 'assets', type)
+  const userDataPath = getCustomUserDataPath() || app.getPath('userData')
+  const dir = join(userDataPath, 'assets', type)
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true })
   return dir
 }
@@ -41,6 +42,40 @@ export function registerAppHandlers(): void {
     }
     createPlayerWindow()
     return true
+  })
+
+  // Get default user data folder
+  ipcMain.handle('GET_DEFAULT_USER_DATA_FOLDER', () => {
+    const { app } = require('electron')
+    const { join } = require('path')
+    return join(app.getPath('documents'), 'BoltBerry')
+  })
+
+  // Set custom user data folder
+  ipcMain.handle('SET_USER_DATA_FOLDER', (_event, path: string) => {
+    const { setCustomUserDataPath, initDatabase } = require('../db/database')
+    setCustomUserDataPath(path)
+    
+    // Reinitialize database with new path
+    try {
+      initDatabase()
+    } catch (err) {
+      console.error('[AppHandlers] Failed to reinitialize database:', err)
+    }
+    
+    return true
+  })
+
+// Open content folder
+  ipcMain.handle('OPEN_CONTENT_FOLDER', () => {
+    const { shell } = require('electron')
+    const { getCustomUserDataPath } = require('../db/database')
+    const { join } = require('path')
+    
+    const userDataPath = getCustomUserDataPath() || app.getPath('userData')
+    const contentPath = join(userDataPath, 'assets')
+    
+    return shell.openPath(contentPath)
   })
 
   // Import file dialog → copy to AppData, return stored path
@@ -90,14 +125,18 @@ export function registerAppHandlers(): void {
 
     copyFileSync(srcPath, destPath)
 
+    // Store relative path from user data folder
+    const userDataPath = getCustomUserDataPath() || app.getPath('userData')
+    const relativePath = relative(userDataPath, destPath)
+
     // Register in assets table
     const db = getDb()
     const stmt = db.prepare(
       `INSERT INTO assets (original_name, stored_path, type, campaign_id) VALUES (?, ?, ?, ?)`
     )
-    const result2 = stmt.run(srcPath.split(/[\\/]/).pop()!, destPath, type, campaignId ?? null)
+    const result2 = stmt.run(srcPath.split(/[\\/]/).pop()!, relativePath, type, campaignId ?? null)
 
-    return { id: result2.lastInsertRowid, path: destPath }
+    return { id: result2.lastInsertRowid, path: relativePath }
   })
 
   // Import PDF → returns file bytes so renderer can render with pdfjs
@@ -130,11 +169,16 @@ export function registerAppHandlers(): void {
     const destName = `${Date.now()}_${Math.random().toString(36).slice(2)}.png`
     const destPath = join(destDir, destName)
     writeFileSync(destPath, Buffer.from(base64, 'base64'))
+    
+    // Store relative path from user data folder
+    const userDataPath = getCustomUserDataPath() || app.getPath('userData')
+    const relativePath = relative(userDataPath, destPath)
+    
     const db = getDb()
     const row = db.prepare(
       `INSERT INTO assets (original_name, stored_path, type, campaign_id) VALUES (?, ?, ?, ?)`
-    ).run(originalName, destPath, type, campaignId)
-    return { id: row.lastInsertRowid, path: destPath }
+    ).run(originalName, relativePath, type, campaignId)
+    return { id: row.lastInsertRowid, path: relativePath }
   })
 
   // Save now (autosave trigger)

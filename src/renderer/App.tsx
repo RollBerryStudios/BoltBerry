@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useUIStore } from './stores/uiStore'
 import { useCampaignStore } from './stores/campaignStore'
+import { useSettingsStore } from './stores/settingsStore'
 import { AppLayout } from './components/AppLayout'
 import { StartScreen } from './components/StartScreen'
+import { SetupWizard } from './components/SetupWizard'
 import { ShortcutOverlay } from './components/ShortcutOverlay'
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
 import { useAutoSave } from './hooks/useAutoSave'
@@ -43,9 +45,22 @@ export default function App() {
     loadCampaigns()
   }, [])
 
+  // Initialize settings
+  useEffect(() => {
+    initializeSettings()
+  }, [])
+
+  const { isSetupComplete } = useSettingsStore()
+
   return (
     <>
-      {activeCampaignId ? <AppLayout /> : <StartScreen />}
+      {!isSetupComplete ? (
+        <SetupWizard onComplete={() => useSettingsStore.getState().setIsSetupComplete(true)} />
+      ) : activeCampaignId ? (
+        <AppLayout />
+      ) : (
+        <StartScreen />
+      )}
       {showShortcuts && <ShortcutOverlay onClose={() => setShowShortcuts(false)} />}
     </>
   )
@@ -75,5 +90,19 @@ async function loadCampaigns() {
     }
   } catch (err) {
     console.error('[App] Failed to load campaigns:', err)
+  }
+}
+
+async function initializeSettings() {
+  if (!window.electronAPI) {
+    console.error('[App] electronAPI not available — preload may have failed')
+    return
+  }
+  try {
+    const defaultFolder = await window.electronAPI.getDefaultUserDataFolder()
+    useSettingsStore.getState().setUserDataFolder(defaultFolder)
+    useSettingsStore.getState().setIsSetupComplete(true)
+  } catch (err) {
+    console.error('[App] Failed to initialize settings:', err)
   }
 }

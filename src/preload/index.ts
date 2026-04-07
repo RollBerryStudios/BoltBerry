@@ -20,6 +20,9 @@ const dmApi = {
   setPlayerMonitor: (displayId: number) =>
     ipcRenderer.invoke(IPC.SET_PLAYER_MONITOR, displayId),
   openPlayerWindow: () => ipcRenderer.invoke(IPC.OPEN_PLAYER_WINDOW),
+  getDefaultUserDataFolder: () => ipcRenderer.invoke('GET_DEFAULT_USER_DATA_FOLDER'),
+  setUserDataFolder: (path: string) => ipcRenderer.invoke('SET_USER_DATA_FOLDER', path),
+  openContentFolder: () => ipcRenderer.invoke('OPEN_CONTENT_FOLDER'),
 
   // File operations
   importFile: (type: 'map' | 'token' | 'atmosphere' | 'audio', campaignId?: number) =>

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { AssetBrowser } from './panels/AssetBrowser'
+import { SettingsPanel } from './panels/SettingsPanel'
 import type { MapRecord } from '@shared/ipc-types'
 
 export function LeftSidebar() {
@@ -70,19 +71,27 @@ export function LeftSidebar() {
   }
 
   async function handleAddMap() {
-    if (!mapName.trim() || !activeCampaignId || !window.electronAPI) return
+    if (!activeCampaignId || !window.electronAPI) return
     try {
+      // Get file first to extract name
       const asset = await window.electronAPI.importFile('map', activeCampaignId)
       if (!asset) return
+      
+      // Auto-name from file if no name was entered
+      let finalMapName = mapName.trim()
+      if (!finalMapName) {
+        const fileName = asset.path.split(/[\\/]/).pop() || ''
+        finalMapName = fileName.replace(/\.[^/.]+$/, "") || 'Neue Karte'
+      }
 
       const result = await window.electronAPI.dbRun(
         `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation) VALUES (?, ?, ?, ?, 0)`,
-        [activeCampaignId, mapName.trim(), asset.path, activeMaps.length]
+        [activeCampaignId, finalMapName, asset.path, activeMaps.length]
       )
       const newMap: MapRecord = {
         id: result.lastInsertRowid,
         campaignId: activeCampaignId,
-        name: mapName.trim(),
+        name: finalMapName,
         imagePath: asset.path,
         gridType: 'square',
         gridSize: 50,
@@ -104,7 +113,7 @@ export function LeftSidebar() {
   }
 
   async function handleAddMapFromPdf() {
-    if (!mapName.trim() || !activeCampaignId || !window.electronAPI) return
+    if (!activeCampaignId || !window.electronAPI) return
     try {
       const pdfData = await window.electronAPI.importPdf(activeCampaignId)
       if (!pdfData) return
@@ -118,14 +127,20 @@ export function LeftSidebar() {
         return
       }
 
+      // Auto-name from file if no name was entered
+      let finalMapName = mapName.trim()
+      if (!finalMapName && pdfData.originalName) {
+        finalMapName = pdfData.originalName.replace(/\.[^/.]+$/, "") || 'Neue Karte'
+      }
+
       const result = await window.electronAPI.dbRun(
         `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation) VALUES (?, ?, ?, ?, 0)`,
-        [activeCampaignId, mapName.trim(), imagePath, activeMaps.length]
+        [activeCampaignId, finalMapName, imagePath, activeMaps.length]
       )
       const newMap: MapRecord = {
         id: result.lastInsertRowid,
         campaignId: activeCampaignId,
-        name: mapName.trim(),
+        name: finalMapName,
         imagePath,
         gridType: 'square',
         gridSize: 50,
@@ -188,7 +203,11 @@ export function LeftSidebar() {
     <div className="sidebar sidebar-left">
       {/* ── Tab bar ──────────────────────────────────────────────────────── */}
       <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', background: 'var(--bg-surface)', flexShrink: 0 }}>
-        {([['maps', '🗺️', t('sidebar.left.tabMaps')], ['assets', '🗄', t('sidebar.left.tabAssets')]] as const).map(([id, icon, label]) => (
+        {([
+          ['maps', '🗺️', t('sidebar.left.tabMaps')],
+          ['assets', '🗄', t('sidebar.left.tabAssets')],
+          ['settings', '⚙️', t('settings.title')]
+        ] as const).map(([id, icon, label]) => (
           <button
             key={id}
             onClick={() => setTab(id)}
@@ -207,6 +226,8 @@ export function LeftSidebar() {
       </div>
 
       {tab === 'assets' && <AssetBrowser />}
+      
+      {tab === 'settings' && <SettingsPanel />}
 
       {tab === 'maps' && <>
       {/* ── Map list ──────────────────────────────────────────────────────── */}

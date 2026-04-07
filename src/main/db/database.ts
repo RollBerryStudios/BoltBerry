@@ -6,8 +6,18 @@ import { CREATE_TABLES_SQL, SEED_SCHEMA_VERSION, MIGRATE_V1_TO_V2, MIGRATE_V2_TO
 
 let db: Database.Database | null = null
 
+let customUserDataPath: string | null = null
+
+export function setCustomUserDataPath(path: string) {
+  customUserDataPath = path
+}
+
+export function getCustomUserDataPath(): string | null {
+  return customUserDataPath
+}
+
 export function initDatabase(): Database.Database {
-  const userDataPath = app.getPath('userData')
+  const userDataPath = customUserDataPath || app.getPath('userData')
   const dbDir = join(userDataPath, 'data')
 
   if (!existsSync(dbDir)) {

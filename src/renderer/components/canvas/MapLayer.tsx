@@ -1,4 +1,4 @@
-import { useEffect, useRef, RefObject } from 'react'
+import { useEffect, useRef, RefObject, useState } from 'react'
 import { Layer, Image as KonvaImage, Shape } from 'react-konva'
 import Konva from 'konva'
 import type { MapRecord } from '@shared/ipc-types'
@@ -19,13 +19,36 @@ const MAX_SCALE = 12
 export function MapLayer({ map, stageRef, canvasSize }: MapLayerProps) {
   const { scale, offsetX, offsetY, setTransform, reset } = useMapTransformStore()
   const { activeTool } = useUIStore()
-  const { img: image, imgW: natW, imgH: natH } = useRotatedImage(`file://${map.imagePath}`, map.rotation ?? 0)
+  const [resolvedImagePath, setResolvedImagePath] = useState<string | null>(null)
+  const { img: image, imgW: natW, imgH: natH } = useRotatedImage(resolvedImagePath, map.rotation ?? 0)
   const isPanning = useRef(false)
   const lastPointer = useRef({ x: 0, y: 0 })
   const cameraInitializedRef = useRef(false)
   const cameraSaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  // Reset transform and camera-init flag when map changes
+  // Resolve image path when map changes
+  useEffect(() => {
+    async function resolvePath() {
+      if (!window.electronAPI) {
+        // Fallback to direct file path for development
+        setResolvedImagePath(`file://${map.imagePath}`)
+        return
+      }
+      
+      try {
+        // In production, we store relative paths, so we need to resolve them
+        const userDataPath = await window.electronAPI.getDefaultUserDataFolder()
+        const absolutePath = `${userDataPath}/${map.imagePath}`
+        setResolvedImagePath(`file://${absolutePath}`)
+      } catch (err) {
+        console.error('[MapLayer] Failed to resolve image path:', err)
+        // Fallback to direct path
+        setResolvedImagePath(`file://${map.imagePath}`)
+      }
+    }
+    
+    resolvePath()
+  }, [map.imagePath])
   useEffect(() => {
     cameraInitializedRef.current = false
     reset()

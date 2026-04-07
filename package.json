@@ -1,7 +1,7 @@
 {
   "name": "boltberry",
   "version": "0.1.0",
-  "description": "BoltBerry \u2013 Lokale Virtual-Tabletop-App f\u00fcr Pen-and-Paper-Runden",
+  "description": "BoltBerry – Lokale Virtual-Tabletop-App für Pen-and-Paper-Runden",
   "main": "dist/main/main/index.js",
   "homepage": ".",
   "author": {
@@ -67,7 +67,7 @@
     "electron-devtools-installer": "^3.2.0",
     "electronmon": "^2.0.4",
     "eslint": "^8.57.0",
-    "typescript": "^5.5.0",
+    "typescript": "^5.9.3",
     "vite": "^5.3.0",
     "vitest": "^2.0.0",
     "wait-on": "^9.0.4"
