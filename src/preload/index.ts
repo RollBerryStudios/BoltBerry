@@ -23,6 +23,8 @@ const dmApi = {
   getDefaultUserDataFolder: () => ipcRenderer.invoke('GET_DEFAULT_USER_DATA_FOLDER'),
   setUserDataFolder: (path: string) => ipcRenderer.invoke('SET_USER_DATA_FOLDER', path),
   openContentFolder: () => ipcRenderer.invoke('OPEN_CONTENT_FOLDER'),
+  getImageAsBase64: (path: string) => ipcRenderer.invoke('GET_IMAGE_AS_BASE64', path),
+  getUserDataPath: () => ipcRenderer.invoke('GET_USER_DATA_PATH'),
 
   // File operations
   importFile: (type: 'map' | 'token' | 'atmosphere' | 'audio', campaignId?: number) =>

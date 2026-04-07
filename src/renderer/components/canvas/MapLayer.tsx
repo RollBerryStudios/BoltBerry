@@ -30,29 +30,49 @@ export function MapLayer({ map, stageRef, canvasSize }: MapLayerProps) {
   useEffect(() => {
     async function resolvePath() {
       if (!window.electronAPI) {
-        // Fallback to direct file path for development
+        // Try direct file path for development
         setResolvedImagePath(`file://${map.imagePath}`)
         return
       }
       
       try {
-        // In production, we store relative paths, so we need to resolve them
-        const userDataPath = await window.electronAPI.getDefaultUserDataFolder()
-        const absolutePath = `${userDataPath}/${map.imagePath}`
-        setResolvedImagePath(`file://${absolutePath}`)
+        // Use main process to get image as base64 to avoid file:// access issues
+        const imageData = await window.electronAPI.getImageAsBase64(map.imagePath)
+        if (imageData) {
+          setResolvedImagePath(imageData)
+        } else {
+          // Fallback to file URL if base64 fails
+          const userDataPath = await window.electronAPI.getUserDataPath()
+          const absolutePath = `${userDataPath}/${map.imagePath}`
+          setResolvedImagePath(`file://${absolutePath}`)
+        }
       } catch (err) {
         console.error('[MapLayer] Failed to resolve image path:', err)
-        // Fallback to direct path
+        // Ultimate fallback
         setResolvedImagePath(`file://${map.imagePath}`)
       }
     }
     
     resolvePath()
   }, [map.imagePath])
+
+  // Create image element from resolved image path (base64 or file URL)
   useEffect(() => {
-    cameraInitializedRef.current = false
-    reset()
-  }, [map.id])
+    if (!resolvedImagePath) {
+      setImageElement(null)
+      return
+    }
+    
+    const img = new Image()
+    img.onload = () => {
+      setImageElement(img)
+    }
+    img.onerror = (err) => {
+      console.error('[MapLayer] Failed to load image element:', resolvedImagePath, err)
+      setImageElement(null)
+    }
+    img.src = resolvedImagePath
+  }, [resolvedImagePath])
 
   // Clear pending camera-save timer on unmount to prevent stale writes
   useEffect(() => {
@@ -60,6 +80,16 @@ export function MapLayer({ map, stageRef, canvasSize }: MapLayerProps) {
       if (cameraSaveTimerRef.current) clearTimeout(cameraSaveTimerRef.current)
     }
   }, [])
+
+  // Debug logging for map visibility
+  useEffect(() => {
+    console.log('[MapLayer] Map render state:', {
+      hasImage: !!imageElement,
+      imagePath: map.imagePath,
+      natW, natH,
+      scale, offsetX, offsetY
+    })
+  }, [imageElement, map.imagePath, natW, natH, scale, offsetX, offsetY])
 
   // Fit map to canvas when image loads or canvas resizes
   useEffect(() => {
@@ -176,9 +206,9 @@ export function MapLayer({ map, stageRef, canvasSize }: MapLayerProps) {
       onMouseLeave={handleMouseUp}
       onWheel={handleWheel}
     >
-      {image && (
+      {imageElement && (
         <KonvaImage
-          image={image as HTMLImageElement}
+          image={imageElement}
           x={offsetX}
           y={offsetY}
           width={natW * scale}

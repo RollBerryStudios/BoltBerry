@@ -78,6 +78,37 @@ export function registerAppHandlers(): void {
     return shell.openPath(contentPath)
   })
 
+  // Get image as base64 for direct embedding
+  ipcMain.handle('GET_IMAGE_AS_BASE64', async (_event, imagePath: string) => {
+    const { getCustomUserDataPath } = require('../db/database')
+    const { join, isAbsolute } = require('path')
+    const { promises: { readFile } } = require('fs')
+    
+    try {
+      let fullPath: string
+      if (isAbsolute(imagePath)) {
+        // Already absolute path
+        fullPath = imagePath
+      } else {
+        // Relative path from user data folder
+        const userDataPath = getCustomUserDataPath() || app.getPath('userData')
+        fullPath = join(userDataPath, imagePath)
+      }
+      
+      console.log('[AppHandlers] Reading image from:', fullPath)
+      const imageBuffer = await readFile(fullPath)
+      const base64 = imageBuffer.toString('base64')
+      const extension = fullPath.toLowerCase().split('.').pop() || 'png'
+      const mimeType = extension === 'jpg' || extension === 'jpeg' ? 'image/jpeg' : 
+                     extension === 'webp' ? 'image/webp' : 'image/png'
+      
+      return `data:${mimeType};base64,${base64}`
+    } catch (err) {
+      console.error('[AppHandlers] Failed to read image:', err)
+      return null
+    }
+  })
+
   // Import file dialog → copy to AppData, return stored path
   ipcMain.handle(IPC.IMPORT_FILE, async (_event, type: 'map' | 'token' | 'atmosphere' | 'audio', campaignId?: number) => {
     const extensions = ASSET_EXTENSIONS[type]
@@ -181,8 +212,14 @@ export function registerAppHandlers(): void {
     return { id: row.lastInsertRowid, path: relativePath }
   })
 
-  // Save now (autosave trigger)
+// Save now (autosave trigger)
   ipcMain.handle(IPC.SAVE_NOW, () => {
     return true
+  })
+
+  // Get Electron's userData path
+  ipcMain.handle('GET_USER_DATA_PATH', () => {
+    const { app } = require('electron')
+    return app.getPath('userData')
   })
 }
