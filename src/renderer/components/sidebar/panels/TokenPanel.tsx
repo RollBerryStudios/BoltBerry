@@ -100,12 +100,16 @@ export function TokenPanel() {
 
   async function handleUpdate(id: number, patch: Partial<TokenRecord>) {
     updateToken(id, patch)
-    for (const [key, val] of Object.entries(patch)) {
-      const col = key.replace(/([A-Z])/g, '_$1').toLowerCase()
-      const dbVal = key === 'statusEffects'
-        ? (Array.isArray(val) && (val as string[]).length > 0 ? JSON.stringify(val) : null)
-        : val
-      await window.electronAPI?.dbRun(`UPDATE tokens SET ${col} = ? WHERE id = ?`, [dbVal, id])
+    try {
+      for (const [key, val] of Object.entries(patch)) {
+        const col = key.replace(/([A-Z])/g, '_$1').toLowerCase()
+        const dbVal = key === 'statusEffects'
+          ? (Array.isArray(val) && (val as string[]).length > 0 ? JSON.stringify(val) : null)
+          : val
+        await window.electronAPI?.dbRun(`UPDATE tokens SET ${col} = ? WHERE id = ?`, [dbVal, id])
+      }
+    } catch (err) {
+      console.error('[TokenPanel] handleUpdate failed:', err)
     }
   }
 

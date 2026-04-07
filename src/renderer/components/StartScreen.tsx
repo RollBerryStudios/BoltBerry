@@ -92,6 +92,21 @@ export function StartScreen() {
         </p>
       </div>
 
+      {!window.electronAPI && (
+        <div style={{
+          padding: 'var(--sp-3) var(--sp-4)',
+          background: 'rgba(239, 83, 80, 0.15)',
+          border: '1px solid rgba(239, 83, 80, 0.3)',
+          borderRadius: 'var(--radius)',
+          color: '#EF5350',
+          fontSize: 'var(--text-sm)',
+          width: 440,
+          marginBottom: 'var(--sp-3)',
+        }}>
+          ⚠️ Datenbankverbindung nicht verfügbar. Die App wurde möglicherweise nicht korrekt installiert.
+        </div>
+      )}
+
       <div style={{
         width: 440,
         background: 'var(--bg-surface)',

@@ -65,11 +65,15 @@ export function HandoutsPanel() {
   }
 
   async function handleDeleteHandout(id: number) {
-    await window.electronAPI?.dbRun('DELETE FROM handouts WHERE id = ?', [id])
-    setHandouts((prev) => prev.filter((h) => h.id !== id))
-    if (sentId === id) {
-      window.electronAPI?.sendHandout(null)
-      setSentId(null)
+    try {
+      await window.electronAPI?.dbRun('DELETE FROM handouts WHERE id = ?', [id])
+      setHandouts((prev) => prev.filter((h) => h.id !== id))
+      if (sentId === id) {
+        window.electronAPI?.sendHandout(null)
+        setSentId(null)
+      }
+    } catch (err) {
+      console.error('[HandoutsPanel] handleDeleteHandout failed:', err)
     }
   }
 

@@ -42,94 +42,107 @@ export function LeftSidebar() {
 
   async function loadMaps(campaignId: number) {
     if (!window.electronAPI) return
-    const rows = await window.electronAPI.dbQuery<{
-      id: number; campaign_id: number; name: string; image_path: string
-      grid_type: string; grid_size: number; ft_per_unit: number; order_index: number
-      camera_x: number | null; camera_y: number | null; camera_scale: number | null
-      rotation: number | null
-    }>('SELECT id, campaign_id, name, image_path, grid_type, grid_size, ft_per_unit, order_index, camera_x, camera_y, camera_scale, rotation FROM maps WHERE campaign_id = ? ORDER BY order_index', [campaignId])
+    try {
+      const rows = await window.electronAPI.dbQuery<{
+        id: number; campaign_id: number; name: string; image_path: string
+        grid_type: string; grid_size: number; ft_per_unit: number; order_index: number
+        camera_x: number | null; camera_y: number | null; camera_scale: number | null
+        rotation: number | null
+      }>('SELECT id, campaign_id, name, image_path, grid_type, grid_size, ft_per_unit, order_index, camera_x, camera_y, camera_scale, rotation FROM maps WHERE campaign_id = ? ORDER BY order_index', [campaignId])
 
-    setActiveMaps(rows.map((r) => ({
-      id: r.id,
-      campaignId: r.campaign_id,
-      name: r.name,
-      imagePath: r.image_path,
-      gridType: r.grid_type as MapRecord['gridType'],
-      gridSize: r.grid_size,
-      ftPerUnit: r.ft_per_unit ?? 5,
-      orderIndex: r.order_index,
-      rotation: r.rotation ?? 0,
-      cameraX: r.camera_x ?? null,
-      cameraY: r.camera_y ?? null,
-      cameraScale: r.camera_scale ?? null,
-    })))
+      setActiveMaps(rows.map((r) => ({
+        id: r.id,
+        campaignId: r.campaign_id,
+        name: r.name,
+        imagePath: r.image_path,
+        gridType: r.grid_type as MapRecord['gridType'],
+        gridSize: r.grid_size,
+        ftPerUnit: r.ft_per_unit ?? 5,
+        orderIndex: r.order_index,
+        rotation: r.rotation ?? 0,
+        cameraX: r.camera_x ?? null,
+        cameraY: r.camera_y ?? null,
+        cameraScale: r.camera_scale ?? null,
+      })))
+    } catch (err) {
+      console.error('[LeftSidebar] loadMaps failed:', err)
+    }
   }
 
   async function handleAddMap() {
     if (!mapName.trim() || !activeCampaignId || !window.electronAPI) return
-    const asset = await window.electronAPI.importFile('map', activeCampaignId)
-    if (!asset) return
+    try {
+      const asset = await window.electronAPI.importFile('map', activeCampaignId)
+      if (!asset) return
 
-    const result = await window.electronAPI.dbRun(
-      `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation) VALUES (?, ?, ?, ?, 0)`,
-      [activeCampaignId, mapName.trim(), asset.path, activeMaps.length]
-    )
-    const newMap: MapRecord = {
-      id: result.lastInsertRowid,
-      campaignId: activeCampaignId,
-      name: mapName.trim(),
-      imagePath: asset.path,
-      gridType: 'square',
-      gridSize: 50,
-      ftPerUnit: 5,
-      orderIndex: activeMaps.length,
-      rotation: 0,
-      cameraX: null,
-      cameraY: null,
-      cameraScale: null,
+      const result = await window.electronAPI.dbRun(
+        `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation) VALUES (?, ?, ?, ?, 0)`,
+        [activeCampaignId, mapName.trim(), asset.path, activeMaps.length]
+      )
+      const newMap: MapRecord = {
+        id: result.lastInsertRowid,
+        campaignId: activeCampaignId,
+        name: mapName.trim(),
+        imagePath: asset.path,
+        gridType: 'square',
+        gridSize: 50,
+        ftPerUnit: 5,
+        orderIndex: activeMaps.length,
+        rotation: 0,
+        cameraX: null,
+        cameraY: null,
+        cameraScale: null,
+      }
+      addMap(newMap)
+      setActiveMap(newMap.id)
+      setAddingMap(false)
+      setMapName('')
+    } catch (err) {
+      console.error('[LeftSidebar] handleAddMap failed:', err)
+      alert(`Karte konnte nicht hinzugefügt werden: ${err}`)
     }
-    addMap(newMap)
-    setActiveMap(newMap.id)
-    setAddingMap(false)
-    setMapName('')
   }
 
   async function handleAddMapFromPdf() {
     if (!mapName.trim() || !activeCampaignId || !window.electronAPI) return
-    const pdfData = await window.electronAPI.importPdf(activeCampaignId)
-    if (!pdfData) return
-
-    // Render PDF first page in renderer using pdfjs-dist
-    let imagePath: string
     try {
-      imagePath = await renderPdfToImage(pdfData.data, pdfData.originalName, activeCampaignId)
-    } catch (err) {
-      console.error('[LeftSidebar] PDF render failed:', err)
-      return
-    }
+      const pdfData = await window.electronAPI.importPdf(activeCampaignId)
+      if (!pdfData) return
 
-    const result = await window.electronAPI.dbRun(
-      `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation) VALUES (?, ?, ?, ?, 0)`,
-      [activeCampaignId, mapName.trim(), imagePath, activeMaps.length]
-    )
-    const newMap: MapRecord = {
-      id: result.lastInsertRowid,
-      campaignId: activeCampaignId,
-      name: mapName.trim(),
-      imagePath,
-      gridType: 'square',
-      gridSize: 50,
-      ftPerUnit: 5,
-      orderIndex: activeMaps.length,
-      rotation: 0,
-      cameraX: null,
-      cameraY: null,
-      cameraScale: null,
+      // Render PDF first page in renderer using pdfjs-dist
+      let imagePath: string
+      try {
+        imagePath = await renderPdfToImage(pdfData.data, pdfData.originalName, activeCampaignId)
+      } catch (err) {
+        console.error('[LeftSidebar] PDF render failed:', err)
+        return
+      }
+
+      const result = await window.electronAPI.dbRun(
+        `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation) VALUES (?, ?, ?, ?, 0)`,
+        [activeCampaignId, mapName.trim(), imagePath, activeMaps.length]
+      )
+      const newMap: MapRecord = {
+        id: result.lastInsertRowid,
+        campaignId: activeCampaignId,
+        name: mapName.trim(),
+        imagePath,
+        gridType: 'square',
+        gridSize: 50,
+        ftPerUnit: 5,
+        orderIndex: activeMaps.length,
+        rotation: 0,
+        cameraX: null,
+        cameraY: null,
+        cameraScale: null,
+      }
+      addMap(newMap)
+      setActiveMap(newMap.id)
+      setAddingMap(false)
+      setMapName('')
+    } catch (err) {
+      console.error('[LeftSidebar] handleAddMapFromPdf failed:', err)
     }
-    addMap(newMap)
-    setActiveMap(newMap.id)
-    setAddingMap(false)
-    setMapName('')
   }
 
   async function handleGridChange(type: MapRecord['gridType'], size: number, fpu?: number) {
@@ -138,29 +151,37 @@ export function LeftSidebar() {
     setGridType(type)
     setGridSize(size)
     setFtPerUnit(newFpu)
-    await window.electronAPI.dbRun(
-      'UPDATE maps SET grid_type = ?, grid_size = ?, ft_per_unit = ? WHERE id = ?',
-      [type, size, newFpu, activeMapId]
-    )
-    useCampaignStore.getState().setActiveMaps(
-      activeMaps.map((m) =>
-        m.id === activeMapId ? { ...m, gridType: type, gridSize: size, ftPerUnit: newFpu } : m
+    try {
+      await window.electronAPI.dbRun(
+        'UPDATE maps SET grid_type = ?, grid_size = ?, ft_per_unit = ? WHERE id = ?',
+        [type, size, newFpu, activeMapId]
       )
-    )
+      useCampaignStore.getState().setActiveMaps(
+        activeMaps.map((m) =>
+          m.id === activeMapId ? { ...m, gridType: type, gridSize: size, ftPerUnit: newFpu } : m
+        )
+      )
+    } catch (err) {
+      console.error('[LeftSidebar] handleGridChange failed:', err)
+    }
   }
 
   async function handleRotationChange(rot: 0 | 90 | 180 | 270) {
     if (!activeMapId || !window.electronAPI) return
     setRotation(rot)
-    await window.electronAPI.dbRun(
-      'UPDATE maps SET rotation = ? WHERE id = ?',
-      [rot, activeMapId]
-    )
-    useCampaignStore.getState().setActiveMaps(
-      activeMaps.map((m) =>
-        m.id === activeMapId ? { ...m, rotation: rot } : m
+    try {
+      await window.electronAPI.dbRun(
+        'UPDATE maps SET rotation = ? WHERE id = ?',
+        [rot, activeMapId]
       )
-    )
+      useCampaignStore.getState().setActiveMaps(
+        activeMaps.map((m) =>
+          m.id === activeMapId ? { ...m, rotation: rot } : m
+        )
+      )
+    } catch (err) {
+      console.error('[LeftSidebar] handleRotationChange failed:', err)
+    }
   }
 
   return (
