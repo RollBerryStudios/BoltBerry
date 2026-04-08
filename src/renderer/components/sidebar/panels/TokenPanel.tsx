@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useTokenStore } from '../../../stores/tokenStore'
 import { useUIStore } from '../../../stores/uiStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
@@ -6,6 +6,45 @@ import { useImageUrl } from '../../../hooks/useImageUrl'
 import { invalidateImageCache } from '../../../hooks/useImage'
 import { invalidateImageUrlCache } from '../../../hooks/useImageUrl'
 import type { TokenRecord } from '@shared/ipc-types'
+
+const LIGHT_COLORS = [
+  { id: 'warm', hex: '#ffcc44' },
+  { id: 'cool', hex: '#4488ff' },
+  { id: 'white', hex: '#ffffff' },
+  { id: 'green', hex: '#44ff88' },
+]
+
+const TOKEN_TEMPLATES = [
+  { name: 'Goblin',   hp: 7,   ac: 15, size: 1, faction: 'enemy' as const },
+  { name: 'Ork',     hp: 15,  ac: 13, size: 1, faction: 'enemy' as const },
+  { name: 'Skelett', hp: 13,  ac: 13, size: 1, faction: 'enemy' as const },
+  { name: 'Zombie',   hp: 22,  ac: 8,  size: 1, faction: 'enemy' as const },
+  { name: 'Wolf',     hp: 11,  ac: 13, size: 1, faction: 'enemy' as const },
+  { name: 'Bandit',   hp: 11,  ac: 12, size: 1, faction: 'enemy' as const },
+  { name: 'Soldat',   hp: 16,  ac: 16, size: 1, faction: 'enemy' as const },
+  { name: 'Magier',   hp: 40,  ac: 12, size: 1, faction: 'enemy' as const },
+  { name: 'Drache',   hp: 200, ac: 19, size: 4, faction: 'enemy' as const },
+]
+
+function parseLightFromNotes(notes: string | null): { enabled: boolean; radius: number; color: string } {
+  if (!notes) return { enabled: false, radius: 5, color: '#ffcc44' }
+  const match = notes.match(/light:(\d+)(?::(#\w+))?/)
+  if (!match) return { enabled: false, radius: 5, color: '#ffcc44' }
+  return {
+    enabled: true,
+    radius: parseInt(match[1]) || 5,
+    color: match[2] || '#ffcc44',
+  }
+}
+
+function setLightInNotes(notes: string | null, enabled: boolean, radius: number, color: string): string | null {
+  const lightStr = enabled ? `light:${radius}:${color}` : ''
+  const cleaned = (notes ?? '').replace(/light:\d+(?::#\w+)?/g, '').trim()
+  if (!lightStr && !cleaned) return null
+  if (!lightStr) return cleaned || null
+  if (!cleaned) return lightStr
+  return `${cleaned}\n${lightStr}`
+}
 
 const STATUS_EFFECTS = [
   { id: 'blinded',       icon: '🫣', label: 'Blind' },
@@ -64,15 +103,29 @@ export function TokenPanel() {
 
   const [secKampf, setSecKampf]       = useState(true)
   const [secAussehen, setSecAussehen] = useState(false)
+  const [secLicht, setSecLicht]       = useState(false)
   const [secStatus, setSecStatus]     = useState(false)
   const [secNotizen, setSecNotizen]   = useState(false)
+  const [showTemplates, setShowTemplates] = useState(false)
+  const templateRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!showTemplates) return
+    function handleClickOutside(e: MouseEvent) {
+      if (templateRef.current && !templateRef.current.contains(e.target as Node)) {
+        setShowTemplates(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [showTemplates])
 
   async function handleAddToken() {
     if (!activeMapId || !window.electronAPI) return
     try {
       const asset = await window.electronAPI.importFile('token', activeMapId)
       const result = await window.electronAPI.dbRun(
-        `INSERT INTO tokens (map_id, name, image_path, x, y) VALUES (?, ?, ?, ?, ?)`,
+        `INSERT INTO tokens (map_id, name, image_path, x, y, faction, show_name) VALUES (?, ?, ?, ?, ?, 'party', 1)`,
         [activeMapId, 'Token', asset?.path ?? null, 100, 100]
       )
       const token: TokenRecord = {
@@ -93,12 +146,57 @@ export function TokenPanel() {
         ac: null,
         notes: null,
         statusEffects: null,
+        faction: 'party',
+        showName: true,
       }
       addToken(token)
       setSelectedToken(token.id)
       broadcastTokensFromPanel()
     } catch (err) {
       console.error('[TokenPanel] handleAddToken failed:', err)
+    }
+  }
+
+  async function handleAddFromTemplate(template: typeof TOKEN_TEMPLATES[number] | null) {
+    if (!activeMapId || !window.electronAPI) return
+    setShowTemplates(false)
+    try {
+      const asset = await window.electronAPI.importFile('token', activeMapId)
+      const name = template ? template.name : 'Token'
+      const hp = template ? template.hp : 0
+      const ac = template ? template.ac : null
+      const size = template ? template.size : 1
+      const faction = template ? template.faction : 'party'
+      const result = await window.electronAPI.dbRun(
+        `INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, ac, faction, visible_to_players, show_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 1)`,
+        [activeMapId, name, asset?.path ?? null, 100, 100, size, hp, hp, ac, faction]
+      )
+      const token: TokenRecord = {
+        id: result.lastInsertRowid,
+        mapId: activeMapId,
+        name,
+        imagePath: asset?.path ?? null,
+        x: 100,
+        y: 100,
+        size,
+        hpCurrent: hp,
+        hpMax: hp,
+        visibleToPlayers: true,
+        rotation: 0,
+        locked: false,
+        zIndex: 0,
+        markerColor: null,
+        ac,
+        notes: null,
+        statusEffects: null,
+        faction,
+        showName: true,
+      }
+      addToken(token)
+      setSelectedToken(token.id)
+      broadcastTokensFromPanel()
+    } catch (err) {
+      console.error('[TokenPanel] handleAddFromTemplate failed:', err)
     }
   }
 
@@ -139,6 +237,56 @@ export function TokenPanel() {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {/* Token list */}
       <div style={{ flex: 1, overflowY: 'auto' }}>
+        {/* Schnellerstellung dropdown */}
+        <div ref={templateRef} style={{ position: 'relative', padding: 'var(--sp-2) var(--sp-4)' }}>
+          <button
+            className="btn btn-ghost"
+            style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--text-xs)' }}
+            onClick={() => setShowTemplates((v) => !v)}
+            disabled={!activeMapId}
+          >
+            ⚡ Schnellerstellung
+          </button>
+          {showTemplates && (
+            <div style={{
+              position: 'absolute', top: '100%', left: 'var(--sp-4)', right: 'var(--sp-4)',
+              background: 'var(--bg-elevated)', border: '1px solid var(--border)',
+              borderRadius: 'var(--radius)', zIndex: 100, maxHeight: 240, overflowY: 'auto',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+            }}>
+              {TOKEN_TEMPLATES.map((tmpl) => (
+                <button
+                  key={tmpl.name}
+                  style={{
+                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                    width: '100%', padding: 'var(--sp-1) var(--sp-2)',
+                    background: 'none', border: 'none', cursor: 'pointer',
+                    color: 'var(--text-primary)', fontSize: 'var(--text-xs)',
+                  }}
+                  onClick={() => handleAddFromTemplate(tmpl)}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
+                >
+                  <span>{tmpl.name}</span>
+                  <span style={{ color: 'var(--text-muted)', fontSize: 10 }}>HP {tmpl.hp} / RK {tmpl.ac}{tmpl.size > 1 ? ` / ${tmpl.size}×${tmpl.size}` : ''}</span>
+                </button>
+              ))}
+              <button
+                style={{
+                  display: 'flex', width: '100%', padding: 'var(--sp-1) var(--sp-2)',
+                  background: 'none', border: 'none', borderTop: '1px solid var(--border)',
+                  cursor: 'pointer', color: 'var(--text-muted)', fontSize: 'var(--text-xs)',
+                }}
+                onClick={() => handleAddFromTemplate(null)}
+                onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
+              >
+                Benutzerdefiniert…
+              </button>
+            </div>
+          )}
+        </div>
+
         {tokens.length === 0 ? (
           <div className="empty-state" style={{ padding: 'var(--sp-6)' }}>
             <div className="empty-state-icon" style={{ fontSize: 32 }}>⬤</div>
@@ -271,6 +419,18 @@ export function TokenPanel() {
                   {selected.visibleToPlayers ? '👁' : '🙈'}
                 </button>
               </div>
+              {/* Faction selector */}
+              <div style={{ display: 'flex', gap: 'var(--sp-2)', alignItems: 'center' }}>
+                <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>Fraktion</label>
+                <select className="input" value={selected.faction}
+                  onChange={(e) => handleUpdate(selected.id, { faction: e.target.value })}
+                  style={{ width: 'auto' }}>
+                  <option value="party">🟢 Spieler</option>
+                  <option value="enemy">🔴 Gegner</option>
+                  <option value="neutral">🟡 Neutral</option>
+                  <option value="friendly">🔵 Freundlich</option>
+                </select>
+              </div>
             </div>
           )}
 
@@ -330,6 +490,69 @@ export function TokenPanel() {
               </div>
             </div>
           )}
+
+          {/* ── Licht ──────────────────────────────────────────────────── */}
+          <SectionHeader title="Licht" open={secLicht} onToggle={() => setSecLicht((v) => !v)} />
+          {secLicht && (() => {
+            const light = parseLightFromNotes(selected.notes)
+            return (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)', paddingBottom: 'var(--sp-2)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
+                  <button
+                    className="btn btn-ghost"
+                    style={{ fontSize: 'var(--text-xs)', flex: 1, justifyContent: 'center' }}
+                    onClick={() => {
+                      const newNotes = setLightInNotes(selected.notes, !light.enabled, light.radius, light.color)
+                      handleUpdate(selected.id, { notes: newNotes })
+                    }}
+                  >
+                    💡 Lichtquelle {light.enabled ? 'an' : 'aus'}
+                  </button>
+                </div>
+                {light.enabled && (
+                  <>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
+                      <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 80 }}>Radius in Feldern</label>
+                      <input
+                        type="range" min={1} max={30}
+                        value={light.radius}
+                        onChange={(e) => {
+                          const newNotes = setLightInNotes(selected.notes, true, parseInt(e.target.value), light.color)
+                          handleUpdate(selected.id, { notes: newNotes })
+                        }}
+                        style={{ flex: 1 }}
+                      />
+                      <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-primary)', minWidth: 24, textAlign: 'right' }}>{light.radius}</span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
+                      <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 80 }}>Farbe</label>
+                      <div style={{ display: 'flex', gap: 4 }}>
+                        {LIGHT_COLORS.map((c) => (
+                          <button
+                            key={c.id}
+                            title={c.id}
+                            onClick={() => {
+                              const newNotes = setLightInNotes(selected.notes, true, light.radius, c.hex)
+                              handleUpdate(selected.id, { notes: newNotes })
+                            }}
+                            style={{
+                              width: 22, height: 22, borderRadius: '50%',
+                              background: c.hex,
+                              border: light.color === c.hex ? '2px solid var(--text-primary)' : '1px solid rgba(255,255,255,0.3)',
+                              cursor: 'pointer', padding: 0,
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>
+                      Vorschau: <span style={{ color: light.color, textShadow: `0 0 6px ${light.color}` }}>○</span> Radius {light.radius}, {light.color}
+                    </div>
+                  </>
+                )}
+              </div>
+            )
+          })()}
 
           {/* ── Status-Effekte ───────────────────────────────────────── */}
           <SectionHeader title="Status-Effekte" open={secStatus} onToggle={() => setSecStatus((v) => !v)} />
@@ -429,11 +652,12 @@ function broadcastTokensFromPanel() {
       size: t.size,
       hpCurrent: t.hpCurrent,
       hpMax: t.hpMax,
-      showName: true,
+      showName: t.showName,
       rotation: t.rotation,
       markerColor: t.markerColor,
       statusEffects: t.statusEffects,
       ac: t.ac,
+      faction: t.faction,
     }))
   window.electronAPI?.sendTokenUpdate(visible)
 }

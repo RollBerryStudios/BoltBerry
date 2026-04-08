@@ -3,7 +3,7 @@ import { useInitiativeStore } from '../renderer/stores/initiativeStore'
 import type { InitiativeEntry } from '../shared/ipc-types'
 
 function makeEntry(id: number, roll: number, currentTurn = false): InitiativeEntry {
-  return { id, mapId: 1, combatantName: `Combatant ${id}`, roll, currentTurn }
+  return { id, mapId: 1, combatantName: `Combatant ${id}`, roll, currentTurn, tokenId: null }
 }
 
 beforeEach(() => {

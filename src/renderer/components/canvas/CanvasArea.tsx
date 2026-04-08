@@ -28,9 +28,10 @@ function broadcastTokensFromCanvas() {
     .map((t) => ({
       id: t.id, name: t.name, imagePath: t.imagePath,
       x: t.x, y: t.y, size: t.size,
-      hpCurrent: t.hpCurrent, hpMax: t.hpMax, showName: true,
+      hpCurrent: t.hpCurrent, hpMax: t.hpMax, showName: t.showName,
       rotation: t.rotation, markerColor: t.markerColor,
       statusEffects: t.statusEffects, ac: t.ac,
+      faction: t.faction,
     }))
   window.electronAPI?.sendTokenUpdate(visible)
 }
@@ -154,7 +155,7 @@ export function CanvasArea() {
       const y = shouldSnap ? Math.round(mapPos.y / gridSize) * gridSize : mapPos.y
 
       const dbResult = await window.electronAPI.dbRun(
-        `INSERT INTO tokens (map_id, name, image_path, x, y) VALUES (?, ?, ?, ?, ?)`,
+        `INSERT INTO tokens (map_id, name, image_path, x, y, faction, show_name) VALUES (?, ?, ?, ?, ?, 'party', 1)`,
         [activeMapId, file.name.replace(/\.[^.]+$/, ''), result.path, x, y]
       )
 
@@ -175,6 +176,8 @@ export function CanvasArea() {
         ac: null,
         notes: null,
         statusEffects: null,
+        faction: 'party',
+        showName: true,
       })
       broadcastTokensFromCanvas()
       return
@@ -197,7 +200,7 @@ export function CanvasArea() {
       const y = shouldSnap ? Math.round(mapPos.y / gridSize) * gridSize : mapPos.y
 
       const dbResult = await window.electronAPI.dbRun(
-        `INSERT INTO tokens (map_id, name, image_path, x, y) VALUES (?, ?, ?, ?, ?)`,
+        `INSERT INTO tokens (map_id, name, image_path, x, y, faction, show_name) VALUES (?, ?, ?, ?, ?, 'party', 1)`,
         [activeMapId, storedPath.split(/[\\/]/).pop()?.replace(/\.[^.]+$/, '') ?? 'Token', storedPath, x, y]
       )
 
@@ -209,6 +212,7 @@ export function CanvasArea() {
         x, y,
         size: 1, hpCurrent: 0, hpMax: 0, visibleToPlayers: true, rotation: 0,
         locked: false, zIndex: 0, markerColor: null, ac: null, notes: null, statusEffects: null,
+        faction: 'party', showName: true,
       })
       broadcastTokensFromCanvas()
     }
@@ -404,8 +408,8 @@ async function loadMapData(mapId: number, map: MapRecord) {
       x: number; y: number; size: number; hp_current: number; hp_max: number
       visible_to_players: number; rotation: number; locked: number; z_index: number
       marker_color: string | null; ac: number | null; notes: string | null
-      status_effects: string | null
-    }>('SELECT id, map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects FROM tokens WHERE map_id = ?', [mapId])
+      status_effects: string | null; faction: string; show_name: number
+    }>('SELECT id, map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name FROM tokens WHERE map_id = ?', [mapId])
 
     useTokenStore.getState().setTokens(tokenRows.map((r) => ({
       id: r.id,
@@ -425,12 +429,14 @@ async function loadMapData(mapId: number, map: MapRecord) {
       ac: r.ac ?? null,
       notes: r.notes ?? null,
       statusEffects: r.status_effects ? JSON.parse(r.status_effects) : null,
+      faction: r.faction ?? 'party',
+      showName: Boolean(r.show_name ?? 1),
     })))
 
     // Load initiative
     const initRows = await window.electronAPI.dbQuery<{
-      id: number; map_id: number; combatant_name: string; roll: number; current_turn: number
-    }>('SELECT id, map_id, combatant_name, roll, current_turn FROM initiative WHERE map_id = ? ORDER BY roll DESC', [mapId])
+      id: number; map_id: number; combatant_name: string; roll: number; current_turn: number; token_id: number | null
+    }>('SELECT id, map_id, combatant_name, roll, current_turn, token_id FROM initiative WHERE map_id = ? ORDER BY roll DESC', [mapId])
 
     useInitiativeStore.getState().setEntries(initRows.map((r) => ({
       id: r.id,
@@ -438,6 +444,7 @@ async function loadMapData(mapId: number, map: MapRecord) {
       combatantName: r.combatant_name,
       roll: r.roll,
       currentTurn: Boolean(r.current_turn),
+      tokenId: r.token_id ?? null,
     })))
 
     // Sync player: send full state
@@ -494,11 +501,12 @@ async function loadMapData(mapId: number, map: MapRecord) {
           size: t.size,
           hpCurrent: t.hpCurrent,
           hpMax: t.hpMax,
-          showName: true,
+          showName: t.showName,
           rotation: t.rotation,
           markerColor: t.markerColor,
           statusEffects: t.statusEffects,
           ac: t.ac,
+          faction: t.faction,
         })),
       fogBitmap,
       exploredBitmap,

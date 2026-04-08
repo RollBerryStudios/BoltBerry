@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 10
+export const SCHEMA_VERSION = 12
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -86,6 +86,17 @@ ALTER TABLE maps ADD COLUMN grid_offset_y REAL NOT NULL DEFAULT 0;
 UPDATE schema_version SET version = 10;
 `
 
+export const MIGRATE_V10_TO_V11 = `
+ALTER TABLE tokens ADD COLUMN faction TEXT DEFAULT 'party';
+ALTER TABLE tokens ADD COLUMN show_name INTEGER NOT NULL DEFAULT 1;
+UPDATE schema_version SET version = 11;
+`
+
+export const MIGRATE_V11_TO_V12 = `
+ALTER TABLE initiative ADD COLUMN token_id INTEGER REFERENCES tokens(id) ON DELETE SET NULL;
+UPDATE schema_version SET version = 12;
+`
+
 export const CREATE_TABLES_SQL = `
 -- Campaigns
 CREATE TABLE IF NOT EXISTS campaigns (
@@ -138,7 +149,9 @@ CREATE TABLE IF NOT EXISTS tokens (
   marker_color       TEXT,
   ac                 INTEGER,
   notes              TEXT,
-  status_effects     TEXT
+  status_effects     TEXT,
+  faction            TEXT    DEFAULT 'party',
+  show_name          INTEGER NOT NULL DEFAULT 1
 );
 
 -- Initiative list
@@ -147,7 +160,8 @@ CREATE TABLE IF NOT EXISTS initiative (
   map_id          INTEGER NOT NULL REFERENCES maps(id) ON DELETE CASCADE,
   combatant_name  TEXT    NOT NULL,
   roll            INTEGER NOT NULL DEFAULT 0,
-  current_turn    INTEGER NOT NULL DEFAULT 0
+  current_turn    INTEGER NOT NULL DEFAULT 0,
+  token_id        INTEGER REFERENCES tokens(id) ON DELETE SET NULL
 );
 
 -- Notes (campaign-level or map-level)
@@ -208,5 +222,5 @@ CREATE TABLE IF NOT EXISTS schema_version (
 `
 
 export const SEED_SCHEMA_VERSION = `
-INSERT OR IGNORE INTO schema_version (version) VALUES (10);
+INSERT OR IGNORE INTO schema_version (version) VALUES (12);
 `

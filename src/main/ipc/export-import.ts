@@ -180,10 +180,11 @@ interface CampaignExport {
   maps: Array<{
     name: string; imagePath: string; gridType: string; gridSize: number; orderIndex: number; rotation: number; ftPerUnit: number; gridOffsetX: number; gridOffsetY: number
     tokens: Array<{
-      name: string; imagePath: string | null; x: number; y: number; size: number
+      id: number; name: string; imagePath: string | null; x: number; y: number; size: number
       hpCurrent: number; hpMax: number; visibleToPlayers: number
       rotation: number; locked: number; zIndex: number; markerColor: string | null
       ac: number | null; notes: string | null; statusEffects: string | null
+      faction: string; showName: number
     }>
     gmPins: Array<{
       x: number; y: number; label: string; icon: string; color: string
@@ -193,7 +194,7 @@ interface CampaignExport {
     }>
     fogBitmap: string | null
     exploredBitmap: string | null
-    initiative: Array<{ combatantName: string; roll: number; currentTurn: number }>
+    initiative: Array<{ combatantName: string; roll: number; currentTurn: number; tokenId: number | null }>
     notes: string
   }>
   campaignNote: string
@@ -210,7 +211,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
   ).get(campaignId) as { content: string } | undefined)?.content ?? ''
 
   return {
-    version: 4,
+    version: 5,
     campaign: { name: campaign.name },
     campaignNote,
     maps: maps.map((m) => {
@@ -231,6 +232,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
         gridOffsetX: m.grid_offset_x ?? 0,
         gridOffsetY: m.grid_offset_y ?? 0,
         tokens: tokens.map((t) => ({
+          id: t.id,
           name: t.name,
           imagePath: t.image_path,
           x: t.x, y: t.y, size: t.size,
@@ -243,6 +245,8 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
           ac: t.ac ?? null,
           notes: t.notes ?? null,
           statusEffects: t.status_effects ?? null,
+          faction: t.faction ?? 'party',
+          showName: t.show_name ?? 1,
         })),
         gmPins: gmPins.map((p) => ({
           x: p.x, y: p.y, label: p.label, icon: p.icon, color: p.color,
@@ -253,7 +257,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
         fogBitmap: fog?.fog_bitmap ?? null,
         exploredBitmap: fog?.explored_bitmap ?? null,
         initiative: initiative.map((i) => ({
-          combatantName: i.combatant_name, roll: i.roll, currentTurn: i.current_turn,
+          combatantName: i.combatant_name, roll: i.roll, currentTurn: i.current_turn, tokenId: i.token_id ?? null,
         })),
         notes: note,
       }
@@ -313,12 +317,16 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
       ).run(campaignId, m.name, m.imagePath, m.gridType, m.gridSize, m.orderIndex, m.rotation ?? 0, m.ftPerUnit ?? 5, m.gridOffsetX ?? 0, m.gridOffsetY ?? 0)
       const mapId = Number(mapResult.lastInsertRowid)
 
+      const tokenIdMap = new Map<number, number>()
+
       for (const t of m.tokens) {
-        db.prepare(
-          `INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        const result = db.prepare(
+          `INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
         ).run(mapId, t.name, t.imagePath, t.x, t.y, t.size, t.hpCurrent, t.hpMax, t.visibleToPlayers,
-          t.rotation ?? 0, t.locked ?? 0, t.zIndex ?? 0, t.markerColor ?? null, t.ac ?? null, t.notes ?? null, t.statusEffects ?? null)
+          t.rotation ?? 0, t.locked ?? 0, t.zIndex ?? 0, t.markerColor ?? null, t.ac ?? null, t.notes ?? null, t.statusEffects ?? null,
+          t.faction ?? 'party', t.showName ?? 1)
+        tokenIdMap.set(t.id, Number(result.lastInsertRowid))
       }
 
       if (m.fogBitmap) {
@@ -340,8 +348,9 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
       }
 
       for (const i of m.initiative) {
-        db.prepare(`INSERT INTO initiative (map_id, combatant_name, roll, current_turn) VALUES (?, ?, ?, ?)`)
-          .run(mapId, i.combatantName, i.roll, i.currentTurn)
+        const mappedTokenId = i.tokenId != null ? (tokenIdMap.get(i.tokenId) ?? null) : null
+        db.prepare(`INSERT INTO initiative (map_id, combatant_name, roll, current_turn, token_id) VALUES (?, ?, ?, ?, ?)`)
+          .run(mapId, i.combatantName, i.roll, i.currentTurn, mappedTokenId)
       }
 
       if (m.notes) {

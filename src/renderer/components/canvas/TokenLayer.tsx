@@ -5,8 +5,18 @@ import Konva from 'konva'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useUIStore } from '../../stores/uiStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
+import { useInitiativeStore } from '../../stores/initiativeStore'
 import type { MapRecord, TokenRecord } from '@shared/ipc-types'
 import { useImage } from '../../hooks/useImage'
+
+function factionColor(faction: string): string {
+  switch (faction) {
+    case 'enemy': return '#ef4444'
+    case 'neutral': return '#f59e0b'
+    case 'friendly': return '#3b82f6'
+    default: return '#22c55e'
+  }
+}
 
 const STATUS_ICON_MAP: Record<string, string> = {
   blinded: '🫣', charmed: '💫', dead: '💀', deafened: '🔇',
@@ -221,10 +231,19 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     for (const did of idsToDelete) {
       removeToken(did)
     }
+    useInitiativeStore.getState().entries.forEach((entry) => {
+      if (entry.tokenId != null && idsToDelete.includes(entry.tokenId)) {
+        useInitiativeStore.getState().updateEntry(entry.id, { tokenId: null })
+      }
+    })
     clearTokenSelection()
     try {
       await window.electronAPI?.dbRun(
         `DELETE FROM tokens WHERE id IN (${idsToDelete.map(() => '?').join(',')})`,
+        idsToDelete
+      )
+      await window.electronAPI?.dbRun(
+        `UPDATE initiative SET token_id = NULL WHERE token_id IN (${idsToDelete.map(() => '?').join(',')})`,
         idsToDelete
       )
       broadcastTokens(useTokenStore.getState().tokens)
@@ -240,10 +259,10 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     const newY = token.y + map.gridSize
     try {
       const row = await window.electronAPI.dbRun(
-        'INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [token.mapId, token.name, token.imagePath, newX, newY, token.size, token.hpCurrent, token.hpMax, token.visibleToPlayers ? 1 : 0,
          token.rotation, token.locked ? 1 : 0, token.zIndex, token.markerColor, token.ac, token.notes,
-         token.statusEffects ? JSON.stringify(token.statusEffects) : null]
+         token.statusEffects ? JSON.stringify(token.statusEffects) : null, token.faction ?? 'party', token.showName ? 1 : 0]
       )
       useTokenStore.getState().addToken({
         id: row.lastInsertRowid,
@@ -263,6 +282,8 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
         ac: token.ac,
         notes: token.notes,
         statusEffects: token.statusEffects,
+        faction: token.faction ?? 'party',
+        showName: token.showName,
       })
       broadcastTokens(useTokenStore.getState().tokens)
     } catch (err) {
@@ -400,6 +421,9 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     { label: '📋 Duplizieren', action: () => handleDuplicate(token) },
                     { label: token.locked ? '🔓 Entsperren' : '🔒 Sperren', action: () => handleToggleLock(token) },
                     { label: '🏷 Markierung', action: null, submenu: true },
+                    { label: '⬆️ nach vorne', action: () => { handleUpdate(token.id, { zIndex: token.zIndex + 1 }); closeContextMenu() } },
+                    { label: '⬇️ nach hinten', action: () => { handleUpdate(token.id, { zIndex: Math.max(0, token.zIndex - 1) }); closeContextMenu() } },
+                    { label: '⏫ ganz nach vorne', action: () => { const maxZ = Math.max(...tokens.map(t => t.zIndex), 0); handleUpdate(token.id, { zIndex: maxZ + 1 }); closeContextMenu() } },
                     null,
                     { label: '❌ Löschen', action: () => handleDelete(token.id), danger: true },
                   ]
@@ -548,10 +572,10 @@ const TokenNode = memo(function TokenNode({
       {/* Inner group: rotates around token center (r, r) */}
       <Group x={r} y={r} rotation={token.rotation}>
         {/* Marker color ring */}
-        {token.markerColor && (
+        {(token.markerColor ?? factionColor(token.faction)) && (
           <Circle
             x={0} y={0} radius={r + 5}
-            stroke={token.markerColor} strokeWidth={3}
+            stroke={token.markerColor || factionColor(token.faction)} strokeWidth={3}
             fill="transparent" listening={false}
           />
         )}
@@ -559,7 +583,7 @@ const TokenNode = memo(function TokenNode({
         {/* Selection ring */}
         {isSelected && (
           <Circle
-            x={0} y={0} radius={r + (token.markerColor ? 10 : 3)}
+            x={0} y={0} radius={r + (token.markerColor || factionColor(token.faction) ? 10 : 3)}
             stroke="#4A86FF" strokeWidth={2}
             dash={[4, 3]} fill="transparent" listening={false}
           />
@@ -790,11 +814,12 @@ function broadcastTokens(tokens: TokenRecord[]) {
       size: t.size,
       hpCurrent: t.hpCurrent,
       hpMax: t.hpMax,
-      showName: true,
+      showName: t.showName,
       rotation: t.rotation,
       markerColor: t.markerColor,
       statusEffects: t.statusEffects,
       ac: t.ac,
+      faction: t.faction,
     }))
   window.electronAPI?.sendTokenUpdate(visible)
 }

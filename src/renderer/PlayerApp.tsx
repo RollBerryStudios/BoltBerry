@@ -7,6 +7,15 @@ import { useRotatedImage } from './hooks/useRotatedImage'
 import { useImageUrl } from './hooks/useImageUrl'
 import { applyOpToCtxPair } from './components/canvas/FogLayer'
 
+function factionColor(faction: string): string {
+  switch (faction) {
+    case 'enemy': return '#ef4444'
+    case 'neutral': return '#f59e0b'
+    case 'friendly': return '#3b82f6'
+    default: return '#22c55e'
+  }
+}
+
 type Mode = 'idle' | 'map' | 'atmosphere' | 'blackout'
 
 export default function PlayerApp() {
@@ -835,8 +844,8 @@ function PlayerTokenNode({
   return (
     <Group x={x} y={y} listening={false}>
       <Group x={r} y={r} rotation={token.rotation ?? 0}>
-        {token.markerColor && (
-          <Circle x={0} y={0} radius={r + 5} stroke={token.markerColor} strokeWidth={3} fill="transparent" listening={false} />
+        {(token.markerColor || factionColor(token.faction)) && (
+          <Circle x={0} y={0} radius={r + 5} stroke={token.markerColor || factionColor(token.faction)} strokeWidth={3} fill="transparent" listening={false} />
         )}
         <Circle x={0} y={0} radius={r} fill="#182130" stroke="#1E2A3E" strokeWidth={1.5} listening={false} />
         {image ? (

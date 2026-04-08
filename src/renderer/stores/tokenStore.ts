@@ -89,11 +89,12 @@ function broadcastTokens(tokens: TokenRecord[]) {
       size: t.size,
       hpCurrent: t.hpCurrent,
       hpMax: t.hpMax,
-      showName: true,
+      showName: t.showName,
       rotation: t.rotation,
       markerColor: t.markerColor,
       statusEffects: t.statusEffects,
       ac: t.ac,
+      faction: t.faction,
     }))
   window.electronAPI?.sendTokenUpdate(visible)
 }

@@ -102,6 +102,8 @@ export interface TokenRecord {
   ac: number | null
   notes: string | null
   statusEffects: string[] | null
+  faction: string
+  showName: boolean
 }
 
 export interface InitiativeEntry {
@@ -110,6 +112,7 @@ export interface InitiativeEntry {
   combatantName: string
   roll: number
   currentTurn: boolean
+  tokenId: number | null
 }
 
 export interface NoteRecord {
@@ -143,6 +146,7 @@ export interface PlayerTokenState {
   markerColor: string | null
   statusEffects: string[] | null
   ac: number | null
+  faction: string
 }
 
 export interface PlayerMeasureState {
