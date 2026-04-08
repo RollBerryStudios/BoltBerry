@@ -413,14 +413,35 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     { label: 'Lila', color: '#a855f7' },
                     { label: 'Pink', color: '#ec4899' },
                   ]
-                  const menuItems: any[] = [
+                  const isBatch = selectedTokenIds.length > 1 && selectedTokenIds.includes(token.id)
+                  const menuItems: any[] = isBatch ? [
+                    { label: `👁 Alle sichtbar machen (${selectedTokenIds.length})`, action: () => {
+                      for (const id of selectedTokenIds) handleUpdate(id, { visibleToPlayers: true })
+                      closeContextMenu()
+                    }},
+                    { label: `🙈 Alle verstecken (${selectedTokenIds.length})`, action: () => {
+                      for (const id of selectedTokenIds) handleUpdate(id, { visibleToPlayers: false })
+                      closeContextMenu()
+                    }},
+                    { label: `🔒 Sperren (${selectedTokenIds.length})`, action: () => {
+                      for (const id of selectedTokenIds) handleUpdate(id, { locked: true })
+                      closeContextMenu()
+                    }},
+                    { label: `🔓 Entsperren (${selectedTokenIds.length})`, action: () => {
+                      for (const id of selectedTokenIds) handleUpdate(id, { locked: false })
+                      closeContextMenu()
+                    }},
+                    { label: '🏷 Fraktion setzen', action: null, submenu: true, submenuType: 'faction' },
+                    null,
+                    { label: `❌ Alle löschen (${selectedTokenIds.length})`, action: () => handleDelete(token.id), danger: true },
+                  ] : [
                     { label: '✏️ Umbenennen', action: () => startEdit(token) },
                     { label: '❤️ HP bearbeiten', action: () => startEditHp(token) },
                     { label: '🛡 AC bearbeiten', action: () => startEditAc(token) },
                     { label: token.visibleToPlayers ? '🙈 Verstecken' : '👁 Sichtbar machen', action: () => handleToggleVisibility(token) },
                     { label: '📋 Duplizieren', action: () => handleDuplicate(token) },
                     { label: token.locked ? '🔓 Entsperren' : '🔒 Sperren', action: () => handleToggleLock(token) },
-                    { label: '🏷 Markierung', action: null, submenu: true },
+                    { label: '🏷 Markierung', action: null, submenu: true, submenuType: 'marker' },
                     { label: '⬆️ nach vorne', action: () => { handleUpdate(token.id, { zIndex: token.zIndex + 1 }); closeContextMenu() } },
                     { label: '⬇️ nach hinten', action: () => { handleUpdate(token.id, { zIndex: Math.max(0, token.zIndex - 1) }); closeContextMenu() } },
                     { label: '⏫ ganz nach vorne', action: () => { const maxZ = Math.max(...tokens.map(t => t.zIndex), 0); handleUpdate(token.id, { zIndex: maxZ + 1 }); closeContextMenu() } },
@@ -433,7 +454,13 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     }
                     if (item.submenu) {
                       const isSubOpen = markerSubmenuId === token.id
-                      const MARKER_COLORS_LOCAL = MARKER_COLORS
+                      const isFaction = item.submenuType === 'faction'
+                      const FACTION_OPTIONS = [
+                        { value: 'party', label: '🎮 Spieler', color: '#22c55e' },
+                        { value: 'enemy', label: '⚔️ Gegner', color: '#ef4444' },
+                        { value: 'neutral', label: '⚖️ Neutral', color: '#f59e0b' },
+                        { value: 'friendly', label: '🤝 Freundlich', color: '#3b82f6' },
+                      ]
                       return (
                         <div key={i}>
                           <button
@@ -452,11 +479,43 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                             onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
                             onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
                           >
-                            🏷 Markierung {isSubOpen ? '▲' : '▶'} {token.markerColor && <span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: '50%', background: token.markerColor, marginLeft: 4, verticalAlign: 'middle' }} />}
+                            {isFaction ? '🏷 Fraktion' : '🏷 Markierung'} {isSubOpen ? '▲' : '▶'}
                           </button>
-                          {isSubOpen && (
+                          {isSubOpen && isFaction && (
                             <div style={{ background: 'var(--bg-elevated)', padding: '2px 0' }}>
-                              {MARKER_COLORS_LOCAL.map((mc) => (
+                              {FACTION_OPTIONS.map((f) => (
+                                <button
+                                  key={f.value}
+                                  onClick={() => {
+                                    const ids = isBatch ? selectedTokenIds : [token.id]
+                                    for (const id of ids) handleUpdate(id, { faction: f.value })
+                                    closeContextMenu()
+                                  }}
+                                  style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 6,
+                                    width: '100%',
+                                    padding: '4px 12px 4px 24px',
+                                    background: token.faction === f.value ? 'var(--bg-overlay)' : 'none',
+                                    border: 'none',
+                                    textAlign: 'left',
+                                    fontSize: 'var(--text-sm)',
+                                    color: 'var(--text-primary)',
+                                    cursor: 'pointer',
+                                  }}
+                                  onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
+                                  onMouseLeave={(e) => (e.currentTarget.style.background = token.faction === f.value ? 'var(--bg-overlay)' : 'none')}
+                                >
+                                  <span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: '50%', background: f.color }} />
+                                  {f.label}
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                          {isSubOpen && !isFaction && (
+                            <div style={{ background: 'var(--bg-elevated)', padding: '2px 0' }}>
+                              {MARKER_COLORS.map((mc) => (
                                 <button
                                   key={mc.color ?? 'none'}
                                   onClick={() => handleSetMarker(token.id, mc.color)}
