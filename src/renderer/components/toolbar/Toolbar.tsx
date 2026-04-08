@@ -236,6 +236,20 @@ export function Toolbar() {
 
       <button className="tool-btn" title={t('toolbar.openPlayerWindow')} onClick={() => setShowMonitorDialog(true)}>🖥</button>
 
+      <button
+        className="tool-btn"
+        title="Playerfenster schließen"
+        onClick={() => window.electronAPI?.closePlayerWindow()}
+      >
+        ✕🖥
+      </button>
+
+      <div style={{ width: 1, height: 24, background: 'var(--border)', margin: '0 4px' }} />
+
+      <button className="tool-btn" title="Vergrößern" onClick={() => useMapTransformStore.getState().zoomIn()}>🔍+</button>
+      <button className="tool-btn" title="Verkleinern" onClick={() => useMapTransformStore.getState().zoomOut()}>🔍−</button>
+      <button className="tool-btn" title="Ansicht anpassen" onClick={() => useMapTransformStore.getState().fitToScreen()}>⊡</button>
+
       <div style={{ flex: 1 }} />
 
       {activeCampaignId && (

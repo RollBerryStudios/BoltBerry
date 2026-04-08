@@ -9,6 +9,7 @@ import { useUIStore } from '../../stores/uiStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useInitiativeStore } from '../../stores/initiativeStore'
+import { useImageUrl } from '../../hooks/useImageUrl'
 import type Konva from 'konva'
 import type { MapRecord } from '@shared/ipc-types'
 
@@ -20,6 +21,7 @@ export function CanvasArea() {
   const { activeTool, blackoutActive, appMode, atmosphereImagePath } = useUIStore()
   const { activeMapId, activeMaps } = useCampaignStore()
   const activeMap = activeMaps.find((m) => m.id === activeMapId) ?? null
+  const atmosphereUrl = useImageUrl(atmosphereImagePath)
 
   // Resize observer
   useEffect(() => {
@@ -53,7 +55,7 @@ export function CanvasArea() {
           background: '#000',
         }}>
           <img
-            src={`file://${atmosphereImagePath}`}
+            src={atmosphereUrl ?? ''}
             style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
           />
         </div>

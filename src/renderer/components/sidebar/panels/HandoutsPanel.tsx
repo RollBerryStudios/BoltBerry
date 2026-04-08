@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useCampaignStore } from '../../../stores/campaignStore'
+import { useImageUrl } from '../../../hooks/useImageUrl'
 import type { HandoutRecord } from '@shared/ipc-types'
 
 export function HandoutsPanel() {
@@ -146,10 +147,7 @@ export function HandoutsPanel() {
               </button>
             </div>
             {h.imagePath && (
-              <img
-                src={`file://${h.imagePath}`}
-                style={{ width: '100%', maxHeight: 80, objectFit: 'cover', borderRadius: 'var(--radius-sm)' }}
-              />
+              <HandoutThumbnail path={h.imagePath} />
             )}
             {h.textContent && (
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginTop: 'var(--sp-1)', whiteSpace: 'pre-wrap' }}>
@@ -197,4 +195,10 @@ export function HandoutsPanel() {
       )}
     </div>
   )
+}
+
+function HandoutThumbnail({ path }: { path: string }) {
+  const url = useImageUrl(path)
+  if (!url) return null
+  return <img src={url} style={{ width: '100%', maxHeight: 80, objectFit: 'cover', borderRadius: 'var(--radius-sm)' }} />
 }

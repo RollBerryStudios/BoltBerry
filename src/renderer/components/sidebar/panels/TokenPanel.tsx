@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useTokenStore } from '../../../stores/tokenStore'
 import { useUIStore } from '../../../stores/uiStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
+import { useImageUrl } from '../../../hooks/useImageUrl'
 import type { TokenRecord } from '@shared/ipc-types'
 
 const STATUS_EFFECTS = [
@@ -157,7 +158,7 @@ export function TokenPanel() {
                 fontSize: 16, overflow: 'hidden', flexShrink: 0,
               }}>
                 {token.imagePath
-                  ? <img src={`file://${token.imagePath}`} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+                  ? <TokenThumbnail path={token.imagePath} />
                   : '⬤'}
               </div>
 
@@ -378,4 +379,10 @@ export function TokenPanel() {
       </div>
     </div>
   )
+}
+
+function TokenThumbnail({ path }: { path: string }) {
+  const url = useImageUrl(path)
+  if (!url) return null
+  return <img src={url} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
 }

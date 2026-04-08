@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import { useTokenStore } from '../../../stores/tokenStore'
 import { useMapTransformStore } from '../../../stores/mapTransformStore'
+import { useImageUrl } from '../../../hooks/useImageUrl'
 
 interface AssetRow {
   id: number
@@ -137,11 +138,7 @@ export function AssetBrowser() {
                 onClick={() => asset.type === 'token' && activeMapId ? handleDropTokenOnMap(asset) : undefined}
               >
                 {imageTypes.includes(asset.type) ? (
-                  <img
-                    src={`file://${asset.storedPath}`}
-                    style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', display: 'block' }}
-                    draggable={false}
-                  />
+                  <AssetThumbnail path={asset.storedPath} />
                 ) : (
                   <div style={{
                     width: '100%', aspectRatio: '1',
@@ -183,4 +180,10 @@ export function AssetBrowser() {
       </button>
     </div>
   )
+}
+
+function AssetThumbnail({ path }: { path: string }) {
+  const url = useImageUrl(path)
+  if (!url) return <div style={{ width: '100%', aspectRatio: '1', background: 'var(--bg-overlay)' }} />
+  return <img src={url} style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', display: 'block' }} draggable={false} />
 }

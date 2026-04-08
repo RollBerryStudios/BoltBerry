@@ -20,8 +20,13 @@ export function useImage(src: string | null): HTMLImageElement | null {
 
     let cancelled = false
 
-    if (!src.startsWith('data:') && !src.startsWith('http') && !src.startsWith('file://')) {
-      window.electronAPI?.getImageAsBase64(src).then((imageData) => {
+    // data: URLs load directly; everything else goes through main process
+    // (file:// URLs are unreliable in Electron due to security restrictions,
+    // and relative paths like "assets/map/foo.png" need resolving anyway)
+    if (!src.startsWith('data:')) {
+      // Strip file:// prefix if present, then load relative path through main process
+      const relativePath = src.startsWith('file://') ? src.substring(7) : src
+      window.electronAPI?.getImageAsBase64(relativePath).then((imageData) => {
         if (cancelled) return
         if (!imageData) {
           setImg(null)
@@ -42,7 +47,6 @@ export function useImage(src: string | null): HTMLImageElement | null {
       })
     } else {
       const image = new Image()
-      image.crossOrigin = 'anonymous'
       image.onload = () => {
         if (cancelled) return
         cache.set(src, image)

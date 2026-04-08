@@ -44,6 +44,15 @@ export function registerAppHandlers(): void {
     return true
   })
 
+  // Close player window
+  ipcMain.handle(IPC.CLOSE_PLAYER_WINDOW, () => {
+    const existing = getPlayerWindow()
+    if (existing && !existing.isDestroyed()) {
+      existing.close()
+    }
+    return true
+  })
+
   // Get default user data folder
   ipcMain.handle('GET_DEFAULT_USER_DATA_FOLDER', () => {
     const { app } = require('electron')

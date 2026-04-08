@@ -4,6 +4,7 @@ import { useFogStore } from '../stores/fogStore'
 import { useInitiativeStore } from '../stores/initiativeStore'
 import { useTokenStore } from '../stores/tokenStore'
 import { useCampaignStore } from '../stores/campaignStore'
+import { useMapTransformStore } from '../stores/mapTransformStore'
 
 export function useKeyboardShortcuts() {
   useEffect(() => {
@@ -79,6 +80,16 @@ export function useKeyboardShortcuts() {
           }
           break
         }
+
+        case '=': case '+':
+          useMapTransformStore.getState().zoomIn()
+          break
+        case '-':
+          useMapTransformStore.getState().zoomOut()
+          break
+        case '0':
+          useMapTransformStore.getState().fitToScreen()
+          break
 
         case '1': case '2': case '3': case '4': case '5': {
           const idx = parseInt(e.key) - 1

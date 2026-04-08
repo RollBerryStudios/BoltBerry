@@ -14,6 +14,7 @@ export const IPC = {
   GET_MONITORS: 'app:get-monitors',
   SET_PLAYER_MONITOR: 'app:set-player-monitor',
   OPEN_PLAYER_WINDOW: 'app:open-player-window',
+  CLOSE_PLAYER_WINDOW: 'app:close-player-window',
   IMPORT_FILE: 'app:import-file',
   IMPORT_PDF: 'app:import-pdf',
   SAVE_ASSET_IMAGE: 'app:save-asset-image',

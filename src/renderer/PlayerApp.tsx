@@ -4,6 +4,7 @@ import { Stage, Layer, Image as KonvaImage } from 'react-konva'
 import Konva from 'konva'
 import type { PlayerFullState, PlayerTokenState, FogDelta, PlayerMapState, PlayerPointer, PlayerCamera, PlayerOverlay, PlayerInitiativeEntry, WeatherType } from '@shared/ipc-types'
 import { useRotatedImage } from './hooks/useRotatedImage'
+import { useImageUrl } from './hooks/useImageUrl'
 import { applyOpToCtxPair } from './components/canvas/FogLayer'
 
 type Mode = 'idle' | 'map' | 'atmosphere' | 'blackout'
@@ -157,10 +158,7 @@ export default function PlayerApp() {
             {handout.title}
           </div>
           {handout.imagePath && (
-            <img
-              src={`file://${handout.imagePath}`}
-              style={{ width: '100%', borderRadius: 8, marginBottom: handout.textContent ? 16 : 0 }}
-            />
+            <PlayerImg path={handout.imagePath} style={{ width: '100%', borderRadius: 8, marginBottom: handout.textContent ? 16 : 0 }} />
           )}
           {handout.textContent && (
             <div style={{ fontSize: 16, color: '#94A0B2', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
@@ -175,7 +173,7 @@ export default function PlayerApp() {
   if (mode === 'atmosphere' && atmospherePath) {
     return (
       <div style={{ position: 'relative', width: '100vw', height: '100vh', background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <img src={`file://${atmospherePath}`} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+        <PlayerImg path={atmospherePath} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
         <WeatherCanvas type={weather} width={size.w} height={size.h} />
         <PlayerOverlayWidget overlay={overlay} />
       </div>
@@ -579,8 +577,7 @@ function initDualFogCanvas(
 
   const explored = document.createElement('canvas')
   explored.width = w; explored.height = h
-  explored.getContext('2d')!.fillStyle = 'rgba(0,0,0,1)'
-  explored.getContext('2d')!.fillRect(0, 0, w, h)
+  // starts fully transparent — everything visible by default
   exploredRef.current = explored
 
   const covered = document.createElement('canvas')
@@ -620,4 +617,10 @@ function loadBitmapToRef(
     onDone()
   }
   img.src = dataUrl
+}
+
+function PlayerImg({ path, style }: { path: string; style?: React.CSSProperties }) {
+  const url = useImageUrl(path)
+  if (!url) return null
+  return <img src={url} style={style} />
 }
