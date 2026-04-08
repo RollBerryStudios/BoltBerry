@@ -497,17 +497,46 @@ function PlayerMapView({
     return () => cancelAnimationFrame(rafId)
   }, [fogVersion])
 
-  // Fit-to-screen transform (base)
-  let scale = 1, offX = 0, offY = 0
-  if (image && natW > 0 && natH > 0) {
+  // Smooth camera animation — lerp toward target camera position
+  const [animScale, setAnimScale] = useState(1)
+  const [animOffX, setAnimOffX] = useState(0)
+  const [animOffY, setAnimOffY] = useState(0)
+  const animRunning = useRef(false)
+
+  useEffect(() => {
+    if (!image || natW === 0 || natH === 0 || width === 0 || height === 0) return
+
     const sx = width / natW
     const sy = height / natH
     const fitScale = Math.min(sx, sy)
+
+    let targetScale: number, targetOffX: number, targetOffY: number
     if (camera) {
-      scale = fitScale * camera.relZoom
-      offX = width / 2 - camera.imageCenterX * scale
-      offY = height / 2 - camera.imageCenterY * scale
+      targetScale = fitScale * camera.relZoom
+      targetOffX = width / 2 - camera.imageCenterX * targetScale
+      targetOffY = height / 2 - camera.imageCenterY * targetScale
     } else {
+      targetScale = fitScale * playerScale
+      targetOffX = (width - natW * targetScale) / 2 + playerOffX
+      targetOffY = (height - natH * targetScale) / 2 + playerOffY
+    }
+
+    // If DM camera sync: animate towards target; if local pan/zoom: snap immediately
+    const lerp = camera ? 0.15 : 1
+    setAnimScale((prev) => prev + (targetScale - prev) * lerp)
+    setAnimOffX((prev) => prev + (targetOffX - prev) * lerp)
+    setAnimOffY((prev) => prev + (targetOffY - prev) * lerp)
+  }, [camera, playerScale, playerOffX, playerOffY, image, natW, natH, width, height])
+
+  // Compute final display values
+  let scale = 1, offX = 0, offY = 0
+  if (image && natW > 0 && natH > 0) {
+    if (camera) {
+      scale = animScale
+      offX = animOffX
+      offY = animOffY
+    } else {
+      const fitScale = Math.min(width / natW, height / natH)
       scale = fitScale * playerScale
       offX = (width - natW * scale) / 2 + playerOffX
       offY = (height - natH * scale) / 2 + playerOffY
@@ -528,7 +557,9 @@ function PlayerMapView({
     e.evt.preventDefault()
     const stage = stageRef.current
     if (!stage) return
-    const zoomFactor = e.evt.deltaY < 0 ? 1.12 : 1 / 1.12
+    // Trackpad pinch sends ctrlKey=true with finer deltaY
+    const isPinch = e.evt.ctrlKey
+    const zoomFactor = e.evt.deltaY < 0 ? (isPinch ? 1.03 : 1.12) : (isPinch ? 1 / 1.03 : 1 / 1.12)
     const newScale = Math.max(0.1, Math.min(8, playerScale * zoomFactor))
     const pointer = stage.getPointerPosition()
     if (!pointer) return

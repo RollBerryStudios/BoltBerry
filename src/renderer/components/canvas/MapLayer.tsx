@@ -23,8 +23,32 @@ export function MapLayer({ map, stageRef, canvasSize }: MapLayerProps) {
   const { img: image, imgW: natW, imgH: natH } = useRotatedImage(resolvedImagePath, map.rotation ?? 0)
   const isPanning = useRef(false)
   const lastPointer = useRef({ x: 0, y: 0 })
+  const spaceHeld = useRef(false)
   const cameraInitializedRef = useRef(false)
   const cameraSaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // Track spacebar for alternate pan
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.code === 'Space' && !e.repeat) {
+        spaceHeld.current = true
+        const el = document.getElementById('root')
+        if (el) el.style.cursor = 'grab'
+      }
+    }
+    const onKeyUp = (e: KeyboardEvent) => {
+      if (e.code === 'Space') {
+        spaceHeld.current = false
+        if (!isPanning.current) {
+          const el = document.getElementById('root')
+          if (el) el.style.cursor = ''
+        }
+      }
+    }
+    window.addEventListener('keydown', onKeyDown)
+    window.addEventListener('keyup', onKeyUp)
+    return () => { window.removeEventListener('keydown', onKeyDown); window.removeEventListener('keyup', onKeyUp) }
+  }, [])
 
   // Clear pending camera-save timer on unmount to prevent stale writes
   useEffect(() => {
@@ -93,10 +117,11 @@ export function MapLayer({ map, stageRef, canvasSize }: MapLayerProps) {
   function handleMouseDown(e: Konva.KonvaEventObject<MouseEvent>) {
     const isMiddle = e.evt.button === 1
     const isAltLeft = e.evt.button === 0 && e.evt.altKey
-    const isSelectPan = e.evt.button === 0 && activeTool === 'select'
+    const isSpacePan = e.evt.button === 0 && spaceHeld.current
+    const isSelectPan = e.evt.button === 0 && activeTool === 'select' && !spaceHeld.current
     // Only start select-tool panning when clicking on empty canvas (stage background)
     if (isSelectPan && e.target !== e.target.getStage()) return
-    if (!isMiddle && !isAltLeft && !isSelectPan) return
+    if (!isMiddle && !isAltLeft && !isSelectPan && !isSpacePan) return
     e.evt.preventDefault()
     isPanning.current = true
     lastPointer.current = { x: e.evt.clientX, y: e.evt.clientY }
@@ -108,35 +133,61 @@ export function MapLayer({ map, stageRef, canvasSize }: MapLayerProps) {
     const dx = e.evt.clientX - lastPointer.current.x
     const dy = e.evt.clientY - lastPointer.current.y
     lastPointer.current = { x: e.evt.clientX, y: e.evt.clientY }
-    setTransform({ offsetX: offsetX + dx, offsetY: offsetY + dy })
+    const newOffX = offsetX + dx
+    const newOffY = offsetY + dy
+    setTransform({ offsetX: clampOffsetX(newOffX), offsetY: clampOffsetY(newOffY) })
   }
 
   function handleMouseUp(_e: Konva.KonvaEventObject<MouseEvent>) {
     if (isPanning.current) {
       isPanning.current = false
-      stageRef.current?.container().style.removeProperty('cursor')
+      const cursor = spaceHeld.current ? 'grab' : undefined
+      if (cursor) {
+        stageRef.current?.container().style.setProperty('cursor', cursor)
+      } else {
+        stageRef.current?.container().style.removeProperty('cursor')
+      }
       scheduleCameraSave(scale, offsetX, offsetY)
     }
   }
 
-  // ── Zoom: scroll wheel ─────────────────────────────────────────────────────
+  // ── Zoom: scroll wheel or trackpad pinch ──────────────────────────────────
   function handleWheel(e: Konva.KonvaEventObject<WheelEvent>) {
     e.evt.preventDefault()
     const stage = stageRef.current
     if (!stage) return
 
-    const zoomFactor = e.evt.deltaY < 0 ? 1.12 : 1 / 1.12
+    // Trackpad pinch sends ctrlKey=true with deltaY for zoom
+    const isPinch = e.evt.ctrlKey
+    const zoomFactor = e.evt.deltaY < 0 ? (isPinch ? 1.03 : 1.12) : (isPinch ? 1 / 1.03 : 1 / 1.12)
     const newScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale * zoomFactor))
 
     const pointer = stage.getPointerPosition()
     if (!pointer) return
 
-    // Zoom towards cursor point
     const newOffX = pointer.x - (pointer.x - offsetX) * (newScale / scale)
     const newOffY = pointer.y - (pointer.y - offsetY) * (newScale / scale)
 
-    setTransform({ scale: newScale, offsetX: newOffX, offsetY: newOffY })
+    setTransform({ scale: newScale, offsetX: clampOffsetX(newOffX), offsetY: clampOffsetY(newOffY) })
     scheduleCameraSave(newScale, newOffX, newOffY)
+  }
+
+  // ── Clamp offset so viewport doesn't drift too far from the map ───────────
+  // Allow up to 1 viewport-width/height of empty space beyond the map edge
+  function clampOffsetX(x: number): number {
+    if (!image || natW === 0) return x
+    const mapRight = natW * scale
+    const min = canvasSize.width - mapRight - canvasSize.width * 0.5
+    const max = canvasSize.width * 0.5
+    return Math.max(min, Math.min(max, x))
+  }
+
+  function clampOffsetY(y: number): number {
+    if (!image || natH === 0) return y
+    const mapBottom = natH * scale
+    const min = canvasSize.height - mapBottom - canvasSize.height * 0.5
+    const max = canvasSize.height * 0.5
+    return Math.max(min, Math.min(max, y))
   }
 
   // ── Grid: single Shape with native canvas draw (much cheaper than <Line> array) ──
