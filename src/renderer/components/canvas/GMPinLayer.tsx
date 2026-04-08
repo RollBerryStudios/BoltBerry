@@ -1,4 +1,4 @@
-import { useState, RefObject } from 'react'
+import { useState, useEffect, RefObject } from 'react'
 import { Layer, Group, Text, Circle, Rect } from 'react-konva'
 import { Html } from 'react-konva-utils'
 import Konva from 'konva'
@@ -26,10 +26,12 @@ export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
   const [editingLabel, setEditingLabel] = useState('')
   const [loadedMapId, setLoadedMapId] = useState<number | null>(null)
 
-  if (mapId !== loadedMapId) {
-    setLoadedMapId(mapId)
-    loadPins(mapId).then(setPins)
-  }
+  useEffect(() => {
+    if (mapId !== loadedMapId) {
+      setLoadedMapId(mapId)
+      loadPins(mapId).then(setPins)
+    }
+  }, [mapId, loadedMapId])
 
   async function handleAddPin(e: Konva.KonvaEventObject<MouseEvent>) {
     if (e.evt.button !== 2) return

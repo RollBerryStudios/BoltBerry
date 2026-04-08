@@ -110,7 +110,6 @@ const FOG_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: str
   { id: 'fog-rect',    icon: '▭', labelKey: 'toolbar.tools.fogRect',    shortcut: 'F' },
   { id: 'fog-polygon', icon: '⬡', labelKey: 'toolbar.tools.fogPolygon', shortcut: 'P' },
   { id: 'fog-cover',   icon: '▮', labelKey: 'toolbar.tools.fogCover',   shortcut: 'C' },
-  { id: 'fog-brush',  icon: '🖌', labelKey: 'toolbar.tools.fogBrush',  shortcut: '' },
 ]
 
 const MEASURE_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [

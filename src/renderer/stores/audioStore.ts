@@ -48,7 +48,8 @@ export const useAudioStore = create<AudioState>((set, get) => ({
       audioInstance.pause()
       audioInstance = null
     }
-    audioInstance = new Audio(`file://${path}`)
+    const url = path.startsWith('/') ? `local-asset://${path}` : `local-asset://${path}`
+    audioInstance = new Audio(url)
     audioInstance.loop = get().loop
     audioInstance.volume = get().volume
     audioInstance.ontimeupdate = () => {

@@ -160,8 +160,8 @@ const playerApi = {
     ipcRenderer.on(IPC.PLAYER_MEASURE, handler)
     return () => ipcRenderer.removeListener(IPC.PLAYER_MEASURE, handler)
   },
-  onDrawing: (cb: (drawing: unknown) => void) => {
-    const handler = (_: Electron.IpcRendererEvent, drawing: unknown) => cb(drawing)
+  onDrawing: (cb: (drawing: import('../shared/ipc-types').PlayerDrawingState) => void) => {
+    const handler = (_: Electron.IpcRendererEvent, drawing: import('../shared/ipc-types').PlayerDrawingState) => cb(drawing)
     ipcRenderer.on(IPC.PLAYER_DRAWING, handler)
     return () => ipcRenderer.removeListener(IPC.PLAYER_DRAWING, handler)
   },

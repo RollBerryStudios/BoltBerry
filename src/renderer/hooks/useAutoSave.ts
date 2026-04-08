@@ -21,12 +21,12 @@ export function useAutoSave() {
     // which is a no-op since better-sqlite3 writes are synchronous.
     // We just need to update the UI indicator here.
     const onSaveNow = () => triggerSave()
-    window.addEventListener('rollberry:save-now', onSaveNow)
+    window.addEventListener('boltberry:save-now', onSaveNow)
 
     return () => {
       if (timerRef.current) clearInterval(timerRef.current)
       document.removeEventListener('visibilitychange', onVisibility)
-      window.removeEventListener('rollberry:save-now', onSaveNow)
+      window.removeEventListener('boltberry:save-now', onSaveNow)
     }
   }, [])
 }

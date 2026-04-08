@@ -14,6 +14,7 @@ import { useCampaignStore } from '../../stores/campaignStore'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useInitiativeStore } from '../../stores/initiativeStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
+import { useFogStore } from '../../stores/fogStore'
 import { useImageUrl } from '../../hooks/useImageUrl'
 import type Konva from 'konva'
 import type { MapRecord } from '@shared/ipc-types'
@@ -182,13 +183,14 @@ function getCursor(tool: string): string {
     case 'draw-rect':    return 'crosshair'
     case 'draw-circle':  return 'crosshair'
     case 'draw-text':    return 'text'
-    case 'fog-brush':    return 'crosshair'
     default:              return 'default'
   }
 }
 
 async function loadMapData(mapId: number, map: MapRecord) {
   if (!window.electronAPI) return
+
+  useFogStore.getState().clearHistory()
 
   try {
     // Load tokens
@@ -247,7 +249,21 @@ async function loadMapData(mapId: number, map: MapRecord) {
       console.error('[CanvasArea] fog load failed:', err)
     }
 
-    window.electronAPI.sendFullSync({
+    let playerDrawings: Array<{ id: number; type: string; points: number[]; color: string; width: number }> = []
+    try {
+      const drawingRows = await window.electronAPI.dbQuery<{
+        id: number; type: string; points: string; color: string; width: number
+      }>('SELECT id, type, points, color, width FROM drawings WHERE map_id = ? AND synced = 1', [mapId])
+      playerDrawings = drawingRows.map((r) => {
+        const parsed = JSON.parse(r.points)
+        const points = Array.isArray(parsed) ? parsed : (parsed.x != null ? [parsed.x, parsed.y] : [])
+        return { id: r.id, type: r.type, points, color: r.color, width: r.width }
+      })
+    } catch (err) {
+      console.error('[CanvasArea] drawings load failed:', err)
+    }
+
+    window.electronAPI?.sendFullSync({
       mode: 'map',
       map: {
         imagePath: map.imagePath,
@@ -276,9 +292,12 @@ async function loadMapData(mapId: number, map: MapRecord) {
       exploredBitmap,
       atmosphereImagePath: null,
       blackout: useUIStore.getState().blackoutActive,
+      drawings: playerDrawings,
     })
 
-    useUIStore.getState().setPlayerConnected(true)
+    if (useUIStore.getState().sessionMode !== 'prep') {
+      useUIStore.getState().setPlayerConnected(true)
+    }
   } catch (err) {
     console.error('[CanvasArea] loadMapData failed:', err)
   }

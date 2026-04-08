@@ -52,6 +52,9 @@ export function useKeyboardShortcuts() {
         case 'v': case 'V':
           useUIStore.getState().setActiveTool('select')
           break
+        case 'w': case 'W':
+          useUIStore.getState().setActiveTool('pointer')
+          break
         case 'f': case 'F':
           useUIStore.getState().setActiveTool('fog-rect')
           break

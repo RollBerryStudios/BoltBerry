@@ -506,17 +506,20 @@ const TokenNode = memo(function TokenNode({
         })()}
       </Group>
 
-      {/* HP bar (not rotated) */}
+      {/* HP bar + text (not rotated) */}
       {hpRatio >= 0 && (
         <>
-          <Rect x={0} y={sizePx + 3} width={sizePx} height={4}
+          <Rect x={0} y={sizePx + 3} width={sizePx} height={6}
             fill="#0D1015" cornerRadius={2} listening={false} />
-          <Rect x={0} y={sizePx + 3} width={sizePx * hpRatio} height={4}
+          <Rect x={0} y={sizePx + 3} width={sizePx * hpRatio} height={6}
             fill={hpColor} cornerRadius={2} listening={false} />
+          <Text x={0} y={sizePx + 2} width={sizePx} text={`${token.hpCurrent}/${token.hpMax}`}
+            align="center" fontSize={8} fontStyle="bold" fill="#F4F6FA"
+            listening={false} />
         </>
       )}
 
-      {/* Name label (not rotated) */}
+      {/* Name label ABOVE token (not rotated) */}
       {isEditing ? (
         <Html divProps={{ style: { position: 'absolute', top: 0, left: 0 } }}>
           <input
@@ -531,7 +534,7 @@ const TokenNode = memo(function TokenNode({
             style={{
               position: 'absolute',
               left: x - 40,
-              top: y + sizePx + (hpRatio >= 0 ? 12 : 5),
+              top: y - 20,
               width: sizePx + 80,
               background: '#0D1015',
               border: '1px solid #2F6BFF',
@@ -550,7 +553,7 @@ const TokenNode = memo(function TokenNode({
             style={{
               position: 'absolute',
               left: x - 50,
-              top: y + sizePx + 10,
+              top: y - 40,
               display: 'flex',
               gap: 4,
               background: '#0D1015',
@@ -608,7 +611,7 @@ const TokenNode = memo(function TokenNode({
       ) : (
         <Text
           x={-r}
-          y={sizePx + (hpRatio >= 0 ? 11 : 4)}
+          y={-16}
           width={sizePx * 2}
           text={token.name}
           align="center"

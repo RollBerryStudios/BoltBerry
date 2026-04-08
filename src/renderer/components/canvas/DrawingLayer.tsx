@@ -36,7 +36,7 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
     setLoadedMapId(mapId)
   }, [mapId])
 
-  if (!DRAWING_TOOLS.has(activeTool)) return null
+  const isDrawingActive = DRAWING_TOOLS.has(activeTool)
 
   function getMapPos() {
     const stage = stageRef.current
@@ -47,7 +47,7 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
   }
 
   function handleMouseDown(e: Konva.KonvaEventObject<MouseEvent>) {
-    if (e.evt.button !== 0) return
+    if (!isDrawingActive || e.evt.button !== 0) return
     const pos = getMapPos()
     if (!pos) return
 
@@ -64,7 +64,7 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
   }
 
   function handleMouseMove() {
-    if (currentPath.length === 0) return
+    if (!isDrawingActive || currentPath.length === 0) return
     const pos = getMapPos()
     if (!pos) return
 
@@ -76,7 +76,7 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
   }
 
   function handleMouseUp() {
-    if (currentPath.length < 2) { setCurrentPath([]); return }
+    if (!isDrawingActive || currentPath.length < 2) { setCurrentPath([]); return }
 
     const type: DrawingType =
       activeTool === 'draw-freehand' ? 'freehand' :
@@ -158,12 +158,13 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
 
   return (
     <Layer
+      listening={isDrawingActive}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
       {drawings.map(renderDrawing)}
-      {renderCurrentPath()}
+      {isDrawingActive && renderCurrentPath()}
     </Layer>
   )
 }

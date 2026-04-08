@@ -1,5 +1,7 @@
-import { app, BrowserWindow } from 'electron'
-import { initDatabase, closeDatabase } from './db/database'
+import { app, BrowserWindow, net, protocol } from 'electron'
+import { pathToFileURL } from 'url'
+import { existsSync, statSync } from 'fs'
+import { initDatabase, closeDatabase, getCustomUserDataPath } from './db/database'
 import { createDMWindow } from './windows'
 import { registerPlayerBridgeHandlers } from './ipc/player-bridge'
 import { registerAppHandlers } from './ipc/app-handlers'
@@ -14,7 +16,6 @@ if (!gotLock) {
 }
 
 app.on('second-instance', () => {
-  // Focus existing window if a second instance is launched
   const wins = BrowserWindow.getAllWindows()
   if (wins.length > 0) {
     const dmWin = wins[0]
@@ -25,6 +26,26 @@ app.on('second-instance', () => {
 
 // ─── App Lifecycle ────────────────────────────────────────────────────────────
 app.whenReady().then(() => {
+  // Register custom protocol for serving local assets (images, audio)
+  // This bypasses the file:// CSP restriction in Electron with contextIsolation
+  protocol.handle('local-asset', (request) => {
+    try {
+      const filePath = decodeURIComponent(request.url.replace('local-asset://', ''))
+      const userDataPath = getCustomUserDataPath() || app.getPath('userData')
+      const fullPath = filePath.startsWith('/') ? filePath : require('path').join(userDataPath, filePath)
+      if (!existsSync(fullPath)) {
+        return new Response('Not found', { status: 404 })
+      }
+      const stat = statSync(fullPath)
+      if (stat.size > 200 * 1024 * 1024) {
+        return new Response('Too large', { status: 413 })
+      }
+      return net.fetch(pathToFileURL(fullPath).href)
+    } catch (err) {
+      return new Response('Error', { status: 500 })
+    }
+  })
+
   // Init DB first
   initDatabase()
 
@@ -38,7 +59,6 @@ app.whenReady().then(() => {
   createDMWindow()
 
   app.on('activate', () => {
-    // macOS: re-create window when dock icon is clicked
     if (BrowserWindow.getAllWindows().length === 0) {
       createDMWindow()
     }
@@ -58,10 +78,9 @@ app.on('before-quit', () => {
 
 // ─── Error Handling ───────────────────────────────────────────────────────────
 process.on('uncaughtException', (error) => {
-  console.error('[RollBerry] Uncaught Exception:', error)
-  // In production: log to file in userData
+  console.error('[BoltBerry] Uncaught Exception:', error)
 })
 
 process.on('unhandledRejection', (reason) => {
-  console.error('[RollBerry] Unhandled Rejection:', reason)
+  console.error('[BoltBerry] Unhandled Rejection:', reason)
 })

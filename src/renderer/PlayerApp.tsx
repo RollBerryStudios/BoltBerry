@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Stage, Layer, Image as KonvaImage, Shape, Group, Circle, Rect, Text, Line } from 'react-konva'
 import Konva from 'konva'
-import type { PlayerFullState, PlayerTokenState, PlayerMeasureState, FogDelta, PlayerMapState, PlayerPointer, PlayerCamera, PlayerOverlay, PlayerInitiativeEntry, WeatherType, GridType } from '@shared/ipc-types'
+import type { PlayerFullState, PlayerTokenState, PlayerMeasureState, FogDelta, PlayerMapState, PlayerPointer, PlayerCamera, PlayerOverlay, PlayerInitiativeEntry, WeatherType, GridType, PlayerDrawingState } from '@shared/ipc-types'
 import { useRotatedImage } from './hooks/useRotatedImage'
 import { useImageUrl } from './hooks/useImageUrl'
 import { applyOpToCtxPair } from './components/canvas/FogLayer'
@@ -24,7 +24,8 @@ export default function PlayerApp() {
   const [initiative, setInitiative] = useState<PlayerInitiativeEntry[]>([])
   const [weather, setWeather] = useState<WeatherType>('none')
   const [measure, setMeasure] = useState<PlayerMeasureState | null>(null)
-  const [drawingData, setDrawingData] = useState<unknown[]>([])
+  const [drawingData, setDrawingData] = useState<PlayerDrawingState[]>([])
+
 
   // Dual fog canvases at map natural resolution
   const exploredCanvasRef = useRef<HTMLCanvasElement | null>(null)
@@ -54,6 +55,7 @@ export default function PlayerApp() {
       window.playerAPI.onFullSync((state: PlayerFullState) => {
         setBlackout(state.blackout)
         setTokens(state.tokens)
+        setDrawingData(state.drawings ?? [])
 
         if (state.mode === 'blackout') {
           setMode('blackout')
@@ -87,6 +89,7 @@ export default function PlayerApp() {
         setMapState(state)
         setMode('map')
         setCamera(null)
+        setDrawingData([])
         exploredCanvasRef.current = null
         coveredCanvasRef.current = null
         setFogVersion((v) => v + 1)
@@ -149,7 +152,7 @@ export default function PlayerApp() {
         setMeasure(m)
       }),
 
-      window.playerAPI.onDrawing((d: unknown) => {
+      window.playerAPI.onDrawing((d: PlayerDrawingState) => {
         setDrawingData((prev) => [...prev, d])
       }),
     ]
@@ -425,7 +428,7 @@ interface PlayerMapViewProps {
   pointer: PlayerPointer | null
   camera: PlayerCamera | null
   measure: PlayerMeasureState | null
-  drawingData: unknown[]
+  drawingData: PlayerDrawingState[]
   onMapLoaded: (naturalW: number, naturalH: number) => void
 }
 
@@ -630,6 +633,37 @@ function PlayerMapView({
         )}
       </Layer>
 
+      {/* Layer 3.5: Player drawings */}
+      {drawingData.length > 0 && (
+        <Layer listening={false}>
+          {drawingData.map((d) => {
+            if (d.type === 'freehand' && d.points.length >= 4) {
+              const screenPoints = d.points.flatMap((p: number, i: number) => i % 2 === 0 ? p * scale + offX : p * scale + offY)
+              return <Line key={`d-${d.id}`} points={screenPoints} stroke={d.color} strokeWidth={d.width * scale} listening={false} />
+            }
+            if (d.type === 'rect' && d.points.length >= 4) {
+              const x1 = d.points[0] * scale + offX
+              const y1 = d.points[1] * scale + offY
+              const x2 = d.points[2] * scale + offX
+              const y2 = d.points[3] * scale + offY
+              return <Rect key={`d-${d.id}`} x={Math.min(x1, x2)} y={Math.min(y1, y2)}
+                width={Math.abs(x2 - x1)} height={Math.abs(y2 - y1)}
+                stroke={d.color} strokeWidth={d.width * scale} listening={false} />
+            }
+            if (d.type === 'circle' && d.points.length >= 4) {
+              const cx = d.points[0] * scale + offX
+              const cy = d.points[1] * scale + offY
+              const dx = d.points[2] - d.points[0]
+              const dy = d.points[3] - d.points[1]
+              const radius = Math.sqrt(dx * dx + dy * dy) * scale
+              return <Circle key={`d-${d.id}`} x={cx} y={cy} radius={radius}
+                stroke={d.color} strokeWidth={d.width * scale} listening={false} />
+            }
+            return null
+          })}
+        </Layer>
+      )}
+
       {/* Layer 4: Tokens */}
       <Layer listening={false}>
         {tokens.map((token) => (
@@ -684,7 +718,7 @@ function PlayerTokenNode({
 
   return (
     <Group x={x} y={y} listening={false}>
-      <Group x={r} y={r} rotation={0}>
+      <Group x={r} y={r} rotation={token.rotation ?? 0}>
         {token.markerColor && (
           <Circle x={0} y={0} radius={r + 5} stroke={token.markerColor} strokeWidth={3} fill="transparent" listening={false} />
         )}
@@ -733,19 +767,24 @@ function PlayerTokenNode({
         )}
       </Group>
 
+      {/* HP bar + text */}
       {hpRatio >= 0 && (
         <>
-          <Rect x={0} y={sizePx + 3} width={sizePx} height={4}
+          <Rect x={0} y={sizePx + 3} width={sizePx} height={6}
             fill="#0D1015" cornerRadius={2} listening={false} />
-          <Rect x={0} y={sizePx + 3} width={sizePx * hpRatio} height={4}
+          <Rect x={0} y={sizePx + 3} width={sizePx * hpRatio} height={6}
             fill={hpColor} cornerRadius={2} listening={false} />
+          <Text x={0} y={sizePx + 2} width={sizePx} text={`${token.hpCurrent}/${token.hpMax}`}
+            align="center" fontSize={8} fontStyle="bold" fill="#F4F6FA"
+            listening={false} />
         </>
       )}
 
+      {/* Name label ABOVE token */}
       {token.showName && (
         <Text
           x={-r}
-          y={sizePx + (hpRatio >= 0 ? 11 : 4)}
+          y={-16}
           width={sizePx * 2}
           text={token.name}
           align="center"

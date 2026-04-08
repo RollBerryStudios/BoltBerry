@@ -2,6 +2,9 @@ import { useState, useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
+import { useUIStore } from '../../stores/uiStore'
+import { useTokenStore } from '../../stores/tokenStore'
+import { useInitiativeStore } from '../../stores/initiativeStore'
 import { AssetBrowser } from './panels/AssetBrowser'
 import { SettingsPanel } from './panels/SettingsPanel'
 import { useImageUrl } from '../../hooks/useImageUrl'
@@ -177,11 +180,11 @@ export function LeftSidebar() {
         'UPDATE maps SET grid_type = ?, grid_size = ?, ft_per_unit = ? WHERE id = ?',
         [type, size, newFpu, activeMapId]
       )
-      useCampaignStore.getState().setActiveMaps(
-        activeMaps.map((m) =>
-          m.id === activeMapId ? { ...m, gridType: type, gridSize: size, ftPerUnit: newFpu } : m
-        )
+      const updatedMaps = activeMaps.map((m) =>
+        m.id === activeMapId ? { ...m, gridType: type, gridSize: size, ftPerUnit: newFpu } : m
       )
+      useCampaignStore.getState().setActiveMaps(updatedMaps)
+      syncMapStateToPlayer(updatedMaps.find((m) => m.id === activeMapId)!)
     } catch (err) {
       console.error('[LeftSidebar] handleGridChange failed:', err)
     }
@@ -195,11 +198,11 @@ export function LeftSidebar() {
         'UPDATE maps SET rotation = ? WHERE id = ?',
         [rot, activeMapId]
       )
-      useCampaignStore.getState().setActiveMaps(
-        activeMaps.map((m) =>
-          m.id === activeMapId ? { ...m, rotation: rot } : m
-        )
+      const updatedMaps = activeMaps.map((m) =>
+        m.id === activeMapId ? { ...m, rotation: rot } : m
       )
+      useCampaignStore.getState().setActiveMaps(updatedMaps)
+      syncMapStateToPlayer(updatedMaps.find((m) => m.id === activeMapId)!)
     } catch (err) {
       console.error('[LeftSidebar] handleRotationChange failed:', err)
     }
@@ -227,6 +230,16 @@ export function LeftSidebar() {
     } catch (err) {
       console.error('[LeftSidebar] handleReorderMap failed:', err)
     }
+  }
+
+  function syncMapStateToPlayer(m: MapRecord) {
+    if (!m || useUIStore.getState().sessionMode === 'prep') return
+    window.electronAPI?.sendMapUpdate({
+      imagePath: m.imagePath,
+      gridType: m.gridType,
+      gridSize: m.gridSize,
+      rotation: m.rotation ?? 0,
+    })
   }
 
   return (
@@ -500,7 +513,23 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder }: {
               'DELETE FROM maps WHERE id = ?',
               [map.id]
             )
+            await window.electronAPI.dbRun(
+              'DELETE FROM tokens WHERE map_id = ?',
+              [map.id]
+            )
+            await window.electronAPI.dbRun(
+              'DELETE FROM initiative WHERE map_id = ?',
+              [map.id]
+            )
+            await window.electronAPI.dbRun(
+              'DELETE FROM fog_state WHERE map_id = ?',
+              [map.id]
+            )
             useCampaignStore.getState().refreshCampaigns()
+            if (map.id === useCampaignStore.getState().activeMapId) {
+              useTokenStore.getState().setTokens([])
+              useInitiativeStore.getState().setEntries([])
+            }
           }
         }
       }}

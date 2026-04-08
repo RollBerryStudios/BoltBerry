@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react'
 
 const cache = new Map<string, HTMLImageElement>()
 
+export function invalidateImageCache(src: string | null) {
+  if (src) cache.delete(src)
+}
+
 export function useImage(src: string | null): HTMLImageElement | null {
   const [img, setImg] = useState<HTMLImageElement | null>(
     src ? (cache.get(src) ?? null) : null

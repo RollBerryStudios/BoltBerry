@@ -84,6 +84,7 @@ export function AssetBrowser() {
         markerColor: null,
         ac: null,
         notes: null,
+        statusEffects: null,
       })
     } catch (err) {
       console.error('[AssetBrowser] token insert failed:', err)

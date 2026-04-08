@@ -3,6 +3,8 @@ import { useTokenStore } from '../../../stores/tokenStore'
 import { useUIStore } from '../../../stores/uiStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import { useImageUrl } from '../../../hooks/useImageUrl'
+import { invalidateImageCache } from '../../../hooks/useImage'
+import { invalidateImageUrlCache } from '../../../hooks/useImageUrl'
 import type { TokenRecord } from '@shared/ipc-types'
 
 const STATUS_EFFECTS = [
@@ -101,14 +103,24 @@ export function TokenPanel() {
 
   async function handleUpdate(id: number, patch: Partial<TokenRecord>) {
     updateToken(id, patch)
+    if (patch.imagePath) {
+      invalidateImageCache(`file://${patch.imagePath}`)
+      invalidateImageUrlCache(patch.imagePath)
+    }
     try {
       for (const [key, val] of Object.entries(patch)) {
         const col = key.replace(/([A-Z])/g, '_$1').toLowerCase()
-        const dbVal = key === 'statusEffects'
-          ? (Array.isArray(val) && (val as string[]).length > 0 ? JSON.stringify(val) : null)
-          : val
+        let dbVal: unknown = val
+        if (key === 'statusEffects') {
+          dbVal = Array.isArray(val) && (val as string[]).length > 0 ? JSON.stringify(val) : null
+        } else if (key === 'visibleToPlayers' || key === 'locked') {
+          dbVal = val ? 1 : 0
+        } else if (val === null || val === undefined) {
+          dbVal = null
+        }
         await window.electronAPI?.dbRun(`UPDATE tokens SET ${col} = ? WHERE id = ?`, [dbVal, id])
       }
+      broadcastTokensFromPanel()
     } catch (err) {
       console.error('[TokenPanel] handleUpdate failed:', err)
     }
@@ -371,7 +383,16 @@ export function TokenPanel() {
           <button
             className="btn btn-danger"
             style={{ fontSize: 'var(--text-xs)', justifyContent: 'center', marginTop: 'var(--sp-2)', width: '100%' }}
-            onClick={() => { removeToken(selected.id); setSelectedToken(null) }}
+            onClick={async () => {
+              removeToken(selected.id)
+              setSelectedToken(null)
+              try {
+                await window.electronAPI?.dbRun('DELETE FROM tokens WHERE id = ?', [selected.id])
+                broadcastTokensFromPanel()
+              } catch (err) {
+                console.error('[TokenPanel] delete failed:', err)
+              }
+            }}
           >
             Token löschen
           </button>
@@ -391,6 +412,29 @@ export function TokenPanel() {
       </div>
     </div>
   )
+}
+
+function broadcastTokensFromPanel() {
+  if (useUIStore.getState().sessionMode === 'prep') return
+  const tokens = useTokenStore.getState().tokens
+  const visible = tokens
+    .filter((t) => t.visibleToPlayers)
+    .map((t) => ({
+      id: t.id,
+      name: t.name,
+      imagePath: t.imagePath,
+      x: t.x,
+      y: t.y,
+      size: t.size,
+      hpCurrent: t.hpCurrent,
+      hpMax: t.hpMax,
+      showName: true,
+      rotation: t.rotation,
+      markerColor: t.markerColor,
+      statusEffects: t.statusEffects,
+      ac: t.ac,
+    }))
+  window.electronAPI?.sendTokenUpdate(visible)
 }
 
 function TokenThumbnail({ path }: { path: string }) {

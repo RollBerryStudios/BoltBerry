@@ -40,7 +40,7 @@ export function registerExportImportHandlers(): void {
     if (!campaign) return { success: false, error: 'Kampagne nicht gefunden' }
 
     const safeName = campaign.name.replace(/[^a-z0-9äöüß\-_ ]/gi, '_').trim()
-    const defaultPath = `RollBerry_${safeName}_${new Date().toISOString().slice(0, 10)}.zip`
+    const defaultPath = `BoltBerry_${safeName}_${new Date().toISOString().slice(0, 10)}.zip`
 
     const { filePath, canceled } = await dialog.showSaveDialog({
       title: 'Kampagne exportieren',
@@ -64,9 +64,9 @@ export function registerExportImportHandlers(): void {
     const ts = new Date()
     const isoDate = ts.toISOString().slice(0, 10)
     const stamp = ts.getTime()
-    const filename = `RollBerry_${safeName}_${isoDate}_${stamp}.zip`
+    const filename = `BoltBerry_${safeName}_${isoDate}_${stamp}.zip`
 
-    const backupDir = join(app.getPath('documents'), 'RollBerry-Backups')
+    const backupDir = join(app.getPath('documents'), 'BoltBerry-Backups')
     mkdirSync(backupDir, { recursive: true })
     const filePath = join(backupDir, filename)
 

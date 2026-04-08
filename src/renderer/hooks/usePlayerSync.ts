@@ -56,6 +56,22 @@ export function usePlayerSync() {
           ? 'atmosphere'
           : 'map'
 
+      let playerDrawings: Array<{ id: number; type: string; points: number[]; color: string; width: number }> = []
+      if (activeMapId) {
+        try {
+          const drawingRows = await window.electronAPI.dbQuery<{
+            id: number; type: string; points: string; color: string; width: number
+          }>('SELECT id, type, points, color, width FROM drawings WHERE map_id = ? AND synced = 1', [activeMapId])
+          playerDrawings = drawingRows.map((r) => {
+            const parsed = JSON.parse(r.points)
+            const points = Array.isArray(parsed) ? parsed : (parsed.x != null ? [parsed.x, parsed.y] : [])
+            return { id: r.id, type: r.type, points, color: r.color, width: r.width }
+          })
+        } catch (err) {
+          console.error('[usePlayerSync] drawings load failed:', err)
+        }
+      }
+
       const state: PlayerFullState = {
         mode,
         map: activeMap
@@ -71,6 +87,7 @@ export function usePlayerSync() {
         exploredBitmap,
         atmosphereImagePath,
         blackout: blackoutActive,
+        drawings: playerDrawings,
       }
 
       window.electronAPI?.sendFullSync(state)

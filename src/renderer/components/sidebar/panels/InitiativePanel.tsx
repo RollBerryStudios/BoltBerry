@@ -50,6 +50,11 @@ export function InitiativePanel() {
   function handleReset() {
     resetCombat()
     broadcastInitiative()
+    if (activeMapId && window.electronAPI) {
+      window.electronAPI.dbRun('DELETE FROM initiative WHERE map_id = ?', [activeMapId]).catch((err: unknown) => {
+        console.error('[InitiativePanel] reset delete failed:', err)
+      })
+    }
   }
 
   return (

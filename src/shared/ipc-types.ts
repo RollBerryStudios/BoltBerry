@@ -201,4 +201,13 @@ export interface PlayerFullState {
   exploredBitmap: string | null // base64 PNG — "never explored" canvas
   atmosphereImagePath: string | null
   blackout: boolean
+  drawings: PlayerDrawingState[]
+}
+
+export interface PlayerDrawingState {
+  id: number
+  type: string
+  points: number[]
+  color: string
+  width: number
 }

@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react'
 
 const cache = new Map<string, string>()
 
+export function invalidateImageUrlCache(src: string | null) {
+  if (src) cache.delete(src)
+}
+
 export function useImageUrl(src: string | null): string | null {
   const [url, setUrl] = useState<string | null>(
     src ? (cache.get(src) ?? null) : null
