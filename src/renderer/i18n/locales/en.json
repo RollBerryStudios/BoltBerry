@@ -239,5 +239,13 @@
   },
   "errorBoundary": {
     "label": "Error in {{label}}"
-  }
+  },
+  "toolbar.tools.drawGroup": "Drawing",
+  "toolbar.tools.drawFreehand": "Freehand",
+  "toolbar.tools.drawRect": "Rectangle",
+  "toolbar.tools.drawCircle": "Circle",
+  "toolbar.tools.drawText": "Text",
+  "toolbar.tools.fogBrush": "Brush",
+  "toolbar.tools.lightingGroup": "Lighting",
+  "toolbar.tools.lightPointer": "Light Source"
 }

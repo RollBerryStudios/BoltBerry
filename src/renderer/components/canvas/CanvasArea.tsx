@@ -6,6 +6,9 @@ import { TokenLayer } from './TokenLayer'
 import { PointerLayer } from './PointerLayer'
 import { MeasureLayer } from './MeasureLayer'
 import { MinimapOverlay } from './MinimapOverlay'
+import { DrawingLayer } from './DrawingLayer'
+import { GMPinLayer } from './GMPinLayer'
+import { LightingLayer } from './LightingLayer'
 import { useUIStore } from '../../stores/uiStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useTokenStore } from '../../stores/tokenStore'
@@ -123,6 +126,27 @@ export function CanvasArea() {
             gridSize={activeMap.gridSize}
             ftPerUnit={activeMap.ftPerUnit}
           />
+
+          {/* Layer 6: Drawing overlay */}
+          <DrawingLayer
+            stageRef={stageRef}
+            mapId={activeMap.id}
+            gridSize={activeMap.gridSize}
+          />
+
+          {/* Layer 7: GM pins (DM only) */}
+          <GMPinLayer
+            stageRef={stageRef}
+            mapId={activeMap.id}
+            gridSize={activeMap.gridSize}
+          />
+
+          {/* Layer 8: Lighting overlay */}
+          <LightingLayer
+            stageRef={stageRef}
+            mapId={activeMap.id}
+            gridSize={activeMap.gridSize}
+          />
         </Stage>
       )}
 
@@ -154,6 +178,11 @@ function getCursor(tool: string): string {
     case 'measure-line':  return 'crosshair'
     case 'measure-circle': return 'crosshair'
     case 'measure-cone':  return 'crosshair'
+    case 'draw-freehand': return 'crosshair'
+    case 'draw-rect':    return 'crosshair'
+    case 'draw-circle':  return 'crosshair'
+    case 'draw-text':    return 'text'
+    case 'fog-brush':    return 'crosshair'
     default:              return 'default'
   }
 }
@@ -205,6 +234,19 @@ async function loadMapData(mapId: number, map: MapRecord) {
     })))
 
     // Sync player: send full state
+    let fogBitmap: string | null = null
+    let exploredBitmap: string | null = null
+    try {
+      const fogRows = await window.electronAPI.dbQuery<{
+        fog_bitmap: string | null
+        explored_bitmap: string | null
+      }>('SELECT fog_bitmap, explored_bitmap FROM fog_state WHERE map_id = ?', [mapId])
+      fogBitmap = fogRows[0]?.fog_bitmap ?? null
+      exploredBitmap = fogRows[0]?.explored_bitmap ?? null
+    } catch (err) {
+      console.error('[CanvasArea] fog load failed:', err)
+    }
+
     window.electronAPI.sendFullSync({
       mode: 'map',
       map: {
@@ -225,9 +267,13 @@ async function loadMapData(mapId: number, map: MapRecord) {
           hpCurrent: t.hpCurrent,
           hpMax: t.hpMax,
           showName: true,
+          rotation: t.rotation,
+          markerColor: t.markerColor,
+          statusEffects: t.statusEffects,
+          ac: t.ac,
         })),
-      fogBitmap: null,
-      exploredBitmap: null,
+      fogBitmap,
+      exploredBitmap,
       atmosphereImagePath: null,
       blackout: useUIStore.getState().blackoutActive,
     })

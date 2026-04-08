@@ -239,5 +239,13 @@
   },
   "errorBoundary": {
     "label": "Fehler in {{label}}"
-  }
+  },
+  "toolbar.tools.drawGroup": "Zeichnen",
+  "toolbar.tools.drawFreehand": "Freihand",
+  "toolbar.tools.drawRect": "Rechteck",
+  "toolbar.tools.drawCircle": "Kreis",
+  "toolbar.tools.drawText": "Text",
+  "toolbar.tools.fogBrush": "Pinsel",
+  "toolbar.tools.lightingGroup": "Beleuchtung",
+  "toolbar.tools.lightPointer": "Lichtquelle"
 }

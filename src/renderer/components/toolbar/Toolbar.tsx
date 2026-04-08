@@ -110,12 +110,20 @@ const FOG_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: str
   { id: 'fog-rect',    icon: '▭', labelKey: 'toolbar.tools.fogRect',    shortcut: 'F' },
   { id: 'fog-polygon', icon: '⬡', labelKey: 'toolbar.tools.fogPolygon', shortcut: 'P' },
   { id: 'fog-cover',   icon: '▮', labelKey: 'toolbar.tools.fogCover',   shortcut: 'C' },
+  { id: 'fog-brush',  icon: '🖌', labelKey: 'toolbar.tools.fogBrush',  shortcut: '' },
 ]
 
 const MEASURE_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
   { id: 'measure-line',   icon: '📏', labelKey: 'toolbar.tools.measureLine',   shortcut: 'M' },
   { id: 'measure-circle', icon: '◎',  labelKey: 'toolbar.tools.measureCircle', shortcut: '' },
   { id: 'measure-cone',   icon: '◿',  labelKey: 'toolbar.tools.measureCone',   shortcut: '' },
+]
+
+const DRAW_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
+  { id: 'draw-freehand', icon: '✏️', labelKey: 'toolbar.tools.drawFreehand', shortcut: 'D' },
+  { id: 'draw-rect',    icon: '▢',  labelKey: 'toolbar.tools.drawRect',     shortcut: '' },
+  { id: 'draw-circle',  icon: '○',  labelKey: 'toolbar.tools.drawCircle',   shortcut: '' },
+  { id: 'draw-text',    icon: 'T',  labelKey: 'toolbar.tools.drawText',     shortcut: '' },
 ]
 
 export function Toolbar() {
@@ -196,6 +204,14 @@ export function Toolbar() {
         activeTool={activeTool}
         groupIcon="📏"
         groupLabelKey="toolbar.tools.measureGroup"
+        onSelect={handleToolClick}
+      />
+
+      <ToolGroup
+        tools={DRAW_TOOLS}
+        activeTool={activeTool}
+        groupIcon="✏️"
+        groupLabelKey="toolbar.tools.drawGroup"
         onSelect={handleToolClick}
       />
 

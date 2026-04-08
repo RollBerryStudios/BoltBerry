@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Stage, Layer, Image as KonvaImage } from 'react-konva'
+import { Stage, Layer, Image as KonvaImage, Shape, Group, Circle, Rect, Text, Line } from 'react-konva'
 import Konva from 'konva'
-import type { PlayerFullState, PlayerTokenState, FogDelta, PlayerMapState, PlayerPointer, PlayerCamera, PlayerOverlay, PlayerInitiativeEntry, WeatherType } from '@shared/ipc-types'
+import type { PlayerFullState, PlayerTokenState, PlayerMeasureState, FogDelta, PlayerMapState, PlayerPointer, PlayerCamera, PlayerOverlay, PlayerInitiativeEntry, WeatherType, GridType } from '@shared/ipc-types'
 import { useRotatedImage } from './hooks/useRotatedImage'
 import { useImageUrl } from './hooks/useImageUrl'
 import { applyOpToCtxPair } from './components/canvas/FogLayer'
@@ -23,6 +23,8 @@ export default function PlayerApp() {
   const [overlay, setOverlay] = useState<PlayerOverlay | null>(null)
   const [initiative, setInitiative] = useState<PlayerInitiativeEntry[]>([])
   const [weather, setWeather] = useState<WeatherType>('none')
+  const [measure, setMeasure] = useState<PlayerMeasureState | null>(null)
+  const [drawingData, setDrawingData] = useState<unknown[]>([])
 
   // Dual fog canvases at map natural resolution
   const exploredCanvasRef = useRef<HTMLCanvasElement | null>(null)
@@ -84,6 +86,7 @@ export default function PlayerApp() {
       window.playerAPI.onMapUpdate((state: PlayerMapState) => {
         setMapState(state)
         setMode('map')
+        setCamera(null)
         exploredCanvasRef.current = null
         coveredCanvasRef.current = null
         setFogVersion((v) => v + 1)
@@ -141,6 +144,14 @@ export default function PlayerApp() {
         )
         setFogVersion((v) => v + 1)
       }),
+
+      window.playerAPI.onMeasure((m: PlayerMeasureState | null) => {
+        setMeasure(m)
+      }),
+
+      window.playerAPI.onDrawing((d: unknown) => {
+        setDrawingData((prev) => [...prev, d])
+      }),
     ]
 
     window.playerAPI.requestFullSync()
@@ -157,8 +168,18 @@ export default function PlayerApp() {
       <div style={{
         width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.92)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        padding: 40,
+        padding: 40, position: 'relative',
       }}>
+        <button
+          onClick={() => setHandout(null)}
+          style={{
+            position: 'absolute', top: 16, right: 16, zIndex: 200,
+            background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)',
+            borderRadius: '50%', width: 36, height: 36, fontSize: 18, color: '#F4F6FA',
+            cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}
+          title="Schließen"
+        >✕</button>
         <div style={{
           background: '#182130', borderRadius: 12, border: '1px solid #1E2A3E',
           padding: 32, maxWidth: 600, width: '100%', maxHeight: '80vh', overflowY: 'auto',
@@ -203,6 +224,8 @@ export default function PlayerApp() {
           height={size.h}
           pointer={pointer}
           camera={camera}
+          measure={measure}
+          drawingData={drawingData}
           onMapLoaded={(w, h) =>
             initDualFogCanvas(exploredCanvasRef, coveredCanvasRef, w, h, () =>
               setFogVersion((v) => v + 1)
@@ -401,11 +424,13 @@ interface PlayerMapViewProps {
   height: number
   pointer: PlayerPointer | null
   camera: PlayerCamera | null
+  measure: PlayerMeasureState | null
+  drawingData: unknown[]
   onMapLoaded: (naturalW: number, naturalH: number) => void
 }
 
 function PlayerMapView({
-  mapState, tokens, exploredCanvasRef, coveredCanvasRef, fogVersion, width, height, pointer, camera, onMapLoaded,
+  mapState, tokens, exploredCanvasRef, coveredCanvasRef, fogVersion, width, height, pointer, camera, measure, drawingData, onMapLoaded,
 }: PlayerMapViewProps) {
   const { img: image, imgW: natW, imgH: natH } = useRotatedImage(`file://${mapState.imagePath}`, mapState.rotation ?? 0)
   const [exploredImg, setExploredImg] = useState<HTMLImageElement | null>(null)
@@ -484,20 +509,100 @@ function PlayerMapView({
     new Konva.Tween({ node: ring2, duration: 2.0, opacity: 0, scaleX: 7, scaleY: 7, easing: Konva.Easings.EaseOut, onFinish: () => ring2.destroy() }).play()
   }, [pointer])
 
+  const showGrid = image && mapState.gridType !== 'none'
+  const cellPx = showGrid ? mapState.gridSize * scale : 0
+
   return (
     <Stage width={width} height={height} style={{ background: '#000', display: 'block' }}>
-      {/* Layer 1: Map image */}
+      {/* Layer 1: Map image + checkerboard */}
       <Layer>
         {image && (
-          <KonvaImage
-            image={image as HTMLImageElement}
-            x={offX} y={offY}
-            width={natW * scale}
-            height={natH * scale}
-            listening={false}
-          />
+          <>
+            <Shape
+              listening={false}
+              sceneFunc={(ctx) => {
+                const w = natW * scale
+                const h = natH * scale
+                const sz = 16
+                const cols = Math.ceil(w / sz)
+                const rows = Math.ceil(h / sz)
+                ctx.save()
+                ctx.beginPath()
+                ctx.rect(offX, offY, w, h)
+                ctx.clip()
+                for (let r = 0; r < rows; r++) {
+                  for (let c = 0; c < cols; c++) {
+                    ctx.fillStyle = (r + c) % 2 === 0 ? '#2a2a2a' : '#1a1a1a'
+                    ctx.fillRect(offX + c * sz, offY + r * sz, sz, sz)
+                  }
+                }
+                ctx.restore()
+              }}
+            />
+            <KonvaImage
+              image={image as HTMLImageElement}
+              x={offX} y={offY}
+              width={natW * scale}
+              height={natH * scale}
+              listening={false}
+            />
+          </>
         )}
       </Layer>
+
+      {/* Layer 2: Grid overlay */}
+      {showGrid && cellPx >= 4 && (
+        <Layer listening={false}>
+          <Shape
+            listening={false}
+            sceneFunc={(ctx) => {
+              const x0 = offX
+              const y0 = offY
+              const imgW = natW * scale
+              const imgH = natH * scale
+
+              ctx.beginPath()
+
+              if (mapState.gridType === 'square') {
+                const cols = Math.ceil(imgW / cellPx) + 1
+                const rows = Math.ceil(imgH / cellPx) + 1
+                for (let c = 0; c <= cols; c++) {
+                  const x = x0 + c * cellPx
+                  ctx.moveTo(x, y0)
+                  ctx.lineTo(x, y0 + imgH)
+                }
+                for (let r = 0; r <= rows; r++) {
+                  const y = y0 + r * cellPx
+                  ctx.moveTo(x0, y)
+                  ctx.lineTo(x0 + imgW, y)
+                }
+              } else if (mapState.gridType === 'hex') {
+                const R = cellPx / 2
+                const cols = Math.ceil(imgW / (R * 1.5)) + 2
+                const rows = Math.ceil(imgH / (R * Math.sqrt(3))) + 2
+                for (let col = 0; col < cols; col++) {
+                  for (let row = 0; row < rows; row++) {
+                    const cx = x0 + col * R * 1.5
+                    const cy = y0 + row * R * Math.sqrt(3) + (col % 2) * R * (Math.sqrt(3) / 2)
+                    ctx.moveTo(cx + R, cy)
+                    for (let i = 1; i < 6; i++) {
+                      const a = (Math.PI / 180) * (60 * i)
+                      ctx.lineTo(cx + R * Math.cos(a), cy + R * Math.sin(a))
+                    }
+                    ctx.closePath()
+                  }
+                }
+              }
+
+              ;(ctx as any)._context.save()
+              ;(ctx as any)._context.strokeStyle = 'rgba(255,255,255,0.14)'
+              ;(ctx as any)._context.lineWidth = 0.5
+              ;(ctx as any)._context.stroke()
+              ;(ctx as any)._context.restore()
+            }}
+          />
+        </Layer>
+      )}
 
       {/* Layer 2: "Never explored" mask */}
       <Layer listening={false}>
@@ -541,8 +646,22 @@ function PlayerMapView({
 
       {/* Layer 5: Pointer/Ping overlay */}
       <Layer ref={pointerLayerRef} listening={false} />
+
+      {/* Layer 6: Measurement overlay */}
+      {measure && (
+        <Layer listening={false}>
+          {renderPlayerMeasure(measure, scale, offX, offY, mapState.gridSize)}
+        </Layer>
+      )}
     </Stage>
   )
+}
+
+const STATUS_ICON_MAP: Record<string, string> = {
+  blinded: '🫣', charmed: '💫', dead: '💀', deafened: '🔇',
+  exhausted: '😫', frightened: '😱', grappled: '🤛', incapacitated: '😵',
+  invisible: '👻', paralyzed: '⚡', petrified: '🪨', poisoned: '☠️',
+  prone: '⬇️', restrained: '⛓️', stunned: '⭐', unconscious: '💤',
 }
 
 function PlayerTokenNode({
@@ -554,21 +673,142 @@ function PlayerTokenNode({
   offY: number
   gridSize: number
 }) {
-  const { img: image } = useRotatedImage(token.imagePath ? `file://${token.imagePath}` : null, 0)
+  const rotation = token.rotation ?? 0
+  const { img: image } = useRotatedImage(token.imagePath ? `file://${token.imagePath}` : null, rotation)
   const x = token.x * scale + offX
   const y = token.y * scale + offY
   const sizePx = gridSize * token.size * scale
+  const r = sizePx / 2
+  const hpRatio = token.hpMax > 0 ? Math.max(0, Math.min(1, token.hpCurrent / token.hpMax)) : -1
+  const hpColor = hpRatio > 0.5 ? '#22c55e' : hpRatio > 0.25 ? '#f59e0b' : '#ef4444'
 
-  if (!image) return null
   return (
-    <KonvaImage
-      image={image as HTMLImageElement}
-      x={x} y={y}
-      width={sizePx} height={sizePx}
-      cornerRadius={sizePx / 2}
-      listening={false}
-    />
+    <Group x={x} y={y} listening={false}>
+      <Group x={r} y={r} rotation={0}>
+        {token.markerColor && (
+          <Circle x={0} y={0} radius={r + 5} stroke={token.markerColor} strokeWidth={3} fill="transparent" listening={false} />
+        )}
+        <Circle x={0} y={0} radius={r} fill="#182130" stroke="#1E2A3E" strokeWidth={1.5} listening={false} />
+        {image ? (
+          <KonvaImage
+            image={image as HTMLImageElement}
+            x={-r} y={-r}
+            width={sizePx} height={sizePx}
+            cornerRadius={r}
+            listening={false}
+          />
+        ) : (
+          <Text
+            x={-r} y={-sizePx * 0.22}
+            width={sizePx}
+            text={token.name.charAt(0).toUpperCase()}
+            align="center"
+            fontSize={sizePx * 0.45}
+            fontStyle="bold"
+            fill="#94A0B2"
+            listening={false}
+          />
+        )}
+        {token.statusEffects && token.statusEffects.length > 0 && (() => {
+          const effects = token.statusEffects.slice(0, 4)
+          const iconSize = Math.max(11, Math.min(14, sizePx * 0.22))
+          return effects.map((eff, idx) => (
+            <Text
+              key={eff}
+              x={-r + idx * (iconSize + 2)}
+              y={-r - iconSize - 4}
+              text={STATUS_ICON_MAP[eff] ?? '❓'}
+              fontSize={iconSize}
+              listening={false}
+            />
+          ))
+        })()}
+        {token.ac != null && (
+          <>
+            <Rect x={r - 18} y={r - 14} width={16} height={12} fill="#182130"
+              cornerRadius={3} stroke="#64748b" strokeWidth={1} listening={false} />
+            <Text x={r - 18} y={r - 13} width={16} text={String(token.ac)}
+              align="center" fontSize={9} fontStyle="bold" fill="#94A0B2" listening={false} />
+          </>
+        )}
+      </Group>
+
+      {hpRatio >= 0 && (
+        <>
+          <Rect x={0} y={sizePx + 3} width={sizePx} height={4}
+            fill="#0D1015" cornerRadius={2} listening={false} />
+          <Rect x={0} y={sizePx + 3} width={sizePx * hpRatio} height={4}
+            fill={hpColor} cornerRadius={2} listening={false} />
+        </>
+      )}
+
+      {token.showName && (
+        <Text
+          x={-r}
+          y={sizePx + (hpRatio >= 0 ? 11 : 4)}
+          width={sizePx * 2}
+          text={token.name}
+          align="center"
+          fontSize={Math.max(10, Math.min(13, sizePx * 0.22))}
+          fill="#F4F6FA"
+          shadowColor="black" shadowBlur={4} shadowOpacity={0.9}
+          listening={false}
+        />
+      )}
+    </Group>
   )
+}
+
+function renderPlayerMeasure(m: PlayerMeasureState, scale: number, offX: number, offY: number, gridSize: number) {
+  const sx = m.startX * scale + offX
+  const sy = m.startY * scale + offY
+  const ex = m.endX * scale + offX
+  const ey = m.endY * scale + offY
+  const dx = m.endX - m.startX
+  const dy = m.endY - m.startY
+  const distPx = Math.sqrt(dx * dx + dy * dy)
+  const radiusScreen = distPx * scale
+
+  if (m.type === 'line') {
+    return (
+      <>
+        <Line points={[sx, sy, ex, ey]} stroke="#f59e0b" strokeWidth={2} dash={[6, 3]} listening={false} />
+        <Circle x={sx} y={sy} radius={5} fill="#f59e0b" listening={false} />
+        <Circle x={ex} y={ey} radius={5} fill="#f59e0b" listening={false} />
+        <Text x={(sx + ex) / 2 + 6} y={(sy + ey) / 2 - 8} text={`${m.distance} ft`}
+          fontSize={14} fontStyle="bold" fill="#f59e0b" shadowColor="black" shadowBlur={4} shadowOpacity={0.9} listening={false} />
+      </>
+    )
+  }
+  if (m.type === 'circle') {
+    return (
+      <>
+        <Circle x={sx} y={sy} radius={radiusScreen} stroke="#22c55e" strokeWidth={2}
+          fill="rgba(34,197,94,0.08)" dash={[6, 3]} listening={false} />
+        <Circle x={sx} y={sy} radius={5} fill="#22c55e" listening={false} />
+        <Text x={sx + 8} y={sy - 20} text={`r = ${m.distance} ft`}
+          fontSize={14} fontStyle="bold" fill="#22c55e" shadowColor="black" shadowBlur={4} shadowOpacity={0.9} listening={false} />
+      </>
+    )
+  }
+  if (m.type === 'cone') {
+    const angle = Math.atan2(ey - sy, ex - sx)
+    const halfAngle = Math.PI / 6
+    const len = distPx * scale
+    const p1x = sx + len * Math.cos(angle - halfAngle)
+    const p1y = sy + len * Math.sin(angle - halfAngle)
+    const p2x = sx + len * Math.cos(angle + halfAngle)
+    const p2y = sy + len * Math.sin(angle + halfAngle)
+    return (
+      <>
+        <Line points={[sx, sy, p1x, p1y, p2x, p2y, sx, sy]} stroke="#a855f7" strokeWidth={2}
+          fill="rgba(168,85,247,0.12)" closed dash={[6, 3]} listening={false} />
+        <Text x={(sx + ex) / 2 + 6} y={(sy + ey) / 2 - 8} text={`${m.distance} ft`}
+          fontSize={14} fontStyle="bold" fill="#a855f7" shadowColor="black" shadowBlur={4} shadowOpacity={0.9} listening={false} />
+      </>
+    )
+  }
+  return null
 }
 
 // ─── Fog helpers ──────────────────────────────────────────────────────────────

@@ -44,6 +44,10 @@ export function usePlayerSync() {
           hpCurrent: t.hpCurrent,
           hpMax: t.hpMax,
           showName: true,
+          rotation: t.rotation,
+          markerColor: t.markerColor,
+          statusEffects: t.statusEffects,
+          ac: t.ac,
         }))
 
       const mode: PlayerFullState['mode'] = blackoutActive

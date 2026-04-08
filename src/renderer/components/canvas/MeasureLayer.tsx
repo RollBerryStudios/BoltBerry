@@ -1,4 +1,4 @@
-import { useRef, useState, RefObject } from 'react'
+import { useRef, useState, useEffect, RefObject } from 'react'
 import { Layer, Line, Circle, Text } from 'react-konva'
 import Konva from 'konva'
 import { useUIStore } from '../../stores/uiStore'
@@ -25,7 +25,13 @@ export function MeasureLayer({ stageRef, gridSize, ftPerUnit }: MeasureLayerProp
   const { screenToMap } = useMapTransformStore()
   const [measure, setMeasure] = useState<MeasureState | null>(null)
 
-  if (!MEASURE_TOOLS.has(activeTool)) return null
+  if (!MEASURE_TOOLS.has(activeTool)) {
+    if (measure) {
+      setMeasure(null)
+      window.electronAPI?.sendMeasure(null)
+    }
+    return null
+  }
 
   function getMapPos() {
     const stage = stageRef.current
@@ -50,7 +56,34 @@ export function MeasureLayer({ stageRef, gridSize, ftPerUnit }: MeasureLayerProp
   }
 
   function handleMouseUp() {
-    if (measure) setMeasure((m) => m ? { ...m, active: false } : null)
+    if (measure) {
+      setMeasure((m) => m ? { ...m, active: false } : null)
+      sendMeasureToPlayer(measure)
+    }
+  }
+
+  useEffect(() => {
+    if (measure?.active) sendMeasureToPlayer(measure)
+  }, [measure?.endX, measure?.endY])
+
+  function sendMeasureToPlayer(m: MeasureState | null) {
+    if (!m || !window.electronAPI) return
+    const dx = m.endX - m.startX
+    const dy = m.endY - m.startY
+    const distMapPx = Math.sqrt(dx * dx + dy * dy)
+    const distGridUnits = gridSize > 0 ? distMapPx / gridSize : 0
+    const dist = Math.round(distGridUnits * ftPerUnit)
+    const type: 'line' | 'circle' | 'cone' =
+      activeTool === 'measure-line' ? 'line' :
+      activeTool === 'measure-circle' ? 'circle' : 'cone'
+    window.electronAPI.sendMeasure({
+      type,
+      startX: m.startX,
+      startY: m.startY,
+      endX: m.endX,
+      endY: m.endY,
+      distance: dist,
+    })
   }
 
   // ─── Render helpers ────────────────────────────────────────────────────────

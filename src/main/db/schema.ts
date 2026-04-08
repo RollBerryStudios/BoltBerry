@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 7
+export const SCHEMA_VERSION = 9
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -50,6 +50,34 @@ ALTER TABLE assets ADD COLUMN campaign_id INTEGER REFERENCES campaigns(id);
 ALTER TABLE maps ADD COLUMN rotation INTEGER NOT NULL DEFAULT 0;
 ALTER TABLE tokens ADD COLUMN status_effects TEXT;
 UPDATE schema_version SET version = 7;
+`
+
+// Migration: v7 → v8 — GM pins table
+export const MIGRATE_V7_TO_V8 = `
+CREATE TABLE IF NOT EXISTS gm_pins (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  map_id     INTEGER NOT NULL REFERENCES maps(id) ON DELETE CASCADE,
+  x          REAL    NOT NULL DEFAULT 0,
+  y          REAL    NOT NULL DEFAULT 0,
+  label      TEXT    NOT NULL DEFAULT '',
+  icon       TEXT    NOT NULL DEFAULT '📌',
+  color      TEXT    NOT NULL DEFAULT '#f59e0b'
+);
+UPDATE schema_version SET version = 8;
+`
+
+// Migration: v8 → v9 — drawings table
+export const MIGRATE_V8_TO_V9 = `
+CREATE TABLE IF NOT EXISTS drawings (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  map_id     INTEGER NOT NULL REFERENCES maps(id) ON DELETE CASCADE,
+  type       TEXT    NOT NULL DEFAULT 'freehand',
+  points     TEXT    NOT NULL DEFAULT '[]',
+  color      TEXT    NOT NULL DEFAULT '#f59e0b',
+  width      REAL    NOT NULL DEFAULT 2,
+  synced     INTEGER NOT NULL DEFAULT 0
+);
+UPDATE schema_version SET version = 9;
 `
 
 export const CREATE_TABLES_SQL = `
@@ -134,6 +162,28 @@ CREATE TABLE IF NOT EXISTS handouts (
   created_at   TEXT    NOT NULL DEFAULT (datetime('now'))
 );
 
+-- GM Pins (DM-only map annotations)
+CREATE TABLE IF NOT EXISTS gm_pins (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  map_id     INTEGER NOT NULL REFERENCES maps(id) ON DELETE CASCADE,
+  x          REAL    NOT NULL DEFAULT 0,
+  y          REAL    NOT NULL DEFAULT 0,
+  label      TEXT    NOT NULL DEFAULT '',
+  icon       TEXT    NOT NULL DEFAULT '📌',
+  color      TEXT    NOT NULL DEFAULT '#f59e0b'
+);
+
+-- Drawings (visible on both DM and player)
+CREATE TABLE IF NOT EXISTS drawings (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  map_id     INTEGER NOT NULL REFERENCES maps(id) ON DELETE CASCADE,
+  type       TEXT    NOT NULL DEFAULT 'freehand',
+  points     TEXT    NOT NULL DEFAULT '[]',
+  color      TEXT    NOT NULL DEFAULT '#f59e0b',
+  width      REAL    NOT NULL DEFAULT 2,
+  synced     INTEGER NOT NULL DEFAULT 0
+);
+
 -- Asset registry
 CREATE TABLE IF NOT EXISTS assets (
   id            INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -150,5 +200,5 @@ CREATE TABLE IF NOT EXISTS schema_version (
 `
 
 export const SEED_SCHEMA_VERSION = `
-INSERT OR IGNORE INTO schema_version (version) VALUES (7);
+INSERT OR IGNORE INTO schema_version (version) VALUES (9);
 `

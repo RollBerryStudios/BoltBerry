@@ -166,10 +166,12 @@ interface CampaignExport {
   version: number
   campaign: { name: string }
   maps: Array<{
-    name: string; imagePath: string; gridType: string; gridSize: number; orderIndex: number
+    name: string; imagePath: string; gridType: string; gridSize: number; orderIndex: number; rotation: number; ftPerUnit: number
     tokens: Array<{
       name: string; imagePath: string | null; x: number; y: number; size: number
       hpCurrent: number; hpMax: number; visibleToPlayers: number
+      rotation: number; locked: number; zIndex: number; markerColor: string | null
+      ac: number | null; notes: string | null; statusEffects: string | null
     }>
     fogBitmap: string | null
     exploredBitmap: string | null
@@ -177,6 +179,9 @@ interface CampaignExport {
     notes: string
   }>
   campaignNote: string
+  handouts: Array<{
+    title: string; imagePath: string | null; textContent: string | null
+  }>
 }
 
 function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): CampaignExport {
@@ -187,7 +192,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
   ).get(campaignId) as { content: string } | undefined)?.content ?? ''
 
   return {
-    version: 2,
+    version: 3,
     campaign: { name: campaign.name },
     campaignNote,
     maps: maps.map((m) => {
@@ -201,12 +206,21 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
         gridType: m.grid_type,
         gridSize: m.grid_size,
         orderIndex: m.order_index,
+        rotation: m.rotation ?? 0,
+        ftPerUnit: m.ft_per_unit ?? 5,
         tokens: tokens.map((t) => ({
           name: t.name,
           imagePath: t.image_path,
           x: t.x, y: t.y, size: t.size,
           hpCurrent: t.hp_current, hpMax: t.hp_max,
           visibleToPlayers: t.visible_to_players,
+          rotation: t.rotation ?? 0,
+          locked: t.locked ?? 0,
+          zIndex: t.z_index ?? 0,
+          markerColor: t.marker_color ?? null,
+          ac: t.ac ?? null,
+          notes: t.notes ?? null,
+          statusEffects: t.status_effects ?? null,
         })),
         fogBitmap: fog?.fog_bitmap ?? null,
         exploredBitmap: fog?.explored_bitmap ?? null,
@@ -216,6 +230,11 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
         notes: note,
       }
     }),
+    handouts: (db.prepare('SELECT title, image_path, text_content FROM handouts WHERE campaign_id = ?').all(campaignId) as any[]).map((h) => ({
+      title: h.title,
+      imagePath: h.image_path,
+      textContent: h.text_content,
+    })),
   }
 }
 
@@ -225,6 +244,7 @@ function collectAssetPaths(data: CampaignExport): string[] {
     paths.push(m.imagePath)
     for (const t of m.tokens) if (t.imagePath) paths.push(t.imagePath)
   }
+  for (const h of data.handouts) if (h.imagePath) paths.push(h.imagePath)
   return paths
 }
 
@@ -252,16 +272,17 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
 
     for (const m of data.maps) {
       const mapResult = db.prepare(
-        `INSERT INTO maps (campaign_id, name, image_path, grid_type, grid_size, order_index)
-         VALUES (?, ?, ?, ?, ?, ?)`
-      ).run(campaignId, m.name, m.imagePath, m.gridType, m.gridSize, m.orderIndex)
+        `INSERT INTO maps (campaign_id, name, image_path, grid_type, grid_size, order_index, rotation, ft_per_unit)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+      ).run(campaignId, m.name, m.imagePath, m.gridType, m.gridSize, m.orderIndex, m.rotation ?? 0, m.ftPerUnit ?? 5)
       const mapId = Number(mapResult.lastInsertRowid)
 
       for (const t of m.tokens) {
         db.prepare(
-          `INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
-        ).run(mapId, t.name, t.imagePath, t.x, t.y, t.size, t.hpCurrent, t.hpMax, t.visibleToPlayers)
+          `INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        ).run(mapId, t.name, t.imagePath, t.x, t.y, t.size, t.hpCurrent, t.hpMax, t.visibleToPlayers,
+          t.rotation ?? 0, t.locked ?? 0, t.zIndex ?? 0, t.markerColor ?? null, t.ac ?? null, t.notes ?? null, t.statusEffects ?? null)
       }
 
       if (m.fogBitmap) {
@@ -278,6 +299,12 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
       if (m.notes) {
         db.prepare(`INSERT INTO notes (campaign_id, map_id, content) VALUES (?, ?, ?)`).run(campaignId, mapId, m.notes)
       }
+    }
+
+    for (const h of data.handouts ?? []) {
+      db.prepare(
+        `INSERT INTO handouts (campaign_id, title, image_path, text_content) VALUES (?, ?, ?, ?)`
+      ).run(campaignId, h.title, h.imagePath, h.textContent)
     }
 
     return campaignId

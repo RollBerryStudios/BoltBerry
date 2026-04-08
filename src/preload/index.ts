@@ -9,6 +9,7 @@ import type {
   PlayerHandout,
   PlayerOverlay,
   PlayerInitiativeEntry,
+  PlayerMeasureState,
   WeatherType,
 } from '../shared/ipc-types'
 import { IPC } from '../shared/ipc-types'
@@ -72,6 +73,10 @@ const dmApi = {
     ipcRenderer.send(IPC.PLAYER_INITIATIVE, entries),
   sendWeather: (type: WeatherType) =>
     ipcRenderer.send(IPC.PLAYER_WEATHER, type),
+  sendMeasure: (measure: PlayerMeasureState | null) =>
+    ipcRenderer.send(IPC.PLAYER_MEASURE, measure),
+  sendDrawing: (drawing: unknown) =>
+    ipcRenderer.send(IPC.PLAYER_DRAWING, drawing),
 
   // DB operations
   dbQuery: <T>(sql: string, params?: unknown[]): Promise<T[]> =>
@@ -149,6 +154,16 @@ const playerApi = {
     const handler = (_: Electron.IpcRendererEvent, type: WeatherType) => cb(type)
     ipcRenderer.on(IPC.PLAYER_WEATHER, handler)
     return () => ipcRenderer.removeListener(IPC.PLAYER_WEATHER, handler)
+  },
+  onMeasure: (cb: (measure: PlayerMeasureState | null) => void) => {
+    const handler = (_: Electron.IpcRendererEvent, measure: PlayerMeasureState | null) => cb(measure)
+    ipcRenderer.on(IPC.PLAYER_MEASURE, handler)
+    return () => ipcRenderer.removeListener(IPC.PLAYER_MEASURE, handler)
+  },
+  onDrawing: (cb: (drawing: unknown) => void) => {
+    const handler = (_: Electron.IpcRendererEvent, drawing: unknown) => cb(drawing)
+    ipcRenderer.on(IPC.PLAYER_DRAWING, handler)
+    return () => ipcRenderer.removeListener(IPC.PLAYER_DRAWING, handler)
   },
 }
 

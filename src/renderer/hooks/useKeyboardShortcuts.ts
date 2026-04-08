@@ -61,6 +61,9 @@ export function useKeyboardShortcuts() {
         case 'c': case 'C':
           useUIStore.getState().setActiveTool('fog-cover')
           break
+        case 'd': case 'D':
+          useUIStore.getState().setActiveTool('draw-freehand')
+          break
         case 't': case 'T':
           useUIStore.getState().setActiveTool('select') // token mode via sidebar
           useUIStore.getState().setSidebarTab('tokens')

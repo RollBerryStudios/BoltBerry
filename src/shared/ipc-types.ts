@@ -42,6 +42,12 @@ export const IPC = {
   // DM → Player: camera viewport sync
   PLAYER_CAMERA: 'player:camera',
 
+  // DM → Player: measurement overlay
+  PLAYER_MEASURE: 'player:measure',
+
+  // DM → Player: drawing
+  PLAYER_DRAWING: 'player:drawing',
+
   // Context menu
   SHOW_CONTEXT_MENU: 'app:show-context-menu',
 } as const
@@ -128,6 +134,19 @@ export interface PlayerTokenState {
   hpCurrent: number
   hpMax: number
   showName: boolean
+  rotation: number
+  markerColor: string | null
+  statusEffects: string[] | null
+  ac: number | null
+}
+
+export interface PlayerMeasureState {
+  type: 'line' | 'circle' | 'cone'
+  startX: number
+  startY: number
+  endX: number
+  endY: number
+  distance: number
 }
 
 export interface PlayerInitiativeEntry {

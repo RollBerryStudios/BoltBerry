@@ -636,6 +636,10 @@ function broadcastTokens(tokens: TokenRecord[]) {
       hpCurrent: t.hpCurrent,
       hpMax: t.hpMax,
       showName: true,
+      rotation: t.rotation,
+      markerColor: t.markerColor,
+      statusEffects: t.statusEffects,
+      ac: t.ac,
     }))
   window.electronAPI?.sendTokenUpdate(visible)
 }

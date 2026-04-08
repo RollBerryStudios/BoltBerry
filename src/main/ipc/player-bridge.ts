@@ -11,6 +11,7 @@ import type {
   PlayerHandout,
   PlayerOverlay,
   PlayerInitiativeEntry,
+  PlayerMeasureState,
   WeatherType,
 } from '../../shared/ipc-types'
 
@@ -83,5 +84,15 @@ export function registerPlayerBridgeHandlers(): void {
   // Weather overlay
   ipcMain.on(IPC.PLAYER_WEATHER, (_event, type: WeatherType) => {
     getPlayerWindow()?.webContents.send(IPC.PLAYER_WEATHER, type)
+  })
+
+  // Measurement overlay
+  ipcMain.on(IPC.PLAYER_MEASURE, (_event, measure: PlayerMeasureState | null) => {
+    getPlayerWindow()?.webContents.send(IPC.PLAYER_MEASURE, measure)
+  })
+
+  // Drawing data
+  ipcMain.on(IPC.PLAYER_DRAWING, (_event, drawing: unknown) => {
+    getPlayerWindow()?.webContents.send(IPC.PLAYER_DRAWING, drawing)
   })
 }

@@ -1,7 +1,7 @@
-import { useRef, useEffect, RefObject } from 'react'
+import { useRef, useEffect, RefObject, useState } from 'react'
 import Konva from 'konva'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
-import { useRotatedImage } from '../../hooks/useRotatedImage'
+import { useCampaignStore } from '../../stores/campaignStore'
 
 interface MinimapOverlayProps {
   stageRef: RefObject<Konva.Stage | null>
@@ -13,8 +13,26 @@ const MINIMAP_H = 120
 
 export function MinimapOverlay({ stageRef, canvasSize }: MinimapOverlayProps) {
   const { scale, offsetX, offsetY, imgW, imgH, fitScale } = useMapTransformStore()
-  const activeMapId = useMapTransformStore((s) => s.imgW) > 0 ? true : false
+  const { activeMapId, activeMaps } = useCampaignStore()
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [mapThumbnail, setMapThumbnail] = useState<HTMLImageElement | null>(null)
+
+  const activeMap = activeMaps.find((m) => m.id === activeMapId) ?? null
+
+  useEffect(() => {
+    if (!activeMap?.imagePath) { setMapThumbnail(null); return }
+    const img = new Image()
+    img.onload = () => setMapThumbnail(img)
+    img.onerror = () => setMapThumbnail(null)
+    if (activeMap.imagePath.startsWith('data:')) {
+      img.src = activeMap.imagePath
+    } else {
+      window.electronAPI?.getImageAsBase64(activeMap.imagePath).then((base64) => {
+        if (base64) img.src = base64
+        else setMapThumbnail(null)
+      }).catch(() => setMapThumbnail(null))
+    }
+  }, [activeMap?.imagePath])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -31,7 +49,10 @@ export function MinimapOverlay({ stageRef, canvasSize }: MinimapOverlayProps) {
     ctx.fillStyle = 'rgba(0,0,0,0.6)'
     ctx.fillRect(0, 0, MINIMAP_W, MINIMAP_H)
 
-    // Viewport rect
+    if (mapThumbnail) {
+      ctx.drawImage(mapThumbnail, drawX, drawY, drawW, drawH)
+    }
+
     const vpLeft = (-offsetX / scale) * mmFitScale + drawX
     const vpTop = (-offsetY / scale) * mmFitScale + drawY
     const vpW = (canvasSize.width / scale) * mmFitScale
@@ -45,7 +66,7 @@ export function MinimapOverlay({ stageRef, canvasSize }: MinimapOverlayProps) {
 
     ctx.strokeStyle = 'rgba(255,255,255,0.2)'
     ctx.strokeRect(drawX, drawY, drawW, drawH)
-  }, [scale, offsetX, offsetY, imgW, imgH, canvasSize.width, canvasSize.height])
+  }, [scale, offsetX, offsetY, imgW, imgH, canvasSize.width, canvasSize.height, mapThumbnail])
 
   function handleClick(e: React.MouseEvent<HTMLCanvasElement>) {
     const rect = e.currentTarget.getBoundingClientRect()

@@ -265,6 +265,18 @@ export function TokenPanel() {
           <SectionHeader title="Aussehen" open={secAussehen} onToggle={() => setSecAussehen((v) => !v)} />
           {secAussehen && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)', paddingBottom: 'var(--sp-2)' }}>
+              {/* Replace image */}
+              <button
+                className="btn btn-ghost"
+                style={{ fontSize: 'var(--text-xs)', width: '100%' }}
+                onClick={async () => {
+                  if (!window.electronAPI) return
+                  const asset = await window.electronAPI.importFile('token')
+                  if (asset?.path) handleUpdate(selected.id, { imagePath: asset.path })
+                }}
+              >
+                🖼 Bild ersetzen
+              </button>
               {/* Rotation + lock */}
               <div style={{ display: 'flex', gap: 'var(--sp-2)', alignItems: 'center' }}>
                 <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>°</label>
