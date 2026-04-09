@@ -132,6 +132,10 @@ const WALL_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: st
   { id: 'wall-door',  icon: '🚪', labelKey: 'toolbar.tools.wallDoor',  shortcut: 'J' },
 ]
 
+const ROOM_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
+  { id: 'room', icon: '🏠', labelKey: 'toolbar.tools.room', shortcut: 'R' },
+]
+
 export function Toolbar() {
   const { t } = useTranslation()
   const {
@@ -285,6 +289,14 @@ export function Toolbar() {
         activeTool={activeTool}
         groupIcon="🧱"
         groupLabelKey="toolbar.tools.wallGroup"
+        onSelect={handleToolClick}
+      />)}
+
+      {(workMode === 'prep' || workMode === 'play') && (<ToolGroup
+        tools={ROOM_TOOLS}
+        activeTool={activeTool}
+        groupIcon="🏠"
+        groupLabelKey="toolbar.tools.roomGroup"
         onSelect={handleToolClick}
       />)}
 

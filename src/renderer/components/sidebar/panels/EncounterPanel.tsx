@@ -1,11 +1,10 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useEncounterStore } from '../../../stores/encounterStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import { useTokenStore } from '../../../stores/tokenStore'
 import { useInitiativeStore } from '../../../stores/initiativeStore'
 import { useWallStore } from '../../../stores/wallStore'
 import { useUIStore } from '../../../stores/uiStore'
-import { useMapTransformStore } from '../../../stores/mapTransformStore'
 import type { EncounterTemplate, FormationType, DifficultyLevel } from '@shared/ipc-types'
 import {
   getFormationOffsets,
@@ -57,6 +56,7 @@ export function EncounterPanel() {
   const [difficulty, setDifficulty] = useState<DifficultyLevel>('normal')
   const [randomVariant, setRandomVariant] = useState(false)
   const [randomCount, setRandomCount] = useState(0)
+  const [pendingSpawn, setPendingSpawn] = useState<number | null>(null)
 
   const selected = encounters.find((e) => e.id === selectedId) ?? null
 
@@ -64,6 +64,22 @@ export function EncounterPanel() {
     if (!selected) return null
     try { return JSON.parse(selected.templateData) } catch { return null }
   }, [selected])
+
+  useEffect(() => {
+    function onEncounterSpawn(e: Event) {
+      const encounterId = (e as CustomEvent).detail?.encounterId
+      if (encounterId) setPendingSpawn(encounterId)
+    }
+    window.addEventListener('encounter:spawn', onEncounterSpawn as EventListener)
+    return () => window.removeEventListener('encounter:spawn', onEncounterSpawn as EventListener)
+  }, [])
+
+  useEffect(() => {
+    if (pendingSpawn !== null) {
+      setPendingSpawn(null)
+      handleSpawn(pendingSpawn)
+    }
+  }, [pendingSpawn]) // eslint-disable-line react-hooks/exhaustive-deps
 
   async function handleSave() {
     if (!activeCampaignId || !activeMapId) return

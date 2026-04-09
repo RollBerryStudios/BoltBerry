@@ -100,6 +100,7 @@
     "keyFogRect": "Reveal Fog (Rectangle)",
     "keyFogPolygon": "Reveal Fog (Polygon)",
     "keyFogCover": "Cover Fog",
+    "keyRoom": "Draw Room",
     "keyTokenTab": "Open Token Tab",
     "keyMouseWheel": "Zoom to cursor",
     "keyAltDrag": "Pan map",
@@ -253,5 +254,8 @@
   "toolbar.tools.lightPointer": "Light Source",
   "toolbar.tools.wallGroup": "Walls & Doors",
   "toolbar.tools.wallDraw": "Draw Wall [G]",
-  "toolbar.tools.wallDoor": "Place Door/Window [J]"
+  "toolbar.tools.wallDoor": "Place Door/Window [J]",
+  "toolbar.tools.roomGroup": "Rooms",
+  "toolbar.tools.room": "Draw Room [R]",
+  "sidebar.right.tabRooms": "Rooms"
 }

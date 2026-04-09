@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 15
+export const SCHEMA_VERSION = 16
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -127,6 +127,23 @@ CREATE TABLE IF NOT EXISTS encounters (
   created_at    TEXT    NOT NULL DEFAULT (datetime('now'))
 );
 UPDATE schema_version SET version = 15;
+`
+
+export const MIGRATE_V15_TO_V16 = `
+CREATE TABLE IF NOT EXISTS rooms (
+  id               INTEGER PRIMARY KEY AUTOINCREMENT,
+  map_id           INTEGER NOT NULL REFERENCES maps(id) ON DELETE CASCADE,
+  name             TEXT    NOT NULL DEFAULT 'Neuer Raum',
+  description      TEXT    NOT NULL DEFAULT '',
+  polygon          TEXT    NOT NULL DEFAULT '[]',
+  visibility        TEXT    NOT NULL DEFAULT 'hidden',
+  encounter_id     INTEGER REFERENCES encounters(id) ON DELETE SET NULL,
+  atmosphere_hint  TEXT,
+  notes            TEXT,
+  color            TEXT    NOT NULL DEFAULT '#3b82f6',
+  created_at       TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+UPDATE schema_version SET version = 16;
 `
 
 export const CREATE_TABLES_SQL = `
@@ -262,6 +279,21 @@ CREATE TABLE IF NOT EXISTS encounters (
   created_at    TEXT    NOT NULL DEFAULT (datetime('now'))
 );
 
+-- Rooms (semantic map areas)
+CREATE TABLE IF NOT EXISTS rooms (
+  id               INTEGER PRIMARY KEY AUTOINCREMENT,
+  map_id           INTEGER NOT NULL REFERENCES maps(id) ON DELETE CASCADE,
+  name             TEXT    NOT NULL DEFAULT 'Neuer Raum',
+  description      TEXT    NOT NULL DEFAULT '',
+  polygon          TEXT    NOT NULL DEFAULT '[]',
+  visibility        TEXT    NOT NULL DEFAULT 'hidden',
+  encounter_id     INTEGER REFERENCES encounters(id) ON DELETE SET NULL,
+  atmosphere_hint  TEXT,
+  notes            TEXT,
+  color            TEXT    NOT NULL DEFAULT '#3b82f6',
+  created_at       TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+
 -- Asset registry
 CREATE TABLE IF NOT EXISTS assets (
   id            INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -278,5 +310,5 @@ CREATE TABLE IF NOT EXISTS schema_version (
 `
 
 export const SEED_SCHEMA_VERSION = `
-INSERT OR IGNORE INTO schema_version (version) VALUES (15);
+INSERT OR IGNORE INTO schema_version (version) VALUES (16);
 `

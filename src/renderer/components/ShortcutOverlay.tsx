@@ -17,6 +17,7 @@ export function ShortcutOverlay({ onClose }: ShortcutOverlayProps) {
     { key: 'F',                   labelKey: 'shortcuts.keyFogRect' },
     { key: 'P',                   labelKey: 'shortcuts.keyFogPolygon' },
     { key: 'C',                   labelKey: 'shortcuts.keyFogCover' },
+    { key: 'R',                   labelKey: 'shortcuts.keyRoom' },
     { key: 'T',                   labelKey: 'shortcuts.keyTokenTab' },
     { section: t('shortcuts.sectionMapNav') },
     { key: 'Mausrad / Scroll',    labelKey: 'shortcuts.keyMouseWheel' },

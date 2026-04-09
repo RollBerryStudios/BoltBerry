@@ -100,6 +100,7 @@
     "keyFogRect": "Fog aufdecken (Rechteck)",
     "keyFogPolygon": "Fog aufdecken (Polygon)",
     "keyFogCover": "Fog zudecken",
+    "keyRoom": "Raum zeichnen",
     "keyTokenTab": "Token-Tab öffnen",
     "keyMouseWheel": "Zoom zur Mausposition",
     "keyAltDrag": "Karte verschieben (Pan)",
@@ -253,5 +254,8 @@
   "toolbar.tools.lightPointer": "Lichtquelle",
   "toolbar.tools.wallGroup": "Wände & Türen",
   "toolbar.tools.wallDraw": "Wand zeichnen [G]",
-  "toolbar.tools.wallDoor": "Tür/Fenster [J]"
+  "toolbar.tools.wallDoor": "Tür/Fenster [J]",
+  "toolbar.tools.roomGroup": "Räume",
+  "toolbar.tools.room": "Raum zeichnen [R]",
+  "sidebar.right.tabRooms": "Räume"
 }

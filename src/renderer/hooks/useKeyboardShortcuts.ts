@@ -73,6 +73,9 @@ export function useKeyboardShortcuts() {
         case 'j': case 'J':
           useUIStore.getState().setActiveTool('wall-door')
           break
+        case 'r': case 'R':
+          useUIStore.getState().setActiveTool('room')
+          break
         case 't':
           useUIStore.getState().setActiveTool('token')
           break

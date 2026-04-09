@@ -8,11 +8,13 @@ import { HandoutsPanel } from './panels/HandoutsPanel'
 import { OverlayPanel } from './panels/OverlayPanel'
 import { DiceRoller } from './panels/DiceRoller'
 import { EncounterPanel } from './panels/EncounterPanel'
+import { RoomPanel } from './panels/RoomPanel'
 
 const ALL_TABS: { id: SidebarTab; labelKey: string; icon: string }[] = [
   { id: 'tokens',      labelKey: 'sidebar.right.tabTokens',      icon: '⬤' },
   { id: 'initiative',  labelKey: 'sidebar.right.tabInitiative',  icon: '⚔️' },
   { id: 'encounters',  labelKey: 'sidebar.right.tabEncounters',  icon: '👾' },
+  { id: 'rooms',       labelKey: 'sidebar.right.tabRooms',       icon: '🏠' },
   { id: 'notes',       labelKey: 'sidebar.right.tabNotes',       icon: '📝' },
   { id: 'handouts',    labelKey: 'sidebar.right.tabHandouts',    icon: '📜' },
   { id: 'overlay',     labelKey: 'sidebar.right.tabOverlay',     icon: '✦' },
@@ -76,6 +78,7 @@ export function RightSidebar() {
         {sidebarTab === 'tokens'      && <TokenPanel />}
         {sidebarTab === 'initiative'  && <InitiativePanel />}
         {sidebarTab === 'encounters'  && <EncounterPanel />}
+        {sidebarTab === 'rooms'       && <RoomPanel />}
         {sidebarTab === 'notes'       && <NotesPanel />}
         {sidebarTab === 'handouts'    && <HandoutsPanel />}
         {sidebarTab === 'overlay'     && <OverlayPanel />}

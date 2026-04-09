@@ -164,6 +164,7 @@ export interface EncounterRecord {
 
 export type FormationType = 'saved' | 'line' | 'circle' | 'cluster' | 'wing' | 'v-formation'
 export type DifficultyLevel = 'normal' | 'easy' | 'hard' | 'deadly'
+export type RoomVisibility = 'hidden' | 'revealed' | 'dimmed'
 
 export interface EncounterTemplate {
   tokens: Array<{
@@ -201,6 +202,20 @@ export interface EncounterTemplate {
   difficulty?: DifficultyLevel
   randomVariant?: boolean
   randomCount?: number
+}
+
+export interface RoomRecord {
+  id: number
+  mapId: number
+  name: string
+  description: string
+  polygon: string          // JSON: Array<{x: number, y: number}> — closed polygon vertices
+  visibility: RoomVisibility
+  encounterId: number | null
+  atmosphereHint: string | null
+  notes: string | null
+  color: string
+  createdAt: string
 }
 
 export interface PlayerTokenState {

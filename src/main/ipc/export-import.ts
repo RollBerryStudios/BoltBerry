@@ -196,6 +196,9 @@ interface CampaignExport {
     exploredBitmap: string | null
     initiative: Array<{ combatantName: string; roll: number; currentTurn: number; tokenId: number | null; effectTimers: string | null }>
     notes: string
+    rooms: Array<{
+      name: string; description: string; polygon: string; visibility: string; encounterId: number | null; atmosphereHint: string | null; notes: string | null; color: string; createdAt: string
+    }>
   }>
   campaignNote: string
   handouts: Array<{
@@ -214,7 +217,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
   ).get(campaignId) as { content: string } | undefined)?.content ?? ''
 
   return {
-    version: 6,
+    version: 7,
     campaign: { name: campaign.name },
     campaignNote,
     maps: maps.map((m) => {
@@ -265,6 +268,17 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
           effectTimers: i.effect_timers ?? null,
         })),
         notes: note,
+        rooms: (db.prepare('SELECT name, description, polygon, visibility, encounter_id, atmosphere_hint, notes, color, created_at FROM rooms WHERE map_id = ?').all(m.id) as any[]).map((r) => ({
+          name: r.name,
+          description: r.description,
+          polygon: r.polygon,
+          visibility: r.visibility,
+          encounterId: r.encounter_id,
+          atmosphereHint: r.atmosphere_hint,
+          notes: r.notes,
+          color: r.color,
+          createdAt: r.created_at,
+        })),
       }
     }),
     handouts: (db.prepare('SELECT title, image_path, text_content FROM handouts WHERE campaign_id = ?').all(campaignId) as any[]).map((h) => ({
@@ -366,6 +380,12 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
 
       if (m.notes) {
         db.prepare(`INSERT INTO notes (campaign_id, map_id, content) VALUES (?, ?, ?)`).run(campaignId, mapId, m.notes)
+      }
+
+      for (const r of m.rooms ?? []) {
+        db.prepare(
+          `INSERT INTO rooms (map_id, name, description, polygon, visibility, encounter_id, atmosphere_hint, notes, color, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        ).run(mapId, r.name, r.description, r.polygon, r.visibility, r.encounterId, r.atmosphereHint, r.notes, r.color, r.createdAt ?? new Date().toISOString())
       }
     }
 

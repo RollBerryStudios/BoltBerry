@@ -11,6 +11,7 @@ import { DrawingToolbar } from './DrawingToolbar'
 import { GMPinLayer, GM_PIN_ADD_EVENT } from './GMPinLayer'
 import { LightingLayer } from './LightingLayer'
 import { WallLayer } from './WallLayer'
+import { RoomLayer } from './RoomLayer'
 import { useUIStore } from '../../stores/uiStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useTokenStore } from '../../stores/tokenStore'
@@ -19,6 +20,7 @@ import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useFogStore } from '../../stores/fogStore'
 import { useWallStore } from '../../stores/wallStore'
 import { useEncounterStore } from '../../stores/encounterStore'
+import { useRoomStore } from '../../stores/roomStore'
 import { useImageUrl } from '../../hooks/useImageUrl'
 import type Konva from 'konva'
 import type { MapRecord, PlayerFullState } from '@shared/ipc-types'
@@ -359,6 +361,13 @@ export function CanvasArea() {
             stageRef={stageRef}
             gridSize={activeMap.gridSize}
           />
+
+          {/* Layer 10: Rooms */}
+          <RoomLayer
+            mapId={activeMap.id}
+            stageRef={stageRef}
+            gridSize={activeMap.gridSize}
+          />
         </Stage>
       )}
 
@@ -518,6 +527,25 @@ async function loadMapData(mapId: number, map: MapRecord) {
         createdAt: r.created_at,
       })))
     }
+
+    // Load rooms for this map
+    const roomRows = await window.electronAPI.dbQuery<{
+      id: number; map_id: number; name: string; description: string; polygon: string; visibility: string; encounter_id: number | null; atmosphere_hint: string | null; notes: string | null; color: string; created_at: string
+    }>('SELECT id, map_id, name, description, polygon, visibility, encounter_id, atmosphere_hint, notes, color, created_at FROM rooms WHERE map_id = ?', [mapId])
+
+    useRoomStore.getState().setRooms(roomRows.map((r) => ({
+      id: r.id,
+      mapId: r.map_id,
+      name: r.name,
+      description: r.description,
+      polygon: r.polygon,
+      visibility: r.visibility as any,
+      encounterId: r.encounter_id,
+      atmosphereHint: r.atmosphere_hint,
+      notes: r.notes,
+      color: r.color,
+      createdAt: r.created_at,
+    })))
 
     // Sync player: send full state
     let fogBitmap: string | null = null
