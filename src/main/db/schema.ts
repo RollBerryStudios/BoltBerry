@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 14
+export const SCHEMA_VERSION = 15
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -115,6 +115,18 @@ CREATE TABLE IF NOT EXISTS walls (
 );
 ALTER TABLE maps ADD COLUMN ambient_brightness INTEGER NOT NULL DEFAULT 100;
 UPDATE schema_version SET version = 14;
+`
+
+export const MIGRATE_V14_TO_V15 = `
+CREATE TABLE IF NOT EXISTS encounters (
+  id            INTEGER PRIMARY KEY AUTOINCREMENT,
+  campaign_id   INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+  name          TEXT    NOT NULL DEFAULT 'Encounter',
+  template_data TEXT    NOT NULL DEFAULT '{}',
+  notes         TEXT,
+  created_at    TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+UPDATE schema_version SET version = 15;
 `
 
 export const CREATE_TABLES_SQL = `
@@ -240,6 +252,16 @@ CREATE TABLE IF NOT EXISTS walls (
   door_state TEXT    NOT NULL DEFAULT 'closed'
 );
 
+-- Encounters (reusable spawn templates)
+CREATE TABLE IF NOT EXISTS encounters (
+  id            INTEGER PRIMARY KEY AUTOINCREMENT,
+  campaign_id   INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+  name          TEXT    NOT NULL DEFAULT 'Encounter',
+  template_data TEXT    NOT NULL DEFAULT '{}',
+  notes         TEXT,
+  created_at    TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+
 -- Asset registry
 CREATE TABLE IF NOT EXISTS assets (
   id            INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -256,5 +278,5 @@ CREATE TABLE IF NOT EXISTS schema_version (
 `
 
 export const SEED_SCHEMA_VERSION = `
-INSERT OR IGNORE INTO schema_version (version) VALUES (14);
+INSERT OR IGNORE INTO schema_version (version) VALUES (15);
 `

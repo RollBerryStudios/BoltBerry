@@ -153,6 +153,49 @@ export interface PlayerMapState {
   rotation: number
 }
 
+export interface EncounterRecord {
+  id: number
+  campaignId: number
+  name: string
+  templateData: string  // JSON string
+  notes: string | null
+  createdAt: string
+}
+
+export interface EncounterTemplate {
+  tokens: Array<{
+    name: string
+    imagePath: string | null
+    x: number
+    y: number
+    size: number
+    hpCurrent: number
+    hpMax: number
+    faction: string
+    ac: number | null
+    visibleToPlayers: boolean
+  }>
+  walls: Array<{
+    x1: number
+    y1: number
+    x2: number
+    y2: number
+    wallType: string
+    doorState: string
+  }>
+  initiative: Array<{
+    combatantName: string
+    roll: number
+    tokenId: number | null
+  }>
+  fogReveal?: Array<{
+    type: 'reveal' | 'cover'
+    shape: 'rect' | 'circle'
+    points: number[]
+  }>
+  notes: string | null
+}
+
 export interface PlayerTokenState {
   id: number
   name: string

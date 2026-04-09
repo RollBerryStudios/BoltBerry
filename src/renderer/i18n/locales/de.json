@@ -84,7 +84,8 @@
       "tabHandouts": "Handouts",
       "tabOverlay": "Overlay",
       "tabAudio": "Audio",
-      "tabDice": "Würfel"
+      "tabDice": "Würfel",
+      "tabEncounters": "Encounter"
     }
   },
   "shortcuts": {

@@ -201,6 +201,9 @@ interface CampaignExport {
   handouts: Array<{
     title: string; imagePath: string | null; textContent: string | null
   }>
+  encounters: Array<{
+    name: string; templateData: string; notes: string | null; createdAt: string
+  }>
 }
 
 function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): CampaignExport {
@@ -211,7 +214,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
   ).get(campaignId) as { content: string } | undefined)?.content ?? ''
 
   return {
-    version: 5,
+    version: 6,
     campaign: { name: campaign.name },
     campaignNote,
     maps: maps.map((m) => {
@@ -268,6 +271,12 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
       title: h.title,
       imagePath: h.image_path,
       textContent: h.text_content,
+    })),
+    encounters: (db.prepare('SELECT name, template_data, notes, created_at FROM encounters WHERE campaign_id = ?').all(campaignId) as any[]).map((e) => ({
+      name: e.name,
+      templateData: e.template_data,
+      notes: e.notes,
+      createdAt: e.created_at,
     })),
   }
 }
@@ -364,6 +373,12 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
       db.prepare(
         `INSERT INTO handouts (campaign_id, title, image_path, text_content) VALUES (?, ?, ?, ?)`
       ).run(campaignId, h.title, h.imagePath, h.textContent)
+    }
+
+    for (const e of data.encounters ?? []) {
+      db.prepare(
+        `INSERT INTO encounters (campaign_id, name, template_data, notes, created_at) VALUES (?, ?, ?, ?, ?)`
+      ).run(campaignId, e.name, e.templateData, e.notes, e.createdAt ?? new Date().toISOString())
     }
 
     return campaignId

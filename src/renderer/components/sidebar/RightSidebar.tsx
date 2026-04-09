@@ -7,19 +7,21 @@ import { AudioPlayer } from './panels/AudioPlayer'
 import { HandoutsPanel } from './panels/HandoutsPanel'
 import { OverlayPanel } from './panels/OverlayPanel'
 import { DiceRoller } from './panels/DiceRoller'
+import { EncounterPanel } from './panels/EncounterPanel'
 
 export function RightSidebar() {
   const { t } = useTranslation()
   const { sidebarTab, setSidebarTab } = useUIStore()
 
   const TABS: { id: SidebarTab; labelKey: string; icon: string }[] = [
-    { id: 'tokens',     labelKey: 'sidebar.right.tabTokens',     icon: '⬤' },
-    { id: 'initiative', labelKey: 'sidebar.right.tabInitiative', icon: '⚔️' },
-    { id: 'notes',      labelKey: 'sidebar.right.tabNotes',      icon: '📝' },
-    { id: 'handouts',   labelKey: 'sidebar.right.tabHandouts',   icon: '📜' },
-    { id: 'overlay',    labelKey: 'sidebar.right.tabOverlay',    icon: '✦' },
-    { id: 'audio',      labelKey: 'sidebar.right.tabAudio',      icon: '🎵' },
-    { id: 'dice',       labelKey: 'sidebar.right.tabDice',       icon: '🎲' },
+    { id: 'tokens',      labelKey: 'sidebar.right.tabTokens',      icon: '⬤' },
+    { id: 'initiative',  labelKey: 'sidebar.right.tabInitiative',  icon: '⚔️' },
+    { id: 'encounters',  labelKey: 'sidebar.right.tabEncounters',  icon: '👾' },
+    { id: 'notes',       labelKey: 'sidebar.right.tabNotes',       icon: '📝' },
+    { id: 'handouts',    labelKey: 'sidebar.right.tabHandouts',    icon: '📜' },
+    { id: 'overlay',     labelKey: 'sidebar.right.tabOverlay',     icon: '✦' },
+    { id: 'audio',       labelKey: 'sidebar.right.tabAudio',       icon: '🎵' },
+    { id: 'dice',        labelKey: 'sidebar.right.tabDice',        icon: '🎲' },
   ]
 
   return (
@@ -61,13 +63,14 @@ export function RightSidebar() {
       </div>
 
       <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-        {sidebarTab === 'tokens'     && <TokenPanel />}
-        {sidebarTab === 'initiative' && <InitiativePanel />}
-        {sidebarTab === 'notes'      && <NotesPanel />}
-        {sidebarTab === 'handouts'   && <HandoutsPanel />}
-        {sidebarTab === 'overlay'    && <OverlayPanel />}
-        {sidebarTab === 'audio'      && <AudioPlayer />}
-        {sidebarTab === 'dice'       && <DiceRoller />}
+        {sidebarTab === 'tokens'      && <TokenPanel />}
+        {sidebarTab === 'initiative'  && <InitiativePanel />}
+        {sidebarTab === 'encounters'  && <EncounterPanel />}
+        {sidebarTab === 'notes'       && <NotesPanel />}
+        {sidebarTab === 'handouts'    && <HandoutsPanel />}
+        {sidebarTab === 'overlay'     && <OverlayPanel />}
+        {sidebarTab === 'audio'       && <AudioPlayer />}
+        {sidebarTab === 'dice'        && <DiceRoller />}
       </div>
     </div>
   )

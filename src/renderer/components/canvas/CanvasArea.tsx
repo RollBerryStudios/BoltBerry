@@ -18,6 +18,7 @@ import { useInitiativeStore } from '../../stores/initiativeStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useFogStore } from '../../stores/fogStore'
 import { useWallStore } from '../../stores/wallStore'
+import { useEncounterStore } from '../../stores/encounterStore'
 import { useImageUrl } from '../../hooks/useImageUrl'
 import type Konva from 'konva'
 import type { MapRecord, PlayerFullState } from '@shared/ipc-types'
@@ -473,6 +474,22 @@ async function loadMapData(mapId: number, map: MapRecord) {
       wallType: r.wall_type as any,
       doorState: r.door_state as any,
     })))
+
+    // Load encounters for this campaign
+    const campaignId = useCampaignStore.getState().activeCampaignId
+    if (campaignId) {
+      const encRows = await window.electronAPI.dbQuery<{
+        id: number; campaign_id: number; name: string; template_data: string; notes: string | null; created_at: string
+      }>('SELECT id, campaign_id, name, template_data, notes, created_at FROM encounters WHERE campaign_id = ? ORDER BY created_at DESC', [campaignId])
+      useEncounterStore.getState().setEncounters(encRows.map((r) => ({
+        id: r.id,
+        campaignId: r.campaign_id,
+        name: r.name,
+        templateData: r.template_data,
+        notes: r.notes,
+        createdAt: r.created_at,
+      })))
+    }
 
     // Sync player: send full state
     let fogBitmap: string | null = null
