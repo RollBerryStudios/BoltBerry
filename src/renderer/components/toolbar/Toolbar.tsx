@@ -150,6 +150,7 @@ export function Toolbar() {
     showMinimap, toggleMinimap,
     fogBrushRadius, setFogBrushRadius,
     workMode, setWorkMode,
+    showPlayerEye, togglePlayerEye,
   } = useUIStore()
   const { activeCampaignId } = useCampaignStore()
   const [showMonitorDialog, setShowMonitorDialog] = useState(false)
@@ -306,6 +307,15 @@ export function Toolbar() {
         onClick={handleAtmosphere}
       >
         🖼
+      </button>
+
+      <button
+        className={clsx('tool-btn', showPlayerEye && 'active')}
+        title={showPlayerEye ? 'Spieler-Sicht ausblenden [E]' : 'Spieler-Sicht anzeigen [E]'}
+        onClick={togglePlayerEye}
+        style={showPlayerEye ? { color: '#22c55e' } : undefined}
+      >
+        👁‍🗨
       </button>
 
       <div style={{ width: 1, height: 24, background: 'var(--border)', margin: '0 4px' }} />

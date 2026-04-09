@@ -12,6 +12,8 @@ import { GMPinLayer, GM_PIN_ADD_EVENT } from './GMPinLayer'
 import { LightingLayer } from './LightingLayer'
 import { WallLayer } from './WallLayer'
 import { RoomLayer } from './RoomLayer'
+import { PlayerEyeOverlay } from './PlayerEyeOverlay'
+import { PlayerEyeHUD } from './PlayerEyeHUD'
 import { useUIStore } from '../../stores/uiStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useTokenStore } from '../../stores/tokenStore'
@@ -52,6 +54,7 @@ export function CanvasArea() {
   const appMode = useUIStore((s) => s.appMode)
   const atmosphereImagePath = useUIStore((s) => s.atmosphereImagePath)
   const showMinimap = useUIStore((s) => s.showMinimap)
+  const showPlayerEye = useUIStore((s) => s.showPlayerEye)
   const workMode = useUIStore((s) => s.workMode)
   const activeMapId = useCampaignStore((s) => s.activeMapId)
   const activeMaps = useCampaignStore((s) => s.activeMaps)
@@ -368,8 +371,20 @@ export function CanvasArea() {
             stageRef={stageRef}
             gridSize={activeMap.gridSize}
           />
+
+          {/* Layer 11: Player Eye overlay (hidden tokens + stats) */}
+          {showPlayerEye && activeMap && (
+            <PlayerEyeOverlay
+              map={activeMap}
+              stageRef={stageRef}
+              canvasSize={size}
+            />
+          )}
         </Stage>
       )}
+
+      {/* Player Eye HUD */}
+      <PlayerEyeHUD />
 
       {/* Drop highlight overlay */}
       {dropHighlight && (
@@ -403,6 +418,17 @@ export function CanvasArea() {
             onClick={() => useUIStore.getState().setWorkMode('play')}
           >Zurück zum Spiel</button>
         </div>
+      )}
+
+      {/* Player Eye mode border */}
+      {showPlayerEye && (
+        <div style={{
+          position: 'absolute', inset: 0, zIndex: 130,
+          border: '3px solid rgba(34, 197, 94, 0.6)',
+          borderRadius: 4,
+          pointerEvents: 'none',
+          boxShadow: 'inset 0 0 30px rgba(34, 197, 94, 0.15)',
+        }} />
       )}
 
       {/* Blackout overlay */}

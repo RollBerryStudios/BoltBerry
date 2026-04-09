@@ -76,6 +76,9 @@ export function useKeyboardShortcuts() {
         case 'r': case 'R':
           useUIStore.getState().setActiveTool('room')
           break
+        case 'e': case 'E':
+          useUIStore.getState().togglePlayerEye()
+          break
         case 't':
           useUIStore.getState().setActiveTool('token')
           break

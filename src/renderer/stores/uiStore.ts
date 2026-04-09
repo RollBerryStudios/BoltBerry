@@ -29,6 +29,7 @@ interface UIState {
   drawWidth: number
   fogBrushRadius: number
   workMode: WorkMode
+  showPlayerEye: boolean
 
   setActiveTool: (tool: ActiveTool) => void
   setWorkMode: (mode: WorkMode) => void
@@ -52,6 +53,7 @@ interface UIState {
   setDrawColor: (color: string) => void
   setDrawWidth: (width: number) => void
   setFogBrushRadius: (radius: number) => void
+  togglePlayerEye: () => void
 }
 
 export const useUIStore = create<UIState>((set) => ({
@@ -75,6 +77,7 @@ export const useUIStore = create<UIState>((set) => ({
   drawWidth: 3,
   fogBrushRadius: 30,
   workMode: 'prep' as WorkMode,
+  showPlayerEye: false,
 
   setActiveTool: (activeTool) => set({ activeTool }),
   setWorkMode: (workMode: WorkMode) =>
@@ -146,4 +149,5 @@ export const useUIStore = create<UIState>((set) => ({
   setDrawColor: (drawColor) => set({ drawColor }),
   setDrawWidth: (drawWidth) => set({ drawWidth }),
   setFogBrushRadius: (fogBrushRadius: number) => set({ fogBrushRadius }),
+  togglePlayerEye: () => set((s) => ({ showPlayerEye: !s.showPlayerEye })),
 }))
