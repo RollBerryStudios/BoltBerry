@@ -82,6 +82,21 @@ export interface MapRecord {
   cameraX: number | null
   cameraY: number | null
   cameraScale: number | null
+  ambientBrightness: number  // 0-100
+}
+
+export type WallType = 'wall' | 'door' | 'window'
+export type DoorState = 'open' | 'closed' | 'locked'
+
+export interface WallRecord {
+  id: number
+  mapId: number
+  x1: number
+  y1: number
+  x2: number
+  y2: number
+  wallType: WallType
+  doorState: DoorState
 }
 
 export interface TokenRecord {

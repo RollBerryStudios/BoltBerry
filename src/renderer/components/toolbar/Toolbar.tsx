@@ -127,6 +127,11 @@ const DRAW_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: st
   { id: 'draw-text',    icon: 'T',  labelKey: 'toolbar.tools.drawText',     shortcut: '' },
 ]
 
+const WALL_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
+  { id: 'wall-draw',  icon: '🧱', labelKey: 'toolbar.tools.wallDraw',  shortcut: 'G' },
+  { id: 'wall-door',  icon: '🚪', labelKey: 'toolbar.tools.wallDoor',  shortcut: 'J' },
+]
+
 export function Toolbar() {
   const { t } = useTranslation()
   const {
@@ -238,6 +243,14 @@ export function Toolbar() {
         activeTool={activeTool}
         groupIcon="✏️"
         groupLabelKey="toolbar.tools.drawGroup"
+        onSelect={handleToolClick}
+      />
+
+      <ToolGroup
+        tools={WALL_TOOLS}
+        activeTool={activeTool}
+        groupIcon="🧱"
+        groupLabelKey="toolbar.tools.wallGroup"
         onSelect={handleToolClick}
       />
 

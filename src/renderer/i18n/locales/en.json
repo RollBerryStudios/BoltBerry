@@ -249,5 +249,8 @@
   "toolbar.tools.drawText": "Text",
   "toolbar.tools.fogBrush": "Brush",
   "toolbar.tools.lightingGroup": "Lighting",
-  "toolbar.tools.lightPointer": "Light Source"
+  "toolbar.tools.lightPointer": "Light Source",
+  "toolbar.tools.wallGroup": "Walls & Doors",
+  "toolbar.tools.wallDraw": "Draw Wall [G]",
+  "toolbar.tools.wallDoor": "Place Door/Window [J]"
 }

@@ -249,5 +249,8 @@
   "toolbar.tools.drawText": "Text",
   "toolbar.tools.fogBrush": "Pinsel",
   "toolbar.tools.lightingGroup": "Beleuchtung",
-  "toolbar.tools.lightPointer": "Lichtquelle"
+  "toolbar.tools.lightPointer": "Lichtquelle",
+  "toolbar.tools.wallGroup": "Wände & Türen",
+  "toolbar.tools.wallDraw": "Wand zeichnen [G]",
+  "toolbar.tools.wallDoor": "Tür/Fenster [J]"
 }

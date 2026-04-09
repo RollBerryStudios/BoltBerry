@@ -86,7 +86,7 @@ export const useCampaignStore = create<CampaignState>((set) => ({
           id: number; campaign_id: number; name: string; image_path: string
           grid_type: string; grid_size: number; ft_per_unit: number; order_index: number
           camera_x: number | null; camera_y: number | null; camera_scale: number | null
-          rotation: number | null; grid_offset_x: number; grid_offset_y: number
+          rotation: number | null; grid_offset_x: number; grid_offset_y: number; ambient_brightness: number
         }>('SELECT * FROM maps WHERE campaign_id = ? ORDER BY order_index', [state.activeCampaignId])
 
         set({
@@ -102,6 +102,7 @@ export const useCampaignStore = create<CampaignState>((set) => ({
             rotation: r.rotation ?? 0,
             gridOffsetX: r.grid_offset_x ?? 0,
             gridOffsetY: r.grid_offset_y ?? 0,
+            ambientBrightness: r.ambient_brightness ?? 100,
             cameraX: r.camera_x,
             cameraY: r.camera_y,
             cameraScale: r.camera_scale,

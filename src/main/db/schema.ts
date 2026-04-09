@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 13
+export const SCHEMA_VERSION = 14
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -102,6 +102,21 @@ ALTER TABLE initiative ADD COLUMN effect_timers TEXT;
 UPDATE schema_version SET version = 13;
 `
 
+export const MIGRATE_V13_TO_V14 = `
+CREATE TABLE IF NOT EXISTS walls (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  map_id     INTEGER NOT NULL REFERENCES maps(id) ON DELETE CASCADE,
+  x1         REAL NOT NULL DEFAULT 0,
+  y1         REAL NOT NULL DEFAULT 0,
+  x2         REAL NOT NULL DEFAULT 0,
+  y2         REAL NOT NULL DEFAULT 0,
+  wall_type  TEXT NOT NULL DEFAULT 'wall',
+  door_state TEXT NOT NULL DEFAULT 'closed'
+);
+ALTER TABLE maps ADD COLUMN ambient_brightness INTEGER NOT NULL DEFAULT 100;
+UPDATE schema_version SET version = 14;
+`
+
 export const CREATE_TABLES_SQL = `
 -- Campaigns
 CREATE TABLE IF NOT EXISTS campaigns (
@@ -126,7 +141,8 @@ CREATE TABLE IF NOT EXISTS maps (
   camera_scale REAL,
   rotation     INTEGER NOT NULL DEFAULT 0,
   grid_offset_x REAL    NOT NULL DEFAULT 0,
-  grid_offset_y REAL    NOT NULL DEFAULT 0
+  grid_offset_y REAL    NOT NULL DEFAULT 0,
+  ambient_brightness INTEGER NOT NULL DEFAULT 100
 );
 
 -- Fog of War bitmaps (one per map)
@@ -212,6 +228,18 @@ CREATE TABLE IF NOT EXISTS drawings (
   synced     INTEGER NOT NULL DEFAULT 0
 );
 
+-- Walls, doors, windows (line-of-sight blockers)
+CREATE TABLE IF NOT EXISTS walls (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  map_id     INTEGER NOT NULL REFERENCES maps(id) ON DELETE CASCADE,
+  x1         REAL    NOT NULL DEFAULT 0,
+  y1         REAL    NOT NULL DEFAULT 0,
+  x2         REAL    NOT NULL DEFAULT 0,
+  y2         REAL    NOT NULL DEFAULT 0,
+  wall_type  TEXT    NOT NULL DEFAULT 'wall',
+  door_state TEXT    NOT NULL DEFAULT 'closed'
+);
+
 -- Asset registry
 CREATE TABLE IF NOT EXISTS assets (
   id            INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -228,5 +256,5 @@ CREATE TABLE IF NOT EXISTS schema_version (
 `
 
 export const SEED_SCHEMA_VERSION = `
-INSERT OR IGNORE INTO schema_version (version) VALUES (13);
+INSERT OR IGNORE INTO schema_version (version) VALUES (14);
 `

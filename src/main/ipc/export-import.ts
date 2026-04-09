@@ -178,7 +178,7 @@ interface CampaignExport {
   version: number
   campaign: { name: string }
   maps: Array<{
-    name: string; imagePath: string; gridType: string; gridSize: number; orderIndex: number; rotation: number; ftPerUnit: number; gridOffsetX: number; gridOffsetY: number
+    name: string; imagePath: string; gridType: string; gridSize: number; orderIndex: number; rotation: number; ftPerUnit: number; gridOffsetX: number; gridOffsetY: number; ambientBrightness: number
     tokens: Array<{
       id: number; name: string; imagePath: string | null; x: number; y: number; size: number
       hpCurrent: number; hpMax: number; visibleToPlayers: number
@@ -231,6 +231,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
         ftPerUnit: m.ft_per_unit ?? 5,
         gridOffsetX: m.grid_offset_x ?? 0,
         gridOffsetY: m.grid_offset_y ?? 0,
+        ambientBrightness: m.ambient_brightness ?? 100,
         tokens: tokens.map((t) => ({
           id: t.id,
           name: t.name,
@@ -313,9 +314,9 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
 
     for (const m of data.maps) {
       const mapResult = db.prepare(
-        `INSERT INTO maps (campaign_id, name, image_path, grid_type, grid_size, order_index, rotation, ft_per_unit, grid_offset_x, grid_offset_y)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-      ).run(campaignId, m.name, m.imagePath, m.gridType, m.gridSize, m.orderIndex, m.rotation ?? 0, m.ftPerUnit ?? 5, m.gridOffsetX ?? 0, m.gridOffsetY ?? 0)
+        `INSERT INTO maps (campaign_id, name, image_path, grid_type, grid_size, order_index, rotation, ft_per_unit, grid_offset_x, grid_offset_y, ambient_brightness)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+      ).run(campaignId, m.name, m.imagePath, m.gridType, m.gridSize, m.orderIndex, m.rotation ?? 0, m.ftPerUnit ?? 5, m.gridOffsetX ?? 0, m.gridOffsetY ?? 0, m.ambientBrightness ?? 100)
       const mapId = Number(mapResult.lastInsertRowid)
 
       const tokenIdMap = new Map<number, number>()

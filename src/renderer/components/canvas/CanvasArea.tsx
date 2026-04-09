@@ -10,12 +10,14 @@ import { DrawingLayer } from './DrawingLayer'
 import { DrawingToolbar } from './DrawingToolbar'
 import { GMPinLayer, GM_PIN_ADD_EVENT } from './GMPinLayer'
 import { LightingLayer } from './LightingLayer'
+import { WallLayer } from './WallLayer'
 import { useUIStore } from '../../stores/uiStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useInitiativeStore } from '../../stores/initiativeStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useFogStore } from '../../stores/fogStore'
+import { useWallStore } from '../../stores/wallStore'
 import { useImageUrl } from '../../hooks/useImageUrl'
 import type Konva from 'konva'
 import type { MapRecord, PlayerFullState } from '@shared/ipc-types'
@@ -123,6 +125,7 @@ export function CanvasArea() {
           rotation: 0,
           gridOffsetX: 0,
           gridOffsetY: 0,
+          ambientBrightness: 100,
           cameraX: null,
           cameraY: null,
           cameraScale: null,
@@ -337,6 +340,13 @@ export function CanvasArea() {
             mapId={activeMap.id}
             gridSize={activeMap.gridSize}
           />
+
+          {/* Layer 9: Walls & doors */}
+          <WallLayer
+            mapId={activeMap.id}
+            stageRef={stageRef}
+            gridSize={activeMap.gridSize}
+          />
         </Stage>
       )}
 
@@ -449,6 +459,19 @@ async function loadMapData(mapId: number, map: MapRecord) {
       currentTurn: Boolean(r.current_turn),
       tokenId: r.token_id ?? null,
       effectTimers: r.effect_timers ? JSON.parse(r.effect_timers) : null,
+    })))
+
+    // Load walls
+    const wallRows = await window.electronAPI.dbQuery<{
+      id: number; map_id: number; x1: number; y1: number; x2: number; y2: number; wall_type: string; door_state: string
+    }>('SELECT id, map_id, x1, y1, x2, y2, wall_type, door_state FROM walls WHERE map_id = ?', [mapId])
+
+    useWallStore.getState().setWalls(wallRows.map((r) => ({
+      id: r.id,
+      mapId: r.map_id,
+      x1: r.x1, y1: r.y1, x2: r.x2, y2: r.y2,
+      wallType: r.wall_type as any,
+      doorState: r.door_state as any,
     })))
 
     // Sync player: send full state

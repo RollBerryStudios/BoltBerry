@@ -73,6 +73,12 @@ export function useKeyboardShortcuts() {
         case 'd': case 'D':
           useUIStore.getState().setActiveTool('draw-freehand')
           break
+        case 'g': case 'G':
+          useUIStore.getState().setActiveTool('wall-draw')
+          break
+        case 'j': case 'J':
+          useUIStore.getState().setActiveTool('wall-door')
+          break
         case 't':
           useUIStore.getState().setActiveTool('token')
           break
