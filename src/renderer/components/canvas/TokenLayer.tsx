@@ -72,6 +72,8 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   const setSelectedTokens = useUIStore((s) => s.setSelectedTokens)
   const clearTokenSelection = useUIStore((s) => s.clearTokenSelection)
   const gridSnap = useUIStore((s) => s.gridSnap)
+  const clipboardTokens = useUIStore((s) => s.clipboardTokens)
+  const setClipboardTokens = useUIStore((s) => s.setClipboardTokens)
   const scale = useMapTransformStore((s) => s.scale)
   const offsetX = useMapTransformStore((s) => s.offsetX)
   const offsetY = useMapTransformStore((s) => s.offsetY)
@@ -355,6 +357,139 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     }
   }
 
+  async function handleDuplicateGroup() {
+    closeContextMenu()
+    if (!window.electronAPI) return
+    const selectedTokens = tokens.filter((t) => selectedTokenIds.includes(t.id))
+    if (selectedTokens.length === 0) return
+    const firstToken = selectedTokens[0]
+    const baseX = firstToken.x
+    const baseY = firstToken.y
+    const gridSize = map.gridSize
+    for (const token of selectedTokens) {
+      const newX = (token.x - baseX) + baseX + gridSize
+      const newY = (token.y - baseY) + baseY + gridSize
+      try {
+        const row = await window.electronAPI.dbRun(
+          'INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+          [token.mapId, token.name, token.imagePath, newX, newY, token.size, token.hpCurrent, token.hpMax, token.visibleToPlayers ? 1 : 0,
+           token.rotation, token.locked ? 1 : 0, token.zIndex, token.markerColor, token.ac, token.notes,
+           token.statusEffects ? JSON.stringify(token.statusEffects) : null, token.faction ?? 'party', token.showName ? 1 : 0]
+        )
+        useTokenStore.getState().addToken({
+          id: row.lastInsertRowid,
+          mapId: token.mapId,
+          name: token.name,
+          imagePath: token.imagePath,
+          x: newX, y: newY, size: token.size,
+          hpCurrent: token.hpCurrent, hpMax: token.hpMax,
+          visibleToPlayers: token.visibleToPlayers,
+          rotation: token.rotation, locked: token.locked, zIndex: token.zIndex,
+          markerColor: token.markerColor, ac: token.ac, notes: token.notes,
+          statusEffects: token.statusEffects, faction: token.faction ?? 'party', showName: token.showName,
+        })
+      } catch (err) {
+        console.error('[TokenLayer] handleDuplicateGroup failed:', err)
+      }
+    }
+    broadcastTokens(useTokenStore.getState().tokens)
+  }
+
+  function handleFocusToken(token: TokenRecord) {
+    closeContextMenu()
+    const { scale, fitScale, canvasW, canvasH } = useMapTransformStore.getState()
+    const tokenCenterX = token.x + (map.gridSize * token.size) / 2
+    const tokenCenterY = token.y + (map.gridSize * token.size) / 2
+    const targetScale = Math.max(scale, fitScale * 1.5)
+    useMapTransformStore.getState().setTransform({
+      scale: targetScale,
+      offsetX: canvasW / 2 - tokenCenterX * targetScale,
+      offsetY: canvasH / 2 - tokenCenterY * targetScale,
+    })
+  }
+
+  function handleToggleLight(token: TokenRecord) {
+    closeContextMenu()
+    const notes = token.notes ?? ''
+    const lightMatch = notes.match(/light:(\d+)(?::(#[0-9a-fA-F]{3,8}))?/)
+    if (lightMatch) {
+      const newNotes = notes.replace(/\s*light:(\d+)(?::(#[0-9a-fA-F]{3,8}))?/g, '').trim()
+      handleUpdate(token.id, { notes: newNotes || null })
+    } else {
+      const newNotes = notes ? `${notes} light:30` : 'light:30'
+      handleUpdate(token.id, { notes: newNotes })
+    }
+  }
+
+  function handleEditNotes(token: TokenRecord) {
+    closeContextMenu()
+    const newNotes = prompt('Notizen:', token.notes ?? '')
+    if (newNotes === null) return
+    handleUpdate(token.id, { notes: newNotes || null })
+  }
+
+  function handleCopyTokens() {
+    closeContextMenu()
+    const selectedTokens = tokens.filter((t) => selectedTokenIds.includes(t.id))
+    if (selectedTokens.length === 0) {
+      const token = tokens.find((t) => t.id === contextMenu.tokenId)
+      if (!token) return
+      setClipboardTokens([{
+        name: token.name, imagePath: token.imagePath, size: token.size,
+        hpCurrent: token.hpCurrent, hpMax: token.hpMax, faction: token.faction ?? 'party',
+        ac: token.ac, notes: token.notes, statusEffects: token.statusEffects,
+        visibleToPlayers: token.visibleToPlayers, markerColor: token.markerColor,
+        showName: token.showName, offsetX: 0, offsetY: 0,
+      }])
+    } else {
+      const firstX = Math.min(...selectedTokens.map((t) => t.x))
+      const firstY = Math.min(...selectedTokens.map((t) => t.y))
+      setClipboardTokens(selectedTokens.map((t) => ({
+        name: t.name, imagePath: t.imagePath, size: t.size,
+        hpCurrent: t.hpCurrent, hpMax: t.hpMax, faction: t.faction ?? 'party',
+        ac: t.ac, notes: t.notes, statusEffects: t.statusEffects,
+        visibleToPlayers: t.visibleToPlayers, markerColor: t.markerColor,
+        showName: t.showName,
+        offsetX: t.x - firstX, offsetY: t.y - firstY,
+      })))
+    }
+  }
+
+  async function handlePasteTokens() {
+    closeContextMenu()
+    if (!window.electronAPI) return
+    if (clipboardTokens.length === 0) return
+    const stage = stageRef.current
+    if (!stage) return
+    const pos = stage.getPointerPosition()
+    if (!pos) return
+    const mapPos = useMapTransformStore.getState().screenToMap(pos.x, pos.y)
+    for (const ct of clipboardTokens) {
+      const newX = Math.round((mapPos.x + ct.offsetX) / map.gridSize) * map.gridSize
+      const newY = Math.round((mapPos.y + ct.offsetY) / map.gridSize) * map.gridSize
+      try {
+        const row = await window.electronAPI.dbRun(
+          'INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+          [map.id, ct.name, ct.imagePath, newX, newY, ct.size, ct.hpCurrent, ct.hpMax, ct.visibleToPlayers ? 1 : 0,
+           0, 0, 0, ct.markerColor, ct.ac, ct.notes,
+           ct.statusEffects ? JSON.stringify(ct.statusEffects) : null, ct.faction, ct.showName ? 1 : 0]
+        )
+        useTokenStore.getState().addToken({
+          id: row.lastInsertRowid, mapId: map.id,
+          name: ct.name, imagePath: ct.imagePath,
+          x: newX, y: newY, size: ct.size,
+          hpCurrent: ct.hpCurrent, hpMax: ct.hpMax,
+          visibleToPlayers: ct.visibleToPlayers, rotation: 0, locked: false, zIndex: 0,
+          markerColor: ct.markerColor, ac: ct.ac, notes: ct.notes,
+          statusEffects: ct.statusEffects, faction: ct.faction, showName: ct.showName,
+        })
+      } catch (err) {
+        console.error('[TokenLayer] handlePasteTokens failed:', err)
+      }
+    }
+    broadcastTokens(useTokenStore.getState().tokens)
+  }
+
   async function handleToggleVisibility(token: TokenRecord) {
     closeContextMenu()
     const v = !token.visibleToPlayers
@@ -528,6 +663,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     { label: 'Pink', color: '#ec4899' },
                   ]
                   const isBatch = selectedTokenIds.length > 1 && selectedTokenIds.includes(token.id)
+                  const hasLight = (token.notes ?? '').includes('light:')
                   const menuItems: any[] = isBatch ? [
                     { label: `👁 Alle sichtbar machen (${selectedTokenIds.length})`, action: () => {
                       for (const id of selectedTokenIds) handleUpdate(id, { visibleToPlayers: true })
@@ -547,12 +683,16 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     }},
                     { label: '🏷 Fraktion setzen', action: null, submenu: true, submenuType: 'faction' },
                     null,
+                    { label: '📋 Als Gruppe duplizieren', action: () => handleDuplicateGroup() },
+                    { label: '📋 Kopieren', action: () => handleCopyTokens() },
+                    { label: '📋 Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
+                    null,
                     { label: `❌ Alle löschen (${selectedTokenIds.length})`, action: () => handleDelete(token.id), danger: true },
                   ] : [
                     { label: '✏️ Umbenennen', action: () => startEdit(token) },
                     { label: '❤️ HP bearbeiten', action: () => startEditHp(token) },
                     { label: '🛡 AC bearbeiten', action: () => startEditAc(token) },
-                    { label: '⚔️ Zum Kampf hinzufügen', action: () => addToInitiative(token) },
+                    { label: '📝 Notiz', action: () => handleEditNotes(token) },
                     null,
                     { label: '💚 Heilen (+5 HP)', action: () => { handleUpdate(token.id, { hpCurrent: Math.min((token.hpMax || 0) || 999, (token.hpCurrent || 0) + 5) }); closeContextMenu() } },
                     { label: '🩸 Schaden (-5 HP)', action: () => { handleUpdate(token.id, { hpCurrent: Math.max(0, (token.hpCurrent || 0) - 5) }); closeContextMenu() } },
@@ -564,8 +704,13 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     { label: '➖ Nachteil', action: () => toggleAdvantage(token, false) },
                     { label: '🎯 Konzentration', action: () => toggleStatusInMenu(token, 'concentrating') },
                     null,
+                    { label: '⚔️ Zum Kampf hinzufügen', action: () => addToInitiative(token) },
+                    { label: '🎯 Fokus setzen', action: () => handleFocusToken(token) },
+                    { label: hasLight ? '💡 Lichtquelle deaktivieren' : '💡 Lichtquelle aktivieren', action: () => handleToggleLight(token) },
+                    null,
                     { label: token.visibleToPlayers ? '🙈 Verstecken' : '👁 Sichtbar machen', action: () => handleToggleVisibility(token) },
-                    { label: '📋 Duplizieren', action: () => handleDuplicate(token) },
+                    { label: '📋 Kopieren', action: () => handleCopyTokens() },
+                    { label: '📋 Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
                     { label: token.locked ? '🔓 Entsperren' : '🔒 Sperren', action: () => handleToggleLock(token) },
                     { label: '🏷 Markierung', action: null, submenu: true, submenuType: 'marker' },
                     { label: '⬆️ nach vorne', action: () => { handleUpdate(token.id, { zIndex: token.zIndex + 1 }); closeContextMenu() } },
@@ -714,7 +859,8 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     return (
                       <button
                         key={i}
-                        onClick={item.action}
+                        onClick={item.disabled ? undefined : item.action}
+                        disabled={item.disabled}
                         style={{
                           display: 'block',
                           width: '100%',
@@ -723,11 +869,12 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                           border: 'none',
                           textAlign: 'left',
                           fontSize: 'var(--text-sm)',
-                          color: item.danger ? 'var(--danger)' : 'var(--text-primary)',
-                          cursor: 'pointer',
+                          color: item.disabled ? 'var(--text-muted)' : item.danger ? 'var(--danger)' : 'var(--text-primary)',
+                          cursor: item.disabled ? 'default' : 'pointer',
+                          opacity: item.disabled ? 0.5 : 1,
                         }}
-                        onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
-                        onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
+                        onMouseEnter={(e) => { if (!item.disabled) e.currentTarget.style.background = 'var(--bg-overlay)' }}
+                        onMouseLeave={(e) => { e.currentTarget.style.background = 'none' }}
                       >
                         {item.label}
                       </button>

@@ -30,6 +30,22 @@ interface UIState {
   fogBrushRadius: number
   workMode: WorkMode
   showPlayerEye: boolean
+  clipboardTokens: Array<{
+    name: string
+    imagePath: string | null
+    size: number
+    hpCurrent: number
+    hpMax: number
+    faction: string
+    ac: number | null
+    notes: string | null
+    statusEffects: string[] | null
+    visibleToPlayers: boolean
+    markerColor: string | null
+    showName: boolean
+    offsetX: number
+    offsetY: number
+  }>
 
   setActiveTool: (tool: ActiveTool) => void
   setWorkMode: (mode: WorkMode) => void
@@ -54,6 +70,22 @@ interface UIState {
   setDrawWidth: (width: number) => void
   setFogBrushRadius: (radius: number) => void
   togglePlayerEye: () => void
+  setClipboardTokens: (tokens: Array<{
+    name: string
+    imagePath: string | null
+    size: number
+    hpCurrent: number
+    hpMax: number
+    faction: string
+    ac: number | null
+    notes: string | null
+    statusEffects: string[] | null
+    visibleToPlayers: boolean
+    markerColor: string | null
+    showName: boolean
+    offsetX: number
+    offsetY: number
+  }>) => void
 }
 
 export const useUIStore = create<UIState>((set) => ({
@@ -78,6 +110,7 @@ export const useUIStore = create<UIState>((set) => ({
   fogBrushRadius: 30,
   workMode: 'prep' as WorkMode,
   showPlayerEye: false,
+  clipboardTokens: [],
 
   setActiveTool: (activeTool) => set({ activeTool }),
   setWorkMode: (workMode: WorkMode) =>
@@ -150,4 +183,20 @@ export const useUIStore = create<UIState>((set) => ({
   setDrawWidth: (drawWidth) => set({ drawWidth }),
   setFogBrushRadius: (fogBrushRadius: number) => set({ fogBrushRadius }),
   togglePlayerEye: () => set((s) => ({ showPlayerEye: !s.showPlayerEye })),
+  setClipboardTokens: (tokens: Array<{
+    name: string
+    imagePath: string | null
+    size: number
+    hpCurrent: number
+    hpMax: number
+    faction: string
+    ac: number | null
+    notes: string | null
+    statusEffects: string[] | null
+    visibleToPlayers: boolean
+    markerColor: string | null
+    showName: boolean
+    offsetX: number
+    offsetY: number
+  }>) => set({ clipboardTokens: tokens }),
 }))
