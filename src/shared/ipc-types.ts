@@ -172,8 +172,8 @@ export interface PlayerInitiativeEntry {
 
 export interface FogDelta {
   type: 'reveal' | 'cover'
-  shape: 'rect' | 'polygon'
-  points: number[] // flat [x0,y0, x1,y1, ...] in canvas coords
+  shape: 'rect' | 'polygon' | 'circle'
+  points: number[] // flat [x0,y0, x1,y1, ...] in canvas coords; circle: [cx, cy, r]
 }
 
 export interface PlayerOverlay {

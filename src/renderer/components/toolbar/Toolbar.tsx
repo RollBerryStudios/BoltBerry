@@ -107,9 +107,11 @@ const PRIMARY_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut:
 ]
 
 const FOG_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
-  { id: 'fog-rect',    icon: '▭', labelKey: 'toolbar.tools.fogRect',    shortcut: 'F' },
-  { id: 'fog-polygon', icon: '⬡', labelKey: 'toolbar.tools.fogPolygon', shortcut: 'P' },
-  { id: 'fog-cover',   icon: '▮', labelKey: 'toolbar.tools.fogCover',   shortcut: 'C' },
+  { id: 'fog-brush',      icon: '🖌', labelKey: 'toolbar.tools.fogBrush',      shortcut: 'B' },
+  { id: 'fog-rect',       icon: '▭', labelKey: 'toolbar.tools.fogRect',       shortcut: 'F' },
+  { id: 'fog-polygon',    icon: '⬡', labelKey: 'toolbar.tools.fogPolygon',    shortcut: 'P' },
+  { id: 'fog-cover',      icon: '▮', labelKey: 'toolbar.tools.fogCover',      shortcut: 'C' },
+  { id: 'fog-brush-cover', icon: '✏', labelKey: 'toolbar.tools.fogBrushCover', shortcut: 'X' },
 ]
 
 const MEASURE_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
@@ -137,6 +139,7 @@ export function Toolbar() {
     cameraFollowDM, toggleCameraFollow,
     gridSnap, toggleGridSnap,
     showMinimap, toggleMinimap,
+    fogBrushRadius, setFogBrushRadius,
   } = useUIStore()
   const { activeCampaignId } = useCampaignStore()
   const [showMonitorDialog, setShowMonitorDialog] = useState(false)
@@ -193,10 +196,34 @@ export function Toolbar() {
       <ToolGroup
         tools={FOG_TOOLS}
         activeTool={activeTool}
-        groupIcon="▭"
+        groupIcon="🖌"
         groupLabelKey="toolbar.tools.fogGroup"
         onSelect={handleToolClick}
       />
+
+      {/* Fog brush size slider — shown when a fog brush tool is active */}
+      {(activeTool === 'fog-brush' || activeTool === 'fog-brush-cover') && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4, margin: '0 4px' }}>
+          <span style={{ fontSize: 9, color: 'var(--text-muted)' }}>⌀</span>
+          <input
+            type="range" min={5} max={100} step={1}
+            value={fogBrushRadius}
+            onChange={(e) => setFogBrushRadius(parseInt(e.target.value))}
+            style={{ width: 60 }}
+          />
+          <span style={{ fontSize: 9, color: 'var(--text-muted)', minWidth: 24 }}>{fogBrushRadius}px</span>
+        </div>
+      )}
+
+      {/* Fog quick actions — shown when any fog tool is active */}
+      {(activeTool.startsWith('fog-')) && (
+        <>
+          <button className="tool-btn" title="Alles aufdecken" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'revealAll' } }))}>👁</button>
+          <button className="tool-btn" title="Alles zudecken" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'coverAll' } }))}>⬛</button>
+          <button className="tool-btn" title="Token aufdecken (Sichtbereich aller sichtbaren Token)" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'revealTokens' } }))}>⬤👁</button>
+          <button className="tool-btn" title="Erkundetes zurücksetzen (Komplett aufdecken)" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'resetExplored' } }))}>🔄</button>
+        </>
+      )}
 
       <ToolGroup
         tools={MEASURE_TOOLS}

@@ -298,6 +298,7 @@ export function CanvasArea() {
             stageRef={stageRef}
             canvasSize={size}
             activeTool={activeTool}
+            gridSize={activeMap.gridSize}
           />
 
           {/* Layer 3: Tokens */}
@@ -383,6 +384,8 @@ function getCursor(tool: string): string {
     case 'fog-rect':      return 'crosshair'
     case 'fog-polygon':   return 'crosshair'
     case 'fog-cover':     return 'crosshair'
+    case 'fog-brush':     return 'crosshair'
+    case 'fog-brush-cover': return 'crosshair'
     case 'token':         return 'copy'
     case 'pointer':       return 'cell'
     case 'measure-line':  return 'crosshair'

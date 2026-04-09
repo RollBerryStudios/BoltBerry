@@ -1,42 +1,44 @@
 import { useRef, useState, useEffect, RefObject, useCallback } from 'react'
-import { Layer, Rect, Circle } from 'react-konva'
+import { Layer, Rect, Circle, Line, Ellipse } from 'react-konva'
 import Konva from 'konva'
 import { useFogStore, type FogOperation } from '../../stores/fogStore'
 import { useUIStore, type ActiveTool } from '../../stores/uiStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useCampaignStore } from '../../stores/campaignStore'
+import { useTokenStore } from '../../stores/tokenStore'
 
 interface FogLayerProps {
   mapId: number
   stageRef: RefObject<Konva.Stage>
   canvasSize: { width: number; height: number }
   activeTool: ActiveTool
+  gridSize: number
 }
 
-export function FogLayer({ mapId, stageRef, canvasSize, activeTool }: FogLayerProps) {
+export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize }: FogLayerProps) {
   const layerRef = useRef<Konva.Layer>(null)
 
-  // Two off-screen canvases at map natural resolution:
-  // exploredCanvas — black where never explored, transparent where explored (permanent)
-  // coveredCanvas  — transparent where visible, rgba(0,0,0,0.45) where explored-but-covered
   const exploredCanvasRef = useRef<HTMLCanvasElement | null>(null)
   const coveredCanvasRef  = useRef<HTMLCanvasElement | null>(null)
 
-  // Konva Image nodes for each canvas
   const kImgExploredRef = useRef<Konva.Image | null>(null)
   const kImgCoveredRef  = useRef<Konva.Image | null>(null)
 
   const isDrawing    = useRef(false)
   const startMapPos  = useRef({ x: 0, y: 0 })
   const [dragRect, setDragRect] = useState<{ x1: number; y1: number; x2: number; y2: number } | null>(null)
+  const [brushPos, setBrushPos] = useState<{ x: number; y: number } | null>(null)
 
   const { pushOperation, pendingPoints, addPendingPoint, clearPendingPoints, undo, redo } = useFogStore()
   const { screenToMap, mapToScreen } = useMapTransformStore()
   const { scale, offsetX, offsetY, imgW, imgH } = useMapTransformStore()
   const { activeMapId } = useCampaignStore()
+  const tokens = useTokenStore((s) => s.tokens)
+  const fogBrushRadius = useUIStore((s) => s.fogBrushRadius)
 
-  const isFogActive = activeTool === 'fog-rect' || activeTool === 'fog-polygon' || activeTool === 'fog-cover'
-  const isReveal    = activeTool !== 'fog-cover'
+  const isFogActive = activeTool.startsWith('fog-')
+  const isReveal = activeTool === 'fog-rect' || activeTool === 'fog-polygon' || activeTool === 'fog-brush'
+  const isBrush = activeTool === 'fog-brush' || activeTool === 'fog-brush-cover'
 
   // ── Initialize canvases when map/dimensions change ────────────────────────
   useEffect(() => {
@@ -44,16 +46,12 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool }: FogLayerPr
 
     const explored = document.createElement('canvas')
     explored.width = imgW; explored.height = imgH
-    const exploredCtx = explored.getContext('2d')!
-    // starts fully transparent — everything visible by default
     exploredCanvasRef.current = explored
 
     const covered = document.createElement('canvas')
     covered.width = imgW; covered.height = imgH
-    // starts fully transparent — nothing covered yet
     coveredCanvasRef.current = covered
 
-    // Destroy old Konva nodes so they get recreated in refreshDisplay
     kImgExploredRef.current?.destroy()
     kImgExploredRef.current = null
     kImgCoveredRef.current?.destroy()
@@ -69,7 +67,6 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool }: FogLayerPr
     const layer    = layerRef.current
     if (!explored || !covered || !layer) return
 
-    // Explored layer (z-lower — black mask for never-explored areas)
     if (!kImgExploredRef.current) {
       const kImg = new Konva.Image({ image: explored, listening: false })
       kImgExploredRef.current = kImg
@@ -80,7 +77,6 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool }: FogLayerPr
     kE.x(offsetX); kE.y(offsetY)
     kE.width(imgW * scale); kE.height(imgH * scale)
 
-    // Covered layer (z-higher — dim overlay for explored-but-covered areas)
     if (!kImgCoveredRef.current) {
       const kImg = new Konva.Image({ image: covered, listening: false })
       kImgCoveredRef.current = kImg
@@ -89,7 +85,7 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool }: FogLayerPr
     const kC = kImgCoveredRef.current
     kC.image(covered)
     kC.x(offsetX); kC.y(offsetY)
-    kC.width(imgW * scale); kC.height(imgH * scale)
+    kC.width(imgW * scale); kC.height(imgW * scale)
 
     layer.batchDraw()
   }, [offsetX, offsetY, imgW, imgH, scale])
@@ -115,7 +111,6 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool }: FogLayerPr
 
     const ec = explored.getContext('2d')!
     ec.clearRect(0, 0, explored.width, explored.height)
-    // starts fully transparent — everything visible by default
 
     const cc = covered.getContext('2d')!
     cc.clearRect(0, 0, covered.width, covered.height)
@@ -128,7 +123,62 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool }: FogLayerPr
     saveFogToDb(mapId, explored, covered)
   }, [mapId, refreshDisplay])
 
-  // Expose rebuildFog for keyboard shortcut undo/redo
+  // ── Fog quick actions (reveal all, cover all, reset) ─────────────────────
+  useEffect(() => {
+    const el = document.getElementById('root')
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail as { type: string }
+      const explored = exploredCanvasRef.current
+      const covered  = coveredCanvasRef.current
+      if (!explored || !covered || !activeMapId) return
+      const ec = explored.getContext('2d')!
+      const cc = covered.getContext('2d')!
+
+      if (detail.type === 'revealAll') {
+        ec.clearRect(0, 0, explored.width, explored.height)
+        cc.clearRect(0, 0, covered.width, covered.height)
+        const fullOp: FogOperation = { type: 'reveal', shape: 'rect', points: [0, 0, explored.width, explored.height] }
+        pushOperation(fullOp)
+        refreshDisplay()
+        saveFogToDb(mapId, explored, covered)
+        sendFogDelta(fullOp)
+      } else if (detail.type === 'coverAll') {
+        cc.fillStyle = 'rgba(0,0,0,0.45)'
+        cc.fillRect(0, 0, covered.width, covered.height)
+        const fullOp: FogOperation = { type: 'cover', shape: 'rect', points: [0, 0, covered.width, covered.height] }
+        pushOperation(fullOp)
+        refreshDisplay()
+        saveFogToDb(mapId, explored, covered)
+        sendFogDelta(fullOp)
+      } else if (detail.type === 'resetExplored') {
+        ec.clearRect(0, 0, explored.width, explored.height)
+        cc.clearRect(0, 0, covered.width, covered.height)
+        useFogStore.getState().clearHistory()
+        refreshDisplay()
+        saveFogToDb(mapId, explored, covered)
+        const fullOp: FogOperation = { type: 'reveal', shape: 'rect', points: [0, 0, explored.width, explored.height] }
+        sendFogDelta(fullOp)
+      } else if (detail.type === 'revealTokens') {
+        const revealRadius = gridSize * 1.5
+        for (const token of tokens) {
+          if (!token.visibleToPlayers) continue
+          const op: FogOperation = {
+            type: 'reveal',
+            shape: 'circle',
+            points: [token.x + (token.size * gridSize) / 2, token.y + (token.size * gridSize) / 2, revealRadius],
+          }
+          applyOpToCtxPair(ec, cc, op)
+          pushOperation(op)
+        }
+        refreshDisplay()
+        saveFogToDb(mapId, explored, covered)
+      }
+    }
+    el?.addEventListener('fog:action', handler)
+    return () => el?.removeEventListener('fog:action', handler)
+  }, [mapId, activeMapId, tokens, pushOperation, refreshDisplay])
+
+  // ── Undo/redo handler ──────────────────────────────────────────────────────
   useEffect(() => {
     const el = document.getElementById('root')
     const handler = (e: Event) => {
@@ -156,6 +206,48 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool }: FogLayerPr
     return screenToMap(pos.x, pos.y)
   }
 
+  // ── Brush stroke with interpolation ────────────────────────────────────────
+  const lastBrushPos = useRef<{ x: number; y: number } | null>(null)
+
+  function brushAt(x: number, y: number) {
+    const explored = exploredCanvasRef.current
+    const covered  = coveredCanvasRef.current
+    if (!explored || !covered) return
+    const r = fogBrushRadius / scale
+    const op: FogOperation = {
+      type: isReveal ? 'reveal' : 'cover',
+      shape: 'circle',
+      points: [x, y, r],
+    }
+    applyOpToCtxPair(explored.getContext('2d')!, covered.getContext('2d')!, op)
+
+    // Interpolate between last pos and current for smooth strokes
+    if (lastBrushPos.current) {
+      const lx = lastBrushPos.current.x
+      const ly = lastBrushPos.current.y
+      const dx = x - lx
+      const dy = y - ly
+      const dist = Math.sqrt(dx * dx + dy * dy)
+      const step = Math.max(r * 0.3, 2)
+      if (dist > step) {
+        const steps = Math.ceil(dist / step)
+        for (let i = 1; i < steps; i++) {
+          const t = i / steps
+          const ix = lx + dx * t
+          const iy = ly + dy * t
+          const interpOp: FogOperation = {
+            type: op.type,
+            shape: 'circle',
+            points: [ix, iy, r],
+          }
+          applyOpToCtxPair(explored.getContext('2d')!, covered.getContext('2d')!, interpOp)
+        }
+      }
+    }
+    lastBrushPos.current = { x, y }
+    refreshDisplay()
+  }
+
   // ── Mouse handlers ────────────────────────────────────────────────────────
   function handleMouseDown(e: Konva.KonvaEventObject<MouseEvent>) {
     if (!isFogActive || e.evt.button !== 0 || e.evt.altKey) return
@@ -166,21 +258,59 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool }: FogLayerPr
       addPendingPoint(pos.x, pos.y)
       return
     }
+    if (isBrush) {
+      isDrawing.current = true
+      lastBrushPos.current = null
+      brushAt(pos.x, pos.y)
+      return
+    }
     isDrawing.current = true
     startMapPos.current = pos
     setDragRect({ x1: pos.x, y1: pos.y, x2: pos.x, y2: pos.y })
   }
 
-  function handleMouseMove(_e: Konva.KonvaEventObject<MouseEvent>) {
-    if (!isDrawing.current || activeTool !== 'fog-rect') return
+  function handleMouseMove(e: Konva.KonvaEventObject<MouseEvent>) {
     const pos = getMapPos()
     if (!pos) return
+
+    if (isBrush) {
+      // Show cursor preview on all moves
+      setBrushPos({ x: pos.x, y: pos.y })
+    }
+
+    if (!isDrawing.current) return
+
+    if (isBrush) {
+      brushAt(pos.x, pos.y)
+      return
+    }
+    if (activeTool !== 'fog-rect' && activeTool !== 'fog-cover') return
     setDragRect(prev => prev ? { ...prev, x2: pos.x, y2: pos.y } : null)
   }
 
   function handleMouseUp(e: Konva.KonvaEventObject<MouseEvent>) {
-    if (!isDrawing.current || !isFogActive) return
+    if (!isDrawing.current && !isFogActive) return
     isDrawing.current = false
+
+    if (isBrush) {
+      lastBrushPos.current = null
+      // Save after brush stroke
+      const explored = exploredCanvasRef.current
+      const covered  = coveredCanvasRef.current
+      if (explored && covered) {
+        const r = fogBrushRadius / scale
+        const pos = stageRef.current?.getPointerPosition()
+        let cx = 0, cy = 0
+        if (pos) {
+          const mpos = screenToMap(pos.x, pos.y)
+          cx = mpos.x; cy = mpos.y
+        }
+        pushOperation({ type: isReveal ? 'reveal' : 'cover', shape: 'circle', points: [cx, cy, r] })
+        saveFogToDb(mapId, explored, covered)
+      }
+      return
+    }
+
     setDragRect(null)
     const pos = getMapPos()
     if (!pos) return
@@ -206,10 +336,13 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool }: FogLayerPr
     clearPendingPoints()
   }
 
-  const previewColor = isReveal ? '#22c55e' : '#ef4444'
-  const vertexColor  = isReveal ? '#22c55e' : '#ef4444'
+  function handleMouseLeave() {
+    setBrushPos(null)
+  }
 
-  const rectPreview = dragRect && activeTool === 'fog-rect' ? (() => {
+  const previewColor = isReveal ? '#22c55e' : '#ef4444'
+
+  const rectPreview = dragRect && (activeTool === 'fog-rect' || activeTool === 'fog-cover') ? (() => {
     const tl = mapToScreen(
       Math.min(dragRect.x1, dragRect.x2),
       Math.min(dragRect.y1, dragRect.y2),
@@ -232,12 +365,60 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool }: FogLayerPr
     )
   })() : null
 
-  const polygonVertices = activeTool === 'fog-polygon' && pendingPoints.length >= 2
-    ? Array.from({ length: pendingPoints.length / 2 }, (_, i) => {
-        const sx = mapToScreen(pendingPoints[i * 2], pendingPoints[i * 2 + 1])
-        return <Circle key={i} x={sx.x} y={sx.y} radius={4} fill={vertexColor} listening={false} />
-      })
-    : []
+  const brushPreview = isBrush && brushPos ? (() => {
+    const center = mapToScreen(brushPos.x, brushPos.y)
+    const r = fogBrushRadius
+    return (
+      <Ellipse
+        x={center.x}
+        y={center.y}
+        radiusX={r}
+        radiusY={r}
+        stroke={previewColor}
+        strokeWidth={1.5}
+        dash={[4, 3]}
+        listening={false}
+      />
+    )
+  })() : null
+
+  // Polygon preview with live edge
+  const polygonPreview = activeTool === 'fog-polygon' && pendingPoints.length >= 2
+    ? (() => {
+        const points = pendingPoints
+        const screenPoints: number[] = []
+        for (let i = 0; i < points.length; i += 2) {
+          const s = mapToScreen(points[i], points[i + 1])
+          screenPoints.push(s.x, s.y)
+        }
+        return (
+          <>
+            <Line
+              points={screenPoints}
+              stroke={previewColor}
+              strokeWidth={2}
+              dash={[6, 4]}
+              listening={false}
+            />
+            {Array.from({ length: points.length / 2 }, (_, i) => {
+              const s = mapToScreen(points[i * 2], points[i * 2 + 1])
+              return (
+                <Circle
+                  key={i}
+                  x={s.x}
+                  y={s.y}
+                  radius={i === 0 ? 6 : 4}
+                  fill={i === 0 ? previewColor : '#fff'}
+                  stroke={previewColor}
+                  strokeWidth={1.5}
+                  listening={false}
+                />
+              )
+            })}
+          </>
+        )
+      })()
+    : null
 
   return (
     <Layer
@@ -246,10 +427,12 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool }: FogLayerPr
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onDblClick={handleDblClick}
+      onMouseLeave={handleMouseLeave}
       listening={isFogActive}
     >
       {rectPreview}
-      {polygonVertices}
+      {brushPreview}
+      {polygonPreview}
     </Layer>
   )
 }
@@ -278,8 +461,6 @@ async function loadFogFromDb(
   if (rows[0].explored_bitmap) {
     promises.push(loadBitmapToCanvas(rows[0].explored_bitmap, exploredCanvas))
   }
-  // If explored_bitmap is NULL (migrated from v1), keep explored canvas fully black
-  // (conservative: treat all existing fog as unexplored)
   await Promise.all(promises)
 }
 
@@ -333,24 +514,12 @@ function sendFogDelta(op: FogOperation) {
 
 // ── Pure canvas draw helpers — exported for PlayerApp ────────────────────────
 
-/**
- * Apply a fog operation to a PAIR of canvases (dual-canvas system).
- *
- * exploredCtx  — black=never explored / transparent=explored  (only erased on reveal)
- * coveredCtx   — transparent=visible  / rgba dim=covered       (erased on reveal, filled on cover)
- *
- * Visual result:
- *   never explored      → exploredCtx black (fully opaque)    → map invisible ✓
- *   explored + covered  → exploredCtx transparent, coveredCtx dim → map dimly visible ✓
- *   currently visible   → both transparent                    → map fully visible ✓
- */
 export function applyOpToCtxPair(
   exploredCtx: CanvasRenderingContext2D,
   coveredCtx: CanvasRenderingContext2D,
   op: FogOperation,
 ) {
   if (op.type === 'reveal') {
-    // Erase from both canvases
     exploredCtx.globalCompositeOperation = 'destination-out'
     exploredCtx.fillStyle = '#fff'
     applyShape(exploredCtx, op)
@@ -361,7 +530,6 @@ export function applyOpToCtxPair(
     applyShape(coveredCtx, op)
     coveredCtx.globalCompositeOperation = 'source-over'
   } else {
-    // Cover: fill dim on coveredCtx only — exploredCtx stays as-is
     coveredCtx.globalCompositeOperation = 'source-over'
     coveredCtx.fillStyle = 'rgba(0,0,0,0.45)'
     applyShape(coveredCtx, op)
@@ -372,6 +540,11 @@ function applyShape(ctx: CanvasRenderingContext2D, op: FogOperation) {
   if (op.shape === 'rect' && op.points.length === 4) {
     const [x1, y1, x2, y2] = op.points
     ctx.fillRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1))
+  } else if (op.shape === 'circle' && op.points.length === 3) {
+    const [cx, cy, r] = op.points
+    ctx.beginPath()
+    ctx.arc(cx, cy, r, 0, Math.PI * 2)
+    ctx.fill()
   } else if (op.shape === 'polygon' && op.points.length >= 6) {
     ctx.beginPath()
     for (let i = 0; i < op.points.length; i += 2) {

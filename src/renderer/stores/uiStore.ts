@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import i18n from '../i18n'
 
-export type ActiveTool = 'select' | 'fog-rect' | 'fog-polygon' | 'fog-cover' | 'token' | 'atmosphere' | 'pointer' | 'measure-line' | 'measure-circle' | 'measure-cone' | 'draw-freehand' | 'draw-rect' | 'draw-circle' | 'draw-text'
+export type ActiveTool = 'select' | 'fog-rect' | 'fog-polygon' | 'fog-cover' | 'fog-brush' | 'fog-brush-cover' | 'token' | 'atmosphere' | 'pointer' | 'measure-line' | 'measure-circle' | 'measure-cone' | 'draw-freehand' | 'draw-rect' | 'draw-circle' | 'draw-text'
 export type SidebarTab = 'tokens' | 'initiative' | 'notes' | 'handouts' | 'overlay' | 'audio' | 'dice'
 export type AppMode = 'map' | 'atmosphere' | 'blackout'
 export type SessionMode = 'session' | 'prep'
@@ -26,6 +26,7 @@ interface UIState {
   showMinimap: boolean
   drawColor: string
   drawWidth: number
+  fogBrushRadius: number
 
   setActiveTool: (tool: ActiveTool) => void
   setSidebarTab: (tab: SidebarTab) => void
@@ -47,6 +48,7 @@ interface UIState {
   toggleMinimap: () => void
   setDrawColor: (color: string) => void
   setDrawWidth: (width: number) => void
+  setFogBrushRadius: (radius: number) => void
 }
 
 export const useUIStore = create<UIState>((set) => ({
@@ -68,6 +70,7 @@ export const useUIStore = create<UIState>((set) => ({
   showMinimap: false,
   drawColor: '#ff6b6b',
   drawWidth: 3,
+  fogBrushRadius: 30,
 
   setActiveTool: (activeTool) => set({ activeTool }),
   setSidebarTab: (sidebarTab) => set({ sidebarTab }),
@@ -112,4 +115,5 @@ export const useUIStore = create<UIState>((set) => ({
   toggleMinimap: () => set((s) => ({ showMinimap: !s.showMinimap })),
   setDrawColor: (drawColor) => set({ drawColor }),
   setDrawWidth: (drawWidth) => set({ drawWidth }),
+  setFogBrushRadius: (fogBrushRadius: number) => set({ fogBrushRadius }),
 }))

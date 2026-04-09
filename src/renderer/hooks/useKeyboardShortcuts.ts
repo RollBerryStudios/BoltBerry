@@ -64,6 +64,12 @@ export function useKeyboardShortcuts() {
         case 'c': case 'C':
           useUIStore.getState().setActiveTool('fog-cover')
           break
+        case 'b': case 'B':
+          useUIStore.getState().setActiveTool('fog-brush')
+          break
+        case 'x': case 'X':
+          useUIStore.getState().setActiveTool('fog-brush-cover')
+          break
         case 'd': case 'D':
           useUIStore.getState().setActiveTool('draw-freehand')
           break

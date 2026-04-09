@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-export type FogShape = 'rect' | 'polygon'
+export type FogShape = 'rect' | 'polygon' | 'circle'
 export type FogOperation = { type: 'reveal' | 'cover'; shape: FogShape; points: number[] }
 
 interface FogState {
