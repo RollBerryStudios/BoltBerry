@@ -1,9 +1,19 @@
-import { RefObject } from 'react'
-import { Layer, Circle, Shape } from 'react-konva'
+import { RefObject, useMemo } from 'react'
+import { Layer, Shape } from 'react-konva'
 import Konva from 'konva'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useCampaignStore } from '../../stores/campaignStore'
+
+const LIGHT_REGEX = /light:(\d+)(?::(#\w+))?/
+
+interface LightToken {
+  id: number
+  cx: number
+  cy: number
+  rPx: number
+  lightColor: string
+}
 
 interface LightingLayerProps {
   stageRef: RefObject<Konva.Stage>
@@ -12,22 +22,18 @@ interface LightingLayerProps {
 }
 
 export function LightingLayer({ stageRef, mapId, gridSize }: LightingLayerProps) {
-  const { tokens } = useTokenStore()
-  const { scale, offsetX, offsetY } = useMapTransformStore()
-  const { activeMapId } = useCampaignStore()
+  const tokens = useTokenStore((s) => s.tokens)
+  const scale = useMapTransformStore((s) => s.scale)
+  const offsetX = useMapTransformStore((s) => s.offsetX)
+  const offsetY = useMapTransformStore((s) => s.offsetY)
+  const activeMapId = useCampaignStore((s) => s.activeMapId)
 
-  if (activeMapId !== mapId) return null
-
-  const tokensWithLight = tokens.filter((t) => {
-    return t.notes && t.notes.includes('light:')
-  })
-
-  if (tokensWithLight.length === 0) return null
-
-  return (
-    <Layer listening={false} opacity={0.6}>
-      {tokensWithLight.map((token) => {
-        const match = token.notes?.match(/light:(\d+)(?::(#\w+))?/)
+  const lights: LightToken[] = useMemo(() => {
+    if (activeMapId !== mapId) return []
+    return tokens
+      .filter((t) => t.notes && t.notes.includes('light:'))
+      .map((token) => {
+        const match = token.notes?.match(LIGHT_REGEX)
         if (!match) return null
         const lightRadius = parseInt(match[1]) || 0
         const rawColor = match[2] || '#ffcc44'
@@ -35,34 +41,44 @@ export function LightingLayer({ stageRef, mapId, gridSize }: LightingLayerProps)
           ? '#' + rawColor[1] + rawColor[1] + rawColor[2] + rawColor[2] + rawColor[3] + rawColor[3]
           : rawColor
         if (lightRadius <= 0) return null
-
         const sx = token.x * scale + offsetX
         const sy = token.y * scale + offsetY
         const sizePx = gridSize * token.size * scale
-        const cx = sx + sizePx / 2
-        const cy = sy + sizePx / 2
-        const rPx = lightRadius * gridSize * scale
+        return {
+          id: token.id,
+          cx: sx + sizePx / 2,
+          cy: sy + sizePx / 2,
+          rPx: lightRadius * gridSize * scale,
+          lightColor,
+        }
+      })
+      .filter((l): l is LightToken => l !== null)
+  }, [tokens, scale, offsetX, offsetY, gridSize, mapId, activeMapId])
 
-        return (
-          <Shape
-            key={`light-${token.id}`}
-            listening={false}
-            sceneFunc={(ctx) => {
-              const context = (ctx as any)._context
-              context.save()
-              const gradient = context.createRadialGradient(cx, cy, 0, cx, cy, rPx)
-              gradient.addColorStop(0, lightColor + '44')
-              gradient.addColorStop(0.5, lightColor + '22')
-              gradient.addColorStop(1, lightColor + '00')
-              context.fillStyle = gradient
-              context.beginPath()
-              context.arc(cx, cy, rPx, 0, Math.PI * 2)
-              context.fill()
-              context.restore()
-            }}
-          />
-        )
-      })}
+  if (activeMapId !== mapId || lights.length === 0) return null
+
+  return (
+    <Layer listening={false} opacity={0.6} perfectDrawEnabled={false}>
+      {lights.map((l) => (
+        <Shape
+          key={`light-${l.id}`}
+          listening={false}
+          perfectDrawEnabled={false}
+          sceneFunc={(ctx) => {
+            const context = (ctx as any)._context
+            context.save()
+            const gradient = context.createRadialGradient(l.cx, l.cy, 0, l.cx, l.cy, l.rPx)
+            gradient.addColorStop(0, l.lightColor + '44')
+            gradient.addColorStop(0.5, l.lightColor + '22')
+            gradient.addColorStop(1, l.lightColor + '00')
+            context.fillStyle = gradient
+            context.beginPath()
+            context.arc(l.cx, l.cy, l.rPx, 0, Math.PI * 2)
+            context.fill()
+            context.restore()
+          }}
+        />
+      ))}
     </Layer>
   )
 }

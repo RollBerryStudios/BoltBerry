@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 import { Stage, Layer } from 'react-konva'
 import { MapLayer } from './MapLayer'
 import { FogLayer } from './FogLayer'
@@ -45,9 +45,14 @@ export function CanvasArea() {
   const [size, setSize] = useState({ width: 800, height: 600 })
   const [dropHighlight, setDropHighlight] = useState(false)
 
-  const { activeTool, blackoutActive, appMode, atmosphereImagePath, showMinimap } = useUIStore()
-  const { activeMapId, activeMaps } = useCampaignStore()
-  const activeMap = activeMaps.find((m) => m.id === activeMapId) ?? null
+  const activeTool = useUIStore((s) => s.activeTool)
+  const blackoutActive = useUIStore((s) => s.blackoutActive)
+  const appMode = useUIStore((s) => s.appMode)
+  const atmosphereImagePath = useUIStore((s) => s.atmosphereImagePath)
+  const showMinimap = useUIStore((s) => s.showMinimap)
+  const activeMapId = useCampaignStore((s) => s.activeMapId)
+  const activeMaps = useCampaignStore((s) => s.activeMaps)
+  const activeMap = useMemo(() => activeMaps.find((m) => m.id === activeMapId) ?? null, [activeMaps, activeMapId])
   const atmosphereUrl = useImageUrl(atmosphereImagePath)
 
   // Continuous camera sync to player when follow mode is on
@@ -71,7 +76,12 @@ export function CanvasArea() {
     const el = containerRef.current
     if (!el) return
     const ro = new ResizeObserver(() => {
-      setSize({ width: el.clientWidth, height: el.clientHeight })
+      const w = el.clientWidth
+      const h = el.clientHeight
+      setSize((prev) => {
+        if (prev.width === w && prev.height === h) return prev
+        return { width: w, height: h }
+      })
     })
     ro.observe(el)
     setSize({ width: el.clientWidth, height: el.clientHeight })

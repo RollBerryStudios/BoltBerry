@@ -4,7 +4,7 @@ import { Html } from 'react-konva-utils'
 import Konva from 'konva'
 import { useWallStore } from '../../stores/wallStore'
 import { useUIStore } from '../../stores/uiStore'
-import { useMapTransformStore } from '../../stores/mapTransformStore'
+import { useMapTransformStore, screenToMapPure, mapToScreenPure } from '../../stores/mapTransformStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import type { WallRecord } from '@shared/ipc-types'
 
@@ -23,9 +23,11 @@ const SELECTED_COLOR = '#2F6BFF'
 
 export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
   const { walls, addWall, removeWall, updateWall, toggleDoor } = useWallStore()
-  const { activeTool, selectedTokenId } = useUIStore()
-  const { scale, offsetX, offsetY, screenToMap, mapToScreen } = useMapTransformStore()
-  const { activeMapId } = useCampaignStore()
+  const activeTool = useUIStore((s) => s.activeTool)
+  const scale = useMapTransformStore((s) => s.scale)
+  const offsetX = useMapTransformStore((s) => s.offsetX)
+  const offsetY = useMapTransformStore((s) => s.offsetY)
+  const activeMapId = useCampaignStore((s) => s.activeMapId)
 
   const [selectedWallId, setSelectedWallId] = useState<number | null>(null)
   const [drawingStart, setDrawingStart] = useState<{ x: number; y: number } | null>(null)
@@ -49,7 +51,7 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
     if (!stage) return
     const pos = stage.getPointerPosition()
     if (!pos) return
-    const mapPos = screenToMap(pos.x, pos.y)
+    const mapPos = screenToMapPure(pos.x, pos.y, scale, offsetX, offsetY)
     setDrawingStart(mapPos)
     setPreviewEnd(mapPos)
   }
@@ -60,7 +62,7 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
     if (!stage) return
     const pos = stage.getPointerPosition()
     if (!pos) return
-    setPreviewEnd(screenToMap(pos.x, pos.y))
+    setPreviewEnd(screenToMapPure(pos.x, pos.y, scale, offsetX, offsetY))
   }
 
   async function handleMouseUp(e: Konva.KonvaEventObject<MouseEvent>) {
@@ -69,7 +71,7 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
     if (!stage) return
     const pos = stage.getPointerPosition()
     if (!pos) return
-    const mapPos = screenToMap(pos.x, pos.y)
+    const mapPos = screenToMapPure(pos.x, pos.y, scale, offsetX, offsetY)
 
     const dx = Math.abs(mapPos.x - drawingStart.x)
     const dy = Math.abs(mapPos.y - drawingStart.y)
@@ -180,8 +182,8 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
         listening={isActive}
       >
         {displayWalls.map((wall) => {
-          const p1 = mapToScreen(wall.x1, wall.y1)
-          const p2 = mapToScreen(wall.x2, wall.y2)
+          const p1 = mapToScreenPure(wall.x1, wall.y1, scale, offsetX, offsetY)
+          const p2 = mapToScreenPure(wall.x2, wall.y2, scale, offsetX, offsetY)
           const color = getWallColor(wall)
           const dash = getWallDash(wall)
           const midX = (p1.x + p2.x) / 2
@@ -223,7 +225,12 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
         {/* Wall being drawn preview */}
         {drawingStart && previewEnd && (
           <Line
-            points={[mapToScreen(drawingStart.x, drawingStart.y).x, mapToScreen(drawingStart.x, drawingStart.y).y, mapToScreen(previewEnd.x, previewEnd.y).x, mapToScreen(previewEnd.x, previewEnd.y).y]}
+            points={[
+              mapToScreenPure(drawingStart.x, drawingStart.y, scale, offsetX, offsetY).x,
+              mapToScreenPure(drawingStart.x, drawingStart.y, scale, offsetX, offsetY).y,
+              mapToScreenPure(previewEnd.x, previewEnd.y, scale, offsetX, offsetY).x,
+              mapToScreenPure(previewEnd.x, previewEnd.y, scale, offsetX, offsetY).y,
+            ]}
             stroke={wallTypeForNew === 'door' ? DOOR_COLOR_CLOSED : WALL_COLOR}
             strokeWidth={WALL_WIDTH}
             dash={[6, 3]}

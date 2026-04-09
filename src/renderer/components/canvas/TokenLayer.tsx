@@ -1,4 +1,4 @@
-import { RefObject, useState, useRef, memo } from 'react'
+import { RefObject, useState, useRef, useMemo, useCallback, memo } from 'react'
 import { Layer, Group, Image as KonvaImage, Rect, Text, Circle, Line } from 'react-konva'
 import { Html } from 'react-konva-utils'
 import Konva from 'konva'
@@ -59,9 +59,21 @@ interface ContextMenu {
 }
 
 export function TokenLayer({ map, stageRef }: TokenLayerProps) {
-  const { tokens, moveToken, updateToken, removeToken } = useTokenStore()
-  const { activeTool, selectedTokenId, selectedTokenIds, setSelectedToken, toggleTokenInSelection, setSelectedTokens, clearTokenSelection, gridSnap } = useUIStore()
-  const { scale, offsetX, offsetY } = useMapTransformStore()
+  const tokens = useTokenStore((s) => s.tokens)
+  const moveToken = useTokenStore((s) => s.moveToken)
+  const updateToken = useTokenStore((s) => s.updateToken)
+  const removeToken = useTokenStore((s) => s.removeToken)
+  const activeTool = useUIStore((s) => s.activeTool)
+  const selectedTokenId = useUIStore((s) => s.selectedTokenId)
+  const selectedTokenIds = useUIStore((s) => s.selectedTokenIds)
+  const setSelectedToken = useUIStore((s) => s.setSelectedToken)
+  const toggleTokenInSelection = useUIStore((s) => s.toggleTokenInSelection)
+  const setSelectedTokens = useUIStore((s) => s.setSelectedTokens)
+  const clearTokenSelection = useUIStore((s) => s.clearTokenSelection)
+  const gridSnap = useUIStore((s) => s.gridSnap)
+  const scale = useMapTransformStore((s) => s.scale)
+  const offsetX = useMapTransformStore((s) => s.offsetX)
+  const offsetY = useMapTransformStore((s) => s.offsetY)
   const [contextMenu, setContextMenu] = useState<ContextMenu>({ visible: false, x: 0, y: 0, tokenId: -1 })
   const [editingId, setEditingId] = useState<number | null>(null)
   const [editName, setEditName] = useState('')
@@ -75,7 +87,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   const [rubberBand, setRubberBand] = useState<{ x1: number; y1: number; x2: number; y2: number } | null>(null)
 
   const isDraggable = activeTool === 'select'
-  const sortedTokens = [...tokens].sort((a, b) => a.zIndex - b.zIndex)
+  const sortedTokens = useMemo(() => [...tokens].sort((a, b) => a.zIndex - b.zIndex), [tokens])
 
   async function handleDragEnd(token: TokenRecord, e: Konva.KonvaEventObject<DragEvent>) {
     const sx = e.target.x()

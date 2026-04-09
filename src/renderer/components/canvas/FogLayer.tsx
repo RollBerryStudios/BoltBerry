@@ -3,7 +3,7 @@ import { Layer, Rect, Circle, Line, Ellipse } from 'react-konva'
 import Konva from 'konva'
 import { useFogStore, type FogOperation } from '../../stores/fogStore'
 import { useUIStore, type ActiveTool } from '../../stores/uiStore'
-import { useMapTransformStore } from '../../stores/mapTransformStore'
+import { useMapTransformStore, screenToMapPure, mapToScreenPure } from '../../stores/mapTransformStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useTokenStore } from '../../stores/tokenStore'
 
@@ -26,15 +26,19 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize }: 
 
   const isDrawing    = useRef(false)
   const startMapPos  = useRef({ x: 0, y: 0 })
+  const rafPending   = useRef(false)
   const [dragRect, setDragRect] = useState<{ x1: number; y1: number; x2: number; y2: number } | null>(null)
   const [brushPos, setBrushPos] = useState<{ x: number; y: number } | null>(null)
 
   const { pushOperation, pendingPoints, addPendingPoint, clearPendingPoints, undo, redo } = useFogStore()
-  const { screenToMap, mapToScreen } = useMapTransformStore()
-  const { scale, offsetX, offsetY, imgW, imgH } = useMapTransformStore()
+  const scale = useMapTransformStore((s) => s.scale)
+  const offsetX = useMapTransformStore((s) => s.offsetX)
+  const offsetY = useMapTransformStore((s) => s.offsetY)
+  const imgW = useMapTransformStore((s) => s.imgW)
+  const imgH = useMapTransformStore((s) => s.imgH)
   const { activeMapId } = useCampaignStore()
-  const tokens = useTokenStore((s) => s.tokens)
   const fogBrushRadius = useUIStore((s) => s.fogBrushRadius)
+  const gridSizeProp = gridSize
 
   const isFogActive = activeTool.startsWith('fog-')
   const isReveal = activeTool === 'fog-rect' || activeTool === 'fog-polygon' || activeTool === 'fog-brush'
@@ -159,13 +163,14 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize }: 
         const fullOp: FogOperation = { type: 'reveal', shape: 'rect', points: [0, 0, explored.width, explored.height] }
         sendFogDelta(fullOp)
       } else if (detail.type === 'revealTokens') {
-        const revealRadius = gridSize * 1.5
+        const tokens = useTokenStore.getState().tokens
+        const revealRadius = gridSizeProp * 1.5
         for (const token of tokens) {
           if (!token.visibleToPlayers) continue
           const op: FogOperation = {
             type: 'reveal',
             shape: 'circle',
-            points: [token.x + (token.size * gridSize) / 2, token.y + (token.size * gridSize) / 2, revealRadius],
+            points: [token.x + (token.size * gridSizeProp) / 2, token.y + (token.size * gridSizeProp) / 2, revealRadius],
           }
           applyOpToCtxPair(ec, cc, op)
           pushOperation(op)
@@ -176,7 +181,7 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize }: 
     }
     el?.addEventListener('fog:action', handler)
     return () => el?.removeEventListener('fog:action', handler)
-  }, [mapId, activeMapId, tokens, pushOperation, refreshDisplay])
+  }, [mapId, activeMapId, pushOperation, refreshDisplay])
 
   // ── Undo/redo handler ──────────────────────────────────────────────────────
   useEffect(() => {
@@ -203,7 +208,7 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize }: 
     if (!stage) return null
     const pos = stage.getPointerPosition()
     if (!pos) return null
-    return screenToMap(pos.x, pos.y)
+    return screenToMapPure(pos.x, pos.y, scale, offsetX, offsetY)
   }
 
   // ── Brush stroke with interpolation ────────────────────────────────────────
@@ -245,7 +250,13 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize }: 
       }
     }
     lastBrushPos.current = { x, y }
-    refreshDisplay()
+    if (!rafPending.current) {
+      rafPending.current = true
+      requestAnimationFrame(() => {
+        refreshDisplay()
+        rafPending.current = false
+      })
+    }
   }
 
   // ── Mouse handlers ────────────────────────────────────────────────────────
@@ -302,7 +313,7 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize }: 
         const pos = stageRef.current?.getPointerPosition()
         let cx = 0, cy = 0
         if (pos) {
-          const mpos = screenToMap(pos.x, pos.y)
+          const mpos = screenToMapPure(pos.x, pos.y, scale, offsetX, offsetY)
           cx = mpos.x; cy = mpos.y
         }
         pushOperation({ type: isReveal ? 'reveal' : 'cover', shape: 'circle', points: [cx, cy, r] })
@@ -343,13 +354,15 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize }: 
   const previewColor = isReveal ? '#22c55e' : '#ef4444'
 
   const rectPreview = dragRect && (activeTool === 'fog-rect' || activeTool === 'fog-cover') ? (() => {
-    const tl = mapToScreen(
+    const tl = mapToScreenPure(
       Math.min(dragRect.x1, dragRect.x2),
       Math.min(dragRect.y1, dragRect.y2),
+      scale, offsetX, offsetY,
     )
-    const br = mapToScreen(
+    const br = mapToScreenPure(
       Math.max(dragRect.x1, dragRect.x2),
       Math.max(dragRect.y1, dragRect.y2),
+      scale, offsetX, offsetY,
     )
     return (
       <Rect
@@ -366,7 +379,7 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize }: 
   })() : null
 
   const brushPreview = isBrush && brushPos ? (() => {
-    const center = mapToScreen(brushPos.x, brushPos.y)
+    const center = mapToScreenPure(brushPos.x, brushPos.y, scale, offsetX, offsetY)
     const r = fogBrushRadius
     return (
       <Ellipse
@@ -388,7 +401,7 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize }: 
         const points = pendingPoints
         const screenPoints: number[] = []
         for (let i = 0; i < points.length; i += 2) {
-          const s = mapToScreen(points[i], points[i + 1])
+          const s = mapToScreenPure(points[i], points[i + 1], scale, offsetX, offsetY)
           screenPoints.push(s.x, s.y)
         }
         return (
@@ -401,7 +414,7 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize }: 
               listening={false}
             />
             {Array.from({ length: points.length / 2 }, (_, i) => {
-              const s = mapToScreen(points[i * 2], points[i * 2 + 1])
+              const s = mapToScreenPure(points[i * 2], points[i * 2 + 1], scale, offsetX, offsetY)
               return (
                 <Circle
                   key={i}
