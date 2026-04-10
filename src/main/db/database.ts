@@ -64,7 +64,7 @@ export function initDatabase(): Database.Database {
   db.exec(SEED_SCHEMA_VERSION)
 
   // Run schema migrations — each wrapped in a transaction for atomicity
-  const migrate = (sql: string) => db.transaction(() => db.exec(sql))()
+  const migrate = (sql: string) => db!.transaction(() => db!.exec(sql))()
   const row = db.prepare('SELECT version FROM schema_version WHERE id = 1').get() as { version: number } | undefined
   const version = row?.version ?? 1
   if (version < 2)  migrate(MIGRATE_V1_TO_V2)
