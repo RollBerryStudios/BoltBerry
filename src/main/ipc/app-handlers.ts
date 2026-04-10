@@ -172,7 +172,7 @@ export function registerAppHandlers(): void {
         scanned: imageFiles.length, 
         added: addedCount, 
         removed: removedCount,
-        message: `Scan abgeschlossen: ${imageFiles.length} Dateien, ${addedCount} hinzugefügt, ${removedCount} entfernt`
+        message: `Scan abgeschlossen: ${imageFiles.length} Dateien, ${addedCount} hinzugef\u00fcgt, ${removedCount} entfernt`
       }
     } catch (err) {
       console.error('[AppHandlers] Failed to rescan content folder:', err)
@@ -183,10 +183,10 @@ export function registerAppHandlers(): void {
     }
   })
 
-  // Import file dialog → copy to AppData, return stored path
+  // Import file dialog \u2192 copy to AppData, return stored path
   ipcMain.handle(IPC.IMPORT_FILE, async (_event, type: 'map' | 'token' | 'atmosphere' | 'audio', campaignId?: number) => {
     const extensions = ASSET_EXTENSIONS[type]
-    const titles = { map: 'Karte', token: 'Token', atmosphere: 'Atmosphäre-Bild', audio: 'Audio-Datei' }
+    const titles = { map: 'Karte', token: 'Token', atmosphere: 'Atmosph\u00e4re-Bild', audio: 'Audio-Datei' }
     const filterNames = { map: 'Bilder', token: 'Bilder', atmosphere: 'Bilder', audio: 'Audio' }
     const result = await dialog.showOpenDialog({
       title: `${titles[type]} importieren`,
@@ -213,9 +213,9 @@ export function registerAppHandlers(): void {
       const maxMB = (MAX_SIZES[type] / (1024 * 1024)).toFixed(0)
       const { response } = await dialog.showMessageBox({
         type: 'warning',
-        title: 'Große Datei',
-        message: `Die Datei ist ${sizeMB} MB groß (empfohlen: max. ${maxMB} MB).`,
-        detail: 'Große Dateien können die Performance beeinträchtigen. Trotzdem importieren?',
+        title: 'Gro\u00dfe Datei',
+        message: `Die Datei ist ${sizeMB} MB gro\u00df (empfohlen: max. ${maxMB} MB).`,
+        detail: 'Gro\u00dfe Dateien k\u00f6nnen die Performance beeintr\u00e4chtigen. Trotzdem importieren?',
         buttons: ['Importieren', 'Abbrechen'],
         defaultId: 0,
         cancelId: 1,
@@ -228,7 +228,12 @@ export function registerAppHandlers(): void {
     const destName = `${Date.now()}_${Math.random().toString(36).slice(2)}${ext}`
     const destPath = join(destDir, destName)
 
-    copyFileSync(srcPath, destPath)
+    try {
+      copyFileSync(srcPath, destPath)
+    } catch (err) {
+      console.error('[AppHandlers] Failed to copy file:', err)
+      return null
+    }
 
     // Store relative path from user data folder
     const userDataPath = getCustomUserDataPath() || app.getPath('userData')
@@ -244,7 +249,7 @@ export function registerAppHandlers(): void {
     return { id: result2.lastInsertRowid, path: relativePath }
   })
 
-  // Import PDF → returns file bytes so renderer can render with pdfjs
+  // Import PDF \u2192 returns file bytes so renderer can render with pdfjs
   ipcMain.handle(IPC.IMPORT_PDF, async (_event, _campaignId: number) => {
     const result = await dialog.showOpenDialog({
       title: 'PDF-Karte importieren',
@@ -259,16 +264,22 @@ export function registerAppHandlers(): void {
       const sizeMB = (stats.size / (1024 * 1024)).toFixed(1)
       const { response } = await dialog.showMessageBox({
         type: 'warning',
-        title: 'Große PDF-Datei',
-        message: `Die PDF-Datei ist ${sizeMB} MB groß (empfohlen: max. 100 MB).`,
-        detail: 'Sehr große PDFs können den Arbeitsspeicher überlasten. Trotzdem importieren?',
+        title: 'Gro\u00dfe PDF-Datei',
+        message: `Die PDF-Datei ist ${sizeMB} MB gro\u00df (empfohlen: max. 100 MB).`,
+        detail: 'Sehr gro\u00dfe PDFs k\u00f6nnen den Arbeitsspeicher \u00fcberlasten. Trotzdem importieren?',
         buttons: ['Importieren', 'Abbrechen'],
         defaultId: 0,
         cancelId: 1,
       })
       if (response === 1) return null
     }
-    const data = readFileSync(srcPath)
+    let data: Buffer
+    try {
+      data = readFileSync(srcPath)
+    } catch (err) {
+      console.error('[AppHandlers] Failed to read PDF:', err)
+      return null
+    }
     return {
       path: srcPath,
       originalName: srcPath.split(/[\\/]/).pop()!,
@@ -284,12 +295,22 @@ export function registerAppHandlers(): void {
     campaignId: number
   }) => {
     const { dataUrl, originalName, type, campaignId } = args
-    // Match image/* MIME types including svg+xml, webp etc.
-    const base64 = dataUrl.replace(/^data:image\/[\w+.-]+;base64,/, '')
+    // Validate data URL format before processing
+    const match = dataUrl.match(/^data:image\/[\w+.-]+;base64,(.+)$/)
+    if (!match) {
+      console.error('[AppHandlers] Invalid data URL format')
+      return null
+    }
+    const base64 = match[1]
     const destDir = getAssetDir(type)
     const destName = `${Date.now()}_${Math.random().toString(36).slice(2)}.png`
     const destPath = join(destDir, destName)
-    writeFileSync(destPath, Buffer.from(base64, 'base64'))
+    try {
+      writeFileSync(destPath, Buffer.from(base64, 'base64'))
+    } catch (err) {
+      console.error('[AppHandlers] Failed to write asset image:', err)
+      return null
+    }
     
     // Store relative path from user data folder
     const userDataPath = getCustomUserDataPath() || app.getPath('userData')
@@ -348,7 +369,7 @@ export function registerAppHandlers(): void {
     if (!win) return false
     const { response } = await dialog.showMessageBox(win, {
       type: 'warning',
-      title: 'Bestätigung',
+      title: 'Best\u00e4tigung',
       message,
       detail,
       buttons: ['Abbrechen', 'OK'],
@@ -365,10 +386,10 @@ export function registerAppHandlers(): void {
 
     const { response } = await dialog.showMessageBox(win, {
       type: 'warning',
-      title: 'Karte löschen',
-      message: `Karte "${mapName}" wirklich löschen?`,
-      detail: 'Diese Aktion kann nicht rückgängig gemacht werden.',
-      buttons: ['Abbrechen', 'Löschen'],
+      title: 'Karte l\u00f6schen',
+      message: `Karte "${mapName}" wirklich l\u00f6schen?`,
+      detail: 'Diese Aktion kann nicht r\u00fcckg\u00e4ngig gemacht werden.',
+      buttons: ['Abbrechen', 'L\u00f6schen'],
       defaultId: 0,
       cancelId: 0,
     })
@@ -382,10 +403,10 @@ export function registerAppHandlers(): void {
 
     const { response } = await dialog.showMessageBox(win, {
       type: 'warning',
-      title: 'Token löschen',
-      message: `Token "${tokenName}" wirklich löschen?`,
-      detail: 'Diese Aktion kann nicht rückgängig gemacht werden.',
-      buttons: ['Abbrechen', 'Löschen'],
+      title: 'Token l\u00f6schen',
+      message: `Token "${tokenName}" wirklich l\u00f6schen?`,
+      detail: 'Diese Aktion kann nicht r\u00fcckg\u00e4ngig gemacht werden.',
+      buttons: ['Abbrechen', 'L\u00f6schen'],
       defaultId: 0,
       cancelId: 0,
     })
