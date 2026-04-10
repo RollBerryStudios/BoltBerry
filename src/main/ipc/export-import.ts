@@ -19,9 +19,7 @@ export function registerExportImportHandlers(): void {
     const data = buildCampaignExport(campaignId, db)
     data.campaign.name = `${data.campaign.name} (Kopie)`
     const newId = insertCampaignData(data, db)
-    const newCampaign = db.prepare('SELECT id, name, created_at, last_opened FROM campaigns WHERE id = ?').get(newId) as
-      | { id: number; name: string; created_at: string; last_opened: string } | undefined
-    if (!newCampaign) return { success: false, error: 'Duplizierte Kampagne nicht gefunden' }
+    const newCampaign = db.prepare('SELECT id, name, created_at, last_opened FROM campaigns WHERE id = ?').get(newId) as any
     return {
       success: true,
       campaign: {
@@ -122,12 +120,7 @@ export function registerExportImportHandlers(): void {
 
     let campaignData: CampaignExport
     try {
-      const parsed: unknown = JSON.parse(readFileSync(campaignJsonPath, 'utf-8'))
-      if (!isValidCampaignExport(parsed)) {
-        rmSync(importDir, { recursive: true, force: true })
-        return { success: false, error: 'Ungültiges Kampagnen-Format in campaign.json' }
-      }
-      campaignData = parsed
+      campaignData = JSON.parse(readFileSync(campaignJsonPath, 'utf-8')) as CampaignExport
     } catch {
       rmSync(importDir, { recursive: true, force: true })
       return { success: false, error: 'campaign.json konnte nicht gelesen werden' }
@@ -206,19 +199,6 @@ function buildZip(
   })
 }
 
-// ── Validation ───────────────────────────────────────────────────────────────
-
-function isValidCampaignExport(data: unknown): data is CampaignExport {
-  if (typeof data !== 'object' || data === null) return false
-  const obj = data as Record<string, unknown>
-  return (
-    typeof obj.version === 'number' &&
-    typeof obj.campaign === 'object' && obj.campaign !== null &&
-    typeof (obj.campaign as Record<string, unknown>).name === 'string' &&
-    Array.isArray(obj.maps)
-  )
-}
-
 // ── Export data structures ─────────────────────────────────────────────────────
 
 interface CampaignExport {
@@ -264,17 +244,53 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
     'SELECT content FROM notes WHERE campaign_id = ? AND map_id IS NULL'
   ).get(campaignId) as { content: string } | undefined)?.content ?? ''
 
+  // Prefetch all per-map data in bulk to avoid N*7 queries
+  const mapIds = maps.map((m) => m.id)
+  const placeholders = mapIds.map(() => '?').join(',')
+
+  const allTokens = mapIds.length > 0
+    ? db.prepare(`SELECT * FROM tokens WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
+    : []
+  const allFog = mapIds.length > 0
+    ? db.prepare(`SELECT map_id, fog_bitmap, explored_bitmap FROM fog_state WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
+    : []
+  const allInitiative = mapIds.length > 0
+    ? db.prepare(`SELECT * FROM initiative WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
+    : []
+  const allGmPins = mapIds.length > 0
+    ? db.prepare(`SELECT map_id, x, y, label, icon, color FROM gm_pins WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
+    : []
+  const allDrawings = mapIds.length > 0
+    ? db.prepare(`SELECT map_id, type, points, color, width, synced FROM drawings WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
+    : []
+  const allNotes = mapIds.length > 0
+    ? db.prepare(`SELECT map_id, content FROM notes WHERE campaign_id = ? AND map_id IN (${placeholders})`).all(campaignId, ...mapIds) as any[]
+    : []
+  const allRooms = mapIds.length > 0
+    ? db.prepare(`SELECT map_id, name, description, polygon, visibility, encounter_id, atmosphere_hint, notes, color, created_at FROM rooms WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
+    : []
+
+  // Index by map_id for O(1) lookup
+  const tokensByMap = groupBy(allTokens, 'map_id')
+  const fogByMap = new Map(allFog.map((f: any) => [f.map_id, f]))
+  const initByMap = groupBy(allInitiative, 'map_id')
+  const pinsByMap = groupBy(allGmPins, 'map_id')
+  const drawingsByMap = groupBy(allDrawings, 'map_id')
+  const notesByMap = new Map(allNotes.map((n: any) => [n.map_id, n.content]))
+  const roomsByMap = groupBy(allRooms, 'map_id')
+
   return {
     version: 7,
     campaign: { name: campaign.name },
     campaignNote,
     maps: maps.map((m) => {
-      const tokens = db.prepare('SELECT * FROM tokens WHERE map_id = ?').all(m.id) as any[]
-      const fog = (db.prepare('SELECT fog_bitmap, explored_bitmap FROM fog_state WHERE map_id = ?').get(m.id) as any) ?? null
-      const initiative = db.prepare('SELECT * FROM initiative WHERE map_id = ?').all(m.id) as any[]
-      const gmPins = db.prepare('SELECT x, y, label, icon, color FROM gm_pins WHERE map_id = ?').all(m.id) as any[]
-      const drawings = db.prepare('SELECT type, points, color, width, synced FROM drawings WHERE map_id = ?').all(m.id) as any[]
-      const note = (db.prepare('SELECT content FROM notes WHERE campaign_id = ? AND map_id = ?').get(campaignId, m.id) as any)?.content ?? ''
+      const tokens = tokensByMap.get(m.id) ?? []
+      const fog = fogByMap.get(m.id) ?? null
+      const initiative = initByMap.get(m.id) ?? []
+      const gmPins = pinsByMap.get(m.id) ?? []
+      const drawings = drawingsByMap.get(m.id) ?? []
+      const note = notesByMap.get(m.id) ?? ''
+      const rooms = roomsByMap.get(m.id) ?? []
       return {
         name: m.name,
         imagePath: m.image_path,
@@ -286,7 +302,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
         gridOffsetX: m.grid_offset_x ?? 0,
         gridOffsetY: m.grid_offset_y ?? 0,
         ambientBrightness: m.ambient_brightness ?? 100,
-        tokens: tokens.map((t) => ({
+        tokens: tokens.map((t: any) => ({
           id: t.id,
           name: t.name,
           imagePath: t.image_path,
@@ -303,20 +319,20 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
           faction: t.faction ?? 'party',
           showName: t.show_name ?? 1,
         })),
-        gmPins: gmPins.map((p) => ({
+        gmPins: gmPins.map((p: any) => ({
           x: p.x, y: p.y, label: p.label, icon: p.icon, color: p.color,
         })),
-        drawings: drawings.map((d) => ({
+        drawings: drawings.map((d: any) => ({
           type: d.type, points: d.points, color: d.color, width: d.width, synced: d.synced,
         })),
         fogBitmap: fog?.fog_bitmap ?? null,
         exploredBitmap: fog?.explored_bitmap ?? null,
-        initiative: initiative.map((i) => ({
+        initiative: initiative.map((i: any) => ({
           combatantName: i.combatant_name, roll: i.roll, currentTurn: i.current_turn, tokenId: i.token_id ?? null,
           effectTimers: i.effect_timers ?? null,
         })),
         notes: note,
-        rooms: (db.prepare('SELECT name, description, polygon, visibility, encounter_id, atmosphere_hint, notes, color, created_at FROM rooms WHERE map_id = ?').all(m.id) as any[]).map((r) => ({
+        rooms: rooms.map((r: any) => ({
           name: r.name,
           description: r.description,
           polygon: r.polygon,
@@ -341,6 +357,17 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
       createdAt: e.created_at,
     })),
   }
+}
+
+function groupBy(rows: any[], key: string): Map<number, any[]> {
+  const map = new Map<number, any[]>()
+  for (const row of rows) {
+    const k = row[key]
+    const arr = map.get(k)
+    if (arr) arr.push(row)
+    else map.set(k, [row])
+  }
+  return map
 }
 
 function collectAssetPaths(data: CampaignExport): string[] {
