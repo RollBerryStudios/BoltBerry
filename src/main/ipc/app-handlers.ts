@@ -147,7 +147,7 @@ export function registerAppHandlers(): void {
         if (!existingMapPaths.has(filePath)) {
           const fileName = file.replace(/\.[^/.]+$/, "") || file
           
-          let campaignId = db.prepare('SELECT id FROM campaigns LIMIT 1').get()?.id
+          let campaignId = (db.prepare('SELECT id FROM campaigns LIMIT 1').get() as { id: number } | undefined)?.id
           if (!campaignId) {
             const campaignResult = db.prepare(
               'INSERT INTO campaigns (name, created_at, last_opened) VALUES (?, datetime("now"), datetime("now"))'
@@ -159,7 +159,7 @@ export function registerAppHandlers(): void {
             'INSERT INTO assets (original_name, stored_path, type, campaign_id) VALUES (?, ?, ?, ?)'
           ).run(fileName, filePath, 'map', campaignId)
           
-          const orderIndex = db.prepare('SELECT COALESCE(MAX(order_index), -1) + 1 AS next FROM maps WHERE campaign_id = ?').get(campaignId)!.next
+          const orderIndex = (db.prepare('SELECT COALESCE(MAX(order_index), -1) + 1 AS next FROM maps WHERE campaign_id = ?').get(campaignId) as { next: number }).next
           db.prepare(
             'INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, grid_offset_x, grid_offset_y) VALUES (?, ?, ?, ?, 0, 0, 0)'
           ).run(campaignId, fileName, filePath, orderIndex)
