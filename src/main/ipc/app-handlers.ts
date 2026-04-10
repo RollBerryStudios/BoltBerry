@@ -54,15 +54,13 @@ export function registerAppHandlers(): void {
   })
 
   // Get default user data folder
-  ipcMain.handle('GET_DEFAULT_USER_DATA_FOLDER', () => {
-    const { app } = require('electron')
-    const { join } = require('path')
+  ipcMain.handle(IPC.GET_DEFAULT_USER_DATA_FOLDER, () => {
     return join(app.getPath('documents'), 'BoltBerry')
   })
 
   // Set custom user data folder
-  ipcMain.handle('SET_USER_DATA_FOLDER', (_event, path: string) => {
-    setCustomUserDataPath(path)
+  ipcMain.handle(IPC.SET_USER_DATA_FOLDER, (_event, dataPath: string) => {
+    setCustomUserDataPath(dataPath)
     try {
       closeDatabase()
       initDatabase()
@@ -72,20 +70,16 @@ export function registerAppHandlers(): void {
     return true
   })
 
-// Open content folder
-  ipcMain.handle('OPEN_CONTENT_FOLDER', () => {
-    const { shell } = require('electron')
-    const { getCustomUserDataPath } = require('../db/database')
-    const { join } = require('path')
-    
+  // Open content folder
+  ipcMain.handle(IPC.OPEN_CONTENT_FOLDER, async () => {
+    const { shell } = await import('electron')
     const userDataPath = getCustomUserDataPath() || app.getPath('userData')
     const contentPath = join(userDataPath, 'assets')
-    
     return shell.openPath(contentPath)
   })
 
   // Get image as base64 for direct embedding
-  ipcMain.handle('GET_IMAGE_AS_BASE64', async (_event, imagePath: string) => {
+  ipcMain.handle(IPC.GET_IMAGE_AS_BASE64, async (_event, imagePath: string) => {
     try {
       let cleanPath = imagePath
       if (imagePath.startsWith('file://')) {
@@ -109,10 +103,9 @@ export function registerAppHandlers(): void {
   })
 
   // Rescan content folder to synchronize files with database
-  ipcMain.handle('RESCAN_CONTENT_FOLDER', async () => {
-    const { getCustomUserDataPath, getDb } = require('../db/database')
-    const { join, basename } = require('path')
-    const { readdir, stat } = require('fs').promises
+  ipcMain.handle(IPC.RESCAN_CONTENT_FOLDER, async () => {
+    const { readdir } = require('fs').promises
+    const { basename } = require('path')
     
     try {
       const userDataPath = getCustomUserDataPath() || app.getPath('userData')
@@ -121,8 +114,7 @@ export function registerAppHandlers(): void {
       let files: string[] = []
       try {
         files = await readdir(assetsPath)
-      } catch (err) {
-        const { mkdirSync } = require('fs')
+      } catch {
         mkdirSync(assetsPath, { recursive: true })
         return { scanned: 0, added: 0, removed: 0, message: 'Keine Dateien gefunden' }
       }
@@ -261,6 +253,21 @@ export function registerAppHandlers(): void {
     })
     if (result.canceled || !result.filePaths[0]) return null
     const srcPath = result.filePaths[0]
+    const MAX_PDF_SIZE = 100 * 1024 * 1024 // 100 MB
+    const stats = statSync(srcPath)
+    if (stats.size > MAX_PDF_SIZE) {
+      const sizeMB = (stats.size / (1024 * 1024)).toFixed(1)
+      const { response } = await dialog.showMessageBox({
+        type: 'warning',
+        title: 'Große PDF-Datei',
+        message: `Die PDF-Datei ist ${sizeMB} MB groß (empfohlen: max. 100 MB).`,
+        detail: 'Sehr große PDFs können den Arbeitsspeicher überlasten. Trotzdem importieren?',
+        buttons: ['Importieren', 'Abbrechen'],
+        defaultId: 0,
+        cancelId: 1,
+      })
+      if (response === 1) return null
+    }
     const data = readFileSync(srcPath)
     return {
       path: srcPath,
@@ -277,7 +284,8 @@ export function registerAppHandlers(): void {
     campaignId: number
   }) => {
     const { dataUrl, originalName, type, campaignId } = args
-    const base64 = dataUrl.replace(/^data:image\/\w+;base64,/, '')
+    // Match image/* MIME types including svg+xml, webp etc.
+    const base64 = dataUrl.replace(/^data:image\/[\w+.-]+;base64,/, '')
     const destDir = getAssetDir(type)
     const destName = `${Date.now()}_${Math.random().toString(36).slice(2)}.png`
     const destPath = join(destDir, destName)
@@ -300,8 +308,7 @@ export function registerAppHandlers(): void {
   })
 
   // Get Electron's userData path
-  ipcMain.handle('GET_USER_DATA_PATH', () => {
-    const { app } = require('electron')
+  ipcMain.handle(IPC.GET_USER_DATA_PATH, () => {
     return app.getPath('userData')
   })
 
@@ -335,8 +342,24 @@ export function registerAppHandlers(): void {
     })
   })
 
+  // Generic confirm dialog
+  ipcMain.handle(IPC.CONFIRM_DIALOG, async (event, message: string, detail?: string) => {
+    const win = BrowserWindow.fromWebContents(event.sender)
+    if (!win) return false
+    const { response } = await dialog.showMessageBox(win, {
+      type: 'warning',
+      title: 'Bestätigung',
+      message,
+      detail,
+      buttons: ['Abbrechen', 'OK'],
+      defaultId: 0,
+      cancelId: 0,
+    })
+    return response === 1
+  })
+
   // Delete map (with native confirmation dialog)
-  ipcMain.handle('DELETE_MAP_CONFIRM', async (event, mapName: string) => {
+  ipcMain.handle(IPC.DELETE_MAP_CONFIRM, async (event, mapName: string) => {
     const win = BrowserWindow.fromWebContents(event.sender)
     if (!win) return false
 
