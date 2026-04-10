@@ -24,21 +24,31 @@ export function RoomPanel() {
   const selected = mapRooms.find((r) => r.id === selectedRoomId) ?? null
 
   const handleDelete = useCallback(async (id: number) => {
+    if (!window.electronAPI) return
+    const room = rooms.find((r) => r.id === id)
+    const confirmed = await window.electronAPI.confirmDialog(
+      `Raum "${room?.name ?? ''}" löschen?`,
+      'Diese Aktion kann nicht rükgängig gemacht werden.'
+    )
+    if (!confirmed) return
     removeRoom(id)
     if (selectedRoomId === id) setSelectedRoomId(null)
     try {
-      await window.electronAPI?.dbRun('DELETE FROM rooms WHERE id = ?', [id])
+      await window.electronAPI.dbRun('DELETE FROM rooms WHERE id = ?', [id])
     } catch (err) {
       console.error('[RoomPanel] delete failed:', err)
     }
-  }, [removeRoom, selectedRoomId, setSelectedRoomId])
+  }, [rooms, removeRoom, selectedRoomId, setSelectedRoomId])
 
   const handleUpdateField = useCallback(async (id: number, field: string, value: any) => {
+    // Convert snake_case DB field name to camelCase for store update
+    const storeField = field.replace(/_([a-z])/g, (_, c: string) => c.toUpperCase())
     const patch: Partial<RoomRecord> = {}
-    ;(patch as any)[field] = value
+    ;(patch as any)[storeField] = value
     updateRoom(id, patch)
     try {
-      await window.electronAPI?.dbRun(`UPDATE rooms SET ${field} = ? WHERE id = ?`, [typeof value === 'string' ? value : JSON.stringify(value), id])
+      const dbValue = value == null ? null : typeof value === 'string' ? value : JSON.stringify(value)
+      await window.electronAPI?.dbRun(`UPDATE rooms SET ${field} = ? WHERE id = ?`, [dbValue, id])
     } catch (err) {
       console.error('[RoomPanel] update failed:', err)
     }
