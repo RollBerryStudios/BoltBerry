@@ -63,7 +63,7 @@
   "sidebar": {
     "left": {
       "tabMaps": "Karten",
-      "tabAssets": "Assets",
+      "tabAssets": "Medien",
       "mapsTitle": "Karten",
       "mapsEmpty": "Noch keine Karten",
       "addMap": "+ Karte hinzufügen",
@@ -85,7 +85,7 @@
       "tabOverlay": "Overlay",
       "tabAudio": "Audio",
       "tabDice": "Würfel",
-      "tabEncounters": "Encounter"
+      "tabEncounters": "Begegnungen"
     }
   },
   "shortcuts": {
@@ -229,7 +229,7 @@
     "unconscious": "Bewusstlos"
   },
   "assets": {
-    "title": "Assets",
+    "title": "Medien",
     "filterAll": "Alle",
     "filterMaps": "Karten",
     "filterTokens": "Token",
