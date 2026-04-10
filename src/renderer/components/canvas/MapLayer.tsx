@@ -158,7 +158,7 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
     }
   }
 
-  // ── Zoom: scroll wheel or trackpad pinch ──────────────────────────────────
+  // ── Zoom: scroll wheel or trackpad pinch ────────────────────────────────────
   function handleWheel(e: Konva.KonvaEventObject<WheelEvent>) {
     e.evt.preventDefault()
     const stage = stageRef.current
@@ -174,12 +174,14 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
 
     const newOffX = pointer.x - (pointer.x - offsetX) * (newScale / scale)
     const newOffY = pointer.y - (pointer.y - offsetY) * (newScale / scale)
+    const clampedOffX = clampOffsetX(newOffX)
+    const clampedOffY = clampOffsetY(newOffY)
 
-    setTransform({ scale: newScale, offsetX: clampOffsetX(newOffX), offsetY: clampOffsetY(newOffY) })
-    scheduleCameraSave(newScale, newOffX, newOffY)
+    setTransform({ scale: newScale, offsetX: clampedOffX, offsetY: clampedOffY })
+    scheduleCameraSave(newScale, clampedOffX, clampedOffY)
   }
 
-  // ── Clamp offset so viewport doesn't drift too far from the map ───────────
+  // ── Clamp offset so viewport doesn't drift too far from the map ─────────────────
   // Allow up to 1 viewport-width/height of empty space beyond the map edge
   function clampOffsetX(x: number): number {
     if (!image || natW === 0) return x
@@ -258,12 +260,12 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
               const cols = Math.ceil(imgW / cellPx) + 1
               const rows = Math.ceil(imgH / cellPx) + 1
               for (let c = 0; c <= cols; c++) {
-                const x = gridOffsetX + c * cellPx + offsetX
+                const x = gridOffsetX * scale + c * cellPx + offsetX
                 ctx.moveTo(x, y0)
                 ctx.lineTo(x, y0 + imgH)
               }
               for (let r = 0; r <= rows; r++) {
-                const y = gridOffsetY + r * cellPx + offsetY
+                const y = gridOffsetY * scale + r * cellPx + offsetY
                 ctx.moveTo(x0, y)
                 ctx.lineTo(x0 + imgW, y)
               }
