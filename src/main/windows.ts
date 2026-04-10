@@ -13,7 +13,7 @@ let dmWindow: BrowserWindow | null = null
 let playerWindow: BrowserWindow | null = null
 let playerDisplayId: number | null = null
 
-// ─── DM Window ────────────────────────────────────────────────────────────────
+// ─── DM Window ────────────────────────────────────────────────────────────────────
 export function createDMWindow(): BrowserWindow {
   dmWindow = new BrowserWindow({
     width: 1400,
@@ -53,7 +53,7 @@ export function createDMWindow(): BrowserWindow {
   return dmWindow
 }
 
-// ─── Player Window ────────────────────────────────────────────────────────────
+// ─── Player Window ─────────────────────────────────────────────────────────────────
 export function createPlayerWindow(): BrowserWindow | null {
   const displays = screen.getAllDisplays()
 
@@ -95,12 +95,13 @@ export function createPlayerWindow(): BrowserWindow | null {
 
   playerWindow.on('closed', () => {
     playerWindow = null
+    getDMWindow()?.webContents.send('dm:player-window-closed')
   })
 
   return playerWindow
 }
 
-// ─── Accessors ────────────────────────────────────────────────────────────────
+// ─── Accessors ────────────────────────────────────────────────────────────────────
 export function getDMWindow() {
   return dmWindow
 }

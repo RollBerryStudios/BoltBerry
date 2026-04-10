@@ -22,15 +22,15 @@ if (!gotLock) {
 }
 
 app.on('second-instance', () => {
-  const wins = BrowserWindow.getAllWindows()
-  if (wins.length > 0) {
-    const dmWin = wins[0]
+  const { getDMWindow } = require('./windows')
+  const dmWin = getDMWindow()
+  if (dmWin && !dmWin.isDestroyed()) {
     if (dmWin.isMinimized()) dmWin.restore()
     dmWin.focus()
   }
 })
 
-// ─── App Lifecycle ────────────────────────────────────────────────────────────
+// ─── App Lifecycle ─────────────────────────────────────────────────────────────────
 app.whenReady().then(() => {
   // Register custom protocol for serving local assets (images, audio)
   protocol.handle('local-asset', (request) => {
@@ -75,8 +75,8 @@ app.whenReady().then(() => {
 })
 
 app.on('window-all-closed', () => {
-  closeDatabase()
   if (process.platform !== 'darwin') {
+    closeDatabase()
     app.quit()
   }
 })
