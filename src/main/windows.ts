@@ -13,7 +13,7 @@ let dmWindow: BrowserWindow | null = null
 let playerWindow: BrowserWindow | null = null
 let playerDisplayId: number | null = null
 
-// ─── DM Window ────────────────────────────────────────────────────────────────────
+// ─── DM Window ───────────────────────────────────────────────────────────────────────
 export function createDMWindow(): BrowserWindow {
   dmWindow = new BrowserWindow({
     width: 1400,
@@ -44,6 +44,12 @@ export function createDMWindow(): BrowserWindow {
     dmWindow.loadFile(join(app.getAppPath(), 'dist/renderer/index.html'))
   }
 
+  // Block navigation to external URLs
+  dmWindow.webContents.on('will-navigate', (e, url) => {
+    if (!url.startsWith(RENDERER_URL) && !url.startsWith('file://')) e.preventDefault()
+  })
+  dmWindow.webContents.setWindowOpenHandler(() => ({ action: 'deny' }))
+
   dmWindow.on('closed', () => {
     dmWindow = null
     playerWindow?.close()
@@ -53,7 +59,7 @@ export function createDMWindow(): BrowserWindow {
   return dmWindow
 }
 
-// ─── Player Window ─────────────────────────────────────────────────────────────────
+// ─── Player Window ───────────────────────────────────────────────────────────────────
 export function createPlayerWindow(): BrowserWindow | null {
   const displays = screen.getAllDisplays()
 
@@ -93,6 +99,12 @@ export function createPlayerWindow(): BrowserWindow | null {
     playerWindow.loadFile(join(app.getAppPath(), 'dist/renderer/player.html'))
   }
 
+  // Block navigation to external URLs
+  playerWindow.webContents.on('will-navigate', (e, url) => {
+    if (!url.startsWith(RENDERER_URL) && !url.startsWith('file://')) e.preventDefault()
+  })
+  playerWindow.webContents.setWindowOpenHandler(() => ({ action: 'deny' }))
+
   playerWindow.on('closed', () => {
     playerWindow = null
     getDMWindow()?.webContents.send('dm:player-window-closed')
@@ -101,7 +113,7 @@ export function createPlayerWindow(): BrowserWindow | null {
   return playerWindow
 }
 
-// ─── Accessors ────────────────────────────────────────────────────────────────────
+// ─── Accessors ───────────────────────────────────────────────────────────────────────
 export function getDMWindow() {
   return dmWindow
 }

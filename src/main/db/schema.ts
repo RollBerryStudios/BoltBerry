@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 17
+export const SCHEMA_VERSION = 18
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -328,6 +328,22 @@ CREATE TABLE IF NOT EXISTS schema_version (
 );
 `
 
+// Migration: v17 → v18 — add indexes on frequently-queried foreign keys
+export const MIGRATE_V17_TO_V18 = `
+CREATE INDEX IF NOT EXISTS idx_tokens_map_id ON tokens(map_id);
+CREATE INDEX IF NOT EXISTS idx_initiative_map_id ON initiative(map_id);
+CREATE INDEX IF NOT EXISTS idx_gm_pins_map_id ON gm_pins(map_id);
+CREATE INDEX IF NOT EXISTS idx_drawings_map_id ON drawings(map_id);
+CREATE INDEX IF NOT EXISTS idx_walls_map_id ON walls(map_id);
+CREATE INDEX IF NOT EXISTS idx_rooms_map_id ON rooms(map_id);
+CREATE INDEX IF NOT EXISTS idx_notes_campaign_map ON notes(campaign_id, map_id);
+CREATE INDEX IF NOT EXISTS idx_handouts_campaign_id ON handouts(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_encounters_campaign_id ON encounters(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_assets_campaign_id ON assets(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_maps_campaign_id ON maps(campaign_id);
+UPDATE schema_version SET version = 18;
+`
+
 export const SEED_SCHEMA_VERSION = `
-INSERT OR IGNORE INTO schema_version (id, version) VALUES (1, 17);
+INSERT OR IGNORE INTO schema_version (id, version) VALUES (1, 18);
 `

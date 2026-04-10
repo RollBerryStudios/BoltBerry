@@ -3,7 +3,7 @@ import { immer } from 'zustand/middleware/immer'
 import type { InitiativeEntry, EffectTimer } from '@shared/ipc-types'
 
 function persistCurrentTurns(entries: InitiativeEntry[]) {
-  if (!window.electronAPI) return
+  if (typeof window === 'undefined' || !window.electronAPI) return
   entries.forEach((e) => {
     window.electronAPI!.dbRun(
       'UPDATE initiative SET current_turn = ? WHERE id = ?',
