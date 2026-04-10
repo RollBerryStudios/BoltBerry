@@ -2,7 +2,7 @@ import { ipcMain, dialog, app } from 'electron'
 import path from 'path'
 import {
   existsSync, mkdirSync, createWriteStream,
-  createReadStream, copyFileSync, readdirSync, readFileSync,
+  createReadStream, copyFileSync, readdirSync, readFileSync, rmSync,
 } from 'fs'
 import archiver from 'archiver'
 import unzipper from 'unzipper'
@@ -88,21 +88,43 @@ export function registerExportImportHandlers(): void {
     const importDir = path.join(userData, 'imports', `import_${Date.now()}`)
     mkdirSync(importDir, { recursive: true })
 
+    // Extract with path-traversal protection using unzipper.Parse
     await new Promise<void>((resolve, reject) => {
       createReadStream(zipPath)
-        .pipe(unzipper.Extract({ path: importDir }))
+        .pipe(unzipper.Parse())
+        .on('entry', (entry: unzipper.Entry) => {
+          const entryPath: string = entry.path
+          // Normalize and validate: must not escape importDir
+          const dest = path.resolve(importDir, entryPath)
+          if (!dest.startsWith(importDir + path.sep) && dest !== importDir) {
+            entry.autodrain()
+            return
+          }
+          if (entry.type === 'Directory') {
+            mkdirSync(dest, { recursive: true })
+            entry.autodrain()
+          } else {
+            mkdirSync(path.dirname(dest), { recursive: true })
+            entry.pipe(createWriteStream(dest))
+          }
+        })
         .on('close', resolve)
         .on('error', reject)
     })
 
     const campaignJsonPath = path.join(importDir, 'campaign.json')
     if (!existsSync(campaignJsonPath)) {
+      rmSync(importDir, { recursive: true, force: true })
       return { success: false, error: 'Ungültige Kampagnen-Datei (campaign.json fehlt)' }
     }
 
-    const campaignData = JSON.parse(
-      readFileSync(campaignJsonPath, 'utf-8')
-    ) as CampaignExport
+    let campaignData: CampaignExport
+    try {
+      campaignData = JSON.parse(readFileSync(campaignJsonPath, 'utf-8')) as CampaignExport
+    } catch {
+      rmSync(importDir, { recursive: true, force: true })
+      return { success: false, error: 'campaign.json konnte nicht gelesen werden' }
+    }
 
     const assetsDir = path.join(importDir, 'assets')
     const destAssetsDir = path.join(userData, 'assets', 'imported')
@@ -134,6 +156,9 @@ export function registerExportImportHandlers(): void {
     const db = getDb()
     const newCampaignId = insertCampaignData(campaignData, db)
 
+    // Clean up the temporary extraction directory
+    rmSync(importDir, { recursive: true, force: true })
+
     return { success: true, campaignId: newCampaignId }
   })
 }
@@ -162,6 +187,8 @@ function buildZip(
     for (const p of paths) {
       if (!p) continue
       const absPath = path.resolve(userData, p)
+      // Security: ensure path stays within userData
+      if (!absPath.startsWith(userData + path.sep) && absPath !== userData) continue
       if (existsSync(absPath) && !added.has(p)) {
         archive.file(absPath, { name: p })
         added.add(p)
@@ -319,7 +346,7 @@ function remapPaths(data: CampaignExport, map: Map<string, string>) {
 
 function findRemap(imagePath: string, map: Map<string, string>): string {
   for (const [key, val] of map) {
-    if (imagePath.endsWith(key.replace(/^assets\//, '')) || imagePath === key) {
+    if (imagePath.endsWith(key.replace(/^\/assets\//, '')) || imagePath === key) {
       return val
     }
   }
