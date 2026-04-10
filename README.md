@@ -11,9 +11,9 @@
 
 <p align="center">
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg">
-  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg">
+  <img alt="Version" src="https://img.shields.io/badge/version-0.19.1-blue.svg">
   <img alt="Electron" src="https://img.shields.io/badge/Electron-32-47848F?logo=electron&logoColor=white">
-  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.5-3178C6?logo=typescript&logoColor=white">
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white">
   <img alt="React" src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white">
   <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg">
 </p>
@@ -110,7 +110,7 @@ Beiträge sind willkommen. Bitte lies [CONTRIBUTING.md](CONTRIBUTING.md) vor dem
 
 ### Lizenz
 
-[MIT](LICENSE) © 2025 RollBerry Studios
+[MIT](LICENSE) © 2026 RollBerry Studios
 
 ---
 
@@ -200,4 +200,4 @@ Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before
 
 ### License
 
-[MIT](LICENSE) © 2025 RollBerry Studios
+[MIT](LICENSE) © 2026 RollBerry Studios
