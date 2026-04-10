@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 16
+export const SCHEMA_VERSION = 17
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -75,7 +75,8 @@ CREATE TABLE IF NOT EXISTS drawings (
   points     TEXT    NOT NULL DEFAULT '[]',
   color      TEXT    NOT NULL DEFAULT '#f59e0b',
   width      REAL    NOT NULL DEFAULT 2,
-  synced     INTEGER NOT NULL DEFAULT 0
+  synced     INTEGER NOT NULL DEFAULT 0,
+  text       TEXT
 );
 UPDATE schema_version SET version = 9;
 `
@@ -144,6 +145,22 @@ CREATE TABLE IF NOT EXISTS rooms (
   created_at       TEXT    NOT NULL DEFAULT (datetime('now'))
 );
 UPDATE schema_version SET version = 16;
+`
+
+// Migration: v16 → v17 — fix assets FK cascade, add drawings.text column
+export const MIGRATE_V16_TO_V17 = `
+ALTER TABLE drawings ADD COLUMN text TEXT;
+CREATE TABLE IF NOT EXISTS assets_new (
+  id            INTEGER PRIMARY KEY AUTOINCREMENT,
+  original_name TEXT    NOT NULL,
+  stored_path   TEXT    NOT NULL,
+  type          TEXT    NOT NULL,
+  campaign_id   INTEGER REFERENCES campaigns(id) ON DELETE CASCADE
+);
+INSERT INTO assets_new SELECT * FROM assets;
+DROP TABLE assets;
+ALTER TABLE assets_new RENAME TO assets;
+UPDATE schema_version SET version = 17;
 `
 
 export const CREATE_TABLES_SQL = `
@@ -254,7 +271,8 @@ CREATE TABLE IF NOT EXISTS drawings (
   points     TEXT    NOT NULL DEFAULT '[]',
   color      TEXT    NOT NULL DEFAULT '#f59e0b',
   width      REAL    NOT NULL DEFAULT 2,
-  synced     INTEGER NOT NULL DEFAULT 0
+  synced     INTEGER NOT NULL DEFAULT 0,
+  text       TEXT
 );
 
 -- Walls, doors, windows (line-of-sight blockers)
@@ -300,15 +318,16 @@ CREATE TABLE IF NOT EXISTS assets (
   original_name TEXT    NOT NULL,
   stored_path   TEXT    NOT NULL,
   type          TEXT    NOT NULL,
-  campaign_id   INTEGER REFERENCES campaigns(id)
+  campaign_id   INTEGER REFERENCES campaigns(id) ON DELETE CASCADE
 );
 
--- Schema version tracking
+-- Schema version tracking (single-row enforced by PK constraint)
 CREATE TABLE IF NOT EXISTS schema_version (
+  id      INTEGER PRIMARY KEY CHECK (id = 1),
   version INTEGER NOT NULL
 );
 `
 
 export const SEED_SCHEMA_VERSION = `
-INSERT OR IGNORE INTO schema_version (version) VALUES (16);
+INSERT OR IGNORE INTO schema_version (id, version) VALUES (1, 17);
 `

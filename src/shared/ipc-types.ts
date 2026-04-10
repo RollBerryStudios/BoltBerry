@@ -1,4 +1,4 @@
-// ─── IPC Channel Names ────────────────────────────────────────────────────────
+// ─── IPC Channel Names ─────────────────────────────────────────────────────────────────
 export const IPC = {
   // DM → Main → Player
   PLAYER_MAP_UPDATE: 'player:map-update',
@@ -26,6 +26,7 @@ export const IPC = {
   // DB queries (renderer → main)
   DB_QUERY: 'db:query',
   DB_RUN: 'db:run',
+  DB_RUN_BATCH: 'db:run-batch',
 
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
@@ -53,9 +54,21 @@ export const IPC = {
 
   // Token delete confirmation
   DELETE_TOKEN_CONFIRM: 'app:delete-token-confirm',
+
+  // Generic confirm dialog
+  CONFIRM_DIALOG: 'app:confirm-dialog',
+
+  // File system / settings
+  GET_DEFAULT_USER_DATA_FOLDER: 'app:get-default-user-data-folder',
+  SET_USER_DATA_FOLDER: 'app:set-user-data-folder',
+  OPEN_CONTENT_FOLDER: 'app:open-content-folder',
+  GET_IMAGE_AS_BASE64: 'app:get-image-as-base64',
+  GET_USER_DATA_PATH: 'app:get-user-data-path',
+  RESCAN_CONTENT_FOLDER: 'app:rescan-content-folder',
+  DELETE_MAP_CONFIRM: 'app:delete-map-confirm',
 } as const
 
-// ─── Shared Data Types ────────────────────────────────────────────────────────
+// ─── Shared Data Types ─────────────────────────────────────────────────────────────────
 
 export type GridType = 'none' | 'square' | 'hex'
 export type WeatherType = 'none' | 'rain' | 'snow' | 'fog' | 'wind'
@@ -144,7 +157,7 @@ export interface NoteRecord {
   updatedAt: string
 }
 
-// ─── Player Window State (what gets synced) ───────────────────────────────────
+// ─── Player Window State (what gets synced) ──────────────────────────────────────────
 
 export interface PlayerMapState {
   imagePath: string
