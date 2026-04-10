@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Group, Circle, Text } from 'react-konva'
+import { Layer, Group, Circle, Text } from 'react-konva'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useCampaignStore } from '../../stores/campaignStore'
@@ -54,7 +54,7 @@ export function PlayerEyeOverlay({ map, stageRef, canvasSize }: PlayerEyeOverlay
   [hiddenTokens, scale, offsetX, offsetY, map.gridSize])
 
   return (
-    <>
+    <Layer listening={false}>
       {markers.map((m) => (
         <Group key={`hidden-${m.id}`} listening={false}>
           <Circle
@@ -100,6 +100,6 @@ export function PlayerEyeOverlay({ map, stageRef, canvasSize }: PlayerEyeOverlay
           padding={4}
         />
       </Group>
-    </>
+    </Layer>
   )
 }
