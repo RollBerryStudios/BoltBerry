@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback, memo } from 'react'
+import { useState, useEffect, useCallback, memo, useRef } from 'react'
 import { useCampaignStore } from '../../../stores/campaignStore'
 
-// ── Simple inline markdown renderer (no external deps) ────────────────────────
+// ── Simple inline markdown renderer (no external deps) ────────────────────
 
 function renderInline(text: string): React.ReactNode[] {
   const parts: React.ReactNode[] = []
@@ -66,7 +66,7 @@ const MarkdownPreview = memo(function MarkdownPreview({ text }: { text: string }
   )
 })
 
-// ─── NotesPanel ───────────────────────────────────────────────────────────────
+// ─── NotesPanel ──────────────────────────────────────────────────────────────────
 
 export function NotesPanel() {
   const { activeCampaignId, activeMapId } = useCampaignStore()
@@ -74,6 +74,11 @@ export function NotesPanel() {
   const [mapNote, setMapNote] = useState('')
   const [activeTab, setActiveTab] = useState<'campaign' | 'map'>('campaign')
   const [preview, setPreview] = useState(false)
+  const prevTabRef = useRef<'campaign' | 'map'>('campaign')
+  const campaignNoteRef = useRef(campaignNote)
+  const mapNoteRef = useRef(mapNote)
+  useEffect(() => { campaignNoteRef.current = campaignNote }, [campaignNote])
+  useEffect(() => { mapNoteRef.current = mapNote }, [mapNote])
 
   useEffect(() => {
     if (!activeCampaignId) return
@@ -116,6 +121,19 @@ export function NotesPanel() {
     }
   }, [activeCampaignId])
 
+  // Save the previous tab's note when switching tabs
+  function handleTabSwitch(tab: 'campaign' | 'map') {
+    if (tab === activeTab) return
+    const prevTab = prevTabRef.current
+    prevTabRef.current = tab
+    if (prevTab === 'campaign') {
+      saveNote(campaignNoteRef.current, null)
+    } else if (activeMapId) {
+      saveNote(mapNoteRef.current, activeMapId)
+    }
+    setActiveTab(tab)
+  }
+
   const currentNote = activeTab === 'campaign' ? campaignNote : mapNote
   const setCurrentNote = activeTab === 'campaign' ? setCampaignNote : setMapNote
 
@@ -131,7 +149,7 @@ export function NotesPanel() {
         {(['campaign', 'map'] as const).map((tab) => (
           <button
             key={tab}
-            onClick={() => setActiveTab(tab)}
+            onClick={() => handleTabSwitch(tab)}
             style={{
               flex: 1,
               padding: 'var(--sp-2)',
