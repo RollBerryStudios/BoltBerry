@@ -10,7 +10,7 @@ import { IPC } from '../../shared/ipc-types'
 import { getDb, closeDatabase, initDatabase } from '../db/database'
 
 export function registerExportImportHandlers(): void {
-  // ── Duplicate Campaign ─────────────────────────────────────────────────────
+  // ── Duplicate Campaign ─────────────────────────────────────────────────────────
   ipcMain.handle(IPC.DUPLICATE_CAMPAIGN, async (_event, campaignId: number) => {
     const db = getDb()
     const original = db.prepare('SELECT name FROM campaigns WHERE id = ?').get(campaignId) as
@@ -31,7 +31,7 @@ export function registerExportImportHandlers(): void {
     }
   })
 
-  // ── Export Campaign ────────────────────────────────────────────────────────
+  // ── Export Campaign ──────────────────────────────────────────────────────────
   ipcMain.handle(IPC.EXPORT_CAMPAIGN, async (_event, campaignId: number) => {
     const db = getDb()
 
@@ -39,7 +39,7 @@ export function registerExportImportHandlers(): void {
       | { name: string } | undefined
     if (!campaign) return { success: false, error: 'Kampagne nicht gefunden' }
 
-    const safeName = campaign.name.replace(/[^a-z0-9äöüß\-_ ]/gi, '_').trim()
+    const safeName = campaign.name.replace(/[^a-z0-9\u00e4\u00f6\u00fc\u00df\-_ ]/gi, '_').trim()
     const defaultPath = `BoltBerry_${safeName}_${new Date().toISOString().slice(0, 10)}.zip`
 
     const { filePath, canceled } = await dialog.showSaveDialog({
@@ -52,7 +52,7 @@ export function registerExportImportHandlers(): void {
     return buildZip(campaignId, db, filePath)
   })
 
-  // ── Quick Backup (no dialog, auto-path) ───────────────────────────────────
+  // ── Quick Backup (no dialog, auto-path) ───────────────────────────────────────
   ipcMain.handle(IPC.QUICK_BACKUP, async (_event, campaignId: number) => {
     const db = getDb()
 
@@ -60,7 +60,7 @@ export function registerExportImportHandlers(): void {
       | { name: string } | undefined
     if (!campaign) return { success: false, error: 'Kampagne nicht gefunden' }
 
-    const safeName = campaign.name.replace(/[^a-z0-9äöüß\-_ ]/gi, '_').trim()
+    const safeName = campaign.name.replace(/[^a-z0-9\u00e4\u00f6\u00fc\u00df\-_ ]/gi, '_').trim()
     const ts = new Date()
     const isoDate = ts.toISOString().slice(0, 10)
     const stamp = ts.getTime()
@@ -74,7 +74,7 @@ export function registerExportImportHandlers(): void {
     return { ...result, filePath }
   })
 
-  // ── Import Campaign ────────────────────────────────────────────────────────
+  // ── Import Campaign ──────────────────────────────────────────────────────────
   ipcMain.handle(IPC.IMPORT_CAMPAIGN, async () => {
     const { filePaths, canceled } = await dialog.showOpenDialog({
       title: 'Kampagne importieren',
@@ -115,7 +115,7 @@ export function registerExportImportHandlers(): void {
     const campaignJsonPath = path.join(importDir, 'campaign.json')
     if (!existsSync(campaignJsonPath)) {
       rmSync(importDir, { recursive: true, force: true })
-      return { success: false, error: 'Ungültige Kampagnen-Datei (campaign.json fehlt)' }
+      return { success: false, error: 'Ung\u00fcltige Kampagnen-Datei (campaign.json fehlt)' }
     }
 
     let campaignData: CampaignExport
@@ -199,7 +199,7 @@ function buildZip(
   })
 }
 
-// ── Export data structures ───────────────────────────────────────────────────
+// ── Export data structures ─────────────────────────────────────────────────────
 
 interface CampaignExport {
   version: number
@@ -237,7 +237,8 @@ interface CampaignExport {
 }
 
 function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): CampaignExport {
-  const campaign = db.prepare('SELECT name FROM campaigns WHERE id = ?').get(campaignId) as { name: string }
+  const campaign = db.prepare('SELECT name FROM campaigns WHERE id = ?').get(campaignId) as { name: string } | undefined
+  if (!campaign) throw new Error(`Campaign ${campaignId} not found`)
   const maps = db.prepare('SELECT * FROM maps WHERE campaign_id = ? ORDER BY order_index').all(campaignId) as any[]
   const campaignNote = (db.prepare(
     'SELECT content FROM notes WHERE campaign_id = ? AND map_id IS NULL'
