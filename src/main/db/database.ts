@@ -53,8 +53,8 @@ export function initDatabase(): Database.Database {
           id      INTEGER PRIMARY KEY CHECK (id = 1),
           version INTEGER NOT NULL
         );
-        INSERT INTO schema_version (id, version) VALUES (1, ${oldVersion});
       `)
+      db.prepare('INSERT INTO schema_version (id, version) VALUES (1, ?)').run(oldVersion)
     }
   } catch {
     // Table didn't exist yet — SEED_SCHEMA_VERSION below will create it via CREATE_TABLES_SQL

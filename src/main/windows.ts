@@ -27,7 +27,7 @@ export function createDMWindow(): BrowserWindow {
       preload: preloadPath(),
       contextIsolation: true,
       nodeIntegration: false,
-      sandbox: false, // needed for preload to access ipcRenderer
+      sandbox: true,
     },
   })
 
@@ -82,7 +82,7 @@ export function createPlayerWindow(): BrowserWindow | null {
       preload: preloadPath(),
       contextIsolation: true,
       nodeIntegration: false,
-      sandbox: false,
+      sandbox: true,
     },
   })
 

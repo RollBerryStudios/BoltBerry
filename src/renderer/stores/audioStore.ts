@@ -46,6 +46,8 @@ export const useAudioStore = create<AudioState>((set, get) => ({
   loadFile: (path: string) => {
     if (audioInstance) {
       audioInstance.pause()
+      audioInstance.removeAttribute('src')
+      audioInstance.load()
       audioInstance = null
     }
     const relativePath = path.startsWith('/') ? path.substring(1) : path
