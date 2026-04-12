@@ -30,6 +30,8 @@ interface UIState {
   fogBrushRadius: number
   workMode: WorkMode
   showPlayerEye: boolean
+  overlayActive: boolean
+  activeWeather: string
   clipboardTokens: Array<{
     name: string
     imagePath: string | null
@@ -70,6 +72,8 @@ interface UIState {
   setDrawWidth: (width: number) => void
   setFogBrushRadius: (radius: number) => void
   togglePlayerEye: () => void
+  setOverlayActive: (active: boolean) => void
+  setActiveWeather: (weather: string) => void
   setClipboardTokens: (tokens: Array<{
     name: string
     imagePath: string | null
@@ -110,6 +114,8 @@ export const useUIStore = create<UIState>((set) => ({
   fogBrushRadius: 30,
   workMode: 'prep' as WorkMode,
   showPlayerEye: false,
+  overlayActive: false,
+  activeWeather: 'none',
   clipboardTokens: [],
 
   setActiveTool: (activeTool) => set({ activeTool }),
@@ -183,6 +189,8 @@ export const useUIStore = create<UIState>((set) => ({
   setDrawWidth: (drawWidth) => set({ drawWidth }),
   setFogBrushRadius: (fogBrushRadius: number) => set({ fogBrushRadius }),
   togglePlayerEye: () => set((s) => ({ showPlayerEye: !s.showPlayerEye })),
+  setOverlayActive: (overlayActive) => set({ overlayActive }),
+  setActiveWeather: (activeWeather) => set({ activeWeather }),
   setClipboardTokens: (tokens: Array<{
     name: string
     imagePath: string | null

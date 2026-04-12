@@ -104,11 +104,16 @@ export function InitiativePanel() {
   const nameInputRef = useRef<HTMLInputElement>(null)
   const suggestionsRef = useRef<HTMLDivElement>(null)
 
+  const mapTokens = useMemo(() =>
+    tokens.filter((t) => t.mapId === activeMapId),
+    [tokens, activeMapId]
+  )
+
   const filteredTokens = useMemo(() =>
     name.trim()
-      ? tokens.filter((t) => t.name.toLowerCase().includes(name.toLowerCase()))
-      : tokens,
-    [tokens, name]
+      ? mapTokens.filter((t) => t.name.toLowerCase().includes(name.toLowerCase()))
+      : mapTokens,
+    [mapTokens, name]
   )
 
   useEffect(() => {
@@ -203,6 +208,29 @@ export function InitiativePanel() {
     }
   }
 
+  async function handleAddAllTokens() {
+    if (!activeMapId || !window.electronAPI) return
+    const existingTokenIds = new Set(entries.map((e) => e.tokenId).filter(Boolean))
+    const tokensToAdd = mapTokens.filter((t) => !existingTokenIds.has(t.id))
+    if (tokensToAdd.length === 0) return
+    for (const token of tokensToAdd) {
+      try {
+        const result = await window.electronAPI.dbRun(
+          'INSERT INTO initiative (map_id, combatant_name, roll, current_turn, token_id) VALUES (?, ?, 0, 0, ?)',
+          [activeMapId, token.name, token.id]
+        )
+        addEntry({
+          id: result.lastInsertRowid, mapId: activeMapId,
+          combatantName: token.name, roll: 0, currentTurn: false,
+          tokenId: token.id, effectTimers: null,
+        })
+      } catch (err) {
+        console.error('[InitiativePanel] handleAddAllTokens failed:', err)
+      }
+    }
+    broadcastInitiative()
+  }
+
   function startEditRoll(entryId: number, currentRoll: number) {
     setEditingRollId(entryId)
     setEditRollValue(String(currentRoll))
@@ -271,6 +299,15 @@ export function InitiativePanel() {
               title="Sortieren"
             >
               ↕ Sortieren
+            </button>
+            <button
+              className="btn btn-ghost"
+              style={{ fontSize: 'var(--text-xs)', padding: '2px 6px' }}
+              onClick={handleAddAllTokens}
+              title={`Alle ${mapTokens.length} Karten-Token zur Initiative hinzufügen`}
+              disabled={mapTokens.length === 0}
+            >
+              ⊕ Alle
             </button>
             <button
               className="btn btn-ghost"

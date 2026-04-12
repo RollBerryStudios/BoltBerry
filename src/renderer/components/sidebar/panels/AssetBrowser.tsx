@@ -24,6 +24,7 @@ export function AssetBrowser() {
   const activeMaps = useCampaignStore((s) => s.activeMaps)
   const [assets, setAssets] = useState<AssetRow[]>([])
   const [filter, setFilter] = useState<string>('all')
+  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
     loadAssets()
@@ -95,10 +96,14 @@ export function AssetBrowser() {
     }
   }
 
-  const filtered = useMemo(
-    () => filter === 'all' ? assets : assets.filter((a) => a.type === filter),
-    [assets, filter]
-  )
+  const filtered = useMemo(() => {
+    let result = filter === 'all' ? assets : assets.filter((a) => a.type === filter)
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase()
+      result = result.filter((a) => a.originalName.toLowerCase().includes(q))
+    }
+    return result
+  }, [assets, filter, searchQuery])
   const imageTypes = ['map', 'token', 'atmosphere']
 
   return (
@@ -106,6 +111,20 @@ export function AssetBrowser() {
       <div className="sidebar-section-title" style={{ marginBottom: 'var(--sp-3)' }}>
         Asset-Browser
       </div>
+
+      {/* Search field */}
+      <input
+        type="search"
+        placeholder="Suchen…"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        style={{
+          width: '100%', fontSize: 'var(--text-xs)', padding: '4px 8px',
+          background: 'var(--bg-base)', border: '1px solid var(--border)',
+          borderRadius: 3, color: 'var(--text-primary)', marginBottom: 'var(--sp-2)',
+          outline: 'none', boxSizing: 'border-box',
+        }}
+      />
 
       {/* Filter tabs */}
       <div style={{ display: 'flex', gap: 'var(--sp-1)', marginBottom: 'var(--sp-3)', flexWrap: 'wrap' }}>

@@ -88,6 +88,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   const [markerSubmenuId, setMarkerSubmenuId] = useState<number | null>(null)
   const [submenuType, setSubmenuType] = useState<string | null>(null)
   const [rubberBand, setRubberBand] = useState<{ x1: number; y1: number; x2: number; y2: number } | null>(null)
+  const [notesEditState, setNotesEditState] = useState<{ tokenId: number; screenX: number; screenY: number; value: string } | null>(null)
 
   // Ref for values read by stable callbacks (avoids recreating closures on every render)
   const latestRef = useRef({ tokens, selectedTokenIds, scale, offsetX, offsetY, gridSnap, map, editName, editHpCurrent, editHpMax, editAc })
@@ -475,9 +476,15 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
 
   function handleEditNotes(token: TokenRecord) {
     closeContextMenu()
-    const newNotes = prompt('Notizen:', token.notes ?? '')
-    if (newNotes === null) return
-    handleUpdate(token.id, { notes: newNotes || null })
+    const sx = token.x * scale + offsetX
+    const sy = token.y * scale + offsetY
+    setNotesEditState({ tokenId: token.id, screenX: sx, screenY: sy, value: token.notes ?? '' })
+  }
+
+  function commitNotesEdit() {
+    if (!notesEditState) return
+    handleUpdate(notesEditState.tokenId, { notes: notesEditState.value.trim() || null })
+    setNotesEditState(null)
   }
 
   function handleCopyTokens() {
@@ -735,7 +742,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     null,
                     { label: '📋 Als Gruppe duplizieren', action: () => handleDuplicateGroup() },
                     { label: '📋 Kopieren', action: () => handleCopyTokens() },
-                    { label: '📋 Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
+                    { label: clipboardTokens.length > 0 ? `📋 Einfügen (${clipboardTokens.length})` : '📋 Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
                     null,
                     { label: `❌ Alle löschen (${selectedTokenIds.length})`, action: () => handleDelete(token.id), danger: true },
                   ] : [
@@ -760,7 +767,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     null,
                     { label: token.visibleToPlayers ? '🙈 Verstecken' : '👁 Sichtbar machen', action: () => handleToggleVisibility(token) },
                     { label: '📋 Kopieren', action: () => handleCopyTokens() },
-                    { label: '📋 Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
+                    { label: clipboardTokens.length > 0 ? `📋 Einfügen (${clipboardTokens.length})` : '📋 Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
                     { label: token.locked ? '🔓 Entsperren' : '🔒 Sperren', action: () => handleToggleLock(token) },
                     { label: '🏷 Markierung', action: null, submenu: true, submenuType: 'marker' },
                     { label: '⬆️ nach vorne', action: () => { handleUpdate(token.id, { zIndex: token.zIndex + 1 }); closeContextMenu() } },
@@ -935,6 +942,32 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
             </Html>
           )
         })()}
+
+        {/* Inline notes editor overlay */}
+        {notesEditState && (
+          <Html divProps={{ style: { position: 'absolute', top: 0, left: 0, pointerEvents: 'none' } }}>
+            <div style={{ position: 'fixed', left: notesEditState.screenX, top: notesEditState.screenY, zIndex: 9999, pointerEvents: 'all', minWidth: 220 }}>
+              <div style={{ background: 'var(--bg-elevated)', border: '1px solid var(--accent-blue)', borderRadius: 6, padding: 8, boxShadow: '0 8px 24px rgba(0,0,0,0.6)' }}>
+                <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Notizen</div>
+                <textarea
+                  autoFocus
+                  value={notesEditState.value}
+                  onChange={(e) => setNotesEditState((s) => s ? { ...s, value: e.target.value } : null)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); commitNotesEdit() }
+                    if (e.key === 'Escape') setNotesEditState(null)
+                  }}
+                  rows={3}
+                  style={{ width: '100%', fontSize: 12, padding: '4px 6px', background: 'var(--bg-base)', border: '1px solid var(--border)', borderRadius: 3, color: 'var(--text-primary)', resize: 'vertical', outline: 'none', boxSizing: 'border-box' }}
+                />
+                <div style={{ display: 'flex', gap: 6, marginTop: 6, justifyContent: 'flex-end' }}>
+                  <button style={{ fontSize: 11, padding: '2px 8px', background: 'none', border: '1px solid var(--border-subtle)', borderRadius: 3, color: 'var(--text-muted)', cursor: 'pointer' }} onClick={() => setNotesEditState(null)}>Abbruch</button>
+                  <button style={{ fontSize: 11, padding: '2px 8px', background: 'var(--accent-blue-dim)', border: '1px solid var(--accent-blue)', borderRadius: 3, color: 'var(--text-primary)', cursor: 'pointer' }} onClick={commitNotesEdit}>OK</button>
+                </div>
+              </div>
+            </div>
+          </Html>
+        )}
       </Layer>
     </>
   )

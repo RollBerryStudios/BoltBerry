@@ -6,6 +6,7 @@ import { AppLayout } from './components/AppLayout'
 import { StartScreen } from './components/StartScreen'
 import { SetupWizard } from './components/SetupWizard'
 import { ShortcutOverlay } from './components/ShortcutOverlay'
+import { ToastProvider } from './components/shared/Toast'
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
 import { useAutoSave } from './hooks/useAutoSave'
 import { usePlayerSync } from './hooks/usePlayerSync'
@@ -62,6 +63,7 @@ export default function App() {
         <StartScreen />
       )}
       {showShortcuts && <ShortcutOverlay onClose={() => setShowShortcuts(false)} />}
+      <ToastProvider />
     </>
   )
 }
