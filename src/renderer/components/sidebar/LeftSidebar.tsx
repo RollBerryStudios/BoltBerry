@@ -24,8 +24,6 @@ export function LeftSidebar() {
   } = useCampaignStore()
 
   const [tab, setTab] = useState<'maps' | 'assets' | 'settings'>('maps')
-  const [addingMap, setAddingMap] = useState(false)
-  const [mapName, setMapName] = useState('')
 
   // Current map settings
   const activeMap = activeMaps.find((m) => m.id === activeMapId) ?? null
@@ -35,6 +33,8 @@ export function LeftSidebar() {
   const [rotation, setRotation] = useState<0 | 90 | 180 | 270>(0)
   const [gridOffsetX, setGridOffsetX] = useState(0)
   const [gridOffsetY, setGridOffsetY] = useState(0)
+  const [gridDetecting, setGridDetecting] = useState(false)
+  const [gridDetectMsg, setGridDetectMsg] = useState<{ text: string; ok: boolean } | null>(null)
 
   useEffect(() => {
     if (!activeCampaignId) return
@@ -49,6 +49,8 @@ export function LeftSidebar() {
     setRotation((activeMap.rotation ?? 0) as 0 | 90 | 180 | 270)
     setGridOffsetX(activeMap.gridOffsetX ?? 0)
     setGridOffsetY(activeMap.gridOffsetY ?? 0)
+    setGridDetecting(false)
+    setGridDetectMsg(null)
   }, [activeMapId])
 
   async function loadMaps(campaignId: number) {
@@ -86,21 +88,12 @@ export function LeftSidebar() {
   async function handleAddMap() {
     if (!activeCampaignId || !window.electronAPI) return
     try {
-      // Get file first to extract name
       const asset = await window.electronAPI.importFile('map', activeCampaignId)
       if (!asset) return
-      
-      // Auto-name from file if no name was entered
-      let finalMapName = mapName.trim()
-      if (!finalMapName && asset.path) {
-        // Extract filename from path and remove extension
-        const fileName = asset.path.split(/[\\/]/).pop() || ''
-        finalMapName = fileName.replace(/\.[^/.]+$/, "") || 'Neue Karte'
-      }
-      // If still no name, use default
-      if (!finalMapName) {
-        finalMapName = 'Neue Karte'
-      }
+
+      // Auto-name from filename, strip extension
+      const fileName = asset.path.split(/[\\/]/).pop() || ''
+      const finalMapName = fileName.replace(/\.[^/.]+$/, '') || 'Neue Karte'
 
       const result = await window.electronAPI.dbRun(
         `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, grid_offset_x, grid_offset_y, ambient_brightness) VALUES (?, ?, ?, ?, 0, 0, 0, 100)`,
@@ -125,13 +118,11 @@ export function LeftSidebar() {
       }
       addMap(newMap)
       setActiveMap(newMap.id)
-      setAddingMap(false)
-      setMapName('')
 
       // Auto-detect grid size from image
-      detectGrid(asset.path).then((result) => {
-        if (result.confidence > 0.3 && result.gridSize > 10) {
-          handleGridChange(result.gridType, result.gridSize, undefined, 0, 0)
+      detectGrid(asset.path).then((detected) => {
+        if (detected.confidence > 0.3 && detected.gridSize > 10) {
+          handleGridChange(detected.gridType, detected.gridSize, undefined, 0, 0)
         }
       }).catch(() => { /* ignore detection errors */ })
     } catch (err) {
@@ -146,7 +137,6 @@ export function LeftSidebar() {
       const pdfData = await window.electronAPI.importPdf(activeCampaignId)
       if (!pdfData) return
 
-      // Render PDF first page in renderer using pdfjs-dist
       let imagePath: string
       try {
         imagePath = await renderPdfToImage(pdfData.data, pdfData.originalName, activeCampaignId)
@@ -155,11 +145,8 @@ export function LeftSidebar() {
         return
       }
 
-      // Auto-name from file if no name was entered
-      let finalMapName = mapName.trim()
-      if (!finalMapName && pdfData.originalName) {
-        finalMapName = pdfData.originalName.replace(/\.[^/.]+$/, "") || 'Neue Karte'
-      }
+      // Auto-name from filename
+      const finalMapName = pdfData.originalName.replace(/\.[^/.]+$/, '') || 'Neue Karte'
 
       const result = await window.electronAPI.dbRun(
         `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, grid_offset_x, grid_offset_y, ambient_brightness) VALUES (?, ?, ?, ?, 0, 0, 0, 100)`,
@@ -184,12 +171,10 @@ export function LeftSidebar() {
       }
       addMap(newMap)
       setActiveMap(newMap.id)
-      setAddingMap(false)
-      setMapName('')
 
-      detectGrid(imagePath).then((result) => {
-        if (result.confidence > 0.3 && result.gridSize > 10) {
-          handleGridChange(result.gridType, result.gridSize, undefined, 0, 0)
+      detectGrid(imagePath).then((detected) => {
+        if (detected.confidence > 0.3 && detected.gridSize > 10) {
+          handleGridChange(detected.gridType, detected.gridSize, undefined, 0, 0)
         }
       }).catch(() => { /* ignore detection errors */ })
     } catch (err) {
@@ -327,46 +312,24 @@ export function LeftSidebar() {
           />
         ))}
 
-        {addingMap ? (
-          <div style={{ marginTop: 'var(--sp-2)' }}>
-            <input
-              className="input"
-              autoFocus
-              placeholder={t('sidebar.left.mapNamePlaceholder')}
-              value={mapName}
-              onChange={(e) => setMapName(e.target.value)}
-              style={{ marginBottom: 'var(--sp-2)' }}
-              onKeyDown={(e) => {
-                if (e.key === 'Escape') { setAddingMap(false); setMapName('') }
-              }}
-            />
-            <div style={{ display: 'flex', gap: 'var(--sp-1)', flexWrap: 'wrap' }}>
-              <button
-                className="btn btn-primary"
-                style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-xs)' }}
-                onClick={handleAddMap}
-              >
-                {t('sidebar.left.chooseImage')}
-              </button>
-              <button
-                className="btn btn-ghost"
-                style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-xs)' }}
-                onClick={handleAddMapFromPdf}
-              >
-                {t('sidebar.left.choosePdf')}
-              </button>
-              <button className="btn btn-ghost" onClick={() => { setAddingMap(false); setMapName('') }}>✕</button>
-            </div>
-          </div>
-        ) : (
+        <div style={{ display: 'flex', gap: 'var(--sp-1)', marginTop: 'var(--sp-2)' }}>
           <button
             className="btn btn-ghost"
-            style={{ width: '100%', justifyContent: 'center', marginTop: 'var(--sp-2)', fontSize: 'var(--text-xs)' }}
-            onClick={() => setAddingMap(true)}
+            style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-xs)' }}
+            onClick={handleAddMap}
+            title="Bild-Datei als Karte importieren (Name wird aus Dateiname übernommen)"
           >
-            {t('sidebar.left.addMap')}
+            🖼 {t('sidebar.left.addMap')}
           </button>
-        )}
+          <button
+            className="btn btn-ghost"
+            style={{ justifyContent: 'center', fontSize: 'var(--text-xs)', padding: '4px 8px' }}
+            onClick={handleAddMapFromPdf}
+            title="PDF als Karte importieren"
+          >
+            📄 PDF
+          </button>
+        </div>
       </div>
 
       {/* ── Grid settings (only when a map is active) ────────────────────────────── */}
@@ -410,23 +373,39 @@ export function LeftSidebar() {
                 <button
                   className="btn btn-ghost"
                   style={{ fontSize: 'var(--text-xs)', padding: '2px 6px', marginLeft: 'var(--sp-1)' }}
+                  disabled={gridDetecting}
                   onClick={async () => {
                     if (!activeMap?.imagePath) return
+                    setGridDetecting(true)
+                    setGridDetectMsg(null)
                     try {
-                      const result = await detectGrid(activeMap.imagePath)
-                      if (result.confidence > 0.2 && result.gridSize > 10) {
-                        handleGridChange(result.gridType, result.gridSize, undefined, 0, 0)
+                      const detected = await detectGrid(activeMap.imagePath)
+                      if (detected.confidence > 0.2 && detected.gridSize > 10) {
+                        handleGridChange(detected.gridType, detected.gridSize, undefined, 0, 0)
+                        setGridDetectMsg({ text: `✓ ${detected.gridType}, ${detected.gridSize}px`, ok: true })
                       } else {
-                        alert('Kein Raster erkannt. Bitte manuell einstellen.')
+                        setGridDetectMsg({ text: '✕ Kein Raster erkannt', ok: false })
                       }
                     } catch (err) {
                       console.error('[LeftSidebar] grid detect failed:', err)
+                      setGridDetectMsg({ text: '✕ Fehler', ok: false })
+                    } finally {
+                      setGridDetecting(false)
                     }
                   }}
                   title="Raster automatisch erkennen"
                 >
-                  🔍 Erkennen
+                  {gridDetecting ? '⏳' : '🔍'} Erkennen
                 </button>
+                {gridDetectMsg && (
+                  <span style={{
+                    fontSize: 'var(--text-xs)',
+                    color: gridDetectMsg.ok ? 'var(--success)' : 'var(--warning)',
+                    whiteSpace: 'nowrap',
+                  }}>
+                    {gridDetectMsg.text}
+                  </span>
+                )}
               </div>
             )}
 

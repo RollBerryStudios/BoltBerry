@@ -5,6 +5,7 @@ import { useCampaignStore } from '../../stores/campaignStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useInitiativeStore } from '../../stores/initiativeStore'
+import { useUndoStore } from '../../stores/undoStore'
 import { MonitorDialog } from '../MonitorDialog'
 import clsx from 'clsx'
 import logoSquare from '../../assets/boltberry-logo.png'
@@ -114,12 +115,15 @@ const PRIMARY_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut:
   { id: 'token',   icon: '⬤',  labelKey: 'toolbar.tools.token',   shortcut: 'T' },
 ]
 
-const FOG_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
-  { id: 'fog-brush',       icon: '🖌', labelKey: 'toolbar.tools.fogBrush',       shortcut: 'B' },
-  { id: 'fog-rect',        icon: '▭', labelKey: 'toolbar.tools.fogRect',        shortcut: 'F' },
-  { id: 'fog-polygon',     icon: '⬡', labelKey: 'toolbar.tools.fogPolygon',     shortcut: 'P' },
-  { id: 'fog-cover',       icon: '▮', labelKey: 'toolbar.tools.fogCover',       shortcut: 'C' },
-  { id: 'fog-brush-cover', icon: '✏', labelKey: 'toolbar.tools.fogBrushCover',  shortcut: 'X' },
+const FOG_DIRECT_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
+  { id: 'fog-brush', icon: '🖌', labelKey: 'toolbar.tools.fogBrush', shortcut: 'B' },
+  { id: 'fog-rect',  icon: '▭',  labelKey: 'toolbar.tools.fogRect',  shortcut: 'F' },
+]
+
+const FOG_GROUP_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
+  { id: 'fog-polygon',     icon: '⬡', labelKey: 'toolbar.tools.fogPolygon',    shortcut: 'P' },
+  { id: 'fog-cover',       icon: '▮', labelKey: 'toolbar.tools.fogCover',      shortcut: 'C' },
+  { id: 'fog-brush-cover', icon: '✏', labelKey: 'toolbar.tools.fogBrushCover', shortcut: 'X' },
 ]
 
 const MEASURE_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
@@ -175,6 +179,11 @@ export function Toolbar() {
   const [showMonitorDialog, setShowMonitorDialog] = useState(false)
   const [cameraSent, setCameraSent] = useState(false)
   const zoomPercent = Math.round(useMapTransformStore((s) => s.scale / s.fitScale * 100))
+  const canUndo = useUndoStore((s) => s.undoStack.length > 0)
+  const canRedo = useUndoStore((s) => s.redoStack.length > 0)
+  const lastUndoLabel = useUndoStore((s) => s.undoStack[s.undoStack.length - 1]?.label ?? '')
+  const lastRedoLabel = useUndoStore((s) => s.redoStack[0]?.label ?? '')
+  const { undo, redo } = useUndoStore()
 
   const activeCampaignName = campaigns.find((c) => c.id === activeCampaignId)?.name ?? ''
 
@@ -307,13 +316,25 @@ export function Toolbar() {
       ))}
 
       {showFogTools && (
-        <ToolGroup
-          tools={FOG_TOOLS}
-          activeTool={activeTool}
-          groupIcon="🖌"
-          groupLabelKey="toolbar.tools.fogGroup"
-          onSelect={handleToolClick}
-        />
+        <>
+          {FOG_DIRECT_TOOLS.map((tool) => (
+            <button
+              key={tool.id}
+              className={clsx('tool-btn', activeTool === tool.id && 'active')}
+              title={`${t(tool.labelKey)} [${tool.shortcut}]`}
+              onClick={() => handleToolClick(tool.id)}
+            >
+              {tool.icon}
+            </button>
+          ))}
+          <ToolGroup
+            tools={FOG_GROUP_TOOLS}
+            activeTool={activeTool}
+            groupIcon="⬡"
+            groupLabelKey="toolbar.tools.fogGroup"
+            onSelect={handleToolClick}
+          />
+        </>
       )}
 
       {/* Fog brush size — only when a brush fog tool is active */}
@@ -474,6 +495,28 @@ export function Toolbar() {
         style={blackoutActive ? { color: 'var(--warning)' } : undefined}
       >
         🌚
+      </button>
+
+      <Divider />
+
+      {/* ── SECTION: Undo / Redo ────────────────────────────────────────── */}
+      <button
+        className="tool-btn"
+        title={canUndo ? `Rückgängig: ${lastUndoLabel} (Ctrl+Z)` : 'Nichts rückgängig zu machen'}
+        disabled={!canUndo}
+        onClick={() => undo()}
+        style={!canUndo ? { opacity: 0.35 } : undefined}
+      >
+        ↩
+      </button>
+      <button
+        className="tool-btn"
+        title={canRedo ? `Wiederholen: ${lastRedoLabel} (Ctrl+Y)` : 'Nichts zu wiederholen'}
+        disabled={!canRedo}
+        onClick={() => redo()}
+        style={!canRedo ? { opacity: 0.35 } : undefined}
+      >
+        ↪
       </button>
 
       <Divider />

@@ -288,8 +288,13 @@ export function CanvasArea() {
         <div className="empty-state">
           <div className="empty-state-icon">🗺️</div>
           <div className="empty-state-title">Keine Karte geladen</div>
-          <div className="empty-state-desc">
-            Wähle eine Karte aus der linken Sidebar oder füge eine neue hinzu
+          <div className="empty-state-desc" style={{ maxWidth: 320 }}>
+            <ol style={{ textAlign: 'left', paddingLeft: 20, margin: '8px 0 0', lineHeight: 2 }}>
+              <li>Öffne die <strong>linke Sidebar</strong> (◧ oben links)</li>
+              <li>Klicke auf <strong>🖼 Karte hinzufügen</strong> und wähle ein Bild</li>
+              <li>Passe Raster &amp; Felder in den Karteneinstellungen an</li>
+              <li>Wechsle in den <strong>▶ Spiel-Modus</strong> und starte die Session</li>
+            </ol>
           </div>
         </div>
       ) : (
