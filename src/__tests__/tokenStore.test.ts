@@ -8,6 +8,7 @@ function makeToken(id: number, x = 0, y = 0): TokenRecord {
     x, y, size: 1, hpCurrent: 10, hpMax: 10, visibleToPlayers: true,
     rotation: 0, locked: false, zIndex: 0, markerColor: null, ac: null,
     notes: null, statusEffects: null, faction: 'party', showName: true,
+    lightRadius: 0, lightColor: '#ffcc44',
   }
 }
 
