@@ -16,27 +16,20 @@ export function PlayerEyeOverlay({ map, stageRef, canvasSize }: PlayerEyeOverlay
   const scale = useMapTransformStore((s) => s.scale)
   const offsetX = useMapTransformStore((s) => s.offsetX)
   const offsetY = useMapTransformStore((s) => s.offsetY)
-  const { activeMapId } = useCampaignStore()
+  const activeMapId = useCampaignStore((s) => s.activeMapId)
 
-  const hiddenTokens = useMemo(() =>
-    tokens.filter((t) => !t.visibleToPlayers && t.mapId === activeMapId),
-    [tokens, activeMapId]
-  )
-
-  const visibleCount = useMemo(() =>
-    tokens.filter((t) => t.visibleToPlayers && t.mapId === activeMapId).length,
-    [tokens, activeMapId]
-  )
-
-  const enemyVisible = useMemo(() =>
-    tokens.filter((t) => t.visibleToPlayers && (t.faction === 'enemy' || t.faction === 'neutral') && t.mapId === activeMapId).length,
-    [tokens, activeMapId]
-  )
-
-  const totalCount = useMemo(() =>
-    tokens.filter((t) => t.mapId === activeMapId).length,
-    [tokens, activeMapId]
-  )
+  // Single pass over the token list to derive all needed values
+  const { hiddenTokens, visibleCount, enemyVisible, totalCount } = useMemo(() => {
+    const mapTokens = tokens.filter((t) => t.mapId === activeMapId)
+    const hidden = mapTokens.filter((t) => !t.visibleToPlayers)
+    const visible = mapTokens.filter((t) => t.visibleToPlayers)
+    return {
+      hiddenTokens: hidden,
+      visibleCount: visible.length,
+      enemyVisible: visible.filter((t) => t.faction === 'enemy' || t.faction === 'neutral').length,
+      totalCount: mapTokens.length,
+    }
+  }, [tokens, activeMapId])
 
   const markers = useMemo(() =>
     hiddenTokens.map((t) => {

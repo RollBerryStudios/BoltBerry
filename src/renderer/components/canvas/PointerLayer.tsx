@@ -10,8 +10,8 @@ interface PointerLayerProps {
 }
 
 export function PointerLayer({ stageRef }: PointerLayerProps) {
-  const { activeTool } = useUIStore()
-  const { screenToMap } = useMapTransformStore()
+  const activeTool = useUIStore((s) => s.activeTool)
+  const screenToMap = useMapTransformStore((s) => s.screenToMap)
   const layerRef = useRef<Konva.Layer>(null)
 
   // Destroy all imperatively-created Konva nodes when component unmounts

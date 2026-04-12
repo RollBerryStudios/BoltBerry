@@ -8,7 +8,8 @@ import { ErrorBoundary } from './ErrorBoundary'
 import clsx from 'clsx'
 
 export function AppLayout() {
-  const { leftSidebarOpen, rightSidebarOpen } = useUIStore()
+  const leftSidebarOpen = useUIStore((s) => s.leftSidebarOpen)
+  const rightSidebarOpen = useUIStore((s) => s.rightSidebarOpen)
 
   return (
     <div

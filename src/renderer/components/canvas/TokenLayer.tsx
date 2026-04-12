@@ -1,4 +1,4 @@
-import { RefObject, useState, useRef, useMemo, useCallback, memo } from 'react'
+import { RefObject, useState, useRef, useMemo, useCallback, useEffect, memo } from 'react'
 import { Layer, Group, Image as KonvaImage, Rect, Text, Circle, Line } from 'react-konva'
 import { Html } from 'react-konva-utils'
 import Konva from 'konva'
@@ -92,6 +92,23 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   // Ref for values read by stable callbacks (avoids recreating closures on every render)
   const latestRef = useRef({ tokens, selectedTokenIds, scale, offsetX, offsetY, gridSnap, map, editName, editHpCurrent, editHpMax, editAc })
   latestRef.current = { tokens, selectedTokenIds, scale, offsetX, offsetY, gridSnap, map, editName, editHpCurrent, editHpMax, editAc }
+
+  // Guard against rapid double-paste from context menu
+  const pasteInProgressRef = useRef(false)
+
+  // Ref-based context menu visibility for the wheel handler (avoids re-registering on every open/close)
+  const contextMenuVisibleRef = useRef(false)
+  contextMenuVisibleRef.current = contextMenu.visible
+
+  // Close the context menu when the user scrolls (pans) the canvas
+  useEffect(() => {
+    const stage = stageRef.current
+    if (!stage) return
+    const container = stage.container()
+    const onWheel = () => { if (contextMenuVisibleRef.current) closeContextMenu() }
+    container.addEventListener('wheel', onWheel, { passive: true })
+    return () => container.removeEventListener('wheel', onWheel)
+  }, [closeContextMenu])
 
   const isDraggable = activeTool === 'select'
   const sortedTokens = useMemo(() => [...tokens].sort((a, b) => a.zIndex - b.zIndex), [tokens])
@@ -491,9 +508,11 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   }
 
   async function handlePasteTokens() {
+    if (pasteInProgressRef.current) return
+    pasteInProgressRef.current = true
     closeContextMenu()
-    if (!window.electronAPI) return
-    if (clipboardTokens.length === 0) return
+    if (!window.electronAPI) { pasteInProgressRef.current = false; return }
+    if (clipboardTokens.length === 0) { pasteInProgressRef.current = false; return }
     const stage = stageRef.current
     if (!stage) return
     const pos = stage.getPointerPosition()
@@ -523,6 +542,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
       }
     }
     broadcastTokens(useTokenStore.getState().tokens)
+    pasteInProgressRef.current = false
   }
 
   async function handleToggleVisibility(token: TokenRecord) {

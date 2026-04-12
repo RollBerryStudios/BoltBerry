@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useInitiativeStore } from '../../../stores/initiativeStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
@@ -88,7 +88,7 @@ async function quickTokenUpdate(tokenId: number, updates: Record<string, any>) {
 export function InitiativePanel() {
   const { t } = useTranslation()
   const { entries, round, addEntry, removeEntry, updateEntry, reorderEntries, sortEntries, nextTurn, resetCombat, addTimer, removeTimer } = useInitiativeStore()
-  const { activeMapId } = useCampaignStore()
+  const activeMapId = useCampaignStore((s) => s.activeMapId)
   const tokens = useTokenStore((s) => s.tokens)
   const [name, setName] = useState('')
   const [roll, setRoll] = useState('')
@@ -104,11 +104,12 @@ export function InitiativePanel() {
   const nameInputRef = useRef<HTMLInputElement>(null)
   const suggestionsRef = useRef<HTMLDivElement>(null)
 
-  const mapTokens = tokens
-
-  const filteredTokens = name.trim()
-    ? mapTokens.filter((t) => t.name.toLowerCase().includes(name.toLowerCase()))
-    : mapTokens
+  const filteredTokens = useMemo(() =>
+    name.trim()
+      ? tokens.filter((t) => t.name.toLowerCase().includes(name.toLowerCase()))
+      : tokens,
+    [tokens, name]
+  )
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {

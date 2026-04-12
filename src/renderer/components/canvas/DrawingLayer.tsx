@@ -1,4 +1,4 @@
-import { useState, useEffect, RefObject } from 'react'
+import { useState, useEffect, useMemo, RefObject } from 'react'
 import { Layer, Line, Rect, Circle, Text as KonvaText } from 'react-konva'
 import Konva from 'konva'
 import { useUIStore } from '../../stores/uiStore'
@@ -24,9 +24,13 @@ interface DrawingLayerProps {
 const DRAWING_TOOLS = new Set<string>(['draw-freehand', 'draw-rect', 'draw-circle', 'draw-text'])
 
 export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
-  const { activeTool } = useUIStore()
-  const { drawColor, drawWidth } = useUIStore()
-  const { scale, offsetX, offsetY, screenToMap } = useMapTransformStore()
+  const activeTool = useUIStore((s) => s.activeTool)
+  const drawColor = useUIStore((s) => s.drawColor)
+  const drawWidth = useUIStore((s) => s.drawWidth)
+  const scale = useMapTransformStore((s) => s.scale)
+  const offsetX = useMapTransformStore((s) => s.offsetX)
+  const offsetY = useMapTransformStore((s) => s.offsetY)
+  const screenToMap = useMapTransformStore((s) => s.screenToMap)
   const [drawings, setDrawings] = useState<Drawing[]>([])
   const [currentPath, setCurrentPath] = useState<number[]>([])
   const [loadedMapId, setLoadedMapId] = useState<number | null>(null)
@@ -105,7 +109,9 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
     }
   }
 
-  function renderDrawing(d: Drawing) {
+  // Memoized rendered nodes: only recompute when drawings or transform changes,
+  // not on tool/color/currentPath changes.
+  const renderedDrawings = useMemo(() => drawings.map((d) => {
     if (d.type === 'freehand' && d.points.length >= 4) {
       const screenPoints = d.points.flatMap((p, i) => i % 2 === 0 ? p * scale + offsetX : p * scale + offsetY)
       return <Line key={d.id} points={screenPoints} stroke={d.color} strokeWidth={d.width * scale} listening={false} />
@@ -135,7 +141,7 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
         fontSize={14 * scale} fill={d.color} listening={false} />
     }
     return null
-  }
+  }), [drawings, scale, offsetX, offsetY])
 
   function renderCurrentPath() {
     if (currentPath.length < 2) return null
@@ -171,7 +177,7 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
-      {drawings.map(renderDrawing)}
+      {renderedDrawings}
       {isDrawingActive && renderCurrentPath()}
     </Layer>
   )

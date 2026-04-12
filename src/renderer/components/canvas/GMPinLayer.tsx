@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, RefObject } from 'react'
+import { useState, useEffect, useCallback, useRef, RefObject } from 'react'
 import { Layer, Group, Text, Circle, Rect } from 'react-konva'
 import { Html } from 'react-konva-utils'
 import Konva from 'konva'
@@ -22,11 +22,15 @@ interface GMPinLayerProps {
 export const GM_PIN_ADD_EVENT = 'gm-pin-add'
 
 export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
-  const { scale, offsetX, offsetY } = useMapTransformStore()
+  const scale = useMapTransformStore((s) => s.scale)
+  const offsetX = useMapTransformStore((s) => s.offsetX)
+  const offsetY = useMapTransformStore((s) => s.offsetY)
   const [pins, setPins] = useState<GMPin[]>([])
   const [editingPinId, setEditingPinId] = useState<number | null>(null)
   const [editingLabel, setEditingLabel] = useState('')
   const [selectedPinId, setSelectedPinId] = useState<number | null>(null)
+  const selectedPinIdRef = useRef<number | null>(null)
+  selectedPinIdRef.current = selectedPinId
   const [loadedMapId, setLoadedMapId] = useState<number | null>(null)
 
   useEffect(() => {
@@ -58,16 +62,17 @@ export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
     return () => window.removeEventListener(GM_PIN_ADD_EVENT, handler as EventListener)
   }, [addPinAt])
 
+  // Use ref so we don't re-register the listener on every pin selection change
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Delete' && selectedPinId !== null) {
-        handleDeletePin(selectedPinId)
+      if (e.key === 'Delete' && selectedPinIdRef.current !== null) {
+        handleDeletePin(selectedPinIdRef.current)
         setSelectedPinId(null)
       }
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [selectedPinId])
+  }, [])
 
   async function handleDeletePin(id: number) {
     try {

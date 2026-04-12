@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import { useTokenStore } from '../../../stores/tokenStore'
 import { useMapTransformStore } from '../../../stores/mapTransformStore'
@@ -19,7 +19,9 @@ const TYPE_LABELS: Record<string, string> = {
 }
 
 export function AssetBrowser() {
-  const { activeCampaignId, activeMapId, activeMaps } = useCampaignStore()
+  const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
+  const activeMapId = useCampaignStore((s) => s.activeMapId)
+  const activeMaps = useCampaignStore((s) => s.activeMaps)
   const [assets, setAssets] = useState<AssetRow[]>([])
   const [filter, setFilter] = useState<string>('all')
 
@@ -93,7 +95,10 @@ export function AssetBrowser() {
     }
   }
 
-  const filtered = filter === 'all' ? assets : assets.filter((a) => a.type === filter)
+  const filtered = useMemo(
+    () => filter === 'all' ? assets : assets.filter((a) => a.type === filter),
+    [assets, filter]
+  )
   const imageTypes = ['map', 'token', 'atmosphere']
 
   return (

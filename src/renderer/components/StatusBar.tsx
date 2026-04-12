@@ -6,8 +6,11 @@ import { APP_VERSION } from '@shared/version'
 
 export function StatusBar() {
   const { t, i18n } = useTranslation()
-  const { playerConnected, blackoutActive, sessionMode } = useUIStore()
-  const { entries, round } = useInitiativeStore()
+  const playerConnected = useUIStore((s) => s.playerConnected)
+  const blackoutActive = useUIStore((s) => s.blackoutActive)
+  const sessionMode = useUIStore((s) => s.sessionMode)
+  const entries = useInitiativeStore((s) => s.entries)
+  const round = useInitiativeStore((s) => s.round)
   const { saveState, lastSaved } = useAppStore()
   const current = entries.find((e) => e.currentTurn)
 
