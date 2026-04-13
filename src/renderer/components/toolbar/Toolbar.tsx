@@ -6,6 +6,7 @@ import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useInitiativeStore } from '../../stores/initiativeStore'
 import { useUndoStore } from '../../stores/undoStore'
+import { useFogStore } from '../../stores/fogStore'
 import { MonitorDialog } from '../MonitorDialog'
 import clsx from 'clsx'
 import logoSquare from '../../assets/boltberry-logo.png'
@@ -194,6 +195,7 @@ export function Toolbar() {
     useCampaignStore.getState().setActiveMap(null)
     useTokenStore.getState().setTokens([])
     useInitiativeStore.getState().setEntries([])
+    useFogStore.getState().clearHistory()
     useUIStore.getState().setWorkMode('prep')
     useUIStore.getState().setSessionMode('prep')
   }

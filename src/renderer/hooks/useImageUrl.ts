@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
 
+// Sentinel stored in cache when a path was fetched but returned null (missing file).
+// Prevents repeated IPC calls for the same broken path.
+const MISSING = '__missing__'
 const cache = new Map<string, string>()
 
 export function invalidateImageUrlCache(src: string | null) {
@@ -18,7 +21,8 @@ export function useImageUrl(src: string | null): string | null {
     }
 
     if (cache.has(src)) {
-      setUrl(cache.get(src)!)
+      const cached = cache.get(src)!
+      setUrl(cached === MISSING ? null : cached)
       return
     }
 
@@ -37,9 +41,15 @@ export function useImageUrl(src: string | null): string | null {
         cache.set(src, imageData)
         setUrl(imageData)
       } else {
+        cache.set(src, MISSING)
         setUrl(null)
       }
-    }).catch(() => { if (!cancelled) setUrl(null) })
+    }).catch(() => {
+      if (!cancelled) {
+        cache.set(src, MISSING)
+        setUrl(null)
+      }
+    })
     return () => { cancelled = true }
   }, [src])
 
