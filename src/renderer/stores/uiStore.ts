@@ -102,7 +102,7 @@ export const useUIStore = create<UIState>((set) => ({
   appMode: 'map',
   sessionMode: 'session',
   theme: 'dark',
-  language: (localStorage.getItem('boltberry-lang') as AppLanguage | null) ?? 'de',
+  language: (() => { try { return (localStorage.getItem('boltberry-lang') as AppLanguage | null) ?? 'de' } catch { return 'de' as AppLanguage } })(),
   atmosphereImagePath: null,
   selectedTokenId: null,
   selectedTokenIds: [],

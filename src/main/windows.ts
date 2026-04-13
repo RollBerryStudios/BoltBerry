@@ -1,5 +1,6 @@
 import { BrowserWindow, screen, app } from 'electron'
 import { join } from 'path'
+import { IPC } from '../shared/ipc-types'
 
 // Resolve preload path relative to the app root (works in both dev and packaged)
 function preloadPath(): string {
@@ -107,7 +108,7 @@ export function createPlayerWindow(): BrowserWindow | null {
 
   playerWindow.on('closed', () => {
     playerWindow = null
-    getDMWindow()?.webContents.send('dm:player-window-closed')
+    getDMWindow()?.webContents.send(IPC.DM_PLAYER_WINDOW_CLOSED)
   })
 
   return playerWindow

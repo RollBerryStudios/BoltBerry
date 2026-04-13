@@ -11,6 +11,11 @@ export const IPC = {
   PLAYER_INITIATIVE: 'player:initiative',
   PLAYER_WEATHER: 'player:weather',
 
+  // Player → Main → DM (internal sync handshake)
+  PLAYER_REQUEST_SYNC: 'player:request-sync',
+  DM_REQUEST_FULL_SYNC: 'dm:request-full-sync',
+  DM_PLAYER_WINDOW_CLOSED: 'dm:player-window-closed',
+
   // DM ↔ Main
   GET_MONITORS: 'app:get-monitors',
   SET_PLAYER_MONITOR: 'app:set-player-monitor',
