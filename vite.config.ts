@@ -21,13 +21,26 @@ export default defineConfig({
         player: resolve(__dirname, 'src/renderer/player.html'),
       },
       output: {
-        // Explicit vendor chunks prevent Rollup from creating hybrid shared
-        // chunks that mix vendor and application code — the root cause of
-        // "Cannot access X before initialization" TDZ crashes in production.
-        manualChunks: {
-          'vendor-react':  ['react', 'react-dom'],
-          'vendor-konva':  ['konva', 'react-konva'],
-          'vendor-i18n':   ['i18next', 'react-i18next'],
+        // Path-based manualChunks catches every sub-entry of each package
+        // (e.g. react/jsx-runtime, konva/lib/...) — not just the main entry.
+        //
+        // The previous string-based form only pinned top-level entry points,
+        // so react/jsx-runtime fell into the shared fogUtils chunk and Rollup
+        // routed its React import through vendor-i18n instead of vendor-react.
+        // That cross-chunk indirection was the root cause of every
+        // "Cannot access X before initialization" TDZ crash in production.
+        manualChunks(id) {
+          // react-dom and scheduler must be matched before the 'react/' check
+          // (react-dom path does NOT contain '/react/' so order doesn't matter,
+          // but being explicit avoids surprises when packages rename internals)
+          if (id.includes('/node_modules/react-dom/') ||
+              id.includes('/node_modules/scheduler/')) return 'vendor-react'
+          if (id.includes('/node_modules/react/'))      return 'vendor-react'
+          if (id.includes('/node_modules/react-konva/') ||
+              id.includes('/node_modules/konva/') ||
+              id.includes('/node_modules/react-konva-utils/')) return 'vendor-konva'
+          if (id.includes('/node_modules/react-i18next/') ||
+              id.includes('/node_modules/i18next/'))    return 'vendor-i18n'
         },
       },
     },
