@@ -41,7 +41,7 @@ export function HandoutsPanel() {
     const title = addingTitle.trim() || 'Handout'
     let imagePath: string | null = null
     try {
-      const asset = await window.electronAPI.importFile('map')
+      const asset = await window.electronAPI.importFile('handout')
       if (asset) imagePath = asset.path
 
       const result = await window.electronAPI.dbRun(

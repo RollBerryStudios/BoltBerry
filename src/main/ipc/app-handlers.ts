@@ -14,6 +14,7 @@ const ASSET_EXTENSIONS = {
   map: ['.png', '.jpg', '.jpeg', '.webp'],
   token: ['.png', '.jpg', '.jpeg', '.webp'],
   atmosphere: ['.png', '.jpg', '.jpeg', '.webp', '.gif'],
+  handout: ['.png', '.jpg', '.jpeg', '.webp', '.gif'],
   audio: ['.mp3', '.ogg', '.wav', '.m4a'],
 }
 
@@ -196,10 +197,10 @@ export function registerAppHandlers(): void {
   })
 
   // Import file dialog \u2192 copy to AppData, return stored path
-  ipcMain.handle(IPC.IMPORT_FILE, async (_event, type: 'map' | 'token' | 'atmosphere' | 'audio', campaignId?: number) => {
+  ipcMain.handle(IPC.IMPORT_FILE, async (_event, type: 'map' | 'token' | 'atmosphere' | 'handout' | 'audio', campaignId?: number) => {
     const extensions = ASSET_EXTENSIONS[type]
-    const titles = { map: 'Karte', token: 'Token', atmosphere: 'Atmosph\u00e4re-Bild', audio: 'Audio-Datei' }
-    const filterNames = { map: 'Bilder', token: 'Bilder', atmosphere: 'Bilder', audio: 'Audio' }
+    const titles = { map: 'Karte', token: 'Token', atmosphere: 'Atmosph\u00e4re-Bild', handout: 'Handout-Bild', audio: 'Audio-Datei' }
+    const filterNames = { map: 'Bilder', token: 'Bilder', atmosphere: 'Bilder', handout: 'Bilder', audio: 'Audio' }
     const result = await dialog.showOpenDialog({
       title: `${titles[type]} importieren`,
       filters: [

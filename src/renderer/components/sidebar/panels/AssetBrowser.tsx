@@ -8,7 +8,7 @@ interface AssetRow {
   id: number
   originalName: string
   storedPath: string
-  type: 'map' | 'token' | 'atmosphere' | 'audio'
+  type: 'map' | 'token' | 'atmosphere' | 'handout' | 'audio'
 }
 
 const TYPE_LABELS: Record<string, string> = {
@@ -36,7 +36,7 @@ export function AssetBrowser() {
     const rows = await window.electronAPI.dbQuery<{
       id: number; original_name: string; stored_path: string; type: string
     }>(
-      'SELECT id, original_name, stored_path, type FROM assets WHERE campaign_id = ? OR campaign_id IS NULL ORDER BY id DESC',
+      'SELECT id, original_name, stored_path, type FROM assets WHERE (campaign_id = ? OR campaign_id IS NULL) AND type != \'handout\' ORDER BY id DESC',
       [activeCampaignId ?? -1]
     )
     setAssets(rows.map((r) => ({

@@ -35,7 +35,7 @@ const dmApi = {
   deleteTokenConfirm: (tokenName: string) => ipcRenderer.invoke(IPC.DELETE_TOKEN_CONFIRM, tokenName),
 
   // File operations
-  importFile: (type: 'map' | 'token' | 'atmosphere' | 'audio', campaignId?: number) =>
+  importFile: (type: 'map' | 'token' | 'atmosphere' | 'handout' | 'audio', campaignId?: number) =>
     ipcRenderer.invoke(IPC.IMPORT_FILE, type, campaignId),
   importPdf: (campaignId: number) =>
     ipcRenderer.invoke(IPC.IMPORT_PDF, campaignId),
