@@ -22,16 +22,16 @@ const dmApi = {
     ipcRenderer.invoke(IPC.SET_PLAYER_MONITOR, displayId),
   openPlayerWindow: () => ipcRenderer.invoke(IPC.OPEN_PLAYER_WINDOW),
   closePlayerWindow: () => ipcRenderer.invoke(IPC.CLOSE_PLAYER_WINDOW),
-  getDefaultUserDataFolder: () => ipcRenderer.invoke('GET_DEFAULT_USER_DATA_FOLDER'),
-  chooseFolder: () => ipcRenderer.invoke('app:choose-folder'),
-  setUserDataFolder: (path: string) => ipcRenderer.invoke('SET_USER_DATA_FOLDER', path),
-  openContentFolder: () => ipcRenderer.invoke('OPEN_CONTENT_FOLDER'),
-  getImageAsBase64: (path: string) => ipcRenderer.invoke('GET_IMAGE_AS_BASE64', path),
-  getUserDataPath: () => ipcRenderer.invoke('GET_USER_DATA_PATH'),
-  rescanContentFolder: () => ipcRenderer.invoke('RESCAN_CONTENT_FOLDER'),
+  getDefaultUserDataFolder: () => ipcRenderer.invoke(IPC.GET_DEFAULT_USER_DATA_FOLDER),
+  chooseFolder: () => ipcRenderer.invoke(IPC.CHOOSE_FOLDER),
+  setUserDataFolder: (path: string) => ipcRenderer.invoke(IPC.SET_USER_DATA_FOLDER, path),
+  openContentFolder: () => ipcRenderer.invoke(IPC.OPEN_CONTENT_FOLDER),
+  getImageAsBase64: (path: string) => ipcRenderer.invoke(IPC.GET_IMAGE_AS_BASE64, path),
+  getUserDataPath: () => ipcRenderer.invoke(IPC.GET_USER_DATA_PATH),
+  rescanContentFolder: () => ipcRenderer.invoke(IPC.RESCAN_CONTENT_FOLDER),
   showContextMenu: (items: { label: string; action: string; danger?: boolean }[]) =>
     ipcRenderer.invoke(IPC.SHOW_CONTEXT_MENU, items),
-  deleteMapConfirm: (mapName: string) => ipcRenderer.invoke('DELETE_MAP_CONFIRM', mapName),
+  deleteMapConfirm: (mapName: string) => ipcRenderer.invoke(IPC.DELETE_MAP_CONFIRM, mapName),
   deleteTokenConfirm: (tokenName: string) => ipcRenderer.invoke(IPC.DELETE_TOKEN_CONFIRM, tokenName),
 
   // File operations
@@ -87,6 +87,8 @@ const dmApi = {
     ipcRenderer.invoke(IPC.DB_QUERY, sql, params),
   dbRun: (sql: string, params?: unknown[]): Promise<{ lastInsertRowid: number; changes: number }> =>
     ipcRenderer.invoke(IPC.DB_RUN, sql, params),
+  dbRunBatch: (statements: Array<{ sql: string; params?: unknown[] }>): Promise<void> =>
+    ipcRenderer.invoke(IPC.DB_RUN_BATCH, statements),
 
   // Listen for main → DM: player window requested a full state sync
   onRequestFullSync: (cb: () => void) => {
