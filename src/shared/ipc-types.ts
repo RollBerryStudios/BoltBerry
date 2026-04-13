@@ -67,6 +67,7 @@ export const IPC = {
   GET_USER_DATA_PATH: 'app:get-user-data-path',
   RESCAN_CONTENT_FOLDER: 'app:rescan-content-folder',
   DELETE_MAP_CONFIRM: 'app:delete-map-confirm',
+  CHOOSE_FOLDER: 'app:choose-folder',
 } as const
 
 // ─── Shared Data Types ─────────────────────────────────────────────────────────────────

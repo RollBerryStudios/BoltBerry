@@ -13,19 +13,20 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    setTempFolder(userDataFolder)
+    if (userDataFolder) {
+      setTempFolder(userDataFolder)
+    } else if (window.electronAPI) {
+      window.electronAPI.getDefaultUserDataFolder().then((defaultPath: string) => {
+        if (defaultPath) setTempFolder(defaultPath)
+      })
+    }
   }, [userDataFolder])
 
   async function handleChooseFolder() {
     if (!window.electronAPI) return
-    
     try {
-      const result = await window.electronAPI.importFile('atmosphere') // We'll reuse this for folder selection
-      if (result?.path) {
-        // Extract directory from the selected file path
-        const directory = result.path.substring(0, result.path.lastIndexOf('/'))
-        setTempFolder(directory)
-      }
+      const chosen = await window.electronAPI.chooseFolder()
+      if (chosen) setTempFolder(chosen)
     } catch (err) {
       console.error('[SetupWizard] folder selection failed:', err)
       setError('Ordnerauswahl fehlgeschlagen')

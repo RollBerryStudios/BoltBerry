@@ -58,6 +58,18 @@ export function registerAppHandlers(): void {
     return join(app.getPath('documents'), 'BoltBerry')
   })
 
+  // Open native folder picker — returns chosen path or null
+  ipcMain.handle(IPC.CHOOSE_FOLDER, async (event) => {
+    const win = BrowserWindow.fromWebContents(event.sender)
+    const result = await dialog.showOpenDialog(win!, {
+      title: 'Datenordner wählen',
+      defaultPath: join(app.getPath('documents'), 'BoltBerry'),
+      properties: ['openDirectory', 'createDirectory'],
+    })
+    if (result.canceled || !result.filePaths[0]) return null
+    return result.filePaths[0]
+  })
+
   // Set custom user data folder
   ipcMain.handle(IPC.SET_USER_DATA_FOLDER, (_event, dataPath: string) => {
     setCustomUserDataPath(dataPath)

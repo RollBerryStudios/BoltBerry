@@ -23,6 +23,7 @@ const dmApi = {
   openPlayerWindow: () => ipcRenderer.invoke(IPC.OPEN_PLAYER_WINDOW),
   closePlayerWindow: () => ipcRenderer.invoke(IPC.CLOSE_PLAYER_WINDOW),
   getDefaultUserDataFolder: () => ipcRenderer.invoke('GET_DEFAULT_USER_DATA_FOLDER'),
+  chooseFolder: () => ipcRenderer.invoke('app:choose-folder'),
   setUserDataFolder: (path: string) => ipcRenderer.invoke('SET_USER_DATA_FOLDER', path),
   openContentFolder: () => ipcRenderer.invoke('OPEN_CONTENT_FOLDER'),
   getImageAsBase64: (path: string) => ipcRenderer.invoke('GET_IMAGE_AS_BASE64', path),
