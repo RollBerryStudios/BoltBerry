@@ -5,7 +5,7 @@ import Konva from 'konva'
 import type { PlayerFullState, PlayerTokenState, PlayerMeasureState, FogDelta, PlayerMapState, PlayerPointer, PlayerCamera, PlayerOverlay, PlayerInitiativeEntry, WeatherType, GridType, PlayerDrawingState } from '@shared/ipc-types'
 import { useRotatedImage } from './hooks/useRotatedImage'
 import { useImageUrl } from './hooks/useImageUrl'
-import { applyOpToCtxPair } from './components/canvas/FogLayer'
+import { applyOpToCtxPair } from './utils/fogUtils'
 
 function factionColor(faction: string): string {
   switch (faction) {
