@@ -101,6 +101,13 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   const contextMenuVisibleRef = useRef(false)
   contextMenuVisibleRef.current = contextMenu.visible
 
+  // Defined early so the wheel useEffect below can safely list it as a dependency.
+  const closeContextMenu = useCallback(() => {
+    setContextMenu((m) => ({ ...m, visible: false }))
+    setMarkerSubmenuId(null)
+    setSubmenuType(null)
+  }, [])
+
   // Close the context menu when the user scrolls (pans) the canvas
   useEffect(() => {
     const stage = stageRef.current
@@ -263,12 +270,6 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     }
     setRubberBand(null)
   }
-
-  const closeContextMenu = useCallback(() => {
-    setContextMenu((m) => ({ ...m, visible: false }))
-    setMarkerSubmenuId(null)
-    setSubmenuType(null)
-  }, [])
 
   const stableStartEdit = useCallback((token: TokenRecord) => {
     setEditingId(token.id)
