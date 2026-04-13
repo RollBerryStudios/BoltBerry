@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Stage, Layer, Image as KonvaImage, Shape, Group, Circle, Rect, Text, Line } from 'react-konva'
 import Konva from 'konva'
 import type { PlayerFullState, PlayerTokenState, PlayerMeasureState, FogDelta, PlayerMapState, PlayerPointer, PlayerCamera, PlayerOverlay, PlayerInitiativeEntry, WeatherType, GridType, PlayerDrawingState } from '@shared/ipc-types'
@@ -19,7 +18,6 @@ function factionColor(faction: string): string {
 type Mode = 'idle' | 'map' | 'atmosphere' | 'blackout'
 
 export default function PlayerApp() {
-  const { t } = useTranslation()
   const [mode, setMode] = useState<Mode>('idle')
   const [mapState, setMapState] = useState<PlayerMapState | null>(null)
   const [atmospherePath, setAtmospherePath] = useState<string | null>(null)

@@ -19,6 +19,7 @@ const FORBIDDEN = [
   'useEncounterStore',  // DM encounter management
   'boltberry-lang',     // i18n locale key (from uiStore init)
   'i18next',            // i18n library
+  'useTranslation',     // i18n hook (i18n not initialized in player window)
   'toggleBlackout',     // DM-only UI action
 ]
 
