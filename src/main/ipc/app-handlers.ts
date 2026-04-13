@@ -252,14 +252,19 @@ export function registerAppHandlers(): void {
     const userDataPath = getCustomUserDataPath() || app.getPath('userData')
     const relativePath = relative(userDataPath, destPath)
 
-    // Register in assets table
-    const db = getDb()
-    const stmt = db.prepare(
-      `INSERT INTO assets (original_name, stored_path, type, campaign_id) VALUES (?, ?, ?, ?)`
-    )
-    const result2 = stmt.run(srcPath.split(/[\\/]/).pop()!, relativePath, type, campaignId ?? null)
-
-    return { id: result2.lastInsertRowid, path: relativePath }
+    // Register in assets table — clean up copied file if DB insert fails
+    try {
+      const db = getDb()
+      const stmt = db.prepare(
+        `INSERT INTO assets (original_name, stored_path, type, campaign_id) VALUES (?, ?, ?, ?)`
+      )
+      const result2 = stmt.run(srcPath.split(/[\\/]/).pop()!, relativePath, type, campaignId ?? null)
+      return { id: result2.lastInsertRowid, path: relativePath }
+    } catch (err) {
+      console.error('[AppHandlers] DB insert failed, removing orphaned file:', err)
+      try { unlinkSync(destPath) } catch {}
+      return null
+    }
   })
 
   // Import PDF \u2192 returns file bytes so renderer can render with pdfjs
@@ -386,7 +391,7 @@ export function registerAppHandlers(): void {
       message,
       detail,
       buttons: ['Abbrechen', 'OK'],
-      defaultId: 0,
+      defaultId: 1,
       cancelId: 0,
     })
     return response === 1

@@ -294,7 +294,7 @@ export function LeftSidebar() {
       <div className="sidebar-section">
         <div className="sidebar-section-title">{t('sidebar.left.mapsTitle')}</div>
 
-        {activeMaps.length === 0 && !addingMap && (
+        {activeMaps.length === 0 && (
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', padding: 'var(--sp-2) 0' }}>
             {t('sidebar.left.mapsEmpty')}
           </div>

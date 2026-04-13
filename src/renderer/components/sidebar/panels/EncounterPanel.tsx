@@ -240,6 +240,7 @@ export function EncounterPanel() {
     if (template.tokens.length === 0) return
 
     setIsSpawning(true)
+    try {
     const gridSize = useCampaignStore.getState().activeMaps.find((m) => m.id === activeMapId)?.gridSize ?? 50
 
     const centerToken = template.tokens[0]
@@ -324,8 +325,10 @@ export function EncounterPanel() {
     }
 
     broadcastTokensFromPanel()
-    setIsSpawning(false)
     showToast(`${enc.name}: ${spawnedTokenIds.length} Token gespawnt`, 'success')
+    } finally {
+      setIsSpawning(false)
+    }
   }
 
   async function handleDelete(id: number) {
