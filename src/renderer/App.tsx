@@ -56,7 +56,7 @@ export default function App() {
   return (
     <>
       {!isSetupComplete ? (
-        <SetupWizard onComplete={() => useSettingsStore.getState().setIsSetupComplete(true)} />
+        <SetupWizard onComplete={() => { /* isSetupComplete set inside wizard */ }} />
       ) : activeCampaignId ? (
         <AppLayout />
       ) : (
@@ -100,11 +100,14 @@ async function initializeSettings() {
     console.error('[App] electronAPI not available — preload may have failed')
     return
   }
-  try {
-    const defaultFolder = await window.electronAPI.getDefaultUserDataFolder()
-    useSettingsStore.getState().setUserDataFolder(defaultFolder)
-    useSettingsStore.getState().setIsSetupComplete(true)
-  } catch (err) {
-    console.error('[App] Failed to initialize settings:', err)
+  const { userDataFolder, isSetupComplete } = useSettingsStore.getState()
+  if (isSetupComplete && userDataFolder) {
+    // Already configured in a previous session — tell main process the path
+    try {
+      await window.electronAPI.setUserDataFolder(userDataFolder)
+    } catch (err) {
+      console.error('[App] Failed to restore data folder path:', err)
+    }
   }
+  // If not set up yet, the SetupWizard handles everything
 }

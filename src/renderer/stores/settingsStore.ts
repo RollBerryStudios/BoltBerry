@@ -8,9 +8,16 @@ interface SettingsState {
 }
 
 export const useSettingsStore = create<SettingsState>((set) => ({
-  userDataFolder: '', // Will be set during app initialization
-  isSetupComplete: false,
-  
-  setUserDataFolder: (folder) => set({ userDataFolder: folder }),
-  setIsSetupComplete: (complete) => set({ isSetupComplete: complete }),
+  userDataFolder: localStorage.getItem('boltberry-data-folder') ?? '',
+  isSetupComplete: localStorage.getItem('boltberry-setup-complete') === '1',
+
+  setUserDataFolder: (folder) => {
+    localStorage.setItem('boltberry-data-folder', folder)
+    set({ userDataFolder: folder })
+  },
+  setIsSetupComplete: (complete) => {
+    if (complete) localStorage.setItem('boltberry-setup-complete', '1')
+    else localStorage.removeItem('boltberry-setup-complete')
+    set({ isSetupComplete: complete })
+  },
 }))
