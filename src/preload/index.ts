@@ -27,7 +27,6 @@ const dmApi = {
   setUserDataFolder: (path: string) => ipcRenderer.invoke('app:set-user-data-folder', path),
   openContentFolder: () => ipcRenderer.invoke('app:open-content-folder'),
   getImageAsBase64: (path: string) => ipcRenderer.invoke('app:get-image-as-base64', path),
-  getUserDataPath: () => ipcRenderer.invoke('app:get-user-data-path'),
   rescanContentFolder: () => ipcRenderer.invoke('app:rescan-content-folder'),
   showContextMenu: (items: { label: string; action: string; danger?: boolean }[]) =>
     ipcRenderer.invoke('app:show-context-menu', items),
