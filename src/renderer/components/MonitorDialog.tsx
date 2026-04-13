@@ -29,10 +29,15 @@ export function MonitorDialog({ onClose }: MonitorDialogProps) {
   async function handleOpen() {
     if (selected === null) return
     setOpening(true)
-    await window.electronAPI?.setPlayerMonitor(selected)
-    await window.electronAPI?.openPlayerWindow()
-    setOpening(false)
-    onClose()
+    try {
+      await window.electronAPI?.setPlayerMonitor(selected)
+      await window.electronAPI?.openPlayerWindow()
+      onClose()
+    } catch (err) {
+      console.error('[MonitorDialog] Failed to open player window:', err)
+    } finally {
+      setOpening(false)
+    }
   }
 
   return (

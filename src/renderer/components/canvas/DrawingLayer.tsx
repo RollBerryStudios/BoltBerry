@@ -40,10 +40,12 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
   const textInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
+    let cancelled = false
     loadDrawings(mapId)
-      .then(setDrawings)
-      .catch((err) => console.error('[DrawingLayer] loadDrawings failed:', err))
+      .then((result) => { if (!cancelled) setDrawings(result) })
+      .catch((err) => { if (!cancelled) console.error('[DrawingLayer] loadDrawings failed:', err) })
     setLoadedMapId(mapId)
+    return () => { cancelled = true }
   }, [mapId])
 
   const isDrawingActive = DRAWING_TOOLS.has(activeTool)
