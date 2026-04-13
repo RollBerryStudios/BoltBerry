@@ -11,84 +11,84 @@ import type {
   PlayerInitiativeEntry,
   PlayerMeasureState,
   WeatherType,
+  PlayerDrawingState,
 } from '../shared/ipc-types'
-import { IPC } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
 const dmApi = {
   // Monitor management
-  getMonitors: () => ipcRenderer.invoke(IPC.GET_MONITORS),
+  getMonitors: () => ipcRenderer.invoke('app:get-monitors'),
   setPlayerMonitor: (displayId: number) =>
-    ipcRenderer.invoke(IPC.SET_PLAYER_MONITOR, displayId),
-  openPlayerWindow: () => ipcRenderer.invoke(IPC.OPEN_PLAYER_WINDOW),
-  closePlayerWindow: () => ipcRenderer.invoke(IPC.CLOSE_PLAYER_WINDOW),
-  getDefaultUserDataFolder: () => ipcRenderer.invoke(IPC.GET_DEFAULT_USER_DATA_FOLDER),
-  chooseFolder: () => ipcRenderer.invoke(IPC.CHOOSE_FOLDER),
-  setUserDataFolder: (path: string) => ipcRenderer.invoke(IPC.SET_USER_DATA_FOLDER, path),
-  openContentFolder: () => ipcRenderer.invoke(IPC.OPEN_CONTENT_FOLDER),
-  getImageAsBase64: (path: string) => ipcRenderer.invoke(IPC.GET_IMAGE_AS_BASE64, path),
-  getUserDataPath: () => ipcRenderer.invoke(IPC.GET_USER_DATA_PATH),
-  rescanContentFolder: () => ipcRenderer.invoke(IPC.RESCAN_CONTENT_FOLDER),
+    ipcRenderer.invoke('app:set-player-monitor', displayId),
+  openPlayerWindow: () => ipcRenderer.invoke('app:open-player-window'),
+  closePlayerWindow: () => ipcRenderer.invoke('app:close-player-window'),
+  getDefaultUserDataFolder: () => ipcRenderer.invoke('app:get-default-user-data-folder'),
+  chooseFolder: () => ipcRenderer.invoke('app:choose-folder'),
+  setUserDataFolder: (path: string) => ipcRenderer.invoke('app:set-user-data-folder', path),
+  openContentFolder: () => ipcRenderer.invoke('app:open-content-folder'),
+  getImageAsBase64: (path: string) => ipcRenderer.invoke('app:get-image-as-base64', path),
+  getUserDataPath: () => ipcRenderer.invoke('app:get-user-data-path'),
+  rescanContentFolder: () => ipcRenderer.invoke('app:rescan-content-folder'),
   showContextMenu: (items: { label: string; action: string; danger?: boolean }[]) =>
-    ipcRenderer.invoke(IPC.SHOW_CONTEXT_MENU, items),
-  deleteMapConfirm: (mapName: string) => ipcRenderer.invoke(IPC.DELETE_MAP_CONFIRM, mapName),
-  deleteTokenConfirm: (tokenName: string) => ipcRenderer.invoke(IPC.DELETE_TOKEN_CONFIRM, tokenName),
+    ipcRenderer.invoke('app:show-context-menu', items),
+  deleteMapConfirm: (mapName: string) => ipcRenderer.invoke('app:delete-map-confirm', mapName),
+  deleteTokenConfirm: (tokenName: string) => ipcRenderer.invoke('app:delete-token-confirm', tokenName),
 
   // File operations
   importFile: (type: 'map' | 'token' | 'atmosphere' | 'handout' | 'audio', campaignId?: number) =>
-    ipcRenderer.invoke(IPC.IMPORT_FILE, type, campaignId),
+    ipcRenderer.invoke('app:import-file', type, campaignId),
   importPdf: (campaignId: number) =>
-    ipcRenderer.invoke(IPC.IMPORT_PDF, campaignId),
+    ipcRenderer.invoke('app:import-pdf', campaignId),
   saveAssetImage: (args: { dataUrl: string; originalName: string; type: 'map' | 'token'; campaignId: number }) =>
-    ipcRenderer.invoke(IPC.SAVE_ASSET_IMAGE, args),
+    ipcRenderer.invoke('app:save-asset-image', args),
   exportCampaign: (campaignId: number) =>
-    ipcRenderer.invoke(IPC.EXPORT_CAMPAIGN, campaignId),
-  importCampaign: () => ipcRenderer.invoke(IPC.IMPORT_CAMPAIGN),
+    ipcRenderer.invoke('app:export-campaign', campaignId),
+  importCampaign: () => ipcRenderer.invoke('app:import-campaign'),
   duplicateCampaign: (campaignId: number) =>
-    ipcRenderer.invoke(IPC.DUPLICATE_CAMPAIGN, campaignId),
+    ipcRenderer.invoke('app:duplicate-campaign', campaignId),
   quickBackup: (campaignId: number) =>
-    ipcRenderer.invoke(IPC.QUICK_BACKUP, campaignId),
-  saveNow: () => ipcRenderer.invoke(IPC.SAVE_NOW),
+    ipcRenderer.invoke('app:quick-backup', campaignId),
+  saveNow: () => ipcRenderer.invoke('app:save-now'),
 
   // Player state broadcasting
   sendMapUpdate: (state: PlayerMapState) =>
-    ipcRenderer.send(IPC.PLAYER_MAP_UPDATE, state),
+    ipcRenderer.send('player:map-update', state),
   sendFogDelta: (delta: FogDelta) =>
-    ipcRenderer.send(IPC.PLAYER_FOG_DELTA, delta),
+    ipcRenderer.send('player:fog-delta', delta),
   sendFogReset: (fogBitmap: string, exploredBitmap: string) =>
-    ipcRenderer.send(IPC.PLAYER_FOG_RESET, { fogBitmap, exploredBitmap }),
+    ipcRenderer.send('player:fog-reset', { fogBitmap, exploredBitmap }),
   sendTokenUpdate: (tokens: PlayerTokenState[]) =>
-    ipcRenderer.send(IPC.PLAYER_TOKEN_UPDATE, tokens),
+    ipcRenderer.send('player:token-update', tokens),
   sendBlackout: (active: boolean) =>
-    ipcRenderer.send(IPC.PLAYER_BLACKOUT, active),
+    ipcRenderer.send('player:blackout', active),
   sendAtmosphere: (imagePath: string | null) =>
-    ipcRenderer.send(IPC.PLAYER_ATMOSPHERE, imagePath),
+    ipcRenderer.send('player:atmosphere', imagePath),
   sendFullSync: (state: PlayerFullState) =>
-    ipcRenderer.send(IPC.PLAYER_FULL_SYNC, state),
+    ipcRenderer.send('player:full-sync', state),
   sendPointer: (pointer: PlayerPointer) =>
-    ipcRenderer.send(IPC.PLAYER_POINTER, pointer),
+    ipcRenderer.send('player:pointer', pointer),
   sendCameraView: (camera: PlayerCamera) =>
-    ipcRenderer.send(IPC.PLAYER_CAMERA, camera),
+    ipcRenderer.send('player:camera', camera),
   sendHandout: (handout: PlayerHandout | null) =>
-    ipcRenderer.send(IPC.PLAYER_HANDOUT, handout),
+    ipcRenderer.send('player:handout', handout),
   sendOverlay: (overlay: PlayerOverlay | null) =>
-    ipcRenderer.send(IPC.PLAYER_OVERLAY, overlay),
+    ipcRenderer.send('player:overlay', overlay),
   sendInitiative: (entries: PlayerInitiativeEntry[]) =>
-    ipcRenderer.send(IPC.PLAYER_INITIATIVE, entries),
+    ipcRenderer.send('player:initiative', entries),
   sendWeather: (type: WeatherType) =>
-    ipcRenderer.send(IPC.PLAYER_WEATHER, type),
+    ipcRenderer.send('player:weather', type),
   sendMeasure: (measure: PlayerMeasureState | null) =>
-    ipcRenderer.send(IPC.PLAYER_MEASURE, measure),
+    ipcRenderer.send('player:measure', measure),
   sendDrawing: (drawing: unknown) =>
-    ipcRenderer.send(IPC.PLAYER_DRAWING, drawing),
+    ipcRenderer.send('player:drawing', drawing),
 
   // DB operations
   dbQuery: <T>(sql: string, params?: unknown[]): Promise<T[]> =>
-    ipcRenderer.invoke(IPC.DB_QUERY, sql, params),
+    ipcRenderer.invoke('db:query', sql, params),
   dbRun: (sql: string, params?: unknown[]): Promise<{ lastInsertRowid: number; changes: number }> =>
-    ipcRenderer.invoke(IPC.DB_RUN, sql, params),
+    ipcRenderer.invoke('db:run', sql, params),
   dbRunBatch: (statements: Array<{ sql: string; params?: unknown[] }>): Promise<void> =>
-    ipcRenderer.invoke(IPC.DB_RUN_BATCH, statements),
+    ipcRenderer.invoke('db:run-batch', statements),
 
   // Listen for main → DM: player window requested a full state sync
   onRequestFullSync: (cb: () => void) => {
@@ -102,79 +102,79 @@ const dmApi = {
 const playerApi = {
   onFullSync: (cb: (state: PlayerFullState) => void) => {
     const handler = (_: Electron.IpcRendererEvent, state: PlayerFullState) => cb(state)
-    ipcRenderer.on(IPC.PLAYER_FULL_SYNC, handler)
-    return () => ipcRenderer.removeListener(IPC.PLAYER_FULL_SYNC, handler)
+    ipcRenderer.on('player:full-sync', handler)
+    return () => ipcRenderer.removeListener('player:full-sync', handler)
   },
   onMapUpdate: (cb: (state: PlayerMapState) => void) => {
     const handler = (_: Electron.IpcRendererEvent, state: PlayerMapState) => cb(state)
-    ipcRenderer.on(IPC.PLAYER_MAP_UPDATE, handler)
-    return () => ipcRenderer.removeListener(IPC.PLAYER_MAP_UPDATE, handler)
+    ipcRenderer.on('player:map-update', handler)
+    return () => ipcRenderer.removeListener('player:map-update', handler)
   },
   onFogDelta: (cb: (delta: FogDelta) => void) => {
     const handler = (_: Electron.IpcRendererEvent, delta: FogDelta) => cb(delta)
-    ipcRenderer.on(IPC.PLAYER_FOG_DELTA, handler)
-    return () => ipcRenderer.removeListener(IPC.PLAYER_FOG_DELTA, handler)
+    ipcRenderer.on('player:fog-delta', handler)
+    return () => ipcRenderer.removeListener('player:fog-delta', handler)
   },
   onFogReset: (cb: (payload: { fogBitmap: string; exploredBitmap: string }) => void) => {
     const handler = (_: Electron.IpcRendererEvent, payload: { fogBitmap: string; exploredBitmap: string }) => cb(payload)
-    ipcRenderer.on(IPC.PLAYER_FOG_RESET, handler)
-    return () => ipcRenderer.removeListener(IPC.PLAYER_FOG_RESET, handler)
+    ipcRenderer.on('player:fog-reset', handler)
+    return () => ipcRenderer.removeListener('player:fog-reset', handler)
   },
   onTokenUpdate: (cb: (tokens: PlayerTokenState[]) => void) => {
     const handler = (_: Electron.IpcRendererEvent, tokens: PlayerTokenState[]) => cb(tokens)
-    ipcRenderer.on(IPC.PLAYER_TOKEN_UPDATE, handler)
-    return () => ipcRenderer.removeListener(IPC.PLAYER_TOKEN_UPDATE, handler)
+    ipcRenderer.on('player:token-update', handler)
+    return () => ipcRenderer.removeListener('player:token-update', handler)
   },
   onBlackout: (cb: (active: boolean) => void) => {
     const handler = (_: Electron.IpcRendererEvent, active: boolean) => cb(active)
-    ipcRenderer.on(IPC.PLAYER_BLACKOUT, handler)
-    return () => ipcRenderer.removeListener(IPC.PLAYER_BLACKOUT, handler)
+    ipcRenderer.on('player:blackout', handler)
+    return () => ipcRenderer.removeListener('player:blackout', handler)
   },
   onAtmosphere: (cb: (imagePath: string | null) => void) => {
     const handler = (_: Electron.IpcRendererEvent, imagePath: string | null) => cb(imagePath)
-    ipcRenderer.on(IPC.PLAYER_ATMOSPHERE, handler)
-    return () => ipcRenderer.removeListener(IPC.PLAYER_ATMOSPHERE, handler)
+    ipcRenderer.on('player:atmosphere', handler)
+    return () => ipcRenderer.removeListener('player:atmosphere', handler)
   },
   requestFullSync: () => ipcRenderer.send('player:request-sync'),
   onPointer: (cb: (pointer: PlayerPointer) => void) => {
     const handler = (_: Electron.IpcRendererEvent, pointer: PlayerPointer) => cb(pointer)
-    ipcRenderer.on(IPC.PLAYER_POINTER, handler)
-    return () => ipcRenderer.removeListener(IPC.PLAYER_POINTER, handler)
+    ipcRenderer.on('player:pointer', handler)
+    return () => ipcRenderer.removeListener('player:pointer', handler)
   },
   onCameraView: (cb: (camera: PlayerCamera) => void) => {
     const handler = (_: Electron.IpcRendererEvent, camera: PlayerCamera) => cb(camera)
-    ipcRenderer.on(IPC.PLAYER_CAMERA, handler)
-    return () => ipcRenderer.removeListener(IPC.PLAYER_CAMERA, handler)
+    ipcRenderer.on('player:camera', handler)
+    return () => ipcRenderer.removeListener('player:camera', handler)
   },
   onHandout: (cb: (handout: PlayerHandout | null) => void) => {
     const handler = (_: Electron.IpcRendererEvent, handout: PlayerHandout | null) => cb(handout)
-    ipcRenderer.on(IPC.PLAYER_HANDOUT, handler)
-    return () => ipcRenderer.removeListener(IPC.PLAYER_HANDOUT, handler)
+    ipcRenderer.on('player:handout', handler)
+    return () => ipcRenderer.removeListener('player:handout', handler)
   },
   onOverlay: (cb: (overlay: PlayerOverlay | null) => void) => {
     const handler = (_: Electron.IpcRendererEvent, overlay: PlayerOverlay | null) => cb(overlay)
-    ipcRenderer.on(IPC.PLAYER_OVERLAY, handler)
-    return () => ipcRenderer.removeListener(IPC.PLAYER_OVERLAY, handler)
+    ipcRenderer.on('player:overlay', handler)
+    return () => ipcRenderer.removeListener('player:overlay', handler)
   },
   onInitiative: (cb: (entries: PlayerInitiativeEntry[]) => void) => {
     const handler = (_: Electron.IpcRendererEvent, entries: PlayerInitiativeEntry[]) => cb(entries)
-    ipcRenderer.on(IPC.PLAYER_INITIATIVE, handler)
-    return () => ipcRenderer.removeListener(IPC.PLAYER_INITIATIVE, handler)
+    ipcRenderer.on('player:initiative', handler)
+    return () => ipcRenderer.removeListener('player:initiative', handler)
   },
   onWeather: (cb: (type: WeatherType) => void) => {
     const handler = (_: Electron.IpcRendererEvent, type: WeatherType) => cb(type)
-    ipcRenderer.on(IPC.PLAYER_WEATHER, handler)
-    return () => ipcRenderer.removeListener(IPC.PLAYER_WEATHER, handler)
+    ipcRenderer.on('player:weather', handler)
+    return () => ipcRenderer.removeListener('player:weather', handler)
   },
   onMeasure: (cb: (measure: PlayerMeasureState | null) => void) => {
     const handler = (_: Electron.IpcRendererEvent, measure: PlayerMeasureState | null) => cb(measure)
-    ipcRenderer.on(IPC.PLAYER_MEASURE, handler)
-    return () => ipcRenderer.removeListener(IPC.PLAYER_MEASURE, handler)
+    ipcRenderer.on('player:measure', handler)
+    return () => ipcRenderer.removeListener('player:measure', handler)
   },
-  onDrawing: (cb: (drawing: import('../shared/ipc-types').PlayerDrawingState) => void) => {
-    const handler = (_: Electron.IpcRendererEvent, drawing: import('../shared/ipc-types').PlayerDrawingState) => cb(drawing)
-    ipcRenderer.on(IPC.PLAYER_DRAWING, handler)
-    return () => ipcRenderer.removeListener(IPC.PLAYER_DRAWING, handler)
+  onDrawing: (cb: (drawing: PlayerDrawingState) => void) => {
+    const handler = (_: Electron.IpcRendererEvent, drawing: PlayerDrawingState) => cb(drawing)
+    ipcRenderer.on('player:drawing', handler)
+    return () => ipcRenderer.removeListener('player:drawing', handler)
   },
 }
 
