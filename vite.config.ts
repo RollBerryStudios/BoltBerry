@@ -21,26 +21,27 @@ export default defineConfig({
         player: resolve(__dirname, 'src/renderer/player.html'),
       },
       output: {
-        // Path-based manualChunks catches every sub-entry of each package
-        // (e.g. react/jsx-runtime, konva/lib/...) — not just the main entry.
+        // manualChunks: isolate vendor packages into stable named chunks.
         //
-        // The previous string-based form only pinned top-level entry points,
-        // so react/jsx-runtime fell into the shared fogUtils chunk and Rollup
-        // routed its React import through vendor-i18n instead of vendor-react.
-        // That cross-chunk indirection was the root cause of every
-        // "Cannot access X before initialization" TDZ crash in production.
+        // IMPORTANT: Rollup passes Windows paths with backslashes on Windows
+        // builds, so we normalise to forward slashes before matching.
+        //
+        // konva and react-konva are intentionally kept in SEPARATE chunks:
+        // - vendor-konva   → the raw Konva library only
+        // - vendor-react-konva → react-konva + react-konva-utils
+        // This guarantees the module system fully initialises konva before
+        // react-konva runs any of its 72 module-level const declarations that
+        // extend Konva classes, preventing "Cannot access X before init" TDZ.
         manualChunks(id) {
-          // react-dom and scheduler must be matched before the 'react/' check
-          // (react-dom path does NOT contain '/react/' so order doesn't matter,
-          // but being explicit avoids surprises when packages rename internals)
-          if (id.includes('/node_modules/react-dom/') ||
-              id.includes('/node_modules/scheduler/')) return 'vendor-react'
-          if (id.includes('/node_modules/react/'))      return 'vendor-react'
-          if (id.includes('/node_modules/react-konva/') ||
-              id.includes('/node_modules/konva/') ||
-              id.includes('/node_modules/react-konva-utils/')) return 'vendor-konva'
-          if (id.includes('/node_modules/react-i18next/') ||
-              id.includes('/node_modules/i18next/'))    return 'vendor-i18n'
+          const p = id.replace(/\\/g, '/')
+          if (p.includes('/node_modules/react-dom/') ||
+              p.includes('/node_modules/scheduler/'))   return 'vendor-react'
+          if (p.includes('/node_modules/react/'))       return 'vendor-react'
+          if (p.includes('/node_modules/react-konva/') ||
+              p.includes('/node_modules/react-konva-utils/')) return 'vendor-react-konva'
+          if (p.includes('/node_modules/konva/'))       return 'vendor-konva'
+          if (p.includes('/node_modules/react-i18next/') ||
+              p.includes('/node_modules/i18next/'))     return 'vendor-i18n'
         },
       },
     },
