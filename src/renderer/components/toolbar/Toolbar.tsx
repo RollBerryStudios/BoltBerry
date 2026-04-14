@@ -353,8 +353,8 @@ export function Toolbar() {
         </div>
       )}
 
-      {/* Fog quick actions — shown when any fog tool is active */}
-      {activeTool.startsWith('fog-') && (
+      {/* Fog quick actions — shown when any fog tool is active or fog-edit mode */}
+      {(activeTool.startsWith('fog-') || workMode === 'fog-edit') && (
         <>
           <button className="tool-btn" title="Alles aufdecken" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'revealAll' } }))}>👁</button>
           <button className="tool-btn" title="Alles zudecken" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'coverAll' } }))}>🌑</button>

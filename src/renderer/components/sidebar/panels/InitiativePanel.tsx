@@ -517,10 +517,10 @@ export function InitiativePanel() {
                     </span>
                   )}
                   <button
-                    style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 11, padding: '0 2px', lineHeight: 1 }}
+                    style={{ background: timerEntryId === entry.id ? 'var(--accent-blue-dim)' : 'var(--bg-overlay)', border: `1px solid ${timerEntryId === entry.id ? 'var(--accent-blue)' : 'var(--border-subtle)'}`, color: timerEntryId === entry.id ? 'var(--accent-blue-light)' : 'var(--text-muted)', cursor: 'pointer', fontSize: 10, padding: '1px 4px', lineHeight: 1, borderRadius: 3 }}
                     onClick={() => setTimerEntryId(timerEntryId === entry.id ? null : entry.id)}
                     title="Effekt-Timer hinzufügen"
-                  >⏱</button>
+                  >⏱ Timer</button>
                   <button
                     className="btn btn-ghost btn-icon"
                     style={{ fontSize: 10, padding: 2 }}

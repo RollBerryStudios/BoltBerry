@@ -92,7 +92,7 @@ export function TokenPanel() {
   const [secKampf, setSecKampf]       = useState(true)
   const [secAussehen, setSecAussehen] = useState(false)
   const [secLicht, setSecLicht]       = useState(false)
-  const [secStatus, setSecStatus]     = useState(false)
+  const [secStatus, setSecStatus]     = useState(true)
   const [secNotizen, setSecNotizen]   = useState(false)
   const [showTemplates, setShowTemplates] = useState(false)
   const templateRef = useRef<HTMLDivElement>(null)
@@ -228,6 +228,17 @@ export function TokenPanel() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      {/* Add token button */}
+      <div style={{ padding: 'var(--sp-3) var(--sp-4)', borderBottom: '1px solid var(--border)', flexShrink: 0 }}>
+        <button
+          className="btn btn-primary"
+          style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--text-xs)' }}
+          onClick={handleAddToken}
+          disabled={!activeMapId}
+        >
+          + Token hinzufügen
+        </button>
+      </div>
       {/* Token list */}
       <div style={{ flex: 1, overflowY: 'auto' }}>
         {/* Schnellerstellung dropdown */}
@@ -454,6 +465,42 @@ export function TokenPanel() {
             </div>
           )}
 
+          {/* ── Status-Effekte ───────────────────────────────────────── */}
+          <SectionHeader title="Status-Effekte" open={secStatus} onToggle={() => setSecStatus((v) => !v)} />
+          {secStatus && (
+            <div style={{ paddingBottom: 'var(--sp-2)' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                {STATUS_EFFECTS.map((eff, idx) => (
+                  <React.Fragment key={eff.id}>
+                    {idx === 16 && (
+                      <div style={{ width: '100%', height: 1, background: 'var(--border-subtle)', margin: '2px 0' }} />
+                    )}
+                    <button
+                      title={eff.label}
+                      onClick={() => toggleStatusEffect(selected.id, eff.id, selected.statusEffects)}
+                      style={{
+                        width: 30, height: 30, borderRadius: 'var(--radius)',
+                        background: selected.statusEffects?.includes(eff.id) ? 'var(--accent-blue-dim)' : 'var(--bg-overlay)',
+                        border: selected.statusEffects?.includes(eff.id) ? '1px solid var(--accent-blue)' : '1px solid var(--border-subtle)',
+                        cursor: 'pointer', fontSize: 14,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      }}
+                    >
+                      {eff.icon}
+                    </button>
+                  </React.Fragment>
+                ))}
+              </div>
+              {selected.statusEffects && selected.statusEffects.length > 0 && (
+                <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 4 }}>
+                  {selected.statusEffects.map((id) =>
+                    STATUS_EFFECTS.find((e) => e.id === id)?.label
+                  ).filter(Boolean).join(', ')}
+                </div>
+              )}
+            </div>
+          )}
+
           {/* ── Aussehen ─────────────────────────────────────────────── */}
           <SectionHeader title="Aussehen" open={secAussehen} onToggle={() => setSecAussehen((v) => !v)} />
           {secAussehen && (
@@ -570,42 +617,6 @@ export function TokenPanel() {
             )
           })()}
 
-          {/* ── Status-Effekte ───────────────────────────────────────── */}
-          <SectionHeader title="Status-Effekte" open={secStatus} onToggle={() => setSecStatus((v) => !v)} />
-          {secStatus && (
-            <div style={{ paddingBottom: 'var(--sp-2)' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-                {STATUS_EFFECTS.map((eff, idx) => (
-                  <React.Fragment key={eff.id}>
-                    {idx === 16 && (
-                      <div style={{ width: '100%', height: 1, background: 'var(--border-subtle)', margin: '2px 0' }} />
-                    )}
-                    <button
-                      title={eff.label}
-                      onClick={() => toggleStatusEffect(selected.id, eff.id, selected.statusEffects)}
-                      style={{
-                        width: 30, height: 30, borderRadius: 'var(--radius)',
-                        background: selected.statusEffects?.includes(eff.id) ? 'var(--accent-blue-dim)' : 'var(--bg-overlay)',
-                        border: selected.statusEffects?.includes(eff.id) ? '1px solid var(--accent-blue)' : '1px solid var(--border-subtle)',
-                        cursor: 'pointer', fontSize: 14,
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      }}
-                    >
-                      {eff.icon}
-                    </button>
-                  </React.Fragment>
-                ))}
-              </div>
-              {selected.statusEffects && selected.statusEffects.length > 0 && (
-                <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 4 }}>
-                  {selected.statusEffects.map((id) =>
-                    STATUS_EFFECTS.find((e) => e.id === id)?.label
-                  ).filter(Boolean).join(', ')}
-                </div>
-              )}
-            </div>
-          )}
-
           {/* ── Notizen ──────────────────────────────────────────────── */}
           <SectionHeader title="Notizen" open={secNotizen} onToggle={() => setSecNotizen((v) => !v)} />
           {secNotizen && (
@@ -643,17 +654,6 @@ export function TokenPanel() {
         </div>
       )}
 
-      {/* Add token button */}
-      <div style={{ padding: 'var(--sp-3) var(--sp-4)', borderTop: '1px solid var(--border)', flexShrink: 0 }}>
-        <button
-          className="btn btn-primary"
-          style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--text-xs)' }}
-          onClick={handleAddToken}
-          disabled={!activeMapId}
-        >
-          + Token hinzufügen
-        </button>
-      </div>
     </div>
   )
 }
