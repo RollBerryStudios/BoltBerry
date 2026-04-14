@@ -83,13 +83,14 @@ export function createPlayerWindow(): BrowserWindow | null {
     title: 'BoltBerry – Spieler',
     backgroundColor: '#000000',
     frame: false,
-    alwaysOnTop: false,
+    alwaysOnTop: true,
     fullscreen: true,
     webPreferences: {
       preload: preloadPath(),
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: true,
+      additionalArguments: ['--boltberry-window-type=player'],
     },
   })
 

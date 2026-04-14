@@ -3,7 +3,8 @@ import { pathToFileURL } from 'url'
 import { existsSync, statSync } from 'fs'
 import { resolve, join, sep } from 'path'
 import { initDatabase, closeDatabase, getCustomUserDataPath } from './db/database'
-import { createDMWindow } from './windows'
+import { logger } from './logger'
+import { createDMWindow, getDMWindow } from './windows'
 import { registerPlayerBridgeHandlers } from './ipc/player-bridge'
 import { registerAppHandlers } from './ipc/app-handlers'
 import { registerDbHandlers } from './ipc/db-handlers'
@@ -22,7 +23,6 @@ if (!gotLock) {
 }
 
 app.on('second-instance', () => {
-  const { getDMWindow } = require('./windows')
   const dmWin = getDMWindow()
   if (dmWin && !dmWin.isDestroyed()) {
     if (dmWin.isMinimized()) dmWin.restore()
@@ -76,7 +76,6 @@ app.whenReady().then(() => {
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    closeDatabase()
     app.quit()
   }
 })
@@ -86,9 +85,9 @@ app.on('will-quit', () => {
 })
 
 process.on('uncaughtException', (error) => {
-  console.error('[BoltBerry] Uncaught Exception:', error)
+  logger.error('Uncaught Exception', error)
 })
 
 process.on('unhandledRejection', (reason) => {
-  console.error('[BoltBerry] Unhandled Rejection:', reason)
+  logger.error('Unhandled Rejection', reason instanceof Error ? reason : String(reason))
 })

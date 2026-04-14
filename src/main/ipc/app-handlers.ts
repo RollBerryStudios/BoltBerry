@@ -126,15 +126,14 @@ export function registerAppHandlers(): void {
     }
   })
 
-  // Rescan content folder to synchronize files with database
-  ipcMain.handle(IPC.RESCAN_CONTENT_FOLDER, async () => {
+  // Rescan content folder to synchronize files with database (scoped to active campaign)
+  ipcMain.handle(IPC.RESCAN_CONTENT_FOLDER, async (_event, campaignId: number) => {
     const { readdir } = require('fs').promises
-    const { basename } = require('path')
-    
+
     try {
       const userDataPath = getCustomUserDataPath() || app.getPath('userData')
       const assetsPath = join(userDataPath, 'assets', 'map')
-      
+
       let files: string[] = []
       try {
         files = await readdir(assetsPath)
@@ -142,67 +141,63 @@ export function registerAppHandlers(): void {
         mkdirSync(assetsPath, { recursive: true })
         return { scanned: 0, added: 0, removed: 0, message: 'Keine Dateien gefunden' }
       }
-      
-      const imageFiles = files.filter((f: string) => 
+
+      const imageFiles = files.filter((f: string) =>
         f.endsWith('.png') || f.endsWith('.jpg') || f.endsWith('.jpeg') || f.endsWith('.webp')
       )
-      
+
       const db = getDb()
 
-      const maps = db.prepare('SELECT id, image_path, name FROM maps').all() as { id: number; image_path: string; name: string }[]
-      
+      // Scope entirely to the active campaign — never touch other campaigns' data
+      const maps = db.prepare(
+        'SELECT id, image_path, name FROM maps WHERE campaign_id = ?'
+      ).all(campaignId) as { id: number; image_path: string; name: string }[]
+
       const existingFilePaths = new Set(imageFiles.map((f: string) => `assets/map/${f}`))
-      
+
       let removedCount = 0
       for (const map of maps) {
         if (!existingFilePaths.has(map.image_path)) {
-          db.prepare('DELETE FROM maps WHERE id = ?').run(map.id)
-          db.prepare('DELETE FROM assets WHERE stored_path = ?').run(map.image_path)
-          db.prepare('DELETE FROM tokens WHERE map_id = ?').run(map.id)
+          db.prepare('DELETE FROM maps WHERE id = ? AND campaign_id = ?').run(map.id, campaignId)
+          db.prepare('DELETE FROM assets WHERE stored_path = ? AND campaign_id = ?').run(map.image_path, campaignId)
           removedCount++
         }
       }
-      
+
       const existingMapPaths = new Set(maps.map((m: { image_path: string }) => m.image_path))
-      
+
       let addedCount = 0
       for (const file of imageFiles) {
         const filePath = `assets/map/${file}`
         if (!existingMapPaths.has(filePath)) {
-          const fileName = file.replace(/\.[^/.]+$/, "") || file
-          
-          let campaignId = (db.prepare('SELECT id FROM campaigns LIMIT 1').get() as { id: number } | undefined)?.id
-          if (!campaignId) {
-            const campaignResult = db.prepare(
-              'INSERT INTO campaigns (name, created_at, last_opened) VALUES (?, datetime("now"), datetime("now"))'
-            ).run('Standard Kampagne')
-            campaignId = campaignResult.lastInsertRowid as number
-          }
+          const fileName = file.replace(/\.[^/.]+$/, '') || file
 
           db.prepare(
             'INSERT INTO assets (original_name, stored_path, type, campaign_id) VALUES (?, ?, ?, ?)'
           ).run(fileName, filePath, 'map', campaignId)
-          
-          const orderIndex = (db.prepare('SELECT COALESCE(MAX(order_index), -1) + 1 AS next FROM maps WHERE campaign_id = ?').get(campaignId) as { next: number }).next
+
+          const orderIndex = (db.prepare(
+            'SELECT COALESCE(MAX(order_index), -1) + 1 AS next FROM maps WHERE campaign_id = ?'
+          ).get(campaignId) as { next: number }).next
           db.prepare(
             'INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, grid_offset_x, grid_offset_y) VALUES (?, ?, ?, ?, 0, 0, 0)'
           ).run(campaignId, fileName, filePath, orderIndex)
-          
+
           addedCount++
         }
       }
-      
-      return { 
-        scanned: imageFiles.length, 
-        added: addedCount, 
+
+      return {
+        scanned: imageFiles.length,
+        added: addedCount,
         removed: removedCount,
-        message: `Scan abgeschlossen: ${imageFiles.length} Dateien, ${addedCount} hinzugef\u00fcgt, ${removedCount} entfernt`
+        message: `Scan abgeschlossen: ${imageFiles.length} Dateien, ${addedCount} hinzugef\u00fcgt, ${removedCount} entfernt`,
       }
     } catch (err) {
       console.error('[AppHandlers] Failed to rescan content folder:', err)
-      return { 
+      return {
         scanned: 0, added: 0, removed: 0,
-        message: 'Fehler beim Scannen: ' + (err instanceof Error ? err.message : String(err))
+        message: 'Fehler beim Scannen: ' + (err instanceof Error ? err.message : String(err)),
       }
     }
   })
