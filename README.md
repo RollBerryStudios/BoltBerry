@@ -40,16 +40,26 @@ Gebaut mit Electron, React, TypeScript und SQLite. Läuft auf macOS, Windows und
 | Kategorie | Funktion |
 |---|---|
 | **Karten** | Bilder oder PDFs importieren; Quadrat-/Hex-Raster; Drehung; Kamerasync pro Karte |
-| **Fog of War** | Rechteck-, Polygon- und Zudecken-Werkzeuge; Delta-basierte Sync zum Spieler-Bildschirm |
-| **Token** | Drag & Drop; TP-Leiste; Statuseffekte; Markierungsringe; Sichtbarkeits-Toggle; Sperren |
-| **Initiative** | Sortierbarer Tracker; überträgt aktuellen Zug an Spieler-Overlay |
-| **Notizen** | Pro-Kampagne und pro-Karte mit Markdown-Vorschau |
+| **Fog of War** | Rechteck-, Polygon-, Pinsel- und Zudecken-Werkzeuge; Delta-basierte Sync zum Spieler-Bildschirm |
+| **Sichtlinie (LOS)** | Ray-Casting-Algorithmus: Token mit Lichtradius enthüllen beim Ziehen automatisch den Nebel entsprechend der Wandgeometrie |
+| **Wände & Türen** | Linien-Werkzeug für Sichtlinienblocker; Türen und Fenster öffenbar/schließbar |
+| **Beleuchtung** | Pro-Token Lichtradius und Lichtfarbe; Beleuchtungsebene auf DM- und Spieler-Fenster |
+| **Token** | Drag & Drop; TP-Leiste; AC; Statuseffekte; Markierungsringe; Sichtbarkeits-Toggle; Sperren; Fraktionen |
+| **Charakterbögen** | Vollständiger D&D-5e-Charakterbogen pro Kampagne: Eigenschaftswerte, Rettungswürfe, Fertigkeiten, Angriffe, Ausrüstung, Persönlichkeit, Hintergeschichte |
+| **Initiative** | Sortierbarer Tracker mit Effekttimern; überträgt aktuellen Zug an Spieler-Overlay |
+| **Begegnungen** | Wiederverwendbare Spawn-Templates mit Formationen und Schwierigkeitsgraden |
+| **Räume** | Semantische Kartenbereiche mit Sichtbarkeit und Atmosphäre-Hinweis |
+| **Zeichnungen** | Freihand, Rechteck, Kreis und Text; werden auf DM- und Spieler-Fenster angezeigt |
+| **GM-Pins** | DM-only Kartenanmerkungen (nur im DM-Fenster sichtbar) |
+| **Notizen** | Pro-Kampagne und pro-Karte |
 | **Handouts** | Bilder oder Textkarten direkt an den Spieler-Bildschirm senden |
 | **Audio** | Hintergrundmusik (MP3/OGG/WAV) mit Schleife und Lautstärkeregelung |
 | **Würfelsystem** | Schnelles Würfeln mit Verlauf, Vor-/Nachteil für d20 |
 | **Wetter-FX** | Regen, Schnee, Wind und Nebel-Overlays auf dem Spieler-Bildschirm |
 | **Overlays** | Titel-/Untertitel-Textoverlays für dramatische Momente |
 | **Atmosphäre** | Vollbild-Bildmodus zwischen Begegnungen |
+| **Undo/Redo** | Vollständige Undo-History für Fog-of-War-Operationen und Token-Bewegungen |
+| **Spieler-Vorschau** | DM-seitiger Player-Eye-Modus zum Prüfen der Spieler-Perspektive |
 
 ### Schnellstart
 
@@ -79,10 +89,15 @@ Fertige Builds liegen in `release/` und werden automatisch als [GitHub Releases]
 ```
 src/
   main/          Electron Main-Prozess (IPC, Datenbank, Fenster)
+    db/          SQLite-Schema (v20) und Migrationskette
+    ipc/         IPC-Handler (App, DB, Player-Bridge)
   preload/       Context Bridge (electronAPI / playerAPI)
   renderer/      React-App (DM-Ansicht)
+    components/  UI-Komponenten (Canvas-Ebenen, Sidebar-Panels)
+    stores/      Zustand-Stores (Token, Fog, Walls, Characters, …)
+    utils/       Hilfsfunktionen (losEngine, fogUtils, …)
     i18n/        Übersetzungen (DE/EN)
-  shared/        Gemeinsame TypeScript-Typen
+  shared/        Gemeinsame TypeScript-Typen und IPC-Konstanten
 resources/       App-Icons (ICNS, ICO, PNG)
 scripts/         Deployment-Hilfsskripte (Proxmox Runner-Setup)
 ```
@@ -95,7 +110,7 @@ scripts/         Deployment-Hilfsskripte (Proxmox Runner-Setup)
 | React 18 + TypeScript 5 | Benutzeroberfläche |
 | Vite 5 | Renderer-Bundler |
 | Zustand 5 | State-Management |
-| better-sqlite3 | Lokale Datenbank |
+| better-sqlite3 | Lokale Datenbank (SQLite, Schema v20) |
 | Konva / react-konva | Canvas-Rendering |
 | i18next / react-i18next | Mehrsprachigkeit (DE/EN) |
 | pdfjs-dist | PDF-Import für Karten |
@@ -130,16 +145,26 @@ Built with Electron, React, TypeScript and SQLite. Runs on macOS, Windows and Li
 | Category | What you get |
 |---|---|
 | **Maps** | Import images or PDFs; square/hex grid; rotation; per-map camera sync |
-| **Fog of War** | Rectangle, polygon, and cover tools; delta-based sync to player screen |
-| **Tokens** | Drag & drop; HP bar; status effects; marker rings; visibility toggle; lock |
-| **Initiative** | Sortable tracker; broadcasts current turn to player overlay |
-| **Notes** | Per-campaign and per-map with Markdown preview |
+| **Fog of War** | Rectangle, polygon, brush, and cover tools; delta-based sync to player screen |
+| **Line of Sight (LOS)** | Ray-casting algorithm: tokens with a light radius automatically reveal fog on drag, clipped to wall geometry |
+| **Walls & Doors** | Draw line-of-sight blockers; doors and windows can be opened/closed |
+| **Lighting** | Per-token light radius and colour; lighting layer rendered on both DM and player windows |
+| **Tokens** | Drag & drop; HP bar; AC; status effects; marker rings; visibility toggle; lock; factions |
+| **Character Sheets** | Full D&D 5e sheet per campaign: ability scores, saving throws, skills, attacks, equipment, personality, backstory |
+| **Initiative** | Sortable tracker with effect timers; broadcasts current turn to player overlay |
+| **Encounters** | Reusable spawn templates with formation and difficulty options |
+| **Rooms** | Semantic map areas with visibility state and atmosphere hints |
+| **Drawings** | Freehand, rectangle, circle and text; synced to player window |
+| **GM Pins** | DM-only map annotations (never shown on player screen) |
+| **Notes** | Per-campaign and per-map |
 | **Handouts** | Send images or text cards to the player screen |
 | **Audio** | Background music (MP3/OGG/WAV) with loop and volume control |
 | **Dice Roller** | Quick rolls with history, advantage/disadvantage for d20 |
 | **Weather FX** | Rain, snow, wind and fog overlays on the player screen |
 | **Overlays** | Title/subtitle text overlays for dramatic moments |
 | **Atmosphere** | Full-screen image mode between encounters |
+| **Undo/Redo** | Full undo history for fog operations and token moves |
+| **Player Preview** | DM-side player-eye mode to check the player's perspective |
 
 ### Getting Started
 
@@ -169,10 +194,15 @@ Packaged output goes to `release/`. Binaries are published automatically as [Git
 ```
 src/
   main/          Electron main process (IPC, database, windows)
+    db/          SQLite schema (v20) and migration chain
+    ipc/         IPC handlers (app, database, player bridge)
   preload/       Context bridge (electronAPI / playerAPI)
   renderer/      React app (DM view)
+    components/  UI components (canvas layers, sidebar panels)
+    stores/      Zustand stores (tokens, fog, walls, characters, …)
+    utils/       Utilities (losEngine, fogUtils, …)
     i18n/        Translations (DE/EN)
-  shared/        Shared TypeScript types
+  shared/        Shared TypeScript types and IPC constants
 resources/       App icons (ICNS, ICO, PNG)
 scripts/         Deployment helpers (Proxmox runner setup)
 ```
@@ -185,7 +215,7 @@ scripts/         Deployment helpers (Proxmox runner setup)
 | React 18 + TypeScript 5 | UI |
 | Vite 5 | Renderer bundler |
 | Zustand 5 | State management |
-| better-sqlite3 | Embedded database |
+| better-sqlite3 | Embedded database (SQLite, schema v20) |
 | Konva / react-konva | Canvas rendering |
 | i18next / react-i18next | Internationalisation (DE/EN) |
 | pdfjs-dist | PDF → PNG for map import |
