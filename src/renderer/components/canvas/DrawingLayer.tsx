@@ -92,7 +92,9 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
   }
 
   function handleMouseUp() {
-    if (!isDrawingActive || currentPath.length < 2) { setCurrentPath([]); return }
+    if (!isDrawingActive || currentPath.length < 4) { setCurrentPath([]); return }
+    // For freehand: need ≥4 values (2 distinct points = actual stroke)
+    // For rect/circle: need exactly 4 values (start + end corner), already satisfied by check above
 
     const type: DrawingType =
       activeTool === 'draw-freehand' ? 'freehand' :

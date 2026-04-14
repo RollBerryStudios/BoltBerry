@@ -267,7 +267,7 @@ export function LeftSidebar() {
   return (
     <div className="sidebar sidebar-left">
       {/* ── Tab bar ────────────────────────────────────────────────────────────────── */}
-      <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', background: 'var(--bg-surface)', flexShrink: 0 }}>
+      <div className="sidebar-tab-strip">
         {([
           ['maps', '🗺️', t('sidebar.left.tabMaps')],
           ['assets', '🗄', t('sidebar.left.tabAssets')],
@@ -276,15 +276,9 @@ export function LeftSidebar() {
           <button
             key={id}
             onClick={() => setTab(id)}
-            style={{
-              flex: 1, padding: 'var(--sp-2)', background: 'none', border: 'none',
-              borderBottom: tab === id ? '2px solid var(--accent-blue)' : '2px solid transparent',
-              color: tab === id ? 'var(--accent-blue-light)' : 'var(--text-muted)',
-              cursor: 'pointer', fontSize: 'var(--text-xs)', fontWeight: 600,
-              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2,
-            }}
+            className={tab === id ? 'active' : ''}
           >
-            <span style={{ fontSize: 14 }}>{icon}</span>
+            <span className="tab-icon">{icon}</span>
             {label}
           </button>
         ))}
