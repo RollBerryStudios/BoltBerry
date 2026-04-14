@@ -53,7 +53,7 @@ Gebaut mit Electron, React, TypeScript und SQLite. Läuft auf macOS, Windows und
 | **GM-Pins** | DM-only Kartenanmerkungen (nur im DM-Fenster sichtbar) |
 | **Notizen** | Pro-Kampagne und pro-Karte |
 | **Handouts** | Bilder oder Textkarten direkt an den Spieler-Bildschirm senden |
-| **Audio** | Hintergrundmusik (MP3/OGG/WAV) mit Schleife und Lautstärkeregelung |
+| **Audio** | Playlist-Manager für Hintergrundmusik (MP3/OGG/WAV): Play/Pause/Stop, Vor-/Zurück-Navigation, Seek-Leiste, Lautstärke, Schleifenmodus, Titel hinzufügen/entfernen |
 | **Würfelsystem** | Schnelles Würfeln mit Verlauf, Vor-/Nachteil für d20 |
 | **Wetter-FX** | Regen, Schnee, Wind und Nebel-Overlays auf dem Spieler-Bildschirm |
 | **Overlays** | Titel-/Untertitel-Textoverlays für dramatische Momente |
@@ -158,7 +158,7 @@ Built with Electron, React, TypeScript and SQLite. Runs on macOS, Windows and Li
 | **GM Pins** | DM-only map annotations (never shown on player screen) |
 | **Notes** | Per-campaign and per-map |
 | **Handouts** | Send images or text cards to the player screen |
-| **Audio** | Background music (MP3/OGG/WAV) with loop and volume control |
+| **Audio** | Playlist manager for background music (MP3/OGG/WAV): play/pause/stop, prev/next, seek bar, volume, loop mode, add/remove tracks |
 | **Dice Roller** | Quick rolls with history, advantage/disadvantage for d20 |
 | **Weather FX** | Rain, snow, wind and fog overlays on the player screen |
 | **Overlays** | Title/subtitle text overlays for dramatic moments |
