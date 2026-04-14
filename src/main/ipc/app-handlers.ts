@@ -65,7 +65,7 @@ export function registerAppHandlers(): void {
     const opts: Electron.OpenDialogOptions = {
       title: 'Datenordner wählen',
       defaultPath: join(app.getPath('documents'), 'BoltBerry'),
-      properties: ['openDirectory'],
+      properties: ['openDirectory', 'createDirectory'],
     }
     const result = win ? await dialog.showOpenDialog(win, opts) : await dialog.showOpenDialog(opts)
     if (result.canceled || !result.filePaths[0]) return null
