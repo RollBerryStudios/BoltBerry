@@ -12,6 +12,7 @@ import type {
   PlayerMeasureState,
   WeatherType,
   PlayerDrawingState,
+  PlayerWallState,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -83,6 +84,8 @@ const dmApi = {
     ipcRenderer.send('player:measure', measure),
   sendDrawing: (drawing: unknown) =>
     ipcRenderer.send('player:drawing', drawing),
+  sendWalls: (walls: PlayerWallState[]) =>
+    ipcRenderer.send('player:walls', walls),
 
   // DB operations
   dbQuery: <T>(sql: string, params?: unknown[]): Promise<T[]> =>
@@ -184,6 +187,11 @@ const playerApi = {
     const handler = (_: Electron.IpcRendererEvent, drawing: PlayerDrawingState) => cb(drawing)
     ipcRenderer.on('player:drawing', handler)
     return () => ipcRenderer.removeListener('player:drawing', handler)
+  },
+  onWalls: (cb: (walls: PlayerWallState[]) => void) => {
+    const handler = (_: Electron.IpcRendererEvent, walls: PlayerWallState[]) => cb(walls)
+    ipcRenderer.on('player:walls', handler)
+    return () => ipcRenderer.removeListener('player:walls', handler)
   },
 }
 

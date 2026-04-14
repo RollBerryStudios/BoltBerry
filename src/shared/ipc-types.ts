@@ -55,6 +55,9 @@ export const IPC = {
   // DM → Player: drawing
   PLAYER_DRAWING: 'player:drawing',
 
+  // DM → Player: wall list for LOS computation
+  PLAYER_WALLS: 'player:walls',
+
   // Context menu
   SHOW_CONTEXT_MENU: 'app:show-context-menu',
 
@@ -328,4 +331,85 @@ export interface PlayerDrawingState {
   color: string
   width: number
   text?: string
+}
+
+// Minimal wall data sent to the player for LOS ray-casting
+export interface PlayerWallState {
+  x1: number
+  y1: number
+  x2: number
+  y2: number
+  wallType: string   // 'wall' | 'door' | 'window'
+  doorState: string  // 'open' | 'closed' | 'locked'
+}
+
+// ─── Character Sheet (D&D 5e) ─────────────────────────────────────────────────
+
+export interface CharacterAttack {
+  name: string
+  bonus: string
+  damage: string
+  damageType: string
+  range: string
+  notes: string
+}
+
+export interface CharacterSpellSlots {
+  [level: number]: { total: number; used: number }
+}
+
+export interface CharacterSpells {
+  [level: number]: string[]
+}
+
+export interface CharacterSavingThrows {
+  str: boolean; dex: boolean; con: boolean
+  int: boolean; wis: boolean; cha: boolean
+}
+
+export interface CharacterSkills {
+  acrobatics: boolean; animalHandling: boolean; arcana: boolean
+  athletics: boolean; deception: boolean; history: boolean
+  insight: boolean; intimidation: boolean; investigation: boolean
+  medicine: boolean; nature: boolean; perception: boolean
+  performance: boolean; persuasion: boolean; religion: boolean
+  sleightOfHand: boolean; stealth: boolean; survival: boolean
+}
+
+export interface CharacterSheet {
+  id: number
+  campaignId: number
+  tokenId: number | null
+  name: string
+  race: string
+  className: string
+  subclass: string
+  level: number
+  background: string
+  alignment: string
+  experience: number
+  // ability scores
+  str: number; dex: number; con: number
+  intScore: number; wis: number; cha: number
+  // HP / combat
+  hpMax: number; hpCurrent: number; hpTemp: number
+  ac: number; speed: number
+  initiativeBonus: number; proficiencyBonus: number
+  hitDice: string
+  deathSavesSuccess: number; deathSavesFailure: number
+  // JSON blobs
+  savingThrows: CharacterSavingThrows
+  skills: CharacterSkills
+  // text fields
+  languages: string; proficiencies: string
+  features: string; equipment: string
+  attacks: CharacterAttack[]
+  spells: CharacterSpells
+  spellSlots: CharacterSpellSlots
+  personality: string; ideals: string; bonds: string; flaws: string
+  backstory: string; notes: string
+  inspiration: number
+  passivePerception: number
+  createdAt: string
+  updatedAt: string
 }

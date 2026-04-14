@@ -234,6 +234,19 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
     return () => el?.removeEventListener('fog:action', handler)
   }, [mapId, activeMapId, pushFogCommand, refreshDisplay])
 
+  // ── LOS fog reveal (fired by TokenLayer on drag end) ─────────────
+  useEffect(() => {
+    const el = document.getElementById('root')
+    const handler = (e: Event) => {
+      const { poly } = (e as CustomEvent<{ poly: number[] }>).detail
+      if (!poly || poly.length < 6) return
+      if (!exploredCanvasRef.current || !coveredCanvasRef.current || !activeMapId) return
+      pushFogCommand({ type: 'reveal', shape: 'polygon', points: poly })
+    }
+    el?.addEventListener('fog:los-reveal', handler)
+    return () => el?.removeEventListener('fog:los-reveal', handler)
+  }, [activeMapId, pushFogCommand])
+
   // ── Pointer position in MAP coordinates ──────────────────────────
   function getMapPos(): { x: number; y: number } | null {
     const stage = stageRef.current

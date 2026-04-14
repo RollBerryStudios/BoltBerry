@@ -9,12 +9,14 @@ import { OverlayPanel } from './panels/OverlayPanel'
 import { DiceRoller } from './panels/DiceRoller'
 import { EncounterPanel } from './panels/EncounterPanel'
 import { RoomPanel } from './panels/RoomPanel'
+import { CharacterSheetPanel } from './panels/CharacterSheetPanel'
 
 const ALL_TABS: { id: SidebarTab; labelKey: string; icon: string; shortLabel: string }[] = [
   { id: 'tokens',      labelKey: 'sidebar.right.tabTokens',      icon: '⬤',  shortLabel: 'Token' },
   { id: 'initiative',  labelKey: 'sidebar.right.tabInitiative',  icon: '⚔️', shortLabel: 'Init' },
   { id: 'encounters',  labelKey: 'sidebar.right.tabEncounters',  icon: '👾', shortLabel: 'Enc.' },
   { id: 'rooms',       labelKey: 'sidebar.right.tabRooms',       icon: '🏠', shortLabel: 'Räume' },
+  { id: 'characters',  labelKey: 'sidebar.right.tabCharacters',  icon: '📋', shortLabel: 'Chars' },
   { id: 'notes',       labelKey: 'sidebar.right.tabNotes',       icon: '📝', shortLabel: 'Notiz' },
   { id: 'handouts',    labelKey: 'sidebar.right.tabHandouts',    icon: '📜', shortLabel: 'Handout' },
   { id: 'overlay',     labelKey: 'sidebar.right.tabOverlay',     icon: '✦',  shortLabel: 'Overlay' },
@@ -75,6 +77,7 @@ export function RightSidebar() {
         {sidebarTab === 'initiative'  && <InitiativePanel />}
         {sidebarTab === 'encounters'  && <EncounterPanel />}
         {sidebarTab === 'rooms'       && <RoomPanel />}
+        {sidebarTab === 'characters'  && <CharacterSheetPanel />}
         {sidebarTab === 'notes'       && <NotesPanel />}
         {sidebarTab === 'handouts'    && <HandoutsPanel />}
         {sidebarTab === 'overlay'     && <OverlayPanel />}

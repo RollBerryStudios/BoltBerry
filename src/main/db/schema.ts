@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 19
+export const SCHEMA_VERSION = 20
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -323,6 +323,56 @@ CREATE TABLE IF NOT EXISTS assets (
   campaign_id   INTEGER REFERENCES campaigns(id) ON DELETE CASCADE
 );
 
+-- Character sheets (D&D 5e)
+CREATE TABLE IF NOT EXISTS character_sheets (
+  id               INTEGER PRIMARY KEY AUTOINCREMENT,
+  campaign_id      INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+  token_id         INTEGER REFERENCES tokens(id) ON DELETE SET NULL,
+  name             TEXT    NOT NULL DEFAULT 'Charakter',
+  race             TEXT    NOT NULL DEFAULT '',
+  class_name       TEXT    NOT NULL DEFAULT '',
+  subclass         TEXT    NOT NULL DEFAULT '',
+  level            INTEGER NOT NULL DEFAULT 1,
+  background       TEXT    NOT NULL DEFAULT '',
+  alignment        TEXT    NOT NULL DEFAULT '',
+  experience       INTEGER NOT NULL DEFAULT 0,
+  str              INTEGER NOT NULL DEFAULT 10,
+  dex              INTEGER NOT NULL DEFAULT 10,
+  con              INTEGER NOT NULL DEFAULT 10,
+  int_score        INTEGER NOT NULL DEFAULT 10,
+  wis              INTEGER NOT NULL DEFAULT 10,
+  cha              INTEGER NOT NULL DEFAULT 10,
+  hp_max           INTEGER NOT NULL DEFAULT 0,
+  hp_current       INTEGER NOT NULL DEFAULT 0,
+  hp_temp          INTEGER NOT NULL DEFAULT 0,
+  ac               INTEGER NOT NULL DEFAULT 10,
+  speed            INTEGER NOT NULL DEFAULT 30,
+  initiative_bonus INTEGER NOT NULL DEFAULT 0,
+  proficiency_bonus INTEGER NOT NULL DEFAULT 2,
+  hit_dice         TEXT    NOT NULL DEFAULT 'd8',
+  death_saves_success INTEGER NOT NULL DEFAULT 0,
+  death_saves_failure INTEGER NOT NULL DEFAULT 0,
+  saving_throws    TEXT    NOT NULL DEFAULT '{}',
+  skills           TEXT    NOT NULL DEFAULT '{}',
+  languages        TEXT    NOT NULL DEFAULT '',
+  proficiencies    TEXT    NOT NULL DEFAULT '',
+  features         TEXT    NOT NULL DEFAULT '',
+  equipment        TEXT    NOT NULL DEFAULT '',
+  attacks          TEXT    NOT NULL DEFAULT '[]',
+  spells           TEXT    NOT NULL DEFAULT '{}',
+  spell_slots      TEXT    NOT NULL DEFAULT '{}',
+  personality      TEXT    NOT NULL DEFAULT '',
+  ideals           TEXT    NOT NULL DEFAULT '',
+  bonds            TEXT    NOT NULL DEFAULT '',
+  flaws            TEXT    NOT NULL DEFAULT '',
+  backstory        TEXT    NOT NULL DEFAULT '',
+  notes            TEXT    NOT NULL DEFAULT '',
+  inspiration      INTEGER NOT NULL DEFAULT 0,
+  passive_perception INTEGER NOT NULL DEFAULT 10,
+  created_at       TEXT    NOT NULL DEFAULT (datetime('now')),
+  updated_at       TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+
 -- Schema version tracking (single-row enforced by PK constraint)
 CREATE TABLE IF NOT EXISTS schema_version (
   id      INTEGER PRIMARY KEY CHECK (id = 1),
@@ -353,6 +403,61 @@ ALTER TABLE tokens ADD COLUMN light_color TEXT NOT NULL DEFAULT '#ffcc44';
 UPDATE schema_version SET version = 19;
 `
 
+// Migration: v19 → v20 — add character_sheets table
+export const MIGRATE_V19_TO_V20 = `
+CREATE TABLE IF NOT EXISTS character_sheets (
+  id               INTEGER PRIMARY KEY AUTOINCREMENT,
+  campaign_id      INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+  token_id         INTEGER REFERENCES tokens(id) ON DELETE SET NULL,
+  name             TEXT    NOT NULL DEFAULT 'Charakter',
+  race             TEXT    NOT NULL DEFAULT '',
+  class_name       TEXT    NOT NULL DEFAULT '',
+  subclass         TEXT    NOT NULL DEFAULT '',
+  level            INTEGER NOT NULL DEFAULT 1,
+  background       TEXT    NOT NULL DEFAULT '',
+  alignment        TEXT    NOT NULL DEFAULT '',
+  experience       INTEGER NOT NULL DEFAULT 0,
+  str              INTEGER NOT NULL DEFAULT 10,
+  dex              INTEGER NOT NULL DEFAULT 10,
+  con              INTEGER NOT NULL DEFAULT 10,
+  int_score        INTEGER NOT NULL DEFAULT 10,
+  wis              INTEGER NOT NULL DEFAULT 10,
+  cha              INTEGER NOT NULL DEFAULT 10,
+  hp_max           INTEGER NOT NULL DEFAULT 0,
+  hp_current       INTEGER NOT NULL DEFAULT 0,
+  hp_temp          INTEGER NOT NULL DEFAULT 0,
+  ac               INTEGER NOT NULL DEFAULT 10,
+  speed            INTEGER NOT NULL DEFAULT 30,
+  initiative_bonus INTEGER NOT NULL DEFAULT 0,
+  proficiency_bonus INTEGER NOT NULL DEFAULT 2,
+  hit_dice         TEXT    NOT NULL DEFAULT 'd8',
+  death_saves_success INTEGER NOT NULL DEFAULT 0,
+  death_saves_failure INTEGER NOT NULL DEFAULT 0,
+  saving_throws    TEXT    NOT NULL DEFAULT '{}',
+  skills           TEXT    NOT NULL DEFAULT '{}',
+  languages        TEXT    NOT NULL DEFAULT '',
+  proficiencies    TEXT    NOT NULL DEFAULT '',
+  features         TEXT    NOT NULL DEFAULT '',
+  equipment        TEXT    NOT NULL DEFAULT '',
+  attacks          TEXT    NOT NULL DEFAULT '[]',
+  spells           TEXT    NOT NULL DEFAULT '{}',
+  spell_slots      TEXT    NOT NULL DEFAULT '{}',
+  personality      TEXT    NOT NULL DEFAULT '',
+  ideals           TEXT    NOT NULL DEFAULT '',
+  bonds            TEXT    NOT NULL DEFAULT '',
+  flaws            TEXT    NOT NULL DEFAULT '',
+  backstory        TEXT    NOT NULL DEFAULT '',
+  notes            TEXT    NOT NULL DEFAULT '',
+  inspiration      INTEGER NOT NULL DEFAULT 0,
+  passive_perception INTEGER NOT NULL DEFAULT 10,
+  created_at       TEXT    NOT NULL DEFAULT (datetime('now')),
+  updated_at       TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_character_sheets_campaign_id ON character_sheets(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_character_sheets_token_id ON character_sheets(token_id);
+UPDATE schema_version SET version = 20;
+`
+
 export const SEED_SCHEMA_VERSION = `
-INSERT OR IGNORE INTO schema_version (id, version) VALUES (1, 19);
+INSERT OR IGNORE INTO schema_version (id, version) VALUES (1, 20);
 `

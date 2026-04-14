@@ -8,6 +8,8 @@ import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useInitiativeStore } from '../../stores/initiativeStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useUndoStore, nextCommandId } from '../../stores/undoStore'
+import { useWallStore } from '../../stores/wallStore'
+import { computeVisibilityPolygon } from '../../utils/losEngine'
 import type { MapRecord, TokenRecord } from '@shared/ipc-types'
 import { useImage } from '../../hooks/useImage'
 
@@ -188,6 +190,27 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     }
 
     broadcastTokens(useTokenStore.getState().tokens)
+
+    // ── LOS fog reveal for light-emitting tokens ──────────────────
+    {
+      const { imgW, imgH } = useMapTransformStore.getState()
+      const walls = useWallStore.getState().walls
+      const updatedTokens = useTokenStore.getState().tokens
+      for (const pos of newPositions) {
+        const t = updatedTokens.find((tok) => tok.id === pos.id)
+        if (!t || t.lightRadius <= 0) continue
+        const halfSize = (t.size * latestRef.current.map.gridSize) / 2
+        const cx = pos.x + halfSize
+        const cy = pos.y + halfSize
+        const radiusPx = t.lightRadius * latestRef.current.map.gridSize
+        const poly = computeVisibilityPolygon(cx, cy, radiusPx, walls, imgW, imgH)
+        if (poly.length >= 6) {
+          document.getElementById('root')?.dispatchEvent(
+            new CustomEvent('fog:los-reveal', { detail: { poly } })
+          )
+        }
+      }
+    }
 
     useUndoStore.getState().pushCommand({
       id: nextCommandId(),

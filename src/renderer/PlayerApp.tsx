@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Stage, Layer, Image as KonvaImage, Shape, Group, Circle, Rect, Text, Line } from 'react-konva'
 import Konva from 'konva'
-import type { PlayerFullState, PlayerTokenState, PlayerMeasureState, FogDelta, PlayerMapState, PlayerPointer, PlayerCamera, PlayerOverlay, PlayerInitiativeEntry, WeatherType, GridType, PlayerDrawingState } from '@shared/ipc-types'
+import type { PlayerFullState, PlayerTokenState, PlayerMeasureState, FogDelta, PlayerMapState, PlayerPointer, PlayerCamera, PlayerOverlay, PlayerInitiativeEntry, WeatherType, GridType, PlayerDrawingState, PlayerWallState } from '@shared/ipc-types'
 import { useRotatedImage } from './hooks/useRotatedImage'
 import { useImageUrl } from './hooks/useImageUrl'
 import { applyOpToCtxPair } from './utils/fogUtils'
@@ -32,6 +32,7 @@ export default function PlayerApp() {
   const [weather, setWeather] = useState<WeatherType>('none')
   const [measure, setMeasure] = useState<PlayerMeasureState | null>(null)
   const [drawingData, setDrawingData] = useState<PlayerDrawingState[]>([])
+  const [walls, setWalls] = useState<PlayerWallState[]>([])
 
   const mapStateRef = useRef<PlayerMapState | null>(null)
   mapStateRef.current = mapState
@@ -182,6 +183,10 @@ export default function PlayerApp() {
 
       window.playerAPI.onDrawing((d: PlayerDrawingState) => {
         setDrawingData((prev) => [...prev, d])
+      }),
+
+      window.playerAPI.onWalls((w: PlayerWallState[]) => {
+        setWalls(w)
       }),
     ]
 

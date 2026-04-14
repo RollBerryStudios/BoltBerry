@@ -13,6 +13,7 @@ import type {
   PlayerInitiativeEntry,
   PlayerMeasureState,
   WeatherType,
+  PlayerWallState,
 } from '../../shared/ipc-types'
 
 /**
@@ -99,5 +100,10 @@ export function registerPlayerBridgeHandlers(): void {
   // Drawing data
   ipcMain.on(IPC.PLAYER_DRAWING, (_event, drawing: unknown) => {
     getPlayerWindow()?.webContents.send(IPC.PLAYER_DRAWING, drawing)
+  })
+
+  // Wall list for LOS
+  ipcMain.on(IPC.PLAYER_WALLS, (_event, walls: PlayerWallState[]) => {
+    getPlayerWindow()?.webContents.send(IPC.PLAYER_WALLS, walls)
   })
 }
