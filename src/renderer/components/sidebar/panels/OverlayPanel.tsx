@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useUIStore } from '../../../stores/uiStore'
 import type { PlayerOverlay, WeatherType } from '@shared/ipc-types'
 
 export function OverlayPanel() {
   const { t } = useTranslation()
+  const setOverlayActive = useUIStore((s) => s.setOverlayActive)
+  const setActiveWeather = useUIStore((s) => s.setActiveWeather)
   const [text, setText] = useState('')
   const [position, setPosition] = useState<PlayerOverlay['position']>('bottom')
   const [style, setStyle] = useState<PlayerOverlay['style']>('title')
@@ -34,15 +37,18 @@ export function OverlayPanel() {
     if (!text.trim()) return
     window.electronAPI?.sendOverlay({ text: text.trim(), position, style })
     setActive(true)
+    setOverlayActive(true)
   }
 
   function handleClear() {
     window.electronAPI?.sendOverlay(null)
     setActive(false)
+    setOverlayActive(false)
   }
 
   function handleWeather(type: WeatherType) {
     setWeather(type)
+    setActiveWeather(type)
     window.electronAPI?.sendWeather(type)
   }
 

@@ -17,6 +17,8 @@ interface MapTransformState extends MapTransform {
   zoomIn: () => void
   zoomOut: () => void
   fitToScreen: () => void
+  /** Pan so map point (mx, my) is centered in the viewport, keeping current scale. */
+  centerOnPoint: (mx: number, my: number) => void
   screenToMap: (sx: number, sy: number) => { x: number; y: number }
   mapToScreen: (mx: number, my: number) => { x: number; y: number }
 }
@@ -74,6 +76,14 @@ export const useMapTransformStore = create<MapTransformState>((set, get) => ({
       scale: fitScale,
       offsetX: (canvasW - imgW * fitScale) / 2,
       offsetY: (canvasH - imgH * fitScale) / 2,
+    })
+  },
+
+  centerOnPoint: (mx, my) => {
+    const { scale, canvasW, canvasH } = get()
+    set({
+      offsetX: canvasW / 2 - mx * scale,
+      offsetY: canvasH / 2 - my * scale,
     })
   },
 

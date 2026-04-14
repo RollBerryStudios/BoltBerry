@@ -21,8 +21,11 @@ interface MeasureState {
 const MEASURE_TOOLS = new Set(['measure-line', 'measure-circle', 'measure-cone'])
 
 export function MeasureLayer({ stageRef, gridSize, ftPerUnit }: MeasureLayerProps) {
-  const { activeTool } = useUIStore()
-  const { scale, offsetX, offsetY, screenToMap } = useMapTransformStore()
+  const activeTool = useUIStore((s) => s.activeTool)
+  const scale = useMapTransformStore((s) => s.scale)
+  const offsetX = useMapTransformStore((s) => s.offsetX)
+  const offsetY = useMapTransformStore((s) => s.offsetY)
+  const screenToMap = useMapTransformStore((s) => s.screenToMap)
   const [measure, setMeasure] = useState<MeasureState | null>(null)
 
   // Clear measure when switching away from measure tools (in useEffect, not render)

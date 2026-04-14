@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import i18n from '../i18n'
 
 export type ActiveTool = 'select' | 'fog-rect' | 'fog-polygon' | 'fog-cover' | 'fog-brush' | 'fog-brush-cover' | 'token' | 'atmosphere' | 'pointer' | 'measure-line' | 'measure-circle' | 'measure-cone' | 'draw-freehand' | 'draw-rect' | 'draw-circle' | 'draw-text' | 'wall-draw' | 'wall-door' | 'room'
-export type SidebarTab = 'tokens' | 'initiative' | 'notes' | 'handouts' | 'overlay' | 'audio' | 'dice' | 'encounters' | 'rooms'
+export type SidebarTab = 'tokens' | 'initiative' | 'notes' | 'handouts' | 'overlay' | 'audio' | 'dice' | 'encounters' | 'rooms' | 'characters'
 export type AppMode = 'map' | 'atmosphere' | 'blackout'
 export type SessionMode = 'session' | 'prep'
 export type WorkMode = 'prep' | 'play' | 'combat' | 'player-preview' | 'fog-edit'
@@ -30,6 +30,8 @@ interface UIState {
   fogBrushRadius: number
   workMode: WorkMode
   showPlayerEye: boolean
+  overlayActive: boolean
+  activeWeather: string
   clipboardTokens: Array<{
     name: string
     imagePath: string | null
@@ -70,6 +72,8 @@ interface UIState {
   setDrawWidth: (width: number) => void
   setFogBrushRadius: (radius: number) => void
   togglePlayerEye: () => void
+  setOverlayActive: (active: boolean) => void
+  setActiveWeather: (weather: string) => void
   setClipboardTokens: (tokens: Array<{
     name: string
     imagePath: string | null
@@ -96,9 +100,9 @@ export const useUIStore = create<UIState>((set) => ({
   playerConnected: false,
   blackoutActive: false,
   appMode: 'map',
-  sessionMode: 'session',
+  sessionMode: 'prep',
   theme: 'dark',
-  language: (localStorage.getItem('boltberry-lang') as AppLanguage | null) ?? 'de',
+  language: (() => { try { return (localStorage.getItem('boltberry-lang') as AppLanguage | null) ?? 'de' } catch { return 'de' as AppLanguage } })(),
   atmosphereImagePath: null,
   selectedTokenId: null,
   selectedTokenIds: [],
@@ -110,6 +114,8 @@ export const useUIStore = create<UIState>((set) => ({
   fogBrushRadius: 30,
   workMode: 'prep' as WorkMode,
   showPlayerEye: false,
+  overlayActive: false,
+  activeWeather: 'none',
   clipboardTokens: [],
 
   setActiveTool: (activeTool) => set({ activeTool }),
@@ -183,6 +189,8 @@ export const useUIStore = create<UIState>((set) => ({
   setDrawWidth: (drawWidth) => set({ drawWidth }),
   setFogBrushRadius: (fogBrushRadius: number) => set({ fogBrushRadius }),
   togglePlayerEye: () => set((s) => ({ showPlayerEye: !s.showPlayerEye })),
+  setOverlayActive: (overlayActive) => set({ overlayActive }),
+  setActiveWeather: (activeWeather) => set({ activeWeather }),
   setClipboardTokens: (tokens: Array<{
     name: string
     imagePath: string | null

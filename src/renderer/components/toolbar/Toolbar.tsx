@@ -3,7 +3,12 @@ import { useTranslation } from 'react-i18next'
 import { useUIStore, type ActiveTool, type WorkMode } from '../../stores/uiStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
+import { useTokenStore } from '../../stores/tokenStore'
+import { useInitiativeStore } from '../../stores/initiativeStore'
+import { useUndoStore } from '../../stores/undoStore'
+import { useFogStore } from '../../stores/fogStore'
 import { MonitorDialog } from '../MonitorDialog'
+import { SessionStartModal } from '../SessionStartModal'
 import clsx from 'clsx'
 import logoSquare from '../../assets/boltberry-logo.png'
 
@@ -98,7 +103,13 @@ function ToolGroup({ tools, activeTool, groupIcon, groupLabelKey, onSelect }: To
   )
 }
 
-// ─── Main Toolbar ──────────────────────────────────────────────────────────────
+// ─── Toolbar Divider ───────────────────────────────────────────────────────────
+
+function Divider() {
+  return <div style={{ width: 1, height: 24, background: 'var(--border)', margin: '0 4px', flexShrink: 0 }} />
+}
+
+// ─── Tool Definitions ──────────────────────────────────────────────────────────
 
 const PRIMARY_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
   { id: 'select',  icon: '↖',  labelKey: 'toolbar.tools.select',  shortcut: 'V' },
@@ -106,11 +117,14 @@ const PRIMARY_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut:
   { id: 'token',   icon: '⬤',  labelKey: 'toolbar.tools.token',   shortcut: 'T' },
 ]
 
-const FOG_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
-  { id: 'fog-brush',      icon: '🖌', labelKey: 'toolbar.tools.fogBrush',      shortcut: 'B' },
-  { id: 'fog-rect',       icon: '▭', labelKey: 'toolbar.tools.fogRect',       shortcut: 'F' },
-  { id: 'fog-polygon',    icon: '⬡', labelKey: 'toolbar.tools.fogPolygon',    shortcut: 'P' },
-  { id: 'fog-cover',      icon: '▮', labelKey: 'toolbar.tools.fogCover',      shortcut: 'C' },
+const FOG_DIRECT_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
+  { id: 'fog-brush', icon: '🖌', labelKey: 'toolbar.tools.fogBrush', shortcut: 'B' },
+  { id: 'fog-rect',  icon: '▭',  labelKey: 'toolbar.tools.fogRect',  shortcut: 'F' },
+]
+
+const FOG_GROUP_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
+  { id: 'fog-polygon',     icon: '⬡', labelKey: 'toolbar.tools.fogPolygon',    shortcut: 'P' },
+  { id: 'fog-cover',       icon: '▮', labelKey: 'toolbar.tools.fogCover',      shortcut: 'C' },
   { id: 'fog-brush-cover', icon: '✏', labelKey: 'toolbar.tools.fogBrushCover', shortcut: 'X' },
 ]
 
@@ -122,19 +136,29 @@ const MEASURE_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut:
 
 const DRAW_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
   { id: 'draw-freehand', icon: '✏️', labelKey: 'toolbar.tools.drawFreehand', shortcut: 'D' },
-  { id: 'draw-rect',    icon: '▢',  labelKey: 'toolbar.tools.drawRect',     shortcut: '' },
-  { id: 'draw-circle',  icon: '○',  labelKey: 'toolbar.tools.drawCircle',   shortcut: '' },
-  { id: 'draw-text',    icon: 'T',  labelKey: 'toolbar.tools.drawText',     shortcut: '' },
+  { id: 'draw-rect',     icon: '▢',  labelKey: 'toolbar.tools.drawRect',     shortcut: '' },
+  { id: 'draw-circle',   icon: '○',  labelKey: 'toolbar.tools.drawCircle',   shortcut: '' },
+  { id: 'draw-text',     icon: 'T',  labelKey: 'toolbar.tools.drawText',     shortcut: '' },
 ]
 
 const WALL_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
-  { id: 'wall-draw',  icon: '🧱', labelKey: 'toolbar.tools.wallDraw',  shortcut: 'G' },
-  { id: 'wall-door',  icon: '🚪', labelKey: 'toolbar.tools.wallDoor',  shortcut: 'J' },
+  { id: 'wall-draw', icon: '🧱', labelKey: 'toolbar.tools.wallDraw', shortcut: 'G' },
+  { id: 'wall-door', icon: '🚪', labelKey: 'toolbar.tools.wallDoor', shortcut: 'J' },
 ]
 
 const ROOM_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
   { id: 'room', icon: '🏠', labelKey: 'toolbar.tools.room', shortcut: 'R' },
 ]
+
+const WORK_MODE_CONFIG: { id: WorkMode; icon: string; label: string }[] = [
+  { id: 'prep',           icon: '✎',  label: 'Vorbereitung' },
+  { id: 'play',           icon: '▶',  label: 'Spiel' },
+  { id: 'combat',         icon: '⚔️', label: 'Kampf' },
+  { id: 'fog-edit',       icon: '🌫', label: 'Fog' },
+  { id: 'player-preview', icon: '👁', label: 'Spieler-Vorschau' },
+]
+
+// ─── Main Toolbar ──────────────────────────────────────────────────────────────
 
 export function Toolbar() {
   const { t } = useTranslation()
@@ -151,11 +175,32 @@ export function Toolbar() {
     fogBrushRadius, setFogBrushRadius,
     workMode, setWorkMode,
     showPlayerEye, togglePlayerEye,
+    playerConnected,
   } = useUIStore()
-  const { activeCampaignId } = useCampaignStore()
+  const { activeCampaignId, campaigns } = useCampaignStore()
   const [showMonitorDialog, setShowMonitorDialog] = useState(false)
+  const [showSessionModal, setShowSessionModal] = useState(false)
   const [cameraSent, setCameraSent] = useState(false)
   const zoomPercent = Math.round(useMapTransformStore((s) => s.scale / s.fitScale * 100))
+  const canUndo = useUndoStore((s) => s.undoStack.length > 0)
+  const canRedo = useUndoStore((s) => s.redoStack.length > 0)
+  const lastUndoLabel = useUndoStore((s) => s.undoStack[s.undoStack.length - 1]?.label ?? '')
+  const lastRedoLabel = useUndoStore((s) => s.redoStack[0]?.label ?? '')
+  const { undo, redo } = useUndoStore()
+
+  const activeCampaignName = campaigns.find((c) => c.id === activeCampaignId)?.name ?? ''
+
+  // Leave current campaign and return to campaign list
+  function handleLeaveCampaign() {
+    useCampaignStore.getState().setActiveCampaign(null)
+    useCampaignStore.getState().setActiveMaps([])
+    useCampaignStore.getState().setActiveMap(null)
+    useTokenStore.getState().setTokens([])
+    useInitiativeStore.getState().setEntries([])
+    useFogStore.getState().clearHistory()
+    useUIStore.getState().setWorkMode('prep')
+    useUIStore.getState().setSessionMode('prep')
+  }
 
   async function handleAtmosphere() {
     if (!window.electronAPI) return
@@ -178,11 +223,30 @@ export function Toolbar() {
   }
 
   function handleToolClick(tool: ActiveTool) {
-    if (tool === 'atmosphere') {
-      handleAtmosphere()
-      return
-    }
+    if (tool === 'atmosphere') { handleAtmosphere(); return }
     setActiveTool(tool)
+  }
+
+  function handleSessionToggle() {
+    if (sessionMode === 'prep') {
+      setShowSessionModal(true)
+    } else {
+      setSessionMode('prep')
+    }
+  }
+
+  function handleSessionConfirm() {
+    setShowSessionModal(false)
+    setSessionMode('session')
+    if (workMode === 'prep') setWorkMode('play')
+  }
+
+  function handlePlayerWindowToggle() {
+    if (playerConnected) {
+      window.electronAPI?.closePlayerWindow()
+    } else {
+      setShowMonitorDialog(true)
+    }
   }
 
   // Filter tools based on work mode
@@ -190,24 +254,42 @@ export function Toolbar() {
     if (workMode === 'player-preview') return tool.id === 'pointer'
     return true
   })
-  const showFogTools = workMode === 'fog-edit' || workMode === 'prep'
-  const showDrawTools = workMode === 'prep' || workMode === 'play' || workMode === 'combat'
-  const showWallTools = workMode === 'prep' || workMode === 'fog-edit'
+  const showFogTools     = workMode === 'fog-edit' || workMode === 'prep'
+  const showDrawTools    = workMode === 'prep' || workMode === 'play' || workMode === 'combat'
+  const showWallTools    = workMode === 'prep' || workMode === 'fog-edit'
   const showMeasureTools = workMode !== 'player-preview'
+  const showRoomTools    = workMode === 'prep' || workMode === 'play'
 
-  const WORK_MODE_CONFIG: { id: WorkMode; icon: string; label: string; color?: string }[] = [
-    { id: 'prep', icon: '✎', label: 'Vorbereitung' },
-    { id: 'play', icon: '▶', label: 'Spiel' },
-    { id: 'combat', icon: '⚔️', label: 'Kampf' },
-    { id: 'fog-edit', icon: '🌫', label: 'Fog' },
-    { id: 'player-preview', icon: '👁', label: 'Spieler' },
-  ]
+  const isLive = sessionMode === 'session'
 
   return (
     <div className="toolbar">
+
+      {/* ── SECTION: Navigation ─────────────────────────────────────────── */}
       <button className="tool-btn" title={t('toolbar.leftSidebar')} onClick={toggleLeftSidebar}>◧</button>
 
-      {/* Work mode selector */}
+      {activeCampaignId && (
+        <button
+          className="tool-btn"
+          title="Zur Kampagnenliste"
+          onClick={handleLeaveCampaign}
+          style={{
+            display: 'flex', alignItems: 'center', gap: 4,
+            fontSize: 'var(--text-xs)', fontWeight: 600,
+            maxWidth: 140, overflow: 'hidden',
+            color: 'var(--text-secondary)',
+          }}
+        >
+          <span style={{ fontSize: 10 }}>◁</span>
+          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            {activeCampaignName}
+          </span>
+        </button>
+      )}
+
+      <Divider />
+
+      {/* ── SECTION: Work Modes ─────────────────────────────────────────── */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
         {WORK_MODE_CONFIG.map((wm) => (
           <button
@@ -215,15 +297,21 @@ export function Toolbar() {
             className={clsx('tool-btn', workMode === wm.id && 'active')}
             title={wm.label}
             onClick={() => setWorkMode(wm.id)}
-            style={workMode === wm.id ? { color: wm.id === 'combat' ? 'var(--danger)' : wm.id === 'fog-edit' ? '#3b82f6' : wm.id === 'player-preview' ? '#22c55e' : undefined } : undefined}
+            style={workMode === wm.id ? {
+              color: wm.id === 'combat'         ? 'var(--danger)'
+                   : wm.id === 'fog-edit'       ? '#3b82f6'
+                   : wm.id === 'player-preview' ? '#22c55e'
+                   : undefined
+            } : undefined}
           >
             {wm.icon}
           </button>
         ))}
       </div>
 
-      <div style={{ width: 1, height: 24, background: 'var(--border)', margin: '0 4px' }} />
+      <Divider />
 
+      {/* ── SECTION: Tools ──────────────────────────────────────────────── */}
       {visiblePrimaryTools.map((tool) => (
         <button
           key={tool.id}
@@ -235,17 +323,29 @@ export function Toolbar() {
         </button>
       ))}
 
-      <div style={{ width: 1, height: 24, background: 'var(--border)', margin: '0 4px' }} />
+      {showFogTools && (
+        <>
+          {FOG_DIRECT_TOOLS.map((tool) => (
+            <button
+              key={tool.id}
+              className={clsx('tool-btn', activeTool === tool.id && 'active')}
+              title={`${t(tool.labelKey)} [${tool.shortcut}]`}
+              onClick={() => handleToolClick(tool.id)}
+            >
+              {tool.icon}
+            </button>
+          ))}
+          <ToolGroup
+            tools={FOG_GROUP_TOOLS}
+            activeTool={activeTool}
+            groupIcon="⬡"
+            groupLabelKey="toolbar.tools.fogGroup"
+            onSelect={handleToolClick}
+          />
+        </>
+      )}
 
-      {showFogTools && (<ToolGroup
-        tools={FOG_TOOLS}
-        activeTool={activeTool}
-        groupIcon="🖌"
-        groupLabelKey="toolbar.tools.fogGroup"
-        onSelect={handleToolClick}
-      />)}
-
-      {/* Fog brush size slider — shown when a fog brush tool is active */}
+      {/* Fog brush size — only when a brush fog tool is active */}
       {(activeTool === 'fog-brush' || activeTool === 'fog-brush-cover') && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 4, margin: '0 4px' }}>
           <span style={{ fontSize: 9, color: 'var(--text-muted)' }}>⌀</span>
@@ -259,47 +359,55 @@ export function Toolbar() {
         </div>
       )}
 
-      {/* Fog quick actions — shown when any fog tool is active */}
-      {(activeTool.startsWith('fog-')) && (
+      {/* Fog quick actions — shown when any fog tool is active or fog-edit mode */}
+      {(activeTool.startsWith('fog-') || workMode === 'fog-edit') && (
         <>
           <button className="tool-btn" title="Alles aufdecken" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'revealAll' } }))}>👁</button>
-          <button className="tool-btn" title="Alles zudecken" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'coverAll' } }))}>⬛</button>
-          <button className="tool-btn" title="Token aufdecken (Sichtbereich aller sichtbaren Token)" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'revealTokens' } }))}>⬤👁</button>
-          <button className="tool-btn" title="Erkundetes zurücksetzen (Komplett aufdecken)" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'resetExplored' } }))}>🔄</button>
+          <button className="tool-btn" title="Alles zudecken" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'coverAll' } }))}>🌑</button>
+          <button className="tool-btn" title="Token-Sichtbereich aufdecken" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'revealTokens' } }))}>⬤👁</button>
+          <button className="tool-btn" title="Erkundetes zurücksetzen" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'resetExplored' } }))}>🔄</button>
         </>
       )}
 
-      {showMeasureTools && (<ToolGroup
-        tools={MEASURE_TOOLS}
-        activeTool={activeTool}
-        groupIcon="📏"
-        groupLabelKey="toolbar.tools.measureGroup"
-        onSelect={handleToolClick}
-      />)}
+      {showMeasureTools && (
+        <ToolGroup
+          tools={MEASURE_TOOLS}
+          activeTool={activeTool}
+          groupIcon="📏"
+          groupLabelKey="toolbar.tools.measureGroup"
+          onSelect={handleToolClick}
+        />
+      )}
 
-      {showDrawTools && (<ToolGroup
-        tools={DRAW_TOOLS}
-        activeTool={activeTool}
-        groupIcon="✏️"
-        groupLabelKey="toolbar.tools.drawGroup"
-        onSelect={handleToolClick}
-      />)}
+      {showDrawTools && (
+        <ToolGroup
+          tools={DRAW_TOOLS}
+          activeTool={activeTool}
+          groupIcon="✏️"
+          groupLabelKey="toolbar.tools.drawGroup"
+          onSelect={handleToolClick}
+        />
+      )}
 
-      {showWallTools && (<ToolGroup
-        tools={WALL_TOOLS}
-        activeTool={activeTool}
-        groupIcon="🧱"
-        groupLabelKey="toolbar.tools.wallGroup"
-        onSelect={handleToolClick}
-      />)}
+      {showWallTools && (
+        <ToolGroup
+          tools={WALL_TOOLS}
+          activeTool={activeTool}
+          groupIcon="🧱"
+          groupLabelKey="toolbar.tools.wallGroup"
+          onSelect={handleToolClick}
+        />
+      )}
 
-      {(workMode === 'prep' || workMode === 'play') && (<ToolGroup
-        tools={ROOM_TOOLS}
-        activeTool={activeTool}
-        groupIcon="🏠"
-        groupLabelKey="toolbar.tools.roomGroup"
-        onSelect={handleToolClick}
-      />)}
+      {showRoomTools && (
+        <ToolGroup
+          tools={ROOM_TOOLS}
+          activeTool={activeTool}
+          groupIcon="🏠"
+          groupLabelKey="toolbar.tools.roomGroup"
+          onSelect={handleToolClick}
+        />
+      )}
 
       <button
         className="tool-btn"
@@ -318,56 +426,110 @@ export function Toolbar() {
         👁‍🗨
       </button>
 
-      <div style={{ width: 1, height: 24, background: 'var(--border)', margin: '0 4px' }} />
+      <Divider />
 
-      {/* Session mode */}
+      {/* ── SECTION: Session Status (prominent) ─────────────────────────── */}
       <button
-        className={clsx('tool-btn', sessionMode === 'prep' && 'active')}
-        title={sessionMode === 'session' ? t('toolbar.sessionModeHint') : t('toolbar.prepModeHint')}
-        onClick={() => setSessionMode(sessionMode === 'session' ? 'prep' : 'session')}
-        style={sessionMode === 'prep' ? { color: 'var(--warning)' } : undefined}
+        onClick={handleSessionToggle}
+        title={isLive ? 'Session beenden — Spieler-Sync deaktivieren' : 'Session starten — Änderungen live an Spieler senden'}
+        style={{
+          display: 'flex', alignItems: 'center', gap: 6,
+          padding: '4px 12px',
+          borderRadius: 'var(--radius)',
+          border: 'none',
+          cursor: 'pointer',
+          fontWeight: 700,
+          fontSize: 'var(--text-xs)',
+          letterSpacing: '0.04em',
+          transition: 'background var(--transition), color var(--transition)',
+          flexShrink: 0,
+          ...(isLive ? {
+            background: 'rgba(34, 197, 94, 0.15)',
+            color: '#22c55e',
+            outline: '1px solid rgba(34, 197, 94, 0.4)',
+          } : {
+            background: 'rgba(245, 158, 0, 0.15)',
+            color: 'var(--warning)',
+            outline: '1px solid rgba(245, 158, 0, 0.4)',
+          }),
+        }}
       >
-        {sessionMode === 'session' ? '▶' : '✎'}
+        <span style={{
+          width: 7, height: 7, borderRadius: '50%', flexShrink: 0,
+          background: isLive ? '#22c55e' : 'var(--warning)',
+          boxShadow: isLive ? '0 0 0 2px rgba(34,197,94,0.3)' : 'none',
+        }} />
+        {isLive ? 'LIVE' : 'VORBEREITUNG'}
       </button>
 
       {/* Camera follow toggle */}
       <button
         className={clsx('tool-btn', cameraFollowDM && 'active')}
-        title={cameraFollowDM ? 'Kamera-Folgemodus AN (DM-Ansicht wird kontinuierlich an Spieler gesendet)' : 'Kamera-Folgemodus AUS (Einmalig senden)'}
+        title={cameraFollowDM ? 'Kamera-Folgemodus AN — Kamera wird kontinuierlich synchronisiert' : 'Kamera-Folgemodus AUS — Einmalig senden mit 📺'}
         onClick={toggleCameraFollow}
         style={cameraFollowDM ? { color: 'var(--success)' } : undefined}
       >
         📡
       </button>
 
-      <div style={{ width: 1, height: 24, background: 'var(--border)', margin: '0 4px' }} />
+      <Divider />
 
-      {/* Blackout */}
+      {/* ── SECTION: Player Window ──────────────────────────────────────── */}
       <button
-        className={clsx('tool-btn', blackoutActive && 'active')}
-        title={t('toolbar.blackout')}
-        onClick={toggleBlackout}
-        style={blackoutActive ? { color: 'var(--warning)' } : undefined}
+        className={clsx('tool-btn', playerConnected && 'active')}
+        title={playerConnected ? 'Spielerfenster schließen' : 'Spielerfenster öffnen'}
+        onClick={handlePlayerWindowToggle}
+        style={playerConnected ? { color: '#22c55e' } : undefined}
       >
-        ⬛
+        {playerConnected ? '🖥' : '🖥'}
+        <span style={{ fontSize: 8, marginLeft: 2, opacity: 0.7 }}>{playerConnected ? '●' : '○'}</span>
       </button>
 
       {/* Single camera send */}
       <button
         className={clsx('tool-btn', cameraSent && 'active')}
-        title={t('toolbar.shareCamera')}
+        title="Kamera-Ausschnitt einmalig an Spieler senden"
         onClick={handleShareCamera}
         style={cameraSent ? { color: 'var(--success)' } : undefined}
       >
         📺
       </button>
 
-      <button className="tool-btn" title={t('toolbar.openPlayerWindow')} onClick={() => setShowMonitorDialog(true)}>🖥</button>
-      <button className="tool-btn" title="Playerfenster schließen" onClick={() => window.electronAPI?.closePlayerWindow()}>✕🖥</button>
+      {/* Blackout — use distinct icon */}
+      <button
+        className={clsx('tool-btn', blackoutActive && 'active')}
+        title={t('toolbar.blackout')}
+        onClick={toggleBlackout}
+        style={blackoutActive ? { color: 'var(--warning)' } : undefined}
+      >
+        🌚
+      </button>
 
-      <div style={{ width: 1, height: 24, background: 'var(--border)', margin: '0 4px' }} />
+      <Divider />
 
-      {/* Zoom controls + percentage */}
+      {/* ── SECTION: Undo / Redo ────────────────────────────────────────── */}
+      <button
+        className="tool-btn"
+        title={canUndo ? `Rückgängig: ${lastUndoLabel} (Ctrl+Z)` : 'Nichts rückgängig zu machen'}
+        disabled={!canUndo}
+        onClick={() => undo()}
+        style={!canUndo ? { opacity: 0.35 } : undefined}
+      >
+        ↩
+      </button>
+      <button
+        className="tool-btn"
+        title={canRedo ? `Wiederholen: ${lastRedoLabel} (Ctrl+Y)` : 'Nichts zu wiederholen'}
+        disabled={!canRedo}
+        onClick={() => redo()}
+        style={!canRedo ? { opacity: 0.35 } : undefined}
+      >
+        ↪
+      </button>
+
+      <Divider />
+
+      {/* ── SECTION: View ───────────────────────────────────────────────── */}
       <button className="tool-btn" title="Vergrößern (+)" onClick={() => useMapTransformStore.getState().zoomIn()}>🔍+</button>
       <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 36, textAlign: 'center', lineHeight: '32px', fontFamily: 'monospace' }}>
         {zoomPercent}%
@@ -375,13 +537,9 @@ export function Toolbar() {
       <button className="tool-btn" title="Verkleinern (-)" onClick={() => useMapTransformStore.getState().zoomOut()}>🔍−</button>
       <button className="tool-btn" title="Ansicht anpassen (0)" onClick={() => useMapTransformStore.getState().fitToScreen()}>⊡</button>
       <button className={clsx('tool-btn', showMinimap && 'active')} title="Minimap" onClick={toggleMinimap}>🗺</button>
-
-      <div style={{ width: 1, height: 24, background: 'var(--border)', margin: '0 4px' }} />
-
-      {/* Grid snap toggle */}
       <button
         className={clsx('tool-btn', gridSnap && 'active')}
-        title={gridSnap ? 'Raster-Snapp AN' : 'Raster-Snapp AUS'}
+        title={gridSnap ? 'Raster-Snap AN' : 'Raster-Snap AUS'}
         onClick={toggleGridSnap}
       >
         ⊞
@@ -389,23 +547,13 @@ export function Toolbar() {
 
       <div style={{ flex: 1 }} />
 
-      {/* Session mode indicator */}
-      {sessionMode === 'prep' && (
-        <div style={{
-          padding: '2px 8px', borderRadius: 'var(--radius)', fontSize: 'var(--text-xs)', fontWeight: 600,
-          background: 'rgba(245, 158, 0, 0.15)', color: 'var(--warning)', border: '1px solid rgba(245, 158, 0, 0.3)',
-          marginRight: 4,
-        }}>
-          PREP
-        </div>
-      )}
-
+      {/* ── SECTION: Misc ───────────────────────────────────────────────── */}
       {activeCampaignId && (
         <img
           src={logoSquare}
           alt="BoltBerry"
           style={{
-            height: 28,
+            height: 24,
             width: 'auto',
             marginRight: 'var(--sp-2)',
             filter: 'drop-shadow(0 0 6px rgba(245, 168, 0, 0.3))',
@@ -442,6 +590,14 @@ export function Toolbar() {
 
       {showMonitorDialog && (
         <MonitorDialog onClose={() => setShowMonitorDialog(false)} />
+      )}
+
+      {showSessionModal && (
+        <SessionStartModal
+          onConfirm={handleSessionConfirm}
+          onCancel={() => setShowSessionModal(false)}
+          onOpenPlayerWindow={() => { setShowSessionModal(false); setShowMonitorDialog(true) }}
+        />
       )}
     </div>
   )

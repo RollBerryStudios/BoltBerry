@@ -3,12 +3,18 @@ export const IPC = {
   // DM → Main → Player
   PLAYER_MAP_UPDATE: 'player:map-update',
   PLAYER_FOG_DELTA: 'player:fog-delta',
+  PLAYER_FOG_RESET: 'player:fog-reset',
   PLAYER_TOKEN_UPDATE: 'player:token-update',
   PLAYER_BLACKOUT: 'player:blackout',
   PLAYER_ATMOSPHERE: 'player:atmosphere',
   PLAYER_FULL_SYNC: 'player:full-sync',
   PLAYER_INITIATIVE: 'player:initiative',
   PLAYER_WEATHER: 'player:weather',
+
+  // Player → Main → DM (internal sync handshake)
+  PLAYER_REQUEST_SYNC: 'player:request-sync',
+  DM_REQUEST_FULL_SYNC: 'dm:request-full-sync',
+  DM_PLAYER_WINDOW_CLOSED: 'dm:player-window-closed',
 
   // DM ↔ Main
   GET_MONITORS: 'app:get-monitors',
@@ -49,6 +55,9 @@ export const IPC = {
   // DM → Player: drawing
   PLAYER_DRAWING: 'player:drawing',
 
+  // DM → Player: wall list for LOS computation
+  PLAYER_WALLS: 'player:walls',
+
   // Context menu
   SHOW_CONTEXT_MENU: 'app:show-context-menu',
 
@@ -66,6 +75,7 @@ export const IPC = {
   GET_USER_DATA_PATH: 'app:get-user-data-path',
   RESCAN_CONTENT_FOLDER: 'app:rescan-content-folder',
   DELETE_MAP_CONFIRM: 'app:delete-map-confirm',
+  CHOOSE_FOLDER: 'app:choose-folder',
 } as const
 
 // ─── Shared Data Types ─────────────────────────────────────────────────────────────────
@@ -132,6 +142,8 @@ export interface TokenRecord {
   statusEffects: string[] | null
   faction: string
   showName: boolean
+  lightRadius: number
+  lightColor: string
 }
 
 export interface EffectTimer {
@@ -319,4 +331,85 @@ export interface PlayerDrawingState {
   color: string
   width: number
   text?: string
+}
+
+// Minimal wall data sent to the player for LOS ray-casting
+export interface PlayerWallState {
+  x1: number
+  y1: number
+  x2: number
+  y2: number
+  wallType: string   // 'wall' | 'door' | 'window'
+  doorState: string  // 'open' | 'closed' | 'locked'
+}
+
+// ─── Character Sheet (D&D 5e) ─────────────────────────────────────────────────
+
+export interface CharacterAttack {
+  name: string
+  bonus: string
+  damage: string
+  damageType: string
+  range: string
+  notes: string
+}
+
+export interface CharacterSpellSlots {
+  [level: number]: { total: number; used: number }
+}
+
+export interface CharacterSpells {
+  [level: number]: string[]
+}
+
+export interface CharacterSavingThrows {
+  str: boolean; dex: boolean; con: boolean
+  int: boolean; wis: boolean; cha: boolean
+}
+
+export interface CharacterSkills {
+  acrobatics: boolean; animalHandling: boolean; arcana: boolean
+  athletics: boolean; deception: boolean; history: boolean
+  insight: boolean; intimidation: boolean; investigation: boolean
+  medicine: boolean; nature: boolean; perception: boolean
+  performance: boolean; persuasion: boolean; religion: boolean
+  sleightOfHand: boolean; stealth: boolean; survival: boolean
+}
+
+export interface CharacterSheet {
+  id: number
+  campaignId: number
+  tokenId: number | null
+  name: string
+  race: string
+  className: string
+  subclass: string
+  level: number
+  background: string
+  alignment: string
+  experience: number
+  // ability scores
+  str: number; dex: number; con: number
+  intScore: number; wis: number; cha: number
+  // HP / combat
+  hpMax: number; hpCurrent: number; hpTemp: number
+  ac: number; speed: number
+  initiativeBonus: number; proficiencyBonus: number
+  hitDice: string
+  deathSavesSuccess: number; deathSavesFailure: number
+  // JSON blobs
+  savingThrows: CharacterSavingThrows
+  skills: CharacterSkills
+  // text fields
+  languages: string; proficiencies: string
+  features: string; equipment: string
+  attacks: CharacterAttack[]
+  spells: CharacterSpells
+  spellSlots: CharacterSpellSlots
+  personality: string; ideals: string; bonds: string; flaws: string
+  backstory: string; notes: string
+  inspiration: number
+  passivePerception: number
+  createdAt: string
+  updatedAt: string
 }

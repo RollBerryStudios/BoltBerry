@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useInitiativeStore } from '../../../stores/initiativeStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
@@ -87,8 +87,8 @@ async function quickTokenUpdate(tokenId: number, updates: Record<string, any>) {
 
 export function InitiativePanel() {
   const { t } = useTranslation()
-  const { entries, round, addEntry, removeEntry, updateEntry, sortEntries, nextTurn, resetCombat, addTimer, removeTimer } = useInitiativeStore()
-  const { activeMapId } = useCampaignStore()
+  const { entries, round, addEntry, removeEntry, updateEntry, reorderEntries, sortEntries, nextTurn, resetCombat, addTimer, removeTimer } = useInitiativeStore()
+  const activeMapId = useCampaignStore((s) => s.activeMapId)
   const tokens = useTokenStore((s) => s.tokens)
   const [name, setName] = useState('')
   const [roll, setRoll] = useState('')
@@ -99,14 +99,22 @@ export function InitiativePanel() {
   const [timerEntryId, setTimerEntryId] = useState<number | null>(null)
   const [timerEffect, setTimerEffect] = useState('blessed')
   const [timerRounds, setTimerRounds] = useState('10')
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null)
+  const dragIndexRef = useRef<number | null>(null)
   const nameInputRef = useRef<HTMLInputElement>(null)
   const suggestionsRef = useRef<HTMLDivElement>(null)
 
-  const mapTokens = tokens
+  const mapTokens = useMemo(() =>
+    tokens.filter((t) => t.mapId === activeMapId),
+    [tokens, activeMapId]
+  )
 
-  const filteredTokens = name.trim()
-    ? mapTokens.filter((t) => t.name.toLowerCase().includes(name.toLowerCase()))
-    : mapTokens
+  const filteredTokens = useMemo(() =>
+    name.trim()
+      ? mapTokens.filter((t) => t.name.toLowerCase().includes(name.toLowerCase()))
+      : mapTokens,
+    [mapTokens, name]
+  )
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -200,6 +208,29 @@ export function InitiativePanel() {
     }
   }
 
+  async function handleAddAllTokens() {
+    if (!activeMapId || !window.electronAPI) return
+    const existingTokenIds = new Set(entries.map((e) => e.tokenId).filter(Boolean))
+    const tokensToAdd = mapTokens.filter((t) => !existingTokenIds.has(t.id))
+    if (tokensToAdd.length === 0) return
+    for (const token of tokensToAdd) {
+      try {
+        const result = await window.electronAPI.dbRun(
+          'INSERT INTO initiative (map_id, combatant_name, roll, current_turn, token_id) VALUES (?, ?, 0, 0, ?)',
+          [activeMapId, token.name, token.id]
+        )
+        addEntry({
+          id: result.lastInsertRowid, mapId: activeMapId,
+          combatantName: token.name, roll: 0, currentTurn: false,
+          tokenId: token.id, effectTimers: null,
+        })
+      } catch (err) {
+        console.error('[InitiativePanel] handleAddAllTokens failed:', err)
+      }
+    }
+    broadcastInitiative()
+  }
+
   function startEditRoll(entryId: number, currentRoll: number) {
     setEditingRollId(entryId)
     setEditRollValue(String(currentRoll))
@@ -268,6 +299,15 @@ export function InitiativePanel() {
               title="Sortieren"
             >
               ↕ Sortieren
+            </button>
+            <button
+              className="btn btn-ghost"
+              style={{ fontSize: 'var(--text-xs)', padding: '2px 6px' }}
+              onClick={handleAddAllTokens}
+              title={`Alle ${mapTokens.length} Karten-Token zur Initiative hinzufügen`}
+              disabled={mapTokens.length === 0}
+            >
+              ⊕ Alle
             </button>
             <button
               className="btn btn-ghost"
@@ -377,7 +417,7 @@ export function InitiativePanel() {
             <div className="empty-state-title" style={{ fontSize: 'var(--text-sm)' }}>{t('initiative.noCombat')}</div>
           </div>
         ) : (
-          entries.map((entry) => {
+          entries.map((entry, entryIdx) => {
             const dotColor = getTokenFactionColor(entry.tokenId)
             const linkedToken = entry.tokenId != null ? mapTokens.find((t) => t.id === entry.tokenId) : null
             const hpRatio = linkedToken && linkedToken.hpMax > 0 ? Math.max(0, Math.min(1, linkedToken.hpCurrent / linkedToken.hpMax)) : -1
@@ -387,11 +427,27 @@ export function InitiativePanel() {
             return (
               <div
                 key={entry.id}
+                draggable
+                onDragStart={() => { dragIndexRef.current = entryIdx }}
+                onDragOver={(e) => { e.preventDefault(); setDragOverIndex(entryIdx) }}
+                onDragLeave={() => setDragOverIndex(null)}
+                onDrop={() => {
+                  if (dragIndexRef.current != null && dragIndexRef.current !== entryIdx) {
+                    reorderEntries(dragIndexRef.current, entryIdx)
+                    broadcastInitiative()
+                  }
+                  dragIndexRef.current = null
+                  setDragOverIndex(null)
+                }}
+                onDragEnd={() => { dragIndexRef.current = null; setDragOverIndex(null) }}
                 style={{
                   padding: 'var(--sp-2) var(--sp-4)',
                   borderBottom: '1px solid var(--border-subtle)',
                   background: entry.currentTurn ? 'var(--accent-dim)' : 'transparent',
                   borderLeft: entry.currentTurn ? '3px solid var(--accent)' : '3px solid transparent',
+                  outline: dragOverIndex === entryIdx ? '1px solid var(--accent-blue)' : undefined,
+                  cursor: 'grab',
+                  userSelect: 'none',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
@@ -461,10 +517,10 @@ export function InitiativePanel() {
                     </span>
                   )}
                   <button
-                    style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 11, padding: '0 2px', lineHeight: 1 }}
+                    style={{ background: timerEntryId === entry.id ? 'var(--accent-blue-dim)' : 'var(--bg-overlay)', border: `1px solid ${timerEntryId === entry.id ? 'var(--accent-blue)' : 'var(--border-subtle)'}`, color: timerEntryId === entry.id ? 'var(--accent-blue-light)' : 'var(--text-muted)', cursor: 'pointer', fontSize: 10, padding: '1px 4px', lineHeight: 1, borderRadius: 3 }}
                     onClick={() => setTimerEntryId(timerEntryId === entry.id ? null : entry.id)}
                     title="Effekt-Timer hinzufügen"
-                  >⏱</button>
+                  >⏱ Timer</button>
                   <button
                     className="btn btn-ghost btn-icon"
                     style={{ fontSize: 10, padding: 2 }}

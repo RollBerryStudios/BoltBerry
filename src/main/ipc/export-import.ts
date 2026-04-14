@@ -126,6 +126,11 @@ export function registerExportImportHandlers(): void {
       return { success: false, error: 'campaign.json konnte nicht gelesen werden' }
     }
 
+    if (!campaignData?.campaign?.name || !Array.isArray(campaignData.maps)) {
+      rmSync(importDir, { recursive: true, force: true })
+      return { success: false, error: 'Ungültige Kampagnendaten: Pflichtfelder fehlen' }
+    }
+
     const assetsDir = path.join(importDir, 'assets')
     const destAssetsDir = path.join(userData, 'assets', 'imported')
     mkdirSync(destAssetsDir, { recursive: true })

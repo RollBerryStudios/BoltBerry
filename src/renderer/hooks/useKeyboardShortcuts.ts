@@ -13,6 +13,19 @@ export function useKeyboardShortcuts() {
       const tag = (e.target as HTMLElement).tagName
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
 
+      // ── Alt shortcuts — sidebar tab switching ─────────────────────────────
+      if (e.altKey && !e.ctrlKey && !e.metaKey) {
+        const SIDEBAR_TABS: import('../stores/uiStore').SidebarTab[] = [
+          'tokens', 'initiative', 'encounters', 'rooms', 'notes', 'handouts', 'overlay', 'audio', 'dice',
+        ]
+        const idx = parseInt(e.key) - 1
+        if (idx >= 0 && idx < SIDEBAR_TABS.length) {
+          e.preventDefault()
+          useUIStore.getState().setSidebarTab(SIDEBAR_TABS[idx])
+        }
+        return
+      }
+
       // ── Ctrl / Cmd shortcuts ──────────────────────────────────────────────
       if (e.ctrlKey || e.metaKey) {
         switch (e.key.toLowerCase()) {
@@ -101,16 +114,30 @@ export function useKeyboardShortcuts() {
             const ids = [...selectedTokenIds]
             const tokens = useTokenStore.getState().tokens
             const names = ids.map((id) => tokens.find((t) => t.id === id)?.name ?? 'Token').join(', ')
-            window.electronAPI?.deleteTokenConfirm(names).then((confirmed) => {
+            window.electronAPI?.deleteTokenConfirm(names).then(async (confirmed) => {
               if (!confirmed) return
               for (const id of ids) {
                 useTokenStore.getState().removeToken(id)
               }
-              window.electronAPI?.dbRun(
-                `DELETE FROM tokens WHERE id IN (${ids.map(() => '?').join(',')})`,
-                ids
-              )
+              // Null out initiative references to deleted tokens (matches TokenLayer behaviour)
+              useInitiativeStore.getState().entries.forEach((entry) => {
+                if (entry.tokenId != null && ids.includes(entry.tokenId)) {
+                  useInitiativeStore.getState().updateEntry(entry.id, { tokenId: null })
+                }
+              })
               useUIStore.getState().clearTokenSelection()
+              try {
+                await window.electronAPI?.dbRun(
+                  `DELETE FROM tokens WHERE id IN (${ids.map(() => '?').join(',')})`,
+                  ids
+                )
+                await window.electronAPI?.dbRun(
+                  `UPDATE initiative SET token_id = NULL WHERE token_id IN (${ids.map(() => '?').join(',')})`,
+                  ids
+                )
+              } catch (err) {
+                console.error('[useKeyboardShortcuts] token delete failed:', err)
+              }
             })
           }
           break

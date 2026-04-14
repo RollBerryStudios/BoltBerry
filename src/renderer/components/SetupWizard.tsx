@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
 import { useSettingsStore } from '../stores/settingsStore'
 
 interface SetupWizardProps {
@@ -7,39 +6,51 @@ interface SetupWizardProps {
 }
 
 export function SetupWizard({ onComplete }: SetupWizardProps) {
-  const { t } = useTranslation()
-  const { userDataFolder, setUserDataFolder } = useSettingsStore()
+  const { setUserDataFolder, setIsSetupComplete } = useSettingsStore()
   const [tempFolder, setTempFolder] = useState('')
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    setTempFolder(userDataFolder)
-  }, [userDataFolder])
+    if (!window.electronAPI) {
+      setLoading(false)
+      return
+    }
+    window.electronAPI.getDefaultUserDataFolder()
+      .then((path: string) => {
+        if (path) setTempFolder(path)
+      })
+      .catch((err: unknown) => {
+        console.error('[SetupWizard] getDefaultUserDataFolder failed:', err)
+      })
+      .finally(() => setLoading(false))
+  }, [])
 
   async function handleChooseFolder() {
     if (!window.electronAPI) return
-    
+    setError(null)
     try {
-      const result = await window.electronAPI.importFile('atmosphere') // We'll reuse this for folder selection
-      if (result?.path) {
-        // Extract directory from the selected file path
-        const directory = result.path.substring(0, result.path.lastIndexOf('/'))
-        setTempFolder(directory)
-      }
+      const chosen = await window.electronAPI.chooseFolder()
+      if (chosen) setTempFolder(chosen)
     } catch (err) {
-      console.error('[SetupWizard] folder selection failed:', err)
+      console.error('[SetupWizard] chooseFolder failed:', err)
       setError('Ordnerauswahl fehlgeschlagen')
     }
   }
 
   async function handleContinue() {
-    if (tempFolder.trim()) {
-      // Set the custom user data folder in the main process
+    const folder = tempFolder.trim()
+    if (!folder) return
+    try {
       if (window.electronAPI) {
-        await window.electronAPI.setUserDataFolder(tempFolder)
+        await window.electronAPI.setUserDataFolder(folder)
       }
-      setUserDataFolder(tempFolder)
+      setUserDataFolder(folder)
+      setIsSetupComplete(true)
       onComplete()
+    } catch (err) {
+      console.error('[SetupWizard] setUserDataFolder failed:', err)
+      setError('Ordner konnte nicht gesetzt werden')
     }
   }
 
@@ -62,73 +73,68 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
         textAlign: 'center',
       }}>
         <h2 style={{ marginBottom: 'var(--sp-2)' }}>Willkommen bei BoltBerry!</h2>
-        <p style={{ 
-          color: 'var(--text-muted)', 
+        <p style={{
+          color: 'var(--text-muted)',
           marginBottom: 'var(--sp-6)',
-          lineHeight: 1.5
+          lineHeight: 1.5,
         }}>
-          Wählen Sie einen Ordner für Ihre BoltBerry-Daten. 
+          Wählen Sie einen Ordner für Ihre BoltBerry-Daten.
           Wir empfehlen den Standardordner zu verwenden.
         </p>
 
-        <div style={{ 
-          display: 'flex', 
-          flexDirection: 'column', 
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
           gap: 'var(--sp-3)',
-          marginBottom: 'var(--sp-6)'
+          marginBottom: 'var(--sp-6)',
         }}>
-          <label style={{ 
-            textAlign: 'left', 
-            fontSize: 'var(--text-sm)', 
+          <label style={{
+            textAlign: 'left',
+            fontSize: 'var(--text-sm)',
             color: 'var(--text-muted)',
-            fontWeight: 500
+            fontWeight: 500,
           }}>
             Datenordner
           </label>
-          
+
           <div style={{ display: 'flex', gap: 'var(--sp-2)' }}>
             <input
               className="input"
-              value={tempFolder}
+              value={loading ? 'Lade…' : tempFolder}
               onChange={(e) => setTempFolder(e.target.value)}
               placeholder="Pfad zum Datenordner"
+              disabled={loading}
               style={{ flex: 1 }}
             />
-            <button 
+            <button
               className="btn btn-ghost"
               onClick={handleChooseFolder}
+              disabled={loading}
             >
               Durchsuchen
             </button>
           </div>
-          
+
           {error && (
             <div style={{
               color: 'var(--error)',
               fontSize: 'var(--text-xs)',
               textAlign: 'left',
-              marginTop: 'var(--sp-1)'
             }}>
               {error}
             </div>
           )}
         </div>
 
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between',
-          gap: 'var(--sp-2)'
+        <div style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          gap: 'var(--sp-2)',
         }}>
-          <button 
-            className="btn btn-ghost"
-            onClick={() => setTempFolder('')}
-          >
-            Zurücksetzen
-          </button>
-          <button 
+          <button
             className="btn btn-primary"
             onClick={handleContinue}
-            disabled={!tempFolder.trim()}
+            disabled={loading || !tempFolder.trim()}
           >
             Weiter
           </button>

@@ -1,5 +1,6 @@
-import { useState, useEffect, RefObject } from 'react'
+import { useState, useEffect, useMemo, useRef, RefObject } from 'react'
 import { Layer, Line, Rect, Circle, Text as KonvaText } from 'react-konva'
+import { Html } from 'react-konva-utils'
 import Konva from 'konva'
 import { useUIStore } from '../../stores/uiStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
@@ -24,18 +25,27 @@ interface DrawingLayerProps {
 const DRAWING_TOOLS = new Set<string>(['draw-freehand', 'draw-rect', 'draw-circle', 'draw-text'])
 
 export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
-  const { activeTool } = useUIStore()
-  const { drawColor, drawWidth } = useUIStore()
-  const { scale, offsetX, offsetY, screenToMap } = useMapTransformStore()
+  const activeTool = useUIStore((s) => s.activeTool)
+  const drawColor = useUIStore((s) => s.drawColor)
+  const drawWidth = useUIStore((s) => s.drawWidth)
+  const scale = useMapTransformStore((s) => s.scale)
+  const offsetX = useMapTransformStore((s) => s.offsetX)
+  const offsetY = useMapTransformStore((s) => s.offsetY)
+  const screenToMap = useMapTransformStore((s) => s.screenToMap)
   const [drawings, setDrawings] = useState<Drawing[]>([])
   const [currentPath, setCurrentPath] = useState<number[]>([])
   const [loadedMapId, setLoadedMapId] = useState<number | null>(null)
+  const [pendingText, setPendingText] = useState<{ screenX: number; screenY: number; mapX: number; mapY: number } | null>(null)
+  const [pendingTextValue, setPendingTextValue] = useState('')
+  const textInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
+    let cancelled = false
     loadDrawings(mapId)
-      .then(setDrawings)
-      .catch((err) => console.error('[DrawingLayer] loadDrawings failed:', err))
+      .then((result) => { if (!cancelled) setDrawings(result) })
+      .catch((err) => { if (!cancelled) console.error('[DrawingLayer] loadDrawings failed:', err) })
     setLoadedMapId(mapId)
+    return () => { cancelled = true }
   }, [mapId])
 
   const isDrawingActive = DRAWING_TOOLS.has(activeTool)
@@ -56,9 +66,13 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
     if (activeTool === 'draw-freehand') {
       setCurrentPath([pos.x, pos.y])
     } else if (activeTool === 'draw-text') {
-      const label = prompt('Text:')
-      if (label) {
-        addDrawing({ type: 'text', points: [pos.x, pos.y], color: drawColor, width: drawWidth, text: label })
+      const stage = stageRef.current
+      const containerRect = stage?.container().getBoundingClientRect()
+      const screenPos = stage?.getPointerPosition()
+      if (containerRect && screenPos) {
+        setPendingText({ screenX: screenPos.x, screenY: screenPos.y, mapX: pos.x, mapY: pos.y })
+        setPendingTextValue('')
+        setTimeout(() => textInputRef.current?.focus(), 20)
       }
     } else if (activeTool === 'draw-rect' || activeTool === 'draw-circle') {
       setCurrentPath([pos.x, pos.y, pos.x, pos.y])
@@ -105,7 +119,9 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
     }
   }
 
-  function renderDrawing(d: Drawing) {
+  // Memoized rendered nodes: only recompute when drawings or transform changes,
+  // not on tool/color/currentPath changes.
+  const renderedDrawings = useMemo(() => drawings.map((d) => {
     if (d.type === 'freehand' && d.points.length >= 4) {
       const screenPoints = d.points.flatMap((p, i) => i % 2 === 0 ? p * scale + offsetX : p * scale + offsetY)
       return <Line key={d.id} points={screenPoints} stroke={d.color} strokeWidth={d.width * scale} listening={false} />
@@ -135,7 +151,7 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
         fontSize={14 * scale} fill={d.color} listening={false} />
     }
     return null
-  }
+  }), [drawings, scale, offsetX, offsetY])
 
   function renderCurrentPath() {
     if (currentPath.length < 2) return null
@@ -164,6 +180,13 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
     return null
   }
 
+  function commitPendingText() {
+    if (!pendingText || !pendingTextValue.trim()) { setPendingText(null); return }
+    addDrawing({ type: 'text', points: [pendingText.mapX, pendingText.mapY], color: drawColor, width: drawWidth, text: pendingTextValue.trim() })
+    setPendingText(null)
+    setPendingTextValue('')
+  }
+
   return (
     <Layer
       listening={isDrawingActive}
@@ -171,8 +194,37 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
-      {drawings.map(renderDrawing)}
+      {renderedDrawings}
       {isDrawingActive && renderCurrentPath()}
+
+      {pendingText && (
+        <Html divProps={{ style: { position: 'absolute', top: 0, left: 0, pointerEvents: 'none' } }}>
+          <div style={{ position: 'fixed', left: pendingText.screenX, top: pendingText.screenY, zIndex: 9999, pointerEvents: 'all' }}>
+            <input
+              ref={textInputRef}
+              value={pendingTextValue}
+              onChange={(e) => setPendingTextValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') { e.preventDefault(); commitPendingText() }
+                if (e.key === 'Escape') { setPendingText(null) }
+              }}
+              onBlur={commitPendingText}
+              placeholder="Text eingeben…"
+              style={{
+                background: 'var(--bg-elevated)',
+                border: '1px solid var(--accent-blue)',
+                borderRadius: 4,
+                color: 'var(--text-primary)',
+                fontSize: 13,
+                padding: '3px 8px',
+                outline: 'none',
+                minWidth: 140,
+                boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
+              }}
+            />
+          </div>
+        </Html>
+      )}
     </Layer>
   )
 }

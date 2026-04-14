@@ -14,6 +14,7 @@ const ASSET_EXTENSIONS = {
   map: ['.png', '.jpg', '.jpeg', '.webp'],
   token: ['.png', '.jpg', '.jpeg', '.webp'],
   atmosphere: ['.png', '.jpg', '.jpeg', '.webp', '.gif'],
+  handout: ['.png', '.jpg', '.jpeg', '.webp', '.gif'],
   audio: ['.mp3', '.ogg', '.wav', '.m4a'],
 }
 
@@ -56,6 +57,18 @@ export function registerAppHandlers(): void {
   // Get default user data folder
   ipcMain.handle(IPC.GET_DEFAULT_USER_DATA_FOLDER, () => {
     return join(app.getPath('documents'), 'BoltBerry')
+  })
+
+  // Open native folder picker — returns chosen path or null
+  ipcMain.handle(IPC.CHOOSE_FOLDER, async (event) => {
+    const win = BrowserWindow.fromWebContents(event.sender)
+    const result = await dialog.showOpenDialog(win!, {
+      title: 'Datenordner wählen',
+      defaultPath: join(app.getPath('documents'), 'BoltBerry'),
+      properties: ['openDirectory', 'createDirectory'],
+    })
+    if (result.canceled || !result.filePaths[0]) return null
+    return result.filePaths[0]
   })
 
   // Set custom user data folder
@@ -184,10 +197,10 @@ export function registerAppHandlers(): void {
   })
 
   // Import file dialog \u2192 copy to AppData, return stored path
-  ipcMain.handle(IPC.IMPORT_FILE, async (_event, type: 'map' | 'token' | 'atmosphere' | 'audio', campaignId?: number) => {
+  ipcMain.handle(IPC.IMPORT_FILE, async (_event, type: 'map' | 'token' | 'atmosphere' | 'handout' | 'audio', campaignId?: number) => {
     const extensions = ASSET_EXTENSIONS[type]
-    const titles = { map: 'Karte', token: 'Token', atmosphere: 'Atmosph\u00e4re-Bild', audio: 'Audio-Datei' }
-    const filterNames = { map: 'Bilder', token: 'Bilder', atmosphere: 'Bilder', audio: 'Audio' }
+    const titles = { map: 'Karte', token: 'Token', atmosphere: 'Atmosph\u00e4re-Bild', handout: 'Handout-Bild', audio: 'Audio-Datei' }
+    const filterNames = { map: 'Bilder', token: 'Bilder', atmosphere: 'Bilder', handout: 'Bilder', audio: 'Audio' }
     const result = await dialog.showOpenDialog({
       title: `${titles[type]} importieren`,
       filters: [
@@ -239,14 +252,19 @@ export function registerAppHandlers(): void {
     const userDataPath = getCustomUserDataPath() || app.getPath('userData')
     const relativePath = relative(userDataPath, destPath)
 
-    // Register in assets table
-    const db = getDb()
-    const stmt = db.prepare(
-      `INSERT INTO assets (original_name, stored_path, type, campaign_id) VALUES (?, ?, ?, ?)`
-    )
-    const result2 = stmt.run(srcPath.split(/[\\/]/).pop()!, relativePath, type, campaignId ?? null)
-
-    return { id: result2.lastInsertRowid, path: relativePath }
+    // Register in assets table — clean up copied file if DB insert fails
+    try {
+      const db = getDb()
+      const stmt = db.prepare(
+        `INSERT INTO assets (original_name, stored_path, type, campaign_id) VALUES (?, ?, ?, ?)`
+      )
+      const result2 = stmt.run(srcPath.split(/[\\/]/).pop()!, relativePath, type, campaignId ?? null)
+      return { id: result2.lastInsertRowid, path: relativePath }
+    } catch (err) {
+      console.error('[AppHandlers] DB insert failed, removing orphaned file:', err)
+      try { unlinkSync(destPath) } catch {}
+      return null
+    }
   })
 
   // Import PDF \u2192 returns file bytes so renderer can render with pdfjs
@@ -373,7 +391,7 @@ export function registerAppHandlers(): void {
       message,
       detail,
       buttons: ['Abbrechen', 'OK'],
-      defaultId: 0,
+      defaultId: 1,
       cancelId: 0,
     })
     return response === 1

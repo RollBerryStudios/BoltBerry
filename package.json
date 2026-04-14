@@ -1,6 +1,6 @@
 {
   "name": "boltberry",
-  "version": "0.19.3",
+  "version": "0.19.19",
   "description": "BoltBerry \u2013 Lokale Virtual-Tabletop-App f\u00fcr Pen-and-Paper-Runden",
   "main": "dist/main/main/index.js",
   "homepage": ".",
@@ -27,6 +27,8 @@
     "dist:mac": "npm run build && electron-builder --mac",
     "dist:linux": "npm run build && electron-builder --linux",
     "test": "vitest run",
+    "check:bundle": "node scripts/check-player-bundle.mjs",
+    "check:all": "npm test && npm run check:bundle",
     "test:e2e": "playwright test",
     "lint": "eslint src --ext .ts,.tsx",
     "postinstall": "electron-builder install-app-deps"

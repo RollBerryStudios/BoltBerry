@@ -1,7 +1,6 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 import type { TokenRecord } from '@shared/ipc-types'
-import { useUIStore } from './uiStore'
 
 interface TokenState {
   tokens: TokenRecord[]

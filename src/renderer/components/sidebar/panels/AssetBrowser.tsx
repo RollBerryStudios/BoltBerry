@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import { useTokenStore } from '../../../stores/tokenStore'
 import { useMapTransformStore } from '../../../stores/mapTransformStore'
@@ -8,7 +8,7 @@ interface AssetRow {
   id: number
   originalName: string
   storedPath: string
-  type: 'map' | 'token' | 'atmosphere' | 'audio'
+  type: 'map' | 'token' | 'atmosphere' | 'handout' | 'audio'
 }
 
 const TYPE_LABELS: Record<string, string> = {
@@ -19,9 +19,12 @@ const TYPE_LABELS: Record<string, string> = {
 }
 
 export function AssetBrowser() {
-  const { activeCampaignId, activeMapId, activeMaps } = useCampaignStore()
+  const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
+  const activeMapId = useCampaignStore((s) => s.activeMapId)
+  const activeMaps = useCampaignStore((s) => s.activeMaps)
   const [assets, setAssets] = useState<AssetRow[]>([])
   const [filter, setFilter] = useState<string>('all')
+  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
     loadAssets()
@@ -33,7 +36,7 @@ export function AssetBrowser() {
     const rows = await window.electronAPI.dbQuery<{
       id: number; original_name: string; stored_path: string; type: string
     }>(
-      'SELECT id, original_name, stored_path, type FROM assets WHERE campaign_id = ? OR campaign_id IS NULL ORDER BY id DESC',
+      'SELECT id, original_name, stored_path, type FROM assets WHERE (campaign_id = ? OR campaign_id IS NULL) AND type != \'handout\' ORDER BY id DESC',
       [activeCampaignId ?? -1]
     )
     setAssets(rows.map((r) => ({
@@ -87,13 +90,22 @@ export function AssetBrowser() {
         statusEffects: null,
         faction: 'party',
         showName: true,
+        lightRadius: 0,
+        lightColor: '#ffcc44',
       })
     } catch (err) {
       console.error('[AssetBrowser] token insert failed:', err)
     }
   }
 
-  const filtered = filter === 'all' ? assets : assets.filter((a) => a.type === filter)
+  const filtered = useMemo(() => {
+    let result = filter === 'all' ? assets : assets.filter((a) => a.type === filter)
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase()
+      result = result.filter((a) => a.originalName.toLowerCase().includes(q))
+    }
+    return result
+  }, [assets, filter, searchQuery])
   const imageTypes = ['map', 'token', 'atmosphere']
 
   return (
@@ -101,6 +113,20 @@ export function AssetBrowser() {
       <div className="sidebar-section-title" style={{ marginBottom: 'var(--sp-3)' }}>
         Asset-Browser
       </div>
+
+      {/* Search field */}
+      <input
+        type="search"
+        placeholder="Suchen…"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        style={{
+          width: '100%', fontSize: 'var(--text-xs)', padding: '4px 8px',
+          background: 'var(--bg-base)', border: '1px solid var(--border)',
+          borderRadius: 3, color: 'var(--text-primary)', marginBottom: 'var(--sp-2)',
+          outline: 'none', boxSizing: 'border-box',
+        }}
+      />
 
       {/* Filter tabs */}
       <div style={{ display: 'flex', gap: 'var(--sp-1)', marginBottom: 'var(--sp-3)', flexWrap: 'wrap' }}>

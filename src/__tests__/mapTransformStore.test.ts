@@ -35,4 +35,85 @@ describe('mapTransformStore', () => {
     expect(back.x).toBeCloseTo(screen.x)
     expect(back.y).toBeCloseTo(screen.y)
   })
+
+  it('setTransform merges partial state', () => {
+    useMapTransformStore.setState({ scale: 1, offsetX: 0, offsetY: 0 })
+    useMapTransformStore.getState().setTransform({ scale: 3, offsetX: 100 })
+    const s = useMapTransformStore.getState()
+    expect(s.scale).toBe(3)
+    expect(s.offsetX).toBe(100)
+    expect(s.offsetY).toBe(0)
+  })
+
+  it('reset returns to default state', () => {
+    useMapTransformStore.getState().setTransform({ scale: 5, offsetX: 200, offsetY: 300 })
+    useMapTransformStore.getState().reset()
+    const s = useMapTransformStore.getState()
+    expect(s.scale).toBe(1)
+    expect(s.offsetX).toBe(0)
+    expect(s.offsetY).toBe(0)
+  })
+
+  it('zoomIn multiplies scale by ZOOM_FACTOR, clamped at MAX_SCALE', () => {
+    useMapTransformStore.setState({ scale: 1, offsetX: 0, offsetY: 0, canvasW: 800, canvasH: 600 })
+    useMapTransformStore.getState().zoomIn()
+    const s = useMapTransformStore.getState()
+    expect(s.scale).toBeCloseTo(1.3)
+  })
+
+  it('zoomIn does not exceed MAX_SCALE (12)', () => {
+    useMapTransformStore.setState({ scale: 11, offsetX: 0, offsetY: 0, canvasW: 800, canvasH: 600 })
+    useMapTransformStore.getState().zoomIn()
+    expect(useMapTransformStore.getState().scale).toBe(12)
+  })
+
+  it('zoomOut divides scale by ZOOM_FACTOR, clamped at MIN_SCALE', () => {
+    useMapTransformStore.setState({ scale: 1, offsetX: 0, offsetY: 0, canvasW: 800, canvasH: 600 })
+    useMapTransformStore.getState().zoomOut()
+    const s = useMapTransformStore.getState()
+    expect(s.scale).toBeCloseTo(1 / 1.3)
+  })
+
+  it('zoomOut does not go below MIN_SCALE (0.05)', () => {
+    useMapTransformStore.setState({ scale: 0.06, offsetX: 0, offsetY: 0, canvasW: 800, canvasH: 600 })
+    useMapTransformStore.getState().zoomOut()
+    expect(useMapTransformStore.getState().scale).toBe(0.05)
+  })
+
+  it('fitToScreen sets scale to fitScale and centers image', () => {
+    useMapTransformStore.setState({ scale: 3, fitScale: 0.5, imgW: 1600, imgH: 900, canvasW: 800, canvasH: 600 })
+    useMapTransformStore.getState().fitToScreen()
+    const s = useMapTransformStore.getState()
+    expect(s.scale).toBe(0.5)
+    // offsetX = (canvasW - imgW * fitScale) / 2 = (800 - 1600 * 0.5) / 2 = 0
+    expect(s.offsetX).toBeCloseTo(0)
+    // offsetY = (canvasH - imgH * fitScale) / 2 = (600 - 900 * 0.5) / 2 = 75
+    expect(s.offsetY).toBeCloseTo(75)
+  })
+
+  it('fitToScreen is a no-op when no image is loaded', () => {
+    useMapTransformStore.setState({ scale: 2, imgW: 0, imgH: 0 })
+    useMapTransformStore.getState().fitToScreen()
+    expect(useMapTransformStore.getState().scale).toBe(2)
+  })
+
+  it('centerOnPoint places map point at canvas centre', () => {
+    // Canvas 800×600, scale 2 → map point (100, 50) should land at screen (400, 300)
+    useMapTransformStore.setState({ scale: 2, canvasW: 800, canvasH: 600 })
+    useMapTransformStore.getState().centerOnPoint(100, 50)
+    const s = useMapTransformStore.getState()
+    // offsetX = canvasW/2 - mx*scale = 400 - 200 = 200
+    expect(s.offsetX).toBe(200)
+    // offsetY = canvasH/2 - my*scale = 300 - 100 = 200
+    expect(s.offsetY).toBe(200)
+    // Verify via mapToScreen: map(100,50) → screen should be (400, 300)
+    const { mapToScreen } = useMapTransformStore.getState()
+    expect(mapToScreen(100, 50)).toEqual({ x: 400, y: 300 })
+  })
+
+  it('centerOnPoint does not change scale', () => {
+    useMapTransformStore.setState({ scale: 3, canvasW: 600, canvasH: 400 })
+    useMapTransformStore.getState().centerOnPoint(0, 0)
+    expect(useMapTransformStore.getState().scale).toBe(3)
+  })
 })

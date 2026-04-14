@@ -21,6 +21,8 @@ interface InitiativeState {
   addEntry: (entry: InitiativeEntry) => void
   removeEntry: (id: number) => void
   updateEntry: (id: number, patch: Partial<InitiativeEntry>) => void
+  /** Reorder without re-sorting by roll — preserves manual drag order */
+  reorderEntries: (fromIndex: number, toIndex: number) => void
   nextTurn: () => void
   resetCombat: () => void
   sortEntries: () => void
@@ -54,6 +56,13 @@ export const useInitiativeStore = create<InitiativeState>()(
         const e = s.entries.find((e) => e.id === id)
         if (e) Object.assign(e, patch)
         s.entries.sort((a, b) => b.roll - a.roll)
+      }),
+
+    reorderEntries: (fromIndex, toIndex) =>
+      set((s) => {
+        if (fromIndex === toIndex) return
+        const [moved] = s.entries.splice(fromIndex, 1)
+        s.entries.splice(toIndex, 0, moved)
       }),
 
     nextTurn: () => {

@@ -18,7 +18,11 @@ const MIN_SCALE = 0.05
 const MAX_SCALE = 12
 
 export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }: MapLayerProps) {
-  const { scale, offsetX, offsetY, setTransform, reset } = useMapTransformStore()
+  const scale = useMapTransformStore((s) => s.scale)
+  const offsetX = useMapTransformStore((s) => s.offsetX)
+  const offsetY = useMapTransformStore((s) => s.offsetY)
+  const setTransform = useMapTransformStore((s) => s.setTransform)
+  const reset = useMapTransformStore((s) => s.reset)
   const resolvedImagePath = map.imagePath
   const { img: image, imgW: natW, imgH: natH } = useRotatedImage(resolvedImagePath, map.rotation ?? 0)
   const isPanning = useRef(false)

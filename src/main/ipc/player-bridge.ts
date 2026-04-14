@@ -13,6 +13,7 @@ import type {
   PlayerInitiativeEntry,
   PlayerMeasureState,
   WeatherType,
+  PlayerWallState,
 } from '../../shared/ipc-types'
 
 /**
@@ -26,9 +27,9 @@ export function registerPlayerBridgeHandlers(): void {
     getPlayerWindow()?.webContents.send(IPC.PLAYER_FULL_SYNC, state)
   })
 
-  ipcMain.on('player:request-sync', () => {
+  ipcMain.on(IPC.PLAYER_REQUEST_SYNC, () => {
     // Ask DM to broadcast its current full state
-    getDMWindow()?.webContents.send('dm:request-full-sync')
+    getDMWindow()?.webContents.send(IPC.DM_REQUEST_FULL_SYNC)
   })
 
   // Map update
@@ -39,6 +40,11 @@ export function registerPlayerBridgeHandlers(): void {
   // Fog delta (only changed regions → low bandwidth)
   ipcMain.on(IPC.PLAYER_FOG_DELTA, (_event, delta: FogDelta) => {
     getPlayerWindow()?.webContents.send(IPC.PLAYER_FOG_DELTA, delta)
+  })
+
+  // Fog full reset (after undo — sends both bitmaps)
+  ipcMain.on(IPC.PLAYER_FOG_RESET, (_event, payload: { fogBitmap: string; exploredBitmap: string }) => {
+    getPlayerWindow()?.webContents.send(IPC.PLAYER_FOG_RESET, payload)
   })
 
   // Token update (only player-visible tokens)
@@ -94,5 +100,10 @@ export function registerPlayerBridgeHandlers(): void {
   // Drawing data
   ipcMain.on(IPC.PLAYER_DRAWING, (_event, drawing: unknown) => {
     getPlayerWindow()?.webContents.send(IPC.PLAYER_DRAWING, drawing)
+  })
+
+  // Wall list for LOS
+  ipcMain.on(IPC.PLAYER_WALLS, (_event, walls: PlayerWallState[]) => {
+    getPlayerWindow()?.webContents.send(IPC.PLAYER_WALLS, walls)
   })
 }

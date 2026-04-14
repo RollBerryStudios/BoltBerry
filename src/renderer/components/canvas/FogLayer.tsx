@@ -1,7 +1,8 @@
 import { useRef, useState, useEffect, RefObject, useCallback } from 'react'
 import { Layer, Rect, Circle, Line, Ellipse } from 'react-konva'
 import Konva from 'konva'
-import { useFogStore, type FogOperation } from '../../stores/fogStore'
+import { useFogStore } from '../../stores/fogStore'
+import { applyOpToCtxPair, type FogOperation } from '../../utils/fogUtils'
 import { useUIStore, type ActiveTool } from '../../stores/uiStore'
 import { useMapTransformStore, screenToMapPure, mapToScreenPure } from '../../stores/mapTransformStore'
 import { useCampaignStore } from '../../stores/campaignStore'
@@ -14,9 +15,10 @@ interface FogLayerProps {
   canvasSize: { width: number; height: number }
   activeTool: ActiveTool
   gridSize: number
+  playerPreview?: boolean
 }
 
-export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize }: FogLayerProps) {
+export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, playerPreview = false }: FogLayerProps) {
   const layerRef = useRef<Konva.Layer>(null)
 
   const exploredCanvasRef = useRef<HTMLCanvasElement | null>(null)
@@ -71,6 +73,8 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize }: 
     }
   }, [mapId, imgW, imgH])
 
+  const playerPreviewCanvasRef = useRef<HTMLCanvasElement | null>(null)
+
   // ── Create/update Konva.Image nodes ──────────────────────────────────
   const refreshDisplay = useCallback(() => {
     const explored = exploredCanvasRef.current
@@ -88,18 +92,41 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize }: 
     kE.x(offsetX); kE.y(offsetY)
     kE.width(imgW * scale); kE.height(imgH * scale)
 
+    // In player-preview mode, boost fog to full opacity so DM sees exactly what players see
+    let coveredSource: HTMLCanvasElement = covered
+    if (playerPreview) {
+      if (!playerPreviewCanvasRef.current) {
+        playerPreviewCanvasRef.current = document.createElement('canvas')
+      }
+      const pp = playerPreviewCanvasRef.current
+      if (pp.width !== covered.width || pp.height !== covered.height) {
+        pp.width = covered.width
+        pp.height = covered.height
+      }
+      const ppCtx = pp.getContext('2d')!
+      ppCtx.clearRect(0, 0, pp.width, pp.height)
+      ppCtx.drawImage(covered, 0, 0)
+      // Normalize: any pixel with non-zero alpha → full opacity black
+      const id = ppCtx.getImageData(0, 0, pp.width, pp.height)
+      for (let i = 0; i < id.data.length; i += 4) {
+        if (id.data[i + 3] > 0) { id.data[i] = 0; id.data[i+1] = 0; id.data[i+2] = 0; id.data[i+3] = 255 }
+      }
+      ppCtx.putImageData(id, 0, 0)
+      coveredSource = pp
+    }
+
     if (!kImgCoveredRef.current) {
-      const kImg = new Konva.Image({ image: covered, listening: false })
+      const kImg = new Konva.Image({ image: coveredSource, listening: false })
       kImgCoveredRef.current = kImg
       layer.add(kImg)
     }
     const kC = kImgCoveredRef.current
-    kC.image(covered)
+    kC.image(coveredSource)
     kC.x(offsetX); kC.y(offsetY)
     kC.width(imgW * scale); kC.height(imgH * scale)
 
     layer.batchDraw()
-  }, [offsetX, offsetY, imgW, imgH, scale])
+  }, [offsetX, offsetY, imgW, imgH, scale, playerPreview])
 
   useEffect(() => { refreshDisplay() }, [refreshDisplay])
 
@@ -132,6 +159,14 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize }: 
 
     refreshDisplay()
     saveFogToDb(mapId, explored, covered)
+
+    // Broadcast rebuilt fog to player so their view stays in sync after undo/redo
+    if (useUIStore.getState().sessionMode !== 'prep') {
+      window.electronAPI?.sendFogReset(
+        covered.toDataURL('image/jpeg', 0.85),
+        explored.toDataURL('image/jpeg', 0.85),
+      )
+    }
   }, [mapId, refreshDisplay])
 
   // ── Push fog operation to global undo stack ────────────────────────
@@ -198,6 +233,19 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize }: 
     el?.addEventListener('fog:action', handler)
     return () => el?.removeEventListener('fog:action', handler)
   }, [mapId, activeMapId, pushFogCommand, refreshDisplay])
+
+  // ── LOS fog reveal (fired by TokenLayer on drag end) ─────────────
+  useEffect(() => {
+    const el = document.getElementById('root')
+    const handler = (e: Event) => {
+      const { poly } = (e as CustomEvent<{ poly: number[] }>).detail
+      if (!poly || poly.length < 6) return
+      if (!exploredCanvasRef.current || !coveredCanvasRef.current || !activeMapId) return
+      pushFogCommand({ type: 'reveal', shape: 'polygon', points: poly })
+    }
+    el?.addEventListener('fog:los-reveal', handler)
+    return () => el?.removeEventListener('fog:los-reveal', handler)
+  }, [activeMapId, pushFogCommand])
 
   // ── Pointer position in MAP coordinates ──────────────────────────
   function getMapPos(): { x: number; y: number } | null {
@@ -496,8 +544,9 @@ function saveFogToDb(
   if (saveTimer) clearTimeout(saveTimer)
   saveTimer = setTimeout(async () => {
     try {
-      const fogBitmap      = coveredCanvas.toDataURL('image/png')
-      const exploredBitmap = exploredCanvas.toDataURL('image/png')
+      // JPEG (~4× smaller than PNG for typical fog bitmaps)
+      const fogBitmap      = coveredCanvas.toDataURL('image/jpeg', 0.85)
+      const exploredBitmap = exploredCanvas.toDataURL('image/jpeg', 0.85)
       await window.electronAPI?.dbRun(
         `INSERT INTO fog_state (map_id, fog_bitmap, explored_bitmap) VALUES (?, ?, ?)
          ON CONFLICT(map_id) DO UPDATE SET
@@ -520,46 +569,3 @@ function sendFogDelta(op: FogOperation) {
   })
 }
 
-// ── Pure canvas draw helpers — exported for PlayerApp ──────────────────────
-
-export function applyOpToCtxPair(
-  exploredCtx: CanvasRenderingContext2D,
-  coveredCtx: CanvasRenderingContext2D,
-  op: FogOperation,
-) {
-  if (op.type === 'reveal') {
-    exploredCtx.globalCompositeOperation = 'destination-out'
-    exploredCtx.fillStyle = '#fff'
-    applyShape(exploredCtx, op)
-    exploredCtx.globalCompositeOperation = 'source-over'
-
-    coveredCtx.globalCompositeOperation = 'destination-out'
-    coveredCtx.fillStyle = '#fff'
-    applyShape(coveredCtx, op)
-    coveredCtx.globalCompositeOperation = 'source-over'
-  } else {
-    coveredCtx.globalCompositeOperation = 'source-over'
-    coveredCtx.fillStyle = 'rgba(0,0,0,0.45)'
-    applyShape(coveredCtx, op)
-  }
-}
-
-function applyShape(ctx: CanvasRenderingContext2D, op: FogOperation) {
-  if (op.shape === 'rect' && op.points.length === 4) {
-    const [x1, y1, x2, y2] = op.points
-    ctx.fillRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1))
-  } else if (op.shape === 'circle' && op.points.length === 3) {
-    const [cx, cy, r] = op.points
-    ctx.beginPath()
-    ctx.arc(cx, cy, r, 0, Math.PI * 2)
-    ctx.fill()
-  } else if (op.shape === 'polygon' && op.points.length >= 6) {
-    ctx.beginPath()
-    for (let i = 0; i < op.points.length; i += 2) {
-      if (i === 0) ctx.moveTo(op.points[i], op.points[i + 1])
-      else         ctx.lineTo(op.points[i], op.points[i + 1])
-    }
-    ctx.closePath()
-    ctx.fill()
-  }
-}

@@ -6,10 +6,11 @@ import { useMapTransformStore } from '../../stores/mapTransformStore'
 
 export function PlayerEyeHUD() {
   const showPlayerEye = useUIStore((s) => s.showPlayerEye)
+  const blackoutActive = useUIStore((s) => s.blackoutActive)
+  const appMode = useUIStore((s) => s.appMode)
   const tokens = useTokenStore((s) => s.tokens)
-  const { activeMapId } = useCampaignStore()
+  const activeMapId = useCampaignStore((s) => s.activeMapId)
   const scale = useMapTransformStore((s) => s.scale)
-  const { blackoutActive, appMode, atmosphereImagePath } = useUIStore()
 
   const mapTokens = useMemo(() =>
     tokens.filter((t) => t.mapId === activeMapId),

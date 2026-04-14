@@ -1,4 +1,4 @@
-import { RefObject, useState, useRef, useMemo, useCallback, memo } from 'react'
+import { RefObject, useState, useRef, useMemo, useCallback, useEffect, memo } from 'react'
 import { Layer, Group, Image as KonvaImage, Rect, Text, Circle, Line } from 'react-konva'
 import { Html } from 'react-konva-utils'
 import Konva from 'konva'
@@ -8,6 +8,8 @@ import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useInitiativeStore } from '../../stores/initiativeStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useUndoStore, nextCommandId } from '../../stores/undoStore'
+import { useWallStore } from '../../stores/wallStore'
+import { computeVisibilityPolygon } from '../../utils/losEngine'
 import type { MapRecord, TokenRecord } from '@shared/ipc-types'
 import { useImage } from '../../hooks/useImage'
 
@@ -88,13 +90,59 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   const [markerSubmenuId, setMarkerSubmenuId] = useState<number | null>(null)
   const [submenuType, setSubmenuType] = useState<string | null>(null)
   const [rubberBand, setRubberBand] = useState<{ x1: number; y1: number; x2: number; y2: number } | null>(null)
+  const [notesEditState, setNotesEditState] = useState<{ tokenId: number; screenX: number; screenY: number; value: string } | null>(null)
 
   // Ref for values read by stable callbacks (avoids recreating closures on every render)
   const latestRef = useRef({ tokens, selectedTokenIds, scale, offsetX, offsetY, gridSnap, map, editName, editHpCurrent, editHpMax, editAc })
   latestRef.current = { tokens, selectedTokenIds, scale, offsetX, offsetY, gridSnap, map, editName, editHpCurrent, editHpMax, editAc }
 
+  // Guard against rapid double-paste from context menu
+  const pasteInProgressRef = useRef(false)
+
+  // Ref-based context menu visibility for the wheel handler (avoids re-registering on every open/close)
+  const contextMenuVisibleRef = useRef(false)
+  contextMenuVisibleRef.current = contextMenu.visible
+
+  // Defined early so the wheel useEffect below can safely list it as a dependency.
+  const closeContextMenu = useCallback(() => {
+    setContextMenu((m) => ({ ...m, visible: false }))
+    setMarkerSubmenuId(null)
+    setSubmenuType(null)
+  }, [])
+
+  // Close the context menu when the user scrolls (pans) the canvas
+  useEffect(() => {
+    const stage = stageRef.current
+    if (!stage) return
+    const container = stage.container()
+    const onWheel = () => { if (contextMenuVisibleRef.current) closeContextMenu() }
+    container.addEventListener('wheel', onWheel, { passive: true })
+    return () => container.removeEventListener('wheel', onWheel)
+  }, [closeContextMenu])
+
   const isDraggable = activeTool === 'select'
   const sortedTokens = useMemo(() => [...tokens].sort((a, b) => a.zIndex - b.zIndex), [tokens])
+
+  const dragBroadcastLastRef = useRef(0)
+
+  // Throttled live-position broadcast during drag (100 ms interval)
+  const stableHandleDragMove = useCallback((token: TokenRecord, e: Konva.KonvaEventObject<DragEvent>) => {
+    const now = Date.now()
+    if (now - dragBroadcastLastRef.current < 100) return
+    dragBroadcastLastRef.current = now
+    const { tokens, selectedTokenIds, scale, offsetX, offsetY } = latestRef.current
+    const sx = e.target.x()
+    const sy = e.target.y()
+    const liveX = (sx - offsetX) / scale
+    const liveY = (sy - offsetY) / scale
+    const idsToMove = selectedTokenIds.includes(token.id) ? selectedTokenIds : [token.id]
+    const dx = liveX - token.x
+    const dy = liveY - token.y
+    const liveTokens = tokens.map((t) =>
+      idsToMove.includes(t.id) ? { ...t, x: t.x + dx, y: t.y + dy } : t
+    )
+    broadcastTokens(liveTokens)
+  }, [])
 
   const stableHandleDragEnd = useCallback(async (token: TokenRecord, e: Konva.KonvaEventObject<DragEvent>) => {
     const { tokens, selectedTokenIds, scale, offsetX, offsetY, gridSnap, map } = latestRef.current
@@ -142,6 +190,27 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     }
 
     broadcastTokens(useTokenStore.getState().tokens)
+
+    // ── LOS fog reveal for light-emitting tokens ──────────────────
+    {
+      const { imgW, imgH } = useMapTransformStore.getState()
+      const walls = useWallStore.getState().walls
+      const updatedTokens = useTokenStore.getState().tokens
+      for (const pos of newPositions) {
+        const t = updatedTokens.find((tok) => tok.id === pos.id)
+        if (!t || t.lightRadius <= 0) continue
+        const halfSize = (t.size * latestRef.current.map.gridSize) / 2
+        const cx = pos.x + halfSize
+        const cy = pos.y + halfSize
+        const radiusPx = t.lightRadius * latestRef.current.map.gridSize
+        const poly = computeVisibilityPolygon(cx, cy, radiusPx, walls, imgW, imgH)
+        if (poly.length >= 6) {
+          document.getElementById('root')?.dispatchEvent(
+            new CustomEvent('fog:los-reveal', { detail: { poly } })
+          )
+        }
+      }
+    }
 
     useUndoStore.getState().pushCommand({
       id: nextCommandId(),
@@ -224,12 +293,6 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     }
     setRubberBand(null)
   }
-
-  const closeContextMenu = useCallback(() => {
-    setContextMenu((m) => ({ ...m, visible: false }))
-    setMarkerSubmenuId(null)
-    setSubmenuType(null)
-  }, [])
 
   const stableStartEdit = useCallback((token: TokenRecord) => {
     setEditingId(token.id)
@@ -364,6 +427,8 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
         statusEffects: token.statusEffects,
         faction: token.faction ?? 'party',
         showName: token.showName,
+        lightRadius: token.lightRadius,
+        lightColor: token.lightColor,
       })
       broadcastTokens(useTokenStore.getState().tokens)
     } catch (err) {
@@ -401,6 +466,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
           rotation: token.rotation, locked: token.locked, zIndex: token.zIndex,
           markerColor: token.markerColor, ac: token.ac, notes: token.notes,
           statusEffects: token.statusEffects, faction: token.faction ?? 'party', showName: token.showName,
+          lightRadius: token.lightRadius, lightColor: token.lightColor,
         })
       } catch (err) {
         console.error('[TokenLayer] handleDuplicateGroup failed:', err)
@@ -437,9 +503,15 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
 
   function handleEditNotes(token: TokenRecord) {
     closeContextMenu()
-    const newNotes = prompt('Notizen:', token.notes ?? '')
-    if (newNotes === null) return
-    handleUpdate(token.id, { notes: newNotes || null })
+    const sx = token.x * scale + offsetX
+    const sy = token.y * scale + offsetY
+    setNotesEditState({ tokenId: token.id, screenX: sx, screenY: sy, value: token.notes ?? '' })
+  }
+
+  function commitNotesEdit() {
+    if (!notesEditState) return
+    handleUpdate(notesEditState.tokenId, { notes: notesEditState.value.trim() || null })
+    setNotesEditState(null)
   }
 
   function handleCopyTokens() {
@@ -470,9 +542,11 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   }
 
   async function handlePasteTokens() {
+    if (pasteInProgressRef.current) return
+    pasteInProgressRef.current = true
     closeContextMenu()
-    if (!window.electronAPI) return
-    if (clipboardTokens.length === 0) return
+    if (!window.electronAPI) { pasteInProgressRef.current = false; return }
+    if (clipboardTokens.length === 0) { pasteInProgressRef.current = false; return }
     const stage = stageRef.current
     if (!stage) return
     const pos = stage.getPointerPosition()
@@ -496,12 +570,14 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
           visibleToPlayers: ct.visibleToPlayers, rotation: 0, locked: false, zIndex: 0,
           markerColor: ct.markerColor, ac: ct.ac, notes: ct.notes,
           statusEffects: ct.statusEffects, faction: ct.faction, showName: ct.showName,
+          lightRadius: 0, lightColor: '#ffcc44',
         })
       } catch (err) {
         console.error('[TokenLayer] handlePasteTokens failed:', err)
       }
     }
     broadcastTokens(useTokenStore.getState().tokens)
+    pasteInProgressRef.current = false
   }
 
   async function handleToggleVisibility(token: TokenRecord) {
@@ -600,12 +676,12 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
               isDraggable={isDraggable && !token.locked}
               isSelected={selectedTokenIds.includes(token.id)}
               isEditing={editingId === token.id}
-              editName={editName}
+              editName={editingId === token.id ? editName : ''}
               isEditingHp={editingHpId === token.id}
-              editHpCurrent={editHpCurrent}
-              editHpMax={editHpMax}
+              editHpCurrent={editingHpId === token.id ? editHpCurrent : ''}
+              editHpMax={editingHpId === token.id ? editHpMax : ''}
               isEditingAc={editingAcId === token.id}
-              editAc={editAc}
+              editAc={editingAcId === token.id ? editAc : ''}
               onEditNameChange={setEditName}
               onEditCommit={stableCommitEdit}
               onEditHpCurrentChange={setEditHpCurrent}
@@ -615,6 +691,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
               onEditAcCommit={stableCommitEditAc}
               onSelect={stableHandleSelect}
               onDblClick={stableStartEdit}
+              onDragMove={stableHandleDragMove}
               onDragEnd={stableHandleDragEnd}
               onContextMenu={stableHandleContextMenu}
             />
@@ -693,7 +770,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     null,
                     { label: '📋 Als Gruppe duplizieren', action: () => handleDuplicateGroup() },
                     { label: '📋 Kopieren', action: () => handleCopyTokens() },
-                    { label: '📋 Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
+                    { label: clipboardTokens.length > 0 ? `📋 Einfügen (${clipboardTokens.length})` : '📋 Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
                     null,
                     { label: `❌ Alle löschen (${selectedTokenIds.length})`, action: () => handleDelete(token.id), danger: true },
                   ] : [
@@ -718,7 +795,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     null,
                     { label: token.visibleToPlayers ? '🙈 Verstecken' : '👁 Sichtbar machen', action: () => handleToggleVisibility(token) },
                     { label: '📋 Kopieren', action: () => handleCopyTokens() },
-                    { label: '📋 Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
+                    { label: clipboardTokens.length > 0 ? `📋 Einfügen (${clipboardTokens.length})` : '📋 Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
                     { label: token.locked ? '🔓 Entsperren' : '🔒 Sperren', action: () => handleToggleLock(token) },
                     { label: '🏷 Markierung', action: null, submenu: true, submenuType: 'marker' },
                     { label: '⬆️ nach vorne', action: () => { handleUpdate(token.id, { zIndex: token.zIndex + 1 }); closeContextMenu() } },
@@ -893,6 +970,32 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
             </Html>
           )
         })()}
+
+        {/* Inline notes editor overlay */}
+        {notesEditState && (
+          <Html divProps={{ style: { position: 'absolute', top: 0, left: 0, pointerEvents: 'none' } }}>
+            <div style={{ position: 'fixed', left: notesEditState.screenX, top: notesEditState.screenY, zIndex: 9999, pointerEvents: 'all', minWidth: 220 }}>
+              <div style={{ background: 'var(--bg-elevated)', border: '1px solid var(--accent-blue)', borderRadius: 6, padding: 8, boxShadow: '0 8px 24px rgba(0,0,0,0.6)' }}>
+                <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Notizen</div>
+                <textarea
+                  autoFocus
+                  value={notesEditState.value}
+                  onChange={(e) => setNotesEditState((s) => s ? { ...s, value: e.target.value } : null)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); commitNotesEdit() }
+                    if (e.key === 'Escape') setNotesEditState(null)
+                  }}
+                  rows={3}
+                  style={{ width: '100%', fontSize: 12, padding: '4px 6px', background: 'var(--bg-base)', border: '1px solid var(--border)', borderRadius: 3, color: 'var(--text-primary)', resize: 'vertical', outline: 'none', boxSizing: 'border-box' }}
+                />
+                <div style={{ display: 'flex', gap: 6, marginTop: 6, justifyContent: 'flex-end' }}>
+                  <button style={{ fontSize: 11, padding: '2px 8px', background: 'none', border: '1px solid var(--border-subtle)', borderRadius: 3, color: 'var(--text-muted)', cursor: 'pointer' }} onClick={() => setNotesEditState(null)}>Abbruch</button>
+                  <button style={{ fontSize: 11, padding: '2px 8px', background: 'var(--accent-blue-dim)', border: '1px solid var(--accent-blue)', borderRadius: 3, color: 'var(--text-primary)', cursor: 'pointer' }} onClick={commitNotesEdit}>OK</button>
+                </div>
+              </div>
+            </div>
+          </Html>
+        )}
       </Layer>
     </>
   )
@@ -923,6 +1026,7 @@ interface TokenNodeProps {
   onEditAcCommit: (id: number) => void
   onSelect: (tokenId: number, e?: Konva.KonvaEventObject<MouseEvent>) => void
   onDblClick: (token: TokenRecord) => void
+  onDragMove: (token: TokenRecord, e: Konva.KonvaEventObject<DragEvent>) => void
   onDragEnd: (token: TokenRecord, e: Konva.KonvaEventObject<DragEvent>) => void
   onContextMenu: (token: TokenRecord, e: Konva.KonvaEventObject<MouseEvent>) => void
 }
@@ -933,7 +1037,7 @@ const TokenNode = memo(function TokenNode({
   onEditNameChange, onEditCommit,
   onEditHpCurrentChange, onEditHpMaxChange, onEditHpCommit,
   onEditAcChange, onEditAcCommit,
-  onSelect, onDblClick, onDragEnd, onContextMenu,
+  onSelect, onDblClick, onDragMove, onDragEnd, onContextMenu,
 }: TokenNodeProps) {
   const image = useImage(token.imagePath ? `file://${token.imagePath}` : null)
   const r = sizePx / 2
@@ -943,6 +1047,7 @@ const TokenNode = memo(function TokenNode({
   // Internal handlers that bind token data to stable parent callbacks
   const handleClick = useCallback((e?: Konva.KonvaEventObject<MouseEvent>) => onSelect(token.id, e), [onSelect, token.id])
   const handleDblClick = useCallback(() => onDblClick(token), [onDblClick, token])
+  const handleDragMove = useCallback((e: Konva.KonvaEventObject<DragEvent>) => onDragMove(token, e), [onDragMove, token])
   const handleDrag = useCallback((e: Konva.KonvaEventObject<DragEvent>) => onDragEnd(token, e), [onDragEnd, token])
   const handleCtxMenu = useCallback((e: Konva.KonvaEventObject<MouseEvent>) => onContextMenu(token, e), [onContextMenu, token])
   const handleEditDone = useCallback(() => onEditCommit(token.id), [onEditCommit, token.id])
@@ -954,6 +1059,7 @@ const TokenNode = memo(function TokenNode({
     <Group
       x={x} y={y}
       draggable={isDraggable}
+      onDragMove={handleDragMove}
       onDragEnd={handleDrag}
       onClick={handleClick}
       onDblClick={handleDblClick}
@@ -1189,7 +1295,28 @@ const TokenNode = memo(function TokenNode({
       )}
     </Group>
   )
-})
+}, (prev, next) => (
+  // Return true = equal = skip re-render
+  prev.token === next.token &&
+  prev.x === next.x &&
+  prev.y === next.y &&
+  prev.sizePx === next.sizePx &&
+  prev.isDraggable === next.isDraggable &&
+  prev.isSelected === next.isSelected &&
+  prev.isEditing === next.isEditing &&
+  prev.isEditingHp === next.isEditingHp &&
+  prev.isEditingAc === next.isEditingAc &&
+  // Only compare edit inputs for the token that is actively being edited
+  (!next.isEditing  || prev.editName === next.editName) &&
+  (!next.isEditingHp || (prev.editHpCurrent === next.editHpCurrent && prev.editHpMax === next.editHpMax)) &&
+  (!next.isEditingAc || prev.editAc === next.editAc) &&
+  // Stable callback refs (all defined with useCallback in parent)
+  prev.onSelect === next.onSelect &&
+  prev.onDblClick === next.onDblClick &&
+  prev.onDragMove === next.onDragMove &&
+  prev.onDragEnd === next.onDragEnd &&
+  prev.onContextMenu === next.onContextMenu
+))
 
 function broadcastTokens(tokens: TokenRecord[]) {
   if (useUIStore.getState().sessionMode === 'prep') return

@@ -5,8 +5,6 @@ import { useTokenStore } from '../../stores/tokenStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 
-const LIGHT_REGEX = /light:(\d+)(?::(#\w+))?/
-
 interface LightToken {
   id: number
   cx: number
@@ -31,16 +29,12 @@ export function LightingLayer({ stageRef, mapId, gridSize }: LightingLayerProps)
   const lights: LightToken[] = useMemo(() => {
     if (activeMapId !== mapId) return []
     return tokens
-      .filter((t) => t.notes && t.notes.includes('light:'))
+      .filter((t) => t.lightRadius > 0)
       .map((token) => {
-        const match = token.notes?.match(LIGHT_REGEX)
-        if (!match) return null
-        const lightRadius = parseInt(match[1]) || 0
-        const rawColor = match[2] || '#ffcc44'
+        const rawColor = token.lightColor || '#ffcc44'
         const lightColor = rawColor.length === 4
           ? '#' + rawColor[1] + rawColor[1] + rawColor[2] + rawColor[2] + rawColor[3] + rawColor[3]
           : rawColor
-        if (lightRadius <= 0) return null
         const sx = token.x * scale + offsetX
         const sy = token.y * scale + offsetY
         const sizePx = gridSize * token.size * scale
@@ -48,11 +42,10 @@ export function LightingLayer({ stageRef, mapId, gridSize }: LightingLayerProps)
           id: token.id,
           cx: sx + sizePx / 2,
           cy: sy + sizePx / 2,
-          rPx: lightRadius * gridSize * scale,
+          rPx: token.lightRadius * gridSize * scale,
           lightColor,
         }
       })
-      .filter((l): l is LightToken => l !== null)
   }, [tokens, scale, offsetX, offsetY, gridSize, mapId, activeMapId])
 
   if (activeMapId !== mapId || lights.length === 0) return null

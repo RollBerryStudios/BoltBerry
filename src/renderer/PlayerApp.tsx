@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Stage, Layer, Image as KonvaImage, Shape, Group, Circle, Rect, Text, Line } from 'react-konva'
 import Konva from 'konva'
-import type { PlayerFullState, PlayerTokenState, PlayerMeasureState, FogDelta, PlayerMapState, PlayerPointer, PlayerCamera, PlayerOverlay, PlayerInitiativeEntry, WeatherType, GridType, PlayerDrawingState } from '@shared/ipc-types'
+import type { PlayerFullState, PlayerTokenState, PlayerMeasureState, FogDelta, PlayerMapState, PlayerPointer, PlayerCamera, PlayerOverlay, PlayerInitiativeEntry, WeatherType, GridType, PlayerDrawingState, PlayerWallState } from '@shared/ipc-types'
 import { useRotatedImage } from './hooks/useRotatedImage'
 import { useImageUrl } from './hooks/useImageUrl'
-import { applyOpToCtxPair } from './components/canvas/FogLayer'
+import { applyOpToCtxPair } from './utils/fogUtils'
 
 function factionColor(faction: string): string {
   switch (faction) {
@@ -19,7 +18,6 @@ function factionColor(faction: string): string {
 type Mode = 'idle' | 'map' | 'atmosphere' | 'blackout'
 
 export default function PlayerApp() {
-  const { t } = useTranslation()
   const [mode, setMode] = useState<Mode>('idle')
   const [mapState, setMapState] = useState<PlayerMapState | null>(null)
   const [atmospherePath, setAtmospherePath] = useState<string | null>(null)
@@ -34,6 +32,7 @@ export default function PlayerApp() {
   const [weather, setWeather] = useState<WeatherType>('none')
   const [measure, setMeasure] = useState<PlayerMeasureState | null>(null)
   const [drawingData, setDrawingData] = useState<PlayerDrawingState[]>([])
+  const [walls, setWalls] = useState<PlayerWallState[]>([])
 
   const mapStateRef = useRef<PlayerMapState | null>(null)
   mapStateRef.current = mapState
@@ -168,12 +167,26 @@ export default function PlayerApp() {
         setFogVersion((v) => v + 1)
       }),
 
+      window.playerAPI.onFogReset((payload) => {
+        loadDualFog(
+          payload.fogBitmap,
+          payload.exploredBitmap,
+          coveredCanvasRef,
+          exploredCanvasRef,
+          () => setFogVersion((v) => v + 1),
+        )
+      }),
+
       window.playerAPI.onMeasure((m: PlayerMeasureState | null) => {
         setMeasure(m)
       }),
 
       window.playerAPI.onDrawing((d: PlayerDrawingState) => {
         setDrawingData((prev) => [...prev, d])
+      }),
+
+      window.playerAPI.onWalls((w: PlayerWallState[]) => {
+        setWalls(w)
       }),
     ]
 

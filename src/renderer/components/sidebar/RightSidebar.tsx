@@ -9,32 +9,26 @@ import { OverlayPanel } from './panels/OverlayPanel'
 import { DiceRoller } from './panels/DiceRoller'
 import { EncounterPanel } from './panels/EncounterPanel'
 import { RoomPanel } from './panels/RoomPanel'
+import { CharacterSheetPanel } from './panels/CharacterSheetPanel'
 
-const ALL_TABS: { id: SidebarTab; labelKey: string; icon: string }[] = [
-  { id: 'tokens',      labelKey: 'sidebar.right.tabTokens',      icon: '⬤' },
-  { id: 'initiative',  labelKey: 'sidebar.right.tabInitiative',  icon: '⚔️' },
-  { id: 'encounters',  labelKey: 'sidebar.right.tabEncounters',  icon: '👾' },
-  { id: 'rooms',       labelKey: 'sidebar.right.tabRooms',       icon: '🏠' },
-  { id: 'notes',       labelKey: 'sidebar.right.tabNotes',       icon: '📝' },
-  { id: 'handouts',    labelKey: 'sidebar.right.tabHandouts',    icon: '📜' },
-  { id: 'overlay',     labelKey: 'sidebar.right.tabOverlay',     icon: '✦' },
-  { id: 'audio',       labelKey: 'sidebar.right.tabAudio',       icon: '🎵' },
-  { id: 'dice',        labelKey: 'sidebar.right.tabDice',        icon: '🎲' },
+const ALL_TABS: { id: SidebarTab; labelKey: string; icon: string; shortLabel: string }[] = [
+  { id: 'tokens',      labelKey: 'sidebar.right.tabTokens',      icon: '⬤',  shortLabel: 'Token' },
+  { id: 'initiative',  labelKey: 'sidebar.right.tabInitiative',  icon: '⚔️', shortLabel: 'Init' },
+  { id: 'encounters',  labelKey: 'sidebar.right.tabEncounters',  icon: '👾', shortLabel: 'Enc.' },
+  { id: 'rooms',       labelKey: 'sidebar.right.tabRooms',       icon: '🏠', shortLabel: 'Räume' },
+  { id: 'characters',  labelKey: 'sidebar.right.tabCharacters',  icon: '📋', shortLabel: 'Chars' },
+  { id: 'notes',       labelKey: 'sidebar.right.tabNotes',       icon: '📝', shortLabel: 'Notiz' },
+  { id: 'handouts',    labelKey: 'sidebar.right.tabHandouts',    icon: '📜', shortLabel: 'Handout' },
+  { id: 'overlay',     labelKey: 'sidebar.right.tabOverlay',     icon: '✦',  shortLabel: 'Overlay' },
+  { id: 'audio',       labelKey: 'sidebar.right.tabAudio',       icon: '🎵', shortLabel: 'Audio' },
+  { id: 'dice',        labelKey: 'sidebar.right.tabDice',        icon: '🎲', shortLabel: 'Würfel' },
 ]
 
 export function RightSidebar() {
   const { t } = useTranslation()
-  const { sidebarTab, setSidebarTab, workMode } = useUIStore()
+  const { sidebarTab, setSidebarTab } = useUIStore()
 
-  const visibleTabs: typeof ALL_TABS = workMode === 'player-preview'
-    ? []
-    : workMode === 'combat'
-      ? ALL_TABS.filter((t) => t.id === 'tokens' || t.id === 'initiative')
-      : workMode === 'fog-edit'
-        ? ALL_TABS.filter((t) => t.id === 'tokens')
-        : ALL_TABS
-
-  if (workMode === 'player-preview') return null
+  const visibleTabs = ALL_TABS
 
   return (
     <div className="sidebar sidebar-right">
@@ -52,7 +46,7 @@ export function RightSidebar() {
             onClick={() => setSidebarTab(tab.id)}
             style={{
               flex: 1,
-              padding: 'var(--sp-2)',
+              padding: '4px 2px',
               background: 'none',
               border: 'none',
               borderBottom: sidebarTab === tab.id
@@ -60,16 +54,20 @@ export function RightSidebar() {
                 : '2px solid transparent',
               color: sidebarTab === tab.id ? 'var(--accent-blue-light)' : 'var(--text-muted)',
               cursor: 'pointer',
-              fontSize: 'var(--text-xs)',
+              fontSize: 9,
               fontWeight: 600,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: 2,
+              gap: 1,
               transition: 'color var(--transition)',
+              minWidth: 0,
             }}
           >
-            <span style={{ fontSize: 16 }}>{tab.icon}</span>
+            <span style={{ fontSize: 14, lineHeight: 1 }}>{tab.icon}</span>
+            <span style={{ lineHeight: 1.2, letterSpacing: '0.01em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100%' }}>
+              {tab.shortLabel}
+            </span>
           </button>
         ))}
       </div>
@@ -79,6 +77,7 @@ export function RightSidebar() {
         {sidebarTab === 'initiative'  && <InitiativePanel />}
         {sidebarTab === 'encounters'  && <EncounterPanel />}
         {sidebarTab === 'rooms'       && <RoomPanel />}
+        {sidebarTab === 'characters'  && <CharacterSheetPanel />}
         {sidebarTab === 'notes'       && <NotesPanel />}
         {sidebarTab === 'handouts'    && <HandoutsPanel />}
         {sidebarTab === 'overlay'     && <OverlayPanel />}

@@ -7,6 +7,13 @@ import type { PlayerFullState, PlayerTokenState } from '@shared/ipc-types'
 
 export function usePlayerSync() {
   const setPlayerConnected = useUIStore((s) => s.setPlayerConnected)
+  const sessionMode = useUIStore((s) => s.sessionMode)
+
+  // When DM switches to prep mode the player window stops receiving updates,
+  // so the "connected" indicator should reflect that.
+  useEffect(() => {
+    if (sessionMode === 'prep') setPlayerConnected(false)
+  }, [sessionMode, setPlayerConnected])
 
   useEffect(() => {
     if (!window.electronAPI) return

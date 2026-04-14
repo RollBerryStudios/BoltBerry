@@ -23,6 +23,15 @@ export function RoomPanel() {
 
   const selected = mapRooms.find((r) => r.id === selectedRoomId) ?? null
 
+  function handleCenterOnRoom(room: RoomRecord) {
+    let points: Array<{x: number; y: number}> = []
+    try { points = JSON.parse(room.polygon) } catch { return }
+    if (points.length === 0) return
+    const cx = points.reduce((s, p) => s + p.x, 0) / points.length
+    const cy = points.reduce((s, p) => s + p.y, 0) / points.length
+    useMapTransformStore.getState().centerOnPoint(cx, cy)
+  }
+
   const handleDelete = useCallback(async (id: number) => {
     if (!window.electronAPI) return
     const room = rooms.find((r) => r.id === id)
@@ -154,6 +163,14 @@ export function RoomPanel() {
               <span style={{ flex: 1, fontSize: 'var(--text-sm)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {room.name}
               </span>
+              <button
+                className="btn btn-ghost btn-icon"
+                style={{ fontSize: 10, padding: 2, color: 'var(--text-muted)' }}
+                onClick={(e) => { e.stopPropagation(); handleCenterOnRoom(room) }}
+                title="Auf Karte zentrieren"
+              >
+                🎯
+              </button>
               <button
                 className="btn btn-ghost btn-icon"
                 style={{ fontSize: 10, padding: 2, color: 'var(--danger)' }}

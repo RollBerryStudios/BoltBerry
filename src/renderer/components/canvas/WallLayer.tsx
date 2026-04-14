@@ -135,7 +135,7 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
     const wall = walls.find((w) => w.id === selectedWallId)
     if (!wall) return
     closeContextMenu()
-    const newState: string = type === 'wall' ? 'closed' : 'closed'
+    const newState: string = type === 'wall' ? 'closed' : (wall.doorState ?? 'closed')
     updateWall(selectedWallId, { wallType: type, doorState: newState as any })
     try {
       await window.electronAPI?.dbRun('UPDATE walls SET wall_type = ?, door_state = ? WHERE id = ?', [type, newState, selectedWallId])

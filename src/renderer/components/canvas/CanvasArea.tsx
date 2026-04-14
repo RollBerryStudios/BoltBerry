@@ -212,6 +212,8 @@ export function CanvasArea() {
         statusEffects: null,
         faction: 'party',
         showName: true,
+        lightRadius: 0,
+        lightColor: '#ffcc44',
       })
       broadcastTokensFromCanvas()
       return
@@ -246,7 +248,7 @@ export function CanvasArea() {
         x, y,
         size: 1, hpCurrent: 0, hpMax: 0, visibleToPlayers: true, rotation: 0,
         locked: false, zIndex: 0, markerColor: null, ac: null, notes: null, statusEffects: null,
-        faction: 'party', showName: true,
+        faction: 'party', showName: true, lightRadius: 0, lightColor: '#ffcc44',
       })
       broadcastTokensFromCanvas()
     }
@@ -288,8 +290,13 @@ export function CanvasArea() {
         <div className="empty-state">
           <div className="empty-state-icon">🗺️</div>
           <div className="empty-state-title">Keine Karte geladen</div>
-          <div className="empty-state-desc">
-            Wähle eine Karte aus der linken Sidebar oder füge eine neue hinzu
+          <div className="empty-state-desc" style={{ maxWidth: 320 }}>
+            <ol style={{ textAlign: 'left', paddingLeft: 20, margin: '8px 0 0', lineHeight: 2 }}>
+              <li>Öffne die <strong>linke Sidebar</strong> (◧ oben links)</li>
+              <li>Klicke auf <strong>🖼 Karte hinzufügen</strong> und wähle ein Bild</li>
+              <li>Passe Raster &amp; Felder in den Karteneinstellungen an</li>
+              <li>Wechsle in den <strong>▶ Spiel-Modus</strong> und starte die Session</li>
+            </ol>
           </div>
         </div>
       ) : (
@@ -333,6 +340,7 @@ export function CanvasArea() {
             canvasSize={size}
             activeTool={activeTool}
             gridSize={activeMap.gridSize}
+            playerPreview={workMode === 'player-preview'}
           />
 
           {/* Layer 3: Tokens */}
@@ -387,7 +395,7 @@ export function CanvasArea() {
           />
 
           {/* Layer 11: Player Eye overlay (hidden tokens + stats) */}
-          {showPlayerEye && activeMap && (
+          {(showPlayerEye || workMode === 'player-preview') && activeMap && (
             <PlayerEyeOverlay
               map={activeMap}
               stageRef={stageRef}
@@ -500,7 +508,8 @@ async function loadMapData(mapId: number, map: MapRecord) {
       visible_to_players: number; rotation: number; locked: number; z_index: number
       marker_color: string | null; ac: number | null; notes: string | null
       status_effects: string | null; faction: string; show_name: number
-    }>('SELECT id, map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name FROM tokens WHERE map_id = ?', [mapId])
+      light_radius: number; light_color: string
+    }>('SELECT id, map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name, light_radius, light_color FROM tokens WHERE map_id = ?', [mapId])
 
     useTokenStore.getState().setTokens(tokenRows.map((r) => ({
       id: r.id,
@@ -522,6 +531,8 @@ async function loadMapData(mapId: number, map: MapRecord) {
       statusEffects: r.status_effects ? JSON.parse(r.status_effects) : null,
       faction: r.faction ?? 'party',
       showName: Boolean(r.show_name ?? 1),
+      lightRadius: r.light_radius ?? 0,
+      lightColor: r.light_color ?? '#ffcc44',
     })))
 
     // Load initiative
