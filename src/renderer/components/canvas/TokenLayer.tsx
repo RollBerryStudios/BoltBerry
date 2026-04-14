@@ -404,6 +404,8 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
         statusEffects: token.statusEffects,
         faction: token.faction ?? 'party',
         showName: token.showName,
+        lightRadius: token.lightRadius,
+        lightColor: token.lightColor,
       })
       broadcastTokens(useTokenStore.getState().tokens)
     } catch (err) {
@@ -441,6 +443,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
           rotation: token.rotation, locked: token.locked, zIndex: token.zIndex,
           markerColor: token.markerColor, ac: token.ac, notes: token.notes,
           statusEffects: token.statusEffects, faction: token.faction ?? 'party', showName: token.showName,
+          lightRadius: token.lightRadius, lightColor: token.lightColor,
         })
       } catch (err) {
         console.error('[TokenLayer] handleDuplicateGroup failed:', err)
@@ -544,6 +547,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
           visibleToPlayers: ct.visibleToPlayers, rotation: 0, locked: false, zIndex: 0,
           markerColor: ct.markerColor, ac: ct.ac, notes: ct.notes,
           statusEffects: ct.statusEffects, faction: ct.faction, showName: ct.showName,
+          lightRadius: 0, lightColor: '#ffcc44',
         })
       } catch (err) {
         console.error('[TokenLayer] handlePasteTokens failed:', err)

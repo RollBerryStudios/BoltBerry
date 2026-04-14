@@ -279,6 +279,7 @@ export function EncounterPanel() {
           hpCurrent: t.hpCurrent, hpMax: t.hpMax, visibleToPlayers: t.visibleToPlayers,
           rotation: 0, locked: false, zIndex: 0, markerColor: null, ac: t.ac, notes: null,
           statusEffects: null, faction: t.faction, showName: true,
+          lightRadius: 0, lightColor: '#ffcc44',
         })
         spawnedTokenIds.push({ name: t.name, id: newTokenId })
       } catch (err) {
