@@ -62,25 +62,31 @@ export function registerAppHandlers(): void {
   // Open native folder picker — returns chosen path or null
   ipcMain.handle(IPC.CHOOSE_FOLDER, async (event) => {
     const win = BrowserWindow.fromWebContents(event.sender)
-    const result = await dialog.showOpenDialog(win!, {
+    const opts = {
       title: 'Datenordner wählen',
       defaultPath: join(app.getPath('documents'), 'BoltBerry'),
-      properties: ['openDirectory', 'createDirectory'],
-    })
+      properties: ['openDirectory', 'createDirectory'] as const,
+    }
+    const result = win ? await dialog.showOpenDialog(win, opts) : await dialog.showOpenDialog(opts)
     if (result.canceled || !result.filePaths[0]) return null
     return result.filePaths[0]
   })
 
   // Set custom user data folder
   ipcMain.handle(IPC.SET_USER_DATA_FOLDER, (_event, dataPath: string) => {
+    const previousPath = getCustomUserDataPath()
     setCustomUserDataPath(dataPath)
     try {
       closeDatabase()
       initDatabase()
+      return { success: true }
     } catch (err) {
-      console.error('[AppHandlers] Failed to reinitialize database:', err)
+      console.error('[AppHandlers] Failed to reinitialize database at new path, reverting:', err)
+      // Revert to previous path so the DB stays open
+      setCustomUserDataPath(previousPath ?? '')
+      try { initDatabase() } catch { /* best-effort revert */ }
+      return { success: false, error: err instanceof Error ? err.message : String(err) }
     }
-    return true
   })
 
   // Open content folder
@@ -91,7 +97,7 @@ export function registerAppHandlers(): void {
     return shell.openPath(contentPath)
   })
 
-  // Get image as base64 for direct embedding
+  // Get image as base64 for direct embedding (e.g. PDF-to-canvas rendering)
   ipcMain.handle(IPC.GET_IMAGE_AS_BASE64, async (_event, imagePath: string) => {
     try {
       let cleanPath = imagePath
@@ -103,27 +109,31 @@ export function registerAppHandlers(): void {
       if (!fullPath.startsWith(userDataPath + sep) && fullPath !== userDataPath) {
         return null
       }
+      const stat = statSync(fullPath)
+      if (stat.size > 200 * 1024 * 1024) {
+        console.warn('[AppHandlers] GET_IMAGE_AS_BASE64: file too large, refusing', fullPath)
+        return null
+      }
       const { readFile } = require('fs/promises')
       const imageBuffer = await readFile(fullPath)
       const base64 = imageBuffer.toString('base64')
       const extension = fullPath.toLowerCase().split('.').pop() || 'png'
-      const mimeType = extension === 'jpg' || extension === 'jpeg' ? 'image/jpeg' : 
-                     extension === 'webp' ? 'image/webp' : 'image/png'
+      const mimeType = extension === 'jpg' || extension === 'jpeg' ? 'image/jpeg' :
+                       extension === 'webp' ? 'image/webp' : 'image/png'
       return `data:${mimeType};base64,${base64}`
     } catch (err) {
       return null
     }
   })
 
-  // Rescan content folder to synchronize files with database
-  ipcMain.handle(IPC.RESCAN_CONTENT_FOLDER, async () => {
+  // Rescan content folder to synchronize files with database (scoped to active campaign)
+  ipcMain.handle(IPC.RESCAN_CONTENT_FOLDER, async (_event, campaignId: number) => {
     const { readdir } = require('fs').promises
-    const { basename } = require('path')
-    
+
     try {
       const userDataPath = getCustomUserDataPath() || app.getPath('userData')
       const assetsPath = join(userDataPath, 'assets', 'map')
-      
+
       let files: string[] = []
       try {
         files = await readdir(assetsPath)
@@ -131,67 +141,63 @@ export function registerAppHandlers(): void {
         mkdirSync(assetsPath, { recursive: true })
         return { scanned: 0, added: 0, removed: 0, message: 'Keine Dateien gefunden' }
       }
-      
-      const imageFiles = files.filter((f: string) => 
+
+      const imageFiles = files.filter((f: string) =>
         f.endsWith('.png') || f.endsWith('.jpg') || f.endsWith('.jpeg') || f.endsWith('.webp')
       )
-      
+
       const db = getDb()
 
-      const maps = db.prepare('SELECT id, image_path, name FROM maps').all() as { id: number; image_path: string; name: string }[]
-      
+      // Scope entirely to the active campaign — never touch other campaigns' data
+      const maps = db.prepare(
+        'SELECT id, image_path, name FROM maps WHERE campaign_id = ?'
+      ).all(campaignId) as { id: number; image_path: string; name: string }[]
+
       const existingFilePaths = new Set(imageFiles.map((f: string) => `assets/map/${f}`))
-      
+
       let removedCount = 0
       for (const map of maps) {
         if (!existingFilePaths.has(map.image_path)) {
-          db.prepare('DELETE FROM maps WHERE id = ?').run(map.id)
-          db.prepare('DELETE FROM assets WHERE stored_path = ?').run(map.image_path)
-          db.prepare('DELETE FROM tokens WHERE map_id = ?').run(map.id)
+          db.prepare('DELETE FROM maps WHERE id = ? AND campaign_id = ?').run(map.id, campaignId)
+          db.prepare('DELETE FROM assets WHERE stored_path = ? AND campaign_id = ?').run(map.image_path, campaignId)
           removedCount++
         }
       }
-      
+
       const existingMapPaths = new Set(maps.map((m: { image_path: string }) => m.image_path))
-      
+
       let addedCount = 0
       for (const file of imageFiles) {
         const filePath = `assets/map/${file}`
         if (!existingMapPaths.has(filePath)) {
-          const fileName = file.replace(/\.[^/.]+$/, "") || file
-          
-          let campaignId = (db.prepare('SELECT id FROM campaigns LIMIT 1').get() as { id: number } | undefined)?.id
-          if (!campaignId) {
-            const campaignResult = db.prepare(
-              'INSERT INTO campaigns (name, created_at, last_opened) VALUES (?, datetime("now"), datetime("now"))'
-            ).run('Standard Kampagne')
-            campaignId = campaignResult.lastInsertRowid as number
-          }
+          const fileName = file.replace(/\.[^/.]+$/, '') || file
 
           db.prepare(
             'INSERT INTO assets (original_name, stored_path, type, campaign_id) VALUES (?, ?, ?, ?)'
           ).run(fileName, filePath, 'map', campaignId)
-          
-          const orderIndex = (db.prepare('SELECT COALESCE(MAX(order_index), -1) + 1 AS next FROM maps WHERE campaign_id = ?').get(campaignId) as { next: number }).next
+
+          const orderIndex = (db.prepare(
+            'SELECT COALESCE(MAX(order_index), -1) + 1 AS next FROM maps WHERE campaign_id = ?'
+          ).get(campaignId) as { next: number }).next
           db.prepare(
             'INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, grid_offset_x, grid_offset_y) VALUES (?, ?, ?, ?, 0, 0, 0)'
           ).run(campaignId, fileName, filePath, orderIndex)
-          
+
           addedCount++
         }
       }
-      
-      return { 
-        scanned: imageFiles.length, 
-        added: addedCount, 
+
+      return {
+        scanned: imageFiles.length,
+        added: addedCount,
         removed: removedCount,
-        message: `Scan abgeschlossen: ${imageFiles.length} Dateien, ${addedCount} hinzugef\u00fcgt, ${removedCount} entfernt`
+        message: `Scan abgeschlossen: ${imageFiles.length} Dateien, ${addedCount} hinzugef\u00fcgt, ${removedCount} entfernt`,
       }
     } catch (err) {
       console.error('[AppHandlers] Failed to rescan content folder:', err)
-      return { 
+      return {
         scanned: 0, added: 0, removed: 0,
-        message: 'Fehler beim Scannen: ' + (err instanceof Error ? err.message : String(err))
+        message: 'Fehler beim Scannen: ' + (err instanceof Error ? err.message : String(err)),
       }
     }
   })
@@ -384,50 +390,54 @@ export function registerAppHandlers(): void {
   // Generic confirm dialog
   ipcMain.handle(IPC.CONFIRM_DIALOG, async (event, message: string, detail?: string) => {
     const win = BrowserWindow.fromWebContents(event.sender)
-    if (!win) return false
-    const { response } = await dialog.showMessageBox(win, {
-      type: 'warning',
+    const opts = {
+      type: 'warning' as const,
       title: 'Best\u00e4tigung',
       message,
       detail,
       buttons: ['Abbrechen', 'OK'],
       defaultId: 1,
       cancelId: 0,
-    })
+    }
+    const { response } = win
+      ? await dialog.showMessageBox(win, opts)
+      : await dialog.showMessageBox(opts)
     return response === 1
   })
 
   // Delete map (with native confirmation dialog)
   ipcMain.handle(IPC.DELETE_MAP_CONFIRM, async (event, mapName: string) => {
     const win = BrowserWindow.fromWebContents(event.sender)
-    if (!win) return false
-
-    const { response } = await dialog.showMessageBox(win, {
-      type: 'warning',
+    const opts = {
+      type: 'warning' as const,
       title: 'Karte l\u00f6schen',
       message: `Karte "${mapName}" wirklich l\u00f6schen?`,
       detail: 'Diese Aktion kann nicht r\u00fcckg\u00e4ngig gemacht werden.',
       buttons: ['Abbrechen', 'L\u00f6schen'],
       defaultId: 0,
       cancelId: 0,
-    })
+    }
+    const { response } = win
+      ? await dialog.showMessageBox(win, opts)
+      : await dialog.showMessageBox(opts)
     return response === 1
   })
 
   // Delete token (with native confirmation dialog)
   ipcMain.handle(IPC.DELETE_TOKEN_CONFIRM, async (event, tokenName: string) => {
     const win = BrowserWindow.fromWebContents(event.sender)
-    if (!win) return false
-
-    const { response } = await dialog.showMessageBox(win, {
-      type: 'warning',
+    const opts = {
+      type: 'warning' as const,
       title: 'Token l\u00f6schen',
       message: `Token "${tokenName}" wirklich l\u00f6schen?`,
       detail: 'Diese Aktion kann nicht r\u00fcckg\u00e4ngig gemacht werden.',
       buttons: ['Abbrechen', 'L\u00f6schen'],
       defaultId: 0,
       cancelId: 0,
-    })
+    }
+    const { response } = win
+      ? await dialog.showMessageBox(win, opts)
+      : await dialog.showMessageBox(opts)
     return response === 1
   })
 }

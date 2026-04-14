@@ -150,11 +150,7 @@ export const useUIStore = create<UIState>((set) => ({
   toggleRightSidebar: () => set((s) => ({ rightSidebarOpen: !s.rightSidebarOpen })),
   setPlayerConnected: (playerConnected) => set({ playerConnected }),
   toggleBlackout: () =>
-    set((s) => {
-      const blackoutActive = !s.blackoutActive
-      window.electronAPI?.sendBlackout(blackoutActive)
-      return { blackoutActive }
-    }),
+    set((s) => ({ blackoutActive: !s.blackoutActive })),
   setAppMode: (appMode) => set({ appMode }),
   setSessionMode: (sessionMode) => set({ sessionMode }),
   toggleTheme: () =>

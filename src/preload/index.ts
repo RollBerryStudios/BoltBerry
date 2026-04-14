@@ -29,7 +29,7 @@ const dmApi = {
   openContentFolder: () => ipcRenderer.invoke('app:open-content-folder'),
   getImageAsBase64: (path: string) => ipcRenderer.invoke('app:get-image-as-base64', path),
   getUserDataPath: () => ipcRenderer.invoke('app:get-user-data-path'),
-  rescanContentFolder: () => ipcRenderer.invoke('app:rescan-content-folder'),
+  rescanContentFolder: (campaignId: number) => ipcRenderer.invoke('app:rescan-content-folder', campaignId),
   showContextMenu: (items: { label: string; action: string; danger?: boolean }[]) =>
     ipcRenderer.invoke('app:show-context-menu', items),
   deleteMapConfirm: (mapName: string) => ipcRenderer.invoke('app:delete-map-confirm', mapName),
@@ -196,9 +196,12 @@ const playerApi = {
 }
 
 
-// Expose APIs based on which window this preload is running in
-// Both APIs are exposed; each window only uses what it needs
-contextBridge.exposeInMainWorld('electronAPI', dmApi)
+// Expose only the API appropriate for this window type.
+// The player window passes --boltberry-window-type=player via additionalArguments.
+const isPlayerWindow = process.argv.includes('--boltberry-window-type=player')
+if (!isPlayerWindow) {
+  contextBridge.exposeInMainWorld('electronAPI', dmApi)
+}
 contextBridge.exposeInMainWorld('playerAPI', playerApi)
 
 // Type declarations for renderer TypeScript

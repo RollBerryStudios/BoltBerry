@@ -14,6 +14,17 @@ ALTER TABLE maps ADD COLUMN camera_scale REAL;
 UPDATE schema_version SET version = 3;
 `
 
+// Migration: v3 → v4 — add rotation, lock, z_index, marker_color, ac, notes to tokens
+export const MIGRATE_V3_TO_V4 = `
+ALTER TABLE tokens ADD COLUMN rotation    REAL    NOT NULL DEFAULT 0;
+ALTER TABLE tokens ADD COLUMN locked      INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE tokens ADD COLUMN z_index     INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE tokens ADD COLUMN marker_color TEXT;
+ALTER TABLE tokens ADD COLUMN ac          INTEGER;
+ALTER TABLE tokens ADD COLUMN notes       TEXT;
+UPDATE schema_version SET version = 4;
+`
+
 // Migration: v4 → v5 — add handouts table
 export const MIGRATE_V4_TO_V5 = `
 CREATE TABLE IF NOT EXISTS handouts (
@@ -25,17 +36,6 @@ CREATE TABLE IF NOT EXISTS handouts (
   created_at   TEXT    NOT NULL DEFAULT (datetime('now'))
 );
 UPDATE schema_version SET version = 5;
-`
-
-// Migration: v3 → v4 — add rotation, lock, z_index, marker_color, ac, notes to tokens
-export const MIGRATE_V3_TO_V4 = `
-ALTER TABLE tokens ADD COLUMN rotation    REAL    NOT NULL DEFAULT 0;
-ALTER TABLE tokens ADD COLUMN locked      INTEGER NOT NULL DEFAULT 0;
-ALTER TABLE tokens ADD COLUMN z_index     INTEGER NOT NULL DEFAULT 0;
-ALTER TABLE tokens ADD COLUMN marker_color TEXT;
-ALTER TABLE tokens ADD COLUMN ac          INTEGER;
-ALTER TABLE tokens ADD COLUMN notes       TEXT;
-UPDATE schema_version SET version = 4;
 `
 
 // Migration: v5 → v6 — add ft_per_unit to maps
@@ -75,8 +75,7 @@ CREATE TABLE IF NOT EXISTS drawings (
   points     TEXT    NOT NULL DEFAULT '[]',
   color      TEXT    NOT NULL DEFAULT '#f59e0b',
   width      REAL    NOT NULL DEFAULT 2,
-  synced     INTEGER NOT NULL DEFAULT 0,
-  text       TEXT
+  synced     INTEGER NOT NULL DEFAULT 0
 );
 UPDATE schema_version SET version = 9;
 `

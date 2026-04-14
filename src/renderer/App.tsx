@@ -14,7 +14,7 @@ import { useAutoAmbient } from './hooks/useAutoAmbient'
 
 export default function App() {
   const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
-  const { theme } = useUIStore()
+  const { theme, blackoutActive } = useUIStore()
   const [showShortcuts, setShowShortcuts] = useState(false)
 
   useKeyboardShortcuts()
@@ -27,6 +27,12 @@ export default function App() {
     document.documentElement.setAttribute('data-theme', theme)
     localStorage.setItem('theme', theme)
   }, [theme])
+
+  // Sync blackout state to player window.
+  // Kept here (not inside the Zustand setter) so IPC is a proper React side effect.
+  useEffect(() => {
+    window.electronAPI?.sendBlackout(blackoutActive)
+  }, [blackoutActive])
 
   // Open shortcut overlay on ? or F1
   useEffect(() => {
@@ -43,14 +49,11 @@ export default function App() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
-  // Load campaigns on mount
+  // Initialize settings first (may switch the DB path), then load campaigns.
+  // Sequencing matters: loadCampaigns must query whichever DB is authoritative
+  // for this session — which is only known after initializeSettings completes.
   useEffect(() => {
-    loadCampaigns()
-  }, [])
-
-  // Initialize settings
-  useEffect(() => {
-    initializeSettings()
+    initializeSettings().then(() => loadCampaigns())
   }, [])
 
   const { isSetupComplete } = useSettingsStore()
@@ -106,7 +109,10 @@ async function initializeSettings() {
   if (isSetupComplete && userDataFolder) {
     // Already configured in a previous session — tell main process the path
     try {
-      await window.electronAPI.setUserDataFolder(userDataFolder)
+      const result = await window.electronAPI.setUserDataFolder(userDataFolder)
+      if (!result?.success) {
+        console.error('[App] Failed to restore data folder path:', result?.error)
+      }
     } catch (err) {
       console.error('[App] Failed to restore data folder path:', err)
     }

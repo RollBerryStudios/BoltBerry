@@ -7,7 +7,7 @@ import { getDb } from '../db/database'
  * The renderer never touches the DB directly (security + contextIsolation).
  */
 
-const FORBIDDEN_SQL = /\b(DROP\s+TABLE|DROP\s+INDEX|ALTER\s+TABLE|TRUNCATE|ATTACH|DETACH|PRAGMA|VACUUM|REINDEX)\b/i
+const FORBIDDEN_SQL = /\b(DROP\s+TABLE|DROP\s+INDEX|ALTER\s+TABLE|TRUNCATE|ATTACH|DETACH|PRAGMA|VACUUM|REINDEX|CREATE\s+TABLE|CREATE\s+INDEX)\b/i
 
 function validateSql(sql: string): void {
   if (FORBIDDEN_SQL.test(sql)) {

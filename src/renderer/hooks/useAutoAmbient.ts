@@ -45,8 +45,34 @@ export function useAutoAmbient() {
 
       if (currentSrc !== newUrl) {
         loadChannel('track2', map.ambientTrackPath)
-        // Small delay to let the element load before playing
-        setTimeout(() => playChannel('track2'), 50)
+        // Play as soon as the element has enough data — not after a fixed delay.
+        // We capture the path to guard against map changes before the event fires.
+        const capturedPath = map.ambientTrackPath
+        const el = audioCH.track2
+        const onReady = () => {
+          // Only play if the user is still on the same map and same track
+          if (prevMapIdRef.current === activeMapId && el.src === newUrl) {
+            playChannel('track2')
+          }
+        }
+        // canplaythrough fires when the browser has buffered enough to play uninterrupted.
+        // Fall back to loadedmetadata (fires earlier) if canplaythrough doesn't fire quickly.
+        const onMeta = () => {
+          el.removeEventListener('canplaythrough', onReady)
+          if (prevMapIdRef.current === activeMapId && el.src === newUrl) {
+            playChannel('track2')
+          }
+        }
+        el.addEventListener('canplaythrough', onReady, { once: true })
+        // 2-second fallback: if canplaythrough hasn't fired yet, try loadedmetadata path
+        const fallback = setTimeout(() => {
+          el.removeEventListener('canplaythrough', onReady)
+          onMeta()
+        }, 2000)
+        el.addEventListener('loadedmetadata', () => clearTimeout(fallback), { once: true })
+
+        // Suppress unused-variable lint for capturedPath (documents intent clearly)
+        void capturedPath
       }
     }
   }, [activeMapId, activeMaps])
