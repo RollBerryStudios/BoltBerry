@@ -2,12 +2,15 @@ import { useEffect } from 'react'
 import { useUIStore } from '../stores/uiStore'
 import { useTokenStore } from '../stores/tokenStore'
 import { useCampaignStore } from '../stores/campaignStore'
+import { useWallStore } from '../stores/wallStore'
 import { useMapTransformStore } from '../stores/mapTransformStore'
-import type { PlayerFullState, PlayerTokenState } from '@shared/ipc-types'
+import type { PlayerFullState, PlayerTokenState, PlayerWallState } from '@shared/ipc-types'
 
 export function usePlayerSync() {
   const setPlayerConnected = useUIStore((s) => s.setPlayerConnected)
   const sessionMode = useUIStore((s) => s.sessionMode)
+  const activeMapId = useCampaignStore((s) => s.activeMapId)
+  const walls = useWallStore((s) => s.walls)
 
   // When DM switches to prep mode the player window stops receiving updates,
   // so the "connected" indicator should reflect that.
@@ -56,6 +59,8 @@ export function usePlayerSync() {
           statusEffects: t.statusEffects,
           ac: t.ac,
           faction: t.faction,
+          lightRadius: t.lightRadius,
+          lightColor: t.lightColor,
         }))
 
       const mode: PlayerFullState['mode'] = blackoutActive
@@ -115,4 +120,13 @@ export function usePlayerSync() {
 
     return () => { unsub() }
   }, [])
+
+  // Broadcast wall data whenever the active map or wall list changes
+  useEffect(() => {
+    if (sessionMode === 'prep' || !window.electronAPI?.sendWalls) return
+    const mapWalls: PlayerWallState[] = walls
+      .filter((w) => w.mapId === activeMapId)
+      .map((w) => ({ x1: w.x1, y1: w.y1, x2: w.x2, y2: w.y2, wallType: w.wallType, doorState: w.doorState }))
+    window.electronAPI.sendWalls(mapWalls)
+  }, [activeMapId, walls, sessionMode])
 }

@@ -262,6 +262,8 @@ export interface PlayerTokenState {
   statusEffects: string[] | null
   ac: number | null
   faction: string
+  lightRadius: number
+  lightColor: string
 }
 
 export interface PlayerMeasureState {

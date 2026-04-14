@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Stage, Layer, Image as KonvaImage, Shape, Group, Circle, Rect, Text, Line } from 'react-konva'
 import Konva from 'konva'
 import type { PlayerFullState, PlayerTokenState, PlayerMeasureState, FogDelta, PlayerMapState, PlayerPointer, PlayerCamera, PlayerOverlay, PlayerInitiativeEntry, WeatherType, GridType, PlayerDrawingState, PlayerWallState } from '@shared/ipc-types'
 import { useRotatedImage } from './hooks/useRotatedImage'
 import { useImageUrl } from './hooks/useImageUrl'
 import { applyOpToCtxPair } from './utils/fogUtils'
+import { computeVisibilityPolygon, type Segment } from './utils/losEngine'
 
 function factionColor(faction: string): string {
   switch (faction) {
@@ -253,6 +254,7 @@ export default function PlayerApp() {
         <PlayerMapView
           mapState={mapState}
           tokens={tokens}
+          walls={walls}
           exploredCanvasRef={exploredCanvasRef}
           coveredCanvasRef={coveredCanvasRef}
           fogVersion={fogVersion}
@@ -453,6 +455,7 @@ function makeParticle(type: WeatherType, width: number, height: number, randomY:
 interface PlayerMapViewProps {
   mapState: PlayerMapState
   tokens: PlayerTokenState[]
+  walls: PlayerWallState[]
   exploredCanvasRef: React.RefObject<HTMLCanvasElement | null>
   coveredCanvasRef: React.RefObject<HTMLCanvasElement | null>
   fogVersion: number
@@ -466,7 +469,7 @@ interface PlayerMapViewProps {
 }
 
 function PlayerMapView({
-  mapState, tokens, exploredCanvasRef, coveredCanvasRef, fogVersion, width, height, pointer, camera, measure, drawingData, onMapLoaded,
+  mapState, tokens, walls, exploredCanvasRef, coveredCanvasRef, fogVersion, width, height, pointer, camera, measure, drawingData, onMapLoaded,
 }: PlayerMapViewProps) {
   const { img: image, imgW: natW, imgH: natH } = useRotatedImage(`file://${mapState.imagePath}`, mapState.rotation ?? 0)
   const [exploredImg, setExploredImg] = useState<HTMLImageElement | null>(null)
@@ -816,6 +819,18 @@ function PlayerMapView({
         ))}
       </Layer>
 
+      {/* Layer 4.5: Lighting (LOS-clipped radial gradients) */}
+      <PlayerLightingLayer
+        tokens={tokens}
+        walls={walls}
+        scale={scale}
+        offX={offX}
+        offY={offY}
+        gridSize={mapState.gridSize}
+        imgW={natW}
+        imgH={natH}
+      />
+
       {/* Layer 5: Pointer/Ping overlay */}
       <Layer ref={pointerLayerRef} listening={false} />
 
@@ -826,6 +841,92 @@ function PlayerMapView({
         </Layer>
       )}
     </Stage>
+  )
+}
+
+// ─── Player-side lighting layer (LOS-clipped radial gradients) ───────────────
+
+interface PlayerLightingLayerProps {
+  tokens: PlayerTokenState[]
+  walls: PlayerWallState[]
+  scale: number
+  offX: number
+  offY: number
+  gridSize: number
+  imgW: number
+  imgH: number
+}
+
+function PlayerLightingLayer({ tokens, walls, scale, offX, offY, gridSize, imgW, imgH }: PlayerLightingLayerProps) {
+  const segments: Segment[] = useMemo(
+    () => walls.map((w) => ({ x1: w.x1, y1: w.y1, x2: w.x2, y2: w.y2, wallType: w.wallType, doorState: w.doorState })),
+    [walls]
+  )
+
+  const lights = useMemo(
+    () => tokens
+      .filter((t) => t.lightRadius > 0)
+      .map((t) => {
+        const rawColor = t.lightColor || '#ffcc44'
+        const lightColor = rawColor.length === 4
+          ? '#' + rawColor[1] + rawColor[1] + rawColor[2] + rawColor[2] + rawColor[3] + rawColor[3]
+          : rawColor
+        const cx = t.x + (t.size * gridSize) / 2
+        const cy = t.y + (t.size * gridSize) / 2
+        return { id: t.id, cx, cy, rPx: t.lightRadius * gridSize, lightColor }
+      }),
+    [tokens, gridSize]
+  )
+
+  if (lights.length === 0 || imgW === 0 || imgH === 0) return null
+
+  return (
+    <Layer listening={false} opacity={0.6} perfectDrawEnabled={false}>
+      {lights.map((l) => {
+        const poly = computeVisibilityPolygon(l.cx, l.cy, l.rPx, segments, imgW, imgH)
+        const screenPoly: number[] = []
+        for (let i = 0; i < poly.length; i += 2) {
+          screenPoly.push(poly[i] * scale + offX, poly[i + 1] * scale + offY)
+        }
+        const scx = l.cx * scale + offX
+        const scy = l.cy * scale + offY
+        const srPx = l.rPx * scale
+
+        return (
+          <Shape
+            key={`pl-${l.id}`}
+            listening={false}
+            perfectDrawEnabled={false}
+            sceneFunc={(ctx) => {
+              const context = (ctx as unknown as { _context: CanvasRenderingContext2D })._context
+              context.save()
+              if (screenPoly.length >= 6) {
+                context.beginPath()
+                context.moveTo(screenPoly[0], screenPoly[1])
+                for (let i = 2; i < screenPoly.length; i += 2) {
+                  context.lineTo(screenPoly[i], screenPoly[i + 1])
+                }
+                context.closePath()
+                context.clip()
+              } else {
+                context.beginPath()
+                context.arc(scx, scy, srPx, 0, Math.PI * 2)
+                context.clip()
+              }
+              const gradient = context.createRadialGradient(scx, scy, 0, scx, scy, srPx)
+              gradient.addColorStop(0,   l.lightColor + '44')
+              gradient.addColorStop(0.5, l.lightColor + '22')
+              gradient.addColorStop(1,   l.lightColor + '00')
+              context.fillStyle = gradient
+              context.beginPath()
+              context.arc(scx, scy, srPx, 0, Math.PI * 2)
+              context.fill()
+              context.restore()
+            }}
+          />
+        )
+      })}
+    </Layer>
   )
 }
 

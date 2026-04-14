@@ -2,13 +2,17 @@ import { RefObject, useMemo } from 'react'
 import { Layer, Shape } from 'react-konva'
 import Konva from 'konva'
 import { useTokenStore } from '../../stores/tokenStore'
+import { useWallStore } from '../../stores/wallStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useCampaignStore } from '../../stores/campaignStore'
+import { computeVisibilityPolygon, type Segment } from '../../utils/losEngine'
 
 interface LightToken {
   id: number
+  /** center in map-image pixels */
   cx: number
   cy: number
+  /** radius in map-image pixels */
   rPx: number
   lightColor: string
 }
@@ -19,13 +23,25 @@ interface LightingLayerProps {
   gridSize: number
 }
 
-export function LightingLayer({ stageRef, mapId, gridSize }: LightingLayerProps) {
-  const tokens = useTokenStore((s) => s.tokens)
-  const scale = useMapTransformStore((s) => s.scale)
-  const offsetX = useMapTransformStore((s) => s.offsetX)
-  const offsetY = useMapTransformStore((s) => s.offsetY)
+export function LightingLayer({ mapId, gridSize }: LightingLayerProps) {
+  const tokens    = useTokenStore((s) => s.tokens)
+  const walls     = useWallStore((s) => s.walls)
+  const scale     = useMapTransformStore((s) => s.scale)
+  const offsetX   = useMapTransformStore((s) => s.offsetX)
+  const offsetY   = useMapTransformStore((s) => s.offsetY)
+  const imgW      = useMapTransformStore((s) => s.imgW)
+  const imgH      = useMapTransformStore((s) => s.imgH)
   const activeMapId = useCampaignStore((s) => s.activeMapId)
 
+  // Walls for the active map as Segment[] (map-image pixels)
+  const segments: Segment[] = useMemo(
+    () => walls
+      .filter((w) => w.mapId === mapId)
+      .map((w) => ({ x1: w.x1, y1: w.y1, x2: w.x2, y2: w.y2, wallType: w.wallType, doorState: w.doorState })),
+    [walls, mapId]
+  )
+
+  // Light sources for this map (map-image pixel coords)
   const lights: LightToken[] = useMemo(() => {
     if (activeMapId !== mapId) return []
     return tokens
@@ -35,43 +51,70 @@ export function LightingLayer({ stageRef, mapId, gridSize }: LightingLayerProps)
         const lightColor = rawColor.length === 4
           ? '#' + rawColor[1] + rawColor[1] + rawColor[2] + rawColor[2] + rawColor[3] + rawColor[3]
           : rawColor
-        const sx = token.x * scale + offsetX
-        const sy = token.y * scale + offsetY
-        const sizePx = gridSize * token.size * scale
-        return {
-          id: token.id,
-          cx: sx + sizePx / 2,
-          cy: sy + sizePx / 2,
-          rPx: token.lightRadius * gridSize * scale,
-          lightColor,
-        }
+        const cx = token.x + (token.size * gridSize) / 2
+        const cy = token.y + (token.size * gridSize) / 2
+        return { id: token.id, cx, cy, rPx: token.lightRadius * gridSize, lightColor }
       })
-  }, [tokens, scale, offsetX, offsetY, gridSize, mapId, activeMapId])
+  }, [tokens, gridSize, mapId, activeMapId])
 
   if (activeMapId !== mapId || lights.length === 0) return null
 
   return (
     <Layer listening={false} opacity={0.6} perfectDrawEnabled={false}>
-      {lights.map((l) => (
-        <Shape
-          key={`light-${l.id}`}
-          listening={false}
-          perfectDrawEnabled={false}
-          sceneFunc={(ctx) => {
-            const context = (ctx as any)._context
-            context.save()
-            const gradient = context.createRadialGradient(l.cx, l.cy, 0, l.cx, l.cy, l.rPx)
-            gradient.addColorStop(0, l.lightColor + '44')
-            gradient.addColorStop(0.5, l.lightColor + '22')
-            gradient.addColorStop(1, l.lightColor + '00')
-            context.fillStyle = gradient
-            context.beginPath()
-            context.arc(l.cx, l.cy, l.rPx, 0, Math.PI * 2)
-            context.fill()
-            context.restore()
-          }}
-        />
-      ))}
+      {lights.map((l) => {
+        // Compute LOS polygon in map-image pixel space
+        const poly = computeVisibilityPolygon(l.cx, l.cy, l.rPx, segments, imgW, imgH)
+
+        // Convert polygon to screen coords
+        const screenPoly: number[] = []
+        for (let i = 0; i < poly.length; i += 2) {
+          screenPoly.push(poly[i] * scale + offsetX, poly[i + 1] * scale + offsetY)
+        }
+
+        const scx = l.cx * scale + offsetX
+        const scy = l.cy * scale + offsetY
+        const srPx = l.rPx * scale
+
+        return (
+          <Shape
+            key={`light-${l.id}`}
+            listening={false}
+            perfectDrawEnabled={false}
+            sceneFunc={(ctx) => {
+              const context = (ctx as unknown as { _context: CanvasRenderingContext2D })._context
+              context.save()
+
+              if (screenPoly.length >= 6) {
+                // Clip to LOS polygon so light doesn't bleed through walls
+                context.beginPath()
+                context.moveTo(screenPoly[0], screenPoly[1])
+                for (let i = 2; i < screenPoly.length; i += 2) {
+                  context.lineTo(screenPoly[i], screenPoly[i + 1])
+                }
+                context.closePath()
+                context.clip()
+              } else {
+                // No walls or degenerate poly — clip to circle only
+                context.beginPath()
+                context.arc(scx, scy, srPx, 0, Math.PI * 2)
+                context.clip()
+              }
+
+              // Radial gradient fill
+              const gradient = context.createRadialGradient(scx, scy, 0, scx, scy, srPx)
+              gradient.addColorStop(0,   l.lightColor + '44')
+              gradient.addColorStop(0.5, l.lightColor + '22')
+              gradient.addColorStop(1,   l.lightColor + '00')
+              context.fillStyle = gradient
+              context.beginPath()
+              context.arc(scx, scy, srPx, 0, Math.PI * 2)
+              context.fill()
+
+              context.restore()
+            }}
+          />
+        )
+      })}
     </Layer>
   )
 }
