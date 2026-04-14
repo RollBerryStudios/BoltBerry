@@ -41,9 +41,16 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
   async function handleContinue() {
     const folder = tempFolder.trim()
     if (!folder) return
+    setError(null)
     try {
       if (window.electronAPI) {
-        await window.electronAPI.setUserDataFolder(folder)
+        const result = await window.electronAPI.setUserDataFolder(folder)
+        if (!result?.success) {
+          const msg = result?.error ? `Datenbank-Fehler: ${result.error}` : 'Ordner konnte nicht gesetzt werden'
+          setError(msg)
+          console.error('[SetupWizard] setUserDataFolder failed:', result?.error)
+          return
+        }
       }
       setUserDataFolder(folder)
       setIsSetupComplete(true)

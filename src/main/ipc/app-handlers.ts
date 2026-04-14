@@ -62,25 +62,31 @@ export function registerAppHandlers(): void {
   // Open native folder picker — returns chosen path or null
   ipcMain.handle(IPC.CHOOSE_FOLDER, async (event) => {
     const win = BrowserWindow.fromWebContents(event.sender)
-    const result = await dialog.showOpenDialog(win!, {
+    const opts = {
       title: 'Datenordner wählen',
       defaultPath: join(app.getPath('documents'), 'BoltBerry'),
-      properties: ['openDirectory', 'createDirectory'],
-    })
+      properties: ['openDirectory', 'createDirectory'] as const,
+    }
+    const result = win ? await dialog.showOpenDialog(win, opts) : await dialog.showOpenDialog(opts)
     if (result.canceled || !result.filePaths[0]) return null
     return result.filePaths[0]
   })
 
   // Set custom user data folder
   ipcMain.handle(IPC.SET_USER_DATA_FOLDER, (_event, dataPath: string) => {
+    const previousPath = getCustomUserDataPath()
     setCustomUserDataPath(dataPath)
     try {
       closeDatabase()
       initDatabase()
+      return { success: true }
     } catch (err) {
-      console.error('[AppHandlers] Failed to reinitialize database:', err)
+      console.error('[AppHandlers] Failed to reinitialize database at new path, reverting:', err)
+      // Revert to previous path so the DB stays open
+      setCustomUserDataPath(previousPath ?? '')
+      try { initDatabase() } catch { /* best-effort revert */ }
+      return { success: false, error: err instanceof Error ? err.message : String(err) }
     }
-    return true
   })
 
   // Open content folder
@@ -91,7 +97,7 @@ export function registerAppHandlers(): void {
     return shell.openPath(contentPath)
   })
 
-  // Get image as base64 for direct embedding
+  // Get image as base64 for direct embedding (e.g. PDF-to-canvas rendering)
   ipcMain.handle(IPC.GET_IMAGE_AS_BASE64, async (_event, imagePath: string) => {
     try {
       let cleanPath = imagePath
@@ -103,12 +109,17 @@ export function registerAppHandlers(): void {
       if (!fullPath.startsWith(userDataPath + sep) && fullPath !== userDataPath) {
         return null
       }
+      const stat = statSync(fullPath)
+      if (stat.size > 200 * 1024 * 1024) {
+        console.warn('[AppHandlers] GET_IMAGE_AS_BASE64: file too large, refusing', fullPath)
+        return null
+      }
       const { readFile } = require('fs/promises')
       const imageBuffer = await readFile(fullPath)
       const base64 = imageBuffer.toString('base64')
       const extension = fullPath.toLowerCase().split('.').pop() || 'png'
-      const mimeType = extension === 'jpg' || extension === 'jpeg' ? 'image/jpeg' : 
-                     extension === 'webp' ? 'image/webp' : 'image/png'
+      const mimeType = extension === 'jpg' || extension === 'jpeg' ? 'image/jpeg' :
+                       extension === 'webp' ? 'image/webp' : 'image/png'
       return `data:${mimeType};base64,${base64}`
     } catch (err) {
       return null
@@ -384,50 +395,54 @@ export function registerAppHandlers(): void {
   // Generic confirm dialog
   ipcMain.handle(IPC.CONFIRM_DIALOG, async (event, message: string, detail?: string) => {
     const win = BrowserWindow.fromWebContents(event.sender)
-    if (!win) return false
-    const { response } = await dialog.showMessageBox(win, {
-      type: 'warning',
+    const opts = {
+      type: 'warning' as const,
       title: 'Best\u00e4tigung',
       message,
       detail,
       buttons: ['Abbrechen', 'OK'],
       defaultId: 1,
       cancelId: 0,
-    })
+    }
+    const { response } = win
+      ? await dialog.showMessageBox(win, opts)
+      : await dialog.showMessageBox(opts)
     return response === 1
   })
 
   // Delete map (with native confirmation dialog)
   ipcMain.handle(IPC.DELETE_MAP_CONFIRM, async (event, mapName: string) => {
     const win = BrowserWindow.fromWebContents(event.sender)
-    if (!win) return false
-
-    const { response } = await dialog.showMessageBox(win, {
-      type: 'warning',
+    const opts = {
+      type: 'warning' as const,
       title: 'Karte l\u00f6schen',
       message: `Karte "${mapName}" wirklich l\u00f6schen?`,
       detail: 'Diese Aktion kann nicht r\u00fcckg\u00e4ngig gemacht werden.',
       buttons: ['Abbrechen', 'L\u00f6schen'],
       defaultId: 0,
       cancelId: 0,
-    })
+    }
+    const { response } = win
+      ? await dialog.showMessageBox(win, opts)
+      : await dialog.showMessageBox(opts)
     return response === 1
   })
 
   // Delete token (with native confirmation dialog)
   ipcMain.handle(IPC.DELETE_TOKEN_CONFIRM, async (event, tokenName: string) => {
     const win = BrowserWindow.fromWebContents(event.sender)
-    if (!win) return false
-
-    const { response } = await dialog.showMessageBox(win, {
-      type: 'warning',
+    const opts = {
+      type: 'warning' as const,
       title: 'Token l\u00f6schen',
       message: `Token "${tokenName}" wirklich l\u00f6schen?`,
       detail: 'Diese Aktion kann nicht r\u00fcckg\u00e4ngig gemacht werden.',
       buttons: ['Abbrechen', 'L\u00f6schen'],
       defaultId: 0,
       cancelId: 0,
-    })
+    }
+    const { response } = win
+      ? await dialog.showMessageBox(win, opts)
+      : await dialog.showMessageBox(opts)
     return response === 1
   })
 }

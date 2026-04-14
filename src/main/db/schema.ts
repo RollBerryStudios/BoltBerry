@@ -75,8 +75,7 @@ CREATE TABLE IF NOT EXISTS drawings (
   points     TEXT    NOT NULL DEFAULT '[]',
   color      TEXT    NOT NULL DEFAULT '#f59e0b',
   width      REAL    NOT NULL DEFAULT 2,
-  synced     INTEGER NOT NULL DEFAULT 0,
-  text       TEXT
+  synced     INTEGER NOT NULL DEFAULT 0
 );
 UPDATE schema_version SET version = 9;
 `

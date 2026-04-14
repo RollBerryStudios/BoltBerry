@@ -7,7 +7,11 @@ import {
 import archiver from 'archiver'
 import unzipper from 'unzipper'
 import { IPC } from '../../shared/ipc-types'
-import { getDb, closeDatabase, initDatabase } from '../db/database'
+import { getDb, closeDatabase, initDatabase, getCustomUserDataPath } from '../db/database'
+
+function getEffectiveUserDataPath(): string {
+  return getCustomUserDataPath() || app.getPath('userData')
+}
 
 export function registerExportImportHandlers(): void {
   // ── Duplicate Campaign ─────────────────────────────────────────────────────────
@@ -84,7 +88,7 @@ export function registerExportImportHandlers(): void {
     if (canceled || !filePaths[0]) return { success: false, canceled: true }
 
     const zipPath = filePaths[0]
-    const userData = app.getPath('userData')
+    const userData = getEffectiveUserDataPath()
     const importDir = path.join(userData, 'imports', `import_${Date.now()}`)
     mkdirSync(importDir, { recursive: true })
 
@@ -186,7 +190,7 @@ function buildZip(
     const campaignData = buildCampaignExport(campaignId, db)
     archive.append(JSON.stringify(campaignData, null, 2), { name: 'campaign.json' })
 
-    const userData = app.getPath('userData')
+    const userData = getEffectiveUserDataPath()
     const paths = collectAssetPaths(campaignData)
     const added = new Set<string>()
     for (const p of paths) {
@@ -206,23 +210,30 @@ function buildZip(
 
 // ── Export data structures ─────────────────────────────────────────────────────
 
+const EXPORT_VERSION = 8
+
 interface CampaignExport {
   version: number
   campaign: { name: string }
   maps: Array<{
     name: string; imagePath: string; gridType: string; gridSize: number; orderIndex: number; rotation: number; ftPerUnit: number; gridOffsetX: number; gridOffsetY: number; ambientBrightness: number
+    // Audio per-map (v8+)
+    ambientTrackPath: string | null; track1Volume: number; track2Volume: number; combatVolume: number
     tokens: Array<{
       id: number; name: string; imagePath: string | null; x: number; y: number; size: number
       hpCurrent: number; hpMax: number; visibleToPlayers: number
       rotation: number; locked: number; zIndex: number; markerColor: string | null
       ac: number | null; notes: string | null; statusEffects: string | null
-      faction: string; showName: number
+      faction: string; showName: number; lightRadius: number; lightColor: string
+    }>
+    walls: Array<{
+      x1: number; y1: number; x2: number; y2: number; wallType: string; doorState: string
     }>
     gmPins: Array<{
       x: number; y: number; label: string; icon: string; color: string
     }>
     drawings: Array<{
-      type: string; points: string; color: string; width: number; synced: number
+      type: string; points: string; color: string; width: number; synced: number; text: string | null
     }>
     fogBitmap: string | null
     exploredBitmap: string | null
@@ -239,6 +250,27 @@ interface CampaignExport {
   encounters: Array<{
     name: string; templateData: string; notes: string | null; createdAt: string
   }>
+  // v8+: character sheets
+  characterSheets: Array<{
+    tokenId: number | null; name: string; race: string; className: string; subclass: string; level: number
+    background: string; alignment: string; experience: number
+    str: number; dex: number; con: number; intScore: number; wis: number; cha: number
+    hpMax: number; hpCurrent: number; hpTemp: number; ac: number; speed: number
+    initiativeBonus: number; proficiencyBonus: number; hitDice: string
+    deathSavesSuccess: number; deathSavesFailure: number
+    savingThrows: string; skills: string; languages: string; proficiencies: string
+    features: string; equipment: string; attacks: string; spells: string; spellSlots: string
+    personality: string; ideals: string; bonds: string; flaws: string
+    backstory: string; notes: string; inspiration: number; passivePerception: number
+    createdAt: string; updatedAt: string
+  }>
+  // v8+: audio boards and slots
+  audioBoards: Array<{
+    name: string; sortOrder: number
+    slots: Array<{
+      slotNumber: number; emoji: string | null; title: string | null; audioPath: string | null
+    }>
+  }>
 }
 
 function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): CampaignExport {
@@ -249,7 +281,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
     'SELECT content FROM notes WHERE campaign_id = ? AND map_id IS NULL'
   ).get(campaignId) as { content: string } | undefined)?.content ?? ''
 
-  // Prefetch all per-map data in bulk to avoid N*7 queries
+  // Prefetch all per-map data in bulk to avoid N*M queries
   const mapIds = maps.map((m) => m.id)
   const placeholders = mapIds.map(() => '?').join(',')
 
@@ -266,13 +298,16 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
     ? db.prepare(`SELECT map_id, x, y, label, icon, color FROM gm_pins WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
     : []
   const allDrawings = mapIds.length > 0
-    ? db.prepare(`SELECT map_id, type, points, color, width, synced FROM drawings WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
+    ? db.prepare(`SELECT map_id, type, points, color, width, synced, text FROM drawings WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
     : []
   const allNotes = mapIds.length > 0
     ? db.prepare(`SELECT map_id, content FROM notes WHERE campaign_id = ? AND map_id IN (${placeholders})`).all(campaignId, ...mapIds) as any[]
     : []
   const allRooms = mapIds.length > 0
     ? db.prepare(`SELECT map_id, name, description, polygon, visibility, encounter_id, atmosphere_hint, notes, color, created_at FROM rooms WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
+    : []
+  const allWalls = mapIds.length > 0
+    ? db.prepare(`SELECT map_id, x1, y1, x2, y2, wall_type, door_state FROM walls WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
     : []
 
   // Index by map_id for O(1) lookup
@@ -283,9 +318,51 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
   const drawingsByMap = groupBy(allDrawings, 'map_id')
   const notesByMap = new Map(allNotes.map((n: any) => [n.map_id, n.content]))
   const roomsByMap = groupBy(allRooms, 'map_id')
+  const wallsByMap = groupBy(allWalls, 'map_id')
+
+  // Character sheets (per-campaign, with original token ids for remapping on import)
+  const characterSheets = (db.prepare(
+    `SELECT * FROM character_sheets WHERE campaign_id = ?`
+  ).all(campaignId) as any[]).map((cs) => ({
+    tokenId:           cs.token_id ?? null,
+    name:              cs.name,
+    race:              cs.race,
+    className:         cs.class_name,
+    subclass:          cs.subclass,
+    level:             cs.level,
+    background:        cs.background,
+    alignment:         cs.alignment,
+    experience:        cs.experience,
+    str:               cs.str, dex: cs.dex, con: cs.con, intScore: cs.int_score, wis: cs.wis, cha: cs.cha,
+    hpMax:             cs.hp_max, hpCurrent: cs.hp_current, hpTemp: cs.hp_temp,
+    ac:                cs.ac, speed: cs.speed,
+    initiativeBonus:   cs.initiative_bonus, proficiencyBonus: cs.proficiency_bonus,
+    hitDice:           cs.hit_dice,
+    deathSavesSuccess: cs.death_saves_success, deathSavesFailure: cs.death_saves_failure,
+    savingThrows:      cs.saving_throws, skills: cs.skills,
+    languages:         cs.languages, proficiencies: cs.proficiencies,
+    features:          cs.features, equipment: cs.equipment,
+    attacks:           cs.attacks, spells: cs.spells, spellSlots: cs.spell_slots,
+    personality:       cs.personality, ideals: cs.ideals, bonds: cs.bonds, flaws: cs.flaws,
+    backstory:         cs.backstory, notes: cs.notes,
+    inspiration:       cs.inspiration, passivePerception: cs.passive_perception,
+    createdAt:         cs.created_at, updatedAt: cs.updated_at,
+  }))
+
+  // Audio boards with their slots
+  const boardRows = (db.prepare(`SELECT * FROM audio_boards WHERE campaign_id = ? ORDER BY sort_order`).all(campaignId) as any[])
+  const audioBoards = boardRows.map((b: any) => {
+    const slots = (db.prepare(`SELECT slot_number, emoji, title, audio_path FROM audio_board_slots WHERE board_id = ? ORDER BY slot_number`).all(b.id) as any[]).map((s: any) => ({
+      slotNumber: s.slot_number,
+      emoji:      s.emoji ?? null,
+      title:      s.title ?? null,
+      audioPath:  s.audio_path ?? null,
+    }))
+    return { name: b.name, sortOrder: b.sort_order, slots }
+  })
 
   return {
-    version: 7,
+    version: EXPORT_VERSION,
     campaign: { name: campaign.name },
     campaignNote,
     maps: maps.map((m) => {
@@ -296,6 +373,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
       const drawings = drawingsByMap.get(m.id) ?? []
       const note = notesByMap.get(m.id) ?? ''
       const rooms = roomsByMap.get(m.id) ?? []
+      const walls = wallsByMap.get(m.id) ?? []
       return {
         name: m.name,
         imagePath: m.image_path,
@@ -307,6 +385,10 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
         gridOffsetX: m.grid_offset_x ?? 0,
         gridOffsetY: m.grid_offset_y ?? 0,
         ambientBrightness: m.ambient_brightness ?? 100,
+        ambientTrackPath: m.ambient_track_path ?? null,
+        track1Volume: m.track1_volume ?? 1,
+        track2Volume: m.track2_volume ?? 1,
+        combatVolume: m.combat_volume ?? 1,
         tokens: tokens.map((t: any) => ({
           id: t.id,
           name: t.name,
@@ -323,12 +405,18 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
           statusEffects: t.status_effects ?? null,
           faction: t.faction ?? 'party',
           showName: t.show_name ?? 1,
+          lightRadius: t.light_radius ?? 0,
+          lightColor: t.light_color ?? '#ffcc44',
+        })),
+        walls: walls.map((w: any) => ({
+          x1: w.x1, y1: w.y1, x2: w.x2, y2: w.y2,
+          wallType: w.wall_type, doorState: w.door_state,
         })),
         gmPins: gmPins.map((p: any) => ({
           x: p.x, y: p.y, label: p.label, icon: p.icon, color: p.color,
         })),
         drawings: drawings.map((d: any) => ({
-          type: d.type, points: d.points, color: d.color, width: d.width, synced: d.synced,
+          type: d.type, points: d.points, color: d.color, width: d.width, synced: d.synced, text: d.text ?? null,
         })),
         fogBitmap: fog?.fog_bitmap ?? null,
         exploredBitmap: fog?.explored_bitmap ?? null,
@@ -361,6 +449,8 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
       notes: e.notes,
       createdAt: e.created_at,
     })),
+    characterSheets,
+    audioBoards,
   }
 }
 
@@ -379,21 +469,31 @@ function collectAssetPaths(data: CampaignExport): string[] {
   const paths: string[] = []
   for (const m of data.maps) {
     paths.push(m.imagePath)
+    if (m.ambientTrackPath) paths.push(m.ambientTrackPath)
     for (const t of m.tokens) if (t.imagePath) paths.push(t.imagePath)
   }
   for (const h of data.handouts) if (h.imagePath) paths.push(h.imagePath)
+  for (const b of data.audioBoards ?? []) {
+    for (const s of b.slots) if (s.audioPath) paths.push(s.audioPath)
+  }
   return paths
 }
 
 function remapPaths(data: CampaignExport, map: Map<string, string>) {
   for (const m of data.maps) {
     m.imagePath = findRemap(m.imagePath, map)
+    if (m.ambientTrackPath) m.ambientTrackPath = findRemap(m.ambientTrackPath, map)
     for (const t of m.tokens) {
       if (t.imagePath) t.imagePath = findRemap(t.imagePath, map)
     }
   }
   for (const h of data.handouts) {
     if (h.imagePath) h.imagePath = findRemap(h.imagePath, map)
+  }
+  for (const b of data.audioBoards ?? []) {
+    for (const s of b.slots) {
+      if (s.audioPath) s.audioPath = findRemap(s.audioPath, map)
+    }
   }
 }
 
@@ -415,29 +515,43 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
       db.prepare(`INSERT INTO notes (campaign_id, map_id, content) VALUES (?, NULL, ?)`).run(campaignId, data.campaignNote)
     }
 
+    // Build a cross-map token id → new id map (used for character sheet FK remapping)
+    const globalTokenIdMap = new Map<number, number>()
+
     for (const m of data.maps) {
       const mapResult = db.prepare(
-        `INSERT INTO maps (campaign_id, name, image_path, grid_type, grid_size, order_index, rotation, ft_per_unit, grid_offset_x, grid_offset_y, ambient_brightness)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-      ).run(campaignId, m.name, m.imagePath, m.gridType, m.gridSize, m.orderIndex, m.rotation ?? 0, m.ftPerUnit ?? 5, m.gridOffsetX ?? 0, m.gridOffsetY ?? 0, m.ambientBrightness ?? 100)
+        `INSERT INTO maps (campaign_id, name, image_path, grid_type, grid_size, order_index, rotation, ft_per_unit, grid_offset_x, grid_offset_y, ambient_brightness, ambient_track_path, track1_volume, track2_volume, combat_volume)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+      ).run(
+        campaignId, m.name, m.imagePath, m.gridType, m.gridSize, m.orderIndex,
+        m.rotation ?? 0, m.ftPerUnit ?? 5, m.gridOffsetX ?? 0, m.gridOffsetY ?? 0, m.ambientBrightness ?? 100,
+        m.ambientTrackPath ?? null, m.track1Volume ?? 1, m.track2Volume ?? 1, m.combatVolume ?? 1,
+      )
       const mapId = Number(mapResult.lastInsertRowid)
-
-      const tokenIdMap = new Map<number, number>()
 
       for (const t of m.tokens) {
         const result = db.prepare(
-          `INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-        ).run(mapId, t.name, t.imagePath, t.x, t.y, t.size, t.hpCurrent, t.hpMax, t.visibleToPlayers,
-          t.rotation ?? 0, t.locked ?? 0, t.zIndex ?? 0, t.markerColor ?? null, t.ac ?? null, t.notes ?? null, t.statusEffects ?? null,
-          t.faction ?? 'party', t.showName ?? 1)
-        tokenIdMap.set(t.id, Number(result.lastInsertRowid))
+          `INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name, light_radius, light_color)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        ).run(
+          mapId, t.name, t.imagePath, t.x, t.y, t.size, t.hpCurrent, t.hpMax, t.visibleToPlayers,
+          t.rotation ?? 0, t.locked ?? 0, t.zIndex ?? 0, t.markerColor ?? null, t.ac ?? null,
+          t.notes ?? null, t.statusEffects ?? null, t.faction ?? 'party', t.showName ?? 1,
+          t.lightRadius ?? 0, t.lightColor ?? '#ffcc44',
+        )
+        globalTokenIdMap.set(t.id, Number(result.lastInsertRowid))
       }
 
       if (m.fogBitmap) {
         db.prepare(
           `INSERT INTO fog_state (map_id, fog_bitmap, explored_bitmap) VALUES (?, ?, ?)`
         ).run(mapId, m.fogBitmap, m.exploredBitmap ?? null)
+      }
+
+      for (const w of m.walls ?? []) {
+        db.prepare(
+          `INSERT INTO walls (map_id, x1, y1, x2, y2, wall_type, door_state) VALUES (?, ?, ?, ?, ?, ?, ?)`
+        ).run(mapId, w.x1, w.y1, w.x2, w.y2, w.wallType, w.doorState)
       }
 
       for (const p of m.gmPins ?? []) {
@@ -448,12 +562,12 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
 
       for (const d of m.drawings ?? []) {
         db.prepare(
-          `INSERT INTO drawings (map_id, type, points, color, width, synced) VALUES (?, ?, ?, ?, ?, ?)`
-        ).run(mapId, d.type, d.points, d.color, d.width, d.synced)
+          `INSERT INTO drawings (map_id, type, points, color, width, synced, text) VALUES (?, ?, ?, ?, ?, ?, ?)`
+        ).run(mapId, d.type, d.points, d.color, d.width, d.synced, d.text ?? null)
       }
 
       for (const i of m.initiative) {
-        const mappedTokenId = i.tokenId != null ? (tokenIdMap.get(i.tokenId) ?? null) : null
+        const mappedTokenId = i.tokenId != null ? (globalTokenIdMap.get(i.tokenId) ?? null) : null
         db.prepare(`INSERT INTO initiative (map_id, combatant_name, roll, current_turn, token_id, effect_timers) VALUES (?, ?, ?, ?, ?, ?)`)
           .run(mapId, i.combatantName, i.roll, i.currentTurn, mappedTokenId, i.effectTimers ?? null)
       }
@@ -479,6 +593,45 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
       db.prepare(
         `INSERT INTO encounters (campaign_id, name, template_data, notes, created_at) VALUES (?, ?, ?, ?, ?)`
       ).run(campaignId, e.name, e.templateData, e.notes, e.createdAt ?? new Date().toISOString())
+    }
+
+    // Character sheets (v8+) — remap token_id to new ids
+    for (const cs of data.characterSheets ?? []) {
+      const remappedTokenId = cs.tokenId != null ? (globalTokenIdMap.get(cs.tokenId) ?? null) : null
+      db.prepare(
+        `INSERT INTO character_sheets
+         (campaign_id, token_id, name, race, class_name, subclass, level, background, alignment, experience,
+          str, dex, con, int_score, wis, cha, hp_max, hp_current, hp_temp, ac, speed,
+          initiative_bonus, proficiency_bonus, hit_dice, death_saves_success, death_saves_failure,
+          saving_throws, skills, languages, proficiencies, features, equipment, attacks, spells, spell_slots,
+          personality, ideals, bonds, flaws, backstory, notes, inspiration, passive_perception, created_at, updated_at)
+         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+      ).run(
+        campaignId, remappedTokenId, cs.name, cs.race, cs.className, cs.subclass, cs.level,
+        cs.background, cs.alignment, cs.experience,
+        cs.str, cs.dex, cs.con, cs.intScore, cs.wis, cs.cha,
+        cs.hpMax, cs.hpCurrent, cs.hpTemp, cs.ac, cs.speed,
+        cs.initiativeBonus, cs.proficiencyBonus, cs.hitDice,
+        cs.deathSavesSuccess, cs.deathSavesFailure,
+        cs.savingThrows, cs.skills, cs.languages, cs.proficiencies,
+        cs.features, cs.equipment, cs.attacks, cs.spells, cs.spellSlots,
+        cs.personality, cs.ideals, cs.bonds, cs.flaws,
+        cs.backstory, cs.notes, cs.inspiration, cs.passivePerception,
+        cs.createdAt ?? new Date().toISOString(), cs.updatedAt ?? new Date().toISOString(),
+      )
+    }
+
+    // Audio boards and slots (v8+)
+    for (const b of data.audioBoards ?? []) {
+      const boardResult = db.prepare(
+        `INSERT INTO audio_boards (campaign_id, name, sort_order) VALUES (?, ?, ?)`
+      ).run(campaignId, b.name, b.sortOrder ?? 0)
+      const boardId = Number(boardResult.lastInsertRowid)
+      for (const s of b.slots ?? []) {
+        db.prepare(
+          `INSERT INTO audio_board_slots (board_id, slot_number, emoji, title, audio_path) VALUES (?, ?, ?, ?, ?)`
+        ).run(boardId, s.slotNumber, s.emoji ?? null, s.title ?? null, s.audioPath ?? null)
+      }
     }
 
     return campaignId
