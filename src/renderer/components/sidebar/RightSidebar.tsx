@@ -3,7 +3,7 @@ import { useUIStore, type SidebarTab } from '../../stores/uiStore'
 import { TokenPanel } from './panels/TokenPanel'
 import { InitiativePanel } from './panels/InitiativePanel'
 import { NotesPanel } from './panels/NotesPanel'
-import { AudioPlayer } from './panels/AudioPlayer'
+import { AudioPanel } from './panels/AudioPanel'
 import { HandoutsPanel } from './panels/HandoutsPanel'
 import { OverlayPanel } from './panels/OverlayPanel'
 import { DiceRoller } from './panels/DiceRoller'
@@ -81,7 +81,7 @@ export function RightSidebar() {
         {sidebarTab === 'notes'       && <NotesPanel />}
         {sidebarTab === 'handouts'    && <HandoutsPanel />}
         {sidebarTab === 'overlay'     && <OverlayPanel />}
-        {sidebarTab === 'audio'       && <AudioPlayer />}
+        {sidebarTab === 'audio'       && <AudioPanel />}
         {sidebarTab === 'dice'        && <DiceRoller />}
       </div>
     </div>

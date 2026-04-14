@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 20
+export const SCHEMA_VERSION = 21
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -188,7 +188,11 @@ CREATE TABLE IF NOT EXISTS maps (
   rotation     INTEGER NOT NULL DEFAULT 0,
   grid_offset_x REAL    NOT NULL DEFAULT 0,
   grid_offset_y REAL    NOT NULL DEFAULT 0,
-  ambient_brightness INTEGER NOT NULL DEFAULT 100
+  ambient_brightness INTEGER NOT NULL DEFAULT 100,
+  ambient_track_path TEXT,
+  track1_volume REAL NOT NULL DEFAULT 1.0,
+  track2_volume REAL NOT NULL DEFAULT 1.0,
+  combat_volume REAL NOT NULL DEFAULT 1.0
 );
 
 -- Fog of War bitmaps (one per map)
@@ -373,6 +377,25 @@ CREATE TABLE IF NOT EXISTS character_sheets (
   updated_at       TEXT    NOT NULL DEFAULT (datetime('now'))
 );
 
+-- Audio boards (per campaign, named SFX grids)
+CREATE TABLE IF NOT EXISTS audio_boards (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  campaign_id INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+  name        TEXT    NOT NULL DEFAULT 'Board',
+  sort_order  INTEGER NOT NULL DEFAULT 0
+);
+
+-- Audio board slots (up to 10 per board)
+CREATE TABLE IF NOT EXISTS audio_board_slots (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  board_id    INTEGER NOT NULL REFERENCES audio_boards(id) ON DELETE CASCADE,
+  slot_number INTEGER NOT NULL CHECK(slot_number BETWEEN 0 AND 9),
+  emoji       TEXT,
+  title       TEXT,
+  audio_path  TEXT,
+  UNIQUE(board_id, slot_number)
+);
+
 -- Schema version tracking (single-row enforced by PK constraint)
 CREATE TABLE IF NOT EXISTS schema_version (
   id      INTEGER PRIMARY KEY CHECK (id = 1),
@@ -458,6 +481,32 @@ CREATE INDEX IF NOT EXISTS idx_character_sheets_token_id ON character_sheets(tok
 UPDATE schema_version SET version = 20;
 `
 
+// Migration: v20 → v21 — audio system (map audio columns + boards/slots tables)
+export const MIGRATE_V20_TO_V21 = `
+ALTER TABLE maps ADD COLUMN ambient_track_path TEXT;
+ALTER TABLE maps ADD COLUMN track1_volume REAL NOT NULL DEFAULT 1.0;
+ALTER TABLE maps ADD COLUMN track2_volume REAL NOT NULL DEFAULT 1.0;
+ALTER TABLE maps ADD COLUMN combat_volume REAL NOT NULL DEFAULT 1.0;
+CREATE TABLE IF NOT EXISTS audio_boards (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  campaign_id INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+  name        TEXT    NOT NULL DEFAULT 'Board',
+  sort_order  INTEGER NOT NULL DEFAULT 0
+);
+CREATE TABLE IF NOT EXISTS audio_board_slots (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  board_id    INTEGER NOT NULL REFERENCES audio_boards(id) ON DELETE CASCADE,
+  slot_number INTEGER NOT NULL CHECK(slot_number BETWEEN 0 AND 9),
+  emoji       TEXT,
+  title       TEXT,
+  audio_path  TEXT,
+  UNIQUE(board_id, slot_number)
+);
+CREATE INDEX IF NOT EXISTS idx_audio_boards_campaign_id ON audio_boards(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_audio_board_slots_board_id ON audio_board_slots(board_id);
+UPDATE schema_version SET version = 21;
+`
+
 export const SEED_SCHEMA_VERSION = `
-INSERT OR IGNORE INTO schema_version (id, version) VALUES (1, 20);
+INSERT OR IGNORE INTO schema_version (id, version) VALUES (1, 21);
 `

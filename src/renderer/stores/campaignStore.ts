@@ -79,7 +79,8 @@ export const useCampaignStore = create<CampaignState>((set) => ({
           grid_type: string; grid_size: number; ft_per_unit: number; order_index: number
           camera_x: number | null; camera_y: number | null; camera_scale: number | null
           rotation: number | null; grid_offset_x: number; grid_offset_y: number; ambient_brightness: number
-        }>('SELECT * FROM maps WHERE campaign_id = ? ORDER BY order_index', [activeCampaignId])
+          ambient_track_path: string | null; track1_volume: number; track2_volume: number; combat_volume: number
+        }>('SELECT id, campaign_id, name, image_path, grid_type, grid_size, ft_per_unit, order_index, camera_x, camera_y, camera_scale, rotation, grid_offset_x, grid_offset_y, ambient_brightness, ambient_track_path, track1_volume, track2_volume, combat_volume FROM maps WHERE campaign_id = ? ORDER BY order_index', [activeCampaignId])
 
         activeMaps = rows.map(r => ({
           id: r.id,
@@ -97,6 +98,10 @@ export const useCampaignStore = create<CampaignState>((set) => ({
           cameraX: r.camera_x,
           cameraY: r.camera_y,
           cameraScale: r.camera_scale,
+          ambientTrackPath: r.ambient_track_path ?? null,
+          track1Volume: r.track1_volume ?? 1,
+          track2Volume: r.track2_volume ?? 1,
+          combatVolume: r.combat_volume ?? 1,
         }))
       }
 

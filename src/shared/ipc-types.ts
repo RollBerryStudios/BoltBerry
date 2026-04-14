@@ -106,6 +106,10 @@ export interface MapRecord {
   cameraY: number | null
   cameraScale: number | null
   ambientBrightness: number  // 0-100
+  ambientTrackPath: string | null
+  track1Volume: number
+  track2Volume: number
+  combatVolume: number
 }
 
 export type WallType = 'wall' | 'door' | 'window'

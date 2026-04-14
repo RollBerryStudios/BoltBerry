@@ -6,6 +6,7 @@ import { useTokenStore } from '../stores/tokenStore'
 import { useCampaignStore } from '../stores/campaignStore'
 import { useMapTransformStore } from '../stores/mapTransformStore'
 import { useUndoStore } from '../stores/undoStore'
+import { useAudioStore } from '../stores/audioStore'
 
 export function useKeyboardShortcuts() {
   useEffect(() => {
@@ -47,6 +48,32 @@ export function useKeyboardShortcuts() {
             return
         }
         return
+      }
+
+      // ── Audio tab: SFX board shortcuts ───────────────────────────────────
+      if (useUIStore.getState().sidebarTab === 'audio') {
+        const { boards, activeBoardIndex, triggerSfx, setActiveBoardIndex } = useAudioStore.getState()
+        const board = boards[activeBoardIndex]
+
+        // 1–9 → slots 0–8,  0 → slot 9
+        if (/^[0-9]$/.test(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          const slotIdx = e.key === '0' ? 9 : parseInt(e.key) - 1
+          const slot = board?.slots.find((s) => s.slotNumber === slotIdx)
+          if (slot?.audioPath) {
+            e.preventDefault()
+            triggerSfx(slot.audioPath)
+          }
+          return
+        }
+
+        // ß → cycle to next board
+        if ((e.key === 'ß' || e.key === '-') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          if (boards.length > 1) {
+            e.preventDefault()
+            setActiveBoardIndex((activeBoardIndex + 1) % boards.length)
+          }
+          return
+        }
       }
 
       // ── Single-key shortcuts ──────────────────────────────────────────────

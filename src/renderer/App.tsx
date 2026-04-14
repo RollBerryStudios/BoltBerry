@@ -10,6 +10,7 @@ import { ToastProvider } from './components/shared/Toast'
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
 import { useAutoSave } from './hooks/useAutoSave'
 import { usePlayerSync } from './hooks/usePlayerSync'
+import { useAutoAmbient } from './hooks/useAutoAmbient'
 
 export default function App() {
   const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
@@ -19,6 +20,7 @@ export default function App() {
   useKeyboardShortcuts()
   useAutoSave()
   usePlayerSync()
+  useAutoAmbient()
 
   // Persist theme
   useEffect(() => {
