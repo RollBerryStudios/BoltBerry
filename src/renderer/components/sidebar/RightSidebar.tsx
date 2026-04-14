@@ -24,7 +24,7 @@ const ALL_TABS: { id: SidebarTab; labelKey: string; icon: string; shortLabel: st
 
 export function RightSidebar() {
   const { t } = useTranslation()
-  const { sidebarTab, setSidebarTab, workMode } = useUIStore()
+  const { sidebarTab, setSidebarTab } = useUIStore()
 
   const visibleTabs = ALL_TABS
 
