@@ -100,7 +100,7 @@ export const useUIStore = create<UIState>((set) => ({
   playerConnected: false,
   blackoutActive: false,
   appMode: 'map',
-  sessionMode: 'session',
+  sessionMode: 'prep',
   theme: 'dark',
   language: (() => { try { return (localStorage.getItem('boltberry-lang') as AppLanguage | null) ?? 'de' } catch { return 'de' as AppLanguage } })(),
   atmosphereImagePath: null,

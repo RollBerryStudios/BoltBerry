@@ -24,17 +24,9 @@ const ALL_TABS: { id: SidebarTab; labelKey: string; icon: string; shortLabel: st
 
 export function RightSidebar() {
   const { t } = useTranslation()
-  const { sidebarTab, setSidebarTab, workMode } = useUIStore()
+  const { sidebarTab, setSidebarTab } = useUIStore()
 
-  const visibleTabs: typeof ALL_TABS = workMode === 'player-preview'
-    ? []
-    : workMode === 'combat'
-      ? ALL_TABS.filter((t) => t.id === 'tokens' || t.id === 'initiative')
-      : workMode === 'fog-edit'
-        ? ALL_TABS.filter((t) => t.id === 'tokens')
-        : ALL_TABS
-
-  if (workMode === 'player-preview') return null
+  const visibleTabs = ALL_TABS
 
   return (
     <div className="sidebar sidebar-right">

@@ -90,6 +90,8 @@ export function AssetBrowser() {
         statusEffects: null,
         faction: 'party',
         showName: true,
+        lightRadius: 0,
+        lightColor: '#ffcc44',
       })
     } catch (err) {
       console.error('[AssetBrowser] token insert failed:', err)

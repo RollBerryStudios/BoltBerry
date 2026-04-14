@@ -212,6 +212,8 @@ export function CanvasArea() {
         statusEffects: null,
         faction: 'party',
         showName: true,
+        lightRadius: 0,
+        lightColor: '#ffcc44',
       })
       broadcastTokensFromCanvas()
       return
@@ -246,7 +248,7 @@ export function CanvasArea() {
         x, y,
         size: 1, hpCurrent: 0, hpMax: 0, visibleToPlayers: true, rotation: 0,
         locked: false, zIndex: 0, markerColor: null, ac: null, notes: null, statusEffects: null,
-        faction: 'party', showName: true,
+        faction: 'party', showName: true, lightRadius: 0, lightColor: '#ffcc44',
       })
       broadcastTokensFromCanvas()
     }

@@ -33,7 +33,8 @@ const dmApi = {
     ipcRenderer.invoke('app:show-context-menu', items),
   deleteMapConfirm: (mapName: string) => ipcRenderer.invoke('app:delete-map-confirm', mapName),
   deleteTokenConfirm: (tokenName: string) => ipcRenderer.invoke('app:delete-token-confirm', tokenName),
-  confirmDialog: (message: string, detail?: string) => ipcRenderer.invoke('app:confirm-dialog', message, detail),
+  confirmDialog: (message: string, detail?: string) =>
+    ipcRenderer.invoke('app:confirm-dialog', message, detail),
 
   // File operations
   importFile: (type: 'map' | 'token' | 'atmosphere' | 'handout' | 'audio', campaignId?: number) =>
@@ -95,7 +96,7 @@ const dmApi = {
   onPlayerWindowClosed: (cb: () => void) => {
     const handler = () => cb()
     ipcRenderer.on('dm:player-window-closed', handler)
-    return () => ipcRenderer.removeListener('dm:player-window-closed', handler)
+    return () => { ipcRenderer.removeListener('dm:player-window-closed', handler) }
   },
 
   // Listen for main → DM: player window requested a full state sync

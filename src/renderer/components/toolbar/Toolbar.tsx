@@ -8,6 +8,7 @@ import { useInitiativeStore } from '../../stores/initiativeStore'
 import { useUndoStore } from '../../stores/undoStore'
 import { useFogStore } from '../../stores/fogStore'
 import { MonitorDialog } from '../MonitorDialog'
+import { SessionStartModal } from '../SessionStartModal'
 import clsx from 'clsx'
 import logoSquare from '../../assets/boltberry-logo.png'
 
@@ -178,6 +179,7 @@ export function Toolbar() {
   } = useUIStore()
   const { activeCampaignId, campaigns } = useCampaignStore()
   const [showMonitorDialog, setShowMonitorDialog] = useState(false)
+  const [showSessionModal, setShowSessionModal] = useState(false)
   const [cameraSent, setCameraSent] = useState(false)
   const zoomPercent = Math.round(useMapTransformStore((s) => s.scale / s.fitScale * 100))
   const canUndo = useUndoStore((s) => s.undoStack.length > 0)
@@ -227,12 +229,16 @@ export function Toolbar() {
 
   function handleSessionToggle() {
     if (sessionMode === 'prep') {
-      setSessionMode('session')
-      // Auto-switch to play mode if still on prep work-mode
-      if (workMode === 'prep') setWorkMode('play')
+      setShowSessionModal(true)
     } else {
       setSessionMode('prep')
     }
+  }
+
+  function handleSessionConfirm() {
+    setShowSessionModal(false)
+    setSessionMode('session')
+    if (workMode === 'prep') setWorkMode('play')
   }
 
   function handlePlayerWindowToggle() {
@@ -353,8 +359,8 @@ export function Toolbar() {
         </div>
       )}
 
-      {/* Fog quick actions — shown when any fog tool is active */}
-      {activeTool.startsWith('fog-') && (
+      {/* Fog quick actions — shown when any fog tool is active or fog-edit mode */}
+      {(activeTool.startsWith('fog-') || workMode === 'fog-edit') && (
         <>
           <button className="tool-btn" title="Alles aufdecken" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'revealAll' } }))}>👁</button>
           <button className="tool-btn" title="Alles zudecken" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'coverAll' } }))}>🌑</button>
@@ -584,6 +590,14 @@ export function Toolbar() {
 
       {showMonitorDialog && (
         <MonitorDialog onClose={() => setShowMonitorDialog(false)} />
+      )}
+
+      {showSessionModal && (
+        <SessionStartModal
+          onConfirm={handleSessionConfirm}
+          onCancel={() => setShowSessionModal(false)}
+          onOpenPlayerWindow={() => { setShowSessionModal(false); setShowMonitorDialog(true) }}
+        />
       )}
     </div>
   )

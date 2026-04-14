@@ -65,6 +65,8 @@ export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
   // Use ref so we don't re-register the listener on every pin selection change
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement).tagName
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
       if (e.key === 'Delete' && selectedPinIdRef.current !== null) {
         handleDeletePin(selectedPinIdRef.current)
         setSelectedPinId(null)
