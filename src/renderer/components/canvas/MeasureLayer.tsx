@@ -90,11 +90,11 @@ export function MeasureLayer({ stageRef, gridSize, ftPerUnit }: MeasureLayerProp
     })
   }
 
-  if (!MEASURE_TOOLS.has(activeTool) || !measure) {
+  if (!MEASURE_TOOLS.has(activeTool)) {
     return null
   }
 
-  const { startX, startY, endX, endY } = measure
+  const { startX, startY, endX, endY } = measure ?? { startX: 0, startY: 0, endX: 0, endY: 0 }
   const sx = startX * scale + offsetX
   const sy = startY * scale + offsetY
   const ex = endX * scale + offsetX
@@ -113,7 +113,7 @@ export function MeasureLayer({ stageRef, gridSize, ftPerUnit }: MeasureLayerProp
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
-      {activeTool === 'measure-line' && (
+      {measure && activeTool === 'measure-line' && (
         <>
           <Line points={[sx, sy, ex, ey]} stroke="#f59e0b" strokeWidth={2}
             dash={[6, 3]} listening={false} />
@@ -129,7 +129,7 @@ export function MeasureLayer({ stageRef, gridSize, ftPerUnit }: MeasureLayerProp
         </>
       )}
 
-      {activeTool === 'measure-circle' && (
+      {measure && activeTool === 'measure-circle' && (
         <>
           <Circle x={sx} y={sy} radius={distMapPx * scale}
             stroke="#22c55e" strokeWidth={2}
@@ -143,7 +143,7 @@ export function MeasureLayer({ stageRef, gridSize, ftPerUnit }: MeasureLayerProp
         </>
       )}
 
-      {activeTool === 'measure-cone' && (
+      {measure && activeTool === 'measure-cone' && (
         (() => {
           const angle = Math.atan2(ey - sy, ex - sx)
           const halfAngle = Math.PI / 6

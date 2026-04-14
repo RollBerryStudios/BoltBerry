@@ -150,12 +150,12 @@ const ROOM_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: st
   { id: 'room', icon: '🏠', labelKey: 'toolbar.tools.room', shortcut: 'R' },
 ]
 
-const WORK_MODE_CONFIG: { id: WorkMode; icon: string; label: string }[] = [
-  { id: 'prep',           icon: '✎',  label: 'Vorbereitung' },
-  { id: 'play',           icon: '▶',  label: 'Spiel' },
-  { id: 'combat',         icon: '⚔️', label: 'Kampf' },
-  { id: 'fog-edit',       icon: '🌫', label: 'Fog' },
-  { id: 'player-preview', icon: '👁', label: 'Spieler-Vorschau' },
+const WORK_MODE_CONFIG: { id: WorkMode; icon: string; label: string; shortLabel: string }[] = [
+  { id: 'prep',           icon: '✎',  label: 'Vorbereitung',    shortLabel: 'Prep'    },
+  { id: 'play',           icon: '▶',  label: 'Spiel',           shortLabel: 'Spiel'   },
+  { id: 'combat',         icon: '⚔️', label: 'Kampf',           shortLabel: 'Kampf'   },
+  { id: 'fog-edit',       icon: '🌫', label: 'Nebel bearbeiten',shortLabel: 'Fog'     },
+  { id: 'player-preview', icon: '👁', label: 'Spieler-Vorschau',shortLabel: 'Vorschau'},
 ]
 
 // ─── Main Toolbar ──────────────────────────────────────────────────────────────
@@ -290,21 +290,23 @@ export function Toolbar() {
       <Divider />
 
       {/* ── SECTION: Work Modes ─────────────────────────────────────────── */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+      <div className="workmode-group">
         {WORK_MODE_CONFIG.map((wm) => (
           <button
             key={wm.id}
-            className={clsx('tool-btn', workMode === wm.id && 'active')}
+            className={clsx(
+              'workmode-btn',
+              workMode === wm.id && 'active',
+              workMode === wm.id && wm.id === 'play'           && 'active-play',
+              workMode === wm.id && wm.id === 'combat'         && 'active-combat',
+              workMode === wm.id && wm.id === 'fog-edit'       && 'active-fog',
+              workMode === wm.id && wm.id === 'player-preview' && 'active-prev',
+            )}
             title={wm.label}
             onClick={() => setWorkMode(wm.id)}
-            style={workMode === wm.id ? {
-              color: wm.id === 'combat'         ? 'var(--danger)'
-                   : wm.id === 'fog-edit'       ? '#3b82f6'
-                   : wm.id === 'player-preview' ? '#22c55e'
-                   : undefined
-            } : undefined}
           >
-            {wm.icon}
+            <span style={{ fontSize: 13 }}>{wm.icon}</span>
+            <span style={{ fontSize: 10, marginLeft: 4 }}>{wm.shortLabel}</span>
           </button>
         ))}
       </div>
