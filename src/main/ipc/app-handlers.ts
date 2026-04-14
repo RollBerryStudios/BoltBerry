@@ -65,7 +65,7 @@ export function registerAppHandlers(): void {
     const opts = {
       title: 'Datenordner wählen',
       defaultPath: join(app.getPath('documents'), 'BoltBerry'),
-      properties: ['openDirectory', 'createDirectory'] as const,
+      properties: ['openDirectory'] as const,
     }
     const result = win ? await dialog.showOpenDialog(win, opts) : await dialog.showOpenDialog(opts)
     if (result.canceled || !result.filePaths[0]) return null
