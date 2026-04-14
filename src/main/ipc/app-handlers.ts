@@ -62,10 +62,10 @@ export function registerAppHandlers(): void {
   // Open native folder picker — returns chosen path or null
   ipcMain.handle(IPC.CHOOSE_FOLDER, async (event) => {
     const win = BrowserWindow.fromWebContents(event.sender)
-    const opts = {
+    const opts: Electron.OpenDialogOptions = {
       title: 'Datenordner wählen',
       defaultPath: join(app.getPath('documents'), 'BoltBerry'),
-      properties: ['openDirectory'] as const,
+      properties: ['openDirectory'],
     }
     const result = win ? await dialog.showOpenDialog(win, opts) : await dialog.showOpenDialog(opts)
     if (result.canceled || !result.filePaths[0]) return null
