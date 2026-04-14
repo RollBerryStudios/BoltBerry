@@ -11,65 +11,51 @@ import { EncounterPanel } from './panels/EncounterPanel'
 import { RoomPanel } from './panels/RoomPanel'
 import { CharacterSheetPanel } from './panels/CharacterSheetPanel'
 
-const ALL_TABS: { id: SidebarTab; labelKey: string; icon: string; shortLabel: string }[] = [
-  { id: 'tokens',      labelKey: 'sidebar.right.tabTokens',      icon: '⬤',  shortLabel: 'Token' },
-  { id: 'initiative',  labelKey: 'sidebar.right.tabInitiative',  icon: '⚔️', shortLabel: 'Init' },
-  { id: 'encounters',  labelKey: 'sidebar.right.tabEncounters',  icon: '👾', shortLabel: 'Enc.' },
-  { id: 'rooms',       labelKey: 'sidebar.right.tabRooms',       icon: '🏠', shortLabel: 'Räume' },
-  { id: 'characters',  labelKey: 'sidebar.right.tabCharacters',  icon: '📋', shortLabel: 'Chars' },
-  { id: 'notes',       labelKey: 'sidebar.right.tabNotes',       icon: '📝', shortLabel: 'Notiz' },
-  { id: 'handouts',    labelKey: 'sidebar.right.tabHandouts',    icon: '📜', shortLabel: 'Handout' },
-  { id: 'overlay',     labelKey: 'sidebar.right.tabOverlay',     icon: '✦',  shortLabel: 'Overlay' },
-  { id: 'audio',       labelKey: 'sidebar.right.tabAudio',       icon: '🎵', shortLabel: 'Audio' },
-  { id: 'dice',        labelKey: 'sidebar.right.tabDice',        icon: '🎲', shortLabel: 'Würfel' },
+// Split 10 tabs into two logical rows of 5
+// Row 1 — session-critical (always needed during play)
+const ROW_1: { id: SidebarTab; labelKey: string; icon: string; shortLabel: string }[] = [
+  { id: 'tokens',     labelKey: 'sidebar.right.tabTokens',     icon: '⬤',  shortLabel: 'Tokens'   },
+  { id: 'initiative', labelKey: 'sidebar.right.tabInitiative', icon: '⚔️', shortLabel: 'Initiative' },
+  { id: 'characters', labelKey: 'sidebar.right.tabCharacters', icon: '📋', shortLabel: 'Chars'    },
+  { id: 'notes',      labelKey: 'sidebar.right.tabNotes',      icon: '📝', shortLabel: 'Notizen'  },
+  { id: 'audio',      labelKey: 'sidebar.right.tabAudio',      icon: '🎵', shortLabel: 'Audio'    },
+]
+
+// Row 2 — world & utility (less frequently needed mid-session)
+const ROW_2: { id: SidebarTab; labelKey: string; icon: string; shortLabel: string }[] = [
+  { id: 'encounters', labelKey: 'sidebar.right.tabEncounters', icon: '👾', shortLabel: 'Encounter' },
+  { id: 'rooms',      labelKey: 'sidebar.right.tabRooms',      icon: '🏠', shortLabel: 'Räume'    },
+  { id: 'handouts',   labelKey: 'sidebar.right.tabHandouts',   icon: '📜', shortLabel: 'Handouts' },
+  { id: 'overlay',    labelKey: 'sidebar.right.tabOverlay',    icon: '✦',  shortLabel: 'Overlay'  },
+  { id: 'dice',       labelKey: 'sidebar.right.tabDice',       icon: '🎲', shortLabel: 'Würfel'   },
 ]
 
 export function RightSidebar() {
   const { t } = useTranslation()
   const { sidebarTab, setSidebarTab } = useUIStore()
 
-  const visibleTabs = ALL_TABS
+  function Tab({ tab }: { tab: typeof ROW_1[number] }) {
+    return (
+      <button
+        key={tab.id}
+        className={`sidebar-tab${sidebarTab === tab.id ? ' active' : ''}`}
+        title={t(tab.labelKey)}
+        aria-label={t(tab.labelKey)}
+        onClick={() => setSidebarTab(tab.id)}
+      >
+        <span className="tab-icon">{tab.icon}</span>
+        <span className="tab-label">{tab.shortLabel}</span>
+      </button>
+    )
+  }
 
   return (
     <div className="sidebar sidebar-right">
-      <div style={{
-        display: 'flex',
-        borderBottom: '1px solid var(--border)',
-        background: 'var(--bg-surface)',
-        flexShrink: 0,
-      }}>
-        {visibleTabs.map((tab) => (
-          <button
-            key={tab.id}
-            title={t(tab.labelKey)}
-            aria-label={t(tab.labelKey)}
-            onClick={() => setSidebarTab(tab.id)}
-            style={{
-              flex: 1,
-              padding: '4px 2px',
-              background: 'none',
-              border: 'none',
-              borderBottom: sidebarTab === tab.id
-                ? '2px solid var(--accent-blue)'
-                : '2px solid transparent',
-              color: sidebarTab === tab.id ? 'var(--accent-blue-light)' : 'var(--text-muted)',
-              cursor: 'pointer',
-              fontSize: 9,
-              fontWeight: 600,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: 1,
-              transition: 'color var(--transition)',
-              minWidth: 0,
-            }}
-          >
-            <span style={{ fontSize: 14, lineHeight: 1 }}>{tab.icon}</span>
-            <span style={{ lineHeight: 1.2, letterSpacing: '0.01em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100%' }}>
-              {tab.shortLabel}
-            </span>
-          </button>
-        ))}
+      {/* Two-row tab grid — 5 tabs per row */}
+      <div className="sidebar-tabs" style={{ gridTemplateRows: 'auto 1px auto' }}>
+        {ROW_1.map((tab) => <Tab key={tab.id} tab={tab} />)}
+        <div className="sidebar-tabs-divider" />
+        {ROW_2.map((tab) => <Tab key={tab.id} tab={tab} />)}
       </div>
 
       <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
