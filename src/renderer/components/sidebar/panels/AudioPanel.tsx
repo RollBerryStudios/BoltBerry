@@ -349,8 +349,10 @@ function BoardManager({ boards, activeBoardIndex, onSelect, campaignId, onBoards
 }
 
 // ─── Main AudioPanel ──────────────────────────────────────────────────────────
+// `layout="wide"`: two-column (music | sfx) — used in CampaignView
+// `layout="narrow"` (default): tabbed — used in the right sidebar
 
-export function AudioPanel() {
+export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }) {
   const { t } = useTranslation()
   const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
   const activeMapId = useCampaignStore((s) => s.activeMapId)
@@ -405,107 +407,160 @@ export function AudioPanel() {
     if (slot?.audioPath) triggerSfx(slot.audioPath)
   }
 
+  // ── Shared content blocks (used in both layouts) ───────────────────────────
+
+  const musicContent = (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+      {/* Master volume */}
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: 8,
+        padding: '8px 0', marginBottom: 8,
+        borderBottom: '1px solid var(--border-subtle)',
+      }}>
+        <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 48, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          Master
+        </span>
+        <input type="range" min={0} max={1} step={0.01} value={masterVolume}
+          onChange={(e) => setMasterVolume(parseFloat(e.target.value))} style={{ flex: 1 }} />
+        <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 34, textAlign: 'right' }}>
+          {Math.round(masterVolume * 100)}%
+        </span>
+      </div>
+
+      <ChannelStrip chId="track1" label={t('audio.track1')} color="#3b82f6" activeMapId={activeMapId} />
+      <ChannelStrip chId="track2" label={t('audio.track2')} color="#a78bfa" activeMapId={activeMapId} />
+
+      {/* Combat */}
+      <div style={{ marginTop: 8, paddingTop: 8, borderTop: '1px solid var(--border-subtle)' }}>
+        <button
+          onClick={combatActive ? deactivateCombat : activateCombat}
+          style={{
+            width: '100%', padding: '5px 0', marginBottom: 8,
+            background: combatActive ? '#ef4444' : 'var(--bg-surface)',
+            border: '1px solid #ef4444', borderRadius: 'var(--radius)',
+            color: combatActive ? '#fff' : '#ef4444',
+            cursor: 'pointer', fontSize: 'var(--text-sm)', fontWeight: 700,
+          }}
+        >
+          ⚔️ {combatActive ? t('audio.endCombat') : t('audio.startCombat')}
+        </button>
+        <ChannelStrip chId="combat" label={t('audio.combat')} color="#ef4444" activeMapId={activeMapId} />
+      </div>
+    </div>
+  )
+
+  const sfxContent = (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      {/* SFX volume */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 48, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          SFX Vol
+        </span>
+        <input type="range" min={0} max={1} step={0.01} value={sfxVolume}
+          onChange={(e) => setSfxVolume(parseFloat(e.target.value))} style={{ flex: 1 }} />
+        <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 34, textAlign: 'right' }}>
+          {Math.round(sfxVolume * 100)}%
+        </span>
+      </div>
+
+      {activeCampaignId && (
+        <BoardManager
+          boards={boards}
+          activeBoardIndex={activeBoardIndex}
+          onSelect={setActiveBoardIndex}
+          campaignId={activeCampaignId}
+          onBoardsChanged={loadBoards}
+        />
+      )}
+
+      {activeBoard ? (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 6 }}>
+          {Array.from({ length: 10 }, (_, i) => {
+            const slot = activeBoard.slots.find((s) => s.slotNumber === i)
+            return (
+              <SfxSlot
+                key={i}
+                slot={slot}
+                slotIndex={i}
+                onTrigger={() => handleTriggerSlot(i)}
+                onEdit={() => setEditingSlot({ boardId: activeBoard.id, slotIndex: i })}
+              />
+            )
+          })}
+        </div>
+      ) : (
+        <div style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: 'var(--text-sm)', padding: 16 }}>
+          {activeCampaignId ? t('audio.noBoards') : t('audio.noCampaign')}
+        </div>
+      )}
+
+      <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textAlign: 'center' }}>
+        {t('audio.sfxHint')}
+      </div>
+    </div>
+  )
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
-      {/* Section toggle */}
-      <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', flexShrink: 0 }}>
-        {(['music', 'sfx'] as const).map((sec) => (
-          <button
-            key={sec}
-            onClick={() => setActiveSection(sec)}
-            style={{
-              flex: 1, padding: '5px 0', background: 'none', border: 'none',
-              borderBottom: activeSection === sec ? '2px solid var(--accent-blue)' : '2px solid transparent',
-              color: activeSection === sec ? 'var(--accent-blue-light)' : 'var(--text-muted)',
-              cursor: 'pointer', fontSize: 11, fontWeight: 600,
-            }}
-          >
-            {sec === 'music' ? t('audio.tabMusic') : t('audio.tabSfx')}
-          </button>
-        ))}
-      </div>
 
-      <div style={{ flex: 1, overflowY: 'auto', padding: '8px 10px' }}>
-
-        {activeSection === 'music' && (
-          <>
-            {/* Master volume */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 12, paddingBottom: 8, borderBottom: '1px solid var(--border)' }}>
-              <span style={{ fontSize: 10, color: 'var(--text-muted)', minWidth: 46 }}>MASTER</span>
-              <input type="range" min={0} max={1} step={0.01} value={masterVolume} onChange={(e) => setMasterVolume(parseFloat(e.target.value))} style={{ flex: 1 }} />
-              <span style={{ fontSize: 10, color: 'var(--text-muted)', minWidth: 30, textAlign: 'right' }}>{Math.round(masterVolume * 100)}%</span>
+      {layout === 'wide' ? (
+        /* ── Wide two-column layout ── */
+        <div style={{
+          flex: 1, overflow: 'hidden',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: 0,
+        }}>
+          {/* Left: Music */}
+          <div style={{
+            borderRight: '1px solid var(--border)',
+            overflowY: 'auto',
+            padding: 'var(--sp-4) var(--sp-5)',
+          }}>
+            <div style={{
+              fontSize: 'var(--text-xs)', fontWeight: 700, textTransform: 'uppercase',
+              letterSpacing: '0.08em', color: 'var(--text-muted)', marginBottom: 'var(--sp-4)',
+            }}>
+              {t('audio.tabMusic')}
             </div>
+            {musicContent}
+          </div>
 
-            {/* Three channel strips */}
-            <ChannelStrip chId="track1" label={t('audio.track1')} color="#3b82f6" activeMapId={activeMapId} />
-            <ChannelStrip chId="track2" label={t('audio.track2')} color="#a78bfa" activeMapId={activeMapId} />
-
-            {/* Combat button */}
-            <div style={{ marginBottom: 10 }}>
+          {/* Right: SFX */}
+          <div style={{ overflowY: 'auto', padding: 'var(--sp-4) var(--sp-5)' }}>
+            <div style={{
+              fontSize: 'var(--text-xs)', fontWeight: 700, textTransform: 'uppercase',
+              letterSpacing: '0.08em', color: 'var(--text-muted)', marginBottom: 'var(--sp-4)',
+            }}>
+              {t('audio.tabSfx')}
+            </div>
+            {sfxContent}
+          </div>
+        </div>
+      ) : (
+        /* ── Narrow tabbed layout (sidebar) ── */
+        <>
+          <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', flexShrink: 0 }}>
+            {(['music', 'sfx'] as const).map((sec) => (
               <button
-                onClick={combatActive ? deactivateCombat : activateCombat}
+                key={sec}
+                onClick={() => setActiveSection(sec)}
                 style={{
-                  width: '100%', padding: '5px 0', marginBottom: 6,
-                  background: combatActive ? '#ef4444' : 'var(--bg-surface)',
-                  border: '1px solid #ef4444', borderRadius: 4,
-                  color: combatActive ? '#fff' : '#ef4444',
-                  cursor: 'pointer', fontSize: 11, fontWeight: 700,
+                  flex: 1, padding: '5px 0', background: 'none', border: 'none',
+                  borderBottom: activeSection === sec ? '2px solid var(--accent-blue)' : '2px solid transparent',
+                  color: activeSection === sec ? 'var(--accent-blue-light)' : 'var(--text-muted)',
+                  cursor: 'pointer', fontSize: 11, fontWeight: 600,
                 }}
               >
-                ⚔️ {combatActive ? t('audio.endCombat') : t('audio.startCombat')}
+                {sec === 'music' ? t('audio.tabMusic') : t('audio.tabSfx')}
               </button>
-              <ChannelStrip chId="combat" label={t('audio.combat')} color="#ef4444" activeMapId={activeMapId} />
-            </div>
-          </>
-        )}
-
-        {activeSection === 'sfx' && (
-          <>
-            {/* SFX volume */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
-              <span style={{ fontSize: 10, color: 'var(--text-muted)', minWidth: 40 }}>SFX VOL</span>
-              <input type="range" min={0} max={1} step={0.01} value={sfxVolume} onChange={(e) => setSfxVolume(parseFloat(e.target.value))} style={{ flex: 1 }} />
-              <span style={{ fontSize: 10, color: 'var(--text-muted)', minWidth: 30, textAlign: 'right' }}>{Math.round(sfxVolume * 100)}%</span>
-            </div>
-
-            {activeCampaignId && (
-              <BoardManager
-                boards={boards}
-                activeBoardIndex={activeBoardIndex}
-                onSelect={setActiveBoardIndex}
-                campaignId={activeCampaignId}
-                onBoardsChanged={loadBoards}
-              />
-            )}
-
-            {/* 2×5 slot grid */}
-            {activeBoard ? (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 6 }}>
-                {Array.from({ length: 10 }, (_, i) => {
-                  const slot = activeBoard.slots.find((s) => s.slotNumber === i)
-                  return (
-                    <SfxSlot
-                      key={i}
-                      slot={slot}
-                      slotIndex={i}
-                      onTrigger={() => handleTriggerSlot(i)}
-                      onEdit={() => setEditingSlot({ boardId: activeBoard.id, slotIndex: i })}
-                    />
-                  )
-                })}
-              </div>
-            ) : (
-              <div style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: 11, padding: 16 }}>
-                {activeCampaignId ? t('audio.noBoards') : t('audio.noCampaign')}
-              </div>
-            )}
-
-            <div style={{ marginTop: 8, fontSize: 9, color: 'var(--text-muted)', textAlign: 'center' }}>
-              {t('audio.sfxHint')}
-            </div>
-          </>
-        )}
-      </div>
+            ))}
+          </div>
+          <div style={{ flex: 1, overflowY: 'auto', padding: '8px 10px' }}>
+            {activeSection === 'music' ? musicContent : sfxContent}
+          </div>
+        </>
+      )}
 
       {/* Slot editor modal */}
       {editingSlot && (

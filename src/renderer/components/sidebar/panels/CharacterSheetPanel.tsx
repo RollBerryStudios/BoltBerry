@@ -503,13 +503,12 @@ function SheetEditor({ sheet, onUpdate }: {
 }
 
 // ─── CharacterSheetPanel ──────────────────────────────────────────────────────
+// Split-pane: character list on the left, editor fills the right.
 
 export function CharacterSheetPanel() {
   const { t } = useTranslation()
   const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
   const { sheets, activeSheetId, setSheets, addSheet, updateSheet, removeSheet, setActiveSheetId } = useCharacterStore()
-
-  const [view, setView] = useState<'list' | 'sheet'>('list')
 
   // Load sheets for current campaign
   useEffect(() => {
@@ -535,7 +534,6 @@ export function CharacterSheetPanel() {
       if (rows && rows.length > 0) {
         addSheet(rowToSheet(rows[0]))
         setActiveSheetId(result.lastInsertRowid)
-        setView('sheet')
       }
     } catch (err) { console.error('[CharacterSheetPanel] new sheet failed:', err) }
   }, [activeCampaignId, addSheet, setActiveSheetId])
@@ -579,54 +577,148 @@ export function CharacterSheetPanel() {
     if (!ok) return
     removeSheet(id)
     await window.electronAPI?.dbRun('DELETE FROM character_sheets WHERE id = ?', [id]).catch(console.error)
-    if (activeSheetId === id) { setActiveSheetId(null); setView('list') }
+    if (activeSheetId === id) setActiveSheetId(null)
   }, [activeSheetId, removeSheet, setActiveSheetId, t])
-
-  const handleSelect = (id: number) => { setActiveSheetId(id); setView('sheet') }
 
   const activeSheet = sheets.find((s) => s.id === activeSheetId)
 
   if (!activeCampaignId) {
-    return <div style={{ padding: 16, color: 'var(--text-muted)', fontSize: 12 }}>{t('characters.noCampaign')}</div>
+    return (
+      <div className="empty-state">
+        <div className="empty-state-icon">👤</div>
+        <div className="empty-state-title">{t('characters.noCampaign')}</div>
+      </div>
+    )
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
-      {/* Breadcrumb / back */}
-      {view === 'sheet' && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '4px 8px', borderBottom: '1px solid var(--border)', background: 'var(--bg-surface)', flexShrink: 0 }}>
-          <button
-            onClick={() => setView('list')}
-            style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 12 }}
-          >
-            ← {t('characters.backToList')}
-          </button>
-          <span style={{ color: 'var(--text-muted)', fontSize: 10 }}>|</span>
-          <span style={{ fontSize: 11, color: 'var(--text)', fontWeight: 600 }}>{activeSheet?.name ?? '—'}</span>
-        </div>
-      )}
+    <div style={{ display: 'flex', height: '100%', overflow: 'hidden' }}>
 
-      {view === 'list' ? (
-        <div style={{ padding: 8, overflowY: 'auto', flex: 1 }}>
-          {sheets.length === 0
-            ? <EmptyState onNew={handleNew} />
-            : <SheetList
-                sheets={sheets}
-                activeId={activeSheetId}
-                onSelect={handleSelect}
-                onNew={handleNew}
-                onDelete={handleDelete}
-              />
-          }
+      {/* ── Left: character list (fixed width) ── */}
+      <div style={{
+        width: 220,
+        flexShrink: 0,
+        borderRight: '1px solid var(--border)',
+        display: 'flex',
+        flexDirection: 'column',
+        background: 'var(--bg-surface)',
+        overflow: 'hidden',
+      }}>
+        {/* List header */}
+        <div style={{
+          padding: 'var(--sp-3) var(--sp-3)',
+          borderBottom: '1px solid var(--border-subtle)',
+          flexShrink: 0,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--sp-2)',
+        }}>
+          <span style={{
+            flex: 1,
+            fontSize: 'var(--text-xs)', fontWeight: 700, textTransform: 'uppercase',
+            letterSpacing: '0.07em', color: 'var(--text-muted)',
+          }}>
+            Charaktere
+          </span>
+          <button
+            onClick={handleNew}
+            className="btn btn-secondary"
+            style={{ fontSize: 'var(--text-xs)', padding: '3px 8px' }}
+            title={t('characters.newSheet')}
+          >
+            +
+          </button>
         </div>
-      ) : activeSheet ? (
-        <SheetEditor
-          sheet={activeSheet}
-          onUpdate={(patch) => handleUpdate(activeSheet.id, patch)}
-        />
-      ) : (
-        <EmptyState onNew={handleNew} />
-      )}
+
+        {/* Character list */}
+        <div style={{ flex: 1, overflowY: 'auto', padding: 'var(--sp-2)' }}>
+          {sheets.length === 0 ? (
+            <div style={{
+              display: 'flex', flexDirection: 'column', alignItems: 'center',
+              gap: 'var(--sp-3)', padding: 'var(--sp-6) var(--sp-3)',
+              color: 'var(--text-muted)', textAlign: 'center',
+            }}>
+              <span style={{ fontSize: 28 }}>📋</span>
+              <p style={{ fontSize: 'var(--text-xs)', margin: 0, lineHeight: 1.5 }}>
+                {t('characters.empty')}
+              </p>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              {sheets.map((s) => (
+                <div
+                  key={s.id}
+                  style={{
+                    display: 'flex', alignItems: 'center',
+                    padding: 'var(--sp-2) var(--sp-3)',
+                    borderRadius: 'var(--radius)',
+                    cursor: 'pointer',
+                    background: s.id === activeSheetId ? 'var(--accent-blue-dim)' : 'transparent',
+                    border: `1px solid ${s.id === activeSheetId ? 'var(--accent-blue)' : 'transparent'}`,
+                    transition: 'background var(--transition), border-color var(--transition)',
+                  }}
+                  onClick={() => setActiveSheetId(s.id)}
+                  onMouseEnter={(e) => {
+                    if (s.id !== activeSheetId) e.currentTarget.style.background = 'var(--bg-overlay)'
+                  }}
+                  onMouseLeave={(e) => {
+                    if (s.id !== activeSheetId) e.currentTarget.style.background = 'transparent'
+                  }}
+                >
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{
+                      fontSize: 'var(--text-sm)', fontWeight: 600,
+                      color: s.id === activeSheetId ? 'var(--accent-blue-light)' : 'var(--text-primary)',
+                      overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                    }}>
+                      {s.name}
+                    </div>
+                    <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 1 }}>
+                      Lv.{s.level} {s.className}
+                    </div>
+                  </div>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); handleDelete(s.id) }}
+                    style={{
+                      background: 'none', border: 'none', color: 'var(--text-muted)',
+                      cursor: 'pointer', fontSize: 12, opacity: 0, padding: '0 2px',
+                      flexShrink: 0,
+                    }}
+                    className="sheet-delete-btn"
+                    onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.color = 'var(--danger)' }}
+                    onMouseLeave={(e) => { e.currentTarget.style.opacity = '0' }}
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* ── Right: sheet editor fills remaining space ── */}
+      <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+        {activeSheet ? (
+          <SheetEditor
+            sheet={activeSheet}
+            onUpdate={(patch) => handleUpdate(activeSheet.id, patch)}
+          />
+        ) : (
+          <div className="empty-state">
+            <div className="empty-state-icon">👤</div>
+            <div className="empty-state-title">Kein Charakter ausgewählt</div>
+            <div className="empty-state-desc">
+              Wähle einen Charakter aus der Liste oder erstelle einen neuen.
+            </div>
+            {sheets.length === 0 && (
+              <button className="btn btn-secondary" onClick={handleNew} style={{ marginTop: 'var(--sp-2)' }}>
+                {t('characters.newSheet')}
+              </button>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

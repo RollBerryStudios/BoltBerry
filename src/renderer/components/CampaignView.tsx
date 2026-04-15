@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useCampaignStore } from '../stores/campaignStore'
+import { useUIStore } from '../stores/uiStore'
 import { NotesPanel } from './sidebar/panels/NotesPanel'
 import { CharacterSheetPanel } from './sidebar/panels/CharacterSheetPanel'
 import { HandoutsPanel } from './sidebar/panels/HandoutsPanel'
@@ -31,6 +32,8 @@ export function CampaignView() {
     setActiveCampaign,
   } = useCampaignStore()
 
+  const { playerConnected } = useUIStore()
+
   const [tab, setTab] = useState<Tab>('notes')
   const [mapsLoaded, setMapsLoaded] = useState(false)
   const [importing, setImporting] = useState(false)
@@ -38,7 +41,6 @@ export function CampaignView() {
   const campaign = campaigns.find((c) => c.id === activeCampaignId)
 
   // Populate activeMaps so the "Spielansicht" button knows which map to open.
-  // This mirrors LeftSidebar's loadMaps — both write the same data to the store.
   useEffect(() => {
     if (!activeCampaignId) return
     setMapsLoaded(false)
@@ -133,11 +135,6 @@ export function CampaignView() {
   }
 
   // ── Game view entry button ─────────────────────────────────────────────────
-  // States:
-  //   loading  → maps query in flight
-  //   hasMaps  → open first map in game view
-  //   noMaps   → import a first map (then auto-enters game view)
-
   const loading = !mapsLoaded || importing
   const hasMaps = mapsLoaded && activeMaps.length > 0
 
@@ -148,7 +145,7 @@ export function CampaignView() {
           disabled
           style={{
             display: 'flex', alignItems: 'center', gap: 6,
-            padding: '6px 16px',
+            padding: '7px 18px',
             background: 'var(--bg-overlay)',
             border: '1px solid var(--border)',
             borderRadius: 'var(--radius)',
@@ -171,7 +168,7 @@ export function CampaignView() {
           onClick={() => setActiveMap(activeMaps[0].id)}
           style={{
             display: 'flex', alignItems: 'center', gap: 8,
-            padding: '6px 18px',
+            padding: '7px 20px',
             background: 'var(--accent)',
             border: 'none',
             borderRadius: 'var(--radius)',
@@ -193,13 +190,12 @@ export function CampaignView() {
       )
     }
 
-    // No maps yet — offer import
     return (
       <button
         onClick={handleImportFirstMap}
         style={{
           display: 'flex', alignItems: 'center', gap: 8,
-          padding: '6px 16px',
+          padding: '7px 18px',
           background: 'none',
           border: '1px solid var(--accent)',
           borderRadius: 'var(--radius)',
@@ -233,19 +229,18 @@ export function CampaignView() {
       <div style={{
         display: 'flex',
         alignItems: 'center',
-        gap: 'var(--sp-4)',
+        gap: 'var(--sp-3)',
         padding: '0 var(--sp-5)',
         height: 56,
         borderBottom: '1px solid var(--border)',
         background: 'var(--bg-surface)',
         flexShrink: 0,
-      }}>
+        WebkitAppRegion: 'drag',
+      } as React.CSSProperties}>
         <button
           onClick={() => setActiveCampaign(null)}
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6,
+            display: 'flex', alignItems: 'center', gap: 6,
             padding: '5px 12px',
             background: 'none',
             border: '1px solid var(--border)',
@@ -256,7 +251,8 @@ export function CampaignView() {
             fontWeight: 500,
             transition: 'border-color var(--transition), color var(--transition)',
             flexShrink: 0,
-          }}
+            WebkitAppRegion: 'no-drag',
+          } as React.CSSProperties}
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = 'var(--accent)'
             e.currentTarget.style.color = 'var(--accent-light)'
@@ -280,11 +276,45 @@ export function CampaignView() {
           whiteSpace: 'nowrap',
           margin: 0,
           letterSpacing: '-0.01em',
-        }}>
+          WebkitAppRegion: 'drag',
+        } as React.CSSProperties}>
           {campaign?.name ?? ''}
         </h1>
 
-        {renderGameButton()}
+        {/* Player window controls — shown when window is open */}
+        {playerConnected && (
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: 'var(--sp-2)',
+            padding: '4px 10px',
+            background: 'rgba(34,197,94,0.08)',
+            border: '1px solid rgba(34,197,94,0.3)',
+            borderRadius: 'var(--radius)',
+            flexShrink: 0,
+            WebkitAppRegion: 'no-drag',
+          } as React.CSSProperties}>
+            <span style={{ fontSize: 8, color: '#22c55e' }}>●</span>
+            <span style={{ fontSize: 'var(--text-xs)', color: '#22c55e', fontWeight: 600 }}>
+              Spielerfenster
+            </span>
+            <button
+              onClick={() => window.electronAPI?.closePlayerWindow()}
+              style={{
+                background: 'none', border: 'none', cursor: 'pointer',
+                color: 'var(--text-muted)', fontSize: 12, padding: '0 0 0 4px',
+                lineHeight: 1,
+              }}
+              title="Spielerfenster schließen"
+              onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--danger)' }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-muted)' }}
+            >
+              ✕
+            </button>
+          </div>
+        )}
+
+        <div style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}>
+          {renderGameButton()}
+        </div>
 
         <img
           src={logoWide}
@@ -315,7 +345,7 @@ export function CampaignView() {
               display: 'flex',
               alignItems: 'center',
               gap: 6,
-              padding: '10px 16px',
+              padding: '10px 18px',
               background: 'none',
               border: 'none',
               borderBottom: tab === t.id ? '2px solid var(--accent)' : '2px solid transparent',
@@ -341,35 +371,50 @@ export function CampaignView() {
       </div>
 
       {/* ── Content ────────────────────────────────────────────────────── */}
-      <div style={{ flex: 1, overflow: 'auto', minHeight: 0 }}>
+      {/* overflow: hidden so panels can control their own scrolling */}
+      <div style={{ flex: 1, overflow: 'hidden', minHeight: 0, position: 'relative' }}>
 
         {tab === 'notes' && (
-          <div style={{ maxWidth: 860, margin: '0 auto', padding: 'var(--sp-6)' }}>
-            <NotesPanel />
+          <div style={{
+            position: 'absolute', inset: 0,
+            display: 'flex', justifyContent: 'center',
+            padding: 'var(--sp-6)',
+            overflow: 'auto',
+          }}>
+            <div style={{ width: '100%', maxWidth: 860, display: 'flex', flexDirection: 'column' }}>
+              <NotesPanel />
+            </div>
           </div>
         )}
 
         {tab === 'characters' && (
-          <div style={{ padding: 'var(--sp-6)' }}>
+          <div style={{ position: 'absolute', inset: 0 }}>
             <CharacterSheetPanel />
           </div>
         )}
 
         {tab === 'handouts' && (
-          <div style={{ padding: 'var(--sp-6)' }}>
+          <div style={{ position: 'absolute', inset: 0 }}>
             <HandoutsPanel />
           </div>
         )}
 
         {tab === 'audio' && (
-          <div style={{ maxWidth: 860, margin: '0 auto', padding: 'var(--sp-6)' }}>
-            <AudioPanel />
+          <div style={{ position: 'absolute', inset: 0 }}>
+            <AudioPanel layout="wide" />
           </div>
         )}
 
         {tab === 'settings' && (
-          <div style={{ maxWidth: 720, margin: '0 auto', padding: 'var(--sp-6)' }}>
-            <SettingsPanel />
+          <div style={{
+            position: 'absolute', inset: 0,
+            display: 'flex', justifyContent: 'center',
+            padding: 'var(--sp-6)',
+            overflow: 'auto',
+          }}>
+            <div style={{ width: '100%', maxWidth: 720 }}>
+              <SettingsPanel />
+            </div>
           </div>
         )}
       </div>

@@ -139,14 +139,14 @@ export function NotesPanel() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      {/* Sub-tabs + preview toggle */}
+      {/* Sub-tabs + preview toggle — only show map tab when a map is active */}
       <div style={{
         display: 'flex',
         borderBottom: '1px solid var(--border-subtle)',
         flexShrink: 0,
         alignItems: 'center',
       }}>
-        {(['campaign', 'map'] as const).map((tab) => (
+        {(activeMapId ? (['campaign', 'map'] as const) : (['campaign'] as const)).map((tab) => (
           <button
             key={tab}
             onClick={() => handleTabSwitch(tab)}
