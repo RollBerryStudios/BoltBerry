@@ -154,4 +154,11 @@ export function usePlayerSync() {
       .map((w) => ({ x1: w.x1, y1: w.y1, x2: w.x2, y2: w.y2, wallType: w.wallType, doorState: w.doorState }))
     window.electronAPI.sendWalls(mapWalls)
   }, [activeMapId, walls, sessionMode])
+
+  // ── Re-broadcast full state when drawings are cleared ────────────────────────
+  const drawingClearTick = useUIStore((s) => s.drawingClearTick)
+  useEffect(() => {
+    if (drawingClearTick === 0 || sessionMode === 'prep' || !window.electronAPI) return
+    if (useUIStore.getState().playerConnected) buildAndSendFullSync()
+  }, [drawingClearTick, sessionMode, buildAndSendFullSync])
 }

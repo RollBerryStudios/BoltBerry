@@ -537,8 +537,8 @@ async function loadMapData(mapId: number, map: MapRecord) {
 
     // Load initiative
     const initRows = await window.electronAPI.dbQuery<{
-      id: number; map_id: number; combatant_name: string; roll: number; current_turn: number; token_id: number | null; effect_timers: string | null
-    }>('SELECT id, map_id, combatant_name, roll, current_turn, token_id, effect_timers FROM initiative WHERE map_id = ? ORDER BY roll DESC', [mapId])
+      id: number; map_id: number; combatant_name: string; roll: number; current_turn: number; token_id: number | null; effect_timers: string | null; sort_order: number
+    }>('SELECT id, map_id, combatant_name, roll, current_turn, token_id, effect_timers, sort_order FROM initiative WHERE map_id = ? ORDER BY sort_order ASC, roll DESC', [mapId])
 
     useInitiativeStore.getState().setEntries(initRows.map((r) => ({
       id: r.id,

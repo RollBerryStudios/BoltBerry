@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useUIStore } from '../../../stores/uiStore'
+import { useCampaignStore } from '../../../stores/campaignStore'
 import type { PlayerOverlay, WeatherType } from '@shared/ipc-types'
 
 export function OverlayPanel() {
@@ -8,6 +9,8 @@ export function OverlayPanel() {
   const overlayActive = useUIStore((s) => s.overlayActive)
   const setOverlayActive = useUIStore((s) => s.setOverlayActive)
   const setActiveWeather = useUIStore((s) => s.setActiveWeather)
+  const incrementDrawingClearTick = useUIStore((s) => s.incrementDrawingClearTick)
+  const activeMapId = useCampaignStore((s) => s.activeMapId)
   const [text, setText] = useState('')
   const [position, setPosition] = useState<PlayerOverlay['position']>('bottom')
   const [style, setStyle] = useState<PlayerOverlay['style']>('title')
@@ -44,6 +47,12 @@ export function OverlayPanel() {
   function handleClear() {
     window.electronAPI?.sendOverlay(null)
     setOverlayActive(false)
+  }
+
+  async function handleClearDrawings() {
+    if (!activeMapId) return
+    await window.electronAPI?.dbRun('DELETE FROM drawings WHERE map_id = ?', [activeMapId])
+    incrementDrawingClearTick()
   }
 
   function handleWeather(type: WeatherType) {
@@ -122,6 +131,17 @@ export function OverlayPanel() {
             </button>
           )}
         </div>
+
+        {activeMapId && (
+          <button
+            className="btn btn-ghost"
+            style={{ justifyContent: 'center', fontSize: 'var(--text-xs)', color: 'var(--danger)' }}
+            onClick={handleClearDrawings}
+            title="Alle Zeichnungen dieser Karte löschen"
+          >
+            ✕ Zeichnungen löschen
+          </button>
+        )}
 
         <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: 'var(--sp-3)' }}>
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 'var(--sp-2)' }}>

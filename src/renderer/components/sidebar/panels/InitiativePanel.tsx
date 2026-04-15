@@ -149,9 +149,10 @@ export function InitiativePanel() {
     const rollVal = parseInt(roll) || 0
     const tokenId = selectedTokenId
     try {
+      const sortOrder = entries.length
       const result = await window.electronAPI.dbRun(
-        `INSERT INTO initiative (map_id, combatant_name, roll, token_id) VALUES (?, ?, ?, ?)`,
-        [activeMapId, name.trim(), rollVal, tokenId]
+        `INSERT INTO initiative (map_id, combatant_name, roll, token_id, sort_order) VALUES (?, ?, ?, ?, ?)`,
+        [activeMapId, name.trim(), rollVal, tokenId, sortOrder]
       )
       addEntry({
         id: result.lastInsertRowid,
@@ -175,6 +176,11 @@ export function InitiativePanel() {
   function handleSort() {
     sortEntries()
     broadcastInitiative()
+    // Persist new sort order to DB
+    const { entries: sorted } = useInitiativeStore.getState()
+    window.electronAPI?.dbRunBatch(
+      sorted.map((e, i) => ({ sql: 'UPDATE initiative SET sort_order = ? WHERE id = ?', params: [i, e.id] }))
+    )
   }
 
   function handleNextTurn() {
@@ -213,17 +219,19 @@ export function InitiativePanel() {
     const existingTokenIds = new Set(entries.map((e) => e.tokenId).filter(Boolean))
     const tokensToAdd = mapTokens.filter((t) => !existingTokenIds.has(t.id))
     if (tokensToAdd.length === 0) return
+    let sortOrderBase = entries.length
     for (const token of tokensToAdd) {
       try {
         const result = await window.electronAPI.dbRun(
-          'INSERT INTO initiative (map_id, combatant_name, roll, current_turn, token_id) VALUES (?, ?, 0, 0, ?)',
-          [activeMapId, token.name, token.id]
+          'INSERT INTO initiative (map_id, combatant_name, roll, current_turn, token_id, sort_order) VALUES (?, ?, 0, 0, ?, ?)',
+          [activeMapId, token.name, token.id, sortOrderBase]
         )
         addEntry({
           id: result.lastInsertRowid, mapId: activeMapId,
           combatantName: token.name, roll: 0, currentTurn: false,
           tokenId: token.id, effectTimers: null,
         })
+        sortOrderBase++
       } catch (err) {
         console.error('[InitiativePanel] handleAddAllTokens failed:', err)
       }
@@ -435,6 +443,11 @@ export function InitiativePanel() {
                   if (dragIndexRef.current != null && dragIndexRef.current !== entryIdx) {
                     reorderEntries(dragIndexRef.current, entryIdx)
                     broadcastInitiative()
+                    // Persist new sort order to DB
+                    const { entries: reordered } = useInitiativeStore.getState()
+                    window.electronAPI?.dbRunBatch(
+                      reordered.map((e, i) => ({ sql: 'UPDATE initiative SET sort_order = ? WHERE id = ?', params: [i, e.id] }))
+                    )
                   }
                   dragIndexRef.current = null
                   setDragOverIndex(null)

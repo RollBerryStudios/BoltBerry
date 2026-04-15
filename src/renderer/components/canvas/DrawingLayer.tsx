@@ -28,6 +28,7 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
   const activeTool = useUIStore((s) => s.activeTool)
   const drawColor = useUIStore((s) => s.drawColor)
   const drawWidth = useUIStore((s) => s.drawWidth)
+  const drawingClearTick = useUIStore((s) => s.drawingClearTick)
   const scale = useMapTransformStore((s) => s.scale)
   const offsetX = useMapTransformStore((s) => s.offsetX)
   const offsetY = useMapTransformStore((s) => s.offsetY)
@@ -47,6 +48,11 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
     setLoadedMapId(mapId)
     return () => { cancelled = true }
   }, [mapId])
+
+  // Clear local drawings when the GM triggers a full clear from OverlayPanel
+  useEffect(() => {
+    if (drawingClearTick > 0) setDrawings([])
+  }, [drawingClearTick])
 
   const isDrawingActive = DRAWING_TOOLS.has(activeTool)
 

@@ -13,6 +13,12 @@ function fmt(s: number): string {
 
 // ─── Channel strip ────────────────────────────────────────────────────────────
 
+const VOLUME_COL: Record<ChannelId, string> = {
+  track1: 'track1_volume',
+  track2: 'track2_volume',
+  combat: 'combat_volume',
+}
+
 function ChannelStrip({ chId, label, color, activeMapId }: {
   chId: ChannelId
   label: string
@@ -121,7 +127,16 @@ function ChannelStrip({ chId, label, color, activeMapId }: {
         <span style={{ fontSize: 9, color: 'var(--text-muted)', minWidth: 14 }}>🔊</span>
         <input
           type="range" min={0} max={1} step={0.01} value={ch.volume}
-          onChange={(e) => store.setChannelVolume(chId, parseFloat(e.target.value))}
+          onChange={(e) => {
+            const vol = parseFloat(e.target.value)
+            store.setChannelVolume(chId, vol)
+            if (activeMapId) {
+              window.electronAPI?.dbRun(
+                `UPDATE maps SET ${VOLUME_COL[chId]} = ? WHERE id = ?`,
+                [vol, activeMapId]
+              )
+            }
+          }}
           disabled={disabled}
           style={{ flex: 1 }}
         />
@@ -446,6 +461,12 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
         </button>
         <ChannelStrip chId="combat" label={t('audio.combat')} color="#ef4444" activeMapId={activeMapId} />
       </div>
+
+      {!activeCampaignId && (
+        <div style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: 'var(--text-xs)', padding: '8px 0 0' }}>
+          {t('audio.noCampaign')}
+        </div>
+      )}
     </div>
   )
 
