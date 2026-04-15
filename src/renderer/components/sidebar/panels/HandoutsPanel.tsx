@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useCampaignStore } from '../../../stores/campaignStore'
+import { useUIStore } from '../../../stores/uiStore'
 import { useImageUrl } from '../../../hooks/useImageUrl'
 import type { HandoutRecord } from '@shared/ipc-types'
 
 export function HandoutsPanel() {
   const { activeCampaignId } = useCampaignStore()
+  const sessionMode = useUIStore((s) => s.sessionMode)
+  const isSession = sessionMode === 'session'
+
   const [handouts, setHandouts] = useState<HandoutRecord[]>([])
   const [addingTitle, setAddingTitle] = useState('')
   const [addingText, setAddingText] = useState('')
@@ -12,11 +16,21 @@ export function HandoutsPanel() {
   const [addingImageName, setAddingImageName] = useState('')
   const [isAdding, setIsAdding] = useState(false)
   const [lightboxId, setLightboxId] = useState<number | null>(null)
+  // Only relevant in session mode: which handout is currently shown to players
+  const [sentId, setSentId] = useState<number | null>(null)
 
   useEffect(() => {
     if (!activeCampaignId) return
     loadHandouts(activeCampaignId)
   }, [activeCampaignId])
+
+  // Clear player handout when leaving session mode
+  useEffect(() => {
+    if (!isSession && sentId != null) {
+      window.electronAPI?.sendHandout(null)
+      setSentId(null)
+    }
+  }, [isSession])
 
   async function loadHandouts(campaignId: number) {
     if (!window.electronAPI) return
@@ -98,9 +112,27 @@ export function HandoutsPanel() {
       await window.electronAPI.dbRun('DELETE FROM handouts WHERE id = ?', [id])
       setHandouts((prev) => prev.filter((h) => h.id !== id))
       if (lightboxId === id) setLightboxId(null)
+      if (sentId === id) {
+        window.electronAPI?.sendHandout(null)
+        setSentId(null)
+      }
     } catch (err) {
       console.error('[HandoutsPanel] handleDeleteHandout failed:', err)
     }
+  }
+
+  function handleSendToPlayer(handout: HandoutRecord) {
+    window.electronAPI?.sendHandout({
+      title: handout.title,
+      imagePath: handout.imagePath,
+      textContent: handout.textContent,
+    })
+    setSentId(handout.id)
+  }
+
+  function handleDismissFromPlayer() {
+    window.electronAPI?.sendHandout(null)
+    setSentId(null)
   }
 
   const lightboxHandout = lightboxId != null ? handouts.find((h) => h.id === lightboxId) ?? null : null
@@ -108,7 +140,7 @@ export function HandoutsPanel() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
 
-      {/* ── Lightbox ─────────────────────────────────────────────────────── */}
+      {/* ── Lightbox ───────────────────────────────────────────────────────── */}
       {lightboxHandout && (
         <HandoutLightbox
           handout={lightboxHandout}
@@ -131,6 +163,18 @@ export function HandoutsPanel() {
         }}>
           {handouts.length} Handout{handouts.length !== 1 ? 's' : ''}
         </span>
+
+        {/* "Dismiss from players" — only in session mode when something is shown */}
+        {isSession && sentId != null && (
+          <button
+            className="btn btn-ghost"
+            style={{ fontSize: 'var(--text-xs)', color: 'var(--warning)', padding: '3px 8px' }}
+            onClick={handleDismissFromPlayer}
+            title="Handout beim Spieler ausblenden"
+          >
+            ✕ Ausblenden
+          </button>
+        )}
 
         <button
           className="btn btn-secondary"
@@ -224,7 +268,9 @@ export function HandoutsPanel() {
             <div className="empty-state-icon">📄</div>
             <div className="empty-state-title">Keine Handouts</div>
             <div className="empty-state-desc">
-              Bilder und Texte für die Spielrunde vorbereiten und auf Klick vergrößert anzeigen.
+              {isSession
+                ? 'Bilder und Texte für Spieler vorbereiten und per Klick anzeigen.'
+                : 'Bilder und Texte für die Spielrunde vorbereiten.'}
             </div>
           </div>
         ) : (
@@ -237,7 +283,10 @@ export function HandoutsPanel() {
               <HandoutCard
                 key={h.id}
                 handout={h}
+                isSession={isSession}
+                isSent={sentId === h.id}
                 onZoom={() => setLightboxId(h.id)}
+                onSend={() => handleSendToPlayer(h)}
                 onDelete={() => handleDeleteHandout(h.id)}
               />
             ))}
@@ -251,10 +300,13 @@ export function HandoutsPanel() {
 // ─── Handout card ──────────────────────────────────────────────────────────────
 
 function HandoutCard({
-  handout, onZoom, onDelete,
+  handout, isSession, isSent, onZoom, onSend, onDelete,
 }: {
   handout: HandoutRecord
+  isSession: boolean
+  isSent: boolean
   onZoom: () => void
+  onSend: () => void
   onDelete: () => void
 }) {
   const [expanded, setExpanded] = useState(false)
@@ -263,10 +315,11 @@ function HandoutCard({
     <div style={{
       display: 'flex',
       flexDirection: 'column',
-      background: 'var(--bg-elevated)',
-      border: '1px solid var(--border)',
+      background: isSent ? 'var(--accent-dim)' : 'var(--bg-elevated)',
+      border: `1px solid ${isSent ? 'var(--accent)' : 'var(--border)'}`,
       borderRadius: 'var(--radius-md)',
       overflow: 'hidden',
+      transition: 'border-color var(--transition), background var(--transition)',
     }}>
       {/* Thumbnail — click to zoom */}
       {handout.imagePath && (
@@ -276,16 +329,28 @@ function HandoutCard({
       {/* Card body */}
       <div style={{ padding: 'var(--sp-3)', display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)', flex: 1 }}>
 
-        {/* Title */}
-        <span style={{
-          fontSize: 'var(--text-sm)',
-          fontWeight: 600,
-          color: 'var(--text-primary)',
-          lineHeight: 1.4,
-          wordBreak: 'break-word',
-        }}>
-          {handout.title}
-        </span>
+        {/* Title row */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--sp-2)' }}>
+          <span style={{
+            flex: 1,
+            fontSize: 'var(--text-sm)',
+            fontWeight: 600,
+            color: 'var(--text-primary)',
+            lineHeight: 1.4,
+            wordBreak: 'break-word',
+          }}>
+            {handout.title}
+          </span>
+          {isSent && (
+            <span style={{
+              fontSize: 9, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em',
+              color: 'var(--accent)', background: 'var(--accent-dim)', padding: '2px 5px',
+              borderRadius: 'var(--radius-sm)', flexShrink: 0,
+            }}>
+              Live
+            </span>
+          )}
+        </div>
 
         {/* Text content */}
         {handout.textContent && (
@@ -320,19 +385,38 @@ function HandoutCard({
 
         {/* Actions */}
         <div style={{ display: 'flex', gap: 'var(--sp-2)', marginTop: 'auto', paddingTop: 'var(--sp-1)' }}>
+          {/* Zoom — always visible */}
           <button
             className="btn btn-ghost"
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              fontSize: 'var(--text-xs)',
-              padding: '4px 8px',
-            }}
+            style={{ flex: isSession ? undefined : 1, justifyContent: 'center', fontSize: 'var(--text-xs)', padding: '4px 8px' }}
             onClick={onZoom}
             title="Vergrößert anzeigen"
           >
-            ⛶ Anzeigen
+            ⛶
           </button>
+
+          {/* Send to players — only in session mode */}
+          {isSession && (
+            <button
+              className="btn btn-ghost"
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                fontSize: 'var(--text-xs)',
+                fontWeight: 600,
+                padding: '4px 8px',
+                color: isSent ? 'var(--accent-light)' : 'var(--text-secondary)',
+                borderColor: isSent ? 'var(--accent)' : 'var(--border-subtle)',
+                border: '1px solid',
+                borderRadius: 'var(--radius)',
+              }}
+              onClick={onSend}
+              title={isSent ? 'Erneut senden' : 'An Spieler senden'}
+            >
+              {isSent ? '📺 Wird gezeigt' : '→ Spieler'}
+            </button>
+          )}
+
           <button
             className="btn btn-ghost btn-icon"
             style={{ color: 'var(--danger)', flexShrink: 0 }}
@@ -352,7 +436,6 @@ function HandoutCard({
 function HandoutLightbox({ handout, onClose }: { handout: HandoutRecord; onClose: () => void }) {
   const imageUrl = useImageUrl(handout.imagePath)
 
-  // Close on Escape
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', handler)
@@ -383,7 +466,6 @@ function HandoutLightbox({ handout, onClose }: { handout: HandoutRecord; onClose
           position: 'relative',
         }}
       >
-        {/* Close button */}
         <button
           onClick={onClose}
           style={{
@@ -397,7 +479,6 @@ function HandoutLightbox({ handout, onClose }: { handout: HandoutRecord; onClose
           ✕
         </button>
 
-        {/* Image — full-width */}
         {imageUrl && (
           <img
             src={imageUrl}
@@ -412,7 +493,6 @@ function HandoutLightbox({ handout, onClose }: { handout: HandoutRecord; onClose
           />
         )}
 
-        {/* Text body */}
         {(handout.title || handout.textContent) && (
           <div style={{ padding: 24 }}>
             <div style={{ fontSize: 18, fontWeight: 700, color: '#F4F6FA', marginBottom: handout.textContent ? 12 : 0 }}>
