@@ -22,7 +22,7 @@ export function SettingsPanel() {
   async function handleRescanContent() {
     if (window.electronAPI) {
       try {
-        const result = await window.electronAPI.rescanContentFolder()
+        const result = await window.electronAPI.rescanContentFolder(activeCampaignId ?? 0)
         await useCampaignStore.getState().refreshCampaigns()
         alert(result.message)
       } catch (err) {

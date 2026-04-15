@@ -393,11 +393,11 @@ export function TokenPanel() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)', paddingBottom: 'var(--sp-2)' }}>
               {/* HP */}
               <div style={{ display: 'flex', gap: 'var(--sp-2)' }}>
-                <input className="input" type="number" value={selected.hpCurrent}
-                  onChange={(e) => handleUpdate(selected.id, { hpCurrent: parseInt(e.target.value) || 0 })}
+                <input className="input" type="number" min={0} value={selected.hpCurrent}
+                  onChange={(e) => handleUpdate(selected.id, { hpCurrent: Math.max(0, parseInt(e.target.value) || 0) })}
                   placeholder="HP aktuell" />
-                <input className="input" type="number" value={selected.hpMax}
-                  onChange={(e) => handleUpdate(selected.id, { hpMax: parseInt(e.target.value) || 0 })}
+                <input className="input" type="number" min={0} value={selected.hpMax}
+                  onChange={(e) => handleUpdate(selected.id, { hpMax: Math.max(0, parseInt(e.target.value) || 0) })}
                   placeholder="HP max" />
               </div>
               {/* Size presets (D&D 5e grid squares) */}

@@ -243,8 +243,10 @@ export function LeftSidebar() {
     const mapA = activeMaps[idx]
     const mapB = activeMaps[swapIdx]
     try {
-      await window.electronAPI.dbRun('UPDATE maps SET order_index = ? WHERE id = ?', [mapB.orderIndex, mapA.id])
-      await window.electronAPI.dbRun('UPDATE maps SET order_index = ? WHERE id = ?', [mapA.orderIndex, mapB.id])
+      await window.electronAPI.dbRunBatch([
+        { sql: 'UPDATE maps SET order_index = ? WHERE id = ?', params: [mapB.orderIndex, mapA.id] },
+        { sql: 'UPDATE maps SET order_index = ? WHERE id = ?', params: [mapA.orderIndex, mapB.id] },
+      ])
       useCampaignStore.getState().setActiveMaps(
         activeMaps.map((m) => {
           if (m.id === mapA.id) return { ...m, orderIndex: mapB.orderIndex }
@@ -580,7 +582,8 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
     if (!window.electronAPI) return
     if (trimmed === map.name) return
     await window.electronAPI.dbRun('UPDATE maps SET name = ? WHERE id = ?', [trimmed, map.id])
-    useCampaignStore.getState().refreshCampaigns()
+    const { activeMaps, setActiveMaps } = useCampaignStore.getState()
+    setActiveMaps(activeMaps.map((m) => m.id === map.id ? { ...m, name: trimmed } : m))
   }
 
   async function handleDelete() {

@@ -32,6 +32,7 @@ interface UIState {
   showPlayerEye: boolean
   overlayActive: boolean
   activeWeather: string
+  drawingClearTick: number
   clipboardTokens: Array<{
     name: string
     imagePath: string | null
@@ -74,6 +75,7 @@ interface UIState {
   togglePlayerEye: () => void
   setOverlayActive: (active: boolean) => void
   setActiveWeather: (weather: string) => void
+  incrementDrawingClearTick: () => void
   setClipboardTokens: (tokens: Array<{
     name: string
     imagePath: string | null
@@ -116,6 +118,7 @@ export const useUIStore = create<UIState>((set) => ({
   showPlayerEye: false,
   overlayActive: false,
   activeWeather: 'none',
+  drawingClearTick: 0,
   clipboardTokens: [],
 
   setActiveTool: (activeTool) => set({ activeTool }),
@@ -187,6 +190,7 @@ export const useUIStore = create<UIState>((set) => ({
   togglePlayerEye: () => set((s) => ({ showPlayerEye: !s.showPlayerEye })),
   setOverlayActive: (overlayActive) => set({ overlayActive }),
   setActiveWeather: (activeWeather) => set({ activeWeather }),
+  incrementDrawingClearTick: () => set((s) => ({ drawingClearTick: s.drawingClearTick + 1 })),
   setClipboardTokens: (tokens: Array<{
     name: string
     imagePath: string | null

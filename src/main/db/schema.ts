@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 21
+export const SCHEMA_VERSION = 22
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -234,7 +234,8 @@ CREATE TABLE IF NOT EXISTS initiative (
   roll            INTEGER NOT NULL DEFAULT 0,
   current_turn    INTEGER NOT NULL DEFAULT 0,
   token_id        INTEGER REFERENCES tokens(id) ON DELETE SET NULL,
-  effect_timers   TEXT
+  effect_timers   TEXT,
+  sort_order      INTEGER NOT NULL DEFAULT 0
 );
 
 -- Notes (campaign-level or map-level)
@@ -506,6 +507,13 @@ CREATE INDEX IF NOT EXISTS idx_audio_board_slots_board_id ON audio_board_slots(b
 UPDATE schema_version SET version = 21;
 `
 
+// Migration: v21 → v22 — add sort_order to initiative for persistent manual ordering
+export const MIGRATE_V21_TO_V22 = `
+ALTER TABLE initiative ADD COLUMN sort_order INTEGER NOT NULL DEFAULT 0;
+UPDATE initiative SET sort_order = rowid;
+UPDATE schema_version SET version = 22;
+`
+
 export const SEED_SCHEMA_VERSION = `
-INSERT OR IGNORE INTO schema_version (id, version) VALUES (1, 21);
+INSERT OR IGNORE INTO schema_version (id, version) VALUES (1, 22);
 `
