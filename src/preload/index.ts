@@ -112,6 +112,9 @@ const dmApi = {
 
 // ─── Player Window API ────────────────────────────────────────────────────────
 const playerApi = {
+  // Image loading — player window does not get electronAPI, but still needs images
+  getImageAsBase64: (path: string) => ipcRenderer.invoke('app:get-image-as-base64', path),
+
   onFullSync: (cb: (state: PlayerFullState) => void) => {
     const handler = (_: Electron.IpcRendererEvent, state: PlayerFullState) => cb(state)
     ipcRenderer.on('player:full-sync', handler)

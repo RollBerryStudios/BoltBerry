@@ -47,9 +47,11 @@ export function useImage(src: string | null): HTMLImageElement | null {
     // (file:// URLs are unreliable in Electron due to security restrictions,
     // and relative paths like "assets/map/foo.png" need resolving anyway)
     if (!src.startsWith('data:')) {
-      // Strip file:// prefix if present, then load relative path through main process
+      // Strip file:// prefix if present, then load relative path through main process.
+      // Player window has no window.electronAPI — fall back to window.playerAPI.
       const relativePath = src.startsWith('file://') ? src.substring(7) : src
-      window.electronAPI?.getImageAsBase64(relativePath).then((imageData) => {
+      const loader = window.electronAPI?.getImageAsBase64 ?? window.playerAPI?.getImageAsBase64
+      loader?.(relativePath).then((imageData) => {
         if (cancelled) return
         if (!imageData) {
           setImg(null)

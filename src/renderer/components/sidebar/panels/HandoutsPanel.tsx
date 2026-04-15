@@ -11,8 +11,7 @@ export function HandoutsPanel() {
   const [addingImagePath, setAddingImagePath] = useState<string | null>(null)
   const [addingImageName, setAddingImageName] = useState('')
   const [isAdding, setIsAdding] = useState(false)
-  const [sentId, setSentId] = useState<number | null>(null)
-  const [expandedId, setExpandedId] = useState<number | null>(null)
+  const [lightboxId, setLightboxId] = useState<number | null>(null)
 
   useEffect(() => {
     if (!activeCampaignId) return
@@ -92,37 +91,30 @@ export function HandoutsPanel() {
     const handout = handouts.find((h) => h.id === id)
     const confirmed = await window.electronAPI.confirmDialog(
       `Handout "${handout?.title ?? ''}" löschen?`,
-      'Diese Aktion kann nicht rükgängig gemacht werden.'
+      'Diese Aktion kann nicht rückgängig gemacht werden.'
     )
     if (!confirmed) return
     try {
       await window.electronAPI.dbRun('DELETE FROM handouts WHERE id = ?', [id])
       setHandouts((prev) => prev.filter((h) => h.id !== id))
-      if (sentId === id) {
-        window.electronAPI.sendHandout(null)
-        setSentId(null)
-      }
+      if (lightboxId === id) setLightboxId(null)
     } catch (err) {
       console.error('[HandoutsPanel] handleDeleteHandout failed:', err)
     }
   }
 
-  function handleSendToPlayer(handout: HandoutRecord) {
-    window.electronAPI?.sendHandout({
-      title: handout.title,
-      imagePath: handout.imagePath,
-      textContent: handout.textContent,
-    })
-    setSentId(handout.id)
-  }
-
-  function handleDismissFromPlayer() {
-    window.electronAPI?.sendHandout(null)
-    setSentId(null)
-  }
+  const lightboxHandout = lightboxId != null ? handouts.find((h) => h.id === lightboxId) ?? null : null
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+
+      {/* ── Lightbox ─────────────────────────────────────────────────────── */}
+      {lightboxHandout && (
+        <HandoutLightbox
+          handout={lightboxHandout}
+          onClose={() => setLightboxId(null)}
+        />
+      )}
 
       {/* ── Header bar ─────────────────────────────────────────────────────── */}
       <div style={{
@@ -139,17 +131,6 @@ export function HandoutsPanel() {
         }}>
           {handouts.length} Handout{handouts.length !== 1 ? 's' : ''}
         </span>
-
-        {sentId != null && (
-          <button
-            className="btn btn-ghost"
-            style={{ fontSize: 'var(--text-xs)', color: 'var(--warning)', padding: '3px 8px' }}
-            onClick={handleDismissFromPlayer}
-            title="Handout beim Spieler ausblenden"
-          >
-            ✕ Ausblenden
-          </button>
-        )}
 
         <button
           className="btn btn-secondary"
@@ -192,7 +173,7 @@ export function HandoutsPanel() {
             style={{ resize: 'vertical', fontSize: 'var(--text-sm)' }}
           />
 
-          {/* Image picker — separate from save */}
+          {/* Image picker */}
           <button
             className="btn btn-ghost"
             style={{ justifyContent: 'flex-start', gap: 6, fontSize: 'var(--text-xs)' }}
@@ -216,7 +197,7 @@ export function HandoutsPanel() {
             )}
           </button>
 
-          {/* Save / Cancel row */}
+          {/* Save / Cancel */}
           <div style={{ display: 'flex', gap: 'var(--sp-2)', alignItems: 'center' }}>
             <button
               className="btn btn-primary"
@@ -243,7 +224,7 @@ export function HandoutsPanel() {
             <div className="empty-state-icon">📄</div>
             <div className="empty-state-title">Keine Handouts</div>
             <div className="empty-state-desc">
-              Bilder und Texte für Spieler vorbereiten und per Klick anzeigen.
+              Bilder und Texte für die Spielrunde vorbereiten und auf Klick vergrößert anzeigen.
             </div>
           </div>
         ) : (
@@ -256,11 +237,8 @@ export function HandoutsPanel() {
               <HandoutCard
                 key={h.id}
                 handout={h}
-                isSent={sentId === h.id}
-                isExpanded={expandedId === h.id}
-                onSend={() => handleSendToPlayer(h)}
+                onZoom={() => setLightboxId(h.id)}
                 onDelete={() => handleDeleteHandout(h.id)}
-                onToggleExpand={() => setExpandedId(expandedId === h.id ? null : h.id)}
               />
             ))}
           </div>
@@ -273,55 +251,41 @@ export function HandoutsPanel() {
 // ─── Handout card ──────────────────────────────────────────────────────────────
 
 function HandoutCard({
-  handout, isSent, isExpanded, onSend, onDelete, onToggleExpand,
+  handout, onZoom, onDelete,
 }: {
   handout: HandoutRecord
-  isSent: boolean
-  isExpanded: boolean
-  onSend: () => void
+  onZoom: () => void
   onDelete: () => void
-  onToggleExpand: () => void
 }) {
+  const [expanded, setExpanded] = useState(false)
+
   return (
     <div style={{
       display: 'flex',
       flexDirection: 'column',
-      background: isSent ? 'var(--accent-dim)' : 'var(--bg-elevated)',
-      border: `1px solid ${isSent ? 'var(--accent)' : 'var(--border)'}`,
+      background: 'var(--bg-elevated)',
+      border: '1px solid var(--border)',
       borderRadius: 'var(--radius-md)',
       overflow: 'hidden',
-      transition: 'border-color var(--transition), background var(--transition)',
     }}>
-      {/* Thumbnail */}
+      {/* Thumbnail — click to zoom */}
       {handout.imagePath && (
-        <HandoutThumbnail path={handout.imagePath} />
+        <HandoutThumbnail path={handout.imagePath} onClick={onZoom} />
       )}
 
       {/* Card body */}
       <div style={{ padding: 'var(--sp-3)', display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)', flex: 1 }}>
 
-        {/* Title row */}
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--sp-2)' }}>
-          <span style={{
-            flex: 1,
-            fontSize: 'var(--text-sm)',
-            fontWeight: 600,
-            color: 'var(--text-primary)',
-            lineHeight: 1.4,
-            wordBreak: 'break-word',
-          }}>
-            {handout.title}
-          </span>
-          {isSent && (
-            <span style={{
-              fontSize: 9, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em',
-              color: 'var(--accent)', background: 'var(--accent-dim)', padding: '2px 5px',
-              borderRadius: 'var(--radius-sm)', flexShrink: 0,
-            }}>
-              Live
-            </span>
-          )}
-        </div>
+        {/* Title */}
+        <span style={{
+          fontSize: 'var(--text-sm)',
+          fontWeight: 600,
+          color: 'var(--text-primary)',
+          lineHeight: 1.4,
+          wordBreak: 'break-word',
+        }}>
+          {handout.title}
+        </span>
 
         {/* Text content */}
         {handout.textContent && (
@@ -332,23 +296,23 @@ function HandoutCard({
               lineHeight: 1.55,
               margin: 0,
               whiteSpace: 'pre-wrap',
-              overflow: isExpanded ? undefined : 'hidden',
-              display: isExpanded ? undefined : '-webkit-box',
-              WebkitLineClamp: isExpanded ? undefined : 3,
-              WebkitBoxOrient: isExpanded ? undefined : 'vertical',
+              overflow: expanded ? undefined : 'hidden',
+              display: expanded ? undefined : '-webkit-box',
+              WebkitLineClamp: expanded ? undefined : 3,
+              WebkitBoxOrient: expanded ? undefined : 'vertical',
             } as React.CSSProperties}>
               {handout.textContent}
             </p>
             {handout.textContent.length > 120 && (
               <button
-                onClick={onToggleExpand}
+                onClick={() => setExpanded((v) => !v)}
                 style={{
                   background: 'none', border: 'none', padding: 0, marginTop: 4,
                   color: 'var(--accent-blue-light)', cursor: 'pointer',
                   fontSize: 'var(--text-xs)', fontWeight: 600,
                 }}
               >
-                {isExpanded ? 'Weniger' : 'Mehr anzeigen'}
+                {expanded ? 'Weniger' : 'Mehr anzeigen'}
               </button>
             )}
           </div>
@@ -362,17 +326,12 @@ function HandoutCard({
               flex: 1,
               justifyContent: 'center',
               fontSize: 'var(--text-xs)',
-              fontWeight: 600,
-              color: isSent ? 'var(--accent-light)' : 'var(--text-secondary)',
-              borderColor: isSent ? 'var(--accent)' : 'var(--border-subtle)',
-              border: '1px solid',
-              borderRadius: 'var(--radius)',
               padding: '4px 8px',
             }}
-            onClick={onSend}
-            title={isSent ? 'Erneut senden' : 'An Spieler senden'}
+            onClick={onZoom}
+            title="Vergrößert anzeigen"
           >
-            {isSent ? '💺 Wird gezeigt' : '→ Zeigen'}
+            ⛶ Anzeigen
           </button>
           <button
             className="btn btn-ghost btn-icon"
@@ -388,19 +347,105 @@ function HandoutCard({
   )
 }
 
-function HandoutThumbnail({ path }: { path: string }) {
+// ─── Lightbox ─────────────────────────────────────────────────────────────────
+
+function HandoutLightbox({ handout, onClose }: { handout: HandoutRecord; onClose: () => void }) {
+  const imageUrl = useImageUrl(handout.imagePath)
+
+  // Close on Escape
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [onClose])
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 9000,
+        background: 'rgba(0,0,0,0.88)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        padding: 32,
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          background: '#182130',
+          borderRadius: 12,
+          border: '1px solid #1E2A3E',
+          maxWidth: 800,
+          width: '100%',
+          maxHeight: '90vh',
+          overflowY: 'auto',
+          boxShadow: '0 24px 64px rgba(0,0,0,0.8)',
+          position: 'relative',
+        }}
+      >
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          style={{
+            position: 'absolute', top: 12, right: 12, zIndex: 1,
+            background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)',
+            borderRadius: '50%', width: 32, height: 32, fontSize: 16, color: '#F4F6FA',
+            cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}
+          title="Schließen (Esc)"
+        >
+          ✕
+        </button>
+
+        {/* Image — full-width */}
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            style={{
+              width: '100%',
+              borderRadius: '12px 12px 0 0',
+              display: 'block',
+              maxHeight: '60vh',
+              objectFit: 'contain',
+              background: '#0d1117',
+            }}
+          />
+        )}
+
+        {/* Text body */}
+        {(handout.title || handout.textContent) && (
+          <div style={{ padding: 24 }}>
+            <div style={{ fontSize: 18, fontWeight: 700, color: '#F4F6FA', marginBottom: handout.textContent ? 12 : 0 }}>
+              {handout.title}
+            </div>
+            {handout.textContent && (
+              <div style={{ fontSize: 15, color: '#94A0B2', lineHeight: 1.65, whiteSpace: 'pre-wrap' }}>
+                {handout.textContent}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function HandoutThumbnail({ path, onClick }: { path: string; onClick: () => void }) {
   const url = useImageUrl(path)
   if (!url) return null
   return (
     <img
       src={url}
+      onClick={onClick}
       style={{
         width: '100%',
         height: 160,
         objectFit: 'cover',
         display: 'block',
         background: 'var(--bg-base)',
+        cursor: 'zoom-in',
       }}
+      title="Vergrößert anzeigen"
     />
   )
 }

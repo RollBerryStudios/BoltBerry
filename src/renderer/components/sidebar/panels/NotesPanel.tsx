@@ -66,80 +66,129 @@ const MarkdownPreview = memo(function MarkdownPreview({ text }: { text: string }
   )
 })
 
+// ── Campaign note categories ──────────────────────────────────────────────────
+
+const CAMPAIGN_CATEGORIES = [
+  { id: 'Allgemein',   icon: '📜' },
+  { id: 'NSCs',        icon: '🧑' },
+  { id: 'Orte',        icon: '🗺️' },
+  { id: 'Quests',      icon: '⚔️' },
+  { id: 'Gegenstände', icon: '🎒' },
+  { id: 'Sonstiges',   icon: '📌' },
+]
+
 // ─── NotesPanel ──────────────────────────────────────────────────────────────────
 
 export function NotesPanel() {
   const { activeCampaignId, activeMapId } = useCampaignStore()
-  const [campaignNote, setCampaignNote] = useState('')
-  const [mapNote, setMapNote] = useState('')
-  const [activeTab, setActiveTab] = useState<'campaign' | 'map'>('campaign')
-  const [preview, setPreview] = useState(false)
-  const prevTabRef = useRef<'campaign' | 'map'>('campaign')
-  const campaignNoteRef = useRef(campaignNote)
-  const mapNoteRef = useRef(mapNote)
-  useEffect(() => { campaignNoteRef.current = campaignNote }, [campaignNote])
-  useEffect(() => { mapNoteRef.current = mapNote }, [mapNote])
 
+  // 'campaign' or 'map' top-level tab
+  const [activeTab, setActiveTab] = useState<'campaign' | 'map'>('campaign')
+
+  // Active category within the campaign tab
+  const [activeCategory, setActiveCategory] = useState('Allgemein')
+
+  // Note contents: keyed by category for campaign notes, plus 'map' for the map tab
+  const [notes, setNotes] = useState<Record<string, string>>({})
+
+  const [preview, setPreview] = useState(false)
+
+  // Refs for auto-save on tab/category switch
+  const notesRef = useRef(notes)
+  useEffect(() => { notesRef.current = notes }, [notes])
+  const activeTabRef = useRef(activeTab)
+  useEffect(() => { activeTabRef.current = activeTab }, [activeTab])
+  const activeCategoryRef = useRef(activeCategory)
+  useEffect(() => { activeCategoryRef.current = activeCategory }, [activeCategory])
+  const activeMapIdRef = useRef(activeMapId)
+  useEffect(() => { activeMapIdRef.current = activeMapId }, [activeMapId])
+
+  // Load all notes for the current campaign
   useEffect(() => {
     if (!activeCampaignId) return
-    loadNotes()
+    loadAllNotes(activeCampaignId, activeMapId)
   }, [activeCampaignId, activeMapId])
 
-  async function loadNotes() {
-    if (!window.electronAPI || !activeCampaignId) return
+  async function loadAllNotes(campaignId: number, mapId: number | null) {
+    if (!window.electronAPI) return
     try {
-      const [cNote] = await window.electronAPI.dbQuery<{ content: string }>(
-        `SELECT content FROM notes WHERE campaign_id = ? AND map_id IS NULL LIMIT 1`,
-        [activeCampaignId]
+      // All campaign-level notes (map_id IS NULL)
+      const campaignRows = await window.electronAPI.dbQuery<{ category: string; content: string }>(
+        `SELECT category, content FROM notes WHERE campaign_id = ? AND map_id IS NULL`,
+        [campaignId]
       )
-      setCampaignNote(cNote?.content ?? '')
+      const loaded: Record<string, string> = {}
+      for (const row of campaignRows) {
+        loaded[row.category] = row.content
+      }
 
-      if (activeMapId) {
+      // Map note
+      if (mapId) {
         const [mNote] = await window.electronAPI.dbQuery<{ content: string }>(
           `SELECT content FROM notes WHERE campaign_id = ? AND map_id = ? LIMIT 1`,
-          [activeCampaignId, activeMapId]
+          [campaignId, mapId]
         )
-        setMapNote(mNote?.content ?? '')
+        loaded['__map__'] = mNote?.content ?? ''
       }
+
+      setNotes(loaded)
     } catch (err) {
-      console.error('[NotesPanel] loadNotes failed:', err)
+      console.error('[NotesPanel] loadAllNotes failed:', err)
     }
   }
 
-  const saveNote = useCallback(async (content: string, mapId: number | null) => {
+  const saveNote = useCallback(async (content: string, mapId: number | null, category: string) => {
     if (!window.electronAPI || !activeCampaignId) return
     try {
       await window.electronAPI.dbRun(
-        `INSERT INTO notes (campaign_id, map_id, content, updated_at)
-         VALUES (?, ?, ?, datetime('now'))
-         ON CONFLICT(campaign_id, map_id) DO UPDATE
+        `INSERT INTO notes (campaign_id, map_id, category, content, updated_at)
+         VALUES (?, ?, ?, ?, datetime('now'))
+         ON CONFLICT(campaign_id, map_id, category) DO UPDATE
            SET content = excluded.content, updated_at = excluded.updated_at`,
-        [activeCampaignId, mapId, content]
+        [activeCampaignId, mapId, category, content]
       )
     } catch (err) {
       console.error('[NotesPanel] saveNote failed:', err)
     }
   }, [activeCampaignId])
 
-  // Save the previous tab's note when switching tabs
+  // Auto-save before switching tabs
   function handleTabSwitch(tab: 'campaign' | 'map') {
     if (tab === activeTab) return
-    const prevTab = prevTabRef.current
-    prevTabRef.current = tab
-    if (prevTab === 'campaign') {
-      saveNote(campaignNoteRef.current, null)
-    } else if (activeMapId) {
-      saveNote(mapNoteRef.current, activeMapId)
-    }
+    flushCurrentNote()
     setActiveTab(tab)
   }
 
-  const currentNote = activeTab === 'campaign' ? campaignNote : mapNote
-  const setCurrentNote = activeTab === 'campaign' ? setCampaignNote : setMapNote
+  // Auto-save before switching category
+  function handleCategorySwitch(cat: string) {
+    if (cat === activeCategory) return
+    flushCurrentNote()
+    setActiveCategory(cat)
+  }
+
+  function flushCurrentNote() {
+    const tab = activeTabRef.current
+    const cat = activeCategoryRef.current
+    const mapId = activeMapIdRef.current
+    const content = notesRef.current
+    if (tab === 'campaign') {
+      saveNote(content[cat] ?? '', null, cat)
+    } else if (tab === 'map' && mapId) {
+      saveNote(content['__map__'] ?? '', mapId, 'Allgemein')
+    }
+  }
+
+  // Derive current note text
+  const currentKey = activeTab === 'campaign' ? activeCategory : '__map__'
+  const currentNote = notes[currentKey] ?? ''
+  function setCurrentNote(val: string) {
+    setNotes((prev) => ({ ...prev, [currentKey]: val }))
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      {/* Sub-tabs + preview toggle — only show map tab when a map is active */}
+
+      {/* ── Top tab bar: Campaign / Map ─────────────────────────────────── */}
       <div style={{
         display: 'flex',
         borderBottom: '1px solid var(--border-subtle)',
@@ -180,7 +229,53 @@ export function NotesPanel() {
         </button>
       </div>
 
-      {/* Note area */}
+      {/* ── Category tabs (campaign tab only) ──────────────────────────── */}
+      {activeTab === 'campaign' && (
+        <div style={{
+          display: 'flex',
+          overflowX: 'auto',
+          borderBottom: '1px solid var(--border-subtle)',
+          flexShrink: 0,
+          scrollbarWidth: 'none',
+        }}>
+          {CAMPAIGN_CATEGORIES.map((cat) => {
+            const hasContent = !!(notes[cat.id]?.trim())
+            return (
+              <button
+                key={cat.id}
+                onClick={() => handleCategorySwitch(cat.id)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 4,
+                  padding: '5px 10px',
+                  background: 'none',
+                  border: 'none',
+                  borderBottom: activeCategory === cat.id ? '2px solid var(--accent)' : '2px solid transparent',
+                  color: activeCategory === cat.id ? 'var(--text-primary)' : 'var(--text-muted)',
+                  cursor: 'pointer',
+                  fontSize: 11,
+                  fontWeight: activeCategory === cat.id ? 600 : 400,
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
+                }}
+                title={cat.id}
+              >
+                <span>{cat.icon}</span>
+                <span>{cat.id}</span>
+                {hasContent && (
+                  <span style={{
+                    width: 5, height: 5, borderRadius: '50%',
+                    background: 'var(--accent)', display: 'inline-block', flexShrink: 0,
+                  }} />
+                )}
+              </button>
+            )
+          })}
+        </div>
+      )}
+
+      {/* ── Note area ───────────────────────────────────────────────────── */}
       <div style={{ flex: 1, padding: 'var(--sp-3)', display: 'flex', flexDirection: 'column' }}>
         {preview ? (
           <MarkdownPreview text={currentNote} />
@@ -188,10 +283,16 @@ export function NotesPanel() {
           <textarea
             value={currentNote}
             onChange={(e) => setCurrentNote(e.target.value)}
-            onBlur={() => saveNote(currentNote, activeTab === 'map' ? activeMapId : null)}
+            onBlur={() => {
+              if (activeTab === 'campaign') {
+                saveNote(currentNote, null, activeCategory)
+              } else if (activeMapId) {
+                saveNote(currentNote, activeMapId, 'Allgemein')
+              }
+            }}
             placeholder={
               activeTab === 'campaign'
-                ? 'Kampagnen-Notizen, NSC-Namen, Passworte, Plots…\n\n# Überschrift\n**Fett** *Kursiv* `Code`\n- Aufzählung'
+                ? `${CAMPAIGN_CATEGORIES.find(c => c.id === activeCategory)?.icon ?? ''} ${activeCategory}-Notizen…\n\n# Überschrift\n**Fett** *Kursiv* \`Code\`\n- Aufzählung`
                 : activeMapId ? 'Karten-spezifische Notizen, Fallen, Raumhinweise…' : 'Keine Karte ausgewählt'
             }
             disabled={activeTab === 'map' && !activeMapId}

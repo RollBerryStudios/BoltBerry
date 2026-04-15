@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 22
+export const SCHEMA_VERSION = 23
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -238,14 +238,15 @@ CREATE TABLE IF NOT EXISTS initiative (
   sort_order      INTEGER NOT NULL DEFAULT 0
 );
 
--- Notes (campaign-level or map-level)
+-- Notes (campaign-level with category, or map-level)
 CREATE TABLE IF NOT EXISTS notes (
   id           INTEGER PRIMARY KEY AUTOINCREMENT,
   campaign_id  INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
   map_id       INTEGER REFERENCES maps(id) ON DELETE SET NULL,
+  category     TEXT    NOT NULL DEFAULT 'Allgemein',
   content      TEXT    NOT NULL DEFAULT '',
   updated_at   TEXT    NOT NULL DEFAULT (datetime('now')),
-  UNIQUE(campaign_id, map_id)
+  UNIQUE(campaign_id, map_id, category)
 );
 
 -- Handouts
@@ -514,6 +515,25 @@ UPDATE initiative SET sort_order = rowid;
 UPDATE schema_version SET version = 22;
 `
 
+// Migration: v22 → v23 — add category column to notes, recreate with new UNIQUE constraint
+export const MIGRATE_V22_TO_V23 = `
+CREATE TABLE notes_new (
+  id           INTEGER PRIMARY KEY AUTOINCREMENT,
+  campaign_id  INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+  map_id       INTEGER REFERENCES maps(id) ON DELETE SET NULL,
+  category     TEXT    NOT NULL DEFAULT 'Allgemein',
+  content      TEXT    NOT NULL DEFAULT '',
+  updated_at   TEXT    NOT NULL DEFAULT (datetime('now')),
+  UNIQUE(campaign_id, map_id, category)
+);
+INSERT INTO notes_new (campaign_id, map_id, category, content, updated_at)
+  SELECT campaign_id, map_id, 'Allgemein', content, updated_at FROM notes;
+DROP TABLE notes;
+ALTER TABLE notes_new RENAME TO notes;
+CREATE INDEX IF NOT EXISTS idx_notes_campaign_map ON notes(campaign_id, map_id);
+UPDATE schema_version SET version = 23;
+`
+
 export const SEED_SCHEMA_VERSION = `
-INSERT OR IGNORE INTO schema_version (id, version) VALUES (1, 22);
+INSERT OR IGNORE INTO schema_version (id, version) VALUES (1, 23);
 `
