@@ -95,7 +95,7 @@
     "sectionTools": "Werkzeuge",
     "sectionMapNav": "Karte & Navigation",
     "sectionCombat": "Kampf & Initiative",
-    "sectionFog": "Fog of War",
+    "sectionFog": "Nebel des Krieges",
     "sectionGeneral": "Allgemein",
     "keySelect": "Auswählen / Token verschieben",
     "keyFogRect": "Fog aufdecken (Rechteck)",
@@ -182,7 +182,27 @@
     "pause": "Pause",
     "stop": "Stop / An den Anfang",
     "loop": "Wiederholen",
-    "volume": "Lautstärke"
+    "volume": "Lautstärke",
+    "tabMusic": "Musik",
+    "tabSfx": "SFX",
+    "track1": "Track 1",
+    "track2": "Track 2",
+    "combat": "Kampf",
+    "startCombat": "Kampf starten",
+    "endCombat": "Kampf beenden",
+    "setAmbient": "Als Ambiente-Track setzen",
+    "addBoard": "Board hinzufügen",
+    "deleteBoardConfirm": "Dieses Board und alle Slots löschen?",
+    "editSlot": "Slot bearbeiten",
+    "slotTitle": "Name",
+    "save": "Speichern",
+    "clear": "Löschen",
+    "noBoards": "Noch keine Boards. Oben eines hinzufügen.",
+    "noCampaign": "Kampagne öffnen, um Soundboards zu nutzen.",
+    "sfxHint": "Rechtsklick auf einen Slot zum Bearbeiten"
+  },
+  "settings": {
+    "title": "Einstellungen"
   },
   "dice": {
     "title": "Würfelsystem",

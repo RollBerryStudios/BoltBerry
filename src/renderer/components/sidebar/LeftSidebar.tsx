@@ -24,6 +24,7 @@ export function LeftSidebar() {
   } = useCampaignStore()
 
   const [tab, setTab] = useState<'maps' | 'assets' | 'settings'>('maps')
+  const [newMapId, setNewMapId] = useState<number | null>(null)
 
   // Current map settings
   const activeMap = activeMaps.find((m) => m.id === activeMapId) ?? null
@@ -123,6 +124,7 @@ export function LeftSidebar() {
       }
       addMap(newMap)
       setActiveMap(newMap.id)
+      setNewMapId(newMap.id)
 
       // Auto-detect grid size from image
       detectGrid(asset.path).then((detected) => {
@@ -176,6 +178,7 @@ export function LeftSidebar() {
       }
       addMap(newMap)
       setActiveMap(newMap.id)
+      setNewMapId(newMap.id)
 
       detectGrid(imagePath).then((detected) => {
         if (detected.confidence > 0.3 && detected.gridSize > 10) {
@@ -309,6 +312,8 @@ export function LeftSidebar() {
             isActive={activeMapId === map.id}
             onSelect={() => setActiveMap(map.id)}
             onReorder={handleReorderMap}
+            autoRename={map.id === newMapId}
+            onAutoRenameDone={() => setNewMapId(null)}
           />
         ))}
 
@@ -539,30 +544,41 @@ async function renderPdfToImage(
   return result.path
 }
 
-function MapListItem({ map, index, total, isActive, onSelect, onReorder }: {
+function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRename, onAutoRenameDone }: {
   map: MapRecord
   index: number
   total: number
   isActive: boolean
   onSelect: () => void
   onReorder: (id: number, direction: 'up' | 'down') => void
+  autoRename?: boolean
+  onAutoRenameDone?: () => void
 }) {
+  const { t } = useTranslation()
   const thumbnailUrl = useImageUrl(map.imagePath)
   const [renaming, setRenaming] = useState(false)
   const [renameValue, setRenameValue] = useState(map.name)
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
+    if (autoRename) {
+      setRenameValue('')
+      setRenaming(true)
+    }
+  }, [autoRename])
+
+  useEffect(() => {
     if (renaming) {
-      setRenameValue(map.name)
       setTimeout(() => inputRef.current?.select(), 0)
     }
-  }, [renaming, map.name])
+  }, [renaming])
 
   async function commitRename() {
-    const trimmed = renameValue.trim()
+    const trimmed = renameValue.trim() || map.name
     setRenaming(false)
-    if (!trimmed || trimmed === map.name || !window.electronAPI) return
+    onAutoRenameDone?.()
+    if (!window.electronAPI) return
+    if (trimmed === map.name) return
     await window.electronAPI.dbRun('UPDATE maps SET name = ? WHERE id = ?', [trimmed, map.id])
     useCampaignStore.getState().refreshCampaigns()
   }
@@ -637,10 +653,11 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder }: {
           ref={inputRef}
           className="input"
           value={renameValue}
+          placeholder={autoRename ? t('sidebar.left.mapNamePlaceholder') : undefined}
           onChange={(e) => setRenameValue(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter') { e.preventDefault(); commitRename() }
-            if (e.key === 'Escape') setRenaming(false)
+            if (e.key === 'Escape') { setRenaming(false); onAutoRenameDone?.() }
             e.stopPropagation()
           }}
           onClick={(e) => e.stopPropagation()}

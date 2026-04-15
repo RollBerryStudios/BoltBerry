@@ -182,7 +182,27 @@
     "pause": "Pause",
     "stop": "Stop / Rewind",
     "loop": "Loop",
-    "volume": "Volume"
+    "volume": "Volume",
+    "tabMusic": "Music",
+    "tabSfx": "SFX",
+    "track1": "Track 1",
+    "track2": "Track 2",
+    "combat": "Combat",
+    "startCombat": "Start Combat",
+    "endCombat": "End Combat",
+    "setAmbient": "Set as ambient track",
+    "addBoard": "Add Board",
+    "deleteBoardConfirm": "Delete this board and all its slots?",
+    "editSlot": "Edit Slot",
+    "slotTitle": "Name",
+    "save": "Save",
+    "clear": "Clear",
+    "noBoards": "No boards yet. Add one above.",
+    "noCampaign": "Open a campaign to use soundboards.",
+    "sfxHint": "Right-click a slot to edit it"
+  },
+  "settings": {
+    "title": "Settings"
   },
   "dice": {
     "title": "Dice System",
