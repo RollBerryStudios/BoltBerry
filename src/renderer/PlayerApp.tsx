@@ -522,11 +522,9 @@ function PlayerMapView({
     return () => cancelAnimationFrame(rafId)
   }, [fogVersion])
 
-  // Smooth camera animation — lerp toward target camera position
   const [animScale, setAnimScale] = useState(1)
   const [animOffX, setAnimOffX] = useState(0)
   const [animOffY, setAnimOffY] = useState(0)
-  const animRunning = useRef(false)
 
   useEffect(() => {
     if (!image || natW === 0 || natH === 0 || width === 0 || height === 0) return
@@ -546,11 +544,9 @@ function PlayerMapView({
       targetOffY = (height - natH * targetScale) / 2 + playerOffY
     }
 
-    // If DM camera sync: animate towards target; if local pan/zoom: snap immediately
-    const lerp = camera ? 0.15 : 1
-    setAnimScale((prev) => prev + (targetScale - prev) * lerp)
-    setAnimOffX((prev) => prev + (targetOffX - prev) * lerp)
-    setAnimOffY((prev) => prev + (targetOffY - prev) * lerp)
+    setAnimScale(targetScale)
+    setAnimOffX(targetOffX)
+    setAnimOffY(targetOffY)
   }, [camera, playerScale, playerOffX, playerOffY, image, natW, natH, width, height])
 
   // Compute final display values

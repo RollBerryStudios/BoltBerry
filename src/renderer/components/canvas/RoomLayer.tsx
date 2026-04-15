@@ -30,7 +30,6 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
 
   const [drawingPoints, setDrawingPoints] = useState<Point[]>([])
   const [previewPoint, setPreviewPoint] = useState<Point | null>(null)
-  const [contextMenu, setContextMenu] = useState<{ roomId: number; x: number; y: number } | null>(null)
 
   const isRoomTool = activeTool === 'room'
   const offsetX = useMapTransformStore((s) => s.offsetX)
@@ -138,12 +137,6 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
     setSelectedRoomId(roomId)
   }, [setSelectedRoomId])
 
-  const handleRoomRightClick = useCallback((e: any, roomId: number) => {
-    e.evt.preventDefault()
-    const pos = e.evt
-    setContextMenu({ roomId, x: pos.offsetX ?? pos.clientX, y: pos.offsetY ?? pos.clientY })
-  }, [])
-
   return (
     <Layer
       listening={isRoomTool || selectedRoomId !== null}
@@ -165,7 +158,7 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
         const labelY = (pts.reduce((s, p) => s + p.y, 0) / pts.length) * scale + offsetY
 
         return (
-          <Group key={room.id} onClick={() => handleRoomClick(room.id)} onContextMenu={(e) => handleRoomRightClick(e, room.id)}>
+          <Group key={room.id} onClick={() => handleRoomClick(room.id)}>
             <Line
               points={screenPoints}
               closed
