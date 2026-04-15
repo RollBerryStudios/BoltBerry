@@ -308,18 +308,109 @@ export function CanvasArea() {
           onContextMenu={async (e) => {
             e.evt.preventDefault()
             if (!window.electronAPI) return
-            const action = await window.electronAPI.showContextMenu([
-              { label: 'Kamera zentrieren', action: 'center-camera' },
-              { label: 'GM-Pin setzen', action: 'add-gm-pin' },
-            ])
+
+            const { activeTool, workMode, sessionMode } = useUIStore.getState()
+            const { activeMapId: mapId, activeMaps: maps } = useCampaignStore.getState()
+            const map = maps.find((m) => m.id === mapId)
+            const curRot = (map?.rotation ?? 0) as 0 | 90 | 180 | 270
+            const rotLabel = (r: number) => ({ 0: '↑ 0°', 90: '→ 90°', 180: '↓ 180°', 270: '← 270°' }[r] ?? `${r}°`)
+
+            const items: Array<{ label: string; action: string } | { separator: true }> = []
+
+            // ── Ansicht ────────────────────────────────────────────
+            items.push({ label: '⊡  Karte einpassen', action: 'center-camera' })
+
+            // ── Karte drehen ───────────────────────────────────────
+            if (map) {
+              items.push({ separator: true })
+              const rotations: (0 | 90 | 180 | 270)[] = [0, 90, 180, 270]
+              rotations.forEach((r) => {
+                items.push({
+                  label: `${rotLabel(r)}${r === curRot ? '  ✓' : ''}`,
+                  action: `rotate-${r}`,
+                })
+              })
+            }
+
+            // ── Nebel ──────────────────────────────────────────────
+            items.push({ separator: true })
+            items.push({ label: '👁  Alles aufdecken',              action: 'fog-reveal-all'     })
+            items.push({ label: '🌑  Alles verdecken',              action: 'fog-cover-all'      })
+            items.push({ label: '⬤  Token-Bereiche aufdecken',     action: 'fog-reveal-tokens'  })
+            items.push({ label: '↺  Erkundetes zurücksetzen',       action: 'fog-reset-explored' })
+
+            // ── Werkzeuge ──────────────────────────────────────────
+            items.push({ separator: true })
+            items.push({ label: `📏  Messen${activeTool === 'measure-line' ? '  ✓' : ''}`,         action: 'tool-measure'   })
+            items.push({ label: `✏️  Zeichnen${activeTool === 'draw-freehand' ? '  ✓' : ''}`,      action: 'tool-draw'      })
+            items.push({ label: `🖌  Nebel-Pinsel${activeTool === 'fog-brush' ? '  ✓' : ''}`,       action: 'tool-fog-brush' })
+            items.push({ label: `▭  Nebel-Rechteck${activeTool === 'fog-rect' ? '  ✓' : ''}`,      action: 'tool-fog-rect'  })
+
+            // ── Karte / Zeichnungen ────────────────────────────────
+            items.push({ separator: true })
+            items.push({ label: '📌  GM-Pin hier setzen',           action: 'add-gm-pin'         })
+            items.push({ label: '✕  Zeichnungen löschen',           action: 'clear-drawings'     })
+
+            const action = await window.electronAPI.showContextMenu(items)
+            if (!action) return
+
+            // ── Ansicht ────────────────────────────────────────────
             if (action === 'center-camera') {
               useMapTransformStore.getState().fitToScreen()
+
+            // ── Rotation ───────────────────────────────────────────
+            } else if (action.startsWith('rotate-')) {
+              const rot = parseInt(action.split('-')[1]) as 0 | 90 | 180 | 270
+              if (!mapId || !map) return
+              try {
+                await window.electronAPI.dbRun('UPDATE maps SET rotation = ? WHERE id = ?', [rot, mapId])
+                const updated = maps.map((m) => m.id === mapId ? { ...m, rotation: rot } : m)
+                useCampaignStore.getState().setActiveMaps(updated)
+                if (sessionMode !== 'prep') {
+                  const m = updated.find((m) => m.id === mapId)!
+                  window.electronAPI.sendMapUpdate({ imagePath: m.imagePath, gridType: m.gridType, gridSize: m.gridSize, rotation: rot })
+                }
+              } catch (err) {
+                console.error('[CanvasArea] rotation change failed:', err)
+              }
+
+            // ── Nebel ──────────────────────────────────────────────
+            } else if (action === 'fog-reveal-all') {
+              window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'revealAll' } }))
+            } else if (action === 'fog-cover-all') {
+              window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'coverAll' } }))
+            } else if (action === 'fog-reveal-tokens') {
+              window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'revealTokens' } }))
+            } else if (action === 'fog-reset-explored') {
+              window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'resetExplored' } }))
+
+            // ── Werkzeuge ──────────────────────────────────────────
+            } else if (action === 'tool-measure') {
+              useUIStore.getState().setActiveTool('measure-line')
+            } else if (action === 'tool-draw') {
+              useUIStore.getState().setActiveTool('draw-freehand')
+            } else if (action === 'tool-fog-brush') {
+              useUIStore.getState().setActiveTool('fog-brush')
+            } else if (action === 'tool-fog-rect') {
+              useUIStore.getState().setActiveTool('fog-rect')
+
+            // ── GM-Pin ─────────────────────────────────────────────
             } else if (action === 'add-gm-pin') {
               useUIStore.getState().setActiveTool('select')
               const pos = e.target.getStage()?.getPointerPosition()
               if (pos) {
                 const mapPos = useMapTransformStore.getState().screenToMap(pos.x, pos.y)
                 window.dispatchEvent(new CustomEvent(GM_PIN_ADD_EVENT, { detail: { x: mapPos.x, y: mapPos.y } }))
+              }
+
+            // ── Zeichnungen ────────────────────────────────────────
+            } else if (action === 'clear-drawings') {
+              if (!mapId) return
+              try {
+                await window.electronAPI.dbRun('DELETE FROM drawings WHERE map_id = ?', [mapId])
+                useUIStore.getState().incrementDrawingClearTick()
+              } catch (err) {
+                console.error('[CanvasArea] clear drawings failed:', err)
               }
             }
           }}

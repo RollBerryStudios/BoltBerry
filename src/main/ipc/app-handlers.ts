@@ -358,7 +358,7 @@ export function registerAppHandlers(): void {
   })
 
   // Context menu: renderer sends menu items, main process shows native menu and returns selected action
-  ipcMain.handle(IPC.SHOW_CONTEXT_MENU, async (event, items: { label: string; action: string; danger?: boolean }[]) => {
+  ipcMain.handle(IPC.SHOW_CONTEXT_MENU, async (event, items: Array<{ label: string; action: string; danger?: boolean } | { separator: true }>) => {
     const win = BrowserWindow.fromWebContents(event.sender)
     if (!win) return null
 
@@ -371,15 +371,17 @@ export function registerAppHandlers(): void {
         }
       }
 
-      const menuItems = items.map((item) => ({
-        label: item.label,
-        click: () => safeResolve(item.action),
-      }))
+      const menuItems = items.map((item) => {
+        if ('separator' in item) return { type: 'separator' as const }
+        return {
+          label: item.label,
+          click: () => safeResolve(item.action),
+        }
+      })
 
       const menu = Menu.buildFromTemplate(menuItems)
 
       menu.once('menu-will-close', () => {
-        // Small delay to let click handler fire first if an item was selected
         setTimeout(() => safeResolve(null), 50)
       })
 

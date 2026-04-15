@@ -8,7 +8,6 @@ import { useInitiativeStore } from '../../stores/initiativeStore'
 import { useUndoStore } from '../../stores/undoStore'
 import { useFogStore } from '../../stores/fogStore'
 import { MonitorDialog } from '../MonitorDialog'
-import { SessionStartModal } from '../SessionStartModal'
 import clsx from 'clsx'
 import logoSquare from '../../assets/boltberry-logo.png'
 
@@ -179,7 +178,7 @@ export function Toolbar() {
   } = useUIStore()
   const { activeCampaignId, campaigns } = useCampaignStore()
   const [showMonitorDialog, setShowMonitorDialog] = useState(false)
-  const [showSessionModal, setShowSessionModal] = useState(false)
+  const [liveWarning, setLiveWarning] = useState<string | null>(null)
   const [cameraSent, setCameraSent] = useState(false)
   const zoomPercent = Math.round(useMapTransformStore((s) => s.scale / s.fitScale * 100))
   const canUndo = useUndoStore((s) => s.undoStack.length > 0)
@@ -229,16 +228,22 @@ export function Toolbar() {
 
   function handleSessionToggle() {
     if (sessionMode === 'prep') {
-      setShowSessionModal(true)
+      // Go live immediately — show inline warning if something needs attention
+      const { activeMapId } = useCampaignStore.getState()
+      if (!activeMapId) {
+        setLiveWarning('Keine Karte geladen')
+        setTimeout(() => setLiveWarning(null), 3000)
+        return
+      }
+      if (!playerConnected) {
+        setLiveWarning('Spielerfenster nicht geöffnet')
+        setTimeout(() => setLiveWarning(null), 3000)
+      }
+      setSessionMode('session')
+      if (workMode === 'prep') setWorkMode('play')
     } else {
       setSessionMode('prep')
     }
-  }
-
-  function handleSessionConfirm() {
-    setShowSessionModal(false)
-    setSessionMode('session')
-    if (workMode === 'prep') setWorkMode('play')
   }
 
   function handlePlayerWindowToggle() {
@@ -446,39 +451,49 @@ export function Toolbar() {
       <Divider />
 
       {/* ── SECTION: Session ─────────────────────────────────────────────── */}
-      {/* Live/Prep toggle */}
-      <button
-        onClick={handleSessionToggle}
-        title={isLive ? 'Session beenden — Spieler-Sync deaktivieren' : 'Session starten — Änderungen live an Spieler senden'}
-        style={{
-          display: 'flex', alignItems: 'center', gap: 6,
-          padding: '4px 12px',
-          borderRadius: 'var(--radius)',
-          border: 'none',
-          cursor: 'pointer',
-          fontWeight: 700,
-          fontSize: 'var(--text-xs)',
-          letterSpacing: '0.04em',
-          transition: 'background var(--transition), color var(--transition)',
-          flexShrink: 0,
-          ...(isLive ? {
-            background: 'rgba(34, 197, 94, 0.15)',
-            color: '#22c55e',
-            outline: '1px solid rgba(34, 197, 94, 0.4)',
-          } : {
-            background: 'rgba(245, 158, 0, 0.15)',
-            color: 'var(--warning)',
-            outline: '1px solid rgba(245, 158, 0, 0.4)',
-          }),
-        }}
-      >
-        <span style={{
-          width: 7, height: 7, borderRadius: '50%', flexShrink: 0,
-          background: isLive ? '#22c55e' : 'var(--warning)',
-          boxShadow: isLive ? '0 0 0 2px rgba(34,197,94,0.3)' : 'none',
-        }} />
-        {isLive ? 'LIVE' : 'VORBEREITUNG'}
-      </button>
+      {/* Live/Prep toggle — direct, no modal */}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flexShrink: 0 }}>
+        <button
+          onClick={handleSessionToggle}
+          title={isLive ? 'Session beenden' : 'Session starten — Änderungen live an Spieler senden'}
+          style={{
+            display: 'flex', alignItems: 'center', gap: 6,
+            padding: '4px 12px',
+            borderRadius: 'var(--radius)',
+            border: 'none',
+            cursor: 'pointer',
+            fontWeight: 700,
+            fontSize: 'var(--text-xs)',
+            letterSpacing: '0.04em',
+            transition: 'background var(--transition), color var(--transition)',
+            ...(isLive ? {
+              background: 'rgba(34, 197, 94, 0.15)',
+              color: '#22c55e',
+              outline: '1px solid rgba(34, 197, 94, 0.4)',
+            } : {
+              background: 'rgba(245, 158, 0, 0.15)',
+              color: 'var(--warning)',
+              outline: '1px solid rgba(245, 158, 0, 0.4)',
+            }),
+          }}
+        >
+          <span style={{
+            width: 7, height: 7, borderRadius: '50%', flexShrink: 0,
+            background: isLive ? '#22c55e' : 'var(--warning)',
+            boxShadow: isLive ? '0 0 0 2px rgba(34,197,94,0.3)' : 'none',
+          }} />
+          {isLive ? 'LIVE' : 'VORBEREITUNG'}
+        </button>
+        {liveWarning && (
+          <span style={{
+            fontSize: 9, color: 'var(--warning)', whiteSpace: 'nowrap',
+            background: 'rgba(245,158,0,0.12)', padding: '1px 6px',
+            borderRadius: 3, border: '1px solid rgba(245,158,0,0.3)',
+          }}>
+            ⚠ {liveWarning}
+          </span>
+        )}
+      </div>
 
       {/* Player window */}
       <button
@@ -546,12 +561,13 @@ export function Toolbar() {
       <Divider />
 
       {/* ── SECTION: View ───────────────────────────────────────────────── */}
-      <button className="tool-btn" title="Vergrößern (+)" onClick={() => useMapTransformStore.getState().zoomIn()}>🔍+</button>
-      <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 36, textAlign: 'center', lineHeight: '32px', fontFamily: 'monospace' }}>
+      <div
+        title="Zoom (Mausrad zum Zoomen)"
+        style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 36, textAlign: 'center', lineHeight: '32px', fontFamily: 'monospace', cursor: 'default' }}
+      >
         {zoomPercent}%
       </div>
-      <button className="tool-btn" title="Verkleinern (-)" onClick={() => useMapTransformStore.getState().zoomOut()}>🔍−</button>
-      <button className="tool-btn" title="Ansicht anpassen (0)" onClick={() => useMapTransformStore.getState().fitToScreen()}>⊡</button>
+      <button className="tool-btn" title="Ansicht einpassen (0)" onClick={() => useMapTransformStore.getState().fitToScreen()}>⊡</button>
       <button className={clsx('tool-btn', showMinimap && 'active')} title="Minimap" onClick={toggleMinimap}>🗺</button>
       <button
         className={clsx('tool-btn', gridSnap && 'active')}
@@ -606,14 +622,6 @@ export function Toolbar() {
 
       {showMonitorDialog && (
         <MonitorDialog onClose={() => setShowMonitorDialog(false)} />
-      )}
-
-      {showSessionModal && (
-        <SessionStartModal
-          onConfirm={handleSessionConfirm}
-          onCancel={() => setShowSessionModal(false)}
-          onOpenPlayerWindow={() => { setShowSessionModal(false); setShowMonitorDialog(true) }}
-        />
       )}
     </div>
   )

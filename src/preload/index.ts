@@ -30,7 +30,7 @@ const dmApi = {
   getImageAsBase64: (path: string) => ipcRenderer.invoke('app:get-image-as-base64', path),
   getUserDataPath: () => ipcRenderer.invoke('app:get-user-data-path'),
   rescanContentFolder: (campaignId: number) => ipcRenderer.invoke('app:rescan-content-folder', campaignId),
-  showContextMenu: (items: { label: string; action: string; danger?: boolean }[]) =>
+  showContextMenu: (items: Array<{ label: string; action: string; danger?: boolean } | { separator: true }>) =>
     ipcRenderer.invoke('app:show-context-menu', items),
   deleteMapConfirm: (mapName: string) => ipcRenderer.invoke('app:delete-map-confirm', mapName),
   deleteTokenConfirm: (tokenName: string) => ipcRenderer.invoke('app:delete-token-confirm', tokenName),
