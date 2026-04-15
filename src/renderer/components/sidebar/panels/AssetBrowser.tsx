@@ -109,7 +109,7 @@ export function AssetBrowser() {
   const imageTypes = ['map', 'token', 'atmosphere']
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: 'var(--sp-4)' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0, padding: 'var(--sp-4)' }}>
       <div className="sidebar-section-title" style={{ marginBottom: 'var(--sp-3)' }}>
         Asset-Browser
       </div>

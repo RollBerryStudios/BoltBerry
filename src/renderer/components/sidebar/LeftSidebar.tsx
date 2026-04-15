@@ -284,11 +284,12 @@ export function LeftSidebar() {
         ))}
       </div>
 
-      {tab === 'assets' && <AssetBrowser />}
-      
-      {tab === 'settings' && <SettingsPanel />}
-
-      {tab === 'maps' && <>
+      {/* Content area: fills remaining sidebar height; AssetBrowser scrolls internally,
+          maps/settings scroll via this container */}
+      <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
+        {tab === 'assets' && <AssetBrowser />}
+        {tab === 'settings' && <SettingsPanel />}
+        {tab === 'maps' && <>
       {/* ── Map list ─────────────────────────────────────────────────────────────── */}
       <div className="sidebar-section">
         <div className="sidebar-section-title">{t('sidebar.left.mapsTitle')}</div>
@@ -492,7 +493,8 @@ export function LeftSidebar() {
           </div>
         </div>
       )}
-      </>}
+        </>}
+      </div>
     </div>
   )
 }
