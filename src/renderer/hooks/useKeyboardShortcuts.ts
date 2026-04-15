@@ -14,21 +14,21 @@ export function useKeyboardShortcuts() {
       const tag = (e.target as HTMLElement).tagName
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
 
-      // ── Alt shortcuts — sidebar tab switching ─────────────────────────────
-      if (e.altKey && !e.ctrlKey && !e.metaKey) {
-        const SIDEBAR_TABS: import('../stores/uiStore').SidebarTab[] = [
-          'tokens', 'initiative', 'encounters', 'rooms', 'notes', 'handouts', 'overlay', 'audio', 'dice',
-        ]
-        const idx = parseInt(e.key) - 1
-        if (idx >= 0 && idx < SIDEBAR_TABS.length) {
-          e.preventDefault()
-          useUIStore.getState().setSidebarTab(SIDEBAR_TABS[idx])
-        }
-        return
-      }
-
       // ── Ctrl / Cmd shortcuts ──────────────────────────────────────────────
       if (e.ctrlKey || e.metaKey) {
+        // ── Ctrl+1-9 — sidebar tab switching ─────────────────────────────
+        if (!e.shiftKey && !e.altKey) {
+          const SIDEBAR_TABS: import('../stores/uiStore').SidebarTab[] = [
+            'tokens', 'initiative', 'encounters', 'rooms', 'notes', 'handouts', 'overlay', 'audio', 'dice',
+          ]
+          const idx = parseInt(e.key) - 1
+          if (idx >= 0 && idx < SIDEBAR_TABS.length) {
+            e.preventDefault()
+            useUIStore.getState().setSidebarTab(SIDEBAR_TABS[idx])
+            return
+          }
+        }
+
         switch (e.key.toLowerCase()) {
           case 'z':
             e.preventDefault()
@@ -37,6 +37,11 @@ export function useKeyboardShortcuts() {
             } else {
               useUndoStore.getState().undo()
             }
+            return
+          case 'y':
+            // Ctrl+Y — redo (Windows convention, alongside Ctrl+Shift+Z)
+            e.preventDefault()
+            useUndoStore.getState().redo()
             return
           case 's':
             e.preventDefault()

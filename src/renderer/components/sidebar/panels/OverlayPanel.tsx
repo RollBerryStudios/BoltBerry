@@ -50,8 +50,13 @@ export function OverlayPanel() {
   }
 
   async function handleClearDrawings() {
-    if (!activeMapId) return
-    await window.electronAPI?.dbRun('DELETE FROM drawings WHERE map_id = ?', [activeMapId])
+    if (!activeMapId || !window.electronAPI) return
+    const confirmed = await window.electronAPI.confirmDialog(
+      'Zeichnungen löschen',
+      'Alle Zeichnungen dieser Karte unwiderruflich löschen?'
+    )
+    if (!confirmed) return
+    await window.electronAPI.dbRun('DELETE FROM drawings WHERE map_id = ?', [activeMapId])
     incrementDrawingClearTick()
   }
 
@@ -132,17 +137,6 @@ export function OverlayPanel() {
           )}
         </div>
 
-        {activeMapId && (
-          <button
-            className="btn btn-ghost"
-            style={{ justifyContent: 'center', fontSize: 'var(--text-xs)', color: 'var(--danger)' }}
-            onClick={handleClearDrawings}
-            title="Alle Zeichnungen dieser Karte löschen"
-          >
-            ✕ Zeichnungen löschen
-          </button>
-        )}
-
         <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: 'var(--sp-3)' }}>
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 'var(--sp-2)' }}>
             {t('overlay.weather')}
@@ -161,6 +155,28 @@ export function OverlayPanel() {
             ))}
           </div>
         </div>
+
+        {activeMapId && (
+          <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: 'var(--sp-3)' }}>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 'var(--sp-2)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>
+              Gefahrzone
+            </div>
+            <button
+              className="btn btn-ghost"
+              style={{
+                justifyContent: 'center',
+                fontSize: 'var(--text-xs)',
+                color: 'var(--danger)',
+                border: '1px solid rgba(239,68,68,0.35)',
+                width: '100%',
+              }}
+              onClick={handleClearDrawings}
+              title="Alle Zeichnungen dieser Karte löschen (nicht rückgängig machbar)"
+            >
+              ✕ Zeichnungen löschen
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )

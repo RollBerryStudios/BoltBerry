@@ -191,6 +191,7 @@ export function StartScreen() {
                 className="input"
                 autoFocus
                 placeholder={t('startScreen.campaignNamePlaceholder')}
+                maxLength={60}
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
                 onKeyDown={(e) => {
@@ -279,11 +280,12 @@ function CampaignRow({
             <input
               ref={inputRef}
               className="input"
+              maxLength={60}
               value={renameValue}
               onChange={(e) => setRenameValue(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') commitRename()
-                if (e.key === 'Escape') setRenaming(false)
+                if (e.key === 'Escape') { setRenameValue(campaign.name); setRenaming(false) }
                 e.stopPropagation()
               }}
               onClick={(e) => e.stopPropagation()}
@@ -291,7 +293,10 @@ function CampaignRow({
             />
           ) : (
             <>
-              <div style={{ fontWeight: 500 }} onDoubleClick={() => setRenaming(true)}>
+              <div
+                style={{ fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                onDoubleClick={() => setRenaming(true)}
+              >
                 {campaign.name}
               </div>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>

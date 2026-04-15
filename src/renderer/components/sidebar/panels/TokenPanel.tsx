@@ -95,6 +95,7 @@ export function TokenPanel() {
   const [secStatus, setSecStatus]     = useState(true)
   const [secNotizen, setSecNotizen]   = useState(false)
   const [statusFilter, setStatusFilter] = useState('')
+  const [showTemplates, setShowTemplates] = useState(false)
   const templateRef = useRef<HTMLDivElement>(null)
 
   async function handleAddToken() {

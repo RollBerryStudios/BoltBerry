@@ -234,6 +234,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
 
   const stableHandleContextMenu = useCallback((token: TokenRecord, e: Konva.KonvaEventObject<MouseEvent>) => {
     e.evt.preventDefault()
+    e.cancelBubble = true
     const stage = stageRef.current
     if (!stage) return
     const pos = stage.container().getBoundingClientRect()
