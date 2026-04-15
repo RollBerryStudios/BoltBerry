@@ -8,6 +8,8 @@ export function HandoutsPanel() {
   const [handouts, setHandouts] = useState<HandoutRecord[]>([])
   const [addingTitle, setAddingTitle] = useState('')
   const [addingText, setAddingText] = useState('')
+  const [addingImagePath, setAddingImagePath] = useState<string | null>(null)
+  const [addingImageName, setAddingImageName] = useState('')
   const [isAdding, setIsAdding] = useState(false)
   const [sentId, setSentId] = useState<number | null>(null)
   const [expandedId, setExpandedId] = useState<number | null>(null)
@@ -37,33 +39,52 @@ export function HandoutsPanel() {
     }
   }
 
-  async function handleAddHandout() {
-    if (!activeCampaignId || !window.electronAPI) return
-    const title = addingTitle.trim() || 'Handout'
-    let imagePath: string | null = null
+  async function handlePickImage() {
+    if (!window.electronAPI) return
     try {
       const asset = await window.electronAPI.importFile('handout')
-      if (asset) imagePath = asset.path
+      if (asset) {
+        setAddingImagePath(asset.path)
+        setAddingImageName(asset.path.split(/[\\/]/).pop() ?? '')
+      }
+    } catch (err) {
+      console.error('[HandoutsPanel] handlePickImage failed:', err)
+    }
+  }
 
+  async function handleSaveHandout() {
+    if (!activeCampaignId || !window.electronAPI) return
+    const title = addingTitle.trim() || 'Handout'
+    try {
       const result = await window.electronAPI.dbRun(
         'INSERT INTO handouts (campaign_id, title, image_path, text_content) VALUES (?, ?, ?, ?)',
-        [activeCampaignId, title, imagePath, addingText.trim() || null]
+        [activeCampaignId, title, addingImagePath, addingText.trim() || null]
       )
       const newHandout: HandoutRecord = {
         id: result.lastInsertRowid,
         campaignId: activeCampaignId,
         title,
-        imagePath,
+        imagePath: addingImagePath,
         textContent: addingText.trim() || null,
         createdAt: new Date().toISOString(),
       }
       setHandouts((prev) => [newHandout, ...prev])
       setAddingTitle('')
       setAddingText('')
+      setAddingImagePath(null)
+      setAddingImageName('')
       setIsAdding(false)
     } catch (err) {
-      console.error('[HandoutsPanel] handleAddHandout failed:', err)
+      console.error('[HandoutsPanel] handleSaveHandout failed:', err)
     }
+  }
+
+  function handleCancelAdding() {
+    setIsAdding(false)
+    setAddingTitle('')
+    setAddingText('')
+    setAddingImagePath(null)
+    setAddingImageName('')
   }
 
   async function handleDeleteHandout(id: number) {
@@ -146,6 +167,9 @@ export function HandoutsPanel() {
           padding: 'var(--sp-4)',
           borderBottom: '1px solid var(--border)',
           background: 'var(--bg-elevated)',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--radius)',
+          margin: 'var(--sp-3) var(--sp-3) 0',
           flexShrink: 0,
           display: 'flex',
           flexDirection: 'column',
@@ -157,7 +181,7 @@ export function HandoutsPanel() {
             placeholder="Titel…"
             value={addingTitle}
             onChange={(e) => setAddingTitle(e.target.value)}
-            onKeyDown={(e) => { if (e.key === 'Escape') setIsAdding(false) }}
+            onKeyDown={(e) => { if (e.key === 'Escape') handleCancelAdding() }}
           />
           <textarea
             className="input"
@@ -167,15 +191,47 @@ export function HandoutsPanel() {
             rows={3}
             style={{ resize: 'vertical', fontSize: 'var(--text-sm)' }}
           />
-          <div style={{ display: 'flex', gap: 'var(--sp-2)' }}>
+
+          {/* Image picker — separate from save */}
+          <button
+            className="btn btn-ghost"
+            style={{ justifyContent: 'flex-start', gap: 6, fontSize: 'var(--text-xs)' }}
+            onClick={handlePickImage}
+          >
+            🖼
+            <span style={{
+              overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1,
+              color: addingImagePath ? 'var(--text-primary)' : 'var(--text-muted)',
+            }}>
+              {addingImagePath ? addingImageName : 'Bild wählen (optional)…'}
+            </span>
+            {addingImagePath && (
+              <span
+                style={{ color: 'var(--text-muted)', fontSize: 12, cursor: 'pointer', flexShrink: 0 }}
+                onClick={(e) => { e.stopPropagation(); setAddingImagePath(null); setAddingImageName('') }}
+                title="Bild entfernen"
+              >
+                ✕
+              </span>
+            )}
+          </button>
+
+          {/* Save / Cancel row */}
+          <div style={{ display: 'flex', gap: 'var(--sp-2)', alignItems: 'center' }}>
             <button
               className="btn btn-primary"
               style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-sm)' }}
-              onClick={handleAddHandout}
+              onClick={handleSaveHandout}
             >
-              Bild wählen &amp; speichern
+              ✓ Speichern
             </button>
-            <button className="btn btn-ghost" onClick={() => setIsAdding(false)}>✕</button>
+            <button
+              className="btn btn-ghost"
+              style={{ fontSize: 'var(--text-sm)' }}
+              onClick={handleCancelAdding}
+            >
+              Abbrechen
+            </button>
           </div>
         </div>
       )}

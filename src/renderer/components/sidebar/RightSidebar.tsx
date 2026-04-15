@@ -11,23 +11,19 @@ import { EncounterPanel } from './panels/EncounterPanel'
 import { RoomPanel } from './panels/RoomPanel'
 import { CharacterSheetPanel } from './panels/CharacterSheetPanel'
 
-// Split 10 tabs into two logical rows of 5
-// Row 1 — session-critical (always needed during play)
-const ROW_1: { id: SidebarTab; labelKey: string; icon: string; shortLabel: string }[] = [
-  { id: 'tokens',     labelKey: 'sidebar.right.tabTokens',     icon: '⬤',  shortLabel: 'Tokens'   },
-  { id: 'initiative', labelKey: 'sidebar.right.tabInitiative', icon: '⚔️', shortLabel: 'Initiative' },
-  { id: 'characters', labelKey: 'sidebar.right.tabCharacters', icon: '📋', shortLabel: 'Chars'    },
-  { id: 'notes',      labelKey: 'sidebar.right.tabNotes',      icon: '📝', shortLabel: 'Notizen'  },
-  { id: 'audio',      labelKey: 'sidebar.right.tabAudio',      icon: '🎵', shortLabel: 'Audio'    },
-]
-
-// Row 2 — world & utility (less frequently needed mid-session)
-const ROW_2: { id: SidebarTab; labelKey: string; icon: string; shortLabel: string }[] = [
-  { id: 'encounters', labelKey: 'sidebar.right.tabEncounters', icon: '👾', shortLabel: 'Encounter' },
-  { id: 'rooms',      labelKey: 'sidebar.right.tabRooms',      icon: '🏠', shortLabel: 'Räume'    },
-  { id: 'handouts',   labelKey: 'sidebar.right.tabHandouts',   icon: '📜', shortLabel: 'Handouts' },
-  { id: 'overlay',    labelKey: 'sidebar.right.tabOverlay',    icon: '✦',  shortLabel: 'Overlay'  },
-  { id: 'dice',       labelKey: 'sidebar.right.tabDice',       icon: '🎲', shortLabel: 'Würfel'   },
+// Single ordered list — session-critical tabs first, then utility
+// Rendered in one horizontal scrollable row (min 44px per tab, no two-row grid)
+const ALL_TABS: { id: SidebarTab; labelKey: string; icon: string; shortLabel: string }[] = [
+  { id: 'tokens',     labelKey: 'sidebar.right.tabTokens',     icon: '⬤',  shortLabel: 'Tokens'  },
+  { id: 'initiative', labelKey: 'sidebar.right.tabInitiative', icon: '⚔️', shortLabel: 'Init'    },
+  { id: 'notes',      labelKey: 'sidebar.right.tabNotes',      icon: '📝', shortLabel: 'Notizen' },
+  { id: 'audio',      labelKey: 'sidebar.right.tabAudio',      icon: '🎵', shortLabel: 'Audio'   },
+  { id: 'handouts',   labelKey: 'sidebar.right.tabHandouts',   icon: '📜', shortLabel: 'Handout' },
+  { id: 'overlay',    labelKey: 'sidebar.right.tabOverlay',    icon: '✦',  shortLabel: 'Overlay' },
+  { id: 'dice',       labelKey: 'sidebar.right.tabDice',       icon: '🎲', shortLabel: 'Würfel'  },
+  { id: 'characters', labelKey: 'sidebar.right.tabCharacters', icon: '📋', shortLabel: 'Chars'   },
+  { id: 'encounters', labelKey: 'sidebar.right.tabEncounters', icon: '👾', shortLabel: 'Encounter'},
+  { id: 'rooms',      labelKey: 'sidebar.right.tabRooms',      icon: '🏠', shortLabel: 'Räume'   },
 ]
 
 export function RightSidebar() {
@@ -51,11 +47,9 @@ export function RightSidebar() {
 
   return (
     <div className="sidebar sidebar-right">
-      {/* Two-row tab grid — 5 tabs per row */}
-      <div className="sidebar-tabs" style={{ gridTemplateRows: 'auto 1px auto' }}>
-        {ROW_1.map((tab) => <Tab key={tab.id} tab={tab} />)}
-        <div className="sidebar-tabs-divider" />
-        {ROW_2.map((tab) => <Tab key={tab.id} tab={tab} />)}
+      {/* Single scrollable row — 10 tabs, min 44px each, horizontally scrollable */}
+      <div className="sidebar-tabs">
+        {ALL_TABS.map((tab) => <Tab key={tab.id} tab={tab} />)}
       </div>
 
       <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>

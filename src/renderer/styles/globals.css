@@ -232,12 +232,15 @@ html, body {
 
 /* ─── Right sidebar tab bar ──────────────────────────────────────────────────── */
 .sidebar-tabs {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scrollbar-width: none;       /* Firefox */
   background: var(--bg-elevated);
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
 }
+.sidebar-tabs::-webkit-scrollbar { display: none; } /* Chrome/Safari */
 .sidebar-tab {
   display: flex;
   flex-direction: column;
@@ -255,7 +258,8 @@ html, body {
   line-height: 1.2;
   letter-spacing: 0.02em;
   transition: color var(--transition), border-color var(--transition), background var(--transition);
-  min-width: 0;
+  min-width: 44px;
+  flex-shrink: 0;
 }
 .sidebar-tab .tab-icon { font-size: 15px; line-height: 1; }
 .sidebar-tab .tab-label {
@@ -274,12 +278,8 @@ html, body {
   border-bottom-color: var(--accent-blue);
   background: var(--bg-surface);
 }
-/* Row divider between the two tab rows */
-.sidebar-tabs-divider {
-  grid-column: 1 / -1;
-  height: 1px;
-  background: var(--border-subtle);
-}
+/* Row divider — kept for backwards compat but no longer rendered */
+.sidebar-tabs-divider { display: none; }
 
 /* ─── Canvas area ────────────────────────────────────────────────────────────── */
 .canvas-area {

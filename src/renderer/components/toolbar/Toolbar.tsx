@@ -189,6 +189,7 @@ export function Toolbar() {
   const { undo, redo } = useUndoStore()
 
   const activeCampaignName = campaigns.find((c) => c.id === activeCampaignId)?.name ?? ''
+  const tokenCount = useTokenStore((s) => s.tokens.length)
 
   // Leave the current map and return to the Campaign View
   function handleLeaveMap() {
@@ -310,6 +311,21 @@ export function Toolbar() {
         ))}
       </div>
 
+      {/* Token count badge */}
+      {tokenCount > 0 && (
+        <div
+          title={`${tokenCount} Token auf der Karte`}
+          style={{
+            fontSize: 'var(--text-xs)', fontFamily: 'monospace',
+            color: 'var(--text-muted)', background: 'var(--bg-overlay)',
+            border: '1px solid var(--border)', borderRadius: 'var(--radius)',
+            padding: '1px 6px', lineHeight: '20px', flexShrink: 0,
+          }}
+        >
+          {tokenCount} T
+        </div>
+      )}
+
       <Divider />
 
       {/* ── SECTION: Tools ──────────────────────────────────────────────── */}
@@ -429,7 +445,8 @@ export function Toolbar() {
 
       <Divider />
 
-      {/* ── SECTION: Session Status (prominent) ─────────────────────────── */}
+      {/* ── SECTION: Session ─────────────────────────────────────────────── */}
+      {/* Live/Prep toggle */}
       <button
         onClick={handleSessionToggle}
         title={isLive ? 'Session beenden — Spieler-Sync deaktivieren' : 'Session starten — Änderungen live an Spieler senden'}
@@ -463,40 +480,38 @@ export function Toolbar() {
         {isLive ? 'LIVE' : 'VORBEREITUNG'}
       </button>
 
-      {/* Camera follow toggle */}
-      <button
-        className={clsx('tool-btn', cameraFollowDM && 'active')}
-        title={cameraFollowDM ? 'Kamera-Folgemodus AN — Kamera wird kontinuierlich synchronisiert' : 'Kamera-Folgemodus AUS — Einmalig senden mit 📺'}
-        onClick={toggleCameraFollow}
-        style={cameraFollowDM ? { color: 'var(--success)' } : undefined}
-      >
-        📡
-      </button>
-
-      <Divider />
-
-      {/* ── SECTION: Player Window ──────────────────────────────────────── */}
+      {/* Player window */}
       <button
         className={clsx('tool-btn', playerConnected && 'active')}
-        title={playerConnected ? 'Spielerfenster schließen' : 'Spielerfenster öffnen'}
+        title={playerConnected ? 'Spielerfenster schließen' : t('toolbar.openPlayerWindow')}
         onClick={handlePlayerWindowToggle}
         style={playerConnected ? { color: '#22c55e' } : undefined}
       >
-        {playerConnected ? '🖥' : '🖥'}
+        🖥
         <span style={{ fontSize: 8, marginLeft: 2, opacity: 0.7 }}>{playerConnected ? '●' : '○'}</span>
       </button>
 
-      {/* Single camera send */}
+      {/* Camera: one-shot send */}
       <button
         className={clsx('tool-btn', cameraSent && 'active')}
-        title="Kamera-Ausschnitt einmalig an Spieler senden"
+        title={t('toolbar.shareCamera')}
         onClick={handleShareCamera}
         style={cameraSent ? { color: 'var(--success)' } : undefined}
       >
         📺
       </button>
 
-      {/* Blackout — use distinct icon */}
+      {/* Camera follow toggle */}
+      <button
+        className={clsx('tool-btn', cameraFollowDM && 'active')}
+        title={cameraFollowDM ? 'Kamera-Folgemodus AN' : 'Kamera-Folgemodus AUS'}
+        onClick={toggleCameraFollow}
+        style={cameraFollowDM ? { color: 'var(--success)' } : undefined}
+      >
+        📡
+      </button>
+
+      {/* Blackout */}
       <button
         className={clsx('tool-btn', blackoutActive && 'active')}
         title={t('toolbar.blackout')}

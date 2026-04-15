@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSettingsStore } from '../stores/settingsStore'
+import logoSquare from '../assets/boltberry-logo.png'
 
 interface SetupWizardProps {
   onComplete: () => void
@@ -79,14 +80,22 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
         padding: 'var(--sp-6)',
         textAlign: 'center',
       }}>
+        <img
+          src={logoSquare}
+          alt="BoltBerry"
+          style={{ height: 56, width: 'auto', marginBottom: 'var(--sp-3)' }}
+        />
         <h2 style={{ marginBottom: 'var(--sp-2)' }}>Willkommen bei BoltBerry!</h2>
         <p style={{
           color: 'var(--text-muted)',
           marginBottom: 'var(--sp-6)',
           lineHeight: 1.5,
+          maxWidth: 380,
+          margin: '0 auto var(--sp-6)',
         }}>
-          Wählen Sie einen Ordner für Ihre BoltBerry-Daten.
-          Wir empfehlen den Standardordner zu verwenden.
+          Wähle einen Ordner, in dem BoltBerry deine Kampagnen, Karten,
+          Token und Audio-Dateien speichert. Du kannst diesen Ordner
+          später in den Einstellungen ändern.
         </p>
 
         <div style={{
