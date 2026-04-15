@@ -58,7 +58,9 @@ class MockAudio {
 let rafId = 0
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ;(global as any).requestAnimationFrame = (cb: (time: number) => void): number => {
-  cb(performance.now())
+  // Advance timestamp well past FADE_MS (300 ms) so fadeTo() resolves in a single
+  // tick and does not recurse back into requestAnimationFrame.
+  cb(performance.now() + 1000)
   return ++rafId
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

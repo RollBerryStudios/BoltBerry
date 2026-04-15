@@ -37,12 +37,13 @@ export const useInitiativeStore = create<InitiativeState>()(
 
     setEntries: (entries) =>
       set((s) => {
-        s.entries = [...entries]
+        s.entries = [...entries].sort((a, b) => b.roll - a.roll)
       }),
 
     addEntry: (entry) =>
       set((s) => {
         s.entries.push(entry)
+        s.entries.sort((a, b) => b.roll - a.roll)
       }),
 
     removeEntry: (id) =>
@@ -53,7 +54,10 @@ export const useInitiativeStore = create<InitiativeState>()(
     updateEntry: (id, patch) =>
       set((s) => {
         const e = s.entries.find((e) => e.id === id)
-        if (e) Object.assign(e, patch)
+        if (!e) return
+        Object.assign(e, patch)
+        // Re-sort if roll changed so ordering stays consistent
+        if ('roll' in patch) s.entries.sort((a, b) => b.roll - a.roll)
       }),
 
     reorderEntries: (fromIndex, toIndex) =>
