@@ -198,6 +198,9 @@ export function useKeyboardShortcuts() {
           break
 
         case '1': case '2': case '3': case '4': case '5': {
+          // Only switch maps when already inside the game view — pressing 1–5
+          // in CampaignView would accidentally navigate away from prep work.
+          if (!useCampaignStore.getState().activeMapId) break
           const idx = parseInt(e.key) - 1
           const maps = useCampaignStore.getState().activeMaps
           if (maps[idx]) {
