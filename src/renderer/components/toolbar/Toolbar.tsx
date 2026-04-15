@@ -190,10 +190,8 @@ export function Toolbar() {
 
   const activeCampaignName = campaigns.find((c) => c.id === activeCampaignId)?.name ?? ''
 
-  // Leave current campaign and return to campaign list
-  function handleLeaveCampaign() {
-    useCampaignStore.getState().setActiveCampaign(null)
-    useCampaignStore.getState().setActiveMaps([])
+  // Leave the current map and return to the Campaign View
+  function handleLeaveMap() {
     useCampaignStore.getState().setActiveMap(null)
     useTokenStore.getState().setTokens([])
     useInitiativeStore.getState().setEntries([])
@@ -271,8 +269,8 @@ export function Toolbar() {
       {activeCampaignId && (
         <button
           className="tool-btn"
-          title="Zur Kampagnenliste"
-          onClick={handleLeaveCampaign}
+          title="Zurück zur Kampagne"
+          onClick={handleLeaveMap}
           style={{
             display: 'flex', alignItems: 'center', gap: 4,
             fontSize: 'var(--text-xs)', fontWeight: 600,

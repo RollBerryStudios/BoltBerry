@@ -3,6 +3,7 @@ import { useUIStore } from './stores/uiStore'
 import { useCampaignStore } from './stores/campaignStore'
 import { useSettingsStore } from './stores/settingsStore'
 import { AppLayout } from './components/AppLayout'
+import { CampaignView } from './components/CampaignView'
 import { StartScreen } from './components/StartScreen'
 import { SetupWizard } from './components/SetupWizard'
 import { ShortcutOverlay } from './components/ShortcutOverlay'
@@ -14,6 +15,7 @@ import { useAutoAmbient } from './hooks/useAutoAmbient'
 
 export default function App() {
   const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
+  const activeMapId = useCampaignStore((s) => s.activeMapId)
   const { theme, blackoutActive } = useUIStore()
   const [showShortcuts, setShowShortcuts] = useState(false)
 
@@ -62,10 +64,18 @@ export default function App() {
     <>
       {!isSetupComplete ? (
         <SetupWizard onComplete={() => { /* isSetupComplete set inside wizard */ }} />
-      ) : activeCampaignId ? (
-        <AppLayout />
-      ) : (
+      ) : !activeCampaignId ? (
         <StartScreen />
+      ) : (
+        <>
+          {/* CampaignView stays mounted while a campaign is open so tab state is preserved.
+              Hidden (not unmounted) when a map is active. */}
+          <div style={{ display: activeMapId ? 'none' : 'flex', flexDirection: 'column', height: '100%' }}>
+            <CampaignView />
+          </div>
+          {/* AppLayout is only mounted when a map is open — the canvas is heavy. */}
+          {activeMapId && <AppLayout />}
+        </>
       )}
       {showShortcuts && <ShortcutOverlay onClose={() => setShowShortcuts(false)} />}
       <ToastProvider />
@@ -91,10 +101,7 @@ async function loadCampaigns() {
         lastOpened: c.last_opened,
       }))
     )
-
-    if (campaigns.length > 0) {
-      useCampaignStore.getState().setActiveCampaign(campaigns[0].id)
-    }
+    // Do not auto-open: always land on StartScreen so the user chooses a campaign
   } catch (err) {
     console.error('[App] Failed to load campaigns:', err)
   }
