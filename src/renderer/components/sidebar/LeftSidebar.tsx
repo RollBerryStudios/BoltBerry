@@ -657,7 +657,7 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
           onChange={(e) => setRenameValue(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter') { e.preventDefault(); commitRename() }
-            if (e.key === 'Escape') { setRenaming(false); onAutoRenameDone?.() }
+            if (e.key === 'Escape') { setRenameValue(map.name); setRenaming(false); onAutoRenameDone?.() }
             e.stopPropagation()
           }}
           onClick={(e) => e.stopPropagation()}

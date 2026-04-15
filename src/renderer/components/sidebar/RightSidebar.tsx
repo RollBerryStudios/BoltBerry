@@ -30,7 +30,7 @@ export function RightSidebar() {
   const { t } = useTranslation()
   const { sidebarTab, setSidebarTab } = useUIStore()
 
-  function Tab({ tab }: { tab: typeof ROW_1[number] }) {
+  function Tab({ tab }: { tab: typeof ALL_TABS[number] }) {
     return (
       <button
         key={tab.id}
