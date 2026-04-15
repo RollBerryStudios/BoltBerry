@@ -99,7 +99,8 @@ export interface MapRecord {
   gridSize: number
   ftPerUnit: number  // feet per grid unit (e.g. 5 for D&D standard)
   orderIndex: number
-  rotation: number   // 0 | 90 | 180 | 270
+  rotation: number         // 0 | 90 | 180 | 270 — DM view only
+  rotationPlayer: number   // 0 | 90 | 180 | 270 — sent to player window
   gridOffsetX: number  // pixel offset for grid alignment
   gridOffsetY: number  // pixel offset for grid alignment
   cameraX: number | null
@@ -169,7 +170,11 @@ export interface NoteRecord {
   id: number
   campaignId: number
   mapId: number | null
+  category: string
+  title: string
   content: string
+  pinX: number | null
+  pinY: number | null
   updatedAt: string
 }
 

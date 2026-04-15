@@ -34,6 +34,7 @@ export function LeftSidebar() {
   const [rotation, setRotation] = useState<0 | 90 | 180 | 270>(0)
   const [gridOffsetX, setGridOffsetX] = useState(0)
   const [gridOffsetY, setGridOffsetY] = useState(0)
+  const [rotationPlayer, setRotationPlayer] = useState<0 | 90 | 180 | 270>(0)
   const [gridDetecting, setGridDetecting] = useState(false)
   const [gridDetectMsg, setGridDetectMsg] = useState<{ text: string; ok: boolean } | null>(null)
 
@@ -48,6 +49,7 @@ export function LeftSidebar() {
     setGridSize(activeMap.gridSize)
     setFtPerUnit(activeMap.ftPerUnit)
     setRotation((activeMap.rotation ?? 0) as 0 | 90 | 180 | 270)
+    setRotationPlayer((activeMap.rotationPlayer ?? 0) as 0 | 90 | 180 | 270)
     setGridOffsetX(activeMap.gridOffsetX ?? 0)
     setGridOffsetY(activeMap.gridOffsetY ?? 0)
     setGridDetecting(false)
@@ -61,9 +63,10 @@ export function LeftSidebar() {
         id: number; campaign_id: number; name: string; image_path: string
         grid_type: string; grid_size: number; ft_per_unit: number; order_index: number
         camera_x: number | null; camera_y: number | null; camera_scale: number | null
-        rotation: number | null; grid_offset_x: number; grid_offset_y: number; ambient_brightness: number
+        rotation: number | null; rotation_player: number | null
+        grid_offset_x: number; grid_offset_y: number; ambient_brightness: number
         ambient_track_path: string | null; track1_volume: number; track2_volume: number; combat_volume: number
-      }>('SELECT id, campaign_id, name, image_path, grid_type, grid_size, ft_per_unit, order_index, camera_x, camera_y, camera_scale, rotation, grid_offset_x, grid_offset_y, ambient_brightness, ambient_track_path, track1_volume, track2_volume, combat_volume FROM maps WHERE campaign_id = ? ORDER BY order_index', [campaignId])
+      }>('SELECT id, campaign_id, name, image_path, grid_type, grid_size, ft_per_unit, order_index, camera_x, camera_y, camera_scale, rotation, rotation_player, grid_offset_x, grid_offset_y, ambient_brightness, ambient_track_path, track1_volume, track2_volume, combat_volume FROM maps WHERE campaign_id = ? ORDER BY order_index', [campaignId])
 
       setActiveMaps(rows.map((r) => ({
         id: r.id,
@@ -75,6 +78,7 @@ export function LeftSidebar() {
         ftPerUnit: r.ft_per_unit ?? 5,
         orderIndex: r.order_index,
         rotation: r.rotation ?? 0,
+        rotationPlayer: r.rotation_player ?? 0,
         gridOffsetX: r.grid_offset_x ?? 0,
         gridOffsetY: r.grid_offset_y ?? 0,
         ambientBrightness: r.ambient_brightness ?? 100,
@@ -115,6 +119,7 @@ export function LeftSidebar() {
         ftPerUnit: 5,
         orderIndex: activeMaps.length,
         rotation: 0,
+        rotationPlayer: 0,
         gridOffsetX: 0,
         gridOffsetY: 0,
         ambientBrightness: 100,
@@ -169,6 +174,7 @@ export function LeftSidebar() {
         ftPerUnit: 5,
         orderIndex: activeMaps.length,
         rotation: 0,
+        rotationPlayer: 0,
         gridOffsetX: 0,
         gridOffsetY: 0,
         ambientBrightness: 100,
@@ -219,17 +225,25 @@ export function LeftSidebar() {
     if (!activeMapId || !window.electronAPI) return
     setRotation(rot)
     try {
-      await window.electronAPI.dbRun(
-        'UPDATE maps SET rotation = ? WHERE id = ?',
-        [rot, activeMapId]
-      )
-      const updatedMaps = activeMaps.map((m) =>
-        m.id === activeMapId ? { ...m, rotation: rot } : m
-      )
+      await window.electronAPI.dbRun('UPDATE maps SET rotation = ? WHERE id = ?', [rot, activeMapId])
+      const updatedMaps = activeMaps.map((m) => m.id === activeMapId ? { ...m, rotation: rot } : m)
+      useCampaignStore.getState().setActiveMaps(updatedMaps)
+      // DM rotation does NOT sync to player
+    } catch (err) {
+      console.error('[LeftSidebar] handleRotationChange failed:', err)
+    }
+  }
+
+  async function handlePlayerRotationChange(rot: 0 | 90 | 180 | 270) {
+    if (!activeMapId || !window.electronAPI) return
+    setRotationPlayer(rot)
+    try {
+      await window.electronAPI.dbRun('UPDATE maps SET rotation_player = ? WHERE id = ?', [rot, activeMapId])
+      const updatedMaps = activeMaps.map((m) => m.id === activeMapId ? { ...m, rotationPlayer: rot } : m)
       useCampaignStore.getState().setActiveMaps(updatedMaps)
       syncMapStateToPlayer(updatedMaps.find((m) => m.id === activeMapId)!)
     } catch (err) {
-      console.error('[LeftSidebar] handleRotationChange failed:', err)
+      console.error('[LeftSidebar] handlePlayerRotationChange failed:', err)
     }
   }
 
@@ -265,7 +279,7 @@ export function LeftSidebar() {
       imagePath: m.imagePath,
       gridType: m.gridType,
       gridSize: m.gridSize,
-      rotation: m.rotation ?? 0,
+      rotation: m.rotationPlayer ?? 0,
     })
   }
 
@@ -485,10 +499,10 @@ export function LeftSidebar() {
               </div>
             )}
 
-            {/* Rotation */}
+            {/* Rotation — DM view */}
             <div>
               <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', display: 'block', marginBottom: 'var(--sp-1)' }}>
-                Drehung
+                Drehung (meine Ansicht)
               </label>
               <div style={{ display: 'flex', gap: 'var(--sp-1)' }}>
                 {([0, 90, 180, 270] as const).map((rot) => (
@@ -496,7 +510,27 @@ export function LeftSidebar() {
                     key={rot}
                     className={`btn btn-ghost ${rotation === rot ? 'btn-active' : ''}`}
                     style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-xs)', padding: '3px' }}
+                    title={`DM-Ansicht: ${rot}°`}
                     onClick={() => handleRotationChange(rot)}
+                  >
+                    {rot === 0 ? '↑' : rot === 90 ? '→' : rot === 180 ? '↓' : '←'}
+                  </button>
+                ))}
+              </div>
+            </div>
+            {/* Rotation — Player view */}
+            <div>
+              <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', display: 'block', marginBottom: 'var(--sp-1)' }}>
+                Drehung (Spieler-Ansicht)
+              </label>
+              <div style={{ display: 'flex', gap: 'var(--sp-1)' }}>
+                {([0, 90, 180, 270] as const).map((rot) => (
+                  <button
+                    key={rot}
+                    className={`btn btn-ghost ${rotationPlayer === rot ? 'btn-active' : ''}`}
+                    style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-xs)', padding: '3px' }}
+                    title={`Spieler-Ansicht: ${rot}° (wird sofort synchronisiert)`}
+                    onClick={() => handlePlayerRotationChange(rot)}
                   >
                     {rot === 0 ? '↑' : rot === 90 ? '→' : rot === 180 ? '↓' : '←'}
                   </button>
