@@ -60,13 +60,16 @@ export function RightSidebar() {
         {/* Overflow toggle — highlighted when an overflow tab is active */}
         <button
           className={`sidebar-tab${activeInOverflow || overflowOpen ? ' active' : ''}`}
-          title="Weitere Panels"
+          title={`Weitere Panels: ${OVERFLOW_TABS.map((t) => t.shortLabel).join(', ')}`}
           aria-label="Weitere Panels"
           onClick={() => setOverflowOpen((v) => !v)}
-          style={{ minWidth: 36, flexShrink: 0 }}
+          style={{ minWidth: 44, flexShrink: 0 }}
         >
           <span className="tab-icon">{activeInOverflow ? OVERFLOW_TABS.find(t => t.id === sidebarTab)?.icon : '⋯'}</span>
-          <span className="tab-label">{activeInOverflow ? OVERFLOW_TABS.find(t => t.id === sidebarTab)?.shortLabel : 'Mehr'}</span>
+          <span className="tab-label" style={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <span>{activeInOverflow ? OVERFLOW_TABS.find(t => t.id === sidebarTab)?.shortLabel : 'Mehr'}</span>
+            <span style={{ fontSize: 7, opacity: 0.7 }}>▼</span>
+          </span>
         </button>
 
         {/* Overflow dropdown */}

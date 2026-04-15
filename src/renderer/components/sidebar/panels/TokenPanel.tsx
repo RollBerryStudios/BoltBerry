@@ -94,19 +94,8 @@ export function TokenPanel() {
   const [secLicht, setSecLicht]       = useState(false)
   const [secStatus, setSecStatus]     = useState(true)
   const [secNotizen, setSecNotizen]   = useState(false)
-  const [showTemplates, setShowTemplates] = useState(false)
+  const [statusFilter, setStatusFilter] = useState('')
   const templateRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (!showTemplates) return
-    function handleClickOutside(e: MouseEvent) {
-      if (templateRef.current && !templateRef.current.contains(e.target as Node)) {
-        setShowTemplates(false)
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [showTemplates])
 
   async function handleAddToken() {
     if (!activeMapId || !window.electronAPI) return
@@ -241,54 +230,54 @@ export function TokenPanel() {
       </div>
       {/* Token list */}
       <div style={{ flex: 1, overflowY: 'auto' }}>
-        {/* Schnellerstellung dropdown */}
-        <div ref={templateRef} style={{ position: 'relative', padding: 'var(--sp-2) var(--sp-4)' }}>
-          <button
-            className="btn btn-ghost"
-            style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--text-xs)' }}
-            onClick={() => setShowTemplates((v) => !v)}
-            disabled={!activeMapId}
-          >
+        {/* ── Schnellerstellung (always visible) ── */}
+        <div ref={templateRef} style={{ padding: 'var(--sp-2) var(--sp-4)', borderBottom: '1px solid var(--border-subtle)' }}>
+          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 'var(--sp-1)' }}>
             ⚡ Schnellerstellung
-          </button>
-          {showTemplates && (
-            <div style={{
-              position: 'absolute', top: '100%', left: 'var(--sp-4)', right: 'var(--sp-4)',
-              background: 'var(--bg-elevated)', border: '1px solid var(--border)',
-              borderRadius: 'var(--radius)', zIndex: 100, maxHeight: 240, overflowY: 'auto',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-            }}>
-              {TOKEN_TEMPLATES.map((tmpl) => (
-                <button
-                  key={tmpl.name}
-                  style={{
-                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                    width: '100%', padding: 'var(--sp-1) var(--sp-2)',
-                    background: 'none', border: 'none', cursor: 'pointer',
-                    color: 'var(--text-primary)', fontSize: 'var(--text-xs)',
-                  }}
-                  onClick={() => handleAddFromTemplate(tmpl)}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
-                >
-                  <span>{tmpl.name}</span>
-                  <span style={{ color: 'var(--text-muted)', fontSize: 10 }}>HP {tmpl.hp} / RK {tmpl.ac}{tmpl.size > 1 ? ` / ${tmpl.size}×${tmpl.size}` : ''}</span>
-                </button>
-              ))}
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+            {TOKEN_TEMPLATES.map((tmpl) => (
               <button
+                key={tmpl.name}
+                disabled={!activeMapId}
+                title={`${tmpl.name} — HP ${tmpl.hp}, RK ${tmpl.ac}${tmpl.size > 1 ? `, ${tmpl.size}×${tmpl.size}` : ''}`}
+                onClick={() => handleAddFromTemplate(tmpl)}
                 style={{
-                  display: 'flex', width: '100%', padding: 'var(--sp-1) var(--sp-2)',
-                  background: 'none', border: 'none', borderTop: '1px solid var(--border)',
-                  cursor: 'pointer', color: 'var(--text-muted)', fontSize: 'var(--text-xs)',
+                  padding: '2px 8px',
+                  fontSize: 'var(--text-xs)',
+                  background: 'var(--bg-overlay)',
+                  border: '1px solid var(--border-subtle)',
+                  borderRadius: 99,
+                  color: 'var(--text-secondary)',
+                  cursor: activeMapId ? 'pointer' : 'not-allowed',
+                  whiteSpace: 'nowrap',
                 }}
-                onClick={() => handleAddFromTemplate(null)}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
+                onMouseEnter={(e) => { if (activeMapId) e.currentTarget.style.background = 'var(--bg-elevated)' }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--bg-overlay)' }}
               >
-                Benutzerdefiniert…
+                {tmpl.name}
               </button>
-            </div>
-          )}
+            ))}
+            <button
+              disabled={!activeMapId}
+              title="Leeres Token (Bild wählen)"
+              onClick={() => handleAddFromTemplate(null)}
+              style={{
+                padding: '2px 8px',
+                fontSize: 'var(--text-xs)',
+                background: 'none',
+                border: '1px dashed var(--border)',
+                borderRadius: 99,
+                color: 'var(--text-muted)',
+                cursor: activeMapId ? 'pointer' : 'not-allowed',
+                whiteSpace: 'nowrap',
+              }}
+              onMouseEnter={(e) => { if (activeMapId) e.currentTarget.style.background = 'var(--bg-overlay)' }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = 'none' }}
+            >
+              + Eigenes…
+            </button>
+          </div>
         </div>
 
         {tokens.length === 0 ? (
@@ -469,13 +458,20 @@ export function TokenPanel() {
           <SectionHeader title="Status-Effekte" open={secStatus} onToggle={() => setSecStatus((v) => !v)} />
           {secStatus && (
             <div style={{ paddingBottom: 'var(--sp-2)' }}>
+              {/* Filter input */}
+              <input
+                className="input"
+                placeholder="Filter…"
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                style={{ marginBottom: 6, fontSize: 'var(--text-xs)', padding: '3px 8px', height: 24 }}
+              />
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-                {STATUS_EFFECTS.map((eff, idx) => (
-                  <React.Fragment key={eff.id}>
-                    {idx === 16 && (
-                      <div style={{ width: '100%', height: 1, background: 'var(--border-subtle)', margin: '2px 0' }} />
-                    )}
+                {STATUS_EFFECTS
+                  .filter((eff) => !statusFilter || eff.label.toLowerCase().includes(statusFilter.toLowerCase()))
+                  .map((eff) => (
                     <button
+                      key={eff.id}
                       title={eff.label}
                       onClick={() => toggleStatusEffect(selected.id, eff.id, selected.statusEffects)}
                       style={{
@@ -488,8 +484,7 @@ export function TokenPanel() {
                     >
                       {eff.icon}
                     </button>
-                  </React.Fragment>
-                ))}
+                  ))}
               </div>
               {selected.statusEffects && selected.statusEffects.length > 0 && (
                 <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 4 }}>

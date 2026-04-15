@@ -180,6 +180,7 @@ export function Toolbar() {
   const [showMonitorDialog, setShowMonitorDialog] = useState(false)
   const [liveWarning, setLiveWarning] = useState<string | null>(null)
   const [cameraSent, setCameraSent] = useState(false)
+  const [workModeToast, setWorkModeToast] = useState<string | null>(null)
   const zoomPercent = Math.round(useMapTransformStore((s) => s.scale / s.fitScale * 100))
   const canUndo = useUndoStore((s) => s.undoStack.length > 0)
   const canRedo = useUndoStore((s) => s.redoStack.length > 0)
@@ -295,25 +296,54 @@ export function Toolbar() {
       <Divider />
 
       {/* ── SECTION: Work Modes ─────────────────────────────────────────── */}
-      <div className="workmode-group">
-        {WORK_MODE_CONFIG.map((wm) => (
-          <button
-            key={wm.id}
-            className={clsx(
-              'workmode-btn',
-              workMode === wm.id && 'active',
-              workMode === wm.id && wm.id === 'play'           && 'active-play',
-              workMode === wm.id && wm.id === 'combat'         && 'active-combat',
-              workMode === wm.id && wm.id === 'fog-edit'       && 'active-fog',
-              workMode === wm.id && wm.id === 'player-preview' && 'active-prev',
-            )}
-            title={wm.label}
-            onClick={() => setWorkMode(wm.id)}
-          >
-            <span style={{ fontSize: 13 }}>{wm.icon}</span>
-            <span style={{ fontSize: 10, marginLeft: 4 }}>{wm.shortLabel}</span>
-          </button>
-        ))}
+      <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+        <div className="workmode-group">
+          {WORK_MODE_CONFIG.map((wm) => (
+            <button
+              key={wm.id}
+              className={clsx(
+                'workmode-btn',
+                workMode === wm.id && 'active',
+                workMode === wm.id && wm.id === 'play'           && 'active-play',
+                workMode === wm.id && wm.id === 'combat'         && 'active-combat',
+                workMode === wm.id && wm.id === 'fog-edit'       && 'active-fog',
+                workMode === wm.id && wm.id === 'player-preview' && 'active-prev',
+              )}
+              title={wm.label}
+              onClick={() => {
+                setWorkMode(wm.id)
+                const config = WORK_MODE_CONFIG.find((c) => c.id === wm.id)
+                if (config) {
+                  setWorkModeToast(config.label)
+                  setTimeout(() => setWorkModeToast(null), 1800)
+                }
+              }}
+            >
+              <span style={{ fontSize: 13 }}>{wm.icon}</span>
+              <span style={{ fontSize: 10, marginLeft: 4 }}>{wm.shortLabel}</span>
+            </button>
+          ))}
+        </div>
+        {workModeToast && (
+          <div style={{
+            position: 'absolute',
+            top: 'calc(100% + 6px)',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: 'var(--bg-elevated)',
+            border: '1px solid var(--border)',
+            borderRadius: 'var(--radius)',
+            padding: '3px 10px',
+            fontSize: 'var(--text-xs)',
+            color: 'var(--text-secondary)',
+            whiteSpace: 'nowrap',
+            zIndex: 9999,
+            pointerEvents: 'none',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
+          }}>
+            {workModeToast}
+          </div>
+        )}
       </div>
 
       {/* Token count badge */}
@@ -327,7 +357,7 @@ export function Toolbar() {
             padding: '1px 6px', lineHeight: '20px', flexShrink: 0,
           }}
         >
-          {tokenCount} T
+          ⬤ {tokenCount}
         </div>
       )}
 
@@ -509,7 +539,7 @@ export function Toolbar() {
       {/* Camera: one-shot send */}
       <button
         className={clsx('tool-btn', cameraSent && 'active')}
-        title={t('toolbar.shareCamera')}
+        title="Kamera einmalig senden — überträgt den aktuellen Bildausschnitt einmalig an das Spielerfenster"
         onClick={handleShareCamera}
         style={cameraSent ? { color: 'var(--success)' } : undefined}
       >
@@ -519,7 +549,9 @@ export function Toolbar() {
       {/* Camera follow toggle */}
       <button
         className={clsx('tool-btn', cameraFollowDM && 'active')}
-        title={cameraFollowDM ? 'Kamera-Folgemodus AN' : 'Kamera-Folgemodus AUS'}
+        title={cameraFollowDM
+          ? 'Kamera-Synchronisierung AN — Spielerfenster folgt automatisch deinem Bildausschnitt (klicken zum Deaktivieren)'
+          : 'Kamera-Synchronisierung AUS — Spielerfenster bewegt sich nicht mit (klicken zum Aktivieren)'}
         onClick={toggleCameraFollow}
         style={cameraFollowDM ? { color: 'var(--success)' } : undefined}
       >

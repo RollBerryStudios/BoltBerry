@@ -423,6 +423,11 @@ export function InitiativePanel() {
           <div className="empty-state" style={{ padding: 'var(--sp-6)' }}>
             <div className="empty-state-icon" style={{ fontSize: 32 }}>⚔️</div>
             <div className="empty-state-title" style={{ fontSize: 'var(--text-sm)' }}>{t('initiative.noCombat')}</div>
+            <div className="empty-state-desc" style={{ fontSize: 'var(--text-xs)', marginTop: 'var(--sp-1)' }}>
+              Namen eingeben &amp; + drücken.<br />
+              Token-Vorschläge erscheinen beim Tippen.<br />
+              <strong style={{ color: 'var(--text-secondary)' }}>⊕ Alle</strong> fügt alle Karten-Token auf einmal hinzu.
+            </div>
           </div>
         ) : (
           entries.map((entry, entryIdx) => {

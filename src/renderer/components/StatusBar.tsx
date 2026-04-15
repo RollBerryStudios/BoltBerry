@@ -55,13 +55,13 @@ export function StatusBar() {
       )}
 
       {overlayActive && (
-        <div className="statusbar-item" style={{ cursor: 'pointer' }} onClick={() => { setSidebarTab('overlay') }} title="Aktives Overlay — klicken zum Verwalten">
+        <div className="statusbar-item statusbar-clickable" onClick={() => { setSidebarTab('overlay') }} title="Aktives Overlay — klicken zum Verwalten">
           <span style={{ color: '#a855f7' }}>✦ Overlay aktiv</span>
         </div>
       )}
 
       {activeWeather !== 'none' && activeWeather !== '' && (
-        <div className="statusbar-item" style={{ cursor: 'pointer' }} onClick={() => setSidebarTab('overlay')} title="Aktives Wetter — klicken zum Verwalten">
+        <div className="statusbar-item statusbar-clickable" onClick={() => setSidebarTab('overlay')} title="Aktives Wetter — klicken zum Verwalten">
           <span style={{ color: '#3b82f6' }}>
             {activeWeather === 'rain' ? '🌧 Regen' : activeWeather === 'snow' ? '❄ Schnee' : activeWeather === 'fog' ? '🌫 Nebel' : activeWeather === 'wind' ? '💨 Wind' : `🌤 ${activeWeather}`}
           </span>

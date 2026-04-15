@@ -269,7 +269,8 @@ export function CanvasArea() {
     <div
       ref={containerRef}
       className="canvas-area"
-      style={{ cursor: getCursor(activeTool), position: 'relative' }}
+      data-tool={activeTool}
+      style={{ position: 'relative' }}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}

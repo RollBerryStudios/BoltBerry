@@ -289,6 +289,27 @@ html, body {
   position: relative;
 }
 
+/* Tool-specific cursors — set via data-tool attribute on the canvas wrapper */
+.canvas-area[data-tool='select']          { cursor: default; }
+.canvas-area[data-tool='pointer']         { cursor: grab; }
+.canvas-area[data-tool='pointer']:active  { cursor: grabbing; }
+.canvas-area[data-tool='token']           { cursor: copy; }
+.canvas-area[data-tool='fog-brush']       { cursor: cell; }
+.canvas-area[data-tool='fog-brush-cover'] { cursor: cell; }
+.canvas-area[data-tool='fog-rect']        { cursor: crosshair; }
+.canvas-area[data-tool='fog-polygon']     { cursor: crosshair; }
+.canvas-area[data-tool='fog-cover']       { cursor: crosshair; }
+.canvas-area[data-tool='measure-line']    { cursor: crosshair; }
+.canvas-area[data-tool='measure-circle']  { cursor: crosshair; }
+.canvas-area[data-tool='measure-cone']    { cursor: crosshair; }
+.canvas-area[data-tool='draw-freehand']   { cursor: crosshair; }
+.canvas-area[data-tool='draw-rect']       { cursor: crosshair; }
+.canvas-area[data-tool='draw-circle']     { cursor: crosshair; }
+.canvas-area[data-tool='draw-text']       { cursor: text; }
+.canvas-area[data-tool='wall-draw']       { cursor: crosshair; }
+.canvas-area[data-tool='wall-door']       { cursor: crosshair; }
+.canvas-area[data-tool='room']            { cursor: crosshair; }
+
 /* ─── Status bar ─────────────────────────────────────────────────────────────── */
 .statusbar {
   grid-area: statusbar;
@@ -316,6 +337,14 @@ html, body {
 }
 .statusbar-dot.connected    { background: var(--success); }
 .statusbar-dot.disconnected { background: var(--danger); }
+.statusbar-clickable {
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  padding: 1px 4px;
+  margin: -1px -4px;
+  transition: background var(--transition);
+}
+.statusbar-clickable:hover { background: var(--bg-overlay); }
 
 /* ─── Buttons ────────────────────────────────────────────────────────────────── */
 .btn {
@@ -351,9 +380,22 @@ html, body {
   box-shadow: 0 0 0 3px var(--accent-dim);
 }
 .btn-primary:disabled {
-  opacity: 0.45;
+  opacity: 0.4;
   cursor: not-allowed;
   box-shadow: none;
+  filter: grayscale(0.4);
+}
+.btn-ghost:disabled,
+.btn-secondary:disabled,
+.btn-danger:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.tool-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 /* Secondary – Berry Blue border, for structural secondary actions */

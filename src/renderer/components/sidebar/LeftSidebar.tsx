@@ -406,11 +406,17 @@ export function LeftSidebar() {
                 </button>
                 {gridDetectMsg && (
                   <span style={{
+                    display: 'inline-flex', alignItems: 'center', gap: 4,
                     fontSize: 'var(--text-xs)',
                     color: gridDetectMsg.ok ? 'var(--success)' : 'var(--warning)',
                     whiteSpace: 'nowrap',
                   }}>
                     {gridDetectMsg.text}
+                    <button
+                      onClick={() => setGridDetectMsg(null)}
+                      style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', fontSize: 9, padding: 0, lineHeight: 1, opacity: 0.7 }}
+                      title="Schließen"
+                    >✕</button>
                   </span>
                 )}
               </div>

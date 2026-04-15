@@ -9,33 +9,50 @@ export function ShortcutOverlay({ onClose }: ShortcutOverlayProps) {
 
   type ShortcutEntry =
     | { section: string }
-    | { key: string; labelKey: string }
+    | { key: string; labelKey: string; label?: never }
+    | { key: string; label: string; labelKey?: never }
 
   const SHORTCUTS: ShortcutEntry[] = [
     { section: t('shortcuts.sectionTools') },
-    { key: 'V',                   labelKey: 'shortcuts.keySelect' },
-    { key: 'F',                   labelKey: 'shortcuts.keyFogRect' },
-    { key: 'P',                   labelKey: 'shortcuts.keyFogPolygon' },
-    { key: 'C',                   labelKey: 'shortcuts.keyFogCover' },
-    { key: 'R',                   labelKey: 'shortcuts.keyRoom' },
-    { key: 'T',                   labelKey: 'shortcuts.keyTokenTab' },
+    { key: 'V',        labelKey: 'shortcuts.keySelect' },
+    { key: 'W',        label: 'Zeiger / Kamera-Pan' },
+    { key: 'T',        labelKey: 'shortcuts.keyTokenTab' },
+    { key: 'B',        label: 'Nebel-Pinsel' },
+    { key: 'F',        labelKey: 'shortcuts.keyFogRect' },
+    { key: 'P',        labelKey: 'shortcuts.keyFogPolygon' },
+    { key: 'C',        labelKey: 'shortcuts.keyFogCover' },
+    { key: 'X',        label: 'Nebel-Pinsel Verdecken' },
+    { key: 'M',        label: 'Messen (Linie)' },
+    { key: 'D',        label: 'Zeichnen (Freihand)' },
+    { key: 'G',        label: 'Wand zeichnen' },
+    { key: 'J',        label: 'Tür setzen' },
+    { key: 'R',        labelKey: 'shortcuts.keyRoom' },
+    { key: 'E',        label: 'Spieler-Sicht ein-/ausblenden' },
     { section: t('shortcuts.sectionMapNav') },
-    { key: 'Mausrad / Scroll',    labelKey: 'shortcuts.keyMouseWheel' },
-    { key: 'Alt + Drag',          labelKey: 'shortcuts.keyAltDrag' },
-    { key: 'Mittelklick / Middle',labelKey: 'shortcuts.keyMiddleDrag' },
-    { key: '1 – 5',               labelKey: 'shortcuts.keyMapSwitch' },
+    { key: 'Mausrad',  labelKey: 'shortcuts.keyMouseWheel' },
+    { key: 'Alt + Drag',           labelKey: 'shortcuts.keyAltDrag' },
+    { key: 'Mittelklick + Drag',   labelKey: 'shortcuts.keyMiddleDrag' },
+    { key: '0',        label: 'Ansicht einpassen (Fit)' },
+    { key: '1 – 5',   labelKey: 'shortcuts.keyMapSwitch' },
+    { section: 'Auswahl & Token' },
+    { key: 'Klick',          label: 'Token auswählen' },
+    { key: 'Shift + Klick',  label: 'Token zur Mehrfachauswahl hinzufügen' },
+    { key: 'Delete',         labelKey: 'shortcuts.keyDeleteToken' },
     { section: t('shortcuts.sectionCombat') },
-    { key: 'N',                   labelKey: 'shortcuts.keyNextFighter' },
+    { key: 'N',        labelKey: 'shortcuts.keyNextFighter' },
     { section: t('shortcuts.sectionFog') },
-    { key: 'Doppelklick / Dblclk',labelKey: 'shortcuts.keyPolygonFinish' },
-    { key: 'Ctrl + Z',            labelKey: 'shortcuts.keyFogUndo' },
-    { key: 'Ctrl + ⇧ + Z',       labelKey: 'shortcuts.keyFogRedo' },
+    { key: 'Doppelklick', labelKey: 'shortcuts.keyPolygonFinish' },
+    { key: 'Ctrl + Z',    labelKey: 'shortcuts.keyFogUndo' },
+    { key: 'Ctrl + ⇧ + Z', labelKey: 'shortcuts.keyFogRedo' },
+    { section: 'Rechtsklick-Menüs' },
+    { key: 'Rechtsklick Karte',   label: 'Drehung, Nebel, Werkzeuge, Zeichnungen löschen' },
+    { key: 'Rechtsklick Token',   label: 'Token-Optionen (Vordergrund, Löschen…)' },
+    { key: 'Rechtsklick Karte (Liste)', label: 'Umbenennen, Löschen' },
     { section: t('shortcuts.sectionGeneral') },
-    { key: 'Space',               labelKey: 'shortcuts.keyBlackout' },
-    { key: 'Delete',              labelKey: 'shortcuts.keyDeleteToken' },
-    { key: 'Escape',              labelKey: 'shortcuts.keyEscape' },
-    { key: 'Ctrl + S',            labelKey: 'shortcuts.keySave' },
-    { key: '?',                   labelKey: 'shortcuts.keyShortcutOverlay' },
+    { key: 'Space',    labelKey: 'shortcuts.keyBlackout' },
+    { key: 'Escape',   labelKey: 'shortcuts.keyEscape' },
+    { key: 'Ctrl + S', labelKey: 'shortcuts.keySave' },
+    { key: '? / F1',   label: 'Diese Übersicht öffnen' },
   ]
 
   return (
@@ -53,7 +70,7 @@ export function ShortcutOverlay({ onClose }: ShortcutOverlayProps) {
         border: '1px solid var(--border)',
         borderRadius: 'var(--radius-lg)',
         padding: 'var(--sp-6)',
-        width: 520,
+        width: 580,
         maxHeight: '85vh',
         overflowY: 'auto',
         boxShadow: '0 24px 64px rgba(0,0,0,0.8)',
@@ -90,7 +107,7 @@ export function ShortcutOverlay({ onClose }: ShortcutOverlayProps) {
               gap: 'var(--sp-4)',
             }}>
               <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
-                {t(s.labelKey)}
+                {s.labelKey ? t(s.labelKey) : s.label}
               </span>
               <kbd style={{
                 background: 'var(--bg-overlay)',
