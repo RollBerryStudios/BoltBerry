@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { useCampaignStore } from '../stores/campaignStore'
-import { useImageUrl } from '../hooks/useImageUrl'
 import { NotesPanel } from './sidebar/panels/NotesPanel'
 import { CharacterSheetPanel } from './sidebar/panels/CharacterSheetPanel'
 import { HandoutsPanel } from './sidebar/panels/HandoutsPanel'
@@ -9,135 +8,15 @@ import { SettingsPanel } from './sidebar/panels/SettingsPanel'
 import logoWide from '../assets/boltberry-logo-wide.png'
 import type { MapRecord } from '@shared/ipc-types'
 
-type Tab = 'maps' | 'notes' | 'characters' | 'handouts' | 'audio' | 'settings'
+type Tab = 'notes' | 'characters' | 'handouts' | 'audio' | 'settings'
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
-  { id: 'maps',       label: 'Karten',       icon: '🗺️' },
   { id: 'notes',      label: 'Notizen',       icon: '📝' },
   { id: 'characters', label: 'Charaktere',    icon: '👤' },
   { id: 'handouts',   label: 'Handouts',      icon: '📄' },
   { id: 'audio',      label: 'Audio',         icon: '🎵' },
   { id: 'settings',   label: 'Einstellungen', icon: '⚙️' },
 ]
-
-// ─── Map Thumbnail Card ───────────────────────────────────────────────────────
-
-function MapCard({ map, onOpen }: { map: MapRecord; onOpen: (id: number) => void }) {
-  const url = useImageUrl(map.imagePath)
-
-  return (
-    <div
-      onDoubleClick={() => onOpen(map.id)}
-      title={`${map.name} — Doppelklick zum Öffnen`}
-      style={{
-        width: 200,
-        borderRadius: 'var(--radius-lg)',
-        border: '1px solid var(--border)',
-        background: 'var(--bg-surface)',
-        overflow: 'hidden',
-        cursor: 'pointer',
-        transition: 'border-color var(--transition), transform var(--transition), box-shadow var(--transition)',
-        flexShrink: 0,
-        userSelect: 'none',
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = 'var(--accent)'
-        e.currentTarget.style.transform = 'translateY(-2px)'
-        e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.4)'
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = 'var(--border)'
-        e.currentTarget.style.transform = 'none'
-        e.currentTarget.style.boxShadow = 'none'
-      }}
-    >
-      <div style={{
-        width: '100%',
-        height: 130,
-        background: 'var(--bg-overlay)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-      }}>
-        {url ? (
-          <img
-            src={url}
-            alt={map.name}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            draggable={false}
-          />
-        ) : (
-          <span style={{ fontSize: 36, opacity: 0.3 }}>🗺️</span>
-        )}
-      </div>
-      <div style={{
-        padding: '10px 12px',
-        borderTop: '1px solid var(--border)',
-      }}>
-        <div style={{
-          fontSize: 'var(--text-sm)',
-          fontWeight: 600,
-          color: 'var(--text-primary)',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-        }}>
-          {map.name}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-// ─── Add Map Card ─────────────────────────────────────────────────────────────
-
-function AddMapCard({ onClick, loading }: { onClick: () => void; loading: boolean }) {
-  return (
-    <div
-      onClick={loading ? undefined : onClick}
-      title="Neue Karte importieren"
-      style={{
-        width: 200,
-        height: 178,
-        borderRadius: 'var(--radius-lg)',
-        border: '2px dashed var(--border)',
-        background: 'var(--bg-surface)',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        cursor: loading ? 'default' : 'pointer',
-        gap: 8,
-        opacity: loading ? 0.6 : 1,
-        transition: 'border-color var(--transition), background var(--transition)',
-        flexShrink: 0,
-        userSelect: 'none',
-      }}
-      onMouseEnter={(e) => {
-        if (!loading) {
-          e.currentTarget.style.borderColor = 'var(--accent)'
-          e.currentTarget.style.background = 'var(--bg-overlay)'
-        }
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = 'var(--border)'
-        e.currentTarget.style.background = 'var(--bg-surface)'
-      }}
-    >
-      <span style={{ fontSize: 32, opacity: 0.5 }}>{loading ? '…' : '+'}</span>
-      <span style={{
-        fontSize: 'var(--text-xs)',
-        color: 'var(--text-muted)',
-        textAlign: 'center',
-        lineHeight: 1.4,
-        padding: '0 16px',
-      }}>
-        {loading ? 'Importiere…' : 'Karte importieren'}
-      </span>
-    </div>
-  )
-}
 
 // ─── CampaignView ─────────────────────────────────────────────────────────────
 
@@ -152,14 +31,17 @@ export function CampaignView() {
     setActiveCampaign,
   } = useCampaignStore()
 
-  const [tab, setTab] = useState<Tab>('maps')
+  const [tab, setTab] = useState<Tab>('notes')
+  const [mapsLoaded, setMapsLoaded] = useState(false)
   const [importing, setImporting] = useState(false)
 
   const campaign = campaigns.find((c) => c.id === activeCampaignId)
 
-  // Load maps when campaign changes — mirrors LeftSidebar's loadMaps
+  // Populate activeMaps so the "Spielansicht" button knows which map to open.
+  // This mirrors LeftSidebar's loadMaps — both write the same data to the store.
   useEffect(() => {
     if (!activeCampaignId) return
+    setMapsLoaded(false)
     loadMaps(activeCampaignId)
   }, [activeCampaignId])
 
@@ -200,10 +82,13 @@ export function CampaignView() {
       })))
     } catch (err) {
       console.error('[CampaignView] loadMaps failed:', err)
+    } finally {
+      setMapsLoaded(true)
     }
   }
 
-  async function handleAddMap() {
+  // Import a first map and immediately enter the game view
+  async function handleImportFirstMap() {
     if (!activeCampaignId || !window.electronAPI || importing) return
     setImporting(true)
     try {
@@ -241,10 +126,98 @@ export function CampaignView() {
       addMap(newMap)
       setActiveMap(newMap.id)
     } catch (err) {
-      console.error('[CampaignView] addMap failed:', err)
+      console.error('[CampaignView] importFirstMap failed:', err)
     } finally {
       setImporting(false)
     }
+  }
+
+  // ── Game view entry button ─────────────────────────────────────────────────
+  // States:
+  //   loading  → maps query in flight
+  //   hasMaps  → open first map in game view
+  //   noMaps   → import a first map (then auto-enters game view)
+
+  const loading = !mapsLoaded || importing
+  const hasMaps = mapsLoaded && activeMaps.length > 0
+
+  function renderGameButton() {
+    if (loading) {
+      return (
+        <button
+          disabled
+          style={{
+            display: 'flex', alignItems: 'center', gap: 6,
+            padding: '6px 16px',
+            background: 'var(--bg-overlay)',
+            border: '1px solid var(--border)',
+            borderRadius: 'var(--radius)',
+            color: 'var(--text-muted)',
+            fontSize: 'var(--text-sm)',
+            fontWeight: 600,
+            cursor: 'default',
+            flexShrink: 0,
+          }}
+        >
+          <span style={{ fontSize: 11 }}>…</span>
+          Laden
+        </button>
+      )
+    }
+
+    if (hasMaps) {
+      return (
+        <button
+          onClick={() => setActiveMap(activeMaps[0].id)}
+          style={{
+            display: 'flex', alignItems: 'center', gap: 8,
+            padding: '6px 18px',
+            background: 'var(--accent)',
+            border: 'none',
+            borderRadius: 'var(--radius)',
+            color: '#000',
+            fontSize: 'var(--text-sm)',
+            fontWeight: 700,
+            cursor: 'pointer',
+            flexShrink: 0,
+            transition: 'opacity var(--transition)',
+            letterSpacing: '0.01em',
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.85' }}
+          onMouseLeave={(e) => { e.currentTarget.style.opacity = '1' }}
+          title={`Spielansicht öffnen — ${activeMaps[0].name}`}
+        >
+          <span>▶</span>
+          Spielansicht
+        </button>
+      )
+    }
+
+    // No maps yet — offer import
+    return (
+      <button
+        onClick={handleImportFirstMap}
+        style={{
+          display: 'flex', alignItems: 'center', gap: 8,
+          padding: '6px 16px',
+          background: 'none',
+          border: '1px solid var(--accent)',
+          borderRadius: 'var(--radius)',
+          color: 'var(--accent-light)',
+          fontSize: 'var(--text-sm)',
+          fontWeight: 600,
+          cursor: 'pointer',
+          flexShrink: 0,
+          transition: 'background var(--transition)',
+        }}
+        onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(245,168,0,0.08)' }}
+        onMouseLeave={(e) => { e.currentTarget.style.background = 'none' }}
+        title="Erste Karte importieren um die Spielansicht zu öffnen"
+      >
+        <span style={{ fontSize: 13 }}>+</span>
+        Karte importieren
+      </button>
+    )
   }
 
   return (
@@ -311,6 +284,8 @@ export function CampaignView() {
           {campaign?.name ?? ''}
         </h1>
 
+        {renderGameButton()}
+
         <img
           src={logoWide}
           alt="BoltBerry"
@@ -368,67 +343,30 @@ export function CampaignView() {
       {/* ── Content ────────────────────────────────────────────────────── */}
       <div style={{ flex: 1, overflow: 'auto', minHeight: 0 }}>
 
-        {/* Maps tab */}
-        {tab === 'maps' && (
-          <div style={{
-            padding: 'var(--sp-6)',
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: 'var(--sp-4)',
-            alignContent: 'flex-start',
-          }}>
-            {activeMaps.length === 0 && !importing && (
-              <div style={{
-                width: '100%',
-                textAlign: 'center',
-                padding: 'var(--sp-10) 0',
-                color: 'var(--text-muted)',
-                fontSize: 'var(--text-sm)',
-              }}>
-                <div style={{ fontSize: 40, marginBottom: 'var(--sp-3)', opacity: 0.4 }}>🗺️</div>
-                Keine Karten vorhanden. Importiere eine Karte um zu beginnen.
-              </div>
-            )}
-            {activeMaps.map((map) => (
-              <MapCard
-                key={map.id}
-                map={map}
-                onOpen={(id) => setActiveMap(id)}
-              />
-            ))}
-            <AddMapCard onClick={handleAddMap} loading={importing} />
-          </div>
-        )}
-
-        {/* Notes tab */}
         {tab === 'notes' && (
           <div style={{ maxWidth: 860, margin: '0 auto', padding: 'var(--sp-6)' }}>
             <NotesPanel />
           </div>
         )}
 
-        {/* Characters tab */}
         {tab === 'characters' && (
           <div style={{ padding: 'var(--sp-6)' }}>
             <CharacterSheetPanel />
           </div>
         )}
 
-        {/* Handouts tab */}
         {tab === 'handouts' && (
           <div style={{ padding: 'var(--sp-6)' }}>
             <HandoutsPanel />
           </div>
         )}
 
-        {/* Audio tab */}
         {tab === 'audio' && (
           <div style={{ maxWidth: 860, margin: '0 auto', padding: 'var(--sp-6)' }}>
             <AudioPanel />
           </div>
         )}
 
-        {/* Settings tab */}
         {tab === 'settings' && (
           <div style={{ maxWidth: 720, margin: '0 auto', padding: 'var(--sp-6)' }}>
             <SettingsPanel />
