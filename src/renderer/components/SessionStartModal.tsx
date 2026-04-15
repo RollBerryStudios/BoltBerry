@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { ReactNode } from 'react'
 import { useUIStore } from '../stores/uiStore'
 import { useTokenStore } from '../stores/tokenStore'
@@ -13,9 +14,20 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
   const playerConnected = useUIStore((s) => s.playerConnected)
   const tokens = useTokenStore((s) => s.tokens)
   const { activeMaps, activeMapId } = useCampaignStore()
+  const [confirmWarning, setConfirmWarning] = useState<string | null>(null)
 
   const activeMap = activeMaps.find((m) => m.id === activeMapId)
   const visibleTokenCount = tokens.filter((t) => t.visibleToPlayers).length
+
+  function handleGoLive() {
+    if (!playerConnected) {
+      setConfirmWarning('Das Spielerfenster ist nicht geöffnet. Trotzdem live gehen?')
+    } else if (visibleTokenCount === 0) {
+      setConfirmWarning('Keine Token sind für Spieler sichtbar. Trotzdem live gehen?')
+    } else {
+      onConfirm()
+    }
+  }
 
   return (
     <div
@@ -77,6 +89,36 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
           />
         </div>
 
+        {confirmWarning && (
+          <div style={{
+            marginBottom: 'var(--sp-4)',
+            padding: 'var(--sp-3)',
+            background: 'rgba(245,158,11,0.08)',
+            border: '1px solid rgba(245,158,11,0.4)',
+            borderRadius: 'var(--radius)',
+          }}>
+            <p style={{ fontSize: 'var(--text-xs)', color: 'var(--warning)', margin: '0 0 var(--sp-3)' }}>
+              {confirmWarning}
+            </p>
+            <div style={{ display: 'flex', gap: 'var(--sp-2)' }}>
+              <button
+                className="btn btn-ghost"
+                style={{ fontSize: 'var(--text-xs)' }}
+                onClick={() => setConfirmWarning(null)}
+              >
+                Abbrechen
+              </button>
+              <button
+                className="btn btn-primary"
+                style={{ fontSize: 'var(--text-xs)', background: 'rgba(34,197,94,0.2)', color: '#22c55e', borderColor: 'rgba(34,197,94,0.4)' }}
+                onClick={() => { setConfirmWarning(null); onConfirm() }}
+              >
+                ▶ Trotzdem fortfahren
+              </button>
+            </div>
+          </div>
+        )}
+
         <div style={{ display: 'flex', gap: 'var(--sp-2)', justifyContent: 'flex-end' }}>
           <button className="btn btn-ghost" onClick={onCancel}>
             Abbrechen
@@ -84,7 +126,7 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
           <button
             className="btn btn-primary"
             style={{ background: 'rgba(34,197,94,0.2)', color: '#22c55e', borderColor: 'rgba(34,197,94,0.4)' }}
-            onClick={onConfirm}
+            onClick={handleGoLive}
           >
             ▶ Jetzt live gehen
           </button>

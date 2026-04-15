@@ -5,18 +5,16 @@ import { NotesPanel } from './sidebar/panels/NotesPanel'
 import { CharacterSheetPanel } from './sidebar/panels/CharacterSheetPanel'
 import { HandoutsPanel } from './sidebar/panels/HandoutsPanel'
 import { AudioPanel } from './sidebar/panels/AudioPanel'
-import { SettingsPanel } from './sidebar/panels/SettingsPanel'
 import logoWide from '../assets/boltberry-logo-wide.png'
 import type { MapRecord } from '@shared/ipc-types'
 
-type Tab = 'notes' | 'characters' | 'handouts' | 'audio' | 'settings'
+type Tab = 'notes' | 'characters' | 'handouts' | 'audio'
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
-  { id: 'notes',      label: 'Notizen',       icon: '📝' },
-  { id: 'characters', label: 'Charaktere',    icon: '👤' },
-  { id: 'handouts',   label: 'Handouts',      icon: '📄' },
-  { id: 'audio',      label: 'Audio',         icon: '🎵' },
-  { id: 'settings',   label: 'Einstellungen', icon: '⚙️' },
+  { id: 'notes',      label: 'Notizen',    icon: '📝' },
+  { id: 'characters', label: 'Charaktere', icon: '👤' },
+  { id: 'handouts',   label: 'Handouts',   icon: '📄' },
+  { id: 'audio',      label: 'Audio',      icon: '🎵' },
 ]
 
 // ─── CampaignView ─────────────────────────────────────────────────────────────
@@ -405,18 +403,6 @@ export function CampaignView() {
           </div>
         )}
 
-        {tab === 'settings' && (
-          <div style={{
-            position: 'absolute', inset: 0,
-            display: 'flex', justifyContent: 'center',
-            padding: 'var(--sp-6)',
-            overflow: 'auto',
-          }}>
-            <div style={{ width: '100%', maxWidth: 720 }}>
-              <SettingsPanel />
-            </div>
-          </div>
-        )}
       </div>
     </div>
   )
