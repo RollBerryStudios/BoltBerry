@@ -5,13 +5,15 @@ import type { PlayerOverlay, WeatherType } from '@shared/ipc-types'
 
 export function OverlayPanel() {
   const { t } = useTranslation()
+  const overlayActive = useUIStore((s) => s.overlayActive)
   const setOverlayActive = useUIStore((s) => s.setOverlayActive)
   const setActiveWeather = useUIStore((s) => s.setActiveWeather)
   const [text, setText] = useState('')
   const [position, setPosition] = useState<PlayerOverlay['position']>('bottom')
   const [style, setStyle] = useState<PlayerOverlay['style']>('title')
-  const [active, setActive] = useState(false)
-  const [weather, setWeather] = useState<WeatherType>('none')
+  const [weather, setWeather] = useState<WeatherType>(
+    () => (useUIStore.getState().activeWeather as WeatherType) || 'none'
+  )
 
   const STYLE_OPTS: { id: PlayerOverlay['style']; labelKey: string }[] = [
     { id: 'title',    labelKey: 'overlay.styleTitle' },
@@ -36,13 +38,11 @@ export function OverlayPanel() {
   function handleSend() {
     if (!text.trim()) return
     window.electronAPI?.sendOverlay({ text: text.trim(), position, style })
-    setActive(true)
     setOverlayActive(true)
   }
 
   function handleClear() {
     window.electronAPI?.sendOverlay(null)
-    setActive(false)
     setOverlayActive(false)
   }
 
@@ -113,7 +113,7 @@ export function OverlayPanel() {
           >
             {t('overlay.send')}
           </button>
-          {active && (
+          {overlayActive && (
             <button
               className="btn btn-ghost"
               onClick={handleClear}

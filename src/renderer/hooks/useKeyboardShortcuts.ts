@@ -125,9 +125,26 @@ export function useKeyboardShortcuts() {
         case 'T':
           useUIStore.getState().setSidebarTab('tokens')
           break
-        case 'n': case 'N':
+        case 'n': case 'N': {
           useInitiativeStore.getState().nextTurn()
+          // Broadcast to player window (same as InitiativePanel.handleNextTurn)
+          if (useUIStore.getState().sessionMode !== 'prep') {
+            const { entries } = useInitiativeStore.getState()
+            window.electronAPI?.sendInitiative(
+              entries.map((e) => ({ name: e.combatantName, roll: e.roll, current: e.currentTurn }))
+            )
+            // Persist effect timer changes after round boundary
+            for (const entry of entries) {
+              if (entry.effectTimers != null) {
+                window.electronAPI?.dbRun('UPDATE initiative SET effect_timers = ? WHERE id = ?', [
+                  entry.effectTimers.length > 0 ? JSON.stringify(entry.effectTimers) : null,
+                  entry.id,
+                ])
+              }
+            }
+          }
           break
+        }
 
         case 'Escape':
           useFogStore.getState().clearPendingPoints()
