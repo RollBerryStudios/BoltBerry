@@ -198,6 +198,7 @@ export function Toolbar() {
     useFogStore.getState().clearHistory()
     useUIStore.getState().setWorkMode('prep')
     useUIStore.getState().setSessionMode('prep')
+    useUIStore.getState().clearTokenSelection()
   }
 
   async function handleAtmosphere() {

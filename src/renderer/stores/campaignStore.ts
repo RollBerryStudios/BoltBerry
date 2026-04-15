@@ -27,7 +27,11 @@ export const useCampaignStore = create<CampaignState>((set) => ({
   activeMapId: null,
 
   setCampaigns: (campaigns) => set({ campaigns }),
-  setActiveCampaign: (id) => set({ activeCampaignId: id }),
+  setActiveCampaign: (id) => set(
+    id === null
+      ? { activeCampaignId: null, activeMaps: [], activeMapId: null }
+      : { activeCampaignId: id }
+  ),
   setActiveMaps: (maps) => set({ activeMaps: maps }),
   setActiveMap: (id) => set({ activeMapId: id }),
 
