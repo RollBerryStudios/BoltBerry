@@ -9,6 +9,7 @@ import { registerPlayerBridgeHandlers } from './ipc/player-bridge'
 import { registerAppHandlers } from './ipc/app-handlers'
 import { registerDbHandlers } from './ipc/db-handlers'
 import { registerExportImportHandlers } from './ipc/export-import'
+import { buildAppMenu } from './menu'
 
 // Must be called before app.whenReady()
 protocol.registerSchemesAsPrivileged([
@@ -63,6 +64,10 @@ app.whenReady().then(() => {
   registerAppHandlers()
   registerDbHandlers()
   registerExportImportHandlers()
+
+  // Install the native application menu before opening any windows so
+  // accelerators bind on first paint.
+  buildAppMenu()
 
   // Open DM window
   createDMWindow()

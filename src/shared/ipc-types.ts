@@ -76,6 +76,10 @@ export const IPC = {
   RESCAN_CONTENT_FOLDER: 'app:rescan-content-folder',
   DELETE_MAP_CONFIRM: 'app:delete-map-confirm',
   CHOOSE_FOLDER: 'app:choose-folder',
+
+  // Native application menu
+  SET_MENU_LANGUAGE: 'app:set-menu-language',
+  MENU_ACTION: 'menu:action',
 } as const
 
 // ─── Shared Data Types ─────────────────────────────────────────────────────────────────

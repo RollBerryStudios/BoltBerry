@@ -9,6 +9,7 @@ import {
   setPlayerDisplayId,
 } from '../windows'
 import { getDb, getCustomUserDataPath, setCustomUserDataPath, closeDatabase, initDatabase } from '../db/database'
+import { setMenuLanguage, type MenuLanguage } from '../menu'
 
 const ASSET_EXTENSIONS = {
   map: ['.png', '.jpg', '.jpeg', '.webp'],
@@ -26,6 +27,12 @@ function getAssetDir(type: string): string {
 }
 
 export function registerAppHandlers(): void {
+  // Rebuild the application menu in the given language.
+  ipcMain.handle(IPC.SET_MENU_LANGUAGE, (_event, lang: MenuLanguage) => {
+    setMenuLanguage(lang)
+    return true
+  })
+
   // Monitor list
   ipcMain.handle(IPC.GET_MONITORS, () => getAvailableDisplays())
 

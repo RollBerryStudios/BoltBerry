@@ -12,17 +12,35 @@ import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
 import { useAutoSave } from './hooks/useAutoSave'
 import { usePlayerSync } from './hooks/usePlayerSync'
 import { useAutoAmbient } from './hooks/useAutoAmbient'
+import { useMenuActions } from './hooks/useMenuActions'
+import { showToast } from './components/shared/Toast'
 
 export default function App() {
   const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
   const activeMapId = useCampaignStore((s) => s.activeMapId)
-  const { theme, blackoutActive } = useUIStore()
+  const { theme, blackoutActive, language } = useUIStore()
   const [showShortcuts, setShowShortcuts] = useState(false)
 
   useKeyboardShortcuts()
   useAutoSave()
   usePlayerSync()
   useAutoAmbient()
+
+  useMenuActions({
+    onShowShortcuts: () => setShowShortcuts((v) => !v),
+    onNewCampaign: () => {
+      // StartScreen listens for this and opens its create form.
+      window.dispatchEvent(new CustomEvent('menu:new-campaign'))
+    },
+    onAbout: () => {
+      showToast('BoltBerry — Virtual Tabletop')
+    },
+  })
+
+  // Keep the native menu in the same language as the UI
+  useEffect(() => {
+    window.electronAPI?.setMenuLanguage?.(language)
+  }, [language])
 
   // Persist theme
   useEffect(() => {

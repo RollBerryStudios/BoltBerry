@@ -13,6 +13,12 @@ export function StartScreen() {
   const [duplicating, setDuplicating] = useState<number | null>(null)
   const [error, setError] = useState<string | null>(null)
 
+  useEffect(() => {
+    const onMenuNew = () => setCreating(true)
+    window.addEventListener('menu:new-campaign', onMenuNew)
+    return () => window.removeEventListener('menu:new-campaign', onMenuNew)
+  }, [])
+
   async function handleCreate() {
     if (!newName.trim()) return
     if (!window.electronAPI) {

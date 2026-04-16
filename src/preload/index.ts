@@ -1,4 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron'
+import { IPC } from '../shared/ipc-types'
 import type {
   PlayerFullState,
   FogDelta,
@@ -107,6 +108,15 @@ const dmApi = {
     const handler = () => cb()
     ipcRenderer.on('dm:request-full-sync', handler)
     return () => ipcRenderer.removeListener('dm:request-full-sync', handler)
+  },
+
+  // Native application menu bridge
+  setMenuLanguage: (lang: 'de' | 'en') =>
+    ipcRenderer.invoke(IPC.SET_MENU_LANGUAGE, lang),
+  onMenuAction: (cb: (action: string) => void) => {
+    const handler = (_: Electron.IpcRendererEvent, action: string) => cb(action)
+    ipcRenderer.on(IPC.MENU_ACTION, handler)
+    return () => ipcRenderer.removeListener(IPC.MENU_ACTION, handler)
   },
 }
 
