@@ -7,6 +7,7 @@ import { CampaignView } from './components/CampaignView'
 import { StartScreen } from './components/StartScreen'
 import { SetupWizard } from './components/SetupWizard'
 import { ShortcutOverlay } from './components/ShortcutOverlay'
+import { CommandPalette } from './components/CommandPalette'
 import { ToastProvider } from './components/shared/Toast'
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
 import { useAutoSave } from './hooks/useAutoSave'
@@ -20,6 +21,7 @@ export default function App() {
   const activeMapId = useCampaignStore((s) => s.activeMapId)
   const { theme, blackoutActive, language } = useUIStore()
   const [showShortcuts, setShowShortcuts] = useState(false)
+  const [showCommandPalette, setShowCommandPalette] = useState(false)
 
   useKeyboardShortcuts()
   useAutoSave()
@@ -54,16 +56,25 @@ export default function App() {
     window.electronAPI?.sendBlackout(blackoutActive)
   }, [blackoutActive])
 
-  // Open shortcut overlay on ? or F1
+  // Open shortcut overlay on ? or F1; open command palette on Ctrl/Cmd+K.
+  // Ctrl+K intentionally works even inside inputs — a palette is global by nature.
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
+      if ((e.key === 'k' || e.key === 'K') && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault()
+        setShowCommandPalette((v) => !v)
+        return
+      }
       const tag = (e.target as HTMLElement).tagName
       if (tag === 'INPUT' || tag === 'TEXTAREA') return
       if (e.key === '?' || e.key === 'F1') {
         e.preventDefault()
         setShowShortcuts((v) => !v)
       }
-      if (e.key === 'Escape') setShowShortcuts(false)
+      if (e.key === 'Escape') {
+        setShowShortcuts(false)
+        setShowCommandPalette(false)
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -96,6 +107,7 @@ export default function App() {
         </>
       )}
       {showShortcuts && <ShortcutOverlay onClose={() => setShowShortcuts(false)} />}
+      {showCommandPalette && <CommandPalette onClose={() => setShowCommandPalette(false)} />}
       <ToastProvider />
     </>
   )
