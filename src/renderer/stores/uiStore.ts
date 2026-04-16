@@ -97,8 +97,8 @@ interface UIState {
 export const useUIStore = create<UIState>((set) => ({
   activeTool: 'select',
   sidebarTab: 'tokens',
-  leftSidebarOpen: true,
-  rightSidebarOpen: true,
+  leftSidebarOpen: (() => { try { const v = localStorage.getItem('boltberry-left-sidebar'); return v === null ? true : v !== 'false' } catch { return true } })(),
+  rightSidebarOpen: (() => { try { const v = localStorage.getItem('boltberry-right-sidebar'); return v === null ? true : v !== 'false' } catch { return true } })(),
   playerConnected: false,
   blackoutActive: false,
   appMode: 'map',
@@ -149,8 +149,16 @@ export const useUIStore = create<UIState>((set) => ({
       return updates
     }),
   setSidebarTab: (sidebarTab) => set({ sidebarTab }),
-  toggleLeftSidebar: () => set((s) => ({ leftSidebarOpen: !s.leftSidebarOpen })),
-  toggleRightSidebar: () => set((s) => ({ rightSidebarOpen: !s.rightSidebarOpen })),
+  toggleLeftSidebar: () => set((s) => {
+    const v = !s.leftSidebarOpen
+    try { localStorage.setItem('boltberry-left-sidebar', String(v)) } catch { /* noop */ }
+    return { leftSidebarOpen: v }
+  }),
+  toggleRightSidebar: () => set((s) => {
+    const v = !s.rightSidebarOpen
+    try { localStorage.setItem('boltberry-right-sidebar', String(v)) } catch { /* noop */ }
+    return { rightSidebarOpen: v }
+  }),
   setPlayerConnected: (playerConnected) => set({ playerConnected }),
   toggleBlackout: () =>
     set((s) => ({ blackoutActive: !s.blackoutActive })),

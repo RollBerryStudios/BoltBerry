@@ -262,9 +262,11 @@ export function Toolbar() {
   })
   const showFogTools     = workMode === 'fog-edit' || workMode === 'prep'
   const showDrawTools    = workMode === 'prep' || workMode === 'play' || workMode === 'combat'
-  const showWallTools    = workMode === 'prep' || workMode === 'fog-edit'
+  // Wall/room tools are always visible but dimmed in combat mode (progressive disclosure)
+  const showWallTools    = workMode === 'prep' || workMode === 'fog-edit' || workMode === 'combat'
   const showMeasureTools = workMode !== 'player-preview'
-  const showRoomTools    = workMode === 'prep' || workMode === 'play'
+  const showRoomTools    = workMode === 'prep' || workMode === 'play' || workMode === 'combat'
+  const combatActive     = workMode === 'combat'
 
   const isLive = sessionMode === 'session'
 
@@ -345,6 +347,28 @@ export function Toolbar() {
           </div>
         )}
       </div>
+
+      {/* ── Combat mode indicator ───────────────────────────────────────── */}
+      {combatActive && (
+        <div
+          title="Kampfmodus aktiv — Wand- und Raumwerkzeuge sind deaktiviert"
+          style={{
+            padding: '2px 8px',
+            borderRadius: 'var(--radius)',
+            background: 'rgba(239, 68, 68, 0.15)',
+            border: '1px solid rgba(239, 68, 68, 0.45)',
+            color: '#ef4444',
+            fontSize: 'var(--text-xs)',
+            fontWeight: 700,
+            letterSpacing: '0.06em',
+            flexShrink: 0,
+            whiteSpace: 'nowrap',
+            userSelect: 'none',
+          }}
+        >
+          ⚔ KAMPF AKTIV
+        </div>
+      )}
 
       {/* Token count badge */}
       {tokenCount > 0 && (
@@ -442,23 +466,33 @@ export function Toolbar() {
       )}
 
       {showWallTools && (
-        <ToolGroup
-          tools={WALL_TOOLS}
-          activeTool={activeTool}
-          groupIcon="🧱"
-          groupLabelKey="toolbar.tools.wallGroup"
-          onSelect={handleToolClick}
-        />
+        <div
+          style={combatActive ? { opacity: 0.35, pointerEvents: 'none' } : undefined}
+          title={combatActive ? 'Im Kampfmodus nicht verfügbar' : undefined}
+        >
+          <ToolGroup
+            tools={WALL_TOOLS}
+            activeTool={activeTool}
+            groupIcon="🧱"
+            groupLabelKey="toolbar.tools.wallGroup"
+            onSelect={handleToolClick}
+          />
+        </div>
       )}
 
       {showRoomTools && (
-        <ToolGroup
-          tools={ROOM_TOOLS}
-          activeTool={activeTool}
-          groupIcon="🏠"
-          groupLabelKey="toolbar.tools.roomGroup"
-          onSelect={handleToolClick}
-        />
+        <div
+          style={combatActive ? { opacity: 0.35, pointerEvents: 'none' } : undefined}
+          title={combatActive ? 'Im Kampfmodus nicht verfügbar' : undefined}
+        >
+          <ToolGroup
+            tools={ROOM_TOOLS}
+            activeTool={activeTool}
+            groupIcon="🏠"
+            groupLabelKey="toolbar.tools.roomGroup"
+            onSelect={handleToolClick}
+          />
+        </div>
       )}
 
       <button

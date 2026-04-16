@@ -91,10 +91,15 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   const [submenuType, setSubmenuType] = useState<string | null>(null)
   const [rubberBand, setRubberBand] = useState<{ x1: number; y1: number; x2: number; y2: number } | null>(null)
   const [notesEditState, setNotesEditState] = useState<{ tokenId: number; screenX: number; screenY: number; value: string } | null>(null)
+  const [ghostPos, setGhostPos] = useState<{ x: number; y: number; sizePx: number } | null>(null)
 
   // Ref for values read by stable callbacks (avoids recreating closures on every render)
   const latestRef = useRef({ tokens, selectedTokenIds, scale, offsetX, offsetY, gridSnap, map, editName, editHpCurrent, editHpMax, editAc })
   latestRef.current = { tokens, selectedTokenIds, scale, offsetX, offsetY, gridSnap, map, editName, editHpCurrent, editHpMax, editAc }
+
+  // Ref to setGhostPos so stable callbacks can update it without recreating
+  const setGhostPosRef = useRef(setGhostPos)
+  setGhostPosRef.current = setGhostPos
 
   // Guard against rapid double-paste from context menu
   const pasteInProgressRef = useRef(false)
@@ -120,6 +125,25 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     return () => container.removeEventListener('wheel', onWheel)
   }, [closeContextMenu])
 
+  // Close the context menu on Escape or any click outside the menu
+  useEffect(() => {
+    if (!contextMenu.visible) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeContextMenu()
+    }
+    const onMouseDown = (e: MouseEvent) => {
+      const menuEl = document.querySelector('[data-token-context-menu]')
+      if (menuEl && !menuEl.contains(e.target as Node)) closeContextMenu()
+    }
+    window.addEventListener('keydown', onKeyDown)
+    // Use capture so this fires before the Konva/React event tree
+    window.addEventListener('mousedown', onMouseDown, { capture: true })
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+      window.removeEventListener('mousedown', onMouseDown, { capture: true })
+    }
+  }, [contextMenu.visible, closeContextMenu])
+
   const isDraggable = activeTool === 'select'
   const sortedTokens = useMemo(() => [...tokens].sort((a, b) => a.zIndex - b.zIndex), [tokens])
 
@@ -127,12 +151,26 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
 
   // Throttled live-position broadcast during drag (100 ms interval)
   const stableHandleDragMove = useCallback((token: TokenRecord, e: Konva.KonvaEventObject<DragEvent>) => {
+    const { tokens, selectedTokenIds, scale, offsetX, offsetY, gridSnap, map } = latestRef.current
+    const sx = e.target.x()
+    const sy = e.target.y()
+
+    // Ghost snap preview: update snapped position indicator
+    if (gridSnap && map.gridType !== 'none') {
+      const mapX = (sx - offsetX) / scale
+      const mapY = (sy - offsetY) / scale
+      const snappedX = Math.round(mapX / map.gridSize) * map.gridSize
+      const snappedY = Math.round(mapY / map.gridSize) * map.gridSize
+      const sizePx = map.gridSize * token.size * scale
+      setGhostPosRef.current({ x: snappedX * scale + offsetX, y: snappedY * scale + offsetY, sizePx })
+    } else {
+      setGhostPosRef.current(null)
+    }
+
+    // Throttle network broadcast
     const now = Date.now()
     if (now - dragBroadcastLastRef.current < 100) return
     dragBroadcastLastRef.current = now
-    const { tokens, selectedTokenIds, scale, offsetX, offsetY } = latestRef.current
-    const sx = e.target.x()
-    const sy = e.target.y()
     const liveX = (sx - offsetX) / scale
     const liveY = (sy - offsetY) / scale
     const idsToMove = selectedTokenIds.includes(token.id) ? selectedTokenIds : [token.id]
@@ -145,6 +183,9 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   }, [])
 
   const stableHandleDragEnd = useCallback(async (token: TokenRecord, e: Konva.KonvaEventObject<DragEvent>) => {
+    // Clear ghost preview
+    setGhostPosRef.current(null)
+
     const { tokens, selectedTokenIds, scale, offsetX, offsetY, gridSnap, map } = latestRef.current
     const sx = e.target.x()
     const sy = e.target.y()
@@ -355,6 +396,17 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     } catch (err) {
       console.error('[TokenLayer] commitEdit failed:', err)
     }
+    // Sync name to any initiative entries that reference this token
+    const { entries, updateEntry } = useInitiativeStore.getState()
+    entries.forEach((entry) => {
+      if (entry.tokenId === id) {
+        updateEntry(entry.id, { combatantName: name })
+        window.electronAPI?.dbRun(
+          'UPDATE initiative SET combatant_name = ? WHERE id = ?',
+          [name, entry.id]
+        ).catch((err: any) => console.error('[TokenLayer] initiative name sync failed:', err))
+      }
+    })
     setEditingId(null)
   }, [updateToken])
 
@@ -372,6 +424,12 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     const names = idsToDelete.map((did) => tokens.find((t) => t.id === did)?.name ?? 'Token').join(', ')
     const confirmed = await window.electronAPI?.deleteTokenConfirm(names)
     if (!confirmed) return
+
+    // Capture full token data before deletion so undo can re-insert
+    const deletedTokens = idsToDelete
+      .map((did) => tokens.find((t) => t.id === did))
+      .filter(Boolean) as typeof tokens
+
     for (const did of idsToDelete) {
       removeToken(did)
     }
@@ -394,6 +452,47 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     } catch (err) {
       console.error('[TokenLayer] handleDelete failed:', err)
     }
+
+    useUndoStore.getState().pushCommand({
+      id: nextCommandId(),
+      label: deletedTokens.length === 1
+        ? `Delete ${deletedTokens[0].name}`
+        : `Delete ${deletedTokens.length} tokens`,
+      undo: async () => {
+        for (const token of deletedTokens) {
+          try {
+            await window.electronAPI?.dbRun(
+              'INSERT INTO tokens (id, map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name, light_radius, light_color) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+              [token.id, token.mapId, token.name, token.imagePath, token.x, token.y, token.size,
+               token.hpCurrent, token.hpMax, token.visibleToPlayers ? 1 : 0,
+               token.rotation, token.locked ? 1 : 0, token.zIndex, token.markerColor,
+               token.ac, token.notes,
+               token.statusEffects ? JSON.stringify(token.statusEffects) : null,
+               token.faction ?? 'party', token.showName ? 1 : 0,
+               token.lightRadius, token.lightColor]
+            )
+            useTokenStore.getState().addToken(token)
+          } catch (err) {
+            console.error('[TokenLayer] undo delete failed:', err)
+          }
+        }
+        broadcastTokens(useTokenStore.getState().tokens)
+      },
+      redo: async () => {
+        for (const did of idsToDelete) {
+          useTokenStore.getState().removeToken(did)
+        }
+        try {
+          await window.electronAPI?.dbRun(
+            `DELETE FROM tokens WHERE id IN (${idsToDelete.map(() => '?').join(',')})`,
+            idsToDelete
+          )
+        } catch (err) {
+          console.error('[TokenLayer] redo delete failed:', err)
+        }
+        broadcastTokens(useTokenStore.getState().tokens)
+      },
+    })
   }
 
   async function handleDuplicate(token: TokenRecord) {
@@ -699,6 +798,22 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
           )
         })}
 
+        {/* Ghost snap preview — shown during token drag when grid snap is active */}
+        {ghostPos && (
+          <Rect
+            x={ghostPos.x}
+            y={ghostPos.y}
+            width={ghostPos.sizePx}
+            height={ghostPos.sizePx}
+            fill="rgba(47, 107, 255, 0.1)"
+            stroke="rgba(47, 107, 255, 0.45)"
+            strokeWidth={2}
+            dash={[6, 4]}
+            cornerRadius={ghostPos.sizePx / 2}
+            listening={false}
+          />
+        )}
+
         {/* Rubber-band selection rectangle */}
         {rubberBand && (
           <Rect
@@ -723,6 +838,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
               divProps={{ style: { position: 'absolute', top: 0, left: 0, pointerEvents: 'none' } }}
             >
               <div
+                data-token-context-menu
                 style={{
                   position: 'fixed',
                   left: contextMenu.x,
@@ -736,7 +852,6 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                   zIndex: 9999,
                   pointerEvents: 'all',
                 }}
-                onMouseLeave={closeContextMenu}
               >
                 {(() => {
                   const MARKER_COLORS = [

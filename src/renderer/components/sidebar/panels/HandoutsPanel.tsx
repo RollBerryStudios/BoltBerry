@@ -4,6 +4,66 @@ import { useUIStore } from '../../../stores/uiStore'
 import { useImageUrl } from '../../../hooks/useImageUrl'
 import type { HandoutRecord } from '@shared/ipc-types'
 
+// ─── Simple Markdown renderer ─────────────────────────────────────────────────
+// Supports: # headings, **bold**, *italic*, - lists, blank-line paragraphs
+
+function renderMarkdown(text: string): string {
+  const lines = text.split('\n')
+  const htmlLines: string[] = []
+  let inList = false
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i]
+
+    // Headings
+    if (/^### (.+)/.test(line)) {
+      if (inList) { htmlLines.push('</ul>'); inList = false }
+      line = line.replace(/^### (.+)/, '<h4 style="margin:8px 0 4px;font-size:0.9em;color:var(--text-primary)">$1</h4>')
+      htmlLines.push(line); continue
+    }
+    if (/^## (.+)/.test(line)) {
+      if (inList) { htmlLines.push('</ul>'); inList = false }
+      line = line.replace(/^## (.+)/, '<h3 style="margin:10px 0 4px;font-size:1em;color:var(--text-primary)">$1</h3>')
+      htmlLines.push(line); continue
+    }
+    if (/^# (.+)/.test(line)) {
+      if (inList) { htmlLines.push('</ul>'); inList = false }
+      line = line.replace(/^# (.+)/, '<h2 style="margin:12px 0 6px;font-size:1.1em;color:var(--text-primary)">$1</h2>')
+      htmlLines.push(line); continue
+    }
+
+    // List items
+    if (/^[-*] (.+)/.test(line)) {
+      if (!inList) { htmlLines.push('<ul style="margin:4px 0 4px 16px;padding:0;list-style:disc">'); inList = true }
+      line = line.replace(/^[-*] (.+)/, '<li>$1</li>')
+      line = applyInline(line)
+      htmlLines.push(line); continue
+    } else if (inList) {
+      htmlLines.push('</ul>'); inList = false
+    }
+
+    // Blank line → paragraph break
+    if (line.trim() === '') {
+      htmlLines.push('<br/>')
+      continue
+    }
+
+    // Normal paragraph line
+    htmlLines.push('<span>' + applyInline(line) + '</span><br/>')
+  }
+
+  if (inList) htmlLines.push('</ul>')
+  return htmlLines.join('')
+}
+
+function applyInline(text: string): string {
+  // Bold before italic to avoid greedy match issues
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`(.+?)`/g, '<code style="background:var(--bg-overlay);padding:1px 4px;border-radius:3px;font-size:0.9em">$1</code>')
+}
+
 export function HandoutsPanel() {
   const { activeCampaignId } = useCampaignStore()
   const sessionMode = useUIStore((s) => s.sessionMode)
@@ -15,6 +75,7 @@ export function HandoutsPanel() {
   const [addingImagePath, setAddingImagePath] = useState<string | null>(null)
   const [addingImageName, setAddingImageName] = useState('')
   const [isAdding, setIsAdding] = useState(false)
+  const [composeTab, setComposeTab] = useState<'write' | 'preview'>('write')
   const [lightboxId, setLightboxId] = useState<number | null>(null)
   // Only relevant in session mode: which handout is currently shown to players
   const [sentId, setSentId] = useState<number | null>(null)
@@ -94,6 +155,7 @@ export function HandoutsPanel() {
 
   function handleCancelAdding() {
     setIsAdding(false)
+    setComposeTab('write')
     setAddingTitle('')
     setAddingText('')
     setAddingImagePath(null)
@@ -208,14 +270,66 @@ export function HandoutsPanel() {
             onChange={(e) => setAddingTitle(e.target.value)}
             onKeyDown={(e) => { if (e.key === 'Escape') handleCancelAdding() }}
           />
-          <textarea
-            className="input"
-            placeholder="Beschreibung / Notiz (optional)…"
-            value={addingText}
-            onChange={(e) => setAddingText(e.target.value)}
-            rows={3}
-            style={{ resize: 'vertical', fontSize: 'var(--text-sm)' }}
-          />
+
+          {/* Write / Preview tab bar */}
+          <div style={{ display: 'flex', gap: 0, borderBottom: '1px solid var(--border-subtle)' }}>
+            {(['write', 'preview'] as const).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setComposeTab(tab)}
+                style={{
+                  padding: '4px 12px',
+                  background: 'none',
+                  border: 'none',
+                  borderBottom: composeTab === tab ? '2px solid var(--accent-blue)' : '2px solid transparent',
+                  color: composeTab === tab ? 'var(--accent-blue-light)' : 'var(--text-muted)',
+                  cursor: 'pointer',
+                  fontSize: 'var(--text-xs)',
+                  fontWeight: composeTab === tab ? 700 : 400,
+                  marginBottom: -1,
+                  transition: 'color var(--transition)',
+                }}
+              >
+                {tab === 'write' ? '✏ Schreiben' : '👁 Vorschau'}
+              </button>
+            ))}
+            <span style={{ flex: 1 }} />
+            <span style={{ fontSize: 9, color: 'var(--text-muted)', lineHeight: '28px', paddingRight: 4 }}>
+              Markdown
+            </span>
+          </div>
+
+          {composeTab === 'write' ? (
+            <textarea
+              className="input"
+              placeholder="Beschreibung / Notiz (optional)…  Markdown: **fett**, *kursiv*, # Überschrift, - Liste"
+              value={addingText}
+              onChange={(e) => setAddingText(e.target.value)}
+              rows={5}
+              style={{ resize: 'vertical', fontSize: 'var(--text-sm)' }}
+            />
+          ) : (
+            <div style={{
+              minHeight: 96,
+              maxHeight: 300,
+              overflowY: 'auto',
+              padding: '8px 10px',
+              background: 'var(--bg-base)',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: 'var(--radius)',
+              fontSize: 'var(--text-sm)',
+              color: 'var(--text-secondary)',
+              lineHeight: 1.6,
+            }}>
+              {addingText.trim() ? (
+                <div dangerouslySetInnerHTML={{ __html: renderMarkdown(addingText) }} />
+              ) : (
+                <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>
+                  Nichts zu Vorschau — wechsle zu „Schreiben" und gib Text ein.
+                </span>
+              )}
+            </div>
+          )}
 
           {/* Image picker */}
           <button

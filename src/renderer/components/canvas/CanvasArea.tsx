@@ -23,6 +23,7 @@ import { useFogStore } from '../../stores/fogStore'
 import { useWallStore } from '../../stores/wallStore'
 import { useEncounterStore } from '../../stores/encounterStore'
 import { useRoomStore } from '../../stores/roomStore'
+import { useUndoStore, nextCommandId } from '../../stores/undoStore'
 import { useImageUrl } from '../../hooks/useImageUrl'
 import type Konva from 'konva'
 import type { MapRecord, PlayerFullState } from '@shared/ipc-types'
@@ -43,11 +44,47 @@ function broadcastTokensFromCanvas() {
   window.electronAPI?.sendTokenUpdate(visible)
 }
 
+// ─── Layer visibility definitions ─────────────────────────────────────────────
+const LAYER_DEFS: { key: string; label: string; icon: string; canToggle: boolean }[] = [
+  { key: 'map',      label: 'Karte',        icon: '🗺',  canToggle: false },
+  { key: 'fog',      label: 'Nebel',        icon: '🌫',  canToggle: true  },
+  { key: 'tokens',   label: 'Token',        icon: '🪙',  canToggle: true  },
+  { key: 'drawings', label: 'Zeichnungen',  icon: '✏',   canToggle: true  },
+  { key: 'gmPins',   label: 'GM-Pins',      icon: '📌',  canToggle: true  },
+  { key: 'lighting', label: 'Beleuchtung',  icon: '💡',  canToggle: true  },
+  { key: 'walls',    label: 'Wände',        icon: '🧱',  canToggle: true  },
+  { key: 'rooms',    label: 'Räume',        icon: '🏠',  canToggle: true  },
+]
+
+const DEFAULT_LAYER_VISIBILITY: Record<string, boolean> = {
+  map: true, fog: true, tokens: true, drawings: true,
+  gmPins: true, lighting: true, walls: true, rooms: true,
+}
+
 export function CanvasArea() {
   const containerRef = useRef<HTMLDivElement>(null)
   const stageRef = useRef<Konva.Stage>(null)
   const [size, setSize] = useState({ width: 800, height: 600 })
   const [dropHighlight, setDropHighlight] = useState(false)
+  const [layerPanelOpen, setLayerPanelOpen] = useState(false)
+  const [layerVisibility, setLayerVisibility] = useState<Record<string, boolean>>(DEFAULT_LAYER_VISIBILITY)
+  const layerPanelRef = useRef<HTMLDivElement>(null)
+
+  // Close layer panel when clicking outside
+  useEffect(() => {
+    if (!layerPanelOpen) return
+    function handleOutside(e: MouseEvent) {
+      if (layerPanelRef.current && !layerPanelRef.current.contains(e.target as Node)) {
+        setLayerPanelOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleOutside)
+    return () => document.removeEventListener('mousedown', handleOutside)
+  }, [layerPanelOpen])
+
+  function toggleLayer(key: string) {
+    setLayerVisibility((prev) => ({ ...prev, [key]: !prev[key] }))
+  }
 
   const activeTool = useUIStore((s) => s.activeTool)
   const blackoutActive = useUIStore((s) => s.blackoutActive)
@@ -193,29 +230,37 @@ export function CanvasArea() {
         [activeMapId, file.name.replace(/\.[^.]+$/, ''), result.path, x, y]
       )
 
-      useTokenStore.getState().addToken({
+      const droppedToken = {
         id: dbResult.lastInsertRowid,
         mapId: activeMapId,
         name: file.name.replace(/\.[^.]+$/, ''),
         imagePath: result.path,
         x, y,
-        size: 1,
-        hpCurrent: 0,
-        hpMax: 0,
-        visibleToPlayers: true,
-        rotation: 0,
-        locked: false,
-        zIndex: 0,
-        markerColor: null,
-        ac: null,
-        notes: null,
-        statusEffects: null,
-        faction: 'party',
-        showName: true,
-        lightRadius: 0,
-        lightColor: '#ffcc44',
-      })
+        size: 1, hpCurrent: 0, hpMax: 0, visibleToPlayers: true,
+        rotation: 0, locked: false, zIndex: 0, markerColor: null,
+        ac: null, notes: null, statusEffects: null,
+        faction: 'party' as const, showName: true, lightRadius: 0, lightColor: '#ffcc44',
+      }
+      useTokenStore.getState().addToken(droppedToken)
       broadcastTokensFromCanvas()
+
+      useUndoStore.getState().pushCommand({
+        id: nextCommandId(),
+        label: `Place ${droppedToken.name}`,
+        undo: async () => {
+          useTokenStore.getState().removeToken(droppedToken.id)
+          await window.electronAPI?.dbRun('DELETE FROM tokens WHERE id = ?', [droppedToken.id])
+          broadcastTokensFromCanvas()
+        },
+        redo: async () => {
+          await window.electronAPI?.dbRun(
+            'INSERT INTO tokens (id, map_id, name, image_path, x, y, faction, show_name) VALUES (?, ?, ?, ?, ?, ?, \'party\', 1)',
+            [droppedToken.id, activeMapId, droppedToken.name, droppedToken.imagePath, droppedToken.x, droppedToken.y]
+          )
+          useTokenStore.getState().addToken(droppedToken)
+          broadcastTokensFromCanvas()
+        },
+      })
       return
     }
 
@@ -235,22 +280,42 @@ export function CanvasArea() {
       const x = shouldSnap ? Math.round(mapPos.x / gridSize) * gridSize : mapPos.x
       const y = shouldSnap ? Math.round(mapPos.y / gridSize) * gridSize : mapPos.y
 
+      const assetName = storedPath.split(/[\\/]/).pop()?.replace(/\.[^.]+$/, '') ?? 'Token'
       const dbResult = await window.electronAPI.dbRun(
         `INSERT INTO tokens (map_id, name, image_path, x, y, faction, show_name) VALUES (?, ?, ?, ?, ?, 'party', 1)`,
-        [activeMapId, storedPath.split(/[\\/]/).pop()?.replace(/\.[^.]+$/, '') ?? 'Token', storedPath, x, y]
+        [activeMapId, assetName, storedPath, x, y]
       )
 
-      useTokenStore.getState().addToken({
+      const assetToken = {
         id: dbResult.lastInsertRowid,
         mapId: activeMapId,
-        name: storedPath.split(/[\\/]/).pop()?.replace(/\.[^.]+$/, '') ?? 'Token',
+        name: assetName,
         imagePath: storedPath,
         x, y,
         size: 1, hpCurrent: 0, hpMax: 0, visibleToPlayers: true, rotation: 0,
         locked: false, zIndex: 0, markerColor: null, ac: null, notes: null, statusEffects: null,
-        faction: 'party', showName: true, lightRadius: 0, lightColor: '#ffcc44',
-      })
+        faction: 'party' as const, showName: true, lightRadius: 0, lightColor: '#ffcc44',
+      }
+      useTokenStore.getState().addToken(assetToken)
       broadcastTokensFromCanvas()
+
+      useUndoStore.getState().pushCommand({
+        id: nextCommandId(),
+        label: `Place ${assetToken.name}`,
+        undo: async () => {
+          useTokenStore.getState().removeToken(assetToken.id)
+          await window.electronAPI?.dbRun('DELETE FROM tokens WHERE id = ?', [assetToken.id])
+          broadcastTokensFromCanvas()
+        },
+        redo: async () => {
+          await window.electronAPI?.dbRun(
+            'INSERT INTO tokens (id, map_id, name, image_path, x, y, faction, show_name) VALUES (?, ?, ?, ?, ?, ?, \'party\', 1)',
+            [assetToken.id, activeMapId, assetToken.name, assetToken.imagePath, assetToken.x, assetToken.y]
+          )
+          useTokenStore.getState().addToken(assetToken)
+          broadcastTokensFromCanvas()
+        },
+      })
     }
   }
 
@@ -426,20 +491,24 @@ export function CanvasArea() {
           />
 
           {/* Layer 2: Fog of War */}
-          <FogLayer
-            mapId={activeMap.id}
-            stageRef={stageRef}
-            canvasSize={size}
-            activeTool={activeTool}
-            gridSize={activeMap.gridSize}
-            playerPreview={workMode === 'player-preview'}
-          />
+          {layerVisibility['fog'] && (
+            <FogLayer
+              mapId={activeMap.id}
+              stageRef={stageRef}
+              canvasSize={size}
+              activeTool={activeTool}
+              gridSize={activeMap.gridSize}
+              playerPreview={workMode === 'player-preview'}
+            />
+          )}
 
           {/* Layer 3: Tokens */}
-          <TokenLayer
-            map={activeMap}
-            stageRef={stageRef}
-          />
+          {layerVisibility['tokens'] && (
+            <TokenLayer
+              map={activeMap}
+              stageRef={stageRef}
+            />
+          )}
 
           {/* Layer 4: Pointer/Ping overlay */}
           <PointerLayer stageRef={stageRef} />
@@ -452,39 +521,49 @@ export function CanvasArea() {
           />
 
           {/* Layer 6: Drawing overlay */}
-          <DrawingLayer
-            stageRef={stageRef}
-            mapId={activeMap.id}
-            gridSize={activeMap.gridSize}
-          />
+          {layerVisibility['drawings'] && (
+            <DrawingLayer
+              stageRef={stageRef}
+              mapId={activeMap.id}
+              gridSize={activeMap.gridSize}
+            />
+          )}
 
           {/* Layer 7: GM pins (DM only) */}
-          <GMPinLayer
-            stageRef={stageRef}
-            mapId={activeMap.id}
-            gridSize={activeMap.gridSize}
-          />
+          {layerVisibility['gmPins'] && (
+            <GMPinLayer
+              stageRef={stageRef}
+              mapId={activeMap.id}
+              gridSize={activeMap.gridSize}
+            />
+          )}
 
           {/* Layer 8: Lighting overlay */}
-          <LightingLayer
-            stageRef={stageRef}
-            mapId={activeMap.id}
-            gridSize={activeMap.gridSize}
-          />
+          {layerVisibility['lighting'] && (
+            <LightingLayer
+              stageRef={stageRef}
+              mapId={activeMap.id}
+              gridSize={activeMap.gridSize}
+            />
+          )}
 
           {/* Layer 9: Walls & doors */}
-          <WallLayer
-            mapId={activeMap.id}
-            stageRef={stageRef}
-            gridSize={activeMap.gridSize}
-          />
+          {layerVisibility['walls'] && (
+            <WallLayer
+              mapId={activeMap.id}
+              stageRef={stageRef}
+              gridSize={activeMap.gridSize}
+            />
+          )}
 
           {/* Layer 10: Rooms */}
-          <RoomLayer
-            mapId={activeMap.id}
-            stageRef={stageRef}
-            gridSize={activeMap.gridSize}
-          />
+          {layerVisibility['rooms'] && (
+            <RoomLayer
+              mapId={activeMap.id}
+              stageRef={stageRef}
+              gridSize={activeMap.gridSize}
+            />
+          )}
 
           {/* Layer 11: Player Eye overlay (hidden tokens + stats) */}
           {(showPlayerEye || workMode === 'player-preview') && activeMap && (
@@ -562,6 +641,127 @@ export function CanvasArea() {
 
       {/* Drawing toolbar */}
       <DrawingToolbar />
+
+      {/* ── Layer visibility panel ─────────────────────────────────────── */}
+      {activeMap && (
+        <div
+          ref={layerPanelRef}
+          style={{
+            position: 'absolute',
+            bottom: showMinimap ? 172 : 12,
+            right: 12,
+            zIndex: 300,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-end',
+            gap: 4,
+          }}
+        >
+          {/* Panel itself */}
+          {layerPanelOpen && (
+            <div style={{
+              background: 'var(--bg-elevated)',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-md)',
+              padding: '8px 0',
+              boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
+              minWidth: 170,
+            }}>
+              <div style={{
+                padding: '2px 12px 6px',
+                fontSize: 9,
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                letterSpacing: '0.1em',
+                color: 'var(--text-muted)',
+                borderBottom: '1px solid var(--border-subtle)',
+                marginBottom: 4,
+              }}>
+                Ebenen
+              </div>
+              {LAYER_DEFS.map((def) => (
+                <button
+                  key={def.key}
+                  onClick={() => def.canToggle && toggleLayer(def.key)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    width: '100%',
+                    padding: '5px 12px',
+                    background: 'none',
+                    border: 'none',
+                    cursor: def.canToggle ? 'pointer' : 'default',
+                    color: layerVisibility[def.key] ? 'var(--text-primary)' : 'var(--text-muted)',
+                    fontSize: 'var(--text-xs)',
+                    textAlign: 'left',
+                    opacity: def.canToggle ? 1 : 0.5,
+                  }}
+                  onMouseEnter={(e) => { if (def.canToggle) e.currentTarget.style.background = 'var(--bg-overlay)' }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = 'none' }}
+                  title={def.canToggle ? (layerVisibility[def.key] ? 'Ebene ausblenden' : 'Ebene einblenden') : 'Immer sichtbar'}
+                >
+                  {/* Visibility dot */}
+                  <span style={{
+                    width: 8, height: 8, borderRadius: '50%', flexShrink: 0,
+                    background: layerVisibility[def.key] ? 'var(--success, #22c55e)' : 'var(--border)',
+                    border: `1px solid ${layerVisibility[def.key] ? 'rgba(34,197,94,0.4)' : 'var(--border)'}`,
+                  }} />
+                  <span style={{ fontSize: 13, minWidth: 18 }}>{def.icon}</span>
+                  <span style={{ flex: 1 }}>{def.label}</span>
+                  {!def.canToggle && (
+                    <span style={{ fontSize: 9, color: 'var(--text-muted)' }}>immer</span>
+                  )}
+                </button>
+              ))}
+              {/* Reset all */}
+              <div style={{ borderTop: '1px solid var(--border-subtle)', marginTop: 4, padding: '4px 12px 0' }}>
+                <button
+                  onClick={() => setLayerVisibility(DEFAULT_LAYER_VISIBILITY)}
+                  style={{
+                    background: 'none', border: 'none', padding: '3px 0',
+                    color: 'var(--text-muted)', fontSize: 'var(--text-xs)',
+                    cursor: 'pointer', width: '100%', textAlign: 'left',
+                  }}
+                >
+                  ↺ Alle einblenden
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Toggle button */}
+          <button
+            onClick={() => setLayerPanelOpen((v) => !v)}
+            title="Ebenen ein-/ausblenden"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 5,
+              padding: '5px 10px',
+              background: layerPanelOpen ? 'var(--bg-elevated)' : 'rgba(13,16,21,0.75)',
+              border: `1px solid ${layerPanelOpen ? 'var(--border)' : 'rgba(255,255,255,0.1)'}`,
+              borderRadius: 'var(--radius)',
+              color: 'var(--text-secondary)',
+              cursor: 'pointer',
+              fontSize: 'var(--text-xs)',
+              fontWeight: 600,
+              backdropFilter: 'blur(8px)',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.4)',
+            }}
+          >
+            <span>◫</span>
+            <span>Ebenen</span>
+            {/* Dot indicator if any layer is hidden */}
+            {Object.entries(layerVisibility).some(([k, v]) => {
+              const def = LAYER_DEFS.find((d) => d.key === k)
+              return def?.canToggle && !v
+            }) && (
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--warning, #f59e00)' }} />
+            )}
+          </button>
+        </div>
+      )}
     </div>
   )
 }
@@ -593,16 +793,53 @@ async function loadMapData(mapId: number, map: MapRecord) {
   useFogStore.getState().clearHistory()
 
   try {
-    // Load tokens
-    const tokenRows = await window.electronAPI.dbQuery<{
-      id: number; map_id: number; name: string; image_path: string | null
-      x: number; y: number; size: number; hp_current: number; hp_max: number
-      visible_to_players: number; rotation: number; locked: number; z_index: number
-      marker_color: string | null; ac: number | null; notes: string | null
-      status_effects: string | null; faction: string; show_name: number
-      light_radius: number; light_color: string
-    }>('SELECT id, map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name, light_radius, light_color FROM tokens WHERE map_id = ?', [mapId])
+    const campaignId = useCampaignStore.getState().activeCampaignId
 
+    // Fire all independent DB queries in parallel for faster map load
+    const [tokenRows, initRows, wallRows, encRows, roomRows, fogRows, drawingRows] = await Promise.all([
+      window.electronAPI.dbQuery<{
+        id: number; map_id: number; name: string; image_path: string | null
+        x: number; y: number; size: number; hp_current: number; hp_max: number
+        visible_to_players: number; rotation: number; locked: number; z_index: number
+        marker_color: string | null; ac: number | null; notes: string | null
+        status_effects: string | null; faction: string; show_name: number
+        light_radius: number; light_color: string
+      }>('SELECT id, map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name, light_radius, light_color FROM tokens WHERE map_id = ?', [mapId]),
+
+      window.electronAPI.dbQuery<{
+        id: number; map_id: number; combatant_name: string; roll: number; current_turn: number; token_id: number | null; effect_timers: string | null; sort_order: number
+      }>('SELECT id, map_id, combatant_name, roll, current_turn, token_id, effect_timers, sort_order FROM initiative WHERE map_id = ? ORDER BY sort_order ASC, roll DESC', [mapId]),
+
+      window.electronAPI.dbQuery<{
+        id: number; map_id: number; x1: number; y1: number; x2: number; y2: number; wall_type: string; door_state: string
+      }>('SELECT id, map_id, x1, y1, x2, y2, wall_type, door_state FROM walls WHERE map_id = ?', [mapId]),
+
+      campaignId
+        ? window.electronAPI.dbQuery<{
+            id: number; campaign_id: number; name: string; template_data: string; notes: string | null; created_at: string
+          }>('SELECT id, campaign_id, name, template_data, notes, created_at FROM encounters WHERE campaign_id = ? ORDER BY created_at DESC', [campaignId])
+        : Promise.resolve([] as any[]),
+
+      window.electronAPI.dbQuery<{
+        id: number; map_id: number; name: string; description: string; polygon: string; visibility: string; encounter_id: number | null; atmosphere_hint: string | null; notes: string | null; color: string; created_at: string
+      }>('SELECT id, map_id, name, description, polygon, visibility, encounter_id, atmosphere_hint, notes, color, created_at FROM rooms WHERE map_id = ?', [mapId]),
+
+      window.electronAPI.dbQuery<{
+        fog_bitmap: string | null; explored_bitmap: string | null
+      }>('SELECT fog_bitmap, explored_bitmap FROM fog_state WHERE map_id = ?', [mapId]).catch((err) => {
+        console.error('[CanvasArea] fog load failed:', err)
+        return [] as any[]
+      }),
+
+      window.electronAPI.dbQuery<{
+        id: number; type: string; points: string; color: string; width: number
+      }>('SELECT id, type, points, color, width FROM drawings WHERE map_id = ? AND synced = 1', [mapId]).catch((err) => {
+        console.error('[CanvasArea] drawings load failed:', err)
+        return [] as any[]
+      }),
+    ])
+
+    // Apply results to stores
     useTokenStore.getState().setTokens(tokenRows.map((r) => ({
       id: r.id,
       mapId: r.map_id,
@@ -627,11 +864,6 @@ async function loadMapData(mapId: number, map: MapRecord) {
       lightColor: r.light_color ?? '#ffcc44',
     })))
 
-    // Load initiative
-    const initRows = await window.electronAPI.dbQuery<{
-      id: number; map_id: number; combatant_name: string; roll: number; current_turn: number; token_id: number | null; effect_timers: string | null; sort_order: number
-    }>('SELECT id, map_id, combatant_name, roll, current_turn, token_id, effect_timers, sort_order FROM initiative WHERE map_id = ? ORDER BY sort_order ASC, roll DESC', [mapId])
-
     useInitiativeStore.getState().setEntries(initRows.map((r) => ({
       id: r.id,
       mapId: r.map_id,
@@ -642,11 +874,6 @@ async function loadMapData(mapId: number, map: MapRecord) {
       effectTimers: r.effect_timers ? JSON.parse(r.effect_timers) : null,
     })))
 
-    // Load walls
-    const wallRows = await window.electronAPI.dbQuery<{
-      id: number; map_id: number; x1: number; y1: number; x2: number; y2: number; wall_type: string; door_state: string
-    }>('SELECT id, map_id, x1, y1, x2, y2, wall_type, door_state FROM walls WHERE map_id = ?', [mapId])
-
     useWallStore.getState().setWalls(wallRows.map((r) => ({
       id: r.id,
       mapId: r.map_id,
@@ -655,12 +882,7 @@ async function loadMapData(mapId: number, map: MapRecord) {
       doorState: r.door_state as any,
     })))
 
-    // Load encounters for this campaign
-    const campaignId = useCampaignStore.getState().activeCampaignId
-    if (campaignId) {
-      const encRows = await window.electronAPI.dbQuery<{
-        id: number; campaign_id: number; name: string; template_data: string; notes: string | null; created_at: string
-      }>('SELECT id, campaign_id, name, template_data, notes, created_at FROM encounters WHERE campaign_id = ? ORDER BY created_at DESC', [campaignId])
+    if (campaignId && encRows.length > 0) {
       useEncounterStore.getState().setEncounters(encRows.map((r) => ({
         id: r.id,
         campaignId: r.campaign_id,
@@ -670,11 +892,6 @@ async function loadMapData(mapId: number, map: MapRecord) {
         createdAt: r.created_at,
       })))
     }
-
-    // Load rooms for this map
-    const roomRows = await window.electronAPI.dbQuery<{
-      id: number; map_id: number; name: string; description: string; polygon: string; visibility: string; encounter_id: number | null; atmosphere_hint: string | null; notes: string | null; color: string; created_at: string
-    }>('SELECT id, map_id, name, description, polygon, visibility, encounter_id, atmosphere_hint, notes, color, created_at FROM rooms WHERE map_id = ?', [mapId])
 
     useRoomStore.getState().setRooms(roomRows.map((r) => ({
       id: r.id,
@@ -690,33 +907,15 @@ async function loadMapData(mapId: number, map: MapRecord) {
       createdAt: r.created_at,
     })))
 
-    // Sync player: send full state
-    let fogBitmap: string | null = null
-    let exploredBitmap: string | null = null
-    try {
-      const fogRows = await window.electronAPI.dbQuery<{
-        fog_bitmap: string | null
-        explored_bitmap: string | null
-      }>('SELECT fog_bitmap, explored_bitmap FROM fog_state WHERE map_id = ?', [mapId])
-      fogBitmap = fogRows[0]?.fog_bitmap ?? null
-      exploredBitmap = fogRows[0]?.explored_bitmap ?? null
-    } catch (err) {
-      console.error('[CanvasArea] fog load failed:', err)
-    }
+    const fogBitmap: string | null = fogRows[0]?.fog_bitmap ?? null
+    const exploredBitmap: string | null = fogRows[0]?.explored_bitmap ?? null
 
-    let playerDrawings: Array<{ id: number; type: string; points: number[]; color: string; width: number }> = []
-    try {
-      const drawingRows = await window.electronAPI.dbQuery<{
-        id: number; type: string; points: string; color: string; width: number
-      }>('SELECT id, type, points, color, width FROM drawings WHERE map_id = ? AND synced = 1', [mapId])
-      playerDrawings = drawingRows.map((r) => {
+    const playerDrawings: Array<{ id: number; type: string; points: number[]; color: string; width: number }> =
+      drawingRows.map((r) => {
         const parsed = JSON.parse(r.points)
         const points = Array.isArray(parsed) ? parsed : (parsed.x != null ? [parsed.x, parsed.y] : [])
         return { id: r.id, type: r.type, points, color: r.color, width: r.width }
       })
-    } catch (err) {
-      console.error('[CanvasArea] drawings load failed:', err)
-    }
 
     const { blackoutActive, appMode, atmosphereImagePath } = useUIStore.getState()
     const syncMode: PlayerFullState['mode'] = blackoutActive
