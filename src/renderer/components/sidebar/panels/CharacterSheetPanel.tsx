@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useCharacterStore, rowToSheet } from '../../../stores/characterStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import type { CharacterSheet, CharacterAttack } from '@shared/ipc-types'
+import { EmptyState } from '../../EmptyState'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -583,12 +584,7 @@ export function CharacterSheetPanel() {
   const activeSheet = sheets.find((s) => s.id === activeSheetId)
 
   if (!activeCampaignId) {
-    return (
-      <div className="empty-state">
-        <div className="empty-state-icon">👤</div>
-        <div className="empty-state-title">{t('characters.noCampaign')}</div>
-      </div>
-    )
+    return <EmptyState icon="👤" title={t('characters.noCampaign')} />
   }
 
   return (
@@ -705,18 +701,16 @@ export function CharacterSheetPanel() {
             onUpdate={(patch) => handleUpdate(activeSheet.id, patch)}
           />
         ) : (
-          <div className="empty-state">
-            <div className="empty-state-icon">👤</div>
-            <div className="empty-state-title">Kein Charakter ausgewählt</div>
-            <div className="empty-state-desc">
-              Wähle einen Charakter aus der Liste oder erstelle einen neuen.
-            </div>
-            {sheets.length === 0 && (
-              <button className="btn btn-secondary" onClick={handleNew} style={{ marginTop: 'var(--sp-2)' }}>
+          <EmptyState
+            icon="👤"
+            title="Kein Charakter ausgewählt"
+            description="Wähle einen Charakter aus der Liste oder erstelle einen neuen."
+            actions={sheets.length === 0 ? (
+              <button className="btn btn-secondary" onClick={handleNew}>
                 {t('characters.newSheet')}
               </button>
-            )}
-          </div>
+            ) : undefined}
+          />
         )}
       </div>
     </div>

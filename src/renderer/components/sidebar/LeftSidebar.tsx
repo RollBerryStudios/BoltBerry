@@ -659,6 +659,8 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
 
   return (
     <div
+      tabIndex={renaming ? -1 : 0}
+      role="button"
       style={{
         display: 'flex', alignItems: 'center', gap: 'var(--sp-2)',
         width: '100%', padding: 'var(--sp-2)',
@@ -671,6 +673,16 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
         marginBottom: 'var(--sp-1)', transition: 'background var(--transition)',
       }}
       onClick={renaming ? undefined : onSelect}
+      onKeyDown={(e) => {
+        if (renaming) return
+        if (e.key === 'F2') {
+          e.preventDefault()
+          setRenaming(true)
+        } else if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onSelect()
+        }
+      }}
       onContextMenu={async (e) => {
         e.preventDefault()
         if (!window.electronAPI || renaming) return

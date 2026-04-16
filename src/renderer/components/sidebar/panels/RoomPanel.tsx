@@ -5,6 +5,7 @@ import { useEncounterStore } from '../../../stores/encounterStore'
 import { useUIStore } from '../../../stores/uiStore'
 import { useMapTransformStore } from '../../../stores/mapTransformStore'
 import { useFogStore } from '../../../stores/fogStore'
+import { EmptyState } from '../../EmptyState'
 import type { RoomVisibility, RoomRecord } from '@shared/ipc-types'
 
 const VISIBILITY_OPTIONS: { value: RoomVisibility; label: string; icon: string }[] = [
@@ -127,13 +128,12 @@ export function RoomPanel() {
 
       <div style={{ flex: 1, overflowY: 'auto' }}>
         {mapRooms.length === 0 ? (
-          <div className="empty-state" style={{ padding: 'var(--sp-6)' }}>
-            <div className="empty-state-icon" style={{ fontSize: 32 }}>🏠</div>
-            <div className="empty-state-title" style={{ fontSize: 'var(--text-sm)' }}>Keine Räume</div>
-            <div className="empty-state-desc" style={{ fontSize: 'var(--text-xs)' }}>
-              Zeichne Räume auf der Karte mit dem Raum-Werkzeug
-            </div>
-          </div>
+          <EmptyState
+            size="sm"
+            icon="🏠"
+            title="Keine Räume"
+            description="Zeichne Räume auf der Karte mit dem Raum-Werkzeug"
+          />
         ) : (
           mapRooms.map((room) => (
             <div

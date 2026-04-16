@@ -83,7 +83,6 @@ export function createPlayerWindow(): BrowserWindow | null {
     title: 'BoltBerry – Spieler',
     backgroundColor: '#000000',
     frame: false,
-    alwaysOnTop: true,
     fullscreen: true,
     webPreferences: {
       preload: preloadPath(),
@@ -94,7 +93,6 @@ export function createPlayerWindow(): BrowserWindow | null {
     },
   })
 
-  // ESC key exits fullscreen on player window
   if (isDev) {
     playerWindow.loadURL(`${RENDERER_URL}/player.html`)
   } else {

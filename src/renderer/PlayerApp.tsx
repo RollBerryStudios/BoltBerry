@@ -53,7 +53,18 @@ export default function PlayerApp() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        document.exitFullscreen?.().catch(() => {})
+        if (e.shiftKey) {
+          window.playerAPI?.closeSelf?.()
+          return
+        }
+        if (document.fullscreenElement) {
+          document.exitFullscreen?.().catch(() => {})
+        } else {
+          window.playerAPI?.closeSelf?.()
+        }
+      } else if ((e.key === 'w' || e.key === 'W') && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault()
+        window.playerAPI?.closeSelf?.()
       }
     }
     window.addEventListener('keydown', onKey)

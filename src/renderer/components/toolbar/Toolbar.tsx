@@ -562,7 +562,7 @@ export function Toolbar() {
       {/* Player window */}
       <button
         className={clsx('tool-btn', playerConnected && 'active')}
-        title={playerConnected ? 'Spielerfenster schließen' : t('toolbar.openPlayerWindow')}
+        title={playerConnected ? 'Spielerfenster schließen (Ctrl+P)' : `${t('toolbar.openPlayerWindow')} (Ctrl+P)`}
         onClick={handlePlayerWindowToggle}
         style={playerConnected ? { color: '#22c55e' } : undefined}
       >
@@ -595,7 +595,7 @@ export function Toolbar() {
       {/* Blackout */}
       <button
         className={clsx('tool-btn', blackoutActive && 'active')}
-        title={t('toolbar.blackout')}
+        title={`${t('toolbar.blackout')} (Ctrl+B)`}
         onClick={toggleBlackout}
         style={blackoutActive ? { color: 'var(--warning)' } : undefined}
       >

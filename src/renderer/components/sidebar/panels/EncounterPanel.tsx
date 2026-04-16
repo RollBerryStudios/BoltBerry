@@ -6,6 +6,7 @@ import { useInitiativeStore } from '../../../stores/initiativeStore'
 import { useWallStore } from '../../../stores/wallStore'
 import { useUIStore } from '../../../stores/uiStore'
 import { showToast } from '../../shared/Toast'
+import { EmptyState } from '../../EmptyState'
 import type { EncounterTemplate, FormationType, DifficultyLevel } from '@shared/ipc-types'
 import {
   getFormationOffsets,
@@ -437,13 +438,12 @@ export function EncounterPanel() {
         )}
 
         {encounters.length === 0 ? (
-          <div className="empty-state" style={{ padding: 'var(--sp-6)' }}>
-            <div className="empty-state-icon" style={{ fontSize: 32 }}>⚔️</div>
-            <div className="empty-state-title" style={{ fontSize: 'var(--text-sm)' }}>Keine Encounter</div>
-            <div className="empty-state-desc" style={{ fontSize: 'var(--text-xs)' }}>
-              Platziere Gegner auf der Karte und speichere sie als Vorlage
-            </div>
-          </div>
+          <EmptyState
+            size="sm"
+            icon="⚔️"
+            title="Keine Encounter"
+            description="Platziere Gegner auf der Karte und speichere sie als Vorlage"
+          />
         ) : (
           encounters.map((enc) => {
             let count = 0

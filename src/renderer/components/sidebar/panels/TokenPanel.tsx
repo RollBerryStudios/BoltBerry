@@ -6,6 +6,7 @@ import { useInitiativeStore } from '../../../stores/initiativeStore'
 import { useImageUrl } from '../../../hooks/useImageUrl'
 import { invalidateImageCache } from '../../../hooks/useImage'
 import { invalidateImageUrlCache } from '../../../hooks/useImageUrl'
+import { EmptyState } from '../../EmptyState'
 import type { TokenRecord } from '@shared/ipc-types'
 
 const LIGHT_COLORS = [
@@ -282,13 +283,12 @@ export function TokenPanel() {
         </div>
 
         {tokens.length === 0 ? (
-          <div className="empty-state" style={{ padding: 'var(--sp-6)' }}>
-            <div className="empty-state-icon" style={{ fontSize: 32 }}>⬤</div>
-            <div className="empty-state-title" style={{ fontSize: 'var(--text-sm)' }}>Keine Token</div>
-            <div className="empty-state-desc" style={{ fontSize: 'var(--text-xs)' }}>
-              Token hinzufügen und auf der Karte platzieren
-            </div>
-          </div>
+          <EmptyState
+            size="sm"
+            icon="⬤"
+            title="Keine Token"
+            description="Token hinzufügen und auf der Karte platzieren"
+          />
         ) : (
           tokens.map((token) => (
             <div

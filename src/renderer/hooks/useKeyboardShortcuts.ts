@@ -11,8 +11,10 @@ import { useAudioStore } from '../stores/audioStore'
 export function useKeyboardShortcuts() {
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
-      const tag = (e.target as HTMLElement).tagName
+      const target = e.target as HTMLElement | null
+      const tag = target?.tagName
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
+      if (target?.isContentEditable) return
 
       // ── Ctrl / Cmd shortcuts ──────────────────────────────────────────────
       if (e.ctrlKey || e.metaKey) {
@@ -119,7 +121,7 @@ export function useKeyboardShortcuts() {
                 }
               }
               if (pastedIds.length > 0) {
-                window.electronAPI?.sendTokens?.(useTokenStore.getState().tokens)
+                window.electronAPI?.sendTokenUpdate?.(useTokenStore.getState().tokens)
                 useUndoStore.getState().pushCommand({
                   id: nextCommandId(),
                   label: `Paste ${pastedIds.length} token${pastedIds.length > 1 ? 's' : ''}`,
@@ -129,11 +131,12 @@ export function useKeyboardShortcuts() {
                       `DELETE FROM tokens WHERE id IN (${pastedIds.map(() => '?').join(',')})`,
                       pastedIds
                     )
-                    window.electronAPI?.sendTokens?.(useTokenStore.getState().tokens)
+                    window.electronAPI?.sendTokenUpdate?.(useTokenStore.getState().tokens)
                   },
                   redo: async () => {
-                    // Re-fetch not possible without stored data — just reload map
-                    window.electronAPI?.reloadMap?.()
+                    // Re-inserting pasted tokens requires re-running the original DB inserts,
+                    // which we don't currently retain. Leaving redo as a no-op keeps the
+                    // undo stack consistent without crashing.
                   },
                 })
               }
@@ -273,7 +276,7 @@ export function useKeyboardShortcuts() {
                   `UPDATE initiative SET token_id = NULL WHERE token_id IN (${ids.map(() => '?').join(',')})`,
                   ids
                 )
-                window.electronAPI?.sendTokens?.(useTokenStore.getState().tokens)
+                window.electronAPI?.sendTokenUpdate?.(useTokenStore.getState().tokens)
               } catch (err) {
                 console.error('[useKeyboardShortcuts] token delete failed:', err)
               }
@@ -300,7 +303,7 @@ export function useKeyboardShortcuts() {
                       console.error('[useKeyboardShortcuts] undo delete failed:', err)
                     }
                   }
-                  window.electronAPI?.sendTokens?.(useTokenStore.getState().tokens)
+                  window.electronAPI?.sendTokenUpdate?.(useTokenStore.getState().tokens)
                 },
                 redo: async () => {
                   for (const id of ids) useTokenStore.getState().removeToken(id)
@@ -309,7 +312,7 @@ export function useKeyboardShortcuts() {
                       `DELETE FROM tokens WHERE id IN (${ids.map(() => '?').join(',')})`,
                       ids
                     )
-                    window.electronAPI?.sendTokens?.(useTokenStore.getState().tokens)
+                    window.electronAPI?.sendTokenUpdate?.(useTokenStore.getState().tokens)
                   } catch (err) {
                     console.error('[useKeyboardShortcuts] redo delete failed:', err)
                   }

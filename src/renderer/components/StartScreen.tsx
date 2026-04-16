@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useCampaignStore } from '../stores/campaignStore'
 import type { Campaign } from '@shared/ipc-types'
 import logoWide from '../assets/boltberry-logo-wide.png'
+import { EmptyState } from './EmptyState'
 
 export function StartScreen() {
   const { t } = useTranslation()
@@ -141,11 +142,12 @@ export function StartScreen() {
         overflow: 'visible',
       }}>
         {campaigns.length === 0 ? (
-          <div className="empty-state" style={{ padding: 'var(--sp-8)' }}>
-            <div className="empty-state-icon">📜</div>
-            <div className="empty-state-title">{t('startScreen.noCampaigns')}</div>
-            <div className="empty-state-desc">{t('startScreen.noCampaignsDesc')}</div>
-          </div>
+          <EmptyState
+            icon="📜"
+            title={t('startScreen.noCampaigns')}
+            description={t('startScreen.noCampaignsDesc')}
+            style={{ padding: 'var(--sp-8)' }}
+          />
         ) : (
           <div>
             <div style={{
@@ -257,6 +259,12 @@ function CampaignRow({
       {/* Main click area */}
       <button
         onClick={renaming ? undefined : onOpen}
+        onKeyDown={(e) => {
+          if (!renaming && e.key === 'F2') {
+            e.preventDefault()
+            setRenaming(true)
+          }
+        }}
         disabled={renaming}
         style={{
           flex: 1,

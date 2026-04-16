@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import { useUIStore } from '../../../stores/uiStore'
 import { useImageUrl } from '../../../hooks/useImageUrl'
+import { EmptyState } from '../../EmptyState'
 import type { HandoutRecord } from '@shared/ipc-types'
 
 // ─── Simple Markdown renderer ─────────────────────────────────────────────────
@@ -378,15 +379,13 @@ export function HandoutsPanel() {
       {/* ── Card grid ───────────────────────────────────────────────────────── */}
       <div style={{ flex: 1, overflowY: 'auto', padding: 'var(--sp-4)' }}>
         {handouts.length === 0 && !isAdding ? (
-          <div className="empty-state">
-            <div className="empty-state-icon">📄</div>
-            <div className="empty-state-title">Keine Handouts</div>
-            <div className="empty-state-desc">
-              {isSession
-                ? 'Bilder und Texte für Spieler vorbereiten und per Klick anzeigen.'
-                : 'Bilder und Texte für die Spielrunde vorbereiten.'}
-            </div>
-          </div>
+          <EmptyState
+            icon="📄"
+            title="Keine Handouts"
+            description={isSession
+              ? 'Bilder und Texte für Spieler vorbereiten und per Klick anzeigen.'
+              : 'Bilder und Texte für die Spielrunde vorbereiten.'}
+          />
         ) : (
           <div style={{
             display: 'grid',

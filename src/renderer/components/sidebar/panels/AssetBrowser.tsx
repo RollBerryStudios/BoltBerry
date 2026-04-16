@@ -3,6 +3,7 @@ import { useCampaignStore } from '../../../stores/campaignStore'
 import { useTokenStore } from '../../../stores/tokenStore'
 import { useMapTransformStore } from '../../../stores/mapTransformStore'
 import { useImageUrl } from '../../../hooks/useImageUrl'
+import { EmptyState } from '../../EmptyState'
 
 interface AssetRow {
   id: number
@@ -145,11 +146,12 @@ export function AssetBrowser() {
       {/* Asset grid */}
       <div style={{ flex: 1, overflowY: 'auto' }}>
         {filtered.length === 0 ? (
-          <div className="empty-state" style={{ padding: 'var(--sp-6)' }}>
-            <div className="empty-state-icon" style={{ fontSize: 28 }}>🗄</div>
-            <div className="empty-state-title" style={{ fontSize: 'var(--text-sm)' }}>Keine Assets</div>
-            <div className="empty-state-desc">Importierte Dateien erscheinen hier</div>
-          </div>
+          <EmptyState
+            size="sm"
+            icon="🗄"
+            title="Keine Assets"
+            description="Importierte Dateien erscheinen hier"
+          />
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--sp-2)' }}>
             {filtered.map((asset) => (

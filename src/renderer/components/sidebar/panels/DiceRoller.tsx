@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react'
+import { EmptyState } from '../../EmptyState'
 
 interface RollResult {
   dice: string
@@ -117,10 +118,7 @@ export function DiceRoller() {
       {/* Roll history */}
       <div style={{ flex: 1, overflowY: 'auto', borderTop: '1px solid var(--border-subtle)' }}>
         {history.length === 0 ? (
-          <div className="empty-state" style={{ padding: 'var(--sp-6)' }}>
-            <div className="empty-state-icon" style={{ fontSize: 32 }}>🎲</div>
-            <div className="empty-state-title" style={{ fontSize: 'var(--text-sm)' }}>Noch kein Wurf</div>
-          </div>
+          <EmptyState size="sm" icon="🎲" title="Noch kein Wurf" />
         ) : (
           history.map((r, i) => (
             <div

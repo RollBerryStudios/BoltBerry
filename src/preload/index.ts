@@ -151,6 +151,7 @@ const playerApi = {
     return () => ipcRenderer.removeListener('player:atmosphere', handler)
   },
   requestFullSync: () => ipcRenderer.send('player:request-sync'),
+  closeSelf: () => ipcRenderer.invoke('app:close-player-window'),
   onPointer: (cb: (pointer: PlayerPointer) => void) => {
     const handler = (_: Electron.IpcRendererEvent, pointer: PlayerPointer) => cb(pointer)
     ipcRenderer.on('player:pointer', handler)

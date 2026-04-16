@@ -25,6 +25,7 @@ import { useEncounterStore } from '../../stores/encounterStore'
 import { useRoomStore } from '../../stores/roomStore'
 import { useUndoStore, nextCommandId } from '../../stores/undoStore'
 import { useImageUrl } from '../../hooks/useImageUrl'
+import { EmptyState } from '../EmptyState'
 import type Konva from 'konva'
 import type { MapRecord, PlayerFullState } from '@shared/ipc-types'
 
@@ -353,18 +354,18 @@ export function CanvasArea() {
           />
         </div>
       ) : !activeMap ? (
-        <div className="empty-state">
-          <div className="empty-state-icon">🗺️</div>
-          <div className="empty-state-title">Keine Karte geladen</div>
-          <div className="empty-state-desc" style={{ maxWidth: 320 }}>
-            <ol style={{ textAlign: 'left', paddingLeft: 20, margin: '8px 0 0', lineHeight: 2 }}>
+        <EmptyState
+          icon="🗺️"
+          title="Keine Karte geladen"
+          description={
+            <ol style={{ textAlign: 'left', paddingLeft: 20, margin: '8px 0 0', lineHeight: 2, maxWidth: 320 }}>
               <li>Öffne die <strong>linke Sidebar</strong> (◧ oben links)</li>
               <li>Klicke auf <strong>🖼 Karte hinzufügen</strong> und wähle ein Bild</li>
               <li>Passe Raster &amp; Felder in den Karteneinstellungen an</li>
               <li>Wechsle in den <strong>▶ Spiel-Modus</strong> und starte die Session</li>
             </ol>
-          </div>
-        </div>
+          }
+        />
       ) : (
         <Stage
           ref={stageRef}
