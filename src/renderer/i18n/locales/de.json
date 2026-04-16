@@ -49,7 +49,7 @@
     "blackout": "⬛ Schwarzbild",
     "round": "⚔️ Runde {{round}} · {{name}}",
     "saving": "💾 Speichert…",
-    "saved": "✓ Gespeichert",
+    "saved": "✓ Alle Änderungen gespeichert",
     "saveError": "⚠ Fehler",
     "lastSaved": "Zuletzt: {{time}}",
     "autosave": "Autosave aktiv",
@@ -58,7 +58,8 @@
     "backup": "⬡ Backup",
     "importTooltip": "Kampagne importieren (ZIP)",
     "exportTooltip": "Kampagne exportieren (ZIP)",
-    "backupTooltip": "Schnell-Backup → ~/Documents/BoltBerry-Backups/"
+    "backupTooltip": "Schnell-Backup → ~/Documents/BoltBerry-Backups/",
+    "savedAt": "✓ Gespeichert · {{time}}"
   },
   "sidebar": {
     "left": {

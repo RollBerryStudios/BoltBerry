@@ -5,7 +5,7 @@ import { useInitiativeStore } from '../stores/initiativeStore'
 import { useTokenStore } from '../stores/tokenStore'
 import { useCampaignStore } from '../stores/campaignStore'
 import { useMapTransformStore } from '../stores/mapTransformStore'
-import { useUndoStore } from '../stores/undoStore'
+import { useUndoStore, nextCommandId } from '../stores/undoStore'
 import { useAudioStore } from '../stores/audioStore'
 
 export function useKeyboardShortcuts() {
@@ -51,6 +51,95 @@ export function useKeyboardShortcuts() {
             e.preventDefault()
             window.electronAPI?.openPlayerWindow()
             return
+          case 'b':
+            // Ctrl+B — toggle blackout (Space is reserved for canvas panning)
+            e.preventDefault()
+            useUIStore.getState().toggleBlackout()
+            return
+          case 'c': {
+            // Ctrl+C — copy selected tokens to clipboard
+            const { selectedTokenIds } = useUIStore.getState()
+            if (selectedTokenIds.length === 0) return
+            e.preventDefault()
+            const tokens = useTokenStore.getState().tokens
+            const selectedTokens = tokens.filter((t) => selectedTokenIds.includes(t.id))
+            if (selectedTokens.length === 0) return
+            const firstX = Math.min(...selectedTokens.map((t) => t.x))
+            const firstY = Math.min(...selectedTokens.map((t) => t.y))
+            useUIStore.getState().setClipboardTokens(selectedTokens.map((t) => ({
+              name: t.name, imagePath: t.imagePath, size: t.size,
+              hpCurrent: t.hpCurrent, hpMax: t.hpMax, faction: t.faction ?? 'party',
+              ac: t.ac, notes: t.notes, statusEffects: t.statusEffects,
+              visibleToPlayers: t.visibleToPlayers, markerColor: t.markerColor,
+              showName: t.showName,
+              offsetX: t.x - firstX, offsetY: t.y - firstY,
+            })))
+            return
+          }
+          case 'v': {
+            // Ctrl+V — paste tokens at visible map center
+            const clipboardTokens = useUIStore.getState().clipboardTokens
+            if (clipboardTokens.length === 0) return
+            const activeMapId = useCampaignStore.getState().activeMapId
+            if (!activeMapId || !window.electronAPI) return
+            e.preventDefault()
+            const activeMap = useCampaignStore.getState().activeMaps.find((m) => m.id === activeMapId)
+            const gridSize = activeMap?.gridSize ?? 50
+            // Paste anchor = current visible map center
+            const { canvasW, canvasH, screenToMap } = useMapTransformStore.getState()
+            const center = screenToMap(canvasW / 2, canvasH / 2)
+            const pastedIds: number[] = []
+            ;(async () => {
+              for (const ct of clipboardTokens) {
+                const newX = Math.round((center.x + ct.offsetX) / gridSize) * gridSize
+                const newY = Math.round((center.y + ct.offsetY) / gridSize) * gridSize
+                try {
+                  const row = await window.electronAPI!.dbRun(
+                    'INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                    [activeMapId, ct.name, ct.imagePath, newX, newY, ct.size,
+                     ct.hpCurrent, ct.hpMax, ct.visibleToPlayers ? 1 : 0,
+                     0, 0, 0, ct.markerColor, ct.ac, ct.notes,
+                     ct.statusEffects ? JSON.stringify(ct.statusEffects) : null,
+                     ct.faction, ct.showName ? 1 : 0]
+                  )
+                  const newToken = {
+                    id: row.lastInsertRowid, mapId: activeMapId,
+                    name: ct.name, imagePath: ct.imagePath,
+                    x: newX, y: newY, size: ct.size,
+                    hpCurrent: ct.hpCurrent, hpMax: ct.hpMax,
+                    visibleToPlayers: ct.visibleToPlayers, rotation: 0, locked: false, zIndex: 0,
+                    markerColor: ct.markerColor, ac: ct.ac, notes: ct.notes,
+                    statusEffects: ct.statusEffects, faction: ct.faction as 'party' | 'enemy' | 'neutral',
+                    showName: ct.showName, lightRadius: 0, lightColor: '#ffcc44',
+                  }
+                  useTokenStore.getState().addToken(newToken)
+                  pastedIds.push(row.lastInsertRowid)
+                } catch (err) {
+                  console.error('[useKeyboardShortcuts] paste token failed:', err)
+                }
+              }
+              if (pastedIds.length > 0) {
+                window.electronAPI?.sendTokens?.(useTokenStore.getState().tokens)
+                useUndoStore.getState().pushCommand({
+                  id: nextCommandId(),
+                  label: `Paste ${pastedIds.length} token${pastedIds.length > 1 ? 's' : ''}`,
+                  undo: async () => {
+                    for (const id of pastedIds) useTokenStore.getState().removeToken(id)
+                    await window.electronAPI?.dbRun(
+                      `DELETE FROM tokens WHERE id IN (${pastedIds.map(() => '?').join(',')})`,
+                      pastedIds
+                    )
+                    window.electronAPI?.sendTokens?.(useTokenStore.getState().tokens)
+                  },
+                  redo: async () => {
+                    // Re-fetch not possible without stored data — just reload map
+                    window.electronAPI?.reloadMap?.()
+                  },
+                })
+              }
+            })()
+            return
+          }
         }
         return
       }
@@ -83,10 +172,8 @@ export function useKeyboardShortcuts() {
 
       // ── Single-key shortcuts ──────────────────────────────────────────────
       switch (e.key) {
-        case ' ':
-          e.preventDefault()
-          useUIStore.getState().toggleBlackout()
-          break
+        // Space is intentionally NOT handled here — it is used by MapLayer for canvas panning.
+        // Blackout is now Ctrl+B.
 
         case 'v': case 'V':
           useUIStore.getState().setActiveTool('select')
@@ -162,13 +249,15 @@ export function useKeyboardShortcuts() {
           if (selectedTokenIds.length > 0) {
             const ids = [...selectedTokenIds]
             const tokens = useTokenStore.getState().tokens
-            const names = ids.map((id) => tokens.find((t) => t.id === id)?.name ?? 'Token').join(', ')
+            // Capture full token records BEFORE deletion so undo can re-insert
+            const deletedTokens = ids.map((id) => tokens.find((t) => t.id === id)).filter(Boolean) as typeof tokens
+            const names = deletedTokens.map((t) => t.name).join(', ')
             window.electronAPI?.deleteTokenConfirm(names).then(async (confirmed) => {
               if (!confirmed) return
               for (const id of ids) {
                 useTokenStore.getState().removeToken(id)
               }
-              // Null out initiative references to deleted tokens (matches TokenLayer behaviour)
+              // Null out initiative references to deleted tokens
               useInitiativeStore.getState().entries.forEach((entry) => {
                 if (entry.tokenId != null && ids.includes(entry.tokenId)) {
                   useInitiativeStore.getState().updateEntry(entry.id, { tokenId: null })
@@ -184,9 +273,48 @@ export function useKeyboardShortcuts() {
                   `UPDATE initiative SET token_id = NULL WHERE token_id IN (${ids.map(() => '?').join(',')})`,
                   ids
                 )
+                window.electronAPI?.sendTokens?.(useTokenStore.getState().tokens)
               } catch (err) {
                 console.error('[useKeyboardShortcuts] token delete failed:', err)
               }
+
+              // Push undo command so Delete key is as undoable as context-menu delete
+              useUndoStore.getState().pushCommand({
+                id: nextCommandId(),
+                label: deletedTokens.length === 1 ? `Delete ${deletedTokens[0].name}` : `Delete ${deletedTokens.length} tokens`,
+                undo: async () => {
+                  for (const token of deletedTokens) {
+                    try {
+                      await window.electronAPI?.dbRun(
+                        'INSERT INTO tokens (id, map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name, light_radius, light_color) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                        [token.id, token.mapId, token.name, token.imagePath, token.x, token.y, token.size,
+                         token.hpCurrent, token.hpMax, token.visibleToPlayers ? 1 : 0,
+                         token.rotation, token.locked ? 1 : 0, token.zIndex, token.markerColor,
+                         token.ac, token.notes,
+                         token.statusEffects ? JSON.stringify(token.statusEffects) : null,
+                         token.faction ?? 'party', token.showName ? 1 : 0,
+                         token.lightRadius, token.lightColor]
+                      )
+                      useTokenStore.getState().addToken(token)
+                    } catch (err) {
+                      console.error('[useKeyboardShortcuts] undo delete failed:', err)
+                    }
+                  }
+                  window.electronAPI?.sendTokens?.(useTokenStore.getState().tokens)
+                },
+                redo: async () => {
+                  for (const id of ids) useTokenStore.getState().removeToken(id)
+                  try {
+                    await window.electronAPI?.dbRun(
+                      `DELETE FROM tokens WHERE id IN (${ids.map(() => '?').join(',')})`,
+                      ids
+                    )
+                    window.electronAPI?.sendTokens?.(useTokenStore.getState().tokens)
+                  } catch (err) {
+                    console.error('[useKeyboardShortcuts] redo delete failed:', err)
+                  }
+                },
+              })
             })
           }
           break

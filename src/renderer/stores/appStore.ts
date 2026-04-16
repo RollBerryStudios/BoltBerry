@@ -21,12 +21,10 @@ export const useAppStore = create<AppState>((set) => ({
     set({ saveState: 'saving' })
   },
   setSaved: () => {
+    // Stay in 'saved' state permanently — no revert to 'idle'.
+    // The StatusBar shows a persistent "Alle Änderungen gespeichert" indicator.
+    if (savedTimer) { clearTimeout(savedTimer); savedTimer = null }
     set({ saveState: 'saved', lastSaved: new Date() })
-    if (savedTimer) clearTimeout(savedTimer)
-    savedTimer = setTimeout(() => {
-      set({ saveState: 'idle' })
-      savedTimer = null
-    }, 2500)
   },
   setSaveError: () => set({ saveState: 'error' }),
 }))

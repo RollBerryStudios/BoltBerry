@@ -21,17 +21,20 @@ export function StatusBar() {
   const saveLabel = (() => {
     switch (saveState) {
       case 'saving': return { text: t('statusBar.saving'), color: 'var(--warning)' }
-      case 'saved':  return { text: t('statusBar.saved'),  color: 'var(--success)' }
-      case 'error':  return { text: t('statusBar.saveError'), color: 'var(--danger)' }
-      default:
+      case 'saved':
+        // Persistent indicator — show time of last save so DM always sees the current state
         return lastSaved
           ? {
-              text: t('statusBar.lastSaved', {
+              text: t('statusBar.savedAt', {
                 time: lastSaved.toLocaleTimeString(i18n.language, { hour: '2-digit', minute: '2-digit' }),
               }),
-              color: 'var(--text-muted)',
+              color: 'var(--success)',
             }
-          : { text: t('statusBar.autosave'), color: 'var(--text-muted)' }
+          : { text: t('statusBar.saved'), color: 'var(--success)' }
+      case 'error':  return { text: t('statusBar.saveError'), color: 'var(--danger)' }
+      default:
+        // idle — no save has completed yet this session
+        return { text: t('statusBar.autosave'), color: 'var(--text-muted)' }
     }
   })()
 
