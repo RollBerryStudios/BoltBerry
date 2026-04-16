@@ -16,6 +16,7 @@ import { PlayerEyeOverlay } from './PlayerEyeOverlay'
 import { PlayerEyeHUD } from './PlayerEyeHUD'
 import { ViewportHUD } from './ViewportHUD'
 import { CombatHUD } from './CombatHUD'
+import { MultiSelectBar } from '../MultiSelectBar'
 import { useUIStore } from '../../stores/uiStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useTokenStore } from '../../stores/tokenStore'
@@ -587,6 +588,9 @@ export function CanvasArea() {
 
       {/* Combat HUD (top-center, combat mode only) */}
       <CombatHUD />
+
+      {/* Multi-select bar (bottom-center, when 2+ tokens selected) */}
+      <MultiSelectBar />
 
       {/* Drop highlight overlay */}
       {dropHighlight && (

@@ -15,6 +15,17 @@
       "endTurn": "End turn"
     }
   },
+  "multiSelect": {
+    "label": "Multi-select actions",
+    "countSelected": "{{count}} tokens selected",
+    "countSelected_one": "{{count}} token selected",
+    "showAll": "Show all",
+    "hideAll": "Hide all",
+    "deleteAll": "Delete all",
+    "clear": "Deselect",
+    "deleteTitle": "Delete tokens",
+    "deleteMessage": "Delete {{count}} selected tokens? This cannot be undone."
+  },
   "palette": {
     "title": "Command Palette",
     "placeholder": "Type a command…",

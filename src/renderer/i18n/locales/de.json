@@ -15,6 +15,17 @@
       "endTurn": "Zug beenden"
     }
   },
+  "multiSelect": {
+    "label": "Mehrfachauswahl-Aktionen",
+    "countSelected": "{{count}} Token ausgewählt",
+    "countSelected_one": "{{count}} Token ausgewählt",
+    "showAll": "Alle zeigen",
+    "hideAll": "Alle verbergen",
+    "deleteAll": "Alle löschen",
+    "clear": "Auswahl aufheben",
+    "deleteTitle": "Token löschen",
+    "deleteMessage": "{{count}} ausgewählte Token löschen? Kann nicht rückgängig gemacht werden."
+  },
   "palette": {
     "title": "Befehlspalette",
     "placeholder": "Befehl eingeben…",
