@@ -6,6 +6,9 @@ export default defineConfig({
     environment: 'node',
     globals: true,
     setupFiles: ['src/__tests__/setup.ts'],
+    // Only run unit tests under src/__tests__; e2e specs use `playwright test`
+    include: ['src/__tests__/**/*.test.ts'],
+    exclude: ['e2e/**', 'node_modules/**'],
   },
   resolve: {
     alias: {
