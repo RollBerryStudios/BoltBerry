@@ -79,6 +79,9 @@
       "gridOff": "✕ Aus"
     },
     "right": {
+      "dockScene": "Szene",
+      "dockContent": "Inhalte",
+      "dockAmbience": "Ambiente",
       "tabTokens": "Token",
       "tabInitiative": "Initiative",
       "tabNotes": "Notizen",

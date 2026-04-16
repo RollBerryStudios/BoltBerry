@@ -150,12 +150,38 @@ html, body {
   overflow: hidden;
 }
 
+/* Resizable layout: 5 columns — left sidebar, left handle, canvas, right handle, right sidebar. */
+.app-layout-resizable {
+  grid-template-areas:
+    "toolbar toolbar toolbar toolbar toolbar"
+    "sidebar-left left-handle canvas right-handle sidebar-right"
+    "statusbar statusbar statusbar statusbar statusbar";
+}
+
 .sidebar-left-collapsed .app-layout {
   grid-template-columns: 0 1fr var(--sidebar-right);
 }
 .sidebar-right-collapsed .app-layout {
   grid-template-columns: var(--sidebar-left) 1fr 0;
 }
+
+/* ─── Resizer handles ────────────────────────────────────────────────────────── */
+.sidebar-resizer {
+  grid-row: 2;
+  width: 4px;
+  cursor: col-resize;
+  background: transparent;
+  position: relative;
+  z-index: 10;
+  transition: background var(--transition);
+  touch-action: none;
+}
+.sidebar-resizer:hover,
+.sidebar-resizer:active {
+  background: var(--accent-blue);
+}
+.sidebar-resizer-left { grid-area: left-handle; }
+.sidebar-resizer-right { grid-area: right-handle; }
 
 /* ─── Toolbar ────────────────────────────────────────────────────────────────── */
 .toolbar {
@@ -230,7 +256,104 @@ html, body {
   margin-bottom: var(--sp-2);
 }
 
-/* ─── Right sidebar tab bar ──────────────────────────────────────────────────── */
+/* ─── Right sidebar: dock strip + accordion ──────────────────────────────────── */
+.sidebar-dock-strip {
+  display: flex;
+  flex-direction: row;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.sidebar-dock-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: var(--sp-2) var(--sp-1);
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+.sidebar-dock-tab .dock-icon { font-size: 16px; line-height: 1; }
+.sidebar-dock-tab .dock-label {
+  font-size: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+.sidebar-dock-tab:hover { color: var(--text-secondary); background: var(--bg-overlay); }
+.sidebar-dock-tab.active {
+  color: var(--accent-blue-light);
+  border-bottom-color: var(--accent-blue);
+  background: var(--accent-blue-dim);
+}
+
+.sidebar-accordion {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+}
+.accordion-item {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--border-subtle);
+  min-height: 0;
+}
+.accordion-item.open {
+  flex: 1;
+  min-height: 0;
+}
+.accordion-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  width: 100%;
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--bg-elevated);
+  border: none;
+  border-left: 3px solid transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-align: left;
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
+  flex-shrink: 0;
+}
+.accordion-header:hover { background: var(--bg-overlay); color: var(--text-primary); }
+.accordion-item.open > .accordion-header {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border-left-color: var(--accent-blue);
+}
+.accordion-icon { font-size: 14px; width: 18px; text-align: center; flex-shrink: 0; }
+.accordion-title { flex: 1; }
+.accordion-chevron {
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.accordion-panel {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Right sidebar tab bar (legacy — kept for compatibility) ─────────────────── */
 .sidebar-tabs {
   display: flex;
   flex-direction: row;

@@ -3,16 +3,39 @@ import i18n from '../i18n'
 
 export type ActiveTool = 'select' | 'fog-rect' | 'fog-polygon' | 'fog-cover' | 'fog-brush' | 'fog-brush-cover' | 'token' | 'atmosphere' | 'pointer' | 'measure-line' | 'measure-circle' | 'measure-cone' | 'draw-freehand' | 'draw-rect' | 'draw-circle' | 'draw-text' | 'wall-draw' | 'wall-door' | 'room'
 export type SidebarTab = 'tokens' | 'initiative' | 'notes' | 'handouts' | 'overlay' | 'audio' | 'dice' | 'encounters' | 'rooms' | 'characters'
+export type SidebarDock = 'scene' | 'content' | 'ambience'
 export type AppMode = 'map' | 'atmosphere' | 'blackout'
 export type SessionMode = 'session' | 'prep'
 export type WorkMode = 'prep' | 'play' | 'combat' | 'player-preview' | 'fog-edit'
 export type AppLanguage = 'de' | 'en'
 
+// Maps each sidebar tab to the dock it belongs to.
+// When setSidebarTab is called, sidebarDock follows automatically.
+export const SIDEBAR_TAB_TO_DOCK: Record<SidebarTab, SidebarDock> = {
+  tokens: 'scene',
+  initiative: 'scene',
+  rooms: 'scene',
+  notes: 'content',
+  handouts: 'content',
+  characters: 'content',
+  encounters: 'content',
+  overlay: 'ambience',
+  audio: 'ambience',
+  dice: 'ambience',
+}
+
+// Min/max widths in px for the resizable sidebars.
+export const SIDEBAR_MIN_WIDTH = 200
+export const SIDEBAR_MAX_WIDTH = 520
+
 interface UIState {
   activeTool: ActiveTool
   sidebarTab: SidebarTab
+  sidebarDock: SidebarDock
   leftSidebarOpen: boolean
   rightSidebarOpen: boolean
+  leftSidebarWidth: number
+  rightSidebarWidth: number
   playerConnected: boolean
   blackoutActive: boolean
   appMode: AppMode
@@ -53,8 +76,11 @@ interface UIState {
   setActiveTool: (tool: ActiveTool) => void
   setWorkMode: (mode: WorkMode) => void
   setSidebarTab: (tab: SidebarTab) => void
+  setSidebarDock: (dock: SidebarDock) => void
   toggleLeftSidebar: () => void
   toggleRightSidebar: () => void
+  setLeftSidebarWidth: (px: number) => void
+  setRightSidebarWidth: (px: number) => void
   setPlayerConnected: (connected: boolean) => void
   toggleBlackout: () => void
   setAppMode: (mode: AppMode) => void
@@ -96,9 +122,12 @@ interface UIState {
 
 export const useUIStore = create<UIState>((set) => ({
   activeTool: 'select',
-  sidebarTab: 'tokens',
+  sidebarTab: (() => { try { const v = localStorage.getItem('boltberry-sidebar-tab') as SidebarTab | null; return v && v in SIDEBAR_TAB_TO_DOCK ? v : 'tokens' } catch { return 'tokens' } })(),
+  sidebarDock: (() => { try { const v = localStorage.getItem('boltberry-sidebar-tab') as SidebarTab | null; return v && v in SIDEBAR_TAB_TO_DOCK ? SIDEBAR_TAB_TO_DOCK[v] : 'scene' } catch { return 'scene' } })(),
   leftSidebarOpen: (() => { try { const v = localStorage.getItem('boltberry-left-sidebar'); return v === null ? true : v !== 'false' } catch { return true } })(),
   rightSidebarOpen: (() => { try { const v = localStorage.getItem('boltberry-right-sidebar'); return v === null ? true : v !== 'false' } catch { return true } })(),
+  leftSidebarWidth: (() => { try { const v = parseInt(localStorage.getItem('boltberry-left-sidebar-width') || '', 10); return Number.isFinite(v) && v >= SIDEBAR_MIN_WIDTH && v <= SIDEBAR_MAX_WIDTH ? v : 240 } catch { return 240 } })(),
+  rightSidebarWidth: (() => { try { const v = parseInt(localStorage.getItem('boltberry-right-sidebar-width') || '', 10); return Number.isFinite(v) && v >= SIDEBAR_MIN_WIDTH && v <= SIDEBAR_MAX_WIDTH ? v : 300 } catch { return 300 } })(),
   playerConnected: false,
   blackoutActive: false,
   appMode: 'map',
@@ -125,30 +154,39 @@ export const useUIStore = create<UIState>((set) => ({
   setWorkMode: (workMode: WorkMode) =>
     set((s) => {
       const updates: Partial<UIState> = { workMode }
+      const setTab = (tab: SidebarTab) => {
+        updates.sidebarTab = tab
+        updates.sidebarDock = SIDEBAR_TAB_TO_DOCK[tab]
+        try { localStorage.setItem('boltberry-sidebar-tab', tab) } catch { /* noop */ }
+      }
       switch (workMode) {
         case 'prep':
           updates.activeTool = 'select'
-          updates.sidebarTab = 'tokens'
+          setTab('tokens')
           break
         case 'play':
           updates.activeTool = 'select'
-          updates.sidebarTab = 'initiative'
+          setTab('initiative')
           break
         case 'combat':
           updates.activeTool = 'select'
-          updates.sidebarTab = 'initiative'
+          setTab('initiative')
           break
         case 'player-preview':
           updates.activeTool = 'pointer'
           break
         case 'fog-edit':
           updates.activeTool = 'fog-brush'
-          updates.sidebarTab = 'tokens'
+          setTab('tokens')
           break
       }
       return updates
     }),
-  setSidebarTab: (sidebarTab) => set({ sidebarTab }),
+  setSidebarTab: (sidebarTab) => {
+    try { localStorage.setItem('boltberry-sidebar-tab', sidebarTab) } catch { /* noop */ }
+    set({ sidebarTab, sidebarDock: SIDEBAR_TAB_TO_DOCK[sidebarTab] })
+  },
+  setSidebarDock: (sidebarDock) => set({ sidebarDock }),
   toggleLeftSidebar: () => set((s) => {
     const v = !s.leftSidebarOpen
     try { localStorage.setItem('boltberry-left-sidebar', String(v)) } catch { /* noop */ }
@@ -159,6 +197,16 @@ export const useUIStore = create<UIState>((set) => ({
     try { localStorage.setItem('boltberry-right-sidebar', String(v)) } catch { /* noop */ }
     return { rightSidebarOpen: v }
   }),
+  setLeftSidebarWidth: (px) => {
+    const clamped = Math.min(SIDEBAR_MAX_WIDTH, Math.max(SIDEBAR_MIN_WIDTH, Math.round(px)))
+    try { localStorage.setItem('boltberry-left-sidebar-width', String(clamped)) } catch { /* noop */ }
+    set({ leftSidebarWidth: clamped })
+  },
+  setRightSidebarWidth: (px) => {
+    const clamped = Math.min(SIDEBAR_MAX_WIDTH, Math.max(SIDEBAR_MIN_WIDTH, Math.round(px)))
+    try { localStorage.setItem('boltberry-right-sidebar-width', String(clamped)) } catch { /* noop */ }
+    set({ rightSidebarWidth: clamped })
+  },
   setPlayerConnected: (playerConnected) => set({ playerConnected }),
   toggleBlackout: () =>
     set((s) => ({ blackoutActive: !s.blackoutActive })),

@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useUIStore, type SidebarTab } from '../../stores/uiStore'
+import { useUIStore, SIDEBAR_TAB_TO_DOCK, type SidebarTab, type SidebarDock } from '../../stores/uiStore'
 import { TokenPanel } from './panels/TokenPanel'
 import { InitiativePanel } from './panels/InitiativePanel'
 import { NotesPanel } from './panels/NotesPanel'
@@ -12,127 +11,125 @@ import { EncounterPanel } from './panels/EncounterPanel'
 import { RoomPanel } from './panels/RoomPanel'
 import { CharacterSheetPanel } from './panels/CharacterSheetPanel'
 
-// Session-critical tabs — always visible in the tab strip
-const PRIMARY_TABS: { id: SidebarTab; labelKey: string; icon: string; shortLabel: string }[] = [
-  { id: 'tokens',     labelKey: 'sidebar.right.tabTokens',     icon: '⬤',  shortLabel: 'Token'   },
-  { id: 'initiative', labelKey: 'sidebar.right.tabInitiative', icon: '⚔️', shortLabel: 'Init'    },
-  { id: 'notes',      labelKey: 'sidebar.right.tabNotes',      icon: '📝', shortLabel: 'Notizen' },
-  { id: 'audio',      labelKey: 'sidebar.right.tabAudio',      icon: '🎵', shortLabel: 'Audio'   },
-  { id: 'handouts',   labelKey: 'sidebar.right.tabHandouts',   icon: '📜', shortLabel: 'Handout' },
-  { id: 'overlay',    labelKey: 'sidebar.right.tabOverlay',    icon: '✦',  shortLabel: 'Overlay' },
-]
+interface SectionDef {
+  id: SidebarTab
+  labelKey: string
+  icon: string
+  render: () => JSX.Element
+}
 
-// Utility tabs — accessible via the "⋯" overflow button
-const OVERFLOW_TABS: { id: SidebarTab; labelKey: string; icon: string; shortLabel: string }[] = [
-  { id: 'dice',       labelKey: 'sidebar.right.tabDice',       icon: '🎲', shortLabel: 'Würfel'   },
-  { id: 'characters', labelKey: 'sidebar.right.tabCharacters', icon: '📋', shortLabel: 'Chars'    },
-  { id: 'encounters', labelKey: 'sidebar.right.tabEncounters', icon: '👾', shortLabel: 'Encounter' },
-  { id: 'rooms',      labelKey: 'sidebar.right.tabRooms',      icon: '🏠', shortLabel: 'Räume'    },
-]
+interface DockDef {
+  id: SidebarDock
+  labelKey: string
+  icon: string
+  sections: SectionDef[]
+}
 
-const ALL_TABS = [...PRIMARY_TABS, ...OVERFLOW_TABS]
+// The three docks group related panels together. Each dock is a tab in the top strip;
+// within a dock, sections behave as an accordion (one open at a time = the current sidebarTab).
+const DOCKS: DockDef[] = [
+  {
+    id: 'scene',
+    labelKey: 'sidebar.right.dockScene',
+    icon: '🗺️',
+    sections: [
+      { id: 'tokens',     labelKey: 'sidebar.right.tabTokens',     icon: '⬤',  render: () => <TokenPanel /> },
+      { id: 'initiative', labelKey: 'sidebar.right.tabInitiative', icon: '⚔️', render: () => <InitiativePanel /> },
+      { id: 'rooms',      labelKey: 'sidebar.right.tabRooms',      icon: '🏠', render: () => <RoomPanel /> },
+    ],
+  },
+  {
+    id: 'content',
+    labelKey: 'sidebar.right.dockContent',
+    icon: '📚',
+    sections: [
+      { id: 'notes',      labelKey: 'sidebar.right.tabNotes',      icon: '📝', render: () => <NotesPanel /> },
+      { id: 'handouts',   labelKey: 'sidebar.right.tabHandouts',   icon: '📜', render: () => <HandoutsPanel /> },
+      { id: 'encounters', labelKey: 'sidebar.right.tabEncounters', icon: '👾', render: () => <EncounterPanel /> },
+      { id: 'characters', labelKey: 'sidebar.right.tabCharacters', icon: '📋', render: () => <CharacterSheetPanel /> },
+    ],
+  },
+  {
+    id: 'ambience',
+    labelKey: 'sidebar.right.dockAmbience',
+    icon: '✦',
+    sections: [
+      { id: 'overlay', labelKey: 'sidebar.right.tabOverlay', icon: '✦',  render: () => <OverlayPanel /> },
+      { id: 'audio',   labelKey: 'sidebar.right.tabAudio',   icon: '🎵', render: () => <AudioPanel /> },
+      { id: 'dice',    labelKey: 'sidebar.right.tabDice',    icon: '🎲', render: () => <DiceRoller /> },
+    ],
+  },
+]
 
 export function RightSidebar() {
   const { t } = useTranslation()
-  const { sidebarTab, setSidebarTab } = useUIStore()
-  const [overflowOpen, setOverflowOpen] = useState(false)
+  const sidebarTab = useUIStore((s) => s.sidebarTab)
+  const sidebarDock = useUIStore((s) => s.sidebarDock)
+  const setSidebarTab = useUIStore((s) => s.setSidebarTab)
+  const setSidebarDock = useUIStore((s) => s.setSidebarDock)
 
-  const activeInOverflow = OVERFLOW_TABS.some((tab) => tab.id === sidebarTab)
+  const currentDock = DOCKS.find((d) => d.id === sidebarDock) ?? DOCKS[0]
+  // If the current sidebarTab doesn't belong to the current dock (e.g. dock switched but no tab
+  // was clicked yet), fall back to the dock's first section as the expanded one.
+  const expandedTab: SidebarTab =
+    SIDEBAR_TAB_TO_DOCK[sidebarTab] === currentDock.id ? sidebarTab : currentDock.sections[0].id
+
+  const handleDockClick = (dockId: SidebarDock) => {
+    if (dockId === sidebarDock) return
+    setSidebarDock(dockId)
+  }
+
+  const handleSectionClick = (sectionId: SidebarTab) => {
+    setSidebarTab(sectionId)
+  }
 
   return (
     <div className="sidebar sidebar-right">
-      {/* ── Tab strip ─────────────────────────────────────────────────────── */}
-      <div className="sidebar-tabs" style={{ position: 'relative' }}>
-        {/* Primary tabs */}
-        {PRIMARY_TABS.map((tab) => (
+      {/* Dock strip — three top-level groupings */}
+      <div className="sidebar-dock-strip">
+        {DOCKS.map((dock) => (
           <button
-            key={tab.id}
-            className={`sidebar-tab${sidebarTab === tab.id ? ' active' : ''}`}
-            title={t(tab.labelKey)}
-            aria-label={t(tab.labelKey)}
-            onClick={() => { setSidebarTab(tab.id); setOverflowOpen(false) }}
+            key={dock.id}
+            className={`sidebar-dock-tab${sidebarDock === dock.id ? ' active' : ''}`}
+            title={t(dock.labelKey)}
+            aria-label={t(dock.labelKey)}
+            onClick={() => handleDockClick(dock.id)}
           >
-            <span className="tab-icon">{tab.icon}</span>
-            <span className="tab-label">{tab.shortLabel}</span>
+            <span className="dock-icon">{dock.icon}</span>
+            <span className="dock-label">{t(dock.labelKey)}</span>
           </button>
         ))}
-
-        {/* Overflow toggle — highlighted when an overflow tab is active */}
-        <button
-          className={`sidebar-tab${activeInOverflow || overflowOpen ? ' active' : ''}`}
-          title={`Weitere Panels: ${OVERFLOW_TABS.map((t) => t.shortLabel).join(', ')}`}
-          aria-label="Weitere Panels"
-          onClick={() => setOverflowOpen((v) => !v)}
-          style={{ minWidth: 44, flexShrink: 0 }}
-        >
-          <span className="tab-icon">{activeInOverflow ? OVERFLOW_TABS.find(t => t.id === sidebarTab)?.icon : '⋯'}</span>
-          <span className="tab-label" style={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <span>{activeInOverflow ? OVERFLOW_TABS.find(t => t.id === sidebarTab)?.shortLabel : 'Mehr'}</span>
-            <span style={{ fontSize: 7, opacity: 0.7 }}>▼</span>
-          </span>
-        </button>
-
-        {/* Overflow dropdown */}
-        {overflowOpen && (
-          <>
-            <div
-              style={{ position: 'fixed', inset: 0, zIndex: 1000 }}
-              onClick={() => setOverflowOpen(false)}
-            />
-            <div style={{
-              position: 'absolute',
-              top: '100%',
-              right: 0,
-              zIndex: 1001,
-              background: 'var(--bg-elevated)',
-              border: '1px solid var(--border)',
-              borderRadius: 'var(--radius)',
-              padding: '4px 0',
-              minWidth: 160,
-              boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
-            }}>
-              {OVERFLOW_TABS.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => { setSidebarTab(tab.id); setOverflowOpen(false) }}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    width: '100%',
-                    padding: '7px 14px',
-                    background: sidebarTab === tab.id ? 'var(--accent-blue-dim)' : 'none',
-                    border: 'none',
-                    borderLeft: sidebarTab === tab.id ? '2px solid var(--accent-blue)' : '2px solid transparent',
-                    color: sidebarTab === tab.id ? 'var(--accent-blue-light)' : 'var(--text-primary)',
-                    cursor: 'pointer',
-                    fontSize: 'var(--text-sm)',
-                    textAlign: 'left',
-                  }}
-                  onMouseEnter={(e) => { if (sidebarTab !== tab.id) e.currentTarget.style.background = 'var(--bg-overlay)' }}
-                  onMouseLeave={(e) => { if (sidebarTab !== tab.id) e.currentTarget.style.background = 'none' }}
-                >
-                  <span style={{ fontSize: 15, width: 20, textAlign: 'center' }}>{tab.icon}</span>
-                  <span>{t(tab.labelKey)}</span>
-                </button>
-              ))}
-            </div>
-          </>
-        )}
       </div>
 
-      {/* ── Panel content ─────────────────────────────────────────────────── */}
-      <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-        {sidebarTab === 'tokens'      && <TokenPanel />}
-        {sidebarTab === 'initiative'  && <InitiativePanel />}
-        {sidebarTab === 'notes'       && <NotesPanel />}
-        {sidebarTab === 'audio'       && <AudioPanel />}
-        {sidebarTab === 'handouts'    && <HandoutsPanel />}
-        {sidebarTab === 'overlay'     && <OverlayPanel />}
-        {sidebarTab === 'dice'        && <DiceRoller />}
-        {sidebarTab === 'characters'  && <CharacterSheetPanel />}
-        {sidebarTab === 'encounters'  && <EncounterPanel />}
-        {sidebarTab === 'rooms'       && <RoomPanel />}
+      {/* Accordion body — sections within the active dock */}
+      <div className="sidebar-accordion">
+        {currentDock.sections.map((section) => {
+          const isOpen = section.id === expandedTab
+          return (
+            <div key={section.id} className={`accordion-item${isOpen ? ' open' : ''}`}>
+              <button
+                className="accordion-header"
+                aria-expanded={isOpen}
+                aria-controls={`panel-${section.id}`}
+                onClick={() => handleSectionClick(section.id)}
+              >
+                <span className="accordion-icon">{section.icon}</span>
+                <span className="accordion-title">{t(section.labelKey)}</span>
+                <span className="accordion-chevron" aria-hidden="true">{isOpen ? '▾' : '▸'}</span>
+              </button>
+              {isOpen && (
+                <div
+                  id={`panel-${section.id}`}
+                  className="accordion-panel"
+                  role="region"
+                  aria-label={t(section.labelKey)}
+                >
+                  {section.render()}
+                </div>
+              )}
+            </div>
+          )
+        })}
       </div>
     </div>
   )
