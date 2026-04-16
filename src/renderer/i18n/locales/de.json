@@ -3,6 +3,18 @@
     "tagline": "Dein lokales Virtual Tabletop",
     "version": "BoltBerry v{{version}}"
   },
+  "canvas": {
+    "hud": {
+      "viewportLabel": "Viewport-Info",
+      "combatLabel": "Kampfstatus",
+      "noGrid": "Kein Raster",
+      "ftSuffix": "ft",
+      "round": "Runde",
+      "currentTurn": "Aktueller Zug",
+      "upNext": "Als Nächstes",
+      "endTurn": "Zug beenden"
+    }
+  },
   "startScreen": {
     "recentlyUsed": "Zuletzt verwendet",
     "noCampaigns": "Noch keine Kampagnen",

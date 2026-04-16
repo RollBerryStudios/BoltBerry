@@ -890,3 +890,119 @@ textarea.input {
   color: var(--text-primary);
   margin-bottom: var(--sp-4);
 }
+
+/* ─── Canvas HUDs ────────────────────────────────────────────────────────────── */
+/* Viewport info chip — bottom-left of canvas. Pointer-inert (pure display). */
+.viewport-hud {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 250;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(13, 16, 21, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  pointer-events: none;
+  user-select: none;
+  max-width: 60%;
+}
+.viewport-hud-map {
+  color: var(--text-primary);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+}
+.viewport-hud-sep { color: var(--text-muted); }
+.viewport-hud-zoom { font-variant-numeric: tabular-nums; color: var(--accent-blue-light); font-weight: 600; }
+.viewport-hud-grid { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+/* Combat HUD — top-center. Visible only in combat work mode. */
+.combat-hud {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 260;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  background: rgba(13, 16, 21, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--accent-blue);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  max-width: 90%;
+  user-select: none;
+}
+.combat-hud-round,
+.combat-hud-turn,
+.combat-hud-next {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.combat-hud-round-label,
+.combat-hud-turn-label,
+.combat-hud-next-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.combat-hud-round-value {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--accent-blue-light);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.combat-hud-turn-name {
+  font-weight: 700;
+  color: var(--accent);
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.combat-hud-next-name {
+  color: var(--text-secondary);
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.combat-hud-divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--border-subtle);
+}
+.combat-hud-btn {
+  background: var(--accent-blue);
+  color: var(--text-inverse, #fff);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  white-space: nowrap;
+}
+.combat-hud-btn:hover { background: var(--accent-blue-light, var(--accent-blue)); transform: translateY(-1px); }
+.combat-hud-btn:active { transform: translateY(0); }

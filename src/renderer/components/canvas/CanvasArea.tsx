@@ -14,6 +14,8 @@ import { WallLayer } from './WallLayer'
 import { RoomLayer } from './RoomLayer'
 import { PlayerEyeOverlay } from './PlayerEyeOverlay'
 import { PlayerEyeHUD } from './PlayerEyeHUD'
+import { ViewportHUD } from './ViewportHUD'
+import { CombatHUD } from './CombatHUD'
 import { useUIStore } from '../../stores/uiStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useTokenStore } from '../../stores/tokenStore'
@@ -579,6 +581,12 @@ export function CanvasArea() {
 
       {/* Player Eye HUD */}
       <PlayerEyeHUD />
+
+      {/* Viewport info chip (bottom-left) */}
+      <ViewportHUD />
+
+      {/* Combat HUD (top-center, combat mode only) */}
+      <CombatHUD />
 
       {/* Drop highlight overlay */}
       {dropHighlight && (
