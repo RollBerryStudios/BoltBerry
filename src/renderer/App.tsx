@@ -15,6 +15,7 @@ import { usePlayerSync } from './hooks/usePlayerSync'
 import { useAutoAmbient } from './hooks/useAutoAmbient'
 import { useMenuActions } from './hooks/useMenuActions'
 import { showToast } from './components/shared/Toast'
+import { flushFogSave } from './components/canvas/FogLayer'
 
 export default function App() {
   const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
@@ -103,6 +104,17 @@ export default function App() {
   // for this session — which is only known after initializeSettings completes.
   useEffect(() => {
     initializeSettings().then(() => loadCampaigns())
+  }, [])
+
+  // Flush any pending debounced saves before the renderer tears down. Today
+  // that's only fog (the ~2 s debounced save); if other debounced saves
+  // appear they should hook into this same handler.
+  useEffect(() => {
+    const onBeforeUnload = () => {
+      try { flushFogSave() } catch { /* never block unload */ }
+    }
+    window.addEventListener('beforeunload', onBeforeUnload)
+    return () => window.removeEventListener('beforeunload', onBeforeUnload)
   }, [])
 
   const { isSetupComplete } = useSettingsStore()

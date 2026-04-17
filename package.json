@@ -39,6 +39,7 @@
     "archiver-utils": "^5.0.2",
     "better-sqlite3": "^11.0.0",
     "clsx": "^2.1.1",
+    "electron-updater": "^6.3.0",
     "i18next": "^26.0.3",
     "immer": "^10.1.1",
     "konva": "^9.3.6",

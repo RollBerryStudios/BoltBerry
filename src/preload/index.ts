@@ -1,4 +1,4 @@
-import { contextBridge, ipcRenderer } from 'electron'
+import { ipcRenderer } from 'electron'
 import { IPC } from '../shared/ipc-types'
 import type {
   PlayerFullState,
@@ -17,7 +17,7 @@ import type {
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
-const dmApi = {
+export const dmApi = {
   // Monitor management
   getMonitors: () => ipcRenderer.invoke('app:get-monitors'),
   setPlayerMonitor: (displayId: number) =>
@@ -121,7 +121,7 @@ const dmApi = {
 }
 
 // ─── Player Window API ────────────────────────────────────────────────────────
-const playerApi = {
+export const playerApi = {
   // Image loading — player window does not get electronAPI, but still needs images
   getImageAsBase64: (path: string) => ipcRenderer.invoke('app:get-image-as-base64', path),
 
@@ -210,13 +210,11 @@ const playerApi = {
 }
 
 
-// Expose only the API appropriate for this window type.
-// The player window passes --boltberry-window-type=player via additionalArguments.
-const isPlayerWindow = process.argv.includes('--boltberry-window-type=player')
-if (!isPlayerWindow) {
-  contextBridge.exposeInMainWorld('electronAPI', dmApi)
-}
-contextBridge.exposeInMainWorld('playerAPI', playerApi)
+// Compatibility shim: the main process no longer targets this file as a
+// preload — it uses preload-dm.ts / preload-player.ts instead, which import
+// `dmApi` / `playerApi` from here and expose only their relevant surface.
+// We intentionally do NOT call `contextBridge.exposeInMainWorld` from this
+// file anymore so that importing it is a pure, side-effect-free operation.
 
 // Type declarations for renderer TypeScript
 export type ElectronAPI = typeof dmApi

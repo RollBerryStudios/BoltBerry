@@ -534,6 +534,39 @@ function loadBitmapToCanvas(dataUrl: string, canvas: HTMLCanvasElement): Promise
 }
 
 let saveTimer: ReturnType<typeof setTimeout> | null = null
+// We stash the inputs needed to commit the save so that if the renderer is
+// tearing down (beforeunload) we can flush synchronously instead of losing
+// the pending 2 s-debounced write. The actual encode+dbRun still needs to
+// run; we just short-circuit the timer.
+let pendingSave: {
+  mapId: number
+  exploredCanvas: HTMLCanvasElement
+  coveredCanvas: HTMLCanvasElement
+} | null = null
+
+function commitFogSave(
+  mapId: number,
+  exploredCanvas: HTMLCanvasElement,
+  coveredCanvas: HTMLCanvasElement,
+) {
+  try {
+    // JPEG (~4× smaller than PNG for typical fog bitmaps)
+    const fogBitmap      = coveredCanvas.toDataURL('image/jpeg', 0.85)
+    const exploredBitmap = exploredCanvas.toDataURL('image/jpeg', 0.85)
+    // Fire-and-forget: the caller may be synchronous (beforeunload) and
+    // can't await. dbRun is an ipcRenderer.invoke — the IPC send itself is
+    // synchronous enough to survive the renderer shutting down.
+    void window.electronAPI?.dbRun(
+      `INSERT INTO fog_state (map_id, fog_bitmap, explored_bitmap) VALUES (?, ?, ?)
+       ON CONFLICT(map_id) DO UPDATE SET
+         fog_bitmap      = excluded.fog_bitmap,
+         explored_bitmap = excluded.explored_bitmap`,
+      [mapId, fogBitmap, exploredBitmap]
+    )
+  } catch (err) {
+    console.error('[FogLayer] commitFogSave failed:', err)
+  }
+}
 
 function saveFogToDb(
   mapId: number,
@@ -541,22 +574,30 @@ function saveFogToDb(
   coveredCanvas: HTMLCanvasElement,
 ) {
   if (saveTimer) clearTimeout(saveTimer)
-  saveTimer = setTimeout(async () => {
-    try {
-      // JPEG (~4× smaller than PNG for typical fog bitmaps)
-      const fogBitmap      = coveredCanvas.toDataURL('image/jpeg', 0.85)
-      const exploredBitmap = exploredCanvas.toDataURL('image/jpeg', 0.85)
-      await window.electronAPI?.dbRun(
-        `INSERT INTO fog_state (map_id, fog_bitmap, explored_bitmap) VALUES (?, ?, ?)
-         ON CONFLICT(map_id) DO UPDATE SET
-           fog_bitmap      = excluded.fog_bitmap,
-           explored_bitmap = excluded.explored_bitmap`,
-        [mapId, fogBitmap, exploredBitmap]
-      )
-    } catch (err) {
-      console.error('[FogLayer] saveFogToDb failed:', err)
-    }
+  pendingSave = { mapId, exploredCanvas, coveredCanvas }
+  saveTimer = setTimeout(() => {
+    const p = pendingSave
+    saveTimer = null
+    pendingSave = null
+    if (!p) return
+    commitFogSave(p.mapId, p.exploredCanvas, p.coveredCanvas)
   }, 2000)
+}
+
+/**
+ * Flush any pending debounced fog save immediately. Intended for
+ * `beforeunload` so we don't lose the last ~2 s of fog edits when the user
+ * quits the app or closes the window.
+ */
+export function flushFogSave(): void {
+  if (saveTimer) {
+    clearTimeout(saveTimer)
+    saveTimer = null
+  }
+  if (!pendingSave) return
+  const { mapId, exploredCanvas, coveredCanvas } = pendingSave
+  pendingSave = null
+  commitFogSave(mapId, exploredCanvas, coveredCanvas)
 }
 
 function sendFogDelta(op: FogOperation) {

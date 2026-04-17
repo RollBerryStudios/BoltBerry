@@ -3,9 +3,16 @@ import { join } from 'path'
 import { pathToFileURL } from 'url'
 import { IPC } from '../shared/ipc-types'
 
-// Resolve preload path relative to the app root (works in both dev and packaged)
-function preloadPath(): string {
-  return join(app.getAppPath(), 'dist/preload/index.js')
+// Preload paths resolved relative to the app root (works in dev + packaged).
+// DM and Player use separate preload bundles so each window only receives the
+// API surface it actually needs — previously keyed on `process.argv` which was
+// fragile and easy to break when window options changed.
+function dmPreloadPath(): string {
+  return join(app.getAppPath(), 'dist/preload/preload-dm.js')
+}
+
+function playerPreloadPath(): string {
+  return join(app.getAppPath(), 'dist/preload/preload-player.js')
 }
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -27,7 +34,7 @@ export function createDMWindow(): BrowserWindow {
     backgroundColor: '#121722',
     show: false,
     webPreferences: {
-      preload: preloadPath(),
+      preload: dmPreloadPath(),
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: true,
@@ -61,7 +68,12 @@ export function createDMWindow(): BrowserWindow {
 
   dmWindow.on('closed', () => {
     dmWindow = null
-    playerWindow?.close()
+    // Guard against the race where the player window was already torn down
+    // (e.g. user closed it manually) — calling .close() on a destroyed
+    // BrowserWindow throws "Object has been destroyed".
+    if (playerWindow && !playerWindow.isDestroyed()) {
+      playerWindow.close()
+    }
     playerWindow = null
   })
 
@@ -70,6 +82,12 @@ export function createDMWindow(): BrowserWindow {
 
 // ─── Player Window ───────────────────────────────────────────────────────────────────
 export function createPlayerWindow(): BrowserWindow | null {
+  // If a player window is already open, focus it instead of creating a new one.
+  if (playerWindow && !playerWindow.isDestroyed()) {
+    playerWindow.focus()
+    return playerWindow
+  }
+
   const displays = screen.getAllDisplays()
 
   // Pick the target display (non-primary if not set)
@@ -93,11 +111,10 @@ export function createPlayerWindow(): BrowserWindow | null {
     frame: false,
     fullscreen: true,
     webPreferences: {
-      preload: preloadPath(),
+      preload: playerPreloadPath(),
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: true,
-      additionalArguments: ['--boltberry-window-type=player'],
     },
   })
 
@@ -118,7 +135,12 @@ export function createPlayerWindow(): BrowserWindow | null {
 
   playerWindow.on('closed', () => {
     playerWindow = null
-    getDMWindow()?.webContents.send(IPC.DM_PLAYER_WINDOW_CLOSED)
+    // The DM window may have been closed first (which cascades into closing
+    // the player). Guard before posting back so we don't crash on shutdown.
+    const dm = getDMWindow()
+    if (dm && !dm.isDestroyed()) {
+      dm.webContents.send(IPC.DM_PLAYER_WINDOW_CLOSED)
+    }
   })
 
   return playerWindow

@@ -10,6 +10,7 @@ import { registerAppHandlers } from './ipc/app-handlers'
 import { registerDbHandlers } from './ipc/db-handlers'
 import { registerExportImportHandlers } from './ipc/export-import'
 import { buildAppMenu } from './menu'
+import { initAutoUpdater } from './updater'
 
 // Must be called before app.whenReady()
 protocol.registerSchemesAsPrivileged([
@@ -92,6 +93,9 @@ app.whenReady().then(() => {
   buildAppMenu()
 
   createDMWindow()
+
+  // Start background update check (no-ops in dev)
+  initAutoUpdater()
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {

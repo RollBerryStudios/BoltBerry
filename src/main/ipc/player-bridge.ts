@@ -16,6 +16,8 @@ import type {
   PlayerWallState,
 } from '../../shared/ipc-types'
 
+let registered = false
+
 /**
  * Validates that a DM-originated message actually comes from the DM window.
  * Returns false (and the handler should return early) if the sender is unexpected.
@@ -37,8 +39,14 @@ function isFromPlayer(event: Electron.IpcMainEvent): boolean {
  * Registers IPC handlers that relay DM -> Player updates.
  * The DM renderer sends these via ipcRenderer.send();
  * main process forwards them to the player window.
+ *
+ * Idempotent: safe to call multiple times — `ipcMain.on` would otherwise
+ * stack duplicate listeners each time, causing duplicate broadcasts.
  */
 export function registerPlayerBridgeHandlers(): void {
+  if (registered) return
+  registered = true
+
   // Full state sync (on player window open / reconnect) — DM -> Player
   ipcMain.on(IPC.PLAYER_FULL_SYNC, (event, state: PlayerFullState) => {
     if (!isFromDM(event)) return
