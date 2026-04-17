@@ -60,6 +60,13 @@ function buildCommands(t: (k: string) => string): Command[] {
     { id: 'panel.handouts',   labelKey: 'palette.openHandouts',   groupKey: 'palette.groupPanels', keywords: 'handouts handout',                     run: () => openTab('handouts') },
     { id: 'panel.encounters', labelKey: 'palette.openEncounters', groupKey: 'palette.groupPanels', keywords: 'encounters begegnungen',               run: () => openTab('encounters') },
     { id: 'panel.characters', labelKey: 'palette.openCharacters', groupKey: 'palette.groupPanels', keywords: 'characters charaktere',                run: () => openTab('characters') },
+    { id: 'panel.library',    labelKey: 'palette.openLibrary',    groupKey: 'palette.groupPanels', keywords: 'bestiary bestiarium library bibliothek monster token srd',
+      run: () => {
+        // Bestiarium is a Workspace tab — exit the map first if needed
+        // so CampaignView is the visible layer that catches the event.
+        useCampaignStore.getState().setActiveMap(null)
+        window.dispatchEvent(new CustomEvent('workspace:open-tab', { detail: 'library' }))
+      } },
     { id: 'panel.audio',      labelKey: 'palette.openAudio',      groupKey: 'palette.groupPanels', keywords: 'audio music sound musik',              run: () => openFloating('audio') },
     { id: 'panel.overlay',    labelKey: 'palette.openOverlay',    groupKey: 'palette.groupPanels', keywords: 'overlay atmosphere weather wetter',    run: () => openFloating('overlay') },
     { id: 'panel.dice',       labelKey: 'palette.openDice',       groupKey: 'palette.groupPanels', keywords: 'dice würfel roll rollen',              run: () => openFloating('dice') },

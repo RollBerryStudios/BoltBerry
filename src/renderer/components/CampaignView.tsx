@@ -63,6 +63,17 @@ export function CampaignView() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeCampaignId])
 
+  // Command-palette → workspace tab deep-link. Lets a DM open the Bestiarium
+  // via Ctrl+K from anywhere in the campaign.
+  useEffect(() => {
+    function onOpenTab(e: Event) {
+      const detail = (e as CustomEvent<Tab>).detail
+      if (TABS.some((tb) => tb.id === detail)) setTab(detail)
+    }
+    window.addEventListener('workspace:open-tab', onOpenTab)
+    return () => window.removeEventListener('workspace:open-tab', onOpenTab)
+  }, [])
+
   async function loadMaps(campaignId: number) {
     if (!window.electronAPI) return
     try {
