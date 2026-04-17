@@ -226,13 +226,13 @@ function buildZip(
   campaignId: number,
   db: ReturnType<typeof getDb>,
   filePath: string,
-): Promise<{ success: boolean; error?: string; missingAssets?: string[] }> {
+): Promise<{ success: boolean; error?: string; missingAssets?: string[]; filePath?: string }> {
   return new Promise((resolve) => {
     const output = createWriteStream(filePath)
     const archive = archiver('zip', { zlib: { level: 6 } })
 
-    output.on('close', () => resolve({ success: true, missingAssets: missing.length ? missing : undefined }))
-    archive.on('error', (err) => resolve({ success: false, error: err.message, missingAssets: missing.length ? missing : undefined }))
+    output.on('close', () => resolve({ success: true, filePath, missingAssets: missing.length ? missing : undefined }))
+    archive.on('error', (err) => resolve({ success: false, error: err.message, filePath, missingAssets: missing.length ? missing : undefined }))
     archive.pipe(output)
 
     const campaignData = buildCampaignExport(campaignId, db)
