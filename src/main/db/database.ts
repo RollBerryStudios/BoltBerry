@@ -13,6 +13,7 @@ import {
   MIGRATE_V21_TO_V22, MIGRATE_V22_TO_V23, MIGRATE_V23_TO_V24,
   MIGRATE_V24_TO_V25,
 } from './schema'
+import { SRD_MONSTERS } from './srd-monsters'
 
 let db: Database.Database | null = null
 
@@ -124,6 +125,11 @@ export function initDatabase(): Database.Database {
     // *after* migrations — otherwise opening a legacy DB blows up with
     // "no such column" before the migration gets a chance to add it.
     db.exec(CREATE_POST_MIGRATION_INDEXES_SQL)
+
+    // Seed SRD monsters into token_templates. Idempotent via
+    // UNIQUE(source, name) — a user who deleted a seeded row keeps it
+    // gone (INSERT OR IGNORE), which is the right behavior.
+    seedSrdMonsters(db)
   } catch (err) {
     db.close()
     db = null
@@ -136,6 +142,40 @@ export function initDatabase(): Database.Database {
 export function getDb(): Database.Database {
   if (!db) throw new Error('Database not initialized. Call initDatabase() first.')
   return db
+}
+
+// Seeds the D&D 5e SRD creature library into token_templates. Runs on every
+// startup but UNIQUE(source, name) makes the INSERT a no-op for rows that
+// already exist, so user-scoped tweaks (source='user') are never touched.
+// A user who explicitly deleted a seeded row keeps it deleted — we don't
+// re-insert because the WHERE clause on INSERT OR IGNORE matches by UNIQUE.
+function seedSrdMonsters(database: Database.Database) {
+  const stmt = database.prepare(
+    `INSERT OR IGNORE INTO token_templates
+      (category, source, name, image_path, size, hp_max, ac, speed, cr,
+       creature_type, faction, marker_color, notes, stat_block, created_at)
+      VALUES
+      ('monster', 'srd', @name, NULL, @size, @hp_max, @ac, @speed, @cr,
+       @creature_type, @faction, @marker_color, NULL, @stat_block,
+       datetime('now'))`,
+  )
+  const tx = database.transaction((rows: typeof SRD_MONSTERS) => {
+    for (const m of rows) {
+      stmt.run({
+        name: m.name_de,
+        size: m.size,
+        hp_max: m.hp_max,
+        ac: m.ac,
+        speed: m.speed,
+        cr: m.cr,
+        creature_type: m.creature_type,
+        faction: m.faction,
+        marker_color: m.marker_color,
+        stat_block: JSON.stringify(m.stat_block),
+      })
+    }
+  })
+  tx(SRD_MONSTERS)
 }
 
 export function closeDatabase(): void {
