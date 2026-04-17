@@ -110,20 +110,25 @@ export function CanvasArea() {
     return () => unsub?.()
   }, [])
 
-  // Continuous camera sync to player when follow mode is on
+  // Continuous camera sync to player when follow mode is on (rAF-coalesced)
   useEffect(() => {
+    let rafId: number | null = null
     const unsub = useMapTransformStore.subscribe((state, prevState) => {
       if (!useUIStore.getState().cameraFollowDM) return
       if (state.scale !== prevState.scale || state.offsetX !== prevState.offsetX || state.offsetY !== prevState.offsetY) {
-        const { scale, offsetX, offsetY, fitScale, canvasW, canvasH, imgW, imgH } = state
-        if (!fitScale || !canvasW || !canvasH || !imgW || !imgH) return
-        const imageCenterX = (canvasW / 2 - offsetX) / scale
-        const imageCenterY = (canvasH / 2 - offsetY) / scale
-        const relZoom = scale / fitScale
-        window.electronAPI?.sendCameraView({ imageCenterX, imageCenterY, relZoom })
+        if (rafId !== null) cancelAnimationFrame(rafId)
+        rafId = requestAnimationFrame(() => {
+          rafId = null
+          const { scale, offsetX, offsetY, fitScale, canvasW, canvasH, imgW, imgH } = useMapTransformStore.getState()
+          if (!fitScale || !canvasW || !canvasH || !imgW || !imgH) return
+          const imageCenterX = (canvasW / 2 - offsetX) / scale
+          const imageCenterY = (canvasH / 2 - offsetY) / scale
+          const relZoom = scale / fitScale
+          window.electronAPI?.sendCameraView({ imageCenterX, imageCenterY, relZoom })
+        })
       }
     })
-    return () => unsub()
+    return () => { unsub(); if (rafId !== null) cancelAnimationFrame(rafId) }
   }, [])
 
   // Resize observer

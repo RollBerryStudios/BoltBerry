@@ -229,12 +229,20 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
               ctx.beginPath()
               ctx.rect(offsetX, offsetY, w, h)
               ctx.clip()
-              for (let r = 0; r < rows; r++) {
-                for (let c = 0; c < cols; c++) {
-                  ctx.fillStyle = (r + c) % 2 === 0 ? '#2a2a2a' : '#1a1a1a'
-                  ctx.fillRect(offsetX + c * sz, offsetY + r * sz, sz, sz)
-                }
-              }
+              // Create a 2-tile pattern once instead of per-cell fillRect
+              const patternCanvas = document.createElement('canvas')
+              patternCanvas.width = sz * 2
+              patternCanvas.height = sz * 2
+              const pCtx = patternCanvas.getContext('2d')!
+              pCtx.fillStyle = '#2a2a2a'
+              pCtx.fillRect(0, 0, sz, sz)
+              pCtx.fillRect(sz, sz, sz, sz)
+              pCtx.fillStyle = '#1a1a1a'
+              pCtx.fillRect(sz, 0, sz, sz)
+              pCtx.fillRect(0, sz, sz, sz)
+              const pattern = ctx.createPattern(patternCanvas, 'repeat')!
+              ctx.fillStyle = pattern
+              ctx.fillRect(offsetX, offsetY, cols * sz, rows * sz)
               ctx.restore()
             }}
           />

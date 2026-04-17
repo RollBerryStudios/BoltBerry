@@ -483,8 +483,8 @@ function PlayerMapView({
   mapState, tokens, walls, exploredCanvasRef, coveredCanvasRef, fogVersion, width, height, pointer, camera, measure, drawingData, onMapLoaded,
 }: PlayerMapViewProps) {
   const { img: image, imgW: natW, imgH: natH } = useRotatedImage(`file://${mapState.imagePath}`, mapState.rotation ?? 0)
-  const [exploredImg, setExploredImg] = useState<HTMLImageElement | null>(null)
-  const [coveredImg, setCoveredImg]   = useState<HTMLImageElement | null>(null)
+  const [exploredImg, setExploredImg] = useState<HTMLCanvasElement | null>(null)
+  const [coveredImg, setCoveredImg]   = useState<HTMLCanvasElement | null>(null)
   const pointerLayerRef = useRef<Konva.Layer>(null)
   const stageRef = useRef<Konva.Stage>(null)
 
@@ -501,36 +501,16 @@ function PlayerMapView({
     onMapLoaded(natW, natH)
   }, [natW, natH])
 
-  // Convert fog canvases → HTMLImageElement for Konva on each fog change.
+  // Pass fog canvases directly to Konva (no dataURL round-trip).
+  // Konva accepts HTMLCanvasElement as an image prop.
   useEffect(() => {
     const ec = exploredCanvasRef.current
     const cc = coveredCanvasRef.current
 
     if (!ec && !cc) { setExploredImg(null); setCoveredImg(null); return }
 
-    let rafId: number
-    rafId = requestAnimationFrame(() => {
-      let eImg: HTMLImageElement | null = null
-      let cImg: HTMLImageElement | null = null
-      let loaded = 0
-      const target = (ec ? 1 : 0) + (cc ? 1 : 0)
-      const trySetBoth = () => {
-        if (++loaded === target) { setExploredImg(eImg); setCoveredImg(cImg) }
-      }
-
-      if (ec) {
-        const img = new Image()
-        img.onload = () => { eImg = img; trySetBoth() }
-        img.src = ec.toDataURL()
-      }
-      if (cc) {
-        const img = new Image()
-        img.onload = () => { cImg = img; trySetBoth() }
-        img.src = cc.toDataURL()
-      }
-    })
-
-    return () => cancelAnimationFrame(rafId)
+    setExploredImg(ec ?? null)
+    setCoveredImg(cc ?? null)
   }, [fogVersion])
 
   const [animScale, setAnimScale] = useState(1)
@@ -675,12 +655,20 @@ function PlayerMapView({
                 ctx.beginPath()
                 ctx.rect(offX, offY, w, h)
                 ctx.clip()
-                for (let r = 0; r < rows; r++) {
-                  for (let c = 0; c < cols; c++) {
-                    ctx.fillStyle = (r + c) % 2 === 0 ? '#2a2a2a' : '#1a1a1a'
-                    ctx.fillRect(offX + c * sz, offY + r * sz, sz, sz)
-                  }
-                }
+                // Create a 2-tile pattern once instead of per-cell fillRect
+                const patternCanvas = document.createElement('canvas')
+                patternCanvas.width = sz * 2
+                patternCanvas.height = sz * 2
+                const pCtx = patternCanvas.getContext('2d')!
+                pCtx.fillStyle = '#2a2a2a'
+                pCtx.fillRect(0, 0, sz, sz)
+                pCtx.fillRect(sz, sz, sz, sz)
+                pCtx.fillStyle = '#1a1a1a'
+                pCtx.fillRect(sz, 0, sz, sz)
+                pCtx.fillRect(0, sz, sz, sz)
+                const pattern = ctx.createPattern(patternCanvas, 'repeat')!
+                ctx.fillStyle = pattern
+                ctx.fillRect(offX, offY, cols * sz, rows * sz)
                 ctx.restore()
               }}
             />

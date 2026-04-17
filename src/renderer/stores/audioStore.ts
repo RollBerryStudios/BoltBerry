@@ -199,9 +199,13 @@ function pathToUrl(path: string): string {
 // ─── Store ────────────────────────────────────────────────────────────────────
 
 export const useAudioStore = create<AudioState>((set, get) => {
-  // Wire up timeupdate on all channels
+  // Wire up timeupdate on all channels (throttled to avoid excessive store updates)
   for (const ch of ['track1', 'track2', 'combat'] as ChannelId[]) {
+    let lastUpdate = 0
     CH[ch].ontimeupdate = () => {
+      const now = Date.now()
+      if (now - lastUpdate < 500) return
+      lastUpdate = now
       set((s) => ({ [ch]: { ...s[ch as keyof typeof s] as ChannelState, currentTime: CH[ch].currentTime } }))
     }
     CH[ch].onloadedmetadata = () => {

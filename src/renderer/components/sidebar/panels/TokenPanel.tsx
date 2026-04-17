@@ -191,6 +191,8 @@ export function TokenPanel() {
       invalidateImageUrlCache(patch.imagePath)
     }
     try {
+      const cols: string[] = []
+      const vals: any[] = []
       for (const [key, val] of Object.entries(patch)) {
         const col = key.replace(/([A-Z])/g, '_$1').toLowerCase()
         let dbVal: unknown = val
@@ -201,7 +203,12 @@ export function TokenPanel() {
         } else if (val === null || val === undefined) {
           dbVal = null
         }
-        await window.electronAPI?.dbRun(`UPDATE tokens SET ${col} = ? WHERE id = ?`, [dbVal, id])
+        cols.push(`${col} = ?`)
+        vals.push(dbVal)
+      }
+      if (cols.length > 0) {
+        vals.push(id)
+        await window.electronAPI?.dbRun(`UPDATE tokens SET ${cols.join(', ')} WHERE id = ?`, vals)
       }
       broadcastTokensFromPanel()
     } catch (err) {

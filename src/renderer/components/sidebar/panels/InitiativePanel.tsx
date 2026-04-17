@@ -187,15 +187,22 @@ export function InitiativePanel() {
   function handleNextTurn() {
     nextTurn()
     broadcastInitiative()
-    // Persist effect timer changes after round boundary
+    // Persist effect timer changes after round boundary in a single batch
     const { entries } = useInitiativeStore.getState()
+    const batch: { sql: string; params: any[] }[] = []
     for (const entry of entries) {
       if (entry.effectTimers != null) {
-        window.electronAPI?.dbRun('UPDATE initiative SET effect_timers = ? WHERE id = ?', [
-          entry.effectTimers.length > 0 ? JSON.stringify(entry.effectTimers) : null,
-          entry.id,
-        ])
+        batch.push({
+          sql: 'UPDATE initiative SET effect_timers = ? WHERE id = ?',
+          params: [
+            entry.effectTimers.length > 0 ? JSON.stringify(entry.effectTimers) : null,
+            entry.id,
+          ],
+        })
       }
+    }
+    if (batch.length > 0) {
+      window.electronAPI?.dbRunBatch(batch)
     }
   }
 

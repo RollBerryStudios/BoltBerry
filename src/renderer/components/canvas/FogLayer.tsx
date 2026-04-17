@@ -107,11 +107,11 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
       ppCtx.clearRect(0, 0, pp.width, pp.height)
       ppCtx.drawImage(covered, 0, 0)
       // Normalize: any pixel with non-zero alpha → full opacity black
-      const id = ppCtx.getImageData(0, 0, pp.width, pp.height)
-      for (let i = 0; i < id.data.length; i += 4) {
-        if (id.data[i + 3] > 0) { id.data[i] = 0; id.data[i+1] = 0; id.data[i+2] = 0; id.data[i+3] = 255 }
-      }
-      ppCtx.putImageData(id, 0, 0)
+      // Use compositing instead of pixel-by-pixel ImageData scan
+      ppCtx.globalCompositeOperation = 'source-in'
+      ppCtx.fillStyle = '#000000'
+      ppCtx.fillRect(0, 0, pp.width, pp.height)
+      ppCtx.globalCompositeOperation = 'source-over'
       coveredSource = pp
     }
 
