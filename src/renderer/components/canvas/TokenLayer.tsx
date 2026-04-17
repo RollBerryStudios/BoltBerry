@@ -355,18 +355,6 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     closeContextMenu()
   }
 
-  const stableCommitEditHp = useCallback(async (id: number) => {
-    const hpCurrent = parseInt(latestRef.current.editHpCurrent) || 0
-    const hpMax = parseInt(latestRef.current.editHpMax) || 0
-    const prev = useTokenStore.getState().tokens.find((t) => t.id === id)
-    setEditingHpId(null)
-    if (!prev || (prev.hpCurrent === hpCurrent && prev.hpMax === hpMax)) return
-    // Route through handleUpdate so the inline HP edit goes through the
-    // same undo path as quick-damage/heal — a single predictable stack
-    // across every HP mutation.
-    handleUpdate(id, { hpCurrent, hpMax })
-  }, [handleUpdate])
-
   const handleUpdate = useCallback((id: number, updates: Record<string, any>) => {
     // Capture the prior values for each updated key so the action is
     // reversible. Without this, quick-damage in the context menu during
@@ -419,6 +407,18 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
       redo: applyForward,
     })
   }, [updateToken])
+
+  const stableCommitEditHp = useCallback(async (id: number) => {
+    const hpCurrent = parseInt(latestRef.current.editHpCurrent) || 0
+    const hpMax = parseInt(latestRef.current.editHpMax) || 0
+    const prev = useTokenStore.getState().tokens.find((t) => t.id === id)
+    setEditingHpId(null)
+    if (!prev || (prev.hpCurrent === hpCurrent && prev.hpMax === hpMax)) return
+    // Route through handleUpdate so the inline HP edit goes through the
+    // same undo path as quick-damage/heal — a single predictable stack
+    // across every HP mutation.
+    handleUpdate(id, { hpCurrent, hpMax })
+  }, [handleUpdate])
 
   const stableCommitEditAc = useCallback(async (id: number) => {
     const { editAc } = latestRef.current
