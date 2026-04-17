@@ -6,6 +6,7 @@ import { useWallStore } from '../../stores/wallStore'
 import { useUIStore } from '../../stores/uiStore'
 import { useMapTransformStore, screenToMapPure, mapToScreenPure } from '../../stores/mapTransformStore'
 import { useCampaignStore } from '../../stores/campaignStore'
+import { useUndoStore, nextCommandId } from '../../stores/undoStore'
 import type { WallRecord } from '@shared/ipc-types'
 
 interface WallLayerProps {
@@ -121,9 +122,38 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
   async function handleDelete() {
     if (selectedWallId == null) return
     closeContextMenu()
+    // Wall deletion is cheap to click (right-click → Löschen) but hard to
+    // recover from — walls are what drive LOS, so a mistaken delete can
+    // silently reveal hidden rooms to the players. Confirm before acting.
+    const ok = await window.electronAPI?.confirmDialog(
+      'Wand löschen?',
+      'Diese Wand wird entfernt. Sichtbarkeit kann sich für Spieler ändern.',
+    )
+    if (!ok) { setSelectedWallId(null); return }
+    const wallToDelete = walls.find((w) => w.id === selectedWallId)
     removeWall(selectedWallId)
     try {
       await window.electronAPI?.dbRun('DELETE FROM walls WHERE id = ?', [selectedWallId])
+      if (wallToDelete) {
+        const deleted = wallToDelete
+        useUndoStore.getState().pushCommand({
+          id: nextCommandId(),
+          label: 'Delete wall',
+          undo: async () => {
+            const result = await window.electronAPI?.dbRun(
+              'INSERT INTO walls (map_id, x1, y1, x2, y2, wall_type, door_state) VALUES (?, ?, ?, ?, ?, ?, ?)',
+              [deleted.mapId, deleted.x1, deleted.y1, deleted.x2, deleted.y2, deleted.wallType, deleted.doorState],
+            )
+            if (result?.lastInsertRowid) {
+              useWallStore.getState().addWall({ ...deleted, id: result.lastInsertRowid })
+            }
+          },
+          redo: async () => {
+            removeWall(deleted.id)
+            await window.electronAPI?.dbRun('DELETE FROM walls WHERE id = ?', [deleted.id])
+          },
+        })
+      }
     } catch (err) {
       console.error('[WallLayer] delete failed:', err)
     }

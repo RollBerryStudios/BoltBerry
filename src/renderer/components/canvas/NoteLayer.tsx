@@ -158,6 +158,14 @@ export function NoteLayer({ stageRef, mapId }: NoteLayerProps) {
 
   async function handleDeleteNote(id: number) {
     if (!window.electronAPI) return
+    // Note delete is irreversible today — the body is dropped too. Ask
+    // before we drop it. (Follow-up: wire into undo stack so the note
+    // can be restored from a session-local buffer.)
+    const ok = await window.electronAPI.confirmDialog(
+      'Notiz löschen?',
+      'Die Notiz wird dauerhaft entfernt.',
+    )
+    if (!ok) return
     try {
       await window.electronAPI.dbRun('DELETE FROM notes WHERE id = ?', [id])
       setPins((prev) => prev.filter((p) => p.id !== id))

@@ -77,7 +77,8 @@
     "duplicateCampaign": "Kampagne duplizieren",
     "campaignNamePlaceholder": "Kampagnen-Name...",
     "create": "Erstellen",
-    "newCampaign": "+ Neue Kampagne"
+    "newCampaign": "+ Neue Kampagne",
+    "importCampaign": "Kampagne importieren\u2026"
   },
   "toolbar": {
     "leftSidebar": "Linke Sidebar",

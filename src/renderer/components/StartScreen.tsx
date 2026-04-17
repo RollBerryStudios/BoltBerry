@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { formatError } from '../utils/formatError'
 import { useCampaignStore } from '../stores/campaignStore'
 import type { Campaign } from '@shared/ipc-types'
 import logoWide from '../assets/boltberry-logo-wide.png'
@@ -43,7 +44,7 @@ export function StartScreen() {
       setNewName('')
     } catch (err) {
       console.error('[StartScreen] create failed:', err)
-      setError(`Kampagne konnte nicht erstellt werden: ${err}`)
+      setError(`Kampagne konnte nicht erstellt werden: ${formatError(err)}`)
     }
   }
 
@@ -74,7 +75,7 @@ export function StartScreen() {
       removeCampaign(campaign.id)
     } catch (err) {
       console.error('[StartScreen] delete campaign failed:', err)
-      setError(`Löschen fehlgeschlagen: ${err}`)
+      setError(`Löschen fehlgeschlagen: ${formatError(err)}`)
     }
   }
 
@@ -213,13 +214,43 @@ export function StartScreen() {
               <button className="btn btn-ghost" onClick={() => { setCreating(false); setNewName('') }}>✕</button>
             </div>
           ) : (
-            <button
-              className="btn btn-primary"
-              style={{ width: '100%', justifyContent: 'center' }}
-              onClick={() => setCreating(true)}
-            >
-              {t('startScreen.newCampaign')}
-            </button>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)' }}>
+              <button
+                className="btn btn-primary"
+                style={{ width: '100%', justifyContent: 'center' }}
+                onClick={() => setCreating(true)}
+              >
+                {t('startScreen.newCampaign')}
+              </button>
+              {/* Campaign import was previously only reachable via the
+                  command palette — new DMs receiving a shared .boltberry
+                  ZIP had no visible path to it. Surfaced here as a
+                  secondary ghost button so the happy path stays obvious
+                  but the import is one click away. */}
+              <button
+                className="btn btn-ghost"
+                style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--text-xs)' }}
+                onClick={async () => {
+                  if (!window.electronAPI) return
+                  try {
+                    const result = await window.electronAPI.importCampaign()
+                    if (result?.success && result.campaignId) {
+                      const row = await window.electronAPI.dbQuery<Campaign>(
+                        'SELECT id, name, created_at as createdAt, last_opened as lastOpened FROM campaigns WHERE id = ?',
+                        [result.campaignId],
+                      )
+                      if (row[0]) addCampaign(row[0])
+                    } else if (result && !result.success) {
+                      setError(result.error ?? 'Import fehlgeschlagen.')
+                    }
+                  } catch (err) {
+                    setError(`Import fehlgeschlagen: ${formatError(err)}`)
+                  }
+                }}
+              >
+                📥 {t('startScreen.importCampaign', 'Kampagne importieren…')}
+              </button>
+            </div>
           )}
         </div>
       </div>

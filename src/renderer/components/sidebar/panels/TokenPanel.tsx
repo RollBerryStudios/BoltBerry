@@ -87,6 +87,14 @@ export function TokenPanel() {
   const { tokens, addToken, updateToken, removeToken } = useTokenStore()
   const { selectedTokenId, setSelectedToken } = useUIStore()
   const { activeMapId } = useCampaignStore()
+  const [filter, setFilter] = useState('')
+  const filterLower = filter.trim().toLowerCase()
+  // Filter reactively as the DM types. Matches on name only — faction/HP
+  // etc. are visible right next to the name so a single-field substring
+  // filter is enough and keeps the input-affordance minimal.
+  const displayedTokens = filterLower
+    ? tokens.filter((t) => t.name.toLowerCase().includes(filterLower))
+    : tokens
 
   const selected = tokens.find((t) => t.id === selectedTokenId) ?? null
 
@@ -226,8 +234,8 @@ export function TokenPanel() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      {/* Add token button */}
-      <div style={{ padding: 'var(--sp-3) var(--sp-4)', borderBottom: '1px solid var(--border)', flexShrink: 0 }}>
+      {/* Add token button + filter */}
+      <div style={{ padding: 'var(--sp-3) var(--sp-4)', borderBottom: '1px solid var(--border)', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)' }}>
         <button
           className="btn btn-primary"
           style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--text-xs)' }}
@@ -236,6 +244,47 @@ export function TokenPanel() {
         >
           + Token hinzufügen
         </button>
+        {tokens.length > 6 && (
+          <div style={{ position: 'relative' }}>
+            <input
+              type="search"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              placeholder="Token suchen…"
+              style={{
+                width: '100%',
+                padding: '4px 24px 4px 8px',
+                fontSize: 'var(--text-xs)',
+                background: 'var(--bg-elevated)',
+                border: '1px solid var(--border)',
+                borderRadius: 'var(--radius-sm)',
+                color: 'var(--text-primary)',
+                outline: 'none',
+              }}
+            />
+            {filter && (
+              <button
+                onClick={() => setFilter('')}
+                aria-label="Suche zurücksetzen"
+                style={{
+                  position: 'absolute',
+                  right: 4,
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'none',
+                  border: 'none',
+                  color: 'var(--text-muted)',
+                  cursor: 'pointer',
+                  fontSize: 12,
+                  padding: 2,
+                  lineHeight: 1,
+                }}
+              >
+                ×
+              </button>
+            )}
+          </div>
+        )}
       </div>
       {/* Token list */}
       <div style={{ flex: 1, overflowY: 'auto' }}>
@@ -296,8 +345,14 @@ export function TokenPanel() {
             title="Keine Token"
             description="Token hinzufügen und auf der Karte platzieren"
           />
+        ) : displayedTokens.length === 0 ? (
+          <EmptyState
+            icon="🔍"
+            title="Keine Treffer"
+            description={`Kein Token passt zu „${filter}".`}
+          />
         ) : (
-          tokens.map((token) => (
+          displayedTokens.map((token) => (
             <div
               key={token.id}
               onClick={() => setSelectedToken(token.id)}

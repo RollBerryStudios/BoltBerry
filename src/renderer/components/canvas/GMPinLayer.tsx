@@ -3,6 +3,7 @@ import { Layer, Group, Text, Circle, Rect } from 'react-konva'
 import { Html } from 'react-konva-utils'
 import Konva from 'konva'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
+import { useUndoStore, nextCommandId } from '../../stores/undoStore'
 
 interface GMPin {
   id: number
@@ -77,9 +78,34 @@ export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
   }, [])
 
   async function handleDeletePin(id: number) {
+    // Pins are lightweight markers — confirming every delete is annoying.
+    // Instead we make the delete reversible via Ctrl+Z by pushing an undo
+    // entry that re-inserts the row.
+    const pin = pins.find((p) => p.id === id)
+    if (!pin) return
     try {
       await window.electronAPI?.dbRun('DELETE FROM gm_pins WHERE id = ?', [id])
       setPins(prev => prev.filter((p) => p.id !== id))
+      useUndoStore.getState().pushCommand({
+        id: nextCommandId(),
+        label: 'Delete GM pin',
+        undo: async () => {
+          const result = await window.electronAPI?.dbRun(
+            'INSERT INTO gm_pins (map_id, x, y, label, icon, color) VALUES (?, ?, ?, ?, ?, ?)',
+            [mapId, pin.x, pin.y, pin.label, pin.icon, pin.color],
+          )
+          if (result?.lastInsertRowid) {
+            setPins((prev) => [...prev, { ...pin, id: result.lastInsertRowid }])
+          }
+        },
+        redo: async () => {
+          const current = pins.find((p) => p.label === pin.label && p.x === pin.x && p.y === pin.y)
+          if (current) {
+            await window.electronAPI?.dbRun('DELETE FROM gm_pins WHERE id = ?', [current.id])
+            setPins((prev) => prev.filter((p) => p.id !== current.id))
+          }
+        },
+      })
     } catch (err) {
       console.error('[GMPinLayer] delete pin failed:', err)
     }

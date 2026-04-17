@@ -358,26 +358,66 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   const stableCommitEditHp = useCallback(async (id: number) => {
     const hpCurrent = parseInt(latestRef.current.editHpCurrent) || 0
     const hpMax = parseInt(latestRef.current.editHpMax) || 0
-    updateToken(id, { hpCurrent, hpMax })
-    try {
-      await window.electronAPI?.dbRun('UPDATE tokens SET hp_current = ?, hp_max = ? WHERE id = ?', [hpCurrent, hpMax, id])
-      broadcastTokens(useTokenStore.getState().tokens)
-    } catch (err) {
-      console.error('[TokenLayer] commitEditHp failed:', err)
-    }
+    const prev = useTokenStore.getState().tokens.find((t) => t.id === id)
     setEditingHpId(null)
-  }, [updateToken])
+    if (!prev || (prev.hpCurrent === hpCurrent && prev.hpMax === hpMax)) return
+    // Route through handleUpdate so the inline HP edit goes through the
+    // same undo path as quick-damage/heal — a single predictable stack
+    // across every HP mutation.
+    handleUpdate(id, { hpCurrent, hpMax })
+  }, [handleUpdate])
 
   const handleUpdate = useCallback((id: number, updates: Record<string, any>) => {
-    updateToken(id, updates)
-    const cols = Object.keys(updates).map((k) => {
-      const col = k.replace(/([A-Z])/g, '_$1').toLowerCase()
-      return `${col} = ?`
-    }).join(', ')
-    const vals = Object.values(updates).map((v) => typeof v === 'boolean' ? (v ? 1 : 0) : v)
-    window.electronAPI?.dbRun(`UPDATE tokens SET ${cols} WHERE id = ?`, [...vals, id])
-      .then(() => broadcastTokens(useTokenStore.getState().tokens))
-      .catch((err: any) => console.error('[TokenLayer] handleUpdate failed:', err))
+    // Capture the prior values for each updated key so the action is
+    // reversible. Without this, quick-damage in the context menu during
+    // combat (the DM's most-used destructive action) was one-way — a
+    // mis-click couldn't be undone. Every write that routes through
+    // handleUpdate now contributes an undo entry.
+    const token = useTokenStore.getState().tokens.find((t) => t.id === id)
+    if (!token) return
+    const oldValues: Record<string, any> = {}
+    for (const key of Object.keys(updates)) {
+      oldValues[key] = (token as any)[key]
+    }
+
+    const buildSqlParts = (obj: Record<string, any>) => {
+      const cols = Object.keys(obj).map((k) => {
+        const col = k.replace(/([A-Z])/g, '_$1').toLowerCase()
+        return `${col} = ?`
+      }).join(', ')
+      const vals = Object.values(obj).map((v) => typeof v === 'boolean' ? (v ? 1 : 0) : v)
+      return { cols, vals }
+    }
+
+    const applyForward = async () => {
+      updateToken(id, updates)
+      const { cols, vals } = buildSqlParts(updates)
+      try {
+        await window.electronAPI?.dbRun(`UPDATE tokens SET ${cols} WHERE id = ?`, [...vals, id])
+        broadcastTokens(useTokenStore.getState().tokens)
+      } catch (err) {
+        console.error('[TokenLayer] handleUpdate failed:', err)
+      }
+    }
+
+    const applyBackward = async () => {
+      updateToken(id, oldValues)
+      const { cols, vals } = buildSqlParts(oldValues)
+      try {
+        await window.electronAPI?.dbRun(`UPDATE tokens SET ${cols} WHERE id = ?`, [...vals, id])
+        broadcastTokens(useTokenStore.getState().tokens)
+      } catch (err) {
+        console.error('[TokenLayer] handleUpdate undo failed:', err)
+      }
+    }
+
+    applyForward()
+    useUndoStore.getState().pushCommand({
+      id: nextCommandId(),
+      label: `Token ${Object.keys(updates).join(', ')}`,
+      undo: applyBackward,
+      redo: applyForward,
+    })
   }, [updateToken])
 
   const stableCommitEditAc = useCallback(async (id: number) => {
@@ -389,25 +429,42 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
 
   const stableCommitEdit = useCallback(async (id: number) => {
     const name = latestRef.current.editName.trim() || 'Token'
-    updateToken(id, { name })
-    try {
-      await window.electronAPI?.dbRun('UPDATE tokens SET name = ? WHERE id = ?', [name, id])
-      broadcastTokens(useTokenStore.getState().tokens)
-    } catch (err) {
-      console.error('[TokenLayer] commitEdit failed:', err)
-    }
-    // Sync name to any initiative entries that reference this token
-    const { entries, updateEntry } = useInitiativeStore.getState()
-    entries.forEach((entry) => {
-      if (entry.tokenId === id) {
-        updateEntry(entry.id, { combatantName: name })
-        window.electronAPI?.dbRun(
+    const prev = useTokenStore.getState().tokens.find((t) => t.id === id)
+    setEditingId(null)
+    if (!prev || prev.name === name) return
+    const oldName = prev.name
+    // Initiative entries mirror the token name — capture their old values
+    // so undo restores both sides in one step.
+    const linkedEntries = useInitiativeStore.getState().entries
+      .filter((e) => e.tokenId === id)
+      .map((e) => ({ id: e.id, oldName: e.combatantName }))
+
+    const applyName = async (newName: string, entryNames: Array<{ id: number; name: string }>) => {
+      updateToken(id, { name: newName })
+      try {
+        await window.electronAPI?.dbRun('UPDATE tokens SET name = ? WHERE id = ?', [newName, id])
+        broadcastTokens(useTokenStore.getState().tokens)
+      } catch (err) {
+        console.error('[TokenLayer] commitEdit failed:', err)
+      }
+      const { updateEntry } = useInitiativeStore.getState()
+      for (const e of entryNames) {
+        updateEntry(e.id, { combatantName: e.name })
+        await window.electronAPI?.dbRun(
           'UPDATE initiative SET combatant_name = ? WHERE id = ?',
-          [name, entry.id]
+          [e.name, e.id],
         ).catch((err: any) => console.error('[TokenLayer] initiative name sync failed:', err))
       }
+    }
+
+    await applyName(name, linkedEntries.map((e) => ({ id: e.id, name })))
+
+    useUndoStore.getState().pushCommand({
+      id: nextCommandId(),
+      label: `Rename token`,
+      undo: () => applyName(oldName, linkedEntries.map((e) => ({ id: e.id, name: e.oldName }))),
+      redo: () => applyName(name, linkedEntries.map((e) => ({ id: e.id, name }))),
     })
-    setEditingId(null)
   }, [updateToken])
 
   const stableHandleSelect = useCallback((tokenId: number, e?: Konva.KonvaEventObject<MouseEvent>) => {
