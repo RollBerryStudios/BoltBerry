@@ -173,7 +173,7 @@ export function CampaignView() {
             background: 'var(--accent)',
             border: 'none',
             borderRadius: 'var(--radius)',
-            color: '#000',
+            color: 'var(--text-inverse)',
             fontSize: 'var(--text-sm)',
             fontWeight: 700,
             cursor: 'pointer',
@@ -293,8 +293,8 @@ export function CampaignView() {
             flexShrink: 0,
             WebkitAppRegion: 'no-drag',
           } as React.CSSProperties}>
-            <span style={{ fontSize: 8, color: '#22c55e' }}>●</span>
-            <span style={{ fontSize: 'var(--text-xs)', color: '#22c55e', fontWeight: 600 }}>
+            <span style={{ fontSize: 8, color: 'var(--success)' }}>●</span>
+            <span style={{ fontSize: 'var(--text-xs)', color: 'var(--success)', fontWeight: 600 }}>
               Spielerfenster
             </span>
             <button

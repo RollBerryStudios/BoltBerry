@@ -1,6 +1,7 @@
 import { Menu, MenuItemConstructorOptions, shell, BrowserWindow } from 'electron'
 import { IPC } from '../shared/ipc-types'
 import { getDMWindow, getPlayerWindow, createPlayerWindow } from './windows'
+import { savePrefs } from './prefs'
 
 export type MenuLanguage = 'de' | 'en'
 
@@ -236,9 +237,12 @@ function buildTemplate(lang: MenuLanguage): MenuItemConstructorOptions[] {
   template.push({
     label: s.view,
     submenu: [
-      { label: s.zoomIn, accelerator: 'CmdOrCtrl+=', click: () => send('zoom-in') },
-      { label: s.zoomOut, accelerator: 'CmdOrCtrl+-', click: () => send('zoom-out') },
-      { label: s.fit, accelerator: 'CmdOrCtrl+0', click: () => send('fit-to-screen') },
+      // Accelerators intentionally omitted — the renderer's keyboard handler
+      // owns =/-/0, and Chromium's built-in CmdOrCtrl+=/-/0 zoom also fires on
+      // those keys. Binding them here would double-dispatch or collide.
+      { label: s.zoomIn, click: () => send('zoom-in') },
+      { label: s.zoomOut, click: () => send('zoom-out') },
+      { label: s.fit, click: () => send('fit-to-screen') },
       { type: 'separator' },
       { label: s.minimap, click: () => send('toggle-minimap') },
       { label: s.leftSidebar, accelerator: 'CmdOrCtrl+\\', click: () => send('toggle-left-sidebar') },
@@ -315,5 +319,6 @@ export function buildAppMenu(lang?: MenuLanguage) {
 export function setMenuLanguage(lang: MenuLanguage) {
   if (lang === currentLanguage) return
   currentLanguage = lang
+  savePrefs({ menuLanguage: lang })
   buildAppMenu()
 }

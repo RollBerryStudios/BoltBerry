@@ -11,6 +11,7 @@ import { registerDbHandlers } from './ipc/db-handlers'
 import { registerExportImportHandlers } from './ipc/export-import'
 import { buildAppMenu } from './menu'
 import { initAutoUpdater } from './updater'
+import { loadPrefs } from './prefs'
 
 // Must be called before app.whenReady()
 protocol.registerSchemesAsPrivileged([
@@ -90,7 +91,7 @@ app.whenReady().then(() => {
   registerDbHandlers()
   registerExportImportHandlers()
 
-  buildAppMenu()
+  buildAppMenu(loadPrefs().menuLanguage)
 
   createDMWindow()
 
