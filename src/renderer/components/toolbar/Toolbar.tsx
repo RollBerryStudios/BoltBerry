@@ -143,6 +143,28 @@ function Divider() {
   return <div style={{ width: 1, height: 24, background: 'var(--border)', margin: '0 4px', flexShrink: 0 }} />
 }
 
+// ─── Broadcast status pill ───────────────────────────────────────────────
+// Read-only indicator of what the second-screen is receiving right now.
+// Green = session running + player connected. Yellow = player connected but
+// DM still prepping (so any share is visible to players). Muted = no player.
+function BroadcastPill({ status }: { status: 'live' | 'prep' | 'offline' }) {
+  const { t } = useTranslation()
+  const label =
+    status === 'live' ? t('toolbar.broadcastLive')
+    : status === 'prep' ? t('toolbar.broadcastPrep')
+    : t('toolbar.broadcastOffline')
+  const title =
+    status === 'live' ? t('toolbar.broadcastLiveHint')
+    : status === 'prep' ? t('toolbar.broadcastPrepHint')
+    : t('toolbar.broadcastOfflineHint')
+  return (
+    <div className={clsx('toolbar-broadcast-pill', `toolbar-broadcast-${status}`)} title={title}>
+      <span className="toolbar-broadcast-dot" />
+      <span className="toolbar-broadcast-label">{label}</span>
+    </div>
+  )
+}
+
 // ─── Action group dropdown ────────────────────────────────────────────────────
 // Same UX as ToolGroup but for fire-and-forget commands (no persistent active
 // state). Used to fold the four fog quick-action buttons into a single slot.
@@ -305,7 +327,8 @@ export function Toolbar() {
     showPlayerEye, togglePlayerEye,
     playerConnected,
   } = useUIStore()
-  const { activeCampaignId, campaigns } = useCampaignStore()
+  const sessionMode = useUIStore((s) => s.sessionMode)
+  const { activeCampaignId, campaigns, activeMapId, activeMaps } = useCampaignStore()
   const [showMonitorDialog, setShowMonitorDialog] = useState(false)
   const [showSessionStartModal, setShowSessionStartModal] = useState(false)
   const [liveWarning, setLiveWarning] = useState<string | null>(null)
@@ -319,6 +342,15 @@ export function Toolbar() {
   const { undo, redo } = useUndoStore()
 
   const activeCampaignName = campaigns.find((c) => c.id === activeCampaignId)?.name ?? ''
+  const activeMapName = activeMaps.find((m) => m.id === activeMapId)?.name ?? ''
+
+  // Broadcast status: what the player window is currently receiving.
+  // live     — session is running AND player window is connected.
+  // prep     — player window is connected but DM is prepping (session not
+  //            started) — anything shared is visible to players right now.
+  // offline  — no player window open; nothing is being broadcast.
+  const broadcastStatus: 'live' | 'prep' | 'offline' =
+    !playerConnected ? 'offline' : sessionMode === 'session' ? 'live' : 'prep'
 
   // Leave the current map and return to the Campaign View
   function handleLeaveMap() {
@@ -415,22 +447,26 @@ export function Toolbar() {
       <button className="tool-btn" title={t('toolbar.leftSidebar')} onClick={toggleLeftSidebar}>◧</button>
 
       {activeCampaignId && (
-        <button
-          className="tool-btn"
-          title="Zurück zur Kampagne"
-          onClick={handleLeaveMap}
-          style={{
-            display: 'flex', alignItems: 'center', gap: 4,
-            fontSize: 'var(--text-xs)', fontWeight: 600,
-            maxWidth: 140, overflow: 'hidden',
-            color: 'var(--text-secondary)',
-          }}
-        >
-          <span style={{ fontSize: 10 }}>◁</span>
-          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-            {activeCampaignName}
-          </span>
-        </button>
+        <>
+          <button
+            className="tool-btn"
+            title={t('toolbar.backToCampaign')}
+            onClick={handleLeaveMap}
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            ◁
+          </button>
+          <div className="toolbar-breadcrumb" title={`${activeCampaignName}${activeMapName ? ' / ' + activeMapName : ''}`}>
+            <span className="toolbar-breadcrumb-campaign">{activeCampaignName}</span>
+            {activeMapName && (
+              <>
+                <span className="toolbar-breadcrumb-sep">/</span>
+                <span className="toolbar-breadcrumb-map">{activeMapName}</span>
+              </>
+            )}
+          </div>
+          <BroadcastPill status={broadcastStatus} />
+        </>
       )}
 
       <Divider />

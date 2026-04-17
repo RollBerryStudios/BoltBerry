@@ -160,6 +160,13 @@
   "toolbar": {
     "leftSidebar": "Linke Sidebar",
     "rightSidebar": "Rechte Sidebar",
+    "backToCampaign": "Zur\u00fcck zur Kampagne",
+    "broadcastLive": "Live",
+    "broadcastPrep": "Vorbereitung",
+    "broadcastOffline": "Offline",
+    "broadcastLiveHint": "Sitzung l\u00e4uft \u2014 Spielerfenster ist verbunden",
+    "broadcastPrepHint": "Spielerfenster ist offen, aber keine Sitzung gestartet",
+    "broadcastOfflineHint": "Kein Spielerfenster verbunden",
     "tools": {
       "select": "Auswählen / Verschieben",
       "pointer": "Zeiger / Ping",

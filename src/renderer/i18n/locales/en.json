@@ -159,6 +159,13 @@
   },
   "toolbar": {
     "leftSidebar": "Left Sidebar",
+    "backToCampaign": "Back to campaign",
+    "broadcastLive": "Live",
+    "broadcastPrep": "Prep",
+    "broadcastOffline": "Offline",
+    "broadcastLiveHint": "Session running \u2014 player window connected",
+    "broadcastPrepHint": "Player window connected but session not started",
+    "broadcastOfflineHint": "No player window connected",
     "rightSidebar": "Right Sidebar",
     "tools": {
       "select": "Select / Move",
