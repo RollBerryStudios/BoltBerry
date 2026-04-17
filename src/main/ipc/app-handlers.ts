@@ -359,11 +359,14 @@ export function registerAppHandlers(): void {
     }
 
     // Magic-byte validation: reject files whose contents don't match the extension
-    // (defends against corrupted or disguised payloads).
+    // (defends against corrupted or disguised payloads). Preserve the null|{id,path}
+    // contract — renderer callers check `if (!asset) return`. Log server-side so
+    // the rejection isn't totally silent.
     try {
       if (!validateMagicBytes(destPath, ext)) {
         try { unlinkSync(destPath) } catch {}
-        return { success: false, error: 'File content does not match extension (possible corrupted or disguised file)' }
+        console.warn('[AppHandlers] IMPORT_FILE rejected — magic bytes do not match extension', { srcPath, ext })
+        return null
       }
     } catch (err) {
       console.error('[AppHandlers] Magic-byte validation failed:', err)

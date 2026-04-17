@@ -231,8 +231,8 @@ function buildZip(
     const output = createWriteStream(filePath)
     const archive = archiver('zip', { zlib: { level: 6 } })
 
-    output.on('close', () => resolve({ success: true }))
-    archive.on('error', (err) => resolve({ success: false, error: err.message }))
+    output.on('close', () => resolve({ success: true, missingAssets: missing.length ? missing : undefined }))
+    archive.on('error', (err) => resolve({ success: false, error: err.message, missingAssets: missing.length ? missing : undefined }))
     archive.pipe(output)
 
     const campaignData = buildCampaignExport(campaignId, db)
