@@ -1,6 +1,7 @@
 import { ipcMain, dialog, app, Menu, BrowserWindow } from 'electron'
 import { join, extname, relative, resolve, isAbsolute, sep } from 'path'
-import { copyFileSync, existsSync, mkdirSync, statSync, writeFileSync, readFileSync, unlinkSync, realpathSync, readdirSync, lstatSync } from 'fs'
+import { copyFileSync, existsSync, mkdirSync, statSync, writeFileSync, readFileSync, unlinkSync, realpathSync, readdirSync, lstatSync, openSync, readSync, closeSync } from 'fs'
+import { readFile } from 'fs/promises'
 import { IPC } from '../../shared/ipc-types'
 import {
   createPlayerWindow,
@@ -25,6 +26,47 @@ function getAssetDir(type: string): string {
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true })
   return dir
 }
+
+// Verify the first bytes of a copied file match the expected extension's magic bytes.
+// Used to catch corrupted or disguised files (e.g. a .exe renamed to .png).
+// Unknown extensions default to accept.
+function validateMagicBytes(filePath: string, ext: string): boolean {
+  const fd = openSync(filePath, 'r')
+  const buf = Buffer.alloc(16)
+  try {
+    readSync(fd, buf, 0, 16, 0)
+  } finally {
+    closeSync(fd)
+  }
+  switch (ext.toLowerCase()) {
+    case '.png':  return buf[0] === 0x89 && buf[1] === 0x50 && buf[2] === 0x4e && buf[3] === 0x47
+    case '.jpg':
+    case '.jpeg': return buf[0] === 0xff && buf[1] === 0xd8
+    case '.webp': return buf[0] === 0x52 && buf[1] === 0x49 && buf[2] === 0x46 && buf[3] === 0x46 && buf[8] === 0x57 && buf[9] === 0x45 && buf[10] === 0x42 && buf[11] === 0x50
+    case '.gif':  return buf[0] === 0x47 && buf[1] === 0x49 && buf[2] === 0x46
+    case '.mp3':  return (buf[0] === 0xff && (buf[1] & 0xe0) === 0xe0) || (buf[0] === 0x49 && buf[1] === 0x44 && buf[2] === 0x33)
+    case '.wav':  return buf[0] === 0x52 && buf[1] === 0x49 && buf[2] === 0x46 && buf[3] === 0x46 && buf[8] === 0x57 && buf[9] === 0x41 && buf[10] === 0x56 && buf[11] === 0x45
+    case '.ogg':  return buf[0] === 0x4f && buf[1] === 0x67 && buf[2] === 0x67 && buf[3] === 0x53
+    case '.m4a':  return buf[4] === 0x66 && buf[5] === 0x74 && buf[6] === 0x79 && buf[7] === 0x70
+    default: return true  // unknown extensions are not validated
+  }
+}
+
+// Action names the renderer is allowed to route through SHOW_CONTEXT_MENU.
+// Derived from grep of `showContextMenu` callers in the renderer.
+const ALLOWED_CONTEXT_MENU_ACTIONS = new Set<string>([
+  // Sidebar / list items
+  'delete', 'duplicate', 'hide-player', 'show-player', 'edit', 'rename',
+  'cut', 'copy', 'paste',
+  'move-to-top', 'move-up', 'move-down', 'move-to-bottom',
+  // Note layer
+  'open', 'remove-pin',
+  // Canvas
+  'center-camera',
+  'fog-reveal-all', 'fog-cover-all', 'fog-reveal-tokens', 'fog-reset-explored',
+  'tool-measure', 'tool-draw', 'tool-fog-brush', 'tool-fog-rect',
+  'add-gm-pin', 'clear-drawings',
+])
 
 export function registerAppHandlers(): void {
   // Rebuild the application menu in the given language.
@@ -316,6 +358,19 @@ export function registerAppHandlers(): void {
       return null
     }
 
+    // Magic-byte validation: reject files whose contents don't match the extension
+    // (defends against corrupted or disguised payloads).
+    try {
+      if (!validateMagicBytes(destPath, ext)) {
+        try { unlinkSync(destPath) } catch {}
+        return { success: false, error: 'File content does not match extension (possible corrupted or disguised file)' }
+      }
+    } catch (err) {
+      console.error('[AppHandlers] Magic-byte validation failed:', err)
+      try { unlinkSync(destPath) } catch {}
+      return null
+    }
+
     // Store relative path from user data folder
     const userDataPath = getCustomUserDataPath() || app.getPath('userData')
     const relativePath = relative(userDataPath, destPath)
@@ -361,7 +416,8 @@ export function registerAppHandlers(): void {
     }
     let data: Buffer
     try {
-      data = readFileSync(srcPath)
+      // Use async readFile to avoid blocking the main process on large PDFs.
+      data = await readFile(srcPath)
     } catch (err) {
       console.error('[AppHandlers] Failed to read PDF:', err)
       return null
@@ -381,27 +437,51 @@ export function registerAppHandlers(): void {
     campaignId: number
   }) => {
     const { dataUrl, originalName, type, campaignId } = args
-    // Validate data URL format before processing
-    const match = dataUrl.match(/^data:image\/[\w+.-]+;base64,(.+)$/)
+    const MAX_SAVE_ASSET_SIZE = 50 * 1024 * 1024 // 50 MB
+
+    // Parse the data URL header properly (MIME must be a supported image subtype)
+    const match = dataUrl.match(/^data:image\/(png|jpeg|webp|gif);base64,(.+)$/)
     if (!match) {
-      console.error('[AppHandlers] Invalid data URL format')
-      return null
+      console.error('[AppHandlers] Invalid or unsupported image data URL')
+      return { success: false, error: 'Invalid image data URL' }
     }
-    const base64 = match[1]
+    const format = match[1]
+    const base64 = match[2]
+
+    // Decode and enforce size cap on the decoded buffer
+    const buf = Buffer.from(base64, 'base64')
+    if (buf.length > MAX_SAVE_ASSET_SIZE) {
+      return { success: false, error: 'Image exceeds max size (50 MB)' }
+    }
+
+    // Verify magic bytes match the claimed MIME (defends against mislabeled data URLs)
+    const magicOK = (() => {
+      if (format === 'png')  return buf[0] === 0x89 && buf[1] === 0x50
+      if (format === 'jpeg') return buf[0] === 0xff && buf[1] === 0xd8
+      if (format === 'webp') return buf[0] === 0x52 && buf[1] === 0x49 && buf[8] === 0x57 && buf[9] === 0x45
+      if (format === 'gif')  return buf[0] === 0x47 && buf[1] === 0x49
+      return false
+    })()
+    if (!magicOK) {
+      return { success: false, error: 'Image data does not match declared format' }
+    }
+
+    // Use the correct extension for the declared format (not always .png)
+    const ext = format === 'jpeg' ? 'jpg' : format
     const destDir = getAssetDir(type)
-    const destName = `${Date.now()}_${Math.random().toString(36).slice(2)}.png`
+    const destName = `${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`
     const destPath = join(destDir, destName)
     try {
-      writeFileSync(destPath, Buffer.from(base64, 'base64'))
+      writeFileSync(destPath, buf)
     } catch (err) {
       console.error('[AppHandlers] Failed to write asset image:', err)
       return null
     }
-    
+
     // Store relative path from user data folder
     const userDataPath = getCustomUserDataPath() || app.getPath('userData')
     const relativePath = relative(userDataPath, destPath)
-    
+
     const db = getDb()
     const row = db.prepare(
       `INSERT INTO assets (original_name, stored_path, type, campaign_id) VALUES (?, ?, ?, ?)`
@@ -419,10 +499,21 @@ export function registerAppHandlers(): void {
     return app.getPath('userData')
   })
 
-  // Context menu: renderer sends menu items, main process shows native menu and returns selected action
+  // Context menu: renderer sends menu items, main process shows native menu and returns selected action.
+  // Actions are validated against an allowlist to prevent the renderer from triggering arbitrary strings.
   ipcMain.handle(IPC.SHOW_CONTEXT_MENU, async (event, items: Array<{ label: string; action: string; danger?: boolean } | { separator: true }>) => {
     const win = BrowserWindow.fromWebContents(event.sender)
     if (!win) return null
+
+    // Filter items: drop any non-separator entry whose action is not in the allowlist.
+    const validatedItems = items.filter((item) => {
+      if ('separator' in item) return true
+      if (!ALLOWED_CONTEXT_MENU_ACTIONS.has(item.action)) {
+        console.warn('[AppHandlers] SHOW_CONTEXT_MENU: rejected unknown action:', item.action)
+        return false
+      }
+      return true
+    })
 
     return new Promise<string | null>((resolve) => {
       let resolved = false
@@ -433,7 +524,7 @@ export function registerAppHandlers(): void {
         }
       }
 
-      const menuItems = items.map((item) => {
+      const menuItems = validatedItems.map((item) => {
         if ('separator' in item) return { type: 'separator' as const }
         return {
           label: item.label,
@@ -443,8 +534,10 @@ export function registerAppHandlers(): void {
 
       const menu = Menu.buildFromTemplate(menuItems)
 
+      // Resolve null on menu close, but defer one microtask so any click handler
+      // (which fires before `menu-will-close`) has already called safeResolve.
       menu.once('menu-will-close', () => {
-        setTimeout(() => safeResolve(null), 50)
+        queueMicrotask(() => safeResolve(null))
       })
 
       menu.popup({ window: win })
