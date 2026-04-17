@@ -425,6 +425,14 @@ CREATE INDEX IF NOT EXISTS idx_character_sheets_campaign_id ON character_sheets(
 CREATE INDEX IF NOT EXISTS idx_character_sheets_token_id ON character_sheets(token_id);
 CREATE INDEX IF NOT EXISTS idx_audio_boards_campaign_id ON audio_boards(campaign_id);
 CREATE INDEX IF NOT EXISTS idx_audio_board_slots_board_id ON audio_board_slots(board_id);
+`
+
+// Indexes that reference columns added in later migrations (pin_x/pin_y landed
+// in v24). Keeping them out of CREATE_TABLES_SQL prevents "no such column"
+// errors when opening a legacy DB — CREATE TABLE IF NOT EXISTS is a no-op on
+// the existing table, and the partial-index clause would evaluate before the
+// migration adds the column. We apply these once, after migrations run.
+export const CREATE_POST_MIGRATION_INDEXES_SQL = `
 -- Partial unique index for category-level notes (those without pin coordinates).
 -- SQLite treats NULL != NULL in UNIQUE, so COALESCE(map_id, 0) collapses
 -- campaign-level notes (map_id IS NULL) into a single key.

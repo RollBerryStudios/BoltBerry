@@ -4,7 +4,7 @@ import { join } from 'path'
 import { existsSync, mkdirSync } from 'fs'
 import {
   SCHEMA_VERSION,
-  CREATE_TABLES_SQL, SEED_SCHEMA_VERSION,
+  CREATE_TABLES_SQL, CREATE_POST_MIGRATION_INDEXES_SQL, SEED_SCHEMA_VERSION,
   MIGRATE_V1_TO_V2, MIGRATE_V2_TO_V3, MIGRATE_V3_TO_V4, MIGRATE_V4_TO_V5,
   MIGRATE_V5_TO_V6, MIGRATE_V6_TO_V7, MIGRATE_V7_TO_V8, MIGRATE_V8_TO_V9,
   MIGRATE_V9_TO_V10, MIGRATE_V10_TO_V11, MIGRATE_V11_TO_V12, MIGRATE_V12_TO_V13,
@@ -117,6 +117,11 @@ export function initDatabase(): Database.Database {
         db.pragma('foreign_keys = ON')
       }
     }
+
+    // Indexes that depend on columns added in later migrations must run
+    // *after* migrations — otherwise opening a legacy DB blows up with
+    // "no such column" before the migration gets a chance to add it.
+    db.exec(CREATE_POST_MIGRATION_INDEXES_SQL)
   } catch (err) {
     db.close()
     db = null
