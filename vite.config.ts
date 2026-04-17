@@ -13,6 +13,7 @@ export default defineConfig({
   },
   base: './',
   build: {
+    sourcemap: false,
     outDir: resolve(__dirname, 'dist/renderer'),
     emptyOutDir: true,
     rollupOptions: {

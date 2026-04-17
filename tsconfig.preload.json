@@ -3,10 +3,10 @@
   "compilerOptions": {
     "module": "CommonJS",
     "moduleResolution": "node",
-    "outDir": "dist/preload",
+    "outDir": "dist",
     "rootDir": "src",
     "target": "ES2022"
   },
-  "include": ["src/preload/**/*", "src/shared/**/*"],
+  "include": ["src/preload/**/*"],
   "exclude": ["node_modules", "dist"]
 }

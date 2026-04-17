@@ -5,7 +5,7 @@ import { IPC } from '../shared/ipc-types'
 
 // Resolve preload path relative to the app root (works in both dev and packaged)
 function preloadPath(): string {
-  return join(app.getAppPath(), 'dist/preload/preload/index.js')
+  return join(app.getAppPath(), 'dist/preload/index.js')
 }
 
 const isDev = process.env.NODE_ENV === 'development'

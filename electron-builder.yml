@@ -14,6 +14,10 @@ files:
   - "!node_modules/**/{test,__tests__,tests,powered-test,example,examples}"
   - "!node_modules/.bin"
   - "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}"
+  - "!**/*.map"
+  - "!**/*.js.map"
+  - "!src/**"
+  - "!**/*.ts"
 
 asarUnpack:
   # better-sqlite3 contains native binaries – must be outside asar
@@ -54,7 +58,11 @@ mac:
       arch: [x64, arm64]
   icon: resources/icon.icns
   category: public.app-category.entertainment
-  # notarize: true  # requires APPLE_ID + APPLE_ID_PASSWORD env vars
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  notarize: true
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
 
 dmg:
   icon: resources/icon.icns
