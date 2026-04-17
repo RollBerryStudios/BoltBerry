@@ -1,7 +1,7 @@
 {
   "name": "boltberry",
   "version": "0.19.32",
-  "description": "BoltBerry \u2013 Lokale Virtual-Tabletop-App f\u00fcr Pen-and-Paper-Runden",
+  "description": "BoltBerry – Lokale Virtual-Tabletop-App für Pen-and-Paper-Runden",
   "main": "dist/main/index.js",
   "homepage": ".",
   "author": {
@@ -39,7 +39,7 @@
     "archiver-utils": "^5.0.2",
     "better-sqlite3": "^11.0.0",
     "clsx": "^2.1.1",
-    "electron-updater": "^6.3.0",
+    "electron-updater": "^6.8.3",
     "i18next": "^26.0.3",
     "immer": "^10.1.1",
     "konva": "^9.3.6",
