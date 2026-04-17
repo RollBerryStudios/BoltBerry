@@ -29,10 +29,10 @@ export function showToast(message: string, type: ToastType = 'info', durationMs?
 }
 
 const COLORS: Record<ToastType, { bg: string; border: string; icon: string }> = {
-  success: { bg: '#0d2318', border: '#22c55e', icon: '✓' },
-  error:   { bg: '#2a0a0a', border: '#ef4444', icon: '✕' },
-  warning: { bg: '#2a1800', border: '#f59e0b', icon: '⚠' },
-  info:    { bg: '#0d1a2a', border: '#3b82f6', icon: 'ℹ' },
+  success: { bg: '#0d2318', border: 'var(--success)', icon: '✓' },
+  error:   { bg: '#2a0a0a', border: 'var(--danger)',  icon: '✕' },
+  warning: { bg: '#2a1800', border: 'var(--warning)', icon: '⚠' },
+  info:    { bg: '#0d1a2a', border: 'var(--info)',    icon: 'ℹ' },
 }
 
 export function ToastProvider() {

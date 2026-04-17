@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useUIStore } from './stores/uiStore'
 import { useCampaignStore } from './stores/campaignStore'
 import { useSettingsStore } from './stores/settingsStore'
@@ -28,15 +28,20 @@ export default function App() {
   usePlayerSync()
   useAutoAmbient()
 
+  // Stable callbacks so useMenuActions doesn't re-register its IPC listener on every render.
+  const handleShowShortcuts = useCallback(() => setShowShortcuts((v) => !v), [])
+  const handleNewCampaign = useCallback(() => {
+    // StartScreen listens for this and opens its create form.
+    window.dispatchEvent(new CustomEvent('menu:new-campaign'))
+  }, [])
+  const handleAbout = useCallback(() => {
+    showToast('BoltBerry — Virtual Tabletop')
+  }, [])
+
   useMenuActions({
-    onShowShortcuts: () => setShowShortcuts((v) => !v),
-    onNewCampaign: () => {
-      // StartScreen listens for this and opens its create form.
-      window.dispatchEvent(new CustomEvent('menu:new-campaign'))
-    },
-    onAbout: () => {
-      showToast('BoltBerry — Virtual Tabletop')
-    },
+    onShowShortcuts: handleShowShortcuts,
+    onNewCampaign: handleNewCampaign,
+    onAbout: handleAbout,
   })
 
   // Guard against accidental quit during active sessions

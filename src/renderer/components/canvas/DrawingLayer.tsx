@@ -39,6 +39,17 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
   const [pendingText, setPendingText] = useState<{ screenX: number; screenY: number; mapX: number; mapY: number } | null>(null)
   const [pendingTextValue, setPendingTextValue] = useState('')
   const textInputRef = useRef<HTMLInputElement>(null)
+  const focusTimerIdRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // Clear any pending focus timer on unmount
+  useEffect(() => {
+    return () => {
+      if (focusTimerIdRef.current != null) {
+        clearTimeout(focusTimerIdRef.current)
+        focusTimerIdRef.current = null
+      }
+    }
+  }, [])
 
   useEffect(() => {
     let cancelled = false
@@ -78,7 +89,11 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
       if (containerRect && screenPos) {
         setPendingText({ screenX: screenPos.x, screenY: screenPos.y, mapX: pos.x, mapY: pos.y })
         setPendingTextValue('')
-        setTimeout(() => textInputRef.current?.focus(), 20)
+        if (focusTimerIdRef.current != null) clearTimeout(focusTimerIdRef.current)
+        focusTimerIdRef.current = setTimeout(() => {
+          textInputRef.current?.focus()
+          focusTimerIdRef.current = null
+        }, 20)
       }
     } else if (activeTool === 'draw-rect' || activeTool === 'draw-circle') {
       setCurrentPath([pos.x, pos.y, pos.x, pos.y])

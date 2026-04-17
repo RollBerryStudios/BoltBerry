@@ -68,7 +68,7 @@ export const useCampaignStore = create<CampaignState>((set) => ({
       // Reload campaigns
       const campaigns = await window.electronAPI.dbQuery<{
         id: number; name: string; created_at: string; last_opened: string
-      }>('SELECT * FROM campaigns ORDER BY last_opened DESC')
+      }>('SELECT id, name, created_at, last_opened FROM campaigns ORDER BY last_opened DESC')
 
       const currentId = useCampaignStore.getState().activeCampaignId
       const activeCampaignId = currentId && campaigns.some(c => c.id === currentId)

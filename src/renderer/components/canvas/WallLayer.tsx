@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, RefObject } from 'react'
+import { useRef, useState, useEffect, useMemo, RefObject } from 'react'
 import { Layer, Line, Circle, Group, Text } from 'react-konva'
 import { Html } from 'react-konva-utils'
 import Konva from 'konva'
@@ -171,7 +171,10 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
     return []
   }
 
-  const displayWalls = walls.filter((w) => w.mapId === activeMapId)
+  const displayWalls = useMemo(
+    () => walls.filter((w) => w.mapId === activeMapId),
+    [walls, activeMapId]
+  )
 
   return (
     <>

@@ -25,6 +25,18 @@ const COMBAT_ICONS: Record<string, string> = {
   deafened: '🔇',
 }
 
+const TIMER_PRESETS = [
+  { id: 'blessed', label: '✨ Gesegnet' },
+  { id: 'cursed', label: '🔮 Verflucht' },
+  { id: 'hasted', label: '⚡ Verlangsamt' },
+  { id: 'concentrating', label: '🎯 Konzentration' },
+  { id: 'advantage', label: '▲ Vorteil' },
+  { id: 'disadvantage', label: '▼ Nachteil' },
+  { id: 'blinded', label: '🫣 Blind' },
+  { id: 'invisible', label: '👻 Unsichtbar' },
+  { id: 'charmed', label: '💫 Bezaubert' },
+]
+
 function broadcastInitiative() {
   if (useUIStore.getState().sessionMode === 'prep') return
   const { entries } = useInitiativeStore.getState()
@@ -274,18 +286,6 @@ export function InitiativePanel() {
     if (!token) return null
     return token.markerColor ?? FACTION_COLORS[token.faction] ?? null
   }
-
-  const TIMER_PRESETS = [
-    { id: 'blessed', label: '✨ Gesegnet' },
-    { id: 'cursed', label: '🔮 Verflucht' },
-    { id: 'hasted', label: '⚡ Verlangsamt' },
-    { id: 'concentrating', label: '🎯 Konzentration' },
-    { id: 'advantage', label: '▲ Vorteil' },
-    { id: 'disadvantage', label: '▼ Nachteil' },
-    { id: 'blinded', label: '🫣 Blind' },
-    { id: 'invisible', label: '👻 Unsichtbar' },
-    { id: 'charmed', label: '💫 Bezaubert' },
-  ]
 
   function handleAddTimer() {
     if (timerEntryId == null) return

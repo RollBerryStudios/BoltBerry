@@ -518,7 +518,7 @@ export function Toolbar() {
         className={clsx('tool-btn', showPlayerEye && 'active')}
         title={showPlayerEye ? 'Spieler-Sicht ausblenden [E]' : 'Spieler-Sicht anzeigen [E]'}
         onClick={togglePlayerEye}
-        style={showPlayerEye ? { color: '#22c55e' } : undefined}
+        style={showPlayerEye ? { color: 'var(--success)' } : undefined}
       >
         👁‍🗨
       </button>
@@ -543,7 +543,7 @@ export function Toolbar() {
             transition: 'background var(--transition), color var(--transition)',
             ...(isLive ? {
               background: 'rgba(34, 197, 94, 0.15)',
-              color: '#22c55e',
+              color: 'var(--success)',
               outline: '1px solid rgba(34, 197, 94, 0.4)',
             } : {
               background: 'rgba(245, 158, 0, 0.15)',
@@ -554,7 +554,7 @@ export function Toolbar() {
         >
           <span style={{
             width: 7, height: 7, borderRadius: '50%', flexShrink: 0,
-            background: isLive ? '#22c55e' : 'var(--warning)',
+            background: isLive ? 'var(--success)' : 'var(--warning)',
             boxShadow: isLive ? '0 0 0 2px rgba(34,197,94,0.3)' : 'none',
           }} />
           {isLive ? 'LIVE' : 'VORBEREITUNG'}
@@ -575,7 +575,7 @@ export function Toolbar() {
         className={clsx('tool-btn', playerConnected && 'active')}
         title={playerConnected ? 'Spielerfenster schließen (Ctrl+P)' : `${t('toolbar.openPlayerWindow')} (Ctrl+P)`}
         onClick={handlePlayerWindowToggle}
-        style={playerConnected ? { color: '#22c55e' } : undefined}
+        style={playerConnected ? { color: 'var(--success)' } : undefined}
       >
         🖥
         <span style={{ fontSize: 8, marginLeft: 2, opacity: 0.7 }}>{playerConnected ? '●' : '○'}</span>

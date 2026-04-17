@@ -128,10 +128,10 @@ export function StartScreen() {
       {!window.electronAPI && (
         <div style={{
           padding: 'var(--sp-3) var(--sp-4)',
-          background: 'rgba(239, 83, 80, 0.15)',
-          border: '1px solid rgba(239, 83, 80, 0.3)',
+          background: 'rgba(239, 68, 68, 0.15)',
+          border: '1px solid rgba(239, 68, 68, 0.3)',
           borderRadius: 'var(--radius)',
-          color: '#EF5350',
+          color: 'var(--danger)',
           fontSize: 'var(--text-sm)',
           width: 440,
           marginBottom: 'var(--sp-3)',
@@ -184,9 +184,9 @@ export function StartScreen() {
         {error && (
           <div style={{
             padding: 'var(--sp-3) var(--sp-4)',
-            background: 'rgba(239, 83, 80, 0.15)',
-            borderTop: '1px solid rgba(239, 83, 80, 0.3)',
-            color: '#EF5350',
+            background: 'rgba(239, 68, 68, 0.15)',
+            borderTop: '1px solid rgba(239, 68, 68, 0.3)',
+            color: 'var(--danger)',
             fontSize: 'var(--text-sm)',
           }}>
             ⚠️ {error}
@@ -382,9 +382,9 @@ function CampaignRow({
               style={{
                 padding: '4px 6px',
                 background: 'none',
-                border: '1px solid rgba(239,83,80,0.3)',
+                border: '1px solid rgba(239, 68, 68, 0.3)',
                 borderRadius: 'var(--radius)',
-                color: '#ef4444',
+                color: 'var(--danger)',
                 cursor: 'pointer',
                 fontSize: 12,
               }}
