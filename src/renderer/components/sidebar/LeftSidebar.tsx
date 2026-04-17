@@ -10,6 +10,7 @@ import { SettingsPanel } from './panels/SettingsPanel'
 import { useImageUrl } from '../../hooks/useImageUrl'
 import { detectGrid } from '../../utils/gridDetect'
 import { detectMargins } from '../../utils/autoCrop'
+import { showToast } from '../shared/Toast'
 import type { MapRecord } from '@shared/ipc-types'
 
 export function LeftSidebar() {
@@ -143,7 +144,7 @@ export function LeftSidebar() {
       }).catch(() => { /* ignore detection errors */ })
     } catch (err) {
       console.error('[LeftSidebar] handleAddMap failed:', err)
-      alert(`Karte konnte nicht hinzugefügt werden: ${err}`)
+      showToast(`Karte konnte nicht hinzugefügt werden: ${err}`, 'error')
     }
   }
 

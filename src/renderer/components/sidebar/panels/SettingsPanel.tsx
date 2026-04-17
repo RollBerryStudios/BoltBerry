@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { useSettingsStore } from '../../../stores/settingsStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import { useAppStore } from '../../../stores/appStore'
+import { showToast } from '../../shared/Toast'
 
 export function SettingsPanel() {
   const { t } = useTranslation()
@@ -14,7 +15,7 @@ export function SettingsPanel() {
         await window.electronAPI.openContentFolder()
       } catch (err) {
         console.error('[SettingsPanel] Failed to open content folder:', err)
-        alert('Ordner konnte nicht geöffnet werden')
+        showToast('Ordner konnte nicht geöffnet werden', 'error')
       }
     }
   }
@@ -24,10 +25,10 @@ export function SettingsPanel() {
       try {
         const result = await window.electronAPI.rescanContentFolder(activeCampaignId ?? 0)
         await useCampaignStore.getState().refreshCampaigns()
-        alert(result.message)
+        showToast(result.message, 'success')
       } catch (err) {
         console.error('[SettingsPanel] Failed to rescan content folder:', err)
-        alert('Fehler beim Scannen des Inhaltsordners: ' + (err instanceof Error ? err.message : String(err)))
+        showToast('Fehler beim Scannen des Inhaltsordners: ' + (err instanceof Error ? err.message : String(err)), 'error')
       }
     }
   }

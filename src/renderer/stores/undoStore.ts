@@ -10,12 +10,14 @@ export interface Command {
 interface UndoState {
   undoStack: Command[]
   redoStack: Command[]
+  activeMapId: number | null
 
   pushCommand: (cmd: Command) => void
   undo: () => Promise<void>
   redo: () => Promise<void>
   canUndo: () => boolean
   canRedo: () => boolean
+  setActiveMapId: (id: number | null) => void
 }
 
 let cmdCounter = 0
@@ -23,6 +25,7 @@ let cmdCounter = 0
 export const useUndoStore = create<UndoState>((set, get) => ({
   undoStack: [],
   redoStack: [],
+  activeMapId: null,
 
   pushCommand: (cmd) =>
     set((s) => ({
@@ -54,6 +57,11 @@ export const useUndoStore = create<UndoState>((set, get) => ({
 
   canUndo: () => get().undoStack.length > 0,
   canRedo: () => get().redoStack.length > 0,
+
+  setActiveMapId: (id) => {
+    if (id === get().activeMapId) return
+    set({ activeMapId: id, undoStack: [], redoStack: [] })
+  },
 }))
 
 export function nextCommandId(): string {

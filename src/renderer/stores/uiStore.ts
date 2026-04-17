@@ -211,7 +211,14 @@ export const useUIStore = create<UIState>((set) => ({
   toggleBlackout: () =>
     set((s) => ({ blackoutActive: !s.blackoutActive })),
   setAppMode: (appMode) => set({ appMode }),
-  setSessionMode: (sessionMode) => set({ sessionMode }),
+  setSessionMode: (sessionMode) => set((s) => {
+    const updates: Partial<UIState> = { sessionMode }
+    // Prevent unreachable state: sessionMode=prep + workMode=combat
+    if (sessionMode === 'prep' && s.workMode === 'combat') {
+      updates.workMode = 'prep'
+    }
+    return updates
+  }),
   toggleTheme: () =>
     set((s) => ({ theme: s.theme === 'dark' ? 'light' : 'dark' })),
   toggleLanguage: () =>

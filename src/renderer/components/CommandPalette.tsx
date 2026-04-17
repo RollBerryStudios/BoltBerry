@@ -103,8 +103,16 @@ export function CommandPalette({ onClose }: CommandPaletteProps) {
     return commands.filter((c) => terms.every((term) => c.keywords.includes(term)))
   }, [query, commands])
 
+  // Focus the input on mount; restore focus to the previously-focused element on unmount.
+  const previousFocusRef = useRef<Element | null>(null)
   useEffect(() => {
+    previousFocusRef.current = document.activeElement
     inputRef.current?.focus()
+    return () => {
+      if (previousFocusRef.current instanceof HTMLElement) {
+        previousFocusRef.current.focus()
+      }
+    }
   }, [])
 
   // Reset the highlighted row whenever the filter changes.
@@ -127,7 +135,17 @@ export function CommandPalette({ onClose }: CommandPaletteProps) {
   }
 
   const onKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'ArrowDown') {
+    if (e.key === 'Tab') {
+      // Focus trap: keep Tab/Shift+Tab within the palette (input ↔ list)
+      e.preventDefault()
+      const focusable = [inputRef.current, listRef.current].filter(Boolean) as HTMLElement[]
+      if (focusable.length === 0) return
+      const idx = focusable.indexOf(e.target as HTMLElement)
+      const next = e.shiftKey
+        ? (idx <= 0 ? focusable.length - 1 : idx - 1)
+        : (idx >= focusable.length - 1 ? 0 : idx + 1)
+      focusable[next]?.focus()
+    } else if (e.key === 'ArrowDown') {
       e.preventDefault()
       setActiveIndex((i) => Math.min(filtered.length - 1, i + 1))
     } else if (e.key === 'ArrowUp') {

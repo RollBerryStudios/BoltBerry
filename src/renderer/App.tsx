@@ -39,6 +39,19 @@ export default function App() {
     },
   })
 
+  // Guard against accidental quit during active sessions
+  useEffect(() => {
+    const handler = (e: BeforeUnloadEvent) => {
+      if (useUIStore.getState().sessionMode === 'session') {
+        e.preventDefault()
+        e.returnValue = 'Eine aktive Session läuft. Wirklich beenden?'
+        return e.returnValue
+      }
+    }
+    window.addEventListener('beforeunload', handler)
+    return () => window.removeEventListener('beforeunload', handler)
+  }, [])
+
   // Keep the native menu in the same language as the UI
   useEffect(() => {
     window.electronAPI?.setMenuLanguage?.(language)

@@ -49,6 +49,26 @@ export function Resizer({ side, width, onResize, label }: ResizerProps) {
     onResize(side === 'left' ? 240 : 300)
   }, [side, onResize])
 
+  const STEP = 8
+  const MIN_WIDTH = 200
+  const MAX_WIDTH = 520
+
+  const onKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault()
+      onResize(width - STEP)
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault()
+      onResize(width + STEP)
+    } else if (e.key === 'Home') {
+      e.preventDefault()
+      onResize(MIN_WIDTH)
+    } else if (e.key === 'End') {
+      e.preventDefault()
+      onResize(MAX_WIDTH)
+    }
+  }, [width, onResize])
+
   useEffect(() => {
     // Safety: if the component unmounts mid-drag, clear body cursor.
     return () => {
@@ -65,11 +85,16 @@ export function Resizer({ side, width, onResize, label }: ResizerProps) {
       role="separator"
       aria-label={label ?? 'Resize sidebar'}
       aria-orientation="vertical"
+      aria-valuenow={width}
+      aria-valuemin={MIN_WIDTH}
+      aria-valuemax={MAX_WIDTH}
+      tabIndex={0}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
       onPointerCancel={endDrag}
       onDoubleClick={onDoubleClick}
+      onKeyDown={onKeyDown}
     />
   )
 }

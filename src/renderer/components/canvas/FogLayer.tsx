@@ -193,7 +193,6 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
 
   // ── Fog quick actions (reveal all, cover all, reset) ───────────────
   useEffect(() => {
-    const el = document.getElementById('root')
     const handler = (e: Event) => {
       const detail = (e as CustomEvent).detail as { type: string }
       const explored = exploredCanvasRef.current
@@ -230,8 +229,8 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
         }
       }
     }
-    el?.addEventListener('fog:action', handler)
-    return () => el?.removeEventListener('fog:action', handler)
+    window.addEventListener('fog:action', handler)
+    return () => window.removeEventListener('fog:action', handler)
   }, [mapId, activeMapId, pushFogCommand, refreshDisplay])
 
   // ── LOS fog reveal (fired by TokenLayer on drag end) ─────────────

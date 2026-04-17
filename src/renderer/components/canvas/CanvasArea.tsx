@@ -143,6 +143,11 @@ export function CanvasArea() {
     return () => ro.disconnect()
   }, [])
 
+  // Clear undo/redo stacks when switching maps to prevent cross-map undos
+  useEffect(() => {
+    useUndoStore.getState().setActiveMapId(activeMapId ?? null)
+  }, [activeMapId])
+
   // Load tokens + initiative when map changes, then sync player
   useEffect(() => {
     if (!activeMapId || !activeMap) return
