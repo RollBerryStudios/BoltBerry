@@ -8,6 +8,7 @@ import { useInitiativeStore } from '../../stores/initiativeStore'
 import { useUndoStore } from '../../stores/undoStore'
 import { useFogStore } from '../../stores/fogStore'
 import { MonitorDialog } from '../MonitorDialog'
+import { SessionStartModal } from '../SessionStartModal'
 import clsx from 'clsx'
 import logoSquare from '../../assets/boltberry-logo.png'
 
@@ -178,6 +179,7 @@ export function Toolbar() {
   } = useUIStore()
   const { activeCampaignId, campaigns } = useCampaignStore()
   const [showMonitorDialog, setShowMonitorDialog] = useState(false)
+  const [showSessionStartModal, setShowSessionStartModal] = useState(false)
   const [liveWarning, setLiveWarning] = useState<string | null>(null)
   const [cameraSent, setCameraSent] = useState(false)
   const [workModeToast, setWorkModeToast] = useState<string | null>(null)
@@ -229,22 +231,31 @@ export function Toolbar() {
 
   function handleSessionToggle() {
     if (sessionMode === 'prep') {
-      // Go live immediately — show inline warning if something needs attention
+      // Going prep → session: require confirmation via SessionStartModal
       const { activeMapId } = useCampaignStore.getState()
       if (!activeMapId) {
         setLiveWarning('Keine Karte geladen')
         setTimeout(() => setLiveWarning(null), 3000)
         return
       }
-      if (!playerConnected) {
-        setLiveWarning('Spielerfenster nicht geöffnet')
-        setTimeout(() => setLiveWarning(null), 3000)
-      }
-      setSessionMode('session')
-      if (workMode === 'prep') setWorkMode('play')
+      setShowSessionStartModal(true)
     } else {
       setSessionMode('prep')
     }
+  }
+
+  function handleSessionStartConfirm() {
+    setShowSessionStartModal(false)
+    setSessionMode('session')
+    if (workMode === 'prep') setWorkMode('play')
+  }
+
+  function handleSessionStartCancel() {
+    setShowSessionStartModal(false)
+  }
+
+  function handleSessionStartOpenPlayerWindow() {
+    setShowMonitorDialog(true)
   }
 
   function handlePlayerWindowToggle() {
@@ -688,6 +699,14 @@ export function Toolbar() {
 
       {showMonitorDialog && (
         <MonitorDialog onClose={() => setShowMonitorDialog(false)} />
+      )}
+
+      {showSessionStartModal && (
+        <SessionStartModal
+          onConfirm={handleSessionStartConfirm}
+          onCancel={handleSessionStartCancel}
+          onOpenPlayerWindow={handleSessionStartOpenPlayerWindow}
+        />
       )}
     </div>
   )

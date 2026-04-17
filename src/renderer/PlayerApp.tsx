@@ -611,22 +611,64 @@ function PlayerMapView({
     }
   }
 
-  // Pointer pulse (imperative Konva)
+  // Pointer pulse (imperative Konva) — track active tweens/nodes so rapid
+  // pointer events cannot accumulate orphaned Konva objects on the layer.
+  const activeTweensRef = useRef<Konva.Tween[]>([])
+  const activeNodesRef = useRef<Konva.Node[]>([])
+
   useEffect(() => {
     if (!pointer || !pointerLayerRef.current || !image) return
     const layer = pointerLayerRef.current
     const px = pointer.x * scale + offX
     const py = pointer.y * scale + offY
 
+    // Destroy any in-flight tweens from the previous pointer event
+    for (const tween of activeTweensRef.current) {
+      try { tween.destroy() } catch { /* already gone */ }
+    }
+    activeTweensRef.current = []
+    for (const node of activeNodesRef.current) {
+      try { node.destroy() } catch { /* already destroyed */ }
+    }
+    activeNodesRef.current = []
+
     const dot = new Konva.Circle({ x: px, y: py, radius: 10, fill: '#f59e0b', opacity: 1, listening: false })
     const ring1 = new Konva.Circle({ x: px, y: py, radius: 16, fill: 'transparent', stroke: '#f59e0b', strokeWidth: 3, opacity: 1, listening: false })
     const ring2 = new Konva.Circle({ x: px, y: py, radius: 16, fill: 'transparent', stroke: '#f59e0b', strokeWidth: 1.5, opacity: 0.5, listening: false })
     layer.add(dot); layer.add(ring1); layer.add(ring2)
+    activeNodesRef.current.push(dot, ring1, ring2)
 
-    new Konva.Tween({ node: dot,   duration: 0.9, opacity: 0,   easing: Konva.Easings.EaseOut, onFinish: () => dot.destroy() }).play()
-    new Konva.Tween({ node: ring1, duration: 1.4, opacity: 0, scaleX: 4, scaleY: 4, easing: Konva.Easings.EaseOut, onFinish: () => ring1.destroy() }).play()
-    new Konva.Tween({ node: ring2, duration: 2.0, opacity: 0, scaleX: 7, scaleY: 7, easing: Konva.Easings.EaseOut, onFinish: () => ring2.destroy() }).play()
+    const finishNode = (node: Konva.Node, tween: Konva.Tween) => {
+      activeTweensRef.current = activeTweensRef.current.filter((t) => t !== tween)
+      activeNodesRef.current = activeNodesRef.current.filter((n) => n !== node)
+      try { node.destroy() } catch { /* ignore */ }
+    }
+
+    const dotTween = new Konva.Tween({ node: dot, duration: 0.9, opacity: 0, easing: Konva.Easings.EaseOut })
+    dotTween.onFinish = () => finishNode(dot, dotTween)
+    const ring1Tween = new Konva.Tween({ node: ring1, duration: 1.4, opacity: 0, scaleX: 4, scaleY: 4, easing: Konva.Easings.EaseOut })
+    ring1Tween.onFinish = () => finishNode(ring1, ring1Tween)
+    const ring2Tween = new Konva.Tween({ node: ring2, duration: 2.0, opacity: 0, scaleX: 7, scaleY: 7, easing: Konva.Easings.EaseOut })
+    ring2Tween.onFinish = () => finishNode(ring2, ring2Tween)
+
+    activeTweensRef.current.push(dotTween, ring1Tween, ring2Tween)
+    dotTween.play(); ring1Tween.play(); ring2Tween.play()
   }, [pointer])
+
+  // Cleanup on unmount: destroy any in-flight tweens/nodes and clear the layer
+  useEffect(() => {
+    return () => {
+      for (const tween of activeTweensRef.current) {
+        try { tween.destroy() } catch { /* ignore */ }
+      }
+      activeTweensRef.current = []
+      for (const node of activeNodesRef.current) {
+        try { node.destroy() } catch { /* ignore */ }
+      }
+      activeNodesRef.current = []
+      try { pointerLayerRef.current?.destroyChildren() } catch { /* ignore */ }
+    }
+  }, [])
 
   const showGrid = image && mapState.gridType !== 'none'
   const cellPx = showGrid ? mapState.gridSize * scale : 0

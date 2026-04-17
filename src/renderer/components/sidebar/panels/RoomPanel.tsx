@@ -14,6 +14,30 @@ const VISIBILITY_OPTIONS: { value: RoomVisibility; label: string; icon: string }
   { value: 'dimmed', label: 'Gedimmt', icon: '🌤' },
 ]
 
+// Map each DB column to its SQLite affinity so we coerce incoming JS values
+// to a compatible shape instead of naïvely JSON.stringify()-ing everything.
+const COLUMN_TYPES: Record<string, 'text' | 'integer' | 'real' | 'nullable-integer'> = {
+  name: 'text',
+  description: 'text',
+  polygon: 'text',
+  visibility: 'text',
+  encounter_id: 'nullable-integer',
+  atmosphere_hint: 'text',
+  notes: 'text',
+  color: 'text',
+}
+
+function coerceForDb(field: string, value: unknown): any {
+  const type = COLUMN_TYPES[field]
+  if (value == null) return null
+  if (type === 'integer' || type === 'nullable-integer') {
+    return typeof value === 'number' ? value : Number(value)
+  }
+  if (type === 'real') return Number(value)
+  // text (default): keep strings as-is, stringify anything else
+  return typeof value === 'string' ? value : String(value)
+}
+
 export function RoomPanel() {
   const { rooms, selectedRoomId, setSelectedRoomId, updateRoom, removeRoom } = useRoomStore()
   const { activeMapId } = useCampaignStore()
@@ -57,7 +81,7 @@ export function RoomPanel() {
     ;(patch as any)[storeField] = value
     updateRoom(id, patch)
     try {
-      const dbValue = value == null ? null : typeof value === 'string' ? value : JSON.stringify(value)
+      const dbValue = coerceForDb(field, value)
       await window.electronAPI?.dbRun(`UPDATE rooms SET ${field} = ? WHERE id = ?`, [dbValue, id])
     } catch (err) {
       console.error('[RoomPanel] update failed:', err)

@@ -7,7 +7,7 @@ import { showToast } from '../../shared/Toast'
 export function SettingsPanel() {
   const { t } = useTranslation()
   const { userDataFolder } = useSettingsStore()
-  const { activeCampaignId, addCampaign, setActiveCampaign } = useCampaignStore()
+  const { activeCampaignId, setActiveCampaign } = useCampaignStore()
 
   async function handleOpenContentFolder() {
     if (window.electronAPI) {
@@ -21,53 +21,82 @@ export function SettingsPanel() {
   }
 
   async function handleRescanContent() {
-    if (window.electronAPI) {
-      try {
-        const result = await window.electronAPI.rescanContentFolder(activeCampaignId ?? 0)
-        await useCampaignStore.getState().refreshCampaigns()
-        showToast(result.message, 'success')
-      } catch (err) {
-        console.error('[SettingsPanel] Failed to rescan content folder:', err)
-        showToast('Fehler beim Scannen des Inhaltsordners: ' + (err instanceof Error ? err.message : String(err)), 'error')
-      }
+    if (!window.electronAPI) return
+    showToast('Inhaltsordner wird gescannt…', 'info')
+    try {
+      const result = await window.electronAPI.rescanContentFolder(activeCampaignId ?? 0)
+      await useCampaignStore.getState().refreshCampaigns()
+      showToast(result.message ?? 'Scan abgeschlossen', 'success', 6000)
+    } catch (err) {
+      console.error('[SettingsPanel] Failed to rescan content folder:', err)
+      showToast('Fehler beim Scannen: ' + (err instanceof Error ? err.message : String(err)), 'error', 7000)
     }
   }
 
   async function handleExport() {
     if (!activeCampaignId || !window.electronAPI) return
     useAppStore.getState().setSaving()
-    const result = await window.electronAPI.exportCampaign(activeCampaignId) as { success: boolean; error?: string; canceled?: boolean }
-    if (result.success) {
-      useAppStore.getState().setSaved()
-    } else if (!result.canceled) {
+    showToast('Kampagne wird exportiert…', 'info')
+    try {
+      const result = await window.electronAPI.exportCampaign(activeCampaignId) as { success: boolean; filePath?: string; error?: string; canceled?: boolean }
+      if (result.success) {
+        useAppStore.getState().setSaved()
+        const path = result.filePath ? ` → ${result.filePath}` : ''
+        showToast(`Kampagne exportiert${path}`, 'success', 8000)
+      } else if (result.canceled) {
+        useAppStore.getState().setSaved()
+        showToast('Export abgebrochen', 'info')
+      } else {
+        useAppStore.getState().setSaveError()
+        showToast('Export fehlgeschlagen: ' + (result.error ?? 'Unbekannter Fehler'), 'error', 7000)
+      }
+    } catch (err) {
       useAppStore.getState().setSaveError()
-    } else {
-      useAppStore.getState().setSaved()
+      showToast('Export fehlgeschlagen: ' + (err instanceof Error ? err.message : String(err)), 'error', 7000)
     }
   }
 
   async function handleQuickBackup() {
     if (!activeCampaignId || !window.electronAPI) return
     useAppStore.getState().setSaving()
-    const result = await window.electronAPI.quickBackup(activeCampaignId) as { success: boolean; filePath?: string; error?: string }
-    if (result.success) {
-      useAppStore.getState().setSaved()
-    } else {
+    showToast('Schnell-Backup wird erstellt…', 'info')
+    try {
+      const result = await window.electronAPI.quickBackup(activeCampaignId) as { success: boolean; filePath?: string; error?: string }
+      if (result.success) {
+        useAppStore.getState().setSaved()
+        const path = result.filePath ? ` → ${result.filePath}` : ''
+        showToast(`Schnell-Backup gespeichert${path}`, 'success', 8000)
+      } else {
+        useAppStore.getState().setSaveError()
+        showToast('Backup fehlgeschlagen: ' + (result.error ?? 'Unbekannter Fehler'), 'error', 7000)
+      }
+    } catch (err) {
       useAppStore.getState().setSaveError()
+      showToast('Backup fehlgeschlagen: ' + (err instanceof Error ? err.message : String(err)), 'error', 7000)
     }
   }
 
   async function handleImport() {
     if (!window.electronAPI) return
-    const result = await window.electronAPI.importCampaign() as { success: boolean; campaignId?: number; error?: string; canceled?: boolean }
-    if (result.success && result.campaignId) {
-      const campaigns = await window.electronAPI.dbQuery<{
-        id: number; name: string; created_at: string; last_opened: string
-      }>('SELECT * FROM campaigns ORDER BY last_opened DESC')
-      useCampaignStore.getState().setCampaigns(campaigns.map((c) => ({
-        id: c.id, name: c.name, createdAt: c.created_at, lastOpened: c.last_opened,
-      })))
-      setActiveCampaign(result.campaignId)
+    showToast('Kampagne wird importiert…', 'info')
+    try {
+      const result = await window.electronAPI.importCampaign() as { success: boolean; campaignId?: number; error?: string; canceled?: boolean }
+      if (result.success && result.campaignId) {
+        const campaigns = await window.electronAPI.dbQuery<{
+          id: number; name: string; created_at: string; last_opened: string
+        }>('SELECT * FROM campaigns ORDER BY last_opened DESC')
+        useCampaignStore.getState().setCampaigns(campaigns.map((c) => ({
+          id: c.id, name: c.name, createdAt: c.created_at, lastOpened: c.last_opened,
+        })))
+        setActiveCampaign(result.campaignId)
+        showToast('Kampagne importiert', 'success', 6000)
+      } else if (result.canceled) {
+        showToast('Import abgebrochen', 'info')
+      } else if (!result.success) {
+        showToast('Import fehlgeschlagen: ' + (result.error ?? 'Unbekannter Fehler'), 'error', 7000)
+      }
+    } catch (err) {
+      showToast('Import fehlgeschlagen: ' + (err instanceof Error ? err.message : String(err)), 'error', 7000)
     }
   }
 

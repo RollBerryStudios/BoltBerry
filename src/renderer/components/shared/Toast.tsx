@@ -9,11 +9,23 @@ interface Toast {
 }
 
 // Module-level registry so showToast() works from anywhere without context
-let _addToast: ((msg: string, type: ToastType) => void) | null = null
+let _addToast: ((msg: string, type: ToastType, durationMs: number) => void) | null = null
 let _nextId = 0
 
-export function showToast(message: string, type: ToastType = 'info') {
-  _addToast?.(message, type)
+/**
+ * Display a toast notification.
+ *
+ * Default duration depends on type and message content:
+ *  - error: 5000 ms
+ *  - messages containing a "/" (likely paths): 5000 ms
+ *  - everything else (info/success/warning): 3000 ms
+ *
+ * Callers may override with an explicit durationMs (e.g. 6000–8000 ms for
+ * export/import success toasts where the user must have time to read the path).
+ */
+export function showToast(message: string, type: ToastType = 'info', durationMs?: number) {
+  const resolved = durationMs ?? (type === 'error' ? 5000 : message.includes('/') ? 5000 : 3000)
+  _addToast?.(message, type, resolved)
 }
 
 const COLORS: Record<ToastType, { bg: string; border: string; icon: string }> = {
@@ -26,12 +38,12 @@ const COLORS: Record<ToastType, { bg: string; border: string; icon: string }> = 
 export function ToastProvider() {
   const [toasts, setToasts] = useState<Toast[]>([])
 
-  const addToast = useCallback((message: string, type: ToastType) => {
+  const addToast = useCallback((message: string, type: ToastType, durationMs: number) => {
     const id = ++_nextId
     setToasts((prev) => [...prev, { id, message, type }])
     setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id))
-    }, 3000)
+    }, durationMs)
   }, [])
 
   useEffect(() => {
