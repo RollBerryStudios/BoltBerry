@@ -4,7 +4,7 @@ import { useCampaignStore } from './stores/campaignStore'
 import { useSettingsStore } from './stores/settingsStore'
 import { AppLayout } from './components/AppLayout'
 import { CampaignView } from './components/CampaignView'
-import { StartScreen } from './components/StartScreen'
+import { CampaignDashboard } from './components/CampaignDashboard'
 import { SetupWizard } from './components/SetupWizard'
 import { ShortcutOverlay } from './components/ShortcutOverlay'
 import { CommandPalette } from './components/CommandPalette'
@@ -86,6 +86,14 @@ export default function App() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
+  // CampaignDashboard's search input opens the same command palette the rest
+  // of the app uses, so there is one discoverable surface for navigation.
+  useEffect(() => {
+    const onOpen = () => setShowCommandPalette(true)
+    window.addEventListener('dashboard:open-palette', onOpen)
+    return () => window.removeEventListener('dashboard:open-palette', onOpen)
+  }, [])
+
   // Initialize settings first (may switch the DB path), then load campaigns.
   // Sequencing matters: loadCampaigns must query whichever DB is authoritative
   // for this session — which is only known after initializeSettings completes.
@@ -134,7 +142,7 @@ export default function App() {
       {!isSetupComplete ? (
         <SetupWizard onComplete={() => { /* isSetupComplete set inside wizard */ }} />
       ) : !activeCampaignId ? (
-        <StartScreen />
+        <CampaignDashboard />
       ) : (
         <>
           {/* CampaignView stays mounted while a campaign is open so tab state is preserved.
