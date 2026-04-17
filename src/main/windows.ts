@@ -21,7 +21,7 @@ function playerPreloadPath(): string {
  * Fail loudly when a preload bundle is missing instead of letting Electron
  * silently drop it and ship a renderer with no IPC surface. That produced
  * the confusing "Datenbankverbindung nicht verfügbar — App wurde möglicher-
- * weise nicht korrekt installiert" banner from StartScreen without any hint
+ * weise nicht korrekt installiert" banner from the dashboard without any hint
  * of the real cause (running `electron .` before `npm run build:preload`,
  * or a stale packaged build). Returns the path if present, else aborts.
  */

@@ -32,7 +32,7 @@ export default function App() {
   // Stable callbacks so useMenuActions doesn't re-register its IPC listener on every render.
   const handleShowShortcuts = useCallback(() => setShowShortcuts((v) => !v), [])
   const handleNewCampaign = useCallback(() => {
-    // StartScreen listens for this and opens its create form.
+    // CampaignDashboard listens for this and opens its create form.
     window.dispatchEvent(new CustomEvent('menu:new-campaign'))
   }, [])
   const handleAbout = useCallback(() => {
@@ -179,7 +179,7 @@ async function loadCampaigns() {
         lastOpened: c.last_opened,
       }))
     )
-    // Do not auto-open: always land on StartScreen so the user chooses a campaign
+    // Do not auto-open: always land on the dashboard so the user chooses a campaign
   } catch (err) {
     console.error('[App] Failed to load campaigns:', err)
   }

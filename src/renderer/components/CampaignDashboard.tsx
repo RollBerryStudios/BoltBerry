@@ -117,7 +117,7 @@ export function CampaignDashboard() {
     }
   }
 
-  // Row actions: rename, duplicate, delete, export. Reused from StartScreen.
+  // Row actions: rename, duplicate, delete, export.
   async function handleRename(campaign: Campaign, next: string) {
     const name = next.trim()
     if (!name || name === campaign.name || !window.electronAPI) return
