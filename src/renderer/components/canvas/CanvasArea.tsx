@@ -15,7 +15,7 @@ import { RoomLayer } from './RoomLayer'
 import { PlayerEyeOverlay } from './PlayerEyeOverlay'
 import { PlayerEyeHUD } from './PlayerEyeHUD'
 import { ViewportHUD } from './ViewportHUD'
-import { CombatHUD } from './CombatHUD'
+import { InitiativeTopStrip } from './InitiativeTopStrip'
 import { MultiSelectBar } from '../MultiSelectBar'
 import { useUIStore } from '../../stores/uiStore'
 import { useCampaignStore } from '../../stores/campaignStore'
@@ -640,8 +640,8 @@ export function CanvasArea() {
       {/* Viewport info chip (bottom-left) */}
       <ViewportHUD />
 
-      {/* Combat HUD (top-center, combat mode only) */}
-      <CombatHUD />
+      {/* Initiative top-strip (top-center, combat mode only) */}
+      <InitiativeTopStrip />
 
       {/* Multi-select bar (bottom-center, when 2+ tokens selected) */}
       <MultiSelectBar />

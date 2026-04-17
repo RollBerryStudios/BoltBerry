@@ -788,7 +788,8 @@ textarea.input {
   0%, 100% { box-shadow: 0 0 0 0 rgba(245, 168, 0, 0.0); }
   50%      { box-shadow: 0 0 0 6px rgba(245, 168, 0, 0.08); }
 }
-.combat-hud-turn-name { animation: subtlePulse 2.4s ease-in-out infinite; border-radius: 4px; padding: 0 2px; }
+/* Pulsing accent ring on the active combatant card. */
+.initiative-card.current { animation: subtlePulse 2.4s ease-in-out infinite; }
 
 /* Respect OS reduced-motion preference — disable non-essential motion. */
 @media (prefers-reduced-motion: reduce) {
@@ -990,86 +991,155 @@ textarea.input {
 .viewport-hud-zoom { font-variant-numeric: tabular-nums; color: var(--accent-blue-light); font-weight: 600; }
 .viewport-hud-grid { color: var(--text-muted); font-variant-numeric: tabular-nums; }
 
-/* Combat HUD — top-center. Visible only in combat work mode. */
-.combat-hud {
+/* ─── Initiative top-strip — combat mode HUD ─────────────────────────────── */
+.initiative-strip {
   position: absolute;
   top: 12px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 260;
   display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 14px;
+  align-items: stretch;
+  gap: var(--sp-3);
+  padding: 8px var(--sp-3);
   background: rgba(13, 16, 21, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--accent-blue);
-  border-radius: var(--radius);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-  color: var(--text-primary);
-  font-size: var(--text-sm);
-  max-width: 90%;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  max-width: calc(100vw - var(--sidebar-left, 0px) - var(--sidebar-right, 0px) - 32px);
   user-select: none;
 }
-.combat-hud-round,
-.combat-hud-turn,
-.combat-hud-next {
+.initiative-strip-round {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--sp-2);
+  border-right: 1px solid var(--border-subtle);
+  flex-shrink: 0;
 }
-.combat-hud-round-label,
-.combat-hud-turn-label,
-.combat-hud-next-label {
+.initiative-strip-round-label {
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-muted);
 }
-.combat-hud-round-value {
+.initiative-strip-round-value {
   font-size: var(--text-lg);
   font-weight: 700;
   color: var(--accent-blue-light);
   font-variant-numeric: tabular-nums;
-  line-height: 1;
+  line-height: 1.1;
 }
-.combat-hud-turn-name {
-  font-weight: 700;
-  color: var(--accent);
-  max-width: 220px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.initiative-strip-list {
+  display: flex;
+  flex-direction: row;
+  gap: var(--sp-2);
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2px 2px;
+  scrollbar-width: thin;
 }
-.combat-hud-next-name {
-  color: var(--text-secondary);
-  max-width: 160px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.combat-hud-divider {
-  width: 1px;
-  align-self: stretch;
-  background: var(--border-subtle);
-}
-.combat-hud-btn {
+.initiative-strip-next {
+  align-self: center;
   background: var(--accent-blue);
   color: var(--text-inverse, #fff);
   border: none;
-  border-radius: var(--radius-sm);
-  padding: 6px 12px;
+  border-radius: var(--radius);
+  padding: 8px 14px;
   font-size: var(--text-xs);
   font-weight: 700;
   cursor: pointer;
   transition: background var(--transition), transform var(--transition);
   white-space: nowrap;
+  flex-shrink: 0;
 }
-.combat-hud-btn:hover { background: var(--accent-blue-light, var(--accent-blue)); transform: translateY(-1px); }
-.combat-hud-btn:active { transform: translateY(0); }
+.initiative-strip-next:hover { background: var(--accent-blue-light); transform: translateY(-1px); }
+.initiative-strip-next:active { transform: translateY(0); }
+
+/* One combatant card: portrait + name + HP bar. Square 56px portrait keeps
+   eight combatants visible at typical 1280px-wide DM windows. */
+.initiative-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: 64px;
+  padding: 4px;
+  background: var(--bg-elevated);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+}
+.initiative-card:hover {
+  background: var(--bg-overlay);
+  border-color: var(--border);
+}
+.initiative-card.current {
+  border-color: var(--accent);
+  background: rgba(255, 198, 46, 0.08);
+}
+.initiative-card-portrait {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-base);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.initiative-card-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.initiative-card-initial {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+.initiative-card-roll {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  background: rgba(13, 16, 21, 0.85);
+  color: var(--accent-blue-light);
+  font-size: 9px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  padding: 1px 4px;
+  border-radius: var(--radius-sm);
+  line-height: 1.1;
+}
+.initiative-card-name {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  max-width: 56px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+.initiative-card.current .initiative-card-name { color: var(--text-primary); }
+.initiative-card-hp {
+  width: 100%;
+  height: 3px;
+  background: var(--bg-base);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.initiative-card-hp-fill {
+  height: 100%;
+  transition: width 200ms ease, background 200ms ease;
+}
 
 /* ─── Command Palette ────────────────────────────────────────────────────────── */
 .command-palette-backdrop {
