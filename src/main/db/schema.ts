@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 23
+export const SCHEMA_VERSION = 24
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -191,7 +191,8 @@ CREATE TABLE IF NOT EXISTS maps (
   ambient_track_path TEXT,
   track1_volume REAL NOT NULL DEFAULT 1.0,
   track2_volume REAL NOT NULL DEFAULT 1.0,
-  combat_volume REAL NOT NULL DEFAULT 1.0
+  combat_volume REAL NOT NULL DEFAULT 1.0,
+  rotation_player INTEGER NOT NULL DEFAULT 0
 );
 
 -- Fog of War bitmaps (one per map)
@@ -238,15 +239,17 @@ CREATE TABLE IF NOT EXISTS initiative (
   sort_order      INTEGER NOT NULL DEFAULT 0
 );
 
--- Notes (campaign-level with category, or map-level)
+-- Notes (campaign-level with category, or map-level pin)
 CREATE TABLE IF NOT EXISTS notes (
   id           INTEGER PRIMARY KEY AUTOINCREMENT,
   campaign_id  INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
   map_id       INTEGER REFERENCES maps(id) ON DELETE SET NULL,
   category     TEXT    NOT NULL DEFAULT 'Allgemein',
+  title        TEXT    NOT NULL DEFAULT '',
   content      TEXT    NOT NULL DEFAULT '',
-  updated_at   TEXT    NOT NULL DEFAULT (datetime('now')),
-  UNIQUE(campaign_id, map_id, category)
+  pin_x        REAL,
+  pin_y        REAL,
+  updated_at   TEXT    NOT NULL DEFAULT (datetime('now'))
 );
 
 -- Handouts
@@ -402,6 +405,33 @@ CREATE TABLE IF NOT EXISTS schema_version (
   id      INTEGER PRIMARY KEY CHECK (id = 1),
   version INTEGER NOT NULL
 );
+
+-- Indexes on foreign keys and frequently-queried columns.
+-- Fresh installs seed at the current SCHEMA_VERSION, so none of the per-version
+-- migrations that added these indexes (v17, v19, v20, v22) will ever run — we
+-- must define them here or new databases silently lose every index.
+CREATE INDEX IF NOT EXISTS idx_tokens_map_id ON tokens(map_id);
+CREATE INDEX IF NOT EXISTS idx_initiative_map_id ON initiative(map_id);
+CREATE INDEX IF NOT EXISTS idx_gm_pins_map_id ON gm_pins(map_id);
+CREATE INDEX IF NOT EXISTS idx_drawings_map_id ON drawings(map_id);
+CREATE INDEX IF NOT EXISTS idx_walls_map_id ON walls(map_id);
+CREATE INDEX IF NOT EXISTS idx_rooms_map_id ON rooms(map_id);
+CREATE INDEX IF NOT EXISTS idx_notes_campaign_map ON notes(campaign_id, map_id);
+CREATE INDEX IF NOT EXISTS idx_handouts_campaign_id ON handouts(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_encounters_campaign_id ON encounters(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_assets_campaign_id ON assets(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_maps_campaign_id ON maps(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_character_sheets_campaign_id ON character_sheets(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_character_sheets_token_id ON character_sheets(token_id);
+CREATE INDEX IF NOT EXISTS idx_audio_boards_campaign_id ON audio_boards(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_audio_board_slots_board_id ON audio_board_slots(board_id);
+-- Partial unique index for category-level notes (those without pin coordinates).
+-- SQLite treats NULL != NULL in UNIQUE, so COALESCE(map_id, 0) collapses
+-- campaign-level notes (map_id IS NULL) into a single key.
+CREATE UNIQUE INDEX IF NOT EXISTS idx_notes_category_unique
+  ON notes(campaign_id, COALESCE(map_id, 0), category)
+  WHERE pin_x IS NULL AND pin_y IS NULL;
+CREATE INDEX IF NOT EXISTS idx_notes_map_pins ON notes(map_id) WHERE pin_x IS NOT NULL;
 `
 
 // Migration: v17 → v18 — add indexes on frequently-queried foreign keys
@@ -534,6 +564,37 @@ CREATE INDEX IF NOT EXISTS idx_notes_campaign_map ON notes(campaign_id, map_id);
 UPDATE schema_version SET version = 23;
 `
 
-export const SEED_SCHEMA_VERSION = `
-INSERT OR IGNORE INTO schema_version (id, version) VALUES (1, 23);
+// Migration: v23 → v24 — add rotation_player to maps, add title/pin_x/pin_y to notes,
+// replace the broken UNIQUE(campaign_id, map_id, category) with a partial unique
+// index that handles NULL map_id correctly, and add a pin-lookup index.
+export const MIGRATE_V23_TO_V24 = `
+ALTER TABLE maps ADD COLUMN rotation_player INTEGER NOT NULL DEFAULT 0;
+
+CREATE TABLE notes_v24 (
+  id           INTEGER PRIMARY KEY AUTOINCREMENT,
+  campaign_id  INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+  map_id       INTEGER REFERENCES maps(id) ON DELETE SET NULL,
+  category     TEXT    NOT NULL DEFAULT 'Allgemein',
+  title        TEXT    NOT NULL DEFAULT '',
+  content      TEXT    NOT NULL DEFAULT '',
+  pin_x        REAL,
+  pin_y        REAL,
+  updated_at   TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+INSERT INTO notes_v24 (id, campaign_id, map_id, category, content, updated_at)
+  SELECT id, campaign_id, map_id, category, content, updated_at FROM notes;
+DROP TABLE notes;
+ALTER TABLE notes_v24 RENAME TO notes;
+
+CREATE INDEX IF NOT EXISTS idx_notes_campaign_map ON notes(campaign_id, map_id);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_notes_category_unique
+  ON notes(campaign_id, COALESCE(map_id, 0), category)
+  WHERE pin_x IS NULL AND pin_y IS NULL;
+CREATE INDEX IF NOT EXISTS idx_notes_map_pins ON notes(map_id) WHERE pin_x IS NOT NULL;
+
+UPDATE schema_version SET version = 24;
 `
+
+// Use the SCHEMA_VERSION constant directly so there's a single source of truth.
+// The old template hard-coded the version number, inviting drift.
+export const SEED_SCHEMA_VERSION = `INSERT OR IGNORE INTO schema_version (id, version) VALUES (1, ${SCHEMA_VERSION});`

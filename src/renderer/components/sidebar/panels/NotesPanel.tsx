@@ -139,12 +139,18 @@ export function NotesPanel() {
 
   const saveNote = useCallback(async (content: string, mapId: number | null, category: string) => {
     if (!window.electronAPI || !activeCampaignId) return
+    // SQLite treats NULL != NULL in UNIQUE constraints, so the old
+    // UNIQUE(campaign_id, map_id, category) silently let campaign-level
+    // notes (map_id IS NULL) accumulate duplicates. v24 replaces it with
+    // a partial unique index on COALESCE(map_id, 0) where pin_x/pin_y are
+    // NULL — target it explicitly in ON CONFLICT.
     try {
       await window.electronAPI.dbRun(
         `INSERT INTO notes (campaign_id, map_id, category, content, updated_at)
          VALUES (?, ?, ?, ?, datetime('now'))
-         ON CONFLICT(campaign_id, map_id, category) DO UPDATE
-           SET content = excluded.content, updated_at = excluded.updated_at`,
+         ON CONFLICT (campaign_id, COALESCE(map_id, 0), category)
+           WHERE pin_x IS NULL AND pin_y IS NULL
+           DO UPDATE SET content = excluded.content, updated_at = excluded.updated_at`,
         [activeCampaignId, mapId, category, content]
       )
     } catch (err) {

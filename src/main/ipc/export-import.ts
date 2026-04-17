@@ -3,18 +3,24 @@ import path from 'path'
 import {
   existsSync, mkdirSync, createWriteStream,
   createReadStream, copyFileSync, readdirSync, readFileSync, rmSync,
+  renameSync, lstatSync,
 } from 'fs'
 import archiver from 'archiver'
 import unzipper from 'unzipper'
 import { IPC } from '../../shared/ipc-types'
-import { getDb, closeDatabase, initDatabase, getCustomUserDataPath } from '../db/database'
+import { getDb, getCustomUserDataPath } from '../db/database'
+
+const EXPORT_VERSION = 9
+
+const MAX_IMPORT_BYTES = 2 * 1024 * 1024 * 1024 // 2 GB cumulative uncompressed
+const MAX_IMPORT_ENTRIES = 50_000
 
 function getEffectiveUserDataPath(): string {
   return getCustomUserDataPath() || app.getPath('userData')
 }
 
 export function registerExportImportHandlers(): void {
-  // ── Duplicate Campaign ─────────────────────────────────────────────────────────
+  // ── Duplicate Campaign ─────────────────────────────────────────────────────
   ipcMain.handle(IPC.DUPLICATE_CAMPAIGN, async (_event, campaignId: number) => {
     const db = getDb()
     const original = db.prepare('SELECT name FROM campaigns WHERE id = ?').get(campaignId) as
@@ -35,7 +41,7 @@ export function registerExportImportHandlers(): void {
     }
   })
 
-  // ── Export Campaign ──────────────────────────────────────────────────────────
+  // ── Export Campaign ────────────────────────────────────────────────────────
   ipcMain.handle(IPC.EXPORT_CAMPAIGN, async (_event, campaignId: number) => {
     const db = getDb()
 
@@ -56,7 +62,7 @@ export function registerExportImportHandlers(): void {
     return buildZip(campaignId, db, filePath)
   })
 
-  // ── Quick Backup (no dialog, auto-path) ───────────────────────────────────────
+  // ── Quick Backup (no dialog, auto-path) ───────────────────────────────────
   ipcMain.handle(IPC.QUICK_BACKUP, async (_event, campaignId: number) => {
     const db = getDb()
 
@@ -70,15 +76,21 @@ export function registerExportImportHandlers(): void {
     const stamp = ts.getTime()
     const filename = `BoltBerry_${safeName}_${isoDate}_${stamp}.zip`
 
-    const backupDir = path.join(app.getPath('documents'), 'BoltBerry-Backups')
+    const backupDir = path.join(getEffectiveUserDataPath(), 'backups')
     mkdirSync(backupDir, { recursive: true })
-    const filePath = path.join(backupDir, filename)
+    const tmpPath = path.join(backupDir, `${filename}.tmp`)
+    const finalPath = path.join(backupDir, filename)
 
-    const result = await buildZip(campaignId, db, filePath)
-    return { ...result, filePath }
+    const result = await buildZip(campaignId, db, tmpPath)
+    if (result.success) {
+      renameSync(tmpPath, finalPath)
+    } else {
+      try { rmSync(tmpPath, { force: true }) } catch { /* best-effort */ }
+    }
+    return { ...result, filePath: finalPath }
   })
 
-  // ── Import Campaign ──────────────────────────────────────────────────────────
+  // ── Import Campaign ────────────────────────────────────────────────────────
   ipcMain.handle(IPC.IMPORT_CAMPAIGN, async () => {
     const { filePaths, canceled } = await dialog.showOpenDialog({
       title: 'Kampagne importieren',
@@ -92,29 +104,59 @@ export function registerExportImportHandlers(): void {
     const importDir = path.join(userData, 'imports', `import_${Date.now()}`)
     mkdirSync(importDir, { recursive: true })
 
-    // Extract with path-traversal protection using unzipper.Parse
-    await new Promise<void>((resolve, reject) => {
-      createReadStream(zipPath)
-        .pipe(unzipper.Parse())
-        .on('entry', (entry: unzipper.Entry) => {
-          const entryPath: string = entry.path
-          // Normalize and validate: must not escape importDir
-          const dest = path.resolve(importDir, entryPath)
-          if (!dest.startsWith(importDir + path.sep) && dest !== importDir) {
-            entry.autodrain()
-            return
-          }
-          if (entry.type === 'Directory') {
-            mkdirSync(dest, { recursive: true })
-            entry.autodrain()
-          } else {
-            mkdirSync(path.dirname(dest), { recursive: true })
-            entry.pipe(createWriteStream(dest))
-          }
-        })
-        .on('close', resolve)
-        .on('error', reject)
-    })
+    let cumulativeBytes = 0
+    let entryCount = 0
+
+    try {
+      await new Promise<void>((resolve, reject) => {
+        createReadStream(zipPath)
+          .pipe(unzipper.Parse())
+          .on('entry', (entry: unzipper.Entry) => {
+            entryCount++
+            if (entryCount > MAX_IMPORT_ENTRIES) {
+              entry.autodrain()
+              reject(new Error(`Archive exceeds max entry count (${MAX_IMPORT_ENTRIES})`))
+              return
+            }
+
+            const entryPath: string = entry.path
+
+            if (entryPath.includes('..') || entryPath.startsWith('/') || /^[a-zA-Z]:/.test(entryPath)) {
+              entry.autodrain()
+              return
+            }
+
+            const dest = path.resolve(importDir, entryPath)
+            const realImportDir = path.resolve(importDir)
+            if (!dest.startsWith(realImportDir + path.sep) && dest !== realImportDir) {
+              entry.autodrain()
+              return
+            }
+
+            if (entry.type === 'Directory') {
+              mkdirSync(dest, { recursive: true })
+              entry.autodrain()
+            } else {
+              mkdirSync(path.dirname(dest), { recursive: true })
+              const ws = createWriteStream(dest)
+              entry.on('data', (chunk: Buffer) => {
+                cumulativeBytes += chunk.length
+                if (cumulativeBytes > MAX_IMPORT_BYTES) {
+                  ws.destroy()
+                  entry.autodrain()
+                  reject(new Error(`Archive exceeds max uncompressed size (${MAX_IMPORT_BYTES / (1024 * 1024 * 1024)} GB)`))
+                }
+              })
+              entry.pipe(ws)
+            }
+          })
+          .on('close', resolve)
+          .on('error', reject)
+      })
+    } catch (err: any) {
+      rmSync(importDir, { recursive: true, force: true })
+      return { success: false, error: err.message || 'ZIP-Extraktion fehlgeschlagen' }
+    }
 
     const campaignJsonPath = path.join(importDir, 'campaign.json')
     if (!existsSync(campaignJsonPath)) {
@@ -135,6 +177,12 @@ export function registerExportImportHandlers(): void {
       return { success: false, error: 'Ungültige Kampagnendaten: Pflichtfelder fehlen' }
     }
 
+    const dataVersion = campaignData.version ?? 1
+    if (dataVersion > EXPORT_VERSION) {
+      rmSync(importDir, { recursive: true, force: true })
+      return { success: false, error: `Diese Kampagne wurde mit einer neueren App-Version exportiert (v${dataVersion}). Bitte aktualisiere BoltBerry.` }
+    }
+
     const assetsDir = path.join(importDir, 'assets')
     const destAssetsDir = path.join(userData, 'assets', 'imported')
     mkdirSync(destAssetsDir, { recursive: true })
@@ -142,10 +190,10 @@ export function registerExportImportHandlers(): void {
     const pathMap = new Map<string, string>()
 
     if (existsSync(assetsDir)) {
-      const importAssetsDir = path.join(importDir, 'assets')
       const walkDir = (dir: string, prefix: string) => {
         for (const entry of readdirSync(dir, { withFileTypes: true })) {
           const srcPath = path.join(dir, entry.name)
+          if (entry.isSymbolicLink()) continue
           const entryKey = prefix ? `${prefix}/${entry.name}` : entry.name
           if (entry.isDirectory()) {
             walkDir(srcPath, entryKey)
@@ -153,11 +201,12 @@ export function registerExportImportHandlers(): void {
             const destName = `${Date.now()}_${Math.random().toString(36).slice(2)}${path.extname(entry.name)}`
             const dest = path.join(destAssetsDir, destName)
             copyFileSync(srcPath, dest)
-            pathMap.set(`assets/${entryKey}`, path.relative(userData, dest))
+            const relDest = path.relative(userData, dest).split(path.sep).join('/')
+            pathMap.set(`assets/${entryKey}`, relDest)
           }
         }
       }
-      walkDir(importAssetsDir, '')
+      walkDir(assetsDir, '')
     }
 
     remapPaths(campaignData, pathMap)
@@ -165,7 +214,6 @@ export function registerExportImportHandlers(): void {
     const db = getDb()
     const newCampaignId = insertCampaignData(campaignData, db)
 
-    // Clean up the temporary extraction directory
     rmSync(importDir, { recursive: true, force: true })
 
     return { success: true, campaignId: newCampaignId }
@@ -178,7 +226,7 @@ function buildZip(
   campaignId: number,
   db: ReturnType<typeof getDb>,
   filePath: string,
-): Promise<{ success: boolean; error?: string }> {
+): Promise<{ success: boolean; error?: string; missingAssets?: string[] }> {
   return new Promise((resolve) => {
     const output = createWriteStream(filePath)
     const archive = archiver('zip', { zlib: { level: 6 } })
@@ -191,14 +239,21 @@ function buildZip(
     archive.append(JSON.stringify(campaignData, null, 2), { name: 'campaign.json' })
 
     const userData = getEffectiveUserDataPath()
-    const paths = collectAssetPaths(campaignData)
+    const assetPaths = collectAssetPaths(campaignData)
     const added = new Set<string>()
-    for (const p of paths) {
+    const missing: string[] = []
+    for (const p of assetPaths) {
       if (!p) continue
       const absPath = path.resolve(userData, p)
-      // Security: ensure path stays within userData
       if (!absPath.startsWith(userData + path.sep) && absPath !== userData) continue
-      if (existsSync(absPath) && !added.has(p)) {
+      try {
+        const stat = lstatSync(absPath)
+        if (stat.isSymbolicLink()) continue
+      } catch {
+        missing.push(p)
+        continue
+      }
+      if (!added.has(p)) {
         archive.file(absPath, { name: p })
         added.add(p)
       }
@@ -210,14 +265,13 @@ function buildZip(
 
 // ── Export data structures ─────────────────────────────────────────────────────
 
-const EXPORT_VERSION = 8
-
 interface CampaignExport {
   version: number
   campaign: { name: string }
   maps: Array<{
-    name: string; imagePath: string; gridType: string; gridSize: number; orderIndex: number; rotation: number; ftPerUnit: number; gridOffsetX: number; gridOffsetY: number; ambientBrightness: number
-    // Audio per-map (v8+)
+    name: string; imagePath: string; gridType: string; gridSize: number; orderIndex: number
+    rotation: number; rotationPlayer: number; ftPerUnit: number
+    gridOffsetX: number; gridOffsetY: number; ambientBrightness: number
     ambientTrackPath: string | null; track1Volume: number; track2Volume: number; combatVolume: number
     tokens: Array<{
       id: number; name: string; imagePath: string | null; x: number; y: number; size: number
@@ -239,8 +293,10 @@ interface CampaignExport {
     exploredBitmap: string | null
     initiative: Array<{ combatantName: string; roll: number; currentTurn: number; tokenId: number | null; effectTimers: string | null }>
     notes: string
+    pinNotes: Array<{ title: string; content: string; pinX: number; pinY: number; category: string }>
     rooms: Array<{
-      name: string; description: string; polygon: string; visibility: string; encounterId: number | null; atmosphereHint: string | null; notes: string | null; color: string; createdAt: string
+      name: string; description: string; polygon: string; visibility: string
+      encounterId: number | null; atmosphereHint: string | null; notes: string | null; color: string; createdAt: string
     }>
   }>
   campaignNote: string
@@ -248,9 +304,8 @@ interface CampaignExport {
     title: string; imagePath: string | null; textContent: string | null
   }>
   encounters: Array<{
-    name: string; templateData: string; notes: string | null; createdAt: string
+    id: number; name: string; templateData: string; notes: string | null; createdAt: string
   }>
-  // v8+: character sheets
   characterSheets: Array<{
     tokenId: number | null; name: string; race: string; className: string; subclass: string; level: number
     background: string; alignment: string; experience: number
@@ -264,7 +319,6 @@ interface CampaignExport {
     backstory: string; notes: string; inspiration: number; passivePerception: number
     createdAt: string; updatedAt: string
   }>
-  // v8+: audio boards and slots
   audioBoards: Array<{
     name: string; sortOrder: number
     slots: Array<{
@@ -278,49 +332,58 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
   if (!campaign) throw new Error(`Campaign ${campaignId} not found`)
   const maps = db.prepare('SELECT * FROM maps WHERE campaign_id = ? ORDER BY order_index').all(campaignId) as any[]
   const campaignNote = (db.prepare(
-    'SELECT content FROM notes WHERE campaign_id = ? AND map_id IS NULL'
+    'SELECT content FROM notes WHERE campaign_id = ? AND map_id IS NULL AND pin_x IS NULL LIMIT 1'
   ).get(campaignId) as { content: string } | undefined)?.content ?? ''
 
-  // Prefetch all per-map data in bulk to avoid N*M queries
   const mapIds = maps.map((m) => m.id)
-  const placeholders = mapIds.map(() => '?').join(',')
+  const ph = mapIds.map(() => '?').join(',')
 
   const allTokens = mapIds.length > 0
-    ? db.prepare(`SELECT * FROM tokens WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
+    ? db.prepare(`SELECT * FROM tokens WHERE map_id IN (${ph})`).all(...mapIds) as any[]
     : []
   const allFog = mapIds.length > 0
-    ? db.prepare(`SELECT map_id, fog_bitmap, explored_bitmap FROM fog_state WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
+    ? db.prepare(`SELECT map_id, fog_bitmap, explored_bitmap FROM fog_state WHERE map_id IN (${ph})`).all(...mapIds) as any[]
     : []
   const allInitiative = mapIds.length > 0
-    ? db.prepare(`SELECT * FROM initiative WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
+    ? db.prepare(`SELECT * FROM initiative WHERE map_id IN (${ph})`).all(...mapIds) as any[]
     : []
   const allGmPins = mapIds.length > 0
-    ? db.prepare(`SELECT map_id, x, y, label, icon, color FROM gm_pins WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
+    ? db.prepare(`SELECT map_id, x, y, label, icon, color FROM gm_pins WHERE map_id IN (${ph})`).all(...mapIds) as any[]
     : []
   const allDrawings = mapIds.length > 0
-    ? db.prepare(`SELECT map_id, type, points, color, width, synced, text FROM drawings WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
+    ? db.prepare(`SELECT map_id, type, points, color, width, synced, text FROM drawings WHERE map_id IN (${ph})`).all(...mapIds) as any[]
     : []
   const allNotes = mapIds.length > 0
-    ? db.prepare(`SELECT map_id, content FROM notes WHERE campaign_id = ? AND map_id IN (${placeholders})`).all(campaignId, ...mapIds) as any[]
+    ? db.prepare(`SELECT map_id, content FROM notes WHERE campaign_id = ? AND map_id IN (${ph}) AND pin_x IS NULL`).all(campaignId, ...mapIds) as any[]
+    : []
+  const allPinNotes = mapIds.length > 0
+    ? db.prepare(`SELECT map_id, title, content, pin_x, pin_y, category FROM notes WHERE campaign_id = ? AND map_id IN (${ph}) AND pin_x IS NOT NULL`).all(campaignId, ...mapIds) as any[]
     : []
   const allRooms = mapIds.length > 0
-    ? db.prepare(`SELECT map_id, name, description, polygon, visibility, encounter_id, atmosphere_hint, notes, color, created_at FROM rooms WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
+    ? db.prepare(`SELECT map_id, name, description, polygon, visibility, encounter_id, atmosphere_hint, notes, color, created_at FROM rooms WHERE map_id IN (${ph})`).all(...mapIds) as any[]
     : []
   const allWalls = mapIds.length > 0
-    ? db.prepare(`SELECT map_id, x1, y1, x2, y2, wall_type, door_state FROM walls WHERE map_id IN (${placeholders})`).all(...mapIds) as any[]
+    ? db.prepare(`SELECT map_id, x1, y1, x2, y2, wall_type, door_state FROM walls WHERE map_id IN (${ph})`).all(...mapIds) as any[]
     : []
 
-  // Index by map_id for O(1) lookup
   const tokensByMap = groupBy(allTokens, 'map_id')
   const fogByMap = new Map(allFog.map((f: any) => [f.map_id, f]))
   const initByMap = groupBy(allInitiative, 'map_id')
   const pinsByMap = groupBy(allGmPins, 'map_id')
   const drawingsByMap = groupBy(allDrawings, 'map_id')
   const notesByMap = new Map(allNotes.map((n: any) => [n.map_id, n.content]))
+  const pinNotesByMap = groupBy(allPinNotes, 'map_id')
   const roomsByMap = groupBy(allRooms, 'map_id')
   const wallsByMap = groupBy(allWalls, 'map_id')
 
-  // Character sheets (per-campaign, with original token ids for remapping on import)
+  const encounters = (db.prepare('SELECT id, name, template_data, notes, created_at FROM encounters WHERE campaign_id = ?').all(campaignId) as any[]).map((e) => ({
+    id: e.id as number,
+    name: e.name,
+    templateData: e.template_data,
+    notes: e.notes,
+    createdAt: e.created_at,
+  }))
+
   const characterSheets = (db.prepare(
     `SELECT * FROM character_sheets WHERE campaign_id = ?`
   ).all(campaignId) as any[]).map((cs) => ({
@@ -333,23 +396,22 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
     background:        cs.background,
     alignment:         cs.alignment,
     experience:        cs.experience,
-    str:               cs.str, dex: cs.dex, con: cs.con, intScore: cs.int_score, wis: cs.wis, cha: cs.cha,
-    hpMax:             cs.hp_max, hpCurrent: cs.hp_current, hpTemp: cs.hp_temp,
-    ac:                cs.ac, speed: cs.speed,
-    initiativeBonus:   cs.initiative_bonus, proficiencyBonus: cs.proficiency_bonus,
-    hitDice:           cs.hit_dice,
+    str: cs.str, dex: cs.dex, con: cs.con, intScore: cs.int_score, wis: cs.wis, cha: cs.cha,
+    hpMax: cs.hp_max, hpCurrent: cs.hp_current, hpTemp: cs.hp_temp,
+    ac: cs.ac, speed: cs.speed,
+    initiativeBonus: cs.initiative_bonus, proficiencyBonus: cs.proficiency_bonus,
+    hitDice: cs.hit_dice,
     deathSavesSuccess: cs.death_saves_success, deathSavesFailure: cs.death_saves_failure,
-    savingThrows:      cs.saving_throws, skills: cs.skills,
-    languages:         cs.languages, proficiencies: cs.proficiencies,
-    features:          cs.features, equipment: cs.equipment,
-    attacks:           cs.attacks, spells: cs.spells, spellSlots: cs.spell_slots,
-    personality:       cs.personality, ideals: cs.ideals, bonds: cs.bonds, flaws: cs.flaws,
-    backstory:         cs.backstory, notes: cs.notes,
-    inspiration:       cs.inspiration, passivePerception: cs.passive_perception,
-    createdAt:         cs.created_at, updatedAt: cs.updated_at,
+    savingThrows: cs.saving_throws, skills: cs.skills,
+    languages: cs.languages, proficiencies: cs.proficiencies,
+    features: cs.features, equipment: cs.equipment,
+    attacks: cs.attacks, spells: cs.spells, spellSlots: cs.spell_slots,
+    personality: cs.personality, ideals: cs.ideals, bonds: cs.bonds, flaws: cs.flaws,
+    backstory: cs.backstory, notes: cs.notes,
+    inspiration: cs.inspiration, passivePerception: cs.passive_perception,
+    createdAt: cs.created_at, updatedAt: cs.updated_at,
   }))
 
-  // Audio boards with their slots
   const boardRows = (db.prepare(`SELECT * FROM audio_boards WHERE campaign_id = ? ORDER BY sort_order`).all(campaignId) as any[])
   const audioBoards = boardRows.map((b: any) => {
     const slots = (db.prepare(`SELECT slot_number, emoji, title, audio_path FROM audio_board_slots WHERE board_id = ? ORDER BY slot_number`).all(b.id) as any[]).map((s: any) => ({
@@ -372,6 +434,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
       const gmPins = pinsByMap.get(m.id) ?? []
       const drawings = drawingsByMap.get(m.id) ?? []
       const note = notesByMap.get(m.id) ?? ''
+      const pinNotes = pinNotesByMap.get(m.id) ?? []
       const rooms = roomsByMap.get(m.id) ?? []
       const walls = wallsByMap.get(m.id) ?? []
       return {
@@ -381,6 +444,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
         gridSize: m.grid_size,
         orderIndex: m.order_index,
         rotation: m.rotation ?? 0,
+        rotationPlayer: m.rotation_player ?? 0,
         ftPerUnit: m.ft_per_unit ?? 5,
         gridOffsetX: m.grid_offset_x ?? 0,
         gridOffsetY: m.grid_offset_y ?? 0,
@@ -421,10 +485,18 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
         fogBitmap: fog?.fog_bitmap ?? null,
         exploredBitmap: fog?.explored_bitmap ?? null,
         initiative: initiative.map((i: any) => ({
-          combatantName: i.combatant_name, roll: i.roll, currentTurn: i.current_turn, tokenId: i.token_id ?? null,
+          combatantName: i.combatant_name, roll: i.roll, currentTurn: i.current_turn,
+          tokenId: i.token_id ?? null,
           effectTimers: i.effect_timers ?? null,
         })),
         notes: note,
+        pinNotes: pinNotes.map((pn: any) => ({
+          title: pn.title ?? '',
+          content: pn.content ?? '',
+          pinX: pn.pin_x,
+          pinY: pn.pin_y,
+          category: pn.category ?? 'Allgemein',
+        })),
         rooms: rooms.map((r: any) => ({
           name: r.name,
           description: r.description,
@@ -443,12 +515,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
       imagePath: h.image_path,
       textContent: h.text_content,
     })),
-    encounters: (db.prepare('SELECT name, template_data, notes, created_at FROM encounters WHERE campaign_id = ?').all(campaignId) as any[]).map((e) => ({
-      name: e.name,
-      templateData: e.template_data,
-      notes: e.notes,
-      createdAt: e.created_at,
-    })),
+    encounters,
     characterSheets,
     audioBoards,
   }
@@ -479,31 +546,22 @@ function collectAssetPaths(data: CampaignExport): string[] {
   return paths
 }
 
-function remapPaths(data: CampaignExport, map: Map<string, string>) {
+function remapPaths(data: CampaignExport, pathMap: Map<string, string>) {
   for (const m of data.maps) {
-    m.imagePath = findRemap(m.imagePath, map)
-    if (m.ambientTrackPath) m.ambientTrackPath = findRemap(m.ambientTrackPath, map)
+    m.imagePath = pathMap.get(m.imagePath) ?? m.imagePath
+    if (m.ambientTrackPath) m.ambientTrackPath = pathMap.get(m.ambientTrackPath) ?? m.ambientTrackPath
     for (const t of m.tokens) {
-      if (t.imagePath) t.imagePath = findRemap(t.imagePath, map)
+      if (t.imagePath) t.imagePath = pathMap.get(t.imagePath) ?? t.imagePath
     }
   }
   for (const h of data.handouts) {
-    if (h.imagePath) h.imagePath = findRemap(h.imagePath, map)
+    if (h.imagePath) h.imagePath = pathMap.get(h.imagePath) ?? h.imagePath
   }
   for (const b of data.audioBoards ?? []) {
     for (const s of b.slots) {
-      if (s.audioPath) s.audioPath = findRemap(s.audioPath, map)
+      if (s.audioPath) s.audioPath = pathMap.get(s.audioPath) ?? s.audioPath
     }
   }
-}
-
-function findRemap(imagePath: string, map: Map<string, string>): string {
-  for (const [key, val] of map) {
-    if (imagePath.endsWith(key.replace(/^\/assets\//, '')) || imagePath === key) {
-      return val
-    }
-  }
-  return imagePath
 }
 
 function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>): number {
@@ -515,16 +573,25 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
       db.prepare(`INSERT INTO notes (campaign_id, map_id, content) VALUES (?, NULL, ?)`).run(campaignId, data.campaignNote)
     }
 
-    // Build a cross-map token id → new id map (used for character sheet FK remapping)
+    // Insert encounters first and build id remap so rooms can reference them
+    const encounterIdMap = new Map<number, number>()
+    for (const e of data.encounters ?? []) {
+      const result = db.prepare(
+        `INSERT INTO encounters (campaign_id, name, template_data, notes, created_at) VALUES (?, ?, ?, ?, ?)`
+      ).run(campaignId, e.name, e.templateData, e.notes, e.createdAt ?? new Date().toISOString())
+      if (e.id != null) encounterIdMap.set(e.id, Number(result.lastInsertRowid))
+    }
+
     const globalTokenIdMap = new Map<number, number>()
 
     for (const m of data.maps) {
       const mapResult = db.prepare(
-        `INSERT INTO maps (campaign_id, name, image_path, grid_type, grid_size, order_index, rotation, ft_per_unit, grid_offset_x, grid_offset_y, ambient_brightness, ambient_track_path, track1_volume, track2_volume, combat_volume)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        `INSERT INTO maps (campaign_id, name, image_path, grid_type, grid_size, order_index, rotation, rotation_player, ft_per_unit, grid_offset_x, grid_offset_y, ambient_brightness, ambient_track_path, track1_volume, track2_volume, combat_volume)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
       ).run(
         campaignId, m.name, m.imagePath, m.gridType, m.gridSize, m.orderIndex,
-        m.rotation ?? 0, m.ftPerUnit ?? 5, m.gridOffsetX ?? 0, m.gridOffsetY ?? 0, m.ambientBrightness ?? 100,
+        m.rotation ?? 0, m.rotationPlayer ?? 0, m.ftPerUnit ?? 5,
+        m.gridOffsetX ?? 0, m.gridOffsetY ?? 0, m.ambientBrightness ?? 100,
         m.ambientTrackPath ?? null, m.track1Volume ?? 1, m.track2Volume ?? 1, m.combatVolume ?? 1,
       )
       const mapId = Number(mapResult.lastInsertRowid)
@@ -576,10 +643,17 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
         db.prepare(`INSERT INTO notes (campaign_id, map_id, content) VALUES (?, ?, ?)`).run(campaignId, mapId, m.notes)
       }
 
+      for (const pn of m.pinNotes ?? []) {
+        db.prepare(
+          `INSERT INTO notes (campaign_id, map_id, title, content, pin_x, pin_y, category) VALUES (?, ?, ?, ?, ?, ?, ?)`
+        ).run(campaignId, mapId, pn.title, pn.content, pn.pinX, pn.pinY, pn.category ?? 'Allgemein')
+      }
+
       for (const r of m.rooms ?? []) {
+        const remappedEncId = r.encounterId != null ? (encounterIdMap.get(r.encounterId) ?? null) : null
         db.prepare(
           `INSERT INTO rooms (map_id, name, description, polygon, visibility, encounter_id, atmosphere_hint, notes, color, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-        ).run(mapId, r.name, r.description, r.polygon, r.visibility, r.encounterId, r.atmosphereHint, r.notes, r.color, r.createdAt ?? new Date().toISOString())
+        ).run(mapId, r.name, r.description, r.polygon, r.visibility, remappedEncId, r.atmosphereHint, r.notes, r.color, r.createdAt ?? new Date().toISOString())
       }
     }
 
@@ -589,13 +663,6 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
       ).run(campaignId, h.title, h.imagePath, h.textContent)
     }
 
-    for (const e of data.encounters ?? []) {
-      db.prepare(
-        `INSERT INTO encounters (campaign_id, name, template_data, notes, created_at) VALUES (?, ?, ?, ?, ?)`
-      ).run(campaignId, e.name, e.templateData, e.notes, e.createdAt ?? new Date().toISOString())
-    }
-
-    // Character sheets (v8+) — remap token_id to new ids
     for (const cs of data.characterSheets ?? []) {
       const remappedTokenId = cs.tokenId != null ? (globalTokenIdMap.get(cs.tokenId) ?? null) : null
       db.prepare(
@@ -621,7 +688,6 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
       )
     }
 
-    // Audio boards and slots (v8+)
     for (const b of data.audioBoards ?? []) {
       const boardResult = db.prepare(
         `INSERT INTO audio_boards (campaign_id, name, sort_order) VALUES (?, ?, ?)`

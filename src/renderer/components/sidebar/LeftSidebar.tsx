@@ -106,7 +106,7 @@ export function LeftSidebar() {
       const finalMapName = fileName.replace(/\.[^/.]+$/, '') || 'Neue Karte'
 
       const result = await window.electronAPI.dbRun(
-        `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, grid_offset_x, grid_offset_y, ambient_brightness) VALUES (?, ?, ?, ?, 0, 0, 0, 100)`,
+        `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, rotation_player, grid_offset_x, grid_offset_y, ambient_brightness) VALUES (?, ?, ?, ?, 0, 0, 0, 0, 100)`,
         [activeCampaignId, finalMapName, asset.path, activeMaps.length]
       )
       const newMap: MapRecord = {
@@ -126,6 +126,10 @@ export function LeftSidebar() {
         cameraX: null,
         cameraY: null,
         cameraScale: null,
+        ambientTrackPath: null,
+        track1Volume: 1,
+        track2Volume: 1,
+        combatVolume: 1,
       }
       addMap(newMap)
       setActiveMap(newMap.id)
@@ -161,7 +165,7 @@ export function LeftSidebar() {
       const finalMapName = pdfData.originalName.replace(/\.[^/.]+$/, '') || 'Neue Karte'
 
       const result = await window.electronAPI.dbRun(
-        `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, grid_offset_x, grid_offset_y, ambient_brightness) VALUES (?, ?, ?, ?, 0, 0, 0, 100)`,
+        `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, rotation_player, grid_offset_x, grid_offset_y, ambient_brightness) VALUES (?, ?, ?, ?, 0, 0, 0, 0, 100)`,
         [activeCampaignId, finalMapName, imagePath, activeMaps.length]
       )
       const newMap: MapRecord = {
@@ -181,6 +185,10 @@ export function LeftSidebar() {
         cameraX: null,
         cameraY: null,
         cameraScale: null,
+        ambientTrackPath: null,
+        track1Volume: 1,
+        track2Volume: 1,
+        combatVolume: 1,
       }
       addMap(newMap)
       setActiveMap(newMap.id)

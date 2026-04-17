@@ -182,7 +182,7 @@ export function CanvasArea() {
         if (!assetResult) return
         const mapName = file.name.replace(/\.[^.]+$/, '') || 'Neue Karte'
         const dbResult = await window.electronAPI.dbRun(
-          `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation) VALUES (?, ?, ?, ?, 0)`,
+          `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, rotation_player) VALUES (?, ?, ?, ?, 0, 0)`,
           [useCampaignStore.getState().activeCampaignId, mapName, assetResult.path, useCampaignStore.getState().activeMaps.length]
         )
         useCampaignStore.getState().addMap({
@@ -195,12 +195,17 @@ export function CanvasArea() {
           ftPerUnit: 5,
           orderIndex: useCampaignStore.getState().activeMaps.length,
           rotation: 0,
+          rotationPlayer: 0,
           gridOffsetX: 0,
           gridOffsetY: 0,
           ambientBrightness: 100,
           cameraX: null,
           cameraY: null,
           cameraScale: null,
+          ambientTrackPath: null,
+          track1Volume: 1,
+          track2Volume: 1,
+          combatVolume: 1,
         })
         useCampaignStore.getState().setActiveMap(dbResult.lastInsertRowid)
         return

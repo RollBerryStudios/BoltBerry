@@ -55,8 +55,9 @@ export function CampaignView() {
         rotation: number | null; grid_offset_x: number; grid_offset_y: number
         ambient_brightness: number; ambient_track_path: string | null
         track1_volume: number; track2_volume: number; combat_volume: number
+        rotation_player: number
       }>(
-        'SELECT id, campaign_id, name, image_path, grid_type, grid_size, ft_per_unit, order_index, camera_x, camera_y, camera_scale, rotation, grid_offset_x, grid_offset_y, ambient_brightness, ambient_track_path, track1_volume, track2_volume, combat_volume FROM maps WHERE campaign_id = ? ORDER BY order_index',
+        'SELECT id, campaign_id, name, image_path, grid_type, grid_size, ft_per_unit, order_index, camera_x, camera_y, camera_scale, rotation, rotation_player, grid_offset_x, grid_offset_y, ambient_brightness, ambient_track_path, track1_volume, track2_volume, combat_volume FROM maps WHERE campaign_id = ? ORDER BY order_index',
         [campaignId],
       )
       setActiveMaps(rows.map((r) => ({
@@ -69,6 +70,7 @@ export function CampaignView() {
         ftPerUnit: r.ft_per_unit ?? 5,
         orderIndex: r.order_index,
         rotation: r.rotation ?? 0,
+        rotationPlayer: (r as any).rotation_player ?? 0,
         gridOffsetX: r.grid_offset_x ?? 0,
         gridOffsetY: r.grid_offset_y ?? 0,
         ambientBrightness: r.ambient_brightness ?? 100,
@@ -99,7 +101,7 @@ export function CampaignView() {
       const finalMapName = fileName.replace(/\.[^/.]+$/, '') || 'Neue Karte'
 
       const result = await window.electronAPI.dbRun(
-        `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, grid_offset_x, grid_offset_y, ambient_brightness) VALUES (?, ?, ?, ?, 0, 0, 0, 100)`,
+        `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, rotation_player, grid_offset_x, grid_offset_y, ambient_brightness) VALUES (?, ?, ?, ?, 0, 0, 0, 0, 100)`,
         [activeCampaignId, finalMapName, asset.path, activeMaps.length],
       )
       const newMap: MapRecord = {
@@ -112,6 +114,7 @@ export function CampaignView() {
         ftPerUnit: 5,
         orderIndex: activeMaps.length,
         rotation: 0,
+        rotationPlayer: 0,
         gridOffsetX: 0,
         gridOffsetY: 0,
         ambientBrightness: 100,

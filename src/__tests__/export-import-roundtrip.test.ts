@@ -44,8 +44,8 @@ describe('CampaignExport interface', () => {
     expect(SRC).toContain(field)
   })
 
-  it('EXPORT_VERSION is 8 (schema v8 with audio + character sheets)', () => {
-    expect(SRC).toMatch(/const EXPORT_VERSION\s*=\s*8/)
+  it('EXPORT_VERSION is 9 (schema v9 with encounter-id remap + rotation_player + pin notes)', () => {
+    expect(SRC).toMatch(/const EXPORT_VERSION\s*=\s*9/)
   })
 })
 
@@ -156,29 +156,29 @@ describe('collectAssetPaths', () => {
 
 describe('remapPaths', () => {
   it('remaps map imagePath', () => {
-    expect(SRC).toMatch(/m\.imagePath\s*=\s*findRemap/)
+    expect(SRC).toMatch(/m\.imagePath\s*=\s*pathMap\.get/)
   })
 
   it('remaps map ambientTrackPath', () => {
-    expect(SRC).toMatch(/m\.ambientTrackPath\s*=\s*findRemap/)
+    expect(SRC).toMatch(/m\.ambientTrackPath\s*=\s*pathMap\.get/)
   })
 
   it('remaps token imagePaths', () => {
-    expect(SRC).toMatch(/t\.imagePath\s*=\s*findRemap/)
+    expect(SRC).toMatch(/t\.imagePath\s*=\s*pathMap\.get/)
   })
 
   it('remaps handout imagePaths', () => {
-    expect(SRC).toMatch(/h\.imagePath\s*=\s*findRemap/)
+    expect(SRC).toMatch(/h\.imagePath\s*=\s*pathMap\.get/)
   })
 
   it('remaps audio board slot audioPaths', () => {
-    expect(SRC).toMatch(/s\.audioPath\s*=\s*findRemap/)
+    expect(SRC).toMatch(/s\.audioPath\s*=\s*pathMap\.get/)
   })
 })
 
 describe('path-traversal protection in ZIP import', () => {
   it('validates extracted paths against importDir boundary', () => {
-    expect(SRC).toContain('dest.startsWith(importDir')
+    expect(SRC).toContain('dest.startsWith(realImportDir')
   })
 })
 
