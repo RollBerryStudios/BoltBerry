@@ -9,6 +9,7 @@ import archiver from 'archiver'
 import unzipper from 'unzipper'
 import { IPC } from '../../shared/ipc-types'
 import { getDb, getCustomUserDataPath } from '../db/database'
+import { validateMagicBytes } from '../utils/magic-bytes'
 
 const EXPORT_VERSION = 9
 
@@ -190,6 +191,11 @@ export function registerExportImportHandlers(): void {
     const pathMap = new Map<string, string>()
 
     if (existsSync(assetsDir)) {
+      // Magic-byte check mirrors IMPORT_FILE: a third-party ZIP can't smuggle
+      // a disguised .exe by naming it .png. Unknown extensions are rejected
+      // under strict mode so only the known asset types (image/audio) make
+      // it into the campaign folder.
+      const rejected: string[] = []
       const walkDir = (dir: string, prefix: string) => {
         for (const entry of readdirSync(dir, { withFileTypes: true })) {
           const srcPath = path.join(dir, entry.name)
@@ -198,7 +204,12 @@ export function registerExportImportHandlers(): void {
           if (entry.isDirectory()) {
             walkDir(srcPath, entryKey)
           } else {
-            const destName = `${Date.now()}_${Math.random().toString(36).slice(2)}${path.extname(entry.name)}`
+            const ext = path.extname(entry.name)
+            if (!validateMagicBytes(srcPath, ext, /* strict */ true)) {
+              rejected.push(entryKey)
+              continue
+            }
+            const destName = `${Date.now()}_${Math.random().toString(36).slice(2)}${ext}`
             const dest = path.join(destAssetsDir, destName)
             copyFileSync(srcPath, dest)
             const relDest = path.relative(userData, dest).split(path.sep).join('/')
@@ -207,6 +218,9 @@ export function registerExportImportHandlers(): void {
         }
       }
       walkDir(assetsDir, '')
+      if (rejected.length > 0) {
+        console.warn('[export-import] IMPORT_CAMPAIGN rejected disguised files:', rejected)
+      }
     }
 
     remapPaths(campaignData, pathMap)
@@ -291,7 +305,7 @@ interface CampaignExport {
     }>
     fogBitmap: string | null
     exploredBitmap: string | null
-    initiative: Array<{ combatantName: string; roll: number; currentTurn: number; tokenId: number | null; effectTimers: string | null }>
+    initiative: Array<{ combatantName: string; roll: number; currentTurn: number; tokenId: number | null; effectTimers: string | null; sortOrder: number }>
     notes: string
     pinNotes: Array<{ title: string; content: string; pinX: number; pinY: number; category: string }>
     rooms: Array<{
@@ -488,6 +502,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
           combatantName: i.combatant_name, roll: i.roll, currentTurn: i.current_turn,
           tokenId: i.token_id ?? null,
           effectTimers: i.effect_timers ?? null,
+          sortOrder: i.sort_order ?? 0,
         })),
         notes: note,
         pinNotes: pinNotes.map((pn: any) => ({
@@ -635,8 +650,8 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
 
       for (const i of m.initiative) {
         const mappedTokenId = i.tokenId != null ? (globalTokenIdMap.get(i.tokenId) ?? null) : null
-        db.prepare(`INSERT INTO initiative (map_id, combatant_name, roll, current_turn, token_id, effect_timers) VALUES (?, ?, ?, ?, ?, ?)`)
-          .run(mapId, i.combatantName, i.roll, i.currentTurn, mappedTokenId, i.effectTimers ?? null)
+        db.prepare(`INSERT INTO initiative (map_id, combatant_name, roll, current_turn, token_id, effect_timers, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?)`)
+          .run(mapId, i.combatantName, i.roll, i.currentTurn, mappedTokenId, i.effectTimers ?? null, i.sortOrder ?? 0)
       }
 
       if (m.notes) {
