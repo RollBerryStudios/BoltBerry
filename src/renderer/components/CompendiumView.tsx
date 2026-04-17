@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useUIStore } from '../stores/uiStore'
+import { CompendiumPdfViewer } from './CompendiumPdfViewer'
 import type { CompendiumFile } from '@shared/ipc-types'
 
 /* Top-level Compendium view. Shown via uiStore.topView === 'compendium'.
@@ -154,30 +155,12 @@ export function CompendiumView() {
         <main className="bb-comp-main">
           {error && <div className="bb-comp-error">⚠️ {error}</div>}
           {selected ? (
-            <PdfViewerPlaceholder file={selected} />
+            <CompendiumPdfViewer key={selected.path} file={selected} />
           ) : (
             <EmptyCompendium onImport={handleImport} onOpenFolder={handleOpenFolder} />
           )}
         </main>
       </div>
-    </div>
-  )
-}
-
-// ─── Viewer placeholder ───────────────────────────────────────────────
-// Real PDF rendering lands in the next package. This placeholder proves
-// the data flow (file listed, file selected, path resolvable) end-to-end.
-
-function PdfViewerPlaceholder({ file }: { file: CompendiumFile }) {
-  const { t } = useTranslation()
-  return (
-    <div className="bb-comp-viewer-empty">
-      <div className="bb-comp-viewer-empty-icon">📕</div>
-      <h2 className="bb-comp-viewer-empty-title display">{file.name}</h2>
-      <p className="bb-comp-viewer-empty-sub">
-        {formatSize(file.size)} · {t(file.source === 'bundled' ? 'compendium.bundled' : 'compendium.userFile')}
-      </p>
-      <p className="bb-comp-viewer-empty-hint">{t('compendium.viewerComingSoon')}</p>
     </div>
   )
 }
@@ -404,9 +387,11 @@ function CompendiumStyles() {
       /* ── Main area ─────────────────────────────────────────── */
       .bb-comp-main {
         position: relative;
-        overflow: auto;
-        padding: var(--sp-6);
+        display: flex; flex-direction: column;
+        min-width: 0; min-height: 0;
+        padding: var(--sp-5);
       }
+      .bb-comp-main > :not(.bb-comp-error) { flex: 1; min-height: 0; }
       .bb-comp-error {
         padding: var(--sp-3) var(--sp-4);
         background: rgba(239, 68, 68, 0.15);
@@ -417,7 +402,6 @@ function CompendiumStyles() {
         margin-bottom: var(--sp-4);
       }
 
-      .bb-comp-viewer-empty,
       .bb-comp-empty {
         display: flex; flex-direction: column; align-items: center;
         text-align: center;
@@ -426,27 +410,15 @@ function CompendiumStyles() {
         border: 1px solid var(--border);
         border-radius: var(--radius-lg);
       }
-      .bb-comp-viewer-empty-icon,
       .bb-comp-empty-icon { font-size: 52px; opacity: 0.6; margin-bottom: var(--sp-3); }
-      .bb-comp-viewer-empty-title,
       .bb-comp-empty-title {
         font-size: 24px; margin: 0 0 var(--sp-2);
         color: var(--text-primary);
       }
-      .bb-comp-viewer-empty-sub,
       .bb-comp-empty-sub {
         color: var(--text-secondary);
         font-size: 13px; max-width: 480px;
         margin: 0 0 var(--sp-5);
-      }
-      .bb-comp-viewer-empty-hint {
-        color: var(--text-muted);
-        font-size: 12px;
-        margin: 0;
-        padding: var(--sp-2) var(--sp-4);
-        background: var(--bg-elevated);
-        border: 1px dashed var(--border);
-        border-radius: var(--radius);
       }
       .bb-comp-empty-actions {
         display: flex; gap: var(--sp-3);

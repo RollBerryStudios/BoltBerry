@@ -110,7 +110,14 @@
     "emptyTitle": "Noch keine PDFs",
     "emptySub": "Lege PDF-Regelwerke in den Kompendium-Ordner oder importiere sie direkt \u2014 sie erscheinen hier sofort.",
     "srdHintTitle": "Tipp",
-    "viewerComingSoon": "PDF-Viewer wird im n\u00e4chsten Schritt aktiviert."
+    "loading": "L\u00e4dt",
+    "readError": "PDF konnte nicht gelesen werden",
+    "prevPage": "Vorherige Seite",
+    "nextPage": "N\u00e4chste Seite",
+    "pageNumber": "Seitenzahl",
+    "zoomIn": "Vergr\u00f6\u00dfern",
+    "zoomOut": "Verkleinern",
+    "zoomReset": "Zoom zur\u00fccksetzen"
   },
   "welcome": {
     "tag": "Lokales Spieltisch-Studio",
