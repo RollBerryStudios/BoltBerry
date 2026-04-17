@@ -65,6 +65,7 @@
     "saveNow": "Jetzt speichern",
     "exportCampaign": "Kampagne exportieren",
     "importCampaign": "Kampagne importieren",
+    "openCompendium": "Kompendium \u00f6ffnen",
     "openPlayerWindow": "Spielerfenster öffnen",
     "shareCameraOnce": "Kamera einmal teilen",
     "toggleCameraFollow": "Kamera-Folgen umschalten"
@@ -96,6 +97,20 @@
     "playerWindow": "Spielerfenster",
     "playerWindowOpen": "Spielerfenster ist ge\u00f6ffnet",
     "closePlayerWindow": "Spielerfenster schlie\u00dfen"
+  },
+  "compendium": {
+    "title": "Kompendium",
+    "back": "Zur\u00fcck",
+    "files": "PDFs",
+    "noFiles": "Keine PDFs gefunden",
+    "bundled": "Beigelegt",
+    "userFile": "Eigene Datei",
+    "importPdf": "PDF importieren",
+    "openFolder": "Ordner \u00f6ffnen",
+    "emptyTitle": "Noch keine PDFs",
+    "emptySub": "Lege PDF-Regelwerke in den Kompendium-Ordner oder importiere sie direkt \u2014 sie erscheinen hier sofort.",
+    "srdHintTitle": "Tipp",
+    "viewerComingSoon": "PDF-Viewer wird im n\u00e4chsten Schritt aktiviert."
   },
   "welcome": {
     "tag": "Lokales Spieltisch-Studio",

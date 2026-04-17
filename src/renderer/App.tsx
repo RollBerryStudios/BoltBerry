@@ -5,6 +5,7 @@ import { useSettingsStore } from './stores/settingsStore'
 import { AppLayout } from './components/AppLayout'
 import { CampaignView } from './components/CampaignView'
 import { Welcome } from './components/Welcome'
+import { CompendiumView } from './components/CompendiumView'
 import { SetupWizard } from './components/SetupWizard'
 import { ShortcutOverlay } from './components/ShortcutOverlay'
 import { CommandPalette } from './components/CommandPalette'
@@ -136,11 +137,14 @@ export default function App() {
   }, [])
 
   const { isSetupComplete } = useSettingsStore()
+  const topView = useUIStore((s) => s.topView)
 
   return (
     <>
       {!isSetupComplete ? (
         <SetupWizard onComplete={() => { /* isSetupComplete set inside wizard */ }} />
+      ) : topView === 'compendium' ? (
+        <CompendiumView />
       ) : !activeCampaignId ? (
         <Welcome />
       ) : (

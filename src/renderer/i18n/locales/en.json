@@ -65,6 +65,7 @@
     "saveNow": "Save now",
     "exportCampaign": "Export campaign",
     "importCampaign": "Import campaign",
+    "openCompendium": "Open compendium",
     "openPlayerWindow": "Open player window",
     "shareCameraOnce": "Share camera once",
     "toggleCameraFollow": "Toggle camera follow"
@@ -96,6 +97,20 @@
     "playerWindow": "Player window",
     "playerWindowOpen": "Player window is open",
     "closePlayerWindow": "Close player window"
+  },
+  "compendium": {
+    "title": "Compendium",
+    "back": "Back",
+    "files": "PDFs",
+    "noFiles": "No PDFs found",
+    "bundled": "Bundled",
+    "userFile": "User file",
+    "importPdf": "Import PDF",
+    "openFolder": "Open folder",
+    "emptyTitle": "No PDFs yet",
+    "emptySub": "Drop PDF rulebooks into the compendium folder or import them directly \u2014 they will appear here instantly.",
+    "srdHintTitle": "Tip",
+    "viewerComingSoon": "PDF viewer will be wired up in the next step."
   },
   "welcome": {
     "tag": "Local tabletop studio",

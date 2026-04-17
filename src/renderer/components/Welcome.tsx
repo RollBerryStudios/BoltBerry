@@ -255,6 +255,13 @@ function RightPane({
   return (
     <section className="bb-welcome-right">
       <div className="bb-welcome-right-top">
+        <button
+          type="button"
+          className="bb-welcome-compendium-btn"
+          onClick={() => useUIStore.getState().setTopView('compendium')}
+        >
+          📚 {t('welcome.openCompendium')}
+        </button>
         <div className="bb-welcome-lang" role="group" aria-label="Language">
           {(['de', 'en'] as const).map((l) => (
             <button
@@ -729,7 +736,25 @@ function WelcomeStyles() {
       }
       .bb-welcome-right-top {
         display: flex; justify-content: flex-end;
+        align-items: center;
+        gap: 10px;
         padding: 22px 36px;
+      }
+      .bb-welcome-compendium-btn {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 5px 10px;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        color: var(--text-secondary);
+        font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
+        cursor: pointer;
+        font-family: inherit;
+        transition: border-color var(--transition), color var(--transition);
+      }
+      .bb-welcome-compendium-btn:hover {
+        border-color: var(--accent-blue);
+        color: var(--accent-blue-light);
       }
       .bb-welcome-lang {
         display: flex;

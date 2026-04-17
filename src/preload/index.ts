@@ -14,6 +14,7 @@ import type {
   WeatherType,
   PlayerDrawingState,
   PlayerWallState,
+  CompendiumFile,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -109,6 +110,16 @@ export const dmApi = {
     ipcRenderer.on('dm:request-full-sync', handler)
     return () => ipcRenderer.removeListener('dm:request-full-sync', handler)
   },
+
+  // Compendium (SRD + user-supplied PDFs)
+  listCompendium: (): Promise<CompendiumFile[]> =>
+    ipcRenderer.invoke(IPC.COMPENDIUM_LIST),
+  readCompendiumPdf: (filePath: string): Promise<string | null> =>
+    ipcRenderer.invoke(IPC.COMPENDIUM_READ, filePath),
+  importCompendiumPdf: (): Promise<{ success: true; path: string; name: string } | { success: false; error: string }> =>
+    ipcRenderer.invoke(IPC.COMPENDIUM_IMPORT),
+  openCompendiumFolder: (): Promise<void> =>
+    ipcRenderer.invoke(IPC.COMPENDIUM_OPEN_FOLDER),
 
   // Native application menu bridge
   setMenuLanguage: (lang: 'de' | 'en') =>

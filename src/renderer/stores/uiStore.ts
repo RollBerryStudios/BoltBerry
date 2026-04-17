@@ -10,6 +10,10 @@ export type AppMode = 'map' | 'atmosphere' | 'blackout'
 export type SessionMode = 'session' | 'prep'
 export type WorkMode = 'prep' | 'play' | 'combat' | 'player-preview' | 'fog-edit'
 export type AppLanguage = 'de' | 'en'
+/** Top-level screen override. When set to a non-'main' value, the named
+ *  overlay view (e.g. compendium) takes over the whole window; 'main'
+ *  falls through to the regular Welcome / Workspace / Map routing. */
+export type TopView = 'main' | 'compendium'
 
 const FLOATING_PANELS: ReadonlySet<string> = new Set(['audio', 'overlay', 'dice'])
 export function isFloatingPanel(id: string): id is FloatingPanel {
@@ -62,6 +66,8 @@ interface UIState {
   overlayActive: boolean
   activeWeather: string
   drawingClearTick: number
+  topView: TopView
+
   clipboardTokens: Array<{
     name: string
     imagePath: string | null
@@ -126,6 +132,8 @@ interface UIState {
     offsetX: number
     offsetY: number
   }>) => void
+
+  setTopView: (view: TopView) => void
 }
 
 export const useUIStore = create<UIState>((set) => ({
@@ -158,6 +166,7 @@ export const useUIStore = create<UIState>((set) => ({
   activeWeather: 'none',
   drawingClearTick: 0,
   clipboardTokens: [],
+  topView: 'main',
 
   setActiveTool: (activeTool) => set({ activeTool }),
   setWorkMode: (workMode: WorkMode) =>
@@ -262,6 +271,7 @@ export const useUIStore = create<UIState>((set) => ({
   setOverlayActive: (overlayActive) => set({ overlayActive }),
   setActiveWeather: (activeWeather) => set({ activeWeather }),
   incrementDrawingClearTick: () => set((s) => ({ drawingClearTick: s.drawingClearTick + 1 })),
+  setTopView: (topView) => set({ topView }),
   setClipboardTokens: (tokens: Array<{
     name: string
     imagePath: string | null

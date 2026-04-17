@@ -72,6 +72,7 @@ function buildCommands(t: (k: string) => string): Command[] {
     { id: 'campaign.save',   labelKey: 'palette.saveNow',       groupKey: 'palette.groupFile', shortcut: 'Ctrl+S', keywords: 'save speichern', run: () => { window.electronAPI?.saveNow() } },
     { id: 'campaign.export', labelKey: 'palette.exportCampaign',groupKey: 'palette.groupFile', keywords: 'export kampagne exportieren', run: () => { const id = campaign().activeCampaignId; if (id) window.electronAPI?.exportCampaign(id) } },
     { id: 'campaign.import', labelKey: 'palette.importCampaign',groupKey: 'palette.groupFile', keywords: 'import kampagne importieren', run: () => { window.electronAPI?.importCampaign() } },
+    { id: 'compendium.open', labelKey: 'palette.openCompendium', groupKey: 'palette.groupFile', keywords: 'compendium kompendium srd pdf regelwerk rulebook', run: () => ui().setTopView('compendium') },
 
     // ── Player window
     { id: 'player.open',         labelKey: 'palette.openPlayerWindow',   groupKey: 'palette.groupPlayer', shortcut: 'Ctrl+P', keywords: 'player window spielerfenster öffnen', run: () => { window.electronAPI?.openPlayerWindow?.() } },

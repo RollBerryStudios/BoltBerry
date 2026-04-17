@@ -80,7 +80,24 @@ export const IPC = {
   // Native application menu
   SET_MENU_LANGUAGE: 'app:set-menu-language',
   MENU_ACTION: 'menu:action',
+
+  // Compendium: bundled + user-supplied PDFs (SRD etc.)
+  COMPENDIUM_LIST: 'compendium:list',
+  COMPENDIUM_READ: 'compendium:read',
+  COMPENDIUM_IMPORT: 'compendium:import',
+  COMPENDIUM_OPEN_FOLDER: 'compendium:open-folder',
 } as const
+
+export interface CompendiumFile {
+  /** File name with extension, e.g. "srd-de-5.2.1.pdf" */
+  name: string
+  /** Absolute path on disk; used as the key when opening the file. */
+  path: string
+  /** 'bundled' = ships with the installer; 'user' = in <userData>/compendium/. */
+  source: 'bundled' | 'user'
+  /** Size in bytes, useful for display ("24 MB"). */
+  size: number
+}
 
 // ─── Shared Data Types ─────────────────────────────────────────────────────────────────
 

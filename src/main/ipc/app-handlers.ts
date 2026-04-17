@@ -477,6 +477,108 @@ export function registerAppHandlers(): void {
     return true
   })
 
+  // ── Compendium ────────────────────────────────────────────────────────
+  // PDFs live in two folders: bundled (ships with the installer) and user
+  // (per-user additions). We merge them at list time; user files override
+  // a bundled file with the same name so users can drop in a newer SRD
+  // version without editing the repo.
+
+  function getCompendiumDirs(): { bundled: string; user: string } {
+    // In packaged builds resources live under process.resourcesPath; in
+    // development (tsc + electron .) the build hasn't run so we fall back
+    // to the repo-level resources folder.
+    const resourcesBase = app.isPackaged
+      ? process.resourcesPath
+      : join(app.getAppPath(), 'resources')
+    const bundled = join(resourcesBase, 'compendium')
+    const userDataPath = getCustomUserDataPath() || app.getPath('userData')
+    const user = join(userDataPath, 'compendium')
+    if (!existsSync(user)) {
+      try { mkdirSync(user, { recursive: true }) } catch { /* ignore — will show empty list */ }
+    }
+    return { bundled, user }
+  }
+
+  function listPdfsIn(dir: string, source: 'bundled' | 'user') {
+    if (!existsSync(dir)) return []
+    try {
+      return readdirSync(dir)
+        .filter((n) => n.toLowerCase().endsWith('.pdf'))
+        .map((name) => {
+          const full = join(dir, name)
+          let size = 0
+          try { size = statSync(full).size } catch { /* ignore */ }
+          return { name, path: full, source, size }
+        })
+    } catch {
+      return []
+    }
+  }
+
+  ipcMain.handle(IPC.COMPENDIUM_LIST, () => {
+    const { bundled, user } = getCompendiumDirs()
+    const bundledFiles = listPdfsIn(bundled, 'bundled')
+    const userFiles = listPdfsIn(user, 'user')
+    const byName = new Map<string, ReturnType<typeof listPdfsIn>[number]>()
+    for (const f of bundledFiles) byName.set(f.name, f)
+    for (const f of userFiles) byName.set(f.name, f) // user overrides bundled
+    return Array.from(byName.values()).sort((a, b) => a.name.localeCompare(b.name))
+  })
+
+  ipcMain.handle(IPC.COMPENDIUM_READ, async (_event, filePath: string) => {
+    try {
+      const { bundled, user } = getCompendiumDirs()
+      const realBundled = existsSync(bundled) ? realpathSync(bundled) : null
+      const realUser = existsSync(user) ? realpathSync(user) : null
+      const real = realpathSync(filePath)
+      const inBundled = realBundled && (real === realBundled || real.startsWith(realBundled + sep))
+      const inUser = realUser && (real === realUser || real.startsWith(realUser + sep))
+      if (!inBundled && !inUser) {
+        console.warn('[AppHandlers] COMPENDIUM_READ: path outside compendium dirs — rejecting', filePath)
+        return null
+      }
+      if (!real.toLowerCase().endsWith('.pdf')) return null
+      const stat = statSync(real)
+      if (stat.size > 200 * 1024 * 1024) {
+        console.warn('[AppHandlers] COMPENDIUM_READ: file too large, refusing', real)
+        return null
+      }
+      const buf = await readFile(real)
+      return `data:application/pdf;base64,${buf.toString('base64')}`
+    } catch (err) {
+      console.warn('[AppHandlers] COMPENDIUM_READ failed:', err)
+      return null
+    }
+  })
+
+  ipcMain.handle(IPC.COMPENDIUM_IMPORT, async (event) => {
+    const win = BrowserWindow.fromWebContents(event.sender)
+    if (!win) return { success: false, error: 'no-window' as const }
+    const { canceled, filePaths } = await dialog.showOpenDialog(win, {
+      title: 'PDF importieren',
+      properties: ['openFile'],
+      filters: [{ name: 'PDF', extensions: ['pdf'] }],
+    })
+    if (canceled || filePaths.length === 0) return { success: false, error: 'cancelled' as const }
+    const src = filePaths[0]
+    const { user } = getCompendiumDirs()
+    const fileName = src.split(/[\\/]/).pop() || 'imported.pdf'
+    const dest = join(user, fileName)
+    try {
+      copyFileSync(src, dest)
+      return { success: true, path: dest, name: fileName }
+    } catch (err) {
+      return { success: false, error: (err as Error).message }
+    }
+  })
+
+  ipcMain.handle(IPC.COMPENDIUM_OPEN_FOLDER, async () => {
+    const { shell } = await import('electron')
+    const { user } = getCompendiumDirs()
+    const err = await shell.openPath(user)
+    if (err) throw new Error(`Open compendium folder failed: ${err}`)
+  })
+
   // Get Electron's userData path
   ipcMain.handle(IPC.GET_USER_DATA_PATH, () => {
     return app.getPath('userData')

@@ -207,6 +207,15 @@ export function CampaignView() {
             labelLoading={t('workspace.loading')}
           />
 
+          <button
+            type="button"
+            className="bb-ws-compendium"
+            title={t('compendium.title')}
+            onClick={() => useUIStore.getState().setTopView('compendium')}
+          >
+            📚
+          </button>
+
           <div className="bb-ws-lang" role="group" aria-label="Language">
             {(['de', 'en'] as const).map((l) => (
               <button
@@ -548,6 +557,22 @@ function WorkspaceStyles() {
       }
       .bb-ws-cta-ghost:hover { background: rgba(255, 198, 46, 0.08); color: var(--accent-light); }
 
+      .bb-ws-compendium {
+        width: 32px; height: 32px;
+        display: inline-flex; align-items: center; justify-content: center;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--text-secondary);
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 14px;
+        transition: border-color var(--transition), color var(--transition);
+      }
+      .bb-ws-compendium:hover {
+        border-color: var(--accent-blue);
+        color: var(--accent-blue-light);
+      }
       .bb-ws-lang {
         display: flex;
         border: 1px solid var(--border);
