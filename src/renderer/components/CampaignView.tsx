@@ -1,25 +1,35 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useCampaignStore } from '../stores/campaignStore'
 import { useUIStore } from '../stores/uiStore'
 import { NotesPanel } from './sidebar/panels/NotesPanel'
 import { CharacterSheetPanel } from './sidebar/panels/CharacterSheetPanel'
 import { HandoutsPanel } from './sidebar/panels/HandoutsPanel'
 import { AudioPanel } from './sidebar/panels/AudioPanel'
-import logoWide from '../assets/boltberry-logo-wide.png'
+import {
+  CampaignDataStyles,
+  MapThumbnail,
+  useCampaignStats,
+  useRelativeTime,
+} from './campaign-data'
 import type { MapRecord } from '@shared/ipc-types'
+
+/* Campaign workspace — shown when a campaign is open but no map is
+   active. Uses the dashboard aesthetic (Fraunces titles, dark cards,
+   Bolt-yellow CTA) so that the whole "between sessions" experience —
+   Welcome → Workspace → Map view — shares one visual language. */
 
 type Tab = 'notes' | 'characters' | 'handouts' | 'audio'
 
-const TABS: { id: Tab; label: string; icon: string }[] = [
-  { id: 'notes',      label: 'Notizen',    icon: '📝' },
-  { id: 'characters', label: 'Charaktere', icon: '👤' },
-  { id: 'handouts',   label: 'Handouts',   icon: '📄' },
-  { id: 'audio',      label: 'Audio',      icon: '🎵' },
+const TABS: { id: Tab; icon: string; i18nKey: string }[] = [
+  { id: 'notes',      icon: '📝', i18nKey: 'workspace.tabNotes' },
+  { id: 'characters', icon: '👤', i18nKey: 'workspace.tabCharacters' },
+  { id: 'handouts',   icon: '📄', i18nKey: 'workspace.tabHandouts' },
+  { id: 'audio',      icon: '🎵', i18nKey: 'workspace.tabAudio' },
 ]
 
-// ─── CampaignView ─────────────────────────────────────────────────────────────
-
 export function CampaignView() {
+  const { t } = useTranslation()
   const {
     activeCampaignId,
     campaigns,
@@ -29,20 +39,26 @@ export function CampaignView() {
     addMap,
     setActiveCampaign,
   } = useCampaignStore()
-
-  const { playerConnected } = useUIStore()
+  const { playerConnected, language, toggleLanguage } = useUIStore()
 
   const [tab, setTab] = useState<Tab>('notes')
   const [mapsLoaded, setMapsLoaded] = useState(false)
   const [importing, setImporting] = useState(false)
 
   const campaign = campaigns.find((c) => c.id === activeCampaignId)
+  const campaignIds = useMemo(
+    () => (activeCampaignId ? [activeCampaignId] : []),
+    [activeCampaignId],
+  )
+  const stats = useCampaignStats(campaignIds)
+  const selfStats = activeCampaignId ? stats[activeCampaignId] : undefined
 
   // Populate activeMaps so the "Spielansicht" button knows which map to open.
   useEffect(() => {
     if (!activeCampaignId) return
     setMapsLoaded(false)
     loadMaps(activeCampaignId)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeCampaignId])
 
   async function loadMaps(campaignId: number) {
@@ -70,7 +86,7 @@ export function CampaignView() {
         ftPerUnit: r.ft_per_unit ?? 5,
         orderIndex: r.order_index,
         rotation: r.rotation ?? 0,
-        rotationPlayer: (r as any).rotation_player ?? 0,
+        rotationPlayer: r.rotation_player ?? 0,
         gridOffsetX: r.grid_offset_x ?? 0,
         gridOffsetY: r.grid_offset_y ?? 0,
         ambientBrightness: r.ambient_brightness ?? 100,
@@ -89,7 +105,6 @@ export function CampaignView() {
     }
   }
 
-  // Import a first map and immediately enter the game view
   async function handleImportFirstMap() {
     if (!activeCampaignId || !window.electronAPI || importing) return
     setImporting(true)
@@ -135,278 +150,583 @@ export function CampaignView() {
     }
   }
 
-  // ── Game view entry button ─────────────────────────────────────────────────
   const loading = !mapsLoaded || importing
   const hasMaps = mapsLoaded && activeMaps.length > 0
+  const heroMap = hasMaps ? activeMaps[0] : null
 
-  function renderGameButton() {
-    if (loading) {
-      return (
+  return (
+    <div className="bb-ws">
+      <WorkspaceStyles />
+      <CampaignDataStyles />
+
+      {/* ── Top bar ───────────────────────────────────────────────── */}
+      <header className="bb-ws-topbar" style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}>
         <button
-          disabled
-          style={{
-            display: 'flex', alignItems: 'center', gap: 6,
-            padding: '7px 18px',
-            background: 'var(--bg-overlay)',
-            border: '1px solid var(--border)',
-            borderRadius: 'var(--radius)',
-            color: 'var(--text-muted)',
-            fontSize: 'var(--text-sm)',
-            fontWeight: 600,
-            cursor: 'default',
-            flexShrink: 0,
+          type="button"
+          className="bb-ws-back"
+          onClick={() => setActiveCampaign(null)}
+          style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
+        >
+          ◁ {t('workspace.backToCampaigns')}
+        </button>
+
+        <div className="bb-ws-brand">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M13 2L4 14h7l-2 8 9-12h-7l2-8z" fill="var(--accent)" />
+          </svg>
+          <span className="bb-ws-wordmark">
+            BOLT<span style={{ color: 'var(--accent-blue-light)' }}>BERRY</span>
+          </span>
+          <span className="bb-ws-breadcrumb-sep">/</span>
+          <span className="bb-ws-breadcrumb-name">{campaign?.name ?? ''}</span>
+        </div>
+
+        <div className="bb-ws-topbar-actions" style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}>
+          {playerConnected && (
+            <div className="bb-ws-player-pill" title={t('workspace.playerWindowOpen')}>
+              <span className="bb-ws-player-dot" aria-hidden="true" />
+              {t('workspace.playerWindow')}
+              <button
+                type="button"
+                className="bb-ws-player-close"
+                onClick={() => window.electronAPI?.closePlayerWindow()}
+                title={t('workspace.closePlayerWindow')}
+              >
+                ✕
+              </button>
+            </div>
+          )}
+
+          <PlayButton
+            loading={loading}
+            hasMaps={hasMaps}
+            onStart={() => hasMaps && setActiveMap(activeMaps[0].id)}
+            onImportFirst={handleImportFirstMap}
+            labelStart={t('workspace.openGameView')}
+            labelImport={t('workspace.importFirstMap')}
+            labelLoading={t('workspace.loading')}
+          />
+
+          <div className="bb-ws-lang" role="group" aria-label="Language">
+            {(['de', 'en'] as const).map((l) => (
+              <button
+                key={l}
+                type="button"
+                onClick={() => {
+                  if (language !== l) toggleLanguage()
+                }}
+                className={language === l ? 'active' : ''}
+              >
+                {l.toUpperCase()}
+              </button>
+            ))}
+          </div>
+        </div>
+      </header>
+
+      {/* ── Main scroll area ──────────────────────────────────────── */}
+      <main className="bb-ws-main">
+        <div className="bb-ws-inner">
+          {/* Greeting */}
+          <div className="bb-ws-greeting">
+            <div className="bb-ws-greeting-kicker">{t('workspace.campaignKicker')}</div>
+            <h1 className="bb-ws-greeting-title display">{campaign?.name ?? ''}</h1>
+            <div className="bb-ws-greeting-meta mono">
+              {selfStats?.mapCount ?? 0} {t('dashboard.maps').toLowerCase()}
+              <span className="bb-ws-meta-sep">·</span>
+              {selfStats?.party.length ?? 0} {t('dashboard.characters').toLowerCase()}
+              <span className="bb-ws-meta-sep">·</span>
+              {selfStats?.handoutCount ?? 0} {t('dashboard.handouts').toLowerCase()}
+            </div>
+          </div>
+
+          {/* Hero: most recent map (or import CTA) */}
+          {heroMap ? (
+            <HeroMap
+              map={heroMap}
+              campaignName={campaign?.name ?? ''}
+              onOpen={() => setActiveMap(heroMap.id)}
+              label={t('workspace.openGameView')}
+              kicker={t('workspace.continueAtMap')}
+            />
+          ) : mapsLoaded ? (
+            <HeroEmpty
+              onImport={handleImportFirstMap}
+              title={t('workspace.noMapsTitle')}
+              sub={t('workspace.noMapsSub')}
+              cta={t('workspace.importFirstMap')}
+              importing={importing}
+            />
+          ) : null}
+
+          {/* Tab strip (dashboard-style pills) */}
+          <div className="bb-ws-tabs">
+            {TABS.map((tb) => (
+              <button
+                key={tb.id}
+                type="button"
+                className={tb.id === tab ? 'bb-ws-tab active' : 'bb-ws-tab'}
+                onClick={() => setTab(tb.id)}
+              >
+                <span className="bb-ws-tab-icon">{tb.icon}</span>
+                {t(tb.i18nKey)}
+              </button>
+            ))}
+          </div>
+
+          {/* Tab panel */}
+          <div className="bb-ws-panel">
+            {tab === 'notes' && (
+              <div className="bb-ws-panel-inner bb-ws-panel-notes">
+                <NotesPanel />
+              </div>
+            )}
+            {tab === 'characters' && (
+              <div className="bb-ws-panel-inner bb-ws-panel-characters">
+                <CharacterSheetPanel />
+              </div>
+            )}
+            {tab === 'handouts' && (
+              <div className="bb-ws-panel-inner bb-ws-panel-handouts">
+                <HandoutsPanel />
+              </div>
+            )}
+            {tab === 'audio' && (
+              <div className="bb-ws-panel-inner bb-ws-panel-audio">
+                <AudioPanel layout="wide" />
+              </div>
+            )}
+          </div>
+        </div>
+      </main>
+    </div>
+  )
+}
+
+// ─── Hero (most-recent map card) ──────────────────────────────────────
+
+function HeroMap({
+  map,
+  campaignName,
+  onOpen,
+  label,
+  kicker,
+}: {
+  map: MapRecord
+  campaignName: string
+  onOpen: () => void
+  label: string
+  kicker: string
+}) {
+  return (
+    <section
+      className="bb-ws-hero"
+      role="button"
+      tabIndex={0}
+      onClick={onOpen}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onOpen()
+        }
+      }}
+    >
+      <div className="bb-ws-hero-cover">
+        <MapThumbnail path={map.imagePath} campaignName={campaignName} />
+        <div className="bb-ws-hero-cover-fade" aria-hidden="true" />
+      </div>
+      <div className="bb-ws-hero-body">
+        <div className="bb-ws-hero-kicker">
+          <span className="bb-ws-hero-dot" aria-hidden="true" />
+          {kicker}
+        </div>
+        <h2 className="bb-ws-hero-title display">{map.name}</h2>
+        <button
+          type="button"
+          className="bb-ws-cta bb-ws-cta-lg"
+          onClick={(e) => {
+            e.stopPropagation()
+            onOpen()
           }}
         >
-          <span style={{ fontSize: 11 }}>…</span>
-          Laden
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+          {label}
         </button>
-      )
-    }
+      </div>
+    </section>
+  )
+}
 
-    if (hasMaps) {
-      return (
-        <button
-          onClick={() => setActiveMap(activeMaps[0].id)}
-          style={{
-            display: 'flex', alignItems: 'center', gap: 8,
-            padding: '7px 20px',
-            background: 'var(--accent)',
-            border: 'none',
-            borderRadius: 'var(--radius)',
-            color: 'var(--text-inverse)',
-            fontSize: 'var(--text-sm)',
-            fontWeight: 700,
-            cursor: 'pointer',
-            flexShrink: 0,
-            transition: 'opacity var(--transition)',
-            letterSpacing: '0.01em',
-          }}
-          onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.85' }}
-          onMouseLeave={(e) => { e.currentTarget.style.opacity = '1' }}
-          title={`Spielansicht öffnen — ${activeMaps[0].name}`}
-        >
-          <span>▶</span>
-          Spielansicht
-        </button>
-      )
-    }
+function HeroEmpty({
+  onImport,
+  title,
+  sub,
+  cta,
+  importing,
+}: {
+  onImport: () => void
+  title: string
+  sub: string
+  cta: string
+  importing: boolean
+}) {
+  return (
+    <section className="bb-ws-hero-empty">
+      <div className="bb-ws-hero-empty-icon">🗺️</div>
+      <h2 className="bb-ws-hero-empty-title display">{title}</h2>
+      <p className="bb-ws-hero-empty-sub">{sub}</p>
+      <button type="button" className="bb-ws-cta bb-ws-cta-lg" onClick={onImport} disabled={importing}>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+        {cta}
+      </button>
+    </section>
+  )
+}
 
+// ─── Play button (loading / play / import-first) ─────────────────────
+
+function PlayButton({
+  loading,
+  hasMaps,
+  onStart,
+  onImportFirst,
+  labelStart,
+  labelImport,
+  labelLoading,
+}: {
+  loading: boolean
+  hasMaps: boolean
+  onStart: () => void
+  onImportFirst: () => void
+  labelStart: string
+  labelImport: string
+  labelLoading: string
+}) {
+  if (loading) {
     return (
-      <button
-        onClick={handleImportFirstMap}
-        style={{
-          display: 'flex', alignItems: 'center', gap: 8,
-          padding: '7px 18px',
-          background: 'none',
-          border: '1px solid var(--accent)',
-          borderRadius: 'var(--radius)',
-          color: 'var(--accent-light)',
-          fontSize: 'var(--text-sm)',
-          fontWeight: 600,
-          cursor: 'pointer',
-          flexShrink: 0,
-          transition: 'background var(--transition)',
-        }}
-        onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(245,168,0,0.08)' }}
-        onMouseLeave={(e) => { e.currentTarget.style.background = 'none' }}
-        title="Erste Karte importieren um die Spielansicht zu öffnen"
-      >
-        <span style={{ fontSize: 13 }}>+</span>
-        Karte importieren
+      <button type="button" className="bb-ws-cta" disabled>
+        <span>…</span>
+        {labelLoading}
       </button>
     )
   }
-
+  if (!hasMaps) {
+    return (
+      <button type="button" className="bb-ws-cta bb-ws-cta-ghost" onClick={onImportFirst}>
+        <span>+</span>
+        {labelImport}
+      </button>
+    )
+  }
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%',
-      background: 'var(--bg-base)',
-      overflow: 'hidden',
-    }}>
+    <button type="button" className="bb-ws-cta" onClick={onStart}>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+      {labelStart}
+    </button>
+  )
+}
 
-      {/* ── Header ─────────────────────────────────────────────────────── */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 'var(--sp-3)',
-        padding: '0 var(--sp-5)',
-        height: 56,
-        borderBottom: '1px solid var(--border)',
-        background: 'var(--bg-surface)',
-        flexShrink: 0,
-        WebkitAppRegion: 'drag',
-      } as React.CSSProperties}>
-        <button
-          onClick={() => setActiveCampaign(null)}
-          style={{
-            display: 'flex', alignItems: 'center', gap: 6,
-            padding: '5px 12px',
-            background: 'none',
-            border: '1px solid var(--border)',
-            borderRadius: 'var(--radius)',
-            color: 'var(--text-secondary)',
-            cursor: 'pointer',
-            fontSize: 'var(--text-sm)',
-            fontWeight: 500,
-            transition: 'border-color var(--transition), color var(--transition)',
-            flexShrink: 0,
-            WebkitAppRegion: 'no-drag',
-          } as React.CSSProperties}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = 'var(--accent)'
-            e.currentTarget.style.color = 'var(--accent-light)'
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = 'var(--border)'
-            e.currentTarget.style.color = 'var(--text-secondary)'
-          }}
-        >
-          <span style={{ fontSize: 11 }}>◁</span>
-          Kampagnen
-        </button>
+// ─── Scoped styles ────────────────────────────────────────────────────
 
-        <h1 style={{
-          flex: 1,
-          fontSize: 20,
-          fontWeight: 700,
-          color: 'var(--text-primary)',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-          margin: 0,
-          letterSpacing: '-0.01em',
-          WebkitAppRegion: 'drag',
-        } as React.CSSProperties}>
-          {campaign?.name ?? ''}
-        </h1>
+function WorkspaceStyles() {
+  return (
+    <style>{`
+      .bb-ws {
+        display: flex; flex-direction: column;
+        height: 100%;
+        background: var(--bg-base);
+        color: var(--text-primary);
+      }
+      .bb-ws .display {
+        font-family: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+        font-weight: 500; letter-spacing: -0.01em;
+      }
+      .bb-ws .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
-        {/* Player window controls — shown when window is open */}
-        {playerConnected && (
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 'var(--sp-2)',
-            padding: '4px 10px',
-            background: 'rgba(34,197,94,0.08)',
-            border: '1px solid rgba(34,197,94,0.3)',
-            borderRadius: 'var(--radius)',
-            flexShrink: 0,
-            WebkitAppRegion: 'no-drag',
-          } as React.CSSProperties}>
-            <span style={{ fontSize: 8, color: 'var(--success)' }}>●</span>
-            <span style={{ fontSize: 'var(--text-xs)', color: 'var(--success)', fontWeight: 600 }}>
-              Spielerfenster
-            </span>
-            <button
-              onClick={() => window.electronAPI?.closePlayerWindow()}
-              style={{
-                background: 'none', border: 'none', cursor: 'pointer',
-                color: 'var(--text-muted)', fontSize: 12, padding: '0 0 0 4px',
-                lineHeight: 1,
-              }}
-              title="Spielerfenster schließen"
-              onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--danger)' }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-muted)' }}
-            >
-              ✕
-            </button>
-          </div>
-        )}
+      /* ── Top bar ──────────────────────────────────────────── */
+      .bb-ws-topbar {
+        display: flex; align-items: center; gap: var(--sp-4);
+        padding: 0 var(--sp-6); height: 56px;
+        background: rgba(13, 16, 21, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        flex-shrink: 0;
+        user-select: none;
+      }
+      .bb-ws-back {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 5px 12px;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--text-secondary);
+        font-size: 12px; font-weight: 500;
+        cursor: pointer;
+        font-family: inherit;
+        transition: border-color var(--transition), color var(--transition);
+        flex-shrink: 0;
+      }
+      .bb-ws-back:hover {
+        border-color: var(--accent);
+        color: var(--accent-light);
+      }
+      .bb-ws-brand {
+        display: flex; align-items: center; gap: 8px;
+        min-width: 0;
+        flex: 1;
+      }
+      .bb-ws-wordmark {
+        font-size: 12px; letter-spacing: 0.14em; font-weight: 700;
+        color: var(--text-primary);
+      }
+      .bb-ws-breadcrumb-sep { color: var(--text-muted); }
+      .bb-ws-breadcrumb-name {
+        font-size: 13px; font-weight: 500;
+        color: var(--text-primary);
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        min-width: 0;
+      }
+      .bb-ws-topbar-actions {
+        display: flex; align-items: center; gap: var(--sp-2);
+        flex-shrink: 0;
+      }
 
-        <div style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}>
-          {renderGameButton()}
-        </div>
+      .bb-ws-player-pill {
+        display: flex; align-items: center; gap: 6px;
+        padding: 4px 10px;
+        background: rgba(34, 197, 94, 0.08);
+        border: 1px solid rgba(34, 197, 94, 0.3);
+        border-radius: var(--radius);
+        font-size: 11px; font-weight: 600;
+        color: var(--success);
+      }
+      .bb-ws-player-dot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: var(--success);
+        box-shadow: 0 0 6px var(--success);
+      }
+      .bb-ws-player-close {
+        background: transparent; border: none; cursor: pointer;
+        color: var(--text-muted);
+        font-size: 12px; padding: 0 0 0 4px; line-height: 1;
+      }
+      .bb-ws-player-close:hover { color: var(--danger); }
 
-        <img
-          src={logoWide}
-          alt="BoltBerry"
-          style={{
-            height: 26,
-            width: 'auto',
-            filter: 'drop-shadow(0 0 8px rgba(245, 168, 0, 0.3))',
-            flexShrink: 0,
-          }}
-        />
-      </div>
+      .bb-ws-cta {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 7px 14px;
+        background: var(--accent);
+        color: var(--text-inverse);
+        border: none; border-radius: var(--radius);
+        font-size: 13px; font-weight: 700; letter-spacing: 0.01em;
+        cursor: pointer;
+        font-family: inherit;
+        transition: background var(--transition), transform var(--transition);
+        box-shadow: 0 0 0 1px rgba(255, 198, 46, 0.28), 0 4px 10px rgba(255, 198, 46, 0.15);
+      }
+      .bb-ws-cta:hover { background: var(--accent-hover); }
+      .bb-ws-cta:active { transform: translateY(1px); }
+      .bb-ws-cta:disabled {
+        opacity: 0.5; cursor: not-allowed;
+        background: var(--bg-overlay);
+        color: var(--text-muted);
+        box-shadow: none;
+      }
+      .bb-ws-cta-lg { padding: 12px 20px; font-size: 14px; }
+      .bb-ws-cta-ghost {
+        background: transparent;
+        color: var(--accent-light);
+        border: 1px solid var(--accent);
+        box-shadow: none;
+      }
+      .bb-ws-cta-ghost:hover { background: rgba(255, 198, 46, 0.08); color: var(--accent-light); }
 
-      {/* ── Tab Bar ────────────────────────────────────────────────────── */}
-      <div style={{
-        display: 'flex',
-        borderBottom: '1px solid var(--border)',
-        background: 'var(--bg-surface)',
-        flexShrink: 0,
-        padding: '0 var(--sp-5)',
-        overflowX: 'auto',
-      }}>
-        {TABS.map((t) => (
-          <button
-            key={t.id}
-            onClick={() => setTab(t.id)}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 6,
-              padding: '10px 18px',
-              background: 'none',
-              border: 'none',
-              borderBottom: tab === t.id ? '2px solid var(--accent)' : '2px solid transparent',
-              color: tab === t.id ? 'var(--accent-light)' : 'var(--text-secondary)',
-              cursor: 'pointer',
-              fontSize: 'var(--text-sm)',
-              fontWeight: tab === t.id ? 600 : 400,
-              transition: 'color var(--transition), border-color var(--transition)',
-              flexShrink: 0,
-              whiteSpace: 'nowrap',
-            }}
-            onMouseEnter={(e) => {
-              if (tab !== t.id) e.currentTarget.style.color = 'var(--text-primary)'
-            }}
-            onMouseLeave={(e) => {
-              if (tab !== t.id) e.currentTarget.style.color = 'var(--text-secondary)'
-            }}
-          >
-            <span style={{ fontSize: 14 }}>{t.icon}</span>
-            {t.label}
-          </button>
-        ))}
-      </div>
+      .bb-ws-lang {
+        display: flex;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+      }
+      .bb-ws-lang button {
+        padding: 4px 10px;
+        font-size: 10px; font-weight: 600; letter-spacing: 0.04em;
+        background: transparent;
+        color: var(--text-muted);
+        border: none; cursor: pointer;
+        font-family: inherit;
+      }
+      .bb-ws-lang button.active {
+        background: var(--accent-dim);
+        color: var(--accent);
+      }
 
-      {/* ── Content ────────────────────────────────────────────────────── */}
-      {/* overflow: hidden so panels can control their own scrolling */}
-      <div style={{ flex: 1, overflow: 'hidden', minHeight: 0, position: 'relative' }}>
+      /* ── Main scroll area ─────────────────────────────────── */
+      .bb-ws-main {
+        flex: 1; min-height: 0;
+        overflow-y: auto;
+      }
+      .bb-ws-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: var(--sp-8) var(--sp-8) 64px;
+      }
 
-        {tab === 'notes' && (
-          <div style={{
-            position: 'absolute', inset: 0,
-            display: 'flex', justifyContent: 'center',
-            padding: 'var(--sp-6)',
-            overflow: 'auto',
-          }}>
-            <div style={{ width: '100%', maxWidth: 860, display: 'flex', flexDirection: 'column' }}>
-              <NotesPanel />
-            </div>
-          </div>
-        )}
+      /* Greeting */
+      .bb-ws-greeting { margin-bottom: var(--sp-6); }
+      .bb-ws-greeting-kicker {
+        font-size: 11px; letter-spacing: 0.14em; font-weight: 700;
+        color: var(--accent);
+        text-transform: uppercase;
+        margin-bottom: var(--sp-2);
+      }
+      .bb-ws-greeting-title {
+        font-size: 32px; line-height: 1.1;
+        color: var(--text-primary);
+        margin: 0 0 var(--sp-2) 0;
+      }
+      .bb-ws-greeting-meta {
+        font-size: 12px; color: var(--text-muted);
+        display: flex; align-items: center; gap: 8px;
+      }
+      .bb-ws-meta-sep { opacity: 0.5; }
 
-        {tab === 'characters' && (
-          <div style={{ position: 'absolute', inset: 0 }}>
-            <CharacterSheetPanel />
-          </div>
-        )}
+      /* Hero */
+      .bb-ws-hero {
+        display: grid;
+        grid-template-columns: minmax(240px, 1fr) 1.2fr;
+        min-height: 220px;
+        margin-bottom: var(--sp-6);
+        background: var(--bg-surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        cursor: pointer;
+        transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+      }
+      .bb-ws-hero:hover {
+        border-color: var(--text-muted);
+        transform: translateY(-2px);
+      }
+      .bb-ws-hero:focus-visible {
+        outline: 2px solid var(--accent-blue);
+        outline-offset: 2px;
+      }
+      .bb-ws-hero-cover {
+        position: relative;
+        min-height: 220px;
+        background: var(--bg-elevated);
+      }
+      .bb-ws-hero-cover-fade {
+        position: absolute; inset: 0;
+        background: linear-gradient(90deg, transparent 30%, var(--bg-surface) 100%);
+        pointer-events: none;
+      }
+      .bb-ws-hero-body {
+        padding: 28px 32px;
+        display: flex; flex-direction: column; justify-content: center;
+        gap: var(--sp-3);
+      }
+      .bb-ws-hero-kicker {
+        display: flex; align-items: center; gap: 6px;
+        font-size: 10px; letter-spacing: 0.16em; font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+      }
+      .bb-ws-hero-dot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 8px var(--accent);
+      }
+      .bb-ws-hero-title {
+        font-size: 28px; line-height: 1.1;
+        color: var(--text-primary);
+        margin: 0;
+      }
+      .bb-ws-hero .bb-ws-cta { align-self: flex-start; }
 
-        {tab === 'handouts' && (
-          <div style={{ position: 'absolute', inset: 0 }}>
-            <HandoutsPanel />
-          </div>
-        )}
+      /* Hero empty */
+      .bb-ws-hero-empty {
+        display: flex; flex-direction: column; align-items: center;
+        text-align: center;
+        padding: 48px var(--sp-6);
+        margin-bottom: var(--sp-6);
+        background: var(--bg-surface);
+        border: 1px dashed var(--border);
+        border-radius: var(--radius-lg);
+      }
+      .bb-ws-hero-empty-icon { font-size: 44px; opacity: 0.6; margin-bottom: var(--sp-3); }
+      .bb-ws-hero-empty-title {
+        font-size: 22px; margin: 0 0 var(--sp-1);
+        color: var(--text-primary);
+      }
+      .bb-ws-hero-empty-sub {
+        color: var(--text-secondary);
+        font-size: 13px; max-width: 420px;
+        margin: 0 0 var(--sp-5);
+      }
 
-        {tab === 'audio' && (
-          <div style={{ position: 'absolute', inset: 0 }}>
-            <AudioPanel layout="wide" />
-          </div>
-        )}
+      /* Tab strip — dashboard-style pills */
+      .bb-ws-tabs {
+        display: flex; gap: 2px;
+        padding: 4px;
+        background: var(--bg-surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        margin-bottom: var(--sp-4);
+        overflow-x: auto;
+      }
+      .bb-ws-tab {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 8px 14px;
+        background: transparent;
+        border: none; border-radius: var(--radius-sm);
+        color: var(--text-muted);
+        font-size: 13px; font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        transition: background var(--transition), color var(--transition);
+        white-space: nowrap;
+      }
+      .bb-ws-tab:hover { background: var(--bg-overlay); color: var(--text-secondary); }
+      .bb-ws-tab.active {
+        background: var(--accent-dim);
+        color: var(--accent-light);
+      }
+      .bb-ws-tab-icon { font-size: 14px; line-height: 1; }
 
-      </div>
-    </div>
+      /* Panel container */
+      .bb-ws-panel {
+        position: relative;
+        min-height: 400px;
+        background: var(--bg-surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+      }
+      .bb-ws-panel-inner { position: relative; min-height: 400px; }
+      .bb-ws-panel-notes {
+        padding: var(--sp-5);
+        display: flex; justify-content: center;
+      }
+      .bb-ws-panel-notes > * { width: 100%; max-width: 860px; }
+      .bb-ws-panel-characters,
+      .bb-ws-panel-handouts,
+      .bb-ws-panel-audio {
+        min-height: 500px;
+        display: flex;
+        flex-direction: column;
+      }
+      .bb-ws-panel-characters > *,
+      .bb-ws-panel-handouts > *,
+      .bb-ws-panel-audio > * { flex: 1; min-height: 0; }
+    `}</style>
   )
 }

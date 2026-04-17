@@ -80,6 +80,23 @@
     "newCampaign": "+ Neue Kampagne",
     "importCampaign": "Kampagne importieren\u2026"
   },
+  "workspace": {
+    "backToCampaigns": "Kampagnen",
+    "campaignKicker": "Aktive Kampagne",
+    "continueAtMap": "Letzte Karte",
+    "openGameView": "Spielansicht",
+    "importFirstMap": "Erste Karte importieren",
+    "loading": "Laden\u2026",
+    "noMapsTitle": "Noch keine Karte",
+    "noMapsSub": "Importiere die erste Karte, um die Spielansicht zu \u00f6ffnen.",
+    "tabNotes": "Notizen",
+    "tabCharacters": "Charaktere",
+    "tabHandouts": "Handouts",
+    "tabAudio": "Audio",
+    "playerWindow": "Spielerfenster",
+    "playerWindowOpen": "Spielerfenster ist ge\u00f6ffnet",
+    "closePlayerWindow": "Spielerfenster schlie\u00dfen"
+  },
   "welcome": {
     "tag": "Lokales Spieltisch-Studio",
     "h1a": "Heute Abend",

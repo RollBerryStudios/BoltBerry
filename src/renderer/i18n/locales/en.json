@@ -80,6 +80,23 @@
     "newCampaign": "+ New Campaign",
     "importCampaign": "Import campaign\u2026"
   },
+  "workspace": {
+    "backToCampaigns": "Campaigns",
+    "campaignKicker": "Active campaign",
+    "continueAtMap": "Latest map",
+    "openGameView": "Play view",
+    "importFirstMap": "Import first map",
+    "loading": "Loading\u2026",
+    "noMapsTitle": "No maps yet",
+    "noMapsSub": "Import your first map to open the play view.",
+    "tabNotes": "Notes",
+    "tabCharacters": "Characters",
+    "tabHandouts": "Handouts",
+    "tabAudio": "Audio",
+    "playerWindow": "Player window",
+    "playerWindowOpen": "Player window is open",
+    "closePlayerWindow": "Close player window"
+  },
   "welcome": {
     "tag": "Local tabletop studio",
     "h1a": "Tonight",
