@@ -700,6 +700,15 @@ export function Toolbar() {
         )}
       </div>
 
+      {/* Compendium — always reachable, swaps the whole view via topView */}
+      <button
+        className="tool-btn"
+        title={t('compendium.title')}
+        onClick={() => useUIStore.getState().setTopView('compendium')}
+      >
+        📚
+      </button>
+
       {/* Player window */}
       <button
         className={clsx('tool-btn', playerConnected && 'active')}

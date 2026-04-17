@@ -21,7 +21,7 @@ import pkg from '../../../package.json'
    campaign rows come from the campaign store. */
 
 export function Welcome() {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const {
     campaigns,
     setActiveCampaign,
@@ -168,7 +168,7 @@ function LeftPane({
 }: {
   stats: { campaignCount: number; mapCount: number; characterCount: number }
 }) {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   return (
     <aside className="bb-welcome-left grain">
       <Atmosphere />
