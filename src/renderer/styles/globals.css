@@ -1296,6 +1296,47 @@ textarea.input {
 }
 .multi-select-btn-ghost:hover { color: var(--text-primary); border-color: var(--border); }
 
+/* ─── Character sheet tabs (progressive disclosure) ─────────────────────────── */
+.character-sheet-tabs {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  padding: 0;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.character-sheet-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 4px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 600;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+.character-sheet-tab:hover {
+  color: var(--text-secondary);
+  background: var(--bg-overlay);
+}
+.character-sheet-tab.active {
+  color: var(--accent-blue-light);
+  border-bottom-color: var(--accent-blue);
+}
+.character-sheet-tab-icon { font-size: 14px; line-height: 1; }
+.character-sheet-tab-label {
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
 /* ─── Floating utility dock ──────────────────────────────────────────────────── */
 /* Bottom-right rail of icon buttons that toggle a glass popover for utility
    panels (dice, audio, overlay). Lives outside the right sidebar so the main

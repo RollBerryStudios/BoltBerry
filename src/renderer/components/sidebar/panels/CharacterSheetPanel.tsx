@@ -232,11 +232,35 @@ function SheetList({ sheets, activeId, onSelect, onNew, onDelete }: {
 
 // ─── Main sheet editor ────────────────────────────────────────────────────────
 
+type SheetTab = 'combat' | 'abilities' | 'inventory' | 'bio'
+
+const SHEET_TAB_STORAGE_KEY = 'boltberry-character-sheet-tab'
+function loadInitialTab(): SheetTab {
+  try {
+    const v = localStorage.getItem(SHEET_TAB_STORAGE_KEY)
+    if (v === 'combat' || v === 'abilities' || v === 'inventory' || v === 'bio') return v
+  } catch { /* noop */ }
+  return 'combat'
+}
+
 function SheetEditor({ sheet, onUpdate }: {
   sheet: CharacterSheet
   onUpdate: (patch: Partial<CharacterSheet>) => void
 }) {
   const { t } = useTranslation()
+  const [activeTab, setActiveTab] = useState<SheetTab>(loadInitialTab)
+
+  function selectTab(tab: SheetTab) {
+    setActiveTab(tab)
+    try { localStorage.setItem(SHEET_TAB_STORAGE_KEY, tab) } catch { /* noop */ }
+  }
+
+  const TABS: { id: SheetTab; labelKey: string; icon: string }[] = [
+    { id: 'combat',    labelKey: 'characters.tabCombat',    icon: '⚔' },
+    { id: 'abilities', labelKey: 'characters.tabAbilities', icon: '✦' },
+    { id: 'inventory', labelKey: 'characters.tabInventory', icon: '🎒' },
+    { id: 'bio',       labelKey: 'characters.tabBio',       icon: '📖' },
+  ]
 
   const field = <K extends keyof CharacterSheet>(k: K) => ({
     value: sheet[k] as string,
@@ -306,7 +330,26 @@ function SheetEditor({ sheet, onUpdate }: {
         </div>
       </div>
 
-      {/* ── Combat stats ── */}
+      {/* ── Tabs (progressive disclosure) ─────────────────────────────────────
+          Long sheets default to information overload; the tab strip groups
+          related sections so the DM only sees what they're working on. */}
+      <div className="character-sheet-tabs" role="tablist">
+        {TABS.map((tab) => (
+          <button
+            key={tab.id}
+            role="tab"
+            aria-selected={activeTab === tab.id}
+            className={`character-sheet-tab${activeTab === tab.id ? ' active' : ''}`}
+            onClick={() => selectTab(tab.id)}
+          >
+            <span className="character-sheet-tab-icon">{tab.icon}</span>
+            <span className="character-sheet-tab-label">{t(tab.labelKey)}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* ── Combat stats + Attacks ── */}
+      {activeTab === 'combat' && <>
       <Section title={t('characters.sectionCombat')}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 6, textAlign: 'center' }}>
           {([
@@ -354,7 +397,41 @@ function SheetEditor({ sheet, onUpdate }: {
         </div>
       </Section>
 
-      {/* ── Ability scores ── */}
+      {/* ── Attacks (combat tab) ── */}
+      <Section title={t('characters.sectionAttacks')}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+          {sheet.attacks.map((atk, i) => (
+            <div key={i} style={{ background: 'var(--bg)', borderRadius: 4, padding: 6, border: '1px solid var(--border)' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 50px 80px', gap: 4, marginBottom: 4 }}>
+                <TextInput value={atk.name} onChange={(v) => updateAttack(i, { name: v })} placeholder={t('characters.atkName')} />
+                <TextInput value={atk.bonus} onChange={(v) => updateAttack(i, { bonus: v })} placeholder="+0" style={{ textAlign: 'center' }} />
+                <TextInput value={atk.damage} onChange={(v) => updateAttack(i, { damage: v })} placeholder="1d6" style={{ textAlign: 'center' }} />
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: 4 }}>
+                <TextInput value={atk.damageType} onChange={(v) => updateAttack(i, { damageType: v })} placeholder={t('characters.atkDmgType')} />
+                <TextInput value={atk.range} onChange={(v) => updateAttack(i, { range: v })} placeholder={t('characters.atkRange')} />
+                <button
+                  onClick={() => removeAttack(i)}
+                  style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 14 }}
+                >✕</button>
+              </div>
+            </div>
+          ))}
+          <button
+            onClick={addAttack}
+            style={{
+              padding: '4px 8px', background: 'var(--bg-surface)', border: '1px dashed var(--border)',
+              color: 'var(--text-muted)', borderRadius: 4, cursor: 'pointer', fontSize: 11,
+            }}
+          >
+            + {t('characters.addAttack')}
+          </button>
+        </div>
+      </Section>
+      </>}
+
+      {/* ── Abilities, Saving throws, Skills ── */}
+      {activeTab === 'abilities' && <>
       <Section title={t('characters.sectionAbilities')}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 4, textAlign: 'center' }}>
           {ABILITY_KEYS.map(({ key, label }) => {
@@ -419,40 +496,11 @@ function SheetEditor({ sheet, onUpdate }: {
         </div>
       </Section>
 
-      {/* ── Attacks ── */}
-      <Section title={t('characters.sectionAttacks')}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          {sheet.attacks.map((atk, i) => (
-            <div key={i} style={{ background: 'var(--bg)', borderRadius: 4, padding: 6, border: '1px solid var(--border)' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 50px 80px', gap: 4, marginBottom: 4 }}>
-                <TextInput value={atk.name} onChange={(v) => updateAttack(i, { name: v })} placeholder={t('characters.atkName')} />
-                <TextInput value={atk.bonus} onChange={(v) => updateAttack(i, { bonus: v })} placeholder="+0" style={{ textAlign: 'center' }} />
-                <TextInput value={atk.damage} onChange={(v) => updateAttack(i, { damage: v })} placeholder="1d6" style={{ textAlign: 'center' }} />
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: 4 }}>
-                <TextInput value={atk.damageType} onChange={(v) => updateAttack(i, { damageType: v })} placeholder={t('characters.atkDmgType')} />
-                <TextInput value={atk.range} onChange={(v) => updateAttack(i, { range: v })} placeholder={t('characters.atkRange')} />
-                <button
-                  onClick={() => removeAttack(i)}
-                  style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 14 }}
-                >✕</button>
-              </div>
-            </div>
-          ))}
-          <button
-            onClick={addAttack}
-            style={{
-              padding: '4px 8px', background: 'var(--bg-surface)', border: '1px dashed var(--border)',
-              color: 'var(--text-muted)', borderRadius: 4, cursor: 'pointer', fontSize: 11,
-            }}
-          >
-            + {t('characters.addAttack')}
-          </button>
-        </div>
-      </Section>
+      </>}
 
-      {/* ── Equipment & proficiencies ── */}
-      <Section title={t('characters.sectionEquipment')} defaultOpen={false}>
+      {/* ── Inventory tab: Equipment & proficiencies ── */}
+      {activeTab === 'inventory' && <>
+      <Section title={t('characters.sectionEquipment')} defaultOpen={true}>
         <TextArea {...field('equipment')} rows={4} placeholder={t('characters.equipmentPlaceholder')} />
         <div style={{ marginTop: 6 }}>
           <label style={{ fontSize: 9, color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('characters.languages')}</label>
@@ -464,12 +512,14 @@ function SheetEditor({ sheet, onUpdate }: {
         </div>
       </Section>
 
-      {/* ── Features & traits ── */}
-      <Section title={t('characters.sectionFeatures')} defaultOpen={false}>
+      </>}
+
+      {/* ── Bio tab: Features, Personality, Backstory ── */}
+      {activeTab === 'bio' && <>
+      <Section title={t('characters.sectionFeatures')} defaultOpen={true}>
         <TextArea {...field('features')} rows={5} placeholder={t('characters.featuresPlaceholder')} />
       </Section>
 
-      {/* ── Personality ── */}
       <Section title={t('characters.sectionPersonality')} defaultOpen={false}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
           <div>
@@ -491,7 +541,6 @@ function SheetEditor({ sheet, onUpdate }: {
         </div>
       </Section>
 
-      {/* ── Backstory & notes ── */}
       <Section title={t('characters.sectionBackstory')} defaultOpen={false}>
         <TextArea {...field('backstory')} rows={5} />
         <div style={{ marginTop: 6 }}>
@@ -499,6 +548,7 @@ function SheetEditor({ sheet, onUpdate }: {
           <TextArea {...field('notes')} rows={3} />
         </div>
       </Section>
+      </>}
     </div>
   )
 }
