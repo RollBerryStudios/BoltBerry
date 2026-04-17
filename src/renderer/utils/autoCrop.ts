@@ -12,8 +12,22 @@ function luminance(r: number, g: number, b: number): number {
   return 0.299 * r + 0.587 * g + 0.114 * b
 }
 
+// Same image-resolution helper as gridDetect — stored relative paths
+// ("assets/…") must be converted to a loadable data URL before the <img>
+// element can read them, otherwise detection silently fails.
+async function resolveImageSrc(path: string): Promise<string> {
+  if (path.startsWith('data:') || path.startsWith('http:') || path.startsWith('https:') || path.startsWith('blob:')) {
+    return path
+  }
+  const cleaned = path.startsWith('file://') ? path.substring(7) : path
+  const data = await window.electronAPI?.getImageAsBase64(cleaned)
+  if (!data) throw new Error(`Cannot resolve image path: ${path}`)
+  return data
+}
+
 export function detectMargins(imagePath: string, threshold: number = DEFAULT_THRESHOLD): Promise<CropResult> {
   return new Promise((resolve, reject) => {
+    resolveImageSrc(imagePath).then((src) => {
     const img = new Image()
     img.onload = () => {
       const w = img.naturalWidth || img.width
@@ -146,6 +160,7 @@ export function detectMargins(imagePath: string, threshold: number = DEFAULT_THR
       })
     }
     img.onerror = () => reject(new Error(`Failed to load image: ${imagePath}`))
-    img.src = imagePath
+    img.src = src
+    }).catch(reject)
   })
 }

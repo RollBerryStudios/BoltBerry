@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 import { useUIStore, type ActiveTool, type WorkMode } from '../../stores/uiStore'
 import { useCampaignStore } from '../../stores/campaignStore'
@@ -11,6 +12,32 @@ import { MonitorDialog } from '../MonitorDialog'
 import { SessionStartModal } from '../SessionStartModal'
 import clsx from 'clsx'
 import logoSquare from '../../assets/boltberry-logo.png'
+
+// ─── Dropdown positioning ────────────────────────────────────────────────────
+// The toolbar is overflow:hidden vertically (to hide horizontal scroll on
+// narrow windows), so an absolutely-positioned child dropdown is clipped
+// before it reaches the canvas. We sidestep that by portaling the dropdown
+// to document.body and computing its position from the anchor's viewport
+// rect — it's a fixed-position floating element, untouched by any
+// stacking/clipping context on the toolbar side.
+function useAnchoredPosition(anchorRef: React.RefObject<HTMLElement>, open: boolean) {
+  const [pos, setPos] = useState<{ top: number; left: number } | null>(null)
+  useLayoutEffect(() => {
+    if (!open || !anchorRef.current) return
+    const update = () => {
+      const rect = anchorRef.current!.getBoundingClientRect()
+      setPos({ top: rect.bottom + 4, left: rect.left })
+    }
+    update()
+    window.addEventListener('resize', update)
+    window.addEventListener('scroll', update, true)
+    return () => {
+      window.removeEventListener('resize', update)
+      window.removeEventListener('scroll', update, true)
+    }
+  }, [open, anchorRef])
+  return pos
+}
 
 // ─── Tool group dropdown ───────────────────────────────────────────────────────
 
@@ -25,7 +52,9 @@ interface ToolGroupProps {
 function ToolGroup({ tools, activeTool, groupIcon, groupLabelKey, onSelect }: ToolGroupProps) {
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
-  const wrapRef = useRef<HTMLDivElement>(null)
+  const btnRef = useRef<HTMLButtonElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const pos = useAnchoredPosition(btnRef, open)
 
   const activeInGroup = tools.find((t) => t.id === activeTool)
   const displayIcon = activeInGroup?.icon ?? groupIcon
@@ -34,17 +63,19 @@ function ToolGroup({ tools, activeTool, groupIcon, groupLabelKey, onSelect }: To
   useEffect(() => {
     if (!open) return
     function handleOutside(e: MouseEvent) {
-      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
-        setOpen(false)
-      }
+      const target = e.target as Node
+      if (btnRef.current?.contains(target)) return
+      if (menuRef.current?.contains(target)) return
+      setOpen(false)
     }
     document.addEventListener('mousedown', handleOutside)
     return () => document.removeEventListener('mousedown', handleOutside)
   }, [open])
 
   return (
-    <div ref={wrapRef} style={{ position: 'relative' }}>
+    <>
       <button
+        ref={btnRef}
         className={clsx('tool-btn', isGroupActive && 'active')}
         title={t(groupLabelKey)}
         onClick={() => setOpen((v) => !v)}
@@ -53,20 +84,22 @@ function ToolGroup({ tools, activeTool, groupIcon, groupLabelKey, onSelect }: To
         <span style={{ fontSize: 8, lineHeight: 1, marginLeft: 1, opacity: 0.6 }}>▾</span>
       </button>
 
-      {open && (
-        <div style={{
-          position: 'absolute',
-          top: '100%',
-          left: 0,
-          marginTop: 4,
-          background: 'var(--bg-elevated)',
-          border: '1px solid var(--border)',
-          borderRadius: 'var(--radius)',
-          padding: '4px 0',
-          minWidth: 200,
-          boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
-          zIndex: 9999,
-        }}>
+      {open && pos && createPortal(
+        <div
+          ref={menuRef}
+          style={{
+            position: 'fixed',
+            top: pos.top,
+            left: pos.left,
+            background: 'var(--bg-elevated)',
+            border: '1px solid var(--border)',
+            borderRadius: 'var(--radius)',
+            padding: '4px 0',
+            minWidth: 200,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
+            zIndex: 9999,
+          }}
+        >
           {tools.map((tool) => (
             <button
               key={tool.id}
@@ -97,9 +130,10 @@ function ToolGroup({ tools, activeTool, groupIcon, groupLabelKey, onSelect }: To
               )}
             </button>
           ))}
-        </div>
+        </div>,
+        document.body,
       )}
-    </div>
+    </>
   )
 }
 
@@ -129,20 +163,26 @@ interface ActionGroupProps {
 function ActionGroup({ actions, groupIcon, groupLabelKey }: ActionGroupProps) {
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
-  const wrapRef = useRef<HTMLDivElement>(null)
+  const btnRef = useRef<HTMLButtonElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const pos = useAnchoredPosition(btnRef, open)
 
   useEffect(() => {
     if (!open) return
     function handleOutside(e: MouseEvent) {
-      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) setOpen(false)
+      const target = e.target as Node
+      if (btnRef.current?.contains(target)) return
+      if (menuRef.current?.contains(target)) return
+      setOpen(false)
     }
     document.addEventListener('mousedown', handleOutside)
     return () => document.removeEventListener('mousedown', handleOutside)
   }, [open])
 
   return (
-    <div ref={wrapRef} style={{ position: 'relative' }}>
+    <>
       <button
+        ref={btnRef}
         className="tool-btn"
         title={t(groupLabelKey)}
         onClick={() => setOpen((v) => !v)}
@@ -150,20 +190,22 @@ function ActionGroup({ actions, groupIcon, groupLabelKey }: ActionGroupProps) {
         {groupIcon}
         <span style={{ fontSize: 8, lineHeight: 1, marginLeft: 1, opacity: 0.6 }}>▾</span>
       </button>
-      {open && (
-        <div style={{
-          position: 'absolute',
-          top: '100%',
-          left: 0,
-          marginTop: 4,
-          background: 'var(--bg-elevated)',
-          border: '1px solid var(--border)',
-          borderRadius: 'var(--radius)',
-          padding: '4px 0',
-          minWidth: 220,
-          boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
-          zIndex: 9999,
-        }}>
+      {open && pos && createPortal(
+        <div
+          ref={menuRef}
+          style={{
+            position: 'fixed',
+            top: pos.top,
+            left: pos.left,
+            background: 'var(--bg-elevated)',
+            border: '1px solid var(--border)',
+            borderRadius: 'var(--radius)',
+            padding: '4px 0',
+            minWidth: 220,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
+            zIndex: 9999,
+          }}
+        >
           {actions.map((action) => (
             <button
               key={action.id}
@@ -188,9 +230,10 @@ function ActionGroup({ actions, groupIcon, groupLabelKey }: ActionGroupProps) {
               <span style={{ flex: 1 }}>{t(action.labelKey)}</span>
             </button>
           ))}
-        </div>
+        </div>,
+        document.body,
       )}
-    </div>
+    </>
   )
 }
 

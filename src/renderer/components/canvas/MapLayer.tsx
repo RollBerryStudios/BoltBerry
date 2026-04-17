@@ -299,12 +299,17 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
               }
             }
 
-            // Use Konva context's stroke with inline style
-            ;(ctx as any)._context.save()
-            ;(ctx as any)._context.strokeStyle = 'rgba(255,255,255,0.14)'
-            ;(ctx as any)._context.lineWidth = 0.5
-            ;(ctx as any)._context.stroke()
-            ;(ctx as any)._context.restore()
+            // Grid stroke. Previous defaults (0.14 alpha / 0.5 px) were
+            // invisible at typical zoom levels. Scale line width with the
+            // map scale so it stays crisp zoomed in and readable zoomed
+            // out — capped so it doesn't turn into thick bars.
+            const raw = ctx as any
+            const scaledLineWidth = Math.max(0.8, Math.min(1.6, 1 / scale))
+            raw._context.save()
+            raw._context.strokeStyle = 'rgba(255, 255, 255, 0.34)'
+            raw._context.lineWidth = scaledLineWidth
+            raw._context.stroke()
+            raw._context.restore()
           }}
         />
       )}

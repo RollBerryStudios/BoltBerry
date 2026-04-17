@@ -144,8 +144,24 @@ function detectHexGrid(dir: Float64Array, mag: Float64Array, width: number, heig
   return score > 0.6
 }
 
+// Resolve a stored-relative asset path (e.g. "assets/map/foo.png") into
+// something an <img> element can actually load. Data URLs / http(s) URLs are
+// passed through; everything else goes through the main-process image reader
+// so it comes back as a base64 data URL. Without this conversion the <img>
+// silently fails to load and the detector always returns confidence: 0.
+async function resolveImageSrc(path: string): Promise<string> {
+  if (path.startsWith('data:') || path.startsWith('http:') || path.startsWith('https:') || path.startsWith('blob:')) {
+    return path
+  }
+  const cleaned = path.startsWith('file://') ? path.substring(7) : path
+  const data = await window.electronAPI?.getImageAsBase64(cleaned)
+  if (!data) throw new Error(`Cannot resolve image path: ${path}`)
+  return data
+}
+
 export function detectGrid(imagePath: string): Promise<GridDetectResult> {
   return new Promise((resolve, reject) => {
+    resolveImageSrc(imagePath).then((src) => {
     const img = new Image()
     img.onload = () => {
       const origW = img.naturalWidth || img.width
@@ -219,6 +235,7 @@ export function detectGrid(imagePath: string): Promise<GridDetectResult> {
       })
     }
     img.onerror = () => reject(new Error(`Failed to load image: ${imagePath}`))
-    img.src = imagePath
+    img.src = src
+    }).catch(reject)
   })
 }
