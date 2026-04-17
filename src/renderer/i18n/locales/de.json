@@ -80,6 +80,26 @@
     "newCampaign": "+ Neue Kampagne",
     "importCampaign": "Kampagne importieren\u2026"
   },
+  "welcome": {
+    "tag": "Lokales Spieltisch-Studio",
+    "h1a": "Heute Abend",
+    "h1b": "spielst du",
+    "h1c": "ein Gott.",
+    "sub": "BoltBerry läuft komplett lokal: Karten, Nebel, Token, Handouts, Audio — kein Konto, keine Cloud, kein Internet nötig.",
+    "pickTitle": "Wähle deine Kampagne",
+    "pickSub": "Setze fort, wo deine Runde aufgehört hat.",
+    "noneTitle": "Noch keine Kampagne",
+    "noneSub": "Lege deine erste Kampagne an oder importiere eine bestehende.",
+    "statCampaigns": "Kampagnen",
+    "statMaps": "Karten",
+    "statCharacters": "Charaktere",
+    "footerStatus": "Lokal · alle Daten auf diesem Rechner",
+    "footerVersion": "v{{version}}",
+    "newCampaign": "Neue Kampagne",
+    "importCampaign": "Importieren\u2026",
+    "openCompendium": "Kompendium",
+    "lastPlayed": "Zuletzt"
+  },
   "dashboard": {
     "greetingMorning": "Guten Morgen",
     "greetingDay": "Guten Tag",

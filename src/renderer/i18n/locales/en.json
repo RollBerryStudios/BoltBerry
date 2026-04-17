@@ -80,6 +80,26 @@
     "newCampaign": "+ New Campaign",
     "importCampaign": "Import campaign\u2026"
   },
+  "welcome": {
+    "tag": "Local tabletop studio",
+    "h1a": "Tonight",
+    "h1b": "you play",
+    "h1c": "a god.",
+    "sub": "BoltBerry runs entirely on this machine: maps, fog, tokens, handouts, audio — no account, no cloud, no internet required.",
+    "pickTitle": "Pick your campaign",
+    "pickSub": "Resume where your table left off.",
+    "noneTitle": "No campaigns yet",
+    "noneSub": "Create your first campaign or import an existing one.",
+    "statCampaigns": "Campaigns",
+    "statMaps": "Maps",
+    "statCharacters": "Characters",
+    "footerStatus": "Local \u00b7 all data stays on this machine",
+    "footerVersion": "v{{version}}",
+    "newCampaign": "New campaign",
+    "importCampaign": "Import\u2026",
+    "openCompendium": "Compendium",
+    "lastPlayed": "Last"
+  },
   "dashboard": {
     "greetingMorning": "Good morning",
     "greetingDay": "Good afternoon",
