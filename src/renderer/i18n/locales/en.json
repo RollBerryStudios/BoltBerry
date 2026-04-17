@@ -117,7 +117,19 @@
     "pageNumber": "Page number",
     "zoomIn": "Zoom in",
     "zoomOut": "Zoom out",
-    "zoomReset": "Reset zoom"
+    "zoomReset": "Reset zoom",
+    "search": "Search",
+    "searchPlaceholder": "Search in PDF\u2026",
+    "closeSearch": "Close search",
+    "hits": "{{count}} hits",
+    "hits_one": "{{count}} hit",
+    "noHits": "No matches",
+    "ready": "Ready",
+    "sendToPlayer": "Send to player window",
+    "sendShort": "Send",
+    "sendDisabled": "Player window not connected",
+    "sentToPlayer": "Sent to player window",
+    "pageShort": "p."
   },
   "welcome": {
     "tag": "Local tabletop studio",

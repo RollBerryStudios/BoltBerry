@@ -117,7 +117,19 @@
     "pageNumber": "Seitenzahl",
     "zoomIn": "Vergr\u00f6\u00dfern",
     "zoomOut": "Verkleinern",
-    "zoomReset": "Zoom zur\u00fccksetzen"
+    "zoomReset": "Zoom zur\u00fccksetzen",
+    "search": "Suche",
+    "searchPlaceholder": "Im PDF suchen\u2026",
+    "closeSearch": "Suche schlie\u00dfen",
+    "hits": "{{count}} Treffer",
+    "hits_one": "{{count}} Treffer",
+    "noHits": "Keine Treffer",
+    "ready": "Bereit",
+    "sendToPlayer": "An Spielerfenster senden",
+    "sendShort": "Senden",
+    "sendDisabled": "Spielerfenster nicht verbunden",
+    "sentToPlayer": "An Spielerfenster gesendet",
+    "pageShort": "S."
   },
   "welcome": {
     "tag": "Lokales Spieltisch-Studio",

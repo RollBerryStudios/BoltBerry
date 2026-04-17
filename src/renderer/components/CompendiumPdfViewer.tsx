@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useUIStore } from '../stores/uiStore'
 import type { CompendiumFile } from '@shared/ipc-types'
 
 /* PDF viewer for the Compendium. Loads a single PDF via the
@@ -12,6 +13,18 @@ type Loaded = {
   doc: unknown
   numPages: number
 }
+
+interface SearchHit {
+  page: number
+  snippet: string
+  /** Index-of match within the extracted page text; used for result ordering. */
+  offset: number
+}
+
+type SearchState =
+  | { phase: 'idle' }
+  | { phase: 'indexing'; done: number; total: number }
+  | { phase: 'ready' }
 
 interface PdfViewerProps {
   file: CompendiumFile
@@ -27,6 +40,17 @@ export function CompendiumPdfViewer({ file }: PdfViewerProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  // Search state. The per-page text cache survives zoom/page changes but is
+  // tied to the loaded document; cleared when the user picks a different PDF.
+  const pageTextRef = useRef<Map<number, string>>(new Map())
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchState, setSearchState] = useState<SearchState>({ phase: 'idle' })
+
+  // Send-to-player toast — acknowledges the page broadcast succeeded.
+  const [sentTick, setSentTick] = useState(0)
+  const playerConnected = useUIStore((s) => s.playerConnected)
+
   // Load (or re-load) the PDF whenever the selected file changes. A cancel
   // flag prevents a stale load from overwriting a newer one when the user
   // clicks through the sidebar faster than the read IPC returns.
@@ -37,6 +61,9 @@ export function CompendiumPdfViewer({ file }: PdfViewerProps) {
     setZoom(1.0)
     setError(null)
     setLoading(true)
+    pageTextRef.current = new Map()
+    setSearchQuery('')
+    setSearchState({ phase: 'idle' })
 
     ;(async () => {
       if (!window.electronAPI) {
@@ -129,12 +156,23 @@ export function CompendiumPdfViewer({ file }: PdfViewerProps) {
     }
   }, [loaded, pageNum, zoom])
 
-  // Keyboard navigation: arrows for prev/next, Ctrl+=/+-/0 for zoom.
+  // Keyboard navigation: arrows for prev/next, Ctrl+=/+-/0 for zoom,
+  // Ctrl+F to toggle search.
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       const tag = (e.target as HTMLElement | null)?.tagName
-      if (tag === 'INPUT' || tag === 'TEXTAREA') return
+      const inInput = tag === 'INPUT' || tag === 'TEXTAREA'
       if (!loaded) return
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'f' || e.key === 'F')) {
+        e.preventDefault()
+        setSearchOpen((v) => !v)
+        return
+      }
+      if (e.key === 'Escape' && searchOpen) {
+        setSearchOpen(false)
+        return
+      }
+      if (inInput) return
       if (e.key === 'ArrowRight' || e.key === 'PageDown') {
         e.preventDefault()
         setPageNum((p) => Math.min(loaded.numPages, p + 1))
@@ -154,7 +192,97 @@ export function CompendiumPdfViewer({ file }: PdfViewerProps) {
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
+  }, [loaded, searchOpen])
+
+  // Build a page-text index on demand. Runs when search opens for the first
+  // time (or when the document changes). Each page's getTextContent yields
+  // an array of items; concatenating their strs gives a searchable body.
+  const ensureIndex = useCallback(async () => {
+    if (!loaded) return
+    if (pageTextRef.current.size === loaded.numPages) {
+      setSearchState({ phase: 'ready' })
+      return
+    }
+    setSearchState({ phase: 'indexing', done: 0, total: loaded.numPages })
+    const doc = loaded.doc as { getPage: (n: number) => Promise<{ getTextContent: () => Promise<{ items: Array<{ str?: string }> }> }> }
+    for (let n = 1; n <= loaded.numPages; n++) {
+      if (pageTextRef.current.has(n)) continue
+      try {
+        const page = await doc.getPage(n)
+        const content = await page.getTextContent()
+        const text = content.items.map((it) => (it.str ?? '').trim()).filter(Boolean).join(' ')
+        pageTextRef.current.set(n, text)
+      } catch {
+        pageTextRef.current.set(n, '')
+      }
+      setSearchState({ phase: 'indexing', done: n, total: loaded.numPages })
+    }
+    setSearchState({ phase: 'ready' })
   }, [loaded])
+
+  // Lazy-build the index the first time the user opens search. Re-opening is
+  // cheap: the ref is preserved across opens until the doc changes.
+  useEffect(() => {
+    if (!searchOpen || !loaded) return
+    void ensureIndex()
+  }, [searchOpen, loaded, ensureIndex])
+
+  const searchResults: SearchHit[] = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase()
+    if (!q || q.length < 2 || searchState.phase !== 'ready') return []
+    const hits: SearchHit[] = []
+    // Cap at 200 hits so pathological queries (single letter "e") don't
+    // freeze the UI. Users can refine the query for more.
+    outer: for (const [page, text] of pageTextRef.current) {
+      const lower = text.toLowerCase()
+      let from = 0
+      while (true) {
+        const idx = lower.indexOf(q, from)
+        if (idx === -1) break
+        const start = Math.max(0, idx - 30)
+        const end = Math.min(text.length, idx + q.length + 60)
+        const snippet = (start > 0 ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : '')
+        hits.push({ page, snippet, offset: idx })
+        from = idx + q.length
+        if (hits.length >= 200) break outer
+      }
+    }
+    return hits.sort((a, b) => a.page - b.page || a.offset - b.offset)
+  }, [searchQuery, searchState])
+
+  // Send current page to player window as a handout. Renders a fresh, higher-
+  // resolution copy rather than reusing the on-screen canvas so zoom level
+  // doesn't leak into the player's copy. Uses data-URL imagePath, which the
+  // PlayerApp's useImageUrl hook passes through unchanged.
+  async function sendCurrentPageToPlayer() {
+    if (!loaded || !window.electronAPI) return
+    try {
+      const doc = loaded.doc as { getPage: (n: number) => Promise<{ getViewport: (o: { scale: number }) => { width: number; height: number }; render: (o: { canvasContext: CanvasRenderingContext2D; viewport: unknown }) => { promise: Promise<void> } }> }
+      const page = await doc.getPage(pageNum)
+      const viewport = page.getViewport({ scale: 2 }) // fixed 2× for player clarity
+      const canvas = document.createElement('canvas')
+      canvas.width = viewport.width
+      canvas.height = viewport.height
+      const ctx = canvas.getContext('2d')!
+      await page.render({ canvasContext: ctx, viewport }).promise
+      const dataUrl = canvas.toDataURL('image/png')
+      window.electronAPI.sendHandout({
+        title: `${file.name} · ${t('compendium.pageShort')} ${pageNum}`,
+        imagePath: dataUrl,
+        textContent: null,
+      })
+      setSentTick((n) => n + 1)
+    } catch (err) {
+      setError((err as Error).message || String(err))
+    }
+  }
+
+  // Clear the "sent" toast after 1.8s.
+  useEffect(() => {
+    if (sentTick === 0) return
+    const id = window.setTimeout(() => setSentTick(0), 1800)
+    return () => window.clearTimeout(id)
+  }, [sentTick])
 
   if (loading || !loaded) {
     return (
@@ -170,6 +298,10 @@ export function CompendiumPdfViewer({ file }: PdfViewerProps) {
         pageNum={pageNum}
         numPages={loaded.numPages}
         zoom={zoom}
+        searchOpen={searchOpen}
+        onToggleSearch={() => setSearchOpen((v) => !v)}
+        playerConnected={playerConnected}
+        onSendToPlayer={sendCurrentPageToPlayer}
         onPrev={() => setPageNum((p) => Math.max(1, p - 1))}
         onNext={() => setPageNum((p) => Math.min(loaded.numPages, p + 1))}
         onGoto={(n) => setPageNum(Math.max(1, Math.min(loaded.numPages, n)))}
@@ -178,11 +310,109 @@ export function CompendiumPdfViewer({ file }: PdfViewerProps) {
         onZoomReset={() => setZoom(1.0)}
       />
 
+      {searchOpen && (
+        <SearchBar
+          query={searchQuery}
+          onChange={setSearchQuery}
+          state={searchState}
+          results={searchResults}
+          onJump={(p) => setPageNum(p)}
+          onClose={() => setSearchOpen(false)}
+          activePage={pageNum}
+        />
+      )}
+
       <div className="bb-pdf-canvas-wrap">
         <canvas ref={canvasRef} className="bb-pdf-canvas" />
+        {sentTick > 0 && (
+          <div className="bb-pdf-sent-toast">
+            ✓ {t('compendium.sentToPlayer')}
+          </div>
+        )}
       </div>
 
       <PdfViewerStyles />
+    </div>
+  )
+}
+
+// ─── Search bar + result list ────────────────────────────────────────
+
+function SearchBar({
+  query,
+  onChange,
+  state,
+  results,
+  onJump,
+  onClose,
+  activePage,
+}: {
+  query: string
+  onChange: (q: string) => void
+  state: SearchState
+  results: SearchHit[]
+  onJump: (page: number) => void
+  onClose: () => void
+  activePage: number
+}) {
+  const { t } = useTranslation()
+  const trimmed = query.trim()
+  return (
+    <div className="bb-pdf-search">
+      <div className="bb-pdf-search-row">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" style={{ color: 'var(--text-muted)' }}>
+          <circle cx="11" cy="11" r="7" />
+          <path d="m20 20-3.5-3.5" />
+        </svg>
+        <input
+          className="bb-pdf-search-input"
+          autoFocus
+          value={query}
+          placeholder={t('compendium.searchPlaceholder')}
+          onChange={(e) => onChange(e.target.value)}
+        />
+        <span className="bb-pdf-search-status mono">
+          {state.phase === 'indexing' ? `${state.done}/${state.total}` :
+            state.phase === 'ready' && trimmed.length >= 2 ? t('compendium.hits', { count: results.length }) :
+            state.phase === 'ready' ? t('compendium.ready') : ''}
+        </span>
+        <button type="button" className="bb-pdf-btn" onClick={onClose} title={t('compendium.closeSearch')}>
+          ✕
+        </button>
+      </div>
+      {state.phase === 'ready' && trimmed.length >= 2 && (
+        <div className="bb-pdf-search-results">
+          {results.length === 0 ? (
+            <div className="bb-pdf-search-none">{t('compendium.noHits')}</div>
+          ) : (
+            results.map((hit, i) => {
+              const lower = hit.snippet.toLowerCase()
+              const q = trimmed.toLowerCase()
+              const idx = lower.indexOf(q)
+              const before = idx >= 0 ? hit.snippet.slice(0, idx) : hit.snippet
+              const match = idx >= 0 ? hit.snippet.slice(idx, idx + trimmed.length) : ''
+              const after = idx >= 0 ? hit.snippet.slice(idx + trimmed.length) : ''
+              return (
+                <button
+                  key={`${hit.page}-${hit.offset}-${i}`}
+                  type="button"
+                  className={hit.page === activePage ? 'bb-pdf-search-hit active' : 'bb-pdf-search-hit'}
+                  onClick={() => onJump(hit.page)}
+                >
+                  <span className="bb-pdf-search-hit-page mono">
+                    {t('compendium.pageShort')} {hit.page}
+                  </span>
+                  <span className="bb-pdf-search-hit-snippet">
+                    {before}
+                    <mark>{match}</mark>
+                    {after}
+                  </span>
+                </button>
+              )
+            })
+          )}
+        </div>
+      )}
     </div>
   )
 }
@@ -193,6 +423,10 @@ function PdfToolbar({
   pageNum,
   numPages,
   zoom,
+  searchOpen,
+  onToggleSearch,
+  playerConnected,
+  onSendToPlayer,
   onPrev,
   onNext,
   onGoto,
@@ -203,6 +437,10 @@ function PdfToolbar({
   pageNum: number
   numPages: number
   zoom: number
+  searchOpen: boolean
+  onToggleSearch: () => void
+  playerConnected: boolean
+  onSendToPlayer: () => void
   onPrev: () => void
   onNext: () => void
   onGoto: (n: number) => void
@@ -258,6 +496,26 @@ function PdfToolbar({
         </button>
         <button type="button" className="bb-pdf-btn" onClick={onZoomIn} disabled={zoom >= 4} title={t('compendium.zoomIn')}>
           +
+        </button>
+      </div>
+
+      <div className="bb-pdf-group">
+        <button
+          type="button"
+          className={searchOpen ? 'bb-pdf-btn active' : 'bb-pdf-btn'}
+          onClick={onToggleSearch}
+          title={t('compendium.search') + ' (Ctrl+F)'}
+        >
+          🔎
+        </button>
+        <button
+          type="button"
+          className="bb-pdf-btn bb-pdf-btn-send"
+          onClick={onSendToPlayer}
+          disabled={!playerConnected}
+          title={playerConnected ? t('compendium.sendToPlayer') : t('compendium.sendDisabled')}
+        >
+          ↗ {t('compendium.sendShort')}
         </button>
       </div>
     </div>
@@ -342,6 +600,131 @@ function PdfViewerStyles() {
         height: 100%;
         color: var(--text-muted);
         font-size: 13px;
+      }
+
+      .bb-pdf-btn.active {
+        background: var(--accent-blue-dim);
+        border-color: var(--accent-blue);
+        color: var(--accent-blue-light);
+      }
+      .bb-pdf-btn-send {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--text-inverse);
+      }
+      .bb-pdf-btn-send:hover:not(:disabled) {
+        background: var(--accent-hover);
+        border-color: var(--accent-hover);
+        color: var(--text-inverse);
+      }
+      .bb-pdf-btn-send:disabled {
+        background: transparent;
+        color: var(--text-muted);
+        border-color: var(--border);
+      }
+
+      /* ── Search bar ─────────────────────────────────────────── */
+      .bb-pdf-search {
+        background: var(--bg-elevated);
+        border-bottom: 1px solid var(--border);
+        display: flex; flex-direction: column;
+        max-height: 40%;
+      }
+      .bb-pdf-search-row {
+        display: flex; align-items: center; gap: 8px;
+        padding: 8px var(--sp-4);
+      }
+      .bb-pdf-search-input {
+        flex: 1;
+        padding: 6px 8px;
+        background: var(--bg-base);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        color: var(--text-primary);
+        font-size: 12px;
+        outline: none;
+        font-family: inherit;
+      }
+      .bb-pdf-search-input:focus {
+        border-color: var(--accent-blue);
+        box-shadow: 0 0 0 2px var(--accent-blue-dim);
+      }
+      .bb-pdf-search-status {
+        font-size: 11px;
+        color: var(--text-muted);
+        flex-shrink: 0;
+      }
+      .bb-pdf-search-results {
+        overflow-y: auto;
+        border-top: 1px solid var(--border-subtle);
+      }
+      .bb-pdf-search-none {
+        padding: var(--sp-3) var(--sp-4);
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+      .bb-pdf-search-hit {
+        display: flex; gap: 10px;
+        width: 100%;
+        padding: 7px var(--sp-4);
+        background: transparent;
+        border: none;
+        border-left: 2px solid transparent;
+        color: var(--text-primary);
+        font-family: inherit;
+        font-size: 12px;
+        text-align: left;
+        cursor: pointer;
+        transition: background var(--transition), border-color var(--transition);
+      }
+      .bb-pdf-search-hit:hover { background: var(--bg-overlay); }
+      .bb-pdf-search-hit.active {
+        border-left-color: var(--accent-blue);
+        background: var(--accent-blue-dim);
+      }
+      .bb-pdf-search-hit-page {
+        flex-shrink: 0;
+        min-width: 48px;
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--text-muted);
+      }
+      .bb-pdf-search-hit-snippet {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: var(--text-secondary);
+      }
+      .bb-pdf-search-hit-snippet mark {
+        background: rgba(255, 198, 46, 0.35);
+        color: var(--accent);
+        padding: 0 2px;
+        border-radius: 2px;
+      }
+
+      /* ── Sent-to-player toast ───────────────────────────────── */
+      .bb-pdf-canvas-wrap { position: relative; }
+      .bb-pdf-sent-toast {
+        position: absolute;
+        top: 14px; left: 50%;
+        transform: translateX(-50%);
+        padding: 6px 14px;
+        background: rgba(13, 16, 21, 0.92);
+        border: 1px solid var(--success);
+        border-radius: 999px;
+        color: var(--success);
+        font-size: 12px;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        z-index: 10;
+        animation: bb-pdf-toast-in 180ms ease-out;
+        pointer-events: none;
+      }
+      @keyframes bb-pdf-toast-in {
+        from { opacity: 0; transform: translate(-50%, -8px); }
+        to { opacity: 1; transform: translate(-50%, 0); }
       }
     `}</style>
   )
