@@ -345,6 +345,23 @@ html, body {
   color: var(--text-muted);
   flex-shrink: 0;
 }
+/* Contextual section: subtle yellow accent dot + tinted left border so the
+   most-relevant panel reads as "live" without shouting. */
+.accordion-context-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent-dim);
+  flex-shrink: 0;
+}
+.accordion-item.contextual > .accordion-header {
+  border-left-color: var(--accent);
+  color: var(--text-primary);
+}
+.accordion-item.contextual.open > .accordion-header {
+  border-left-color: var(--accent);
+}
 .accordion-panel {
   flex: 1;
   min-height: 0;
@@ -1193,3 +1210,113 @@ textarea.input {
   color: var(--text-muted);
 }
 .multi-select-btn-ghost:hover { color: var(--text-primary); border-color: var(--border); }
+
+/* ─── Floating utility dock ──────────────────────────────────────────────────── */
+/* Bottom-right rail of icon buttons that toggle a glass popover for utility
+   panels (dice, audio, overlay). Lives outside the right sidebar so the main
+   surface stays focused on scene/content tasks. */
+.floating-utility-dock {
+  position: fixed;
+  right: var(--sp-3);
+  bottom: calc(var(--statusbar-h) + var(--sp-3));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--sp-2);
+  z-index: 60;
+  pointer-events: none;
+}
+.floating-utility-dock > * { pointer-events: auto; }
+
+.floating-utility-rail {
+  display: flex;
+  flex-direction: row;
+  gap: var(--sp-1);
+  padding: 4px;
+  background: rgba(13, 16, 21, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+.floating-utility-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 16px;
+  transition: color var(--transition), background var(--transition);
+}
+.floating-utility-btn:hover {
+  background: var(--bg-overlay);
+  color: var(--text-primary);
+}
+.floating-utility-btn.active {
+  background: var(--accent-blue-dim);
+  color: var(--accent-blue-light);
+}
+
+.floating-utility-popover {
+  width: 320px;
+  max-width: calc(100vw - 2 * var(--sp-3));
+  max-height: calc(100vh - var(--toolbar-h) - var(--statusbar-h) - 80px);
+  display: flex;
+  flex-direction: column;
+  background: rgba(18, 23, 34, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  animation: floatingPopoverEnter 160ms ease-out;
+}
+@keyframes floatingPopoverEnter {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.floating-utility-popover-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+.floating-utility-popover-icon { font-size: 14px; }
+.floating-utility-popover-title {
+  flex: 1;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.floating-utility-popover-close {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  transition: color var(--transition), background var(--transition);
+}
+.floating-utility-popover-close:hover { background: var(--bg-overlay); color: var(--text-primary); }
+.floating-utility-popover-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}

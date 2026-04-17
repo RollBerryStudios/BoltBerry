@@ -6,6 +6,7 @@ import { CanvasArea } from './canvas/CanvasArea'
 import { StatusBar } from './StatusBar'
 import { ErrorBoundary } from './ErrorBoundary'
 import { Resizer } from './shared/Resizer'
+import { FloatingUtilityDock } from './FloatingUtilityDock'
 
 export function AppLayout() {
   const leftSidebarOpen = useUIStore((s) => s.leftSidebarOpen)
@@ -69,6 +70,10 @@ export function AppLayout() {
 
       <ErrorBoundary label="Statusbar">
         <StatusBar />
+      </ErrorBoundary>
+
+      <ErrorBoundary label="Utility Dock">
+        <FloatingUtilityDock />
       </ErrorBoundary>
     </div>
   )

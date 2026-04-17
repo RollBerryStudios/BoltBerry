@@ -34,6 +34,7 @@ function buildCommands(t: (k: string) => string): Command[] {
     if (!ui().rightSidebarOpen) ui().toggleRightSidebar()
     ui().setSidebarTab(tab)
   }
+  const openFloating = (panel: 'audio' | 'overlay' | 'dice') => ui().setFloatingPanel(panel)
 
   return [
     // ── Session
@@ -59,9 +60,9 @@ function buildCommands(t: (k: string) => string): Command[] {
     { id: 'panel.handouts',   labelKey: 'palette.openHandouts',   groupKey: 'palette.groupPanels', keywords: 'handouts handout',                     run: () => openTab('handouts') },
     { id: 'panel.encounters', labelKey: 'palette.openEncounters', groupKey: 'palette.groupPanels', keywords: 'encounters begegnungen',               run: () => openTab('encounters') },
     { id: 'panel.characters', labelKey: 'palette.openCharacters', groupKey: 'palette.groupPanels', keywords: 'characters charaktere',                run: () => openTab('characters') },
-    { id: 'panel.audio',      labelKey: 'palette.openAudio',      groupKey: 'palette.groupPanels', keywords: 'audio music sound musik',              run: () => openTab('audio') },
-    { id: 'panel.overlay',    labelKey: 'palette.openOverlay',    groupKey: 'palette.groupPanels', keywords: 'overlay atmosphere weather wetter',    run: () => openTab('overlay') },
-    { id: 'panel.dice',       labelKey: 'palette.openDice',       groupKey: 'palette.groupPanels', keywords: 'dice würfel roll rollen',              run: () => openTab('dice') },
+    { id: 'panel.audio',      labelKey: 'palette.openAudio',      groupKey: 'palette.groupPanels', keywords: 'audio music sound musik',              run: () => openFloating('audio') },
+    { id: 'panel.overlay',    labelKey: 'palette.openOverlay',    groupKey: 'palette.groupPanels', keywords: 'overlay atmosphere weather wetter',    run: () => openFloating('overlay') },
+    { id: 'panel.dice',       labelKey: 'palette.openDice',       groupKey: 'palette.groupPanels', keywords: 'dice würfel roll rollen',              run: () => openFloating('dice') },
 
     // ── Edit
     { id: 'edit.undo', labelKey: 'palette.undo', groupKey: 'palette.groupEdit', shortcut: 'Ctrl+Z',       keywords: 'undo rückgängig', run: () => undo().undo() },

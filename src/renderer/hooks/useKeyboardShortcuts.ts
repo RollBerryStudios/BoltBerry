@@ -18,15 +18,31 @@ export function useKeyboardShortcuts() {
 
       // ── Ctrl / Cmd shortcuts ──────────────────────────────────────────────
       if (e.ctrlKey || e.metaKey) {
-        // ── Ctrl+1-9 — sidebar tab switching ─────────────────────────────
+        // ── Ctrl+1-9 — panel switching (sidebar tabs + floating utility panels) ─
         if (!e.shiftKey && !e.altKey) {
-          const SIDEBAR_TABS: import('../stores/uiStore').SidebarTab[] = [
-            'tokens', 'initiative', 'encounters', 'rooms', 'notes', 'handouts', 'overlay', 'audio', 'dice',
+          type PanelTarget =
+            | { kind: 'sidebar'; tab: import('../stores/uiStore').SidebarTab }
+            | { kind: 'floating'; panel: import('../stores/uiStore').FloatingPanel }
+          const PANELS: PanelTarget[] = [
+            { kind: 'sidebar',  tab: 'tokens' },
+            { kind: 'sidebar',  tab: 'initiative' },
+            { kind: 'sidebar',  tab: 'encounters' },
+            { kind: 'sidebar',  tab: 'rooms' },
+            { kind: 'sidebar',  tab: 'notes' },
+            { kind: 'sidebar',  tab: 'handouts' },
+            { kind: 'floating', panel: 'overlay' },
+            { kind: 'floating', panel: 'audio' },
+            { kind: 'floating', panel: 'dice' },
           ]
           const idx = parseInt(e.key) - 1
-          if (idx >= 0 && idx < SIDEBAR_TABS.length) {
+          if (idx >= 0 && idx < PANELS.length) {
             e.preventDefault()
-            useUIStore.getState().setSidebarTab(SIDEBAR_TABS[idx])
+            const target = PANELS[idx]
+            if (target.kind === 'sidebar') {
+              useUIStore.getState().setSidebarTab(target.tab)
+            } else {
+              useUIStore.getState().setFloatingPanel(target.panel)
+            }
             return
           }
         }
@@ -214,8 +230,8 @@ export function useKeyboardShortcuts() {
         return
       }
 
-      // ── Audio tab: SFX board shortcuts ───────────────────────────────────
-      if (useUIStore.getState().sidebarTab === 'audio') {
+      // ── Audio panel: SFX board shortcuts (only when floating audio panel is open) ─
+      if (useUIStore.getState().floatingPanel === 'audio') {
         const { boards, activeBoardIndex, triggerSfx, setActiveBoardIndex } = useAudioStore.getState()
         const board = boards[activeBoardIndex]
 

@@ -11,7 +11,7 @@ export function StatusBar() {
   const sessionMode = useUIStore((s) => s.sessionMode)
   const overlayActive = useUIStore((s) => s.overlayActive)
   const activeWeather = useUIStore((s) => s.activeWeather)
-  const setSidebarTab = useUIStore((s) => s.setSidebarTab)
+  const setFloatingPanel = useUIStore((s) => s.setFloatingPanel)
   const setOverlayActive = useUIStore((s) => s.setOverlayActive)
   const entries = useInitiativeStore((s) => s.entries)
   const round = useInitiativeStore((s) => s.round)
@@ -58,13 +58,13 @@ export function StatusBar() {
       )}
 
       {overlayActive && (
-        <div className="statusbar-item statusbar-clickable" onClick={() => { setSidebarTab('overlay') }} title="Aktives Overlay — klicken zum Verwalten">
+        <div className="statusbar-item statusbar-clickable" onClick={() => setFloatingPanel('overlay')} title="Aktives Overlay — klicken zum Verwalten">
           <span style={{ color: '#a855f7' }}>✦ Overlay aktiv</span>
         </div>
       )}
 
       {activeWeather !== 'none' && activeWeather !== '' && (
-        <div className="statusbar-item statusbar-clickable" onClick={() => setSidebarTab('overlay')} title="Aktives Wetter — klicken zum Verwalten">
+        <div className="statusbar-item statusbar-clickable" onClick={() => setFloatingPanel('overlay')} title="Aktives Wetter — klicken zum Verwalten">
           <span style={{ color: '#3b82f6' }}>
             {activeWeather === 'rain' ? '🌧 Regen' : activeWeather === 'snow' ? '❄ Schnee' : activeWeather === 'fog' ? '🌫 Nebel' : activeWeather === 'wind' ? '💨 Wind' : `🌤 ${activeWeather}`}
           </span>

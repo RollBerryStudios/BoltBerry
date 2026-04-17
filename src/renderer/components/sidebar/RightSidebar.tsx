@@ -1,12 +1,11 @@
+import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useUIStore, SIDEBAR_TAB_TO_DOCK, type SidebarTab, type SidebarDock } from '../../stores/uiStore'
+import { useInitiativeStore } from '../../stores/initiativeStore'
 import { TokenPanel } from './panels/TokenPanel'
 import { InitiativePanel } from './panels/InitiativePanel'
 import { NotesPanel } from './panels/NotesPanel'
-import { AudioPanel } from './panels/AudioPanel'
 import { HandoutsPanel } from './panels/HandoutsPanel'
-import { OverlayPanel } from './panels/OverlayPanel'
-import { DiceRoller } from './panels/DiceRoller'
 import { EncounterPanel } from './panels/EncounterPanel'
 import { RoomPanel } from './panels/RoomPanel'
 import { CharacterSheetPanel } from './panels/CharacterSheetPanel'
@@ -16,6 +15,8 @@ interface SectionDef {
   labelKey: string
   icon: string
   render: () => JSX.Element
+  /** True when this section is currently the most relevant to user context. */
+  isContextual?: boolean
 }
 
 interface DockDef {
@@ -25,75 +26,82 @@ interface DockDef {
   sections: SectionDef[]
 }
 
-// The three docks group related panels together. Each dock is a tab in the top strip;
-// within a dock, sections behave as an accordion (one open at a time = the current sidebarTab).
-const DOCKS: DockDef[] = [
-  {
-    id: 'scene',
-    labelKey: 'sidebar.right.dockScene',
-    icon: '🗺️',
-    sections: [
-      { id: 'tokens',     labelKey: 'sidebar.right.tabTokens',     icon: '⬤',  render: () => <TokenPanel /> },
-      { id: 'initiative', labelKey: 'sidebar.right.tabInitiative', icon: '⚔️', render: () => <InitiativePanel /> },
-      { id: 'rooms',      labelKey: 'sidebar.right.tabRooms',      icon: '🏠', render: () => <RoomPanel /> },
-    ],
-  },
-  {
-    id: 'content',
-    labelKey: 'sidebar.right.dockContent',
-    icon: '📚',
-    sections: [
-      { id: 'notes',      labelKey: 'sidebar.right.tabNotes',      icon: '📝', render: () => <NotesPanel /> },
-      { id: 'handouts',   labelKey: 'sidebar.right.tabHandouts',   icon: '📜', render: () => <HandoutsPanel /> },
-      { id: 'encounters', labelKey: 'sidebar.right.tabEncounters', icon: '👾', render: () => <EncounterPanel /> },
-      { id: 'characters', labelKey: 'sidebar.right.tabCharacters', icon: '📋', render: () => <CharacterSheetPanel /> },
-    ],
-  },
-  {
-    id: 'ambience',
-    labelKey: 'sidebar.right.dockAmbience',
-    icon: '✦',
-    sections: [
-      { id: 'overlay', labelKey: 'sidebar.right.tabOverlay', icon: '✦',  render: () => <OverlayPanel /> },
-      { id: 'audio',   labelKey: 'sidebar.right.tabAudio',   icon: '🎵', render: () => <AudioPanel /> },
-      { id: 'dice',    labelKey: 'sidebar.right.tabDice',    icon: '🎲', render: () => <DiceRoller /> },
-    ],
-  },
-]
-
 export function RightSidebar() {
   const { t } = useTranslation()
   const sidebarTab = useUIStore((s) => s.sidebarTab)
   const sidebarDock = useUIStore((s) => s.sidebarDock)
   const setSidebarTab = useUIStore((s) => s.setSidebarTab)
   const setSidebarDock = useUIStore((s) => s.setSidebarDock)
+  const selectedTokenId = useUIStore((s) => s.selectedTokenId)
+  const workMode = useUIStore((s) => s.workMode)
+  const initiativeCount = useInitiativeStore((s) => s.entries.length)
 
-  const currentDock = DOCKS.find((d) => d.id === sidebarDock) ?? DOCKS[0]
-  // If the current sidebarTab doesn't belong to the current dock (e.g. dock switched but no tab
-  // was clicked yet), fall back to the dock's first section as the expanded one.
+  const combatActive = workMode === 'combat' || initiativeCount > 0
+  const tokenSelected = selectedTokenId !== null
+
+  // Auto-open the contextually-relevant section when user context changes.
+  // We track the previous "context signature" to only fire on actual transitions —
+  // not on every re-render — so the user can still manually navigate elsewhere.
+  const prevContextRef = useRef<string>('')
+  useEffect(() => {
+    const sig = `${tokenSelected ? 't' : ''}|${combatActive ? 'c' : ''}`
+    if (sig === prevContextRef.current) return
+    prevContextRef.current = sig
+    if (combatActive) {
+      setSidebarTab('initiative')
+    } else if (tokenSelected) {
+      setSidebarTab('tokens')
+    }
+  }, [tokenSelected, combatActive, setSidebarTab])
+
+  const docks: DockDef[] = [
+    {
+      id: 'scene',
+      labelKey: 'sidebar.right.dockScene',
+      icon: '🗺️',
+      sections: [
+        { id: 'tokens',     labelKey: 'sidebar.right.tabTokens',     icon: '⬤',  render: () => <TokenPanel />,         isContextual: tokenSelected && !combatActive },
+        { id: 'initiative', labelKey: 'sidebar.right.tabInitiative', icon: '⚔️', render: () => <InitiativePanel />,    isContextual: combatActive },
+        { id: 'rooms',      labelKey: 'sidebar.right.tabRooms',      icon: '🏠', render: () => <RoomPanel /> },
+      ],
+    },
+    {
+      id: 'content',
+      labelKey: 'sidebar.right.dockContent',
+      icon: '📚',
+      sections: [
+        { id: 'notes',      labelKey: 'sidebar.right.tabNotes',      icon: '📝', render: () => <NotesPanel /> },
+        { id: 'handouts',   labelKey: 'sidebar.right.tabHandouts',   icon: '📜', render: () => <HandoutsPanel /> },
+        { id: 'encounters', labelKey: 'sidebar.right.tabEncounters', icon: '👾', render: () => <EncounterPanel /> },
+        { id: 'characters', labelKey: 'sidebar.right.tabCharacters', icon: '📋', render: () => <CharacterSheetPanel /> },
+      ],
+    },
+  ]
+
+  // Reorder Scene dock so the contextual section appears first when active.
+  const sceneDock = docks[0]
+  const ctxIdx = sceneDock.sections.findIndex((s) => s.isContextual)
+  if (ctxIdx > 0) {
+    const reordered = [...sceneDock.sections]
+    const [pinned] = reordered.splice(ctxIdx, 1)
+    reordered.unshift(pinned)
+    docks[0] = { ...sceneDock, sections: reordered }
+  }
+
+  const currentDock = docks.find((d) => d.id === sidebarDock) ?? docks[0]
   const expandedTab: SidebarTab =
     SIDEBAR_TAB_TO_DOCK[sidebarTab] === currentDock.id ? sidebarTab : currentDock.sections[0].id
 
-  const handleDockClick = (dockId: SidebarDock) => {
-    if (dockId === sidebarDock) return
-    setSidebarDock(dockId)
-  }
-
-  const handleSectionClick = (sectionId: SidebarTab) => {
-    setSidebarTab(sectionId)
-  }
-
   return (
     <div className="sidebar sidebar-right">
-      {/* Dock strip — three top-level groupings */}
       <div className="sidebar-dock-strip">
-        {DOCKS.map((dock) => (
+        {docks.map((dock) => (
           <button
             key={dock.id}
             className={`sidebar-dock-tab${sidebarDock === dock.id ? ' active' : ''}`}
             title={t(dock.labelKey)}
             aria-label={t(dock.labelKey)}
-            onClick={() => handleDockClick(dock.id)}
+            onClick={() => sidebarDock !== dock.id && setSidebarDock(dock.id)}
           >
             <span className="dock-icon">{dock.icon}</span>
             <span className="dock-label">{t(dock.labelKey)}</span>
@@ -101,20 +109,25 @@ export function RightSidebar() {
         ))}
       </div>
 
-      {/* Accordion body — sections within the active dock */}
       <div className="sidebar-accordion">
         {currentDock.sections.map((section) => {
           const isOpen = section.id === expandedTab
           return (
-            <div key={section.id} className={`accordion-item${isOpen ? ' open' : ''}`}>
+            <div
+              key={section.id}
+              className={`accordion-item${isOpen ? ' open' : ''}${section.isContextual ? ' contextual' : ''}`}
+            >
               <button
                 className="accordion-header"
                 aria-expanded={isOpen}
                 aria-controls={`panel-${section.id}`}
-                onClick={() => handleSectionClick(section.id)}
+                onClick={() => setSidebarTab(section.id)}
               >
                 <span className="accordion-icon">{section.icon}</span>
                 <span className="accordion-title">{t(section.labelKey)}</span>
+                {section.isContextual && (
+                  <span className="accordion-context-dot" aria-hidden="true" title={t('sidebar.right.contextual')} />
+                )}
                 <span className="accordion-chevron" aria-hidden="true">{isOpen ? '▾' : '▸'}</span>
               </button>
               {isOpen && (

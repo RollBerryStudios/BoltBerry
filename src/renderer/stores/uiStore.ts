@@ -2,12 +2,19 @@ import { create } from 'zustand'
 import i18n from '../i18n'
 
 export type ActiveTool = 'select' | 'fog-rect' | 'fog-polygon' | 'fog-cover' | 'fog-brush' | 'fog-brush-cover' | 'token' | 'atmosphere' | 'pointer' | 'measure-line' | 'measure-circle' | 'measure-cone' | 'draw-freehand' | 'draw-rect' | 'draw-circle' | 'draw-text' | 'wall-draw' | 'wall-door' | 'room'
-export type SidebarTab = 'tokens' | 'initiative' | 'notes' | 'handouts' | 'overlay' | 'audio' | 'dice' | 'encounters' | 'rooms' | 'characters'
-export type SidebarDock = 'scene' | 'content' | 'ambience'
+export type SidebarTab = 'tokens' | 'initiative' | 'notes' | 'handouts' | 'encounters' | 'rooms' | 'characters'
+export type SidebarDock = 'scene' | 'content'
+/** Utility panels live in a floating dock outside the right sidebar. */
+export type FloatingPanel = 'audio' | 'overlay' | 'dice'
 export type AppMode = 'map' | 'atmosphere' | 'blackout'
 export type SessionMode = 'session' | 'prep'
 export type WorkMode = 'prep' | 'play' | 'combat' | 'player-preview' | 'fog-edit'
 export type AppLanguage = 'de' | 'en'
+
+const FLOATING_PANELS: ReadonlySet<string> = new Set(['audio', 'overlay', 'dice'])
+export function isFloatingPanel(id: string): id is FloatingPanel {
+  return FLOATING_PANELS.has(id)
+}
 
 // Maps each sidebar tab to the dock it belongs to.
 // When setSidebarTab is called, sidebarDock follows automatically.
@@ -19,9 +26,6 @@ export const SIDEBAR_TAB_TO_DOCK: Record<SidebarTab, SidebarDock> = {
   handouts: 'content',
   characters: 'content',
   encounters: 'content',
-  overlay: 'ambience',
-  audio: 'ambience',
-  dice: 'ambience',
 }
 
 // Min/max widths in px for the resizable sidebars.
@@ -32,6 +36,8 @@ interface UIState {
   activeTool: ActiveTool
   sidebarTab: SidebarTab
   sidebarDock: SidebarDock
+  /** Currently-open floating utility panel (audio/overlay/dice). null = none. */
+  floatingPanel: FloatingPanel | null
   leftSidebarOpen: boolean
   rightSidebarOpen: boolean
   leftSidebarWidth: number
@@ -77,6 +83,8 @@ interface UIState {
   setWorkMode: (mode: WorkMode) => void
   setSidebarTab: (tab: SidebarTab) => void
   setSidebarDock: (dock: SidebarDock) => void
+  setFloatingPanel: (panel: FloatingPanel | null) => void
+  toggleFloatingPanel: (panel: FloatingPanel) => void
   toggleLeftSidebar: () => void
   toggleRightSidebar: () => void
   setLeftSidebarWidth: (px: number) => void
@@ -124,6 +132,7 @@ export const useUIStore = create<UIState>((set) => ({
   activeTool: 'select',
   sidebarTab: (() => { try { const v = localStorage.getItem('boltberry-sidebar-tab') as SidebarTab | null; return v && v in SIDEBAR_TAB_TO_DOCK ? v : 'tokens' } catch { return 'tokens' } })(),
   sidebarDock: (() => { try { const v = localStorage.getItem('boltberry-sidebar-tab') as SidebarTab | null; return v && v in SIDEBAR_TAB_TO_DOCK ? SIDEBAR_TAB_TO_DOCK[v] : 'scene' } catch { return 'scene' } })(),
+  floatingPanel: null,
   leftSidebarOpen: (() => { try { const v = localStorage.getItem('boltberry-left-sidebar'); return v === null ? true : v !== 'false' } catch { return true } })(),
   rightSidebarOpen: (() => { try { const v = localStorage.getItem('boltberry-right-sidebar'); return v === null ? true : v !== 'false' } catch { return true } })(),
   leftSidebarWidth: (() => { try { const v = parseInt(localStorage.getItem('boltberry-left-sidebar-width') || '', 10); return Number.isFinite(v) && v >= SIDEBAR_MIN_WIDTH && v <= SIDEBAR_MAX_WIDTH ? v : 240 } catch { return 240 } })(),
@@ -187,6 +196,9 @@ export const useUIStore = create<UIState>((set) => ({
     set({ sidebarTab, sidebarDock: SIDEBAR_TAB_TO_DOCK[sidebarTab] })
   },
   setSidebarDock: (sidebarDock) => set({ sidebarDock }),
+  setFloatingPanel: (floatingPanel) => set({ floatingPanel }),
+  toggleFloatingPanel: (panel) =>
+    set((s) => ({ floatingPanel: s.floatingPanel === panel ? null : panel })),
   toggleLeftSidebar: () => set((s) => {
     const v = !s.leftSidebarOpen
     try { localStorage.setItem('boltberry-left-sidebar', String(v)) } catch { /* noop */ }

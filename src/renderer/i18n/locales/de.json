@@ -147,7 +147,6 @@
     "right": {
       "dockScene": "Szene",
       "dockContent": "Inhalte",
-      "dockAmbience": "Ambiente",
       "tabTokens": "Token",
       "tabInitiative": "Initiative",
       "tabNotes": "Notizen",
@@ -156,7 +155,9 @@
       "tabAudio": "Audio",
       "tabDice": "Würfel",
       "tabEncounters": "Begegnungen",
-      "tabCharacters": "Charaktere"
+      "tabCharacters": "Charaktere",
+      "contextual": "Kontextrelevant",
+      "utilityDock": "Hilfs-Panels"
     }
   },
   "shortcuts": {
