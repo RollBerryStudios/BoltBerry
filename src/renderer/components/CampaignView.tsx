@@ -6,6 +6,7 @@ import { NotesPanel } from './sidebar/panels/NotesPanel'
 import { CharacterSheetPanel } from './sidebar/panels/CharacterSheetPanel'
 import { HandoutsPanel } from './sidebar/panels/HandoutsPanel'
 import { AudioPanel } from './sidebar/panels/AudioPanel'
+import { TokenLibraryPanel } from './sidebar/panels/TokenLibraryPanel'
 import {
   CampaignDataStyles,
   MapThumbnail,
@@ -19,11 +20,12 @@ import type { MapRecord } from '@shared/ipc-types'
    Bolt-yellow CTA) so that the whole "between sessions" experience —
    Welcome → Workspace → Map view — shares one visual language. */
 
-type Tab = 'notes' | 'characters' | 'handouts' | 'audio'
+type Tab = 'notes' | 'characters' | 'library' | 'handouts' | 'audio'
 
 const TABS: { id: Tab; icon: string; i18nKey: string }[] = [
   { id: 'notes',      icon: '📝', i18nKey: 'workspace.tabNotes' },
   { id: 'characters', icon: '👤', i18nKey: 'workspace.tabCharacters' },
+  { id: 'library',    icon: '📚', i18nKey: 'workspace.tabLibrary' },
   { id: 'handouts',   icon: '📄', i18nKey: 'workspace.tabHandouts' },
   { id: 'audio',      icon: '🎵', i18nKey: 'workspace.tabAudio' },
 ]
@@ -293,6 +295,11 @@ export function CampaignView() {
             {tab === 'characters' && (
               <div className="bb-ws-panel-inner bb-ws-panel-characters">
                 <CharacterSheetPanel />
+              </div>
+            )}
+            {tab === 'library' && (
+              <div className="bb-ws-panel-inner bb-ws-panel-library">
+                <TokenLibraryPanel />
               </div>
             )}
             {tab === 'handouts' && (
@@ -743,6 +750,7 @@ function WorkspaceStyles() {
       }
       .bb-ws-panel-notes > * { width: 100%; max-width: 860px; }
       .bb-ws-panel-characters,
+      .bb-ws-panel-library,
       .bb-ws-panel-handouts,
       .bb-ws-panel-audio {
         min-height: 500px;
@@ -750,6 +758,7 @@ function WorkspaceStyles() {
         flex-direction: column;
       }
       .bb-ws-panel-characters > *,
+      .bb-ws-panel-library > *,
       .bb-ws-panel-handouts > *,
       .bb-ws-panel-audio > * { flex: 1; min-height: 0; }
     `}</style>
