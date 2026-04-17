@@ -1,9 +1,21 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { useCampaignStore } from '../stores/campaignStore'
 import { useUIStore } from '../stores/uiStore'
 import { formatError } from '../utils/formatError'
+import { useImageUrl } from '../hooks/useImageUrl'
 import type { Campaign } from '@shared/ipc-types'
+
+/* ─── Types for the dashboard-only DB aggregates ──────────────────── */
+
+interface CampaignStats {
+  mapCount: number
+  handoutCount: number
+  thumbnailPath: string | null
+  party: Array<{ name: string; className: string; level: number }>
+}
+
+type StatsMap = Record<number, CampaignStats>
 
 /* Landing screen shown when no campaign is active.
    Replaces the minimal StartScreen with a dashboard-style layout that surfaces
@@ -18,6 +30,23 @@ export function CampaignDashboard() {
   const [creating, setCreating] = useState(false)
   const [newName, setNewName] = useState('')
   const [error, setError] = useState<string | null>(null)
+  const [stats, setStats] = useState<StatsMap>({})
+
+  // Pull per-campaign aggregates in one shot when the campaign list changes.
+  // Three small indexed queries beat N round-trips per card.
+  useEffect(() => {
+    if (!window.electronAPI || campaigns.length === 0) {
+      setStats({})
+      return
+    }
+    let cancelled = false
+    void loadStats(campaigns.map((c) => c.id)).then((result) => {
+      if (!cancelled) setStats(result)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [campaigns])
 
   // The "+ New campaign" menu item dispatches this; we catch it here instead
   // of in StartScreen.
@@ -115,10 +144,15 @@ export function CampaignDashboard() {
             description={t('startScreen.noCampaignsDesc')}
           />
         ) : (
-          // Hero + grid + recent maps + quick actions land in later commits.
-          <div className="bb-dash-placeholder">
-            {t('startScreen.recentlyUsed')} · {campaigns.length}
-          </div>
+          <>
+            {mostRecent && (
+              <HeroCard
+                campaign={mostRecent}
+                stats={stats[mostRecent.id]}
+                onOpen={() => setActiveCampaign(mostRecent.id)}
+              />
+            )}
+          </>
         )}
 
         {error && <div className="bb-dash-error">⚠️ {error}</div>}
@@ -292,6 +326,208 @@ function CreateCampaignModal({
   )
 }
 
+// ─── Hero card ─────────────────────────────────────────────────────────
+
+function HeroCard({
+  campaign,
+  stats,
+  onOpen,
+}: {
+  campaign: Campaign
+  stats: CampaignStats | undefined
+  onOpen: () => void
+}) {
+  const { t } = useTranslation()
+  const lastEditedLabel = useRelativeTime(campaign.lastOpened)
+
+  return (
+    <section
+      className="bb-dash-hero"
+      role="button"
+      tabIndex={0}
+      onClick={onOpen}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onOpen()
+        }
+      }}
+    >
+      <div className="bb-dash-hero-cover">
+        <MapThumbnail path={stats?.thumbnailPath ?? null} campaignName={campaign.name} />
+        <div className="bb-dash-hero-cover-fade" aria-hidden="true" />
+      </div>
+
+      <div className="bb-dash-hero-body">
+        <div className="bb-dash-hero-kicker">
+          <span className="bb-dash-dot" aria-hidden="true" />
+          {t('dashboard.lastEdited')} · {lastEditedLabel}
+        </div>
+
+        <h2 className="bb-dash-hero-title display">{campaign.name}</h2>
+
+        <div className="bb-dash-hero-metrics">
+          <Metric label={t('dashboard.characters')} value={stats?.party.length ?? 0}>
+            {stats && stats.party.length > 0 ? <PartyAvatars party={stats.party} /> : null}
+          </Metric>
+          <div className="bb-dash-hero-sep" aria-hidden="true" />
+          <Metric label={t('dashboard.maps')} value={stats?.mapCount ?? 0} />
+          <div className="bb-dash-hero-sep" aria-hidden="true" />
+          <Metric label={t('dashboard.handouts')} value={stats?.handoutCount ?? 0} />
+        </div>
+
+        <div className="bb-dash-hero-cta">
+          <button
+            className="bb-dash-cta bb-dash-cta-lg"
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation()
+              onOpen()
+            }}
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M13 2L4 14h7l-2 8 9-12h-7l2-8z" />
+            </svg>
+            {t('dashboard.resume')}
+          </button>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Metric({
+  label,
+  value,
+  children,
+}: {
+  label: string
+  value: number
+  children?: React.ReactNode
+}) {
+  return (
+    <div className="bb-dash-metric">
+      <div className="bb-dash-metric-label">{label}</div>
+      {children ?? <div className="bb-dash-metric-value mono">{value}</div>}
+    </div>
+  )
+}
+
+function MapThumbnail({ path, campaignName }: { path: string | null; campaignName: string }) {
+  const url = useImageUrl(path)
+  if (!path || !url) {
+    // Fallback: first letter of the campaign name on a soft tinted block.
+    const initial = campaignName.trim().charAt(0).toUpperCase() || '?'
+    const hue = hashHue(campaignName)
+    return (
+      <div
+        className="bb-dash-thumb-fallback display"
+        style={{
+          background: `linear-gradient(135deg, hsl(${hue} 40% 24%), hsl(${hue} 30% 14%))`,
+        }}
+      >
+        {initial}
+      </div>
+    )
+  }
+  return <img className="bb-dash-thumb-img" src={url} alt="" draggable={false} />
+}
+
+function PartyAvatars({
+  party,
+  max = 4,
+  size = 26,
+}: {
+  party: CampaignStats['party']
+  max?: number
+  size?: number
+}) {
+  const shown = party.slice(0, max)
+  const extra = party.length - shown.length
+  return (
+    <div className="bb-dash-party">
+      {shown.map((p, i) => {
+        const initial = (p.name.trim().charAt(0) || '?').toUpperCase()
+        const hue = hashHue(p.name + p.className)
+        return (
+          <div
+            key={`${p.name}-${i}`}
+            className="bb-dash-party-avatar"
+            title={`${p.name} · ${p.className}${p.level ? ' · Lv ' + p.level : ''}`}
+            style={{
+              width: size,
+              height: size,
+              marginLeft: i === 0 ? 0 : -8,
+              background: `hsl(${hue} 55% 55%)`,
+              zIndex: max - i,
+              fontSize: size * 0.42,
+            }}
+          >
+            {initial}
+          </div>
+        )
+      })}
+      {extra > 0 && (
+        <div
+          className="bb-dash-party-avatar bb-dash-party-extra"
+          style={{ width: size, height: size, marginLeft: -8, fontSize: size * 0.4 }}
+        >
+          +{extra}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ─── Data loader ───────────────────────────────────────────────────────
+
+async function loadStats(campaignIds: number[]): Promise<StatsMap> {
+  if (!window.electronAPI || campaignIds.length === 0) return {}
+
+  const placeholders = campaignIds.map(() => '?').join(',')
+
+  const [maps, handouts, chars] = await Promise.all([
+    window.electronAPI.dbQuery<{ campaign_id: number; image_path: string; order_index: number }>(
+      `SELECT campaign_id, image_path, order_index
+       FROM maps WHERE campaign_id IN (${placeholders}) ORDER BY order_index ASC`,
+      campaignIds,
+    ),
+    window.electronAPI.dbQuery<{ campaign_id: number; n: number }>(
+      `SELECT campaign_id, COUNT(*) as n FROM handouts
+       WHERE campaign_id IN (${placeholders}) GROUP BY campaign_id`,
+      campaignIds,
+    ),
+    window.electronAPI.dbQuery<{ campaign_id: number; name: string; class_name: string; level: number }>(
+      `SELECT campaign_id, name, class_name, level
+       FROM character_sheets WHERE campaign_id IN (${placeholders})
+       ORDER BY level DESC, id ASC`,
+      campaignIds,
+    ),
+  ])
+
+  const out: StatsMap = {}
+  for (const id of campaignIds) {
+    out[id] = { mapCount: 0, handoutCount: 0, thumbnailPath: null, party: [] }
+  }
+  for (const row of maps) {
+    const entry = out[row.campaign_id]
+    if (!entry) continue
+    entry.mapCount += 1
+    if (entry.thumbnailPath === null) entry.thumbnailPath = row.image_path
+  }
+  for (const row of handouts) {
+    const entry = out[row.campaign_id]
+    if (entry) entry.handoutCount = row.n
+  }
+  for (const row of chars) {
+    const entry = out[row.campaign_id]
+    if (entry) {
+      entry.party.push({ name: row.name, className: row.class_name, level: row.level })
+    }
+  }
+  return out
+}
+
 // ─── Utilities ────────────────────────────────────────────────────────
 
 function pickGreeting(t: (key: string) => string): string {
@@ -300,6 +536,33 @@ function pickGreeting(t: (key: string) => string): string {
   if (h < 12) return t('dashboard.greetingMorning')
   if (h < 18) return t('dashboard.greetingDay')
   return t('dashboard.greetingEvening')
+}
+
+// Returns a localized relative-time string for an ISO timestamp.
+// Memoised on the timestamp — not a live clock; relative times only need to
+// be correct when the dashboard is re-opened.
+function useRelativeTime(iso: string): string {
+  const { t } = useTranslation()
+  return useMemo(() => {
+    const then = new Date(iso).getTime()
+    if (Number.isNaN(then)) return ''
+    const diffMs = Date.now() - then
+    const minutes = Math.floor(diffMs / 60_000)
+    if (minutes < 60) return t('dashboard.justNow')
+    const hours = Math.floor(minutes / 60)
+    if (hours < 24) return t('dashboard.hoursAgo', { count: hours })
+    const days = Math.floor(hours / 24)
+    if (days === 1) return t('dashboard.daysAgoOne')
+    return t('dashboard.daysAgo', { count: days })
+  }, [iso, t])
+}
+
+// Deterministic hue from a string — used for card covers and party avatars
+// so the same campaign / character always renders the same color.
+function hashHue(s: string): number {
+  let h = 0
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0
+  return Math.abs(h) % 360
 }
 
 // ─── Scoped styles ────────────────────────────────────────────────────
@@ -467,14 +730,120 @@ function DashboardStyles() {
       }
       .bb-dash-empty-actions { display: flex; gap: var(--sp-3); }
 
-      /* Placeholder (removed in next commit when hero/grid land) */
-      .bb-dash-placeholder {
-        padding: var(--sp-6);
+      /* Hero card */
+      .bb-dash-hero {
+        display: grid;
+        grid-template-columns: minmax(260px, 1.1fr) 1fr;
+        min-height: 280px;
+        margin-bottom: var(--sp-8);
         background: var(--bg-surface);
-        border: 1px dashed var(--border);
+        border: 1px solid var(--border);
         border-radius: var(--radius-lg);
+        overflow: hidden;
+        cursor: pointer;
+        transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 4px 8px rgba(0, 0, 0, 0.25);
+      }
+      .bb-dash-hero:hover {
+        border-color: var(--text-muted);
+        transform: translateY(-2px);
+        box-shadow: 0 22px 54px rgba(0, 0, 0, 0.4), 0 6px 12px rgba(0, 0, 0, 0.3);
+      }
+      .bb-dash-hero:focus-visible {
+        outline: 2px solid var(--accent-blue);
+        outline-offset: 2px;
+      }
+
+      .bb-dash-hero-cover {
+        position: relative;
+        min-height: 260px;
+        background: var(--bg-elevated);
+      }
+      .bb-dash-hero-cover-fade {
+        position: absolute; inset: 0;
+        background: linear-gradient(90deg, transparent 30%, var(--bg-surface) 100%);
+        pointer-events: none;
+      }
+
+      .bb-dash-hero-body {
+        padding: 28px 32px 24px;
+        display: flex; flex-direction: column;
+      }
+      .bb-dash-hero-kicker {
+        display: flex; align-items: center; gap: var(--sp-2);
+        font-size: 10px; letter-spacing: 0.16em; font-weight: 600;
         color: var(--text-muted);
-        font-size: var(--text-sm);
+        text-transform: uppercase;
+        margin-bottom: var(--sp-2);
+      }
+      .bb-dash-dot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 8px var(--accent);
+      }
+      .bb-dash-hero-title {
+        font-size: 32px; line-height: 1.08; font-weight: 500;
+        letter-spacing: -0.01em;
+        color: var(--text-primary);
+        margin: 0 0 var(--sp-4) 0;
+      }
+
+      .bb-dash-hero-metrics {
+        display: flex; gap: var(--sp-6);
+        margin-bottom: var(--sp-5);
+      }
+      .bb-dash-hero-sep { width: 1px; background: var(--border-subtle); }
+      .bb-dash-metric { display: flex; flex-direction: column; gap: var(--sp-1); }
+      .bb-dash-metric-label {
+        font-size: 10px; letter-spacing: 0.1em; font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+      }
+      .bb-dash-metric-value {
+        font-size: 22px; font-weight: 500;
+        color: var(--text-primary);
+        letter-spacing: -0.01em;
+        line-height: 1;
+      }
+
+      .bb-dash-hero-cta { margin-top: auto; display: flex; gap: var(--sp-2); }
+
+      /* Thumbnail (map image or fallback tile) */
+      .bb-dash-thumb-img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .bb-dash-thumb-fallback {
+        width: 100%; height: 100%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 72px;
+        color: rgba(255, 255, 255, 0.55);
+      }
+
+      /* Party avatars */
+      .bb-dash-party { display: flex; }
+      .bb-dash-party-avatar {
+        border-radius: 50%;
+        color: var(--text-inverse);
+        font-family: var(--font-mono);
+        font-weight: 700;
+        border: 2px solid var(--bg-surface);
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+      }
+      .bb-dash-party-extra {
+        background: var(--bg-elevated);
+        color: var(--text-secondary);
+        font-weight: 600;
+      }
+
+      @media (max-width: 720px) {
+        .bb-dash-hero { grid-template-columns: 1fr; }
+        .bb-dash-hero-cover { min-height: 180px; }
+        .bb-dash-hero-cover-fade {
+          background: linear-gradient(180deg, transparent 50%, var(--bg-surface) 100%);
+        }
       }
 
       /* Modal */
