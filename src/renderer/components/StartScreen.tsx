@@ -136,7 +136,7 @@ export function StartScreen() {
           width: 440,
           marginBottom: 'var(--sp-3)',
         }}>
-          ⚠️ Datenbankverbindung nicht verfügbar. Die App wurde möglicherweise nicht korrekt installiert.
+          ⚠️ Preload-Skript nicht geladen (<code>window.electronAPI</code> fehlt). Die Datenbank ist nicht erreichbar — bitte App neu installieren oder <code>npm run build</code> ausführen und neu starten.
         </div>
       )}
 

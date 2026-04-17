@@ -1,7 +1,9 @@
-import { BrowserWindow, screen, app, session } from 'electron'
+import { BrowserWindow, dialog, screen, app, session } from 'electron'
+import { existsSync } from 'fs'
 import { join } from 'path'
 import { pathToFileURL } from 'url'
 import { IPC } from '../shared/ipc-types'
+import { logger } from './logger'
 
 // Preload paths resolved relative to the app root (works in dev + packaged).
 // DM and Player use separate preload bundles so each window only receives the
@@ -13,6 +15,25 @@ function dmPreloadPath(): string {
 
 function playerPreloadPath(): string {
   return join(app.getAppPath(), 'dist/preload/preload-player.js')
+}
+
+/**
+ * Fail loudly when a preload bundle is missing instead of letting Electron
+ * silently drop it and ship a renderer with no IPC surface. That produced
+ * the confusing "Datenbankverbindung nicht verfügbar — App wurde möglicher-
+ * weise nicht korrekt installiert" banner from StartScreen without any hint
+ * of the real cause (running `electron .` before `npm run build:preload`,
+ * or a stale packaged build). Returns the path if present, else aborts.
+ */
+function requirePreload(path: string, label: string): string {
+  if (!existsSync(path)) {
+    const msg = `Preload bundle missing: ${path}\n\nRun \`npm run build\` before starting Electron, or rebuild the installer.`
+    logger.error(`[windows] ${label} preload not found at ${path}`)
+    dialog.showErrorBox('BoltBerry — Preload fehlt', msg)
+    app.exit(1)
+    throw new Error(msg)
+  }
+  return path
 }
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -34,7 +55,7 @@ export function createDMWindow(): BrowserWindow {
     backgroundColor: '#121722',
     show: false,
     webPreferences: {
-      preload: dmPreloadPath(),
+      preload: requirePreload(dmPreloadPath(), 'DM'),
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: true,
@@ -111,7 +132,7 @@ export function createPlayerWindow(): BrowserWindow | null {
     frame: false,
     fullscreen: true,
     webPreferences: {
-      preload: playerPreloadPath(),
+      preload: requirePreload(playerPreloadPath(), 'Player'),
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: true,
