@@ -1,10 +1,4 @@
-/**
- * Lightweight file-based logger for the main process.
- * Uses only Node.js built-ins — no external dependencies.
- * Writes to <app-logs>/boltberry.log and echoes to stderr/stdout.
- */
-
-import { appendFileSync, mkdirSync } from 'fs'
+import { createWriteStream, mkdirSync, WriteStream } from 'fs'
 import { join } from 'path'
 import { app } from 'electron'
 
@@ -12,7 +6,6 @@ function getLogPath(): string {
   try {
     return join(app.getPath('logs'), 'boltberry.log')
   } catch {
-    // app may not be ready yet; fall back to userData
     try {
       return join(app.getPath('userData'), 'boltberry.log')
     } catch {
@@ -21,11 +14,21 @@ function getLogPath(): string {
   }
 }
 
-function ensureLogDir(): void {
+let logStream: WriteStream | null = null
+let logDirEnsured = false
+
+function ensureLogStream(): WriteStream | null {
+  if (logStream) return logStream
   try {
-    mkdirSync(app.getPath('logs'), { recursive: true })
+    if (!logDirEnsured) {
+      mkdirSync(app.getPath('logs'), { recursive: true })
+      logDirEnsured = true
+    }
+    logStream = createWriteStream(getLogPath(), { flags: 'a' })
+    logStream.on('error', () => { logStream = null })
+    return logStream
   } catch {
-    // best-effort
+    return null
   }
 }
 
@@ -40,12 +43,7 @@ function format(level: string, message: string, extra?: unknown): string {
 
 function write(line: string, stream: NodeJS.WriteStream): void {
   stream.write(line)
-  try {
-    ensureLogDir()
-    appendFileSync(getLogPath(), line)
-  } catch {
-    // never throw from logger
-  }
+  ensureLogStream()?.write(line)
 }
 
 export const logger = {
@@ -57,5 +55,9 @@ export const logger = {
   },
   error(message: string, extra?: unknown): void {
     write(format('ERROR', message, extra), process.stderr)
+  },
+  flush(): void {
+    logStream?.end()
+    logStream = null
   },
 }

@@ -28,11 +28,15 @@ export function CombatHUD() {
         <span className="combat-hud-turn-label">{t('canvas.hud.currentTurn')}</span>
         <span className="combat-hud-turn-name" title={current.combatantName}>{current.combatantName}</span>
       </div>
-      <div className="combat-hud-divider" />
-      <div className="combat-hud-next" title={next.combatantName}>
-        <span className="combat-hud-next-label">{t('canvas.hud.upNext')}</span>
-        <span className="combat-hud-next-name">{next.combatantName}</span>
-      </div>
+      {entries.length > 1 && (
+        <>
+          <div className="combat-hud-divider" />
+          <div className="combat-hud-next" title={next.combatantName}>
+            <span className="combat-hud-next-label">{t('canvas.hud.upNext')}</span>
+            <span className="combat-hud-next-name">{next.combatantName}</span>
+          </div>
+        </>
+      )}
       <button
         type="button"
         className="combat-hud-btn"

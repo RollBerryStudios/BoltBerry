@@ -20,6 +20,9 @@ export function ViewportHUD() {
     ? t('canvas.hud.noGrid')
     : `${map.gridSize}px · ${map.ftPerUnit}${t('canvas.hud.ftSuffix')}`
 
+  const ROTATION_ARROWS: Record<number, string> = { 0: '↑', 90: '→', 180: '↓', 270: '←' }
+  const rotPlayer = (map as any).rotationPlayer ?? 0
+
   return (
     <div
       className="viewport-hud"
@@ -32,6 +35,12 @@ export function ViewportHUD() {
       <span className="viewport-hud-zoom">{relPct}%</span>
       <span className="viewport-hud-sep">·</span>
       <span className="viewport-hud-grid">{gridLabel}</span>
+      {rotPlayer !== 0 && (
+        <>
+          <span className="viewport-hud-sep">·</span>
+          <span className="viewport-hud-rot" title={`Player rotation: ${rotPlayer}°`}>{ROTATION_ARROWS[rotPlayer] ?? `${rotPlayer}°`}</span>
+        </>
+      )}
     </div>
   )
 }

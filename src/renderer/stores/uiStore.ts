@@ -213,11 +213,7 @@ export const useUIStore = create<UIState>((set) => ({
   setAppMode: (appMode) => set({ appMode }),
   setSessionMode: (sessionMode) => set({ sessionMode }),
   toggleTheme: () =>
-    set((s) => {
-      const theme = s.theme === 'dark' ? 'light' : 'dark'
-      document.documentElement.setAttribute('data-theme', theme)
-      return { theme }
-    }),
+    set((s) => ({ theme: s.theme === 'dark' ? 'light' : 'dark' })),
   toggleLanguage: () =>
     set((s) => {
       const language: AppLanguage = s.language === 'de' ? 'en' : 'de'

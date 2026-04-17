@@ -1,4 +1,4 @@
-import { app, BrowserWindow, net, protocol } from 'electron'
+import { app, BrowserWindow, dialog, net, protocol } from 'electron'
 import { pathToFileURL } from 'url'
 import { existsSync, statSync } from 'fs'
 import { resolve, join, sep } from 'path'
@@ -19,8 +19,7 @@ protocol.registerSchemesAsPrivileged([
 // Prevent multiple instances
 const gotLock = app.requestSingleInstanceLock()
 if (!gotLock) {
-  app.quit()
-  process.exit(0)
+  app.exit(0)
 }
 
 app.on('second-instance', () => {
@@ -56,20 +55,25 @@ app.whenReady().then(() => {
     }
   })
 
-  // Init DB first
-  initDatabase()
+  try {
+    initDatabase()
+  } catch (err: any) {
+    logger.error('Database initialization failed', err)
+    dialog.showErrorBox(
+      'BoltBerry — Datenbankfehler',
+      `Die Datenbank konnte nicht geöffnet werden.\n\n${err.message || String(err)}`,
+    )
+    app.exit(1)
+    return
+  }
 
-  // Register all IPC handlers
   registerPlayerBridgeHandlers()
   registerAppHandlers()
   registerDbHandlers()
   registerExportImportHandlers()
 
-  // Install the native application menu before opening any windows so
-  // accelerators bind on first paint.
   buildAppMenu()
 
-  // Open DM window
   createDMWindow()
 
   app.on('activate', () => {
@@ -91,6 +95,7 @@ app.on('will-quit', () => {
 
 process.on('uncaughtException', (error) => {
   logger.error('Uncaught Exception', error)
+  dialog.showErrorBox?.('BoltBerry — Unerwarteter Fehler', error.message || String(error))
 })
 
 process.on('unhandledRejection', (reason) => {

@@ -316,7 +316,4 @@ export function setMenuLanguage(lang: MenuLanguage) {
   if (lang === currentLanguage) return
   currentLanguage = lang
   buildAppMenu()
-  for (const win of BrowserWindow.getAllWindows()) {
-    if (!win.isDestroyed()) win.setTitle(win.getTitle())
-  }
 }
