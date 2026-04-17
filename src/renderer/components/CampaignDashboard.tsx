@@ -24,7 +24,13 @@ type StatsMap = Record<number, CampaignStats>
 
 export function CampaignDashboard() {
   const { t } = useTranslation()
-  const { campaigns, setActiveCampaign, addCampaign } = useCampaignStore()
+  const {
+    campaigns,
+    setActiveCampaign,
+    addCampaign,
+    removeCampaign,
+    updateCampaign,
+  } = useCampaignStore()
   const { language, toggleLanguage } = useUIStore()
 
   const [creating, setCreating] = useState(false)
@@ -97,8 +103,53 @@ export function CampaignDashboard() {
     }
   }
 
+  // Row actions: rename, duplicate, delete, export. Reused from StartScreen.
+  async function handleRename(campaign: Campaign, next: string) {
+    const name = next.trim()
+    if (!name || name === campaign.name || !window.electronAPI) return
+    try {
+      await window.electronAPI.dbRun('UPDATE campaigns SET name = ? WHERE id = ?', [
+        name,
+        campaign.id,
+      ])
+      updateCampaign(campaign.id, { name })
+    } catch (err) {
+      setError(formatError(err))
+    }
+  }
+
+  async function handleDuplicate(campaign: Campaign) {
+    if (!window.electronAPI) return
+    try {
+      const result = await window.electronAPI.duplicateCampaign(campaign.id)
+      if (result?.success && result.campaign) addCampaign(result.campaign)
+    } catch (err) {
+      setError(formatError(err))
+    }
+  }
+
+  async function handleDelete(campaign: Campaign) {
+    if (!window.electronAPI) return
+    const confirmed = await window.electronAPI.confirmDialog(
+      t('dashboard.deleteTitle'),
+      t('dashboard.deleteMessage', { name: campaign.name }),
+    )
+    if (!confirmed) return
+    try {
+      await window.electronAPI.dbRun('DELETE FROM campaigns WHERE id = ?', [campaign.id])
+      removeCampaign(campaign.id)
+    } catch (err) {
+      setError(t('dashboard.deleteError', { error: formatError(err) }))
+    }
+  }
+
+  function handleExport(campaign: Campaign) {
+    window.electronAPI?.exportCampaign(campaign.id)
+  }
+
   const greeting = pickGreeting(t)
   const mostRecent = campaigns[0] ?? null
+  const others = campaigns.slice(1)
 
   return (
     <div className="bb-dash">
@@ -151,6 +202,26 @@ export function CampaignDashboard() {
                 stats={stats[mostRecent.id]}
                 onOpen={() => setActiveCampaign(mostRecent.id)}
               />
+            )}
+
+            {others.length > 0 && (
+              <section className="bb-dash-section">
+                <h2 className="bb-dash-section-title display">{t('dashboard.yourCampaigns')}</h2>
+                <div className="bb-dash-grid">
+                  {others.map((c) => (
+                    <CampaignCard
+                      key={c.id}
+                      campaign={c}
+                      stats={stats[c.id]}
+                      onOpen={() => setActiveCampaign(c.id)}
+                      onRename={(name) => handleRename(c, name)}
+                      onDuplicate={() => handleDuplicate(c)}
+                      onDelete={() => handleDelete(c)}
+                      onExport={() => handleExport(c)}
+                    />
+                  ))}
+                </div>
+              </section>
             )}
           </>
         )}
@@ -393,6 +464,185 @@ function HeroCard({
         </div>
       </div>
     </section>
+  )
+}
+
+// ─── Compact campaign card (grid) ─────────────────────────────────────
+
+function CampaignCard({
+  campaign,
+  stats,
+  onOpen,
+  onRename,
+  onDuplicate,
+  onDelete,
+  onExport,
+}: {
+  campaign: Campaign
+  stats: CampaignStats | undefined
+  onOpen: () => void
+  onRename: (name: string) => void
+  onDuplicate: () => void
+  onDelete: () => void
+  onExport: () => void
+}) {
+  const { t } = useTranslation()
+  const lastEditedLabel = useRelativeTime(campaign.lastOpened)
+  const [renaming, setRenaming] = useState(false)
+  const [renameValue, setRenameValue] = useState(campaign.name)
+
+  function commitRename() {
+    onRename(renameValue)
+    setRenaming(false)
+  }
+
+  return (
+    <article
+      className="bb-dash-card"
+      onClick={renaming ? undefined : onOpen}
+      onKeyDown={(e) => {
+        if (renaming) return
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onOpen()
+        }
+        if (e.key === 'F2') {
+          e.preventDefault()
+          setRenameValue(campaign.name)
+          setRenaming(true)
+        }
+      }}
+      role="button"
+      tabIndex={0}
+    >
+      <div className="bb-dash-card-cover">
+        <MapThumbnail path={stats?.thumbnailPath ?? null} campaignName={campaign.name} />
+        <div className="bb-dash-card-cover-fade" aria-hidden="true" />
+      </div>
+
+      <div className="bb-dash-card-body">
+        {renaming ? (
+          <input
+            className="input bb-dash-card-rename"
+            autoFocus
+            value={renameValue}
+            maxLength={60}
+            onChange={(e) => setRenameValue(e.target.value)}
+            onClick={(e) => e.stopPropagation()}
+            onKeyDown={(e) => {
+              e.stopPropagation()
+              if (e.key === 'Enter') commitRename()
+              if (e.key === 'Escape') {
+                setRenameValue(campaign.name)
+                setRenaming(false)
+              }
+            }}
+            onBlur={commitRename}
+          />
+        ) : (
+          <h3 className="bb-dash-card-title display">{campaign.name}</h3>
+        )}
+
+        <div className="bb-dash-card-meta mono">
+          {lastEditedLabel}
+          <span className="bb-dash-card-meta-sep">·</span>
+          {stats?.mapCount ?? 0} {t('dashboard.maps').toLowerCase()}
+          {typeof stats?.handoutCount === 'number' && stats.handoutCount > 0 && (
+            <>
+              <span className="bb-dash-card-meta-sep">·</span>
+              {stats.handoutCount} {t('dashboard.handouts').toLowerCase()}
+            </>
+          )}
+        </div>
+
+        {stats && stats.party.length > 0 && (
+          <div className="bb-dash-card-party">
+            <PartyAvatars party={stats.party} max={4} size={22} />
+          </div>
+        )}
+
+        <CardActions
+          renaming={renaming}
+          onStartRename={() => {
+            setRenameValue(campaign.name)
+            setRenaming(true)
+          }}
+          onCancelRename={() => setRenaming(false)}
+          onCommitRename={commitRename}
+          onDuplicate={onDuplicate}
+          onDelete={onDelete}
+          onExport={onExport}
+          renameLabel={t('dashboard.rename')}
+          duplicateLabel={t('dashboard.duplicate')}
+          deleteLabel={t('dashboard.delete')}
+          exportLabel={t('dashboard.export')}
+        />
+      </div>
+    </article>
+  )
+}
+
+function CardActions({
+  renaming,
+  onStartRename,
+  onCancelRename,
+  onCommitRename,
+  onDuplicate,
+  onDelete,
+  onExport,
+  renameLabel,
+  duplicateLabel,
+  deleteLabel,
+  exportLabel,
+}: {
+  renaming: boolean
+  onStartRename: () => void
+  onCancelRename: () => void
+  onCommitRename: () => void
+  onDuplicate: () => void
+  onDelete: () => void
+  onExport: () => void
+  renameLabel: string
+  duplicateLabel: string
+  deleteLabel: string
+  exportLabel: string
+}) {
+  const stop = (fn: () => void) => (e: React.MouseEvent) => {
+    e.stopPropagation()
+    fn()
+  }
+  if (renaming) {
+    return (
+      <div className="bb-dash-card-actions">
+        <button className="bb-dash-card-action" type="button" onClick={stop(onCommitRename)}>
+          ✓
+        </button>
+        <button className="bb-dash-card-action" type="button" onClick={stop(onCancelRename)}>
+          ✕
+        </button>
+      </div>
+    )
+  }
+  return (
+    <div className="bb-dash-card-actions">
+      <button className="bb-dash-card-action" type="button" title={renameLabel} onClick={stop(onStartRename)}>
+        ✏️
+      </button>
+      <button className="bb-dash-card-action" type="button" title={duplicateLabel} onClick={stop(onDuplicate)}>
+        📋
+      </button>
+      <button className="bb-dash-card-action" type="button" title={exportLabel} onClick={stop(onExport)}>
+        ⇪
+      </button>
+      <button
+        className="bb-dash-card-action bb-dash-card-action-danger"
+        type="button"
+        title={deleteLabel}
+        onClick={stop(onDelete)}
+      >
+        🗑
+      </button>
+    </div>
   )
 }
 
@@ -844,6 +1094,99 @@ function DashboardStyles() {
         .bb-dash-hero-cover-fade {
           background: linear-gradient(180deg, transparent 50%, var(--bg-surface) 100%);
         }
+      }
+
+      /* Section heading (shared) */
+      .bb-dash-section { margin-bottom: var(--sp-8); }
+      .bb-dash-section-title {
+        font-size: 20px; margin: 0 0 var(--sp-4);
+        color: var(--text-primary);
+      }
+
+      /* Campaign grid */
+      .bb-dash-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--sp-4);
+      }
+
+      .bb-dash-card {
+        display: flex; flex-direction: column;
+        background: var(--bg-surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        cursor: pointer;
+        transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      }
+      .bb-dash-card:hover {
+        border-color: var(--text-muted);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      }
+      .bb-dash-card:focus-visible {
+        outline: 2px solid var(--accent-blue);
+        outline-offset: 2px;
+      }
+
+      .bb-dash-card-cover {
+        position: relative; height: 120px;
+        background: var(--bg-elevated);
+      }
+      .bb-dash-card-cover-fade {
+        position: absolute; inset: 0;
+        background: linear-gradient(180deg, transparent 50%, rgba(13, 16, 21, 0.9) 100%);
+      }
+
+      .bb-dash-card-body {
+        padding: var(--sp-4);
+        display: flex; flex-direction: column;
+        gap: var(--sp-2);
+      }
+      .bb-dash-card-title {
+        font-size: 18px; line-height: 1.2; font-weight: 500;
+        margin: 0;
+        letterSpacing: -0.005em;
+        color: var(--text-primary);
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+      .bb-dash-card-rename { font-size: var(--text-sm); padding: 4px 8px; height: 28px; }
+      .bb-dash-card-meta {
+        font-size: 11px;
+        color: var(--text-muted);
+        display: flex; align-items: center; gap: 6px;
+        flex-wrap: wrap;
+      }
+      .bb-dash-card-meta-sep { color: var(--text-muted); opacity: 0.6; }
+      .bb-dash-card-party { margin-top: 2px; }
+
+      .bb-dash-card-actions {
+        display: flex; gap: 4px;
+        margin-top: auto;
+        padding-top: var(--sp-2);
+        border-top: 1px solid var(--border-subtle);
+      }
+      .bb-dash-card-action {
+        flex-shrink: 0;
+        padding: 4px 8px;
+        background: transparent;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-sm);
+        color: var(--text-muted);
+        cursor: pointer;
+        font-size: 12px;
+        font-family: inherit;
+        transition: background var(--transition), color var(--transition), border-color var(--transition);
+      }
+      .bb-dash-card-action:hover {
+        background: var(--bg-overlay);
+        color: var(--text-primary);
+        border-color: var(--border);
+      }
+      .bb-dash-card-action-danger { border-color: rgba(239, 68, 68, 0.3); color: var(--danger); }
+      .bb-dash-card-action-danger:hover {
+        background: rgba(239, 68, 68, 0.12);
+        border-color: var(--danger);
       }
 
       /* Modal */
