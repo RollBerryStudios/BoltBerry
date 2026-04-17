@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 24
+export const SCHEMA_VERSION = 25
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -400,6 +400,28 @@ CREATE TABLE IF NOT EXISTS audio_board_slots (
   UNIQUE(board_id, slot_number)
 );
 
+-- Token templates — reusable stat blocks grouped into three categories
+-- ('monster', 'player', 'npc'). Seeded with SRD creatures on first run.
+CREATE TABLE IF NOT EXISTS token_templates (
+  id               INTEGER PRIMARY KEY AUTOINCREMENT,
+  category         TEXT    NOT NULL DEFAULT 'monster',
+  source           TEXT    NOT NULL DEFAULT 'user',
+  name             TEXT    NOT NULL,
+  image_path       TEXT,
+  size             INTEGER NOT NULL DEFAULT 1,
+  hp_max           INTEGER NOT NULL DEFAULT 10,
+  ac               INTEGER,
+  speed            INTEGER,
+  cr               TEXT,
+  creature_type    TEXT,
+  faction          TEXT    NOT NULL DEFAULT 'enemy',
+  marker_color     TEXT,
+  notes            TEXT,
+  stat_block       TEXT,
+  created_at       TEXT    NOT NULL DEFAULT (datetime('now')),
+  UNIQUE(source, name)
+);
+
 -- Schema version tracking (single-row enforced by PK constraint)
 CREATE TABLE IF NOT EXISTS schema_version (
   id      INTEGER PRIMARY KEY CHECK (id = 1),
@@ -425,6 +447,8 @@ CREATE INDEX IF NOT EXISTS idx_character_sheets_campaign_id ON character_sheets(
 CREATE INDEX IF NOT EXISTS idx_character_sheets_token_id ON character_sheets(token_id);
 CREATE INDEX IF NOT EXISTS idx_audio_boards_campaign_id ON audio_boards(campaign_id);
 CREATE INDEX IF NOT EXISTS idx_audio_board_slots_board_id ON audio_board_slots(board_id);
+CREATE INDEX IF NOT EXISTS idx_token_templates_category ON token_templates(category);
+CREATE INDEX IF NOT EXISTS idx_token_templates_source ON token_templates(source);
 `
 
 // Indexes that reference columns added in later migrations (pin_x/pin_y landed
@@ -601,6 +625,41 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_notes_category_unique
 CREATE INDEX IF NOT EXISTS idx_notes_map_pins ON notes(map_id) WHERE pin_x IS NOT NULL;
 
 UPDATE schema_version SET version = 24;
+`
+
+// Migration: v24 → v25
+// 1. Drop the partial unique index on notes so multiple notes can coexist
+//    per (campaign, map, category). The categories (Allgemein, NSCs, Orte,
+//    Quests, Gegenstände, Sonstiges) are now *folders*, not single docs.
+// 2. Add the token_templates library: reusable stat blocks grouped by
+//    category ('monster' | 'player' | 'npc'). Seeded by the main process
+//    with SRD creatures on first launch.
+export const MIGRATE_V24_TO_V25 = `
+DROP INDEX IF EXISTS idx_notes_category_unique;
+
+CREATE TABLE IF NOT EXISTS token_templates (
+  id               INTEGER PRIMARY KEY AUTOINCREMENT,
+  category         TEXT    NOT NULL DEFAULT 'monster',
+  source           TEXT    NOT NULL DEFAULT 'user',
+  name             TEXT    NOT NULL,
+  image_path       TEXT,
+  size             INTEGER NOT NULL DEFAULT 1,
+  hp_max           INTEGER NOT NULL DEFAULT 10,
+  ac               INTEGER,
+  speed            INTEGER,
+  cr               TEXT,
+  creature_type    TEXT,
+  faction          TEXT    NOT NULL DEFAULT 'enemy',
+  marker_color     TEXT,
+  notes            TEXT,
+  stat_block       TEXT,
+  created_at       TEXT    NOT NULL DEFAULT (datetime('now')),
+  UNIQUE(source, name)
+);
+CREATE INDEX IF NOT EXISTS idx_token_templates_category ON token_templates(category);
+CREATE INDEX IF NOT EXISTS idx_token_templates_source ON token_templates(source);
+
+UPDATE schema_version SET version = 25;
 `
 
 // Use the SCHEMA_VERSION constant directly so there's a single source of truth.
