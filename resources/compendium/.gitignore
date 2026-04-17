@@ -1,0 +1,4 @@
+# Bundled compendium PDFs are not committed (large files, check upstream
+# license before redistributing). The build's extraResources rule still
+# picks them up at package time when present.
+*.pdf

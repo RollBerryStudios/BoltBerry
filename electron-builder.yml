@@ -28,6 +28,16 @@ asarUnpack:
   - node_modules/archiver-utils/**/*
   - node_modules/unzipper/**/*
 
+# Bundle compendium PDFs (e.g. the D&D 5e SRD) under the app's resources path
+# so they ship with the installer. Available at runtime via
+# process.resourcesPath/compendium/*.pdf. Users can drop additional PDFs into
+# their per-user compendium folder; the resource copy is treated as a
+# read-only seed.
+extraResources:
+  - from: resources/compendium
+    to: compendium
+    filter: ["**/*.pdf"]
+
 # ─── Windows ──────────────────────────────────────────────────────────────────
 win:
   target:
