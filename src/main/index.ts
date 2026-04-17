@@ -1,6 +1,6 @@
 import { app, BrowserWindow, dialog, net, protocol } from 'electron'
 import { pathToFileURL } from 'url'
-import { existsSync, statSync } from 'fs'
+import { existsSync, realpathSync, lstatSync } from 'fs'
 import { resolve, join, sep } from 'path'
 import { initDatabase, closeDatabase, getCustomUserDataPath } from './db/database'
 import { logger } from './logger'
@@ -33,9 +33,13 @@ app.on('second-instance', () => {
 // ─── App Lifecycle ─────────────────────────────────────────────────────────────────
 app.whenReady().then(() => {
   // Register custom protocol for serving local assets (images, audio)
+  const MAX_ASSET_SIZE = 200 * 1024 * 1024 // 200 MB
+
   protocol.handle('local-asset', (request) => {
     try {
-      const rawPath = decodeURIComponent(request.url.replace('local-asset://', ''))
+      const url = new URL(request.url)
+      const rawPath = decodeURIComponent(url.pathname)
+
       const userDataPath = resolve(getCustomUserDataPath() || app.getPath('userData'))
       // Always resolve relative to userData; reject absolute paths and traversal
       const fullPath = resolve(userDataPath, rawPath)
@@ -45,11 +49,24 @@ app.whenReady().then(() => {
       if (!existsSync(fullPath)) {
         return new Response('Not found', { status: 404 })
       }
-      const stat = statSync(fullPath)
-      if (stat.size > 200 * 1024 * 1024) {
+
+      // Resolve symlinks and re-verify the real path is still under userData
+      const realPath = realpathSync(fullPath)
+      const realUserDataPath = realpathSync(userDataPath)
+      if (!realPath.startsWith(realUserDataPath + sep) && realPath !== realUserDataPath) {
+        return new Response('Forbidden', { status: 403 })
+      }
+
+      // Use lstatSync to reject symlinks and check size
+      const lstat = lstatSync(fullPath)
+      if (lstat.isSymbolicLink()) {
+        return new Response('Forbidden', { status: 403 })
+      }
+      if (lstat.size > MAX_ASSET_SIZE) {
         return new Response('Too large', { status: 413 })
       }
-      return net.fetch(pathToFileURL(fullPath).href)
+
+      return net.fetch(pathToFileURL(realPath).href)
     } catch (err) {
       return new Response('Error', { status: 500 })
     }

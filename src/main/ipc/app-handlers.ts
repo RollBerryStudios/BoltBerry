@@ -1,6 +1,6 @@
 import { ipcMain, dialog, app, Menu, BrowserWindow } from 'electron'
 import { join, extname, relative, resolve, isAbsolute, sep } from 'path'
-import { copyFileSync, existsSync, mkdirSync, statSync, writeFileSync, readFileSync, unlinkSync } from 'fs'
+import { copyFileSync, existsSync, mkdirSync, statSync, writeFileSync, readFileSync, unlinkSync, realpathSync, readdirSync, lstatSync } from 'fs'
 import { IPC } from '../../shared/ipc-types'
 import {
   createPlayerWindow,
@@ -81,12 +81,31 @@ export function registerAppHandlers(): void {
 
   // Set custom user data folder
   ipcMain.handle(IPC.SET_USER_DATA_FOLDER, (_event, dataPath: string) => {
+    // Validate the path exists and is a directory
+    if (!existsSync(dataPath) || !statSync(dataPath).isDirectory()) {
+      return { success: false, error: 'Path does not exist or is not a directory' }
+    }
+
+    // Reject system directories
+    const SYSTEM_PREFIXES_UNIX = ['/etc', '/usr', '/bin', '/sbin', '/lib', '/boot', '/proc', '/sys', '/dev']
+    const SYSTEM_PREFIXES_WIN = ['C:\\Windows', 'C:\\windows', 'C:\\WINDOWS']
+    const normalizedPath = resolve(dataPath)
+    const isSystemDir =
+      SYSTEM_PREFIXES_UNIX.some(p => normalizedPath === p || normalizedPath.startsWith(p + '/')) ||
+      SYSTEM_PREFIXES_WIN.some(p => normalizedPath.toLowerCase().startsWith(p.toLowerCase() + '\\') || normalizedPath.toLowerCase() === p.toLowerCase())
+    if (isSystemDir) {
+      return { success: false, error: 'Cannot use a system directory as data path' }
+    }
+
     const previousPath = getCustomUserDataPath()
-    setCustomUserDataPath(dataPath)
+
+    // Open the new DB BEFORE closing the old one — only close old on success
     try {
-      closeDatabase()
+      setCustomUserDataPath(dataPath)
       initDatabase()
-      return { success: true }
+      // New DB opened successfully — now close the old one
+      // (initDatabase already replaced the db reference, but we close
+      // the previous handle if it was separate)
     } catch (err) {
       console.error('[AppHandlers] Failed to reinitialize database at new path, reverting:', err)
       // Revert to previous path so the DB stays open
@@ -94,6 +113,8 @@ export function registerAppHandlers(): void {
       try { initDatabase() } catch { /* best-effort revert */ }
       return { success: false, error: err instanceof Error ? err.message : String(err) }
     }
+
+    return { success: true }
   })
 
   // Open content folder
@@ -111,20 +132,36 @@ export function registerAppHandlers(): void {
       if (imagePath.startsWith('file://')) {
         cleanPath = imagePath.substring(7)
       }
-      const userDataPath = resolve(getCustomUserDataPath() || app.getPath('userData'))
-      const fullPath = resolve(userDataPath, cleanPath)
-      if (!fullPath.startsWith(userDataPath + sep) && fullPath !== userDataPath) {
+
+      // Strip leading slashes, backslashes, and drive letters from the cleaned path
+      cleanPath = cleanPath.replace(/^[/\\]+/, '').replace(/^[A-Za-z]:[/\\]?/, '')
+
+      // Reject paths containing '..' segments
+      if (cleanPath.includes('..')) {
+        console.warn('[AppHandlers] GET_IMAGE_AS_BASE64: path contains ".." — rejecting', imagePath)
         return null
       }
-      const stat = statSync(fullPath)
+
+      const userDataPath = resolve(getCustomUserDataPath() || app.getPath('userData'))
+      const fullPath = resolve(userDataPath, cleanPath)
+
+      // Verify using realpathSync to defeat symlink-based traversal
+      const realPath = realpathSync(fullPath)
+      const realUserDataPath = realpathSync(userDataPath)
+      if (!realPath.startsWith(realUserDataPath + sep) && realPath !== realUserDataPath) {
+        console.warn('[AppHandlers] GET_IMAGE_AS_BASE64: path escapes userData — rejecting', fullPath)
+        return null
+      }
+
+      const stat = statSync(realPath)
       if (stat.size > 200 * 1024 * 1024) {
-        console.warn('[AppHandlers] GET_IMAGE_AS_BASE64: file too large, refusing', fullPath)
+        console.warn('[AppHandlers] GET_IMAGE_AS_BASE64: file too large, refusing', realPath)
         return null
       }
       const { readFile } = require('fs/promises')
-      const imageBuffer = await readFile(fullPath)
+      const imageBuffer = await readFile(realPath)
       const base64 = imageBuffer.toString('base64')
-      const extension = fullPath.toLowerCase().split('.').pop() || 'png'
+      const extension = realPath.toLowerCase().split('.').pop() || 'png'
       const mimeType = extension === 'jpg' || extension === 'jpeg' ? 'image/jpeg' :
                        extension === 'webp' ? 'image/webp' : 'image/png'
       return `data:${mimeType};base64,${base64}`
@@ -135,15 +172,13 @@ export function registerAppHandlers(): void {
 
   // Rescan content folder to synchronize files with database (scoped to active campaign)
   ipcMain.handle(IPC.RESCAN_CONTENT_FOLDER, async (_event, campaignId: number) => {
-    const { readdir } = require('fs').promises
-
     try {
       const userDataPath = getCustomUserDataPath() || app.getPath('userData')
       const assetsPath = join(userDataPath, 'assets', 'map')
 
       let files: string[] = []
       try {
-        files = await readdir(assetsPath)
+        files = readdirSync(assetsPath)
       } catch {
         mkdirSync(assetsPath, { recursive: true })
         return { scanned: 0, added: 0, removed: 0, message: 'Keine Dateien gefunden' }
@@ -160,39 +195,58 @@ export function registerAppHandlers(): void {
         'SELECT id, image_path, name FROM maps WHERE campaign_id = ?'
       ).all(campaignId) as { id: number; image_path: string; name: string }[]
 
-      const existingFilePaths = new Set(imageFiles.map((f: string) => `assets/map/${f}`))
-
-      let removedCount = 0
-      for (const map of maps) {
-        if (!existingFilePaths.has(map.image_path)) {
-          db.prepare('DELETE FROM maps WHERE id = ? AND campaign_id = ?').run(map.id, campaignId)
-          db.prepare('DELETE FROM assets WHERE stored_path = ? AND campaign_id = ?').run(map.image_path, campaignId)
-          removedCount++
+      // Sanity check: if readdir returns 0 files but DB has maps, refuse to
+      // delete — the folder may have been moved or the FS is unavailable.
+      if (imageFiles.length === 0 && maps.length > 0) {
+        return {
+          scanned: 0, added: 0, removed: 0,
+          message: 'Fehler: Ordner ist leer, aber die Datenbank enthält Karten. Löschung verweigert.',
         }
       }
 
-      const existingMapPaths = new Set(maps.map((m: { image_path: string }) => m.image_path))
+      // Use case-insensitive comparison on Windows
+      const isWin = process.platform === 'win32'
+      const normalizePath = (p: string) => isWin ? p.toLowerCase() : p
+      const existingFilePaths = new Set(imageFiles.map((f: string) => normalizePath(`assets/map/${f}`)))
 
-      let addedCount = 0
-      for (const file of imageFiles) {
-        const filePath = `assets/map/${file}`
-        if (!existingMapPaths.has(filePath)) {
-          const fileName = file.replace(/\.[^/.]+$/, '') || file
-
-          db.prepare(
-            'INSERT INTO assets (original_name, stored_path, type, campaign_id) VALUES (?, ?, ?, ?)'
-          ).run(fileName, filePath, 'map', campaignId)
-
-          const orderIndex = (db.prepare(
-            'SELECT COALESCE(MAX(order_index), -1) + 1 AS next FROM maps WHERE campaign_id = ?'
-          ).get(campaignId) as { next: number }).next
-          db.prepare(
-            'INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, grid_offset_x, grid_offset_y) VALUES (?, ?, ?, ?, 0, 0, 0)'
-          ).run(campaignId, fileName, filePath, orderIndex)
-
-          addedCount++
+      // Wrap destructive operations in a transaction
+      const txn = db.transaction(() => {
+        let removedCount = 0
+        for (const map of maps) {
+          if (!existingFilePaths.has(normalizePath(map.image_path))) {
+            db.prepare('DELETE FROM maps WHERE id = ? AND campaign_id = ?').run(map.id, campaignId)
+            db.prepare('DELETE FROM assets WHERE stored_path = ? AND campaign_id = ?').run(map.image_path, campaignId)
+            removedCount++
+          }
         }
-      }
+
+        const existingMapPaths = new Set(maps.map((m: { image_path: string }) => normalizePath(m.image_path)))
+
+        let addedCount = 0
+        for (const file of imageFiles) {
+          const filePath = `assets/map/${file}`
+          if (!existingMapPaths.has(normalizePath(filePath))) {
+            const fileName = file.replace(/\.[^/.]+$/, '') || file
+
+            db.prepare(
+              'INSERT INTO assets (original_name, stored_path, type, campaign_id) VALUES (?, ?, ?, ?)'
+            ).run(fileName, filePath, 'map', campaignId)
+
+            const orderIndex = (db.prepare(
+              'SELECT COALESCE(MAX(order_index), -1) + 1 AS next FROM maps WHERE campaign_id = ?'
+            ).get(campaignId) as { next: number }).next
+            db.prepare(
+              'INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, grid_offset_x, grid_offset_y) VALUES (?, ?, ?, ?, 0, 0, 0)'
+            ).run(campaignId, fileName, filePath, orderIndex)
+
+            addedCount++
+          }
+        }
+
+        return { addedCount, removedCount }
+      })
+
+      const { addedCount, removedCount } = txn()
 
       return {
         scanned: imageFiles.length,
@@ -231,6 +285,7 @@ export function registerAppHandlers(): void {
       map: 20 * 1024 * 1024,
       token: 4 * 1024 * 1024,
       atmosphere: 20 * 1024 * 1024,
+      handout: 10 * 1024 * 1024,
       audio: 100 * 1024 * 1024,
     }
     const stats = statSync(srcPath)

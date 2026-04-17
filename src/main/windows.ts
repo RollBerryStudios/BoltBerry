@@ -1,5 +1,6 @@
-import { BrowserWindow, screen, app } from 'electron'
+import { BrowserWindow, screen, app, session } from 'electron'
 import { join } from 'path'
+import { pathToFileURL } from 'url'
 import { IPC } from '../shared/ipc-types'
 
 // Resolve preload path relative to the app root (works in both dev and packaged)
@@ -9,6 +10,7 @@ function preloadPath(): string {
 
 const isDev = process.env.NODE_ENV === 'development'
 const RENDERER_URL = 'http://localhost:5173'
+const ALLOWED_FILE_PREFIX = pathToFileURL(join(app.getAppPath(), 'dist/renderer/')).href
 
 let dmWindow: BrowserWindow | null = null
 let playerWindow: BrowserWindow | null = null
@@ -45,11 +47,17 @@ export function createDMWindow(): BrowserWindow {
     dmWindow.loadFile(join(app.getAppPath(), 'dist/renderer/index.html'))
   }
 
-  // Block navigation to external URLs
+  // Block navigation to external URLs — only allow the dev server or the specific renderer build path
   dmWindow.webContents.on('will-navigate', (e, url) => {
-    if (!url.startsWith(RENDERER_URL) && !url.startsWith('file://')) e.preventDefault()
+    if (!url.startsWith(RENDERER_URL) && !url.startsWith(ALLOWED_FILE_PREFIX)) e.preventDefault()
+  })
+  dmWindow.webContents.on('will-redirect', (e, url) => {
+    if (!url.startsWith(RENDERER_URL) && !url.startsWith(ALLOWED_FILE_PREFIX)) e.preventDefault()
   })
   dmWindow.webContents.setWindowOpenHandler(() => ({ action: 'deny' }))
+
+  // Deny all permission requests (camera, microphone, geolocation, etc.)
+  session.defaultSession.setPermissionRequestHandler((_wc, _perm, cb) => cb(false))
 
   dmWindow.on('closed', () => {
     dmWindow = null
@@ -99,9 +107,12 @@ export function createPlayerWindow(): BrowserWindow | null {
     playerWindow.loadFile(join(app.getAppPath(), 'dist/renderer/player.html'))
   }
 
-  // Block navigation to external URLs
+  // Block navigation to external URLs — only allow the dev server or the specific renderer build path
   playerWindow.webContents.on('will-navigate', (e, url) => {
-    if (!url.startsWith(RENDERER_URL) && !url.startsWith('file://')) e.preventDefault()
+    if (!url.startsWith(RENDERER_URL) && !url.startsWith(ALLOWED_FILE_PREFIX)) e.preventDefault()
+  })
+  playerWindow.webContents.on('will-redirect', (e, url) => {
+    if (!url.startsWith(RENDERER_URL) && !url.startsWith(ALLOWED_FILE_PREFIX)) e.preventDefault()
   })
   playerWindow.webContents.setWindowOpenHandler(() => ({ action: 'deny' }))
 

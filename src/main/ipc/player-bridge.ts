@@ -17,93 +17,128 @@ import type {
 } from '../../shared/ipc-types'
 
 /**
- * Registers IPC handlers that relay DM → Player updates.
+ * Validates that a DM-originated message actually comes from the DM window.
+ * Returns false (and the handler should return early) if the sender is unexpected.
+ */
+function isFromDM(event: Electron.IpcMainEvent): boolean {
+  const dmContents = getDMWindow()?.webContents
+  return !!dmContents && event.sender === dmContents
+}
+
+/**
+ * Validates that a Player-originated message actually comes from the Player window.
+ */
+function isFromPlayer(event: Electron.IpcMainEvent): boolean {
+  const playerContents = getPlayerWindow()?.webContents
+  return !!playerContents && event.sender === playerContents
+}
+
+/**
+ * Registers IPC handlers that relay DM -> Player updates.
  * The DM renderer sends these via ipcRenderer.send();
  * main process forwards them to the player window.
  */
 export function registerPlayerBridgeHandlers(): void {
-  // Full state sync (on player window open / reconnect)
-  ipcMain.on(IPC.PLAYER_FULL_SYNC, (_event, state: PlayerFullState) => {
+  // Full state sync (on player window open / reconnect) — DM -> Player
+  ipcMain.on(IPC.PLAYER_FULL_SYNC, (event, state: PlayerFullState) => {
+    if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_FULL_SYNC, state)
   })
 
-  ipcMain.on(IPC.PLAYER_REQUEST_SYNC, () => {
+  // Player -> DM: request sync
+  ipcMain.on(IPC.PLAYER_REQUEST_SYNC, (event) => {
+    if (!isFromPlayer(event)) return
     // Ask DM to broadcast its current full state
     getDMWindow()?.webContents.send(IPC.DM_REQUEST_FULL_SYNC)
   })
 
-  // Map update
-  ipcMain.on(IPC.PLAYER_MAP_UPDATE, (_event, state: PlayerMapState) => {
+  // Map update — DM -> Player
+  ipcMain.on(IPC.PLAYER_MAP_UPDATE, (event, state: PlayerMapState) => {
+    if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_MAP_UPDATE, state)
   })
 
-  // Fog delta (only changed regions → low bandwidth)
-  ipcMain.on(IPC.PLAYER_FOG_DELTA, (_event, delta: FogDelta) => {
+  // Fog delta (only changed regions -> low bandwidth) — DM -> Player
+  ipcMain.on(IPC.PLAYER_FOG_DELTA, (event, delta: FogDelta) => {
+    if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_FOG_DELTA, delta)
   })
 
-  // Fog full reset (after undo — sends both bitmaps)
-  ipcMain.on(IPC.PLAYER_FOG_RESET, (_event, payload: { fogBitmap: string; exploredBitmap: string }) => {
+  // Fog full reset (after undo — sends both bitmaps) — DM -> Player
+  ipcMain.on(IPC.PLAYER_FOG_RESET, (event, payload: { fogBitmap: string; exploredBitmap: string }) => {
+    if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_FOG_RESET, payload)
   })
 
-  // Token update (only player-visible tokens)
-  ipcMain.on(IPC.PLAYER_TOKEN_UPDATE, (_event, tokens: PlayerTokenState[]) => {
+  // Token update (only player-visible tokens) — DM -> Player
+  ipcMain.on(IPC.PLAYER_TOKEN_UPDATE, (event, tokens: PlayerTokenState[]) => {
+    if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_TOKEN_UPDATE, tokens)
   })
 
-  // Blackout toggle
-  ipcMain.on(IPC.PLAYER_BLACKOUT, (_event, active: boolean) => {
+  // Blackout toggle — DM -> Player
+  ipcMain.on(IPC.PLAYER_BLACKOUT, (event, active: boolean) => {
+    if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_BLACKOUT, active)
   })
 
-  // Atmosphere image
-  ipcMain.on(IPC.PLAYER_ATMOSPHERE, (_event, imagePath: string | null) => {
+  // Atmosphere image — DM -> Player
+  ipcMain.on(IPC.PLAYER_ATMOSPHERE, (event, imagePath: string | null) => {
+    if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_ATMOSPHERE, imagePath)
   })
 
-  // Pointer ping
-  ipcMain.on(IPC.PLAYER_POINTER, (_event, pointer: PlayerPointer) => {
+  // Pointer ping — DM -> Player
+  ipcMain.on(IPC.PLAYER_POINTER, (event, pointer: PlayerPointer) => {
+    if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_POINTER, pointer)
   })
 
-  // Camera viewport sync
-  ipcMain.on(IPC.PLAYER_CAMERA, (_event, camera: PlayerCamera) => {
+  // Camera viewport sync — DM -> Player
+  ipcMain.on(IPC.PLAYER_CAMERA, (event, camera: PlayerCamera) => {
+    if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_CAMERA, camera)
   })
 
-  // Handout display
-  ipcMain.on(IPC.PLAYER_HANDOUT, (_event, handout: PlayerHandout | null) => {
+  // Handout display — DM -> Player
+  ipcMain.on(IPC.PLAYER_HANDOUT, (event, handout: PlayerHandout | null) => {
+    if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_HANDOUT, handout)
   })
 
-  // Presentation overlay
-  ipcMain.on(IPC.PLAYER_OVERLAY, (_event, overlay: PlayerOverlay | null) => {
+  // Presentation overlay — DM -> Player
+  ipcMain.on(IPC.PLAYER_OVERLAY, (event, overlay: PlayerOverlay | null) => {
+    if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_OVERLAY, overlay)
   })
 
-  // Initiative list sync
-  ipcMain.on(IPC.PLAYER_INITIATIVE, (_event, entries: PlayerInitiativeEntry[]) => {
+  // Initiative list sync — DM -> Player
+  ipcMain.on(IPC.PLAYER_INITIATIVE, (event, entries: PlayerInitiativeEntry[]) => {
+    if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_INITIATIVE, entries)
   })
 
-  // Weather overlay
-  ipcMain.on(IPC.PLAYER_WEATHER, (_event, type: WeatherType) => {
+  // Weather overlay — DM -> Player
+  ipcMain.on(IPC.PLAYER_WEATHER, (event, type: WeatherType) => {
+    if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_WEATHER, type)
   })
 
-  // Measurement overlay
-  ipcMain.on(IPC.PLAYER_MEASURE, (_event, measure: PlayerMeasureState | null) => {
+  // Measurement overlay — DM -> Player
+  ipcMain.on(IPC.PLAYER_MEASURE, (event, measure: PlayerMeasureState | null) => {
+    if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_MEASURE, measure)
   })
 
-  // Drawing data
-  ipcMain.on(IPC.PLAYER_DRAWING, (_event, drawing: unknown) => {
+  // Drawing data — DM -> Player
+  ipcMain.on(IPC.PLAYER_DRAWING, (event, drawing: unknown) => {
+    if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_DRAWING, drawing)
   })
 
-  // Wall list for LOS
-  ipcMain.on(IPC.PLAYER_WALLS, (_event, walls: PlayerWallState[]) => {
+  // Wall list for LOS — DM -> Player
+  ipcMain.on(IPC.PLAYER_WALLS, (event, walls: PlayerWallState[]) => {
+    if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_WALLS, walls)
   })
 }
