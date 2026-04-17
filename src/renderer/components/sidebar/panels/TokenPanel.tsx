@@ -700,9 +700,10 @@ function AddToInitiativeButton({ token, mapId }: { token: TokenRecord; mapId: nu
   async function handleAdd() {
     if (!mapId || !window.electronAPI) return
     try {
+      const sortOrder = useInitiativeStore.getState().entries.length
       const result = await window.electronAPI.dbRun(
-        'INSERT INTO initiative (map_id, combatant_name, roll, token_id) VALUES (?, ?, 0, ?)',
-        [mapId, token.name, token.id]
+        'INSERT INTO initiative (map_id, combatant_name, roll, token_id, sort_order) VALUES (?, ?, 0, ?, ?)',
+        [mapId, token.name, token.id, sortOrder]
       )
       useInitiativeStore.getState().addEntry({
         id: result.lastInsertRowid,

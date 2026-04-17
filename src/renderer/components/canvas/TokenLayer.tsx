@@ -711,8 +711,8 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     try {
       const { entries } = useInitiativeStore.getState()
       const result = await window.electronAPI.dbRun(
-        'INSERT INTO initiative (map_id, combatant_name, roll, current_turn, token_id) VALUES (?, ?, 0, ?, ?)',
-        [activeMapId, token.name, entries.length === 0 ? 1 : 0, token.id]
+        'INSERT INTO initiative (map_id, combatant_name, roll, current_turn, token_id, sort_order) VALUES (?, ?, 0, ?, ?, ?)',
+        [activeMapId, token.name, entries.length === 0 ? 1 : 0, token.id, entries.length]
       )
       addEntry({
         id: result.lastInsertRowid,
