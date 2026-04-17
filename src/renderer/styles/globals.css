@@ -958,6 +958,39 @@ textarea.input {
 }
 
 /* Viewport info chip — bottom-left of canvas. Pointer-inert (pure display). */
+/* Active tool chip — sits above the viewport-HUD in the same bottom-left
+   corner. Announces the currently armed tool so the DM never clicks into
+   the wrong mode. Accent yellow so it's distinguishable from the blue
+   viewport info chip. Auto-fades with the rest of the ambient HUDs. */
+.active-tool-hud {
+  position: absolute;
+  left: 12px;
+  bottom: 52px;
+  z-index: 250;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(13, 16, 21, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  color: var(--accent);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  user-select: none;
+  animation: activeToolPop 180ms ease-out;
+}
+.active-tool-hud-icon { font-size: 13px; line-height: 1; }
+.active-tool-hud-label { line-height: 1.2; }
+@keyframes activeToolPop {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .viewport-hud {
   position: absolute;
   left: 12px;
@@ -1237,7 +1270,9 @@ textarea.input {
 /* ─── Multi-select floating bar ──────────────────────────────────────────────── */
 .multi-select-bar {
   position: absolute;
-  bottom: 20px;
+  /* Bumped up from 20px to 80px to clear the bottom tool dock, which now
+     lives at bottom: 16px with a ~48px footprint. */
+  bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 270;
@@ -1445,4 +1480,129 @@ textarea.input {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+}
+
+/* ─── Bottom tool dock (canvas, minimalistic play-mode toolbar) ────────────── */
+/* Glass pill floating at bottom-center of the canvas. Inspired by Owlbear
+   Rodeo's dock: 6 primary icons, optional fan-out popover opening upward
+   for variant tools (measure line/circle/cone, fog brush/rect/cover, etc.).
+   Lives alongside the top toolbar, not replacing it — the top bar still
+   houses session controls and power-user actions. */
+.bottom-tool-dock {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 265;
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  padding: 4px;
+  background: rgba(13, 16, 21, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  user-select: none;
+}
+
+.bottom-tool-group {
+  position: relative;
+  display: flex;
+}
+.bottom-tool-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: transparent;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+}
+.bottom-tool-btn:hover {
+  background: var(--bg-overlay);
+  color: var(--text-primary);
+}
+.bottom-tool-btn.active {
+  background: rgba(255, 198, 46, 0.12);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.bottom-tool-btn:active { transform: translateY(1px); }
+.bottom-tool-btn-icon { font-size: 18px; line-height: 1; }
+.bottom-tool-btn-chevron {
+  position: absolute;
+  right: 3px;
+  bottom: 2px;
+  font-size: 8px;
+  line-height: 1;
+  color: var(--text-muted);
+  padding: 1px 2px;
+  border-radius: 2px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity var(--transition), background var(--transition);
+}
+.bottom-tool-btn-chevron:hover { opacity: 1; background: var(--bg-elevated); color: var(--text-primary); }
+.bottom-tool-btn.active .bottom-tool-btn-chevron { color: var(--accent); opacity: 1; }
+
+/* Fan-out popover opens upward. `left` coordinate from layout is the button
+   center; translateX(-50%) centers the popover horizontally above it. */
+.bottom-tool-popover {
+  position: fixed;
+  transform: translateX(-50%);
+  z-index: 9999;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 4px 0;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  animation: bottomDockPopIn 140ms ease-out;
+}
+@keyframes bottomDockPopIn {
+  from { opacity: 0; transform: translate(-50%, 6px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.bottom-tool-popover-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-left: 2px solid transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  text-align: left;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+.bottom-tool-popover-item:hover { background: var(--bg-overlay); }
+.bottom-tool-popover-item.active {
+  background: var(--accent-blue-dim);
+  border-left-color: var(--accent-blue);
+  color: var(--accent-blue-light);
+}
+.bottom-tool-popover-item-icon { font-size: 15px; min-width: 20px; text-align: center; }
+.bottom-tool-popover-item-label { flex: 1; }
+.bottom-tool-popover-item-shortcut {
+  font-size: 10px;
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: var(--font-mono, monospace);
 }

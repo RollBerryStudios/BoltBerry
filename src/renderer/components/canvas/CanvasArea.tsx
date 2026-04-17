@@ -16,6 +16,8 @@ import { PlayerEyeOverlay } from './PlayerEyeOverlay'
 import { PlayerEyeHUD } from './PlayerEyeHUD'
 import { ViewportHUD } from './ViewportHUD'
 import { InitiativeTopStrip } from './InitiativeTopStrip'
+import { ActiveToolHUD } from './ActiveToolHUD'
+import { BottomToolDock } from './BottomToolDock'
 import { MultiSelectBar } from '../MultiSelectBar'
 import { useUIStore } from '../../stores/uiStore'
 import { useCampaignStore } from '../../stores/campaignStore'
@@ -639,6 +641,12 @@ export function CanvasArea() {
 
       {/* Viewport info chip (bottom-left) */}
       <ViewportHUD />
+
+      {/* Active tool chip (bottom-left, above viewport HUD) */}
+      <ActiveToolHUD />
+
+      {/* Minimalistic tool dock (bottom-center, play-mode fast-path) */}
+      <BottomToolDock />
 
       {/* Initiative top-strip (top-center, combat mode only) */}
       <InitiativeTopStrip />
