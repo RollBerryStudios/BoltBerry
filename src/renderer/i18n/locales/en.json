@@ -96,7 +96,12 @@
       "measureCone": "Cone (60°)",
       "fogGroup": "Fog Tools",
       "measureGroup": "Measure Tools",
-      "atmosphere": "Atmosphere Image [A]"
+      "atmosphere": "Atmosphere Image [A]",
+      "fogActionsGroup": "Fog Actions",
+      "fogRevealAll": "Reveal All",
+      "fogCoverAll": "Cover All",
+      "fogRevealTokens": "Reveal Token Sights",
+      "fogResetExplored": "Reset Explored"
     },
     "sessionModeHint": "Session mode: Player sees changes live. Click for prep mode.",
     "prepModeHint": "Prep mode: Player sync locked. Click for session mode.",

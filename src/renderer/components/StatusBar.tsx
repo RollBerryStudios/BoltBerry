@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useUIStore } from '../stores/uiStore'
 import { useInitiativeStore } from '../stores/initiativeStore'
+import { useTokenStore } from '../stores/tokenStore'
 import { useAppStore } from '../stores/appStore'
 import { APP_VERSION } from '@shared/version'
 
@@ -15,6 +16,7 @@ export function StatusBar() {
   const setOverlayActive = useUIStore((s) => s.setOverlayActive)
   const entries = useInitiativeStore((s) => s.entries)
   const round = useInitiativeStore((s) => s.round)
+  const tokenCount = useTokenStore((s) => s.tokens.length)
   const { saveState, lastSaved } = useAppStore()
   const current = entries.find((e) => e.currentTurn)
 
@@ -80,6 +82,16 @@ export function StatusBar() {
       )}
 
       <div style={{ flex: 1 }} />
+
+      {tokenCount > 0 && (
+        <div
+          className="statusbar-item"
+          style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-mono, monospace)' }}
+          title={`${tokenCount} Token`}
+        >
+          ⬤ {tokenCount}
+        </div>
+      )}
 
       <div className="statusbar-item" style={{ color: saveLabel.color }}>
         {saveLabel.text}

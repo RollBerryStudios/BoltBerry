@@ -96,7 +96,12 @@
       "measureCone": "Kegel (60°)",
       "fogGroup": "Nebel-Werkzeuge",
       "measureGroup": "Mess-Werkzeuge",
-      "atmosphere": "Atmosphäre-Bild [A]"
+      "atmosphere": "Atmosphäre-Bild [A]",
+      "fogActionsGroup": "Nebel-Aktionen",
+      "fogRevealAll": "Alles aufdecken",
+      "fogCoverAll": "Alles zudecken",
+      "fogRevealTokens": "Token-Sicht aufdecken",
+      "fogResetExplored": "Erkundetes zurücksetzen"
     },
     "sessionModeHint": "Sitzungsmodus: Spieler sieht Änderungen live. Klicken für Vorbereitungsmodus.",
     "prepModeHint": "Vorbereitungsmodus: Spieler-Sync gesperrt. Klicken für Sitzungsmodus.",

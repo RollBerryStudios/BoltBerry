@@ -109,6 +109,91 @@ function Divider() {
   return <div style={{ width: 1, height: 24, background: 'var(--border)', margin: '0 4px', flexShrink: 0 }} />
 }
 
+// ─── Action group dropdown ────────────────────────────────────────────────────
+// Same UX as ToolGroup but for fire-and-forget commands (no persistent active
+// state). Used to fold the four fog quick-action buttons into a single slot.
+
+interface ActionItem {
+  id: string
+  icon: string
+  labelKey: string
+  run: () => void
+}
+
+interface ActionGroupProps {
+  actions: ActionItem[]
+  groupIcon: string
+  groupLabelKey: string
+}
+
+function ActionGroup({ actions, groupIcon, groupLabelKey }: ActionGroupProps) {
+  const { t } = useTranslation()
+  const [open, setOpen] = useState(false)
+  const wrapRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    function handleOutside(e: MouseEvent) {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handleOutside)
+    return () => document.removeEventListener('mousedown', handleOutside)
+  }, [open])
+
+  return (
+    <div ref={wrapRef} style={{ position: 'relative' }}>
+      <button
+        className="tool-btn"
+        title={t(groupLabelKey)}
+        onClick={() => setOpen((v) => !v)}
+      >
+        {groupIcon}
+        <span style={{ fontSize: 8, lineHeight: 1, marginLeft: 1, opacity: 0.6 }}>▾</span>
+      </button>
+      {open && (
+        <div style={{
+          position: 'absolute',
+          top: '100%',
+          left: 0,
+          marginTop: 4,
+          background: 'var(--bg-elevated)',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--radius)',
+          padding: '4px 0',
+          minWidth: 220,
+          boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
+          zIndex: 9999,
+        }}>
+          {actions.map((action) => (
+            <button
+              key={action.id}
+              onClick={() => { action.run(); setOpen(false) }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+                width: '100%',
+                padding: '6px 12px',
+                background: 'none',
+                border: 'none',
+                color: 'var(--text-primary)',
+                cursor: 'pointer',
+                fontSize: 'var(--text-sm)',
+                textAlign: 'left',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--bg-overlay)' }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = 'none' }}
+            >
+              <span style={{ fontSize: 16, minWidth: 20, textAlign: 'center' }}>{action.icon}</span>
+              <span style={{ flex: 1 }}>{t(action.labelKey)}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ─── Tool Definitions ──────────────────────────────────────────────────────────
 
 const PRIMARY_TOOLS: { id: ActiveTool; icon: string; labelKey: string; shortcut: string }[] = [
@@ -191,7 +276,6 @@ export function Toolbar() {
   const { undo, redo } = useUndoStore()
 
   const activeCampaignName = campaigns.find((c) => c.id === activeCampaignId)?.name ?? ''
-  const tokenCount = useTokenStore((s) => s.tokens.length)
 
   // Leave the current map and return to the Campaign View
   function handleLeaveMap() {
@@ -359,43 +443,6 @@ export function Toolbar() {
         )}
       </div>
 
-      {/* ── Combat mode indicator ───────────────────────────────────────── */}
-      {combatActive && (
-        <div
-          title="Kampfmodus aktiv — Wand- und Raumwerkzeuge sind deaktiviert"
-          style={{
-            padding: '2px 8px',
-            borderRadius: 'var(--radius)',
-            background: 'rgba(239, 68, 68, 0.15)',
-            border: '1px solid rgba(239, 68, 68, 0.45)',
-            color: '#ef4444',
-            fontSize: 'var(--text-xs)',
-            fontWeight: 700,
-            letterSpacing: '0.06em',
-            flexShrink: 0,
-            whiteSpace: 'nowrap',
-            userSelect: 'none',
-          }}
-        >
-          ⚔ KAMPF AKTIV
-        </div>
-      )}
-
-      {/* Token count badge */}
-      {tokenCount > 0 && (
-        <div
-          title={`${tokenCount} Token auf der Karte`}
-          style={{
-            fontSize: 'var(--text-xs)', fontFamily: 'monospace',
-            color: 'var(--text-muted)', background: 'var(--bg-overlay)',
-            border: '1px solid var(--border)', borderRadius: 'var(--radius)',
-            padding: '1px 6px', lineHeight: '20px', flexShrink: 0,
-          }}
-        >
-          ⬤ {tokenCount}
-        </div>
-      )}
-
       <Divider />
 
       {/* ── SECTION: Tools ──────────────────────────────────────────────── */}
@@ -446,14 +493,18 @@ export function Toolbar() {
         </div>
       )}
 
-      {/* Fog quick actions — shown when any fog tool is active or fog-edit mode */}
+      {/* Fog quick actions — folded into a single dropdown to keep the toolbar narrow */}
       {(activeTool.startsWith('fog-') || workMode === 'fog-edit') && (
-        <>
-          <button className="tool-btn" title="Alles aufdecken" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'revealAll' } }))}>👁</button>
-          <button className="tool-btn" title="Alles zudecken" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'coverAll' } }))}>🌑</button>
-          <button className="tool-btn" title="Token-Sichtbereich aufdecken" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'revealTokens' } }))}>⬤👁</button>
-          <button className="tool-btn" title="Erkundetes zurücksetzen" onClick={() => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'resetExplored' } }))}>🔄</button>
-        </>
+        <ActionGroup
+          groupIcon="🌫"
+          groupLabelKey="toolbar.tools.fogActionsGroup"
+          actions={[
+            { id: 'revealAll',     icon: '👁',  labelKey: 'toolbar.tools.fogRevealAll',     run: () => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'revealAll' } })) },
+            { id: 'coverAll',      icon: '🌑',  labelKey: 'toolbar.tools.fogCoverAll',      run: () => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'coverAll' } })) },
+            { id: 'revealTokens',  icon: '⬤',   labelKey: 'toolbar.tools.fogRevealTokens',  run: () => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'revealTokens' } })) },
+            { id: 'resetExplored', icon: '🔄',  labelKey: 'toolbar.tools.fogResetExplored', run: () => window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'resetExplored' } })) },
+          ]}
+        />
       )}
 
       {showMeasureTools && (
