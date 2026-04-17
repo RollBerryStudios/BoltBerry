@@ -941,6 +941,21 @@ textarea.input {
 }
 
 /* ─── Canvas HUDs ────────────────────────────────────────────────────────────── */
+/* Ambient HUDs fade down when the canvas cursor is idle. Any pointer or
+   wheel event over the canvas wakes them in <150ms. Elements that opt into
+   this behavior carry `.canvas-hud-fade`; Combat HUD and MultiSelectBar
+   deliberately skip the class because their information is action-critical. */
+.canvas-hud-fade {
+  transition: opacity 220ms ease;
+}
+.canvas-area.hud-idle .canvas-hud-fade {
+  opacity: 0.3;
+}
+.canvas-area.hud-idle .canvas-hud-fade:hover,
+.canvas-area.hud-idle .canvas-hud-fade:focus-within {
+  opacity: 1;
+}
+
 /* Viewport info chip — bottom-left of canvas. Pointer-inert (pure display). */
 .viewport-hud {
   position: absolute;

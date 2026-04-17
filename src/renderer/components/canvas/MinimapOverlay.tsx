@@ -94,6 +94,7 @@ export function MinimapOverlay({ stageRef, canvasSize }: MinimapOverlayProps) {
       width={MINIMAP_W}
       height={MINIMAP_H}
       onClick={handleClick}
+      className="minimap-overlay canvas-hud-fade"
       style={{
         position: 'absolute',
         bottom: 12,

@@ -25,7 +25,7 @@ export function ViewportHUD() {
 
   return (
     <div
-      className="viewport-hud"
+      className="viewport-hud canvas-hud-fade"
       role="status"
       aria-label={t('canvas.hud.viewportLabel')}
       title={`${map.name} · ${relPct}% · ${gridLabel}`}

@@ -65,6 +65,13 @@ const DEFAULT_LAYER_VISIBILITY: Record<string, boolean> = {
   gmPins: true, lighting: true, walls: true, rooms: true,
 }
 
+/**
+ * Delay before ambient canvas HUDs (viewport chip, minimap, layer toggle) fade
+ * down. 2.5s felt noisy in testing; 3.5s matches Owlbear Rodeo. Combat HUD and
+ * the multi-select bar ignore this — they carry action-critical state.
+ */
+const HUD_IDLE_DELAY_MS = 3500
+
 export function CanvasArea() {
   const containerRef = useRef<HTMLDivElement>(null)
   const stageRef = useRef<Konva.Stage>(null)
@@ -73,6 +80,7 @@ export function CanvasArea() {
   const [layerPanelOpen, setLayerPanelOpen] = useState(false)
   const [layerVisibility, setLayerVisibility] = useState<Record<string, boolean>>(DEFAULT_LAYER_VISIBILITY)
   const layerPanelRef = useRef<HTMLDivElement>(null)
+  const [hudIdle, setHudIdle] = useState(false)
 
   // Close layer panel when clicking outside
   useEffect(() => {
@@ -85,6 +93,37 @@ export function CanvasArea() {
     document.addEventListener('mousedown', handleOutside)
     return () => document.removeEventListener('mousedown', handleOutside)
   }, [layerPanelOpen])
+
+  // Fade ambient HUDs (viewport chip, minimap, layer toggle) when the cursor
+  // is idle over the canvas. Pointer movement, click, wheel, or focus all
+  // re-wake the HUDs. We bind on the container so sidebar interactions don't
+  // count as activity.
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    let timer: ReturnType<typeof setTimeout> | null = null
+    const wake = () => {
+      setHudIdle(false)
+      if (timer) clearTimeout(timer)
+      timer = setTimeout(() => setHudIdle(true), HUD_IDLE_DELAY_MS)
+    }
+    const sleep = () => {
+      if (timer) clearTimeout(timer)
+      setHudIdle(true)
+    }
+    wake()
+    el.addEventListener('pointermove', wake, { passive: true })
+    el.addEventListener('pointerdown', wake)
+    el.addEventListener('wheel', wake, { passive: true })
+    el.addEventListener('pointerleave', sleep)
+    return () => {
+      if (timer) clearTimeout(timer)
+      el.removeEventListener('pointermove', wake)
+      el.removeEventListener('pointerdown', wake)
+      el.removeEventListener('wheel', wake)
+      el.removeEventListener('pointerleave', sleep)
+    }
+  }, [])
 
   function toggleLayer(key: string) {
     setLayerVisibility((prev) => ({ ...prev, [key]: !prev[key] }))
@@ -352,7 +391,7 @@ export function CanvasArea() {
   return (
     <div
       ref={containerRef}
-      className="canvas-area"
+      className={`canvas-area${hudIdle ? ' hud-idle' : ''}`}
       data-tool={activeTool}
       style={{ position: 'relative' }}
       onDrop={handleDrop}
@@ -674,6 +713,7 @@ export function CanvasArea() {
       {activeMap && (
         <div
           ref={layerPanelRef}
+          className="canvas-hud-fade"
           style={{
             position: 'absolute',
             bottom: showMinimap ? 172 : 12,
