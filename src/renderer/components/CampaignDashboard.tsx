@@ -17,6 +17,14 @@ interface CampaignStats {
 
 type StatsMap = Record<number, CampaignStats>
 
+interface RecentMap {
+  id: number
+  name: string
+  imagePath: string
+  campaignId: number
+  campaignName: string
+}
+
 /* Landing screen shown when no campaign is active.
    Replaces the minimal StartScreen with a dashboard-style layout that surfaces
    campaign metadata (map counts, handout counts, party size) pulled directly
@@ -37,17 +45,23 @@ export function CampaignDashboard() {
   const [newName, setNewName] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [stats, setStats] = useState<StatsMap>({})
+  const [recentMaps, setRecentMaps] = useState<RecentMap[]>([])
 
   // Pull per-campaign aggregates in one shot when the campaign list changes.
   // Three small indexed queries beat N round-trips per card.
   useEffect(() => {
     if (!window.electronAPI || campaigns.length === 0) {
       setStats({})
+      setRecentMaps([])
       return
     }
     let cancelled = false
-    void loadStats(campaigns.map((c) => c.id)).then((result) => {
+    const ids = campaigns.map((c) => c.id)
+    void loadStats(ids).then((result) => {
       if (!cancelled) setStats(result)
+    })
+    void loadRecentMaps(ids).then((rows) => {
+      if (!cancelled) setRecentMaps(rows)
     })
     return () => {
       cancelled = true
@@ -223,6 +237,31 @@ export function CampaignDashboard() {
                 </div>
               </section>
             )}
+
+            {recentMaps.length > 0 && (
+              <section className="bb-dash-section">
+                <h2 className="bb-dash-section-title display">{t('dashboard.recentMaps')}</h2>
+                <RecentMapsStrip
+                  maps={recentMaps}
+                  onOpen={(m) => setActiveCampaign(m.campaignId)}
+                />
+              </section>
+            )}
+
+            <section className="bb-dash-section">
+              <h2 className="bb-dash-section-title display">{t('dashboard.quickActions')}</h2>
+              <QuickActions
+                onNewCampaign={() => setCreating(true)}
+                onImportCampaign={handleImport}
+                onOpenFolder={() => window.electronAPI?.openContentFolder()}
+                newCampaignLabel={t('dashboard.qaNewCampaign')}
+                newCampaignDesc={t('dashboard.qaNewCampaignDesc')}
+                importCampaignLabel={t('dashboard.qaImportCampaign')}
+                importCampaignDesc={t('dashboard.qaImportCampaignDesc')}
+                openFolderLabel={t('dashboard.qaOpenFolder')}
+                openFolderDesc={t('dashboard.qaOpenFolderDesc')}
+              />
+            </section>
           </>
         )}
 
@@ -729,6 +768,127 @@ function PartyAvatars({
   )
 }
 
+// ─── Recent maps strip ─────────────────────────────────────────────────
+
+function RecentMapsStrip({
+  maps,
+  onOpen,
+}: {
+  maps: RecentMap[]
+  onOpen: (m: RecentMap) => void
+}) {
+  return (
+    <div className="bb-dash-maps-strip">
+      {maps.map((m) => (
+        <button
+          key={m.id}
+          type="button"
+          className="bb-dash-map-tile"
+          onClick={() => onOpen(m)}
+          title={`${m.name} · ${m.campaignName}`}
+        >
+          <div className="bb-dash-map-cover">
+            <MapThumbnail path={m.imagePath} campaignName={m.name} />
+            <div className="bb-dash-card-cover-fade" aria-hidden="true" />
+          </div>
+          <div className="bb-dash-map-body">
+            <div className="bb-dash-map-name">{m.name}</div>
+            <div className="bb-dash-map-sub">{m.campaignName}</div>
+          </div>
+        </button>
+      ))}
+    </div>
+  )
+}
+
+// ─── Quick actions ─────────────────────────────────────────────────────
+
+function QuickActions({
+  onNewCampaign,
+  onImportCampaign,
+  onOpenFolder,
+  newCampaignLabel,
+  newCampaignDesc,
+  importCampaignLabel,
+  importCampaignDesc,
+  openFolderLabel,
+  openFolderDesc,
+}: {
+  onNewCampaign: () => void
+  onImportCampaign: () => void
+  onOpenFolder: () => void
+  newCampaignLabel: string
+  newCampaignDesc: string
+  importCampaignLabel: string
+  importCampaignDesc: string
+  openFolderLabel: string
+  openFolderDesc: string
+}) {
+  return (
+    <div className="bb-dash-qa-grid">
+      <QuickActionTile
+        onClick={onNewCampaign}
+        color="var(--accent)"
+        icon={
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+        }
+        label={newCampaignLabel}
+        desc={newCampaignDesc}
+      />
+      <QuickActionTile
+        onClick={onImportCampaign}
+        color="var(--accent-blue-light)"
+        icon={
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+          </svg>
+        }
+        label={importCampaignLabel}
+        desc={importCampaignDesc}
+      />
+      <QuickActionTile
+        onClick={onOpenFolder}
+        color="#a78bfa"
+        icon={
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M3 7a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" />
+          </svg>
+        }
+        label={openFolderLabel}
+        desc={openFolderDesc}
+      />
+    </div>
+  )
+}
+
+function QuickActionTile({
+  onClick,
+  color,
+  icon,
+  label,
+  desc,
+}: {
+  onClick: () => void
+  color: string
+  icon: React.ReactNode
+  label: string
+  desc: string
+}) {
+  return (
+    <button type="button" className="bb-dash-qa-tile" onClick={onClick}>
+      <div className="bb-dash-qa-icon" style={{ color, borderColor: `${color}40` }}>
+        {icon}
+      </div>
+      <div className="bb-dash-qa-text">
+        <div className="bb-dash-qa-label">{label}</div>
+        <div className="bb-dash-qa-desc">{desc}</div>
+      </div>
+    </button>
+  )
+}
+
 // ─── Data loader ───────────────────────────────────────────────────────
 
 async function loadStats(campaignIds: number[]): Promise<StatsMap> {
@@ -776,6 +936,36 @@ async function loadStats(campaignIds: number[]): Promise<StatsMap> {
     }
   }
   return out
+}
+
+async function loadRecentMaps(campaignIds: number[]): Promise<RecentMap[]> {
+  if (!window.electronAPI || campaignIds.length === 0) return []
+  const placeholders = campaignIds.map(() => '?').join(',')
+  // maps has no updated_at / created_at — we use the autoincrement id as a
+  // proxy for recency. Newer maps have larger ids, so DESC surfaces
+  // recently-imported ones first.
+  const rows = await window.electronAPI.dbQuery<{
+    id: number
+    name: string
+    image_path: string
+    campaign_id: number
+    campaign_name: string
+  }>(
+    `SELECT m.id, m.name, m.image_path, m.campaign_id, c.name as campaign_name
+     FROM maps m
+     JOIN campaigns c ON c.id = m.campaign_id
+     WHERE m.campaign_id IN (${placeholders})
+     ORDER BY m.id DESC
+     LIMIT 6`,
+    campaignIds,
+  )
+  return rows.map((r) => ({
+    id: r.id,
+    name: r.name,
+    imagePath: r.image_path,
+    campaignId: r.campaign_id,
+    campaignName: r.campaign_name,
+  }))
 }
 
 // ─── Utilities ────────────────────────────────────────────────────────
@@ -1188,6 +1378,77 @@ function DashboardStyles() {
         background: rgba(239, 68, 68, 0.12);
         border-color: var(--danger);
       }
+
+      /* Recent maps strip */
+      .bb-dash-maps-strip {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: var(--sp-3);
+      }
+      .bb-dash-map-tile {
+        display: flex; flex-direction: column;
+        background: var(--bg-surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        cursor: pointer;
+        padding: 0;
+        font-family: inherit;
+        color: inherit;
+        text-align: left;
+        transition: border-color var(--transition), transform var(--transition);
+      }
+      .bb-dash-map-tile:hover {
+        border-color: var(--text-muted);
+        transform: translateY(-2px);
+      }
+      .bb-dash-map-cover { position: relative; height: 72px; background: var(--bg-elevated); }
+      .bb-dash-map-body { padding: var(--sp-2) var(--sp-3) var(--sp-3); }
+      .bb-dash-map-name {
+        font-size: 12px; font-weight: 500;
+        color: var(--text-primary);
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+      .bb-dash-map-sub {
+        font-size: 10px;
+        color: var(--text-muted);
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        margin-top: 2px;
+      }
+
+      /* Quick actions */
+      .bb-dash-qa-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: var(--sp-3);
+      }
+      .bb-dash-qa-tile {
+        display: flex; align-items: center; gap: var(--sp-3);
+        padding: var(--sp-4);
+        background: var(--bg-surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--text-primary);
+        cursor: pointer;
+        text-align: left;
+        font-family: inherit;
+        transition: border-color var(--transition), transform var(--transition);
+      }
+      .bb-dash-qa-tile:hover {
+        border-color: var(--text-muted);
+        transform: translateY(-2px);
+      }
+      .bb-dash-qa-icon {
+        width: 36px; height: 36px;
+        display: flex; align-items: center; justify-content: center;
+        border-radius: var(--radius-sm);
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid;
+        flex-shrink: 0;
+      }
+      .bb-dash-qa-text { display: flex; flex-direction: column; gap: 2px; }
+      .bb-dash-qa-label { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+      .bb-dash-qa-desc { font-size: 11px; color: var(--text-muted); }
 
       /* Modal */
       .bb-dash-modal-backdrop {
