@@ -3,7 +3,7 @@ import path from 'path'
 import {
   existsSync, mkdirSync, createWriteStream,
   createReadStream, copyFileSync, readdirSync, readFileSync, rmSync,
-  renameSync, lstatSync,
+  renameSync, lstatSync, unlinkSync,
 } from 'fs'
 import archiver from 'archiver'
 import unzipper from 'unzipper'
@@ -189,6 +189,11 @@ export function registerExportImportHandlers(): void {
     mkdirSync(destAssetsDir, { recursive: true })
 
     const pathMap = new Map<string, string>()
+    // Track every file copied into destAssetsDir so we can roll them back if
+    // insertCampaignData throws partway through. Without this, a failed
+    // import leaves orphaned blobs in assets/imported/ that the user can
+    // never reclaim through the UI.
+    const copiedFiles: string[] = []
 
     if (existsSync(assetsDir)) {
       // Magic-byte check mirrors IMPORT_FILE: a third-party ZIP can't smuggle
@@ -212,6 +217,7 @@ export function registerExportImportHandlers(): void {
             const destName = `${Date.now()}_${Math.random().toString(36).slice(2)}${ext}`
             const dest = path.join(destAssetsDir, destName)
             copyFileSync(srcPath, dest)
+            copiedFiles.push(dest)
             const relDest = path.relative(userData, dest).split(path.sep).join('/')
             pathMap.set(`assets/${entryKey}`, relDest)
           }
@@ -226,7 +232,20 @@ export function registerExportImportHandlers(): void {
     remapPaths(campaignData, pathMap)
 
     const db = getDb()
-    const newCampaignId = insertCampaignData(campaignData, db)
+    let newCampaignId: number
+    try {
+      newCampaignId = insertCampaignData(campaignData, db)
+    } catch (err) {
+      // Roll back the extracted asset blobs — the DB transaction inside
+      // insertCampaignData already reverted itself, but the file copies on
+      // disk would otherwise leak. Best-effort unlink; ignore individual
+      // failures so we never throw a different error from the rollback path.
+      for (const f of copiedFiles) {
+        try { unlinkSync(f) } catch { /* ignore */ }
+      }
+      rmSync(importDir, { recursive: true, force: true })
+      throw err
+    }
 
     rmSync(importDir, { recursive: true, force: true })
 

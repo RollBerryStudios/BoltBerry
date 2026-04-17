@@ -13,6 +13,8 @@ import { readFileSync } from 'fs'
 import { resolve } from 'path'
 import {
   SCHEMA_VERSION,
+  CREATE_TABLES_SQL,
+  CREATE_POST_MIGRATION_INDEXES_SQL,
   MIGRATE_V1_TO_V2,
   MIGRATE_V2_TO_V3,
   MIGRATE_V3_TO_V4,
@@ -120,6 +122,55 @@ describe('Migration chain', () => {
       const exportName = `MIGRATE_${name.replace('→', '_TO_')}`
       expect(dbSource, `database.ts should import ${exportName}`).toContain(exportName)
     }
+  })
+
+  // ── Bootstrap-order regression test ──────────────────────────────────────
+  // The pin_y bug (a1f7c2b) happened because CREATE_TABLES_SQL — which runs
+  // unconditionally before migrations on every init — contained partial
+  // indexes whose WHERE clauses referenced columns added in a later
+  // migration (v23→v24). That broke init for every legacy DB.
+  //
+  // Lock in the architectural rule: any DDL that depends on a column added
+  // by a later migration MUST live in CREATE_POST_MIGRATION_INDEXES_SQL,
+  // not in CREATE_TABLES_SQL. This test fails fast if anyone adds another
+  // partial index referencing a late-added column to the wrong block.
+  describe('CREATE_TABLES_SQL must not depend on post-migration columns', () => {
+    // Column → migration that introduced it. Extend whenever a new column
+    // is added by an ALTER TABLE migration AND becomes referenced by an
+    // index/trigger that we want to bootstrap on fresh installs.
+    const POST_BOOTSTRAP_COLUMNS: Array<[string, string]> = [
+      ['pin_x',      'V23→V24'],
+      ['pin_y',      'V23→V24'],
+      ['sort_order', 'V21→V22'],
+    ]
+
+    it.each(POST_BOOTSTRAP_COLUMNS)(
+      '%s (added in %s) is not referenced in CREATE_TABLES_SQL',
+      (col) => {
+        // Only flag the column when used in a clause that would evaluate
+        // immediately on existing tables (WHERE, partial-index predicate,
+        // CHECK). A bare CREATE TABLE column declaration is fine.
+        const dangerousRe = new RegExp(`(WHERE|CHECK)\\b[^;]*\\b${col}\\b`, 'i')
+        expect(
+          CREATE_TABLES_SQL,
+          `${col} is referenced in a WHERE/CHECK clause inside CREATE_TABLES_SQL — this will fail on legacy DBs whose notes table predates the v24 migration. Move the index/check into CREATE_POST_MIGRATION_INDEXES_SQL.`
+        ).not.toMatch(dangerousRe)
+      }
+    )
+
+    it('CREATE_POST_MIGRATION_INDEXES_SQL uses IF NOT EXISTS so it stays idempotent across launches', () => {
+      // The post-migration block runs every init (both fresh and migrated),
+      // so each statement must be safely re-runnable.
+      const stmts = CREATE_POST_MIGRATION_INDEXES_SQL
+        .split(';')
+        .map((s) => s.trim())
+        .filter((s) => s.length > 0 && !s.startsWith('--'))
+      for (const stmt of stmts) {
+        if (/^CREATE\s+(UNIQUE\s+)?INDEX/i.test(stmt)) {
+          expect(stmt, `Statement is not idempotent: ${stmt}`).toMatch(/IF\s+NOT\s+EXISTS/i)
+        }
+      }
+    })
   })
 
   it('database.ts applies migrations in ascending order', () => {

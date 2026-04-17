@@ -117,6 +117,29 @@ export default function App() {
     return () => window.removeEventListener('beforeunload', onBeforeUnload)
   }, [])
 
+  // Surface unhandled promise rejections from store actions / IPC calls.
+  // Without this, an awaited dbRun that rejects (e.g. SQLITE_BUSY, FK
+  // violation) silently swallows the failure and the UI drifts from the
+  // DB until reload. We log to console for devtools triage and toast the
+  // user so they know to retry / report.
+  useEffect(() => {
+    const onRejection = (e: PromiseRejectionEvent) => {
+      const reason = e.reason instanceof Error ? e.reason.message : String(e.reason)
+      console.error('[App] Unhandled promise rejection:', e.reason)
+      showToast(`Hintergrund-Fehler: ${reason}`, 'error')
+    }
+    const onError = (e: ErrorEvent) => {
+      console.error('[App] Uncaught error:', e.error || e.message)
+      showToast(`Unerwarteter Fehler: ${e.message}`, 'error')
+    }
+    window.addEventListener('unhandledrejection', onRejection)
+    window.addEventListener('error', onError)
+    return () => {
+      window.removeEventListener('unhandledrejection', onRejection)
+      window.removeEventListener('error', onError)
+    }
+  }, [])
+
   const { isSetupComplete } = useSettingsStore()
 
   return (

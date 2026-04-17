@@ -140,7 +140,11 @@ export function registerAppHandlers(): void {
     const { shell } = await import('electron')
     const userDataPath = getCustomUserDataPath() || app.getPath('userData')
     const contentPath = join(userDataPath, 'assets')
-    return shell.openPath(contentPath)
+    // shell.openPath resolves with '' on success, otherwise an error message.
+    // Throwing on a non-empty result makes the renderer's catch fire instead
+    // of letting the user click "Open folder" and see nothing happen.
+    const err = await shell.openPath(contentPath)
+    if (err) throw new Error(`Open path failed: ${err}`)
   })
 
   // Get image as base64 for direct embedding (e.g. PDF-to-canvas rendering)
