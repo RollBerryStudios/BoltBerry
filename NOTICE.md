@@ -24,9 +24,11 @@ Dragons System Reference Document 5.2 ("SRD 5.2"), licensed under the
    omitted. This is a **derivative work** under CC-BY-4.0.
 
 2. **Kompendium** — the official WotC-published SRD 5.2 PDFs
-   (`DE_SRD_CC_v5.2.1.pdf`, English SRD 5.2 PDF) may be bundled verbatim in
-   `resources/compendium/` and shipped to users unmodified. These PDFs
-   contain WotC's own CC-BY-4.0 license notice on their title page.
+   (`resources/compendium/srd-de-5.2.1.pdf` and `srd-en-5.2.1.pdf`) are
+   committed to the repo and bundled into the installer verbatim. These
+   PDFs contain WotC's own CC-BY-4.0 license notice on their title page;
+   redistribution is explicitly permitted by CC-BY-4.0 provided attribution
+   is preserved (which this NOTICE + the in-app Kompendium header do).
 
 **No endorsement:** This project is independent fan work and is not
 approved, endorsed, sponsored, or specifically licensed by Wizards of the
