@@ -193,11 +193,23 @@ function LeftPane({
         </h1>
         <p className="bb-welcome-sub">{t('welcome.sub')}</p>
 
-        <div className="bb-welcome-stats">
-          <Stat n={stats.campaignCount} l={t('welcome.statCampaigns')} first />
-          <Stat n={stats.mapCount} l={t('welcome.statMaps')} />
-          <Stat n={stats.characterCount} l={t('welcome.statCharacters')} />
-        </div>
+        {stats.campaignCount === 0 ? (
+          <div className="bb-welcome-firsttime">
+            <div className="bb-welcome-firsttime-kicker">
+              <span className="bb-welcome-status-dot" aria-hidden="true" />
+              {t('welcome.firstTimeKicker')}
+            </div>
+            <div className="bb-welcome-firsttime-body">
+              {t('welcome.firstTimeBody')}
+            </div>
+          </div>
+        ) : (
+          <div className="bb-welcome-stats">
+            <Stat n={stats.campaignCount} l={t('welcome.statCampaigns')} first />
+            <Stat n={stats.mapCount} l={t('welcome.statMaps')} />
+            <Stat n={stats.characterCount} l={t('welcome.statCharacters')} />
+          </div>
+        )}
       </div>
 
       <div className="bb-welcome-footer">
@@ -697,6 +709,24 @@ function WelcomeStyles() {
         border-top: 1px solid var(--border);
         border-bottom: 1px solid var(--border);
         animation: bb-slide-up 700ms 440ms both ease-out;
+      }
+      .bb-welcome-firsttime {
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 18px 4px;
+        animation: bb-slide-up 700ms 440ms both ease-out;
+      }
+      .bb-welcome-firsttime-kicker {
+        display: flex; align-items: center; gap: 8px;
+        font-size: 10px; letter-spacing: 0.16em; font-weight: 700;
+        color: var(--accent);
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .bb-welcome-firsttime-body {
+        font-size: 14px; line-height: 1.55;
+        color: var(--text-primary);
+        max-width: 480px;
       }
       .bb-welcome-stat {
         flex: 1; padding: 18px 14px;

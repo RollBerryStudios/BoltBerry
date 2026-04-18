@@ -170,6 +170,8 @@
     "statCampaigns": "Kampagnen",
     "statMaps": "Karten",
     "statCharacters": "Charaktere",
+    "firstTimeKicker": "Willkommen",
+    "firstTimeBody": "Noch keine Kampagne. Leg los — unten rechts neu erstellen oder eine .boltberry-Datei importieren.",
     "footerStatus": "Lokal · alle Daten auf diesem Rechner",
     "footerVersion": "v{{version}}",
     "newCampaign": "Neue Kampagne",

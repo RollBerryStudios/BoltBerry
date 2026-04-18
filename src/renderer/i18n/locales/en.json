@@ -170,6 +170,8 @@
     "statCampaigns": "Campaigns",
     "statMaps": "Maps",
     "statCharacters": "Characters",
+    "firstTimeKicker": "Welcome",
+    "firstTimeBody": "No campaigns yet. Get started — create one in the bottom-right or import a .boltberry file.",
     "footerStatus": "Local \u00b7 all data stays on this machine",
     "footerVersion": "v{{version}}",
     "newCampaign": "New campaign",
