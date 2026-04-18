@@ -136,7 +136,14 @@
     "fieldType": "Typ",
     "fieldSize": "Größe",
     "fieldMarkerColor": "Markerfarbe",
-    "save": "Speichern"
+    "save": "Speichern",
+    "spawnCount": "Anzahl",
+    "spawnFormation": "Formation",
+    "formationCluster": "Gruppe",
+    "formationLine": "Linie",
+    "formationCircle": "Kreis",
+    "formationWing": "Flügel",
+    "formationV": "V-Form"
   },
   "workspace": {
     "backToCampaigns": "Kampagnen",

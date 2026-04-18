@@ -2,7 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import { useImageUrl } from '../../../hooks/useImageUrl'
-import type { MapRecord, TokenVariant } from '@shared/ipc-types'
+import { getFormationOffsets } from '../../../utils/formationLayout'
+import type { FormationType, MapRecord, TokenVariant } from '@shared/ipc-types'
 
 /* Token library — browsable stat blocks grouped into three categories
    (Monster / Player / NPC). The monster category ships pre-seeded with
@@ -275,7 +276,7 @@ export function TokenLibraryPanel() {
     }
   }
 
-  async function handleInsertOnMap(tpl: TokenTemplate) {
+  async function handleInsertOnMap(tpl: TokenTemplate, count: number = 1, formation: FormationType = 'cluster') {
     if (!window.electronAPI || !activeCampaignId) return
     const targetMap = activeMapId
       ? activeMaps.find((m) => m.id === activeMapId)
@@ -285,20 +286,24 @@ export function TokenLibraryPanel() {
       return
     }
     try {
-      // Pick a random variant image if any exist for this template's slug.
-      // Fallback to the template's stored image_path (may be null → no image).
-      let image: string | null = tpl.image_path
-      if (tpl.slug && window.electronAPI) {
-        const variants = await window.electronAPI.listTokenVariants(tpl.slug)
-        if (variants.length > 0) {
-          image = variants[Math.floor(Math.random() * variants.length)].path
-        }
+      // Pre-fetch the variant list once so we can re-roll per spawn, giving
+      // each of the N tokens a different face instead of N identical copies.
+      const variants = tpl.slug && window.electronAPI
+        ? await window.electronAPI.listTokenVariants(tpl.slug)
+        : []
+
+      const offsets = getFormationOffsets(formation, count, targetMap.gridSize)
+      for (let i = 0; i < count; i++) {
+        const image = variants.length > 0
+          ? variants[Math.floor(Math.random() * variants.length)].path
+          : tpl.image_path
+        const { dx, dy } = offsets[i] ?? { dx: 0, dy: 0 }
+        await insertTokenForTemplate(tpl, targetMap, image, dx, dy)
       }
-      await insertTokenForTemplate(tpl, targetMap, image)
       // If we were not currently on a map, switch into play view with the
-      // selected one so the DM sees the new token immediately.
+      // selected one so the DM sees the new tokens immediately.
       if (!activeMapId) setActiveMap(targetMap.id)
-      setInsertedName(tpl.name)
+      setInsertedName(count > 1 ? `${count}× ${tpl.name}` : tpl.name)
       setInsertTick((n) => n + 1)
     } catch (err) {
       setError(String(err))
@@ -523,7 +528,7 @@ export function TokenLibraryPanel() {
               onOpenEditor={() => setEditingId(tpl.id)}
               onDuplicate={() => handleDuplicate(tpl)}
               onDelete={() => handleDelete(tpl)}
-              onInsert={() => handleInsertOnMap(tpl)}
+              onInsert={(count, formation) => handleInsertOnMap(tpl, count, formation)}
               canInsert={!disabled && activeMaps.length > 0}
             />
           ))
@@ -576,11 +581,13 @@ function TemplateCard({
   onOpenEditor: () => void
   onDuplicate: () => void
   onDelete: () => void
-  onInsert: () => void
+  onInsert: (count: number, formation: FormationType) => void
   canInsert: boolean
 }) {
   const { t } = useTranslation()
   const isUser = tpl.source === 'user'
+  const [spawnCount, setSpawnCount] = useState(1)
+  const [spawnFormation, setSpawnFormation] = useState<FormationType>('cluster')
   const color = tpl.marker_color ?? 'var(--text-muted)'
 
   return (
@@ -710,15 +717,58 @@ function TemplateCard({
 
       {/* Actions */}
       <div style={{
-        display: 'flex', gap: 4,
+        display: 'flex', gap: 4, alignItems: 'center',
         padding: 8,
         marginTop: 'auto',
         borderTop: '1px solid var(--border-subtle)',
         background: 'var(--bg-elevated)',
       }}>
+        <input
+          type="number"
+          min={1}
+          max={12}
+          value={spawnCount}
+          onChange={(e) => {
+            const n = parseInt(e.target.value, 10)
+            setSpawnCount(Number.isFinite(n) ? Math.max(1, Math.min(12, n)) : 1)
+          }}
+          title={t('library.spawnCount')}
+          style={{
+            width: 42,
+            padding: '6px 4px',
+            background: 'var(--bg-base)',
+            border: '1px solid var(--border)',
+            borderRadius: 'var(--radius-sm)',
+            color: 'var(--text-primary)',
+            fontFamily: 'var(--font-mono)', fontSize: 11,
+            textAlign: 'center',
+            fontWeight: 700,
+          }}
+        />
+        <select
+          value={spawnFormation}
+          onChange={(e) => setSpawnFormation(e.target.value as FormationType)}
+          disabled={spawnCount <= 1}
+          title={t('library.spawnFormation')}
+          style={{
+            padding: '6px 4px',
+            background: 'var(--bg-base)',
+            border: '1px solid var(--border)',
+            borderRadius: 'var(--radius-sm)',
+            color: spawnCount > 1 ? 'var(--text-primary)' : 'var(--text-muted)',
+            fontFamily: 'inherit', fontSize: 10,
+            cursor: spawnCount > 1 ? 'pointer' : 'not-allowed',
+          }}
+        >
+          <option value="cluster">⚫ {t('library.formationCluster')}</option>
+          <option value="line">▬ {t('library.formationLine')}</option>
+          <option value="circle">◯ {t('library.formationCircle')}</option>
+          <option value="wing">◣ {t('library.formationWing')}</option>
+          <option value="v-formation">⋎ {t('library.formationV')}</option>
+        </select>
         <button
           type="button"
-          onClick={onInsert}
+          onClick={() => onInsert(spawnCount, spawnFormation)}
           disabled={!canInsert}
           title={canInsert ? t('library.insertOnMap') : t('library.noMapForInsert')}
           style={{
@@ -1381,13 +1431,12 @@ function compareBy(key: SortKey): (a: TokenTemplate, b: TokenTemplate) => number
 }
 
 // Inserts a token derived from a library template onto the given map.
-// Placed near the camera center by default; the DM can drag it anywhere.
-// imageOverride wins over tpl.image_path so the caller can pick a random
-// variant when the template carries a slug.
-async function insertTokenForTemplate(tpl: TokenTemplate, map: MapRecord, imageOverride: string | null) {
+// Placed near the camera center by default + a per-token offset so bulk
+// spawns land in a formation instead of overlapping on one spot.
+async function insertTokenForTemplate(tpl: TokenTemplate, map: MapRecord, imageOverride: string | null, dx = 0, dy = 0) {
   if (!window.electronAPI) return
-  const cx = map.cameraX ?? 0
-  const cy = map.cameraY ?? 0
+  const cx = (map.cameraX ?? 0) + dx
+  const cy = (map.cameraY ?? 0) + dy
   await window.electronAPI.dbRun(
     `INSERT INTO tokens
        (map_id, name, image_path, x, y, size, hp_current, hp_max,
