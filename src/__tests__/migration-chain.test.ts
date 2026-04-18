@@ -38,6 +38,14 @@ import {
   MIGRATE_V21_TO_V22,
   MIGRATE_V22_TO_V23,
   MIGRATE_V23_TO_V24,
+  MIGRATE_V24_TO_V25,
+  MIGRATE_V25_TO_V26,
+  MIGRATE_V26_TO_V27,
+  MIGRATE_V27_TO_V28,
+  MIGRATE_V28_TO_V29,
+  MIGRATE_V29_TO_V30,
+  MIGRATE_V30_TO_V31,
+  MIGRATE_V31_TO_V32,
 } from '../main/db/schema'
 
 // Ordered table of all migrations: [from, to, sql]
@@ -65,6 +73,14 @@ const CHAIN: Array<{ from: number; to: number; sql: string; name: string }> = [
   { from: 21, to: 22, sql: MIGRATE_V21_TO_V22, name: 'V21→V22'},
   { from: 22, to: 23, sql: MIGRATE_V22_TO_V23, name: 'V22→V23'},
   { from: 23, to: 24, sql: MIGRATE_V23_TO_V24, name: 'V23→V24'},
+  { from: 24, to: 25, sql: MIGRATE_V24_TO_V25, name: 'V24→V25'},
+  { from: 25, to: 26, sql: MIGRATE_V25_TO_V26, name: 'V25→V26'},
+  { from: 26, to: 27, sql: MIGRATE_V26_TO_V27, name: 'V26→V27'},
+  { from: 27, to: 28, sql: MIGRATE_V27_TO_V28, name: 'V27→V28'},
+  { from: 28, to: 29, sql: MIGRATE_V28_TO_V29, name: 'V28→V29'},
+  { from: 29, to: 30, sql: MIGRATE_V29_TO_V30, name: 'V29→V30'},
+  { from: 30, to: 31, sql: MIGRATE_V30_TO_V31, name: 'V30→V31'},
+  { from: 31, to: 32, sql: MIGRATE_V31_TO_V32, name: 'V31→V32'},
 ]
 
 describe('Migration chain', () => {
@@ -171,6 +187,27 @@ describe('Migration chain', () => {
         }
       }
     })
+  })
+
+  it('V31→V32 adds grid_visible / grid_thickness / grid_color to maps', () => {
+    // Guards against accidentally dropping one of the three columns the
+    // renderer now requires (src/shared/ipc-types.ts MapRecord).
+    const sql = MIGRATE_V31_TO_V32
+    expect(sql).toMatch(/ALTER\s+TABLE\s+maps\s+ADD\s+COLUMN\s+grid_visible/i)
+    expect(sql).toMatch(/ALTER\s+TABLE\s+maps\s+ADD\s+COLUMN\s+grid_thickness/i)
+    expect(sql).toMatch(/ALTER\s+TABLE\s+maps\s+ADD\s+COLUMN\s+grid_color/i)
+    // Defaults must stay so legacy rows satisfy NOT NULL without a backfill.
+    expect(sql).toMatch(/grid_visible\s+INTEGER\s+NOT\s+NULL\s+DEFAULT\s+1/i)
+    expect(sql).toMatch(/grid_thickness\s+REAL\s+NOT\s+NULL\s+DEFAULT\s+1\.0/i)
+    expect(sql).toMatch(/grid_color\s+TEXT\s+NOT\s+NULL\s+DEFAULT/i)
+  })
+
+  it('CREATE_TABLES_SQL for a fresh install ships the v32 grid columns', () => {
+    // Fresh installs skip the migration chain and run CREATE_TABLES_SQL;
+    // if that forgets the new columns, only upgraders get them.
+    expect(CREATE_TABLES_SQL).toMatch(/maps[\s\S]*grid_visible/i)
+    expect(CREATE_TABLES_SQL).toMatch(/maps[\s\S]*grid_thickness/i)
+    expect(CREATE_TABLES_SQL).toMatch(/maps[\s\S]*grid_color/i)
   })
 
   it('database.ts applies migrations in ascending order', () => {

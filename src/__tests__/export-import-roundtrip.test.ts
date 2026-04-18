@@ -129,6 +129,18 @@ describe('insertCampaignData', () => {
   it('inserts all audio map columns', () => {
     expect(SRC).toContain('ambient_track_path, track1_volume, track2_volume, combat_volume')
   })
+
+  it('round-trips the v32 grid style columns', () => {
+    // Without these the export path drops gridVisible / gridThickness /
+    // gridColor on re-import, resetting every map back to the default
+    // white/thin/visible grid even if the DM customised them.
+    expect(SRC).toMatch(/grid_visible/)
+    expect(SRC).toMatch(/grid_thickness/)
+    expect(SRC).toMatch(/grid_color/)
+    // Also on the readback side the export builder must emit typed
+    // booleans, not 0/1, so the receiver can import into a strict DB.
+    expect(SRC).toMatch(/gridVisible:\s*\(m\.grid_visible\s*\?\?\s*1\)\s*!==\s*0/)
+  })
 })
 
 describe('collectAssetPaths', () => {
@@ -177,8 +189,18 @@ describe('remapPaths', () => {
 })
 
 describe('path-traversal protection in ZIP import', () => {
-  it('validates extracted paths against importDir boundary', () => {
-    expect(SRC).toContain('dest.startsWith(realImportDir')
+  it('validates extracted paths against canonicalised importDir boundary', () => {
+    // Post-audit (blocker #3) the guard canonicalises via realpathSync
+    // so a symlinked parent can't redirect writes outside the import
+    // dir. Assertion name tracks the variable name.
+    expect(SRC).toContain('dest.startsWith(canonicalImportDir')
+    expect(SRC).toContain('realpathSync(importDir)')
+  })
+
+  it('rejects entries with a ".." path segment', () => {
+    // Segment-level check (not substring) — legitimate filenames like
+    // "a..b.txt" must still unpack.
+    expect(SRC).toMatch(/segments\.includes\(['"]\.\.['"]\)/)
   })
 })
 

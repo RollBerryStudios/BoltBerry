@@ -166,7 +166,7 @@ async function resolveImageSrc(path: string): Promise<string> {
  * peaks by at least `separation` samples so we don't pick out the
  * same hump twice.
  */
-function findTopPeaks(
+export function findTopPeaks(
   signal: Float64Array,
   minLag: number,
   maxLag: number,
@@ -197,7 +197,7 @@ function findTopPeaks(
  * of its cell size, so real peaks come with friends; spurious ones
  * don't. Returns a bonus in [0, 1].
  */
-function harmonicBonus(signal: Float64Array, lag: number, baseValue: number): number {
+export function harmonicBonus(signal: Float64Array, lag: number, baseValue: number): number {
   if (baseValue <= 0) return 0
   let sum = 0
   let counted = 0
