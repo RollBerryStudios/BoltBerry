@@ -46,6 +46,12 @@ let playerDisplayId: number | null = null
 
 // ─── DM Window ───────────────────────────────────────────────────────────────────────
 export function createDMWindow(): BrowserWindow {
+  // Frameless with a platform-aware title-bar strategy so the in-app custom
+  // TitleBar can render its own breadcrumb + broadcast pill + lang toggle.
+  // macOS keeps its native traffic lights (hiddenInset); Windows/Linux get
+  // native minimise/maximise/close controls painted by titleBarOverlay so
+  // we don't need custom buttons.
+  const isDarwin = process.platform === 'darwin'
   dmWindow = new BrowserWindow({
     width: 1400,
     height: 900,
@@ -54,6 +60,11 @@ export function createDMWindow(): BrowserWindow {
     title: 'BoltBerry – DM',
     backgroundColor: '#121722',
     show: false,
+    frame: false,
+    titleBarStyle: isDarwin ? 'hiddenInset' : 'hidden',
+    ...(isDarwin
+      ? {}
+      : { titleBarOverlay: { color: '#121722', symbolColor: '#94a0b2', height: 36 } }),
     webPreferences: {
       preload: requirePreload(dmPreloadPath(), 'DM'),
       contextIsolation: true,

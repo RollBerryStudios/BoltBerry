@@ -81,6 +81,7 @@
   --sidebar-right: 300px;
   --toolbar-h:     52px;
   --statusbar-h:   26px;
+  --titlebar-h:    36px;
 
   /* ── Backwards-compat aliases  (used throughout panel components) ─────────── */
   --bg-input: var(--bg-elevated);   /* dark input / file-picker backgrounds    */
@@ -140,9 +141,10 @@ html, body {
 /* ─── Layout primitives ──────────────────────────────────────────────────────── */
 .app-layout {
   display: grid;
-  grid-template-rows: var(--toolbar-h) 1fr var(--statusbar-h);
+  grid-template-rows: var(--titlebar-h) var(--toolbar-h) 1fr var(--statusbar-h);
   grid-template-columns: var(--sidebar-left) 1fr var(--sidebar-right);
   grid-template-areas:
+    "titlebar titlebar titlebar"
     "toolbar toolbar toolbar"
     "sidebar-left canvas sidebar-right"
     "statusbar statusbar statusbar";
@@ -153,6 +155,7 @@ html, body {
 /* Resizable layout: 5 columns — left sidebar, left handle, canvas, right handle, right sidebar. */
 .app-layout-resizable {
   grid-template-areas:
+    "titlebar titlebar titlebar titlebar titlebar"
     "toolbar toolbar toolbar toolbar toolbar"
     "sidebar-left left-handle canvas right-handle sidebar-right"
     "statusbar statusbar statusbar statusbar statusbar";
@@ -182,6 +185,98 @@ html, body {
 }
 .sidebar-resizer-left { grid-area: left-handle; }
 .sidebar-resizer-right { grid-area: right-handle; }
+
+/* ─── DM frameless title bar ────────────────────────────────────────────────── */
+.dm-title-bar {
+  grid-area: titlebar;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: 0 var(--sp-3);
+  height: var(--titlebar-h);
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  user-select: none;
+  overflow: hidden;
+  min-width: 0;
+}
+.dm-title-bar-traffic-space {
+  width: 72px;
+  height: 100%;
+  flex-shrink: 0;
+}
+.dm-title-bar-controls-space {
+  width: 140px;
+  height: 100%;
+  flex-shrink: 0;
+}
+.dm-title-bar-brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.dm-title-bar-wordmark {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.dm-title-bar-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  max-width: 360px;
+  padding-left: var(--sp-2);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.dm-title-bar-breadcrumb-campaign {
+  font-weight: 600;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-shrink: 0;
+  max-width: 160px;
+}
+.dm-title-bar-breadcrumb-sep {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.dm-title-bar-breadcrumb-map {
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.dm-title-bar-pill {
+  flex-shrink: 0;
+}
+.dm-title-bar-lang {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.dm-title-bar-lang button {
+  padding: 2px 8px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+.dm-title-bar-lang button.active {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
 
 /* ─── Toolbar ────────────────────────────────────────────────────────────────── */
 .toolbar {

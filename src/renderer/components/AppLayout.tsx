@@ -1,5 +1,6 @@
 import { useUIStore } from '../stores/uiStore'
 import { Toolbar } from './toolbar/Toolbar'
+import { DmTitleBar } from './DmTitleBar'
 import { LeftSidebar } from './sidebar/LeftSidebar'
 import { RightSidebar } from './sidebar/RightSidebar'
 import { CanvasArea } from './canvas/CanvasArea'
@@ -30,6 +31,10 @@ export function AppLayout() {
         gridTemplateColumns: `${leftCol} ${leftHandleCol} 1fr ${rightHandleCol} ${rightCol}`,
       }}
     >
+      <ErrorBoundary label="TitleBar">
+        <DmTitleBar />
+      </ErrorBoundary>
+
       <ErrorBoundary label="Toolbar">
         <Toolbar />
       </ErrorBoundary>

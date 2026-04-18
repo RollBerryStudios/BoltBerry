@@ -445,27 +445,19 @@ export function Toolbar() {
       {/* ── SECTION: Navigation ─────────────────────────────────────────── */}
       <button className="tool-btn" title={t('toolbar.leftSidebar')} onClick={toggleLeftSidebar}>◧</button>
 
+      {/* Breadcrumb + broadcast pill now live in the frameless title bar
+          (src/renderer/components/DmTitleBar.tsx). Only the back-to-
+          campaign button stays here as part of the toolbar's Navigation
+          section — it's a tool action, not a status display. */}
       {activeCampaignId && (
-        <>
-          <button
-            className="tool-btn"
-            title={t('toolbar.backToCampaign')}
-            onClick={handleLeaveMap}
-            style={{ color: 'var(--text-secondary)' }}
-          >
-            ◁
-          </button>
-          <div className="toolbar-breadcrumb" title={`${activeCampaignName}${activeMapName ? ' / ' + activeMapName : ''}`}>
-            <span className="toolbar-breadcrumb-campaign">{activeCampaignName}</span>
-            {activeMapName && (
-              <>
-                <span className="toolbar-breadcrumb-sep">/</span>
-                <span className="toolbar-breadcrumb-map">{activeMapName}</span>
-              </>
-            )}
-          </div>
-          <BroadcastPill status={broadcastStatus} />
-        </>
+        <button
+          className="tool-btn"
+          title={t('toolbar.backToCampaign')}
+          onClick={handleLeaveMap}
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          ◁
+        </button>
       )}
 
       <Divider />
