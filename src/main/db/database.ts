@@ -51,6 +51,27 @@ export class SchemaTooNewError extends Error {
   }
 }
 
+// Self-healing migration runner. Applies the migration SQL in one shot.
+// When SQLite reports "duplicate column name: X" — which means an
+// ALTER TABLE ADD COLUMN in the migration hit a column that already
+// exists — we re-run the migration with the ALTER TABLE statements
+// stripped. This recovers from older dev installations that advanced the
+// schema by hand without bumping schema_version, and is a no-op on clean
+// DBs. Any other SQL error still aborts the whole migration transaction.
+function applyMigration(db: Database.Database, sql: string): void {
+  try {
+    db.exec(sql)
+  } catch (err) {
+    const msg = (err instanceof Error ? err.message : String(err)).toLowerCase()
+    if (!msg.includes('duplicate column name')) throw err
+    const withoutAlters = sql
+      .split(';')
+      .filter((s) => !/^\s*ALTER\s+TABLE[^;]*ADD\s+COLUMN/i.test(s))
+      .join(';')
+    db.exec(withoutAlters)
+  }
+}
+
 export function initDatabase(): Database.Database {
   const userDataPath = customUserDataPath || app.getPath('userData')
   const dbDir = join(userDataPath, 'data')
@@ -113,7 +134,7 @@ export function initDatabase(): Database.Database {
       try {
         db.transaction(() => {
           for (const [target, sql] of MIGRATIONS) {
-            if (currentVersion < target) db!.exec(sql)
+            if (currentVersion < target) applyMigration(db!, sql)
           }
         })()
 
