@@ -1,8 +1,21 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useUIStore } from '../stores/uiStore'
 import { CompendiumPdfViewer } from './CompendiumPdfViewer'
 import type { CompendiumFile } from '@shared/ipc-types'
+
+// Global search state — shared hit record with enough to render one row
+// and jump straight into the right PDF at the right page.
+interface GlobalHit {
+  file: CompendiumFile
+  page: number
+  snippet: string
+}
+
+type IndexState =
+  | { phase: 'idle' }
+  | { phase: 'indexing'; doneFiles: number; totalFiles: number }
+  | { phase: 'ready' }
 
 /* Top-level Compendium view. Shown via uiStore.topView === 'compendium'.
    Currently scaffolds navigation, the PDF list sidebar, and the empty-
@@ -17,6 +30,13 @@ export function CompendiumView() {
 
   const [files, setFiles] = useState<CompendiumFile[]>([])
   const [selectedPath, setSelectedPath] = useState<string | null>(null)
+  // Jump target: when set, the viewer opens this page on load.
+  const [jumpTarget, setJumpTarget] = useState<number | null>(null)
+  // Global search: query, state, results, and the per-file text index.
+  const [globalQuery, setGlobalQuery] = useState('')
+  const [globalIndexState, setGlobalIndexState] = useState<IndexState>({ phase: 'idle' })
+  // Map file.path → page → extracted text.
+  const globalIndexRef = useRef<Map<string, Map<number, string>>>(new Map())
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -59,6 +79,93 @@ export function CompendiumView() {
 
   const selected = files.find((f) => f.path === selectedPath) ?? null
 
+  // Build the per-file text index on demand. Each PDF is loaded once via
+  // compendium:read IPC, decoded, pdfjs-ified, and every page's
+  // getTextContent is cached in globalIndexRef. Repeat searches are O(n)
+  // scans over already-loaded text maps.
+  const buildIndex = useCallback(async () => {
+    if (!window.electronAPI || files.length === 0) return
+    const pdfjsLib = await import('pdfjs-dist')
+    pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+      'pdfjs-dist/build/pdf.worker.min.mjs',
+      import.meta.url,
+    ).toString()
+    setGlobalIndexState({ phase: 'indexing', doneFiles: 0, totalFiles: files.length })
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i]
+      if (globalIndexRef.current.has(file.path)) {
+        setGlobalIndexState({ phase: 'indexing', doneFiles: i + 1, totalFiles: files.length })
+        continue
+      }
+      try {
+        const dataUrl = await window.electronAPI.readCompendiumPdf(file.path)
+        if (!dataUrl) {
+          globalIndexRef.current.set(file.path, new Map())
+          continue
+        }
+        const raw = atob(dataUrl.split(',')[1] ?? '')
+        const bytes = new Uint8Array(raw.length)
+        for (let j = 0; j < raw.length; j++) bytes[j] = raw.charCodeAt(j)
+        const doc = await pdfjsLib.getDocument({ data: bytes }).promise
+        const pageText = new Map<number, string>()
+        for (let p = 1; p <= doc.numPages; p++) {
+          try {
+            const page = await doc.getPage(p)
+            const content = await page.getTextContent()
+            const text = (content.items as Array<{ str?: string }>)
+              .map((it) => (it.str ?? '').trim()).filter(Boolean).join(' ')
+            pageText.set(p, text)
+          } catch {
+            pageText.set(p, '')
+          }
+        }
+        globalIndexRef.current.set(file.path, pageText)
+        doc.destroy()
+      } catch {
+        globalIndexRef.current.set(file.path, new Map())
+      }
+      setGlobalIndexState({ phase: 'indexing', doneFiles: i + 1, totalFiles: files.length })
+    }
+    setGlobalIndexState({ phase: 'ready' })
+  }, [files])
+
+  useEffect(() => {
+    const q = globalQuery.trim()
+    if (q.length < 2) return
+    if (globalIndexState.phase === 'idle') void buildIndex()
+  }, [globalQuery, globalIndexState.phase, buildIndex])
+
+  const globalHits: GlobalHit[] = useMemo(() => {
+    const q = globalQuery.trim().toLowerCase()
+    if (q.length < 2 || globalIndexState.phase !== 'ready') return []
+    const hits: GlobalHit[] = []
+    outer: for (const file of files) {
+      const pages = globalIndexRef.current.get(file.path)
+      if (!pages) continue
+      for (const [page, text] of pages) {
+        const lower = text.toLowerCase()
+        let from = 0
+        while (true) {
+          const idx = lower.indexOf(q, from)
+          if (idx === -1) break
+          const start = Math.max(0, idx - 30)
+          const end = Math.min(text.length, idx + q.length + 60)
+          const snippet = (start > 0 ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : '')
+          hits.push({ file, page, snippet })
+          from = idx + q.length
+          if (hits.length >= 300) break outer
+        }
+      }
+    }
+    return hits
+  }, [globalQuery, globalIndexState, files])
+
+  function jumpToHit(hit: GlobalHit) {
+    setSelectedPath(hit.file.path)
+    setJumpTarget(hit.page)
+    setGlobalQuery('')
+  }
+
   return (
     <div className="bb-comp">
       <CompendiumStyles />
@@ -87,6 +194,20 @@ export function CompendiumView() {
         </div>
 
         <div className="bb-comp-actions" style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}>
+          <div className="bb-comp-global-search">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+              style={{ color: 'var(--text-muted)' }}>
+              <circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" />
+            </svg>
+            <input
+              value={globalQuery}
+              onChange={(e) => setGlobalQuery(e.target.value)}
+              placeholder={t('compendium.globalSearchPlaceholder')}
+            />
+            {globalQuery && (
+              <button type="button" onClick={() => setGlobalQuery('')} title={t('compendium.closeSearch')}>✕</button>
+            )}
+          </div>
           <button type="button" className="bb-comp-cta bb-comp-cta-ghost" onClick={handleImport}>
             📥 {t('compendium.importPdf')}
           </button>
@@ -129,6 +250,48 @@ export function CompendiumView() {
           CC-BY-4.0
         </a>
       </div>
+
+      {/* Cross-PDF search results — overlays the body when a query is active. */}
+      {globalQuery.trim().length >= 2 && (
+        <div className="bb-comp-global-results">
+          <div className="bb-comp-global-results-header">
+            {globalIndexState.phase === 'indexing'
+              ? t('compendium.indexing', { done: globalIndexState.doneFiles, total: globalIndexState.totalFiles })
+              : globalIndexState.phase === 'ready'
+                ? t('compendium.hits', { count: globalHits.length })
+                : '…'}
+          </div>
+          {globalIndexState.phase === 'ready' && globalHits.length === 0 ? (
+            <div className="bb-comp-sidebar-empty">{t('compendium.noHits')}</div>
+          ) : (
+            <div className="bb-comp-global-results-list">
+              {globalHits.map((h, i) => {
+                const q = globalQuery.trim().toLowerCase()
+                const idx = h.snippet.toLowerCase().indexOf(q)
+                const before = idx >= 0 ? h.snippet.slice(0, idx) : h.snippet
+                const match = idx >= 0 ? h.snippet.slice(idx, idx + q.length) : ''
+                const after = idx >= 0 ? h.snippet.slice(idx + q.length) : ''
+                return (
+                  <button
+                    key={`${h.file.path}-${h.page}-${i}`}
+                    type="button"
+                    className="bb-comp-global-hit"
+                    onClick={() => jumpToHit(h)}
+                  >
+                    <span className="bb-comp-global-hit-file">{h.file.name}</span>
+                    <span className="bb-comp-global-hit-page mono">
+                      {t('compendium.pageShort')} {h.page}
+                    </span>
+                    <span className="bb-comp-global-hit-snippet">
+                      {before}<mark>{match}</mark>{after}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Body: file list sidebar + viewer */}
       <div className="bb-comp-body">
@@ -175,7 +338,12 @@ export function CompendiumView() {
         <main className="bb-comp-main">
           {error && <div className="bb-comp-error">⚠️ {error}</div>}
           {selected ? (
-            <CompendiumPdfViewer key={selected.path} file={selected} />
+            <CompendiumPdfViewer
+              key={selected.path}
+              file={selected}
+              initialPage={jumpTarget}
+              onConsumedInitialPage={() => setJumpTarget(null)}
+            />
           ) : (
             <EmptyCompendium onImport={handleImport} onOpenFolder={handleOpenFolder} />
           )}
@@ -315,6 +483,85 @@ function CompendiumStyles() {
         border: 1px solid var(--border);
       }
       .bb-comp-cta-ghost:hover { background: var(--bg-overlay); }
+
+      /* Global search input */
+      .bb-comp-global-search {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 4px 10px;
+        background: var(--bg-base);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        width: 220px;
+      }
+      .bb-comp-global-search input {
+        flex: 1; min-width: 0;
+        background: transparent;
+        border: none; outline: none;
+        color: var(--text-primary);
+        font-size: 12px;
+        font-family: inherit;
+      }
+      .bb-comp-global-search button {
+        background: transparent; border: none; cursor: pointer;
+        color: var(--text-muted); font-size: 11px; padding: 0 2px;
+      }
+
+      /* Global search result panel */
+      .bb-comp-global-results {
+        border-bottom: 1px solid var(--border);
+        background: var(--bg-surface);
+        max-height: 60%;
+        overflow-y: auto;
+      }
+      .bb-comp-global-results-header {
+        padding: 8px var(--sp-5);
+        font-size: 10px; letterSpacing: '0.08em';
+        color: var(--text-muted);
+        text-transform: uppercase;
+        font-weight: 700;
+        background: var(--bg-elevated);
+        border-bottom: 1px solid var(--border-subtle);
+      }
+      .bb-comp-global-results-list {
+        display: flex; flex-direction: column;
+      }
+      .bb-comp-global-hit {
+        display: grid;
+        grid-template-columns: 140px 60px 1fr;
+        align-items: baseline;
+        gap: 10px;
+        padding: 6px var(--sp-5);
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid var(--border-subtle);
+        color: var(--text-primary);
+        text-align: left;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 11px;
+        transition: background var(--transition);
+      }
+      .bb-comp-global-hit:hover { background: var(--bg-overlay); }
+      .bb-comp-global-hit-file {
+        font-weight: 600;
+        overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      }
+      .bb-comp-global-hit-page {
+        font-size: 10px;
+        color: var(--text-muted);
+        font-weight: 600;
+      }
+      .bb-comp-global-hit-snippet {
+        color: var(--text-secondary);
+        overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        min-width: 0;
+      }
+      .bb-comp-global-hit-snippet mark {
+        background: rgba(255, 198, 46, 0.35);
+        color: var(--accent);
+        padding: 0 2px;
+        border-radius: 2px;
+      }
 
       .bb-comp-lang {
         display: flex;

@@ -179,7 +179,9 @@
     "attributionPrefix": "SRD 5.2 © Wizards of the Coast LLC, lizenziert unter",
     "toggleToc": "Inhaltsverzeichnis",
     "toggleThumbs": "Seiten-Vorschau",
-    "noOutline": "Kein Inhaltsverzeichnis in dieser PDF"
+    "noOutline": "Kein Inhaltsverzeichnis in dieser PDF",
+    "globalSearchPlaceholder": "Alle PDFs…",
+    "indexing": "Indexiere… {{done}}/{{total}}"
   },
   "welcome": {
     "tag": "Lokales Spieltisch-Studio",

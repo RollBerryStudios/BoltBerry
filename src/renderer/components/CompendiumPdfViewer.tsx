@@ -38,9 +38,13 @@ type SearchState =
 
 interface PdfViewerProps {
   file: CompendiumFile
+  /** If set, the viewer jumps to this 1-based page as soon as the PDF loads. */
+  initialPage?: number | null
+  /** Called after initialPage has been honoured so the parent can clear it. */
+  onConsumedInitialPage?: () => void
 }
 
-export function CompendiumPdfViewer({ file }: PdfViewerProps) {
+export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }: PdfViewerProps) {
   const { t } = useTranslation()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const renderTaskRef = useRef<{ cancel: () => void } | null>(null)
@@ -111,6 +115,10 @@ export function CompendiumPdfViewer({ file }: PdfViewerProps) {
         const outline = await extractOutline(doc)
         setLoaded({ doc, numPages: doc.numPages, outline })
         setLoading(false)
+        if (initialPage && initialPage >= 1 && initialPage <= doc.numPages) {
+          setPageNum(initialPage)
+          onConsumedInitialPage?.()
+        }
       } catch (err) {
         if (!cancelled) {
           setError((err as Error).message || String(err))
