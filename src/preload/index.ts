@@ -15,6 +15,7 @@ import type {
   PlayerDrawingState,
   PlayerWallState,
   CompendiumFile,
+  TokenVariant,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -120,6 +121,16 @@ export const dmApi = {
     ipcRenderer.invoke(IPC.COMPENDIUM_IMPORT),
   openCompendiumFolder: (): Promise<void> =>
     ipcRenderer.invoke(IPC.COMPENDIUM_OPEN_FOLDER),
+
+  // Token variants (artwork per creature slug)
+  listTokenVariants: (slug: string): Promise<TokenVariant[]> =>
+    ipcRenderer.invoke(IPC.TOKEN_VARIANTS_LIST, slug),
+  importTokenVariants: (slug: string): Promise<
+    | { success: true; paths: string[] }
+    | { success: false; error: string }
+  > => ipcRenderer.invoke(IPC.TOKEN_VARIANTS_IMPORT, slug),
+  openTokenVariantsFolder: (slug?: string): Promise<void> =>
+    ipcRenderer.invoke(IPC.TOKEN_VARIANTS_OPEN_FOLDER, slug),
 
   // Native application menu bridge
   setMenuLanguage: (lang: 'de' | 'en') =>

@@ -44,7 +44,69 @@ const ALLOWED_CONTEXT_MENU_ACTIONS = new Set<string>([
   'add-gm-pin', 'clear-drawings',
 ])
 
+// ── Token variants (artwork per creature slug) ──────────────────────────
+// Bundled art ships via electron-builder's extraResources rule. On first run
+// we copy it into the user folder so the existing getImageAsBase64 reader,
+// which is userData-scoped, can serve it without special-casing bundled
+// paths. The copy is idempotent: existing files are never overwritten (so
+// user-added variants with the same name win) and user deletions stay
+// deleted across restarts.
+function getTokenVariantDirs(): { bundled: string; user: string } {
+  const resourcesBase = app.isPackaged
+    ? process.resourcesPath
+    : join(app.getAppPath(), 'resources')
+  const bundled = join(resourcesBase, 'token-variants')
+  const userDataPath = getCustomUserDataPath() || app.getPath('userData')
+  const user = join(userDataPath, 'token-variants')
+  if (!existsSync(user)) {
+    try { mkdirSync(user, { recursive: true }) } catch { /* ignore */ }
+  }
+  return { bundled, user }
+}
+
+// Avoid clobbering an existing file by appending " (2)", " (3)", … before
+// the extension until the name is free.
+function uniqueFileName(dir: string, fileName: string): string {
+  if (!existsSync(join(dir, fileName))) return fileName
+  const dot = fileName.lastIndexOf('.')
+  const stem = dot > 0 ? fileName.slice(0, dot) : fileName
+  const ext = dot > 0 ? fileName.slice(dot) : ''
+  for (let i = 2; i < 1000; i++) {
+    const candidate = `${stem} (${i})${ext}`
+    if (!existsSync(join(dir, candidate))) return candidate
+  }
+  return `${stem}-${Date.now()}${ext}`
+}
+
+function ensureTokenVariantsSeeded(): void {
+  const { bundled, user } = getTokenVariantDirs()
+  if (!existsSync(bundled)) return
+  try {
+    for (const slugDir of readdirSync(bundled, { withFileTypes: true })) {
+      if (!slugDir.isDirectory()) continue
+      const src = join(bundled, slugDir.name)
+      const dst = join(user, slugDir.name)
+      if (!existsSync(dst)) mkdirSync(dst, { recursive: true })
+      for (const file of readdirSync(src)) {
+        const srcPath = join(src, file)
+        const dstPath = join(dst, file)
+        if (existsSync(dstPath)) continue
+        try {
+          // COPYFILE_EXCL doubles as a guard if two processes race.
+          copyFileSync(srcPath, dstPath, 1 /* COPYFILE_EXCL */)
+        } catch {
+          // File got created between our existsSync and copyFileSync — fine.
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('[AppHandlers] token variants seed failed:', err)
+  }
+}
+
 export function registerAppHandlers(): void {
+  ensureTokenVariantsSeeded()
+
   // Rebuild the application menu in the given language.
   ipcMain.handle(IPC.SET_MENU_LANGUAGE, (_event, lang: MenuLanguage) => {
     setMenuLanguage(lang)
@@ -577,6 +639,84 @@ export function registerAppHandlers(): void {
     const { user } = getCompendiumDirs()
     const err = await shell.openPath(user)
     if (err) throw new Error(`Open compendium folder failed: ${err}`)
+  })
+
+  // ── Token variants (per-slug artwork) ───────────────────────────────
+  // Slug validation guards against a malicious renderer sending paths
+  // with traversal segments. Only alphanumerics + single dashes allowed.
+  const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/
+  const VARIANT_EXTS = ['.webp', '.png', '.jpg', '.jpeg']
+
+  ipcMain.handle(IPC.TOKEN_VARIANTS_LIST, (_event, slug: string) => {
+    if (typeof slug !== 'string' || !SLUG_RE.test(slug)) return []
+    const { user } = getTokenVariantDirs()
+    const dir = join(user, slug)
+    if (!existsSync(dir)) return []
+    try {
+      return readdirSync(dir)
+        .filter((n) => VARIANT_EXTS.some((e) => n.toLowerCase().endsWith(e)))
+        .map((name) => {
+          const full = join(dir, name)
+          let size = 0
+          try { size = statSync(full).size } catch { /* ignore */ }
+          // Files with 2-digit numeric prefix (01.webp … 05.webp) are the
+          // bundled seed — everything else is user-added. This lets us
+          // show a subtle badge in the UI without tracking sources in DB.
+          const source = /^\d{2}\.[a-z]+$/i.test(name) ? 'bundled' : 'user'
+          // Path is userData-relative so the existing getImageAsBase64
+          // reader can serve it with the same guard as any other asset.
+          const relPath = `token-variants/${slug}/${name}`
+          return { path: relPath, name, size, source }
+        })
+        .sort((a, b) => a.name.localeCompare(b.name))
+    } catch {
+      return []
+    }
+  })
+
+  ipcMain.handle(IPC.TOKEN_VARIANTS_IMPORT, async (event, slug: string) => {
+    if (typeof slug !== 'string' || !SLUG_RE.test(slug)) {
+      return { success: false, error: 'invalid-slug' as const }
+    }
+    const win = BrowserWindow.fromWebContents(event.sender)
+    if (!win) return { success: false, error: 'no-window' as const }
+    const { canceled, filePaths } = await dialog.showOpenDialog(win, {
+      title: 'Token-Varianten importieren',
+      properties: ['openFile', 'multiSelections'],
+      filters: [{ name: 'Bilder', extensions: ['webp', 'png', 'jpg', 'jpeg'] }],
+    })
+    if (canceled || filePaths.length === 0) {
+      return { success: false, error: 'cancelled' as const }
+    }
+    const { user } = getTokenVariantDirs()
+    const dir = join(user, slug)
+    if (!existsSync(dir)) mkdirSync(dir, { recursive: true })
+    const copied: string[] = []
+    for (const src of filePaths) {
+      const fileName = src.split(/[\\/]/).pop() || 'token.webp'
+      const finalName = uniqueFileName(dir, fileName)
+      const dest = join(dir, finalName)
+      try {
+        copyFileSync(src, dest)
+        copied.push(`token-variants/${slug}/${finalName}`)
+      } catch (err) {
+        return { success: false, error: (err as Error).message }
+      }
+    }
+    return { success: true, paths: copied }
+  })
+
+  ipcMain.handle(IPC.TOKEN_VARIANTS_OPEN_FOLDER, async (_event, slug?: string) => {
+    const { shell } = await import('electron')
+    const { user } = getTokenVariantDirs()
+    let target = user
+    if (typeof slug === 'string' && SLUG_RE.test(slug)) {
+      const sub = join(user, slug)
+      if (!existsSync(sub)) mkdirSync(sub, { recursive: true })
+      target = sub
+    }
+    const err = await shell.openPath(target)
+    if (err) throw new Error(`Open token-variants folder failed: ${err}`)
   })
 
   // Get Electron's userData path

@@ -86,7 +86,24 @@ export const IPC = {
   COMPENDIUM_READ: 'compendium:read',
   COMPENDIUM_IMPORT: 'compendium:import',
   COMPENDIUM_OPEN_FOLDER: 'compendium:open-folder',
+
+  // Token variants: bundled + user-supplied artwork per creature slug.
+  TOKEN_VARIANTS_LIST: 'token-variants:list',
+  TOKEN_VARIANTS_IMPORT: 'token-variants:import',
+  TOKEN_VARIANTS_OPEN_FOLDER: 'token-variants:open-folder',
 } as const
+
+export interface TokenVariant {
+  /** Path relative to the user-data folder — usable directly with the
+   *  existing getImageAsBase64 loader. */
+  path: string
+  /** File name with extension for display. */
+  name: string
+  /** Size in bytes. */
+  size: number
+  /** Distinguishes bundled seed art from user-added files. */
+  source: 'bundled' | 'user'
+}
 
 export interface CompendiumFile {
   /** File name with extension, e.g. "srd-de-5.2.1.pdf" */
