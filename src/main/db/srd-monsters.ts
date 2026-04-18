@@ -314,7 +314,308 @@ export const SRD_MONSTERS: SrdMonster[] = [
       traits: ['Scharfe Sinne', 'Vielseitig'],
     },
   },
+  // ── Beasts ──────────────────────────────────────────────────────────
+  {
+    name_de: 'Braunbär',
+    name_en: 'Brown Bear',
+    slug: 'brown-bear',
+    size: 2, hp_max: 34, ac: 11, speed: 40, cr: '1',
+    creature_type: 'beast', faction: 'enemy', marker_color: '#b45309',
+    stat_block: {
+      str: 19, dex: 10, con: 16, int: 2, wis: 13, cha: 7,
+      attacks: [
+        { name: 'Biss', bonus: '+5', damage: '8 (1W8+4) Stich' },
+        { name: 'Klauen', bonus: '+5', damage: '11 (2W6+4) Hieb' },
+      ],
+      traits: ['Multiangriff: 1 Biss + 1 Klaue', 'Scharfer Geruch', 'Klettern 30 ft'],
+    },
+  },
+  {
+    name_de: 'Wildschwein',
+    name_en: 'Boar',
+    slug: 'boar',
+    size: 1, hp_max: 11, ac: 11, speed: 40, cr: '1/4',
+    creature_type: 'beast', faction: 'enemy', marker_color: '#ef4444',
+    stat_block: {
+      str: 13, dex: 11, con: 12, int: 2, wis: 9, cha: 5,
+      attacks: [
+        { name: 'Hauerangriff', bonus: '+3', damage: '4 (1W6+1) Hieb' },
+      ],
+      traits: ['Sturmangriff: 20 ft auf Feind zu + Hauerangriff · STR RW DC 11 oder liegend, +3 (1W6) Schaden', 'Unbeugsam (1/Tag): bei 0 HP → 1 HP'],
+    },
+  },
+  {
+    name_de: 'Reitpferd',
+    name_en: 'Riding Horse',
+    slug: 'riding-horse',
+    size: 2, hp_max: 13, ac: 10, speed: 60, cr: '1/4',
+    creature_type: 'beast', faction: 'friendly', marker_color: '#3b82f6',
+    stat_block: {
+      str: 16, dex: 10, con: 12, int: 2, wis: 11, cha: 7,
+      attacks: [
+        { name: 'Hufe', bonus: '+2', damage: '5 (1W6+3) Wucht' },
+      ],
+      traits: ['Geschwindigkeit 60 ft'],
+    },
+  },
+  {
+    name_de: 'Pony',
+    name_en: 'Pony',
+    slug: 'pony',
+    size: 1, hp_max: 11, ac: 10, speed: 40, cr: '1/8',
+    creature_type: 'beast', faction: 'friendly', marker_color: '#3b82f6',
+    stat_block: {
+      str: 15, dex: 10, con: 13, int: 2, wis: 11, cha: 7,
+      attacks: [
+        { name: 'Hufe', bonus: '+2', damage: '4 (1W6+2) Wucht' },
+      ],
+      traits: [],
+    },
+  },
+  {
+    name_de: 'Maultier',
+    name_en: 'Mule',
+    slug: 'mule',
+    size: 1, hp_max: 11, ac: 10, speed: 40, cr: '1/8',
+    creature_type: 'beast', faction: 'friendly', marker_color: '#3b82f6',
+    stat_block: {
+      str: 14, dex: 10, con: 13, int: 2, wis: 10, cha: 5,
+      attacks: [
+        { name: 'Hufe', bonus: '+2', damage: '4 (1W6+2) Wucht' },
+      ],
+      traits: ['Trittsicher: Vorteil auf STR/GES-RW gegen Umwerfen'],
+    },
+  },
+
+  // ── Swarms ──────────────────────────────────────────────────────────
+  {
+    name_de: 'Rattenschwarm',
+    name_en: 'Swarm of Rats',
+    slug: 'swarm-of-rats',
+    size: 1, hp_max: 24, ac: 10, speed: 30, cr: '1/4',
+    creature_type: 'swarm', faction: 'enemy', marker_color: '#ef4444',
+    stat_block: {
+      str: 9, dex: 11, con: 9, int: 2, wis: 10, cha: 3,
+      attacks: [
+        { name: 'Bisse', bonus: '+2', damage: '7 (2W6) Stich · halbe HP: 2 (1W6)' },
+      ],
+      traits: ['Schwarm: Raum von 1 Feld · Tiny-Ratten', 'Resistent Wucht/Stich/Hieb', 'Scharfer Geruch'],
+    },
+  },
+  {
+    name_de: 'Fledermausschwarm',
+    name_en: 'Swarm of Bats',
+    slug: 'swarm-of-bats',
+    size: 1, hp_max: 22, ac: 12, speed: 0, cr: '1/4',
+    creature_type: 'swarm', faction: 'enemy', marker_color: '#ef4444',
+    stat_block: {
+      str: 5, dex: 15, con: 10, int: 2, wis: 12, cha: 4,
+      attacks: [
+        { name: 'Bisse', bonus: '+4', damage: '5 (2W4) Stich · halbe HP: 2 (1W4)' },
+      ],
+      traits: ['Flug 30 ft', 'Echolot · Blindsicht 60 ft', 'Resistent Wucht/Stich/Hieb'],
+    },
+  },
+  {
+    name_de: 'Insektenschwarm',
+    name_en: 'Swarm of Insects',
+    slug: 'swarm-of-insects',
+    size: 1, hp_max: 22, ac: 12, speed: 20, cr: '1/2',
+    creature_type: 'swarm', faction: 'enemy', marker_color: '#ef4444',
+    stat_block: {
+      str: 3, dex: 13, con: 10, int: 1, wis: 7, cha: 1,
+      attacks: [
+        { name: 'Bisse', bonus: '+3', damage: '10 (4W4) Stich · halbe HP: 5 (2W4)' },
+      ],
+      traits: ['Klettern 20 ft', 'Blindsicht 10 ft', 'Resistent Wucht/Stich/Hieb'],
+    },
+  },
+
+  // ── Fiends (SRD demons + devils, low CR) ───────────────────────────
+  {
+    name_de: 'Imp',
+    name_en: 'Imp',
+    slug: 'imp',
+    size: 1, hp_max: 10, ac: 13, speed: 20, cr: '1',
+    creature_type: 'fiend', faction: 'enemy', marker_color: '#991b1b',
+    stat_block: {
+      str: 6, dex: 17, con: 13, int: 11, wis: 12, cha: 14,
+      attacks: [
+        { name: 'Stich', bonus: '+5', damage: '5 (1W4+3) Stich + 10 (3W6) Gift · KON RW DC 11' },
+      ],
+      traits: ['Gestaltwandel: Ratte/Rabe/Spinne', 'Unsichtbarkeit nach Belieben', 'Magieresistenz', 'Teufelssicht 120 ft'],
+    },
+  },
+  {
+    name_de: 'Quasit',
+    name_en: 'Quasit',
+    slug: 'quasit',
+    size: 1, hp_max: 7, ac: 13, speed: 40, cr: '1',
+    creature_type: 'fiend', faction: 'enemy', marker_color: '#991b1b',
+    stat_block: {
+      str: 5, dex: 17, con: 10, int: 7, wis: 10, cha: 10,
+      attacks: [
+        { name: 'Klauen', bonus: '+4', damage: '5 (1W4+3) Stich + 5 (2W4) Gift · KON RW DC 10' },
+        { name: 'Erschrecken (1/Tag)', bonus: '—', damage: '20 ft · WIS RW DC 10 oder verängstigt 1 min' },
+      ],
+      traits: ['Gestaltwandel: Fledermaus/Tausendfüßer/Kröte', 'Unsichtbarkeit nach Belieben', 'Magieresistenz'],
+    },
+  },
+  {
+    name_de: 'Dretch',
+    name_en: 'Dretch',
+    slug: 'dretch',
+    size: 1, hp_max: 18, ac: 11, speed: 20, cr: '1/4',
+    creature_type: 'fiend', faction: 'enemy', marker_color: '#991b1b',
+    stat_block: {
+      str: 11, dex: 11, con: 12, int: 5, wis: 8, cha: 3,
+      attacks: [
+        { name: 'Biss', bonus: '+2', damage: '3 (1W6) Stich' },
+        { name: 'Klauen', bonus: '+2', damage: '5 (2W4) Hieb' },
+      ],
+      traits: ['Multiangriff: Biss + Klauen', 'Stinkende Wolke (5-6): 10 ft · KON RW DC 11 oder nur Aktion oder Bonusaktion 1 Rd'],
+    },
+  },
+
+  // ── Elementals ──────────────────────────────────────────────────────
+  {
+    name_de: 'Feuerelementar',
+    name_en: 'Fire Elemental',
+    slug: 'fire-elemental',
+    size: 2, hp_max: 102, ac: 13, speed: 50, cr: '5',
+    creature_type: 'elemental', faction: 'enemy', marker_color: '#f59e0b',
+    stat_block: {
+      str: 10, dex: 17, con: 16, int: 6, wis: 10, cha: 7,
+      attacks: [
+        { name: 'Berührung', bonus: '+6', damage: '10 (2W6+3) Feuer · entzündet brennbares' },
+      ],
+      traits: ['Multiangriff: 2 Berührungen', 'Feuerform: kann durch 1-ft-Räume, entzündet Kreaturen am Ende eigener Züge', 'Beleuchtung 30 ft hell + 30 ft schwach', 'Wasseranfälligkeit: 1 Kälte je 5 Gallonen'],
+    },
+  },
+  {
+    name_de: 'Wasserelementar',
+    name_en: 'Water Elemental',
+    slug: 'water-elemental',
+    size: 2, hp_max: 114, ac: 14, speed: 30, cr: '5',
+    creature_type: 'elemental', faction: 'enemy', marker_color: '#3b82f6',
+    stat_block: {
+      str: 18, dex: 14, con: 18, int: 5, wis: 10, cha: 8,
+      attacks: [
+        { name: 'Schlagangriff', bonus: '+7', damage: '13 (2W8+4) Wucht' },
+        { name: 'Umspülen (4-6)', bonus: '—', damage: 'Kreatur in eigenem Feld · STR RW DC 15 oder festgesetzt + 13 (2W8+4) Wucht/Rd' },
+      ],
+      traits: ['Multiangriff: 2 Schläge', 'Schwimmen 90 ft', 'Wasserform: kann durch 1-ft-Räume', 'Freeze-Anfälligkeit: Geschwindigkeit 0 wenn Kälteschaden'],
+    },
+  },
+  {
+    name_de: 'Erdelementar',
+    name_en: 'Earth Elemental',
+    slug: 'earth-elemental',
+    size: 2, hp_max: 126, ac: 17, speed: 30, cr: '5',
+    creature_type: 'elemental', faction: 'enemy', marker_color: '#78350f',
+    stat_block: {
+      str: 20, dex: 8, con: 20, int: 5, wis: 10, cha: 5,
+      attacks: [
+        { name: 'Schlagangriff', bonus: '+8', damage: '14 (2W8+5) Wucht' },
+      ],
+      traits: ['Multiangriff: 2 Schläge', 'Graben 30 ft', 'Erdgleiten: bewegt sich durch nicht-magischen Stein/Erde'],
+    },
+  },
+  {
+    name_de: 'Luftelementar',
+    name_en: 'Air Elemental',
+    slug: 'air-elemental',
+    size: 2, hp_max: 90, ac: 15, speed: 0, cr: '5',
+    creature_type: 'elemental', faction: 'enemy', marker_color: '#94a3b8',
+    stat_block: {
+      str: 14, dex: 20, con: 14, int: 6, wis: 10, cha: 6,
+      attacks: [
+        { name: 'Schlagangriff', bonus: '+8', damage: '14 (3W8+5) Wucht' },
+        { name: 'Wirbelsturm (4-6)', bonus: '—', damage: 'Bewegt durch Feinde · STR RW DC 13 oder 15 ft geschoben + liegend' },
+      ],
+      traits: ['Flug 90 ft (hover)', 'Multiangriff: 2 Schläge', 'Luftform: kann durch 1-ft-Räume'],
+    },
+  },
+
+  // ── Named humanoid archetypes (mid-tier) ─────────────────────────
+  {
+    name_de: 'Priester',
+    name_en: 'Priest',
+    slug: 'priest',
+    size: 1, hp_max: 27, ac: 13, speed: 30, cr: '2',
+    creature_type: 'humanoid', faction: 'neutral', marker_color: '#f59e0b',
+    stat_block: {
+      str: 10, dex: 10, con: 12, int: 13, wis: 16, cha: 13,
+      attacks: [
+        { name: 'Streitkolben', bonus: '+2', damage: '3 (1W6) Wucht' },
+        { name: 'Göttliche Erhabenheit', bonus: '—', damage: 'Bonusaktion: +10 (3W6) strahlend oder nekrotisch beim nächsten Nahkampftreffer' },
+      ],
+      traits: ['Zauberwirker: Kleriker Stufe 5 (WIS, SG 13) · Spirituelle Waffe, Heilwort, Segen, Ruhige Emotionen, Heilige Flamme'],
+    },
+  },
+  {
+    name_de: 'Berserker',
+    name_en: 'Berserker',
+    slug: 'berserker',
+    size: 1, hp_max: 67, ac: 13, speed: 30, cr: '2',
+    creature_type: 'humanoid', faction: 'enemy', marker_color: '#ef4444',
+    stat_block: {
+      str: 16, dex: 12, con: 17, int: 9, wis: 11, cha: 9,
+      attacks: [
+        { name: 'Großaxt', bonus: '+5', damage: '9 (1W12+3) Hieb' },
+      ],
+      traits: ['Hemmungslos: Vorteil auf Nahkampfangriffe, Angriffe gegen ihn auch mit Vorteil bis zum nächsten Zug', 'Fellrüstung (AC 13)'],
+    },
+  },
+  {
+    name_de: 'Ritter',
+    name_en: 'Knight',
+    slug: 'knight',
+    size: 1, hp_max: 52, ac: 18, speed: 30, cr: '3',
+    creature_type: 'humanoid', faction: 'friendly', marker_color: '#3b82f6',
+    stat_block: {
+      str: 16, dex: 11, con: 14, int: 11, wis: 11, cha: 15,
+      attacks: [
+        { name: 'Großschwert', bonus: '+5', damage: '10 (2W6+3) Hieb' },
+        { name: 'Schwere Armbrust', bonus: '+2', damage: '5 (1W10) Stich · 100/400 ft' },
+        { name: 'Lanze (beritten)', bonus: '+5', damage: '9 (1W12+3) Stich' },
+      ],
+      traits: ['Multiangriff: 2 Großschwerthiebe', 'Tapfer: Vorteil auf RW gegen Verängstigung', 'Führung (1/Rast): bis zu 6 Verbündete in 30 ft +1W4 auf eigene Angriffswürfe/RW'],
+    },
+  },
+  {
+    name_de: 'Magier',
+    name_en: 'Mage',
+    slug: 'mage',
+    size: 1, hp_max: 40, ac: 12, speed: 30, cr: '6',
+    creature_type: 'humanoid', faction: 'enemy', marker_color: '#a78bfa',
+    stat_block: {
+      str: 9, dex: 14, con: 11, int: 17, wis: 12, cha: 11,
+      attacks: [
+        { name: 'Dolch', bonus: '+5', damage: '4 (1W4+2) Stich' },
+        { name: 'Zauberwirker: Feuerball', bonus: '—', damage: '8 Grad Magier (INT, SG 14, +6 Angriff) · Feuerball, Eisstrahl, Blitzstrahl, Magisches Geschoss' },
+      ],
+      traits: ['Magierrüstung (AC 15 aktiv)', 'Unsichtbarkeit', 'Verhaltenes Schweben', 'Gegenzauber als Reaktion'],
+    },
+  },
+
   // ── Bosses ──────────────────────────────────────────────────────────
+  {
+    name_de: 'Junger Schwarzer Drache',
+    name_en: 'Young Black Dragon',
+    slug: 'young-black-dragon',
+    size: 2, hp_max: 127, ac: 18, speed: 40, cr: '7',
+    creature_type: 'dragon', faction: 'enemy', marker_color: '#1f2937',
+    stat_block: {
+      str: 19, dex: 14, con: 17, int: 12, wis: 11, cha: 15,
+      attacks: [
+        { name: 'Biss', bonus: '+7', damage: '15 (2W10+4) Stich + 4 (1W8) Säure' },
+        { name: 'Klauen', bonus: '+7', damage: '11 (2W6+4) Hieb' },
+        { name: 'Säureatem (5-6)', bonus: '—', damage: '49 (11W8) Säure · 30 ft Linie, GES RW DC 14 halbiert' },
+      ],
+      traits: ['Multiangriff: Biss + 2 Klauen', 'Immun Säure', 'Amphibisch', 'Flug 80 ft, Schwimmen 40 ft'],
+    },
+  },
   {
     name_de: 'Junger Roter Drache',
     name_en: 'Young Red Dragon',
