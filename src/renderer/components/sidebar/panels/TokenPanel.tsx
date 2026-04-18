@@ -7,6 +7,7 @@ import { useImageUrl } from '../../../hooks/useImageUrl'
 import { invalidateImageCache } from '../../../hooks/useImage'
 import { invalidateImageUrlCache } from '../../../hooks/useImageUrl'
 import { EmptyState } from '../../EmptyState'
+import { NumberStepper } from '../../shared/NumberStepper'
 import type { TokenRecord } from '@shared/ipc-types'
 
 const LIGHT_COLORS = [
@@ -465,14 +466,27 @@ export function TokenPanel() {
           <SectionHeader title="Kampf" open={secKampf} onToggle={() => setSecKampf((v) => !v)} />
           {secKampf && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)', paddingBottom: 'var(--sp-2)' }}>
-              {/* HP */}
-              <div style={{ display: 'flex', gap: 'var(--sp-2)' }}>
-                <input className="input" type="number" min={0} value={selected.hpCurrent}
-                  onChange={(e) => handleUpdate(selected.id, { hpCurrent: Math.max(0, parseInt(e.target.value) || 0) })}
-                  placeholder="HP aktuell" />
-                <input className="input" type="number" min={0} value={selected.hpMax}
-                  onChange={(e) => handleUpdate(selected.id, { hpMax: Math.max(0, parseInt(e.target.value) || 0) })}
-                  placeholder="HP max" />
+              {/* HP — NumberStepper gives ±1 / Shift±5 / wheel / hold-repeat
+                  which is much friendlier during combat than plain type-and-enter */}
+              <div style={{ display: 'flex', gap: 'var(--sp-2)', alignItems: 'center' }}>
+                <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 20 }}>HP</label>
+                <NumberStepper
+                  value={selected.hpCurrent}
+                  onChange={(v) => handleUpdate(selected.id, { hpCurrent: Math.max(0, v) })}
+                  min={0}
+                  ariaLabel="HP aktuell"
+                  width={110}
+                  size="sm"
+                />
+                <span style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', fontSize: 11 }}>/</span>
+                <NumberStepper
+                  value={selected.hpMax}
+                  onChange={(v) => handleUpdate(selected.id, { hpMax: Math.max(0, v) })}
+                  min={0}
+                  ariaLabel="HP max"
+                  width={110}
+                  size="sm"
+                />
               </div>
               {/* Size presets (D&D 5e grid squares) */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-1)' }}>
@@ -507,11 +521,16 @@ export function TokenPanel() {
               </div>
               {/* AC + visibility */}
               <div style={{ display: 'flex', gap: 'var(--sp-2)', alignItems: 'center' }}>
-                <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>RK</label>
-                <input className="input" type="number"
-                  value={selected.ac ?? ''}
-                  onChange={(e) => handleUpdate(selected.id, { ac: e.target.value ? parseInt(e.target.value) : null })}
-                  placeholder="–" style={{ width: 52 }} />
+                <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 20 }}>RK</label>
+                <NumberStepper
+                  value={selected.ac ?? 10}
+                  onChange={(v) => handleUpdate(selected.id, { ac: v })}
+                  min={0}
+                  max={40}
+                  ariaLabel="Rüstungsklasse"
+                  width={90}
+                  size="sm"
+                />
                 <button
                   className="btn btn-ghost"
                   title={selected.visibleToPlayers ? 'Für Spieler sichtbar' : 'Für Spieler unsichtbar'}

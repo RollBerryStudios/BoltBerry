@@ -379,7 +379,15 @@
     "importTooltip": "Kampagne importieren (ZIP)",
     "exportTooltip": "Kampagne exportieren (ZIP)",
     "backupTooltip": "Schnell-Backup → ~/Documents/BoltBerry-Backups/",
-    "savedAt": "✓ Gespeichert · {{time}}"
+    "savedAt": "✓ Gespeichert · {{time}}",
+    "overlayActive": "✦ Overlay aktiv",
+    "overlayHint": "Aktives Overlay — klicken zum Verwalten",
+    "weatherHint": "Aktives Wetter — klicken zum Verwalten",
+    "weatherRain": "🌧 Regen",
+    "weatherSnow": "❄ Schnee",
+    "weatherFog": "🌫 Nebel",
+    "weatherWind": "💨 Wind",
+    "tokenCount": "{{count}} Token"
   },
   "sidebar": {
     "left": {

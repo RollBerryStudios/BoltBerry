@@ -159,6 +159,64 @@ async function resolveImageSrc(path: string): Promise<string> {
   return data
 }
 
+/**
+ * Find up to `maxPeaks` local maxima in `signal[minLag..maxLag]`,
+ * sorted by descending value. A "peak" is any index strictly greater
+ * than its immediate neighbours AND separated from previously-found
+ * peaks by at least `separation` samples so we don't pick out the
+ * same hump twice.
+ */
+function findTopPeaks(
+  signal: Float64Array,
+  minLag: number,
+  maxLag: number,
+  maxPeaks: number,
+  separation: number,
+): Array<{ lag: number; value: number }> {
+  const peaks: Array<{ lag: number; value: number }> = []
+  for (let x = minLag + 1; x < Math.min(maxLag, signal.length - 1); x++) {
+    const v = signal[x]
+    if (v > signal[x - 1] && v > signal[x + 1] && v > 0) {
+      peaks.push({ lag: x, value: v })
+    }
+  }
+  peaks.sort((a, b) => b.value - a.value)
+  const picked: Array<{ lag: number; value: number }> = []
+  for (const p of peaks) {
+    if (picked.every((q) => Math.abs(q.lag - p.lag) >= separation)) {
+      picked.push(p)
+      if (picked.length >= maxPeaks) break
+    }
+  }
+  return picked
+}
+
+/**
+ * Score a candidate lag by how well its harmonics (2×, 3×) also show
+ * up in the autocorrelation. A genuine grid repeats at every multiple
+ * of its cell size, so real peaks come with friends; spurious ones
+ * don't. Returns a bonus in [0, 1].
+ */
+function harmonicBonus(signal: Float64Array, lag: number, baseValue: number): number {
+  if (baseValue <= 0) return 0
+  let sum = 0
+  let counted = 0
+  for (const k of [2, 3]) {
+    const idx = lag * k
+    if (idx >= signal.length - 1) break
+    // Sample a small ±2 window so we don't miss the harmonic if it
+    // drifts by a pixel due to rounding.
+    let peak = 0
+    for (let d = -2; d <= 2; d++) {
+      const v = signal[idx + d] ?? 0
+      if (v > peak) peak = v
+    }
+    sum += Math.min(1, peak / baseValue)
+    counted++
+  }
+  return counted > 0 ? sum / counted : 0
+}
+
 export function detectGrid(imagePath: string): Promise<GridDetectResult> {
   return new Promise((resolve, reject) => {
     resolveImageSrc(imagePath).then((src) => {
@@ -180,6 +238,14 @@ export function detectGrid(imagePath: string): Promise<GridDetectResult> {
       const gray = toGrayscale(imageData.data, w, h)
       const { mag, dir } = sobelEdge(gray, w, h)
 
+      // Adaptive edge threshold — use 20% of the image's peak magnitude
+      // but not less than 8. Soft / anti-aliased grid lines on bright
+      // maps used to disappear under the old fixed `> 10` cut-off.
+      let maxMag = 0
+      for (let i = 0; i < mag.length; i++) if (mag[i] > maxMag) maxMag = mag[i]
+      const edgeThreshold = Math.max(8, maxMag * 0.2)
+
+      // Row autocorrelation — horizontal periodicity.
       const rowAutocorr = new Float64Array(w)
       let rowsUsed = 0
       for (let y = 1; y < h - 1; y++) {
@@ -188,7 +254,7 @@ export function detectGrid(imagePath: string): Promise<GridDetectResult> {
         for (let x = 0; x < w; x++) {
           const v = mag[y * w + x]
           row[x] = v
-          if (v > 10) hasEdge = true
+          if (v > edgeThreshold) hasEdge = true
         }
         if (!hasEdge) continue
         const ac = autocorrelation(row)
@@ -196,34 +262,80 @@ export function detectGrid(imagePath: string): Promise<GridDetectResult> {
         rowsUsed++
       }
 
-      if (rowsUsed === 0) {
+      // Column autocorrelation — vertical periodicity. Averaging both
+      // axes doubles the signal on true grids and dampens anisotropic
+      // artefacts (e.g. long horizontal patterns from paper grain).
+      const colAutocorr = new Float64Array(h)
+      let colsUsed = 0
+      for (let x = 1; x < w - 1; x++) {
+        const col = new Float64Array(h)
+        let hasEdge = false
+        for (let y = 0; y < h; y++) {
+          const v = mag[y * w + x]
+          col[y] = v
+          if (v > edgeThreshold) hasEdge = true
+        }
+        if (!hasEdge) continue
+        const ac = autocorrelation(col)
+        for (let y = 0; y < h; y++) colAutocorr[y] += ac[y]
+        colsUsed++
+      }
+
+      if (rowsUsed === 0 && colsUsed === 0) {
         resolve({ gridSize: 0, gridType: 'none', confidence: 0 })
         return
       }
+      if (rowsUsed > 0) for (let x = 0; x < w; x++) rowAutocorr[x] /= rowsUsed
+      if (colsUsed > 0) for (let y = 0; y < h; y++) colAutocorr[y] /= colsUsed
 
-      for (let x = 0; x < w; x++) rowAutocorr[x] /= rowsUsed
+      // Combined autocorrelation — length is the shorter of the two
+      // axes; add values where both exist, else use whichever is
+      // available.
+      const combLen = Math.min(
+        rowsUsed > 0 ? w : Infinity,
+        colsUsed > 0 ? h : Infinity,
+      )
+      const combined = new Float64Array(combLen)
+      for (let i = 0; i < combLen; i++) {
+        const r = rowsUsed > 0 ? rowAutocorr[i] : 0
+        const c = colsUsed > 0 ? colAutocorr[i] : 0
+        combined[i] = (r + c) / ((rowsUsed > 0 ? 1 : 0) + (colsUsed > 0 ? 1 : 0))
+      }
 
-      const zeroLag = rowAutocorr[0]
+      const zeroLag = combined[0]
       if (zeroLag <= 0) {
         resolve({ gridSize: 0, gridType: 'none', confidence: 0 })
         return
       }
 
+      // Top-3 candidate peaks, pick the best by base-strength × (1 + 0.5 ×
+      // harmonic-bonus). A peak with strong harmonics at 2L/3L wins over
+      // a slightly stronger one-off peak — that's the signature of a
+      // real grid vs. a single repeating feature.
       const minLag = 6
-      let bestLag = 0
-      let bestVal = 0
-      for (let x = minLag; x < w / 2; x++) {
-        if (rowAutocorr[x] > bestVal) {
-          bestVal = rowAutocorr[x]
-          bestLag = x
-        }
+      const maxLag = Math.floor(combLen / 2)
+      const candidates = findTopPeaks(combined, minLag, maxLag, 5, Math.max(4, Math.floor(minLag / 2)))
+
+      if (candidates.length === 0) {
+        resolve({ gridSize: 0, gridType: 'none', confidence: 0 })
+        return
+      }
+
+      let best = { lag: 0, value: 0, score: 0 }
+      for (const c of candidates) {
+        const harmonic = harmonicBonus(combined, c.lag, c.value)
+        const score = (c.value / zeroLag) * (1 + 0.5 * harmonic)
+        if (score > best.score) best = { lag: c.lag, value: c.value, score }
       }
 
       const isHex = detectHexGrid(dir, mag, w, h)
-      const confidence = Math.min(bestVal / zeroLag, 1)
-      const gridSize = Math.round(bestLag * downsample)
+      // Base confidence = normalised peak height; the harmonic-weighted
+      // score already factored in, so surface the stronger number so the
+      // caller's threshold is meaningful.
+      const confidence = Math.min(best.score, 1)
+      const gridSize = Math.round(best.lag * downsample)
 
-      if (confidence < 0.15 || bestLag === 0) {
+      if (confidence < 0.15 || best.lag === 0) {
         resolve({ gridSize: 0, gridType: 'none', confidence: 0 })
         return
       }

@@ -12,6 +12,7 @@ import { detectGrid } from '../../utils/gridDetect'
 import { detectMargins } from '../../utils/autoCrop'
 import { showToast } from '../shared/Toast'
 import { formatError } from '../../utils/formatError'
+import { NumberStepper } from '../shared/NumberStepper'
 import type { MapRecord } from '@shared/ipc-types'
 
 export function LeftSidebar() {
@@ -241,6 +242,31 @@ export function LeftSidebar() {
     }
   }
 
+  // Partial patch for the new style-only grid fields (v32): visibility,
+  // thickness, colour. Kept separate from handleGridChange so we don't
+  // touch the geometry (type/size/offset/fpu) unless the caller asked for
+  // it. Persists immediately and re-syncs the player window.
+  async function handleGridStylePatch(patch: Partial<Pick<MapRecord, 'gridVisible' | 'gridThickness' | 'gridColor'>>) {
+    if (!activeMapId || !window.electronAPI) return
+    try {
+      const sets: string[] = []
+      const vals: Array<number | string> = []
+      if (patch.gridVisible !== undefined) { sets.push('grid_visible = ?'); vals.push(patch.gridVisible ? 1 : 0) }
+      if (patch.gridThickness !== undefined) { sets.push('grid_thickness = ?'); vals.push(patch.gridThickness) }
+      if (patch.gridColor !== undefined) { sets.push('grid_color = ?'); vals.push(patch.gridColor) }
+      if (sets.length === 0) return
+      vals.push(activeMapId)
+      await window.electronAPI.dbRun(`UPDATE maps SET ${sets.join(', ')} WHERE id = ?`, vals)
+      const updatedMaps = activeMaps.map((m) =>
+        m.id === activeMapId ? { ...m, ...patch } : m,
+      )
+      useCampaignStore.getState().setActiveMaps(updatedMaps)
+      syncMapStateToPlayer(updatedMaps.find((m) => m.id === activeMapId)!)
+    } catch (err) {
+      console.error('[LeftSidebar] handleGridStylePatch failed:', err)
+    }
+  }
+
   async function handleRotationChange(rot: 0 | 90 | 180 | 270) {
     if (!activeMapId || !window.electronAPI) return
     setRotation(rot)
@@ -399,18 +425,17 @@ export function LeftSidebar() {
                 <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', flexShrink: 0 }}>
                   Feld-px
                 </label>
-                <input
-                  className="input"
-                  type="number"
-                  min={10} max={500}
+                <NumberStepper
                   value={gridSize}
-                  onChange={(e) => {
-                    const v = parseInt(e.target.value)
-                    if (v >= 10 && v <= 500) handleGridChange(gridType, v)
-                  }}
-                  style={{ width: 70 }}
+                  onChange={(v) => handleGridChange(gridType, v)}
+                  min={10}
+                  max={500}
+                  step={1}
+                  bigStep={5}
+                  width={92}
+                  size="sm"
+                  ariaLabel="Raster-Feldgröße in Pixeln"
                 />
-                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>px</span>
                 <button
                   className="btn btn-ghost"
                   style={{ fontSize: 'var(--text-xs)', padding: '2px 6px', marginLeft: 'var(--sp-1)' }}
@@ -517,6 +542,79 @@ export function LeftSidebar() {
                 />
                 <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>px</span>
               </div>
+            )}
+
+            {/* Grid style — visibility / thickness / colour. Hidden when
+                grid type is 'none' since there's no grid to style. */}
+            {gridType !== 'none' && activeMap && (
+              <>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
+                  <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', flexShrink: 0 }}>
+                    Anzeige
+                  </label>
+                  <button
+                    type="button"
+                    className={`btn btn-ghost ${activeMap.gridVisible ? 'btn-active' : ''}`}
+                    style={{ fontSize: 'var(--text-xs)', padding: '3px 10px' }}
+                    onClick={() => handleGridStylePatch({ gridVisible: !activeMap.gridVisible })}
+                    title="Raster ein/aus (G)"
+                  >
+                    {activeMap.gridVisible ? '👁 sichtbar' : '🙈 versteckt'}
+                  </button>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
+                  <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', flexShrink: 0 }}>
+                    Dicke
+                  </label>
+                  <NumberStepper
+                    value={activeMap.gridThickness}
+                    onChange={(v) => handleGridStylePatch({ gridThickness: Math.max(0.25, Math.min(4, v)) })}
+                    min={0.25}
+                    max={4}
+                    step={0.25}
+                    bigStep={0.5}
+                    width={92}
+                    size="sm"
+                    ariaLabel="Rasterlinien-Dicke"
+                  />
+                  <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>×</span>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
+                  <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', flexShrink: 0 }}>
+                    Farbe
+                  </label>
+                  {[
+                    { label: 'Weiß', value: 'rgba(255,255,255,0.34)' },
+                    { label: 'Hell', value: 'rgba(255,255,255,0.6)' },
+                    { label: 'Schwarz', value: 'rgba(0,0,0,0.45)' },
+                    { label: 'Gelb', value: 'rgba(255,198,46,0.55)' },
+                    { label: 'Blau', value: 'rgba(96,165,250,0.55)' },
+                  ].map(({ label, value }) => (
+                    <button
+                      key={value}
+                      type="button"
+                      title={label}
+                      onClick={() => handleGridStylePatch({ gridColor: value })}
+                      style={{
+                        width: 22, height: 22,
+                        borderRadius: '50%',
+                        border: activeMap.gridColor === value
+                          ? '2px solid var(--accent-blue)'
+                          : '2px solid var(--border)',
+                        background: value,
+                        padding: 0,
+                        cursor: 'pointer',
+                        backgroundImage: value.includes('0,0,0')
+                          ? 'linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.15) 75%)'
+                          : undefined,
+                        backgroundSize: '6px 6px',
+                      }}
+                    />
+                  ))}
+                </div>
+              </>
             )}
 
             {/* Rotation — DM view */}

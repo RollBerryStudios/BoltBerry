@@ -60,15 +60,19 @@ export function StatusBar() {
       )}
 
       {overlayActive && (
-        <div className="statusbar-item statusbar-clickable" onClick={() => setFloatingPanel('overlay')} title="Aktives Overlay — klicken zum Verwalten">
-          <span style={{ color: '#a855f7' }}>✦ Overlay aktiv</span>
+        <div className="statusbar-item statusbar-clickable" onClick={() => setFloatingPanel('overlay')} title={t('statusBar.overlayHint')}>
+          <span style={{ color: '#a855f7' }}>{t('statusBar.overlayActive')}</span>
         </div>
       )}
 
       {activeWeather !== 'none' && activeWeather !== '' && (
-        <div className="statusbar-item statusbar-clickable" onClick={() => setFloatingPanel('overlay')} title="Aktives Wetter — klicken zum Verwalten">
+        <div className="statusbar-item statusbar-clickable" onClick={() => setFloatingPanel('overlay')} title={t('statusBar.weatherHint')}>
           <span style={{ color: '#3b82f6' }}>
-            {activeWeather === 'rain' ? '🌧 Regen' : activeWeather === 'snow' ? '❄ Schnee' : activeWeather === 'fog' ? '🌫 Nebel' : activeWeather === 'wind' ? '💨 Wind' : `🌤 ${activeWeather}`}
+            {activeWeather === 'rain'  ? t('statusBar.weatherRain')
+             : activeWeather === 'snow' ? t('statusBar.weatherSnow')
+             : activeWeather === 'fog'  ? t('statusBar.weatherFog')
+             : activeWeather === 'wind' ? t('statusBar.weatherWind')
+             : `🌤 ${activeWeather}`}
           </span>
         </div>
       )}
@@ -87,7 +91,7 @@ export function StatusBar() {
         <div
           className="statusbar-item"
           style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-mono, monospace)' }}
-          title={`${tokenCount} Token`}
+          title={t('statusBar.tokenCount', { count: tokenCount })}
         >
           ⬤ {tokenCount}
         </div>
