@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 25
+export const SCHEMA_VERSION = 26
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -418,6 +418,7 @@ CREATE TABLE IF NOT EXISTS token_templates (
   marker_color     TEXT,
   notes            TEXT,
   stat_block       TEXT,
+  slug             TEXT,
   created_at       TEXT    NOT NULL DEFAULT (datetime('now')),
   UNIQUE(source, name)
 );
@@ -449,6 +450,7 @@ CREATE INDEX IF NOT EXISTS idx_audio_boards_campaign_id ON audio_boards(campaign
 CREATE INDEX IF NOT EXISTS idx_audio_board_slots_board_id ON audio_board_slots(board_id);
 CREATE INDEX IF NOT EXISTS idx_token_templates_category ON token_templates(category);
 CREATE INDEX IF NOT EXISTS idx_token_templates_source ON token_templates(source);
+CREATE INDEX IF NOT EXISTS idx_token_templates_slug ON token_templates(slug);
 `
 
 // Indexes that reference columns added in later migrations (pin_x/pin_y landed
@@ -653,6 +655,7 @@ CREATE TABLE IF NOT EXISTS token_templates (
   marker_color     TEXT,
   notes            TEXT,
   stat_block       TEXT,
+  slug             TEXT,
   created_at       TEXT    NOT NULL DEFAULT (datetime('now')),
   UNIQUE(source, name)
 );
@@ -660,6 +663,16 @@ CREATE INDEX IF NOT EXISTS idx_token_templates_category ON token_templates(categ
 CREATE INDEX IF NOT EXISTS idx_token_templates_source ON token_templates(source);
 
 UPDATE schema_version SET version = 25;
+`
+
+// Migration: v25 → v26 — add token_templates.slug so the renderer can
+// resolve artwork folders (resources/token-variants/<slug>/ → user copy).
+// Backfilled by the seed step, which UPDATEs slug for SRD rows that
+// pre-exist from v25 without one.
+export const MIGRATE_V25_TO_V26 = `
+ALTER TABLE token_templates ADD COLUMN slug TEXT;
+CREATE INDEX IF NOT EXISTS idx_token_templates_slug ON token_templates(slug);
+UPDATE schema_version SET version = 26;
 `
 
 // Use the SCHEMA_VERSION constant directly so there's a single source of truth.

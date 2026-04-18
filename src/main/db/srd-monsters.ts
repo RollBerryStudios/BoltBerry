@@ -12,6 +12,9 @@
 export interface SrdMonster {
   name_de: string
   name_en: string
+  /** Stable identifier for artwork folders (resources/token-variants/<slug>/).
+   *  Matches the too-many-tokens-dnd folder after slugify. null = no art. */
+  slug: string | null
   /** Grid cells the token occupies (square). */
   size: number
   hp_max: number
@@ -35,6 +38,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Goblin',
     name_en: 'Goblin',
+    slug: 'goblin',
     size: 1, hp_max: 7, ac: 15, speed: 30, cr: '1/4',
     creature_type: 'humanoid', faction: 'enemy', marker_color: '#ef4444',
     stat_block: {
@@ -49,6 +53,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Kobold',
     name_en: 'Kobold',
+    slug: 'kobold',
     size: 1, hp_max: 5, ac: 12, speed: 30, cr: '1/8',
     creature_type: 'humanoid', faction: 'enemy', marker_color: '#ef4444',
     stat_block: {
@@ -63,6 +68,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Skelett',
     name_en: 'Skeleton',
+    slug: 'skeleton',
     size: 1, hp_max: 13, ac: 13, speed: 30, cr: '1/4',
     creature_type: 'undead', faction: 'enemy', marker_color: '#a78bfa',
     stat_block: {
@@ -77,6 +83,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Zombie',
     name_en: 'Zombie',
+    slug: 'zombie',
     size: 1, hp_max: 22, ac: 8, speed: 20, cr: '1/4',
     creature_type: 'undead', faction: 'enemy', marker_color: '#a78bfa',
     stat_block: {
@@ -88,6 +95,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Ork',
     name_en: 'Orc',
+    slug: 'orc',
     size: 1, hp_max: 15, ac: 13, speed: 30, cr: '1/2',
     creature_type: 'humanoid', faction: 'enemy', marker_color: '#ef4444',
     stat_block: {
@@ -102,6 +110,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Räuber',
     name_en: 'Bandit',
+    slug: 'bandit',
     size: 1, hp_max: 11, ac: 12, speed: 30, cr: '1/8',
     creature_type: 'humanoid', faction: 'enemy', marker_color: '#ef4444',
     stat_block: {
@@ -116,6 +125,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Riesenratte',
     name_en: 'Giant Rat',
+    slug: 'giant-rat',
     size: 1, hp_max: 7, ac: 12, speed: 30, cr: '1/8',
     creature_type: 'beast', faction: 'enemy', marker_color: '#ef4444',
     stat_block: {
@@ -127,6 +137,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Riesenspinne',
     name_en: 'Giant Spider',
+    slug: 'giant-spider',
     size: 2, hp_max: 26, ac: 14, speed: 30, cr: '1',
     creature_type: 'beast', faction: 'enemy', marker_color: '#ef4444',
     stat_block: {
@@ -141,6 +152,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Wolf',
     name_en: 'Wolf',
+    slug: 'wolf',
     size: 1, hp_max: 11, ac: 13, speed: 40, cr: '1/4',
     creature_type: 'beast', faction: 'enemy', marker_color: '#ef4444',
     stat_block: {
@@ -152,6 +164,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Schattenwolf',
     name_en: 'Dire Wolf',
+    slug: 'dire-wolf',
     size: 2, hp_max: 37, ac: 14, speed: 50, cr: '1',
     creature_type: 'beast', faction: 'enemy', marker_color: '#ef4444',
     stat_block: {
@@ -163,6 +176,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Bugbear',
     name_en: 'Bugbear',
+    slug: 'bugbear',
     size: 1, hp_max: 27, ac: 16, speed: 30, cr: '1',
     creature_type: 'humanoid', faction: 'enemy', marker_color: '#ef4444',
     stat_block: {
@@ -177,6 +191,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Gnoll',
     name_en: 'Gnoll',
+    slug: 'gnoll',
     size: 1, hp_max: 22, ac: 15, speed: 30, cr: '1/2',
     creature_type: 'humanoid', faction: 'enemy', marker_color: '#ef4444',
     stat_block: {
@@ -191,6 +206,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Ghul',
     name_en: 'Ghoul',
+    slug: 'ghoul',
     size: 1, hp_max: 22, ac: 12, speed: 30, cr: '1',
     creature_type: 'undead', faction: 'enemy', marker_color: '#a78bfa',
     stat_block: {
@@ -205,6 +221,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Gast',
     name_en: 'Ghast',
+    slug: 'ghast',
     size: 1, hp_max: 36, ac: 13, speed: 30, cr: '2',
     creature_type: 'undead', faction: 'enemy', marker_color: '#a78bfa',
     stat_block: {
@@ -219,6 +236,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Hobgoblin',
     name_en: 'Hobgoblin',
+    slug: 'hobgoblin',
     size: 1, hp_max: 11, ac: 18, speed: 30, cr: '1/2',
     creature_type: 'humanoid', faction: 'enemy', marker_color: '#ef4444',
     stat_block: {
@@ -233,6 +251,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Oger',
     name_en: 'Ogre',
+    slug: 'ogre',
     size: 2, hp_max: 59, ac: 11, speed: 40, cr: '2',
     creature_type: 'giant', faction: 'enemy', marker_color: '#ef4444',
     stat_block: {
@@ -247,6 +266,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Kultist',
     name_en: 'Cultist',
+    slug: 'cultist',
     size: 1, hp_max: 9, ac: 12, speed: 30, cr: '1/8',
     creature_type: 'humanoid', faction: 'enemy', marker_color: '#ef4444',
     stat_block: {
@@ -258,6 +278,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Akolyth',
     name_en: 'Acolyte',
+    slug: 'acolyte',
     size: 1, hp_max: 9, ac: 10, speed: 30, cr: '1/4',
     creature_type: 'humanoid', faction: 'neutral', marker_color: '#f59e0b',
     stat_block: {
@@ -269,6 +290,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Wache',
     name_en: 'Guard',
+    slug: 'guard',
     size: 1, hp_max: 11, ac: 16, speed: 30, cr: '1/8',
     creature_type: 'humanoid', faction: 'friendly', marker_color: '#3b82f6',
     stat_block: {
@@ -280,6 +302,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Kundschafter',
     name_en: 'Scout',
+    slug: 'scout',
     size: 1, hp_max: 16, ac: 13, speed: 30, cr: '1/2',
     creature_type: 'humanoid', faction: 'neutral', marker_color: '#f59e0b',
     stat_block: {
@@ -295,6 +318,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Junger Roter Drache',
     name_en: 'Young Red Dragon',
+    slug: 'young-red-dragon',
     size: 2, hp_max: 178, ac: 18, speed: 40, cr: '10',
     creature_type: 'dragon', faction: 'enemy', marker_color: '#991b1b',
     stat_block: {
@@ -310,6 +334,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Beholder',
     name_en: 'Beholder',
+    slug: null,
     size: 2, hp_max: 180, ac: 18, speed: 0, cr: '13',
     creature_type: 'aberration', faction: 'enemy', marker_color: '#a78bfa',
     stat_block: {
@@ -324,6 +349,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Lich',
     name_en: 'Lich',
+    slug: null,
     size: 1, hp_max: 135, ac: 17, speed: 30, cr: '21',
     creature_type: 'undead', faction: 'enemy', marker_color: '#a78bfa',
     stat_block: {
@@ -338,6 +364,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Mind Flayer',
     name_en: 'Mind Flayer',
+    slug: 'mindflayer',
     size: 1, hp_max: 71, ac: 15, speed: 30, cr: '7',
     creature_type: 'aberration', faction: 'enemy', marker_color: '#a78bfa',
     stat_block: {
@@ -353,6 +380,7 @@ export const SRD_MONSTERS: SrdMonster[] = [
   {
     name_de: 'Vampir',
     name_en: 'Vampire',
+    slug: 'vampire-spawn',
     size: 1, hp_max: 144, ac: 16, speed: 30, cr: '13',
     creature_type: 'undead', faction: 'enemy', marker_color: '#991b1b',
     stat_block: {

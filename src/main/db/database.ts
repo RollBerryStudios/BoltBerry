@@ -11,7 +11,7 @@ import {
   MIGRATE_V13_TO_V14, MIGRATE_V14_TO_V15, MIGRATE_V15_TO_V16, MIGRATE_V16_TO_V17,
   MIGRATE_V17_TO_V18, MIGRATE_V18_TO_V19, MIGRATE_V19_TO_V20, MIGRATE_V20_TO_V21,
   MIGRATE_V21_TO_V22, MIGRATE_V22_TO_V23, MIGRATE_V23_TO_V24,
-  MIGRATE_V24_TO_V25,
+  MIGRATE_V24_TO_V25, MIGRATE_V25_TO_V26,
 } from './schema'
 import { SRD_MONSTERS } from './srd-monsters'
 
@@ -36,7 +36,7 @@ const MIGRATIONS: ReadonlyArray<readonly [target: number, sql: string]> = [
   [17, MIGRATE_V16_TO_V17], [18, MIGRATE_V17_TO_V18], [19, MIGRATE_V18_TO_V19],
   [20, MIGRATE_V19_TO_V20], [21, MIGRATE_V20_TO_V21], [22, MIGRATE_V21_TO_V22],
   [23, MIGRATE_V22_TO_V23], [24, MIGRATE_V23_TO_V24],
-  [25, MIGRATE_V24_TO_V25],
+  [25, MIGRATE_V24_TO_V25], [26, MIGRATE_V25_TO_V26],
 ]
 
 export class SchemaTooNewError extends Error {
@@ -150,18 +150,26 @@ export function getDb(): Database.Database {
 // A user who explicitly deleted a seeded row keeps it deleted — we don't
 // re-insert because the WHERE clause on INSERT OR IGNORE matches by UNIQUE.
 function seedSrdMonsters(database: Database.Database) {
-  const stmt = database.prepare(
+  const insert = database.prepare(
     `INSERT OR IGNORE INTO token_templates
       (category, source, name, image_path, size, hp_max, ac, speed, cr,
-       creature_type, faction, marker_color, notes, stat_block, created_at)
+       creature_type, faction, marker_color, notes, stat_block, slug, created_at)
       VALUES
       ('monster', 'srd', @name, NULL, @size, @hp_max, @ac, @speed, @cr,
-       @creature_type, @faction, @marker_color, NULL, @stat_block,
+       @creature_type, @faction, @marker_color, NULL, @stat_block, @slug,
        datetime('now'))`,
+  )
+  // Backfill slug for rows seeded before v26 (inserted as INSERT OR IGNORE
+  // above is a no-op for them, but they're missing the new column). Only
+  // touches rows where slug IS NULL so user edits (even renames) are safe.
+  const backfill = database.prepare(
+    `UPDATE token_templates
+     SET slug = @slug
+     WHERE source = 'srd' AND name = @name AND slug IS NULL`,
   )
   const tx = database.transaction((rows: typeof SRD_MONSTERS) => {
     for (const m of rows) {
-      stmt.run({
+      const payload = {
         name: m.name_de,
         size: m.size,
         hp_max: m.hp_max,
@@ -172,7 +180,10 @@ function seedSrdMonsters(database: Database.Database) {
         faction: m.faction,
         marker_color: m.marker_color,
         stat_block: JSON.stringify(m.stat_block),
-      })
+        slug: m.slug,
+      }
+      insert.run(payload)
+      if (m.slug !== null) backfill.run({ name: m.name_de, slug: m.slug })
     }
   })
   tx(SRD_MONSTERS)
