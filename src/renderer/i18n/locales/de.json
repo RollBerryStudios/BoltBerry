@@ -120,6 +120,9 @@
     "tabLibrary": "Bestiarium",
     "tabHandouts": "Handouts",
     "tabAudio": "Audio",
+    "hintCharacters": "D&D 5e Charakterbögen deiner Gruppe",
+    "hintHandouts": "Karten, Briefe und Bilder ans Spielerfenster senden",
+    "hintAudio": "Hintergrundmusik und Soundeffekte für die Sitzung",
     "playerWindow": "Spielerfenster",
     "playerWindowOpen": "Spielerfenster ist ge\u00f6ffnet",
     "closePlayerWindow": "Spielerfenster schlie\u00dfen"

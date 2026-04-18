@@ -120,6 +120,9 @@
     "tabLibrary": "Bestiary",
     "tabHandouts": "Handouts",
     "tabAudio": "Audio",
+    "hintCharacters": "D&D 5e character sheets for your party",
+    "hintHandouts": "Push maps, letters, and images to the player window",
+    "hintAudio": "Background music and sound effects for the session",
     "playerWindow": "Player window",
     "playerWindowOpen": "Player window is open",
     "closePlayerWindow": "Close player window"

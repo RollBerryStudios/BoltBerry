@@ -296,17 +296,20 @@ export function CampaignView() {
             ))}
           </div>
 
-          {/* Tab panel */}
-          <div className="bb-ws-panel">
+          {/* Tab panel — fade-in on switch binds all panels visually. */}
+          <div className="bb-ws-panel" key={tab}>
             {tab === 'notes' && (
               <div className="bb-ws-panel-inner bb-ws-panel-notes">
                 <NotesPanel />
               </div>
             )}
             {tab === 'characters' && (
-              <div className="bb-ws-panel-inner bb-ws-panel-characters">
-                <CharacterSheetPanel />
-              </div>
+              <>
+                <PanelHeader title={t('workspace.tabCharacters')} hint={t('workspace.hintCharacters')} />
+                <div className="bb-ws-panel-inner bb-ws-panel-characters">
+                  <CharacterSheetPanel />
+                </div>
+              </>
             )}
             {tab === 'library' && (
               <div className="bb-ws-panel-inner bb-ws-panel-library">
@@ -314,14 +317,20 @@ export function CampaignView() {
               </div>
             )}
             {tab === 'handouts' && (
-              <div className="bb-ws-panel-inner bb-ws-panel-handouts">
-                <HandoutsPanel />
-              </div>
+              <>
+                <PanelHeader title={t('workspace.tabHandouts')} hint={t('workspace.hintHandouts')} />
+                <div className="bb-ws-panel-inner bb-ws-panel-handouts">
+                  <HandoutsPanel />
+                </div>
+              </>
             )}
             {tab === 'audio' && (
-              <div className="bb-ws-panel-inner bb-ws-panel-audio">
-                <AudioPanel layout="wide" />
-              </div>
+              <>
+                <PanelHeader title={t('workspace.tabAudio')} hint={t('workspace.hintAudio')} />
+                <div className="bb-ws-panel-inner bb-ws-panel-audio">
+                  <AudioPanel layout="wide" />
+                </div>
+              </>
             )}
           </div>
         </div>
@@ -460,6 +469,21 @@ function PlayButton({
 }
 
 // ─── Scoped styles ────────────────────────────────────────────────────
+
+// ─── Panel header ────────────────────────────────────────────────────
+// Dashboard-style framing for panels that lack their own sub-navigation
+// (Characters, Handouts, Audio). Notes + Library skip it — they already
+// have category/tab strips at the top, so adding another header on top
+// would be visual noise.
+
+function PanelHeader({ title, hint }: { title: string; hint: string }) {
+  return (
+    <div className="bb-ws-panel-header">
+      <div className="bb-ws-panel-header-title display">{title}</div>
+      <div className="bb-ws-panel-header-hint">{hint}</div>
+    </div>
+  )
+}
 
 function WorkspaceStyles() {
   return (
@@ -753,6 +777,27 @@ function WorkspaceStyles() {
         border: 1px solid var(--border);
         border-radius: var(--radius-lg);
         overflow: hidden;
+        animation: bb-panel-fade 200ms ease-out;
+      }
+      @keyframes bb-panel-fade {
+        from { opacity: 0; transform: translateY(4px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .bb-ws-panel-header {
+        display: flex; align-items: baseline; gap: var(--sp-3);
+        padding: var(--sp-4) var(--sp-5);
+        border-bottom: 1px solid var(--border-subtle);
+        background: linear-gradient(180deg, var(--bg-elevated), transparent);
+      }
+      .bb-ws-panel-header-title {
+        font-size: 18px; line-height: 1.2;
+        color: var(--text-primary);
+        margin: 0;
+      }
+      .bb-ws-panel-header-hint {
+        font-size: 11px;
+        color: var(--text-muted);
+        letter-spacing: 0.02em;
       }
       .bb-ws-panel-inner { position: relative; min-height: 400px; }
       .bb-ws-panel-notes {
