@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useTokenStore } from '../../../stores/tokenStore'
 import { useUIStore } from '../../../stores/uiStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
@@ -85,6 +86,7 @@ function SectionHeader({ title, open, onToggle }: { title: string; open: boolean
 }
 
 export function TokenPanel() {
+  const { t } = useTranslation()
   const { tokens, addToken, updateToken, removeToken } = useTokenStore()
   const { selectedTokenId, setSelectedToken } = useUIStore()
   const { activeMapId } = useCampaignStore()
@@ -245,7 +247,7 @@ export function TokenPanel() {
             onClick={handleAddToken}
             disabled={!activeMapId}
           >
-            + Token hinzufügen
+            {t('tokens.addToken')}
           </button>
           <button
             className="btn"
@@ -262,7 +264,7 @@ export function TokenPanel() {
             }}
             onClick={() => setLibraryPickerOpen(true)}
             disabled={!activeMapId}
-            title="Aus Bibliothek einfügen"
+            title={t('tokens.fromLibrary')}
           >
             📚
           </button>
@@ -273,7 +275,7 @@ export function TokenPanel() {
               type="search"
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
-              placeholder="Token suchen…"
+              placeholder={t('tokens.searchPlaceholder')}
               style={{
                 width: '100%',
                 padding: '4px 24px 4px 8px',
@@ -288,7 +290,7 @@ export function TokenPanel() {
             {filter && (
               <button
                 onClick={() => setFilter('')}
-                aria-label="Suche zurücksetzen"
+                aria-label={t('tokens.clearSearch')}
                 style={{
                   position: 'absolute',
                   right: 4,
@@ -314,14 +316,17 @@ export function TokenPanel() {
         {/* ── Schnellerstellung (always visible) ── */}
         <div ref={templateRef} style={{ padding: 'var(--sp-2) var(--sp-4)', borderBottom: '1px solid var(--border-subtle)' }}>
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 'var(--sp-1)' }}>
-            ⚡ Schnellerstellung
+            {t('tokens.quickCreate')}
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
             {TOKEN_TEMPLATES.map((tmpl) => (
               <button
                 key={tmpl.name}
                 disabled={!activeMapId}
-                title={`${tmpl.name} — HP ${tmpl.hp}, RK ${tmpl.ac}${tmpl.size > 1 ? `, ${tmpl.size}×${tmpl.size}` : ''}`}
+                title={tmpl.size > 1
+                  ? t('tokens.templateTooltipSize', { name: tmpl.name, hp: tmpl.hp, ac: tmpl.ac, size: tmpl.size })
+                  : t('tokens.templateTooltip', { name: tmpl.name, hp: tmpl.hp, ac: tmpl.ac })
+                }
                 onClick={() => handleAddFromTemplate(tmpl)}
                 style={{
                   padding: '2px 8px',
@@ -341,7 +346,7 @@ export function TokenPanel() {
             ))}
             <button
               disabled={!activeMapId}
-              title="Leeres Token (Bild wählen)"
+              title={t('tokens.emptyTemplate')}
               onClick={() => handleAddFromTemplate(null)}
               style={{
                 padding: '2px 8px',
@@ -356,7 +361,7 @@ export function TokenPanel() {
               onMouseEnter={(e) => { if (activeMapId) e.currentTarget.style.background = 'var(--bg-overlay)' }}
               onMouseLeave={(e) => { e.currentTarget.style.background = 'none' }}
             >
-              + Eigenes…
+              {t('tokens.customTemplate')}
             </button>
           </div>
         </div>
@@ -365,14 +370,14 @@ export function TokenPanel() {
           <EmptyState
             size="sm"
             icon="⬤"
-            title="Keine Token"
-            description="Token hinzufügen und auf der Karte platzieren"
+            title={t('tokens.empty')}
+            description={t('tokens.emptyDesc')}
           />
         ) : displayedTokens.length === 0 ? (
           <EmptyState
             icon="🔍"
-            title="Keine Treffer"
-            description={`Kein Token passt zu „${filter}".`}
+            title={t('tokens.noResults')}
+            description={t('tokens.noResultsDesc', { filter })}
           />
         ) : (
           displayedTokens.map((token) => (
@@ -450,7 +455,7 @@ export function TokenPanel() {
           maxHeight: '65%',
         }}>
           <div className="sidebar-section-title" style={{ marginBottom: 'var(--sp-2)' }}>
-            Token bearbeiten
+            {t('tokens.edit')}
           </div>
 
           {/* Name (always visible) */}
@@ -458,12 +463,12 @@ export function TokenPanel() {
             className="input"
             value={selected.name}
             onChange={(e) => handleUpdate(selected.id, { name: e.target.value })}
-            placeholder="Name"
+            placeholder={t('tokens.name')}
             style={{ marginBottom: 'var(--sp-2)' }}
           />
 
           {/* ── Kampf ────────────────────────────────────────────────── */}
-          <SectionHeader title="Kampf" open={secKampf} onToggle={() => setSecKampf((v) => !v)} />
+          <SectionHeader title={t('tokens.combat')} open={secKampf} onToggle={() => setSecKampf((v) => !v)} />
           {secKampf && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)', paddingBottom: 'var(--sp-2)' }}>
               {/* HP — NumberStepper gives ±1 / Shift±5 / wheel / hold-repeat
@@ -490,7 +495,7 @@ export function TokenPanel() {
               </div>
               {/* Size presets (D&D 5e grid squares) */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-1)' }}>
-                <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>Größe</label>
+                <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>{t('tokens.size')}</label>
                 <div style={{ display: 'flex', gap: 3 }}>
                   {([
                     { label: '1×1', title: 'Klein/Mittel (1 Feld)', size: 1 },
@@ -521,7 +526,7 @@ export function TokenPanel() {
               </div>
               {/* AC + visibility */}
               <div style={{ display: 'flex', gap: 'var(--sp-2)', alignItems: 'center' }}>
-                <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 20 }}>RK</label>
+                <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 20 }}>{t('tokens.ac')}</label>
                 <NumberStepper
                   value={selected.ac ?? 10}
                   onChange={(v) => handleUpdate(selected.id, { ac: v })}
@@ -533,8 +538,8 @@ export function TokenPanel() {
                 />
                 <button
                   className="btn btn-ghost"
-                  title={selected.visibleToPlayers ? 'Für Spieler sichtbar' : 'Für Spieler unsichtbar'}
-                  aria-label={selected.visibleToPlayers ? 'Token verstecken' : 'Token sichtbar machen'}
+                  title={selected.visibleToPlayers ? t('tokens.visibleForPlayers') : t('tokens.hiddenFromPlayers')}
+                  aria-label={selected.visibleToPlayers ? t('tokens.hideToken') : t('tokens.showToken')}
                   style={{ fontSize: 'var(--text-xs)', marginLeft: 'auto' }}
                   onClick={() => handleUpdate(selected.id, { visibleToPlayers: !selected.visibleToPlayers })}
                 >
