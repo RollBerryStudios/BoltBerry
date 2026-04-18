@@ -65,6 +65,12 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
   const [sentTick, setSentTick] = useState(0)
   const playerConnected = useUIStore((s) => s.playerConnected)
 
+  // Broadcast state: once the DM sends a page to the player window we enter
+  // "broadcasting" mode. Page / zoom changes then auto re-render + re-send
+  // so players follow what the DM is looking at. The DM can exit broadcast
+  // explicitly with the "Stop" button, which clears the player's handout.
+  const [broadcasting, setBroadcasting] = useState(false)
+
   // Sidebar: toc (outline), thumbs (page previews), or off.
   const [sidebarMode, setSidebarMode] = useState<SidebarMode>('off')
 
@@ -272,16 +278,17 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
     return hits.sort((a, b) => a.page - b.page || a.offset - b.offset)
   }, [searchQuery, searchState])
 
-  // Send current page to player window as a handout. Renders a fresh, higher-
-  // resolution copy rather than reusing the on-screen canvas so zoom level
-  // doesn't leak into the player's copy. Uses data-URL imagePath, which the
-  // PlayerApp's useImageUrl hook passes through unchanged.
-  async function sendCurrentPageToPlayer() {
+  // Render + broadcast the current page as a PNG handout. Uses a fresh
+  // render so the on-screen canvas state doesn't leak in. Resolution
+  // scales with the DM's zoom (clamped) so the DM can enlarge the page
+  // for players just by zooming.
+  const broadcastCurrentPage = useCallback(async () => {
     if (!loaded || !window.electronAPI) return
     try {
       const doc = loaded.doc as { getPage: (n: number) => Promise<{ getViewport: (o: { scale: number }) => { width: number; height: number }; render: (o: { canvasContext: CanvasRenderingContext2D; viewport: unknown }) => { promise: Promise<void> } }> }
       const page = await doc.getPage(pageNum)
-      const viewport = page.getViewport({ scale: 2 }) // fixed 2× for player clarity
+      const broadcastScale = Math.min(3, Math.max(1.5, zoom * 2))
+      const viewport = page.getViewport({ scale: broadcastScale })
       const canvas = document.createElement('canvas')
       canvas.width = viewport.width
       canvas.height = viewport.height
@@ -293,11 +300,37 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
         imagePath: dataUrl,
         textContent: null,
       })
-      setSentTick((n) => n + 1)
     } catch (err) {
       setError((err as Error).message || String(err))
     }
+  }, [loaded, pageNum, zoom, file.name, t])
+
+  async function startOrSendBroadcast() {
+    await broadcastCurrentPage()
+    setBroadcasting(true)
+    setSentTick((n) => n + 1)
   }
+
+  function stopBroadcast() {
+    if (!window.electronAPI) return
+    window.electronAPI.sendHandout(null)
+    setBroadcasting(false)
+  }
+
+  // While broadcasting, re-send whenever the DM changes page or zoom so the
+  // player window stays in sync with the DM's view. Debounce to avoid
+  // spamming during rapid zoom-button mashing.
+  useEffect(() => {
+    if (!broadcasting) return
+    const id = window.setTimeout(() => { void broadcastCurrentPage() }, 180)
+    return () => window.clearTimeout(id)
+  }, [broadcasting, broadcastCurrentPage])
+
+  // If the player window disconnects, drop out of broadcast mode so the
+  // "Stop" button doesn't linger with nothing to stop.
+  useEffect(() => {
+    if (!playerConnected && broadcasting) setBroadcasting(false)
+  }, [playerConnected, broadcasting])
 
   // Clear the "sent" toast after 1.8s.
   useEffect(() => {
@@ -326,7 +359,9 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
         onSidebarMode={setSidebarMode}
         hasOutline={loaded.outline.length > 0}
         playerConnected={playerConnected}
-        onSendToPlayer={sendCurrentPageToPlayer}
+        broadcasting={broadcasting}
+        onSendToPlayer={startOrSendBroadcast}
+        onStopBroadcast={stopBroadcast}
         onPrev={() => setPageNum((p) => Math.max(1, p - 1))}
         onNext={() => setPageNum((p) => Math.min(loaded.numPages, p + 1))}
         onGoto={(n) => setPageNum(Math.max(1, Math.min(loaded.numPages, n)))}
@@ -482,7 +517,9 @@ function PdfToolbar({
   onSidebarMode,
   hasOutline,
   playerConnected,
+  broadcasting,
   onSendToPlayer,
+  onStopBroadcast,
   onPrev,
   onNext,
   onGoto,
@@ -499,7 +536,9 @@ function PdfToolbar({
   onSidebarMode: (m: SidebarMode) => void
   hasOutline: boolean
   playerConnected: boolean
+  broadcasting: boolean
   onSendToPlayer: () => void
+  onStopBroadcast: () => void
   onPrev: () => void
   onNext: () => void
   onGoto: (n: number) => void
@@ -589,13 +628,27 @@ function PdfToolbar({
         </button>
         <button
           type="button"
-          className="bb-pdf-btn bb-pdf-btn-send"
+          className={broadcasting ? 'bb-pdf-btn bb-pdf-btn-send active' : 'bb-pdf-btn bb-pdf-btn-send'}
           onClick={onSendToPlayer}
           disabled={!playerConnected}
-          title={playerConnected ? t('compendium.sendToPlayer') : t('compendium.sendDisabled')}
+          title={
+            !playerConnected ? t('compendium.sendDisabled')
+            : broadcasting ? t('compendium.resyncPlayer')
+            : t('compendium.sendToPlayer')
+          }
         >
-          ↗ {t('compendium.sendShort')}
+          {broadcasting ? '🔄' : '↗'} {t('compendium.sendShort')}
         </button>
+        {broadcasting && (
+          <button
+            type="button"
+            className="bb-pdf-btn bb-pdf-btn-stop"
+            onClick={onStopBroadcast}
+            title={t('compendium.stopBroadcast')}
+          >
+            ⏹ {t('compendium.stopShort')}
+          </button>
+        )}
       </div>
     </div>
   )
@@ -936,6 +989,21 @@ function PdfViewerStyles() {
         background: transparent;
         color: var(--text-muted);
         border-color: var(--border);
+      }
+      .bb-pdf-btn-send.active {
+        background: rgba(34, 197, 94, 0.18);
+        border-color: rgba(34, 197, 94, 0.6);
+        color: var(--success);
+      }
+      .bb-pdf-btn-stop {
+        background: rgba(239, 68, 68, 0.12);
+        border-color: rgba(239, 68, 68, 0.4);
+        color: var(--danger);
+      }
+      .bb-pdf-btn-stop:hover {
+        background: rgba(239, 68, 68, 0.22);
+        border-color: var(--danger);
+        color: var(--danger);
       }
 
       /* ── Search bar ─────────────────────────────────────────── */

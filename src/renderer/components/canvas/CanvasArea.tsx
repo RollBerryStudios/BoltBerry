@@ -19,6 +19,8 @@ import { ActiveToolHUD } from './ActiveToolHUD'
 import { LeftToolDock } from './LeftToolDock'
 import { SubToolStrip } from './SubToolStrip'
 import { AudioStrip } from './AudioStrip'
+import { WeatherCanvas } from './WeatherCanvas'
+import type { WeatherType } from '@shared/ipc-types'
 import { MultiSelectBar } from '../MultiSelectBar'
 import { useUIStore } from '../../stores/uiStore'
 import { useCampaignStore } from '../../stores/campaignStore'
@@ -138,6 +140,7 @@ export function CanvasArea() {
   const atmosphereImagePath = useUIStore((s) => s.atmosphereImagePath)
   const showMinimap = useUIStore((s) => s.showMinimap)
   const showPlayerEye = useUIStore((s) => s.showPlayerEye)
+  const activeWeather = useUIStore((s) => s.activeWeather)
   const workMode = useUIStore((s) => s.workMode)
   const activeMapId = useCampaignStore((s) => s.activeMapId)
   const activeMaps = useCampaignStore((s) => s.activeMaps)
@@ -656,6 +659,18 @@ export function CanvasArea() {
       {/* Compact audio strip (bottom-left); only visible when a channel
           is loaded. Click the ⋯ handle to open the full AudioPanel. */}
       <AudioStrip />
+
+      {/* Weather overlay — preview for the DM of what the players see.
+          `activeWeather` is kept in uiStore so it persists across view
+          toggles; the actual broadcast to the player window happens in
+          OverlayPanel. */}
+      {activeWeather && activeWeather !== 'none' && (
+        <WeatherCanvas
+          type={activeWeather as WeatherType}
+          width={size.width}
+          height={size.height}
+        />
+      )}
 
       {/* Initiative top-strip (top-center, combat mode only) */}
       <InitiativeTopStrip />

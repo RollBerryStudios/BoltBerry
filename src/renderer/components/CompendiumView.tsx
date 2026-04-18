@@ -46,9 +46,6 @@ export function CompendiumView() {
     try {
       const list = await window.electronAPI.listCompendium()
       setFiles(list)
-      if (list.length > 0 && !selectedPath) {
-        setSelectedPath(list[0].path)
-      }
       if (list.length === 0) setSelectedPath(null)
     } catch (err) {
       setError(String(err))
@@ -56,6 +53,29 @@ export function CompendiumView() {
       setLoading(false)
     }
   }
+
+  // SRD PDFs ship in both languages (srd-de-5.2.1.pdf, srd-en-5.2.1.pdf).
+  // Show only the one that matches the current UI language so the
+  // compendium doesn't force the DM to pick the same book twice.
+  const matchesLanguage = (name: string) =>
+    language === 'de' ? /[-_]de[-_]/i.test(name) : /[-_]en[-_]/i.test(name)
+  const visibleFiles = useMemo(
+    () => files.filter((f) => f.source === 'user' || matchesLanguage(f.name)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [files, language],
+  )
+
+  // Auto-select a sensible default: the language-matching bundled SRD first,
+  // or the first user file otherwise. Re-runs when the language toggles so
+  // the viewer follows.
+  useEffect(() => {
+    if (visibleFiles.length === 0) { setSelectedPath(null); return }
+    const stillVisible = visibleFiles.find((f) => f.path === selectedPath)
+    if (stillVisible) return
+    const bundled = visibleFiles.find((f) => f.source !== 'user')
+    setSelectedPath((bundled ?? visibleFiles[0]).path)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visibleFiles])
 
   useEffect(() => {
     void refresh()
@@ -301,19 +321,18 @@ export function CompendiumView() {
         </div>
       )}
 
-      {/* Body: file list sidebar + viewer */}
+      {/* Body: file list sidebar (only when the user has more than one
+          file to choose from — typically happens only after importing a
+          custom PDF) + viewer. Bundled SRDs are filtered by UI language
+          upstream, so the default install shows no sidebar. */}
       <div className="bb-comp-body">
-        <aside className="bb-comp-sidebar">
-          <div className="bb-comp-sidebar-title">
-            {t('compendium.files')} <span className="bb-comp-sidebar-count mono">{files.length}</span>
-          </div>
-          {loading && files.length === 0 ? (
-            <div className="bb-comp-sidebar-empty">…</div>
-          ) : files.length === 0 ? (
-            <div className="bb-comp-sidebar-empty">{t('compendium.noFiles')}</div>
-          ) : (
+        {visibleFiles.length > 1 && (
+          <aside className="bb-comp-sidebar">
+            <div className="bb-comp-sidebar-title">
+              {t('compendium.files')} <span className="bb-comp-sidebar-count mono">{visibleFiles.length}</span>
+            </div>
             <ul className="bb-comp-sidebar-list">
-              {files.map((f) => (
+              {visibleFiles.map((f) => (
                 <li key={f.path}>
                   <button
                     type="button"
@@ -340,8 +359,8 @@ export function CompendiumView() {
                 </li>
               ))}
             </ul>
-          )}
-        </aside>
+          </aside>
+        )}
 
         <main className="bb-comp-main">
           {error && <div className="bb-comp-error">⚠️ {error}</div>}

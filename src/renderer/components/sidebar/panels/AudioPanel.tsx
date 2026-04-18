@@ -19,10 +19,9 @@ const VOLUME_COL: Record<ChannelId, string> = {
   combat: 'combat_volume',
 }
 
-function ChannelStrip({ chId, label, color, activeMapId }: {
+function ChannelStrip({ chId, label, activeMapId }: {
   chId: ChannelId
   label: string
-  color: string
   activeMapId: number | null
 }) {
   const { t } = useTranslation()
@@ -48,83 +47,70 @@ function ChannelStrip({ chId, label, color, activeMapId }: {
     ).catch(console.error)
   }
 
+  const channelClass = `audio-channel ${chId}${disabled ? ' disabled' : ''}`
+
   return (
-    <div style={{
-      borderLeft: `3px solid ${color}`,
-      paddingLeft: 8,
-      marginBottom: 10,
-      opacity: disabled ? 0.45 : 1,
-      transition: 'opacity 0.2s',
-    }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 4 }}>
-        <span style={{ fontSize: 10, fontWeight: 700, color, textTransform: 'uppercase', flex: 1 }}>{label}</span>
+    <div className={channelClass}>
+      <div className="audio-channel-head">
+        <span className="audio-channel-label">{label}</span>
         {ch.playing && (
-          <span style={{ fontSize: 9, color, animation: 'pulse 1.5s infinite' }}>♪ playing</span>
+          <span className="audio-channel-badge animate-pulse">♪ {t('audio.play')}</span>
         )}
       </div>
 
-      {/* File picker */}
       <button
+        className={`audio-channel-file${ch.filePath ? '' : ' empty'}`}
         onClick={handleImport}
         disabled={disabled}
         title={ch.filePath ?? t('audio.loadFile')}
-        style={{
-          width: '100%', textAlign: 'left', background: 'var(--bg-input)', border: '1px solid var(--border)',
-          borderRadius: 4, padding: '3px 6px', fontSize: 10, color: ch.filePath ? 'var(--text)' : 'var(--text-muted)',
-          cursor: disabled ? 'default' : 'pointer', marginBottom: 4,
-          overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-        }}
       >
         {ch.fileName ?? t('audio.loadFile')}
       </button>
 
-      {/* Seek bar */}
       {ch.filePath && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 4 }}>
-          <span style={{ fontSize: 9, color: 'var(--text-muted)', fontFamily: 'monospace', minWidth: 30 }}>{fmt(ch.currentTime)}</span>
+        <div className="audio-channel-seek">
+          <span>{fmt(ch.currentTime)}</span>
           <input
             type="range" min={0} max={ch.duration || 100} step={0.1} value={ch.currentTime}
             onChange={(e) => store.seekChannel(chId, parseFloat(e.target.value))}
             disabled={disabled || !ch.duration}
             style={{ flex: 1 }}
           />
-          <span style={{ fontSize: 9, color: 'var(--text-muted)', fontFamily: 'monospace', minWidth: 30, textAlign: 'right' }}>{fmt(ch.duration)}</span>
+          <span>{fmt(ch.duration)}</span>
         </div>
       )}
 
-      {/* Controls row */}
-      <div style={{ display: 'flex', gap: 4, alignItems: 'center', marginBottom: 4 }}>
+      <div className="audio-channel-controls">
         <button
+          className={`audio-channel-play${ch.playing ? ' playing' : ''}`}
           onClick={() => ch.playing ? store.stopChannel(chId) : store.playChannel(chId)}
           disabled={disabled || !ch.filePath}
-          style={{
-            flex: 1, padding: '3px 0', background: ch.playing ? color : 'var(--bg-surface)',
-            border: `1px solid ${color}`, borderRadius: 4, color: ch.playing ? '#fff' : color,
-            cursor: disabled || !ch.filePath ? 'default' : 'pointer', fontSize: 13,
-          }}
+          title={ch.playing ? t('audio.pause') : t('audio.play')}
         >
           {ch.playing ? '⏸' : '▶'}
         </button>
         <button
+          className="audio-channel-icon-btn"
           onClick={() => store.stopChannel(chId)}
           disabled={disabled || !ch.filePath}
-          style={{ padding: '3px 6px', background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 4, color: 'var(--text-muted)', cursor: disabled || !ch.filePath ? 'default' : 'pointer', fontSize: 13 }}
-        >⏹</button>
-
-        {/* Track 2 only: set as auto-ambient */}
+          title={t('audio.stop')}
+        >
+          ⏹
+        </button>
         {chId === 'track2' && (
           <button
+            className="audio-channel-icon-btn"
             onClick={handleSetAmbient}
             disabled={!ch.filePath || !activeMapId}
             title={t('audio.setAmbient')}
-            style={{ padding: '3px 6px', background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 4, color: 'var(--text-muted)', cursor: !ch.filePath || !activeMapId ? 'default' : 'pointer', fontSize: 11 }}
-          >🌙</button>
+          >
+            🌙
+          </button>
         )}
       </div>
 
-      {/* Volume */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-        <span style={{ fontSize: 9, color: 'var(--text-muted)', minWidth: 14 }}>🔊</span>
+      <div className="audio-channel-volume">
+        <span className="audio-channel-volume-icon">🔊</span>
         <input
           type="range" min={0} max={1} step={0.01} value={ch.volume}
           onChange={(e) => {
@@ -140,9 +126,7 @@ function ChannelStrip({ chId, label, color, activeMapId }: {
           disabled={disabled}
           style={{ flex: 1 }}
         />
-        <span style={{ fontSize: 9, color: 'var(--text-muted)', minWidth: 28, textAlign: 'right' }}>
-          {Math.round(ch.volume * 100)}%
-        </span>
+        <span className="audio-channel-volume-value">{Math.round(ch.volume * 100)}%</span>
       </div>
     </div>
   )
@@ -425,42 +409,24 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
   // ── Shared content blocks (used in both layouts) ───────────────────────────
 
   const musicContent = (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-      {/* Master volume */}
-      <div style={{
-        display: 'flex', alignItems: 'center', gap: 8,
-        padding: '8px 0', marginBottom: 8,
-        borderBottom: '1px solid var(--border-subtle)',
-      }}>
-        <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 48, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-          Master
-        </span>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div className="audio-master-row">
+        <span className="audio-master-label">Master</span>
         <input type="range" min={0} max={1} step={0.01} value={masterVolume}
           onChange={(e) => setMasterVolume(parseFloat(e.target.value))} style={{ flex: 1 }} />
-        <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 34, textAlign: 'right' }}>
-          {Math.round(masterVolume * 100)}%
-        </span>
+        <span className="audio-master-value">{Math.round(masterVolume * 100)}%</span>
       </div>
 
-      <ChannelStrip chId="track1" label={t('audio.track1')} color="#3b82f6" activeMapId={activeMapId} />
-      <ChannelStrip chId="track2" label={t('audio.track2')} color="#a78bfa" activeMapId={activeMapId} />
+      <ChannelStrip chId="track1" label={t('audio.track1')} activeMapId={activeMapId} />
+      <ChannelStrip chId="track2" label={t('audio.track2')} activeMapId={activeMapId} />
 
-      {/* Combat */}
-      <div style={{ marginTop: 8, paddingTop: 8, borderTop: '1px solid var(--border-subtle)' }}>
-        <button
-          onClick={combatActive ? deactivateCombat : activateCombat}
-          style={{
-            width: '100%', padding: '5px 0', marginBottom: 8,
-            background: combatActive ? '#ef4444' : 'var(--bg-surface)',
-            border: '1px solid #ef4444', borderRadius: 'var(--radius)',
-            color: combatActive ? '#fff' : '#ef4444',
-            cursor: 'pointer', fontSize: 'var(--text-sm)', fontWeight: 700,
-          }}
-        >
-          ⚔️ {combatActive ? t('audio.endCombat') : t('audio.startCombat')}
-        </button>
-        <ChannelStrip chId="combat" label={t('audio.combat')} color="#ef4444" activeMapId={activeMapId} />
-      </div>
+      <button
+        className={`audio-combat-toggle${combatActive ? ' active' : ''}`}
+        onClick={combatActive ? deactivateCombat : activateCombat}
+      >
+        ⚔️ {combatActive ? t('audio.endCombat') : t('audio.startCombat')}
+      </button>
+      <ChannelStrip chId="combat" label={t('audio.combat')} activeMapId={activeMapId} />
 
       {!activeCampaignId && (
         <div style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: 'var(--text-xs)', padding: '8px 0 0' }}>
@@ -471,17 +437,12 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
   )
 
   const sfxContent = (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      {/* SFX volume */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 48, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-          SFX Vol
-        </span>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-3)' }}>
+      <div className="audio-master-row" style={{ marginBottom: 0 }}>
+        <span className="audio-master-label">SFX</span>
         <input type="range" min={0} max={1} step={0.01} value={sfxVolume}
           onChange={(e) => setSfxVolume(parseFloat(e.target.value))} style={{ flex: 1 }} />
-        <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 34, textAlign: 'right' }}>
-          {Math.round(sfxVolume * 100)}%
-        </span>
+        <span className="audio-master-value">{Math.round(sfxVolume * 100)}%</span>
       </div>
 
       {activeCampaignId && (
