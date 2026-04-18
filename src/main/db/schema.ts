@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 26
+export const SCHEMA_VERSION = 27
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -673,6 +673,18 @@ export const MIGRATE_V25_TO_V26 = `
 ALTER TABLE token_templates ADD COLUMN slug TEXT;
 CREATE INDEX IF NOT EXISTS idx_token_templates_slug ON token_templates(slug);
 UPDATE schema_version SET version = 26;
+`
+
+// Migration: v26 → v27 — retire two seeded rows that were bundled under
+// names protected by Wizards of the Coast IP (Beholder, Mind Flayer).
+// Those creatures are not part of SRD 5.2 CC-BY-4.0. Only rows still
+// untouched by the user (source='srd', name unchanged) are removed;
+// anyone who renamed or otherwise edited the row keeps their copy.
+export const MIGRATE_V26_TO_V27 = `
+DELETE FROM token_templates
+ WHERE source = 'srd'
+   AND name IN ('Beholder', 'Mind Flayer');
+UPDATE schema_version SET version = 27;
 `
 
 // Use the SCHEMA_VERSION constant directly so there's a single source of truth.
