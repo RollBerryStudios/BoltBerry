@@ -594,7 +594,10 @@ function TemplateCard({
   const isUser = tpl.source === 'user'
   const [spawnCount, setSpawnCount] = useState(1)
   const [spawnFormation, setSpawnFormation] = useState<FormationType>('cluster')
+  const [previewOpen, setPreviewOpen] = useState(false)
+  const imageUrl = useImageUrl(tpl.image_path)
   const color = tpl.marker_color ?? 'var(--text-muted)'
+  const creatureIcon = creatureTypeIcon(tpl.creature_type)
 
   return (
     <div style={{
@@ -605,6 +608,27 @@ function TemplateCard({
       overflow: 'hidden',
       display: 'flex', flexDirection: 'column',
     }}>
+      {/* Hero image — click to open full stat-block preview. Falls back to
+          a creature-type glyph so cards without artwork still read
+          semantically. */}
+      <button
+        type="button"
+        onClick={() => setPreviewOpen(true)}
+        title={t('library.preview')}
+        aria-label={t('library.preview')}
+        className="token-card-hero"
+        style={{ borderTopColor: color }}
+      >
+        {imageUrl ? (
+          <img src={imageUrl} alt="" draggable={false} />
+        ) : (
+          <span className="token-card-hero-glyph" aria-hidden="true">{creatureIcon}</span>
+        )}
+        <span className="token-card-hero-overlay" aria-hidden="true">
+          <span className="token-card-hero-zoom">🔍</span>
+        </span>
+      </button>
+
       {/* Header */}
       <div style={{ padding: '10px 12px 6px', display: 'flex', gap: 8, alignItems: 'flex-start' }}>
         <div style={{ flex: 1, minWidth: 0 }}>
@@ -817,8 +841,153 @@ function TemplateCard({
           >🗑</button>
         )}
       </div>
+
+      {previewOpen && (
+        <MonsterPreviewDialog
+          tpl={tpl}
+          imageUrl={imageUrl}
+          onClose={() => setPreviewOpen(false)}
+        />
+      )}
     </div>
   )
+}
+
+// ─── Monster preview dialog ────────────────────────────────────────────
+// Full-size modal showing the complete stat block. Uses the shared
+// `.modal-backdrop` / `.modal` primitives (see globals.css) so the
+// design language stays consistent with other dialogs. Closes on
+// backdrop click, ESC, or the × button.
+function MonsterPreviewDialog({
+  tpl,
+  imageUrl,
+  onClose,
+}: {
+  tpl: TokenTemplate
+  imageUrl: string | null
+  onClose: () => void
+}) {
+  const { t } = useTranslation()
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onClose])
+
+  const color = tpl.marker_color ?? 'var(--text-muted)'
+  const icon = creatureTypeIcon(tpl.creature_type)
+  const sb = tpl.stat_block
+
+  return (
+    <div
+      className="modal-backdrop monster-preview-backdrop"
+      onClick={onClose}
+      role="presentation"
+    >
+      <div
+        className="modal monster-preview-modal"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label={tpl.name}
+        style={{ borderLeft: `4px solid ${color}` }}
+      >
+        <button
+          type="button"
+          className="monster-preview-close"
+          onClick={onClose}
+          aria-label={t('library.close')}
+          title={t('library.close')}
+        >×</button>
+
+        <div className="monster-preview-hero">
+          {imageUrl ? (
+            <img src={imageUrl} alt="" draggable={false} />
+          ) : (
+            <span className="monster-preview-hero-glyph" aria-hidden="true">{icon}</span>
+          )}
+        </div>
+
+        <div className="monster-preview-body">
+          <div className="monster-preview-head">
+            <h2 className="monster-preview-name">{tpl.name}</h2>
+            <div className="monster-preview-subline">
+              {tpl.cr && <span className="monster-preview-chip">CR {tpl.cr}</span>}
+              {tpl.creature_type && <span>{tpl.creature_type}</span>}
+              <span>·</span>
+              <span>{sizeLabel(tpl.size)}</span>
+            </div>
+          </div>
+
+          <div className="monster-preview-stats">
+            <StatBox label="HP" value={String(tpl.hp_max)} />
+            <StatBox label="AC" value={tpl.ac != null ? String(tpl.ac) : '—'} />
+            <StatBox label={t('library.speed')} value={tpl.speed != null ? `${tpl.speed} ft` : '—'} />
+          </div>
+
+          {sb && (
+            <div className="monster-preview-abilities">
+              {(['str','dex','con','int','wis','cha'] as const).map((k) => (
+                <AbilityCell key={k} label={k.toUpperCase()} score={sb[k]} />
+              ))}
+            </div>
+          )}
+
+          {sb && sb.attacks.length > 0 && (
+            <section className="monster-preview-section">
+              <h3>{t('library.attacks')}</h3>
+              <ul>
+                {sb.attacks.map((a, i) => (
+                  <li key={i}>
+                    <span className="monster-preview-attack-name">{a.name}</span>{' '}
+                    <span className="monster-preview-attack-bonus">{a.bonus}</span>{' '}
+                    — <span>{a.damage}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {sb && sb.traits.length > 0 && (
+            <section className="monster-preview-section">
+              <h3>{t('library.traits')}</h3>
+              <ul>
+                {sb.traits.map((tr, i) => <li key={i}>{tr}</li>)}
+              </ul>
+            </section>
+          )}
+
+          {tpl.notes && (
+            <section className="monster-preview-section">
+              <h3>{t('library.notes')}</h3>
+              <p className="monster-preview-notes">{tpl.notes}</p>
+            </section>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// Crude creature-type → glyph fallback for cards without artwork. Keeps
+// the visual language consistent (glyph stays subtle, not emoji-spam).
+function creatureTypeIcon(type: string | null | undefined): string {
+  const t = (type ?? '').toLowerCase()
+  if (t.includes('drag'))                       return '🐉'
+  if (t.includes('undead') || t.includes('unto')) return '💀'
+  if (t.includes('beast') || t.includes('tier')) return '🐾'
+  if (t.includes('fiend') || t.includes('teuf')) return '👹'
+  if (t.includes('celestial') || t.includes('himm')) return '👼'
+  if (t.includes('elemental') || t.includes('element')) return '🔥'
+  if (t.includes('fey'))                         return '🧚'
+  if (t.includes('giant') || t.includes('riese')) return '🗿'
+  if (t.includes('plant') || t.includes('pflan')) return '🌿'
+  if (t.includes('construct')||t.includes('konstr')) return '⚙️'
+  if (t.includes('aberr') || t.includes('aberr'))return '👁'
+  if (t.includes('ooze') || t.includes('schlei')) return '🫧'
+  if (t.includes('human') || t.includes('mensch')) return '🧙'
+  return '👤'
 }
 
 function StatBox({ label, value }: { label: string; value: string }) {

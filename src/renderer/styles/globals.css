@@ -1664,6 +1664,217 @@ textarea.input {
   flex-direction: column;
 }
 
+/* ─── Token / Monster card hero image ─────────────────────────────────────── */
+/* Clickable 112-px tall hero banner at the top of each creature card. Shows
+   the template's image_path when available; falls back to a large glyph
+   picked from creature_type. Hover reveals a 🔍 overlay that hints "open
+   preview". Click opens MonsterPreviewDialog with the full stat block. */
+.token-card-hero {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 112px;
+  padding: 0;
+  border: none;
+  background: var(--bg-elevated);
+  cursor: pointer;
+  overflow: hidden;
+  border-top: 3px solid transparent; /* coloured in inline style per card */
+  transition: filter var(--transition);
+}
+.token-card-hero:hover { filter: brightness(1.08); }
+.token-card-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.token-card-hero-glyph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44px;
+  opacity: 0.45;
+  color: var(--text-muted);
+  filter: grayscale(0.4);
+}
+.token-card-hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.35));
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.token-card-hero:hover .token-card-hero-overlay,
+.token-card-hero:focus-visible .token-card-hero-overlay {
+  opacity: 1;
+}
+.token-card-hero-zoom {
+  background: rgba(13, 16, 21, 0.85);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ─── Monster preview dialog ───────────────────────────────────────────── */
+/* Large modal opened from any token card. Reuses the shared .modal-backdrop
+   geometry and blur, but widens .modal and flows the hero image + stat
+   block vertically with scroll-if-needed. */
+.monster-preview-backdrop {
+  z-index: 9950;
+}
+.monster-preview-modal {
+  width: min(560px, 94vw);
+  max-width: none;
+  max-height: min(85vh, 800px);
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.monster-preview-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(13, 16, 21, 0.75);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  z-index: 2;
+  transition: background var(--transition), color var(--transition);
+}
+.monster-preview-close:hover {
+  background: var(--bg-overlay);
+  color: var(--accent);
+}
+.monster-preview-hero {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: var(--bg-elevated);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.monster-preview-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.monster-preview-hero-glyph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 96px;
+  opacity: 0.35;
+}
+.monster-preview-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--sp-4) var(--sp-5) var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.monster-preview-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.monster-preview-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+.monster-preview-subline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+.monster-preview-chip {
+  background: var(--accent-dim);
+  color: var(--accent);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.monster-preview-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.monster-preview-abilities {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  padding-top: var(--sp-1);
+  border-top: 1px solid var(--border-subtle);
+}
+.monster-preview-section h3 {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.monster-preview-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.monster-preview-section li {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.monster-preview-attack-name {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.monster-preview-attack-bonus {
+  color: var(--accent);
+  font-family: var(--font-mono, monospace);
+}
+.monster-preview-notes {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
 /* ─── Audio strip (bottom-left, v1 Conservative) ─────────────────────────── */
 /* Compact floating audio chip anchored bottom-left. Shows the currently
    active channel + play/stop + handle that opens the full AudioPanel.

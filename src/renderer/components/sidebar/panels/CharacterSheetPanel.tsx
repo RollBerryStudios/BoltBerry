@@ -54,7 +54,7 @@ function skillBonus(sheet: CharacterSheet, sk: typeof SKILL_DEFS[number]): numbe
     int: sheet.intScore, wis: sheet.wis, cha: sheet.cha,
   }
   const abilityMod = modifier(abilityMap[sk.ability] ?? 10)
-  const prof = (sheet.skills as Record<string, boolean>)[sk.key] ? sheet.proficiencyBonus : 0
+  const prof = (sheet.skills as unknown as Record<string, boolean>)[sk.key] ? sheet.proficiencyBonus : 0
   return abilityMod + prof
 }
 
@@ -64,7 +64,7 @@ function savingBonus(sheet: CharacterSheet, ability: string): number {
     int: sheet.intScore, wis: sheet.wis, cha: sheet.cha,
   }
   const abilityMod = modifier(abilityMap[ability] ?? 10)
-  const prof = (sheet.savingThrows as Record<string, boolean>)[ability] ? sheet.proficiencyBonus : 0
+  const prof = (sheet.savingThrows as unknown as Record<string, boolean>)[ability] ? sheet.proficiencyBonus : 0
   return abilityMod + prof
 }
 
@@ -160,27 +160,6 @@ function TextInput({ value, onChange, placeholder, style }: {
   )
 }
 
-// ─── Empty state ──────────────────────────────────────────────────────────────
-
-function EmptyState({ onNew }: { onNew: () => void }) {
-  const { t } = useTranslation()
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', gap: 12, color: 'var(--text-muted)', padding: 24 }}>
-      <span style={{ fontSize: 32 }}>📋</span>
-      <p style={{ textAlign: 'center', fontSize: 12, margin: 0 }}>{t('characters.empty')}</p>
-      <button
-        onClick={onNew}
-        style={{
-          padding: '6px 16px', background: 'var(--accent-blue)', color: '#fff',
-          border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: 12,
-        }}
-      >
-        {t('characters.newSheet')}
-      </button>
-    </div>
-  )
-}
-
 // ─── Sheet list sidebar ───────────────────────────────────────────────────────
 
 function SheetList({ sheets, activeId, onSelect, onNew, onDelete }: {
@@ -273,12 +252,12 @@ function SheetEditor({ sheet, onUpdate }: {
   })
 
   function toggleSavingThrow(ability: string) {
-    const updated = { ...sheet.savingThrows, [ability]: !((sheet.savingThrows as Record<string, boolean>)[ability]) }
+    const updated = { ...sheet.savingThrows, [ability]: !((sheet.savingThrows as unknown as Record<string, boolean>)[ability]) }
     onUpdate({ savingThrows: updated as CharacterSheet['savingThrows'] })
   }
 
   function toggleSkill(key: string) {
-    const updated = { ...sheet.skills, [key]: !((sheet.skills as Record<string, boolean>)[key]) }
+    const updated = { ...sheet.skills, [key]: !((sheet.skills as unknown as Record<string, boolean>)[key]) }
     onUpdate({ skills: updated as CharacterSheet['skills'] })
   }
 
@@ -451,7 +430,7 @@ function SheetEditor({ sheet, onUpdate }: {
       <Section title={t('characters.sectionSavingThrows')} defaultOpen={false}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           {SAVING_THROW_KEYS.map((ab) => {
-            const proficient = (sheet.savingThrows as Record<string, boolean>)[ab]
+            const proficient = (sheet.savingThrows as unknown as Record<string, boolean>)[ab]
             const bonus = savingBonus(sheet, ab)
             return (
               <div key={ab} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11 }}>
@@ -475,7 +454,7 @@ function SheetEditor({ sheet, onUpdate }: {
       <Section title={t('characters.sectionSkills')} defaultOpen={false}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           {SKILL_DEFS.map((sk) => {
-            const proficient = (sheet.skills as Record<string, boolean>)[sk.key]
+            const proficient = (sheet.skills as unknown as Record<string, boolean>)[sk.key]
             const bonus = skillBonus(sheet, sk)
             return (
               <div key={sk.key} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11 }}>
