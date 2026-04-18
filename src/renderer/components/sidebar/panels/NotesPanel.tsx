@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, memo, useRef } from 'react'
+import { useState, useEffect, useCallback, useMemo, memo, useRef } from 'react'
 import { useCampaignStore } from '../../../stores/campaignStore'
 
 /* Notes panel — each category is now a folder of multiple notes.
@@ -98,6 +98,17 @@ interface NoteRow {
   title: string
   content: string
   updated_at: string
+  tags: string[]
+}
+
+function parseTags(raw: string | null | undefined): string[] {
+  if (!raw) return []
+  try {
+    const parsed = JSON.parse(raw)
+    return Array.isArray(parsed) ? parsed.filter((t) => typeof t === 'string') : []
+  } catch {
+    return []
+  }
 }
 
 // ─── NotesPanel ──────────────────────────────────────────────────────────────────
@@ -114,6 +125,9 @@ export function NotesPanel() {
   const [selectedByBucket, setSelectedByBucket] = useState<Record<string, number | null>>({})
 
   const [preview, setPreview] = useState(false)
+  // Cross-bucket search — when non-empty, replaces the list column with a
+  // result list spanning every category and the map notes.
+  const [searchQuery, setSearchQuery] = useState('')
 
   // Active bucket key derives from tab+category. When tab is map, the bucket
   // is MAP_BUCKET regardless of category selection.
@@ -141,8 +155,11 @@ export function NotesPanel() {
   async function loadAllNotes(campaignId: number, mapId: number | null) {
     if (!window.electronAPI) return
     try {
-      const campaignRows = await window.electronAPI.dbQuery<NoteRow & { category: string }>(
-        `SELECT id, category, title, content, updated_at
+      const campaignRows = await window.electronAPI.dbQuery<{
+        id: number; category: string; title: string; content: string
+        updated_at: string; tags: string | null
+      }>(
+        `SELECT id, category, title, content, updated_at, tags
          FROM notes
          WHERE campaign_id = ? AND map_id IS NULL AND pin_x IS NULL AND pin_y IS NULL
          ORDER BY updated_at DESC`,
@@ -151,20 +168,23 @@ export function NotesPanel() {
       const buckets: Record<string, NoteRow[]> = {}
       for (const cat of CAMPAIGN_CATEGORIES) buckets[cat.id] = []
       for (const row of campaignRows) {
-        const { category, ...note } = row
+        const { category, tags, ...rest } = row
         if (!buckets[category]) buckets[category] = []
-        buckets[category].push(note)
+        buckets[category].push({ ...rest, tags: parseTags(tags) })
       }
 
       if (mapId) {
-        const mapRows = await window.electronAPI.dbQuery<NoteRow>(
-          `SELECT id, title, content, updated_at
+        const mapRows = await window.electronAPI.dbQuery<{
+          id: number; title: string; content: string
+          updated_at: string; tags: string | null
+        }>(
+          `SELECT id, title, content, updated_at, tags
            FROM notes
            WHERE campaign_id = ? AND map_id = ? AND pin_x IS NULL AND pin_y IS NULL
            ORDER BY updated_at DESC`,
           [campaignId, mapId],
         )
-        buckets[MAP_BUCKET] = mapRows
+        buckets[MAP_BUCKET] = mapRows.map(({ tags, ...r }) => ({ ...r, tags: parseTags(tags) }))
       } else {
         buckets[MAP_BUCKET] = []
       }
@@ -187,7 +207,7 @@ export function NotesPanel() {
   const saveNote = useCallback(async (
     bucket: string,
     noteId: number,
-    patch: { title?: string; content?: string },
+    patch: { title?: string; content?: string; tags?: string[] },
   ) => {
     if (!window.electronAPI || !activeCampaignId) return
     try {
@@ -195,6 +215,7 @@ export function NotesPanel() {
       const params: unknown[] = []
       if (patch.title !== undefined) { fields.push('title = ?'); params.push(patch.title) }
       if (patch.content !== undefined) { fields.push('content = ?'); params.push(patch.content) }
+      if (patch.tags !== undefined) { fields.push('tags = ?'); params.push(JSON.stringify(patch.tags)) }
       if (fields.length === 0) return
       fields.push(`updated_at = datetime('now')`)
       params.push(noteId)
@@ -226,7 +247,7 @@ export function NotesPanel() {
         [activeCampaignId, mapId, category, 'Neue Notiz'],
       )
       const id = result.lastInsertRowid
-      const newRow: NoteRow = { id, title: 'Neue Notiz', content: '', updated_at: new Date().toISOString() }
+      const newRow: NoteRow = { id, title: 'Neue Notiz', content: '', updated_at: new Date().toISOString(), tags: [] }
       setNotesByBucket((prev) => ({ ...prev, [bucket]: [newRow, ...(prev[bucket] ?? [])] }))
       setSelectedByBucket((prev) => ({ ...prev, [bucket]: id }))
     } catch (err) {
@@ -252,7 +273,7 @@ export function NotesPanel() {
     }
   }
 
-  function setActiveNoteLocal(bucket: string, patch: { title?: string; content?: string }) {
+  function setActiveNoteLocal(bucket: string, patch: { title?: string; content?: string; tags?: string[] }) {
     setNotesByBucket((prev) => ({
       ...prev,
       [bucket]: (prev[bucket] ?? []).map((n) =>
@@ -272,9 +293,83 @@ export function NotesPanel() {
   }
 
   const disabled = activeTab === 'map' && !activeMapId
+  const trimmedQuery = searchQuery.trim().toLowerCase()
+  const isSearching = trimmedQuery.length > 0
+
+  // Cross-bucket search: scan title + content + tags in every bucket.
+  // Returns a flat list with the bucket the match came from, so a hit
+  // can deep-link into its category tab.
+  const searchResults = useMemo(() => {
+    if (!isSearching) return []
+    const hits: Array<{ bucket: string; note: NoteRow; snippet: string }> = []
+    for (const [bucket, notes] of Object.entries(notesByBucket)) {
+      for (const n of notes) {
+        const hay = `${n.title}\n${n.content}\n${n.tags.join(' ')}`.toLowerCase()
+        const idx = hay.indexOf(trimmedQuery)
+        if (idx === -1) continue
+        const source = `${n.title} · ${n.content}`
+        const cleanIdx = source.toLowerCase().indexOf(trimmedQuery)
+        const start = Math.max(0, cleanIdx - 20)
+        const end = Math.min(source.length, cleanIdx + trimmedQuery.length + 60)
+        const snippet = (start > 0 ? '…' : '') + source.slice(start, end) + (end < source.length ? '…' : '')
+        hits.push({ bucket, note: n, snippet })
+      }
+    }
+    return hits.slice(0, 100)
+  }, [isSearching, trimmedQuery, notesByBucket])
+
+  function jumpToHit(bucket: string, noteId: number) {
+    setSearchQuery('')
+    if (bucket === MAP_BUCKET) {
+      setActiveTab('map')
+    } else {
+      setActiveTab('campaign')
+      setActiveCategory(bucket)
+    }
+    setSelectedByBucket((prev) => ({ ...prev, [bucket]: noteId }))
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      {/* ── Search bar ───────────────────────────────────────────────── */}
+      <div style={{
+        padding: '6px 8px',
+        borderBottom: '1px solid var(--border-subtle)',
+        display: 'flex', alignItems: 'center', gap: 6,
+      }}>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+          style={{ color: 'var(--text-muted)', marginLeft: 4 }}>
+          <circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" />
+        </svg>
+        <input
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Alle Notizen durchsuchen…"
+          style={{
+            flex: 1,
+            background: 'transparent',
+            border: 'none',
+            outline: 'none',
+            color: 'var(--text-primary)',
+            fontSize: 11,
+            fontFamily: 'inherit',
+          }}
+        />
+        {isSearching && (
+          <button
+            type="button"
+            onClick={() => setSearchQuery('')}
+            style={{
+              background: 'transparent', border: 'none', cursor: 'pointer',
+              color: 'var(--text-muted)', fontSize: 12, padding: '0 4px',
+            }}
+            title="Suche schließen"
+          >
+            ✕
+          </button>
+        )}
+      </div>
+
       {/* ── Top tab bar: Campaign / Map ─────────────────────────────────── */}
       <div style={{
         display: 'flex',
@@ -368,8 +463,59 @@ export function NotesPanel() {
         </div>
       )}
 
+      {/* ── Search results (replaces list + editor while searching) ─── */}
+      {isSearching && (
+        <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
+          {searchResults.length === 0 ? (
+            <div style={{ padding: 16, fontSize: 11, color: 'var(--text-muted)', textAlign: 'center' }}>
+              Keine Treffer für „{searchQuery}"
+            </div>
+          ) : (
+            searchResults.map((hit) => {
+              const cat = CAMPAIGN_CATEGORIES.find((c) => c.id === hit.bucket)
+              const label = cat ? `${cat.icon} ${cat.id}` : '🗺️ Karte'
+              return (
+                <button
+                  key={`${hit.bucket}-${hit.note.id}`}
+                  type="button"
+                  onClick={() => jumpToHit(hit.bucket, hit.note.id)}
+                  style={{
+                    display: 'flex', flexDirection: 'column', gap: 2,
+                    width: '100%',
+                    padding: '8px 12px',
+                    background: 'transparent',
+                    border: 'none',
+                    borderBottom: '1px solid var(--border-subtle)',
+                    color: 'var(--text-primary)',
+                    fontFamily: 'inherit',
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+                >
+                  <div style={{
+                    display: 'flex', alignItems: 'center', gap: 6,
+                    fontSize: 9, letterSpacing: '0.08em', fontWeight: 700,
+                    color: 'var(--text-muted)',
+                  }}>
+                    {label}
+                  </div>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-primary)' }}>
+                    {hit.note.title || 'Ohne Titel'}
+                  </div>
+                  <div style={{ fontSize: 10, color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                    {hit.snippet}
+                  </div>
+                </button>
+              )
+            })
+          )}
+        </div>
+      )}
+
       {/* ── Main body: list + editor ─────────────────────────────────── */}
-      <div style={{ flex: 1, display: 'flex', minHeight: 0, opacity: disabled ? 0.5 : 1 }}>
+      {!isSearching && <div style={{ flex: 1, display: 'flex', minHeight: 0, opacity: disabled ? 0.5 : 1 }}>
         {!disabled && (
           <NoteList
             notes={notes}
@@ -412,6 +558,13 @@ export function NotesPanel() {
                   marginBottom: 'var(--sp-2)',
                 }}
               />
+              <TagsEditor
+                tags={selectedNote.tags}
+                onChange={(next) => {
+                  setActiveNoteLocal(activeBucket, { tags: next })
+                  saveNote(activeBucket, selectedNote.id, { tags: next })
+                }}
+              />
               {preview ? (
                 <MarkdownPreview text={selectedNote.content} />
               ) : (
@@ -438,7 +591,7 @@ export function NotesPanel() {
             </>
           )}
         </div>
-      </div>
+      </div>}
     </div>
   )
 }
@@ -588,6 +741,74 @@ function NoteRowItem({
           🗑
         </button>
       )}
+    </div>
+  )
+}
+
+// ─── Tags editor ─────────────────────────────────────────────────────
+// Chip list with an inline add-input. Enter or comma commits, Backspace
+// on empty input removes the last chip. Simple + keyboard-friendly.
+
+function TagsEditor({ tags, onChange }: { tags: string[]; onChange: (next: string[]) => void }) {
+  const [draft, setDraft] = useState('')
+
+  function commit() {
+    const v = draft.trim()
+    if (!v) return
+    if (tags.includes(v)) { setDraft(''); return }
+    onChange([...tags, v])
+    setDraft('')
+  }
+
+  return (
+    <div style={{
+      display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 4,
+      padding: '4px 6px',
+      marginBottom: 'var(--sp-2)',
+      background: 'var(--bg-base)',
+      border: '1px solid var(--border-subtle)',
+      borderRadius: 'var(--radius-sm)',
+    }}>
+      {tags.map((t) => (
+        <span
+          key={t}
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: 4,
+            padding: '2px 6px',
+            background: 'var(--accent-blue-dim)',
+            color: 'var(--accent-blue-light)',
+            borderRadius: 999,
+            fontSize: 10, fontWeight: 600,
+          }}
+        >
+          #{t}
+          <button
+            type="button"
+            onClick={() => onChange(tags.filter((x) => x !== t))}
+            style={{
+              background: 'transparent', border: 'none', cursor: 'pointer',
+              color: 'inherit', fontSize: 11, padding: 0, lineHeight: 1,
+            }}
+          >×</button>
+        </span>
+      ))}
+      <input
+        value={draft}
+        onChange={(e) => setDraft(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); commit() }
+          else if (e.key === 'Backspace' && draft === '' && tags.length > 0) {
+            onChange(tags.slice(0, -1))
+          }
+        }}
+        onBlur={commit}
+        placeholder={tags.length === 0 ? 'Tags…' : ''}
+        style={{
+          flex: 1, minWidth: 60,
+          background: 'transparent', border: 'none', outline: 'none',
+          color: 'var(--text-primary)', fontSize: 11, fontFamily: 'inherit',
+        }}
+      />
     </div>
   )
 }

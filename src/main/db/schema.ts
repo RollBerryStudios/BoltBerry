@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 28
+export const SCHEMA_VERSION = 29
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -249,6 +249,7 @@ CREATE TABLE IF NOT EXISTS notes (
   content      TEXT    NOT NULL DEFAULT '',
   pin_x        REAL,
   pin_y        REAL,
+  tags         TEXT,
   updated_at   TEXT    NOT NULL DEFAULT (datetime('now'))
 );
 
@@ -697,6 +698,14 @@ DELETE FROM token_templates
  WHERE source = 'srd'
    AND name = 'Lich';
 UPDATE schema_version SET version = 28;
+`
+
+// Migration: v28 → v29 — add notes.tags (JSON array of strings) so users
+// can tag notes across categories. NULL or '[]' = no tags.
+export const MIGRATE_V28_TO_V29 = `
+ALTER TABLE notes ADD COLUMN tags TEXT;
+CREATE INDEX IF NOT EXISTS idx_notes_campaign ON notes(campaign_id);
+UPDATE schema_version SET version = 29;
 `
 
 // Use the SCHEMA_VERSION constant directly so there's a single source of truth.
