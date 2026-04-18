@@ -231,25 +231,33 @@ export function CompendiumView() {
         </div>
       </header>
 
-      {/* Attribution strip — CC-BY-4.0 requires visible credit for bundled SRD PDFs. */}
-      <div style={{
-        padding: '6px var(--sp-6)',
-        background: 'var(--bg-elevated)',
-        borderBottom: '1px solid var(--border-subtle)',
-        fontSize: 10,
-        color: 'var(--text-muted)',
-        lineHeight: 1.4,
-      }}>
-        {t('compendium.attributionPrefix')}{' '}
-        <a
-          href="https://creativecommons.org/licenses/by/4.0/"
-          target="_blank"
-          rel="noreferrer"
-          style={{ color: 'var(--accent-blue-light)', textDecoration: 'underline', textDecorationStyle: 'dotted' }}
-        >
-          CC-BY-4.0
-        </a>
-      </div>
+      {/* Short visible credit in proximity to the bundled SRD PDFs.
+          Click opens the About dialog with the canonical CC-BY-4.0
+          attribution paragraph. */}
+      <button
+        type="button"
+        onClick={() => window.dispatchEvent(new CustomEvent('app:open-about'))}
+        style={{
+          padding: '6px var(--sp-6)',
+          background: 'var(--bg-elevated)',
+          borderBottom: '1px solid var(--border-subtle)',
+          border: 'none',
+          fontSize: 10,
+          color: 'var(--text-muted)',
+          lineHeight: 1.4,
+          textAlign: 'left',
+          cursor: 'pointer',
+          fontFamily: 'inherit',
+          width: '100%',
+        }}
+      >
+        {t('compendium.attributionPrefix')} · CC-BY-4.0{' · '}
+        <span style={{
+          color: 'var(--accent-blue-light)',
+          textDecoration: 'underline',
+          textDecorationStyle: 'dotted',
+        }}>{t('compendium.attributionSuffix')}</span>
+      </button>
 
       {/* Cross-PDF search results — overlays the body when a query is active. */}
       {globalQuery.trim().length >= 2 && (

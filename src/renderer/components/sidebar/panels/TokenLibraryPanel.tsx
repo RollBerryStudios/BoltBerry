@@ -320,27 +320,33 @@ export function TokenLibraryPanel() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: 'var(--bg-base)' }}>
-      {/* Attribution strip — CC-BY-4.0 requires visible credit for SRD content. */}
-      <div style={{
-        padding: '6px var(--sp-4)',
-        background: 'var(--bg-elevated)',
-        borderBottom: '1px solid var(--border-subtle)',
-        fontSize: 10,
-        color: 'var(--text-muted)',
-        lineHeight: 1.4,
-      }}>
-        {t('library.attributionPrefix')}{' '}
-        <a
-          href="https://creativecommons.org/licenses/by/4.0/"
-          target="_blank"
-          rel="noreferrer"
-          style={{ color: 'var(--accent-blue-light)', textDecoration: 'underline', textDecorationStyle: 'dotted' }}
-        >
-          CC-BY-4.0
-        </a>
-        {' · '}
-        <span style={{ fontStyle: 'italic' }}>{t('library.attributionSuffix')}</span>
-      </div>
+      {/* Short visible credit in proximity to the SRD-derived material.
+          Click opens the About dialog with the canonical CC-BY-4.0
+          attribution paragraph the licence requires. */}
+      <button
+        type="button"
+        onClick={() => window.dispatchEvent(new CustomEvent('app:open-about'))}
+        style={{
+          padding: '6px var(--sp-4)',
+          background: 'var(--bg-elevated)',
+          borderBottom: '1px solid var(--border-subtle)',
+          border: 'none',
+          fontSize: 10,
+          color: 'var(--text-muted)',
+          lineHeight: 1.4,
+          textAlign: 'left',
+          cursor: 'pointer',
+          fontFamily: 'inherit',
+          width: '100%',
+        }}
+      >
+        {t('library.attributionPrefix')} · CC-BY-4.0{' · '}
+        <span style={{
+          color: 'var(--accent-blue-light)',
+          textDecoration: 'underline',
+          textDecorationStyle: 'dotted',
+        }}>{t('library.attributionSuffix')}</span>
+      </button>
 
       {/* Category tabs */}
       <div style={{

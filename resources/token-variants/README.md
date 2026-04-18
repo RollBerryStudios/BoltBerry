@@ -15,12 +15,12 @@ them, put them in a stew. They belong to anyone."*
 We ship the first 5 alphabetical variants per creature. All 25 seeded
 SRD creatures have bundled art.
 
-Only creatures present in the D&D 5.2 SRD (CC-BY-4.0) are seeded.
-Earlier drafts included two creatures whose names are protected Wizards
-of the Coast IP and are **not** in the SRD — they were replaced with
-Fire Giant and Treant. A later pass swapped Lich (SRD-legal but with
-no upstream art) for Stone Golem (CR 10, construct, 5 variants) so
-every seeded creature has a recognisable token.
+Only creatures present in the SRD 5.2.1 (CC-BY-4.0) are seeded.
+Earlier drafts included two creatures whose names are not part of the
+SRD — they were replaced with Fire Giant and Treant. A later pass
+swapped Lich (SRD-legal but with no upstream art) for Stone Golem
+(CR 10, construct, 5 variants) so every seeded creature has a
+recognisable token.
 
 The v27 / v28 migrations remove the obsolete seed rows from existing
 user DBs as long as they were untouched.

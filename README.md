@@ -126,13 +126,10 @@ Beiträge sind willkommen. Bitte lies [CONTRIBUTING.md](CONTRIBUTING.md) vor dem
 ### Lizenz
 
 App-Code: [MIT](LICENSE) © 2026 RollBerry Studios.
-Gebündelte Drittanbieter-Inhalte: siehe [NOTICE.md](NOTICE.md).
-
-Die Kreaturen-Statblocks im Bestiarium und die ggf. mitgelieferte SRD 5.2-PDF
-stammen aus dem *D&D 5e System Reference Document 5.2* von Wizards of the
-Coast LLC, lizenziert unter [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/).
-Unabhängiges Fan-Projekt — nicht von Wizards of the Coast genehmigt oder
-gesponsert.
+Gebündelte Drittanbieter-Inhalte (SRD 5.2.1 + Pflicht-Attribution + Token-
+Artwork-Credits): siehe [NOTICE.md](NOTICE.md). Vollständige
+Pflicht-Attribution für SRD 5.2.1 ist im App-Dialog "Über BoltBerry"
+sichtbar.
 
 ---
 
@@ -238,10 +235,6 @@ Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before
 ### License
 
 App code: [MIT](LICENSE) © 2026 RollBerry Studios.
-Bundled third-party content: see [NOTICE.md](NOTICE.md).
-
-Creature stat blocks in the Bestiary and the optionally-bundled SRD 5.2 PDF
-originate from the *D&D 5e System Reference Document 5.2* by Wizards of the
-Coast LLC, licensed under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/).
-Independent fan project — not approved, endorsed, or sponsored by Wizards of
-the Coast.
+Bundled third-party content (SRD 5.2.1 + required attribution + token
+artwork credits): see [NOTICE.md](NOTICE.md). The full required SRD
+5.2.1 attribution is visible in the app's "About BoltBerry" dialog.

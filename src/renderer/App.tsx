@@ -95,6 +95,14 @@ export default function App() {
     return () => window.removeEventListener('dashboard:open-palette', onOpen)
   }, [])
 
+  // The Bestiarium / Compendium attribution strips dispatch this so a
+  // visible short-credit deep-links to the full canonical attribution.
+  useEffect(() => {
+    const onOpenAbout = () => setShowAbout(true)
+    window.addEventListener('app:open-about', onOpenAbout)
+    return () => window.removeEventListener('app:open-about', onOpenAbout)
+  }, [])
+
   // Initialize settings first (may switch the DB path), then load campaigns.
   // Sequencing matters: loadCampaigns must query whichever DB is authoritative
   // for this session — which is only known after initializeSettings completes.

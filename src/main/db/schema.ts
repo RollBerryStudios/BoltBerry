@@ -687,10 +687,9 @@ CREATE INDEX IF NOT EXISTS idx_token_templates_slug ON token_templates(slug);
 UPDATE schema_version SET version = 26;
 `
 
-// Migration: v26 → v27 — retire two seeded rows that were bundled under
-// names protected by Wizards of the Coast IP (Beholder, Mind Flayer).
-// Those creatures are not part of SRD 5.2 CC-BY-4.0. Only rows still
-// untouched by the user (source='srd', name unchanged) are removed;
+// Migration: v26 → v27 — retire two seeded rows whose names are not part
+// of the SRD 5.2.1 CC-BY-4.0 release (Beholder, Mind Flayer). Only rows
+// still untouched by the user (source='srd', name unchanged) are removed;
 // anyone who renamed or otherwise edited the row keeps their copy.
 export const MIGRATE_V26_TO_V27 = `
 DELETE FROM token_templates

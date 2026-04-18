@@ -1,9 +1,8 @@
-/* SRD 5.2 creature templates seeded into token_templates on first run.
+/* SRD 5.2.1 creature templates seeded into token_templates on first run.
 
-   Source: Wizards of the Coast, D&D 5e SRD v5.2.1 — Creative Commons
-   Attribution 4.0 International (CC-BY-4.0). Stats are the SRD baseline;
-   DMs can duplicate into the user-scoped library to tweak without
-   losing the canonical copy.
+   Stats are the SRD 5.2.1 baseline (CC-BY-4.0); DMs can duplicate into
+   the user-scoped library to tweak without losing the canonical copy.
+   Full attribution lives in NOTICE.md and the in-app About dialog.
 
    Sizes follow BoltBerry's grid-cell convention: Small/Medium = 1,
    Large = 2, Huge = 3. Tiny creatures are rounded to 1 because the token

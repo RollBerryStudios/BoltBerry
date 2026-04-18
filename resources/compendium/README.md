@@ -7,15 +7,16 @@ PDFs in this folder ship with the installer and appear in the app's
 
 | File | Source | License |
 |---|---|---|
-| `srd-de-5.2.1.pdf` | [D&D Beyond — SRD CC 5.2.1 (DE)](https://media.dndbeyond.com/compendium-images/srd/5.2/DE_SRD_CC_v5.2.1.pdf) | [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) — © Wizards of the Coast LLC, SRD 5.2 |
-| `srd-en-5.2.1.pdf` | [D&D Beyond — SRD CC 5.2.1 (EN)](https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf) | [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) — © Wizards of the Coast LLC, SRD 5.2 |
+| `srd-de-5.2.1.pdf` | <https://www.dndbeyond.com/srd> | [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode.de) |
+| `srd-en-5.2.1.pdf` | <https://www.dndbeyond.com/srd> | [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode) |
 
-Both PDFs are committed directly to the repo — the CC-BY-4.0 license
-explicitly allows redistribution as long as the attribution (see
-[`NOTICE.md`](../../NOTICE.md) at repo root and the in-app Kompendium
-header strip) is preserved. The `extraResources` rule in
-[`electron-builder.yml`](../../electron-builder.yml) ships them inside
-the installer.
+The full required attribution string is in [`NOTICE.md`](../../NOTICE.md)
+and rendered in-app in the "About BoltBerry" dialog and as a clickable
+short-credit strip above the Compendium PDF list.
+
+The `extraResources` rule in
+[`electron-builder.yml`](../../electron-builder.yml) bundles every
+`*.pdf` in this folder into the installer.
 
 End users can add their own PDFs through the in-app "PDF importieren"
 button — those land in `<userDataFolder>/compendium/` and are merged

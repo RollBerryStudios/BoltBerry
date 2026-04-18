@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 import pkg from '../../../package.json'
 
 /* About dialog — single authoritative surface for attributions and legal
@@ -59,27 +59,37 @@ export function AboutDialog({ onClose }: { onClose: () => void }) {
             </p>
           </section>
 
-          {/* SRD attribution — required by CC-BY-4.0 */}
+          {/* SRD attribution — verbatim CC-BY-4.0 attribution as required
+              by the SRD 5.2.1 licence. The two URLs are clickable. No
+              additional references to Wizards or its parent/subsidiary
+              companies are added per the licence terms. */}
           <section>
             <h3 className="bb-about-section-title">{t('about.srdTitle')}</h3>
             <p className="bb-about-text">
-              {t('about.srdBody1')}{' '}
-              <strong>Wizards of the Coast LLC</strong>{t('about.srdBody2')}{' '}
-              <a
-                className="bb-about-link"
-                href="https://creativecommons.org/licenses/by/4.0/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Creative Commons Attribution 4.0 International (CC-BY-4.0)
-              </a>
-              .
-            </p>
-            <p className="bb-about-text">
-              {t('about.srdModifications')}
+              <Trans
+                i18nKey="about.srdAttribution"
+                components={{
+                  srd: (
+                    <a
+                      className="bb-about-link"
+                      href="https://www.dndbeyond.com/srd"
+                      target="_blank"
+                      rel="noreferrer"
+                    />
+                  ),
+                  cc: (
+                    <a
+                      className="bb-about-link"
+                      href={t('about.srdLicenceUrl')}
+                      target="_blank"
+                      rel="noreferrer"
+                    />
+                  ),
+                }}
+              />
             </p>
             <p className="bb-about-disclaimer">
-              {t('about.srdDisclaimer')}
+              {t('about.srdModifications')}
             </p>
           </section>
 
