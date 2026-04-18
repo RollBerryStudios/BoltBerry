@@ -83,10 +83,10 @@ export function SettingsPanel() {
       const result = await window.electronAPI.importCampaign() as { success: boolean; campaignId?: number; error?: string; canceled?: boolean }
       if (result.success && result.campaignId) {
         const campaigns = await window.electronAPI.dbQuery<{
-          id: number; name: string; created_at: string; last_opened: string
-        }>('SELECT * FROM campaigns ORDER BY last_opened DESC')
+          id: number; name: string; cover_path: string | null; created_at: string; last_opened: string
+        }>('SELECT id, name, cover_path, created_at, last_opened FROM campaigns ORDER BY last_opened DESC')
         useCampaignStore.getState().setCampaigns(campaigns.map((c) => ({
-          id: c.id, name: c.name, createdAt: c.created_at, lastOpened: c.last_opened,
+          id: c.id, name: c.name, coverPath: c.cover_path, createdAt: c.created_at, lastOpened: c.last_opened,
         })))
         setActiveCampaign(result.campaignId)
         showToast('Kampagne importiert', 'success', 6000)

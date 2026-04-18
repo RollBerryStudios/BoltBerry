@@ -267,6 +267,7 @@ export function CampaignView() {
             <HeroMap
               map={heroMap}
               campaignName={campaign?.name ?? ''}
+              coverPath={campaign?.coverPath ?? null}
               onOpen={() => setActiveMap(heroMap.id)}
               label={t('workspace.openGameView')}
               kicker={t('workspace.continueAtMap')}
@@ -344,12 +345,14 @@ export function CampaignView() {
 function HeroMap({
   map,
   campaignName,
+  coverPath,
   onOpen,
   label,
   kicker,
 }: {
   map: MapRecord
   campaignName: string
+  coverPath: string | null
   onOpen: () => void
   label: string
   kicker: string
@@ -368,7 +371,7 @@ function HeroMap({
       }}
     >
       <div className="bb-ws-hero-cover">
-        <MapThumbnail path={map.imagePath} campaignName={campaignName} />
+        <MapThumbnail path={coverPath ?? map.imagePath} campaignName={campaignName} />
         <div className="bb-ws-hero-cover-fade" aria-hidden="true" />
       </div>
       <div className="bb-ws-hero-body">

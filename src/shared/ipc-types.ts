@@ -124,6 +124,7 @@ export type WeatherType = 'none' | 'rain' | 'snow' | 'fog' | 'wind'
 export interface Campaign {
   id: number
   name: string
+  coverPath: string | null
   createdAt: string
   lastOpened: string
 }

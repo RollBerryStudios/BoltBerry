@@ -198,7 +198,18 @@
     "newCampaign": "New campaign",
     "importCampaign": "Import\u2026",
     "openCompendium": "Compendium",
-    "lastPlayed": "Last"
+    "lastPlayed": "Last",
+    "tagGreeted": "Welcome back, {{name}}",
+    "profile": "Profile",
+    "editProfile": "Edit profile",
+    "profileTitle": "Your profile",
+    "profileName": "Name",
+    "profileNamePlaceholder": "What should we call you?",
+    "profileAvatar": "Avatar color",
+    "profileAutoHue": "Auto from name",
+    "profileSave": "Save",
+    "setCover": "Set cover",
+    "clearCover": "Clear cover"
   },
   "dashboard": {
     "greetingMorning": "Good morning",

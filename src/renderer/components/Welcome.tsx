@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCampaignStore } from '../stores/campaignStore'
+import { useSettingsStore } from '../stores/settingsStore'
 import { useUIStore } from '../stores/uiStore'
 import { formatError } from '../utils/formatError'
 import type { Campaign } from '@shared/ipc-types'
@@ -53,6 +54,7 @@ export function Welcome() {
       const campaign: Campaign = {
         id: result.lastInsertRowid,
         name: newName.trim(),
+        coverPath: null,
         createdAt: new Date().toISOString(),
         lastOpened: new Date().toISOString(),
       }
@@ -71,7 +73,7 @@ export function Welcome() {
       const result = await window.electronAPI.importCampaign()
       if (result?.success && result.campaignId) {
         const rows = await window.electronAPI.dbQuery<Campaign>(
-          'SELECT id, name, created_at as createdAt, last_opened as lastOpened FROM campaigns WHERE id = ?',
+          'SELECT id, name, cover_path as coverPath, created_at as createdAt, last_opened as lastOpened FROM campaigns WHERE id = ?',
           [result.campaignId],
         )
         if (rows[0]) addCampaign(rows[0])
@@ -124,6 +126,27 @@ export function Welcome() {
 
   const stats = useCampaignStats(useMemo(() => campaigns.map((c) => c.id), [campaigns]))
   const global = useGlobalStats([campaigns.length])
+  const [profileOpen, setProfileOpen] = useState(false)
+
+  async function handleSetCover(campaign: Campaign) {
+    if (!window.electronAPI) return
+    const asset = await window.electronAPI.importFile('handout', campaign.id)
+    if (!asset) return
+    await window.electronAPI.dbRun(
+      'UPDATE campaigns SET cover_path = ? WHERE id = ?',
+      [asset.path, campaign.id],
+    )
+    updateCampaign(campaign.id, { coverPath: asset.path })
+  }
+
+  async function handleClearCover(campaign: Campaign) {
+    if (!window.electronAPI || !campaign.coverPath) return
+    await window.electronAPI.dbRun(
+      'UPDATE campaigns SET cover_path = NULL WHERE id = ?',
+      [campaign.id],
+    )
+    updateCampaign(campaign.id, { coverPath: null })
+  }
 
   return (
     <div className="bb-welcome">
@@ -141,10 +164,15 @@ export function Welcome() {
         onRename={handleRename}
         onDuplicate={handleDuplicate}
         onDelete={handleDelete}
+        onSetCover={handleSetCover}
+        onClearCover={handleClearCover}
         onCreate={() => setCreating(true)}
         onImport={handleImport}
+        onOpenProfile={() => setProfileOpen(true)}
         error={error}
       />
+
+      {profileOpen && <ProfileModal onClose={() => setProfileOpen(false)} />}
 
       {creating && (
         <CreateModal
@@ -169,6 +197,7 @@ function LeftPane({
   stats: { campaignCount: number; mapCount: number; characterCount: number }
 }) {
   const { t } = useTranslation()
+  const displayName = useSettingsStore((s) => s.displayName)
   return (
     <aside className="bb-welcome-left grain">
       <Atmosphere />
@@ -184,7 +213,11 @@ function LeftPane({
       </div>
 
       <div className="bb-welcome-hero">
-        <div className="bb-welcome-tag">{t('welcome.tag')}</div>
+        <div className="bb-welcome-tag">
+          {displayName
+            ? t('welcome.tagGreeted', { name: displayName })
+            : t('welcome.tag')}
+        </div>
         <h1 className="bb-welcome-h1 display">
           <span className="bb-welcome-h1-dim">{t('welcome.h1a')}</span>{' '}
           <span className="bb-welcome-h1-dim">{t('welcome.h1b')}</span>
@@ -245,8 +278,11 @@ function RightPane({
   onRename,
   onDuplicate,
   onDelete,
+  onSetCover,
+  onClearCover,
   onCreate,
   onImport,
+  onOpenProfile,
   error,
 }: {
   language: 'de' | 'en'
@@ -257,8 +293,11 @@ function RightPane({
   onRename: (c: Campaign, name: string) => void
   onDuplicate: (c: Campaign) => void
   onDelete: (c: Campaign) => void
+  onSetCover: (c: Campaign) => void
+  onClearCover: (c: Campaign) => void
   onCreate: () => void
   onImport: () => void
+  onOpenProfile: () => void
   error: string | null
 }) {
   const { t } = useTranslation()
@@ -267,6 +306,14 @@ function RightPane({
   return (
     <section className="bb-welcome-right">
       <div className="bb-welcome-right-top">
+        <button
+          type="button"
+          className="bb-welcome-compendium-btn"
+          onClick={onOpenProfile}
+          title={t('welcome.editProfile')}
+        >
+          👤 {t('welcome.profile')}
+        </button>
         <button
           type="button"
           className="bb-welcome-compendium-btn"
@@ -315,6 +362,8 @@ function RightPane({
                 onRename={(name) => onRename(c, name)}
                 onDuplicate={() => onDuplicate(c)}
                 onDelete={() => onDelete(c)}
+                onSetCover={() => onSetCover(c)}
+                onClearCover={() => onClearCover(c)}
               />
             ))}
           </div>
@@ -345,6 +394,8 @@ function CampaignRow({
   onRename,
   onDuplicate,
   onDelete,
+  onSetCover,
+  onClearCover,
 }: {
   campaign: Campaign
   stats: import('./campaign-data').CampaignStats | undefined
@@ -352,6 +403,8 @@ function CampaignRow({
   onRename: (name: string) => void
   onDuplicate: () => void
   onDelete: () => void
+  onSetCover: () => void
+  onClearCover: () => void
 }) {
   const { t } = useTranslation()
   const relative = useRelativeTime(campaign.lastOpened)
@@ -388,7 +441,7 @@ function CampaignRow({
       }}
     >
       <div className="bb-welcome-row-cover">
-        <MapThumbnail path={stats?.thumbnailPath ?? null} campaignName={campaign.name} />
+        <MapThumbnail path={campaign.coverPath ?? stats?.thumbnailPath ?? null} campaignName={campaign.name} />
       </div>
 
       <div className="bb-welcome-row-body">
@@ -471,6 +524,14 @@ function CampaignRow({
             <button
               type="button"
               className="bb-welcome-row-action"
+              title={campaign.coverPath ? t('welcome.clearCover') : t('welcome.setCover')}
+              onClick={stop(campaign.coverPath ? onClearCover : onSetCover)}
+            >
+              {campaign.coverPath ? '🖼️' : '📷'}
+            </button>
+            <button
+              type="button"
+              className="bb-welcome-row-action"
               title={t('dashboard.duplicate')}
               onClick={stop(onDuplicate)}
             >
@@ -492,6 +553,88 @@ function CampaignRow({
 }
 
 // ─── Create campaign modal ────────────────────────────────────────────
+
+// ─── Profile modal ───────────────────────────────────────────────────
+
+function ProfileModal({ onClose }: { onClose: () => void }) {
+  const { t } = useTranslation()
+  const { displayName, avatarHue, setDisplayName, setAvatarHue } = useSettingsStore()
+  const [draftName, setDraftName] = useState(displayName)
+  const [draftHue, setDraftHue] = useState<number | null>(avatarHue)
+
+  function commit() {
+    setDisplayName(draftName)
+    setAvatarHue(draftHue)
+    onClose()
+  }
+
+  return (
+    <div className="bb-welcome-modal-backdrop" onClick={onClose}>
+      <div className="bb-welcome-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="bb-welcome-modal-title display">{t('welcome.profileTitle')}</div>
+
+        <label style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+          <span style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: 700 }}>
+            {t('welcome.profileName')}
+          </span>
+          <input
+            className="input"
+            autoFocus
+            placeholder={t('welcome.profileNamePlaceholder')}
+            maxLength={40}
+            value={draftName}
+            onChange={(e) => setDraftName(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') commit()
+              if (e.key === 'Escape') onClose()
+            }}
+          />
+        </label>
+
+        <div>
+          <div style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: 700, marginBottom: 6 }}>
+            {t('welcome.profileAvatar')}
+          </div>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            {[null, 40, 80, 140, 200, 260, 320].map((h) => {
+              const selected = draftHue === h
+              const bg = h === null ? 'var(--bg-elevated)' : `hsl(${h} 60% 45%)`
+              return (
+                <button
+                  key={String(h)}
+                  type="button"
+                  onClick={() => setDraftHue(h)}
+                  style={{
+                    width: 32, height: 32,
+                    borderRadius: '50%',
+                    background: bg,
+                    border: selected ? '2px solid var(--text-primary)' : '2px solid transparent',
+                    cursor: 'pointer',
+                    color: 'var(--text-inverse)',
+                    fontSize: 12,
+                    fontWeight: 700,
+                  }}
+                  title={h === null ? t('welcome.profileAutoHue') : `${h}°`}
+                >
+                  {h === null ? '?' : ''}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        <div className="bb-welcome-modal-actions">
+          <button className="bb-welcome-cta bb-welcome-cta-ghost" type="button" onClick={onClose}>
+            {t('dashboard.cancel')}
+          </button>
+          <button className="bb-welcome-cta" type="button" onClick={commit}>
+            {t('welcome.profileSave')}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 function CreateModal({
   value,

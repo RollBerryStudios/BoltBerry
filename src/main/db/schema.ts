@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 29
+export const SCHEMA_VERSION = 30
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -167,6 +167,7 @@ export const CREATE_TABLES_SQL = `
 CREATE TABLE IF NOT EXISTS campaigns (
   id          INTEGER PRIMARY KEY AUTOINCREMENT,
   name        TEXT    NOT NULL,
+  cover_path  TEXT,
   created_at  TEXT    NOT NULL DEFAULT (datetime('now')),
   last_opened TEXT    NOT NULL DEFAULT (datetime('now'))
 );
@@ -706,6 +707,15 @@ export const MIGRATE_V28_TO_V29 = `
 ALTER TABLE notes ADD COLUMN tags TEXT;
 CREATE INDEX IF NOT EXISTS idx_notes_campaign ON notes(campaign_id);
 UPDATE schema_version SET version = 29;
+`
+
+// Migration: v29 → v30 — add campaigns.cover_path. Stores a userData-
+// relative path to an image the user has set as the campaign's cover;
+// rendered by Welcome, Workspace hero, and campaign cards. NULL falls
+// back to the first map's thumbnail (existing behavior).
+export const MIGRATE_V29_TO_V30 = `
+ALTER TABLE campaigns ADD COLUMN cover_path TEXT;
+UPDATE schema_version SET version = 30;
 `
 
 // Use the SCHEMA_VERSION constant directly so there's a single source of truth.

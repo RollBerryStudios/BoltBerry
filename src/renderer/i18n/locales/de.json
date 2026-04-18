@@ -198,7 +198,18 @@
     "newCampaign": "Neue Kampagne",
     "importCampaign": "Importieren\u2026",
     "openCompendium": "Kompendium",
-    "lastPlayed": "Zuletzt"
+    "lastPlayed": "Zuletzt",
+    "tagGreeted": "Willkommen zurück, {{name}}",
+    "profile": "Profil",
+    "editProfile": "Profil bearbeiten",
+    "profileTitle": "Dein Profil",
+    "profileName": "Name",
+    "profileNamePlaceholder": "Wie heißt du?",
+    "profileAvatar": "Avatar-Farbe",
+    "profileAutoHue": "Automatisch aus Name",
+    "profileSave": "Speichern",
+    "setCover": "Cover setzen",
+    "clearCover": "Cover entfernen"
   },
   "dashboard": {
     "greetingMorning": "Guten Morgen",
