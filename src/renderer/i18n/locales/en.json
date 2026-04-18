@@ -104,7 +104,22 @@
     "variantsLabel": "Variants",
     "noVariants": "none yet",
     "importVariants": "Import custom artwork",
-    "openVariantsFolder": "Open folder"
+    "openVariantsFolder": "Open folder",
+    "filterType": "Type",
+    "filterFaction": "Faction",
+    "filterSource": "Source",
+    "filterAll": "All",
+    "clearFilters": "Clear filters",
+    "sortBy": "Sort",
+    "sortCrAsc": "CR \u2191",
+    "sortCrDesc": "CR \u2193",
+    "sortNameAsc": "Name A\u2013Z",
+    "sortHpDesc": "HP \u2193",
+    "sortAcDesc": "AC \u2193",
+    "faction_enemy": "Enemy",
+    "faction_neutral": "Neutral",
+    "faction_friendly": "Friendly",
+    "faction_party": "Party"
   },
   "workspace": {
     "backToCampaigns": "Campaigns",

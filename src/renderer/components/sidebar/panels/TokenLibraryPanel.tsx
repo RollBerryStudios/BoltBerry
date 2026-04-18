@@ -13,6 +13,7 @@ import type { MapRecord, TokenVariant } from '@shared/ipc-types'
 
 type Category = 'monster' | 'player' | 'npc'
 type Source = 'srd' | 'user'
+type SortKey = 'cr-asc' | 'cr-desc' | 'name-asc' | 'hp-desc' | 'ac-desc'
 
 interface AbilityScores {
   str: number; dex: number; con: number
@@ -58,6 +59,10 @@ export function TokenLibraryPanel() {
 
   const [category, setCategory] = useState<Category>('monster')
   const [query, setQuery] = useState('')
+  const [typeFilter, setTypeFilter] = useState<string>('')
+  const [factionFilter, setFactionFilter] = useState<string>('')
+  const [sourceFilter, setSourceFilter] = useState<'' | 'srd' | 'user'>('')
+  const [sortBy, setSortBy] = useState<SortKey>('cr-asc')
   const [templates, setTemplates] = useState<TokenTemplate[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -113,8 +118,11 @@ export function TokenLibraryPanel() {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return templates.filter((tpl) => {
+    const matched = templates.filter((tpl) => {
       if (tpl.category !== category) return false
+      if (typeFilter && tpl.creature_type !== typeFilter) return false
+      if (factionFilter && tpl.faction !== factionFilter) return false
+      if (sourceFilter && tpl.source !== sourceFilter) return false
       if (!q) return true
       return (
         tpl.name.toLowerCase().includes(q) ||
@@ -122,7 +130,27 @@ export function TokenLibraryPanel() {
         tpl.cr?.includes(q)
       )
     })
-  }, [templates, category, query])
+    return matched.sort(compareBy(sortBy))
+  }, [templates, category, query, typeFilter, factionFilter, sourceFilter, sortBy])
+
+  // Distinct creature types actually present in the current category —
+  // drives the type filter dropdown so empty categories don't offer empty
+  // options. Same for factions (faction is freeform text in DB).
+  const availableTypes = useMemo(() => {
+    const set = new Set<string>()
+    for (const tpl of templates) {
+      if (tpl.category === category && tpl.creature_type) set.add(tpl.creature_type)
+    }
+    return Array.from(set).sort()
+  }, [templates, category])
+
+  const availableFactions = useMemo(() => {
+    const set = new Set<string>()
+    for (const tpl of templates) {
+      if (tpl.category === category && tpl.faction) set.add(tpl.faction)
+    }
+    return Array.from(set).sort()
+  }, [templates, category])
 
   const counts = useMemo(() => {
     const out: Record<Category, number> = { monster: 0, player: 0, npc: 0 }
@@ -342,6 +370,71 @@ export function TokenLibraryPanel() {
           fontSize: 12,
         }}>⚠️ {error}</div>
       )}
+
+      {/* Filter + sort bar */}
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap',
+        padding: '8px var(--sp-4)',
+        borderBottom: '1px solid var(--border-subtle)',
+        background: 'var(--bg-elevated)',
+      }}>
+        <FilterSelect
+          value={typeFilter}
+          onChange={setTypeFilter}
+          label={t('library.filterType')}
+          allLabel={t('library.filterAll')}
+          options={availableTypes.map((v) => ({ value: v, label: v }))}
+        />
+        <FilterSelect
+          value={factionFilter}
+          onChange={setFactionFilter}
+          label={t('library.filterFaction')}
+          allLabel={t('library.filterAll')}
+          options={availableFactions.map((v) => ({ value: v, label: t(`library.faction_${v}`, v) }))}
+        />
+        <FilterSelect
+          value={sourceFilter}
+          onChange={(v) => setSourceFilter(v as '' | 'srd' | 'user')}
+          label={t('library.filterSource')}
+          allLabel={t('library.filterAll')}
+          options={[
+            { value: 'srd', label: t('library.sourceSrd') },
+            { value: 'user', label: t('library.sourceUser') },
+          ]}
+        />
+        <div style={{ flex: 1 }} />
+        <FilterSelect
+          value={sortBy}
+          onChange={(v) => setSortBy(v as SortKey)}
+          label={t('library.sortBy')}
+          allLabel=""
+          options={[
+            { value: 'cr-asc', label: t('library.sortCrAsc') },
+            { value: 'cr-desc', label: t('library.sortCrDesc') },
+            { value: 'name-asc', label: t('library.sortNameAsc') },
+            { value: 'hp-desc', label: t('library.sortHpDesc') },
+            { value: 'ac-desc', label: t('library.sortAcDesc') },
+          ]}
+        />
+        {(typeFilter || factionFilter || sourceFilter) && (
+          <button
+            type="button"
+            onClick={() => { setTypeFilter(''); setFactionFilter(''); setSourceFilter('') }}
+            style={{
+              padding: '5px 10px',
+              background: 'transparent',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-sm)',
+              color: 'var(--text-muted)',
+              fontSize: 11,
+              cursor: 'pointer',
+              fontFamily: 'inherit',
+            }}
+          >
+            ✕ {t('library.clearFilters')}
+          </button>
+        )}
+      </div>
 
       {/* Card grid */}
       <div style={{
@@ -744,6 +837,49 @@ function VariantThumb({ variant }: { variant: TokenVariant }) {
   )
 }
 
+function FilterSelect({
+  value,
+  onChange,
+  label,
+  allLabel,
+  options,
+}: {
+  value: string
+  onChange: (v: string) => void
+  label: string
+  allLabel: string
+  options: Array<{ value: string; label: string }>
+}) {
+  return (
+    <label style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+      <span style={{
+        fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase',
+        fontWeight: 700, color: 'var(--text-muted)',
+      }}>{label}</span>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        style={{
+          padding: '4px 8px',
+          background: 'var(--bg-base)',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--radius-sm)',
+          color: 'var(--text-primary)',
+          fontSize: 11,
+          fontFamily: 'inherit',
+          cursor: 'pointer',
+          minWidth: 90,
+        }}
+      >
+        {allLabel && <option value="">{allLabel}</option>}
+        {options.map((o) => (
+          <option key={o.value} value={o.value}>{o.label}</option>
+        ))}
+      </select>
+    </label>
+  )
+}
+
 const variantIconBtn: React.CSSProperties = {
   padding: '4px 6px',
   background: 'transparent',
@@ -783,6 +919,34 @@ function sizeLabel(size: number): string {
   if (size === 2) return 'L'
   if (size === 3) return 'H'
   return 'G'
+}
+
+// Parse CR strings like "1/8", "1/4", "1/2", "3", "13" into a sortable
+// number. Unknown / null values go to the end.
+function crValue(cr: string | null): number {
+  if (!cr) return 9999
+  if (cr.includes('/')) {
+    const [a, b] = cr.split('/').map((s) => parseInt(s, 10))
+    if (Number.isFinite(a) && Number.isFinite(b) && b !== 0) return a / b
+    return 9999
+  }
+  const n = parseFloat(cr)
+  return Number.isFinite(n) ? n : 9999
+}
+
+function compareBy(key: SortKey): (a: TokenTemplate, b: TokenTemplate) => number {
+  switch (key) {
+    case 'cr-asc':
+      return (a, b) => crValue(a.cr) - crValue(b.cr) || a.name.localeCompare(b.name)
+    case 'cr-desc':
+      return (a, b) => crValue(b.cr) - crValue(a.cr) || a.name.localeCompare(b.name)
+    case 'name-asc':
+      return (a, b) => a.name.localeCompare(b.name)
+    case 'hp-desc':
+      return (a, b) => b.hp_max - a.hp_max || a.name.localeCompare(b.name)
+    case 'ac-desc':
+      return (a, b) => (b.ac ?? 0) - (a.ac ?? 0) || a.name.localeCompare(b.name)
+  }
 }
 
 // Inserts a token derived from a library template onto the given map.

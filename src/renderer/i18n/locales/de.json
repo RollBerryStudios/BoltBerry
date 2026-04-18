@@ -104,7 +104,22 @@
     "variantsLabel": "Varianten",
     "noVariants": "noch keine",
     "importVariants": "Eigene Bilder importieren",
-    "openVariantsFolder": "Ordner \u00f6ffnen"
+    "openVariantsFolder": "Ordner \u00f6ffnen",
+    "filterType": "Typ",
+    "filterFaction": "Fraktion",
+    "filterSource": "Quelle",
+    "filterAll": "Alle",
+    "clearFilters": "Filter l\u00f6schen",
+    "sortBy": "Sortierung",
+    "sortCrAsc": "CR \u2191",
+    "sortCrDesc": "CR \u2193",
+    "sortNameAsc": "Name A\u2013Z",
+    "sortHpDesc": "HP \u2193",
+    "sortAcDesc": "AC \u2193",
+    "faction_enemy": "Feind",
+    "faction_neutral": "Neutral",
+    "faction_friendly": "Freund",
+    "faction_party": "Gruppe"
   },
   "workspace": {
     "backToCampaigns": "Kampagnen",
