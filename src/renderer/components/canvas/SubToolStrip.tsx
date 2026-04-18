@@ -34,8 +34,15 @@ export function SubToolStrip() {
   const content = renderContent()
   if (!content) return null
 
-  const classes = ['sub-tool-strip', dockAutoHide ? 'canvas-hud-fade' : '']
-    .filter(Boolean).join(' ')
+  // When combat mode is active, the InitiativeTopStrip anchors at top:12
+  // in the same horizontal plane. Shift the SubToolStrip down by a
+  // strip-height so the two don't fight for the same pixel row.
+  const shiftForInitiative = workMode === 'combat'
+  const classes = [
+    'sub-tool-strip',
+    shiftForInitiative ? 'sub-tool-strip--low' : '',
+    dockAutoHide ? 'canvas-hud-fade' : '',
+  ].filter(Boolean).join(' ')
 
   return (
     <div className={classes} role="toolbar" aria-label={t('subtool.label')}>

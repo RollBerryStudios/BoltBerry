@@ -749,10 +749,11 @@ export function CanvasArea() {
           className="canvas-hud-fade"
           style={{
             position: 'absolute',
-            // Clear the FloatingUtilityDock (dice/audio/overlay rail, ~48 px
-            // tall at bottom-right). Minimap is larger so we offset further
-            // when it's visible.
-            bottom: showMinimap ? 220 : 60,
+            // Clear the FloatingUtilityDock (dice/audio/overlay rail, which
+            // sits at bottom:calc(statusbar-h + sp-3) = ~38 px, ~44 px tall
+            // so it extends to ~82 px). Give a pinch extra so the hover
+            // shadows don't overlap. Minimap pushes us further up.
+            bottom: showMinimap ? 220 : 96,
             right: 12,
             zIndex: 300,
             display: 'flex',

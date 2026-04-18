@@ -219,14 +219,31 @@ function ToolGroupButton({ group, activeTool, open, onToggleOpen, onClose, onSel
     }
   }, [open, onClose])
 
-  const handleClick = () => { onSelect(group.primary.id) }
+  // Primary-click UX (Foundry / Owlbear pattern):
+  //  - first click on an inactive group ⇒ activate its primary tool.
+  //  - click again on the already-active group ⇒ open the variant
+  //    popover, so users can reach variants without aiming at the
+  //    ~12-px chevron. The chevron remains as an affordance for
+  //    non-active groups + as a visual "there's more here" hint.
+  //  - right-click anywhere on the button always opens the popover.
+  const handleClick = () => {
+    if (hasVariants && groupActive) {
+      onToggleOpen()
+      return
+    }
+    onSelect(group.primary.id)
+  }
   const handleChevron = (e: React.MouseEvent) => { e.stopPropagation(); onToggleOpen() }
   const handleContext = (e: React.MouseEvent) => {
     if (!hasVariants) return
     e.preventDefault()
     onToggleOpen()
   }
-  const label = t(group.primary.labelKey) + (group.primary.shortcut ? ` [${group.primary.shortcut}]` : '')
+  const baseLabel = t(group.primary.labelKey) + (group.primary.shortcut ? ` [${group.primary.shortcut}]` : '')
+  // When a group has variants, surface the "click again for variants /
+  // right-click for variants" affordance in the tooltip so users who
+  // miss the small chevron still discover the second entry point.
+  const label = hasVariants ? `${baseLabel} · ▸` : baseLabel
 
   return (
     <div className="left-tool-group">
