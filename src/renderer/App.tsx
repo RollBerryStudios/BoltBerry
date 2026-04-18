@@ -6,6 +6,7 @@ import { AppLayout } from './components/AppLayout'
 import { CampaignView } from './components/CampaignView'
 import { Welcome } from './components/Welcome'
 import { CompendiumView } from './components/CompendiumView'
+import { AboutDialog } from './components/AboutDialog'
 import { SetupWizard } from './components/SetupWizard'
 import { ShortcutOverlay } from './components/ShortcutOverlay'
 import { CommandPalette } from './components/CommandPalette'
@@ -24,6 +25,7 @@ export default function App() {
   const { theme, blackoutActive, language } = useUIStore()
   const [showShortcuts, setShowShortcuts] = useState(false)
   const [showCommandPalette, setShowCommandPalette] = useState(false)
+  const [showAbout, setShowAbout] = useState(false)
 
   useKeyboardShortcuts()
   useAutoSave()
@@ -36,9 +38,7 @@ export default function App() {
     // Welcome listens for this and opens its create form.
     window.dispatchEvent(new CustomEvent('menu:new-campaign'))
   }, [])
-  const handleAbout = useCallback(() => {
-    showToast('BoltBerry — Virtual Tabletop')
-  }, [])
+  const handleAbout = useCallback(() => setShowAbout(true), [])
 
   useMenuActions({
     onShowShortcuts: handleShowShortcuts,
@@ -159,6 +159,7 @@ export default function App() {
         </>
       )}
       {showShortcuts && <ShortcutOverlay onClose={() => setShowShortcuts(false)} />}
+      {showAbout && <AboutDialog onClose={() => setShowAbout(false)} />}
       {showCommandPalette && <CommandPalette onClose={() => setShowCommandPalette(false)} />}
       <ToastProvider />
     </>

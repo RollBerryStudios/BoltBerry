@@ -205,6 +205,24 @@
     "globalSearchPlaceholder": "Alle PDFs…",
     "indexing": "Indexiere… {{done}}/{{total}}"
   },
+  "about": {
+    "title": "Über BoltBerry",
+    "tagline": "Lokales Virtual Tabletop",
+    "close": "Schließen",
+    "appLicence": "App-Code",
+    "appLicenceBody": "Der Quellcode dieser Anwendung steht unter der",
+    "srdTitle": "D&D 5e SRD 5.2",
+    "srdBody1": "Dieses Produkt enthält Material aus dem Dungeons & Dragons System Reference Document 5.2 (\"SRD 5.2\"), © ",
+    "srdBody2": ", lizenziert unter der",
+    "srdModifications": "Das Material wurde für die App-Darstellung ins Deutsche übersetzt und gekürzt. Es umfasst u.a. die Kreaturen-Statblocks im Bestiarium und die optional mitgelieferten SRD-PDFs im Kompendium.",
+    "srdDisclaimer": "Unabhängiges Fan-Projekt. Nicht von Wizards of the Coast genehmigt, gesponsert oder speziell lizenziert. Dungeons & Dragons und verwandte Marken sind Eigentum von Wizards of the Coast LLC.",
+    "tokenArtTitle": "Token-Artwork",
+    "tokenArtBody": "Die gebündelten Kreatur-Token stammen aus der Community-Sammlung",
+    "tokenArtQuote": "Free to use: All tokens are created with the Bing Image creator and totaly license free. Save them, share them, put them in a stew. They belong to anyone.",
+    "creditsTitle": "Open-Source-Bausteine",
+    "creditsBody": "BoltBerry nutzt mehrere Open-Source-Projekte. Vollständige Lizenz-Liste im Repository:",
+    "fullNotice": "Vollständige Drittanbieter-Hinweise:"
+  },
   "welcome": {
     "tag": "Lokales Spieltisch-Studio",
     "h1a": "Heute Abend",

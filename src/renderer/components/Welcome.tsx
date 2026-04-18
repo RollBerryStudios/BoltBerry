@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useCampaignStore } from '../stores/campaignStore'
 import { useSettingsStore } from '../stores/settingsStore'
 import { useUIStore } from '../stores/uiStore'
+import { AboutDialog } from './AboutDialog'
 import { formatError } from '../utils/formatError'
 import type { Campaign } from '@shared/ipc-types'
 import {
@@ -127,6 +128,7 @@ export function Welcome() {
   const stats = useCampaignStats(useMemo(() => campaigns.map((c) => c.id), [campaigns]))
   const global = useGlobalStats([campaigns.length])
   const [profileOpen, setProfileOpen] = useState(false)
+  const [aboutOpen, setAboutOpen] = useState(false)
 
   async function handleSetCover(campaign: Campaign) {
     if (!window.electronAPI) return
@@ -169,10 +171,12 @@ export function Welcome() {
         onCreate={() => setCreating(true)}
         onImport={handleImport}
         onOpenProfile={() => setProfileOpen(true)}
+        onOpenAbout={() => setAboutOpen(true)}
         error={error}
       />
 
       {profileOpen && <ProfileModal onClose={() => setProfileOpen(false)} />}
+      {aboutOpen && <AboutDialog onClose={() => setAboutOpen(false)} />}
 
       {creating && (
         <CreateModal
@@ -283,6 +287,7 @@ function RightPane({
   onCreate,
   onImport,
   onOpenProfile,
+  onOpenAbout,
   error,
 }: {
   language: 'de' | 'en'
@@ -298,6 +303,7 @@ function RightPane({
   onCreate: () => void
   onImport: () => void
   onOpenProfile: () => void
+  onOpenAbout: () => void
   error: string | null
 }) {
   const { t } = useTranslation()
@@ -306,6 +312,14 @@ function RightPane({
   return (
     <section className="bb-welcome-right">
       <div className="bb-welcome-right-top">
+        <button
+          type="button"
+          className="bb-welcome-compendium-btn"
+          onClick={onOpenAbout}
+          title={t('about.title')}
+        >
+          ℹ
+        </button>
         <button
           type="button"
           className="bb-welcome-compendium-btn"
