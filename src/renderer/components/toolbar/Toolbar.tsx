@@ -327,7 +327,6 @@ export function Toolbar() {
     showPlayerEye, togglePlayerEye,
     playerConnected,
   } = useUIStore()
-  const sessionMode = useUIStore((s) => s.sessionMode)
   const { activeCampaignId, campaigns, activeMapId, activeMaps } = useCampaignStore()
   const [showMonitorDialog, setShowMonitorDialog] = useState(false)
   const [showSessionStartModal, setShowSessionStartModal] = useState(false)
