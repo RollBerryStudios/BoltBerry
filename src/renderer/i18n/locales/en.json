@@ -300,6 +300,14 @@
     "importError": "Import failed: {{error}}",
     "preloadMissing": "Preload script not loaded. The database is unreachable \u2014 please restart the app."
   },
+  "wallMenu": {
+    "openDoor": "🚪 Open",
+    "closeDoor": "🔒 Close",
+    "asDoor": "🚪 Make door",
+    "asWindow": "🪟 Make window",
+    "asWall": "🧱 Make wall",
+    "delete": "❌ Delete"
+  },
   "subtool": {
     "label": "Tool options",
     "fogBrush": "Brush size",

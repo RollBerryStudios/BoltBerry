@@ -8,6 +8,7 @@ import { useMapTransformStore, screenToMapPure, mapToScreenPure } from '../../st
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useUndoStore, nextCommandId } from '../../stores/undoStore'
+import { showToast } from '../shared/Toast'
 
 interface FogLayerProps {
   mapId: number
@@ -66,7 +67,18 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
 
     loadFogFromDb(mapId, explored, covered)
       .then(() => refreshDisplay())
-      .catch((err) => console.error('[FogLayer] loadFogFromDb failed:', err))
+      .catch((err) => {
+        console.error('[FogLayer] loadFogFromDb failed:', err)
+        // Surface the failure to the DM so they don't unknowingly start a
+        // session on an empty fog canvas — previously the error was
+        // console-only and the player would see whatever (likely nothing)
+        // ended up painted.
+        showToast(
+          'Nebel der Karte konnte nicht geladen werden — Zustand setzt auf leer.',
+          'error',
+          7000,
+        )
+      })
 
     return () => {
       if (saveTimer) { clearTimeout(saveTimer); saveTimer = null }

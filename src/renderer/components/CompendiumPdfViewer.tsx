@@ -249,10 +249,18 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
   }, [loaded])
 
   // Lazy-build the index the first time the user opens search. Re-opening is
-  // cheap: the ref is preserved across opens until the doc changes.
+  // cheap: the ref is preserved across opens until the doc changes. A local
+  // `cancelled` flag guards against state updates firing after the component
+  // unmounts or the user switches PDFs mid-index — without it the last
+  // `setSearchState({ phase: 'ready' })` would leak against a stale doc.
   useEffect(() => {
     if (!searchOpen || !loaded) return
-    void ensureIndex()
+    let cancelled = false
+    void (async () => {
+      await ensureIndex()
+      if (cancelled) return
+    })()
+    return () => { cancelled = true }
   }, [searchOpen, loaded, ensureIndex])
 
   const searchResults: SearchHit[] = useMemo(() => {

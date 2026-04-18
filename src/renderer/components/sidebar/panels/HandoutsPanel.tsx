@@ -625,11 +625,43 @@ function HandoutLightbox({ handout, onClose }: { handout: HandoutRecord; onClose
 
 function HandoutThumbnail({ path, onClick }: { path: string; onClick: () => void }) {
   const url = useImageUrl(path)
-  if (!url) return null
+  const [broken, setBroken] = useState(false)
+
+  // Explicit fallback when the image file is missing from disk (e.g. the
+  // user deleted it outside BoltBerry). Without this the card rendered
+  // blank with no clue what went wrong. We flag `broken` from either the
+  // hook returning nothing OR an `<img onError>` firing at load time.
+  if (!url || broken) {
+    return (
+      <div
+        onClick={onClick}
+        style={{
+          width: '100%',
+          height: 160,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 6,
+          background: 'var(--bg-base)',
+          color: 'var(--text-muted)',
+          fontSize: 12,
+          cursor: 'pointer',
+          border: '1px dashed var(--border)',
+        }}
+        title={path}
+      >
+        <span style={{ fontSize: 24, opacity: 0.6 }}>🖼️</span>
+        <span>Bilddatei fehlt</span>
+      </div>
+    )
+  }
+
   return (
     <img
       src={url}
       onClick={onClick}
+      onError={() => setBroken(true)}
       style={{
         width: '100%',
         height: 160,

@@ -4,6 +4,12 @@ import Konva from 'konva'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useWallStore } from '../../stores/wallStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
+
+// Accept the hex shapes actually produced by the token editor and the
+// bundled defaults (#rgb, #rrggbb). Anything else falls back to the
+// sensible default rather than silently corrupting the gradient.
+const HEX_COLOR_RE = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/
+function isValidHexColor(s: string): boolean { return HEX_COLOR_RE.test(s) }
 import { useCampaignStore } from '../../stores/campaignStore'
 import { computeVisibilityPolygon, type Segment } from '../../utils/losEngine'
 
@@ -45,9 +51,14 @@ export function LightingLayer({ mapId, gridSize }: LightingLayerProps) {
   const lights: LightToken[] = useMemo(() => {
     if (activeMapId !== mapId) return []
     return tokens
-      .filter((t) => t.lightRadius > 0)
+      // Filter out bad light data: NaN / negative / non-finite radii, and
+      // anything that isn't a real positive number. A NaN sneaks in when the
+      // DB column round-trips through a broken import or a dirty template.
+      .filter((t) => Number.isFinite(t.lightRadius) && t.lightRadius > 0)
       .map((token) => {
-        const rawColor = token.lightColor || '#ffcc44'
+        const rawColor = token.lightColor && isValidHexColor(token.lightColor)
+          ? token.lightColor
+          : '#ffcc44'
         const lightColor = rawColor.length === 4
           ? '#' + rawColor[1] + rawColor[1] + rawColor[2] + rawColor[2] + rawColor[3] + rawColor[3]
           : rawColor

@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useMemo, RefObject } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Layer, Line, Circle, Group, Rect, Text } from 'react-konva'
 import { Html } from 'react-konva-utils'
 import Konva from 'konva'
@@ -23,6 +24,7 @@ const WALL_WIDTH = 4
 const SELECTED_COLOR = '#2F6BFF'
 
 export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
+  const { t } = useTranslation()
   const { walls, addWall, removeWall, updateWall, toggleDoor } = useWallStore()
   const activeTool = useUIStore((s) => s.activeTool)
   const scale = useMapTransformStore((s) => s.scale)
@@ -308,7 +310,7 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
                   onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
                   onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
                 >
-                  {wall.doorState === 'open' ? '🔒 Schließen' : '🚪 Öffnen'}
+                  {wall.doorState === 'open' ? t('wallMenu.closeDoor') : t('wallMenu.openDoor')}
                 </button>
               )}
               <button
@@ -317,7 +319,7 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
                 onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
               >
-                🚪 Als Tür
+                {t('wallMenu.asDoor')}
               </button>
               <button
                 style={{ display: 'block', width: '100%', padding: '6px 12px', background: 'none', border: 'none', textAlign: 'left', fontSize: 'var(--text-sm)', color: 'var(--text-primary)', cursor: 'pointer' }}
@@ -325,7 +327,7 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
                 onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
               >
-                🪟 Als Fenster
+                {t('wallMenu.asWindow')}
               </button>
               <button
                 style={{ display: 'block', width: '100%', padding: '6px 12px', background: 'none', border: 'none', textAlign: 'left', fontSize: 'var(--text-sm)', color: 'var(--text-primary)', cursor: 'pointer' }}
@@ -333,7 +335,7 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
                 onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
               >
-                🧱 Als Wand
+                {t('wallMenu.asWall')}
               </button>
               <div style={{ height: 1, background: 'var(--border-subtle)', margin: '4px 0' }} />
               <button
@@ -342,7 +344,7 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
                 onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
               >
-                ❌ Löschen
+                {t('wallMenu.delete')}
               </button>
             </div>
           </Html>

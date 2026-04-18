@@ -7,6 +7,7 @@ import { CharacterSheetPanel } from './sidebar/panels/CharacterSheetPanel'
 import { HandoutsPanel } from './sidebar/panels/HandoutsPanel'
 import { AudioPanel } from './sidebar/panels/AudioPanel'
 import { TokenLibraryPanel } from './sidebar/panels/TokenLibraryPanel'
+import { showToast } from './shared/Toast'
 import {
   CampaignDataStyles,
   MapThumbnail,
@@ -123,7 +124,14 @@ export function CampaignView() {
     setImporting(true)
     try {
       const asset = await window.electronAPI.importFile('map', activeCampaignId)
-      if (!asset) return
+      // importFile returns null on user-cancel; treat that as silent.
+      // Any other falsy value means the copy/read failed — toast the
+      // failure so the user doesn't think they mis-clicked.
+      if (asset === null) return
+      if (!asset || !asset.path) {
+        showToast('Karte konnte nicht importiert werden — Datei konnte nicht kopiert werden', 'error', 6000)
+        return
+      }
 
       const fileName = asset.path.split(/[\\/]/).pop() || ''
       const finalMapName = fileName.replace(/\.[^/.]+$/, '') || 'Neue Karte'
@@ -158,6 +166,7 @@ export function CampaignView() {
       setActiveMap(newMap.id)
     } catch (err) {
       console.error('[CampaignView] importFirstMap failed:', err)
+      showToast('Karten-Import fehlgeschlagen: ' + (err instanceof Error ? err.message : String(err)), 'error', 7000)
     } finally {
       setImporting(false)
     }

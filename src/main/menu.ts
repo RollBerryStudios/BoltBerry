@@ -31,6 +31,10 @@ export type MenuAction =
 
 let currentLanguage: MenuLanguage = 'de'
 
+/** Current UI language — read by other main-process modules (e.g. dialog
+ * warnings in app-handlers) so that their copy matches the DM's toggle. */
+export function getMenuLanguage(): MenuLanguage { return currentLanguage }
+
 function send(action: MenuAction) {
   const dm = getDMWindow()
   if (dm && !dm.isDestroyed()) {

@@ -8,17 +8,24 @@ interface Props {
 
 interface State {
   error: Error | null
+  /** Bumped on retry so the children remount with fresh state instead of
+   * re-rendering the same broken tree that threw in the first place. */
+  resetKey: number
 }
 
 export class ErrorBoundary extends Component<Props, State> {
-  state: State = { error: null }
+  state: State = { error: null, resetKey: 0 }
 
-  static getDerivedStateFromError(error: Error): State {
+  static getDerivedStateFromError(error: Error): Partial<State> {
     return { error }
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
     console.error(`[BoltBerry ErrorBoundary – ${this.props.label ?? 'unknown'}]`, error, info)
+  }
+
+  private handleRetry = () => {
+    this.setState((s) => ({ error: null, resetKey: s.resetKey + 1 }))
   }
 
   render() {
@@ -45,13 +52,15 @@ export class ErrorBoundary extends Component<Props, State> {
           <button
             className="btn btn-ghost"
             style={{ fontSize: 'var(--text-xs)' }}
-            onClick={() => this.setState({ error: null })}
+            onClick={this.handleRetry}
           >
             Erneut versuchen
           </button>
         </div>
       )
     }
-    return this.props.children
+    // Force the children to remount after a retry so any stale state that
+    // produced the crash is cleared, not just the boundary's own state.
+    return <div key={this.state.resetKey} style={{ display: 'contents' }}>{this.props.children}</div>
   }
 }

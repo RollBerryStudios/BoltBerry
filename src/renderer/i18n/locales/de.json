@@ -300,6 +300,14 @@
     "importError": "Import fehlgeschlagen: {{error}}",
     "preloadMissing": "Preload-Skript nicht geladen. Die Datenbank ist nicht erreichbar — bitte App neu starten."
   },
+  "wallMenu": {
+    "openDoor": "🚪 Öffnen",
+    "closeDoor": "🔒 Schließen",
+    "asDoor": "🚪 Als Tür",
+    "asWindow": "🪟 Als Fenster",
+    "asWall": "🧱 Als Wand",
+    "delete": "❌ Löschen"
+  },
   "subtool": {
     "label": "Werkzeugoptionen",
     "fogBrush": "Pinselgröße",

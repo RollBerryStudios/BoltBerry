@@ -11,7 +11,7 @@ import {
   setPlayerDisplayId,
 } from '../windows'
 import { getDb, getCustomUserDataPath, setCustomUserDataPath, closeDatabase, initDatabase } from '../db/database'
-import { setMenuLanguage, type MenuLanguage } from '../menu'
+import { setMenuLanguage, getMenuLanguage, type MenuLanguage } from '../menu'
 
 const ASSET_EXTENSIONS = {
   map: ['.png', '.jpg', '.jpeg', '.webp'],
@@ -376,12 +376,30 @@ export function registerAppHandlers(): void {
     if (stats.size > MAX_SIZES[type]) {
       const sizeMB = (stats.size / (1024 * 1024)).toFixed(1)
       const maxMB = (MAX_SIZES[type] / (1024 * 1024)).toFixed(0)
+      // Respect the DM's current UI language so EN users don't get a
+      // German file-size dialog.
+      const lang = getMenuLanguage()
+      const copy = lang === 'en'
+        ? {
+            title: 'Large file',
+            message: `This file is ${sizeMB} MB (recommended max: ${maxMB} MB).`,
+            detail: 'Large files can affect performance. Import anyway?',
+            importBtn: 'Import',
+            cancelBtn: 'Cancel',
+          }
+        : {
+            title: 'Große Datei',
+            message: `Die Datei ist ${sizeMB} MB groß (empfohlen: max. ${maxMB} MB).`,
+            detail: 'Große Dateien können die Performance beeinträchtigen. Trotzdem importieren?',
+            importBtn: 'Importieren',
+            cancelBtn: 'Abbrechen',
+          }
       const { response } = await dialog.showMessageBox({
         type: 'warning',
-        title: 'Gro\u00dfe Datei',
-        message: `Die Datei ist ${sizeMB} MB gro\u00df (empfohlen: max. ${maxMB} MB).`,
-        detail: 'Gro\u00dfe Dateien k\u00f6nnen die Performance beeintr\u00e4chtigen. Trotzdem importieren?',
-        buttons: ['Importieren', 'Abbrechen'],
+        title: copy.title,
+        message: copy.message,
+        detail: copy.detail,
+        buttons: [copy.importBtn, copy.cancelBtn],
         defaultId: 0,
         cancelId: 1,
       })

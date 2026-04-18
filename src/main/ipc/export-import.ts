@@ -3,7 +3,7 @@ import path from 'path'
 import {
   existsSync, mkdirSync, createWriteStream,
   createReadStream, copyFileSync, readdirSync, readFileSync, rmSync,
-  renameSync, lstatSync, unlinkSync,
+  renameSync, lstatSync, unlinkSync, realpathSync,
 } from 'fs'
 import archiver from 'archiver'
 import unzipper from 'unzipper'
@@ -104,6 +104,11 @@ export function registerExportImportHandlers(): void {
     const userData = getEffectiveUserDataPath()
     const importDir = path.join(userData, 'imports', `import_${Date.now()}`)
     mkdirSync(importDir, { recursive: true })
+    // Canonicalize the import dir via realpathSync so the prefix check
+    // below compares OS-resolved paths. path.resolve() is string-only
+    // and would pass a malicious entry whose physical target sits outside
+    // importDir via a symlink somewhere in the parent chain.
+    const canonicalImportDir = realpathSync(importDir)
 
     let cumulativeBytes = 0
     let entryCount = 0
@@ -122,14 +127,20 @@ export function registerExportImportHandlers(): void {
 
             const entryPath: string = entry.path
 
-            if (entryPath.includes('..') || entryPath.startsWith('/') || /^[a-zA-Z]:/.test(entryPath)) {
+            // Segment-level `..` rejection so legitimate filenames like
+            // `a..b.txt` still unpack, but `foo/../../evil` is dropped.
+            const segments = entryPath.split(/[\\/]/)
+            if (
+              segments.includes('..') ||
+              entryPath.startsWith('/') ||
+              /^[a-zA-Z]:/.test(entryPath)
+            ) {
               entry.autodrain()
               return
             }
 
-            const dest = path.resolve(importDir, entryPath)
-            const realImportDir = path.resolve(importDir)
-            if (!dest.startsWith(realImportDir + path.sep) && dest !== realImportDir) {
+            const dest = path.resolve(canonicalImportDir, entryPath)
+            if (!dest.startsWith(canonicalImportDir + path.sep) && dest !== canonicalImportDir) {
               entry.autodrain()
               return
             }
