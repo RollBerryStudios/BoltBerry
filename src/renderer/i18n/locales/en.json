@@ -121,7 +121,22 @@
     "faction_friendly": "Friendly",
     "faction_party": "Party",
     "attributionPrefix": "Stat blocks derived from D&D 5e SRD 5.2 by Wizards of the Coast LLC, licensed under",
-    "attributionSuffix": "translated into German and condensed."
+    "attributionSuffix": "translated into German and condensed.",
+    "edit": "Edit",
+    "editTitle": "Edit stat block",
+    "editAbilities": "Ability scores",
+    "editAttacks": "Attacks",
+    "editTraits": "Traits",
+    "add": "Add",
+    "attackName": "Name",
+    "attackDamage": "Damage",
+    "noAttacks": "No attacks yet",
+    "noTraits": "No traits yet",
+    "fieldName": "Name",
+    "fieldType": "Type",
+    "fieldSize": "Size",
+    "fieldMarkerColor": "Marker color",
+    "save": "Save"
   },
   "workspace": {
     "backToCampaigns": "Campaigns",

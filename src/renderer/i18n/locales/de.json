@@ -121,7 +121,22 @@
     "faction_friendly": "Freund",
     "faction_party": "Gruppe",
     "attributionPrefix": "Statblocks basieren auf dem D&D 5e SRD 5.2 von Wizards of the Coast LLC, lizenziert unter",
-    "attributionSuffix": "ins Deutsche übersetzt und gekürzt."
+    "attributionSuffix": "ins Deutsche übersetzt und gekürzt.",
+    "edit": "Bearbeiten",
+    "editTitle": "Statblock bearbeiten",
+    "editAbilities": "Attributswerte",
+    "editAttacks": "Angriffe",
+    "editTraits": "Merkmale",
+    "add": "Hinzufügen",
+    "attackName": "Name",
+    "attackDamage": "Schaden",
+    "noAttacks": "Noch keine Angriffe",
+    "noTraits": "Noch keine Merkmale",
+    "fieldName": "Name",
+    "fieldType": "Typ",
+    "fieldSize": "Größe",
+    "fieldMarkerColor": "Markerfarbe",
+    "save": "Speichern"
   },
   "workspace": {
     "backToCampaigns": "Kampagnen",

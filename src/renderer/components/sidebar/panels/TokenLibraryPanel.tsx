@@ -67,6 +67,7 @@ export function TokenLibraryPanel() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [insertTick, setInsertTick] = useState(0)
+  const [editingId, setEditingId] = useState<number | null>(null)
   const [insertedName, setInsertedName] = useState('')
 
   const load = useCallback(async () => {
@@ -236,6 +237,39 @@ export function TokenLibraryPanel() {
         params,
       )
       setTemplates((prev) => prev.map((x) => (x.id === tpl.id ? { ...x, ...patch } : x)))
+    } catch (err) {
+      setError(String(err))
+    }
+  }
+
+  // Full update — used by the edit modal. Handles every editable field
+  // including stat_block and image_path with one UPDATE round-trip.
+  async function handleSaveFull(tpl: TokenTemplate, next: TokenTemplate) {
+    if (!window.electronAPI) return
+    try {
+      await window.electronAPI.dbRun(
+        `UPDATE token_templates
+         SET name = ?, image_path = ?, size = ?, hp_max = ?, ac = ?, speed = ?,
+             cr = ?, creature_type = ?, faction = ?, marker_color = ?,
+             notes = ?, stat_block = ?
+         WHERE id = ?`,
+        [
+          next.name,
+          next.image_path,
+          next.size,
+          next.hp_max,
+          next.ac,
+          next.speed,
+          next.cr,
+          next.creature_type,
+          next.faction,
+          next.marker_color,
+          next.notes,
+          next.stat_block ? JSON.stringify(next.stat_block) : null,
+          tpl.id,
+        ],
+      )
+      setTemplates((prev) => prev.map((x) => (x.id === tpl.id ? next : x)))
     } catch (err) {
       setError(String(err))
     }
@@ -486,6 +520,7 @@ export function TokenLibraryPanel() {
               key={tpl.id}
               tpl={tpl}
               onEdit={(patch) => handleEdit(tpl, patch)}
+              onOpenEditor={() => setEditingId(tpl.id)}
               onDuplicate={() => handleDuplicate(tpl)}
               onDelete={() => handleDelete(tpl)}
               onInsert={() => handleInsertOnMap(tpl)}
@@ -509,6 +544,18 @@ export function TokenLibraryPanel() {
           ✓ {t('library.inserted', { name: insertedName })}
         </div>
       )}
+
+      {editingId !== null && (() => {
+        const tpl = templates.find((x) => x.id === editingId)
+        if (!tpl) return null
+        return (
+          <TemplateEditor
+            tpl={tpl}
+            onSave={(next) => { void handleSaveFull(tpl, next); setEditingId(null) }}
+            onClose={() => setEditingId(null)}
+          />
+        )
+      })()}
     </div>
   )
 }
@@ -518,6 +565,7 @@ export function TokenLibraryPanel() {
 function TemplateCard({
   tpl,
   onEdit,
+  onOpenEditor,
   onDuplicate,
   onDelete,
   onInsert,
@@ -525,6 +573,7 @@ function TemplateCard({
 }: {
   tpl: TokenTemplate
   onEdit: (patch: Partial<Pick<TokenTemplate, 'name' | 'hp_max' | 'ac' | 'speed' | 'size' | 'cr' | 'creature_type' | 'faction' | 'marker_color'>>) => void
+  onOpenEditor: () => void
   onDuplicate: () => void
   onDelete: () => void
   onInsert: () => void
@@ -685,6 +734,14 @@ function TemplateCard({
         >
           + {t('library.addToken')}
         </button>
+        {isUser && (
+          <button
+            type="button"
+            onClick={onOpenEditor}
+            title={t('library.edit')}
+            style={iconBtn}
+          >✏️</button>
+        )}
         <button
           type="button"
           onClick={onDuplicate}
@@ -856,6 +913,358 @@ function VariantThumb({ variant }: { variant: TokenVariant }) {
         />
       )}
     </div>
+  )
+}
+
+// ─── Template editor (user-scoped rows only) ──────────────────────────
+
+function TemplateEditor({
+  tpl,
+  onSave,
+  onClose,
+}: {
+  tpl: TokenTemplate
+  onSave: (next: TokenTemplate) => void
+  onClose: () => void
+}) {
+  const { t } = useTranslation()
+  const [draft, setDraft] = useState<TokenTemplate>(tpl)
+
+  // Shortcut for mutating nested stat_block.
+  function mutStat<K extends keyof StatBlock>(key: K, value: StatBlock[K]) {
+    setDraft((d) => ({
+      ...d,
+      stat_block: { ...(d.stat_block ?? emptyStatBlock()), [key]: value },
+    }))
+  }
+
+  function setAttack(i: number, patch: Partial<StatAttack>) {
+    setDraft((d) => {
+      const sb = d.stat_block ?? emptyStatBlock()
+      const attacks = sb.attacks.map((a, j) => (i === j ? { ...a, ...patch } : a))
+      return { ...d, stat_block: { ...sb, attacks } }
+    })
+  }
+  function addAttack() {
+    setDraft((d) => {
+      const sb = d.stat_block ?? emptyStatBlock()
+      return { ...d, stat_block: { ...sb, attacks: [...sb.attacks, { name: '', bonus: '', damage: '' }] } }
+    })
+  }
+  function removeAttack(i: number) {
+    setDraft((d) => {
+      const sb = d.stat_block ?? emptyStatBlock()
+      return { ...d, stat_block: { ...sb, attacks: sb.attacks.filter((_, j) => j !== i) } }
+    })
+  }
+  function setTrait(i: number, text: string) {
+    setDraft((d) => {
+      const sb = d.stat_block ?? emptyStatBlock()
+      const traits = sb.traits.map((tr, j) => (i === j ? text : tr))
+      return { ...d, stat_block: { ...sb, traits } }
+    })
+  }
+  function addTrait() {
+    setDraft((d) => {
+      const sb = d.stat_block ?? emptyStatBlock()
+      return { ...d, stat_block: { ...sb, traits: [...sb.traits, ''] } }
+    })
+  }
+  function removeTrait(i: number) {
+    setDraft((d) => {
+      const sb = d.stat_block ?? emptyStatBlock()
+      return { ...d, stat_block: { ...sb, traits: sb.traits.filter((_, j) => j !== i) } }
+    })
+  }
+
+  const sb = draft.stat_block ?? emptyStatBlock()
+
+  return (
+    <div className="bb-lib-modal-backdrop" onClick={onClose}>
+      <div className="bb-lib-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="bb-lib-modal-header">
+          <h2 className="display" style={{ margin: 0, fontSize: 22, fontWeight: 500 }}>
+            {t('library.editTitle')}
+          </h2>
+          <button type="button" onClick={onClose} className="bb-lib-modal-close">✕</button>
+        </div>
+
+        <div className="bb-lib-modal-body">
+          {/* Row: name + CR + type */}
+          <div className="bb-lib-row-3">
+            <Field label={t('library.fieldName')}>
+              <input
+                className="input"
+                value={draft.name}
+                onChange={(e) => setDraft({ ...draft, name: e.target.value })}
+              />
+            </Field>
+            <Field label="CR">
+              <input
+                className="input"
+                value={draft.cr ?? ''}
+                onChange={(e) => setDraft({ ...draft, cr: e.target.value })}
+                placeholder="1/4"
+              />
+            </Field>
+            <Field label={t('library.fieldType')}>
+              <input
+                className="input"
+                value={draft.creature_type ?? ''}
+                onChange={(e) => setDraft({ ...draft, creature_type: e.target.value })}
+                placeholder="humanoid"
+              />
+            </Field>
+          </div>
+
+          {/* Row: HP / AC / Speed / Size */}
+          <div className="bb-lib-row-4">
+            <Field label="HP">
+              <input
+                type="number" className="input"
+                value={draft.hp_max}
+                onChange={(e) => setDraft({ ...draft, hp_max: parseInt(e.target.value, 10) || 0 })}
+              />
+            </Field>
+            <Field label="AC">
+              <input
+                type="number" className="input"
+                value={draft.ac ?? ''}
+                onChange={(e) => setDraft({ ...draft, ac: e.target.value === '' ? null : parseInt(e.target.value, 10) })}
+              />
+            </Field>
+            <Field label={t('library.speed')}>
+              <input
+                type="number" className="input"
+                value={draft.speed ?? ''}
+                onChange={(e) => setDraft({ ...draft, speed: e.target.value === '' ? null : parseInt(e.target.value, 10) })}
+              />
+            </Field>
+            <Field label={t('library.fieldSize')}>
+              <select
+                className="input"
+                value={draft.size}
+                onChange={(e) => setDraft({ ...draft, size: parseInt(e.target.value, 10) })}
+              >
+                <option value={1}>Medium (1)</option>
+                <option value={2}>Large (2)</option>
+                <option value={3}>Huge (3)</option>
+                <option value={4}>Gargantuan (4)</option>
+              </select>
+            </Field>
+          </div>
+
+          {/* Row: faction + marker color */}
+          <div className="bb-lib-row-3">
+            <Field label={t('library.filterFaction')}>
+              <select
+                className="input"
+                value={draft.faction}
+                onChange={(e) => setDraft({ ...draft, faction: e.target.value })}
+              >
+                <option value="enemy">{t('library.faction_enemy')}</option>
+                <option value="neutral">{t('library.faction_neutral')}</option>
+                <option value="friendly">{t('library.faction_friendly')}</option>
+                <option value="party">{t('library.faction_party')}</option>
+              </select>
+            </Field>
+            <Field label={t('library.fieldMarkerColor')}>
+              <input
+                type="color"
+                value={draft.marker_color ?? '#ef4444'}
+                onChange={(e) => setDraft({ ...draft, marker_color: e.target.value })}
+                style={{ height: 32, width: '100%', padding: 0, background: 'transparent', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)' }}
+              />
+            </Field>
+            <div />
+          </div>
+
+          {/* Ability scores */}
+          <div className="bb-lib-section-title">{t('library.editAbilities')}</div>
+          <div className="bb-lib-abilities">
+            {(['str','dex','con','int','wis','cha'] as const).map((k) => (
+              <Field key={k} label={k.toUpperCase()}>
+                <input
+                  type="number" className="input"
+                  value={sb[k]}
+                  onChange={(e) => mutStat(k, parseInt(e.target.value, 10) || 0)}
+                />
+              </Field>
+            ))}
+          </div>
+
+          {/* Attacks */}
+          <div className="bb-lib-section-header">
+            <div className="bb-lib-section-title">{t('library.editAttacks')}</div>
+            <button type="button" className="bb-lib-add-btn" onClick={addAttack}>+ {t('library.add')}</button>
+          </div>
+          {sb.attacks.length === 0 ? (
+            <div className="bb-lib-empty-hint">{t('library.noAttacks')}</div>
+          ) : (
+            <div className="bb-lib-rows">
+              {sb.attacks.map((a, i) => (
+                <div key={i} className="bb-lib-attack-row">
+                  <input
+                    className="input" placeholder={t('library.attackName')}
+                    value={a.name}
+                    onChange={(e) => setAttack(i, { name: e.target.value })}
+                  />
+                  <input
+                    className="input" placeholder="+4"
+                    value={a.bonus}
+                    onChange={(e) => setAttack(i, { bonus: e.target.value })}
+                  />
+                  <input
+                    className="input" placeholder={t('library.attackDamage')}
+                    value={a.damage}
+                    onChange={(e) => setAttack(i, { damage: e.target.value })}
+                  />
+                  <button type="button" className="bb-lib-remove-btn" onClick={() => removeAttack(i)}>✕</button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Traits */}
+          <div className="bb-lib-section-header">
+            <div className="bb-lib-section-title">{t('library.editTraits')}</div>
+            <button type="button" className="bb-lib-add-btn" onClick={addTrait}>+ {t('library.add')}</button>
+          </div>
+          {sb.traits.length === 0 ? (
+            <div className="bb-lib-empty-hint">{t('library.noTraits')}</div>
+          ) : (
+            <div className="bb-lib-rows">
+              {sb.traits.map((tr, i) => (
+                <div key={i} className="bb-lib-trait-row">
+                  <input
+                    className="input"
+                    value={tr}
+                    onChange={(e) => setTrait(i, e.target.value)}
+                  />
+                  <button type="button" className="bb-lib-remove-btn" onClick={() => removeTrait(i)}>✕</button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="bb-lib-modal-footer">
+          <button type="button" className="bb-lib-btn-ghost" onClick={onClose}>{t('dashboard.cancel')}</button>
+          <button type="button" className="bb-lib-btn-primary" onClick={() => onSave(draft)}>
+            {t('library.save')}
+          </button>
+        </div>
+      </div>
+      <TemplateEditorStyles />
+    </div>
+  )
+}
+
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <label style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+      <span style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: 700 }}>
+        {label}
+      </span>
+      {children}
+    </label>
+  )
+}
+
+function emptyStatBlock(): StatBlock {
+  return { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10, attacks: [], traits: [] }
+}
+
+function TemplateEditorStyles() {
+  return (
+    <style>{`
+      .bb-lib-modal-backdrop {
+        position: fixed; inset: 0; z-index: 9950;
+        background: rgba(0, 0, 0, 0.65);
+        display: flex; align-items: center; justify-content: center;
+        backdrop-filter: blur(2px);
+      }
+      .bb-lib-modal {
+        width: min(640px, 94vw);
+        max-height: 90vh;
+        display: flex; flex-direction: column;
+        background: var(--bg-surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+      }
+      .bb-lib-modal-header {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: var(--sp-4) var(--sp-5);
+        border-bottom: 1px solid var(--border-subtle);
+      }
+      .bb-lib-modal-close {
+        background: transparent; border: none; cursor: pointer;
+        color: var(--text-muted); font-size: 16px;
+      }
+      .bb-lib-modal-body {
+        flex: 1; min-height: 0;
+        overflow-y: auto;
+        padding: var(--sp-4) var(--sp-5);
+        display: flex; flex-direction: column; gap: var(--sp-3);
+      }
+      .bb-lib-modal-footer {
+        display: flex; justify-content: flex-end; gap: var(--sp-2);
+        padding: var(--sp-3) var(--sp-5);
+        border-top: 1px solid var(--border-subtle);
+      }
+      .bb-lib-row-3 { display: grid; grid-template-columns: 2fr 1fr 1.2fr; gap: var(--sp-3); }
+      .bb-lib-row-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1.3fr; gap: var(--sp-3); }
+      .bb-lib-abilities { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--sp-2); }
+      .bb-lib-section-title {
+        font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+        color: var(--text-muted); font-weight: 700;
+        margin-top: var(--sp-2);
+      }
+      .bb-lib-section-header {
+        display: flex; align-items: baseline; justify-content: space-between;
+        margin-top: var(--sp-2);
+      }
+      .bb-lib-rows { display: flex; flex-direction: column; gap: 4px; }
+      .bb-lib-attack-row {
+        display: grid; grid-template-columns: 1.5fr 0.5fr 2fr 30px;
+        gap: 6px;
+      }
+      .bb-lib-trait-row { display: grid; grid-template-columns: 1fr 30px; gap: 6px; }
+      .bb-lib-add-btn {
+        padding: 3px 8px;
+        background: var(--accent-blue-dim);
+        color: var(--accent-blue-light);
+        border: 1px solid transparent;
+        border-radius: var(--radius-sm);
+        cursor: pointer; font-size: 10px; font-weight: 700; fontFamily: inherit;
+      }
+      .bb-lib-remove-btn {
+        background: transparent; border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-sm);
+        color: var(--text-muted); cursor: pointer; font-size: 11px;
+      }
+      .bb-lib-remove-btn:hover { color: var(--danger); border-color: var(--danger); }
+      .bb-lib-empty-hint {
+        font-size: 11px; color: var(--text-muted); font-style: italic;
+        padding: 4px;
+      }
+      .bb-lib-btn-ghost {
+        padding: 7px 14px;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--text-primary);
+        cursor: pointer; font-family: inherit; font-size: 12px;
+      }
+      .bb-lib-btn-primary {
+        padding: 7px 14px;
+        background: var(--accent);
+        color: var(--text-inverse);
+        border: none; border-radius: var(--radius);
+        cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700;
+      }
+    `}</style>
   )
 }
 
