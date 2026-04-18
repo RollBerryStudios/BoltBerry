@@ -88,6 +88,7 @@ export function TokenPanel() {
   const { selectedTokenId, setSelectedToken } = useUIStore()
   const { activeMapId } = useCampaignStore()
   const [filter, setFilter] = useState('')
+  const [libraryPickerOpen, setLibraryPickerOpen] = useState(false)
   const filterLower = filter.trim().toLowerCase()
   // Filter reactively as the DM types. Matches on name only — faction/HP
   // etc. are visible right next to the name so a single-field substring
@@ -236,14 +237,35 @@ export function TokenPanel() {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {/* Add token button + filter */}
       <div style={{ padding: 'var(--sp-3) var(--sp-4)', borderBottom: '1px solid var(--border)', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)' }}>
-        <button
-          className="btn btn-primary"
-          style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--text-xs)' }}
-          onClick={handleAddToken}
-          disabled={!activeMapId}
-        >
-          + Token hinzufügen
-        </button>
+        <div style={{ display: 'flex', gap: 6 }}>
+          <button
+            className="btn btn-primary"
+            style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-xs)' }}
+            onClick={handleAddToken}
+            disabled={!activeMapId}
+          >
+            + Token hinzufügen
+          </button>
+          <button
+            className="btn"
+            style={{
+              padding: '4px 10px',
+              background: 'var(--accent-blue-dim)',
+              color: 'var(--accent-blue-light)',
+              border: '1px solid var(--accent-blue)',
+              borderRadius: 'var(--radius)',
+              cursor: activeMapId ? 'pointer' : 'not-allowed',
+              fontSize: 'var(--text-xs)',
+              fontWeight: 600,
+              fontFamily: 'inherit',
+            }}
+            onClick={() => setLibraryPickerOpen(true)}
+            disabled={!activeMapId}
+            title="Aus Bibliothek einfügen"
+          >
+            📚
+          </button>
+        </div>
         {tokens.length > 6 && (
           <div style={{ position: 'relative' }}>
             <input
@@ -712,6 +734,16 @@ export function TokenPanel() {
         </div>
       )}
 
+      {libraryPickerOpen && activeMapId && (
+        <LibraryPicker
+          mapId={activeMapId}
+          onClose={() => setLibraryPickerOpen(false)}
+          onInserted={(token) => {
+            addToken(token)
+            broadcastTokensFromPanel()
+          }}
+        />
+      )}
     </div>
   )
 }
@@ -793,6 +825,258 @@ function AddToInitiativeButton({ token, mapId }: { token: TokenRecord; mapId: nu
       title="Token zur Initiative hinzufügen und Initiative-Tab öffnen"
     >
       ⚔️ Zur Initiative hinzufügen
+    </button>
+  )
+}
+
+// ─── Library picker (compact) ────────────────────────────────────────
+// Inline modal that lets the DM pick a template from token_templates
+// and drop it on the current map without leaving the Tokens tab.
+// Mirrors the Bestiarium's insert flow (random variant pick) but strips
+// the filter bar + statblock view to stay compact.
+
+interface LibraryPickerTemplate {
+  id: number
+  category: string
+  source: string
+  name: string
+  image_path: string | null
+  size: number
+  hp_max: number
+  ac: number | null
+  cr: string | null
+  creature_type: string | null
+  faction: string
+  marker_color: string | null
+  notes: string | null
+  slug: string | null
+}
+
+function LibraryPicker({
+  mapId,
+  onClose,
+  onInserted,
+}: {
+  mapId: number
+  onClose: () => void
+  onInserted: (token: TokenRecord) => void
+}) {
+  const [templates, setTemplates] = useState<LibraryPickerTemplate[]>([])
+  const [query, setQuery] = useState('')
+  const [category, setCategory] = useState<'monster' | 'player' | 'npc'>('monster')
+  const activeMaps = useCampaignStore((s) => s.activeMaps)
+  const map = activeMaps.find((m) => m.id === mapId)
+
+  useEffect(() => {
+    if (!window.electronAPI) return
+    void window.electronAPI.dbQuery<LibraryPickerTemplate>(
+      `SELECT id, category, source, name, image_path, size, hp_max, ac, cr,
+              creature_type, faction, marker_color, notes, slug
+       FROM token_templates ORDER BY name`,
+    ).then(setTemplates)
+  }, [])
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    return templates.filter((t) => {
+      if (t.category !== category) return false
+      if (!q) return true
+      return t.name.toLowerCase().includes(q)
+        || t.creature_type?.toLowerCase().includes(q)
+        || (t.cr ?? '').includes(q)
+    })
+  }, [templates, category, query])
+
+  async function insertOne(tpl: LibraryPickerTemplate) {
+    if (!window.electronAPI || !map) return
+    // Pick a random variant if the template carries a slug.
+    let image: string | null = tpl.image_path
+    if (tpl.slug) {
+      const variants = await window.electronAPI.listTokenVariants(tpl.slug)
+      if (variants.length > 0) {
+        image = variants[Math.floor(Math.random() * variants.length)].path
+      }
+    }
+    const cx = map.cameraX ?? 0
+    const cy = map.cameraY ?? 0
+    const result = await window.electronAPI.dbRun(
+      `INSERT INTO tokens
+         (map_id, name, image_path, x, y, size, hp_current, hp_max,
+          visible_to_players, rotation, locked, z_index, marker_color,
+          ac, notes, status_effects, faction, show_name, light_radius, light_color)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, 0, 0, 0, ?, ?, ?, NULL, ?, 1, 0, '#ffffff')`,
+      [
+        mapId, tpl.name, image, cx, cy, tpl.size,
+        tpl.hp_max, tpl.hp_max,
+        tpl.marker_color, tpl.ac, tpl.notes, tpl.faction,
+      ],
+    )
+    onInserted({
+      id: result.lastInsertRowid,
+      mapId,
+      name: tpl.name,
+      imagePath: image,
+      x: cx, y: cy,
+      size: tpl.size,
+      hpCurrent: tpl.hp_max, hpMax: tpl.hp_max,
+      visibleToPlayers: true,
+      rotation: 0, locked: false, zIndex: 0,
+      markerColor: tpl.marker_color,
+      ac: tpl.ac,
+      notes: tpl.notes,
+      statusEffects: null,
+      faction: tpl.faction,
+      showName: true,
+      lightRadius: 0,
+      lightColor: '#ffffff',
+    })
+  }
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 9950,
+        background: 'rgba(0,0,0,0.65)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        backdropFilter: 'blur(2px)',
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          width: 'min(520px, 94vw)',
+          maxHeight: '80vh',
+          display: 'flex', flexDirection: 'column',
+          background: 'var(--bg-surface)',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--radius-lg)',
+          overflow: 'hidden',
+          boxShadow: '0 24px 64px rgba(0,0,0,0.6)',
+        }}
+      >
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          padding: 'var(--sp-3) var(--sp-4)',
+          borderBottom: '1px solid var(--border-subtle)',
+        }}>
+          <div style={{
+            fontFamily: "'Fraunces', Georgia, serif",
+            fontSize: 18, fontWeight: 500,
+          }}>
+            📚 Aus Bibliothek
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 14 }}
+          >✕</button>
+        </div>
+
+        <div style={{ display: 'flex', gap: 0, borderBottom: '1px solid var(--border-subtle)' }}>
+          {(['monster', 'player', 'npc'] as const).map((c) => (
+            <button
+              key={c}
+              type="button"
+              onClick={() => setCategory(c)}
+              style={{
+                flex: 1,
+                padding: '6px 8px',
+                background: 'transparent',
+                border: 'none',
+                borderBottom: category === c ? '2px solid var(--accent-blue)' : '2px solid transparent',
+                color: category === c ? 'var(--accent-blue-light)' : 'var(--text-muted)',
+                cursor: 'pointer',
+                fontSize: 11, fontWeight: 600,
+                fontFamily: 'inherit',
+                textTransform: 'capitalize',
+              }}
+            >
+              {c === 'monster' ? '👹 Monster' : c === 'player' ? '🧝 Spieler' : '🧑 NSC'}
+            </button>
+          ))}
+        </div>
+
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Suchen…"
+          style={{
+            padding: '8px var(--sp-4)',
+            background: 'var(--bg-base)',
+            border: 'none',
+            borderBottom: '1px solid var(--border-subtle)',
+            color: 'var(--text-primary)',
+            fontSize: 12,
+            outline: 'none',
+            fontFamily: 'inherit',
+          }}
+        />
+
+        <div style={{ flex: 1, overflowY: 'auto', padding: 4 }}>
+          {filtered.length === 0 ? (
+            <div style={{ padding: 24, color: 'var(--text-muted)', textAlign: 'center', fontSize: 12 }}>
+              Kein Treffer
+            </div>
+          ) : (
+            filtered.map((tpl) => (
+              <LibraryPickerRow
+                key={tpl.id}
+                tpl={tpl}
+                onPick={async () => {
+                  try {
+                    await insertOne(tpl)
+                  } catch (err) {
+                    console.error('[LibraryPicker] insert failed:', err)
+                  }
+                }}
+              />
+            ))
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function LibraryPickerRow({ tpl, onPick }: { tpl: LibraryPickerTemplate; onPick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onPick}
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr auto auto',
+        gap: 8, alignItems: 'center',
+        width: '100%',
+        padding: '6px 10px',
+        background: 'transparent',
+        border: 'none',
+        borderLeft: `3px solid ${tpl.marker_color ?? 'transparent'}`,
+        borderRadius: 2,
+        color: 'var(--text-primary)',
+        textAlign: 'left',
+        cursor: 'pointer',
+        fontFamily: 'inherit',
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
+      onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+    >
+      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <div style={{ fontSize: 12, fontWeight: 600 }}>{tpl.name}</div>
+        <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>
+          {tpl.creature_type ?? '—'} · CR {tpl.cr ?? '—'}
+        </div>
+      </div>
+      <div style={{
+        fontFamily: 'var(--font-mono)',
+        fontSize: 10,
+        color: 'var(--text-muted)',
+        whiteSpace: 'nowrap',
+      }}>
+        HP {tpl.hp_max} · AC {tpl.ac ?? '—'}
+      </div>
+      <div style={{ fontSize: 11, color: 'var(--accent)' }}>+</div>
     </button>
   )
 }
