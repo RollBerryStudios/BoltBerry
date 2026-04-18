@@ -1143,7 +1143,9 @@ textarea.input {
    viewport info chip. Auto-fades with the rest of the ambient HUDs. */
 .active-tool-hud {
   position: absolute;
-  left: 12px;
+  /* Offset right to clear the 60-px left tool rail (rail sits at left:12,
+     width:60, plus 12-px breathing room). */
+  left: 84px;
   bottom: 52px;
   z-index: 250;
   display: flex;
@@ -1172,7 +1174,8 @@ textarea.input {
 
 .viewport-hud {
   position: absolute;
-  left: 12px;
+  /* Offset right to clear the left tool rail. */
+  left: 84px;
   bottom: 12px;
   z-index: 250;
   display: flex;
@@ -1661,36 +1664,58 @@ textarea.input {
   flex-direction: column;
 }
 
-/* ─── Bottom tool dock (canvas, minimalistic play-mode toolbar) ────────────── */
-/* Glass pill floating at bottom-center of the canvas. Inspired by Owlbear
-   Rodeo's dock: 6 primary icons, optional fan-out popover opening upward
-   for variant tools (measure line/circle/cone, fog brush/rect/cover, etc.).
-   Lives alongside the top toolbar, not replacing it — the top bar still
-   houses session controls and power-user actions. */
-.bottom-tool-dock {
+/* ─── Left tool rail (v1 Conservative floating dock) ─────────────────────── */
+/* Vertical 60-px glass rail anchored at left:12 / top:12 / bottom:12 inside
+   the canvas area. Five tool sections separated by thin dividers; each
+   group's primary tool activates on click, groups with variants fan out a
+   popover to the right. Faithful to the "DM View Layouts" design bundle. */
+.left-tool-dock {
   position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 12px;
+  top: 12px;
+  bottom: 12px;
+  width: 60px;
   z-index: 265;
   display: flex;
-  flex-direction: row;
-  gap: 2px;
-  padding: 4px;
-  background: rgba(13, 16, 21, 0.82);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 8px;
+  background: rgba(14, 22, 38, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: 12px;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
   user-select: none;
+  overflow-y: auto;
+  overflow-x: visible;
+  scrollbar-width: thin;
+}
+.left-tool-dock::-webkit-scrollbar { width: 4px; }
+.left-tool-dock::-webkit-scrollbar-track { background: transparent; }
+.left-tool-dock::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 2px; }
+.left-tool-dock::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.22); }
+
+.left-tool-dock-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+.left-tool-dock-divider {
+  width: 28px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 6px 0 2px;
 }
 
-.bottom-tool-group {
+.left-tool-group {
   position: relative;
   display: flex;
 }
-.bottom-tool-btn {
+.left-tool-btn {
   position: relative;
   display: flex;
   align-items: center;
@@ -1699,28 +1724,38 @@ textarea.input {
   height: 44px;
   padding: 0;
   background: transparent;
-  border: 1.5px solid transparent;
-  border-radius: var(--radius);
+  border: none;
+  border-radius: 8px;
   color: var(--text-secondary);
   cursor: pointer;
-  transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+  transition: background var(--transition), color var(--transition), transform var(--transition);
 }
-.bottom-tool-btn:hover {
+.left-tool-btn:hover {
   background: var(--bg-overlay);
   color: var(--text-primary);
 }
-.bottom-tool-btn.active {
-  background: rgba(255, 198, 46, 0.12);
-  border-color: var(--accent);
+.left-tool-btn.active {
+  background: rgba(255, 198, 46, 0.10);
   color: var(--accent);
 }
-.bottom-tool-btn:active { transform: translateY(1px); }
-.bottom-tool-btn-icon { font-size: 18px; line-height: 1; }
-.bottom-tool-btn-chevron {
+.left-tool-btn:active { transform: translateY(1px); }
+.left-tool-btn-icon { font-size: 18px; line-height: 1; }
+/* Yellow accent indicator on the left edge of the active button. */
+.left-tool-btn-accent {
   position: absolute;
-  right: 3px;
+  left: -8px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(255, 198, 46, 0.6);
+}
+.left-tool-btn-chevron {
+  position: absolute;
+  right: 2px;
   bottom: 2px;
-  font-size: 8px;
+  font-size: 10px;
   line-height: 1;
   color: var(--text-muted);
   padding: 1px 2px;
@@ -1729,16 +1764,15 @@ textarea.input {
   opacity: 0.7;
   transition: opacity var(--transition), background var(--transition);
 }
-.bottom-tool-btn-chevron:hover { opacity: 1; background: var(--bg-elevated); color: var(--text-primary); }
-.bottom-tool-btn.active .bottom-tool-btn-chevron { color: var(--accent); opacity: 1; }
+.left-tool-btn-chevron:hover { opacity: 1; background: var(--bg-elevated); color: var(--text-primary); }
+.left-tool-btn.active .left-tool-btn-chevron { color: var(--accent); opacity: 1; }
 
-/* Fan-out popover opens upward. `left` coordinate from layout is the button
-   center; translateX(-50%) centers the popover horizontally above it. */
-.bottom-tool-popover {
+/* Fan-out popover opens to the right of the button, vertically centered. */
+.left-tool-popover {
   position: fixed;
-  transform: translateX(-50%);
+  transform: translateY(-50%);
   z-index: 9999;
-  min-width: 200px;
+  min-width: 220px;
   display: flex;
   flex-direction: column;
   gap: 1px;
@@ -1747,14 +1781,14 @@ textarea.input {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
-  animation: bottomDockPopIn 140ms ease-out;
+  animation: leftDockPopIn 140ms ease-out;
 }
-@keyframes bottomDockPopIn {
-  from { opacity: 0; transform: translate(-50%, 6px); }
-  to   { opacity: 1; transform: translate(-50%, 0); }
+@keyframes leftDockPopIn {
+  from { opacity: 0; transform: translate(-6px, -50%); }
+  to   { opacity: 1; transform: translate(0, -50%); }
 }
 
-.bottom-tool-popover-item {
+.left-tool-popover-item {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1769,15 +1803,15 @@ textarea.input {
   text-align: left;
   transition: background var(--transition), color var(--transition), border-color var(--transition);
 }
-.bottom-tool-popover-item:hover { background: var(--bg-overlay); }
-.bottom-tool-popover-item.active {
+.left-tool-popover-item:hover { background: var(--bg-overlay); }
+.left-tool-popover-item.active {
   background: var(--accent-blue-dim);
   border-left-color: var(--accent-blue);
   color: var(--accent-blue-light);
 }
-.bottom-tool-popover-item-icon { font-size: 15px; min-width: 20px; text-align: center; }
-.bottom-tool-popover-item-label { flex: 1; }
-.bottom-tool-popover-item-shortcut {
+.left-tool-popover-item-icon { font-size: 15px; min-width: 20px; text-align: center; }
+.left-tool-popover-item-label { flex: 1; }
+.left-tool-popover-item-shortcut {
   font-size: 10px;
   color: var(--text-muted);
   background: var(--bg-surface);
