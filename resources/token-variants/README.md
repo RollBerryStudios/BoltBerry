@@ -12,16 +12,18 @@ license-free by the maintainer: *"Free to use: All tokens are created
 with the Bing Image creator and totaly license free. Save them, share
 them, put them in a stew. They belong to anyone."*
 
-We ship the first 5 alphabetical variants per creature. 24 of the 25
-seeded SRD creatures have bundled art; Lich has no entry in the upstream
-repo and falls back to the deterministic-hue initial tile.
+We ship the first 5 alphabetical variants per creature. All 25 seeded
+SRD creatures have bundled art.
 
 Only creatures present in the D&D 5.2 SRD (CC-BY-4.0) are seeded.
 Earlier drafts included two creatures whose names are protected Wizards
-of the Coast IP and are **not** in the SRD — they've been replaced with
-Fire Giant and Treant (both SRD-legal, both with art in the upstream
-repo). The v27 migration removes the old seed rows from existing user
-DBs as long as they were untouched.
+of the Coast IP and are **not** in the SRD — they were replaced with
+Fire Giant and Treant. A later pass swapped Lich (SRD-legal but with
+no upstream art) for Stone Golem (CR 10, construct, 5 variants) so
+every seeded creature has a recognisable token.
+
+The v27 / v28 migrations remove the obsolete seed rows from existing
+user DBs as long as they were untouched.
 
 ## Layout
 

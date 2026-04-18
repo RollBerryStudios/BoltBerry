@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 27
+export const SCHEMA_VERSION = 28
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -685,6 +685,18 @@ DELETE FROM token_templates
  WHERE source = 'srd'
    AND name IN ('Beholder', 'Mind Flayer');
 UPDATE schema_version SET version = 27;
+`
+
+// Migration: v27 → v28 — replace the Lich seed with Stone Golem. Lich is
+// SRD-legal but the upstream too-many-tokens-dnd repo has no entries for
+// it, so the row had no bundled art. Stone Golem (CR 10, construct) fills
+// the boss slot with a different archetype and ships with five variants.
+// Same pattern as v27: only deletes the row if untouched.
+export const MIGRATE_V27_TO_V28 = `
+DELETE FROM token_templates
+ WHERE source = 'srd'
+   AND name = 'Lich';
+UPDATE schema_version SET version = 28;
 `
 
 // Use the SCHEMA_VERSION constant directly so there's a single source of truth.

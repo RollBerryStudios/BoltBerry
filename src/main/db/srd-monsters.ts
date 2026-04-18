@@ -347,18 +347,18 @@ export const SRD_MONSTERS: SrdMonster[] = [
     },
   },
   {
-    name_de: 'Lich',
-    name_en: 'Lich',
-    slug: null,
-    size: 1, hp_max: 135, ac: 17, speed: 30, cr: '21',
-    creature_type: 'undead', faction: 'enemy', marker_color: '#a78bfa',
+    name_de: 'Steingolem',
+    name_en: 'Stone Golem',
+    slug: 'stone-golem',
+    size: 2, hp_max: 178, ac: 17, speed: 30, cr: '10',
+    creature_type: 'construct', faction: 'enemy', marker_color: '#64748b',
     stat_block: {
-      str: 11, dex: 16, con: 16, int: 20, wis: 14, cha: 16,
+      str: 22, dex: 9, con: 20, int: 3, wis: 11, cha: 1,
       attacks: [
-        { name: 'Eiseskaltes Berühren', bonus: '+12', damage: '10 (3W6) Kalt · kein HP-Gewinn bis kurze Rast' },
-        { name: 'Zauberwerk', bonus: '—', damage: 'Zauberkundiger Stufe 18 (SG 20, +12 Angriff)' },
+        { name: 'Schlagangriff', bonus: '+10', damage: '19 (3W8+6) Wucht · Multiangriff: 2 Schläge' },
+        { name: 'Verlangsamen (5-6)', bonus: '—', damage: '10 ft · WIS RW DC 17 oder verlangsamt 1 min · halbe Bewegung, kein Multiangriff, AC −2' },
       ],
-      traits: ['Legendäre Aktionen 3/Runde', 'Legendäre Resistenzen 3/Tag', 'Phylakterie'],
+      traits: ['Magieresistenz: Vorteil auf RW gegen Zauber', 'Magische Waffen: Angriffe gelten als magisch', 'Immun Gift, Psychisch + nicht-magische W/S/H ohne Adamantin', 'Immun gegen Bezauberung, Erschöpfung, Furcht, Lähmung, Versteinerung, Vergiftung'],
     },
   },
   {
