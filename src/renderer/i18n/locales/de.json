@@ -236,7 +236,9 @@
     "profileAutoHue": "Automatisch aus Name",
     "profileSave": "Speichern",
     "setCover": "Cover setzen",
-    "clearCover": "Cover entfernen"
+    "clearCover": "Cover entfernen",
+    "sessionCount": "{{count}} Sitzungen",
+    "sessionCount_one": "{{count}} Sitzung"
   },
   "dashboard": {
     "greetingMorning": "Guten Morgen",

@@ -236,7 +236,9 @@
     "profileAutoHue": "Auto from name",
     "profileSave": "Save",
     "setCover": "Set cover",
-    "clearCover": "Clear cover"
+    "clearCover": "Clear cover",
+    "sessionCount": "{{count}} sessions",
+    "sessionCount_one": "{{count}} session"
   },
   "dashboard": {
     "greetingMorning": "Good morning",

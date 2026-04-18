@@ -1,6 +1,31 @@
 import { create } from 'zustand'
 import i18n from '../i18n'
 
+// Fire a sessions row insert / close based on the mode flip. Reads the
+// active campaign from the store lazily via a dynamic import to avoid a
+// circular dep (campaignStore may import uiStore-adjacent things).
+async function logSessionTransition(next: 'session' | 'prep'): Promise<void> {
+  if (typeof window === 'undefined' || !window.electronAPI) return
+  const { useCampaignStore } = await import('./campaignStore')
+  const campaignId = useCampaignStore.getState().activeCampaignId
+  if (!campaignId) return
+  if (next === 'session') {
+    // New session row — started_at defaults to datetime('now').
+    await window.electronAPI.dbRun(
+      `INSERT INTO sessions (campaign_id) VALUES (?)`,
+      [campaignId],
+    )
+  } else {
+    // Close whichever open row exists for this campaign. UPDATE is a no-op
+    // if there isn't one (e.g. the DB was at prep across a restart).
+    await window.electronAPI.dbRun(
+      `UPDATE sessions SET ended_at = datetime('now')
+       WHERE campaign_id = ? AND ended_at IS NULL`,
+      [campaignId],
+    )
+  }
+}
+
 export type ActiveTool = 'select' | 'fog-rect' | 'fog-polygon' | 'fog-cover' | 'fog-brush' | 'fog-brush-cover' | 'token' | 'atmosphere' | 'pointer' | 'measure-line' | 'measure-circle' | 'measure-cone' | 'draw-freehand' | 'draw-rect' | 'draw-circle' | 'draw-text' | 'wall-draw' | 'wall-door' | 'room'
 export type SidebarTab = 'tokens' | 'initiative' | 'notes' | 'handouts' | 'encounters' | 'rooms' | 'characters'
 export type SidebarDock = 'scene' | 'content'
@@ -238,6 +263,10 @@ export const useUIStore = create<UIState>((set) => ({
     if (sessionMode === 'prep' && s.workMode === 'combat') {
       updates.workMode = 'prep'
     }
+    // Log the transition to the sessions table so Welcome / Workspace can
+    // surface a session count + last-played stat. Fire-and-forget — we
+    // don't block the UI on a DB round-trip and any failure is cosmetic.
+    if (sessionMode !== s.sessionMode) void logSessionTransition(sessionMode).catch(() => {})
     return updates
   }),
   toggleTheme: () =>

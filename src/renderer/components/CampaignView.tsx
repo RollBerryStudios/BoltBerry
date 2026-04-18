@@ -259,6 +259,12 @@ export function CampaignView() {
               {selfStats?.party.length ?? 0} {t('dashboard.characters').toLowerCase()}
               <span className="bb-ws-meta-sep">·</span>
               {selfStats?.handoutCount ?? 0} {t('dashboard.handouts').toLowerCase()}
+              {typeof selfStats?.sessionCount === 'number' && selfStats.sessionCount > 0 && (
+                <>
+                  <span className="bb-ws-meta-sep">·</span>
+                  {t('welcome.sessionCount', { count: selfStats.sessionCount })}
+                </>
+              )}
             </div>
           </div>
 

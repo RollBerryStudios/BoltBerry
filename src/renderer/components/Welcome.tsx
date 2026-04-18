@@ -469,6 +469,12 @@ function CampaignRow({
 
         <div className="bb-welcome-row-meta mono">
           {t('welcome.lastPlayed')} · {relative}
+          {typeof stats?.sessionCount === 'number' && stats.sessionCount > 0 && (
+            <>
+              <span className="bb-welcome-row-sep">·</span>
+              {t('welcome.sessionCount', { count: stats.sessionCount })}
+            </>
+          )}
           {typeof stats?.mapCount === 'number' && stats.mapCount > 0 && (
             <>
               <span className="bb-welcome-row-sep">·</span>

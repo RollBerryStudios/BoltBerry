@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 30
+export const SCHEMA_VERSION = 31
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -425,6 +425,14 @@ CREATE TABLE IF NOT EXISTS token_templates (
   UNIQUE(source, name)
 );
 
+-- Sessions: prep→session transitions logged here. Closed on session→prep.
+CREATE TABLE IF NOT EXISTS sessions (
+  id           INTEGER PRIMARY KEY AUTOINCREMENT,
+  campaign_id  INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+  started_at   TEXT    NOT NULL DEFAULT (datetime('now')),
+  ended_at     TEXT
+);
+
 -- Schema version tracking (single-row enforced by PK constraint)
 CREATE TABLE IF NOT EXISTS schema_version (
   id      INTEGER PRIMARY KEY CHECK (id = 1),
@@ -453,6 +461,8 @@ CREATE INDEX IF NOT EXISTS idx_audio_board_slots_board_id ON audio_board_slots(b
 CREATE INDEX IF NOT EXISTS idx_token_templates_category ON token_templates(category);
 CREATE INDEX IF NOT EXISTS idx_token_templates_source ON token_templates(source);
 CREATE INDEX IF NOT EXISTS idx_token_templates_slug ON token_templates(slug);
+CREATE INDEX IF NOT EXISTS idx_sessions_campaign ON sessions(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_sessions_open ON sessions(campaign_id) WHERE ended_at IS NULL;
 `
 
 // Indexes that reference columns added in later migrations (pin_x/pin_y landed
@@ -716,6 +726,21 @@ UPDATE schema_version SET version = 29;
 export const MIGRATE_V29_TO_V30 = `
 ALTER TABLE campaigns ADD COLUMN cover_path TEXT;
 UPDATE schema_version SET version = 30;
+`
+
+// Migration: v30 → v31 — sessions log. Each row is one prep→session
+// transition; ended_at is filled on session→prep or when the campaign
+// closes. Surfaces as session count + last-played in Welcome/Workspace.
+export const MIGRATE_V30_TO_V31 = `
+CREATE TABLE IF NOT EXISTS sessions (
+  id           INTEGER PRIMARY KEY AUTOINCREMENT,
+  campaign_id  INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+  started_at   TEXT    NOT NULL DEFAULT (datetime('now')),
+  ended_at     TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_sessions_campaign ON sessions(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_sessions_open ON sessions(campaign_id) WHERE ended_at IS NULL;
+UPDATE schema_version SET version = 31;
 `
 
 // Use the SCHEMA_VERSION constant directly so there's a single source of truth.

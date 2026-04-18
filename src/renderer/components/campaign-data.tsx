@@ -13,6 +13,8 @@ export interface CampaignStats {
   handoutCount: number
   thumbnailPath: string | null
   party: Array<{ name: string; className: string; level: number }>
+  sessionCount: number
+  lastSessionAt: string | null
 }
 
 export type StatsMap = Record<number, CampaignStats>
@@ -263,7 +265,7 @@ async function loadCampaignStats(campaignIds: number[]): Promise<StatsMap> {
   if (!window.electronAPI || campaignIds.length === 0) return {}
   const placeholders = campaignIds.map(() => '?').join(',')
 
-  const [maps, handouts, chars] = await Promise.all([
+  const [maps, handouts, chars, sessions] = await Promise.all([
     window.electronAPI.dbQuery<{ campaign_id: number; image_path: string; order_index: number }>(
       `SELECT campaign_id, image_path, order_index
        FROM maps WHERE campaign_id IN (${placeholders}) ORDER BY order_index ASC`,
@@ -280,11 +282,16 @@ async function loadCampaignStats(campaignIds: number[]): Promise<StatsMap> {
        ORDER BY level DESC, id ASC`,
       campaignIds,
     ),
+    window.electronAPI.dbQuery<{ campaign_id: number; n: number; last_at: string | null }>(
+      `SELECT campaign_id, COUNT(*) as n, MAX(started_at) as last_at
+       FROM sessions WHERE campaign_id IN (${placeholders}) GROUP BY campaign_id`,
+      campaignIds,
+    ),
   ])
 
   const out: StatsMap = {}
   for (const id of campaignIds) {
-    out[id] = { mapCount: 0, handoutCount: 0, thumbnailPath: null, party: [] }
+    out[id] = { mapCount: 0, handoutCount: 0, thumbnailPath: null, party: [], sessionCount: 0, lastSessionAt: null }
   }
   for (const row of maps) {
     const entry = out[row.campaign_id]
@@ -300,6 +307,13 @@ async function loadCampaignStats(campaignIds: number[]): Promise<StatsMap> {
     const entry = out[row.campaign_id]
     if (entry) {
       entry.party.push({ name: row.name, className: row.class_name, level: row.level })
+    }
+  }
+  for (const row of sessions) {
+    const entry = out[row.campaign_id]
+    if (entry) {
+      entry.sessionCount = row.n
+      entry.lastSessionAt = row.last_at
     }
   }
   return out
