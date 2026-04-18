@@ -100,7 +100,11 @@
     "delete": "L\u00f6schen",
     "confirmDeleteTitle": "Vorlage l\u00f6schen",
     "confirmDeleteMessage": "\u201e{{name}}\u201c wirklich l\u00f6schen?",
-    "inserted": "\u201e{{name}}\u201c eingef\u00fcgt"
+    "inserted": "\u201e{{name}}\u201c eingef\u00fcgt",
+    "variantsLabel": "Varianten",
+    "noVariants": "noch keine",
+    "importVariants": "Eigene Bilder importieren",
+    "openVariantsFolder": "Ordner \u00f6ffnen"
   },
   "workspace": {
     "backToCampaigns": "Kampagnen",

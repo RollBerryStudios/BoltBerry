@@ -100,7 +100,11 @@
     "delete": "Delete",
     "confirmDeleteTitle": "Delete template",
     "confirmDeleteMessage": "Really delete \u201c{{name}}\u201d?",
-    "inserted": "Inserted \u201c{{name}}\u201d"
+    "inserted": "Inserted \u201c{{name}}\u201d",
+    "variantsLabel": "Variants",
+    "noVariants": "none yet",
+    "importVariants": "Import custom artwork",
+    "openVariantsFolder": "Open folder"
   },
   "workspace": {
     "backToCampaigns": "Campaigns",

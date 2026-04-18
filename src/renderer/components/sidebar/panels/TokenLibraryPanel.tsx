@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCampaignStore } from '../../../stores/campaignStore'
-import type { MapRecord } from '@shared/ipc-types'
+import { useImageUrl } from '../../../hooks/useImageUrl'
+import type { MapRecord, TokenVariant } from '@shared/ipc-types'
 
 /* Token library — browsable stat blocks grouped into three categories
    (Monster / Player / NPC). The monster category ships pre-seeded with
@@ -41,6 +42,7 @@ interface TokenTemplate {
   marker_color: string | null
   notes: string | null
   stat_block: StatBlock | null
+  slug: string | null
   created_at: string
 }
 
@@ -82,10 +84,11 @@ export function TokenLibraryPanel() {
         marker_color: string | null
         notes: string | null
         stat_block: string | null
+        slug: string | null
         created_at: string
       }>(
         `SELECT id, category, source, name, image_path, size, hp_max, ac, speed,
-                cr, creature_type, faction, marker_color, notes, stat_block, created_at
+                cr, creature_type, faction, marker_color, notes, stat_block, slug, created_at
          FROM token_templates
          ORDER BY
            CASE source WHEN 'user' THEN 0 ELSE 1 END,
@@ -220,7 +223,16 @@ export function TokenLibraryPanel() {
       return
     }
     try {
-      await insertTokenForTemplate(tpl, targetMap)
+      // Pick a random variant image if any exist for this template's slug.
+      // Fallback to the template's stored image_path (may be null → no image).
+      let image: string | null = tpl.image_path
+      if (tpl.slug && window.electronAPI) {
+        const variants = await window.electronAPI.listTokenVariants(tpl.slug)
+        if (variants.length > 0) {
+          image = variants[Math.floor(Math.random() * variants.length)].path
+        }
+      }
+      await insertTokenForTemplate(tpl, targetMap, image)
       // If we were not currently on a map, switch into play view with the
       // selected one so the DM sees the new token immediately.
       if (!activeMapId) setActiveMap(targetMap.id)
@@ -527,6 +539,11 @@ function TemplateCard({
         </div>
       )}
 
+      {/* Variant strip — bundled + user artwork per slug */}
+      {tpl.slug && (
+        <VariantStrip slug={tpl.slug} />
+      )}
+
       {/* Actions */}
       <div style={{
         display: 'flex', gap: 4,
@@ -620,6 +637,125 @@ const iconBtn: React.CSSProperties = {
   flexShrink: 0,
 }
 
+// ─── Variant strip ────────────────────────────────────────────────────
+
+function VariantStrip({ slug }: { slug: string }) {
+  const { t } = useTranslation()
+  const [variants, setVariants] = useState<TokenVariant[]>([])
+
+  const reload = useCallback(async () => {
+    if (!window.electronAPI) return
+    try {
+      const list = await window.electronAPI.listTokenVariants(slug)
+      setVariants(list)
+    } catch {
+      /* ignore — empty strip is fine */
+    }
+  }, [slug])
+
+  useEffect(() => { void reload() }, [reload])
+
+  async function handleImport() {
+    if (!window.electronAPI) return
+    const result = await window.electronAPI.importTokenVariants(slug)
+    if (result?.success) await reload()
+  }
+
+  async function handleOpenFolder() {
+    await window.electronAPI?.openTokenVariantsFolder(slug)
+  }
+
+  return (
+    <div style={{
+      display: 'flex', alignItems: 'center', gap: 6,
+      padding: '8px 12px',
+      borderTop: '1px solid var(--border-subtle)',
+    }}>
+      <div style={{
+        fontSize: 9, letterSpacing: '0.1em', fontWeight: 700,
+        color: 'var(--text-muted)', textTransform: 'uppercase',
+        flexShrink: 0, marginRight: 4,
+      }}>
+        {t('library.variantsLabel')}
+      </div>
+      <div style={{ display: 'flex', gap: 4, flex: 1, overflow: 'hidden' }}>
+        {variants.length === 0 ? (
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', fontStyle: 'italic' }}>
+            {t('library.noVariants')}
+          </div>
+        ) : (
+          variants.slice(0, 8).map((v) => (
+            <VariantThumb key={v.path} variant={v} />
+          ))
+        )}
+        {variants.length > 8 && (
+          <div style={{
+            width: 32, height: 32,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 10, fontWeight: 600,
+            color: 'var(--text-muted)',
+            background: 'var(--bg-elevated)',
+            border: '1px solid var(--border-subtle)',
+            borderRadius: 'var(--radius-sm)',
+          }}>+{variants.length - 8}</div>
+        )}
+      </div>
+      <button
+        type="button"
+        onClick={handleImport}
+        title={t('library.importVariants')}
+        style={variantIconBtn}
+      >📥</button>
+      <button
+        type="button"
+        onClick={handleOpenFolder}
+        title={t('library.openVariantsFolder')}
+        style={variantIconBtn}
+      >📁</button>
+    </div>
+  )
+}
+
+function VariantThumb({ variant }: { variant: TokenVariant }) {
+  const url = useImageUrl(variant.path)
+  return (
+    <div
+      title={`${variant.name} · ${variant.source === 'bundled' ? 'Seed' : 'Eigene'}`}
+      style={{
+        width: 32, height: 32,
+        borderRadius: 'var(--radius-sm)',
+        overflow: 'hidden',
+        flexShrink: 0,
+        background: 'var(--bg-elevated)',
+        border: variant.source === 'bundled'
+          ? '1px solid var(--border-subtle)'
+          : '1px solid var(--accent-blue)',
+      }}
+    >
+      {url && (
+        <img
+          src={url}
+          alt=""
+          draggable={false}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+        />
+      )}
+    </div>
+  )
+}
+
+const variantIconBtn: React.CSSProperties = {
+  padding: '4px 6px',
+  background: 'transparent',
+  border: '1px solid var(--border-subtle)',
+  borderRadius: 'var(--radius-sm)',
+  color: 'var(--text-muted)',
+  cursor: 'pointer',
+  fontFamily: 'inherit',
+  fontSize: 11,
+  flexShrink: 0,
+}
+
 // ─── Helpers ──────────────────────────────────────────────────────────
 
 function parseTemplate(row: {
@@ -628,7 +764,7 @@ function parseTemplate(row: {
   ac: number | null; speed: number | null; cr: string | null
   creature_type: string | null; faction: string
   marker_color: string | null; notes: string | null
-  stat_block: string | null; created_at: string
+  stat_block: string | null; slug: string | null; created_at: string
 }): TokenTemplate {
   let parsed: StatBlock | null = null
   if (row.stat_block) {
@@ -651,7 +787,9 @@ function sizeLabel(size: number): string {
 
 // Inserts a token derived from a library template onto the given map.
 // Placed near the camera center by default; the DM can drag it anywhere.
-async function insertTokenForTemplate(tpl: TokenTemplate, map: MapRecord) {
+// imageOverride wins over tpl.image_path so the caller can pick a random
+// variant when the template carries a slug.
+async function insertTokenForTemplate(tpl: TokenTemplate, map: MapRecord, imageOverride: string | null) {
   if (!window.electronAPI) return
   const cx = map.cameraX ?? 0
   const cy = map.cameraY ?? 0
@@ -664,7 +802,7 @@ async function insertTokenForTemplate(tpl: TokenTemplate, map: MapRecord) {
     [
       map.id,
       tpl.name,
-      tpl.image_path,
+      imageOverride ?? tpl.image_path,
       cx, cy,
       tpl.size,
       tpl.hp_max, tpl.hp_max,
