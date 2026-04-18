@@ -5,6 +5,15 @@ once it hits 1.0; until then, 0.x releases may break prior assumptions.
 
 ## Unreleased
 
+(nothing yet)
+
+## 0.20.0 — 2026-04-18
+
+First minor release after the v0.19.x stabilisation cycle. Introduces
+the full v1 Conservative DM View, per-map grid styling, a shared
+NumberStepper, redesigned audio panel, hero-image monster cards,
+language-scoped compendium, and ~227 tests — up from 208.
+
 ### Added
 - Extended grid settings: per-map **visibility** toggle, **thickness**
   multiplier, and **custom colour** (hex / rgba) — stored in schema v32.
