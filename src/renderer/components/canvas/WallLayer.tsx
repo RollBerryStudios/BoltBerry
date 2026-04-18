@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, useMemo, RefObject } from 'react'
-import { Layer, Line, Circle, Group, Text } from 'react-konva'
+import { Layer, Line, Circle, Group, Rect, Text } from 'react-konva'
 import { Html } from 'react-konva-utils'
 import Konva from 'konva'
 import { useWallStore } from '../../stores/wallStore'
@@ -28,6 +28,8 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
   const scale = useMapTransformStore((s) => s.scale)
   const offsetX = useMapTransformStore((s) => s.offsetX)
   const offsetY = useMapTransformStore((s) => s.offsetY)
+  const canvasW = useMapTransformStore((s) => s.canvasW)
+  const canvasH = useMapTransformStore((s) => s.canvasH)
   const activeMapId = useCampaignStore((s) => s.activeMapId)
 
   const [selectedWallId, setSelectedWallId] = useState<number | null>(null)
@@ -214,6 +216,11 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
         onMouseUp={isActive ? handleMouseUp : undefined}
         listening={isActive}
       >
+        {/* Full-canvas transparent hit target so empty-space clicks bubble
+            up to handleMouseDown even before any wall exists. */}
+        {isActive && (
+          <Rect x={0} y={0} width={canvasW} height={canvasH} fill="rgba(0,0,0,0.001)" listening />
+        )}
         {displayWalls.map((wall) => {
           const p1 = mapToScreenPure(wall.x1, wall.y1, scale, offsetX, offsetY)
           const p2 = mapToScreenPure(wall.x2, wall.y2, scale, offsetX, offsetY)

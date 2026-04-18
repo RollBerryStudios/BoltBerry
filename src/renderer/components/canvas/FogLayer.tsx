@@ -485,6 +485,22 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
       onMouseLeave={handleMouseLeave}
       listening={isFogActive}
     >
+      {/* Full-canvas transparent hit target — without this, empty clicks on
+          unfogged areas (the common case when you first start painting
+          fog on a new map) never bubble up to handleMouseDown. Konva only
+          dispatches layer mouse events on clicks that hit a listening
+          shape; the covered/explored images are listening:false so they
+          can't serve that role. */}
+      {isFogActive && (
+        <Rect
+          x={0}
+          y={0}
+          width={canvasSize.width}
+          height={canvasSize.height}
+          fill="rgba(0,0,0,0.001)"
+          listening
+        />
+      )}
       {rectPreview}
       {brushPreview}
       {polygonPreview}

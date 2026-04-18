@@ -931,7 +931,15 @@ function WelcomeStyles() {
         display: flex; justify-content: flex-end;
         align-items: center;
         gap: 10px;
-        padding: 22px 36px;
+        /* Reserve ~140 px on the right so the header buttons don't slide
+           under Electron's titleBarOverlay (minimize / maximize / close)
+           on Windows/Linux. macOS keeps its native traffic lights on the
+           opposite side (top-left), so the extra gutter is harmless. */
+        padding: 22px 150px 22px 36px;
+        -webkit-app-region: drag;
+      }
+      .bb-welcome-right-top > * {
+        -webkit-app-region: no-drag;
       }
       .bb-welcome-compendium-btn {
         display: inline-flex; align-items: center; gap: 6px;

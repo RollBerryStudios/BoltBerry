@@ -305,7 +305,10 @@
     "wall": "Wall",
     "draw": "Draw",
     "reveal": "Reveal",
-    "cover": "Cover"
+    "cover": "Cover",
+    "thin": "Thin",
+    "medium": "Medium",
+    "thick": "Thick"
   },
   "toolbar": {
     "leftSidebar": "Left Sidebar",

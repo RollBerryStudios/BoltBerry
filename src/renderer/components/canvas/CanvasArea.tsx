@@ -7,7 +7,6 @@ import { PointerLayer } from './PointerLayer'
 import { MeasureLayer } from './MeasureLayer'
 import { MinimapOverlay } from './MinimapOverlay'
 import { DrawingLayer } from './DrawingLayer'
-import { DrawingToolbar } from './DrawingToolbar'
 import { GMPinLayer, GM_PIN_ADD_EVENT } from './GMPinLayer'
 import { LightingLayer } from './LightingLayer'
 import { WallLayer } from './WallLayer'
@@ -724,9 +723,6 @@ export function CanvasArea() {
         <MinimapOverlay stageRef={stageRef} canvasSize={size} />
       )}
 
-      {/* Drawing toolbar */}
-      <DrawingToolbar />
-
       {/* ── Layer visibility panel ─────────────────────────────────────── */}
       {activeMap && (
         <div
@@ -734,7 +730,10 @@ export function CanvasArea() {
           className="canvas-hud-fade"
           style={{
             position: 'absolute',
-            bottom: showMinimap ? 172 : 12,
+            // Clear the FloatingUtilityDock (dice/audio/overlay rail, ~48 px
+            // tall at bottom-right). Minimap is larger so we offset further
+            // when it's visible.
+            bottom: showMinimap ? 220 : 60,
             right: 12,
             zIndex: 300,
             display: 'flex',

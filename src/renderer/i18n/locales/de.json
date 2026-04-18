@@ -305,7 +305,10 @@
     "wall": "Wand",
     "draw": "Zeichnen",
     "reveal": "Aufdecken",
-    "cover": "Verdecken"
+    "cover": "Verdecken",
+    "thin": "Dünn",
+    "medium": "Mittel",
+    "thick": "Dick"
   },
   "toolbar": {
     "leftSidebar": "Linke Sidebar",

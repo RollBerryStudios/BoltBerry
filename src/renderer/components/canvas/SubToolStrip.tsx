@@ -112,20 +112,26 @@ export function SubToolStrip() {
       )
     }
 
-    // Draw tools: stroke width + color.
+    // Draw tools: stroke width + color. Widths use named presets (the old
+    // DrawingToolbar used Thin/Medium/Thick mapped to 1/3/6); colors
+    // include black + white so map annotations stay legible on both light
+    // and dark backgrounds.
     if (activeTool.startsWith('draw-')) {
-      const widths = [2, 3, 5, 8]
-      const colors = ['#ff6b6b', '#fbbf24', '#4ade80', '#60a5fa', '#a78bfa', '#f4f6fa']
+      const widths: Array<{ label: string; value: number }> = [
+        { label: t('subtool.thin'),   value: 1 },
+        { label: t('subtool.medium'), value: 3 },
+        { label: t('subtool.thick'),  value: 6 },
+      ]
+      const colors = ['#ff6b6b', '#f59e0b', '#22c55e', '#3b82f6', '#a855f7', '#ec4899', '#ffffff', '#000000']
       return (
         <>
           <Seg label={t('subtool.draw')} />
           {widths.map((w) => (
             <Pill
-              key={w}
-              label={`${w}px`}
-              mono
-              active={drawWidth === w}
-              onClick={() => setDrawWidth(w)}
+              key={w.value}
+              label={w.label}
+              active={drawWidth === w.value}
+              onClick={() => setDrawWidth(w.value)}
             />
           ))}
           <Divider />

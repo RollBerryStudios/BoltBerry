@@ -1,5 +1,5 @@
 import { useMemo, useState, useCallback, useRef, useEffect } from 'react'
-import { Layer, Line, Group, Text, Circle } from 'react-konva'
+import { Layer, Line, Group, Rect, Text, Circle } from 'react-konva'
 import { useRoomStore } from '../../stores/roomStore'
 import { useUIStore, type ActiveTool } from '../../stores/uiStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
@@ -34,6 +34,8 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
   const isRoomTool = activeTool === 'room'
   const offsetX = useMapTransformStore((s) => s.offsetX)
   const offsetY = useMapTransformStore((s) => s.offsetY)
+  const canvasW = useMapTransformStore((s) => s.canvasW)
+  const canvasH = useMapTransformStore((s) => s.canvasH)
 
   const parsedRooms = useMemo(() => {
     return rooms.map((room) => {
@@ -144,6 +146,12 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
       onMouseMove={isRoomTool ? handleStageMouseMove : undefined}
       onDblClick={isRoomTool ? handleDoubleClick : undefined}
     >
+      {/* Full-canvas transparent hit target so empty-space clicks reach
+          handleStageClick — required to drop the first polygon vertex
+          before any room exists. */}
+      {isRoomTool && (
+        <Rect x={0} y={0} width={canvasW} height={canvasH} fill="rgba(0,0,0,0.001)" listening />
+      )}
       {parsedRooms.map((room) => {
         const pts = room.parsedPoints
         if (pts.length < 3) return null

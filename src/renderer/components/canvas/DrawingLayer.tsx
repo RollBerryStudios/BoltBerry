@@ -32,6 +32,8 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
   const scale = useMapTransformStore((s) => s.scale)
   const offsetX = useMapTransformStore((s) => s.offsetX)
   const offsetY = useMapTransformStore((s) => s.offsetY)
+  const canvasW = useMapTransformStore((s) => s.canvasW)
+  const canvasH = useMapTransformStore((s) => s.canvasH)
   const screenToMap = useMapTransformStore((s) => s.screenToMap)
   const [drawings, setDrawings] = useState<Drawing[]>([])
   const [currentPath, setCurrentPath] = useState<number[]>([])
@@ -217,6 +219,12 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
+      {/* Full-canvas transparent hit target. Without this, empty-space
+          clicks on the map never bubble to the Layer's onMouseDown since
+          every rendered drawing uses listening:false. */}
+      {isDrawingActive && (
+        <Rect x={0} y={0} width={canvasW} height={canvasH} fill="rgba(0,0,0,0.001)" listening />
+      )}
       {renderedDrawings}
       {isDrawingActive && renderCurrentPath()}
 
