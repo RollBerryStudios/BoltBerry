@@ -12,7 +12,17 @@ import type { CompendiumFile } from '@shared/ipc-types'
 type Loaded = {
   doc: unknown
   numPages: number
+  outline: OutlineEntry[]
 }
+
+interface OutlineEntry {
+  title: string
+  /** 1-based page number; null when the outline item can't be resolved. */
+  page: number | null
+  children: OutlineEntry[]
+}
+
+type SidebarMode = 'off' | 'toc' | 'thumbs'
 
 interface SearchHit {
   page: number
@@ -50,6 +60,9 @@ export function CompendiumPdfViewer({ file }: PdfViewerProps) {
   // Send-to-player toast — acknowledges the page broadcast succeeded.
   const [sentTick, setSentTick] = useState(0)
   const playerConnected = useUIStore((s) => s.playerConnected)
+
+  // Sidebar: toc (outline), thumbs (page previews), or off.
+  const [sidebarMode, setSidebarMode] = useState<SidebarMode>('off')
 
   // Load (or re-load) the PDF whenever the selected file changes. A cancel
   // flag prevents a stale load from overwriting a newer one when the user
@@ -95,7 +108,8 @@ export function CompendiumPdfViewer({ file }: PdfViewerProps) {
           doc.destroy()
           return
         }
-        setLoaded({ doc, numPages: doc.numPages })
+        const outline = await extractOutline(doc)
+        setLoaded({ doc, numPages: doc.numPages, outline })
         setLoading(false)
       } catch (err) {
         if (!cancelled) {
@@ -300,6 +314,9 @@ export function CompendiumPdfViewer({ file }: PdfViewerProps) {
         zoom={zoom}
         searchOpen={searchOpen}
         onToggleSearch={() => setSearchOpen((v) => !v)}
+        sidebarMode={sidebarMode}
+        onSidebarMode={setSidebarMode}
+        hasOutline={loaded.outline.length > 0}
         playerConnected={playerConnected}
         onSendToPlayer={sendCurrentPageToPlayer}
         onPrev={() => setPageNum((p) => Math.max(1, p - 1))}
@@ -322,13 +339,41 @@ export function CompendiumPdfViewer({ file }: PdfViewerProps) {
         />
       )}
 
-      <div className="bb-pdf-canvas-wrap">
-        <canvas ref={canvasRef} className="bb-pdf-canvas" />
-        {sentTick > 0 && (
-          <div className="bb-pdf-sent-toast">
-            ✓ {t('compendium.sentToPlayer')}
-          </div>
+      <div className="bb-pdf-body">
+        {sidebarMode !== 'off' && (
+          <aside className="bb-pdf-sidebar">
+            {sidebarMode === 'toc' && loaded.outline.length > 0 && (
+              <OutlineTree
+                entries={loaded.outline}
+                depth={0}
+                currentPage={pageNum}
+                onJump={(p) => setPageNum(p)}
+              />
+            )}
+            {sidebarMode === 'toc' && loaded.outline.length === 0 && (
+              <div className="bb-pdf-sidebar-empty">
+                {t('compendium.noOutline')}
+              </div>
+            )}
+            {sidebarMode === 'thumbs' && (
+              <ThumbnailList
+                doc={loaded.doc}
+                numPages={loaded.numPages}
+                currentPage={pageNum}
+                onJump={(p) => setPageNum(p)}
+              />
+            )}
+          </aside>
         )}
+
+        <div className="bb-pdf-canvas-wrap">
+          <canvas ref={canvasRef} className="bb-pdf-canvas" />
+          {sentTick > 0 && (
+            <div className="bb-pdf-sent-toast">
+              ✓ {t('compendium.sentToPlayer')}
+            </div>
+          )}
+        </div>
       </div>
 
       <PdfViewerStyles />
@@ -425,6 +470,9 @@ function PdfToolbar({
   zoom,
   searchOpen,
   onToggleSearch,
+  sidebarMode,
+  onSidebarMode,
+  hasOutline,
   playerConnected,
   onSendToPlayer,
   onPrev,
@@ -439,6 +487,9 @@ function PdfToolbar({
   zoom: number
   searchOpen: boolean
   onToggleSearch: () => void
+  sidebarMode: SidebarMode
+  onSidebarMode: (m: SidebarMode) => void
+  hasOutline: boolean
   playerConnected: boolean
   onSendToPlayer: () => void
   onPrev: () => void
@@ -457,6 +508,26 @@ function PdfToolbar({
 
   return (
     <div className="bb-pdf-toolbar">
+      <div className="bb-pdf-group">
+        <button
+          type="button"
+          className={sidebarMode === 'toc' ? 'bb-pdf-btn active' : 'bb-pdf-btn'}
+          onClick={() => onSidebarMode(sidebarMode === 'toc' ? 'off' : 'toc')}
+          disabled={!hasOutline}
+          title={hasOutline ? t('compendium.toggleToc') : t('compendium.noOutline')}
+        >
+          ☰
+        </button>
+        <button
+          type="button"
+          className={sidebarMode === 'thumbs' ? 'bb-pdf-btn active' : 'bb-pdf-btn'}
+          onClick={() => onSidebarMode(sidebarMode === 'thumbs' ? 'off' : 'thumbs')}
+          title={t('compendium.toggleThumbs')}
+        >
+          ▤
+        </button>
+      </div>
+
       <div className="bb-pdf-group">
         <button type="button" className="bb-pdf-btn" onClick={onPrev} disabled={pageNum <= 1} title={t('compendium.prevPage')}>
           ◀
@@ -524,6 +595,223 @@ function PdfToolbar({
 
 // ─── Styles ──────────────────────────────────────────────────────────
 
+// ─── Outline extraction ──────────────────────────────────────────────
+// pdfjs-dist returns bookmarks as a tree of OutlineNode objects whose
+// `dest` needs to be resolved to a 1-based page number via getPageIndex.
+// A null result means the destination couldn't be resolved (e.g. external
+// links, encrypted refs) — we keep the title but disable the click.
+
+interface PdfOutlineItem {
+  title: string
+  dest: string | unknown[] | null
+  items: PdfOutlineItem[]
+}
+
+async function extractOutline(doc: unknown): Promise<OutlineEntry[]> {
+  const d = doc as {
+    getOutline: () => Promise<PdfOutlineItem[] | null>
+    getPageIndex: (ref: unknown) => Promise<number>
+    getDestination: (name: string) => Promise<unknown[] | null>
+  }
+  const raw = await d.getOutline()
+  if (!raw) return []
+  async function resolve(items: PdfOutlineItem[]): Promise<OutlineEntry[]> {
+    const out: OutlineEntry[] = []
+    for (const it of items) {
+      let page: number | null = null
+      try {
+        let dest = it.dest
+        if (typeof dest === 'string') dest = await d.getDestination(dest)
+        if (Array.isArray(dest) && dest.length > 0) {
+          const ref = dest[0]
+          const idx = await d.getPageIndex(ref)
+          if (Number.isFinite(idx)) page = idx + 1
+        }
+      } catch {
+        /* unresolvable — leave page null */
+      }
+      const children = it.items && it.items.length > 0 ? await resolve(it.items) : []
+      out.push({ title: it.title, page, children })
+    }
+    return out
+  }
+  return resolve(raw)
+}
+
+// ─── TOC sidebar ─────────────────────────────────────────────────────
+
+function OutlineTree({
+  entries,
+  depth,
+  currentPage,
+  onJump,
+}: {
+  entries: OutlineEntry[]
+  depth: number
+  currentPage: number
+  onJump: (page: number) => void
+}) {
+  return (
+    <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+      {entries.map((e, i) => (
+        <li key={`${depth}-${i}`}>
+          <button
+            type="button"
+            onClick={() => e.page && onJump(e.page)}
+            disabled={e.page === null}
+            title={e.title}
+            style={{
+              display: 'flex', alignItems: 'baseline', gap: 8,
+              width: '100%',
+              padding: `4px 10px 4px ${10 + depth * 12}px`,
+              background: e.page === currentPage ? 'var(--accent-blue-dim)' : 'transparent',
+              border: 'none',
+              borderLeft: e.page === currentPage ? '2px solid var(--accent-blue)' : '2px solid transparent',
+              color: e.page === null ? 'var(--text-muted)' : 'var(--text-primary)',
+              fontFamily: 'inherit',
+              fontSize: 11,
+              cursor: e.page === null ? 'default' : 'pointer',
+              textAlign: 'left',
+            }}
+            onMouseEnter={(ev) => { if (e.page !== null && e.page !== currentPage) ev.currentTarget.style.background = 'var(--bg-overlay)' }}
+            onMouseLeave={(ev) => { if (e.page !== currentPage) ev.currentTarget.style.background = 'transparent' }}
+          >
+            <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              {e.title}
+            </span>
+            {e.page !== null && (
+              <span className="mono" style={{ fontSize: 10, color: 'var(--text-muted)' }}>{e.page}</span>
+            )}
+          </button>
+          {e.children.length > 0 && (
+            <OutlineTree entries={e.children} depth={depth + 1} currentPage={currentPage} onJump={onJump} />
+          )}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+// ─── Thumbnail sidebar ───────────────────────────────────────────────
+
+function ThumbnailList({
+  doc,
+  numPages,
+  currentPage,
+  onJump,
+}: {
+  doc: unknown
+  numPages: number
+  currentPage: number
+  onJump: (page: number) => void
+}) {
+  // Pre-allocate a flat array — each Thumb only renders its canvas when
+  // scrolled into view via IntersectionObserver. Keeps memory low on
+  // long PDFs (300+ pages).
+  const pages = useMemo(() => Array.from({ length: numPages }, (_, i) => i + 1), [numPages])
+  return (
+    <div style={{ padding: 8, display: 'flex', flexDirection: 'column', gap: 8 }}>
+      {pages.map((p) => (
+        <Thumb
+          key={p}
+          doc={doc}
+          page={p}
+          active={p === currentPage}
+          onClick={() => onJump(p)}
+        />
+      ))}
+    </div>
+  )
+}
+
+function Thumb({
+  doc,
+  page,
+  active,
+  onClick,
+}: {
+  doc: unknown
+  page: number
+  active: boolean
+  onClick: () => void
+}) {
+  const rootRef = useRef<HTMLButtonElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [rendered, setRendered] = useState(false)
+
+  // Render the canvas the first time this thumb intersects the viewport.
+  useEffect(() => {
+    if (rendered || !rootRef.current) return
+    const el = rootRef.current
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue
+        io.disconnect()
+        void renderThumb()
+        return
+      }
+    }, { rootMargin: '200px' })
+    io.observe(el)
+    return () => io.disconnect()
+
+    async function renderThumb() {
+      try {
+        const d = doc as { getPage: (n: number) => Promise<{ getViewport: (o: { scale: number }) => { width: number; height: number }; render: (o: { canvasContext: CanvasRenderingContext2D; viewport: unknown }) => { promise: Promise<void> } }> }
+        const p = await d.getPage(page)
+        if (!canvasRef.current) return
+        const vp = p.getViewport({ scale: 0.18 })
+        canvasRef.current.width = vp.width
+        canvasRef.current.height = vp.height
+        const ctx = canvasRef.current.getContext('2d')!
+        await p.render({ canvasContext: ctx, viewport: vp }).promise
+        setRendered(true)
+      } catch {
+        /* ignore cancelled / stale thumb renders */
+      }
+    }
+  }, [doc, page, rendered])
+
+  // When the user navigates to this page via other controls, scroll the
+  // thumb into view so the sidebar tracks the main canvas.
+  useEffect(() => {
+    if (active && rootRef.current) {
+      rootRef.current.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+    }
+  }, [active])
+
+  return (
+    <button
+      ref={rootRef}
+      type="button"
+      onClick={onClick}
+      title={`Seite ${page}`}
+      style={{
+        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
+        padding: 4,
+        background: 'transparent',
+        border: active ? '2px solid var(--accent-blue)' : '2px solid transparent',
+        borderRadius: 'var(--radius-sm)',
+        cursor: 'pointer',
+        fontFamily: 'inherit',
+      }}
+    >
+      <div style={{
+        width: '100%',
+        minHeight: 120,
+        background: '#fff',
+        borderRadius: 2,
+        boxShadow: '0 2px 6px rgba(0,0,0,0.4)',
+        overflow: 'hidden',
+      }}>
+        <canvas ref={canvasRef} style={{ width: '100%', height: 'auto', display: 'block' }} />
+      </div>
+      <div style={{ fontSize: 10, color: active ? 'var(--accent-blue-light)' : 'var(--text-muted)', fontWeight: 600 }}>
+        {page}
+      </div>
+    </button>
+  )
+}
+
 function PdfViewerStyles() {
   return (
     <style>{`
@@ -582,6 +870,25 @@ function PdfViewerStyles() {
       }
       .bb-pdf-page-of { font-size: 12px; color: var(--text-muted); }
 
+      .bb-pdf-body {
+        flex: 1; min-height: 0;
+        display: flex;
+      }
+      .bb-pdf-sidebar {
+        width: 220px;
+        flex-shrink: 0;
+        overflow-y: auto;
+        background: var(--bg-surface);
+        border-right: 1px solid var(--border);
+        padding: 6px 0;
+      }
+      .bb-pdf-sidebar-empty {
+        padding: 16px;
+        font-size: 11px;
+        color: var(--text-muted);
+        text-align: center;
+        font-style: italic;
+      }
       .bb-pdf-canvas-wrap {
         flex: 1; min-height: 0;
         overflow: auto;

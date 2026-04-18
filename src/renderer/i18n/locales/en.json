@@ -176,7 +176,10 @@
     "sendDisabled": "Player window not connected",
     "sentToPlayer": "Sent to player window",
     "pageShort": "p.",
-    "attributionPrefix": "SRD 5.2 © Wizards of the Coast LLC, licensed under"
+    "attributionPrefix": "SRD 5.2 © Wizards of the Coast LLC, licensed under",
+    "toggleToc": "Table of contents",
+    "toggleThumbs": "Page thumbnails",
+    "noOutline": "This PDF has no table of contents"
   },
   "welcome": {
     "tag": "Local tabletop studio",

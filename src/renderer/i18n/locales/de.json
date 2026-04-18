@@ -176,7 +176,10 @@
     "sendDisabled": "Spielerfenster nicht verbunden",
     "sentToPlayer": "An Spielerfenster gesendet",
     "pageShort": "S.",
-    "attributionPrefix": "SRD 5.2 © Wizards of the Coast LLC, lizenziert unter"
+    "attributionPrefix": "SRD 5.2 © Wizards of the Coast LLC, lizenziert unter",
+    "toggleToc": "Inhaltsverzeichnis",
+    "toggleThumbs": "Seiten-Vorschau",
+    "noOutline": "Kein Inhaltsverzeichnis in dieser PDF"
   },
   "welcome": {
     "tag": "Lokales Spieltisch-Studio",
