@@ -1676,6 +1676,9 @@ textarea.input {
   left: 84px;
   bottom: 12px;
   z-index: 260;
+  /* Pass clicks through so tools (fog brush, draw) still work if the
+     strip overlaps the bottom-left corner of the map. */
+  pointer-events: none;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1701,6 +1704,7 @@ textarea.input {
   background: var(--bg-elevated);
   color: var(--text-secondary);
   cursor: pointer;
+  pointer-events: auto;
   font-size: 11px;
   line-height: 1;
   flex-shrink: 0;
@@ -1748,10 +1752,13 @@ textarea.input {
   border-radius: var(--radius-sm);
   color: var(--text-muted);
   cursor: pointer;
+  pointer-events: auto;
   font-size: 14px;
   flex-shrink: 0;
   transition: background var(--transition), color var(--transition);
 }
+/* Meta block is purely text; keep click-through so canvas stays usable. */
+.audio-strip-meta { pointer-events: none; }
 .audio-strip-expand:hover { background: var(--bg-overlay); color: var(--text-primary); }
 
 /* ─── Sub-tool strip (contextual presets, v1 Conservative) ───────────────── */
@@ -1764,6 +1771,10 @@ textarea.input {
   top: 12px;
   z-index: 264;
   height: 48px;
+  /* Cap the strip so it never stretches farther than it needs and never
+     silently covers a large canvas region. Width is content-driven via
+     shrink-to-fit; max-width guards against pathological labels. */
+  max-width: calc(100% - 96px);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1777,6 +1788,10 @@ textarea.input {
   user-select: none;
   animation: subToolSlideIn 180ms ease both;
 }
+/* Interactive children opt back in; the strip itself is click-through so
+   canvas tools keep working if the strip covers a corner of the map. */
+.sub-tool-strip > * { pointer-events: auto; }
+.sub-tool-strip { pointer-events: none; }
 @keyframes subToolSlideIn {
   from { opacity: 0; transform: translateX(-8px); }
   to   { opacity: 1; transform: none; }
@@ -1850,9 +1865,17 @@ textarea.input {
   position: absolute;
   left: 12px;
   top: 12px;
-  bottom: 12px;
+  /* Don't pin the bottom — the rail previously spanned top:12→bottom:12 and
+     absorbed every click in its 60-px column over the full canvas height,
+     blocking fog/draw/measure pointer events along the left side. Let the
+     rail shrink-wrap to content and cap it at the viewport so scroll still
+     works on very short windows. */
+  max-height: calc(100% - 24px);
   width: 60px;
   z-index: 265;
+  /* Pointer-events: the rail container lets clicks pass through to the
+     canvas; only the buttons opt back in below. */
+  pointer-events: none;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1891,6 +1914,9 @@ textarea.input {
 .left-tool-group {
   position: relative;
   display: flex;
+  /* Re-enable pointer events on interactive children since the dock
+     container has pointer-events: none for canvas pass-through. */
+  pointer-events: auto;
 }
 .left-tool-btn {
   position: relative;
@@ -1905,6 +1931,7 @@ textarea.input {
   border-radius: 8px;
   color: var(--text-secondary);
   cursor: pointer;
+  pointer-events: auto;
   transition: background var(--transition), color var(--transition), transform var(--transition);
 }
 .left-tool-btn:hover {
