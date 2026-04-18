@@ -781,7 +781,9 @@ function WorkspaceStyles() {
       /* Panel container */
       .bb-ws-panel {
         position: relative;
-        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+        min-height: min(720px, calc(100vh - 260px));
         background: var(--bg-surface);
         border: 1px solid var(--border);
         border-radius: var(--radius-lg);
@@ -808,17 +810,27 @@ function WorkspaceStyles() {
         color: var(--text-muted);
         letter-spacing: 0.02em;
       }
-      .bb-ws-panel-inner { position: relative; min-height: 400px; }
-      .bb-ws-panel-notes {
-        padding: var(--sp-5);
-        display: flex; justify-content: center;
+      .bb-ws-panel-inner {
+        position: relative;
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
       }
-      .bb-ws-panel-notes > * { width: 100%; max-width: 860px; }
+      .bb-ws-panel-notes {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        height: 100%;
+      }
+      .bb-ws-panel-notes > * {
+        flex: 1;
+        min-height: 0;
+      }
       .bb-ws-panel-characters,
       .bb-ws-panel-library,
       .bb-ws-panel-handouts,
       .bb-ws-panel-audio {
-        min-height: 500px;
         display: flex;
         flex-direction: column;
       }
