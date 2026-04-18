@@ -92,6 +92,9 @@ interface UIState {
   activeWeather: string
   drawingClearTick: number
   topView: TopView
+  /** v1 Conservative dock prefs — persisted to localStorage. */
+  dockLabels: boolean
+  dockAutoHide: boolean
 
   clipboardTokens: Array<{
     name: string
@@ -159,6 +162,8 @@ interface UIState {
   }>) => void
 
   setTopView: (view: TopView) => void
+  toggleDockLabels: () => void
+  toggleDockAutoHide: () => void
 }
 
 export const useUIStore = create<UIState>((set) => ({
@@ -192,6 +197,8 @@ export const useUIStore = create<UIState>((set) => ({
   drawingClearTick: 0,
   clipboardTokens: [],
   topView: 'main',
+  dockLabels: (() => { try { return localStorage.getItem('boltberry-dock-labels') === 'true' } catch { return false } })(),
+  dockAutoHide: (() => { try { return localStorage.getItem('boltberry-dock-auto-hide') === 'true' } catch { return false } })(),
 
   setActiveTool: (activeTool) => set({ activeTool }),
   setWorkMode: (workMode: WorkMode) =>
@@ -301,6 +308,18 @@ export const useUIStore = create<UIState>((set) => ({
   setActiveWeather: (activeWeather) => set({ activeWeather }),
   incrementDrawingClearTick: () => set((s) => ({ drawingClearTick: s.drawingClearTick + 1 })),
   setTopView: (topView) => set({ topView }),
+  toggleDockLabels: () =>
+    set((s) => {
+      const next = !s.dockLabels
+      try { localStorage.setItem('boltberry-dock-labels', String(next)) } catch { /* noop */ }
+      return { dockLabels: next }
+    }),
+  toggleDockAutoHide: () =>
+    set((s) => {
+      const next = !s.dockAutoHide
+      try { localStorage.setItem('boltberry-dock-auto-hide', String(next)) } catch { /* noop */ }
+      return { dockAutoHide: next }
+    }),
   setClipboardTokens: (tokens: Array<{
     name: string
     imagePath: string | null

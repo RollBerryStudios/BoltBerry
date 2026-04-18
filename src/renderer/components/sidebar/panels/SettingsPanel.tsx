@@ -2,12 +2,17 @@ import { useTranslation } from 'react-i18next'
 import { useSettingsStore } from '../../../stores/settingsStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import { useAppStore } from '../../../stores/appStore'
+import { useUIStore } from '../../../stores/uiStore'
 import { showToast } from '../../shared/Toast'
 
 export function SettingsPanel() {
   const { t } = useTranslation()
   const { userDataFolder } = useSettingsStore()
   const { activeCampaignId, setActiveCampaign } = useCampaignStore()
+  const dockLabels = useUIStore((s) => s.dockLabels)
+  const dockAutoHide = useUIStore((s) => s.dockAutoHide)
+  const toggleDockLabels = useUIStore((s) => s.toggleDockLabels)
+  const toggleDockAutoHide = useUIStore((s) => s.toggleDockAutoHide)
 
   async function handleOpenContentFolder() {
     if (window.electronAPI) {
@@ -146,6 +151,51 @@ export function SettingsPanel() {
             </button>
           </div>
         </div>
+      </div>
+
+      {/* ── Dock-Einstellungen ────────────────────────────────────────── */}
+      <div className="sidebar-section">
+        <div className="sidebar-section-title">Werkzeugleiste</div>
+
+        <label
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 'var(--sp-2)',
+            padding: 'var(--sp-1) 0',
+            fontSize: 'var(--text-sm)',
+            cursor: 'pointer',
+          }}
+        >
+          <span>
+            Beschriftung anzeigen
+            <span style={{ display: 'block', fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 2 }}>
+              Zeigt Werkzeugnamen unter den Icons.
+            </span>
+          </span>
+          <input type="checkbox" checked={dockLabels} onChange={toggleDockLabels} />
+        </label>
+
+        <label
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 'var(--sp-2)',
+            padding: 'var(--sp-1) 0',
+            fontSize: 'var(--text-sm)',
+            cursor: 'pointer',
+          }}
+        >
+          <span>
+            Automatisch ausblenden
+            <span style={{ display: 'block', fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 2 }}>
+              Dimmt die Werkzeugleiste, wenn der Cursor auf der Karte ruht.
+            </span>
+          </span>
+          <input type="checkbox" checked={dockAutoHide} onChange={toggleDockAutoHide} />
+        </label>
       </div>
 
       {/* ── Kampagnen-Import/Export ───────────────────────────────────── */}

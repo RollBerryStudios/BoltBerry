@@ -292,6 +292,16 @@
     "importError": "Import fehlgeschlagen: {{error}}",
     "preloadMissing": "Preload-Skript nicht geladen. Die Datenbank ist nicht erreichbar — bitte App neu starten."
   },
+  "subtool": {
+    "label": "Werkzeugoptionen",
+    "fogBrush": "Pinselgröße",
+    "fogShape": "Nebel",
+    "measure": "Messen",
+    "wall": "Wand",
+    "draw": "Zeichnen",
+    "reveal": "Aufdecken",
+    "cover": "Verdecken"
+  },
   "toolbar": {
     "leftSidebar": "Linke Sidebar",
     "rightSidebar": "Rechte Sidebar",
@@ -495,7 +505,9 @@
     "clear": "Löschen",
     "noBoards": "Noch keine Boards. Oben eines hinzufügen.",
     "noCampaign": "Kampagne öffnen, um Soundboards zu nutzen.",
-    "sfxHint": "Rechtsklick auf einen Slot zum Bearbeiten"
+    "sfxHint": "Rechtsklick auf einen Slot zum Bearbeiten",
+    "strip": "Audio-Leiste",
+    "openPanel": "Audio-Panel öffnen"
   },
   "settings": {
     "title": "Einstellungen"

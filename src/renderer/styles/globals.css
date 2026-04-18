@@ -1143,10 +1143,10 @@ textarea.input {
    viewport info chip. Auto-fades with the rest of the ambient HUDs. */
 .active-tool-hud {
   position: absolute;
-  /* Offset right to clear the 60-px left tool rail (rail sits at left:12,
-     width:60, plus 12-px breathing room). */
+  /* Offset right to clear the 60-px left tool rail, and stacked above the
+     audio strip (bottom:12, ~40px tall) and viewport HUD (bottom:60). */
   left: 84px;
-  bottom: 52px;
+  bottom: 108px;
   z-index: 250;
   display: flex;
   align-items: center;
@@ -1174,9 +1174,9 @@ textarea.input {
 
 .viewport-hud {
   position: absolute;
-  /* Offset right to clear the left tool rail. */
+  /* Offset right to clear the left tool rail; sits above the audio strip. */
   left: 84px;
-  bottom: 12px;
+  bottom: 60px;
   z-index: 250;
   display: flex;
   align-items: center;
@@ -1664,6 +1664,183 @@ textarea.input {
   flex-direction: column;
 }
 
+/* ─── Audio strip (bottom-left, v1 Conservative) ─────────────────────────── */
+/* Compact floating audio chip anchored bottom-left. Shows the currently
+   active channel + play/stop + handle that opens the full AudioPanel.
+   Only rendered when at least one channel has a loaded track. */
+.audio-strip {
+  position: absolute;
+  /* Anchored to the bottom-left of the canvas, right of the 60-px tool
+     rail (rail occupies left:12 through left:72). Viewport- and active-
+     tool-HUDs stack above it. */
+  left: 84px;
+  bottom: 12px;
+  z-index: 260;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  background: rgba(14, 22, 38, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  user-select: none;
+  min-width: 180px;
+  max-width: 280px;
+}
+.audio-strip-play {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+.audio-strip-play:hover {
+  background: var(--bg-overlay);
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+}
+.audio-strip-play.playing {
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--success);
+  border-color: rgba(34, 197, 94, 0.4);
+}
+.audio-strip-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+}
+.audio-strip-channel {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.audio-strip-track {
+  font-size: 11px;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.audio-strip-expand {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 14px;
+  flex-shrink: 0;
+  transition: background var(--transition), color var(--transition);
+}
+.audio-strip-expand:hover { background: var(--bg-overlay); color: var(--text-primary); }
+
+/* ─── Sub-tool strip (contextual presets, v1 Conservative) ───────────────── */
+/* Glass pill anchored at top:12, just right of the 60-px left rail. Renders
+   tool-specific option presets (fog brush size, measure shape, draw width,
+   etc.). Slides in from the left when its content appears. */
+.sub-tool-strip {
+  position: absolute;
+  left: 84px;  /* 12 (rail offset) + 60 (rail width) + 12 (gap) */
+  top: 12px;
+  z-index: 264;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  background: rgba(14, 22, 38, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  user-select: none;
+  animation: subToolSlideIn 180ms ease both;
+}
+@keyframes subToolSlideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.sub-tool-seg {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-right: 10px;
+  margin-right: 2px;
+  border-right: 1px solid var(--border);
+  height: 24px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.sub-tool-pill {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 11px;
+  padding: 5px 10px;
+  height: 26px;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+  white-space: nowrap;
+}
+.sub-tool-pill:hover {
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+}
+.sub-tool-pill.active {
+  background: rgba(255, 198, 46, 0.12);
+  border-color: rgba(255, 198, 46, 0.4);
+  color: var(--accent);
+}
+.sub-tool-pill.mono { font-family: var(--font-mono, monospace); }
+
+.sub-tool-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+  margin: 0 2px;
+}
+
+.sub-tool-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+.sub-tool-swatch:hover { transform: scale(1.1); }
+.sub-tool-swatch.active {
+  border-color: var(--text-primary);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
+}
+
 /* ─── Left tool rail (v1 Conservative floating dock) ─────────────────────── */
 /* Vertical 60-px glass rail anchored at left:12 / top:12 / bottom:12 inside
    the canvas area. Five tool sections separated by thin dividers; each
@@ -1740,6 +1917,26 @@ textarea.input {
 }
 .left-tool-btn:active { transform: translateY(1px); }
 .left-tool-btn-icon { font-size: 18px; line-height: 1; }
+
+/* Novice-mode labels: small text under the icon. Enabled when the dock
+   has class `left-tool-dock--labels` (driven by uiStore.dockLabels). */
+.left-tool-dock--labels .left-tool-btn {
+  flex-direction: column;
+  gap: 2px;
+  height: 54px;
+}
+.left-tool-btn-label {
+  font-size: 9px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: inherit;
+  opacity: 0.8;
+  max-width: 38px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 /* Yellow accent indicator on the left edge of the active button. */
 .left-tool-btn-accent {
   position: absolute;

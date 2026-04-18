@@ -11,6 +11,10 @@ import { useUIStore, type ActiveTool } from '../../stores/uiStore'
  * morphism panel anchored at left:12 / top:12 / bottom:12 inside the
  * canvas area, so it floats on top of the map.
  */
+function truncate(s: string, max: number): string {
+  return s.length > max ? s.slice(0, max) + '…' : s
+}
+
 interface ToolDef {
   id: ActiveTool
   icon: string
@@ -105,6 +109,8 @@ export function LeftToolDock() {
   const activeTool = useUIStore((s) => s.activeTool)
   const setActiveTool = useUIStore((s) => s.setActiveTool)
   const workMode = useUIStore((s) => s.workMode)
+  const dockLabels = useUIStore((s) => s.dockLabels)
+  const dockAutoHide = useUIStore((s) => s.dockAutoHide)
   const [openGroup, setOpenGroup] = useState<string | null>(null)
 
   // Player-preview restricts the DM to the pointer tool — hide the rail.
@@ -124,8 +130,17 @@ export function LeftToolDock() {
     setActiveTool(id)
   }
 
+  const classes = [
+    'left-tool-dock',
+    dockLabels ? 'left-tool-dock--labels' : '',
+    // Auto-hide pairs with `.canvas-area.hud-idle` (the class CanvasArea sets
+    // when the cursor is idle over the map). The `canvas-hud-fade` opt-in
+    // gives us the same fade contract the other ambient HUDs use.
+    dockAutoHide ? 'canvas-hud-fade' : '',
+  ].filter(Boolean).join(' ')
+
   return (
-    <div className="left-tool-dock" role="toolbar" aria-label={t('toolbar.tools.select')}>
+    <div className={classes} role="toolbar" aria-label={t('toolbar.tools.select')}>
       {SECTIONS.map((section, i) => (
         <div key={section.id} className="left-tool-dock-section">
           {i > 0 && <div className="left-tool-dock-divider" aria-hidden="true" />}
@@ -138,6 +153,7 @@ export function LeftToolDock() {
               onToggleOpen={() => setOpenGroup(openGroup === g.id ? null : g.id)}
               onClose={() => setOpenGroup(null)}
               onSelect={handleSelect}
+              showLabel={dockLabels}
               t={t}
             />
           ))}
@@ -154,10 +170,11 @@ interface ToolGroupButtonProps {
   onToggleOpen: () => void
   onClose: () => void
   onSelect: (id: ActiveTool) => void
+  showLabel: boolean
   t: (k: string) => string
 }
 
-function ToolGroupButton({ group, activeTool, open, onToggleOpen, onClose, onSelect, t }: ToolGroupButtonProps) {
+function ToolGroupButton({ group, activeTool, open, onToggleOpen, onClose, onSelect, showLabel, t }: ToolGroupButtonProps) {
   const btnRef = useRef<HTMLButtonElement>(null)
   const popRef = useRef<HTMLDivElement>(null)
   const [pos, setPos] = useState<{ top: number; left: number } | null>(null)
@@ -224,6 +241,11 @@ function ToolGroupButton({ group, activeTool, open, onToggleOpen, onClose, onSel
       >
         {groupActive && <span className="left-tool-btn-accent" aria-hidden="true" />}
         <span className="left-tool-btn-icon" aria-hidden="true">{displayIcon}</span>
+        {showLabel && (
+          <span className="left-tool-btn-label">
+            {truncate(t(group.primary.labelKey), 8)}
+          </span>
+        )}
         {hasVariants && (
           <span
             className="left-tool-btn-chevron"

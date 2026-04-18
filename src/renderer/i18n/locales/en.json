@@ -292,6 +292,16 @@
     "importError": "Import failed: {{error}}",
     "preloadMissing": "Preload script not loaded. The database is unreachable \u2014 please restart the app."
   },
+  "subtool": {
+    "label": "Tool options",
+    "fogBrush": "Brush size",
+    "fogShape": "Fog",
+    "measure": "Measure",
+    "wall": "Wall",
+    "draw": "Draw",
+    "reveal": "Reveal",
+    "cover": "Cover"
+  },
   "toolbar": {
     "leftSidebar": "Left Sidebar",
     "backToCampaign": "Back to campaign",
@@ -495,7 +505,9 @@
     "clear": "Clear",
     "noBoards": "No boards yet. Add one above.",
     "noCampaign": "Open a campaign to use soundboards.",
-    "sfxHint": "Right-click a slot to edit it"
+    "sfxHint": "Right-click a slot to edit it",
+    "strip": "Audio strip",
+    "openPanel": "Open audio panel"
   },
   "settings": {
     "title": "Settings"

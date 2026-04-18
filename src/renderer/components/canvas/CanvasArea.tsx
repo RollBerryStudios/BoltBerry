@@ -18,6 +18,8 @@ import { ViewportHUD } from './ViewportHUD'
 import { InitiativeTopStrip } from './InitiativeTopStrip'
 import { ActiveToolHUD } from './ActiveToolHUD'
 import { LeftToolDock } from './LeftToolDock'
+import { SubToolStrip } from './SubToolStrip'
+import { AudioStrip } from './AudioStrip'
 import { MultiSelectBar } from '../MultiSelectBar'
 import { useUIStore } from '../../stores/uiStore'
 import { useCampaignStore } from '../../stores/campaignStore'
@@ -647,6 +649,14 @@ export function CanvasArea() {
 
       {/* Floating tool rail (v1 Conservative left rail, 60px, glass) */}
       <LeftToolDock />
+
+      {/* Contextual sub-tool strip (appears right of the rail when the
+          active tool has configurable presets). */}
+      <SubToolStrip />
+
+      {/* Compact audio strip (bottom-left); only visible when a channel
+          is loaded. Click the ⋯ handle to open the full AudioPanel. */}
+      <AudioStrip />
 
       {/* Initiative top-strip (top-center, combat mode only) */}
       <InitiativeTopStrip />
