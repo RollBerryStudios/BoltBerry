@@ -36,7 +36,9 @@ function ChannelStrip({ chId, label, activeMapId }: {
     try {
       const result = await window.electronAPI.importFile('audio')
       if (result) store.loadChannel(chId, result.path)
-    } catch { /* silent */ }
+    } catch (err) {
+      console.error('[AudioPanel] importFile failed:', err)
+    }
   }
 
   async function handleSetAmbient() {

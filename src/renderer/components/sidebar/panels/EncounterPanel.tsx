@@ -27,6 +27,7 @@ function broadcastTokensFromPanel() {
       showName: t.showName, rotation: t.rotation,
       markerColor: t.markerColor, statusEffects: t.statusEffects,
       ac: t.ac, faction: t.faction,
+      lightRadius: t.lightRadius, lightColor: t.lightColor,
     }))
   window.electronAPI?.sendTokenUpdate(visible)
 }

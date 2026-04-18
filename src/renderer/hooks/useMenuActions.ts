@@ -14,7 +14,7 @@ export function useMenuActions({ onShowShortcuts, onNewCampaign, onAbout }: UseM
   useEffect(() => {
     if (!window.electronAPI?.onMenuAction) return
 
-    const unsub = window.electronAPI.onMenuAction((action: string) => {
+    const unsub: () => unknown = window.electronAPI.onMenuAction((action: string) => {
       switch (action) {
         case 'new-campaign':
           onNewCampaign()
@@ -100,6 +100,8 @@ export function useMenuActions({ onShowShortcuts, onNewCampaign, onAbout }: UseM
           break
       }
     })
-    return unsub
+    // Wrap so the cleanup matches React's void-returning contract — the
+    // underlying preload binding hands back the IpcRenderer reference.
+    return () => { unsub() }
   }, [onShowShortcuts, onNewCampaign, onAbout])
 }

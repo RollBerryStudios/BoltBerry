@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useMemo } from 'react'
 import { useTokenStore } from '../../../stores/tokenStore'
 import { useUIStore } from '../../../stores/uiStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
@@ -768,6 +768,8 @@ function broadcastTokensFromPanel() {
       statusEffects: t.statusEffects,
       ac: t.ac,
       faction: t.faction,
+      lightRadius: t.lightRadius,
+      lightColor: t.lightColor,
     }))
   window.electronAPI?.sendTokenUpdate(visible)
 }

@@ -49,6 +49,7 @@ function broadcastTokensFromCanvas() {
       rotation: t.rotation, markerColor: t.markerColor,
       statusEffects: t.statusEffects, ac: t.ac,
       faction: t.faction,
+      lightRadius: t.lightRadius, lightColor: t.lightColor,
     }))
   window.electronAPI?.sendTokenUpdate(visible)
 }
@@ -1049,6 +1050,8 @@ async function loadMapData(mapId: number, map: MapRecord) {
           statusEffects: t.statusEffects,
           ac: t.ac,
           faction: t.faction,
+          lightRadius: t.lightRadius,
+          lightColor: t.lightColor,
         })),
       fogBitmap,
       exploredBitmap,

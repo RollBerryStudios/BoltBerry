@@ -70,6 +70,12 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
 
     return () => {
       if (saveTimer) { clearTimeout(saveTimer); saveTimer = null }
+      // Destroy imperatively-added Konva.Image nodes so they don't leak
+      // if the component unmounts before another map loads.
+      kImgExploredRef.current?.destroy()
+      kImgExploredRef.current = null
+      kImgCoveredRef.current?.destroy()
+      kImgCoveredRef.current = null
     }
   }, [mapId, imgW, imgH])
 

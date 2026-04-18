@@ -2419,7 +2419,10 @@ textarea.input {
 .left-tool-popover {
   position: fixed;
   transform: translateY(-50%);
-  z-index: 9999;
+  /* Sit below .modal-backdrop (9900) / .monster-preview-backdrop (9950)
+     and one step below .context-menu (9999) so right-click menus always
+     render on top of an open tool variant popover. */
+  z-index: 9800;
   min-width: 220px;
   display: flex;
   flex-direction: column;

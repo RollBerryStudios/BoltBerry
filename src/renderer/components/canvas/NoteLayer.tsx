@@ -92,8 +92,12 @@ export function NoteLayer({ stageRef, mapId }: NoteLayerProps) {
   }, [mapId])
 
   useEffect(() => {
-    window.addEventListener(NOTE_NEW_PIN_EVENT, handleNewPin as EventListener)
-    return () => window.removeEventListener(NOTE_NEW_PIN_EVENT, handleNewPin as EventListener)
+    // Bridge the typed CustomEvent handler to the DOM's plain EventListener
+    // contract via `unknown` — TS rightly rejects the direct cast because
+    // the parameter types don't overlap.
+    const listener = handleNewPin as unknown as EventListener
+    window.addEventListener(NOTE_NEW_PIN_EVENT, listener)
+    return () => window.removeEventListener(NOTE_NEW_PIN_EVENT, listener)
   }, [handleNewPin])
 
   // ── Listen for "enter pin mode" (from NotesPanel "Auf Karte setzen") ────────

@@ -1510,6 +1510,8 @@ function broadcastTokens(tokens: TokenRecord[]) {
       statusEffects: t.statusEffects,
       ac: t.ac,
       faction: t.faction,
+      lightRadius: t.lightRadius,
+      lightColor: t.lightColor,
     }))
   window.electronAPI?.sendTokenUpdate(visible)
 }
