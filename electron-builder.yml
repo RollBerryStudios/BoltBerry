@@ -37,6 +37,9 @@ extraResources:
   - from: resources/compendium
     to: compendium
     filter: ["**/*.pdf"]
+  - from: resources/token-variants
+    to: token-variants
+    filter: ["**/*.{webp,png,jpg,jpeg}"]
 
 # ─── Windows ──────────────────────────────────────────────────────────────────
 win:
