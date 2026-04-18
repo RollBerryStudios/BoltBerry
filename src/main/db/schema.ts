@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 31
+export const SCHEMA_VERSION = 32
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -193,7 +193,10 @@ CREATE TABLE IF NOT EXISTS maps (
   track1_volume REAL NOT NULL DEFAULT 1.0,
   track2_volume REAL NOT NULL DEFAULT 1.0,
   combat_volume REAL NOT NULL DEFAULT 1.0,
-  rotation_player INTEGER NOT NULL DEFAULT 0
+  rotation_player INTEGER NOT NULL DEFAULT 0,
+  grid_visible   INTEGER NOT NULL DEFAULT 1,
+  grid_thickness REAL    NOT NULL DEFAULT 1.0,
+  grid_color     TEXT    NOT NULL DEFAULT 'rgba(255,255,255,0.34)'
 );
 
 -- Fog of War bitmaps (one per map)
@@ -740,6 +743,17 @@ CREATE TABLE IF NOT EXISTS sessions (
 CREATE INDEX IF NOT EXISTS idx_sessions_campaign ON sessions(campaign_id);
 CREATE INDEX IF NOT EXISTS idx_sessions_open ON sessions(campaign_id) WHERE ended_at IS NULL;
 UPDATE schema_version SET version = 31;
+`
+
+// Migration: v31 → v32 — per-map grid visibility / thickness / colour. The
+// three existing columns (grid_type, grid_size, grid_offset_*) only cover
+// geometry; the DM couldn't hide the grid without setting type='none'
+// (which also disabled snap) nor adjust stroke opacity or colour.
+export const MIGRATE_V31_TO_V32 = `
+ALTER TABLE maps ADD COLUMN grid_visible   INTEGER NOT NULL DEFAULT 1;
+ALTER TABLE maps ADD COLUMN grid_thickness REAL    NOT NULL DEFAULT 1.0;
+ALTER TABLE maps ADD COLUMN grid_color     TEXT    NOT NULL DEFAULT 'rgba(255,255,255,0.34)';
+UPDATE schema_version SET version = 32;
 `
 
 // Use the SCHEMA_VERSION constant directly so there's a single source of truth.

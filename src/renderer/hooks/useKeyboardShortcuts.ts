@@ -8,6 +8,35 @@ import { useMapTransformStore } from '../stores/mapTransformStore'
 import { useUndoStore, nextCommandId } from '../stores/undoStore'
 import { useAudioStore } from '../stores/audioStore'
 
+// ── Grid chord state ─────────────────────────────────────────────────────
+// `G` on its own toggles the grid. `G` followed (within CHORD_WINDOW ms) by
+// `+` / `=` grows the grid by 5 px; `-` / `_` shrinks it by 5 px. Any other
+// key cancels the chord. Keeping this at module scope rather than inside
+// the hook so the window survives across React re-renders.
+const CHORD_WINDOW_MS = 900
+const GRID_STEP_PX = 5
+let gridChordDeadline = 0
+
+async function persistMapGridPatch(patch: Partial<{ gridVisible: boolean; gridSize: number }>) {
+  const { activeMapId, activeMaps, setActiveMaps } = useCampaignStore.getState()
+  if (!activeMapId) return
+  const map = activeMaps.find((m) => m.id === activeMapId)
+  if (!map) return
+  const next = { ...map, ...patch }
+  setActiveMaps(activeMaps.map((m) => (m.id === activeMapId ? next : m)))
+  try {
+    const sets: string[] = []
+    const vals: Array<number | string> = []
+    if (patch.gridVisible !== undefined) { sets.push('grid_visible = ?'); vals.push(patch.gridVisible ? 1 : 0) }
+    if (patch.gridSize !== undefined) { sets.push('grid_size = ?'); vals.push(patch.gridSize) }
+    if (sets.length === 0) return
+    vals.push(activeMapId)
+    await window.electronAPI?.dbRun(`UPDATE maps SET ${sets.join(', ')} WHERE id = ?`, vals)
+  } catch (err) {
+    console.error('[useKeyboardShortcuts] grid patch persist failed:', err)
+  }
+}
+
 export function useKeyboardShortcuts() {
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -15,6 +44,28 @@ export function useKeyboardShortcuts() {
       const tag = target?.tagName
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
       if (target?.isContentEditable) return
+
+      // ── Grid chord: `G +` / `G -` ─────────────────────────────────────────
+      // Runs first so the second keystroke wins over any matching single-key
+      // action (e.g. the standalone `-` zoom-out binding below).
+      if (performance.now() <= gridChordDeadline && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        gridChordDeadline = 0
+        if (e.key === '+' || e.key === '=') {
+          e.preventDefault()
+          const { activeMapId, activeMaps } = useCampaignStore.getState()
+          const map = activeMaps.find((m) => m.id === activeMapId)
+          if (map) void persistMapGridPatch({ gridSize: Math.min(400, map.gridSize + GRID_STEP_PX) })
+          return
+        }
+        if (e.key === '-' || e.key === '_') {
+          e.preventDefault()
+          const { activeMapId, activeMaps } = useCampaignStore.getState()
+          const map = activeMaps.find((m) => m.id === activeMapId)
+          if (map) void persistMapGridPatch({ gridSize: Math.max(10, map.gridSize - GRID_STEP_PX) })
+          return
+        }
+        // Any other key cancels the chord and falls through to normal handling.
+      }
 
       // ── Ctrl / Cmd shortcuts ──────────────────────────────────────────────
       if (e.ctrlKey || e.metaKey) {
@@ -286,7 +337,19 @@ export function useKeyboardShortcuts() {
           useUIStore.getState().setActiveTool('draw-freehand')
           break
         case 'g': case 'G':
-          useUIStore.getState().setActiveTool('wall-draw')
+          if (e.shiftKey) {
+            // Shift+G keeps the old wall-draw binding — fog/wall muscle
+            // memory stays intact while plain G is reclaimed for grid.
+            useUIStore.getState().setActiveTool('wall-draw')
+          } else {
+            // Plain G toggles grid visibility on the active map *and* arms
+            // the chord window: press + / - within CHORD_WINDOW_MS to
+            // resize the grid instead of toggling it.
+            const { activeMapId, activeMaps } = useCampaignStore.getState()
+            const map = activeMaps.find((m) => m.id === activeMapId)
+            if (map) void persistMapGridPatch({ gridVisible: !(map.gridVisible ?? true) })
+            gridChordDeadline = performance.now() + CHORD_WINDOW_MS
+          }
           break
         case 'j': case 'J':
           useUIStore.getState().setActiveTool('wall-door')

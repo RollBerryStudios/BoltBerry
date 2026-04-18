@@ -85,7 +85,8 @@ export const useCampaignStore = create<CampaignState>((set) => ({
           rotation: number | null; grid_offset_x: number; grid_offset_y: number; ambient_brightness: number
           ambient_track_path: string | null; track1_volume: number; track2_volume: number; combat_volume: number
           rotation_player: number
-        }>('SELECT id, campaign_id, name, image_path, grid_type, grid_size, ft_per_unit, order_index, camera_x, camera_y, camera_scale, rotation, rotation_player, grid_offset_x, grid_offset_y, ambient_brightness, ambient_track_path, track1_volume, track2_volume, combat_volume FROM maps WHERE campaign_id = ? ORDER BY order_index', [activeCampaignId])
+          grid_visible: number | null; grid_thickness: number | null; grid_color: string | null
+        }>('SELECT id, campaign_id, name, image_path, grid_type, grid_size, ft_per_unit, order_index, camera_x, camera_y, camera_scale, rotation, rotation_player, grid_offset_x, grid_offset_y, ambient_brightness, ambient_track_path, track1_volume, track2_volume, combat_volume, grid_visible, grid_thickness, grid_color FROM maps WHERE campaign_id = ? ORDER BY order_index', [activeCampaignId])
 
         activeMaps = rows.map(r => ({
           id: r.id,
@@ -108,6 +109,9 @@ export const useCampaignStore = create<CampaignState>((set) => ({
           track1Volume: r.track1_volume ?? 1,
           track2Volume: r.track2_volume ?? 1,
           combatVolume: r.combat_volume ?? 1,
+          gridVisible: (r.grid_visible ?? 1) !== 0,
+          gridThickness: r.grid_thickness ?? 1,
+          gridColor: r.grid_color ?? 'rgba(255,255,255,0.34)',
         }))
       }
 

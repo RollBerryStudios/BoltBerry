@@ -204,7 +204,11 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
   }
 
   // ── Grid: single Shape with native canvas draw (much cheaper than <Line> array) ──
-  const showGrid = image && map.gridType !== 'none'
+  // Grid visibility is now two-gated: gridType !== 'none' *and* the
+  // per-map gridVisible flag (so the DM can hide the grid visually
+  // without losing snap/geometry). Both default to on for existing
+  // maps via the schema v32 migration.
+  const showGrid = !!image && map.gridType !== 'none' && map.gridVisible !== false
   const cellPx = showGrid ? map.gridSize * scale : 0
 
   return (
@@ -302,11 +306,14 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
             // Grid stroke. Previous defaults (0.14 alpha / 0.5 px) were
             // invisible at typical zoom levels. Scale line width with the
             // map scale so it stays crisp zoomed in and readable zoomed
-            // out — capped so it doesn't turn into thick bars.
+            // out — capped so it doesn't turn into thick bars. The per-map
+            // thickness multiplier + colour (schema v32) override the old
+            // hardcoded white/0.34 stroke.
             const raw = ctx as any
-            const scaledLineWidth = Math.max(0.8, Math.min(1.6, 1 / scale))
+            const thickness = map.gridThickness ?? 1
+            const scaledLineWidth = Math.max(0.8, Math.min(1.6, 1 / scale)) * thickness
             raw._context.save()
-            raw._context.strokeStyle = 'rgba(255, 255, 255, 0.34)'
+            raw._context.strokeStyle = map.gridColor ?? 'rgba(255, 255, 255, 0.34)'
             raw._context.lineWidth = scaledLineWidth
             raw._context.stroke()
             raw._context.restore()

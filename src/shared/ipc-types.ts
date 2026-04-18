@@ -150,6 +150,11 @@ export interface MapRecord {
   track1Volume: number
   track2Volume: number
   combatVolume: number
+  // Grid appearance — decoupled from gridType so the DM can hide the
+  // grid without disabling snap/geometry, and restyle the stroke.
+  gridVisible: boolean
+  gridThickness: number   // multiplier applied to the auto-scaled stroke
+  gridColor: string       // any CSS colour string (hex or rgba)
 }
 
 export type WallType = 'wall' | 'door' | 'window'

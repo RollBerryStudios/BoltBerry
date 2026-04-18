@@ -148,6 +148,9 @@ export function CampaignMapGrid() {
         track1Volume: 1,
         track2Volume: 1,
         combatVolume: 1,
+        gridVisible: true,
+        gridThickness: 1,
+        gridColor: 'rgba(255,255,255,0.34)',
       }
       useCampaignStore.getState().addMap(newMap)
       setActiveMap(newMap.id)

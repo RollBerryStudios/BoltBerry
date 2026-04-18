@@ -13,7 +13,7 @@ import {
   MIGRATE_V21_TO_V22, MIGRATE_V22_TO_V23, MIGRATE_V23_TO_V24,
   MIGRATE_V24_TO_V25, MIGRATE_V25_TO_V26, MIGRATE_V26_TO_V27,
   MIGRATE_V27_TO_V28, MIGRATE_V28_TO_V29, MIGRATE_V29_TO_V30,
-  MIGRATE_V30_TO_V31,
+  MIGRATE_V30_TO_V31, MIGRATE_V31_TO_V32,
 } from './schema'
 import { SRD_MONSTERS } from './srd-monsters'
 
@@ -42,6 +42,7 @@ const MIGRATIONS: ReadonlyArray<readonly [target: number, sql: string]> = [
   [27, MIGRATE_V26_TO_V27], [28, MIGRATE_V27_TO_V28],
   [29, MIGRATE_V28_TO_V29], [30, MIGRATE_V29_TO_V30],
   [31, MIGRATE_V30_TO_V31],
+  [32, MIGRATE_V31_TO_V32],
 ]
 
 export class SchemaTooNewError extends Error {

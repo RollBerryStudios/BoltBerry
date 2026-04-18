@@ -317,6 +317,7 @@ interface CampaignExport {
     rotation: number; rotationPlayer: number; ftPerUnit: number
     gridOffsetX: number; gridOffsetY: number; ambientBrightness: number
     ambientTrackPath: string | null; track1Volume: number; track2Volume: number; combatVolume: number
+    gridVisible?: boolean; gridThickness?: number; gridColor?: string
     tokens: Array<{
       id: number; name: string; imagePath: string | null; x: number; y: number; size: number
       hpCurrent: number; hpMax: number; visibleToPlayers: number
@@ -497,6 +498,9 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
         track1Volume: m.track1_volume ?? 1,
         track2Volume: m.track2_volume ?? 1,
         combatVolume: m.combat_volume ?? 1,
+        gridVisible: (m.grid_visible ?? 1) !== 0,
+        gridThickness: m.grid_thickness ?? 1,
+        gridColor: m.grid_color ?? 'rgba(255,255,255,0.34)',
         tokens: tokens.map((t: any) => ({
           id: t.id,
           name: t.name,
@@ -631,13 +635,14 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
 
     for (const m of data.maps) {
       const mapResult = db.prepare(
-        `INSERT INTO maps (campaign_id, name, image_path, grid_type, grid_size, order_index, rotation, rotation_player, ft_per_unit, grid_offset_x, grid_offset_y, ambient_brightness, ambient_track_path, track1_volume, track2_volume, combat_volume)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        `INSERT INTO maps (campaign_id, name, image_path, grid_type, grid_size, order_index, rotation, rotation_player, ft_per_unit, grid_offset_x, grid_offset_y, ambient_brightness, ambient_track_path, track1_volume, track2_volume, combat_volume, grid_visible, grid_thickness, grid_color)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
       ).run(
         campaignId, m.name, m.imagePath, m.gridType, m.gridSize, m.orderIndex,
         m.rotation ?? 0, m.rotationPlayer ?? 0, m.ftPerUnit ?? 5,
         m.gridOffsetX ?? 0, m.gridOffsetY ?? 0, m.ambientBrightness ?? 100,
         m.ambientTrackPath ?? null, m.track1Volume ?? 1, m.track2Volume ?? 1, m.combatVolume ?? 1,
+        m.gridVisible === false ? 0 : 1, m.gridThickness ?? 1, m.gridColor ?? 'rgba(255,255,255,0.34)',
       )
       const mapId = Number(mapResult.lastInsertRowid)
 
