@@ -119,7 +119,9 @@
     "faction_enemy": "Enemy",
     "faction_neutral": "Neutral",
     "faction_friendly": "Friendly",
-    "faction_party": "Party"
+    "faction_party": "Party",
+    "attributionPrefix": "Stat blocks derived from D&D 5e SRD 5.2 by Wizards of the Coast LLC, licensed under",
+    "attributionSuffix": "translated into German and condensed."
   },
   "workspace": {
     "backToCampaigns": "Campaigns",
@@ -173,7 +175,8 @@
     "sendShort": "Send",
     "sendDisabled": "Player window not connected",
     "sentToPlayer": "Sent to player window",
-    "pageShort": "p."
+    "pageShort": "p.",
+    "attributionPrefix": "SRD 5.2 © Wizards of the Coast LLC, licensed under"
   },
   "welcome": {
     "tag": "Local tabletop studio",

@@ -119,7 +119,9 @@
     "faction_enemy": "Feind",
     "faction_neutral": "Neutral",
     "faction_friendly": "Freund",
-    "faction_party": "Gruppe"
+    "faction_party": "Gruppe",
+    "attributionPrefix": "Statblocks basieren auf dem D&D 5e SRD 5.2 von Wizards of the Coast LLC, lizenziert unter",
+    "attributionSuffix": "ins Deutsche übersetzt und gekürzt."
   },
   "workspace": {
     "backToCampaigns": "Kampagnen",
@@ -173,7 +175,8 @@
     "sendShort": "Senden",
     "sendDisabled": "Spielerfenster nicht verbunden",
     "sentToPlayer": "An Spielerfenster gesendet",
-    "pageShort": "S."
+    "pageShort": "S.",
+    "attributionPrefix": "SRD 5.2 © Wizards of the Coast LLC, lizenziert unter"
   },
   "welcome": {
     "tag": "Lokales Spieltisch-Studio",

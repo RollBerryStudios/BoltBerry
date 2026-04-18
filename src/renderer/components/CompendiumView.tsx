@@ -110,6 +110,26 @@ export function CompendiumView() {
         </div>
       </header>
 
+      {/* Attribution strip — CC-BY-4.0 requires visible credit for bundled SRD PDFs. */}
+      <div style={{
+        padding: '6px var(--sp-6)',
+        background: 'var(--bg-elevated)',
+        borderBottom: '1px solid var(--border-subtle)',
+        fontSize: 10,
+        color: 'var(--text-muted)',
+        lineHeight: 1.4,
+      }}>
+        {t('compendium.attributionPrefix')}{' '}
+        <a
+          href="https://creativecommons.org/licenses/by/4.0/"
+          target="_blank"
+          rel="noreferrer"
+          style={{ color: 'var(--accent-blue-light)', textDecoration: 'underline', textDecorationStyle: 'dotted' }}
+        >
+          CC-BY-4.0
+        </a>
+      </div>
+
       {/* Body: file list sidebar + viewer */}
       <div className="bb-comp-body">
         <aside className="bb-comp-sidebar">
