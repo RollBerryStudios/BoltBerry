@@ -1,0 +1,26 @@
+{
+  "id": 273,
+  "slug": "rope-of-climbing",
+  "name": "Rope of Climbing",
+  "nameDe": "Seil des Kletterns",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 200000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon This 60-foot length of silk rope weighs 3 pounds and can hold up to 3,000 pounds. If you hold one end of the rope and use an action to speak the command word, the rope animates. As a bonus action, you can command the other end to move toward a destination you choose. That end moves 10 feet on your turn when you first command it and 10 feet on each of your turns until reaching its destination, up to its maximum length away, or until you tell it to stop. You can also tell the rope to fasten itself securely to an object or to unfasten itself, to knot or unknot itself, or to coil itself for carrying. If you tell the rope to knot, large knots appear at 1 foot intervals along the rope. While knotted, the rope shortens to a 50-foot length and grants advantage on checks made to climb it. The rope has AC 20 and 20 hit points. It regains 1 hit point every 5 minutes as long as it has at least 1 hit point. If the rope drops to 0 hit points, it is destroyed.",
+    "de": "Dieses 18 Meter lange Seidenseil wiegt 1,5 Kilogramm und kann bis zu 1.500 Kilogramm Last halten. Wenn du ein Ende des Seils festhältst und als Aktion das Befehlswort aussprichst, erwacht das Seil zum Leben. Du kannst dem anderen Ende als Bonusaktion befehlen, sich auf ein Ziel deiner Wahl zuzubewegen. Wenn du ihm in deinem Zug den Befehl gibst, bewegt sich jenes Seilende drei Meter weit. Dann bewegt es sich in jedem deiner nächsten Züge jeweils weitere drei Meter weit, bis es sein Ziel erreicht, die ganze Seillänge aufgebraucht ist oder du ihm befiehlst, anzuhalten. Du kannst dem Seil auch befehlen, sich sicher an einem Gegenstand zu befestigen oder wieder zu lösen, sich zu ver- oder entknoten oder sich aufzurollen, damit du es tragen kannst. Wenn du dem Seil befiehlst, sich zu verknoten, erscheinen alle 30 Zentimeter große Knoten am Seil. Wenn es verknotet ist, ist das Seil nur 15 Meter lang und verleiht dir bei Würfen, die du ausführst, um an ihm hochzuklettern, einen Vorteil. Das Seil besitzt eine RK von 20 und 20 Trefferpunkte. Es erhält alle fünf Minuten 1 Trefferpunkt zurück, solange es noch mindestens 1 Trefferpunkt hat. Wenn die Trefferpunkte des Seils auf 0 sinken, ist das Seil zerstört."
+  },
+  "image": "rope",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

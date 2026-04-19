@@ -1,0 +1,63 @@
+{
+  "id": 379,
+  "slug": "arcane-hand",
+  "name": "Arcane Hand",
+  "nameDe": "Arkane Hand",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "5th-level evocation",
+    "de": "Stufe 5 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "26 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "An eggshell and a snakeskin glove",
+      "de": "Eine Eierschale und ein Handschuh aus Schlangenleder"
+    },
+    "raw": {
+      "en": "V, S, M (An eggshell and a snakeskin glove)",
+      "de": "V, G, M (Eine Eierschale und ein Handschuh aus Schlangenleder)"
+    }
+  },
+  "description": {
+    "en": "You create a Large hand of shimmering, translucent force in an unoccupied space that you can see within range. The hand lasts for the spell's duration, and it moves at your command, mimicking the movements of your own hand. The hand is an object that has AC 20 and hit points equal to your hit point maximum. If it drops to 0 hit points, the spell ends. It has a Strength of 26 (+8) and a Dexterity of 10 (+0). The hand doesn't fill its space. When you cast the spell and as a bonus action on your subsequent turns, you can move the hand up to 60 feet and then cause one of the following effects with it. ***Clenched Fist.*** The hand strikes one creature or object within 5 feet of it. Make a melee spell attack for the hand using your game statistics. On a hit, the target takes 4d8 force damage. ***Forceful Hand.*** The hand attempts to push a creature within 5 feet of it in a direction you choose. Make a check with the hand's Strength contested by the Strength (Athletics) check of the target. If the target is Medium or smaller, you have advantage on the check. If you succeed, the hand pushes the target up to 5 feet plus a number of feet equal to five times your spellcasting ability modifier. The hand moves with the target to remain within 5 feet of it. ***Grasping Hand.*** The hand attempts to grapple a Huge or smaller creature within 5 feet of it. You use the hand's Strength score to resolve the grapple. If the target is Medium or smaller, you have advantage on the check. While the hand is grappling the target, you can use a bonus action to have the hand crush it. When you do so, the target takes bludgeoning damage equal to 2d6 + your spellcasting ability modifier. ***Interposing Hand.*** The hand interposes itself between you and a creature you choose until you give the hand a different command. The hand moves to stay between you and the target, providing you with half cover against the target. The target can't move through the hand's space if its Strength score is less than or equal to the hand's Strength score. If its Strength score is higher than the hand's Strength score, the target can move toward you through the hand's space, but that space is difficult terrain for the target.",
+    "de": "Du erschaffst eine große Hand aus schimmernder, durchsichtiger Energie in einem freien Bereich in Reichweite, den du sehen kannst. Die Hand bleibt für die Wirkungsdauer des Zaubers bestehen. Sie bewegt sich auf deinen Befehl und ahmt die Bewegungen deiner eigenen Hand nach. Die Hand ist ein Gegenstand mit einer RK von 20. Ihre Trefferpunkte entsprechen deinem Trefferpunktemaximum. Wenn ihre Trefferpunkte auf 0 sinken, endet der Zauber. Sie besitzt eine Stärke von 26 (+8) und eine Geschicklichkeit von 10 (+0), Der Bereich der Hand gilt nicht als besetzt. Nach dem Wirken des Zaubers und als Bonusaktion in deinen darauffolgenden Zügen kannst du die Hand bis zu 18 Meter weit bewegen und einen der folgenden Effekte auslösen. Blockierende Hand:  Die Hand platziert sich zwischen dir und einer Kreatur deiner Wahl, bis du der Hand einen anderen Befehl erteilst. Die Hand bewegt sich, um diese Position beizubehalten, und gewährt dir Teildeckung gegen das Ziel. Das Ziel kann sich nicht durch den Bereich der Hand bewegen, wenn sein Stärkewert kleiner oder gleich dem Stärkewert der Hand ist. Ist sein Stärkewert größer als der Stärkewert der Hand, kann sich das Ziel durch den Bereich der Hand auf dich zubewegen. Der Bereich gilt jedoch für das Ziel als schwieriges Gelände. Geballte Faust:  Die Hand schlägt eine Kreatur oder einen Gegenstand im Abstand von bis zu 1,5 Metern von ihr. Führe einen Nahkampf-Zauberangriff für die Hand mit deinen Spielwerten aus. Bei einem Treffer erleidet das Ziel 4W8 Energieschaden. Greifende Hand:  Die Hand versucht, eine höchstens riesige Kreatur im Abstand von bis zu 1,5 Metern von ihr zu packen. Verwende den Stärkewert der Hand für den Ringenwurf. Ist das Ziel höchstens mittelgroß, bist du beim Wurf im Vorteil. Während die Hand das Ziel gepackt hat, kannst du eine Bonusaktion verwenden, damit die Hand es zerquetscht. Dabei erleidet das Ziel Wuchtschaden in Höhe von 2W6 + deinem Zauberwirken-Attributsmodifikator. Kraftvolle Hand:  Die Hand versucht, eine Kreatinin 1,5 Metern Entfernung in eine Richtung deiner Wahl zu schieben. Führe einen Stärkewurf für die Hand aus, der mit dem Stärkewurf (Athletik) des Ziels verglichen wird. Ist das Ziel höchstens mittelgroß, bist du beim Wurf im Vorteil. Bei einem Erfolg schiebt die Hand das Ziel bis zu 1,5 Meter + (1,5 Meter mal deinem Zauberwirken-Attributsmodifikator). Die Hand bewegt sich mit dem Ziel, um im Abstand von bis zu 1,5 Metern von ihm zu bleiben. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, erhöht sich für jeden Grad über dem 5. der Schaden der geballten Faust um 2W8 und der Schaden der greifenden Hand um 2W6."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 6th level or higher, the damage from the clenched fist option increases by 2d8 and the damage from the grasping hand increases by 2d6 for each slot level above 5th.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, erhöht sich für jeden Grad über dem 5. der Schaden der geballten Faust um 2W8 und der Schaden der greifenden Hand um 2W6."
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

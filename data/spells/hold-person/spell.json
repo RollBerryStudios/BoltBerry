@@ -1,0 +1,74 @@
+{
+  "id": 91,
+  "slug": "hold-person",
+  "name": "Hold Person",
+  "nameDe": "Person festhalten",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "druid",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Druide",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-level enchantment (ritual)",
+    "de": "Stufe 2 Verzauberung (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a small, straight piece of iron",
+      "de": "ein kleines, gerades Stück Eisen"
+    },
+    "raw": {
+      "en": "V, S, M (a small, straight piece of iron)",
+      "de": "V, G, M (ein kleines, gerades Stück Eisen)"
+    }
+  },
+  "description": {
+    "en": "Choose a humanoid that you can see within range. The target must succeed on a wisdom saving throw or be paralyzed for the duration. At the end of each of its turns, the target can make another wisdom saving throw. On a success, the spell ends on the target.",
+    "de": "Wähle einen Humanoiden in Reichweite, den du sehen kannst. Das Ziel muss einen Weisheitsrettungswurf ausführen oder es wird für die Wirkungsdauer gelähmt. Am Ende jedes seiner Züge kann das Ziel einen weiteren Weisheitsrettungswurf ausführen. Bei einem Erfolg endet die Wirkung des Zaubers auf das Ziel. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, kannst du für jeden Grad über dem 2. einen zusätzlichen Humanoiden als Ziel wählen. Deine humanoiden Ziele, die du festhältst, dürfen nicht mehr als neun Meter voneinander entfernt sein."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 3rd level or higher, you can target one additional humanoid for each slot level above 2nd. The humanoids must be within 30 feet of each other when you target them.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, kannst du für jeden Grad über dem 2. einen zusätzlichen Humanoiden als Ziel wählen. Deine humanoiden Ziele, die du festhältst, dürfen nicht mehr als neun Meter voneinander entfernt sein."
+  },
+  "image": "hold-person",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

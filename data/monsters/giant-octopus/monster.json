@@ -1,0 +1,214 @@
+{
+  "id": 133,
+  "slug": "giant-octopus",
+  "name": "Giant Octopus",
+  "nameDe": "Riesenoktopus",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "11",
+    "de": "11"
+  },
+  "hp": {
+    "en": "52 (8d10 + 8)",
+    "de": "52 (8W10+8)"
+  },
+  "str": 17,
+  "dex": 13,
+  "con": 13,
+  "int": 4,
+  "wis": 10,
+  "cha": 4,
+  "strMod": 3,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": -3,
+  "wisMod": 0,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "swim": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +5",
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Hold Breath",
+        "text": "While out of water, the octopus can hold its breath for 1 hour."
+      },
+      {
+        "name": "Underwater Camouflage",
+        "text": "The octopus has advantage on Dexterity (Stealth) checks made while underwater."
+      },
+      {
+        "name": "Water Breathing",
+        "text": "The octopus can breathe only underwater."
+      }
+    ],
+    "de": [
+      {
+        "name": "Atem anhalten",
+        "text": "Der Oktopus kann eine Stunde lang den Atem anhalten, wenn er nicht im Wasser ist."
+      },
+      {
+        "name": "Unterwassertarnung",
+        "text": "Der Oktopus ist bei Geschicklichkeitswürfen (Heimlichkeit) unter Wasser im Vorteil."
+      },
+      {
+        "name": "Wasser atmen",
+        "text": "Der Oktopus kann nur unter Wasser atmen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Tentacles",
+        "text": "Melee Weapon Attack: +5 to hit, reach 15 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage. If the target is a creature, it is grappled (escape DC 16). Until this grapple ends, the target is restrained, and the octopus can't use its tentacles on another target."
+      },
+      {
+        "name": "Ink Cloud",
+        "text": "A 20-foot-radius cloud of ink extends all around the octopus if it is underwater. The area is heavily obscured for 1 minute, although a significant current can disperse the ink. After releasing the ink, the octopus can use the Dash action as a bonus action."
+      }
+    ],
+    "de": [
+      {
+        "name": "Tentakel",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 4,5 m, ein Ziel. Treffer: 10 (2W6+3) Wuchtschaden. Wenn das Ziel eine Kreatur ist, wird es gepackt (Rettungswurf-SG 16). Ein gepacktes Ziel ist festgesetzt. Der Oktopus kann seine Tentakel nicht gegen andere Ziele einsetzen."
+      },
+      {
+        "name": "Tintenwolke (wird nach kurzer oder langer Rast aufgeladen)",
+        "text": "Eine Tintenwolke mit sechs Metern Radius breitet sich um den Oktopus aus, wenn dieser sich unter Wasser befindet. Der Bereich ist eine Minute lang komplett verschleiert, wobei eine starke Strömung die Tinte fortspülen kann. Nach Ausstoßen der Tinte kann der Oktopus die Spurt-Aktion als Bonusaktion ausführen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/9/898/315/315/636334288003435302.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantOctopus (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GiantOctopus (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantOctopus (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

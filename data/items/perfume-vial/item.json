@@ -1,0 +1,23 @@
+{
+  "id": 120,
+  "slug": "perfume-vial",
+  "name": "Perfume (vial)",
+  "nameDe": "Parfum (Phiole)",
+  "category": {
+    "en": "ADVENTURING_GEAR",
+    "de": "Ausrüstung"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 500,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 0,
+  "image": "adventuring-gear",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

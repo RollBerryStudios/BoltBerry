@@ -1,0 +1,30 @@
+{
+  "id": 294,
+  "slug": "eyes-of-charming",
+  "name": "Eyes of Charming",
+  "nameDe": "Augen der Bezauberung",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 300000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon (requires attunement) These crystal lenses fit over the eyes. They have 3 charges. While wearing them, you can expend 1 charge as an action to cast the charm person spell (save DC 13) on a humanoid within 30 feet of you, provided that you and the target can see each other. The lenses regain all expended charges daily at dawn.",
+    "de": "Diese kristallenen Gläser können als Brille getragen werden. Sie haben drei Ladungen. Wenn du sie trägst, kannst du als Aktion eine Ladung verbrauchen und den Zauber Person bezaubern  (Zauberrettungswurf-SG 13) auf eine humanoide Kreatur im Abstand von bis zu neun Metern von dir wirken, sofern du und das Ziel euch gegenseitig sehen könnt. Die Gläser erhalten täglich im Morgengrauen alle verbrauchten Ladungen zurück."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

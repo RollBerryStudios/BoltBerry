@@ -1,0 +1,30 @@
+{
+  "id": 411,
+  "slug": "mantle-of-spell-resistance",
+  "name": "Mantle of Spell Resistance",
+  "nameDe": "Mantel des Zauberwiderstands",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 3000000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, rare (requires attunement) You have advantage on saving throws against spells while you wear this cloak.",
+    "de": "Wenn du diesen Mantel trägst, bist du bei Rettungswürfen gegen Zauber im Vorteil."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "cloak",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

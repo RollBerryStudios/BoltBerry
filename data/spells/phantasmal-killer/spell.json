@@ -1,0 +1,60 @@
+{
+  "id": 300,
+  "slug": "phantasmal-killer",
+  "name": "Phantasmal Killer",
+  "nameDe": "Tödliches Phantom",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "4th-level illusion",
+    "de": "Stufe 4 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You tap into the nightmares of a creature you can see within range and create an illusory manifestation of its deepest fears, visible only to that creature. The target must make a wisdom saving throw. On a failed save, the target becomes frightened for the duration. At the start of each of the target's turns before the spell ends, the target must succeed on a wisdom saving throw or take 4d10 psychic damage. On a successful save, the spell ends.",
+    "de": "Du zapfst die Alpträume einer Kreatur in Reichweite an, die du sehen kannst, und erschaffst eine illusionäre Manifestation ihrer tiefsten Ängste, die nur für diese Kreatur sichtbar ist. Das Ziel muss einen Weisheitsrettungswurf ausführen. Scheitert der Wurf, ist das Ziel für die Wirkungsdauer verängstigt. Bis der Zauber endet, muss das Ziel am Ende jedes seiner Züge einen Weisheitsrettungswurfbestehen, oder es erleidet 4W10 psychischen Schaden. Bei einem erfolgreichen Wurf endet der Zauber. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 5. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 4. um 1W10."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d10 for each slot level above 4th.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 5. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 4. um 1W10."
+  },
+  "image": "madness",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

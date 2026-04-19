@@ -1,0 +1,54 @@
+{
+  "id": 394,
+  "slug": "irresistible-dance",
+  "name": "Irresistible Dance",
+  "nameDe": "Unwiderstehlicher Tanz",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard",
+      "bard"
+    ],
+    "de": [
+      "Magier",
+      "Barde"
+    ]
+  },
+  "type": {
+    "en": "6th-level enchantment",
+    "de": "Stufe 6 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "Choose one creature that you can see within range. The target begins a comic dance in place: shuffling, tapping its feet, and capering for the duration. Creatures that can't be charmed are immune to this spell. A dancing creature must use all its movement to dance without leaving its space and has disadvantage on dexterity saving throws and attack rolls. While the target is affected by this spell, other creatures have advantage on attack rolls against it. As an action, a dancing creature makes a wisdom saving throw to regain control of itself. On a successful save, the spell ends.",
+    "de": "Wähle eine Kreatur in Reichweite, die du sehen kannst. Das Ziel beginnt einen komischen Tanz an Ort und Stelle: Für die Wirkungsdauer wiegt es sich, wippt mit den Füßen und springt umher. Kreaturen, die nicht bezaubert werden können, sind gegen diesen Zauber immun. Eine tanzende Kreatur muss ihre gesamte Bewegungsrate für den Tanz verwenden, ohne ihren Bereich zu verlassen. Sie ist zudem bei Angriffs- und Rettungswürfen auf Geschicklichkeit im Nachteil. Während die Kreatur von diesem Zauber betroffen ist, sind andere Kreaturen bei Angriffswürfen gegen sie im Vorteil. Als Aktion kann eine tanzende Kreatur einen Weisheitsrettungswurf ausführen, um die Kontrolle wiederzuerlangen. Bei einem erfolgreichen Wurf endet der Zauber."
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

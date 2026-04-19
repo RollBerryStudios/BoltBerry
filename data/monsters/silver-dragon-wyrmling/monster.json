@@ -1,0 +1,192 @@
+{
+  "id": 261,
+  "slug": "silver-dragon-wyrmling",
+  "name": "Silver Dragon Wyrmling",
+  "nameDe": "Silberdrachennestling",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium dragon, lawful good",
+    "de": "Mittelgroßer Drache, rechtschaffen gut"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "17 (Natural Armor)",
+    "de": "17 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "45 (6d8 + 18)",
+    "de": "45 (6W8+18)"
+  },
+  "str": 19,
+  "dex": 10,
+  "con": 17,
+  "int": 12,
+  "wis": 11,
+  "cha": 15,
+  "strMod": 4,
+  "dexMod": 0,
+  "conMod": 3,
+  "intMod": 1,
+  "wisMod": 0,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 10 ft.",
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Blindsicht 3 m",
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Draconic"
+    ],
+    "de": [
+      "Drakonisch"
+    ]
+  },
+  "savingThrows": [
+    "Ges +2",
+    "Kon +5",
+    "Wei +2",
+    "Cha +4"
+  ],
+  "skills": [
+    "Heimlichkeit +2",
+    "Wahrnehmung +4"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 9 (1d10 + 4) piercing damage."
+      },
+      {
+        "name": "Breath Weapons (Recharge 5-6)",
+        "text": "The dragon uses one of the following breath weapons:"
+      },
+      {
+        "name": "Cold Breath",
+        "text": "The dragon exhales an icy blast in a 15-foot cone. Each creature in that area must make a DC 13 Constitution saving throw, taking 18 (4d8) cold damage on a failed save, or half as much damage on a successful one."
+      },
+      {
+        "name": "Paralyzing Breath",
+        "text": "The dragon exhales paralyzing gas in a 15-foot cone. Each creature in that area must succeed on a DC 13 Constitution saving throw or be paralyzed for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 9 (1W10+4) Stichschaden."
+      },
+      {
+        "name": "Odemwaffen (Aufladung 5–6)",
+        "text": "Der Drache setzt eine der folgenden Odemwaffen ein:"
+      },
+      {
+        "name": "Kälteodem",
+        "text": "Der Drache atmet einen eisigen Stoß in einem Kegel von 4,5 Metern aus. Jede Kreatur in diesem Bereich muss einen SG-13-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 18 (4W8) Kälteschaden, anderenfalls die Hälfte."
+      },
+      {
+        "name": "Lähmender Odem",
+        "text": "Der Drache atmet lähmendes Gas in einem Kegel von 4,5 Metern aus. Jede Kreatur in diesem Bereich muss einen SG-13-Konstitutionsrettungswurf bestehen, oder sie ist eine Minute lang gelähmt. Eine Kreatur kann den Rettungswurf am Ende jedes ihrer Züge wiederholen und den Effekt bei einem Erfolg beenden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/143/315/315/636252757538355953.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "dragon",
+    "de": "Drache"
+  },
+  "alignment": {
+    "en": "lawful good",
+    "de": "rechtschaffen gut"
+  },
+  "token": {
+    "file": "SilverDragonWyrmling (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "SilverDragonWyrmling (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "SilverDragonWyrmling (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "SilverDragonWyrmling (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "SilverDragonWyrmling (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "SilverDragonWyrmling (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "SilverDragonWyrmling (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "SilverDragonWyrmling (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "SilverDragonWyrmling (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "SilverDragonWyrmling (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "SilverDragonWyrmling (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "SilverDragonWyrmling (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "SilverDragonWyrmling (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "SilverDragonWyrmling (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "SilverDragonWyrmling (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "SilverDragonWyrmling (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

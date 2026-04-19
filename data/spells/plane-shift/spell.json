@@ -1,0 +1,68 @@
+{
+  "id": 206,
+  "slug": "plane-shift",
+  "name": "Plane Shift",
+  "nameDe": "Ebenenwechsel",
+  "level": {
+    "en": "7",
+    "de": "Grad 7"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "druid",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Kleriker",
+      "Druide",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "7th-level conjuration",
+    "de": "Stufe 7 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a forked, metal rod worth at least 250 gp, attuned to a particular plane of existence",
+      "de": "ein gegabelter Metallstab im Wert von mindestens 250 Goldstücken, der auf eine bestimmte Existenzebene eingestimmt ist"
+    },
+    "raw": {
+      "en": "V, S, M (a forked, metal rod worth at least 250 gp, attuned to a particular plane of existence)",
+      "de": "V, G, M (ein gegabelter Metallstab im Wert von mindestens 250 Goldstücken, der auf eine bestimmte Existenzebene eingestimmt ist)"
+    }
+  },
+  "description": {
+    "en": "You and up to eight willing creatures who link hands in a circle are transported to a different plane of existence. You can specify a target destination in general terms, such as the City of Brass on the Elemental Plane of Fire or the palace of Dispater on the second level of the Nine Hells, and you appear in or near that destination. If you are trying to reach the City of Brass, for example, you might arrive in its Street of Steel, before its Gate of Ashes, or looking at the city from across the Sea of Fire, at the GM's discretion. Alternatively, if you know the sigil sequence of a teleportation circle on another plane of existence, this spell can take you to that circle. If the teleportation circle is too small to hold all the creatures you transported, they appear in the closest unoccupied spaces next to the circle. You can use this spell to banish an unwilling creature to another plane. Choose a creature within your reach and make a melee spell attack against it. On a hit, the creature must make a charisma saving throw. If the creature fails this save, it is transported to a random location on the plane of existence you specify. A creature so transported must find its own way back to your current plane of existence.",
+    "de": "Dieser Zauber transportiert dich und bis zu acht bereitwillige Kreaturen, die sich in einem Kreis an den Händen halten, auf eine andere Existenzebene. Du kannst einen allgemeinen Zielort bestimmten, etwa die Messingstadt auf der Elementarebene des Feuers oder den Palast von Dispater auf der zweiten Ebene der Neun Höllen, und ihr erscheint dort oder in der Nähe des Ziels. Versuchst du beispielsweise, die Messingstadt zu erreichen, könntest du in ihrer Stahlstraße, vor dem Tor der Achse oder an einem Ort erscheinen, von dem aus du über das Feuermeer auf die Stadt blickst. Die Entscheidung liegt beim SL. Kennst du die Siegelsequenz eines Kreises der Teleportation auf einer anderen Existenzebene, kann dich der Zauber zu diesem Kreis bringen. Ist der Kreis der Teleportation zu klein für alle transportieren Kreaturen, erscheinen sie an der nächsten freien Stelle neben dem Kreis. Du kannst mit diesem Zauber eine unwillige Kreatur auf eine andere Existenzebene verbannen. Wähle eine Kreatur in Reichweite und führe einen Nahkampf-Zauberangriff aus. Bei einem Treffer muss das Ziel einen Charismarettungswurf ausführen. Scheitert der Wurf, wird es an einen zufälligen Ort auf der vor dir angegebenen Existenzebene transportiert. Eine auf diese Weise transportiere Kreatur muss ihren eigenen Weg zurück auf deine derzeitige Existenzebene finden."
+  },
+  "image": "magic-circle",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

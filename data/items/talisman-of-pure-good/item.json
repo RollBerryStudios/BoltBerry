@@ -1,0 +1,30 @@
+{
+  "id": 433,
+  "slug": "talisman-of-pure-good",
+  "name": "Talisman of Pure Good",
+  "nameDe": "Talisman des reinen Guten",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "LEGENDARY",
+    "de": "Legendär"
+  },
+  "cost": 7168000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, legendary (requires attunement by a creature of good alignment) This talisman is a mighty symbol of goodness. A creature that is neither good nor evil in alignment takes 6d6 radiant damage upon touching the talisman. An evil creature takes 8d6 radiant damage upon touching the talisman. Either sort of creature takes the damage again each time it ends its turn holding or carrying the talisman. If you are a good cleric or paladin, you can use the talisman as a holy symbol, and you gain a +2 bonus to spell attack rolls while you wear or hold it. The talisman has 7 charges. If you are wearing or holding it, you can use an action to expend 1 charge from it and choose one creature you can see on the ground within 120 feet of you. If the target is of evil alignment, a flaming fissure opens under it. The target must succeed on a DC 20 Dexterity saving throw or fall into the fissure and be destroyed, leaving no remains. The fissure then closes, leaving no trace of its existence. When you expend the last charge, the talisman disperses into motes of golden light and is destroyed.",
+    "de": "Dieser Talisman ist ein mächtiges Symbol des Guten. Eine Kreatur, deren Gesinnung weder gut noch böse ist, erleidet 6W6 gleißenden Schaden, wenn sie den Talisman berührt. Eine böse Kreatur erleidet 8W6 gleißenden Schaden, wenn sie den Talisman berührt. Beide Arten von Kreaturen erleiden den Schaden jedes Mal erneut, wenn sie ihren Zug beenden und den Talisman halten oder tragen. Wenn du ein guter Kleriker oder Paladin bist, kannst du den Talisman als heiliges Symbol verwenden, und du erhältst einen Bonus von +2 auf Zauberangriffswürfe, wenn du ihn trägst oder hältst. Der Talisman hat sieben Ladungen. Wenn du ihn trägst oder hältst, kannst du als Aktion eine Ladung verbrauchen und eine Kreatur am Boden auswählen, die du im Abstand von bis zu 36 Metern von dir sehen kannst. Wenn die Gesinnung des Ziels böse ist, öffnet sich ein brennender Spalt unter ihr. Das Ziel muss einen SG-20-Geschicklichkeitsrettungswurf bestehen, oder es fällt in den Spalt und wird zerstört, ohne sterbliche Überreste zu hinterlassen. Der Spalt schließt sich dann spurlos. Wenn du die letzte Ladung verbrauchst, löst sich der Talisman in goldene Lichtfunken auf und wird zerstört."
+  },
+  "properties": {
+    "en": "requires attunement by a creature of good alignment",
+    "de": "erfordert einstimmung einer kreatur mit guter ausrichtung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

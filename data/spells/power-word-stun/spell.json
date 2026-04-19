@@ -1,0 +1,59 @@
+{
+  "id": 183,
+  "slug": "power-word-stun",
+  "name": "Power Word Stun",
+  "nameDe": "Wort der Macht: Betäubung",
+  "level": {
+    "en": "8",
+    "de": "Grad 8"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "8th-level enchantment",
+    "de": "Stufe 8 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "You speak a word of power that can overwhelm the mind of one creature you can see within range, leaving it dumbfounded. If the target has 150 hit points or fewer, it is stunned. Otherwise, the spell has no effect. The stunned target must make a constitution saving throw at the end of each of its turns. On a successful save, this stunning effect ends.",
+    "de": "Du sprichst ein Wort der Macht, das den Verstand einer Kreatur in Reichweite, die du sehen kannst, überwältigt. Wenn die gewählte Kreatur maximal 150 Trefferpunkte hat, wird sie betäubt. Anderenfalls hat der Zauber keine Wirkung. Am Ende jedes seiner Züge muss das Ziel einen Konstitutionsrettungswurf ausführen. Bei einem erfolgreichen Rettungswurf endet dieser Betäubungseffekt."
+  },
+  "image": "power-word-stun",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

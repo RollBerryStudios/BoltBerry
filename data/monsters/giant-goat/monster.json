@@ -1,0 +1,212 @@
+{
+  "id": 130,
+  "slug": "giant-goat",
+  "name": "Giant Goat",
+  "nameDe": "Riesenziege",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "11 (Natural Armor)",
+    "de": "11 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "19 (3d10 + 3)",
+    "de": "19 (3W10+3)"
+  },
+  "str": 17,
+  "dex": 11,
+  "con": 12,
+  "int": 3,
+  "wis": 12,
+  "cha": 6,
+  "strMod": 3,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 11"
+    ],
+    "de": [
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Charge",
+        "text": "If the goat moves at least 20 ft. straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra 5 (2d4) bludgeoning damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone."
+      },
+      {
+        "name": "Sure-Footed",
+        "text": "The goat has advantage on Strength and Dexterity saving throws made against effects that would knock it prone."
+      }
+    ],
+    "de": [
+      {
+        "name": "Sturmangriff",
+        "text": "Wenn die Ziege sich mindestens sechs Meter weit direkt auf ein Ziel zubewegt und es dann im selben Zug mit einem Rammbock-Angriff trifft, erleidet das Ziel zusätzlich 5 (2W4) Wuchtschaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-13-Stärkerettungswurf bestehen, oder es wird umgestoßen."
+      },
+      {
+        "name": "Sicherer Tritt",
+        "text": "Die Ziege ist bei Stärke- und Geschicklichkeitsrettungswürfen gegen Effekte, die sie umstoßen würden, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Ram",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (2d4 + 3) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rammbock",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 8 (2W4+3) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantGoat (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GiantGoat (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantGoat (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

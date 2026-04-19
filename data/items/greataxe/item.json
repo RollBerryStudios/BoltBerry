@@ -1,0 +1,36 @@
+{
+  "id": 30,
+  "slug": "greataxe",
+  "name": "Greataxe",
+  "nameDe": "Zweihändige Axt",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 3000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 7,
+  "classification": {
+    "en": "Martial Melee Weapons",
+    "de": "Nahkampfs-Kriegswaffen"
+  },
+  "damage": "1d12",
+  "damageType": {
+    "en": "slashing",
+    "de": "hieb"
+  },
+  "properties": {
+    "en": "heavy | two-handed",
+    "de": "schwer | zweihändig"
+  },
+  "image": "greataxe",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

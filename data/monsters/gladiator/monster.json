@@ -1,0 +1,976 @@
+{
+  "id": 148,
+  "slug": "gladiator",
+  "name": "Gladiator",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "5",
+  "xp": 1800,
+  "ac": {
+    "en": "16 (Studded Leather, Shield)",
+    "de": "16 (Beschlagenes Leder, Schild)"
+  },
+  "hp": {
+    "en": "112 (15d8 + 45)",
+    "de": "112 (15W8 + 45)"
+  },
+  "str": 18,
+  "dex": 15,
+  "con": 16,
+  "int": 10,
+  "wis": 12,
+  "cha": 15,
+  "strMod": 4,
+  "dexMod": 2,
+  "conMod": 3,
+  "intMod": 0,
+  "wisMod": 1,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 11"
+    ],
+    "de": [
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any one language (usually Common)"
+    ],
+    "de": [
+      "Eine beliebige Sprache (normalerweise Gemeinsprache)"
+    ]
+  },
+  "savingThrows": [
+    "Str +7",
+    "Ges +5",
+    "Kon +6"
+  ],
+  "skills": [
+    "Athletik +10",
+    "Einschüchtern +5"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Brave",
+        "text": "The gladiator has advantage on saving throws against being frightened."
+      },
+      {
+        "name": "Brute",
+        "text": "A melee weapon deals one extra die of its damage when the gladiator hits with it (included in the attack)."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rohling",
+        "text": "Eine Nahkampfwaffe bewirkt einen zusätzlichen Würfel ihres Schadens, wenn der Gladiator damit trifft (im Angriff enthalten)."
+      },
+      {
+        "name": "Tapferkeit",
+        "text": "Der Gladiator ist bei Rettungswürfen gegen den Zustand Verängstigt im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The gladiator makes three melee attacks or two ranged attacks."
+      },
+      {
+        "name": "Spear",
+        "text": "Melee or Ranged Weapon Attack: +7 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 11 (2d6 + 4) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack."
+      },
+      {
+        "name": "Shield Bash",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one creature. Hit: 9 (2d4 + 4) bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Gladiator führt drei Nahkampfangriffe oder zwei Fernkampfangriffe aus."
+      },
+      {
+        "name": "Schildstoß",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 9 (2W4+4) Wuchtschaden. Wenn das Ziel eine höchstens mittelgroße Kreatur ist, muss es einen SG-15-Stärkerettungswurf bestehen, oder es wird umgestoßen."
+      },
+      {
+        "name": "Speer",
+        "text": "Nah- oder Fernkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m und Reichweite 6/18 m, ein Ziel. Treffer: 11 (2W6+4) Stichschaden oder 13 (2W8+4) Stichschaden bei zweihändiger Führung und Nahkampfangriff."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/656/humanoid.jpg",
+  "size": {
+    "en": "medium",
+    "de": "mittel"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoid"
+  },
+  "alignment": {
+    "en": "any alignment",
+    "de": "jegliche"
+  },
+  "token": {
+    "file": "GladiatorDragonborn (1).webp",
+    "variant": "dragonborn"
+  },
+  "tokens": [
+    {
+      "file": "GladiatorDragonborn (10).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GladiatorDragonborn (11).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GladiatorDragonborn (2).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GladiatorDragonborn (3).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GladiatorDragonborn (4).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GladiatorDragonborn (5).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GladiatorDragonborn (6).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GladiatorDragonborn (7).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GladiatorDragonborn (8).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GladiatorDragonborn (9).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GladiatorDwarfFemale (1).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GladiatorDwarfFemale (3).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GladiatorDwarfFemale (4).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GladiatorDwarfFemale (5).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GladiatorDwarfFemale (6).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GladiatorDwarfFemale (7).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GladiatorDwarfFemale (8).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GladiatorDwarfFemale (2)_cleanup.webp",
+      "variant": "dwarfFemale(2)_cleanup"
+    },
+    {
+      "file": "GladiatorDwarfMale (1).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (10).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (11).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (12).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (13).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (14).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (15).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (16).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (17).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (18).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (19).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (2).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (20).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (21).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (22).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (23).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (24).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (3).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (4).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (5).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (6).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (7).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (8).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorDwarfMale (9).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GladiatorElfFemale (1).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GladiatorElfFemale (10).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GladiatorElfFemale (11).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GladiatorElfFemale (12).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GladiatorElfFemale (13).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GladiatorElfFemale (14).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GladiatorElfFemale (15).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GladiatorElfFemale (16).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GladiatorElfFemale (2).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GladiatorElfFemale (3).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GladiatorElfFemale (4).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GladiatorElfFemale (5).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GladiatorElfFemale (6).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GladiatorElfFemale (7).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GladiatorElfFemale (8).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GladiatorElfFemale (9).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GladiatorElfMale (1).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GladiatorElfMale (10).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GladiatorElfMale (11).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GladiatorElfMale (12).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GladiatorElfMale (2).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GladiatorElfMale (3).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GladiatorElfMale (4).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GladiatorElfMale (5).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GladiatorElfMale (6).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GladiatorElfMale (7).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GladiatorElfMale (8).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GladiatorElfMale (9).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GladiatorGnomeFemale (1).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "GladiatorGnomeFemale (2).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "GladiatorGnomeFemale (3).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "GladiatorGnomeFemale (4).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "GladiatorGnomeFemale (5).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "GladiatorGnomeFemale (6).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "GladiatorGnomeFemale (7).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "GladiatorGnomeFemale (8).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "GladiatorGnomeFemale (9).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "GladiatorGnomeMale (1).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GladiatorGnomeMale (10).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GladiatorGnomeMale (11).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GladiatorGnomeMale (12).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GladiatorGnomeMale (13).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GladiatorGnomeMale (14).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GladiatorGnomeMale (2).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GladiatorGnomeMale (3).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GladiatorGnomeMale (4).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GladiatorGnomeMale (5).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GladiatorGnomeMale (6).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GladiatorGnomeMale (7).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GladiatorGnomeMale (8).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GladiatorGnomeMale (9).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GladiatorHalflingFemale (1).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "GladiatorHalflingFemale (10).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "GladiatorHalflingFemale (2).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "GladiatorHalflingFemale (3).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "GladiatorHalflingFemale (4).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "GladiatorHalflingFemale (5).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "GladiatorHalflingFemale (6).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "GladiatorHalflingFemale (7).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "GladiatorHalflingFemale (8).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "GladiatorHalflingFemale (9).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "GladiatorHalflingMale (1).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GladiatorHalflingMale (10).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GladiatorHalflingMale (2).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GladiatorHalflingMale (3).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GladiatorHalflingMale (4).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GladiatorHalflingMale (5).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GladiatorHalflingMale (6).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GladiatorHalflingMale (7).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GladiatorHalflingMale (8).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GladiatorHalflingMale (9).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GladiatorHalfOrcFemale (1).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "GladiatorHalfOrcFemale (2).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "GladiatorHalfOrcFemale (3).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "GladiatorHalfOrcFemale (4).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "GladiatorHalfOrcFemale (5).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "GladiatorHalfOrcFemale (6).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "GladiatorHalfOrcFemale (7).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "GladiatorHalfOrcFemale (8).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "GladiatorHalfOrcMale (1).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "GladiatorHalfOrcMale (10).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "GladiatorHalfOrcMale (11).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "GladiatorHalfOrcMale (12).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "GladiatorHalfOrcMale (13).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "GladiatorHalfOrcMale (2).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "GladiatorHalfOrcMale (3).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "GladiatorHalfOrcMale (4).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "GladiatorHalfOrcMale (5).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "GladiatorHalfOrcMale (6).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "GladiatorHalfOrcMale (7).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "GladiatorHalfOrcMale (8).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "GladiatorHalfOrcMale (9).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "GladiatorHumanFemale (1).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (10).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (11).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (12).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (13).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (14).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (15).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (16).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (17).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (18).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (19).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (2).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (20).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (21).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (22).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (23).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (3).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (4).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (5).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (6).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (7).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (8).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanFemale (9).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GladiatorHumanMale (1).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (10).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (11).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (12).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (13).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (14).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (15).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (16).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (17).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (18).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (19).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (2).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (20).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (21).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (22).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (23).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (3).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (4).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (5).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (6).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (7).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (8).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorHumanMale (9).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GladiatorTieflingFemale (1).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GladiatorTieflingFemale (10).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GladiatorTieflingFemale (11).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GladiatorTieflingFemale (12).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GladiatorTieflingFemale (13).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GladiatorTieflingFemale (2).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GladiatorTieflingFemale (3).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GladiatorTieflingFemale (4).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GladiatorTieflingFemale (5).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GladiatorTieflingFemale (6).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GladiatorTieflingFemale (7).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GladiatorTieflingFemale (8).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GladiatorTieflingFemale (9).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GladiatorTieflingMale (1).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GladiatorTieflingMale (10).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GladiatorTieflingMale (11).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GladiatorTieflingMale (12).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GladiatorTieflingMale (13).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GladiatorTieflingMale (14).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GladiatorTieflingMale (15).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GladiatorTieflingMale (16).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GladiatorTieflingMale (17).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GladiatorTieflingMale (2).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GladiatorTieflingMale (3).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GladiatorTieflingMale (4).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GladiatorTieflingMale (5).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GladiatorTieflingMale (6).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GladiatorTieflingMale (7).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GladiatorTieflingMale (8).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GladiatorTieflingMale (9).webp",
+      "variant": "tieflingMale"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

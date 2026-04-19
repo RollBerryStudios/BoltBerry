@@ -1,0 +1,66 @@
+{
+  "id": 33,
+  "slug": "fog-cloud",
+  "name": "Fog Cloud",
+  "nameDe": "Nebelwolke",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "ranger",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Druide",
+      "Waldläufer",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level conjuration",
+    "de": "Stufe 1 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You create a 20-foot-radius sphere of fog centered on a point within range. The sphere spreads around corners, and its area is heavily obscured. It lasts for the duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it.",
+    "de": "Du erschaffst eine Sphäre aus Nebel mit einem Radius von sechs Metern an einem Ort in Reichweite. Die Sphäre breitet sich um Ecken aus und ihr Bereich ist komplett verschleiert Sie bleibt für die Wirkungsdauer bestehen oder bis ein mäßiger oder stärkerer Wind (mindestens 16 Kilometer pro Stunde) den Nebel auflöst Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, steigt der Radius des Nebels für jeden Grad über dem 1. um sechs Meter."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 2nd level or higher, the radius of the fog increases by 20 feet for each slot level above 1st.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, steigt der Radius des Nebels für jeden Grad über dem 1. um sechs Meter."
+  },
+  "image": "fog-cloud",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

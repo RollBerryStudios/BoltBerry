@@ -1,0 +1,64 @@
+{
+  "id": 209,
+  "slug": "reverse-gravity",
+  "name": "Reverse Gravity",
+  "nameDe": "Schwerkraft umkehren",
+  "level": {
+    "en": "7",
+    "de": "Grad 7"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Druide",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "7th-level transmutation",
+    "de": "Stufe 7 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "100 feet",
+    "de": "30 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a lodestone and iron filings",
+      "de": "ein Magnetstein und Eisenfeilspäne"
+    },
+    "raw": {
+      "en": "V, S, M (a lodestone and iron filings)",
+      "de": "V, G, M (ein Magnetstein und Eisenfeilspäne)"
+    }
+  },
+  "description": {
+    "en": "This spell reverses gravity in a 50-foot-radius, 100-foot high cylinder centered on a point within range. All creatures and objects that aren't somehow anchored to the ground in the area fall upward and reach the top of the area when you cast this spell. A creature can make a dexterity saving throw to grab onto a fixed object it can reach, thus avoiding the fall. If some solid object (such as a ceiling) is encountered in this fall, falling objects and creatures strike it just as they would during a normal downward fall. If an object or creature reaches the top of the area without striking anything, it remains there, oscillating slightly, for the duration. At the end of the duration, affected objects and creatures fall back down.",
+    "de": "Dieser Zauber kehrt die Schwerkraft in einem 30 Meter hohen Zylinder mit einem Radius von 15 Metern um, der auf einen Punkt in Reichweite zentriert ist. Wenn du diesen Zauber wirkst, fallen alle Kreaturen und Gegenstände, die nicht mit dem Boden im Bereich verankert sind, nach oben bis zur Oberseite des Zylinders. Eine Kreatur kann einen Geschicklichkeitsrettungswurf ausführen, um sich an einem verankerten Gegenstand in Reichweite festzuhalten und somit den Fall verhindern. Wenn ein solider Gegenstand (wie eine Decke) bei dem umgekehrten Sturz im Weg ist, treffen fallende Gegenstände und Kreaturen diesen wie bei einem normalen Sturz. Erreicht ein Gegenstand oder eine Kreatur die Oberseite des Zylinders, ohne etwas zu treffen, bleibt das Ziel dort und hängt für die Wirkungsdauer schwingend in der Luft. Am Ende der Wirkungsdauer fallen betroffene Gegenstände und Kreaturen wieder herunter."
+  },
+  "image": "antigravity",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

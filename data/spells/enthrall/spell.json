@@ -1,0 +1,58 @@
+{
+  "id": 247,
+  "slug": "enthrall",
+  "name": "Enthrall",
+  "nameDe": "Fesseln",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "warlock"
+    ],
+    "de": [
+      "Barde",
+      "Hexenmeister"
+    ]
+  },
+  "type": {
+    "en": "2nd-level enchantment",
+    "de": "Stufe 2 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You weave a distracting string of words, causing creatures of your choice that you can see within range and that can hear you to make a wisdom saving throw. Any creature that can't be charmed succeeds on this saving throw automatically, and if you or your companions are fighting a creature, it has advantage on the save. On a failed save, the target has disadvantage on Wisdom (Perception) checks made to perceive any creature other than you until the spell ends or until the target can no longer hear you. The spell ends if you are incapacitated or can no longer speak.",
+    "de": "Du intonierst eine ablenkende Folge von Worten. Kreaturen deiner Wahl in Reichweite, die du sehen kannst und die dich hören können, müssen Weisheitsrettungswürfe ausführen. Kreaturen, die nicht bezaubert werden können, bestehen diesen Rettungswurf automatisch. Kämpfen du oder deine Gefährten gegen eine Kreatur, ist sie beim Rettungswurf im Vorteil. Scheitert der Wurf, ist das Ziel bei Weisheitswürfen (Wahrnehmung) im Nachteil, um andere Kreaturen als dich wahrzunehmen. Dieser Effekt hält an, bis der Zauber endet oder bis das Ziel dich nicht mehr hören kann. Der Zauber endet, wenn du kampfunfähig wirst oder nicht mehr sprechen kannst."
+  },
+  "image": "tounges",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

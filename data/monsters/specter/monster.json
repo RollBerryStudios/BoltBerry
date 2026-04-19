@@ -1,0 +1,276 @@
+{
+  "id": 265,
+  "slug": "specter",
+  "name": "Specter",
+  "nameDe": "Schreckgespenst",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium undead, chaotic evil",
+    "de": "Mittelgroßer Untoter, chaotisch böse"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "22 (5d8)",
+    "de": "22 (5W8)"
+  },
+  "str": 1,
+  "dex": 14,
+  "con": 11,
+  "int": 10,
+  "wis": 10,
+  "cha": 11,
+  "strMod": -5,
+  "dexMod": 2,
+  "conMod": 0,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": 0,
+  "speed": {
+    "run": {},
+    "fly": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "understands all languages it knew in life but can't speak"
+    ],
+    "de": [
+      "Versteht alle zu Lebzeiten bekannten Sprachen",
+      "kann aber nicht sprechen"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Incorporeal Movement",
+        "text": "The specter can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object."
+      },
+      {
+        "name": "Sunlight Sensitivity",
+        "text": "While in sunlight, the specter has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+      }
+    ],
+    "de": [
+      {
+        "name": "Empfindlich gegenüber Sonnenlicht",
+        "text": "Im Sonnenlicht ist das Schreckgespenst bei Angriffswürfen sowie bei Weisheitswürfen (Wahrnehmung), die Sicht erfordern, im Nachteil."
+      },
+      {
+        "name": "Körperlose Bewegung",
+        "text": "Das Schreckgespenst kann sich durch andere Kreaturen und Gegenstände bewegen, als wären sie schwieriges Gelände. Es erleidet 5 (1W10) Energieschaden, wenn es seinen Zug in einem Gegenstand beendet."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Life Drain",
+        "text": "Melee Spell Attack: +4 to hit, reach 5 ft., one creature. Hit: 10 (3d6) necrotic damage. The target must succeed on a DC 10 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the creature finishes a long rest. The target dies if this effect reduces its hit point maximum to 0."
+      }
+    ],
+    "de": [
+      {
+        "name": "Lebensentzug",
+        "text": "Nahkampf-Zauberangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 10 (3W6) nekrotischer Schaden. Das Ziel muss einen SG-10-Konstitutionsrettungswurf bestehen, oder sein Trefferpunktemaximum wird um den Betrag des erlittenen Schadens verringert. Es bleibt verringert, bis die Kreatur eine lange Rast beendet. Wenn das Trefferpunktemaximum durch diesen Effekt auf 0 sinkt, stirbt das Ziel."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/119/1000/1000/636252747399435720.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "undead",
+    "de": "Untoter"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "SpecterDragonborn (1).webp",
+    "variant": "dragonborn"
+  },
+  "tokens": [
+    {
+      "file": "SpecterDragonborn (2).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "SpecterDragonborn (3).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "SpecterDwarfMale (1).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "SpecterDwarfMale (2).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "SpecterDwarfMale (3).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "SpecterDwarfMale (4).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "SpecterDwarfMale (5).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "SpecterDwarfMale (6).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "SpecterElfFemale (1).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "SpecterElfFemale (2).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "SpecterGnomeFemale.webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "SpecterGnomeMale (1).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "SpecterGnomeMale (2).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "SpecterHalfElfFemale (1).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "SpecterHalfElfMale (1).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "SpecterHalfElfMale (2).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "SpecterHalfElfMale (3).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "SpecterHalfElfMale (4).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "SpecterHalflingMale (1).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "SpecterHalflingMale (2).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "SpecterHalflingMale (3).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "SpecterHumanFemale (1).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "SpecterHumanFemale (2).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "SpecterHumanFemale (3).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "SpecterHumanFemale (4).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "SpecterHumanFemale (5).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "SpecterHumanMale (1).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "SpecterHumanMale (10).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "SpecterHumanMale (2).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "SpecterHumanMale (3).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "SpecterHumanMale (4).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "SpecterHumanMale (5).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "SpecterHumanMale (6).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "SpecterHumanMale (7).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "SpecterHumanMale (8).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "SpecterHumanMale (9).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "SpecterTieflingMale (1).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "SpecterTieflingMale (2).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "SpecterTieflingMale (3).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "SpecterTieflingMale (4).webp",
+      "variant": "tieflingMale"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

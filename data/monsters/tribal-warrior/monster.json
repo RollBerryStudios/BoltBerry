@@ -1,0 +1,1548 @@
+{
+  "id": 286,
+  "slug": "tribal-warrior",
+  "name": "Tribal Warrior",
+  "nameDe": "Stammeskrieger",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "1/8",
+  "xp": 25,
+  "ac": {
+    "en": "12 (Hide Armor)",
+    "de": "12 (Fellrüstung)"
+  },
+  "hp": {
+    "en": "11 (2d8 + 2)",
+    "de": "11 (2W8+2)"
+  },
+  "str": 13,
+  "dex": 11,
+  "con": 12,
+  "int": 8,
+  "wis": 11,
+  "cha": 8,
+  "strMod": 1,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": -1,
+  "wisMod": 0,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any one language"
+    ],
+    "de": [
+      "Eine beliebige Sprache"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Pack Tactics",
+        "text": "The warrior has advantage on an attack roll against a creature if at least one of the warrior's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rudeltaktik",
+        "text": "Der Stammeskrieger ist bei Angriffswürfen gegen eine Kreatur im Vorteil, wenn sich mindestens einer seiner Verbündeten, der nicht kampfunfähig ist, im Abstand von bis zu 1,5 Metern von der Kreatur befindet."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Spear",
+        "text": "Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d6 + 1) piercing damage, or 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack."
+      }
+    ],
+    "de": [
+      {
+        "name": "Speer",
+        "text": "Nah- oder Fernkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m oder Reichweite 6/18 m, ein Ziel. Treffer: 4 (1W6+1) Stichschaden oder 5 (1W8+1) Stichschaden, wenn beidhändig geführt, um einen Nahkampfangriff auszuführen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/656/humanoid.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (jedes Volk)"
+  },
+  "alignment": {
+    "en": "any alignment",
+    "de": "jede Gesinnung"
+  },
+  "token": {
+    "file": "TribalWarriorDragonbornCoastal (1).webp",
+    "variant": "dragonbornCoastal"
+  },
+  "tokens": [
+    {
+      "file": "TribalWarriorDragonbornCoastal (2).webp",
+      "variant": "dragonbornCoastal"
+    },
+    {
+      "file": "TribalWarriorDragonbornCoastal (3).webp",
+      "variant": "dragonbornCoastal"
+    },
+    {
+      "file": "TribalWarriorDragonbornCoastal (4).webp",
+      "variant": "dragonbornCoastal"
+    },
+    {
+      "file": "TribalWarriorDragonbornForest (1).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "TribalWarriorDragonbornForest (10).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "TribalWarriorDragonbornForest (11).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "TribalWarriorDragonbornForest (12).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "TribalWarriorDragonbornForest (2).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "TribalWarriorDragonbornForest (3).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "TribalWarriorDragonbornForest (4).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "TribalWarriorDragonbornForest (5).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "TribalWarriorDragonbornForest (6).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "TribalWarriorDragonbornForest (7).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "TribalWarriorDragonbornForest (8).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "TribalWarriorDragonbornForest (9).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "TribalWarriorDragonbornMountains (1).webp",
+      "variant": "dragonbornMountains"
+    },
+    {
+      "file": "TribalWarriorDragonbornMountains (2).webp",
+      "variant": "dragonbornMountains"
+    },
+    {
+      "file": "TribalWarriorDragonbornMountains (3).webp",
+      "variant": "dragonbornMountains"
+    },
+    {
+      "file": "TribalWarriorDragonbornMountains (4).webp",
+      "variant": "dragonbornMountains"
+    },
+    {
+      "file": "TribalWarriorDragonbornMountains (5).webp",
+      "variant": "dragonbornMountains"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (1).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (10).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (11).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (12).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (13).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (14).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (15).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (16).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (17).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (18).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (19).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (2).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (3).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (4).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (5).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (6).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (7).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (8).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfFemaleUnderdark (9).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleMountains (1).webp",
+      "variant": "dwarfMaleMountains"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleMountains (10).webp",
+      "variant": "dwarfMaleMountains"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleMountains (11).webp",
+      "variant": "dwarfMaleMountains"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleMountains (12).webp",
+      "variant": "dwarfMaleMountains"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleMountains (2).webp",
+      "variant": "dwarfMaleMountains"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleMountains (3).webp",
+      "variant": "dwarfMaleMountains"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleMountains (4).webp",
+      "variant": "dwarfMaleMountains"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleMountains (5).webp",
+      "variant": "dwarfMaleMountains"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleMountains (6).webp",
+      "variant": "dwarfMaleMountains"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleMountains (7).webp",
+      "variant": "dwarfMaleMountains"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleMountains (8).webp",
+      "variant": "dwarfMaleMountains"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleMountains (9).webp",
+      "variant": "dwarfMaleMountains"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (1).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (10).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (11).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (12).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (13).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (14).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (15).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (16).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (17).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (18).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (19).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (2).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (20).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (21).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (22).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (3).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (4).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (5).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (6).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (7).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (8).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorDwarfMaleUnderdark (9).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorElfFemaleCoastal (1).webp",
+      "variant": "elfFemaleCoastal"
+    },
+    {
+      "file": "TribalWarriorElfFemaleCoastal (2).webp",
+      "variant": "elfFemaleCoastal"
+    },
+    {
+      "file": "TribalWarriorElfFemaleCoastal (3).webp",
+      "variant": "elfFemaleCoastal"
+    },
+    {
+      "file": "TribalWarriorElfFemaleCoastal (4).webp",
+      "variant": "elfFemaleCoastal"
+    },
+    {
+      "file": "TribalWarriorElfFemaleCoastal (5).webp",
+      "variant": "elfFemaleCoastal"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (1).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (10).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (11).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (12).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (13).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (14).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (15).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (16).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (17).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (18).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (2).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (3).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (4).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (5).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (6).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (7).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (8).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleForest (9).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorElfFemaleWinter (1).webp",
+      "variant": "elfFemaleWinter"
+    },
+    {
+      "file": "TribalWarriorElfFemaleWinter (2).webp",
+      "variant": "elfFemaleWinter"
+    },
+    {
+      "file": "TribalWarriorElfFemaleWinter (3).webp",
+      "variant": "elfFemaleWinter"
+    },
+    {
+      "file": "TribalWarriorElfFemaleWinter (4).webp",
+      "variant": "elfFemaleWinter"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (1).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (10).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (11).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (12).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (13).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (14).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (15).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (16).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (17).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (18).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (19).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (2).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (20).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (21).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (22).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (23).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (3).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (4).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (5).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (6).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (7).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (8).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorElfMaleForest (9).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (1).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (10).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (11).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (12).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (13).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (14).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (15).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (16).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (17).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (18).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (2).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (3).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (4).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (5).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (6).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (7).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (8).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeFemaleHills (9).webp",
+      "variant": "gnomeFemaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (1).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (10).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (11).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (12).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (13).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (14).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (15).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (16).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (17).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (18).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (19).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (2).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (20).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (21).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (22).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (23).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (3).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (4).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (5).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (6).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (7).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (8).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorGnomeMaleHills (9).webp",
+      "variant": "gnomeMaleHills"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleForest (1).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleForest (10).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleForest (11).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleForest (12).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleForest (13).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleForest (14).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleForest (15).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleForest (16).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleForest (2).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleForest (3).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleForest (4).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleForest (5).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleForest (6).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleForest (7).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleForest (8).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleForest (9).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleMountains (1).webp",
+      "variant": "halfElfFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleMountains (2).webp",
+      "variant": "halfElfFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleMountains (3).webp",
+      "variant": "halfElfFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleMountains (4).webp",
+      "variant": "halfElfFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleMountains (5).webp",
+      "variant": "halfElfFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfElfFemaleMountains (6).webp",
+      "variant": "halfElfFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfElfMaleForest (1).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfMaleForest (10).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfMaleForest (11).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfMaleForest (12).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfMaleForest (13).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfMaleForest (14).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfMaleForest (15).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfMaleForest (2).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfMaleForest (3).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfMaleForest (4).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfMaleForest (5).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfMaleForest (6).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfMaleForest (7).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfMaleForest (8).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfMaleForest (9).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "TribalWarriorHalfElfMaleMountains (1).webp",
+      "variant": "halfElfMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleMountains (1).webp",
+      "variant": "halflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleMountains (10).webp",
+      "variant": "halflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleMountains (11).webp",
+      "variant": "halflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleMountains (12).webp",
+      "variant": "halflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleMountains (2).webp",
+      "variant": "halflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleMountains (3).webp",
+      "variant": "halflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleMountains (4).webp",
+      "variant": "halflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleMountains (5).webp",
+      "variant": "halflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleMountains (6).webp",
+      "variant": "halflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleMountains (7).webp",
+      "variant": "halflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleMountains (8).webp",
+      "variant": "halflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleMountains (9).webp",
+      "variant": "halflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleUnderdark (1).webp",
+      "variant": "halflingFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleUnderdark (2).webp",
+      "variant": "halflingFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleUnderdark (3).webp",
+      "variant": "halflingFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleUnderdark (4).webp",
+      "variant": "halflingFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleUnderdark (5).webp",
+      "variant": "halflingFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleUnderdark (6).webp",
+      "variant": "halflingFemaleUnderdark"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleWinter (1).webp",
+      "variant": "halflingFemaleWinter"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleWinter (2).webp",
+      "variant": "halflingFemaleWinter"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleWinter (3).webp",
+      "variant": "halflingFemaleWinter"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleWinter (4).webp",
+      "variant": "halflingFemaleWinter"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleWinter (5).webp",
+      "variant": "halflingFemaleWinter"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleWinter (6).webp",
+      "variant": "halflingFemaleWinter"
+    },
+    {
+      "file": "TribalWarriorHalflingFemaleWinter (7).webp",
+      "variant": "halflingFemaleWinter"
+    },
+    {
+      "file": "TribalWarriorHalflingMaleMountains (1).webp",
+      "variant": "halflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingMaleMountains (10).webp",
+      "variant": "halflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingMaleMountains (11).webp",
+      "variant": "halflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingMaleMountains (2).webp",
+      "variant": "halflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingMaleMountains (3).webp",
+      "variant": "halflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingMaleMountains (4).webp",
+      "variant": "halflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingMaleMountains (5).webp",
+      "variant": "halflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingMaleMountains (6).webp",
+      "variant": "halflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingMaleMountains (7).webp",
+      "variant": "halflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingMaleMountains (8).webp",
+      "variant": "halflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingMaleMountains (9).webp",
+      "variant": "halflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalflingMaleWinter (1).webp",
+      "variant": "halflingMaleWinter"
+    },
+    {
+      "file": "TribalWarriorHalflingMaleWinter (2).webp",
+      "variant": "halflingMaleWinter"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (1).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (10).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (11).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (12).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (13).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (14).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (15).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (16).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (17).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (18).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (19).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (2).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (20).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (3).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (4).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (5).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (6).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (7).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (8).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcFemaleMountains (9).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcMaleMountains (1).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcMaleMountains (10).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcMaleMountains (11).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcMaleMountains (12).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcMaleMountains (13).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcMaleMountains (14).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcMaleMountains (15).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcMaleMountains (16).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcMaleMountains (2).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcMaleMountains (3).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcMaleMountains (4).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcMaleMountains (5).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcMaleMountains (6).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcMaleMountains (7).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcMaleMountains (8).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHalfOrcMaleMountains (9).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleForest (1).webp",
+      "variant": "humanFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleForest (2).webp",
+      "variant": "humanFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleForest (3).webp",
+      "variant": "humanFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleForest (4).webp",
+      "variant": "humanFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleForest (5).webp",
+      "variant": "humanFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleForest (6).webp",
+      "variant": "humanFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleForest (7).webp",
+      "variant": "humanFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleForest (8).webp",
+      "variant": "humanFemaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleMountains (1).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleMountains (10).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleMountains (11).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleMountains (12).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleMountains (2).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleMountains (3).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleMountains (4).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleMountains (5).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleMountains (6).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleMountains (7).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleMountains (8).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHumanFemaleMountains (9).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorHumanMaleDesert (1).webp",
+      "variant": "humanMaleDesert"
+    },
+    {
+      "file": "TribalWarriorHumanMaleDesert (2).webp",
+      "variant": "humanMaleDesert"
+    },
+    {
+      "file": "TribalWarriorHumanMaleDesert (3).webp",
+      "variant": "humanMaleDesert"
+    },
+    {
+      "file": "TribalWarriorHumanMaleDesert (4).webp",
+      "variant": "humanMaleDesert"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (1).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (10).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (11).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (12).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (13).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (14).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (15).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (16).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (17).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (18).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (19).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (2).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (20).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (3).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (4).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (5).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (6).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (7).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (8).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleForest (9).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "TribalWarriorHumanMaleMountains (1).webp",
+      "variant": "humanMaleMountains"
+    },
+    {
+      "file": "TribalWarriorHumanMaleWinter (1).webp",
+      "variant": "humanMaleWinter"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (1).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (10).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (11).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (12).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (13).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (14).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (15).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (16).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (17).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (18).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (19).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (2).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (3).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (4).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (5).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (6).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (7).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (8).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingFemaleMountains (9).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleDesert (1).webp",
+      "variant": "tieflingMaleDesert"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleDesert (2).webp",
+      "variant": "tieflingMaleDesert"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleDesert (3).webp",
+      "variant": "tieflingMaleDesert"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleDesert (4).webp",
+      "variant": "tieflingMaleDesert"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleDesert (5).webp",
+      "variant": "tieflingMaleDesert"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleDesert (6).webp",
+      "variant": "tieflingMaleDesert"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleDesert (7).webp",
+      "variant": "tieflingMaleDesert"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleDesert (8).webp",
+      "variant": "tieflingMaleDesert"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleDesert (9).webp",
+      "variant": "tieflingMaleDesert"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleForest (1).webp",
+      "variant": "tieflingMaleForest"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleMountains (1).webp",
+      "variant": "tieflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleMountains (10).webp",
+      "variant": "tieflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleMountains (2).webp",
+      "variant": "tieflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleMountains (3).webp",
+      "variant": "tieflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleMountains (4).webp",
+      "variant": "tieflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleMountains (5).webp",
+      "variant": "tieflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleMountains (6).webp",
+      "variant": "tieflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleMountains (7).webp",
+      "variant": "tieflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleMountains (8).webp",
+      "variant": "tieflingMaleMountains"
+    },
+    {
+      "file": "TribalWarriorTieflingMaleMountains (9).webp",
+      "variant": "tieflingMaleMountains"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

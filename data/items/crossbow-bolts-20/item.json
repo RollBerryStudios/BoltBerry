@@ -1,0 +1,23 @@
+{
+  "id": 52,
+  "slug": "crossbow-bolts-20",
+  "name": "Crossbow Bolts (20)",
+  "nameDe": "Armbrustbolzen (20)",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 100,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 1.5,
+  "image": "bolts",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

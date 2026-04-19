@@ -1,0 +1,66 @@
+{
+  "id": 159,
+  "slug": "darkvision",
+  "name": "Darkvision",
+  "nameDe": "Dunkelsicht",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "ranger",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Druide",
+      "Waldläufer",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-level transmutation",
+    "de": "Stufe 2 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "8 hours",
+    "de": "8 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "either a pinch of dried carrot or an agate",
+      "de": "entweder eine Prise getrocknete Karotte oder einen Achat"
+    },
+    "raw": {
+      "en": "V, S, M (either a pinch of dried carrot or an agate)",
+      "de": "V, G, M (entweder eine Prise getrocknete Karotte oder einen Achat)"
+    }
+  },
+  "description": {
+    "en": "You touch a willing creature to grant it the ability to see in the dark. For the duration, that creature has darkvision out to a range of 60 feet.",
+    "de": "Du berührst eine bereitwillige Kreatur und verleihst ihr die Fähigkeit, im Dunkeln zu sehen. Für die Wirkungsdauer hat diese Kreatur Dunkelsicht mit einer Reichweite von 18 Metern."
+  },
+  "image": "arcane-eye",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

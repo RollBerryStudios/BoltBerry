@@ -1,0 +1,177 @@
+{
+  "id": 43,
+  "slug": "basilisk",
+  "name": "Basilisk",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium monstrosity, unaligned",
+    "de": "Mittelgroße Monstrosität, ohne Gesinnung"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "15 (Natural Armor)",
+    "de": "15 (Natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "52 (8d8 + 16)",
+    "de": "52 (8W8 + 16)"
+  },
+  "str": 16,
+  "dex": 8,
+  "con": 15,
+  "int": 2,
+  "wis": 8,
+  "cha": 7,
+  "strMod": 3,
+  "dexMod": -1,
+  "conMod": 2,
+  "intMod": -4,
+  "wisMod": -1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 9"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 9"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Petrifying Gaze",
+        "text": "If a creature starts its turn within 30 ft. of the basilisk and the two of them can see each other, the basilisk can force the creature to make a DC 12 Constitution saving throw if the basilisk isn't incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified until freed by the greater restoration spell or other magic.\nA creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the basilisk until the start of its next turn, when it can avert its eyes again. If it looks at the basilisk in the meantime, it must immediately make the save.\nIf the basilisk sees its reflection within 30 ft. of it in bright light, it mistakes itself for a rival and targets itself with its gaze."
+      }
+    ],
+    "de": [
+      {
+        "name": "Versteinernder Blick",
+        "text": "Wenn eine Kreatur ihren Zug im Abstand von bis zu neun Metern vom Basilisken beginnt und die beiden einander sehen können, kann der Basilisk die Kreatur zu einem SG-12-Konstitutionsrettungswurf zwingen, sofern er nicht kampfunfähig ist. Scheitert der Wurf, so beginnt die Kreatur, magisch zu versteinern, und ist festgesetzt. Sie muss den Rettungswurf am Ende ihres nächsten Zugs wiederholen. Bei einem Erfolg endet der Effekt. Scheitert der Wurf, so bleibt die Kreatur versteinert, bis sie durch den Zauber Vollständige Genesung oder andere Magie befreit wird. Wenn die Kreatur nicht überrascht wird, kann sie die Augen abwenden, um den Rettungswurf zu Beginn ihres Zugs zu vermeiden. In diesem Fall kann sie den Basilisken bis zum Beginn ihres nächsten Zugs, wenn sie die Augen erneut abwenden kann, nicht sehen. Schaut sie den Basilisken in der Zwischenzeit an, so muss sie den Rettungswurf sofort ausführen.  Wenn der Basilisk im Abstand von bis zu neun Metern von sich in hellem Licht sein Spiegelbild sieht, hält er sich selbst für einen Rivalen und zielt mit seinem Blick auf sich."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) piercing damage plus 7 (2d6) poison damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Stichschaden plus 7 (2W6) Giftschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/185/1000/1000/636252762168821795.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "mittel"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "ohne Ausrichtung"
+  },
+  "token": {
+    "file": "Basilisk (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Basilisk (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Basilisk (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Basilisk (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Basilisk (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Basilisk (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Basilisk (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Basilisk (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Basilisk (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Basilisk (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Basilisk (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Basilisk (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Basilisk (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Basilisk (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Basilisk (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Basilisk (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Basilisk (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Basilisk (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Basilisk (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

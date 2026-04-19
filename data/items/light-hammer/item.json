@@ -1,0 +1,36 @@
+{
+  "id": 18,
+  "slug": "light-hammer",
+  "name": "Light Hammer",
+  "nameDe": "Leichter Hammer",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 20,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 2,
+  "classification": {
+    "en": "Simple Melee Weapon",
+    "de": "Einfache Nahkampfwaffe"
+  },
+  "damage": "1d4",
+  "damageType": {
+    "en": "bludgeoning",
+    "de": "wucht"
+  },
+  "properties": {
+    "en": "light | thrown (range 20/60)",
+    "de": "leicht | geworfen (fernkampf 20/60)"
+  },
+  "image": "hammer",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

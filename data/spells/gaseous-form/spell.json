@@ -1,0 +1,62 @@
+{
+  "id": 124,
+  "slug": "gaseous-form",
+  "name": "Gaseous Form",
+  "nameDe": "Gasförmige Gestalt",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level transmutation",
+    "de": "Stufe 3 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a bit of gauze and a wisp of smoke",
+      "de": "ein bisschen Gaze und ein Hauch von Rauch"
+    },
+    "raw": {
+      "en": "V, S, M (a bit of gauze and a wisp of smoke)",
+      "de": "V, G, M (ein bisschen Gaze und ein Hauch von Rauch)"
+    }
+  },
+  "description": {
+    "en": "You transform a willing creature you touch, along with everything it's wearing and carrying, into a misty cloud for the duration. The spell ends if the creature drops to 0 hit points. An incorporeal creature isn't affected. While in this form, the target's only method of movement is a flying speed of 10 feet. The target can enter and occupy the space of another creature. The target has resistance to nonmagical damage, and it has advantage on Strength, Dexterity, and constitution saving throws. The target can pass through small holes, narrow openings, and even mere cracks, though it treats liquids as though they were solid surfaces. The target can't fall and remains hovering in the air even when stunned or otherwise incapacitated. While in the form of a misty cloud, the target can't talk or manipulate objects, and any objects it was carrying or holding can't be dropped, used, or otherwise interacted with. The target can't attack or cast spells.",
+    "de": "Für die Wirkungsdauer verwandelst du eine bereitwillige Kreatur, die du berührst, mitsamt ihrer Ausrüstung in eine Nebelwolke. Wenn die Trefferpunkte der Kreatur auf 0 sinken, endet der Zauber. Eine körperlose Kreatur ist nicht betroffen. Während sie sich in dieser Gestalt befindet, verfügt das Ziel als einzige Bewegungsrate über eine Flugbewegungsrate von drei Metern. Das Ziel kann den Bereich einer anderen Kreatur betreten und besetzen. Das Ziel ist bei Rettungswürfen auf Stärke, Geschicklichkeit und Konstitution im Vorteil und gegen nichtmagischen Schaden resistent. Das Ziel passt durch kleine Löcher, schmale Öffnungen und sogar Spalten. Flüssigkeiten stellen für es jedoch solide Oberflächen dar. Das Ziel kann nicht fallen und schwebt selbst dann in der Luft, wenn es betäubt oder kampfunfähig ist. In der Gestalt einer Nebelwolke kann das Ziel weder sprechen noch mit Gegenständen interagieren. Es kann keine von ihm getragenen Objekte fallenlassen, verwenden oder anderweitig mit ihnen interagieren. Das Ziel kann nicht angreifen und keine Zauber wirken."
+  },
+  "image": "gaseous-form",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

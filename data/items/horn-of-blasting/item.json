@@ -1,0 +1,26 @@
+{
+  "id": 229,
+  "slug": "horn-of-blasting",
+  "name": "Horn of Blasting",
+  "nameDe": "Horn der Sprengung",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 45000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, rare You can use an action to speak the horn's command word and then blow the horn, which emits a thunderous blast in a 30-foot cone that is audible 600 feet away. Each creature in the cone must make a DC 15 Constitution saving throw. On a failed save, a creature takes 5d6 thunder damage and is deafened for 1 minute. On a successful save, a creature takes half as much damage and isn't deafened. Creatures and objects made of glass or crystal have disadvantage on the saving throw and take 10d6 thunder damage instead of 5d6. Each use of the horn's magic has a 20 percent chance of causing the horn to explode. The explosion deals 10d6 fire damage to the blower and destroys the horn.",
+    "de": "Du kannst als Aktion das Befehlswort des Horns aussprechen und dann in das Horn blasen. Es erzeugt in einem Kegel von neun Metern einen donnernden Ton, der 180 Meter weit zu hören ist Jede Kreatur in dem Kegel muss einen SG-15-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet die jeweilige Kreatur 5W6 Schallschaden und ist eine Minute lang taub. Anderenfalls erleidet die jeweilige Kreatur halb so viel Schaden und ist nicht taub. Kreaturen und Gegenstände aus Glas oder Kristall sind bei dem Rettungswurf im Nachteil und erleiden 10W6 statt 5W6 Schallschaden. Jedes Mal, wenn die Magie des Horns verwendet wird, besteht eine Chance von 20 Prozent, dass das Horn explodiert. Die Explosion verursacht beim Hornbläser 10W6 Feuerschaden und zerstört das Horn."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

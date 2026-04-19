@@ -1,0 +1,53 @@
+{
+  "id": 339,
+  "slug": "word-of-recall",
+  "name": "Word of Recall",
+  "nameDe": "Rückruf",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "6th-level conjuration",
+    "de": "Stufe 6 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "5 feet",
+    "de": "1,5 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "You and up to five willing creatures within 5 feet of you instantly teleport to a previously designated sanctuary. You and any creatures that teleport with you appear in the nearest unoccupied space to the spot you designated when you prepared your sanctuary (see below). If you cast this spell without first preparing a sanctuary, the spell has no effect. You must designate a sanctuary by casting this spell within a location, such as a temple, dedicated to or strongly linked to your deity. If you attempt to cast the spell in this manner in an area that isn't dedicated to your deity, the spell has no effect.",
+    "de": "Dieser Zauber teleportiert dich und bis zu fünf bereitwillige Kreaturen, die sich im Abstand von bis zu 1,5 Metern von dir befinden, sofort zu einer zuvor festgelegten Zuflucht Du und alle Kreaturen, die mit dir teleportiert werden, erscheint an einer freien Stelle, die der von dir als Zuflucht bestimmten Ort am nächsten liegt (siehe unten). Wirkst du diesen Zauber, ohne zuvor eine Zuflucht festzulegen, hat er keinen Effekt Du bestimmst eine Zuflucht, indem du diesen Zauber an einem Ort wirkst, der deiner Gottheit geweiht oder stark mit ihr verbunden ist - beispielweise in einem Tempel. Versuchst du, diesen Zauber auf diese Weise in einem Bereich zu wirken, der nicht deiner Gottheit gewidmet ist, hat der Zauber keinen Effekt"
+  },
+  "image": "word-of-recall",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

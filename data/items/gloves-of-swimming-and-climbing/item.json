@@ -1,0 +1,30 @@
+{
+  "id": 271,
+  "slug": "gloves-of-swimming-and-climbing",
+  "name": "Gloves of Swimming and Climbing",
+  "nameDe": "Handschuhe des Schwimmens und Kletterns",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 200000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon (requires attunement) While wearing these gloves, climbing and swimming don't cost you extra movement, and you gain a +5 bonus to Strength (Athletics) checks made to climb or swim.",
+    "de": "Wenn du diese Handschuhe trägst, kosten dich Klettern und Schwimmen keine zusätzliche Bewegung, und du erhältst einen Bonus von +5 auf Stärkewürfe (Athletik), um zu klettern oder zu schwimmen."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

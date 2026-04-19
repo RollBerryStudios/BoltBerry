@@ -1,0 +1,59 @@
+{
+  "id": 390,
+  "slug": "instant-summons",
+  "name": "Instant Summons",
+  "nameDe": "Sofortige Beschwörung",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "6th-level conjuration (ritual)",
+    "de": "Stufe 6 Beschwörung (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Until dispelled",
+    "de": "Bis entzaubert"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "A sapphire worth 1,000 gp",
+      "de": "Ein Saphir im Wert von 1.000 GM"
+    },
+    "raw": {
+      "en": "V, S, M (A sapphire worth 1,000 gp)",
+      "de": "V, G, M (Ein Saphir im Wert von 1.000 GM)"
+    }
+  },
+  "description": {
+    "en": "You touch an object weighing 10 pounds or less whose longest dimension is 6 feet or less. The spell leaves an invisible mark on its surface and invisibly inscribes the name of the item on the sapphire you use as the material component. Each time you cast this spell, you must use a different sapphire. At any time thereafter, you can use your action to speak the item's name and crush the sapphire. The item instantly appears in your hand regardless of physical or planar distances, and the spell ends. If another creature is holding or carrying the item, crushing the sapphire doesn't transport the item to you, but instead you learn who the creature possessing the object is and roughly where that creature is located at that moment. Dispel magic or a similar effect successfully applied to the sapphire ends this spell's effect.",
+    "de": "Du berührst einen Gegenstand mit einem Gewicht von maximal 4,5 Kilogramm und einer Länge von maximal 1,8 Metern. Der Zauber hinterlässt ein unsichtbares Mal auf der Oberfläche des Gegenstands und schreibt dessen Namen auf den Saphir, den du als Materialkomponente verwendest. Jedes Mal, wenn du diesen Zauber wirkst, musst du einen anderen Saphir verwenden. Danach kannst du jederzeit deine Aktion verwenden, um den Namen des Gegenstands auszusprechen und den Saphir zu zerbrechen. Der Gegenstand erscheint sofort in deiner Hand, unabhängig von seiner physischen oder planaren Entfernung, und der Zauber endet. Hält oder trägt eine andere Kreatur den Gegenstand, wird er beim Zerbrechen des Saphirs nicht zu dir transportiert Stattdessen erfährst du, welche Kreatur den Gegenstand besitzt und wo sie sich in diesem Augenblick ungefähr aufhält. Wird der Zauber Magie bannen  oder ein ähnlicher Effekt erfolgreich auf den Saphir gewirkt, endet dieser Zauber."
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

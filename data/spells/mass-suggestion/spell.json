@@ -1,0 +1,70 @@
+{
+  "id": 291,
+  "slug": "mass-suggestion",
+  "name": "Mass Suggestion",
+  "nameDe": "Massen-Einflüsterung",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "6th-level enchantment",
+    "de": "Stufe 6 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "24 hours",
+    "de": "24 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a snake's tongue and either a bit of honeycomb or a drop of sweet oil",
+      "de": "eine Schlangenzunge und entweder ein Stückchen Honigwabe oder ein Tropfen Süßöl"
+    },
+    "raw": {
+      "en": "V, M (a snake's tongue and either a bit of honeycomb or a drop of sweet oil)",
+      "de": "V, M (eine Schlangenzunge und entweder ein Stückchen Honigwabe oder ein Tropfen Süßöl)"
+    }
+  },
+  "description": {
+    "en": "You suggest a course of activity (limited to a sentence or two) and magically influence up to twelve creatures of your choice that you can see within range and that can hear and understand you. Creatures that can't be charmed are immune to this effect. The suggestion must be worded in such a manner as to make the course of action sound reasonable. Asking the creature to stab itself, throw itself onto a spear, immolate itself, or do some other obviously harmful act automatically negates the effect of the spell. Each target must make a wisdom saving throw. On a failed save, it pursues the course of action you described to the best of its ability. The suggested course of action can continue for the entire duration. If the suggested activity can be completed in a shorter time, the spell ends when the subject finishes what it was asked to do. You can also specify conditions that will trigger a special activity during the duration. For example, you might suggest that a group of soldiers give all their money to the first beggar they meet. If the condition isn't met before the spell ends, the activity isn't performed. If you or any of your companions damage a creature affected by this spell, the spell ends for that creature.",
+    "de": "Du schlägst eine Vorgehensweise vor (auf einen oder zwei Sätze beschränkt) und beeinflusst auf magische Weise bis zu zwölf Kreaturen deiner Wahl in Reichweite, die du sehen kannst und die dich hören und verstehen können. Kreaturen, die nicht bezaubert werden können, sind gegen diesen Effekt immun. Die Einflüsterung muss so formuliert sein, dass die vorgeschlagene Vorgehensweise angemessen erscheint. Aufforderungen, sich selbst zu erstechen, sich in einen Speer zu stürzen, sich anzuzünden oder auf andere Weise zu verletzen, heben die Wirkung des Zaubers auf. Jedes Ziel muss einen Weisheitsrettungswurf ausführen. Scheitert der Wurf, führt es die von dir beschriebene Vorgehensweise nach Kräften aus. Die vorgeschlagene Vorgehensweise kann während der gesamten Wirkungsdauer fortgesetzt werden. Wenn die vorgeschlagene Aktivität in kürzerer Zeit abgeschlossen werden kann, endet der Zauber, sobald das Ziel die Aktivität beendet hat. Du kannst auch Bedingungen festlegen, die während der Wirkungsdauer eine besondere Handlung auslösen. Beispielsweise könntest du vorschlagen, dass eine Gruppe Soldaten dem ersten Bettler, den sie treffen, all ihr Geld geben. Wird die Bedingung vor Ablauf der Wirkungsdauer nicht erfüllt, wird die Handlung nicht ausgeführt. Fügt einer deiner Begleiter oder du einer Kreatur Schaden zu, die von diesem Zauber betroffen ist, endet der Zauber für diese Kreatur. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 7. Grades nutzt, beträgt die Wirkungsdauer zehn Tage. Bei einem Zauberplatz des 8. Grades beträgt die Wirkungsdauer 30 Tage. Bei einem Zauberplatz des 9. Grades beträgt die Wirkungsdauer ein Jahr und einen Tag."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a 7th-level spell slot, the duration is 10 days. When you use an 8th-level spell slot, the duration is 30 days. When you use a 9th-level spell slot, the duration is a year and a day.",
+    "de": "\\Wirkst du diesen Zauber, indem du einen Zauberplatz des 7. Grades nutzt, beträgt die Wirkungsdauer zehn Tage. Bei einem Zauberplatz des 8. Grades beträgt die Wirkungsdauer 30 Tage. Bei einem Zauberplatz des 9. Grades beträgt die Wirkungsdauer ein Jahr und einen Tag."
+  },
+  "image": "mass-suggestion",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

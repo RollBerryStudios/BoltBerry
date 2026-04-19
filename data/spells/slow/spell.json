@@ -1,0 +1,62 @@
+{
+  "id": 142,
+  "slug": "slow",
+  "name": "Slow",
+  "nameDe": "Verlangsamen",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level transmutation",
+    "de": "Stufe 3 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a drop of molasses",
+      "de": "ein Tropfen Melasse"
+    },
+    "raw": {
+      "en": "V, S, M (a drop of molasses)",
+      "de": "V, G, M (ein Tropfen Melasse)"
+    }
+  },
+  "description": {
+    "en": "You alter time around up to six creatures of your choice in a 40-foot cube within range. Each target must succeed on a wisdom saving throw or be affected by this spell for the duration. An affected target's speed is halved, it takes a -2 penalty to AC and dexterity saving throws, and it can't use reactions. On its turn, it can use either an action or a bonus action, not both. Regardless of the creature's abilities or magic items, it can't make more than one melee or ranged attack during its turn. If the creature attempts to cast a spell with a casting time of 1 action, roll a d20. On an 11 or higher, the spell doesn't take effect until the creature's next turn, and the creature must use its action on that turn to complete the spell. If it can't, the spell is wasted. A creature affected by this spell makes another wisdom saving throw at the end of its turn. On a successful save, the effect ends for it.",
+    "de": "Du verlangsamst die Zeit um bis zu sechs Kreaturen deiner Wahl in einem Würfel mit zwölf Metern Kantenlänge in Reichweite. Jedes Ziel muss einen Weisheitsrettungswurfbestehen oder es wird für die Wirkungsdauer von diesem Zauber betroffen. Die Bewegungsrate eines betroffenen Ziels wird halbiert, es erleidet einen Malus von -2 auf seine RK und Geschicklichkeitsrettungswürfe. Außerdem kann es keine Reaktionen verwenden. Es kann in seinem Zug entweder eine Aktion oder eine Bonusaktion einsetzen, aber nicht beides. Unabhängig von den Fähigkeiten oder magischen Gegenständen der Kreatur kann sie in ihrem Zug maximal einen Nahkampf- oder Fernkampfangriff ausführen. Versucht die Kreatur, einen Zauber mit einem Zeitaufwand von einer Aktion zu wirken, würfle mit einem W20. Bei einer 11 oder höher tritt der Zauber erst beim nächsten Zug der Kreatur in Kraft und die Kreatur muss ihre Aktion in jenem Zug verwenden, um den Zauber abzuschließen. Falls dies nicht möglich ist, ist der Zauber vergeudet Eine von diesem Zauber betroffene Kreatur muss am Ende ihres Zugs einen weiteren Weisheitsrettungswurf ausführen. Ist der Rettungswurf erfolgreich, endet der Effekt für die Kreatur."
+  },
+  "image": "slow",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

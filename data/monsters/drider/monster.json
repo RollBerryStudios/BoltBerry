@@ -1,0 +1,244 @@
+{
+  "id": 91,
+  "slug": "drider",
+  "name": "Drider",
+  "nameDe": "Drinne",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, chaotic evil",
+    "de": "Große Monstrosität, chaotisch böse"
+  },
+  "challenge": "6",
+  "xp": 2300,
+  "ac": {
+    "en": "19 (Natural Armor)",
+    "de": "19 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "123 (13d10 + 52)",
+    "de": "123 (13W10+52)"
+  },
+  "str": 16,
+  "dex": 16,
+  "con": 18,
+  "int": 13,
+  "wis": 14,
+  "cha": 12,
+  "strMod": 3,
+  "dexMod": 3,
+  "conMod": 4,
+  "intMod": 1,
+  "wisMod": 2,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "climb": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 15"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 15"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Elvish",
+      "Undercommon"
+    ],
+    "de": [
+      "Elfisch",
+      "Gemeinsprache der Unterreiche"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +9",
+    "Wahrnehmung +5"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Fey Ancestry",
+        "text": "The drider has advantage on saving throws against being charmed, and magic can't put the drider to sleep."
+      },
+      {
+        "name": "Spider Climb",
+        "text": "The drider can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+      },
+      {
+        "name": "Sunlight Sensitivity",
+        "text": "While in sunlight, the drider has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+      },
+      {
+        "name": "Web Walker",
+        "text": "The drider ignores movement restrictions caused by webbing."
+      }
+    ],
+    "de": [
+      {
+        "name": "Empfindlich gegenüber Sonnenlicht",
+        "text": "Im Sonnenlicht ist der Drinne bei Angriffswürfen sowie bei Weisheitswürfen (Wahrnehmung), die Sicht erfordern, im Nachteil."
+      },
+      {
+        "name": "Feenblut",
+        "text": "Der Drinne ist bei Rettungswürfen gegen Bezauberung im Vorteil und kann nicht magisch zum Einschlafen gebracht werden."
+      },
+      {
+        "name": "Netzwandler",
+        "text": "Der Drinne ignoriert Bewegungsein-schränkungen, die durch Netze verursacht werden."
+      },
+      {
+        "name": "Spinnenklettern",
+        "text": "Der Drinne kann ohne Attributswürfe schwierige Oberflächen erklimmen und sich kopfüber an Decken entlang bewegen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The drider makes three attacks, either with its longsword or its longbow. It can replace one of those attacks with a bite attack."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one creature. Hit: 2 (1d4) piercing damage plus 9 (2d8) poison damage."
+      },
+      {
+        "name": "Longsword",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage if used with two hands."
+      },
+      {
+        "name": "Longbow",
+        "text": "Ranged Weapon Attack: +6 to hit, range 150/600 ft., one target. Hit: 7 (1d8 + 3) piercing damage plus 4 (1d8) poison damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Drinne führt entweder mit dem Langschwert oder mit dem Langbogen drei Angriffe aus. Er kann einen dieser Angriffe durch einen Bissangriff ersetzen."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 2 (1W4) Stichschaden plus 9 (2W8) Giftschaden."
+      },
+      {
+        "name": "Langschwert",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (1W8+3) Hiebschaden oder 8 (1W10+3) Hiebschaden bei zweihändiger Führung."
+      },
+      {
+        "name": "Langbogen",
+        "text": "Fernkampfwaffenangriff: +6 auf Treffer, Reichweite 45/180 m, ein Ziel. Treffer: 7 (1W8+3) Stichschaden plus 4 (1W8) Giftschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/295/1000/1000/636252771409285458.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "Drider (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Drider (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Drider (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,325 @@
+{
+  "id": 55,
+  "slug": "bone-devil",
+  "name": "Bone Devil",
+  "nameDe": "Knochenteufel",
+  "source": "SRD",
+  "meta": {
+    "en": "Large fiend, lawful evil",
+    "de": "Großer Unhold, rechtschaffen böse"
+  },
+  "challenge": "9",
+  "xp": 5000,
+  "ac": {
+    "en": "19 (Natural Armor)",
+    "de": "19 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "142 (15d10 + 60)",
+    "de": "142 (15W10+60)"
+  },
+  "str": 18,
+  "dex": 16,
+  "con": 18,
+  "int": 13,
+  "wis": 14,
+  "cha": 16,
+  "strMod": 4,
+  "dexMod": 3,
+  "conMod": 4,
+  "intMod": 1,
+  "wisMod": 2,
+  "chaMod": 3,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    },
+    "fly": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 12"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Infernal",
+      "telepathy 120 ft."
+    ],
+    "de": [
+      "Infernalisch",
+      "Telepathie auf 36 m"
+    ]
+  },
+  "savingThrows": [
+    "Int +5",
+    "Wei +6",
+    "Cha +7"
+  ],
+  "skills": [
+    "Motiv erkennen +6",
+    "Täuschen +7"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Devil's Sight",
+        "text": "Magical darkness doesn't impede the devil's darkvision."
+      },
+      {
+        "name": "Magic Resistance",
+        "text": "The devil has advantage on saving throws against spells and other magical effects."
+      }
+    ],
+    "de": [
+      {
+        "name": "Magieresistenz",
+        "text": "Der Teufel ist bei Rettungswürfen gegen Zauber und andere magische Effekte im Vorteil."
+      },
+      {
+        "name": "Teufelssicht",
+        "text": "Die Dunkelsicht des Teufels wird nicht durch magische Dunkelheit beeinträchtigt."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The devil makes three attacks: two with its claws and one with its sting."
+      },
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +8 to hit, reach 10 ft., one target. Hit: 8 (1d8 + 4) slashing damage."
+      },
+      {
+        "name": "Sting",
+        "text": "Melee Weapon Attack: +8 to hit, reach 10 ft., one target. Hit: 13 (2d8 + 4) piercing damage plus 17 (5d6) poison damage, and the target must succeed on a DC 14 Constitution saving throw or become poisoned for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Teufel führt drei Angriffe aus: zwei Klauen- und einen Stachelangriff."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +8 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 8 (1W8+4) Hiebschaden."
+      },
+      {
+        "name": "Stachel",
+        "text": "Nahkampfwaffenangriff: +8 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 13 (2W8+4) Stichschaden plus 17 (5W6) Giftschaden, und das Ziel muss einen SG-14-Konstitutionsrettungswurf ausführen, oder es ist eine Minute lang vergiftet. Das Ziel kann den Rettungswurf am Ende jedes seiner Züge wiederholen und den Effekt bei einem Erfolg beenden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/9/481/1000/1000/636328225187253200.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "fiend",
+    "de": "Unhold (Teufel)"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "BoneDevil (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "BoneDevil (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (31).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (32).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (33).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (34).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (35).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (36).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (37).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (38).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (39).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (40).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (41).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (42).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (43).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (44).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (45).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (46).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "BoneDevil (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

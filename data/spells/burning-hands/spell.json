@@ -1,0 +1,62 @@
+{
+  "id": 6,
+  "slug": "burning-hands",
+  "name": "Burning Hands",
+  "nameDe": "Brennende Hände",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level evocation",
+    "de": "Stufe 1 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self (15-foot cone)",
+    "de": "Selbst (4,5 Meter Kegel)"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "As you hold your hands with thumbs touching and fingers spread, a thin sheet of flames shoots forth from your outstretched fingertips. Each creature in a 15-foot cone must make a dexterity saving throw. A creature takes 3d6 fire damage on a failed save, or half as much damage on a successful one. The fire ignites any flammable objects in the area that aren't being worn or carried.",
+    "de": "Du streckst deine Hände mit sich berührenden Daumen und gespreizten Fingern aus und eine dünne Flammenwand schießt aus deinen Fingerspitzen hervor. Kreaturen innerhalb eines Kegels von 4,5 Metern müssen einen Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleiden sie 3W6 Feuerschaden, anderenfalls die Hälfte. Das Feuer entzündet brennbare Gegenstände in der Umgebung, die nicht getragen werden. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 1. um 1W6."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 1. um 1W6."
+  },
+  "image": "burning-hands",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

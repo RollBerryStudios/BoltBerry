@@ -1,0 +1,26 @@
+{
+  "id": 246,
+  "slug": "eversmoking-bottle",
+  "name": "Eversmoking Bottle",
+  "nameDe": "Rauchflasche",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 100000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon Smoke leaks from the lead-stoppered mouth of this brass bottle, which weighs 1 pound. When you use an action to remove the stopper, a cloud of thick smoke pours out in a 60-foot radius from the bottle. The cloud's area is heavily obscured. Each minute the bottle remains open and within the cloud, the radius increases by 10 feet until it reaches its maximum radius of 120 feet. The cloud persists as long as the bottle is open. Closing the bottle requires you to speak its command word as an action. Once the bottle is closed, the cloud disperses after 10 minutes. A moderate wind (11 to 20 miles per hour) can also disperse the smoke after 1 minute, and a strong wind (21 or more miles per hour) can do so after 1 round.",
+    "de": "Obwohl sie mit einem Bleistopfen versiegelt ist, dringt aus dieser 0,5 Kilogramm schweren Flasche Rauch. Wenn du eine Aktion verwendest, um den Stopfen herauszuziehen, quillt in einem Radius von 18 Metern um die Flasche eine dichte Rauchwolke hervor. Der Bereich der Wolke ist komplett verschleiert Mit jeder Minute, die die Flasche geöffnet und innerhalb der Wolke bleibt, vergrößert sich der Radius um 1,5 Meter, bis der Maximalradius von 36 Metern erreicht ist. Die Wolke bleibt bestehen, solange die Flasche geöffnet ist. Um die Flasche zu schließen, musst du als Aktion ihr Befehlswort aussprechen. Nachdem die Flasche verschlossen wurde, löst sich die Wolke innerhalb von zehn Minuten auf. Mäßiger Wind (17,6 bis 32 Kilometer pro Stunde) kann den Rauch in einer Minute verwehen, und starker Wind (33,6 Kilometer pro Stunde oder mehr) braucht dafür nur eine Runde."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

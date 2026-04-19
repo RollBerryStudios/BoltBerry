@@ -1,0 +1,66 @@
+{
+  "id": 271,
+  "slug": "hallucinatory-terrain",
+  "name": "Hallucinatory Terrain",
+  "nameDe": "Scheingelände",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "druid",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Druide",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "4th-level illusion",
+    "de": "Stufe 4 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "10 minutes",
+    "de": "10 Minuten"
+  },
+  "range": {
+    "en": "300 feet",
+    "de": "90 Meter"
+  },
+  "duration": {
+    "en": "24 hours",
+    "de": "24 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a stone, a twig, and a bit of green plant",
+      "de": "ein Stein, ein Zweig und ein Stück grüne Pflanze"
+    },
+    "raw": {
+      "en": "V, S, M (a stone, a twig, and a bit of green plant)",
+      "de": "V, G, M (ein Stein, ein Zweig und ein Stück grüne Pflanze)"
+    }
+  },
+  "description": {
+    "en": "You make natural terrain in a 150-foot cube in range look, sound, and smell like some other sort of natural terrain. Thus, open fields or a road can be made to resemble a swamp, hill, crevasse, or some other difficult or impassable terrain. A pond can be made to seem like a grassy meadow, a precipice like a gentle slope, or a rock-strewn gully like a wide and smooth road. Manufactured structures, equipment, and creatures within the area aren't changed in appearance. The tactile characteristics of the terrain are unchanged, so creatures entering the area are likely to see through the illusion. If the difference isn't obvious by touch, a creature carefully examining the illusion can attempt an Intelligence (Investigation) check against your spell save DC to disbelieve it. A creature who discerns the illusion for what it is, sees it as a vague image superimposed on the terrain.",
+    "de": "Du lässt natürliches Gelände innerhalb eines Würfels mit 45 Metern Kantenlänge wie ein anderes natürliches Gelände aussehen, klingen und riechen. Weite Felder oder eine Straße können somit wie ein Sumpf, ein Hügel, eine Erdspalte oder anderes schwieriges oder unpassierbares Gelände erscheinen. Ein Tümpel kann wie eine grüne Wiese wirken, ein Abhang wie ein sanftes Gefälle oder ein mit Felsen übersäter Graben wie eine breite, flache Straße. Bauwerke, Ausrüstung und Kreaturen im Bereich verändern ihr Aussehen nicht. Die ertastbaren Eigenschaften des Geländes bleiben unverändert, so dass Kreaturen, die den Bereich betreten, die Illusion wahrscheinlich durchschauen. Ist der Unterschied bei Berührung nicht offensichtlich, kann eine Kreatur die Illusion sorgfältig untersuchen. Sie kann einen Intelligenzwurf (Nachforschungen) gegen deinen Zauberrettungswurf-SG ausführen, um sie zu durchschauen. Eine Kreatur, die die Illusion als solche erkennt, sieht sie als vages Bild über dem darunter befindlichen Gelände."
+  },
+  "image": "illusion",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

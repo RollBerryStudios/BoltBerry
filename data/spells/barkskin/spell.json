@@ -1,0 +1,62 @@
+{
+  "id": 133,
+  "slug": "barkskin",
+  "name": "Barkskin",
+  "nameDe": "Rindenhaut",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "ranger"
+    ],
+    "de": [
+      "Druide",
+      "Waldläufer"
+    ]
+  },
+  "type": {
+    "en": "2nd-level transmutation",
+    "de": "Stufe 2 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a handful of oak bark",
+      "de": "eine Handvoll Eichenrinde"
+    },
+    "raw": {
+      "en": "V, S, M (a handful of oak bark)",
+      "de": "V, G, M (eine Handvoll Eichenrinde)"
+    }
+  },
+  "description": {
+    "en": "You touch a willing creature. Until the spell ends, the target's skin has a rough, bark-like appearance, and the target's AC can't be less than 16, regardless of what kind of armor it is wearing.",
+    "de": "Du berührst eine bereitwillige Kreatur. Bis der Zauber endet, wird die Haut des Ziels rau und rindenartig und seine RK beträgt mindestens 16, egal, welche Rüstung es trägt"
+  },
+  "image": "bark-skin",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

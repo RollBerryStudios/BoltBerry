@@ -1,0 +1,226 @@
+{
+  "id": 87,
+  "slug": "doppelganger",
+  "name": "Doppelganger",
+  "nameDe": "Doppelgänger",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium monstrosity, neutral",
+    "de": "Mittelgroße Monstrosität, neutral"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "14",
+    "de": "14"
+  },
+  "hp": {
+    "en": "52 (8d8 + 16)",
+    "de": "52 (8W8+16)"
+  },
+  "str": 11,
+  "dex": 18,
+  "con": 14,
+  "int": 11,
+  "wis": 12,
+  "cha": 14,
+  "strMod": 0,
+  "dexMod": 4,
+  "conMod": 2,
+  "intMod": 0,
+  "wisMod": 1,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common"
+    ],
+    "de": [
+      "Gemeinsprache"
+    ]
+  },
+  "skills": [
+    "Motiv erkennen +3",
+    "Täuschen +6"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Shapechanger",
+        "text": "The doppelganger can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+      },
+      {
+        "name": "Ambusher",
+        "text": "In the first round of combat, the doppelganger has advantage on attack rolls against any creature it has surprised."
+      },
+      {
+        "name": "Surprise Attack",
+        "text": "If the doppelganger surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 (3d6) damage from the attack."
+      }
+    ],
+    "de": [
+      {
+        "name": "Gestaltwandler",
+        "text": "Der Doppelgänger kann seine Aktion verwenden, um sich in einen kleinen oder mittelgroßen Humanoiden, den er gesehen hat, oder zurück in seine wahre Gestalt zu verwandeln. Seine Spielwerte sind abgesehen von der Größe in beiden Gestalten gleich. Ausrüstung, die er trägt oder hält, wird nicht verwandelt. Wenn er stirbt, nimmt er seine wahre Gestalt an."
+      },
+      {
+        "name": "Lauerjäger",
+        "text": "Der Doppelgänger ist in der ersten Kampfrunde bei Angriffswürfen gegen jede Kreatur im Vorteil, die er überrascht hat."
+      },
+      {
+        "name": "Überraschungsangriff",
+        "text": "Wenn der Doppelgänger in der ersten Kampfrunde eine Kreatur überrascht und mit einem Angriff trifft, erleidet das Ziel zusätzlich 10 (3W6) Schaden durch den Angriff."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The doppelganger makes two melee attacks."
+      },
+      {
+        "name": "Slam",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 7 (1d6 + 4) bludgeoning damage."
+      },
+      {
+        "name": "Read Thoughts",
+        "text": "The doppelganger magically reads the surface thoughts of one creature within 60 ft. of it. The effect can penetrate barriers, but 3 ft. of wood or dirt, 2 ft. of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, the doppelganger can continue reading its thoughts, as long as the doppelganger's concentration isn't broken (as if concentrating on a spell). While reading the target's mind, the doppelganger has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Doppelgänger führt zwei Nahkampfangriffe aus."
+      },
+      {
+        "name": "Hieb",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (1W6+4) Wuchtschaden."
+      },
+      {
+        "name": "Gedanken lesen",
+        "text": "Der Doppelgänger liest magisch die oberflächlichen Gedanken einer Kreatur im Abstand von bis zu 18 Metern von ihm. Der Zauber kann Barrieren durchdringen, wird aber von 90 Zentimetern Holz oder Erde, 60 Zentimetern Stein, fünf Zentimetern Metall (außer Blei) oder von einer dünnen Bleischicht blockiert. Solange das Ziel sich in Reichweite befindet, kann der Doppelgänger dessen Gedanken fortlaufend lesen, sofern seine Konzentration nicht unterbrochen wird (wie bei einem Zauber). Solange der Doppelgänger die Gedanken des Ziels liest, ist er bei Weisheits- (Motiv erkennen) und Charismawürfen (Täuschen, Einschüchtern und Überzeugen) gegen das Ziel im Vorteil."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/289/315/315/636252770983164351.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität (Gestaltwandler)"
+  },
+  "alignment": {
+    "en": "neutral",
+    "de": "neutral"
+  },
+  "token": {
+    "file": "Doppelganger (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Doppelganger (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Doppelganger (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

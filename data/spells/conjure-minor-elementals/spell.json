@@ -1,0 +1,62 @@
+{
+  "id": 148,
+  "slug": "conjure-minor-elementals",
+  "name": "Conjure Minor Elementals",
+  "nameDe": "Schwache Elementare beschwören",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "wizard"
+    ],
+    "de": [
+      "Druide",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "4th-level conjuration",
+    "de": "Stufe 4 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "90 feet",
+    "de": "27 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You summon elementals that appear in unoccupied spaces that you can see within range. You choose one the following options for what appears: - One elemental of challenge rating 2 or lower - Two elementals of challenge rating 1 or lower - Four elementals of challenge rating 1/2 or lower - Eight elementals of challenge rating 1/4 or lower. An elemental summoned by this spell disappears when it drops to 0 hit points or when the spell ends. The summoned creatures are friendly to you and your companions. Roll initiative for the summoned creatures as a group, which has its own turns. They obey any verbal commands that you issue to them (no action required by you). If you don't issue any commands to them, they defend themselves from hostile creatures, but otherwise take no actions. The GM has the creatures' statistics.",
+    "de": "Du beschwörst Elementare, die in freien Bereichen in Reichweite erscheinen, die du sehen kannst. Wähle eine der folgenden Optionen aus: Ein auf diese Weise beschworener Elementar verschwindet, wenn der Zauber endet oder seine Trefferpunkte auf 0 sinken. Die beschworenen Kreaturen sind dir und deinen Gefährten freundlich gesinnt. Würfle die Initiative für die beschworenen Kreaturen als Gruppe aus, die über ihren eigenen Zug verfügt. Sie gehorchen deinen mündlichen Befehlen (erfordert keine Aktion), Wenn du ihnen keine Befehle erteilst, verteidigen sie sich gegen feindlich gesinnte Kreaturen, führen aber anderenfalls keine Aktionen aus. Der SL hat die Werte der Kreaturen. Auf höheren Graden:  Wirkst du diesen Zauber mit bestimmten Zauberplätzen höheren Grades, erscheinen mehr Kreaturen, wenn du eine der oben genannten Optionen auswählst: doppelt so viele mit einem Zauberplatz des 6. Grades und dreimal so viele mit einem Zauberplatz des 8. Grades."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using certain higher-level spell slots, you choose one of the summoning options above, and more creatures appear: twice as many with a 6th-level slot and three times as many with an 8th-level slot.",
+    "de": "Wirkst du diesen Zauber mit bestimmten Zauberplätzen höheren Grades, erscheinen mehr Kreaturen, wenn du eine der oben genannten Optionen auswählst: doppelt so viele mit einem Zauberplatz des 6. Grades und dreimal so viele mit einem Zauberplatz des 8. Grades."
+  },
+  "image": "conjure-elemental",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

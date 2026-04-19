@@ -1,0 +1,68 @@
+{
+  "id": 235,
+  "slug": "create-undead",
+  "name": "Create Undead",
+  "nameDe": "Untote erschaffen",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Necromancy",
+    "de": "Nekromantie"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Kleriker",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "6th-level necromancy",
+    "de": "Stufe 6 Nekromantie"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "10 feet",
+    "de": "3 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "one clay pot filled with grave dirt, one clay pot filled with brackish water, and one 150 gp black onyx stone for each corpse",
+      "de": "einen mit Graberde gefüllten Tontopf, einen mit Brackwasser gefüllten Tontopf und einen schwarzen Onyxstein für 150 Goldstücke pro Leiche"
+    },
+    "raw": {
+      "en": "V, S, M (one clay pot filled with grave dirt, one clay pot filled with brackish water, and one 150 gp black onyx stone for each corpse)",
+      "de": "V, G, M (einen mit Graberde gefüllten Tontopf, einen mit Brackwasser gefüllten Tontopf und einen schwarzen Onyxstein für 150 Goldstücke pro Leiche)"
+    }
+  },
+  "description": {
+    "en": "You can cast this spell only at night. Choose up to three corpses of Medium or Small humanoids within range. Each corpse becomes a ghoul under your control. (The GM has game statistics for these creatures.) As a bonus action on each of your turns, you can mentally command any creature you animated with this spell if the creature is within 120 feet of you (if you control multiple creatures, you can command any or all of them at the same time, issuing the same command to each one). You decide what action the creature will take and where it will move during its next turn, or you can issue a general command, such as to guard a particular chamber or corridor. If you issue no commands, the creature only defends itself against hostile creatures. Once given an order, the creature continues to follow it until its task is complete. The creature is under your control for 24 hours, after which it stops obeying any command you have given it. To maintain control of the creature for another 24 hours, you must cast this spell on the creature before the current 24-hour period ends. This use of the spell reasserts your control over up to three creatures you have animated with this spell, rather than animating new ones.",
+    "de": "Du kannst diesen Zauber nur nachts wirken. Wähle bis zu drei Leichen kleiner oder mittelgroßer Humanoiden in Reichweite. Jede Leiche wird zu einem Ghul unter deiner Kontrolle. (Der SL hat die Spielwerte für diese Kreaturen.) Du kannst als Bonusaktion in jedem deiner Züge jede Kreatur, die du mit diesem Zauber belebt hast und die sich im Abstand von bis zu 36 Metern von dir befindet, mental befehligen. Wenn du mehrere Kreaturen kontrollierst, kannst du gleichzeitig eine oder alle befehligen, wobei jeder derselbe Befehl erteilt wird. Du entscheidest über die Aktion der Kreatur und ihre Bewegung in ihrem nächsten Zug. Alternativ kannst du einen allgemeinen Befehl erteilen, etwa das Bewachen einer bestimmten Kammer oder eines Korridors. Erteilst du keine Befehle, verteidigt sich die Kreatur lediglich gegen feindlich gesinnte Kreaturen. Sobald die Kreatur einen Befehl erhalten hat, führt sie ihn aus, bis die Aufgabe abgeschlossen ist. Die Kreatur steht 24 Stunden lang unter deiner Kontrolle. Danach folgt sie keinem deiner Befehle mehr. Um weitere 24 Stunden die Kontrolle über die Kreatur zu behalten, musst du diesen Zauber vor dem Ablauf der ersten 24 Stunden erneut auf die Kreatur wirken. Setzt du den Zauber auf diese Weise ein, erlangst du die Kontrolle über bis zu drei Kreaturen, die du mit diesem Zauber belebt hast, anstatt eine neue zu beleben. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 7. Grades nutzt, kannst du vier Ghule beleben oder wieder unter deine Kontrolle bringen. Wirkst du diesen Zauber, indem du einen Zauberplatz des 8. Grades nutzt, kannst du fünf Ghule oder zwei Grule oder zwei Gruftschrecken beleben oder wieder unter deine Kontrolle bringen. Wirkst du diesen Zauber, indem du einen Zauberplatz des 9. Grades nutzt, kannst du sechs Ghule oder drei Grule oder drei Gruftschrecken oder zwei Mumien beleben oder wieder unter deine Kontrolle bringen."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a 7th-level spell slot, you can animate or reassert control over four ghouls. When you cast this spell using an 8th-level spell slot, you can animate or reassert control over five ghouls or two ghasts or wights. When you cast this spell using a 9th-level spell slot, you can animate or reassert control over six ghouls, three ghasts or wights, or two mummies.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 7. Grades nutzt, kannst du vier Ghule beleben oder wieder unter deine Kontrolle bringen. Wirkst du diesen Zauber, indem du einen Zauberplatz des 8. Grades nutzt, kannst du fünf Ghule oder zwei Grule oder zwei Gruftschrecken beleben oder wieder unter deine Kontrolle bringen. Wirkst du diesen Zauber, indem du einen Zauberplatz des 9. Grades nutzt, kannst du sechs Ghule oder drei Grule oder drei Gruftschrecken oder zwei Mumien beleben oder wieder unter deine Kontrolle bringen."
+  },
+  "image": "create-undead",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

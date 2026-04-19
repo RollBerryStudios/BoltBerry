@@ -1,0 +1,63 @@
+{
+  "id": 88,
+  "slug": "blindnessdeafness",
+  "name": "Blindness/Deafness",
+  "nameDe": "Blindheit/Taubheit",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "necromancy",
+    "de": "Nekromantie"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-level Necromancy",
+    "de": "Stufe 2 Nekromantie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "You can blind or deafen a foe. Choose one creature that you can see within range to make a constitution saving throw. If it fails, the target is either blinded or deafened (your choice) for the duration. At the end of each of its turns, the target can make a constitution saving throw. On a success, the spell ends.",
+    "de": "Du kannst einen Feind blind oder taub werden lassen. Wähle eine Kreatur in Reichweite, die du sehen kannst Sie muss einen Konstitutionsrettungswurf ausführen. Scheitert der Wurf, ist das Ziel für die Wirkungsdauer entweder blind oder taub (du entscheidest). Am Ende jedes seiner Züge kann das Ziel einen Konstitutionsrettungswurf ausführen. Bei einem Erfolg endet der Zauber. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, kannst du für jeden Grad über dem 2. eine zusätzliche Kreatur als Ziel wählen."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, kannst du für jeden Grad über dem 2. eine zusätzliche Kreatur als Ziel wählen."
+  },
+  "image": "blindness-deafness",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

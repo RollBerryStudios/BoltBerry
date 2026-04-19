@@ -1,0 +1,30 @@
+{
+  "id": 259,
+  "slug": "necklace-of-adaptation",
+  "name": "Necklace of Adaptation",
+  "nameDe": "Halskette der Anpassung",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 150000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon (requires attunement) While wearing this necklace, you can breathe normally in any environment, and you have advantage on saving throws made against harmful gases and vapors (such as cloudkill and stinking cloud effects, inhaled poisons, and the breath weapons of some dragons).",
+    "de": "Wenn du diese Halskette trägst, kannst du in jeder Umgebung normal atmen und du bist bei Rettungswürfen gegen schädliche Gase und Dämpfe (wie Stinkende Wolke  und Todeswolke , inhalierte Gifte und die Odemwaffen mancher Drachen) im Vorteil."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

@@ -1,0 +1,263 @@
+{
+  "id": 217,
+  "slug": "oni",
+  "name": "Oni",
+  "nameDe": "Myconid-Spross",
+  "source": "SRD",
+  "meta": {
+    "en": "Large giant, lawful evil",
+    "de": "Großer Gigant, rechtschaffen böse"
+  },
+  "challenge": "7",
+  "xp": 2900,
+  "ac": {
+    "en": "16 (Chain Mail)",
+    "de": "16 (Kettenpanzer)"
+  },
+  "hp": {
+    "en": "110 (13d10 + 39)",
+    "de": "110 (13W10 + 39)"
+  },
+  "str": 19,
+  "dex": 11,
+  "con": 16,
+  "int": 14,
+  "wis": 12,
+  "cha": 15,
+  "strMod": 4,
+  "dexMod": 0,
+  "conMod": 3,
+  "intMod": 2,
+  "wisMod": 1,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Giant"
+    ],
+    "de": [
+      "Gemeinsprache",
+      "Riesisch"
+    ]
+  },
+  "savingThrows": [
+    "Ges +3",
+    "Kon +6",
+    "Wei +4",
+    "Cha +5"
+  ],
+  "skills": [
+    "Arkane Kunde +5",
+    "Täuschen +8",
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Magic Weapons",
+        "text": "The oni's weapon attacks are magical."
+      },
+      {
+        "name": "Regeneration",
+        "text": "The oni regains 10 hit points at the start of its turn if it has at least 1 hit point."
+      }
+    ],
+    "de": [
+      {
+        "name": "Magische Waffen",
+        "text": "Die Waffenangriffe des Onis sind magisch."
+      },
+      {
+        "name": "Regeneration",
+        "text": "Der Oni erhält zu Beginn seines Zugs 10 Trefferpunkte zurück, wenn er noch mindestens 1 Trefferpunkt hat."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The oni makes two attacks, either with its claws or its glaive."
+      },
+      {
+        "name": "Claw (Oni Form Only)",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) slashing damage."
+      },
+      {
+        "name": "Glaive",
+        "text": "Melee Weapon Attack: +7 to hit, reach 10 ft., one target. Hit: 15 (2d10 + 4) slashing damage, or 9 (1d10 + 4) slashing damage in Small or Medium form."
+      },
+      {
+        "name": "Change Shape",
+        "text": "The oni magically polymorphs into a Small or Medium humanoid, into a Large giant, or back into its true form. Other than its size, its statistics are the same in each form. The only equipment that is transformed is its glaive, which shrinks so that it can be wielded in humanoid form. If the oni dies, it reverts to its true form, and its glaive reverts to its normal size."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Oni führt zwei Angriffe aus, entweder mit seinen Klauen oder mit seiner Glefe."
+      },
+      {
+        "name": "Klauen (nur Oni-Gestalt)",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 8 (1W8+4) Hiebschaden."
+      },
+      {
+        "name": "Glefe",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 15 (2W10+4) Hiebschaden oder 9 (1W10+4) Hiebschaden in kleiner oder mittelgroßer Gestalt."
+      },
+      {
+        "name": "Gestalt ändern",
+        "text": "Der Oni verwandelt sich magisch in einen kleinen oder mittelgroßen Humanoiden oder zurück in seine wahre Gestalt. Seine Spielwerte sind abgesehen von der Größe in allen Gestalten gleich. Die einzige Ausrüstung, die sich ebenfalls verwandelt, ist seine Glefe. Sie schrumpft, sodass sie auch in humanoider Gestalt geführt werden kann. Wenn der Oni stirbt, nimmt er wieder seine wahre Gestalt an, und seine Glefe nimmt wieder ihre normale Größe an."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/297/1000/1000/636252771507213738.jpeg",
+  "size": {
+    "en": "small",
+    "de": "klein"
+  },
+  "type": {
+    "en": "plant",
+    "de": "Pflanze"
+  },
+  "alignment": {
+    "en": "lawful neutral",
+    "de": "rechtschaffen neutral"
+  },
+  "token": {
+    "file": "Oni (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Oni (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Oni (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

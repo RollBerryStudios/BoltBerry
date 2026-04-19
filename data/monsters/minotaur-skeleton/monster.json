@@ -1,0 +1,191 @@
+{
+  "id": 204,
+  "slug": "minotaur-skeleton",
+  "name": "Minotaur Skeleton",
+  "nameDe": "Minotaurus-Skelett",
+  "source": "SRD",
+  "meta": {
+    "en": "Large undead, lawful evil",
+    "de": "Großer Untoter, rechtschaffen böse"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "12 (Natural Armor)",
+    "de": "12 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "67 (9d10 + 18)",
+    "de": "67 (9W10+18)"
+  },
+  "str": 18,
+  "dex": 11,
+  "con": 15,
+  "int": 6,
+  "wis": 8,
+  "cha": 5,
+  "strMod": 4,
+  "dexMod": 0,
+  "conMod": 2,
+  "intMod": -2,
+  "wisMod": -1,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 9"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 9"
+    ]
+  },
+  "languages": {
+    "en": [
+      "understands Abyssal but can't speak"
+    ],
+    "de": [
+      "Versteht Abyssisch",
+      "aber kann nicht sprechen"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Charge",
+        "text": "If the skeleton moves at least 10 feet straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra 9 (2d8) piercing damage. If the target is a creature, it must succeed on a DC 14 Strength saving throw or be pushed up to 10 feet away and knocked prone."
+      }
+    ],
+    "de": [
+      {
+        "name": "Sturmangriff",
+        "text": "Wenn das Skelett sich mindestens drei Meter weit direkt auf ein Ziel zubewegt und es dann im selben Zug mit einem Zerfleischen-Angriff trifft, erleidet das Ziel zusätzlich 9 (2W8) Stichschaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-14-Stärkerettungswurf bestehen, oder es wird bis zu drei Meter weit weg- und umgestoßen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Greataxe",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 17 (2d12 + 4) slashing damage."
+      },
+      {
+        "name": "Gore",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Zerfleischen",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 13 (2W8+4) Stichschaden."
+      },
+      {
+        "name": "Zweihandaxt",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 17 (2W12+4) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/480/1000/1000/636376298435934058.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "undead",
+    "de": "Untoter"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "MinotaurSkeleton (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "MinotaurSkeleton (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "MinotaurSkeleton (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,59 @@
+{
+  "id": 392,
+  "slug": "faithful-hound",
+  "name": "Faithful Hound",
+  "nameDe": "Treuer Hund",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "5th-level conjuration",
+    "de": "Stufe 5 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "8 hours",
+    "de": "8 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "A tiny silver whistle, a piece of bone, and a thread",
+      "de": "Eine winzige Silberpfeife, ein Knochenstück und ein Faden"
+    },
+    "raw": {
+      "en": "V, S, M (A tiny silver whistle, a piece of bone, and a thread)",
+      "de": "V, G, M (Eine winzige Silberpfeife, ein Knochenstück und ein Faden)"
+    }
+  },
+  "description": {
+    "en": "You conjure a phantom watchdog in an unoccupied space that you can see within range, where it remains for the duration, until you dismiss it as an action, or until you move more than 100 feet away from it. The hound is invisible to all creatures except you and can't be harmed. When a Small or larger creature comes within 30 feet of it without first speaking the password that you specify when you cast this spell, the hound starts barking loudly. The hound sees invisible creatures and can see into the Ethereal Plane. It ignores illusions. At the start of each of your turns, the hound attempts to bite one creature within 5 feet of it that is hostile to you. The hound's attack bonus is equal to your spellcasting ability modifier + your proficiency bonus. On a hit, it deals 4d8 piercing damage.",
+    "de": "Du beschwörst einen geisterhaften Wachhund an einer freien Stelle in Reichweite, die du sehen kannst. Der Wachhund bleibt für die Wirkungsdauer bestehen, bis du ihn als Aktion fortschickst oder du dich mehr als 30 Meter von ihm entfernst. Der Hund ist für alle Kreaturen außer dir unsichtbar und kann nicht verletzt werden. Wenn sich ihm eine mindestens kleine Kreatur auf neun Meter nähert, ohne zuvor das Passwort zu sprechen, das du beim Wirken des Zaubers festlegst, bellt der Hund laut. Der Hund sieht unsichtbare Kreaturen und kann in die Ätherebene sehen. Er ignoriert Illusionen. Zu Beginn jedes deiner Züge versucht der Hund, eine Kreatur im Abstand von bis zu 1,5 Metern von ihm zu beißen, die dir feindlich gesinnt ist. Der Angriffsbonus des Hunds entspricht deinem Zauberwirken-Attributsmodifikator + deinem Übungsbonus. Bei einem Treffer verursacht er 4W8 Stichschaden."
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

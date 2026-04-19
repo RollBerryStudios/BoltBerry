@@ -1,0 +1,40 @@
+{
+  "id": 397,
+  "slug": "dwarven-thrower",
+  "name": "Dwarven Thrower",
+  "nameDe": "Zwergischer Wurfhammer",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 1800000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Weapon (warhammer), very rare (requires attunement by a dwarf) You gain a +3 bonus to attack and damage rolls made with this magic weapon. It has the thrown property with a normal range of 20 feet and a long range of 60 feet. When you hit with a ranged attack using this weapon, it deals an extra 1d8 damage or, if the target is a giant, 2d8 damage. Immediately after the attack, the weapon flies back to your hand.",
+    "de": "Du erhältst einen Bonus von +3 auf Angriffs- und Schadenswürfe, die du mit dieser magischen Waffe ausführst Sie ist eine Wurfwaffe mit einer Grundreichweite von sechs Metern und einer Maximalreichweite von 18 Metern. Wenn ein Fernkampfangriff mit dieser Waffe trifft, verursacht sie zusätzlich 1W8 Schaden oder, wenn das Ziel ein Riese ist, 2W8 Schaden. Unmittelbar nach dem Angriff fliegt die Waffe zurück in deine Hand."
+  },
+  "weight": 2,
+  "classification": {
+    "en": "Martial Melee Weapons",
+    "de": "Nahkampfs-Kriegswaffen"
+  },
+  "damage": "1d8",
+  "damageType": {
+    "en": "bludgeoning",
+    "de": "wucht"
+  },
+  "properties": {
+    "en": "versatile (1d10) | requires attunement by a dwarf",
+    "de": "vielseitig (1d10) | erfordert einstimmung eines zwerges"
+  },
+  "image": "weapon",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

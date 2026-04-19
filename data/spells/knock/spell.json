@@ -1,0 +1,57 @@
+{
+  "id": 280,
+  "slug": "knock",
+  "name": "Knock",
+  "nameDe": "Klopfen",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard",
+      "bard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier",
+      "Barde"
+    ]
+  },
+  "type": {
+    "en": "2nd-level transmutation",
+    "de": "Stufe 2 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "Choose an object that you can see within range. The object can be a door, a box, a chest, a set of manacles, a padlock, or another object that contains a mundane or magical means that prevents access. A target that is held shut by a mundane lock or that is stuck or barred becomes unlocked, unstuck, or unbarred. If the object has multiple locks, only one of them is unlocked. If you choose a target that is held shut with arcane lock, that spell is suppressed for 10 minutes, during which time the target can be opened and shut normally. When you cast the spell, a loud knock, audible from as far away as 300 feet, emanates from the target object.",
+    "de": "Wähle einen Gegenstand in Reichweite, den du sehen kannst. Es kann sich um eine Tür, eine Kiste, Handschellen, ein Vorhängeschloss oder einen anderen Gegenstand handeln, der auf magische oder gewöhnliche Art verschlossen ist. Ein Ziel, das von einem gewöhnlichen Schloss oder durch einen Riegel verschlossen ist oder klemmt, wird entriegelt, geöffnet oder gelöst. Wenn der Gegenstand mehrere Schlösser besitzt, wird nur eines von ihnen geöffnet. Wählst du ein Ziel, das mit dem Zauber Arkanes Schloss  verriegelt ist, wird dieser Zauber zehn Minuten lang unterdrückt. In dieser Zeit kann das Ziel normal geöffnet und geschlossen werden. Wenn du diesen Zauber wirkst, gibt dein Ziel ein lautes Klopfgeräusch von sich, dass auf eine Entfernung von 90 Metern hörbar ist."
+  },
+  "image": "knock",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

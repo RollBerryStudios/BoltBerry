@@ -1,0 +1,30 @@
+{
+  "id": 318,
+  "slug": "boots-of-striding-and-springing",
+  "name": "Boots of Striding and Springing",
+  "nameDe": "Stiefel des Schreitens und Springens",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 500000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon (requires attunement) While you wear these boots, your walking speed becomes 30 feet, unless your walking speed is higher, and your speed isn't reduced if you are encumbered or wearing heavy armor. In addition, you can jump three times the normal distance, though you can't jump farther than your remaining movement would allow.",
+    "de": "Wenn du diese Stiefel trägst, beträgt deine Schrittbewegungsrate neun Meter, es sei denn, sie ist normalerweise höher. Außerdem verringert sich deine Bewegungsrate nicht, wenn du belastet bist oder schwere Rüstung trägst. Außerdem verdreifacht sich deine Sprungdistanz, wobei du jedoch nicht weiter springen kannst, als deine verbleibende Bewegung erlauben würde."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "boots",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

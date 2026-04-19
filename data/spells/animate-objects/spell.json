@@ -1,0 +1,64 @@
+{
+  "id": 216,
+  "slug": "animate-objects",
+  "name": "Animate Objects",
+  "nameDe": "Gegenstände beleben",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "5th level transmutation",
+    "de": "Stufe 5 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "Objects come to life at your command. Choose up to ten nonmagical objects within range that are not being worn or carried. Medium targets count as two objects, Large targets count as four objects, Huge targets count as eight objects. You can't animate any object larger than Huge. Each target animates and becomes a creature under your control until the spell ends or until reduced to 0 hit points. As a bonus action, you can mentally command any creature you made with this spell if the creature is within 500 feet of you (if you control multiple creatures, you can command any or all of them at the same time, issuing the same command to each one). You decide what action the creature will take and where it will move during its next turn, or you can issue a general command, such as to guard a particular chamber or corridor. If you issue no commands, the creature only defends itself against hostile creatures. Once given an order, the creature continues to follow it until its task is complete. ##### Animated Object Statistics | Size | HP | AC | Attack | Str | Dex | |---|---|---|---|---|---| | Tiny | 20 | 18 | +8 to hit, 1d4 + 4 damage | 4 | 18 | | Small | 25 | 16 | +6 to hit, 1d8 + 2 damage | 6 | 14 | | Medium | 40 | 13 | +5 to hit, 2d6 + 1 damage | 10 | 12 | | Large | 50 | 10 | +6 to hit, 2d10 + 2 damage | 14 | 10 | | Huge | 80 | 10 | +8 to hit, 2d12 + 4 damage | 18 | 6 | An animated object is a construct with AC, hit points, attacks, Strength, and Dexterity determined by its size. Its Constitution is 10 and its Intelligence and Wisdom are 3, and its Charisma is 1. Its speed is 30 feet; if the object lacks legs or other appendages it can use for locomotion, it instead has a flying speed of 30 feet and can hover. If the object is securely attached to a surface or a larger object, such as a chain bolted to a wall, its speed is 0. It has blindsight with a radius of 30 feet and is blind beyond that distance. When the animated object drops to 0 hit points, it reverts to its original object form, and any remaining damage carries over to its original object form. If you command an object to attack, it can make a single melee attack against a creature within 5 feet of it. It makes a slam attack with an attack bonus and bludgeoning damage determined by its size. The GM might rule that a specific object inflicts slashing or piercing damage based on its form.",
+    "de": "Objekte erwachen auf deinen Befehl hin zum Leben. Wähle bis zu zehn nichtmagische Gegenstände in Reichweite, die nicht getragen oder gehalten werden. Mittelgroße Ziele zählen als zwei Gegenstände, große Ziele als vier und riesige Ziele als acht. Du kannst keine Gegenstände beleben, die größer als riesig sind. Jedes Ziel wird belebt und zu einer Kreatur unter deiner Kontrolle. Dies hält an, bis der Zauber endet oder die Treffpunkte des Ziels auf 0 sinken. Als Bonusaktion kannst du jede Kreatur, die du mit diesem Zauber belebt hast und die sich im Abstand von bis zu 150 Metern von dir befindet, mental befehligen. Wenn du mehrere Kreaturen kontrollierst, kannst du gleichzeitig eine oder alle befehligen, wobei jeder derselbe Befehl erteilt wird. Du entscheidest über die Aktion der Kreatur und ihre Bewegung in ihrem nächsten Zug. Alternativ kannst du einen allgemeinen Befehl erteilen, etwa das Bewachen einer bestimmten Kammer oder eines Korridors. Erteilst du keine Befehle, verteidigt sich die Kreatur lediglich gegen feindlich gesinnte Kreaturen. Sobald die Kreatur einen Befehl erhalten hat, führt sie ihn aus, bis die Aufgabe abgeschlossen ist Ein animierter Gegenstand ist ein Konstrukt, dessen RK, Trefferpunkte, Angriffe, Stärke und Geschicklichkeit von seiner Größe festgelegt werden. Seine Konstitution beträgt 10, seine Intelligenz und Weisheit 3 und sein Charisma 1. Es verfügt über eine Bewegungsrate von neun Metern. Wenn der Gegenstand keine Beine oder ähnliches zur Fortbewegung besitzt, verfügt er stattdessen über eine Flugbewegungsrate von neun Metern und kann schweben. Ist der Gegenstand an einer Oberfläche oder einem größeren Gegenstand befestigt, etwa mit einer Kette an einer Wand, beträgt seine Bewegungsrate 0. Der belebte Gegenstand besitzt Blindsicht mit einem Radius von neun Metern. Über diese Entfernung hinaus ist er blind. Sinken die Trefferpunkte des animierten Gegenstands auf 0, nimmt er wieder seine unbelebte Form an. Verbleibender Schaden wird auf diese Form übertragen. Wenn du einem Gegenstand befiehlst anzugreifen, führt er einen einzelnen Nahkampfangriff gegen eine Kreatur im Abstand von bis zu 1,5 Metern von ihm aus. Dabei handelt es sich um einen Hiebangriff, dessen Angriffsbonus und Wuchtschaden von der Größe des Gegenstands abhängen. Der SL kann bestimmen, dass ein bestimmter Gegenstand aufgrund seiner Form Hieb- oder Stichschaden verursacht. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, kannst du für jeden Grad über dem 5. zwei zusätzliche Gegenstände beleben."
+  },
+  "higherLevels": {
+    "en": "If you cast this spell using a spell slot of 6th level or higher, you can animate two additional objects for each slot level above 5th.",
+    "de": "Wenn du diesen Zauber mit einem Zauberplatz des 6. Grades oder höher wirkst, kannst du für jeden Zauberplatz-Grad über dem 5. zwei zusätzliche Gegenstände beleben."
+  },
+  "image": "animate-object",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

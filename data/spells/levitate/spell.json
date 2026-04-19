@@ -1,0 +1,62 @@
+{
+  "id": 282,
+  "slug": "levitate",
+  "name": "Levitate",
+  "nameDe": "Schweben",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-level transmutation",
+    "de": "Stufe 2 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "either a small leather loop or a pieee of golden wire bent into a cup shape with a long shank on one end",
+      "de": "entweder eine kleine Lederschlaufe oder ein Stückchen Golddraht, das zu einem Becher gebogen ist und an einem Ende einen langen Schaft hat"
+    },
+    "raw": {
+      "en": "V, S, M (either a small leather loop or a pieee of golden wire bent into a cup shape with a long shank on one end)",
+      "de": "V, G, M (entweder eine kleine Lederschlaufe oder ein Stückchen Golddraht, das zu einem Becher gebogen ist und an einem Ende einen langen Schaft hat)"
+    }
+  },
+  "description": {
+    "en": "One creature or object of your choice that you can see within range rises vertically, up to 20 feet, and remains suspended there for the duration. The spell can levitate a target that weighs up to 500 pounds. An unwilling creature that succeeds on a constitution saving throw is unaffected. The target can move only by pushing or pulling against a fixed object or surface within reach (such as a wall or a ceiling), which allows it to move as if it were climbing. You can change the target's altitude by up to 20 feet in either direction on your turn. If you are the target, you can move up or down as part of your move. Otherwise, you can use your action to move the target, which must remain within the spell's range. When the spell ends, the target floats gently to the ground if it is still aloft.",
+    "de": "Eine Kreatur oder ein Gegenstand deiner Wahl in Reichweite steigt sechs Meter senkrecht empor und verbleibt für die Wirkungsdauer schwebend in der Luft Der Zauber kann Ziele mit einem Maximalgewicht von 250 Kilogramm anheben. Hat eine unwillige Kreatur bei einem Konstitutionsrettungswurf Erfolg, ist sie nicht betroffen. Das Ziel kann sich nur bewegen, indem es sich von festen Gegenständen oder Oberflächen wie Wänden oder Decken in Reichweite abstößt oder sich an diesen entlanghangelt Dabei gilt die Klettergeschwindigkeit. Während deines Zugs kannst du das Ziel um bis zu sechs Meter anheben oder absenken. Wenn du das Ziel bist, kannst du dich im Rahmen deiner Bewegung selbst anheben oder absenken. Anderenfalls kannst du das Ziel mit deiner Aktion bewegen und musst dabei die Reichweite des Zaubers einhalten. Wenn der Zauber endet und das Ziel noch schwebt, sinkt es sanft zu Boden."
+  },
+  "image": "levitate",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

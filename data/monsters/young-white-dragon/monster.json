@@ -1,0 +1,256 @@
+{
+  "id": 326,
+  "slug": "young-white-dragon",
+  "name": "Young White Dragon",
+  "nameDe": "Junger weißer Drache",
+  "source": "SRD",
+  "meta": {
+    "en": "Large dragon, chaotic evil",
+    "de": "Großer Drache, chaotisch böse"
+  },
+  "challenge": "6",
+  "xp": 2300,
+  "ac": {
+    "en": "17 (Natural Armor)",
+    "de": "17 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "133 (14d10 + 56)",
+    "de": "133 (14W8+56)"
+  },
+  "str": 18,
+  "dex": 10,
+  "con": 18,
+  "int": 6,
+  "wis": 11,
+  "cha": 12,
+  "strMod": 4,
+  "dexMod": 0,
+  "conMod": 4,
+  "intMod": -2,
+  "wisMod": 0,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    },
+    "swim": {
+      "en": 40,
+      "de": 12
+    },
+    "fly": {
+      "en": 80,
+      "de": 24
+    },
+    "burrow": {
+      "en": 20,
+      "de": 6
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 30 ft.",
+      "Darkvision 120 ft.",
+      "passive perception 16"
+    ],
+    "de": [
+      "Blindsicht 9 m",
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 16"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Draconic"
+    ],
+    "de": [
+      "Drakonisch",
+      "Gemeinsprache"
+    ]
+  },
+  "savingThrows": [
+    "Ges +3",
+    "Kon +7",
+    "Wei +3",
+    "Cha +4"
+  ],
+  "skills": [
+    "Heimlichkeit +3",
+    "Wahrnehmung +6"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Ice Walk",
+        "text": "The dragon can move across and climb icy surfaces without needing to make an ability check. Additionally, difficult terrain composed of ice or snow doesn't cost it extra moment."
+      }
+    ],
+    "de": [
+      {
+        "name": "Eisschritt",
+        "text": "Der Drache kann sich über Eis bewegen und eisige Oberflächen erklimmen, ohne Attributswürfe ausführen zu müssen. Außerdem kostet ihn schwieriges Gelände, das aus Eis oder Schnee besteht, keine zusätzliche Bewegung."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The dragon makes three attacks: one with its bite and two with its claws."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +7 to hit, reach 10 ft., one target. Hit: 15 (2d10 + 4) piercing damage plus 4 (1d8) cold damage."
+      },
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage."
+      },
+      {
+        "name": "Cold Breath",
+        "text": "The dragon exhales an icy blast in a 30-foot cone. Each creature in that area must make a DC 15 Constitution saving throw, taking 45 (10d8) cold damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Drache führt drei Angriffe aus: einen mit seinem Biss und zwei mit seinen Klauen."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 15 (2W10+4) Stichschaden plus 4 (1W8) Kälteschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 11 (2W6+4) Hiebschaden."
+      },
+      {
+        "name": "Kälteodem (Aufladung 5–6)",
+        "text": "Der Drache atmet in einem Kegel von neun Metern Länge eisige Luft aus. Jede Kreatur im Kegel muss einen SG-15-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 45 (10W8) Kälteschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/403/1000/1000/636252785358767533.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "dragon",
+    "de": "Drache"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "YoungWhiteDragon (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "YoungWhiteDragon (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungWhiteDragon (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

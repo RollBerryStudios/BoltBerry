@@ -1,0 +1,2064 @@
+{
+  "id": 2,
+  "slug": "acolyte",
+  "name": "Acolyte",
+  "nameDe": "Akolyth",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittlerer humanoid, jede"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "10",
+    "de": "10"
+  },
+  "hp": {
+    "en": "9 (2d8)",
+    "de": "9 (2W8)"
+  },
+  "str": 10,
+  "dex": 10,
+  "con": 10,
+  "int": 10,
+  "wis": 14,
+  "cha": 11,
+  "strMod": 0,
+  "dexMod": 0,
+  "conMod": 0,
+  "intMod": 0,
+  "wisMod": 2,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 12"
+    ],
+    "de": [
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any one language (usually Common)"
+    ],
+    "de": [
+      "Eine beliebige Sprache (normalerweise Gemeinsprache)"
+    ]
+  },
+  "skills": [
+    "Heilkunde +4",
+    "Religion +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Spellcasting",
+        "text": "The acolyte is a 1st-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell attacks). The acolyte has following cleric spells prepared:"
+      },
+      {
+        "name": "Cantrips (at will)",
+        "text": "light, sacred flame, thaumaturgy"
+      },
+      {
+        "name": "1st level (3 slots)",
+        "text": "bless, cure wounds, sanctuary"
+      }
+    ],
+    "de": [
+      {
+        "name": "Zaubern",
+        "text": "Der Akolyth ist ein Zauberwirker des 1 Grades. Seine Zauberfertigkeit ist Weisheit (Zauberrettungswurf SG 12, +4 zum Treffen mit Zauberangriffen). Der Akolyth hat folgende Klerikerzauber vorbereitet:"
+      },
+      {
+        "name": "Zaubertricks (nach Belieben)",
+        "text": "Licht, Heilige Flamme, Thaumaturgie"
+      },
+      {
+        "name": "1. Grad (3 Zauberplätze)",
+        "text": "Segen, Wunden heilen, Heiligtum"
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Club",
+        "text": "Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 2 (1d4) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Knüppel",
+        "text": "Nahkampfwaffenangriff: +2 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 2 (1W4) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/656/humanoid.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (jedes Volk)"
+  },
+  "alignment": {
+    "en": "any alignment",
+    "de": "jede Gesinnung"
+  },
+  "token": {
+    "file": "AcolyteDarkDragonborn (1).webp",
+    "variant": "darkDragonborn"
+  },
+  "tokens": [
+    {
+      "file": "AcolyteDarkDragonborn (2).webp",
+      "variant": "darkDragonborn"
+    },
+    {
+      "file": "AcolyteDarkDwarfFemale (1).webp",
+      "variant": "darkDwarfFemale"
+    },
+    {
+      "file": "AcolyteDarkDwarfFemale (2).webp",
+      "variant": "darkDwarfFemale"
+    },
+    {
+      "file": "AcolyteDarkDwarfFemale (3).webp",
+      "variant": "darkDwarfFemale"
+    },
+    {
+      "file": "AcolyteDarkDwarfFemale (4).webp",
+      "variant": "darkDwarfFemale"
+    },
+    {
+      "file": "AcolyteDarkDwarfFemale (5).webp",
+      "variant": "darkDwarfFemale"
+    },
+    {
+      "file": "AcolyteDarkDwarfFemale (6).webp",
+      "variant": "darkDwarfFemale"
+    },
+    {
+      "file": "AcolyteDarkDwarfFemale (7).webp",
+      "variant": "darkDwarfFemale"
+    },
+    {
+      "file": "AcolyteDarkDwarfMale (1).webp",
+      "variant": "darkDwarfMale"
+    },
+    {
+      "file": "AcolyteDarkDwarfMale (2).webp",
+      "variant": "darkDwarfMale"
+    },
+    {
+      "file": "AcolyteDarkDwarfMale (3).webp",
+      "variant": "darkDwarfMale"
+    },
+    {
+      "file": "AcolyteDarkDwarfMale (4).webp",
+      "variant": "darkDwarfMale"
+    },
+    {
+      "file": "AcolyteDarkDwarfMale (5).webp",
+      "variant": "darkDwarfMale"
+    },
+    {
+      "file": "AcolyteDarkElfFemale (1).webp",
+      "variant": "darkElfFemale"
+    },
+    {
+      "file": "AcolyteDarkElfFemale (2).webp",
+      "variant": "darkElfFemale"
+    },
+    {
+      "file": "AcolyteDarkElfFemale (3).webp",
+      "variant": "darkElfFemale"
+    },
+    {
+      "file": "AcolyteDarkElfFemale (4).webp",
+      "variant": "darkElfFemale"
+    },
+    {
+      "file": "AcolyteDarkElfFemale (5).webp",
+      "variant": "darkElfFemale"
+    },
+    {
+      "file": "AcolyteDarkElfMale (1).webp",
+      "variant": "darkElfMale"
+    },
+    {
+      "file": "AcolyteDarkElfMale (2).webp",
+      "variant": "darkElfMale"
+    },
+    {
+      "file": "AcolyteDarkElfMale (3).webp",
+      "variant": "darkElfMale"
+    },
+    {
+      "file": "AcolyteDarkElfMale (4).webp",
+      "variant": "darkElfMale"
+    },
+    {
+      "file": "AcolyteDarkElfMale (5).webp",
+      "variant": "darkElfMale"
+    },
+    {
+      "file": "AcolyteDarkGnomeFemale (1).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "AcolyteDarkGnomeFemale (2).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "AcolyteDarkGnomeFemale (3).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "AcolyteDarkGnomeFemale (4).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "AcolyteDarkGnomeFemale (5).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "AcolyteDarkGnomeMale (1).webp",
+      "variant": "darkGnomeMale"
+    },
+    {
+      "file": "AcolyteDarkGnomeMale (2).webp",
+      "variant": "darkGnomeMale"
+    },
+    {
+      "file": "AcolyteDarkGnomeMale (3).webp",
+      "variant": "darkGnomeMale"
+    },
+    {
+      "file": "AcolyteDarkGnomeMale (4).webp",
+      "variant": "darkGnomeMale"
+    },
+    {
+      "file": "AcolyteDarkGnomeMale (5).webp",
+      "variant": "darkGnomeMale"
+    },
+    {
+      "file": "AcolyteDarkHalfElfFemale (1).webp",
+      "variant": "darkHalfElfFemale"
+    },
+    {
+      "file": "AcolyteDarkHalfElfFemale (2).webp",
+      "variant": "darkHalfElfFemale"
+    },
+    {
+      "file": "AcolyteDarkHalfElfFemale (3).webp",
+      "variant": "darkHalfElfFemale"
+    },
+    {
+      "file": "AcolyteDarkHalfElfFemale (4).webp",
+      "variant": "darkHalfElfFemale"
+    },
+    {
+      "file": "AcolyteDarkHalfElfFemale (5).webp",
+      "variant": "darkHalfElfFemale"
+    },
+    {
+      "file": "AcolyteDarkHalfElfFemale (6).webp",
+      "variant": "darkHalfElfFemale"
+    },
+    {
+      "file": "AcolyteDarkHalfElfMale (1).webp",
+      "variant": "darkHalfElfMale"
+    },
+    {
+      "file": "AcolyteDarkHalfElfMale (2).webp",
+      "variant": "darkHalfElfMale"
+    },
+    {
+      "file": "AcolyteDarkHalfElfMale (3).webp",
+      "variant": "darkHalfElfMale"
+    },
+    {
+      "file": "AcolyteDarkHalfElfMale (4).webp",
+      "variant": "darkHalfElfMale"
+    },
+    {
+      "file": "AcolyteDarkHalflingFemale (1).webp",
+      "variant": "darkHalflingFemale"
+    },
+    {
+      "file": "AcolyteDarkHalflingFemale (2).webp",
+      "variant": "darkHalflingFemale"
+    },
+    {
+      "file": "AcolyteDarkHalflingFemale (3).webp",
+      "variant": "darkHalflingFemale"
+    },
+    {
+      "file": "AcolyteDarkHalflingMale (1).webp",
+      "variant": "darkHalflingMale"
+    },
+    {
+      "file": "AcolyteDarkHalflingMale (2).webp",
+      "variant": "darkHalflingMale"
+    },
+    {
+      "file": "AcolyteDarkHalflingMale (3).webp",
+      "variant": "darkHalflingMale"
+    },
+    {
+      "file": "AcolyteDarkHalflingMale (4).webp",
+      "variant": "darkHalflingMale"
+    },
+    {
+      "file": "AcolyteDarkHalflingMale (5).webp",
+      "variant": "darkHalflingMale"
+    },
+    {
+      "file": "AcolyteDarkHalflingMale (6).webp",
+      "variant": "darkHalflingMale"
+    },
+    {
+      "file": "AcolyteDarkHalflingMale (7).webp",
+      "variant": "darkHalflingMale"
+    },
+    {
+      "file": "AcolyteDarkHalfOrcFemale (1).webp",
+      "variant": "darkHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteDarkHalfOrcFemale (2).webp",
+      "variant": "darkHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteDarkHalfOrcFemale (3).webp",
+      "variant": "darkHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteDarkHalfOrcFemale (4).webp",
+      "variant": "darkHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteDarkHalfOrcMale (1).webp",
+      "variant": "darkHalfOrcMale"
+    },
+    {
+      "file": "AcolyteDarkHalfOrcMale (2).webp",
+      "variant": "darkHalfOrcMale"
+    },
+    {
+      "file": "AcolyteDarkHalfOrcMale (3).webp",
+      "variant": "darkHalfOrcMale"
+    },
+    {
+      "file": "AcolyteDarkHalfOrcMale (4).webp",
+      "variant": "darkHalfOrcMale"
+    },
+    {
+      "file": "AcolyteDarkHumanFemale (1).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "AcolyteDarkHumanFemale (10).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "AcolyteDarkHumanFemale (11).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "AcolyteDarkHumanFemale (12).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "AcolyteDarkHumanFemale (13).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "AcolyteDarkHumanFemale (14).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "AcolyteDarkHumanFemale (15).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "AcolyteDarkHumanFemale (2).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "AcolyteDarkHumanFemale (3).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "AcolyteDarkHumanFemale (4).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "AcolyteDarkHumanFemale (5).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "AcolyteDarkHumanFemale (6).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "AcolyteDarkHumanFemale (7).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "AcolyteDarkHumanFemale (8).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "AcolyteDarkHumanFemale (9).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "AcolyteDarkHumanMale (1).webp",
+      "variant": "darkHumanMale"
+    },
+    {
+      "file": "AcolyteDarkHumanMale (10).webp",
+      "variant": "darkHumanMale"
+    },
+    {
+      "file": "AcolyteDarkHumanMale (11).webp",
+      "variant": "darkHumanMale"
+    },
+    {
+      "file": "AcolyteDarkHumanMale (2).webp",
+      "variant": "darkHumanMale"
+    },
+    {
+      "file": "AcolyteDarkHumanMale (3).webp",
+      "variant": "darkHumanMale"
+    },
+    {
+      "file": "AcolyteDarkHumanMale (4).webp",
+      "variant": "darkHumanMale"
+    },
+    {
+      "file": "AcolyteDarkHumanMale (5).webp",
+      "variant": "darkHumanMale"
+    },
+    {
+      "file": "AcolyteDarkHumanMale (6).webp",
+      "variant": "darkHumanMale"
+    },
+    {
+      "file": "AcolyteDarkHumanMale (7).webp",
+      "variant": "darkHumanMale"
+    },
+    {
+      "file": "AcolyteDarkHumanMale (8).webp",
+      "variant": "darkHumanMale"
+    },
+    {
+      "file": "AcolyteDarkHumanMale (9).webp",
+      "variant": "darkHumanMale"
+    },
+    {
+      "file": "AcolyteDarkTieflingFemale (1).webp",
+      "variant": "darkTieflingFemale"
+    },
+    {
+      "file": "AcolyteDarkTieflingFemale (2).webp",
+      "variant": "darkTieflingFemale"
+    },
+    {
+      "file": "AcolyteDarkTieflingFemale (3).webp",
+      "variant": "darkTieflingFemale"
+    },
+    {
+      "file": "AcolyteDarkTieflingFemale (4).webp",
+      "variant": "darkTieflingFemale"
+    },
+    {
+      "file": "AcolyteDarkTieflingFemale (5).webp",
+      "variant": "darkTieflingFemale"
+    },
+    {
+      "file": "AcolyteDarkTieflingMale (1).webp",
+      "variant": "darkTieflingMale"
+    },
+    {
+      "file": "AcolyteDarkTieflingMale (2).webp",
+      "variant": "darkTieflingMale"
+    },
+    {
+      "file": "AcolyteDarkTieflingMale (3).webp",
+      "variant": "darkTieflingMale"
+    },
+    {
+      "file": "AcolyteDarkTieflingMale (4).webp",
+      "variant": "darkTieflingMale"
+    },
+    {
+      "file": "AcolyteFireDragonborn (1).webp",
+      "variant": "fireDragonborn"
+    },
+    {
+      "file": "AcolyteFireDragonborn (2).webp",
+      "variant": "fireDragonborn"
+    },
+    {
+      "file": "AcolyteFireDwarfFemale (1).webp",
+      "variant": "fireDwarfFemale"
+    },
+    {
+      "file": "AcolyteFireDwarfFemale (2).webp",
+      "variant": "fireDwarfFemale"
+    },
+    {
+      "file": "AcolyteFireDwarfFemale (3).webp",
+      "variant": "fireDwarfFemale"
+    },
+    {
+      "file": "AcolyteFireDwarfFemale (4).webp",
+      "variant": "fireDwarfFemale"
+    },
+    {
+      "file": "AcolyteFireDwarfMale (1).webp",
+      "variant": "fireDwarfMale"
+    },
+    {
+      "file": "AcolyteFireDwarfMale (2).webp",
+      "variant": "fireDwarfMale"
+    },
+    {
+      "file": "AcolyteFireDwarfMale (3).webp",
+      "variant": "fireDwarfMale"
+    },
+    {
+      "file": "AcolyteFireDwarfMale (4).webp",
+      "variant": "fireDwarfMale"
+    },
+    {
+      "file": "AcolyteFireDwarfMale (5).webp",
+      "variant": "fireDwarfMale"
+    },
+    {
+      "file": "AcolyteFireDwarfMale (6).webp",
+      "variant": "fireDwarfMale"
+    },
+    {
+      "file": "AcolyteFireElfFemale (1).webp",
+      "variant": "fireElfFemale"
+    },
+    {
+      "file": "AcolyteFireElfFemale (2).webp",
+      "variant": "fireElfFemale"
+    },
+    {
+      "file": "AcolyteFireElfFemale (3).webp",
+      "variant": "fireElfFemale"
+    },
+    {
+      "file": "AcolyteFireElfFemale (4).webp",
+      "variant": "fireElfFemale"
+    },
+    {
+      "file": "AcolyteFireElfFemale (5).webp",
+      "variant": "fireElfFemale"
+    },
+    {
+      "file": "AcolyteFireElfMale (1).webp",
+      "variant": "fireElfMale"
+    },
+    {
+      "file": "AcolyteFireElfMale (2).webp",
+      "variant": "fireElfMale"
+    },
+    {
+      "file": "AcolyteFireElfMale (3).webp",
+      "variant": "fireElfMale"
+    },
+    {
+      "file": "AcolyteFireElfMale (4).webp",
+      "variant": "fireElfMale"
+    },
+    {
+      "file": "AcolyteFireElfMale (5).webp",
+      "variant": "fireElfMale"
+    },
+    {
+      "file": "AcolyteFireElfMale (6).webp",
+      "variant": "fireElfMale"
+    },
+    {
+      "file": "AcolyteFireGnomeFemale (1).webp",
+      "variant": "fireGnomeFemale"
+    },
+    {
+      "file": "AcolyteFireGnomeFemale (2).webp",
+      "variant": "fireGnomeFemale"
+    },
+    {
+      "file": "AcolyteFireGnomeFemale (3).webp",
+      "variant": "fireGnomeFemale"
+    },
+    {
+      "file": "AcolyteFireGnomeFemale (4).webp",
+      "variant": "fireGnomeFemale"
+    },
+    {
+      "file": "AcolyteFireGnomeMale (1).webp",
+      "variant": "fireGnomeMale"
+    },
+    {
+      "file": "AcolyteFireGnomeMale (2).webp",
+      "variant": "fireGnomeMale"
+    },
+    {
+      "file": "AcolyteFireGnomeMale (3).webp",
+      "variant": "fireGnomeMale"
+    },
+    {
+      "file": "AcolyteFireGnomeMale (4).webp",
+      "variant": "fireGnomeMale"
+    },
+    {
+      "file": "AcolyteFireGnomeMale (5).webp",
+      "variant": "fireGnomeMale"
+    },
+    {
+      "file": "AcolyteFireHalfElfFemale (1).webp",
+      "variant": "fireHalfElfFemale"
+    },
+    {
+      "file": "AcolyteFireHalfElfFemale (2).webp",
+      "variant": "fireHalfElfFemale"
+    },
+    {
+      "file": "AcolyteFireHalfElfFemale (3).webp",
+      "variant": "fireHalfElfFemale"
+    },
+    {
+      "file": "AcolyteFireHalfElfFemale (4).webp",
+      "variant": "fireHalfElfFemale"
+    },
+    {
+      "file": "AcolyteFireHalfElfFemale (5).webp",
+      "variant": "fireHalfElfFemale"
+    },
+    {
+      "file": "AcolyteFireHalfElfFemale (6).webp",
+      "variant": "fireHalfElfFemale"
+    },
+    {
+      "file": "AcolyteFireHalfElfMale (1).webp",
+      "variant": "fireHalfElfMale"
+    },
+    {
+      "file": "AcolyteFireHalfElfMale (2).webp",
+      "variant": "fireHalfElfMale"
+    },
+    {
+      "file": "AcolyteFireHalflingFemale (1).webp",
+      "variant": "fireHalflingFemale"
+    },
+    {
+      "file": "AcolyteFireHalflingFemale (2).webp",
+      "variant": "fireHalflingFemale"
+    },
+    {
+      "file": "AcolyteFireHalflingFemale (3).webp",
+      "variant": "fireHalflingFemale"
+    },
+    {
+      "file": "AcolyteFireHalflingFemale (4).webp",
+      "variant": "fireHalflingFemale"
+    },
+    {
+      "file": "AcolyteFireHalflingMale (1).webp",
+      "variant": "fireHalflingMale"
+    },
+    {
+      "file": "AcolyteFireHalflingMale (2).webp",
+      "variant": "fireHalflingMale"
+    },
+    {
+      "file": "AcolyteFireHalflingMale (3).webp",
+      "variant": "fireHalflingMale"
+    },
+    {
+      "file": "AcolyteFireHalfOrcFemale (1).webp",
+      "variant": "fireHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteFireHalfOrcFemale (2).webp",
+      "variant": "fireHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteFireHalfOrcFemale (3).webp",
+      "variant": "fireHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteFireHalfOrcMale (1).webp",
+      "variant": "fireHalfOrcMale"
+    },
+    {
+      "file": "AcolyteFireHalfOrcMale (2).webp",
+      "variant": "fireHalfOrcMale"
+    },
+    {
+      "file": "AcolyteFireHalfOrcMale (3).webp",
+      "variant": "fireHalfOrcMale"
+    },
+    {
+      "file": "AcolyteFireHalfOrcMale (4).webp",
+      "variant": "fireHalfOrcMale"
+    },
+    {
+      "file": "AcolyteFireHumanFemale (1).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "AcolyteFireHumanFemale (10).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "AcolyteFireHumanFemale (11).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "AcolyteFireHumanFemale (12).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "AcolyteFireHumanFemale (13).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "AcolyteFireHumanFemale (14).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "AcolyteFireHumanFemale (15).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "AcolyteFireHumanFemale (16).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "AcolyteFireHumanFemale (17).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "AcolyteFireHumanFemale (2).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "AcolyteFireHumanFemale (3).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "AcolyteFireHumanFemale (4).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "AcolyteFireHumanFemale (5).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "AcolyteFireHumanFemale (6).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "AcolyteFireHumanFemale (7).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "AcolyteFireHumanFemale (8).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "AcolyteFireHumanFemale (9).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "AcolyteFireHumanMale (1).webp",
+      "variant": "fireHumanMale"
+    },
+    {
+      "file": "AcolyteFireHumanMale (10).webp",
+      "variant": "fireHumanMale"
+    },
+    {
+      "file": "AcolyteFireHumanMale (11).webp",
+      "variant": "fireHumanMale"
+    },
+    {
+      "file": "AcolyteFireHumanMale (12).webp",
+      "variant": "fireHumanMale"
+    },
+    {
+      "file": "AcolyteFireHumanMale (2).webp",
+      "variant": "fireHumanMale"
+    },
+    {
+      "file": "AcolyteFireHumanMale (3).webp",
+      "variant": "fireHumanMale"
+    },
+    {
+      "file": "AcolyteFireHumanMale (4).webp",
+      "variant": "fireHumanMale"
+    },
+    {
+      "file": "AcolyteFireHumanMale (5).webp",
+      "variant": "fireHumanMale"
+    },
+    {
+      "file": "AcolyteFireHumanMale (6).webp",
+      "variant": "fireHumanMale"
+    },
+    {
+      "file": "AcolyteFireHumanMale (7).webp",
+      "variant": "fireHumanMale"
+    },
+    {
+      "file": "AcolyteFireHumanMale (8).webp",
+      "variant": "fireHumanMale"
+    },
+    {
+      "file": "AcolyteFireHumanMale (9).webp",
+      "variant": "fireHumanMale"
+    },
+    {
+      "file": "AcolyteFireTieflingFemale (1).webp",
+      "variant": "fireTieflingFemale"
+    },
+    {
+      "file": "AcolyteFireTieflingFemale (2).webp",
+      "variant": "fireTieflingFemale"
+    },
+    {
+      "file": "AcolyteFireTieflingFemale (3).webp",
+      "variant": "fireTieflingFemale"
+    },
+    {
+      "file": "AcolyteFireTieflingFemale (4).webp",
+      "variant": "fireTieflingFemale"
+    },
+    {
+      "file": "AcolyteFireTieflingFemale (5).webp",
+      "variant": "fireTieflingFemale"
+    },
+    {
+      "file": "AcolyteFireTieflingMale (1).webp",
+      "variant": "fireTieflingMale"
+    },
+    {
+      "file": "AcolyteFireTieflingMale (2).webp",
+      "variant": "fireTieflingMale"
+    },
+    {
+      "file": "AcolyteFireTieflingMale (3).webp",
+      "variant": "fireTieflingMale"
+    },
+    {
+      "file": "AcolyteFireTieflingMale (4).webp",
+      "variant": "fireTieflingMale"
+    },
+    {
+      "file": "AcolyteFireTieflingMale (5).webp",
+      "variant": "fireTieflingMale"
+    },
+    {
+      "file": "AcolyteFireTieflingMale (6).webp",
+      "variant": "fireTieflingMale"
+    },
+    {
+      "file": "AcolyteLightDragonborn (1).webp",
+      "variant": "lightDragonborn"
+    },
+    {
+      "file": "AcolyteLightDragonborn (2).webp",
+      "variant": "lightDragonborn"
+    },
+    {
+      "file": "AcolyteLightDragonborn (3).webp",
+      "variant": "lightDragonborn"
+    },
+    {
+      "file": "AcolyteLightDwarfFemale (1).webp",
+      "variant": "lightDwarfFemale"
+    },
+    {
+      "file": "AcolyteLightDwarfFemale (2).webp",
+      "variant": "lightDwarfFemale"
+    },
+    {
+      "file": "AcolyteLightDwarfFemale (3).webp",
+      "variant": "lightDwarfFemale"
+    },
+    {
+      "file": "AcolyteLightDwarfFemale (4).webp",
+      "variant": "lightDwarfFemale"
+    },
+    {
+      "file": "AcolyteLightDwarfFemale (5).webp",
+      "variant": "lightDwarfFemale"
+    },
+    {
+      "file": "AcolyteLightDwarfMale (1).webp",
+      "variant": "lightDwarfMale"
+    },
+    {
+      "file": "AcolyteLightDwarfMale (2).webp",
+      "variant": "lightDwarfMale"
+    },
+    {
+      "file": "AcolyteLightDwarfMale (3).webp",
+      "variant": "lightDwarfMale"
+    },
+    {
+      "file": "AcolyteLightElfFemale (1).webp",
+      "variant": "lightElfFemale"
+    },
+    {
+      "file": "AcolyteLightElfFemale (2).webp",
+      "variant": "lightElfFemale"
+    },
+    {
+      "file": "AcolyteLightElfFemale (3).webp",
+      "variant": "lightElfFemale"
+    },
+    {
+      "file": "AcolyteLightElfFemale (4).webp",
+      "variant": "lightElfFemale"
+    },
+    {
+      "file": "AcolyteLightElfMale (1).webp",
+      "variant": "lightElfMale"
+    },
+    {
+      "file": "AcolyteLightElfMale (2).webp",
+      "variant": "lightElfMale"
+    },
+    {
+      "file": "AcolyteLightElfMale (3).webp",
+      "variant": "lightElfMale"
+    },
+    {
+      "file": "AcolyteLightGnomeFemale (1).webp",
+      "variant": "lightGnomeFemale"
+    },
+    {
+      "file": "AcolyteLightGnomeFemale (2).webp",
+      "variant": "lightGnomeFemale"
+    },
+    {
+      "file": "AcolyteLightGnomeFemale (3).webp",
+      "variant": "lightGnomeFemale"
+    },
+    {
+      "file": "AcolyteLightGnomeFemale (4).webp",
+      "variant": "lightGnomeFemale"
+    },
+    {
+      "file": "AcolyteLightGnomeMale (1).webp",
+      "variant": "lightGnomeMale"
+    },
+    {
+      "file": "AcolyteLightGnomeMale (2).webp",
+      "variant": "lightGnomeMale"
+    },
+    {
+      "file": "AcolyteLightGnomeMale (3).webp",
+      "variant": "lightGnomeMale"
+    },
+    {
+      "file": "AcolyteLightGnomeMale (4).webp",
+      "variant": "lightGnomeMale"
+    },
+    {
+      "file": "AcolyteLightHalfElfFemale (1).webp",
+      "variant": "lightHalfElfFemale"
+    },
+    {
+      "file": "AcolyteLightHalfElfFemale (2).webp",
+      "variant": "lightHalfElfFemale"
+    },
+    {
+      "file": "AcolyteLightHalfElfFemale (3).webp",
+      "variant": "lightHalfElfFemale"
+    },
+    {
+      "file": "AcolyteLightHalfElfFemale (4).webp",
+      "variant": "lightHalfElfFemale"
+    },
+    {
+      "file": "AcolyteLightHalfElfFemale (5).webp",
+      "variant": "lightHalfElfFemale"
+    },
+    {
+      "file": "AcolyteLightHalfElfFemale (6).webp",
+      "variant": "lightHalfElfFemale"
+    },
+    {
+      "file": "AcolyteLightHalfElfMale (1).webp",
+      "variant": "lightHalfElfMale"
+    },
+    {
+      "file": "AcolyteLightHalfElfMale (2).webp",
+      "variant": "lightHalfElfMale"
+    },
+    {
+      "file": "AcolyteLightHalfElfMale (3).webp",
+      "variant": "lightHalfElfMale"
+    },
+    {
+      "file": "AcolyteLightHalfElfMale (4).webp",
+      "variant": "lightHalfElfMale"
+    },
+    {
+      "file": "AcolyteLightHalfElfMale (5).webp",
+      "variant": "lightHalfElfMale"
+    },
+    {
+      "file": "AcolyteLightHalflingFemale (1).webp",
+      "variant": "lightHalflingFemale"
+    },
+    {
+      "file": "AcolyteLightHalflingFemale (2).webp",
+      "variant": "lightHalflingFemale"
+    },
+    {
+      "file": "AcolyteLightHalflingFemale (3).webp",
+      "variant": "lightHalflingFemale"
+    },
+    {
+      "file": "AcolyteLightHalflingFemale (4).webp",
+      "variant": "lightHalflingFemale"
+    },
+    {
+      "file": "AcolyteLightHalflingFemale (5).webp",
+      "variant": "lightHalflingFemale"
+    },
+    {
+      "file": "AcolyteLightHalflingFemale (6).webp",
+      "variant": "lightHalflingFemale"
+    },
+    {
+      "file": "AcolyteLightHalflingMale (1).webp",
+      "variant": "lightHalflingMale"
+    },
+    {
+      "file": "AcolyteLightHalflingMale (2).webp",
+      "variant": "lightHalflingMale"
+    },
+    {
+      "file": "AcolyteLightHalflingMale (3).webp",
+      "variant": "lightHalflingMale"
+    },
+    {
+      "file": "AcolyteLightHalflingMale (4).webp",
+      "variant": "lightHalflingMale"
+    },
+    {
+      "file": "AcolyteLightHalfOrcFemale (1).webp",
+      "variant": "lightHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteLightHalfOrcFemale (2).webp",
+      "variant": "lightHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteLightHalfOrcFemale (3).webp",
+      "variant": "lightHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteLightHalfOrcFemale (4).webp",
+      "variant": "lightHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteLightHalfOrcFemale (5).webp",
+      "variant": "lightHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteLightHalfOrcMale (1).webp",
+      "variant": "lightHalfOrcMale"
+    },
+    {
+      "file": "AcolyteLightHalfOrcMale (2).webp",
+      "variant": "lightHalfOrcMale"
+    },
+    {
+      "file": "AcolyteLightHalfOrcMale (3).webp",
+      "variant": "lightHalfOrcMale"
+    },
+    {
+      "file": "AcolyteLightHalfOrcMale (4).webp",
+      "variant": "lightHalfOrcMale"
+    },
+    {
+      "file": "AcolyteLightHalfOrcMale (5).webp",
+      "variant": "lightHalfOrcMale"
+    },
+    {
+      "file": "AcolyteLightHalfOrcMale (6).webp",
+      "variant": "lightHalfOrcMale"
+    },
+    {
+      "file": "AcolyteLightHumanFemale (1).webp",
+      "variant": "lightHumanFemale"
+    },
+    {
+      "file": "AcolyteLightHumanFemale (10).webp",
+      "variant": "lightHumanFemale"
+    },
+    {
+      "file": "AcolyteLightHumanFemale (11).webp",
+      "variant": "lightHumanFemale"
+    },
+    {
+      "file": "AcolyteLightHumanFemale (2).webp",
+      "variant": "lightHumanFemale"
+    },
+    {
+      "file": "AcolyteLightHumanFemale (3).webp",
+      "variant": "lightHumanFemale"
+    },
+    {
+      "file": "AcolyteLightHumanFemale (4).webp",
+      "variant": "lightHumanFemale"
+    },
+    {
+      "file": "AcolyteLightHumanFemale (5).webp",
+      "variant": "lightHumanFemale"
+    },
+    {
+      "file": "AcolyteLightHumanFemale (6).webp",
+      "variant": "lightHumanFemale"
+    },
+    {
+      "file": "AcolyteLightHumanFemale (7).webp",
+      "variant": "lightHumanFemale"
+    },
+    {
+      "file": "AcolyteLightHumanFemale (8).webp",
+      "variant": "lightHumanFemale"
+    },
+    {
+      "file": "AcolyteLightHumanFemale (9).webp",
+      "variant": "lightHumanFemale"
+    },
+    {
+      "file": "AcolyteLightHumanMale (1).webp",
+      "variant": "lightHumanMale"
+    },
+    {
+      "file": "AcolyteLightHumanMale (10).webp",
+      "variant": "lightHumanMale"
+    },
+    {
+      "file": "AcolyteLightHumanMale (2).webp",
+      "variant": "lightHumanMale"
+    },
+    {
+      "file": "AcolyteLightHumanMale (3).webp",
+      "variant": "lightHumanMale"
+    },
+    {
+      "file": "AcolyteLightHumanMale (4).webp",
+      "variant": "lightHumanMale"
+    },
+    {
+      "file": "AcolyteLightHumanMale (5).webp",
+      "variant": "lightHumanMale"
+    },
+    {
+      "file": "AcolyteLightHumanMale (6).webp",
+      "variant": "lightHumanMale"
+    },
+    {
+      "file": "AcolyteLightHumanMale (7).webp",
+      "variant": "lightHumanMale"
+    },
+    {
+      "file": "AcolyteLightHumanMale (8).webp",
+      "variant": "lightHumanMale"
+    },
+    {
+      "file": "AcolyteLightHumanMale (9).webp",
+      "variant": "lightHumanMale"
+    },
+    {
+      "file": "AcolyteLightTieflingFemale (1).webp",
+      "variant": "lightTieflingFemale"
+    },
+    {
+      "file": "AcolyteLightTieflingFemale (2).webp",
+      "variant": "lightTieflingFemale"
+    },
+    {
+      "file": "AcolyteLightTieflingFemale (3).webp",
+      "variant": "lightTieflingFemale"
+    },
+    {
+      "file": "AcolyteLightTieflingFemale (4).webp",
+      "variant": "lightTieflingFemale"
+    },
+    {
+      "file": "AcolyteLightTieflingMale (1).webp",
+      "variant": "lightTieflingMale"
+    },
+    {
+      "file": "AcolyteLightTieflingMale (2).webp",
+      "variant": "lightTieflingMale"
+    },
+    {
+      "file": "AcolyteLightTieflingMale (3).webp",
+      "variant": "lightTieflingMale"
+    },
+    {
+      "file": "AcolyteLightTieflingMale (4).webp",
+      "variant": "lightTieflingMale"
+    },
+    {
+      "file": "AcolyteLightTieflingMale (5).webp",
+      "variant": "lightTieflingMale"
+    },
+    {
+      "file": "AcolyteLightTieflingMale (6).webp",
+      "variant": "lightTieflingMale"
+    },
+    {
+      "file": "AcolyteNatureDragonborn (1).webp",
+      "variant": "natureDragonborn"
+    },
+    {
+      "file": "AcolyteNatureDragonborn (2).webp",
+      "variant": "natureDragonborn"
+    },
+    {
+      "file": "AcolyteNatureDragonborn (3).webp",
+      "variant": "natureDragonborn"
+    },
+    {
+      "file": "AcolyteNatureDwarfFemale (1).webp",
+      "variant": "natureDwarfFemale"
+    },
+    {
+      "file": "AcolyteNatureDwarfFemale (2).webp",
+      "variant": "natureDwarfFemale"
+    },
+    {
+      "file": "AcolyteNatureDwarfFemale (3).webp",
+      "variant": "natureDwarfFemale"
+    },
+    {
+      "file": "AcolyteNatureDwarfFemale (4).webp",
+      "variant": "natureDwarfFemale"
+    },
+    {
+      "file": "AcolyteNatureDwarfMale (1).webp",
+      "variant": "natureDwarfMale"
+    },
+    {
+      "file": "AcolyteNatureDwarfMale (2).webp",
+      "variant": "natureDwarfMale"
+    },
+    {
+      "file": "AcolyteNatureDwarfMale (3).webp",
+      "variant": "natureDwarfMale"
+    },
+    {
+      "file": "AcolyteNatureDwarfMale (4).webp",
+      "variant": "natureDwarfMale"
+    },
+    {
+      "file": "AcolyteNatureDwarfMale (5).webp",
+      "variant": "natureDwarfMale"
+    },
+    {
+      "file": "AcolyteNatureDwarfMale (6).webp",
+      "variant": "natureDwarfMale"
+    },
+    {
+      "file": "AcolyteNatureElfFemale (1).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "AcolyteNatureElfFemale (2).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "AcolyteNatureElfFemale (3).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "AcolyteNatureElfFemale (4).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "AcolyteNatureElfFemale (5).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "AcolyteNatureElfFemale (6).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "AcolyteNatureElfFemale (7).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "AcolyteNatureElfFemale (8).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "AcolyteNatureElfFemale (9).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "AcolyteNatureElfMale (1).webp",
+      "variant": "natureElfMale"
+    },
+    {
+      "file": "AcolyteNatureElfMale (2).webp",
+      "variant": "natureElfMale"
+    },
+    {
+      "file": "AcolyteNatureElfMale (3).webp",
+      "variant": "natureElfMale"
+    },
+    {
+      "file": "AcolyteNatureElfMale (4).webp",
+      "variant": "natureElfMale"
+    },
+    {
+      "file": "AcolyteNatureElfMale (5).webp",
+      "variant": "natureElfMale"
+    },
+    {
+      "file": "AcolyteNatureElfMale (6).webp",
+      "variant": "natureElfMale"
+    },
+    {
+      "file": "AcolyteNatureGnomeFemale (1).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "AcolyteNatureGnomeFemale (2).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "AcolyteNatureGnomeFemale (3).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "AcolyteNatureGnomeFemale (4).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "AcolyteNatureGnomeFemale (5).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "AcolyteNatureGnomeFemale (6).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "AcolyteNatureGnomeFemale (7).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "AcolyteNatureGnomeFemale (8).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "AcolyteNatureGnomeMale (1).webp",
+      "variant": "natureGnomeMale"
+    },
+    {
+      "file": "AcolyteNatureGnomeMale (2).webp",
+      "variant": "natureGnomeMale"
+    },
+    {
+      "file": "AcolyteNatureHalfElfFemale (1).webp",
+      "variant": "natureHalfElfFemale"
+    },
+    {
+      "file": "AcolyteNatureHalfElfFemale (10).webp",
+      "variant": "natureHalfElfFemale"
+    },
+    {
+      "file": "AcolyteNatureHalfElfFemale (2).webp",
+      "variant": "natureHalfElfFemale"
+    },
+    {
+      "file": "AcolyteNatureHalfElfFemale (3).webp",
+      "variant": "natureHalfElfFemale"
+    },
+    {
+      "file": "AcolyteNatureHalfElfFemale (4).webp",
+      "variant": "natureHalfElfFemale"
+    },
+    {
+      "file": "AcolyteNatureHalfElfFemale (5).webp",
+      "variant": "natureHalfElfFemale"
+    },
+    {
+      "file": "AcolyteNatureHalfElfFemale (6).webp",
+      "variant": "natureHalfElfFemale"
+    },
+    {
+      "file": "AcolyteNatureHalfElfFemale (7).webp",
+      "variant": "natureHalfElfFemale"
+    },
+    {
+      "file": "AcolyteNatureHalfElfFemale (8).webp",
+      "variant": "natureHalfElfFemale"
+    },
+    {
+      "file": "AcolyteNatureHalfElfFemale (9).webp",
+      "variant": "natureHalfElfFemale"
+    },
+    {
+      "file": "AcolyteNatureHalfElfMale (1).webp",
+      "variant": "natureHalfElfMale"
+    },
+    {
+      "file": "AcolyteNatureHalfElfMale (2).webp",
+      "variant": "natureHalfElfMale"
+    },
+    {
+      "file": "AcolyteNatureHalfElfMale (3).webp",
+      "variant": "natureHalfElfMale"
+    },
+    {
+      "file": "AcolyteNatureHalfElfMale (4).webp",
+      "variant": "natureHalfElfMale"
+    },
+    {
+      "file": "AcolyteNatureHalfElfMale (5).webp",
+      "variant": "natureHalfElfMale"
+    },
+    {
+      "file": "AcolyteNatureHalflingFemale (1).webp",
+      "variant": "natureHalflingFemale"
+    },
+    {
+      "file": "AcolyteNatureHalflingFemale (2).webp",
+      "variant": "natureHalflingFemale"
+    },
+    {
+      "file": "AcolyteNatureHalflingFemale (3).webp",
+      "variant": "natureHalflingFemale"
+    },
+    {
+      "file": "AcolyteNatureHalflingFemale (4).webp",
+      "variant": "natureHalflingFemale"
+    },
+    {
+      "file": "AcolyteNatureHalflingFemale (5).webp",
+      "variant": "natureHalflingFemale"
+    },
+    {
+      "file": "AcolyteNatureHalflingFemale (6).webp",
+      "variant": "natureHalflingFemale"
+    },
+    {
+      "file": "AcolyteNatureHalflingFemale (7).webp",
+      "variant": "natureHalflingFemale"
+    },
+    {
+      "file": "AcolyteNatureHalflingMale (1).webp",
+      "variant": "natureHalflingMale"
+    },
+    {
+      "file": "AcolyteNatureHalflingMale (2).webp",
+      "variant": "natureHalflingMale"
+    },
+    {
+      "file": "AcolyteNatureHalflingMale (3).webp",
+      "variant": "natureHalflingMale"
+    },
+    {
+      "file": "AcolyteNatureHalflingMale (4).webp",
+      "variant": "natureHalflingMale"
+    },
+    {
+      "file": "AcolyteNatureHalflingMale (5).webp",
+      "variant": "natureHalflingMale"
+    },
+    {
+      "file": "AcolyteNatureHalfOrcFemale (1).webp",
+      "variant": "natureHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteNatureHalfOrcFemale (2).webp",
+      "variant": "natureHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteNatureHalfOrcFemale (3).webp",
+      "variant": "natureHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteNatureHalfOrcFemale (4).webp",
+      "variant": "natureHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteNatureHalfOrcFemale (5).webp",
+      "variant": "natureHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteNatureHalfOrcFemale (6).webp",
+      "variant": "natureHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteNatureHalfOrcMale (1).webp",
+      "variant": "natureHalfOrcMale"
+    },
+    {
+      "file": "AcolyteNatureHalfOrcMale (2).webp",
+      "variant": "natureHalfOrcMale"
+    },
+    {
+      "file": "AcolyteNatureHalfOrcMale (3).webp",
+      "variant": "natureHalfOrcMale"
+    },
+    {
+      "file": "AcolyteNatureHalfOrcMale (4).webp",
+      "variant": "natureHalfOrcMale"
+    },
+    {
+      "file": "AcolyteNatureHalfOrcMale (5).webp",
+      "variant": "natureHalfOrcMale"
+    },
+    {
+      "file": "AcolyteNatureHalfOrcMale (6).webp",
+      "variant": "natureHalfOrcMale"
+    },
+    {
+      "file": "AcolyteNatureHumanFemale (1).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "AcolyteNatureHumanFemale (10).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "AcolyteNatureHumanFemale (11).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "AcolyteNatureHumanFemale (12).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "AcolyteNatureHumanFemale (2).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "AcolyteNatureHumanFemale (3).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "AcolyteNatureHumanFemale (4).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "AcolyteNatureHumanFemale (5).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "AcolyteNatureHumanFemale (6).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "AcolyteNatureHumanFemale (7).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "AcolyteNatureHumanFemale (8).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "AcolyteNatureHumanFemale (9).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "AcolyteNatureHumanMale (1).webp",
+      "variant": "natureHumanMale"
+    },
+    {
+      "file": "AcolyteNatureHumanMale (2).webp",
+      "variant": "natureHumanMale"
+    },
+    {
+      "file": "AcolyteNatureHumanMale (3).webp",
+      "variant": "natureHumanMale"
+    },
+    {
+      "file": "AcolyteNatureHumanMale (4).webp",
+      "variant": "natureHumanMale"
+    },
+    {
+      "file": "AcolyteNatureHumanMale (5).webp",
+      "variant": "natureHumanMale"
+    },
+    {
+      "file": "AcolyteNatureHumanMale (6).webp",
+      "variant": "natureHumanMale"
+    },
+    {
+      "file": "AcolyteNatureHumanMale (7).webp",
+      "variant": "natureHumanMale"
+    },
+    {
+      "file": "AcolyteNatureHumanMale (8).webp",
+      "variant": "natureHumanMale"
+    },
+    {
+      "file": "AcolyteNatureHumanMale (9).webp",
+      "variant": "natureHumanMale"
+    },
+    {
+      "file": "AcolyteNatureTieflingFemale (1).webp",
+      "variant": "natureTieflingFemale"
+    },
+    {
+      "file": "AcolyteNatureTieflingFemale (2).webp",
+      "variant": "natureTieflingFemale"
+    },
+    {
+      "file": "AcolyteNatureTieflingFemale (3).webp",
+      "variant": "natureTieflingFemale"
+    },
+    {
+      "file": "AcolyteNatureTieflingFemale (4).webp",
+      "variant": "natureTieflingFemale"
+    },
+    {
+      "file": "AcolyteNatureTieflingMale (1).webp",
+      "variant": "natureTieflingMale"
+    },
+    {
+      "file": "AcolyteNatureTieflingMale (2).webp",
+      "variant": "natureTieflingMale"
+    },
+    {
+      "file": "AcolyteNatureTieflingMale (3).webp",
+      "variant": "natureTieflingMale"
+    },
+    {
+      "file": "AcolyteNatureTieflingMale (4).webp",
+      "variant": "natureTieflingMale"
+    },
+    {
+      "file": "AcolyteWaterDragonborn (1).webp",
+      "variant": "waterDragonborn"
+    },
+    {
+      "file": "AcolyteWaterDragonborn (2).webp",
+      "variant": "waterDragonborn"
+    },
+    {
+      "file": "AcolyteWaterDragonborn (3).webp",
+      "variant": "waterDragonborn"
+    },
+    {
+      "file": "AcolyteWaterDwarfFemale (1).webp",
+      "variant": "waterDwarfFemale"
+    },
+    {
+      "file": "AcolyteWaterDwarfFemale (2).webp",
+      "variant": "waterDwarfFemale"
+    },
+    {
+      "file": "AcolyteWaterDwarfFemale (3).webp",
+      "variant": "waterDwarfFemale"
+    },
+    {
+      "file": "AcolyteWaterDwarfMale (1).webp",
+      "variant": "waterDwarfMale"
+    },
+    {
+      "file": "AcolyteWaterDwarfMale (2).webp",
+      "variant": "waterDwarfMale"
+    },
+    {
+      "file": "AcolyteWaterDwarfMale (3).webp",
+      "variant": "waterDwarfMale"
+    },
+    {
+      "file": "AcolyteWaterDwarfMale (4).webp",
+      "variant": "waterDwarfMale"
+    },
+    {
+      "file": "AcolyteWaterDwarfMale (5).webp",
+      "variant": "waterDwarfMale"
+    },
+    {
+      "file": "AcolyteWaterElfFemale (1).webp",
+      "variant": "waterElfFemale"
+    },
+    {
+      "file": "AcolyteWaterElfFemale (2).webp",
+      "variant": "waterElfFemale"
+    },
+    {
+      "file": "AcolyteWaterElfFemale (3).webp",
+      "variant": "waterElfFemale"
+    },
+    {
+      "file": "AcolyteWaterElfFemale (4).webp",
+      "variant": "waterElfFemale"
+    },
+    {
+      "file": "AcolyteWaterElfFemale (5).webp",
+      "variant": "waterElfFemale"
+    },
+    {
+      "file": "AcolyteWaterElfFemale (6).webp",
+      "variant": "waterElfFemale"
+    },
+    {
+      "file": "AcolyteWaterElfMale (1).webp",
+      "variant": "waterElfMale"
+    },
+    {
+      "file": "AcolyteWaterElfMale (2).webp",
+      "variant": "waterElfMale"
+    },
+    {
+      "file": "AcolyteWaterElfMale (3).webp",
+      "variant": "waterElfMale"
+    },
+    {
+      "file": "AcolyteWaterElfMale (4).webp",
+      "variant": "waterElfMale"
+    },
+    {
+      "file": "AcolyteWaterElfMale (5).webp",
+      "variant": "waterElfMale"
+    },
+    {
+      "file": "AcolyteWaterGnomeFemale (1).webp",
+      "variant": "waterGnomeFemale"
+    },
+    {
+      "file": "AcolyteWaterGnomeFemale (2).webp",
+      "variant": "waterGnomeFemale"
+    },
+    {
+      "file": "AcolyteWaterGnomeFemale (3).webp",
+      "variant": "waterGnomeFemale"
+    },
+    {
+      "file": "AcolyteWaterGnomeFemale (4).webp",
+      "variant": "waterGnomeFemale"
+    },
+    {
+      "file": "AcolyteWaterGnomeFemale (5).webp",
+      "variant": "waterGnomeFemale"
+    },
+    {
+      "file": "AcolyteWaterGnomeMale (1).webp",
+      "variant": "waterGnomeMale"
+    },
+    {
+      "file": "AcolyteWaterGnomeMale (2).webp",
+      "variant": "waterGnomeMale"
+    },
+    {
+      "file": "AcolyteWaterGnomeMale (3).webp",
+      "variant": "waterGnomeMale"
+    },
+    {
+      "file": "AcolyteWaterGnomeMale (4).webp",
+      "variant": "waterGnomeMale"
+    },
+    {
+      "file": "AcolyteWaterGnomeMale (5).webp",
+      "variant": "waterGnomeMale"
+    },
+    {
+      "file": "AcolyteWaterHalfElfFemale (1).webp",
+      "variant": "waterHalfElfFemale"
+    },
+    {
+      "file": "AcolyteWaterHalfElfFemale (2).webp",
+      "variant": "waterHalfElfFemale"
+    },
+    {
+      "file": "AcolyteWaterHalfElfFemale (3).webp",
+      "variant": "waterHalfElfFemale"
+    },
+    {
+      "file": "AcolyteWaterHalfElfFemale (4).webp",
+      "variant": "waterHalfElfFemale"
+    },
+    {
+      "file": "AcolyteWaterHalfElfFemale (5).webp",
+      "variant": "waterHalfElfFemale"
+    },
+    {
+      "file": "AcolyteWaterHalfElfFemale (6).webp",
+      "variant": "waterHalfElfFemale"
+    },
+    {
+      "file": "AcolyteWaterHalfElfMale (1).webp",
+      "variant": "waterHalfElfMale"
+    },
+    {
+      "file": "AcolyteWaterHalfElfMale (2).webp",
+      "variant": "waterHalfElfMale"
+    },
+    {
+      "file": "AcolyteWaterHalfElfMale (3).webp",
+      "variant": "waterHalfElfMale"
+    },
+    {
+      "file": "AcolyteWaterHalfElfMale (4).webp",
+      "variant": "waterHalfElfMale"
+    },
+    {
+      "file": "AcolyteWaterHalfElfMale (5).webp",
+      "variant": "waterHalfElfMale"
+    },
+    {
+      "file": "AcolyteWaterHalfElfMale (6).webp",
+      "variant": "waterHalfElfMale"
+    },
+    {
+      "file": "AcolyteWaterHalflingFemale (1).webp",
+      "variant": "waterHalflingFemale"
+    },
+    {
+      "file": "AcolyteWaterHalflingFemale (2).webp",
+      "variant": "waterHalflingFemale"
+    },
+    {
+      "file": "AcolyteWaterHalflingFemale (3).webp",
+      "variant": "waterHalflingFemale"
+    },
+    {
+      "file": "AcolyteWaterHalflingFemale (4).webp",
+      "variant": "waterHalflingFemale"
+    },
+    {
+      "file": "AcolyteWaterHalflingFemale (5).webp",
+      "variant": "waterHalflingFemale"
+    },
+    {
+      "file": "AcolyteWaterHalflingFemale (6).webp",
+      "variant": "waterHalflingFemale"
+    },
+    {
+      "file": "AcolyteWaterHalflingFemale (7).webp",
+      "variant": "waterHalflingFemale"
+    },
+    {
+      "file": "AcolyteWaterHalflingMale (1).webp",
+      "variant": "waterHalflingMale"
+    },
+    {
+      "file": "AcolyteWaterHalflingMale (2).webp",
+      "variant": "waterHalflingMale"
+    },
+    {
+      "file": "AcolyteWaterHalflingMale (3).webp",
+      "variant": "waterHalflingMale"
+    },
+    {
+      "file": "AcolyteWaterHalflingMale (4).webp",
+      "variant": "waterHalflingMale"
+    },
+    {
+      "file": "AcolyteWaterHalflingMale (5).webp",
+      "variant": "waterHalflingMale"
+    },
+    {
+      "file": "AcolyteWaterHalflingMale (6).webp",
+      "variant": "waterHalflingMale"
+    },
+    {
+      "file": "AcolyteWaterHalfOrcFemale (1).webp",
+      "variant": "waterHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteWaterHalfOrcFemale (2).webp",
+      "variant": "waterHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteWaterHalfOrcFemale (3).webp",
+      "variant": "waterHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteWaterHalfOrcFemale (4).webp",
+      "variant": "waterHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteWaterHalfOrcFemale (5).webp",
+      "variant": "waterHalfOrcFemale"
+    },
+    {
+      "file": "AcolyteWaterHalfOrcMale (1).webp",
+      "variant": "waterHalfOrcMale"
+    },
+    {
+      "file": "AcolyteWaterHalfOrcMale (2).webp",
+      "variant": "waterHalfOrcMale"
+    },
+    {
+      "file": "AcolyteWaterHalfOrcMale (3).webp",
+      "variant": "waterHalfOrcMale"
+    },
+    {
+      "file": "AcolyteWaterHalfOrcMale (4).webp",
+      "variant": "waterHalfOrcMale"
+    },
+    {
+      "file": "AcolyteWaterHalfOrcMale (5).webp",
+      "variant": "waterHalfOrcMale"
+    },
+    {
+      "file": "AcolyteWaterHalfOrcMale (6).webp",
+      "variant": "waterHalfOrcMale"
+    },
+    {
+      "file": "AcolyteWaterHalfOrcMale (7).webp",
+      "variant": "waterHalfOrcMale"
+    },
+    {
+      "file": "AcolyteWaterHumanFemale (1).webp",
+      "variant": "waterHumanFemale"
+    },
+    {
+      "file": "AcolyteWaterHumanFemale (10).webp",
+      "variant": "waterHumanFemale"
+    },
+    {
+      "file": "AcolyteWaterHumanFemale (11).webp",
+      "variant": "waterHumanFemale"
+    },
+    {
+      "file": "AcolyteWaterHumanFemale (12).webp",
+      "variant": "waterHumanFemale"
+    },
+    {
+      "file": "AcolyteWaterHumanFemale (13).webp",
+      "variant": "waterHumanFemale"
+    },
+    {
+      "file": "AcolyteWaterHumanFemale (2).webp",
+      "variant": "waterHumanFemale"
+    },
+    {
+      "file": "AcolyteWaterHumanFemale (3).webp",
+      "variant": "waterHumanFemale"
+    },
+    {
+      "file": "AcolyteWaterHumanFemale (4).webp",
+      "variant": "waterHumanFemale"
+    },
+    {
+      "file": "AcolyteWaterHumanFemale (5).webp",
+      "variant": "waterHumanFemale"
+    },
+    {
+      "file": "AcolyteWaterHumanFemale (6).webp",
+      "variant": "waterHumanFemale"
+    },
+    {
+      "file": "AcolyteWaterHumanFemale (7).webp",
+      "variant": "waterHumanFemale"
+    },
+    {
+      "file": "AcolyteWaterHumanFemale (8).webp",
+      "variant": "waterHumanFemale"
+    },
+    {
+      "file": "AcolyteWaterHumanFemale (9).webp",
+      "variant": "waterHumanFemale"
+    },
+    {
+      "file": "AcolyteWaterHumanMale (1).webp",
+      "variant": "waterHumanMale"
+    },
+    {
+      "file": "AcolyteWaterHumanMale (10).webp",
+      "variant": "waterHumanMale"
+    },
+    {
+      "file": "AcolyteWaterHumanMale (11).webp",
+      "variant": "waterHumanMale"
+    },
+    {
+      "file": "AcolyteWaterHumanMale (12).webp",
+      "variant": "waterHumanMale"
+    },
+    {
+      "file": "AcolyteWaterHumanMale (13).webp",
+      "variant": "waterHumanMale"
+    },
+    {
+      "file": "AcolyteWaterHumanMale (2).webp",
+      "variant": "waterHumanMale"
+    },
+    {
+      "file": "AcolyteWaterHumanMale (3).webp",
+      "variant": "waterHumanMale"
+    },
+    {
+      "file": "AcolyteWaterHumanMale (4).webp",
+      "variant": "waterHumanMale"
+    },
+    {
+      "file": "AcolyteWaterHumanMale (5).webp",
+      "variant": "waterHumanMale"
+    },
+    {
+      "file": "AcolyteWaterHumanMale (6).webp",
+      "variant": "waterHumanMale"
+    },
+    {
+      "file": "AcolyteWaterHumanMale (7).webp",
+      "variant": "waterHumanMale"
+    },
+    {
+      "file": "AcolyteWaterHumanMale (8).webp",
+      "variant": "waterHumanMale"
+    },
+    {
+      "file": "AcolyteWaterHumanMale (9).webp",
+      "variant": "waterHumanMale"
+    },
+    {
+      "file": "AcolyteWaterTieflingFemale (1).webp",
+      "variant": "waterTieflingFemale"
+    },
+    {
+      "file": "AcolyteWaterTieflingFemale (2).webp",
+      "variant": "waterTieflingFemale"
+    },
+    {
+      "file": "AcolyteWaterTieflingFemale (3).webp",
+      "variant": "waterTieflingFemale"
+    },
+    {
+      "file": "AcolyteWaterTieflingMale (1).webp",
+      "variant": "waterTieflingMale"
+    },
+    {
+      "file": "AcolyteWaterTieflingMale (2).webp",
+      "variant": "waterTieflingMale"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

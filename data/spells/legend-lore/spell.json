@@ -1,0 +1,64 @@
+{
+  "id": 281,
+  "slug": "legend-lore",
+  "name": "Legend Lore",
+  "nameDe": "Sagenkunde",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "wizard",
+      "bard"
+    ],
+    "de": [
+      "Kleriker",
+      "Magier",
+      "Barde"
+    ]
+  },
+  "type": {
+    "en": "5th-level divination",
+    "de": "Stufe 5 Erkenntnismagie"
+  },
+  "castingTime": {
+    "en": "10 minutes",
+    "de": "10 Minuten"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "incense worth at least 250 gp, which the spell consumes, and four ivory strips worth at least 50 gp each",
+      "de": "Weihrauch im Wert von mindestens 250 Goldstücken, den der Zauber verbraucht, und vier Goldstücke aus Elfenbein im Wert von jeweils mindestens 50 Goldstücken"
+    },
+    "raw": {
+      "en": "V, S, M (incense worth at least 250 gp, which the spell consumes, and four ivory strips worth at least 50 gp each)",
+      "de": "V, G, M (Weihrauch im Wert von mindestens 250 Goldstücken, den der Zauber verbraucht, und vier Goldstücke aus Elfenbein im Wert von jeweils mindestens 50 Goldstücken)"
+    }
+  },
+  "description": {
+    "en": "Name or describe a person, place, or object. The spell brings to your mind a brief summary of the significant lore about the thing you named. The lore might consist of current tales, forgotten stories, or even secret lore that has never been widely known. If the thing you named isn't of legendary importance, you gain no information. The more information you already have about the thing, the more precise and detailed the information you receive is. The information you learn is accurate but might be couched in figurative language. For example, if you have a mysterious magic axe on hand the spell might yield this information: \"Woe to the evildoer whose hand touches the axe, for even the haft slices the hand of the evil ones. Only a true Child of Stone, lover and beloved of Moradin, may awaken the true powers of the axe, and only with the sacred word *Rudnogg* on the lips.\"",
+    "de": "Nenne oder beschreibe eine Person, einen Ort oder einen Gegenstand. Der Zauber zeigt dir mental eine kurze Zusammenfassung der Überlieferungen des Genannten. Dabei kann es sich um aktuelle Geschichten, vergessene Erzählungen oder sogar geheimes Wissen handeln, das nicht allgemein bekannt ist Ist das Genannte nicht von legendärer Bedeutung, erhältst du keine Informationen. Je mehr Informationen dir bereits zur Verfügung stehen, desto präzisere und detailliertere Informationen erhältst du durch den Zauber. Die erhaltenen Informationen sind korrekt, können aber in bildlicher Sprache erscheinen. Hast du beispielsweise eine mysteriöse Axt vor dir, übermittelt der Zauber vielleicht die folgenden Informationen: 'Wehe dem Übeltäter, der die Axt berührt, denn selbst der Griff schneidet die Hand des Bösen. Nur ein wahres Kind des Steins, Jünger und Schützling von Moradin, vermag die wahre Macht der Axt zu erwecken, und nur mit dem heiligen Wort Rudnogg  auf den Lippen.'"
+  },
+  "image": "legendary-lore",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

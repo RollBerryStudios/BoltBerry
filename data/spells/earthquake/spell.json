@@ -1,0 +1,64 @@
+{
+  "id": 169,
+  "slug": "earthquake",
+  "name": "Earthquake",
+  "nameDe": "Erdbeben",
+  "level": {
+    "en": "8",
+    "de": "Grad 8"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "druid",
+      "sorcerer"
+    ],
+    "de": [
+      "Kleriker",
+      "Druide",
+      "Zauberer"
+    ]
+  },
+  "type": {
+    "en": "8th-level evocation",
+    "de": "Stufe 8 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "500 feet",
+    "de": "45 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a pinch of dirt, a piece of rock, and a lump of clay",
+      "de": "eine Prise Erde, ein Stück Stein und einen Klumpen Ton"
+    },
+    "raw": {
+      "en": "V, S, M (a pinch of dirt, a piece of rock, and a lump of clay)",
+      "de": "V, G, M (eine Prise Erde, ein Stück Stein und einen Klumpen Ton)"
+    }
+  },
+  "description": {
+    "en": "You create a seismic disturbance at a point on the ground that you can see within range. For the duration, an intense tremor rips through the ground in a 100-foot-radius circle centered on that point and shakes creatures and structures in contact with the ground in that area. The ground in the area becomes difficult terrain. Each creature on the ground that is concentrating must make a constitution saving throw. On a failed save, the creature's concentration is broken. When you cast this spell and at the end of each turn you spend concentrating on it, each creature on the ground in the area must make a dexterity saving throw. On a failed save, the creature is knocked prone. This spell can have additional effects depending on the terrain in the area, as determined by the GM. Fissures. Fissures open throughout the spell's area at the start of your next turn after you cast the spell. A total of 1d6 such fissures open in locations chosen by the GM. Each is 1d10 x 10 feet deep, 10 feet wide, and extends from one edge of the spell's area to the opposite side. A creature standing on a spot where a fissure opens must succeed on a dexterity saving throw or fall in. A creature that successfully saves moves with the fissure's edge as it opens. A fissure that opens beneath a structure causes it to automatically collapse (see below). Structures. The tremor deals 50 bludgeoning damage to any structure in contact with the ground in the area when you cast the spell and at the start of each of your turns until the spell ends. If a structure drops to 0 hit points, it collapses and potentially damages nearby creatures. A creature within half the distance of a structure's height must make a dexterity saving throw. On a failed save, the creature takes 5d6 bludgeoning damage, is knocked prone, and is buried in the rubble, requiring a DC 20 Strength (Athletics) check as an action to escape. The GM can adjust the DC higher or lower, depending on the nature of the rubble. On a successful save, the creature takes half as much damage and doesn't fall prone or become buried.",
+    "de": "Du erschaffst eine seismische Störung an einem Punkt auf dem Boden in Reichweite, den du sehen kannst. Für die Wirkungsdauer reißt ein gewaltiges Beben die Erde in einem Radius von 30 Metern um diesen Punkt auf und erschüttert Kreaturen und Strukturen auf dem Boden in diesem Bereich. Der Bereich wird zu schwierigem Gelände. Jede Kreatur auf dem Boden, die Konzentration aufrechterhält, muss einen Konstitutionsrettungswurf ausführen. Scheitert der Wurf, wird die Konzentration der Kreatur unterbrochen. Wenn du diesen Zauber wirkst, sowie am Ende jedes Zugs, in dem du dich darauf konzentrierst, muss jede Kreatur auf dem Boden in dem Bereich einen Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, wird die Kreatur umgestoßen. Dieser Zauber kann nach Wahl des SL zusätzliche Auswirkungen abhängig vom Gelände haben. Erdspalten:  Erdspalten öffnen sich zu Beginn deines nächsten Zugs im Bereich des Zaubers. Insgesamt öffnen sich 1W6 Erdspalten an Orten, die der SL bestimmt. Jede ist 1W10 mal drei Meter tief, drei Meter breit und verläuft von einer Seite des Wirkungsbereichs zum anderen. Eine Kreatur, die dort steht, wo sich eine Erdspalte öffnet, muss einen Geschicklichkeitsrettungswurfbestehen, oder sie fällt hinein. Ist der Rettungswurf erfolgreich, bewegt sich die Kreatur mit dem Rand der Erdspalte, während sich diese öffnet. Öffnet sich eine Erdspalte unter einem Gebäude, stürzt dieses automatisch ein (siehe unten). Gebäude: Wenn du den Zauber wirkst, sowie zu Beginn jedes deiner Züge, bis der Zauber endet, fügt das Beben allen Gebäuden, die den Boden im Wirkungsbereich berühren, 50 Wuchtschaden zu. Wird ein Gebäude auf 0 Trefferpunkte reduziert, stürzt es ein und fügt möglicherweise Kreaturen in der Nähe Schaden zu. Eine Kreatur innerhalb der halben Entfernung der Höhe des Gebäudes muss einen Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet die Kreatur 5W6 Wuchtschaden, wird umgestoßen und ist in den Trümmern gefangen. Als Aktion muss sie einen SG-20-Stärkewurf (Athletik) bestehen, um sich zu befreien. Der SL kann den SG je nach Art der Trümmer erhöhen oder verringern. Bei einem erfolgreichen Rettungswurf erleidet die Kreatur halb so viel Schaden und wird nicht umgestoßen oder begraben."
+  },
+  "image": "earthquake",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

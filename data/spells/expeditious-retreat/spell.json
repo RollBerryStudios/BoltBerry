@@ -1,0 +1,60 @@
+{
+  "id": 28,
+  "slug": "expeditious-retreat",
+  "name": "Expeditious Retreat",
+  "nameDe": "Rascher Rückzug",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level transmutation",
+    "de": "Stufe 1 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 bonus action",
+    "de": "1 Bonusaktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "This spell allows you to move at an incredible pace. When you cast this spell, and then as a bonus action on each of your turns until the spell ends, you can take the Dash action.",
+    "de": "Mit diesem Zauber kannst du dich mit unglaublicher Geschwindigkeit bewegen. Wenn du diesen Zauber wirkst, sowie als Bonusaktion in jedem deiner Züge während der Wirkungsdauer, kannst du die Spurt-Aktion verwenden."
+  },
+  "image": "retreat",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

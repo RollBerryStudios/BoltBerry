@@ -1,0 +1,28 @@
+{
+  "id": 528,
+  "slug": "pile-of-unidentifiable-slime",
+  "name": "Pile of Unidentifiable Slime",
+  "nameDe": "Haufen Nicht identifizierbar Schleim",
+  "category": {
+    "en": "OTHER",
+    "de": "Sonstiges"
+  },
+  "rarity": {
+    "en": "MUNDANE",
+    "de": "Alltäglich"
+  },
+  "cost": 0,
+  "source": {
+    "en": "Homebrew (Mundane)",
+    "de": "Homebrew (Mundän)"
+  },
+  "description": "Is this goblin snort?",
+  "weight": "0.1",
+  "modifiers": {
+    "en": "unidentifiable|green|stinky|",
+    "de": "nicht identifizierbar|grüner|stinkender|"
+  },
+  "image": "slime",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,59 @@
+{
+  "id": 328,
+  "slug": "vampiric-touch",
+  "name": "Vampiric Touch",
+  "nameDe": "Vampirgriff",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Necromancy",
+    "de": "Nekromantie"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level necromancy",
+    "de": "Stufe 3 Nekromantie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": "V,S"
+  },
+  "description": {
+    "en": "The touch of your shadow-wreathed hand can siphon life force from others to heal your wounds. Make a melee spell attack against a creature within your reach. On a hit, the target takes 3d6 necrotic damage, and you regain hit points equal to half the amount of necrotic damage dealt. Until the spell ends, you can make the attack again on each of your turns as an action.",
+    "de": "Die Berührung deiner in Schatten gehüllten Hand entzieht anderen Lebenskraft, um dich zu heilen. Führe einen Nahkampf-Zauberangriff gegen eine Kreatur innerhalb deiner Reichweite aus. Bei einem Treffer erleidet das Ziel 3W6 nekrotischen Schaden und du erhältst Trefferpunkte in Höhe der Hälfte des nekrotischen Schadens zurück. Bis der Zauber endet, kannst du in jedem deiner Züge den Angriff als Aktion wiederholen. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 4. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 3. um 1W6."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 4. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 3. um 1W6."
+  },
+  "image": "vampiric-touch",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

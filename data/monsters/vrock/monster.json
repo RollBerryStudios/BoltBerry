@@ -1,0 +1,224 @@
+{
+  "id": 296,
+  "slug": "vrock",
+  "name": "Vrock",
+  "source": "SRD",
+  "meta": {
+    "en": "Large fiend, chaotic evil",
+    "de": "Großer Unhold, chaotisch böse"
+  },
+  "challenge": "6",
+  "xp": 2300,
+  "ac": {
+    "en": "15 (Natural Armor)",
+    "de": "15 (Natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "104 (11d10 + 44)",
+    "de": "104 (11W10 + 44)"
+  },
+  "str": 17,
+  "dex": 15,
+  "con": 18,
+  "int": 8,
+  "wis": 13,
+  "cha": 8,
+  "strMod": 3,
+  "dexMod": 2,
+  "conMod": 4,
+  "intMod": -1,
+  "wisMod": 1,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Abyssal",
+      "telepathy 120 ft."
+    ],
+    "de": [
+      "Abyssisch",
+      "Telepathie auf 36 m"
+    ]
+  },
+  "savingThrows": [
+    "Ges +5",
+    "Wei +4",
+    "Cha +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Magic Resistance",
+        "text": "The vrock has advantage on saving throws against spells and other magical effects."
+      }
+    ],
+    "de": [
+      {
+        "name": "Magieresistenz",
+        "text": "Der Vrock ist bei Rettungswürfen gegen Zauber und andere magische Effekte im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The vrock makes two attacks: one with its beak and one with its talons."
+      },
+      {
+        "name": "Beak",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) piercing damage."
+      },
+      {
+        "name": "Talons",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 14 (2d10 + 3) slashing damage."
+      },
+      {
+        "name": "Spores",
+        "text": "A 15-foot-radius cloud of toxic spores extends out from the vrock. The spores spread around corners. Each creature in that area must succeed on a DC 14 Constitution saving throw or become poisoned. While poisoned in this way, a target takes 5 (1d10) poison damage at the start of each of its turns. A target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. Emptying a vial of holy water on the target also ends the effect on it."
+      },
+      {
+        "name": "Stunning Screech",
+        "text": "The vrock emits a horrific screech. Each creature within 20 feet of it that can hear it and that isn't a demon must succeed on a DC 14 Constitution saving throw or be stunned until the end of the vrock's next turn ."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Vrock führt zwei Angriffe aus: einen Schnabel- und einen Klauenangriff."
+      },
+      {
+        "name": "Krallen",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 14 (2W10+3) Hiebschaden."
+      },
+      {
+        "name": "Schnabel",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Stichschaden."
+      },
+      {
+        "name": "Betäubendes Kreischen (1-mal täglich)",
+        "text": "Der Vrock stößt ein entsetzliches Kreischen aus. Jede Kreatur im Abstand von bis zu sechs Metern von ihm, die ihn hören kann und kein Dämon ist, muss einen SG-14-Konstitutionsrettungswurf bestehen, oder sie ist bis zum Ende des nächsten Zugs des Vrocks betäubt."
+      },
+      {
+        "name": "Sporen (Aufladung 6)",
+        "text": "Eine Wolke giftiger Sporen breitet sich im Radius von 4,5 m um den Vrock aus. Die Sporen breiten sich um Ecken aus. Jede Kreatur in diesem Bereich muss einen SG-14-Konstitutionsrettungswurf bestehen, oder sie ist vergiftet. Auf diese Art vergiftete Kreaturen erleiden zu Beginn jedes ihrer Züge 5 (1W10) Giftschaden. Ein Ziel kann den Rettungswurf am Ende jedes seiner Züge wiederholen und den Effekt bei einem Erfolg beenden. Der Effekt wird auch durch den Konsum einer Phiole mit Weihwasser beendet."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/87/315/315/636252737538172594.jpeg",
+  "size": {
+    "en": "large",
+    "de": "groß"
+  },
+  "type": {
+    "en": "fiend",
+    "de": "Unhold"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "Vrock (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Vrock (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vrock (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

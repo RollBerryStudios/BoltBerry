@@ -1,0 +1,1094 @@
+{
+  "id": 151,
+  "slug": "goblin",
+  "name": "Goblin",
+  "source": "SRD",
+  "meta": {
+    "en": "Small humanoid, neutral evil",
+    "de": "Kleiner humanoid, neutral böse"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "15 (Leather Armor, Shield)",
+    "de": "15 (Lederrüstung, Schild)"
+  },
+  "hp": {
+    "en": "7 (2d6)",
+    "de": "7 (2W6)"
+  },
+  "str": 8,
+  "dex": 14,
+  "con": 10,
+  "int": 10,
+  "wis": 8,
+  "cha": 8,
+  "strMod": -1,
+  "dexMod": 2,
+  "conMod": 0,
+  "intMod": 0,
+  "wisMod": -1,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 9"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 9"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Goblin"
+    ],
+    "de": [
+      "Gemeinsprache",
+      "Goblinisch"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +6"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Nimble Escape",
+        "text": "The goblin can take the Disengage or Hide action as a bonus action on each of its turns."
+      }
+    ],
+    "de": [
+      {
+        "name": "Behändes Entkommen",
+        "text": "Der Goblin kann in jedem seiner Züge die Rückzugs- oder die Verstecken-Aktion als Bonusaktion ausführen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Scimitar",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) slashing damage."
+      },
+      {
+        "name": "Shortbow",
+        "text": "Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Krummsäbel",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W6+2) Hiebschaden."
+      },
+      {
+        "name": "Kurzbogen",
+        "text": "Fernkampfwaffenangriff: +4 auf Treffer, Reichweite 24/96 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/351/315/315/636252777818652432.jpeg",
+  "size": {
+    "en": "small",
+    "de": "Klein"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (Goblinoide)"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "GoblinForestMaleGraygreenMelee (1).webp",
+    "variant": "forestMaleGraygreenMelee"
+  },
+  "tokens": [
+    {
+      "file": "GoblinForestMaleGraygreenMelee (2).webp",
+      "variant": "forestMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinForestMaleGraygreenMelee (3).webp",
+      "variant": "forestMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinForestMaleGraygreenMelee (4).webp",
+      "variant": "forestMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinForestMaleGraygreenMelee (5).webp",
+      "variant": "forestMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinForestMaleGraygreenMelee (6).webp",
+      "variant": "forestMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinForestMaleGraygreenMelee (7).webp",
+      "variant": "forestMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinForestMaleGraygreenRanged (1).webp",
+      "variant": "forestMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinForestMaleGraygreenRanged (2).webp",
+      "variant": "forestMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinForestMaleGraygreenRanged (3).webp",
+      "variant": "forestMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinForestMaleGraygreenRanged (4).webp",
+      "variant": "forestMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinForestMaleGraygreenRanged (5).webp",
+      "variant": "forestMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinForestMaleGraygreenRanged (6).webp",
+      "variant": "forestMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinForestMaleGreenMelee (1).webp",
+      "variant": "forestMaleGreenMelee"
+    },
+    {
+      "file": "GoblinForestMaleGreenMelee (2).webp",
+      "variant": "forestMaleGreenMelee"
+    },
+    {
+      "file": "GoblinForestMaleGreenMelee (3).webp",
+      "variant": "forestMaleGreenMelee"
+    },
+    {
+      "file": "GoblinForestMaleGreenMelee (4).webp",
+      "variant": "forestMaleGreenMelee"
+    },
+    {
+      "file": "GoblinForestMaleGreenMelee (5).webp",
+      "variant": "forestMaleGreenMelee"
+    },
+    {
+      "file": "GoblinForestMaleGreenMelee (6).webp",
+      "variant": "forestMaleGreenMelee"
+    },
+    {
+      "file": "GoblinForestMaleGreenMelee (7).webp",
+      "variant": "forestMaleGreenMelee"
+    },
+    {
+      "file": "GoblinForestMaleGreenMelee (8).webp",
+      "variant": "forestMaleGreenMelee"
+    },
+    {
+      "file": "GoblinForestMaleGreenRanged (1).webp",
+      "variant": "forestMaleGreenRanged"
+    },
+    {
+      "file": "GoblinForestMaleGreenRanged (2).webp",
+      "variant": "forestMaleGreenRanged"
+    },
+    {
+      "file": "GoblinForestMaleGreenRanged (3).webp",
+      "variant": "forestMaleGreenRanged"
+    },
+    {
+      "file": "GoblinForestMaleGreenRanged (4).webp",
+      "variant": "forestMaleGreenRanged"
+    },
+    {
+      "file": "GoblinForestMaleGreenRanged (5).webp",
+      "variant": "forestMaleGreenRanged"
+    },
+    {
+      "file": "GoblinForestMaleOrangeMelee (1).webp",
+      "variant": "forestMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinForestMaleOrangeMelee (2).webp",
+      "variant": "forestMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinForestMaleOrangeMelee (3).webp",
+      "variant": "forestMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinForestMaleOrangeMelee (4).webp",
+      "variant": "forestMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinForestMaleOrangeMelee (5).webp",
+      "variant": "forestMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinForestMaleOrangeRanged (1).webp",
+      "variant": "forestMaleOrangeRanged"
+    },
+    {
+      "file": "GoblinForestMaleOrangeRanged (2).webp",
+      "variant": "forestMaleOrangeRanged"
+    },
+    {
+      "file": "GoblinForestMaleOrangeRanged (3).webp",
+      "variant": "forestMaleOrangeRanged"
+    },
+    {
+      "file": "GoblinForestMaleOrangeRanged (4).webp",
+      "variant": "forestMaleOrangeRanged"
+    },
+    {
+      "file": "GoblinForestMaleOrangeRanged (5).webp",
+      "variant": "forestMaleOrangeRanged"
+    },
+    {
+      "file": "GoblinForestMaleRedMelee (1).webp",
+      "variant": "forestMaleRedMelee"
+    },
+    {
+      "file": "GoblinForestMaleRedMelee (2).webp",
+      "variant": "forestMaleRedMelee"
+    },
+    {
+      "file": "GoblinForestMaleRedMelee (3).webp",
+      "variant": "forestMaleRedMelee"
+    },
+    {
+      "file": "GoblinForestMaleRedMelee (4).webp",
+      "variant": "forestMaleRedMelee"
+    },
+    {
+      "file": "GoblinForestMaleRedMelee (5).webp",
+      "variant": "forestMaleRedMelee"
+    },
+    {
+      "file": "GoblinForestMaleRedMelee (6).webp",
+      "variant": "forestMaleRedMelee"
+    },
+    {
+      "file": "GoblinForestMaleRedMelee (7).webp",
+      "variant": "forestMaleRedMelee"
+    },
+    {
+      "file": "GoblinForestMaleRedMelee (8).webp",
+      "variant": "forestMaleRedMelee"
+    },
+    {
+      "file": "GoblinForestMaleRedRanged (1).webp",
+      "variant": "forestMaleRedRanged"
+    },
+    {
+      "file": "GoblinForestMaleRedRanged (2).webp",
+      "variant": "forestMaleRedRanged"
+    },
+    {
+      "file": "GoblinForestMaleRedRanged (3).webp",
+      "variant": "forestMaleRedRanged"
+    },
+    {
+      "file": "GoblinForestMaleRedRanged (4).webp",
+      "variant": "forestMaleRedRanged"
+    },
+    {
+      "file": "GoblinForestMaleRedRanged (5).webp",
+      "variant": "forestMaleRedRanged"
+    },
+    {
+      "file": "GoblinForestMaleYellowMelee (1).webp",
+      "variant": "forestMaleYellowMelee"
+    },
+    {
+      "file": "GoblinForestMaleYellowMelee (10).webp",
+      "variant": "forestMaleYellowMelee"
+    },
+    {
+      "file": "GoblinForestMaleYellowMelee (11).webp",
+      "variant": "forestMaleYellowMelee"
+    },
+    {
+      "file": "GoblinForestMaleYellowMelee (12).webp",
+      "variant": "forestMaleYellowMelee"
+    },
+    {
+      "file": "GoblinForestMaleYellowMelee (2).webp",
+      "variant": "forestMaleYellowMelee"
+    },
+    {
+      "file": "GoblinForestMaleYellowMelee (3).webp",
+      "variant": "forestMaleYellowMelee"
+    },
+    {
+      "file": "GoblinForestMaleYellowMelee (4).webp",
+      "variant": "forestMaleYellowMelee"
+    },
+    {
+      "file": "GoblinForestMaleYellowMelee (5).webp",
+      "variant": "forestMaleYellowMelee"
+    },
+    {
+      "file": "GoblinForestMaleYellowMelee (6).webp",
+      "variant": "forestMaleYellowMelee"
+    },
+    {
+      "file": "GoblinForestMaleYellowMelee (7).webp",
+      "variant": "forestMaleYellowMelee"
+    },
+    {
+      "file": "GoblinForestMaleYellowMelee (8).webp",
+      "variant": "forestMaleYellowMelee"
+    },
+    {
+      "file": "GoblinForestMaleYellowMelee (9).webp",
+      "variant": "forestMaleYellowMelee"
+    },
+    {
+      "file": "GoblinForestMaleYellowRanged (1).webp",
+      "variant": "forestMaleYellowRanged"
+    },
+    {
+      "file": "GoblinForestMaleYellowRanged (2).webp",
+      "variant": "forestMaleYellowRanged"
+    },
+    {
+      "file": "GoblinForestMaleYellowRanged (3).webp",
+      "variant": "forestMaleYellowRanged"
+    },
+    {
+      "file": "GoblinForestMaleYellowRanged (4).webp",
+      "variant": "forestMaleYellowRanged"
+    },
+    {
+      "file": "GoblinForestMaleYellowRanged (5).webp",
+      "variant": "forestMaleYellowRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGraygreenMelee (1).webp",
+      "variant": "grasslandMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGraygreenMelee (2).webp",
+      "variant": "grasslandMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGraygreenMelee (3).webp",
+      "variant": "grasslandMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGraygreenMelee (4).webp",
+      "variant": "grasslandMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGraygreenMelee (5).webp",
+      "variant": "grasslandMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGraygreenMelee (6).webp",
+      "variant": "grasslandMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGraygreenRanged (1).webp",
+      "variant": "grasslandMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGraygreenRanged (10).webp",
+      "variant": "grasslandMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGraygreenRanged (2).webp",
+      "variant": "grasslandMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGraygreenRanged (3).webp",
+      "variant": "grasslandMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGraygreenRanged (4).webp",
+      "variant": "grasslandMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGraygreenRanged (5).webp",
+      "variant": "grasslandMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGraygreenRanged (6).webp",
+      "variant": "grasslandMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGraygreenRanged (7).webp",
+      "variant": "grasslandMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGraygreenRanged (8).webp",
+      "variant": "grasslandMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGraygreenRanged (9).webp",
+      "variant": "grasslandMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenMelee (1).webp",
+      "variant": "grasslandMaleGreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenMelee (10).webp",
+      "variant": "grasslandMaleGreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenMelee (11).webp",
+      "variant": "grasslandMaleGreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenMelee (12).webp",
+      "variant": "grasslandMaleGreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenMelee (13).webp",
+      "variant": "grasslandMaleGreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenMelee (14).webp",
+      "variant": "grasslandMaleGreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenMelee (15).webp",
+      "variant": "grasslandMaleGreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenMelee (16).webp",
+      "variant": "grasslandMaleGreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenMelee (2).webp",
+      "variant": "grasslandMaleGreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenMelee (3).webp",
+      "variant": "grasslandMaleGreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenMelee (4).webp",
+      "variant": "grasslandMaleGreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenMelee (5).webp",
+      "variant": "grasslandMaleGreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenMelee (6).webp",
+      "variant": "grasslandMaleGreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenMelee (7).webp",
+      "variant": "grasslandMaleGreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenMelee (8).webp",
+      "variant": "grasslandMaleGreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenMelee (9).webp",
+      "variant": "grasslandMaleGreenMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenRanged (1).webp",
+      "variant": "grasslandMaleGreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenRanged (10).webp",
+      "variant": "grasslandMaleGreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenRanged (2).webp",
+      "variant": "grasslandMaleGreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenRanged (3).webp",
+      "variant": "grasslandMaleGreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenRanged (4).webp",
+      "variant": "grasslandMaleGreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenRanged (5).webp",
+      "variant": "grasslandMaleGreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenRanged (6).webp",
+      "variant": "grasslandMaleGreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenRanged (7).webp",
+      "variant": "grasslandMaleGreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenRanged (8).webp",
+      "variant": "grasslandMaleGreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleGreenRanged (9).webp",
+      "variant": "grasslandMaleGreenRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleOrangeMelee (1).webp",
+      "variant": "grasslandMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleOrangeMelee (2).webp",
+      "variant": "grasslandMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleOrangeMelee (3).webp",
+      "variant": "grasslandMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleOrangeMelee (4).webp",
+      "variant": "grasslandMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleOrangeMelee (5).webp",
+      "variant": "grasslandMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleOrangeMelee (6).webp",
+      "variant": "grasslandMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleOrangeRanged (1).webp",
+      "variant": "grasslandMaleOrangeRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleOrangeRanged (2).webp",
+      "variant": "grasslandMaleOrangeRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleOrangeRanged (3).webp",
+      "variant": "grasslandMaleOrangeRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleOrangeRanged (4).webp",
+      "variant": "grasslandMaleOrangeRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleRedMelee (1).webp",
+      "variant": "grasslandMaleRedMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleRedMelee (2).webp",
+      "variant": "grasslandMaleRedMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleRedMelee (3).webp",
+      "variant": "grasslandMaleRedMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleRedMelee (4).webp",
+      "variant": "grasslandMaleRedMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleRedMelee (5).webp",
+      "variant": "grasslandMaleRedMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleRedMelee (6).webp",
+      "variant": "grasslandMaleRedMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleRedRanged (1).webp",
+      "variant": "grasslandMaleRedRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleRedRanged (2).webp",
+      "variant": "grasslandMaleRedRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleRedRanged (3).webp",
+      "variant": "grasslandMaleRedRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleRedRanged (4).webp",
+      "variant": "grasslandMaleRedRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleRedRanged (5).webp",
+      "variant": "grasslandMaleRedRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleRedRanged (6).webp",
+      "variant": "grasslandMaleRedRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleRedRanged (7).webp",
+      "variant": "grasslandMaleRedRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleRedRanged (8).webp",
+      "variant": "grasslandMaleRedRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleYellowMelee (1).webp",
+      "variant": "grasslandMaleYellowMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleYellowMelee (2).webp",
+      "variant": "grasslandMaleYellowMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleYellowMelee (3).webp",
+      "variant": "grasslandMaleYellowMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleYellowMelee (4).webp",
+      "variant": "grasslandMaleYellowMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleYellowMelee (5).webp",
+      "variant": "grasslandMaleYellowMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleYellowMelee (6).webp",
+      "variant": "grasslandMaleYellowMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleYellowMelee (7).webp",
+      "variant": "grasslandMaleYellowMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleYellowMelee (8).webp",
+      "variant": "grasslandMaleYellowMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleYellowMelee (9).webp",
+      "variant": "grasslandMaleYellowMelee"
+    },
+    {
+      "file": "GoblinGrasslandMaleYellowRanged (1).webp",
+      "variant": "grasslandMaleYellowRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleYellowRanged (2).webp",
+      "variant": "grasslandMaleYellowRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleYellowRanged (3).webp",
+      "variant": "grasslandMaleYellowRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleYellowRanged (4).webp",
+      "variant": "grasslandMaleYellowRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleYellowRanged (5).webp",
+      "variant": "grasslandMaleYellowRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleYellowRanged (6).webp",
+      "variant": "grasslandMaleYellowRanged"
+    },
+    {
+      "file": "GoblinGrasslandMaleYellowRanged (7).webp",
+      "variant": "grasslandMaleYellowRanged"
+    },
+    {
+      "file": "GoblinHillMaleOrangeMelee (1).webp",
+      "variant": "hillMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinHillMaleOrangeMelee (2).webp",
+      "variant": "hillMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinHillMaleOrangeMelee (3).webp",
+      "variant": "hillMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinHillMaleOrangeMelee (4).webp",
+      "variant": "hillMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinHillMaleOrangeMelee (5).webp",
+      "variant": "hillMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinHillMaleOrangeMelee (6).webp",
+      "variant": "hillMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinHillMaleOrangeMelee (7).webp",
+      "variant": "hillMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinHillMaleOrangeMelee (8).webp",
+      "variant": "hillMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinHillMaleOrangeRanged (1).webp",
+      "variant": "hillMaleOrangeRanged"
+    },
+    {
+      "file": "GoblinHillMaleOrangeRanged (2).webp",
+      "variant": "hillMaleOrangeRanged"
+    },
+    {
+      "file": "GoblinHillMaleOrangeRanged (3).webp",
+      "variant": "hillMaleOrangeRanged"
+    },
+    {
+      "file": "GoblinHillMaleRedMelee (1).webp",
+      "variant": "hillMaleRedMelee"
+    },
+    {
+      "file": "GoblinHillMaleRedMelee (2).webp",
+      "variant": "hillMaleRedMelee"
+    },
+    {
+      "file": "GoblinHillMaleRedMelee (3).webp",
+      "variant": "hillMaleRedMelee"
+    },
+    {
+      "file": "GoblinHillMaleRedMelee (4).webp",
+      "variant": "hillMaleRedMelee"
+    },
+    {
+      "file": "GoblinHillMaleRedRanged (1).webp",
+      "variant": "hillMaleRedRanged"
+    },
+    {
+      "file": "GoblinHillMaleRedRanged (2).webp",
+      "variant": "hillMaleRedRanged"
+    },
+    {
+      "file": "GoblinHillMaleRedRanged (3).webp",
+      "variant": "hillMaleRedRanged"
+    },
+    {
+      "file": "GoblinHillMaleRedRanged (4).webp",
+      "variant": "hillMaleRedRanged"
+    },
+    {
+      "file": "GoblinHillMaleRedRanged (5).webp",
+      "variant": "hillMaleRedRanged"
+    },
+    {
+      "file": "GoblinHillMaleYellowMelee (1).webp",
+      "variant": "hillMaleYellowMelee"
+    },
+    {
+      "file": "GoblinHillMaleYellowMelee (10).webp",
+      "variant": "hillMaleYellowMelee"
+    },
+    {
+      "file": "GoblinHillMaleYellowMelee (11).webp",
+      "variant": "hillMaleYellowMelee"
+    },
+    {
+      "file": "GoblinHillMaleYellowMelee (2).webp",
+      "variant": "hillMaleYellowMelee"
+    },
+    {
+      "file": "GoblinHillMaleYellowMelee (3).webp",
+      "variant": "hillMaleYellowMelee"
+    },
+    {
+      "file": "GoblinHillMaleYellowMelee (4).webp",
+      "variant": "hillMaleYellowMelee"
+    },
+    {
+      "file": "GoblinHillMaleYellowMelee (5).webp",
+      "variant": "hillMaleYellowMelee"
+    },
+    {
+      "file": "GoblinHillMaleYellowMelee (6).webp",
+      "variant": "hillMaleYellowMelee"
+    },
+    {
+      "file": "GoblinHillMaleYellowMelee (7).webp",
+      "variant": "hillMaleYellowMelee"
+    },
+    {
+      "file": "GoblinHillMaleYellowMelee (8).webp",
+      "variant": "hillMaleYellowMelee"
+    },
+    {
+      "file": "GoblinHillMaleYellowMelee (9).webp",
+      "variant": "hillMaleYellowMelee"
+    },
+    {
+      "file": "GoblinHillMaleYellowRanged (1).webp",
+      "variant": "hillMaleYellowRanged"
+    },
+    {
+      "file": "GoblinHillMaleYellowRanged (2).webp",
+      "variant": "hillMaleYellowRanged"
+    },
+    {
+      "file": "GoblinHillMaleYellowRanged (3).webp",
+      "variant": "hillMaleYellowRanged"
+    },
+    {
+      "file": "GoblinHillMaleYellowRanged (4).webp",
+      "variant": "hillMaleYellowRanged"
+    },
+    {
+      "file": "GoblinHillMaleYellowRanged (5).webp",
+      "variant": "hillMaleYellowRanged"
+    },
+    {
+      "file": "GoblinHillMaleYellowRanged (6).webp",
+      "variant": "hillMaleYellowRanged"
+    },
+    {
+      "file": "GoblinHillMaleYellowRanged (7).webp",
+      "variant": "hillMaleYellowRanged"
+    },
+    {
+      "file": "GoblinHillMaleYellowRanged (8).webp",
+      "variant": "hillMaleYellowRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGraygreenMelee (1).webp",
+      "variant": "underdarkMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGraygreenMelee (2).webp",
+      "variant": "underdarkMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGraygreenMelee (3).webp",
+      "variant": "underdarkMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGraygreenMelee (4).webp",
+      "variant": "underdarkMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGraygreenMelee (5).webp",
+      "variant": "underdarkMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGraygreenMelee (6).webp",
+      "variant": "underdarkMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGraygreenMelee (7).webp",
+      "variant": "underdarkMaleGraygreenMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGraygreenRanged (1).webp",
+      "variant": "underdarkMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGraygreenRanged (2).webp",
+      "variant": "underdarkMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGraygreenRanged (3).webp",
+      "variant": "underdarkMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGraygreenRanged (4).webp",
+      "variant": "underdarkMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGraygreenRanged (5).webp",
+      "variant": "underdarkMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGraygreenRanged (6).webp",
+      "variant": "underdarkMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGraygreenRanged (7).webp",
+      "variant": "underdarkMaleGraygreenRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGreenMelee (1).webp",
+      "variant": "underdarkMaleGreenMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGreenMelee (2).webp",
+      "variant": "underdarkMaleGreenMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGreenMelee (3).webp",
+      "variant": "underdarkMaleGreenMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGreenMelee (4).webp",
+      "variant": "underdarkMaleGreenMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGreenMelee (5).webp",
+      "variant": "underdarkMaleGreenMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGreenMelee (6).webp",
+      "variant": "underdarkMaleGreenMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGreenMelee (7).webp",
+      "variant": "underdarkMaleGreenMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGreenRanged (1).webp",
+      "variant": "underdarkMaleGreenRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGreenRanged (2).webp",
+      "variant": "underdarkMaleGreenRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGreenRanged (3).webp",
+      "variant": "underdarkMaleGreenRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGreenRanged (4).webp",
+      "variant": "underdarkMaleGreenRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleGreenRanged (5).webp",
+      "variant": "underdarkMaleGreenRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleOrangeMelee (1).webp",
+      "variant": "underdarkMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleOrangeMelee (2).webp",
+      "variant": "underdarkMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleOrangeMelee (3).webp",
+      "variant": "underdarkMaleOrangeMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleOrangeRanged (1).webp",
+      "variant": "underdarkMaleOrangeRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleOrangeRanged (2).webp",
+      "variant": "underdarkMaleOrangeRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleOrangeRanged (3).webp",
+      "variant": "underdarkMaleOrangeRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleOrangeRanged (4).webp",
+      "variant": "underdarkMaleOrangeRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleOrangeRanged (5).webp",
+      "variant": "underdarkMaleOrangeRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleRedMelee (1).webp",
+      "variant": "underdarkMaleRedMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleRedMelee (2).webp",
+      "variant": "underdarkMaleRedMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleRedMelee (3).webp",
+      "variant": "underdarkMaleRedMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleRedRanged (1).webp",
+      "variant": "underdarkMaleRedRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleRedRanged (2).webp",
+      "variant": "underdarkMaleRedRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleRedRanged (3).webp",
+      "variant": "underdarkMaleRedRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleRedRanged (4).webp",
+      "variant": "underdarkMaleRedRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleRedRanged (5).webp",
+      "variant": "underdarkMaleRedRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleRedRanged (6).webp",
+      "variant": "underdarkMaleRedRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleRedRanged (7).webp",
+      "variant": "underdarkMaleRedRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleRedRanged (8).webp",
+      "variant": "underdarkMaleRedRanged"
+    },
+    {
+      "file": "GoblinUnderdarkMaleYellowMelee (1).webp",
+      "variant": "underdarkMaleYellowMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleYellowMelee (10).webp",
+      "variant": "underdarkMaleYellowMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleYellowMelee (11).webp",
+      "variant": "underdarkMaleYellowMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleYellowMelee (12).webp",
+      "variant": "underdarkMaleYellowMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleYellowMelee (13).webp",
+      "variant": "underdarkMaleYellowMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleYellowMelee (2).webp",
+      "variant": "underdarkMaleYellowMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleYellowMelee (3).webp",
+      "variant": "underdarkMaleYellowMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleYellowMelee (4).webp",
+      "variant": "underdarkMaleYellowMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleYellowMelee (5).webp",
+      "variant": "underdarkMaleYellowMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleYellowMelee (6).webp",
+      "variant": "underdarkMaleYellowMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleYellowMelee (7).webp",
+      "variant": "underdarkMaleYellowMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleYellowMelee (8).webp",
+      "variant": "underdarkMaleYellowMelee"
+    },
+    {
+      "file": "GoblinUnderdarkMaleYellowMelee (9).webp",
+      "variant": "underdarkMaleYellowMelee"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

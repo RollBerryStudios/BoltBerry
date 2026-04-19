@@ -1,0 +1,60 @@
+{
+  "id": 36,
+  "slug": "grease",
+  "name": "Grease",
+  "nameDe": "Schmieren",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level conjuration",
+    "de": "Stufe 1 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a bit of pork rind or butter",
+      "de": "ein bisschen Schweineschwarte oder Butter"
+    },
+    "raw": {
+      "en": "V, S, M (a bit of pork rind or butter)",
+      "de": "V, G, M (ein bisschen Schweineschwarte oder Butter)"
+    }
+  },
+  "description": {
+    "en": "Slick grease covers the ground in a 10-foot square centered on a point within range and turns it into difficult terrain for the duration. When the grease appears, each creature standing in its area must succeed on a dexterity saving throw or fall prone. A creature that enters the area or ends its turn there must also succeed on a dexterity saving throw or fall prone.",
+    "de": "Schmieriges Fett bedeckt den Boden in einem würfelförmigen Bereich mit drei Metern Kantenlänge, der um einen Punkt in Reichweite zentriert ist, und macht ihn für die Wirkungsdauer zu schwierigem Gelände. Wenn das Schmierfett erscheint, muss jede Kreatur, die in diesem Bereich steht, einen Geschicklichkeitsrettungswurf bestehen, um nicht hinzufallen. Kreaturen, die den Bereich betreten oder ihren Zug darin beginnen, müssen ebenfalls einen Geschicklichkeitsrettungswurf bestehen, oder sie rutschen aus und sind liegend."
+  },
+  "image": "grease",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

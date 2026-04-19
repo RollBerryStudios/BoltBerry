@@ -1,0 +1,238 @@
+{
+  "id": 119,
+  "slug": "giant-badger",
+  "name": "Giant Badger",
+  "nameDe": "Riesendachs",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "10",
+    "de": "10"
+  },
+  "hp": {
+    "en": "13 (2d8 + 4)",
+    "de": "13 (2W8+4)"
+  },
+  "str": 13,
+  "dex": 10,
+  "con": 15,
+  "int": 2,
+  "wis": 12,
+  "cha": 5,
+  "strMod": 1,
+  "dexMod": 0,
+  "conMod": 2,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "burrow": {
+      "en": 10,
+      "de": 3
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 30 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Dunkelsicht 9 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Smell",
+        "text": "The badger has advantage on Wisdom (Perception) checks that rely on smell."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfer Geruchssinn",
+        "text": "Der Dachs ist bei Weisheitswürfen (Wahrnehmung), die auf Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The badger makes two attacks: one with its bite and one with its claws."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 6 (2d4 + 1) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Dachs führt zwei Angriffe aus: einen Biss- und einen Klauenangriff."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 4 (1W6+1) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (2W4+1) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/530/1000/1000/636376327839601860.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantBadgerSummer (1).webp",
+    "variant": "summer"
+  },
+  "tokens": [
+    {
+      "file": "GiantBadgerSummer (10).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (11).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (12).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (13).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (14).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (15).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (16).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (17).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (18).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (19).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (2).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (20).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (21).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (22).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (23).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (24).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (25).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (26).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (27).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (28).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (29).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (3).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (4).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (5).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (6).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (7).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (8).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBadgerSummer (9).webp",
+      "variant": "summer"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

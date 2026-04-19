@@ -1,0 +1,62 @@
+{
+  "id": 249,
+  "slug": "eyebite",
+  "name": "Eyebite",
+  "nameDe": "Böser Blick",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Necromancy",
+    "de": "Nekromantie"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "6th-level necromancy",
+    "de": "Stufe 6 Nekromantie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "For the spell's duration, your eyes become an inky void imbued with dread power. One creature of your choice within 60 feet of you that you can see must succeed on a wisdom saving throw or be affected by one of the following effects of your choice for the duration. On each of your turns until the spell ends, you can use your action to target another creature but can't target a creature again if it has succeeded on a saving throw against this casting of eyebite. ***Asleep.*** The target falls unconscious. It wakes up if it takes any damage or if another creature uses its action to shake the sleeper awake. ***Panicked.*** The target is frightened of you. On each of its turns, the frightened creature must take the Dash action and move away from you by the safest and shortest available route, unless there is nowhere to move. If the target moves to a place at least 60 feet away from you where it can no longer see you, this effect ends. ***Sickened.*** The target has disadvantage on attack rolls and ability checks. At the end of each of its turns, it can make another wisdom saving throw. If it succeeds, the effect ends.",
+    "de": "Für die Wirkungsdauer werden deine Augen zu einer tiefschwarzen Leere, die von schauerlicher Macht erfüllt ist. Eine Kreatur deiner Wahl, die du sehen kannst und die sich im Abstand von bis zu 18 Metern von dir befindet, muss einen Weisheitsrettungswurf bestehen, anderenfalls leidet sie für die Wirkungsdauer unter einem der folgenden Effekte deiner Wahl. Bis der Zauber endet, kannst du deine Aktion in jedem deiner Züge verwenden, um eine andere Kreatur als Ziel auszuwählen. Du kannst jedoch keine Kreatur erneut als Ziel auswählen, die bei ihrem Rettungswurf gegen Böser Blick  Erfolg hatte. Krank:  Das Ziel ist bei Angriffs- und Attributswürfen im Nachteil. Am Ende jedes seiner Züge kann es einen weiteren Weisheitsrettungswurf ausführen. Ist der Rettungswurf erfolgreich, endet der Effekt. Panik:  Das Ziel ist von dir verängstigt. Verängstigte Kreaturen müssen in jedem Zug die Spurt-Aktion ausführen und sich auf dem sichersten und kürzesten Weg von dir entfernen, sofern das technisch möglich ist. Wenn sich das Ziel mindestens 18 Meter von dir wegbewegt und dich nicht länger sehen kann, endet dieser Effekt. Schlaf:  Das Zielt wird bewusstlos. Es wacht auf, wenn es Schaden erleidet oder wenn eine andere Kreatur eine Aktion verwendet, um es wachzurütteln."
+  },
+  "image": "eyebite",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

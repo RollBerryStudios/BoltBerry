@@ -1,0 +1,30 @@
+{
+  "id": 281,
+  "slug": "eyes-of-the-eagle",
+  "name": "Eyes of the Eagle",
+  "nameDe": "Augen des Adlers",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 250000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon (requires attunement) These crystal lenses fit over the eyes. While wearing them, you have advantage on Wisdom (Perception) checks that rely on sight. In conditions of clear visibility, you can make out details of even extremely distant creatures and objects as small as 2 feet across.",
+    "de": "Diese kristallenen Gläser können als Brille getragen werden. Wenn du sie trägst, bist du bei Weisheitswürfen (Wahrnehmung), die einen klaren Blick erfordern, im Vorteil. Bei klaren Sichtverhältnissen kannst du selbst bei extrem weit entfernten Kreaturen und Gegenständen Details erkennen, wenn diese mindestens 60 Zentimeter groß sind."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

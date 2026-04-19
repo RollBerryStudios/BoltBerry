@@ -1,0 +1,166 @@
+{
+  "id": 164,
+  "slug": "harpy",
+  "name": "Harpy",
+  "nameDe": "Harpyie",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium monstrosity, chaotic evil",
+    "de": "Mittelgroße Monstrosität, chaotisch böse"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "11",
+    "de": "11"
+  },
+  "hp": {
+    "en": "38 (7d8 + 7)",
+    "de": "38 (7W8+7)"
+  },
+  "str": 12,
+  "dex": 13,
+  "con": 12,
+  "int": 7,
+  "wis": 10,
+  "cha": 13,
+  "strMod": 1,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": -2,
+  "wisMod": 0,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    },
+    "fly": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common"
+    ],
+    "de": [
+      "Gemeinsprache"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The harpy makes two attacks: one with its claws and one with its club."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 6 (2d4 + 1) slashing damage."
+      },
+      {
+        "name": "Club",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 3 (1d4 + 1) bludgeoning damage."
+      },
+      {
+        "name": "Luring Song",
+        "text": "The harpy sings a magical melody. Every humanoid and giant within 300 ft. of the harpy that can hear the song must succeed on a DC 11 Wisdom saving throw or be charmed until the song ends. The harpy must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the harpy is incapacitated.\nWhile charmed by the harpy, a target is incapacitated and ignores the songs of other harpies. If the charmed target is more than 5 ft. away from the harpy, the must move on its turn toward the harpy by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the harpy, a target can repeat the saving throw. A creature can also repeat the saving throw at the end of each of its turns. If a creature's saving throw is successful, the effect ends on it.\nA target that successfully saves is immune to this harpy's song for the next 24 hours."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Die Harpyie führt zwei Angriffe aus: einen Klauenangriff und einen mit dem Knüppel."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (2W4+1) Hiebschaden."
+      },
+      {
+        "name": "Knüppel",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 3 (1W4+1) Wuchtschaden."
+      },
+      {
+        "name": "Verlockender Gesang",
+        "text": "Die Harpyie singt eine magische Melodie. Alle Humanoiden und Riesen im Abstand von bis zu 90 Metern um die Harpyie, die das Lied hören können, müssen einen SG-11-Weisheitsrettungswurf bestehen, um nicht bis zum Ende des Lieds bezaubert zu sein. Die Harpyie muss in folgenden Zügen eine Bonusaktion verwenden, um weiterzusingen. Sie kann den Gesang jederzeit beenden. Der Gesang endet, wenn die Harpyie kampfunfähig ist. Solange ein Ziel von der Harpyie bezaubert ist, ist es kampfunfähig und ignoriert die Lieder anderer Harpyien. Wenn das bezauberte Ziel mehr als 1,5 Meter von der Harpyie entfernt ist, muss es sich in seinem Zug auf dem direktesten Weg auf die Harpyie zubewegen, um in einen Radius von bis zu 1,5 Meter um die Kreatur zu kommen. Das Ziel vermeidet keine Gelegenheitsangriffe, aber bevor es sich in schädigendes Gelände wie Lava oder eine Grube bewegt und wenn es Schaden durch eine Quelle mit Ausnahme der Harpyie erleidet, kann das Ziel den Rettungswurf wiederholen. Das bezauberte Ziel kann den Rettungswurf am Ende eines jeden seiner Züge wiederholen. Wenn der Rettungswurf erfolgreich ist, endet der Effekt für das Ziel. Ein Ziel, dem ein Rettungswurf gelingt, ist 24 Stunden lang gegen den Gesang der Harpyie immun."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/391/315/315/636252781955908234.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "Harpy (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Harpy (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Harpy (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Harpy (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Harpy (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Harpy (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Harpy (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Harpy (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Harpy (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Harpy (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Harpy (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Harpy (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Harpy (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,66 @@
+{
+  "id": 60,
+  "slug": "protection-from-evil-and-good",
+  "name": "Protection from Evil and Good",
+  "nameDe": "Schutz vor Gut und Böse",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "paladin",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Kleriker",
+      "Paladin",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level abjuration",
+    "de": "Stufe 1 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "holy water or powdered silver and iron, which the spell consumes",
+      "de": "Weihwasser oder pulverisiertes Silber und Eisen, das durch den Zauber verbraucht wird"
+    },
+    "raw": {
+      "en": "V, S, M (holy water or powdered silver and iron, which the spell consumes)",
+      "de": "V, G, M (Weihwasser oder pulverisiertes Silber und Eisen, das durch den Zauber verbraucht wird)"
+    }
+  },
+  "description": {
+    "en": "Until the spell ends, one willing creature you touch is protected against certain types of creatures: aberrations, celestials, elementals, fey, fiends, and undead. The protection grants several benefits. Creatures of those types have disadvantage on attack rolls against the target. The target also can't be charmed, frightened, or possessed by them. If the target is already charmed, frightened, or possessed by such a creature, the target has advantage on any new saving throw against the relevant effect.",
+    "de": "Der Schutz gewährt mehrere Vorteile. Angriffswürfe von Kreaturen dieses Typs sind bei Angriffen auf das Ziel im Nachteil. Das Ziel kann auch nicht von ihnen besessen, bezaubert oder verängstigt sein. Ist das Ziel bereits von einer solchen Kreatur besessen, bezaubert oder verängstigt, ist das Ziel bei jedem neuen Rettungswurf gegen den entsprechenden Effekt im Vorteil."
+  },
+  "image": "abjuration",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

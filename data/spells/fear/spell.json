@@ -1,0 +1,66 @@
+{
+  "id": 120,
+  "slug": "fear",
+  "name": "Fear",
+  "nameDe": "Furcht",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level illusion",
+    "de": "Stufe 3 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self (30-foot cone)",
+    "de": "Selbst (9 Meter Kegel)"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a white feather or the heart of a hen",
+      "de": "eine weiße Feder oder das Herz eines Huhns"
+    },
+    "raw": {
+      "en": "V, S, M (a white feather or the heart of a hen)",
+      "de": "V, G, M (eine weiße Feder oder das Herz eines Huhns)"
+    }
+  },
+  "description": {
+    "en": "You project a phantasmal image of a creature's worst fears. Each creature in a 30-foot cone must succeed on a wisdom saving throw or drop whatever it is holding and become frightened for the duration. While frightened by this spell, a creature must take the Dash action and move away from you by the safest available route on each of its turns, unless there is nowhere to move. If the creature ends its turn in a location where it doesn't have line of sight to you, the creature can make a wisdom saving throw. On a successful save, the spell ends for that creature.",
+    "de": "Du projizierst ein Trugbild der schlimmsten Ängste einer Kreatur. Jede Kreatur in einem Kegel von neun Metern muss einen Weisheitsrettungswurf bestehen, oder sie lässt fallen, was auch immer sie hält, und ist für die Wirkungsdauer verängstigt. Wenn eine Kreatur aufgrund dieses Zaubers verängstigt ist, muss sie in jedem ihrer Züge die Spurt-Aktion ausführen und sich auf dem sichersten Weg von dir fortbewegen, sofern dies technisch möglich ist. Wenn eine Kreatur ihren Zug an einem Ort beendet, an dem sie dich nicht sehen kann, kann sie einen Weisheitsrettungswurf ausführen. Bei einem Erfolg endet der Zauber für diese Kreatur."
+  },
+  "image": "illusion",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

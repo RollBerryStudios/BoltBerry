@@ -1,0 +1,293 @@
+{
+  "id": 93,
+  "slug": "druid",
+  "name": "Druid",
+  "nameDe": "Druide",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "11 (16 With Barkskin)",
+    "de": "11 (16 mit Rindenhaut)"
+  },
+  "hp": {
+    "en": "27 (5d8 + 5)",
+    "de": "27 (5W8+5)"
+  },
+  "str": 10,
+  "dex": 12,
+  "con": 13,
+  "int": 12,
+  "wis": 15,
+  "cha": 11,
+  "strMod": 0,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": 1,
+  "wisMod": 2,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 14"
+    ],
+    "de": [
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Druidic plus any two languages"
+    ],
+    "de": [
+      "Druidisch und zwei weitere beliebige Sprachen"
+    ]
+  },
+  "skills": [
+    "Heilkunde +4",
+    "Naturkunde +3",
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Spellcasting",
+        "text": "The druid is a 4th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell attacks). The druid has the following druid spells prepared:"
+      },
+      {
+        "name": "Cantrips (at will)",
+        "text": "druidcraft, produce flame, shillelagh"
+      },
+      {
+        "name": "1st level (4 slots)",
+        "text": "entangle, faerie fire, speak with animals, thunderwave"
+      },
+      {
+        "name": "2nd level (3 slots)",
+        "text": "flame blade, moonbeam"
+      }
+    ],
+    "de": [
+      {
+        "name": "Zaubern",
+        "text": "Der Druide ist ein Zauberwirker des 4 Grades. Seine Zauberfertigkeit ist Weisheit (Zauberrettungswurf SG 12, +4 zum Treffen mit Zauberangriffen). Er hat die folgenden Druidenzauber vorbereitet:"
+      },
+      {
+        "name": "Zaubertricks (nach Belieben)",
+        "text": "Druidenkunst, Flammen erzeugen, Shillelagh"
+      },
+      {
+        "name": "1. Grad (4 Zauberplätze)",
+        "text": "Verstricken, Lange Schritte, Mit Tieren sprechen, Donnerwoge"
+      },
+      {
+        "name": "2. Grad (3 Zauberplätze)",
+        "text": "Tierbote, Rindenhaut"
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Quarterstaff",
+        "text": " Melee Weapon Attack: +2 to hit (+4 to hit with shillelagh), reach 5 ft., one target. Hit: 3 (1d6) bludgeoning damage, 4 (1d8) bludgeoning damage if wielded with two hands, or 6 (1d8 + 2) bludgeoning damage with shillelagh."
+      }
+    ],
+    "de": [
+      {
+        "name": "Kampfstab",
+        "text": "Nahkampfwaffenangriff: +2 auf Treffer (+4 auf Treffer mit Shillelagh), Reichweite 1,5 m, ein Ziel. Treffer: 3 (1W6) Wuchtschaden, 4 (1W8) Wuchtschaden bei zweihändiger Führung oder 6 (1W8+2) Wuchtschaden mit Shillelagh."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/299/1000/1000/636252771583275655.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (jedes Volk)"
+  },
+  "alignment": {
+    "en": "any alignment",
+    "de": "jede Gesinnung"
+  },
+  "token": {
+    "file": "DruidDwarfMale (1).webp",
+    "variant": "dwarfMale"
+  },
+  "tokens": [
+    {
+      "file": "DruidDwarfMale (2).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "DruidDwarfMale (3).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "DruidElfFemale (1).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "DruidElfFemale (2).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "DruidElfFemale (3).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "DruidElfFemale (4).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "DruidElfMale (1).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "DruidElfMale (2).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "DruidElfMale (3).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "DruidElfMale (4).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "DruidElfMale.webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "DruidGnomeFemale (1).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "DruidGnomeFemale (2).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "DruidGnomeFemale (3).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "DruidGnomeFemale (4).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "DruidGnomeFemale (5).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "DruidGnomeFemale (6).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "DruidGnomeFemale (7).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "DruidGnomeFemale (8).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "DruidGnomeMale (1).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "DruidGnomeMale (2).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "DruidHalflingFemale (1).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "DruidHalflingFemale (2).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "DruidHalflingFemale (3).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "DruidHalfOrcMale.webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "DruidHumanFemale (1).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "DruidHumanFemale (2).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "DruidHumanFemale (3).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "DruidHumanFemale (4).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "DruidHumanMale (1).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "DruidHumanMale (2).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "DruidHumanMale (3).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "DruidHumanMale (4).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "DruidHumanMale (5).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "DruidTieflingMale (1).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "DruidTieflingMale (2).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "DruidTieflingMale (3).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "DruidTieflingMale (4).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "DruidTieflingMale (5).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "DruidTieflingMale (6).webp",
+      "variant": "tieflingMale"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

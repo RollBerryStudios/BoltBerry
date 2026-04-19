@@ -1,0 +1,212 @@
+{
+  "id": 201,
+  "slug": "merrow",
+  "name": "Merrow",
+  "nameDe": "Seeoger",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, chaotic evil",
+    "de": "Große Monstrosität, chaotisch böse"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "45 (6d10 + 12)",
+    "de": "45 (6W10+12)"
+  },
+  "str": 18,
+  "dex": 10,
+  "con": 15,
+  "int": 8,
+  "wis": 10,
+  "cha": 9,
+  "strMod": 4,
+  "dexMod": 0,
+  "conMod": 2,
+  "intMod": -1,
+  "wisMod": 0,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "swim": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Abyssal",
+      "Aquan"
+    ],
+    "de": [
+      "Abyssisch",
+      "Aqual"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Amphibious",
+        "text": "The merrow can breathe air and water."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amphibisch",
+        "text": "Der Seeoger kann Luft und Wasser atmen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The merrow makes two attacks: one with its bite and one with its claws or harpoon."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 9 (2d4 + 4) slashing damage."
+      },
+      {
+        "name": "Harpoon",
+        "text": "Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 11 (2d6 + 4) piercing damage. If the target is a Huge or smaller creature, it must succeed on a Strength contest against the merrow or be pulled up to 20 feet toward the merrow."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Seeoger führt zwei Angriffe aus: einen Biss- und einen Klauen- oder Harpunenangriff."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 8 (1W8+4) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 9 (2W4+4) Hiebschaden."
+      },
+      {
+        "name": "Harpune",
+        "text": "Nah- oder Fernkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m oder Reichweite 6/18 m, ein Ziel. Treffer: 11 (2W6+4) Stichschaden. Wenn das Ziel eine höchstens riesige Kreatur ist, muss es einen Stärkevergleich mit dem Seeoger bestehen, oder es wird bis zu sechs Meter auf den Seeoger zugezogen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/203/315/315/636252764097970952.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "Merrow (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Merrow (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Merrow (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

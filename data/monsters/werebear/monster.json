@@ -1,0 +1,219 @@
+{
+  "id": 302,
+  "slug": "werebear",
+  "name": "Werebear",
+  "nameDe": "Werbär",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, neutral good",
+    "de": "Mittelgroßer Humanoid, neutral gut"
+  },
+  "challenge": "5",
+  "xp": 1800,
+  "ac": {
+    "en": "10 (in humanoider Gestalt, 11 (natürliche Rüstung) in Bären- und hybrider Gestalt)",
+    "de": "10 (in humanoider Gestalt, 11 (natürliche Rüstung) in Bären- und hybrider Gestalt)"
+  },
+  "hp": {
+    "en": "135 (18d8 + 54)",
+    "de": "135 (18W8+54)"
+  },
+  "str": 19,
+  "dex": 10,
+  "con": 17,
+  "int": 11,
+  "wis": 12,
+  "cha": 12,
+  "strMod": 4,
+  "dexMod": 0,
+  "conMod": 3,
+  "intMod": 0,
+  "wisMod": 1,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "climb": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Passive Perception 17"
+    ],
+    "de": [
+      "Passive Wahrnehmung 17"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Gemeinsprache (kann in Bärengestalt nicht sprechen)"
+    ],
+    "de": [
+      "Gemeinsprache (kann in Bärengestalt nicht sprechen)"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +7"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Shapechanger",
+        "text": "The werebear can use its action to polymorph into a Large bear-humanoid hybrid or into a Large bear, or back into its true form, which is humanoid. Its statistics, other than its size and AC, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+      },
+      {
+        "name": "Keen Smell",
+        "text": "The werebear has advantage on Wisdom (Perception) checks that rely on smell."
+      }
+    ],
+    "de": [
+      {
+        "name": "Gestaltwandler",
+        "text": "Der Werbär kann seine Aktion verwenden, um sich in eine hybride Gestalt aus Bär und Humanoide oder in einen großen Bären zu verwandeln - oder um wieder seine wahre, humanoide Gestalt anzunehmen. Seine Spielwerte sind abgesehen von Größe und RK in beiden Gestalten gleich. Ausrüstung, die er trägt oder hält, wird nicht verwandelt. Wenn er stirbt, nimmt er seine wahre Gestalt an."
+      },
+      {
+        "name": "Scharfer Geruchssinn",
+        "text": "Der Werbär ist bei Weisheitswürfen (Wahrnehmung), die auf Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "In bear form, the werebear makes two claw attacks. In humanoid form, it makes two greataxe attacks. In hybrid form, it can attack like a bear or a humanoid."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 15 (2d10 + 4) piercing damage. If the target is a humanoid, it must succeed on a DC 14 Constitution saving throw or be cursed with werebear lycanthropy."
+      },
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) slashing damage."
+      },
+      {
+        "name": "Greataxe",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 10 (1d12 + 4) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "In Bärengestalt führt der Werbär zwei Klauenangriffe aus. In humanoider Gestalt führt er zwei Angriffe mit der Zweihandaxt aus. In hybrider Gestalt kann er wie ein Bär oder wie ein Humanoide angreifen."
+      },
+      {
+        "name": "Biss (nur Bären- oder hybride Gestalt)",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 15 (2W10+4) Stichschaden. Wenn das Ziel ein Humanoide ist, muss es einen SG-14-Konstitutionsrettungswurf bestehen, um nicht mit Werbär-Lykanthropie verflucht zu werden."
+      },
+      {
+        "name": "Klauen (nur Bären- oder hybride Gestalt)",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 13 (2W8+4) Hiebschaden."
+      },
+      {
+        "name": "Zweihandaxt (nur humanoide oder hybride Gestalt)",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (1W12+4) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/82/1000/1000/636252736005297867.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (Mensch"
+  },
+  "alignment": {
+    "en": "neutral good",
+    "de": "Gestaltwandler), neutral gut"
+  },
+  "token": {
+    "file": "Werebear (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Werebear (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werebear (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

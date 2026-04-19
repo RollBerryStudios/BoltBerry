@@ -1,0 +1,26 @@
+{
+  "id": 296,
+  "slug": "ring-of-swimming",
+  "name": "Ring of Swimming",
+  "nameDe": "Ring des Schwimmens",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 300000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Ring, uncommon You have a swimming speed of 40 feet while wearing this ring.",
+    "de": "Wenn du diesen Ring trägst, hast du eine Schwimmbewegungsrate von zwölf Metern."
+  },
+  "image": "ring",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

@@ -1,0 +1,228 @@
+{
+  "id": 252,
+  "slug": "satyr",
+  "name": "Satyr",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium fey, chaotic neutral",
+    "de": "Mittelgroße Fee, chaotisch neutral"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "14 (Leather Armor)",
+    "de": "14 (Lederrüstung)"
+  },
+  "hp": {
+    "en": "31 (7d8)",
+    "de": "31 (7W8)"
+  },
+  "str": 12,
+  "dex": 16,
+  "con": 11,
+  "int": 12,
+  "wis": 10,
+  "cha": 14,
+  "strMod": 1,
+  "dexMod": 3,
+  "conMod": 0,
+  "intMod": 1,
+  "wisMod": 0,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 12"
+    ],
+    "de": [
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Elvish",
+      "Sylvan"
+    ],
+    "de": [
+      "Elfisch",
+      "Gemeinsprache",
+      "Sylvanisch"
+    ]
+  },
+  "skills": [
+    "Auftreten +6",
+    "Heimlichkeit +5",
+    "Wahrnehmung +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Magic Resistance",
+        "text": "The satyr has advantage on saving throws against spells and other magical effects."
+      }
+    ],
+    "de": [
+      {
+        "name": "Magieresistenz",
+        "text": "Der Satyr ist bei Rettungswürfen gegen Zauber und andere magische Effekte im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Ram",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 6 (2d4 + 1) bludgeoning damage."
+      },
+      {
+        "name": "Shortsword",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1 d6 + 3) piercing damage."
+      },
+      {
+        "name": "Shortbow",
+        "text": "Ranged Weapon Attack: +5 to hit, range 80/320 ft., one target. Hit: 6 (1d6 + 3) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Kurzbogen",
+        "text": "Fernkampfwaffenangriff: +5 auf Treffer, Reichweite 24/96 m, ein Ziel. Treffer: 6 (1W6+3) Stichschaden."
+      },
+      {
+        "name": "Kurzschwert",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W6+3) Stichschaden."
+      },
+      {
+        "name": "Rammbock",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (2W4+1) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/169/1000/1000/636252760706340605.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "fey",
+    "de": "Feenwesen"
+  },
+  "alignment": {
+    "en": "chaotic neutral",
+    "de": "chaotisch neutral"
+  },
+  "token": {
+    "file": "Satyr (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Satyr (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Satyr (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

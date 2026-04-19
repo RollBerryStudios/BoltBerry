@@ -1,0 +1,64 @@
+{
+  "id": 319,
+  "slug": "stone-shape",
+  "name": "Stone Shape",
+  "nameDe": "Stein formen",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "druid",
+      "wizard"
+    ],
+    "de": [
+      "Kleriker",
+      "Druide",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "4th-level transmutation",
+    "de": "Stufe 4 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "soft clay, which must be worked into roughly the desired shape of the stone object",
+      "de": "weicher Ton, der in etwa in die gewünschte Form des Steinobjekts gebracht werden muss"
+    },
+    "raw": {
+      "en": "V, S, M (soft clay, which must be worked into roughly the desired shape of the stone object)",
+      "de": "V, G, M (weicher Ton, der in etwa in die gewünschte Form des Steinobjekts gebracht werden muss)"
+    }
+  },
+  "description": {
+    "en": "You touch a stone object of Medium size or smaller or a section of stone no more than 5 feet in any dimension and form it into any shape that suits your purpose. So, for example, you could shape a large rock into a weapon, idol, or coffer, or make a small passage through a wall, as long as the wall is less than 5 feet thick. You could also shape a stone door or its frame to seal the door shut. The object you create can have up to two hinges and a latch, but finer mechanical detail isn't possible.",
+    "de": "Du berührst einen maximal mittelgroßen, steinernen Gegenstand oder einen Bereich aus Stein, der in keiner Abmessung größer als 1,5 Meter sein darf, und verformst ihn nach deinen Wünschen. Du könntest beispielsweise einen großen Felsen in eine Waffe, einen Götzen oder eine Truhe formen, oder einen kleinen Durchgang durch eine Mauer schaffen, solange die Mauer nicht dicker als 1,5 Meter ist. Du könntest auch eine Steintür oder ihren Rahmen umformen, um sie zu versiegeln. Der von dir erschaffene Gegenstand kann bis zu zwei Scharniere und einen Riegel besitzen, feinere mechanische Details sind jedoch nicht möglich."
+  },
+  "image": "stone-shape",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

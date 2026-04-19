@@ -1,0 +1,210 @@
+{
+  "id": 173,
+  "slug": "hunter-shark",
+  "name": "Hunter Shark",
+  "nameDe": "Jagdhai",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "12 (Natural Armor)",
+    "de": "12 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "45 (6d10 + 12)",
+    "de": "45 (6W10+12)"
+  },
+  "str": 18,
+  "dex": 13,
+  "con": 15,
+  "int": 1,
+  "wis": 10,
+  "cha": 4,
+  "strMod": 4,
+  "dexMod": 1,
+  "conMod": 2,
+  "intMod": -5,
+  "wisMod": 0,
+  "chaMod": -3,
+  "speed": {
+    "run": {},
+    "swim": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 30 ft.",
+      "passive perception 12"
+    ],
+    "de": [
+      "Blindsicht 9 m",
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Blood Frenzy",
+        "text": "The shark has advantage on melee attack rolls against any creature that doesn't have all its hit points."
+      },
+      {
+        "name": "Water Breathing",
+        "text": "The shark can breathe only underwater."
+      }
+    ],
+    "de": [
+      {
+        "name": "Blutrausch",
+        "text": "Der Hai ist bei Nahkampf-Angriffswürfen gegen Kreaturen, die nicht alle Trefferpunkte besitzen, im Vorteil."
+      },
+      {
+        "name": "Wasser atmen",
+        "text": "Der Hai kann nur unter Wasser atmen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 13 (2W8+4) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "HunterShark (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "HunterShark (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "HunterShark (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

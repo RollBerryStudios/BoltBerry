@@ -1,0 +1,191 @@
+{
+  "id": 239,
+  "slug": "raven",
+  "name": "Raven",
+  "nameDe": "Rabe",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny beast, unaligned",
+    "de": "Winzige Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "1 (1d4 - 1)",
+    "de": "1 (1W4-1)"
+  },
+  "str": 2,
+  "dex": 14,
+  "con": 8,
+  "int": 2,
+  "wis": 12,
+  "cha": 6,
+  "strMod": -4,
+  "dexMod": 2,
+  "conMod": -1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "fly": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Mimicry",
+        "text": "The raven can mimic simple sounds it has heard, such as a person whispering, a baby crying, or an animal chittering. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
+      }
+    ],
+    "de": [
+      {
+        "name": "Stimmen nachahmen",
+        "text": "Der Rabe kann einfache Geräusche imitieren, die er gehört hat, beispielsweise das Geflüster einer Person, Säuglingsgeschrei oder Tierlaute. Ein Kreatur, die diese Geräusche hört, erkennt sie als Imitation, sofern sie einen SG-10-Weisheitswurf (Motiv erkennen) besteht."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Beak",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1 piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Schnabel",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 1 Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/553/1000/1000/636376341568391037.jpeg",
+  "size": {
+    "en": "tiny",
+    "de": "Winziges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "RavenForest (1).webp",
+    "variant": "forest"
+  },
+  "tokens": [
+    {
+      "file": "RavenForest (10).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "RavenForest (11).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "RavenForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "RavenForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "RavenForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "RavenForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "RavenForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "RavenForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "RavenForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "RavenForest (9).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "RavenUrban (1).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RavenUrban (10).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RavenUrban (2).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RavenUrban (3).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RavenUrban (4).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RavenUrban (5).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RavenUrban (6).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RavenUrban (7).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RavenUrban (8).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RavenUrban (9).webp",
+      "variant": "urban"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

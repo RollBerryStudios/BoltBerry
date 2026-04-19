@@ -1,0 +1,60 @@
+{
+  "id": 272,
+  "slug": "hallow",
+  "name": "Hallow",
+  "nameDe": "Weihen",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "5th-level evocation",
+    "de": "Stufe 5 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "24 hours",
+    "de": "24 Stunden"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Until dispelled",
+    "de": "Bis entzaubert"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "herbs, oils, and incense worth at least 1,000 gp, which the spell consumes",
+      "de": "Kräuter, Öle und Weihrauch im Wert von mindestens 1.000 Goldstücken, die der Zauberspruch verbraucht"
+    },
+    "raw": {
+      "en": "V, S, M (herbs, oils, and incense worth at least 1,000 gp, which the spell consumes)",
+      "de": "V, G, M (Kräuter, Öle und Weihrauch im Wert von mindestens 1.000 Goldstücken, die der Zauberspruch verbraucht)"
+    }
+  },
+  "description": {
+    "en": "You touch a point and infuse an area around it with holy (or unholy) power. The area can have a radius up to 60 feet, and the spell fails if the radius includes an area already under the effect a hallow spell. The affected area is subject to the following effects. First, celestials, elementals, fey, fiends, and undead can't enter the area, nor can such creatures charm, frighten, or possess creatures within it. Any creature charmed, frightened, or possessed by such a creature is no longer charmed, frightened, or possessed upon entering the area. You can exclude one or more of those types of creatures from this effect. Second, you can bind an extra effect to the area. Choose the effect from the following list, or choose an effect offered by the GM. Some of these effects apply to creatures in the area; you can designate whether the effect applies to all creatures, creatures that follow a specific deity or leader, or creatures of a specific sort, such as ores or trolls. When a creature that would be affected enters the spell's area for the first time on a turn or starts its turn there, it can make a charisma saving throw. On a success, the creature ignores the extra effect until it leaves the area. ***Courage.*** Affected creatures can't be frightened while in the area. ***Darkness.*** Darkness fills the area. Normal light, as well as magical light created by spells of a lower level than the slot you used to cast this spell, can't illuminate the area. ***Daylight.*** Bright light fills the area. Magical darkness created by spells of a lower level than the slot you used to cast this spell can't extinguish the light. ***Energy Protection.*** Affected creatures in the area have resistance to one damage type of your choice, except for bludgeoning, piercing, or slashing. ***Energy Vulnerability.*** Affected creatures in the area have vulnerability to one damage type of your choice, except for bludgeoning, piercing, or slashing. ***Everlasting Rest.*** Dead bodies interred in the area can't be turned into undead. ***Extradimensional Interference.*** Affected creatures can't move or travel using teleportation or by extradimensional or interplanar means. ***Fear.*** Affected creatures are frightened while in the area. ***Silence.*** No sound can emanate from within the area, and no sound can reach into it. ***Tongues.*** Affected creatures can communicate with any other creature in the area, even if they don't share a common language.",
+    "de": "Du berührst einen Punkt und erfüllst den Bereich um ihn herum mit heiliger (oder unheiliger) Macht. Der Bereich kann einen Radius von bis zu 18 Metern haben. Der Zauber schlägt fehlt, wenn zum Radius ein Bereich gehört, der bereits unter dem Effekt des Zaubers Weihen  steht. Der betroffene Bereich unterliegt den folgenden Effekten: Celestische Wesen, Elementare, Feenwesen, Unholde und Untote können den Bereich weder betreten noch Kreaturen innerhalb des Bereichs besessen machen, bezaubern oder verängstigen. Wenn eine Kreatur von diesen Kreaturen besessen, bezaubert oder verängstigt ist, endet dieser Zustand, sobald sie den Bereich betritt. Du kannst einen oder mehrere Arten von Kreaturen von diesem Effekt ausschließen. Zudem kannst du einen zusätzlichen Effekt an den Bereich binden. Wähle einen Effekt aus der folgenden Liste oder einen, den dir dein SL anbietet. Einige dieser Effekte wirken auf Kreaturen in dem Bereich. Du kannst bestimmen, ob der Effekt auf alle Kreaturen wirkt, nur auf Kreaturen, die einer bestimmten Gottheit oder einem Anführer folgen, oder auf Kreaturen einer bestimmten Art wie Orks oder Trolle. Wenn eine Kreatur, die davon betroffen wäre, den Bereich des Zaubers in einem Zug erstmals betritt oder ihren Zug darin beginnt, kann sie einen Charismarettungswurf ausführen. Bei einem Erfolg ignoriert die Kreatur den zusätzlichen Effekt, bis sie den Bereich verlässt. Anfälligkeit gegen Energie:  Betroffene Kreaturen in dem Bereich sind anfällig für eine Schadensart deiner Wahl, mit Ausnahme von Hieb-, Stich- oder Wuchtschaden. Dunkelheit:  Dunkelheit erfüllt den Bereich. Natürliches und magisches Licht, das von Zaubern eines niedrigeren Grades erschaffen wurde als der Zauberplatz, den du zum Wirken von Weihen  verwendet hast, kann den Bereich nicht erhellen. Ewige Ruhe:  Leichen innerhalb des Bereichs können nicht in Untote verwandelt werden. Extradimensionale Interferenz:  Betroffene Kreaturen können nicht mittels Teleportation oder auf extradimensionale oder interplanare Art reisen. Furcht:  Betroffene Kreaturen sind verängstigt, während sie sich in dem Bereich befinden. Mut:  Betroffene Kreaturen können nicht verängstigt werden, während sie sich in dem Bereich befinden. Schutz vor Energie:  Betroffene Kreaturen in dem Bereich sind gegen eine Schadensart deiner Wahl resistent, mit Ausnahme von Hieb-, Stich- oder Wuchtschaden. Stille:  Aus dem Bereich können keine Geräusche dringen, ebenso wenig wie in ihn hinein. Tageslicht:  Helles Licht erfüllt den Bereich. Magische Dunkelheit, die von Zaubern eines niedrigeren Grades erschaffen wurde als der Zauberplatz, den du zum Wirken von Weihen  verwendet hast, kann das Licht nicht löschen. Zungen:  Betroffene Kreaturen können mit allen anderen Kreaturen in dem Bereich kommunizieren, selbst wenn sie keine gemeinsame Sprache sprechen."
+  },
+  "image": "hallow",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

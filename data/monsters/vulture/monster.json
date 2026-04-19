@@ -1,0 +1,195 @@
+{
+  "id": 297,
+  "slug": "vulture",
+  "name": "Vulture",
+  "nameDe": "Geier",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "10",
+    "de": "10"
+  },
+  "hp": {
+    "en": "5 (1d8 + 1)",
+    "de": "5 (1W8+1)"
+  },
+  "str": 7,
+  "dex": 10,
+  "con": 13,
+  "int": 2,
+  "wis": 12,
+  "cha": 4,
+  "strMod": -2,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "fly": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Sight and Smell",
+        "text": "The vulture has advantage on Wisdom (Perception) checks that rely on sight or smell."
+      },
+      {
+        "name": "Pack Tactics",
+        "text": "The vulture has advantage on an attack roll against a creature if at least one of the vulture's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rudeltaktik",
+        "text": "Der Geier ist bei Angriffswürfen gegen eine Kreatur im Vorteil, wenn sich mindestens einer seiner Verbündeten, der nicht kampfunfähig ist, im Abstand von bis zu 1,5 Metern von der Kreatur befindet."
+      },
+      {
+        "name": "Scharfe Sicht und scharfer Geruchssinn",
+        "text": "Der Geier ist bei Weisheitswürfen (Wahrnehmung), die auf Sicht oder Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Beak",
+        "text": "Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 2 (1d4) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Schnabel",
+        "text": "Nahkampfwaffenangriff: +2 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 2 (1W4) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Vulture (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Vulture (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Vulture (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

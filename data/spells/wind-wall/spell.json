@@ -1,0 +1,62 @@
+{
+  "id": 338,
+  "slug": "wind-wall",
+  "name": "Wind Wall",
+  "nameDe": "Windwall",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "ranger"
+    ],
+    "de": [
+      "Druide",
+      "Waldläufer"
+    ]
+  },
+  "type": {
+    "en": "3rd-level evocation",
+    "de": "Stufe 3 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a tiny fan and a feather of exotic origin",
+      "de": "ein kleiner Fächer und eine Feder exotischer Herkunft"
+    },
+    "raw": {
+      "en": "V, S, M (a tiny fan and a feather of exotic origin)",
+      "de": "V, G, M (ein kleiner Fächer und eine Feder exotischer Herkunft)"
+    }
+  },
+  "description": {
+    "en": "A wall of strong wind rises from the ground at a point you choose within range. You can make the wall up to 50 feet long, 15 feet high, and 1 foot thick. You can shape the wall in any way you choose so long as it makes one continuous path along the ground. The wall lasts for the duration. When the wall appears, each creature within its area must make a strength saving throw. A creature takes 3d8 bludgeoning damage on a failed save, or half as much damage on a successful one. The strong wind keeps fog, smoke, and other gases at bay. Small or smaller flying creatures or objects can't pass through the wall. Loose, lightweight materials brought into the wall fly upward. Arrows, bolts, and other ordinary projectiles launched at targets behind the wall are deflected upward and automatically miss. (Boulders hurled by giants or siege engines, and similar projectiles, are unaffected.) Creatures in gaseous form can't pass through it.",
+    "de": "Eine Wand aus starkem Wind erscheint an einem Punkt deiner Wahl in Reichweite. Die Wand kann bis zu 15 Meter lang, 4,5 Meter hoch und 30 Zentimeter dick sein. Du kannst die Wand beliebig formen, solange sie einem ununterbrochenen Pfad auf dem Boden folgt. Sie bleibt für die Wirkungsdauer bestehen. Wenn die Wand erscheint, muss jede Kreatur in ihrem Bereich einen Stärkerettungswurf ausführen. Scheitert der Wurf, erleidet die Kreatur 3W8 Wuchtschaden, anderenfalls die Hälfte. Der starke Wind hält Nebel, Rauch und andere Gase auf Abstand. Maximal kleine fliegende Kreaturen oder Gegenstände können die Wand nicht durchdringen. Lose, leichte Materialien, die in die Wand gebracht werden, fliegen nach oben. Pfeile, Bolzen und andere gewöhnliche Geschosse, die auf Ziele hinter der Wand geschossen werden, werden nach oben abgelenkt und verfehlen ihr Ziel automatisch. (Felsbrocken, die von Riesen oder Belagerungsmaschinen geschleudert werden, und ähnliche Geschosse sind hiervon nicht betroffen.) Kreaturen in gasförmiger Gestalt können die Wand nicht passieren."
+  },
+  "image": "wind-wall",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,186 @@
+{
+  "id": 267,
+  "slug": "spirit-naga",
+  "name": "Spirit Naga",
+  "nameDe": "Geisternaga",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, chaotic evil",
+    "de": "Große Monstrosität, chaotisch böse"
+  },
+  "challenge": "8",
+  "xp": 3900,
+  "ac": {
+    "en": "15 (Natural Armor)",
+    "de": "15 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "75 (10d10 + 20)",
+    "de": "75 (10W10+20)"
+  },
+  "str": 18,
+  "dex": 17,
+  "con": 14,
+  "int": 16,
+  "wis": 15,
+  "cha": 16,
+  "strMod": 4,
+  "dexMod": 3,
+  "conMod": 2,
+  "intMod": 3,
+  "wisMod": 2,
+  "chaMod": 3,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 12"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Abyssal",
+      "Common"
+    ],
+    "de": [
+      "Abyssisch",
+      "Gemeinsprache"
+    ]
+  },
+  "savingThrows": [
+    "Ges +6",
+    "Kon +5",
+    "Wei +5",
+    "Cha +6"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Rejuvenation",
+        "text": "If it dies, the naga returns to life in 1d6 days and regains all its hit points. Only a wish spell can prevent this trait from functioning."
+      }
+    ],
+    "de": [
+      {
+        "name": "Wiederbelebung",
+        "text": "Wenn der Naga stirbt, wird er nach 1W6 Tagen wieder lebendig und erhält all seine Trefferpunkte zurück. Nur der Zauber Wunsch kann verhindern, dass dieses Merkmal wirkt."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +7 to hit, reach 10 ft., one creature. Hit: 7 (1d6 + 4) piercing damage, and the target must make a DC 13 Constitution saving throw, taking 31 (7d8) poison damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 3 m, eine Kreatur. Treffer: 7 (1W6+4) Stichschaden, und das Ziel muss einen SG-13-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet es 31 (7W8) Giftschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/117/315/315/636252746851035686.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "SpiritNaga (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "SpiritNaga (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "SpiritNaga (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "SpiritNaga (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "SpiritNaga (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "SpiritNaga (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "SpiritNaga (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "SpiritNaga (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "SpiritNaga (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "SpiritNaga (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "SpiritNaga (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "SpiritNaga (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "SpiritNaga (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "SpiritNaga (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "SpiritNaga (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "SpiritNaga (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "SpiritNaga (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "SpiritNaga (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "SpiritNaga (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

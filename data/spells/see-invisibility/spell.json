@@ -1,0 +1,64 @@
+{
+  "id": 314,
+  "slug": "see-invisibility",
+  "name": "See Invisibility",
+  "nameDe": "Unsichtbares Sehen",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-level divination",
+    "de": "Stufe 2 Erkenntnismagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a pinch of tale and a small sprinkling of powdered silver",
+      "de": "eine Prise Tale und eine kleine Prise pulverisiertes Silber"
+    },
+    "raw": {
+      "en": "V, S, M (a pinch of tale and a small sprinkling of powdered silver)",
+      "de": "V, G, M (eine Prise Tale und eine kleine Prise pulverisiertes Silber)"
+    }
+  },
+  "description": {
+    "en": "For the duration of the spell, you see invisible creatures and objects as if they were visible, and you can see through Ethereal. The ethereal objects and creatures appear ghostly translucent.",
+    "de": "Für die Wirkungsdauer siehst du unsichtbare Kreaturen und Gegenstände, als wären sie sichtbar. Du kannst zudem in die Ätherebene blicken. Ätherische Kreaturen und Gegenstände erscheinen geisterhaft und durchscheinend."
+  },
+  "image": "detect-thoughts",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

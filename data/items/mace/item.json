@@ -1,0 +1,32 @@
+{
+  "id": 19,
+  "slug": "mace",
+  "name": "Mace",
+  "nameDe": "Streitkolben",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 500,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 4,
+  "classification": {
+    "en": "Simple Melee Weapon",
+    "de": "Einfache Nahkampfwaffe"
+  },
+  "damage": "1d6",
+  "damageType": {
+    "en": "bludgeoning",
+    "de": "wucht"
+  },
+  "image": "mace",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

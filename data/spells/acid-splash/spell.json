@@ -1,0 +1,58 @@
+{
+  "id": 0,
+  "slug": "acid-splash",
+  "name": "Acid Splash",
+  "nameDe": "Säurespritzer",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "Conjuration cantrip",
+    "de": "Beschwörung Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You hurl a bubble of acid. Choose one creature within range, or choose two creatures within range that are within 5 feet of each other. A target must succeed on a dexterity saving throw or take 1d6 acid damage. This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).",
+    "de": "Du wirfst eine Säureblase. Wähle eine oder zwei Kreaturen in Reichweite, sofern sie nicht weiter als 1,5 Meter voneinander entfernt sind. Ziele müssen einen Geschicklichkeitsrettungswurf bestehen, oder sie erleiden 1W6 Säureschaden. Der Schaden des Zaubers steigt um je 1W6, wenn du die 5. Stufe (2W6), die 11. Stufe (3W6) und die 17. Stufe (4W6) erreichst."
+  },
+  "image": "acid-splash",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

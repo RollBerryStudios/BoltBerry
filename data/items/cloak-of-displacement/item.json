@@ -1,0 +1,30 @@
+{
+  "id": 429,
+  "slug": "cloak-of-displacement",
+  "name": "Cloak of Displacement",
+  "nameDe": "Umhang der Verlagerung",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 6000000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, rare (requires attunement) While you wear this cloak, it projects an illusion that makes you appear to be standing in a place near your actual location, causing any creature to have disadvantage on attack rolls against you. If you take damage, the property ceases to function until the start of your next turn. This property is suppressed while you are incapacitated, restrained, or otherwise unable to move.",
+    "de": "Wenn du diesen Umhang trägst, projiziert er eine Illusion, die dich dicht neben deinem eigentlichen Standort erscheinen lässt. Dadurch sind Kreaturen bei Angriffswürfen gegen dich im Nachteil. Wenn du Schaden erleidest, kannst du diese Eigenschaft erst zu Beginn deines nächsten Zugs erneut verwenden. Diese Eigenschaft ist nicht aktiv, wenn du kampfunfähig, festgesetzt oder auf andere Art nicht in der Lage bist, dich zu bewegen."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "cloak",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

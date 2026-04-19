@@ -1,0 +1,59 @@
+{
+  "id": 11,
+  "slug": "command",
+  "name": "Command",
+  "nameDe": "Befehl",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "paladin"
+    ],
+    "de": [
+      "Kleriker",
+      "Paladin"
+    ]
+  },
+  "type": {
+    "en": "1st-level enchantment",
+    "de": "Stufe 1 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "1 round",
+    "de": "1 Runde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "You speak a one-word command to a creature you can see within range. The target must succeed on a wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn't understand your language, or if your command is directly harmful to it. Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the GM determines how the target behaves. If the target can't follow your command, the spell ends. ***Approach.*** The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you. ***Drop.*** The target drops whatever it is holding and then ends its turn. ***Flee.*** The target spends its turn moving away from you by the fastest available means. ***Grovel.*** The target falls prone and then ends its turn. ***Halt.*** The target doesn't move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.",
+    "de": "Du gibst einer Kreatur in Reichweite, die du sehen kannst, einen ein Wort langen Befehl. Das Ziel muss einen Weisheitsrettungswurf bestehen oder den Befehl im nächsten Zug ausführen. Der Zauber hat keine Wirkung, wenn das Ziel untot ist, deine Sprache nicht versteht oder dein Befehl ihm direkt Schaden zufügen würde. Im Folgenden sind einige typische Befehle und deren Effekte aufgelistet. Du kannst auch andere als die hier aufgelisteten Befehle aussprechen. In dem Fall bestimmt der SL, wie sich das Ziel verhält. Kann das Ziel deinen Befehl nicht ausführen, endet der Zauber. Flieh:  Das Ziel nutzt seinen Zug, um sich so schnell wie möglich von dir wegzubewegen. Hinlegen:  Das Ziel legt sich hin und beendet seinen Zug. Komm:  Das Ziel bewegt sich auf dem kürzesten Weg in deine Richtung und beendet seinen Zug, sobald es sich auf 1,5 Meter genähert hat. Loslassen:  Das Ziel lässt fallen, was es gerade hält, und beendet seinen Zug. Stopp:  Das Ziel bewegt sich nicht und führt keinerlei Aktionen aus. Eine fliegende Kreatur bleibt in der Luft, sofern sie dies kann. Falls sie sich bewegen muss, um in der Luft zu bleiben, fliegt sie die dazu minimal notwendige Strecke. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, kann für jeden Grad über dem 1. eine zusätzliche Kreatur betroffen sein. Die Kreaturen müssen sich im Abstand von bis zu neun Metern voneinander befinden, wenn du sie als Ziel wählst."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, kann für jeden Grad über dem 1. eine zusätzliche Kreatur betroffen sein. Die Kreaturen müssen sich im Abstand von bis zu neun Metern voneinander befinden, wenn du sie als Ziel wählst."
+  },
+  "image": "enchantment",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

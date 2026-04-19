@@ -1,0 +1,56 @@
+{
+  "id": 59,
+  "slug": "produce-flame",
+  "name": "Produce Flame",
+  "nameDe": "Flammen erzeugen",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid"
+    ],
+    "de": [
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "Conjuration cantrip",
+    "de": "Beschwörung Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "10 minutes",
+    "de": "10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "A flickering flame appears in your hand. The flame remains there for the duration and harms neither you nor your equipment. The flame sheds bright light in a 10-foot radius and dim light for an additional 10 feet. The spell ends if you dismiss it as an action or if you cast it again. You can also attack with the flame, although doing so ends the spell. When you cast this spell, or as an action on a later turn, you can hurl the flame at a creature within 30 feet of you. Make a ranged spell attack. On a hit, the target takes 1d8 fire damage. This spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).",
+    "de": "Eine flackernde Flamme erscheint in deiner Hand. Sie bleibt für die Wirkungsdauer bestehen und schadet weder dir noch deiner Ausrüstung. Die Flamme spendet in einem Radius von drei Metern helles Licht und in einem Radius von weiteren drei Metern dämmriges Licht. Der Zauber endet, wenn du ihn als Aktion beendest oder ihn erneut wirkst. Du kannst auch mit der Flamme angreifen. Dies beendet jedoch den Zauber. Wenn du diesen Zauber wirkst oder ihn als Aktion in einem späteren Zug wirkst, kannst du die Flamme auf eine Kreatur im Abstand von bis zu neun Metern von dir schleudern. Führe einen Fernkampf-Zauberangriff aus. Bei einem Treffer erleidet das Ziel 1W8 Feuerschaden. Der Schaden dieses Zaubers erhöht sich um je 1W8, wenn du die 5. Stufe (2W8), die 11. Stufe (3W8) und die 17. Stufe (4W8) erreichst"
+  },
+  "image": "produce-flame",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

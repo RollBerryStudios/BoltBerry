@@ -1,0 +1,242 @@
+{
+  "id": 215,
+  "slug": "ogre",
+  "name": "Ogre",
+  "nameDe": "Oger",
+  "source": "SRD",
+  "meta": {
+    "en": "Large giant, chaotic evil",
+    "de": "Großer Gigant, chaotisch böse"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "11 (Hide Armor)",
+    "de": "11 (Fellrüstung)"
+  },
+  "hp": {
+    "en": "59 (7d10 + 21)",
+    "de": "59 (7W10+21)"
+  },
+  "str": 19,
+  "dex": 8,
+  "con": 16,
+  "int": 5,
+  "wis": 7,
+  "cha": 7,
+  "strMod": 4,
+  "dexMod": -1,
+  "conMod": 3,
+  "intMod": -3,
+  "wisMod": -2,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 8"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 8"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Giant"
+    ],
+    "de": [
+      "Gemeinsprache",
+      "Riesisch"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Greatclub",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) bludgeoning damage."
+      },
+      {
+        "name": "Javelin",
+        "text": "Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: 11 (2d6 + 4) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Zweihandknüppel",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 13 (2W8+4) Wuchtschaden."
+      },
+      {
+        "name": "Wurfspeer",
+        "text": "Nah- oder Fernkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m oder Reichweite 9/36 m, ein Ziel. Treffer: 11 (2W6+4) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/285/315/315/636252770535203221.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "giant",
+    "de": "Riese"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "Ogre (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Ogre (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (31).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (32).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (33).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (34).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (35).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (36).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ogre (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

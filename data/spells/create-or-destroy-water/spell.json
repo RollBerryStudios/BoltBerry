@@ -1,0 +1,66 @@
+{
+  "id": 14,
+  "slug": "create-or-destroy-water",
+  "name": "Create or Destroy Water",
+  "nameDe": "Wasser erschaffen oder zerstören",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "druid"
+    ],
+    "de": [
+      "Kleriker",
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "1st-level transmutation",
+    "de": "Stufe 1 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a drop of water if creating water, or a few grains of sand if destroying it",
+      "de": "ein Wassertropfen, wenn du Wasser erzeugst, oder ein paar Sandkörner, wenn du es zerstörst"
+    },
+    "raw": {
+      "en": "V, S, M (a drop of water if creating water, or a few grains of sand if destroying it)",
+      "de": "V, G, M (ein Wassertropfen, wenn du Wasser erzeugst, oder ein paar Sandkörner, wenn du es zerstörst)"
+    }
+  },
+  "description": {
+    "en": "You either create or destroy water. ***Create Water.*** You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot cube within range. ***Destroy Water.*** You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot cube within range.",
+    "de": "Du erschaffst oder zerstörst Wasser. Wasser erschaffen:  Du erschaffst bis zu 40 Liter sauberes Wasser in einem offenen Behälter in Reichweite. Alternativ fällt das Wasser als Regen in einem Würfel mit neun Metern Kantenlänge in Reichweite und löscht offene Flammen in dem Bereich. Wasser zerstören:  Du zerstörst bis zu 40 Liter Wasser in einem offenen Behälter in Reichweite. Alternativ zerstörst du Nebel in einem Würfel mit neun Metern Kantenlänge in Reichweite. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, kannst du für jeden Grad über dem 1. zusätzliche 40 Liter Wasser erschaffen oder zerstören, oder die Kantenlänge des Würfels um 1,5 Meter vergrößern."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 2nd level or higher, you create or destroy 10 additional gallons of water, or the size of the cube increases by 5 feet, for each slot level above 1st.",
+    "de": "Wenn du diesen Zauber mit einem Zauberplatz des 2. Grads oder höher wirkst, erschaffst oder zerstörst du 45 zusätzliche Liter Wasser oder die Größe des Würfels vergrößert sich um 1,5 Meter, für jeden zusätzlichen Zaubergrad."
+  },
+  "image": "transmutation",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

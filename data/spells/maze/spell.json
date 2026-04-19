@@ -1,0 +1,56 @@
+{
+  "id": 178,
+  "slug": "maze",
+  "name": "Maze",
+  "nameDe": "Irrgarten",
+  "level": {
+    "en": "8",
+    "de": "Grad 8"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "8th-level conjuration",
+    "de": "Stufe 8 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You banish a creature that you can see within range into a labyrinthine demiplane. The target remains there for the duration or until it escapes the maze. The target can use its action to attempt to escape. When it does so, it makes a DC 20 Intelligence check. If it succeeds, it escapes, and the spell ends (a minotaur or goristro demon automatically succeeds). When the spell ends, the target reappears in the space it left or, if that space is occupied, in the nearest unoccupied space.",
+    "de": "Du verbannst eine Kreatur in Reichweite, die du sehen kannst, auf eine labyrinthartige Halbebene. Das Ziel bleibt bis zur Wirkungsdauer dort - oder bis es dem Irrgarten entkommt. Das Ziel kann seine Aktion verwenden, um eine Flucht zu versuchen. Dazu muss es einen SG-20-Intelligenzwurf ausführen. Bei einem Erfolg entkommt es und der Zauber endet. Ein Minotaurus oder Goristro-Dämon hat automatisch Erfolg. Wenn der Zauber endet, erscheint das Ziel wieder an der Stelle, von der es wegteleportiert wurde, oder an der nächstgelegenen freien Stelle, falls dieser Ort besetzt ist."
+  },
+  "image": "maze",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

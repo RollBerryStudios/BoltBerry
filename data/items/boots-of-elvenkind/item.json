@@ -1,0 +1,26 @@
+{
+  "id": 279,
+  "slug": "boots-of-elvenkind",
+  "name": "Boots of Elvenkind",
+  "nameDe": "Stiefel der Elfen",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 250000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon While you wear these boots, your steps make no sound, regardless of the surface you are moving across. You also have advantage on Dexterity (Stealth) checks that rely on moving silently.",
+    "de": "Wenn du diese Stiefel trägst, sind deine Schritte unabhängig vom Untergrund geräuschlos. Außerdem bist du bei Geschicklichkeitswürfen (Heimlichkeit), die geräuschlose Bewegung voraussetzen, im Vorteil."
+  },
+  "image": "boots",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

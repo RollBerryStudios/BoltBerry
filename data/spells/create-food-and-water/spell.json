@@ -1,0 +1,58 @@
+{
+  "id": 115,
+  "slug": "create-food-and-water",
+  "name": "Create Food and Water",
+  "nameDe": "Nahrung und Wasser erschaffen",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "paladin"
+    ],
+    "de": [
+      "Kleriker",
+      "Paladin"
+    ]
+  },
+  "type": {
+    "en": "3rd-level conjuration",
+    "de": "Stufe 3 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You create 45 pounds of food and 30 gallons of water on the ground or in containers within range, enough to sustain up to fifteen humanoids or five steeds for 24 hours. The food is bland but nourishing, and spoils if uneaten after 24 hours. The water is clean and doesn't go bad.",
+    "de": "Du erschaffst 22,5 Kilogramm Nahrung und 120 Liter Wasser auf dem Boden oder in Behältern in Reichweite. Diese Vorräte reichen aus, um bis zu fünfzehn Humanoide oder fünf Reittiere 24 Stunden lang zu versorgen. Das Essen ist fade, aber nahrhaft, und verdirbt, wenn es nicht innerhalb von 24 Stunden gegessen wird. Das Wasser ist sauber und verdirbt nicht."
+  },
+  "image": "create-food-water",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,245 @@
+{
+  "id": 266,
+  "slug": "spider",
+  "name": "Spider",
+  "nameDe": "Spinne",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny beast, unaligned",
+    "de": "Winzige Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "1 (1d4 - 1)",
+    "de": "1 (1W4-1)"
+  },
+  "str": 2,
+  "dex": 14,
+  "con": 8,
+  "int": 1,
+  "wis": 10,
+  "cha": 2,
+  "strMod": -4,
+  "dexMod": 2,
+  "conMod": -1,
+  "intMod": -5,
+  "wisMod": 0,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    },
+    "climb": {
+      "en": 20,
+      "de": 6
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 30 ft.",
+      "passive perception 12"
+    ],
+    "de": [
+      "Dunkelsicht 9 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Spider Climb",
+        "text": "The spider can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+      },
+      {
+        "name": "Web Sense",
+        "text": "While in contact with a web, the spider knows the exact location of any other creature in contact with the same web."
+      },
+      {
+        "name": "Web Walker",
+        "text": "The spider ignores movement restrictions caused by webbing."
+      }
+    ],
+    "de": [
+      {
+        "name": "Netzsinn",
+        "text": "Solange die Spinne in Kontakt mit einem Spinnennetz ist, weiß sie genau, wo sich andere Kreaturen aufhalten, die in Kontakt mit demselben Netz sind."
+      },
+      {
+        "name": "Netzwandler",
+        "text": "Die Spinne ignoriert Bewegungseinschränkungen, die durch Netze verursacht werden."
+      },
+      {
+        "name": "Spinnenklettern",
+        "text": "Die Spinne kann an schwierigen Oberflächen klettern, auch kopfüber an der Decke, ohne Attributswürfe ausführen zu müssen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 1 piercing damage, and the target must succeed on a DC 9 Constitution saving throw or take 2 (1d4) poison damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 1 Stichschaden, und das Ziel muss einen SG-9-Konstitutionsrettungswurf bestehen, oder es erleidet 2 (1W4) Giftschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/575/315/315/636376359864842950.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Winziges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "SpiderCave (1).webp",
+    "variant": "cave"
+  },
+  "tokens": [
+    {
+      "file": "SpiderCave (10).webp",
+      "variant": "cave"
+    },
+    {
+      "file": "SpiderCave (11).webp",
+      "variant": "cave"
+    },
+    {
+      "file": "SpiderCave (2).webp",
+      "variant": "cave"
+    },
+    {
+      "file": "SpiderCave (3).webp",
+      "variant": "cave"
+    },
+    {
+      "file": "SpiderCave (4).webp",
+      "variant": "cave"
+    },
+    {
+      "file": "SpiderCave (5).webp",
+      "variant": "cave"
+    },
+    {
+      "file": "SpiderCave (6).webp",
+      "variant": "cave"
+    },
+    {
+      "file": "SpiderCave (7).webp",
+      "variant": "cave"
+    },
+    {
+      "file": "SpiderCave (8).webp",
+      "variant": "cave"
+    },
+    {
+      "file": "SpiderCave (9).webp",
+      "variant": "cave"
+    },
+    {
+      "file": "SpiderForest (1).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "SpiderForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "SpiderForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "SpiderForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "SpiderForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "SpiderForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "SpiderForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "SpiderForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "SpiderSwamp (1).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "SpiderSwamp (2).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "SpiderSwamp (3).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "SpiderSwamp (4).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "SpiderUrban (1).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "SpiderUrban (2).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "SpiderUrban (3).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "SpiderUrban (4).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "SpiderUrban (5).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "SpiderUrban (6).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "SpiderUrban (7).webp",
+      "variant": "urban"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

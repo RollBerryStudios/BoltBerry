@@ -1,0 +1,238 @@
+{
+  "id": 113,
+  "slug": "gargoyle",
+  "name": "Gargoyle",
+  "nameDe": "Gargyl",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium elemental, chaotic evil",
+    "de": "Mittleres Elementar, chaotisch böse"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "15 (Natural Armor)",
+    "de": "15 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "52 (7d8 + 21)",
+    "de": "52 (7W8+21)"
+  },
+  "str": 15,
+  "dex": 11,
+  "con": 16,
+  "int": 6,
+  "wis": 11,
+  "cha": 7,
+  "strMod": 2,
+  "dexMod": 0,
+  "conMod": 3,
+  "intMod": -2,
+  "wisMod": 0,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Terran"
+    ],
+    "de": [
+      "Terral"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "False Appearance",
+        "text": "While the gargoyle remains motion less, it is indistinguishable from an inanimate statue."
+      }
+    ],
+    "de": [
+      {
+        "name": "Falsches Erscheinungsbild",
+        "text": "Solange der Gargyl sich nicht bewegt, ist er nicht von einer leblosen Statue zu unterscheiden."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The gargoyle makes two attacks: one with its bite and one with its claws."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Gargyl führt zwei Angriffe aus: einen Biss- und einen Klauenangriff."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W6+2) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/407/315/315/636252786295384889.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "elemental",
+    "de": "Elementar"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "Gargoyle (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Gargoyle (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gargoyle (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

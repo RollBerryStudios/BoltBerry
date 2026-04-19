@@ -1,0 +1,23 @@
+{
+  "id": 53,
+  "slug": "sling-bullets-20",
+  "name": "Sling Bullets (20)",
+  "nameDe": "Schleudergeschosse (20)",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 4,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 2.5,
+  "image": "weapon",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

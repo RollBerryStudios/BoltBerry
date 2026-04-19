@@ -1,0 +1,56 @@
+{
+  "id": 21,
+  "slug": "divine-favor",
+  "name": "Divine Favor",
+  "nameDe": "Göttliche Gunst",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "paladin"
+    ],
+    "de": [
+      "Paladin"
+    ]
+  },
+  "type": {
+    "en": "1st-level evocation",
+    "de": "Stufe 1 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 bonus action",
+    "de": "1 Bonusaktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "Your prayer empowers you with divine radiance. Until the spell ends, your weapon attacks deal an extra 1d4 radiant damage on a hit.",
+    "de": "Dein Gebet erfüllt dich mit göttlicher Macht Bis der Zauber endet, verursachst du mit deinen Waffenangriffen bei jedem Treffer zusätzlich 1W4 gleißenden Schaden."
+  },
+  "image": "bless",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

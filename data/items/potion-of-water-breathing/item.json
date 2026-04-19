@@ -1,0 +1,26 @@
+{
+  "id": 208,
+  "slug": "potion-of-water-breathing",
+  "name": "Potion of Water Breathing",
+  "nameDe": "Trank der Wasseratmung",
+  "category": {
+    "en": "POTIONS_OILS",
+    "de": "Tränke & Öle"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 18000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Potion, uncommon You can breathe underwater for 1 hour after drinking this potion. Its cloudy green fluid smells of the sea and has a jellyfish-like bubble floating in it.",
+    "de": "Wenn du diesen Trank trinkst, kannst du eine Stunde lang unter Wasser atmen. Die grüne wolkige Flüssigkeit riecht nach Meer, und es treibt eine kleine quallenartige Blase darin."
+  },
+  "image": "potions-and-oils",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

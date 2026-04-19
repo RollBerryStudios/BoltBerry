@@ -1,0 +1,64 @@
+{
+  "id": 140,
+  "slug": "sending",
+  "name": "Sending",
+  "nameDe": "Verständigung",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level evocation",
+    "de": "Stufe 3 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Unlimited",
+    "de": "Unbegrenzt"
+  },
+  "duration": {
+    "en": "1 round",
+    "de": "1 Runde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a short piece of fine copper wire",
+      "de": "ein kurzes Stück feiner Kupferdraht"
+    },
+    "raw": {
+      "en": "V, S, M (a short piece of fine copper wire)",
+      "de": "V, G, M (ein kurzes Stück feiner Kupferdraht)"
+    }
+  },
+  "description": {
+    "en": "You send a short message of twenty-five words or less to a creature with which you are familiar. The creature hears the message in its mind, recognizes you as the sender if it knows you, and can answer in a like manner immediately. The spell enables creatures with Intelligence scores of at least 1 to understand the meaning of your message. You can send the message across any distance and even to other planes of existence, but if the target is on a different plane than you, there is a 5 percent chance that the message doesn't arrive.",
+    "de": "Du sendest eine kurze Nachricht von höchstens 25 Wörtern an eine Kreatur, mit der du vertraut bist. Die Kreatur hört die Nachricht in ihrem Kopf, erkennt dich als Absender, wenn sie dich kennt, und kann auf gleiche Weise sofort antworten. Der Zauber ermöglicht es Kreaturen mit einem Intelligenzwert von mindestens 1, die Bedeutung deiner Nachricht zu verstehen. Du kannst die Nachricht über beliebige Entfernungen und sogar auf andere Ebenen senden. Befindet sich das Ziel jedoch auf einer anderen Ebene als du, besteht ein Risiko von fünf Prozent, dass die Nachricht nicht ankommt."
+  },
+  "image": "sending",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

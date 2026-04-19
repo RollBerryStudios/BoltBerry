@@ -1,0 +1,187 @@
+{
+  "id": 51,
+  "slug": "blink-dog",
+  "name": "Blink Dog",
+  "nameDe": "Flimmerhund",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium fey, lawful good",
+    "de": "Mittelgroße Fee, rechtschaffen gut"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "13",
+    "de": "13"
+  },
+  "hp": {
+    "en": "22 (4d8 + 4)",
+    "de": "22 (4W8+4)"
+  },
+  "str": 12,
+  "dex": 17,
+  "con": 12,
+  "int": 10,
+  "wis": 13,
+  "cha": 11,
+  "strMod": 1,
+  "dexMod": 3,
+  "conMod": 1,
+  "intMod": 0,
+  "wisMod": 1,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Blink Dog",
+      "understands Sylvan but can't speak it"
+    ],
+    "de": [
+      "Flimmerhundisch",
+      "versteht Sylvanisch",
+      "aber kann es nicht sprechen"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +5",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Hearing and Smell",
+        "text": "The dog has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfes Gehör und scharfer Geruchssinn",
+        "text": "Der Hund ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör oder Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) piercing damage."
+      },
+      {
+        "name": "Teleport",
+        "text": "The dog magically teleports, along with any equipment it is wearing or carrying, up to 40 ft. to an unoccupied space it can see. Before or after teleporting, the dog can make one bite attack."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 4 (1W6+1) Stichschaden."
+      },
+      {
+        "name": "Teleportieren (Aufladung 4–6)",
+        "text": "Der Hund teleportiert sich und alle Ausrüstung, die er trägt oder hält, magisch bis zu zwölf Meter weit an eine freie Stelle, die er sehen kann. Vor oder nach dem Teleportieren kann der Hund einen Bissangriff ausführen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/205/315/315/636252764168652859.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "fey",
+    "de": "Feenwesen"
+  },
+  "alignment": {
+    "en": "lawful good",
+    "de": "rechtschaffen gut"
+  },
+  "token": {
+    "file": "BlinkDogRunning (1).webp",
+    "variant": "running"
+  },
+  "tokens": [
+    {
+      "file": "BlinkDogRunning (10).webp",
+      "variant": "running"
+    },
+    {
+      "file": "BlinkDogRunning (2).webp",
+      "variant": "running"
+    },
+    {
+      "file": "BlinkDogRunning (3).webp",
+      "variant": "running"
+    },
+    {
+      "file": "BlinkDogRunning (4).webp",
+      "variant": "running"
+    },
+    {
+      "file": "BlinkDogRunning (5).webp",
+      "variant": "running"
+    },
+    {
+      "file": "BlinkDogRunning (6).webp",
+      "variant": "running"
+    },
+    {
+      "file": "BlinkDogRunning (7).webp",
+      "variant": "running"
+    },
+    {
+      "file": "BlinkDogRunning (8).webp",
+      "variant": "running"
+    },
+    {
+      "file": "BlinkDogRunning (9).webp",
+      "variant": "running"
+    },
+    {
+      "file": "BlinkDogTeleporting (1).webp",
+      "variant": "teleporting"
+    },
+    {
+      "file": "BlinkDogTeleporting (2).webp",
+      "variant": "teleporting"
+    },
+    {
+      "file": "BlinkDogTeleporting (3).webp",
+      "variant": "teleporting"
+    },
+    {
+      "file": "BlinkDogTeleporting (4).webp",
+      "variant": "teleporting"
+    },
+    {
+      "file": "BlinkDogTeleporting (5).webp",
+      "variant": "teleporting"
+    },
+    {
+      "file": "BlinkDogTeleporting (6).webp",
+      "variant": "teleporting"
+    },
+    {
+      "file": "BlinkDogTeleporting (7).webp",
+      "variant": "teleporting"
+    },
+    {
+      "file": "BlinkDogTeleporting (8).webp",
+      "variant": "teleporting"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

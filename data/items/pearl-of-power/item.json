@@ -1,0 +1,30 @@
+{
+  "id": 337,
+  "slug": "pearl-of-power",
+  "name": "Pearl of Power",
+  "nameDe": "Perle der Macht",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 600000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon (requires attunement by a spellcaster) While this pearl is on your person, you can use an action to speak its command word and regain one expended spell slot. If the expended slot was of 4th level or higher, the new slot is 3rd level. Once you use the pearl, it can't be used again until the next dawn.",
+    "de": "Solange du diese Perle bei dir trägst, kannst du als Aktion ihr Befehlswort aussprechen und einen verbrauchten Zauberplatz zurückerhalten. Wenn der verbrauchte Platz ein Platz des 4. oder höheren Grades war, ist der neue Platz ein Zauberplatz des 3. Grades. Nachdem du die Perle verwendet hast, kannst du sie erst im nächsten Morgengrauen erneut verwenden."
+  },
+  "properties": {
+    "en": "requires attunement by a spellcaster",
+    "de": "erfordert einstimmung eines zauberwirkenden"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

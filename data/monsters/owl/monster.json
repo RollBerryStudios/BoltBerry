@@ -1,0 +1,230 @@
+{
+  "id": 220,
+  "slug": "owl",
+  "name": "Owl",
+  "nameDe": "Eule",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny beast, unaligned",
+    "de": "Winzige Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "11",
+    "de": "11"
+  },
+  "hp": {
+    "en": "1 (1d4 - 1)",
+    "de": "1 (1W4-1)"
+  },
+  "str": 3,
+  "dex": 13,
+  "con": 8,
+  "int": 2,
+  "wis": 12,
+  "cha": 7,
+  "strMod": -4,
+  "dexMod": 1,
+  "conMod": -1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 5,
+      "de": 1
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 13"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +3",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Flyby",
+        "text": "The owl doesn't provoke opportunity attacks when it flies out of an enemy's reach."
+      },
+      {
+        "name": "Keen Hearing and Sight",
+        "text": "The owl has advantage on Wisdom (Perception) checks that rely on hearing or sight."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfes Gehör und scharfer Geruchssinn",
+        "text": "Die Eule ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör oder Sicht basieren, im Vorteil."
+      },
+      {
+        "name": "Vorbeifliegen",
+        "text": "Die Eule provoziert keine Gelegenheitsangriffe, wenn sie die Reichweite eines Feindes verlässt."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Talons",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1 slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Krallen",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 1 Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/533/1000/1000/636376331660233857.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Winziges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Owl (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Owl (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owl (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

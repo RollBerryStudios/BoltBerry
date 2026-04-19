@@ -1,0 +1,60 @@
+{
+  "id": 195,
+  "slug": "conjure-celestial",
+  "name": "Conjure Celestial",
+  "nameDe": "Celestisches Wesen beschwören",
+  "level": {
+    "en": "7",
+    "de": "Grad 7"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "7th-level conjuration",
+    "de": "Stufe 7 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "90 feet",
+    "de": "27 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You summon a celestial of challenge rating 4 or lower, which appears in an unoccupied space that you can see within range. The celestial disappears when it drops to 0 hit points or when the spell ends. The celestial is friendly to you and your companions for the duration. Roll initiative for the celestial, which has its own turns. It obeys any verbal commands that you issue to it (no action required by you), as long as they don't violate its alignment. If you don't issue any commands to the celestial, it defends itself from hostile creatures but otherwise takes no actions. The GM has the celestial's statistics.",
+    "de": "Du beschwörst ein celestisches Wesen mit Herausforderungsgrad 4 oder niedriger, das in einem freien Bereich in Reichweite erscheint, den du sehen kannst. Das celestische Wesen verschwindet, wenn der Zauber endet oder seine Trefferpunkte auf 0 sinken. Das celestische Wesen ist dir und deinen Gefährten für die Wirkungsdauer freundlich gesinnt. Würfle die Initiative für das celestische Wesen aus, das über seinen eigenen Zug verfügt. Es gehorcht deinen mündlichen Befehlen (erfordert keine Aktion), solange sie nicht gegen seine Gesinnung verstoßen. Wenn du dem celestischen Wesen keine Befehle erteilst, verteidigt es sich gegen feindlich gesinnte Kreaturen, führt aber anderenfalls keine Aktionen aus. Der SL hat die Werte des celestischen Wesens. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 9. Grades nutzt, beschwörst du ein celestisches Wesen mit Herausforderungsgrad 5 oder niedriger."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a 9th-level spell slot, you summon a celestial of challenge rating 5 or lower.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 9. Grades nutzt, beschwörst du ein celestisches Wesen mit Herausforderungsgrad 5 oder niedriger."
+  },
+  "image": "charm-person",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

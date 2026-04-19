@@ -1,0 +1,60 @@
+{
+  "id": 299,
+  "slug": "passwall",
+  "name": "Passwall",
+  "nameDe": "Wände passieren",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "5th-level transmutation",
+    "de": "Stufe 5 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a pinch of sesame seeds",
+      "de": "eine Prise Sesamsamen"
+    },
+    "raw": {
+      "en": "V, S, M (a pinch of sesame seeds)",
+      "de": "V, G, M (eine Prise Sesamsamen)"
+    }
+  },
+  "description": {
+    "en": "A passage appears at a point of your choice that you can see on a wooden, plaster, or stone surface (such as a wall, a ceiling, or a floor) within range, and lasts for the duration. You choose the opening's dimensions: up to 5 feet wide, 8 feet tall, and 20 feet deep. The passage creates no instability in a structure surrounding it. When the opening disappears, any creatures or objects still in the passage created by the spell are safely ejected to an unoccupied space nearest to the surface on which you cast the spell.",
+    "de": "Ein Durchgang erscheint an einem Punkt deiner Wahl in Reichweite, den du auf einer Oberfläche aus Holz, Gips oder Stein sehen kannst (etwa eine Mauer, eine Decke oder ein Fußboden). Er bleibt für die Wirkungsdauer bestehen. Du bestimmst die Ausmaße des Durchgangs: maximal 1,5 Meter breit, 2,5 Meter hoch und sechs Meter tief. Der Durchgang macht die umgebende Struktur nicht instabil. Wenn der Durchgang verschwindet, werden sämtliche Kreaturen und Gegenstände, die sich noch darin befinden, sicher an eine freie Stelle ausgestoßen, die der Oberfläche am nächsten liegt, auf die der Zauber gewirkt wurde."
+  },
+  "image": "confusion",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

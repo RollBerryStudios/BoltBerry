@@ -1,0 +1,36 @@
+{
+  "id": 22,
+  "slug": "spear",
+  "name": "Spear",
+  "nameDe": "Speer",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 100,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 3,
+  "classification": {
+    "en": "Simple Melee Weapon",
+    "de": "Einfache Nahkampfwaffe"
+  },
+  "damage": "1d6",
+  "damageType": {
+    "en": "piercing",
+    "de": "stich"
+  },
+  "properties": {
+    "en": "thrown (range 20/60) | versatile (1d8)",
+    "de": "geworfen (fernkampf 20/60) | vielseitig (1d8)"
+  },
+  "image": "weapon",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

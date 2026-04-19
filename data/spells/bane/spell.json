@@ -1,0 +1,66 @@
+{
+  "id": 3,
+  "slug": "bane",
+  "name": "Bane",
+  "nameDe": "Verderben",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "1st-level enchantment",
+    "de": "Stufe 1 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a drop of blood",
+      "de": "ein Blutstropfen"
+    },
+    "raw": {
+      "en": "V, S, M (a drop of blood)",
+      "de": "V, G, M (ein Blutstropfen)"
+    }
+  },
+  "description": {
+    "en": "Up to three creatures of your choice that you can see within range must make charisma saving throws. Whenever a target that fails this saving throw makes an attack roll or a saving throw before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw.",
+    "de": "Bis zu drei Kreaturen deiner Wahl in Reichweite, die du sehen kannst, müssen Charismarettungswürfe ausführen. Wenn ein Ziel, das diesen Rettungswurf nicht besteht, während der Wirkungsdauer einen Angriffs- oder Rettungswurf ausführt, muss es einen W4 würfeln und das Würfelergebnis von seinem Angriffs- oder Rettungswurf abziehen. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, kannst du für jeden Grad über dem 1. eine zusätzliche Kreatur als Ziel wählen."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, kannst du für jeden Grad über dem 1. eine zusätzliche Kreatur als Ziel wählen."
+  },
+  "image": "bane",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,62 @@
+{
+  "id": 311,
+  "slug": "scorching-ray",
+  "name": "Scorching Ray",
+  "nameDe": "Sengender Strahl",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-level evocation",
+    "de": "Stufe 2 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You create three rays of fire and hurl them at targets within range. You can hurl them at one target or several. Make a ranged spell attack for each ray. On a hit, the target takes 2d6 fire damage.",
+    "de": "Du erschaffst drei Feuerstrahlen und schleuderst sie auf ein oder mehrere Ziele in Reichweite. Führe für jeden Strahl einen Fernkampf-Zauberangriff aus. Bei einem Treffer erleidet das Ziel 2W6 Feuerschaden. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, erschaffst du für jeden Grad über dem 2. einen zusätzlichen Strahl."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 3rd level or higher, you create one additional ray for each slot level above 2nd.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, erschaffst du für jeden Grad über dem 2. einen zusätzlichen Strahl."
+  },
+  "image": "scorching-ray",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

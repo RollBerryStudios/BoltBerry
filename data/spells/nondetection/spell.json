@@ -1,0 +1,64 @@
+{
+  "id": 134,
+  "slug": "nondetection",
+  "name": "Nondetection",
+  "nameDe": "Unauffindbarkeit",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "ranger"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Waldläufer"
+    ]
+  },
+  "type": {
+    "en": "3rd-level abjuration",
+    "de": "Stufe 3 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "8 hours",
+    "de": "8 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a pinch of diamond dust worth 25 gp sprinkled over the target, which the spell consumes",
+      "de": "eine Prise Diamantenstaub im Wert von 25 Goldstücken, die über das Ziel gestreut wird und die der Zauberspruch verbraucht"
+    },
+    "raw": {
+      "en": "V, S, M (a pinch of diamond dust worth 25 gp sprinkled over the target, which the spell consumes)",
+      "de": "V, G, M (eine Prise Diamantenstaub im Wert von 25 Goldstücken, die über das Ziel gestreut wird und die der Zauberspruch verbraucht)"
+    }
+  },
+  "description": {
+    "en": "For the duration, you hide a target that you touch from divination magic. The target can be a willing creature or a place or an object no larger than 10 feet in any dimension. The target can't be targeted by any divination magic or perceived through magical scrying sensors.",
+    "de": "Für die Wirkungsdauer verbirgst du ein Ziel, das du berührst, vor Erkenntniszaubern. Beim Ziel kann es sich um eine bereitwillige Kreatur, einen Ort oder einen Gegenstand handeln, die oder der in keiner Abmessung größer als drei Meter sein darf. Das Ziel kann nicht von Erkenntniszaubern beeinflusst oder durch magische Ausspähungssensoren wahrgenommen werden."
+  },
+  "image": "nondetection",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

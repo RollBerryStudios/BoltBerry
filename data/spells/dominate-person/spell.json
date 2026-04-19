@@ -1,0 +1,64 @@
+{
+  "id": 243,
+  "slug": "dominate-person",
+  "name": "Dominate Person",
+  "nameDe": "Person beherrschen",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "5th-level enchantment",
+    "de": "Stufe 5 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You attempt to beguile a humanoid that you can see within range. It must succeed on a wisdom saving throw or be charmed by you for the duration. If you or creatures that are friendly to you are fighting it, it has advantage on the saving throw. While the target is charmed, you have a telepathic link with it as long as the two of you are on the same plane of existence. You can use this telepathic link to issue commands to the creature while you are conscious (no action required), which it does its best to obey. You can specify a simple and general course of action, such as \"Attack that creature,\" \"Run over there,\" or \"Fetch that object.\" If the creature completes the order and doesn't receive further direction from you, it defends and preserves itself to the best of its ability. You can use your action to take total and precise control of the target. Until the end of your next turn, the creature takes only the actions you choose, and doesn't do anything that you don't allow it to do. During this time you can also cause the creature to use a reaction, but this requires you to use your own reaction as well. Each time the target takes damage, it makes a new wisdom saving throw against the spell. If the saving throw succeeds, the spell ends.",
+    "de": "Du versuchst, eine humanoide Kreatur in Reichweite zu betören, die du sehen kannst. Sie muss einen Weisheitsrettungswurfbestehen oder sie wird für die Wirkungsdauer von dir bezaubert. Wenn du oder deine Verbündeten gegen die Kreatur kämpfen, ist sie beim Rettungswurf im Vorteil. Während das Ziel bezaubert ist und ihr euch auf derselben Existenzebene aufhaltet, verfügst du über eine telepathische Verbindung zu ihm. Diese kannst du verwenden, um der Kreatur Befehle zu erteilen, solange du bei Bewusstsein bist (erfordert keine Aktion). Die Kreatur befolgt diese nach Kräften. Du kannst eine einfache, allgemeine Aktion angeben, wie 'Greife diese Kreatur an', 'Lauf dorthin' oder 'Hole diesen Gegenstand'. Wenn die Kreatur den Befehl erfüllt hat und keine weiteren Anweisungen von dir erhält, verteidigt sie sich und versucht nach Kräften, am Leben zu bleiben. Du kannst eine Aktion verwenden, um vollständige und präzise Kontrolle über das Ziel zu erlangen. Bis zum Ende deines nächsten Zugs führt die Kreatur nur Aktionen deiner Wahl aus und tut nichts, was du ihr nicht erlaubst. Währenddessen kannst du die Kreatur auch reagieren lassen, allerdings musst du dafür deine eigene Reaktion verwenden. Jedes Mal, wenn das Ziel Schaden erleidet, führt es einen neuen Weisheitsrettungswurf gegen den Zauber aus. Ist der Rettungswurf erfolgreich, endet der Zauber. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades nutzt, ändert sich die Wirkungsdauer zu: Konzentration, bis zu 10 Minuten. Bei einem Zauberplatz des 7. Grades beträgt die Wirkungsdauer: Konzentration, bis zu 1 Stunde. Bei einem Zauberplatz des 8. Grades beträgt die Wirkungsdauer: Konzentration, bis zu 8 Stunden."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a 6th-level spell slot, the duration is concentration, up to 10 minutes. When you use a 7th-level spell slot, the duration is concentration, up to 1 hour. When you use a spell slot of 8th level or higher, the duration is concentration, up to 8 hours.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades nutzt, ändert sich die Wirkungsdauer zu: Konzentration, bis zu 10 Minuten. Bei einem Zauberplatz des 7. Grades beträgt die Wirkungsdauer: Konzentration, bis zu 1 Stunde. Bei einem Zauberplatz des 8. Grades beträgt die Wirkungsdauer: Konzentration, bis zu 8 Stunden."
+  },
+  "image": "dominate-person",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

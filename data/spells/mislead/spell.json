@@ -1,0 +1,55 @@
+{
+  "id": 293,
+  "slug": "mislead",
+  "name": "Mislead",
+  "nameDe": "Ablenkung",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "5th-level illusion",
+    "de": "Stufe 5 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": false,
+    "somatic": true,
+    "material": false,
+    "raw": "S"
+  },
+  "description": {
+    "en": "You become invisible at the same time that an illusory double of you appears where you are standing. The double lasts for the duration, but the invisibility ends if you attack or cast a spell. You can use your action to move your illusory double up to twice your speed and make it gesture, speak, and behave in whatever way you choose. You can see through its eyes and hear through its ears as if you were located where it is. On each of your turns as a bonus action, you can switch from using its senses to using your own, or back again. While you are using its senses, you are blinded and deafened in regard to your own surroundings.",
+    "de": "Du wirst unsichtbar und gleichzeitig erscheint ein illusionärer Doppelgänger von dir an deinem Standort Der Doppelgänger bleibt für die Wirkungsdauer bestehen, die Unsichtbarkeit endet jedoch, wenn du angreifst oder einen Zauber wirkst. Du kannst deine Aktion verwenden, um deinen illusionären Doppelgänger bis zu deiner doppelten Bewegungsrate zu bewegen und ihn gestikulieren, sprechen und auf eine beliebige Art handeln zu lassen. Du kannst durch seine Augen sehen und durch seine Ohren hören, als befändest du dich am selben Ort. In jedem deiner Züge kannst du als Bonusaktion von den Sinnen des Doppelgängers zu deinen eigenen wechseln, oder wieder zurück. Während du seine Sinne benutzt, bist du in deiner eigenen Umgebung blind und taub."
+  },
+  "image": "mislead",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

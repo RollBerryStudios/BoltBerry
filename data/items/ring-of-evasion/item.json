@@ -1,0 +1,30 @@
+{
+  "id": 316,
+  "slug": "ring-of-evasion",
+  "name": "Ring of Evasion",
+  "nameDe": "Ring des Ausweichens",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 500000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Ring, rare (requires attunement) This ring has 3 charges, and it regains 1d3 expended charges daily at dawn. When you fail a Dexterity saving throw while wearing it, you can use your reaction to expend 1 of its charges to succeed on that saving throw instead.",
+    "de": "Dieser Ring hat drei Ladungen und erhält täglich im Morgengrauen 1W3 verbrauchte Ladungen zurück Wenn du bei einem Geschicklichkeitsrettungswurf scheiterst, während du diesen Ring trägst, kannst du deine Reaktion verwenden, um eine seiner Ladungen zu verbrauchen und den Rettungswurf stattdessen zu bestehen."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "ring",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

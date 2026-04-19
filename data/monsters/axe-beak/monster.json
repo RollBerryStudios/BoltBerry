@@ -1,0 +1,118 @@
+{
+  "id": 34,
+  "slug": "axe-beak",
+  "name": "Axe Beak",
+  "nameDe": "Axtschnabel",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "11",
+    "de": "11"
+  },
+  "hp": {
+    "en": "19 (3d10 + 3)",
+    "de": "19 (3W10+3)"
+  },
+  "str": 14,
+  "dex": 12,
+  "con": 12,
+  "int": 2,
+  "wis": 10,
+  "cha": 5,
+  "strMod": 2,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Beak",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Schnabel",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W8+2) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "AxeBeak (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "AxeBeak (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "AxeBeak (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "AxeBeak (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "AxeBeak (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "AxeBeak (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "AxeBeak (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "AxeBeak (8).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

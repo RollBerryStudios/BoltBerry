@@ -1,0 +1,62 @@
+{
+  "id": 57,
+  "slug": "poison-spray",
+  "name": "Poison Spray",
+  "nameDe": "Gift versprühen",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Druide",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "Conjuration cantrip",
+    "de": "Beschwörung Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "10 feet",
+    "de": "3 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You extend your hand toward a creature you can see within range and project a puff of noxious gas from your palm. The creature must succeed on a constitution saving throw or take 1d12 poison damage. This spell's damage increases by 1d12 when you reach 5th level (2d12), 11th level (3d12), and 17th level (4d12).",
+    "de": "Du streckst deine Hand in Richtung einer Kreatur in Reichweite aus, die du sehen kannst, und erzeugst eine Wolke giftigen Gases aus deiner Handfläche. Die Kreatur muss einen Konstitutionsrettungswurf bestehen, oder sie erleidet 1W12 Giftschaden. Der Schaden dieses Zaubers steigt um je 1W12, wenn du die 5. Stufe (2W12), die 11. Stufe (3W12) und die 17. Stufe (4W12) erreichst"
+  },
+  "image": "poison-spray",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

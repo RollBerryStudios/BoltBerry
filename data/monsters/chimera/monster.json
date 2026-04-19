@@ -1,0 +1,196 @@
+{
+  "id": 65,
+  "slug": "chimera",
+  "name": "Chimera",
+  "nameDe": "Chimäre",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, chaotic evil",
+    "de": "Große Monstrosität, chaotisch böse"
+  },
+  "challenge": "6",
+  "xp": 2300,
+  "ac": {
+    "en": "14 (Natural Armor)",
+    "de": "14 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "114 (12d10 + 48)",
+    "de": "114 (12W10+48)"
+  },
+  "str": 19,
+  "dex": 11,
+  "con": 19,
+  "int": 3,
+  "wis": 14,
+  "cha": 10,
+  "strMod": 4,
+  "dexMod": 0,
+  "conMod": 4,
+  "intMod": -4,
+  "wisMod": 2,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 18"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 18"
+    ]
+  },
+  "languages": {
+    "en": [
+      "understands Draconic but can't speak"
+    ],
+    "de": [
+      "Versteht Drakonisch",
+      "aber kann nicht sprechen"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +8"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The chimera makes three attacks: one with its bite, one with its horns, and one with its claws. When its fire breath is available, it can use the breath in place of its bite or horns."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) piercing damage."
+      },
+      {
+        "name": "Horns",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 10 (1d12 + 4) bludgeoning damage."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage."
+      },
+      {
+        "name": "Fire Breath",
+        "text": "The dragon head exhales fire in a 15-foot cone. Each creature in that area must make a DC 15 Dexterity saving throw, taking 31 (7d8) fire damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Die Chimäre führt drei Angriffe aus: einen Biss-, einen Hörner- und einen Klauenangriff. Ist ihr Feuerodem-Angriff verfügbar, kann sie den Odem anstatt Biss oder Hörner einsetzen."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 11 (2W6+4) Stichschaden."
+      },
+      {
+        "name": "Hörner",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (1W12+4) Wuchtschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 11 (2W6+4) Hiebschaden."
+      },
+      {
+        "name": "Feuerodem (Aufladung 5–6)",
+        "text": "Der Drachenkopf atmet Feuer in einem Kegel von 4,5 Metern aus. Jede Kreatur in diesem Bereich muss einen SG-15-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 31 (7W8) Feuerschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/237/1000/1000/636252766770156389.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "Chimera (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Chimera (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chimera (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chimera (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chimera (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chimera (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chimera (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chimera (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chimera (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chimera (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chimera (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chimera (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chimera (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chimera (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chimera (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chimera (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chimera (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

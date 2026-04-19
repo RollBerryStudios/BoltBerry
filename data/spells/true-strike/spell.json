@@ -1,0 +1,59 @@
+{
+  "id": 81,
+  "slug": "true-strike",
+  "name": "True Strike",
+  "nameDe": "Zielsicherer Schlag",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnismagie"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "Divination cantrip",
+    "de": "Erkenntnismagie Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 round",
+    "de": "Konzentration, bis zu 1 Runde"
+  },
+  "components": {
+    "verbal": false,
+    "somatic": true,
+    "material": false,
+    "raw": "S"
+  },
+  "description": {
+    "en": "You extend your hand and point a finger at a target in range. Your magic grants you a brief insight into the target's defenses. On your next turn, you gain advantage on your first attack roll against the target, provided that this spell hasn't ended.",
+    "de": "Du streckst deine Hand aus und deutest mit dem Finger auf ein Ziel in Reichweite. Deine Magie gewährt dir einen kurzen Einblick in die Verteidigung des Ziels. In deinem nächsten Zug bist du bei deinem ersten Angriffswurf gegen das Ziel im Vorteil, sofern dieser Zauber noch aktiv ist."
+  },
+  "image": "truestrike",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

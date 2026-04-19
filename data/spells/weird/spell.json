@@ -1,0 +1,56 @@
+{
+  "id": 193,
+  "slug": "weird",
+  "name": "Weird",
+  "nameDe": "Unheimliches Schicksal",
+  "level": {
+    "en": "9",
+    "de": "Grad 9"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "9th-level illusion",
+    "de": "Stufe 9 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "Drawing on the deepest fears of a group of creatures, you create illusory creatures in their minds, visible only to them. Each creature in a 30-foot-radius sphere centered on a point of your choice within range must make a wisdom saving throw. On a failed save, a creature becomes frightened for the duration. The illusion calls on the creature's deepest fears, manifesting its worst nightmares as an implacable threat. At the start of each of the frightened creature's turns, it must succeed on a wisdom saving throw or take 4d10 psychic damage. On a successful save, the spell ends for that creature.",
+    "de": "Du schöpfst aus den tiefsten Ängsten einer Gruppe von Kreaturen und erschaffst illusionäre Monster in ihren Köpfen, die nur für sie sichtbar sind. Jede Kreatur in einer Sphäre mit einem Radius von neun Metern, die um einen Punkt deiner Wahl in Reichweite zentriert ist, muss einen Weisheitsrettungswurf ausführen. Scheitert der Wurf, ist die Kreatur für die Wirkungsdauer verängstigt Die Illusion manifestiert die schlimmsten Albträume einer Kreatur als unerbittliche Bedrohung. Am Ende jedes ihrer Züge muss die verängstigte Kreatur einen Weisheitsrettungswurf bestehen, oder sie erleidet 4W10 psychischen Schaden. Bei einem Erfolg endet der Zauber für diese Kreatur."
+  },
+  "image": "madness",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

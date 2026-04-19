@@ -1,0 +1,62 @@
+{
+  "id": 52,
+  "slug": "mage-hand",
+  "name": "Mage Hand",
+  "nameDe": "Magierhand",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "Conjuration cantrip",
+    "de": "Beschwörung Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again. You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it. The hand can't attack, activate magic items, or carry more than 10 pounds.",
+    "de": "Eine spektrale, schwebende Hand erscheint in Reichweite an einem Punkt deiner Wahl. Die Hand bleibtwährend der Wirkungsdauer bestehen, oder bis du sie als Aktion beendest. Die Hand verschwindet, wenn sie mehr als neun Meter von dir entfernt ist oder falls du den Zauber erneut wirkst. Du kannst eine Aktion verwenden, um die Hand zu kontrollieren. Damit kannst du mit Gegenständen interagieren, unverschlossene Türen oder Behälter öffnen, Gegenstände in einem Behälter verstauen oder daraus hervorholen oder den Inhalt einer Phiole ausgießen. Wann immer du sie kontrollierst, kannst du sie um bis zu neun Meter bewegen. Die Hand kann nicht angreifen, keine magischen Gegenstände aktivieren und nicht mehr als 5 Kilogramm Gewicht tragen."
+  },
+  "image": "mage-hand",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

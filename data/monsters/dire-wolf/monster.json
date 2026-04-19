@@ -1,0 +1,244 @@
+{
+  "id": 85,
+  "slug": "dire-wolf",
+  "name": "Dire Wolf",
+  "nameDe": "Schreckenswolf",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "14 (Natural Armor)",
+    "de": "14 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "37 (5d10 + 10)",
+    "de": "37 (5W10+10)"
+  },
+  "str": 17,
+  "dex": 15,
+  "con": 15,
+  "int": 3,
+  "wis": 12,
+  "cha": 7,
+  "strMod": 3,
+  "dexMod": 2,
+  "conMod": 2,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +4",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Hearing and Smell",
+        "text": "The wolf has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+      },
+      {
+        "name": "Pack Tactics",
+        "text": "The wolf has advantage on an attack roll against a creature if at least one of the wolf's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rudeltaktik",
+        "text": "Der Wolf ist bei Angriffswürfen gegen eine Kreatur im Vorteil, wenn sich mindestens einer seiner Verbündeten, der nicht kampfunfähig ist, im Abstand von bis zu 1,5 Metern von der Kreatur befindet."
+      },
+      {
+        "name": "Scharfes Gehör und scharfer Geruchssinn",
+        "text": "Der Wolf ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör oder Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) piercing damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Stichschaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-13-Stärkerettungswurf bestehen, oder es wird umgestoßen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/484/315/315/636376300478361995.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "DireWolfSummer (1).webp",
+    "variant": "summer"
+  },
+  "tokens": [
+    {
+      "file": "DireWolfSummer (10).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DireWolfSummer (11).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DireWolfSummer (12).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DireWolfSummer (13).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DireWolfSummer (14).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DireWolfSummer (15).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DireWolfSummer (16).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DireWolfSummer (2).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DireWolfSummer (3).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DireWolfSummer (4).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DireWolfSummer (5).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DireWolfSummer (6).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DireWolfSummer (7).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DireWolfSummer (8).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DireWolfSummer (9).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DireWolfWinter (1).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DireWolfWinter (10).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DireWolfWinter (11).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DireWolfWinter (12).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DireWolfWinter (13).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DireWolfWinter (14).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DireWolfWinter (15).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DireWolfWinter (16).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DireWolfWinter (17).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DireWolfWinter (2).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DireWolfWinter (3).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DireWolfWinter (4).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DireWolfWinter (5).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DireWolfWinter (6).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DireWolfWinter (7).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DireWolfWinter (8).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DireWolfWinter (9).webp",
+      "variant": "winter"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

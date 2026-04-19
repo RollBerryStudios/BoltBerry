@@ -1,0 +1,30 @@
+{
+  "id": 417,
+  "slug": "wand-of-lightning-bolts",
+  "name": "Wand of Lightning Bolts",
+  "nameDe": "Zauberstab der Blitzschläge",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 3200000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wand, rare (requires attunement by a spellcaster) This wand has 7 charges. While holding it, you can use an action to expend 1 or more of its charges to cast the lightning bolt spell (save DC 15) from it. For 1 charge, you cast the 3rd-level version of the spell. You can increase the spell slot level by one for each additional charge you expend. The wand regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.",
+    "de": "Dieser Zauberstab hat sieben Ladungen. Wenn du ihn hältst, kannst du als Aktion eine oder mehrere seiner Ladungen verbrauchen, um den Zauber Blitz  (Rettungswurf-SG 15) mit ihm zu wirken. Für eine Ladung wirkst du den Zauber des 3. Grades. Du kannst den Zauberplatz-Grad für jede weitere Ladung, die du verbrauchst, um einen Grad erhöhen. Der Zauberstab erhält täglich im Morgengrauen 1W6+1 verbrauchte Ladungen zurück. Wenn du die letzte Ladung des Zauberstabs verbrauchst, würfle mit einem W20. Bei einer 1 zerfällt der Zauberstab zu Asche und ist damit zerstört."
+  },
+  "properties": {
+    "en": "requires attunement by a spellcaster",
+    "de": "erfordert einstimmung eines zauberwirkenden"
+  },
+  "image": "wand",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

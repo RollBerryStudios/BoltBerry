@@ -1,0 +1,593 @@
+{
+  "id": 262,
+  "slug": "skeleton",
+  "name": "Skeleton",
+  "nameDe": "Skelett",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium undead, lawful evil",
+    "de": "Mittelgroßer Untoter, rechtschaffen böse"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "13 (Armor Scraps)",
+    "de": "13 (Rüstungsteile)"
+  },
+  "hp": {
+    "en": "13 (2d8 + 4)",
+    "de": "13 (2W8+4)"
+  },
+  "str": 10,
+  "dex": 14,
+  "con": 15,
+  "int": 6,
+  "wis": 8,
+  "cha": 5,
+  "strMod": 0,
+  "dexMod": 2,
+  "conMod": 2,
+  "intMod": -2,
+  "wisMod": -1,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 9"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 9"
+    ]
+  },
+  "languages": {
+    "en": [
+      "understands all languages it spoke in life but can't speak"
+    ],
+    "de": [
+      "Versteht alle zu Lebzeiten bekannten Sprachen",
+      "kann aber nicht sprechen"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Shortsword",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      },
+      {
+        "name": "Shortbow",
+        "text": "Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Kurzschwert",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden."
+      },
+      {
+        "name": "Kurzbogen",
+        "text": "Fernkampfwaffenangriff: +4 auf Treffer, Reichweite 24/96 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/472/315/315/636376294573239565.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "undead",
+    "de": "Untoter"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "SkeletonBow (1).webp",
+    "variant": "bow"
+  },
+  "tokens": [
+    {
+      "file": "SkeletonBow (10).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "SkeletonBow (11).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "SkeletonBow (12).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "SkeletonBow (13).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "SkeletonBow (14).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "SkeletonBow (15).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "SkeletonBow (16).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "SkeletonBow (17).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "SkeletonBow (18).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "SkeletonBow (2).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "SkeletonBow (3).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "SkeletonBow (4).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "SkeletonBow (5).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "SkeletonBow (6).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "SkeletonBow (7).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "SkeletonBow (8).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "SkeletonBow (9).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "SkeletonDragonbornSword (1).webp",
+      "variant": "dragonbornSword"
+    },
+    {
+      "file": "SkeletonDragonbornSword (10).webp",
+      "variant": "dragonbornSword"
+    },
+    {
+      "file": "SkeletonDragonbornSword (11).webp",
+      "variant": "dragonbornSword"
+    },
+    {
+      "file": "SkeletonDragonbornSword (2).webp",
+      "variant": "dragonbornSword"
+    },
+    {
+      "file": "SkeletonDragonbornSword (3).webp",
+      "variant": "dragonbornSword"
+    },
+    {
+      "file": "SkeletonDragonbornSword (4).webp",
+      "variant": "dragonbornSword"
+    },
+    {
+      "file": "SkeletonDragonbornSword (5).webp",
+      "variant": "dragonbornSword"
+    },
+    {
+      "file": "SkeletonDragonbornSword (6).webp",
+      "variant": "dragonbornSword"
+    },
+    {
+      "file": "SkeletonDragonbornSword (7).webp",
+      "variant": "dragonbornSword"
+    },
+    {
+      "file": "SkeletonDragonbornSword (8).webp",
+      "variant": "dragonbornSword"
+    },
+    {
+      "file": "SkeletonDragonbornSword (9).webp",
+      "variant": "dragonbornSword"
+    },
+    {
+      "file": "SkeletonDwarfSword (1).webp",
+      "variant": "dwarfSword"
+    },
+    {
+      "file": "SkeletonDwarfSword (10).webp",
+      "variant": "dwarfSword"
+    },
+    {
+      "file": "SkeletonDwarfSword (11).webp",
+      "variant": "dwarfSword"
+    },
+    {
+      "file": "SkeletonDwarfSword (12).webp",
+      "variant": "dwarfSword"
+    },
+    {
+      "file": "SkeletonDwarfSword (13).webp",
+      "variant": "dwarfSword"
+    },
+    {
+      "file": "SkeletonDwarfSword (2).webp",
+      "variant": "dwarfSword"
+    },
+    {
+      "file": "SkeletonDwarfSword (3).webp",
+      "variant": "dwarfSword"
+    },
+    {
+      "file": "SkeletonDwarfSword (4).webp",
+      "variant": "dwarfSword"
+    },
+    {
+      "file": "SkeletonDwarfSword (5).webp",
+      "variant": "dwarfSword"
+    },
+    {
+      "file": "SkeletonDwarfSword (6).webp",
+      "variant": "dwarfSword"
+    },
+    {
+      "file": "SkeletonDwarfSword (7).webp",
+      "variant": "dwarfSword"
+    },
+    {
+      "file": "SkeletonDwarfSword (8).webp",
+      "variant": "dwarfSword"
+    },
+    {
+      "file": "SkeletonDwarfSword (9).webp",
+      "variant": "dwarfSword"
+    },
+    {
+      "file": "SkeletonGnomeSword (1).webp",
+      "variant": "gnomeSword"
+    },
+    {
+      "file": "SkeletonGnomeSword (2).webp",
+      "variant": "gnomeSword"
+    },
+    {
+      "file": "SkeletonHalflingSword (1).webp",
+      "variant": "halflingSword"
+    },
+    {
+      "file": "SkeletonHalflingSword (2).webp",
+      "variant": "halflingSword"
+    },
+    {
+      "file": "SkeletonHalflingSword (3).webp",
+      "variant": "halflingSword"
+    },
+    {
+      "file": "SkeletonHalflingSword (4).webp",
+      "variant": "halflingSword"
+    },
+    {
+      "file": "SkeletonHalflingSword (5).webp",
+      "variant": "halflingSword"
+    },
+    {
+      "file": "SkeletonHalflingSword (6).webp",
+      "variant": "halflingSword"
+    },
+    {
+      "file": "SkeletonHalflingSword (7).webp",
+      "variant": "halflingSword"
+    },
+    {
+      "file": "SkeletonHalflingSword (8).webp",
+      "variant": "halflingSword"
+    },
+    {
+      "file": "SkeletonHalflingSword (9).webp",
+      "variant": "halflingSword"
+    },
+    {
+      "file": "SkeletonSword (1).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (10).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (11).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (12).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (13).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (14).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (15).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (16).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (17).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (18).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (19).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (2).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (20).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (21).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (22).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (23).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (24).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (25).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (26).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (27).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (28).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (29).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (3).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (30).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (31).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (32).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (33).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (34).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (35).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (36).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (37).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (38).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (39).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (4).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (40).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (41).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (42).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (43).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (44).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (45).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (46).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (47).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (48).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (49).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (5).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (50).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (51).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (52).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (53).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (54).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (55).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (56).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (57).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (6).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (7).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (8).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonSword (9).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "SkeletonTieflingSword (1).webp",
+      "variant": "tieflingSword"
+    },
+    {
+      "file": "SkeletonTieflingSword (10).webp",
+      "variant": "tieflingSword"
+    },
+    {
+      "file": "SkeletonTieflingSword (11).webp",
+      "variant": "tieflingSword"
+    },
+    {
+      "file": "SkeletonTieflingSword (12).webp",
+      "variant": "tieflingSword"
+    },
+    {
+      "file": "SkeletonTieflingSword (13).webp",
+      "variant": "tieflingSword"
+    },
+    {
+      "file": "SkeletonTieflingSword (14).webp",
+      "variant": "tieflingSword"
+    },
+    {
+      "file": "SkeletonTieflingSword (2).webp",
+      "variant": "tieflingSword"
+    },
+    {
+      "file": "SkeletonTieflingSword (3).webp",
+      "variant": "tieflingSword"
+    },
+    {
+      "file": "SkeletonTieflingSword (4).webp",
+      "variant": "tieflingSword"
+    },
+    {
+      "file": "SkeletonTieflingSword (5).webp",
+      "variant": "tieflingSword"
+    },
+    {
+      "file": "SkeletonTieflingSword (6).webp",
+      "variant": "tieflingSword"
+    },
+    {
+      "file": "SkeletonTieflingSword (7).webp",
+      "variant": "tieflingSword"
+    },
+    {
+      "file": "SkeletonTieflingSword (8).webp",
+      "variant": "tieflingSword"
+    },
+    {
+      "file": "SkeletonTieflingSword (9).webp",
+      "variant": "tieflingSword"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

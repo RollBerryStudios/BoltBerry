@@ -1,0 +1,59 @@
+{
+  "id": 389,
+  "slug": "floating-disk",
+  "name": "Floating Disk",
+  "nameDe": "Schwebende Scheibe",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level conjuration (ritual)",
+    "de": "Stufe 1 Beschwörung (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "A drop of mercury",
+      "de": "Ein Tropfen Quecksilber"
+    },
+    "raw": {
+      "en": "V, S, M (A drop of mercury)",
+      "de": "V, G, M (Ein Tropfen Quecksilber)"
+    }
+  },
+  "description": {
+    "en": "This spell creates a circular, horizontal plane of force, 3 feet in diameter and 1 inch thick, that floats 3 feet above the ground in an unoccupied space of your choice that you can see within range. The disk remains for the duration, and can hold up to 500 pounds. If more weight is placed on it, the spell ends, and everything on the disk falls to the ground. The disk is immobile while you are within 20 feet of it. If you move more than 20 feet away from it, the disk follows you so that it remains within 20 feet of you. If can move across uneven terrain, up or down stairs, slopes and the like, but it can't cross an elevation change of 10 feet or more. For example, the disk can't move across a 10-foot-deep pit, nor could it leave such a pit if it was created at the bottom. If you move more than 100 feet away from the disk (typically because it can't move around an obstacle to follow you), the spell ends.",
+    "de": "Dieser Zauber erschafft eine kreisförmige, waagrechte Fläche aus Energie mit 90 Zentimetern Durchmesser und 2,5 Zentimetern Dicke. Sie schwebt an einer freien Stelle deiner Wahl in Reichweite, die du sehen kannst, 90 Zentimeter über dem Boden. Die Scheibe bleibt für die Wirkungsdauer bestehen und kann bis zu 250 Kilogramm tragen. Lastet mehr Gewicht auf ihr, endet der Zauber, und alles auf der Scheibe fällt zu Boden. Die Scheibe ist unbeweglich, wenn du dich im Abstand von bis zu sechs Metern von ihr befindest. Entfernst du dich mehr als sechs Meter von ihr, folgt dir die Scheibe, so dass sie im Abstand von bis zu sechs Metern von dir bleibt. Sie kann sich über unebenes Gelände, Treppen, Abhänge und dergleichen bewegen, kann jedoch keinen Höhenunterschied von drei Metern oder mehr überwinden. Beispielsweise kann die Scheibe nicht über eine drei Meter tiefe Grube hinwegschweben oder eine derartige Grube verlassen, falls sie in ihr erschaffen wurde. Entfernst du dich mehr als 30 Meter von der Scheibe (meist, weil sie sich nicht um ein Hindernis bewegen kann, um dir zu folgen), endet der Zauber."
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

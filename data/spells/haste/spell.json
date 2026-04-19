@@ -1,0 +1,62 @@
+{
+  "id": 125,
+  "slug": "haste",
+  "name": "Haste",
+  "nameDe": "Hast",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level transmutation",
+    "de": "Stufe 3 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a shaving of licorice root",
+      "de": "eine Späne der Süßholzwurzel"
+    },
+    "raw": {
+      "en": "V, S, M (a shaving of licorice root)",
+      "de": "V, G, M (eine Späne der Süßholzwurzel)"
+    }
+  },
+  "description": {
+    "en": "Choose a willing creature that you can see within range. Until the spell ends, the target's speed is doubled, it gains a +2 bonus to AC, it has advantage on dexterity saving throws, and it gains an additional action on each of its turns. That action can be used only to take the Attack (one weapon attack only), Dash, Disengage, Hide, or Use an Object action. When the spell ends, the target can't move or take actions until after its next turn, as a wave of lethargy sweeps over it.",
+    "de": "Wähle eine bereitwillige Kreatur in Reichweite, die du sehen kannst. Bis der Zauber endet, wird die Bewegungsrate des Ziels verdoppelt, es erhält einen Bonus von +2 auf seine RK, ist bei Rettungswürfen auf Geschicklichkeit im Vorteil und kann in jedem seiner Züge eine zusätzliche Aktion ausführen. Diese Aktion darf nur für Folgendes eingesetzt werden: Angriff (nur ein Waffenangriff), Gegenstand benutzen, Rückzug, Spurt, Verstecken. Wenn der Zauber endet, kann das Ziel bis zum Ende seines nächsten Zugs keine Aktion ausführen und sich nicht bewegen, weil es von einer Welle der Erschöpfung ergriffen wird."
+  },
+  "image": "retreat",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

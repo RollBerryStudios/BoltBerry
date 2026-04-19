@@ -1,0 +1,242 @@
+{
+  "id": 178,
+  "slug": "imp",
+  "name": "Imp",
+  "nameDe": "Teufelchen",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny fiend, lawful evil",
+    "de": "Winziger Unhold, rechtschaffen böse"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "13",
+    "de": "13"
+  },
+  "hp": {
+    "en": "10 (3d4 + 3)",
+    "de": "10 (3W4+3)"
+  },
+  "str": 6,
+  "dex": 17,
+  "con": 13,
+  "int": 11,
+  "wis": 12,
+  "cha": 14,
+  "strMod": -2,
+  "dexMod": 3,
+  "conMod": 1,
+  "intMod": 0,
+  "wisMod": 1,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    },
+    "fly": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Infernal",
+      "Common"
+    ],
+    "de": [
+      "Gemeinsprache",
+      "Infernalisch"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +5",
+    "Motiv erkennen +3",
+    "Täuschen +4",
+    "Überzeugen +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Shapechanger",
+        "text": "The imp can use its action to polymorph into a beast form that resembles a rat (speed 20 ft.), a raven (20 ft., fly 60 ft.), or a spider (20 ft., climb 20 ft.), or back into its true form. Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+      },
+      {
+        "name": "Devil's Sight",
+        "text": "Magical darkness doesn't impede the imp's darkvision."
+      },
+      {
+        "name": "Magic Resistance",
+        "text": "The imp has advantage on saving throws against spells and other magical effects."
+      }
+    ],
+    "de": [
+      {
+        "name": "Gestaltwandler",
+        "text": "Das Teufelchen kann seine Aktion verwenden, um sich in eine Tiergestalt wie einen Raben (6 m, Fliegen 18 m), eine Ratte (Bewegungsrate 6 m), eine Spinne (6 m, Klettern 6 m) oder zurück in seine wahre Gestalt zu verwandeln. Seine Spielwerte sind in allen Gestalten bis auf die angegebenen Bewegungsraten gleich. Ausrüstung, die er trägt oder hält, wird nicht verwandelt. Wenn er stirbt, nimmt er seine wahre Gestalt an."
+      },
+      {
+        "name": "Magieresistenz",
+        "text": "Das Teufelchen ist bei Rettungswürfen gegen Zauber und andere magische Effekte im Vorteil."
+      },
+      {
+        "name": "Teufelssicht",
+        "text": "Die Dunkelsicht des Teufelchens wird nicht durch magische Dunkelheit beeinträchtigt."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Sting (Bite in Beast Form)",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 5 (1d4 + 3) piercing damage, and the target must make on a DC 11 Constitution saving throw, taking 10 (3d6) poison damage on a failed save, or half as much damage on a successful one."
+      },
+      {
+        "name": "Invisibility",
+        "text": "The imp magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the imp wears or carries is invisible with it."
+      }
+    ],
+    "de": [
+      {
+        "name": "Stachel (Biss in Tiergestalt)",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W4+3) Stichschaden, und das Ziel muss einen SG-11-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet es 10 (3W6) Giftschaden, anderenfalls die Hälfte."
+      },
+      {
+        "name": "Unsichtbarkeit",
+        "text": "Das Teufelchen wird magisch unsichtbar, bis es angreift oder seine Konzentration endet (wie bei einem Zauber). Ausrüstung, die das Teufelchen trägt oder hält, ist ebenfalls unsichtbar."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/361/315/315/636252778560366227.jpeg",
+  "size": {
+    "en": "tiny",
+    "de": "Winzig"
+  },
+  "type": {
+    "en": "fiend",
+    "de": "Unhold (Teufel"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "Gestaltwandler), rechtschaffen böse"
+  },
+  "token": {
+    "file": "Imp (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Imp (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Imp (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

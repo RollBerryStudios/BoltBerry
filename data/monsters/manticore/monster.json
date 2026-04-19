@@ -1,0 +1,214 @@
+{
+  "id": 196,
+  "slug": "manticore",
+  "name": "Manticore",
+  "nameDe": "Mantikor",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, lawful evil",
+    "de": "Große Monstrosität, rechtschaffen böse"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "14 (Natural Armor)",
+    "de": "14 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "68 (8d10 + 24)",
+    "de": "68 (8W10+24)"
+  },
+  "str": 17,
+  "dex": 16,
+  "con": 17,
+  "int": 7,
+  "wis": 12,
+  "cha": 8,
+  "strMod": 3,
+  "dexMod": 3,
+  "conMod": 3,
+  "intMod": -2,
+  "wisMod": 1,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common"
+    ],
+    "de": [
+      "Gemeinsprache"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Tail Spike Regrowth",
+        "text": "The manticore has twenty-four tail spikes. Used spikes regrow when the manticore finishes a long rest."
+      }
+    ],
+    "de": [
+      {
+        "name": "Schwanzstachel-Wachstum",
+        "text": "Der Mantikor hat 24 Schwanzstacheln. Verbrauchte Stacheln wachsen nach, wenn der Mantikor eine lange Rast abschließt."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The manticore makes three attacks: one with its bite and two with its claws or three with its tail spikes."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) piercing damage."
+      },
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) slashing damage."
+      },
+      {
+        "name": "Tail Spike",
+        "text": "Ranged Weapon Attack: +5 to hit, range 100/200 ft., one target. Hit: 7 (1d8 + 3) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Mantikor führt drei Angriffe aus: einen mit seinem Biss und zwei mit seinen Klauen oder drei mit seinen Schwanzstacheln."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (1W8+3) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W6+3) Hiebschaden."
+      },
+      {
+        "name": "Schwanzstacheln",
+        "text": "Fernkampfwaffenangriff: +5 auf Treffer, Reichweite 30/60 m, ein Ziel. Treffer: 7 (1W8+3) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/187/315/315/636252762623266809.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "Manticore (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Manticore (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Manticore (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

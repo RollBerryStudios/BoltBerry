@@ -1,0 +1,211 @@
+{
+  "id": 76,
+  "slug": "crocodile",
+  "name": "Crocodile",
+  "nameDe": "Krokodil",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "12 (Natural Armor)",
+    "de": "12 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "19 (3d10 + 3)",
+    "de": "19 (3W10+3)"
+  },
+  "str": 15,
+  "dex": 10,
+  "con": 13,
+  "int": 2,
+  "wis": 10,
+  "cha": 5,
+  "strMod": 2,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    },
+    "swim": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Hold Breath",
+        "text": "The crocodile can hold its breath for 15 minutes."
+      }
+    ],
+    "de": [
+      {
+        "name": "Atem anhalten",
+        "text": "Das Krokodil kann 15 Minuten lang den Atem anhalten."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 7 (1d10 + 2) piercing damage, and the target is grappled (escape DC 12). Until this grapple ends, the target is restrained, and the crocodile can't bite another target"
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 7 (1W10+2) Stichschaden, und das Ziel wird gepackt (Rettungswurf-SG 12). Ein gepacktes Ziel ist festgesetzt. Das Krokodil kann solange kein weiteres Ziel beißen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "CrocodileSewers (1).webp",
+    "variant": "sewers"
+  },
+  "tokens": [
+    {
+      "file": "CrocodileSewers (10).webp",
+      "variant": "sewers"
+    },
+    {
+      "file": "CrocodileSewers (11).webp",
+      "variant": "sewers"
+    },
+    {
+      "file": "CrocodileSewers (12).webp",
+      "variant": "sewers"
+    },
+    {
+      "file": "CrocodileSewers (13).webp",
+      "variant": "sewers"
+    },
+    {
+      "file": "CrocodileSewers (2).webp",
+      "variant": "sewers"
+    },
+    {
+      "file": "CrocodileSewers (3).webp",
+      "variant": "sewers"
+    },
+    {
+      "file": "CrocodileSewers (4).webp",
+      "variant": "sewers"
+    },
+    {
+      "file": "CrocodileSewers (5).webp",
+      "variant": "sewers"
+    },
+    {
+      "file": "CrocodileSewers (6).webp",
+      "variant": "sewers"
+    },
+    {
+      "file": "CrocodileSewers (7).webp",
+      "variant": "sewers"
+    },
+    {
+      "file": "CrocodileSewers (8).webp",
+      "variant": "sewers"
+    },
+    {
+      "file": "CrocodileSewers (9).webp",
+      "variant": "sewers"
+    },
+    {
+      "file": "CrocodileSwamp (1).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "CrocodileSwamp (10).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "CrocodileSwamp (11).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "CrocodileSwamp (12).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "CrocodileSwamp (13).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "CrocodileSwamp (2).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "CrocodileSwamp (3).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "CrocodileSwamp (4).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "CrocodileSwamp (5).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "CrocodileSwamp (6).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "CrocodileSwamp (7).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "CrocodileSwamp (8).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "CrocodileSwamp (9).webp",
+      "variant": "swamp"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

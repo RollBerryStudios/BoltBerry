@@ -1,0 +1,208 @@
+{
+  "id": 270,
+  "slug": "steam-mephit",
+  "name": "Steam Mephit",
+  "nameDe": "Dampf-Mephit",
+  "source": "SRD",
+  "meta": {
+    "en": "Small elemental, neutral evil",
+    "de": "Kleines Elementar, neutral böse"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "10",
+    "de": "10"
+  },
+  "hp": {
+    "en": "21 (6d6)",
+    "de": "21 (6W6)"
+  },
+  "str": 5,
+  "dex": 11,
+  "con": 10,
+  "int": 11,
+  "wis": 10,
+  "cha": 12,
+  "strMod": -3,
+  "dexMod": 0,
+  "conMod": 0,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Aquan",
+      "Ignan"
+    ],
+    "de": [
+      "Aqual",
+      "Ignal"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Death Burst",
+        "text": "When the mephit dies, it explodes in a cloud of steam. Each creature within 5 ft. of the mephit must succeed on a DC 10 Dexterity saving throw or take 4 (1d8) fire damage."
+      },
+      {
+        "name": "Innate Spellcasting",
+        "text": "The mephit can innately cast blur, requiring no material components. Its innate spellcasting ability is Charisma."
+      }
+    ],
+    "de": [
+      {
+        "name": "Angeborenes Zauberwirken (1-mal täglich)",
+        "text": "Der Mephit kann den angeborenen Zauber Verschwimmen wirken, ohne Materialkomponenten zu benötigen. Sein Attribut zum angeborenen Zauberwirken ist Charisma."
+      },
+      {
+        "name": "Todesexplosion",
+        "text": "Wenn der Mephit stirbt, vergeht er in einer Dampfwolke. Jede Kreatur im Abstand von bis zu 1,5 Metern vom Mephit muss einen SG-10-Geschicklichkeitsrettungswurf bestehen, oder sie erleidet 4 (1W8) Feuerschaden."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +2 to hit, reach 5 ft., one creature. Hit: 2 (1d4) slashing damage plus 2 (1d4) fire damage."
+      },
+      {
+        "name": "Steam Breath",
+        "text": "The mephit exhales a 15-foot cone of scalding steam. Each creature in that area must succeed on a DC 10 Dexterity saving throw, taking 4 (1d8) fire damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +2 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 2 (1W4) Hiebschaden plus 2 (1W4) Feuerschaden."
+      },
+      {
+        "name": "Dampfodem (Aufladung 6)",
+        "text": "Der Mephit atmet siedenden Dampf in einem Kegel von 4,5 Metern aus. Jede Kreatur in diesem Bereich muss einen SG-10-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 4 (1W8) Feuerschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/113/315/315/636252745841820724.jpeg",
+  "size": {
+    "en": "small",
+    "de": "Klein"
+  },
+  "type": {
+    "en": "elemental",
+    "de": "Elementar"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "SteamMephit (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "SteamMephit (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "SteamMephit (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

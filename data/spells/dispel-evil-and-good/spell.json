@@ -1,0 +1,62 @@
+{
+  "id": 241,
+  "slug": "dispel-evil-and-good",
+  "name": "Dispel Evil and Good",
+  "nameDe": "Gutes und Böses bannen",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "paladin"
+    ],
+    "de": [
+      "Kleriker",
+      "Paladin"
+    ]
+  },
+  "type": {
+    "en": "5th-level abjuration",
+    "de": "Stufe 5 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "holy water or powdered silver and iron",
+      "de": "Weihwasser oder pulverisiertes Silber und Eisen"
+    },
+    "raw": {
+      "en": "V, S, M (holy water or powdered silver and iron)",
+      "de": "V, G, M (Weihwasser oder pulverisiertes Silber und Eisen)"
+    }
+  },
+  "description": {
+    "en": "Shimmering energy surrounds and protects you from fey, undead, and creatures originating from beyond the Material Plane. For the duration, celestials, elementals, fey, fiends, and undead have disadvantage on attack rolls against you. You can end the spell early by using either of the following special functions. ***Break Enchantment.*** As your action, you touch a creature you can reach that is charmed, frightened, or possessed by a celestial, an elemental, a fey, a fiend, or an undead. The creature you touch is no longer charmed, frightened, or possessed by such creatures. ***Dismissal.*** As your action, make a melee spell attack against a celestial, an elemental, a fey, a fiend, or an undead you can reach. On a hit, you attempt to drive the creature back to its home plane. The creature must succeed on a charisma saving throw or be sent back to its home plane (if it isn't there already). If they aren't on their home plane, undead are sent to the Shadowfell, and fey are sent to the Feywild.",
+    "de": "Schimmernde Energie umgibt dich und beschützt dich vor Feenwesen, Untoten und Kreaturen, die nicht von der materiellen Ebene stammen. Während der Wirkungsdauer sind celestische Wesen, Elementare, Feenwesen, Unholde und Untote bei Angriffswürfen gegen dich im Nachteil. Du kannst den Zauber vorzeitig beenden, indem du einen der folgenden besonderen Effekte verwendest: Vertreiben:  Als Aktion führst du einen Nahkampf-Zauberangriff gegen ein celestisches Wesen, einen Elementar, ein Feenwesen, einen Unhold oder einen Untoten innerhalb deiner Reichweite aus. Bei einem Treffer versuchst du, die Kreatur wieder auf ihre Heimatebene zu vertreiben. Das Ziel muss einen Charismarettungswurf bestehen, oder es wird auf seine Heimatebene verbannt (falls es sich nicht bereits dort befindet). Wenn sie sich nicht auf ihrer Heimatebene befinden, werden Untote ins Schattenfell und Feenwesen ins Feywild verbannt. Verzauberung brechen:  Als Aktion berührst du eine Kreatur in Reichweite, die von einem celestischen Wesen, einem Elementar, einem Feenwesen, einem Unhold oder einem Untoten bezaubert, verängstigt oder besessen wurde. Die von dir berührte Kreatur ist nicht länger von derartigen Kreaturen bezaubert, verängstigt oder besessen."
+  },
+  "image": "dispell-magic",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

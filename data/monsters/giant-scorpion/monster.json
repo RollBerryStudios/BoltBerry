@@ -1,0 +1,176 @@
+{
+  "id": 137,
+  "slug": "giant-scorpion",
+  "name": "Giant Scorpion",
+  "nameDe": "Riesenskorpion",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "15 (Natural Armor)",
+    "de": "15 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "52 (7d10 + 14)",
+    "de": "52 (7W10+14)"
+  },
+  "str": 15,
+  "dex": 13,
+  "con": 15,
+  "int": 1,
+  "wis": 9,
+  "cha": 3,
+  "strMod": 2,
+  "dexMod": 1,
+  "conMod": 2,
+  "intMod": -5,
+  "wisMod": -1,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 60 ft.",
+      "passive perception 9"
+    ],
+    "de": [
+      "Blindsicht 18 m",
+      "Passive Wahrnehmung 9"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) bludgeoning damage, and the target is grappled (escape DC 12). The scorpion has two claws, each of which can grapple only one target."
+      },
+      {
+        "name": "Multiattack",
+        "text": "The scorpion makes three attacks: two with its claws and one with its sting."
+      },
+      {
+        "name": "Sting",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 7 (1d10 + 2) piercing damage, and the target must make a DC 12 Constitution saving throw, taking 22 (4d10) poison damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Skorpion führt drei Angriffe aus: zwei Klauen- und einen Stachelangriff."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W8+2) Wuchtschaden, und das Ziel wird gepackt (Rettungswurf-SG 12). Der Skorpion hat zwei Klauen, die jeweils ein Ziel packen können."
+      },
+      {
+        "name": "Stachel",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 7 (1W10+2) Stichschaden, und das Ziel muss einen SG-12-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet es 22 (4W10) Giftschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantScorpion (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GiantScorpion (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantScorpion (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantScorpion (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantScorpion (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantScorpion (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantScorpion (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantScorpion (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantScorpion (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantScorpion (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantScorpion (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantScorpion (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantScorpion (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantScorpion (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantScorpion (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantScorpion (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantScorpion (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantScorpion (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,30 @@
+{
+  "id": 391,
+  "slug": "staff-of-swarming-insects",
+  "name": "Staff of Swarming Insects",
+  "nameDe": "Stab der Insektenschwärme",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 1600000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Staff, very rare (requires attunement by a bard, cleric, druid, sorcerer, warlock, or wizard) This staff has 10 charges and regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, a swarm of insects consumes and destroys the staff, then disperses. ***Spells.*** While holding the staff, you can use an action to expend some of its charges to cast one of the following spells from it, using your spell save DC: giant insect (4 charges) or insect plague (5 charges). ***Insect Cloud.*** While holding the staff, you can use an action and expend 1 charge to cause a swarm of harmless flying insects to spread out in a 30-foot radius from you. The insects remain for 10 minutes, making the area heavily obscured for creatures other than you. The swarm moves with you, remaining centered on you. A wind of at least 10 miles per hour disperses the swarm and ends the effect.",
+    "de": "Dieser Stab hat zehn Ladungen und erhält täglich im Morgengrauen 1W6+4 verbrauchte Ladungen zurück. Wenn du die letzte Ladung verbraucht hast, würfle mit einem W20. Bei einer 1 frisst ein Insektenschwarm den Stab auf und verschwindet dann. Zauber:  Wenn du den Stab hältst, kannst du als Aktion einige seiner Ladungen verbrauchen, um einen der folgenden Zauber mit ihm zu wirken, wobei du deinen Zauberrettungswurf-SG verwendest: Insektenplage  (fünf Ladungen) oder Rieseninsekt  (vier Ladungen). Insektenschwarm:  Wenn du den Stab hältst, kannst du eine Aktion verwenden und eine Ladung verbrauchen, um einen Schwarm harmloser fliegender Insekten erscheinen zu lassen, die sich im Radius von neun Metern um dich herum ausbreiten. Die Insekten verweilen zehn Minuten lang und bewirken, dass der Bereich für andere Kreaturen als dich komplett verschleiert ist. Der Schwarm bewegt sich mit dir, mit dir als seinem Mittelpunkt. Wind mit einer Geschwindigkeit von mindestens 16 Kilometern pro Stunde vertreibt den Schwarm und beendet den Effekt."
+  },
+  "properties": {
+    "en": "requires attunement by a bard",
+    "de": "erfordert einstimmung eines barden"
+  },
+  "image": "staff",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

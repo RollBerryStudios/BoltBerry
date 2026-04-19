@@ -1,0 +1,50 @@
+{
+  "id": 77,
+  "slug": "thaumaturgy",
+  "name": "Thaumaturgy",
+  "nameDe": "Thaumaturgie",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "Transmutation cantrip",
+    "de": "Verwandlungsmagie Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": "Up to 1 minute",
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "You manifest a minor wonder, a sign of supernatural power, within range. You create one of the following magical effects within range. - Your voice booms up to three times as loud as normal for 1 minute. - You cause flames to flicker, brighten, dim, or change color for 1 minute. - You cause harmless tremors in the ground for 1 minute. - You create an instantaneous sound that originates from a point of your choice within range, such as a rumble of thunder, the cry of a raven, or ominous whispers. - You instantaneously cause an unlocked door or window to fly open or slam shut. - You alter the appearance of your eyes for 1 minute. If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.",
+    "de": "Du manifestierst ein kleines Wunder, ein Zeichen übernatürlicher Kraft in Reichweite. Du erzeugst einen der folgenden magischen Effekte in Reichweite: Wenn du diesen Zauber mehrmals wirkst, können bis zu drei seiner einminütigen Effekte gleichzeitig wirken, und du kannst als Aktion einen der Effekte beenden."
+  },
+  "image": "thaumaturgy",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

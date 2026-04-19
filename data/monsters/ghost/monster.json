@@ -1,0 +1,323 @@
+{
+  "id": 116,
+  "slug": "ghost",
+  "name": "Ghost",
+  "nameDe": "Geist",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium undead, any",
+    "de": "Mittelgroßer Untoter, jegliche Gesinnung"
+  },
+  "challenge": "4",
+  "xp": 1100,
+  "ac": {
+    "en": "11",
+    "de": "11"
+  },
+  "hp": {
+    "en": "45 (10d8)",
+    "de": "45 (10W8)"
+  },
+  "str": 7,
+  "dex": 13,
+  "con": 10,
+  "int": 10,
+  "wis": 12,
+  "cha": 17,
+  "strMod": -2,
+  "dexMod": 1,
+  "conMod": 0,
+  "intMod": 0,
+  "wisMod": 1,
+  "chaMod": 3,
+  "speed": {
+    "run": {},
+    "fly": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any languages it knew in life"
+    ],
+    "de": [
+      "Alle zu Lebzeiten bekannten Sprachen"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Ethereal Sight",
+        "text": "The ghost can see 60 ft. into the Ethereal Plane when it is on the Material Plane, and vice versa."
+      },
+      {
+        "name": "Incorporeal Movement",
+        "text": "The ghost can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object."
+      }
+    ],
+    "de": [
+      {
+        "name": "Ätherische Sicht",
+        "text": "Der Geist kann 18 Meter weit in die Ätherebene blicken, wenn er sich auf der materiellen Ebene befindet, sowie umgekehrt."
+      },
+      {
+        "name": "Körperlose Bewegung",
+        "text": "Der Geist kann sich durch andere Kreaturen und durch Gegenstände bewegen, als wären sie schwieriges Gelände. Er erleidet 5 (1W10) Energieschaden, wenn er seinen Zug in einem Gegenstand beendet."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Withering Touch",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 17 (4d6 + 3) necrotic damage."
+      },
+      {
+        "name": "Etherealness",
+        "text": "The ghost enters the Ethereal Plane from the Material Plane, or vice versa. It is visible on the Material Plane while it is in the Border Ethereal, and vice versa, yet it can't affect or be affected by anything on the other plane."
+      },
+      {
+        "name": "Horrifying Visage",
+        "text": "Each non-undead creature within 60 ft. of the ghost that can see it must succeed on a DC 13 Wisdom saving throw or be frightened for 1 minute. If the save fails by 5 or more, the target also ages 1d4 × 10 years. A frightened target can repeat the saving throw at the end of each of its turns, ending the frightened condition on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to this ghost's Horrifying Visage for the next 24 hours. The aging effect can be reversed with a greater restoration spell, but only within 24 hours of it occurring."
+      },
+      {
+        "name": "Possession",
+        "text": "One humanoid that the ghost can see within 5 ft. of it must succeed on a DC 13 Charisma saving throw or be possessed by the ghost; the ghost then disappears, and the target is incapacitated and loses control of its body. The ghost now controls the body but doesn't deprive the target of awareness. The ghost can't be targeted by any attack, spell, or other effect, except ones that turn undead, and it retains its alignment, Intelligence, Wisdom, Charisma, and immunity to being charmed and frightened. It otherwise uses the possessed target's statistics, but doesn't gain access to the target's knowledge, class features, or proficiencies.\nThe possession lasts until the body drops to 0 hit points, the ghost ends it as a bonus action, or the ghost is turned or forced out by an effect like the dispel evil and good spell. When the possession ends, the ghost reappears in an unoccupied space within 5 ft. of the body. The target is immune to this ghost's Possession for 24 hours after succeeding on the saving throw or after the possession ends."
+      }
+    ],
+    "de": [
+      {
+        "name": "Vernichtende Berührung",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 17 (4W6+3) nekrotischer Schaden."
+      },
+      {
+        "name": "Ätherische Gestalten",
+        "text": "Der Geist begibt sich von der materiellen Ebene aus auf die Ätherebene oder umgekehrt. Er ist auf der materiellen Ebene sichtbar, solange er sich an der Äthergrenze befindet, sowie umgekehrt, aber er kann weder etwas auf der anderen Ebene beeinflussen noch von etwas auf der anderen Ebene beeinflusst werden."
+      },
+      {
+        "name": "Grauenhaftes Antlitz",
+        "text": "Alle Kreaturen - außer Untoten - im Abstand von bis zu 18 Metern vom Geist, die ihn sehen können, müssen einen SG-13-Weisheitsrettungswurf bestehen, oder sie sind eine Minute lang verängstigt. Wenn der Rettungswurf um mindestens 5 Punkte scheitert, altert das Ziel zusätzlich um 1W4×10 Jahre. Ein verängstigtes Ziel kann den Rettungswurf am Ende jedes seiner Züge wiederholen und den Verängstigt-Zustand bei einem Erfolg beenden. Wenn der Rettungswurf erfolgreich ist oder der Effekt endet, ist das Ziel 24 Stunden lang immun gegen das grauenhafte Antlitz des Geists. Der Alterungseffekt kann mit dem Zauber Vollständige Genesung rückgängig gemacht werden, allerdings nur in den ersten 24 Stunden, nachdem er aufgetreten ist."
+      },
+      {
+        "name": "Inbesitznahme (Aufladung 6)",
+        "text": "Ein Humanoide im Abstand von bis zu 1,5 Metern vom Geist, den der Geist sehen kann, muss einen SG-13-Charismarettungswurf bestehen, oder der Geist ergreift Besitz von ihm. In dem Fall verschwindet der Geist, und das Ziel ist kampfunfähig und verliert die Kontrolle über seinen Körper. Der Geist kontrolliert jetzt den Körper des Ziels, nimmt dem Ziel aber nicht das Bewusstsein. Der Geist kann nicht das Ziel von Angriffen, Zaubern oder anderen Effekten werden - außer solchen, die Untote vertreiben. Er behält Gesinnung, Intelligenz, Weisheit und Charisma sowie seine Immunität gegen Bezaubert und Verängstigt bei. Ansonsten gelten die Werte des besessenen Ziels. Wissen, Klassenmerkmale und Übungen des Ziels sind jedoch nicht verfügbar. Die Inbesitznahme bleibt bestehen, bis die Trefferpunkte des besessenen Körpers auf 0 sinken, der Geist die Inbesitznahme als Bonusaktion beendet oder er vertrieben bzw. von einem Effekt wie vom Zauber Gutes und Böses bannen exorziert wird. Wenn die Inbesitznahme endet, erscheint der Geist an einer freien Stelle im Abstand von bis zu 1,5 Metern vom Körper des Ziels wieder. Wenn der Rettungswurf erfolgreich ist oder die Inbesitznahme endet, ist das Ziel 24 Stunden lang gegen die Inbesitznahme des Geists immun."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/413/1000/1000/636252786639798307.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "undead",
+    "de": "Untoter"
+  },
+  "alignment": {
+    "en": "any alignment",
+    "de": "jede Gesinnung"
+  },
+  "token": {
+    "file": "Ghost (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Ghost (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ghost (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ghost (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ghost (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ghost (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ghost (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GhostFemale (1).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (10).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (11).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (12).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (13).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (14).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (15).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (16).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (17).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (18).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (19).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (2).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (20).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (21).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (22).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (23).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (24).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (25).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (3).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (4).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (5).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (6).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (7).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (8).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostFemale (9).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhostMale (1).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhostMale (10).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhostMale (11).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhostMale (12).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhostMale (13).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhostMale (14).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhostMale (15).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhostMale (2).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhostMale (3).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhostMale (4).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhostMale (5).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhostMale (6).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhostMale (7).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhostMale (8).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhostMale (9).webp",
+      "variant": "male"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

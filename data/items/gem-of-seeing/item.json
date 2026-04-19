@@ -1,0 +1,30 @@
+{
+  "id": 419,
+  "slug": "gem-of-seeing",
+  "name": "Gem of Seeing",
+  "nameDe": "Edelstein des Sehens",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 3200000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, rare (requires attunement) This gem has 3 charges. As an action, you can speak the gem's command word and expend 1 charge. For the next 10 minutes, you have truesight out to 120 feet when you peer through the gem. The gem regains 1d3 expended charges daily at dawn.",
+    "de": "Dieser Edelstein hat drei Ladungen. Du kannst als Aktion das Befehlswort des Edelsteins aussprechen und eine Ladung verbrauchen. Die nächsten zehn Minuten lang hast du Wahrer Blick mit einer Reichweite von 36 Metern, wenn du durch den Edelstein schaust. Der Edelstein erhält täglich im Morgengrauen 1W3 verbrauchte Ladungen zurück."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

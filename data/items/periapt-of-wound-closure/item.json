@@ -1,0 +1,30 @@
+{
+  "id": 315,
+  "slug": "periapt-of-wound-closure",
+  "name": "Periapt of Wound Closure",
+  "nameDe": "Anhänger der Wundheilung",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 500000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon (requires attunement) While you wear this pendant, you stabilize whenever you are dying at the start of your turn. In addition, whenever you roll a Hit Die to regain hit points, double the number of hit points it restores.",
+    "de": "Wenn du diesen Anhänger trägst und sterben würdest, stabilisierst du dich zum Beginn deines Zugs. Wenn du einen Trefferwürfel verwendest, um Trefferpunkte zurückzuerhalten, verdoppelst du außerdem jedes Mal die zurückerhaltenen Trefferpunkte."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

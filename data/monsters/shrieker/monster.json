@@ -1,0 +1,209 @@
+{
+  "id": 260,
+  "slug": "shrieker",
+  "name": "Shrieker",
+  "nameDe": "Kreischer",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium plant, unaligned",
+    "de": "Mittelgroße Pflanze, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "5",
+    "de": "5"
+  },
+  "hp": {
+    "en": "13 (3d8)",
+    "de": "13 (3W8)"
+  },
+  "str": 1,
+  "dex": 1,
+  "con": 10,
+  "int": 1,
+  "wis": 3,
+  "cha": 1,
+  "strMod": -5,
+  "dexMod": -5,
+  "conMod": 0,
+  "intMod": -5,
+  "wisMod": -4,
+  "chaMod": -5,
+  "speed": {
+    "run": {}
+  },
+  "senses": {
+    "en": [
+      "blindsight 30 ft. (blind beyond this radius)",
+      "passive perception 6"
+    ],
+    "de": [
+      "Blindsicht 9 m (blind außerhalb des Radius)",
+      "Passive Wahrnehmung 6"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "False Appearance",
+        "text": "While the shrieker remains motionless, it is indistinguishable from an ordinary fungus."
+      },
+      {
+        "name": "Shriek",
+        "text": "When bright light or a creature is within 30 feet of the shrieker, it emits a shriek audible up to 300 feet away. The shrieker continues to shriek until the disturbance moves out of range, for 1d4 of its turns later."
+      }
+    ],
+    "de": [
+      {
+        "name": "Falsches Erscheinungsbild",
+        "text": "Solange der Kreischer sich nicht bewegt, ist er nicht von einem gewöhnlichen Pilz zu unterscheiden.  Reaktionen"
+      },
+      {
+        "name": "Kreischen",
+        "text": "Wenn sich helles Licht oder eine Kreatur im Abstand von bis zu neun Metern vom Kreischer befindet, stößt dieser ein Kreischen aus, das bis zu 90 Meter weit zu hören ist. Nachdem die Störung sich außer Reichweite bewegt hat, kreischt der Kreischer noch 1W4 seiner Züge lang weiter."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/571/1000/1000/636376357634308010.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "plant",
+    "de": "Pflanze"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Shrieker (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Shrieker (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shrieker (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

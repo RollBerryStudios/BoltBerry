@@ -1,0 +1,58 @@
+{
+  "id": 70,
+  "slug": "shield",
+  "name": "Shield",
+  "nameDe": "Schild",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level abjuration",
+    "de": "Stufe 1 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 reaction, which you take when you are hit by an attack or targeted by the magic missile spell",
+    "de": "1 Reaktion, die du machst, wenn du von einem Angriff getroffen wirst oder von dem Zauber \"Magisches Geschoss\" anvisiert wirst"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "1 round",
+    "de": "1 Runde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from magic missile.",
+    "de": "Eine unsichtbare Barriere aus magischer Energie erscheint und schützt dich. Bis zum Beginn deines nächsten Zuges hast du einen Bonus von +5 auf RK, auch gegen den auslösenden Angriff, und du erleidest keinen Schaden durch Magisches Geschoss ."
+  },
+  "image": "shield",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

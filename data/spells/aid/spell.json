@@ -1,0 +1,66 @@
+{
+  "id": 86,
+  "slug": "aid",
+  "name": "Aid",
+  "nameDe": "Beistand",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "paladin"
+    ],
+    "de": [
+      "Kleriker",
+      "Paladin"
+    ]
+  },
+  "type": {
+    "en": "2nd-level abjuration",
+    "de": "Stufe 2 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "8 hours",
+    "de": "8 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a tiny strip of white cloth",
+      "de": "ein kleiner Streifen weißer Stoff"
+    },
+    "raw": {
+      "en": "V, S, M (a tiny strip of white cloth)",
+      "de": "V, G, M (ein kleiner Streifen weißer Stoff)"
+    }
+  },
+  "description": {
+    "en": "Your spell bolsters your allies with toughness and resolve. Choose up to three creatures within range. Each target's hit point maximum and current hit points increase by 5 for the duration.",
+    "de": "Dein Zauber verleiht deinen Mitstreitern mehr Widerstandsfähigkeit und Entschlossenheit. Wähle bis zu drei Kreaturen in Reichweite. Das Trefferpunktemaximum und die aktuellen Trefferpunkte jedes Ziels werden für die Wirkungsdauer um 5 erhöht. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, erhöhen sich die Trefferpunkte des Ziels für jeden Grad über dem 2. um 5 Punkte."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 3rd level or higher, a target's hit points increase by an additional 5 for each slot level above 2nd.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, erhöhen sich die Trefferpunkte des Ziels für jeden Grad über dem 2. um 5 Punkte."
+  },
+  "image": "aid",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

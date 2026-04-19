@@ -1,0 +1,58 @@
+{
+  "id": 382,
+  "slug": "hideous-laughter",
+  "name": "Hideous Laughter",
+  "nameDe": "Fürchterlicher Lachanfall",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard",
+      "bard"
+    ],
+    "de": [
+      "Magier",
+      "Barde"
+    ]
+  },
+  "type": {
+    "en": "1st-level enchantment",
+    "de": "Stufe 1 Verzauberung"
+  },
+  "castingTime": "1 action",
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "Tiny tarts and a feather that is waved in the air",
+      "de": "Winzige Törtchen und eine Feder, die durch die Luft geschwenkt wird"
+    },
+    "raw": {
+      "en": "V, S, M (Tiny tarts and a feather that is waved in the air)",
+      "de": "V, G, M (Winzige Törtchen und eine Feder, die durch die Luft geschwenkt wird)"
+    }
+  },
+  "description": {
+    "en": "A creature of your choice that you can see within range perceives everything as hilariously funny and falls into fits of laughter if this spell affects it. The target must succeed on a wisdom saving throw or fall prone, becoming incapacitated and unable to stand up for the duration. A creature with an Intelligence score of 4 or less isn't affected. At the end of each of its turns, and each time it takes damage, the target can make another wisdom saving throw. The target had advantage on the saving throw if it's triggered by damage. On a success, the spell ends.",
+    "de": "Eine Kreatur deiner Wahl in Reichweite, die du sehen kannst, findet alles unglaublich lustig und bricht in einen Lachanfall aus, wenn dieser Zauber einen Effekt auf sie hat. Das Ziel muss einen Weisheitsrettungswurfbestehen oder es fällt für die Wirkungsdauer hin, wird kampfunfähig und kann nicht mehr aufstehen. Kreaturen mit einem Intelligenzwert von 4 oder niedriger sind nicht betroffen. Am Ende jedes seiner Züge und jedes Mal, wenn es Schaden erleidet, kann das Ziel einen weiteren Weisheitsrettungswurf ausführen. Wird er durch Schaden ausgelöst, ist das Ziel beim Rettungswurf im Vorteil. Bei einem Erfolg endet der Zauber."
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

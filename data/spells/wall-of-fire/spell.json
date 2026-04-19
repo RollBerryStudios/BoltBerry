@@ -1,0 +1,68 @@
+{
+  "id": 329,
+  "slug": "wall-of-fire",
+  "name": "Wall of Fire",
+  "nameDe": "Feuerwand",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Druide",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "4th-level evocation",
+    "de": "Stufe 4 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a small piece of phosphorus",
+      "de": "ein kleines Stück Phosphor"
+    },
+    "raw": {
+      "en": "V, S, M (a small piece of phosphorus)",
+      "de": "V, G, M (ein kleines Stück Phosphor)"
+    }
+  },
+  "description": {
+    "en": "You create a wall of fire on a solid surface within range. You can make the wall up to 60 feet long, 20 feet high, and 1 foot thick, or a ringed wall up to 20 feet in diameter, 20 feet high, and 1 foot thick. The wall is opaque and lasts for the duration. When the wall appears, each creature within its area must make a Dexterity saving throw. On a failed save, a creature takes 5d8 fire damage, or half as much damage on a successful save. One side of the wall, selected by you when you cast this spell, deals 5d8 fire damage to each creature that ends its turn within 10 feet o f that side or inside the wall. A creature takes the same damage when it enters the wall for the first time on a turn or ends its turn there. The other side of the wall deals no damage. The other side of the wall deals no damage.",
+    "de": "Du erschaffst eine Feuerwand auf einer festen Oberfläche in Reichweite. Du kannst eine gerade Wand erschaffen, die bis zu 18 Meter lang ist, oder eine ringförmige Wand mit bis zu sechs Metern Durchmesser. In beiden Fällen ist die Wand sechs Meter hoch und 0,3 Meter dick Die Wand ist undurchsichtig und bleibt für die Wirkungsdauer bestehen. Wenn die Wand erscheint, muss jede Kreatur in ihrem Bereich einen Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet die Kreatur 5W8 Feuerschaden, anderenfalls die Hälfte. Eine Seite der Wand, die du beim Wirken des Zaubers bestimmst, fügt jeder Kreatur 5W8 Feuerschaden zu, die ihren Zug im Abstand von bis zu drei Metern von dieser Seite oder in der Wand beendet. Eine Kreatur erleidet den Schaden ebenfalls, wenn sie die Wand in einem Zug erstmals betritt. Die andere Seite der Wand verursacht keinen Schaden. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 5. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 4. um 1W8."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 5. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 4. um 1W8."
+  },
+  "image": "wall-of-fire",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

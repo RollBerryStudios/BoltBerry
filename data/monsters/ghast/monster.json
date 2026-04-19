@@ -1,0 +1,286 @@
+{
+  "id": 115,
+  "slug": "ghast",
+  "name": "Ghast",
+  "nameDe": "Grul",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium undead, chaotic evil",
+    "de": "Mittelgroßer Untoter, chaotisch böse"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "13",
+    "de": "13"
+  },
+  "hp": {
+    "en": "36 (8d8)",
+    "de": "36 (8W8)"
+  },
+  "str": 16,
+  "dex": 17,
+  "con": 10,
+  "int": 11,
+  "wis": 10,
+  "cha": 8,
+  "strMod": 3,
+  "dexMod": 3,
+  "conMod": 0,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common"
+    ],
+    "de": [
+      "Gemeinsprache"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Stench",
+        "text": "Any creature that starts its turn within 5 ft. of the ghast must succeed on a DC 10 Constitution saving throw or be poisoned until the start of its next turn. On a successful saving throw, the creature is immune to the ghast's Stench for 24 hours."
+      },
+      {
+        "name": "Turn Defiance",
+        "text": "The ghast and any ghouls within 30 ft. of it have advantage on saving throws against effects that turn undead."
+      }
+    ],
+    "de": [
+      {
+        "name": "Gestank",
+        "text": "Jede Kreatur, die ihren Zug im Abstand von bis zu 1,5 Metern vom Grul beginnt, muss einen SG-10-Konstitutionsrettungswurf bestehen, oder sie ist bis zum Beginn ihres nächsten Zugs vergiftet. Bei einem erfolgreichen Rettungswurf ist die Kreatur 24 Stunden lang gegen den Gestank des Gruls immun."
+      },
+      {
+        "name": "Trutz gegen Vertreibung",
+        "text": "Der Grul und alle Ghule im Abstand von bis zu neun Metern von ihm sind bei Rettungswürfen gegen Effekte, die Untote vertreiben, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one creature. Hit: 12 (2d8 + 3) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage. If the target is a creature other than an undead, it must succeed on a DC 10 Constitution saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 12 (2W8+3) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Hiebschaden. Wenn das Ziel kein Untoter ist, muss es einen SG-10-Konstitutionsrettungswurf bestehen, oder es ist eine Minute lang gelähmt. Das Ziel kann den Rettungswurf am Ende jedes seiner Züge wiederholen und den Effekt bei einem Erfolg beenden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/411/315/315/636252786516023032.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "undead",
+    "de": "Untoter"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "GhastFemale (1).webp",
+    "variant": "female"
+  },
+  "tokens": [
+    {
+      "file": "GhastFemale (10).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (11).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (12).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (13).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (14).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (15).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (16).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (17).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (18).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (19).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (2).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (20).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (21).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (3).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (4).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (5).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (6).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (7).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (8).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastFemale (9).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GhastMale (1).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (10).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (11).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (12).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (13).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (14).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (15).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (16).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (17).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (18).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (19).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (2).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (20).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (21).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (3).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (4).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (5).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (6).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (7).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (8).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GhastMale (9).webp",
+      "variant": "male"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

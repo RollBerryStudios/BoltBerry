@@ -1,0 +1,229 @@
+{
+  "id": 221,
+  "slug": "owlbear",
+  "name": "Owlbear",
+  "nameDe": "Eulenbär",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, unaligned",
+    "de": "Große Monstrosität, ohne Gesinnung"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "59 (7d10 + 21)",
+    "de": "59 (7W10+21)"
+  },
+  "str": 20,
+  "dex": 12,
+  "con": 17,
+  "int": 3,
+  "wis": 12,
+  "cha": 7,
+  "strMod": 5,
+  "dexMod": 1,
+  "conMod": 3,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 13"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Sight and Smell",
+        "text": "The owlbear has advantage on Wisdom (Perception) checks that rely on sight or smell."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfe Sicht und scharfer Geruchssinn",
+        "text": "Der Eulenbär ist bei Weisheitswürfen (Wahrnehmung), die auf Sicht oder Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The owlbear makes two attacks: one with its beak and one with its claws."
+      },
+      {
+        "name": "Beak",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one creature. Hit: 10 (1d10 + 5) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 14 (2d8 + 5) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Eulenbär führt zwei Angriffe aus: einen Schnabel- und einen Klauenangriff."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 14 (2W8+5) Hiebschaden."
+      },
+      {
+        "name": "Schnabel",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 10 (1W10+5) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/315/315/315/636252772225295187.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Owlbear (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Owlbear (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Owlbear (9).webp",
+      "variant": ""
+    },
+    {
+      "file": "OwlbearSnow (1).webp",
+      "variant": "snow"
+    },
+    {
+      "file": "OwlbearSnow (2).webp",
+      "variant": "snow"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,60 @@
+{
+  "id": 292,
+  "slug": "mirror-image",
+  "name": "Mirror Image",
+  "nameDe": "Spiegelbilder",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-level illusion",
+    "de": "Stufe 2 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "Three illusory duplicates of yourself appear in your space. Until the spell ends, the duplicates move with you and mimic your actions, shifting position so it's impossible to track which image is real. You can use your action to dismiss the illusory duplicates. Each time a creature targets you with an attack during the spell's duration, roll a d20 to determine whether the attack instead targets one of your duplicates. If you have three duplicates, you must roll a 6 or higher to change the attack's target to a duplicate. With two duplicates, you must roll an 8 or higher. With one duplicate, you must roll an 11 or higher. A duplicate's AC equals 10 + your Dexterity modifier. If an attack hits a duplicate, the duplicate is destroyed. A duplicate can be destroyed only by an attack that hits it. It ignores all other damage and effects. The spell ends when all three duplicates are destroyed. A creature is unaffected by this spell if it can't see, if it relies on senses other than sight, such as blindsight, or if it can perceive illusions as false, as with truesight.",
+    "de": "Drei illusionäre Duplikate deiner selbst erscheinen in deinem Bereich. Bis der Zauber endet, bewegen sich die Duplikate mit dir, ahmen deine Aktionen nach und verändern ihre Position, so dass es unmöglich ist, zu erkennen, was real ist. Du kannst deine Aktion verwenden, um die illusionären Duplikate fortzuschicken. Jedes Mal, wenn dich eine Kreatur während der Wirkungsdauer angreift, würfle mit einem W20, um zu bestimmen, ob der Angriff stattdessen eines deiner Duplikate zum Ziel hat. Wenn du drei Duplikate hast, musst du eine 6 oder höher würfeln, damit ein Duplikat das Ziel des Angriffs wird. Bei zwei Duplikaten musst du eine 8 oder höher würfeln. Bei einem Duplikat musst du eine 11 oder höher würfeln. Die RK eines Duplikats beträgt 10 + dein Geschicklichkeitsmodifikator. Wenn ein Angriff ein Duplikat trifft, wird dieses zerstört. Ein Duplikat kann nur von einem Angriff zerstört werden, der es trifft. Es ignoriert alle anderen Schadensquellen und Effekte. Der Zauber endet, wenn alle drei Duplikate zerstört wurden. Eine Kreatur ist von diesem Zauber nicht betroffen, wenn sie nicht sehen kann, wenn sie sich auf andere Sinne als Sicht verlässt (wie Blindsicht) oder wenn sie Illusionen als solche erkennen kann (wie mit Wahrer Blick)."
+  },
+  "image": "blur",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,60 @@
+{
+  "id": 67,
+  "slug": "sanctuary",
+  "name": "Sanctuary",
+  "nameDe": "Heiligtum",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "1st-level abjuration",
+    "de": "Stufe 1 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 bonus action",
+    "de": "1 Bonusaktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a small silver mirror",
+      "de": "ein kleiner silberner Spiegel"
+    },
+    "raw": {
+      "en": "V, S, M (a small silver mirror)",
+      "de": "V, G, M (ein kleiner silberner Spiegel)"
+    }
+  },
+  "description": {
+    "en": "You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or a harmful spell must first make a wisdom saving throw. On a failed save, the creature must choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from area effects, such as the explosion of a fireball. If the warded creature makes an attack or casts a spell that affects an enemy creature, this spell ends.",
+    "de": "Du schützt eine Kreatur in Reichweite vor Angriffen. Während der Wirkungsdauer muss jede Kreatur, die bei einem Angriff oder schädlichen Zauber die geschützte Kreatur als Ziel hat, zuerst einen Weisheitsrettungswurf bestehen. Scheitert der Wurf, muss die Kreatur ein neues Ziel wählen, oder sie verliert den Angriff oder Zauber. Dieser Zauber schützt die entsprechende Kreatur nicht vor Flächeneffekten wie der Explosion eines Feuerballs. Greift die geschützte Kreatur an oder wirkt sie einen Zauber auf eine feindliche Kreatur, endet Heiligtum ."
+  },
+  "image": "abjuration",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

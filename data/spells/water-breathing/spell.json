@@ -1,0 +1,66 @@
+{
+  "id": 334,
+  "slug": "water-breathing",
+  "name": "Water Breathing",
+  "nameDe": "Wasser atmen",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "ranger",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Druide",
+      "Waldläufer",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level transmutation (ritual)",
+    "de": "Stufe 3 Verwandlungsmagie (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "24 hours",
+    "de": "24 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a short reed or piece of straw",
+      "de": "ein kurzes Schilfrohr oder ein Stück Stroh"
+    },
+    "raw": {
+      "en": "V, S, M (a short reed or piece of straw)",
+      "de": "V, G, M (ein kurzes Schilfrohr oder ein Stück Stroh)"
+    }
+  },
+  "description": {
+    "en": "This spell gives a maximum of ten willing creatures within range and you can see, the ability to breathe underwater until the end of its term. Affected creatures also retain their normal breathing pattern.",
+    "de": "Bis zu zehn bereitwillige Kreaturen in Reichweite, die du sehen kannst, können bis zum Ende des Zaubers unter Wasser atmen. Betroffene Kreaturen verfügen weiterhin über ihre normale Atmung."
+  },
+  "image": "water-breathing",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

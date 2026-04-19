@@ -1,0 +1,23 @@
+{
+  "id": 54,
+  "slug": "abacus",
+  "name": "Abacus",
+  "nameDe": "Abakus",
+  "category": {
+    "en": "ADVENTURING_GEAR",
+    "de": "Ausrüstung"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 200,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 2,
+  "image": "adventuring-gear",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

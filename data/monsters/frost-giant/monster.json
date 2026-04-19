@@ -1,0 +1,327 @@
+{
+  "id": 112,
+  "slug": "frost-giant",
+  "name": "Frost Giant",
+  "nameDe": "Frostriese",
+  "source": "SRD",
+  "meta": {
+    "en": "Huge giant, neutral evil",
+    "de": "Großer Riese, neutral böse"
+  },
+  "challenge": "8",
+  "xp": 3900,
+  "ac": {
+    "en": "15 (zusammengewürfelte Rüstung)",
+    "de": "15 (zusammengewürfelte Rüstung)"
+  },
+  "hp": {
+    "en": "138 (12d12 + 60)",
+    "de": "138 (12W12+60)"
+  },
+  "str": 23,
+  "dex": 9,
+  "con": 21,
+  "int": 9,
+  "wis": 10,
+  "cha": 12,
+  "strMod": 6,
+  "dexMod": -1,
+  "conMod": 5,
+  "intMod": -1,
+  "wisMod": 0,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Giant"
+    ],
+    "de": [
+      "Riesisch"
+    ]
+  },
+  "savingThrows": [
+    "Kon +8",
+    "Wei +3",
+    "Cha +4"
+  ],
+  "skills": [
+    "Athletik +9",
+    "Wahrnehmung +3"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The giant makes two greataxe attacks."
+      },
+      {
+        "name": "Greataxe",
+        "text": "Melee Weapon Attack: +9 to hit, reach 10 ft., one target. Hit: 25 (3d12 + 6) slashing damage."
+      },
+      {
+        "name": "Rock",
+        "text": "Ranged Weapon Attack: +9 to hit, range 60/240 ft., one target. Hit: 28 (4d10 + 6) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Riese führt zwei Angriffe mit der Zweihandaxt aus."
+      },
+      {
+        "name": "Zweihandaxt",
+        "text": "Nahkampfwaffenangriff: +9 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 25 (3W12+6) Hiebschaden."
+      },
+      {
+        "name": "Felsblock",
+        "text": "Fernkampfwaffenangriff: +9 auf Treffer, Reichweite 18/72 m, ein Ziel. Treffer: 28 (4W10+6) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/405/1000/1000/636252786158646348.jpeg",
+  "size": {
+    "en": "huge",
+    "de": "Riesig"
+  },
+  "type": {
+    "en": "giant",
+    "de": "Riese"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "FrostGiantFemale (1).webp",
+    "variant": "female"
+  },
+  "tokens": [
+    {
+      "file": "FrostGiantFemale (10).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (11).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (12).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (13).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (14).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (15).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (16).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (17).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (18).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (19).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (2).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (20).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (21).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (22).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (23).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (24).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (25).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (26).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (27).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (28).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (29).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (3).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (4).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (5).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (6).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (7).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (8).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantFemale (9).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FrostGiantMale (1).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (10).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (11).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (12).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (13).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (14).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (15).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (16).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (17).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (18).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (19).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (2).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (20).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (21).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (22).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (23).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (24).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (25).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (3).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (4).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (5).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (6).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (7).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (8).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FrostGiantMale (9).webp",
+      "variant": "male"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

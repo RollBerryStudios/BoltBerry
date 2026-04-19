@@ -1,0 +1,60 @@
+{
+  "id": 174,
+  "slug": "holy-aura",
+  "name": "Holy Aura",
+  "nameDe": "Heilige Aura",
+  "level": {
+    "en": "8",
+    "de": "Grad 8"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "8th-level abjuration",
+    "de": "Stufe 8 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a tiny reliquary worth at least 1,000 gp containing a sacred relic, such as a scrap of cloth from a saint's robe or a piece of parchment from a religious text",
+      "de": "eine winzige Schatulle im Wert von mindestens 1.000 Gulden, die eine heilige Reliquie enthält, z. B. einen Stofffetzen aus dem Gewand eines Heiligen oder ein Stück Pergament aus einem religiösen Text"
+    },
+    "raw": {
+      "en": "V, S, M (a tiny reliquary worth at least 1,000 gp containing a sacred relic, such as a scrap of cloth from a saint's robe or a piece of parchment from a religious text)",
+      "de": "V, G, M (eine winzige Schatulle im Wert von mindestens 1.000 Gulden, die eine heilige Reliquie enthält, z. B. einen Stofffetzen aus dem Gewand eines Heiligen oder ein Stück Pergament aus einem religiösen Text)"
+    }
+  },
+  "description": {
+    "en": "Divine light washes out from you and coalesces in a soft radiance in a 30-foot radius around you. Creatures of your choice in that radius when you cast this spell shed dim light in a 5-foot radius and have advantage on all saving throws, and other creatures have disadvantage on attack rolls against them until the spell ends. In addition, when a fiend or an undead hits an affected creature with a melee attack, the aura flashes with brilliant light. The attacker must succeed on a constitution saving throw or be blinded until the spell ends.",
+    "de": "Göttliches Licht breitet sich von dir aus und wird in einem Radius von neun Metern um dich herum zu einem sanften Strahlen. Kreaturen deiner Wahl, die sich im Radius befinden, wenn du den Zauber wirkst, strahlen in einem Radius von 1,5 Metern dämmriges Licht aus und sind bei allen Rettungswürfen im Vorteil. Bis der Zauber endet, sind andere Kreaturen zudem bei Angriffswürfen gegen sie im Nachteil. Trifft ein Unhold oder ein Untoter eine betroffene Kreatur mit einem Nahkampfangriff, blitzt die Aura hell auf. Der Angreifer muss einen Konstitutionsrettungswurf bestehen, oder er ist blind, bis der Zauber endet."
+  },
+  "image": "magic-circle",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

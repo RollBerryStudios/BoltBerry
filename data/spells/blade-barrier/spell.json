@@ -1,0 +1,56 @@
+{
+  "id": 222,
+  "slug": "blade-barrier",
+  "name": "Blade Barrier",
+  "nameDe": "Klingenbarriere",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "6th-level evocation",
+    "de": "Stufe 6 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "90 feet",
+    "de": "27 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You create a vertical wall of whirling, razor-sharp blades made of magical energy. The wall appears within range and lasts for the duration. You can make a straight wall up to 100 feet long, 20 feet high, and 5 feet thick, or a ringed wall up to 60 feet in diameter, 20 feet high, and 5 feet thick. The wall provides three-quarters cover to creatures behind it, and its space is difficult terrain. When a creature enters the wall's area for the first time on a turn or starts its turn there, the creature must make a dexterity saving throw. On a failed save, the creature takes 6d10 slashing damage. On a successful save, the creature takes half as much damage.",
+    "de": "Du erschaffst eine vertikale Wand wirbelnder, rasiermesserscharfer Klingen aus magischer Energie. Sie erscheint in Reichweite und bleibt für die Wirkungsdauer bestehen. Du kannst eine gerade Wand erschaffen, die bis zu 30 Meter lang ist, oder eine ringförmige Wand mit bis zu 18 Meter Durchmesser. In beiden Fällen ist die Wand sechs Meter hoch und 1,5 Meter dick. Die Wand bietet allen Kreaturen dahinter Dreivierteldeckung und stellt schwieriges Gelände dar. Wenn eine Kreatur den Bereich der Wand in einem Zug erstmals betritt oder den Zug darin beginnt, muss sie einen Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet die Kreatur 6W10 Hiebschaden. Bei einem erfolgreichen Rettungswurf erleidet die Kreatur halb so viel Schaden."
+  },
+  "image": "blade-barrier",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

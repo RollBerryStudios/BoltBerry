@@ -1,0 +1,62 @@
+{
+  "id": 162,
+  "slug": "antimagic-field",
+  "name": "Antimagic Field",
+  "nameDe": "Antimagisches Feld",
+  "level": {
+    "en": "8",
+    "de": "Grad 8"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "wizard"
+    ],
+    "de": [
+      "Kleriker",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "8th-level abjuration",
+    "de": "Stufe 8 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self (10-foot-radius sphere)",
+    "de": "Selbst (3 Meter Radius Kugel)"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a pinch of powdered iron or iron filings",
+      "de": "eine Prise pulverisiertes Eisen oder Eisenspäne"
+    },
+    "raw": {
+      "en": "V, S, M (a pinch of powdered iron or iron filings)",
+      "de": "V, G, M (eine Prise pulverisiertes Eisen oder Eisenspäne)"
+    }
+  },
+  "description": {
+    "en": "A 10-foot-radius invisible sphere of antimagic surrounds you. This area is divorced from the magical energy that suffuses the multiverse. Within the sphere, spells can't be cast, summoned creatures disappear, and even magic items become mundane. Until the spell ends, the sphere moves with you, centered on you. Spells and other magical effects, except those created by an artifact or a deity, are suppressed in the sphere and can't protrude into it. A slot expended to cast a suppressed spell is consumed. While an effect is suppressed, it doesn't function, but the time it spends suppressed counts against its duration. ***Targeted Effects.*** Spells and other magical effects, such as magic missile and charm person, that target a creature or an object in the sphere have no effect on that target. ***Areas of Magic.*** The area of another spell or magical effect, such as fireball, can't extend into the sphere. If the sphere overlaps an area of magic, the part of the area that is covered by the sphere is suppressed. For example, the flames created by a wall of fire are suppressed within the sphere, creating a gap in the wall if the overlap is large enough. ***Spells.*** Any active spell or other magical effect on a creature or an object in the sphere is suppressed while the creature or object is in it. ***Magic Items.*** The properties and powers of magic items are suppressed in the sphere. For example, a +1 longsword in the sphere functions as a nonmagical longsword. A magic weapon's properties and powers are suppressed if it is used against a target in the sphere or wielded by an attacker in the sphere. If a magic weapon or a piece of magic ammunition fully leaves the sphere (for example, if you fire a magic arrow or throw a magic spear at a target outside the sphere), the magic of the item ceases to be suppressed as soon as it exits. ***Magical Travel.*** Teleportation and planar travel fail to work in the sphere, whether the sphere is the destination or the departure point for such magical travel. A portal to another location, world, or plane of existence, as well as an opening to an extradimensional space such as that created by the rope trick spell, temporarily closes while in the sphere. ***Creatures and Objects.*** A creature or object summoned or created by magic temporarily winks out of existence in the sphere. Such a creature instantly reappears once the space the creature occupied is no longer within the sphere. ***Dispel Magic.*** Spells and magical effects such as dispel magic have no effect on the sphere. Likewise, the spheres created by different antimagic field spells don't nullify each other.",
+    "de": "Eine unsichtbare Sphäre aus Antimagie mit einem Radius von 3 Metern umgibt dich. Dieser Bereich ist von der magischen Energie abgeschnitten, die das Multiversum erfüllt. Innerhalb der Sphäre können keine Zauber gewirkt werden, beschworene Kreaturen verschwinden und magische Gegenstände werden zu gewöhnlichen. Bis der Zauber endet, bewegt sich die Sphäre mit dir im Zentrum fort. Zauber und andere magische Effekte (außer solche durch Artefakte oder Gottheiten) werden von der Sphäre unterdrückt, die für sie undurchdringlich ist Ein Zauberplatz, der zum Wirken eines unterdrückten Zaubers verwendet wird, gilt als verbraucht. Solange ein Effekt unterdrückt wird, wirkt er nicht, doch die Zeit, in der er unterdrückt wird, wird von seiner Dauer abgezogen. Gezielte Effekte:  Zauber und andere magische Effekte wie Magisches Geschoss  und Person bezaubern , die auf eine Kreatur oder einen Gegenstand in der Sphäre abzielen, haben keinen Effekt. Magische Flächeneffekte:  Der Flächeneffekt eines anderen Zaubers oder magischen Effekts wie eines Feuerball s kann nicht in die Sphäre eindringen. Wenn die Sphäre einen magischen Flächeneffekt überschneidet, wird der Bereich in der Sphäre unterdrückt. Beispiel: Die Flammen einer Feuerwand  werden innerhalb der Sphäre unterdrückt, sodass bei ausreichender Überschneidung eine Lücke in der Wand entsteht. Zauber:  Alle aktiven Zauber oder anderen magischen Effekte, die eine Kreatur oder einen Gegenstand in der Sphäre beeinflussen, werden unterdrückt, solange sich die Kreatur oder der Gegenstand darin befinden. Magische Gegenstände:  Die Eigenschaften und Kräfte magischer Gegenstände werden in der Sphäre unterdrückt. Beispiel: Ein Langschwert+1 ist in der Sphäre ein nichtmagisches Langschwert. Die Eigenschaften und Kräfte magischer Waffen werden unterdrückt, wenn sie gegen ein Ziel in der Sphäre gerichtet oder von einem Angreifer in der Sphäre geführt werden. Verlässt eine magische Waffe oder ein magisches Geschoss die Sphäre vollständig (beispielsweise, wenn du mit einem magischen Pfeil oder einem magischen Speer ein Ziel außerhalb der Sphäre anvisierst), wird die Magie des Gegenstands nicht mehr unterdrückt, sobald er die Sphäre verlässt. Magisches Reisen:  Teleportation und Ebenenreisen funktionieren in der Sphäre nicht. Dabei spielt es keine Rolle, ob die Sphäre der Zielort oder der Startpunkt der magischen Reise darstellt. Ein Portal zu einem anderen Ort, einer anderen Welt oder einer anderen Existenzebene, sowie Öffnungen in den extradimensionalen Raum, wie beispielsweise durch den Zauber Seiltrick , schließen sich vorübergehend in der Sphäre. Kreaturen und Objekte:  Kreaturen oder Gegenstände, die mit Magie beschworen oder erschaffen wurden, existieren in der Sphäre vorübergehend nicht mehr. Kreaturen erscheinen sofort wieder, sobald der Bereich, in dem sie sich zuletzt befanden, nicht mehr innerhalb der Sphäre liegt Magie bannen:  Zauber und magische Effekte wie Magie bannen  haben keine Auswirkungen auf die Sphäre. Ebenso heben sich Sphären nicht gegenseitig auf, die von verschiedenen Antimagisches Feld  erschaffen wurden."
+  },
+  "image": "conjuration",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

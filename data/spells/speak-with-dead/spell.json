@@ -1,0 +1,62 @@
+{
+  "id": 143,
+  "slug": "speak-with-dead",
+  "name": "Speak with Dead",
+  "nameDe": "Mit Toten sprechen",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Necromancy",
+    "de": "Nekromantie"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "3rd-level necromancy",
+    "de": "Stufe 3 Nekromantie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "10 feet",
+    "de": "3 Meter"
+  },
+  "duration": {
+    "en": "10 minutes",
+    "de": "10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "burning incense",
+      "de": "brennendes Räucherwerk"
+    },
+    "raw": {
+      "en": "V, S, M (burning incense)",
+      "de": "V, G, M (brennendes Räucherwerk)"
+    }
+  },
+  "description": {
+    "en": "You grant the semblance of life and intelligence to a corpse of your choice within range, allowing it to answer the questions you pose. The corpse must still have a mouth and can't be undead. The spell fails if the corpse was the target of this spell within the last 10 days. Until the spell ends, you can ask the corpse up to five questions. The corpse knows only what it knew in life, including the languages it knew. Answers are usually brief, cryptic, or repetitive, and the corpse is under no compulsion to offer a truthful answer if you are hostile to it or it recognizes you as an enemy. This spell doesn't return the creature's soul to its body, only its animating spirit. Thus, the corpse can't learn new information, doesn't comprehend anything that has happened since it died, and can't speculate about future events.",
+    "de": "Du erfüllst einen Leichnam deiner Wahl in Reichweite mit dem Anschein von Leben und Intelligenz, damit er Fragen beantworten kann, die du ihm stellst Die Leiche muss einen Mund besitzen und darf nicht untot sein. Der Zauber scheitert, wenn die Leiche innerhalb der letzten zehn Tage bereits Ziel dieses Zaubers war. Bis der Zauber endet, kannst du der Leiche bis zu fünf Fragen stellen. Die Leiche besitzt nur das Wissen, das sie zu Lebzeiten hatte, und spricht nur die zu Lebzeiten bekannten Sprachen. Die Antworten sind normalerweise kurz, kryptisch oder monoton. Der Leichnam muss dir nicht wahrheitsgemäß antworten, wenn du ihm feindlich gesinnt bist oder er dich als Feind ansieht. Dieser Zauber bringt nicht die Seele der Kreatur in ihren Körper zurück, nur ihren belebenden Geist Daher kann die Leiche keine neuen Informationen erhalten, nichts verstehen, das nach ihrem Tod geschehen ist und nicht über zukünftige Ereignisse mutmaßen."
+  },
+  "image": "speak-with-dead",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

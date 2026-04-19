@@ -1,0 +1,36 @@
+{
+  "id": 15,
+  "slug": "greatclub",
+  "name": "Greatclub",
+  "nameDe": "Zweihändige Keule",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 20,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 10,
+  "classification": {
+    "en": "Simple Melee Weapon",
+    "de": "Einfache Nahkampfwaffe"
+  },
+  "damage": "1d8",
+  "damageType": {
+    "en": "bludgeoning",
+    "de": "wucht"
+  },
+  "properties": {
+    "en": "two-handed",
+    "de": "zweihändig"
+  },
+  "image": "weapon",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

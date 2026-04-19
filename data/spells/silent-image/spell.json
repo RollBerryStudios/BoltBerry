@@ -1,0 +1,64 @@
+{
+  "id": 73,
+  "slug": "silent-image",
+  "name": "Silent Image",
+  "nameDe": "Lautloses Trugbild",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level illusion",
+    "de": "Stufe 1 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a bit of fleece",
+      "de": "ein bisschen Vlies"
+    },
+    "raw": {
+      "en": "V, S, M (a bit of fleece)",
+      "de": "V, G, M (ein bisschen Vlies)"
+    }
+  },
+  "description": {
+    "en": "You create the image of an object, a creature, or some other visible phenomenon that is no larger than a 15-foot cube. The image appears at a spot within range and lasts for the duration. The image is purely visual; it isn't accompanied by sound, smell, or other sensory effects. You can use your action to cause the image to move to any spot within range. As the image changes location, you can alter its appearance so that its movements appear natural for the image. For example, if you create an image of a creature and move it, you can alter the image so that it appears to be walking. Physical interaction with the image reveals it to be an illusion, because things can pass through it. A creature that uses its action to examine the image can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image.",
+    "de": "Du erschaffst ein Abbild eines Gegenstands, einer Kreatur oder eines anderen sichtbaren Phänomens, das nicht größer als ein Würfel mit 4,5 Metern Kantenlänge sein darf. Das Abbild erscheint an einem Punkt in Reichweite und bleibt während der Wirkungsdauer bestehen. Das Abbild ist ein rein visueller Eindruck ohne Geräusche, Gerüche oder andere Sinneseffekte. Als Aktion kannst du das Abbild an einen Ort deiner Wahl in Reichweite bewegen. Dabei kannst du das Bild so verändern, dass seine Bewegung natürlich erscheint. Beispiel: Wenn du das Abbild einer Kreatur erstellst und bewegst, kannst du es so verändern, dass es zu laufen scheint. Physische Interaktionen mit dem Abbild enttarnen es als Illusion, da Dinge es einfach durchdringen können. Eine Kreatur, die ihre Aktion verwendet, um das Abbild zu untersuchen, kann einen Intelligenzwurf (Nachforschungen) gegen deinen Zauberrettungswurf-SG ausführen. Erkennt eine Kreatur die Illusion als solche, wird das Abbild für sie durchscheinend."
+  },
+  "image": "illusion",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,61 @@
+{
+  "id": 384,
+  "slug": "magnificent-mansion",
+  "name": "Magnificent Mansion",
+  "nameDe": "Herrliches Herrenhaus",
+  "level": {
+    "en": "7",
+    "de": "Grad 7"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard",
+      "bard"
+    ],
+    "de": [
+      "Magier",
+      "Barde"
+    ]
+  },
+  "type": {
+    "en": "7th-level conjuration",
+    "de": "Stufe 7 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "300 feet",
+    "de": "90 Meter"
+  },
+  "duration": {
+    "en": "24 hours",
+    "de": "24 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "A miniature portal carved from ivory, a small piece of polished marble, and a tiny silver spoon, each item worth at least 5 gp",
+      "de": "Ein Miniaturportal aus Elfenbein, ein kleines Stück polierter Marmor und ein winziger Silberlöffel, jeweils im Wert von mindestens 5 GM"
+    },
+    "raw": {
+      "en": "V, S, M (A miniature portal carved from ivory, a small piece of polished marble, and a tiny silver spoon, each item worth at least 5 gp)",
+      "de": "V, G, M (Ein Miniaturportal aus Elfenbein, ein kleines Stück polierter Marmor und ein winziger Silberlöffel, jeweils im Wert von mindestens 5 GM)"
+    }
+  },
+  "description": {
+    "en": "You conjure an extradimensional dwelling in range that lasts for the duration. You choose where its one entrance is located. The entrance shimmers faintly and is 5 feet wide and 10 feet tall. You and any creature you designate when you cast the spell can enter the extradimensional dwelling as long as the portal remains open. You can open or close the portal if you are within 30 feet of it. While closed, the portal is invisible. Beyond the portal is a magnificent foyer with numerous chambers beyond. The atmosphere is clean, fresh, and warm. You can create any floor plan you like, but the space can't exceed 50 cubes, each cube being 10 feet on each side. The place is furnished and decorated as you choose. It contains sufficient food to serve a nine course banquet for up to 100 people. A staff of 100 near-transparent servants attends all who enter. You decide the visual appearance of these servants and their attire. They are completely obedient to your orders. Each servant can perform any task a normal human servant could perform, but they can't attack or take any action that would directly harm another creature. Thus the servants can fetch things, clean, mend, fold clothes, light fires, serve food, pour wine, and so on. The servants can go anywhere in the mansion but can't leave it. Furnishings and other objects created by this spell dissipate into smoke if removed from the mansion. When the spell ends, any creatures inside the extradimensional space are expelled into the open spaces nearest to the entrance.",
+    "de": "Du beschwörst ein extradimensionales Anwesen in Reichweite, die für die Wirkungsdauer bestehen bleibt Du entscheidest, wo sein einziger Eingang liegt. Dieser schimmert leicht und ist 1,5 Meter breit und drei Meter hoch. Du und Kreaturen, die du beim Wirken des Zaubers bestimmst, könnt das extradimensionale Anwesen betreten, solange das Portal geöffnet ist. Du kannst das Portal öffnen oder schließen, wenn du dich im Abstand von bis zu neun Metern davon befindest. Wenn das Portal geschlossen ist, ist es unsichtbar. Hinter dem Portal befindet sich eine herrliche Eingangshalle mit zahlreichen Zimmern. Die Atmosphäre ist sauber, frisch und warm. Du kannst einen beliebigen Grundriss erstellen. Der Bereich darf jedoch aus maximal 50 Würfeln mit einer drei Metern Kantenlänge bestehen. Das Anwesen ist nach deinen Wünschen eingerichtet und dekoriert Es gibt ausreichend Nahrung, um ein Festmahl mit neun Gängen für bis zu 100 Personen zu servieren. 100 fast transparente Diener nehmen sich den Wünschen aller Gäste an. Du bestimmst das Aussehen dieser Diener und ihre Kleidung. Sie folgen ausnahmslos jedem deiner Befehle. Jeder Diener kann dieselben Aufgaben erfüllen wie normale menschliche Diener. Sie können jedoch nicht angreifen oder Aktionen ausführen, die einer anderen Kreatur direkt Schaden zufügen würde. Die Diener können Gegenstände holen und reinigen, Kleidung Zusammenlegen, Feuer entzünden, Essen servieren, Wein einschenken und dergleichen. Sie können sich im Anwesen frei bewegen, es jedoch nicht verlassen. Möbel und andere Gegenstände, die durch diesen Zauber erschaffen wurden, lösen sich in Rauch auf, wenn sie aus dem Anwesen entfernt werden. Wenn der Zauber endet, werden alle Kreaturen im Innern des extradimensionalen Bereichs in einen freien Bereich ausgestoßen, der dem Eingang am nächsten liegt."
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

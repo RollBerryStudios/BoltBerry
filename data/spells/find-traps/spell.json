@@ -1,0 +1,60 @@
+{
+  "id": 252,
+  "slug": "find-traps",
+  "name": "Find Traps",
+  "nameDe": "Fallen finden",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "druid",
+      "ranger"
+    ],
+    "de": [
+      "Kleriker",
+      "Druide",
+      "Waldläufer"
+    ]
+  },
+  "type": {
+    "en": "2nd-level divination",
+    "de": "Stufe 2 Erkenntnismagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You sense the presence of any trap within range that is within line of sight. A trap, for the purpose of this spell, includes anything that would inflict a sudden or unexpected effect you consider harmful or undesirable, which was specifically intended as such by its creator. Thus, the spell would sense an area affected by the alarm spell, a glyph of warding, or a mechanical pit trap, but it would not reveal a natural weakness in the floor, an unstable ceiling, or a hidden sinkhole. This spell merely reveals that a trap is present. You don't learn the location of each trap, but you do learn the general nature of the danger posed by a trap you sense.",
+    "de": "Du spürst die Gegenwart von Fallen, die sich in Reichweite und in deiner Sichtlinie befinden. Für diesen Zauber zählt alles als Falle, was einen plötzlichen oder unerwarteten Effekt auslösen könnte, den du als schädlich oder unerwünscht erachtest und der von seinem Erschaffer derart beabsichtigt war. Somit spürt der Zauber einen Bereich mit dem Zauber Alarm  oder Glyphe des Schutzes  oder eine mechanische Fallgrube auf. Er offenbart jedoch keine natürliche Schwachstelle im Boden, eine instabile Decke oder ein verstecktes Senkloch. Dieser Zauber zeigt nur an, dass eine Falle vorhanden ist. Du erfährst nicht, wo sich jede Falle befindet, kennst jedoch die allgemeine Art der Gefahr der gespürten Falle."
+  },
+  "image": "find-traps",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

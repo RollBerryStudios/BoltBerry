@@ -1,0 +1,62 @@
+{
+  "id": 236,
+  "slug": "continual-flame",
+  "name": "Continual Flame",
+  "nameDe": "Dauerhafte Flamme",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "wizard"
+    ],
+    "de": [
+      "Kleriker",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-level evocation",
+    "de": "Stufe 2 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Until dispelled",
+    "de": "Bis entzaubert"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "ruby dust worth 50 gp, which the spell consumes",
+      "de": "Rubinstaub im Wert von 50 Gold, den der Zauberspruch verbraucht"
+    },
+    "raw": {
+      "en": "V, S, M (ruby dust worth 50 gp, which the spell consumes)",
+      "de": "V, G, M (Rubinstaub im Wert von 50 Gold, den der Zauberspruch verbraucht)"
+    }
+  },
+  "description": {
+    "en": "A flame, equivalent in brightness to a torch, springs forth from an object that you touch. The effect looks like a regular flame, but it creates no heat and doesn't use oxygen. A continual flame can be covered or hidden but not smothered or quenched.",
+    "de": "Eine Flamme, etwa so hell wie eine Fackel, entspringt einem Gegenstand, den du berührst. Der Effekt sieht aus wie eine gewöhnliche Flamme, erzeugt jedoch keine Hitze und verbraucht keinen Sauerstoff. Eine Dauerhafte Flamme  kann verdeckt oder verborgen, aber nicht erstickt oder gelöscht werden."
+  },
+  "image": "produce-flame",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

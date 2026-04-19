@@ -1,0 +1,208 @@
+{
+  "id": 41,
+  "slug": "banshee",
+  "name": "Banshee",
+  "nameDe": "Todesfee",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium undead, chaotic evil",
+    "de": "Mittlerer Untoter, chaotisch böse"
+  },
+  "challenge": "4",
+  "xp": 1100,
+  "ac": "12",
+  "hp": {
+    "en": "58 (13d8)",
+    "de": "58 (13W8)"
+  },
+  "str": 1,
+  "dex": 14,
+  "con": 10,
+  "int": 12,
+  "wis": 11,
+  "cha": 17,
+  "strMod": -5,
+  "dexMod": 2,
+  "conMod": 0,
+  "intMod": 1,
+  "wisMod": 0,
+  "chaMod": 3,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "Passive Perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Elvish"
+    ],
+    "de": [
+      "Die zu Lebzeiten bekannten Sprachen"
+    ]
+  },
+  "savingThrows": {
+    "wis": 2,
+    "cha": 5
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Detect Life",
+        "text": "The banshee can magically sense the presence of creatures up to 5 miles away that aren't undead or constructs. She knows the general direction they're in but not their exact locations."
+      },
+      {
+        "name": "Incorporeal Movement",
+        "text": "The banshee can move through other creatures and objects as if they were difficult terrain. She takes 5 (1d10) force damage if she ends her turn inside an object."
+      }
+    ],
+    "de": [
+      {
+        "name": "Empfindlich gegenüber Sonnenlicht",
+        "text": "Im Sonnenlicht ist der Todesalb bei Angriffswürfen sowie bei Weisheitswürfen (Wahrnehmung), die Sicht erfordern, im Nachteil."
+      },
+      {
+        "name": "Körperlose Bewegung",
+        "text": "Der Todesalb kann sich durch andere Kreaturen und Gegenstände bewegen, als wären sie schwieriges Gelände. Er erleidet 5 (1W10) Energieschaden, wenn er seinen Zug in einem Gegenstand beendet."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Corrupting Touch",
+        "text": "Melee Spell Attack: +4 to hit, reach 5 ft., one target. Hit: 12 (3d6 + 2) necrotic damage."
+      },
+      {
+        "name": "Horrifying Visage",
+        "text": "Each non-undead creature within 60 feet of the banshee that can see her must succeed on a DC 13 Wisdom saving throw or be frightened for 1 minute. A frightened target can repeat the saving throw at the end of each of its turns, with disadvantage if the banshee is within line of sight, ending the effect on itself on a success. If a target’s saving throw is successful or the effect ends for it, the target is immune to the banshee’s Horrifying Visage for the next 24 hours."
+      },
+      {
+        "name": "Wail (1/Day)",
+        "text": "The banshee releases a mournful wail, provided that she isn’t in sunlight. This wail has no effect on constructs and undead. All other creatures within 30 feet of her that can hear her must make a DC 13 Constitution saving throw. On a failure, a creature drops to 0 hit points. On a success, a creature takes 10 (3d6) psychic damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Korrumtierende Berührung",
+        "text": "Nahkampf-Zauberangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 12 (3W6+2) nekrotischer Schaden."
+      },
+      {
+        "name": "Schreckliches Antlitz",
+        "text": "Jede nicht untote Kreatur im Abstand von bis zu 18 Metern von der Todesfee, die sie sehen kann, muss einen SG-13-Weisheitsrettungswurf bestehen oder eine Minute lang verängstigt sein. Ein verängstigtes Ziel kann den Rettungswurf am Ende jedes seiner Züge wiederholen, mit Nachteil, wenn die Todesfee in Sichtlinie ist, und den Effekt bei einem Erfolg beenden. Wenn der Rettungswurf eines Ziels erfolgreich ist oder der Effekt für es endet, ist das Ziel für die nächsten 24 Stunden immun gegenüber dem Schrecklichen Antlitz der Todesfee."
+      },
+      {
+        "name": "Klagen (1-mal täglich)",
+        "text": "Die Todesfee stößt eine klägliche Klage aus, sofern sie sich nicht im Sonnenlicht befindet. Diese Klage hat keinen Effekt auf Konstrukte und Untote. Alle anderen Kreaturen im Abstand von bis zu neun Metern von ihr, die sie hören können, müssen einen SG-13-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, sinken die Trefferpunkte der Kreatur auf 0. Gelingt der Wurf, erleidet die Kreatur 10 (3W6) psychischen Schaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/8/446/315/315/636306384206418474.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "mittel"
+  },
+  "type": {
+    "en": "undead",
+    "de": "Untot"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "BansheeCoast (1).webp",
+    "variant": "coast"
+  },
+  "tokens": [
+    {
+      "file": "BansheeCoast (2).webp",
+      "variant": "coast"
+    },
+    {
+      "file": "BansheeCoast (3).webp",
+      "variant": "coast"
+    },
+    {
+      "file": "BansheeCoast (4).webp",
+      "variant": "coast"
+    },
+    {
+      "file": "BansheeForest (1).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BansheeForest (10).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BansheeForest (11).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BansheeForest (12).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BansheeForest (13).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BansheeForest (14).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BansheeForest (15).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BansheeForest (16).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BansheeForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BansheeForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BansheeForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BansheeForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BansheeForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BansheeForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BansheeForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BansheeForest (9).webp",
+      "variant": "forest"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

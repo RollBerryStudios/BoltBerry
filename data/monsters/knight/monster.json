@@ -1,0 +1,894 @@
+{
+  "id": 183,
+  "slug": "knight",
+  "name": "Knight",
+  "nameDe": "Ritter",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "18 (Ritterrüstung)",
+    "de": "18 (Ritterrüstung)"
+  },
+  "hp": {
+    "en": "52 (8d8 + 16)",
+    "de": "52 (8W8+16)"
+  },
+  "str": 16,
+  "dex": 11,
+  "con": 14,
+  "int": 11,
+  "wis": 11,
+  "cha": 15,
+  "strMod": 3,
+  "dexMod": 0,
+  "conMod": 2,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any one language (usually Common)"
+    ],
+    "de": [
+      "Eine beliebige Sprache (normalerweise Gemeinsprache)"
+    ]
+  },
+  "savingThrows": [
+    "Kon +4",
+    "Wei +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Brave",
+        "text": "The knight has advantage on saving throws against being frightened."
+      }
+    ],
+    "de": [
+      {
+        "name": "Tapferkeit",
+        "text": "Der Ritter ist bei Rettungswürfen gegen den Zustand Verängstigt im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The knight makes two melee attacks."
+      },
+      {
+        "name": "Greatsword",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage."
+      },
+      {
+        "name": "Heavy Crossbow",
+        "text": "Ranged Weapon Attack: +2 to hit, range 100/400 ft., one target. Hit: 5 (1d10) piercing damage."
+      },
+      {
+        "name": "Leadership",
+        "text": "For 1 minute, the knight can utter a special command or warning whenever a nonhostile creature that it can see within 30 ft. of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand the knight. A creature can benefit from only one Leadership die at a time. This effect ends if the knight is incapacitated."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Ritter führt zwei Nahkampfangriffe aus."
+      },
+      {
+        "name": "Zweihandschwert",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Hiebschaden."
+      },
+      {
+        "name": "Schwere Armbrust",
+        "text": "Fernkampfwaffenangriff: +2 auf Treffer, Reichweite 30/120 m, ein Ziel. Treffer: 5 (1W10) Stichschaden."
+      },
+      {
+        "name": "Führungsqualitäten (wird nach kurzer oder langer Rast aufgeladen)",
+        "text": "Der Ritter kann eine Minute lang einen speziellen Befehl oder eine Warnung aussprechen, wann immer eine Kreatur im Abstand von bis zu neun Metern von ihm, die er sehen kann und die ihm nicht feindlich gesinnt ist, einen Angriffs- oder Rettungswurf ausführt. Diese Kreatur kann ihrem Wurf dann einen W4 hinzufügen, sofern sie den Ritter hören und verstehen kann. Eine Kreatur kann nur von jeweils einem Führungsqualitäten-Würfel profitieren. Dieser Effekt endet, wenn der Ritter kampfunfähig ist."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/656/humanoid.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "undead",
+    "de": "Humanoide (jedes Volk)"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "jede Gesinnung"
+  },
+  "token": {
+    "file": "KightHalflingFemaleGood (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "KightHalflingFemaleGood (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Knight (1).webp",
+      "variant": ""
+    },
+    {
+      "file": "Knight (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Knight (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Knight (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Knight (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Knight (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Knight (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Knight (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Knight (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Knight (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Knight (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Knight (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Knight (9).webp",
+      "variant": ""
+    },
+    {
+      "file": "KnightDragonbornEvil (1).webp",
+      "variant": "dragonbornEvil"
+    },
+    {
+      "file": "KnightDragonbornEvil (2).webp",
+      "variant": "dragonbornEvil"
+    },
+    {
+      "file": "KnightDragonbornEvil (3).webp",
+      "variant": "dragonbornEvil"
+    },
+    {
+      "file": "KnightDragonbornEvil (4).webp",
+      "variant": "dragonbornEvil"
+    },
+    {
+      "file": "KnightDragonbornEvil (5).webp",
+      "variant": "dragonbornEvil"
+    },
+    {
+      "file": "KnightDragonbornEvil (6).webp",
+      "variant": "dragonbornEvil"
+    },
+    {
+      "file": "KnightDragonbornEvil (7).webp",
+      "variant": "dragonbornEvil"
+    },
+    {
+      "file": "KnightDragonbornEvil (8).webp",
+      "variant": "dragonbornEvil"
+    },
+    {
+      "file": "KnightDragonbornGood (1).webp",
+      "variant": "dragonbornGood"
+    },
+    {
+      "file": "KnightDragonbornGood (10).webp",
+      "variant": "dragonbornGood"
+    },
+    {
+      "file": "KnightDragonbornGood (11).webp",
+      "variant": "dragonbornGood"
+    },
+    {
+      "file": "KnightDragonbornGood (12).webp",
+      "variant": "dragonbornGood"
+    },
+    {
+      "file": "KnightDragonbornGood (13).webp",
+      "variant": "dragonbornGood"
+    },
+    {
+      "file": "KnightDragonbornGood (2).webp",
+      "variant": "dragonbornGood"
+    },
+    {
+      "file": "KnightDragonbornGood (3).webp",
+      "variant": "dragonbornGood"
+    },
+    {
+      "file": "KnightDragonbornGood (4).webp",
+      "variant": "dragonbornGood"
+    },
+    {
+      "file": "KnightDragonbornGood (5).webp",
+      "variant": "dragonbornGood"
+    },
+    {
+      "file": "KnightDragonbornGood (6).webp",
+      "variant": "dragonbornGood"
+    },
+    {
+      "file": "KnightDragonbornGood (7).webp",
+      "variant": "dragonbornGood"
+    },
+    {
+      "file": "KnightDragonbornGood (8).webp",
+      "variant": "dragonbornGood"
+    },
+    {
+      "file": "KnightDragonbornGood (9).webp",
+      "variant": "dragonbornGood"
+    },
+    {
+      "file": "KnightDwarf (1).webp",
+      "variant": "dwarf"
+    },
+    {
+      "file": "KnightDwarf (10).webp",
+      "variant": "dwarf"
+    },
+    {
+      "file": "KnightDwarf (2).webp",
+      "variant": "dwarf"
+    },
+    {
+      "file": "KnightDwarf (3).webp",
+      "variant": "dwarf"
+    },
+    {
+      "file": "KnightDwarf (4).webp",
+      "variant": "dwarf"
+    },
+    {
+      "file": "KnightDwarf (5).webp",
+      "variant": "dwarf"
+    },
+    {
+      "file": "KnightDwarf (6).webp",
+      "variant": "dwarf"
+    },
+    {
+      "file": "KnightDwarf (7).webp",
+      "variant": "dwarf"
+    },
+    {
+      "file": "KnightDwarf (8).webp",
+      "variant": "dwarf"
+    },
+    {
+      "file": "KnightDwarf (9).webp",
+      "variant": "dwarf"
+    },
+    {
+      "file": "KnightDwarfFemale (1).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "KnightDwarfFemale (2).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "KnightDwarfFemale (3).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "KnightDwarfFemale (4).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "KnightDwarfFemale (5).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "KnightDwarfFemale (6).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "KnightDwarfFemale (7).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "KnightDwarfFemale (8).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "KnightDwarfFemaleEvil (1).webp",
+      "variant": "dwarfFemaleEvil"
+    },
+    {
+      "file": "KnightDwarfFemaleEvil (2).webp",
+      "variant": "dwarfFemaleEvil"
+    },
+    {
+      "file": "KnightDwarfFemaleEvil (3).webp",
+      "variant": "dwarfFemaleEvil"
+    },
+    {
+      "file": "KnightDwarfFemaleEvil (4).webp",
+      "variant": "dwarfFemaleEvil"
+    },
+    {
+      "file": "KnightDwarfMale (1).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "KnightDwarfMaleEvil (1).webp",
+      "variant": "dwarfMaleEvil"
+    },
+    {
+      "file": "KnightDwarfMaleEvil (10).webp",
+      "variant": "dwarfMaleEvil"
+    },
+    {
+      "file": "KnightDwarfMaleEvil (2).webp",
+      "variant": "dwarfMaleEvil"
+    },
+    {
+      "file": "KnightDwarfMaleEvil (3).webp",
+      "variant": "dwarfMaleEvil"
+    },
+    {
+      "file": "KnightDwarfMaleEvil (4).webp",
+      "variant": "dwarfMaleEvil"
+    },
+    {
+      "file": "KnightDwarfMaleEvil (5).webp",
+      "variant": "dwarfMaleEvil"
+    },
+    {
+      "file": "KnightDwarfMaleEvil (6).webp",
+      "variant": "dwarfMaleEvil"
+    },
+    {
+      "file": "KnightDwarfMaleEvil (7).webp",
+      "variant": "dwarfMaleEvil"
+    },
+    {
+      "file": "KnightDwarfMaleEvil (8).webp",
+      "variant": "dwarfMaleEvil"
+    },
+    {
+      "file": "KnightDwarfMaleEvil (9).webp",
+      "variant": "dwarfMaleEvil"
+    },
+    {
+      "file": "KnightElfFemale (1).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "KnightElfFemale (2).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "KnightElfFemale (3).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "KnightElfFemale (4).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "KnightElfFemale (5).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "KnightElfFemaleGood (1).webp",
+      "variant": "elfFemaleGood"
+    },
+    {
+      "file": "KnightElfMaleEvil (1).webp",
+      "variant": "elfMaleEvil"
+    },
+    {
+      "file": "KnightElfMaleEvil (2).webp",
+      "variant": "elfMaleEvil"
+    },
+    {
+      "file": "KnightEvil (1).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (10).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (11).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (12).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (13).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (14).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (15).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (16).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (17).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (18).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (19).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (2).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (20).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (21).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (3).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (4).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (5).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (6).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (7).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (8).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightEvil (9).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "KnightFemale.webp",
+      "variant": "female"
+    },
+    {
+      "file": "KnightFemaleEvil (1).webp",
+      "variant": "femaleEvil"
+    },
+    {
+      "file": "KnightGnomeFemale (1).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "KnightGnomeFemale (2).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "KnightGnomeFemale (3).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "KnightGnomeFemale (4).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "KnightGnomeFemale (5).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "KnightGnomeMale (1).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "KnightGnomeMale (2).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "KnightGnomeMaleEvil (1).webp",
+      "variant": "gnomeMaleEvil"
+    },
+    {
+      "file": "KnightGnomeMaleEvil (2).webp",
+      "variant": "gnomeMaleEvil"
+    },
+    {
+      "file": "KnightGood (1).webp",
+      "variant": "good"
+    },
+    {
+      "file": "KnightGood (10).webp",
+      "variant": "good"
+    },
+    {
+      "file": "KnightGood (11).webp",
+      "variant": "good"
+    },
+    {
+      "file": "KnightGood (12).webp",
+      "variant": "good"
+    },
+    {
+      "file": "KnightGood (13).webp",
+      "variant": "good"
+    },
+    {
+      "file": "KnightGood (2).webp",
+      "variant": "good"
+    },
+    {
+      "file": "KnightGood (3).webp",
+      "variant": "good"
+    },
+    {
+      "file": "KnightGood (4).webp",
+      "variant": "good"
+    },
+    {
+      "file": "KnightGood (5).webp",
+      "variant": "good"
+    },
+    {
+      "file": "KnightGood (6).webp",
+      "variant": "good"
+    },
+    {
+      "file": "KnightGood (7).webp",
+      "variant": "good"
+    },
+    {
+      "file": "KnightGood (8).webp",
+      "variant": "good"
+    },
+    {
+      "file": "KnightGood (9).webp",
+      "variant": "good"
+    },
+    {
+      "file": "KnightHalfElfFemaleEvil (1).webp",
+      "variant": "halfElfFemaleEvil"
+    },
+    {
+      "file": "KnightHalfElfFemaleGood (1).webp",
+      "variant": "halfElfFemaleGood"
+    },
+    {
+      "file": "KnightHalfElfFemaleGood (2).webp",
+      "variant": "halfElfFemaleGood"
+    },
+    {
+      "file": "KnightHalflingMaleGood (1).webp",
+      "variant": "halflingMaleGood"
+    },
+    {
+      "file": "KnightHumanFemale (1).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "KnightHumanFemale (2).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "KnightHumanFemale (3).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "KnightHumanFemale (4).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "KnightHumanFemale (5).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "KnightHumanFemaleEvil (1).webp",
+      "variant": "humanFemaleEvil"
+    },
+    {
+      "file": "KnightHumanFemaleEvil (10).webp",
+      "variant": "humanFemaleEvil"
+    },
+    {
+      "file": "KnightHumanFemaleEvil (11).webp",
+      "variant": "humanFemaleEvil"
+    },
+    {
+      "file": "KnightHumanFemaleEvil (12).webp",
+      "variant": "humanFemaleEvil"
+    },
+    {
+      "file": "KnightHumanFemaleEvil (2).webp",
+      "variant": "humanFemaleEvil"
+    },
+    {
+      "file": "KnightHumanFemaleEvil (3).webp",
+      "variant": "humanFemaleEvil"
+    },
+    {
+      "file": "KnightHumanFemaleEvil (4).webp",
+      "variant": "humanFemaleEvil"
+    },
+    {
+      "file": "KnightHumanFemaleEvil (5).webp",
+      "variant": "humanFemaleEvil"
+    },
+    {
+      "file": "KnightHumanFemaleEvil (6).webp",
+      "variant": "humanFemaleEvil"
+    },
+    {
+      "file": "KnightHumanFemaleEvil (7).webp",
+      "variant": "humanFemaleEvil"
+    },
+    {
+      "file": "KnightHumanFemaleEvil (8).webp",
+      "variant": "humanFemaleEvil"
+    },
+    {
+      "file": "KnightHumanFemaleEvil (9).webp",
+      "variant": "humanFemaleEvil"
+    },
+    {
+      "file": "KnightHumanFemaleGood (1).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (10).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (11).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (12).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (13).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (14).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (15).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (16).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (17).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (18).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (19).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (2).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (20).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (3).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (4).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (5).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (6).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (7).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (8).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanFemaleGood (9).webp",
+      "variant": "humanFemaleGood"
+    },
+    {
+      "file": "KnightHumanMaleEvil (1).webp",
+      "variant": "humanMaleEvil"
+    },
+    {
+      "file": "KnightHumanMaleEvil (2).webp",
+      "variant": "humanMaleEvil"
+    },
+    {
+      "file": "KnightHumanMaleEvil (3).webp",
+      "variant": "humanMaleEvil"
+    },
+    {
+      "file": "KnightHumanMaleEvil (4).webp",
+      "variant": "humanMaleEvil"
+    },
+    {
+      "file": "KnightHumanMaleEvil (5).webp",
+      "variant": "humanMaleEvil"
+    },
+    {
+      "file": "KnightHumanMaleEvil (6).webp",
+      "variant": "humanMaleEvil"
+    },
+    {
+      "file": "KnightHumanMaleEvil (7).webp",
+      "variant": "humanMaleEvil"
+    },
+    {
+      "file": "KnightHumanMaleGood (1).webp",
+      "variant": "humanMaleGood"
+    },
+    {
+      "file": "KnightHumanMaleGood (2).webp",
+      "variant": "humanMaleGood"
+    },
+    {
+      "file": "KnightHumanMaleGood (3).webp",
+      "variant": "humanMaleGood"
+    },
+    {
+      "file": "KnightHumanMaleGood (4).webp",
+      "variant": "humanMaleGood"
+    },
+    {
+      "file": "KnightHumanMaleGood (5).webp",
+      "variant": "humanMaleGood"
+    },
+    {
+      "file": "KnightHumanMaleGood (6).webp",
+      "variant": "humanMaleGood"
+    },
+    {
+      "file": "KnightHumanMaleGood (7).webp",
+      "variant": "humanMaleGood"
+    },
+    {
+      "file": "KnightTieflingFemaleGood (1).webp",
+      "variant": "tieflingFemaleGood"
+    },
+    {
+      "file": "KnightTieflingFemaleGood (2).webp",
+      "variant": "tieflingFemaleGood"
+    },
+    {
+      "file": "KnightTieflingFemaleGood (3).webp",
+      "variant": "tieflingFemaleGood"
+    },
+    {
+      "file": "KnightTieflingFemaleGood (4).webp",
+      "variant": "tieflingFemaleGood"
+    },
+    {
+      "file": "KnightTieflingMale (1).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "KnightTieflingMale (2).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "KnightTieflingMale (3).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "KnightTieflingMaleGood (1).webp",
+      "variant": "tieflingMaleGood"
+    },
+    {
+      "file": "KnightTieflingMaleGood (2).webp",
+      "variant": "tieflingMaleGood"
+    },
+    {
+      "file": "KnightTieflingMaleGood (3).webp",
+      "variant": "tieflingMaleGood"
+    },
+    {
+      "file": "KnightTieflingMaleGood (4).webp",
+      "variant": "tieflingMaleGood"
+    }
+  ],
+  "reactions": {
+    "en": [
+      {
+        "name": "Parry",
+        "text": "The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon."
+      }
+    ],
+    "de": [
+      {
+        "name": "Parieren",
+        "text": "Der Ritter erhöht seine RK gegen einen Nahkampfangriff, der ihn treffen würde, um 2. Dazu muss der Ritter den Angreifer sehen können und eine Nahkampfwaffe führen."
+      }
+    ]
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

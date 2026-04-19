@@ -1,0 +1,23 @@
+{
+  "id": 82,
+  "slug": "clothes-common",
+  "name": "Clothes, Common",
+  "nameDe": "Kleidung, Gewöhnlich",
+  "category": {
+    "en": "ADVENTURING_GEAR",
+    "de": "Ausrüstung"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 50,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 3,
+  "image": "adventuring-gear",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

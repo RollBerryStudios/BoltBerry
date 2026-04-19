@@ -1,0 +1,266 @@
+{
+  "id": 305,
+  "slug": "weretiger",
+  "name": "Weretiger",
+  "nameDe": "Wertiger",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, neutral",
+    "de": "Mittelgroßer Humanoid, neutral"
+  },
+  "challenge": "4",
+  "xp": 1100,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "120 (16d8 + 48)",
+    "de": "120 (16W8+48)"
+  },
+  "str": 17,
+  "dex": 15,
+  "con": 16,
+  "int": 10,
+  "wis": 13,
+  "cha": 11,
+  "strMod": 3,
+  "dexMod": 2,
+  "conMod": 3,
+  "intMod": 0,
+  "wisMod": 1,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "Passive Perception 15"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 15"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common (can't speak in tiger form)"
+    ],
+    "de": [
+      "Gemeinsprache (kann in Tigergestalt nicht sprechen)"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +4",
+    "Wahrnehmung +5"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Shapechanger",
+        "text": "The weretiger can use its action to polymorph into a tiger-humanoid hybrid or into a tiger, or back into its true form, which is humanoid. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+      },
+      {
+        "name": "Keen Hearing and Smell",
+        "text": "The weretiger has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+      },
+      {
+        "name": "Pounce",
+        "text": "If the weretiger moves at least 15 feet straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a DC 14 Strength saving throw or be knocked prone. If the target is prone, the weretiger can make one bite attack against it as a bonus action."
+      }
+    ],
+    "de": [
+      {
+        "name": "Gestaltwandler",
+        "text": "Der Wertiger kann seine Aktion verwenden, um sich in eine hybride Gestalt aus Tiger und Humanoide oder in einen Tiger zu verwandeln - oder um wieder seine wahre, humanoide Gestalt anzunehmen. Seine Spielwerte sind abgesehen von der Größe in beiden Gestalten gleich. Ausrüstung, die sie trägt oder hält, wird nicht verwandelt. Wenn er stirbt, nimmt er seine wahre Gestalt an."
+      },
+      {
+        "name": "Anspringen (nur Tiger- oder hybride Gestalt)",
+        "text": "Wenn der Wertiger sich mindestens 4,5 Meter weit direkt auf eine Kreatur zubewegt und sie dann im gleichen Zug mit einem Klauenangriff trifft, muss das Ziel einen SG-14-Stärkerettungswurf bestehen, oder es wird umgestoßen. Wenn das Ziel liegt, kann der Wertiger als Bonusaktion einen Bissangriff gegen es ausführen."
+      },
+      {
+        "name": "Scharfes Gehör und scharfer Geruchssinn",
+        "text": "Der Wertiger ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör oder Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "In humanoid form, the weretiger makes two scimitar attacks or two longbow attacks. In hybrid form, it can attack like a humanoid or make two claw attacks."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (1d10 + 3) piercing damage. If the target is a humanoid, it must succeed on a DC 13 Constitution saving throw or be cursed with weretiger lycanthropy."
+      },
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage."
+      },
+      {
+        "name": "Scimitar",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) slashing damage."
+      },
+      {
+        "name": "Longbow",
+        "text": "Ranged Weapon Attack: +4 to hit, range 150/600 ft., one target. Hit: 6 (1d8 + 2) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff (nur humanoide oder hybride Gestalt)",
+        "text": "In humanoider Gestalt führt der Wertiger zwei Angriffe mit dem Krummsäbel oder zwei Angriffe mit dem Langbogen aus. In hybrider Gestalt kann er wie ein Humanoide angreifen oder zwei Klauenangriffe ausführen."
+      },
+      {
+        "name": "Biss (nur Tiger- oder hybride Gestalt)",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 8 (1W10+3) Stichschaden. Wenn das Ziel ein Humanoide ist, muss es einen SG-13-Konstitutionsrettungswurf bestehen, um nicht mit Wertiger-Lykanthropie verflucht zu werden."
+      },
+      {
+        "name": "Klauen (nur Tiger- oder hybride Gestalt)",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (1W8+3) Hiebschaden."
+      },
+      {
+        "name": "Krummsäbel (nur humanoide oder hybride Gestalt)",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W6+3) Hiebschaden."
+      },
+      {
+        "name": "Langbogen (nur humanoide oder hybride Gestalt)",
+        "text": "Fernkampfwaffenangriff: +4 auf Treffer, Reichweite 45/180 m, ein Ziel. Treffer: 6 (1W8+2) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/76/1000/1000/636252734783831163.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (Mensch"
+  },
+  "alignment": {
+    "en": "neutral",
+    "de": "Gestaltwandler), neutral"
+  },
+  "token": {
+    "file": "WeretigerDesert (1).webp",
+    "variant": "desert"
+  },
+  "tokens": [
+    {
+      "file": "WeretigerDesert (10).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "WeretigerDesert (11).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "WeretigerDesert (2).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "WeretigerDesert (3).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "WeretigerDesert (4).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "WeretigerDesert (5).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "WeretigerDesert (6).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "WeretigerDesert (7).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "WeretigerDesert (8).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "WeretigerDesert (9).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "WeretigerJungle (1).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "WeretigerJungle (10).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "WeretigerJungle (11).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "WeretigerJungle (12).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "WeretigerJungle (13).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "WeretigerJungle (14).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "WeretigerJungle (15).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "WeretigerJungle (16).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "WeretigerJungle (17).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "WeretigerJungle (2).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "WeretigerJungle (3).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "WeretigerJungle (4).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "WeretigerJungle (5).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "WeretigerJungle (6).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "WeretigerJungle (7).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "WeretigerJungle (8).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "WeretigerJungle (9).webp",
+      "variant": "jungle"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

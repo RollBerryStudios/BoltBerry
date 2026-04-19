@@ -1,0 +1,60 @@
+{
+  "id": 41,
+  "slug": "hellish-rebuke",
+  "name": "Hellish Rebuke",
+  "nameDe": "Höllischer Tadel",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "warlock"
+    ],
+    "de": [
+      "Hexenmeister"
+    ]
+  },
+  "type": {
+    "en": "1st-level evocation",
+    "de": "Stufe 1 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 reaction, which you take in response to being damaged by a creature within 60 feet of you that you can see.",
+    "de": "1 Reaktion, die du ausführst, wenn du von einer Kreatur im Umkreis von 18 Metern um dich herum, die du sehen kannst, verletzt wirst."
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You point your finger, and the creature that damaged you is momentarily surrounded by hellish flames. The creature must make a dexterity saving throw. It takes 2d10 fire damage on a failed save, or half as much damage on a successful one.",
+    "de": "Du deutest mit deinem Finger und die Kreatur, die dich verletzt hat, wird für einen kurzen Moment von höllischen Flammen eingehüllt. Sie muss einen Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 2W10 Feuerschaden, anderenfalls die Hälfte. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 1. um 1W10."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d10 for each slot level above 1st.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 1. um 1W10."
+  },
+  "image": "hellish-rebuke",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

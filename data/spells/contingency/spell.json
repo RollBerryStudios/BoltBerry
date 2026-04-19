@@ -1,0 +1,60 @@
+{
+  "id": 234,
+  "slug": "contingency",
+  "name": "Contingency",
+  "nameDe": "Notfall",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "6th-level evocation",
+    "de": "Stufe 6 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "10 minutes",
+    "de": "10 Minuten"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "10 days",
+    "de": "10 Tage"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a statuette of yourself carved from ivory and decorated with gems worth at least 1,500 gp",
+      "de": "eine aus Elfenbein geschnitzte und mit Edelsteinen verzierte Statuette von dir im Wert von mindestens 1.500 Goldstücken"
+    },
+    "raw": {
+      "en": "V, S, M (a statuette of yourself carved from ivory and decorated with gems worth at least 1,500 gp)",
+      "de": "V, G, M (eine aus Elfenbein geschnitzte und mit Edelsteinen verzierte Statuette von dir im Wert von mindestens 1.500 Goldstücken)"
+    }
+  },
+  "description": {
+    "en": "Choose a spell of 5th level or lower that you can cast, that has a casting time of 1 action, and that can target you. You cast that spell--called the contingent spell--as part of casting contingency, expending spell slots for both, but the contingent spell doesn't come into effect. Instead, it takes effect when a certain circumstance occurs. You describe that circumstance when you cast the two spells. For example, a contingency cast with water breathing might stipulate that water breathing comes into effect when you are engulfed in water or a similar liquid. The contingent spell takes effect immediately after the circumstance is met for the first time, whether or not you want it to. and then contingency ends. The contingent spell takes effect only on you, even if it can normally target others. You can use only one contingency spell at a time. If you cast this spell again, the effect of another contingency spell on you ends. Also, contingency ends on you if its material component is ever not on your person.",
+    "de": "Wähle einen Zauber des höchstens 5. Grades, den du auf dich selbst wirken kannst und dessen Zeitaufwand eine Aktion beträgt. Du wirkst diesen Zauber (auch Notfallzauber genannt) gemeinsam mit Notfall  und verbrauchst Zauberplätze für beide. Der Notfallzauber tritt allerdings erst in Kraft, wenn ein bestimmter Umstand eintritt, den du beschreibst, wenn du die beiden Zauber wirkst. Beispiel: Wirkst du Notfall  gemeinsam mit Wasser atmen , kannst du bestimmen, dass Wasser atmen  in Kraft tritt, wenn du in Wasser oder einer ähnlichen Flüssigkeit untertauchst. Der Notfallzauber tritt sofort in Kraft, wenn der Umstand das erste Mal auftritt, egal, ob du es willst oder nicht. Danach endet Notfall . Der Notfallzauber wirkt nur auf dich, selbst wenn er normalerweise auch auf andere Ziele gewirkt werden könnte. Du kannst immer nur einen Notfallzauber gleichzeitig verwenden. Wirkst du diesen Zauber erneut, endet der Effekt eines anderen Notfallzaubers auf dich. Notfall  endet auch, wenn du die Materialkomponenten nicht mehr bei dir hast."
+  },
+  "image": "slow",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

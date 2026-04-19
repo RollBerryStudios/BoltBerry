@@ -1,0 +1,60 @@
+{
+  "id": 8,
+  "slug": "chill-touch",
+  "name": "Chill Touch",
+  "nameDe": "Kalte Hand",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Necromancy",
+    "de": "Nekromantie"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "Necromancy cantrip",
+    "de": "Nekromantie Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "1 round",
+    "de": "1 Runde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You create a ghostly, skeletal hand in the space of a creature within range. Make a ranged spell attack against the creature to assail it with the chill of the grave. On a hit, the target takes 1d8 necrotic damage, and it can't regain hit points until the start of your next turn. Until then, the hand clings to the target. If you hit an undead target, it also has disadvantage on attack rolls against you until the end of your next turn. This spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).",
+    "de": "Du erschaffst eine geisterhafte Skeletthand im Bereich einer Kreatur in Reichweite. Führe einen Fernkampf-Zauberangriff gegen die Kreatur aus, um sie die Kälte des Grabes spüren zu lassen. Bei einem Treffer erleidet das Ziel 1W8 nekrotischen Schaden und kann bis zum Beginn deines nächsten Zugs keine Trefferpunkte zurückerhalten. Bis dahin klammert sich die Hand an das Ziel. Triffst du ein untotes Ziel, so ist es außerdem bis zum Ende deines nächsten Zugs bei Angriffswürfen gegen dich im Nachteil. Der Schaden dieses Zaubers erhöht sich um je 1W8, wenn du die 5. Stufe (2W8), die 11. Stufe (3W8) und die 17. Stufe (4W8) erreichst"
+  },
+  "image": "chill-touch",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

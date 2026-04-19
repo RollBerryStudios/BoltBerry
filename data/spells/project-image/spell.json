@@ -1,0 +1,62 @@
+{
+  "id": 205,
+  "slug": "project-image",
+  "name": "Project Image",
+  "nameDe": "Trugbild projizieren",
+  "level": {
+    "en": "7",
+    "de": "Grad 7"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "7th-level illusion",
+    "de": "Stufe 7 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "500 miles",
+    "de": "800km"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 day",
+    "de": "Konzentration, bis zu 1 Tag"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a small replica of you made from materials worth at least 5 gp",
+      "de": "eine kleine Nachbildung von dir aus Materialien im Wert von mindestens 5 Goldstücken"
+    },
+    "raw": {
+      "en": "V, S, M (a small replica of you made from materials worth at least 5 gp)",
+      "de": "V, G, M (eine kleine Nachbildung von dir aus Materialien im Wert von mindestens 5 Goldstücken)"
+    }
+  },
+  "description": {
+    "en": "You create an illusory copy of yourself that lasts for the duration. The copy can appear at any location within range that you have seen before, regardless of intervening obstacles. The illusion looks and sounds like you but is intangible. If the illusion takes any damage, it disappears, and the spell ends. You can use your action to move this illusion up to twice your speed, and make it gesture, speak, and behave in whatever way you choose. It mimics your mannerisms perfectly. You can see through its eyes and hear through its ears as if you were in its space. On your turn as a bonus action, you can switch from using its senses to using your own, or back again. While you are using its senses, you are blinded and deafened in regard to your own surroundings. Physical interaction with the image reveals it to be an illusion, because things can pass through it. A creature that uses its action to examine the image can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image, and any noise it makes sounds hollow to the creature.",
+    "de": "Du erschaffst ein illusionäres Abbild von dir selbst, das für die Wirkungsdauer bestehen bleibt. Das Abbild kann an einem beliebigen Ort in Reichweite erscheinen, den du schon einmal gesehen hast, unabhängig von dazwischenliegenden Hindernissen. Die Illusion sieht aus und klingt wie du, ist aber immateriell. Erleidet die Illusion Schaden, verschwindet sie und der Zauber endet Als Aktion kannst du diese Illusion bis zu deiner doppelten Bewegungsrate bewegen und sie gestikulieren, sprechen und auf eine beliebige Art handeln lassen. Sie ahmt dein Verhalten perfekt nach. Du kannst durch ihre Augen sehen und durch ihre Ohren hören, als befändest du dich am selben Ort. In jedem deiner Züge kannst du als Bonusaktion von den Sinnen der Illusion zu deinen eigenen wechseln, und wieder zurück. Während du seine Sinne benutzt, bist du in deiner eigenen Umgebung blind und taub. Physische Interaktionen mit dem Abbild enttarnen es als Illusion, da Dinge es einfach durchdringen können. Eine Kreatur, die ihre Aktion verwendet, um das Abbild zu untersuchen, kann einen Intelligenzwurf (Nachforschungen) gegen deinen Zauberrettungswurf-SG ausführen. Erkennt eine Kreatur die Illusion als solche, wird das Abbild für sie durchscheinend, und sämtliche Geräusche klingen für die Kreatur hohl."
+  },
+  "image": "illusion",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

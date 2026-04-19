@@ -1,0 +1,23 @@
+{
+  "id": 105,
+  "slug": "ink-1-ounce-bottle",
+  "name": "Ink (1 ounce bottle)",
+  "nameDe": "Tinte (25ml Flasche)",
+  "category": {
+    "en": "ADVENTURING_GEAR",
+    "de": "Ausrüstung"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 1000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 0,
+  "image": "adventuring-gear",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

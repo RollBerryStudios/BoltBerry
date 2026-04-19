@@ -1,0 +1,64 @@
+{
+  "id": 160,
+  "slug": "detect-thoughts",
+  "name": "Detect Thoughts",
+  "nameDe": "Gedanken wahrnehmen",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-Level divination",
+    "de": "Stufe 2 Erkenntnismagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a copper piece",
+      "de": "ein Stück Kupfer"
+    },
+    "raw": {
+      "en": "V, S, M (a copper piece)",
+      "de": "V, G, M (ein Stück Kupfer)"
+    }
+  },
+  "description": {
+    "en": "For the duration, you can read the thoughts of certain creatures. When you cast the spell and as your action on each turn until the spell ends, you can focus your mind on any one creature that you can see within 30 feet of you. If the creature you choose has an Intelligence of 3 or lower or doesn't speak any language, the creature is unaffected. You initially learn the surface thoughts of the creature - what is most on its mind in that moment. As an action, you can either shift your attention to another creature's thoughts or attempt to probe deeper into the same creature's mind. If you probe deeper, the target must make a Wisdom saving throw. If it fails, you gain insight into its reasoning (if any), its emotional state, and something that looms large in its mind (such as something it worries over, loves, or hates). If it succeeds, the spell ends. Either way, the target knows that you are probing into its mind, and unless you shift your attention to another creature's thoughts, the creature can use its action on its turn to make an Intelligence check contested by your Intelligence check; if it succeeds, the spell ends. Questions verbally directed at the target creature naturally shape the course of its thoughts, so this spell is particularly effective as part of an interrogation. You can also use this spell to detect the presence of thinking creatures you can't see. When you cast the spell or as your action during the duration, you can search for thoughts within 30 feet of you. The spell can penetrate barriers, but 2 feet of rock, 2 inches of any metal other than lead, or a thin sheet of lead blocks you. You can't detect a creature with an Intelligence of 3 or lower or one that doesn't speak any language. Once you detect the presence of a creature in this way, you can read its thoughts for the rest of the duration as described above, even if you can't see it, but it must still be within range.",
+    "de": "Während der Wirkungsdauer kannst du die Gedanken bestimmter Kreaturen lesen. Wenn du den Zauber wirkst und als Aktion in jedem deiner Züge bis zum Ende der Wirkungsdauer, kannst du deinen Verstand auf eine Kreatur im Abstand von bis zu neun Metern von dir richten, die du sehen kannst. Besitzt die Kreatur eine Intelligenz von höchstens 3 oder spricht keine Sprache, ist sie von dem Zauber nicht betroffen. Du erfährst zunächst die oberflächlichen Gedanken der Kreatur - ein Thema, das sie in diesem Augenblick am meisten beschäftigt. Als Aktion kannst du deine Aufmerksamkeit entweder auf die Gedanken einer anderen Kreatur richten oder versuchen, tiefer in den Verstand derselben Kreatur einzudringen. Wenn du tiefer in die Gedanken des Ziels eindringst, muss es einen Weisheitsrettungswurf ausführen. Scheitert der Wurf, erhältst du Einsicht in seine Beweggründe (sofern es welche gibt), seinen emotionalen Zustand, sowie über etwas, das seine Gedanken beherrscht (beispielsweise etwas, das es beschäftigt, das es liebt oder hasst). Ist der Rettungswurf erfolgreich, endet der Zauber. In jedem Fall ist sich das Ziel bewusst, dass du in seinen Verstand eindringst Wenn du deine Aufmerksamkeit nicht den Gedanken einer anderen Kreatur zuwendest, kann dein aktuelles Ziel eine Aktion verwenden, um seinen Intelligenzwurf mit deinem Intelligenzwurf zu vergleichen. Bei einem Erfolg endet der Zauber. Fragen, die verbal an die Zielkreatur gerichtet werden, formen auf natürliche Weise ihre Gedanken, sodass dieser Zauber als Verhör besonders effektiv ist Du kannst diesen Zauber auch nutzen, um die Gegenwart denkender Kreaturen aufzuspüren, die du nicht sehen kannst. Wenn du den Zauber wirkst, oder als Aktion während der Wirkungsdauer, kannst du nach Gedanken im Umkreis von neun Metern von dir suchen. Der Zauber kann Barrieren durchdringen, wird aber von 60 Zentimetern Stein, fünf Zentimetern Metall oder von einer dünnen Bleischicht blockiert. Du kannst keine Kreatur wahrnehmen, deren Intelligenz höchstens 3 ist oder die keine Sprache spricht. Sobald du die Gegenwart einer Kreatur auf diese Weise aufgespürt hast, kannst du bis zum Ende der Wirkungsdauer wie oben beschrieben ihre Gedanken lesen, selbst wenn du sie nicht sehen kannst. Die Kreatur muss sich allerdings in Reichweite befinden."
+  },
+  "image": "detect-thoughts",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

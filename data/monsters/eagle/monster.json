@@ -1,0 +1,219 @@
+{
+  "id": 97,
+  "slug": "eagle",
+  "name": "Eagle",
+  "nameDe": "Adler",
+  "source": "SRD",
+  "meta": {
+    "en": "Small beast, unaligned",
+    "de": "Kleine Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "3 (1d6)",
+    "de": "3 (1W6)"
+  },
+  "str": 6,
+  "dex": 15,
+  "con": 10,
+  "int": 2,
+  "wis": 14,
+  "cha": 7,
+  "strMod": -2,
+  "dexMod": 2,
+  "conMod": 0,
+  "intMod": -4,
+  "wisMod": 2,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 14"
+    ],
+    "de": [
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Sight",
+        "text": "The eagle has advantage on Wisdom (Perception) checks that rely on sight."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfe Sicht",
+        "text": "Der Adler ist bei Weisheitswürfen (Wahrnehmung), die auf Sicht basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Talons",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Krallen",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 4 (1W4+2) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/515/1000/1000/636376317171111968.jpeg",
+  "size": {
+    "en": "small",
+    "de": "Kleines"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "EagleCoast (1).webp",
+    "variant": "coast"
+  },
+  "tokens": [
+    {
+      "file": "EagleCoast (2).webp",
+      "variant": "coast"
+    },
+    {
+      "file": "EagleCoast (3).webp",
+      "variant": "coast"
+    },
+    {
+      "file": "EagleCoast (4).webp",
+      "variant": "coast"
+    },
+    {
+      "file": "EagleCoast (5).webp",
+      "variant": "coast"
+    },
+    {
+      "file": "EagleCoast (6).webp",
+      "variant": "coast"
+    },
+    {
+      "file": "EagleCoast (7).webp",
+      "variant": "coast"
+    },
+    {
+      "file": "EagleCoast (8).webp",
+      "variant": "coast"
+    },
+    {
+      "file": "EagleGrassland (1).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "EagleGrassland (2).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "EagleGrassland (3).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "EagleGrassland (4).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "EagleGrassland (5).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "EagleGrassland (6).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "EagleGrassland (7).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "EagleGrassland (8).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "EagleHills (1).webp",
+      "variant": "hills"
+    },
+    {
+      "file": "EagleHills (2).webp",
+      "variant": "hills"
+    },
+    {
+      "file": "EagleHills (3).webp",
+      "variant": "hills"
+    },
+    {
+      "file": "EagleHills (4).webp",
+      "variant": "hills"
+    },
+    {
+      "file": "EagleMountains (1).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "EagleMountains (2).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "EagleMountains (3).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "EagleMountains (4).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "EagleMountains (5).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "EagleMountains (6).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "EagleMountains (7).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "EagleMountains (8).webp",
+      "variant": "mountains"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

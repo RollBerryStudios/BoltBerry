@@ -1,0 +1,220 @@
+{
+  "id": 73,
+  "slug": "copper-dragon-wyrmling",
+  "name": "Copper Dragon Wyrmling",
+  "nameDe": "Kupferdrachennestling",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium dragon, chaotic good",
+    "de": "Mittelgroßer Drache, chaotisch gut"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "16 (Natural Armor)",
+    "de": "16 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "22 (4d8 + 4)",
+    "de": "22 (4W8+4)"
+  },
+  "str": 15,
+  "dex": 12,
+  "con": 13,
+  "int": 14,
+  "wis": 11,
+  "cha": 13,
+  "strMod": 2,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": 2,
+  "wisMod": 0,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    },
+    "climb": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 10 ft.",
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Blindsicht 3 m",
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Draconic"
+    ],
+    "de": [
+      "Drakonisch"
+    ]
+  },
+  "savingThrows": [
+    "Ges +3",
+    "Kon +3",
+    "Wei +2",
+    "Cha +3"
+  ],
+  "skills": [
+    "Heimlichkeit +3",
+    "Wahrnehmung +4"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (1d10 + 2) piercing damage."
+      },
+      {
+        "name": "Breath Weapons (Recharge 5-6)",
+        "text": "The dragon uses one of the following breath weapons:"
+      },
+      {
+        "name": "Acid Breath",
+        "text": "The dragon exhales acid in an 20-foot line that is 5 feet wide. Each creature in that line must make a DC 11 Dexterity saving throw, taking 18 (4d8) acid damage on a failed save, or half as much damage on a successful one."
+      },
+      {
+        "name": "Slowing Breath",
+        "text": "The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC 11 Constitution saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the end of each of its turns, ending the effect on itself with a successful save."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (1W10+2) Stichschaden."
+      },
+      {
+        "name": "Odemwaffen (Aufladung 5–6)",
+        "text": "Der Drache setzt eine der folgenden Odemwaffen ein:"
+      },
+      {
+        "name": "Säureodem",
+        "text": "Der Drache atmet Säure in einer sechs Meter langen, 1,5 Meter breiten Linie aus. Jede Kreatur in dieser Linie muss einen SG-11-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 18 (4W8) Säureschaden, anderenfalls die Hälfte."
+      },
+      {
+        "name": "Bremsender Odem",
+        "text": "Der Drache atmet Gas in einem Kegel von 4,5 Metern aus. Jede Kreatur in diesem Bereich muss einen SG-11-Konstitutionsrettungswurf bestehen. Scheitert der Wurf, so kann die Kreatur keine Reaktionen einsetzen, ihre Bewegungsrate ist halbiert, und sie kann in ihrem Zug höchstens einen Angriff ausführen. Außerdem kann sie in ihrem Zug entweder eine Aktion oder eine Bonusaktion einsetzen, aber nicht beides. Diese Effekte halten eine Minute lang an. Die Kreatur kann den Rettungswurf am Ende jedes ihrer Züge wiederholen und den Effekt bei einem Erfolg beenden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/255/1000/1000/636252768002215182.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "dragon",
+    "de": "Drache"
+  },
+  "alignment": {
+    "en": "chaotic good",
+    "de": "chaotisch gut"
+  },
+  "token": {
+    "file": "CopperDragonWyrmling (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "CopperDragonWyrmling (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "CopperDragonWyrmling (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

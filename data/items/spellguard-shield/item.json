@@ -1,0 +1,36 @@
+{
+  "id": 427,
+  "slug": "spellguard-shield",
+  "name": "Spellguard Shield",
+  "nameDe": "Zauberabwehrschild",
+  "category": {
+    "en": "ARMOR",
+    "de": "Rüstung"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 5000000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Armor (shield), very rare (requires attunement) While holding this shield, you have advantage on saving throws against spells and other magical effects, and spell attacks have disadvantage against you.",
+    "de": "Wenn du diesen Schild hältst, bist du bei Rettungswürfen gegen Zauber und andere magische Effekte im Vorteil und Zauberangriffe gegen dich sind im Nachteil."
+  },
+  "weight": 6,
+  "classification": {
+    "en": "Shield",
+    "de": "Schild"
+  },
+  "ac": "+2",
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "armor",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

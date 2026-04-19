@@ -1,0 +1,208 @@
+{
+  "id": 134,
+  "slug": "giant-owl",
+  "name": "Giant Owl",
+  "nameDe": "Rieseneule",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, neutral",
+    "de": "Große Bestie, neutral"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "19 (3d10 + 3)",
+    "de": "19 (3W10+3)"
+  },
+  "str": 13,
+  "dex": 15,
+  "con": 12,
+  "int": 8,
+  "wis": 13,
+  "cha": 10,
+  "strMod": 1,
+  "dexMod": 2,
+  "conMod": 1,
+  "intMod": -1,
+  "wisMod": 1,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 5,
+      "de": 1
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 15"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 15"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Giant Owl",
+      "understands Common",
+      "Elvish",
+      "and Sylvan but can't speak"
+    ],
+    "de": [
+      "Rieseneulisch",
+      "versteht Elfisch",
+      "Gemeinsprache und Sylvanisch",
+      "aber kann sie nicht sprechen"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +4",
+    "Wahrnehmung +5"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Flyby",
+        "text": "The owl doesn't provoke opportunity attacks when it flies out of an enemy's reach."
+      },
+      {
+        "name": "Keen Hearing and Sight",
+        "text": "The owl has advantage on Wisdom (Perception) checks that rely on hearing or sight."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfes Gehör und scharfer Geruchssinn",
+        "text": "Die Eule ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör oder Sicht basieren, im Vorteil."
+      },
+      {
+        "name": "Vorbeifliegen",
+        "text": "Die Eule provoziert keine Gelegenheitsangriffe, wenn sie die Reichweite eines Feindes verlässt."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Talons",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 8 (2d6 + 1) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Krallen",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 8 (2W6+1) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/535/1000/1000/636376331788287090.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "neutral",
+    "de": "neutral"
+  },
+  "token": {
+    "file": "GiantOwlArctic (1).webp",
+    "variant": "arctic"
+  },
+  "tokens": [
+    {
+      "file": "GiantOwlArctic (2).webp",
+      "variant": "arctic"
+    },
+    {
+      "file": "GiantOwlArctic (3).webp",
+      "variant": "arctic"
+    },
+    {
+      "file": "GiantOwlArctic (4).webp",
+      "variant": "arctic"
+    },
+    {
+      "file": "GiantOwlArctic (5).webp",
+      "variant": "arctic"
+    },
+    {
+      "file": "GiantOwlArctic (6).webp",
+      "variant": "arctic"
+    },
+    {
+      "file": "GiantOwlArctic (7).webp",
+      "variant": "arctic"
+    },
+    {
+      "file": "GiantOwlArctic (8).webp",
+      "variant": "arctic"
+    },
+    {
+      "file": "GiantOwlArctic (9).webp",
+      "variant": "arctic"
+    },
+    {
+      "file": "GiantOwlForest (1).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantOwlForest (10).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantOwlForest (11).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantOwlForest (12).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantOwlForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantOwlForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantOwlForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantOwlForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantOwlForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantOwlForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantOwlForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantOwlForest (9).webp",
+      "variant": "forest"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

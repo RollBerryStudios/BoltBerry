@@ -1,0 +1,322 @@
+{
+  "id": 318,
+  "slug": "young-blue-dragon",
+  "name": "Young Blue Dragon",
+  "nameDe": "Junger blauer Drache",
+  "source": "SRD",
+  "meta": {
+    "en": "Large dragon, lawful evil",
+    "de": "Großer Drache, rechtschaffen böse"
+  },
+  "challenge": "9",
+  "xp": 5000,
+  "ac": {
+    "en": "18 (Natural Armor)",
+    "de": "18 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "152 (16d10 + 64)",
+    "de": "152 (16W10+64)"
+  },
+  "str": 21,
+  "dex": 10,
+  "con": 19,
+  "int": 14,
+  "wis": 13,
+  "cha": 17,
+  "strMod": 5,
+  "dexMod": 0,
+  "conMod": 4,
+  "intMod": 2,
+  "wisMod": 1,
+  "chaMod": 3,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    },
+    "fly": {
+      "en": 80,
+      "de": 24
+    },
+    "burrow": {
+      "en": 20,
+      "de": 6
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 30 ft.",
+      "Darkvision 120 ft.",
+      "passive perception 19"
+    ],
+    "de": [
+      "Blindsicht 9 m",
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 19"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Draconic"
+    ],
+    "de": [
+      "Drakonisch",
+      "Gemeinsprache"
+    ]
+  },
+  "savingThrows": [
+    "Ges +4",
+    "Kon +8",
+    "Wei +5",
+    "Cha +7"
+  ],
+  "skills": [
+    "Heimlichkeit +4",
+    "Wahrnehmung +9"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The dragon makes three attacks: one with its bite and two with its claws."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +9 to hit, reach 10 ft., one target. Hit: 16 (2d10 + 5) piercing damage plus 5 (1d10) lightning damage."
+      },
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 12 (2d6 + 5) slashing damage."
+      },
+      {
+        "name": "Lightning Breath",
+        "text": "The dragon exhales lightning in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 16 Dexterity saving throw, taking 55 (10d10) lightning damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Drache führt drei Angriffe aus: einen mit seinem Biss und zwei mit seinen Klauen."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +9 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 16 (2W10+5) Stichschaden plus 5 (1W10) Blitzschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +9 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 12 (2W6+5) Hiebschaden."
+      },
+      {
+        "name": "Blitzodem (Aufladung 5–6)",
+        "text": "Der Drache atmet einen Blitzstrahl in an 18 Meter langen, 1,5 Meter breiten Linie aus. Jede Kreatur in dieser Linie muss einen SG-16-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 55 (10W10) Blitzschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/68/1000/1000/636252732434296782.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "dragon",
+    "de": "Drache"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "YoungBlueDragon (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "YoungBlueDragon (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (31).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (32).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (33).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (34).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (35).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (36).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (37).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (38).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (39).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (40).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (41).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (42).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (43).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (44).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (45).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (46).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (47).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlueDragon (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

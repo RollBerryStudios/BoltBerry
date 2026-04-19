@@ -1,0 +1,30 @@
+{
+  "id": 378,
+  "slug": "ring-of-invisibility",
+  "name": "Ring of Invisibility",
+  "nameDe": "Ring der Unsichtbarkeit",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "LEGENDARY",
+    "de": "Legendär"
+  },
+  "cost": 1000000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Ring, legendary (requires attunement) While wearing this ring, you can turn invisible as an action. Anything you are wearing or carrying is invisible with you. You remain invisible until the ring is removed, until you attack or cast a spell, or until you use a bonus action to become visible again.",
+    "de": "Wenn du diesen Ring trägst, kannst du als Aktion unsichtbar werden. Alles, was du trägst oder mit dir führst, wird mit dir unsichtbar. Du bleibst unsichtbar, bis der Ring entfernt wird, bis du angreifst oder einen Zauber wirkst oder bis du eine Bonusaktion verwendest, um wieder sichtbar zu werden."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "ring",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

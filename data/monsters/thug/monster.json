@@ -1,0 +1,1531 @@
+{
+  "id": 283,
+  "slug": "thug",
+  "name": "Thug",
+  "nameDe": "Schläger",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "11 (Leather Armor)",
+    "de": "11 (Lederrüstung)"
+  },
+  "hp": {
+    "en": "32 (5d8 + 10)",
+    "de": "32 (5W8+10)"
+  },
+  "str": 15,
+  "dex": 11,
+  "con": 14,
+  "int": 10,
+  "wis": 10,
+  "cha": 11,
+  "strMod": 2,
+  "dexMod": 0,
+  "conMod": 2,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any one language (usually Common)"
+    ],
+    "de": [
+      "Eine beliebige Sprache (normalerweise Gemeinsprache)"
+    ]
+  },
+  "skills": [
+    "Einschüchtern +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Pack Tactics",
+        "text": "The thug has advantage on an attack roll against a creature if at least one of the thug's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rudeltaktik",
+        "text": "Der Schläger ist bei Angriffswürfen gegen eine Kreatur im Vorteil, wenn sich mindestens einer seiner Verbündeten, der nicht kampfunfähig ist, im Abstand von bis zu 1,5 Metern von der Kreatur befindet."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The thug makes two melee attacks."
+      },
+      {
+        "name": "Mace",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 5 (1d6 + 2) bludgeoning damage."
+      },
+      {
+        "name": "Heavy Crossbow",
+        "text": "Ranged Weapon Attack: +2 to hit, range 100/400 ft., one target. Hit: 5 (1d10) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Schläger führt zwei Nahkampfangriffe aus."
+      },
+      {
+        "name": "Streitkolben",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 5 (1W6+2) Wuchtschaden."
+      },
+      {
+        "name": "Schwere Armbrust",
+        "text": "Fernkampfwaffenangriff: +2 auf Treffer, Reichweite 30/120 m, ein Ziel. Treffer: 5 (1W10) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/99/1000/1000/636252741335519081.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (jedes Volk)"
+  },
+  "alignment": {
+    "en": "any non-good",
+    "de": "jede nichtgute Gesinnung"
+  },
+  "token": {
+    "file": "ThugDragonbornMelee (1).webp",
+    "variant": "dragonbornMelee"
+  },
+  "tokens": [
+    {
+      "file": "ThugDragonbornMelee (10).webp",
+      "variant": "dragonbornMelee"
+    },
+    {
+      "file": "ThugDragonbornMelee (11).webp",
+      "variant": "dragonbornMelee"
+    },
+    {
+      "file": "ThugDragonbornMelee (12).webp",
+      "variant": "dragonbornMelee"
+    },
+    {
+      "file": "ThugDragonbornMelee (2).webp",
+      "variant": "dragonbornMelee"
+    },
+    {
+      "file": "ThugDragonbornMelee (3).webp",
+      "variant": "dragonbornMelee"
+    },
+    {
+      "file": "ThugDragonbornMelee (4).webp",
+      "variant": "dragonbornMelee"
+    },
+    {
+      "file": "ThugDragonbornMelee (5).webp",
+      "variant": "dragonbornMelee"
+    },
+    {
+      "file": "ThugDragonbornMelee (6).webp",
+      "variant": "dragonbornMelee"
+    },
+    {
+      "file": "ThugDragonbornMelee (7).webp",
+      "variant": "dragonbornMelee"
+    },
+    {
+      "file": "ThugDragonbornMelee (8).webp",
+      "variant": "dragonbornMelee"
+    },
+    {
+      "file": "ThugDragonbornMelee (9).webp",
+      "variant": "dragonbornMelee"
+    },
+    {
+      "file": "ThugDragonbornRanged (1).webp",
+      "variant": "dragonbornRanged"
+    },
+    {
+      "file": "ThugDragonbornRanged (2).webp",
+      "variant": "dragonbornRanged"
+    },
+    {
+      "file": "ThugDragonbornRanged (3).webp",
+      "variant": "dragonbornRanged"
+    },
+    {
+      "file": "ThugDragonbornRanged (4).webp",
+      "variant": "dragonbornRanged"
+    },
+    {
+      "file": "ThugDragonbornRanged (5).webp",
+      "variant": "dragonbornRanged"
+    },
+    {
+      "file": "ThugDragonbornRanged (6).webp",
+      "variant": "dragonbornRanged"
+    },
+    {
+      "file": "ThugDragonbornRanged (7).webp",
+      "variant": "dragonbornRanged"
+    },
+    {
+      "file": "ThugDragonbornRanged (8).webp",
+      "variant": "dragonbornRanged"
+    },
+    {
+      "file": "ThugDragonbornRanged (9).webp",
+      "variant": "dragonbornRanged"
+    },
+    {
+      "file": "ThugDwarfFemaleMelee (1).webp",
+      "variant": "dwarfFemaleMelee"
+    },
+    {
+      "file": "ThugDwarfFemaleMelee (2).webp",
+      "variant": "dwarfFemaleMelee"
+    },
+    {
+      "file": "ThugDwarfFemaleMelee (3).webp",
+      "variant": "dwarfFemaleMelee"
+    },
+    {
+      "file": "ThugDwarfFemaleMelee (4).webp",
+      "variant": "dwarfFemaleMelee"
+    },
+    {
+      "file": "ThugDwarfFemaleMelee (5).webp",
+      "variant": "dwarfFemaleMelee"
+    },
+    {
+      "file": "ThugDwarfFemaleMelee (6).webp",
+      "variant": "dwarfFemaleMelee"
+    },
+    {
+      "file": "ThugDwarfFemaleMelee (7).webp",
+      "variant": "dwarfFemaleMelee"
+    },
+    {
+      "file": "ThugDwarfFemaleMelee (8).webp",
+      "variant": "dwarfFemaleMelee"
+    },
+    {
+      "file": "ThugDwarfFemaleMelee (9).webp",
+      "variant": "dwarfFemaleMelee"
+    },
+    {
+      "file": "ThugDwarfFemaleRanged (1).webp",
+      "variant": "dwarfFemaleRanged"
+    },
+    {
+      "file": "ThugDwarfFemaleRanged (2).webp",
+      "variant": "dwarfFemaleRanged"
+    },
+    {
+      "file": "ThugDwarfFemaleRanged (3).webp",
+      "variant": "dwarfFemaleRanged"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (1).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (10).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (11).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (12).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (13).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (14).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (15).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (16).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (17).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (18).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (19).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (2).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (20).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (21).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (22).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (3).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (4).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (5).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (6).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (7).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (8).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleMelee (9).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "ThugDwarfMaleRanged (1).webp",
+      "variant": "dwarfMaleRanged"
+    },
+    {
+      "file": "ThugDwarfMaleRanged (2).webp",
+      "variant": "dwarfMaleRanged"
+    },
+    {
+      "file": "ThugDwarfMaleRanged (3).webp",
+      "variant": "dwarfMaleRanged"
+    },
+    {
+      "file": "ThugDwarfMaleRanged (4).webp",
+      "variant": "dwarfMaleRanged"
+    },
+    {
+      "file": "ThugElfFemaleMelee (1).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (10).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (11).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (12).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (13).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (14).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (15).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (16).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (17).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (18).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (19).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (2).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (3).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (4).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (5).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (6).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (7).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (8).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleMelee (9).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "ThugElfFemaleRanged (1).webp",
+      "variant": "elfFemaleRanged"
+    },
+    {
+      "file": "ThugElfFemaleRanged (2).webp",
+      "variant": "elfFemaleRanged"
+    },
+    {
+      "file": "ThugElfFemaleRanged (3).webp",
+      "variant": "elfFemaleRanged"
+    },
+    {
+      "file": "ThugElfFemaleRanged (4).webp",
+      "variant": "elfFemaleRanged"
+    },
+    {
+      "file": "ThugElfFemaleRanged (5).webp",
+      "variant": "elfFemaleRanged"
+    },
+    {
+      "file": "ThugElfFemaleRanged (6).webp",
+      "variant": "elfFemaleRanged"
+    },
+    {
+      "file": "ThugElfFemaleRanged (7).webp",
+      "variant": "elfFemaleRanged"
+    },
+    {
+      "file": "ThugElfMaleMelee (1).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (10).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (11).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (12).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (13).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (14).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (15).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (16).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (17).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (18).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (19).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (2).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (20).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (21).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (22).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (23).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (3).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (4).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (5).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (6).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (7).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (8).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleMelee (9).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "ThugElfMaleRanged (1).webp",
+      "variant": "elfMaleRanged"
+    },
+    {
+      "file": "ThugElfMaleRanged (2).webp",
+      "variant": "elfMaleRanged"
+    },
+    {
+      "file": "ThugElfMaleRanged (3).webp",
+      "variant": "elfMaleRanged"
+    },
+    {
+      "file": "ThugElfMaleRanged (4).webp",
+      "variant": "elfMaleRanged"
+    },
+    {
+      "file": "ThugGnomeFemaleMelee (1).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "ThugGnomeFemaleMelee (10).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "ThugGnomeFemaleMelee (11).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "ThugGnomeFemaleMelee (12).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "ThugGnomeFemaleMelee (13).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "ThugGnomeFemaleMelee (14).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "ThugGnomeFemaleMelee (2).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "ThugGnomeFemaleMelee (3).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "ThugGnomeFemaleMelee (4).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "ThugGnomeFemaleMelee (5).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "ThugGnomeFemaleMelee (6).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "ThugGnomeFemaleMelee (7).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "ThugGnomeFemaleMelee (8).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "ThugGnomeFemaleMelee (9).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "ThugGnomeFemaleRanged (1).webp",
+      "variant": "gnomeFemaleRanged"
+    },
+    {
+      "file": "ThugGnomeFemaleRanged (2).webp",
+      "variant": "gnomeFemaleRanged"
+    },
+    {
+      "file": "ThugGnomeFemaleRanged (3).webp",
+      "variant": "gnomeFemaleRanged"
+    },
+    {
+      "file": "ThugGnomeMaleMelee (1).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "ThugGnomeMaleMelee (10).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "ThugGnomeMaleMelee (11).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "ThugGnomeMaleMelee (12).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "ThugGnomeMaleMelee (13).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "ThugGnomeMaleMelee (14).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "ThugGnomeMaleMelee (15).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "ThugGnomeMaleMelee (16).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "ThugGnomeMaleMelee (2).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "ThugGnomeMaleMelee (3).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "ThugGnomeMaleMelee (4).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "ThugGnomeMaleMelee (5).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "ThugGnomeMaleMelee (6).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "ThugGnomeMaleMelee (7).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "ThugGnomeMaleMelee (8).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "ThugGnomeMaleMelee (9).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "ThugGnomeMaleRanged (1).webp",
+      "variant": "gnomeMaleRanged"
+    },
+    {
+      "file": "ThugGnomeMaleRanged (2).webp",
+      "variant": "gnomeMaleRanged"
+    },
+    {
+      "file": "ThugGnomeMaleRanged (3).webp",
+      "variant": "gnomeMaleRanged"
+    },
+    {
+      "file": "ThugHalfElfFemaleMelee (1).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "ThugHalfElfFemaleMelee (10).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "ThugHalfElfFemaleMelee (11).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "ThugHalfElfFemaleMelee (12).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "ThugHalfElfFemaleMelee (13).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "ThugHalfElfFemaleMelee (14).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "ThugHalfElfFemaleMelee (15).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "ThugHalfElfFemaleMelee (2).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "ThugHalfElfFemaleMelee (3).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "ThugHalfElfFemaleMelee (4).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "ThugHalfElfFemaleMelee (5).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "ThugHalfElfFemaleMelee (6).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "ThugHalfElfFemaleMelee (7).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "ThugHalfElfFemaleMelee (8).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "ThugHalfElfFemaleMelee (9).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "ThugHalfElfFemaleRanged (1).webp",
+      "variant": "halfElfFemaleRanged"
+    },
+    {
+      "file": "ThugHalfElfFemaleRanged (2).webp",
+      "variant": "halfElfFemaleRanged"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (1).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (10).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (11).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (12).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (13).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (14).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (15).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (16).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (17).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (18).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (2).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (3).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (4).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (5).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (6).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (7).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (8).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleMelee (9).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "ThugHalfElfMaleRanged (1).webp",
+      "variant": "halfElfMaleRanged"
+    },
+    {
+      "file": "ThugHalfElfMaleRanged (2).webp",
+      "variant": "halfElfMaleRanged"
+    },
+    {
+      "file": "ThugHalfElfMaleRanged (3).webp",
+      "variant": "halfElfMaleRanged"
+    },
+    {
+      "file": "ThugHalfElfMaleRanged (4).webp",
+      "variant": "halfElfMaleRanged"
+    },
+    {
+      "file": "ThugHalflingFemaleMelee (1).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "ThugHalflingFemaleMelee (10).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "ThugHalflingFemaleMelee (11).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "ThugHalflingFemaleMelee (12).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "ThugHalflingFemaleMelee (13).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "ThugHalflingFemaleMelee (14).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "ThugHalflingFemaleMelee (2).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "ThugHalflingFemaleMelee (3).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "ThugHalflingFemaleMelee (4).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "ThugHalflingFemaleMelee (5).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "ThugHalflingFemaleMelee (6).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "ThugHalflingFemaleMelee (7).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "ThugHalflingFemaleMelee (8).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "ThugHalflingFemaleMelee (9).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "ThugHalflingFemaleRanged (1).webp",
+      "variant": "halflingFemaleRanged"
+    },
+    {
+      "file": "ThugHalflingFemaleRanged (2).webp",
+      "variant": "halflingFemaleRanged"
+    },
+    {
+      "file": "ThugHalflingFemaleRanged (3).webp",
+      "variant": "halflingFemaleRanged"
+    },
+    {
+      "file": "ThugHalflingFemaleRanged (4).webp",
+      "variant": "halflingFemaleRanged"
+    },
+    {
+      "file": "ThugHalflingFemaleRanged (5).webp",
+      "variant": "halflingFemaleRanged"
+    },
+    {
+      "file": "ThugHalflingFemaleRanged (6).webp",
+      "variant": "halflingFemaleRanged"
+    },
+    {
+      "file": "ThugHalflingMaleMelee (1).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "ThugHalflingMaleMelee (10).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "ThugHalflingMaleMelee (11).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "ThugHalflingMaleMelee (12).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "ThugHalflingMaleMelee (2).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "ThugHalflingMaleMelee (3).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "ThugHalflingMaleMelee (4).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "ThugHalflingMaleMelee (5).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "ThugHalflingMaleMelee (6).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "ThugHalflingMaleMelee (7).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "ThugHalflingMaleMelee (8).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "ThugHalflingMaleMelee (9).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcFemaleMelee (1).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcFemaleMelee (10).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcFemaleMelee (11).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcFemaleMelee (12).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcFemaleMelee (13).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcFemaleMelee (14).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcFemaleMelee (2).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcFemaleMelee (3).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcFemaleMelee (4).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcFemaleMelee (5).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcFemaleMelee (6).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcFemaleMelee (7).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcFemaleMelee (8).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcFemaleMelee (9).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcFemaleRanged (1).webp",
+      "variant": "halfOrcFemaleRanged"
+    },
+    {
+      "file": "ThugHalfOrcFemaleRanged (2).webp",
+      "variant": "halfOrcFemaleRanged"
+    },
+    {
+      "file": "ThugHalfOrcFemaleRanged (3).webp",
+      "variant": "halfOrcFemaleRanged"
+    },
+    {
+      "file": "ThugHalfOrcFemaleRanged (4).webp",
+      "variant": "halfOrcFemaleRanged"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (1).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (10).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (11).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (12).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (13).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (14).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (15).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (16).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (17).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (18).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (19).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (2).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (20).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (21).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (3).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (4).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (5).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (6).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (7).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (8).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleMelee (9).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "ThugHalfOrcMaleRanged (1).webp",
+      "variant": "halfOrcMaleRanged"
+    },
+    {
+      "file": "ThugHalfOrcMaleRanged (2).webp",
+      "variant": "halfOrcMaleRanged"
+    },
+    {
+      "file": "ThugHalfOrcMaleRanged (3).webp",
+      "variant": "halfOrcMaleRanged"
+    },
+    {
+      "file": "ThugHalfOrcMaleRanged (4).webp",
+      "variant": "halfOrcMaleRanged"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (1).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (10).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (11).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (12).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (13).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (14).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (15).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (16).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (17).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (18).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (19).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (2).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (20).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (21).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (22).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (23).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (24).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (25).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (3).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (4).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (5).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (6).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (7).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (8).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleMelee (9).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "ThugHumanFemaleRanged (1).webp",
+      "variant": "humanFemaleRanged"
+    },
+    {
+      "file": "ThugHumanFemaleRanged (2).webp",
+      "variant": "humanFemaleRanged"
+    },
+    {
+      "file": "ThugHumanFemaleRanged (3).webp",
+      "variant": "humanFemaleRanged"
+    },
+    {
+      "file": "ThugHumanFemaleRanged (4).webp",
+      "variant": "humanFemaleRanged"
+    },
+    {
+      "file": "ThugHumanFemaleRanged (5).webp",
+      "variant": "humanFemaleRanged"
+    },
+    {
+      "file": "ThugHumanFemaleRanged (6).webp",
+      "variant": "humanFemaleRanged"
+    },
+    {
+      "file": "ThugHumanMaleMelee (1).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "ThugHumanMaleMelee (10).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "ThugHumanMaleMelee (11).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "ThugHumanMaleMelee (12).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "ThugHumanMaleMelee (13).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "ThugHumanMaleMelee (14).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "ThugHumanMaleMelee (15).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "ThugHumanMaleMelee (16).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "ThugHumanMaleMelee (17).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "ThugHumanMaleMelee (2).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "ThugHumanMaleMelee (3).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "ThugHumanMaleMelee (4).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "ThugHumanMaleMelee (5).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "ThugHumanMaleMelee (6).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "ThugHumanMaleMelee (7).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "ThugHumanMaleMelee (8).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "ThugHumanMaleMelee (9).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "ThugHumanMaleRanged (1).webp",
+      "variant": "humanMaleRanged"
+    },
+    {
+      "file": "ThugHumanMaleRanged (2).webp",
+      "variant": "humanMaleRanged"
+    },
+    {
+      "file": "ThugHumanMaleRanged (3).webp",
+      "variant": "humanMaleRanged"
+    },
+    {
+      "file": "ThugHumanMaleRanged (4).webp",
+      "variant": "humanMaleRanged"
+    },
+    {
+      "file": "ThugTieflingFemaleMelee (1).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "ThugTieflingFemaleMelee (10).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "ThugTieflingFemaleMelee (11).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "ThugTieflingFemaleMelee (12).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "ThugTieflingFemaleMelee (13).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "ThugTieflingFemaleMelee (14).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "ThugTieflingFemaleMelee (2).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "ThugTieflingFemaleMelee (3).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "ThugTieflingFemaleMelee (4).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "ThugTieflingFemaleMelee (5).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "ThugTieflingFemaleMelee (6).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "ThugTieflingFemaleMelee (7).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "ThugTieflingFemaleMelee (8).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "ThugTieflingFemaleMelee (9).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "ThugTieflingFemaleRanged (1).webp",
+      "variant": "tieflingFemaleRanged"
+    },
+    {
+      "file": "ThugTieflingFemaleRanged (2).webp",
+      "variant": "tieflingFemaleRanged"
+    },
+    {
+      "file": "ThugTieflingFemaleRanged (3).webp",
+      "variant": "tieflingFemaleRanged"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (1).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (10).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (11).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (12).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (13).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (14).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (15).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (16).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (17).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (18).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (19).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (2).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (20).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (3).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (4).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (5).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (6).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (7).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (8).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleMelee (9).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "ThugTieflingMaleRanged (1).webp",
+      "variant": "tieflingMaleRanged"
+    },
+    {
+      "file": "ThugTieflingMaleRanged (2).webp",
+      "variant": "tieflingMaleRanged"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

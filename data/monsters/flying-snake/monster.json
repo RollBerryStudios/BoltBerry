@@ -1,0 +1,194 @@
+{
+  "id": 109,
+  "slug": "flying-snake",
+  "name": "Flying Snake",
+  "nameDe": "Fliegende Schlange",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny beast, unaligned",
+    "de": "Winzige Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/8",
+  "xp": 25,
+  "ac": {
+    "en": "14",
+    "de": "14"
+  },
+  "hp": {
+    "en": "5 (2d4)",
+    "de": "5 (2W4)"
+  },
+  "str": 4,
+  "dex": 18,
+  "con": 11,
+  "int": 2,
+  "wis": 12,
+  "cha": 5,
+  "strMod": -3,
+  "dexMod": 4,
+  "conMod": 0,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "swim": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 10 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Blindsicht 3 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Flyby",
+        "text": "The snake doesn't provoke opportunity attacks when it flies out of an enemy's reach."
+      }
+    ],
+    "de": [
+      {
+        "name": "Vorbeifliegen",
+        "text": "Die Schlange provoziert keine Gelegenheitsangriffe, wenn sie die Reichweite eines Feindes verlässt."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 1 piercing damage plus 7 (3d4) poison damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 1 Stichschaden plus 7 (3W4) Giftschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/517/1000/1000/636376319640572721.jpeg",
+  "size": {
+    "en": "tiny",
+    "de": "Winziges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "FlyingSnake (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "FlyingSnake (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "FlyingSnake (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

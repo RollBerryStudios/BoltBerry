@@ -1,0 +1,63 @@
+{
+  "id": 237,
+  "slug": "creation",
+  "name": "Creation",
+  "nameDe": "Erschaffung",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "5th-level illusion",
+    "de": "Stufe 5 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": "Special",
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a tiny piece of matter of the same type of the item you plan to create",
+      "de": "ein winziges Stück Stoff der gleichen Art wie der Gegenstand, den du herstellen willst"
+    },
+    "raw": {
+      "en": "V, S, M (a tiny piece of matter of the same type of the item you plan to create)",
+      "de": "V, G, M (ein winziges Stück Stoff der gleichen Art wie der Gegenstand, den du herstellen willst)"
+    }
+  },
+  "description": {
+    "en": "You pull wisps of shadow material from the Shadowfell to create a nonliving object of vegetable matter within range: soft goods, rope, wood, or something similar. You can also use this spell to create mineral objects such as stone, crystal, or metal. The object created must be no larger than a 5-foot cube, and the object must be of a form and material that you have seen before. The duration depends on the object's material. If the object is composed of multiple materials, use the shortest duration. | Material | Duration | |---|---| | Vegetable matter | 1 day | | Stone or crystal | 12 hours | | Precious metals | 1 hour | | Gems | 10 minutes | | Adamantine or mithral | 1 minute | Using any material created by this spell as another spell's material component causes that spell to fail.",
+    "de": "Du ziehst Fäden aus Schattenmaterial aus dem Schattenfell und erschaffst ein unbelebtes Objekt aus pflanzlichem Material in Reichweite: Textilien, Seil, Holz oder dergleichen. Du kannst mit dem Zauber auch Mineralien erschaffen, etwa Stein, Kristall oder Metall. Der erschaffene Gegenstand darf nicht größer als ein Würfel mit 1,5 Metern Kantenlänge sein und muss aus einem Material bestehen sowie eine Form besitzen, die du bereits gesehen hast. Die Wirkungsdauer hängt vom Material des Gegenstands ab. Besteht der Gegenstand aus mehreren Materialien, verwende die kürzeste Wirkungsdauer. Wird mit diesem Zauber erschaffenes Material als Materialkomponente für einen anderen Zauber verwendet, schlägt dieser Zauber fehl. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, erhöht sich die Kantenlänge des Würfels für jeden Grad über dem 5. um 1,5 Meter."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 6th level or higher, the cube increases by 5 feet for each slot level above 5th.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, erhöht sich die Kantenlänge des Würfels für jeden Grad über dem 5. um 1,5 Meter."
+  },
+  "image": "creation",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

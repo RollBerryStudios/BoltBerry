@@ -1,0 +1,72 @@
+{
+  "id": 118,
+  "slug": "dispel-magic",
+  "name": "Dispel Magic",
+  "nameDe": "Magie bannen",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "druid",
+      "paladin",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Druide",
+      "Paladin",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level abjuration",
+    "de": "Stufe 3 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "Choose one creature, object, or magical effect within range. Any spell of 3rd level or lower on the target ends. For each spell of 4th level or higher on the target, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a successful check, the spell ends.",
+    "de": "Wähle eine Kreatur, ein Objekt oder einen magischen Effekt in Reichweite. Jeder Zauber des 3. Grades oder niedriger, der auf dem Ziel liegt, endet. Führe für jeden Zauber des 4. Grades oder höher, der auf dem Ziel liegt, einen Attributswurf mit deinem Attribut zum Zauberwirken aus. Der SG ist gleich 10 + der Grad des Zaubers. Bei einem erfolgreichen Wurf endet der Zauber. Auf höheren Graden:  Wenn du diesen Zauber wirkst, indem du einen Zauberplatz des 4. Grades oder höher nutzt, beendest du automatisch die Effekte von Zaubern, die auf dem Ziel liegen und deren Grad gleich oder niedriger als der Grad des Zauberplatzes ist, den du gerade nutzt."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 4th level or higher, you automatically end the effects of a spell on the target if the spell's level is equal to or less than the level of the spell slot you used.",
+    "de": "Wenn du diesen Zauber wirkst, indem du einen Zauberplatz des 4. Grades oder höher nutzt, beendest du automatisch die Effekte von Zaubern, die auf dem Ziel liegen und deren Grad gleich oder niedriger als der Grad des Zauberplatzes ist, den du gerade nutzt."
+  },
+  "image": "dispell-magic",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,220 @@
+{
+  "id": 167,
+  "slug": "hezrou",
+  "name": "Hezrou",
+  "source": "SRD",
+  "meta": {
+    "en": "Large fiend, chaotic evil",
+    "de": "Großer Unhold, chaotisch böse"
+  },
+  "challenge": "8",
+  "xp": 3900,
+  "ac": {
+    "en": "16 (Natural Armor)",
+    "de": "16 (Natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "136 (13d10 + 65)",
+    "de": "136 (13W10 + 65)"
+  },
+  "str": 19,
+  "dex": 17,
+  "con": 20,
+  "int": 5,
+  "wis": 12,
+  "cha": 13,
+  "strMod": 4,
+  "dexMod": 3,
+  "conMod": 5,
+  "intMod": -3,
+  "wisMod": 1,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Abyssal",
+      "telepathy 120 ft."
+    ],
+    "de": [
+      "Abyssisch",
+      "Telepathie auf 36 m"
+    ]
+  },
+  "savingThrows": [
+    "Str +7",
+    "Kon +8",
+    "Wei +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Magic Resistance",
+        "text": "The hezrou has advantage on saving throws against spells and other magical effects."
+      },
+      {
+        "name": "Stench",
+        "text": "Any creature that starts its turn within 10 feet of the hezrou must succeed on a DC 14 Constitution saving throw or be poisoned until the start of its next turn. On a successful saving throw, the creature is immune to the hezrou's stench for 24 hours."
+      }
+    ],
+    "de": [
+      {
+        "name": "Gestank",
+        "text": "Jede Kreatur, die ihren Zug im Abstand von bis zu drei Metern vom Hezrou beginnt, muss einen SG-14-Konstitutionsrettungswurf bestehen, oder sie ist bis zum Beginn ihres nächsten Zugs vergiftet. Bei einem erfolgreichen Rettungswurf ist die Kreatur 24 Stunden lang gegen den Gestank des Hezrou immun."
+      },
+      {
+        "name": "Magieresistenz",
+        "text": "Der Hezrou ist bei Rettungswürfen gegen Zauber und andere magische Effekte im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The hezrou makes three attacks: one with its bite and two with its claws."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 15 (2d10 + 4) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Hezrou führt drei Angriffe aus: einen Biss- und zwei Klauenangriffe."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 15 (2W10+4) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 11 (2W6+4) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/321/315/315/636252775562934524.jpeg",
+  "size": {
+    "en": "large",
+    "de": "groß"
+  },
+  "type": {
+    "en": "fiend",
+    "de": "Unhold"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "HezrouGrey (1).webp",
+    "variant": "grey"
+  },
+  "tokens": [
+    {
+      "file": "HezrouGrey (10).webp",
+      "variant": "grey"
+    },
+    {
+      "file": "HezrouGrey (11).webp",
+      "variant": "grey"
+    },
+    {
+      "file": "HezrouGrey (12).webp",
+      "variant": "grey"
+    },
+    {
+      "file": "HezrouGrey (13).webp",
+      "variant": "grey"
+    },
+    {
+      "file": "HezrouGrey (14).webp",
+      "variant": "grey"
+    },
+    {
+      "file": "HezrouGrey (15).webp",
+      "variant": "grey"
+    },
+    {
+      "file": "HezrouGrey (2).webp",
+      "variant": "grey"
+    },
+    {
+      "file": "HezrouGrey (3).webp",
+      "variant": "grey"
+    },
+    {
+      "file": "HezrouGrey (4).webp",
+      "variant": "grey"
+    },
+    {
+      "file": "HezrouGrey (5).webp",
+      "variant": "grey"
+    },
+    {
+      "file": "HezrouGrey (6).webp",
+      "variant": "grey"
+    },
+    {
+      "file": "HezrouGrey (7).webp",
+      "variant": "grey"
+    },
+    {
+      "file": "HezrouGrey (8).webp",
+      "variant": "grey"
+    },
+    {
+      "file": "HezrouGrey (9).webp",
+      "variant": "grey"
+    },
+    {
+      "file": "HezrouOrange (1).webp",
+      "variant": "orange"
+    },
+    {
+      "file": "HezrouOrange (2).webp",
+      "variant": "orange"
+    },
+    {
+      "file": "HezrouOrange (3).webp",
+      "variant": "orange"
+    },
+    {
+      "file": "HezrouOrange (4).webp",
+      "variant": "orange"
+    },
+    {
+      "file": "HezrouOrange (5).webp",
+      "variant": "orange"
+    },
+    {
+      "file": "HezrouOrange (6).webp",
+      "variant": "orange"
+    },
+    {
+      "file": "HezrouOrange (7).webp",
+      "variant": "orange"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

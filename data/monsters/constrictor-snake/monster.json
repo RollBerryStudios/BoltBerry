@@ -1,0 +1,228 @@
+{
+  "id": 72,
+  "slug": "constrictor-snake",
+  "name": "Constrictor Snake",
+  "nameDe": "Würgeschlange",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "13 (2d10 + 2)",
+    "de": "13 (2W10+2)"
+  },
+  "str": 15,
+  "dex": 14,
+  "con": 12,
+  "int": 1,
+  "wis": 10,
+  "cha": 3,
+  "strMod": 2,
+  "dexMod": 2,
+  "conMod": 1,
+  "intMod": -5,
+  "wisMod": 0,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "swim": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 10 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Blindsicht 3 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 5 (1d6 + 2) piercing damage."
+      },
+      {
+        "name": "Constrict",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 6 (1d8 + 2) bludgeoning damage, and the target is grappled (escape DC 14). Until this grapple ends, the creature is restrained, and the snake can't constrict another target."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 5 (1W6+2) Stichschaden."
+      },
+      {
+        "name": "Umschlingen",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 6 (1W8+2) Wuchtschaden, und das Ziel wird gepackt (Rettungswurf-SG 14). Eine gepackte Kreatur ist festgesetzt. Die Schlange kann solange kein weiteres Ziel umschlingen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "ConstrictorSnakeDesert (1).webp",
+    "variant": "desert"
+  },
+  "tokens": [
+    {
+      "file": "ConstrictorSnakeDesert (2).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "ConstrictorSnakeDesert (3).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "ConstrictorSnakeDesert (4).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "ConstrictorSnakeDesert (5).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "ConstrictorSnakeDesert (6).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "ConstrictorSnakeDesert (7).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "ConstrictorSnakeDesert (8).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "ConstrictorSnakeForest (1).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ConstrictorSnakeForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ConstrictorSnakeForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ConstrictorSnakeForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ConstrictorSnakeForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ConstrictorSnakeForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ConstrictorSnakeForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ConstrictorSnakeForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ConstrictorSnakeSwamp (1).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "ConstrictorSnakeSwamp (2).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "ConstrictorSnakeSwamp (3).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "ConstrictorSnakeSwamp (4).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "ConstrictorSnakeSwamp (5).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "ConstrictorSnakeSwamp (6).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "ConstrictorSnakeSwamp (7).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "ConstrictorSnakeSwamp (8).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "ConstrictorSnakeUnderwater (1).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "ConstrictorSnakeUnderwater (2).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "ConstrictorSnakeUnderwater (3).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "ConstrictorSnakeUnderwater (4).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "ConstrictorSnakeUnderwater (5).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "ConstrictorSnakeUnderwater (6).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "ConstrictorSnakeUnderwater (7).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "ConstrictorSnakeUnderwater (8).webp",
+      "variant": "underwater"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

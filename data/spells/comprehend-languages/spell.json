@@ -1,0 +1,66 @@
+{
+  "id": 13,
+  "slug": "comprehend-languages",
+  "name": "Comprehend Languages",
+  "nameDe": "Sprachen verstehen",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level divination (Ritual)",
+    "de": "Stufe 1 Erkenntnismagie (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a pinch of soot and salt",
+      "de": "eine Prise Ruß und Salz"
+    },
+    "raw": {
+      "en": "V, S, M (a pinch of soot and salt)",
+      "de": "V, G, M (eine Prise Ruß und Salz)"
+    }
+  },
+  "description": {
+    "en": "For the duration, you understand the literal meaning of any spoken language that you hear. You also understand any written language that you see, but you must be touching the surface on which the words are written. It takes about 1 minute to read one page of text. This spell doesn't decode secret messages in a text or a glyph, such as an arcane sigil, that isn't part of a written language.",
+    "de": "Für die Wirkungsdauer verstehst du die wörtliche Bedeutung jeder gesprochenen Sprache, die du hörst Außerdem verstehst du jede Schriftsprache, die du liest, sofern du die Oberfläche berührst, auf der die Worte geschrieben stehen. Eine Seite Text zu lesen dauert etwa eine Minute. Dieser Zauber entschlüsselt weder Geheimbotschaften in Texten noch Glyphen wie arkane Siegel, die nicht Teil der geschriebenen Sprache sind."
+  },
+  "image": "comprehend-languages",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

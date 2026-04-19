@@ -1,0 +1,184 @@
+{
+  "id": 70,
+  "slug": "cockatrice",
+  "name": "Cockatrice",
+  "nameDe": "Basilisk",
+  "source": "SRD",
+  "meta": {
+    "en": "Small monstrosity, unaligned",
+    "de": "Kleine Monstrosität, ohne Gesinnung"
+  },
+  "challenge": "3",
+  "xp": 100,
+  "ac": {
+    "en": "15 (natürliche Rüstung)",
+    "de": "15 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "27 (6d6 + 6)",
+    "de": "52 (8W8+16)"
+  },
+  "str": 6,
+  "dex": 12,
+  "con": 12,
+  "int": 2,
+  "wis": 13,
+  "cha": 5,
+  "strMod": -2,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    },
+    "fly": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 9"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one creature. Hit: 3 (1d4 + 1) piercing damage, and the target must succeed on a DC 11 Constitution saving throw against being magically petrified. On a failed save, the creature begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified for 24 hours."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Stichschaden plus 7 (2W6) Giftschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/251/315/315/636252767744669874.jpeg",
+  "size": {
+    "en": "small",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Cockatrice (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Cockatrice (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cockatrice (9).webp",
+      "variant": ""
+    }
+  ],
+  "traits": {
+    "en": [],
+    "de": []
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

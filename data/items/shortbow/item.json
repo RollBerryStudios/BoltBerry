@@ -1,0 +1,36 @@
+{
+  "id": 25,
+  "slug": "shortbow",
+  "name": "Shortbow",
+  "nameDe": "Kurzbogen",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 2500,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 2,
+  "classification": {
+    "en": "Simple Ranged Weapons",
+    "de": "Einfache Fernkampfwaffe"
+  },
+  "damage": "1d6",
+  "damageType": {
+    "en": "piercing",
+    "de": "stich"
+  },
+  "properties": {
+    "en": "ammunition (range 80/320) | two-handed ",
+    "de": "munition (fernkampf 80/320) | zweihändig "
+  },
+  "image": "bow",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,222 @@
+{
+  "id": 149,
+  "slug": "gnoll",
+  "name": "Gnoll",
+  "nameDe": "Gnoll-Rudelfürst",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, chaotic evil",
+    "de": "Mittelgroßer Humanoid, chaotisch böse"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "15 (Hide Armor, Shield)",
+    "de": "15 (Fellrüstung, Schild)"
+  },
+  "hp": {
+    "en": "22 (5d8)",
+    "de": "22 (5W8)"
+  },
+  "str": 14,
+  "dex": 12,
+  "con": 11,
+  "int": 6,
+  "wis": 10,
+  "cha": 7,
+  "strMod": 2,
+  "dexMod": 1,
+  "conMod": 0,
+  "intMod": -2,
+  "wisMod": 0,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Gnoll"
+    ],
+    "de": [
+      "Gnollisch"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Rampage",
+        "text": "When the gnoll reduces a creature to 0 hit points with a melee attack on its turn, the gnoll can take a bonus action to move up to half its speed and make a bite attack."
+      }
+    ],
+    "de": [
+      {
+        "name": "Wüten",
+        "text": "Wenn der Gnoll in seinem Zug die Trefferpunkte einer Kreatur mit einem Nahkampfangriff auf 0 verringert hat, kann er eine Bonusaktion ausführen, um bis zur Hälfte seiner Bewegungsrate zurückzulegen und einen Bissangriff auszuführen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 4 (1d4 + 2) piercing damage."
+      },
+      {
+        "name": "Spear",
+        "text": "Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 5 (1d6 + 2) piercing damage, or 6 (1d8 + 2) piercing damage if used with two hands to make a melee attack."
+      },
+      {
+        "name": "Longbow",
+        "text": "Ranged Weapon Attack: +3 to hit, range 150/600 ft., one target. Hit: 5 (1d8 + 1) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 4 (1W4+2) Stichschaden."
+      },
+      {
+        "name": "Speer",
+        "text": "Nah- oder Fernkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m oder Reichweite 6/18 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden oder 6 (1W8+2) Stichschaden bei zweihändiger Führung und Nahkampfangriff."
+      },
+      {
+        "name": "Langbogen",
+        "text": "Fernkampfwaffenangriff: +3 auf Treffer, Reichweite 45/180 m, ein Ziel. Treffer: 5 (1W8+1) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/345/1000/1000/636252777224997611.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "mittel"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoid"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "GnollBow (1).webp",
+    "variant": "bow"
+  },
+  "tokens": [
+    {
+      "file": "GnollBow (2).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "GnollBow (3).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "GnollBow (4).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "GnollBow (5).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "GnollBow (6).webp",
+      "variant": "bow"
+    },
+    {
+      "file": "GnollSpear (1).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (10).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (11).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (12).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (13).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (14).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (15).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (16).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (17).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (18).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (19).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (2).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (20).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (3).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (4).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (5).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (6).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (7).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (8).webp",
+      "variant": "spear"
+    },
+    {
+      "file": "GnollSpear (9).webp",
+      "variant": "spear"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

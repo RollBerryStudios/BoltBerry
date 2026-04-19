@@ -1,0 +1,274 @@
+{
+  "id": 285,
+  "slug": "treant",
+  "name": "Treant",
+  "nameDe": "Baumhirte",
+  "source": "SRD",
+  "meta": {
+    "en": "Huge plant, chaotic good",
+    "de": "Riesige Pflanze, chaotisch gut"
+  },
+  "challenge": "9",
+  "xp": 5000,
+  "ac": {
+    "en": "16 (Natural Armor)",
+    "de": "16 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "138 (12d12 + 60)",
+    "de": "138 (12W12+60)"
+  },
+  "str": 23,
+  "dex": 8,
+  "con": 21,
+  "int": 12,
+  "wis": 16,
+  "cha": 12,
+  "strMod": 6,
+  "dexMod": -1,
+  "conMod": 5,
+  "intMod": 1,
+  "wisMod": 3,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Druidic",
+      "Elvish",
+      "Sylvan"
+    ],
+    "de": [
+      "Druidisch",
+      "Elfisch",
+      "Gemeinsprache",
+      "Sylvanisch"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "False Appearance",
+        "text": "While the treant remains motionless, it is indistinguishable from a normal tree."
+      },
+      {
+        "name": "Siege Monster",
+        "text": "The treant deals double damage to objects and structures."
+      }
+    ],
+    "de": [
+      {
+        "name": "Belagerungsmonster",
+        "text": "Der Baumhirte fügt Gegenständen und Gebäuden doppelten Schaden zu."
+      },
+      {
+        "name": "Falsches Erscheinungsbild",
+        "text": "Solange der Baumhirte sich nicht bewegt, ist er nicht von einem gewöhnlichen Baum zu unterscheiden."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The treant makes two slam attacks."
+      },
+      {
+        "name": "Slam",
+        "text": "Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 16 (3d6 + 6) bludgeoning damage."
+      },
+      {
+        "name": "Rock",
+        "text": "Ranged Weapon Attack: +10 to hit, range 60/180 ft., one target. Hit: 28 (4d10 + 6) bludgeoning damage."
+      },
+      {
+        "name": "Animate Trees",
+        "text": "The treant magically animates one or two trees it can see within 60 feet of it. These trees have the same statistics as a treant, except they have Intelligence and Charisma scores of 1, they can't speak, and they have only the Slam action option. An animated tree acts as an ally of the treant. The tree remains animate for 1 day or until it dies; until the treant dies or is more than 120 feet from the tree; or until the treant takes a bonus action to turn it back into an inanimate tree. The tree then takes root if possible."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Baumhirte führt zwei Hiebangriffe aus."
+      },
+      {
+        "name": "Hieb",
+        "text": "Nahkampfwaffenangriff: +10 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 16 (3W6+6) Wuchtschaden."
+      },
+      {
+        "name": "Felsblock",
+        "text": "Fernkampfwaffenangriff: +10 auf Treffer, Reichweite 18/54 m, ein Ziel. Treffer: 28 (4W10+6) Wuchtschaden."
+      },
+      {
+        "name": "Bäume beleben (1-mal täglich)",
+        "text": "Der Baumhirte belebt magisch einen oder zwei Bäume im Abstand von bis zu 18 Metern, die er sehen kann. Diese Bäume haben die gleichen Spielwerte wie der Baumhirte, allerdings mit folgenden Abweichungen: Sie haben einen Intelligenz- und einen Charismawert von 1, können nicht sprechen und haben nur die Hieb-Aktionsmöglichkeit. Belebte Bäume agieren als Verbündete des Baumhirten. Sie bleiben einen Tag lang belebt oder bis sie sterben, der Baumhirte stirbt, er sich weiter als 36 Meter von ihnen entfernt oder sie als Bonusaktion wieder in normale Bäume verwandelt. In diesem Fall versuchen sie, sich wieder zu verwurzeln."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/97/315/315/636252740537990664.jpeg",
+  "size": {
+    "en": "huge",
+    "de": "Riesig"
+  },
+  "type": {
+    "en": "plant",
+    "de": "Pflanze"
+  },
+  "alignment": {
+    "en": "chaotic good",
+    "de": "chaotisch gut"
+  },
+  "token": {
+    "file": "TreantEvil (1).webp",
+    "variant": "evil"
+  },
+  "tokens": [
+    {
+      "file": "TreantEvil (2).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "TreantEvil (3).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "TreantEvil (4).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "TreantEvil (5).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "TreantEvil (6).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "TreantEvil (7).webp",
+      "variant": "evil"
+    },
+    {
+      "file": "TreantNormal (1).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (10).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (11).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (12).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (13).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (14).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (15).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (16).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (17).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (18).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (19).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (2).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (20).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (21).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (22).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (23).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (24).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (25).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (26).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (27).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (3).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (4).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (5).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (6).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (7).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (8).webp",
+      "variant": "normal"
+    },
+    {
+      "file": "TreantNormal (9).webp",
+      "variant": "normal"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

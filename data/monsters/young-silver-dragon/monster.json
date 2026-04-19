@@ -1,0 +1,184 @@
+{
+  "id": 325,
+  "slug": "young-silver-dragon",
+  "name": "Young Silver Dragon",
+  "nameDe": "Junger Silberdrache",
+  "source": "SRD",
+  "meta": {
+    "en": "Large dragon, lawful good",
+    "de": "Großer Drache, rechtschaffen gut"
+  },
+  "challenge": "9",
+  "xp": 5000,
+  "ac": {
+    "en": "18 (Natural Armor)",
+    "de": "18 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "168 (16d10 + 80)",
+    "de": "168 (16W10+80)"
+  },
+  "str": 23,
+  "dex": 10,
+  "con": 21,
+  "int": 14,
+  "wis": 11,
+  "cha": 19,
+  "strMod": 6,
+  "dexMod": 0,
+  "conMod": 5,
+  "intMod": 2,
+  "wisMod": 0,
+  "chaMod": 4,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    },
+    "fly": {
+      "en": 80,
+      "de": 24
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 30 ft.",
+      "Darkvision 120 ft.",
+      "passive perception 18"
+    ],
+    "de": [
+      "Blindsicht 9 m",
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 18"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Draconic"
+    ],
+    "de": [
+      "Drakonisch",
+      "Gemeinsprache"
+    ]
+  },
+  "savingThrows": [
+    "Ges +4",
+    "Kon +9",
+    "Wei +4",
+    "Cha +8"
+  ],
+  "skills": [
+    "Arkane Kunde +6",
+    "Geschichte +6",
+    "Heimlichkeit +4",
+    "Wahrnehmung +8"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The dragon makes three attacks: one with its bite and two with its claws."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +10 to hit, reach 10 ft., one target. Hit: 17 (2d10 + 6) piercing damage."
+      },
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 13 (2d6 + 6) slashing damage."
+      },
+      {
+        "name": "Breath Weapons (Recharge 5-6)",
+        "text": "The dragon uses one of the following breath weapons:"
+      },
+      {
+        "name": "Cold Breath",
+        "text": "The dragon exhales an icy blast in a 30-foot cone. Each creature in that area must make a DC 17 Constitution saving throw, taking 54 (12d8) cold damage on a failed save, or half as much damage on a successful one."
+      },
+      {
+        "name": "Paralyzing Breath",
+        "text": "The dragon exhales paralyzing gas in a 30-foot cone. Each creature in that area must succeed on a DC 17 Constitution saving throw or be paralyzed for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Drache führt drei Angriffe aus: einen mit seinem Biss und zwei mit seinen Klauen."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +10 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 17 (2W10+6) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +10 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 13 (2W6+6) Hiebschaden."
+      },
+      {
+        "name": "Odemwaffen (Aufladung 5–6)",
+        "text": "Der Drache setzt eine der folgenden Odemwaffen ein:"
+      },
+      {
+        "name": "Kälteodem",
+        "text": "Der Drache atmet in einem Kegel von neun Metern Länge eisige Luft aus. Jede Kreatur in diesem Bereich muss einen SG-17-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 54 (12W8) Kälteschaden, anderenfalls die Hälfte."
+      },
+      {
+        "name": "Lähmender Odem",
+        "text": "Der Drache atmet lähmendes Gas in einem Kegel von neun Metern aus. Jede Kreatur in diesem Bereich muss einen SG-17-Konstitutionsrettungswurf bestehen, oder sie ist eine Minute lang gelähmt. Eine Kreatur kann den Rettungswurf am Ende jedes ihrer Züge wiederholen und den Effekt bei einem Erfolg beenden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/401/315/315/636252784740667730.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "dragon",
+    "de": "Drache"
+  },
+  "alignment": {
+    "en": "lawful good",
+    "de": "rechtschaffen gut"
+  },
+  "token": {
+    "file": "YoungSilverDragon (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "YoungSilverDragon (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungSilverDragon (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungSilverDragon (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungSilverDragon (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungSilverDragon (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungSilverDragon (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungSilverDragon (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungSilverDragon (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

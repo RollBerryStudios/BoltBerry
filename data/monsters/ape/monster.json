@@ -1,0 +1,166 @@
+{
+  "id": 29,
+  "slug": "ape",
+  "name": "Ape",
+  "nameDe": "Menschenaffe",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "19 (3d8 + 6)",
+    "de": "19 (3W8+6)"
+  },
+  "str": 16,
+  "dex": 14,
+  "con": 14,
+  "int": 6,
+  "wis": 12,
+  "cha": 7,
+  "strMod": 3,
+  "dexMod": 2,
+  "conMod": 2,
+  "intMod": -2,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "climb": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Athletik +5",
+    "Wahrnehmung +3"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The ape makes two fist attacks."
+      },
+      {
+        "name": "Fist",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) bludgeoning damage."
+      },
+      {
+        "name": "Rock",
+        "text": "Ranged Weapon Attack: +5 to hit, range 25/50 ft., one target. Hit: 6 (1d6 + 3) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Menschenaffe führt zwei Faustangriffe aus."
+      },
+      {
+        "name": "Faust",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W6+3) Wuchtschaden."
+      },
+      {
+        "name": "Felsblock",
+        "text": "Fernkampfwaffenangriff: +5 auf Treffer, Reichweite 7,5/15 m, ein Ziel. Treffer: 6 (1W6+3) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Ape (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Ape (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ape (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ape (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ape (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ape (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ape (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ape (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ape (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ape (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ape (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ape (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ape (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ape (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

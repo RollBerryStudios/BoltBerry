@@ -1,0 +1,26 @@
+{
+  "id": 264,
+  "slug": "oil-of-etherealness",
+  "name": "Oil of Etherealness",
+  "nameDe": "Öl der Körperlosigkeit",
+  "category": {
+    "en": "POTIONS_OILS",
+    "de": "Tränke & Öle"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 192000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Potion, rare Beads of this cloudy gray oil form on the outside of its container and quickly evaporate. The oil can cover a Medium or smaller creature, along with the equipment it's wearing and carrying (one additional vial is required for each size category above Medium). Applying the oil takes 10 minutes. The affected creature then gains the effect of the etherealness spell for 1 hour.",
+    "de": "An der Außenseite des Behälters bilden sich Tropfen dieses trübgrauen Öls, die schnell verdunsten. Das Öl kann eine höchstens mittelgroße Kreatur mit all ihrer getragenen und mitgeführten Ausrüstung bedecken (für jede Größenkategorie über mittelgroß wird eine weitere Phiole benötigt). Das Aufträgen des Öls dauert zehn Minuten. Die vom Öl bedeckte Kreatur erhält eine Stunde lang den Effekt des Zaubers Ätherische Gestalten ."
+  },
+  "image": "potions-and-oils",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

@@ -1,0 +1,60 @@
+{
+  "id": 137,
+  "slug": "plant-growth",
+  "name": "Plant Growth",
+  "nameDe": "Pflanzenwachstum",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "druid",
+      "ranger"
+    ],
+    "de": [
+      "Barde",
+      "Druide",
+      "Waldläufer"
+    ]
+  },
+  "type": {
+    "en": "3rd-level transmutation",
+    "de": "Stufe 3 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action or 8 hours",
+    "de": "1 Aktion oder 8 Stunden"
+  },
+  "range": {
+    "en": "150 feet",
+    "de": "45 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "This spell channels vitality into plants within a specific area. There are two possible uses for the spell, granting either immediate or long-term benefits. If you cast this spell using 1 action, choose a point within range. All normal plants in a 100-foot radius centered on that point become thick and overgrown. A creature moving through the area must spend 4 feet of movement for every 1 foot it moves. You can exclude one or more areas of any size within the spell's area from being affected. If you cast this spell over 8 hours, you enrich the land. All plants in a half-mile radius centered on a point within range become enriched for 1 year. The plants yield twice the normal amount of food when harvested.",
+    "de": "Dieser Zauber kanalisiert Vitalität in Pflanzen in einem bestimmten Bereich. Es gibt zwei Anwendungsarten für diesen Zauber, die entweder unmittelbare oder langfristige Effekte haben. Wirkst du diesen Zauber als Aktion, wähle einen Punkt in Reichweite aus. Alle normalen Pflanzen in einem Radius von 30 Metern um diesen Punkt wachsen und wuchern. Jede Kreatur in dem Bereich muss für jeden Meter, den sie sich bewegt, vier Meter ihrer Bewegungsrate verwenden. Du kannst einen oder mehrere Bereiche beliebiger Größe im Wirkungsbereich davon ausschließen. Wirkst du diesen Zauber im Verlauf von acht Stunden, machst du das Land fruchtbar. Alle Pflanzen in einem Radius von 0,8 Kilometern, der auf einem Punkt in Reichweite zentriert ist, werden ein Jahr lang ertragreich. Bei der Ernte erzeugen sie doppelt so viel Nahrung wie gewöhnlich."
+  },
+  "image": "plant-growth",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

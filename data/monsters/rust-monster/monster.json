@@ -1,0 +1,158 @@
+{
+  "id": 248,
+  "slug": "rust-monster",
+  "name": "Rust Monster",
+  "nameDe": "Rostmonster",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium monstrosity, unaligned",
+    "de": "Mittelgroße Monstrosität, ohne Gesinnung"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "14 (Natural Armor)",
+    "de": "14 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "27 (5d8 + 5)",
+    "de": "27 (5W8+5)"
+  },
+  "str": 13,
+  "dex": 12,
+  "con": 13,
+  "int": 2,
+  "wis": 13,
+  "cha": 6,
+  "strMod": 1,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Iron Scent",
+        "text": "The rust monster can pinpoint, by scent, the location of ferrous metal within 30 feet of it."
+      },
+      {
+        "name": "Rust Metal",
+        "text": "Any nonmagical weapon made of metal that hits the rust monster corrodes. After dealing damage, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Nonmagical ammunition made of metal that hits the rust monster is destroyed after dealing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Eisenwitterung",
+        "text": "Das Rostmonster kann eisenartiges Metall im Abstand von bis zu neun Metern von ihm wittern und lokalisieren."
+      },
+      {
+        "name": "Metall verrosten",
+        "text": "Jede nichtmagische Waffe aus Metall, die das Rostmonster trifft, korrodiert. Wenn die Waffe Schaden bewirkt hat, erhält sie einen permanenten und kumulativen Malus von -1 auf Schadenswürfe. Sinkt ihr Malus auf -5, wird die Waffe zerstört. Nichtmagische Munition aus Metall, die das Rostmonster trifft, wird zerstört, nachdem sie Schaden bewirkt hat."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 5 (1d8 + 1) piercing damage."
+      },
+      {
+        "name": "Antennae",
+        "text": "The rust monster corrodes a nonmagical ferrous metal object it can see within 5 feet of it. If the object isn't being worn or carried, the touch destroys a 1-foot cube of it. If the object is being worn or carried by a creature, the creature can make a DC 11 Dexterity saving throw to avoid the rust monster's touch.\nIf the object touched is either metal armor or a metal shield being worn or carried, its takes a permanent and cumulative -1 penalty to the AC it offers. Armor reduced to an AC of 10 or a shield that drops to a +0 bonus is destroyed. If the object touched is a held metal weapon, it rusts as described in the Rust Metal trait."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W8+1) Stichschaden."
+      },
+      {
+        "name": "Antennen",
+        "text": "Das Rostmonster korrodiert ein Objekt aus eisenartigem Metall im Abstand von bis zu 1,5 Metern von ihm, das es sehen kann. Wenn das Objekt nicht getragen oder gehalten wird, zerstört die Berührung einen würfelförmigen Teil von 30 Zentimetern Kantenlänge davon. Wenn das Objekt von einer Kreatur getragen oder gehalten wird, kann diese einen SG-11-Geschicklichkeitsrettungswurf ausführen, um die Berührung des Rostmonsters zu vermeiden. Wenn das getragene oder gehaltene berührte Objekt entweder eine Metallrüstung oder ein Metallschild ist, erleidet es einen permanenten und kumulativen Malus von -1 auf die RK, die es gewährt. Rüstungen, deren RK auf 10 sinkt, und Schilde, deren Bonus auf +0 sinkt, werden zerstört. Wenn das berührte Objekt eine Metallwaffe ist, die gehalten wird, verrostet sie wie beim Merkmal Metall verrosten beschrieben."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/207/1000/1000/636252764265020108.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "RustMonster (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "RustMonster (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "RustMonster (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "RustMonster (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "RustMonster (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "RustMonster (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "RustMonster (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "RustMonster (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "RustMonster (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "RustMonster (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

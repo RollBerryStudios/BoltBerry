@@ -1,0 +1,841 @@
+{
+  "id": 211,
+  "slug": "noble",
+  "name": "Noble",
+  "nameDe": "Adeliger",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "1/8",
+  "xp": 25,
+  "ac": {
+    "en": "15 (Breastplate)",
+    "de": "15 (Brustplatte)"
+  },
+  "hp": {
+    "en": "9 (2d8)",
+    "de": "9 (2W8)"
+  },
+  "str": 11,
+  "dex": 12,
+  "con": 11,
+  "int": 12,
+  "wis": 14,
+  "cha": 16,
+  "strMod": 0,
+  "dexMod": 1,
+  "conMod": 0,
+  "intMod": 1,
+  "wisMod": 2,
+  "chaMod": 3,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 12"
+    ],
+    "de": [
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any two languages"
+    ],
+    "de": [
+      "Zwei beliebige Sprachen"
+    ]
+  },
+  "skills": [
+    "Motiv erkennen +4",
+    "Täuschen +5",
+    "Überzeugen +5"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Rapier",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 5 (1d8 + 1) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rapier",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W8+1) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/277/1000/1000/636252769861281900.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (jedes Volk)"
+  },
+  "alignment": {
+    "en": "any alignment",
+    "de": "jede Gesinnung"
+  },
+  "token": {
+    "file": "NobleDragonborn (1).webp",
+    "variant": "dragonborn"
+  },
+  "tokens": [
+    {
+      "file": "NobleDragonborn (10).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "NobleDragonborn (11).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "NobleDragonborn (12).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "NobleDragonborn (13).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "NobleDragonborn (2).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "NobleDragonborn (3).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "NobleDragonborn (4).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "NobleDragonborn (5).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "NobleDragonborn (6).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "NobleDragonborn (7).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "NobleDragonborn (8).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "NobleDragonborn (9).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "NobleDwarfFemale (1).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "NobleDwarfFemale (2).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "NobleDwarfFemale (3).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "NobleDwarfMale (1).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "NobleDwarfMale (2).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "NobleDwarfMale (3).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "NobleDwarfMale (4).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "NobleDwarfMale (5).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "NobleDwarfMale (6).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "NobleDwarfMale (7).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "NobleElfFemale (1).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "NobleElfFemale (10).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "NobleElfFemale (11).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "NobleElfFemale (2).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "NobleElfFemale (3).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "NobleElfFemale (4).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "NobleElfFemale (5).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "NobleElfFemale (6).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "NobleElfFemale (7).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "NobleElfFemale (8).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "NobleElfFemale (9).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "NobleElfMale (1).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "NobleElfMale (2).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "NobleElfMale (3).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "NobleElfMale (4).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "NobleElfMale (5).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "NobleElfMale (6).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "NobleElfMale (7).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "NobleElfMale (8).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "NobleElfMale (9).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "NobleGnomeFemale (1).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "NobleGnomeFemale (10).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "NobleGnomeFemale (2).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "NobleGnomeFemale (3).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "NobleGnomeFemale (4).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "NobleGnomeFemale (5).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "NobleGnomeFemale (6).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "NobleGnomeFemale (7).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "NobleGnomeFemale (8).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "NobleGnomeFemale (9).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "NobleGnomeMale (1).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "NobleGnomeMale (10).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "NobleGnomeMale (2).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "NobleGnomeMale (3).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "NobleGnomeMale (4).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "NobleGnomeMale (5).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "NobleGnomeMale (6).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "NobleGnomeMale (7).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "NobleGnomeMale (8).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "NobleGnomeMale (9).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "NobleHalfElfFemale (1).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "NobleHalfElfFemale (10).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "NobleHalfElfFemale (2).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "NobleHalfElfFemale (3).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "NobleHalfElfFemale (4).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "NobleHalfElfFemale (5).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "NobleHalfElfFemale (6).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "NobleHalfElfFemale (7).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "NobleHalfElfFemale (8).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "NobleHalfElfFemale (9).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "NobleHalfElfMale (1).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "NobleHalfElfMale (2).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "NobleHalfElfMale (3).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "NobleHalfElfMale (4).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "NobleHalfElfMale (5).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "NobleHalfElfMale (6).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "NobleHalfElfMale (7).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "NobleHalfElfMale (8).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "NobleHalflingFemale (1).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "NobleHalflingFemale (10).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "NobleHalflingFemale (2).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "NobleHalflingFemale (3).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "NobleHalflingFemale (4).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "NobleHalflingFemale (5).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "NobleHalflingFemale (6).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "NobleHalflingFemale (7).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "NobleHalflingFemale (8).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "NobleHalflingFemale (9).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "NobleHalflingMale (1).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "NobleHalflingMale (10).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "NobleHalflingMale (11).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "NobleHalflingMale (12).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "NobleHalflingMale (13).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "NobleHalflingMale (14).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "NobleHalflingMale (2).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "NobleHalflingMale (3).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "NobleHalflingMale (4).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "NobleHalflingMale (5).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "NobleHalflingMale (6).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "NobleHalflingMale (7).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "NobleHalflingMale (8).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "NobleHalflingMale (9).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "NobleHalfOrcFemale (1).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "NobleHalfOrcFemale (10).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "NobleHalfOrcFemale (11).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "NobleHalfOrcFemale (2).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "NobleHalfOrcFemale (3).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "NobleHalfOrcFemale (4).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "NobleHalfOrcFemale (5).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "NobleHalfOrcFemale (6).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "NobleHalfOrcFemale (7).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "NobleHalfOrcFemale (8).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "NobleHalfOrcFemale (9).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "NobleHalfOrcMale (1).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "NobleHalfOrcMale (10).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "NobleHalfOrcMale (2).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "NobleHalfOrcMale (3).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "NobleHalfOrcMale (4).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "NobleHalfOrcMale (5).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "NobleHalfOrcMale (6).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "NobleHalfOrcMale (7).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "NobleHalfOrcMale (8).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "NobleHalfOrcMale (9).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "NobleHumanFemale (1).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanFemale (10).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanFemale (11).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanFemale (12).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanFemale (13).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanFemale (14).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanFemale (15).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanFemale (16).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanFemale (17).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanFemale (18).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanFemale (2).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanFemale (3).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanFemale (4).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanFemale (5).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanFemale (6).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanFemale (7).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanFemale (8).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanFemale (9).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "NobleHumanMale (1).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleHumanMale (10).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleHumanMale (11).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleHumanMale (12).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleHumanMale (13).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleHumanMale (14).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleHumanMale (15).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleHumanMale (16).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleHumanMale (17).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleHumanMale (18).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleHumanMale (2).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleHumanMale (3).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleHumanMale (4).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleHumanMale (5).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleHumanMale (6).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleHumanMale (7).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleHumanMale (8).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleHumanMale (9).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "NobleTieflingFemale (1).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "NobleTieflingFemale (2).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "NobleTieflingFemale (3).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "NobleTieflingFemale (4).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "NobleTieflingFemale (5).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "NobleTieflingFemale (6).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "NobleTieflingFemale (7).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "NobleTieflingFemale (8).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "NobleTieflingFemale (9).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "NobleTieflingMale (1).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "NobleTieflingMale (10).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "NobleTieflingMale (11).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "NobleTieflingMale (12).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "NobleTieflingMale (13).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "NobleTieflingMale (2).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "NobleTieflingMale (3).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "NobleTieflingMale (4).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "NobleTieflingMale (5).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "NobleTieflingMale (6).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "NobleTieflingMale (7).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "NobleTieflingMale (8).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "NobleTieflingMale (9).webp",
+      "variant": "tieflingMale"
+    }
+  ],
+  "reactions": {
+    "en": [
+      {
+        "name": "Parry",
+        "text": "The noble adds 2 to its AC against one melee attack that would hit it. To do so, the noble must see the attacker and be wielding a melee weapon."
+      }
+    ],
+    "de": [
+      {
+        "name": "Parieren",
+        "text": "Der Adelige erhöht seine RK gegen einen Nahkampfangriff, der treffen würde, um 2. Dazu muss der Adelige den Angreifer sehen können und eine Nahkampfwaffe führen."
+      }
+    ]
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

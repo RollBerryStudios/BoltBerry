@@ -1,0 +1,26 @@
+{
+  "id": 362,
+  "slug": "portable-hole",
+  "name": "Portable Hole",
+  "nameDe": "Tragbares Loch",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 800000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, rare This fine black cloth, soft as silk, is folded up to the dimensions of a handkerchief. It unfolds into a circular sheet 6 feet in diameter. You can use an action to unfold a portable hole and place it on or against a solid surface, whereupon the portable hole creates an extradimensional hole 10 feet deep. The cylindrical space within the hole exists on a different plane, so it can't be used to create open passages. Any creature inside an open portable hole can exit the hole by climbing out of it. You can use an action to close a portable hole by taking hold of the edges of the cloth and folding it up. Folding the cloth closes the hole, and any creatures or objects within remain in the extradimensional space. No matter what's in it, the hole weighs next to nothing. If the hole is folded up, a creature within the hole's extradimensional space can use an action to make a DC 10 Strength check. On a successful check, the creature forces its way out and appears within 5 feet of the portable hole or the creature carrying it. A breathing creature within a closed portable hole can survive for up to 10 minutes, after which time it begins to suffocate. Placing a portable hole inside an extradimensional space created by a bag of holding, handy haversack, or similar item instantly destroys both items and opens a gate to the Astral Plane. The gate originates where the one item was placed inside the other. Any creature within 10 feet of the gate is sucked through it and deposited in a random location on the Astral Plane. The gate then closes. The gate is one-way only and can't be reopened.",
+    "de": "Dieses feine, schwarze Tuch ist seidenweich und auf die Größe eines Taschentuchs zusammengefaltet. Ausgebreitet ist es ein kreisrundes Tuch mit einem Durchmesser von 1,8 Metern. Du kannst ein Tragbares Loch  als Aktion ausbreiten und auf oder gegen eine feste Oberfläche legen. Daraufhin erzeugt das Tragbare Loch  ein drei Meter tiefes extradimensionales Loch. Der zylindrische Raum im Inneren des Lochs befindet sich auf einer anderen Ebene, sodass das Loch nicht verwendet werden kann, um Durchgänge zu öffnen. Eine Kreatur innerhalb eines offenen Tragbaren Lochs  kann aus dem Loch hinausklettern. Du kannst ein Tragbares Loch  als Aktion schließen, indem du den Rand des Tuchs greifst und es zusammenfaltest Durch das Falten des Stoffs schließt sich das Loch und Kreaturen oder Gegenstände in seinem Inneren bleiben im extradimensionalen Raum. Das Loch wiegt unabhängig von seinem Inhalt fast nichts. Wenn das Loch zusammengefaltet ist, kann eine Kreatur im Inneren des extradimensionalen Raums als Aktion einen SG-10-Stärkewurf ausführen. Bei einem Erfolg gelangt die Kreatur aus dem Loch und erscheint im Abstand von bis zu 1,5 Metern vom Tragbaren Loch  oder von der Kreatur, die es trägt. Eine atmende Kreatur in einem geschlossenen Tragbaren Loch  kann bis zu zehn Minuten lang überleben. Danach beginnt sie zu ersticken. Wenn ein Tragbares Loch  in den extradimensionalen Raum eines Nimmervollen Beutels , eines Praktischen Rucksacks  oder eines ähnlichen Gegenstands gelangt, zerstört dies sofort beide Gegenstände, und ein Tor in die Astralebene öffnet sich. Das Tor erscheint dort, wo der eine Gegenstand in den anderen gelangt ist. Kreaturen im Abstand von bis zu drei Metern vom Tor werden hineingezogen und an einen zufälligen Ort auf der Astralebene transportiert. Dann schließt sich das Tor. Das Tor funktioniert nur in eine Richtung und kann nicht wieder geöffnet werden."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

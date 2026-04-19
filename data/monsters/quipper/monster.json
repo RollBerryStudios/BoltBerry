@@ -1,0 +1,199 @@
+{
+  "id": 236,
+  "slug": "quipper",
+  "name": "Quipper",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny beast, unaligned",
+    "de": "Winzige Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": "13",
+  "hp": {
+    "en": "1 (1d4 - 1)",
+    "de": "1 (1W4 - 1)"
+  },
+  "str": 2,
+  "dex": 16,
+  "con": 9,
+  "int": 1,
+  "wis": 7,
+  "cha": 2,
+  "strMod": -4,
+  "dexMod": 3,
+  "conMod": -1,
+  "intMod": -5,
+  "wisMod": -2,
+  "chaMod": -4,
+  "speed": {
+    "run": 0,
+    "swim": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 8"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 8"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Blood Frenzy",
+        "text": "The quipper has advantage on melee attack rolls against any creature that doesn't have all its hit points."
+      },
+      {
+        "name": "Water Breathing",
+        "text": "The quipper can breathe only underwater."
+      }
+    ],
+    "de": [
+      {
+        "name": "Blutrausch",
+        "text": "Der Quipper ist bei Nahkampf-Angriffswürfen gegen Kreaturen, die nicht alle Trefferpunkte besitzen, im Vorteil."
+      },
+      {
+        "name": "Wasser atmen",
+        "text": "Der Quipper kann nur unter Wasser atmen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 1 piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 1 Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/253/1000/1000/636252767919065233.jpeg",
+  "size": {
+    "en": "tiny",
+    "de": "winzig"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Bestie"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "ohne Ausrichtung"
+  },
+  "token": {
+    "file": "Quipper (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Quipper (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quipper (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

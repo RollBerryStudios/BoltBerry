@@ -1,0 +1,64 @@
+{
+  "id": 316,
+  "slug": "spider-climb",
+  "name": "Spider Climb",
+  "nameDe": "Spinnenklettern",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-level transmutation",
+    "de": "Stufe 2 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a drop of bitumen and a spider",
+      "de": "ein Tropfen Bitumen und eine Spinne"
+    },
+    "raw": {
+      "en": "V, S, M (a drop of bitumen and a spider)",
+      "de": "V, G, M (ein Tropfen Bitumen und eine Spinne)"
+    }
+  },
+  "description": {
+    "en": "Until the spell ends, one willing creature you touch gains the ability to move up, down, and across vertical surfaces and upside down along ceilings, while leaving its hands free. The target also gains a climbing speed equal to its walking speed.",
+    "de": "Eine bereitwillige Kreatur, die du berührst, erhält für die Wirkungsdauer die Fähigkeit, sich in alle Richtungen und mit freien Händen über senkrechte Oberflächen sowie an Decken zu bewegen. Ihre Kletterbewegungsrate entspricht zudem ihrer Schrittbewegungsrate."
+  },
+  "image": "spider-climb",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

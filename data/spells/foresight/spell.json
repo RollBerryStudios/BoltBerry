@@ -1,0 +1,66 @@
+{
+  "id": 171,
+  "slug": "foresight",
+  "name": "Foresight",
+  "nameDe": "Voraussicht",
+  "level": {
+    "en": "9",
+    "de": "Grad 9"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "druid",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Druide",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "9th-level divination",
+    "de": "Stufe 9 Erkenntnismagie"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "8 hours",
+    "de": "8 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a hummingbird feather",
+      "de": "eine Kolibrifeder"
+    },
+    "raw": {
+      "en": "V, S, M (a hummingbird feather)",
+      "de": "V, G, M (eine Kolibrifeder)"
+    }
+  },
+  "description": {
+    "en": "You touch a willing creature and bestow a limited ability to see into the immediate future. For the duration, the target can't be surprised and has advantage on attack rolls, ability checks, and saving throws. Additionally, other creatures have disadvantage on attack rolls against the target for the duration. This spell immediately ends if you cast it again before its duration ends.",
+    "de": "Du berührst eine bereitwillige Kreatur und verleihst ihr die eingeschränkte Fähigkeit, in die unmittelbare Zukunft zu blicken. Für die Wirkungsdauer kann das Ziel nicht überrascht werden und ist bei Angriffs-, Attributs- und Rettungswürfen im Vorteil. Zudem sind andere Kreaturen für die Wirkungsdauer bei Angriffswürfen gegen das Ziel im Nachteil. Der Zauber endet sofort, wenn du ihn vor Ablauf der Wirkungsdauer erneut wirkst."
+  },
+  "image": "detect-thoughts",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

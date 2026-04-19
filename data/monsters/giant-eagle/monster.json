@@ -1,0 +1,222 @@
+{
+  "id": 126,
+  "slug": "giant-eagle",
+  "name": "Giant Eagle",
+  "nameDe": "Riesenadler",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, neutral good",
+    "de": "Große Bestie, neutral gut"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "13",
+    "de": "13"
+  },
+  "hp": {
+    "en": "26 (4d10 + 4)",
+    "de": "26 (4W10+4)"
+  },
+  "str": 16,
+  "dex": 17,
+  "con": 13,
+  "int": 8,
+  "wis": 14,
+  "cha": 10,
+  "strMod": 3,
+  "dexMod": 3,
+  "conMod": 1,
+  "intMod": -1,
+  "wisMod": 2,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "fly": {
+      "en": 80,
+      "de": 24
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 14"
+    ],
+    "de": [
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Giant Eagle",
+      "understands Common and Auran but can't speak"
+    ],
+    "de": [
+      "Riesenadlerisch",
+      "versteht Aural und Gemeinsprache",
+      "aber kann sie nicht sprechen"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Sight",
+        "text": "The eagle has advantage on Wisdom (Perception) checks that rely on sight."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfe Sicht",
+        "text": "Der Adler ist bei Weisheitswürfen (Wahrnehmung), die auf Sicht basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The eagle makes two attacks: one with its beak and one with its talons."
+      },
+      {
+        "name": "Beak",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) piercing damage."
+      },
+      {
+        "name": "Talons",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Adler führt zwei Angriffe aus: einen Schnabel- und einen Klauenangriff."
+      },
+      {
+        "name": "Krallen",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Hiebschaden."
+      },
+      {
+        "name": "Schnabel",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W6+3) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/9/894/315/315/636334286969931904.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "neutral good",
+    "de": "neutral gut"
+  },
+  "token": {
+    "file": "GiantEagle (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GiantEagle (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantEagle (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

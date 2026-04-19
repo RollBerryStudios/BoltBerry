@@ -1,0 +1,64 @@
+{
+  "id": 244,
+  "slug": "dream",
+  "name": "Dream",
+  "nameDe": "Traum",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "5th-level illusion",
+    "de": "Stufe 5 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "Special",
+    "de": "Speziell"
+  },
+  "duration": {
+    "en": "8 hours",
+    "de": "8 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a handful of sand, a dab of ink, and a writing quill plucked from a sleeping bird",
+      "de": "eine Handvoll Sand, einen Klecks Tinte und eine Schreibfeder, die einem schlafenden Vogel entrissen wurde"
+    },
+    "raw": {
+      "en": "V, S, M (a handful of sand, a dab of ink, and a writing quill plucked from a sleeping bird)",
+      "de": "V, G, M (eine Handvoll Sand, einen Klecks Tinte und eine Schreibfeder, die einem schlafenden Vogel entrissen wurde)"
+    }
+  },
+  "description": {
+    "en": "This spell shapes a creature's dreams. Choose a creature known to you as the target of this spell. The target must be on the same plane of existence as you. Creatures that don't sleep, such as elves, can't be contacted by this spell. You, or a willing creature you touch, enters a trance state, acting as a messenger. While in the trance, the messenger is aware of his or her surroundings, but can't take actions or move. If the target is asleep, the messenger appears in the target's dreams and can converse with the target as long as it remains asleep, through the duration of the spell. The messenger can also shape the environment of the dream, creating landscapes, objects, and other images. The messenger can emerge from the trance at any time, ending the effect of the spell early. The target recalls the dream perfectly upon waking. If the target is awake when you cast the spell, the messenger knows it, and can either end the trance (and the spell) or wait for the target to fall asleep, at which point the messenger appears in the target's dreams. You can make the messenger appear monstrous and terrifying to the target. If you do, the messenger can deliver a message of no more than ten words and then the target must make a wisdom saving throw. On a failed save, echoes of the phantasmal monstrosity spawn a nightmare that lasts the duration of the target's sleep and prevents the target from gaining any benefit from that rest. In addition, when the target wakes up, it takes 3d6 psychic damage. If you have a body part, lock of hair, clipping from a nail, or similar portion of the target's body, the target makes its saving throw with disadvantage.",
+    "de": "Dieser Zauber formt die Träume einer Kreatur. Wähle als Ziel eine Kreatur, die du kennst. Sie muss sich auf derselben Existenzebene befinden wie du. Kreaturen, die nicht schlafen, wie beispielsweise Elfen, sind von diesem Zauber nicht betroffen. Der Zauber versetzt dich oder eine bereitwillige Kreatur, die du berührst, in Trance - als Boten. Während der Trance ist sich der Bote seiner Umgebung bewusst, kann jedoch keine Aktionen ausführen oder sich bewegen. Wenn das Ziel schläft, erscheint der Bote in den Träumen des Ziels und kann mit ihm für die Wirkungsdauer des Zaubers sprechen, solange es schläft. Der Bote kann zudem die Umgebung des Traums gestalten und Landschaften, Gegenstände oder andere Bilder erschaffen. Der Bote kann die Trance jederzeit verlassen und den Zauber somit vorzeitig beenden. Das Ziel erinnert sich beim Aufwachen perfekt an den Traum. Ist das Ziel wach, wenn du den Zauber wirkst, weiß der Bote dies und kann die Trance (und den Zauber) entweder beenden oder warten, bis das Ziel einschläft und dann in dessen Träumen erscheinen. Du kannst den Boten für das Ziel monströs und furchteinflößend erscheinen lassen. In diesem Fall kann der Bote eine Nachricht von höchstens zehn Wörtern übermitteln. Dann muss das Ziel einen Weisheitsrettungswurf ausführen. Scheitert der Wurf, erschaffen die Echos der trügerischen Monstrosität einen Alptraum, der anhält, solange das Ziel schläft und verhindert, dass es die Effekte der Rast erhält. Außerdem erleidet das Ziel beim Aufwachen 3W6 psychischen Schaden. Besitzt du eine Haarsträhne, einen Fingernagel oder dergleichen vom Körper des Ziels, ist es beim Rettungswurf im Nachteil."
+  },
+  "image": "dream",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

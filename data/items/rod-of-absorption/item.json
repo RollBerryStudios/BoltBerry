@@ -1,0 +1,30 @@
+{
+  "id": 426,
+  "slug": "rod-of-absorption",
+  "name": "Rod of Absorption",
+  "nameDe": "Zepter der Absorption",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 5000000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Rod, very rare (requires attunement) While holding this rod, you can use your reaction to absorb a spell that is targeting only you and not with an area of effect. The absorbed spell's effect is canceled, and the spell's energy-not the spell itself-is stored in the rod. The energy has the same level as the spell when it was cast. The rod can absorb and store up to 50 levels of energy over the course of its existence. Once the rod absorbs 50 levels of energy, it can't absorb more. If you are targeted by a spell that the rod can't store, the rod has no effect on that spell. When you become attuned to the rod, you know how many levels of energy the rod has absorbed over the course of its existence, and how many levels of spell energy it currently has stored. If you are a spellcaster holding the rod, you can convert energy stored in it into spell slots to cast spells you have prepared or know. You can create spell slots only of a level equal to or lower than your own spell slots, up to a maximum of 5th level. You use the stored levels in place of your slots, but otherwise cast the spell as normal. For example, you can use 3 levels stored in the rod as a 3rd-level spell slot. A newly found rod has 1d10 levels of spell energy stored in it already. A rod that can no longer absorb spell energy and has no energy remaining becomes nonmagical.",
+    "de": "Wenn du dieses Zepter hältst, kannst du als Reaktion einen Zauber absorbieren, der nur dich als Ziel und keinen Wirkungsbereich hat. Der Effekt des absorbierten Zaubers wird aufgehoben und die Energie des Zaubers - nicht aber der Zauber selbst -wird im Zepter gespeichert. Die Energie entspricht dem Grad des Zaubers, als er gewirkt wurde. Das Zepter kann insgesamt bis zu 50 Zauberenergiegrade in sich aufnehmen. Nachdem das Zepter 50 Zauberenergiegrade aufgenommen hat, kann es keine Energie mehr aufnehmen. Wenn du das Ziel eines Zaubers bist, den das Zepter nicht speichern kann, hat das Zepter keinen Effekt auf diesen Zauber. Wenn du dich auf das Zepter eingestimmt hast, weißt du, wie viele Zauberenergiegrade das Zepter seit seiner Erschaffung absorbiert hat und wie viele aktuell in ihm gespeichert sind. Wenn du ein Zauberwirker bist und das Zepter hältst, kannst du die im Zepter gespeicherte Energie in Zauberplätze umwandeln, um Zauber zu wirken, die du vorbereitet hast oder kennst. Du kannst nur Zauberplätze bis zur Gradzahl deiner eigenen Zauberplätze oder niedriger erzeugen, maximal jedoch Zauberplätze des 5. Grades. Du verwendest die gespeicherten Grade anstelle deiner Zauberplätze. Ansonsten wirkst du die Zauber wie gewohnt. Du kannst zum Beispiel drei im Zepter gespeicherte Zauberenergiegrade als einen Zauberplatz des 3. Grades verwenden. Wenn es gefunden wird, sind in einem Zepter bereits 1W10 Zauberenergiegrade gespeichert. Ein Zepter, das keine weitere Zauberenergie aufnehmen kann und keine Energie mehr in sich gespeichert hat, wird nichtmagisch."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

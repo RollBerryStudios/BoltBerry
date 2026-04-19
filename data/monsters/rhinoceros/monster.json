@@ -1,0 +1,188 @@
+{
+  "id": 243,
+  "slug": "rhinoceros",
+  "name": "Rhinoceros",
+  "nameDe": "Nashorn",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "11 (Natural Armor)",
+    "de": "11 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "45 (6d10 + 12)",
+    "de": "45 (6W10+12)"
+  },
+  "str": 21,
+  "dex": 8,
+  "con": 15,
+  "int": 2,
+  "wis": 12,
+  "cha": 6,
+  "strMod": 5,
+  "dexMod": -1,
+  "conMod": 2,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 11"
+    ],
+    "de": [
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Charge",
+        "text": "If the rhinoceros moves at least 20 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra 9 (2d8) bludgeoning damage. If the target is a creature, it must succeed on a DC 15 Strength saving throw or be knocked prone."
+      }
+    ],
+    "de": [
+      {
+        "name": "Sturmangriff",
+        "text": "Wenn das Nashorn sich mindestens sechs Meter weit direkt auf ein Ziel zubewegt und es dann im selben Zug mit einem Zerfleischen-Angriff trifft, erleidet das Ziel zusätzlich 9 (2W8) Wuchtschaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-15-Stärkerettungswurf bestehen, oder es wird umgestoßen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Gore",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 14 (2d8 + 5) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Zerfleischen",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 14 (2W8+5) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Rhinoceros (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Rhinoceros (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Rhinoceros (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

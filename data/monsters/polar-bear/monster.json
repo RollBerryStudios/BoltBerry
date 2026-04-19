@@ -1,0 +1,259 @@
+{
+  "id": 229,
+  "slug": "polar-bear",
+  "name": "Polar Bear",
+  "nameDe": "Eisbär",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "12 (Natural Armor)",
+    "de": "12 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "42 (5d10 + 15)",
+    "de": "42 (5W10+15)"
+  },
+  "str": 20,
+  "dex": 10,
+  "con": 16,
+  "int": 2,
+  "wis": 13,
+  "cha": 7,
+  "strMod": 5,
+  "dexMod": 0,
+  "conMod": 3,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    },
+    "swim": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Smell",
+        "text": "The bear has advantage on Wisdom (Perception) checks that rely on smell."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfer Geruchssinn",
+        "text": "Der Bär ist bei Weisheitswürfen (Wahrnehmung), die auf Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The bear makes two attacks: one with its bite and one with its claws."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 9 (1d8 + 5) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 12 (2d6 + 5) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Bär führt zwei Angriffe aus: einen Biss- und einen Klauenangriff."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 9 (1W8+5) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 12 (2W6+5) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "PolarBear (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "PolarBear (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBear (9).webp",
+      "variant": ""
+    },
+    {
+      "file": "PolarBearSaddled (1).webp",
+      "variant": "saddled"
+    },
+    {
+      "file": "PolarBearSaddled (2).webp",
+      "variant": "saddled"
+    },
+    {
+      "file": "PolarBearSaddled (3).webp",
+      "variant": "saddled"
+    },
+    {
+      "file": "PolarBearSaddled (4).webp",
+      "variant": "saddled"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,55 @@
+{
+  "id": 27,
+  "slug": "faerie-fire",
+  "name": "Faerie Fire",
+  "nameDe": "Feenfeuer",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "druid"
+    ],
+    "de": [
+      "Barde",
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "1st-level evocation",
+    "de": "Stufe 1 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "Each object in a 20-foot cube within range is outlined in blue, green, or violet light (your choice). Any creature in the area when the spell is cast is also outlined in light if it fails a dexterity saving throw. For the duration, objects and affected creatures shed dim light in a 10-foot radius. Any attack roll against an affected creature or object has advantage if the attacker can see it, and the affected creature or object can't benefit from being invisible.",
+    "de": "Jeder Gegenstand innerhalb eines würfelförmigen Bereichs mit sechs Metern Kantenlänge in Reichweite wird von blauem, grünen oder violetten Licht umrahmt - deine Wahl. Auch Kreaturen im Wirkungsbereich des Zaubers werden von diesem Licht umspielt, es sei denn, sie bestehen einen Geschicklichkeitsrettungswurf. Während der Wirkungsdauer verströmen betroffene Gegenstände und Kreaturen ein dämmriges Licht in einem Radius von drei Metern. Angreifer sind bei Angriffswürfen gegen betroffene Kreaturen oder Gegenstände im Vorteil, wenn sie ihr Ziel sehen können. Die Ziele profitieren nicht von Unsichtbarkeit."
+  },
+  "image": "charm-person",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

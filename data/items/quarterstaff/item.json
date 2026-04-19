@@ -1,0 +1,36 @@
+{
+  "id": 20,
+  "slug": "quarterstaff",
+  "name": "Quarterstaff",
+  "nameDe": "Kampfstab",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 20,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 4,
+  "classification": {
+    "en": "Simple Melee Weapon",
+    "de": "Einfache Nahkampfwaffe"
+  },
+  "damage": "1d6",
+  "damageType": {
+    "en": "bludgeoning",
+    "de": "wucht"
+  },
+  "properties": {
+    "en": "versatile (1d8)",
+    "de": "vielseitig (1d8)"
+  },
+  "image": "quarterstaff",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,59 @@
+{
+  "id": 71,
+  "slug": "shillelagh",
+  "name": "Shillelagh",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid"
+    ],
+    "de": [
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "Transmutation cantrip",
+    "de": "Verwandlungsmagie Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 bonus action",
+    "de": "1 Bonusaktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "mistletoe, a shamrock leaf, and a club or quarterstaff",
+      "de": "ein Mistelzweig, ein Kleeblatt und eine Keule oder ein Quarterstaff"
+    },
+    "raw": {
+      "en": "V, S, M (mistletoe, a shamrock leaf, and a club or quarterstaff)",
+      "de": "V, G, M (ein Mistelzweig, ein Kleeblatt und eine Keule oder ein Quarterstaff)"
+    }
+  },
+  "description": {
+    "en": "The wood of a club or a quarterstaff you are holding is imbued with nature's power. For the duration, you can use your spellcasting ability instead of Strength for the attack and damage rolls of melee attacks using that weapon, and the weapon's damage die becomes a d8. The weapon also becomes magical, if it isn't already. The spell ends if you cast it again or if you let go of the weapon.",
+    "de": "Das Holz eines Knüppels oder Kampfstabs, den du in der Hand hältst, wird von der Macht der Natur erfüllt. Für die Wirkungsdauer kannst du für Angriffs- und Schadenswürfe von Nahkampfangriffen mit dieser Waffe dein Attribut zum Zauberwirken anstatt Stärke verwenden. Der Schadenswürfel der Waffe wird zu einem W8. Sie wird zudem magisch, falls sie es nicht bereits ist. Der Zauber endet, wenn du ihn erneut wirkst oder die Waffe loslässt."
+  },
+  "image": "shillelagh",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

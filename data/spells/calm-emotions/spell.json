@@ -1,0 +1,58 @@
+{
+  "id": 90,
+  "slug": "calm-emotions",
+  "name": "Calm Emotions",
+  "nameDe": "Gefühle besänftigen",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "2nd-level Enchantment",
+    "de": "Stufe 2 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You attempt to suppress strong emotions in a group of people. Each humanoid in a 20-foot-radius sphere centered on a point you choose within range must make a charisma saving throw; a creature can choose to fail this saving throw if it wishes. If a creature fails its saving throw, choose one of the following two effects. You can suppress any effect causing a target to be charmed or frightened. When this spell ends, any suppressed effect resumes, provided that its duration has not expired in the meantime. Alternatively, you can make a target indifferent about creatures of your choice that it is hostile toward. This indifference ends if the target is attacked or harmed by a spell or if it witnesses any of its friends being harmed. When the spell ends, the creature becomes hostile again, unless the GM rules otherwise.",
+    "de": "Du versuchst, starke Gefühle in einer Gruppe zu unterdrücken. Alle Humanoide innerhalb einer Sphäre mit einem Radius von sechs Metern, die auf einen Punkt deiner Wahl in Reichweite des Zaubers zentriert ist, müssen einen Charismarettungswurf ausführen. Eine Kreatur kann bei diesem Rettungswurf freiwillig scheitern. Scheitert der Wurf, wähle einen der folgenden Effekte aus: Du kannst jeden Effekt unterdrücken, der ein Ziel bezaubert oder verängstigt. Wenn der Zauber endet, wird jeder unterdrückte Effekt fortgesetzt, sofern seine Wirkungsdauer in der Zwischenzeit nicht abgelaufen ist. Alternativ kannst du ein Ziel Kreaturen gegenüber gleichgültig machen, denen es feindlich gesinnt ist. Diese Gleichgültigkeit endet, wenn das Ziel angegriffen oder durch einen Zauber verletzt wird oder sieht, wie einem seiner Verbündeten Schaden zugefügt wird. Wenn der Zauber endet, wird die Kreatur wieder feindlich gesinnt, sofern der SL nichts anderes festlegt."
+  },
+  "image": "calm-emotions",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

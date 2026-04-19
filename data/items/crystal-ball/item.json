@@ -1,0 +1,30 @@
+{
+  "id": 428,
+  "slug": "crystal-ball",
+  "name": "Crystal Ball",
+  "nameDe": "Kristallkugel",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 5000000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, very rare or legendary (requires attunement) The typical crystal ball, a very rare item, is about 6 inches in diameter. While touching it, you can cast the scrying spell (save DC 17) with it. The following crystal ball variants are legendary items and have additional properties. ***Crystal Ball of Mind Reading.*** You can use an action to cast the detect thoughts spell (save DC 17) while you are scrying with the crystal ball, targeting creatures you can see within 30 feet of the spell's sensor. You don't need to concentrate on this detect thoughts to maintain it during its duration, but it ends if scrying ends. ***Crystal Ball of Telepathy.*** While scrying with the crystal ball, you can communicate telepathically with creatures you can see within 30 feet of the spell's sensor. You can also use an action to cast the suggestion spell (save DC 17) through the sensor on one of those creatures. You don't need to concentrate on this suggestion to maintain it during its duration, but it ends if scrying ends. Once used, the suggestion power of the crystal ball can't be used again until the next dawn. ***Crystal Ball of True Seeing.*** While scrying with the crystal ball, you have truesight with a radius of 120 feet centered on the spell's sensor.",
+    "de": "Eine typische Kristallkugel ist ein sehr seltener Gegenstand und hat einen Durchmesser von etwa 15 Zentimetern. Wenn du sie berührst, kannst du den Zauber Ausspähung (Rettungswurf-SG 17) mit ihr wirken. Die folgenden Kristallkugel-Varianten sind legendäre Gegenstände und haben zusätzliche Eigenschaften. Kristallkugel des Gedankenlesens:  Während du mit der Kristallkugel ausspähst, kannst du als Aktion den Zauber Gedanken wahrnehmen  (Rettungswurf-SG 17) wirken. Du kannst dabei Kreaturen als Ziel auswählen, die du im Abstand von bis zu neun Metern vom Sensor des Zaubers sehen kannst. Du musst dich nicht auf Gedanken wahrnehmen  konzentrieren, um den Zauber während seiner Wirkungsdauer aufrechtzuerhalten. Er endet jedoch, wenn die Ausspähung  endet. Kristallkugel der Telepathie:  Während du mit der Kristallkugel ausspähst, kannst du telepathisch mit Kreaturen kommunizieren, die du im Abstand von bis zu neun Metern vom Sensor des Zaubers sehen kannst. Du kannst als Aktion auch den Zauber Einflüsterung  (Rettungswurf-SG 17) durch den Sensor auf eine dieser Kreaturen wirken. Du musst dich nicht auf Einflüsterung  konzentrieren, um den Zauber während seiner Wirkungsdauer aufrechtzuerhalten. Er endet jedoch, wenn die Ausspähung  endet Nachdem sie verwendet wurde, kann die Kristallkugel erst im nächsten Morgengrauen wieder für Einflüsterung  verwendet werden. Kristallkugel des Wahren Blicks:  Wenn du durch die Kristallkugel ausspähst, hast du in einem Radius von 36 Metern um den Sensor des Zaubers herum Wahrer Blick."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

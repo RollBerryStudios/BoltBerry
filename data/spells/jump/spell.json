@@ -1,0 +1,66 @@
+{
+  "id": 48,
+  "slug": "jump",
+  "name": "Jump",
+  "nameDe": "Springen",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "ranger",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Druide",
+      "Waldläufer",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level transmutation",
+    "de": "Stufe 1 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a grasshopper's hind leg",
+      "de": "das Hinterbein einer Heuschrecke"
+    },
+    "raw": {
+      "en": "V, S, M (a grasshopper's hind leg)",
+      "de": "V, G, M (das Hinterbein einer Heuschrecke)"
+    }
+  },
+  "description": {
+    "en": "You touch a creature. The creature's jump distance is tripled until the spell ends.",
+    "de": "Du berührst eine Kreatur. Die Sprungdistanz der Kreatur wird bis zum Ende des Zaubers verdreifacht."
+  },
+  "image": "jump",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

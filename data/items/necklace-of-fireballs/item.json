@@ -1,0 +1,26 @@
+{
+  "id": 232,
+  "slug": "necklace-of-fireballs",
+  "name": "Necklace of Fireballs",
+  "nameDe": "Halskette der Feuerbälle",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 300000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, rare This necklace has 1d6 + 3 beads hanging from it. You can use an action to detach a bead and throw it up to 60 feet away. When it reaches the end of its trajectory, the bead detonates as a 3rd-level fireball spell (save DC 15). You can hurl multiple beads, or even the whole necklace, as one action. When you do so, increase the level of the fireball by 1 for each bead beyond the first.",
+    "de": "An dieser Kette hängen 1W6+3 Perlen. Du kannst eine Aktion verwenden, um eine Perle abzunehmen und bis zu 18 Meter weit zu werfen. Am Ende ihrer Flugbahn explodiert die Perle wie ein Feuerball -Zauber des 3. Grades (Rettungswurf-SG 15). Du kannst als eine Aktion mehrere Perlen oder sogar die ganze Kette werfen. In diesem Fall steigt der Grad des Feuerball s für jede Perle über den 1. Grad hinaus um 1."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

@@ -1,0 +1,64 @@
+{
+  "id": 188,
+  "slug": "sunburst",
+  "name": "Sunburst",
+  "nameDe": "Sonnenfeuer",
+  "level": {
+    "en": "8",
+    "de": "Grad 8"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Druide",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "8th-level evocation",
+    "de": "Stufe 8 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "150 feet",
+    "de": "45 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "fire and a piece of sunstone",
+      "de": "Feuer und ein Stück Sonnenstein"
+    },
+    "raw": {
+      "en": "V, S, M (fire and a piece of sunstone)",
+      "de": "V, G, M (Feuer und ein Stück Sonnenstein)"
+    }
+  },
+  "description": {
+    "en": "Brilliant sunlight flashes in a 60-foot radius centered on a point you choose within range. Each creature in that light must make a constitution saving throw. On a failed save, a creature takes 12d6 radiant damage and is blinded for 1 minute. On a successful save, it takes half as much damage and isn't blinded by this spell. Undead and oozes have disadvantage on this saving throw. A creature blinded by this spell makes another constitution saving throw at the end of each of its turns. On a successful save, it is no longer blinded. This spell dispels any darkness in its area that was created by a spell.",
+    "de": "Gleißendes Sonnenlicht erfüllt einen Radius von 18 Metern, der um einen Punkt deiner Wahl in Reichweite zentriert ist. Jede Kreatur in diesem Licht muss einen Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 12W6 gleißenden Schaden und ist eine Minute lang blind. Bei einem erfolgreichen Rettungswurf erleidet sie halb so viel Schaden und wird nicht blind. Untote und Schlicke sind bei diesem Rettungswurf im Nachteil. Eine von diesem Zauber geblendete Kreatur führt am Ende jedes ihrer Züge einen weiteren Konstitutionsrettungswurf aus. Bei einem erfolgreichen Rettungswurf ist sie nicht mehr blind. Dieser Zauber bannt jede Dunkelheit in der Umgebung, die von einem Zauber erschaffen wurde."
+  },
+  "image": "darkness",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

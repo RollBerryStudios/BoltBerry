@@ -1,0 +1,250 @@
+{
+  "id": 139,
+  "slug": "giant-shark",
+  "name": "Giant Shark",
+  "nameDe": "Riesenhai",
+  "source": "SRD",
+  "meta": {
+    "en": "Huge beast, unaligned",
+    "de": "Riesige Bestie, ohne Gesinnung"
+  },
+  "challenge": "5",
+  "xp": 1800,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "126 (11d12 + 55)",
+    "de": "126 (11W12+55)"
+  },
+  "str": 23,
+  "dex": 11,
+  "con": 21,
+  "int": 1,
+  "wis": 10,
+  "cha": 5,
+  "strMod": 6,
+  "dexMod": 0,
+  "conMod": 5,
+  "intMod": -5,
+  "wisMod": 0,
+  "chaMod": -3,
+  "speed": {
+    "run": {},
+    "swim": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 60 ft.",
+      "passive perception 13"
+    ],
+    "de": [
+      "Blindsicht 18 m",
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Blood Frenzy",
+        "text": "The shark has advantage on melee attack rolls against any creature that doesn't have all its hit points."
+      },
+      {
+        "name": "Water Breathing",
+        "text": "The shark can breathe only underwater."
+      }
+    ],
+    "de": [
+      {
+        "name": "Blutrausch",
+        "text": "Der Hai ist bei Nahkampf-Angriffswürfen gegen Kreaturen, die nicht alle Trefferpunkte besitzen, im Vorteil."
+      },
+      {
+        "name": "Wasser atmen",
+        "text": "Der Hai kann nur unter Wasser atmen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 22 (3d10 + 6) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +9 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 22 (3W10+6) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "huge",
+    "de": "Riesiges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantShark (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GiantShark (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (31).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (32).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (33).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (34).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantShark (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

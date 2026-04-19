@@ -1,0 +1,55 @@
+{
+  "id": 173,
+  "slug": "glibness",
+  "name": "Glibness",
+  "nameDe": "Redegewandtheit",
+  "level": {
+    "en": "8",
+    "de": "Grad 8"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "warlock"
+    ],
+    "de": [
+      "Barde",
+      "Hexenmeister"
+    ]
+  },
+  "type": {
+    "en": "8th-level transmutation",
+    "de": "Stufe 8 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "Until the spell ends, when you make a Charisma check, you can replace the number you roll with a 15. Additionally, no matter what you say, magic that would determine if you are telling the truth indicates that you are being truthful.",
+    "de": "Bis der Zauber endet, kannst du das Würfelergebnis deiner Charismawürfe durch eine 15 ersetzen. Magie, die feststellt, ob du die Wahrheit sagst, zeigt immer an, dass du die Wahrheit sagst - egal, was du in Wirklichkeit von dir gibst."
+  },
+  "image": "glibness",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

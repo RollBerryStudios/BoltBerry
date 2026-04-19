@@ -1,0 +1,62 @@
+{
+  "id": 289,
+  "slug": "magic-mouth",
+  "name": "Magic Mouth",
+  "nameDe": "Magischer Mund",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-level illusion (ritual)",
+    "de": "Stufe 2 Illusionsmagie (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "Until dispelled",
+    "de": "Bis entzaubert"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a small bit of honeycomb and jade dust worth at least 10 gp, which the spell consumes",
+      "de": "ein kleines Stückchen Honigwabe und Jadestaub im Wert von mindestens 10 Goldstücken, die der Zauberspruch verbraucht"
+    },
+    "raw": {
+      "en": "V, S, M (a small bit of honeycomb and jade dust worth at least 10 gp, which the spell consumes)",
+      "de": "V, G, M (ein kleines Stückchen Honigwabe und Jadestaub im Wert von mindestens 10 Goldstücken, die der Zauberspruch verbraucht)"
+    }
+  },
+  "description": {
+    "en": "You plant a message to an object in the range of the spell. The message is verbalized when the trigger conditions are met. Choose an object that you see, and that is not worn or carried by another creature. Then say the message, which should not exceed 25 words but listening can take up to 10 minutes. Finally, establish the circumstances that trigger the spell to deliver your message. When these conditions are satisfied, a magical mouth appears on the object and it articulates the message imitating your voice, the same tone used during implantation of the message. If the selected object has a mouth or something that approaches such as the mouth of a statue, the magic mouth come alive at this point, giving the illusion that the words come from the mouth of the object. When you cast this spell, you may decide that the spell ends when the message is delivered or it can persist and repeat the message whenever circumstances occur. The triggering circumstance can be as general or as detailed as you like, though it must be based on visual or audible conditions that occur within 30 feet of the object. For example, you could instruct the mouth to speak when any creature moves within 30 feet of the object or when a silver bell rings within 30 feet of it.",
+    "de": "Du implantierst eine Botschaft in einen Gegenstand in Reichweite. Diese Nachricht wird bei einer bestimmten Auslösebedingung ausgesprochen. Wähle einen Gegenstand, den du sehen kannst und der nicht von einer anderen Kreatur getragen oder gehalten wird. Sprich dann eine Nachricht von maximal 25 Wörtern. Sie kann über einen Zeitraum von bis zu zehn Minuten übermittelt werden. Bestimme dann den Umstand, der den Zauber auslöst und deine Nachricht übermittelt. Tritt dieser Umstand ein, erscheint ein magischer Mund auf dem Gegenstand und spricht die Botschaft in deiner Stimme und in derselben Lautstärke. Verfügt der gewählte Gegenstand über einen Mund oder etwas, das wie ein Mund aussieht, etwa der Mund einer Statue, erscheint der magische Mund dort, so dass die Worte aus dem Mund des Gegenstands zu kommen scheinen. Wenn du diesen Zauber wirkst, kannst du entscheiden, ob er nach dem Übermitteln der Botschaft endet, oder bestehen bleibt und die Botschaft immer wiederholt, wenn die Auslösebedingung erfüllt ist. Die Auslösebedingung kann so allgemein oder so detailliert sein, wie du willst. Sie muss jedoch auf sichtbaren und hörbaren Umständen basieren, die im Abstand von bis zu neun Metern um den Gegenstand auftreten. Beispielweise könntest du den Mund anweisen, die Botschaft zu sprechen, wenn sich eine Kreatur dem Gegenstand im Abstand von neun Metern nähert oder wenn eine Silberglocke im Abstand von bis zu neun Metern um ihn läutet."
+  },
+  "image": "vicious-mockery",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

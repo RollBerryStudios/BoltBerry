@@ -1,0 +1,30 @@
+{
+  "id": 360,
+  "slug": "wand-of-web",
+  "name": "Wand of Web",
+  "nameDe": "Zauberstab des Netzes",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 800000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wand, uncommon (requires attunement by a spellcaster) This wand has 7 charges. While holding it, you can use an action to expend 1 of its charges to cast the web spell (save DC 15) from it. The wand regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.",
+    "de": "Dieser Zauberstab hat sieben Ladungen. Wenn du ihn hältst, kannst du als Aktion eine seiner Ladungen verbrauchen, um den Zauber Netz  (Rettungswurf-SG 15) mit ihm zu wirken. Der Zauberstab erhält täglich im Morgengrauen 1W6+1 verbrauchte Ladungen zurück. Wenn du die letzte Ladung des Zauberstabs verbrauchst, würfle mit einem W20. Bei einer 1 zerfällt der Zauberstab zu Asche und ist damit zerstört."
+  },
+  "properties": {
+    "en": "requires attunement a spellcaster",
+    "de": "erfordert einstimmung a spellcaster"
+  },
+  "image": "wand",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

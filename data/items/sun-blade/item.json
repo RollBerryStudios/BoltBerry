@@ -1,0 +1,30 @@
+{
+  "id": 381,
+  "slug": "sun-blade",
+  "name": "Sun Blade",
+  "nameDe": "Sonnenklinge",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 1200000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Weapon (longsword), rare (requires attunement) This item appears to be a longsword hilt. While grasping the hilt, you can use a bonus action to cause a blade of pure radiance to spring into existence, or make the blade disappear. While the blade exists, this magic longsword has the finesse property. If you are proficient with shortswords or longswords, you are proficient with the sun blade. You gain a +2 bonus to attack and damage rolls made with this weapon, which deals radiant damage instead of slashing damage. When you hit an undead with it, that target takes an extra 1d8 radiant damage. The sword's luminous blade emits bright light in a 15-foot radius and dim light for an additional 15 feet. The light is sunlight. While the blade persists, you can use an action to expand or reduce its radius of bright and dim light by 5 feet each, to a maximum of 30 feet each or a minimum of 10 feet each.",
+    "de": "Dieser Gegenstand sieht aus wie der Griff eines Langschwerts. Wenn du den Griff hältst, kannst du eine Bonusaktion verwenden, um eine Klinge aus purem Licht erscheinen oder wieder verschwinden zu lassen. Während die Klinge existiert, hat dieses magische Langschwert die Eigenschaft Finesse. Wenn du im Umgang mit Kurzschwertern oder Langschwertern geübt bist, bist du auch im Umgang mit der Sonnenklinge  geübt. Du erhältst einen Bonus von +2 auf Angriffs- und Schadenswürfe mit dieser Waffe, die gleißenden statt Hiebschaden verursacht. Wenn du einen Untoten damit triffst, erleidet diese Kreatur zusätzlich 1W8 gleißenden Schaden. Die leuchtende Klinge spendet in einem Radius von 4,5 Metern helles Licht und in einem Radius von weiteren 4,5 Metern dämmriges Licht. Das Licht ist Sonnenlicht. Solange die Klinge existiert, kannst du als Aktion den Radius des hellen und dämmrigen Lichts um jeweils 1,5 Meter erweitern oder reduzieren. Der maximale und der minimale Radius betragen jeweils neun Meter."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "weapon",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

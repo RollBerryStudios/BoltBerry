@@ -1,0 +1,212 @@
+{
+  "id": 74,
+  "slug": "couatl",
+  "name": "Couatl",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium celestial, lawful good",
+    "de": "Mittelgroßer Celestial, rechtschaffen gut"
+  },
+  "challenge": "4",
+  "xp": 1100,
+  "ac": {
+    "en": "19 (Natural Armor)",
+    "de": "19 (Natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "97 (13d8 + 39)",
+    "de": "97 (13W8 + 39)"
+  },
+  "str": 16,
+  "dex": 20,
+  "con": 17,
+  "int": 18,
+  "wis": 20,
+  "cha": 18,
+  "strMod": 3,
+  "dexMod": 5,
+  "conMod": 3,
+  "intMod": 4,
+  "wisMod": 5,
+  "chaMod": 4,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 90,
+      "de": 27
+    }
+  },
+  "senses": {
+    "en": [
+      "truesight 120 ft.",
+      "passive perception 15"
+    ],
+    "de": [
+      "Wahrer Blick 36 m",
+      "Passive Wahrnehmung 15"
+    ]
+  },
+  "languages": {
+    "en": [
+      "all",
+      "telepathy 120 ft."
+    ],
+    "de": [
+      "Alle",
+      "Telepathie auf 36 m"
+    ]
+  },
+  "savingThrows": [
+    "Kon +5",
+    "Wei +7",
+    "Cha +6"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Magic Weapons",
+        "text": "The couatl's weapon attacks are magical."
+      },
+      {
+        "name": "Shielded Mind",
+        "text": "The couatl is immune to scrying and to any effect that would sense its emotions or read its thoughts."
+      }
+    ],
+    "de": [
+      {
+        "name": "Abgeschirmter Geist",
+        "text": "Der Couatl ist gegen Ausspähung und alle Effekte immun, die seine Emotionen spüren, seine Gedanken lesen oder seinen Standort offenbaren würden."
+      },
+      {
+        "name": "Magische Waffen",
+        "text": "Die Waffenangriffe des Couatls sind magisch."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +8 to hit, reach 5 ft., one creature. Hit: 8 (1d6 + 5) piercing damage, and the target must succeed on a DC 13 Constitution saving throw or be poisoned for 24 hours. Until this poison ends, the target is unconscious. Another creature can use an action to shake the target awake."
+      },
+      {
+        "name": "Constrict",
+        "text": "Melee Weapon Attack: +6 to hit, reach 10 ft., one Medium or smaller creature. Hit: 10 (2d6 + 3) bludgeoning damage, and the target is grappled (escape DC 15). Until this grapple ends, the target is restrained, and the couatl can't constrict another target."
+      },
+      {
+        "name": "Change Shape",
+        "text": "The couatl magically polymorphs into a humanoid or beast that has a challenge rating equal to or less than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the couatl's choice).\nIn a new form, the couatl retains its game statistics and ability to speak, but its AC, movement modes, Strength, Dexterity, and other actions are replaced by those of the new form, and it gains any statistics and capabilities (except class features, legendary actions, and lair actions) that the new form has but that it lacks. If the new form has a bite attack, the couatl can use its bite in that form."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +8 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 8 (1W6+5) Stichschaden, und das Ziel muss einen SG-13-Konstitutionsrettungswurf bestehen, oder es ist 24 Stunden lang vergiftet. Bis zum Ende der Vergiftung ist das Ziel bewusstlos. Eine andere Kreatur kann eine Aktion verwenden, um das Ziel wachzurütteln."
+      },
+      {
+        "name": "Umschlingen",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 3 m, eine höchstens mittelgroße Kreatur. Treffer: 10 (2W6+3) Wuchtschaden, und das Ziel wird gepackt (Rettungswurf-SG 15). Ein gepacktes Ziel ist festgesetzt. Der Couatl kann solange kein weiteres Ziel umschlingen."
+      },
+      {
+        "name": "Gestalt ändern",
+        "text": "Der Couatl nimmt magisch die Gestalt eines Humanoiden oder eines Tieres an, dessen Herausforderungsgrad seinen eigenen nicht überschreitet, oder er verwandelt sich wieder in seine wahre Gestalt. Wenn er stirbt, nimmt er seine wahre Gestalt an. Ausrüstung, die er trägt oder hält, wird von der neuen Gestalt absorbiert oder getragen (nach Wahl des Couatls). In anderer Gestalt behält der Couatl seine Spielwerte und seine Sprechfähigkeit bei, seine RK, Bewegungsmodi, Stärke, Geschicklichkeit und andere Aktionen werden durch die der neuen Gestalt ersetzt, und der Couatl erhält alle Spielwerte und Fähigkeiten (außer Klassenmerkmalen, legendären Aktionen und Hortaktionen), welche die neue Gestalt besitzt, der Couatl aber nicht. Wenn die neue Gestalt über einen Bissangriff verfügt, kann der Couatl seinen Biss in dieser Gestalt einsetzen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/257/1000/1000/636252768143323827.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "mittel"
+  },
+  "type": {
+    "en": "celestial",
+    "de": "Himmelswesen"
+  },
+  "alignment": {
+    "en": "lawful good",
+    "de": "rechtschaffen gut"
+  },
+  "token": {
+    "file": "CouatlDesert (1).webp",
+    "variant": "desert"
+  },
+  "tokens": [
+    {
+      "file": "CouatlDesert (2).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "CouatlDesert (3).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "CouatlDesert (4).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "CouatlDesert (5).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "CouatlDesert (6).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "CouatlDesert (7).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "CouatlDesert (8).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "CouatlJungle (1).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "CouatlJungle (10).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "CouatlJungle (11).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "CouatlJungle (2).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "CouatlJungle (3).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "CouatlJungle (4).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "CouatlJungle (5).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "CouatlJungle (6).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "CouatlJungle (7).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "CouatlJungle (8).webp",
+      "variant": "jungle"
+    },
+    {
+      "file": "CouatlJungle (9).webp",
+      "variant": "jungle"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

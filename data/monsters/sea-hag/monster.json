@@ -1,0 +1,254 @@
+{
+  "id": 255,
+  "slug": "sea-hag",
+  "name": "Sea Hag",
+  "nameDe": "Seevettel",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium fey, chaotic evil",
+    "de": "Mittelgroße Fee, chaotisch böse"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "14 (Natural Armor)",
+    "de": "14 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "52 (7d8 + 21)",
+    "de": "52 (7W8+21)"
+  },
+  "str": 16,
+  "dex": 13,
+  "con": 16,
+  "int": 12,
+  "wis": 12,
+  "cha": 13,
+  "strMod": 3,
+  "dexMod": 1,
+  "conMod": 3,
+  "intMod": 1,
+  "wisMod": 1,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "swim": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Aquan",
+      "Common",
+      "Giant"
+    ],
+    "de": [
+      "Aqual",
+      "Gemeinsprache",
+      "Riesisch"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Amphibious",
+        "text": "The hag can breathe air and water."
+      },
+      {
+        "name": "Horrific Appearance",
+        "text": "Any humanoid that starts its turn within 30 feet of the hag and can see the hag's true form must make a DC 11 Wisdom saving throw. On a failed save, the creature is frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, with disadvantage if the hag is within line of sight, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the hag's Horrific Appearance for the next 24 hours.\nUnless the target is surprised or the revelation of the hag's true form is sudden, the target can avert its eyes and avoid making the initial saving throw. Until the start of its next turn, a creature that averts its eyes has disadvantage on attack rolls against the hag."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amphibisch",
+        "text": "Die Vettel kann Luft und Wasser atmen."
+      },
+      {
+        "name": "Grässliches Erscheinungsbild",
+        "text": "Jeder Humanoide, der seinen Zug im Abstand von bis zu neun Metern von der Vettel beginnt und die wahre Gestalt der Vettel sehen kann, muss einen SG-11-Weisheitsrettungswurf ausführen. Scheitert der Wurf, so ist die Kreatur eine Minute lang verängstigt. Die Kreatur kann den Rettungswurf am Ende jedes ihrer Züge wiederholen. Wenn die Vettel in Sichtlinie ist, so ist der Rettungswurf im Nachteil. Bei einem Erfolg endet der Effekt. Wenn eine Kreatur ihren Rettungswurf besteht oder der Effekt auf sie endet, ist sie 24 Stunden lang gegen das grässliche Erscheinungsbild der Vettel immun. Sofern das Ziel nicht überrascht wird oder die Enthüllung der wahren Gestalt der Vettel plötzlich erfolgt, kann das Ziel den Blick abwenden und den ersten Rettungswurf vermeiden. Wendet eine Kreatur den Blick ab, so ist sie bis zum Beginn ihres nächsten Zugs bei Angriffswürfen gegen die Vettel im Nachteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage."
+      },
+      {
+        "name": "Death Glare",
+        "text": "The hag targets one frightened creature she can see within 30 ft. of her. If the target can see the hag, it must succeed on a DC 11 Wisdom saving throw against this magic or drop to 0 hit points."
+      },
+      {
+        "name": "Illusory Appearance",
+        "text": "The hag covers herself and anything she is wearing or carrying with a magical illusion that makes her look like an ugly creature of her general size and humanoid shape. The effect ends if the hag takes a bonus action to end it or if she dies.\nThe changes wrought by this effect fail to hold up to physical inspection. For example, the hag could appear to have no claws, but someone touching her hand might feel the claws. Otherwise, a creature must take an action to visually inspect the illusion and succeed on a DC 16 Intelligence (Investigation) check to discern that the hag is disguised."
+      }
+    ],
+    "de": [
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Hiebschaden."
+      },
+      {
+        "name": "Illusionäres Erscheinungsbild",
+        "text": "Die Vettel hüllt sich und alles, was sie trägt oder hält, in eine magische Illusion, die sie wie eine hässliche Kreatur von ihrer ungefähren Größe sowie von humanoider Gestalt erscheinen lässt. Der Effekt endet, wenn die Vettel ihn mit einer Bonusaktion beendet oder ihre Trefferpunkte auf 0 sinken. Die Veränderungen durch diese Illusion halten einer genauen körperlichen Untersuchung nicht stand. Beispiel: Die Vettel könnte erscheinen, als hätte sie keine Klauen, doch jemand, der ihre Hand berührt, würde ihre Klauen spüren. Anderenfalls muss eine Kreatur eine Aktion ausführen, um die Illusion visuell zu untersuchen und einen SG-20-Intelligenzwurf (Nachforschungen) auszuführen. Bei einem Erfolg bemerkt die Kreatur die Tarnung der Vettel."
+      },
+      {
+        "name": "Todesstarren",
+        "text": "Die Vettel zielt auf eine verängstigte Kreatur im Abstand von bis zu neun Metern von ihr, die sie sehen kann. Wenn das Ziel die Vettel sehen kann, muss es einen SG-11-Weisheitsrettungswurf gegen diese Magie bestehen, oder seine Trefferpunkte sinken auf 0."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/159/1000/1000/636252759356069260.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "fey",
+    "de": "Feenwesen"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "SeaHag (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "SeaHag (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHag (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

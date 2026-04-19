@@ -1,0 +1,40 @@
+{
+  "id": 239,
+  "slug": "trident-of-fish-command",
+  "name": "Trident of Fish Command",
+  "nameDe": "Dreizack der Fischherrschaft",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 80000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Weapon (trident), uncommon (requires attunement) This trident is a magic weapon. It has 3 charges. While you carry it, you can use an action and expend 1 charge to cast dominate beast (save DC 15) from it on a beast that has an innate swimming speed. The trident regains 1d3 expended charges daily at dawn.",
+    "de": "Dieser Dreizack ist eine magische Waffe. Er hat drei Ladungen. Wenn du ihn trägst, kannst du als Aktion eine Ladung verbrauchen, um den Zauber Tier beherrschen  (Rettungswurf-SG 15) damit auf ein Tier zu wirken, das eine angeborene Schwimmbewegungsrate hat. Der Dreizack erhält täglich im Morgengrauen 1W3 verbrauchte Ladungen zurück."
+  },
+  "weight": 4,
+  "classification": {
+    "en": "Martial Melee Weapons",
+    "de": "Nahkampfs-Kriegswaffen"
+  },
+  "damage": "1d7",
+  "damageType": {
+    "en": "piercing",
+    "de": "stich"
+  },
+  "properties": {
+    "en": "thrown (range 20/60) | versatile (1d8) | requires attunement",
+    "de": "geworfen (fernkampf 20/60) | vielseitig (1d8) | erfordert einstimmung"
+  },
+  "image": "trident",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

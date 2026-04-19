@@ -1,0 +1,26 @@
+{
+  "id": 210,
+  "slug": "potion-of-animal-friendship",
+  "name": "Potion of Animal Friendship",
+  "nameDe": "Trank der Tierfreundschaft",
+  "category": {
+    "en": "POTIONS_OILS",
+    "de": "Tränke & Öle"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 20000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Potion, uncommon When you drink this potion, you can cast the animal friendship spell (save DC 13) for 1 hour at will. Agitating this muddy liquid brings little bits into view: a fish scale, a hummingbird tongue, a cat claw, or a squirrel hair.",
+    "de": "Wenn du diesen Trank trinkst, kannst du den Zauber Tierfreundschaft  (Rettungswurf-SG 13) eine Stunde lang beliebig oft wirken. Wird diese schlammfarbene Flüssigkeit geschüttelt, werden kleine Stücke sichtbar: eine Fischschuppe, die Zunge eines Kolibris, eine Katzenkralle oder ein Eichhörnchenhaar."
+  },
+  "image": "potions-and-oils",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

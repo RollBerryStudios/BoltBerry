@@ -1,0 +1,66 @@
+{
+  "id": 229,
+  "slug": "conjure-elemental",
+  "name": "Conjure Elemental",
+  "nameDe": "Elementar beschwören",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "wizard"
+    ],
+    "de": [
+      "Druide",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "5th-level conjuration",
+    "de": "Stufe 5 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "90 feet",
+    "de": "27 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "burning incense for air, soft clay for earth, sulfur and phosphorus for fire, or water and sand for water",
+      "de": "brennendes Räucherwerk for air, soft clay for earth, sulfur and phosphorus for fire, or water and sand for water"
+    },
+    "raw": {
+      "en": "V, S, M (burning incense for air, soft clay for earth, sulfur and phosphorus for fire, or water and sand for water)",
+      "de": "V, G, M (brennendes Räucherwerk for air, soft clay for earth, sulfur and phosphorus for fire, or water and sand for water)"
+    }
+  },
+  "description": {
+    "en": "You call forth an elemental servant. Choose an area of air, earth, fire, or water that fills a 10-foot cube within range. An elemental of challenge rating 5 or lower appropriate to the area you chose appears in an unoccupied space within 10 feet of it. For example, a fire elemental emerges from a bonfire, and an earth elemental rises up from the ground. The elemental disappears when it drops to 0 hit points or when the spell ends. The elemental is friendly to you and your companions for the duration. Roll initiative for the elemental, which has its own turns. It obeys any verbal commands that you issue to it (no action required by you). If you don't issue any commands to the elemental, it defends itself from hostile creatures but otherwise takes no actions. If your concentration is broken, the elemental doesn't disappear. Instead, you lose control of the elemental, it becomes hostile toward you and your companions, and it might attack. An uncontrolled elemental can't be dismissed by you, and it disappears 1 hour after you summoned it. The GM has the elemental's statistics.",
+    "de": "Du rufst einen Elementardiener herbei. Wähle einen Bereich mit Erde, Feuer, Luft oder Wasser in Reichweite, der einen Würfel mit drei Metern Kantenlänge füllt. Ein Elementar mit Herausforderungsgrad 5 oder niedriger, der dem gewählten Bereich entspricht, erscheint an einer freien Stelle im Umkreis von drei Metern um diesen Bereich. Ein Feuerelementar tritt beispielsweise aus einem Lagerfeuer hervor und ein Erdelementar erhebt sich aus dem Boden. Der Elementar verschwindet, wenn der Zauber endet oder seine Trefferpunkte auf 0 sinken. Der Elementar ist dir und deinen Gefährten für die Wirkungsdauer freundlich gesinnt. Würfle die Initiative für den Elementar aus, der über seinen eigenen Zug verfügt. Er gehorcht deinen mündlichen Befehlen (erfordert keine Aktion), Wenn du dem Elementar keine Befehle erteilst, verteidigt er sich gegen feindlich gesinnte Kreaturen, führt aber anderenfalls keine Aktionen aus. Wenn deine Konzentration unterbrochen wird, verschwindet der Elementar nicht. Stattdessen verlierst du die Kontrolle über den Elementar und er wird dir und deinen Gefährten gegenüber feindlich gesinnt und greift möglicherweise an. Ein unkontrollierter Elementar kann nicht von dir fortgeschickt werden und verschwindet eine Stunde nach seiner Beschwörung. Der SL hat die Werte des Elementars. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, erhöht sich der Herausforderungsgrad für jeden Grad über dem 5. um 1."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 6th level or higher, the challenge rating increases by 1 for each slot level above 5th.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, erhöht sich der Herausforderungsgrad für jeden Grad über dem 5. um 1."
+  },
+  "image": "conjure-elemental",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

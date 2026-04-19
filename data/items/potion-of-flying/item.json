@@ -1,0 +1,26 @@
+{
+  "id": 234,
+  "slug": "potion-of-flying",
+  "name": "Potion of Flying",
+  "nameDe": "Trank des Fliegens",
+  "category": {
+    "en": "POTIONS_OILS",
+    "de": "Tränke & Öle"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 50000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Potion, very rare When you drink this potion, you gain a flying speed equal to your walking speed for 1 hour and can hover. If you're in the air when the potion wears off, you fall unless you have some other means of staying aloft. This potion's clear liquid floats at the top of its container and has cloudy white impurities drifting in it.",
+    "de": "Wenn du diesen Trank trinkst, erhältst du eine Stunde lang eine Flugbewegungsrate, die deiner Schrittbewegungsrate entspricht und kannst schweben. Wenn du in der Luft bist, wenn die Wirkung des Tranks endet, fällst du zu Boden, sofern du keine anderen Möglichkeiten hast, weiter zu fliegen oder zu schweben. Die klare Flüssigkeit dieses Tranks schwebt im oberen Teil seines Gefäßes. Trübweiße Unreinheiten treiben darin."
+  },
+  "image": "potions-and-oils",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

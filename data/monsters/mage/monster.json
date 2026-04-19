@@ -1,0 +1,896 @@
+{
+  "id": 192,
+  "slug": "mage",
+  "name": "Mage",
+  "nameDe": "Magier",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "6",
+  "xp": 2300,
+  "ac": {
+    "en": "12 (15 With Mage Armor)",
+    "de": "12 (15 mit Magierrüstung)"
+  },
+  "hp": {
+    "en": "40 (9d8)",
+    "de": "40 (9W8)"
+  },
+  "str": 9,
+  "dex": 14,
+  "con": 11,
+  "int": 17,
+  "wis": 12,
+  "cha": 11,
+  "strMod": -1,
+  "dexMod": 2,
+  "conMod": 0,
+  "intMod": 3,
+  "wisMod": 1,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 11"
+    ],
+    "de": [
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any four languages"
+    ],
+    "de": [
+      "Vier beliebige Sprachen"
+    ]
+  },
+  "savingThrows": [
+    "Int +6",
+    "Wei +4"
+  ],
+  "skills": [
+    "Arkane Kunde +6",
+    "Geschichte +6"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Spellcasting",
+        "text": "The mage is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 14, +6 to hit with spell attacks). The mage has the following wizard spells prepared:"
+      },
+      {
+        "name": "Cantrips (at will)",
+        "text": "fire bolt, light, mage hand, prestidigitation"
+      },
+      {
+        "name": "1st level (4 slots)",
+        "text": "detect magic, mage armor, magic missile, shield"
+      },
+      {
+        "name": "2nd level (3 slots)",
+        "text": "misty step, suggestion"
+      },
+      {
+        "name": "3rd level (3 slots)",
+        "text": "counterspell, fireball, fly"
+      },
+      {
+        "name": "4th level (3 slots)",
+        "text": "greater invisibility, ice storm"
+      },
+      {
+        "name": "5th level (1 slot)",
+        "text": "cone of cold"
+      }
+    ],
+    "de": [
+      {
+        "name": "Zaubern",
+        "text": "Der Magier ist ein Zauberwirker des 9. Grades. Seine Zauberfertigkeit ist Intelligenz (Zauberrettungswurf SG 14, +6 zum Treffen mit Zauberangriffen). Der Magier hat die folgenden Zaubersprüche vorbereitet:"
+      },
+      {
+        "name": "Zaubertricks (nach Belieben)",
+        "text": "Feuerpfeil, Licht, Magierhand, Taschenspielerei"
+      },
+      {
+        "name": "1. Grad (4 Zauberplätze)",
+        "text": "Magie entdecken, Magierrüstung, Magisches Geschoss, Schild"
+      },
+      {
+        "name": "2. Grad (3 Zauberplätze)",
+        "text": "Nebelschritt, Einflüsterung"
+      },
+      {
+        "name": "3. Grad (3 Zauberplätze)",
+        "text": "Gegenzauber, Feuerball, Fliegen"
+      },
+      {
+        "name": "4. Grad (3 Zauberplätze)",
+        "text": "Mächtige Unsichtbarkeit, Eissturm"
+      },
+      {
+        "name": "5th level (1 Zauberplatz)",
+        "text": "Kältekegel"
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Dagger",
+        "text": "Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d4 + 2) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Dolch",
+        "text": "Nah- oder Fernkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m oder Reichweite 6/18 m, ein Ziel. Treffer: 4 (1W4+2) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/656/humanoid.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (jedes Volk)"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "jede Gesinnung"
+  },
+  "token": {
+    "file": "MageDragonborn (1).webp",
+    "variant": "dragonborn"
+  },
+  "tokens": [
+    {
+      "file": "MageDragonborn (10).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "MageDragonborn (11).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "MageDragonborn (12).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "MageDragonborn (13).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "MageDragonborn (2).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "MageDragonborn (3).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "MageDragonborn (4).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "MageDragonborn (5).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "MageDragonborn (6).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "MageDragonborn (7).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "MageDragonborn (8).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "MageDragonborn (9).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "MageDwarfFemale (1).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "MageDwarfFemale (2).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "MageDwarfFemale (3).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "MageDwarfFemale (4).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "MageDwarfFemale (5).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "MageDwarfFemale (6).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "MageDwarfMale (1).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "MageDwarfMale (10).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "MageDwarfMale (11).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "MageDwarfMale (2).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "MageDwarfMale (3).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "MageDwarfMale (4).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "MageDwarfMale (5).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "MageDwarfMale (6).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "MageDwarfMale (7).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "MageDwarfMale (8).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "MageDwarfMale (9).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "MageElfFemale (1).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "MageElfFemale (2).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "MageElfFemale (3).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "MageElfFemale (4).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "MageElfFemale (5).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "MageElfFemale (6).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "MageElfMale (1).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "MageElfMale (10).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "MageElfMale (11).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "MageElfMale (12).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "MageElfMale (13).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "MageElfMale (14).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "MageElfMale (15).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "MageElfMale (2).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "MageElfMale (3).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "MageElfMale (4).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "MageElfMale (5).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "MageElfMale (6).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "MageElfMale (7).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "MageElfMale (8).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "MageElfMale (9).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "MageGnomeFemale (1).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "MageGnomeFemale (10).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "MageGnomeFemale (11).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "MageGnomeFemale (2).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "MageGnomeFemale (3).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "MageGnomeFemale (4).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "MageGnomeFemale (5).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "MageGnomeFemale (6).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "MageGnomeFemale (7).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "MageGnomeFemale (8).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "MageGnomeFemale (9).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "MageGnomeMale (1).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "MageGnomeMale (10).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "MageGnomeMale (2).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "MageGnomeMale (3).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "MageGnomeMale (4).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "MageGnomeMale (5).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "MageGnomeMale (6).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "MageGnomeMale (7).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "MageGnomeMale (8).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "MageGnomeMale (9).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "MageHalfElfFemale (1).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "MageHalfElfFemale (2).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "MageHalfElfFemale (3).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "MageHalfElfFemale (4).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "MageHalfElfFemale (5).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "MageHalfElfMale (1).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "MageHalfElfMale (2).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "MageHalfElfMale (3).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "MageHalfElfMale (4).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "MageHalfElfMale (5).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "MageHalfElfMale (6).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "MageHalfElfMale (7).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "MageHalfElfMale (8).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "MageHalfElfMale (9).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "MageHalflingFemale (1).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "MageHalflingFemale (2).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "MageHalflingMale (1).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "MageHalflingMale (2).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "MageHalflingMale (3).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "MageHalflingMale (4).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "MageHalflingMale (5).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "MageHalflingMale (6).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "MageHalfOrcFemale (1).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "MageHalfOrcFemale (10).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "MageHalfOrcFemale (11).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "MageHalfOrcFemale (12).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "MageHalfOrcFemale (13).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "MageHalfOrcFemale (14).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "MageHalfOrcFemale (15).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "MageHalfOrcFemale (2).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "MageHalfOrcFemale (3).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "MageHalfOrcFemale (4).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "MageHalfOrcFemale (5).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "MageHalfOrcFemale (6).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "MageHalfOrcFemale (7).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "MageHalfOrcFemale (8).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "MageHalfOrcFemale (9).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "MageHalfOrcMale (1).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "MageHalfOrcMale (10).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "MageHalfOrcMale (11).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "MageHalfOrcMale (12).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "MageHalfOrcMale (13).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "MageHalfOrcMale (14).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "MageHalfOrcMale (2).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "MageHalfOrcMale (3).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "MageHalfOrcMale (4).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "MageHalfOrcMale (5).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "MageHalfOrcMale (6).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "MageHalfOrcMale (7).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "MageHalfOrcMale (8).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "MageHalfOrcMale (9).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "MageHumanFemale (1).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "MageHumanFemale (10).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "MageHumanFemale (11).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "MageHumanFemale (12).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "MageHumanFemale (13).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "MageHumanFemale (14).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "MageHumanFemale (15).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "MageHumanFemale (16).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "MageHumanFemale (17).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "MageHumanFemale (2).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "MageHumanFemale (3).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "MageHumanFemale (4).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "MageHumanFemale (5).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "MageHumanFemale (6).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "MageHumanFemale (7).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "MageHumanFemale (8).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "MageHumanFemale (9).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "MageHumanMale (1).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (10).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (11).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (12).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (13).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (14).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (15).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (16).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (17).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (18).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (19).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (2).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (20).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (21).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (22).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (23).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (24).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (25).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (3).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (4).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (5).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (6).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (7).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (8).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageHumanMale (9).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "MageTieflingFemale (1).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "MageTieflingFemale (10).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "MageTieflingFemale (11).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "MageTieflingFemale (12).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "MageTieflingFemale (2).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "MageTieflingFemale (3).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "MageTieflingFemale (4).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "MageTieflingFemale (5).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "MageTieflingFemale (6).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "MageTieflingFemale (7).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "MageTieflingFemale (8).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "MageTieflingFemale (9).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "MageTieflingMale (1).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "MageTieflingMale (2).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "MageTieflingMale (3).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "MageTieflingMale (4).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "MageTieflingMale (5).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "MageTieflingMale (6).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "MageTieflingMale (7).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "MageTieflingMale (8).webp",
+      "variant": "tieflingMale"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

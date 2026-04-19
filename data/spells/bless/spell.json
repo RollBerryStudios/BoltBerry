@@ -1,0 +1,66 @@
+{
+  "id": 5,
+  "slug": "bless",
+  "name": "Bless",
+  "nameDe": "Segnen",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "paladin"
+    ],
+    "de": [
+      "Kleriker",
+      "Paladin"
+    ]
+  },
+  "type": {
+    "en": "1st-level enchantment",
+    "de": "Stufe 1 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a sprinkling of holy water",
+      "de": "eine Besprinkelung mit Weihwasser"
+    },
+    "raw": {
+      "en": "V, S, M (a sprinkling of holy water)",
+      "de": "V, G, M (eine Besprinkelung mit Weihwasser)"
+    }
+  },
+  "description": {
+    "en": "You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll a d4 and add the number rolled to the attack roll or saving throw.",
+    "de": "Du segnest bis zu drei Kreaturen deiner Wahl in Reichweite. Wenn ein Ziel während der Wirkungsdauer einen Angriffs- oder Rettungswurf ausführt, darf es mit einem W4 würfeln und das Würfelergebnis zu seinem Angriffs- oder Rettungswurf addieren. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, kannst du für jeden Grad über dem 1. eine zusätzliche Kreatur als Ziel wählen."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, kannst du für jeden Grad über dem 1. eine zusätzliche Kreatur als Ziel wählen."
+  },
+  "image": "bless",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

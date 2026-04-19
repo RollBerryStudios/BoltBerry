@@ -1,0 +1,26 @@
+{
+  "id": 215,
+  "slug": "dust-of-disappearance",
+  "name": "Dust of Disappearance",
+  "nameDe": "Staub des Verschwindens",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 30000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon Found in a small packet, this powder resembles very fine sand. There is enough of it for one use. When you use an action to throw the dust into the air, you and each creature and object within 10 feet of you become invisible for 2d4 minutes. The duration is the same for all subjects, and the dust is consumed when its magic takes effect. If a creature affected by the dust attacks or casts a spell, the invisibility ends for that creature.",
+    "de": "Dieses Pulver wird in einem kleinen Paket aufbewahrt und ähnelt feinem Sand. Das Paket enthält ausreichend Pulver für einen Einsatz. Du kannst eine Aktion verwenden und den Staub in die Luft werfen, um dich sowie jede Kreatur und jedes Objekt im Abstand von bis zu drei Metern von dir 2W4 Minuten lang unsichtbar werden zu lassen. Die Dauer gilt für alle Wesen und Objekte gleichermaßen. Der Staub wird verbraucht, wenn seine Magie wirkt. Wenn eine durch den Staub unsichtbare Kreatur angreift oder einen Zauber wirkt, endet ihre Unsichtbarkeit."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

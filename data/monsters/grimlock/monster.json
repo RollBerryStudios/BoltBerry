@@ -1,0 +1,323 @@
+{
+  "id": 159,
+  "slug": "grimlock",
+  "name": "Grimlock",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, neutral evil",
+    "de": "Mittelgroßer Humanoid, neutral böse"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": "11",
+  "hp": {
+    "en": "11 (2d8 + 2)",
+    "de": "11 (2W8 + 2)"
+  },
+  "str": 16,
+  "dex": 12,
+  "con": 12,
+  "int": 9,
+  "wis": 8,
+  "cha": 6,
+  "strMod": 3,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": -1,
+  "wisMod": -1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 30 ft. or 10 ft. while deafened (blind beyond this radius)",
+      "passive perception 13"
+    ],
+    "de": [
+      "Blindsicht 9 m oder 3 m bei Taubheit (blind außerhalb des Radius)",
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Undercommon"
+    ],
+    "de": [
+      "Gemeinsprache der Unterreiche"
+    ]
+  },
+  "skills": [
+    "Athletik +5",
+    "Heimlichkeit +3",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Blind Senses",
+        "text": "The grimlock can't use its blindsight while deafened and unable to smell."
+      },
+      {
+        "name": "Keen Hearing and Smell",
+        "text": "The grimlock has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+      },
+      {
+        "name": "Stone Camouflage",
+        "text": "The grimlock has advantage on Dexterity (Stealth) checks made to hide in rocky terrain."
+      }
+    ],
+    "de": [
+      {
+        "name": "Blinde Sinne",
+        "text": "Der Grimlock kann seine Blindsicht nicht verwenden, solange er taub ist und nicht riechen kann."
+      },
+      {
+        "name": "Scharfes Gehör und scharfer Geruchssinn",
+        "text": "Der Grimlock ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör oder Geruchssinn basieren, im Vorteil."
+      },
+      {
+        "name": "Steintarnung",
+        "text": "Der Grimlock ist bei Geschicklichkeitswürfen (Heimlichkeit), die er ausführt, um sich in steinigem Gelände zu verstecken, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Spiked Bone Club",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 5 (1d4 + 3) bludgeoning damage plus 2 (1d4) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Knöcherner Dornenknüppel",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W4+3) Wuchtschaden plus 2 (1W4) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/375/315/315/636252780049813181.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "mittel"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoid"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "GrimlockFemale (1).webp",
+    "variant": "female"
+  },
+  "tokens": [
+    {
+      "file": "GrimlockFemale (10).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockFemale (11).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockFemale (12).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockFemale (13).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockFemale (14).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockFemale (15).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockFemale (16).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockFemale (17).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockFemale (18).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockFemale (19).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockFemale (2).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockFemale (3).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockFemale (4).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockFemale (5).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockFemale (6).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockFemale (7).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockFemale (8).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockFemale (9).webp",
+      "variant": "female"
+    },
+    {
+      "file": "GrimlockMale (1).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (10).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (11).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (12).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (13).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (14).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (15).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (16).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (17).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (18).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (19).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (2).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (20).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (21).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (22).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (23).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (24).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (25).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (26).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (27).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (28).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (29).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (3).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (30).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (31).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (32).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (4).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (5).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (6).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (7).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (8).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GrimlockMale (9).webp",
+      "variant": "male"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,193 @@
+{
+  "id": 150,
+  "slug": "goat",
+  "name": "Goat",
+  "nameDe": "Ziege",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": "10",
+  "hp": {
+    "en": "4 (1d8)",
+    "de": "4 (1W8)"
+  },
+  "str": 12,
+  "dex": 10,
+  "con": 11,
+  "int": 2,
+  "wis": 10,
+  "cha": 5,
+  "strMod": 1,
+  "dexMod": 0,
+  "conMod": 0,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Charge",
+        "text": "If the goat moves at least 20 ft. straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra 2 (1d4) bludgeoning damage. If the target is a creature, it must succeed on a DC 10 Strength saving throw or be knocked prone."
+      },
+      {
+        "name": "Sure-Footed",
+        "text": "The goat has advantage on Strength and Dexterity saving throws made against effects that would knock it prone."
+      }
+    ],
+    "de": [
+      {
+        "name": "Sicherer Tritt",
+        "text": "Die Ziege ist bei Stärke- und Geschicklichkeitsrettungswürfen gegen Effekte, die sie umstoßen würden, im Vorteil."
+      },
+      {
+        "name": "Sturmangriff",
+        "text": "Wenn die Ziege sich mindestens sechs Meter weit direkt auf ein Ziel zubewegt und es dann im selben Zug mit einem Rammbock-Angriff trifft, erleidet das Ziel zusätzlich 2 (1W4) Wuchtschaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-10-Stärkerettungswurf bestehen, oder es wird umgestoßen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Ram",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 3 (1d4 + 1) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rammbock",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 3 (1W4+1) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "groß"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Bestie"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "ohne Ausrichtung"
+  },
+  "token": {
+    "file": "GoatGrassland (1).webp",
+    "variant": "grassland"
+  },
+  "tokens": [
+    {
+      "file": "GoatGrassland (2).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "GoatGrassland (3).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "GoatGrassland (4).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "GoatGrassland (5).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "GoatHill (1).webp",
+      "variant": "hill"
+    },
+    {
+      "file": "GoatHill (2).webp",
+      "variant": "hill"
+    },
+    {
+      "file": "GoatHill (3).webp",
+      "variant": "hill"
+    },
+    {
+      "file": "GoatMountain (1).webp",
+      "variant": "mountain"
+    },
+    {
+      "file": "GoatMountain (2).webp",
+      "variant": "mountain"
+    },
+    {
+      "file": "GoatMountain (3).webp",
+      "variant": "mountain"
+    },
+    {
+      "file": "GoatMountain (4).webp",
+      "variant": "mountain"
+    },
+    {
+      "file": "GoatMountain (5).webp",
+      "variant": "mountain"
+    },
+    {
+      "file": "GoatMountain (6).webp",
+      "variant": "mountain"
+    },
+    {
+      "file": "GoatMountain (7).webp",
+      "variant": "mountain"
+    },
+    {
+      "file": "GoatUrban (1).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GoatUrban (2).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GoatUrban (3).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GoatUrban (4).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GoatUrban (5).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GoatUrban (6).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GoatUrban (7).webp",
+      "variant": "urban"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

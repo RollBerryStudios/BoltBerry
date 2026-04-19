@@ -1,0 +1,54 @@
+{
+  "id": 83,
+  "slug": "vicious-mockery",
+  "name": "Vicious Mockery",
+  "nameDe": "Gehässiger Spott",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard"
+    ],
+    "de": [
+      "Barde"
+    ]
+  },
+  "type": {
+    "en": "Enchantment cantrip",
+    "de": "Verzauberungs Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "You unleash a string of insults laced with subtle enchantments at a creature you can see within range. If the target can hear you (though it need not understand you), it must succeed on a wisdom saving throw or take 1d4 psychic damage and have disadvantage on the next attack roll it makes before the end of its next turn. This spell's damage increases by 1d4 when you reach 5th level (2d4), 11th level (3d4), and 17th level (4d4).",
+    "de": "Du entfesselst eine Reihe von Beleidigungen, die mit subtilen Verzauberungen durchsetzt und an eine Kreatur in Reichweite gerichtet sind, die du sehen kannst. Falls dich das Ziel hören kann - obwohl es dich nicht verstehen muss -, muss es einen Weisheitsrettungswurf bestehen, oder es erleidet 1W4 psychischen Schaden und ist beim nächsten Angriffswurf vor dem Ende seines nächsten Zugs im Nachteil. Der Schaden dieses Zaubers steigt um je 1W4, wenn du die 5. Stufe (2W4), die 11. Stufe (3W4) und die 17. Stufe (4W4) erreichst."
+  },
+  "higherLevels": "Der Schaden des Zaubers steigt jeweils um 1W4 bei Erreichen der 5. (2W4), 11. (3W4) und 17. Stufe (4W4).",
+  "image": "vicious-mockery",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

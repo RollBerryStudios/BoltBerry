@@ -1,0 +1,60 @@
+{
+  "id": 227,
+  "slug": "commune",
+  "name": "Commune",
+  "nameDe": "Heiliges Gespräch",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "5th-level divination (ritual)",
+    "de": "Stufe 5 Erkenntnismagie (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "incense and a vial of holy or unholy water",
+      "de": "Weihrauch und ein Fläschchen mit heiligem oder unheiligem Wasser"
+    },
+    "raw": {
+      "en": "V, S, M (incense and a vial of holy or unholy water)",
+      "de": "V, G, M (Weihrauch und ein Fläschchen mit heiligem oder unheiligem Wasser)"
+    }
+  },
+  "description": {
+    "en": "You contact your deity or a divine proxy and ask up to three questions that can be answered with a yes or no. You must ask your questions before the spell ends. You receive a correct answer for each question. Divine beings aren't necessarily omniscient, so you might receive \"unclear\" as an answer if a question pertains to information that lies beyond the deity's knowledge. In a case where a one-word answer could be misleading or contrary to the deity's interests, the GM might offer a short phrase as an answer instead. If you cast the spell two or more times before finishing your next long rest, there is a cumulative 25 percent chance for each casting after the first that you get no answer. The GM makes this roll in secret.",
+    "de": "Du nimmst mit deiner Gottheit oder einem göttlichen Gesandten Kontakt auf und stellst bis zu drei Fragen, die mit Ja oder Nein beantwortet werden können. Du musst deine Fragen stellen, bevor der Zauber endet. Du erhältst eine korrekte Antwort auf jede Frage. Göttliche Wesen sind nicht unbedingt allwissend. Bezieht sich die Frage auf Informationen, die das Wissen der Gottheit übersteigen, könntest du 'unklar' als Antwort erhalten. Falls eine Antwort mit nur einem Wort irreführend sein oder nicht dem Interesse der Gottheit entsprechen könnte, kann der SL stattdessen einen kurzen Satz als Antwort geben. Wenn du den Zauber vor deiner nächsten langen Rast mindestens zweimal wirkst, besteht eine Chance von 25 Prozent für jedes Wirken nach dem ersten, dass du keine Antwort bekommst. Der SL würfelt das Ergebnis geheim aus."
+  },
+  "image": "bless",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

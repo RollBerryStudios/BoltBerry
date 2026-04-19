@@ -1,0 +1,58 @@
+{
+  "id": 308,
+  "slug": "ray-of-enfeeblement",
+  "name": "Ray of Enfeeblement",
+  "nameDe": "Schwächestrahl",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Necromancy",
+    "de": "Nekromantie"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-level necromancy",
+    "de": "Stufe 2 Nekromantie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "A black beam of enervating energy springs from your finger toward a creature within range. Make a ranged spell attack against the target. On a hit, the target deals only half damage with weapon attacks that use Strength until the spell ends. At the end of each of the target's turns, it can make a constitution saving throw against the spell. On a success, the spell ends.",
+    "de": "Ein schwarzer Strahl aus entkräftender Energie schießt aus deinem Finger auf eine Kreatur in Reichweite. Führe einen Fernkampf-Zauberangriff gegen das Ziel aus. Bei einem Treffer verursacht das Ziel mit Waffenangriffen, die Stärke verwenden, bis der Zauber endet nur den halben Schaden. Am Ende jedes seiner Züge kann das Ziel einen Konstitutionsrettungswurf gegen den Zauber ausführen. Bei einem Erfolg endet der Zauber."
+  },
+  "image": "ray-of-enfeeblement",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,249 @@
+{
+  "id": 168,
+  "slug": "hill-giant",
+  "name": "Hill Giant",
+  "nameDe": "Hügelriese",
+  "source": "SRD",
+  "meta": {
+    "en": "Huge giant, chaotic evil",
+    "de": "Großer Riese, chaotisch böse"
+  },
+  "challenge": "5",
+  "xp": 1800,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "105 (10d12 + 40)",
+    "de": "105 (10W12+40)"
+  },
+  "str": 21,
+  "dex": 8,
+  "con": 19,
+  "int": 5,
+  "wis": 9,
+  "cha": 6,
+  "strMod": 5,
+  "dexMod": -1,
+  "conMod": 4,
+  "intMod": -3,
+  "wisMod": -1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 12"
+    ],
+    "de": [
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Giant"
+    ],
+    "de": [
+      "Riesisch"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +2"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The giant makes two greatclub attacks."
+      },
+      {
+        "name": "Greatclub",
+        "text": "Melee Weapon Attack: +8 to hit, reach 10 ft., one target. Hit: 18 (3d8 + 5) bludgeoning damage."
+      },
+      {
+        "name": "Rock",
+        "text": "Ranged Weapon Attack: +8 to hit, range 60/240 ft., one target. Hit: 21 (3d10 + 5) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Riese führt zwei Angriffe mit dem Zweihandknüppel aus."
+      },
+      {
+        "name": "Zweihandknüppel",
+        "text": "Nahkampfwaffenangriff: +8 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 18 (3W8+5) Wuchtschaden."
+      },
+      {
+        "name": "Felsblock",
+        "text": "Fernkampfwaffenangriff: +8 auf Treffer, Reichweite 18/72 m, ein Ziel. Treffer: 21 (3W10+5) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/331/315/315/636252776196140305.jpeg",
+  "size": {
+    "en": "huge",
+    "de": "Riesig"
+  },
+  "type": {
+    "en": "giant",
+    "de": "Riese"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "HillGiantFemale (1).webp",
+    "variant": "female"
+  },
+  "tokens": [
+    {
+      "file": "HillGiantFemale (10).webp",
+      "variant": "female"
+    },
+    {
+      "file": "HillGiantFemale (11).webp",
+      "variant": "female"
+    },
+    {
+      "file": "HillGiantFemale (12).webp",
+      "variant": "female"
+    },
+    {
+      "file": "HillGiantFemale (2).webp",
+      "variant": "female"
+    },
+    {
+      "file": "HillGiantFemale (3).webp",
+      "variant": "female"
+    },
+    {
+      "file": "HillGiantFemale (4).webp",
+      "variant": "female"
+    },
+    {
+      "file": "HillGiantFemale (5).webp",
+      "variant": "female"
+    },
+    {
+      "file": "HillGiantFemale (6).webp",
+      "variant": "female"
+    },
+    {
+      "file": "HillGiantFemale (7).webp",
+      "variant": "female"
+    },
+    {
+      "file": "HillGiantFemale (8).webp",
+      "variant": "female"
+    },
+    {
+      "file": "HillGiantFemale (9).webp",
+      "variant": "female"
+    },
+    {
+      "file": "HillGiantMale (1).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (10).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (11).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (12).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (13).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (14).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (15).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (16).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (17).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (18).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (19).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (2).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (20).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (21).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (22).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (23).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (24).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (3).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (4).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (5).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (6).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (7).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (8).webp",
+      "variant": "male"
+    },
+    {
+      "file": "HillGiantMale (9).webp",
+      "variant": "male"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

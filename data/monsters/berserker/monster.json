@@ -1,0 +1,355 @@
+{
+  "id": 47,
+  "slug": "berserker",
+  "name": "Berserker",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "13 (Hide Armor)",
+    "de": "13 (Fellrüstung)"
+  },
+  "hp": {
+    "en": "67 (9d8 + 27)",
+    "de": "67 (9W8 + 27)"
+  },
+  "str": 16,
+  "dex": 12,
+  "con": 17,
+  "int": 9,
+  "wis": 11,
+  "cha": 9,
+  "strMod": 3,
+  "dexMod": 1,
+  "conMod": 3,
+  "intMod": -1,
+  "wisMod": 0,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any one language (usually Common)"
+    ],
+    "de": [
+      "Eine beliebige Sprache (normalerweise Gemeinsprache)"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Reckless",
+        "text": "At the start of its turn, the berserker can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn."
+      }
+    ],
+    "de": [
+      {
+        "name": "Unvorsichtig",
+        "text": "Ab Beginn seines Zugs ist der Berserker bei allen Nahkampfwaffenangriffswürfen im Vorteil, doch Angriffswürfe gegen ihn sind ebenfalls im Vorteil. Dies gilt bis zum Beginn seines nächsten Zugs."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Greataxe",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 9 (1d12 + 3) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Zweihandaxt",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 9 (1W12+3) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/656/humanoid.jpg",
+  "size": {
+    "en": "medium",
+    "de": "mittel"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoid"
+  },
+  "alignment": {
+    "en": "any chaotic",
+    "de": "jegliche chaotische"
+  },
+  "token": {
+    "file": "BerserkerDragonborn (1).webp",
+    "variant": "dragonborn"
+  },
+  "tokens": [
+    {
+      "file": "BerserkerDragonborn (2).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "BerserkerDragonborn (3).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "BerserkerDragonborn (4).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "BerserkerDragonborn (5).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "BerserkerDragonborn (6).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "BerserkerDwarfFemale (1).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "BerserkerDwarfFemale (2).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "BerserkerDwarfFemale (3).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "BerserkerDwarfFemale (4).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "BerserkerDwarfMale (1).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "BerserkerDwarfMale (2).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "BerserkerDwarfMale (3).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "BerserkerDwarfMale (4).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "BerserkerDwarfMale (5).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "BerserkerDwarfMale (6).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "BerserkerDwarfMale (7).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "BerserkerElfFemale (1).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "BerserkerElfFemale (2).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "BerserkerHalforcFemale (1).webp",
+      "variant": "halforcFemale"
+    },
+    {
+      "file": "BerserkerHalforcFemale (2).webp",
+      "variant": "halforcFemale"
+    },
+    {
+      "file": "BerserkerHalforcFemale (3).webp",
+      "variant": "halforcFemale"
+    },
+    {
+      "file": "BerserkerHalforcFemale (4).webp",
+      "variant": "halforcFemale"
+    },
+    {
+      "file": "BerserkerHalforcFemale (5).webp",
+      "variant": "halforcFemale"
+    },
+    {
+      "file": "BerserkerHalforcFemale (6).webp",
+      "variant": "halforcFemale"
+    },
+    {
+      "file": "BerserkerHalforcFemale (7).webp",
+      "variant": "halforcFemale"
+    },
+    {
+      "file": "BerserkerHalforcFemale (8).webp",
+      "variant": "halforcFemale"
+    },
+    {
+      "file": "BerserkerHalforcMale (1).webp",
+      "variant": "halforcMale"
+    },
+    {
+      "file": "BerserkerHalforcMale (2).webp",
+      "variant": "halforcMale"
+    },
+    {
+      "file": "BerserkerHumanFemale (1).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "BerserkerHumanFemale (2).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "BerserkerHumanFemale (3).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "BerserkerHumanFemale (4).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "BerserkerHumanFemale (5).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "BerserkerHumanFemale (6).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "BerserkerHumanFemale (7).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "BerserkerHumanMale (1).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerHumanMale (10).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerHumanMale (11).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerHumanMale (12).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerHumanMale (13).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerHumanMale (14).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerHumanMale (15).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerHumanMale (16).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerHumanMale (17).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerHumanMale (18).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerHumanMale (2).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerHumanMale (3).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerHumanMale (4).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerHumanMale (5).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerHumanMale (6).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerHumanMale (7).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerHumanMale (8).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerHumanMale (9).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "BerserkerOrcMale (1).webp",
+      "variant": "orcMale"
+    },
+    {
+      "file": "BerserkerOrcMale (2).webp",
+      "variant": "orcMale"
+    },
+    {
+      "file": "BerserkerOrcMale (3).webp",
+      "variant": "orcMale"
+    },
+    {
+      "file": "BerserkerOrcMale (4).webp",
+      "variant": "orcMale"
+    },
+    {
+      "file": "BerserkerTieflingFemale (1).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "BerserkerTieflingFemale (2).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "BerserkerTieflingFemale (3).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "BerserkerTieflingFemale (4).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "BerserkerTieflingMale (1).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "BerserkerTieflingMale (2).webp",
+      "variant": "tieflingMale"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

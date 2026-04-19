@@ -1,0 +1,60 @@
+{
+  "id": 108,
+  "slug": "call-lightning",
+  "name": "Call Lightning",
+  "nameDe": "Blitze herbeirufen",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid"
+    ],
+    "de": [
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "3rd-level conjuration",
+    "de": "Stufe 3 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "A storm cloud appears in the shape of a cylinder that is 10 feet tall with a 60-foot radius, centered on a point you can see 100 feet directly above you. The spell fails if you can't see a point in the air where the storm cloud could appear (for example, if you are in a room that can't accommodate the cloud). When you cast the spell, choose a point you can see within range. A bolt of lightning flashes down from the cloud to that point. Each creature within 5 feet of that point must make a dexterity saving throw. A creature takes 3d10 lightning damage on a failed save, or half as much damage on a successful one. On each of your turns until the spell ends, you can use your action to call down lightning in this way again, targeting the same point or a different one. If you are outdoors in stormy conditions when you cast this spell, the spell gives you control over the existing storm instead of creating a new one. Under such conditions, the spell's damage increases by 1d10.",
+    "de": "Eine Sturmwolke in Form eines drei Meter hohen Zylinders mit einem Radius von 18 Metern erscheint zentriert auf einem Punkt 30 Meter direkt über dir, den du sehen kannst. Der Zauber schlägt fehlt, wenn du keinen Punkt in der Luft sehen kannst, an dem die Sturmwolke erscheinen kann (beispielsweise, wenn du dich in einem Raum befindest, der zu klein für die Wolke ist). Wenn du diesen Zauber wirkst, wähle einen Punkt in Reichweite, den du sehen kannst. Ein Blitz schlägt von der Wolke in diesen Punkt ein. Jede Kreatur im Umkreis von 1,5 Metern um diesen Punkt muss einen Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet die Kreatur 3W10 Blitzschaden, anderenfalls die Hälfte. Bis der Zauber endet, kannst du deine Aktion in jedem deiner Züge verwenden, um erneut einen Blitz einschlagen zu lassen. Dabei kannst du denselben Punkt oder einen anderen als Ziel auswählen. Wenn du dich draußen aufhältst und ein Sturm herrscht, wenn du diesen Zauber wirkst, verleiht er dir Kontrolle über den bestehenden Sturm und erschafft keinen neuen. Unter diesen Umständen erhöht sich der Schaden des Zaubers um 1W10. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 4. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 3. um 1W10."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 4th or higher level, the damage increases by 1d10 for each slot level above 3rd.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 4. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 3. um 1W10."
+  },
+  "image": "call-lightning",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,56 @@
+{
+  "id": 302,
+  "slug": "planar-ally",
+  "name": "Planar Ally",
+  "nameDe": "Verbündeter aus den Ebenen",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "6th-level conjuration",
+    "de": "Stufe 6 Beschwörung"
+  },
+  "castingTime": {
+    "en": "10 minutes",
+    "de": "10 Minuten"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You beseech an otherworldly entity for aid. The being must be known to you: a god, a primordial, a demon prince, or some other being of cosmic power. That entity sends a celestial, an elemental, or a fiend loyal to it to aid you, making the creature appear in an unoccupied space within range. If you know a specific creature's name, you can speak that name when you cast this spell to request that creature, though you might get a different creature anyway (GM's choice). When the creature appears, it is under no compulsion to behave in any particular way. You can ask the creature to perform a service in exchange for payment, but it isn't obliged to do so. The requested task could range from simple (fly us across the chasm, or help us fight a battle) to complex (spy on our enemies, or protect us during our foray into the dungeon). You must be able to communicate with the creature to bargain for its services. Payment can take a variety of forms. A celestial might require a sizable donation of gold or magic items to an allied temple, while a fiend might demand a living sacrifice or a gift of treasure. Some creatures might exchange their service for a quest undertaken by you. As a rule of thumb, a task that can be measured in minutes requires a payment worth 100 gp per minute. A task measured in hours requires 1,000 gp per hour. And a task measured in days (up to 10 days) requires 10,000 gp per day. The GM can adjust these payments based on the circumstances under which you cast the spell. If the task is aligned with the creature's ethos, the payment might be halved or even waived. Nonhazardous tasks typically require only half the suggested payment, while especially dangerous tasks might require a greater gift. Creatures rarely accept tasks that seem suicidal. After the creature completes the task, or when the agreed-upon duration of service expires, the creature returns to its home plane after reporting back to you, if appropriate to the task and if possible. If you are unable to agree on a price for the creature's service, the creature immediately returns to its home plane. A creature enlisted to join your group counts as a member of it, receiving a full share of experience points awarded.",
+    "de": "Du bittest ein außerweltliches Wesen um Hilfe. Das Wesen muss dir sein: eine Gottheit, eine Elementarmacht, ein Dämonenprinz oder ein anderes Wesen kosmischer Macht Dieses Wesen schickt ein ihm treu ergebenes celestisches Wesen, einen Elementar oder einen Unhold, um dir zu helfen. Die Kreatur erscheint an einer freien Stelle in Reichweite. Kennst du den Namen einer bestimmten Kreatur, kannst du ihn aussprechen, wenn du diesen Zauber wirkst, um diese Kreatur zu erbitten. Du könntest jedoch nach Wahl des SL trotzdem eine andere Kreatur erhalten. Wenn die Kreatur erscheint, ist sie nicht gezwungen, sich auf eine bestimmte Weise zu verhalten. Du kannst sie bitten, einen Dienst gegen Bezahlung auszuführen, sie ist jedoch nicht dazu verpflichtet Die Aufgabe kann einfach oder komplex sein, von 'Fliege uns über den Abgrund!' oder 'Hilf uns im Kampf!' bis zu 'Spioniere unsere Feinde aus!' oder 'Beschützte uns, während wir in das Gewölbe vordringen!'. Du musst mit der Kreatur kommunizieren können, damit du um ihre Dienste feilschen kannst. Die Bezahlung kann auf verschiedene Weise erfolgen. Ein celestisches Wesen verlangt möglicherweise eine beträchtliche Spende an Gold oder magischen Gegenständen, während ein Unhold ein lebendiges Opfer oder einen Schatz erwartet Einige Kreaturen bieten ihre Dienste im Gegenzug für eine Quest an, die du für sie durchführen musst. Als Faustregel erfordert eine Aufgabe, die in Minuten gemessen wird, eine Bezahlung von 100 GM pro Minute. Eine Aufgabe, die in Stunden gemessen wird, kostet 1.000 GM pro Stunde. Eine Aufgabe, die in Tagen gemessen wird (maximal zehn Tage) erfordert 10.000 GM pro Tag. Der SL kann diese Bezahlung an die Umstände anpassen, unter denen du den Zauber wirkst. Steht die Aufgabe im Einklang mit dem Ethos der Kreatur, kann die Bezahlung halbiert werden oder sogar entfallen. Ungefährliche Aufgaben erfordern meist nur die Hälfte der genannten Bezahlung, während besonders gefährliche Aufgaben eine größere Spende benötigen. Kreaturen nehmen selten Aufgaben an, die selbstmörderisch erscheinen. Nachdem die Kreatur den Auftrag abgeschlossen hat oder wenn die abgesprochene Dauer des Dienstes endet, kehrt die Kreatur auf ihre Heimatebene zurück, nachdem sie dir Bericht erstattet hat - sofern dies zur Aufgabe passt und möglich ist Kannst du dich mit der Kreatur nicht auf einen Preis für ihren Dienst einigen, kehrt sie sofort auf ihre Heimatebene zurück. Eine Kreatur, die sich deiner Gruppe anschließt, zählt als Mitglied und erhält den vollen Anteil an Erfahrungspunkten."
+  },
+  "image": "unseen-servant",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

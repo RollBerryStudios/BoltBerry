@@ -1,0 +1,60 @@
+{
+  "id": 94,
+  "slug": "silence",
+  "name": "Silence",
+  "nameDe": "Stille",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "ranger"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Waldläufer"
+    ]
+  },
+  "type": {
+    "en": "2nd-level illusion (ritual)",
+    "de": "Stufe 2 Illusionsmagie (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "For the duration, no sound can be created within or pass through a 20-foot-radius sphere centered on a point you choose within range. Any creature or object entirely inside the sphere is immune to thunder damage, and creatures are deafened while entirely inside it. Casting a spell that includes a verbal component is impossible there.",
+    "de": "Für die Wirkungsdauer kann kein Ton in einer Sphäre mit einem Radius von sechs Metern erzeugt werden oder die Sphäre durchdringen. Die Sphäre wird an einem Ort deiner Wahl in Reichweite erzeugt. Alle Kreaturen und Objekte, die sich vollständig in der Sphäre befinden, sind taub und gegen Schallschaden immun. In der Sphäre kann kein Zauber gewirkt werden, der eine verbale Komponente enthält."
+  },
+  "image": "slience",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,55 @@
+{
+  "id": 154,
+  "slug": "blur",
+  "name": "Blur",
+  "nameDe": "Verschwimmen",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-Level illusion",
+    "de": "Stufe 2 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "Your body becomes blurred, shifting and wavering to all who can see you. For the duration, any creature has disadvantage on attack rolls against you. An attacker is immune to this effect if it doesn't rely on sight, as with blindsight, or can see through illusions, as with truesight.",
+    "de": "Alle, die dich sehen können, nehmen deinen Körper als unscharf und oszillierend wahr. Während der Wirkungsdauer sind Kreaturen bei Angriffswürfen gegen dich im Nachteil. Angreifer, die nicht auf ihre Sicht angewiesen sind (etwa durch Blindsicht) oder Illusionen durchschauen können (etwa mit wahrer Sicht), sind gegen diesen Effekt immun."
+  },
+  "image": "blur",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

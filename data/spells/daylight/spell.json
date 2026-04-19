@@ -1,0 +1,62 @@
+{
+  "id": 117,
+  "slug": "daylight",
+  "name": "Daylight",
+  "nameDe": "Tageslicht",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "druid",
+      "ranger",
+      "sorcerer"
+    ],
+    "de": [
+      "Kleriker",
+      "Druide",
+      "Waldläufer",
+      "Zauberer"
+    ]
+  },
+  "type": {
+    "en": "3rd-level evocation",
+    "de": "Stufe 3 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "A 60-foot-radius sphere of light spreads out from a point you choose within range. The sphere is bright light and sheds dim light for an additional 60 feet. If you chose a point on an object you are holding or one that isn't being worn or carried, the light shines from the object and moves with it. Completely covering the affected object with an opaque object, such as a bowl or a helm, blocks the light. If any of this spell's area overlaps with an area of darkness created by a spell of 3rd level or lower, the spell that created the darkness is dispelled.",
+    "de": "Eine Sphäre aus Licht breitet sich von einem Punkt deiner Wahl in Reichweite mit einem Radius von 18 Metern aus. Bei der Sphäre handelt es sich um helles Licht, das weitere 18 Meter dämmriges Licht gewährt. Wenn der gewählte Punkt ein Objekt ist, das du hältst oder das nicht getragen wird, geht das Licht von diesem Objekt aus und bewegt sich mit ihm mit. Das Licht wird blockiert, wenn seine Quelle mit einem undurchsichtigen Objekt wie einer Schüssel oder einem Helm bedeckt wird. Wenn sich der Wirkbereich dieses Zaubers mit dem einer Dunkelheit überschneidet, die durch einen Zauber des 3. Grades oder niedriger erzeugt wurde, so wird die Dunkelheit gebannt."
+  },
+  "image": "bless",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

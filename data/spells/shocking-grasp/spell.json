@@ -1,0 +1,58 @@
+{
+  "id": 72,
+  "slug": "shocking-grasp",
+  "name": "Shocking Grasp",
+  "nameDe": "Schockgriff",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "Evocation cantrip",
+    "de": "Hervorrufung Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "Lightning springs from your hand to deliver a shock to a creature you try to touch. Make a melee spell attack against the target. You have advantage on the attack roll if the target is wearing armor made of metal. On a hit, the target takes 1d8 lightning damage, and it can't take reactions until the start of its next turn. The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).",
+    "de": "Ein Blitz springt von deiner Hand auf eine Kreatur über, die du zu berühren versuchst, und versetzt ihr einen elektrischen Schlag. Führe einen Nahkampf-Zauberangriff gegen das Ziel aus. Du bist beim Angriffswurf im Vorteil, wenn das Ziel eine Rüstung aus Metall trägt. Bei einem Treffer erleidet das Ziel 1W8 Blitzschaden und kann erst zu Beginn seines nächsten Zugs Reaktionen ausführen. Der Schaden des Zaubers steigt um je 1W8, wenn du die 5. Stufe (2W8), die 11. Stufe (3W8) und die 17. Stufe (4W8) erreichst."
+  },
+  "image": "shocking-grasp",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

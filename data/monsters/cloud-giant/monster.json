@@ -1,0 +1,219 @@
+{
+  "id": 69,
+  "slug": "cloud-giant",
+  "name": "Cloud Giant",
+  "nameDe": "Wolkenriese",
+  "source": "SRD",
+  "meta": {
+    "en": "Huge giant, neutral",
+    "de": "Großer Riese, neutral"
+  },
+  "challenge": "9",
+  "xp": 5000,
+  "ac": {
+    "en": "14 (Natural Armor)",
+    "de": "14 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "200 (16d12 + 96)",
+    "de": "200 (16W12+96)"
+  },
+  "str": 27,
+  "dex": 10,
+  "con": 22,
+  "int": 12,
+  "wis": 16,
+  "cha": 16,
+  "strMod": 8,
+  "dexMod": 0,
+  "conMod": 6,
+  "intMod": 1,
+  "wisMod": 3,
+  "chaMod": 3,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 17"
+    ],
+    "de": [
+      "Passive Wahrnehmung 17"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Giant"
+    ],
+    "de": [
+      "Gemeinsprache",
+      "Riesisch"
+    ]
+  },
+  "savingThrows": [
+    "Kon +10",
+    "Wei +7",
+    "Cha +7"
+  ],
+  "skills": [
+    "Motiv erkennen +7",
+    "Wahrnehmung +7"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Smell",
+        "text": "The giant has advantage on Wisdom (Perception) checks that rely on smell."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfer Geruchssinn",
+        "text": "Der Riese ist bei Weisheitswürfen (Wahrnehmung), die auf Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The giant makes two morningstar attacks."
+      },
+      {
+        "name": "Morningstar",
+        "text": "Melee Weapon Attack: +12 to hit, reach 10 ft., one target. Hit: 21 (3d8 + 8) piercing damage."
+      },
+      {
+        "name": "Rock",
+        "text": "Ranged Weapon Attack: +12 to hit, range 60/240 ft., one target. Hit: 30 (4d10 + 8) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Riese führt zwei Angriffe mit dem Morgenstern aus."
+      },
+      {
+        "name": "Morgenstern",
+        "text": "Nahkampfwaffenangriff: +12 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 21 (3W8+8) Stichschaden."
+      },
+      {
+        "name": "Felsblock",
+        "text": "Fernkampfwaffenangriff: +12 auf Treffer, Reichweite 18/72 m, ein Ziel. Treffer: 30 (4W10+8) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/249/1000/1000/636252767619414260.jpeg",
+  "size": {
+    "en": "huge",
+    "de": "Riesig"
+  },
+  "type": {
+    "en": "giant",
+    "de": "Riese"
+  },
+  "alignment": {
+    "en": "neutral good or neutral evil",
+    "de": "neutral gut (50 %) oder neutral böse (50 %)"
+  },
+  "token": {
+    "file": "CloudGiantFemale (1).webp",
+    "variant": "female"
+  },
+  "tokens": [
+    {
+      "file": "CloudGiantFemale (2).webp",
+      "variant": "female"
+    },
+    {
+      "file": "CloudGiantFemale (3).webp",
+      "variant": "female"
+    },
+    {
+      "file": "CloudGiantFemale (4).webp",
+      "variant": "female"
+    },
+    {
+      "file": "CloudGiantFemale (5).webp",
+      "variant": "female"
+    },
+    {
+      "file": "CloudGiantFemale (6).webp",
+      "variant": "female"
+    },
+    {
+      "file": "CloudGiantFemale (7).webp",
+      "variant": "female"
+    },
+    {
+      "file": "CloudGiantFemale (8).webp",
+      "variant": "female"
+    },
+    {
+      "file": "CloudGiantMale (1).webp",
+      "variant": "male"
+    },
+    {
+      "file": "CloudGiantMale (10).webp",
+      "variant": "male"
+    },
+    {
+      "file": "CloudGiantMale (11).webp",
+      "variant": "male"
+    },
+    {
+      "file": "CloudGiantMale (12).webp",
+      "variant": "male"
+    },
+    {
+      "file": "CloudGiantMale (13).webp",
+      "variant": "male"
+    },
+    {
+      "file": "CloudGiantMale (14).webp",
+      "variant": "male"
+    },
+    {
+      "file": "CloudGiantMale (15).webp",
+      "variant": "male"
+    },
+    {
+      "file": "CloudGiantMale (2).webp",
+      "variant": "male"
+    },
+    {
+      "file": "CloudGiantMale (3).webp",
+      "variant": "male"
+    },
+    {
+      "file": "CloudGiantMale (4).webp",
+      "variant": "male"
+    },
+    {
+      "file": "CloudGiantMale (5).webp",
+      "variant": "male"
+    },
+    {
+      "file": "CloudGiantMale (6).webp",
+      "variant": "male"
+    },
+    {
+      "file": "CloudGiantMale (7).webp",
+      "variant": "male"
+    },
+    {
+      "file": "CloudGiantMale (8).webp",
+      "variant": "male"
+    },
+    {
+      "file": "CloudGiantMale (9).webp",
+      "variant": "male"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

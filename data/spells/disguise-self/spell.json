@@ -1,0 +1,62 @@
+{
+  "id": 20,
+  "slug": "disguise-self",
+  "name": "Disguise Self",
+  "nameDe": "Selbstverkleidung",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level illusion",
+    "de": "Stufe 1 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You make yourself--including your clothing, armor, weapons, and other belongings on your person--look different until the spell ends or until you use your action to dismiss it. You can seem 1 foot shorter or taller and can appear thin, fat, or in between. You can't change your body type, so you must adopt a form that has the same basic arrangement of limbs. Otherwise, the extent of the illusion is up to you. The changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to your outfit, objects pass through the hat, and anyone who touches it would feel nothing or would feel your head and hair. If you use this spell to appear thinner than you are, the hand of someone who reaches out to touch you would bump into you while it was seemingly still in midair. To discern that you are disguised, a creature can use its action to inspect your appearance and must succeed on an Intelligence (Investigation) check against your spell save DC.",
+    "de": "Verändere dein Aussehen einschließlich Kleidung, Rüstung, Waffen und anderer Habseligkeiten, bis der Zauber endet oder du deine Aktion verwendest, um ihn zu beenden. Du kannst 30 Zentimeter größer oder kleiner sowie dick, dünn oder normal erscheinen. Deinen Körpertyp kannst du nicht verändern, musst also eine Form mit der gleichen Grundanordnung von Gliedmaßen annehmen. Abgesehen davon sind Form und Ausmaß der Illusion dir überlassen. Einer genauen körperlichen Untersuchung halten die Veränderungen dieser Illusion nicht stand. Nutzt du diesen Zauber beispielsweise, um dir einen Hut aufzusetzen, durchdringen Gegenstände diesen einfach. Will jemand den Hut berühren, fühlt er dort nichts außer deinen Haaren und deinem Kopf. Lässt du dich durch den Zauber dünner erscheinen, würde eine nach dir greifende Hand schon mit dir kollidieren, wenn sie noch in der Luft zu sein scheint Eine Kreatur kann deine Verkleidung als solche erkennen, wenn sie mit ihrer Aktion dein Aussehen untersucht und einen Intelligenzwurf (Nachforschungen) gegen deinen Zauberrettungswurf-SG besteht."
+  },
+  "image": "disguise",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

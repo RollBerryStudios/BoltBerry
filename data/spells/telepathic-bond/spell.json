@@ -1,0 +1,59 @@
+{
+  "id": 391,
+  "slug": "telepathic-bond",
+  "name": "Telepathic Bond",
+  "nameDe": "Telepathische Bindung",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "5th-level divination (ritual)",
+    "de": "Stufe 5 Erkenntnismagie (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "Pieces of eggshell from two different kinds of creatures",
+      "de": "Eierschalen von zwei unterschiedlichen Arten von Kreaturen"
+    },
+    "raw": {
+      "en": "V, S, M (Pieces of eggshell from two different kinds of creatures)",
+      "de": "V, G, M (Eierschalen von zwei unterschiedlichen Arten von Kreaturen)"
+    }
+  },
+  "description": {
+    "en": "You forge a telepathic link among up to eight willing creatures of your choice within range, psychically linking each creature to all the others for the duration. Creatures with Intelligence scores of 2 or less aren't affected by this spell. Until the spell ends, the targets can communicate telepathically through the bond whether or not they have a common language. The communication is possible over any distance, though it can't extend to other planes of existence.",
+    "de": "Du erschaffst eine telepathische Bindung zwischen bis zu acht bereitwilligen Kreaturen deiner Wahl in Reichweite. Dadurch werden alle Kreaturen für die Wirkungsdauer geistig miteinander verbunden. Kreaturen mit einem Intelligenzwert von höchstens 2 sind von diesem Zauber nicht betroffen. Bis der Zauber endet, können die Ziele telepathisch miteinander kommunizieren, unabhängig davon, ob sie dieselbe Sprache sprechen oder nicht. Die Kommunikation ist auf jede Entfernung möglich, reicht allerdings nicht bis auf andere Ebenen der Existenz."
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

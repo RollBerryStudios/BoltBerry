@@ -1,0 +1,220 @@
+{
+  "id": 100,
+  "slug": "elephant",
+  "name": "Elephant",
+  "nameDe": "Elefant",
+  "source": "SRD",
+  "meta": {
+    "en": "Huge beast, unaligned",
+    "de": "Riesige Bestie, ohne Gesinnung"
+  },
+  "challenge": "4",
+  "xp": 1100,
+  "ac": {
+    "en": "12 (Natural Armor)",
+    "de": "12 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "76 (8d12 + 24)",
+    "de": "76 (8W12+24)"
+  },
+  "str": 22,
+  "dex": 9,
+  "con": 17,
+  "int": 3,
+  "wis": 11,
+  "cha": 6,
+  "strMod": 6,
+  "dexMod": -1,
+  "conMod": 3,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Trampling Charge",
+        "text": "If the elephant moves at least 20 ft. straight toward a creature and then hits it with a gore attack on the same turn, that target must succeed on a DC 12 Strength saving throw or be knocked prone. If the target is prone, the elephant can make one stomp attack against it as a bonus action."
+      }
+    ],
+    "de": [
+      {
+        "name": "Trampel-Sturmangriff",
+        "text": "Wenn der Elefant sich mindestens sechs Meter weit direkt auf eine Kreatur zubewegt und sie dann im selben Zug mit einem Zerfleischen-Angriff trifft, muss das Ziel einen SG-12-Stärkerettungswurf bestehen, oder es wird umgestoßen. Gegen ein liegendes Ziel kann der Elefant als Bonusaktion einen Stampfen-Angriff ausführen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Gore",
+        "text": "Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 19 (3d8 + 6) piercing damage."
+      },
+      {
+        "name": "Stomp",
+        "text": "Melee Weapon Attack: +8 to hit, reach 5 ft., one prone creature. Hit: 22 (3d10 + 6) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Stampfen",
+        "text": "Nahkampfwaffenangriff: +8 auf Treffer, Reichweite 1,5 m, eine liegende Kreatur. Treffer: 22 (3W10+6) Wuchtschaden."
+      },
+      {
+        "name": "Zerfleischen",
+        "text": "Nahkampfwaffenangriff: +8 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 19 (3W8+6) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "huge",
+    "de": "Riesiges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "ElephantGrassland (1).webp",
+    "variant": "grassland"
+  },
+  "tokens": [
+    {
+      "file": "ElephantGrassland (10).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (11).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (12).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (13).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (14).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (15).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (16).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (17).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (18).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (19).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (2).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (20).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (3).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (4).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (5).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (6).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (7).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (8).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantGrassland (9).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "ElephantUrban (1).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "ElephantUrban (2).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "ElephantUrban (3).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "ElephantUrban (4).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "ElephantUrban (5).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "ElephantUrban (6).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "ElephantUrban (7).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "ElephantUrban (8).webp",
+      "variant": "urban"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

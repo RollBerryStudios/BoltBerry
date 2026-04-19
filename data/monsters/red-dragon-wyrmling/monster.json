@@ -1,0 +1,208 @@
+{
+  "id": 240,
+  "slug": "red-dragon-wyrmling",
+  "name": "Red Dragon Wyrmling",
+  "nameDe": "Roter Drachennestling",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium dragon, chaotic evil",
+    "de": "Mittelgroßer Drache, chaotisch böse"
+  },
+  "challenge": "4",
+  "xp": 1100,
+  "ac": {
+    "en": "17 (Natural Armor)",
+    "de": "17 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "75 (10d8 + 30)",
+    "de": "75 (10W8+30)"
+  },
+  "str": 19,
+  "dex": 10,
+  "con": 17,
+  "int": 12,
+  "wis": 11,
+  "cha": 15,
+  "strMod": 4,
+  "dexMod": 0,
+  "conMod": 3,
+  "intMod": 1,
+  "wisMod": 0,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    },
+    "climb": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 10 ft.",
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Blindsicht 3 m",
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Draconic"
+    ],
+    "de": [
+      "Drakonisch"
+    ]
+  },
+  "savingThrows": [
+    "Ges +2",
+    "Kon +5",
+    "Wei +2",
+    "Cha +4"
+  ],
+  "skills": [
+    "Heimlichkeit +2",
+    "Wahrnehmung +4"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 9 (1d10 + 4) piercing damage plus 3 (1d6) fire damage."
+      },
+      {
+        "name": "Fire Breath",
+        "text": "The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC 13 Dexterity saving throw, taking 24 (7d6) fire damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 9 (1W10+4) Stichschaden plus 3 (1W6) Feuerschaden."
+      },
+      {
+        "name": "Feuerodem (Aufladung 5–6)",
+        "text": "Der Drache atmet Feuer in einem Kegel von 4,5 Metern aus. Jede Kreatur in diesem Bereich muss einen SG-13-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 24 (7W6) Feuerschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/239/315/315/636252766855622680.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "dragon",
+    "de": "Drache"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "RedDragonWyrmling (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "RedDragonWyrmling (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "RedDragonWyrmling (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,211 @@
+{
+  "id": 48,
+  "slug": "black-bear",
+  "name": "Black Bear",
+  "nameDe": "Schwarzbär",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "11 (Natural Armor)",
+    "de": "11 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "19 (3d8 + 6)",
+    "de": "19 (3W8+6)"
+  },
+  "str": 15,
+  "dex": 10,
+  "con": 14,
+  "int": 2,
+  "wis": 12,
+  "cha": 7,
+  "strMod": 2,
+  "dexMod": 0,
+  "conMod": 2,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    },
+    "climb": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Smell",
+        "text": "The bear has advantage on Wisdom (Perception) checks that rely on smell."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfer Geruchssinn",
+        "text": "Der Bär ist bei Weisheitswürfen (Wahrnehmung), die auf Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The bear makes two attacks: one with its bite and one with its claws."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 7 (2d4 + 2) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Bär führt zwei Angriffe aus: einen Biss- und einen Klauenangriff."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (2W4+2) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "BlackBearAgressive (1).webp",
+    "variant": "agressive"
+  },
+  "tokens": [
+    {
+      "file": "BlackBearAgressive (10).webp",
+      "variant": "agressive"
+    },
+    {
+      "file": "BlackBearAgressive (11).webp",
+      "variant": "agressive"
+    },
+    {
+      "file": "BlackBearAgressive (2).webp",
+      "variant": "agressive"
+    },
+    {
+      "file": "BlackBearAgressive (3).webp",
+      "variant": "agressive"
+    },
+    {
+      "file": "BlackBearAgressive (4).webp",
+      "variant": "agressive"
+    },
+    {
+      "file": "BlackBearAgressive (5).webp",
+      "variant": "agressive"
+    },
+    {
+      "file": "BlackBearAgressive (6).webp",
+      "variant": "agressive"
+    },
+    {
+      "file": "BlackBearAgressive (7).webp",
+      "variant": "agressive"
+    },
+    {
+      "file": "BlackBearAgressive (8).webp",
+      "variant": "agressive"
+    },
+    {
+      "file": "BlackBearAgressive (9).webp",
+      "variant": "agressive"
+    },
+    {
+      "file": "BlackBearCalm (1).webp",
+      "variant": "calm"
+    },
+    {
+      "file": "BlackBearCalm (10).webp",
+      "variant": "calm"
+    },
+    {
+      "file": "BlackBearCalm (11).webp",
+      "variant": "calm"
+    },
+    {
+      "file": "BlackBearCalm (2).webp",
+      "variant": "calm"
+    },
+    {
+      "file": "BlackBearCalm (3).webp",
+      "variant": "calm"
+    },
+    {
+      "file": "BlackBearCalm (4).webp",
+      "variant": "calm"
+    },
+    {
+      "file": "BlackBearCalm (5).webp",
+      "variant": "calm"
+    },
+    {
+      "file": "BlackBearCalm (6).webp",
+      "variant": "calm"
+    },
+    {
+      "file": "BlackBearCalm (7).webp",
+      "variant": "calm"
+    },
+    {
+      "file": "BlackBearCalm (8).webp",
+      "variant": "calm"
+    },
+    {
+      "file": "BlackBearCalm (9).webp",
+      "variant": "calm"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

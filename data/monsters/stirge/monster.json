@@ -1,0 +1,276 @@
+{
+  "id": 271,
+  "slug": "stirge",
+  "name": "Stirge",
+  "nameDe": "Blutmücke",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny beast, unaligned",
+    "de": "Winzige Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/8",
+  "xp": 25,
+  "ac": {
+    "en": "14 (Natural Armor)",
+    "de": "14 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "2 (1d4)",
+    "de": "2 (1W4)"
+  },
+  "str": 4,
+  "dex": 16,
+  "con": 11,
+  "int": 2,
+  "wis": 8,
+  "cha": 6,
+  "strMod": -3,
+  "dexMod": 3,
+  "conMod": 0,
+  "intMod": -4,
+  "wisMod": -1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "fly": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 9"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 9"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Blood Drain",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one creature. Hit: 5 (1d4 + 3) piercing damage, and the stirge attaches to the target. While attached, the stirge doesn't attack. Instead, at the start of each of the stirge's turns, the target loses 5 (1d4 + 3) hit points due to blood loss.\nThe stirge can detach itself by spending 5 feet of its movement. It does so after it drains 10 hit points of blood from the target or the target dies. A creature, including the target, can use its action to detach the stirge."
+      }
+    ],
+    "de": [
+      {
+        "name": "Blutabsaugung",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 5 (1W4+3) Stichschaden, und die Blutmücke heftet sich an das Ziel an. Während sie angeheftet ist, greift die Blutmücke nicht an. Stattdessen verliert das Ziel zu Beginn jedes Zugs der Blutmücke 5 (1W4+3) Trefferpunkte aufgrund des Blutverlusts. Die Blutmücke kann sich lösen, indem sie 1,5 Meter ihrer Bewegungsrate verwendet. Das tut sie, nachdem sie 10 Trefferpunkte an Blut ausgesaugt hat oder wenn das Ziel stirbt. Eine Kreatur, auch das Ziel, kann eine Aktion verwenden, um die Blutmücke zu entfernen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/111/1000/1000/636252745395103202.jpeg",
+  "size": {
+    "en": "tiny",
+    "de": "Winziges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Stirge (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Stirge (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (31).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (32).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (33).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (34).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (35).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (36).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (37).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (38).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (39).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (40).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (41).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (42).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (43).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (44).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (45).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (46).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Stirge (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,219 @@
+{
+  "id": 58,
+  "slug": "brown-bear",
+  "name": "Brown Bear",
+  "nameDe": "Braunbär",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "11 (Natural Armor)",
+    "de": "11 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "34 (4d10 + 12)",
+    "de": "34 (4W10+12)"
+  },
+  "str": 19,
+  "dex": 10,
+  "con": 16,
+  "int": 2,
+  "wis": 13,
+  "cha": 7,
+  "strMod": 4,
+  "dexMod": 0,
+  "conMod": 3,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    },
+    "climb": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Smell",
+        "text": "The bear has advantage on Wisdom (Perception) checks that rely on smell."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfer Geruchssinn",
+        "text": "Der Bär ist bei Weisheitswürfen (Wahrnehmung), die auf Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The bear makes two attacks: one with its bite and one with its claws."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Bär führt zwei Angriffe aus: einen Biss- und einen Klauenangriff."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 8 (1W8+4) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 11 (2W6+4) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "BrownBearCave (1).webp",
+    "variant": "cave"
+  },
+  "tokens": [
+    {
+      "file": "BrownBearCave (2).webp",
+      "variant": "cave"
+    },
+    {
+      "file": "BrownBearCave (3).webp",
+      "variant": "cave"
+    },
+    {
+      "file": "BrownBearCave (4).webp",
+      "variant": "cave"
+    },
+    {
+      "file": "BrownBearForest (1).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BrownBearForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BrownBearForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BrownBearForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BrownBearForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BrownBearForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BrownBearForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BrownBearForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BrownBearForest (9).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BrownBearNight (1).webp",
+      "variant": "night"
+    },
+    {
+      "file": "BrownBearNight (2).webp",
+      "variant": "night"
+    },
+    {
+      "file": "BrownBearNight (3).webp",
+      "variant": "night"
+    },
+    {
+      "file": "BrownBearNight (4).webp",
+      "variant": "night"
+    },
+    {
+      "file": "BrownBearNight (5).webp",
+      "variant": "night"
+    },
+    {
+      "file": "BrownBearNight (6).webp",
+      "variant": "night"
+    },
+    {
+      "file": "BrownBearWinter (1).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "BrownBearWinter (2).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "BrownBearWinter (3).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "BrownBearWinter (4).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "BrownBearWinter (5).webp",
+      "variant": "winter"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

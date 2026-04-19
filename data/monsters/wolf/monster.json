@@ -1,0 +1,231 @@
+{
+  "id": 311,
+  "slug": "wolf",
+  "name": "Wolf",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "11 (2d8 + 2)",
+    "de": "11 (2W8+2)"
+  },
+  "str": 12,
+  "dex": 15,
+  "con": 12,
+  "int": 3,
+  "wis": 12,
+  "cha": 6,
+  "strMod": 1,
+  "dexMod": 2,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +4",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Hearing and Smell",
+        "text": "The wolf has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+      },
+      {
+        "name": "Pack Tactics",
+        "text": "The wolf has advantage on an attack roll against a creature if at least one of the wolf's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rudeltaktik",
+        "text": "Der Wolf ist bei Angriffswürfen gegen eine Kreatur im Vorteil, wenn sich mindestens einer seiner Verbündeten, der nicht kampfunfähig ist, im Abstand von bis zu 1,5 Metern von der Kreatur befindet."
+      },
+      {
+        "name": "Scharfes Gehör und scharfer Geruchssinn",
+        "text": "Der Wolf ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör oder Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (2d4 + 2) piercing damage. If the target is a creature, it must succeed on a DC 11 Strength saving throw or be knocked prone."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (2W4+2) Stichschaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-11-Stärkerettungswurf bestehen, oder es wird umgestoßen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/482/1000/1000/636376300223855327.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Wolf (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Wolf (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wolf (9).webp",
+      "variant": ""
+    },
+    {
+      "file": "WolfAgressive (1).webp",
+      "variant": "agressive"
+    },
+    {
+      "file": "WolfAgressive (2).webp",
+      "variant": "agressive"
+    },
+    {
+      "file": "WolfAgressive (3).webp",
+      "variant": "agressive"
+    },
+    {
+      "file": "WolfAgressive (4).webp",
+      "variant": "agressive"
+    },
+    {
+      "file": "WolfAgressive (5).webp",
+      "variant": "agressive"
+    },
+    {
+      "file": "WolfAgressive (6).webp",
+      "variant": "agressive"
+    },
+    {
+      "file": "WolfAgressive (7).webp",
+      "variant": "agressive"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,36 @@
+{
+  "id": 330,
+  "slug": "animated-shield",
+  "name": "Animated Shield",
+  "nameDe": "Belebter Schild",
+  "category": {
+    "en": "ARMOR",
+    "de": "Rüstung"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 600000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Armor (shield), very rare (requires attunement) While holding this shield, you can speak its command word as a bonus action to cause it to animate. The shield leaps into the air and hovers in your space to protect you as if you were wielding it, leaving your hands free. The shield remains animated for 1 minute, until you use a bonus action to end this effect, or until you are incapacitated or die, at which point the shield falls to the ground or into your hand if you have one free.",
+    "de": "Wenn du diesen Schild hältst, kannst du als Bonusaktion sein Befehlswort sprechen und ihn animieren. Der Schild springt in die Luft und schwebt in deinem Bereich. Er schützt dich, als würdest du ihn führen, wobei du die Hände frei hast. Der Schild bleibt eine Minute lang animiert, bis du eine Bonusaktion verwendest, um diesen Effekt zu beenden oder bis du kampfunfähig wirst oder stirbst Daraufhin fällt der Schild auf den Boden oder in deine Hand, falls du eine Hand frei hast."
+  },
+  "weight": 6,
+  "classification": {
+    "en": "Shield",
+    "de": "Schild"
+  },
+  "ac": "+2",
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "armor",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

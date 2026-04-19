@@ -1,0 +1,64 @@
+{
+  "id": 146,
+  "slug": "stinking-cloud",
+  "name": "Stinking Cloud",
+  "nameDe": "Stinkende Wolke",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level conjuration",
+    "de": "Stufe 3 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "90 feet",
+    "de": "27 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a rotten egg or several skunk cabbage leaves",
+      "de": "ein faules Ei oder mehrere Stinkkohlblätter"
+    },
+    "raw": {
+      "en": "V, S, M (a rotten egg or several skunk cabbage leaves)",
+      "de": "V, G, M (ein faules Ei oder mehrere Stinkkohlblätter)"
+    }
+  },
+  "description": {
+    "en": "You create a 20-foot-radius sphere of yellow, nauseating gas centered on a point within range. The cloud spreads around corners, and its area is heavily obscured. The cloud lingers in the air for the duration. Each creature that is completely within the cloud at the start of its turn must make a constitution saving throw against poison. On a failed save, the creature spends its action that turn retching and reeling. Creatures that don't need to breathe or are immune to poison automatically succeed on this saving throw. A moderate wind (at least 10 miles per hour) disperses the cloud after 4 rounds. A strong wind (at least 20 miles per hour) disperses it after 1 round.",
+    "de": "Du erschaffst eine Sphäre aus gelbem, übelriechendem Gas mit einem Radius von sechs Metern an einem Ort in Reichweite. Die Wolke breitet sich um Ecken aus und ihr Bereich ist komplett verschleiert. Sie schwebt für die Wirkungsdauer in der Luft. Jede Kreatur, die sich zu Beginn ihres Zugs vollständig in der Wolke befindet, muss einen Konstitutionsrettungswurf gegen Gift ausführen. Scheitert der Wurf, verbringt die Kreatur ihre Aktion in dieser Runde mit Würgen und Taumeln. Kreaturen, die nicht atmen müssen oder gegen Gift immun sind, bestehen diesen Rettungswurf automatisch. Ein mäßiger Wind (mindestens 16 Kilometer pro Stunde) löst die Wolke nach vier Runden auf. Ein starker Wind (mindestens 32 Kilometer pro Stunde) löst sie nach einer Runde auf."
+  },
+  "image": "stinking-cloud",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

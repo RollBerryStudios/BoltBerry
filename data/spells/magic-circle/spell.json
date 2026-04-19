@@ -1,0 +1,70 @@
+{
+  "id": 128,
+  "slug": "magic-circle",
+  "name": "Magic Circle",
+  "nameDe": "Schutzkreis",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "paladin",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Kleriker",
+      "Paladin",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level abjuration",
+    "de": "Stufe 3 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "10 feet",
+    "de": "3 Meter"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "holy water or powdered silver and iron worth at least 100 gp, which the spell consumes",
+      "de": "Weihwasser oder pulverisiertes Silber und Eisen im Wert von mindestens 100 Goldstücken, die der Zauberspruch verbraucht"
+    },
+    "raw": {
+      "en": "V, S, M (holy water or powdered silver and iron worth at least 100 gp, which the spell consumes)",
+      "de": "V, G, M (Weihwasser oder pulverisiertes Silber und Eisen im Wert von mindestens 100 Goldstücken, die der Zauberspruch verbraucht)"
+    }
+  },
+  "description": {
+    "en": "You create a 10-foot radius, 20-foot-tall cylinder of magical energy centered on a point on the ground that you can see within range. Glowing runes appear whenever the cylinder intersects with the floor or other surface. Choose one or more of the following types of creatures: celestials, elementals, fey, fiends, or undead. The circle affects a creature of the chosen type in the following ways: - The creature can't willingly enter the cylinder by nonmagical means. If the creature tries to use teleportation or interplanar travel to do so, it must first succeed on a charisma saving throw. - The creature has disadvantage on attack rolls against targets within the cylinder. - Targets within the cylinder can't be charmed, frightened, or possessed by the creature. When you cast this spell, you can elect to cause its magic to operate in the reverse direction, preventing a creature of the specified type from leaving the cylinder and protecting targets outside it.",
+    "de": "Du erschaffst einen sechs Meter hohen Zylinder aus magischer Energie mit einem Radius von drei Metern, der in Reichweite auf einen Punkt auf dem Boden zentriert ist, den du sehen kannst. Leuchtende Runen erscheinen dort, wo der Zylinder den Boden oder eine andere Oberfläche überschneidet Wähle einen oder mehrere der folgenden Kreaturentypen: celestische Wesen, Elementare, Feenwesen, Unholde oder Untote. Der Kreis beeinflusst eine Kreatur des gewählten Typs auf die folgende Art: Wenn du diesen Zauber wirkst, kannst du seine Wirkung umkehren, so dass Kreaturen des ausgewählten Typs den Zylinder nicht verlassen können und Ziele außerhalb des Zylinders geschützt sind. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 4. Grades oder höher nutzt, steigt die Wirkungsdauer für jeden Grad über dem 3. um eine Stunde."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 4th level or higher, the duration increases by 1 hour for each slot level above 3rd.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 4. Grades oder höher nutzt, steigt die Wirkungsdauer für jeden Grad über dem 3. um eine Stunde."
+  },
+  "image": "magic-circle",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

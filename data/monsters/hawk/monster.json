@@ -1,0 +1,303 @@
+{
+  "id": 165,
+  "slug": "hawk",
+  "name": "Hawk",
+  "nameDe": "Falke",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny beast, unaligned",
+    "de": "Winzige Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "13",
+    "de": "13"
+  },
+  "hp": {
+    "en": "1 (1d4 - 1)",
+    "de": "1 (1W4-1)"
+  },
+  "str": 5,
+  "dex": 16,
+  "con": 8,
+  "int": 2,
+  "wis": 14,
+  "cha": 6,
+  "strMod": -3,
+  "dexMod": 3,
+  "conMod": -1,
+  "intMod": -4,
+  "wisMod": 2,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 14"
+    ],
+    "de": [
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Sight",
+        "text": "The hawk has advantage on Wisdom (Perception) checks that rely on sight."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfe Sicht",
+        "text": "Der Falke ist bei Weisheitswürfen (Wahrnehmung), die auf Sicht basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Talons",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 1 slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Krallen",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 1 Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/9/900/1000/1000/636334288270143064.jpeg",
+  "size": {
+    "en": "small",
+    "de": "Winziges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "HawkCostal (1).webp",
+    "variant": "costal"
+  },
+  "tokens": [
+    {
+      "file": "HawkCostal (10).webp",
+      "variant": "costal"
+    },
+    {
+      "file": "HawkCostal (11).webp",
+      "variant": "costal"
+    },
+    {
+      "file": "HawkCostal (2).webp",
+      "variant": "costal"
+    },
+    {
+      "file": "HawkCostal (3).webp",
+      "variant": "costal"
+    },
+    {
+      "file": "HawkCostal (4).webp",
+      "variant": "costal"
+    },
+    {
+      "file": "HawkCostal (5).webp",
+      "variant": "costal"
+    },
+    {
+      "file": "HawkCostal (6).webp",
+      "variant": "costal"
+    },
+    {
+      "file": "HawkCostal (7).webp",
+      "variant": "costal"
+    },
+    {
+      "file": "HawkCostal (8).webp",
+      "variant": "costal"
+    },
+    {
+      "file": "HawkCostal (9).webp",
+      "variant": "costal"
+    },
+    {
+      "file": "HawkForest (1).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "HawkForest (10).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "HawkForest (11).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "HawkForest (12).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "HawkForest (13).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "HawkForest (14).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "HawkForest (15).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "HawkForest (16).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "HawkForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "HawkForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "HawkForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "HawkForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "HawkForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "HawkForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "HawkForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "HawkForest (9).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "HawkGrassland (1).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "HawkGrassland (2).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "HawkGrassland (3).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "HawkGrassland (4).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "HawkGrassland (5).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "HawkGrassland (6).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "HawkGrassland (7).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "HawkGrassland (8).webp",
+      "variant": "grassland"
+    },
+    {
+      "file": "HawkUrban (1).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "HawkUrban (10).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "HawkUrban (11).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "HawkUrban (12).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "HawkUrban (13).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "HawkUrban (14).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "HawkUrban (2).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "HawkUrban (3).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "HawkUrban (4).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "HawkUrban (5).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "HawkUrban (6).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "HawkUrban (7).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "HawkUrban (8).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "HawkUrban (9).webp",
+      "variant": "urban"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

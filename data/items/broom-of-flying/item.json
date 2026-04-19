@@ -1,0 +1,26 @@
+{
+  "id": 368,
+  "slug": "broom-of-flying",
+  "name": "Broom of Flying",
+  "nameDe": "Flugbesen",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 800000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon This wooden broom, which weighs 3 pounds, functions like a mundane broom until you stand astride it and speak its command word. It then hovers beneath you and can be ridden in the air. It has a flying speed of 50 feet. It can carry up to 400 pounds, but its flying speed becomes 30 feet while carrying over 200 pounds. The broom stops hovering when you land. You can send the broom to travel alone to a destination within 1 mile of you if you speak the command word, name the location, and are familiar with that place. The broom comes back to you when you speak another command word, provided that the broom is still within 1 mile of you.",
+    "de": "Dieser hölzerne Besen wiegt 1,5 Kilogramm und ist als normaler Besen verwendbar, bis du dich über den Besenstiel stellst und sein Befehlswort aussprichst. Dann schwebt er unter dir und du kannst mit ihm durch die Luft fliegen. Die Flugbewegungsrate des Besens beträgt 15 Meter. Er kann bis zu 200 Kilogramm tragen. Allerdings sinkt seine Flugbewegungsrate auf neun Meter, wenn er mehr als 100 Kilogramm trägt. Der Besen hört auf zu schweben, wenn du landest. Du kannst den Besen ohne Passagier zu einem Ziel im Abstand von bis zu 1,6 Kilometern von dir schicken, wenn du sein Befehlswort aussprichst, den Ort nennst und du mit dem Ort vertraut bist. Der Besen kehrt zu dir zurück, wenn du ein anderes Befehlswort aussprichst, sofern er immer noch maximal 1,6 Kilometer von dir entfernt ist."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

@@ -1,0 +1,62 @@
+{
+  "id": 139,
+  "slug": "revivify",
+  "name": "Revivify",
+  "nameDe": "Wiederbeleben",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Nekromantie"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "paladin"
+    ],
+    "de": [
+      "Kleriker",
+      "Paladin"
+    ]
+  },
+  "type": {
+    "en": "3rd-level conjuration",
+    "de": "Stufe 3 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "diamonds worth 300 gp, which the spell consumes",
+      "de": "Diamanten im Wert von 300 Gold, die der Zauberspruch verbraucht"
+    },
+    "raw": {
+      "en": "V, S, M (diamonds worth 300 gp, which the spell consumes)",
+      "de": "V, G, M (Diamanten im Wert von 300 Gold, die der Zauberspruch verbraucht)"
+    }
+  },
+  "description": {
+    "en": "You touch a creature that has died within the last minute. That creature returns to life with 1 hit point. This spell can't return to life a creature that has died of old age, nor can it restore any missing body parts.",
+    "de": "Du berührst eine Kreatur, die innerhalb der letzten Minute gestorben ist. Diese Kreatur wird mit 1 Trefferpunkt wieder lebendig. Dieser Zauber kann keine Kreatur wieder zum Leben erwecken, die an Altersschwäche gestorben ist, und auch keine fehlenden Körperteile wiederherstellen."
+  },
+  "image": "revivify",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

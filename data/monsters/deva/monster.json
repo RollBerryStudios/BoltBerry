@@ -1,0 +1,267 @@
+{
+  "id": 84,
+  "slug": "deva",
+  "name": "Deva",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium celestial, lawful good",
+    "de": "Mittelgroßer Celestial, rechtschaffen gut"
+  },
+  "challenge": "10",
+  "xp": 5900,
+  "ac": {
+    "en": "17 (Natural Armor)",
+    "de": "17 (Natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "136 (16d8 + 64)",
+    "de": "136 (16W8 + 64)"
+  },
+  "str": 18,
+  "dex": 18,
+  "con": 18,
+  "int": 17,
+  "wis": 20,
+  "cha": 20,
+  "strMod": 4,
+  "dexMod": 4,
+  "conMod": 4,
+  "intMod": 3,
+  "wisMod": 5,
+  "chaMod": 5,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 90,
+      "de": 27
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 19"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 19"
+    ]
+  },
+  "languages": {
+    "en": [
+      "all",
+      "telepathy 120 ft."
+    ],
+    "de": [
+      "Alle",
+      "Telepathie auf 36 m"
+    ]
+  },
+  "savingThrows": [
+    "Wei +9",
+    "Cha +9"
+  ],
+  "skills": [
+    "Motiv erkennen +9",
+    "Wahrnehmung +9"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Angelic Weapons",
+        "text": "The deva's weapon attacks are magical. When the deva hits with any weapon, the weapon deals an extra 4d8 radiant damage (included in the attack)."
+      },
+      {
+        "name": "Magic Resistance",
+        "text": "The deva has advantage on saving throws against spells and other magical effects."
+      }
+    ],
+    "de": [
+      {
+        "name": "Engelswaffen",
+        "text": "Die Waffenangriffe des Devas sind magisch. Wenn der Deva mit einer Waffe trifft, bewirkt die Waffe zusätzlich 4W8 gleißenden Schaden (im Angriff enthalten)."
+      },
+      {
+        "name": "Magieresistenz",
+        "text": "Der Deva ist bei Rettungswürfen gegen Zauber und andere magische Effekte im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The deva makes two melee attacks."
+      },
+      {
+        "name": "Mace",
+        "text": "Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 7 (1d6 + 4) bludgeoning damage plus 18 (4d8) radiant damage."
+      },
+      {
+        "name": "Healing Touch",
+        "text": "The deva touches another creature. The target magically regains 20 (4d8 + 2) hit points and is freed from any curse, disease, poison, blindness, or deafness."
+      },
+      {
+        "name": "Change Shape",
+        "text": "The deva magically polymorphs into a humanoid or beast that has a challenge rating equal to or less than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the deva's choice).\nIn a new form, the deva retains its game statistics and ability to speak, but its AC, movement modes, Strength, Dexterity, and special senses are replaced by those of the new form, and it gains any statistics and capabilities (except class features, legendary actions, and lair actions) that the new form has but that it lacks."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Deva führt zwei Nahkampfangriffe aus."
+      },
+      {
+        "name": "Streitkolben",
+        "text": "Nahkampfwaffenangriff: +8 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (1W6+4) Wuchtschaden plus 18 (4W8) gleißender Schaden."
+      },
+      {
+        "name": "Gestalt ändern",
+        "text": "Der Deva nimmt magisch die Gestalt eines Humanoiden eines oder Tieres an, dessen Herausforderungsgrad seinen eigenen nicht überschreitet, oder er verwandelt sich wieder in seine wahre Gestalt. Wenn er stirbt, nimmt er seine wahre Gestalt an. Ausrüstung, die er trägt oder hält, wird von der neuen Gestalt absorbiert oder getragen (nach Wahl des Devas). In anderer Gestalt behält der Deva seine Spielwerte und seine Sprechfähigkeit bei, seine RK, Bewegungsmodi, Stärke, Geschicklichkeit und Spezialsinne werden durch die der neuen Gestalt ersetzt, und der Deva erhält alle Spielwerte und Fähigkeiten (außer Klassenmerkmalen, legendären Aktionen und Hortaktionen), welche die neue Gestalt besitzt, der Deva aber nicht."
+      },
+      {
+        "name": "Heilende Berührung (3-mal täglich)",
+        "text": "Der Deva berührt eine andere Kreatur. Das Ziel erhält magisch 20 (4W8+2) Trefferpunkte zurück und wird von allen Flüchen, Krankheiten, Giften, von Blindheit und Taubheit befreit."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/267/1000/1000/636252768980059444.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "mittel"
+  },
+  "type": {
+    "en": "celestial",
+    "de": "Himmelswesen"
+  },
+  "alignment": {
+    "en": "lawful good",
+    "de": "rechtschaffen gut"
+  },
+  "token": {
+    "file": "DevaFemale (1).webp",
+    "variant": "female"
+  },
+  "tokens": [
+    {
+      "file": "DevaFemale (10).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DevaFemale (11).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DevaFemale (12).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DevaFemale (13).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DevaFemale (14).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DevaFemale (15).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DevaFemale (16).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DevaFemale (2).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DevaFemale (3).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DevaFemale (4).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DevaFemale (5).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DevaFemale (6).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DevaFemale (7).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DevaFemale (8).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DevaFemale (9).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DevaMale (1).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DevaMale (10).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DevaMale (11).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DevaMale (12).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DevaMale (13).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DevaMale (14).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DevaMale (2).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DevaMale (3).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DevaMale (4).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DevaMale (5).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DevaMale (6).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DevaMale (7).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DevaMale (8).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DevaMale (9).webp",
+      "variant": "male"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

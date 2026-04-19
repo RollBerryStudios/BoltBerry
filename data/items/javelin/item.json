@@ -1,0 +1,36 @@
+{
+  "id": 17,
+  "slug": "javelin",
+  "name": "Javelin",
+  "nameDe": "Wurfspeer",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 50,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 2,
+  "classification": {
+    "en": "Simple Melee Weapon",
+    "de": "Einfache Nahkampfwaffe"
+  },
+  "damage": "1d6",
+  "damageType": {
+    "en": "piercing",
+    "de": "stich"
+  },
+  "properties": {
+    "en": "thrown (range 30/120)",
+    "de": "geworfen (fernkampf 30/120)"
+  },
+  "image": "javelin",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

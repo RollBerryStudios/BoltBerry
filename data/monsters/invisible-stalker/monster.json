@@ -1,0 +1,225 @@
+{
+  "id": 179,
+  "slug": "invisible-stalker",
+  "name": "Invisible Stalker",
+  "nameDe": "Unsichtbarer Pirscher",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium elemental, neutral",
+    "de": "Mittleres Elementar, neutral"
+  },
+  "challenge": "6",
+  "xp": 2300,
+  "ac": {
+    "en": "14",
+    "de": "14"
+  },
+  "hp": {
+    "en": "104 (16d8 + 32)",
+    "de": "104 (16W8+32)"
+  },
+  "str": 16,
+  "dex": 19,
+  "con": 14,
+  "int": 10,
+  "wis": 15,
+  "cha": 11,
+  "strMod": 3,
+  "dexMod": 4,
+  "conMod": 2,
+  "intMod": 0,
+  "wisMod": 2,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 50,
+      "de": 15
+    },
+    "fly": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 18"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 18"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Auran",
+      "understands Common but doesn't speak it"
+    ],
+    "de": [
+      "Aural",
+      "versteht die Gemeinsprache",
+      "aber kann sie nicht sprechen"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +10",
+    "Wahrnehmung +8"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Invisibility",
+        "text": "The stalker is invisible."
+      },
+      {
+        "name": "Faultless Tracker",
+        "text": "The stalker is given a quarry by its summoner. The stalker knows the direction and distance to its quarry as long as the two of them are on the same plane of existence. The stalker also knows the location of its summoner."
+      }
+    ],
+    "de": [
+      {
+        "name": "Einwandfreier Fährtenleser",
+        "text": "Der Beschwörer weist dem Pirscher eine Beute zu. Der Pirscher kennt die Richtung und Entfernung zu seiner Beute, solange die beiden sich auf der gleichen Existenzebene befinden. Der Pirscher weiß auch, wo sich sein Beschwörer befindet."
+      },
+      {
+        "name": "Unsichtbarkeit",
+        "text": "Der Pirscher ist unsichtbar."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The stalker makes two slam attacks."
+      },
+      {
+        "name": "Slam",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Pirscher führt zwei Hiebangriffe aus."
+      },
+      {
+        "name": "Hieb",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/367/315/315/636252779159282339.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "elemental",
+    "de": "Elementar"
+  },
+  "alignment": {
+    "en": "neutral",
+    "de": "neutral"
+  },
+  "token": {
+    "file": "InvisibleStalker (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "InvisibleStalker (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "InvisibleStalker (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

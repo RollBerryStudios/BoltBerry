@@ -1,0 +1,188 @@
+{
+  "id": 301,
+  "slug": "weasel",
+  "name": "Weasel",
+  "nameDe": "Wiesel",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny beast, unaligned",
+    "de": "Winzige Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "13",
+    "de": "13"
+  },
+  "hp": {
+    "en": "1 (1d4 - 1)",
+    "de": "1 (1W4-1)"
+  },
+  "str": 3,
+  "dex": 16,
+  "con": 8,
+  "int": 2,
+  "wis": 12,
+  "cha": 3,
+  "strMod": -4,
+  "dexMod": 3,
+  "conMod": -1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +5",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Hearing and Smell",
+        "text": "The weasel has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfes Gehör und scharfer Geruchssinn",
+        "text": "Das Wiesel ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör oder Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one creature. Hit: 1 piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 1 Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Winziges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Weasel (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Weasel (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Weasel (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

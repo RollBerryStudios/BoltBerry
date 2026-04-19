@@ -1,0 +1,283 @@
+{
+  "id": 42,
+  "slug": "barbed-devil",
+  "name": "Barbed Devil",
+  "nameDe": "Klingenteufel",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium fiend, lawful evil",
+    "de": "Mittelgroßer Unhold, rechtschaffen böse"
+  },
+  "challenge": "5",
+  "xp": 1800,
+  "ac": {
+    "en": "15 (Natural Armor)",
+    "de": "15 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "110 (13d8 + 52)",
+    "de": "110 (13W8+52)"
+  },
+  "str": 16,
+  "dex": 17,
+  "con": 18,
+  "int": 12,
+  "wis": 14,
+  "cha": 14,
+  "strMod": 3,
+  "dexMod": 3,
+  "conMod": 4,
+  "intMod": 1,
+  "wisMod": 2,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 18"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 18"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Infernal",
+      "telepathy 120 ft."
+    ],
+    "de": [
+      "Infernalisch",
+      "Telepathie auf 36 m"
+    ]
+  },
+  "savingThrows": [
+    "Str +6",
+    "Kon +7",
+    "Wei +5",
+    "Cha +5"
+  ],
+  "skills": [
+    "Motiv erkennen +5",
+    "Täuschen +5",
+    "Wahrnehmung +8"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Barbed Hide",
+        "text": "At the start of each of its turns, the barbed devil deals 5 (1d10) piercing damage to any creature grappling it."
+      },
+      {
+        "name": "Devil's Sight",
+        "text": "Magical darkness doesn't impede the devil's darkvision."
+      },
+      {
+        "name": "Magic Resistance",
+        "text": "The devil has advantage on saving throws against spells and other magical effects."
+      }
+    ],
+    "de": [
+      {
+        "name": "Klingenhaut",
+        "text": "Der Klingenteufel fügt zu Beginn jedes seiner Züge jeder Kreatur, die er gepackt hält, 5 (1W10) Stichschaden zu."
+      },
+      {
+        "name": "Magieresistenz",
+        "text": "Der Teufel ist bei Rettungswürfen gegen Zauber und andere magische Effekte im Vorteil."
+      },
+      {
+        "name": "Teufelssicht",
+        "text": "Die Dunkelsicht des Teufels wird nicht durch magische Dunkelheit beeinträchtigt."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The devil makes three melee attacks: one with its tail and two with its claws. Alternatively, it can use Hurl Flame twice."
+      },
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) piercing damage."
+      },
+      {
+        "name": "Tail",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) piercing damage."
+      },
+      {
+        "name": "Hurl Flame",
+        "text": "Ranged Spell Attack: +5 to hit, range 150 ft., one target. Hit: 10 (3d6) fire damage. If the target is a flammable object that isn't being worn or carried, it also catches fire."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Teufel führt drei Nahkampfangriffe aus: einen Schwanz- und zwei Klauenangriffe. Alternativ kann er zweimal Flamme schleudern einsetzen."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W6+3) Stichschaden."
+      },
+      {
+        "name": "Schwanz",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Stichschaden."
+      },
+      {
+        "name": "Flamme schleudern",
+        "text": "Fernkampf-Zauberangriff: +5 auf Treffer, Reichweite 45 m, ein Ziel. Treffer: 10 (3W6) Feuerschaden. Wenn das Ziel ein brennbares Objekt ist, das nicht getragen oder gehalten wird, fängt es Feuer."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/486/315/315/636376302569423870.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "fiend",
+    "de": "Unhold (Teufel)"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "BarbedDevil (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "BarbedDevil (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (31).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (32).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "BarbedDevil (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

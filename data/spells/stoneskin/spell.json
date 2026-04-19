@@ -1,0 +1,66 @@
+{
+  "id": 321,
+  "slug": "stoneskin",
+  "name": "Stoneskin",
+  "nameDe": "Steinhaut",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "sorcerer",
+      "ranger",
+      "wizard"
+    ],
+    "de": [
+      "Druide",
+      "Zauberer",
+      "Waldläufer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "4th-level abjuration",
+    "de": "Stufe 4 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "diamond dust worth 100 gp, which the spell consumes",
+      "de": "Diamantstaub im Wert von 100 Goldstücken, den der Zauber verbraucht"
+    },
+    "raw": {
+      "en": "V, S, M (diamond dust worth 100 gp, which the spell consumes)",
+      "de": "V, G, M (Diamantstaub im Wert von 100 Goldstücken, den der Zauber verbraucht)"
+    }
+  },
+  "description": {
+    "en": "This spell turns the flesh of a willing creature you touch as hard as stone. Until the spell ends, the target has resistance to nonmagical bludgeoning, piercing, and slashing damage.",
+    "de": "Der Zauber macht das Fleisch einer bereitwilligen Kreatur, die du berührst, so hart wie Stein. Bis der Zauber endet, ist das Ziel gegen nichtmagischen Hieb-, Stich und Wuchtschaden resistent."
+  },
+  "image": "stoneskin",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

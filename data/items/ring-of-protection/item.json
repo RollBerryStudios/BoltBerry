@@ -1,0 +1,30 @@
+{
+  "id": 301,
+  "slug": "ring-of-protection",
+  "name": "Ring of Protection",
+  "nameDe": "Ring des Schutzes",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 350000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Ring, rare (requires attunement) You gain a +1 bonus to AC and saving throws while wearing this ring.",
+    "de": "Wenn du diesen Ring trägst, erhältst du einen Bonus von +1 auf deine RK und Rettungswürfe."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "ring",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

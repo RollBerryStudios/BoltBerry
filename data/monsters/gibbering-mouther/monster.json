@@ -1,0 +1,234 @@
+{
+  "id": 146,
+  "slug": "gibbering-mouther",
+  "name": "Gibbering Mouther",
+  "nameDe": "Plapperndes Hundertmaul",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium aberration, neutral",
+    "de": "Mittlere Aberration, neutral"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "9",
+    "de": "9"
+  },
+  "hp": {
+    "en": "67 (9d8 + 27)",
+    "de": "67 (9W8+27)"
+  },
+  "str": 10,
+  "dex": 8,
+  "con": 16,
+  "int": 3,
+  "wis": 10,
+  "cha": 6,
+  "strMod": 0,
+  "dexMod": -1,
+  "conMod": 3,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "swim": {
+      "en": 10,
+      "de": 3
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Aberrant Ground",
+        "text": "The ground in a 10-foot radius around the mouther is doughlike difficult terrain. Each creature that starts its turn in that area must succeed on a DC 10 Strength saving throw or have its speed reduced to 0 until the start of its next turn."
+      },
+      {
+        "name": "Gibbering",
+        "text": "The mouther babbles incoherently while it can see any creature and isn't incapacitated. Each creature that starts its turn within 20 feet of the mouther and can hear the gibbering must succeed on a DC 10 Wisdom saving throw. On a failure, the creature can't take reactions until the start of its next turn and rolls a d8 to determine what it does during its turn. On a 1 to 4, the creature does nothing. On a 5 or 6, the creature takes no action or bonus action and uses all its movement to move in a randomly determined direction. On a 7 or 8, the creature makes a melee attack against a randomly determined creature within its reach or does nothing if it can't make such an attack."
+      }
+    ],
+    "de": [
+      {
+        "name": "Plappern",
+        "text": "Das Hundertmaul plappert unzusammenhän-gend, solange es irgendeine Kreatur sehen kann und nicht kampfunfähig ist. Jede Kreatur, die ihren Zug im Abstand von bis zu sechs Metern vom Hundertmaul beginnt und das Plappern hören kann, muss einen SG-10-Weisheitsrettungswurf ausführen. Scheitert der Wurf, so kann die Kreatur bis zum Beginn ihres nächsten Zugs keine Reaktionen ausführen und würfelt mit einem W8, um ihre Handlungen in ihrem Zug zu bestimmen: Von 1 bis 4 tut die Kreatur nichts. Bei 5 oder 6 führt die Kreatur weder Aktionen noch Bonusaktionen aus und verwendet ihre gesamte Bewegungsrate, um sich in eine zufällig bestimmte Richtung zu bewegen. Bei 7 oder 8 führt die Kreatur einen Nahkampfangriff gegen eine zufällig bestimmte Kreatur in Reichweite aus. Ist ein solcher Angriff nicht möglich, so tut die Kreatur nichts."
+      },
+      {
+        "name": "Ungewöhnlicher Boden",
+        "text": "Der Boden im Radius von drei Metern um das Hundertmaul ist teigartiges schwieriges Gelände. Jede Kreatur, die ihren Zug in diesem Bereich beginnt, muss einen SG-10-Stärkerettungswurf bestehen, oder ihre Bewegungsrate ist bis zum Beginn ihres nächsten Zugs auf 0 verringert."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The gibbering mouther makes one bite attack and, if it can, uses its Blinding Spittle."
+      },
+      {
+        "name": "Bites",
+        "text": "Melee Weapon Attack: +2 to hit, reach 5 ft., one creature. Hit: 17 (5d6) piercing damage. If the target is Medium or smaller, it must succeed on a DC 10 Strength saving throw or be knocked prone. If the target is killed by this damage, it is absorbed into the mouther."
+      },
+      {
+        "name": "Blinding Spittle",
+        "text": "The mouther spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact. Each creature within 5 feet of the flash must succeed on a DC 13 Dexterity saving throw or be blinded until the end of the mouther's next turn."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Das plappernde Hundertmaul führt einen Bissangriff aus und setzt Blendender Speichel ein, sofern möglich."
+      },
+      {
+        "name": "Bisse",
+        "text": "Nahkampfwaffenangriff: +2 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 17 (5W6) Stichschaden. Wenn das Ziel höchstens mittelgroß ist, muss es einen SG-10-Stärkerettungswurf bestehen, oder es wird umgestoßen. Wird das Ziel durch diesen Schaden getötet, so wird es vom Hundertmaul absorbiert."
+      },
+      {
+        "name": "Blendender Speichel (Aufladung 5–6)",
+        "text": "Das Hundertmaul speit einen chemischen Klumpen auf einen Punkt im Abstand von bis zu 4,5 Metern von ihm, den es sehen kann. Der Klumpen explodiert beim Auftreffen in einem blendenden Blitz. Jede Kreatur im Abstand von bis zu 1,5 Metern vom Blitz muss einen SG-13-Geschicklichkeitsrettungswurf bestehen, oder sie ist bis zum Ende des nächsten Zugs des Hundertmauls blind."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/333/315/315/636252776252001529.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "aberration",
+    "de": "Aberration"
+  },
+  "alignment": {
+    "en": "neutral",
+    "de": "neutral"
+  },
+  "token": {
+    "file": "GibberingMouther (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GibberingMouther (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GibberingMouther (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

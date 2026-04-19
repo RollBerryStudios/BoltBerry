@@ -1,0 +1,235 @@
+{
+  "id": 103,
+  "slug": "ettercap",
+  "name": "Ettercap",
+  "nameDe": "Atterkopp",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium monstrosity, neutral evil",
+    "de": "Mittelgroße Monstrosität, neutral böse"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "44 (8d8 + 8)",
+    "de": "44 (8W8+8)"
+  },
+  "str": 14,
+  "dex": 15,
+  "con": 13,
+  "int": 7,
+  "wis": 12,
+  "cha": 8,
+  "strMod": 2,
+  "dexMod": 2,
+  "conMod": 1,
+  "intMod": -2,
+  "wisMod": 1,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "climb": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 13"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +4",
+    "Überlebenskunst +3",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Spider Climb",
+        "text": "The ettercap can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+      },
+      {
+        "name": "Web Sense",
+        "text": "While in contact with a web, the ettercap knows the exact location of any other creature in contact with the same web."
+      },
+      {
+        "name": "Web Walker",
+        "text": "The ettercap ignores movement restrictions caused by webbing."
+      }
+    ],
+    "de": [
+      {
+        "name": "Netzsinn",
+        "text": "Bei Kontakt mit einem Netz weiß der Atterkopp den genauen Standort jeder anderen Kreatur im Kontakt mit demselben Netz."
+      },
+      {
+        "name": "Netzwandler",
+        "text": "Der Atterkopp ignoriert Bewegungseinschränkungen, die durch Netze verursacht werden."
+      },
+      {
+        "name": "Spinnenklettern",
+        "text": "Der Atterkopp kann ohne Attributswürfe schwierige Oberflächen erklimmen und sich kopfüber an Decken entlang bewegen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The ettercap makes two attacks: one with its bite and one with its claws."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 6 (1d8 + 2) piercing damage plus 4 (1d8) poison damage. The target must succeed on a DC 11 Constitution saving throw or be poisoned for 1 minute. The creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (2d4 + 2) slashing damage."
+      },
+      {
+        "name": "Web",
+        "text": "Ranged Weapon Attack: +4 to hit, range 30/60 ft., one Large or smaller creature. Hit: The creature is restrained by webbing. As an action, the restrained creature can make a DC 11 Strength check, escaping from the webbing on a success. The effect ends if the webbing is destroyed. The webbing has AC 10, 5 hit points, is vulnerable to fire damage and immune to bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Atterkopp führt zwei Angriffe aus: einen Biss- und einen Klauenangriff."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 6 (1W8+2) Stichschaden plus 4 (1W8) Giftschaden. Das Ziel muss einen SG-11-Konstitutionsrettungswurf bestehen, oder es ist eine Minute lang vergiftet. Die Kreatur kann den Rettungswurf am Ende jedes ihrer Züge wiederholen und den Effekt bei einem Erfolg beenden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (2W4+2) Hiebschaden."
+      },
+      {
+        "name": "Netz (Aufladung 5–6)",
+        "text": "Fernkampfwaffenangriff: +4 auf Treffer, Reichweite 9/18 m, eine höchstens große Kreatur. Treffer: Die Kreatur ist durch das Netz festgesetzt. Als Aktion kann die festgesetzte Kreatur einen SG-11-Stärkewurf ausführen. Bei einem Erfolg befreit sie sich aus dem Netz. Der Effekt endet auch, wenn das Netz zerstört wird. Das Netz besitzt eine RK von 10, 5 Trefferpunkte, ist anfällig für Feuerschaden und gegen Gift-, psychischen und Wuchtschaden immun."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/339/315/315/636252776771842998.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "Ettercap (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Ettercap (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ettercap (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

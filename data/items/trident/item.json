@@ -1,0 +1,36 @@
+{
+  "id": 41,
+  "slug": "trident",
+  "name": "Trident",
+  "nameDe": "Dreizack",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 500,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 4,
+  "classification": {
+    "en": "Martial Melee Weapons",
+    "de": "Nahkampfs-Kriegswaffen"
+  },
+  "damage": "1d7",
+  "damageType": {
+    "en": "piercing",
+    "de": "stich"
+  },
+  "properties": {
+    "en": "thrown (range 20/60) | versatile (1d8)",
+    "de": "geworfen (fernkampf 20/60) | vielseitig (1d8)"
+  },
+  "image": "trident",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,26 @@
+{
+  "id": 231,
+  "slug": "dust-of-sneezing-and-choking",
+  "name": "Dust of Sneezing and Choking",
+  "nameDe": "Staub des Niesens und Erstickens",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 48000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon Found in a small container, this powder resembles very fine sand. It appears to be dust of disappearance, and an identify spell reveals it to be such. There is enough of it for one use. When you use an action to throw a handful of the dust into the air, you and each creature that needs to breathe within 30 feet of you must succeed on a DC 15 Constitution saving throw or become unable to breathe, while sneezing uncontrollably. A creature affected in this way is incapacitated and suffocating. As long as it is conscious, a creature can repeat the saving throw at the end of each of its turns, ending the effect on it on a success. The lesser restoration spell can also end the effect on a creature.",
+    "de": "Dieses Pulver wird in einem kleinen Behälter aufbewahrt und ähnelt feinem Sand. Es ähnelt dem Staub des Verschwindens , und der Zauber Identifizieren  enthüllt das Pulver als solchen. Der Behälter enthält ausreichend Pulver für einen Einsatz. Du kannst als Aktion eine Handvoll des Pulvers in die Luft werfen. Du und jede atmende Kreatur im Abstand von bis zu neun Metern von dir müsst einen SG-15-Konstitutionsrettungswurf bestehen. Anderenfalls kann die betroffene Kreatur beziehungsweise der betroffene Charakter nicht atmen und niest unkontrollierbar. Auf diese Weise betroffene Kreaturen sind kampfunfähig und beginnen zu ersticken. Solange sie bei Bewusstsein ist, kann eine Kreatur den Rettungswurf am Ende jedes ihrer Züge wiederholen. Bei einem Erfolg endet der Effekt. Der Zauber Schwache Genesung  kann den Effekt ebenfalls beenden."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

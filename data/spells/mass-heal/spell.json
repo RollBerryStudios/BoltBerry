@@ -1,0 +1,56 @@
+{
+  "id": 177,
+  "slug": "mass-heal",
+  "name": "Mass Heal",
+  "nameDe": "Massen-Heilung",
+  "level": {
+    "en": "9",
+    "de": "Grad 9"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "9th-level conjuration",
+    "de": "Stufe 9 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "A flood of healing energy flows from you into injured creatures around you. You restore up to 700 hit points, divided as you choose among any number of creatures that you can see within range. Creatures healed by this spell are also cured of all diseases and any effect making them blinded or deafened. This spell has no effect on undead or constructs.",
+    "de": "Eine Flut aus heilender Energie strömt von dir zu verletzten Kreaturen um dich herum. Du stellst bis zu 700 Trefferpunkte wieder her, die du auf eine beliebige Anzahl an Kreaturen in Reichweite aufteilen kannst, die du sehen kannst. Kreaturen, die von diesem Zauber geheilt werden, werden auch von sämtlichen Krankheiten befreit, sowie von Effekten, die sie blind oder taub machen. Dieser Zauber wirkt nicht auf Untote oder Konstrukte."
+  },
+  "image": "heal",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

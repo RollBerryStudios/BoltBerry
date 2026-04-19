@@ -1,0 +1,64 @@
+{
+  "id": 190,
+  "slug": "true-polymorph",
+  "name": "True Polymorph",
+  "nameDe": "Wahre Verwandlung",
+  "level": {
+    "en": "9",
+    "de": "Grad 9"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "9th-level transmutation",
+    "de": "Stufe 9 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a drop of mercury, a dollop of gum arabic, and a wisp of smoke",
+      "de": "ein Tropfen Quecksilber, ein Tupfer Gummiarabikum und eine Rauchfahne"
+    },
+    "raw": {
+      "en": "V, S, M (a drop of mercury, a dollop of gum arabic, and a wisp of smoke)",
+      "de": "V, G, M (ein Tropfen Quecksilber, ein Tupfer Gummiarabikum und eine Rauchfahne)"
+    }
+  },
+  "description": {
+    "en": "Choose one creature or nonmagical object that you can see within range. You transform the creature into a different creature, the creature into an object, or the object into a creature (the object must be neither worn nor carried by another creature). The transformation lasts for the duration, or until the target drops to 0 hit points or dies. If you concentrate on this spell for the full duration, the transformation becomes permanent. Shapechangers aren't affected by this spell. An unwilling creature can make a wisdom saving throw, and if it succeeds, it isn't affected by this spell. ***Creature into Creature.*** If you turn a creature into another kind of creature, the new form can be any kind you choose whose challenge rating is equal to or less than the target's (or its level, if the target doesn't have a challenge rating). The target's game statistics, including mental ability scores, are replaced by the statistics of the new form. It retains its alignment and personality. The target assumes the hit points of its new form, and when it reverts to its normal form, the creature returns to the number of hit points it had before it transformed. If it reverts as a result of dropping to 0 hit points, any excess damage carries over to its normal form. As long as the excess damage doesn't reduce the creature's normal form to 0 hit points, it isn't knocked unconscious. The creature is limited in the actions it can perform by the nature of its new form, and it can't speak, cast spells, or take any other action that requires hands or speech unless its new form is capable of such actions. The target's gear melds into the new form. The creature can't activate, use, wield, or otherwise benefit from any of its equipment. ***Object into Creature.*** You can turn an object into any kind of creature, as long as the creature's size is no larger than the object's size and the creature's challenge rating is 9 or lower. The creature is friendly to you and your companions. It acts on each of your turns. You decide what action it takes and how it moves. The GM has the creature's statistics and resolves all of its actions and movement. If the spell becomes permanent, you no longer control the creature. It might remain friendly to you, depending on how you have treated it. ***Creature into Object.*** If you turn a creature into an object, it transforms along with whatever it is wearing and carrying into that form. The creature's statistics become those of the object, and the creature has no memory of time spent in this form, after the spell ends and it returns to its normal form.",
+    "de": "Wähle eine Kreatur oder einen nichtmagischen Gegenstand in Reichweite, die oder den du sehen kannst. Du verwandelst die Kreatur in eine andere Kreatur, die Kreatur in einen Gegenstand oder den Gegenstand in eine Kreatur. Der Gegenstand darf von keiner anderen Kreatur getragen oder gehalten werden. Die Verwandlungszauber hält bis zum Ende der Wirkungsdauer an, oder bis die Trefferpunkte des Ziels auf 0 fallen oder es stirbt. Konzentrierst du dich für die gesamte Wirkungsdauer auf den Zauber, hält die Verwandlung an, bis sie gebannt wird. Dieser Zauber wirkt nicht auf Gestaltwandler oder auf Kreaturen mit 0 Trefferpunkten. Eine unwillige Kreatur kann einen Charismarettungswurf ausführen. Bei einem Erfolg wird sie nicht von diesem Zauber betroffen. Kreatur in Kreatur:  Verwandelst du eine Kreatur in eine andere Kreatur, kannst du eine beliebige Gestalt wählen, solange deren Herausforderungsgrad gleich oder niedriger ist als der des Ziels (wenn das Ziel keinen Herausforderungsgrad hat, verwende seine Stufe). Die Spielwerte des Ziels, inklusive mentaler Attributswerte, werden durch die Werte der neuen Gestalt ersetzt. Es behält seine Gesinnung und Persönlichkeit. Das Ziel erhält die Trefferpunkte seiner neuen Gestalt. Nimmt es wieder seine ursprüngliche Gestalt an, besitzt es die gleichen Trefferpunkte wie vor der Verwandlung. Findet die Rückverwandlung statt, weil die Trefferpunkte des Ziels auf 0 sinken, wird überschüssiger Schaden auf seine ursprüngliche Gestalt übertragen. Sofern dieser überschüssige Schaden die ursprüngliche Gestalt der Kreatur nicht auf 0 Trefferpunkte reduziert, wird sie nicht bewusstlos. Die Kreatur kann nur Aktionen durchführen, die in ihrer neuen Gestalt möglich sind. Sie kann nicht sprechen, Zauber wirken oder andere Aktionen ausführen, die Hände oder Sprache erfordern, es sei denn, ihre neue Gestalt ist dazu in der Lage. Die Ausrüstung des Ziels verschmilzt mit seiner neuen Gestalt Es kann die Ausrüstung nicht aktivieren, verwenden, führen oder anderweitig nutzen. Gegenstand in Kreatur:  Du kannst einen Gegenstand in eine beliebige Kreatur verwandeln, solange die Kreatur nicht größer als der Gegenstand ist und der Herausforderungsgrad der Kreatur maximal 9 beträgt. Die Kreatur ist dir und deinen Verbündeten gegenüber freundlich gesinnt. Sie handelt in jedem deiner Züge. Du entscheidest, welche Aktion sie ausführt und wie sie sich bewegt. Der SL hat die Spielwerte der Kreatur und führt ihre Aktionen und Bewegungen aus. Wird der Zauber dauerhaft, kontrollierst du die Kreatur nicht mehr. Sie kann dir freundlich gesinnt bleiben, je nachdem, wie du sie behandelt hast. Kreatur in Gegenstand:  Verwandelst du eine Kreatur in einen Gegenstand, verwandelt sie sich mit allem, was sie trägt und in der Hand hält. Die Spielwerte der Kreatur werden zu denen des Gegenstands. Wenn der Zauber endet und das Ziel wieder seine normale Form annimmt, besitzt es keine Erinnerungen an die Zeit, die es als Gegenstand verbracht hat."
+  },
+  "image": "polymorph",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,56 @@
+{
+  "id": 325,
+  "slug": "transport-via-plants",
+  "name": "Transport via Plants",
+  "nameDe": "Pflanzentor",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid"
+    ],
+    "de": [
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "6th-level conjuration",
+    "de": "Stufe 6 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "10 feet",
+    "de": "3 Meter"
+  },
+  "duration": {
+    "en": "1 round",
+    "de": "1 Runde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "This spell creates a magical link between a Large or larger inanimate plant within range and another plant, at any distance, on the same plane of existence. You must have seen or touched the destination plant at least once before. For the duration, any creature can step into the target plant and exit from the destination plant by using 5 feet of movement.",
+    "de": "Dieser Zauber erschafft eine magische Verbindung zwischen einer mindestens großen, unbelebten Pflanze in Reichweite und einer anderen Pflanze in beliebiger Entfernung auf derselben Existenzebene. Du musst die Zielpflanze mindestens einmal gesehen oder berührt haben. Für die Wirkungsdauer kann jede Kreatur die verzauberte Pflanze betreten und steigt aus der Zielpflanze wieder heraus. Dafür benötigt sie 1,5 Meter ihrer Bewegungsrate."
+  },
+  "image": "teleportation-via-plants",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

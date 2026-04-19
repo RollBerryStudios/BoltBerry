@@ -1,0 +1,4129 @@
+{
+  "id": 39,
+  "slug": "bandit",
+  "name": "Bandit",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "1/8",
+  "xp": 25,
+  "ac": {
+    "en": "12 (Leather Armor)",
+    "de": "12 (Lederrüstung)"
+  },
+  "hp": {
+    "en": "11 (2d8 + 2)",
+    "de": "11 (2W8+2)"
+  },
+  "str": 11,
+  "dex": 12,
+  "con": 12,
+  "int": 10,
+  "wis": 10,
+  "cha": 10,
+  "strMod": 0,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any one language (usually Common)"
+    ],
+    "de": [
+      "Eine beliebige Sprache (normalerweise Gemeinsprache)"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Scimitar",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) slashing damage."
+      },
+      {
+        "name": "Light Crossbow",
+        "text": "Ranged Weapon Attack: +3 to hit, range 80 ft./320 ft., one target. Hit: 5 (1d8 + 1) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Krummsäbel",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 4 (1W6+1) Hiebschaden."
+      },
+      {
+        "name": "Leichte Armbrust",
+        "text": "Fernkampfwaffenangriff: +3 auf Treffer, Reichweite 24/96 m, ein Ziel. Treffer: 5 (1W8+1) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/656/humanoid.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (jedes Volk)"
+  },
+  "alignment": {
+    "en": "any non-lawful",
+    "de": "jede nicht-rechtschaffene Gesinnung"
+  },
+  "token": {
+    "file": "BanditDragonbornArcticMelee (1).webp",
+    "variant": "dragonbornArcticMelee"
+  },
+  "tokens": [
+    {
+      "file": "BanditDragonbornArcticMelee (2).webp",
+      "variant": "dragonbornArcticMelee"
+    },
+    {
+      "file": "BanditDragonbornArcticMelee (3).webp",
+      "variant": "dragonbornArcticMelee"
+    },
+    {
+      "file": "BanditDragonbornArcticMelee (4).webp",
+      "variant": "dragonbornArcticMelee"
+    },
+    {
+      "file": "BanditDragonbornArcticMelee (5).webp",
+      "variant": "dragonbornArcticMelee"
+    },
+    {
+      "file": "BanditDragonbornArcticMelee (6).webp",
+      "variant": "dragonbornArcticMelee"
+    },
+    {
+      "file": "BanditDragonbornArcticRanged (1).webp",
+      "variant": "dragonbornArcticRanged"
+    },
+    {
+      "file": "BanditDragonbornArcticRanged (2).webp",
+      "variant": "dragonbornArcticRanged"
+    },
+    {
+      "file": "BanditDragonbornDesertMelee (1).webp",
+      "variant": "dragonbornDesertMelee"
+    },
+    {
+      "file": "BanditDragonbornDesertMelee (2).webp",
+      "variant": "dragonbornDesertMelee"
+    },
+    {
+      "file": "BanditDragonbornDesertMelee (3).webp",
+      "variant": "dragonbornDesertMelee"
+    },
+    {
+      "file": "BanditDragonbornDesertMelee (4).webp",
+      "variant": "dragonbornDesertMelee"
+    },
+    {
+      "file": "BanditDragonbornDesertMelee (5).webp",
+      "variant": "dragonbornDesertMelee"
+    },
+    {
+      "file": "BanditDragonbornDesertRanged (1).webp",
+      "variant": "dragonbornDesertRanged"
+    },
+    {
+      "file": "BanditDragonbornDesertRanged (2).webp",
+      "variant": "dragonbornDesertRanged"
+    },
+    {
+      "file": "BanditDragonbornDesertRanged (3).webp",
+      "variant": "dragonbornDesertRanged"
+    },
+    {
+      "file": "BanditDragonbornForestMelee (1).webp",
+      "variant": "dragonbornForestMelee"
+    },
+    {
+      "file": "BanditDragonbornForestMelee (2).webp",
+      "variant": "dragonbornForestMelee"
+    },
+    {
+      "file": "BanditDragonbornForestMelee (3).webp",
+      "variant": "dragonbornForestMelee"
+    },
+    {
+      "file": "BanditDragonbornForestMelee (4).webp",
+      "variant": "dragonbornForestMelee"
+    },
+    {
+      "file": "BanditDragonbornForestMelee (5).webp",
+      "variant": "dragonbornForestMelee"
+    },
+    {
+      "file": "BanditDragonbornForestMelee (6).webp",
+      "variant": "dragonbornForestMelee"
+    },
+    {
+      "file": "BanditDragonbornForestMelee (7).webp",
+      "variant": "dragonbornForestMelee"
+    },
+    {
+      "file": "BanditDragonbornForestRanged (1).webp",
+      "variant": "dragonbornForestRanged"
+    },
+    {
+      "file": "BanditDragonbornForestRanged (2).webp",
+      "variant": "dragonbornForestRanged"
+    },
+    {
+      "file": "BanditDragonbornForestRanged (3).webp",
+      "variant": "dragonbornForestRanged"
+    },
+    {
+      "file": "BanditDragonbornForestRanged (4).webp",
+      "variant": "dragonbornForestRanged"
+    },
+    {
+      "file": "BanditDragonbornUrbanMelee (1).webp",
+      "variant": "dragonbornUrbanMelee"
+    },
+    {
+      "file": "BanditDragonbornUrbanMelee (10).webp",
+      "variant": "dragonbornUrbanMelee"
+    },
+    {
+      "file": "BanditDragonbornUrbanMelee (2).webp",
+      "variant": "dragonbornUrbanMelee"
+    },
+    {
+      "file": "BanditDragonbornUrbanMelee (3).webp",
+      "variant": "dragonbornUrbanMelee"
+    },
+    {
+      "file": "BanditDragonbornUrbanMelee (4).webp",
+      "variant": "dragonbornUrbanMelee"
+    },
+    {
+      "file": "BanditDragonbornUrbanMelee (5).webp",
+      "variant": "dragonbornUrbanMelee"
+    },
+    {
+      "file": "BanditDragonbornUrbanMelee (6).webp",
+      "variant": "dragonbornUrbanMelee"
+    },
+    {
+      "file": "BanditDragonbornUrbanMelee (7).webp",
+      "variant": "dragonbornUrbanMelee"
+    },
+    {
+      "file": "BanditDragonbornUrbanMelee (8).webp",
+      "variant": "dragonbornUrbanMelee"
+    },
+    {
+      "file": "BanditDragonbornUrbanMelee (9).webp",
+      "variant": "dragonbornUrbanMelee"
+    },
+    {
+      "file": "BanditDragonbornUrbanRanged (1).webp",
+      "variant": "dragonbornUrbanRanged"
+    },
+    {
+      "file": "BanditDragonbornUrbanRanged (2).webp",
+      "variant": "dragonbornUrbanRanged"
+    },
+    {
+      "file": "BanditDragonbornUrbanRanged (3).webp",
+      "variant": "dragonbornUrbanRanged"
+    },
+    {
+      "file": "BanditDragonbornUrbanRanged (4).webp",
+      "variant": "dragonbornUrbanRanged"
+    },
+    {
+      "file": "BanditDwarfArcticFemaleMelee (1).webp",
+      "variant": "dwarfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticFemaleMelee (2).webp",
+      "variant": "dwarfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticFemaleMelee (3).webp",
+      "variant": "dwarfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticFemaleMelee (4).webp",
+      "variant": "dwarfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticFemaleMelee (5).webp",
+      "variant": "dwarfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticFemaleMelee (6).webp",
+      "variant": "dwarfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticFemaleMelee (7).webp",
+      "variant": "dwarfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticFemaleRanged (1).webp",
+      "variant": "dwarfArcticFemaleRanged"
+    },
+    {
+      "file": "BanditDwarfArcticFemaleRanged (2).webp",
+      "variant": "dwarfArcticFemaleRanged"
+    },
+    {
+      "file": "BanditDwarfArcticFemaleRanged (3).webp",
+      "variant": "dwarfArcticFemaleRanged"
+    },
+    {
+      "file": "BanditDwarfArcticMaleMelee (1).webp",
+      "variant": "dwarfArcticMaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticMaleMelee (10).webp",
+      "variant": "dwarfArcticMaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticMaleMelee (11).webp",
+      "variant": "dwarfArcticMaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticMaleMelee (12).webp",
+      "variant": "dwarfArcticMaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticMaleMelee (2).webp",
+      "variant": "dwarfArcticMaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticMaleMelee (3).webp",
+      "variant": "dwarfArcticMaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticMaleMelee (4).webp",
+      "variant": "dwarfArcticMaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticMaleMelee (5).webp",
+      "variant": "dwarfArcticMaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticMaleMelee (6).webp",
+      "variant": "dwarfArcticMaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticMaleMelee (7).webp",
+      "variant": "dwarfArcticMaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticMaleMelee (8).webp",
+      "variant": "dwarfArcticMaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticMaleMelee (9).webp",
+      "variant": "dwarfArcticMaleMelee"
+    },
+    {
+      "file": "BanditDwarfArcticMaleRanged (1).webp",
+      "variant": "dwarfArcticMaleRanged"
+    },
+    {
+      "file": "BanditDwarfArcticMaleRanged (2).webp",
+      "variant": "dwarfArcticMaleRanged"
+    },
+    {
+      "file": "BanditDwarfArcticMaleRanged (3).webp",
+      "variant": "dwarfArcticMaleRanged"
+    },
+    {
+      "file": "BanditDwarfArcticMaleRanged (4).webp",
+      "variant": "dwarfArcticMaleRanged"
+    },
+    {
+      "file": "BanditDwarfDesertFemaleMelee (1).webp",
+      "variant": "dwarfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfDesertFemaleMelee (2).webp",
+      "variant": "dwarfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfDesertFemaleMelee (3).webp",
+      "variant": "dwarfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfDesertFemaleMelee (4).webp",
+      "variant": "dwarfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfDesertFemaleMelee (5).webp",
+      "variant": "dwarfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfDesertFemaleMelee (6).webp",
+      "variant": "dwarfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfDesertFemaleMelee (7).webp",
+      "variant": "dwarfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfDesertFemaleRanged (1).webp",
+      "variant": "dwarfDesertFemaleRanged"
+    },
+    {
+      "file": "BanditDwarfDesertFemaleRanged (2).webp",
+      "variant": "dwarfDesertFemaleRanged"
+    },
+    {
+      "file": "BanditDwarfDesertMaleMelee (1).webp",
+      "variant": "dwarfDesertMaleMelee"
+    },
+    {
+      "file": "BanditDwarfDesertMaleMelee (2).webp",
+      "variant": "dwarfDesertMaleMelee"
+    },
+    {
+      "file": "BanditDwarfDesertMaleMelee (3).webp",
+      "variant": "dwarfDesertMaleMelee"
+    },
+    {
+      "file": "BanditDwarfDesertMaleMelee (4).webp",
+      "variant": "dwarfDesertMaleMelee"
+    },
+    {
+      "file": "BanditDwarfDesertMaleMelee (5).webp",
+      "variant": "dwarfDesertMaleMelee"
+    },
+    {
+      "file": "BanditDwarfDesertMaleMelee (6).webp",
+      "variant": "dwarfDesertMaleMelee"
+    },
+    {
+      "file": "BanditDwarfDesertMaleMelee (7).webp",
+      "variant": "dwarfDesertMaleMelee"
+    },
+    {
+      "file": "BanditDwarfDesertMaleMelee (8).webp",
+      "variant": "dwarfDesertMaleMelee"
+    },
+    {
+      "file": "BanditDwarfDesertMaleMelee (9).webp",
+      "variant": "dwarfDesertMaleMelee"
+    },
+    {
+      "file": "BanditDwarfDesertMaleRanged (1).webp",
+      "variant": "dwarfDesertMaleRanged"
+    },
+    {
+      "file": "BanditDwarfDesertMaleRanged (2).webp",
+      "variant": "dwarfDesertMaleRanged"
+    },
+    {
+      "file": "BanditDwarfForestFemaleMelee (1).webp",
+      "variant": "dwarfForestFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestFemaleMelee (2).webp",
+      "variant": "dwarfForestFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestFemaleMelee (3).webp",
+      "variant": "dwarfForestFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestFemaleMelee (4).webp",
+      "variant": "dwarfForestFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestFemaleMelee (5).webp",
+      "variant": "dwarfForestFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestFemaleMelee (6).webp",
+      "variant": "dwarfForestFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestFemaleMelee (7).webp",
+      "variant": "dwarfForestFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestFemaleMelee (8).webp",
+      "variant": "dwarfForestFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestFemaleRanged (1).webp",
+      "variant": "dwarfForestFemaleRanged"
+    },
+    {
+      "file": "BanditDwarfForestFemaleRanged (2).webp",
+      "variant": "dwarfForestFemaleRanged"
+    },
+    {
+      "file": "BanditDwarfForestMaleMelee (1).webp",
+      "variant": "dwarfForestMaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestMaleMelee (10).webp",
+      "variant": "dwarfForestMaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestMaleMelee (11).webp",
+      "variant": "dwarfForestMaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestMaleMelee (2).webp",
+      "variant": "dwarfForestMaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestMaleMelee (3).webp",
+      "variant": "dwarfForestMaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestMaleMelee (4).webp",
+      "variant": "dwarfForestMaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestMaleMelee (5).webp",
+      "variant": "dwarfForestMaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestMaleMelee (6).webp",
+      "variant": "dwarfForestMaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestMaleMelee (7).webp",
+      "variant": "dwarfForestMaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestMaleMelee (8).webp",
+      "variant": "dwarfForestMaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestMaleMelee (9).webp",
+      "variant": "dwarfForestMaleMelee"
+    },
+    {
+      "file": "BanditDwarfForestMaleRanged (1).webp",
+      "variant": "dwarfForestMaleRanged"
+    },
+    {
+      "file": "BanditDwarfForestMaleRanged (2).webp",
+      "variant": "dwarfForestMaleRanged"
+    },
+    {
+      "file": "BanditDwarfForestMaleRanged (3).webp",
+      "variant": "dwarfForestMaleRanged"
+    },
+    {
+      "file": "BanditDwarfForestMaleRanged (4).webp",
+      "variant": "dwarfForestMaleRanged"
+    },
+    {
+      "file": "BanditDwarfUrbanFemaleMelee (1).webp",
+      "variant": "dwarfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfUrbanFemaleMelee (2).webp",
+      "variant": "dwarfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfUrbanFemaleMelee (3).webp",
+      "variant": "dwarfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfUrbanFemaleMelee (4).webp",
+      "variant": "dwarfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditDwarfUrbanFemaleRanged (1).webp",
+      "variant": "dwarfUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditDwarfUrbanFemaleRanged (2).webp",
+      "variant": "dwarfUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditDwarfUrbanMaleMelee (1).webp",
+      "variant": "dwarfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditDwarfUrbanMaleMelee (10).webp",
+      "variant": "dwarfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditDwarfUrbanMaleMelee (2).webp",
+      "variant": "dwarfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditDwarfUrbanMaleMelee (3).webp",
+      "variant": "dwarfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditDwarfUrbanMaleMelee (4).webp",
+      "variant": "dwarfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditDwarfUrbanMaleMelee (5).webp",
+      "variant": "dwarfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditDwarfUrbanMaleMelee (6).webp",
+      "variant": "dwarfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditDwarfUrbanMaleMelee (7).webp",
+      "variant": "dwarfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditDwarfUrbanMaleMelee (8).webp",
+      "variant": "dwarfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditDwarfUrbanMaleMelee (9).webp",
+      "variant": "dwarfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditDwarfUrbanMaleRanged (1).webp",
+      "variant": "dwarfUrbanMaleRanged"
+    },
+    {
+      "file": "BanditDwarfUrbanMaleRanged (2).webp",
+      "variant": "dwarfUrbanMaleRanged"
+    },
+    {
+      "file": "BanditDwarfUrbanMaleRanged (3).webp",
+      "variant": "dwarfUrbanMaleRanged"
+    },
+    {
+      "file": "BanditDwarfUrbanMaleRanged (4).webp",
+      "variant": "dwarfUrbanMaleRanged"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (1).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (10).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (11).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (12).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (13).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (14).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (15).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (16).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (17).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (18).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (19).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (2).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (20).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (3).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (4).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (5).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (6).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (7).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (8).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleMelee (9).webp",
+      "variant": "elfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditElfArcticFemaleRanged (1).webp",
+      "variant": "elfArcticFemaleRanged"
+    },
+    {
+      "file": "BanditElfArcticFemaleRanged (2).webp",
+      "variant": "elfArcticFemaleRanged"
+    },
+    {
+      "file": "BanditElfArcticFemaleRanged (3).webp",
+      "variant": "elfArcticFemaleRanged"
+    },
+    {
+      "file": "BanditElfArcticFemaleRanged (4).webp",
+      "variant": "elfArcticFemaleRanged"
+    },
+    {
+      "file": "BanditElfArcticFemaleRanged (5).webp",
+      "variant": "elfArcticFemaleRanged"
+    },
+    {
+      "file": "BanditElfArcticFemaleRanged (6).webp",
+      "variant": "elfArcticFemaleRanged"
+    },
+    {
+      "file": "BanditElfArcticFemaleRanged (7).webp",
+      "variant": "elfArcticFemaleRanged"
+    },
+    {
+      "file": "BanditElfArcticFemaleRanged (8).webp",
+      "variant": "elfArcticFemaleRanged"
+    },
+    {
+      "file": "BanditElfArcticMaleMelee (1).webp",
+      "variant": "elfArcticMaleMelee"
+    },
+    {
+      "file": "BanditElfArcticMaleMelee (10).webp",
+      "variant": "elfArcticMaleMelee"
+    },
+    {
+      "file": "BanditElfArcticMaleMelee (11).webp",
+      "variant": "elfArcticMaleMelee"
+    },
+    {
+      "file": "BanditElfArcticMaleMelee (12).webp",
+      "variant": "elfArcticMaleMelee"
+    },
+    {
+      "file": "BanditElfArcticMaleMelee (2).webp",
+      "variant": "elfArcticMaleMelee"
+    },
+    {
+      "file": "BanditElfArcticMaleMelee (3).webp",
+      "variant": "elfArcticMaleMelee"
+    },
+    {
+      "file": "BanditElfArcticMaleMelee (4).webp",
+      "variant": "elfArcticMaleMelee"
+    },
+    {
+      "file": "BanditElfArcticMaleMelee (5).webp",
+      "variant": "elfArcticMaleMelee"
+    },
+    {
+      "file": "BanditElfArcticMaleMelee (6).webp",
+      "variant": "elfArcticMaleMelee"
+    },
+    {
+      "file": "BanditElfArcticMaleMelee (7).webp",
+      "variant": "elfArcticMaleMelee"
+    },
+    {
+      "file": "BanditElfArcticMaleMelee (8).webp",
+      "variant": "elfArcticMaleMelee"
+    },
+    {
+      "file": "BanditElfArcticMaleMelee (9).webp",
+      "variant": "elfArcticMaleMelee"
+    },
+    {
+      "file": "BanditElfArcticMaleRanged (1).webp",
+      "variant": "elfArcticMaleRanged"
+    },
+    {
+      "file": "BanditElfArcticMaleRanged (2).webp",
+      "variant": "elfArcticMaleRanged"
+    },
+    {
+      "file": "BanditElfArcticMaleRanged (3).webp",
+      "variant": "elfArcticMaleRanged"
+    },
+    {
+      "file": "BanditElfArcticMaleRanged (4).webp",
+      "variant": "elfArcticMaleRanged"
+    },
+    {
+      "file": "BanditElfArcticMaleRanged (5).webp",
+      "variant": "elfArcticMaleRanged"
+    },
+    {
+      "file": "BanditElfArcticMaleRanged (6).webp",
+      "variant": "elfArcticMaleRanged"
+    },
+    {
+      "file": "BanditElfArcticMaleRanged (7).webp",
+      "variant": "elfArcticMaleRanged"
+    },
+    {
+      "file": "BanditElfDesertFemaleMelee (1).webp",
+      "variant": "elfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditElfDesertFemaleMelee (2).webp",
+      "variant": "elfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditElfDesertFemaleMelee (3).webp",
+      "variant": "elfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditElfDesertFemaleMelee (4).webp",
+      "variant": "elfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditElfDesertFemaleMelee (5).webp",
+      "variant": "elfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditElfDesertFemaleMelee (6).webp",
+      "variant": "elfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditElfDesertMaleMelee (1).webp",
+      "variant": "elfDesertMaleMelee"
+    },
+    {
+      "file": "BanditElfDesertMaleMelee (2).webp",
+      "variant": "elfDesertMaleMelee"
+    },
+    {
+      "file": "BanditElfDesertMaleMelee (3).webp",
+      "variant": "elfDesertMaleMelee"
+    },
+    {
+      "file": "BanditElfDesertMaleMelee (4).webp",
+      "variant": "elfDesertMaleMelee"
+    },
+    {
+      "file": "BanditElfForestFemaleMelee (1).webp",
+      "variant": "elfForestFemaleMelee"
+    },
+    {
+      "file": "BanditElfForestFemaleMelee (10).webp",
+      "variant": "elfForestFemaleMelee"
+    },
+    {
+      "file": "BanditElfForestFemaleMelee (2).webp",
+      "variant": "elfForestFemaleMelee"
+    },
+    {
+      "file": "BanditElfForestFemaleMelee (3).webp",
+      "variant": "elfForestFemaleMelee"
+    },
+    {
+      "file": "BanditElfForestFemaleMelee (4).webp",
+      "variant": "elfForestFemaleMelee"
+    },
+    {
+      "file": "BanditElfForestFemaleMelee (5).webp",
+      "variant": "elfForestFemaleMelee"
+    },
+    {
+      "file": "BanditElfForestFemaleMelee (6).webp",
+      "variant": "elfForestFemaleMelee"
+    },
+    {
+      "file": "BanditElfForestFemaleMelee (7).webp",
+      "variant": "elfForestFemaleMelee"
+    },
+    {
+      "file": "BanditElfForestFemaleMelee (8).webp",
+      "variant": "elfForestFemaleMelee"
+    },
+    {
+      "file": "BanditElfForestFemaleMelee (9).webp",
+      "variant": "elfForestFemaleMelee"
+    },
+    {
+      "file": "BanditElfForestFemaleRanged (1).webp",
+      "variant": "elfForestFemaleRanged"
+    },
+    {
+      "file": "BanditElfForestFemaleRanged (2).webp",
+      "variant": "elfForestFemaleRanged"
+    },
+    {
+      "file": "BanditElfForestMaleMelee (1).webp",
+      "variant": "elfForestMaleMelee"
+    },
+    {
+      "file": "BanditElfForestMaleMelee (2).webp",
+      "variant": "elfForestMaleMelee"
+    },
+    {
+      "file": "BanditElfForestMaleMelee (3).webp",
+      "variant": "elfForestMaleMelee"
+    },
+    {
+      "file": "BanditElfForestMaleMelee (4).webp",
+      "variant": "elfForestMaleMelee"
+    },
+    {
+      "file": "BanditElfForestMaleMelee (5).webp",
+      "variant": "elfForestMaleMelee"
+    },
+    {
+      "file": "BanditElfForestMaleMelee (6).webp",
+      "variant": "elfForestMaleMelee"
+    },
+    {
+      "file": "BanditElfForestMaleMelee (7).webp",
+      "variant": "elfForestMaleMelee"
+    },
+    {
+      "file": "BanditElfForestMaleMelee (8).webp",
+      "variant": "elfForestMaleMelee"
+    },
+    {
+      "file": "BanditElfForestMaleMelee (9).webp",
+      "variant": "elfForestMaleMelee"
+    },
+    {
+      "file": "BanditElfForestMaleRanged (1).webp",
+      "variant": "elfForestMaleRanged"
+    },
+    {
+      "file": "BanditElfForestMaleRanged (2).webp",
+      "variant": "elfForestMaleRanged"
+    },
+    {
+      "file": "BanditElfForestMaleRanged (3).webp",
+      "variant": "elfForestMaleRanged"
+    },
+    {
+      "file": "BanditElfForestMaleRanged (4).webp",
+      "variant": "elfForestMaleRanged"
+    },
+    {
+      "file": "BanditElfForestMaleRanged (5).webp",
+      "variant": "elfForestMaleRanged"
+    },
+    {
+      "file": "BanditElfForestMaleRanged (6).webp",
+      "variant": "elfForestMaleRanged"
+    },
+    {
+      "file": "BanditElfForestMaleRanged (7).webp",
+      "variant": "elfForestMaleRanged"
+    },
+    {
+      "file": "BanditElfForestMaleRanged (8).webp",
+      "variant": "elfForestMaleRanged"
+    },
+    {
+      "file": "BanditElfUrbanFemaleMelee (1).webp",
+      "variant": "elfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditElfUrbanFemaleMelee (2).webp",
+      "variant": "elfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditElfUrbanFemaleMelee (3).webp",
+      "variant": "elfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditElfUrbanFemaleRanged (1).webp",
+      "variant": "elfUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditElfUrbanFemaleRanged (2).webp",
+      "variant": "elfUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditElfUrbanFemaleRanged (3).webp",
+      "variant": "elfUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditElfUrbanMaleMelee (1).webp",
+      "variant": "elfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditElfUrbanMaleMelee (2).webp",
+      "variant": "elfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditElfUrbanMaleMelee (3).webp",
+      "variant": "elfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditElfUrbanMaleMelee (4).webp",
+      "variant": "elfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditElfUrbanMaleRanged (1).webp",
+      "variant": "elfUrbanMaleRanged"
+    },
+    {
+      "file": "BanditElfUrbanMaleRanged (2).webp",
+      "variant": "elfUrbanMaleRanged"
+    },
+    {
+      "file": "BanditElfUrbanMaleRanged (3).webp",
+      "variant": "elfUrbanMaleRanged"
+    },
+    {
+      "file": "BanditElfUrbanMaleRanged (4).webp",
+      "variant": "elfUrbanMaleRanged"
+    },
+    {
+      "file": "BanditGnomeArcticFemaleMelee (1).webp",
+      "variant": "gnomeArcticFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeArcticFemaleMelee (2).webp",
+      "variant": "gnomeArcticFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeArcticFemaleMelee (3).webp",
+      "variant": "gnomeArcticFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeArcticFemaleMelee (4).webp",
+      "variant": "gnomeArcticFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeArcticFemaleMelee (5).webp",
+      "variant": "gnomeArcticFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeArcticFemaleMelee (6).webp",
+      "variant": "gnomeArcticFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeArcticFemaleMelee (7).webp",
+      "variant": "gnomeArcticFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeArcticFemaleMelee (8).webp",
+      "variant": "gnomeArcticFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeArcticFemaleMelee (9).webp",
+      "variant": "gnomeArcticFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeArcticFemaleRanged (1).webp",
+      "variant": "gnomeArcticFemaleRanged"
+    },
+    {
+      "file": "BanditGnomeArcticMaleMelee (1).webp",
+      "variant": "gnomeArcticMaleMelee"
+    },
+    {
+      "file": "BanditGnomeArcticMaleMelee (2).webp",
+      "variant": "gnomeArcticMaleMelee"
+    },
+    {
+      "file": "BanditGnomeArcticMaleMelee (3).webp",
+      "variant": "gnomeArcticMaleMelee"
+    },
+    {
+      "file": "BanditGnomeArcticMaleMelee (4).webp",
+      "variant": "gnomeArcticMaleMelee"
+    },
+    {
+      "file": "BanditGnomeArcticMaleMelee (5).webp",
+      "variant": "gnomeArcticMaleMelee"
+    },
+    {
+      "file": "BanditGnomeArcticMaleMelee (6).webp",
+      "variant": "gnomeArcticMaleMelee"
+    },
+    {
+      "file": "BanditGnomeArcticMaleMelee (7).webp",
+      "variant": "gnomeArcticMaleMelee"
+    },
+    {
+      "file": "BanditGnomeArcticMaleMelee (8).webp",
+      "variant": "gnomeArcticMaleMelee"
+    },
+    {
+      "file": "BanditGnomeArcticMaleRanged (1).webp",
+      "variant": "gnomeArcticMaleRanged"
+    },
+    {
+      "file": "BanditGnomeArcticMaleRanged (2).webp",
+      "variant": "gnomeArcticMaleRanged"
+    },
+    {
+      "file": "BanditGnomeArcticMaleRanged (3).webp",
+      "variant": "gnomeArcticMaleRanged"
+    },
+    {
+      "file": "BanditGnomeDesertFemaleMelee (1).webp",
+      "variant": "gnomeDesertFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeDesertFemaleMelee (2).webp",
+      "variant": "gnomeDesertFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeDesertFemaleMelee (3).webp",
+      "variant": "gnomeDesertFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeDesertFemaleMelee (4).webp",
+      "variant": "gnomeDesertFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeDesertFemaleMelee (5).webp",
+      "variant": "gnomeDesertFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeDesertFemaleMelee (6).webp",
+      "variant": "gnomeDesertFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeDesertFemaleMelee (7).webp",
+      "variant": "gnomeDesertFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeDesertFemaleMelee (8).webp",
+      "variant": "gnomeDesertFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeDesertFemaleMelee (9).webp",
+      "variant": "gnomeDesertFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeDesertFemaleRanged (1).webp",
+      "variant": "gnomeDesertFemaleRanged"
+    },
+    {
+      "file": "BanditGnomeDesertFemaleRanged (2).webp",
+      "variant": "gnomeDesertFemaleRanged"
+    },
+    {
+      "file": "BanditGnomeDesertFemaleRanged (3).webp",
+      "variant": "gnomeDesertFemaleRanged"
+    },
+    {
+      "file": "BanditGnomeDesertMaleMelee (1).webp",
+      "variant": "gnomeDesertMaleMelee"
+    },
+    {
+      "file": "BanditGnomeDesertMaleMelee (2).webp",
+      "variant": "gnomeDesertMaleMelee"
+    },
+    {
+      "file": "BanditGnomeDesertMaleMelee (3).webp",
+      "variant": "gnomeDesertMaleMelee"
+    },
+    {
+      "file": "BanditGnomeDesertMaleMelee (4).webp",
+      "variant": "gnomeDesertMaleMelee"
+    },
+    {
+      "file": "BanditGnomeDesertMaleMelee (5).webp",
+      "variant": "gnomeDesertMaleMelee"
+    },
+    {
+      "file": "BanditGnomeDesertMaleMelee (6).webp",
+      "variant": "gnomeDesertMaleMelee"
+    },
+    {
+      "file": "BanditGnomeDesertMaleMelee (7).webp",
+      "variant": "gnomeDesertMaleMelee"
+    },
+    {
+      "file": "BanditGnomeDesertMaleMelee (8).webp",
+      "variant": "gnomeDesertMaleMelee"
+    },
+    {
+      "file": "BanditGnomeDesertMaleRanged (1).webp",
+      "variant": "gnomeDesertMaleRanged"
+    },
+    {
+      "file": "BanditGnomeDesertMaleRanged (2).webp",
+      "variant": "gnomeDesertMaleRanged"
+    },
+    {
+      "file": "BanditGnomeDesertMaleRanged (3).webp",
+      "variant": "gnomeDesertMaleRanged"
+    },
+    {
+      "file": "BanditGnomeDesertMaleRanged (4).webp",
+      "variant": "gnomeDesertMaleRanged"
+    },
+    {
+      "file": "BanditGnomeForestFemaleMelee (1).webp",
+      "variant": "gnomeForestFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestFemaleMelee (10).webp",
+      "variant": "gnomeForestFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestFemaleMelee (2).webp",
+      "variant": "gnomeForestFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestFemaleMelee (3).webp",
+      "variant": "gnomeForestFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestFemaleMelee (4).webp",
+      "variant": "gnomeForestFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestFemaleMelee (5).webp",
+      "variant": "gnomeForestFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestFemaleMelee (6).webp",
+      "variant": "gnomeForestFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestFemaleMelee (7).webp",
+      "variant": "gnomeForestFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestFemaleMelee (8).webp",
+      "variant": "gnomeForestFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestFemaleMelee (9).webp",
+      "variant": "gnomeForestFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestFemaleRanged (1).webp",
+      "variant": "gnomeForestFemaleRanged"
+    },
+    {
+      "file": "BanditGnomeForestFemaleRanged (2).webp",
+      "variant": "gnomeForestFemaleRanged"
+    },
+    {
+      "file": "BanditGnomeForestFemaleRanged (3).webp",
+      "variant": "gnomeForestFemaleRanged"
+    },
+    {
+      "file": "BanditGnomeForestMaleMelee (1).webp",
+      "variant": "gnomeForestMaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestMaleMelee (2).webp",
+      "variant": "gnomeForestMaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestMaleMelee (3).webp",
+      "variant": "gnomeForestMaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestMaleMelee (4).webp",
+      "variant": "gnomeForestMaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestMaleMelee (5).webp",
+      "variant": "gnomeForestMaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestMaleMelee (6).webp",
+      "variant": "gnomeForestMaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestMaleMelee (7).webp",
+      "variant": "gnomeForestMaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestMaleMelee (8).webp",
+      "variant": "gnomeForestMaleMelee"
+    },
+    {
+      "file": "BanditGnomeForestMaleRanged (1).webp",
+      "variant": "gnomeForestMaleRanged"
+    },
+    {
+      "file": "BanditGnomeForestMaleRanged (2).webp",
+      "variant": "gnomeForestMaleRanged"
+    },
+    {
+      "file": "BanditGnomeUrbanFemaleMelee (1).webp",
+      "variant": "gnomeUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanFemaleMelee (10).webp",
+      "variant": "gnomeUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanFemaleMelee (2).webp",
+      "variant": "gnomeUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanFemaleMelee (3).webp",
+      "variant": "gnomeUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanFemaleMelee (4).webp",
+      "variant": "gnomeUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanFemaleMelee (5).webp",
+      "variant": "gnomeUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanFemaleMelee (6).webp",
+      "variant": "gnomeUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanFemaleMelee (7).webp",
+      "variant": "gnomeUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanFemaleMelee (8).webp",
+      "variant": "gnomeUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanFemaleMelee (9).webp",
+      "variant": "gnomeUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanFemaleRanged (1).webp",
+      "variant": "gnomeUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditGnomeUrbanFemaleRanged (2).webp",
+      "variant": "gnomeUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditGnomeUrbanMaleMelee (1).webp",
+      "variant": "gnomeUrbanMaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanMaleMelee (2).webp",
+      "variant": "gnomeUrbanMaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanMaleMelee (3).webp",
+      "variant": "gnomeUrbanMaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanMaleMelee (4).webp",
+      "variant": "gnomeUrbanMaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanMaleMelee (5).webp",
+      "variant": "gnomeUrbanMaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanMaleMelee (6).webp",
+      "variant": "gnomeUrbanMaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanMaleMelee (7).webp",
+      "variant": "gnomeUrbanMaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanMaleMelee (8).webp",
+      "variant": "gnomeUrbanMaleMelee"
+    },
+    {
+      "file": "BanditGnomeUrbanMaleRanged (1).webp",
+      "variant": "gnomeUrbanMaleRanged"
+    },
+    {
+      "file": "BanditGnomeUrbanMaleRanged (2).webp",
+      "variant": "gnomeUrbanMaleRanged"
+    },
+    {
+      "file": "BanditGnomeUrbanMaleRanged (3).webp",
+      "variant": "gnomeUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHalfElfArcticFemaleMelee (1).webp",
+      "variant": "halfElfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfArcticFemaleMelee (2).webp",
+      "variant": "halfElfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfArcticFemaleMelee (3).webp",
+      "variant": "halfElfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfArcticFemaleMelee (4).webp",
+      "variant": "halfElfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfArcticFemaleMelee (5).webp",
+      "variant": "halfElfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfArcticFemaleMelee (6).webp",
+      "variant": "halfElfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfArcticFemaleMelee (7).webp",
+      "variant": "halfElfArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfArcticFemaleRanged (1).webp",
+      "variant": "halfElfArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHalfElfArcticMaleMelee (1).webp",
+      "variant": "halfElfArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfArcticMaleMelee (2).webp",
+      "variant": "halfElfArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfArcticMaleMelee (3).webp",
+      "variant": "halfElfArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfArcticMaleMelee (4).webp",
+      "variant": "halfElfArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfArcticMaleMelee (5).webp",
+      "variant": "halfElfArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfArcticMaleMelee (6).webp",
+      "variant": "halfElfArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfArcticMaleRanged (1).webp",
+      "variant": "halfElfArcticMaleRanged"
+    },
+    {
+      "file": "BanditHalfElfArcticMaleRanged (2).webp",
+      "variant": "halfElfArcticMaleRanged"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleMelee (1).webp",
+      "variant": "halfElfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleMelee (10).webp",
+      "variant": "halfElfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleMelee (11).webp",
+      "variant": "halfElfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleMelee (2).webp",
+      "variant": "halfElfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleMelee (3).webp",
+      "variant": "halfElfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleMelee (4).webp",
+      "variant": "halfElfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleMelee (5).webp",
+      "variant": "halfElfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleMelee (6).webp",
+      "variant": "halfElfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleMelee (7).webp",
+      "variant": "halfElfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleMelee (8).webp",
+      "variant": "halfElfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleMelee (9).webp",
+      "variant": "halfElfDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleRanged (1).webp",
+      "variant": "halfElfDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleRanged (2).webp",
+      "variant": "halfElfDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleRanged (3).webp",
+      "variant": "halfElfDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleRanged (4).webp",
+      "variant": "halfElfDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleRanged (5).webp",
+      "variant": "halfElfDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleRanged (6).webp",
+      "variant": "halfElfDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHalfElfDesertFemaleRanged (7).webp",
+      "variant": "halfElfDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHalfElfDesertMaleMelee (1).webp",
+      "variant": "halfElfDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertMaleMelee (2).webp",
+      "variant": "halfElfDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertMaleMelee (3).webp",
+      "variant": "halfElfDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertMaleMelee (4).webp",
+      "variant": "halfElfDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertMaleMelee (5).webp",
+      "variant": "halfElfDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertMaleMelee (6).webp",
+      "variant": "halfElfDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertMaleMelee (7).webp",
+      "variant": "halfElfDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfDesertMaleRanged (1).webp",
+      "variant": "halfElfDesertMaleRanged"
+    },
+    {
+      "file": "BanditHalfElfDesertMaleRanged (2).webp",
+      "variant": "halfElfDesertMaleRanged"
+    },
+    {
+      "file": "BanditHalfElfDesertMaleRanged (3).webp",
+      "variant": "halfElfDesertMaleRanged"
+    },
+    {
+      "file": "BanditHalfElfDesertMaleRanged (4).webp",
+      "variant": "halfElfDesertMaleRanged"
+    },
+    {
+      "file": "BanditHalfElfDesertMaleRanged (5).webp",
+      "variant": "halfElfDesertMaleRanged"
+    },
+    {
+      "file": "BanditHalfElfDesertMaleRanged (6).webp",
+      "variant": "halfElfDesertMaleRanged"
+    },
+    {
+      "file": "BanditHalfElfDesertMaleRanged (7).webp",
+      "variant": "halfElfDesertMaleRanged"
+    },
+    {
+      "file": "BanditHalfElfForestFemaleMelee (1).webp",
+      "variant": "halfElfForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfForestFemaleMelee (2).webp",
+      "variant": "halfElfForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfForestFemaleMelee (3).webp",
+      "variant": "halfElfForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfForestFemaleMelee (4).webp",
+      "variant": "halfElfForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfForestFemaleMelee (5).webp",
+      "variant": "halfElfForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfForestFemaleMelee (6).webp",
+      "variant": "halfElfForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfForestFemaleMelee (7).webp",
+      "variant": "halfElfForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfForestFemaleRanged (1).webp",
+      "variant": "halfElfForestFemaleRanged"
+    },
+    {
+      "file": "BanditHalfElfForestFemaleRanged (2).webp",
+      "variant": "halfElfForestFemaleRanged"
+    },
+    {
+      "file": "BanditHalfElfForestMaleMelee (1).webp",
+      "variant": "halfElfForestMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfForestMaleMelee (2).webp",
+      "variant": "halfElfForestMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfForestMaleMelee (3).webp",
+      "variant": "halfElfForestMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfForestMaleMelee (4).webp",
+      "variant": "halfElfForestMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfForestMaleMelee (5).webp",
+      "variant": "halfElfForestMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfForestMaleRanged (1).webp",
+      "variant": "halfElfForestMaleRanged"
+    },
+    {
+      "file": "BanditHalfElfForestMaleRanged (2).webp",
+      "variant": "halfElfForestMaleRanged"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleMelee (1).webp",
+      "variant": "halfElfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleMelee (10).webp",
+      "variant": "halfElfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleMelee (11).webp",
+      "variant": "halfElfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleMelee (12).webp",
+      "variant": "halfElfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleMelee (13).webp",
+      "variant": "halfElfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleMelee (2).webp",
+      "variant": "halfElfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleMelee (3).webp",
+      "variant": "halfElfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleMelee (4).webp",
+      "variant": "halfElfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleMelee (5).webp",
+      "variant": "halfElfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleMelee (6).webp",
+      "variant": "halfElfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleMelee (7).webp",
+      "variant": "halfElfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleMelee (8).webp",
+      "variant": "halfElfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleMelee (9).webp",
+      "variant": "halfElfUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleRanged (1).webp",
+      "variant": "halfElfUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleRanged (2).webp",
+      "variant": "halfElfUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleRanged (3).webp",
+      "variant": "halfElfUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleRanged (4).webp",
+      "variant": "halfElfUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHalfElfUrbanFemaleRanged (5).webp",
+      "variant": "halfElfUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHalfElfUrbanMaleMelee (1).webp",
+      "variant": "halfElfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanMaleMelee (10).webp",
+      "variant": "halfElfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanMaleMelee (2).webp",
+      "variant": "halfElfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanMaleMelee (3).webp",
+      "variant": "halfElfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanMaleMelee (4).webp",
+      "variant": "halfElfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanMaleMelee (5).webp",
+      "variant": "halfElfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanMaleMelee (6).webp",
+      "variant": "halfElfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanMaleMelee (7).webp",
+      "variant": "halfElfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanMaleMelee (8).webp",
+      "variant": "halfElfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanMaleMelee (9).webp",
+      "variant": "halfElfUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfElfUrbanMaleRanged (1).webp",
+      "variant": "halfElfUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHalfElfUrbanMaleRanged (2).webp",
+      "variant": "halfElfUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHalfElfUrbanMaleRanged (3).webp",
+      "variant": "halfElfUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHalfElfUrbanMaleRanged (4).webp",
+      "variant": "halfElfUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHalflingArcticFemaleMelee (1).webp",
+      "variant": "halflingArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticFemaleMelee (10).webp",
+      "variant": "halflingArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticFemaleMelee (2).webp",
+      "variant": "halflingArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticFemaleMelee (3).webp",
+      "variant": "halflingArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticFemaleMelee (4).webp",
+      "variant": "halflingArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticFemaleMelee (5).webp",
+      "variant": "halflingArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticFemaleMelee (6).webp",
+      "variant": "halflingArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticFemaleMelee (7).webp",
+      "variant": "halflingArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticFemaleMelee (8).webp",
+      "variant": "halflingArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticFemaleMelee (9).webp",
+      "variant": "halflingArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticFemaleRanged (1).webp",
+      "variant": "halflingArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHalflingArcticFemaleRanged (2).webp",
+      "variant": "halflingArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHalflingArcticFemaleRanged (3).webp",
+      "variant": "halflingArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHalflingArcticFemaleRanged (4).webp",
+      "variant": "halflingArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHalflingArcticFemaleRanged (5).webp",
+      "variant": "halflingArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHalflingArcticFemaleRanged (6).webp",
+      "variant": "halflingArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHalflingArcticMaleMelee (1).webp",
+      "variant": "halflingArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticMaleMelee (10).webp",
+      "variant": "halflingArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticMaleMelee (2).webp",
+      "variant": "halflingArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticMaleMelee (3).webp",
+      "variant": "halflingArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticMaleMelee (4).webp",
+      "variant": "halflingArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticMaleMelee (5).webp",
+      "variant": "halflingArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticMaleMelee (6).webp",
+      "variant": "halflingArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticMaleMelee (7).webp",
+      "variant": "halflingArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticMaleMelee (8).webp",
+      "variant": "halflingArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticMaleMelee (9).webp",
+      "variant": "halflingArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalflingArcticMaleRanged (1).webp",
+      "variant": "halflingArcticMaleRanged"
+    },
+    {
+      "file": "BanditHalflingArcticMaleRanged (2).webp",
+      "variant": "halflingArcticMaleRanged"
+    },
+    {
+      "file": "BanditHalflingArcticMaleRanged (3).webp",
+      "variant": "halflingArcticMaleRanged"
+    },
+    {
+      "file": "BanditHalflingArcticMaleRanged (4).webp",
+      "variant": "halflingArcticMaleRanged"
+    },
+    {
+      "file": "BanditHalflingDesertFemaleMelee (1).webp",
+      "variant": "halflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingDesertFemaleMelee (2).webp",
+      "variant": "halflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingDesertFemaleMelee (3).webp",
+      "variant": "halflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingDesertFemaleRanged (1).webp",
+      "variant": "halflingDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHalflingDesertFemaleRanged (2).webp",
+      "variant": "halflingDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHalflingDesertFemaleRanged (3).webp",
+      "variant": "halflingDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHalflingDesertMaleMelee (1).webp",
+      "variant": "halflingDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalflingDesertMaleMelee (2).webp",
+      "variant": "halflingDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalflingDesertMaleMelee (3).webp",
+      "variant": "halflingDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalflingDesertMaleMelee (4).webp",
+      "variant": "halflingDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalflingDesertMaleMelee (5).webp",
+      "variant": "halflingDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalflingDesertMaleMelee (6).webp",
+      "variant": "halflingDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalflingDesertMaleMelee (7).webp",
+      "variant": "halflingDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalflingDesertMaleRanged (1).webp",
+      "variant": "halflingDesertMaleRanged"
+    },
+    {
+      "file": "BanditHalflingDesertMaleRanged (2).webp",
+      "variant": "halflingDesertMaleRanged"
+    },
+    {
+      "file": "BanditHalflingDesertMaleRanged (3).webp",
+      "variant": "halflingDesertMaleRanged"
+    },
+    {
+      "file": "BanditHalflingForestFemaleMelee (1).webp",
+      "variant": "halflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestFemaleMelee (10).webp",
+      "variant": "halflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestFemaleMelee (11).webp",
+      "variant": "halflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestFemaleMelee (12).webp",
+      "variant": "halflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestFemaleMelee (13).webp",
+      "variant": "halflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestFemaleMelee (2).webp",
+      "variant": "halflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestFemaleMelee (3).webp",
+      "variant": "halflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestFemaleMelee (4).webp",
+      "variant": "halflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestFemaleMelee (5).webp",
+      "variant": "halflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestFemaleMelee (6).webp",
+      "variant": "halflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestFemaleMelee (7).webp",
+      "variant": "halflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestFemaleMelee (8).webp",
+      "variant": "halflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestFemaleMelee (9).webp",
+      "variant": "halflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestFemaleRanged (1).webp",
+      "variant": "halflingForestFemaleRanged"
+    },
+    {
+      "file": "BanditHalflingForestFemaleRanged (2).webp",
+      "variant": "halflingForestFemaleRanged"
+    },
+    {
+      "file": "BanditHalflingForestFemaleRanged (3).webp",
+      "variant": "halflingForestFemaleRanged"
+    },
+    {
+      "file": "BanditHalflingForestFemaleRanged (4).webp",
+      "variant": "halflingForestFemaleRanged"
+    },
+    {
+      "file": "BanditHalflingForestFemaleRanged (5).webp",
+      "variant": "halflingForestFemaleRanged"
+    },
+    {
+      "file": "BanditHalflingForestMaleMelee (1).webp",
+      "variant": "halflingForestMaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestMaleMelee (2).webp",
+      "variant": "halflingForestMaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestMaleMelee (3).webp",
+      "variant": "halflingForestMaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestMaleMelee (4).webp",
+      "variant": "halflingForestMaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestMaleMelee (5).webp",
+      "variant": "halflingForestMaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestMaleMelee (6).webp",
+      "variant": "halflingForestMaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestMaleMelee (7).webp",
+      "variant": "halflingForestMaleMelee"
+    },
+    {
+      "file": "BanditHalflingForestMaleRanged (1).webp",
+      "variant": "halflingForestMaleRanged"
+    },
+    {
+      "file": "BanditHalflingForestMaleRanged (2).webp",
+      "variant": "halflingForestMaleRanged"
+    },
+    {
+      "file": "BanditHalflingForestMaleRanged (3).webp",
+      "variant": "halflingForestMaleRanged"
+    },
+    {
+      "file": "BanditHalflingForestMaleRanged (4).webp",
+      "variant": "halflingForestMaleRanged"
+    },
+    {
+      "file": "BanditHalflingForestMaleRanged (5).webp",
+      "variant": "halflingForestMaleRanged"
+    },
+    {
+      "file": "BanditHalflingUrbanFemaleMelee (1).webp",
+      "variant": "halflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanFemaleMelee (10).webp",
+      "variant": "halflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanFemaleMelee (11).webp",
+      "variant": "halflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanFemaleMelee (12).webp",
+      "variant": "halflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanFemaleMelee (13).webp",
+      "variant": "halflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanFemaleMelee (2).webp",
+      "variant": "halflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanFemaleMelee (3).webp",
+      "variant": "halflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanFemaleMelee (4).webp",
+      "variant": "halflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanFemaleMelee (5).webp",
+      "variant": "halflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanFemaleMelee (6).webp",
+      "variant": "halflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanFemaleMelee (7).webp",
+      "variant": "halflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanFemaleMelee (8).webp",
+      "variant": "halflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanFemaleMelee (9).webp",
+      "variant": "halflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanFemaleRanged (1).webp",
+      "variant": "halflingUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHalflingUrbanFemaleRanged (2).webp",
+      "variant": "halflingUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHalflingUrbanFemaleRanged (3).webp",
+      "variant": "halflingUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHalflingUrbanMaleMelee (1).webp",
+      "variant": "halflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanMaleMelee (2).webp",
+      "variant": "halflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanMaleMelee (3).webp",
+      "variant": "halflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanMaleMelee (4).webp",
+      "variant": "halflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanMaleMelee (5).webp",
+      "variant": "halflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanMaleMelee (6).webp",
+      "variant": "halflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanMaleMelee (7).webp",
+      "variant": "halflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanMaleMelee (8).webp",
+      "variant": "halflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanMaleMelee (9).webp",
+      "variant": "halflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalflingUrbanMaleRanged (1).webp",
+      "variant": "halflingUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHalflingUrbanMaleRanged (2).webp",
+      "variant": "halflingUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHalflingUrbanMaleRanged (3).webp",
+      "variant": "halflingUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHalflingUrbanMaleRanged (4).webp",
+      "variant": "halflingUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHalflingUrbanMaleRanged (5).webp",
+      "variant": "halflingUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHalflingUrbanMaleRanged (6).webp",
+      "variant": "halflingUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHalflingUrbanMaleRanged (7).webp",
+      "variant": "halflingUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHalflingUrbanMaleRanged (8).webp",
+      "variant": "halflingUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcArcticFemaleMelee (1).webp",
+      "variant": "halfOrcArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticFemaleMelee (2).webp",
+      "variant": "halfOrcArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticFemaleMelee (3).webp",
+      "variant": "halfOrcArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticFemaleMelee (4).webp",
+      "variant": "halfOrcArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticFemaleMelee (5).webp",
+      "variant": "halfOrcArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticFemaleMelee (6).webp",
+      "variant": "halfOrcArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticFemaleMelee (7).webp",
+      "variant": "halfOrcArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticFemaleRanged (1).webp",
+      "variant": "halfOrcArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcArcticFemaleRanged (2).webp",
+      "variant": "halfOrcArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcArcticFemaleRanged (3).webp",
+      "variant": "halfOrcArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcArcticFemaleRanged (4).webp",
+      "variant": "halfOrcArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcArcticMaleMelee (1).webp",
+      "variant": "halfOrcArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticMaleMelee (10).webp",
+      "variant": "halfOrcArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticMaleMelee (11).webp",
+      "variant": "halfOrcArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticMaleMelee (12).webp",
+      "variant": "halfOrcArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticMaleMelee (2).webp",
+      "variant": "halfOrcArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticMaleMelee (3).webp",
+      "variant": "halfOrcArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticMaleMelee (4).webp",
+      "variant": "halfOrcArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticMaleMelee (5).webp",
+      "variant": "halfOrcArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticMaleMelee (6).webp",
+      "variant": "halfOrcArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticMaleMelee (7).webp",
+      "variant": "halfOrcArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticMaleMelee (8).webp",
+      "variant": "halfOrcArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticMaleMelee (9).webp",
+      "variant": "halfOrcArcticMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcArcticMaleRanged (1).webp",
+      "variant": "halfOrcArcticMaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcArcticMaleRanged (2).webp",
+      "variant": "halfOrcArcticMaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcArcticMaleRanged (3).webp",
+      "variant": "halfOrcArcticMaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcDesertFemaleMelee (1).webp",
+      "variant": "halfOrcDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcDesertFemaleMelee (2).webp",
+      "variant": "halfOrcDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcDesertFemaleMelee (3).webp",
+      "variant": "halfOrcDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcDesertFemaleMelee (4).webp",
+      "variant": "halfOrcDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcDesertFemaleMelee (5).webp",
+      "variant": "halfOrcDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcDesertFemaleRanged (1).webp",
+      "variant": "halfOrcDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcDesertFemaleRanged (2).webp",
+      "variant": "halfOrcDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcDesertFemaleRanged (3).webp",
+      "variant": "halfOrcDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcDesertMaleMelee (1).webp",
+      "variant": "halfOrcDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcDesertMaleMelee (10).webp",
+      "variant": "halfOrcDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcDesertMaleMelee (2).webp",
+      "variant": "halfOrcDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcDesertMaleMelee (3).webp",
+      "variant": "halfOrcDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcDesertMaleMelee (4).webp",
+      "variant": "halfOrcDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcDesertMaleMelee (5).webp",
+      "variant": "halfOrcDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcDesertMaleMelee (6).webp",
+      "variant": "halfOrcDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcDesertMaleMelee (7).webp",
+      "variant": "halfOrcDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcDesertMaleMelee (8).webp",
+      "variant": "halfOrcDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcDesertMaleMelee (9).webp",
+      "variant": "halfOrcDesertMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcDesertMaleRanged (1).webp",
+      "variant": "halfOrcDesertMaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcDesertMaleRanged (2).webp",
+      "variant": "halfOrcDesertMaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcDesertMaleRanged (3).webp",
+      "variant": "halfOrcDesertMaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcDesertMaleRanged (4).webp",
+      "variant": "halfOrcDesertMaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcForestFemaleMelee (1).webp",
+      "variant": "halfOrcForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestFemaleMelee (10).webp",
+      "variant": "halfOrcForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestFemaleMelee (11).webp",
+      "variant": "halfOrcForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestFemaleMelee (2).webp",
+      "variant": "halfOrcForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestFemaleMelee (3).webp",
+      "variant": "halfOrcForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestFemaleMelee (4).webp",
+      "variant": "halfOrcForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestFemaleMelee (5).webp",
+      "variant": "halfOrcForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestFemaleMelee (6).webp",
+      "variant": "halfOrcForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestFemaleMelee (7).webp",
+      "variant": "halfOrcForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestFemaleMelee (8).webp",
+      "variant": "halfOrcForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestFemaleMelee (9).webp",
+      "variant": "halfOrcForestFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestFemaleRanged (1).webp",
+      "variant": "halfOrcForestFemaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcForestFemaleRanged (2).webp",
+      "variant": "halfOrcForestFemaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcForestMaleMelee (1).webp",
+      "variant": "halfOrcForestMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestMaleMelee (10).webp",
+      "variant": "halfOrcForestMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestMaleMelee (11).webp",
+      "variant": "halfOrcForestMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestMaleMelee (12).webp",
+      "variant": "halfOrcForestMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestMaleMelee (2).webp",
+      "variant": "halfOrcForestMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestMaleMelee (3).webp",
+      "variant": "halfOrcForestMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestMaleMelee (4).webp",
+      "variant": "halfOrcForestMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestMaleMelee (5).webp",
+      "variant": "halfOrcForestMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestMaleMelee (6).webp",
+      "variant": "halfOrcForestMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestMaleMelee (7).webp",
+      "variant": "halfOrcForestMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestMaleMelee (8).webp",
+      "variant": "halfOrcForestMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestMaleMelee (9).webp",
+      "variant": "halfOrcForestMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcForestMaleRanged (1).webp",
+      "variant": "halfOrcForestMaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcForestMaleRanged (2).webp",
+      "variant": "halfOrcForestMaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcForestMaleRanged (3).webp",
+      "variant": "halfOrcForestMaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcForestMaleRanged (4).webp",
+      "variant": "halfOrcForestMaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcUrbanFemaleMelee (1).webp",
+      "variant": "halfOrcUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcUrbanFemaleMelee (2).webp",
+      "variant": "halfOrcUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcUrbanFemaleMelee (3).webp",
+      "variant": "halfOrcUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcUrbanFemaleRanged (1).webp",
+      "variant": "halfOrcUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcUrbanFemaleRanged (2).webp",
+      "variant": "halfOrcUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcUrbanFemaleRanged (3).webp",
+      "variant": "halfOrcUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcUrbanMaleMelee (1).webp",
+      "variant": "halfOrcUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcUrbanMaleMelee (10).webp",
+      "variant": "halfOrcUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcUrbanMaleMelee (11).webp",
+      "variant": "halfOrcUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcUrbanMaleMelee (12).webp",
+      "variant": "halfOrcUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcUrbanMaleMelee (2).webp",
+      "variant": "halfOrcUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcUrbanMaleMelee (3).webp",
+      "variant": "halfOrcUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcUrbanMaleMelee (4).webp",
+      "variant": "halfOrcUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcUrbanMaleMelee (5).webp",
+      "variant": "halfOrcUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcUrbanMaleMelee (6).webp",
+      "variant": "halfOrcUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcUrbanMaleMelee (7).webp",
+      "variant": "halfOrcUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcUrbanMaleMelee (8).webp",
+      "variant": "halfOrcUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcUrbanMaleMelee (9).webp",
+      "variant": "halfOrcUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHalfOrcUrbanMaleRanged (1).webp",
+      "variant": "halfOrcUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcUrbanMaleRanged (2).webp",
+      "variant": "halfOrcUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHalfOrcUrbanMaleRanged (3).webp",
+      "variant": "halfOrcUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (1).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (10).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (11).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (12).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (13).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (14).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (15).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (16).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (17).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (18).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (19).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (2).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (20).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (21).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (22).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (23).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (24).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (3).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (4).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (5).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (6).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (7).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (8).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleMelee (9).webp",
+      "variant": "humanArcticFemaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticFemaleRanged (1).webp",
+      "variant": "humanArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticFemaleRanged (10).webp",
+      "variant": "humanArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticFemaleRanged (11).webp",
+      "variant": "humanArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticFemaleRanged (2).webp",
+      "variant": "humanArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticFemaleRanged (3).webp",
+      "variant": "humanArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticFemaleRanged (4).webp",
+      "variant": "humanArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticFemaleRanged (5).webp",
+      "variant": "humanArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticFemaleRanged (6).webp",
+      "variant": "humanArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticFemaleRanged (7).webp",
+      "variant": "humanArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticFemaleRanged (8).webp",
+      "variant": "humanArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticFemaleRanged (9).webp",
+      "variant": "humanArcticFemaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (1).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (10).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (11).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (12).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (13).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (14).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (15).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (16).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (17).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (18).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (19).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (2).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (20).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (21).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (22).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (23).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (24).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (3).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (4).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (5).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (6).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (7).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (8).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleMelee (9).webp",
+      "variant": "humanArcticMaleMelee"
+    },
+    {
+      "file": "BanditHumanArcticMaleRanged (1).webp",
+      "variant": "humanArcticMaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticMaleRanged (2).webp",
+      "variant": "humanArcticMaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticMaleRanged (3).webp",
+      "variant": "humanArcticMaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticMaleRanged (4).webp",
+      "variant": "humanArcticMaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticMaleRanged (5).webp",
+      "variant": "humanArcticMaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticMaleRanged (6).webp",
+      "variant": "humanArcticMaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticMaleRanged (7).webp",
+      "variant": "humanArcticMaleRanged"
+    },
+    {
+      "file": "BanditHumanArcticMaleRanged (8).webp",
+      "variant": "humanArcticMaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (1).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (10).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (11).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (12).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (13).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (14).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (15).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (16).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (17).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (18).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (19).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (2).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (20).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (21).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (22).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (23).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (24).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (25).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (26).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (3).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (4).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (5).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (6).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (7).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (8).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleMelee (9).webp",
+      "variant": "humanDesertFemaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertFemaleRanged (1).webp",
+      "variant": "humanDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertFemaleRanged (2).webp",
+      "variant": "humanDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertFemaleRanged (3).webp",
+      "variant": "humanDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertFemaleRanged (4).webp",
+      "variant": "humanDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertFemaleRanged (5).webp",
+      "variant": "humanDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertFemaleRanged (6).webp",
+      "variant": "humanDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertFemaleRanged (7).webp",
+      "variant": "humanDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertFemaleRanged (8).webp",
+      "variant": "humanDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertFemaleRanged (9).webp",
+      "variant": "humanDesertFemaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (1).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (10).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (11).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (12).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (13).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (14).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (15).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (16).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (17).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (18).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (19).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (2).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (20).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (21).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (22).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (23).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (24).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (25).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (3).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (4).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (5).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (6).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (7).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (8).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleMelee (9).webp",
+      "variant": "humanDesertMaleMelee"
+    },
+    {
+      "file": "BanditHumanDesertMaleRanged (1).webp",
+      "variant": "humanDesertMaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertMaleRanged (2).webp",
+      "variant": "humanDesertMaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertMaleRanged (3).webp",
+      "variant": "humanDesertMaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertMaleRanged (4).webp",
+      "variant": "humanDesertMaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertMaleRanged (5).webp",
+      "variant": "humanDesertMaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertMaleRanged (6).webp",
+      "variant": "humanDesertMaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertMaleRanged (7).webp",
+      "variant": "humanDesertMaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertMaleRanged (8).webp",
+      "variant": "humanDesertMaleRanged"
+    },
+    {
+      "file": "BanditHumanDesertMaleRanged (9).webp",
+      "variant": "humanDesertMaleRanged"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (1).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (10).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (11).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (12).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (13).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (14).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (15).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (16).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (17).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (18).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (19).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (2).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (20).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (21).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (22).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (23).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (24).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (25).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (26).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (27).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (28).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (29).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (3).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (30).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (31).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (32).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (33).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (34).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (35).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (36).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (37).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (38).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (39).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (4).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (40).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (5).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (6).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (7).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (8).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleMelee (9).webp",
+      "variant": "humanForestFemaleMelee"
+    },
+    {
+      "file": "BanditHumanForestFemaleRanged (1).webp",
+      "variant": "humanForestFemaleRanged"
+    },
+    {
+      "file": "BanditHumanForestFemaleRanged (10).webp",
+      "variant": "humanForestFemaleRanged"
+    },
+    {
+      "file": "BanditHumanForestFemaleRanged (11).webp",
+      "variant": "humanForestFemaleRanged"
+    },
+    {
+      "file": "BanditHumanForestFemaleRanged (12).webp",
+      "variant": "humanForestFemaleRanged"
+    },
+    {
+      "file": "BanditHumanForestFemaleRanged (13).webp",
+      "variant": "humanForestFemaleRanged"
+    },
+    {
+      "file": "BanditHumanForestFemaleRanged (14).webp",
+      "variant": "humanForestFemaleRanged"
+    },
+    {
+      "file": "BanditHumanForestFemaleRanged (2).webp",
+      "variant": "humanForestFemaleRanged"
+    },
+    {
+      "file": "BanditHumanForestFemaleRanged (3).webp",
+      "variant": "humanForestFemaleRanged"
+    },
+    {
+      "file": "BanditHumanForestFemaleRanged (4).webp",
+      "variant": "humanForestFemaleRanged"
+    },
+    {
+      "file": "BanditHumanForestFemaleRanged (5).webp",
+      "variant": "humanForestFemaleRanged"
+    },
+    {
+      "file": "BanditHumanForestFemaleRanged (6).webp",
+      "variant": "humanForestFemaleRanged"
+    },
+    {
+      "file": "BanditHumanForestFemaleRanged (7).webp",
+      "variant": "humanForestFemaleRanged"
+    },
+    {
+      "file": "BanditHumanForestFemaleRanged (8).webp",
+      "variant": "humanForestFemaleRanged"
+    },
+    {
+      "file": "BanditHumanForestFemaleRanged (9).webp",
+      "variant": "humanForestFemaleRanged"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (1).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (10).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (11).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (12).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (13).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (14).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (15).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (16).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (17).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (18).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (19).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (2).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (20).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (3).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (4).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (5).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (6).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (7).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (8).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleMelee (9).webp",
+      "variant": "humanForestMaleMelee"
+    },
+    {
+      "file": "BanditHumanForestMaleRanged (1).webp",
+      "variant": "humanForestMaleRanged"
+    },
+    {
+      "file": "BanditHumanForestMaleRanged (10).webp",
+      "variant": "humanForestMaleRanged"
+    },
+    {
+      "file": "BanditHumanForestMaleRanged (2).webp",
+      "variant": "humanForestMaleRanged"
+    },
+    {
+      "file": "BanditHumanForestMaleRanged (3).webp",
+      "variant": "humanForestMaleRanged"
+    },
+    {
+      "file": "BanditHumanForestMaleRanged (4).webp",
+      "variant": "humanForestMaleRanged"
+    },
+    {
+      "file": "BanditHumanForestMaleRanged (5).webp",
+      "variant": "humanForestMaleRanged"
+    },
+    {
+      "file": "BanditHumanForestMaleRanged (6).webp",
+      "variant": "humanForestMaleRanged"
+    },
+    {
+      "file": "BanditHumanForestMaleRanged (7).webp",
+      "variant": "humanForestMaleRanged"
+    },
+    {
+      "file": "BanditHumanForestMaleRanged (8).webp",
+      "variant": "humanForestMaleRanged"
+    },
+    {
+      "file": "BanditHumanForestMaleRanged (9).webp",
+      "variant": "humanForestMaleRanged"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (1).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (10).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (11).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (12).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (13).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (14).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (15).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (16).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (17).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (18).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (19).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (2).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (20).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (21).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (22).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (23).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (24).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (25).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (26).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (27).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (28).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (3).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (4).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (5).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (6).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (7).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (8).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleMelee (9).webp",
+      "variant": "humanUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleRanged (1).webp",
+      "variant": "humanUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleRanged (2).webp",
+      "variant": "humanUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleRanged (3).webp",
+      "variant": "humanUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleRanged (4).webp",
+      "variant": "humanUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleRanged (5).webp",
+      "variant": "humanUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleRanged (6).webp",
+      "variant": "humanUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHumanUrbanFemaleRanged (7).webp",
+      "variant": "humanUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (1).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (10).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (11).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (12).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (13).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (14).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (15).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (16).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (17).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (18).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (19).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (2).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (20).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (21).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (22).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (23).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (3).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (4).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (5).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (6).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (7).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (8).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleMelee (9).webp",
+      "variant": "humanUrbanMaleMelee"
+    },
+    {
+      "file": "BanditHumanUrbanMaleRanged (1).webp",
+      "variant": "humanUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHumanUrbanMaleRanged (10).webp",
+      "variant": "humanUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHumanUrbanMaleRanged (2).webp",
+      "variant": "humanUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHumanUrbanMaleRanged (3).webp",
+      "variant": "humanUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHumanUrbanMaleRanged (4).webp",
+      "variant": "humanUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHumanUrbanMaleRanged (5).webp",
+      "variant": "humanUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHumanUrbanMaleRanged (6).webp",
+      "variant": "humanUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHumanUrbanMaleRanged (7).webp",
+      "variant": "humanUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHumanUrbanMaleRanged (8).webp",
+      "variant": "humanUrbanMaleRanged"
+    },
+    {
+      "file": "BanditHumanUrbanMaleRanged (9).webp",
+      "variant": "humanUrbanMaleRanged"
+    },
+    {
+      "file": "BanditTieflingArcticFemaleMelee (1).webp",
+      "variant": "tieflingArcticFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingArcticFemaleMelee (2).webp",
+      "variant": "tieflingArcticFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingArcticFemaleMelee (3).webp",
+      "variant": "tieflingArcticFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingArcticFemaleMelee (4).webp",
+      "variant": "tieflingArcticFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingArcticFemaleRanged (1).webp",
+      "variant": "tieflingArcticFemaleRanged"
+    },
+    {
+      "file": "BanditTieflingArcticFemaleRanged (2).webp",
+      "variant": "tieflingArcticFemaleRanged"
+    },
+    {
+      "file": "BanditTieflingArcticFemaleRanged (3).webp",
+      "variant": "tieflingArcticFemaleRanged"
+    },
+    {
+      "file": "BanditTieflingArcticFemaleRanged (4).webp",
+      "variant": "tieflingArcticFemaleRanged"
+    },
+    {
+      "file": "BanditTieflingArcticMaleMelee (1).webp",
+      "variant": "tieflingArcticMaleMelee"
+    },
+    {
+      "file": "BanditTieflingArcticMaleMelee (2).webp",
+      "variant": "tieflingArcticMaleMelee"
+    },
+    {
+      "file": "BanditTieflingArcticMaleMelee (3).webp",
+      "variant": "tieflingArcticMaleMelee"
+    },
+    {
+      "file": "BanditTieflingArcticMaleMelee (4).webp",
+      "variant": "tieflingArcticMaleMelee"
+    },
+    {
+      "file": "BanditTieflingArcticMaleMelee (5).webp",
+      "variant": "tieflingArcticMaleMelee"
+    },
+    {
+      "file": "BanditTieflingArcticMaleMelee (6).webp",
+      "variant": "tieflingArcticMaleMelee"
+    },
+    {
+      "file": "BanditTieflingArcticMaleMelee (7).webp",
+      "variant": "tieflingArcticMaleMelee"
+    },
+    {
+      "file": "BanditTieflingArcticMaleRanged (1).webp",
+      "variant": "tieflingArcticMaleRanged"
+    },
+    {
+      "file": "BanditTieflingArcticMaleRanged (2).webp",
+      "variant": "tieflingArcticMaleRanged"
+    },
+    {
+      "file": "BanditTieflingArcticMaleRanged (3).webp",
+      "variant": "tieflingArcticMaleRanged"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleMelee (1).webp",
+      "variant": "tieflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleMelee (10).webp",
+      "variant": "tieflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleMelee (11).webp",
+      "variant": "tieflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleMelee (12).webp",
+      "variant": "tieflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleMelee (13).webp",
+      "variant": "tieflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleMelee (14).webp",
+      "variant": "tieflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleMelee (15).webp",
+      "variant": "tieflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleMelee (2).webp",
+      "variant": "tieflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleMelee (3).webp",
+      "variant": "tieflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleMelee (4).webp",
+      "variant": "tieflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleMelee (5).webp",
+      "variant": "tieflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleMelee (6).webp",
+      "variant": "tieflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleMelee (7).webp",
+      "variant": "tieflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleMelee (8).webp",
+      "variant": "tieflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleMelee (9).webp",
+      "variant": "tieflingDesertFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleRanged (1).webp",
+      "variant": "tieflingDesertFemaleRanged"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleRanged (2).webp",
+      "variant": "tieflingDesertFemaleRanged"
+    },
+    {
+      "file": "BanditTieflingDesertFemaleRanged (3).webp",
+      "variant": "tieflingDesertFemaleRanged"
+    },
+    {
+      "file": "BanditTieflingDesertMaleMelee (1).webp",
+      "variant": "tieflingDesertMaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertMaleMelee (2).webp",
+      "variant": "tieflingDesertMaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertMaleMelee (3).webp",
+      "variant": "tieflingDesertMaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertMaleMelee (4).webp",
+      "variant": "tieflingDesertMaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertMaleMelee (5).webp",
+      "variant": "tieflingDesertMaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertMaleMelee (6).webp",
+      "variant": "tieflingDesertMaleMelee"
+    },
+    {
+      "file": "BanditTieflingDesertMaleRanged (1).webp",
+      "variant": "tieflingDesertMaleRanged"
+    },
+    {
+      "file": "BanditTieflingDesertMaleRanged (2).webp",
+      "variant": "tieflingDesertMaleRanged"
+    },
+    {
+      "file": "BanditTieflingDesertMaleRanged (3).webp",
+      "variant": "tieflingDesertMaleRanged"
+    },
+    {
+      "file": "BanditTieflingDesertMaleRanged (4).webp",
+      "variant": "tieflingDesertMaleRanged"
+    },
+    {
+      "file": "BanditTieflingDesertMaleRanged (5).webp",
+      "variant": "tieflingDesertMaleRanged"
+    },
+    {
+      "file": "BanditTieflingForestFemaleMelee (1).webp",
+      "variant": "tieflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingForestFemaleMelee (2).webp",
+      "variant": "tieflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingForestFemaleMelee (3).webp",
+      "variant": "tieflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingForestFemaleMelee (4).webp",
+      "variant": "tieflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingForestFemaleMelee (5).webp",
+      "variant": "tieflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingForestFemaleMelee (6).webp",
+      "variant": "tieflingForestFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingForestFemaleRanged (1).webp",
+      "variant": "tieflingForestFemaleRanged"
+    },
+    {
+      "file": "BanditTieflingForestFemaleRanged (2).webp",
+      "variant": "tieflingForestFemaleRanged"
+    },
+    {
+      "file": "BanditTieflingForestFemaleRanged (3).webp",
+      "variant": "tieflingForestFemaleRanged"
+    },
+    {
+      "file": "BanditTieflingForestFemaleRanged (4).webp",
+      "variant": "tieflingForestFemaleRanged"
+    },
+    {
+      "file": "BanditTieflingForestMaleMelee (1).webp",
+      "variant": "tieflingForestMaleMelee"
+    },
+    {
+      "file": "BanditTieflingForestMaleMelee (2).webp",
+      "variant": "tieflingForestMaleMelee"
+    },
+    {
+      "file": "BanditTieflingForestMaleMelee (3).webp",
+      "variant": "tieflingForestMaleMelee"
+    },
+    {
+      "file": "BanditTieflingForestMaleMelee (4).webp",
+      "variant": "tieflingForestMaleMelee"
+    },
+    {
+      "file": "BanditTieflingForestMaleMelee (5).webp",
+      "variant": "tieflingForestMaleMelee"
+    },
+    {
+      "file": "BanditTieflingForestMaleMelee (6).webp",
+      "variant": "tieflingForestMaleMelee"
+    },
+    {
+      "file": "BanditTieflingForestMaleRanged (1).webp",
+      "variant": "tieflingForestMaleRanged"
+    },
+    {
+      "file": "BanditTieflingForestMaleRanged (2).webp",
+      "variant": "tieflingForestMaleRanged"
+    },
+    {
+      "file": "BanditTieflingForestMaleRanged (3).webp",
+      "variant": "tieflingForestMaleRanged"
+    },
+    {
+      "file": "BanditTieflingUrbanFemaleMelee (1).webp",
+      "variant": "tieflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanFemaleMelee (10).webp",
+      "variant": "tieflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanFemaleMelee (11).webp",
+      "variant": "tieflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanFemaleMelee (12).webp",
+      "variant": "tieflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanFemaleMelee (13).webp",
+      "variant": "tieflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanFemaleMelee (2).webp",
+      "variant": "tieflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanFemaleMelee (3).webp",
+      "variant": "tieflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanFemaleMelee (4).webp",
+      "variant": "tieflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanFemaleMelee (5).webp",
+      "variant": "tieflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanFemaleMelee (6).webp",
+      "variant": "tieflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanFemaleMelee (7).webp",
+      "variant": "tieflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanFemaleMelee (8).webp",
+      "variant": "tieflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanFemaleMelee (9).webp",
+      "variant": "tieflingUrbanFemaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanFemaleRanged (1).webp",
+      "variant": "tieflingUrbanFemaleRanged"
+    },
+    {
+      "file": "BanditTieflingUrbanMaleMelee (1).webp",
+      "variant": "tieflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanMaleMelee (2).webp",
+      "variant": "tieflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanMaleMelee (3).webp",
+      "variant": "tieflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanMaleMelee (4).webp",
+      "variant": "tieflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanMaleMelee (5).webp",
+      "variant": "tieflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanMaleMelee (6).webp",
+      "variant": "tieflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanMaleMelee (7).webp",
+      "variant": "tieflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanMaleMelee (8).webp",
+      "variant": "tieflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanMaleMelee (9).webp",
+      "variant": "tieflingUrbanMaleMelee"
+    },
+    {
+      "file": "BanditTieflingUrbanMaleRanged (1).webp",
+      "variant": "tieflingUrbanMaleRanged"
+    },
+    {
+      "file": "BanditTieflingUrbanMaleRanged (2).webp",
+      "variant": "tieflingUrbanMaleRanged"
+    },
+    {
+      "file": "BanditTieflingUrbanMaleRanged (3).webp",
+      "variant": "tieflingUrbanMaleRanged"
+    },
+    {
+      "file": "BanditTieflingUrbanMaleRanged (4).webp",
+      "variant": "tieflingUrbanMaleRanged"
+    },
+    {
+      "file": "BanditTieflingUrbanMaleRanged (5).webp",
+      "variant": "tieflingUrbanMaleRanged"
+    },
+    {
+      "file": "BanditTieflingUrbanMaleRanged (6).webp",
+      "variant": "tieflingUrbanMaleRanged"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,22 @@
+{
+  "id": 508,
+  "slug": "scroll-case",
+  "name": "Scroll Case",
+  "nameDe": "Schriftrollenbehälter",
+  "category": {
+    "en": "OTHER",
+    "de": "Sonstiges"
+  },
+  "rarity": {
+    "en": "MUNDANE",
+    "de": "Alltäglich"
+  },
+  "cost": 100,
+  "source": {
+    "en": "Homebrew (Mundane)",
+    "de": "Homebrew (Mundän)"
+  },
+  "image": "other",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

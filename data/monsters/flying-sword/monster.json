@@ -1,0 +1,198 @@
+{
+  "id": 110,
+  "slug": "flying-sword",
+  "name": "Flying Sword",
+  "nameDe": "Fliegendes Schwert",
+  "source": "SRD",
+  "meta": {
+    "en": "Small construct, unaligned",
+    "de": "Kleines Konstrukt, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "17 (Natural Armor)",
+    "de": "17 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "17 (5d6)",
+    "de": "17 (5W6)"
+  },
+  "str": 12,
+  "dex": 15,
+  "con": 11,
+  "int": 1,
+  "wis": 5,
+  "cha": 1,
+  "strMod": 1,
+  "dexMod": 2,
+  "conMod": 0,
+  "intMod": -5,
+  "wisMod": -3,
+  "chaMod": -5,
+  "speed": {
+    "run": {},
+    "fly": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 60 ft. (blind beyond this radius)",
+      "passive perception 7"
+    ],
+    "de": [
+      "Blindsicht 18 m (blind außerhalb des Radius)",
+      "Passive Wahrnehmung 7"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "savingThrows": [
+    "Ges +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Antimagic Susceptibility",
+        "text": "The sword is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the sword must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
+      },
+      {
+        "name": "False Appearance",
+        "text": "While the sword remains motionless and isn't flying, it is indistinguishable from a normal sword."
+      }
+    ],
+    "de": [
+      {
+        "name": "Antimagische Empfindlichkeit",
+        "text": "Das Schwert ist im Bereich eines antimagischen Felds kampfunfähig. Wird es Ziel des Zaubers Magie bannen, muss das Schwert einen Konstitutionsrettungswurf gegen den Zauberrettungswurf-SG des Zauberwirkers bestehen, oder es ist eine Minute lang bewusstlos."
+      },
+      {
+        "name": "Falsches Erscheinungsbild",
+        "text": "Solange das Schwert sich nicht bewegt und nicht fliegt, ist es nicht von einem gewöhnlichen Schwert zu unterscheiden."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Longsword",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 5 (1d8 + 1) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Langschwert",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W8+1) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/77/599/1000/1000/636473151106171093.png",
+  "size": {
+    "en": "small",
+    "de": "Kleines"
+  },
+  "type": {
+    "en": "construct",
+    "de": "Konstrukt"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "FlyingSwordMace (1).webp",
+    "variant": "mace"
+  },
+  "tokens": [
+    {
+      "file": "FlyingSwordMace (10).webp",
+      "variant": "mace"
+    },
+    {
+      "file": "FlyingSwordMace (11).webp",
+      "variant": "mace"
+    },
+    {
+      "file": "FlyingSwordMace (2).webp",
+      "variant": "mace"
+    },
+    {
+      "file": "FlyingSwordMace (3).webp",
+      "variant": "mace"
+    },
+    {
+      "file": "FlyingSwordMace (4).webp",
+      "variant": "mace"
+    },
+    {
+      "file": "FlyingSwordMace (5).webp",
+      "variant": "mace"
+    },
+    {
+      "file": "FlyingSwordMace (6).webp",
+      "variant": "mace"
+    },
+    {
+      "file": "FlyingSwordMace (7).webp",
+      "variant": "mace"
+    },
+    {
+      "file": "FlyingSwordMace (8).webp",
+      "variant": "mace"
+    },
+    {
+      "file": "FlyingSwordMace (9).webp",
+      "variant": "mace"
+    },
+    {
+      "file": "FlyingSwordSword (1).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "FlyingSwordSword (10).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "FlyingSwordSword (2).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "FlyingSwordSword (3).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "FlyingSwordSword (4).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "FlyingSwordSword (5).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "FlyingSwordSword (6).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "FlyingSwordSword (7).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "FlyingSwordSword (8).webp",
+      "variant": "sword"
+    },
+    {
+      "file": "FlyingSwordSword (9).webp",
+      "variant": "sword"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

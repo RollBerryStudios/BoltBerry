@@ -1,0 +1,70 @@
+{
+  "id": 147,
+  "slug": "confusion",
+  "name": "Confusion",
+  "nameDe": "Verwirrung",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "druid",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Druide",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "4th-level enchantment",
+    "de": "Stufe 4 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "90 feet",
+    "de": "27 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "three nut shells",
+      "de": "drei Nussschalen"
+    },
+    "raw": {
+      "en": "V, S, M (three nut shells)",
+      "de": "V, G, M (drei Nussschalen)"
+    }
+  },
+  "description": {
+    "en": "This spell assaults and twists creatures' minds, spawning delusions and provoking uncontrolled action. Each creature in a 10-foot-radius sphere centered on a point you choose within range must succeed on a Wisdom saving throw when you cast this spell or be affected by it. An affected target can't take reactions and must roll a d10 at the start of each of its turns to determine its behavior for that turn. | d10 | Behavior | |---|---| | 1 | The creature uses all its movement to move in a random direction. To determine the direction, roll a d8 and assign a direction to each die face. The creature doesn't take an action this turn. | | 2-6 | The creature doesn't move or take actions this turn. | | 7-8 | The creature uses its action to make a melee attack against a randomly determined creature within its reach. If there is no creature within its reach, the creature does nothing this turn. | | 9-10 | The creature can act and move normally. | At the end of each of its turns, an affected target can make a Wisdom saving throw. If it succeeds, this effect ends for that target.",
+    "de": "Dieser Zauber attackiert und verdreht den Verstand von Kreaturen, was zu Wahnvorstellungen und unkontrollierten Handlungen führt. Wenn du diesen Zauber wirkst, muss jede Kreatur in einer Sphäre mit einem Radius von drei Metern, die auf einen Punkt deiner Wahl in Reichweite zentriert ist, einen Weisheitsrettungswurf ausführen. Scheitert der Wurf, ist die Kreatur von dem Zauber betroffen. Ein betroffenes Ziel kann nicht reagieren und muss zu Beginn jedes seiner Züge mit einem W10 würfeln, um sein Verhalten in diesem Zug zu bestimmen. Am Ende jedes seiner Züge kann ein betroffenes Ziel einen Weisheitsrettungswurf ausführen. Bei einem Erfolg endet der Effekt für dieses Ziel. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 5. Grades oder höher nutzt, erhöht sich der Radius der Sphäre für jeden Grad über dem 4. um 1,5 Meter."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 5th level or higher, the radius of the sphere increases by 5 feet for each slot level above 4th.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 5. Grades oder höher nutzt, erhöht sich der Radius der Sphäre für jeden Grad über dem 4. um 1,5 Meter."
+  },
+  "image": "confusion",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

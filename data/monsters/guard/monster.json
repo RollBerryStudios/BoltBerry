@@ -1,0 +1,1121 @@
+{
+  "id": 160,
+  "slug": "guard",
+  "name": "Guard",
+  "nameDe": "Wache",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "1/8",
+  "xp": 25,
+  "ac": {
+    "en": "16 (Chain Shirt, Shield)",
+    "de": "16 (Kettenhemd, Schild)"
+  },
+  "hp": {
+    "en": "11 (2d8 + 2)",
+    "de": "11 (2W8+2)"
+  },
+  "str": 13,
+  "dex": 12,
+  "con": 12,
+  "int": 10,
+  "wis": 11,
+  "cha": 10,
+  "strMod": 1,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 12"
+    ],
+    "de": [
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any one language (usually Common)"
+    ],
+    "de": [
+      "Eine beliebige Sprache (normalerweise Gemeinsprache)"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +2"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Spear",
+        "text": "Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d6 + 1) piercing damage or 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack."
+      }
+    ],
+    "de": [
+      {
+        "name": "Speer",
+        "text": "Nah- oder Fernkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m oder Reichweite 6/18 m, ein Ziel. Treffer: 4 (1W6+1) Stichschaden oder 5 (1W8+1) Stichschaden, wenn beidhändig geführt, um einen Nahkampfangriff auszuführen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/656/humanoid.jpg",
+  "size": {
+    "en": "large",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Humanoide (jedes Volk)"
+  },
+  "alignment": {
+    "en": "lawful good",
+    "de": "jede Gesinnung"
+  },
+  "token": {
+    "file": "GuardDragonborn (1).webp",
+    "variant": "dragonborn"
+  },
+  "tokens": [
+    {
+      "file": "GuardDragonborn (10).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GuardDragonborn (11).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GuardDragonborn (12).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GuardDragonborn (2).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GuardDragonborn (3).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GuardDragonborn (4).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GuardDragonborn (5).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GuardDragonborn (6).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GuardDragonborn (7).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GuardDragonborn (8).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GuardDragonborn (9).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "GuardDwarfFemale (1).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GuardDwarfFemale (10).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GuardDwarfFemale (11).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GuardDwarfFemale (12).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GuardDwarfFemale (13).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GuardDwarfFemale (14).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GuardDwarfFemale (15).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GuardDwarfFemale (16).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GuardDwarfFemale (17).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GuardDwarfFemale (2).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GuardDwarfFemale (3).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GuardDwarfFemale (4).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GuardDwarfFemale (5).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GuardDwarfFemale (6).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GuardDwarfFemale (7).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GuardDwarfFemale (8).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GuardDwarfFemale (9).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "GuardDwarfMale (1).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (10).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (11).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (12).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (13).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (14).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (15).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (16).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (17).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (18).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (19).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (2).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (20).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (21).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (22).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (23).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (24).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (25).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (26).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (27).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (28).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (29).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (3).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (4).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (5).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (6).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (7).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (8).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardDwarfMale (9).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "GuardElfFemale (1).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (10).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (11).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (12).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (13).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (14).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (15).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (16).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (17).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (18).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (19).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (2).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (20).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (21).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (22).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (23).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (24).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (25).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (26).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (27).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (28).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (29).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (3).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (30).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (31).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (32).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (33).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (34).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (35).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (36).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (37).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (38).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (39).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (4).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (40).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (41).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (5).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (6).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (7).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (8).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfFemale (9).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "GuardElfMale (1).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GuardElfMale (2).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GuardElfMale (3).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GuardElfMale (4).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GuardElfMale (5).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GuardElfMale (6).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "GuardGnomeFemale (1).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "GuardGnomeFemale (2).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "GuardGnomeFemale (3).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "GuardGnomeFemale (4).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "GuardGnomeFemale (5).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "GuardGnomeFemale (6).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "GuardGnomeMale (1).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GuardGnomeMale (2).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GuardGnomeMale (3).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GuardGnomeMale (4).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GuardGnomeMale (5).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "GuardHalfelfFemale (1).webp",
+      "variant": "halfelfFemale"
+    },
+    {
+      "file": "GuardHalfelfFemale (2).webp",
+      "variant": "halfelfFemale"
+    },
+    {
+      "file": "GuardHalfelfFemale (3).webp",
+      "variant": "halfelfFemale"
+    },
+    {
+      "file": "GuardHalfelfFemale (4).webp",
+      "variant": "halfelfFemale"
+    },
+    {
+      "file": "GuardHalfelfFemale (5).webp",
+      "variant": "halfelfFemale"
+    },
+    {
+      "file": "GuardHalflingFemale (1).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "GuardHalflingFemale (2).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "GuardHalflingFemale (3).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "GuardHalflingMale (1).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GuardHalflingMale (10).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GuardHalflingMale (11).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GuardHalflingMale (12).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GuardHalflingMale (13).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GuardHalflingMale (14).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GuardHalflingMale (15).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GuardHalflingMale (2).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GuardHalflingMale (3).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GuardHalflingMale (4).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GuardHalflingMale (5).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GuardHalflingMale (6).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GuardHalflingMale (7).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GuardHalflingMale (8).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GuardHalflingMale (9).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "GuardHalforcFemale (1).webp",
+      "variant": "halforcFemale"
+    },
+    {
+      "file": "GuardHalforcFemale (2).webp",
+      "variant": "halforcFemale"
+    },
+    {
+      "file": "GuardHalforcFemale (3).webp",
+      "variant": "halforcFemale"
+    },
+    {
+      "file": "GuardHalforcFemale (4).webp",
+      "variant": "halforcFemale"
+    },
+    {
+      "file": "GuardHalforcFemale (5).webp",
+      "variant": "halforcFemale"
+    },
+    {
+      "file": "GuardHalforcFemale (6).webp",
+      "variant": "halforcFemale"
+    },
+    {
+      "file": "GuardHalforcFemale (7).webp",
+      "variant": "halforcFemale"
+    },
+    {
+      "file": "GuardHalforcFemale (8).webp",
+      "variant": "halforcFemale"
+    },
+    {
+      "file": "GuardHalforcFemale (9).webp",
+      "variant": "halforcFemale"
+    },
+    {
+      "file": "GuardHalforcMale (1).webp",
+      "variant": "halforcMale"
+    },
+    {
+      "file": "GuardHalforcMale (10).webp",
+      "variant": "halforcMale"
+    },
+    {
+      "file": "GuardHalforcMale (11).webp",
+      "variant": "halforcMale"
+    },
+    {
+      "file": "GuardHalforcMale (12).webp",
+      "variant": "halforcMale"
+    },
+    {
+      "file": "GuardHalforcMale (2).webp",
+      "variant": "halforcMale"
+    },
+    {
+      "file": "GuardHalforcMale (3).webp",
+      "variant": "halforcMale"
+    },
+    {
+      "file": "GuardHalforcMale (4).webp",
+      "variant": "halforcMale"
+    },
+    {
+      "file": "GuardHalforcMale (5).webp",
+      "variant": "halforcMale"
+    },
+    {
+      "file": "GuardHalforcMale (6).webp",
+      "variant": "halforcMale"
+    },
+    {
+      "file": "GuardHalforcMale (7).webp",
+      "variant": "halforcMale"
+    },
+    {
+      "file": "GuardHalforcMale (8).webp",
+      "variant": "halforcMale"
+    },
+    {
+      "file": "GuardHalforcMale (9).webp",
+      "variant": "halforcMale"
+    },
+    {
+      "file": "GuardHumanFemale (1).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanFemale (10).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanFemale (11).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanFemale (12).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanFemale (13).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanFemale (14).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanFemale (15).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanFemale (16).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanFemale (17).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanFemale (18).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanFemale (2).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanFemale (3).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanFemale (4).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanFemale (5).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanFemale (6).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanFemale (7).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanFemale (8).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanFemale (9).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "GuardHumanMale (1).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (10).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (11).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (12).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (13).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (14).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (15).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (16).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (17).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (18).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (19).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (2).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (20).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (21).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (22).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (23).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (24).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (25).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (26).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (27).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (28).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (29).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (3).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (30).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (31).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (32).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (33).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (34).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (35).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (36).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (37).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (38).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (39).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (4).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (40).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (41).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (42).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (43).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (44).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (45).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (46).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (47).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (48).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (49).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (5).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (50).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (51).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (52).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (53).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (54).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (55).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (56).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (6).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (7).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (8).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardHumanMale (9).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "GuardTieflingFemale (1).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GuardTieflingFemale (10).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GuardTieflingFemale (2).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GuardTieflingFemale (3).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GuardTieflingFemale (4).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GuardTieflingFemale (5).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GuardTieflingFemale (6).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GuardTieflingFemale (7).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GuardTieflingFemale (8).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GuardTieflingFemale (9).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "GuardTieflingMale (1).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GuardTieflingMale (10).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GuardTieflingMale (11).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GuardTieflingMale (12).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GuardTieflingMale (13).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GuardTieflingMale (14).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GuardTieflingMale (2).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GuardTieflingMale (3).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GuardTieflingMale (4).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GuardTieflingMale (5).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GuardTieflingMale (6).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GuardTieflingMale (7).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GuardTieflingMale (8).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "GuardTieflingMale (9).webp",
+      "variant": "tieflingMale"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

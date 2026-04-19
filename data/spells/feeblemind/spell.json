@@ -1,0 +1,66 @@
+{
+  "id": 170,
+  "slug": "feeblemind",
+  "name": "Feeblemind",
+  "nameDe": "Schwachsinn",
+  "level": {
+    "en": "8",
+    "de": "Grad 8"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "druid",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Druide",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "8th-level enchantment",
+    "de": "Stufe 8 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "150 feet",
+    "de": "45 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a handful fo clay, crystal, glass, or mineral spheres",
+      "de": "eine Handvoll Ton-, Kristall-, Glas- oder Mineralkugeln"
+    },
+    "raw": {
+      "en": "V, S, M (a handful fo clay, crystal, glass, or mineral spheres)",
+      "de": "V, G, M (eine Handvoll Ton-, Kristall-, Glas- oder Mineralkugeln)"
+    }
+  },
+  "description": {
+    "en": "You blast the mind of a creature that you can see within range, attempting to shatter its intellect and personality. The target takes 4d6 psychic damage and must make an intelligence saving throw. On a failed save, the creature's Intelligence and Charisma scores become 1. The creature can't cast spells, activate magic items, understand language, or communicate in any intelligible way. The creature can, however, identify its friends, follow them, and even protect them. At the end of every 30 days, the creature can repeat its saving throw against this spell. If it succeeds on its saving throw, the spell ends. The spell can also be ended by greater restoration, heal, or wish.",
+    "de": "Du attackierst den Verstand einer Kreatur in Reichweite, die du sehen kannst, und versuchst, ihren Intellekt und ihre Persönlichkeit zu brechen. Das Ziel erleidet 4W6 psychischen Schaden und muss einen Intelligenzrettungswurf ausführen. Scheitert der Wurf, fallen der Intelligenz- und der Charismawert der Kreatur auf 1. Die Kreatur kann keine Zauber wirken, keine magischen Gegenstände aktivieren, versteht keine Sprache und kann nicht verständlich kommunizieren. Sie kann jedoch ihre Freunde erkennen, ihnen folgen und sie sogar beschützen. Nach jeweils 30 Tagen kann die Kreatur den Rettungswurf gegen den Zauber wiederholen. Ist der Rettungswurf erfolgreich, endet der Zauber. Der Zauber kann zudem durch Heilung , Vollständige Genesung  oder Wunsch  aufgehoben werden."
+  },
+  "image": "madness",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

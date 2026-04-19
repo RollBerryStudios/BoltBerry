@@ -1,0 +1,30 @@
+{
+  "id": 382,
+  "slug": "helm-of-telepathy",
+  "name": "Helm of Telepathy",
+  "nameDe": "Helm der Telepathie",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 1200000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon (requires attunement) While wearing this helm, you can use an action to cast the detect thoughts spell (save DC 13) from it. As long as you maintain concentration on the spell, you can use a bonus action to send a telepathic message to a creature you are focused on. It can reply-using a bonus action to do so-while your focus on it continues. While focusing on a creature with detect thoughts, you can use an action to cast the suggestion spell (save DC 13) from the helm on that creature. Once used, the suggestion property can't be used again until the next dawn.",
+    "de": "Wenn du diesen Helm trägst, kannst du als Aktion mit dem Helm den Zauber Gedanken wahrnehmen  (Rettungswurf-SG 13) wirken. Solange du dich auf den Zauber konzentrierst, kannst du als Bonusaktion eine telepathische Botschaft an eine Kreatur senden, auf die du dich konzentrierst. Sie kann antworten -dies erfordert eine Bonusaktion -, solange du dich auf sie konzentrierst. Wenn du dich mit Gedanken wahrnehmen  auf eine Kreatur konzentrierst, kannst du als Aktion mit dem Helm den Zauber Einflüsterung  (Rettungswurf-SG 13) auf diese Kreatur wirken. Nachdem die Einflüsterung-Eigenschaft  verwendet wurde, kann sie erst im nächsten Morgengrauen wiederverwendet werden."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

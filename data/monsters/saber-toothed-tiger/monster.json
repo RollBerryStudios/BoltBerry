@@ -1,0 +1,200 @@
+{
+  "id": 249,
+  "slug": "saber-toothed-tiger",
+  "name": "Saber-Toothed Tiger",
+  "nameDe": "Säbelzahntiger",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "52 (7d10 + 14)",
+    "de": "52 (7W10+14)"
+  },
+  "str": 18,
+  "dex": 14,
+  "con": 15,
+  "int": 3,
+  "wis": 12,
+  "cha": 8,
+  "strMod": 4,
+  "dexMod": 2,
+  "conMod": 2,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +6",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Smell",
+        "text": "The tiger has advantage on Wisdom (Perception) checks that rely on smell."
+      },
+      {
+        "name": "Pounce",
+        "text": "If the tiger moves at least 20 ft. straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a DC 14 Strength saving throw or be knocked prone. If the target is prone, the tiger can make one bite attack against it as a bonus action."
+      }
+    ],
+    "de": [
+      {
+        "name": "Anspringen",
+        "text": "Wenn der Tiger sich mindestens sechs Meter weit direkt auf eine Kreatur zubewegt und sie dann im selben Zug mit einem Klauenangriff trifft, muss das Ziel einen SG-14-Stärkerettungswurf bestehen, oder es wird umgestoßen. Wenn das Ziel liegt, kann der Tiger als Bonusaktion einen Bissangriff gegen es ausführen."
+      },
+      {
+        "name": "Scharfer Geruchssinn",
+        "text": "Die Tiger ist bei Weisheitswürfen (Wahrnehmung), die auf Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 10 (1d10 + 5) piercing damage."
+      },
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 12 (2d6 + 5) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (1W10+5) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 12 (2W6+5) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "SaberToothedTigerArctic (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "SaberToothedTigerArctic (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerArctic (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerArctic (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerArctic (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerArctic (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerArctic (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerArctic (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerArctic (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerArctic (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerArctic (9).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerMountains (1).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerMountains (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerMountains (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerMountains (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerMountains (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerMountains (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerMountains (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerMountains (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "SaberToothedTigerMountains (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

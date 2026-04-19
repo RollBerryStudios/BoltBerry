@@ -1,0 +1,30 @@
+{
+  "id": 282,
+  "slug": "ring-of-jumping",
+  "name": "Ring of Jumping",
+  "nameDe": "Ring des Springens",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 250000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Ring, uncommon (requires attunement) While wearing this ring, you can cast the jump spell from it as a bonus action at will, but can target only yourself when you do so.",
+    "de": "Wenn du diesen Ring trägst, kannst du mit ihm den Zauber Springen  beliebig oft als Bonusaktion wirken. Allerdings kannst du nur dich als Ziel bestimmen, wenn du das tust."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "ring",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

@@ -1,0 +1,307 @@
+{
+  "id": 199,
+  "slug": "medusa",
+  "name": "Medusa",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium monstrosity, lawful evil",
+    "de": "Mittelgroße Monstrosität, rechtschaffen böse"
+  },
+  "challenge": "6",
+  "xp": 2300,
+  "ac": {
+    "en": "15 (Natural Armor)",
+    "de": "15 (Natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "127 (17d8 + 51)",
+    "de": "127 (17W8 + 51)"
+  },
+  "str": 10,
+  "dex": 15,
+  "con": 16,
+  "int": 12,
+  "wis": 13,
+  "cha": 15,
+  "strMod": 0,
+  "dexMod": 2,
+  "conMod": 3,
+  "intMod": 1,
+  "wisMod": 1,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common"
+    ],
+    "de": [
+      "Gemeinsprache"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +5",
+    "Motiv erkennen +4",
+    "Täuschen +5",
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Petrifying Gaze",
+        "text": "When a creature that can see the medusa's eyes starts its turn within 30 ft. of the medusa, the medusa can force it to make a DC 14 Constitution saving throw if the medusa isn't incapacitated and can see the creature. If the saving throw fails by 5 or more, the creature is instantly petrified. Otherwise, a creature that fails the save begins to turn to stone and is restrained. The restrained creature must repeat the saving throw at the end of its next turn, becoming petrified on a failure or ending the effect on a success. The petrification lasts until the creature is freed by the greater restoration spell or other magic.\nUnless surprised, a creature can avert its eyes to avoid the saving throw at the start of its turn. If the creature does so, it can't see the medusa until the start of its next turn, when it can avert its eyes again. If the creature looks at the medusa in the meantime, it must immediately make the save.\nIf the medusa sees itself reflected on a polished surface within 30 ft. of it and in an area of bright light, the medusa is, due to its curse, affected by its own gaze."
+      }
+    ],
+    "de": [
+      {
+        "name": "Versteinernder Blick",
+        "text": "Die Medusa kann Kreaturen, die ihre Augen sehen können und den Zug im Abstand von bis zu neun Metern von ihr beginnen, zu einem SG-14-Konstitutionsrettungswurf zwingen, sofern die Medusa die Kreatur sehen kann und nicht kampfunfähig ist. Wenn der Rettungswurf um mindestens 5 Punkte scheitert, wird die Kreatur sofort versteinert. Anderenfalls beginnt die Kreatur nach einem gescheiterten Rettungswurf zu versteinern und ist festgesetzt. Die festgesetzte Kreatur muss den Rettungswurf am Ende ihres nächsten Zugs wiederholen. Scheitert der Wurf, wird sie versteinert. Bei einem Erfolg endet der Effekt. Die Versteinerung bleibt bestehen, bis die Kreatur durch den Zauber Vollständige Genesung oder andere Magie befreit wird.  Wenn die Kreatur nicht überrascht wird, kann sie zu Beginn ihres Zugs die Augen abwenden, um den Rettungswurf zu vermeiden. In diesem Fall kann sie die Medusa bis zum Beginn ihres nächsten Zugs, wenn sie die Augen erneut abwenden kann, nicht sehen. Schaut sie die Medusa in der Zwischenzeit an, so muss sie den Rettungswurf sofort ausführen.  Wenn die Medusa sich in einem Bereich mit hellem Licht auf einer polierten Oberfläche im Abstand von bis zu neun Metern von ihr reflektiert sieht, erleidet sie aufgrund ihres Fluchs den Effekt ihres eigenen Blicks."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The medusa makes either three melee attacks--one with its snake hair and two with its shortsword--or two ranged attacks with its longbow."
+      },
+      {
+        "name": "Snake Hair",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one creature. Hit: 4 (1d4 + 2) piercing damage plus 14 (4d6) poison damage."
+      },
+      {
+        "name": "Shortsword",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      },
+      {
+        "name": "Longbow",
+        "text": "Ranged Weapon Attack: +5 to hit, range 150/600 ft., one target. Hit: 6 (1d8 + 2) piercing damage plus 7 (2d6) poison damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Die Medusa führt entweder drei Nahkampfangriffe - einen mit ihrem Schlangenhaar und zwei mit ihrem Kurzschwert - oder zwei Fernkampfangriffe mit ihrem Langbogen aus."
+      },
+      {
+        "name": "Kurzschwert",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden."
+      },
+      {
+        "name": "Schlangenhaar",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 4 (1W4+2) Stichschaden plus 14 (4W6) Giftschaden."
+      },
+      {
+        "name": "Langbogen",
+        "text": "Fernkampfwaffenangriff: +5 auf Treffer, Reichweite 45/180 m, ein Ziel. Treffer: 6 (1W8+2) Stichschaden plus 7 (2W6) Giftschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/580/1000/1000/636376361850900325.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "mittel"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "MedusaFemale (1).webp",
+    "variant": "female"
+  },
+  "tokens": [
+    {
+      "file": "MedusaFemale (10).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (11).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (12).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (13).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (14).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (15).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (16).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (17).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (18).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (19).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (2).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (20).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (21).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (22).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (23).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (3).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (4).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (5).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (6).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (7).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (8).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaFemale (9).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MedusaMale (1).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (10).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (11).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (12).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (13).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (14).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (15).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (16).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (17).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (18).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (19).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (2).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (20).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (21).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (3).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (4).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (5).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (6).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (7).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (8).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MedusaMale (9).webp",
+      "variant": "male"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

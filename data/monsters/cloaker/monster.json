@@ -1,0 +1,231 @@
+{
+  "id": 68,
+  "slug": "cloaker",
+  "name": "Cloaker",
+  "nameDe": "Mantler",
+  "source": "SRD",
+  "meta": {
+    "en": "Large aberration, chaotic neutral",
+    "de": "Große Aberration, chaotisch neutral"
+  },
+  "challenge": "8",
+  "xp": 3900,
+  "ac": {
+    "en": "14 (Natural Armor)",
+    "de": "14 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "78 (12d10 + 12)",
+    "de": "78 (12W10+12)"
+  },
+  "str": 17,
+  "dex": 15,
+  "con": 12,
+  "int": 13,
+  "wis": 12,
+  "cha": 14,
+  "strMod": 3,
+  "dexMod": 2,
+  "conMod": 1,
+  "intMod": 1,
+  "wisMod": 1,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "fly": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Deep Speech",
+      "Undercommon"
+    ],
+    "de": [
+      "Gemeinsprache der Unterreiche",
+      "Tiefensprache"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +5"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Damage Transfer",
+        "text": "While attached to a creature, the cloaker takes only half the damage dealt to it (rounded down). and that creature takes the other half."
+      },
+      {
+        "name": "False Appearance",
+        "text": "While the cloaker remains motionless without its underside exposed, it is indistinguishable from a dark leather cloak."
+      },
+      {
+        "name": "Light Sensitivity",
+        "text": "While in bright light, the cloaker has disadvantage on attack rolls and Wisdom (Perception) checks that rely on sight."
+      }
+    ],
+    "de": [
+      {
+        "name": "Falsches Erscheinungsbild",
+        "text": "Solange der Mantler sich nicht bewegt und seine Unterseite nicht exponiert ist, ist er nicht von einem dunklen Lederumhang zu unterscheiden."
+      },
+      {
+        "name": "Lichtempfindlich",
+        "text": "In hellem Licht ist der Mantler bei Angriffswürfen sowie bei Weisheitswürfen (Wahrnehmung), die Sicht erfordern, im Nachteil."
+      },
+      {
+        "name": "Schadensübertragung",
+        "text": "Während der Mantler sich an eine Kreatur angeheftet hat, erleidet er nur die Hälfte des Schadens, der ihm zugefügt wird (abgerundet), und die Kreatur erleidet die andere Hälfte."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The cloaker makes two attacks: one with its bite and one with its tail."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one creature. Hit: 10 (2d6 + 3) piercing damage, and if the target is Large or smaller, the cloaker attaches to it. If the cloaker has advantage against the target, the cloaker attaches to the target's head, and the target is blinded and unable to breathe while the cloaker is attached. While attached, the cloaker can make this attack only against the target and has advantage on the attack roll. The cloaker can detach itself by spending 5 feet of its movement. A creature, including the target, can take its action to detach the cloaker by succeeding on a DC 16 Strength check."
+      },
+      {
+        "name": "Tail",
+        "text": "Melee Weapon Attack: +6 to hit, reach 10 ft., one creature. Hit: 7 (1d8 + 3) slashing damage."
+      },
+      {
+        "name": "Moan",
+        "text": "Each creature within 60 feet of the cloaker that can hear its moan and that isn't an aberration must succeed on a DC 13 Wisdom saving throw or become frightened until the end of the cloaker's next turn. If a creature's saving throw is successful, the creature is immune to the cloaker's moan for the next 24 hours."
+      },
+      {
+        "name": "Phantasms",
+        "text": "The cloaker magically creates three illusory duplicates of itself if it isn't in bright light. The duplicates move with it and mimic its actions, shifting position so as to make it impossible to track which cloaker is the real one. If the cloaker is ever in an area of bright light, the duplicates disappear.\nWhenever any creature targets the cloaker with an attack or a harmful spell while a duplicate remains, that creature rolls randomly to determine whether it targets the cloaker or one of the duplicates. A creature is unaffected by this magical effect if it can't see or if it relies on senses other than sight.\nA duplicate has the cloaker's AC and uses its saving throws. If an attack hits a duplicate, or if a duplicate fails a saving throw against an effect that deals damage, the duplicate disappears."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Mantler führt zwei Angriffe aus: einen Biss- und einen Schwanzangriff."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 10 (2W6+3) Stichschaden, und wenn das Ziel groß oder kleiner ist, heftet der Mantler sich an es an. Wenn der Mantler gegen das Ziel im Vorteil ist, heftet er sich an dessen Kopf. Das Ziel ist blind und kann nicht atmen, solange der Mantler sich angeheftet hat. Ist der Mantler angeheftet, so kann er diesen Angriff nur gegen das Ziel ausführen und ist beim Angriffswurf im Vorteil. Der Mantler kann sich lösen, indem er 1,5 Meter seiner Bewegungsrate verwendet. Eine Kreatur, auch das Ziel, kann seine Aktion verwenden, um den Mantler mit einem erfolgreichen SG-16-Stärkewurf zu entfernen."
+      },
+      {
+        "name": "Schwanz",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 3 m, eine Kreatur. Treffer: 7 (1W8+3) Hiebschaden."
+      },
+      {
+        "name": "Phantome (wird nach kurzer oder langer Rast aufgeladen)",
+        "text": "Der Mantler erzeugt magisch drei illusorische Duplikate von sich selbst, sofern er sich nicht in hellem Licht befindet. Die Duplikate bewegen sich mit ihm und imitieren seine Aktionen. Dabei tauschen sie die Positionen so, dass es unmöglich ist nachzuverfolgen, welcher Mantler der reale ist. Wenn der Mantler sich in einen Bereich mit hellem Licht begibt, verschwinden die Duplikate. Wenn eine Kreatur mit einem Angriff oder Schadenszauber auf den Mantler zielt, solange noch mindestens ein Duplikat vorhanden ist, bestimmt sie durch einen Zufallswurf, ob sie auf den Mantler oder auf ein Duplikat zielt. Die Kreatur ist von diesem magischen Effekt nicht betroffen, wenn sie nicht sehen kann oder sich auf andere Sinne als Sicht verlässt. Duplikate haben die RK des Mantlers und verwenden seine Rettungswürfe. Wenn ein Duplikat von einem Angriff getroffen wird oder sein Rettungswurf gegen einen Schadenseffekt scheitert, verschwindet das Duplikat."
+      },
+      {
+        "name": "Stöhnen",
+        "text": "Jede Kreatur im Abstand von bis zu 18 Metern vom Mantler, die sein Stöhnen hören kann und keine Aberration ist, muss einen SG-13-Weisheitsrettungswurf bestehen, oder sie ist bis zum Ende des nächsten Zugs des Mantlers verängstigt. Wenn eine Kreatur ihren Rettungswurf besteht, ist sie 24 Stunden lang gegen das Stöhnen des Mantlers immun."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/245/1000/1000/636252767458838228.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "aberration",
+    "de": "Aberration"
+  },
+  "alignment": {
+    "en": "chaotic neutral",
+    "de": "chaotisch neutral"
+  },
+  "token": {
+    "file": "Cloaker (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Cloaker (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cloaker (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cloaker (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cloaker (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cloaker (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cloaker (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cloaker (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cloaker (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cloaker (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cloaker (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cloaker (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cloaker (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cloaker (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cloaker (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cloaker (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cloaker (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Cloaker (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

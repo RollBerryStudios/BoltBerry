@@ -1,0 +1,253 @@
+{
+  "id": 127,
+  "slug": "giant-elk",
+  "name": "Giant Elk",
+  "nameDe": "Riesenelch",
+  "source": "SRD",
+  "meta": {
+    "en": "Huge beast, unaligned",
+    "de": "Riesige Bestie, ohne Gesinnung"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "14 (Natural Armor)",
+    "de": "14 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "42 (5d12 + 10)",
+    "de": "42 (5W12+10)"
+  },
+  "str": 19,
+  "dex": 16,
+  "con": 14,
+  "int": 7,
+  "wis": 14,
+  "cha": 10,
+  "strMod": 4,
+  "dexMod": 3,
+  "conMod": 2,
+  "intMod": -2,
+  "wisMod": 2,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 14"
+    ],
+    "de": [
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Giant Elk",
+      "understands Common",
+      "Elvish",
+      "and Sylvan but can't speak"
+    ],
+    "de": [
+      "Riesenelchisch",
+      "versteht Elfisch",
+      "Gemeinsprache und Sylvanisch",
+      "aber kann sie nicht sprechen"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Charge",
+        "text": "If the elk moves at least 20 ft. straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra 7 (2d6) damage. If the target is a creature, it must succeed on a DC 14 Strength saving throw or be knocked prone."
+      }
+    ],
+    "de": [
+      {
+        "name": "Sturmangriff",
+        "text": "Wenn der Elch sich mindestens sechs Meter weit direkt auf ein Ziel zubewegt und es dann im selben Zug mit einem Rammbock-Angriff trifft, erleidet das Ziel zusätzlich 7 (2W6) Schaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-14-Stärkerettungswurf bestehen, oder es wird umgestoßen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Ram",
+        "text": "Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage."
+      },
+      {
+        "name": "Hooves",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one prone creature. Hit: 22 (4d8 + 4) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Hufe",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, eine liegende Kreatur. Treffer: 22 (4W8+4) Wuchtschaden."
+      },
+      {
+        "name": "Rammbock",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 11 (2W6+4) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "huge",
+    "de": "Riesiges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantElkAlbinoForest (1).webp",
+    "variant": "albinoForest"
+  },
+  "tokens": [
+    {
+      "file": "GiantElkAlbinoForest (2).webp",
+      "variant": "albinoForest"
+    },
+    {
+      "file": "GiantElkAlbinoForest (3).webp",
+      "variant": "albinoForest"
+    },
+    {
+      "file": "GiantElkAlbinoForest (4).webp",
+      "variant": "albinoForest"
+    },
+    {
+      "file": "GiantElkAlbinoForest (5).webp",
+      "variant": "albinoForest"
+    },
+    {
+      "file": "GiantElkAlbinoForest (6).webp",
+      "variant": "albinoForest"
+    },
+    {
+      "file": "GiantElkAlbinoForest (7).webp",
+      "variant": "albinoForest"
+    },
+    {
+      "file": "GiantElkForest (1).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantElkForest (10).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantElkForest (11).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantElkForest (12).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantElkForest (13).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantElkForest (14).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantElkForest (15).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantElkForest (16).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantElkForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantElkForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantElkForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantElkForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantElkForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantElkForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantElkForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantElkForest (9).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantElkMountains (1).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "GiantElkMountains (10).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "GiantElkMountains (11).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "GiantElkMountains (2).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "GiantElkMountains (3).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "GiantElkMountains (4).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "GiantElkMountains (5).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "GiantElkMountains (6).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "GiantElkMountains (7).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "GiantElkMountains (8).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "GiantElkMountains (9).webp",
+      "variant": "mountains"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

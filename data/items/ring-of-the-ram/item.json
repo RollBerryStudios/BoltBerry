@@ -1,0 +1,30 @@
+{
+  "id": 317,
+  "slug": "ring-of-the-ram",
+  "name": "Ring of the Ram",
+  "nameDe": "Ring des Widders",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 500000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Ring, rare (requires attunement) This ring has 3 charges, and it regains 1d3 expended charges daily at dawn. While wearing the ring, you can use an action to expend 1 to 3 of its charges to attack one creature you can see within 60 feet of you. The ring produces a spectral ram's head and makes its attack roll with a +7 bonus. On a hit, for each charge you spend, the target takes 2d10 force damage and is pushed 5 feet away from you. Alternatively, you can expend 1 to 3 of the ring's charges as an action to try to break an object you can see within 60 feet of you that isn't being worn or carried. The ring makes a Strength check with a +5 bonus for each charge you spend.",
+    "de": "Dieser Ring hat drei Ladungen und erhält täglich im Morgengrauen 1W3 verbrauchte Ladungen zurück. Wenn du diesen Ring trägst, kannst du eine Aktion verwenden, um eine bis drei Ladungen zu verbrauchen und eine Kreatur anzugreifen, die du im Abstand von bis zu 18 Metern von dir sehen kannst. Der Ring erzeugt einen geisterhaften Widderkopf, der einen Angriffswurf mit einem Bonus von +7 ausführt. Bei einem Treffer erleidet das Ziel für jede verbrauchte Ladung 2W10 Energieschaden und wird 1,5 Meter von dir weggestoßen. Alternativ kannst du als Aktion eine bis drei Ladungen des Rings verbrauchen, um zu versuchen, einen Gegenstand im Abstand von bis zu 18 Metern von dir zu zerstören, den du sehen kannst und der weder getragen noch gehalten wird. Der Ring führt für jede Ladung, die du verbrauchst, einen Stärkewurf mit einem Bonus von +5 aus."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "ring",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

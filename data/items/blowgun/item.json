@@ -1,0 +1,36 @@
+{
+  "id": 45,
+  "slug": "blowgun",
+  "name": "Blowgun",
+  "nameDe": "Blasrohr",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 1000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 1,
+  "classification": {
+    "en": "Martial Ranged Weapons",
+    "de": "Fernkampfs-Kriegswaffen"
+  },
+  "damage": "1",
+  "damageType": {
+    "en": "piercing",
+    "de": "stich"
+  },
+  "properties": {
+    "en": "ammunition (range 25/100) | loading",
+    "de": "munition (fernkampf 25/100) | laden"
+  },
+  "image": "weapon",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

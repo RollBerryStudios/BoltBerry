@@ -1,0 +1,56 @@
+{
+  "id": 217,
+  "slug": "antilife-shell",
+  "name": "Antilife Shell",
+  "nameDe": "Schutzhülle gegen Lebendes",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid"
+    ],
+    "de": [
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "5th-level abjuration",
+    "de": "Stufe 5 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self (10-foot radius)",
+    "de": "Selbst (3 Meter Radius)"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "A shimmering barrier extends out from you in a 10-foot radius and moves with you, remaining centered on you and hedging out creatures other than undead and constructs. The barrier lasts for the duration. The barrier prevents an affected creature from passing or reaching through. An affected creature can cast spells or make attacks with ranged or reach weapons through the barrier. If you move so that an affected creature is forced to pass through the barrier, the spell ends.",
+    "de": "Eine schimmernde Barriere mit einem Radius von drei Metern umgibt dich. Sie bewegt sich mit dir im Mittelpunkt und hält Kreaturen auf Abstand, die keine Untoten oder Konstrukte sind. Die Barriere bleibt für die Wirkungsdauer bestehen. Die Barriere verhindert, dass betroffene Kreaturen hindurchgehen oder hindurchgreifen. Sie können jedoch Zauber wirken oder mit Fernkampfwaffen oder Waffen mit Reichweite durch die Barriere angreifen. Bewegst du dich, so dass eine betroffene Kreatur durch die Barriere passieren muss, endet der Zauber."
+  },
+  "image": "magic-circle",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

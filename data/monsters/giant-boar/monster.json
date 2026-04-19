@@ -1,0 +1,212 @@
+{
+  "id": 121,
+  "slug": "giant-boar",
+  "name": "Giant Boar",
+  "nameDe": "Rieseneber",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "12 (Natural Armor)",
+    "de": "12 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "42 (5d10 + 15)",
+    "de": "42 (5W10+15)"
+  },
+  "str": 17,
+  "dex": 10,
+  "con": 16,
+  "int": 2,
+  "wis": 7,
+  "cha": 5,
+  "strMod": 3,
+  "dexMod": 0,
+  "conMod": 3,
+  "intMod": -4,
+  "wisMod": -2,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 8"
+    ],
+    "de": [
+      "Passive Wahrnehmung 8"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Charge",
+        "text": "If the boar moves at least 20 ft. straight toward a target and then hits it with a tusk attack on the same turn, the target takes an extra 7 (2d6) slashing damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone."
+      },
+      {
+        "name": "Relentless",
+        "text": "If the boar takes 10 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead."
+      }
+    ],
+    "de": [
+      {
+        "name": "Sturmangriff",
+        "text": "Wenn der Eber sich mindestens sechs Meter weit direkt auf ein Ziel zubewegt und es dann im selben Zug mit einem Hauerangriff trifft, erleidet das Ziel zusätzlich 7 (2W6) Hiebschaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-13-Stärkerettungswurf bestehen, oder es wird umgestoßen."
+      },
+      {
+        "name": "Unermüdlich (wird nach kurzer oder langer Rast aufgeladen)",
+        "text": "Wenn der Eber maximal 10 Schaden erleidet und seine Trefferpunkte dadurch auf 0 sinken würden, hat er stattdessen noch 1 Trefferpunkt."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Tusk",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Hauer",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantBoarSummer (1).webp",
+    "variant": "summer"
+  },
+  "tokens": [
+    {
+      "file": "GiantBoarSummer (10).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBoarSummer (11).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBoarSummer (12).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBoarSummer (2).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBoarSummer (3).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBoarSummer (4).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBoarSummer (5).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBoarSummer (6).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBoarSummer (7).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBoarSummer (8).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBoarSummer (9).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "GiantBoarWinter (1).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "GiantBoarWinter (10).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "GiantBoarWinter (11).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "GiantBoarWinter (12).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "GiantBoarWinter (13).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "GiantBoarWinter (14).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "GiantBoarWinter (2).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "GiantBoarWinter (3).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "GiantBoarWinter (4).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "GiantBoarWinter (5).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "GiantBoarWinter (6).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "GiantBoarWinter (7).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "GiantBoarWinter (8).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "GiantBoarWinter (9).webp",
+      "variant": "winter"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

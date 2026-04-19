@@ -1,0 +1,340 @@
+{
+  "id": 317,
+  "slug": "young-black-dragon",
+  "name": "Young Black Dragon",
+  "nameDe": "Junger schwarzer Drache",
+  "source": "SRD",
+  "meta": {
+    "en": "Large dragon, chaotic evil",
+    "de": "Großer Drache, chaotisch böse"
+  },
+  "challenge": "7",
+  "xp": 2900,
+  "ac": {
+    "en": "18 (Natural Armor)",
+    "de": "18 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "127 (15d10 + 45)",
+    "de": "127 (15W10+45)"
+  },
+  "str": 19,
+  "dex": 14,
+  "con": 17,
+  "int": 12,
+  "wis": 11,
+  "cha": 15,
+  "strMod": 4,
+  "dexMod": 2,
+  "conMod": 3,
+  "intMod": 1,
+  "wisMod": 0,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    },
+    "swim": {
+      "en": 40,
+      "de": 12
+    },
+    "fly": {
+      "en": 80,
+      "de": 24
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 30 ft.",
+      "Darkvision 120 ft.",
+      "passive perception 16"
+    ],
+    "de": [
+      "Blindsicht 9 m",
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 16"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Draconic"
+    ],
+    "de": [
+      "Drakonisch",
+      "Gemeinsprache"
+    ]
+  },
+  "savingThrows": [
+    "Ges +5",
+    "Kon +6",
+    "Wei +3",
+    "Cha +5"
+  ],
+  "skills": [
+    "Heimlichkeit +5",
+    "Wahrnehmung +6"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Amphibious",
+        "text": "The dragon can breathe air and water."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amphibisch",
+        "text": "Der Drache kann Luft und Wasser atmen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The dragon makes three attacks: one with its bite and two with its claws."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +7 to hit, reach 10 ft., one target. Hit: 15 (2d10 + 4) piercing damage plus 4 (1d8) acid damage."
+      },
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage."
+      },
+      {
+        "name": "Acid Breath",
+        "text": "The dragon exhales acid in a 30-foot line that is 5 feet wide. Each creature in that line must make a DC 14 Dexterity saving throw, taking 49 (11d8) acid damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Drache führt drei Angriffe aus: einen mit seinem Biss und zwei mit seinen Klauen."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 15 (2W10+4) Stichschaden plus 4 (1W8) Säureschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 11 (2W6+4) Hiebschaden."
+      },
+      {
+        "name": "Säureodem (Aufladung 5–6)",
+        "text": "Der Drache atmet Säure in einer neun Metern langen, 1,5 Meter breiten Linie aus. Jede Kreatur in dieser Linie muss einen SG-14-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 49 (11W8) Säureschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/70/1000/1000/636252732861675698.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "dragon",
+    "de": "Drache"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "YoungBlackDragon (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "YoungBlackDragon (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (31).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (32).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (33).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (34).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (35).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (36).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (37).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (38).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (39).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (40).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (41).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (42).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (43).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (44).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (45).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (46).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (47).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (48).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBlackDragon (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

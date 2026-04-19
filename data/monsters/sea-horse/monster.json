@@ -1,0 +1,167 @@
+{
+  "id": 256,
+  "slug": "sea-horse",
+  "name": "Sea Horse",
+  "nameDe": "Seepferdchen",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny beast, unaligned",
+    "de": "Winzige Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "11",
+    "de": "11"
+  },
+  "hp": {
+    "en": "1 (1d4 - 1)",
+    "de": "1 (1W4-1)"
+  },
+  "str": 1,
+  "dex": 12,
+  "con": 8,
+  "int": 1,
+  "wis": 10,
+  "cha": 2,
+  "strMod": -5,
+  "dexMod": 1,
+  "conMod": -1,
+  "intMod": -5,
+  "wisMod": 0,
+  "chaMod": -4,
+  "speed": {
+    "run": {},
+    "swim": {
+      "en": 20,
+      "de": 6
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Water Breathing",
+        "text": "The sea horse can breathe only underwater."
+      }
+    ],
+    "de": [
+      {
+        "name": "Wasser atmen",
+        "text": "Das Seepferdchen kann nur unter Wasser atmen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Winziges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "SeaHorse (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "SeaHorse (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "SeaHorse (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,62 @@
+{
+  "id": 298,
+  "slug": "pass-without-trace",
+  "name": "Pass without Trace",
+  "nameDe": "Spurloses Gehen",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "ranger"
+    ],
+    "de": [
+      "Druide",
+      "Waldläufer"
+    ]
+  },
+  "type": {
+    "en": "2nd-level abjuration",
+    "de": "Stufe 2 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "ashes from a burned leaf of mistletoe and a sprig of spruce",
+      "de": "Asche von einem verbrannten Mistelzweig und einem Fichtenzweig"
+    },
+    "raw": {
+      "en": "V, S, M (ashes from a burned leaf of mistletoe and a sprig of spruce)",
+      "de": "V, G, M (Asche von einem verbrannten Mistelzweig und einem Fichtenzweig)"
+    }
+  },
+  "description": {
+    "en": "A veil of shadows and silence radiates from you, masking you and your companions from detection. For the duration, each creature you choose within 30 feet of you (including you) has a +10 bonus to Dexterity (Stealth) checks and can't be tracked except by magical means. A creature that receives this bonus leaves behind no tracks or other traces of its passage.",
+    "de": "Ein Schleier aus Schatten und Stille geht von dir aus und schützt dich und deine Gefährten vor Entdeckung. Für die Wirkungsdauer erhält jede Kreatur deiner Wahl im Abstand von bis zu neun Metern von dir (einschließlich dir selbst) einen Bonus von +10 auf Geschicklichkeitswürfe (Heimlichkeit) und kann nur durch Magie aufgespürt werden. Eine Kreatur mit diesem Bonus hinterlässt keine Fährten oder andere Spuren ihrer Anwesenheit."
+  },
+  "image": "path-without-trace",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

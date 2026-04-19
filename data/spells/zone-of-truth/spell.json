@@ -1,0 +1,60 @@
+{
+  "id": 340,
+  "slug": "zone-of-truth",
+  "name": "Zone of Truth",
+  "nameDe": "Zone der Wahrheit",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "paladin"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Paladin"
+    ]
+  },
+  "type": {
+    "en": "2nd-level enchantment",
+    "de": "Stufe 2 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "10 minutes",
+    "de": "10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You create a magical zone that guards against deception in a 15-foot-radius sphere centered on a point of your choice within range. Until the spell ends, a creature that enters the spell's area for the first time on a turn or starts its turn there must make a Charisma saving throw. On a failed save, a creature can't speak a deliberate lie while in the radius. You know whether each creature succeeds or fails on its saving throw. An affected creature is aware of the spell and can thus avoid answering questions to which it would normally respond with a lie. Such a creature can remain evasive in its answers as long as it remains within the boundaries of the truth.",
+    "de": "Du erschaffst eine magische Zone in einer Sphäre mit einem Radius von 4,5 Metern, die auf einen Punkt deiner Wahl in Reichweite zentriert ist. Die Zone schützt vor Täuschung. Bis der Zauber endet, muss jede Kreatur, die den Bereich des Zaubers in einem Zug erstmals betritt oder ihren Zug darin beginnt, einen Charismarettungswurf ausführen. Scheitert der Wurf, so kann die Kreatur innerhalb des Radius nicht absichtlich lügen. Du weißt, ob eine Kreatur ihren Rettungswurf besteht oder nicht. Eine betroffene Kreatur ist sich des Zaubers bewusst und kann somit Fragen vermeiden, bei denen sie als Antwort lügen würde. In diesem Fall kann eine Kreatur die Antwort ausweichend formulieren, solange sie innerhalb der Grenzen der Wahrheit bleibt."
+  },
+  "image": "zone-of-truth",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

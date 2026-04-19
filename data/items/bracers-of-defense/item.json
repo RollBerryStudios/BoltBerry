@@ -1,0 +1,30 @@
+{
+  "id": 335,
+  "slug": "bracers-of-defense",
+  "name": "Bracers of Defense",
+  "nameDe": "Armschienen der Verteidigung",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 600000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondous item, rare (requires attunement) While wearing these bracers, you gain a +2 bonus to AC if you are wearing no armor and using no shield.",
+    "de": "Wenn du diese Armschienen trägst, erhältst du einen Bonus von +2 auf deine RK, falls du keine Rüstung trägst und keinen Schild verwendest."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "bracers",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

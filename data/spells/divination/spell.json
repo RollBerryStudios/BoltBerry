@@ -1,0 +1,60 @@
+{
+  "id": 240,
+  "slug": "divination",
+  "name": "Divination",
+  "nameDe": "Weissagung",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "4th-level divination (ritual)",
+    "de": "Stufe 4 Erkenntnismagie (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "incense and a sacrificial offering appropriate to your religion, together worth at least 25 gp, which the spell consumes",
+      "de": "Weihrauch und ein Opfer, das deiner Religion entspricht, im Wert von mindestens 25 Goldstücken, die der Zauberspruch verbraucht"
+    },
+    "raw": {
+      "en": "V, S, M (incense and a sacrificial offering appropriate to your religion, together worth at least 25 gp, which the spell consumes)",
+      "de": "V, G, M (Weihrauch und ein Opfer, das deiner Religion entspricht, im Wert von mindestens 25 Goldstücken, die der Zauberspruch verbraucht)"
+    }
+  },
+  "description": {
+    "en": "Your magic and an offering put you in contact with a god or a god's servants. You ask a single question concerning a specific goal, event, or activity to occur within 7 days. The GM offers a truthful reply. The reply might be a short phrase, a cryptic rhyme, or an omen. The spell doesn't take into account any possible circumstances that might change the outcome, such as the casting of additional spells or the loss or gain of a companion. If you cast the spell two or more times before finishing your next long rest, there is a cumulative 25 percent chance for each casting after the first that you get a random reading. The GM makes this roll in secret.",
+    "de": "Mit deiner Magie und einer Opfergabe kannst du mit einer Gottheit oder ihren Dienern Kontakt aufhehmen. Du stellst eine einzige Frage über ein bestimmtes Ziel, ein Ereignis oder eine Aktivität, die in den nächsten sieben Tagen stattfindet. Der SL antwortet wahrheitsgemäß. Bei der Antwort kann es sich um einen kurzen Satz, einen kryptischen Reim oder ein Omen handeln. Der Zauber berücksichtigt keinerlei Umstände, die das Ergebnis ändern könnten, wie das Wirken von zusätzlichen Zaubern oder der Verlust oder Gewinn eines Begleiters. Wenn du den Zauber vor deiner nächsten langen Rast mindestens zweimal wirkst, steigt die Chance auf zufällige Omen mit jedem Wirken nach dem ersten um zusätzliche 25 Prozent. Der SL würfelt das Ergebnis geheim aus."
+  },
+  "image": "divination-spell",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,70 @@
+{
+  "id": 285,
+  "slug": "locate-creature",
+  "name": "Locate Creature",
+  "nameDe": "Kreatur aufspüren",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "druid",
+      "paladin",
+      "ranger",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Druide",
+      "Paladin",
+      "Waldläufer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "4th-level divination",
+    "de": "Stufe 4 Erkenntnismagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a bit of fur from a bloodhound",
+      "de": "ein Stückchen Fell von einem Bluthund"
+    },
+    "raw": {
+      "en": "V, S, M (a bit of fur from a bloodhound)",
+      "de": "V, G, M (ein Stückchen Fell von einem Bluthund)"
+    }
+  },
+  "description": {
+    "en": "Describe or name a creature that is familiar to you. You sense the direction to the creature's location, as long as that creature is within 1,000 feet of you. If the creature is moving, you know the direction of its movement. The spell can locate a specific creature known to you, or the nearest creature of a specific kind (such as a human or a unicorn), so long as you have seen such a creature up close--within 30 feet--at least once. If the creature you described or named is in a different form, such as being under the effects of a polymorph spell, this spell doesn't locate the creature. This spell can't locate a creature if running water at least 10 feet wide blocks a direct path between you and the creature.",
+    "de": "Beschreibe oder nenne eine Kreatur, mit der du vertraut bist. Solange sich die Kreatur im Abstand von bis zu 300 Metern von dir befindet, spürst du, in welcher Richtung ihr Aufenthaltsort liegt. Bewegt sich die Kreatur, weißt du, in welche Richtung sie sich bewegt. Der Zauber kann eine bestimmte dir bekannte Kreatur aufspüren oder die nächstgelegene Kreatur einer bestimmten Art (wie ein Mensch oder ein Einhorn), sofern du eine derartige Kreatur mindestens einmal aus der Nähe (aus maximal neun Metern Entfernung) gesehen hast. Hat die von dir beschriebene oder genannte Kreatur eine andere Gestalt angenommen, wie beispielsweise unter dem Effekt des Zaubers Verwandlung , spürt dieser Zauber die Kreatur nicht auf. Dieser Zauber kann die Kreatur nicht aufspüren, wenn fließendes Wasser mit einer Breite von mindestens drei Metern den direkten Weg zwischen dir und der Kreatur blockiert."
+  },
+  "image": "locate-creature",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

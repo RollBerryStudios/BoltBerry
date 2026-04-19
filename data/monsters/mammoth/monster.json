@@ -1,0 +1,188 @@
+{
+  "id": 195,
+  "slug": "mammoth",
+  "name": "Mammoth",
+  "nameDe": "Mammut",
+  "source": "SRD",
+  "meta": {
+    "en": "Huge beast, unaligned",
+    "de": "Riesige Bestie, ohne Gesinnung"
+  },
+  "challenge": "6",
+  "xp": 2300,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "126 (11d12 + 55)",
+    "de": "126 (11W12+55)"
+  },
+  "str": 24,
+  "dex": 9,
+  "con": 21,
+  "int": 3,
+  "wis": 11,
+  "cha": 6,
+  "strMod": 7,
+  "dexMod": -1,
+  "conMod": 5,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Trampling Charge",
+        "text": "If the mammoth moves at least 20 ft. straight toward a creature and then hits it with a gore attack on the same turn, that target must succeed on a DC 18 Strength saving throw or be knocked prone. If the target is prone, the mammoth can make one stomp attack against it as a bonus action."
+      }
+    ],
+    "de": [
+      {
+        "name": "Trampel-Sturmangriff",
+        "text": "Wenn das Mammut sich mindestens sechs Meter weit direkt auf eine Kreatur zubewegt und sie dann im selben Zug mit einem Zerfleischen-Angriff trifft, muss das Ziel einen SG-18-Stärkerettungswurf bestehen, oder es wird umgestoßen. Gegen ein liegendes Ziel kann das Mammut als Bonusaktion einen Stampfen-Angriff ausführen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Gore",
+        "text": "Melee Weapon Attack: +10 to hit, reach 10 ft., one target. Hit: 25 (4d8 + 7) piercing damage."
+      },
+      {
+        "name": "Stomp",
+        "text": "Melee Weapon Attack: +10 to hit, reach 5 ft., one prone creature. Hit: 29 (4d10 + 7) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Zerfleischen",
+        "text": "Nahkampfwaffenangriff: +10 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 25 (4W8+7) Stichschaden."
+      },
+      {
+        "name": "Stampfen",
+        "text": "Nahkampfwaffenangriff: +10 auf Treffer, Reichweite 1,5 m, eine liegende Kreatur. Treffer: 29 (4W10+7) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "huge",
+    "de": "Riesiges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Mammoth (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Mammoth (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mammoth (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

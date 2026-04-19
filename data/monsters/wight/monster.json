@@ -1,0 +1,398 @@
+{
+  "id": 308,
+  "slug": "wight",
+  "name": "Wight",
+  "nameDe": "Gruftschrecken",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium undead, neutral evil",
+    "de": "Mittelgroßer Untoter, neutral böse"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "14 (Studded Leather)",
+    "de": "14 (beschlagenes Leder)"
+  },
+  "hp": {
+    "en": "45 (6d8 + 18)",
+    "de": "45 (6W8+18)"
+  },
+  "str": 15,
+  "dex": 14,
+  "con": 16,
+  "int": 10,
+  "wis": 13,
+  "cha": 15,
+  "strMod": 2,
+  "dexMod": 2,
+  "conMod": 3,
+  "intMod": 0,
+  "wisMod": 1,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 13"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "the languages it knew in life"
+    ],
+    "de": [
+      "Die zu Lebzeiten bekannten Sprachen"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +4",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Sunlight Sensitivity",
+        "text": "While in sunlight, the wight has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+      }
+    ],
+    "de": [
+      {
+        "name": "Empfindlich gegenüber Sonnenlicht",
+        "text": "Im Sonnenlicht ist der Gruftschrecken bei Angriffswürfen sowie bei Weisheitswürfen (Wahrnehmung), die Sicht erfordern, im Nachteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The wight makes two longsword attacks or two longbow attacks. It can use its Life Drain in place of one longsword attack."
+      },
+      {
+        "name": "Life Drain",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 5 (1d6 + 2) necrotic damage. The target must succeed on a DC 13 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0.\nA humanoid slain by this attack rises 24 hours later as a zombie under the wight's control, unless the humanoid is restored to life or its body is destroyed. The wight can have no more than twelve zombies under its control at one time."
+      },
+      {
+        "name": "Longsword",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) slashing damage, or 7 (1d10 + 2) slashing damage if used with two hands."
+      },
+      {
+        "name": "Longbow",
+        "text": "Ranged Weapon Attack: +4 to hit, range 150/600 ft., one target. Hit: 6 (1d8 + 2) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Gruftschrecken führt zwei Langschwert- oder zwei Langbogenangriffe aus. Anstelle eines Langschwertangriffs kann er Lebensentzug einsetzen."
+      },
+      {
+        "name": "Langschwert",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W8+2) Hiebschaden oder 7 (1W10+2) Hiebschaden bei zweihändiger Führung."
+      },
+      {
+        "name": "Lebensentzug",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 5 (1W6+2) nekrotischer Schaden. Das Ziel muss einen SG-13-Konstitutionsrettungswurf bestehen, oder sein Trefferpunktemaximum wird um den Betrag des erlittenen Schadens verringert. Es bleibt verringert, bis das Ziel eine lange Rast beendet. Wenn das Trefferpunktemaximum durch diesen Effekt auf 0 sinkt, stirbt das Ziel. Humanoide, die durch diesen Angriff getötet werden, erheben sich 24 Stunden später als Zombies unter Kontrolle des Gruftschreckens, sofern sie nicht zuvor wiederbelebt oder ihre Leichen zerstört werden. Der Gruftschrecken kann höchstens zwölf Zombies zugleich unter seiner Kontrolle haben."
+      },
+      {
+        "name": "Langbogen",
+        "text": "Fernkampfwaffenangriff: +4 auf Treffer, Reichweite 45/180 m, ein Ziel. Treffer: 6 (1W8+2) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/56/315/315/636252726349692861.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "undead",
+    "de": "Untoter"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "WightDragonborn (1).webp",
+    "variant": "dragonborn"
+  },
+  "tokens": [
+    {
+      "file": "WightDragonborn (2).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "WightDragonborn (3).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "WightDwarfFemale (1).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "WightDwarfFemale (2).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "WightDwarfMale (1).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "WightDwarfMale (2).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "WightDwarfMale (3).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "WightElfFemale (1).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "WightElfFemale (2).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "WightElfFemale (3).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "WightElfFemale (4).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "WightElfFemale (5).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "WightElfFemale (6).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "WightElfMale (1).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "WightElfMale (2).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "WightElfMale (3).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "WightElfMale (4).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "WightElfMale (5).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "WightGnomeFemale (1).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "WightGnomeFemale (2).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "WightGnomeFemale (3).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "WightGnomeFemale (4).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "WightGnomeFemale (5).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "WightGnomeMale (1).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "WightGnomeMale (2).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "WightGnomeMale (3).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "WightGnomeMale (4).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "WightGnomeMale (5).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "WightHalfElfFemale (1).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "WightHalfElfFemale (2).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "WightHalfElfFemale (3).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "WightHalfElfMale (1).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "WightHalfElfMale (2).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "WightHalfElfMale (3).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "WightHalfElfMale (4).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "WightHalfElfMale (5).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "WightHalfElfMale (6).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "WightHalflingFemale (1).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "WightHalflingFemale (2).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "WightHalflingFemale (3).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "WightHalflingFemale (4).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "WightHalflingMale (1).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "WightHalflingMale (2).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "WightHalfOrcFemale (1).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "WightHalfOrcFemale (2).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "WightHalfOrcFemale (3).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "WightHalfOrcMale (1).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "WightHalfOrcMale (2).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "WightHalfOrcMale (3).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "WightHumanFemale (1).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "WightHumanFemale (2).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "WightHumanFemale (3).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "WightHumanFemale (4).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "WightHumanFemale (5).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "WightHumanMale (1).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "WightHumanMale (2).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "WightHumanMale (3).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "WightHumanMale (4).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "WightHumanMale (5).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "WightHumanMale (6).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "WightTieflingFemale (1).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "WightTieflingFemale (2).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "WightTieflingMale (1).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "WightTieflingMale (2).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "WightTieflingMale (3).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "WightTieflingMale (4).webp",
+      "variant": "tieflingMale"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

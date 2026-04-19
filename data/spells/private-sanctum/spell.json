@@ -1,0 +1,60 @@
+{
+  "id": 386,
+  "slug": "private-sanctum",
+  "name": "Private Sanctum",
+  "nameDe": "Privates Heiligtum",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "4th-level abjuration",
+    "de": "Stufe 4 Bannmagie"
+  },
+  "castingTime": {
+    "en": "10 minutes",
+    "de": "10 Minuten"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "24 hours",
+    "de": "24 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "A thin sheet of lead, a piece of opaque glass, a wad of cotton or cloth, and powdered chrysolite",
+      "de": "Ein dünnes Bleiblech, eine undurchsichtige Glasscherbe, ein Bausch Baumwolle oder Stoff und Chrysolith-Pulver"
+    },
+    "raw": {
+      "en": "V, S, M (A thin sheet of lead, a piece of opaque glass, a wad of cotton or cloth, and powdered chrysolite)",
+      "de": "V, G, M (Ein dünnes Bleiblech, eine undurchsichtige Glasscherbe, ein Bausch Baumwolle oder Stoff und Chrysolith-Pulver)"
+    }
+  },
+  "description": {
+    "en": "You make an area within range magically secure. The area is a cube that can be as small as 5 feet to as large as 100 feet on each side. The spell lasts for the duration or until you use an action to dismiss it. When you cast the spell, you decide what sort of security the spell provides, choosing any or all of the following properties: - Sound can't pass through the barrier at the edge of the warded area. - The barrier of the warded area appears dark and foggy, preventing vision (including darkvision) through it. - Sensors created by divination spells can't appear inside the protected area or pass through the barrier at its perimeter. - Creatures in the area can't be targeted by divination spells. - Nothing can teleport into or out of the warded area. - Planar travel is blocked within the warded area. Casting this spell on the same spot every day for a year makes this effect permanent.",
+    "de": "Du sicherst einen Bereich in Reichweite auf magische Weise. Dabei handelt es sich um einen Würfel mit einer Kantenlänge zwischen 1,5 und 30 Metern. Der Zauber bleibt für die Wirkungsdauer bestehen oder bis du ihn als Aktion beendest. Beim Wirken des Zaubers entscheidest du, welche Sicherheit er bietet. Du kannst beliebig viele der folgenden Eigenschaften auswählen: Wirkst du diesen Zauber ein Jahr lang jeden Tag am selben Ort, wird der Effekt dauerhaft. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 5. Grades oder höher nutzt, kannst du für jeden Grad über dem 4. die Größe des Würfels um 30 Meter erweitern. Somit könntest du mit einem Zauberplatz des 5. Grades einen Würfel mit 60 Metern Kantenlänge schützen."
+  },
+  "higherLevels": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 5. Grades oder höher nutzt, kannst du für jeden Grad über dem 4. die Größe des Würfels um 30 Meter erweitern. Somit könntest du mit einem Zauberplatz des 5. Grades einen Würfel mit 60 Metern Kantenlänge schützen.",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

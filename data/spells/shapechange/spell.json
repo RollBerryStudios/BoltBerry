@@ -1,0 +1,62 @@
+{
+  "id": 185,
+  "slug": "shapechange",
+  "name": "Shapechange",
+  "nameDe": "Gestaltwandel",
+  "level": {
+    "en": "9",
+    "de": "Grad 9"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "wizard"
+    ],
+    "de": [
+      "Druide",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "9th-level transmutation",
+    "de": "Stufe 9 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a jade circlet worth at least 1,500 gp, which you must place on your head before you cast the spell",
+      "de": "einen Jade-Ring im Wert von mindestens 1.500 Goldstücken, den du dir auf den Kopf setzen musst, bevor du den Zauber sprichst"
+    },
+    "raw": {
+      "en": "V, S, M (a jade circlet worth at least 1,500 gp, which you must place on your head before you cast the spell)",
+      "de": "V, G, M (einen Jade-Ring im Wert von mindestens 1.500 Goldstücken, den du dir auf den Kopf setzen musst, bevor du den Zauber sprichst)"
+    }
+  },
+  "description": {
+    "en": "You assume the form of a different creature for the duration. The new form can be of any creature with a challenge rating equal to your level or lower. The creature can't be a construct or an undead, and you must have seen the sort of creature at least once. You transform into an average example of that creature, one without any class levels or the Spellcasting trait. Your game statistics are replaced by the statistics of the chosen creature, though you retain your alignment and Intelligence, Wisdom, and Charisma scores. You also retain all of your skill and saving throw proficiencies, in addition to gaining those of the creature. If the creature has the same proficiency as you and the bonus listed in its statistics is higher than yours, use the creature's bonus in place of yours. You can't use any legendary actions or lair actions of the new form. You assume the hit points and Hit Dice of the new form. When you revert to your normal form, you return to the number of hit points you had before you transformed. If you revert as a result of dropping to 0 hit points, any excess damage carries over to your normal form. As long as the excess damage doesn't reduce your normal form to 0 hit points, you aren't knocked unconscious. You retain the benefit of any features from your class, race, or other source and can use them, provided that your new form is physically capable of doing so. You can't use any special senses you have (for example, darkvision) unless your new form also has that sense. You can only speak if the creature can normally speak. When you transform, you choose whether your equipment falls to the ground, merges into the new form, or is worn by it. Worn equipment functions as normal. The GM determines whether it is practical for the new form to wear a piece of equipment, based on the creature's shape and size. Your equipment doesn't change shape or size to match the new form, and any equipment that the new form can't wear must either fall to the ground or merge into your new form. Equipment that merges has no effect in that state. During this spell's duration, you can use your action to assume a different form following the same restrictions and rules for the original form, with one exception: if your new form has more hit points than your current one, your hit points remain at their current value.",
+    "de": "Für die Wirkungsdauer nimmst du die Gestalt einer anderen Kreatur an. Dabei kann es sich um eine beliebige Kreatur handeln, deren Herausforderungsgrad maximal deiner Stufe entspricht. Es darf sich weder um ein Konstrukt noch um einen Untoten handeln. Zudem musst du diese Art von Kreatur mindestens einmal gesehen haben. Du verwandelst dich ein durchschnittliches Exemplar dieser Kreatur, ohne Klassenstufen oder das Merkmal 'Zauberwirken'. Deine Spielwerte werden durch die Werte der gewählten Kreatur ersetzt, du behältst jedoch deine Gesinnung, sowie deine Intelligenz-, Weisheits- und Charismawerte. Du bist weiterhin in deinen Fertigkeiten und Rettungswürfen geübt und darüber hinaus in denen der Kreatur. Sollte es zu Überschneidungen kommen und die Kreatur einen höheren Übungsbonus aufweisen, benutzt du diesen statt deinem. Du kannst keine legendären Aktionen und Hortaktionen der neuen Gestalt ausführen. Du übernimmst die Trefferpunkte und Trefferwürfel der neuen Gestalt. Nimmst du wieder deine normale Gestalt an, hast du so viele Trefferpunkte wie vor der Verwandlung. Solltest du dich zurückverwandeln, weil du auf 0 Trefferpunkte sinkst, wird der überschüssige Schaden auf deine normale Gestalt übertragen. Solange der überschüssige Schaden dich in deiner normalen Gestalt nicht auf 0 Trefferpunkte sinken lässt, wirst du nicht bewusstlos. Du behältst alle Vorzüge deiner Klasse, deines Volkes oder anderer Quellen und kannst sie anwenden, falls deine neue Gestalt körperlich dazu in der Lage ist. Spezialsinne wie Dunkelsicht kannst du aber nur nutzen, wenn deine neue Gestalt ebenfalls darüber verfügt. Du kannst nur sprechen, wenn die Kreatur normalerweise ebenfalls sprechen kann. Bei der Verwandlung entscheidest du, ob deine Ausrüstung zu Boden fällt, mit deiner neuen Gestalt verschmilzt oder von ihr getragen wird. Getragene Ausrüstung kann normal verwendet werden. Der SL entscheidet abhängig von der Größe und Gestalt der Kreatur, ob sie eine bestimmte Ausrüstung tragen kann. Deine Ausrüstung verändert weder Größe noch Form, um sich an die neue Gestalt anzupassen. Ausrüstung, die in der neuen Gestalt nicht getragen werden kann, muss entweder zu Boden fallen oder damit verschmelzen. Verschmolzene Ausrüstung hat in dieser Form keinen Effekt. Während der Wirkungsdauer kannst du als Aktion eine neue Gestalt annehmen, wobei dieselben Einschränkungen und Regeln der ursprünglichen Gestalt gelten, mit einer Ausnahme: Wenn die neue Gestalt mehr Trefferpunkte als deine aktuelle Gestalt besitzt, bleiben deine Trefferpunkte bei ihrem aktuellen Wert."
+  },
+  "image": "shapechange",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,217 @@
+{
+  "id": 224,
+  "slug": "phase-spider",
+  "name": "Phase Spider",
+  "nameDe": "Phasenspinne",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, unaligned",
+    "de": "Große Monstrosität, ohne Gesinnung"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "32 (5d10 + 5)",
+    "de": "32 (5W10+5)"
+  },
+  "str": 15,
+  "dex": 15,
+  "con": 12,
+  "int": 6,
+  "wis": 10,
+  "cha": 6,
+  "strMod": 2,
+  "dexMod": 2,
+  "conMod": 1,
+  "intMod": -2,
+  "wisMod": 0,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "climb": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +6"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Ethereal Jaunt",
+        "text": "As a bonus action, the spider can magically shift from the Material Plane to the Ethereal Plane, or vice versa."
+      },
+      {
+        "name": "Spider Climb",
+        "text": "The spider can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+      },
+      {
+        "name": "Web Walker",
+        "text": "The spider ignores movement restrictions caused by webbing."
+      }
+    ],
+    "de": [
+      {
+        "name": "Ätherische Bewegung",
+        "text": "Als Bonusaktion kann die Spinne sich von der materiellen Ebene aus auf die Ätherebene oder umgekehrt begeben."
+      },
+      {
+        "name": "Netzwandler",
+        "text": "Die Spinne ignoriert Bewegungseinschränkungen, die durch Netze verursacht werden."
+      },
+      {
+        "name": "Spinnenklettern",
+        "text": "Die Spinne kann an schwierigen Oberflächen klettern, auch kopfüber an der Decke, ohne Attributswürfe ausführen zu müssen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 7 (1d10 + 2) piercing damage, and the target must make a DC 11 Constitution saving throw, taking 18 (4d8) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 7 (1W10+2) Stichschaden, und das Ziel muss einen SG-11-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet es 18 (4W8) Giftschaden, anderenfalls die Hälfte. Wenn die Trefferpunkte des Ziels durch den Giftschaden auf 0 sinken, ist das Ziel stabil, aber eine Stunde lang vergiftet sowie gelähmt, selbst wenn es Trefferpunkte zurückgewinnt."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/319/315/315/636252772538300448.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "PhaseSpiderForest (1).webp",
+    "variant": "forest"
+  },
+  "tokens": [
+    {
+      "file": "PhaseSpiderForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PhaseSpiderForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PhaseSpiderForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PhaseSpiderForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PhaseSpiderForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PhaseSpiderForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PhaseSpiderUrban (1).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "PhaseSpiderUrban (10).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "PhaseSpiderUrban (11).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "PhaseSpiderUrban (12).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "PhaseSpiderUrban (13).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "PhaseSpiderUrban (14).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "PhaseSpiderUrban (15).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "PhaseSpiderUrban (16).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "PhaseSpiderUrban (2).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "PhaseSpiderUrban (3).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "PhaseSpiderUrban (4).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "PhaseSpiderUrban (5).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "PhaseSpiderUrban (6).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "PhaseSpiderUrban (7).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "PhaseSpiderUrban (8).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "PhaseSpiderUrban (9).webp",
+      "variant": "urban"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

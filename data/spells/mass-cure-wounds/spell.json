@@ -1,0 +1,64 @@
+{
+  "id": 290,
+  "slug": "mass-cure-wounds",
+  "name": "Mass Cure Wounds",
+  "nameDe": "Massen-Wunden Heilen",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "druid"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "5th-level conjuration",
+    "de": "Stufe 5 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "A wave of healing energy washes out from a point of your choice within range. Choose up to six creatures in a 30-foot-radius sphere centered on that point. Each target regains hit points equal to 3d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.",
+    "de": "Eine Woge aus heilender Energie geht von einem Punkt deiner Wahl in Reichweite aus. Wähle bis zu sechs Kreaturen innerhalb einer Sphäre mit einem Radius von neun Metern aus, die um den Zielort zentriert ist. Jedes Ziel gewinnt Trefferpunkte in Höhe von 3W8 + deinem Zauberwirken-Attributsmodifikator zurück. Dieser Zauber wirkt nicht auf Untote oder Konstrukte. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, steigt die Heilung für jeden Grad über dem 5. um 1W8."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 6th level or higher, the healing increases by 1d8 for each slot level above 5th.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, steigt die Heilung für jeden Grad über dem 5. um 1W8."
+  },
+  "image": "heal",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

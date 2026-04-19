@@ -1,0 +1,60 @@
+{
+  "id": 96,
+  "slug": "warding-bond",
+  "name": "Warding Bond",
+  "nameDe": "Schützendes Band",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "2nd-level abjuration",
+    "de": "Stufe 2 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a pair of platinum rings worth at least 50 gp each, which you and the target must wear for the duration",
+      "de": "ein Paar Platinringe im Wert von jeweils mindestens 50 Goldstücken, die du und die Zielperson für die Dauer des Spiels tragen müssen"
+    },
+    "raw": {
+      "en": "V, S, M (a pair of platinum rings worth at least 50 gp each, which you and the target must wear for the duration)",
+      "de": "V, G, M (ein Paar Platinringe im Wert von jeweils mindestens 50 Goldstücken, die du und die Zielperson für die Dauer des Spiels tragen müssen)"
+    }
+  },
+  "description": {
+    "en": "This spell wards a willing creature you touch and creates a mystic connection between you and the target until the spell ends. While the target is within 60 feet of you, it gains a +1 bonus to AC and saving throws, and it has resistance to all damage. Also, each time it takes damage, you take the same amount of damage. The spell ends if you drop to 0 hit points or if you and the target become separated by more than 60 feet. It also ends if the spell is cast again on either of the connected creatures. You can also dismiss the spell as an action.",
+    "de": "Dieser Zauber schützt eine bereitwillige Kreatur, die du berührst, und erschafft für die Wirkungsdauer eine magische Verbindung zwischen dir und dem Ziel. Solange sich das Ziel im Abstand von bis zu 18 Metern von dir befindet, erhält es einen Bonus von +1 auf seine RK und auf Rettungswürfe und ist gegen alle Schadensarten resistent. Allerdings erleidest du jedes Mal, wenn dem Ziel Schaden zugefügt wird, die gleiche Menge an Schaden. Der Zauber endet, falls deine Trefferpunkte auf 0 sinken oder du und das Ziel sich mehr als 18 Meter voneinander entfernt. Der Zauber endet auch, wenn er erneut auf einen der beiden Beteiligten gewirkt wird. Du kannst den Zauber als Aktion aufheben."
+  },
+  "image": "abjuration",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

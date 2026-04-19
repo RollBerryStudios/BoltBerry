@@ -1,0 +1,62 @@
+{
+  "id": 257,
+  "slug": "flesh-to-stone",
+  "name": "Flesh to Stone",
+  "nameDe": "Fleisch zu Stein",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "6th-level transmutation",
+    "de": "Stufe 6 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a pinch of lime, water, and earth",
+      "de": "eine Prise Kalk, Wasser und Erde"
+    },
+    "raw": {
+      "en": "V, S, M (a pinch of lime, water, and earth)",
+      "de": "V, G, M (eine Prise Kalk, Wasser und Erde)"
+    }
+  },
+  "description": {
+    "en": "You attempt to turn one creature that you can see within range into stone. If the target's body is made of flesh, the creature must make a constitution saving throw. On a failed save, it is restrained as its flesh begins to harden. On a successful save, the creature isn't affected. A creature restrained by this spell must make another constitution saving throw at the end of each of its turns. If it successfully saves against this spell three times, the spell ends. If it fails its saves three times, it is turned to stone and subjected to the petrified condition for the duration. The successes and failures don't need to be consecutive; keep track of both until the target collects three of a kind. If the creature is physically broken while petrified, it suffers from similar deformities if it reverts to its original state. If you maintain your concentration on this spell for the entire possible duration, the creature is turned to stone until the effect is removed.",
+    "de": "Du versuchst, eine Kreatur in Reichweite, die du sehen kannst, in Stein zu verwandeln. Besteht der Körper des Ziels aus Fleisch, muss die Kreatur einen Konstitutionsrettungswurf ausführen. Scheitert der Wurf, ist sie festgesetzt und ihr Fleisch verhärtet sich. Bei einem erfolgreichen Rettungswurf ist die Kreatur nicht betroffen. Eine von diesem Zauber festgesetzte Kreatur muss am Ende jedes ihrer Züge einen weiteren Konstitutionsrettungswurf ausführen. Bei drei erfolgreichen Rettungswürfen endet dieser Zauber. Scheitert der Wurf dreimal, wird sie zu Stein und leidet für die Wirkungsdauer unter dem Versteinert-Zustand. Die erfolgreichen und gescheiterten Würfe müssen nicht unmittelbar aufeinanderfolgen. Notiere dir einfach beide, bis das Ziel drei der gleichen hat. Wird die Kreatur physisch zerbrochen, während sie versteinert ist, leidet sie unter ähnlichen Deformationen, wenn sie sich zurückverwandelt. Konzentrierst du dich für die gesamte Wirkungsdauer auf diesen Zauber, wird die Kreatur in Stein verwandelt, bis der Effekt aufgehoben wird."
+  },
+  "image": "flesh-to-stone",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

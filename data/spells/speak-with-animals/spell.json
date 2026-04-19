@@ -1,0 +1,60 @@
+{
+  "id": 76,
+  "slug": "speak-with-animals",
+  "name": "Speak with Animals",
+  "nameDe": "Mit Tieren sprechen",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "druid",
+      "ranger"
+    ],
+    "de": [
+      "Barde",
+      "Druide",
+      "Waldläufer"
+    ]
+  },
+  "type": {
+    "en": "1st-level divination (ritual)",
+    "de": "Stufe 1 Erkenntnismagie (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "10 minutes",
+    "de": "10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You gain the ability to comprehend and verbally communicate with beasts for the duration. The knowledge and awareness of many beasts is limited by their intelligence, but at a minimum, beasts can give you information about nearby locations and monsters, including whatever they can perceive or have perceived within the past day. You might be able to persuade a beast to perform a small favor for you, at the GM's discretion.",
+    "de": "Für die Wirkungsdauer kannst du Tiere verstehen und verbal mit ihnen kommunizieren. Das Wissen und die Wahrnehmung vieler Tiere wird durch ihre Intelligenz eingeschränkt. Sie sind jedoch zumindest in der Lage, Informationen über nahe Orte und Monster mitzuteilen - sowie über Ereignisse, die sie wahrnehmen können oder innerhalb des letzten Tages erlebt haben. Nach Ermessen des SL kannst du ein Tier überreden, dir einen kleinen Gefallen zu erweisen."
+  },
+  "image": "animal-friendship",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

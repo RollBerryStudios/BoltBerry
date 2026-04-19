@@ -1,0 +1,56 @@
+{
+  "id": 273,
+  "slug": "harm",
+  "name": "Harm",
+  "nameDe": "Leid",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Necromancy",
+    "de": "Nekromantie"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "6th-level necromancy",
+    "de": "Stufe 6 Nekromantie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You unleash a virulent disease on a creature that you can see within range. The target must make a constitution saving throw. On a failed save, it takes 14d6 necrotic damage, or half as much damage on a successful save. The damage can't reduce the target's hit points below 1. If the target fails the saving throw, its hit point maximum is reduced for 1 hour by an amount equal to the necrotic damage it took. Any effect that removes a disease allows a creature's hit point maximum to return to normal before that time passes.",
+    "de": "Du entfesselst eine infektiöse Krankheit bei einer Kreatur in Reichweite, die du sehen kannst. Das Ziel muss einen Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet das Ziel 14W6 nekrotischen Schaden, anderenfalls die Hälfte. Der Schaden kann die Trefferpunkte des Ziels nicht unter 1 senken. Scheitert der Wurf, ist das Trefferpunktemaximum des Ziels eine Stunde lang um den Betrag des erlittenen nekrotischen Schadens verringert. Effekte, die Krankheiten heilen, stellen das Trefferpunktemaximum der Kreatur vor Ablauf dieser Zeit wieder her."
+  },
+  "image": "contagion",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

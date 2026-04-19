@@ -1,0 +1,242 @@
+{
+  "id": 304,
+  "slug": "wererat",
+  "name": "Wererat",
+  "nameDe": "Werratte",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, lawful evil",
+    "de": "Mittelgroßer Humanoid, rechtschaffen böse"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "33 (6d8 + 6)",
+    "de": "33 (6W8+6)"
+  },
+  "str": 10,
+  "dex": 15,
+  "con": 12,
+  "int": 11,
+  "wis": 10,
+  "cha": 8,
+  "strMod": 0,
+  "dexMod": 2,
+  "conMod": 1,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "Passive Perception 12"
+    ],
+    "de": [
+      "Dunkelsicht 18 m (nur in Rattengestalt)",
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common (can't speak in rat form)"
+    ],
+    "de": [
+      "Gemeinsprache (kann in Rattengestalt nicht sprechen)"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +4",
+    "Wahrnehmung +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Shapechanger",
+        "text": "The wererat can use its action to polymorph into a rat-humanoid hybrid or into a giant rat, or back into its true form, which is humanoid. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+      },
+      {
+        "name": "Keen Smell",
+        "text": "The wererat has advantage on Wisdom (Perception) checks that rely on smell."
+      }
+    ],
+    "de": [
+      {
+        "name": "Gestaltwandler",
+        "text": "Die Werratte kann ihre Aktion verwenden, um sich in eine hybride Gestalt aus Ratte und Humanoide oder eine Riesenratte zu verwandeln - oder um wieder ihre wahre, humanoide Gestalt anzunehmen. Ihre Spielwerte sind abgesehen von der Größe in beiden Gestalten gleich. Ausrüstung, die sie trägt oder hält, wird nicht verwandelt. Wenn sie stirbt, nimmt sie ihre wahre Gestalt an."
+      },
+      {
+        "name": "Scharfer Geruchssinn",
+        "text": "Die Werratte ist bei Weisheitswürfen (Wahrnehmung), die auf Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The wererat makes two attacks, only one of which can be a bite."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) piercing damage. If the target is a humanoid, it must succeed on a DC 11 Constitution saving throw or be cursed with wererat lycanthropy."
+      },
+      {
+        "name": "Shortsword",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      },
+      {
+        "name": "Hand Crossbow",
+        "text": "Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff (nur humanoide oder hybride Gestalt)",
+        "text": "Die Werratte führt zwei Angriffe aus, von denen nur einer ein Biss sein darf."
+      },
+      {
+        "name": "Biss (nur Ratten- oder hybride Gestalt)",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 4 (1W4+2) Stichschaden. Wenn das Ziel ein Humanoide ist, muss es einen SG-11-Konstitutionsrettungswurf bestehen, um nicht mit Werratten-Lykanthropie verflucht zu werden."
+      },
+      {
+        "name": "Kurzschwert (nur humanoide oder hybride Gestalt)",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden."
+      },
+      {
+        "name": "Handarmbrust (nur humanoide oder hybride Gestalt)",
+        "text": "Fernkampfwaffenangriff: +4 auf Treffer, Reichweite 9/36 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/78/1000/1000/636252735121410517.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (Mensch"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "Gestaltwandler), rechtschaffen böse"
+  },
+  "token": {
+    "file": "Wererat (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Wererat (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wererat (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

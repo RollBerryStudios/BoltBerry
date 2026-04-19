@@ -1,0 +1,213 @@
+{
+  "id": 154,
+  "slug": "gray-ooze",
+  "name": "Gray Ooze",
+  "nameDe": "Grauschlick",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium ooze, unaligned",
+    "de": "Mittelgroßer Schleim, ohne Gesinnung"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "8",
+    "de": "8"
+  },
+  "hp": {
+    "en": "22 (3d8 + 9)",
+    "de": "22 (3W8+9)"
+  },
+  "str": 12,
+  "dex": 6,
+  "con": 16,
+  "int": 1,
+  "wis": 6,
+  "cha": 2,
+  "strMod": 1,
+  "dexMod": -2,
+  "conMod": 3,
+  "intMod": -5,
+  "wisMod": -2,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "climb": {
+      "en": 10,
+      "de": 3
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 60 ft. (blind beyond this radius)",
+      "passive perception 8"
+    ],
+    "de": [
+      "Blindsicht 18 m (blind außerhalb des Radius)",
+      "Passive Wahrnehmung 8"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Amorphous",
+        "text": "The ooze can move through a space as narrow as 1 inch wide without squeezing."
+      },
+      {
+        "name": "Corrode Metal",
+        "text": "Any nonmagical weapon made of metal that hits the ooze corrodes. After dealing damage, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Nonmagical ammunition made of metal that hits the ooze is destroyed after dealing damage.\nThe ooze can eat through 2-inch-thick, nonmagical metal in 1 round."
+      },
+      {
+        "name": "False Appearance",
+        "text": "While the ooze remains motionless, it is indistinguishable from an oily pool or wet rock."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amorph",
+        "text": "Der Schlick kann sich durch enge Bereiche mit einer Breite von nur 2,5 Zentimetern bewegen, ohne sich quetschen zu müssen."
+      },
+      {
+        "name": "Falsches Erscheinungsbild",
+        "text": "Solange der Schlick sich nicht bewegt, ist er nicht von einer öligen Pfütze oder einem nassen Felsblock zu unterscheiden."
+      },
+      {
+        "name": "Metall korrodieren",
+        "text": "Jede nichtmagische Waffe aus Metall, die den Schlick trifft, korrodiert. Wenn die Waffe Schaden bewirkt hat, erhält sie einen permanenten und kumulativen Malus von -1 auf Schadenswürfe. Sinkt ihr Malus auf -5, wird die Waffe zerstört. Nichtmagische Munition aus Metall, die den Schlick trifft, wird zerstört, nachdem sie Schaden bewirkt hat. Der Schlick kann sich in einer Runde durch fünf Zentimeter starkes nichtmagisches Metall fressen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Pseudopod",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) bludgeoning damage plus 7 (2d6) acid damage, and if the target is wearing nonmagical metal armor, its armor is partly corroded and takes a permanent and cumulative -1 penalty to the AC it offers. The armor is destroyed if the penalty reduces its AC to 10."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scheinfuß",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 4 (1W6+1) Wuchtschaden plus 7 (2W6) Säureschaden, und wenn das Ziel eine nichtmagische Metallrüstung trägt, verrostet diese teilweise und erleidet einen permanenten und kumulativen Malus von -1 auf die RK, die sie bietet. Die Rüstung wird zerstört, wenn der Malus ihre RK auf 10 verringert."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/658/ooze.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "ooze",
+    "de": "Schlick"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GrayOozeDissolving (1).webp",
+    "variant": "dissolving"
+  },
+  "tokens": [
+    {
+      "file": "GrayOozeDissolving (2).webp",
+      "variant": "dissolving"
+    },
+    {
+      "file": "GrayOozeDissolving (3).webp",
+      "variant": "dissolving"
+    },
+    {
+      "file": "GrayOozeDissolving (4).webp",
+      "variant": "dissolving"
+    },
+    {
+      "file": "GrayOozeHidden (1).webp",
+      "variant": "hidden"
+    },
+    {
+      "file": "GrayOozeHidden (2).webp",
+      "variant": "hidden"
+    },
+    {
+      "file": "GrayOozeHidden (3).webp",
+      "variant": "hidden"
+    },
+    {
+      "file": "GrayOozeHidden (4).webp",
+      "variant": "hidden"
+    },
+    {
+      "file": "GrayOozeHidden (5).webp",
+      "variant": "hidden"
+    },
+    {
+      "file": "GrayOozeHidden (6).webp",
+      "variant": "hidden"
+    },
+    {
+      "file": "GrayOozeHidden (7).webp",
+      "variant": "hidden"
+    },
+    {
+      "file": "GrayOozeHidden (8).webp",
+      "variant": "hidden"
+    },
+    {
+      "file": "GrayOozeTentacles (1).webp",
+      "variant": "tentacles"
+    },
+    {
+      "file": "GrayOozeTentacles (10).webp",
+      "variant": "tentacles"
+    },
+    {
+      "file": "GrayOozeTentacles (2).webp",
+      "variant": "tentacles"
+    },
+    {
+      "file": "GrayOozeTentacles (3).webp",
+      "variant": "tentacles"
+    },
+    {
+      "file": "GrayOozeTentacles (4).webp",
+      "variant": "tentacles"
+    },
+    {
+      "file": "GrayOozeTentacles (5).webp",
+      "variant": "tentacles"
+    },
+    {
+      "file": "GrayOozeTentacles (6).webp",
+      "variant": "tentacles"
+    },
+    {
+      "file": "GrayOozeTentacles (7).webp",
+      "variant": "tentacles"
+    },
+    {
+      "file": "GrayOozeTentacles (8).webp",
+      "variant": "tentacles"
+    },
+    {
+      "file": "GrayOozeTentacles (9).webp",
+      "variant": "tentacles"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

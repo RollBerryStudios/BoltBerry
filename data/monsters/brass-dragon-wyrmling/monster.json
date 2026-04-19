@@ -1,0 +1,200 @@
+{
+  "id": 56,
+  "slug": "brass-dragon-wyrmling",
+  "name": "Brass Dragon Wyrmling",
+  "nameDe": "Messingdrachennestling",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium dragon, chaotic good",
+    "de": "Mittelgroßer Drache, chaotisch gut"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "16 (Natural Armor)",
+    "de": "16 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "16 (3d8 + 3)",
+    "de": "16 (3W8+3)"
+  },
+  "str": 15,
+  "dex": 10,
+  "con": 13,
+  "int": 10,
+  "wis": 11,
+  "cha": 13,
+  "strMod": 2,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    },
+    "burrow": {
+      "en": 15,
+      "de": 4
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 10 ft.",
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Blindsicht 3 m",
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Draconic"
+    ],
+    "de": [
+      "Drakonisch"
+    ]
+  },
+  "savingThrows": [
+    "Ges +2",
+    "Kon +3",
+    "Wei +2",
+    "Cha +3"
+  ],
+  "skills": [
+    "Heimlichkeit +2",
+    "Wahrnehmung +4"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (1d10 + 2) piercing damage."
+      },
+      {
+        "name": "Breath Weapons (Recharge 5-6)",
+        "text": "The dragon uses one of the following breath weapons:"
+      },
+      {
+        "name": "Fire Breath",
+        "text": "The dragon exhales fire in an 20-foot line that is 5 feet wide. Each creature in that line must make a DC 11 Dexterity saving throw, taking 14 (4d6) fire damage on a failed save, or half as much damage on a successful one."
+      },
+      {
+        "name": "Sleep Breath",
+        "text": "The dragon exhales sleep gas in a 15-foot cone. Each creature in that area must succeed on a DC 11 Constitution saving throw or fall unconscious for 1 minute. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (1W10+2) Stichschaden."
+      },
+      {
+        "name": "Odemwaffen (Aufladung 5–6)",
+        "text": "Der Drache setzt eine der folgenden Odemwaffen ein:"
+      },
+      {
+        "name": "Feuerodem",
+        "text": "Der Drache atmet Feuer in einer sechs Meter langen, 1,5 Meter breiten Linie aus. Jede Kreatur in dieser Linie muss einen SG-11-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 14 (4W6) Feuerschaden, anderenfalls die Hälfte."
+      },
+      {
+        "name": "Schlafodem",
+        "text": "Der Drache atmet Schlafgas in einem Kegel von 4,5 Metern aus. Jede Kreatur in diesem Bereich muss einen SG-11-Konstitutionsrettungswurf bestehen, oder sie ist eine Minute lang bewusstlos. Dieser Effekt endet bei einer Kreatur, wenn sie Schaden erleidet oder jemand sie mit einer Aktion aufweckt."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/215/315/315/636252764963208954.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "dragon",
+    "de": "Drache"
+  },
+  "alignment": {
+    "en": "chaotic good",
+    "de": "chaotisch gut"
+  },
+  "token": {
+    "file": "BrassDragonWyrmling (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "BrassDragonWyrmling (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "BrassDragonWyrmling (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "BrassDragonWyrmling (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "BrassDragonWyrmling (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "BrassDragonWyrmling (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "BrassDragonWyrmling (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "BrassDragonWyrmling (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "BrassDragonWyrmling (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "BrassDragonWyrmling (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "BrassDragonWyrmling (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "BrassDragonWyrmling (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "BrassDragonWyrmling (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "BrassDragonWyrmling (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "BrassDragonWyrmling (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "BrassDragonWyrmling (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "BrassDragonWyrmling (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

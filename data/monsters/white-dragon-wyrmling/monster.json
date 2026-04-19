@@ -1,0 +1,216 @@
+{
+  "id": 307,
+  "slug": "white-dragon-wyrmling",
+  "name": "White Dragon Wyrmling",
+  "nameDe": "Weißer Drachennestling",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium dragon, chaotic evil",
+    "de": "Mittelgroßer Drache, chaotisch böse"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "16 (Natural Armor)",
+    "de": "16 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "32 (5d8 + 10)",
+    "de": "32 (5W8+10)"
+  },
+  "str": 14,
+  "dex": 10,
+  "con": 14,
+  "int": 5,
+  "wis": 10,
+  "cha": 11,
+  "strMod": 2,
+  "dexMod": 0,
+  "conMod": 2,
+  "intMod": -3,
+  "wisMod": 0,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "swim": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    },
+    "burrow": {
+      "en": 15,
+      "de": 4
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 10 ft.",
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Blindsicht 3 m",
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Draconic"
+    ],
+    "de": [
+      "Drakonisch"
+    ]
+  },
+  "savingThrows": [
+    "Ges +2",
+    "Kon +4",
+    "Wei +2",
+    "Cha +2"
+  ],
+  "skills": [
+    "Heimlichkeit +2",
+    "Wahrnehmung +4"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (1d10 + 2) piercing damage plus 2 (1d4) cold damage."
+      },
+      {
+        "name": "Cold Breath",
+        "text": "The dragon exhales an icy blast of hail in a 15-foot cone. Each creature in that area must make a DC 12 Constitution saving throw, taking 22 (5d8) cold damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (1W10+2) Stichschaden plus 2 (1W4) Kälteschaden."
+      },
+      {
+        "name": "Kälteodem (Aufladung 5–6)",
+        "text": "Der Drache atmet einen eisigen Stoß in einem Kegel von 4,5 Metern aus. Jede Kreatur in diesem Bereich muss einen SG-12-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 22 (5W8) Kälteschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/415/1000/1000/636252789083357808.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "dragon",
+    "de": "Drache"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "WhiteDragonWyrmling (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "WhiteDragonWyrmling (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "WhiteDragonWyrmling (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

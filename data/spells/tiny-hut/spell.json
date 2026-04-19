@@ -1,0 +1,61 @@
+{
+  "id": 395,
+  "slug": "tiny-hut",
+  "name": "Tiny Hut",
+  "nameDe": "Winzige Hütte",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard",
+      "bard"
+    ],
+    "de": [
+      "Magier",
+      "Barde"
+    ]
+  },
+  "type": {
+    "en": "3rd-level evocation (ritual)",
+    "de": "Stufe 3 Hervorrufung (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "Self (10-foot radius hemisphere)",
+    "de": "Selbst (Halbkugel mit 3 Meter Radius)"
+  },
+  "duration": {
+    "en": "8 hours",
+    "de": "8 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "A small crystal bead",
+      "de": "Eine kleine Kristallperle"
+    },
+    "raw": {
+      "en": "V S M (A small crystal bead)",
+      "de": "V G M (Eine kleine Kristallperle)"
+    }
+  },
+  "description": {
+    "en": "A 10-foot-radius immobile dome of force springs into existence around and above you and remains stationary for the duration. The spell ends if you leave its area. Nine creatures of Medium size or smaller can fit inside the dome with you. The spell fails if its area includes a larger creature or more than nine creatures. Creatures and objects within the dome when you cast this spell can move through it freely. All other creatures and objects are barred from passing through it. Spells and other magical effects can't extend through the dome or be cast through it. The atmosphere inside the space is comfortable and dry, regardless of the weather outside. Until the spell ends, you can command the interior to become dimly lit or dark. The dome is opaque from the outside, of any color you choose, but it is transparent from the inside.",
+    "de": "Eine unbewegliche Kuppel aus Energie mit einem Radius von drei Metern entsteht um dich herum und bleibt für die Wirkungsdauer bestehen. Der Zauber endet, wenn du den Bereich verlässt. Außer dir passen in die Kuppel bis zu neun maximal mittelgroße Kreaturen. Der Zauber schlägt fehl, wenn der Bereich eine größere Kreatur oder mehr als neun Kreaturen enthält. Kreaturen und Gegenstände, die sich beim Wirken des Zaubers in der Kuppel aufhalten, können sich frei durch sie bewegen. Allen anderen Kreaturen und Gegenständen ist der Zugang verwehrt. Zauber und andere magische Effekte können nicht in die Kuppel eindringen oder durch sie hindurch gewirkt werden. Die Atmosphäre innerhalb des Bereichs ist angenehm und trocken, ungeachtet des Wetters außerhalb. Bis der Zauber endet, kannst du das Innere in dämmriges Licht tauchen oder verdunkeln. Die Kuppel ist von außen undurchsichtig und erscheint in einer Farbe deiner Wahl. Von innen ist sie durchsichtig."
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

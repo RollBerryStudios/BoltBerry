@@ -1,0 +1,26 @@
+{
+  "id": 260,
+  "slug": "ring-of-water-walking",
+  "name": "Ring of Water Walking",
+  "nameDe": "Ring des Wasserlaufens",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 150000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Ring, uncommon While wearing this ring, you can stand on and move across any liquid surface as if it were solid ground.",
+    "de": "Während du diesen Ring trägst, kannst du auf flüssigen Oberflächen stehen und gehen, als wären sie fester Boden."
+  },
+  "image": "ring",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

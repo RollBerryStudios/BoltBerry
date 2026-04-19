@@ -1,0 +1,222 @@
+{
+  "id": 300,
+  "slug": "water-elemental",
+  "name": "Water Elemental",
+  "nameDe": "Wasserelementar",
+  "source": "SRD",
+  "meta": {
+    "en": "Large elemental, neutral",
+    "de": "Großes Elementar, neutral"
+  },
+  "challenge": "5",
+  "xp": 1800,
+  "ac": {
+    "en": "14 (Natural Armor)",
+    "de": "14 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "114 (12d10 + 48)",
+    "de": "114 (12W10+48)"
+  },
+  "str": 18,
+  "dex": 14,
+  "con": 18,
+  "int": 5,
+  "wis": 10,
+  "cha": 8,
+  "strMod": 4,
+  "dexMod": 2,
+  "conMod": 4,
+  "intMod": -3,
+  "wisMod": 0,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "swim": {
+      "en": 90,
+      "de": 27
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Aquan"
+    ],
+    "de": [
+      "Aqual"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Water Form",
+        "text": "The elemental can enter a hostile creature's space and stop there. It can move through a space as narrow as 1 inch wide without squeezing."
+      },
+      {
+        "name": "Freeze",
+        "text": "If the elemental takes cold damage, it partially freezes; its speed is reduced by 20 ft. until the end of its next turn."
+      }
+    ],
+    "de": [
+      {
+        "name": "Einfrieren",
+        "text": "Wenn der Elementar Kälteschaden erleidet, gefriert er teilweise. Seine Bewegungsrate ist bis zum Ende seines nächsten Zugs um sechs Meter verringert."
+      },
+      {
+        "name": "Wassergestalt",
+        "text": "Der Elementar kann in den Bereich einer feindlich gesinnten Kreatur eindringen und dort stoppen. Er kann sich durch einen engen Bereich mit einer Breite von nur 2,5 Zentimetern bewegen, ohne sich quetschen zu müssen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The elemental makes two slam attacks."
+      },
+      {
+        "name": "Slam",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) bludgeoning damage."
+      },
+      {
+        "name": "Whelm",
+        "text": "Each creature in the elemental's space must make a DC 15 Strength saving throw. On a failure, a target takes 13 (2d8 + 4) bludgeoning damage. If it is Large or smaller, it is also grappled (escape DC 14). Until this grapple ends, the target is restrained and unable to breathe unless it can breathe water. If the saving throw is successful, the target is pushed out of the elemental's space.\nThe elemental can grapple one Large creature or up to two Medium or smaller creatures at one time. At the start of each of the elemental's turns, each target grappled by it takes 13 (2d8 + 4) bludgeoning damage. A creature within 5 feet of the elemental can pull a creature or object out of it by taking an action to make a DC 14 Strength and succeeding."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Elementar führt zwei Hiebangriffe aus."
+      },
+      {
+        "name": "Hieb",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 13 (2W8+4) Wuchtschaden."
+      },
+      {
+        "name": "Überschutt (Aufladung 4–6)",
+        "text": "Jede Kreatur im Bereich des Elementars muss einen SG-15-Stärkerettungswurf ausführen. Scheitert der Wurf, so erleidet das Ziel 13 (2W8+4) Wuchtschaden. Wenn es eine höchstens große Kreatur ist, wird es außerdem gepackt (Rettungswurf-SG 14): Solange das Ziel gepackt bleibt, ist es festgesetzt und kann nicht atmen, es sei denn, es verfügt über Wasseratmung. Wenn der Rettungswurf erfolgreich ist, wird das Ziel aus dem Bereich des Elementars gestoßen. Der Elementar kann eine große Kreatur oder bis zu zwei höchstens mittelgroße Kreaturen zugleich gepackt halten. Zu Beginn jedes Zugs des Elementars erleidet jedes von ihm gepackte Ziel 13 (2W8+4) Wuchtschaden. Eine Kreatur im Abstand von bis zu 1,5 Metern vom Elementar kann eine Kreatur oder ein Objekt aus ihm herausziehen. Dazu ist eine Aktion erforderlich, um einen SG-14-Stärkewurf auszuführen, welcher erfolgreich sein muss."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/84/315/315/636252736680781387.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "elemental",
+    "de": "Elementar"
+  },
+  "alignment": {
+    "en": "neutral",
+    "de": "neutral"
+  },
+  "token": {
+    "file": "WaterElementalSea (1).webp",
+    "variant": "sea"
+  },
+  "tokens": [
+    {
+      "file": "WaterElementalSea (2).webp",
+      "variant": "sea"
+    },
+    {
+      "file": "WaterElementalSea (3).webp",
+      "variant": "sea"
+    },
+    {
+      "file": "WaterElementalSea (4).webp",
+      "variant": "sea"
+    },
+    {
+      "file": "WaterElementalSea (5).webp",
+      "variant": "sea"
+    },
+    {
+      "file": "WaterElementalSea (6).webp",
+      "variant": "sea"
+    },
+    {
+      "file": "WaterElementalSea (7).webp",
+      "variant": "sea"
+    },
+    {
+      "file": "WaterElementalSea (8).webp",
+      "variant": "sea"
+    },
+    {
+      "file": "WaterElementalSwamp (1).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "WaterElementalSwamp (2).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "WaterElementalSwamp (3).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "WaterElementalSwamp (4).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "WaterElementalSwamp (5).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "WaterElementalSwamp (6).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "WaterElementalSwamp (7).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "WaterElementalSwamp (8).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "WaterElementalWaterfall (1).webp",
+      "variant": "waterfall"
+    },
+    {
+      "file": "WaterElementalWaterfall (2).webp",
+      "variant": "waterfall"
+    },
+    {
+      "file": "WaterElementalWaterfall (3).webp",
+      "variant": "waterfall"
+    },
+    {
+      "file": "WaterElementalWaterfall (4).webp",
+      "variant": "waterfall"
+    },
+    {
+      "file": "WaterElementalWaterfall (5).webp",
+      "variant": "waterfall"
+    },
+    {
+      "file": "WaterElementalWaterfall (6).webp",
+      "variant": "waterfall"
+    },
+    {
+      "file": "WaterElementalWaterfall (7).webp",
+      "variant": "waterfall"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

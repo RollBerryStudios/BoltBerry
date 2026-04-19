@@ -1,0 +1,344 @@
+{
+  "id": 189,
+  "slug": "lion",
+  "name": "Lion",
+  "nameDe": "Löwe",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "26 (4d10 + 4)",
+    "de": "26 (4W10+4)"
+  },
+  "str": 17,
+  "dex": 15,
+  "con": 13,
+  "int": 3,
+  "wis": 12,
+  "cha": 8,
+  "strMod": 3,
+  "dexMod": 2,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +6",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Smell",
+        "text": "The lion has advantage on Wisdom (Perception) checks that rely on smell."
+      },
+      {
+        "name": "Pack Tactics",
+        "text": "The lion has advantage on an attack roll against a creature if at least one of the lion's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+      },
+      {
+        "name": "Pounce",
+        "text": "If the lion moves at least 20 ft. straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a DC 13 Strength saving throw or be knocked prone. If the target is prone, the lion can make one bite attack against it as a bonus action."
+      },
+      {
+        "name": "Running Leap",
+        "text": "With a 10-foot running start, the lion can long jump up to 25 ft.."
+      }
+    ],
+    "de": [
+      {
+        "name": "Anspringen",
+        "text": "Wenn der Löwe sich mindestens sechs Meter weit direkt auf eine Kreatur zubewegt und sie dann im selben Zug mit einem Klauenangriff trifft, muss das Ziel einen SG-13-Stärkerettungswurf bestehen, oder es wird umgestoßen. Wenn das Ziel liegt, kann der Löwe als Bonusaktion einen Bissangriff gegen es ausführen."
+      },
+      {
+        "name": "Rudeltaktik",
+        "text": "Der Löwe ist bei Angriffswürfen gegen eine Kreatur im Vorteil, wenn sich mindestens einer seiner Verbündeten, der nicht kampfunfähig ist, im Abstand von bis zu 1,5 Metern von der Kreatur befindet."
+      },
+      {
+        "name": "Scharfer Geruchssinn",
+        "text": "Der Löwe ist bei Weisheitswürfen (Wahrnehmung), die auf Geruchssinn basieren, im Vorteil."
+      },
+      {
+        "name": "Sprung aus dem Lauf",
+        "text": "Nach drei Metern Anlauf kann der Löwe bis zu 7,5 Meter weit springen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) piercing damage."
+      },
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (1W8+3) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W6+3) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "LionFemale (1).webp",
+    "variant": "female"
+  },
+  "tokens": [
+    {
+      "file": "LionFemale (10).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (11).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (12).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (13).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (14).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (15).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (16).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (17).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (18).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (19).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (2).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (20).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (21).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (22).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (23).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (24).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (25).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (26).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (27).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (28).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (29).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (3).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (30).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (31).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (32).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (4).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (5).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (6).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (7).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (8).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionFemale (9).webp",
+      "variant": "female"
+    },
+    {
+      "file": "LionMale (1).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (10).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (11).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (12).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (13).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (14).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (15).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (16).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (17).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (18).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (19).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (2).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (20).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (3).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (4).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (5).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (6).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (7).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (8).webp",
+      "variant": "male"
+    },
+    {
+      "file": "LionMale (9).webp",
+      "variant": "male"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

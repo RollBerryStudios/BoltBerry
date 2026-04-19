@@ -1,0 +1,233 @@
+{
+  "id": 45,
+  "slug": "bearded-devil",
+  "name": "Bearded Devil",
+  "nameDe": "Bartteufel",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium fiend, lawful evil",
+    "de": "Mittelgroßer Unhold, rechtschaffen böse"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "52 (8d8 + 16)",
+    "de": "52 (8W8+16)"
+  },
+  "str": 16,
+  "dex": 15,
+  "con": 15,
+  "int": 9,
+  "wis": 11,
+  "cha": 11,
+  "strMod": 3,
+  "dexMod": 2,
+  "conMod": 2,
+  "intMod": -1,
+  "wisMod": 0,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Infernal",
+      "telepathy 120 ft."
+    ],
+    "de": [
+      "Infernalisch",
+      "Telepathie auf 36 m"
+    ]
+  },
+  "savingThrows": [
+    "Str +5",
+    "Kon +4",
+    "Wei +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Devil's Sight",
+        "text": "Magical darkness doesn't impede the devil's darkvision."
+      },
+      {
+        "name": "Magic Resistance",
+        "text": "The devil has advantage on saving throws against spells and other magical effects."
+      },
+      {
+        "name": "Steadfast",
+        "text": "The devil can't be frightened while it can see an allied creature within 30 feet of it."
+      }
+    ],
+    "de": [
+      {
+        "name": "Magieresistenz",
+        "text": "Der Teufel ist bei Rettungswürfen gegen Zauber und andere magische Effekte im Vorteil."
+      },
+      {
+        "name": "Standfest",
+        "text": "Der Teufel kann nicht verängstigt werden, solange er eine verbündete Kreatur im Abstand von bis zu neun Metern von ihm sehen kann."
+      },
+      {
+        "name": "Teufelssicht",
+        "text": "Die Dunkelsicht des Teufels wird nicht durch magische Dunkelheit beeinträchtigt."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The devil makes two attacks: one with its beard and one with its glaive."
+      },
+      {
+        "name": "Beard",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one creature. Hit: 6 (1d8 + 2) piercing damage, and the target must succeed on a DC 12 Constitution saving throw or be poisoned for 1 minute. While poisoned in this way, the target can't regain hit points. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+      },
+      {
+        "name": "Glaive",
+        "text": "Melee Weapon Attack: +5 to hit, reach 10 ft., one target. Hit: 8 (1d10 + 3) slashing damage. If the target is a creature other than an undead or a construct, it must succeed on a DC 12 Constitution saving throw or lose 5 (1d10) hit points at the start of each of its turns due to an infernal wound. Each time the devil hits the wounded target with this attack, the damage dealt by the wound increases by 5 (1d10). Any creature can take an action to stanch the wound with a successful DC 12 Wisdom (Medicine) check. The wound also closes if the target receives magical healing."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Teufel führt zwei Angriffe aus: einen mit seinem Bart und einen mit seiner Glefe."
+      },
+      {
+        "name": "Bart",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 6 (1W8+2) Stichschaden, und das Ziel muss einen SG-12-Konstitutionsrettungswurf bestehen, oder es ist eine Minute lang vergiftet. Auf diese Art vergiftete Ziele können außerdem keine Trefferpunkte zurückerhalten. Das Ziel kann den Rettungswurf am Ende jedes seiner Züge wiederholen und den Effekt bei einem Erfolg beenden."
+      },
+      {
+        "name": "Glefe",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 8 (1W10+3) Hiebschaden. Wenn das Ziel kein Untoter und kein Konstrukt ist, muss es einen SG-12-Konstitutionsrettungswurf bestehen, oder es verliert zu Beginn jedes seiner Züge aufgrund einer infernalischen Wunde 5 (1W10) Trefferpunkte. Wann immer der Teufel das verwundete Ziel erneut mit diesem Angriff trifft, erhöht sich der Schaden durch die Wunde um 5 (1W10). Kreaturen können als Aktion versuchen, die Wunde mit einem erfolgreichen SG-12-Weisheitswurf (Heilkunde) zu verschließen. Die Wunde schließt sich auch, wenn das Ziel magisch geheilt wird."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/193/1000/1000/636252763397604505.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "fiend",
+    "de": "Unhold (Teufel)"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "BeardedDevil (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "BeardedDevil (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "BeardedDevil (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

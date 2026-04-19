@@ -1,0 +1,30 @@
+{
+  "id": 408,
+  "slug": "rod-of-alertness",
+  "name": "Rod of Alertness",
+  "nameDe": "Zepter der Wachsamkeit",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 2500000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Rod, very rare (requires attunement) This rod has a flanged head and the following properties. ***Alertness.*** While holding the rod, you have advantage on Wisdom (Perception) checks and on rolls for initiative. ***Spells.*** While holding the rod, you can use an action to cast one of the following spells from it: detect evil and good, detect magic, detect poison and disease, or see invisibility. ***Protective Aura.*** As an action, you can plant the haft end of the rod in the ground, whereupon the rod's head sheds bright light in a 60-foot radius and dim light for an additional 60 feet. While in that bright light, you and any creature that is friendly to you gain a +1 bonus to AC and saving throws and can sense the location of any invisible hostile creature that is also in the bright light. The rod's head stops glowing and the effect ends after 10 minutes, or when a creature uses an action to pull the rod from the ground. This property can't be used again until the next dawn.",
+    "de": "Dieses Zepter hat einen angeflanschten Kopf und die folgenden Eigenschaften. Wachsamkeit:  Wenn du das Zepter hältst, bist du bei Weisheitswürfen (Wahrnehmung) und Initiativwürfen im Vorteil. Zauber:  Wenn du das Zepter hältst, kannst du als Aktion einen der folgenden Zauber mit ihm wirken: Gift und Krankheit entdecken , Gutes und Böses entdecken , Magie entdecken  oder Unsichtbares sehen . Schützende Aura:  Du kannst das Heft des Zepters als Aktion in den Boden rammen, woraufhin der Kopf des Zepters in einem Radius von 18 Metern helles Licht und in einem Radius von weiteren 18 Metern dämmriges Licht spendet Wenn du und dir freundlich gesinnte Kreaturen vom Licht des Zepters erhellt werdet, erhaltet ihr einen Bonus von +1 auf eure RK und auf Rettungswürfe, und ihr könnt die Position von unsichtbaren feindlich gesinnten Kreaturen spüren, die sich ebenfalls in diesem hellen Licht befinden. Der Kopf des Zepters hört auf zu leuchten und der Effekt endet entweder nach zehn Minuten oder wenn eine Kreatur eine Aktion verwendet, um das Zepter aus dem Boden zu ziehen. Diese Eigenschaft kann erst im nächsten Morgengrauen wiederverwendet werden."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

@@ -1,0 +1,26 @@
+{
+  "id": 322,
+  "slug": "horseshoes-of-speed",
+  "name": "Horseshoes of Speed",
+  "nameDe": "Hufeisen der Geschwindigkeit",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 500000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, rare These iron horseshoes come in a set of four. While all four shoes are affixed to the hooves of a horse or similar creature, they increase the creature's walking speed by 30 feet.",
+    "de": "Diese eisernen Hufeisen sind in Vierersätzen zu finden. Wenn alle vier Hufeisen an den Hufen eines Pferds oder einer ähnlichen Kreatur befestigt sind, erhöhen sie die Schrittbewegungsrate der Kreatur um neun Meter."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

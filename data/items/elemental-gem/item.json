@@ -1,0 +1,26 @@
+{
+  "id": 241,
+  "slug": "elemental-gem",
+  "name": "Elemental Gem",
+  "nameDe": "Elementarer Edelstein",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 96000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon This gem contains a mote of elemental energy. When you use an action to break the gem, an elemental is summoned as if you had cast the conjure elemental spell, and the gem's magic is lost. The type of gem determines the elemental summoned by the spell.",
+    "de": "Dieser Edelstein enthält ein Partikel Elementarenergie. Wenn du deine Aktion verwendest, um den Edelstein zu zerschmettern, wird ein Elementar beschworen, als hättest du den Zauber Elementar beschwören  gewirkt. Die Magie des Edelsteins geht dadurch verloren. Die Art des Edelsteins bestimmt, was für ein Elementar durch den Zauber beschworen wird."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

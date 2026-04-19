@@ -1,0 +1,201 @@
+{
+  "id": 158,
+  "slug": "griffon",
+  "name": "Griffon",
+  "nameDe": "Greif",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, unaligned",
+    "de": "Große Monstrosität, ohne Gesinnung"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "59 (7d10 + 21)",
+    "de": "59 (7W10+21)"
+  },
+  "str": 18,
+  "dex": 15,
+  "con": 16,
+  "int": 2,
+  "wis": 13,
+  "cha": 8,
+  "strMod": 4,
+  "dexMod": 2,
+  "conMod": 3,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 80,
+      "de": 24
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 15"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 15"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +5"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Sight",
+        "text": "The griffon has advantage on Wisdom (Perception) checks that rely on sight."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfe Sicht",
+        "text": "Der Greif ist bei Weisheitswürfen (Wahrnehmung), die auf Sicht basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The griffon makes two attacks: one with its beak and one with its claws."
+      },
+      {
+        "name": "Beak",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Greif führt zwei Angriffe aus: einen Schnabel- und einen Klauenangriff."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 11 (2W6+4) Hiebschaden."
+      },
+      {
+        "name": "Schnabel",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 8 (1W8+4) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/373/315/315/636252779693862725.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Griffon (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Griffon (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Griffon (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Griffon (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Griffon (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Griffon (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Griffon (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Griffon (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Griffon (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Griffon (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Griffon (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Griffon (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Griffon (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Griffon (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Griffon (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Griffon (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Griffon (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Griffon (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Griffon (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

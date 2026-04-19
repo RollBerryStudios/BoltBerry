@@ -1,0 +1,210 @@
+{
+  "id": 278,
+  "slug": "swarm-of-poisonous-snakes",
+  "name": "Swarm of Poisonous Snakes",
+  "nameDe": "Giftschlangenschwarm",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "14",
+    "de": "14"
+  },
+  "hp": {
+    "en": "36 (8d8)",
+    "de": "36 (8W8)"
+  },
+  "str": 8,
+  "dex": 18,
+  "con": 11,
+  "int": 1,
+  "wis": 10,
+  "cha": 3,
+  "strMod": -1,
+  "dexMod": 4,
+  "conMod": 0,
+  "intMod": -5,
+  "wisMod": 0,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "swim": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 10 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Blindsicht 3 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Swarm",
+        "text": "The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny snake. The swarm can't regain hit points or gain temporary hit points."
+      }
+    ],
+    "de": [
+      {
+        "name": "Schwarm",
+        "text": "Der Schwarm kann den Raum einer anderen Kreatur besetzen und umgekehrt. Er kann sich durch jede Öffnung bewegen, die groß genug für eine winzige Schlange ist. Der Schwarm kann keine Trefferpunkte zurückerhalten und keine temporären Trefferpunkte erhalten."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bites",
+        "text": "Melee Weapon Attack: +6 to hit, reach 0 ft., one creature in the swarm's space. Hit: 7 (2d6) piercing damage, or 3 (1d6) piercing damage if the swarm has half of its hit points or fewer. The target must make a DC 10 Constitution saving throw, taking 14 (4d6) poison damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Bisse",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 0 m, eine Kreatur im Bereich des Schwarms. Treffer: 7 (2W6) Stichschaden oder 3 (1W6) Stichschaden, wenn der Schwarm höchstens die Hälfte seiner Trefferpunkte hat. Das Ziel muss einen SG-10-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet es 14 (4W6) Giftschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Schwarm winziger Tiere"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "SwarmOfPoisonousSnakes (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "SwarmOfPoisonousSnakes (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfPoisonousSnakes (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

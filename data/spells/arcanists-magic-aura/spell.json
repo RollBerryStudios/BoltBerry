@@ -1,0 +1,59 @@
+{
+  "id": 385,
+  "slug": "arcanists-magic-aura",
+  "name": "Arcanist's Magic Aura",
+  "nameDe": "Magische Aura des Arkanisten",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-Level illusion",
+    "de": "Stufe 2 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "24 hours",
+    "de": "24 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "A small square of silk",
+      "de": "Ein kleines Quadrat aus Seide"
+    },
+    "raw": {
+      "en": "V, S, M (A small square of silk)",
+      "de": "V, G, M (Ein kleines Quadrat aus Seide)"
+    }
+  },
+  "description": {
+    "en": "You place an illusion on a creature or an object you touch so that divination spells reveal false information about it. The target can be a willing creature or an object that isn't being carried or worn by another creature. When you cast the spell, choose one or both of the following effects. The effect lasts for the duration. If you cast this spell on the same creature or object every day for 30 days, placing the same effect on it each time, the illusion lasts until it is dispelled. ***False Aura.*** You change the way the target appears to spells and magical effects, such as detect magic, that detect magical auras. You can make a nonmagical object appear magical, a magical object appear nonmagical, or change the object's magical aura so that it appears to belong to a specific school of magic that you choose. When you use this effect on an object, you can make the false magic apparent to any creature that handles the item. ***Mask.*** You change the way the target appears to spells and magical effects that detect creature types, such as a paladin's Divine Sense or the trigger of a symbol spell. You choose a creature type and other spells and magical effects treat the target as if it were a creature of that type or of that alignment.",
+    "de": "Du berührst eine Kreatur oder einen Gegenstand und platzierst damit eine Illusion, so dass Erkenntniszauber falsche Informationen darüber vermitteln. Beim Ziel kann es sich um eine bereitwillige Kreatur oder um einen Gegenstand handeln, der nicht von einer anderen Kreatur getragen wird. Wenn du diesen Zauber wirkst, wähle einen oder beide der folgenden Effekte. Der Effekt bleibt für die Wirkungsdauer bestehen. Wenn du diesen Zauber 30 Tage lang auf dieselbe Kreatur oder denselben Gegenstand wirkst und dabei jedes Mal denselben Effekt auswählst, hält die Illusion an, bis sie gebannt wird. Falsche Aura:  Du veränderst die Art, wie das Ziel für Zauber und magische Effekte wie Magie entdecken  erscheint, die magische Auren entdecken. Du kannst einen nichtmagischen Gegenstand magisch oder einen magischen Gegenstand nichtmagisch erscheinen lassen oder die magische Aura des Gegenstands verändern, so dass er einer Schule der Magie deiner Wahl angehören zu scheint. Wirkst du diesen Effekt auf einen Gegenstand, kannst du entscheiden, dass die Illusion von jeder Kreatur entdeckt wird, die den Gegenstand aufnimmt. Maskierung:  Du veränderst die Art, wie das Ziel für Zauber und magische Effekte erscheint, die Kreaturentypen entdecken (wie das göttliche Gespür des Paladins oder die Auslösebedingung des Zaubers Symbol ). Du wählst einen Kreaturentyp aus und andere Zauber und magische Effekte behandeln das Ziel, als sei es eine Kreatur dieses Typs oder dieser Gesinnung."
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

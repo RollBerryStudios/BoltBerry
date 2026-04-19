@@ -1,0 +1,58 @@
+{
+  "id": 107,
+  "slug": "blink",
+  "name": "Blink",
+  "nameDe": "Flimmern",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level transmutation",
+    "de": "Stufe 3 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "Roll a d20 at the end of each of your turns for the duration of the spell. On a roll of 11 or higher, you vanish from your current plane of existence and appear in the Ethereal Plane (the spell fails and the casting is wasted if you were already on that plane). At the start of your next turn, and when the spell ends if you are on the Ethereal Plane, you return to an unoccupied space of your choice that you can see within 10 feet of the space you vanished from. If no unoccupied space is available within that range, you appear in the nearest unoccupied space (chosen at random if more than one space is equally near). You can dismiss this spell as an action. While on the Ethereal Plane, you can see and hear the plane you originated from, which is cast in shades of gray, and you can't see anything there more than 60 feet away. You can only affect and be affected by other creatures on the Ethereal Plane. Creatures that aren't there can't perceive you or interact with you, unless they have the ability to do so.",
+    "de": "Würfle, solange der Zauber anhält, am Ende jedes deiner Züge mit einem W20. Bei einer 11 oder höher verschwindest du von deiner derzeitigen Existenzebene und erscheinst auf der Ätherebene (der Zauber schlägt fehl und das Wirken ist vergeudet, wenn du dich bereits auf dieser Ebene befindest). Wenn du dich zu Beginn deines nächsten Zugs oder wenn der Zauber endet auf der Ätherebene befindest, kehrst du an eine freien Stelle deiner Wahl zurück, die du im Umkreis von drei Metern um den Ort deines Verschwindens herum sehen kannst Ist innerhalb dieser Reichweite keine freie Stelle vorhanden, erscheinst du an der nächstgelegenen freien Stelle (gibt es mehr als eine Stelle in Reichweite, wird sie zufällig ausgewählt). Du kannst als Aktion den Zauber aufheben. Während du dich auf der Ätherebene befindest, kannst du deine ursprüngliche Ebene sehen und hören. Sie ist jedoch monochrom und deine Sichtweite beträgt maximal 18 Meter. Du kannst nur Kreaturen beeinflussen oder von ihnen beeinflusst werden, die sich ebenfalls auf der Ätherebene aufhalten. Kreaturen, die nicht hier sind, können dich nicht wahrnehmen oder mit dir interagieren, es sei denn, eine Fähigkeit erlaubt es ihnen."
+  },
+  "image": "blink",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

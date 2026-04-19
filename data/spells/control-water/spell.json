@@ -1,0 +1,64 @@
+{
+  "id": 149,
+  "slug": "control-water",
+  "name": "Control Water",
+  "nameDe": "Wasser kontrollieren",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "druid",
+      "wizard"
+    ],
+    "de": [
+      "Kleriker",
+      "Druide",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "4th-level transmutation",
+    "de": "Stufe 4 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "300 feet",
+    "de": "90 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a drop of water and a pinch of dust",
+      "de": "ein Tropfen Wasser und eine Prise Staub"
+    },
+    "raw": {
+      "en": "V, S, M (a drop of water and a pinch of dust)",
+      "de": "V, G, M (ein Tropfen Wasser und eine Prise Staub)"
+    }
+  },
+  "description": {
+    "en": "Until the spell ends, you control any freestanding water inside an area you choose that is a cube up to 100 feet on a side. You can choose from any of the following effects when you cast this spell. As an action on your turn, you can repeat the same effect or choose a different one. ***Flood.*** You cause the water level of all standing water in the area to rise by as much as 20 feet. If the area includes a shore, the flooding water spills over onto dry land. If you choose an area in a large body of water, you instead create a 20-foot tall wave that travels from one side of the area to the other and then crashes down. Any Huge or smaller vehicles in the wave's path are carried with it to the other side. Any Huge or smaller vehicles struck by the wave have a 25 percent chance of capsizing. The water level remains elevated until the spell ends or you choose a different effect. If this effect produced a wave, the wave repeats on the start of your next turn while the flood effect lasts. ***Part Water.*** You cause water in the area to move apart and create a trench. The trench extends across the spell's area, and the separated water forms a wall to either side. The trench remains until the spell ends or you choose a different effect. The water then slowly fills in the trench over the course of the next round until the normal water level is restored. ***Redirect Flow.*** You cause flowing water in the area to move in a direction you choose, even if the water has to flow over obstacles, up walls, or in other unlikely directions. The water in the area moves as you direct it, but once it moves beyond the spell's area, it resumes its flow based on the terrain conditions. The water continues to move in the direction you chose until the spell ends or you choose a different effect. ***Whirlpool.*** This effect requires a body of water at least 50 feet square and 25 feet deep. You cause a whirlpool to form in the center of the area. The whirlpool forms a vortex that is 5 feet wide at the base, up to 50 feet wide at the top, and 25 feet tall. Any creature or object in the water and within 25 feet of the vortex is pulled 10 feet toward it. A creature can swim away from the vortex by making a Strength (Athletics) check against your spell save DC. When a creature enters the vortex for the first time on a turn or starts its turn there, it must make a strength saving throw. On a failed save, the creature takes 2d8 bludgeoning damage and is caught in the vortex until the spell ends. On a successful save, the creature takes half damage, and isn't caught in the vortex. A creature caught in the vortex can use its action to try to swim away from the vortex as described above, but has disadvantage on the Strength (Athletics) check to do so. The first time each turn that an object enters the vortex, the object takes 2d8 bludgeoning damage; this damage occurs each round it remains in the vortex.",
+    "de": "Bis der Zauber endet, kontrollierst du jedes offene Gewässer in einem Bereich deiner Wahl, der einem Würfel mit bis zu 30 Metern Kantenlänge entspricht. Wähle beim Wirken des Zaubers einen der folgenden Effekte aus. Als Aktion in deinem Zug kannst du denselben Effekt wiederholen oder einen anderen auswählen. Fluss umlenken:  Du bewirkst, dass sich fließendes Wasser im Bereich in eine Richtung deiner Wahl bewegt, selbst wenn es dafür über Hindernisse, Wände empor oder in andere unwahrscheinliche Richtungen strömen muss. Das Wasser im Bereich bewegt sich nach deinen Vorgaben. Sobald es jedoch den Bereich des Zaubers verlässt, fließt es wieder nach den Geländebedingungen. Das Wasser strömt in die Richtung deiner Wahl, bis der Zauber endet oder du einen anderen Effekt wählst. Flut:  Du lässt den Wasserspiegel aller stehenden Gewässer im Bereich um bis zu sechs Meter ansteigen. Ist ein Ufer Teil des Bereichs, tritt das Wasser auf das Land über. Wählst du einen Bereich in einem größeren Gewässer, erschaffst du stattdessen eine sechs Meter hohe Welle, die sich von einer Seite des Bereichs zum anderen bewegt und sich dann bricht Alle maximal riesigen Fahrzeuge im Pfad der Welle werden mit ihr zur anderen Seite bewegt. Wird ein derartiges Fahrzeug von der Welle getroffen, besteht eine Chance von 25 Prozent, dass es kentert. Der Wasserspiegel bleibt erhöht, bis der Zauber endet oder du einen anderen Effekt auswählst. Erzeugt dieser Effekt eine Welle, wiederholt sich diese zu Beginn deines nächsten Zugs, solange die Flut anhält. Wasserstrudel:  Dieser Effekt benötigt ein Gewässer mit einer Fläche von mindestens 15 Metern mal 15 Metern und einer Tiefe von 7,5 Metern. Du erschaffst einen Wasserstrudel in der Mitte des Bereichs. Dieser Wirbel ist an der Basis 1,5 Meter breit, an der Spitze bis zu 15 Meter breit und 7,5 Meter hoch. Alle Kreaturen und Objekte, die sich im Wasser im Abstand von bis zu 7,5 Metern um den Wirbel befinden, werden drei Meter in seine Richtung gezogen. Eine Kreatur kann vom Wirbel wegschwimmen, indem sie einen Stärkewurf (Athletik) gegen deinen Zauberrettungswurf-SG ausführt. Wenn eine Kreatur den Bereich des Wirbels in einem Zug erstmals betritt oder ihren Zug darin beginnt, muss sie einen Stärkerettungswurf ausführen. Scheitert der Wurf, erleidet die Kreatur 2W8 Wuchtschaden und ist im Wirbel gefangen, bis der Zauber endet. Bei einem erfolgreichen Rettungswurf erleidet die Kreatur halb so viel Schaden und ist nicht im Wirbel gefangen. Eine Kreatur, die im Wirbel gefangen ist, kann ihre Aktion verwenden, um wie oben beschrieben wegzuschwimmen. Sie ist jedoch beim entsprechenden Stärkewurf (Athletik) im Nachteil. Wird ein Gegenstand zum ersten Mal in einem Zug in den Wirbel gezogen, erleidet der Gegenstand 2W8 Wuchtschaden. Dieser Schaden wird jede Runde verursacht, die der Gegenstand im Strudel verbleibt. Wasser teilen:  Du bewegst Wasser in dem Bereich auseinander und erschaffst einen Graben, der sich durch den Wirkungsbereich zieht. Das Wasser ragt auf beiden Seiten wie eine Mauer auf. Der Graben bleibt bestehen, bis der Zauber endet, oder du einen anderen Effekt auswählst. Anschließend füllt das Wasser im Verlauf der nächsten Runde langsam den Graben, bis der normale Wasserspiegel wiederhergestellt ist."
+  },
+  "image": "control-water",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

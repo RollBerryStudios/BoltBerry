@@ -1,0 +1,57 @@
+{
+  "id": 44,
+  "slug": "hunters-mark",
+  "name": "Hunter's Mark",
+  "nameDe": "Zeichen des Jägers",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "ranger"
+    ],
+    "de": [
+      "Waldläufer"
+    ]
+  },
+  "type": {
+    "en": "1st-level divination",
+    "de": "Stufe 1 Erkenntnismagie"
+  },
+  "castingTime": {
+    "en": "1 bonus action",
+    "de": "1 Bonusaktion"
+  },
+  "range": {
+    "en": "90 feet",
+    "de": "27 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "You choose a creature you can see within range and mystically mark it as your quarry. Until the spell ends, you deal an extra 1d6 damage to the target whenever you hit it with a weapon attack, and you have advantage on any Wisdom (Perception) or Wisdom (Survival) check you make to find it. If the target drops to 0 hit points before this spell ends, you can use a bonus action on a subsequent turn of yours to mark a new creature.",
+    "de": "Du wählst eine Kreatur in Reichweite, die du sehen kannst, und markierst sie auf mystische Weise als deine Beute. Bis der Zauber endet, fügst du dem Ziel bei jedem Treffer mit einem Waffenangriff zusätzliche 1W6 Schaden zu. Zudem bist du bei Weisheitswürfen (Wahrnehmung) oder Weisheitswürfen (Überlebenskunst), um das Ziel ausfindig zu machen, im Vorteil. Sinken die Trefferpunkte des Ziels auf 0, bevor der Zauber endet, kannst du in darauffolgenden Zügen eine Bonusaktion verwenden, um eine neue Kreatur zu markieren. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. oder 4. Grades nutzt, kannst du die Konzentration auf diesen Zauber bis zu acht Stunden aufrechterhalten. Bei einem Zauberplatz des 5. Grades oder höher kannst du die Konzentration auf diesen Zauber bis zu 24 Stunden aufrechterhalten."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 3rd or 4th level, you can maintain your concentration on the spell for up to 8 hours. When you use a spell slot of 5th level or higher, you can maintain your concentration on the spell for up to 24 hours.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. oder 4. Grades nutzt, kannst du die Konzentration auf diesen Zauber bis zu acht Stunden aufrechterhalten. Bei einem Zauberplatz des 5. Grades oder höher kannst du die Konzentration auf diesen Zauber bis zu 24 Stunden aufrechterhalten."
+  },
+  "image": "hunters-mark",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

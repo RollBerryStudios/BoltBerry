@@ -1,0 +1,195 @@
+{
+  "id": 131,
+  "slug": "giant-hyena",
+  "name": "Giant Hyena",
+  "nameDe": "Riesenhyäne",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "45 (6d10 + 12)",
+    "de": "45 (6W10+12)"
+  },
+  "str": 16,
+  "dex": 14,
+  "con": 14,
+  "int": 2,
+  "wis": 12,
+  "cha": 7,
+  "strMod": 3,
+  "dexMod": 2,
+  "conMod": 2,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Rampage",
+        "text": "When the hyena reduces a creature to 0 hit points with a melee attack on its turn, the hyena can take a bonus action to move up to half its speed and make a bite attack."
+      }
+    ],
+    "de": [
+      {
+        "name": "Wüten",
+        "text": "Wenn die Hyäne in ihrem Zug die Trefferpunkte einer Kreatur mit einem Nahkampfangriff auf 0 verringert hat, kann sie eine Bonusaktion ausführen, um bis zur Hälfte ihrer Bewegungsrate zurückzulegen und einen Bissangriff auszuführen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantHyena (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GiantHyena (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantHyena (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

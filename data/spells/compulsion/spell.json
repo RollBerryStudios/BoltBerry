@@ -1,0 +1,56 @@
+{
+  "id": 111,
+  "slug": "compulsion",
+  "name": "Compulsion",
+  "nameDe": "Zwang",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard"
+    ],
+    "de": [
+      "Barde"
+    ]
+  },
+  "type": {
+    "en": "4th-level enchantment",
+    "de": "Stufe 4 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "Creatures of your choice that you can see within range and that can hear you must make a wisdom saving throw. A target automatically succeeds on this saving throw if it can't be charmed. On a failed save, a target is affected by this spell. Until the spell ends, you can use a bonus action on each of your turns to designate a direction that is horizontal to you. Each affected target must use as much of its movement as possible to move in that direction on its next turn. It can take any action before it moves. After moving in this way, it can make another Wisdom save to try to end the effect. A target isn't compelled to move into an obviously deadly hazard, such as a fire or a pit, but it will provoke opportunity attacks to move in the designated direction.",
+    "de": "Kreaturen deiner Wahl in Reichweite, die du sehen kannst und die dich hören können, müssen Weisheitsrettungswürfe ausführen. Ein Ziel besteht den Rettungswurf automatisch, wenn es nicht bezaubert werden kann. Scheitert der Wurf, ist das Ziel von diesem Zauber betroffen. Bis der Zauber endet, kannst du in jedem deiner Züge eine Bonusaktion verwenden, um eine Richtung zu bestimmen, die horizontal von dir verläuft. Jedes betroffene Ziel muss in seinem nächsten Zug so viel seiner Bewegungsrate wie möglich verwenden, um sich in diese Richtung zu bewegen. Es kann vor der Bewegung eine Aktion ausführen. Nachdem es sich auf diese Weise bewegt hat, kann es einen erneuten Weisheitsrettungswurf ausführen, um den Effekt zu beenden. Ein Ziel kann nicht gezwungen werden, sich in eine offensichtlich tödliche Gefahr zu begeben, etwa ein Feuer oder eine Grube. Es provoziert jedoch Gelegenheitsangriffe, wenn es sich in die angegebene Richtung bewegt."
+  },
+  "image": "enchantment",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

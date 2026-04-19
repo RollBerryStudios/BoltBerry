@@ -1,0 +1,199 @@
+{
+  "id": 171,
+  "slug": "homunculus",
+  "name": "Homunculus",
+  "nameDe": "Homunkulus",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny construct, neutral",
+    "de": "Winziges Konstrukt, neutral"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "5 (2d4)",
+    "de": "5 (2W4)"
+  },
+  "str": 4,
+  "dex": 15,
+  "con": 11,
+  "int": 10,
+  "wis": 10,
+  "cha": 7,
+  "strMod": -3,
+  "dexMod": 2,
+  "conMod": 0,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    },
+    "fly": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "understands the languages of its creator but can't speak"
+    ],
+    "de": [
+      "Versteht die Sprache seines Schöpfers",
+      "aber kann nicht sprechen"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Telepathic Bond",
+        "text": "While the homunculus is on the same plane of existence as its master, it can magically convey what it senses to its master, and the two can communicate telepathically."
+      }
+    ],
+    "de": [
+      {
+        "name": "Telepathische Bindung",
+        "text": "Solange sich der Homunkulus auf derselben Existenzebene wie sein Meister befindet, kann er seine Wahrnehmungen magisch übermitteln, und die beiden können telepathisch miteinander kommunizieren."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 1 piercing damage, and the target must succeed on a DC 10 Constitution saving throw or be poisoned for 1 minute. If the saving throw fails by 5 or more, the target is instead poisoned for 5 (1d10) minutes and unconscious while poisoned in this way."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 1 Stichschaden, und das Ziel muss einen SG-10-Konstitutionsrettungswurf bestehen, oder es ist eine Minute lang vergiftet. Wenn der Rettungswurf um mindestens 5 Punkte scheitert, ist das Ziel stattdessen 5 (1W10) Minuten lang vergiftet und bewusstlos, solange es auf diese Art vergiftet ist."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/18/287/315/315/636379803928245506.jpeg",
+  "size": {
+    "en": "tiny",
+    "de": "Winziges"
+  },
+  "type": {
+    "en": "construct",
+    "de": "Konstrukt"
+  },
+  "alignment": {
+    "en": "neutral",
+    "de": "neutral"
+  },
+  "token": {
+    "file": "Homunculus (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Homunculus (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Homunculus (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

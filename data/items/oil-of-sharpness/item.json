@@ -1,0 +1,26 @@
+{
+  "id": 298,
+  "slug": "oil-of-sharpness",
+  "name": "Oil of Sharpness",
+  "nameDe": "Öl der Schärfe",
+  "category": {
+    "en": "POTIONS_OILS",
+    "de": "Tränke & Öle"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 320000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Potion, very rare This clear, gelatinous oil sparkles with tiny, ultrathin silver shards. The oil can coat one slashing or piercing weapon or up to 5 pieces of slashing or piercing ammunition. Applying the oil takes 1 minute. For 1 hour, the coated item is magical and has a +3 bonus to attack and damage rolls.",
+    "de": "In diesem klaren, gelatineartigen Öl glitzern winzige, extrem dünne Silbersplitter. Das Öl kann eine Hieb- oder Stichwaffe oder bis zu fünf Hieb- oder Stichgeschosse bedecken. Das Aufträgen des Öls dauert eine Minute. Der eingeölte Gegenstand ist eine Stunde lang magisch und hat einen Bonus von +3 auf Angriffs- und Schadenswürfe."
+  },
+  "image": "potions-and-oils",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

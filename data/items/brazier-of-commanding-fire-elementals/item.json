@@ -1,0 +1,26 @@
+{
+  "id": 364,
+  "slug": "brazier-of-commanding-fire-elementals",
+  "name": "Brazier of Commanding Fire Elementals",
+  "nameDe": "Feuerschale der Feuerelementar-Herrschaft",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 800000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, rare While a fire burns in this brass brazier, you can use an action to speak the brazier's command word and summon a fire elemental, as if you had cast the conjure elemental spell. The brazier can't be used this way again until the next dawn. The brazier weighs 5 pounds.",
+    "de": "Wenn in dieser kupfernen Feuerschale ein Feuer brennt, kannst du als Aktion das Befehlswort für die Feuerschale aussprechen und einen Feuerelementar beschwören, als hättest du den Zauber Elementar beschwören  gewirkt. Die Feuerschale kann erst im nächsten Morgengrauen wieder auf diese Weise verwendet werden. Die Feuerschale wiegt 2,5 Kilogramm."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

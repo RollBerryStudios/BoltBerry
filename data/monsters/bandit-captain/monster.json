@@ -1,0 +1,2325 @@
+{
+  "id": 40,
+  "slug": "bandit-captain",
+  "name": "Bandit Captain",
+  "nameDe": "Banditenhauptmann",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "15 (Studded Leather)",
+    "de": "15 (beschlagenes Leder)"
+  },
+  "hp": {
+    "en": "65 (10d8 + 20)",
+    "de": "65 (10W8+20)"
+  },
+  "str": 15,
+  "dex": 16,
+  "con": 14,
+  "int": 14,
+  "wis": 11,
+  "cha": 14,
+  "strMod": 2,
+  "dexMod": 3,
+  "conMod": 2,
+  "intMod": 2,
+  "wisMod": 0,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any two languages"
+    ],
+    "de": [
+      "Zwei beliebige Sprachen"
+    ]
+  },
+  "savingThrows": [
+    "Str +4",
+    "Ges +5",
+    "Wei +2"
+  ],
+  "skills": [
+    "Athletik +4",
+    "Täuschen +4"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The captain makes three melee attacks: two with its scimitar and one with its dagger. Or the captain makes two ranged attacks with its daggers."
+      },
+      {
+        "name": "Scimitar",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) slashing damage."
+      },
+      {
+        "name": "Dagger",
+        "text": "Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 5 (1d4 + 3) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Hauptmann führt drei Nahkampfangriffe aus: zwei mit seinem Krummsäbel und einen mit seinem Dolch. Alternativ kann er zwei Fernkampfangriffe mit seinen Dolchen ausführen."
+      },
+      {
+        "name": "Krummsäbel",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W6+3) Hiebschaden."
+      },
+      {
+        "name": "Dolch",
+        "text": "Nah- oder Fernkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m oder Reichweite 6/18 m, ein Ziel. Treffer: 5 (1W4+3) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/181/1000/1000/636252761965117015.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (jedes Volk)"
+  },
+  "alignment": {
+    "en": "any non-lawful",
+    "de": "jede nichtrechtschaffene Gesinnung"
+  },
+  "token": {
+    "file": "BanditCaptainDragonbornArctic (1).webp",
+    "variant": "dragonbornArctic"
+  },
+  "tokens": [
+    {
+      "file": "BanditCaptainDragonbornArctic (2).webp",
+      "variant": "dragonbornArctic"
+    },
+    {
+      "file": "BanditCaptainDragonbornArctic (3).webp",
+      "variant": "dragonbornArctic"
+    },
+    {
+      "file": "BanditCaptainDragonbornArctic (4).webp",
+      "variant": "dragonbornArctic"
+    },
+    {
+      "file": "BanditCaptainDragonbornDesert (1).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "BanditCaptainDragonbornDesert (2).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "BanditCaptainDragonbornDesert (3).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "BanditCaptainDragonbornDesert (4).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "BanditCaptainDragonbornDesert (5).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "BanditCaptainDragonbornDesert (6).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "BanditCaptainDragonbornForest (1).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "BanditCaptainDragonbornForest (2).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "BanditCaptainDragonbornForest (3).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "BanditCaptainDragonbornForest (4).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "BanditCaptainDragonbornForest (5).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "BanditCaptainDragonbornForest (6).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "BanditCaptainDragonbornUrban (1).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "BanditCaptainDragonbornUrban (2).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "BanditCaptainDragonbornUrban (3).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "BanditCaptainDragonbornUrban (4).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "BanditCaptainDragonbornUrban (5).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "BanditCaptainDragonbornUrban (6).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "BanditCaptainDragonbornUrban (7).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "BanditCaptainDragonbornUrban (8).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "BanditCaptainDwarfArcticFemale (1).webp",
+      "variant": "dwarfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfArcticFemale (2).webp",
+      "variant": "dwarfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfArcticFemale (3).webp",
+      "variant": "dwarfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfArcticFemale (4).webp",
+      "variant": "dwarfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfArcticMale (1).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "BanditCaptainDwarfArcticMale (2).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "BanditCaptainDwarfArcticMale (3).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "BanditCaptainDwarfArcticMale (4).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "BanditCaptainDwarfDesertFemale (1).webp",
+      "variant": "dwarfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfDesertFemale (2).webp",
+      "variant": "dwarfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfDesertFemale (3).webp",
+      "variant": "dwarfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfDesertFemale (4).webp",
+      "variant": "dwarfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfDesertFemale (5).webp",
+      "variant": "dwarfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfDesertMale (1).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "BanditCaptainDwarfDesertMale (2).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "BanditCaptainDwarfDesertMale (3).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "BanditCaptainDwarfDesertMale (4).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "BanditCaptainDwarfDesertMale (5).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "BanditCaptainDwarfDesertMale (6).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "BanditCaptainDwarfDesertMale (7).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "BanditCaptainDwarfDesertMale (8).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "BanditCaptainDwarfDesertMale (9).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "BanditCaptainDwarfForestFemale (1).webp",
+      "variant": "dwarfForestFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfForestFemale (2).webp",
+      "variant": "dwarfForestFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfForestFemale (3).webp",
+      "variant": "dwarfForestFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfForestFemale (4).webp",
+      "variant": "dwarfForestFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfForestFemale (5).webp",
+      "variant": "dwarfForestFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfForestFemale (6).webp",
+      "variant": "dwarfForestFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfForestFemale (7).webp",
+      "variant": "dwarfForestFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfForestFemale (8).webp",
+      "variant": "dwarfForestFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfForestMale (1).webp",
+      "variant": "dwarfForestMale"
+    },
+    {
+      "file": "BanditCaptainDwarfForestMale (2).webp",
+      "variant": "dwarfForestMale"
+    },
+    {
+      "file": "BanditCaptainDwarfForestMale (3).webp",
+      "variant": "dwarfForestMale"
+    },
+    {
+      "file": "BanditCaptainDwarfForestMale (4).webp",
+      "variant": "dwarfForestMale"
+    },
+    {
+      "file": "BanditCaptainDwarfForestMale (5).webp",
+      "variant": "dwarfForestMale"
+    },
+    {
+      "file": "BanditCaptainDwarfForestMale (6).webp",
+      "variant": "dwarfForestMale"
+    },
+    {
+      "file": "BanditCaptainDwarfForestMale (7).webp",
+      "variant": "dwarfForestMale"
+    },
+    {
+      "file": "BanditCaptainDwarfForestMale (8).webp",
+      "variant": "dwarfForestMale"
+    },
+    {
+      "file": "BanditCaptainDwarfUrbanFemale (1).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfUrbanFemale (2).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfUrbanFemale (3).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfUrbanFemale (4).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfUrbanFemale (5).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfUrbanFemale (6).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfUrbanFemale (7).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainDwarfUrbanMale (1).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainDwarfUrbanMale (10).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainDwarfUrbanMale (2).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainDwarfUrbanMale (3).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainDwarfUrbanMale (4).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainDwarfUrbanMale (5).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainDwarfUrbanMale (6).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainDwarfUrbanMale (7).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainDwarfUrbanMale (8).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainDwarfUrbanMale (9).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainElfArcticFemale (1).webp",
+      "variant": "elfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainElfArcticFemale (2).webp",
+      "variant": "elfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainElfArcticFemale (3).webp",
+      "variant": "elfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainElfArcticFemale (4).webp",
+      "variant": "elfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainElfArcticFemale (5).webp",
+      "variant": "elfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainElfArcticFemale (6).webp",
+      "variant": "elfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainElfArcticFemale (7).webp",
+      "variant": "elfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainElfArcticFemale (8).webp",
+      "variant": "elfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainElfArcticFemale (9).webp",
+      "variant": "elfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainElfArcticMale (1).webp",
+      "variant": "elfArcticMale"
+    },
+    {
+      "file": "BanditCaptainElfArcticMale (2).webp",
+      "variant": "elfArcticMale"
+    },
+    {
+      "file": "BanditCaptainElfArcticMale (3).webp",
+      "variant": "elfArcticMale"
+    },
+    {
+      "file": "BanditCaptainElfArcticMale (4).webp",
+      "variant": "elfArcticMale"
+    },
+    {
+      "file": "BanditCaptainElfDesertFemale (1).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainElfDesertFemale (2).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainElfDesertFemale (3).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainElfDesertFemale (4).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainElfDesertFemale (5).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainElfDesertFemale (6).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainElfDesertFemale (7).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainElfDesertFemale (8).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainElfDesertFemale (9).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainElfDesertMale (1).webp",
+      "variant": "elfDesertMale"
+    },
+    {
+      "file": "BanditCaptainElfDesertMale (2).webp",
+      "variant": "elfDesertMale"
+    },
+    {
+      "file": "BanditCaptainElfDesertMale (3).webp",
+      "variant": "elfDesertMale"
+    },
+    {
+      "file": "BanditCaptainElfDesertMale (4).webp",
+      "variant": "elfDesertMale"
+    },
+    {
+      "file": "BanditCaptainElfDesertMale (5).webp",
+      "variant": "elfDesertMale"
+    },
+    {
+      "file": "BanditCaptainElfForestFemale (1).webp",
+      "variant": "elfForestFemale"
+    },
+    {
+      "file": "BanditCaptainElfForestFemale (10).webp",
+      "variant": "elfForestFemale"
+    },
+    {
+      "file": "BanditCaptainElfForestFemale (11).webp",
+      "variant": "elfForestFemale"
+    },
+    {
+      "file": "BanditCaptainElfForestFemale (2).webp",
+      "variant": "elfForestFemale"
+    },
+    {
+      "file": "BanditCaptainElfForestFemale (3).webp",
+      "variant": "elfForestFemale"
+    },
+    {
+      "file": "BanditCaptainElfForestFemale (4).webp",
+      "variant": "elfForestFemale"
+    },
+    {
+      "file": "BanditCaptainElfForestFemale (5).webp",
+      "variant": "elfForestFemale"
+    },
+    {
+      "file": "BanditCaptainElfForestFemale (6).webp",
+      "variant": "elfForestFemale"
+    },
+    {
+      "file": "BanditCaptainElfForestFemale (7).webp",
+      "variant": "elfForestFemale"
+    },
+    {
+      "file": "BanditCaptainElfForestFemale (8).webp",
+      "variant": "elfForestFemale"
+    },
+    {
+      "file": "BanditCaptainElfForestFemale (9).webp",
+      "variant": "elfForestFemale"
+    },
+    {
+      "file": "BanditCaptainElfForestMale (1).webp",
+      "variant": "elfForestMale"
+    },
+    {
+      "file": "BanditCaptainElfForestMale (2).webp",
+      "variant": "elfForestMale"
+    },
+    {
+      "file": "BanditCaptainElfForestMale (3).webp",
+      "variant": "elfForestMale"
+    },
+    {
+      "file": "BanditCaptainElfForestMale (4).webp",
+      "variant": "elfForestMale"
+    },
+    {
+      "file": "BanditCaptainElfForestMale (5).webp",
+      "variant": "elfForestMale"
+    },
+    {
+      "file": "BanditCaptainElfForestMale (6).webp",
+      "variant": "elfForestMale"
+    },
+    {
+      "file": "BanditCaptainElfUrbanFemale (1).webp",
+      "variant": "elfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainElfUrbanFemale (2).webp",
+      "variant": "elfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainElfUrbanFemale (3).webp",
+      "variant": "elfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainElfUrbanFemale (4).webp",
+      "variant": "elfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainElfUrbanFemale (5).webp",
+      "variant": "elfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainElfUrbanFemale (6).webp",
+      "variant": "elfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainElfUrbanFemale (7).webp",
+      "variant": "elfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainElfUrbanFemale (8).webp",
+      "variant": "elfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainElfUrbanFemale (9).webp",
+      "variant": "elfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainElfUrbanMale (1).webp",
+      "variant": "elfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainElfUrbanMale (2).webp",
+      "variant": "elfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainElfUrbanMale (3).webp",
+      "variant": "elfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainElfUrbanMale (4).webp",
+      "variant": "elfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainElfUrbanMale (5).webp",
+      "variant": "elfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainGnomeArcticFemale (1).webp",
+      "variant": "gnomeArcticFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeArcticFemale (2).webp",
+      "variant": "gnomeArcticFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeArcticFemale (3).webp",
+      "variant": "gnomeArcticFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeArcticFemale (4).webp",
+      "variant": "gnomeArcticFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeArcticFemale (5).webp",
+      "variant": "gnomeArcticFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeArcticFemale (6).webp",
+      "variant": "gnomeArcticFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeArcticMale (1).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "BanditCaptainGnomeArcticMale (10).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "BanditCaptainGnomeArcticMale (2).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "BanditCaptainGnomeArcticMale (3).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "BanditCaptainGnomeArcticMale (4).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "BanditCaptainGnomeArcticMale (5).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "BanditCaptainGnomeArcticMale (6).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "BanditCaptainGnomeArcticMale (7).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "BanditCaptainGnomeArcticMale (8).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "BanditCaptainGnomeArcticMale (9).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "BanditCaptainGnomeDesertFemale (1).webp",
+      "variant": "gnomeDesertFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeDesertFemale (2).webp",
+      "variant": "gnomeDesertFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeDesertFemale (3).webp",
+      "variant": "gnomeDesertFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeDesertFemale (4).webp",
+      "variant": "gnomeDesertFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeDesertFemale (5).webp",
+      "variant": "gnomeDesertFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeDesertFemale (6).webp",
+      "variant": "gnomeDesertFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeDesertFemale (7).webp",
+      "variant": "gnomeDesertFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeDesertFemale (8).webp",
+      "variant": "gnomeDesertFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeDesertMale (1).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "BanditCaptainGnomeDesertMale (2).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "BanditCaptainGnomeDesertMale (3).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "BanditCaptainGnomeDesertMale (4).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "BanditCaptainGnomeDesertMale (5).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "BanditCaptainGnomeDesertMale (6).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "BanditCaptainGnomeDesertMale (7).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "BanditCaptainGnomeDesertMale (8).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "BanditCaptainGnomeForestFemale (1).webp",
+      "variant": "gnomeForestFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeForestFemale (2).webp",
+      "variant": "gnomeForestFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeForestFemale (3).webp",
+      "variant": "gnomeForestFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeForestFemale (4).webp",
+      "variant": "gnomeForestFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeForestFemale (5).webp",
+      "variant": "gnomeForestFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeForestFemale (6).webp",
+      "variant": "gnomeForestFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeForestFemale (7).webp",
+      "variant": "gnomeForestFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeForestMale (1).webp",
+      "variant": "gnomeForestMale"
+    },
+    {
+      "file": "BanditCaptainGnomeForestMale (2).webp",
+      "variant": "gnomeForestMale"
+    },
+    {
+      "file": "BanditCaptainGnomeForestMale (3).webp",
+      "variant": "gnomeForestMale"
+    },
+    {
+      "file": "BanditCaptainGnomeForestMale (4).webp",
+      "variant": "gnomeForestMale"
+    },
+    {
+      "file": "BanditCaptainGnomeForestMale (5).webp",
+      "variant": "gnomeForestMale"
+    },
+    {
+      "file": "BanditCaptainGnomeForestMale (6).webp",
+      "variant": "gnomeForestMale"
+    },
+    {
+      "file": "BanditCaptainGnomeForestMale (7).webp",
+      "variant": "gnomeForestMale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanFemale (1).webp",
+      "variant": "gnomeUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanFemale (2).webp",
+      "variant": "gnomeUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanFemale (3).webp",
+      "variant": "gnomeUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanFemale (4).webp",
+      "variant": "gnomeUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanFemale (5).webp",
+      "variant": "gnomeUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanFemale (6).webp",
+      "variant": "gnomeUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanFemale (7).webp",
+      "variant": "gnomeUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanMale (1).webp",
+      "variant": "gnomeUrbanMale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanMale (10).webp",
+      "variant": "gnomeUrbanMale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanMale (11).webp",
+      "variant": "gnomeUrbanMale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanMale (2).webp",
+      "variant": "gnomeUrbanMale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanMale (3).webp",
+      "variant": "gnomeUrbanMale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanMale (4).webp",
+      "variant": "gnomeUrbanMale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanMale (5).webp",
+      "variant": "gnomeUrbanMale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanMale (6).webp",
+      "variant": "gnomeUrbanMale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanMale (7).webp",
+      "variant": "gnomeUrbanMale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanMale (8).webp",
+      "variant": "gnomeUrbanMale"
+    },
+    {
+      "file": "BanditCaptainGnomeUrbanMale (9).webp",
+      "variant": "gnomeUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticFemale (1).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticFemale (10).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticFemale (11).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticFemale (2).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticFemale (3).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticFemale (4).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticFemale (5).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticFemale (6).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticFemale (7).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticFemale (8).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticFemale (9).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticMale (1).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticMale (2).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticMale (3).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticMale (4).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticMale (5).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticMale (6).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfArcticMale (7).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfDesertFemale (1).webp",
+      "variant": "halfElfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfDesertFemale (2).webp",
+      "variant": "halfElfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfDesertFemale (3).webp",
+      "variant": "halfElfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfDesertFemale (4).webp",
+      "variant": "halfElfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfDesertFemale (5).webp",
+      "variant": "halfElfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfDesertFemale (6).webp",
+      "variant": "halfElfDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfDesertMale (1).webp",
+      "variant": "halfElfDesertMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfDesertMale (2).webp",
+      "variant": "halfElfDesertMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfDesertMale (3).webp",
+      "variant": "halfElfDesertMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfDesertMale (4).webp",
+      "variant": "halfElfDesertMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestFemale (1).webp",
+      "variant": "halfElfForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestFemale (10).webp",
+      "variant": "halfElfForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestFemale (11).webp",
+      "variant": "halfElfForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestFemale (12).webp",
+      "variant": "halfElfForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestFemale (13).webp",
+      "variant": "halfElfForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestFemale (2).webp",
+      "variant": "halfElfForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestFemale (3).webp",
+      "variant": "halfElfForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestFemale (4).webp",
+      "variant": "halfElfForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestFemale (5).webp",
+      "variant": "halfElfForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestFemale (6).webp",
+      "variant": "halfElfForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestFemale (7).webp",
+      "variant": "halfElfForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestFemale (8).webp",
+      "variant": "halfElfForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestFemale (9).webp",
+      "variant": "halfElfForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestMale (1).webp",
+      "variant": "halfElfForestMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestMale (2).webp",
+      "variant": "halfElfForestMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestMale (3).webp",
+      "variant": "halfElfForestMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestMale (4).webp",
+      "variant": "halfElfForestMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestMale (5).webp",
+      "variant": "halfElfForestMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfForestMale (6).webp",
+      "variant": "halfElfForestMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfUrbanFemale (1).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfUrbanFemale (2).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfUrbanFemale (3).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfUrbanFemale (4).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfUrbanFemale (5).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfUrbanFemale (6).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfUrbanFemale (7).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalfElfUrbanMale (1).webp",
+      "variant": "halfElfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfUrbanMale (2).webp",
+      "variant": "halfElfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfUrbanMale (3).webp",
+      "variant": "halfElfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfUrbanMale (4).webp",
+      "variant": "halfElfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalfElfUrbanMale (5).webp",
+      "variant": "halfElfUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalflingArcticFemale (1).webp",
+      "variant": "halflingArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalflingArcticFemale (2).webp",
+      "variant": "halflingArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalflingArcticFemale (3).webp",
+      "variant": "halflingArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalflingArcticFemale (4).webp",
+      "variant": "halflingArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalflingArcticFemale (5).webp",
+      "variant": "halflingArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalflingArcticMale (1).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalflingArcticMale (2).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalflingArcticMale (3).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalflingArcticMale (4).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalflingArcticMale (5).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalflingArcticMale (6).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalflingArcticMale (7).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalflingDesertFemale (1).webp",
+      "variant": "halflingDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHalflingDesertFemale (2).webp",
+      "variant": "halflingDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHalflingDesertFemale (3).webp",
+      "variant": "halflingDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHalflingDesertMale (1).webp",
+      "variant": "halflingDesertMale"
+    },
+    {
+      "file": "BanditCaptainHalflingDesertMale (2).webp",
+      "variant": "halflingDesertMale"
+    },
+    {
+      "file": "BanditCaptainHalflingDesertMale (3).webp",
+      "variant": "halflingDesertMale"
+    },
+    {
+      "file": "BanditCaptainHalflingDesertMale (4).webp",
+      "variant": "halflingDesertMale"
+    },
+    {
+      "file": "BanditCaptainHalflingForestFemale (1).webp",
+      "variant": "halflingForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalflingForestFemale (2).webp",
+      "variant": "halflingForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalflingForestFemale (3).webp",
+      "variant": "halflingForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalflingForestMale (1).webp",
+      "variant": "halflingForestMale"
+    },
+    {
+      "file": "BanditCaptainHalflingForestMale (2).webp",
+      "variant": "halflingForestMale"
+    },
+    {
+      "file": "BanditCaptainHalflingForestMale (3).webp",
+      "variant": "halflingForestMale"
+    },
+    {
+      "file": "BanditCaptainHalflingUrbanFemale (1).webp",
+      "variant": "halflingUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalflingUrbanFemale (2).webp",
+      "variant": "halflingUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalflingUrbanFemale (3).webp",
+      "variant": "halflingUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalflingUrbanFemale (4).webp",
+      "variant": "halflingUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalflingUrbanFemale (5).webp",
+      "variant": "halflingUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalflingUrbanFemale (6).webp",
+      "variant": "halflingUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalflingUrbanMale (1).webp",
+      "variant": "halflingUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalflingUrbanMale (2).webp",
+      "variant": "halflingUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalflingUrbanMale (3).webp",
+      "variant": "halflingUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalflingUrbanMale (4).webp",
+      "variant": "halflingUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalflingUrbanMale (5).webp",
+      "variant": "halflingUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalflingUrbanMale (6).webp",
+      "variant": "halflingUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalflingUrbanMale (7).webp",
+      "variant": "halflingUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcArcticFemale (1).webp",
+      "variant": "halfOrcArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcArcticFemale (2).webp",
+      "variant": "halfOrcArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcArcticFemale (3).webp",
+      "variant": "halfOrcArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcArcticFemale (4).webp",
+      "variant": "halfOrcArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcArcticFemale (5).webp",
+      "variant": "halfOrcArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcArcticFemale (6).webp",
+      "variant": "halfOrcArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcArcticFemale (7).webp",
+      "variant": "halfOrcArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcArcticMale (1).webp",
+      "variant": "halfOrcArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcArcticMale (2).webp",
+      "variant": "halfOrcArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcArcticMale (3).webp",
+      "variant": "halfOrcArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcArcticMale (4).webp",
+      "variant": "halfOrcArcticMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcDesertFemale (1).webp",
+      "variant": "halfOrcDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcDesertFemale (2).webp",
+      "variant": "halfOrcDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcDesertFemale (3).webp",
+      "variant": "halfOrcDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcDesertFemale (4).webp",
+      "variant": "halfOrcDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcDesertFemale (5).webp",
+      "variant": "halfOrcDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcDesertMale (1).webp",
+      "variant": "halfOrcDesertMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcDesertMale (2).webp",
+      "variant": "halfOrcDesertMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcDesertMale (3).webp",
+      "variant": "halfOrcDesertMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcDesertMale (4).webp",
+      "variant": "halfOrcDesertMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcDesertMale (5).webp",
+      "variant": "halfOrcDesertMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcDesertMale (6).webp",
+      "variant": "halfOrcDesertMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestFemale (1).webp",
+      "variant": "halfOrcForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestFemale (10).webp",
+      "variant": "halfOrcForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestFemale (11).webp",
+      "variant": "halfOrcForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestFemale (2).webp",
+      "variant": "halfOrcForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestFemale (3).webp",
+      "variant": "halfOrcForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestFemale (4).webp",
+      "variant": "halfOrcForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestFemale (5).webp",
+      "variant": "halfOrcForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestFemale (6).webp",
+      "variant": "halfOrcForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestFemale (7).webp",
+      "variant": "halfOrcForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestFemale (8).webp",
+      "variant": "halfOrcForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestFemale (9).webp",
+      "variant": "halfOrcForestFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestMale (1).webp",
+      "variant": "halfOrcForestMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestMale (10).webp",
+      "variant": "halfOrcForestMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestMale (11).webp",
+      "variant": "halfOrcForestMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestMale (2).webp",
+      "variant": "halfOrcForestMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestMale (3).webp",
+      "variant": "halfOrcForestMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestMale (4).webp",
+      "variant": "halfOrcForestMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestMale (5).webp",
+      "variant": "halfOrcForestMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestMale (6).webp",
+      "variant": "halfOrcForestMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestMale (7).webp",
+      "variant": "halfOrcForestMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestMale (8).webp",
+      "variant": "halfOrcForestMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcForestMale (9).webp",
+      "variant": "halfOrcForestMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcUrbanFemale (1).webp",
+      "variant": "halfOrcUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcUrbanFemale (2).webp",
+      "variant": "halfOrcUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcUrbanFemale (3).webp",
+      "variant": "halfOrcUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcUrbanFemale (4).webp",
+      "variant": "halfOrcUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcUrbanFemale (5).webp",
+      "variant": "halfOrcUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcUrbanMale (1).webp",
+      "variant": "halfOrcUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcUrbanMale (2).webp",
+      "variant": "halfOrcUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcUrbanMale (3).webp",
+      "variant": "halfOrcUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcUrbanMale (4).webp",
+      "variant": "halfOrcUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcUrbanMale (5).webp",
+      "variant": "halfOrcUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHalfOrcUrbanMale (6).webp",
+      "variant": "halfOrcUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (1).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (10).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (11).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (12).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (13).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (14).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (15).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (16).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (17).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (18).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (19).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (2).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (20).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (21).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (22).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (3).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (4).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (5).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (6).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (7).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (8).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticFemale (9).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (1).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (10).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (11).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (12).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (13).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (14).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (15).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (16).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (17).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (18).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (2).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (3).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (4).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (5).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (6).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (7).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (8).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanArcticMale (9).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (1).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (10).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (11).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (12).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (13).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (14).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (15).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (16).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (17).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (18).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (2).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (3).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (4).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (5).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (6).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (7).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (8).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertFemale (9).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertMale (1).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertMale (10).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertMale (11).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertMale (12).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertMale (13).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertMale (14).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertMale (15).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertMale (16).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertMale (17).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertMale (2).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertMale (3).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertMale (4).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertMale (5).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertMale (6).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertMale (7).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertMale (8).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "BanditCaptainHumanDesertMale (9).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "BanditCaptainHumanForestFemale (1).webp",
+      "variant": "humanForestFemale"
+    },
+    {
+      "file": "BanditCaptainHumanForestFemale (10).webp",
+      "variant": "humanForestFemale"
+    },
+    {
+      "file": "BanditCaptainHumanForestFemale (11).webp",
+      "variant": "humanForestFemale"
+    },
+    {
+      "file": "BanditCaptainHumanForestFemale (12).webp",
+      "variant": "humanForestFemale"
+    },
+    {
+      "file": "BanditCaptainHumanForestFemale (13).webp",
+      "variant": "humanForestFemale"
+    },
+    {
+      "file": "BanditCaptainHumanForestFemale (14).webp",
+      "variant": "humanForestFemale"
+    },
+    {
+      "file": "BanditCaptainHumanForestFemale (15).webp",
+      "variant": "humanForestFemale"
+    },
+    {
+      "file": "BanditCaptainHumanForestFemale (16).webp",
+      "variant": "humanForestFemale"
+    },
+    {
+      "file": "BanditCaptainHumanForestFemale (17).webp",
+      "variant": "humanForestFemale"
+    },
+    {
+      "file": "BanditCaptainHumanForestFemale (2).webp",
+      "variant": "humanForestFemale"
+    },
+    {
+      "file": "BanditCaptainHumanForestFemale (3).webp",
+      "variant": "humanForestFemale"
+    },
+    {
+      "file": "BanditCaptainHumanForestFemale (4).webp",
+      "variant": "humanForestFemale"
+    },
+    {
+      "file": "BanditCaptainHumanForestFemale (5).webp",
+      "variant": "humanForestFemale"
+    },
+    {
+      "file": "BanditCaptainHumanForestFemale (6).webp",
+      "variant": "humanForestFemale"
+    },
+    {
+      "file": "BanditCaptainHumanForestFemale (7).webp",
+      "variant": "humanForestFemale"
+    },
+    {
+      "file": "BanditCaptainHumanForestFemale (8).webp",
+      "variant": "humanForestFemale"
+    },
+    {
+      "file": "BanditCaptainHumanForestFemale (9).webp",
+      "variant": "humanForestFemale"
+    },
+    {
+      "file": "BanditCaptainHumanForestMale (1).webp",
+      "variant": "humanForestMale"
+    },
+    {
+      "file": "BanditCaptainHumanForestMale (2).webp",
+      "variant": "humanForestMale"
+    },
+    {
+      "file": "BanditCaptainHumanForestMale (3).webp",
+      "variant": "humanForestMale"
+    },
+    {
+      "file": "BanditCaptainHumanForestMale (4).webp",
+      "variant": "humanForestMale"
+    },
+    {
+      "file": "BanditCaptainHumanForestMale (5).webp",
+      "variant": "humanForestMale"
+    },
+    {
+      "file": "BanditCaptainHumanForestMale (6).webp",
+      "variant": "humanForestMale"
+    },
+    {
+      "file": "BanditCaptainHumanForestMale (7).webp",
+      "variant": "humanForestMale"
+    },
+    {
+      "file": "BanditCaptainHumanForestMale (8).webp",
+      "variant": "humanForestMale"
+    },
+    {
+      "file": "BanditCaptainHumanForestMale (9).webp",
+      "variant": "humanForestMale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanFemale (1).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanFemale (10).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanFemale (11).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanFemale (12).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanFemale (13).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanFemale (14).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanFemale (2).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanFemale (3).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanFemale (4).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanFemale (5).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanFemale (6).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanFemale (7).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanFemale (8).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanFemale (9).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanMale (1).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanMale (10).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanMale (11).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanMale (12).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanMale (13).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanMale (14).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanMale (15).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanMale (16).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanMale (2).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanMale (3).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanMale (4).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanMale (5).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanMale (6).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanMale (7).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanMale (8).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "BanditCaptainHumanUrbanMale (9).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "BanditCaptainTieflingArcticFemale (1).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingArcticFemale (10).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingArcticFemale (2).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingArcticFemale (3).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingArcticFemale (4).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingArcticFemale (5).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingArcticFemale (6).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingArcticFemale (7).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingArcticFemale (8).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingArcticFemale (9).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingArcticMale (1).webp",
+      "variant": "tieflingArcticMale"
+    },
+    {
+      "file": "BanditCaptainTieflingArcticMale (2).webp",
+      "variant": "tieflingArcticMale"
+    },
+    {
+      "file": "BanditCaptainTieflingArcticMale (3).webp",
+      "variant": "tieflingArcticMale"
+    },
+    {
+      "file": "BanditCaptainTieflingArcticMale (4).webp",
+      "variant": "tieflingArcticMale"
+    },
+    {
+      "file": "BanditCaptainTieflingArcticMale (5).webp",
+      "variant": "tieflingArcticMale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertFemale (1).webp",
+      "variant": "tieflingDesertFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertFemale (2).webp",
+      "variant": "tieflingDesertFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertFemale (3).webp",
+      "variant": "tieflingDesertFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertFemale (4).webp",
+      "variant": "tieflingDesertFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertFemale (5).webp",
+      "variant": "tieflingDesertFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertFemale (6).webp",
+      "variant": "tieflingDesertFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertFemale (7).webp",
+      "variant": "tieflingDesertFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertMale (1).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertMale (10).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertMale (11).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertMale (2).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertMale (3).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertMale (4).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertMale (5).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertMale (6).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertMale (7).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertMale (8).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "BanditCaptainTieflingDesertMale (9).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "BanditCaptainTieflingForestFemale (1).webp",
+      "variant": "tieflingForestFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingForestFemale (2).webp",
+      "variant": "tieflingForestFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingForestFemale (3).webp",
+      "variant": "tieflingForestFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingForestFemale (4).webp",
+      "variant": "tieflingForestFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingForestFemale (5).webp",
+      "variant": "tieflingForestFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingForestFemale (6).webp",
+      "variant": "tieflingForestFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingForestFemale (7).webp",
+      "variant": "tieflingForestFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingForestFemale (8).webp",
+      "variant": "tieflingForestFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingForestMale (1).webp",
+      "variant": "tieflingForestMale"
+    },
+    {
+      "file": "BanditCaptainTieflingForestMale (2).webp",
+      "variant": "tieflingForestMale"
+    },
+    {
+      "file": "BanditCaptainTieflingForestMale (3).webp",
+      "variant": "tieflingForestMale"
+    },
+    {
+      "file": "BanditCaptainTieflingForestMale (4).webp",
+      "variant": "tieflingForestMale"
+    },
+    {
+      "file": "BanditCaptainTieflingForestMale (5).webp",
+      "variant": "tieflingForestMale"
+    },
+    {
+      "file": "BanditCaptainTieflingForestMale (6).webp",
+      "variant": "tieflingForestMale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanFemale (1).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanFemale (2).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanFemale (3).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanFemale (4).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanFemale (5).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanFemale (6).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanFemale (7).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanFemale (8).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanFemale (9).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanMale (1).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanMale (10).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanMale (2).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanMale (3).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanMale (4).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanMale (5).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanMale (6).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanMale (7).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanMale (8).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "BanditCaptainTieflingUrbanMale (9).webp",
+      "variant": "tieflingUrbanMale"
+    }
+  ],
+  "reactions": {
+    "en": [
+      {
+        "name": "Parry",
+        "text": "The captain adds 2 to its AC against one melee attack that would hit it. To do so, the captain must see the attacker and be wielding a melee weapon."
+      }
+    ],
+    "de": [
+      {
+        "name": "Parieren",
+        "text": "Der Hauptmann erhöht seine RK gegen einen Nahkampfangriff, der ihn treffen würde, um 2. Dazu muss der Hauptmann den Angreifer sehen können und eine Nahkampfwaffe führen."
+      }
+    ]
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

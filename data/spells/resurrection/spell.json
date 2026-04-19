@@ -1,0 +1,64 @@
+{
+  "id": 208,
+  "slug": "resurrection",
+  "name": "Resurrection",
+  "nameDe": "Auferstehung",
+  "level": {
+    "en": "7",
+    "de": "Grad 7"
+  },
+  "school": {
+    "en": "Necromancy",
+    "de": "Nekromantie"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "druid"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "7th-level necromancy",
+    "de": "Stufe 7 Nekromantie"
+  },
+  "castingTime": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a diamond worth at least 1,000 gp, which the spell consumes",
+      "de": "einen Diamanten im Wert von mindestens 1.000 Goldstücken, den der Zauberspruch verbraucht"
+    },
+    "raw": {
+      "en": "V, S, M (a diamond worth at least 1,000 gp, which the spell consumes)",
+      "de": "V, G, M (einen Diamanten im Wert von mindestens 1.000 Goldstücken, den der Zauberspruch verbraucht)"
+    }
+  },
+  "description": {
+    "en": "You touch a dead creature that has been dead for no more than a century, that didn't die of old age, and that isn't undead. If its soul is free and willing, the target returns to life with all its hit points. This spell neutralizes any poisons and cures normal diseases afflicting the creature when it died. It doesn't, however, remove magical diseases, curses, and the like; if such effects aren't removed prior to casting the spell, they afflict the target on its return to life. This spell closes all mortal wounds and restores any missing body parts. Coming back from the dead is an ordeal. The target takes a -4 penalty to all attack rolls, saving throws, and ability checks. Every time the target finishes a long rest, the penalty is reduced by 1 until it disappears. Casting this spell to restore life to a creature that has been dead for one year or longer taxes you greatly. Until you finish a long rest, you can't cast spells again, and you have disadvantage on all attack rolls, ability checks, and saving throws.",
+    "de": "Du berührst eine tote Kreatur. Ihr Tod darf maximal ein Jahrhundert zurückliegen und sie darf weder an Altersschwäche gestorben noch untot sein. Ist die Seele des Ziels frei und bereitwillig, wird es mit all seinen Treffer punkten wieder zum Leben erweckt. Dieser Zauber neutralisiert sämtliche Gifte und heilt gewöhnliche Krankheiten, unter denen das Ziel zum Zeitpunkt seines Todes litt. Er hebt jedoch keine magischen Krankheiten, Flüche oder ähnlichen Effekte auf. Werden diese nicht vor dem Wirken des Zaubers gebannt, wirken sie wieder, wenn das Ziel zum Leben erweckt wird. Dieser Zauber schließt alle tödlichen Wunden und stellt sämtliche abgetrennten Gliedmaßen wieder her. Von den Toten aufzuerstehen ist eine Tortur. Das Ziel erhält einen Malus von -4 auf alle Angriffs-, Attributs- und Rettungswürfe. Nach jeder langen Rast wird der Malus um 1 reduziert, bis er verschwindet. Wirkst du diesen Zauber, um eine Kreatur zum Leben zu erwecken, die seit mindestens einem Jahr tot ist, belastet dich das stark. Du kannst erst nach einer langen Rast wieder Zauber wirken und bist bis dahin bei sämtlichen Angriffs-, Attributs- und Rettungswürfen im Nachteil."
+  },
+  "image": "true-resurrection",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

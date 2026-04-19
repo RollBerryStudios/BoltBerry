@@ -1,0 +1,66 @@
+{
+  "id": 256,
+  "slug": "flaming-sphere",
+  "name": "Flaming Sphere",
+  "nameDe": "Flammenkugel",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "wizard"
+    ],
+    "de": [
+      "Druide",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-level conjuration",
+    "de": "Stufe 2 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a bit of tallow, a pinch of brimstone, and a dusting of powdered iron",
+      "de": "ein bisschen Talg, eine Prise Schwefel und eine Prise pulverisiertes Eisen"
+    },
+    "raw": {
+      "en": "V, S, M (a bit of tallow, a pinch of brimstone, and a dusting of powdered iron)",
+      "de": "V, G, M (ein bisschen Talg, eine Prise Schwefel und eine Prise pulverisiertes Eisen)"
+    }
+  },
+  "description": {
+    "en": "A 5-foot-diameter sphere of fire appears in an unoccupied space of your choice within range and lasts for the duration. Any creature that ends its turn within 5 feet of the sphere must make a dexterity saving throw. The creature takes 2d6 fire damage on a failed save, or half as much damage on a successful one. As a bonus action, you can move the sphere up to 30 feet. If you ram the sphere into a creature, that creature must make the saving throw against the sphere's damage, and the sphere stops moving this turn. When you move the sphere, you can direct it over barriers up to 5 feet tall and jump it across pits up to 10 feet wide. The sphere ignites flammable objects not being worn or carried, and it sheds bright light in a 20-foot radius and dim light for an additional 20 feet.",
+    "de": "Eine flammende Sphäre mit 1,5 Metern Durchmesser erscheint an einer freien Stelle deiner Wahl in Reichweite und bleibt dort für die Wirkungsdauer bestehen. Jede Kreatur, die ihren Zug in einem Umkreis von 1,5 Metern um die Sphäre beendet, muss einen Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 2W6 Feuerschaden, anderenfalls die Hälfte. Als Bonusaktion kannst du die Sphäre um bis zu neun Meter bewegen. Wenn du die Sphäre in eine Kreatur rammst, muss die Kreatur einen Rettungswurf gegen den Schaden der Sphäre ausführen und die Sphäre beendet ihre Bewegung für diesen Zug. Bewegst du die Sphäre, kannst du sie über bis zu 1,5 Meter hohe Hürden dirigieren und über bis zu drei Meter breite Gruben springen lassen. Die Sphäre entzündet brennbare Gegenstände, die nicht getragen oder gehalten werden. Sie strahlt im Radius von sechs Metern helles Licht sowie im Radius von weiteren sechs Metern dämmriges Licht aus. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 2. um 1W6."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d6 for each slot level above 2nd.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 2. um 1W6."
+  },
+  "image": "circle-of-power",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,30 @@
+{
+  "id": 430,
+  "slug": "robe-of-stars",
+  "name": "Robe of Stars",
+  "nameDe": "Robe der Sterne",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 6000000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, very rare (requires attunement) This black or dark blue robe is embroidered with small white or silver stars. You gain a +1 bonus to saving throws while you wear it. Six stars, located on the robe's upper front portion, are particularly large. While wearing this robe, you can use an action to pull off one of the stars and use it to cast magic missile as a 5th-level spell. Daily at dusk, 1d6 removed stars reappear on the robe. While you wear the robe, you can use an action to enter the Astral Plane along with everything you are wearing and carrying. You remain there until you use an action to return to the plane you were on. You reappear in the last space you occupied, or if that space is occupied, the nearest unoccupied space.",
+    "de": "Diese schwarze oder dunkelblaue Robe ist mit kleinen weißen oder silbernen Sternen bestickt. Wenn du sie trägst, erhältst du einen Bonus von +1 auf deine Rettungswürfe. Sechs Sterne im oberen Bereich der Vorderseite der Robe sind besonders groß. Wenn du diese Robe trägst, kannst du als Aktion einen der Sterne abreißen und damit den Zauber Magisches Geschoss  als Zauber des 5. Grades zu wirken. In der Abenddämmerung erscheinen täglich 1W6 entfernte Sterne erneut auf der Robe. Wenn du die Robe trägst, kannst du als Aktion mit allem, was du trägst oder hältst, die Astralebene betreten. Du bleibst dort, bis du eine Aktion verwendest, um zu deiner Ausgangsebene zurückzukehren. Du erscheinst wieder an der Stelle, an der du zuletzt warst, oder an der nächstgelegenen freien Stelle, falls dieser Ort besetzt ist."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

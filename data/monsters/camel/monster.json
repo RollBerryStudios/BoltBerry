@@ -1,0 +1,202 @@
+{
+  "id": 61,
+  "slug": "camel",
+  "name": "Camel",
+  "nameDe": "Kamel",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/8",
+  "xp": 25,
+  "ac": {
+    "en": "9",
+    "de": "9"
+  },
+  "hp": {
+    "en": "15 (2d10 + 4)",
+    "de": "15 (2W10+4)"
+  },
+  "str": 16,
+  "dex": 8,
+  "con": 14,
+  "int": 2,
+  "wis": 8,
+  "cha": 5,
+  "strMod": 3,
+  "dexMod": -1,
+  "conMod": 2,
+  "intMod": -4,
+  "wisMod": -1,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 9"
+    ],
+    "de": [
+      "Passive Wahrnehmung 9"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 2 (1d4) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 2 (1W4) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "CamelTamed (1).webp",
+    "variant": "tamed"
+  },
+  "tokens": [
+    {
+      "file": "CamelTamed (10).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (11).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (12).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (13).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (14).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (15).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (16).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (17).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (18).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (19).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (2).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (20).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (21).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (22).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (23).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (24).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (3).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (4).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (5).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (6).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (7).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (8).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelTamed (9).webp",
+      "variant": "tamed"
+    },
+    {
+      "file": "CamelWild (1).webp",
+      "variant": "wild"
+    },
+    {
+      "file": "CamelWild (2).webp",
+      "variant": "wild"
+    },
+    {
+      "file": "CamelWild (3).webp",
+      "variant": "wild"
+    },
+    {
+      "file": "CamelWild (4).webp",
+      "variant": "wild"
+    },
+    {
+      "file": "CamelWild (5).webp",
+      "variant": "wild"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

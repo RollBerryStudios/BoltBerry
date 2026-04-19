@@ -1,0 +1,68 @@
+{
+  "id": 152,
+  "slug": "tongues",
+  "name": "Tongues",
+  "nameDe": "Zungen",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level divination",
+    "de": "Stufe 3 Erkenntnismagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a small clay model of a ziggurat",
+      "de": "ein kleines Tonmodell einer Ziggurat"
+    },
+    "raw": {
+      "en": "V, M (a small clay model of a ziggurat)",
+      "de": "V, M (ein kleines Tonmodell einer Ziggurat)"
+    }
+  },
+  "description": {
+    "en": "This spell grants the creature you touch the ability to understand any spoken language it hears. Moreover, when the target speaks, any creature that knows at least one language and can hear the target understands what it says.",
+    "de": "Dieser Zauber gewährt der berührten Kreatur die Fähigkeit, jede gesprochene Sprache zu verstehen, die sie hört Wenn das Ziel spricht, können außerdem alle Kreaturen verstehen, was es sagt, die mindestens eine Sprache beherrschen und das Ziel hören können."
+  },
+  "image": "tounges",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

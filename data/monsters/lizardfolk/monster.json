@@ -1,0 +1,289 @@
+{
+  "id": 191,
+  "slug": "lizardfolk",
+  "name": "Lizardfolk",
+  "nameDe": "Echsenmensch",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, neutral",
+    "de": "Mittelgroßer Humanoid, neutral"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "15 (Natural Armor, Shield)",
+    "de": "15 (natürliche Rüstung, Schild)"
+  },
+  "hp": {
+    "en": "22 (4d8 + 4)",
+    "de": "22 (4W8+4)"
+  },
+  "str": 15,
+  "dex": 10,
+  "con": 13,
+  "int": 7,
+  "wis": 12,
+  "cha": 7,
+  "strMod": 2,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": -2,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "swim": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Draconic"
+    ],
+    "de": [
+      "Drakonisch"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +4",
+    "Überlebenskunst +5",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Hold Breath",
+        "text": "The lizardfolk can hold its breath for 15 minutes."
+      }
+    ],
+    "de": [
+      {
+        "name": "Atem anhalten",
+        "text": "Der Echsenmensch kann 15 Minuten lang den Atem anhalten."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The lizardfolk makes two melee attacks, each one with a different weapon."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      },
+      {
+        "name": "Heavy Club",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) bludgeoning damage."
+      },
+      {
+        "name": "Javelin",
+        "text": "Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      },
+      {
+        "name": "Spiked Shield",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Echsenmensch führt zwei Nahkampfangriffe aus, jeden mit einer anderen Waffe."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden."
+      },
+      {
+        "name": "Dornenschild",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden."
+      },
+      {
+        "name": "Schwerer Knüppel",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W6+2) Wuchtschaden."
+      },
+      {
+        "name": "Wurfspeer",
+        "text": "Nah- oder Fernkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m oder Reichweite 9/36 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/233/315/315/636252766314905259.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (Echsenmensch)"
+  },
+  "alignment": {
+    "en": "neutral",
+    "de": "neutral"
+  },
+  "token": {
+    "file": "Lizardfolk (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Lizardfolk (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (31).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (32).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (33).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (34).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (35).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (36).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (37).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lizardfolk (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

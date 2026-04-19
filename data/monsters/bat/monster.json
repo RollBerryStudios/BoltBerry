@@ -1,0 +1,202 @@
+{
+  "id": 44,
+  "slug": "bat",
+  "name": "Bat",
+  "nameDe": "Fledermaus",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny beast, unaligned",
+    "de": "Winzige Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "1 (1d4 - 1)",
+    "de": "1 (1W4-1)"
+  },
+  "str": 2,
+  "dex": 15,
+  "con": 8,
+  "int": 2,
+  "wis": 12,
+  "cha": 4,
+  "strMod": -4,
+  "dexMod": 2,
+  "conMod": -1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 5,
+      "de": 1
+    },
+    "fly": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 60 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Blindsicht 18 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Echolocation",
+        "text": "The bat can't use its blindsight while deafened."
+      },
+      {
+        "name": "Keen Hearing",
+        "text": "The bat has advantage on Wisdom (Perception) checks that rely on hearing."
+      }
+    ],
+    "de": [
+      {
+        "name": "Echolot",
+        "text": "Die Fledermaus kann ihre Blindsicht nicht verwenden, solange sie taub ist."
+      },
+      {
+        "name": "Scharfes Gehör",
+        "text": "Die Fledermaus ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +0 to hit, reach 5 ft., one creature. Hit: 1 piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +0 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 1 Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/18/305/1000/1000/636379812593010967.jpeg",
+  "size": {
+    "en": "tiny",
+    "de": "Winziges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Bat (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Bat (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bat (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

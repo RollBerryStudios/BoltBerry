@@ -1,0 +1,229 @@
+{
+  "id": 203,
+  "slug": "minotaur",
+  "name": "Minotaur",
+  "nameDe": "Minotaurus",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, chaotic evil",
+    "de": "Große Monstrosität, chaotisch böse"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "14 (Natural Armor)",
+    "de": "14 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "76 (9d10 + 27)",
+    "de": "76 (9W10+27)"
+  },
+  "str": 18,
+  "dex": 11,
+  "con": 16,
+  "int": 6,
+  "wis": 16,
+  "cha": 9,
+  "strMod": 4,
+  "dexMod": 0,
+  "conMod": 3,
+  "intMod": -2,
+  "wisMod": 3,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 17"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 17"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Abyssal"
+    ],
+    "de": [
+      "Abyssisch"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +7"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Charge",
+        "text": "If the minotaur moves at least 10 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra 9 (2d8) piercing damage. If the target is a creature, it must succeed on a DC 14 Strength saving throw or be pushed up to 10 ft. away and knocked prone."
+      },
+      {
+        "name": "Labyrinthine Recall",
+        "text": "The minotaur can perfectly recall any path it has traveled."
+      },
+      {
+        "name": "Reckless",
+        "text": "At the start of its turn, the minotaur can gain advantage on all melee weapon attack rolls it makes during that turn, but attack rolls against it have advantage until the start of its next turn."
+      }
+    ],
+    "de": [
+      {
+        "name": "Erinnerung des Labyrinths",
+        "text": "Der Minotaurus kann sich perfekt an jeden Weg erinnern, den er zurückgelegt hat."
+      },
+      {
+        "name": "Sturmangriff",
+        "text": "Wenn der Minotaurus sich mindestens drei Meter weit direkt auf ein Ziel zubewegt und es dann im selben Zug mit einem Zerfleischen-Angriff trifft, erleidet das Ziel zusätzlich 9 (2W8) Stichschaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-14-Stärkerettungswurf bestehen, oder es wird bis zu drei Meter weit weg- und umgestoßen."
+      },
+      {
+        "name": "Unvorsichtig",
+        "text": "Zu Beginn seines Zugs kann der Minotaurus entscheiden, bei allen Nahkampfwaffen-Angriffswürfen im Vorteil zu sein, die er in diesem Zug ausführt, doch dann sind Angriffswürfe gegen ihn bis zum Beginn seines nächsten Zugs ebenfalls im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Greataxe",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 17 (2d12 + 4) slashing damage."
+      },
+      {
+        "name": "Gore",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Zerfleischen",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 13 (2W8+4) Stichschaden."
+      },
+      {
+        "name": "Zweihandaxt",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 17 (2W12+4) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/217/1000/1000/636252765009181721.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "MinotaurFemale (1).webp",
+    "variant": "female"
+  },
+  "tokens": [
+    {
+      "file": "MinotaurFemale (2).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MinotaurFemale (3).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MinotaurFemale (4).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MinotaurFemale (5).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MinotaurFemale (6).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MinotaurFemale (7).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MinotaurMale (1).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MinotaurMale (10).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MinotaurMale (11).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MinotaurMale (12).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MinotaurMale (13).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MinotaurMale (14).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MinotaurMale (15).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MinotaurMale (16).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MinotaurMale (17).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MinotaurMale (18).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MinotaurMale (2).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MinotaurMale (3).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MinotaurMale (4).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MinotaurMale (5).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MinotaurMale (6).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MinotaurMale (7).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MinotaurMale (8).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MinotaurMale (9).webp",
+      "variant": "male"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

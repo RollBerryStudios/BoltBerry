@@ -1,0 +1,60 @@
+{
+  "id": 258,
+  "slug": "forbiddance",
+  "name": "Forbiddance",
+  "nameDe": "Zutritt verwehren",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "6th-level abjuration (ritual)",
+    "de": "Stufe 6 Bannmagie (Ritual)"
+  },
+  "castingTime": {
+    "en": "10 minutes",
+    "de": "10 Minuten"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "1 day",
+    "de": "1 Tag"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a sprinkling of holy water, rare incense, and powdered ruby worth at least 1000 gp",
+      "de": "ein Spritzer Weihwasser, seltener Weihrauch und ein pulverisierter Rubin im Wert von mindestens 1000 Goldstücken"
+    },
+    "raw": {
+      "en": "V, S, M (a sprinkling of holy water, rare incense, and powdered ruby worth at least 1000 gp)",
+      "de": "V, G, M (ein Spritzer Weihwasser, seltener Weihrauch und ein pulverisierter Rubin im Wert von mindestens 1000 Goldstücken)"
+    }
+  },
+  "description": {
+    "en": "You create a ward against magical travel that protects up to 40,000 square feet of floor space to a height of 30 feet above the floor. For the duration, creatures can't teleport into the area or use portals, such as those created by the gate spell, to enter the area. The spell proofs the area against planar travel, and therefore prevents creatures from accessing the area by way of the Astral Plane, Ethereal Plane, Feywild, Shadowfell, or the plane shift spell. In addition, the spell damages types of creatures that you choose when you cast it. Choose one or more of the following: celestials, elementals, fey, fiends, and undead. When a chosen creature enters the spell's area for the first time on a turn or starts its turn there, the creature takes 5d10 radiant or necrotic damage (your choice when you cast this spell). When you cast this spell, you can designate a password. A creature that speaks the password as it enters the area takes no damage from the spell. The spell's area can't overlap with the area of another forbiddance spell. If you cast forbiddance every day for 30 days in the same location, the spell lasts until it is dispelled, and the material components are consumed on the last casting.",
+    "de": "Du erschaffst einen Schutz gegen magische Reisen, der einen Bereich von bis zu 3.700 Quadratmetern mit einer Höhe von bis zu neun Metern über dem Boden abdeckt. Für die Wirkungsdauer können sich Kreaturen nicht in den Bereich teleportieren oder Portale wie durch den Zauber Tor verwenden, um in den Bereich einzudringen. Der Zauber schützt den Bereich gegen Ebenenreisen und verhindert damit, dass Kreaturen den Bereich aus der Astralebene, der Ätherebene, dem Feywild, dem Schattenfell oder mit dem Zauber Ebenenwechsel  betreten. Außerdem fügt der Zauber Kreaturentypen, die du beim Wirken bestimmst, Schaden zu. Wähle einen oder mehrere der folgenden Typen: celestische Wesen, Elementare, Feenwesen, Unholde und Untote. Wenn eine gewählte Kreatur den Bereich des Zaubers in einem Zug erstmals betritt oder ihren Zug darin beginnt, erleidet sie 5W10 gleißenden oder nekrotischen Schaden (deine Wahl beim Wirken des Zaubers). Wenn du diesen Zauber wirkst, kannst du ein Passwort festlegen. Spricht eine Kreatur das Passwort, wenn sie den Bereich betritt, erleidet sie durch den Zauber keinen Schaden. Der Bereich von Zutritt verwehren  kann sich nicht mit dem Bereich eines anderen Zaubers derselben Art überschneiden. Wirkst du Zutritt verwehren  30 Tage lang am selben Ort, hält der Effekt an, bis er gebannt wird. Die Materialkomponenten werden beim letzten Wirken verbraucht."
+  },
+  "image": "forbiddance",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

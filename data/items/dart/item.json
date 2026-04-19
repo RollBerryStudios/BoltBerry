@@ -1,0 +1,36 @@
+{
+  "id": 24,
+  "slug": "dart",
+  "name": "Dart",
+  "nameDe": "Pfeil",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 5,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 0.25,
+  "classification": {
+    "en": "Simple Ranged Weapons",
+    "de": "Einfache Fernkampfwaffe"
+  },
+  "damage": "1d4",
+  "damageType": {
+    "en": "piercing",
+    "de": "stich"
+  },
+  "properties": {
+    "en": "finesse | thrown (range 20/60)",
+    "de": "finesse | geworfen (fernkampf 20/60)"
+  },
+  "image": "weapon",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

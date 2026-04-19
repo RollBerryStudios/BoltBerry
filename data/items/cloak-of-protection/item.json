@@ -1,0 +1,30 @@
+{
+  "id": 299,
+  "slug": "cloak-of-protection",
+  "name": "Cloak of Protection",
+  "nameDe": "Umhang des Schutzes",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 350000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon (requires attunement) You gain a +1 bonus to AC and saving throws while you wear this cloak.",
+    "de": "Wenn du diesen Umhang trägst, erhältst du einen Bonus von +1 auf deine RK und deine Rettungswürfe."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "cloak",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

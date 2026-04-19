@@ -1,0 +1,220 @@
+{
+  "id": 145,
+  "slug": "giant-wolf-spider",
+  "name": "Giant Wolf Spider",
+  "nameDe": "Riesenwolfsspinne",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "13",
+    "de": "13"
+  },
+  "hp": {
+    "en": "11 (2d8 + 2)",
+    "de": "11 (2W8+2)"
+  },
+  "str": 12,
+  "dex": 16,
+  "con": 13,
+  "int": 3,
+  "wis": 12,
+  "cha": 4,
+  "strMod": 1,
+  "dexMod": 3,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    },
+    "climb": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 10 ft.",
+      "Darkvision 60 ft.",
+      "passive perception 13"
+    ],
+    "de": [
+      "Blindsicht 3 m",
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +7",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Spider Climb",
+        "text": "The spider can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+      },
+      {
+        "name": "Web Sense",
+        "text": "While in contact with a web, the spider knows the exact location of any other creature in contact with the same web."
+      },
+      {
+        "name": "Web Walker",
+        "text": "The spider ignores movement restrictions caused by webbing."
+      }
+    ],
+    "de": [
+      {
+        "name": "Netzsinn",
+        "text": "Solange die Spinne in Kontakt mit einem Spinnennetz ist, weiß sie genau, wo sich andere Kreaturen aufhalten, die in Kontakt mit demselben Netz sind."
+      },
+      {
+        "name": "Netzwandler",
+        "text": "Die Spinne ignoriert Bewegungseinschränkungen, die durch Netze verursacht werden."
+      },
+      {
+        "name": "Spinnenklettern",
+        "text": "Die Spinne kann an schwierigen Oberflächen klettern, auch kopfüber an der Decke, ohne Attributswürfe ausführen zu müssen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one creature. Hit: 4 (1d6 + 1) piercing damage, and the target must make a DC 11 Constitution saving throw, taking 7 (2d6) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 4 (1W6+1) Stichschaden, und das Ziel muss einen SG-11-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet es 7 (2W6) Giftschaden, anderenfalls die Hälfte. Wenn die Trefferpunkte des Ziels durch den Giftschaden auf 0 sinken, ist das Ziel stabil, aber eine Stunde lang vergiftet sowie gelähmt, selbst wenn es Trefferpunkte zurückgewinnt."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantWolfSpiderDesert (1).webp",
+    "variant": "desert"
+  },
+  "tokens": [
+    {
+      "file": "GiantWolfSpiderDesert (10).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantWolfSpiderDesert (11).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantWolfSpiderDesert (12).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantWolfSpiderDesert (2).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantWolfSpiderDesert (3).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantWolfSpiderDesert (4).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantWolfSpiderDesert (5).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantWolfSpiderDesert (6).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantWolfSpiderDesert (7).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantWolfSpiderDesert (8).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantWolfSpiderDesert (9).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantWolfSpiderForest (1).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWolfSpiderForest (10).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWolfSpiderForest (11).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWolfSpiderForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWolfSpiderForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWolfSpiderForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWolfSpiderForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWolfSpiderForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWolfSpiderForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWolfSpiderForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWolfSpiderForest (9).webp",
+      "variant": "forest"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,68 @@
+{
+  "id": 18,
+  "slug": "detect-magic",
+  "name": "Detect Magic",
+  "nameDe": "Magie entdecken",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "druid",
+      "paladin",
+      "ranger",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Druide",
+      "Paladin",
+      "Waldläufer",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level divination (Ritual)",
+    "de": "Stufe 1 Erkenntnismagie (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any. The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.",
+    "de": "Während der Wirkungsdauer nimmst du die Gegenwart von Magie im Abstand von bis zu neun Metern von dir wahr. Wenn du auf diese Weise Magie wahrnimmst, kannst du deine Aktion verwenden, um schwache Auren um sichtbare magische Kreaturen oder Objekte sowie ihre magische Schule zu erkennen, falls vorhanden. Dieser Zauber durchdringt die meisten Barrieren, wird aber von 30 Zentimetern Stein, 2,5 Zentimetern gewöhnlichem Metall, dünnem Bleiblech sowie von einem Meter Holz oder Erde blockiert."
+  },
+  "image": "detect",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

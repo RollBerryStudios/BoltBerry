@@ -1,0 +1,224 @@
+{
+  "id": 205,
+  "slug": "mule",
+  "name": "Mule",
+  "nameDe": "Maultier",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/8",
+  "xp": 25,
+  "ac": {
+    "en": "10",
+    "de": "10"
+  },
+  "hp": {
+    "en": "11 (2d8 + 2)",
+    "de": "11 (2W8+2)"
+  },
+  "str": 14,
+  "dex": 10,
+  "con": 13,
+  "int": 2,
+  "wis": 10,
+  "cha": 5,
+  "strMod": 2,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Beast of Burden",
+        "text": "The mule is considered to be a Large animal for the purpose of determining its carrying capacity."
+      },
+      {
+        "name": "Sure-Footed",
+        "text": "The mule has advantage on Strength and Dexterity saving throws made against effects that would knock it prone."
+      }
+    ],
+    "de": [
+      {
+        "name": "Lasttier",
+        "text": "Das Maultier gilt hinsichtlich seiner Traglast als großes Tier."
+      },
+      {
+        "name": "Sicherer Tritt",
+        "text": "Die Maultier ist bei Stärke- und Geschicklichkeitsrettungswürfen gegen Effekte, die es umstoßen würden, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Hooves",
+        "text": "Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Hufe",
+        "text": "Nahkampfwaffenangriff: +2 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 4 (1W4+2) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Mule (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Mule (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mule (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

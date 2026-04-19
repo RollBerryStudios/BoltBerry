@@ -1,0 +1,275 @@
+{
+  "id": 276,
+  "slug": "swarm-of-bats",
+  "name": "Swarm of Bats",
+  "nameDe": "Fledermausschwarm",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "22 (5d8)",
+    "de": "22 (5W8)"
+  },
+  "str": 5,
+  "dex": 15,
+  "con": 10,
+  "int": 2,
+  "wis": 12,
+  "cha": 4,
+  "strMod": -3,
+  "dexMod": 2,
+  "conMod": 0,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -3,
+  "speed": {
+    "run": {},
+    "fly": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 60 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Blindsicht 18 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Echolocation",
+        "text": "The swarm can't use its blindsight while deafened."
+      },
+      {
+        "name": "Keen Hearing",
+        "text": "The swarm has advantage on Wisdom (Perception) checks that rely on hearing."
+      },
+      {
+        "name": "Swarm",
+        "text": "The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny bat. The swarm can't regain hit points or gain temporary hit points."
+      }
+    ],
+    "de": [
+      {
+        "name": "Echolot",
+        "text": "Der Schwarm kann seine Blindsicht nicht verwenden, solange er taub ist."
+      },
+      {
+        "name": "Scharfes Gehör",
+        "text": "Der Schwarm ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör basieren, im Vorteil."
+      },
+      {
+        "name": "Schwarm",
+        "text": "Der Schwarm kann den Bereich einer anderen Kreatur besetzen und umgekehrt. Er kann sich durch jede Öffnung bewegen, die groß genug für eine winzige Fledermaus ist. Der Schwarm kann keine Trefferpunkte zurückerhalten und keine temporären Trefferpunkte erhalten."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bites",
+        "text": "Melee Weapon Attack: +4 to hit, reach 0 ft., one creature in the swarm's space. Hit: 5 (2d4) piercing damage, or 2 (1d4) piercing damage if the swarm has half of its hit points or fewer."
+      }
+    ],
+    "de": [
+      {
+        "name": "Bisse",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 0 m, eine Kreatur im Bereich des Schwarms. Treffer: 5 (2W4) Stichschaden oder 2 (1W4) Stichschaden, wenn der Schwarm höchstens die Hälfte seiner Trefferpunkte hat."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/9/906/315/315/636334289313689439.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Schwarm winziger Tiere"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "SwarmOfBats (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "SwarmOfBats (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (31).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (32).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (33).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (34).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (35).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (36).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (37).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (38).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (39).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfBats (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

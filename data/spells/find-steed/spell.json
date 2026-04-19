@@ -1,0 +1,56 @@
+{
+  "id": 250,
+  "slug": "find-steed",
+  "name": "Find Steed",
+  "nameDe": "Reittier finden",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "paladin"
+    ],
+    "de": [
+      "Paladin"
+    ]
+  },
+  "type": {
+    "en": "2nd-level conjuration",
+    "de": "Stufe 2 Beschwörung"
+  },
+  "castingTime": {
+    "en": "10 minutes",
+    "de": "10 Minuten"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You summon a spirit that assumes the form of an unusually intelligent, strong, and loyal steed, creating a long-lasting bond with it. Appearing in an unoccupied space within range, the steed takes on a form that you choose, such as a warhorse, a pony, a camel, an elk, or a mastiff. (Your GM might allow other animals to be summoned as steeds.) The steed has the statistics of the chosen form, though it is a celestial, fey, or fiend (your choice) instead of its normal type. Additionally, if your steed has an Intelligence of 5 or less, its Intelligence becomes 6, and it gains the ability to understand one language of your choice that you speak. Your steed serves you as a mount, both in combat and out, and you have an instinctive bond with it that allows you to fight as a seamless unit. While mounted on your steed, you can make any spell you cast that targets only you also target your steed. When the steed drops to 0 hit points, it disappears, leaving behind no physical form. You can also dismiss your steed at any time as an action, causing it to disappear. In either case, casting this spell again summons the same steed, restored to its hit point maximum. While your steed is within 1 mile of you, you can communicate with it telepathically. You can't have more than one steed bonded by this spell at a time. As an action, you can release the steed from its bond at any time, causing it to disappear.",
+    "de": "Du beschwörst einen Geist, der die Gestalt eines ungewöhnlich intelligenten, starken und treuen Reittiers annimmt, und gehst eine langanhaltende Bindung mit ihm ein. Das Reittier erscheint an einer fi elen Stelle in Reichweite und nimmt eine Gestalt deiner Wahl an: Dogge, Elch, Kamel, Pony oder Schlachtross. (Dein SL kann Reittiere anderer Gestalten zulassen.) Das Reittier besitzt die Spielwerte der gewählten Gestalt, ist jedoch stattdessen ein celestisches Wesen, ein Feenwesen oder ein Unhold (deine Wahl), Verfügt dein Reittier über eine Intelligenz von höchstens 5, steigt dieser Wert auf 6. Zudem kann es eine Sprache deiner Wahl verstehen, die du ebenfalls sprichst Die instinktive Bindung zwischen deinem Reittier und dir macht euch zu einer perfekten Einheit, sowohl im Kampf als auch außerhalb. Während du reitest, kannst du bestimmen, dass jeder von dir gewirkte Zauber, der dich zum Ziel hat, auch dein Reittier betrifft. Sinken die Trefferpunkte des Reittiers auf 0, verschwindet es und hinterlässt keine physische Form. Du kannst dein Reittier auch jederzeit als Aktion fortschicken, wodurch es verschwindet. In beiden Fällen beschwörst du dasselbe Reittier, wenn du diesen Zauber erneut wirkst, und es verfügt wieder über sein Trefferpunktemaximum. Während sich dein Reittier im Abstand von bis zu 1,6 Kilometern von dir aufhält, kannst du telepathisch mit ihm kommunizieren. Du kannst mit diesem Zauber nur mit einem Reittier gleichzeitig eine Bindung eingehen. Als Aktion kannst du das Reittier jederzeit aus seiner Bindung entlassen, wodurch es verschwindet."
+  },
+  "image": "phantom-steed",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

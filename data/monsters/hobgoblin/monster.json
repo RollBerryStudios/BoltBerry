@@ -1,0 +1,475 @@
+{
+  "id": 170,
+  "slug": "hobgoblin",
+  "name": "Hobgoblin",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, lawful evil",
+    "de": "Mittelgroßer Humanoid, rechtschaffen böse"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "18 (Chain Mail, Shield)",
+    "de": "18 (Kettenpanzer, Schild)"
+  },
+  "hp": {
+    "en": "11 (2d8 + 2)",
+    "de": "11 (2W8+2)"
+  },
+  "str": 13,
+  "dex": 12,
+  "con": 12,
+  "int": 10,
+  "wis": 10,
+  "cha": 9,
+  "strMod": 1,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Goblin"
+    ],
+    "de": [
+      "Gemeinsprache",
+      "Goblinisch"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Martial Advantage",
+        "text": "Once per turn, the hobgoblin can deal an extra 7 (2d6) damage to a creature it hits with a weapon attack if that creature is within 5 ft. of an ally of the hobgoblin that isn't incapacitated."
+      }
+    ],
+    "de": [
+      {
+        "name": "Kämpferischer Vorteil",
+        "text": "Einmal pro Zug kann der Hobgoblin einer Kreatur, die er mit einem Waffenangriff trifft, zusätzlich 7 (2W6) Schaden zufügen, sofern diese Kreatur sich im Abstand von bis zu 1,5 Metern von einem Verbündeten des Hobgoblins befindet, der nicht kampfunfähig ist."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Longsword",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 5 (1d8 + 1) slashing damage, or 6 (1d10 + 1) slashing damage if used with two hands."
+      },
+      {
+        "name": "Longbow",
+        "text": "Ranged Weapon Attack: +3 to hit, range 150/600 ft., one target. Hit: 5 (1d8 + 1) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Langschwert",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W8+1) Hiebschaden oder 6 (1W10+1) Hiebschaden bei zweihändiger Führung."
+      },
+      {
+        "name": "Langbogen",
+        "text": "Fernkampfwaffenangriff: +3 auf Treffer, Reichweite 45/180 m, ein Ziel. Treffer: 5 (1W8+1) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/389/315/315/636252781431932597.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (Goblinoide)"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "HobgoblinArmycampMelee (1).webp",
+    "variant": "armycampMelee"
+  },
+  "tokens": [
+    {
+      "file": "HobgoblinArmycampMelee (2).webp",
+      "variant": "armycampMelee"
+    },
+    {
+      "file": "HobgoblinArmycampMelee (3).webp",
+      "variant": "armycampMelee"
+    },
+    {
+      "file": "HobgoblinArmycampMelee (4).webp",
+      "variant": "armycampMelee"
+    },
+    {
+      "file": "HobgoblinArmycampRanged (1).webp",
+      "variant": "armycampRanged"
+    },
+    {
+      "file": "HobgoblinArmycampRanged (2).webp",
+      "variant": "armycampRanged"
+    },
+    {
+      "file": "HobgoblinArmycampRanged (3).webp",
+      "variant": "armycampRanged"
+    },
+    {
+      "file": "HobgoblinDesertMelee (1).webp",
+      "variant": "desertMelee"
+    },
+    {
+      "file": "HobgoblinDesertMelee (10).webp",
+      "variant": "desertMelee"
+    },
+    {
+      "file": "HobgoblinDesertMelee (11).webp",
+      "variant": "desertMelee"
+    },
+    {
+      "file": "HobgoblinDesertMelee (12).webp",
+      "variant": "desertMelee"
+    },
+    {
+      "file": "HobgoblinDesertMelee (13).webp",
+      "variant": "desertMelee"
+    },
+    {
+      "file": "HobgoblinDesertMelee (2).webp",
+      "variant": "desertMelee"
+    },
+    {
+      "file": "HobgoblinDesertMelee (3).webp",
+      "variant": "desertMelee"
+    },
+    {
+      "file": "HobgoblinDesertMelee (4).webp",
+      "variant": "desertMelee"
+    },
+    {
+      "file": "HobgoblinDesertMelee (5).webp",
+      "variant": "desertMelee"
+    },
+    {
+      "file": "HobgoblinDesertMelee (6).webp",
+      "variant": "desertMelee"
+    },
+    {
+      "file": "HobgoblinDesertMelee (7).webp",
+      "variant": "desertMelee"
+    },
+    {
+      "file": "HobgoblinDesertMelee (8).webp",
+      "variant": "desertMelee"
+    },
+    {
+      "file": "HobgoblinDesertMelee (9).webp",
+      "variant": "desertMelee"
+    },
+    {
+      "file": "HobgoblinDesertRanged (1).webp",
+      "variant": "desertRanged"
+    },
+    {
+      "file": "HobgoblinDesertRanged (2).webp",
+      "variant": "desertRanged"
+    },
+    {
+      "file": "HobgoblinDesertRanged (3).webp",
+      "variant": "desertRanged"
+    },
+    {
+      "file": "HobgoblinDesertRanged (4).webp",
+      "variant": "desertRanged"
+    },
+    {
+      "file": "HobgoblinDesertRanged (5).webp",
+      "variant": "desertRanged"
+    },
+    {
+      "file": "HobgoblinDesertRanged (6).webp",
+      "variant": "desertRanged"
+    },
+    {
+      "file": "HobgoblinDesertRanged (7).webp",
+      "variant": "desertRanged"
+    },
+    {
+      "file": "HobgoblinForestMelee (1).webp",
+      "variant": "forestMelee"
+    },
+    {
+      "file": "HobgoblinForestMelee (10).webp",
+      "variant": "forestMelee"
+    },
+    {
+      "file": "HobgoblinForestMelee (11).webp",
+      "variant": "forestMelee"
+    },
+    {
+      "file": "HobgoblinForestMelee (12).webp",
+      "variant": "forestMelee"
+    },
+    {
+      "file": "HobgoblinForestMelee (13).webp",
+      "variant": "forestMelee"
+    },
+    {
+      "file": "HobgoblinForestMelee (14).webp",
+      "variant": "forestMelee"
+    },
+    {
+      "file": "HobgoblinForestMelee (2).webp",
+      "variant": "forestMelee"
+    },
+    {
+      "file": "HobgoblinForestMelee (3).webp",
+      "variant": "forestMelee"
+    },
+    {
+      "file": "HobgoblinForestMelee (4).webp",
+      "variant": "forestMelee"
+    },
+    {
+      "file": "HobgoblinForestMelee (5).webp",
+      "variant": "forestMelee"
+    },
+    {
+      "file": "HobgoblinForestMelee (6).webp",
+      "variant": "forestMelee"
+    },
+    {
+      "file": "HobgoblinForestMelee (7).webp",
+      "variant": "forestMelee"
+    },
+    {
+      "file": "HobgoblinForestMelee (8).webp",
+      "variant": "forestMelee"
+    },
+    {
+      "file": "HobgoblinForestMelee (9).webp",
+      "variant": "forestMelee"
+    },
+    {
+      "file": "HobgoblinForestRanged (1).webp",
+      "variant": "forestRanged"
+    },
+    {
+      "file": "HobgoblinForestRanged (2).webp",
+      "variant": "forestRanged"
+    },
+    {
+      "file": "HobgoblinForestRanged (3).webp",
+      "variant": "forestRanged"
+    },
+    {
+      "file": "HobgoblinHillsMelee (1).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (10).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (11).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (12).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (13).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (14).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (15).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (16).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (17).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (18).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (19).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (2).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (20).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (21).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (22).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (23).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (24).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (25).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (3).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (4).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (5).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (6).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (7).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (8).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsMelee (9).webp",
+      "variant": "hillsMelee"
+    },
+    {
+      "file": "HobgoblinHillsRanged (1).webp",
+      "variant": "hillsRanged"
+    },
+    {
+      "file": "HobgoblinHillsRanged (2).webp",
+      "variant": "hillsRanged"
+    },
+    {
+      "file": "HobgoblinHillsRanged (3).webp",
+      "variant": "hillsRanged"
+    },
+    {
+      "file": "HobgoblinHillsRanged (4).webp",
+      "variant": "hillsRanged"
+    },
+    {
+      "file": "HobgoblinUnderdarkMelee (1).webp",
+      "variant": "underdarkMelee"
+    },
+    {
+      "file": "HobgoblinUnderdarkMelee (10).webp",
+      "variant": "underdarkMelee"
+    },
+    {
+      "file": "HobgoblinUnderdarkMelee (11).webp",
+      "variant": "underdarkMelee"
+    },
+    {
+      "file": "HobgoblinUnderdarkMelee (2).webp",
+      "variant": "underdarkMelee"
+    },
+    {
+      "file": "HobgoblinUnderdarkMelee (3).webp",
+      "variant": "underdarkMelee"
+    },
+    {
+      "file": "HobgoblinUnderdarkMelee (4).webp",
+      "variant": "underdarkMelee"
+    },
+    {
+      "file": "HobgoblinUnderdarkMelee (5).webp",
+      "variant": "underdarkMelee"
+    },
+    {
+      "file": "HobgoblinUnderdarkMelee (6).webp",
+      "variant": "underdarkMelee"
+    },
+    {
+      "file": "HobgoblinUnderdarkMelee (7).webp",
+      "variant": "underdarkMelee"
+    },
+    {
+      "file": "HobgoblinUnderdarkMelee (8).webp",
+      "variant": "underdarkMelee"
+    },
+    {
+      "file": "HobgoblinUnderdarkMelee (9).webp",
+      "variant": "underdarkMelee"
+    },
+    {
+      "file": "HobgoblinUnderdarkRanged (1).webp",
+      "variant": "underdarkRanged"
+    },
+    {
+      "file": "HobgoblinUnderdarkRanged (2).webp",
+      "variant": "underdarkRanged"
+    },
+    {
+      "file": "HobgoblinUnderdarkRanged (3).webp",
+      "variant": "underdarkRanged"
+    },
+    {
+      "file": "HobgoblinUnderdarkRanged (4).webp",
+      "variant": "underdarkRanged"
+    },
+    {
+      "file": "HobgoblinUnderdarkRanged (5).webp",
+      "variant": "underdarkRanged"
+    },
+    {
+      "file": "HobgoblinUnderdarkRanged (6).webp",
+      "variant": "underdarkRanged"
+    },
+    {
+      "file": "HobgoblinUnderdarkRanged (7).webp",
+      "variant": "underdarkRanged"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

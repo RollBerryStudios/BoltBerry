@@ -1,0 +1,174 @@
+{
+  "id": 244,
+  "slug": "riding-horse",
+  "name": "Riding Horse",
+  "nameDe": "Reitpferd",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "10",
+    "de": "10"
+  },
+  "hp": {
+    "en": "13 (2d10 + 2)",
+    "de": "13 (2W10+2)"
+  },
+  "str": 16,
+  "dex": 10,
+  "con": 12,
+  "int": 2,
+  "wis": 11,
+  "cha": 7,
+  "strMod": 3,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Hooves",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (2d4 + 3) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Hufe",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 8 (2W4+3) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/9/904/315/315/636334288913250513.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "RidingHorse (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "RidingHorse (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "RidingHorse (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

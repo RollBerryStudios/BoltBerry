@@ -1,0 +1,230 @@
+{
+  "id": 83,
+  "slug": "deer",
+  "name": "Deer",
+  "nameDe": "Reh",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "13",
+    "de": "13"
+  },
+  "hp": {
+    "en": "4 (1d8)",
+    "de": "4 (1W8)"
+  },
+  "str": 11,
+  "dex": 16,
+  "con": 11,
+  "int": 2,
+  "wis": 14,
+  "cha": 5,
+  "strMod": 0,
+  "dexMod": 3,
+  "conMod": 0,
+  "intMod": -4,
+  "wisMod": 2,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 12"
+    ],
+    "de": [
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 2 (1d4) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +2 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 2 (1W4) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Deer (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Deer (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Deer (9).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeerDoe (1).webp",
+      "variant": "doe"
+    },
+    {
+      "file": "DeerDoe (10).webp",
+      "variant": "doe"
+    },
+    {
+      "file": "DeerDoe (11).webp",
+      "variant": "doe"
+    },
+    {
+      "file": "DeerDoe (12).webp",
+      "variant": "doe"
+    },
+    {
+      "file": "DeerDoe (13).webp",
+      "variant": "doe"
+    },
+    {
+      "file": "DeerDoe (14).webp",
+      "variant": "doe"
+    },
+    {
+      "file": "DeerDoe (2).webp",
+      "variant": "doe"
+    },
+    {
+      "file": "DeerDoe (3).webp",
+      "variant": "doe"
+    },
+    {
+      "file": "DeerDoe (4).webp",
+      "variant": "doe"
+    },
+    {
+      "file": "DeerDoe (5).webp",
+      "variant": "doe"
+    },
+    {
+      "file": "DeerDoe (6).webp",
+      "variant": "doe"
+    },
+    {
+      "file": "DeerDoe (7).webp",
+      "variant": "doe"
+    },
+    {
+      "file": "DeerDoe (8).webp",
+      "variant": "doe"
+    },
+    {
+      "file": "DeerDoe (9).webp",
+      "variant": "doe"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

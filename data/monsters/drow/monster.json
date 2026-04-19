@@ -1,0 +1,252 @@
+{
+  "id": 92,
+  "slug": "drow",
+  "name": "Drow",
+  "nameDe": "Drow (Elf)",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, neutral evil",
+    "de": "Mittelgroßer Humanoid, neutral böse"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "15 (Chain Shirt)",
+    "de": "15 (Kettenhemd)"
+  },
+  "hp": {
+    "en": "13 (3d8)",
+    "de": "13 (3W8)"
+  },
+  "str": 10,
+  "dex": 14,
+  "con": 10,
+  "int": 11,
+  "wis": 11,
+  "cha": 12,
+  "strMod": 0,
+  "dexMod": 2,
+  "conMod": 0,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 12"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Elvish",
+      "Undercommon"
+    ],
+    "de": [
+      "Elfisch",
+      "Gemeinsprache der Unterreiche"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +4",
+    "Wahrnehmung +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Fey Ancestry",
+        "text": "The drow has advantage on saving throws against being charmed, and magic can't put the drow to sleep."
+      },
+      {
+        "name": "Sunlight Sensitivity",
+        "text": "While in sunlight, the drow has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+      }
+    ],
+    "de": [
+      {
+        "name": "Empfindlich gegenüber Sonnenlicht",
+        "text": "Im Sonnenlicht ist der Drow bei Angriffswürfen sowie bei Weisheitswürfen (Wahrnehmung), die Sicht erfordern, im Nachteil."
+      },
+      {
+        "name": "Feenblut",
+        "text": "Der Drow ist bei Rettungswürfen gegen den Zustand Bezaubert im Vorteil und kann nicht magisch zum Einschlafen gebracht werden."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Shortsword",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      },
+      {
+        "name": "Hand Crossbow",
+        "text": "Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit: 5 (1d6 + 2) piercing damage, and the target must succeed on a DC 13 Constitution saving throw or be poisoned for 1 hour. If the saving throw fails by 5 or more, the target is also unconscious while poisoned in this way. The target wakes up if it takes damage or if another creature takes an action to shake it awake."
+      }
+    ],
+    "de": [
+      {
+        "name": "Kurzschwert",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden."
+      },
+      {
+        "name": "Handarmbrust",
+        "text": "Fernkampfwaffenangriff: +4 auf Treffer, Reichweite 9/36 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden, und das Ziel muss einen SG-13-Konstitutionsrettungswurf bestehen, oder es ist eine Stunde lang vergiftet. Wenn der Rettungswurf um mindestens 5 Punkte scheitert, ist das Ziel außerdem bewusstlos, solange es auf diese Art vergiftet ist. Das Ziel erwacht, wenn es Schaden erleidet oder von einer anderen Kreatur als Aktion wachgerüttelt wird."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/501/1000/1000/636376310726273495.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (Elf)"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "DrowFemaleMelee (1).webp",
+    "variant": "femaleMelee"
+  },
+  "tokens": [
+    {
+      "file": "DrowFemaleMelee (10).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "DrowFemaleMelee (11).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "DrowFemaleMelee (2).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "DrowFemaleMelee (3).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "DrowFemaleMelee (4).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "DrowFemaleMelee (5).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "DrowFemaleMelee (6).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "DrowFemaleMelee (7).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "DrowFemaleMelee (8).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "DrowFemaleMelee (9).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "DrowFemaleRanged (1).webp",
+      "variant": "femaleRanged"
+    },
+    {
+      "file": "DrowFemaleRanged (2).webp",
+      "variant": "femaleRanged"
+    },
+    {
+      "file": "DrowFemaleRanged (3).webp",
+      "variant": "femaleRanged"
+    },
+    {
+      "file": "DrowFemaleRanged (4).webp",
+      "variant": "femaleRanged"
+    },
+    {
+      "file": "DrowMaleMelee (1).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "DrowMaleMelee (10).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "DrowMaleMelee (2).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "DrowMaleMelee (3).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "DrowMaleMelee (4).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "DrowMaleMelee (5).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "DrowMaleMelee (6).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "DrowMaleMelee (7).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "DrowMaleMelee (8).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "DrowMaleMelee (9).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "DrowMaleRanged (1).webp",
+      "variant": "maleRanged"
+    },
+    {
+      "file": "DrowMaleRanged (2).webp",
+      "variant": "maleRanged"
+    },
+    {
+      "file": "DrowMaleRanged (3).webp",
+      "variant": "maleRanged"
+    },
+    {
+      "file": "DrowMaleRanged (4).webp",
+      "variant": "maleRanged"
+    },
+    {
+      "file": "DrowMaleRanged (5).webp",
+      "variant": "maleRanged"
+    },
+    {
+      "file": "DrowMaleRanged (6).webp",
+      "variant": "maleRanged"
+    },
+    {
+      "file": "DrowMaleRanged (7).webp",
+      "variant": "maleRanged"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

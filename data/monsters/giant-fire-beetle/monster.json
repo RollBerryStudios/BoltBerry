@@ -1,0 +1,190 @@
+{
+  "id": 128,
+  "slug": "giant-fire-beetle",
+  "name": "Giant Fire Beetle",
+  "nameDe": "Riesenfeuerkäfer",
+  "source": "SRD",
+  "meta": {
+    "en": "Small beast, unaligned",
+    "de": "Kleine Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "4 (1d6 + 1)",
+    "de": "4 (1W6+1)"
+  },
+  "str": 8,
+  "dex": 10,
+  "con": 12,
+  "int": 1,
+  "wis": 7,
+  "cha": 3,
+  "strMod": -1,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": -5,
+  "wisMod": -2,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 30 ft.",
+      "passive perception 8"
+    ],
+    "de": [
+      "Blindsicht 9 m",
+      "Passive Wahrnehmung 8"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Illumination",
+        "text": "The beetle sheds bright light in a 10-foot radius and dim light for an additional 10 ft.."
+      }
+    ],
+    "de": [
+      {
+        "name": "Beleuchtung",
+        "text": "Der Käfer spendet im Radius von drei Metern helles Licht und im Radius von weiteren drei Metern dämmriges Licht."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +1 to hit, reach 5 ft., one target. Hit: 2 (1d6 - 1) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +1 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 2 (1W6-1) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/9/896/1000/1000/636334287498492864.jpeg",
+  "size": {
+    "en": "small",
+    "de": "Kleines"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantFireBeetle (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GiantFireBeetle (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFireBeetle (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFireBeetle (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFireBeetle (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFireBeetle (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFireBeetle (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFireBeetle (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFireBeetle (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFireBeetle (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFireBeetle (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFireBeetle (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFireBeetle (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFireBeetle (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFireBeetle (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFireBeetle (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFireBeetle (9).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFireBeetleCage (1).webp",
+      "variant": "cage"
+    },
+    {
+      "file": "GiantFireBeetleCage (2).webp",
+      "variant": "cage"
+    },
+    {
+      "file": "GiantFireBeetleCage (3).webp",
+      "variant": "cage"
+    },
+    {
+      "file": "GiantFireBeetleCage (4).webp",
+      "variant": "cage"
+    },
+    {
+      "file": "GiantFireBeetleCage (5).webp",
+      "variant": "cage"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

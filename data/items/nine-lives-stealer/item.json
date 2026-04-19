@@ -1,0 +1,30 @@
+{
+  "id": 358,
+  "slug": "nine-lives-stealer",
+  "name": "Nine Lives Stealer",
+  "nameDe": "Dieb der neun Leben",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 800000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Weapon (any sword), very rare (requires attunement) You gain a +2 bonus to attack and damage rolls made with this magic weapon. The sword has 1d8 + 1 charges. If you score a critical hit against a creature that has fewer than 100 hit points, it must succeed on a DC 15 Constitution saving throw or be slain instantly as the sword tears its life force from its body (a construct or an undead is immune). The sword loses 1 charge if the creature is slain. When the sword has no charges remaining, it loses this property.",
+    "de": "Du erhältst einen Bonus von +2 auf Angriffs- und Schadenswürfe, die du mit dieser magischen Waffe ausführst. Das Schwert hat 1W8+1 Ladungen. Wenn du einen kritischen Treffer gegen eine Kreatur landest, die weniger als 100 Trefferpunkte hat, muss die Kreatur einen SG-15-Konstitutionsrettungswurf bestehen, oder sie stirbt auf der Stelle, da das Schwert ihr ihre Lebensenergie entzieht (Konstrukte und Untote sind immun). Das Schwert verliert eine Ladung, wenn die Kreatur getötet wird. Wenn das Schwert keine Ladungen mehr hat, verliert es diese Eigenschaft."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "weapon",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

@@ -1,0 +1,60 @@
+{
+  "id": 210,
+  "slug": "sequester",
+  "name": "Sequester",
+  "nameDe": "Verbergen",
+  "level": {
+    "en": "7",
+    "de": "Grad 7"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "7th-level transmutation",
+    "de": "Stufe 7 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Until dispelled",
+    "de": "Bis entzaubert"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a powder of diamond, emerald, rube and sapphire dust worth at least 5,000 gp, which the spell consumes",
+      "de": "ein Pulver aus Diamant-, Smaragd-, Rubin- und Saphirstaub im Wert von mindestens 5.000 Goldstücken, das der Zauberspruch verbraucht"
+    },
+    "raw": {
+      "en": "V, S, M (a powder of diamond, emerald, rube and sapphire dust worth at least 5,000 gp, which the spell consumes)",
+      "de": "V, G, M (ein Pulver aus Diamant-, Smaragd-, Rubin- und Saphirstaub im Wert von mindestens 5.000 Goldstücken, das der Zauberspruch verbraucht)"
+    }
+  },
+  "description": {
+    "en": "By means of this spell, a willing creature or an object can be hidden away, safe from detection for the duration. When you cast the spell and touch the target, it becomes invisible and can't be targeted by divination spells or perceived through scrying sensors created by divination spells. If the target is a creature, it falls into a state of suspended animation. Time ceases to flow for it, and it doesn't grow older. You can set a condition for the spell to end early. The condition can be anything you choose, but it must occur or be visible within 1 mile of the target. Examples include \"after 1,000 years\" or \"when the tarrasque awakens.\" This spell also ends if the target takes any damage.",
+    "de": "Mit diesem Zauber kannst du eine bereitwillige Kreatur oder einen Gegenstand verbergen. Das Ziel kann für die Wirkungsdauer nicht entdeckt werden. Wenn du den Zauber wirkst und das Ziel berührst, wird es unsichtbar und kann weder von Erkenntniszaubern aufgespürt noch durch Ausspähungssensoren von Erkenntniszaubern wahrgenommen werden. Handelt es sich bei dem Ziel um eine Kreatur, fällt es in einen scheintoten Zustand. Für das Ziel stoppt die Zeit und es altert nicht. Du kannst eine Bedingung festlegen, durch die der Zauber vorzeitig endet. Dabei hast du freie Wahl, solange die Bedingung im Abstand von bis zu 1,6 Kilometern um das Ziel auftritt oder sichtbar ist. Beispiele dafür wären 'nach 1.000 Jahren' oder 'wenn die Tarraske erwacht'. Dieser Zauber endet auch, wenn das Ziel Schaden erleidet."
+  },
+  "image": "alter-self",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

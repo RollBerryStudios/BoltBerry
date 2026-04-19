@@ -1,0 +1,1546 @@
+{
+  "id": 254,
+  "slug": "scout",
+  "name": "Scout",
+  "nameDe": "Späher",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "13 (Leather Armor)",
+    "de": "13 (Lederrüstung)"
+  },
+  "hp": {
+    "en": "16 (3d8 + 3)",
+    "de": "16 (3W8+3)"
+  },
+  "str": 11,
+  "dex": 14,
+  "con": 12,
+  "int": 11,
+  "wis": 13,
+  "cha": 11,
+  "strMod": 0,
+  "dexMod": 2,
+  "conMod": 1,
+  "intMod": 0,
+  "wisMod": 1,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 15"
+    ],
+    "de": [
+      "Passive Wahrnehmung 15"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any one language (usually Common)"
+    ],
+    "de": [
+      "Eine beliebige Sprache (normalerweise Gemeinsprache)"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +6",
+    "Naturkunde +4",
+    "Überlebenskunst +5",
+    "Wahrnehmung +5"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Hearing and Sight",
+        "text": "The scout has advantage on Wisdom (Perception) checks that rely on hearing or sight."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfes Gehör und scharfer Geruchssinn",
+        "text": "Der Späher ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör oder Sicht basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The scout makes two melee attacks or two ranged attacks."
+      },
+      {
+        "name": "Shortsword",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      },
+      {
+        "name": "Longbow",
+        "text": "Ranged Weapon Attack: +4 to hit, range 150/600 ft., one target. Hit: 6 (1d8 + 2) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Späher führt zwei Nahkampfangriffe oder zwei Fernkampfangriffe aus."
+      },
+      {
+        "name": "Kurzschwert",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden."
+      },
+      {
+        "name": "Langbogen",
+        "text": "Fernkampfwaffenangriff: +4 auf Treffer, Reichweite 45/180 m, ein Ziel. Treffer: 6 (1W8+2) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/163/1000/1000/636252759915100020.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (jedes Volk)"
+  },
+  "alignment": {
+    "en": "any alignment",
+    "de": "jede Gesinnung"
+  },
+  "token": {
+    "file": "ScoutDragonbornArctic (1).webp",
+    "variant": "dragonbornArctic"
+  },
+  "tokens": [
+    {
+      "file": "ScoutDragonbornDesert (1).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "ScoutDragonbornDesert (2).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "ScoutDragonbornDesert (3).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "ScoutDragonbornDesert (4).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "ScoutDragonbornDesert (5).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "ScoutDragonbornDesert (6).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "ScoutDragonbornDesert (7).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "ScoutDragonbornForest (1).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "ScoutDragonbornForest (2).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "ScoutDragonbornForest (3).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "ScoutDragonbornForest (4).webp",
+      "variant": "dragonbornForest"
+    },
+    {
+      "file": "ScoutDragonbornMountain (1).webp",
+      "variant": "dragonbornMountain"
+    },
+    {
+      "file": "ScoutDragonbornMountain (2).webp",
+      "variant": "dragonbornMountain"
+    },
+    {
+      "file": "ScoutDragonbornMountain (3).webp",
+      "variant": "dragonbornMountain"
+    },
+    {
+      "file": "ScoutDragonbornSwamp (1).webp",
+      "variant": "dragonbornSwamp"
+    },
+    {
+      "file": "ScoutDragonbornSwamp (2).webp",
+      "variant": "dragonbornSwamp"
+    },
+    {
+      "file": "ScoutDragonbornSwamp (3).webp",
+      "variant": "dragonbornSwamp"
+    },
+    {
+      "file": "ScoutDragonbornSwamp (4).webp",
+      "variant": "dragonbornSwamp"
+    },
+    {
+      "file": "ScoutDragonbornUnderdark (1).webp",
+      "variant": "dragonbornUnderdark"
+    },
+    {
+      "file": "ScoutDragonbornUnderdark (2).webp",
+      "variant": "dragonbornUnderdark"
+    },
+    {
+      "file": "ScoutDragonbornUnderdark (3).webp",
+      "variant": "dragonbornUnderdark"
+    },
+    {
+      "file": "ScoutDragonbornUnderdark (4).webp",
+      "variant": "dragonbornUnderdark"
+    },
+    {
+      "file": "ScoutDwarfFemaleArctic (1).webp",
+      "variant": "dwarfFemaleArctic"
+    },
+    {
+      "file": "ScoutDwarfFemaleArctic (2).webp",
+      "variant": "dwarfFemaleArctic"
+    },
+    {
+      "file": "ScoutDwarfFemaleArctic (3).webp",
+      "variant": "dwarfFemaleArctic"
+    },
+    {
+      "file": "ScoutDwarfFemaleArctic (4).webp",
+      "variant": "dwarfFemaleArctic"
+    },
+    {
+      "file": "ScoutDwarfFemaleArctic (5).webp",
+      "variant": "dwarfFemaleArctic"
+    },
+    {
+      "file": "ScoutDwarfFemaleArctic (6).webp",
+      "variant": "dwarfFemaleArctic"
+    },
+    {
+      "file": "ScoutDwarfFemaleDesert (1).webp",
+      "variant": "dwarfFemaleDesert"
+    },
+    {
+      "file": "ScoutDwarfFemaleDesert (2).webp",
+      "variant": "dwarfFemaleDesert"
+    },
+    {
+      "file": "ScoutDwarfFemaleForest (1).webp",
+      "variant": "dwarfFemaleForest"
+    },
+    {
+      "file": "ScoutDwarfFemaleMountains (1).webp",
+      "variant": "dwarfFemaleMountains"
+    },
+    {
+      "file": "ScoutDwarfFemaleMountains (2).webp",
+      "variant": "dwarfFemaleMountains"
+    },
+    {
+      "file": "ScoutDwarfFemaleMountains (3).webp",
+      "variant": "dwarfFemaleMountains"
+    },
+    {
+      "file": "ScoutDwarfFemaleMountains (4).webp",
+      "variant": "dwarfFemaleMountains"
+    },
+    {
+      "file": "ScoutDwarfFemaleMountains (5).webp",
+      "variant": "dwarfFemaleMountains"
+    },
+    {
+      "file": "ScoutDwarfFemaleUnderdark (1).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "ScoutDwarfFemaleUnderdark (2).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "ScoutDwarfFemaleUnderdark (3).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "ScoutDwarfFemaleUnderdark (4).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "ScoutDwarfFemaleUnderdark (5).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "ScoutDwarfFemaleUnderdark (6).webp",
+      "variant": "dwarfFemaleUnderdark"
+    },
+    {
+      "file": "ScoutDwarfMaleArctic (1).webp",
+      "variant": "dwarfMaleArctic"
+    },
+    {
+      "file": "ScoutDwarfMaleArctic (2).webp",
+      "variant": "dwarfMaleArctic"
+    },
+    {
+      "file": "ScoutDwarfMaleArctic (3).webp",
+      "variant": "dwarfMaleArctic"
+    },
+    {
+      "file": "ScoutDwarfMaleArctic (4).webp",
+      "variant": "dwarfMaleArctic"
+    },
+    {
+      "file": "ScoutDwarfMaleArctic (5).webp",
+      "variant": "dwarfMaleArctic"
+    },
+    {
+      "file": "ScoutDwarfMaleDesert (1).webp",
+      "variant": "dwarfMaleDesert"
+    },
+    {
+      "file": "ScoutDwarfMaleDesert (2).webp",
+      "variant": "dwarfMaleDesert"
+    },
+    {
+      "file": "ScoutDwarfMaleDesert (3).webp",
+      "variant": "dwarfMaleDesert"
+    },
+    {
+      "file": "ScoutDwarfMaleDesert (4).webp",
+      "variant": "dwarfMaleDesert"
+    },
+    {
+      "file": "ScoutDwarfMaleDesert (5).webp",
+      "variant": "dwarfMaleDesert"
+    },
+    {
+      "file": "ScoutDwarfMaleDesert (6).webp",
+      "variant": "dwarfMaleDesert"
+    },
+    {
+      "file": "ScoutDwarfMaleDesert (7).webp",
+      "variant": "dwarfMaleDesert"
+    },
+    {
+      "file": "ScoutDwarfMaleForest (1).webp",
+      "variant": "dwarfMaleForest"
+    },
+    {
+      "file": "ScoutDwarfMaleForest (2).webp",
+      "variant": "dwarfMaleForest"
+    },
+    {
+      "file": "ScoutDwarfMaleForest (3).webp",
+      "variant": "dwarfMaleForest"
+    },
+    {
+      "file": "ScoutDwarfMaleForest (4).webp",
+      "variant": "dwarfMaleForest"
+    },
+    {
+      "file": "ScoutDwarfMaleForest (5).webp",
+      "variant": "dwarfMaleForest"
+    },
+    {
+      "file": "ScoutDwarfMaleUnderdark (1).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "ScoutDwarfMaleUnderdark (2).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "ScoutDwarfMaleUnderdark (3).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "ScoutDwarfMaleUnderdark (4).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "ScoutDwarfMaleUnderdark (5).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "ScoutDwarfMaleUnderdark (6).webp",
+      "variant": "dwarfMaleUnderdark"
+    },
+    {
+      "file": "ScoutElfFemaleArctic (1).webp",
+      "variant": "elfFemaleArctic"
+    },
+    {
+      "file": "ScoutElfFemaleArctic (2).webp",
+      "variant": "elfFemaleArctic"
+    },
+    {
+      "file": "ScoutElfFemaleArctic (3).webp",
+      "variant": "elfFemaleArctic"
+    },
+    {
+      "file": "ScoutElfFemaleArctic (4).webp",
+      "variant": "elfFemaleArctic"
+    },
+    {
+      "file": "ScoutElfFemaleArctic (5).webp",
+      "variant": "elfFemaleArctic"
+    },
+    {
+      "file": "ScoutElfFemaleArctic (6).webp",
+      "variant": "elfFemaleArctic"
+    },
+    {
+      "file": "ScoutElfFemaleDesert (1).webp",
+      "variant": "elfFemaleDesert"
+    },
+    {
+      "file": "ScoutElfFemaleDesert (2).webp",
+      "variant": "elfFemaleDesert"
+    },
+    {
+      "file": "ScoutElfFemaleDesert (3).webp",
+      "variant": "elfFemaleDesert"
+    },
+    {
+      "file": "ScoutElfFemaleForest (1).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "ScoutElfFemaleForest (2).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "ScoutElfFemaleForest (3).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "ScoutElfFemaleForest (4).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "ScoutElfFemaleForest (5).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "ScoutElfFemaleForest (6).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "ScoutElfFemaleForest (7).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "ScoutElfFemaleForest (8).webp",
+      "variant": "elfFemaleForest"
+    },
+    {
+      "file": "ScoutElfFemaleMountains (1).webp",
+      "variant": "elfFemaleMountains"
+    },
+    {
+      "file": "ScoutElfFemaleMountains (2).webp",
+      "variant": "elfFemaleMountains"
+    },
+    {
+      "file": "ScoutElfFemaleMountains (3).webp",
+      "variant": "elfFemaleMountains"
+    },
+    {
+      "file": "ScoutElfFemaleMountains (4).webp",
+      "variant": "elfFemaleMountains"
+    },
+    {
+      "file": "ScoutElfFemaleMountains (5).webp",
+      "variant": "elfFemaleMountains"
+    },
+    {
+      "file": "ScoutElfFemaleUnderdark (1).webp",
+      "variant": "elfFemaleUnderdark"
+    },
+    {
+      "file": "ScoutElfFemaleUnderdark (2).webp",
+      "variant": "elfFemaleUnderdark"
+    },
+    {
+      "file": "ScoutElfFemaleUnderdark (3).webp",
+      "variant": "elfFemaleUnderdark"
+    },
+    {
+      "file": "ScoutElfMaleArctic (1).webp",
+      "variant": "elfMaleArctic"
+    },
+    {
+      "file": "ScoutElfMaleForest (1).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "ScoutElfMaleForest (2).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "ScoutElfMaleForest (3).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "ScoutElfMaleForest (4).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "ScoutElfMaleForest (5).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "ScoutElfMaleForest (6).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "ScoutElfMaleForest (7).webp",
+      "variant": "elfMaleForest"
+    },
+    {
+      "file": "ScoutElfMaleMountains (1).webp",
+      "variant": "elfMaleMountains"
+    },
+    {
+      "file": "ScoutElfMaleMountains (2).webp",
+      "variant": "elfMaleMountains"
+    },
+    {
+      "file": "ScoutElfMaleMountains (3).webp",
+      "variant": "elfMaleMountains"
+    },
+    {
+      "file": "ScoutElfMaleSwamp (1).webp",
+      "variant": "elfMaleSwamp"
+    },
+    {
+      "file": "ScoutElfMaleUnderdark (1).webp",
+      "variant": "elfMaleUnderdark"
+    },
+    {
+      "file": "ScoutElfMaleUnderdark (2).webp",
+      "variant": "elfMaleUnderdark"
+    },
+    {
+      "file": "ScoutGnomeFemaleArctic (1).webp",
+      "variant": "gnomeFemaleArctic"
+    },
+    {
+      "file": "ScoutGnomeFemaleArctic (2).webp",
+      "variant": "gnomeFemaleArctic"
+    },
+    {
+      "file": "ScoutGnomeFemaleArctic (3).webp",
+      "variant": "gnomeFemaleArctic"
+    },
+    {
+      "file": "ScoutGnomeFemaleDesert (1).webp",
+      "variant": "gnomeFemaleDesert"
+    },
+    {
+      "file": "ScoutGnomeFemaleDesert (2).webp",
+      "variant": "gnomeFemaleDesert"
+    },
+    {
+      "file": "ScoutGnomeFemaleDesert (3).webp",
+      "variant": "gnomeFemaleDesert"
+    },
+    {
+      "file": "ScoutGnomeFemaleGrasland (1).webp",
+      "variant": "gnomeFemaleGrasland"
+    },
+    {
+      "file": "ScoutGnomeFemaleGrasland (2).webp",
+      "variant": "gnomeFemaleGrasland"
+    },
+    {
+      "file": "ScoutGnomeFemaleGrasland (3).webp",
+      "variant": "gnomeFemaleGrasland"
+    },
+    {
+      "file": "ScoutGnomeFemaleGrasland (4).webp",
+      "variant": "gnomeFemaleGrasland"
+    },
+    {
+      "file": "ScoutGnomeFemaleGrasland (5).webp",
+      "variant": "gnomeFemaleGrasland"
+    },
+    {
+      "file": "ScoutGnomeFemaleGrasland (6).webp",
+      "variant": "gnomeFemaleGrasland"
+    },
+    {
+      "file": "ScoutGnomeFemaleGrasland (7).webp",
+      "variant": "gnomeFemaleGrasland"
+    },
+    {
+      "file": "ScoutGnomeFemaleGrasland (8).webp",
+      "variant": "gnomeFemaleGrasland"
+    },
+    {
+      "file": "ScoutGnomeFemaleGrasland (9).webp",
+      "variant": "gnomeFemaleGrasland"
+    },
+    {
+      "file": "ScoutGnomeFemaleMountains (1).webp",
+      "variant": "gnomeFemaleMountains"
+    },
+    {
+      "file": "ScoutGnomeFemaleMountains (2).webp",
+      "variant": "gnomeFemaleMountains"
+    },
+    {
+      "file": "ScoutGnomeFemaleMountains (3).webp",
+      "variant": "gnomeFemaleMountains"
+    },
+    {
+      "file": "ScoutGnomeFemaleUnderdark (1).webp",
+      "variant": "gnomeFemaleUnderdark"
+    },
+    {
+      "file": "ScoutGnomeFemaleUnderdark (2).webp",
+      "variant": "gnomeFemaleUnderdark"
+    },
+    {
+      "file": "ScoutGnomeFemaleUnderdark (3).webp",
+      "variant": "gnomeFemaleUnderdark"
+    },
+    {
+      "file": "ScoutGnomeFemaleUnderdark (4).webp",
+      "variant": "gnomeFemaleUnderdark"
+    },
+    {
+      "file": "ScoutGnomeFemaleUnderdark (5).webp",
+      "variant": "gnomeFemaleUnderdark"
+    },
+    {
+      "file": "ScoutGnomeFemaleUnderdark (6).webp",
+      "variant": "gnomeFemaleUnderdark"
+    },
+    {
+      "file": "ScoutGnomeFemaleUnderdark (7).webp",
+      "variant": "gnomeFemaleUnderdark"
+    },
+    {
+      "file": "ScoutGnomeFemaleUnderdark (8).webp",
+      "variant": "gnomeFemaleUnderdark"
+    },
+    {
+      "file": "ScoutGnomeMaleArctic (1).webp",
+      "variant": "gnomeMaleArctic"
+    },
+    {
+      "file": "ScoutGnomeMaleArctic (2).webp",
+      "variant": "gnomeMaleArctic"
+    },
+    {
+      "file": "ScoutGnomeMaleArctic (3).webp",
+      "variant": "gnomeMaleArctic"
+    },
+    {
+      "file": "ScoutGnomeMaleArctic (4).webp",
+      "variant": "gnomeMaleArctic"
+    },
+    {
+      "file": "ScoutGnomeMaleDesert (1).webp",
+      "variant": "gnomeMaleDesert"
+    },
+    {
+      "file": "ScoutGnomeMaleDesert (2).webp",
+      "variant": "gnomeMaleDesert"
+    },
+    {
+      "file": "ScoutGnomeMaleDesert (3).webp",
+      "variant": "gnomeMaleDesert"
+    },
+    {
+      "file": "ScoutGnomeMaleForest (1).webp",
+      "variant": "gnomeMaleForest"
+    },
+    {
+      "file": "ScoutGnomeMaleMountains (1).webp",
+      "variant": "gnomeMaleMountains"
+    },
+    {
+      "file": "ScoutGnomeMaleMountains (2).webp",
+      "variant": "gnomeMaleMountains"
+    },
+    {
+      "file": "ScoutGnomeMaleMountains (3).webp",
+      "variant": "gnomeMaleMountains"
+    },
+    {
+      "file": "ScoutGnomeMaleMountains (4).webp",
+      "variant": "gnomeMaleMountains"
+    },
+    {
+      "file": "ScoutGnomeMaleMountains (5).webp",
+      "variant": "gnomeMaleMountains"
+    },
+    {
+      "file": "ScoutGnomeMaleUnderdark (1).webp",
+      "variant": "gnomeMaleUnderdark"
+    },
+    {
+      "file": "ScoutGnomeMaleUnderdark (2).webp",
+      "variant": "gnomeMaleUnderdark"
+    },
+    {
+      "file": "ScoutGnomeMaleUnderdark (3).webp",
+      "variant": "gnomeMaleUnderdark"
+    },
+    {
+      "file": "ScoutGnomeMaleUnderdark (4).webp",
+      "variant": "gnomeMaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfElfFemaleArctic (1).webp",
+      "variant": "halfElfFemaleArctic"
+    },
+    {
+      "file": "ScoutHalfElfFemaleArctic (2).webp",
+      "variant": "halfElfFemaleArctic"
+    },
+    {
+      "file": "ScoutHalfElfFemaleDesert (1).webp",
+      "variant": "halfElfFemaleDesert"
+    },
+    {
+      "file": "ScoutHalfElfFemaleDesert (2).webp",
+      "variant": "halfElfFemaleDesert"
+    },
+    {
+      "file": "ScoutHalfElfFemaleForest (1).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "ScoutHalfElfFemaleForest (2).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "ScoutHalfElfFemaleForest (3).webp",
+      "variant": "halfElfFemaleForest"
+    },
+    {
+      "file": "ScoutHalfElfFemaleMountains (1).webp",
+      "variant": "halfElfFemaleMountains"
+    },
+    {
+      "file": "ScoutHalfElfFemaleMountains (2).webp",
+      "variant": "halfElfFemaleMountains"
+    },
+    {
+      "file": "ScoutHalfElfFemaleMountains (3).webp",
+      "variant": "halfElfFemaleMountains"
+    },
+    {
+      "file": "ScoutHalfElfFemaleMountains (4).webp",
+      "variant": "halfElfFemaleMountains"
+    },
+    {
+      "file": "ScoutHalfElfFemaleMountains (5).webp",
+      "variant": "halfElfFemaleMountains"
+    },
+    {
+      "file": "ScoutHalfElfFemaleMountains (6).webp",
+      "variant": "halfElfFemaleMountains"
+    },
+    {
+      "file": "ScoutHalfElfFemaleMountains (7).webp",
+      "variant": "halfElfFemaleMountains"
+    },
+    {
+      "file": "ScoutHalfElfFemaleMountains (8).webp",
+      "variant": "halfElfFemaleMountains"
+    },
+    {
+      "file": "ScoutHalfElfFemaleUnderdark (1).webp",
+      "variant": "halfElfFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfElfFemaleUnderdark (2).webp",
+      "variant": "halfElfFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfElfFemaleUnderdark (3).webp",
+      "variant": "halfElfFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfElfFemaleUnderdark (4).webp",
+      "variant": "halfElfFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfElfFemaleUnderdark (5).webp",
+      "variant": "halfElfFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfElfFemaleUnderdark (6).webp",
+      "variant": "halfElfFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfElfFemaleUnderdark (7).webp",
+      "variant": "halfElfFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfElfMaleDesert (1).webp",
+      "variant": "halfElfMaleDesert"
+    },
+    {
+      "file": "ScoutHalfElfMaleForest (1).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "ScoutHalfElfMaleForest (2).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "ScoutHalfElfMaleForest (3).webp",
+      "variant": "halfElfMaleForest"
+    },
+    {
+      "file": "ScoutHalfElfMaleMountains (1).webp",
+      "variant": "halfElfMaleMountains"
+    },
+    {
+      "file": "ScoutHalfElfMaleUnderdark (1).webp",
+      "variant": "halfElfMaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfElfMaleUnderdark (2).webp",
+      "variant": "halfElfMaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfElfMaleUnderdark (3).webp",
+      "variant": "halfElfMaleUnderdark"
+    },
+    {
+      "file": "ScoutHalflingFemaleArctic (1).webp",
+      "variant": "halflingFemaleArctic"
+    },
+    {
+      "file": "ScoutHalflingFemaleDesert (1).webp",
+      "variant": "halflingFemaleDesert"
+    },
+    {
+      "file": "ScoutHalflingFemaleDesert (2).webp",
+      "variant": "halflingFemaleDesert"
+    },
+    {
+      "file": "ScoutHalflingFemaleDesert (3).webp",
+      "variant": "halflingFemaleDesert"
+    },
+    {
+      "file": "ScoutHalflingFemaleDesert (4).webp",
+      "variant": "halflingFemaleDesert"
+    },
+    {
+      "file": "ScoutHalflingFemaleForest (1).webp",
+      "variant": "halflingFemaleForest"
+    },
+    {
+      "file": "ScoutHalflingFemaleForest (2).webp",
+      "variant": "halflingFemaleForest"
+    },
+    {
+      "file": "ScoutHalflingFemaleMountains (1).webp",
+      "variant": "halflingFemaleMountains"
+    },
+    {
+      "file": "ScoutHalflingFemaleMountains (2).webp",
+      "variant": "halflingFemaleMountains"
+    },
+    {
+      "file": "ScoutHalflingFemaleUnderdark (1).webp",
+      "variant": "halflingFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalflingFemaleUnderdark (2).webp",
+      "variant": "halflingFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalflingFemaleUnderdark (3).webp",
+      "variant": "halflingFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalflingFemaleUnderdark (4).webp",
+      "variant": "halflingFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalflingFemaleUnderdark (5).webp",
+      "variant": "halflingFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalflingFemaleUnderdark (6).webp",
+      "variant": "halflingFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalflingFemaleUnderdark (7).webp",
+      "variant": "halflingFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalflingMaleArctic (1).webp",
+      "variant": "halflingMaleArctic"
+    },
+    {
+      "file": "ScoutHalflingMaleArctic (2).webp",
+      "variant": "halflingMaleArctic"
+    },
+    {
+      "file": "ScoutHalflingMaleDesert (1).webp",
+      "variant": "halflingMaleDesert"
+    },
+    {
+      "file": "ScoutHalflingMaleDesert (2).webp",
+      "variant": "halflingMaleDesert"
+    },
+    {
+      "file": "ScoutHalflingMaleDesert (3).webp",
+      "variant": "halflingMaleDesert"
+    },
+    {
+      "file": "ScoutHalflingMaleForest (1).webp",
+      "variant": "halflingMaleForest"
+    },
+    {
+      "file": "ScoutHalflingMaleForest (2).webp",
+      "variant": "halflingMaleForest"
+    },
+    {
+      "file": "ScoutHalflingMaleForest (3).webp",
+      "variant": "halflingMaleForest"
+    },
+    {
+      "file": "ScoutHalflingMaleForest (4).webp",
+      "variant": "halflingMaleForest"
+    },
+    {
+      "file": "ScoutHalflingMaleMountains (1).webp",
+      "variant": "halflingMaleMountains"
+    },
+    {
+      "file": "ScoutHalflingMaleMountains (2).webp",
+      "variant": "halflingMaleMountains"
+    },
+    {
+      "file": "ScoutHalflingMaleMountains (3).webp",
+      "variant": "halflingMaleMountains"
+    },
+    {
+      "file": "ScoutHalflingMaleMountains (4).webp",
+      "variant": "halflingMaleMountains"
+    },
+    {
+      "file": "ScoutHalflingMaleUnderdark (1).webp",
+      "variant": "halflingMaleUnderdark"
+    },
+    {
+      "file": "ScoutHalflingMaleUnderdark (2).webp",
+      "variant": "halflingMaleUnderdark"
+    },
+    {
+      "file": "ScoutHalflingMaleUnderdark (3).webp",
+      "variant": "halflingMaleUnderdark"
+    },
+    {
+      "file": "ScoutHalflingMaleUnderdark (4).webp",
+      "variant": "halflingMaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleArctic (1).webp",
+      "variant": "halfOrcFemaleArctic"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleArctic (2).webp",
+      "variant": "halfOrcFemaleArctic"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleDesert (1).webp",
+      "variant": "halfOrcFemaleDesert"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleDesert (2).webp",
+      "variant": "halfOrcFemaleDesert"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleDesert (3).webp",
+      "variant": "halfOrcFemaleDesert"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleDesert (4).webp",
+      "variant": "halfOrcFemaleDesert"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleForest (1).webp",
+      "variant": "halfOrcFemaleForest"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleForest (2).webp",
+      "variant": "halfOrcFemaleForest"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleForest (3).webp",
+      "variant": "halfOrcFemaleForest"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleMountains (1).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleMountains (2).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleMountains (3).webp",
+      "variant": "halfOrcFemaleMountains"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleUnderdark (1).webp",
+      "variant": "halfOrcFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleUnderdark (2).webp",
+      "variant": "halfOrcFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleUnderdark (3).webp",
+      "variant": "halfOrcFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleUnderdark (4).webp",
+      "variant": "halfOrcFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleUnderdark (5).webp",
+      "variant": "halfOrcFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleUnderdark (6).webp",
+      "variant": "halfOrcFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleUnderdark (7).webp",
+      "variant": "halfOrcFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfOrcFemaleUnderdark (8).webp",
+      "variant": "halfOrcFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfOrcMaleArctic (1).webp",
+      "variant": "halfOrcMaleArctic"
+    },
+    {
+      "file": "ScoutHalfOrcMaleArctic (2).webp",
+      "variant": "halfOrcMaleArctic"
+    },
+    {
+      "file": "ScoutHalfOrcMaleDesert (1).webp",
+      "variant": "halfOrcMaleDesert"
+    },
+    {
+      "file": "ScoutHalfOrcMaleDesert (2).webp",
+      "variant": "halfOrcMaleDesert"
+    },
+    {
+      "file": "ScoutHalfOrcMaleDesert (3).webp",
+      "variant": "halfOrcMaleDesert"
+    },
+    {
+      "file": "ScoutHalfOrcMaleForest (1).webp",
+      "variant": "halfOrcMaleForest"
+    },
+    {
+      "file": "ScoutHalfOrcMaleForest (2).webp",
+      "variant": "halfOrcMaleForest"
+    },
+    {
+      "file": "ScoutHalfOrcMaleForest (3).webp",
+      "variant": "halfOrcMaleForest"
+    },
+    {
+      "file": "ScoutHalfOrcMaleGrassland (1).webp",
+      "variant": "halfOrcMaleGrassland"
+    },
+    {
+      "file": "ScoutHalfOrcMaleGrassland (2).webp",
+      "variant": "halfOrcMaleGrassland"
+    },
+    {
+      "file": "ScoutHalfOrcMaleGrassland (3).webp",
+      "variant": "halfOrcMaleGrassland"
+    },
+    {
+      "file": "ScoutHalfOrcMaleGrassland (4).webp",
+      "variant": "halfOrcMaleGrassland"
+    },
+    {
+      "file": "ScoutHalfOrcMaleMountains (1).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "ScoutHalfOrcMaleMountains (2).webp",
+      "variant": "halfOrcMaleMountains"
+    },
+    {
+      "file": "ScoutHalfOrcMaleUnderdark (1).webp",
+      "variant": "halfOrcMaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfOrcMaleUnderdark (2).webp",
+      "variant": "halfOrcMaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfOrcMaleUnderdark (3).webp",
+      "variant": "halfOrcMaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfOrcMaleUnderdark (4).webp",
+      "variant": "halfOrcMaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfOrcMaleUnderdark (5).webp",
+      "variant": "halfOrcMaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfOrcMaleUnderdark (6).webp",
+      "variant": "halfOrcMaleUnderdark"
+    },
+    {
+      "file": "ScoutHalfOrcMaleUnderdark (7).webp",
+      "variant": "halfOrcMaleUnderdark"
+    },
+    {
+      "file": "ScoutHumanFemale (1).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ScoutHumanFemale (2).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ScoutHumanFemale (3).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ScoutHumanFemaleArctic (1).webp",
+      "variant": "humanFemaleArctic"
+    },
+    {
+      "file": "ScoutHumanFemaleArctic (2).webp",
+      "variant": "humanFemaleArctic"
+    },
+    {
+      "file": "ScoutHumanFemaleArctic (3).webp",
+      "variant": "humanFemaleArctic"
+    },
+    {
+      "file": "ScoutHumanFemaleArctic (4).webp",
+      "variant": "humanFemaleArctic"
+    },
+    {
+      "file": "ScoutHumanFemaleArctic (5).webp",
+      "variant": "humanFemaleArctic"
+    },
+    {
+      "file": "ScoutHumanFemaleArctic (6).webp",
+      "variant": "humanFemaleArctic"
+    },
+    {
+      "file": "ScoutHumanFemaleArctic (7).webp",
+      "variant": "humanFemaleArctic"
+    },
+    {
+      "file": "ScoutHumanFemaleForest (1).webp",
+      "variant": "humanFemaleForest"
+    },
+    {
+      "file": "ScoutHumanFemaleForest (2).webp",
+      "variant": "humanFemaleForest"
+    },
+    {
+      "file": "ScoutHumanFemaleForest (3).webp",
+      "variant": "humanFemaleForest"
+    },
+    {
+      "file": "ScoutHumanFemaleForest (4).webp",
+      "variant": "humanFemaleForest"
+    },
+    {
+      "file": "ScoutHumanFemaleForest (5).webp",
+      "variant": "humanFemaleForest"
+    },
+    {
+      "file": "ScoutHumanFemaleForest (6).webp",
+      "variant": "humanFemaleForest"
+    },
+    {
+      "file": "ScoutHumanFemaleForest (7).webp",
+      "variant": "humanFemaleForest"
+    },
+    {
+      "file": "ScoutHumanFemaleMountains (1).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "ScoutHumanFemaleMountains (2).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "ScoutHumanFemaleMountains (3).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "ScoutHumanFemaleMountains (4).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "ScoutHumanFemaleMountains (5).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "ScoutHumanFemaleMountains (6).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "ScoutHumanFemaleMountains (7).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "ScoutHumanFemaleMountains (8).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "ScoutHumanFemaleMountains (9).webp",
+      "variant": "humanFemaleMountains"
+    },
+    {
+      "file": "ScoutHumanFemaleUnderdark (1).webp",
+      "variant": "humanFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHumanFemaleUnderdark (2).webp",
+      "variant": "humanFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHumanFemaleUnderdark (3).webp",
+      "variant": "humanFemaleUnderdark"
+    },
+    {
+      "file": "ScoutHumanMaleArctic (1).webp",
+      "variant": "humanMaleArctic"
+    },
+    {
+      "file": "ScoutHumanMaleArctic (2).webp",
+      "variant": "humanMaleArctic"
+    },
+    {
+      "file": "ScoutHumanMaleArctic (3).webp",
+      "variant": "humanMaleArctic"
+    },
+    {
+      "file": "ScoutHumanMaleArctic (4).webp",
+      "variant": "humanMaleArctic"
+    },
+    {
+      "file": "ScoutHumanMaleArctic (5).webp",
+      "variant": "humanMaleArctic"
+    },
+    {
+      "file": "ScoutHumanMaleArctic (6).webp",
+      "variant": "humanMaleArctic"
+    },
+    {
+      "file": "ScoutHumanMaleArctic (7).webp",
+      "variant": "humanMaleArctic"
+    },
+    {
+      "file": "ScoutHumanMaleArctic (8).webp",
+      "variant": "humanMaleArctic"
+    },
+    {
+      "file": "ScoutHumanMaleDesert (1).webp",
+      "variant": "humanMaleDesert"
+    },
+    {
+      "file": "ScoutHumanMaleDesert (2).webp",
+      "variant": "humanMaleDesert"
+    },
+    {
+      "file": "ScoutHumanMaleDesert (3).webp",
+      "variant": "humanMaleDesert"
+    },
+    {
+      "file": "ScoutHumanMaleDesert (4).webp",
+      "variant": "humanMaleDesert"
+    },
+    {
+      "file": "ScoutHumanMaleDesert (5).webp",
+      "variant": "humanMaleDesert"
+    },
+    {
+      "file": "ScoutHumanMaleDesert (6).webp",
+      "variant": "humanMaleDesert"
+    },
+    {
+      "file": "ScoutHumanMaleForest (1).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "ScoutHumanMaleForest (2).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "ScoutHumanMaleForest (3).webp",
+      "variant": "humanMaleForest"
+    },
+    {
+      "file": "ScoutHumanMaleMountains (1).webp",
+      "variant": "humanMaleMountains"
+    },
+    {
+      "file": "ScoutHumanMaleMountains (2).webp",
+      "variant": "humanMaleMountains"
+    },
+    {
+      "file": "ScoutHumanMaleMountains (3).webp",
+      "variant": "humanMaleMountains"
+    },
+    {
+      "file": "ScoutHumanMaleMountains (4).webp",
+      "variant": "humanMaleMountains"
+    },
+    {
+      "file": "ScoutHumanMaleMountains (5).webp",
+      "variant": "humanMaleMountains"
+    },
+    {
+      "file": "ScoutHumanMaleUnderdark (1).webp",
+      "variant": "humanMaleUnderdark"
+    },
+    {
+      "file": "ScoutHumanMaleUnderdark (2).webp",
+      "variant": "humanMaleUnderdark"
+    },
+    {
+      "file": "ScoutTieflingFemaleArctic (1).webp",
+      "variant": "tieflingFemaleArctic"
+    },
+    {
+      "file": "ScoutTieflingFemaleArctic (2).webp",
+      "variant": "tieflingFemaleArctic"
+    },
+    {
+      "file": "ScoutTieflingFemaleArctic (3).webp",
+      "variant": "tieflingFemaleArctic"
+    },
+    {
+      "file": "ScoutTieflingFemaleArctic (4).webp",
+      "variant": "tieflingFemaleArctic"
+    },
+    {
+      "file": "ScoutTieflingFemaleArctic (5).webp",
+      "variant": "tieflingFemaleArctic"
+    },
+    {
+      "file": "ScoutTieflingFemaleArctic (6).webp",
+      "variant": "tieflingFemaleArctic"
+    },
+    {
+      "file": "ScoutTieflingFemaleArctic (7).webp",
+      "variant": "tieflingFemaleArctic"
+    },
+    {
+      "file": "ScoutTieflingFemaleDesert (1).webp",
+      "variant": "tieflingFemaleDesert"
+    },
+    {
+      "file": "ScoutTieflingFemaleDesert (2).webp",
+      "variant": "tieflingFemaleDesert"
+    },
+    {
+      "file": "ScoutTieflingFemaleDesert (3).webp",
+      "variant": "tieflingFemaleDesert"
+    },
+    {
+      "file": "ScoutTieflingFemaleForest (1).webp",
+      "variant": "tieflingFemaleForest"
+    },
+    {
+      "file": "ScoutTieflingFemaleForest (2).webp",
+      "variant": "tieflingFemaleForest"
+    },
+    {
+      "file": "ScoutTieflingFemaleForest (3).webp",
+      "variant": "tieflingFemaleForest"
+    },
+    {
+      "file": "ScoutTieflingFemaleForest (4).webp",
+      "variant": "tieflingFemaleForest"
+    },
+    {
+      "file": "ScoutTieflingFemaleMountains (1).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "ScoutTieflingFemaleMountains (2).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "ScoutTieflingFemaleMountains (3).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "ScoutTieflingFemaleMountains (4).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "ScoutTieflingFemaleMountains (5).webp",
+      "variant": "tieflingFemaleMountains"
+    },
+    {
+      "file": "ScoutTieflingFemaleUnderdark (1).webp",
+      "variant": "tieflingFemaleUnderdark"
+    },
+    {
+      "file": "ScoutTieflingFemaleUnderdark (2).webp",
+      "variant": "tieflingFemaleUnderdark"
+    },
+    {
+      "file": "ScoutTieflingFemaleUnderdark (3).webp",
+      "variant": "tieflingFemaleUnderdark"
+    },
+    {
+      "file": "ScoutTieflingFemaleUnderdark (4).webp",
+      "variant": "tieflingFemaleUnderdark"
+    },
+    {
+      "file": "ScoutTieflingFemaleUnderdark (5).webp",
+      "variant": "tieflingFemaleUnderdark"
+    },
+    {
+      "file": "ScoutTieflingFemaleUnderdark (6).webp",
+      "variant": "tieflingFemaleUnderdark"
+    },
+    {
+      "file": "ScoutTieflingFemaleUnderdark (7).webp",
+      "variant": "tieflingFemaleUnderdark"
+    },
+    {
+      "file": "ScoutTieflingMaleArctic (1).webp",
+      "variant": "tieflingMaleArctic"
+    },
+    {
+      "file": "ScoutTieflingMaleArctic (2).webp",
+      "variant": "tieflingMaleArctic"
+    },
+    {
+      "file": "ScoutTieflingMaleArctic (3).webp",
+      "variant": "tieflingMaleArctic"
+    },
+    {
+      "file": "ScoutTieflingMaleArctic (4).webp",
+      "variant": "tieflingMaleArctic"
+    },
+    {
+      "file": "ScoutTieflingMaleDesert (1).webp",
+      "variant": "tieflingMaleDesert"
+    },
+    {
+      "file": "ScoutTieflingMaleDesert (2).webp",
+      "variant": "tieflingMaleDesert"
+    },
+    {
+      "file": "ScoutTieflingMaleDesert (3).webp",
+      "variant": "tieflingMaleDesert"
+    },
+    {
+      "file": "ScoutTieflingMaleDesert (4).webp",
+      "variant": "tieflingMaleDesert"
+    },
+    {
+      "file": "ScoutTieflingMaleDesert (5).webp",
+      "variant": "tieflingMaleDesert"
+    },
+    {
+      "file": "ScoutTieflingMaleDesert (6).webp",
+      "variant": "tieflingMaleDesert"
+    },
+    {
+      "file": "ScoutTieflingMaleDesert (7).webp",
+      "variant": "tieflingMaleDesert"
+    },
+    {
+      "file": "ScoutTieflingMaleForest (1).webp",
+      "variant": "tieflingMaleForest"
+    },
+    {
+      "file": "ScoutTieflingMaleForest (2).webp",
+      "variant": "tieflingMaleForest"
+    },
+    {
+      "file": "ScoutTieflingMaleForest (3).webp",
+      "variant": "tieflingMaleForest"
+    },
+    {
+      "file": "ScoutTieflingMaleForest (4).webp",
+      "variant": "tieflingMaleForest"
+    },
+    {
+      "file": "ScoutTieflingMaleForest (5).webp",
+      "variant": "tieflingMaleForest"
+    },
+    {
+      "file": "ScoutTieflingMaleForest (6).webp",
+      "variant": "tieflingMaleForest"
+    },
+    {
+      "file": "ScoutTieflingMaleForest (7).webp",
+      "variant": "tieflingMaleForest"
+    },
+    {
+      "file": "ScoutTieflingMaleMountains (1).webp",
+      "variant": "tieflingMaleMountains"
+    },
+    {
+      "file": "ScoutTieflingMaleMountains (2).webp",
+      "variant": "tieflingMaleMountains"
+    },
+    {
+      "file": "ScoutTieflingMaleUnderdark (1).webp",
+      "variant": "tieflingMaleUnderdark"
+    },
+    {
+      "file": "ScoutTieflingMaleUnderdark (2).webp",
+      "variant": "tieflingMaleUnderdark"
+    },
+    {
+      "file": "ScoutTieflingMaleUnderdark (3).webp",
+      "variant": "tieflingMaleUnderdark"
+    },
+    {
+      "file": "ScoutTieflingMaleUnderdark (4).webp",
+      "variant": "tieflingMaleUnderdark"
+    },
+    {
+      "file": "ScoutTieflingMaleUnderdark (5).webp",
+      "variant": "tieflingMaleUnderdark"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

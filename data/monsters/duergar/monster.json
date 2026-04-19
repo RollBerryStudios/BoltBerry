@@ -1,0 +1,255 @@
+{
+  "id": 95,
+  "slug": "duergar",
+  "name": "Duergar",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, lawful evil",
+    "de": "Mittelgroßer Humanoid, rechtschaffen böse"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "16 (Scale Mail, Shield)",
+    "de": "16 (Schuppenpanzer, Schild)"
+  },
+  "hp": {
+    "en": "26 (4d8 + 8)",
+    "de": "26 (4W8 + 8)"
+  },
+  "str": 14,
+  "dex": 11,
+  "con": 14,
+  "int": 11,
+  "wis": 10,
+  "cha": 9,
+  "strMod": 2,
+  "dexMod": 0,
+  "conMod": 2,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 25,
+      "de": 7.5
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Dwarvish",
+      "Undercommon"
+    ],
+    "de": [
+      "Gemeinsprache der Unterreiche",
+      "Zwergisch"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Duergar Resilience",
+        "text": "The duergar has advantage on saving throws against poison, spells, and illusions, as well as to resist being charmed or paralyzed."
+      },
+      {
+        "name": "Sunlight Sensitivity",
+        "text": "While in sunlight, the duergar has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+      }
+    ],
+    "de": [
+      {
+        "name": "Duergar-Widerstandskraft",
+        "text": "Der Duergar ist bei Rettungswürfen gegen den Zustand Vergiftet, gegen Zauber und Illusionen sowie beim Widerstehen gegen die Zustände Bezaubert und Gelähmt im Vorteil."
+      },
+      {
+        "name": "Empfindlich gegenüber Sonnenlicht",
+        "text": "Im Sonnenlicht ist der Duergar bei Angriffs-, und Weisheitswürfen (Wahrnehmung), die auf Sicht basieren, im Nachteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Enlarge",
+        "text": "For 1 minute, the duergar magically increases in size, along with anything it is wearing or carrying. While enlarged, the duergar is Large, doubles its damage dice on Strength-based weapon attacks (included in the attacks), and makes Strength checks and Strength saving throws with advantage. If the duergar lacks the room to become Large, it attains the maximum size possible in the space available."
+      },
+      {
+        "name": "War Pick",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) piercing damage, or 11 (2d8 + 2) piercing damage while enlarged."
+      },
+      {
+        "name": "Javelin",
+        "text": "Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: 5 (1d6 + 2) piercing damage, or 9 (2d6 + 2) piercing damage while enlarged."
+      },
+      {
+        "name": "Invisibility",
+        "text": "The duergar magically turns invisible until it attacks, casts a spell, or uses its Enlarge, or until its concentration is broken, up to 1 hour (as if concentrating on a spell). Any equipment the duergar wears or carries is invisible with it."
+      }
+    ],
+    "de": [
+      {
+        "name": "Vergrößern (wird nach kurzer oder langer Rast aufgeladen)",
+        "text": "Der Duergar wächst auf magische Art und bleibt eine Minute lang groß, ebenso alles, was er trägt oder hält. Vergrößert ist der Duergar groß, sein Schadenswürfel bei stärkebasierten Waffenangriffen wird verdoppelt (in Angriffe eingeschlossen), und er ist bei Stärkewürfen und Stärkerettungswürfen im Vorteil. Wenn der Duergar nicht genügend Platz hat, um groß zu werden, nimmt er die maximal mögliche Größe an."
+      },
+      {
+        "name": "Kriegspicke",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W8+2) Stichschaden oder 11 (2W8+2) Stichschaden, wenn vergrößert."
+      },
+      {
+        "name": "Wurfspeer",
+        "text": "Nah- oder Fernkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m oder Reichweite 9/36 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden oder 9 (2W6+2) Stichschaden, wenn vergrößert."
+      },
+      {
+        "name": "Unsichtbarkeit (wird nach kurzer oder langer Rast aufgeladen)",
+        "text": "Der Duergar ist bis zu eine Stunde lang auf magische Art unsichtbar, bis er angreift, einen Zauber wirkt, Vergrößern einsetzt, oder bis seine Konzentration unterbrochen wird (wie bei einem Zauber). Ausrüstung, die der Duergar trägt oder hält, ist ebenfalls unsichtbar."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/309/1000/1000/636252772101183765.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "mittel"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoid"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "DuergarFemale (1).webp",
+    "variant": "female"
+  },
+  "tokens": [
+    {
+      "file": "DuergarFemale (10).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DuergarFemale (2).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DuergarFemale (3).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DuergarFemale (4).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DuergarFemale (5).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DuergarFemale (6).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DuergarFemale (7).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DuergarFemale (8).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DuergarFemale (9).webp",
+      "variant": "female"
+    },
+    {
+      "file": "DuergarMale (1).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (10).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (11).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (12).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (13).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (14).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (15).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (16).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (17).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (18).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (19).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (2).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (20).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (3).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (4).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (5).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (6).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (7).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (8).webp",
+      "variant": "male"
+    },
+    {
+      "file": "DuergarMale (9).webp",
+      "variant": "male"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

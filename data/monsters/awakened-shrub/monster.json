@@ -1,0 +1,192 @@
+{
+  "id": 32,
+  "slug": "awakened-shrub",
+  "name": "Awakened Shrub",
+  "nameDe": "Erwachter Busch",
+  "source": "SRD",
+  "meta": {
+    "en": "Small plant, unaligned",
+    "de": "Kleine Pflanze, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "9",
+    "de": "9"
+  },
+  "hp": {
+    "en": "10 (3d6)",
+    "de": "10 (3W6)"
+  },
+  "str": 3,
+  "dex": 8,
+  "con": 11,
+  "int": 10,
+  "wis": 10,
+  "cha": 6,
+  "strMod": -4,
+  "dexMod": -1,
+  "conMod": 0,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "one language known by its creator"
+    ],
+    "de": [
+      "Eine seinem Schöpfer bekannte Sprache"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "False Appearance",
+        "text": "While the shrub remains motionless, it is indistinguishable from a normal shrub."
+      }
+    ],
+    "de": [
+      {
+        "name": "Falsches Erscheinungsbild",
+        "text": "Solange der Busch sich nicht bewegt, ist er nicht von einem gewöhnlichen Busch zu unterscheiden."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Rake",
+        "text": "Melee Weapon Attack: +1 to hit, reach 5 ft., one target. Hit: 1 (1d4 - 1) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Harken",
+        "text": "Nahkampfwaffenangriff: +1 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 1 (1W4-1) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/659/plant.jpg",
+  "size": {
+    "en": "small",
+    "de": "Klein"
+  },
+  "type": {
+    "en": "plant",
+    "de": "Pflanze"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "AwakenedShrub (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "AwakenedShrub (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedShrub (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,499 @@
+{
+  "id": 218,
+  "slug": "orc",
+  "name": "Orc",
+  "nameDe": "Ork",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, chaotic evil",
+    "de": "Mittelgroßer Humanoid, chaotisch böse"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "13 (Hide Armor)",
+    "de": "13 (Fellrüstung)"
+  },
+  "hp": {
+    "en": "15 (2d8 + 6)",
+    "de": "15 (2W8+6)"
+  },
+  "str": 16,
+  "dex": 12,
+  "con": 16,
+  "int": 7,
+  "wis": 11,
+  "cha": 10,
+  "strMod": 3,
+  "dexMod": 1,
+  "conMod": 3,
+  "intMod": -2,
+  "wisMod": 0,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Orc"
+    ],
+    "de": [
+      "Gemeinsprache",
+      "Orkisch"
+    ]
+  },
+  "skills": [
+    "Einschüchtern +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Aggressive",
+        "text": "As a bonus action, the orc can move up to its speed toward a hostile creature that it can see."
+      }
+    ],
+    "de": [
+      {
+        "name": "Aggressiv",
+        "text": "Als Bonusaktion kann sich der Ork bis zu seiner Bewegungsrate auf eine feindlich gesinnte Kreatur zubewegen, die er sehen kann."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Greataxe",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 9 (1d12 + 3) slashing damage."
+      },
+      {
+        "name": "Javelin",
+        "text": "Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: 6 (1d6 + 3) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Zweihandaxt",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 9 (1W12+3) Hiebschaden."
+      },
+      {
+        "name": "Wurfspeer",
+        "text": "Nah- oder Fernkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m oder Reichweite 9/36 m, ein Ziel. Treffer: 6 (1W6+3) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/301/1000/1000/636252771691385727.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (Ork)"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "OrcArcticAxe (1).webp",
+    "variant": "arcticAxe"
+  },
+  "tokens": [
+    {
+      "file": "OrcArcticAxe (2).webp",
+      "variant": "arcticAxe"
+    },
+    {
+      "file": "OrcArcticAxe (3).webp",
+      "variant": "arcticAxe"
+    },
+    {
+      "file": "OrcArcticAxe (4).webp",
+      "variant": "arcticAxe"
+    },
+    {
+      "file": "OrcArcticAxe (5).webp",
+      "variant": "arcticAxe"
+    },
+    {
+      "file": "OrcArcticAxe (6).webp",
+      "variant": "arcticAxe"
+    },
+    {
+      "file": "OrcArcticAxe (7).webp",
+      "variant": "arcticAxe"
+    },
+    {
+      "file": "OrcArcticAxe (8).webp",
+      "variant": "arcticAxe"
+    },
+    {
+      "file": "OrcArcticJavelin (1).webp",
+      "variant": "arcticJavelin"
+    },
+    {
+      "file": "OrcArcticJavelin (2).webp",
+      "variant": "arcticJavelin"
+    },
+    {
+      "file": "OrcArcticJavelin (3).webp",
+      "variant": "arcticJavelin"
+    },
+    {
+      "file": "OrcArcticJavelin (4).webp",
+      "variant": "arcticJavelin"
+    },
+    {
+      "file": "OrcForestAxe (1).webp",
+      "variant": "forestAxe"
+    },
+    {
+      "file": "OrcForestAxe (10).webp",
+      "variant": "forestAxe"
+    },
+    {
+      "file": "OrcForestAxe (11).webp",
+      "variant": "forestAxe"
+    },
+    {
+      "file": "OrcForestAxe (2).webp",
+      "variant": "forestAxe"
+    },
+    {
+      "file": "OrcForestAxe (3).webp",
+      "variant": "forestAxe"
+    },
+    {
+      "file": "OrcForestAxe (4).webp",
+      "variant": "forestAxe"
+    },
+    {
+      "file": "OrcForestAxe (5).webp",
+      "variant": "forestAxe"
+    },
+    {
+      "file": "OrcForestAxe (6).webp",
+      "variant": "forestAxe"
+    },
+    {
+      "file": "OrcForestAxe (7).webp",
+      "variant": "forestAxe"
+    },
+    {
+      "file": "OrcForestAxe (8).webp",
+      "variant": "forestAxe"
+    },
+    {
+      "file": "OrcForestAxe (9).webp",
+      "variant": "forestAxe"
+    },
+    {
+      "file": "OrcForestJavelin (1).webp",
+      "variant": "forestJavelin"
+    },
+    {
+      "file": "OrcForestJavelin (2).webp",
+      "variant": "forestJavelin"
+    },
+    {
+      "file": "OrcForestJavelin (3).webp",
+      "variant": "forestJavelin"
+    },
+    {
+      "file": "OrcForestJavelin (4).webp",
+      "variant": "forestJavelin"
+    },
+    {
+      "file": "OrcMountainAxe (1).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainAxe (10).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainAxe (11).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainAxe (12).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainAxe (13).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainAxe (14).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainAxe (15).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainAxe (16).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainAxe (17).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainAxe (18).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainAxe (2).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainAxe (3).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainAxe (4).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainAxe (5).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainAxe (6).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainAxe (7).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainAxe (8).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainAxe (9).webp",
+      "variant": "mountainAxe"
+    },
+    {
+      "file": "OrcMountainJavelin (1).webp",
+      "variant": "mountainJavelin"
+    },
+    {
+      "file": "OrcMountainJavelin (2).webp",
+      "variant": "mountainJavelin"
+    },
+    {
+      "file": "OrcMountainJavelin (3).webp",
+      "variant": "mountainJavelin"
+    },
+    {
+      "file": "OrcMountainJavelin (4).webp",
+      "variant": "mountainJavelin"
+    },
+    {
+      "file": "OrcMountainJavelin (5).webp",
+      "variant": "mountainJavelin"
+    },
+    {
+      "file": "OrcRoadAxe (1).webp",
+      "variant": "roadAxe"
+    },
+    {
+      "file": "OrcRoadAxe (10).webp",
+      "variant": "roadAxe"
+    },
+    {
+      "file": "OrcRoadAxe (11).webp",
+      "variant": "roadAxe"
+    },
+    {
+      "file": "OrcRoadAxe (12).webp",
+      "variant": "roadAxe"
+    },
+    {
+      "file": "OrcRoadAxe (13).webp",
+      "variant": "roadAxe"
+    },
+    {
+      "file": "OrcRoadAxe (2).webp",
+      "variant": "roadAxe"
+    },
+    {
+      "file": "OrcRoadAxe (3).webp",
+      "variant": "roadAxe"
+    },
+    {
+      "file": "OrcRoadAxe (4).webp",
+      "variant": "roadAxe"
+    },
+    {
+      "file": "OrcRoadAxe (5).webp",
+      "variant": "roadAxe"
+    },
+    {
+      "file": "OrcRoadAxe (6).webp",
+      "variant": "roadAxe"
+    },
+    {
+      "file": "OrcRoadAxe (7).webp",
+      "variant": "roadAxe"
+    },
+    {
+      "file": "OrcRoadAxe (8).webp",
+      "variant": "roadAxe"
+    },
+    {
+      "file": "OrcRoadAxe (9).webp",
+      "variant": "roadAxe"
+    },
+    {
+      "file": "OrcSwampAxe (1).webp",
+      "variant": "swampAxe"
+    },
+    {
+      "file": "OrcSwampAxe (10).webp",
+      "variant": "swampAxe"
+    },
+    {
+      "file": "OrcSwampAxe (11).webp",
+      "variant": "swampAxe"
+    },
+    {
+      "file": "OrcSwampAxe (12).webp",
+      "variant": "swampAxe"
+    },
+    {
+      "file": "OrcSwampAxe (13).webp",
+      "variant": "swampAxe"
+    },
+    {
+      "file": "OrcSwampAxe (2).webp",
+      "variant": "swampAxe"
+    },
+    {
+      "file": "OrcSwampAxe (3).webp",
+      "variant": "swampAxe"
+    },
+    {
+      "file": "OrcSwampAxe (4).webp",
+      "variant": "swampAxe"
+    },
+    {
+      "file": "OrcSwampAxe (5).webp",
+      "variant": "swampAxe"
+    },
+    {
+      "file": "OrcSwampAxe (6).webp",
+      "variant": "swampAxe"
+    },
+    {
+      "file": "OrcSwampAxe (7).webp",
+      "variant": "swampAxe"
+    },
+    {
+      "file": "OrcSwampAxe (8).webp",
+      "variant": "swampAxe"
+    },
+    {
+      "file": "OrcSwampAxe (9).webp",
+      "variant": "swampAxe"
+    },
+    {
+      "file": "OrcSwampJavelin (1).webp",
+      "variant": "swampJavelin"
+    },
+    {
+      "file": "OrcSwampJavelin (2).webp",
+      "variant": "swampJavelin"
+    },
+    {
+      "file": "OrcSwampJavelin (3).webp",
+      "variant": "swampJavelin"
+    },
+    {
+      "file": "OrcSwampJavelin (4).webp",
+      "variant": "swampJavelin"
+    },
+    {
+      "file": "OrcUnderdarkAxe (1).webp",
+      "variant": "underdarkAxe"
+    },
+    {
+      "file": "OrcUnderdarkAxe (10).webp",
+      "variant": "underdarkAxe"
+    },
+    {
+      "file": "OrcUnderdarkAxe (11).webp",
+      "variant": "underdarkAxe"
+    },
+    {
+      "file": "OrcUnderdarkAxe (12).webp",
+      "variant": "underdarkAxe"
+    },
+    {
+      "file": "OrcUnderdarkAxe (2).webp",
+      "variant": "underdarkAxe"
+    },
+    {
+      "file": "OrcUnderdarkAxe (3).webp",
+      "variant": "underdarkAxe"
+    },
+    {
+      "file": "OrcUnderdarkAxe (4).webp",
+      "variant": "underdarkAxe"
+    },
+    {
+      "file": "OrcUnderdarkAxe (5).webp",
+      "variant": "underdarkAxe"
+    },
+    {
+      "file": "OrcUnderdarkAxe (6).webp",
+      "variant": "underdarkAxe"
+    },
+    {
+      "file": "OrcUnderdarkAxe (7).webp",
+      "variant": "underdarkAxe"
+    },
+    {
+      "file": "OrcUnderdarkAxe (8).webp",
+      "variant": "underdarkAxe"
+    },
+    {
+      "file": "OrcUnderdarkAxe (9).webp",
+      "variant": "underdarkAxe"
+    },
+    {
+      "file": "OrcUnderdarkJavelin (1).webp",
+      "variant": "underdarkJavelin"
+    },
+    {
+      "file": "OrcUnderdarkJavelin (2).webp",
+      "variant": "underdarkJavelin"
+    },
+    {
+      "file": "OrcUnderdarkJavelin (3).webp",
+      "variant": "underdarkJavelin"
+    },
+    {
+      "file": "OrcUnderdarkJavelin (4).webp",
+      "variant": "underdarkJavelin"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

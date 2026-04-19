@@ -1,0 +1,30 @@
+{
+  "id": 370,
+  "slug": "winged-boots",
+  "name": "Winged Boots",
+  "nameDe": "Geflügelte Stiefel",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 800000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon (requires attunement) While you wear these boots, you have a flying speed equal to your walking speed. You can use the boots to fly for up to 4 hours, all at once or in several shorter flights, each one using a minimum of 1 minute from the duration. If you are flying when the duration expires, you descend at a rate of 30 feet per round until you land. The boots regain 2 hours of flying capability for every 12 hours they aren't in use.",
+    "de": "Wenn du diese Stiefel trägst, hast du eine Flugbewegungsrate, die deiner Schrittbewegungsrate entspricht. Du kannst die Stiefel verwenden, um bis zu vier Stunden lang zu fliegen. Die Wirkungsdauer kann auf einmal oder in kürzeren Flügen von jeweils mindestens einer Minute verbraucht werden. Wenn du fliegst, wenn die Wirkungsdauer abläuft, sinkst du um neun Meter pro Runde, bis du landest. Die Stiefel erhalten alle zwölf Stunden, in denen sie nicht verwendet werden, zwei Stunden Flugzeit zurück."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "boots",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

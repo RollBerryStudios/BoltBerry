@@ -1,0 +1,26 @@
+{
+  "id": 218,
+  "slug": "universal-solvent",
+  "name": "Universal Solvent",
+  "nameDe": "Universelles Lösungsmittel",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "LEGENDARY",
+    "de": "Legendär"
+  },
+  "cost": 30000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, legendary This tube holds milky liquid with a strong alcohol smell. You can use an action to pour the contents of the tube onto a surface within reach. The liquid instantly dissolves up to 1 square foot of adhesive it touches, including sovereign glue.",
+    "de": "Dieses Fläschchen enthält eine milchige Flüssigkeit mit starkem Alkoholgeruch. Du kannst eine Aktion verwenden, um den Inhalt des Fläschchens auf eine Oberfläche in Reichweite zu gießen. Die Flüssigkeit löst sofort eine quadratische Fläche mit einer Kantenlänge von bis zu 30 Zentimetern auf, wenn sie damit in Berührung kommt. Sie funktioniert auch bei Ewigem Leim ."
+  },
+  "image": "glue",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

@@ -1,0 +1,66 @@
+{
+  "id": 150,
+  "slug": "conjure-woodland-beings",
+  "name": "Conjure Woodland Beings",
+  "nameDe": "Wesen des Waldes beschwören",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "ranger"
+    ],
+    "de": [
+      "Druide",
+      "Waldläufer"
+    ]
+  },
+  "type": {
+    "en": "4th-level conjuration",
+    "de": "Stufe 4 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "one holly berry per creature summoned",
+      "de": "eine Stechpalmenbeere pro beschworener Kreatur"
+    },
+    "raw": {
+      "en": "V, S, M (one holly berry per creature summoned)",
+      "de": "V, G, M (eine Stechpalmenbeere pro beschworener Kreatur)"
+    }
+  },
+  "description": {
+    "en": "You summon fey creatures that appear in unoccupied spaces that you can see within range. Choose one of the following options for what appears: - One fey creature of challenge rating 2 or lower - Two fey creatures of challenge rating 1 or lower - Four fey creatures of challenge rating 1/2 or lower - Eight fey creatures of challenge rating 1/4 or lower A summoned creature disappears when it drops to 0 hit points or when the spell ends. The summoned creatures are friendly to you and your companions. Roll initiative for the summoned creatures as a group, which have their own turns. They obey any verbal commands that you issue to them (no action required by you). If you don't issue any commands to them, they defend themselves from hostile creatures, but otherwise take no actions. The GM has the creatures' statistics.",
+    "de": "Du beschwörst Feenwesen, die in freien Bereichen in Reichweite erscheinen, die du sehen kannst. Wähle eine der folgenden Optionen aus: Eine beschworene Kreatur verschwindet, wenn der Zauber endet oder ihre Trefferpunkte auf 0 sinken. Die beschworenen Kreaturen sind dir und deinen Gefährten freundlich gesinnt. Würfle die Initiative für die beschworenen Kreaturen als Gruppe aus, die über ihren eigenen Zug verfügt. Sie gehorchen deinen mündlichen Befehlen (erfordert keine Aktion), Wenn du ihnen keine Befehle erteilst, verteidigen sie sich gegen feindlich gesinnte Kreaturen, führen aber anderenfalls keine Aktionen aus. Der SL hat die Werte der Kreaturen. Auf höheren Graden:  Wirkst du diesen Zauber mit bestimmten Zauberplätzen höheren Grades, erscheinen mehr Kreaturen, wenn du eine der oben genannten Optionen auswählst: doppelt so viele mit einem Zauberplatz des 6. Grades und dreimal so viele mit einem Zauberplatz des 8. Grades."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using certain higher-level spell slots, you choose one of the summoning options above, and more creatures appear: twice as many with a 6th-level slot and three times as many with an 8th-level slot.",
+    "de": "Wirkst du diesen Zauber mit bestimmten Zauberplätzen höheren Grades, erscheinen mehr Kreaturen, wenn du eine der oben genannten Optionen auswählst: doppelt so viele mit einem Zauberplatz des 6. Grades und dreimal so viele mit einem Zauberplatz des 8. Grades."
+  },
+  "image": "conjure-woodland-being",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

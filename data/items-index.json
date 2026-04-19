@@ -1,0 +1,3048 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-04-18T13:52:00.911Z",
+  "itemCount": 203,
+  "items": [
+    {
+      "id": 12,
+      "slug": "shield",
+      "name": "Shield",
+      "nameDe": "Schild",
+      "category": {
+        "en": "ARMOR",
+        "de": "Rüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 1000
+    },
+    {
+      "id": 13,
+      "slug": "club",
+      "name": "Club",
+      "nameDe": "Knüppel",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 10
+    },
+    {
+      "id": 14,
+      "slug": "dagger",
+      "name": "Dagger",
+      "nameDe": "Dolch",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 200
+    },
+    {
+      "id": 15,
+      "slug": "greatclub",
+      "name": "Greatclub",
+      "nameDe": "Zweihändige Keule",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 20
+    },
+    {
+      "id": 16,
+      "slug": "handaxe",
+      "name": "Handaxe",
+      "nameDe": "Beil",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 500
+    },
+    {
+      "id": 17,
+      "slug": "javelin",
+      "name": "Javelin",
+      "nameDe": "Wurfspeer",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 50
+    },
+    {
+      "id": 18,
+      "slug": "light-hammer",
+      "name": "Light Hammer",
+      "nameDe": "Leichter Hammer",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 20
+    },
+    {
+      "id": 19,
+      "slug": "mace",
+      "name": "Mace",
+      "nameDe": "Streitkolben",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 500
+    },
+    {
+      "id": 20,
+      "slug": "quarterstaff",
+      "name": "Quarterstaff",
+      "nameDe": "Kampfstab",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 20
+    },
+    {
+      "id": 21,
+      "slug": "sickle",
+      "name": "Sickle",
+      "nameDe": "Sichel",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 100
+    },
+    {
+      "id": 22,
+      "slug": "spear",
+      "name": "Spear",
+      "nameDe": "Speer",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 100
+    },
+    {
+      "id": 23,
+      "slug": "light-crossbow",
+      "name": "Light Crossbow",
+      "nameDe": "Leichte Armbrust",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 2500
+    },
+    {
+      "id": 24,
+      "slug": "dart",
+      "name": "Dart",
+      "nameDe": "Pfeil",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 5
+    },
+    {
+      "id": 25,
+      "slug": "shortbow",
+      "name": "Shortbow",
+      "nameDe": "Kurzbogen",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 2500
+    },
+    {
+      "id": 26,
+      "slug": "sling",
+      "name": "Sling",
+      "nameDe": "Schleuder",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 10
+    },
+    {
+      "id": 27,
+      "slug": "battleaxe",
+      "name": "Battleaxe",
+      "nameDe": "Streitaxt",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 1000
+    },
+    {
+      "id": 28,
+      "slug": "flail",
+      "name": "Flail",
+      "nameDe": "Streitflegel",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 1000
+    },
+    {
+      "id": 29,
+      "slug": "glaive",
+      "name": "Glaive",
+      "nameDe": "Flefe",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 2000
+    },
+    {
+      "id": 30,
+      "slug": "greataxe",
+      "name": "Greataxe",
+      "nameDe": "Zweihändige Axt",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 3000
+    },
+    {
+      "id": 31,
+      "slug": "greatsword",
+      "name": "Greatsword",
+      "nameDe": "Zweihänder",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 5000
+    },
+    {
+      "id": 32,
+      "slug": "halberd",
+      "name": "Halberd",
+      "nameDe": "Hellebarde",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 2000
+    },
+    {
+      "id": 33,
+      "slug": "lance",
+      "name": "Lance",
+      "nameDe": "Lanze",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 1000
+    },
+    {
+      "id": 34,
+      "slug": "longsword",
+      "name": "Longsword",
+      "nameDe": "Langschwert",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 1500
+    },
+    {
+      "id": 35,
+      "slug": "maul",
+      "name": "Maul",
+      "nameDe": "Langstielhammer",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 1000
+    },
+    {
+      "id": 36,
+      "slug": "morningstar",
+      "name": "Morningstar",
+      "nameDe": "Morgenstern",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 1500
+    },
+    {
+      "id": 37,
+      "slug": "pike",
+      "name": "Pike",
+      "nameDe": "Spieß",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 500
+    },
+    {
+      "id": 38,
+      "slug": "rapier",
+      "name": "Rapier",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 2500
+    },
+    {
+      "id": 39,
+      "slug": "scimitar",
+      "name": "Scimitar",
+      "nameDe": "Krummsäbel",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 2500
+    },
+    {
+      "id": 40,
+      "slug": "shortsword",
+      "name": "Shortsword",
+      "nameDe": "Kurzschwert",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 1000
+    },
+    {
+      "id": 41,
+      "slug": "trident",
+      "name": "Trident",
+      "nameDe": "Dreizack",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 500
+    },
+    {
+      "id": 42,
+      "slug": "war-pick",
+      "name": "War pick",
+      "nameDe": "Kriegspickel",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 500
+    },
+    {
+      "id": 43,
+      "slug": "warhammer",
+      "name": "Warhammer",
+      "nameDe": "Streithammer",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 1500
+    },
+    {
+      "id": 44,
+      "slug": "whip",
+      "name": "Whip",
+      "nameDe": "Peitsche",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 200
+    },
+    {
+      "id": 45,
+      "slug": "blowgun",
+      "name": "Blowgun",
+      "nameDe": "Blasrohr",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 1000
+    },
+    {
+      "id": 46,
+      "slug": "hand-crossbow",
+      "name": "Hand Crossbow",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 7500
+    },
+    {
+      "id": 47,
+      "slug": "heavy-crossbow",
+      "name": "Heavy Crossbow",
+      "nameDe": "Handarmbrust",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 5000
+    },
+    {
+      "id": 48,
+      "slug": "longbow",
+      "name": "Longbow",
+      "nameDe": "Langbogen",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 5000
+    },
+    {
+      "id": 50,
+      "slug": "arrows-20",
+      "name": "Arrows (20)",
+      "nameDe": "Pfeile (20)",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 100
+    },
+    {
+      "id": 51,
+      "slug": "blowgun-needles-50",
+      "name": "Blowgun Needles (50)",
+      "nameDe": "Blasrohr Nadeln (50)",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 100
+    },
+    {
+      "id": 52,
+      "slug": "crossbow-bolts-20",
+      "name": "Crossbow Bolts (20)",
+      "nameDe": "Armbrustbolzen (20)",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 100
+    },
+    {
+      "id": 53,
+      "slug": "sling-bullets-20",
+      "name": "Sling Bullets (20)",
+      "nameDe": "Schleudergeschosse (20)",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 4
+    },
+    {
+      "id": 54,
+      "slug": "abacus",
+      "name": "Abacus",
+      "nameDe": "Abakus",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 200
+    },
+    {
+      "id": 67,
+      "slug": "bedroll",
+      "name": "Bedroll",
+      "nameDe": "Schlafsack",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 100
+    },
+    {
+      "id": 68,
+      "slug": "bell",
+      "name": "Bell",
+      "nameDe": "Glocke",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 100
+    },
+    {
+      "id": 69,
+      "slug": "blanket",
+      "name": "Blanket",
+      "nameDe": "Decke",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 50
+    },
+    {
+      "id": 79,
+      "slug": "chalk-1-piece",
+      "name": "Chalk (1 piece)",
+      "nameDe": "Kreide (1 Stück)",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 1
+    },
+    {
+      "id": 82,
+      "slug": "clothes-common",
+      "name": "Clothes, Common",
+      "nameDe": "Kleidung, Gewöhnlich",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 50
+    },
+    {
+      "id": 83,
+      "slug": "clothes-costume",
+      "name": "Clothes, Costume",
+      "nameDe": "Kleidung, Kostüm",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 500
+    },
+    {
+      "id": 84,
+      "slug": "clothes-fine",
+      "name": "Clothes, Fine",
+      "nameDe": "Kleidung, Fein",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 1500
+    },
+    {
+      "id": 85,
+      "slug": "clothes-travelers",
+      "name": "Clothes, Traveler's",
+      "nameDe": "Kleidung, Wanderer",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 200
+    },
+    {
+      "id": 95,
+      "slug": "grappling-hook",
+      "name": "Grappling Hook",
+      "nameDe": "Greifhaken",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 200
+    },
+    {
+      "id": 96,
+      "slug": "hammer",
+      "name": "Hammer",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 100
+    },
+    {
+      "id": 97,
+      "slug": "hammer-sledge",
+      "name": "Hammer, Sledge",
+      "nameDe": "Vorschlaghammer",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 200
+    },
+    {
+      "id": 103,
+      "slug": "hourglass",
+      "name": "Hourglass",
+      "nameDe": "Sanduhr",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 2500
+    },
+    {
+      "id": 105,
+      "slug": "ink-1-ounce-bottle",
+      "name": "Ink (1 ounce bottle)",
+      "nameDe": "Tinte (25ml Flasche)",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 1000
+    },
+    {
+      "id": 106,
+      "slug": "ink-pen",
+      "name": "Ink Pen",
+      "nameDe": "Feder für Tinte",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 2
+    },
+    {
+      "id": 116,
+      "slug": "mirror-steel",
+      "name": "Mirror, Steel",
+      "nameDe": "Spiegel, Stahl",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 500
+    },
+    {
+      "id": 118,
+      "slug": "paper-one-sheet",
+      "name": "Paper (one sheet)",
+      "nameDe": "Papier (ein Blatt)",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 20
+    },
+    {
+      "id": 119,
+      "slug": "parchment-one-sheet",
+      "name": "Parchment (one sheet)",
+      "nameDe": "Pergament (ein Blatt)",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 10
+    },
+    {
+      "id": 120,
+      "slug": "perfume-vial",
+      "name": "Perfume (vial)",
+      "nameDe": "Parfum (Phiole)",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 500
+    },
+    {
+      "id": 121,
+      "slug": "pick-miners",
+      "name": "Pick, Miner's",
+      "nameDe": "Hacke für Minenarbeiten",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 200
+    },
+    {
+      "id": 122,
+      "slug": "piton",
+      "name": "Piton",
+      "nameDe": "Kletterhaken",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 5
+    },
+    {
+      "id": 124,
+      "slug": "pole-10-foot",
+      "name": "Pole (10-foot)",
+      "nameDe": "Mast (10-foot)",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 5
+    },
+    {
+      "id": 130,
+      "slug": "robes",
+      "name": "Robes",
+      "nameDe": "Umhang",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 100
+    },
+    {
+      "id": 135,
+      "slug": "sealing-wax",
+      "name": "Sealing Wax",
+      "nameDe": "Siegelwachs",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 40
+    },
+    {
+      "id": 136,
+      "slug": "shovel",
+      "name": "Shovel",
+      "nameDe": "Schaufel",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 200
+    },
+    {
+      "id": 137,
+      "slug": "signal-whistle",
+      "name": "Signal Whistle",
+      "nameDe": "Signalpfeife",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 5
+    },
+    {
+      "id": 138,
+      "slug": "signet-ring",
+      "name": "Signet Ring",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 500
+    },
+    {
+      "id": 139,
+      "slug": "soap",
+      "name": "Soap",
+      "nameDe": "Seife",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 2
+    },
+    {
+      "id": 141,
+      "slug": "spikes-iron-10",
+      "name": "Spikes, Iron (10)",
+      "nameDe": "Eisenstachel (10)",
+      "category": {
+        "en": "ADVENTURING_GEAR",
+        "de": "Ausrüstung"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 100
+    },
+    {
+      "id": 198,
+      "slug": "potion-of-healing",
+      "name": "Potion of Healing",
+      "nameDe": "Heiltrank",
+      "category": {
+        "en": "POTIONS_OILS",
+        "de": "Tränke & Öle"
+      },
+      "rarity": {
+        "en": "COMMON",
+        "de": "Gewöhnlich"
+      },
+      "cost": 5000
+    },
+    {
+      "id": 200,
+      "slug": "philter-of-love",
+      "name": "Philter of Love",
+      "nameDe": "Liebestrank",
+      "category": {
+        "en": "POTIONS_OILS",
+        "de": "Tränke & Öle"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 9000
+    },
+    {
+      "id": 207,
+      "slug": "potion-of-mind-reading",
+      "name": "Potion of Mind Reading",
+      "nameDe": "Trank des Gedankenlesens",
+      "category": {
+        "en": "POTIONS_OILS",
+        "de": "Tränke & Öle"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 18000
+    },
+    {
+      "id": 208,
+      "slug": "potion-of-water-breathing",
+      "name": "Potion of Water Breathing",
+      "nameDe": "Trank der Wasseratmung",
+      "category": {
+        "en": "POTIONS_OILS",
+        "de": "Tränke & Öle"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 18000
+    },
+    {
+      "id": 210,
+      "slug": "potion-of-animal-friendship",
+      "name": "Potion of Animal Friendship",
+      "nameDe": "Trank der Tierfreundschaft",
+      "category": {
+        "en": "POTIONS_OILS",
+        "de": "Tränke & Öle"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 20000
+    },
+    {
+      "id": 215,
+      "slug": "dust-of-disappearance",
+      "name": "Dust of Disappearance",
+      "nameDe": "Staub des Verschwindens",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 30000
+    },
+    {
+      "id": 216,
+      "slug": "potion-of-gaseous-form",
+      "name": "Potion of Gaseous Form",
+      "nameDe": "Trank der Gasförmigen Gestalt",
+      "category": {
+        "en": "POTIONS_OILS",
+        "de": "Tränke & Öle"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 30000
+    },
+    {
+      "id": 218,
+      "slug": "universal-solvent",
+      "name": "Universal Solvent",
+      "nameDe": "Universelles Lösungsmittel",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "LEGENDARY",
+        "de": "Legendär"
+      },
+      "cost": 30000
+    },
+    {
+      "id": 227,
+      "slug": "sovereign-glue",
+      "name": "Sovereign Glue",
+      "nameDe": "Ewiger Leim",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "LEGENDARY",
+        "de": "Legendär"
+      },
+      "cost": 40000
+    },
+    {
+      "id": 229,
+      "slug": "horn-of-blasting",
+      "name": "Horn of Blasting",
+      "nameDe": "Horn der Sprengung",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 45000
+    },
+    {
+      "id": 231,
+      "slug": "dust-of-sneezing-and-choking",
+      "name": "Dust of Sneezing and Choking",
+      "nameDe": "Staub des Niesens und Erstickens",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 48000
+    },
+    {
+      "id": 232,
+      "slug": "necklace-of-fireballs",
+      "name": "Necklace of Fireballs",
+      "nameDe": "Halskette der Feuerbälle",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 300000
+    },
+    {
+      "id": 233,
+      "slug": "oil-of-slipperiness",
+      "name": "Oil of Slipperiness",
+      "nameDe": "Öl der Glätte",
+      "category": {
+        "en": "POTIONS_OILS",
+        "de": "Tränke & Öle"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 48000
+    },
+    {
+      "id": 234,
+      "slug": "potion-of-flying",
+      "name": "Potion of Flying",
+      "nameDe": "Trank des Fliegens",
+      "category": {
+        "en": "POTIONS_OILS",
+        "de": "Tränke & Öle"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 50000
+    },
+    {
+      "id": 237,
+      "slug": "helm-of-comprehending-languages",
+      "name": "Helm of Comprehending Languages",
+      "nameDe": "Helm des Sprachenverstehens",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 50000
+    },
+    {
+      "id": 239,
+      "slug": "trident-of-fish-command",
+      "name": "Trident of Fish Command",
+      "nameDe": "Dreizack der Fischherrschaft",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 80000
+    },
+    {
+      "id": 240,
+      "slug": "bead-of-force",
+      "name": "Bead of Force",
+      "nameDe": "Perle der Kraft",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 96000
+    },
+    {
+      "id": 241,
+      "slug": "elemental-gem",
+      "name": "Elemental Gem",
+      "nameDe": "Elementarer Edelstein",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 96000
+    },
+    {
+      "id": 242,
+      "slug": "potion-of-clairvoyance",
+      "name": "Potion of Clairvoyance",
+      "nameDe": "Trank des Hellsehens",
+      "category": {
+        "en": "POTIONS_OILS",
+        "de": "Tränke & Öle"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 96000
+    },
+    {
+      "id": 246,
+      "slug": "eversmoking-bottle",
+      "name": "Eversmoking Bottle",
+      "nameDe": "Rauchflasche",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 100000
+    },
+    {
+      "id": 248,
+      "slug": "ring-of-warmth",
+      "name": "Ring of Warmth",
+      "nameDe": "Ring der Wärme",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 100000
+    },
+    {
+      "id": 255,
+      "slug": "javelin-of-lightning",
+      "name": "Javelin of Lightning",
+      "nameDe": "Wurfspeer des Blitzes",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 150000
+    },
+    {
+      "id": 256,
+      "slug": "wind-fan",
+      "name": "Wind Fan",
+      "nameDe": "Windfächer",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 150000
+    },
+    {
+      "id": 257,
+      "slug": "goggles-of-night",
+      "name": "Goggles of Night",
+      "nameDe": "Nachtbrille",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 150000
+    },
+    {
+      "id": 259,
+      "slug": "necklace-of-adaptation",
+      "name": "Necklace of Adaptation",
+      "nameDe": "Halskette der Anpassung",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 150000
+    },
+    {
+      "id": 260,
+      "slug": "ring-of-water-walking",
+      "name": "Ring of Water Walking",
+      "nameDe": "Ring des Wasserlaufens",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 150000
+    },
+    {
+      "id": 261,
+      "slug": "wand-of-magic-detection",
+      "name": "Wand of Magic Detection",
+      "nameDe": "Zauberstab der Magieerkennung",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 150000
+    },
+    {
+      "id": 262,
+      "slug": "wand-of-secrets",
+      "name": "Wand of Secrets",
+      "nameDe": "Zauberstab der Geheimnisse",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 150000
+    },
+    {
+      "id": 264,
+      "slug": "oil-of-etherealness",
+      "name": "Oil of Etherealness",
+      "nameDe": "Öl der Körperlosigkeit",
+      "category": {
+        "en": "POTIONS_OILS",
+        "de": "Tränke & Öle"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 192000
+    },
+    {
+      "id": 267,
+      "slug": "glamoured-studded-leather",
+      "name": "Glamoured Studded Leather",
+      "nameDe": "Verzaubertes beschlagenes Leder",
+      "category": {
+        "en": "ARMOR",
+        "de": "Rüstung"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 200000
+    },
+    {
+      "id": 268,
+      "slug": "pipes-of-the-sewers",
+      "name": "Pipes of the Sewers",
+      "nameDe": "Flöte des Rattenfängers",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 200000
+    },
+    {
+      "id": 271,
+      "slug": "gloves-of-swimming-and-climbing",
+      "name": "Gloves of Swimming and Climbing",
+      "nameDe": "Handschuhe des Schwimmens und Kletterns",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 200000
+    },
+    {
+      "id": 272,
+      "slug": "handy-haversack",
+      "name": "Handy Haversack",
+      "nameDe": "Praktischer Rucksack",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 200000
+    },
+    {
+      "id": 273,
+      "slug": "rope-of-climbing",
+      "name": "Rope of Climbing",
+      "nameDe": "Seil des Kletterns",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 200000
+    },
+    {
+      "id": 274,
+      "slug": "ring-of-feather-falling",
+      "name": "Ring of Feather Falling",
+      "nameDe": "Ring des Federfalls",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 200000
+    },
+    {
+      "id": 275,
+      "slug": "staff-of-the-python",
+      "name": "Staff of the Python",
+      "nameDe": "Stab der Python",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 200000
+    },
+    {
+      "id": 279,
+      "slug": "boots-of-elvenkind",
+      "name": "Boots of Elvenkind",
+      "nameDe": "Stiefel der Elfen",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 250000
+    },
+    {
+      "id": 281,
+      "slug": "eyes-of-the-eagle",
+      "name": "Eyes of the Eagle",
+      "nameDe": "Augen des Adlers",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 250000
+    },
+    {
+      "id": 282,
+      "slug": "ring-of-jumping",
+      "name": "Ring of Jumping",
+      "nameDe": "Ring des Springens",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 250000
+    },
+    {
+      "id": 293,
+      "slug": "dimensional-shackles",
+      "name": "Dimensional Shackles",
+      "nameDe": "Dimensionsfesseln",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 300000
+    },
+    {
+      "id": 294,
+      "slug": "eyes-of-charming",
+      "name": "Eyes of Charming",
+      "nameDe": "Augen der Bezauberung",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 300000
+    },
+    {
+      "id": 296,
+      "slug": "ring-of-swimming",
+      "name": "Ring of Swimming",
+      "nameDe": "Ring des Schwimmens",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 300000
+    },
+    {
+      "id": 298,
+      "slug": "oil-of-sharpness",
+      "name": "Oil of Sharpness",
+      "nameDe": "Öl der Schärfe",
+      "category": {
+        "en": "POTIONS_OILS",
+        "de": "Tränke & Öle"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 320000
+    },
+    {
+      "id": 299,
+      "slug": "cloak-of-protection",
+      "name": "Cloak of Protection",
+      "nameDe": "Umhang des Schutzes",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 350000
+    },
+    {
+      "id": 300,
+      "slug": "oathbow",
+      "name": "Oathbow",
+      "nameDe": "Schwurbogen",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 350000
+    },
+    {
+      "id": 301,
+      "slug": "ring-of-protection",
+      "name": "Ring of Protection",
+      "nameDe": "Ring des Schutzes",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 350000
+    },
+    {
+      "id": 302,
+      "slug": "boots-of-speed",
+      "name": "Boots of Speed",
+      "nameDe": "Stiefel der Geschwindigkeit",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 400000
+    },
+    {
+      "id": 304,
+      "slug": "elven-chain",
+      "name": "Elven Chain",
+      "nameDe": "Elfenrüstung",
+      "category": {
+        "en": "ARMOR",
+        "de": "Rüstung"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 400000
+    },
+    {
+      "id": 309,
+      "slug": "bag-of-holding",
+      "name": "Bag of Holding",
+      "nameDe": "Nimmervoller Beutel",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 400000
+    },
+    {
+      "id": 313,
+      "slug": "gem-of-brightness",
+      "name": "Gem of Brightness",
+      "nameDe": "Edelstein der Helligkeit",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 500000
+    },
+    {
+      "id": 315,
+      "slug": "periapt-of-wound-closure",
+      "name": "Periapt of Wound Closure",
+      "nameDe": "Anhänger der Wundheilung",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 500000
+    },
+    {
+      "id": 316,
+      "slug": "ring-of-evasion",
+      "name": "Ring of Evasion",
+      "nameDe": "Ring des Ausweichens",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 500000
+    },
+    {
+      "id": 317,
+      "slug": "ring-of-the-ram",
+      "name": "Ring of the Ram",
+      "nameDe": "Ring des Widders",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 500000
+    },
+    {
+      "id": 318,
+      "slug": "boots-of-striding-and-springing",
+      "name": "Boots of Striding and Springing",
+      "nameDe": "Stiefel des Schreitens und Springens",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 500000
+    },
+    {
+      "id": 320,
+      "slug": "cloak-of-elvenkind",
+      "name": "Cloak of Elvenkind",
+      "nameDe": "Elfenumhang",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 500000
+    },
+    {
+      "id": 321,
+      "slug": "hat-of-disguise",
+      "name": "Hat of Disguise",
+      "nameDe": "Hut der Verkleidung",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 500000
+    },
+    {
+      "id": 322,
+      "slug": "horseshoes-of-speed",
+      "name": "Horseshoes of Speed",
+      "nameDe": "Hufeisen der Geschwindigkeit",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 500000
+    },
+    {
+      "id": 325,
+      "slug": "periapt-of-health",
+      "name": "Periapt of Health",
+      "nameDe": "Anhänger der Gesundheit",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 500000
+    },
+    {
+      "id": 326,
+      "slug": "periapt-of-proof-against-poison",
+      "name": "Periapt of Proof Against Poison",
+      "nameDe": "Anhänger des Giftschutzes",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 500000
+    },
+    {
+      "id": 329,
+      "slug": "wings-of-flying",
+      "name": "Wings of Flying",
+      "nameDe": "Zauberflügel",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 500000
+    },
+    {
+      "id": 330,
+      "slug": "animated-shield",
+      "name": "Animated Shield",
+      "nameDe": "Belebter Schild",
+      "category": {
+        "en": "ARMOR",
+        "de": "Rüstung"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 600000
+    },
+    {
+      "id": 333,
+      "slug": "arrow-catching-shield",
+      "name": "Arrow-Catching Shield",
+      "nameDe": "Pfeilfangender Schild",
+      "category": {
+        "en": "ARMOR",
+        "de": "Rüstung"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 600000
+    },
+    {
+      "id": 334,
+      "slug": "belt-of-dwarvenkind",
+      "name": "Belt of Dwarvenkind",
+      "nameDe": "Zwergengürtel",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 600000
+    },
+    {
+      "id": 335,
+      "slug": "bracers-of-defense",
+      "name": "Bracers of Defense",
+      "nameDe": "Armschienen der Verteidigung",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 600000
+    },
+    {
+      "id": 337,
+      "slug": "pearl-of-power",
+      "name": "Pearl of Power",
+      "nameDe": "Perle der Macht",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 600000
+    },
+    {
+      "id": 339,
+      "slug": "ring-of-resistance",
+      "name": "Ring of Resistance",
+      "nameDe": "Ring des Widerstands",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 600000
+    },
+    {
+      "id": 340,
+      "slug": "robe-of-scintillating-colors",
+      "name": "Robe of Scintillating Colors",
+      "nameDe": "Robe der schillernden Farben",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 600000
+    },
+    {
+      "id": 341,
+      "slug": "scimitar-of-speed",
+      "name": "Scimitar of Speed",
+      "nameDe": "Krummsäbel der Geschwindigkeit",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 600000
+    },
+    {
+      "id": 345,
+      "slug": "ring-of-x-ray-vision",
+      "name": "Ring of X-Ray Vision",
+      "nameDe": "Ring des Röntgenblicks",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 600000
+    },
+    {
+      "id": 351,
+      "slug": "brooch-of-shielding",
+      "name": "Brooch of Shielding",
+      "nameDe": "Brosche des Abschirmens",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 750000
+    },
+    {
+      "id": 352,
+      "slug": "amulet-of-health",
+      "name": "Amulet of Health",
+      "nameDe": "Amulett der Gesundheit",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 800000
+    },
+    {
+      "id": 354,
+      "slug": "gauntlets-of-ogre-power",
+      "name": "Gauntlets of Ogre Power",
+      "nameDe": "Panzerhandschuhe der Ogerkraft",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 800000
+    },
+    {
+      "id": 355,
+      "slug": "headband-of-intellect",
+      "name": "Headband of Intellect",
+      "nameDe": "Stirnband der Intelligenz",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 800000
+    },
+    {
+      "id": 356,
+      "slug": "mace-of-disruption",
+      "name": "Mace of Disruption",
+      "nameDe": "Streitkolben des Zusammenbruchs",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 800000
+    },
+    {
+      "id": 357,
+      "slug": "mace-of-terror",
+      "name": "Mace of Terror",
+      "nameDe": "Streitkolben des Terrors",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 800000
+    },
+    {
+      "id": 358,
+      "slug": "nine-lives-stealer",
+      "name": "Nine Lives Stealer",
+      "nameDe": "Dieb der neun Leben",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 800000
+    },
+    {
+      "id": 359,
+      "slug": "wand-of-magic-missiles",
+      "name": "Wand of Magic Missiles",
+      "nameDe": "Zauberstab der magischen Geschosse",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 800000
+    },
+    {
+      "id": 360,
+      "slug": "wand-of-web",
+      "name": "Wand of Web",
+      "nameDe": "Zauberstab des Netzes",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 800000
+    },
+    {
+      "id": 361,
+      "slug": "cape-of-the-mountebank",
+      "name": "Cape of the Mountebank",
+      "nameDe": "Umhang des Scharlatans",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 800000
+    },
+    {
+      "id": 362,
+      "slug": "portable-hole",
+      "name": "Portable Hole",
+      "nameDe": "Tragbares Loch",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 800000
+    },
+    {
+      "id": 363,
+      "slug": "bowl-of-commanding-water-elementals",
+      "name": "Bowl of Commanding Water Elementals",
+      "nameDe": "Schale der Wasserelementar-Herrschaft",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 800000
+    },
+    {
+      "id": 364,
+      "slug": "brazier-of-commanding-fire-elementals",
+      "name": "Brazier of Commanding Fire Elementals",
+      "nameDe": "Feuerschale der Feuerelementar-Herrschaft",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 800000
+    },
+    {
+      "id": 365,
+      "slug": "censer-of-controlling-air-elementals",
+      "name": "Censer of Controlling Air Elementals",
+      "nameDe": "Rauchfass der Luftelementar-Herrschaft",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 800000
+    },
+    {
+      "id": 366,
+      "slug": "stone-of-controlling-earth-elementals",
+      "name": "Stone of Controlling Earth Elementals",
+      "nameDe": "Stein der Erdelementar-Herrschaft",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 800000
+    },
+    {
+      "id": 368,
+      "slug": "broom-of-flying",
+      "name": "Broom of Flying",
+      "nameDe": "Flugbesen",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 800000
+    },
+    {
+      "id": 370,
+      "slug": "winged-boots",
+      "name": "Winged Boots",
+      "nameDe": "Geflügelte Stiefel",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 800000
+    },
+    {
+      "id": 376,
+      "slug": "boots-of-the-winterlands",
+      "name": "Boots of the Winterlands",
+      "nameDe": "Stiefel der Winterlande",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 1000000
+    },
+    {
+      "id": 378,
+      "slug": "ring-of-invisibility",
+      "name": "Ring of Invisibility",
+      "nameDe": "Ring der Unsichtbarkeit",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "LEGENDARY",
+        "de": "Legendär"
+      },
+      "cost": 1000000
+    },
+    {
+      "id": 380,
+      "slug": "staff-of-charming",
+      "name": "Staff of Charming",
+      "nameDe": "Stab der Bezauberung",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 1200000
+    },
+    {
+      "id": 381,
+      "slug": "sun-blade",
+      "name": "Sun Blade",
+      "nameDe": "Sonnenklinge",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 1200000
+    },
+    {
+      "id": 382,
+      "slug": "helm-of-telepathy",
+      "name": "Helm of Telepathy",
+      "nameDe": "Helm der Telepathie",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 1200000
+    },
+    {
+      "id": 383,
+      "slug": "carpet-of-flying",
+      "name": "Carpet of Flying",
+      "nameDe": "Fliegender Teppich",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 1200000
+    },
+    {
+      "id": 384,
+      "slug": "ring-of-regeneration",
+      "name": "Ring of Regeneration",
+      "nameDe": "Ring der Regeneration",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 1200000
+    },
+    {
+      "id": 385,
+      "slug": "staff-of-healing",
+      "name": "Staff of Healing",
+      "nameDe": "Stab der Heilung",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 1300000
+    },
+    {
+      "id": 386,
+      "slug": "ring-of-shooting-stars",
+      "name": "Ring of Shooting Stars",
+      "nameDe": "Ring der Sternschnuppen",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 1400000
+    },
+    {
+      "id": 389,
+      "slug": "hammer-of-thunderbolts",
+      "name": "Hammer of Thunderbolts",
+      "nameDe": "Hammer des Blitzschlags",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "LEGENDARY",
+        "de": "Legendär"
+      },
+      "cost": 1600000
+    },
+    {
+      "id": 390,
+      "slug": "staff-of-fire",
+      "name": "Staff of Fire",
+      "nameDe": "Stab des Feuers",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 1600000
+    },
+    {
+      "id": 391,
+      "slug": "staff-of-swarming-insects",
+      "name": "Staff of Swarming Insects",
+      "nameDe": "Stab der Insektenschwärme",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 1600000
+    },
+    {
+      "id": 394,
+      "slug": "ring-of-mind-shielding",
+      "name": "Ring of Mind Shielding",
+      "nameDe": "Ring der Gedankenabschirmung",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 1600000
+    },
+    {
+      "id": 395,
+      "slug": "rod-of-rulership",
+      "name": "Rod of Rulership",
+      "nameDe": "Zepter der Herrschaft",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 1600000
+    },
+    {
+      "id": 397,
+      "slug": "dwarven-thrower",
+      "name": "Dwarven Thrower",
+      "nameDe": "Zwergischer Wurfhammer",
+      "category": {
+        "en": "WEAPON",
+        "de": "Waffe"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 1800000
+    },
+    {
+      "id": 399,
+      "slug": "ring-of-free-action",
+      "name": "Ring of Free Action",
+      "nameDe": "Ring der Bewegungsfreiheit",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 2000000
+    },
+    {
+      "id": 400,
+      "slug": "amulet-of-proof-against-detection-and-location",
+      "name": "Amulet of Proof Against Detection and Location",
+      "nameDe": "Amulett des Schutzes gegen Ortung und Ausspähung",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 2000000
+    },
+    {
+      "id": 402,
+      "slug": "talisman-of-the-sphere",
+      "name": "Talisman of the Sphere",
+      "nameDe": "Talisman des Nichts",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "LEGENDARY",
+        "de": "Legendär"
+      },
+      "cost": 2000000
+    },
+    {
+      "id": 403,
+      "slug": "staff-of-striking",
+      "name": "Staff of Striking",
+      "nameDe": "Stab des Schlagens",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 2100000
+    },
+    {
+      "id": 404,
+      "slug": "ring-of-spell-storing",
+      "name": "Ring of Spell Storing",
+      "nameDe": "Ring des Zauberspeichers",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 2400000
+    },
+    {
+      "id": 408,
+      "slug": "rod-of-alertness",
+      "name": "Rod of Alertness",
+      "nameDe": "Zepter der Wachsamkeit",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 2500000
+    },
+    {
+      "id": 410,
+      "slug": "rod-of-lordly-might",
+      "name": "Rod of Lordly Might",
+      "nameDe": "Zepter der herrschaftlichen Macht",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "LEGENDARY",
+        "de": "Legendär"
+      },
+      "cost": 2800000
+    },
+    {
+      "id": 411,
+      "slug": "mantle-of-spell-resistance",
+      "name": "Mantle of Spell Resistance",
+      "nameDe": "Mantel des Zauberwiderstands",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 3000000
+    },
+    {
+      "id": 413,
+      "slug": "robe-of-eyes",
+      "name": "Robe of Eyes",
+      "nameDe": "Robe der Augen",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 3000000
+    },
+    {
+      "id": 416,
+      "slug": "wand-of-fireballs",
+      "name": "Wand of Fireballs",
+      "nameDe": "Zauberstab der Feuerbälle",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 3200000
+    },
+    {
+      "id": 417,
+      "slug": "wand-of-lightning-bolts",
+      "name": "Wand of Lightning Bolts",
+      "nameDe": "Zauberstab der Blitzschläge",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 3200000
+    },
+    {
+      "id": 418,
+      "slug": "wand-of-polymorph",
+      "name": "Wand of Polymorph",
+      "nameDe": "Zauberstab der Verwandlung",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 3200000
+    },
+    {
+      "id": 419,
+      "slug": "gem-of-seeing",
+      "name": "Gem of Seeing",
+      "nameDe": "Edelstein des Sehens",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 3200000
+    },
+    {
+      "id": 422,
+      "slug": "scarab-of-protection",
+      "name": "Scarab of Protection",
+      "nameDe": "Skarabäus des Schutzes",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "LEGENDARY",
+        "de": "Legendär"
+      },
+      "cost": 3600000
+    },
+    {
+      "id": 423,
+      "slug": "cubic-gate",
+      "name": "Cubic Gate",
+      "nameDe": "Würfel der Ebenen",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "LEGENDARY",
+        "de": "Legendär"
+      },
+      "cost": 4000000
+    },
+    {
+      "id": 424,
+      "slug": "staff-of-the-woodlands",
+      "name": "Staff of the Woodlands",
+      "nameDe": "Stab der Waldlande",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 4400000
+    },
+    {
+      "id": 426,
+      "slug": "rod-of-absorption",
+      "name": "Rod of Absorption",
+      "nameDe": "Zepter der Absorption",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 5000000
+    },
+    {
+      "id": 427,
+      "slug": "spellguard-shield",
+      "name": "Spellguard Shield",
+      "nameDe": "Zauberabwehrschild",
+      "category": {
+        "en": "ARMOR",
+        "de": "Rüstung"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 5000000
+    },
+    {
+      "id": 428,
+      "slug": "crystal-ball",
+      "name": "Crystal Ball",
+      "nameDe": "Kristallkugel",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 5000000
+    },
+    {
+      "id": 429,
+      "slug": "cloak-of-displacement",
+      "name": "Cloak of Displacement",
+      "nameDe": "Umhang der Verlagerung",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 6000000
+    },
+    {
+      "id": 430,
+      "slug": "robe-of-stars",
+      "name": "Robe of Stars",
+      "nameDe": "Robe der Sterne",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 6000000
+    },
+    {
+      "id": 431,
+      "slug": "talisman-of-ultimate-evil",
+      "name": "Talisman of Ultimate Evil",
+      "nameDe": "Talisman des absolut Bösen",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "LEGENDARY",
+        "de": "Legendär"
+      },
+      "cost": 6144000
+    },
+    {
+      "id": 432,
+      "slug": "helm-of-teleportation",
+      "name": "Helm of Teleportation",
+      "nameDe": "Helm der Teleportation",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 6400000
+    },
+    {
+      "id": 433,
+      "slug": "talisman-of-pure-good",
+      "name": "Talisman of Pure Good",
+      "nameDe": "Talisman des reinen Guten",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "LEGENDARY",
+        "de": "Legendär"
+      },
+      "cost": 7168000
+    },
+    {
+      "id": 434,
+      "slug": "instant-fortress",
+      "name": "Instant Fortress",
+      "nameDe": "Flotte Festung",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "RARE",
+        "de": "Selten"
+      },
+      "cost": 7500000
+    },
+    {
+      "id": 435,
+      "slug": "ring-of-telekinesis",
+      "name": "Ring of Telekinesis",
+      "nameDe": "Ring der Telekinese",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 8000000
+    },
+    {
+      "id": 436,
+      "slug": "rod-of-security",
+      "name": "Rod of Security",
+      "nameDe": "Zepter der Sicherheit",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 9000000
+    },
+    {
+      "id": 437,
+      "slug": "staff-of-power",
+      "name": "Staff of Power",
+      "nameDe": "Stab der Macht",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 9550000
+    },
+    {
+      "id": 439,
+      "slug": "decanter-of-endless-water",
+      "name": "Decanter of Endless Water",
+      "nameDe": "Karaffe des endlosen Wassers",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "UNCOMMON",
+        "de": "Ungewöhnlich"
+      },
+      "cost": 13500000
+    },
+    {
+      "id": 440,
+      "slug": "amulet-of-the-planes",
+      "name": "Amulet of the Planes",
+      "nameDe": "Amulett der Ebenen",
+      "category": {
+        "en": "WONDROUS_ITEMS",
+        "de": "Wundersame Gegenstände"
+      },
+      "rarity": {
+        "en": "VERY_RARE",
+        "de": "Sehr selten"
+      },
+      "cost": 16000000
+    },
+    {
+      "id": 508,
+      "slug": "scroll-case",
+      "name": "Scroll Case",
+      "nameDe": "Schriftrollenbehälter",
+      "category": {
+        "en": "OTHER",
+        "de": "Sonstiges"
+      },
+      "rarity": {
+        "en": "MUNDANE",
+        "de": "Alltäglich"
+      },
+      "cost": 100
+    },
+    {
+      "id": 528,
+      "slug": "pile-of-unidentifiable-slime",
+      "name": "Pile of Unidentifiable Slime",
+      "nameDe": "Haufen Nicht identifizierbar Schleim",
+      "category": {
+        "en": "OTHER",
+        "de": "Sonstiges"
+      },
+      "rarity": {
+        "en": "MUNDANE",
+        "de": "Alltäglich"
+      },
+      "cost": 0
+    }
+  ]
+}

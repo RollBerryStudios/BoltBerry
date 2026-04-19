@@ -1,0 +1,199 @@
+{
+  "id": 287,
+  "slug": "triceratops",
+  "name": "Triceratops",
+  "source": "SRD",
+  "meta": {
+    "en": "Huge beast, unaligned",
+    "de": "Riesige Bestie, ohne Gesinnung"
+  },
+  "challenge": "5",
+  "xp": 1800,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (Natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "95 (10d12 + 30)",
+    "de": "95 (10W12 + 30)"
+  },
+  "str": 22,
+  "dex": 9,
+  "con": 17,
+  "int": 2,
+  "wis": 11,
+  "cha": 5,
+  "strMod": 6,
+  "dexMod": -1,
+  "conMod": 3,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Trampling Charge",
+        "text": "If the triceratops moves at least 20 ft. straight toward a creature and then hits it with a gore attack on the same turn, that target must succeed on a DC 13 Strength saving throw or be knocked prone. If the target is prone, the triceratops can make one stomp attack against it as a bonus action."
+      }
+    ],
+    "de": [
+      {
+        "name": "Trampel-Sturmangriff",
+        "text": "Wenn der Triceratops sich mindestens sechs Meter weit direkt auf eine Kreatur zubewegt und sie dann im gleichen Zug mit einem Zerfleischen-Angriff trifft, muss das Ziel einen SG-13-Stärkerettungswurf bestehen, oder es wird umgestoßen. Gegen ein liegendes Ziel kann der Triceratops als Bonusaktion einen Stampfen-Angriff ausführen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Gore",
+        "text": "Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 24 (4d8 + 6) piercing damage."
+      },
+      {
+        "name": "Stomp",
+        "text": "Melee Weapon Attack: +9 to hit, reach 5 ft., one prone creature. Hit: 22 (3d10 + 6) bludgeoning damage"
+      }
+    ],
+    "de": [
+      {
+        "name": "Stampfen",
+        "text": "Nahkampfwaffenangriff: +9 auf Treffer, Reichweite 1,5 m, eine liegende Kreatur. Treffer: 22 (3W10+6) Wuchtschaden."
+      },
+      {
+        "name": "Zerfleischen",
+        "text": "Nahkampfwaffenangriff: +9 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 24 (4W8+6) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "huge",
+    "de": "riesig"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Bestie"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "ohne Ausrichtung"
+  },
+  "token": {
+    "file": "Triceratops (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Triceratops (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Triceratops (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

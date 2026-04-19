@@ -1,0 +1,66 @@
+{
+  "id": 56,
+  "slug": "minor-illusion",
+  "name": "Minor Illusion",
+  "nameDe": "Einfache Illusion",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "Illusion cantrip",
+    "de": "Illusionsmagie Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "components": {
+    "verbal": false,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a bit of fleece",
+      "de": "ein bisschen Vlies"
+    },
+    "raw": {
+      "en": "S, M (a bit of fleece)",
+      "de": "G, M (ein bisschen Vlies)"
+    }
+  },
+  "description": {
+    "en": "You create a sound or an image of an object within range that lasts for the duration. The illusion also ends if you dismiss it as an action or cast this spell again. If you create a sound, its volume can range from a whisper to a scream. It can be your voice, someone else's voice, a lion's roar, a beating of drums, or any other sound you choose. The sound continues unabated throughout the duration, or you can make discrete sounds at different times before the spell ends. If you create an image of an object--such as a chair, muddy footprints, or a small chest--it must be no larger than a 5-foot cube. The image can't create sound, light, smell, or any other sensory effect. Physical interaction with the image reveals it to be an illusion, because things can pass through it. If a creature uses its action to examine the sound or image, the creature can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the illusion becomes faint to the creature.",
+    "de": "Du erschaffst ein Geräusch oder das Abbild eines Gegenstands in Reichweite, das während der Wirkungsdauer bestehen bleibt. Der Zauber endet vorzeitig, wenn du ihn erneut wirkst oder ihn als Aktion aufhebst. Die Lautstärke des Geräuschs kann so leise wie ein Flüstern oder so laut wie ein Schrei sein. Dies kann deine Stimme oder die einer anderen Person sein, aber auch Löwengebrüll, Trommeln oder ein anderes beliebiges Geräusch. Du kannst einen durchgehenden Laut erzeugen oder während der Wirkungsdauer unterschiedliche kurze Laute. Das erschaffene Bild eines Gegenstands - etwa ein Stuhl, schlammige Fußabdrücke oder eine Truhe - darf nicht größer als ein Würfel mit 1,5 Metern Kantenlänge sein. Dieses Abbild kann weder Geräusche, Gerüche, Licht noch andere sensorische Effekte erzeugen. Physische Interaktionen mit dem Abbild enttarnen es als Illusion, da Dinge es einfach durchdringen können. Eine Kreatur, die ihre Aktion verwendet, um das Geräusch oder Abbild zu untersuchen, kann einen Wurf auf Intelligenz (Nachforschungen) gegen deinen Zauberrettungswurf-SG ausführen. Erkennt eine Kreatur die Illusion als solche, wird das Abbild oder das Geräusch weniger deutlich wahrnehmbar."
+  },
+  "image": "illusion",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

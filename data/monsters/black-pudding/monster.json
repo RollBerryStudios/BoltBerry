@@ -1,0 +1,218 @@
+{
+  "id": 50,
+  "slug": "black-pudding",
+  "name": "Black Pudding",
+  "nameDe": "Schwarzer Blob",
+  "source": "SRD",
+  "meta": {
+    "en": "Large ooze, unaligned",
+    "de": "Großer Schleim, ohne Gesinnung"
+  },
+  "challenge": "4",
+  "xp": 1100,
+  "ac": {
+    "en": "7",
+    "de": "7"
+  },
+  "hp": {
+    "en": "85 (10d10 + 30)",
+    "de": "85 (10W10+30)"
+  },
+  "str": 16,
+  "dex": 5,
+  "con": 16,
+  "int": 1,
+  "wis": 6,
+  "cha": 1,
+  "strMod": 3,
+  "dexMod": -3,
+  "conMod": 3,
+  "intMod": -5,
+  "wisMod": -2,
+  "chaMod": -5,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    },
+    "climb": {
+      "en": 20,
+      "de": 6
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 60 ft. (blind beyond this radius)",
+      "passive perception 8"
+    ],
+    "de": [
+      "Blindsicht 18 m (blind außerhalb des Radius)",
+      "Passive Wahrnehmung 8"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Amorphous",
+        "text": "The pudding can move through a space as narrow as 1 inch wide without squeezing."
+      },
+      {
+        "name": "Corrosive Form",
+        "text": "A creature that touches the pudding or hits it with a melee attack while within 5 feet of it takes 4 (1d8) acid damage. Any nonmagical weapon made of metal or wood that hits the pudding corrodes. After dealing damage, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Nonmagical ammunition made of metal or wood that hits the pudding is destroyed after dealing damage. The pudding can eat through 2-inch-thick, nonmagical wood or metal in 1 round."
+      },
+      {
+        "name": "Spider Climb",
+        "text": "The pudding can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amorph",
+        "text": "Der Blob kann sich durch enge Bereiche mit einer Breite von nur 2,5 Zentimetern bewegen, ohne sich quetschen zu müssen."
+      },
+      {
+        "name": "Korrosive Form",
+        "text": "Eine Kreatur, die den Blob berührt oder mit einem Nahkampfangriff trifft, während sie sich im Abstand von bis zu 1,5 Metern von ihm befindet, erleidet 4 (1W8) Säureschaden. Jede nichtmagische Waffe aus Metall oder Holz, die den Blob trifft, wird verätzt. Wenn die Waffe Schaden bewirkt hat, erhält sie einen permanenten und kumulativen Malus von -1 auf Schadenswürfe. Sinkt ihr Malus auf -5, wird die Waffe zerstört. Nichtmagische Munition aus Metall oder Holz, die den Blob trifft, wird zerstört, nachdem sie Schaden bewirkt hat. Der Blob kann sich in einer Runde durch fünf Zentimeter starkes nichtmagisches Holz oder Metall fressen."
+      },
+      {
+        "name": "Spinnenklettern",
+        "text": "Der Blob kann ohne Attributswürfe schwierige Oberflächen erklimmen und sich kopfüber an Decken entlang bewegen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Pseudopod",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) bludgeoning damage plus 18 (4d8) acid damage. In addition, nonmagical armor worn by the target is partly dissolved and takes a permanent and cumulative -1 penalty to the AC it offers. The armor is destroyed if the penalty reduces its AC to 10."
+      },
+      {
+        "name": "Split",
+        "text": "When a pudding that is Medium or larger is subjected to lightning or slashing damage, it splits into two new puddings if it has at least 10 hit points. Each new pudding has hit points equal to half the current pudding's, rounded down. New puddings are one size smaller than the original pudding."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scheinfuß",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W6+3) Wuchtschaden plus 18 (4W8) Säureschaden. Außerdem wird nichtmagische Rüstung, die vom Ziel getragen wird, teilweise zersetzt und erleidet einen permanenten und kumulativen Malus von -1 auf die RK, die sie gewährt. Die Rüstung wird zerstört, wenn der Malus ihre RK auf 10 verringert."
+      },
+      {
+        "name": "Teilen",
+        "text": "Wenn ein mindestens mittelgroßer Blob Blitz- oder Hiebschaden erleidet, teilt er sich in zwei neue Blobs, sofern er mindestens 10 Trefferpunkte hat. Jeder neue Blob hat halb so viele Trefferpunkte wie der ursprüngliche Blob (abgerundet). Neue Blobs sind eine Größenkategorie kleiner als der ursprüngliche Blob."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/201/315/315/636252764027417823.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "ooze",
+    "de": "Schlick"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "BlackPudding (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "BlackPudding (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackPudding (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

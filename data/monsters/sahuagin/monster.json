@@ -1,0 +1,252 @@
+{
+  "id": 250,
+  "slug": "sahuagin",
+  "name": "Sahuagin",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, lawful evil",
+    "de": "Mittelgroßer Humanoid, rechtschaffen böse"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "12 (Natural Armor)",
+    "de": "12 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "22 (4d8 + 4)",
+    "de": "22 (4W8+4)"
+  },
+  "str": 13,
+  "dex": 11,
+  "con": 12,
+  "int": 12,
+  "wis": 13,
+  "cha": 9,
+  "strMod": 1,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": 1,
+  "wisMod": 1,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "swim": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 15"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 15"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Sahuagin"
+    ],
+    "de": [
+      "Sahuaginisch"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +5"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Blood Frenzy",
+        "text": "The sahuagin has advantage on melee attack rolls against any creature that doesn't have all its hit points."
+      },
+      {
+        "name": "Limited Amphibiousness",
+        "text": "The sahuagin can breathe air and water, but it needs to be submerged at least once every 4 hours to avoid suffocating."
+      },
+      {
+        "name": "Shark Telepathy",
+        "text": "The sahuagin can magically command any shark within 120 feet of it, using a limited telepathy."
+      }
+    ],
+    "de": [
+      {
+        "name": "Blutrausch",
+        "text": "Der Sahuagin ist bei Nahkampf-Angriffswürfen gegen Kreaturen, die nicht alle Trefferpunkte besitzen, im Vorteil."
+      },
+      {
+        "name": "Eingeschränkte Amphibie",
+        "text": "Der Sahuagin kann Luft und Wasser atmen, doch er muss sich mindestens einmal alle vier Stunden ganz im Wasser befinden, um nicht zu ersticken."
+      },
+      {
+        "name": "Haifischtelepathie",
+        "text": "Der Sahuagin kann magisch mithilfe beschränkter Telepathie alle Haie im Abstand von bis zu 36 Metern von ihm befehligen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The sahuagin makes two melee attacks: one with its bite and one with its claws or spear."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 3 (1d4 + 1) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 3 (1d4 + 1) slashing damage."
+      },
+      {
+        "name": "Spear",
+        "text": "Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d6 + 1) piercing damage, or 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Sahuagin führt zwei Nahkampfangriffe aus: einen Biss- und einen Klauen- oder Speerangriff."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 3 (1W4+1) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 3 (1W4+1) Hiebschaden."
+      },
+      {
+        "name": "Speer",
+        "text": "Nah- oder Fernkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m oder Reichweite 6/18 m, ein Ziel. Treffer: 4 (1W6+1) Stichschaden oder 5 (1W8+1) Stichschaden, wenn beidhändig geführt, um einen Nahkampfangriff auszuführen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/177/1000/1000/636252761683746719.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (Sahuagin)"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "Sahuagin (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Sahuagin (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Sahuagin (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

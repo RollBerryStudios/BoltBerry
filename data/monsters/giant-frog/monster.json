@@ -1,0 +1,206 @@
+{
+  "id": 129,
+  "slug": "giant-frog",
+  "name": "Giant Frog",
+  "nameDe": "Riesenfrosch",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "11",
+    "de": "11"
+  },
+  "hp": {
+    "en": "18 (4d8)",
+    "de": "18 (4W8)"
+  },
+  "str": 12,
+  "dex": 13,
+  "con": 11,
+  "int": 2,
+  "wis": 10,
+  "cha": 3,
+  "strMod": 1,
+  "dexMod": 1,
+  "conMod": 0,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "swim": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 30 ft.",
+      "passive perception 12"
+    ],
+    "de": [
+      "Dunkelsicht 9 m",
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +3",
+    "Wahrnehmung +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Amphibious",
+        "text": "The frog can breathe air and water"
+      },
+      {
+        "name": "Standing Leap",
+        "text": "The frog's long jump is up to 20 ft. and its high jump is up to 10 ft., with or without a running start."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amphibisch",
+        "text": "Der Frosch kann Luft und Wasser atmen."
+      },
+      {
+        "name": "Stehender Sprung",
+        "text": "Der Frosch kann mit oder ohne Anlauf bis zu sechs Meter weit und bis zu drei Meter hoch springen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) piercing damage, and the target is grappled (escape DC 11). Until this grapple ends, the target is restrained, and the frog can't bite another target."
+      },
+      {
+        "name": "Swallow",
+        "text": "The frog makes one bite attack against a Small or smaller target it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the frog, and it takes 5 (2d4) acid damage at the start of each of the frog's turns. The frog can have only one target swallowed at a time. If the frog dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 ft. of movement, exiting prone."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 4 (1W6+1) Stichschaden, und das Ziel wird gepackt (Rettungswurf-SG 11). Ein gepacktes Ziel ist festgesetzt. Der Frosch kann solange kein weiteres Ziel beißen."
+      },
+      {
+        "name": "Verschlucken",
+        "text": "Der Frosch führt einen Bissangriff gegen ein höchstens kleines Ziel aus, das er gepackt hält. Wenn der Angriff trifft, wird das Ziel verschluckt, und der Haltegriff endet. Ein verschlucktes Ziel ist blind und festgesetzt, hat vollständige Deckung gegen Angriffe und andere Effekte von außerhalb des Froschs und erleidet zu Beginn jedes Zugs des Froschs 5 (2W4) Säureschaden. Der Frosch kann jeweils nur ein Ziel verschlucken. Stirbt der Frosch, so ist die verschluckte Kreatur nicht mehr festgesetzt und kann aus dem Kadaver entkommen, indem sie 1,5 Meter ihrer Bewegungsrate verwendet. Anschließend ist sie liegend."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/521/1000/1000/636376321052503535.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantFrog (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GiantFrog (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantFrog (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

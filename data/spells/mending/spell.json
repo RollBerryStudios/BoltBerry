@@ -1,0 +1,68 @@
+{
+  "id": 54,
+  "slug": "mending",
+  "name": "Mending",
+  "nameDe": "Ausbessern",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "druid",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Druide",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "Transmutation cantrip",
+    "de": "Verwandlungsmagie Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "two lodestones",
+      "de": "zwei Magnetsteine"
+    },
+    "raw": {
+      "en": "V, S, M (two lodestones)",
+      "de": "V, G, M (zwei Magnetsteine)"
+    }
+  },
+  "description": {
+    "en": "This spell repairs a single break or tear in an object you touch, such as a broken key, a torn cloak, or a leaking wineskin. As long as the break or tear is no longer than 1 foot in any dimension, you mend it, leaving no trace of the former damage. This spell can physically repair a magic item or construct, but the spell can't restore magic to such an object.",
+    "de": "Dieser Zauber repariert eine Bruchstelle oder einen Riss in einem Gegenstand, den du berührst, beispielsweise ein zerbrochenes Kettenglied, einen in zwei Hälften zerbrochenen Schlüssel, einen zerrissenen Umhang oder einen leckenden Weinschlauch. Solange der Riss oder die Bruchstelle in keiner Abmessung größer als 30 Zentimeter ist, ist nicht mehr zu erkennen, dass der Gegenstand beschädigt war. Dieser Zauber kann die physische Form eines magischen Gegenstands oder Konstrukts reparieren, jedoch nicht dessen Magie wiederherstellen."
+  },
+  "image": "mending",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

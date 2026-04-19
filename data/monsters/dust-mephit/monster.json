@@ -1,0 +1,224 @@
+{
+  "id": 96,
+  "slug": "dust-mephit",
+  "name": "Dust Mephit",
+  "nameDe": "Staub-Mephit",
+  "source": "SRD",
+  "meta": {
+    "en": "Small elemental, neutral evil",
+    "de": "Kleines Elementar, neutral böse"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "17 (5d6)",
+    "de": "17 (5W6)"
+  },
+  "str": 5,
+  "dex": 14,
+  "con": 10,
+  "int": 9,
+  "wis": 11,
+  "cha": 10,
+  "strMod": -3,
+  "dexMod": 2,
+  "conMod": 0,
+  "intMod": -1,
+  "wisMod": 0,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 12"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Auran",
+      "Terran"
+    ],
+    "de": [
+      "Aural",
+      "Terral"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +4",
+    "Wahrnehmung +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Death Burst",
+        "text": "When the mephit dies, it explodes in a burst of dust. Each creature within 5 ft. of it must then succeed on a DC 10 Constitution saving throw or be blinded for 1 minute. A blinded creature can repeat the saving throw on each of its turns, ending the effect on itself on a success."
+      },
+      {
+        "name": "Innate Spellcasting",
+        "text": "The mephit can innately cast sleep, requiring no material components. Its innate spellcasting ability is Charisma."
+      }
+    ],
+    "de": [
+      {
+        "name": "Angeborenes Zauberwirken (1-mal täglich)",
+        "text": "Der Mephit kann den angeborenen Zauber Schlaf wirken, ohne Materialkomponenten zu benötigen. Sein Attribut zum angeborenen Zauberwirken ist Charisma."
+      },
+      {
+        "name": "Todesexplosion",
+        "text": "Wenn der Mephit stirbt, vergeht er in einer Staubexplosion. Jede Kreatur im Abstand von bis zu 1,5 Metern von ihm muss einen SG-10-Konstitutionsrettungswurf bestehen, oder sie ist eine Minute lang blind. Eine blinde Kreatur kann den Rettungswurf am Ende jedes ihrer Züge wiederholen und den Effekt bei einem Erfolg beenden."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 4 (1d4 + 2) slashing damage."
+      },
+      {
+        "name": "Blinding Breath",
+        "text": "The mephit exhales a 15-foot cone of blinding dust. Each creature in that area must succeed on a DC 10 Dexterity saving throw or be blinded for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+      }
+    ],
+    "de": [
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 4 (1W4+2) Hiebschaden."
+      },
+      {
+        "name": "Blendender Odem (Aufladung 6)",
+        "text": "Der Mephit atmet blendenden Staub in einem Kegel von 4,5 Metern aus. Jede Kreatur in diesem Bereich muss einen SG-10-Geschicklichkeitsrettungswurf bestehen, oder sie ist eine Minute lang blind. Eine Kreatur kann den Rettungswurf am Ende jedes ihrer Züge wiederholen und den Effekt bei einem Erfolg beenden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/313/1000/1000/636252772213922157.jpeg",
+  "size": {
+    "en": "small",
+    "de": "Klein"
+  },
+  "type": {
+    "en": "elemental",
+    "de": "Elementar"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "DustMephit (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "DustMephit (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "DustMephit (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

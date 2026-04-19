@@ -1,0 +1,62 @@
+{
+  "id": 336,
+  "slug": "web",
+  "name": "Web",
+  "nameDe": "Netz",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-level conjuration",
+    "de": "Stufe 2 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a bit of spiderweb",
+      "de": "ein bisschen Spinnennetz"
+    },
+    "raw": {
+      "en": "V, S, M (a bit of spiderweb)",
+      "de": "V, G, M (ein bisschen Spinnennetz)"
+    }
+  },
+  "description": {
+    "en": "You conjure a mass of thick, sticky webbing at a point of your choice within range. The webs fill a 20-foot cube from that point for the duration. The webs are difficult terrain and lightly obscure their area. If the webs aren't anchored between two solid masses (such as walls or trees) or layered across a floor, wall, or ceiling, the conjured web collapses on itself, and the spell ends at the start of your next turn. Webs layered over a flat surface have a depth of 5 feet. Each creature that starts its turn in the webs or that enters them during its turn must make a dexterity saving throw. On a failed save, the creature is restrained as long as it remains in the webs or until it breaks free. A creature restrained by the webs can use its action to make a Strength check against your spell save DC. If it succeeds, it is no longer restrained. The webs are flammable. Any 5-foot cube of webs exposed to fire burns away in 1 round, dealing 2d4 fire damage to any creature that starts its turn in the fire.",
+    "de": "Du beschwörst eine Masse aus dichten, klebrigen Netzen an einem Ort deiner Wahl in Reichweite. Während der Wirkungsdauer füllen die Netze einen würfelförmigen Bereich mit sechs Metern Kantenlänge. Die Netze gelten als schwieriges Gelände und verschleiern den Bereich leicht. Wenn sich die Spinnweben nicht zwischen zwei festen Gegenständen wie Mauern oder Bäumen befinden oder über einen Fußboden, eine Wand oder eine Decke gespannt sind, fällt das beschworene Netz in sich zusammen und der Zauber endet zu Beginn deines nächsten Zugs. Netze, die über eine flache Oberfläche ausgebreitet sind, besitzen eine Dicke von 1,5 Metern. Jede Kreatur, die ihren Zug in den Netzen beginnt oder diese während ihres Zugs betritt, muss einen Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, ist die Kreatur festgesetzt, solange sie sich in den Netzen befindet oder bis sie sich befreit. Eine von den Netzen festgesetzte Kreatur kann als Aktion einen Stärkewurf gegen deinen Zauberrettungswurf-SG ausführen. Bei einem Erfolg ist sie nicht länger festgesetzt. Die Netze sind brennbar. Alle Netze innerhalb eines würfelförmigen Bereichs mit 1,5 Metern Kantenlänge verbrennen innerhalb von einer Runde, wenn sie mit Feuer in Kontakt kommen, und verursachen dabei bei allen Kreaturen, die ihren Zug im Feuer beginnen, 2W4 Feuerschaden."
+  },
+  "image": "web",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

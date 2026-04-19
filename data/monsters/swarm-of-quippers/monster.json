@@ -1,0 +1,203 @@
+{
+  "id": 279,
+  "slug": "swarm-of-quippers",
+  "name": "Swarm of Quippers",
+  "nameDe": "Quippernschwarm",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "13",
+    "de": "13"
+  },
+  "hp": {
+    "en": "28 (8d8 - 8)",
+    "de": "28 (8W8-8)"
+  },
+  "str": 13,
+  "dex": 16,
+  "con": 9,
+  "int": 1,
+  "wis": 7,
+  "cha": 2,
+  "strMod": 1,
+  "dexMod": 3,
+  "conMod": -1,
+  "intMod": -5,
+  "wisMod": -2,
+  "chaMod": -4,
+  "speed": {
+    "run": {},
+    "swim": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 8"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 8"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Blood Frenzy",
+        "text": "The swarm has advantage on melee attack rolls against any creature that doesn't have all its hit points."
+      },
+      {
+        "name": "Swarm",
+        "text": "The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny quipper. The swarm can't regain hit points or gain temporary hit points."
+      },
+      {
+        "name": "Water Breathing",
+        "text": "The swarm can breathe only underwater."
+      }
+    ],
+    "de": [
+      {
+        "name": "Blutrausch",
+        "text": "Der Schwarm ist bei Nahkampf-Angriffswürfen gegen Kreaturen, die nicht alle Trefferpunkte besitzen, im Vorteil."
+      },
+      {
+        "name": "Schwarm",
+        "text": "Der Schwarm kann den Bereich einer anderen Kreatur besetzen und umgekehrt. Er kann sich durch jede Öffnung bewegen, die groß genug für einen winzigen Quipper ist. Der Schwarm kann keine Trefferpunkte zurückerhalten und keine temporären Trefferpunkte erhalten."
+      },
+      {
+        "name": "Wasser atmen",
+        "text": "Der Schwarm kann nur unter Wasser atmen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bites",
+        "text": "Melee Weapon Attack: +5 to hit, reach 0 ft., one creature in the swarm's space. Hit: 14 (4d6) piercing damage, or 7 (2d6) piercing damage if the swarm has half of its hit points or fewer."
+      }
+    ],
+    "de": [
+      {
+        "name": "Bisse",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 0 m, eine Kreatur im Bereich des Schwarms. Treffer: 14 (4W6) Stichschaden oder 7 (2W6) Stichschaden, wenn der Schwarm höchstens die Hälfte seiner Trefferpunkte hat."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/18/276/315/315/636379781035768521.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Schwarm winziger Tiere"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "SwarmOfQuippers (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "SwarmOfQuippers (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfQuippers (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

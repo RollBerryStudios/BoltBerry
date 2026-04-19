@@ -1,0 +1,57 @@
+{
+  "id": 155,
+  "slug": "branding-smite",
+  "name": "Branding Smite",
+  "nameDe": "Brandmarkendes Niederstrecken",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "paladin"
+    ],
+    "de": [
+      "Paladin"
+    ]
+  },
+  "type": {
+    "en": "2nd-Level evocation",
+    "de": "Stufe 2 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 bonus action",
+    "de": "1 Bonusaktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "The next time you hit a creature with a weapon attack before this spell ends, the weapon gleams with astral radiance as you strike. The attack deals an extra 2d6 radiant damage to the target, which becomes visible if it's invisible, and the target sheds dim light in a 5-foot radius and can't become invisible until the spell ends.",
+    "de": "Das nächste Mal, wenn du eine Kreatur mit einem Waffenangriff triffst, bevor der Zauber endet, umgibt die Waffe ein astrales Leuchten. Der Angriff fügt dem Ziel zusätzlich 2W6 gleißenden Schaden zu. Es wird sichtbar, falls es unsichtbar war, wirft dämmriges Licht in einem Umkreis von 1,5 Metern und kann nicht unsichtbar werden, bis der Zauber endet. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, steigt der zusätzliche Schaden für jeden Grad über dem 2. um 1W6."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 3rd level or higher, the extra damage increases by 1d6 for each slot level above 2nd.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, steigt der zusätzliche Schaden für jeden Grad über dem 2. um 1W6."
+  },
+  "image": "branding-smite",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

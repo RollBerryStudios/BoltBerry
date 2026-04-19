@@ -1,0 +1,70 @@
+{
+  "id": 215,
+  "slug": "invisibility",
+  "name": "Invisibility",
+  "nameDe": "Unsichtbarkeit",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-level illusion",
+    "de": "Stufe 2 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "an eyelash encased in gum arabic",
+      "de": "eine Wimper ummantelt mit Gummi Arabicum"
+    },
+    "raw": {
+      "en": "V, S, M (an eyelash encased in gum arabic)",
+      "de": "V, G, M (eine Wimper ummantelt mit Gummi Arabicum)"
+    }
+  },
+  "description": {
+    "en": "A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target's person. The spell ends for a target that attacks or casts a spell.",
+    "de": "Eine Kreatur, die du berührst, wird unsichtbar, bis der Zauber endet. Alles, was das Ziel trägt, ist unsichtbar, solange es an der Person bleibt. Der Zauber endet, sobald das Ziel einen Angriff ausführt oder selbst einen Zauber wirkt. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, kannst du für jeden Grad über dem 2. eine zusätzliche Kreatur als Ziel wählen."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, kannst du für jeden Grad über dem 2. eine zusätzliche Kreatur als Ziel wählen."
+  },
+  "image": "invisibility",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

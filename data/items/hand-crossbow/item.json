@@ -1,0 +1,35 @@
+{
+  "id": 46,
+  "slug": "hand-crossbow",
+  "name": "Hand Crossbow",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 7500,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 3,
+  "classification": {
+    "en": "Martial Ranged Weapons",
+    "de": "Fernkampfs-Kriegswaffen"
+  },
+  "damage": "1d6",
+  "damageType": {
+    "en": "piercing",
+    "de": "stich"
+  },
+  "properties": {
+    "en": "ammunition (range 30/120) | light | loading",
+    "de": "munition (fernkampf 30/120) | leicht | laden"
+  },
+  "image": "crossbow",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,62 @@
+{
+  "id": 288,
+  "slug": "magic-weapon",
+  "name": "Magic Weapon",
+  "nameDe": "Magische Waffe",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "paladin",
+      "wizard"
+    ],
+    "de": [
+      "Paladin",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-level transmutation",
+    "de": "Stufe 2 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 bonus action",
+    "de": "1 Bonusaktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You touch a nonmagical weapon. Until the spell ends, that weapon becomes a magic weapon with a +1 bonus to attack rolls and damage rolls.",
+    "de": "Du berührst eine nichtmagische Waffe. Während der Wirkungsdauer gilt diese Waffe als magisch mit einem Bonus von +1 bei Angriffs- und Schadenswürfen. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 4. Grades oder höher nutzt, steigt der Bonus auf +2. Mit einem Zauberplatz des 6. Grades oder höher steigt der Bonus auf +3."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 4th level or higher, the bonus increases to +2. When you use a spell slot of 6th level or higher, the bonus increases to +3.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 4. Grades oder höher nutzt, steigt der Bonus auf +2. Mit einem Zauberplatz des 6. Grades oder höher steigt der Bonus auf +3."
+  },
+  "image": "elemental-weapon",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

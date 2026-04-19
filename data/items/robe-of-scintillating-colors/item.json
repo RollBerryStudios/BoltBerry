@@ -1,0 +1,30 @@
+{
+  "id": 340,
+  "slug": "robe-of-scintillating-colors",
+  "name": "Robe of Scintillating Colors",
+  "nameDe": "Robe der schillernden Farben",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 600000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, very rare (requires attunement) This robe has 3 charges, and it regains 1d3 expended charges daily at dawn. While you wear it, you can use an action and expend 1 charge to cause the garment to display a shifting pattern of dazzling hues until the end of your next turn. During this time, the robe sheds bright light in a 30-foot radius and dim light for an additional 30 feet. Creatures that can see you have disadvantage on attack rolls against you. In addition, any creature in the bright light that can see you when the robe's power is activated must succeed on a DC 15 Wisdom saving throw or become stunned until the effect ends.",
+    "de": "Diese Robe hat drei Ladungen und erhält täglich im Morgengrauen 1W3 verbrauchte Ladungen zurück. Wenn du sie trägst, kannst du eine Aktion verwenden und eine Ladung verbrauchen. Daraufhin stellt die Robe bis zum Ende deines nächsten Zugs ein wechselndes Muster aus schillernden Farben zur Schau. In diesem Zeitraum spendet die Robe im Radius von neun Metern helles Licht und im Radius von weiteren neun Metern dämmriges Licht Kreaturen, die dich sehen können, sind bei Angriffswürfen gegen dich im Nachteil. Außerdem muss jede Kreatur im hellen Licht, die dich sehen kann, wenn der Effekt der Robe aktiviert wird, einen SG-15-Weisheitsrettungswurf bestehen. Andernfalls ist die jeweilige Kreatur betäubt, bis der Effekt endet."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

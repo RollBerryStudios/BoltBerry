@@ -1,0 +1,60 @@
+{
+  "id": 132,
+  "slug": "arcane-lock",
+  "name": "Arcane Lock",
+  "nameDe": "Arkanes Schloss",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-Level abjuration",
+    "de": "Stufe 2 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Until dispelled",
+    "de": "Bis entzaubert"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "gold dust w orth at least 25 gp, which the spell consumes",
+      "de": "Goldstaub im Wert von mindestens 25 Gold, den der Zauberspruch verbraucht"
+    },
+    "raw": {
+      "en": "V, S, M (gold dust w orth at least 25 gp, which the spell consumes)",
+      "de": "V, G, M (Goldstaub im Wert von mindestens 25 Gold, den der Zauberspruch verbraucht)"
+    }
+  },
+  "description": {
+    "en": "You touch a closed door, window, gate, chest, or other entryway, and it becomes locked for the duration. You and the creatures you designate when you cast this spell can open the object normally. You can also set a password that, when spoken within 5 feet of the object, suppresses this spell for 1 minute. Otherwise, it is impassable until it is broken or the spell is dispelled or suppressed. Casting knock on the object suppresses arcane lock for 10 minutes. While affected by this spell, the object is more difficult to break or force open; the DC to break it or pick any locks on it increases by 10.",
+    "de": "Wenn du eine Tür, ein Fenster oder Tor, eine Truhe oder einen anderen Eingang berührst, der geschlossen ist, wird er für die Wirkungsdauer verschlossen. Du und alle Kreaturen, die du beim Wirken des Zaubers bestimmst, könnt das Objekt normal öffnen. Du kannst auch ein Kennwort festlegen, das diesen Zauber eine Minute lang innerhalb eines Radius von 1,5 Metern unterdrückt. Der Durchgang ist nicht passierbar, bis der Zauber gebannt oder unterdrückt wird. Wird Klopfen  auf das Objekt gewirkt, so wird Arkanes Schloss  zehn Minuten lang unterdrückt. Unter diesem Zauber ist das Objekt schwieriger aufzubrechen oder aufzuzwingen. Der SG ist entsprechend um 10 erhöht."
+  },
+  "image": "arcane-lock",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

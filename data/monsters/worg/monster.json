@@ -1,0 +1,238 @@
+{
+  "id": 312,
+  "slug": "worg",
+  "name": "Worg",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, neutral evil",
+    "de": "Große Monstrosität, neutral böse"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (Natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "26 (4d10 + 4)",
+    "de": "26 (4W10 + 4)"
+  },
+  "str": 16,
+  "dex": 13,
+  "con": 13,
+  "int": 7,
+  "wis": 11,
+  "cha": 8,
+  "strMod": 3,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": -2,
+  "wisMod": 0,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Goblin",
+      "Worg"
+    ],
+    "de": [
+      "Goblinisch",
+      "Worgisch"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Hearing and Smell",
+        "text": "The worg has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfes Gehör und scharfer Geruchssinn",
+        "text": "Der Worg ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör oder Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) piercing damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Stichschaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-13-Stärkerettungswurf bestehen, oder es wird umgestoßen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/52/1000/1000/636252724662073178.jpeg",
+  "size": {
+    "en": "large",
+    "de": "groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "Worg (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Worg (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (31).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (32).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (33).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Worg (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

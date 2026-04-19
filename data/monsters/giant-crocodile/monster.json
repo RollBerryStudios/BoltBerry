@@ -1,0 +1,247 @@
+{
+  "id": 125,
+  "slug": "giant-crocodile",
+  "name": "Giant Crocodile",
+  "nameDe": "Riesenkrokodil",
+  "source": "SRD",
+  "meta": {
+    "en": "Huge beast, unaligned",
+    "de": "Riesige Bestie, ohne Gesinnung"
+  },
+  "challenge": "5",
+  "xp": 1800,
+  "ac": {
+    "en": "14 (Natural Armor)",
+    "de": "14 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "85 (9d12 + 27)",
+    "de": "85 (9W12+27)"
+  },
+  "str": 21,
+  "dex": 9,
+  "con": 17,
+  "int": 2,
+  "wis": 10,
+  "cha": 7,
+  "strMod": 5,
+  "dexMod": -1,
+  "conMod": 3,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "swim": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +5"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Hold Breath",
+        "text": "The crocodile can hold its breath for 30 minutes."
+      }
+    ],
+    "de": [
+      {
+        "name": "Atem anhalten",
+        "text": "Das Krokodil kann 30 Minuten lang den Atem anhalten."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The crocodile makes two attacks: one with its bite and one with its tail."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 21 (3d10 + 5) piercing damage, and the target is grappled (escape DC 16). Until this grapple ends, the target is restrained, and the crocodile can't bite another target."
+      },
+      {
+        "name": "Tail",
+        "text": "Melee Weapon Attack: +8 to hit, reach 10 ft., one target not grappled by the crocodile. Hit: 14 (2d8 + 5) bludgeoning damage. If the target is a creature, it must succeed on a DC 16 Strength saving throw or be knocked prone."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Das Krokodil führt zwei Angriffe aus: einen Biss- und einen Schwanzangriff."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +8 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 21 (3W10+5) Stichschaden, und das Ziel wird gepackt (Rettungswurf-SG 16). Ein gepacktes Ziel ist festgesetzt. Das Krokodil kann solange kein weiteres Ziel beißen."
+      },
+      {
+        "name": "Schwanz",
+        "text": "Nahkampfwaffenangriff: +8 auf Treffer, Reichweite 3 m, ein Ziel, das nicht vom Krokodil gepackt wurde. Treffer: 14 (2W8+5) Wuchtschaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-16-Stärkerettungswurf bestehen, oder es wird umgestoßen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "huge",
+    "de": "Riesiges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantCrocodile (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GiantCrocodile (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (31).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrocodile (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

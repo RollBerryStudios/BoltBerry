@@ -1,0 +1,225 @@
+{
+  "id": 124,
+  "slug": "giant-crab",
+  "name": "Giant Crab",
+  "nameDe": "Riesenkrabbe",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/8",
+  "xp": 25,
+  "ac": {
+    "en": "15 (Natural Armor)",
+    "de": "15 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "13 (3d8)",
+    "de": "13 (3W8)"
+  },
+  "str": 13,
+  "dex": 15,
+  "con": 11,
+  "int": 1,
+  "wis": 9,
+  "cha": 3,
+  "strMod": 1,
+  "dexMod": 2,
+  "conMod": 0,
+  "intMod": -5,
+  "wisMod": -1,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "swim": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 30 ft.",
+      "passive perception 9"
+    ],
+    "de": [
+      "Blindsicht 9 m",
+      "Passive Wahrnehmung 9"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Amphibious",
+        "text": "The crab can breathe air and water."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amphibisch",
+        "text": "Die Krabbe kann Luft und Wasser atmen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) bludgeoning damage, and the target is grappled (escape DC 11). The crab has two claws, each of which can grapple only one target."
+      }
+    ],
+    "de": [
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 4 (1W6+1) Wuchtschaden, und das Ziel wird gepackt (Rettungswurf-SG 11). Die Krabbe hat zwei Scheren, von denen jede jeweils ein Ziel packen kann."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantCrab (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GiantCrab (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCrab (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

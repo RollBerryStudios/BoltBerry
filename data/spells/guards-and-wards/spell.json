@@ -1,0 +1,62 @@
+{
+  "id": 269,
+  "slug": "guards-and-wards",
+  "name": "Guards and Wards",
+  "nameDe": "Wächter und Hüter",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard",
+      "bard"
+    ],
+    "de": [
+      "Magier",
+      "Barde"
+    ]
+  },
+  "type": {
+    "en": "6th-level abjuration",
+    "de": "Stufe 6 Bannmagie"
+  },
+  "castingTime": {
+    "en": "10 minutes",
+    "de": "10 Minuten"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "24 hours",
+    "de": "24 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "burning incense, a small measure of brimstone and oil, a knotled string, a small amount of umber hulk blood, and a small silver rod worth at least 10 gp",
+      "de": "brennendes Räucherwerk, eine kleine Menge Schwefel und Öl, eine geknotete Schnur, eine kleine Menge Umbra-Hulk-Blut und ein kleines Silberstück im Wert von mindestens 10 Goldstücken"
+    },
+    "raw": {
+      "en": "V, S, M (burning incense, a small measure of brimstone and oil, a knotled string, a small amount of umber hulk blood, and a small silver rod worth at least 10 gp)",
+      "de": "V, G, M (brennendes Räucherwerk, eine kleine Menge Schwefel und Öl, eine geknotete Schnur, eine kleine Menge Umbra-Hulk-Blut und ein kleines Silberstück im Wert von mindestens 10 Goldstücken)"
+    }
+  },
+  "description": {
+    "en": "You create a ward that protects up to 2,500 square feet of floor space (an area 50 feet square, or one hundred 5-foot squares or twenty-five 10-foot squares). The warded area can be up to 20 feet tall, and shaped as you desire. You can ward several stories of a stronghold by dividing the area among them, as long as you can walk into each contiguous area while you are casting the spell. When you cast this spell, you can specify individuals that are unaffected by any or all of the effects that you choose. You can also specify a password that, when spoken aloud, makes the speaker immune to these effects. Guards and wards creates the following effects within the warded area. ***Corridors.*** Fog fills all the warded corridors, making them heavily obscured. In addition, at each intersection or branching passage offering a choice of direction, there is a 50 percent chance that a creature other than you will believe it is going in the opposite direction from the one it chooses. ***Doors.*** All doors in the warded area are magically locked, as if sealed by an arcane lock spell. In addition, you can cover up to ten doors with an illusion (equivalent to the illusory object function of the minor illusion spell) to make them appear as plain sections of wall. ***Stairs.*** Webs fill all stairs in the warded area from top to bottom, as the web spell. These strands regrow in 10 minutes if they are burned or torn away while guards and wards lasts. ***Other Spell Effect.*** You can place your choice of one of the following magical effects within the warded area of the stronghold. - Place dancing lights in four corridors. You can designate a simple program that the lights repeat as long as guards and wards lasts. - Place magic mouth in two locations. - Place stinking cloud in two locations. The vapors appear in the places you designate; they return within 10 minutes if dispersed by wind while guards and wards lasts. - Place a constant gust of wind in one corridor or room. - Place a suggestion in one location. You select an area of up to 5 feet square, and any creature that enters or passes through the area receives the suggestion mentally. The whole warded area radiates magic. A dispel magic cast on a specific effect, if successful, removes only that effect. You can create a permanently guarded and warded structure by casting this spell there every day for one year.",
+    "de": "Du erschaffst einen Schutz, der einen Bereich von bis zu 232 Quadratmetern auf dem Boden abdeckt (entweder ein Quadrat mit 15 Metern Kantenlänge oder hundert Quadrate mit 1,5 Metern Kantenlänge oder 25 Quadrate mit drei Metern Kantenlänge). Der geschützte Bereich kann bis zu sechs Meter hoch sein und eine beliebige Form haben. Du kannst mehrere Stockwerke einer Festung schützen, indem du den Bereich auf sie aufteilst, solange du jeden zusammenhängenden Bereich betreten kannst, während du den Zauber wirkst. Wenn du diesen Zauber wirkst, kannst du Individuen festlegen, die von bestimmten oder allen Effekten deiner Wahl nicht betroffen sind. Du kannst auch ein Passwort festlegen, mit dem der Sprecher gegen diese Effekte immun ist. Wächter und Hüter  erschafft die folgenden Effekte innerhalb des geschützten Bereichs: Korridore:  Nebel füllt alle gesicherten Korridore, so dass sie komplett verschleiert sind. Außerdem besteht an jeder Kreuzung oder Abzweigung eine Chance von 50 Prozent, dass eine Kreatur außer dir selbst glaubt, in die entgegengesetzte Richtung zu gehen. Treppen:  Spinnennetze blockieren alle Treppen im geschützten Bereich von der Decke bis zum Boden, wie beim Zauber Netz . Diese Fäden wachsen innerhalb von zehn Minuten nach, wenn sie verbrannt oder zerrissen werden, solange Wächter und Hüter  anhält. Türen:  Alle Türen im geschützten Bereich sind magisch verschlossen, als wären sie durch den Zauber Arkanes Schloss  versiegelt. Außerdem kannst du bis zu zehn Türen mit einer Illusion verbergen, so dass sie als normale Wand erscheinen (dies entspricht einem illusionären Gegenstand des Zaubers Einfache Illusion ). Andere Zaubereffekte:  Du kannst einen der folgenden magischen Effekte deiner Wahl im geschützten Bereich der Festung platzieren: Der gesamte geschützte Bereich strahlt Magie aus. Wird Magie bannen  erfolgreich auf einen bestimmten Effekt gewirkt, wird nur dieser eine Effekt entfernt. Wenn du diesen Zauber ein Jahr lang jeden Tag an demselben Ort wirkst, kannst du eine dauerhaft geschützte Struktur erschaffen."
+  },
+  "image": "guards-and-wards",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

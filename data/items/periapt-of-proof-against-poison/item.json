@@ -1,0 +1,26 @@
+{
+  "id": 326,
+  "slug": "periapt-of-proof-against-poison",
+  "name": "Periapt of Proof Against Poison",
+  "nameDe": "Anhänger des Giftschutzes",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 500000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, rare This delicate silver chain has a brilliant-cut black gem pendant. While you wear it, poisons have no effect on you. You are immune to the poisoned condition and have immunity to poison damage.",
+    "de": "An dieser feinen Silberkette hängt ein schwarzer Edelsteinanhänger im Brillantschliff. Wenn du ihn trägst, haben Gifte keinen Effekt auf dich. Du bist gegen den Zustand Vergiftet und gegen Giftschaden immun."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

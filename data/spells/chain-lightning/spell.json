@@ -1,0 +1,66 @@
+{
+  "id": 221,
+  "slug": "chain-lightning",
+  "name": "Chain Lightning",
+  "nameDe": "Kettenblitz",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "6th-level evocation",
+    "de": "Stufe 6 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "150 feet",
+    "de": "45 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a bit of fur; a piece of amber, glass or a crystal rod; and three silver pins",
+      "de": "ein Stück Fell, ein Stück Bernstein, Glas oder eine Kristallstange und drei Silbernadeln"
+    },
+    "raw": {
+      "en": "V, S, M (a bit of fur; a piece of amber, glass or a crystal rod; and three silver pins)",
+      "de": "V, G, M (ein Stück Fell, ein Stück Bernstein, Glas oder eine Kristallstange und drei Silbernadeln)"
+    }
+  },
+  "description": {
+    "en": "You create a bolt of lightning that arcs toward a target of your choice that you can see within range. Three bolts then leap from that target to as many as three other targets, each of which must be within 30 feet of the first target. A target can be a creature or an object and can be targeted by only one of the bolts. A target must make a dexterity saving throw. The target takes 10d8 lightning damage on a failed save, or half as much damage on a successful one.",
+    "de": "Du erschaffst einen Blitz, der auf ein Ziel deiner Wahl in Reichweite zuschießt, das du sehen kannst. Drei Blitze springen dann von diesem Ziel auf bis zu drei weitere über, die sich im Abstand von bis zu neun Metern vom ersten Ziel befinden. Beim Ziel kann es sich um eine Kreatur oder einen Gegenstand handeln. Es kann nur von einem der Blitze getroffen werden. Das Ziel muss einen Geschicklichkeitsrettungswurf ausfuhren. Scheitert der Wurf, erleidet das Ziel 10W8 Blitzschaden, anderenfalls die Hälfte. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 7. Grades oder höher nutzt, springt für jeden Grad über dem 6. ein zusätzlicher Blitz vom ersten Ziel auf ein weiteres Ziel über."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 7th level or higher, one additional bolt leaps from the first target to another target for each slot level above 6th.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 7. Grades oder höher nutzt, springt für jeden Grad über dem 6. ein zusätzlicher Blitz vom ersten Ziel auf ein weiteres Ziel über."
+  },
+  "image": "call-lightning",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

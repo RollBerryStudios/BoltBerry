@@ -1,0 +1,56 @@
+{
+  "id": 248,
+  "slug": "fabricate",
+  "name": "Fabricate",
+  "nameDe": "Verarbeitung",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "4th-level transmutation",
+    "de": "Stufe 4 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "10 minutes",
+    "de": "10 Minuten"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You convert raw materials into products of the same material. For example, you can fabricate a wooden bridge from a clump of trees, a rope from a patch of hemp, and clothes from flax or wool. Choose raw materials that you can see within range. You can fabricate a Large or smaller object (contained within a 10-foot cube, or eight connected 5-foot cubes), given a sufficient quantity of raw material. If you are working with metal, stone, or another mineral substance, however, the fabricated object can be no larger than Medium (contained within a single 5-foot cube). The quality of objects made by the spell is commensurate with the quality of the raw materials. Creatures or magic items can't be created or transmuted by this spell. You also can't use it to create items that ordinarily require a high degree of craftsmanship, such as jewelry, weapons, glass, or armor, unless you have proficiency with the type of artisan's tools used to craft such objects.",
+    "de": "Du wandelst Rohmaterial in Erzeugnisse desselben Materials um. Du kannst beispielsweise eine Holzbrücke aus einem Stück Baum erschaffen, ein Seil aus etwas Hanf und Kleider aus Flachs oder Wolle. Wähle Rohmaterial in Reichweite, das du sehen kannst. Du kannst einen maximal großen Gegenstand herstellen (der in einen Würfel mit drei Metern Kantenlänge oder in acht verbundene Würfel mit jeweils 1,5 Metern Kantenlänge passt), sofern du über genug Rohmaterial verfügst. Wenn du mit Metall, Stein oder einem anderen Mineral arbeitest, kann der hergestellte Gegenstand maximal groß sein und muss in einen einzelnen Würfel mit 1,5 Metern Kantenlänge passen. Die Qualität der mit dem Zauber erschaffenen Gegenstände hängt von der Qualität des Rohmaterials ab. Kreaturen oder magische Gegenstände können mit diesem Zauber nicht erschaffen oder verwandelt werden. Du kannst zudem keine Gegenstände wie Schmuck, Waffen, Glas oder Rüstung erschaffen, die normalerweise ein hohes Maß an Handwerkskunst erfordern, es sei denn, du bist im Umgang mit Handwerkszeug geübt, das für die Herstellung dieser Gegenstände erforderlich ist."
+  },
+  "image": "fabricate",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

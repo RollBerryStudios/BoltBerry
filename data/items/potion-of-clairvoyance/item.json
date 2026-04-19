@@ -1,0 +1,26 @@
+{
+  "id": 242,
+  "slug": "potion-of-clairvoyance",
+  "name": "Potion of Clairvoyance",
+  "nameDe": "Trank des Hellsehens",
+  "category": {
+    "en": "POTIONS_OILS",
+    "de": "Tränke & Öle"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 96000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Potion, rare When you drink this potion, you gain the effect of the clairvoyance spell. An eyeball bobs in this yellowish liquid but vanishes when the potion is opened.",
+    "de": "Wenn du diesen Trank trinkst, erhältst du den Effekt des Zaubers Hellsehen . In der gelblichen Flüssigkeit schwimmt ein Augapfel, der verschwindet, sobald der Trank geöffnet wird."
+  },
+  "image": "potions-and-oils",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

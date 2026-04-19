@@ -1,0 +1,30 @@
+{
+  "id": 413,
+  "slug": "robe-of-eyes",
+  "name": "Robe of Eyes",
+  "nameDe": "Robe der Augen",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 3000000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, rare (requires attunement) This robe is adorned with eyelike patterns. While you wear the robe, you gain the following benefits: The robe lets you see in all directions, and you have advantage on Wisdom (Perception) checks that rely on sight. You have darkvision out to a range of 120 feet. You can see invisible creatures and objects, as well as see into the Ethereal Plane, out to a range of 120 feet. The eyes on the robe can't be closed or averted. Although you can close or avert your own eyes, you are never considered to be doing so while wearing this robe. A light spell cast on the robe or a daylight spell cast within 5 feet of the robe causes you to be blinded for 1 minute. At the end of each of your turns, you can make a Constitution saving throw (DC 11 for light or DC 15 for daylight), ending the blindness on a success.",
+    "de": "Diese Robe ist mit augenartigen Mustern verziert. Wenn du diese Robe trägst, erhältst du die folgenden Vorteile: Die Augen auf der Robe können nicht geschlossen oder abgewendet werden. Du kannst zwar deine eigenen Augen schließen oder abwenden, doch wenn du diese Robe trägst, gelten deine Augen nie als geschlossen oder abgewendet. Wenn der Zauber Licht  auf die Robe oder der Zauber Tageslicht  im Abstand von bis zu 1,5 Metern von der Robe gewirkt wird, bist du eine Minute lang blind. Du kannst am Ende jedes deiner Züge einen Konstitutionsrettungswurf (SG 11 für Licht  oder SG 15 für Tageslicht ) ausführen und die Blindheit bei einem Erfolg beenden."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

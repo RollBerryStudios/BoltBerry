@@ -1,0 +1,68 @@
+{
+  "id": 2,
+  "slug": "animal-friendship",
+  "name": "Animal Friendship",
+  "nameDe": "Tierfreundschaft",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "druid",
+      "ranger"
+    ],
+    "de": [
+      "Barde",
+      "Druide",
+      "Waldläufer"
+    ]
+  },
+  "type": {
+    "en": "1st-level enchantment",
+    "de": "Stufe 1 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "24 hours",
+    "de": "24 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a morsel of food",
+      "de": "ein Happen Essen"
+    },
+    "raw": {
+      "en": "V, S, M (a morsel of food)",
+      "de": "V, G, M (ein Happen Essen)"
+    }
+  },
+  "description": {
+    "en": "This spell lets you convince a beast that you mean it no harm. Choose a beast that you can see within range. It must see and hear you. If the beast's Intelligence is 4 or higher, the spell fails. Otherwise, the beast must succeed on a wisdom saving throw or be charmed by you for the spell's duration. If you or one of your companions harms the target, the spells ends.",
+    "de": "Mit diesem Zauber kannst du ein Tier davon überzeugen, dass du ihm nichts Böses willst. Wähle ein Tier in Reichweite, das du sehen kannst. Es muss dich sehen und hören können. Wenn die Intelligenz des Tiers mindestens 4 beträgt, schlägt der Zauber fehl. Anderenfalls muss das Tier einen Weisheitsrettungswurf ausführen oder es wird für die Wirkungsdauer des Zaubers von dir bezaubert. Wenn du oder einer deiner Begleiter das Ziel verletzt, endet der Zauber. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, kann für jeden Grad über dem 1. ein zusätzliches Tier betroffen sein."
+  },
+  "higherLevels": {
+    "en": "",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, kann für jeden Grad über dem 1. ein zusätzliches Tier betroffen sein."
+  },
+  "image": "animal-friendship",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

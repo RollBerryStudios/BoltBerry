@@ -1,0 +1,68 @@
+{
+  "id": 123,
+  "slug": "fly",
+  "name": "Fly",
+  "nameDe": "Fliegen",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level transmutation",
+    "de": "Stufe 3 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a wing feather from any bird",
+      "de": "eine Flügelfeder von einem beliebigen Vogel"
+    },
+    "raw": {
+      "en": "V, S, M (a wing feather from any bird)",
+      "de": "V, G, M (eine Flügelfeder von einem beliebigen Vogel)"
+    }
+  },
+  "description": {
+    "en": "You touch a willing creature. The target gains a flying speed of 60 feet for the duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.",
+    "de": "Du berührst eine bereitwillige Kreatur. Für die Wirkungsdauer erhält das Ziel eine Flugbewegungsrate von 18 Metern. Wenn der Zauber endet und das Ziel noch fliegt, fällt es herunter, sofern es den Sturz nicht verhindern kann. Auf höheren Graden:  Wenn du diesen Zauber wirkst, indem du einen Zauberplatz des 4. Grades oder höher nutzt, kannst du für jeden Grad über dem 3. eine zusätzliche Kreatur als Ziel wählen."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.",
+    "de": "Wenn du diesen Zauber wirkst, indem du einen Zauberplatz des 4. Grades oder höher nutzt, kannst du für jeden Grad über dem 3. eine zusätzliche Kreatur als Ziel wählen."
+  },
+  "image": "fly",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

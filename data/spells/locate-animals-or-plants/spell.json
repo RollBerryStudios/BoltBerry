@@ -1,0 +1,64 @@
+{
+  "id": 283,
+  "slug": "locate-animals-or-plants",
+  "name": "Locate Animals or Plants",
+  "nameDe": "Tiere oder Pflanzen aufspüren",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "druid",
+      "ranger"
+    ],
+    "de": [
+      "Barde",
+      "Druide",
+      "Waldläufer"
+    ]
+  },
+  "type": {
+    "en": "2nd-level divination (ritual)",
+    "de": "Stufe 2 Erkenntnismagie (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a bit of fur from a bloodhound",
+      "de": "ein Stückchen Fell von einem Bluthund"
+    },
+    "raw": {
+      "en": "V, S, M (a bit of fur from a bloodhound)",
+      "de": "V, G, M (ein Stückchen Fell von einem Bluthund)"
+    }
+  },
+  "description": {
+    "en": "Describe or name a specific kind of beast or plant. Concentrating on the voice of nature in your surroundings, you learn the direction and distance to the closest creature or plant of that kind within 5 miles, if any are present.",
+    "de": "Beschreibe oder nenne ein bestimmtes Tier oder eine bestimmte Pflanze. Du konzentrierst dich auf die Stimme der Natur in deiner Umgebung und erfährst, wie weit entfernt und in welcher Richtung im Abstand von bis zu acht Kilometern die nächste Kreatur oder Pflanze dieser Art ist, sofern vorhanden."
+  },
+  "image": "locate-animals-plants",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

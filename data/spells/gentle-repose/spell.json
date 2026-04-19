@@ -1,0 +1,62 @@
+{
+  "id": 261,
+  "slug": "gentle-repose",
+  "name": "Gentle Repose",
+  "nameDe": "Sanfte Ruhe",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Necromancy",
+    "de": "Nekromantie"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "wizard"
+    ],
+    "de": [
+      "Kleriker",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-level necromancy (ritual)",
+    "de": "Stufe 2 Nekromantie (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "10 days",
+    "de": "10 Tage"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a pinch of salt and one copper piece placed on each of the corpse's eyes, which must remain there for the duration",
+      "de": "eine Prise Salz und ein Kupferstück, die auf die Augen der Leiche gelegt werden und dort für die Dauer der Leichenschau verbleiben müssen"
+    },
+    "raw": {
+      "en": "V, S, M (a pinch of salt and one copper piece placed on each of the corpse's eyes, which must remain there for the duration)",
+      "de": "V, G, M (eine Prise Salz und ein Kupferstück, die auf die Augen der Leiche gelegt werden und dort für die Dauer der Leichenschau verbleiben müssen)"
+    }
+  },
+  "description": {
+    "en": "You touch a corpse or other remains. For the duration, the target is protected from decay and can't become undead. The spell also effectively extends the time limit on raising the target from the dead, since days spent under the influence of this spell don't count against the time limit of spells such as raise dead.",
+    "de": "Du berührst einen Leichnam oder andere sterbliche Überreste. Für die Wirkungsdauer wird das Ziel vor Verfall geschützt und kann nicht untot werden. Der Zauber verlängert dadurch auch die Zeit, in der das Ziel wiederbelebt werden kann, da die Tage unter dem Einfluss dieses Zaubers nicht als verstrichene Zeit für Zauber wie Tote erwecken  zählen."
+  },
+  "image": "gentle-repose",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

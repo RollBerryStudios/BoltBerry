@@ -1,0 +1,26 @@
+{
+  "id": 366,
+  "slug": "stone-of-controlling-earth-elementals",
+  "name": "Stone of Controlling Earth Elementals",
+  "nameDe": "Stein der Erdelementar-Herrschaft",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 800000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, rare If the stone is touching the ground, you can use an action to speak its command word and summon an earth elemental, as if you had cast the conjure elemental spell. The stone can't be used this way again until the next dawn. The stone weighs 5 pounds.",
+    "de": "Wenn dieser Stein den Boden berührt, kannst du als Aktion sein Befehlswort aussprechen und einen Erdelementar beschwören, als hättest du den Zauber Elementar beschwören  gewirkt. Der Stein kann erst im nächsten Morgengrauen wieder auf diese Weise verwendet werden. Der Stein wiegt 2,5 Kilogramm."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

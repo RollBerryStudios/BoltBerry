@@ -1,0 +1,30 @@
+{
+  "id": 402,
+  "slug": "talisman-of-the-sphere",
+  "name": "Talisman of the Sphere",
+  "nameDe": "Talisman des Nichts",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "LEGENDARY",
+    "de": "Legendär"
+  },
+  "cost": 2000000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, legendary (requires attunement) When you make an Intelligence (Arcana) check to control a sphere of annihilation while you are holding this talisman, you double your proficiency bonus on the check. In addition, when you start your turn with control over a sphere of annihilation, you can use an action to levitate it 10 feet plus a number of additional feet equal to 10 × your Intelligence modifier.",
+    "de": "Wenn du einen Intelligenzwurf (Arkane Kunde) ausführst, um eine Sphäre des Nichts  zu kontrollieren, während du diesen Talisman hältst, verdoppelst du deinen Übungsbonus für den Wurf. Außerdem kannst du, wenn du zu Beginn deines Zugs eine Sphäre des Nichts kontrollierst, eine Aktion verwenden, um sie drei Meter plus weitere drei Meter mal deinem Intelligenzmodifikator hoch schweben zu lassen."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

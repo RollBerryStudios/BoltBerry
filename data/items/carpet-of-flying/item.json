@@ -1,0 +1,26 @@
+{
+  "id": 383,
+  "slug": "carpet-of-flying",
+  "name": "Carpet of Flying",
+  "nameDe": "Fliegender Teppich",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 1200000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, very rare You can speak the carpet's command word as an  action to make the carpet hover and fly. It moves according to your spoken directions, provided that you are within 30 feet of it. Four sizes of carpet of flying exist. The GM chooses the size of a given carpet or determines it randomly. A carpet can carry up to twice the weight shown on the table, but it flies at half speed if it carries more than its normal capacity.",
+    "de": "Du kannst als Aktion das Befehlswort des Teppichs aussprechen, um den Teppich zum Schweben und Fliegen zu bringen. Er folgt deinen gesprochenen Anweisungen, solange du dich im Abstand von bis zu neun Metern befindest. Es gibt vier verschiedene Größen des Fliegenden Teppichs . Der SL wählt die Größe des jeweiligen Teppichs aus oder bestimmt sie zufällig. Ein Teppich kann das Doppelte der in der Tabelle angegebenen Traglast tragen, fliegt jedoch bei mehr als der angegebenen Traglast mit der halben Bewegungsrate."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

@@ -1,0 +1,206 @@
+{
+  "id": 216,
+  "slug": "ogre-zombie",
+  "name": "Ogre Zombie",
+  "nameDe": "Ogerzombie",
+  "source": "SRD",
+  "meta": {
+    "en": "Large undead, neutral evil",
+    "de": "Großer Untoter, neutral böse"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "8",
+    "de": "8"
+  },
+  "hp": {
+    "en": "85 (9d10 + 36)",
+    "de": "85 (9W10+36)"
+  },
+  "str": 19,
+  "dex": 6,
+  "con": 18,
+  "int": 3,
+  "wis": 6,
+  "cha": 5,
+  "strMod": 4,
+  "dexMod": -2,
+  "conMod": 4,
+  "intMod": -4,
+  "wisMod": -2,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 8"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 8"
+    ]
+  },
+  "languages": {
+    "en": [
+      "understands Common and Giant but can't speak"
+    ],
+    "de": [
+      "Versteht Gemeinsprache und Riesisch",
+      "aber kann nicht sprechen"
+    ]
+  },
+  "savingThrows": [
+    "Wei +0"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Undead Fortitude",
+        "text": "If damage reduces the zombie to 0 hit points, it must make a Constitution saving throw with a DC of 5+the damage taken, unless the damage is radiant or from a critical hit. On a success, the zombie drops to 1 hit point instead."
+      }
+    ],
+    "de": [
+      {
+        "name": "Untote Ausdauer",
+        "text": "Wenn die Trefferpunkte des Zombies durch Schaden auf 0 sinken, muss der Zombie einen Konstitutionsrettungswurf mit SG 5 + erlittenem Schaden ausführen, sofern der Schaden nicht gleißend ist oder von einem kritischen Treffer stammt. Bei einem Erfolg behält der Zombie 1 Trefferpunkt."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Morningstar",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Morgenstern",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 13 (2W8+4) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/287/315/315/636252770700032248.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "undead",
+    "de": "Untoter"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "OgreZombie (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "OgreZombie (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "OgreZombie (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

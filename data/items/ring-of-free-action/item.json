@@ -1,0 +1,30 @@
+{
+  "id": 399,
+  "slug": "ring-of-free-action",
+  "name": "Ring of Free Action",
+  "nameDe": "Ring der Bewegungsfreiheit",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 2000000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Ring, rare (requires attunement) While you wear this ring, difficult terrain doesn't cost you extra movement. In addition, magic can neither reduce your speed nor cause you to be paralyzed or restrained.",
+    "de": "Wenn du diesen Ring trägst, kostet dich schwieriges Gelände keine zusätzliche Bewegung. Außerdem kann Magie weder deine Bewegungsrate reduzieren noch dazu führen, dass du gelähmt oder festgesetzt wirst."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "ring",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

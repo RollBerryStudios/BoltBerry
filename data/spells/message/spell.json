@@ -1,0 +1,64 @@
+{
+  "id": 55,
+  "slug": "message",
+  "name": "Message",
+  "nameDe": "Botschaft",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "Transmutation cantrip",
+    "de": "Verwandlungsmagie Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "1 round",
+    "de": "1 Runde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a short piece of copper wire",
+      "de": "ein kurzes Stück Kupferdraht"
+    },
+    "raw": {
+      "en": "V, S, M (a short piece of copper wire)",
+      "de": "V, G, M (ein kurzes Stück Kupferdraht)"
+    }
+  },
+  "description": {
+    "en": "You point your finger toward a creature within range and whisper a message. The target (and only the target) hears the message and can reply in a whisper that only you can hear. You can cast this spell through solid objects if you are familiar with the target and know it is beyond the barrier. Magical silence, 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood blocks the spell. The spell doesn't have to follow a straight line and can travel freely around corners or through openings.",
+    "de": "Du deutest mit deinem Finger auf eine Kreatur in Reichweite und flüsterst eine Botschaft. Das Ziel (und nur dieses) hört die Botschaft und kann mit einem Flüstern antworten, das nur du hörst. Du kannst diesen Zauber durch solide Gegenstände wirken, wenn du mit dem Ziel vertraut bist und weißt, dass es sich hinter der Barriere befindet. Magische Stille, 30 Zentimeter dicker Stein, 2,5 Zentimeter dickes gewöhnliches Metall, ein dünnes Bleiblech oder 90 Zentimeter dickes Holz blockieren den Zauber. Der Zauber muss keiner geraden Linie folgen und kann sich frei um Ecken oder durch Öffnungen bewegen."
+  },
+  "image": "message",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

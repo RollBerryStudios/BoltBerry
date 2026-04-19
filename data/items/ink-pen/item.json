@@ -1,0 +1,23 @@
+{
+  "id": 106,
+  "slug": "ink-pen",
+  "name": "Ink Pen",
+  "nameDe": "Feder für Tinte",
+  "category": {
+    "en": "ADVENTURING_GEAR",
+    "de": "Ausrüstung"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 2,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 0,
+  "image": "adventuring-gear",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,64 @@
+{
+  "id": 105,
+  "slug": "bestow-curse",
+  "name": "Bestow Curse",
+  "nameDe": "Fluch",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Necromancy",
+    "de": "Nekromantie"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level necromancy",
+    "de": "Stufe 3 Nekromantie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You touch a creature, and that creature must succeed on a wisdom saving throw or become cursed for the duration of the spell. When you cast this spell, choose the nature of the curse from the following options: - Choose one ability score. While cursed, the target has disadvantage on ability checks and saving throws made with that ability score. - While cursed, the target has disadvantage on attack rolls against you. - While cursed, the target must make a wisdom saving throw at the start of each of its turns. If it fails, it wastes its action that turn doing nothing. - While the target is cursed, your attacks and spells deal an extra 1d8 necrotic damage to the target. A remove curse spell ends this effect. At the GM's option, you may choose an alternative curse effect, but it should be no more powerful than those described above. The GM has final say on such a curse's effect.",
+    "de": "Du berührst eine Kreatur, die einen Weisheitsrettungswurf ausführen muss oder für die Wirkungsdauer verflucht wird. Wähle beim Wirken des Zaubers die Art des Fluchs aus den folgenden Optionen aus: Der Zauber Fluch brechen  beendet diesen Effekt. Der SL kann einen alternativen Effekt für den Fluch zulassen, der jedoch nicht mächtiger sein sollte als die beschriebenen Effekte. Der SL hat das letzte Wort, was den Effekt angeht. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 4. Grades oder höher nutzt, ändert sich die Wirkungsdauer zu: Konzentration, bis zu 10 Minuten. Bei einem Zauberplatz des 5. Grades oder höher beträgt die Wirkungsdauer 8 Stunden. Bei einem Zauberplatz des 7. Grades oder höher beträgt die Wirkungsdauer 24 Stunden. Bei einem Zauberplatz des 9. Grades hält der Zauber an, bis er gebannt wird. Bei einem Zauberplatz des 5. Grades oder höher wird keine Konzentration mehr benötigt."
+  },
+  "higherLevels": {
+    "en": "If you cast this spell using a spell slot of 4th level or higher, the duration is concentration, up to 10 minutes. If you use a spell slot of 5th level or higher, the duration is 8 hours. If you use a spell slot of 7th level or higher, the duration is 24 hours. If you use a 9th level spell slot, the spell lasts until it is dispelled. Using a spell slot of 5th level or higher grants a duration that doesn't require concentration.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 4. Grades oder höher nutzt, ändert sich die Wirkungsdauer zu: Konzentration, bis zu 10 Minuten. Bei einem Zauberplatz des 5. Grades oder höher beträgt die Wirkungsdauer 8 Stunden. Bei einem Zauberplatz des 7. Grades oder höher beträgt die Wirkungsdauer 24 Stunden. Bei einem Zauberplatz des 9. Grades hält der Zauber an, bis er gebannt wird. Bei einem Zauberplatz des 5. Grades oder höher wird keine Konzentration mehr benötigt."
+  },
+  "image": "bestow-curse",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

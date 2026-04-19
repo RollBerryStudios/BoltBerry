@@ -1,0 +1,70 @@
+{
+  "id": 277,
+  "slug": "hold-monster",
+  "name": "Hold Monster",
+  "nameDe": "Monster festhalten",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "5th-level enchantment",
+    "de": "Stufe 5 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "90 feet",
+    "de": "27 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a small, straight piece of iron",
+      "de": "ein kleines, gerades Stück Eisen"
+    },
+    "raw": {
+      "en": "V, S, M (a small, straight piece of iron)",
+      "de": "V, G, M (ein kleines, gerades Stück Eisen)"
+    }
+  },
+  "description": {
+    "en": "Choose a creature you can see and reach. The target must make a saving throw of Wisdom or be paralyzed for the duration of the spell. This spell has no effect against the undead. At the end of each round, the target can make a new saving throw of Wisdom. If successful, the spell ends for the creature.",
+    "de": "Wähle eine Kreatur in Reichweite, die du sehen kannst. Das Ziel muss einen Weisheitsrettungswurf ausführen oder es wird für die Wirkungsdauer gelähmt. Dieser Zauber wirkt nicht auf Untote. Am Ende jedes seiner Züge kann das Ziel einen weiteren Weisheitsrettungswurf ausführen. Bei einem Erfolg endet die Wirkung des Zaubers auf das Ziel. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, kannst du für jeden Grad über dem 5. eine zusätzliche Kreatur als Ziel wählen. Die Kreaturen müssen sich im Abstand von bis zu neun Metern voneinander befinden, wenn du sie als Ziel wählst."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a level 6 or higher location, you can target an additional creature for each level of location beyond the fifth. The creatures must be within 30 feet o f each other when you target them.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, kannst du für jeden Grad über dem 5. eine zusätzliche Kreatur als Ziel wählen. Die Kreaturen müssen sich im Abstand von bis zu neun Metern voneinander befinden, wenn du sie als Ziel wählst."
+  },
+  "image": "imprisonment",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,66 @@
+{
+  "id": 284,
+  "slug": "lightning-bolt",
+  "name": "Lightning Bolt",
+  "nameDe": "Blitz",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level evocation",
+    "de": "Stufe 3 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self (100-foot line)",
+    "de": "Selbst (30 Meter Gerade)"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a bit of fur and a rod of amber, crystal, or glass",
+      "de": "ein Stückchen Fell und eine Stange aus Bernstein, Kristall oder Glas"
+    },
+    "raw": {
+      "en": "V, S, M (a bit of fur and a rod of amber, crystal, or glass)",
+      "de": "V, G, M (ein Stückchen Fell und eine Stange aus Bernstein, Kristall oder Glas)"
+    }
+  },
+  "description": {
+    "en": "A stroke of lightning forming a line 100 feet long and 5 feet wide blasts out from you in a direction you choose. Each creature in the line must make a dexterity saving throw. A creature takes 8d6 lightning damage on a failed save, or half as much damage on a successful one. The lightning ignites flammable objects in the area that aren't being worn or carried.",
+    "de": "Du schleuderst einen Blitz von dir ausgehend in einer 30 Meter langen und 1,5 Meter breiten Linie in eine Richtung deiner Wahl. Alle Kreaturen innerhalb der Linie müssen einen Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet eine Kreatur 8W6 Blitzschaden, anderenfalls die Hälfte. Der Blitz entzündet brennbare Gegenstände im Wirkungsbereich, die nicht getragen werden. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 4. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 3. um 1W6."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 4. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 3. um 1W6."
+  },
+  "image": "call-lightning",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,57 @@
+{
+  "id": 130,
+  "slug": "mass-healing-word",
+  "name": "Mass Healing Word",
+  "nameDe": "Massen-Heilendes Wort",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "3rd-level evocation",
+    "de": "Stufe 3 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 bonus action",
+    "de": "1 Bonusaktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "As you call out words of restoration, up to six creatures of your choice that you can see within range regain hit points equal to 1d4 + your spellcasting ability modifier. This spell has no effect on undead or constructs.",
+    "de": "Du sprichst magische Worte der Heilung und bis zu sechs Kreaturen deiner Wahl in Reichweite, die du sehen kannst, erhalten Trefferpunkte in Höhe von 1W4 + deinem Zauberwirken-Attributsmodifikator zurück. Dieser Zauber wirkt nicht auf Untote oder Konstrukte. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 4. Grades oder höher nutzt, steigt die Heilung für jeden Grad über dem 3. um 1W4."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 4th level or higher, the healing increases by 1d4 for each slot level above 3rd.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 4. Grades oder höher nutzt, steigt die Heilung für jeden Grad über dem 3. um 1W4."
+  },
+  "image": "heal",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

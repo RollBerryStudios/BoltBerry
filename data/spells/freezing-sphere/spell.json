@@ -1,0 +1,63 @@
+{
+  "id": 381,
+  "slug": "freezing-sphere",
+  "name": "Freezing Sphere",
+  "nameDe": "Frostsphäre",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "6th-level evocation",
+    "de": "Stufe 6 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "300 feet",
+    "de": "90 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "A small crystal sphere",
+      "de": "Eine kleine Kristallkugel"
+    },
+    "raw": {
+      "en": "V, S, M (A small crystal sphere)",
+      "de": "V, G, M (Eine kleine Kristallkugel)"
+    }
+  },
+  "description": {
+    "en": "A frigid globe of cold energy streaks from your fingertips to a point of your choice within range, where it explodes in a 60-foot-radius sphere. Each creature within the area must make a constitution saving throw. On a failed save, a creature takes 10d6 cold damage. On a successful save, it takes half as much damage. If the globe strikes a body of water or a liquid that is principally water (not including water-based creatures), it freezes the liquid to a depth of 6 inches over an area 30 feet square. This ice lasts for 1 minute. Creatures that were swimming on the surface of frozen water are trapped in the ice. A trapped creature can use an action to make a Strength check against your spell save DC to break free. You can refrain from firing the globe after completing the spell, if you wish. A small globe about the size of a sling stone, cool to the touch, appears in your hand. At any time, you or a creature you give the globe to can throw the globe (to a range of 40 feet) or hurl it with a sling (to the sling's normal range). It shatters on impact, with the same effect as the normal casting of the spell. You can also set the globe down without shattering it. After 1 minute, if the globe hasn't already shattered, it explodes.",
+    "de": "Eine Kugel aus klirrender Kälte schießt aus deinen Fingerspitzen an einen Punkt deiner Wahl in Reichweite, wo sie als Sphäre mit einem Radius von 18 Metern explodiert. Jede Kreatur in dem Bereich muss einen Konstitutionsrettungswurf ausführen. Scheitert der Wurf, so erleidet die Kreatur 10W6 Kälteschaden. Bei einem erfolgreichen Rettungswurf erleidet sie halb so viel Schaden. Trifft die Kugel ein Gewässer oder eine Flüssigkeit, die größtenteils aus Wasser besteht (dazu gehören keine Wasserkreaturen), lässt sie die Flüssigkeit in einem würfelförmigen Bereich von neun Metern mal neun Metern mit 15 Zentimetern Tiefe gefrieren. Das Eis hält eine Minute lang an. Kreaturen, die auf der Oberfläche des gefrorenen Wassers schwimmen, werden im Eis gefangen. Eine gefangene Kreatur kann als Aktion einen Stärkewurf gegen deinen Zauberrettungswurf-SG ausführen, um sich zu befreien. Du musst die Kugel nach dem Wirken des Zaubers nicht sofort abfeuern. In diesem Fall erscheint eine kleine, kühle Kugel von der Größe eines Schleudersteins in deiner Hand. Du - oder eine Kreatur, der du die Kugel gibst - kannst sie jederzeit bis zu zwölf Meter weit werfen oder sie mit einer Schleuder in deren Reichweite verschießen. Die Kugel zerbricht beim Aufprall und bewirkt denselben Effekt wie das normale Wirken des Zaubers. Du kannst die Kugel auch ablegen, ohne sie zu zerbrechen. Ist sie nach einer Minute nicht zerbrochen, explodiert sie. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 7. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 6. um 1W6."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 7th level or higher, the damage increases by 1d6 for each slot level above 6th.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 7. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 6. um 1W6."
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

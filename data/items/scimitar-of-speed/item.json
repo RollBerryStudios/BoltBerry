@@ -1,0 +1,40 @@
+{
+  "id": 341,
+  "slug": "scimitar-of-speed",
+  "name": "Scimitar of Speed",
+  "nameDe": "Krummsäbel der Geschwindigkeit",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 600000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Weapon (scimitar), very rare (requires attunement) You gain a +2 bonus to attack and damage rolls made with this magic weapon. In addition, you can make one attack with it as a bonus action on each of your turns.",
+    "de": "Du erhältst einen Bonus von +2 auf Angriffs- und Schadenswürfe, die du mit dieser magischen Waffe ausführst. Außerdem kannst du damit in jedem Zug einen Angriff als Bonusaktion ausführen."
+  },
+  "weight": 3,
+  "classification": {
+    "en": "Martial Melee Weapons",
+    "de": "Nahkampfs-Kriegswaffen"
+  },
+  "damage": "1d6",
+  "damageType": {
+    "en": "slashing",
+    "de": "hieb"
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "finesse | leicht | erfordert einstimmung"
+  },
+  "image": "weapon",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

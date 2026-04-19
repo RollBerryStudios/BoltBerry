@@ -1,0 +1,30 @@
+{
+  "id": 339,
+  "slug": "ring-of-resistance",
+  "name": "Ring of Resistance",
+  "nameDe": "Ring des Widerstands",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 600000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Ring, rare (requires attunement) You have resistance to one damage type while wearing this ring. The gem in the ring indicates the type, which the GM chooses or determines randomly.",
+    "de": "Wenn du diesen Ring trägst, bist du gegen eine Schadensart resistent. Die Schadensart wird vom SL ausgewählt oder zufällig bestimmt und ist durch den Edelstein erkennbar, der den Ring ziert."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "ring",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

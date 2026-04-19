@@ -1,0 +1,66 @@
+{
+  "id": 49,
+  "slug": "light",
+  "name": "Light",
+  "nameDe": "Licht",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "Evocation cantrip",
+    "de": "Hervorrufung Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a firefly or phosphorescent moss",
+      "de": "ein Glühwürmchen oder phosphoreszierendes Moos"
+    },
+    "raw": {
+      "en": "V, M (a firefly or phosphorescent moss)",
+      "de": "V, M (ein Glühwürmchen oder phosphoreszierendes Moos)"
+    }
+  },
+  "description": {
+    "en": "You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action. If you target an object held or worn by a hostile creature, that creature must succeed on a dexterity saving throw to avoid the spell.",
+    "de": "Du berührst einen Gegenstand, der in keiner Abmessung größer als drei Meter ist. Während der Wirkungsdauer strahlt dieser Gegenstand helles Licht in einem Radius von sechs Metern und dämmriges Licht im Radius von weiteren sechs Metern aus. Du kannst die Farbe des Lichts frei wählen. Wenn der Gegenstand mit etwas Blickdichtem abgedeckt wird, wird das Licht blockiert. Der Zauber endet vorzeitig, wenn du ihn erneut wirkst oder ihn als Aktion aufhebst. Wählst du ein Ziel, das von einer feindlichen Kreatur gehalten oder getragen wird, muss diese einen Geschicklichkeitsrettungswurf ausführen, um den Zauber zu verhindern."
+  },
+  "image": "light",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

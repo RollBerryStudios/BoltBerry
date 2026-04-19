@@ -1,0 +1,70 @@
+{
+  "id": 50,
+  "slug": "longstrider",
+  "name": "Longstrider",
+  "nameDe": "Lange Schritte",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "druid",
+      "ranger",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Druide",
+      "Waldläufer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level transmutation",
+    "de": "Stufe 1 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a pinch of dirt",
+      "de": "eine Prise Dreck"
+    },
+    "raw": {
+      "en": "V, S, M (a pinch of dirt)",
+      "de": "V, G, M (eine Prise Dreck)"
+    }
+  },
+  "description": {
+    "en": "You touch a creature. The target's speed increases by 10 feet until the spell ends.",
+    "de": "Du berührst eine Kreatur. Während der Wirkungsdauer steigt die Bewegungsrate des Ziels um drei Meter. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, kannst du für jeden Grad über dem 1. eine zusätzliche Kreatur als Ziel wählen."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each spell slot above 1st.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, kannst du für jeden Grad über dem 1. eine zusätzliche Kreatur als Ziel wählen."
+  },
+  "image": "retreat",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

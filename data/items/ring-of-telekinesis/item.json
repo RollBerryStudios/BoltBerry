@@ -1,0 +1,30 @@
+{
+  "id": 435,
+  "slug": "ring-of-telekinesis",
+  "name": "Ring of Telekinesis",
+  "nameDe": "Ring der Telekinese",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 8000000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Ring, very rare (requires attunement) While wearing this ring, you can cast the telekinesis spell at will, but you can target only objects that aren't being worn or carried.",
+    "de": "Wenn du diesen Ring trägst, kannst du mit ihm den Zauber Telekinese  beliebig oft wirken. Allerdings kannst du nur Gegenstände als Ziel auswählen, die nicht getragen oder gehalten werden."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "ring",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

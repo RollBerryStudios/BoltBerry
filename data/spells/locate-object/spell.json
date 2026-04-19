@@ -1,0 +1,70 @@
+{
+  "id": 286,
+  "slug": "locate-object",
+  "name": "Locate Object",
+  "nameDe": "Gegenstand aufspüren",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "druid",
+      "paladin",
+      "ranger",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Druide",
+      "Paladin",
+      "Waldläufer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-level divination",
+    "de": "Stufe 2 Erkenntnismagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a forked twig",
+      "de": "ein gespaltener Zweig"
+    },
+    "raw": {
+      "en": "V, S, M (a forked twig)",
+      "de": "V, G, M (ein gespaltener Zweig)"
+    }
+  },
+  "description": {
+    "en": "Describe or name an object that is familiar to you. You sense the direction to the object's location, as long as that object is within 1,000 feet of you. If the object is in motion, you know the direction of its movement. The spell can locate a specific object known to you, as long as you have seen it up close--within 30 feet--at least once. Alternatively, the spell can locate the nearest object of a particular kind, such as a certain kind of apparel, jewelry, furniture, tool, or weapon. This spell can't locate an object if any thickness of lead, even a thin sheet, blocks a direct path between you and the object.",
+    "de": "Beschreibe oder nenne einen Gegenstand, mit dem du vertraut bist. Solange sich der Gegenstand im Abstand von bis zu 300 Metern von dir befindet, spürst du, in welcher Richtung sein Aufenthaltsort liegt. Bewegt sich der Gegenstand, weißt du, in welche Richtung er sich bewegt. Der Zauber kann einen bestimmtem dir bekannten Gegenstand aufspüren, sofern du ihn mindestens einmal aus der Nähe - aus maximal neun Metern Entfernung - gesehen hast. Alternativ kann der Zauber das nächstgelegene Objekt einer bestimmten Art aufspüren, wie eine bestimmte Art von Kleidung, Möbel, Schmuck, Waffe oder Werkzeug. Dieser Zauber kann den Gegenstand nicht aufspüren, wenn Blei den direkten Weg zwischen dir und dem Gegenstand blockiert - egal, wie dünn es ist."
+  },
+  "image": "locate-object",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

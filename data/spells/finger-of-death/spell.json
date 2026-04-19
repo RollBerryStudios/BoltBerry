@@ -1,0 +1,60 @@
+{
+  "id": 200,
+  "slug": "finger-of-death",
+  "name": "Finger of Death",
+  "nameDe": "Finger des Todes",
+  "level": {
+    "en": "7",
+    "de": "Grad 7"
+  },
+  "school": {
+    "en": "Necromancy",
+    "de": "Nekromantie"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "7th-level necromancy",
+    "de": "Stufe 7 Nekromantie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You send negative energy coursing through a creature that you can see within range, causing it searing pain. The target must make a constitution saving throw. It takes 7d8 + 30 necrotic damage on a failed save, or half as much damage on a successful one. A humanoid killed by this spell rises at the start of your next turn as a zombie that is permanently under your command, following your verbal orders to the best of its ability.",
+    "de": "Du lässt negative Energie durch eine Kreatur in Reichweite pulsieren, die du sehen kannst, und fügst ihr extreme Schmerzen zu. Das Ziel muss einen Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet das Ziel 7W8+30 nekrotischen Schaden, anderenfalls die Hälfte. Wird eine humanoide Kreatur durch diesen Zauber getötet, steht sie zu Beginn deines nächsten Zugs als Zombie wieder auf, der sich dauerhaft unter deiner Kontrolle befindet und deinen verbalen Befehlen nach Kräften folgt."
+  },
+  "image": "finger-of-death",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

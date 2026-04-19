@@ -1,0 +1,192 @@
+{
+  "id": 299,
+  "slug": "warhorse-skeleton",
+  "name": "Warhorse Skeleton",
+  "nameDe": "Streitross-Skelett",
+  "source": "SRD",
+  "meta": {
+    "en": "Large undead, lawful evil",
+    "de": "Großer Untoter, rechtschaffen böse"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "13 (Rossharnisch-Teile)",
+    "de": "13 (Rossharnisch-Teile)"
+  },
+  "hp": {
+    "en": "22 (3d10 + 6)",
+    "de": "22 (3W10+6)"
+  },
+  "str": 18,
+  "dex": 12,
+  "con": 15,
+  "int": 2,
+  "wis": 8,
+  "cha": 5,
+  "strMod": 4,
+  "dexMod": 1,
+  "conMod": 2,
+  "intMod": -4,
+  "wisMod": -1,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 9"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 9"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Hooves",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Hufe",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 11 (2W6+4) Wuchtschaden.  Sphinxen"
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/660/undead.jpg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "undead",
+    "de": "Untoter"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "WarhorseSkeleton (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "WarhorseSkeleton (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "WarhorseSkeleton (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

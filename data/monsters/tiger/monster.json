@@ -1,0 +1,202 @@
+{
+  "id": 284,
+  "slug": "tiger",
+  "name": "Tiger",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": "12",
+  "hp": {
+    "en": "37 (5d10 + 10)",
+    "de": "37 (5W10 + 10)"
+  },
+  "str": 17,
+  "dex": 15,
+  "con": 14,
+  "int": 3,
+  "wis": 12,
+  "cha": 8,
+  "strMod": 3,
+  "dexMod": 2,
+  "conMod": 2,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 13"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +6",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Smell",
+        "text": "The tiger has advantage on Wisdom (Perception) checks that rely on smell."
+      },
+      {
+        "name": "Pounce",
+        "text": "If the tiger moves at least 20 ft. straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a DC 13 Strength saving throw or be knocked prone. If the target is prone, the tiger can make one bite attack against it as a bonus action."
+      }
+    ],
+    "de": [
+      {
+        "name": "Anspringen",
+        "text": "Wenn der Tiger sich mindestens sechs Meter weit direkt auf eine Kreatur zubewegt und sie dann im selben Zug mit einem Klauenangriff trifft, muss das Ziel einen SG-13-Stärkerettungswurf bestehen, oder es wird umgestoßen. Wenn das Ziel liegt, kann der Tiger als Bonusaktion einen Bissangriff gegen es ausführen."
+      },
+      {
+        "name": "Scharfer Geruchssinn",
+        "text": "Die Tiger ist bei Weisheitswürfen (Wahrnehmung), die auf Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (1d10 + 3) piercing damage."
+      },
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 8 (1W10+3) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (1W8+3) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "medium",
+    "de": "mittel"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoid"
+  },
+  "alignment": {
+    "en": "neutral",
+    "de": "neutral"
+  },
+  "token": {
+    "file": "Tiger (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Tiger (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Tiger (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

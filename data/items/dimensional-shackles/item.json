@@ -1,0 +1,26 @@
+{
+  "id": 293,
+  "slug": "dimensional-shackles",
+  "name": "Dimensional Shackles",
+  "nameDe": "Dimensionsfesseln",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 300000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, rare You can use an action to place these shackles on an incapacitated creature. The shackles adjust to fit a creature of Small to Large size. In addition to serving as mundane manacles, the shackles prevent a creature bound by them from using any method of extradimensional movement, including teleportation or travel to a different plane of existence. They don't prevent the creature from passing through an interdimensional portal. You and any creature you designate when you use the shackles can use an action to remove them. Once every 30 days, the bound creature can make a DC 30 Strength (Athletics) check. On a success, the creature breaks free and destroys the shackles.",
+    "de": "Du kannst diese Fesseln als Aktion einer kampfunfähigen Kreatur anlegen. Die Fesseln passen sich an kleine bis große Kreaturen an. Zusätzlich zu ihrer Funktion als normale Handschellen verhindern diese Fesseln, dass eine mit ihnen gefesselte Kreatur irgendeine Form von extradimensionaler Bewegung nutzen kann. Dazu gehören Teleportation und Reisen in eine andere Existenzebene. Sie hindern die Kreatur nicht daran, ein interdimensionales Portal zu durchqueren. Du und jede Kreatur, die du bestimmst, wenn du die Fesseln verwendest, könnt sie als Aktion abnehmen. Die gefesselte Kreatur kann alle 30 Tage einmal einen SG-30-Stärkewurf (Athletik) ausführen. Bei einem Erfolg befreit sich die Kreatur und zerstört die Fesseln."
+  },
+  "image": "manacles",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

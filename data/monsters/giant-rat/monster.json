@@ -1,0 +1,334 @@
+{
+  "id": 136,
+  "slug": "giant-rat",
+  "name": "Giant Rat",
+  "nameDe": "Riesenratte Variante: Kranke Riesenratte",
+  "source": "SRD",
+  "meta": {
+    "en": "Small beast, unaligned",
+    "de": "Kleine Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/8",
+  "xp": 25,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "7 (2d6)",
+    "de": "7 (2W6)"
+  },
+  "str": 7,
+  "dex": 15,
+  "con": 11,
+  "int": 2,
+  "wis": 10,
+  "cha": 4,
+  "strMod": -2,
+  "dexMod": 2,
+  "conMod": 0,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Smell",
+        "text": "The rat has advantage on Wisdom (Perception) checks that rely on smell."
+      },
+      {
+        "name": "Pack Tactics",
+        "text": "The rat has advantage on an attack roll against a creature if at least one of the rat's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rudeltaktik",
+        "text": "Die Ratte ist bei Angriffswürfen gegen eine Kreatur im Vorteil, wenn sich mindestens einer ihrer Verbündeten, der nicht kampfunfähig ist, im Abstand von bis zu 1,5 Metern von der Kreatur befindet."
+      },
+      {
+        "name": "Scharfer Geruchssinn",
+        "text": "Die Ratte ist bei Weisheitswürfen (Wahrnehmung) im Vorteil, die auf Geruchssinn basieren."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 4 (1W4+2) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/538/1000/1000/636376332197953299.jpeg",
+  "size": {
+    "en": "small",
+    "de": "Kleines"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantRatForest (1).webp",
+    "variant": "forest"
+  },
+  "tokens": [
+    {
+      "file": "GiantRatForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantRatForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantRatForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantRatForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantRatForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantRatForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantRatForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantRatSwamp (1).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantRatSwamp (10).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantRatSwamp (11).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantRatSwamp (12).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantRatSwamp (13).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantRatSwamp (14).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantRatSwamp (15).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantRatSwamp (16).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantRatSwamp (2).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantRatSwamp (3).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantRatSwamp (4).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantRatSwamp (5).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantRatSwamp (6).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantRatSwamp (7).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantRatSwamp (8).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantRatSwamp (9).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantRatUnderdark (1).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantRatUnderdark (10).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantRatUnderdark (11).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantRatUnderdark (12).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantRatUnderdark (13).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantRatUnderdark (14).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantRatUnderdark (15).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantRatUnderdark (16).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantRatUnderdark (2).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantRatUnderdark (3).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantRatUnderdark (4).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantRatUnderdark (5).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantRatUnderdark (6).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantRatUnderdark (7).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantRatUnderdark (8).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantRatUnderdark (9).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantRatUrban (1).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantRatUrban (10).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantRatUrban (11).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantRatUrban (12).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantRatUrban (13).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantRatUrban (14).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantRatUrban (15).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantRatUrban (16).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantRatUrban (2).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantRatUrban (3).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantRatUrban (4).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantRatUrban (5).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantRatUrban (6).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantRatUrban (7).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantRatUrban (8).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantRatUrban (9).webp",
+      "variant": "urban"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

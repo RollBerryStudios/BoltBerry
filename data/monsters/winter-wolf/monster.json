@@ -1,0 +1,256 @@
+{
+  "id": 310,
+  "slug": "winter-wolf",
+  "name": "Winter Wolf",
+  "nameDe": "Winterwolf",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, neutral evil",
+    "de": "Große Monstrosität, neutral böse"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "75 (10d10 + 20)",
+    "de": "75 (10W10+20)"
+  },
+  "str": 18,
+  "dex": 13,
+  "con": 14,
+  "int": 7,
+  "wis": 12,
+  "cha": 8,
+  "strMod": 4,
+  "dexMod": 1,
+  "conMod": 2,
+  "intMod": -2,
+  "wisMod": 1,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 15"
+    ],
+    "de": [
+      "Passive Wahrnehmung 15"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Giant",
+      "Winter Wolf"
+    ],
+    "de": [
+      "Gemeinsprache",
+      "Riesisch",
+      "Winterwolfisch"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +3",
+    "Wahrnehmung +5"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Hearing and Smell",
+        "text": "The wolf has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+      },
+      {
+        "name": "Pack Tactics",
+        "text": "The wolf has advantage on an attack roll against a creature if at least one of the wolf's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+      },
+      {
+        "name": "Snow Camouflage",
+        "text": "The wolf has advantage on Dexterity (Stealth) checks made to hide in snowy terrain."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rudeltaktik",
+        "text": "Der Wolf ist bei Angriffswürfen gegen eine Kreatur im Vorteil, wenn sich mindestens einer seiner Verbündeten, der nicht kampfunfähig ist, im Abstand von bis zu 1,5 Metern von der Kreatur befindet."
+      },
+      {
+        "name": "Scharfes Gehör und scharfer Geruchssinn",
+        "text": "Der Wolf ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör oder Geruchssinn basieren, im Vorteil."
+      },
+      {
+        "name": "Schneetarnung",
+        "text": "Der Wolf ist bei Geschicklichkeitswürfen (Heimlichkeit), die er ausführt, um sich in verschneitem Gelände zu verstecken, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) piercing damage. If the target is a creature, it must succeed on a DC 14 Strength saving throw or be knocked prone."
+      },
+      {
+        "name": "Cold Breath",
+        "text": "The wolf exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a DC 12 Dexterity saving throw, taking 18 (4d8) cold damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 11 (2W6+4) Stichschaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-14-Stärkerettungswurf bestehen, oder es wird umgestoßen."
+      },
+      {
+        "name": "Kälteodem (Aufladung 5–6)",
+        "text": "Der Wolf atmet eisigen Wind in einem Kegel von 4,5 Metern aus. Jede Kreatur in diesem Bereich muss einen SG-12-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 18 (4W8) Kälteschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/54/315/315/636252725270715296.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "WinterWolf (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "WinterWolf (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (31).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "WinterWolf (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

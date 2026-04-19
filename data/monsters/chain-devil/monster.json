@@ -1,0 +1,229 @@
+{
+  "id": 64,
+  "slug": "chain-devil",
+  "name": "Chain Devil",
+  "nameDe": "Kettenteufel",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium fiend, lawful evil",
+    "de": "Mittelgroßer Unhold, rechtschaffen böse"
+  },
+  "challenge": "8",
+  "xp": 3900,
+  "ac": {
+    "en": "16 (Natural Armor)",
+    "de": "16 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "85 (10d8 + 40)",
+    "de": "85 (10W8+40)"
+  },
+  "str": 18,
+  "dex": 15,
+  "con": 18,
+  "int": 11,
+  "wis": 12,
+  "cha": 14,
+  "strMod": 4,
+  "dexMod": 2,
+  "conMod": 4,
+  "intMod": 0,
+  "wisMod": 1,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Infernal",
+      "telepathy 120 ft."
+    ],
+    "de": [
+      "Infernalisch",
+      "Telepathie auf 36 m"
+    ]
+  },
+  "savingThrows": [
+    "Kon +7",
+    "Wei +4",
+    "Cha +5"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Devil's Sight",
+        "text": "Magical darkness doesn't impede the devil's darkvision."
+      },
+      {
+        "name": "Magic Resistance",
+        "text": "The devil has advantage on saving throws against spells and other magical effects."
+      }
+    ],
+    "de": [
+      {
+        "name": "Magieresistenz",
+        "text": "Der Teufel ist bei Rettungswürfen gegen Zauber und andere magische Effekte im Vorteil."
+      },
+      {
+        "name": "Teufelssicht",
+        "text": "Die Dunkelsicht des Teufels wird nicht durch magische Dunkelheit beeinträchtigt."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The devil makes two attacks with its chains."
+      },
+      {
+        "name": "Chain",
+        "text": "Melee Weapon Attack: +8 to hit, reach 10 ft., one target. Hit: 11 (2d6 + 4) slashing damage. The target is grappled (escape DC 14) if the devil isn't already grappling a creature. Until this grapple ends, the target is restrained and takes 7 (2d6) piercing damage at the start of each of its turns."
+      },
+      {
+        "name": "Animate Chains",
+        "text": "Up to four chains the devil can see within 60 feet of it magically sprout razor-edged barbs and animate under the devil's control, provided that the chains aren't being worn or carried.\nEach animated chain is an object with AC 20, 20 hit points, resistance to piercing damage, and immunity to psychic and thunder damage. When the devil uses Multiattack on its turn, it can use each animated chain to make one additional chain attack. An animated chain can grapple one creature of its own but can't make attacks while grappling. An animated chain reverts to its inanimate state if reduced to 0 hit points or if the devil is incapacitated or dies."
+      },
+      {
+        "name": "Fear Constricting Mask",
+        "text": "When a creature the devil can see starts its turn within 10 feet of the devil, the devil can create an illusory mask resembling a loved one or bitter enemy. If the creature can see the devil, it must succeed on a DC 14 Wisdom saving throw or be frightened until the end of its turn."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Teufel führt zwei Angriffe mit seinen Ketten aus."
+      },
+      {
+        "name": "Kette",
+        "text": "Nahkampfwaffenangriff: +8 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 11 (2W6+4) Hiebschaden. Das Ziel wird gepackt (Rettungswurf-SG 14), sofern der Teufel nicht schon eine Kreatur gepackt hält. Ein gepacktes Ziel ist festgesetzt und erleidet zu Beginn jedes seiner Züge 7 (2W6) Stichschaden."
+      },
+      {
+        "name": "Ketten beleben (wird nach kurzer oder langer Rast aufgeladen)",
+        "text": "Bis zu vier Ketten im Abstand von bis zu 18 Metern vom Teufel, die er sehen kann, bekommen magisch rasiermesserscharfe Stacheln und werden unter der Kontrolle des Teufels belebt, sofern sie nicht getragen oder gehalten werden. Jede belebte Kette ist ein Objekt, besitzt eine RK von 20, 20 Trefferpunkte, ist gegen Stichschaden resistent und gegen psychischen Schaden sowie Schallschaden immun. Wenn der Teufel in seinem Zug Mehrfachangriff einsetzt, kann er jede belebte Kette verwenden, um einen zusätzlichen Kettenangriff auszuführen. Eine belebte Kette kann eine Kreatur packen, aber keine Angriffe ausführen, solange sie eine Kreatur gepackt hält. Sie kehrt zum unbelebten Zustand zurück, wenn ihre Trefferpunkte auf 0 verringert werden, wenn der Teufel kampfunfähig ist oder wenn er stirbt."
+      },
+      {
+        "name": "Beklemmende Maske",
+        "text": "Wenn eine Kreatur, die der Teufel sehen kann, ihren Zug im Abstand von bis zu neun Metern vom Teufel beginnt, kann der Teufel das illusionäre Erscheinungsbild einer geliebten, aber verstorbenen Person oder aber eines erbitterten Feinds der Kreatur annehmen. Wenn die Kreatur den Teufel sehen kann, muss sie einen SG-14-Weisheitsrettungswurf bestehen, oder sie ist bis zum Ende ihres Zugs verängstigt."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/235/1000/1000/636252766618069332.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "fiend",
+    "de": "Unhold (Teufel)"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "ChainDevil (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "ChainDevil (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "ChainDevil (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

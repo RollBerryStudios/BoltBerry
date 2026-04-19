@@ -1,0 +1,26 @@
+{
+  "id": 423,
+  "slug": "cubic-gate",
+  "name": "Cubic Gate",
+  "nameDe": "Würfel der Ebenen",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "LEGENDARY",
+    "de": "Legendär"
+  },
+  "cost": 4000000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, legendary This cube is 3 inches across and radiates palpable magical energy. The six sides of the cube are each keyed to a different plane of existence, one of which is the Material Plane. The other sides are linked to planes determined by the GM. You can use an action to press one side of the cube to cast the gate spell with it, opening a portal to the plane keyed to that side. Alternatively, if you use an action to press one side twice, you can cast the plane shift spell (save DC 17) with the cube and transport the targets to the plane keyed to that side. The cube has 3 charges. Each use of the cube expends 1 charge. The cube regains 1d3 expended charges daily at dawn.",
+    "de": "Dieser Würfel hat eine Kantenlänge von 7,5 Zentimetern und strahlt spürbare magische Energie aus. Die sechs Seiten des Würfels sind jeweils mit einer bestimmten Existenzebene verbunden. Eine davon ist die materielle Ebene. Die anderen Seiten sind mit Ebenen verbunden, die der SL bestimmt Du kannst als Aktion eine Seite des Würfels drücken und den Zauber Tor mit dem Würfel wirken. Dadurch öffnet sich ein Portal zu der zur jeweiligen Würfelseite gehörigen Ebene. Wenn du allerdings eine Aktion verwendest, um eine Seite des Würfels zweimal zu drücken, wirkst du den Zauber Ebenenwechsel  (Zauberrettungswurf-SG 17) mit dem Würfel und transportierst die Ziele zu der zur jeweiligen Würfelseite gehörigen Ebene. Der Würfel hat drei Ladungen. Jede Verwendung des Würfels verbraucht eine Ladung. Der Würfel erhält täglich im Morgengrauen 1W3 verbrauchte Ladungen zurück."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

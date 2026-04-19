@@ -1,0 +1,212 @@
+{
+  "id": 193,
+  "slug": "magma-mephit",
+  "name": "Magma Mephit",
+  "nameDe": "Magma-Mephit",
+  "source": "SRD",
+  "meta": {
+    "en": "Small elemental, neutral evil",
+    "de": "Kleines Elementar, neutral böse"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": "11",
+  "hp": {
+    "en": "22 (5d6 + 5)",
+    "de": "22 (5W6 + 5)"
+  },
+  "str": 8,
+  "dex": 12,
+  "con": 12,
+  "int": 7,
+  "wis": 10,
+  "cha": 10,
+  "strMod": -1,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": -2,
+  "wisMod": 0,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Ignan",
+      "Terran"
+    ],
+    "de": [
+      "Ignal",
+      "Terral"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Death Burst",
+        "text": "When the mephit dies, it explodes in a burst of lava. Each creature within 5 ft. of it must make a DC 11 Dexterity saving throw, taking 7 (2d6) fire damage on a failed save, or half as much damage on a successful one."
+      },
+      {
+        "name": "False Appearance",
+        "text": "While the mephit remains motionless, it is indistinguishable from an ordinary mound of magma."
+      },
+      {
+        "name": "Innate Spellcasting",
+        "text": "The mephit can innately cast heat metal (spell save DC 10), requiring no material components. Its innate spellcasting ability is Charisma."
+      }
+    ],
+    "de": [
+      {
+        "name": "Angeborenes Zauberwirken (1-mal täglich)",
+        "text": "Der Mephit kann den angeborenen Zauber Metall erhitzen (Zauberrettungswurf-SG 10) wirken, ohne Materialkomponenten zu benötigen. Sein Attribut zum angeborenen Zauberwirken ist Charisma."
+      },
+      {
+        "name": "Falsches Erscheinungsbild",
+        "text": "Solange der Mephit sich nicht bewegt, ist er nicht von einem gewöhnlichen Magmahaufen zu unterscheiden."
+      },
+      {
+        "name": "Todesexplosion",
+        "text": "Wenn der Mephit stirbt, vergeht er in einer Lavaexplosion. Jede Kreatur im Abstand von bis zu 1,5 Metern von ihm muss einen SG-11-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 7 (2W6) Feuerschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one creature. Hit: 3 (1d4 + 1) slashing damage plus 2 (1d4) fire damage."
+      },
+      {
+        "name": "Fire Breath",
+        "text": "The mephit exhales a 15-foot cone of fire. Each creature in that area must make a DC 11 Dexterity saving throw, taking 7 (2d6) fire damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 3 (1W4+1) Hiebschaden plus 2 (1W4) Feuerschaden."
+      },
+      {
+        "name": "Feuerodem (Aufladung 6)",
+        "text": "Der Mephit atmet Feuer in einem Kegel von 4,5 Metern aus. Jede Kreatur in diesem Bereich muss einen SG-11-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 7 (2W6) Feuerschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/18/292/315/315/636379804350894228.jpeg",
+  "size": {
+    "en": "small",
+    "de": "klein"
+  },
+  "type": {
+    "en": "elemental",
+    "de": "Elementar"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "MagmaMephit (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "MagmaMephit (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "MagmaMephit (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

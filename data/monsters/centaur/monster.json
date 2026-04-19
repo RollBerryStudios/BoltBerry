@@ -1,0 +1,291 @@
+{
+  "id": 63,
+  "slug": "centaur",
+  "name": "Centaur",
+  "nameDe": "Zentaur",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, neutral good",
+    "de": "Große Monstrosität, neutral gut"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "45 (6d10 + 12)",
+    "de": "45 (6W10+12)"
+  },
+  "str": 18,
+  "dex": 14,
+  "con": 14,
+  "int": 9,
+  "wis": 13,
+  "cha": 11,
+  "strMod": 4,
+  "dexMod": 2,
+  "conMod": 2,
+  "intMod": -1,
+  "wisMod": 1,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Elvish",
+      "Sylvan"
+    ],
+    "de": [
+      "Elfisch",
+      "Sylvanisch"
+    ]
+  },
+  "skills": [
+    "Athletik +6",
+    "Überlebenskunst +3",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Charge",
+        "text": "If the centaur moves at least 30 ft. straight toward a target and then hits it with a pike attack on the same turn, the target takes an extra 10 (3d6) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Sturmangriff",
+        "text": "Wenn der Zentaur sich mindestens neun Meter weit in gerader Linie auf ein Ziel zubewegt und es dann im selben Zug mit einem Pikenangriff trifft, erleidet das Ziel zusätzlich 10 (3W6) Stichschaden."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The centaur makes two attacks: one with its pike and one with its hooves or two with its longbow."
+      },
+      {
+        "name": "Pike",
+        "text": "Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 9 (1d10 + 4) piercing damage."
+      },
+      {
+        "name": "Hooves",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage."
+      },
+      {
+        "name": "Longbow",
+        "text": "Ranged Weapon Attack: +4 to hit, range 150/600 ft., one target. Hit: 6 (1d8 + 2) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Zentauren führen zwei Angriffe aus: entweder einen mit dem Spieß und einen mit den Hufen oder zwei mit dem Langbogen."
+      },
+      {
+        "name": "Hufe",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 11 (2W6+4) Wuchtschaden."
+      },
+      {
+        "name": "Pike",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 9 (1W10+4) Stichschaden."
+      },
+      {
+        "name": "Langbogen",
+        "text": "Fernkampfwaffenangriff: +4 auf Treffer, Reichweite 45/180 m, ein Ziel. Treffer: 6 (1W8+2) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/227/1000/1000/636252765573266420.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "neutral good",
+    "de": "neutral gut"
+  },
+  "token": {
+    "file": "CentaurFemaleMelee (1).webp",
+    "variant": "femaleMelee"
+  },
+  "tokens": [
+    {
+      "file": "CentaurFemaleMelee (2).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "CentaurFemaleMelee (3).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "CentaurFemaleMelee (4).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "CentaurFemaleMelee (5).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "CentaurFemaleMelee (6).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "CentaurFemaleMelee (7).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "CentaurFemaleMelee (8).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "CentaurFemaleMelee (9).webp",
+      "variant": "femaleMelee"
+    },
+    {
+      "file": "CentaurFemaleRanged (1).webp",
+      "variant": "femaleRanged"
+    },
+    {
+      "file": "CentaurFemaleRanged (10).webp",
+      "variant": "femaleRanged"
+    },
+    {
+      "file": "CentaurFemaleRanged (11).webp",
+      "variant": "femaleRanged"
+    },
+    {
+      "file": "CentaurFemaleRanged (12).webp",
+      "variant": "femaleRanged"
+    },
+    {
+      "file": "CentaurFemaleRanged (2).webp",
+      "variant": "femaleRanged"
+    },
+    {
+      "file": "CentaurFemaleRanged (3).webp",
+      "variant": "femaleRanged"
+    },
+    {
+      "file": "CentaurFemaleRanged (4).webp",
+      "variant": "femaleRanged"
+    },
+    {
+      "file": "CentaurFemaleRanged (5).webp",
+      "variant": "femaleRanged"
+    },
+    {
+      "file": "CentaurFemaleRanged (6).webp",
+      "variant": "femaleRanged"
+    },
+    {
+      "file": "CentaurFemaleRanged (7).webp",
+      "variant": "femaleRanged"
+    },
+    {
+      "file": "CentaurFemaleRanged (8).webp",
+      "variant": "femaleRanged"
+    },
+    {
+      "file": "CentaurFemaleRanged (9).webp",
+      "variant": "femaleRanged"
+    },
+    {
+      "file": "CentaurMaleMelee (1).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "CentaurMaleMelee (10).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "CentaurMaleMelee (11).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "CentaurMaleMelee (2).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "CentaurMaleMelee (3).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "CentaurMaleMelee (4).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "CentaurMaleMelee (5).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "CentaurMaleMelee (6).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "CentaurMaleMelee (7).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "CentaurMaleMelee (8).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "CentaurMaleMelee (9).webp",
+      "variant": "maleMelee"
+    },
+    {
+      "file": "CentaurMaleRanged (1).webp",
+      "variant": "maleRanged"
+    },
+    {
+      "file": "CentaurMaleRanged (2).webp",
+      "variant": "maleRanged"
+    },
+    {
+      "file": "CentaurMaleRanged (3).webp",
+      "variant": "maleRanged"
+    },
+    {
+      "file": "CentaurMaleRanged (4).webp",
+      "variant": "maleRanged"
+    },
+    {
+      "file": "CentaurMaleRanged (5).webp",
+      "variant": "maleRanged"
+    },
+    {
+      "file": "CentaurMaleRanged (6).webp",
+      "variant": "maleRanged"
+    },
+    {
+      "file": "CentaurMaleRanged (7).webp",
+      "variant": "maleRanged"
+    },
+    {
+      "file": "CentaurMaleRanged (8).webp",
+      "variant": "maleRanged"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

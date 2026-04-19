@@ -1,0 +1,58 @@
+{
+  "id": 326,
+  "slug": "tree-stride",
+  "name": "Tree Stride",
+  "nameDe": "Hölzerner Weg",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "ranger"
+    ],
+    "de": [
+      "Druide",
+      "Waldläufer"
+    ]
+  },
+  "type": {
+    "en": "5th-level conjuration",
+    "de": "Stufe 5 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You gain the ability to enter a tree and move from inside it to inside another tree of the same kind within 500 feet. Both trees must be living and at least the same size as you. You must use 5 feet of movement to enter a tree. You instantly know the location of all other trees of the same kind within 500 feet and, as part of the move used to enter the tree, can either pass into one of those trees or step out of the tree you're in. You appear in a spot of your choice within 5 feet of the destination tree, using another 5 feet of movement. If you have no movement left, you appear within 5 feet of the tree you entered. You can use this transportation ability once per round for the duration. You must end each turn outside a tree.",
+    "de": "Du erhältst die Fähigkeit, einen Baum zu betreten und aus einem anderen Baum derselben Art im Abstand von bis zu 150 Metern wieder herauszusteigen. Beide Bäume müssen lebendig und mindestens so groß wie du sein. Es kostet 1,5 Meter deiner Bewegungsrate, den Baum zu betreten. Du erfährst sofort die Position aller anderen Bäume derselben Art im Abstand von bis zu 150 Metern. Als Teil der Bewegung, den Baum zu betreten, kannst du entweder in einen dieser Bäume wechseln und oder aus dem Baum heraustreten, in dem du dich befindest. Du erscheinst an einem Ort deiner Wahl im Abstand von bis zu 1,5 Metern vom Zielbaum, was dich weitere 1,5 Meter deiner Bewegungsrate kostet. Hast du keine Bewegungsrate übrig, erscheinst du im Abstand von bis zu 1,5 Metern von dem Baum, den du betreten hast Während der Wirkungsdauer kannst du diese Transportmöglichkeit einmal pro Runde verwenden. Du musst jeden Zug außerhalb eines Baums beenden."
+  },
+  "image": "teleportation-via-plants",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

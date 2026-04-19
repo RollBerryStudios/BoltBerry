@@ -1,0 +1,199 @@
+{
+  "id": 175,
+  "slug": "hyena",
+  "name": "Hyena",
+  "nameDe": "Hyäne",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "11",
+    "de": "11"
+  },
+  "hp": {
+    "en": "5 (1d8 + 1)",
+    "de": "5 (1W8+1)"
+  },
+  "str": 11,
+  "dex": 13,
+  "con": 12,
+  "int": 2,
+  "wis": 12,
+  "cha": 5,
+  "strMod": 0,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Pack Tactics",
+        "text": "The hyena has advantage on an attack roll against a creature if at least one of the hyena's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rudeltaktik",
+        "text": "Die Hyäne ist bei Angriffswürfen gegen eine Kreatur im Vorteil, wenn sich mindestens einer ihrer Verbündeten, der nicht kampfunfähig ist, im Abstand von bis zu 1,5 Metern von der Kreatur befindet."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 3 (1d6) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +2 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 3 (1W6) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/9/902/1000/1000/636334288674955736.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Hyena (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Hyena (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hyena (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

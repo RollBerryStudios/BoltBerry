@@ -1,0 +1,195 @@
+{
+  "id": 161,
+  "slug": "guardian-naga",
+  "name": "Guardian Naga",
+  "nameDe": "Wächternaga",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, lawful good",
+    "de": "Große Monstrosität, rechtschaffen gut"
+  },
+  "challenge": "10",
+  "xp": 5900,
+  "ac": {
+    "en": "18 (Natural Armor)",
+    "de": "18 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "127 (15d10 + 45)",
+    "de": "127 (15W10+45)"
+  },
+  "str": 19,
+  "dex": 18,
+  "con": 16,
+  "int": 16,
+  "wis": 19,
+  "cha": 18,
+  "strMod": 4,
+  "dexMod": 4,
+  "conMod": 3,
+  "intMod": 3,
+  "wisMod": 4,
+  "chaMod": 4,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Celestial",
+      "Common"
+    ],
+    "de": [
+      "Celestisch",
+      "Gemeinsprache"
+    ]
+  },
+  "savingThrows": [
+    "Ges +8",
+    "Kon +7",
+    "Int +7",
+    "Wei +8",
+    "Cha +8"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Rejuvenation",
+        "text": "If it dies, the naga returns to life in 1d6 days and regains all its hit points. Only a wish spell can prevent this trait from functioning."
+      }
+    ],
+    "de": [
+      {
+        "name": "Wiederbelebung",
+        "text": "Wenn der Naga stirbt, wird er nach 1W6 Tagen wieder lebendig und erhält all seine Trefferpunkte zurück. Nur der Zauber Wunsch kann verhindern, dass dieses Merkmal wirkt."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +8 to hit, reach 10 ft., one creature. Hit: 8 (1d8 + 4) piercing damage, and the target must make a DC 15 Constitution saving throw, taking 45 (10d8) poison damage on a failed save, or half as much damage on a successful one."
+      },
+      {
+        "name": "Spit Poison",
+        "text": "Ranged Weapon Attack: +8 to hit, range 15/30 ft., one creature. Hit: The target must make a DC 15 Constitution saving throw, taking 45 (10d8) poison damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +8 auf Treffer, Reichweite 3 m, eine Kreatur. Treffer: 8 (1W8+4) Stichschaden, und das Ziel muss einen SG-15-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet es 45 (10W8) Giftschaden, anderenfalls die Hälfte."
+      },
+      {
+        "name": "Gift spucken",
+        "text": "Fernkampfwaffenangriff: +8 auf Treffer, Reichweite 4,5/9 m, eine Kreatur. Treffer: Das Ziel muss einen SG-15-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet es 45 (10W8) Giftschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/377/315/315/636252780447421771.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "lawful good",
+    "de": "rechtschaffen gut"
+  },
+  "token": {
+    "file": "GuradianNagaFemale (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GuradianNagaFemale (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GuradianNagaFemale (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GuradianNagaFemale (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GuradianNagaFemale (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GuradianNagaFemale (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GuradianNagaFemale (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GuradianNagaFemale (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GuradianNagaFemale (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GuradianNagaFemale (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GuradianNagaFemale (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GuradianNagaFemale (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GuradianNagaFemale (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GuradianNagaFemale (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GuradianNagaFemale (9).webp",
+      "variant": ""
+    },
+    {
+      "file": "GuardianNagaMale (1).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GuardianNagaMale (2).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GuardianNagaMale (3).webp",
+      "variant": "male"
+    },
+    {
+      "file": "GuardianNagaMale (4).webp",
+      "variant": "male"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

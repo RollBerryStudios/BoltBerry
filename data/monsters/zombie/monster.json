@@ -1,0 +1,1629 @@
+{
+  "id": 327,
+  "slug": "zombie",
+  "name": "Zombie",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium undead, neutral evil",
+    "de": "Mittelgroßer Untoter, neutral böse"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "8",
+    "de": "8"
+  },
+  "hp": {
+    "en": "22 (3d8 + 9)",
+    "de": "22 (3W8+9)"
+  },
+  "str": 13,
+  "dex": 6,
+  "con": 16,
+  "int": 3,
+  "wis": 6,
+  "cha": 5,
+  "strMod": 1,
+  "dexMod": -2,
+  "conMod": 3,
+  "intMod": -4,
+  "wisMod": -2,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 8"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 8"
+    ]
+  },
+  "languages": {
+    "en": [
+      "understands all languages it spoke in life but can't speak"
+    ],
+    "de": [
+      "Versteht alle zu Lebzeiten bekannten Sprachen",
+      "aber kann nicht sprechen"
+    ]
+  },
+  "savingThrows": [
+    "Wei +0"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Undead Fortitude",
+        "text": "If damage reduces the zombie to 0 hit points, it must make a Constitution saving throw with a DC of 5+the damage taken, unless the damage is radiant or from a critical hit. On a success, the zombie drops to 1 hit point instead."
+      }
+    ],
+    "de": [
+      {
+        "name": "Untote Ausdauer",
+        "text": "Wenn die Trefferpunkte des Zombies durch Schaden auf 0 sinken, muss der Zombie einen Konstitutionsrettungswurf mit SG 5 + erlittenem Schaden ausführen, sofern der Schaden nicht gleißend ist oder von einem kritischen Treffer stammt. Bei einem Erfolg behält der Zombie 1 Trefferpunkt."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Slam",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Hieb",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 4 (1W6+1) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/71/1000/1000/636252733510786769.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "undead",
+    "de": "Untoter"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "ZombieDragonborn (1).webp",
+    "variant": "dragonborn"
+  },
+  "tokens": [
+    {
+      "file": "ZombieDragonborn (10).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (11).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (12).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (13).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (14).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (15).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (16).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (17).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (18).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (19).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (2).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (20).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (21).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (22).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (23).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (24).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (25).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (26).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (27).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (28).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (29).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (3).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (30).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (31).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (32).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (33).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (34).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (35).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (36).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (37).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (38).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (39).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (4).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (40).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (41).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (42).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (5).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (6).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (7).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (8).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDragonborn (9).webp",
+      "variant": "dragonborn"
+    },
+    {
+      "file": "ZombieDwarfFemale (1).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "ZombieDwarfFemale (10).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "ZombieDwarfFemale (11).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "ZombieDwarfFemale (12).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "ZombieDwarfFemale (13).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "ZombieDwarfFemale (14).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "ZombieDwarfFemale (15).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "ZombieDwarfFemale (16).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "ZombieDwarfFemale (2).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "ZombieDwarfFemale (3).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "ZombieDwarfFemale (4).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "ZombieDwarfFemale (5).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "ZombieDwarfFemale (6).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "ZombieDwarfFemale (7).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "ZombieDwarfFemale (8).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "ZombieDwarfFemale (9).webp",
+      "variant": "dwarfFemale"
+    },
+    {
+      "file": "ZombieDwarfMale (1).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (10).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (11).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (12).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (13).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (14).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (15).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (16).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (17).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (18).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (19).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (2).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (20).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (21).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (22).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (23).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (24).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (3).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (4).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (5).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (6).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (7).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (8).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieDwarfMale (9).webp",
+      "variant": "dwarfMale"
+    },
+    {
+      "file": "ZombieElfFemale (1).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (14).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (15).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (17).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (20).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (21).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (23).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (24).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (26).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (27).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (28).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (3).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (30).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (31).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (32).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (38).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (39).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (5).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (6).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (7).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (8).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfFemale (9).webp",
+      "variant": "elfFemale"
+    },
+    {
+      "file": "ZombieElfMale (1).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (10).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (11).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (12).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (13).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (14).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (15).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (16).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (17).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (19).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (2).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (3).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (35).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (36).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (37).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (38).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (4).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (5).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (6).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieElfMale (7).webp",
+      "variant": "elfMale"
+    },
+    {
+      "file": "ZombieGnomeFemale (1).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (10).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (11).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (12).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (13).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (14).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (15).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (16).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (17).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (18).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (19).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (2).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (20).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (21).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (22).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (23).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (24).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (25).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (3).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (4).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (5).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (6).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (7).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (8).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeFemale (9).webp",
+      "variant": "gnomeFemale"
+    },
+    {
+      "file": "ZombieGnomeMale (1).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "ZombieGnomeMale (10).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "ZombieGnomeMale (12).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "ZombieGnomeMale (13).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "ZombieGnomeMale (14).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "ZombieGnomeMale (15).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "ZombieGnomeMale (17).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "ZombieGnomeMale (18).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "ZombieGnomeMale (2).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "ZombieGnomeMale (3).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "ZombieGnomeMale (4).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "ZombieGnomeMale (5).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "ZombieGnomeMale (6).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "ZombieGnomeMale (7).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "ZombieGnomeMale (8).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "ZombieGnomeMale (9).webp",
+      "variant": "gnomeMale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (1).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (10).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (11).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (12).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (13).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (14).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (15).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (16).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (17).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (18).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (19).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (2).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (20).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (21).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (22).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (23).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (24).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (3).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (4).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (5).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (6).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (7).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (8).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfFemale (9).webp",
+      "variant": "halfElfFemale"
+    },
+    {
+      "file": "ZombieHalfElfMale (1).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (10).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (11).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (12).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (13).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (14).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (15).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (16).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (17).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (18).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (19).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (2).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (20).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (21).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (22).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (23).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (24).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (25).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (26).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (27).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (28).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (3).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (4).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (5).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (6).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (7).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (8).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalfElfMale (9).webp",
+      "variant": "halfElfMale"
+    },
+    {
+      "file": "ZombieHalflingFemale (1).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (10).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (11).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (12).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (13).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (14).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (15).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (16).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (17).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (18).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (19).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (2).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (20).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (3).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (4).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (5).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (6).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (7).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (8).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingFemale (9).webp",
+      "variant": "halflingFemale"
+    },
+    {
+      "file": "ZombieHalflingMale (1).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (10).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (11).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (12).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (13).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (14).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (15).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (16).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (17).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (18).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (19).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (2).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (20).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (3).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (4).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (5).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (6).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (7).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (8).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalflingMale (9).webp",
+      "variant": "halflingMale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (1).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (10).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (11).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (12).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (13).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (14).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (15).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (16).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (17).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (18).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (19).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (2).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (20).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (3).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (4).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (5).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (6).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (7).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (8).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcFemale (9).webp",
+      "variant": "halfOrcFemale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (1).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (10).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (11).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (12).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (13).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (14).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (15).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (16).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (17).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (18).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (19).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (2).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (20).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (21).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (3).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (4).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (5).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (6).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (7).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (8).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHalfOrcMale (9).webp",
+      "variant": "halfOrcMale"
+    },
+    {
+      "file": "ZombieHumanFemale (1).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (10).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (11).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (12).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (13).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (14).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (15).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (16).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (17).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (18).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (19).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (2).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (20).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (21).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (22).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (23).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (3).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (4).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (5).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (6).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (7).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (8).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanFemale (9).webp",
+      "variant": "humanFemale"
+    },
+    {
+      "file": "ZombieHumanMale (1).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (10).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (11).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (12).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (13).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (14).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (15).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (16).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (17).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (18).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (19).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (2).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (3).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (4).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (5).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (6).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (7).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (8).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieHumanMale (9).webp",
+      "variant": "humanMale"
+    },
+    {
+      "file": "ZombieTieflingFemale (1).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (10).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (11).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (12).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (13).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (14).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (15).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (16).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (17).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (18).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (19).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (2).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (20).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (3).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (4).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (5).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (6).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (7).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (8).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingFemale (9).webp",
+      "variant": "tieflingFemale"
+    },
+    {
+      "file": "ZombieTieflingMale (1).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (10).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (11).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (12).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (13).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (14).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (15).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (16).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (17).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (18).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (19).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (2).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (20).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (21).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (3).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (4).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (5).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (6).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (7).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (8).webp",
+      "variant": "tieflingMale"
+    },
+    {
+      "file": "ZombieTieflingMale (9).webp",
+      "variant": "tieflingMale"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

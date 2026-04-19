@@ -1,0 +1,58 @@
+{
+  "id": 151,
+  "slug": "death-ward",
+  "name": "Death Ward",
+  "nameDe": "Todesschutz",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "paladin"
+    ],
+    "de": [
+      "Kleriker",
+      "Paladin"
+    ]
+  },
+  "type": {
+    "en": "4th-level abjuration",
+    "de": "Stufe 4 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "8 hours",
+    "de": "8 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You touch a creature and grant it a measure of protection from death. The first time the target would drop to 0 hit points as a result of taking damage, the target instead drops to 1 hit point, and the spell ends. If the spell is still in effect when the target is subjected to an effect that would kill it instantaneously without dealing damage, that effect is instead negated against the target, and the spell ends.",
+    "de": "Du berührst eine Kreatur und verleihst ihr einen gewissen Schutz vor dem Tod. Wenn die Trefferpunkte des Ziels durch erlittenen Schaden erstmals auf 0 sinken würden, sinken sie stattdessen auf 1 Trefferpunkt und der Zauber endet. Erleidet das Ziel während der Wirkungsdauer einen Effekt, der es sofort töten würde, ohne Schaden zu verursachen, wird die Kreatur nicht von diesem Effekt betroffen und der Zauber endet."
+  },
+  "image": "abjuration",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

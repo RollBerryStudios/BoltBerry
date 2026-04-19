@@ -1,0 +1,170 @@
+{
+  "id": 230,
+  "slug": "pony",
+  "name": "Pony",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/8",
+  "xp": 25,
+  "ac": "10",
+  "hp": {
+    "en": "11 (2d8 + 2)",
+    "de": "11 (2W8 + 2)"
+  },
+  "str": 15,
+  "dex": 10,
+  "con": 13,
+  "int": 2,
+  "wis": 11,
+  "cha": 7,
+  "strMod": 2,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Hooves",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (2d4 + 2) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Hufe",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (2W4+2) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "medium",
+    "de": "mittel"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Bestie"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "ohne Ausrichtung"
+  },
+  "token": {
+    "file": "Pony (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Pony (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Pony (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

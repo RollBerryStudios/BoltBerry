@@ -1,0 +1,165 @@
+{
+  "id": 27,
+  "slug": "ankheg",
+  "name": "Ankheg",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, unaligned",
+    "de": "Große Monstrosität, ohne Gesinnung"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "14 (Natural Armor), 11 While Prone",
+    "de": "14 (Natürliche Rüstung), 11 wenn niedergeschmettert"
+  },
+  "hp": {
+    "en": "39 (6d10 + 6)",
+    "de": "39 (6W10 + 6)"
+  },
+  "str": 17,
+  "dex": 11,
+  "con": 13,
+  "int": 1,
+  "wis": 13,
+  "cha": 6,
+  "strMod": 3,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": -5,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "burrow": {
+      "en": 10,
+      "de": 3
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "tremorsense 60 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Erschütterungssinn 18 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage plus 3 (1d6) acid damage. If the target is a Large or smaller creature, it is grappled (escape DC 13). Until this grapple ends, the ankheg can bite only the grappled creature and has advantage on attack rolls to do so."
+      },
+      {
+        "name": "Acid Spray",
+        "text": "The ankheg spits acid in a line that is 30 ft. long and 5 ft. wide, provided that it has no creature grappled. Each creature in that line must make a DC 13 Dexterity saving throw, taking 10 (3d6) acid damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Hiebschaden plus 3 (1W6) Säureschaden. Ist das Ziel eine höchstens große Kreatur, so wird sie gepackt (Rettungswurf-SG 13). Solange der Ankheg eine Kreatur gepackt hält, kann er nur diese Kreatur beißen und ist bei entsprechenden Angriffswürfen im Vorteil."
+      },
+      {
+        "name": "Säure versprühen (Aufladung 6)",
+        "text": "Der Ankheg versprüht Säure in einem neun Meter langen und 1,5 Meter breiten Bereich, sofern er gerade keine Kreatur gepackt hat. Jede Kreatur in dieser Linie muss einen SG-13-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 10 (3W6) Säureschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/161/315/315/636252759871983921.jpeg",
+  "size": {
+    "en": "large",
+    "de": "groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "ohne Ausrichtung"
+  },
+  "token": {
+    "file": "Ankheg (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Ankheg (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ankheg (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ankheg (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ankheg (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ankheg (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ankheg (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ankheg (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ankheg (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ankheg (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ankheg (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ankheg (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ankheg (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ankheg (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ankheg (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Ankheg (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,189 @@
+{
+  "id": 194,
+  "slug": "magmin",
+  "name": "Magmin",
+  "source": "SRD",
+  "meta": {
+    "en": "Small elemental, chaotic neutral",
+    "de": "Kleines Elementar, chaotisch neutral"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "14 (Natural Armor)",
+    "de": "14 (Natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "9 (2d6 + 2)",
+    "de": "9 (2W6 + 2)"
+  },
+  "str": 7,
+  "dex": 15,
+  "con": 12,
+  "int": 8,
+  "wis": 11,
+  "cha": 10,
+  "strMod": -2,
+  "dexMod": 2,
+  "conMod": 1,
+  "intMod": -1,
+  "wisMod": 0,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Ignan"
+    ],
+    "de": [
+      "Ignal"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Death Burst",
+        "text": "When the magmin dies, it explodes in a burst of fire and magma. Each creature within 10 ft. of it must make a DC 11 Dexterity saving throw, taking 7 (2d6) fire damage on a failed save, or half as much damage on a successful one. Flammable objects that aren't being worn or carried in that area are ignited."
+      },
+      {
+        "name": "Ignited Illumination",
+        "text": "As a bonus action, the magmin can set itself ablaze or extinguish its flames. While ablaze, the magmin sheds bright light in a 10-foot radius and dim light for an additional 10 ft."
+      }
+    ],
+    "de": [
+      {
+        "name": "Entflammte Beleuchtung",
+        "text": "Als Bonusaktion kann der Magmin sich selbst in Flammen aufgehen lassen oder aber seine Flammen löschen. Brennend spendet der Magmin im Radius von drei Metern helles Licht und im Radius von weiteren drei Metern dämmriges Licht."
+      },
+      {
+        "name": "Todesexplosion",
+        "text": "Wenn der Magmin stirbt, explodiert er mit einem Ausbruch von Feuer und Magma. Jede Kreatur im Abstand von bis zu drei Metern von ihm muss einen SG-11-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 7 (2W6) Feuerschaden, anderenfalls die Hälfte. Brennbare Objekte in dem Bereich, die nicht getragen oder gehalten werden, fangen Feuer."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Touch",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (2d6) fire damage. If the target is a creature or a flammable object, it ignites. Until a target takes an action to douse the fire, the target takes 3 (1d6) fire damage at the end of each of its turns."
+      }
+    ],
+    "de": [
+      {
+        "name": "Berührung",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (2W6) Feuerschaden. Wenn das Ziel eine Kreatur oder ein brennbares Objekt ist, fängt es Feuer. Es erleidet am Ende jedes seiner Züge 3 (1W6) Feuerschaden, bis eine Kreatur eine Aktion verwendet, um das Feuer zu löschen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/183/315/315/636252762034276620.jpeg",
+  "size": {
+    "en": "small",
+    "de": "klein"
+  },
+  "type": {
+    "en": "elemental",
+    "de": "Elementar"
+  },
+  "alignment": {
+    "en": "chaotic neutral",
+    "de": "chaotisch neutral"
+  },
+  "token": {
+    "file": "Magmin (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Magmin (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Magmin (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

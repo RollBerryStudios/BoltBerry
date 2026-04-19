@@ -1,0 +1,210 @@
+{
+  "id": 81,
+  "slug": "death-dog",
+  "name": "Death Dog",
+  "nameDe": "Todeshund",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium monstrosity, neutral evil",
+    "de": "Mittelgroße Monstrosität, neutral böse"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "39 (6d8 + 12)",
+    "de": "39 (6W8+12)"
+  },
+  "str": 15,
+  "dex": 14,
+  "con": 14,
+  "int": 3,
+  "wis": 13,
+  "cha": 6,
+  "strMod": 2,
+  "dexMod": 2,
+  "conMod": 2,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 15"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 15"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +4",
+    "Wahrnehmung +5"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Two-Headed",
+        "text": "The dog has advantage on Wisdom (Perception) checks and on saving throws against being blinded, charmed, deafened, frightened, stunned, or knocked unconscious."
+      }
+    ],
+    "de": [
+      {
+        "name": "Zweiköpfig",
+        "text": "Der Hund ist bei Weisheitswürfen (Wahrnehmung) und bei Rettungswürfen gegen die Zustände Betäubt, Bewusstlos, Bezaubert, Blind, Taub und Verängstigt im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The dog makes two bite attacks."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage. If the target is a creature, it must succeed on a DC 12 Constitution saving throw against disease or become poisoned until the disease is cured. Every 24 hours that elapse, the creature must repeat the saving throw, reducing its hit point maximum by 5 (1d10) on a failure. This reduction lasts until the disease is cured. The creature dies if the disease reduces its hit point maximum to 0."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Hund führt zwei Bissangriffe aus."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-12-Konstitutionsrettungswurf gegen die Krankheit bestehen, oder es ist vergiftet, bis die Krankheit geheilt wird. Nach jeweils 24 Stunden muss die Kreatur den Rettungswurf wiederholen. Scheitert der Wurf, wird ihr Trefferpunktemaximum um 5 (1W10) verringert. Es bleibt verringert, bis die Krankheit geheilt ist. Wenn das Trefferpunktemaximum durch die Krankheit auf 0 sinkt, stirbt die Kreatur."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/265/1000/1000/636252768823194310.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "DeathDog (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "DeathDog (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "DeathDog (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

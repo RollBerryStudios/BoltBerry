@@ -1,0 +1,23 @@
+{
+  "id": 118,
+  "slug": "paper-one-sheet",
+  "name": "Paper (one sheet)",
+  "nameDe": "Papier (ein Blatt)",
+  "category": {
+    "en": "ADVENTURING_GEAR",
+    "de": "Ausrüstung"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 20,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 0,
+  "image": "paper",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

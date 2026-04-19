@@ -1,0 +1,64 @@
+{
+  "id": 141,
+  "slug": "sleet-storm",
+  "name": "Sleet Storm",
+  "nameDe": "Schneesturm",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Druide",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level conjuration",
+    "de": "Stufe 3 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "150 feet",
+    "de": "45 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a pinch of dust and a few drops of water",
+      "de": "eine Prise Staub und ein paar Tropfen Wasser"
+    },
+    "raw": {
+      "en": "V, S, M (a pinch of dust and a few drops of water)",
+      "de": "V, G, M (eine Prise Staub und ein paar Tropfen Wasser)"
+    }
+  },
+  "description": {
+    "en": "Until the spell ends, freezing rain and sleet fall in a 20-foot-tall cylinder with a 40-foot radius centered on a point you choose within range. The area is heavily obscured, and exposed flames in the area are doused. The ground in the area is covered with slick ice, making it difficult terrain. When a creature enters the spell's area for the first time on a turn or starts its turn there, it must make a dexterity saving throw. On a failed save, it falls prone. If a creature is concentrating in the spell's area, the creature must make a successful constitution saving throw against your spell save DC or lose concentration.",
+    "de": "Bis der Zauber endet, fallen Regen und Schnee in einem sechs Meter hohen Zylinder mit einem Radius von zwölf Metern, der auf einen Punkt deiner Wahl in Reichweite zentriert ist Der Bereich ist komplett verschleiert und offene Flammen erlöschen darin. Der Boden in dem Bereich ist mit glattem Eis bedeckt und wird zu schwierigem Gelände. Wenn eine Kreatur den Bereich des Zaubers in einem Zug erstmals betritt oder ihren Zug darin beginnt, muss sie einen Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, fällt sie hin und ist liegend. Konzentriert sich eine Kreatur im Bereich des Zaubers, muss sie einen Konstitutionsrettungswurf gegen deinen Zauberrettungswurf-SG bestehen, um nicht die Konzentration zu verlieren."
+  },
+  "image": "sleet-storm",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

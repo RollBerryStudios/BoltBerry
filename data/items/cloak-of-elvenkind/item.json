@@ -1,0 +1,30 @@
+{
+  "id": 320,
+  "slug": "cloak-of-elvenkind",
+  "name": "Cloak of Elvenkind",
+  "nameDe": "Elfenumhang",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 500000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon (requires attunement) While you wear this cloak with its hood up, Wisdom (Perception) checks made to see you have disadvantage, and you have advantage on Dexterity (Stealth) checks made to hide, as the cloak's color shifts to camouflage you. Pulling the hood up or down requires an action.",
+    "de": "Wenn du diesen Umhang mit aufgesetzter Kapuze trägst, sind Weisheitswürfe (Wahrnehmung), die erfolgen, um dich zu entdecken, im Nachteil. Außerdem du bei Geschicklichkeitswürfen (Heimlichkeit), um dich zu verstecken, im Vorteil, da der Umhang sich zur Tarnung and die Farbe der Umgebung anpasst. Das Auf- oder Absetzen der Kapuze erfordert eine Aktion."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "cloak",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

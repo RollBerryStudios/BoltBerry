@@ -1,0 +1,26 @@
+{
+  "id": 257,
+  "slug": "goggles-of-night",
+  "name": "Goggles of Night",
+  "nameDe": "Nachtbrille",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 150000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon While wearing these dark lenses, you have darkvision out to a range of 60 feet. If you already have darkvision, wearing the goggles increases its range by 60 feet.",
+    "de": "Diese dunkle Brille gibt dir Dunkelsicht auf eine Entfernung von bis zu 18 Metern. Hast du bereits Dunkelsicht, so erhöht diese Brille deine Sichtweite um 18 Meter."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

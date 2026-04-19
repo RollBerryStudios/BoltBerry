@@ -1,0 +1,30 @@
+{
+  "id": 385,
+  "slug": "staff-of-healing",
+  "name": "Staff of Healing",
+  "nameDe": "Stab der Heilung",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 1300000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Staff, rare (requires attunement by a bard, cleric, or druid) This staff has 10 charges. While holding it, you can use an action to expend 1 or more of its charges to cast one of the following spells from it, using your spell save DC and spellcasting ability modifier: cure wounds (1 charge per spell level, up to 4th), lesser restoration (2 charges), or mass cure wounds (5 charges). The staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff vanishes in a flash of light, lost forever.",
+    "de": "Dieser Stab hat zehn Ladungen. Wenn du ihn hältst, kannst du als Aktion eine oder mehrere Ladungen verbrauchen, um einen der folgenden Zauber mit ihm zu wirken, wobei du deinen Zauberrettungswurf-SG und Zauberwirken-Attributsmodifikator verwendest: Massen-Wunden heilen  (fünf Ladungen) Schwache Genesung  (zwei Ladungen) oder Wunden heilen  (eine Ladung pro Zaubergrad, bis höchstens dem 4. Grad), Der Stab erhält täglich im Morgengrauen 1W6+4 verbrauchte Ladungen zurück. Wenn du die letzte Ladung verbraucht hast, würfle mit einem W20. Bei einer 1 verschwindet der Stab mit einem Lichtblitz und ist für immer verloren."
+  },
+  "properties": {
+    "en": "requires attunement by a bard",
+    "de": "erfordert einstimmung eines barden"
+  },
+  "image": "staff",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

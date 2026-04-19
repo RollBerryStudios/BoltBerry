@@ -1,0 +1,58 @@
+{
+  "id": 131,
+  "slug": "alter-self",
+  "name": "Alter Self",
+  "nameDe": "Gestalt verändern",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "2nd-Level Transmutation",
+    "de": "Stufe 2 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You assume a different form. When you cast the spell, choose one of the following options, the effects of which last for the duration of the spell. While the spell lasts, you can end one option as an action to gain the benefits of a different one. ***Aquatic Adaptation.*** You adapt your body to an aquatic environment, sprouting gills and growing webbing between your fingers. You can breathe underwater and gain a swimming speed equal to your walking speed. ***Change Appearance.*** You transform your appearance. You decide what you look like, including your height, weight, facial features, sound of your voice, hair length, coloration, and distinguishing characteristics, if any. You can make yourself appear as a member of another race, though none of your statistics change. You also can't appear as a creature of a different size than you, and your basic shape stays the same; if you're bipedal, you can't use this spell to become quadrupedal, for instance. At any time for the duration of the spell, you can use your action to change your appearance in this way again. ***Natural Weapons.*** You grow claws, fangs, spines, horns, or a different natural weapon of your choice. Your unarmed strikes deal 1d6 bludgeoning, piercing, or slashing damage, as appropriate to the natural weapon you chose, and you are proficient with your unarmed strikes. Finally, the natural weapon is magic and you have a +1 bonus to the attack and damage rolls you make using it.",
+    "de": "Du nimmst eine andere Gestalt an. Wenn du den Zauber wirkst, wähle eine der folgenden Optionen aus. Deren Effekt hält für die Wirkungsdauer des Zaubers an. Solange der Zauber anhält, kannst du als Aktion eine Option beenden, um die Vorzüge einer anderen zu erhalten. Aquatische Anpassung:  Du passt deinen Körper an eine aquatische Umgebung an. Dir wachsen Kiemen und Schwimmhäute zwischen den Fingern. Du kannst unter Wasser atmen und erhältst eine Schwimmbewegungsrate, die deiner Schrittbewegungsrate entspricht. Aussehen ändern:  Du veränderst dein Aussehen. Du bestimmst, wie du aussiehst: Größe, Gewicht, Gesichtszüge, Klang deiner Stimme, Haarlänge, Haarfarbe, sowie etwaige besondere Merkmale. Du kannst dich als Mitglied eines anderen Volks ausgeben, wobei deine Werte unverändert bleiben. Du kannst nicht als Kreatur einer anderen Größenkategorie erscheinen. Deine Grundform bleibt ebenfalls gleich: Als Zweibeiner kannst du dich mit diesem Zauber beispielsweise nicht in einen Vierbeiner verwandeln. Während der Wirkungsdauer kannst du deine Aktion jederzeit verwenden, um dein Aussehen erneut zu verändern. Natürliche Waffen:  Dir wachsen Klauen, Fangzähne, Stacheln, Hörner oder andere natürliche Waffen deiner Wahl. Deine waffenlosen Angriffe verursachen 1W6 Wucht-, Stich- oder Hiebschaden, je nachdem, welche natürliche Waffe du gewählt hast. Du bist zudem in waffenlosen Angriffen geübt Die natürliche Waffe ist magisch und du erhältst einen Bonus von +1 auf alle Angriffs- und Schadenswürfe, die du mit ihr ausführst"
+  },
+  "image": "alter-self",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

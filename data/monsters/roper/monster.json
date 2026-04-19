@@ -1,0 +1,202 @@
+{
+  "id": 246,
+  "slug": "roper",
+  "name": "Roper",
+  "nameDe": "Seiler",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, neutral evil",
+    "de": "Große Monstrosität, neutral böse"
+  },
+  "challenge": "5",
+  "xp": 1800,
+  "ac": {
+    "en": "20 (Natural Armor)",
+    "de": "20 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "93 (11d10 + 33)",
+    "de": "93 (11W10+33)"
+  },
+  "str": 18,
+  "dex": 8,
+  "con": 17,
+  "int": 7,
+  "wis": 16,
+  "cha": 6,
+  "strMod": 4,
+  "dexMod": -1,
+  "conMod": 3,
+  "intMod": -2,
+  "wisMod": 3,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "climb": {
+      "en": 10,
+      "de": 3
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 16"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 16"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +5",
+    "Wahrnehmung +6"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "False Appearance",
+        "text": "While the roper remains motionless, it is indistinguishable from a normal cave formation, such as a stalagmite."
+      },
+      {
+        "name": "Grasping Tendrils",
+        "text": "The roper can have up to six tendrils at a time. Each tendril can be attacked (AC 20; 10 hit points; immunity to poison and psychic damage). Destroying a tendril deals no damage to the roper, which can extrude a replacement tendril on its next turn. A tendril can also be broken if a creature takes an action and succeeds on a DC 15 Strength check against it."
+      },
+      {
+        "name": "Spider Climb",
+        "text": "The roper can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+      }
+    ],
+    "de": [
+      {
+        "name": "Falsches Erscheinungsbild",
+        "text": "Solange der Seiler sich nicht bewegt, ist er nicht von einer gewöhnlichen Höhlenformation wie einem Stalagmiten zu unterscheiden."
+      },
+      {
+        "name": "Greifende Tentakel",
+        "text": "Der Seiler kann bis zu sechs Tentakel zugleich haben. Jedes Tentakel kann angegriffen werden (RK 20, 10 Trefferpunkte, gegen Gift- und psychischen Schaden immun). Das Zerstören eines Tentakels fügt dem Seiler keinen Schaden zu. Dieser kann in seinem nächsten Zug einen Ersatztentakel bilden. Ein Tentakel kann auch zerstört werden, indem eine Kreatur eine Aktion verwendet und einen SG-15-Stärkewurf gegen den Tentakel besteht."
+      },
+      {
+        "name": "Spinnenklettern",
+        "text": "Der Seiler kann ohne Attributswürfe schwierige Oberflächen erklimmen und sich kopfüber an Decken entlang bewegen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The roper makes four attacks with its tendrils, uses Reel, and makes one attack with its bite."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 22 (4d8 + 4) piercing damage."
+      },
+      {
+        "name": "Tendril",
+        "text": "Melee Weapon Attack: +7 to hit, reach 50 ft., one creature. Hit: The target is grappled (escape DC 15). Until the grapple ends, the target is restrained and has disadvantage on Strength checks and Strength saving throws, and the roper can't use the same tendril on another target."
+      },
+      {
+        "name": "Reel",
+        "text": "The roper pulls each creature grappled by it up to 25 ft. straight toward it."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Seiler führt vier Angriffe mit seinen Tentakeln aus, setzt Einholen ein und führt einen Bissangriff aus."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 22 (4W8+4) Stichschaden."
+      },
+      {
+        "name": "Tentakel",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 15 m, eine Kreatur. Treffer: Das Ziel wird gepackt (Rettungswurf-SG 15). Solange das Ziel gepackt ist, ist es festgesetzt und bei Stärkewürfen und Stärkerettungswürfen im Nachteil, und der Seiler kann das betreffende Tentakel gegen kein anderes Ziel einsetzen."
+      },
+      {
+        "name": "Einholen",
+        "text": "Der Seiler zieht jede gepackte Kreatur bis zu 7,5 Meter weit direkt auf sich zu."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/560/1000/1000/636376344528091115.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "Roper (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Roper (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Roper (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Roper (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Roper (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Roper (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Roper (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Roper (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Roper (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Roper (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Roper (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Roper (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Roper (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

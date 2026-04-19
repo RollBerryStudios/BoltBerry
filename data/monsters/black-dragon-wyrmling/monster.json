@@ -1,0 +1,214 @@
+{
+  "id": 49,
+  "slug": "black-dragon-wyrmling",
+  "name": "Black Dragon Wyrmling",
+  "nameDe": "Schwarzer Drachennestling",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium dragon, chaotic evil",
+    "de": "Mittelgroßer Drache, chaotisch böse"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "17 (Natural Armor)",
+    "de": "17 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "33 (6d8 + 6)",
+    "de": "33 (6W8+6)"
+  },
+  "str": 15,
+  "dex": 14,
+  "con": 13,
+  "int": 10,
+  "wis": 11,
+  "cha": 13,
+  "strMod": 2,
+  "dexMod": 2,
+  "conMod": 1,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "swim": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 10 ft.",
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Blindsicht 3 m",
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Draconic"
+    ],
+    "de": [
+      "Drakonisch"
+    ]
+  },
+  "savingThrows": [
+    "Ges +4",
+    "Kon +3",
+    "Wei +2",
+    "Cha +3"
+  ],
+  "skills": [
+    "Heimlichkeit +4",
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Amphibious",
+        "text": "The dragon can breathe air and water."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amphibisch",
+        "text": "Der Drache kann Luft und Wasser atmen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (1d10 + 2) piercing damage plus 2 (1d4) acid damage."
+      },
+      {
+        "name": "Acid Breath",
+        "text": "The dragon exhales acid in a 15-foot line that is 5 feet wide. Each creature in that line must make a DC 11 Dexterity saving throw, taking 22 (5d8) acid damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (1W10+2) Stichschaden plus 2 (1W4) Säureschaden."
+      },
+      {
+        "name": "Säureodem (Aufladung 5–6)",
+        "text": "Der Drache atmet Säure in einer 4,5 Meter langen, 1,5 Meter breiten Linie aus. Jede Kreatur in dieser Linie muss einen SG-11-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 22 (5W8) Säureschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/496/1000/1000/636376308217017511.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "dragon",
+    "de": "Drache"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "BlackDragonWyrmling (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "BlackDragonWyrmling (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlackDragonWyrmling (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,223 @@
+{
+  "id": 206,
+  "slug": "mummy",
+  "name": "Mummy",
+  "nameDe": "Mumie",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium undead, lawful evil",
+    "de": "Mittelgroßer Untoter, rechtschaffen böse"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "11 (Natural Armor)",
+    "de": "11 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "58 (9d8 + 18)",
+    "de": "58 (9W8+18)"
+  },
+  "str": 16,
+  "dex": 8,
+  "con": 15,
+  "int": 6,
+  "wis": 10,
+  "cha": 12,
+  "strMod": 3,
+  "dexMod": -1,
+  "conMod": 2,
+  "intMod": -2,
+  "wisMod": 0,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "the languages it knew in life"
+    ],
+    "de": [
+      "Die zu Lebzeiten bekannten Sprachen"
+    ]
+  },
+  "savingThrows": [
+    "Wei +2"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The mummy can use its Dreadful Glare and makes one attack with its rotting fist."
+      },
+      {
+        "name": "Rotting Fist",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage plus 10 (3d6) necrotic damage. If the target is a creature, it must succeed on a DC 12 Constitution saving throw or be cursed with mummy rot. The cursed target can't regain hit points, and its hit point maximum decreases by 10 (3d6) for every 24 hours that elapse. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic."
+      },
+      {
+        "name": "Dreadful Glare",
+        "text": "The mummy targets one creature it can see within 60 ft. of it. If the target can see the mummy, it must succeed on a DC 11 Wisdom saving throw against this magic or become frightened until the end of the mummy's next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all mummies (but not mummy lords) for the next 24 hours."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Die Mumie kann ihr Fürchterliches Starren einsetzen und führt einen Angriff mit ihrer Verrottenden Faust aus."
+      },
+      {
+        "name": "Verrottende Faust",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Wuchtschaden plus 10 (3W6) nekrotischer Schaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-12-Konstitutionsrettungswurf bestehen, oder es wird mit Mumienfäule verflucht. Das verfluchte Ziel kann keine Trefferpunkte zurückerhalten, und sein Trefferpunktemaximum verringert sich alle 24 Stunden um 10 (3W6). Reduziert der Fluch das Trefferpunktemaximum des Ziels auf 0, stirbt das Ziel und sein Körper zerfällt zu Staub. Die Fluch bleibt bestehen, bis er durch den Zauber Fluch brechen oder andere Magie entfernt wird."
+      },
+      {
+        "name": "Fürchterliches Starren",
+        "text": "Die Mumie zielt auf eine Kreatur im Abstand von bis zu 18 Metern von ihr, sofern sie diese sehen kann. Wenn das Ziel die Mumie sehen kann, muss es einen SG-11-Weisheitsrettungswurf gegen diese Magie ausführen, oder es ist bis zum Ende des nächsten Zugs der Mumie verängstigt. Wenn der Rettungswurf um mindestens fünf Punkte scheitert, ist das Ziel außerdem ebenso lange gelähmt. Bei einem erfolgreichen Rettungswurf ist das Ziel 24 Stunden lang gegen das Fürchterliche Starren aller Mumien (jedoch nicht Mumienfürsten) immun."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/225/1000/1000/636252765553048566.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "undead",
+    "de": "Untoter"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "Mummy (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Mummy (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mummy (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

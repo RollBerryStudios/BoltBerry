@@ -1,0 +1,26 @@
+{
+  "id": 325,
+  "slug": "periapt-of-health",
+  "name": "Periapt of Health",
+  "nameDe": "Anhänger der Gesundheit",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 500000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon You are immune to contracting any disease while you wear this pendant. If you are already infected with a disease, the effects of the disease are suppressed you while you wear the pendant.",
+    "de": "Wenn du diesen Anhänger trägst, bist du gegen alle Krankheiten immun. Wenn du bereits eine Krankheit hast, werden die Effekte der Krankheit unterdrückt, solange du den Anhänger trägst."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

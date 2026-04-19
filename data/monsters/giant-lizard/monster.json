@@ -1,0 +1,320 @@
+{
+  "id": 132,
+  "slug": "giant-lizard",
+  "name": "Giant Lizard",
+  "nameDe": "Rieseneidechse",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "12 (Natural Armor)",
+    "de": "12 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "19 (3d10 + 3)",
+    "de": "19 (3W10+3)"
+  },
+  "str": 15,
+  "dex": 12,
+  "con": 13,
+  "int": 2,
+  "wis": 10,
+  "cha": 5,
+  "strMod": 2,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "climb": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 30 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 9 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W8+2) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantLizardSwamp (1).webp",
+    "variant": "swamp"
+  },
+  "tokens": [
+    {
+      "file": "GiantLizardSwamp (10).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardSwamp (11).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardSwamp (12).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardSwamp (13).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardSwamp (14).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardSwamp (15).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardSwamp (16).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardSwamp (17).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardSwamp (18).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardSwamp (19).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardSwamp (2).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardSwamp (3).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardSwamp (4).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardSwamp (5).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardSwamp (6).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardSwamp (7).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardSwamp (8).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardSwamp (9).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantLizardUnderdark (1).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderdark (10).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderdark (11).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderdark (12).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderdark (13).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderdark (14).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderdark (15).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderdark (16).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderdark (17).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderdark (18).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderdark (2).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderdark (3).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderdark (4).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderdark (5).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderdark (6).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderdark (7).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderdark (8).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderdark (9).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantLizardUnderwater (1).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (10).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (11).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (12).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (13).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (14).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (15).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (16).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (17).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (18).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (19).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (2).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (20).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (3).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (4).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (5).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (6).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (7).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (8).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantLizardUnderwater (9).webp",
+      "variant": "underwater"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

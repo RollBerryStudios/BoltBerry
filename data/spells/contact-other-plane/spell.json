@@ -1,0 +1,55 @@
+{
+  "id": 232,
+  "slug": "contact-other-plane",
+  "name": "Contact Other Plane",
+  "nameDe": "Kontakt zu anderen Ebenen",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "5th-level divination (ritual)",
+    "de": "Stufe 5 Erkenntnismagie (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "You mentally contact a demigod, the spirit of a long-dead sage, or some other mysterious entity from another plane. Contacting this extraplanar intelligence can strain or even break your mind. When you cast this spell, make a DC 15 intelligence saving throw. On a failure, you take 6d6 psychic damage and are insane until you finish a long rest. While insane, you can't take actions, can't understand what other creatures say, can't read, and speak only in gibberish. A greater restoration spell cast on you ends this effect. On a successful save, you can ask the entity up to five questions. You must ask your questions before the spell ends. The GM answers each question with one word, such as \"yes,\" \"no,\" \"maybe,\" \"never,\" \"irrelevant,\" or \"unclear\" (if the entity doesn't know the answer to the question). If a one-word answer would be misleading, the GM might instead offer a short phrase as an answer.",
+    "de": "Du trittst mental mit einem Halbgott, dem Geist eines lang verstorbenen Weisen oder einem anderen geheimnisvollen Wesen von einer anderen Ebene in Kontakt. Dieser Kontakt kann deinen Verstand überfordern oder sogar brechen. Führe beim Wirken dieses Zaubers einen SG-15-Intelligenzrettungswurf aus. Scheitert der Wurf, erleidest du 6W6 psychischen Schaden und bist wahnsinnig, bis du eine lange Rast abschließt. Während du wahnsinnig bist, kannst du keine Aktionen ausführen, verstehst nicht, was andere Kreaturen sagen, kannst nicht lesen und dich nicht verständlich ausdrücken. Der Zauber Vollständige Genesung  beendet diesen Effekt. Ist der Rettungswurf erfolgreich, kannst du dem Wesen bis zu fünf Fragen stellen. Du musst deine Fragen stellen, bevor der Zauber endet. Der SL beantwortet jede Frage mit einem einzelnen Wort wie 'ja', 'nein', 'vielleicht', 'niemals', 'irrelevant' oder 'unklar' (wenn das Wesen die Antwort nicht kennt). Falls eine Antwort mit nur einem Wort irreführend wäre, kann der SL stattdessen einen kurzen Satz als Antwort geben."
+  },
+  "image": "contact-other-plane",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

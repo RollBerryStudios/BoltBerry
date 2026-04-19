@@ -1,0 +1,187 @@
+{
+  "id": 281,
+  "slug": "swarm-of-ravens",
+  "name": "Swarm of Ravens",
+  "nameDe": "Rabenschwarm Variante: Insektenschwarm",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "24 (7d8 - 7)",
+    "de": "24 (7W8-7)"
+  },
+  "str": 6,
+  "dex": 14,
+  "con": 8,
+  "int": 3,
+  "wis": 12,
+  "cha": 6,
+  "strMod": -2,
+  "dexMod": 2,
+  "conMod": -1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "fly": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 15"
+    ],
+    "de": [
+      "Passive Wahrnehmung 15"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +5"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Swarm",
+        "text": "The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny raven. The swarm can't regain hit points or gain temporary hit points."
+      }
+    ],
+    "de": [
+      {
+        "name": "Schwarm",
+        "text": "Der Schwarm kann den Raum einer anderen Kreatur besetzen und umgekehrt. Er kann sich durch jede Öffnung bewegen, die groß genug für einen winzigen Raben ist. Der Schwarm kann keine Trefferpunkte zurückerhalten und keine temporären Trefferpunkte erhalten."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Beaks",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target in the swarm's space. Hit: 7 (2d6) piercing damage, or 3 (1d6) piercing damage if the swarm has half of its hit points or fewer."
+      }
+    ],
+    "de": [
+      {
+        "name": "Schnäbel",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel im Bereich des Schwarms. Treffer: 7 (2W6) Stichschaden oder 3 (1W6) Stichschaden, wenn der Schwarm höchstens die Hälfte seiner Trefferpunkte hat."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/555/315/315/636376341743427326.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Schwarm winziger Tiere"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "SwarmOfRavens (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "SwarmOfRavens (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRavens (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

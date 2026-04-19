@@ -1,0 +1,276 @@
+{
+  "id": 111,
+  "slug": "frog",
+  "name": "Frog",
+  "nameDe": "Frosch",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny beast, unaligned",
+    "de": "Winzige Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "11",
+    "de": "11"
+  },
+  "hp": {
+    "en": "1 (1d4 - 1)",
+    "de": "1 (1W4-1)"
+  },
+  "str": 1,
+  "dex": 13,
+  "con": 8,
+  "int": 1,
+  "wis": 8,
+  "cha": 3,
+  "strMod": -5,
+  "dexMod": 1,
+  "conMod": -1,
+  "intMod": -5,
+  "wisMod": -1,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    },
+    "swim": {
+      "en": 20,
+      "de": 6
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 30 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Dunkelsicht 9 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +3",
+    "Wahrnehmung +1"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Amphibious",
+        "text": "The frog can breathe air and water"
+      },
+      {
+        "name": "Standing Leap",
+        "text": "The frog's long jump is up to 10 ft. and its high jump is up to 5 ft., with or without a running start."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amphibisch",
+        "text": "Der Frosch kann Luft und Wasser atmen."
+      },
+      {
+        "name": "Stehender Sprung",
+        "text": "Der Frosch kann mit oder ohne Anlauf bis zu drei Meter weit und bis zu 1,5 Meter hoch springen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/523/315/315/636376321230650501.jpeg",
+  "size": {
+    "en": "tiny",
+    "de": "Winziges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Frog (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Frog (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Frog (9).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (1).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Toad (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

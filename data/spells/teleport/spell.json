@@ -1,0 +1,57 @@
+{
+  "id": 213,
+  "slug": "teleport",
+  "name": "Teleport",
+  "nameDe": "Teleportieren",
+  "level": {
+    "en": "7",
+    "de": "Grad 7"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "7th-level conjuration",
+    "de": "Stufe 7 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "10 feet",
+    "de": "3 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "This spell instantly transports you and up to eight willing creatures of your choice that you can see within range, or a single object that you can see within range, to a destination you select. If you target an object, it must be able to fit entirely inside a 10-foot cube, and it can't be held or carried by an unwilling creature. The destination you choose must be known to you, and it must be on the same plane of existence as you. Your familiarity with the destination determines whether you arrive there successfully. The GM rolls d100 and consults the table. | Familiarity | Mishap | Similar Area | Off Target | On Target | |---|---|---|---|---| | Permanent circle | -- | -- | -- | 01-100 | | Associated object | -- | -- | -- | 01-100 | | Very familiar | 01-05 | 06-13 | 14-24 | 25-100 | | Seen casually | 01-33 | 34-43 | 44-53 | 54-100 | | Viewed once | 01-43 | 44-53 | 54-73 | 74-100 | | Description | 01-43 | 44-53 | 54-73 | 74-100 | | False destination | 01-50 | 51-100 | -- | -- | ***Familiarity.*** \"Permanent circle\" means a permanent teleportation circle whose sigil sequence you know. \"Associated object\" means that you possess an object taken from the desired destination within the last six months, such as a book from a wizard's library, bed linen from a royal suite, or a chunk of marble from a lich's secret tomb. \"Very familiar\" is a place you have been very often, a place you have carefully studied, or a place you can see when you cast the spell. \"Seen casually\" is someplace you have seen more than once but with which you aren't very familiar. \"Viewed once\" is a place you have seen once, possibly using magic. \"Description\" is a place whose location and appearance you know through someone else's description, perhaps from a map. \"False destination\" is a place that doesn't exist. Perhaps you tried to scry an enemy's sanctum but instead viewed an illusion, or you are attempting to teleport to a familiar location that no longer exists. ***On Target.*** You and your group (or the target object) appear where you want to. ***Off Target.*** You and your group (or the target object) appear a random distance away from the destination in a random direction. Distance off target is 1d10 x 1d10 percent of the distance that was to be traveled. For example, if you tried to travel 120 miles, landed off target, and rolled a 5 and 3 on the two d10s, then you would be off target by 15 percent, or 18 miles. The GM determines the direction off target randomly by rolling a d8 and designating 1 as north, 2 as northeast, 3 as east, and so on around the points of the compass.  If you were teleporting to a coastal city and wound up 18 miles out at sea, you could be in trouble. ***Similar Area.*** You and your group (or the target object) wind up in a different area that's visually or thematically similar to the target area. If you are heading for your home laboratory, for example, you might wind up in another wizard's laboratory or in an alchemical supply shop that has many of the same tools and implements as your laboratory. Generally, you appear in the closest similar place, but since the spell has no range limit, you could conceivably wind up anywhere on the plane. ***Mishap.*** The spell's unpredictable magic results in a difficult journey. Each teleporting creature (or the target object) takes 3d10 force damage, and the GM rerolls on the table to see where you wind up (multiple mishaps can occur, dealing damage each time).",
+    "de": "Dieser Zauber transportiert dich und bis zu acht bereitwillige Kreaturen deiner Wahl in Reichweite, die du sehen kannst, sofort zu einem von dir ausgewählten Ort. Du kannst auch einen einzelnen Gegenstand in Reichweite, den du sehen kannst, teleportieren. In diesem Fall muss der Gegenstand in einen Würfel mit drei Metern Kantenlänge passen und kann nicht von einer unwilligen Kreatur gehalten oder getragen werden. Der von dir ausgewählte Zielort muss dir bekannt sein und sich auf derselben Existenzebene wie du befinden. Deine Vertrautheit mit dem Zielort bestimmt, ob du dort erfolgreich eintriffst. Der SL würfelt anhand der folgenden Tabelle mit einem W100. Vertrautheit:  Mit 'dauerhafter Kreis' ist ein dauerhafter Kreis der Teleportation gemeint, dessen Siegelsequenz dir bekannt ist. 'Zugehöriger Gegenstand' bedeutet, dass du einen Gegenstand besitzt, der innerhalb der letzten sechs Monate vom gewünschten Zielort entfernt wurde, etwa ein Buch aus dem Archiv eines Magiers, Bettlaken aus einer königlichen Kammer oder ein Stück Marmor aus der geheimen Gruft eines Lichs. 'Sehr vertraut' beschreibt einen Ort, an dem du oft gewesen bist, den du genau studiert hast oder den du beim Wirken des Zaubers sehen kannst. 'Beiläufig gesehen' beschreibt einen Ort, den du mehr als einmal gesehen hast, mit dem du jedoch nicht sehr vertraut bist. 'Einmal gesehen' beschreibt einen Ort, den du einmal gesehen hast, wahrscheinlich durch Magie. 'Beschreibung' bezieht sich auf einen Ort, dessen Position und Aussehen dir durch eine Beschreibung bekannt sind, etwa durch eine Karte. 'Falscher Zielort' bedeutet, dass ein Ort nicht existiert. Vielleicht hast du versucht, das Heiligtum eines Feindes magisch auszuspähen, konntest jedoch nur eine Illusion sehen. Oder du versuchst, dich an einen vertrauten Ort zu teleportieren, der nicht mehr existiert. Am Zielort:  Du und deine Gruppe (oder der Zielgegenstand) erscheint dort, wo du willst. Abseits des Zielorts:  Du und deine Gruppe (oder der Zielgegenstand) erscheint in einer zufälligen Entfernung und in einer zufälligen Richtung abseits des Zielorts. Die Entfernung vom Ziel beträgt 1W10 x 1W10 Prozent der Entfernung, die teleportiert werden sollte. Beispiel: Du versuchst, 190 Kilometer weit zu reisen und landest abseits des Zielorts. Du würfelst eine 5 und eine 3 mit den beiden W10. Daher befindest du dich 15 Prozent abseits des Ziels, also 28 Kilometer. Der SL bestimmt zufällig die Richtung, in der du vom Zielort entfernt landest, indem er einen W8 würfelt und 1 als Norden, 2 als Nordosten, 3 als Osten und so weiter bestimmt Teleportierst du dich zu einer Küstenstadt und landest 28 Kilometer weit im Meer, könntest du in Schwierigkeiten sein. Ähnliches Gebiet:  Du und deine Gruppe (oder der Zielgegenstand) erscheint in einem anderen Gebiet, das dem Zielort visuell oder thematisch ähnlich ist. Wolltest du dich beispielsweise in dein heimisches Labor teleportieren, landest du vielleicht im Labor eines anderen Magiers oder in einem Alchemieladen, der über viele ähnliche Geräte wie dein Labor verfügt. Grundsätzlich erscheinst du am nächstgelegenen ähnlichen Ort. Da der Zauber jedoch keine Reichweitenbegrenzung besitzt, kannst du theoretisch überall auf der Ebene landen. Unglück:  Die unvorhersehbare Magie des Zaubers führt zu einer holprigen Reise. Jede teleportierte Kreatur (oder der Zielgegenstand) erleidet 3W10 Energieschaden. Zudem würfelt der SL anhand der Tabelle, um zu bestimmen, wo du landest. Es kann zu mehreren Unglücken kommen, die jedes Mal Schaden verursachen."
+  },
+  "image": "blink",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

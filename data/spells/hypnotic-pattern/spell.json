@@ -1,0 +1,66 @@
+{
+  "id": 126,
+  "slug": "hypnotic-pattern",
+  "name": "Hypnotic Pattern",
+  "nameDe": "Hypnotisches Muster",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level illusion",
+    "de": "Stufe 3 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": false,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a glowing stick of incense or a crystal vial filled with phosphorescent material",
+      "de": "ein leuchtendes Räucherstäbchen oder eine mit phosphoreszierendem Material gefüllte Kristallphiole"
+    },
+    "raw": {
+      "en": "S, M (a glowing stick of incense or a crystal vial filled with phosphorescent material)",
+      "de": "G, M (ein leuchtendes Räucherstäbchen oder eine mit phosphoreszierendem Material gefüllte Kristallphiole)"
+    }
+  },
+  "description": {
+    "en": "You create a twisting pattern of colors that weaves through the air inside a 30-foot cube within range. The pattern appears for a moment and vanishes. Each creature in the area who sees the pattern must make a wisdom saving throw. On a failed save, the creature becomes charmed for the duration. While charmed by this spell, the creature is incapacitated and has a speed of 0. The spell ends for an affected creature if it takes any damage or if someone else uses an action to shake the creature out of its stupor.",
+    "de": "Du erschaffst ein wirbelndes Muster aus Farben, das sich innerhalb eines Würfels mit neun Metern Kantenlänge in Reichweite durch die Luft schlängelt Das Muster erscheint für einen Moment und verschwindet dann. Jede Kreatur in diesem Bereich, die das Muster sieht muss einen Weisheitsrettungswurf ausführen. Scheitert der Wurf, ist die Kreatur für die Wirkungsdauer bezaubert. Auf diese Art bezauberte Kreaturen sind kampfunfähig und haben eine Bewegungsrate von 0. Der Zauber endet für eine betroffene Kreatur, wenn sie Schaden erleidet, oder wenn jemand anderes eine Aktion verwendet, um die Kreatur aus ihrer Betäubung zu rütteln."
+  },
+  "image": "illusion",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

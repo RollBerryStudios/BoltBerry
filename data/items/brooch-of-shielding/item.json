@@ -1,0 +1,30 @@
+{
+  "id": 351,
+  "slug": "brooch-of-shielding",
+  "name": "Brooch of Shielding",
+  "nameDe": "Brosche des Abschirmens",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 750000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon (requires attunement) While wearing this brooch, you have resistance to force damage, and you have immunity to damage from the magic missile spell.",
+    "de": "Wenn du diese Brosche trägst, bist du gegen Energieschaden resistent und gegen Schaden durch den Zauber Magisches Geschoss  immun."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

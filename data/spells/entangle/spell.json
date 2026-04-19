@@ -1,0 +1,56 @@
+{
+  "id": 26,
+  "slug": "entangle",
+  "name": "Entangle",
+  "nameDe": "Verstricken",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid"
+    ],
+    "de": [
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "1st-level conjuration",
+    "de": "Stufe 1 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "90 feet",
+    "de": "27 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "Grasping weeds and vines sprout from the ground in a 20-foot square starting form a point within range. For the duration, these plants turn the ground in the area into difficult terrain. A creature in the area when you cast the spell must succeed on a strength saving throw or be restrained by the entangling plants until the spell ends. A creature restrained by the plants can use its action to make a Strength check against your spell save DC. On a success, it frees itself. When the spell ends, the conjured plants wilt away.",
+    "de": "Unkraut und Ranken wachsen in einem viereckigen Bereich mit sechs Metern Kantenlänge in Reichweite aus dem Boden. Während der Wirkungsdauer verwandeln diese Pflanzen den Boden im Bereich in schwieriges Gelände. Jede Kreatur, die sich in dem Bereich aufhält, wenn du den Zauber wirkst, muss einen Stärkerettungswurf bestehen, anderenfalls wird sie von den umschlingenden Pflanzen festgesetzt, bis der Zauber endet. Eine von den Pflanzen festgesetzte Kreatur kann als Aktion einen Stärkewurf gegen deinen Zauberrettungswurf-SG ausführen. Bei einem Erfolg befreit sie sich. Wenn der Zauber endet, verwelken die beschworenen Pflanzen."
+  },
+  "image": "entangle",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,62 @@
+{
+  "id": 230,
+  "slug": "conjure-fey",
+  "name": "Conjure Fey",
+  "nameDe": "Feenwesen beschwören",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "warlock"
+    ],
+    "de": [
+      "Druide",
+      "Hexenmeister"
+    ]
+  },
+  "type": {
+    "en": "6th-level conjuration",
+    "de": "Stufe 6 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "90 feet",
+    "de": "27 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You summon a fey creature of challenge rating 6 or lower, or a fey spirit that takes the form of a beast of challenge rating 6 or lower. It appears in an unoccupied space that you can see within range. The fey creature disappears when it drops to 0 hit points or when the spell ends. The fey creature is friendly to you and your companions for the duration. Roll initiative for the creature, which has its own turns. It obeys any verbal commands that you issue to it (no action required by you), as long as they don't violate its alignment. If you don't issue any commands to the fey creature, it defends itself from hostile creatures but otherwise takes no actions. If your concentration is broken, the fey creature doesn't disappear. Instead, you lose control of the fey creature, it becomes hostile toward you and your companions, and it might attack. An uncontrolled fey creature can't be dismissed by you, and it disappears 1 hour after you summoned it. The GM has the fey creature's statistics.",
+    "de": "Das Feenwesen ist dir und deinen Gefährten für die Wirkungsdauer freundlich gesinnt. Würfle die Initiative für das Wesen aus, das über seinen eigenen Zug verfügt. Es gehorcht deinen mündlichen Befehlen (erfordert keine Aktion), solange sie nicht gegen seine Gesinnung verstoßen. Wenn du dem Feenwesen keine Befehle erteilst, verteidigt es sich gegen feindlich gesinnte Kreaturen, führt aber anderenfalls keine Aktionen aus. Wenn deine Konzentration unterbrochen wird, verschwindet das Feenwesen nicht. Stattdessen verlierst du die Kontrolle über das Feenwesen und es wird dir und deinen Gefährten gegenüber feindlich gesinnt und greift möglicherweise an. Ein unkontrolliertes Feenwesen kann nicht von dir fortgeschickt werden und verschwindet eine Stunde nach seiner Beschwörung. Der SL hat die Werte des Feenwesens. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 7. Grades oder höher nutzt, erhöht sich der Herausforderungsgrad für jeden Grad über dem 6. um 1."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 7th level or higher, the challenge rating increases by 1 for each slot level above 6th.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 7. Grades oder höher nutzt, erhöht sich der Herausforderungsgrad für jeden Grad über dem 6. um 1."
+  },
+  "image": "conjure-fey",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

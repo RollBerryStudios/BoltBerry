@@ -1,0 +1,198 @@
+{
+  "id": 120,
+  "slug": "giant-bat",
+  "name": "Giant Bat",
+  "nameDe": "Riesenfledermaus",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "13",
+    "de": "13"
+  },
+  "hp": {
+    "en": "22 (4d10)",
+    "de": "22 (4W10)"
+  },
+  "str": 15,
+  "dex": 16,
+  "con": 11,
+  "int": 2,
+  "wis": 12,
+  "cha": 6,
+  "strMod": 2,
+  "dexMod": 3,
+  "conMod": 0,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 60 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Blindsicht 18 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Echolocation",
+        "text": "The bat can't use its blindsight while deafened."
+      },
+      {
+        "name": "Keen Hearing",
+        "text": "The bat has advantage on Wisdom (Perception) checks that rely on hearing."
+      }
+    ],
+    "de": [
+      {
+        "name": "Echolot",
+        "text": "Die Fledermaus kann ihre Blindsicht nicht verwenden, solange sie taub ist."
+      },
+      {
+        "name": "Scharfes Gehör",
+        "text": "Die Fledermaus ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 5 (1d6 + 2) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 5 (1W6+2) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantBat (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GiantBat (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantBat (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

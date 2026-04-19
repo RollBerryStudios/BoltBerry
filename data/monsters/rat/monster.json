@@ -1,0 +1,238 @@
+{
+  "id": 238,
+  "slug": "rat",
+  "name": "Rat",
+  "nameDe": "Ratte",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny beast, unaligned",
+    "de": "Winzige Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "10",
+    "de": "10"
+  },
+  "hp": {
+    "en": "1 (1d4 - 1)",
+    "de": "1 (1W4-1)"
+  },
+  "str": 2,
+  "dex": 11,
+  "con": 9,
+  "int": 2,
+  "wis": 10,
+  "cha": 4,
+  "strMod": -4,
+  "dexMod": 0,
+  "conMod": -1,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 30 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 9 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Smell",
+        "text": "The rat has advantage on Wisdom (Perception) checks that rely on smell."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfer Geruchssinn",
+        "text": "Die Ratte ist bei Weisheitswürfen (Wahrnehmung) im Vorteil, die auf Geruchssinn basieren."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +0 to hit, reach 5 ft., one target. Hit: 1 piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +0 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 1 Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/541/315/315/636376335435407571.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Winziges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "RatSwamp (1).webp",
+    "variant": "swamp"
+  },
+  "tokens": [
+    {
+      "file": "RatSwamp (10).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "RatSwamp (11).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "RatSwamp (2).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "RatSwamp (3).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "RatSwamp (4).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "RatSwamp (5).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "RatSwamp (6).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "RatSwamp (7).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "RatSwamp (8).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "RatSwamp (9).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "RatUrban (1).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (10).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (11).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (12).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (13).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (14).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (15).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (16).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (17).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (18).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (19).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (2).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (20).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (21).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (22).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (23).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (3).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (4).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (5).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (6).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (7).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (8).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "RatUrban (9).webp",
+      "variant": "urban"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

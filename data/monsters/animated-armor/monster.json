@@ -1,0 +1,170 @@
+{
+  "id": 26,
+  "slug": "animated-armor",
+  "name": "Animated Armor",
+  "nameDe": "Belebte Rüstung",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium construct, unaligned",
+    "de": "Mittelgroßes Konstrukt, ohne Gesinnung"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "18 (Natural Armor)",
+    "de": "18 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "33 (6d8 + 6)",
+    "de": "33 (6W8+6)"
+  },
+  "str": 14,
+  "dex": 11,
+  "con": 13,
+  "int": 1,
+  "wis": 3,
+  "cha": 1,
+  "strMod": 2,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": -5,
+  "wisMod": -4,
+  "chaMod": -5,
+  "speed": {
+    "run": {
+      "en": 25,
+      "de": 7
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 60 ft. (blind beyond this radius)",
+      "passive perception 6"
+    ],
+    "de": [
+      "Blindsicht 18 m (blind außerhalb des Radius)",
+      "Passive Wahrnehmung 6"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Antimagic Susceptibility",
+        "text": "The armor is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the armor must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
+      },
+      {
+        "name": "False Appearance",
+        "text": "While the armor remains motionless, it is indistinguishable from a normal suit of armor."
+      }
+    ],
+    "de": [
+      {
+        "name": "Antimagische Empfindlichkeit",
+        "text": "Die Rüstung ist im Bereich eines antimagischen Felds kampfunfähig. Wird sie Ziel des Zaubers Magie bannen, muss die Rüstung einen Konstitutionsrettungswurf gegen den Zauberrettungswurf-SG des Zauberwirkers bestehen, oder sie ist eine Minute lang bewusstlos."
+      },
+      {
+        "name": "Falsches Erscheinungsbild",
+        "text": "Solange die Rüstung sich nicht bewegt, ist sie nicht von einer gewöhnlichen Rüstung zu unterscheiden."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The armor makes two melee attacks."
+      },
+      {
+        "name": "Slam",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Rüstung führt zwei Nahkampfangriffe aus."
+      },
+      {
+        "name": "Hieb",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W6+2) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/8/429/1000/1000/636306156895834255.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "construct",
+    "de": "Konstrukt"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "AnimatedArmor (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "AnimatedArmor (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "AnimatedArmor (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "AnimatedArmor (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "AnimatedArmor (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "AnimatedArmor (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "AnimatedArmor (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "AnimatedArmor (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "AnimatedArmor (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "AnimatedArmor (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "AnimatedArmor (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "AnimatedArmor (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "AnimatedArmor (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

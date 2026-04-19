@@ -1,0 +1,66 @@
+{
+  "id": 109,
+  "slug": "clairvoyance",
+  "name": "Clairvoyance",
+  "nameDe": "Hellsehen",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level divination",
+    "de": "Stufe 3 Erkenntnismagie"
+  },
+  "castingTime": {
+    "en": "10 minutes",
+    "de": "10 Minuten"
+  },
+  "range": {
+    "en": "1 mile",
+    "de": "1,6km"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a focus worth at least 100gp, either a jeweled horn for hearing or a glass eye for seeing",
+      "de": "ein Fokus im Wert von mindestens 100 Goldstücken, entweder ein juwelenbesetztes Horn zum Hören oder ein Glasauge zum Sehen"
+    },
+    "raw": {
+      "en": "V, S, M (a focus worth at least 100gp, either a jeweled horn for hearing or a glass eye for seeing)",
+      "de": "V, G, M (ein Fokus im Wert von mindestens 100 Goldstücken, entweder ein juwelenbesetztes Horn zum Hören oder ein Glasauge zum Sehen)"
+    }
+  },
+  "description": {
+    "en": "You create an invisible sensor within range in a location familiar to you (a place you have visited or seen before) or in an obvious location that is unfamiliar to you (such as behind a door, around a corner, or in a grove of trees). The sensor remains in place for the duration, and it can't be attacked or otherwise interacted with. When you cast the spell, you choose seeing or hearing. You can use the chosen sense through the sensor as if you were in its space. As your action, you can switch between seeing and hearing. A creature that can see the sensor (such as a creature benefiting from see invisibility or truesight) sees a luminous, intangible orb about the size of your fist.",
+    "de": "Du erschaffst einen unsichtbaren Sensor in Reichweite an einem dir bekannten Ort (den du bereits gesehen oder besucht hast) oder an einem offensichtlichen Ort, der dir unbekannt ist (wie hinter einer Tür, um eine Ecke oder in einem Hain), Der Sensor bleibt für die Wirkungsdauer bestehen und kann weder angegriffen noch anderweitig beeinflusst werden. Wenn du diesen Zauber wirkst, wählst du Sehen oder Hören aus. Du nimmst den gewählten Sinn durch den Sensor wahr, als ob du dich in seinem Bereich befindest. Als Aktion kannst du zwischen Sehen und Hören wechseln. Eine Kreatur, die den Sensor sehen kann (beispielsweise mit Unsichtbares sehen  oder Wahrer Blick ), sieht eine leuchtende, etwa faustgroße und immaterielle Kugel."
+  },
+  "image": "divination",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

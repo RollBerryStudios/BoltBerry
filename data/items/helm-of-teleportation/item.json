@@ -1,0 +1,30 @@
+{
+  "id": 432,
+  "slug": "helm-of-teleportation",
+  "name": "Helm of Teleportation",
+  "nameDe": "Helm der Teleportation",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 6400000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, rare (requires attunement) This helm has 3 charges. While wearing it, you can use an action and expend 1 charge to cast the teleport spell from it. The helm regains 1d3 expended charges daily at dawn.",
+    "de": "Dieser Helm hat drei Ladungen. Wenn du ihn trägst, kannst du als Aktion eine Ladung verbrauchen, um mit dem Helm den Zauber Teleportieren  zu wirken. Der Helm erhält täglich im Morgengrauen 1W3 verbrauchte Ladungen zurück."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

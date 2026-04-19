@@ -1,0 +1,337 @@
+{
+  "id": 320,
+  "slug": "young-bronze-dragon",
+  "name": "Young Bronze Dragon",
+  "nameDe": "Junger Bronzedrache",
+  "source": "SRD",
+  "meta": {
+    "en": "Large dragon, lawful good",
+    "de": "Großer Drache, rechtschaffen gut"
+  },
+  "challenge": "8",
+  "xp": 3900,
+  "ac": {
+    "en": "18 (Natural Armor)",
+    "de": "18 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "142 (15d10 + 60)",
+    "de": "142 (15W10+60)"
+  },
+  "str": 21,
+  "dex": 10,
+  "con": 19,
+  "int": 14,
+  "wis": 13,
+  "cha": 17,
+  "strMod": 5,
+  "dexMod": 0,
+  "conMod": 4,
+  "intMod": 2,
+  "wisMod": 1,
+  "chaMod": 3,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    },
+    "swim": {
+      "en": 40,
+      "de": 12
+    },
+    "fly": {
+      "en": 80,
+      "de": 24
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 30 ft.",
+      "Darkvision 120 ft.",
+      "passive perception 17"
+    ],
+    "de": [
+      "Blindsicht 9 m",
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 17"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Draconic"
+    ],
+    "de": [
+      "Drakonisch",
+      "Gemeinsprache"
+    ]
+  },
+  "savingThrows": [
+    "Ges +3",
+    "Kon +7",
+    "Wei +4",
+    "Cha +6"
+  ],
+  "skills": [
+    "Heimlichkeit +4",
+    "Motiv erkennen +7",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Amphibious",
+        "text": "The dragon can breathe air and water."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amphibisch",
+        "text": "Der Drache kann Luft und Wasser atmen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The dragon makes three attacks: one with its bite and two with its claws."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +8 to hit, reach 10 ft., one target. Hit: 16 (2d10 + 5) piercing damage."
+      },
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 12 (2d6 + 5) slashing damage."
+      },
+      {
+        "name": "Breath Weapons (Recharge 5-6)",
+        "text": "The dragon uses one of the following breath weapons:"
+      },
+      {
+        "name": "Lightning Breath",
+        "text": "The dragon exhales lightning in a 60-foot line that is 5 feet wide. Each creature in that line must make a DC 15 Dexterity saving throw, taking 55 (10d10) lightning damage on a failed save, or half as much damage on a successful one."
+      },
+      {
+        "name": "Repulsion Breath",
+        "text": "The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a DC 15 Strength saving throw. On a failed save, the creature is pushed 40 feet away from the dragon."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Drache führt drei Angriffe aus: einen mit seinem Biss und zwei mit seinen Klauen."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +8 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 16 (2W10+5) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +8 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 12 (2W6+5) Hiebschaden."
+      },
+      {
+        "name": "Odemwaffen (Aufladung 5–6)",
+        "text": "Der Drache setzt eine der folgenden Odemwaffen ein:"
+      },
+      {
+        "name": "Blitzodem",
+        "text": "Der Drache atmet einen Blitzstrahl in einer 18 Meter langen, 1,5 Meter breiten Linie aus. Jede Kreatur in dieser Linie muss einen SG-15-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 55 (10W10) Blitzschaden, anderenfalls die Hälfte."
+      },
+      {
+        "name": "Odem der Abstoßung",
+        "text": "Der Drache atmet abstoßende Energie in einem Kegel von neun Metern aus. Jede Kreatur in diesem Bereich muss einen SG-15-Stärkerettungswurf bestehen. Scheitert der Wurf, wird die Kreatur bis zu zwölf Meter weit vom Drachen weggestoßen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/64/315/315/636252731269768088.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "dragon",
+    "de": "Drache"
+  },
+  "alignment": {
+    "en": "lawful good",
+    "de": "rechtschaffen gut"
+  },
+  "token": {
+    "file": "YoungBronzeDragon (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "YoungBronzeDragon (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (31).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (32).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (33).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (34).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (35).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (36).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (37).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (38).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (39).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (40).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (41).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (42).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (43).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungBronzeDragon (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

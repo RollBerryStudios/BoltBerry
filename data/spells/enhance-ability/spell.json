@@ -1,0 +1,70 @@
+{
+  "id": 245,
+  "slug": "enhance-ability",
+  "name": "Enhance Ability",
+  "nameDe": "Attribut verbessern",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "druid",
+      "sorcerer"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Druide",
+      "Zauberer"
+    ]
+  },
+  "type": {
+    "en": "2nd-level transmutation",
+    "de": "Stufe 2 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "fur or a feather from a beast",
+      "de": "Fell oder eine Feder von einem Tier"
+    },
+    "raw": {
+      "en": "V, S, M (fur or a feather from a beast)",
+      "de": "V, G, M (Fell oder eine Feder von einem Tier)"
+    }
+  },
+  "description": {
+    "en": "You touch a creature and bestow upon it a magical enhancement. Choose one of the following effects; the target gains that effect until the spell ends. ***Bear's Endurance.*** The target has advantage on constitution checks. It also gains 2d6 temporary hit points, which are lost when the spell ends. ***Bull's Strength.*** The target has advantage on strength checks, and his or her carrying capacity doubles. ***Cat's Grace.*** The target has advantage on dexterity checks. It also doesn't take damage from falling 20 feet or less if it isn't incapacitated. ***Eagle's Splendor.*** The target has advantage on Charisma checks. ***Fox's Cunning.*** The target has advantage on intelligence checks. ***Owl's Wisdom.*** The target has advantage on wisdom checks.",
+    "de": "Du berührst eine Kreatur und verleihst ihr eine magische Verbesserung. Wähle einen der folgenden Effekte aus. Das Ziel erhält diesen Effekt, bis der Zauber endet. Anmut der Katze:  Das Ziel ist bei Geschicklichkeitswürfen im Vorteil. Es erleidet zudem keinen Schaden bei Stürzen aus maximal sechs Metern, solange es nicht kampfunfähig ist. Ausdauer des Bären:  Das Ziel ist bei Konstitutionswürfen im Vorteil. Es erhält zudem 2W6 temporäre Trefferpunkte, die verschwinden, wenn der Zauber endet. Gerissenheit des Fuchses:  Das Ziel ist bei Intelligenz würfen im Vorteil. Pracht des Adlers:  Das Ziel ist bei Charismawürfen im Vorteil. Stärke des Stiers:  Das Ziel ist bei Stärkewürfen im Vorteil und seine Traglast verdoppelt sich. Weisheit der Eule:  Das Ziel ist bei Weisheitswürfen im Vorteil. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, kannst du für jeden Grad über dem 2. eine zusätzliche Kreatur als Ziel wählen."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, kannst du für jeden Grad über dem 2. eine zusätzliche Kreatur als Ziel wählen."
+  },
+  "image": "enhance-ability",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

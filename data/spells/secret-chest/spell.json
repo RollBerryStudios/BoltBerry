@@ -1,0 +1,59 @@
+{
+  "id": 383,
+  "slug": "secret-chest",
+  "name": "Secret Chest",
+  "nameDe": "Geheime Truhe",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "4th-level conjuration",
+    "de": "Stufe 4 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "An exquisite chest, 3 feet by 2 feet by 2 feet, constructed from rare materials worth at least 5,000 gp, and a Tiny replica made from the same materials worth at least 50 gp",
+      "de": "Eine exquisite Truhe in den Abmessungen 90 Zentimeter mal 60 Zentimeter mal 60 Zentimeter, die aus seltenen Materialien im Wert von mindestens 5.000 GM gefertigt wurde, und eine winzige Nachbildung der Truhe aus denselben Materialien im Wert von mindestens 50 GM"
+    },
+    "raw": {
+      "en": "V, S, M (An exquisite chest, 3 feet by 2 feet by 2 feet, constructed from rare materials worth at least 5,000 gp, and a Tiny replica made from the same materials worth at least 50 gp)",
+      "de": "V, G, M (Eine exquisite Truhe in den Abmessungen 90 Zentimeter mal 60 Zentimeter mal 60 Zentimeter, die aus seltenen Materialien im Wert von mindestens 5.000 GM gefertigt wurde, und eine winzige Nachbildung der Truhe aus denselben Materialien im Wert von mindestens 50 GM)"
+    }
+  },
+  "description": {
+    "en": "You hide a chest, and all its contents, on the Ethereal Plane. You must touch the chest and the miniature replica that serves as a material component for the spell. The chest can contain up to 12 cubic feet of nonliving material (3 feet by 2 feet by 2 feet). While the chest remains on the Ethereal Plane, you can use an action and touch the replica to recall the chest. It appears in an unoccupied space on the ground within 5 feet of you. You can send the chest back to the Ethereal Plane by using an action and touching both the chest and the replica. After 60 days, there is a cumulative 5 percent chance per day that the spell's effect ends. This effect ends if you cast this spell again, if the smaller replica chest is destroyed, or if you choose to end the spell as an action. If the spell ends and the larger chest is on the Ethereal Plane, it is irretrievably lost.",
+    "de": "Du versteckst eine Truhe und ihren gesamten Inhalt auf der Ätherebene. Du musst die Truhe und die winzige Nachbildung berühren, die als Materialkomponenten für den Zauber dienen. Die Truhe kann bis zu 336 Liter anorganischen Materials aufhehmen (90 mal 60 mal 60 Zentimeter), Solange sich die Truhe auf der Ätherebene befindet, kannst du als Aktion die Nachbildung berühren, um die Truhe herbeizurufen. Sie erscheint in einem freien Bereich auf dem Boden im Abstand von bis zu 1,5 Metern von dir. Du kannst die Truhe wieder auf die Ätherebene zurückschicken, indem du sie und die Nachbildung als Aktion gleichzeitig berührst. Nach 60 Tagen besteht eine kumulative Chance von fünf Prozent pro Tag, dass der Zauber endet. Er endet zudem, wenn du den Zauber erneut wirkst, wenn die kleine Nachbildung zerstört wird oder wenn du den Zauber als Aktion beendest Endet der Zauber, während sich die große Truhe auf der Ätherebene befindet, ist sie unwiederbringlich verloren."
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

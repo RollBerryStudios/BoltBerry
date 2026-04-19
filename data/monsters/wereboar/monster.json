@@ -1,0 +1,223 @@
+{
+  "id": 303,
+  "slug": "wereboar",
+  "name": "Wereboar",
+  "nameDe": "Wereber",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, neutral evil",
+    "de": "Mittelgroßer Humanoid, neutral böse"
+  },
+  "challenge": "4",
+  "xp": 1100,
+  "ac": {
+    "en": "10 In Humanoid Form, 11 In Boar Or Hybrid Form",
+    "de": "10 (in humanoider Gestalt, 11 (natürliche Rüstung) in Eber- und hybrider Gestalt)"
+  },
+  "hp": {
+    "en": "78 (12d8 + 24)",
+    "de": "78 (12W8+24)"
+  },
+  "str": 17,
+  "dex": 10,
+  "con": 15,
+  "int": 10,
+  "wis": 11,
+  "cha": 8,
+  "strMod": 3,
+  "dexMod": 0,
+  "conMod": 2,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Passive Perception 12"
+    ],
+    "de": [
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common (can't speak in boar form)"
+    ],
+    "de": [
+      "Gemeinsprache (kann in Ebergestalt nicht sprechen)"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Shapechanger",
+        "text": "The wereboar can use its action to polymorph into a boar-humanoid hybrid or into a boar, or back into its true form, which is humanoid. Its statistics, other than its AC, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+      },
+      {
+        "name": "Charge (Boar or Hybrid Form Only)",
+        "text": "If the wereboar moves at least 15 feet straight toward a target and then hits it with its tusks on the same turn, the target takes an extra 7 (2d6) slashing damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone."
+      },
+      {
+        "name": "Relentless",
+        "text": "If the wereboar takes 14 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead."
+      }
+    ],
+    "de": [
+      {
+        "name": "Gestaltwandler",
+        "text": "Der Wereber kann seine Aktion verwenden, um sich in eine hybride Gestalt aus Eber und Humanoide oder in einen Eber zu verwandeln - oder um wieder seine wahre, humanoide Gestalt anzunehmen. Seine Spielwerte sind abgesehen von der RK in beiden Gestalten gleich. Ausrüstung, die er trägt oder hält, wird nicht verwandelt. Wenn er stirbt, nimmt er seine wahre Gestalt an."
+      },
+      {
+        "name": "Sturmangriff (nur Eber- oder hybride Gestalt)",
+        "text": "Wenn der Wereber sich mindestens 4,5 Meter weit direkt auf ein Ziel zubewegt und es dann im selben Zug mit seinen Hauern trifft, erleidet das Ziel zusätzlich 7 (2W6) Hiebschaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-13-Stärkerettungswurf bestehen, oder es wird umgestoßen."
+      },
+      {
+        "name": "Unermüdlich (wird nach kurzer oder langer Rast aufgeladen)",
+        "text": "Wenn der Wereber maximal 14 Schaden erleidet und seine Trefferpunkte dadurch auf 0 sinken würden, hat er stattdessen noch 1 Trefferpunkt."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The wereboar makes two attacks, only one of which can be with its tusks."
+      },
+      {
+        "name": "Maul",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage."
+      },
+      {
+        "name": "Tusks",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage. If the target is a humanoid, it must succeed on a DC 12 Constitution saving throw or be cursed with wereboar lycanthropy."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff (nur humanoide oder hybride Gestalt)",
+        "text": "Der Wereber führt zwei Angriffe aus, von denen nur einer mit den Hauern erfolgen kann."
+      },
+      {
+        "name": "Hauer (nur Eber- oder hybride Gestalt)",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Hiebschaden. Wenn das Ziel ein Humanoide ist, muss es einen SG-12-Konstitutionsrettungswurf bestehen, um nicht mit Wereber-Lykanthropie verflucht zu werden."
+      },
+      {
+        "name": "Zerfleischen (nur humanoide oder hybride Gestalt)",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/80/315/315/636252735506840152.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (Mensch"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "Gestaltwandler), neutral böse"
+  },
+  "token": {
+    "file": "Wereboar (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Wereboar (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wereboar (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

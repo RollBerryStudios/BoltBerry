@@ -1,0 +1,26 @@
+{
+  "id": 216,
+  "slug": "potion-of-gaseous-form",
+  "name": "Potion of Gaseous Form",
+  "nameDe": "Trank der Gasförmigen Gestalt",
+  "category": {
+    "en": "POTIONS_OILS",
+    "de": "Tränke & Öle"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 30000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Potion, rare When you drink this potion, you gain the effect of the gaseous form spell for 1 hour (no concentration required) or until you end the effect as a bonus action. This potion's container seems to hold fog that moves and pours like water.",
+    "de": "Wenn du diesen Trank trinkst, erhältst du eine Stunde lang - oder bis du den Effekt als Bonusaktion beendest - den Effekt des Zaubers Gasförmige Gestalt  (keine Konzentration notwendig). Der Behälter dieses Tranks scheint mit einem Nebel gefüllt zu sein, der sich wie Wasser ausgießen lässt."
+  },
+  "image": "potions-and-oils",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

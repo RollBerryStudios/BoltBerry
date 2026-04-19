@@ -1,0 +1,60 @@
+{
+  "id": 337,
+  "slug": "wind-walk",
+  "name": "Wind Walk",
+  "nameDe": "Windwandeln",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid"
+    ],
+    "de": [
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "6th-level transmutation",
+    "de": "Stufe 6 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "8 hours",
+    "de": "8 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "fire and holy water",
+      "de": "Feuer und Weihwasser"
+    },
+    "raw": {
+      "en": "V, S, M (fire and holy water)",
+      "de": "V, G, M (Feuer und Weihwasser)"
+    }
+  },
+  "description": {
+    "en": "You and up to ten willing creatures you can see within range assume a gaseous form for the duration, appearing as wisps of cloud. While in this cloud form, a creature has a flying speed of 300 feet and has resistance to damage from nonmagical weapons. The only actions a creature can take in this form are the Dash action or to revert to its normal form. Reverting takes 1 minute, during which time a creature is incapacitated and can't move. Until the spell ends, a creature can revert to cloud form, which also requires the 1-minute transformation. If a creature is in cloud form and flying when the effect ends, the creature descends 60 feet per round for 1 minute until it lands, which it does safely. If it can't land after 1 minute, the creature falls the remaining distance.",
+    "de": "Dieser Zauber verwandelt dich und bis zu zehn bereitwillige Kreaturen in Reichweite, die du sehen kannst, für die Wirkungsdauer in eine gasförmige Gestalt, die als Wolkenschwaden erscheint. In Wolkengestalt verfügt eine Kreatur über eine Flugbewegungsrate von 90 Metern und ist gegen Schaden von nichtmagischen Waffen resistent. Die einzigen Aktionen, die sie in dieser Gestalt ausführen kann, sind die Spurt-Aktion und die Rückverwandlung in ihre normale Gestalt. Die Rückverwandlung dauert eine Minute, während der die Kreatur kampfunfähig ist und sich nicht bewegen kann. Bis der Zauber endet, kann sich die Kreatur wieder in die Wolkengestalt verwandeln, was ebenfalls eine Minute dauert. Befindet sich eine Kreatur in Wolkengestalt in der Luft, wenn der Zauber endet, sinkt sie eine Minute lang 18 Meter pro Runde hinab, bis sie sicher landet. Wenn sie nach einer Minute nicht landen kann, stürzt sie die verbleibende Entfernung."
+  },
+  "image": "wind-walk",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

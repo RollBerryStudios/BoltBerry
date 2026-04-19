@@ -1,0 +1,208 @@
+{
+  "id": 54,
+  "slug": "boar",
+  "name": "Boar",
+  "nameDe": "Eber",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "11 (Natural Armor)",
+    "de": "11 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "11 (2d8 + 2)",
+    "de": "11 (2W8+2)"
+  },
+  "str": 13,
+  "dex": 11,
+  "con": 12,
+  "int": 2,
+  "wis": 9,
+  "cha": 5,
+  "strMod": 1,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": -1,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 9"
+    ],
+    "de": [
+      "Passive Wahrnehmung 9"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Charge",
+        "text": "If the boar moves at least 20 ft. straight toward a target and then hits it with a tusk attack on the same turn, the target takes an extra 3 (1d6) slashing damage. If the target is a creature, it must succeed on a DC 11 Strength saving throw or be knocked prone."
+      },
+      {
+        "name": "Relentless",
+        "text": "If the boar takes 7 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead."
+      }
+    ],
+    "de": [
+      {
+        "name": "Sturmangriff",
+        "text": "Wenn der Eber sich mindestens sechs Meter weit direkt auf ein Ziel zubewegt und es dann im selben Zug mit einem Hauerangriff trifft, erleidet das Ziel zusätzlich 3 (1W6) Hiebschaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-11-Stärkerettungswurf bestehen, oder es wird umgestoßen."
+      },
+      {
+        "name": "Unermüdlich (wird nach kurzer oder langer Rast aufgeladen)",
+        "text": "Wenn der Eber maximal 7 Schaden erleidet und seine Trefferpunkte dadurch auf 0 sinken würden, hat er stattdessen noch 1 Trefferpunkt."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Tusk",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Hauer",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 4 (1W6+1) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "BoarField (1).webp",
+    "variant": "field"
+  },
+  "tokens": [
+    {
+      "file": "BoarField (10).webp",
+      "variant": "field"
+    },
+    {
+      "file": "BoarField (11).webp",
+      "variant": "field"
+    },
+    {
+      "file": "BoarField (12).webp",
+      "variant": "field"
+    },
+    {
+      "file": "BoarField (13).webp",
+      "variant": "field"
+    },
+    {
+      "file": "BoarField (14).webp",
+      "variant": "field"
+    },
+    {
+      "file": "BoarField (15).webp",
+      "variant": "field"
+    },
+    {
+      "file": "BoarField (2).webp",
+      "variant": "field"
+    },
+    {
+      "file": "BoarField (3).webp",
+      "variant": "field"
+    },
+    {
+      "file": "BoarField (4).webp",
+      "variant": "field"
+    },
+    {
+      "file": "BoarField (5).webp",
+      "variant": "field"
+    },
+    {
+      "file": "BoarField (6).webp",
+      "variant": "field"
+    },
+    {
+      "file": "BoarField (7).webp",
+      "variant": "field"
+    },
+    {
+      "file": "BoarField (8).webp",
+      "variant": "field"
+    },
+    {
+      "file": "BoarField (9).webp",
+      "variant": "field"
+    },
+    {
+      "file": "BoarForest (1).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BoarForest (10).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BoarForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BoarForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BoarForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BoarForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BoarForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BoarForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BoarForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "BoarForest (9).webp",
+      "variant": "forest"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,57 @@
+{
+  "id": 89,
+  "slug": "augury",
+  "name": "Augury",
+  "nameDe": "Vorahnung",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "2nd-level divination (ritual)",
+    "de": "Stufe 2 Erkenntnismagie (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": "specially marked sticks, bones, or similar tokens worth at least 25 gp",
+    "raw": {
+      "en": "V, S, M (specially marked sticks, bones, or similar tokens worth at least 25 gp)",
+      "de": "V, G, M (specially marked sticks, bones, or similar tokens worth at least 25 gp)"
+    }
+  },
+  "description": {
+    "en": "By casting gem-inlaid sticks, rolling dragon bones, laying out ornate cards, or employing some other divining tool, you receive an omen from an otherworldly entity about the results of a specific course of action that you plan to take within the next 30 minutes. The GM chooses from the following possible omens: - Weal, for good results - Woe, for bad results - Weal and woe, for both good and bad results - Nothing, for results that aren't especially good or bad The spell doesn't take into account any possible circumstances that might change the outcome, such as the casting of additional spells or the loss or gain of a companion. If you cast the spell two or more times before completing your next long rest, there is a cumulative 25 percent chance for each casting after the first that you get a random reading. The GM makes this roll in secret.",
+    "de": "Wirf edelsteinverzierte Stöcke oder Drachenknochen, lege kunstvolle Karten oder nutze ein anderes Hilfsmittel und erhalte ein Omen von einem außerweltlichen Wesen zu einer bestimmten Vorgehensweise, die innerhalb der nächsten 30 Minuten geplant ist. Der SL wählt aus den folgenden möglichen Omen aus: Der Zauber berücksichtigt keinerlei Umstände, die das Ergebnis ändern könnten, etwa das Wirken von zusätzlichen Zaubern oder der Verlust oder Gewinn eines Begleiters. Wenn du den Zauber vor deiner nächsten langen Rast mindestens zweimal wirkst, steigt die Chance auf zufällige Omen mit jedem Wirken nach dem ersten um zusätzliche 25 Prozent. Der SL würfelt das Ergebnis geheim aus."
+  },
+  "image": "divination",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

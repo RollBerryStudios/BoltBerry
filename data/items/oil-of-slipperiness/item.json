@@ -1,0 +1,26 @@
+{
+  "id": 233,
+  "slug": "oil-of-slipperiness",
+  "name": "Oil of Slipperiness",
+  "nameDe": "Öl der Glätte",
+  "category": {
+    "en": "POTIONS_OILS",
+    "de": "Tränke & Öle"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 48000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Potion, uncommon This sticky black unguent is thick and heavy in the container, but it flows quickly when poured. The oil can cover a Medium or smaller creature, along with the equipment it's wearing and carrying (one additional vial is required for each size category above Medium). Applying the oil takes 10 minutes. The affected creature then gains the effect of a freedom of movement spell for 8 hours. Alternatively, the oil can be poured on the ground as an action, where it covers a 10-foot square, duplicating the effect of the grease spell in that area for 8 hours.",
+    "de": "Diese klebrige, schwarze Salbe wirkt im Gefäß sehr dickflüssig und zäh, verteilt sich aber schnell, wenn sie ausgegossen wird. Das Öl kann eine höchstens mittelgroße Kreatur mit all ihrer getragenen und mitgeführten Ausrüstung bedecken (für jede Größenkategorie über mittelgroß wird eine weitere Phiole benötigt). Das Aufträgen des Öls dauert zehn Minuten. Die vom Öl bedeckte Kreatur erhält dann für acht Stunden den Effekt des Zaubers Bewegungsfreiheit . Alternativ kann das Öl als Aktion auf den Boden gegossen werden, wo es einen quadratischen Bereich mit einer Kantenlänge von drei Metern bedeckt. Es dupliziert in diesem Bereich acht Stunden lang den Effekt des Zaubers Schmieren ."
+  },
+  "image": "potions-and-oils",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

@@ -1,0 +1,213 @@
+{
+  "id": 257,
+  "slug": "shadow",
+  "name": "Shadow",
+  "nameDe": "Schatten",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium undead, chaotic evil",
+    "de": "Mittelgroßer Untoter, chaotisch böse"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "16 (3d8 + 3)",
+    "de": "16 (3W8+3)"
+  },
+  "str": 6,
+  "dex": 14,
+  "con": 13,
+  "int": 6,
+  "wis": 10,
+  "cha": 8,
+  "strMod": -2,
+  "dexMod": 2,
+  "conMod": 1,
+  "intMod": -2,
+  "wisMod": 0,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +4 (+6 in dämmrigem Licht oder Dunkelheit)"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Amorphous",
+        "text": "The shadow can move through a space as narrow as 1 inch wide without squeezing."
+      },
+      {
+        "name": "Shadow Stealth",
+        "text": "While in dim light or darkness, the shadow can take the Hide action as a bonus action. Its stealth bonus is also improved to +6."
+      },
+      {
+        "name": "Sunlight Weakness",
+        "text": "While in sunlight, the shadow has disadvantage on attack rolls, ability checks, and saving throws."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amorph",
+        "text": "Der Schatten kann sich durch enge Bereiche mit einer Breite von nur 2,5 Zentimetern bewegen, ohne sich quetschen zu müssen."
+      },
+      {
+        "name": "Heimlicher Schatten",
+        "text": "In dämmrigem Licht oder bei Dunkelheit kann der Schatten die Verstecken-Aktion als Bonusaktion ausführen."
+      },
+      {
+        "name": "Schwach im Sonnenlicht",
+        "text": "Im Sonnenlicht ist der Schatten bei Angriffswürfen, Attributswürfen und Rettungswürfen im Nachteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Strength Drain",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 9 (2d6 + 2) necrotic damage, and the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest.\nIf a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."
+      }
+    ],
+    "de": [
+      {
+        "name": "Stärkeentzug",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 9 (2W6+2) nekrotischer Schaden, und der Stärkewert des Ziels ist um 1W4 verringert. Wenn die Stärke dadurch auf 0 sinkt, stirbt das Ziel. Anderenfalls bleibt die Stärke verringert, bis das Ziel eine kurze oder lange Rast beendet. Wenn ein Humanoide, der keine böse Gesinnung hat, durch diesen Angriff stirbt, erhebt sich 1W4 Stunden später ein neuer Schatten aus der Leiche."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/155/315/315/636252758977032019.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "fiend",
+    "de": "Untoter"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "Shadow (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Shadow (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Shadow (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

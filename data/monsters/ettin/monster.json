@@ -1,0 +1,218 @@
+{
+  "id": 104,
+  "slug": "ettin",
+  "name": "Ettin",
+  "source": "SRD",
+  "meta": {
+    "en": "Large giant, chaotic evil",
+    "de": "Großer Riese, chaotisch böse"
+  },
+  "challenge": "4",
+  "xp": 1100,
+  "ac": {
+    "en": "12 (Natural Armor)",
+    "de": "12 (Natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "85 (10d10 + 30)",
+    "de": "85 (10W10 + 30)"
+  },
+  "str": 21,
+  "dex": 8,
+  "con": 17,
+  "int": 6,
+  "wis": 10,
+  "cha": 8,
+  "strMod": 5,
+  "dexMod": -1,
+  "conMod": 3,
+  "intMod": -2,
+  "wisMod": 0,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Giant",
+      "Orc"
+    ],
+    "de": [
+      "Orkisch",
+      "Riesisch"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Two Heads",
+        "text": "The ettin has advantage on Wisdom (Perception) checks and on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious."
+      },
+      {
+        "name": "Wakeful",
+        "text": "When one of the ettin's heads is asleep, its other head is awake."
+      }
+    ],
+    "de": [
+      {
+        "name": "Wachsam",
+        "text": "Wenn einer der Köpfe des Ettins schläft, ist der andere Kopf wach."
+      },
+      {
+        "name": "Zwei Köpfe",
+        "text": "Der Ettin ist bei Weisheitswürfen (Wahrnehmung) und bei Rettungswürfen gegen die Zustände Betäubt, Bewusstlos, Bezaubert, Blind, Taub und Verängstigt im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The ettin makes two attacks: one with its battleaxe and one with its morningstar."
+      },
+      {
+        "name": "Battleaxe",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 14 (2d8 + 5) slashing damage."
+      },
+      {
+        "name": "Morningstar",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 14 (2d8 + 5) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Ettin führt zwei Angriffe aus: einen mit seiner Streitaxt und einen mit seinem Morgenstern."
+      },
+      {
+        "name": "Morgenstern",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 14 (2W8+5) Stichschaden."
+      },
+      {
+        "name": "Streitaxt",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 14 (2W8+5) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/341/1000/1000/636252776953634777.jpeg",
+  "size": {
+    "en": "large",
+    "de": "groß"
+  },
+  "type": {
+    "en": "giant",
+    "de": "Riese"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "EttinFemale (1).webp",
+    "variant": "female"
+  },
+  "tokens": [
+    {
+      "file": "EttinFemale (2).webp",
+      "variant": "female"
+    },
+    {
+      "file": "EttinFemaleNSFW (1).webp",
+      "variant": "femaleNSFW"
+    },
+    {
+      "file": "EttinFemaleNSFW (2).webp",
+      "variant": "femaleNSFW"
+    },
+    {
+      "file": "EttinFemaleNSFW (3).webp",
+      "variant": "femaleNSFW"
+    },
+    {
+      "file": "EttinFemaleNSFW (4).webp",
+      "variant": "femaleNSFW"
+    },
+    {
+      "file": "EttinFemaleNSFW (5).webp",
+      "variant": "femaleNSFW"
+    },
+    {
+      "file": "EttinFemaleNSFW (6).webp",
+      "variant": "femaleNSFW"
+    },
+    {
+      "file": "EttinMale (1).webp",
+      "variant": "male"
+    },
+    {
+      "file": "EttinMale (10).webp",
+      "variant": "male"
+    },
+    {
+      "file": "EttinMale (11).webp",
+      "variant": "male"
+    },
+    {
+      "file": "EttinMale (12).webp",
+      "variant": "male"
+    },
+    {
+      "file": "EttinMale (13).webp",
+      "variant": "male"
+    },
+    {
+      "file": "EttinMale (14).webp",
+      "variant": "male"
+    },
+    {
+      "file": "EttinMale (2).webp",
+      "variant": "male"
+    },
+    {
+      "file": "EttinMale (3).webp",
+      "variant": "male"
+    },
+    {
+      "file": "EttinMale (4).webp",
+      "variant": "male"
+    },
+    {
+      "file": "EttinMale (5).webp",
+      "variant": "male"
+    },
+    {
+      "file": "EttinMale (6).webp",
+      "variant": "male"
+    },
+    {
+      "file": "EttinMale (7).webp",
+      "variant": "male"
+    },
+    {
+      "file": "EttinMale (8).webp",
+      "variant": "male"
+    },
+    {
+      "file": "EttinMale (9).webp",
+      "variant": "male"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

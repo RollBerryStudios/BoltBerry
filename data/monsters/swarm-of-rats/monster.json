@@ -1,0 +1,222 @@
+{
+  "id": 280,
+  "slug": "swarm-of-rats",
+  "name": "Swarm of Rats",
+  "nameDe": "Rattenschwarm",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "10",
+    "de": "10"
+  },
+  "hp": {
+    "en": "24 (7d8 - 7)",
+    "de": "24 (7W8-7)"
+  },
+  "str": 9,
+  "dex": 11,
+  "con": 9,
+  "int": 2,
+  "wis": 10,
+  "cha": 3,
+  "strMod": -1,
+  "dexMod": 0,
+  "conMod": -1,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 30 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 9 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Smell",
+        "text": "The swarm has advantage on Wisdom (Perception) checks that rely on smell."
+      },
+      {
+        "name": "Swarm",
+        "text": "The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny rat. The swarm can't regain hit points or gain temporary hit points."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfer Geruchssinn",
+        "text": "Der Schwarm ist bei Weisheitswürfen (Wahrnehmung), die auf Geruchssinn basieren, im Vorteil."
+      },
+      {
+        "name": "Schwarm",
+        "text": "Der Schwarm kann den Raum einer anderen Kreatur besetzen und umgekehrt. Er kann sich durch jede Öffnung bewegen, die groß genug für eine winzige Ratte ist. Der Schwarm kann keine Trefferpunkte zurückerhalten und keine temporären Trefferpunkte erhalten."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bites",
+        "text": "Melee Weapon Attack: +2 to hit, reach 0 ft., one target in the swarm's space. Hit: 7 (2d6) piercing damage, or 3 (1d6) piercing damage if the swarm has half of its hit points or fewer."
+      }
+    ],
+    "de": [
+      {
+        "name": "Bisse",
+        "text": "Nahkampfwaffenangriff: +2 auf Treffer, Reichweite 0 m, ein Ziel im Bereich des Schwarms. Treffer: 7 (2W6) Stichschaden oder 3 (1W6) Stichschaden, wenn der Schwarm höchstens die Hälfte seiner Trefferpunkte hat."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/9/908/315/315/636334289541603972.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Schwarm winziger Tiere"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "SwarmOfRats (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "SwarmOfRats (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "SwarmOfRats (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

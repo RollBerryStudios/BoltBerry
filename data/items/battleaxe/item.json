@@ -1,0 +1,36 @@
+{
+  "id": 27,
+  "slug": "battleaxe",
+  "name": "Battleaxe",
+  "nameDe": "Streitaxt",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 1000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 4,
+  "classification": {
+    "en": "Martial Melee Weapons",
+    "de": "Nahkampfs-Kriegswaffen"
+  },
+  "damage": "1d8",
+  "damageType": {
+    "en": "slashing",
+    "de": "hieb"
+  },
+  "properties": {
+    "en": "versatile (1d10)",
+    "de": "vielseitig (1d10)"
+  },
+  "image": "greataxe",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

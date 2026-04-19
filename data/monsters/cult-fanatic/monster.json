@@ -1,0 +1,253 @@
+{
+  "id": 77,
+  "slug": "cult-fanatic",
+  "name": "Cult Fanatic",
+  "nameDe": "Kultfanatiker",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "13 (Leather Armor)",
+    "de": "13 (Lederrüstung)"
+  },
+  "hp": {
+    "en": "33 (6d8 + 6)",
+    "de": "33 (6W8+6)"
+  },
+  "str": 11,
+  "dex": 14,
+  "con": 12,
+  "int": 10,
+  "wis": 13,
+  "cha": 14,
+  "strMod": 0,
+  "dexMod": 2,
+  "conMod": 1,
+  "intMod": 0,
+  "wisMod": 1,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 11"
+    ],
+    "de": [
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any one language (usually Common)"
+    ],
+    "de": [
+      "Eine beliebige Sprache (normalerweise Gemeinsprache)"
+    ]
+  },
+  "skills": [
+    "Religion +2",
+    "Täuschen +4",
+    "Überzeugen +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Dark Devotion",
+        "text": "The fanatic has advantage on saving throws against being charmed or frightened."
+      }
+    ],
+    "de": [
+      {
+        "name": "Dunkle Hingabe",
+        "text": "Der Fanatiker ist bei Rettungswürfen gegen die Zustände Bezaubert und Verängstigt im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The fanatic makes two melee attacks."
+      },
+      {
+        "name": "Dagger",
+        "text": "Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one creature. Hit: 4 (1d4 + 2) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Fanatiker führt zwei Nahkampfangriffe aus."
+      },
+      {
+        "name": "Dolch",
+        "text": "Nah- oder Fernkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m oder Reichweite 6/18 m, eine Kreatur. Treffer: 4 (1W4+2) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/259/1000/1000/636252768307230924.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (jedes Volk)"
+  },
+  "alignment": {
+    "en": "any non-good",
+    "de": "jede nichtgute Gesinnung"
+  },
+  "token": {
+    "file": "CultFanaticForest (1).webp",
+    "variant": "forest"
+  },
+  "tokens": [
+    {
+      "file": "CultFanaticForest (10).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultFanaticForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultFanaticForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultFanaticForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultFanaticForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultFanaticForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultFanaticForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultFanaticForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultFanaticForest (9).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultFanaticTemple (1).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (10).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (11).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (12).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (13).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (14).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (15).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (16).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (17).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (18).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (19).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (2).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (20).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (21).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (22).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (23).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (24).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (25).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (3).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (4).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (5).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (6).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (7).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (8).webp",
+      "variant": "temple"
+    },
+    {
+      "file": "CultFanaticTemple (9).webp",
+      "variant": "temple"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

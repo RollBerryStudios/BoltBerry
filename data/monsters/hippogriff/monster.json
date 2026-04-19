@@ -1,0 +1,311 @@
+{
+  "id": 169,
+  "slug": "hippogriff",
+  "name": "Hippogriff",
+  "nameDe": "Pferdegreif",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, unaligned",
+    "de": "Große Monstrosität, ohne Gesinnung"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "11",
+    "de": "11"
+  },
+  "hp": {
+    "en": "19 (3d10 + 3)",
+    "de": "19 (3W10+3)"
+  },
+  "str": 17,
+  "dex": 13,
+  "con": 13,
+  "int": 2,
+  "wis": 12,
+  "cha": 8,
+  "strMod": 3,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 15"
+    ],
+    "de": [
+      "Passive Wahrnehmung 15"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +5"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Sight",
+        "text": "The hippogriff has advantage on Wisdom (Perception) checks that rely on sight."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfe Sicht",
+        "text": "Der Pferdegreif ist bei Weisheitswürfen (Wahrnehmung), die auf Sicht basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The hippogriff makes two attacks: one with its beak and one with its claws."
+      },
+      {
+        "name": "Beak",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (1d10 + 3) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Pferdegreif führt zwei Angriffe aus: einen Schnabel- und einen Klauenangriff."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Hiebschaden."
+      },
+      {
+        "name": "Schnabel",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 8 (1W10+3) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/335/315/315/636252776578605778.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "HippogriffArmored (1).webp",
+    "variant": "armored"
+  },
+  "tokens": [
+    {
+      "file": "HippogriffArmored (10).webp",
+      "variant": "armored"
+    },
+    {
+      "file": "HippogriffArmored (11).webp",
+      "variant": "armored"
+    },
+    {
+      "file": "HippogriffArmored (2).webp",
+      "variant": "armored"
+    },
+    {
+      "file": "HippogriffArmored (3).webp",
+      "variant": "armored"
+    },
+    {
+      "file": "HippogriffArmored (4).webp",
+      "variant": "armored"
+    },
+    {
+      "file": "HippogriffArmored (5).webp",
+      "variant": "armored"
+    },
+    {
+      "file": "HippogriffArmored (6).webp",
+      "variant": "armored"
+    },
+    {
+      "file": "HippogriffArmored (7).webp",
+      "variant": "armored"
+    },
+    {
+      "file": "HippogriffArmored (8).webp",
+      "variant": "armored"
+    },
+    {
+      "file": "HippogriffArmored (9).webp",
+      "variant": "armored"
+    },
+    {
+      "file": "HippogriffMountains (1).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (10).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (11).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (12).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (13).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (14).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (15).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (16).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (17).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (18).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (19).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (2).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (20).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (21).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (22).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (23).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (24).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (25).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (26).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (27).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (28).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (29).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (3).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (30).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (31).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (32).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (33).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (34).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (35).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (36).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (4).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (5).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (6).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (7).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (8).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "HippogriffMountains (9).webp",
+      "variant": "mountains"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

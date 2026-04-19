@@ -1,0 +1,201 @@
+{
+  "id": 153,
+  "slug": "gorgon",
+  "name": "Gorgon",
+  "nameDe": "Gorgone",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, unaligned",
+    "de": "Große Monstrosität, ohne Gesinnung"
+  },
+  "challenge": "5",
+  "xp": 1800,
+  "ac": {
+    "en": "19 (Natural Armor)",
+    "de": "19 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "114 (12d10 + 48)",
+    "de": "114 (12W10+48)"
+  },
+  "str": 20,
+  "dex": 11,
+  "con": 18,
+  "int": 2,
+  "wis": 12,
+  "cha": 7,
+  "strMod": 5,
+  "dexMod": 0,
+  "conMod": 4,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Trampling Charge",
+        "text": "If the gorgon moves at least 20 feet straight toward a creature and then hits it with a gore attack on the same turn, that target must succeed on a DC 16 Strength saving throw or be knocked prone. If the target is prone, the gorgon can make one attack with its hooves against it as a bonus action."
+      }
+    ],
+    "de": [
+      {
+        "name": "Trampel-Sturmangriff",
+        "text": "Wenn der Gorgone sich mindestens sechs Meter weit direkt auf eine Kreatur zubewegt und sie dann im gleichen Zug mit einem Zerfleischen-Angriff trifft, muss das Ziel einen SG-16-Stärkerettungswurf bestehen, oder es wird umgestoßen. Gegen ein liegendes Ziel kann der Gorgone als Bonusaktion einen Angriff mit seinen Hufen ausführen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Gore",
+        "text": "Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 18 (2d12 + 5) piercing damage."
+      },
+      {
+        "name": "Hooves",
+        "text": "Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 16 (2d10 + 5) bludgeoning damage."
+      },
+      {
+        "name": "Petrifying Breath",
+        "text": "The gorgon exhales petrifying gas in a 30-foot cone. Each creature in that area must succeed on a DC 13 Constitution saving throw. On a failed save, a target begins to turn to stone and is restrained. The restrained target must repeat the saving throw at the end of its next turn. On a success, the effect ends on the target. On a failure, the target is petrified until freed by the greater restoration spell or other magic."
+      }
+    ],
+    "de": [
+      {
+        "name": "Hufe",
+        "text": "Nahkampfwaffenangriff: +8 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 16 (2W10+5) Wuchtschaden."
+      },
+      {
+        "name": "Zerfleischen",
+        "text": "Nahkampfwaffenangriff: +8 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 18 (2W12+5) Stichschaden."
+      },
+      {
+        "name": "Versteinernder Odem (Aufladung 5–6)",
+        "text": "Der Gorgone atmet versteinerndes Gas in einem Kegel von neun Metern aus. Jede Kreatur in diesem Bereich muss einen SG-13-Konstitutionsrettungswurf bestehen. Scheitert der Wurf, so beginnt das Ziel zu versteinern und ist festgesetzt. Das festgesetzte Ziel muss den Rettungswurf am Ende seines nächsten Zugs wiederholen. Bei einem Erfolg endet der Effekt. Bei einem Misserfolg ist das Ziel versteinert, bis es durch den Zauber Vollständige Genesung oder andere Magie befreit wird."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/355/315/315/636252778125099430.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Gorgon (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Gorgon (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Gorgon (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

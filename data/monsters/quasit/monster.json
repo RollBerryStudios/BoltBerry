@@ -1,0 +1,215 @@
+{
+  "id": 235,
+  "slug": "quasit",
+  "name": "Quasit",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny fiend, chaotic evil",
+    "de": "Winziger Unhold, chaotisch böse"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": "13",
+  "hp": {
+    "en": "7 (3d4)",
+    "de": "7 (3W4)"
+  },
+  "str": 5,
+  "dex": 17,
+  "con": 10,
+  "int": 7,
+  "wis": 10,
+  "cha": 10,
+  "strMod": -3,
+  "dexMod": 3,
+  "conMod": 0,
+  "intMod": -2,
+  "wisMod": 0,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Abyssal",
+      "Common"
+    ],
+    "de": [
+      "Abyssisch",
+      "Gemeinsprache"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +5"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Shapechanger",
+        "text": "The quasit can use its action to polymorph into a beast form that resembles a bat (speed 10 ft. fly 40 ft.), a centipede (40 ft., climb 40 ft.), or a toad (40 ft., swim 40 ft.), or back into its true form . Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn't transformed . It reverts to its true form if it dies."
+      },
+      {
+        "name": "Magic Resistance",
+        "text": "The quasit has advantage on saving throws against spells and other magical effects."
+      }
+    ],
+    "de": [
+      {
+        "name": "Gestaltwandler",
+        "text": "Der Quasit kann seine Aktion verwenden, um sich in eine Tiergestalt wie eine Fledermaus (Bewegungsrate 3 m, Fliegen 12 m), eine Kröte (12 m, Schwimmen 12 m), einen Tausendfüßler (12 m, Klettern 12 m) oder zurück in seine wahre Gestalt zu verwandeln. Seine Spielwerte sind in allen Gestalten bis auf die angegebenen Bewegungsraten gleich. Ausrüstung, die er trägt oder hält, wird nicht verwandelt. Wenn er stirbt, nimmt er seine wahre Gestalt an."
+      },
+      {
+        "name": "Magieresistenz",
+        "text": "Der Quasit ist bei Rettungswürfen gegen Zauber und andere magische Effekte im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Claw (Bite in Beast Form)",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d4 + 3) piercing damage, and the target must succeed on a DC 10 Constitution saving throw or take 5 (2d4) poison damage and become poisoned for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+      },
+      {
+        "name": "Scare",
+        "text": "One creature of the quasit's choice within 20 ft. of it must succeed on a DC 10 Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the end of each of its turns, with disadvantage if the quasit is within line of sight, ending the effect on itself on a success."
+      },
+      {
+        "name": "Invisibility",
+        "text": "The quasit magically turns invisible until it attacks or uses Scare, or until its concentration ends (as if concentrating on a spell). Any equipment the quasit wears or carries is invisible with it."
+      }
+    ],
+    "de": [
+      {
+        "name": "Klauen (Biss in Tiergestalt)",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W4+3) Stichschaden, und das Ziel muss einen SG-10-Konstitutionsrettungswurf bestehen, oder es erleidet 5 (2W4) Giftschaden und ist eine Minute lang vergiftet. Das Ziel kann den Rettungswurf am Ende jedes seiner Züge wiederholen und den Effekt bei einem Erfolg beenden."
+      },
+      {
+        "name": "Unsichtbarkeit",
+        "text": "Der Quasit wird magisch unsichtbar, bis er angreift, Verängstigen einsetzt, oder bis seine Konzentration endet (wie bei einem Zauber). Ausrüstung, die der Quasit trägt oder hält, ist ebenfalls unsichtbar."
+      },
+      {
+        "name": "Verängstigen (1-mal täglich)",
+        "text": "Eine Kreatur nach Wahl des Quasiten im Abstand von bis zu sechs Metern von ihm muss einen SG-10-Weisheitsrettungswurf bestehen, oder sie ist eine Minute lang verängstigt. Das Ziel kann den Rettungswurf am Ende jedes seiner Züge wiederholen. Wenn der Quasit in Sichtlinie ist, so ist der Rettungswurf im Nachteil. Bei einem Erfolg endet der Effekt."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/271/315/315/636252769318699115.jpeg",
+  "size": {
+    "en": "tiny",
+    "de": "winzig"
+  },
+  "type": {
+    "en": "fiend",
+    "de": "Unhold"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "Quasit (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Quasit (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Quasit (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

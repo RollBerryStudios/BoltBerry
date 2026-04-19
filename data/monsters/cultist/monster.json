@@ -1,0 +1,268 @@
+{
+  "id": 78,
+  "slug": "cultist",
+  "name": "Cultist",
+  "nameDe": "Kultist",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "1/8",
+  "xp": 25,
+  "ac": {
+    "en": "12 (Leather Armor)",
+    "de": "12 (Lederrüstung)"
+  },
+  "hp": {
+    "en": "9 (2d8)",
+    "de": "9 (2W8)"
+  },
+  "str": 11,
+  "dex": 12,
+  "con": 10,
+  "int": 10,
+  "wis": 11,
+  "cha": 10,
+  "strMod": 0,
+  "dexMod": 1,
+  "conMod": 0,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any one language (usually Common)"
+    ],
+    "de": [
+      "Eine beliebige Sprache (normalerweise Gemeinsprache)"
+    ]
+  },
+  "skills": [
+    "Religion +2",
+    "Täuschen +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Dark Devotion",
+        "text": "The cultist has advantage on saving throws against being charmed or frightened."
+      }
+    ],
+    "de": [
+      {
+        "name": "Dunkle Hingabe",
+        "text": "Der Kultist ist bei Rettungswürfen gegen die Zustände Bezaubert und Verängstigt im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Scimitar",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one creature. Hit: 4 (1d6 + 1) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Krummsäbel",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 4 (1W6+1) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/14/481/1000/1000/636364323106021375.png",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (jedes Volk)"
+  },
+  "alignment": {
+    "en": "any non-good",
+    "de": "jede nichtgute Gesinnung"
+  },
+  "token": {
+    "file": "CultistForest (1).webp",
+    "variant": "forest"
+  },
+  "tokens": [
+    {
+      "file": "CultistForest (10).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultistForest (11).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultistForest (12).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultistForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultistForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultistForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultistForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultistForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultistForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultistForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultistForest (9).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CultistUrban (1).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (10).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (11).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (12).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (13).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (14).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (15).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (16).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (17).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (18).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (19).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (2).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (20).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (21).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (22).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (23).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (24).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (25).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (26).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (27).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (28).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (29).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (3).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (4).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (5).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (6).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (7).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (8).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CultistUrban (9).webp",
+      "variant": "urban"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

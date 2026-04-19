@@ -1,0 +1,68 @@
+{
+  "id": 264,
+  "slug": "glyph-of-warding",
+  "name": "Glyph of Warding",
+  "nameDe": "Glyphe des Schutzes",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "wizard",
+      "bard"
+    ],
+    "de": [
+      "Kleriker",
+      "Magier",
+      "Barde"
+    ]
+  },
+  "type": {
+    "en": "3rd-level abjuration",
+    "de": "Stufe 3 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Until dispelled or triggered",
+    "de": "Bis entzaubert oder ausgelöst"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "incense and powdered diamond worth at least 200 gp, which the spell consumes",
+      "de": "Weihrauch und pulverisierter Diamant im Wert von mindestens 200 Goldstücken, die der Zauber verbraucht"
+    },
+    "raw": {
+      "en": "V, S, M, (incense and powdered diamond worth at least 200 gp, which the spell consumes)",
+      "de": "V, G, M, (Weihrauch und pulverisierter Diamant im Wert von mindestens 200 Goldstücken, die der Zauber verbraucht)"
+    }
+  },
+  "description": {
+    "en": "When you cast this spell, you inscribe a glyph that harms other creatures, either upon a surface (such as a table or a section of floor or wall) or within an object that can be closed (such as a book, a scroll, or a treasure chest) to conceal the glyph. If you choose a surface, the glyph can cover an area of the surface no larger than 10 feet in diameter. If you choose an object, that object must remain in its place; if the object is moved more than 10 feet from where you cast this spell, the glyph is broken, and the spell ends without being triggered. The glyph is nearly invisible and requires a successful Intelligence (Investigation) check against your spell save DC to be found. You decide what triggers the glyph when you cast the spell. For glyphs inscribed on a surface, the most typical triggers include touching or standing on the glyph, removing another object covering the glyph, approaching within a certain distance of the glyph, or manipulating the object on which the glyph is inscribed. For glyphs inscribed within an object, the most common triggers include opening that object, approaching within a certain distance of the object, or seeing or reading the glyph. Once a glyph is triggered, this spell ends. You can further refine the trigger so the spell activates only under certain circumstances or according to physical characteristics (such as height or weight), creature kind (for example, the ward could be set to affect aberrations or drow), or alignment. You can also set conditions for creatures that don't trigger the glyph, such as those who say a certain password. When you inscribe the glyph, choose *explosive runes* or a *spell glyph*. ***Explosive Runes.*** When triggered, the glyph erupts with magical energy in a 20-foot-radius sphere centered on the glyph. The sphere spreads around corners. Each creature in the area must make a Dexterity saving throw. A creature takes 5d8 acid, cold, fire, lightning, or thunder damage on a failed saving throw (your choice when you create the glyph), or half as much damage on a successful one. ***Spell Glyph.*** You can store a prepared spell of 3rd level or lower in the glyph by casting it as part of creating the glyph. The spell must target a single creature or an area. The spell being stored has no immediate effect when cast in this way. When the glyph is triggered, the stored spell is cast. If the spell has a target, it targets the creature that triggered the glyph. If the spell affects an area, the area is centered on that creature. If the spell summons hostile creatures or creates harmful objects or traps, they appear as close as possible to the intruder and attack it. If the spell requires concentration, it lasts until the end of its full duration.",
+    "de": "Wenn du diesen Zauber wirkst, zeichnest du eine Glyphe, die anderen Kreaturen Schaden zufügt. Dies geschieht entweder auf einer Oberfläche (wie einem Tisch, dem Fußboden oder einer Wand) oder in einem Gegenstand, der verschlossen werden kann (wie einem Buch, einer Schriftrolle oder einer Schatztruhe), um die Glyphe zu verbergen. Wählst du eine Oberfläche, kann die Glyphe einen Bereich mit einem Radius von maximal drei Metern abdecken. Wählst du einen Gegenstand, muss dieser an seinem Standort bleiben. Wird er mehr als drei Meter von dem Ort entfernt, an dem du den Zauber gewirkt hast, wird die Glyphe zerstört und der Zauber endet, ohne ausgelöst zu werden. Die Glyphe ist nahezu unsichtbar. Es ist ein erfolgreicher Intelligenzwurf (Nachforschungen) gegen deinen Zauberrettungswurf-SG nötig, um sie zu entdecken. Wenn du den Zauber wirkst, entscheidest du, was die Glyphe auslöst. Glyphen auf Oberflächen werden meist dadurch ausgelöst, dass jemand sie berührt oder darauf steht, einen Gegenstand bewegt, der die Glyphe verdeckt, sich der Glyphe auf eine bestimmte Entfernung nähert oder mit dem Gegenstand interagiert, auf den die Glyphe geschrieben wurde. Glyphen auf Gegenständen werden meist dadurch ausgelöst, dass jemand den Gegenstand öffnet, sich ihm auf eine bestimmte Entfernung nähert oder die Glyphe sieht oder liest. Sobald die Glyphe ausgelöst wurde, endet der Zauber. Du kannst die Auslösebedingung des Zaubers weiter verfeinern, so dass der Zauber nur bei bestimmten Umständen oder körperlichen Eigenschaften (wie Größe oder Gewicht) sowie Kreaturentypen (etwa Aberrationen oder Drow) oder bei einer bestimmten Gesinnung ausgelöst wird. Du kannst auch Bedingungen für Kreaturen festlegen, die die Glyphe nicht auslösen, wenn sie beispielsweise ein bestimmtes Passwort aussprechen. Beim Zeichnen der Glyphe wählst du aus, ob es sich um explosive Runen  oder eine Zauberglyphe  handelt. Auf höheren Graden:  Wenn du diesen Zauber wirkst, indem du einen Zauberplatz des 4. Grades oder höher nutzt, erhöht sich der Schaden der explosiven Runen  für jeden Grad über dem 3. um 1W8. Wenn du eine Zauberglyphe  erschaffst, kannst du Zauber bis zum selben Grad des Zauberplatzes speichern, den du für die Glyphe des Schutzes  verwendet hast. Explosive Runen:  Wird die Glyphe ausgelöst, explodiert ihre magische Energie in einer Sphäre mit einem Radius von sechs Metern mit der Glyphe im Zentrum. Die Sphäre breitet sich um Ecken aus. Jede Kreatur in diesem Bereich muss einen Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 5W8 Blitz-, Feuer-, Kälte-, Säure- oder Schallschaden (deine Wahl beim Wirken der Glyphe), anderenfalls die Hälfte. Zauberglyphe:  Du kannst einen vorbereiteten Zauber des maximal 3. Grades in der Glyphe speichern, den du beim Erschaffen der Glyphe wirkst Der Zauber muss eine einzelne Kreatur oder einen Bereich zum Ziel haben. Wenn er auf diese Weise gewirkt wird, hat der gespeicherte Zauber keinen unmittelbaren Effekt. Erst wenn die Glyphe ausgelöst wird, wird der gespeicherte Zauber gewirkt. Ein gezielter Zauber hat die Kreatur zum Ziel, die die Glyphe auslöst. Wirkt der Zauber auf einen Bereich, ist dieser auf die Kreatur zentriert. Wenn der Zauber feindlich gesinnte Kreaturen beschwört oder schädliche Gegenstände oder Fallen erschafft, erscheinen sie so nahe wie möglich beim Eindringling und greifen ihn an. Erfordert der Zauber Konzentration, hält er bis zum Ende seiner Wirkungsdauer an."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 4th level or higher, the damage of an explosive runes glyph increases by 1d8 for each slot level above 3rd. If you create a spell glyph, you can store any spell of up to the same level as the slot you use for the glyph of warding.",
+    "de": "Wenn du diesen Zauber wirkst, indem du einen Zauberplatz des 4. Grades oder höher nutzt, erhöht sich der Schaden der explosiven Runen für jeden Grad über dem 3. um 1W8. Wenn du eine Zauberglyphe erschaffst, kannst du Zauber bis zum selben Grad des Zauberplatzes speichern, den du für die Glyphe des Schutzes verwendet hast."
+  },
+  "image": "comprehend-languages",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,224 @@
+{
+  "id": 94,
+  "slug": "dryad",
+  "name": "Dryad",
+  "nameDe": "Dryade",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium fey, neutral",
+    "de": "Mittelgroße Fee, neutral"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "11 (16 With Barkskin)",
+    "de": "11 (16 mit Rindenhaut)"
+  },
+  "hp": {
+    "en": "22 (5d8)",
+    "de": "22 (5W8)"
+  },
+  "str": 10,
+  "dex": 12,
+  "con": 11,
+  "int": 14,
+  "wis": 15,
+  "cha": 18,
+  "strMod": 0,
+  "dexMod": 1,
+  "conMod": 0,
+  "intMod": 2,
+  "wisMod": 2,
+  "chaMod": 4,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Elvish",
+      "Sylvan"
+    ],
+    "de": [
+      "Elfisch",
+      "Sylvanisch"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +5",
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Magic Resistance",
+        "text": "The dryad has advantage on saving throws against spells and other magical effects."
+      },
+      {
+        "name": "Speak with Beasts and Plants",
+        "text": "The dryad can communicate with beasts and plants as if they shared a language."
+      },
+      {
+        "name": "Tree Stride",
+        "text": "Once on her turn, the dryad can use 10 feet of her movement to step into one living tree and emerge from another within 60 feet. Both trees must be alive and at least the same size as her."
+      }
+    ],
+    "de": [
+      {
+        "name": "Baumwandeln",
+        "text": "Einmal in jedem ihrer Züge kann die Dryade drei Meter ihrer Bewegungsrate verwenden, um magisch in einen lebendigen Baum innerhalb ihrer Reichweite hinein- und aus einem anderen lebendigen Baum im Abstand von bis zu 18 Metern vom ersten Baum herauszutreten. Sie erscheint dann an einer freien Stelle im Abstand von bis zu 1,5 Metern vom zweiten Baum. Beide Bäume müssen mindestens groß sein."
+      },
+      {
+        "name": "Magieresistenz",
+        "text": "Die Dryade ist bei Rettungswürfen gegen Zauber und andere magische Effekte im Vorteil."
+      },
+      {
+        "name": "Mit Tieren und Pflanzen sprechen",
+        "text": "Die Dryade kann sich mit Tieren und Pflanzen verständigen, als spräche sie ihre Sprache."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Club",
+        "text": "Melee Weapon Attack: +2 to hit (+6 to hit with shillelagh), reach 5 ft., one target. Hit: 2 (1 d4) bludgeoning damage, or 8 (1d8 + 4) bludgeoning damage with shillelagh."
+      },
+      {
+        "name": "Fey Charm",
+        "text": "The dryad targets one humanoid or beast that she can see within 30 feet of her. If the target can see the dryad, it must succeed on a DC 14 Wisdom saving throw or be magically charmed. The charmed creature regards the dryad as a trusted friend to be heeded and protected. Although the target isn't under the dryad's control, it takes the dryad's requests or actions in the most favorable way it can.\nEach time the dryad or its allies do anything harmful to the target, it can repeat the saving throw, ending the effect on itself on a success. Otherwise, the effect lasts 24 hours or until the dryad dies, is on a different plane of existence from the target, or ends the effect as a bonus action. If a target's saving throw is successful, the target is immune to the dryad's Fey Charm for the next 24 hours.\nThe dryad can have no more than one humanoid and up to three beasts charmed at a time."
+      }
+    ],
+    "de": [
+      {
+        "name": "Knüppel",
+        "text": "Nahkampfwaffenangriff: +2 auf Treffer (+6 auf Treffer mit Shillelagh), Reichweite 1,5 m, ein Ziel. Treffer: 2 (1W4) Wuchtschaden oder 8 (1W8+4) Wuchtschaden mit Shillelagh."
+      },
+      {
+        "name": "Feenbezauberung",
+        "text": "Die Dryade zielt auf einen Humanoiden oder ein Tier im Abstand von bis zu neun Metern von ihr, den oder das sie sehen kann. Wenn das Ziel die Dryade sehen kann, muss es einen SG-14-Weisheitsrettungswurf bestehen, oder es ist magisch bezaubert. Die bezauberte Kreatur betrachtet die Dryade als vertrauenswürdigen Freund, den sie beschützt und auf dessen Rat sie hört. Obwohl das Ziel nicht von der Dryade kontrolliert wird, steht es ihren Forderungen und Aktionen so entgegenkommend wie möglich gegenüber. Jedes Mal, wenn die Dryade oder ihre Verbündeten dem Ziel Schaden zufügen, kann es den Rettungswurf wiederholen und den Effekt bei einem Erfolg beenden. Anderenfalls hält der Effekt 24 Stunden lang an, oder bis die Dryade stirbt, sich auf eine andere Existenzebene als die des Ziels begibt oder den Effekt als Bonusaktion beendet. Bei einem erfolgreichen Rettungswurf des Ziels ist dieses 24 Stunden lang gegen die Feenbezauberung der Dryade immun. Die Dryade kann höchstens einen Humanoiden und bis zu drei Tiere zugleich bezaubern."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/307/1000/1000/636252771953950206.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "fey",
+    "de": "Feenwesen"
+  },
+  "alignment": {
+    "en": "neutral",
+    "de": "neutral"
+  },
+  "token": {
+    "file": "Dryad (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Dryad (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dryad (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

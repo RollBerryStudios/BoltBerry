@@ -1,0 +1,210 @@
+{
+  "id": 105,
+  "slug": "fire-elemental",
+  "name": "Fire Elemental",
+  "nameDe": "Feuerelementar",
+  "source": "SRD",
+  "meta": {
+    "en": "Large elemental, neutral",
+    "de": "Großes Elementar, neutral"
+  },
+  "challenge": "5",
+  "xp": 1800,
+  "ac": {
+    "en": "13",
+    "de": "13"
+  },
+  "hp": {
+    "en": "102 (12d10 + 36)",
+    "de": "102 (12W10+36)"
+  },
+  "str": 10,
+  "dex": 17,
+  "con": 16,
+  "int": 6,
+  "wis": 10,
+  "cha": 7,
+  "strMod": 0,
+  "dexMod": 3,
+  "conMod": 3,
+  "intMod": -2,
+  "wisMod": 0,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Ignan"
+    ],
+    "de": [
+      "Ignal"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Fire Form",
+        "text": "The elemental can move through a space as narrow as 1 inch wide without squeezing. A creature that touches the elemental or hits it with a melee attack while within 5 ft. of it takes 5 (1d10) fire damage. In addition, the elemental can enter a hostile creature's space and stop there. The first time it enters a creature's space on a turn, that creature takes 5 (1d10) fire damage and catches fire; until someone takes an action to douse the fire, the creature takes 5 (1d10) fire damage at the start of each of its turns."
+      },
+      {
+        "name": "Illumination",
+        "text": "The elemental sheds bright light in a 30-foot radius and dim light in an additional 30 ft.."
+      },
+      {
+        "name": "Water Susceptibility",
+        "text": "For every 5 ft. the elemental moves in water, or for every gallon of water splashed on it, it takes 1 cold damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Beleuchtung",
+        "text": "Der Elementar spendet im Radius von neun Metern helles Licht und im Radius von weiteren neun Metern dämmriges Licht."
+      },
+      {
+        "name": "Feuergestalt",
+        "text": "Der Elementar kann sich durch enge Bereiche mit einer Breite von nur 2,5 Zentimetern bewegen, ohne sich quetschen zu müssen. Eine Kreatur, die den Elementar berührt oder mit einem Nahkampfangriff trifft, während sie sich im Abstand von bis zu 1,5 Metern von ihm befindet, erleidet 5 (1W10) Feuerschaden. Außerdem kann der Elementar in den Bereich einer feindlich gesinnten Kreatur eindringen und dort stoppen. Wenn er in seinem Zug erstmals in den Bereich der Kreatur gelangt, erleidet diese 5 (1W10) Feuerschaden und fängt Feuer. Sie erleidet zu Beginn jedes ihrer Züge 5 (1W10) Feuerschaden, bis eine Kreatur eine Aktion verwendet, um das Feuer zu löschen."
+      },
+      {
+        "name": "Wasserempfindlichkeit",
+        "text": "Je 1,5 Meter, die der Elementar sich in Wasser bewegt, oder je 4 Liter Wasser, die auf ihn gegossen werden, erleidet er 1 Kälteschaden."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The elemental makes two touch attacks."
+      },
+      {
+        "name": "Touch",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) fire damage. If the target is a creature or a flammable object, it ignites. Until a creature takes an action to douse the fire, the target takes 5 (1d10) fire damage at the start of each of its turns."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Elementar führt zwei Berührungsangriffe aus."
+      },
+      {
+        "name": "Berührung",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 10 (2W6+3) Feuerschaden. Wenn das Ziel eine Kreatur oder ein brennbares Objekt ist, fängt es Feuer. Es erleidet zu Beginn jedes seiner Züge 5 (1W10) Feuerschaden, bis eine Kreatur eine Aktion verwendet, um das Feuer zu löschen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/343/1000/1000/636252777098624896.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "elemental",
+    "de": "Elementar"
+  },
+  "alignment": {
+    "en": "neutral",
+    "de": "neutral"
+  },
+  "token": {
+    "file": "FireElemental (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "FireElemental (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "FireElemental (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

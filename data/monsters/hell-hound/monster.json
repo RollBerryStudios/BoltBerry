@@ -1,0 +1,210 @@
+{
+  "id": 166,
+  "slug": "hell-hound",
+  "name": "Hell Hound",
+  "nameDe": "Höllenhund",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium fiend, lawful evil",
+    "de": "Mittelgroßer Unhold, rechtschaffen böse"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "15 (Natural Armor)",
+    "de": "15 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "45 (7d8 + 14)",
+    "de": "45 (7W8+14)"
+  },
+  "str": 17,
+  "dex": 12,
+  "con": 14,
+  "int": 6,
+  "wis": 13,
+  "cha": 6,
+  "strMod": 3,
+  "dexMod": 1,
+  "conMod": 2,
+  "intMod": -2,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 15"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 15"
+    ]
+  },
+  "languages": {
+    "en": [
+      "understands Infernal but can't speak it"
+    ],
+    "de": [
+      "Versteht Infernalisch",
+      "aber kann nicht sprechen"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +5"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Hearing and Smell",
+        "text": "The hound has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+      },
+      {
+        "name": "Pack Tactics",
+        "text": "The hound has advantage on an attack roll against a creature if at least one of the hound's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rudeltaktik",
+        "text": "Der Hund ist bei Angriffswürfen gegen eine Kreatur im Vorteil, wenn sich mindestens einer seiner Verbündeten, der nicht kampfunfähig ist, im Abstand von bis zu 1,5 Metern von der Kreatur befindet."
+      },
+      {
+        "name": "Scharfes Gehör und scharfer Geruchssinn",
+        "text": "Der Hund ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör oder Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) piercing damage plus 7 (2d6) fire damage."
+      },
+      {
+        "name": "Fire Breath",
+        "text": "The hound exhales fire in a 15-foot cone. Each creature in that area must make a DC 12 Dexterity saving throw, taking 21 (6d6) fire damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (1W8+3) Stichschaden plus 7 (2W6) Feuerschaden."
+      },
+      {
+        "name": "Feuerodem (Aufladung 5–6)",
+        "text": "Der Hund atmet Feuer in einem Kegel von 4,5 Metern aus. Jede Kreatur in diesem Bereich muss einen SG-12-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 21 (6W6) Feuerschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/393/315/315/636252782461361426.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "fiend",
+    "de": "Unhold"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "Hellhound (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Hellhound (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Hellhound (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,208 @@
+{
+  "id": 223,
+  "slug": "pegasus",
+  "name": "Pegasus",
+  "source": "SRD",
+  "meta": {
+    "en": "Large celestial, chaotic good",
+    "de": "Großes Himmelswesen, chaotisch gut"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": "12",
+  "hp": {
+    "en": "59 (7d10 + 21)",
+    "de": "59 (7W10 + 21)"
+  },
+  "str": 18,
+  "dex": 15,
+  "con": 16,
+  "int": 10,
+  "wis": 15,
+  "cha": 13,
+  "strMod": 4,
+  "dexMod": 2,
+  "conMod": 3,
+  "intMod": 0,
+  "wisMod": 2,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 60,
+      "de": 18
+    },
+    "fly": {
+      "en": 90,
+      "de": 27
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 16"
+    ],
+    "de": [
+      "Passive Wahrnehmung 16"
+    ]
+  },
+  "languages": {
+    "en": [
+      "understands Celestial",
+      "Common",
+      "Elvish",
+      "and Sylvan but can't speak"
+    ],
+    "de": [
+      "Versteht Celestisch",
+      "Elfisch",
+      "Gemeinsprache und Sylvanisch",
+      "aber kann nicht sprechen"
+    ]
+  },
+  "savingThrows": [
+    "Ges +4",
+    "Wei +4",
+    "Cha +3"
+  ],
+  "skills": [
+    "Wahrnehmung +6"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Hooves",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Hufe",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 11 (2W6+4) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/18/303/1000/1000/636379808797059368.png",
+  "size": {
+    "en": "large",
+    "de": "groß"
+  },
+  "type": {
+    "en": "celestial",
+    "de": "Himmelswesen"
+  },
+  "alignment": {
+    "en": "chaotic good",
+    "de": "chaotisch gut"
+  },
+  "token": {
+    "file": "PegasusForest (1).webp",
+    "variant": "forest"
+  },
+  "tokens": [
+    {
+      "file": "PegasusForest (10).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PegasusForest (11).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PegasusForest (12).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PegasusForest (13).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PegasusForest (14).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PegasusForest (15).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PegasusForest (16).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PegasusForest (17).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PegasusForest (18).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PegasusForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PegasusForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PegasusForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PegasusForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PegasusForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PegasusForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PegasusForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PegasusForest (9).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PegasusSky (1).webp",
+      "variant": "sky"
+    },
+    {
+      "file": "PegasusSky (2).webp",
+      "variant": "sky"
+    },
+    {
+      "file": "PegasusSky (3).webp",
+      "variant": "sky"
+    },
+    {
+      "file": "PegasusSky (4).webp",
+      "variant": "sky"
+    },
+    {
+      "file": "PegasusSky (5).webp",
+      "variant": "sky"
+    },
+    {
+      "file": "PegasusSky (6).webp",
+      "variant": "sky"
+    },
+    {
+      "file": "PegasusSky (7).webp",
+      "variant": "sky"
+    },
+    {
+      "file": "PegasusSky (8).webp",
+      "variant": "sky"
+    },
+    {
+      "file": "PegasusSky (9).webp",
+      "variant": "sky"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

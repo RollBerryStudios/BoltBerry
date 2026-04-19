@@ -1,0 +1,270 @@
+{
+  "id": 118,
+  "slug": "giant-ape",
+  "name": "Giant Ape",
+  "nameDe": "Riesenaffe",
+  "source": "SRD",
+  "meta": {
+    "en": "Huge beast, unaligned",
+    "de": "Riesige Bestie, ohne Gesinnung"
+  },
+  "challenge": "7",
+  "xp": 2900,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "157 (15d12 + 60)",
+    "de": "157 (15W12+60)"
+  },
+  "str": 23,
+  "dex": 14,
+  "con": 18,
+  "int": 7,
+  "wis": 12,
+  "cha": 7,
+  "strMod": 6,
+  "dexMod": 2,
+  "conMod": 4,
+  "intMod": -2,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    },
+    "climb": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 14"
+    ],
+    "de": [
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Athletik +9",
+    "Wahrnehmung +4"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The ape makes two fist attacks."
+      },
+      {
+        "name": "Fist",
+        "text": "Melee Weapon Attack: +9 to hit, reach 10 ft., one target. Hit: 22 (3d10 + 6) bludgeoning damage."
+      },
+      {
+        "name": "Rock",
+        "text": "Ranged Weapon Attack: +9 to hit, range 50/100 ft., one target. Hit: 30 (7d6 + 6) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Menschenaffe führt zwei Faustangriffe aus."
+      },
+      {
+        "name": "Faust",
+        "text": "Nahkampfwaffenangriff: +9 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 22 (3W10+6) Wuchtschaden."
+      },
+      {
+        "name": "Felsblock",
+        "text": "Fernkampfwaffenangriff: +9 auf Treffer, Reichweite 15/30 m, ein Ziel. Treffer: 30 (7W6+6) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "huge",
+    "de": "Riesiges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantApeGorilla (1).webp",
+    "variant": "gorilla"
+  },
+  "tokens": [
+    {
+      "file": "GiantApeGorilla (10).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (11).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (12).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (13).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (14).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (15).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (16).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (17).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (18).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (19).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (2).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (20).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (21).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (22).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (23).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (24).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (3).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (4).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (5).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (6).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (7).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (8).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeGorilla (9).webp",
+      "variant": "gorilla"
+    },
+    {
+      "file": "GiantApeOrangutan (1).webp",
+      "variant": "orangutan"
+    },
+    {
+      "file": "GiantApeOrangutan (10).webp",
+      "variant": "orangutan"
+    },
+    {
+      "file": "GiantApeOrangutan (11).webp",
+      "variant": "orangutan"
+    },
+    {
+      "file": "GiantApeOrangutan (12).webp",
+      "variant": "orangutan"
+    },
+    {
+      "file": "GiantApeOrangutan (13).webp",
+      "variant": "orangutan"
+    },
+    {
+      "file": "GiantApeOrangutan (14).webp",
+      "variant": "orangutan"
+    },
+    {
+      "file": "GiantApeOrangutan (15).webp",
+      "variant": "orangutan"
+    },
+    {
+      "file": "GiantApeOrangutan (16).webp",
+      "variant": "orangutan"
+    },
+    {
+      "file": "GiantApeOrangutan (2).webp",
+      "variant": "orangutan"
+    },
+    {
+      "file": "GiantApeOrangutan (3).webp",
+      "variant": "orangutan"
+    },
+    {
+      "file": "GiantApeOrangutan (4).webp",
+      "variant": "orangutan"
+    },
+    {
+      "file": "GiantApeOrangutan (5).webp",
+      "variant": "orangutan"
+    },
+    {
+      "file": "GiantApeOrangutan (6).webp",
+      "variant": "orangutan"
+    },
+    {
+      "file": "GiantApeOrangutan (7).webp",
+      "variant": "orangutan"
+    },
+    {
+      "file": "GiantApeOrangutan (8).webp",
+      "variant": "orangutan"
+    },
+    {
+      "file": "GiantApeOrangutan (9).webp",
+      "variant": "orangutan"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

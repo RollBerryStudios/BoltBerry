@@ -1,0 +1,325 @@
+{
+  "id": 202,
+  "slug": "mimic",
+  "name": "Mimic",
+  "nameDe": "Mimik",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium monstrosity, neutral",
+    "de": "Mittelgroße Monstrosität, neutral"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "12 (Natural Armor)",
+    "de": "12 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "58 (9d8 + 18)",
+    "de": "58 (9W8+18)"
+  },
+  "str": 17,
+  "dex": 12,
+  "con": 15,
+  "int": 5,
+  "wis": 13,
+  "cha": 8,
+  "strMod": 3,
+  "dexMod": 1,
+  "conMod": 2,
+  "intMod": -3,
+  "wisMod": 1,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 15,
+      "de": 4
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +5"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Shapechanger",
+        "text": "The mimic can use its action to polymorph into an object or back into its true, amorphous form. Its statistics are the same in each form. Any equipment it is wearing or carrying isn 't transformed. It reverts to its true form if it dies."
+      },
+      {
+        "name": "Adhesive (Object Form Only)",
+        "text": "The mimic adheres to anything that touches it. A Huge or smaller creature adhered to the mimic is also grappled by it (escape DC 13). Ability checks made to escape this grapple have disadvantage."
+      },
+      {
+        "name": "False Appearance (Object Form Only)",
+        "text": "While the mimic remains motionless, it is indistinguishable from an ordinary object."
+      },
+      {
+        "name": "Grappler",
+        "text": "The mimic has advantage on attack rolls against any creature grappled by it."
+      }
+    ],
+    "de": [
+      {
+        "name": "Gestaltwandler",
+        "text": "Der Mimik kann seine Aktion verwenden, um sich in einen Gegenstand oder zurück in seine wahre, amorphe Gestalt zu verwandeln. Seine Spielwerte sind in beiden Formen gleich. Ausrüstung, die er trägt oder hält, wird nicht verwandelt. Wenn er stirbt, nimmt er seine wahre Gestalt an."
+      },
+      {
+        "name": "Falsches Erscheinungsbild (nur in Objektgestalt)",
+        "text": "Solange der Mimik sich nicht bewegt, ist er nicht von einem gewöhnlichen Objekt zu unterscheiden."
+      },
+      {
+        "name": "Greifer",
+        "text": "Der Mimik ist bei Angriffswürfen gegen jede Kreatur, die er gepackt hält, im Vorteil."
+      },
+      {
+        "name": "Haftend (nur in Objektgestalt)",
+        "text": "Der Mimik bleibt an allem haften, was ihn berührt. Eine höchstens riesige Kreatur, die am Mimik haftet, wird auch von ihm gepackt (Rettungswurf-SG 13). Attributswürfe, um diesem Haltegriff zu entkommen, sind im Nachteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Pseudopod",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) bludgeoning damage. If the mimic is in object form, the target is subjected to its Adhesive trait."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) piercing damage plus 4 (1d8) acid damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (1W8+3) Stichschaden plus 4 (1W8) Säureschaden."
+      },
+      {
+        "name": "Scheinfuß",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (1W8+3) Wuchtschaden. Wenn der Mimik sich in Objektgestalt befindet, wird das Ziel Opfer seines Haftend-Merkmals."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/211/315/315/636252764731637373.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität (Gestaltwandler)"
+  },
+  "alignment": {
+    "en": "neutral",
+    "de": "neutral"
+  },
+  "token": {
+    "file": "MimicAltar (1).webp",
+    "variant": "altar"
+  },
+  "tokens": [
+    {
+      "file": "MimicAltar (2).webp",
+      "variant": "altar"
+    },
+    {
+      "file": "MimicAltar (3).webp",
+      "variant": "altar"
+    },
+    {
+      "file": "MimicBackpack (1).webp",
+      "variant": "backpack"
+    },
+    {
+      "file": "MimicBackpack (2).webp",
+      "variant": "backpack"
+    },
+    {
+      "file": "MimicBackpack (3).webp",
+      "variant": "backpack"
+    },
+    {
+      "file": "MimicBackpack (4).webp",
+      "variant": "backpack"
+    },
+    {
+      "file": "MimicBackpack (5).webp",
+      "variant": "backpack"
+    },
+    {
+      "file": "MimicBackpack (6).webp",
+      "variant": "backpack"
+    },
+    {
+      "file": "MimicBackpack (7).webp",
+      "variant": "backpack"
+    },
+    {
+      "file": "MimicBackpack (8).webp",
+      "variant": "backpack"
+    },
+    {
+      "file": "MimicBackpack (9).webp",
+      "variant": "backpack"
+    },
+    {
+      "file": "MimicBag (1).webp",
+      "variant": "bag"
+    },
+    {
+      "file": "MimicBag (2).webp",
+      "variant": "bag"
+    },
+    {
+      "file": "MimicBag (3).webp",
+      "variant": "bag"
+    },
+    {
+      "file": "MimicBag (4).webp",
+      "variant": "bag"
+    },
+    {
+      "file": "MimicBarrel (1).webp",
+      "variant": "barrel"
+    },
+    {
+      "file": "MimicBarrel (2).webp",
+      "variant": "barrel"
+    },
+    {
+      "file": "MimicBarrel (3).webp",
+      "variant": "barrel"
+    },
+    {
+      "file": "MimicBarrel (4).webp",
+      "variant": "barrel"
+    },
+    {
+      "file": "MimicBarrel (5).webp",
+      "variant": "barrel"
+    },
+    {
+      "file": "MimicChair (1).webp",
+      "variant": "chair"
+    },
+    {
+      "file": "MimicChair (2).webp",
+      "variant": "chair"
+    },
+    {
+      "file": "MimicChair (3).webp",
+      "variant": "chair"
+    },
+    {
+      "file": "MimicChest (1).webp",
+      "variant": "chest"
+    },
+    {
+      "file": "MimicChest (2).webp",
+      "variant": "chest"
+    },
+    {
+      "file": "MimicChest (3).webp",
+      "variant": "chest"
+    },
+    {
+      "file": "MimicChest (4).webp",
+      "variant": "chest"
+    },
+    {
+      "file": "MimicChest (5).webp",
+      "variant": "chest"
+    },
+    {
+      "file": "MimicChest (6).webp",
+      "variant": "chest"
+    },
+    {
+      "file": "MimicChest (7).webp",
+      "variant": "chest"
+    },
+    {
+      "file": "MimicDoor (1).webp",
+      "variant": "door"
+    },
+    {
+      "file": "MimicDoor (2).webp",
+      "variant": "door"
+    },
+    {
+      "file": "MimicDoor (3).webp",
+      "variant": "door"
+    },
+    {
+      "file": "MimicDoor (4).webp",
+      "variant": "door"
+    },
+    {
+      "file": "MimicShelf (1).webp",
+      "variant": "shelf"
+    },
+    {
+      "file": "MimicShelf (2).webp",
+      "variant": "shelf"
+    },
+    {
+      "file": "MimicShelf (3).webp",
+      "variant": "shelf"
+    },
+    {
+      "file": "MimicTable (1).webp",
+      "variant": "table"
+    },
+    {
+      "file": "MimicTable (2).webp",
+      "variant": "table"
+    },
+    {
+      "file": "MimicTable (3).webp",
+      "variant": "table"
+    },
+    {
+      "file": "MimicTable (4).webp",
+      "variant": "table"
+    },
+    {
+      "file": "MimicTable (5).webp",
+      "variant": "table"
+    },
+    {
+      "file": "MimicTable (6).webp",
+      "variant": "table"
+    },
+    {
+      "file": "MimicTable (7).webp",
+      "variant": "table"
+    },
+    {
+      "file": "MimicTable (8).webp",
+      "variant": "table"
+    },
+    {
+      "file": "MimicTable (9).webp",
+      "variant": "table"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

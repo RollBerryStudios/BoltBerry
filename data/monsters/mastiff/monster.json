@@ -1,0 +1,191 @@
+{
+  "id": 198,
+  "slug": "mastiff",
+  "name": "Mastiff",
+  "nameDe": "Dogge",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/8",
+  "xp": 25,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "5 (1d8 + 1)",
+    "de": "5 (1W8+1)"
+  },
+  "str": 13,
+  "dex": 14,
+  "con": 12,
+  "int": 3,
+  "wis": 12,
+  "cha": 7,
+  "strMod": 1,
+  "dexMod": 2,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Hearing and Smell",
+        "text": "The mastiff has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfes Gehör und scharfer Geruchssinn",
+        "text": "Die Dogge ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör oder Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) piercing damage. If the target is a creature, it must succeed on a DC 11 Strength saving throw or be knocked prone."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 4 (1W6+1) Stichschaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-11-Stärkerettungswurf bestehen, oder es wird umgestoßen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/191/1000/1000/636252763295291063.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Mastiff (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Mastiff (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mastiff (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mastiff (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mastiff (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mastiff (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mastiff (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mastiff (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mastiff (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mastiff (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mastiff (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mastiff (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mastiff (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mastiff (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mastiff (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Mastiff (9).webp",
+      "variant": ""
+    },
+    {
+      "file": "MastiffSaddled (1).webp",
+      "variant": "saddled"
+    },
+    {
+      "file": "MastiffSaddled (2).webp",
+      "variant": "saddled"
+    },
+    {
+      "file": "MastiffSaddled (3).webp",
+      "variant": "saddled"
+    },
+    {
+      "file": "MastiffSaddled (4).webp",
+      "variant": "saddled"
+    },
+    {
+      "file": "MastiffSaddled (5).webp",
+      "variant": "saddled"
+    },
+    {
+      "file": "MastiffSaddled (6).webp",
+      "variant": "saddled"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

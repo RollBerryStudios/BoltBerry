@@ -1,0 +1,226 @@
+{
+  "id": 141,
+  "slug": "giant-toad",
+  "name": "Giant Toad",
+  "nameDe": "Riesenkröte",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "11",
+    "de": "11"
+  },
+  "hp": {
+    "en": "39 (6d10 + 6)",
+    "de": "39 (6W10+6)"
+  },
+  "str": 15,
+  "dex": 13,
+  "con": 13,
+  "int": 2,
+  "wis": 10,
+  "cha": 3,
+  "strMod": 2,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    },
+    "swim": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 30 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 9 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Amphibious",
+        "text": "The toad can breathe air and water"
+      },
+      {
+        "name": "Standing Leap",
+        "text": "The toad's long jump is up to 20 ft. and its high jump is up to 10 ft., with or without a running start."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amphibisch",
+        "text": "Die Kröte kann Luft und Wasser atmen."
+      },
+      {
+        "name": "Stehender Sprung",
+        "text": "Die Kröte kann mit oder ohne Anlauf bis zu sechs Meter weit und bis zu drei Meter hoch springen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (1d10 + 2) piercing damage plus 5 (1d10) poison damage, and the target is grappled (escape DC 13). Until this grapple ends, the target is restrained, and the toad can't bite another target."
+      },
+      {
+        "name": "Swallow",
+        "text": "The toad makes one bite attack against a Medium or smaller target it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the toad, and it takes 10 (3d6) acid damage at the start of each of the toad's turns. The toad can have only one target swallowed at a time.\nIf the toad dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 feet of movement, exiting prone."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (1W10+2) Stichschaden plus 5 (1W10) Giftschaden, und das Ziel wird gepackt (Rettungswurf-SG 13). Ein gepacktes Ziel ist festgesetzt. Die Kröte kann solange kein weiteres Ziel beißen."
+      },
+      {
+        "name": "Verschlucken",
+        "text": "Die Kröte führt einen Bissangriff gegen ein höchstens mittelgroßes Ziel aus, das sie gepackt hält. Wenn der Angriff trifft, wird das Ziel verschluckt, und der Haltegriff endet. Ein verschlucktes Ziel ist blind und festgesetzt, hat vollständige Deckung gegen Angriffe und andere Effekte von außerhalb der Kröte und erleidet zu Beginn jedes Zugs der Kröte 10 (3W6) Säureschaden. Die Kröte kann jeweils nur ein Ziel verschlucken. Stirbt die Kröte, so ist die verschluckte Kreatur nicht mehr festgesetzt und kann aus dem Kadaver entkommen, indem sie 1,5 Meter ihrer Bewegungsrate verwendet. Anschließend ist sie liegend."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantToadSwamp (1).webp",
+    "variant": "swamp"
+  },
+  "tokens": [
+    {
+      "file": "GiantToadSwamp (10).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantToadSwamp (11).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantToadSwamp (12).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantToadSwamp (13).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantToadSwamp (14).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantToadSwamp (15).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantToadSwamp (16).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantToadSwamp (17).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantToadSwamp (18).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantToadSwamp (2).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantToadSwamp (3).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantToadSwamp (4).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantToadSwamp (5).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantToadSwamp (6).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantToadSwamp (7).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantToadSwamp (8).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantToadSwamp (9).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantToadUnderdark (1).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantToadUnderdark (2).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantToadUnderdark (3).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantToadUnderdark (4).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantToadUnderdark (5).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantToadUnderdark (6).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantToadUnderdark (7).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantToadUnderdark (8).webp",
+      "variant": "underdark"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

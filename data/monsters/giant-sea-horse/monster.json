@@ -1,0 +1,185 @@
+{
+  "id": 138,
+  "slug": "giant-sea-horse",
+  "name": "Giant Sea Horse",
+  "nameDe": "Riesenseepferdchen",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "16 (3d10)",
+    "de": "16 (3W10)"
+  },
+  "str": 12,
+  "dex": 15,
+  "con": 11,
+  "int": 2,
+  "wis": 12,
+  "cha": 5,
+  "strMod": 1,
+  "dexMod": 2,
+  "conMod": 0,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -3,
+  "speed": {
+    "run": {},
+    "swim": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 11"
+    ],
+    "de": [
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Charge",
+        "text": "If the sea horse moves at least 20 ft. straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra 7 (2d6) bludgeoning damage. If the target is a creature, it must succeed on a DC 11 Strength saving throw or be knocked prone."
+      },
+      {
+        "name": "Water Breathing",
+        "text": "The sea horse can breathe only underwater."
+      }
+    ],
+    "de": [
+      {
+        "name": "Sturmangriff",
+        "text": "Wenn das Seepferdchen sich mindestens sechs Meter weit direkt auf ein Ziel zubewegt und es dann im selben Zug mit einem Rammbock-Angriff trifft, erleidet das Ziel zusätzlich 7 (2W6) Wuchtschaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-11-Stärkerettungswurf bestehen, oder es wird umgestoßen."
+      },
+      {
+        "name": "Wasser atmen",
+        "text": "Das Seepferdchen kann nur unter Wasser atmen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Ram",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rammbock",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 4 (1W6+1) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantSeahorse (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GiantSeahorse (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSeahorse (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSeahorse (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSeahorse (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSeahorse (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSeahorse (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSeahorse (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSeahorse (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSeahorse (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSeahorse (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSeahorse (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSeahorse (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSeahorse (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSeahorse (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSeahorse (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSeahorse (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSeahorse (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSeahorse (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

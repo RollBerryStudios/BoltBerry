@@ -1,0 +1,30 @@
+{
+  "id": 380,
+  "slug": "staff-of-charming",
+  "name": "Staff of Charming",
+  "nameDe": "Stab der Bezauberung",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 1200000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Staff, rare (requires attunement by a bard, cleric, druid, sorcerer, warlock, or wizard) While holding this staff, you can use an action to expend 1 of its 10 charges to cast charm person, command, or comprehend languages from it using your spell save DC. The staff can also be used as a magic quarterstaff. If you are holding the staff and fail a saving throw against an enchantment spell that targets only you, you can turn your failed save into a successful one. You can't use this property of the staff again until the next dawn. If you succeed on a save against an enchantment spell that targets only you, with or without the staff's intervention, you can use your reaction to expend 1 charge from the staff and turn the spell back on its caster as if you had cast the spell. The staff regains 1d8 + 2 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff becomes a nonmagical quarterstaff.",
+    "de": "Wenn du diesen Stab hältst, kannst du als Aktion eine seiner zehn Ladungen verbrauchen, um mit ihm Befehl , Person bezaubern  oder Sprachen verstehen  zu wirken. Verwende dafür deinen Zauberrettungswurf-SG. Der Stab kann auch als magischer Kampfstab verwendet werden. Wenn du den Stab hältst und bei einem Rettungswurf gegen Verzauberungsmagie scheiterst, die nur dich zum Ziel hat, kannst du deinen gescheiterten Rettungswurf in einen Erfolg umwandeln. Diese Eigenschaft des Stabs kann erst im nächsten Morgengrauen wiederverwendet werden. Wenn du einen Rettungswurf gegen Verzauberungsmagie, die nur dich als Ziel hat, mit oder ohne die Hilfe des Stabs bestehst, kannst du als Reaktion eine Ladung des Stabs verbrauchen, um den Zauber umzukehren und gegen seinen Zauberwirker zu verwenden, als hättest du den Zauber gewirkt. Der Stab erhält täglich im Morgengrauen 1W8+2 verbrauchte Ladungen zurück. Wenn du die letzte Ladung verbraucht hast, würfle mit einem W20. Bei einer 1 wird der Stab zu einem nichtmagischen Kampfstab."
+  },
+  "properties": {
+    "en": "requires attunement by a bard",
+    "de": "erfordert einstimmung eines barden"
+  },
+  "image": "staff",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

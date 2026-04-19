@@ -1,0 +1,423 @@
+{
+  "id": 140,
+  "slug": "giant-spider",
+  "name": "Giant Spider",
+  "nameDe": "Riesenspinne",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "14 (Natural Armor)",
+    "de": "14 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "26 (4d10 + 4)",
+    "de": "26 (4W10+4)"
+  },
+  "str": 14,
+  "dex": 16,
+  "con": 12,
+  "int": 2,
+  "wis": 11,
+  "cha": 4,
+  "strMod": 2,
+  "dexMod": 3,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "climb": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 10 ft.",
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Blindsicht 3 m",
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +7"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Spider Climb",
+        "text": "The spider can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+      },
+      {
+        "name": "Web Sense",
+        "text": "While in contact with a web, the spider knows the exact location of any other creature in contact with the same web."
+      },
+      {
+        "name": "Web Walker",
+        "text": "The spider ignores movement restrictions caused by webbing."
+      }
+    ],
+    "de": [
+      {
+        "name": "Netzsinn",
+        "text": "Solange die Spinne in Kontakt mit einem Spinnennetz ist, weiß sie genau, wo sich andere Kreaturen aufhalten, die in Kontakt mit demselben Netz sind."
+      },
+      {
+        "name": "Netzwandler",
+        "text": "Die Spinne ignoriert Bewegungseinschränkungen, die durch Netze verursacht werden."
+      },
+      {
+        "name": "Spinnenklettern",
+        "text": "Die Spinne kann an schwierigen Oberflächen klettern, auch kopfüber an der Decke, ohne Attributswürfe ausführen zu müssen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one creature. Hit: 7 (1d8 + 3) piercing damage, and the target must make a DC 11 Constitution saving throw, taking 9 (2d8) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
+      },
+      {
+        "name": "Web",
+        "text": "Ranged Weapon Attack: +5 to hit, range 30/60 ft., one creature. Hit: The target is restrained by webbing. As an action, the restrained target can make a DC 12 Strength check, bursting the webbing on a success. The webbing can also be attacked and destroyed (AC 10; hp 5; vulnerability to fire damage; immunity to bludgeoning, poison, and psychic damage)."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 7 (1W8+3) Stichschaden, und das Ziel muss einen SG-11-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet es 9 (2W8) Giftschaden, anderenfalls die Hälfte. Wenn die Trefferpunkte des Ziels durch den Giftschaden auf 0 sinken, ist das Ziel stabil, aber eine Stunde lang vergiftet sowie gelähmt, selbst wenn es Trefferpunkte zurückgewinnt."
+      },
+      {
+        "name": "Netz (Aufladung 5–6)",
+        "text": "Fernkampfwaffenangriff: +5 auf Treffer, Reichweite 9/18 m, eine Kreatur. Treffer: Das Ziel ist durch das Netz festgesetzt. Als Aktion kann das festgesetzte Ziel einen SG-12-Stärkewurf ausführen. Bei einem Erfolg befreit es sich aus den Netzen. Das Netz kann auch angegriffen und zerstört werden (RK 10, 5 Trefferpunkte, anfällig für Feuerschaden, immun gegen Gift-, psychischen und Wuchtschaden)."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/323/1000/1000/636252775648743317.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantSpider (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GiantSpider (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSpider (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSpider (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSpider (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSpider (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantSpiderDesert (1).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantSpiderDesert (2).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantSpiderDesert (3).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantSpiderDesert (4).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantSpiderDesert (5).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantSpiderForest (1).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (10).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (11).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (12).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (13).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (14).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (15).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (16).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (17).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (18).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (19).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderForest (9).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantSpiderSwamp (1).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantSpiderSwamp (10).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantSpiderSwamp (2).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantSpiderSwamp (3).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantSpiderSwamp (4).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantSpiderSwamp (5).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantSpiderSwamp (6).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantSpiderSwamp (7).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantSpiderSwamp (8).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantSpiderSwamp (9).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantSpiderUnderdark (1).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantSpiderUnderdark (10).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantSpiderUnderdark (11).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantSpiderUnderdark (12).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantSpiderUnderdark (13).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantSpiderUnderdark (14).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantSpiderUnderdark (15).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantSpiderUnderdark (2).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantSpiderUnderdark (3).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantSpiderUnderdark (4).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantSpiderUnderdark (5).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantSpiderUnderdark (6).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantSpiderUnderdark (7).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantSpiderUnderdark (8).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantSpiderUnderdark (9).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantSpiderUrban (1).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantSpiderUrban (10).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantSpiderUrban (11).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantSpiderUrban (12).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantSpiderUrban (13).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantSpiderUrban (14).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantSpiderUrban (15).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantSpiderUrban (16).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantSpiderUrban (17).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantSpiderUrban (2).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantSpiderUrban (3).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantSpiderUrban (4).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantSpiderUrban (5).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantSpiderUrban (6).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantSpiderUrban (7).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantSpiderUrban (8).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantSpiderUrban (9).webp",
+      "variant": "urban"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,213 @@
+{
+  "id": 323,
+  "slug": "young-green-dragon",
+  "name": "Young Green Dragon",
+  "nameDe": "Junger grüner Drache",
+  "source": "SRD",
+  "meta": {
+    "en": "Large dragon, lawful evil",
+    "de": "Großer Drache, rechtschaffen böse"
+  },
+  "challenge": "8",
+  "xp": 3900,
+  "ac": {
+    "en": "18 (Natural Armor)",
+    "de": "18 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "136 (16d10 + 48)",
+    "de": "136 (16W10+48)"
+  },
+  "str": 19,
+  "dex": 12,
+  "con": 17,
+  "int": 16,
+  "wis": 13,
+  "cha": 15,
+  "strMod": 4,
+  "dexMod": 1,
+  "conMod": 3,
+  "intMod": 3,
+  "wisMod": 1,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    },
+    "swim": {
+      "en": 40,
+      "de": 12
+    },
+    "fly": {
+      "en": 80,
+      "de": 24
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 30 ft.",
+      "Darkvision 120 ft.",
+      "passive perception 17"
+    ],
+    "de": [
+      "Blindsicht 9 m",
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 17"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Draconic"
+    ],
+    "de": [
+      "Drakonisch",
+      "Gemeinsprache"
+    ]
+  },
+  "savingThrows": [
+    "Ges +4",
+    "Kon +6",
+    "Wei +4",
+    "Cha +5"
+  ],
+  "skills": [
+    "Heimlichkeit +4",
+    "Täuschen +5",
+    "Wahrnehmung +7"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Amphibious",
+        "text": "The dragon can breathe air and water."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amphibisch",
+        "text": "Der Drache kann Luft und Wasser atmen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The dragon makes three attacks: one with its bite and two with its claws."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +7 to hit, reach 10 ft., one target. Hit: 15 (2d10 + 4) piercing damage plus 7 (2d6) poison damage."
+      },
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage."
+      },
+      {
+        "name": "Poison Breath",
+        "text": "The dragon exhales poisonous gas in a 30-foot cone. Each creature in that area must make a DC 14 Constitution saving throw, taking 42 (12d6) poison damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Drache führt drei Angriffe aus: einen mit seinem Biss und zwei mit seinen Klauen."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 15 (2W10+4) Stichschaden plus 7 (2W6) Giftschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 11 (2W6+4) Hiebschaden."
+      },
+      {
+        "name": "Giftodem (Aufladung 5–6)",
+        "text": "Der Drache atmet giftiges Gas in einem Kegel von neun Metern aus. Jede Kreatur in diesem Bereich muss einen SG-14-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 42 (12W6) Giftschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/58/315/315/636252728834677623.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "dragon",
+    "de": "Drache"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "YoungGreenDragon (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "YoungGreenDragon (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungGreenDragon (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungGreenDragon (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungGreenDragon (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungGreenDragon (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungGreenDragon (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungGreenDragon (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungGreenDragon (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungGreenDragon (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungGreenDragon (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungGreenDragon (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungGreenDragon (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungGreenDragon (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungGreenDragon (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungGreenDragon (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,66 @@
+{
+  "id": 274,
+  "slug": "heat-metal",
+  "name": "Heat Metal",
+  "nameDe": "Metall erhitzen",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "bard"
+    ],
+    "de": [
+      "Druide",
+      "Barde"
+    ]
+  },
+  "type": {
+    "en": "2nd-level transmutation",
+    "de": "Stufe 2 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a piece of iron and a flame",
+      "de": "ein Stück Eisen und eine Flamme"
+    },
+    "raw": {
+      "en": "V, S, M (a piece of iron and a flame)",
+      "de": "V, G, M (ein Stück Eisen und eine Flamme)"
+    }
+  },
+  "description": {
+    "en": "Choose a manufactured metal object, such as a metal weapon or a suit of heavy or medium metal armor, that you can see within range. You cause the object to glow red-hot. Any creature in physical contact with the object takes 2d8 fire damage when you cast the spell. Until the spell ends, you can use a bonus action on each of your subsequent turns to cause this damage again. If a creature is holding or wearing the object and takes the damage from it, the creature must succeed on a constitution saving throw or drop the object if it can. If it doesn't drop the object, it has disadvantage on attack rolls and ability checks until the start of your next turn.",
+    "de": "Wähle einen verarbeiteten Gegenstand aus Metall in Reichweite, den du sehen kannst - etwa eine metallene Waffe oder eine schwere oder mittelschwere Rüstung. Du lässt den Gegenstand glühend heiß werden. Wenn du den Zauber wirkst, erleiden alle Kreaturen in physischem Kontakt mit dem Gegenstand 2W8 Feuerschaden. Bis der Zauber endet, kannst du in jedem deiner darauffolgenden Züge eine Bonusaktion verwenden, um diesen Schaden erneut zu verursachen. Trägt eine Kreatur den Gegenstand oder hält sie ihn in der Hand, während sie den Schaden erleidet, muss sie einen Konstitutionsrettungswurf bestehen, um den Gegenstand falls möglich fallenzulassen. Falls sie den Gegenstand nicht fallenlässt, ist sie bis zum Beginn deines nächsten Zuges bei Angriffs- und Attributswürfen im Nachteil. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 2. um 1W8."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 2. um 1W8."
+  },
+  "image": "heat-metal",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

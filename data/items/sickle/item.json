@@ -1,0 +1,36 @@
+{
+  "id": 21,
+  "slug": "sickle",
+  "name": "Sickle",
+  "nameDe": "Sichel",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 100,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 2,
+  "classification": {
+    "en": "Simple Melee Weapon",
+    "de": "Einfache Nahkampfwaffe"
+  },
+  "damage": "1d4",
+  "damageType": {
+    "en": "slashing",
+    "de": "hieb"
+  },
+  "properties": {
+    "en": "light",
+    "de": "leicht"
+  },
+  "image": "sickle",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

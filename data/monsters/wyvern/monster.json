@@ -1,0 +1,166 @@
+{
+  "id": 314,
+  "slug": "wyvern",
+  "name": "Wyvern",
+  "source": "SRD",
+  "meta": {
+    "en": "Large dragon, unaligned",
+    "de": "Großer Drache, ohne Gesinnung"
+  },
+  "challenge": "6",
+  "xp": 2300,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (Natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "110 (13d10 + 39)",
+    "de": "110 (13W10 + 39)"
+  },
+  "str": 19,
+  "dex": 10,
+  "con": 16,
+  "int": 5,
+  "wis": 12,
+  "cha": 6,
+  "strMod": 4,
+  "dexMod": 0,
+  "conMod": 3,
+  "intMod": -3,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    },
+    "fly": {
+      "en": 80,
+      "de": 24
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +4"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The wyvern makes two attacks: one with its bite and one with its stinger. While flying, it can use its claws in place of one other attack."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +7 to hit, reach 10 ft., one creature. Hit: 11 (2d6 + 4) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) slashing damage."
+      },
+      {
+        "name": "Stinger",
+        "text": "Melee Weapon Attack: +7 to hit, reach 10 ft., one creature. Hit: 11 (2d6 + 4) piercing damage. The target must make a DC 15 Constitution saving throw, taking 24 (7d6) poison damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Wyvern führt zwei Angriffe aus: einen Biss- und einen Stachelangriff. Fliegend kann er anstelle eines anderen Angriffs seine Klauen einsetzen."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 3 m, eine Kreatur. Treffer: 11 (2W6+4) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 13 (2W8+4) Hiebschaden."
+      },
+      {
+        "name": "Stachel",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 3 m, eine Kreatur. Treffer: 11 (2W6+4) Stichschaden. Das Ziel muss einen SG-15-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet es 24 (7W6) Giftschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/48/315/315/636252723695596000.jpeg",
+  "size": {
+    "en": "large",
+    "de": "groß"
+  },
+  "type": {
+    "en": "dragon",
+    "de": "Drache"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "ohne Ausrichtung"
+  },
+  "token": {
+    "file": "Wyvern (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Wyvern (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wyvern (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wyvern (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wyvern (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wyvern (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wyvern (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wyvern (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wyvern (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wyvern (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wyvern (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Wyvern (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

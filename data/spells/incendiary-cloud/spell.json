@@ -1,0 +1,58 @@
+{
+  "id": 176,
+  "slug": "incendiary-cloud",
+  "name": "Incendiary Cloud",
+  "nameDe": "Flammende Wolke",
+  "level": {
+    "en": "8",
+    "de": "Grad 8"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "8th-level conjuration",
+    "de": "Stufe 8 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "150 feet",
+    "de": "45 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "A swirling cloud of smoke shot through with white-hot embers appears in a 20-foot-radius sphere centered on a point within range. The cloud spreads around corners and is heavily obscured. It lasts for the duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it. When the cloud appears, each creature in it must make a dexterity saving throw. A creature takes 10d8 fire damage on a failed save, or half as much damage on a successful one. A creature must also make this saving throw when it enters the spell's area for the first time on a turn or ends its turn there. The cloud moves 10 feet directly away from you in a direction that you choose at the start of each of your turns.",
+    "de": "Eine wirbelnde Rauchwolke, die von weißer Glut durchzogen ist, erscheint in einer Sphäre mit einem Radius von sechs Metern, die auf einem Punkt in Reichweite zentriert ist. Die Wolke breitet sich um Ecken aus und ist komplett verschleiert. Sie bleibt für die Wirkungsdauer bestehen oder bis ein mäßiger oder stärkerer Wind (mindestens 16 Kilometer pro Stunde) den Nebel auflöst. Wenn die Wolke erscheint, muss jede Kreatur in diesem Bereich einen Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet die Kreatur 10W8 Feuerschaden, anderenfalls die Hälfte. Wenn eine Kreatur den Bereich des Zaubers in einem Zug erstmals betritt oder ihren Zug darin beendet, muss sie diesen Rettungswurf ebenfalls ausführen. Zu Beginn jedes deiner Züge bewegt sich die Wolke drei Meter in eine Richtung deiner Wahl direkt von dir weg."
+  },
+  "image": "fog-cloud",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

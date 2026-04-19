@@ -1,0 +1,58 @@
+{
+  "id": 17,
+  "slug": "detect-evil-and-good",
+  "name": "Detect Evil and Good",
+  "nameDe": "Gutes und Böses entdecken",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "paladin"
+    ],
+    "de": [
+      "Kleriker",
+      "Paladin"
+    ]
+  },
+  "type": {
+    "en": "1st-level divination",
+    "de": "Stufe 1 Erkenntnismagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "For the duration, you know if there is an aberration, celestial, elemental, fey, fiend, or undead within 30 feet of you, as well as where the creature is located. Similarly, you know if there is a place or object within 30 feet of you that has been magically consecrated or desecrated. The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.",
+    "de": "Für die Wirkungsdauer weißt du, ob sich eine Aberration, ein celestisches Wesen, ein Elementar, ein Feenwesen, ein Unhold oder ein Untoter im Abstand von bis zu neun Metern von dir befindet, sowie wo sich die Kreatur aufhält. Gleichermaßen weißt du, ob sich im Abstand von bis zu neun Metern von dir ein Ort oder Gegenstand befindet, der magisch geweiht oder entweiht wurde. Dieser Zauber durchdringt die meisten Barrieren, wird aber von 30 Zentimetern Stein, 2,5 Zentimetern gewöhnlichem Metall, dünnem Bleiblech sowie von einem Meter Holz oder Erde blockiert."
+  },
+  "image": "detect",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

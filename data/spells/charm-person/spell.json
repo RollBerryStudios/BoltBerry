@@ -1,0 +1,70 @@
+{
+  "id": 7,
+  "slug": "charm-person",
+  "name": "Charm Person",
+  "nameDe": "Person bezaubern",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "druid",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Druide",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level enchantment",
+    "de": "Stufe 1 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You attempt to charm a humanoid you can see within range. It must make a wisdom saving throw, and does so with advantage if you or your companions are fighting it. If it fails the saving throw, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.",
+    "de": "Du versuchst, einen Humanoiden in Reichweite zu bezaubern, den du sehen kannst. Er muss einen Rettungswurf auf Weisheit ausführen. Dabei ist er im Vorteil, wenn du oder deine Begleiter gegen ihn kämpft. Scheitert der Wurf, ist der Humanoide von dir bezaubert, bis der Zauber endet oder du und deine Begleiter dem Humanoiden Schaden zufügt. Die bezauberte Kreatur betrachtet dich als freundlichen Bekannten. Nach Ende des Zaubers weiß die Kreatur, dass sie von dir bezaubert wurde. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, kannst du für jeden Grad über dem 1. eine zusätzliche Kreatur als Ziel wählen. Die Kreaturen müssen sich im Abstand von bis zu neun Metern voneinander befinden, wenn du sie als Ziel wählst."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, kannst du für jeden Grad über dem 1. eine zusätzliche Kreatur als Ziel wählen. Die Kreaturen müssen sich im Abstand von bis zu neun Metern voneinander befinden, wenn du sie als Ziel wählst."
+  },
+  "image": "charm-person",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

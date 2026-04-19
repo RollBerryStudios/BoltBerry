@@ -1,0 +1,60 @@
+{
+  "id": 95,
+  "slug": "spiritual-weapon",
+  "name": "Spiritual Weapon",
+  "nameDe": "Waffe des Glaubens",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "2nd-level evocation",
+    "de": "Stufe 2 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 bonus action",
+    "de": "1 Bonusaktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You create a floating, spectral weapon within range that lasts for the duration or until you cast this spell again. When you cast the spell, you can make a melee spell attack against a creature within 5 feet of the weapon. On a hit, the target takes force damage equal to 1d8 + your spellcasting ability modifier. As a bonus action on your turn, you can move the weapon up to 20 feet and repeat the attack against a creature within 5 feet of it. The weapon can take whatever form you choose. Clerics of deities who are associated with a particular weapon (as St. Cuthbert is known for his mace and Thor for his hammer) make this spell's effect resemble that weapon.",
+    "de": "Du erzeugst eine schwebende Spektralwaffe in Reichweite, die während der Wirkungsdauer oder bis du diesen Zauber erneut wirkst bestehen bleibt Wenn du den Zauber wirkst, kannst du einen Nahkampf-Zauberangriff gegen eine Kreatur im Abstand von bis zu 1,5 Metern von der Waffe ausführen. Bei einem Treffer erleidet das Ziel Energieschaden in Höhe von 1W8 + deinem Zauberwirken-Attributsmodifikator. Als Bonusaktion kannst du die Waffe in deinem Zug um bis zu sechs Meter bewegen und einen weiteren Angriff gegen eine Kreatur im Abstand von bis zu 1,5 Metern von ihr ausführen. Die Waffe kann eine Form deiner Wahl annehmen. Kleriker von Gottheiten, die mit einer bestimmten Waffe assoziiert sind - wie St. Cuthbert mit seinem Streitkolben und Thor mit seinem Hammer lassen den Effekt des Zaubers wie diese Waffe aussehen. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, erhöht sich der Schaden alle zwei Grade über dem 2. um 1W8."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for every two slot levels above the 2nd.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, erhöht sich der Schaden alle zwei Grade über dem 2. um 1W8."
+  },
+  "image": "wpiritual-weapon",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,58 @@
+{
+  "id": 179,
+  "slug": "meteor-swarm",
+  "name": "Meteor Swarm",
+  "nameDe": "Meteoritenschwarm",
+  "level": {
+    "en": "9",
+    "de": "Grad 9"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "9th-level evocation",
+    "de": "Stufe 9 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "1 mile",
+    "de": "1,6km"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "Blazing orbs of fire plummet to the ground at four different points you can see within range. Each creature in a 40-foot-radius sphere centered on each point you choose must make a dexterity saving throw. The sphere spreads around corners. A creature takes 20d6 fire damage and 20d6 bludgeoning damage on a failed save, or half as much damage on a successful one. A creature in the area of more than one fiery burst is affected only once. The spell damages objects in the area and ignites flammable objects that aren't being worn or carried.",
+    "de": "Lodernde Feuerkugeln stürzen an vier verschiedenen Punkten in Reichweite zu Boden, die du sehen kannst Jede Kreatur in einer Sphäre mit einem Radius von zwölf Metern um jeden gewählten Punkt muss einen Geschicklichkeitsrettungswurf ausführen. Die Sphäre breitet sich um Ecken aus. Scheitert der Wurf, erleidet die Kreatur 20W6 Feuerschaden und 20W6 Wuchtschaden, anderenfalls die Hälfte. Kreaturen im Wirkungsbereich von mehr als einem feurigen Ausbruch sind nur einmal betroffen. Der Zauber verursacht Schaden bei Gegenständen in der Umgebung und entzündet brennbare Gegenstände, die nicht getragen oder gehalten werden."
+  },
+  "image": "meteor-swarm",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,180 @@
+{
+  "id": 298,
+  "slug": "warhorse",
+  "name": "Warhorse",
+  "nameDe": "Streitross",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "11",
+    "de": "11"
+  },
+  "hp": {
+    "en": "19 (3d10 + 3)",
+    "de": "19 (3W10+3)"
+  },
+  "str": 18,
+  "dex": 12,
+  "con": 13,
+  "int": 2,
+  "wis": 12,
+  "cha": 7,
+  "strMod": 4,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 11"
+    ],
+    "de": [
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Trampling Charge",
+        "text": "If the horse moves at least 20 ft. straight toward a creature and then hits it with a hooves attack on the same turn, that target must succeed on a DC 14 Strength saving throw or be knocked prone. If the target is prone, the horse can make another attack with its hooves against it as a bonus action."
+      }
+    ],
+    "de": [
+      {
+        "name": "Trampel-Sturmangriff",
+        "text": "Wenn das Ross sich mindestens sechs Meter weit direkt auf eine Kreatur zubewegt und sie dann im selben Zug mit einem Hufangriff trifft, muss das Ziel einen SG-14-Stärkerettungswurf bestehen, oder es wird umgestoßen. Gegen ein liegendes Ziel kann das Ross als Bonusaktion einen weiteren Angriff mit seinen Hufen ausführen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Hooves",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Hufe",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 11 (2W6+4) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "undead",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Warhorse (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Warhorse (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Warhorse (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

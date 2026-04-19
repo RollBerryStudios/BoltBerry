@@ -1,0 +1,23 @@
+{
+  "id": 51,
+  "slug": "blowgun-needles-50",
+  "name": "Blowgun Needles (50)",
+  "nameDe": "Blasrohr Nadeln (50)",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 100,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 1,
+  "image": "weapon",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

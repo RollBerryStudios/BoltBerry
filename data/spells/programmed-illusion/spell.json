@@ -1,0 +1,62 @@
+{
+  "id": 305,
+  "slug": "programmed-illusion",
+  "name": "Programmed Illusion",
+  "nameDe": "Vorbestimmtes Trugbild",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "6th-level illusion",
+    "de": "Stufe 6 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Until dispelled",
+    "de": "Bis entzaubert"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a bit of fleece and jade dust worth at least 25 gp",
+      "de": "ein bisschen Vlies und Jadestaub im Wert von mindestens 25 Gp"
+    },
+    "raw": {
+      "en": "V, S, M (a bit of fleece and jade dust worth at least 25 gp)",
+      "de": "V, G, M (ein bisschen Vlies und Jadestaub im Wert von mindestens 25 Gp)"
+    }
+  },
+  "description": {
+    "en": "You create an illusion of an object, a creature, or some other visible phenomenon within range that activates when a specific condition occurs. The illusion is imperceptible until then. It must be no larger than a 30-foot cube, and you decide when you cast the spell how the illusion behaves and what sounds it makes. This scripted performance can last up to 5 minutes. When the condition you specify occurs, the illusion springs into existence and performs in the manner you described. Once the illusion finishes performing, it disappears and remains dormant for 10 minutes. After this time, the illusion can be activated again. The triggering condition can be as general or as detailed as you like, though it must be based on visual or audible conditions that occur within 30 feet of the area. For example, you could create an illusion of yourself to appear and warn off others who attempt to open a trapped door, or you could set the illusion to trigger only when a creature says the correct word or phrase. Physical interaction with the image reveals it to be an illusion, because things can pass through it. A creature that uses its action to examine the image can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image, and any noise it makes sounds hollow to the creature.",
+    "de": "Du erschaffst eine Illusion eines Objekts, einer Kreatur oder eines anderen sichtbaren Phänomens in Reichweite, die unter einer bestimmten Bedingung aktiviert wird. Bis dahin ist die Illusion nicht wahrnehmbar. Sie darf nicht größer als ein Würfel mit neun Metern Kantenlänge sein. Beim Wirken des Zaubers bestimmst du, wie sich die Illusion verhält und welche Geräusche sie verursacht Diese vorbestimmte Darbietung kann bis zu fünf Minuten andauern. Tritt die festgelegte Bedingung ein, entsteht die Illusion und verhält sich auf die von dir beschriebene Weise. Sobald die Illusion ihre Darbietung beendet hat, verschwindet sie und ist zehn Minuten lang inaktiv. Danach kann sie wieder aktiviert werden. Die Auslösebedingung kann so allgemein oder detailliert sein, wie du möchtest, muss jedoch auf sichtbaren oder hörbaren Bedingungen basieren, die im Abstand von bis zu neun Metern des Bereichs auftreten. Beispielsweise könntest du eine Illusion deiner selbst erschaffen, die andere davor warnt, eine Tür mit einer Falle zu öffnen, oder die Illusion nur dann auslösen, wenn eine Kreatur ein bestimmtes Wort oder einen Satz ausspricht. Physische Interaktionen mit dem Abbild enttarnen es als Illusion, da Dinge es einfach durchdringen können. Eine Kreatur, die ihre Aktion verwendet, um das Abbild zu untersuchen, kann einen Intelligenzwurf (Nachforschungen) gegen deinen Zauberrettungswurf-SG ausführen. Erkennt eine Kreatur die Illusion als solche, wird das Abbild für sie durchscheinend, und sämtliche Geräusche klingen für die Kreatur hohl."
+  },
+  "image": "illusion",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

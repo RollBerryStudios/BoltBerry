@@ -1,0 +1,319 @@
+{
+  "id": 1,
+  "slug": "aboleth",
+  "name": "Aboleth",
+  "source": "SRD",
+  "meta": {
+    "en": "Large aberration, lawful evil",
+    "de": "Große Aberration, rechtschaffen böse"
+  },
+  "challenge": "10",
+  "xp": 5900,
+  "ac": {
+    "en": "17 (Natural Armor)",
+    "de": "17 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "135 (18d10 + 36)",
+    "de": "135 (18W10+36)"
+  },
+  "str": 21,
+  "dex": 9,
+  "con": 15,
+  "int": 18,
+  "wis": 15,
+  "cha": 18,
+  "strMod": 5,
+  "dexMod": -1,
+  "conMod": 2,
+  "intMod": 4,
+  "wisMod": 2,
+  "chaMod": 4,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "swim": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 20"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 20"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Deep Speech",
+      "telepathy 120 ft."
+    ],
+    "de": [
+      "Telepathie auf 36 m",
+      "Tiefensprache"
+    ]
+  },
+  "savingThrows": [
+    "Kon +6",
+    "Int +8",
+    "Wei +6"
+  ],
+  "skills": [
+    "Geschichte +12",
+    "Wahrnehmung +10"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Amphibious",
+        "text": "The aboleth can breathe air and water."
+      },
+      {
+        "name": "Mucous Cloud",
+        "text": "While underwater, the aboleth is surrounded by transformative mucus. A creature that touches the aboleth or that hits it with a melee attack while within 5 ft. of it must make a DC 14 Constitution saving throw. On a failure, the creature is diseased for 1d4 hours. The diseased creature can breathe only underwater."
+      },
+      {
+        "name": "Probing Telepathy",
+        "text": "If a creature communicates telepathically with the aboleth, the aboleth learns the creature's greatest desires if the aboleth can see the creature."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amphibisch",
+        "text": "Der Aboleth kann Luft und Wasser atmen."
+      },
+      {
+        "name": "Schleimwolke",
+        "text": "Unter Wasser ist der Aboleth von transformativem Schleim umgeben. Eine Kreatur, die den Aboleth berührt oder mit einem Nahkampfangriff trifft, während sie sich im Abstand von bis zu 1,5 Metern von ihm befindet, muss einen SG-14-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, so ist die Kreatur 1W4 Stunden lang krank. Die kranke Kreatur kann nur unter Wasser atmen."
+      },
+      {
+        "name": "Sondierende Telepathie",
+        "text": "Wenn eine Kreatur telepathisch mit dem Abolethen kommuniziert, erfährt der Aboleth die tiefsten Wünsche der Kreatur, sofern er sie sehen kann."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The aboleth makes three tentacle attacks."
+      },
+      {
+        "name": "Tentacle",
+        "text": "Melee Weapon Attack: +9 to hit, reach 10 ft., one target. Hit: 12 (2d6 + 5) bludgeoning damage. If the target is a creature, it must succeed on a DC 14 Constitution saving throw or become diseased. The disease has no effect for 1 minute and can be removed by any magic that cures disease. After 1 minute, the diseased creature's skin becomes translucent and slimy, the creature can't regain hit points unless it is underwater, and the disease can be removed only by heal or another disease-curing spell of 6th level or higher. When the creature is outside a body of water, it takes 6 (1d12) acid damage every 10 minutes unless moisture is applied to the skin before 10 minutes have passed."
+      },
+      {
+        "name": "Tail",
+        "text": "Melee Weapon Attack: +9 to hit, reach 10 ft., one target. Hit: 15 (3d6 + 5) bludgeoning damage."
+      },
+      {
+        "name": "Enslave",
+        "text": "The aboleth targets one creature it can see within 30 ft. of it. The target must succeed on a DC 14 Wisdom saving throw or be magically charmed by the aboleth until the aboleth dies or until it is on a different plane of existence from the target. The charmed target is under the aboleth's control and can't take reactions, and the aboleth and the target can communicate telepathically with each other over any distance.\nWhenever the charmed target takes damage, the target can repeat the saving throw. On a success, the effect ends. No more than once every 24 hours, the target can also repeat the saving throw when it is at least 1 mile away from the aboleth."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Aboleth führt drei Tentakelangriffe aus."
+      },
+      {
+        "name": "Schwanz",
+        "text": "Nahkampfwaffenangriff: +9 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 15 (3W6+5) Wuchtschaden."
+      },
+      {
+        "name": "Tentakel",
+        "text": "Nahkampfwaffenangriff: +9 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 12 (2W6+5) Wuchtschaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-14-Konstitutionsrettungswurf bestehen, oder es wird krank. Die Krankheit hat eine Minute lang keinen Effekt und kann von jeder Magie entfernt werden, die Krankheiten heilt. Nach einer Minute wird die Haut der kranken Kreatur durchscheinend und schleimig. Die Kreatur kann keine Trefferpunkte zurückerhalten, sofern sie sich nicht unter Wasser befindet, und die Krankheit kann nur durch Heilung oder einen anderen Heilzauber des 6. Grades oder höher entfernt werden. Wenn die Kreatur sich nicht im Wasser befindet, erleidet sie alle zehn Minuten 6 (1W12) Säureschaden, sofern ihre Haut nicht nass gemacht wird, bevor zehn Minuten vergangen sind."
+      },
+      {
+        "name": "Versklaven (3-mal täglich)",
+        "text": "Der Aboleth zielt auf eine Kreatur im Abstand von bis zu neun Metern, die er sehen kann. Das Ziel muss einen SG-14-Weisheitsrettungswurf bestehen, oder sie ist vom Aboleth magisch bezaubert, bis der Aboleth stirbt oder sich auf eine andere Existenzebene als das Ziel begibt. Das bezauberte Ziel steht unter der Kontrolle des Abolethen und kann keine Reaktionen ausführen, und der Aboleth und das Ziel können über beliebige Distanzen telepathisch miteinander kommunizieren. Wenn das bezauberte Ziel Schaden erleidet, kann es den Rettungswurf wiederholen. Bei einem Erfolg endet der Effekt. Höchstens einmal alle 24 Stunden kann das Ziel den Rettungswurf ebenfalls wiederholen, wenn es mindestens 1,6 Kilometer vom Abolethen entfernt ist."
+      }
+    ]
+  },
+  "legendaryActions": {
+    "en": [
+      "The aboleth can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. The aboleth regains spent legendary actions at the start of its turn.",
+      {
+        "name": "Detect",
+        "text": "The aboleth makes a Wisdom (Perception) check."
+      },
+      {
+        "name": "Tail Swipe",
+        "text": "The aboleth makes one tail attack."
+      },
+      {
+        "name": "Psychic Drain (Costs 2 Actions)",
+        "text": "One creature charmed by the aboleth takes 10 (3d6) psychic damage, and the aboleth regains hit points equal to the damage the creature takes."
+      }
+    ],
+    "de": [
+      {
+        "name": "Psychische Absaugung (kostet 2 Aktionen)",
+        "text": "Eine vom Abolethen bezauberte Kreatur erleidet 10 (3W6) psychischen Schaden, und der Aboleth erhält Trefferpunkte in Höhe des Schadens zurück, den die Kreatur erleidet."
+      },
+      {
+        "name": "Entdecken",
+        "text": "Der Aboleth führt einen Weisheitswurf (Wahrnehmung) aus."
+      },
+      {
+        "name": "Schwanzstreich",
+        "text": "Der Aboleth führt einen Schwanzangriff aus."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/11/1000/1000/636238825975375671.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "aberration",
+    "de": "Aberration"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "AbolethAberration (1).webp",
+    "variant": "aberration"
+  },
+  "tokens": [
+    {
+      "file": "AbolethAberration (2).webp",
+      "variant": "aberration"
+    },
+    {
+      "file": "AbolethAberration (3).webp",
+      "variant": "aberration"
+    },
+    {
+      "file": "AbolethAberration (4).webp",
+      "variant": "aberration"
+    },
+    {
+      "file": "AbolethAberration (5).webp",
+      "variant": "aberration"
+    },
+    {
+      "file": "AbolethAberration (6).webp",
+      "variant": "aberration"
+    },
+    {
+      "file": "AbolethAberration (7).webp",
+      "variant": "aberration"
+    },
+    {
+      "file": "AbolethCatifish (1).webp",
+      "variant": "catifish"
+    },
+    {
+      "file": "AbolethCatifish (2).webp",
+      "variant": "catifish"
+    },
+    {
+      "file": "AbolethCatifish (3).webp",
+      "variant": "catifish"
+    },
+    {
+      "file": "AbolethCatifish (4).webp",
+      "variant": "catifish"
+    },
+    {
+      "file": "AbolethCatifish (5).webp",
+      "variant": "catifish"
+    },
+    {
+      "file": "AbolethCatifish (6).webp",
+      "variant": "catifish"
+    },
+    {
+      "file": "AbolethCatifish (7).webp",
+      "variant": "catifish"
+    },
+    {
+      "file": "AbolethEel (1).webp",
+      "variant": "eel"
+    },
+    {
+      "file": "AbolethEel (2).webp",
+      "variant": "eel"
+    },
+    {
+      "file": "AbolethEel (3).webp",
+      "variant": "eel"
+    },
+    {
+      "file": "AbolethEel (4).webp",
+      "variant": "eel"
+    },
+    {
+      "file": "AbolethEel (5).webp",
+      "variant": "eel"
+    },
+    {
+      "file": "AbolethPike (1).webp",
+      "variant": "pike"
+    },
+    {
+      "file": "AbolethPike (10).webp",
+      "variant": "pike"
+    },
+    {
+      "file": "AbolethPike (11).webp",
+      "variant": "pike"
+    },
+    {
+      "file": "AbolethPike (12).webp",
+      "variant": "pike"
+    },
+    {
+      "file": "AbolethPike (13).webp",
+      "variant": "pike"
+    },
+    {
+      "file": "AbolethPike (14).webp",
+      "variant": "pike"
+    },
+    {
+      "file": "AbolethPike (2).webp",
+      "variant": "pike"
+    },
+    {
+      "file": "AbolethPike (3).webp",
+      "variant": "pike"
+    },
+    {
+      "file": "AbolethPike (4).webp",
+      "variant": "pike"
+    },
+    {
+      "file": "AbolethPike (5).webp",
+      "variant": "pike"
+    },
+    {
+      "file": "AbolethPike (6).webp",
+      "variant": "pike"
+    },
+    {
+      "file": "AbolethPike (7).webp",
+      "variant": "pike"
+    },
+    {
+      "file": "AbolethPike (8).webp",
+      "variant": "pike"
+    },
+    {
+      "file": "AbolethPike (9).webp",
+      "variant": "pike"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

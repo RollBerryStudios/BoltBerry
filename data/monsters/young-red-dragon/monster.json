@@ -1,0 +1,262 @@
+{
+  "id": 324,
+  "slug": "young-red-dragon",
+  "name": "Young Red Dragon",
+  "nameDe": "Junger roter Drache",
+  "source": "SRD",
+  "meta": {
+    "en": "Large dragon, chaotic evil",
+    "de": "Großer Drache, chaotisch böse"
+  },
+  "challenge": "10",
+  "xp": 5900,
+  "ac": {
+    "en": "18 (Natural Armor)",
+    "de": "18 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "178 (17d10 + 85)",
+    "de": "178 (17W10+85)"
+  },
+  "str": 23,
+  "dex": 10,
+  "con": 21,
+  "int": 14,
+  "wis": 11,
+  "cha": 19,
+  "strMod": 6,
+  "dexMod": 0,
+  "conMod": 5,
+  "intMod": 2,
+  "wisMod": 0,
+  "chaMod": 4,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    },
+    "fly": {
+      "en": 80,
+      "de": 24
+    },
+    "climb": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 30 ft.",
+      "Darkvision 120 ft.",
+      "passive perception 18"
+    ],
+    "de": [
+      "Blindsicht 9 m",
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 18"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Draconic"
+    ],
+    "de": [
+      "Drakonisch",
+      "Gemeinsprache"
+    ]
+  },
+  "savingThrows": [
+    "Ges +4",
+    "Kon +9",
+    "Wei +4",
+    "Cha +8"
+  ],
+  "skills": [
+    "Heimlichkeit +4",
+    "Wahrnehmung +8"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The dragon makes three attacks: one with its bite and two with its claws."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +10 to hit, reach 10 ft., one target. Hit: 17 (2d10 + 6) piercing damage plus 3 (1d6) fire damage."
+      },
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 13 (2d6 + 6) slashing damage."
+      },
+      {
+        "name": "Fire Breath",
+        "text": "The dragon exhales fire in a 30-foot cone. Each creature in that area must make a DC 17 Dexterity saving throw, taking 56 (16d6) fire damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Drache führt drei Angriffe aus: einen mit seinem Biss und zwei mit seinen Klauen."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +10 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 17 (2W10+6) Stichschaden plus 3 (1W6) Feuerschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +10 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 13 (2W6+6) Hiebschaden."
+      },
+      {
+        "name": "Feuerodem (Aufladung 5–6)",
+        "text": "Der Drache atmet Feuer in einem Kegel von neun Metern aus. Jede Kreatur in diesem Bereich muss einen SG-17-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 56 (16W6) Feuerschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/399/315/315/636252784386259001.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "dragon",
+    "de": "Drache"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "YoungRedDragon (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "YoungRedDragon (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (31).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (32).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "YoungRedDragon (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

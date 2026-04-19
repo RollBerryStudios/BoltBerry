@@ -1,0 +1,30 @@
+{
+  "id": 400,
+  "slug": "amulet-of-proof-against-detection-and-location",
+  "name": "Amulet of Proof Against Detection and Location",
+  "nameDe": "Amulett des Schutzes gegen Ortung und Ausspähung",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 2000000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon (requires attunement) While wearing this amulet, you are hidden from divination magic. You can't be targeted by such magic or perceived through magical scrying sensors.",
+    "de": "Wenn du dieses Amulett trägst, bist du vor Erkenntnismagie versteckt. Du kannst nicht das Ziel solcher Magie sein oder durch magische Ausspähungssensoren wahrgenommen werden."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

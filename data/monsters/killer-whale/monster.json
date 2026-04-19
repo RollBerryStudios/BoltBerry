@@ -1,0 +1,210 @@
+{
+  "id": 182,
+  "slug": "killer-whale",
+  "name": "Killer Whale",
+  "nameDe": "Killerwal",
+  "source": "SRD",
+  "meta": {
+    "en": "Huge beast, unaligned",
+    "de": "Riesige Bestie, ohne Gesinnung"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "12 (Natural Armor)",
+    "de": "12 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "90 (12d12 + 12)",
+    "de": "90 (12W12+12)"
+  },
+  "str": 19,
+  "dex": 10,
+  "con": 13,
+  "int": 3,
+  "wis": 12,
+  "cha": 7,
+  "strMod": 4,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {},
+    "swim": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 120 ft.",
+      "passive perception 13"
+    ],
+    "de": [
+      "Blindsicht 36 m",
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Echolocation",
+        "text": "The whale can't use its blindsight while deafened."
+      },
+      {
+        "name": "Hold Breath",
+        "text": "The whale can hold its breath for 30 minutes"
+      },
+      {
+        "name": "Keen Hearing",
+        "text": "The whale has advantage on Wisdom (Perception) checks that rely on hearing."
+      }
+    ],
+    "de": [
+      {
+        "name": "Atem anhalten",
+        "text": "Der Wal kann 30 Minuten lang den Atem anhalten."
+      },
+      {
+        "name": "Echolot",
+        "text": "Der Wal kann seine Blindsicht nicht verwenden, solange er taub ist."
+      },
+      {
+        "name": "Scharfes Gehör",
+        "text": "Der Wal ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 21 (5d6 + 4) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 21 (5W6+4) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "huge",
+    "de": "Riesiges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "KillerWhale (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "KillerWhale (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "KillerWhale (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

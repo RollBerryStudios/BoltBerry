@@ -1,0 +1,68 @@
+{
+  "id": 312,
+  "slug": "scrying",
+  "name": "Scrying",
+  "nameDe": "Ausspähung",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "druid",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Druide",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "5th-level divination",
+    "de": "Stufe 5 Erkenntnismagie"
+  },
+  "castingTime": {
+    "en": "10 minutes",
+    "de": "10 Minuten"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a focus worth at least 1,000 gp, such as a crystal ball, a silver mirror, or a font filled with holy water",
+      "de": "einen Fokus im Wert von mindestens 1.000 Goldstücken, z. B. eine Kristallkugel, einen Silberspiegel oder ein mit Weihwasser gefülltes Becken"
+    },
+    "raw": {
+      "en": "V, S, M (a focus worth at least 1,000 gp, such as a crystal ball, a silver mirror, or a font filled with holy water)",
+      "de": "V, G, M (einen Fokus im Wert von mindestens 1.000 Goldstücken, z. B. eine Kristallkugel, einen Silberspiegel oder ein mit Weihwasser gefülltes Becken)"
+    }
+  },
+  "description": {
+    "en": "You can see and hear a particular creature you choose that is on the same plane of existence as you. The target must make a wisdom saving throw, which is modified by how well you know the target and the sort of physical connection you have to it. If a target knows you're casting this spell, it can fail the saving throw voluntarily if it wants to be observed. | Knowledge | Save Modifier | |---|---| | Secondhand (you have heard of the target) | +5 | | Firsthand (you have met the target) | +0 | | Familiar (you know the target well) | -5 |  | Connection | Save Modifier | |---|---| | Likeness or picture | -2 | | Possession or garment | -4 | | Body part, lock of hair, bit of nail, or the like | -10 | On a successful save, the target isn't affected, and you can't use this spell against it again for 24 hours. On a failed save, the spell creates an invisible sensor within 10 feet of the target. You can see and hear through the sensor as if you were there. The sensor moves with the target, remaining within 10 feet of it for the duration. A creature that can see invisible objects sees the sensor as a luminous orb about the size of your fist. Instead of targeting a creature, you can choose a location you have seen before as the target of this spell. When you do, the sensor appears at that location and doesn't move.",
+    "de": "Du kannst eine bestimmte Kreatur deiner Wahl sehen und hören, die sich auf derselben Existenzebene wie du befindet Das Ziel muss einen Weisheitsrettungswurf ausführen, der dadurch modifiziert wird, wie gut du das Ziel kennst und ob du einen Gegenstand hast, der dich mit ihm verbindet. Weiß das Ziel, dass du diesen Zauber wirkst, und will es beobachtet werden, kann es den Rettungswurf freiwillig scheitern lassen. Bei einem erfolgreichen Rettungswurf ist das Ziel nicht betroffen und du kannst diesen Zauber erst nach 24 Stunden erneut auf das Ziel wirken. Scheitert der Wurf, erschafft der Zauber einen unsichtbaren Sensor im Abstand von bis zu drei Metern vom Ziel. Du kannst durch den Sensor sehen und hören, als ob du dich dort befindest. Der Sensor bewegt sich mit dem Ziel und bleibt für die Wirkungsdauer im Abstand von bis zu drei Metern von ihm. Eine Kreatur, die unsichtbare Gegenstände sehen kann, sieht den Sensor als leuchtende, etwa faustgroße Kugel. Anstelle einer Kreatur kannst du einen Ort, den du schon einmal gesehen hast, als Ziel des Zaubers wählen. In diesem Fall erscheint der Sensor an diesem Ort und bewegt sich nicht."
+  },
+  "image": "arcane-eye",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

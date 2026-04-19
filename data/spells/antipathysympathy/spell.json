@@ -1,0 +1,62 @@
+{
+  "id": 163,
+  "slug": "antipathysympathy",
+  "name": "Antipathy/Sympathy",
+  "nameDe": "Antipathie/Sympathie",
+  "level": {
+    "en": "8",
+    "de": "Grad 8"
+  },
+  "school": {
+    "en": "enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "wizard"
+    ],
+    "de": [
+      "Druide",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "8th-level enchantment",
+    "de": "Stufe 8 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "10 days",
+    "de": "10 Tage"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "either a hump of alum soaked in vinegar for the antipathy effect or a drop of honey for the sympathy effect",
+      "de": "entweder ein in Essig getränktes Stück Alaun für die antipathische Wirkung oder ein Tropfen Honig für die sympathische Wirkung"
+    },
+    "raw": {
+      "en": "V, S, M (either a hump of alum soaked in vinegar for the antipathy effect or a drop of honey for the sympathy effect)",
+      "de": "V, G, M (entweder ein in Essig getränktes Stück Alaun für die antipathische Wirkung oder ein Tropfen Honig für die sympathische Wirkung)"
+    }
+  },
+  "description": {
+    "en": "This spell attracts or repels creatures of your choice. You target something within range, either a Huge or smaller object or creature or an area that is no larger than a 200-foot cube. Then specify a kind of intelligent creature, such as red dragons, goblins, or vampires. You invest the target with an aura that either attracts or repels the specified creatures for the duration. Choose antipathy or sympathy as the aura's effect. ***Antipathy.*** The enchantment causes creatures of the kind you designated to feel an intense urge to leave the area and avoid the target. When such a creature can see the target or comes within 60 feet of it, the creature must succeed on a wisdom saving throw or become frightened. The creature remains frightened while it can see the target or is within 60 feet of it. While frightened by the target, the creature must use its movement to move to the nearest safe spot from which it can't see the target. If the creature moves more than 60 feet from the target and can't see it, the creature is no longer frightened, but the creature becomes frightened again if it regains sight of the target or moves within 60 feet of it. ***Sympathy.*** The enchantment causes the specified creatures to feel an intense urge to approach the target while within 60 feet of it or able to see it. When such a creature can see the target or comes within 60 feet of it, the creature must succeed on a wisdom saving throw or use its movement on each of its turns to enter the area or move within reach of the target. When the creature has done so, it can't willingly move away from the target. If the target damages or otherwise harms an affected creature, the affected creature can make a wisdom saving throw to end the effect, as described below. ***Ending the Effect.*** If an affected creature ends its turn while not within 60 feet of the target or able to see it, the creature makes a wisdom saving throw. On a successful save, the creature is no longer affected by the target and recognizes the feeling of repugnance or attraction as magical. In addition, a creature affected by the spell is allowed another wisdom saving throw every 24 hours while the spell persists. A creature that successfully saves against this effect is immune to it for 1 minute, after which time it can be affected again.",
+    "de": "Dieser Zauber zieht Kreaturen deiner Wahl an oder wehrt sie ab. Wähle als Ziel einen Gegenstand oder eine Kreatur in Reichweite, der oder die höchstens riesig sein darf, oder einen Bereich, der nicht größer als ein Würfel mit 60 Metern Kantenlänge ist. Bestimme dann eine Art von intelligenter Kreatur, wie rote Drachen, Goblins oder Vampire. Du erfüllst das Ziel mit einer Aura, die die gewählten Kreaturen für die Wirkungsdauer entweder anzieht oder abwehrt Wähle Antipathie oder Sympathie für den Effekt der Aura. Antipathie:  Die Verzauberung bewirkt, dass Kreaturen der von dir bestimmten Art den starken Drang verspüren, den Bereich zu verlassen und das Ziel zu meiden. Wenn eine derartige Kreatur das Ziel sehen kann oder sich ihm auf 18 Meter nähert, muss die Kreatur einen Weisheitsrettungswurf bestehen, oder sie wird verängstigt. Die Kreatur bleibt verängstigt, während sie das Ziel sehen kann oder sich im Abstand von bis zu 18 Metern von ihm befindet. Solange sie verängstigt ist, muss die Kreatur ihre Bewegungsrate verwenden, um sich zum nächsten sicheren Ort zu begeben, an dem sie das Ziel nicht sehen kann. Wenn die Kreatur mehr als 18 Meter vom Ziel entfernt ist und es nicht sehen kann, ist sie nicht mehr verängstigt. Sie erhält den Zustand jedoch erneut, wenn sie das Ziel wieder sehen kann oder sich ihm auf 18 Meter nähert. Sympathie:  Die Verzauberung bewirkt, dass Kreaturen der von dir bestimmten Art den starken Drang verspüren, sich dem Ziel zu nähern, während sie sich 18 Meter davon entfernt befinden oder es sehen können. Wenn eine derartige Kreatur das Ziel sehen kann oder sich ihm auf 18 Meter nähert, muss die Kreatur einen Weisheitsrettungswurf bestehen, oder ihre Bewegungsrate in jedem ihrer Züge verwenden, um den Bereich zu betreten oder sich in Reichweite des Ziels zu begeben. Wenn die Kreatur dies getan hat, kann sie sich nicht willentlich vom Ziel entfernen. Wenn das Ziel eine beeinflusste Kreatur verletzt oder ihr anderweitig schadet, kann diese einen Weisheitsrettungswurf ausführen, um den Effekt wie unten beschrieben zu beenden. Den Effekt beenden:  Beendet eine betroffene Kreatur ihren Zug mehr als 18 Meter vom Ziel entfernt oder kann es nicht sehen, führt die Kreatur einen Weisheitsrettungswurf aus. Bei einem erfolgreichen Rettungswurf ist die Kreatur nicht länger vom Effekt des Ziels betroffen und erkennt, dass das Gefühl der Anziehung oder Abneigung magischer Natur ist. Außerdem darf eine Kreatur, während sie von dem Zauber betroffen ist, alle 24 Stunden einen weiteren Weisheitsrettungswurf ausführen. Bei einem erfolgreichen Rettungswurf ist die Kreatur eine Minute lang gegen diesen Effekt immun. Danach kann er wieder in Kraft treten."
+  },
+  "image": "antipathy",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

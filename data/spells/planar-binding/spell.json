@@ -1,0 +1,70 @@
+{
+  "id": 303,
+  "slug": "planar-binding",
+  "name": "Planar Binding",
+  "nameDe": "Bindung der Ebenen",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "druid",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Druide",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "5th-level abjuration",
+    "de": "Stufe 5 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "24 hours",
+    "de": "24 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a jewel worth at least 1,000 gp, which the spell consumes",
+      "de": "ein Goldstück im Wert von mindestens 1.000 Goldstücken, das durch den Zauberspruch verbraucht wird"
+    },
+    "raw": {
+      "en": "V, S, M (a jewel worth at least 1,000 gp, which the spell consumes)",
+      "de": "V, G, M (ein Goldstück im Wert von mindestens 1.000 Goldstücken, das durch den Zauberspruch verbraucht wird)"
+    }
+  },
+  "description": {
+    "en": "With this spell, you attempt to bind a celestial, an elemental, a fey, or a fiend to your service. The creature must be within range for the entire casting of the spell. (Typically, the creature is first summoned into the center of an inverted magic circle in order to keep it trapped while this spell is cast.) At the completion of the casting, the target must make a charisma saving throw. On a failed save, it is bound to serve you for the duration. If the creature was summoned or created by another spell, that spell's duration is extended to match the duration of this spell. A bound creature must follow your instructions to the best of its ability. You might command the creature to accompany you on an adventure, to guard a location, or to deliver a message. The creature obeys the letter of your instructions, but if the creature is hostile to you, it strives to twist your words to achieve its own objectives. If the creature carries out your instructions completely before the spell ends, it travels to you to report this fact if you are on the same plane of existence. If you are on a different plane of existence, it returns to the place where you bound it and remains there until the spell ends.",
+    "de": "Mit diesem Zauber versuchst du, ein celestisches Wesen, einen Elementar, ein Feenwesen oder einen Unhold in deinen Dienst zu verpflichten. Die Kreatur muss sich für die gesamte Wirkungsdauer in Reichweite befinden. (Normalerweise wird die Kreatur zuerst in einen umgekehrten Schutzkreis  beschworen, wo sie gefangen bleibt, während du den Zauber wirkst.) Nach Wirken des Zaubers muss das Ziel einen Charismarettungswurf ausführen. Scheitert der Wurf, muss es dir für die Wirkungsdauer dienen. Wurde die Kreatur durch einen anderen Zauber beschworen oder erschaffen, verlängert sich dessen Wirkungsdauer auf die Wirkungsdauer von Bindung der Ebenen . Eine verpflichtete Kreatur muss deine Befehle nach Kräften befolgen. Du kannst der Kreatur befehlen, dich auf ein Abenteuer zu begleiten, einen Ort zu bewachen oder eine Botschaft zu übermitteln. Die Kreatur befolgt deine Anweisungen wortwörtlich. Ist sie dir jedoch feindlich gesinnt, versucht sie, deine Worte zu verdrehen, um ihre eigenen Ziele zu verfolgen. Führt die Kreatur deine Anweisungen vollständig aus, bevor der Zauber endet, kehrt sie zu dir zurück und erstattet dir Bericht, sofern du dich auf derselben Existenzebene befindest. Anderenfalls kehrt sie an den Ort zurück, an dem du sie verpflichtet hast, und verbleibt dort, bis der Zauber endet. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz eines höheren Grades verwendest, verlängert sich die Wirkungsdauer: zehn Tage bei einem Zauberplatz des 6. Grades, 30 Tage bei einem des 7. Grades, 180 Tage bei einem des 8. Grades und ein Jahr und einen Tag bei einem des 9. Grades."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of a higher level, the duration increases to 10 days with a 6th-level slot, to 30 days with a 7th-level slot, to 180 days with an 8th-level slot, and to a year and a day with a 9th-level spell slot.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz eines höheren Grades verwendest, verlängert sich die Wirkungsdauer: zehn Tage bei einem Zauberplatz des 6. Grades, 30 Tage bei einem des 7. Grades, 180 Tage bei einem des 8. Grades und ein Jahr und einen Tag bei einem des 9. Grades."
+  },
+  "image": "unseen-servant",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,187 @@
+{
+  "id": 135,
+  "slug": "giant-poisonous-snake",
+  "name": "Giant Poisonous Snake",
+  "nameDe": "Riesengiftschlange",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "14",
+    "de": "14"
+  },
+  "hp": {
+    "en": "11 (2d8 + 2)",
+    "de": "11 (2W8+2)"
+  },
+  "str": 10,
+  "dex": 18,
+  "con": 13,
+  "int": 2,
+  "wis": 10,
+  "cha": 3,
+  "strMod": 0,
+  "dexMod": 4,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "swim": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 10 ft.",
+      "passive perception 12"
+    ],
+    "de": [
+      "Blindsicht 3 m",
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +2"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 6 (1d4 + 4) piercing damage, and the target must make a DC 11 Constitution saving throw, taking 10 (3d6) poison damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 6 (1W4+4) Stichschaden, und das Ziel muss einen SG-11-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet es 10 (3W6) Giftschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantPoisonousSnakeDesert (1).webp",
+    "variant": "desert"
+  },
+  "tokens": [
+    {
+      "file": "GiantPoisonousSnakeDesert (2).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantPoisonousSnakeDesert (3).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantPoisonousSnakeDesert (4).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantPoisonousSnakeDesert (5).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantPoisonousSnakeDesert (6).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "GiantPoisonousSnakeSwamp (1).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantPoisonousSnakeSwamp (2).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantPoisonousSnakeSwamp (3).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantPoisonousSnakeSwamp (4).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantPoisonousSnakeSwamp (5).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantPoisonousSnakeSwamp (6).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantPoisonousSnakeSwamp (7).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "GiantPoisonousSnakeUnderdark (1).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantPoisonousSnakeUnderdark (2).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "GiantPoisonousSnakeUnderwater (1).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantPoisonousSnakeUnderwater (2).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantPoisonousSnakeUnderwater (3).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantPoisonousSnakeUnderwater (4).webp",
+      "variant": "underwater"
+    },
+    {
+      "file": "GiantPoisonousSnakeUrban (1).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantPoisonousSnakeUrban (2).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantPoisonousSnakeUrban (3).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "GiantPoisonousSnakeUrban (4).webp",
+      "variant": "urban"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

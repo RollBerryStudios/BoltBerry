@@ -1,0 +1,204 @@
+{
+  "id": 62,
+  "slug": "cat",
+  "name": "Cat",
+  "nameDe": "Katze",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny beast, unaligned",
+    "de": "Winzige Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "2 (1d4)",
+    "de": "2 (1W4)"
+  },
+  "str": 3,
+  "dex": 15,
+  "con": 10,
+  "int": 3,
+  "wis": 12,
+  "cha": 7,
+  "strMod": -4,
+  "dexMod": 2,
+  "conMod": 0,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    },
+    "climb": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +4",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Smell",
+        "text": "The cat has advantage on Wisdom (Perception) checks that rely on smell."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfer Geruchssinn",
+        "text": "Die Katze ist bei Weisheitswürfen (Wahrnehmung), die auf Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +0 to hit, reach 5 ft., one target. Hit: 1 slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +0 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 1 Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "tiny",
+    "de": "Winziges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "CatDesert (1).webp",
+    "variant": "desert"
+  },
+  "tokens": [
+    {
+      "file": "CatDesert (2).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "CatDesert (3).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "CatDesert (4).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "CatDesert (5).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "CatDesert (6).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "CatForest (1).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CatForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CatForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CatForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CatForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CatForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CatForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CatForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CatForest (9).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "CatUrban (1).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CatUrban (2).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CatUrban (3).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CatUrban (4).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CatUrban (5).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CatUrban (6).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CatUrban (7).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CatUrban (8).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "CatUrban (9).webp",
+      "variant": "urban"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

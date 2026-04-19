@@ -1,0 +1,60 @@
+{
+  "id": 31,
+  "slug": "find-familiar",
+  "name": "Find Familiar",
+  "nameDe": "Vertrauten finden",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level conjuration (ritual)",
+    "de": "Stufe 1 Beschwörung (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "range": {
+    "en": "10 feet",
+    "de": "3 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "10gp worth of charcoal, incense, and herbs that must be consumed by fire in a brass brazier",
+      "de": "Holzkohle, Weihrauch und Kräuter im Wert von 10 Goldstücken, die in einer Messingpfanne verbrannt werden müssen"
+    },
+    "raw": {
+      "en": "V, S, M (10gp worth of charcoal, incense, and herbs that must be consumed by fire in a brass brazier)",
+      "de": "V, G, M (Holzkohle, Weihrauch und Kräuter im Wert von 10 Goldstücken, die in einer Messingpfanne verbrannt werden müssen)"
+    }
+  },
+  "description": {
+    "en": "You gain the service of a familiar, a spirit that takes an animal form you choose: bat, cat, crab, frog (toad), hawk, lizard, octopus, owl, poisonous snake, fish (quipper), rat, raven, sea horse, spider, or weasel. Appearing in an unoccupied space within range, the familiar has the statistics of the chosen form, though it is a celestial, fey, or fiend (your choice) instead of a beast. Your familiar acts independently of you, but it always obeys your commands. In combat, it rolls its own initiative and acts on its own turn. A familiar can't attack, but it can take other actions as normal. When the familiar drops to 0 hit points, it disappears, leaving behind no physical form. It reappears after you cast this spell again. While your familiar is within 100 feet of you, you can communicate with it telepathically. Additionally, as an action, you can see through your familiar's eyes and hear what it hears until the start of your next turn, gaining the benefits of any special senses that the familiar has. During this time, you are deaf and blind with regard to your own senses. As an action, you can temporarily dismiss your familiar. It disappears into a pocket dimension where it awaits your summons. Alternatively, you can dismiss it forever. As an action while it is temporarily dismissed, you can cause it to reappear in any unoccupied space within 30 feet of you. You can't have more than one familiar at a time. If you cast this spell while you already have a familiar, you instead cause it to adopt a new form. Choose one of the forms from the above list. Your familiar transforms into the chosen creature. Finally, when you cast a spell with a range of touch, your familiar can deliver the spell as if it had cast the spell. Your familiar must be within 100 feet of you, and it must use its reaction to deliver the spell when you cast it. If the spell requires an attack roll, you use your action modifier for the roll.",
+    "de": "Du erhältst die Dienste eines Vertrauten. Dabei handelt es sich um einen Geist, der die Gestalt eines Tiers deiner Wahl annimmt: Eidechse, Eule, Falke, Fisch (Quipper) Fledermaus, Frosch (Kröte), Giftschlange, Katze, Krabbe, Oktopus, Rabe, Ratte, Seepferdchen, Spinne oder Wiesel. Der Vertraute erscheint an einer freien Stelle in Reichweite. Er besitzt die Spielwerte der gewählten Gestalt, ist jedoch ein celestisches Wesen, ein Feenwesen oder ein Unhold (deine Wahl) und kein Tier. Dein Vertrauter agiert unabhängig von dir, befolgt aber immer deine Befehle. Im Kampf würfelt er seine eigene Initiative aus und hat seinen eigenen Zug. Ein Vertrauter kann nicht angreifen, kann jedoch andere Aktionen wie gewohnt ausführen. Sinken die Trefferpunkte des Vertrauten auf 0, verschwindet er und hinterlässt keine physische Form. Er erscheint wieder, wenn du den Zauber erneut wirkst. Während sich dein Vertrauter im Abstand von bis zu 30 Metern von dir aufhält, kannst du telepathisch mit ihm kommunizieren. Zudem kannst du als Aktion bis zum Beginn deines nächsten Zugs durch die Augen deines Vertrauten sehen und hören, was er hört. Dabei erhältst du etwaige Spezialsinne des Vertrauten. Währenddessen bist du blind und taub, was deine eigenen Sinne betrifft. Als Aktion kannst du deinen Vertrauten kurzzeitig fortschicken. Er verschwindet in eine Taschendimension, wo er auf deinen Ruf wartet. Alternativ kannst du ihn für immer fortschicken. Solange dein Vertrauter kurzzeitig fortgeschickt ist, kannst du ihn als Aktion an einer freien Stelle im Abstand von bis zu neun Metern von dir erscheinen lassen. Du kannst maximal einen Vertrauten gleichzeitig haben. Wirkst du diesen Zauber, während du bereits einen Vertrauten hast, lässt du ihn stattdessen eine neue Gestalt annehmen. Wähle eine aus der Liste weiter oben aus. Dein Vertrauter verwandelt sich in die gewählte Kreatur. Wirkst du zudem einen Zauber mit Berührungsreichweite, kann dein Vertrauter den Zauber ausführen, als hättest du ihn gewirkt. Dein Vertrauter muss sich im Abstand von bis zu 30 Metern von dir befinden und muss seine Reaktion verwenden, um den Zauber auszuführen, wenn du ihn wirkst. Erfordert der Zauber einen Angriffswurf, verwende deinen Angriffsmodifikator."
+  },
+  "image": "animal-friendship",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

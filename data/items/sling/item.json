@@ -1,0 +1,36 @@
+{
+  "id": 26,
+  "slug": "sling",
+  "name": "Sling",
+  "nameDe": "Schleuder",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 10,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 0,
+  "classification": {
+    "en": "Simple Ranged Weapons",
+    "de": "Einfache Fernkampfwaffe"
+  },
+  "damage": "1d4",
+  "damageType": {
+    "en": "bludgeoning",
+    "de": "wucht"
+  },
+  "properties": {
+    "en": "ammunition (range 30/120)",
+    "de": "munition (fernkampf 30/120)"
+  },
+  "image": "sling",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

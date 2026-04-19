@@ -1,0 +1,244 @@
+{
+  "id": 59,
+  "slug": "bugbear",
+  "name": "Bugbear",
+  "nameDe": "Grottenschrat",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, chaotic evil",
+    "de": "Mittelgroßer Humanoid, chaotisch böse"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "16 (Hide Armor, Shield)",
+    "de": "16 (Fellrüstung, Schild)"
+  },
+  "hp": {
+    "en": "27 (5d8 + 5)",
+    "de": "27 (5W8+5)"
+  },
+  "str": 15,
+  "dex": 14,
+  "con": 13,
+  "int": 8,
+  "wis": 11,
+  "cha": 9,
+  "strMod": 2,
+  "dexMod": 2,
+  "conMod": 1,
+  "intMod": -1,
+  "wisMod": 0,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Goblin"
+    ],
+    "de": [
+      "Gemeinsprache",
+      "Goblinisch"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +6",
+    "Überlebenskunst +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Brute",
+        "text": "A melee weapon deals one extra die of its damage when the bugbear hits with it (included in the attack)."
+      },
+      {
+        "name": "Surprise Attack",
+        "text": "If the bugbear surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 7 (2d6) damage from the attack."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rohling",
+        "text": "Eine Nahkampfwaffe bewirkt einen zusätzlichen Würfel ihres Schadens, wenn der Grottenschrat damit trifft (im Angriff enthalten)."
+      },
+      {
+        "name": "Überraschungsangriff",
+        "text": "Wenn der Grottenschrat in der ersten Kampfrunde eine Kreatur überrascht und mit einem Angriff trifft, erleidet das Ziel zusätzlich 7 (2W6) Schaden durch den Angriff."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Morningstar",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 11 (2d8 + 2) piercing damage."
+      },
+      {
+        "name": "Javelin",
+        "text": "Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: 9 (2d6 + 2) piercing damage in melee or 5 (1d6 + 2) piercing damage at range."
+      }
+    ],
+    "de": [
+      {
+        "name": "Morgenstern",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 11 (2W8+2) Stichschaden."
+      },
+      {
+        "name": "Wurfspeer",
+        "text": "Nah- oder Fernkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m oder Reichweite 9/36 m, ein Ziel. Treffer: 9 (2W6+2) Stichschaden im Nahkampf oder 5 (1W6+2) Stichschaden im Fernkampf."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/221/1000/1000/636252765234633232.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (Goblinoide)"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "Bugbear (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Bugbear (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Bugbear (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,26 @@
+{
+  "id": 200,
+  "slug": "philter-of-love",
+  "name": "Philter of Love",
+  "nameDe": "Liebestrank",
+  "category": {
+    "en": "POTIONS_OILS",
+    "de": "Tränke & Öle"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 9000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Potion, uncommon The next time you see a creature within 10 minutes after drinking this philter, you become charmed by that creature for 1 hour. If the creature is of a species and gender you are normally attracted to, you regard it as your true love while you are charmed. This potion's rose-hued, effervescent liquid contains one easy-to-miss bubble shaped like a heart.",
+    "de": "Du wirst von der nächsten Kreatur eine Stunde lang bezaubert, die du innerhalb von zehn Minuten nach dem Trinken dieses Tranks siehst. Wenn du Spezies und Geschlecht der Kreatur normalerweise attraktiv findest, siehst du sie als deine wahre Liebe an, solange du bezaubert bist. Die rosafarbene, sprudelnde Flüssigkeit des Tranks enthält eine leicht übersehbare Blase in Herzform."
+  },
+  "image": "potions-and-oils",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

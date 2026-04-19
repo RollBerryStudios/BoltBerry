@@ -1,0 +1,40 @@
+{
+  "id": 389,
+  "slug": "hammer-of-thunderbolts",
+  "name": "Hammer of Thunderbolts",
+  "nameDe": "Hammer des Blitzschlags",
+  "category": {
+    "en": "WEAPON",
+    "de": "Waffe"
+  },
+  "rarity": {
+    "en": "LEGENDARY",
+    "de": "Legendär"
+  },
+  "cost": 1600000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Weapon (maul), legendary You gain a +1 bonus to attack and damage rolls made with this magic weapon. Giant's Bane (Requires Attunement). You must be wearing a belt of giant strength (any variety) and gauntlets of ogre power to attune to this weapon. The attunement ends if you take off either of those items. While you are attuned to this weapon and holding it, your Strength score increases by 4 and can exceed 20, but not 30. When you roll a 20 on an attack roll made with this weapon against a giant, the giant must succeed on a DC 17 Constitution saving throw or die. The hammer also has 5 charges. While attuned to it, you can expend 1 charge and make a ranged weapon attack with the hammer, hurling it as if it had the thrown property with a normal range of 20 feet and a long range of 60 feet. If the attack hits, the hammer unleashes a thunderclap audible out to 300 feet. The target and every creature within 30 feet of it must succeed on a DC 17 Constitution saving throw or be stunned until the end of your next turn. The hammer regains 1d4 + 1 expended charges daily at dawn.",
+    "de": "Du erhältst einen Bonus von +1 auf Angriffs- und Schadenswürfe, die du mit dieser magischen Waffe ausführst. Verderben der Riesen (erfordert Einstimmung): Du musst einen Gürtel der Riesenstärke  (beliebige Art) und Panzerhandschuhe der Ogerkraft  tragen, um dich auf diese Waffe einzustimmen. Die Einstimmung endet, wenn du einen dieser Gegenstände ablegst. Während du auf diese Waffe eingestimmt bist und sie hältst, erhöht sich dein Stärkewert um 4 und kann größer als 20, aber nicht größer als 30 sein. Wenn du bei einem Angriffswurf mit dieser Waffe gegen einen Riesen eine 20 würfelst, muss der Riese einen SG-17-Konstitutionsrettungswurf bestehen, oder er stirbt. Außerdem hat der Hammer fünf Ladungen. Während du auf ihn eingestimmt bist, kannst du eine Ladung verbrauchen, um einen Fernkampfwaffenangriff mit dem Hammer auszuführen. Du wirfst ihn, als wäre er eine Wurfwaffe mit einer Grundreichweite von sechs Metern und einer Maximalreichweite von 18 Metern. Wenn der Angriff trifft, setzt der Hammer einen Donnerschlag frei, der im Umkreis von 90 Metern zu hören ist. Das Ziel und alle Kreaturen im Abstand von bis zu neun Metern von ihm müssen einen SG-17-Konstitutionsrettungswurf bestehen, oder sie sind bis zum Ende deines nächsten Zugs betäubt. Der Hammer erhält täglich im Morgengrauen 1W4+1 verbrauchte Ladungen zurück"
+  },
+  "weight": 10,
+  "classification": {
+    "en": "Martial Melee Weapons",
+    "de": "Nahkampfs-Kriegswaffen"
+  },
+  "damage": "2d6",
+  "damageType": {
+    "en": "bludgeoning",
+    "de": "wucht"
+  },
+  "properties": {
+    "en": "heavy | two-handed",
+    "de": "schwer | zweihändig"
+  },
+  "image": "hammer",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

@@ -1,0 +1,56 @@
+{
+  "id": 262,
+  "slug": "giant-insect",
+  "name": "Giant Insect",
+  "nameDe": "Rieseninsekt",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid"
+    ],
+    "de": [
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "4th-level transmutation",
+    "de": "Stufe 4 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You transform up to ten centipedes, three spiders, five wasps, or one scorpion within range into giant versions of their natural forms for the duration. A centipede becomes a giant centipede, a spider becomes a giant spider, a wasp becomes a giant wasp, and a scorpion becomes a giant scorpion. Each creature obeys your verbal commands, and in combat, they act on your turn each round. The GM has the statistics for these creatures and resolves their actions and movement. A creature remains in its giant size for the duration, until it drops to 0 hit points, or until you use an action to dismiss the effect on it. The GM might allow you to choose different targets. For example, if you transform a bee, its giant version might have the same statistics as a giant wasp.",
+    "de": "Für die Wirkungsdauer verwandelst du bis zu zehn Tausendfüßler, drei Spinnen, fünf Wespen oder einen Skorpion in Reichweite in riesige Versionen ihrer normalen Gestalt. Ein Tausendfüßler wird zu einem Riesentausendfüßler, eine Spinne zu einer Riesenspinne, eine Wespe zu einer Riesenwespe und ein Skorpion zu einem Riesenskorpion. Jede Kreatur gehorcht deinen verbalen Befehlen. Im Kampf handelt sie in jeder Runde in deinem Zug. Der SL hat die Spielwerte für diese Kreaturen und wickelt ihre Aktionen und Bewegung ab. Kreaturen bleiben in ihrer Riesengestalt, bis die Wirkungsdauer abgelaufen ist, ihre Trefferpunkte auf 0 sinken oder du den Zauber als Aktion beendest. Der SL erlaubt dir möglicherweise, andere Ziele auszuwählen. Beispielsweise könntest du eine Biene verwandeln, die über dieselben Spielwerte wie eine Riesenwespe verfügt."
+  },
+  "image": "giant-insect",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

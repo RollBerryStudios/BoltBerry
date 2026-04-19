@@ -1,0 +1,30 @@
+{
+  "id": 437,
+  "slug": "staff-of-power",
+  "name": "Staff of Power",
+  "nameDe": "Stab der Macht",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 9550000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Staff, very rare (requires attunement by a sorcerer, warlock, or wizard) This staff can be wielded as a magic quarterstaff that grants a +2 bonus to attack and damage rolls made with it. While holding it, you gain a +2 bonus to Armor Class, saving throws, and spell attack rolls. The staff has 20 charges for the following properties. The staff regains 2d8 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff retains its +2 bonus to attack and damage rolls but loses all other properties. On a 20, the staff regains 1d8 + 2 charges. ***Power Strike.*** When you hit with a melee attack using the staff, you can expend 1 charge to deal an extra 1d6 force damage to the target. ***Spells.*** While holding this staff, you can use an action to expend 1 or more of its charges to cast one of the following spells from it, using your spell save DC and spell attack bonus: cone of cold (5 charges), fireball (5th-level version, 5 charges), globe of invulnerability (6 charges), hold monster (5 charges), levitate (2 charges), lightning bolt (5th-level version, 5 charges), magic missile (1 charge), ray of enfeeblement (1 charge), or wall of force (5 charges). ***Retributive Strike.*** You can use an action to break the staff over your knee or against a solid surface, performing a retributive strike. The staff is destroyed and releases its remaining magic in an explosion that expands to fill a 30-foot-radius sphere centered on it. You have a 50 percent chance to instantly travel to a random plane of existence, avoiding the explosion. If you fail to avoid the effect, you take force damage equal to 16 × the number of charges in the staff. Every other creature in the area must make a DC 17 Dexterity saving throw. On a failed save, a creature takes an amount of damage based on how far away it is from the point of origin, as shown in the following table. On a successful save, a creature takes half as much damage.",
+    "de": "Dieser Stab kann als magischer Kampfstab geführt werden, der einen Bonus von +2 auf Angriffs- und Schadenswürfe verleiht, die du mit ihm ausführst. Wenn du ihn hältst, erhältst du einen Bonus von +2 auf deine Rüstungsklasse, Rettungswürfe und Zauberangriffswürfe. Der Stab hat 20 Ladungen und die folgenden Eigenschaften. Der Stab erhält täglich im Morgengrauen 2W8+4 verbrauchte Ladungen zurück. Wenn du die letzte Ladung verbraucht hast, würfle mit einem W20. Bei einer 1 behält der Stab seinen Bonus von +2 auf Angriffs- und Schadenswürfe, verliert jedoch all seine anderen Eigenschaften. Bei einer 20 erhält er 1W8+2 Ladungen zurück Kraftschlag:  Wenn du mit dem Stab einen erfolgreichen Nahkampfangriff ausführst, kannst du eine Ladung verbrauchen, um dem Ziel zusätzlich 1W6 Energieschaden zuzufügen. Zauber:  Wenn du diesen Stab hältst, kannst du als Aktion eine oder mehrere Ladungen verbrauchen, um einen der folgenden Zauber zu wirken, wobei du deinen Zauberrettungswurf-SG und Zauberangriffsbonus verwendest Blitz  (5. Grad, fünf Ladungen), Energiewand  (fünf Ladungen), Feuerball  (5. Grad, fünf Ladungen), Kältekegel  (fünf Ladungen), Kugel der Unverwundbarkeit  (sechs Ladungen), Magisches Geschoss  (eine Ladung), Monster festhalten  (fünf Ladungen), Schwächestrahl  (eine Ladung) oder Schweben  (zwei Ladungen). Vergeltungsschlag:  Du kannst den Stab als Aktion über deinem Knie oder an einer harten Oberfläche zerbrechen und einen Vergeltungsschlag ausführen. Der Stab wird zerstört und entlädt seine übrige Magie als Explosion, die sich als Kugel mit einem Radius von neun Metern um den Stab herum ausbreitet Du hast eine Chance von 50 Prozent, sofort auf eine zufällige Existenzebene transportiert zu werden und der Explosion zu entkommen. Bei einem Fehlschlag entkommst du dem Effekt nicht und erleidest Energieschaden in Höhe des 16-fachen der Ladungen im Stab. Jede andere Kreatur im Bereich muss einen SG-17-GeschicklichkeitsRettungswurf bestehen. Scheitert der Wurf, erleidet eine Kreatur Schaden abhängig von ihrer Entfernung vom Ursprung, wie die folgende Tabelle zeigt. Anderenfalls erleidet eine Kreatur halb so viel Schaden."
+  },
+  "properties": {
+    "en": "requires attunement by a sorcerer",
+    "de": "erfordert einstimmung eines zauberers"
+  },
+  "image": "staff",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

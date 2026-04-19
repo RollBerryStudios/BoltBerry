@@ -1,0 +1,61 @@
+{
+  "id": 380,
+  "slug": "arcane-sword",
+  "name": "Arcane Sword",
+  "nameDe": "Arkanes Schwert",
+  "level": {
+    "en": "7",
+    "de": "Grad 7"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard",
+      "bard"
+    ],
+    "de": [
+      "Magier",
+      "Barde"
+    ]
+  },
+  "type": {
+    "en": "7th-level Evocation",
+    "de": "Stufe 7 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "A miniature platinum sword with a grip and pommel of copper and zinc, worth 250 gp",
+      "de": "Eine Miniatur eines Platinschwerts mit einem Griff und Knauf aus Kupfer und Zink im Wert von 250 GM"
+    },
+    "raw": {
+      "en": "V, G, M (A miniature platinum sword with a grip and pommel of copper and zinc, worth 250 gp)",
+      "de": "V, G, M (Eine Miniatur eines Platinschwerts mit einem Griff und Knauf aus Kupfer und Zink im Wert von 250 GM)"
+    }
+  },
+  "description": {
+    "en": "You create a sword-shaped plane of force that hovers within range. It lasts for the duration. When the sword appears, you make a melee spell attack against a target of your choice within 5 feet of the sword. On a hit, the target takes 3d10 force damage. Until the spell ends, you can use a bonus action on each of your turns to move the sword up to 20 feet to a spot you can see and repeat this attack against the same target or a different one.",
+    "de": "Du erschaffst eine schwertförmige Ebene aus Energie, die in Reichweite schwebt. Sie bleibt für die Wirkungsdauer bestehen. Wenn das Schwert erscheint, kannst du einen Nahkampf-Zauberangriff gegen ein Ziel deiner Wahl im Abstand von bis zu 1,5 Metern vom Schwert ausführen. Bei einem Treffer erleidet das Ziel 3W10 Energieschaden. Bis der Zauber endet, kannst du in jedem deiner Züge eine Bonusaktion verwenden, um das Schwert bis zu sechs Meter zu einem Bereich zu bewegen, den du sehen kannst. Du kannst dann diesen Angriff gegen dasselbe oder ein anderes Ziel wiederholen."
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,56 @@
+{
+  "id": 136,
+  "slug": "phantom-steed",
+  "name": "Phantom Steed",
+  "nameDe": "Geisterross",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level illusion (ritual)",
+    "de": "Stufe 3 Illusionsmagie (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "A Large quasi-real, horselike creature appears on the ground in an unoccupied space of your choice within range. You decide the creature's appearance, but it is equipped with a saddle, bit, and bridle. Any of the equipment created by the spell vanishes in a puff of smoke if it is carried more than 10 feet away from the steed. For the duration, you or a creature you choose can ride the steed. The creature uses the statistics for a riding horse, except it has a speed of 100 feet and can travel 10 miles in an hour, or 13 miles at a fast pace. When the spell ends, the steed gradually fades, giving the rider 1 minute to dismount. The spell ends if you use an action to dismiss it or if the steed takes any damage.",
+    "de": "Eine große, quasi reale, pferdeartige Kreatur erscheint in einem freien Bereich deiner Wahl in Reichweite, den du sehen kannst Du bestimmst das Aussehen der Kreatur. Sie ist jedoch mit einem Sattel und Zaumzeug ausgerüstet Von diesem Zauber erschaffene Ausrüstung löst sich in Rauch auf, wenn sie mehr als drei Meter vom Ross entfernt wird. Für die Wirkungsdauer kannst du beziehungsweise kann eine Kreatur deiner Wahl auf dem Ross reiten. Die Kreatur verwendet die Spielwerte eines Reitpferds, verfügt jedoch über eine Bewegungsrate von 30 Metern und kann in einer Stunde 16 Kilometer zurücklegen - oder 21 Kilometer bei einem schnellen Reittempo. Wenn der Zauber endet, verblasst das Ross langsam und der Reiter hat eine Minute Zeit, um abzusteigen. Der Zauber endet, wenn du ihn als Aktion beendest oder wenn das Ross Schaden erleidet"
+  },
+  "image": "phantom-steed",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

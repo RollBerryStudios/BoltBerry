@@ -1,0 +1,64 @@
+{
+  "id": 207,
+  "slug": "regenerate",
+  "name": "Regenerate",
+  "nameDe": "Regeneration",
+  "level": {
+    "en": "7",
+    "de": "Grad 7"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "druid"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "7th-level transmutation",
+    "de": "Stufe 7 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a prayer wheel and holy water",
+      "de": "eine Gebetsmühle und Weihwasser"
+    },
+    "raw": {
+      "en": "V, S, M (a prayer wheel and holy water)",
+      "de": "V, G, M (eine Gebetsmühle und Weihwasser)"
+    }
+  },
+  "description": {
+    "en": "You touch a creature and stimulate its natural healing ability. The target regains 4d8 + 15 hit points. For the duration of the spell, the target regains 1 hit point at the start of each of its turns (10 hit points each minute). The target's severed body members (fingers, legs, tails, and so on), if any, are restored after 2 minutes. If you have the severed part and hold it to the stump, the spell instantaneously causes the limb to knit to the stump.",
+    "de": "Du berührst eine Kreatur und regst ihre natürliche Heilung an. Das Ziel gewinnt 4W8+15 Trefferpunkte zurück. Für die Wirkungsdauer erhält das Ziel zudem zu Beginn jedes seiner Züge 1 Trefferpunkt zurück (10 Trefferpunkte pro Minute), Eventuelle abgetrennte Gliedmaßen des Ziels (Finger, Beine, Schweif und dergleichen) werden nach zwei Minuten wiederhergestellt. Hältst du eine abgetrennte Gliedmaße an den Stumpf, lässt der Zauber sie sofort wieder anwachsen."
+  },
+  "image": "regeneration",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

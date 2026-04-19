@@ -1,0 +1,218 @@
+{
+  "id": 31,
+  "slug": "assassin",
+  "name": "Assassin",
+  "nameDe": "Assassine",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "8",
+  "xp": 3900,
+  "ac": {
+    "en": "15 (Studded Leather)",
+    "de": "15 (beschlagenes Leder)"
+  },
+  "hp": {
+    "en": "78 (12d8 + 24)",
+    "de": "78 (12W8+24)"
+  },
+  "str": 11,
+  "dex": 16,
+  "con": 14,
+  "int": 13,
+  "wis": 11,
+  "cha": 10,
+  "strMod": 0,
+  "dexMod": 3,
+  "conMod": 2,
+  "intMod": 1,
+  "wisMod": 0,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Thieves' cant plus any two languages"
+    ],
+    "de": [
+      "Diebessprache und zwei weitere beliebige Sprachen"
+    ]
+  },
+  "savingThrows": [
+    "Ges +6",
+    "Int +4"
+  ],
+  "skills": [
+    "Akrobatik +6",
+    "Heimlichkeit +9",
+    "Täuschen +3",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Assassinate",
+        "text": "During its first turn, the assassin has advantage on attack rolls against any creature that hasn't taken a turn. Any hit the assassin scores against a surprised creature is a critical hit."
+      },
+      {
+        "name": "Evasion",
+        "text": "If the assassin is subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, the assassin instead takes no damage if it succeeds on the saving throw, and only half damage if it fails."
+      },
+      {
+        "name": "Sneak Attack (1/Turn)",
+        "text": "The assassin deals an extra 13 (4d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of the assassin that isn't incapacitated and the assassin doesn't have disadvantage on the attack roll."
+      }
+    ],
+    "de": [
+      {
+        "name": "Attentat",
+        "text": "Während seines ersten Zugs ist der Assassine bei Angriffswürfen gegen jede Kreatur, die noch keinen Zug ausgeführt hat, im Vorteil. Jeder Treffer des Assassinen gegen eine überraschte Kreatur ist kritisch."
+      },
+      {
+        "name": "Entrinnen",
+        "text": "Wenn der Assassine von einem Effekt profitiert, der es ihm ermöglicht, einen Geschicklichkeitsrettungswurf auszuführen, damit er nur den halben Schaden erleidet, so erleidet er stattdessen bei einem Erfolg gar keinen Schaden und bei Misserfolg nur den halben Schaden."
+      },
+      {
+        "name": "Hinterhältiger Angriff",
+        "text": "Einmal pro Zug bewirkt der Assassine zusätzlich 14 (4W6) Schaden, wenn er ein Ziel mit einem Waffenangriff trifft und beim Angriffswurf im Vorteil ist, oder wenn das Ziel sich im Abstand von bis zu 1,5 Metern von einem Verbündeten des Assassinen befindet, der nicht kampfunfähig ist, und der Assassine beim Angriffswurf nicht im Nachteil ist."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The assassin makes two shortsword attacks."
+      },
+      {
+        "name": "Shortsword",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) piercing damage, and the target must make a DC 15 Constitution saving throw, taking 24 (7d6) poison damage on a failed save, or half as much damage on a successful one."
+      },
+      {
+        "name": "Light Crossbow",
+        "text": "Ranged Weapon Attack: +6 to hit, range 80/320 ft., one target. Hit: 7 (1d8 + 3) piercing damage, and the target must make a DC 15 Constitution saving throw, taking 24 (7d6) poison damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Assassine führt zwei Angriffe mit dem Kurzschwert aus."
+      },
+      {
+        "name": "Kurzschwert",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W6+3) Stichschaden, und das Ziel muss einen SG-15-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet es 24 (7W6) Giftschaden, anderenfalls die Hälfte."
+      },
+      {
+        "name": "Leichte Armbrust",
+        "text": "Fernkampfwaffenangriff: +6 auf Treffer, Reichweite 24/96 m, ein Ziel. Treffer: 7 (1W8+3) Stichschaden, und das Ziel muss einen SG-15-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet es 24 (7W6) Giftschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/9/910/315/315/636334293020978804.png",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (jedes Volk)"
+  },
+  "alignment": {
+    "en": "any non-good",
+    "de": "jede nichtgute Gesinnung"
+  },
+  "token": {
+    "file": "Assassin (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Assassin (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Assassin (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Assassin (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Assassin (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Assassin (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Assassin (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Assassin (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Assassin (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Assassin (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Assassin (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Assassin (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Assassin (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Assassin (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Assassin (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Assassin (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Assassin (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Assassin (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Assassin (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

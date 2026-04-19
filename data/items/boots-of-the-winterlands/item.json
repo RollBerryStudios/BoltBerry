@@ -1,0 +1,30 @@
+{
+  "id": 376,
+  "slug": "boots-of-the-winterlands",
+  "name": "Boots of the Winterlands",
+  "nameDe": "Stiefel der Winterlande",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 1000000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon (requires attunement) These furred boots are snug and feel quite warm. While you wear them, you gain the following benefits: * You have resistance to cold damage. * You ignore difficult terrain created by ice or snow. * You can tolerate temperatures as low as -50 degrees Fahrenheit without any additional protection. If you wear heavy clothes, you can tolerate temperatures as low as -100 degrees Fahrenheit.",
+    "de": "Diese bequemen Pelzstiefel fühlen sich ziemlich warm an. Wenn du sie trägst, erhältst du die folgenden Vorteile:"
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "boots",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

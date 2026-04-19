@@ -1,0 +1,64 @@
+{
+  "id": 16,
+  "slug": "dancing-lights",
+  "name": "Dancing Lights",
+  "nameDe": "Tanzende Lichter",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "Evocation cantrip",
+    "de": "Hervorrufung Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a bit of phosphorus or wychwood, or a glowworm",
+      "de": "ein bisschen Phosphor oder Wychholz, oder ein Glühwürmchen"
+    },
+    "raw": {
+      "en": "V, S, M (a bit of phosphorus or wychwood, or a glowworm)",
+      "de": "V, G, M (ein bisschen Phosphor oder Wychholz, oder ein Glühwürmchen)"
+    }
+  },
+  "description": {
+    "en": "You create up to four torch-sized lights within range, making them appear as torches, lanterns, or glowing orbs that hover in the air for the duration. You can also combine the four lights into one glowing vaguely humanoid form of Medium size. Whichever form you choose, each light sheds dim light in a 10-foot radius. As a bonus action on your turn, you can move the lights up to 60 feet to a new spot within range. A light must be within 20 feet of another light created by this spell, and a light winks out if it exceeds the spell's range.",
+    "de": "Du kannst bis zu vier Lichter in Fackelgröße in Reichweite erstellen und sie als Fackeln, Laternen oder Leuchtkugeln erscheinen lassen, die während der Wirkungsdauer in der Luft schweben. Du kannst die vier Lichter auch zu einer humanoiden Gestalt mittlerer Größe kombinieren. Jedes Licht strahlt unabhängig von der Form dämmriges Licht im Radius von drei Metern aus. Als Bonusaktion kannst du die Lichter bis zu 18 Meter an einen neuen Ort in Reichweite bewegen. Die Lichter müssen sich im Abstand von bis zu sechs Metern zueinander befinden. Wenn sie die Reichweite des Zaubers verlassen, erlöschen sie."
+  },
+  "image": "evocation",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

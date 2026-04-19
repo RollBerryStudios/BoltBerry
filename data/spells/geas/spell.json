@@ -1,0 +1,64 @@
+{
+  "id": 260,
+  "slug": "geas",
+  "name": "Geas",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "wizard",
+      "paladin",
+      "druid",
+      "bard"
+    ],
+    "de": [
+      "Kleriker",
+      "Magier",
+      "Paladin",
+      "Druide",
+      "Barde"
+    ]
+  },
+  "type": {
+    "en": "5th-level enchantment",
+    "de": "Stufe 5 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "30 days",
+    "de": "30 Tage"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "You place a magical command on a creature that you can see within range, forcing it to carry out some service or refrain from some action or course of activity as you decide. If the creature can understand you, it must succeed on a wisdom saving throw or become charmed by you for the duration. While the creature is charmed by you, it takes 5d10 psychic damage each time it acts in a manner directly counter to your instructions, but no more than once each day. A creature that can't understand you is unaffected by the spell. You can issue any command you choose, short of an activity that would result in certain death. Should you issue a suicidal command, the spell ends. You can end the spell early by using an action to dismiss it. A remove curse, greater restoration, or wish spell also ends it.",
+    "de": "Du platzierst einen magischen Befehl auf einer Kreatur in Reichweite, die du sehen kannst. Damit zwingst du sie, eine Aufgabe zu erfüllen oder eine bestimmte Handlung deiner Wahl zu vermeiden. Wenn die Kreatur dich verstehen kann, muss sie einen Weisheitsrettungswurfbestehen, oder sie wird für die Wirkungsdauer von dir bezaubert. Während die Kreatur von dir bezaubert ist, erleidet sie jedes Mal 5W10 psychischen Schaden, wenn sie direkt gegen deine Anweisungen handelt. Dies kann nur einmal pro Tag auftreten. Eine Kreatur, die dich nicht verstehen kann, ist von dem Zauber nicht betroffen. Du kannst einen beliebigen Befehl erteilen, außer Handlungen, die zum sicheren Tod führen würden. Erteilst du einen selbstmörderischen Befehl, endet der Zauber. Du kannst den Zauber als Aktion vorzeitig beenden. Die Zauber Fluch brechen , Vollständige Genesung  oder Wunsch  beenden den Zauber ebenfalls. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 7. oder 8. Grades nutzt, beträgt die Wirkungsdauer ein Jahr. Wirkst du diesen Zauber, indem du einen Zauberplatz des 9. Grades nutzt, hält er an, bis einer der zuvor genannten Zauber ihn bannt."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 7th or 8th level, the duration is 1 year. When you cast this spell using a spell slot of 9th level, the spell lasts until it is ended by one of the spells mentioned above.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 7. oder 8. Grades nutzt, beträgt die Wirkungsdauer ein Jahr. Wirkst du diesen Zauber, indem du einen Zauberplatz des 9. Grades nutzt, hält er an, bis einer der zuvor genannten Zauber ihn bannt."
+  },
+  "image": "charm-person",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

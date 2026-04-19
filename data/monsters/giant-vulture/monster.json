@@ -1,0 +1,224 @@
+{
+  "id": 142,
+  "slug": "giant-vulture",
+  "name": "Giant Vulture",
+  "nameDe": "Riesengeier",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, neutral",
+    "de": "Große Bestie, neutral"
+  },
+  "challenge": "1",
+  "xp": 200,
+  "ac": {
+    "en": "10",
+    "de": "10"
+  },
+  "hp": {
+    "en": "22 (3d10 + 6)",
+    "de": "22 (3W10+6)"
+  },
+  "str": 15,
+  "dex": 10,
+  "con": 15,
+  "int": 6,
+  "wis": 12,
+  "cha": 7,
+  "strMod": 2,
+  "dexMod": 0,
+  "conMod": 2,
+  "intMod": -2,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "understands Common but can't speak"
+    ],
+    "de": [
+      "Versteht Gemeinsprache",
+      "aber kann nicht sprechen"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Sight and Smell",
+        "text": "The vulture has advantage on Wisdom (Perception) checks that rely on sight or smell."
+      },
+      {
+        "name": "Pack Tactics",
+        "text": "The vulture has advantage on an attack roll against a creature if at least one of the vulture's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rudeltaktik",
+        "text": "Der Geier ist bei Angriffswürfen gegen eine Kreatur im Vorteil, wenn sich mindestens einer seiner Verbündeten, der nicht kampfunfähig ist, im Abstand von bis zu 1,5 Metern von der Kreatur befindet."
+      },
+      {
+        "name": "Scharfe Sicht und scharfer Geruchssinn",
+        "text": "Der Geier ist bei Weisheitswürfen (Wahrnehmung), die auf Sicht oder Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The vulture makes two attacks: one with its beak and one with its talons."
+      },
+      {
+        "name": "Beak",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (2d4 + 2) piercing damage."
+      },
+      {
+        "name": "Talons",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 9 (2d6 + 2) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Geier führt zwei Angriffe aus: einen Schnabel- und einen Klauenangriff."
+      },
+      {
+        "name": "Krallen",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 9 (2W6+2) Hiebschaden."
+      },
+      {
+        "name": "Schnabel",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (2W4+2) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "GiantVulture (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GiantVulture (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantVulture (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

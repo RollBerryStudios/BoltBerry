@@ -1,0 +1,59 @@
+{
+  "id": 197,
+  "slug": "dimension-door",
+  "name": "Dimension Door",
+  "nameDe": "Dimensionstür",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "4th-level conjuration",
+    "de": "Stufe 4 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "500 feet",
+    "de": "150 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "You teleport yourself from your current location to any other spot within range. You arrive at exactly the spot desired. It can be a place you can see, one you can visualize, or one you can describe by stating distance and direction, such as \"200 feet straight downward\" or \"upward to the northwest at a 45-degree angle, 300 feet.\" You can bring along objects as long as their weight doesn't exceed what you can carry. You can also bring one willing creature of your size or smaller who is carrying gear up to its carrying capacity. The creature must be within 5 feet of you when you cast this spell. If you would arrive in a place already occupied by an object or a creature, you and any creature traveling with you each take 4d6 force damage, and the spell fails to teleport you.",
+    "de": "Du teleportierst dich von deiner aktuellen Position zu einem beliebigen anderen Ort in Reichweite. Dabei triffst du genau an dem gewünschten Punkt ein. Es kann sich um einen Ort handeln, den du sehen oder dir vorstellen kannst, oder den du beschreibst, indem du die Entfernung und Richtung angibst (beispielsweise '60 Meter direkt nach unten' oder '90 Meter nordöstlich in einem 45-Grad-Winkel nach oben'). Du kannst Gegenstände mitnehmen, sofern ihr Gewicht deine Traglast nicht übersteigt. Du kannst auch eine bereitwillige Kreatur deiner Größe oder kleiner mit Ausrüstung bis zu ihrer Traglast mitnehmen. Die Kreatur muss sich im Abstand von bis zu 1,5 Metern von dir befinden, wenn du diesen Zauber wirkst. Würdest du an einem Ort ankommen, an dem sich bereits ein Gegenstand oder eine Kreatur befindet, erleidet du und dein Mitreisender jeweils 4W6 Energieschaden und werdet nicht teleportiert."
+  },
+  "image": "confusion",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

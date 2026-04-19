@@ -1,0 +1,30 @@
+{
+  "id": 440,
+  "slug": "amulet-of-the-planes",
+  "name": "Amulet of the Planes",
+  "nameDe": "Amulett der Ebenen",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 16000000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, very rare (requires attunement) While wearing this amulet, you can use an action to name a location that you are familiar with on another plane of existence. Then make a DC 15 Intelligence check. On a successful check, you cast the plane shift spell. On a failure, you and each creature and object within 15 feet of you travel to a random destination. Roll a d100. On a 1-60, you travel to a random location on the plane you named. On a 61-100, you travel to a randomly determined plane of existence.",
+    "de": "Wenn du dieses Amulett trägst, kannst du als Aktion einen Ort auf einer anderen Existenzebene benennen, mit dem du vertraut bist. Führe dann einen SG-15-Intelligenzwurf aus. Bei einem Erfolg wirkst du den Zauber Ebenenwechsel . Anderenfalls reist du und jede Kreatur und jeder Gegenstand im Abstand von bis zu 4,5 Metern von dir an einen zufälligen Ort. Würfle mit einem W100. Bei einer 1-60 reist ihr an einen zufälligen Ort auf der von dir genannten Ebene. Bei einer 61-100 reist ihr auf eine zufällig bestimmte Existenzebene."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

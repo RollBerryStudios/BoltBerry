@@ -1,0 +1,22 @@
+{
+  "id": 79,
+  "slug": "chalk-1-piece",
+  "name": "Chalk (1 piece)",
+  "nameDe": "Kreide (1 Stück)",
+  "category": {
+    "en": "ADVENTURING_GEAR",
+    "de": "Ausrüstung"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 1,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "image": "adventuring-gear",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

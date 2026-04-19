@@ -1,0 +1,62 @@
+{
+  "id": 276,
+  "slug": "heroes-feast",
+  "name": "Heroes' Feast",
+  "nameDe": "Heldenmahl",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "druid"
+    ],
+    "de": [
+      "Kleriker",
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "6th-level conjuration",
+    "de": "Stufe 6 Beschwörung"
+  },
+  "castingTime": {
+    "en": "10 minutes",
+    "de": "10 Minuten"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a gem-encrusted bowl worth at least 1,000 gp, which the spell consumes",
+      "de": "eine mit Edelsteinen besetzte Schale im Wert von mindestens 1.000 Goldstücken, die der Zauberspruch verbraucht"
+    },
+    "raw": {
+      "en": "V, S, M (a gem-encrusted bowl worth at least 1,000 gp, which the spell consumes)",
+      "de": "V, G, M (eine mit Edelsteinen besetzte Schale im Wert von mindestens 1.000 Goldstücken, die der Zauberspruch verbraucht)"
+    }
+  },
+  "description": {
+    "en": "You bring forth a great feast, including magnificent food and drink. The feast takes 1 hour to consume and disappears at the end of that time, and the beneficial effects don't set in until this hour is over. Up to twelve other creatures can partake of the feast. A creature that partakes of the feast gains several benefits. The creature is cured of all diseases and poison, becomes immune to poison and being frightened, and makes all wisdom saving throws with advantage. Its hit point maximum also increases by 2d10, and it gains the same number of hit points. These benefits last for 24 hours.",
+    "de": "Du erschaffst ein riesiges Festmahl aus herrlichem Essen und Trinken. Der Verzehr des Festmahls dauert eine Stunde. Nach dieser Zeit verschwindet es und die positiven Effekte treten erst nach Ablauf dieser Stunde in Kraft. Bis zu zwölf weitere Kreaturen können an dem Festmahl teilnehmen. Eine Kreatur, die an dem Festmahl teilnimmt, erhält verschiedene Vorteile: Sie wird von allen Krankheiten und Giften geheilt, ist gegen Gift immun, kann nicht verängstigt werden und ist bei allen Weisheitsrettungswürfen im Vorteil. Ihr Trefferpunktemaximum steigt zudem um 2W10 und sie erhält dieselbe Anzahl an Trefferpunkten dazu. Diese Vorteile halten 24 Stunden lang an."
+  },
+  "image": "create-food-water",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

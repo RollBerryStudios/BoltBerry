@@ -1,0 +1,3434 @@
+{
+  "id": 71,
+  "slug": "commoner",
+  "name": "Commoner",
+  "nameDe": "Gemeiner",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "10",
+    "de": "10"
+  },
+  "hp": {
+    "en": "4 (1d8)",
+    "de": "4 (1W8)"
+  },
+  "str": 10,
+  "dex": 10,
+  "con": 10,
+  "int": 10,
+  "wis": 10,
+  "cha": 10,
+  "strMod": 0,
+  "dexMod": 0,
+  "conMod": 0,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any one language (usually Common)"
+    ],
+    "de": [
+      "Eine beliebige Sprache (normalerweise Gemeinsprache)"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Club",
+        "text": "Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 2 (1d4) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Knüppel",
+        "text": "Nahkampfwaffenangriff: +2 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 2 (1W4) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/656/humanoid.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (jedes Volk)"
+  },
+  "alignment": {
+    "en": "any alignment",
+    "de": "jede Gesinnung"
+  },
+  "token": {
+    "file": "CommonerDragonbornArctic (1).webp",
+    "variant": "dragonbornArctic"
+  },
+  "tokens": [
+    {
+      "file": "CommonerDragonbornArctic (10).webp",
+      "variant": "dragonbornArctic"
+    },
+    {
+      "file": "CommonerDragonbornArctic (2).webp",
+      "variant": "dragonbornArctic"
+    },
+    {
+      "file": "CommonerDragonbornArctic (3).webp",
+      "variant": "dragonbornArctic"
+    },
+    {
+      "file": "CommonerDragonbornArctic (4).webp",
+      "variant": "dragonbornArctic"
+    },
+    {
+      "file": "CommonerDragonbornArctic (5).webp",
+      "variant": "dragonbornArctic"
+    },
+    {
+      "file": "CommonerDragonbornArctic (6).webp",
+      "variant": "dragonbornArctic"
+    },
+    {
+      "file": "CommonerDragonbornArctic (7).webp",
+      "variant": "dragonbornArctic"
+    },
+    {
+      "file": "CommonerDragonbornArctic (8).webp",
+      "variant": "dragonbornArctic"
+    },
+    {
+      "file": "CommonerDragonbornArctic (9).webp",
+      "variant": "dragonbornArctic"
+    },
+    {
+      "file": "CommonerDragonbornDesert (1).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "CommonerDragonbornDesert (2).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "CommonerDragonbornDesert (3).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "CommonerDragonbornDesert (4).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "CommonerDragonbornDesert (5).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "CommonerDragonbornDesert (6).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "CommonerDragonbornDesert (7).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "CommonerDragonbornDesert (8).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "CommonerDragonbornDesert (9).webp",
+      "variant": "dragonbornDesert"
+    },
+    {
+      "file": "CommonerDragonbornTavern (1).webp",
+      "variant": "dragonbornTavern"
+    },
+    {
+      "file": "CommonerDragonbornTavern (10).webp",
+      "variant": "dragonbornTavern"
+    },
+    {
+      "file": "CommonerDragonbornTavern (11).webp",
+      "variant": "dragonbornTavern"
+    },
+    {
+      "file": "CommonerDragonbornTavern (2).webp",
+      "variant": "dragonbornTavern"
+    },
+    {
+      "file": "CommonerDragonbornTavern (3).webp",
+      "variant": "dragonbornTavern"
+    },
+    {
+      "file": "CommonerDragonbornTavern (4).webp",
+      "variant": "dragonbornTavern"
+    },
+    {
+      "file": "CommonerDragonbornTavern (5).webp",
+      "variant": "dragonbornTavern"
+    },
+    {
+      "file": "CommonerDragonbornTavern (6).webp",
+      "variant": "dragonbornTavern"
+    },
+    {
+      "file": "CommonerDragonbornTavern (7).webp",
+      "variant": "dragonbornTavern"
+    },
+    {
+      "file": "CommonerDragonbornTavern (8).webp",
+      "variant": "dragonbornTavern"
+    },
+    {
+      "file": "CommonerDragonbornTavern (9).webp",
+      "variant": "dragonbornTavern"
+    },
+    {
+      "file": "CommonerDragonbornUrban (1).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "CommonerDragonbornUrban (10).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "CommonerDragonbornUrban (2).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "CommonerDragonbornUrban (3).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "CommonerDragonbornUrban (4).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "CommonerDragonbornUrban (5).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "CommonerDragonbornUrban (6).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "CommonerDragonbornUrban (7).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "CommonerDragonbornUrban (8).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "CommonerDragonbornUrban (9).webp",
+      "variant": "dragonbornUrban"
+    },
+    {
+      "file": "CommonerDwarfArcticFemale (1).webp",
+      "variant": "dwarfArcticFemale"
+    },
+    {
+      "file": "CommonerDwarfArcticFemale (2).webp",
+      "variant": "dwarfArcticFemale"
+    },
+    {
+      "file": "CommonerDwarfArcticFemale (3).webp",
+      "variant": "dwarfArcticFemale"
+    },
+    {
+      "file": "CommonerDwarfArcticFemale (4).webp",
+      "variant": "dwarfArcticFemale"
+    },
+    {
+      "file": "CommonerDwarfArcticFemale (5).webp",
+      "variant": "dwarfArcticFemale"
+    },
+    {
+      "file": "CommonerDwarfArcticFemale (6).webp",
+      "variant": "dwarfArcticFemale"
+    },
+    {
+      "file": "CommonerDwarfArcticFemale (7).webp",
+      "variant": "dwarfArcticFemale"
+    },
+    {
+      "file": "CommonerDwarfArcticFemale (8).webp",
+      "variant": "dwarfArcticFemale"
+    },
+    {
+      "file": "CommonerDwarfArcticFemale (9).webp",
+      "variant": "dwarfArcticFemale"
+    },
+    {
+      "file": "CommonerDwarfArcticMale (1).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "CommonerDwarfArcticMale (10).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "CommonerDwarfArcticMale (11).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "CommonerDwarfArcticMale (12).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "CommonerDwarfArcticMale (13).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "CommonerDwarfArcticMale (14).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "CommonerDwarfArcticMale (15).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "CommonerDwarfArcticMale (2).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "CommonerDwarfArcticMale (3).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "CommonerDwarfArcticMale (4).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "CommonerDwarfArcticMale (5).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "CommonerDwarfArcticMale (6).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "CommonerDwarfArcticMale (7).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "CommonerDwarfArcticMale (8).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "CommonerDwarfArcticMale (9).webp",
+      "variant": "dwarfArcticMale"
+    },
+    {
+      "file": "CommonerDwarfDesertFemale (1).webp",
+      "variant": "dwarfDesertFemale"
+    },
+    {
+      "file": "CommonerDwarfDesertFemale (2).webp",
+      "variant": "dwarfDesertFemale"
+    },
+    {
+      "file": "CommonerDwarfDesertFemale (3).webp",
+      "variant": "dwarfDesertFemale"
+    },
+    {
+      "file": "CommonerDwarfDesertFemale (4).webp",
+      "variant": "dwarfDesertFemale"
+    },
+    {
+      "file": "CommonerDwarfDesertFemale (5).webp",
+      "variant": "dwarfDesertFemale"
+    },
+    {
+      "file": "CommonerDwarfDesertFemale (6).webp",
+      "variant": "dwarfDesertFemale"
+    },
+    {
+      "file": "CommonerDwarfDesertFemale (7).webp",
+      "variant": "dwarfDesertFemale"
+    },
+    {
+      "file": "CommonerDwarfDesertMale (1).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "CommonerDwarfDesertMale (10).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "CommonerDwarfDesertMale (11).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "CommonerDwarfDesertMale (12).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "CommonerDwarfDesertMale (13).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "CommonerDwarfDesertMale (14).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "CommonerDwarfDesertMale (15).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "CommonerDwarfDesertMale (2).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "CommonerDwarfDesertMale (3).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "CommonerDwarfDesertMale (4).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "CommonerDwarfDesertMale (5).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "CommonerDwarfDesertMale (6).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "CommonerDwarfDesertMale (7).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "CommonerDwarfDesertMale (8).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "CommonerDwarfDesertMale (9).webp",
+      "variant": "dwarfDesertMale"
+    },
+    {
+      "file": "CommonerDwarfTavernFemale (1).webp",
+      "variant": "dwarfTavernFemale"
+    },
+    {
+      "file": "CommonerDwarfTavernFemale (10).webp",
+      "variant": "dwarfTavernFemale"
+    },
+    {
+      "file": "CommonerDwarfTavernFemale (11).webp",
+      "variant": "dwarfTavernFemale"
+    },
+    {
+      "file": "CommonerDwarfTavernFemale (12).webp",
+      "variant": "dwarfTavernFemale"
+    },
+    {
+      "file": "CommonerDwarfTavernFemale (2).webp",
+      "variant": "dwarfTavernFemale"
+    },
+    {
+      "file": "CommonerDwarfTavernFemale (3).webp",
+      "variant": "dwarfTavernFemale"
+    },
+    {
+      "file": "CommonerDwarfTavernFemale (4).webp",
+      "variant": "dwarfTavernFemale"
+    },
+    {
+      "file": "CommonerDwarfTavernFemale (5).webp",
+      "variant": "dwarfTavernFemale"
+    },
+    {
+      "file": "CommonerDwarfTavernFemale (6).webp",
+      "variant": "dwarfTavernFemale"
+    },
+    {
+      "file": "CommonerDwarfTavernFemale (7).webp",
+      "variant": "dwarfTavernFemale"
+    },
+    {
+      "file": "CommonerDwarfTavernFemale (8).webp",
+      "variant": "dwarfTavernFemale"
+    },
+    {
+      "file": "CommonerDwarfTavernFemale (9).webp",
+      "variant": "dwarfTavernFemale"
+    },
+    {
+      "file": "CommonerDwarfTavernMale (1).webp",
+      "variant": "dwarfTavernMale"
+    },
+    {
+      "file": "CommonerDwarfTavernMale (10).webp",
+      "variant": "dwarfTavernMale"
+    },
+    {
+      "file": "CommonerDwarfTavernMale (11).webp",
+      "variant": "dwarfTavernMale"
+    },
+    {
+      "file": "CommonerDwarfTavernMale (2).webp",
+      "variant": "dwarfTavernMale"
+    },
+    {
+      "file": "CommonerDwarfTavernMale (3).webp",
+      "variant": "dwarfTavernMale"
+    },
+    {
+      "file": "CommonerDwarfTavernMale (4).webp",
+      "variant": "dwarfTavernMale"
+    },
+    {
+      "file": "CommonerDwarfTavernMale (5).webp",
+      "variant": "dwarfTavernMale"
+    },
+    {
+      "file": "CommonerDwarfTavernMale (6).webp",
+      "variant": "dwarfTavernMale"
+    },
+    {
+      "file": "CommonerDwarfTavernMale (7).webp",
+      "variant": "dwarfTavernMale"
+    },
+    {
+      "file": "CommonerDwarfTavernMale (8).webp",
+      "variant": "dwarfTavernMale"
+    },
+    {
+      "file": "CommonerDwarfTavernMale (9).webp",
+      "variant": "dwarfTavernMale"
+    },
+    {
+      "file": "CommonerDwarfUrbanFemale (1).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "CommonerDwarfUrbanFemale (10).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "CommonerDwarfUrbanFemale (11).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "CommonerDwarfUrbanFemale (2).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "CommonerDwarfUrbanFemale (3).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "CommonerDwarfUrbanFemale (4).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "CommonerDwarfUrbanFemale (5).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "CommonerDwarfUrbanFemale (6).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "CommonerDwarfUrbanFemale (7).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "CommonerDwarfUrbanFemale (8).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "CommonerDwarfUrbanFemale (9).webp",
+      "variant": "dwarfUrbanFemale"
+    },
+    {
+      "file": "CommonerDwarfUrbanMale (1).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "CommonerDwarfUrbanMale (10).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "CommonerDwarfUrbanMale (11).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "CommonerDwarfUrbanMale (12).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "CommonerDwarfUrbanMale (13).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "CommonerDwarfUrbanMale (14).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "CommonerDwarfUrbanMale (15).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "CommonerDwarfUrbanMale (2).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "CommonerDwarfUrbanMale (3).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "CommonerDwarfUrbanMale (4).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "CommonerDwarfUrbanMale (5).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "CommonerDwarfUrbanMale (6).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "CommonerDwarfUrbanMale (7).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "CommonerDwarfUrbanMale (8).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "CommonerDwarfUrbanMale (9).webp",
+      "variant": "dwarfUrbanMale"
+    },
+    {
+      "file": "CommonerElfArcticFemale (1).webp",
+      "variant": "elfArcticFemale"
+    },
+    {
+      "file": "CommonerElfArcticFemale (2).webp",
+      "variant": "elfArcticFemale"
+    },
+    {
+      "file": "CommonerElfArcticFemale (3).webp",
+      "variant": "elfArcticFemale"
+    },
+    {
+      "file": "CommonerElfArcticFemale (4).webp",
+      "variant": "elfArcticFemale"
+    },
+    {
+      "file": "CommonerElfArcticFemale (5).webp",
+      "variant": "elfArcticFemale"
+    },
+    {
+      "file": "CommonerElfArcticFemale (6).webp",
+      "variant": "elfArcticFemale"
+    },
+    {
+      "file": "CommonerElfArcticFemale (7).webp",
+      "variant": "elfArcticFemale"
+    },
+    {
+      "file": "CommonerElfArcticMale (1).webp",
+      "variant": "elfArcticMale"
+    },
+    {
+      "file": "CommonerElfArcticMale (2).webp",
+      "variant": "elfArcticMale"
+    },
+    {
+      "file": "CommonerElfArcticMale (3).webp",
+      "variant": "elfArcticMale"
+    },
+    {
+      "file": "CommonerElfArcticMale (4).webp",
+      "variant": "elfArcticMale"
+    },
+    {
+      "file": "CommonerElfArcticMale (5).webp",
+      "variant": "elfArcticMale"
+    },
+    {
+      "file": "CommonerElfArcticMale (6).webp",
+      "variant": "elfArcticMale"
+    },
+    {
+      "file": "CommonerElfArcticMale (7).webp",
+      "variant": "elfArcticMale"
+    },
+    {
+      "file": "CommonerElfDesertFemale (1).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "CommonerElfDesertFemale (10).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "CommonerElfDesertFemale (11).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "CommonerElfDesertFemale (2).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "CommonerElfDesertFemale (3).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "CommonerElfDesertFemale (4).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "CommonerElfDesertFemale (5).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "CommonerElfDesertFemale (6).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "CommonerElfDesertFemale (7).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "CommonerElfDesertFemale (8).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "CommonerElfDesertFemale (9).webp",
+      "variant": "elfDesertFemale"
+    },
+    {
+      "file": "CommonerElfDesertMale (1).webp",
+      "variant": "elfDesertMale"
+    },
+    {
+      "file": "CommonerElfDesertMale (10).webp",
+      "variant": "elfDesertMale"
+    },
+    {
+      "file": "CommonerElfDesertMale (2).webp",
+      "variant": "elfDesertMale"
+    },
+    {
+      "file": "CommonerElfDesertMale (3).webp",
+      "variant": "elfDesertMale"
+    },
+    {
+      "file": "CommonerElfDesertMale (4).webp",
+      "variant": "elfDesertMale"
+    },
+    {
+      "file": "CommonerElfDesertMale (5).webp",
+      "variant": "elfDesertMale"
+    },
+    {
+      "file": "CommonerElfDesertMale (6).webp",
+      "variant": "elfDesertMale"
+    },
+    {
+      "file": "CommonerElfDesertMale (7).webp",
+      "variant": "elfDesertMale"
+    },
+    {
+      "file": "CommonerElfDesertMale (8).webp",
+      "variant": "elfDesertMale"
+    },
+    {
+      "file": "CommonerElfDesertMale (9).webp",
+      "variant": "elfDesertMale"
+    },
+    {
+      "file": "CommonerElfTavernFemale (1).webp",
+      "variant": "elfTavernFemale"
+    },
+    {
+      "file": "CommonerElfTavernFemale (2).webp",
+      "variant": "elfTavernFemale"
+    },
+    {
+      "file": "CommonerElfTavernFemale (3).webp",
+      "variant": "elfTavernFemale"
+    },
+    {
+      "file": "CommonerElfTavernFemale (4).webp",
+      "variant": "elfTavernFemale"
+    },
+    {
+      "file": "CommonerElfTavernFemale (5).webp",
+      "variant": "elfTavernFemale"
+    },
+    {
+      "file": "CommonerElfTavernFemale (6).webp",
+      "variant": "elfTavernFemale"
+    },
+    {
+      "file": "CommonerElfTavernFemale (7).webp",
+      "variant": "elfTavernFemale"
+    },
+    {
+      "file": "CommonerElfTavernFemale (8).webp",
+      "variant": "elfTavernFemale"
+    },
+    {
+      "file": "CommonerElfTavernFemale (9).webp",
+      "variant": "elfTavernFemale"
+    },
+    {
+      "file": "CommonerElfTavernMale (1).webp",
+      "variant": "elfTavernMale"
+    },
+    {
+      "file": "CommonerElfTavernMale (2).webp",
+      "variant": "elfTavernMale"
+    },
+    {
+      "file": "CommonerElfTavernMale (3).webp",
+      "variant": "elfTavernMale"
+    },
+    {
+      "file": "CommonerElfTavernMale (4).webp",
+      "variant": "elfTavernMale"
+    },
+    {
+      "file": "CommonerElfTavernMale (5).webp",
+      "variant": "elfTavernMale"
+    },
+    {
+      "file": "CommonerElfTavernMale (6).webp",
+      "variant": "elfTavernMale"
+    },
+    {
+      "file": "CommonerElfTavernMale (7).webp",
+      "variant": "elfTavernMale"
+    },
+    {
+      "file": "CommonerElfUrbanFemale (1).webp",
+      "variant": "elfUrbanFemale"
+    },
+    {
+      "file": "CommonerElfUrbanFemale (2).webp",
+      "variant": "elfUrbanFemale"
+    },
+    {
+      "file": "CommonerElfUrbanFemale (3).webp",
+      "variant": "elfUrbanFemale"
+    },
+    {
+      "file": "CommonerElfUrbanFemale (4).webp",
+      "variant": "elfUrbanFemale"
+    },
+    {
+      "file": "CommonerElfUrbanFemale (5).webp",
+      "variant": "elfUrbanFemale"
+    },
+    {
+      "file": "CommonerElfUrbanMale (1).webp",
+      "variant": "elfUrbanMale"
+    },
+    {
+      "file": "CommonerElfUrbanMale (2).webp",
+      "variant": "elfUrbanMale"
+    },
+    {
+      "file": "CommonerElfUrbanMale (3).webp",
+      "variant": "elfUrbanMale"
+    },
+    {
+      "file": "CommonerElfUrbanMale (4).webp",
+      "variant": "elfUrbanMale"
+    },
+    {
+      "file": "CommonerElfUrbanMale (5).webp",
+      "variant": "elfUrbanMale"
+    },
+    {
+      "file": "CommonerElfUrbanMale (6).webp",
+      "variant": "elfUrbanMale"
+    },
+    {
+      "file": "CommonerGnomeArcticFemale (1).webp",
+      "variant": "gnomeArcticFemale"
+    },
+    {
+      "file": "CommonerGnomeArcticFemale (2).webp",
+      "variant": "gnomeArcticFemale"
+    },
+    {
+      "file": "CommonerGnomeArcticFemale (3).webp",
+      "variant": "gnomeArcticFemale"
+    },
+    {
+      "file": "CommonerGnomeArcticFemale (4).webp",
+      "variant": "gnomeArcticFemale"
+    },
+    {
+      "file": "CommonerGnomeArcticFemale (5).webp",
+      "variant": "gnomeArcticFemale"
+    },
+    {
+      "file": "CommonerGnomeArcticFemale (6).webp",
+      "variant": "gnomeArcticFemale"
+    },
+    {
+      "file": "CommonerGnomeArcticFemale (7).webp",
+      "variant": "gnomeArcticFemale"
+    },
+    {
+      "file": "CommonerGnomeArcticFemale (8).webp",
+      "variant": "gnomeArcticFemale"
+    },
+    {
+      "file": "CommonerGnomeArcticFemale (9).webp",
+      "variant": "gnomeArcticFemale"
+    },
+    {
+      "file": "CommonerGnomeArcticMale (1).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "CommonerGnomeArcticMale (2).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "CommonerGnomeArcticMale (3).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "CommonerGnomeArcticMale (4).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "CommonerGnomeArcticMale (5).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "CommonerGnomeArcticMale (6).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "CommonerGnomeArcticMale (7).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "CommonerGnomeArcticMale (8).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "CommonerGnomeArcticMale (9).webp",
+      "variant": "gnomeArcticMale"
+    },
+    {
+      "file": "CommonerGnomeDesertFemale (1).webp",
+      "variant": "gnomeDesertFemale"
+    },
+    {
+      "file": "CommonerGnomeDesertFemale (2).webp",
+      "variant": "gnomeDesertFemale"
+    },
+    {
+      "file": "CommonerGnomeDesertFemale (3).webp",
+      "variant": "gnomeDesertFemale"
+    },
+    {
+      "file": "CommonerGnomeDesertFemale (4).webp",
+      "variant": "gnomeDesertFemale"
+    },
+    {
+      "file": "CommonerGnomeDesertFemale (5).webp",
+      "variant": "gnomeDesertFemale"
+    },
+    {
+      "file": "CommonerGnomeDesertFemale (6).webp",
+      "variant": "gnomeDesertFemale"
+    },
+    {
+      "file": "CommonerGnomeDesertFemale (7).webp",
+      "variant": "gnomeDesertFemale"
+    },
+    {
+      "file": "CommonerGnomeDesertMale (1).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "CommonerGnomeDesertMale (10).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "CommonerGnomeDesertMale (11).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "CommonerGnomeDesertMale (12).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "CommonerGnomeDesertMale (2).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "CommonerGnomeDesertMale (3).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "CommonerGnomeDesertMale (4).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "CommonerGnomeDesertMale (5).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "CommonerGnomeDesertMale (6).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "CommonerGnomeDesertMale (7).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "CommonerGnomeDesertMale (8).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "CommonerGnomeDesertMale (9).webp",
+      "variant": "gnomeDesertMale"
+    },
+    {
+      "file": "CommonerGnomeTavernFemale (1).webp",
+      "variant": "gnomeTavernFemale"
+    },
+    {
+      "file": "CommonerGnomeTavernFemale (10).webp",
+      "variant": "gnomeTavernFemale"
+    },
+    {
+      "file": "CommonerGnomeTavernFemale (2).webp",
+      "variant": "gnomeTavernFemale"
+    },
+    {
+      "file": "CommonerGnomeTavernFemale (3).webp",
+      "variant": "gnomeTavernFemale"
+    },
+    {
+      "file": "CommonerGnomeTavernFemale (4).webp",
+      "variant": "gnomeTavernFemale"
+    },
+    {
+      "file": "CommonerGnomeTavernFemale (5).webp",
+      "variant": "gnomeTavernFemale"
+    },
+    {
+      "file": "CommonerGnomeTavernFemale (6).webp",
+      "variant": "gnomeTavernFemale"
+    },
+    {
+      "file": "CommonerGnomeTavernFemale (7).webp",
+      "variant": "gnomeTavernFemale"
+    },
+    {
+      "file": "CommonerGnomeTavernFemale (8).webp",
+      "variant": "gnomeTavernFemale"
+    },
+    {
+      "file": "CommonerGnomeTavernFemale (9).webp",
+      "variant": "gnomeTavernFemale"
+    },
+    {
+      "file": "CommonerGnomeTavernMale (1).webp",
+      "variant": "gnomeTavernMale"
+    },
+    {
+      "file": "CommonerGnomeTavernMale (2).webp",
+      "variant": "gnomeTavernMale"
+    },
+    {
+      "file": "CommonerGnomeTavernMale (3).webp",
+      "variant": "gnomeTavernMale"
+    },
+    {
+      "file": "CommonerGnomeTavernMale (4).webp",
+      "variant": "gnomeTavernMale"
+    },
+    {
+      "file": "CommonerGnomeTavernMale (5).webp",
+      "variant": "gnomeTavernMale"
+    },
+    {
+      "file": "CommonerGnomeTavernMale (6).webp",
+      "variant": "gnomeTavernMale"
+    },
+    {
+      "file": "CommonerGnomeTavernMale (7).webp",
+      "variant": "gnomeTavernMale"
+    },
+    {
+      "file": "CommonerGnomeTavernMale (8).webp",
+      "variant": "gnomeTavernMale"
+    },
+    {
+      "file": "CommonerGnomeUrbanFemale (1).webp",
+      "variant": "gnomeUrbanFemale"
+    },
+    {
+      "file": "CommonerGnomeUrbanFemale (2).webp",
+      "variant": "gnomeUrbanFemale"
+    },
+    {
+      "file": "CommonerGnomeUrbanFemale (3).webp",
+      "variant": "gnomeUrbanFemale"
+    },
+    {
+      "file": "CommonerGnomeUrbanFemale (4).webp",
+      "variant": "gnomeUrbanFemale"
+    },
+    {
+      "file": "CommonerGnomeUrbanFemale (5).webp",
+      "variant": "gnomeUrbanFemale"
+    },
+    {
+      "file": "CommonerGnomeUrbanFemale (6).webp",
+      "variant": "gnomeUrbanFemale"
+    },
+    {
+      "file": "CommonerGnomeUrbanFemale (7).webp",
+      "variant": "gnomeUrbanFemale"
+    },
+    {
+      "file": "CommonerGnomeUrbanMale (1).webp",
+      "variant": "gnomeUrbanMale"
+    },
+    {
+      "file": "CommonerGnomeUrbanMale (2).webp",
+      "variant": "gnomeUrbanMale"
+    },
+    {
+      "file": "CommonerGnomeUrbanMale (3).webp",
+      "variant": "gnomeUrbanMale"
+    },
+    {
+      "file": "CommonerGnomeUrbanMale (4).webp",
+      "variant": "gnomeUrbanMale"
+    },
+    {
+      "file": "CommonerGnomeUrbanMale (5).webp",
+      "variant": "gnomeUrbanMale"
+    },
+    {
+      "file": "CommonerHalfElfArcticFemale (1).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "CommonerHalfElfArcticFemale (10).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "CommonerHalfElfArcticFemale (2).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "CommonerHalfElfArcticFemale (3).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "CommonerHalfElfArcticFemale (4).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "CommonerHalfElfArcticFemale (5).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "CommonerHalfElfArcticFemale (6).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "CommonerHalfElfArcticFemale (7).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "CommonerHalfElfArcticFemale (8).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "CommonerHalfElfArcticFemale (9).webp",
+      "variant": "halfElfArcticFemale"
+    },
+    {
+      "file": "CommonerHalfElfArcticMale (1).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "CommonerHalfElfArcticMale (10).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "CommonerHalfElfArcticMale (11).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "CommonerHalfElfArcticMale (12).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "CommonerHalfElfArcticMale (13).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "CommonerHalfElfArcticMale (14).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "CommonerHalfElfArcticMale (2).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "CommonerHalfElfArcticMale (3).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "CommonerHalfElfArcticMale (4).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "CommonerHalfElfArcticMale (5).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "CommonerHalfElfArcticMale (6).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "CommonerHalfElfArcticMale (7).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "CommonerHalfElfArcticMale (8).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "CommonerHalfElfArcticMale (9).webp",
+      "variant": "halfElfArcticMale"
+    },
+    {
+      "file": "CommonerHalfElfDesertFemale (1).webp",
+      "variant": "halfElfDesertFemale"
+    },
+    {
+      "file": "CommonerHalfElfDesertFemale (10).webp",
+      "variant": "halfElfDesertFemale"
+    },
+    {
+      "file": "CommonerHalfElfDesertFemale (11).webp",
+      "variant": "halfElfDesertFemale"
+    },
+    {
+      "file": "CommonerHalfElfDesertFemale (2).webp",
+      "variant": "halfElfDesertFemale"
+    },
+    {
+      "file": "CommonerHalfElfDesertFemale (3).webp",
+      "variant": "halfElfDesertFemale"
+    },
+    {
+      "file": "CommonerHalfElfDesertFemale (4).webp",
+      "variant": "halfElfDesertFemale"
+    },
+    {
+      "file": "CommonerHalfElfDesertFemale (5).webp",
+      "variant": "halfElfDesertFemale"
+    },
+    {
+      "file": "CommonerHalfElfDesertFemale (6).webp",
+      "variant": "halfElfDesertFemale"
+    },
+    {
+      "file": "CommonerHalfElfDesertFemale (7).webp",
+      "variant": "halfElfDesertFemale"
+    },
+    {
+      "file": "CommonerHalfElfDesertFemale (8).webp",
+      "variant": "halfElfDesertFemale"
+    },
+    {
+      "file": "CommonerHalfElfDesertFemale (9).webp",
+      "variant": "halfElfDesertFemale"
+    },
+    {
+      "file": "CommonerHalfElfDesertMale (1).webp",
+      "variant": "halfElfDesertMale"
+    },
+    {
+      "file": "CommonerHalfElfDesertMale (2).webp",
+      "variant": "halfElfDesertMale"
+    },
+    {
+      "file": "CommonerHalfElfDesertMale (3).webp",
+      "variant": "halfElfDesertMale"
+    },
+    {
+      "file": "CommonerHalfElfDesertMale (4).webp",
+      "variant": "halfElfDesertMale"
+    },
+    {
+      "file": "CommonerHalfElfDesertMale (5).webp",
+      "variant": "halfElfDesertMale"
+    },
+    {
+      "file": "CommonerHalfElfDesertMale (6).webp",
+      "variant": "halfElfDesertMale"
+    },
+    {
+      "file": "CommonerHalfElfDesertMale (7).webp",
+      "variant": "halfElfDesertMale"
+    },
+    {
+      "file": "CommonerHalfElfDesertMale (8).webp",
+      "variant": "halfElfDesertMale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (1).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (10).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (11).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (12).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (13).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (14).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (15).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (16).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (17).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (18).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (2).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (3).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (4).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (5).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (6).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (7).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (8).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernFemale (9).webp",
+      "variant": "halfElfTavernFemale"
+    },
+    {
+      "file": "CommonerHalfElfTavernMale (1).webp",
+      "variant": "halfElfTavernMale"
+    },
+    {
+      "file": "CommonerHalfElfTavernMale (10).webp",
+      "variant": "halfElfTavernMale"
+    },
+    {
+      "file": "CommonerHalfElfTavernMale (2).webp",
+      "variant": "halfElfTavernMale"
+    },
+    {
+      "file": "CommonerHalfElfTavernMale (3).webp",
+      "variant": "halfElfTavernMale"
+    },
+    {
+      "file": "CommonerHalfElfTavernMale (4).webp",
+      "variant": "halfElfTavernMale"
+    },
+    {
+      "file": "CommonerHalfElfTavernMale (5).webp",
+      "variant": "halfElfTavernMale"
+    },
+    {
+      "file": "CommonerHalfElfTavernMale (6).webp",
+      "variant": "halfElfTavernMale"
+    },
+    {
+      "file": "CommonerHalfElfTavernMale (7).webp",
+      "variant": "halfElfTavernMale"
+    },
+    {
+      "file": "CommonerHalfElfTavernMale (8).webp",
+      "variant": "halfElfTavernMale"
+    },
+    {
+      "file": "CommonerHalfElfTavernMale (9).webp",
+      "variant": "halfElfTavernMale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (1).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (10).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (11).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (12).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (13).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (14).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (15).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (16).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (17).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (18).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (19).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (2).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (3).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (4).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (5).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (6).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (7).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (8).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanFemale (9).webp",
+      "variant": "halfElfUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanMale (1).webp",
+      "variant": "halfElfUrbanMale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanMale (2).webp",
+      "variant": "halfElfUrbanMale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanMale (3).webp",
+      "variant": "halfElfUrbanMale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanMale (4).webp",
+      "variant": "halfElfUrbanMale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanMale (5).webp",
+      "variant": "halfElfUrbanMale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanMale (6).webp",
+      "variant": "halfElfUrbanMale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanMale (7).webp",
+      "variant": "halfElfUrbanMale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanMale (8).webp",
+      "variant": "halfElfUrbanMale"
+    },
+    {
+      "file": "CommonerHalfElfUrbanMale (9).webp",
+      "variant": "halfElfUrbanMale"
+    },
+    {
+      "file": "CommonerHalflingArcticFemale (1).webp",
+      "variant": "halflingArcticFemale"
+    },
+    {
+      "file": "CommonerHalflingArcticFemale (10).webp",
+      "variant": "halflingArcticFemale"
+    },
+    {
+      "file": "CommonerHalflingArcticFemale (11).webp",
+      "variant": "halflingArcticFemale"
+    },
+    {
+      "file": "CommonerHalflingArcticFemale (12).webp",
+      "variant": "halflingArcticFemale"
+    },
+    {
+      "file": "CommonerHalflingArcticFemale (2).webp",
+      "variant": "halflingArcticFemale"
+    },
+    {
+      "file": "CommonerHalflingArcticFemale (3).webp",
+      "variant": "halflingArcticFemale"
+    },
+    {
+      "file": "CommonerHalflingArcticFemale (4).webp",
+      "variant": "halflingArcticFemale"
+    },
+    {
+      "file": "CommonerHalflingArcticFemale (5).webp",
+      "variant": "halflingArcticFemale"
+    },
+    {
+      "file": "CommonerHalflingArcticFemale (6).webp",
+      "variant": "halflingArcticFemale"
+    },
+    {
+      "file": "CommonerHalflingArcticFemale (7).webp",
+      "variant": "halflingArcticFemale"
+    },
+    {
+      "file": "CommonerHalflingArcticFemale (8).webp",
+      "variant": "halflingArcticFemale"
+    },
+    {
+      "file": "CommonerHalflingArcticFemale (9).webp",
+      "variant": "halflingArcticFemale"
+    },
+    {
+      "file": "CommonerHalflingArcticMale (1).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "CommonerHalflingArcticMale (10).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "CommonerHalflingArcticMale (11).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "CommonerHalflingArcticMale (12).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "CommonerHalflingArcticMale (2).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "CommonerHalflingArcticMale (3).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "CommonerHalflingArcticMale (4).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "CommonerHalflingArcticMale (5).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "CommonerHalflingArcticMale (6).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "CommonerHalflingArcticMale (7).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "CommonerHalflingArcticMale (8).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "CommonerHalflingArcticMale (9).webp",
+      "variant": "halflingArcticMale"
+    },
+    {
+      "file": "CommonerHalflingDesertFemale (1).webp",
+      "variant": "halflingDesertFemale"
+    },
+    {
+      "file": "CommonerHalflingDesertFemale (2).webp",
+      "variant": "halflingDesertFemale"
+    },
+    {
+      "file": "CommonerHalflingDesertFemale (3).webp",
+      "variant": "halflingDesertFemale"
+    },
+    {
+      "file": "CommonerHalflingDesertFemale (4).webp",
+      "variant": "halflingDesertFemale"
+    },
+    {
+      "file": "CommonerHalflingDesertFemale (5).webp",
+      "variant": "halflingDesertFemale"
+    },
+    {
+      "file": "CommonerHalflingDesertFemale (6).webp",
+      "variant": "halflingDesertFemale"
+    },
+    {
+      "file": "CommonerHalflingDesertFemale (7).webp",
+      "variant": "halflingDesertFemale"
+    },
+    {
+      "file": "CommonerHalflingDesertFemale (8).webp",
+      "variant": "halflingDesertFemale"
+    },
+    {
+      "file": "CommonerHalflingDesertFemale (9).webp",
+      "variant": "halflingDesertFemale"
+    },
+    {
+      "file": "CommonerHalflingDesertMale (1).webp",
+      "variant": "halflingDesertMale"
+    },
+    {
+      "file": "CommonerHalflingDesertMale (10).webp",
+      "variant": "halflingDesertMale"
+    },
+    {
+      "file": "CommonerHalflingDesertMale (2).webp",
+      "variant": "halflingDesertMale"
+    },
+    {
+      "file": "CommonerHalflingDesertMale (3).webp",
+      "variant": "halflingDesertMale"
+    },
+    {
+      "file": "CommonerHalflingDesertMale (4).webp",
+      "variant": "halflingDesertMale"
+    },
+    {
+      "file": "CommonerHalflingDesertMale (5).webp",
+      "variant": "halflingDesertMale"
+    },
+    {
+      "file": "CommonerHalflingDesertMale (6).webp",
+      "variant": "halflingDesertMale"
+    },
+    {
+      "file": "CommonerHalflingDesertMale (7).webp",
+      "variant": "halflingDesertMale"
+    },
+    {
+      "file": "CommonerHalflingDesertMale (8).webp",
+      "variant": "halflingDesertMale"
+    },
+    {
+      "file": "CommonerHalflingDesertMale (9).webp",
+      "variant": "halflingDesertMale"
+    },
+    {
+      "file": "CommonerHalflingTavernFemale (1).webp",
+      "variant": "halflingTavernFemale"
+    },
+    {
+      "file": "CommonerHalflingTavernFemale (10).webp",
+      "variant": "halflingTavernFemale"
+    },
+    {
+      "file": "CommonerHalflingTavernFemale (11).webp",
+      "variant": "halflingTavernFemale"
+    },
+    {
+      "file": "CommonerHalflingTavernFemale (2).webp",
+      "variant": "halflingTavernFemale"
+    },
+    {
+      "file": "CommonerHalflingTavernFemale (3).webp",
+      "variant": "halflingTavernFemale"
+    },
+    {
+      "file": "CommonerHalflingTavernFemale (4).webp",
+      "variant": "halflingTavernFemale"
+    },
+    {
+      "file": "CommonerHalflingTavernFemale (5).webp",
+      "variant": "halflingTavernFemale"
+    },
+    {
+      "file": "CommonerHalflingTavernFemale (6).webp",
+      "variant": "halflingTavernFemale"
+    },
+    {
+      "file": "CommonerHalflingTavernFemale (7).webp",
+      "variant": "halflingTavernFemale"
+    },
+    {
+      "file": "CommonerHalflingTavernFemale (8).webp",
+      "variant": "halflingTavernFemale"
+    },
+    {
+      "file": "CommonerHalflingTavernFemale (9).webp",
+      "variant": "halflingTavernFemale"
+    },
+    {
+      "file": "CommonerHalflingTavernMale (1).webp",
+      "variant": "halflingTavernMale"
+    },
+    {
+      "file": "CommonerHalflingTavernMale (2).webp",
+      "variant": "halflingTavernMale"
+    },
+    {
+      "file": "CommonerHalflingTavernMale (3).webp",
+      "variant": "halflingTavernMale"
+    },
+    {
+      "file": "CommonerHalflingTavernMale (4).webp",
+      "variant": "halflingTavernMale"
+    },
+    {
+      "file": "CommonerHalflingTavernMale (5).webp",
+      "variant": "halflingTavernMale"
+    },
+    {
+      "file": "CommonerHalflingTavernMale (6).webp",
+      "variant": "halflingTavernMale"
+    },
+    {
+      "file": "CommonerHalflingTavernMale (7).webp",
+      "variant": "halflingTavernMale"
+    },
+    {
+      "file": "CommonerHalflingTavernMale (8).webp",
+      "variant": "halflingTavernMale"
+    },
+    {
+      "file": "CommonerHalflingUrbanFemale (1).webp",
+      "variant": "halflingUrbanFemale"
+    },
+    {
+      "file": "CommonerHalflingUrbanFemale (2).webp",
+      "variant": "halflingUrbanFemale"
+    },
+    {
+      "file": "CommonerHalflingUrbanFemale (3).webp",
+      "variant": "halflingUrbanFemale"
+    },
+    {
+      "file": "CommonerHalflingUrbanFemale (4).webp",
+      "variant": "halflingUrbanFemale"
+    },
+    {
+      "file": "CommonerHalflingUrbanFemale (5).webp",
+      "variant": "halflingUrbanFemale"
+    },
+    {
+      "file": "CommonerHalflingUrbanFemale (6).webp",
+      "variant": "halflingUrbanFemale"
+    },
+    {
+      "file": "CommonerHalflingUrbanFemale (7).webp",
+      "variant": "halflingUrbanFemale"
+    },
+    {
+      "file": "CommonerHalflingUrbanFemale (8).webp",
+      "variant": "halflingUrbanFemale"
+    },
+    {
+      "file": "CommonerHalflingUrbanFemale (9).webp",
+      "variant": "halflingUrbanFemale"
+    },
+    {
+      "file": "CommonerHalflingUrbanMale (1).webp",
+      "variant": "halflingUrbanMale"
+    },
+    {
+      "file": "CommonerHalflingUrbanMale (2).webp",
+      "variant": "halflingUrbanMale"
+    },
+    {
+      "file": "CommonerHalflingUrbanMale (3).webp",
+      "variant": "halflingUrbanMale"
+    },
+    {
+      "file": "CommonerHalflingUrbanMale (4).webp",
+      "variant": "halflingUrbanMale"
+    },
+    {
+      "file": "CommonerHalflingUrbanMale (5).webp",
+      "variant": "halflingUrbanMale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticFemale (1).webp",
+      "variant": "halfOrcArcticFemale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticFemale (2).webp",
+      "variant": "halfOrcArcticFemale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticFemale (3).webp",
+      "variant": "halfOrcArcticFemale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticFemale (4).webp",
+      "variant": "halfOrcArcticFemale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticFemale (5).webp",
+      "variant": "halfOrcArcticFemale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticFemale (6).webp",
+      "variant": "halfOrcArcticFemale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticFemale (7).webp",
+      "variant": "halfOrcArcticFemale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticFemale (8).webp",
+      "variant": "halfOrcArcticFemale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticFemale (9).webp",
+      "variant": "halfOrcArcticFemale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticMale (1).webp",
+      "variant": "halfOrcArcticMale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticMale (10).webp",
+      "variant": "halfOrcArcticMale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticMale (11).webp",
+      "variant": "halfOrcArcticMale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticMale (2).webp",
+      "variant": "halfOrcArcticMale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticMale (3).webp",
+      "variant": "halfOrcArcticMale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticMale (4).webp",
+      "variant": "halfOrcArcticMale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticMale (5).webp",
+      "variant": "halfOrcArcticMale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticMale (6).webp",
+      "variant": "halfOrcArcticMale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticMale (7).webp",
+      "variant": "halfOrcArcticMale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticMale (8).webp",
+      "variant": "halfOrcArcticMale"
+    },
+    {
+      "file": "CommonerHalfOrcArcticMale (9).webp",
+      "variant": "halfOrcArcticMale"
+    },
+    {
+      "file": "CommonerHalfOrcDesertFemale (1).webp",
+      "variant": "halfOrcDesertFemale"
+    },
+    {
+      "file": "CommonerHalfOrcDesertFemale (2).webp",
+      "variant": "halfOrcDesertFemale"
+    },
+    {
+      "file": "CommonerHalfOrcDesertFemale (3).webp",
+      "variant": "halfOrcDesertFemale"
+    },
+    {
+      "file": "CommonerHalfOrcDesertFemale (4).webp",
+      "variant": "halfOrcDesertFemale"
+    },
+    {
+      "file": "CommonerHalfOrcDesertFemale (5).webp",
+      "variant": "halfOrcDesertFemale"
+    },
+    {
+      "file": "CommonerHalfOrcDesertFemale (6).webp",
+      "variant": "halfOrcDesertFemale"
+    },
+    {
+      "file": "CommonerHalfOrcDesertFemale (7).webp",
+      "variant": "halfOrcDesertFemale"
+    },
+    {
+      "file": "CommonerHalfOrcDesertFemale (8).webp",
+      "variant": "halfOrcDesertFemale"
+    },
+    {
+      "file": "CommonerHalfOrcDesertMale (1).webp",
+      "variant": "halfOrcDesertMale"
+    },
+    {
+      "file": "CommonerHalfOrcDesertMale (2).webp",
+      "variant": "halfOrcDesertMale"
+    },
+    {
+      "file": "CommonerHalfOrcDesertMale (3).webp",
+      "variant": "halfOrcDesertMale"
+    },
+    {
+      "file": "CommonerHalfOrcDesertMale (4).webp",
+      "variant": "halfOrcDesertMale"
+    },
+    {
+      "file": "CommonerHalfOrcDesertMale (5).webp",
+      "variant": "halfOrcDesertMale"
+    },
+    {
+      "file": "CommonerHalfOrcDesertMale (6).webp",
+      "variant": "halfOrcDesertMale"
+    },
+    {
+      "file": "CommonerHalfOrcDesertMale (7).webp",
+      "variant": "halfOrcDesertMale"
+    },
+    {
+      "file": "CommonerHalfOrcDesertMale (8).webp",
+      "variant": "halfOrcDesertMale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernFemale (1).webp",
+      "variant": "halfOrcTavernFemale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernFemale (10).webp",
+      "variant": "halfOrcTavernFemale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernFemale (11).webp",
+      "variant": "halfOrcTavernFemale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernFemale (12).webp",
+      "variant": "halfOrcTavernFemale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernFemale (2).webp",
+      "variant": "halfOrcTavernFemale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernFemale (3).webp",
+      "variant": "halfOrcTavernFemale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernFemale (4).webp",
+      "variant": "halfOrcTavernFemale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernFemale (5).webp",
+      "variant": "halfOrcTavernFemale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernFemale (6).webp",
+      "variant": "halfOrcTavernFemale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernFemale (7).webp",
+      "variant": "halfOrcTavernFemale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernFemale (8).webp",
+      "variant": "halfOrcTavernFemale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernFemale (9).webp",
+      "variant": "halfOrcTavernFemale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernMale (1).webp",
+      "variant": "halfOrcTavernMale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernMale (10).webp",
+      "variant": "halfOrcTavernMale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernMale (11).webp",
+      "variant": "halfOrcTavernMale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernMale (2).webp",
+      "variant": "halfOrcTavernMale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernMale (3).webp",
+      "variant": "halfOrcTavernMale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernMale (4).webp",
+      "variant": "halfOrcTavernMale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernMale (5).webp",
+      "variant": "halfOrcTavernMale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernMale (6).webp",
+      "variant": "halfOrcTavernMale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernMale (7).webp",
+      "variant": "halfOrcTavernMale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernMale (8).webp",
+      "variant": "halfOrcTavernMale"
+    },
+    {
+      "file": "CommonerHalfOrcTavernMale (9).webp",
+      "variant": "halfOrcTavernMale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanFemale (1).webp",
+      "variant": "halfOrcUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanFemale (10).webp",
+      "variant": "halfOrcUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanFemale (11).webp",
+      "variant": "halfOrcUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanFemale (12).webp",
+      "variant": "halfOrcUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanFemale (2).webp",
+      "variant": "halfOrcUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanFemale (3).webp",
+      "variant": "halfOrcUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanFemale (4).webp",
+      "variant": "halfOrcUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanFemale (5).webp",
+      "variant": "halfOrcUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanFemale (6).webp",
+      "variant": "halfOrcUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanFemale (7).webp",
+      "variant": "halfOrcUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanFemale (8).webp",
+      "variant": "halfOrcUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanFemale (9).webp",
+      "variant": "halfOrcUrbanFemale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanMale (1).webp",
+      "variant": "halfOrcUrbanMale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanMale (2).webp",
+      "variant": "halfOrcUrbanMale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanMale (3).webp",
+      "variant": "halfOrcUrbanMale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanMale (4).webp",
+      "variant": "halfOrcUrbanMale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanMale (5).webp",
+      "variant": "halfOrcUrbanMale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanMale (6).webp",
+      "variant": "halfOrcUrbanMale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanMale (7).webp",
+      "variant": "halfOrcUrbanMale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanMale (8).webp",
+      "variant": "halfOrcUrbanMale"
+    },
+    {
+      "file": "CommonerHalfOrcUrbanMale (9).webp",
+      "variant": "halfOrcUrbanMale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (1).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (10).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (11).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (12).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (13).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (14).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (15).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (16).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (17).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (18).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (19).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (2).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (20).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (21).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (22).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (23).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (24).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (25).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (26).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (27).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (28).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (29).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (3).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (4).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (5).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (6).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (7).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (8).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticFemale (9).webp",
+      "variant": "humanArcticFemale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (1).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (10).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (11).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (12).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (13).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (14).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (15).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (16).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (17).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (18).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (19).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (2).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (20).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (21).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (22).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (23).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (24).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (25).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (26).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (27).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (3).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (4).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (5).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (6).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (7).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (8).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanArcticMale (9).webp",
+      "variant": "humanArcticMale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (1).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (10).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (11).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (12).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (13).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (14).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (15).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (16).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (17).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (18).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (19).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (2).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (20).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (21).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (22).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (23).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (24).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (25).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (26).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (27).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (28).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (29).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (3).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (4).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (5).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (6).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (7).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (8).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertFemale (9).webp",
+      "variant": "humanDesertFemale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (1).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (10).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (11).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (12).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (13).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (14).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (15).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (16).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (17).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (18).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (19).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (2).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (20).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (21).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (22).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (23).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (24).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (25).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (26).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (27).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (28).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (29).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (3).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (4).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (5).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (6).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (7).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (8).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanDesertMale (9).webp",
+      "variant": "humanDesertMale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (1).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (10).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (11).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (12).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (13).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (14).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (15).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (16).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (17).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (18).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (19).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (2).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (20).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (21).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (22).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (23).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (24).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (25).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (26).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (27).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (28).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (29).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (3).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (30).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (31).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (32).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (4).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (5).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (6).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (7).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (8).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernFemale (9).webp",
+      "variant": "humanTavernFemale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (1).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (10).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (11).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (12).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (13).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (14).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (15).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (16).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (17).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (18).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (19).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (2).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (20).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (21).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (22).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (23).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (24).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (25).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (26).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (27).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (28).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (29).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (3).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (4).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (5).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (6).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (7).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (8).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanTavernMale (9).webp",
+      "variant": "humanTavernMale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (1).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (10).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (11).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (12).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (13).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (14).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (15).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (16).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (17).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (18).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (19).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (2).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (20).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (21).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (22).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (23).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (24).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (25).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (26).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (27).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (28).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (29).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (3).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (4).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (5).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (6).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (7).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (8).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanFemale (9).webp",
+      "variant": "humanUrbanFemale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (1).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (10).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (11).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (12).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (13).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (14).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (15).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (16).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (17).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (18).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (19).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (2).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (20).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (21).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (22).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (23).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (24).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (25).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (26).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (27).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (28).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (3).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (4).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (5).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (6).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (7).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (8).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerHumanUrbanMale (9).webp",
+      "variant": "humanUrbanMale"
+    },
+    {
+      "file": "CommonerTieflingArcticFemale (1).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "CommonerTieflingArcticFemale (10).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "CommonerTieflingArcticFemale (11).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "CommonerTieflingArcticFemale (2).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "CommonerTieflingArcticFemale (3).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "CommonerTieflingArcticFemale (4).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "CommonerTieflingArcticFemale (5).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "CommonerTieflingArcticFemale (6).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "CommonerTieflingArcticFemale (7).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "CommonerTieflingArcticFemale (8).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "CommonerTieflingArcticFemale (9).webp",
+      "variant": "tieflingArcticFemale"
+    },
+    {
+      "file": "CommonerTieflingArcticMale (1).webp",
+      "variant": "tieflingArcticMale"
+    },
+    {
+      "file": "CommonerTieflingArcticMale (10).webp",
+      "variant": "tieflingArcticMale"
+    },
+    {
+      "file": "CommonerTieflingArcticMale (11).webp",
+      "variant": "tieflingArcticMale"
+    },
+    {
+      "file": "CommonerTieflingArcticMale (2).webp",
+      "variant": "tieflingArcticMale"
+    },
+    {
+      "file": "CommonerTieflingArcticMale (3).webp",
+      "variant": "tieflingArcticMale"
+    },
+    {
+      "file": "CommonerTieflingArcticMale (4).webp",
+      "variant": "tieflingArcticMale"
+    },
+    {
+      "file": "CommonerTieflingArcticMale (5).webp",
+      "variant": "tieflingArcticMale"
+    },
+    {
+      "file": "CommonerTieflingArcticMale (6).webp",
+      "variant": "tieflingArcticMale"
+    },
+    {
+      "file": "CommonerTieflingArcticMale (7).webp",
+      "variant": "tieflingArcticMale"
+    },
+    {
+      "file": "CommonerTieflingArcticMale (8).webp",
+      "variant": "tieflingArcticMale"
+    },
+    {
+      "file": "CommonerTieflingArcticMale (9).webp",
+      "variant": "tieflingArcticMale"
+    },
+    {
+      "file": "CommonerTieflingDesertFemale (1).webp",
+      "variant": "tieflingDesertFemale"
+    },
+    {
+      "file": "CommonerTieflingDesertFemale (10).webp",
+      "variant": "tieflingDesertFemale"
+    },
+    {
+      "file": "CommonerTieflingDesertFemale (2).webp",
+      "variant": "tieflingDesertFemale"
+    },
+    {
+      "file": "CommonerTieflingDesertFemale (3).webp",
+      "variant": "tieflingDesertFemale"
+    },
+    {
+      "file": "CommonerTieflingDesertFemale (4).webp",
+      "variant": "tieflingDesertFemale"
+    },
+    {
+      "file": "CommonerTieflingDesertFemale (5).webp",
+      "variant": "tieflingDesertFemale"
+    },
+    {
+      "file": "CommonerTieflingDesertFemale (6).webp",
+      "variant": "tieflingDesertFemale"
+    },
+    {
+      "file": "CommonerTieflingDesertFemale (7).webp",
+      "variant": "tieflingDesertFemale"
+    },
+    {
+      "file": "CommonerTieflingDesertFemale (8).webp",
+      "variant": "tieflingDesertFemale"
+    },
+    {
+      "file": "CommonerTieflingDesertFemale (9).webp",
+      "variant": "tieflingDesertFemale"
+    },
+    {
+      "file": "CommonerTieflingDesertMale (1).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "CommonerTieflingDesertMale (10).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "CommonerTieflingDesertMale (2).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "CommonerTieflingDesertMale (3).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "CommonerTieflingDesertMale (4).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "CommonerTieflingDesertMale (5).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "CommonerTieflingDesertMale (6).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "CommonerTieflingDesertMale (7).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "CommonerTieflingDesertMale (8).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "CommonerTieflingDesertMale (9).webp",
+      "variant": "tieflingDesertMale"
+    },
+    {
+      "file": "CommonerTieflingTavernFemale (1).webp",
+      "variant": "tieflingTavernFemale"
+    },
+    {
+      "file": "CommonerTieflingTavernFemale (10).webp",
+      "variant": "tieflingTavernFemale"
+    },
+    {
+      "file": "CommonerTieflingTavernFemale (11).webp",
+      "variant": "tieflingTavernFemale"
+    },
+    {
+      "file": "CommonerTieflingTavernFemale (2).webp",
+      "variant": "tieflingTavernFemale"
+    },
+    {
+      "file": "CommonerTieflingTavernFemale (3).webp",
+      "variant": "tieflingTavernFemale"
+    },
+    {
+      "file": "CommonerTieflingTavernFemale (4).webp",
+      "variant": "tieflingTavernFemale"
+    },
+    {
+      "file": "CommonerTieflingTavernFemale (5).webp",
+      "variant": "tieflingTavernFemale"
+    },
+    {
+      "file": "CommonerTieflingTavernFemale (6).webp",
+      "variant": "tieflingTavernFemale"
+    },
+    {
+      "file": "CommonerTieflingTavernFemale (7).webp",
+      "variant": "tieflingTavernFemale"
+    },
+    {
+      "file": "CommonerTieflingTavernFemale (8).webp",
+      "variant": "tieflingTavernFemale"
+    },
+    {
+      "file": "CommonerTieflingTavernFemale (9).webp",
+      "variant": "tieflingTavernFemale"
+    },
+    {
+      "file": "CommonerTieflingTavernMale (1).webp",
+      "variant": "tieflingTavernMale"
+    },
+    {
+      "file": "CommonerTieflingTavernMale (10).webp",
+      "variant": "tieflingTavernMale"
+    },
+    {
+      "file": "CommonerTieflingTavernMale (11).webp",
+      "variant": "tieflingTavernMale"
+    },
+    {
+      "file": "CommonerTieflingTavernMale (2).webp",
+      "variant": "tieflingTavernMale"
+    },
+    {
+      "file": "CommonerTieflingTavernMale (3).webp",
+      "variant": "tieflingTavernMale"
+    },
+    {
+      "file": "CommonerTieflingTavernMale (4).webp",
+      "variant": "tieflingTavernMale"
+    },
+    {
+      "file": "CommonerTieflingTavernMale (5).webp",
+      "variant": "tieflingTavernMale"
+    },
+    {
+      "file": "CommonerTieflingTavernMale (6).webp",
+      "variant": "tieflingTavernMale"
+    },
+    {
+      "file": "CommonerTieflingTavernMale (7).webp",
+      "variant": "tieflingTavernMale"
+    },
+    {
+      "file": "CommonerTieflingTavernMale (8).webp",
+      "variant": "tieflingTavernMale"
+    },
+    {
+      "file": "CommonerTieflingTavernMale (9).webp",
+      "variant": "tieflingTavernMale"
+    },
+    {
+      "file": "CommonerTieflingUrbanFemale (1).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "CommonerTieflingUrbanFemale (10).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "CommonerTieflingUrbanFemale (11).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "CommonerTieflingUrbanFemale (2).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "CommonerTieflingUrbanFemale (3).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "CommonerTieflingUrbanFemale (4).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "CommonerTieflingUrbanFemale (5).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "CommonerTieflingUrbanFemale (6).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "CommonerTieflingUrbanFemale (7).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "CommonerTieflingUrbanFemale (8).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "CommonerTieflingUrbanFemale (9).webp",
+      "variant": "tieflingUrbanFemale"
+    },
+    {
+      "file": "CommonerTieflingUrbanMale (1).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "CommonerTieflingUrbanMale (10).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "CommonerTieflingUrbanMale (11).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "CommonerTieflingUrbanMale (2).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "CommonerTieflingUrbanMale (3).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "CommonerTieflingUrbanMale (4).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "CommonerTieflingUrbanMale (5).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "CommonerTieflingUrbanMale (6).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "CommonerTieflingUrbanMale (7).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "CommonerTieflingUrbanMale (8).webp",
+      "variant": "tieflingUrbanMale"
+    },
+    {
+      "file": "CommonerTieflingUrbanMale (9).webp",
+      "variant": "tieflingUrbanMale"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

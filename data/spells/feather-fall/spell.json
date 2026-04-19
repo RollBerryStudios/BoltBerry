@@ -1,0 +1,64 @@
+{
+  "id": 30,
+  "slug": "feather-fall",
+  "name": "Feather Fall",
+  "nameDe": "Federfall",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level transmutation",
+    "de": "Stufe 1 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 reaction, which you take when you or a creature within 60 feet of you falls",
+    "de": "1 Reaktion, die du nimmst, wenn du oder eine Kreatur im Umkreis von 90 Metern von dir fällt"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a small feather or a piece of down",
+      "de": "eine kleine Feder oder ein Stück Daune"
+    },
+    "raw": {
+      "en": "V, M (a small feather or a piece of down)",
+      "de": "V, M (eine kleine Feder oder ein Stück Daune)"
+    }
+  },
+  "description": {
+    "en": "Choose up to five falling creatures within range. A falling creature's rate of descent slows to 60 feet per round until the spell ends. If the creature lands before the spell ends, it takes no falling damage and can land on its feet, and the spell ends for that creature.",
+    "de": "Wähle bis zu fünf fallende Kreaturen in Reichweite. Ihre Fallgeschwindigkeit verlangsamt sich für die Wirkungsdauer auf 18 Meter pro Runde. Landet eine Kreatur, bevor der Zauber endet, kann sie auf ihren Füßen landen und erleidet keinen Sturzschaden. Dann endet der Zauber für diese Kreatur."
+  },
+  "image": "featherfall",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

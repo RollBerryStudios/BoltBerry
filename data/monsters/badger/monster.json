@@ -1,0 +1,186 @@
+{
+  "id": 37,
+  "slug": "badger",
+  "name": "Badger",
+  "nameDe": "Dachs",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny beast, unaligned",
+    "de": "Winzige Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "10",
+    "de": "10"
+  },
+  "hp": {
+    "en": "3 (1d4 + 1)",
+    "de": "3 (1W4+1)"
+  },
+  "str": 4,
+  "dex": 11,
+  "con": 12,
+  "int": 2,
+  "wis": 12,
+  "cha": 5,
+  "strMod": -3,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    },
+    "burrow": {
+      "en": 5,
+      "de": 1
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 30 ft.",
+      "passive perception 11"
+    ],
+    "de": [
+      "Dunkelsicht 9 m",
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Smell",
+        "text": "The badger has advantage on Wisdom (Perception) checks that rely on smell."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfer Geruchssinn",
+        "text": "Der Dachs ist bei Weisheitswürfen (Wahrnehmung), die auf Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 1 piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +2 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 1 Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/528/1000/1000/636376327632236333.jpeg",
+  "size": {
+    "en": "tiny",
+    "de": "Winziges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Badger (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Badger (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Badger (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

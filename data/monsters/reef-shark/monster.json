@@ -1,0 +1,222 @@
+{
+  "id": 241,
+  "slug": "reef-shark",
+  "name": "Reef Shark",
+  "nameDe": "Riffhai",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/2",
+  "xp": 100,
+  "ac": {
+    "en": "12 (Natural Armor)",
+    "de": "12 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "22 (4d8 + 4)",
+    "de": "22 (4W8+4)"
+  },
+  "str": 14,
+  "dex": 13,
+  "con": 13,
+  "int": 1,
+  "wis": 10,
+  "cha": 4,
+  "strMod": 2,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": -5,
+  "wisMod": 0,
+  "chaMod": -3,
+  "speed": {
+    "run": {},
+    "swim": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 30 ft.",
+      "passive perception 12"
+    ],
+    "de": [
+      "Blindsicht 9 m",
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Pack Tactics",
+        "text": "The shark has advantage on an attack roll against a creature if at least one of the shark's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+      },
+      {
+        "name": "Water Breathing",
+        "text": "The shark can breathe only underwater."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rudeltaktik",
+        "text": "Der Hai ist bei Angriffswürfen gegen eine Kreatur im Vorteil, wenn sich mindestens einer seiner Verbündeten, der nicht kampfunfähig ist, im Abstand von bis zu 1,5 Metern von der Kreatur befindet."
+      },
+      {
+        "name": "Wasser atmen",
+        "text": "Der Hai kann nur unter Wasser atmen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W8+2) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "ReefShark (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "ReefShark (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "ReefShark (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,221 @@
+{
+  "id": 258,
+  "slug": "shambling-mound",
+  "name": "Shambling Mound",
+  "nameDe": "Modernder Schlurfer",
+  "source": "SRD",
+  "meta": {
+    "en": "Large plant, unaligned",
+    "de": "Große Pflanze, ohne Gesinnung"
+  },
+  "challenge": "5",
+  "xp": 1800,
+  "ac": {
+    "en": "15 (Natural Armor)",
+    "de": "15 (Natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "136 (16d10 + 48)",
+    "de": "136 (16W10 + 48)"
+  },
+  "str": 18,
+  "dex": 8,
+  "con": 16,
+  "int": 5,
+  "wis": 10,
+  "cha": 5,
+  "strMod": 4,
+  "dexMod": -1,
+  "conMod": 3,
+  "intMod": -3,
+  "wisMod": 0,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    },
+    "swim": {
+      "en": 20,
+      "de": 6
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 60 ft. (blind beyond this radius)",
+      "passive perception 10"
+    ],
+    "de": [
+      "Blindsicht 18 m (blind außerhalb des Radius)",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Lightning Absorption",
+        "text": "Whenever the shambling mound is subjected to lightning damage, it takes no damage and regains a number of hit points equal to the lightning damage dealt."
+      }
+    ],
+    "de": [
+      {
+        "name": "Blitzabsorption",
+        "text": "Der modernde Schlurfer erleidet durch Blitze keinen Schaden, sondern gewinnt Trefferpunkte in Höhe des Blitzschadens zurück."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The shambling mound makes two slam attacks. If both attacks hit a Medium or smaller target, the target is grappled (escape DC 14), and the shambling mound uses its Engulf on it."
+      },
+      {
+        "name": "Slam",
+        "text": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) bludgeoning damage."
+      },
+      {
+        "name": "Engulf",
+        "text": "The shambling mound engulfs a Medium or smaller creature grappled by it. The engulfed target is blinded, restrained, and unable to breathe, and it must succeed on a DC 14 Constitution saving throw at the start of each of the mound's turns or take 13 (2d8 + 4) bludgeoning damage. If the mound moves, the engulfed target moves with it. The mound can have only one creature engulfed at a time."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der modernde Schlurfer führt zwei Hiebangriffe aus. Wenn beide Angriffe ein höchstens mittelgroßes Ziel treffen, wird das Ziel gepackt (Rettungswurf-SG 14), und der modernde Schlurfer setzt bei ihm Einhüllen ein."
+      },
+      {
+        "name": "Hieb",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 13 (2W8+4) Wuchtschaden."
+      },
+      {
+        "name": "Einhüllen",
+        "text": "Der modernde Schlurfer hüllt eine höchstens mittelgroße Kreatur ein, die er gepackt hält. Das eingehüllte Ziel ist blind, festgesetzt und kann nicht atmen. Es muss zu Beginn jedes Zugs des modernden Schlurfers einen SG-14-Konstitutionsrettungswurf bestehen, oder es erleidet 13 (2W8+4) Wuchtschaden. Bewegt sich der modernde Schlurfer, so bewegt das eingehüllte Ziel sich mit ihm. Der modernde Schlurfer kann nur jeweils eine Kreatur einhüllen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/563/315/315/636376346968079714.jpeg",
+  "size": {
+    "en": "large",
+    "de": "groß"
+  },
+  "type": {
+    "en": "plant",
+    "de": "Pflanze"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "ohne Ausrichtung"
+  },
+  "token": {
+    "file": "ShamblingMound (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "ShamblingMound (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "ShamblingMound (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

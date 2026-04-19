@@ -1,0 +1,62 @@
+{
+  "id": 175,
+  "slug": "imprisonment",
+  "name": "Imprisonment",
+  "nameDe": "Einkerkerung",
+  "level": {
+    "en": "9",
+    "de": "Grad 9"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "9th-level abjuration",
+    "de": "Stufe 9 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "Until dispelled",
+    "de": "Bis entzaubert"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a vellum depiction or a carved statuette in the likeness of the target, and a special component that varies according to the version of the spell you choose, worth at least 500 gb per Hit Die of the target",
+      "de": "eine Pergamentdarstellung oder eine geschnitzte Statuette mit dem Abbild der Zielperson und eine besondere Komponente, die je nach Version des Zaubers variiert und mindestens 500 Goldstücke pro Trefferwürfel der Zielperson wert ist"
+    },
+    "raw": {
+      "en": "V, S, M (a vellum depiction or a carved statuette in the likeness of the target, and a special component that varies according to the version of the spell you choose, worth at least 500 gb per Hit Die of the target)",
+      "de": "V, G, M (eine Pergamentdarstellung oder eine geschnitzte Statuette mit dem Abbild der Zielperson und eine besondere Komponente, die je nach Version des Zaubers variiert und mindestens 500 Goldstücke pro Trefferwürfel der Zielperson wert ist)"
+    }
+  },
+  "description": {
+    "en": "You create a magical restraint to hold a creature that you can see within range. The target must succeed on a wisdom saving throw or be bound by the spell; if it succeeds, it is immune to this spell if you cast it again. While affected by this spell, the creature doesn't need to breathe, eat, or drink, and it doesn't age. Divination spells can't locate or perceive the target. When you cast the spell, you choose one of the following forms of imprisonment. ***Burial.*** The target is entombed far beneath the earth in a sphere of magical force that is just large enough to contain the target. Nothing can pass through the sphere, nor can any creature teleport or use planar travel to get into or out of it. The special component for this version of the spell is a small mithral orb. ***Chaining.*** Heavy chains, firmly rooted in the ground, hold the target in place. The target is restrained until the spell ends, and it can't move or be moved by any means until then. The special component for this version of the spell is a fine chain of precious metal. ***Hedged Prison.*** The spell transports the target into a tiny demiplane that is warded against teleportation and planar travel. The demiplane can be a labyrinth, a cage, a tower, or any similar confined structure or area of your choice. The special component for this version of the spell is a miniature representation of the prison made from jade. ***Minimus Containment.*** The target shrinks to a height of 1 inch and is imprisoned inside a gemstone or similar object. Light can pass through the gemstone normally (allowing the target to see out and other creatures to see in), but nothing else can pass through, even by means of teleportation or planar travel. The gemstone can't be cut or broken while the spell remains in effect. The special component for this version of the spell is a large, transparent gemstone, such as a corundum, diamond, or ruby. ***Slumber.*** The target falls asleep and can't be awoken. The special component for this version of the spell consists of rare soporific herbs. ***Ending the Spell.*** During the casting of the spell, in any of its versions, you can specify a condition that will cause the spell to end and release the target. The condition can be as specific or as elaborate as you choose, but the GM must agree that the condition is reasonable and has a likelihood of coming to pass. The conditions can be based on a creature's name, identity, or deity but otherwise must be based on observable actions or qualities and not based on intangibles such as level, class, or hit points. A dispel magic spell can end the spell only if it is cast as a 9th-level spell, targeting either the prison or the special component used to create it. You can use a particular special component to create only one prison at a time. If you cast the spell again using the same component, the target of the first casting is immediately freed from its binding.",
+    "de": "Du erschaffst magische Fesseln, um eine Kreatur in Reichweite festzuhalten, die du sehen kannst. Das Ziel muss einen Weisheitsrettungswurf bestehen oder es wird von dem Zauber gebunden. Ist der Rettungswurf erfolgreich, ist es gegen den Zauber immun, wenn du ihn erneut wirkst. Während sie von diesem Zauber betroffen ist, muss die Kreatur nicht atmen, essen oder trinken und altert nicht. Erkenntniszauber können das Ziel weder orten noch wahrnehmen. Wenn du diesen Zauber wirkst, wähle eine der folgenden Arten der Einkerkerung: Abgesichertes Gefängnis:  Der Zauber transportiert das Ziel zu einer winzigen Halbebene, die gegen Teleportation und Ebenenreisen geschützt ist. Bei der Halbebene kann es sich um ein Labyrinth, einen Käfig, einen Turm oder eine ähnliche geschlossene Struktur oder einen Bereich deiner Wahl handeln. Die besondere Komponente für diese Version des Zaubers ist eine kleine Abbildung des Gefängnisses aus Jade. Anketten:  Schwere Ketten, die fest im Boden verankert sind, halten das Ziel fest. Das Ziel ist bis zum Ende des Zaubers festgesetzt und kann sich bis dahin weder bewegen noch auf irgendeine Art bewegt werden. Die besondere Komponente für diese Version des Zaubers ist eine dünne Kette aus Edelmetall. Begräbnis:  Das Ziel wird tief unter der Erde in einer Sphäre aus magischer Energie begraben, die gerade groß genug für das Ziel ist. Nichts kann die Sphäre durchdringen und keine Kreatur kann durch Teleportation oder Ebenenreisen in die Sphäre hinein- oder herausreisen. Die besondere Komponente für diese Version des Zaubers ist eine kleine Mithralkugel. Schlummer:  Das Ziel schläft ein und kann nicht aufgeweckt werden. Die besondere Komponente für diese Version des Zaubers besteht aus seltenen, einschläfernden Kräutern. Winziges Gefängnis:  Das Ziel schrumpft auf eine Größe von 2,5 Zentimetern und wird in einem Edelstein oder einem ähnlichen Gegenstand eingesperrt. Licht kann den Edelstein normal durchdringen und ermöglicht es dem Ziel somit, nach draußen und anderen Kreaturen ins Innere zu sehen. Ansonsten kann ihn jedoch nichts durchdringen, nicht einmal Teleportation oder Ebenenreisen. Der Edelstein kann nicht geschliffen oder zerbrochen werden, solange der Zauber anhält Die besondere Komponente für diese Version des Zaubers ist ein großer, transparenter Edelstein wie ein Diamant, Korund oder Rubin. Den Zauber beenden:  Während du eine beliebige Version des Zaubers wirkst, kannst du eine Bedingung festlegen, die den Zauber beendet und das Ziel befreit. Die Bedingung kann so spezifisch oder komplex sein, wie du möchtest. Der SL muss jedoch zustimmen, dass sie vernünftig und ihr Eintreten möglich ist. Die Bedingung kann vom Namen, der Identität oder der Gottheit einer Kreatur abhängen, muss aber auf beobachtbaren Handlungen oder Eigenschaften basieren und nicht auf immateriellen Konzepten wie Stufen, Klassen oder Trefferpunkten. Der Zauber Magie bannen  kann den Zauber nur beenden, wenn er als Zauber des 9. Grades gewirkt wird und entweder das Gefängnis oder die besondere Komponente als Ziel hat. Du kannst eine besondere Komponente nur verwenden, um ein Gefängnis pro Komponente zu erschaffen. Wirkst du den Zauber erneut mit derselben Komponente, wird das Ziel des ersten Zaubers sofort aus der Einkerkerung befreit."
+  },
+  "image": "imprisonment",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

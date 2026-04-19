@@ -1,0 +1,343 @@
+{
+  "id": 187,
+  "slug": "lemure",
+  "name": "Lemure",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium fiend, lawful evil",
+    "de": "Mittelgroßer Unhold, rechtschaffen böse"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": "7",
+  "hp": {
+    "en": "13 (3d8)",
+    "de": "13 (3W8)"
+  },
+  "str": 10,
+  "dex": 5,
+  "con": 11,
+  "int": 1,
+  "wis": 11,
+  "cha": 3,
+  "strMod": 0,
+  "dexMod": -3,
+  "conMod": 0,
+  "intMod": -5,
+  "wisMod": 0,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 15,
+      "de": 4.5
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 120 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 36 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "understands infernal but can't speak"
+    ],
+    "de": [
+      "Versteht Diabolisch",
+      "aber kann nicht sprechen"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Devil's Sight",
+        "text": "Magical darkness doesn't impede the lemure's darkvision."
+      },
+      {
+        "name": "Hellish Rejuvenation",
+        "text": "A lemure that dies in the Nine Hells comes back to life with all its hit points in 1d10 days unless it is killed by a good-aligned creature with a bless spell cast on that creature or its remains are sprinkled with holy water."
+      }
+    ],
+    "de": [
+      {
+        "name": "Höllische Wiederbelebung",
+        "text": "Ein Lemure, der in den Neun Höllen stirbt, ersteht mit allen Trefferpunkten in 1W10 Tagen wieder auf, sofern er nicht von einer Kreatur mit guter Gesinnung getötet wurde, auf die der Zauber Segnen gewirkt wurde, oder die Überreste des Lemuren mit Weihwasser besprenkelt werden."
+      },
+      {
+        "name": "Teufelssicht",
+        "text": "Die Dunkelsicht des Lemuren wird nicht durch magische Dunkelheit beeinträchtigt."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Fist",
+        "text": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 2 (1d4) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Faust",
+        "text": "Nahkampfwaffenangriff: +3 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 2 (1W4) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/149/1000/1000/636252758704142054.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "mittel"
+  },
+  "type": {
+    "en": "fiend",
+    "de": "Unhold"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "Lemure (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Lemure (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (31).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (32).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (33).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (34).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (35).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (36).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (37).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (38).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (39).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (40).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (41).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (42).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (43).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (44).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (45).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (46).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (47).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (48).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (49).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (50).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (51).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (52).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (53).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (54).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (55).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (56).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (57).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (58).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (59).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lemure (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

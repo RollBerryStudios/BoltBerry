@@ -1,0 +1,60 @@
+{
+  "id": 331,
+  "slug": "wall-of-force",
+  "name": "Wall of Force",
+  "nameDe": "Energiewand",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "5th-level evocation",
+    "de": "Stufe 5 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a pinch of powder made by crushing a clear gemstone",
+      "de": "eine Prise Pulver, das durch Zerkleinern eines klaren Edelsteins hergestellt wird"
+    },
+    "raw": {
+      "en": "V, S, M (a pinch of powder made by crushing a clear gemstone)",
+      "de": "V, G, M (eine Prise Pulver, das durch Zerkleinern eines klaren Edelsteins hergestellt wird)"
+    }
+  },
+  "description": {
+    "en": "An invisible wall of force springs into existence at a point you choose within range. The wall appears in any orientation you choose, as a horizontal or vertical barrier or at an angle. It can be free floating or resting on a solid surface. You can form it into a hemispherical dome or a sphere with a radius of up to 10 feet, or you can shape a flat surface made up of ten 10-foot-by-10-foot panels. Each panel must be contiguous with another panel. In any form, the wall is 1/4 inch thick. It lasts for the duration. If the wall cuts through a creature's space when it appears, the creature is pushed to one side of the wall (your choice which side). Nothing can physically pass through the wall. It is immune to all damage and can't be dispelled by dispel magic. A disintegrate spell destroys the wall instantly, however. The wall also extends into the Ethereal Plane, blocking ethereal travel through the wall.",
+    "de": "Eine unsichtbare Energiewand erscheint an einem Punkt deiner Wahl in Reichweite. Sie erscheint in einer Ausrichtung deiner Wahl, als senkrechte, waagerechte oder abgewinkelte Barriere. Sie kann frei schweben oder auf einer festen Oberfläche stehen. Du kannst sie auch zu einer halbrunden Kuppel oder einer Sphäre mit einem Radius von bis zu drei Metern formen, oder du kannst eine flache Oberfläche aus zehn Platten erschaffen, die jeweils neun Quadratmeter groß sind, jede Platte muss an eine andere angrenzen. In jeder Form ist die Wand 6,25 Millimeter dick. Sie bleibt für die Wirkungsdauer bestehen. Erschaffst du die Wand so, dass sie den Bereich einer Kreatur durchdringt, wird die Kreatur auf eine Seite der Wand gestoßen (deine Wahl), Nichts kann die Wand physisch durchdringen. Sie ist gegen alle Schadensarten immun und kann nicht durch Magie bannen  aufgehoben werden. Der Zauber Auflösung  zerstört die Wand jedoch sofort. Die Wand erstreckt sich auch in die Ätherebene und blockiert damit Reisen über diese Ebene."
+  },
+  "image": "wall-of-force",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

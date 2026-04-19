@@ -1,0 +1,38 @@
+{
+  "id": 387,
+  "slug": "surepfeil",
+  "name": "Säurepfeil",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "wizard"
+    ],
+    "de": [
+      "Magier"
+    ]
+  },
+  "type": "Stufe 2 Hervorrufung",
+  "castingTime": "1 Aktion",
+  "range": "27 Meter",
+  "duration": "Unmittelbar",
+  "components": {
+    "material": true,
+    "materials_needed": "Ein zerstoßenes Rhabarberblatt und der Magen einer Natter",
+    "raw": "V, G, M (Ein zerstoßenes Rhabarberblatt und der Magen einer Natter)",
+    "somatic": true,
+    "verbal": true
+  },
+  "description": "<p> Ein schimmernder grüner Pfeil schießt auf ein Ziel in Reichweite und explodiert in einem Sprühregen aus Säure. Führe einen Fernkampf-Zauberangriff gegen das Ziel aus. Bei einem Treffer erleidet das Ziel sofort 4W4 Säureschaden und 2W4 Säureschaden am Ende seines nächsten Zugs. Verfehlst du, spritzt genug Säure auf das Ziel, um die Hälfte des anfänglichen Schadens zu verursachen. Das Ziel erleidet am Ende seines nächsten Zugs keinen Schaden. </p>",
+  "higherLevels": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 3. Grades oder höher nutzt, steigt der Schaden (sowohl der anfängliche als auch der spätere) für jeden Grad über dem 2. um 1W4.",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

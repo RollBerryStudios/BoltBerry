@@ -1,0 +1,172 @@
+{
+  "id": 33,
+  "slug": "awakened-tree",
+  "name": "Awakened Tree",
+  "nameDe": "Erwachter Baum",
+  "source": "SRD",
+  "meta": {
+    "en": "Huge plant, unaligned",
+    "de": "Riesige Pflanze, ohne Gesinnung"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "59 (7d12 + 14)",
+    "de": "59 (6W12+14)"
+  },
+  "str": 19,
+  "dex": 6,
+  "con": 15,
+  "int": 10,
+  "wis": 10,
+  "cha": 7,
+  "strMod": 4,
+  "dexMod": -2,
+  "conMod": 2,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "one language known by its creator"
+    ],
+    "de": [
+      "Eine seinem Schöpfer bekannte Sprache"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "False Appearance",
+        "text": "While the tree remains motionless, it is indistinguishable from a normal tree."
+      }
+    ],
+    "de": [
+      {
+        "name": "Falsches Erscheinungsbild",
+        "text": "Solange der Baum sich nicht bewegt, ist er nicht von einem gewöhnlichen Baum zu unterscheiden."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Slam",
+        "text": "Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 14 (3d6 + 4) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Hieb",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 14 (3W6+4) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/659/plant.jpg",
+  "size": {
+    "en": "huge",
+    "de": "Riesig"
+  },
+  "type": {
+    "en": "plant",
+    "de": "Pflanze"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "AwakenedTree (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "AwakenedTree (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedTree (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedTree (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedTree (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedTree (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedTree (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedTree (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedTree (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedTree (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedTree (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedTree (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedTree (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedTree (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedTree (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedTree (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedTree (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "AwakenedTree (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,62 @@
+{
+  "id": 35,
+  "slug": "goodberry",
+  "name": "Goodberry",
+  "nameDe": "Gute Beeren",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "ranger"
+    ],
+    "de": [
+      "Druide",
+      "Waldläufer"
+    ]
+  },
+  "type": {
+    "en": "1st-level transmutation",
+    "de": "Stufe 1 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a sprig of mistletoe",
+      "de": "ein Mistelzweig"
+    },
+    "raw": {
+      "en": "V, S, M (a sprig of mistletoe)",
+      "de": "V, G, M (ein Mistelzweig)"
+    }
+  },
+  "description": {
+    "en": "Up to ten berries appear in your hand and are infused with magic for the duration. A creature can use its action to eat one berry. Eating a berry restores 1 hit point, and the berry provides enough nourishment to sustain a creature for a day. The berries lose their potency if they have not been consumed within 24 hours of the casting of this spell.",
+    "de": "Bis zu zehn Beeren erscheinen in deiner Hand und werden für die Wirkungsdauer mit Magie erfüllt. Kreaturen können als Aktion eine Beere essen. Dadurch wird 1 Trefferpunkt wiederhergestellt und die Beere versorgt die Kreatur einen Tag lang mit Nahrung. Die Beeren verlieren ihre Wirksamkeit, wenn sie nicht innerhalb von 24 Stunden nach dem Wirken des Zaubers verzehrt werden."
+  },
+  "image": "goodberry",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

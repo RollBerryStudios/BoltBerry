@@ -1,0 +1,1306 @@
+{
+  "id": 294,
+  "slug": "veteran",
+  "name": "Veteran",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": "17 (Splint)",
+  "hp": {
+    "en": "58 (9d8 + 18)",
+    "de": "58 (9W8 + 18)"
+  },
+  "str": 16,
+  "dex": 13,
+  "con": 14,
+  "int": 10,
+  "wis": 11,
+  "cha": 10,
+  "strMod": 3,
+  "dexMod": 1,
+  "conMod": 2,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 12"
+    ],
+    "de": [
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any one language (usually Common)"
+    ],
+    "de": [
+      "Eine beliebige Sprache (normalerweise Gemeinsprache)"
+    ]
+  },
+  "skills": [
+    "Athletik +5",
+    "Wahrnehmung +2"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The veteran makes two longsword attacks. If it has a shortsword drawn, it can also make a shortsword attack."
+      },
+      {
+        "name": "Longsword",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage if used with two hands."
+      },
+      {
+        "name": "Shortsword",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) piercing damage."
+      },
+      {
+        "name": "Heavy Crossbow",
+        "text": "Ranged Weapon Attack: +3 to hit, range 100/400 ft., one target. Hit: 6 (1d10 + 1) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Veteran führt zwei Langschwertangriffe durch. Wenn er ein Kurzschwert gezogen hat, kann er auch einen Kurzschwertangriff ausführen."
+      },
+      {
+        "name": "Kurzschwert",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W6+3) Stichschaden."
+      },
+      {
+        "name": "Langschwert",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (1W8+3) Hiebschaden oder 8 (1W10+3) Hiebschaden bei zweihändiger Führung."
+      },
+      {
+        "name": "Schwere Armbrust",
+        "text": "Fernkampfwaffenangriff: +3 auf Treffer, Reichweite 30/120 m, ein Ziel. Treffer: 6 (1W10+1) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/656/humanoid.jpg",
+  "size": {
+    "en": "medium",
+    "de": "mittel"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoid"
+  },
+  "alignment": {
+    "en": "any alignment",
+    "de": "jegliche"
+  },
+  "token": {
+    "file": "VeteranDragonbornMelee (1).webp",
+    "variant": "dragonbornMelee"
+  },
+  "tokens": [
+    {
+      "file": "VeteranDragonbornMelee (2).webp",
+      "variant": "dragonbornMelee"
+    },
+    {
+      "file": "VeteranDragonbornMelee (3).webp",
+      "variant": "dragonbornMelee"
+    },
+    {
+      "file": "VeteranDragonbornMelee (4).webp",
+      "variant": "dragonbornMelee"
+    },
+    {
+      "file": "VeteranDragonbornMelee (5).webp",
+      "variant": "dragonbornMelee"
+    },
+    {
+      "file": "VeteranDragonbornMelee (6).webp",
+      "variant": "dragonbornMelee"
+    },
+    {
+      "file": "VeteranDragonbornMelee (7).webp",
+      "variant": "dragonbornMelee"
+    },
+    {
+      "file": "VeteranDragonbornRanged (1).webp",
+      "variant": "dragonbornRanged"
+    },
+    {
+      "file": "VeteranDragonbornRanged (2).webp",
+      "variant": "dragonbornRanged"
+    },
+    {
+      "file": "VeteranDragonbornRanged (3).webp",
+      "variant": "dragonbornRanged"
+    },
+    {
+      "file": "VeteranDwarfFemaleMelee (1).webp",
+      "variant": "dwarfFemaleMelee"
+    },
+    {
+      "file": "VeteranDwarfFemaleRanged (1).webp",
+      "variant": "dwarfFemaleRanged"
+    },
+    {
+      "file": "VeteranDwarfFemaleRanged (2).webp",
+      "variant": "dwarfFemaleRanged"
+    },
+    {
+      "file": "VeteranDwarfFemaleRanged (3).webp",
+      "variant": "dwarfFemaleRanged"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (1).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (10).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (11).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (12).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (13).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (14).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (15).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (16).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (17).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (18).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (19).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (2).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (20).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (3).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (4).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (5).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (6).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (7).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (8).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleMelee (9).webp",
+      "variant": "dwarfMaleMelee"
+    },
+    {
+      "file": "VeteranDwarfMaleRanged (1).webp",
+      "variant": "dwarfMaleRanged"
+    },
+    {
+      "file": "VeteranElfFemaleMelee (1).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "VeteranElfFemaleMelee (2).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "VeteranElfFemaleMelee (3).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "VeteranElfFemaleMelee (4).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "VeteranElfFemaleMelee (5).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "VeteranElfFemaleMelee (6).webp",
+      "variant": "elfFemaleMelee"
+    },
+    {
+      "file": "VeteranElfFemaleRanged (1).webp",
+      "variant": "elfFemaleRanged"
+    },
+    {
+      "file": "VeteranElfFemaleRanged (2).webp",
+      "variant": "elfFemaleRanged"
+    },
+    {
+      "file": "VeteranElfFemaleRanged (3).webp",
+      "variant": "elfFemaleRanged"
+    },
+    {
+      "file": "VeteranElfFemaleRanged (4).webp",
+      "variant": "elfFemaleRanged"
+    },
+    {
+      "file": "VeteranElfMaleMelee (1).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "VeteranElfMaleMelee (2).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "VeteranElfMaleMelee (3).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "VeteranElfMaleMelee (4).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "VeteranElfMaleMelee (5).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "VeteranElfMaleMelee (6).webp",
+      "variant": "elfMaleMelee"
+    },
+    {
+      "file": "VeteranElfMaleRanged (1).webp",
+      "variant": "elfMaleRanged"
+    },
+    {
+      "file": "VeteranElfMaleRanged (2).webp",
+      "variant": "elfMaleRanged"
+    },
+    {
+      "file": "VeteranElfMaleRanged (3).webp",
+      "variant": "elfMaleRanged"
+    },
+    {
+      "file": "VeteranElfMaleRanged (4).webp",
+      "variant": "elfMaleRanged"
+    },
+    {
+      "file": "VeteranElfMaleRanged (5).webp",
+      "variant": "elfMaleRanged"
+    },
+    {
+      "file": "VeteranGnomeFemaleMelee (1).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "VeteranGnomeFemaleMelee (10).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "VeteranGnomeFemaleMelee (11).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "VeteranGnomeFemaleMelee (12).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "VeteranGnomeFemaleMelee (13).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "VeteranGnomeFemaleMelee (2).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "VeteranGnomeFemaleMelee (3).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "VeteranGnomeFemaleMelee (4).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "VeteranGnomeFemaleMelee (5).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "VeteranGnomeFemaleMelee (6).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "VeteranGnomeFemaleMelee (7).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "VeteranGnomeFemaleMelee (8).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "VeteranGnomeFemaleMelee (9).webp",
+      "variant": "gnomeFemaleMelee"
+    },
+    {
+      "file": "VeteranGnomeMaleMelee (1).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "VeteranGnomeMaleMelee (10).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "VeteranGnomeMaleMelee (11).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "VeteranGnomeMaleMelee (2).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "VeteranGnomeMaleMelee (3).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "VeteranGnomeMaleMelee (4).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "VeteranGnomeMaleMelee (5).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "VeteranGnomeMaleMelee (6).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "VeteranGnomeMaleMelee (7).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "VeteranGnomeMaleMelee (8).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "VeteranGnomeMaleMelee (9).webp",
+      "variant": "gnomeMaleMelee"
+    },
+    {
+      "file": "VeteranGnomeMaleRanged (1).webp",
+      "variant": "gnomeMaleRanged"
+    },
+    {
+      "file": "VeteranGnomeMaleRanged (2).webp",
+      "variant": "gnomeMaleRanged"
+    },
+    {
+      "file": "VeteranGnomeMaleRanged (3).webp",
+      "variant": "gnomeMaleRanged"
+    },
+    {
+      "file": "VeteranGnomeMaleRanged (4).webp",
+      "variant": "gnomeMaleRanged"
+    },
+    {
+      "file": "VeteranGnomeMaleRanged (5).webp",
+      "variant": "gnomeMaleRanged"
+    },
+    {
+      "file": "VeteranHalfElfFemaleMelee (1).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfFemaleMelee (10).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfFemaleMelee (11).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfFemaleMelee (12).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfFemaleMelee (13).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfFemaleMelee (14).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfFemaleMelee (15).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfFemaleMelee (2).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfFemaleMelee (3).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfFemaleMelee (4).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfFemaleMelee (5).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfFemaleMelee (6).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfFemaleMelee (7).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfFemaleMelee (8).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfFemaleMelee (9).webp",
+      "variant": "halfElfFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfFemaleRanged (1).webp",
+      "variant": "halfElfFemaleRanged"
+    },
+    {
+      "file": "VeteranHalfElfFemaleRanged (2).webp",
+      "variant": "halfElfFemaleRanged"
+    },
+    {
+      "file": "VeteranHalfElfFemaleRanged (3).webp",
+      "variant": "halfElfFemaleRanged"
+    },
+    {
+      "file": "VeteranHalfElfFemaleRanged (4).webp",
+      "variant": "halfElfFemaleRanged"
+    },
+    {
+      "file": "VeteranHalfElfFemaleRanged (5).webp",
+      "variant": "halfElfFemaleRanged"
+    },
+    {
+      "file": "VeteranHalfElfFemaleRanged (6).webp",
+      "variant": "halfElfFemaleRanged"
+    },
+    {
+      "file": "VeteranHalfElfFemaleRanged (7).webp",
+      "variant": "halfElfFemaleRanged"
+    },
+    {
+      "file": "VeteranHalfElfMaleMelee (1).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfMaleMelee (10).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfMaleMelee (11).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfMaleMelee (12).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfMaleMelee (2).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfMaleMelee (3).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfMaleMelee (4).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfMaleMelee (5).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfMaleMelee (6).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfMaleMelee (7).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfMaleMelee (8).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfMaleMelee (9).webp",
+      "variant": "halfElfMaleMelee"
+    },
+    {
+      "file": "VeteranHalfElfMaleRanged (1).webp",
+      "variant": "halfElfMaleRanged"
+    },
+    {
+      "file": "VeteranHalflingFemaleMelee (1).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "VeteranHalflingFemaleMelee (10).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "VeteranHalflingFemaleMelee (11).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "VeteranHalflingFemaleMelee (2).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "VeteranHalflingFemaleMelee (3).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "VeteranHalflingFemaleMelee (4).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "VeteranHalflingFemaleMelee (5).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "VeteranHalflingFemaleMelee (6).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "VeteranHalflingFemaleMelee (7).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "VeteranHalflingFemaleMelee (8).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "VeteranHalflingFemaleMelee (9).webp",
+      "variant": "halflingFemaleMelee"
+    },
+    {
+      "file": "VeteranHalflingFemaleRanged (1).webp",
+      "variant": "halflingFemaleRanged"
+    },
+    {
+      "file": "VeteranHalflingFemaleRanged (2).webp",
+      "variant": "halflingFemaleRanged"
+    },
+    {
+      "file": "VeteranHalflingFemaleRanged (3).webp",
+      "variant": "halflingFemaleRanged"
+    },
+    {
+      "file": "VeteranHalflingFemaleRanged (4).webp",
+      "variant": "halflingFemaleRanged"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (1).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (10).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (11).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (12).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (13).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (14).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (15).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (16).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (17).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (18).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (19).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (2).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (20).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (21).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (22).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (23).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (24).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (25).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (26).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (3).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (4).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (5).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (6).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (7).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (8).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleMelee (9).webp",
+      "variant": "halflingMaleMelee"
+    },
+    {
+      "file": "VeteranHalflingMaleRanged (1).webp",
+      "variant": "halflingMaleRanged"
+    },
+    {
+      "file": "VeteranHalflingMaleRanged (2).webp",
+      "variant": "halflingMaleRanged"
+    },
+    {
+      "file": "VeteranHalflingMaleRanged (3).webp",
+      "variant": "halflingMaleRanged"
+    },
+    {
+      "file": "VeteranHalflingMaleRanged (4).webp",
+      "variant": "halflingMaleRanged"
+    },
+    {
+      "file": "VeteranHalflingMaleRanged (5).webp",
+      "variant": "halflingMaleRanged"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (1).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (10).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (11).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (12).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (13).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (14).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (15).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (16).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (17).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (18).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (2).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (3).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (4).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (5).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (6).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (7).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (8).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleMelee (9).webp",
+      "variant": "halfOrcFemaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleRanged (1).webp",
+      "variant": "halfOrcFemaleRanged"
+    },
+    {
+      "file": "VeteranHalfOrcFemaleRanged (2).webp",
+      "variant": "halfOrcFemaleRanged"
+    },
+    {
+      "file": "VeteranHalfOrcMaleMelee (1).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcMaleMelee (10).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcMaleMelee (2).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcMaleMelee (3).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcMaleMelee (4).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcMaleMelee (5).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcMaleMelee (6).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcMaleMelee (7).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcMaleMelee (8).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcMaleMelee (9).webp",
+      "variant": "halfOrcMaleMelee"
+    },
+    {
+      "file": "VeteranHalfOrcMaleRanged (1).webp",
+      "variant": "halfOrcMaleRanged"
+    },
+    {
+      "file": "VeteranHalfOrcMaleRanged (2).webp",
+      "variant": "halfOrcMaleRanged"
+    },
+    {
+      "file": "VeteranHalfOrcMaleRanged (3).webp",
+      "variant": "halfOrcMaleRanged"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (1).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (10).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (11).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (12).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (13).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (14).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (15).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (16).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (17).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (18).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (19).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (2).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (20).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (21).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (22).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (23).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (24).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (25).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (26).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (27).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (3).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (4).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (5).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (6).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (7).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (8).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleMelee (9).webp",
+      "variant": "humanFemaleMelee"
+    },
+    {
+      "file": "VeteranHumanFemaleRanged (1).webp",
+      "variant": "humanFemaleRanged"
+    },
+    {
+      "file": "VeteranHumanFemaleRanged (2).webp",
+      "variant": "humanFemaleRanged"
+    },
+    {
+      "file": "VeteranHumanFemaleRanged (3).webp",
+      "variant": "humanFemaleRanged"
+    },
+    {
+      "file": "VeteranHumanFemaleRanged (4).webp",
+      "variant": "humanFemaleRanged"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (1).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (10).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (11).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (12).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (13).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (14).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (15).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (16).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (17).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (18).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (2).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (3).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (4).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (5).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (6).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (7).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (8).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleMelee (9).webp",
+      "variant": "humanMaleMelee"
+    },
+    {
+      "file": "VeteranHumanMaleRanged (1).webp",
+      "variant": "humanMaleRanged"
+    },
+    {
+      "file": "VeteranHumanMaleRanged (2).webp",
+      "variant": "humanMaleRanged"
+    },
+    {
+      "file": "VeteranHumanMaleRanged (3).webp",
+      "variant": "humanMaleRanged"
+    },
+    {
+      "file": "VeteranHumanMaleRanged (4).webp",
+      "variant": "humanMaleRanged"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (1).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (10).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (11).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (12).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (13).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (14).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (15).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (16).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (17).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (18).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (19).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (2).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (20).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (3).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (4).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (5).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (6).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (7).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (8).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleMelee (9).webp",
+      "variant": "tieflingFemaleMelee"
+    },
+    {
+      "file": "VeteranTieflingFemaleRanged (1).webp",
+      "variant": "tieflingFemaleRanged"
+    },
+    {
+      "file": "VeteranTieflingFemaleRanged (2).webp",
+      "variant": "tieflingFemaleRanged"
+    },
+    {
+      "file": "VeteranTieflingFemaleRanged (3).webp",
+      "variant": "tieflingFemaleRanged"
+    },
+    {
+      "file": "VeteranTieflingFemaleRanged (4).webp",
+      "variant": "tieflingFemaleRanged"
+    },
+    {
+      "file": "VeteranTieflingFemaleRanged (5).webp",
+      "variant": "tieflingFemaleRanged"
+    },
+    {
+      "file": "VeteranTieflingMaleMelee (1).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "VeteranTieflingMaleMelee (10).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "VeteranTieflingMaleMelee (11).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "VeteranTieflingMaleMelee (12).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "VeteranTieflingMaleMelee (13).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "VeteranTieflingMaleMelee (14).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "VeteranTieflingMaleMelee (2).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "VeteranTieflingMaleMelee (3).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "VeteranTieflingMaleMelee (4).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "VeteranTieflingMaleMelee (5).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "VeteranTieflingMaleMelee (6).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "VeteranTieflingMaleMelee (7).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "VeteranTieflingMaleMelee (8).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "VeteranTieflingMaleMelee (9).webp",
+      "variant": "tieflingMaleMelee"
+    },
+    {
+      "file": "VeteranTieflingMaleRanged (1).webp",
+      "variant": "tieflingMaleRanged"
+    },
+    {
+      "file": "VeteranTieflingMaleRanged (2).webp",
+      "variant": "tieflingMaleRanged"
+    },
+    {
+      "file": "VeteranTieflingMaleRanged (3).webp",
+      "variant": "tieflingMaleRanged"
+    },
+    {
+      "file": "VeteranTieflingMaleRanged (4).webp",
+      "variant": "tieflingMaleRanged"
+    },
+    {
+      "file": "VeteranTieflingMaleRanged (5).webp",
+      "variant": "tieflingMaleRanged"
+    },
+    {
+      "file": "VeteranTieflingMaleRanged (6).webp",
+      "variant": "tieflingMaleRanged"
+    },
+    {
+      "file": "VeteranTieflingMaleRanged (7).webp",
+      "variant": "tieflingMaleRanged"
+    },
+    {
+      "file": "VeteranTieflingMaleRanged (8).webp",
+      "variant": "tieflingMaleRanged"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

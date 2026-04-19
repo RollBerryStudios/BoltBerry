@@ -1,0 +1,188 @@
+{
+  "id": 228,
+  "slug": "poisonous-snake",
+  "name": "Poisonous Snake",
+  "nameDe": "Giftschlange",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny beast, unaligned",
+    "de": "Winzige Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/8",
+  "xp": 25,
+  "ac": {
+    "en": "13",
+    "de": "13"
+  },
+  "hp": {
+    "en": "2 (1d4)",
+    "de": "2 (1W4)"
+  },
+  "str": 2,
+  "dex": 16,
+  "con": 11,
+  "int": 1,
+  "wis": 10,
+  "cha": 3,
+  "strMod": -4,
+  "dexMod": 3,
+  "conMod": 0,
+  "intMod": -5,
+  "wisMod": 0,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "swim": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 10 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Blindsicht 3 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 1 piercing damage, and the target must make a DC 10 Constitution saving throw, taking 5 (2d4) poison damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 1 Stichschaden, und das Ziel muss einen SG-10-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet es 5 (2W4) Giftschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Winziges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "PoisonousSnakeDesert (1).webp",
+    "variant": "desert"
+  },
+  "tokens": [
+    {
+      "file": "PoisonousSnakeDesert (2).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "PoisonousSnakeDesert (3).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "PoisonousSnakeDesert (4).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "PoisonousSnakeDesert (5).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "PoisonousSnakeDesert (6).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "PoisonousSnakeDesert (7).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "PoisonousSnakeDesert (8).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "PoisonousSnakeDesert (9).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "PoisonousSnakeSwamp (1).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "PoisonousSnakeSwamp (2).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "PoisonousSnakeSwamp (3).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "PoisonousSnakeSwamp (4).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "PoisonousSnakeSwamp (5).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "PoisonousSnakeSwamp (6).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "PoisonousSnakeSwamp (7).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "PoisonousSnakeSwamp (8).webp",
+      "variant": "swamp"
+    },
+    {
+      "file": "PoisonousSnakeUnderdark (1).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "PoisonousSnakeUnderdark (2).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "PoisonousSnakeUnderdark (3).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "PoisonousSnakeUnderdark (4).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "PoisonousSnakeUnderdark (5).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "PoisonousSnakeUnderdark (6).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "PoisonousSnakeUnderdark (7).webp",
+      "variant": "underdark"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

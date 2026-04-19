@@ -1,0 +1,215 @@
+{
+  "id": 232,
+  "slug": "pseudodragon",
+  "name": "Pseudodragon",
+  "nameDe": "Pseudodrache",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny dragon, neutral good",
+    "de": "Winziger Drache, neutral gut"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "7 (2d4 + 2)",
+    "de": "7 (2W4+2)"
+  },
+  "str": 6,
+  "dex": 15,
+  "con": 13,
+  "int": 10,
+  "wis": 12,
+  "cha": 10,
+  "strMod": -2,
+  "dexMod": 2,
+  "conMod": 1,
+  "intMod": 0,
+  "wisMod": 1,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 15,
+      "de": 4
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 10 ft.",
+      "Darkvision 60 ft.",
+      "passive perception 13"
+    ],
+    "de": [
+      "Blindsicht 3 m",
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "understands Common and Draconic but can't speak"
+    ],
+    "de": [
+      "Versteht Drakonisch und Gemeinsprache",
+      "aber kann nicht sprechen"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +4",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Senses",
+        "text": "The pseudodragon has advantage on Wisdom (Perception) checks that rely on sight, hearing, or smell."
+      },
+      {
+        "name": "Magic Resistance",
+        "text": "The pseudodragon has advantage on saving throws against spells and other magical effects."
+      },
+      {
+        "name": "Limited Telepathy",
+        "text": "The pseudodragon can magically communicate simple ideas, emotions, and images telepathically with any creature within 100 ft. of it that can understand a language."
+      }
+    ],
+    "de": [
+      {
+        "name": "Beschränkte Telepathie",
+        "text": "Der Pseudodrache kann magisch einfache Ideen, Emotionen und Bilder telepathisch an jede Kreatur, die eine Sprache versteht, im Abstand von bis zu 30 Metern von ihm übermitteln."
+      },
+      {
+        "name": "Magieresistenz",
+        "text": "Der Pseudodrache ist bei Rettungswürfen gegen Zauber und andere magische Effekte im Vorteil."
+      },
+      {
+        "name": "Scharfe Sinne",
+        "text": "Der Pseudodrache ist bei Weisheitswürfen (Wahrnehmung), die auf Sicht, Gehör oder Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) piercing damage."
+      },
+      {
+        "name": "Sting",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 4 (1d4 + 2) piercing damage, and the target must succeed on a DC 11 Constitution saving throw or become poisoned for 1 hour. If the saving throw fails by 5 or more, the target falls unconscious for the same duration, or until it takes damage or another creature uses an action to shake it awake."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 4 (1W4+2) Stichschaden."
+      },
+      {
+        "name": "Stachel",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 4 (1W4+2) Stichschaden, und das Ziel muss einen SG-11-Konstitutionsrettungswurf bestehen, oder es ist eine Stunde lang vergiftet. Wenn der Rettungswurf um mindestens 5 Punkte scheitert, wird das Ziel ebenso lange bewusstlos, oder bis es Schaden erleidet oder eine andere Kreatur eine Aktion verwendet, um es wachzurütteln."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/283/1000/1000/636252770521719244.jpeg",
+  "type": {
+    "en": "dragon",
+    "de": "Drache"
+  },
+  "alignment": {
+    "de": "neutral gut"
+  },
+  "token": {
+    "file": "PseudodragonCoastal (1).webp",
+    "variant": "coastal"
+  },
+  "tokens": [
+    {
+      "file": "PseudodragonCoastal (2).webp",
+      "variant": "coastal"
+    },
+    {
+      "file": "PseudodragonCoastal (3).webp",
+      "variant": "coastal"
+    },
+    {
+      "file": "PseudodragonCoastal (4).webp",
+      "variant": "coastal"
+    },
+    {
+      "file": "PseudodragonDesert (1).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "PseudodragonDesert (2).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "PseudodragonDesert (3).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "PseudodragonDesert (4).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "PseudodragonFamiliar (1).webp",
+      "variant": "familiar"
+    },
+    {
+      "file": "PseudodragonFamiliar (2).webp",
+      "variant": "familiar"
+    },
+    {
+      "file": "PseudodragonFamiliar (3).webp",
+      "variant": "familiar"
+    },
+    {
+      "file": "PseudodragonFamiliar (4).webp",
+      "variant": "familiar"
+    },
+    {
+      "file": "PseudodragonFamiliar (5).webp",
+      "variant": "familiar"
+    },
+    {
+      "file": "PseudodragonFamiliar (6).webp",
+      "variant": "familiar"
+    },
+    {
+      "file": "PseudodragonForest (1).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PseudodragonForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PseudodragonForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PseudodragonForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PseudodragonForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "PseudodragonForest (6).webp",
+      "variant": "forest"
+    }
+  ],
+  "size": {
+    "de": "Winzig"
+  },
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

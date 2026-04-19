@@ -1,0 +1,66 @@
+{
+  "id": 304,
+  "slug": "polymorph",
+  "name": "Polymorph",
+  "nameDe": "Verwandlung",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "druid",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Druide",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "4th-level transmutation",
+    "de": "Stufe 4 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 hour",
+    "de": "Konzentration, bis zu 1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a caterpillar cocoon",
+      "de": "ein Raupenkokon"
+    },
+    "raw": {
+      "en": "V, S, M (a caterpillar cocoon)",
+      "de": "V, G, M (ein Raupenkokon)"
+    }
+  },
+  "description": {
+    "en": "This spell transforms a creature that you can see within range into a new form. An unwilling creature must make a wisdom saving throw to avoid the effect. A shapechanger automatically succeeds on this saving throw. The transformation lasts for the duration, or until the target drops to 0 hit points or dies. The new form can be any beast whose challenge rating is equal to or less than the target's (or the target's level, if it doesn't have a challenge rating). The target's game statistics, including mental ability scores, are replaced by the statistics of the chosen beast. It retains its alignment and personality. The target assumes the hit points of its new form. When it reverts to its normal form, the creature returns to the number of hit points it had before it transformed. If it reverts as a result of dropping to 0 hit points, any excess damage carries over to its normal form. As long as the excess damage doesn't reduce the creature's normal form to 0 hit points, it isn't knocked unconscious. The creature is limited in the actions it can perform by the nature of its new form, and it can't speak, cast spells, or take any other action that requires hands or speech. The target's gear melds into the new form. The creature can't activate, use, wield, or otherwise benefit from any of its equipment.",
+    "de": "Dieser Zauber verwandelt eine Kreatur in Reichweite, die du sehen kannst, in eine neue Gestalt Eine unwillige Kreatur muss einen Weisheitsrettungswurf ausführen, um den Effekt zu verhindern. Der Zauber wirkt nicht auf einen Gestaltwandler oder eine Kreatur mit 0 Trefferpunkten. Die Verwandlung hält bis zum Ende der Wirkungsdauer an, oder bis die Trefferpunkte des Ziels auf 0 fallen oder es stirbt. Bei der neuen Gestalt kann es sich um ein beliebiges Tier handeln, dessen Herausforderungsgrad gleich oder niedriger als der des Ziels ist (wenn das Ziel keinen Herausforderungsgrad hat, verwende seine Stufe). Die Spielwerte des Ziels, inklusive mentaler Attributswerte, werden durch die Werte des gewählten Tiers ersetzt. Es behält seine Gesinnung und Persönlichkeit. Das Ziel erhält die Trefferpunkte seiner neuen Gestalt. Nimmt es wieder seine ursprüngliche Gestalt an, besitzt es die gleichen Trefferpunkte wie vor der Verwandlung. Findet die Rückverwandlung statt, weil die Trefferpunkte des Ziels auf 0 sinken, wird überschüssiger Schaden auf seine ursprüngliche Gestalt übertragen. Sofern dieser überschüssige Schaden die ursprüngliche Gestalt der Kreatur nicht auf 0 Trefferpunkte reduziert, wird sie nicht bewusstlos. Die Kreatur kann nur Aktionen durchführen, die in ihrer neuen Gestalt möglich sind. Sie kann nicht sprechen, Zauber wirken oder andere Aktionen ausführen, die Hände oder Sprache erfordern. Die Ausrüstung des Ziels verschmilzt mit seiner neuen Gestalt Es kann die Ausrüstung nicht aktivieren, verwenden, führen oder anderweitig nutzen."
+  },
+  "image": "polymorph",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

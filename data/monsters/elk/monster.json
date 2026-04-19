@@ -1,0 +1,188 @@
+{
+  "id": 101,
+  "slug": "elk",
+  "name": "Elk",
+  "nameDe": "Elch",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "10",
+    "de": "10"
+  },
+  "hp": {
+    "en": "13 (2d10 + 2)",
+    "de": "13 (2W10+2)"
+  },
+  "str": 16,
+  "dex": 10,
+  "con": 12,
+  "int": 2,
+  "wis": 10,
+  "cha": 6,
+  "strMod": 3,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 50,
+      "de": 15
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Charge",
+        "text": "If the elk moves at least 20 ft. straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra 7 (2d6) damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone."
+      }
+    ],
+    "de": [
+      {
+        "name": "Sturmangriff",
+        "text": "Wenn der Elch sich mindestens sechs Meter weit direkt auf ein Ziel zubewegt und es dann im selben Zug mit einem Rammbock-Angriff trifft, erleidet das Ziel zusätzlich 7 (2W6) Schaden. Wenn das Ziel eine Kreatur ist, muss es einen SG-13-Stärkerettungswurf bestehen, oder es wird umgestoßen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Ram",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) bludgeoning damage."
+      },
+      {
+        "name": "Hooves",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one prone creature. Hit: 8 (2d4 + 3) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Hufe",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, eine liegende Kreatur. Treffer: 8 (2W4+3) Wuchtschaden."
+      },
+      {
+        "name": "Rammbock",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W6+3) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "ElkForest (1).webp",
+    "variant": "forest"
+  },
+  "tokens": [
+    {
+      "file": "ElkForest (10).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ElkForest (11).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ElkForest (12).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ElkForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ElkForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ElkForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ElkForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ElkForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ElkForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ElkForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ElkForest (9).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "ElkWinter (1).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "ElkWinter (2).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "ElkWinter (3).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "ElkWinter (4).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "ElkWinter (5).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "ElkWinter (6).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "ElkWinter (7).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "ElkWinter (8).webp",
+      "variant": "winter"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

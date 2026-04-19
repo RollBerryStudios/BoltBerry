@@ -1,0 +1,58 @@
+{
+  "id": 37,
+  "slug": "guidance",
+  "name": "Guidance",
+  "nameDe": "Göttliche Führung",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "druid"
+    ],
+    "de": [
+      "Kleriker",
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "Divination cantrip",
+    "de": "Erkenntnismagie Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You touch one willing creature. Once before the spell ends, the target can roll a d4 and add the number rolled to one ability check of its choice. It can roll the die before or after making the ability check. The spell then ends.",
+    "de": "Du berührst eine bereitwillige Kreatur. Einmal vor dem Ende des Zaubers kann das Ziel mit einem W4 würfeln und das Ergebnis zu einem Attributswurf seiner Wahl addieren. Es kann mit dem W4 vor oder nach dem Attributswurf würfeln. Dann endet der Zauber."
+  },
+  "image": "guidance",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,233 @@
+{
+  "id": 147,
+  "slug": "glabrezu",
+  "name": "Glabrezu",
+  "source": "SRD",
+  "meta": {
+    "en": "Large fiend, chaotic evil",
+    "de": "Großer Unhold, chaotisch böse"
+  },
+  "challenge": "9",
+  "xp": 5000,
+  "ac": {
+    "en": "17 (Natural Armor)",
+    "de": "17 (Natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "157 (15d10 + 75)",
+    "de": "157 (15W10 + 75)"
+  },
+  "str": 20,
+  "dex": 15,
+  "con": 21,
+  "int": 19,
+  "wis": 17,
+  "cha": 16,
+  "strMod": 5,
+  "dexMod": 2,
+  "conMod": 5,
+  "intMod": 4,
+  "wisMod": 3,
+  "chaMod": 3,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "truesight 120 ft.",
+      "passive perception 13"
+    ],
+    "de": [
+      "Wahrer Blick 36 m",
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Abyssal",
+      "telepathy 120 ft."
+    ],
+    "de": [
+      "Abyssisch",
+      "Telepathie auf 36 m"
+    ]
+  },
+  "savingThrows": [
+    "Str +9",
+    "Kon +9",
+    "Wei +7",
+    "Cha +7"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Magic Resistance",
+        "text": "The glabrezu has advantage on saving throws against spells and other magical effects."
+      }
+    ],
+    "de": [
+      {
+        "name": "Magieresistenz",
+        "text": "Der Glabrezu ist bei Rettungswürfen gegen Zauber und andere magische Effekte im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The glabrezu makes four attacks: two with its pincers and two with its fists. Alternatively, it makes two attacks with its pincers and casts one spell."
+      },
+      {
+        "name": "Pincer",
+        "text": "Melee Weapon Attack: +9 to hit, reach 10 ft., one target. Hit: 16 (2d10 + 5) bludgeoning damage. If the target is a Medium or smaller creature, it is grappled (escape DC 15). The glabrezu has two pincers, each of which can grapple only one target."
+      },
+      {
+        "name": "Fist",
+        "text": "Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 7 (2d4 + 2) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Glabrezu führt vier Angriffe aus: zwei mit seinen Zangen und zwei mit seinen Fäusten. Alternativ führt er zwei Angriffe mit seinen Zangen aus und wirkt einen Zauber."
+      },
+      {
+        "name": "Faust",
+        "text": "Nahkampfwaffenangriff: +9 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (2W4+2) Wuchtschaden."
+      },
+      {
+        "name": "Zange",
+        "text": "Nahkampfwaffenangriff: +9 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 16 (2W10+5) Wuchtschaden. Wenn das Ziel eine höchstens mittelgroße Kreatur ist, wird es gepackt (Rettungswurf-SG 15). Der Glabrezu hat zwei Zangen, die jeweils ein Ziel packen können."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/337/315/315/636252776677682465.jpeg",
+  "size": {
+    "en": "large",
+    "de": "groß"
+  },
+  "type": {
+    "en": "fiend",
+    "de": "Unhold"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "Glabrezu (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Glabrezu (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Glabrezu (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

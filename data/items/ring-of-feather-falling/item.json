@@ -1,0 +1,30 @@
+{
+  "id": 274,
+  "slug": "ring-of-feather-falling",
+  "name": "Ring of Feather Falling",
+  "nameDe": "Ring des Federfalls",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 200000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Ring, rare (requires attunement) When you fall while wearing this ring, you descend 60 feet per round and take no damage from falling.",
+    "de": "Wenn du fällst, während du diesen Ring trägst, sinkst du mit einer Geschwindigkeit von 18 Metern pro Runde und erleidest keinen Fallschaden."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "ring",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

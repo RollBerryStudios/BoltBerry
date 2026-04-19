@@ -1,0 +1,236 @@
+{
+  "id": 210,
+  "slug": "nightmare",
+  "name": "Nightmare",
+  "nameDe": "Nachtmahr",
+  "source": "SRD",
+  "meta": {
+    "en": "Large fiend, neutral evil",
+    "de": "Großer Unhold, neutral böse"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "68 (8d10 + 24)",
+    "de": "68 (8W10+24)"
+  },
+  "str": 18,
+  "dex": 15,
+  "con": 16,
+  "int": 10,
+  "wis": 13,
+  "cha": 15,
+  "strMod": 4,
+  "dexMod": 2,
+  "conMod": 3,
+  "intMod": 0,
+  "wisMod": 1,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 60,
+      "de": 18
+    },
+    "fly": {
+      "en": 90,
+      "de": 27
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 11"
+    ],
+    "de": [
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "understands Abyssal",
+      "Common",
+      "and Infernal but can't speak"
+    ],
+    "de": [
+      "Versteht Abyssisch",
+      "Gemeinsprache und Infernalisch",
+      "aber kann nicht sprechen"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Confer Fire Resistance",
+        "text": "The nightmare can grant resistance to fire damage to anyone riding it."
+      },
+      {
+        "name": "Illumination",
+        "text": "The nightmare sheds bright light in a 10-foot radius and dim light for an additional 10 feet."
+      }
+    ],
+    "de": [
+      {
+        "name": "Beleuchtung",
+        "text": "Der Nachtmahr spendet im Radius von drei Metern helles Licht und im Radius von weiteren drei Metern dämmriges Licht."
+      },
+      {
+        "name": "Feuerresistenz gewähren",
+        "text": "Der Nachtmahr kann jedem, der ihn reitet, Resistenz gegen Feuerschaden gewähren."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Hooves",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) bludgeoning damage plus 7 (2d6) fire damage."
+      },
+      {
+        "name": "Ethereal Stride",
+        "text": "The nightmare and up to three willing creatures within 5 feet of it magically enter the Ethereal Plane from the Material Plane, or vice versa."
+      }
+    ],
+    "de": [
+      {
+        "name": "Hufe",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 13 (2W8+4) Wuchtschaden plus 7 (2W6) Feuerschaden."
+      },
+      {
+        "name": "Ätherischer Schritt",
+        "text": "Der Nachtmahr und bis zu drei bereitwillige Kreaturen im Abstand von bis zu 1,5 Metern von ihm betreten von der materiellen Ebene aus magisch die Ätherebene oder umgekehrt."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/273/315/315/636252769493472144.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "fiend",
+    "de": "Unhold"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "Nightmare (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Nightmare (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Nightmare (9).webp",
+      "variant": ""
+    },
+    {
+      "file": "NightmareSkeleton (1).webp",
+      "variant": "skeleton"
+    },
+    {
+      "file": "NightmareSkeleton (2).webp",
+      "variant": "skeleton"
+    },
+    {
+      "file": "NightmareSkeleton (3).webp",
+      "variant": "skeleton"
+    },
+    {
+      "file": "NightmareSkeleton (4).webp",
+      "variant": "skeleton"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

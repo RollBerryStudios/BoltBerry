@@ -1,0 +1,55 @@
+{
+  "id": 189,
+  "slug": "time-stop",
+  "name": "Time Stop",
+  "nameDe": "Zeitstopp",
+  "level": {
+    "en": "9",
+    "de": "Grad 9"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "9th-level transmutation",
+    "de": "Stufe 9 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "You briefly stop the flow of time for everyone but yourself. No time passes for other creatures, while you take 1d4 + 1 turns in a row, during which you can use actions and move as normal. This spell ends if one of the actions you use during this period, or any effects that you create during this period, affects a creature other than you or an object being worn or carried by someone other than you. In addition, the spell ends if you move to a place more than 1,000 feet from the location where you cast it.",
+    "de": "Du stoppst kurzzeitig den Fluss der Zeit für alle außer dir selbst. Für andere Kreaturen vergeht keine Zeit, während du 1W4+1 Züge hintereinander bekommst, in denen du wie gewohnt Aktionen ausführen und dich bewegen kannst. Dieser Zauber endet, wenn eine deiner Aktionen oder ein von dir erschaffener Effekt während dieser Zeitspanne eine Kreatur außer dir selbst oder einen Gegenstand beeinflusst, den jemand anderes außer dir trägt. Zudem endet der Zauber, wenn du dich mehr als 300 Meter von dem Ort entfernst, an dem du ihn gewirkt hast."
+  },
+  "image": "slow",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

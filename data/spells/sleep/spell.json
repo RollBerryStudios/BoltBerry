@@ -1,0 +1,68 @@
+{
+  "id": 74,
+  "slug": "sleep",
+  "name": "Sleep",
+  "nameDe": "Schlaf",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Enchantment",
+    "de": "Verzauberung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level enchantment",
+    "de": "Stufe 1 Verzauberung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "90 feet",
+    "de": "27 Meter"
+  },
+  "duration": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a pinch of fine sand, rose petals, or a cricket",
+      "de": "eine Prise feinen Sand, Rosenblütenblätter oder eine Grille"
+    },
+    "raw": {
+      "en": "V, S, M (a pinch of fine sand, rose petals, or a cricket)",
+      "de": "V, G, M (eine Prise feinen Sand, Rosenblütenblätter oder eine Grille)"
+    }
+  },
+  "description": {
+    "en": "This spell sends creatures into a magical slumber. Roll 5d8; the total is how many hit points of creatures this spell can affect. Creatures within 20 feet of a point you choose within range are affected in ascending order of their current hit points (ignoring unconscious creatures). Starting with the creature that has the lowest current hit points, each creature affected by this spell falls unconscious until the spell ends, the sleeper takes damage, or someone uses an action to shake or slap the sleeper awake. Subtract each creature's hit points from the total before moving on to the creature with the next lowest hit points. A creature's hit points must be equal to or less than the remaining total for that creature to be affected. Undead and creatures immune to being charmed aren't affected by this spell.",
+    "de": "Dieser Zauber versetzt Kreaturen in einen magischen Schlaf. Würfle mit fünf W8. Die Summe gibt an, auf wie viele Trefferpunkte an Kreaturen dieser Zauber wirken kann. Kreaturen im Abstand von bis zu sechs Metern um einen Punkt deiner Wahl in Reichweite sind in aufsteigender Reihenfolge ihrer aktuellen Trefferpunkte betroffen (bewusstlose Kreaturen werden ignoriert). Beginnend mit der Kreatur mit den niedrigsten aktuellen Trefferpunkten verliert jede Kreatur, auf die der Zauber wirkt, das Bewusstsein. Dieser Zustand hält an, bis die Wirkungsdauer endet, der Schlafende Schaden erleidet oder jemand den Schlafenden mit einer Aktion aufweckt. Subtrahiere die Trefferpunkte jeder Kreatur von der Summe, bevor du zur Kreatur mit den nächstniedrigsten Trefferpunkten übergehst. Die Trefferpunkte einer Kreatur müssen kleiner oder gleich der verbleibenden Summe sein, damit der Zauber auf die Kreatur wirkt. Der Zauber wirkt nicht auf Untote und Kreaturen, die nicht bezaubert werden können. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, würfle für jeden Grad über dem 1. zusätzlich mit zwei W8."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 2nd level or higher, roll an additional 2d8 for each slot level above 1st.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, würfle für jeden Grad über dem 1. zusätzlich mit zwei W8."
+  },
+  "image": "sleep",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

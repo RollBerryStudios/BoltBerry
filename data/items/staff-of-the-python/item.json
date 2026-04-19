@@ -1,0 +1,30 @@
+{
+  "id": 275,
+  "slug": "staff-of-the-python",
+  "name": "Staff of the Python",
+  "nameDe": "Stab der Python",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 200000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Staff, very rare (requires attunement by a cleric, druid, or warlock) You can use an action to speak this staff's command word and throw the staff on the ground within 10 feet of you. The staff becomes a giant constrictor snake under your control and acts on its own initiative count. By using a bonus action to speak the command word again, you return the staff to its normal form in a space formerly occupied by the snake. On your turn, you can mentally command the snake if it is within 60 feet of you and you aren't incapacitated. You decide what action the snake takes and where it moves during its next turn, or you can issue it a general command, such as to attack your enemies or guard a location. If the snake is reduced to 0 hit points, it dies and reverts to its staff form. The staff then shatters and is destroyed. If the snake reverts to staff form before losing all its hit points, it regains all of them.",
+    "de": "Du kannst als Aktion das Befehlswort dieses Stabs aussprechen und ihn im Abstand von bis zu drei Metern von dir auf den Boden werfen. Der Stab wird zu einer Riesenwürgeschlange unter deiner Kontrolle, die ihre eigene Initiative würfelt. Wenn du eine Bonusaktion verwendest, um das Befehlswort erneut auszusprechen, verwandelst du den Stab wieder in seine normale Gestalt zurück Er erscheint in dem Bereich, den vorher die Schlange besetzt hatte. Du kannst der Schlange in deinem Zug mentale Befehle erteilen, wenn sie sich im Abstand von bis zu 18 Metern von dir befindet und du nicht kampfunfähig bist. Du entscheidest über die Aktion der Schlange und ihre Bewegung in ihrem nächsten Zug. Alternativ kannst du einen allgemeinen Befehl erteilen und sie beispielsweise deine Feinde angreifen oder einen Ort bewachen lassen. Wenn die Trefferpunkte der Schlange auf 0 sinken, stirbt sie und verwandelt sich wieder in ihre Stabgestalt Der Stab zerbricht dann und wird zerstört. Wenn die Schlange wieder zu einem Stab wird, bevor sie all ihre Trefferpunkte verliert, erhält sie alle Trefferpunkte zurück."
+  },
+  "properties": {
+    "en": "requires attunement by a cleric",
+    "de": "erfordert einstimmung eines klerikers"
+  },
+  "image": "staff",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

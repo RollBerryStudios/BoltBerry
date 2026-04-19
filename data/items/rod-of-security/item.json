@@ -1,0 +1,26 @@
+{
+  "id": 436,
+  "slug": "rod-of-security",
+  "name": "Rod of Security",
+  "nameDe": "Zepter der Sicherheit",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 9000000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Rod, very rare While holding this rod, you can use an action to activate it. The rod then instantly transports you and up to 199 other willing creatures you can see to a paradise that exists in an extraplanar space. You choose the form that the paradise takes. It could be a tranquil garden, lovely glade, cheery tavern, immense palace, tropical island, fantastic carnival, or whatever else you can imagine. Regardless of its nature, the paradise contains enough water and food to sustain its visitors. Everything else that can be interacted with inside the extraplanar space can exist only there. For example, a flower picked from a garden in the paradise disappears if it is taken outside the extraplanar space. For each hour spent in the paradise, a visitor regains hit points as if it had spent 1 Hit Die. Also, creatures don't age while in the paradise, although time passes normally. Visitors can remain in the paradise for up to 200 days divided by the number of creatures present (round down). When the time runs out or you use an action to end it, all visitors reappear in the location they occupied when you activated the rod, or an unoccupied space nearest that location. The rod can't be used again until ten days have passed.",
+    "de": "Wenn du dieses Zepter hältst, kannst du es als Aktion aktivieren. Das Zepter transportiert dann dich und bis zu 199 bereitwillige Kreaturen, die du sehen kannst, sofort in ein Paradies in einem extraplanaren Bereich. Du bestimmst, welche Gestalt das Paradies annimmt Vielleicht ist es ein friedlicher Garten, eine wunderschöne Lichtung, eine heitere Taverne, ein gigantischer Palast, eine tropische Insel, ein fantastischer Jahrmarkt - oder was auch immer du dir vorstellen kannst. Das Paradies enthält unabhängig von seinem Aussehen genug Wasser und Nahrung, um seine Besucher zu versorgen. Ansonsten kann alles, womit in dem extraplanaren Bereich interagiert werden kann, nur dort existieren. Wenn zum Beispiel jemand eine Blume aus einem Garten im Paradies pflückt, verschwindet sie, wenn sie aus dem extraplanaren Bereich gebracht wird. Für jede im Paradies verbrachte Stunde erhält ein Besucher so viele Trefferpunkte zurück, wie er durch einen Trefferwürfel zurückerhalten hätte. Weiterhin altern Kreaturen nicht, solange sie sich im Paradies befinden, auch wenn die Zeit normal vergeht. Besucher können für bis zu 200 Tage geteilt durch die Anzahl der Kreaturen im Paradies bleiben (abgerundet). Wenn die Zeit abläuft oder du eine Aktion verwendest, um das Paradies zu verlassen, erscheinen alle Besucher an derselben Stelle, die sie besetzt hatten, als du das Zepter aktiviert hast, oder an der nächsten freien Stelle. Das Zepter kannst erst nach zehn Tagen wiederverwendet werden."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

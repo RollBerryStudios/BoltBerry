@@ -1,0 +1,62 @@
+{
+  "id": 45,
+  "slug": "identify",
+  "name": "Identify",
+  "nameDe": "Identifizieren",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level divination (Ritual)",
+    "de": "Stufe 1 Erkenntnismagie (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 minute",
+    "de": "1 Minute"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a pearl worth at least 100 gp and an owl feather",
+      "de": "eine Perle im Wert von mindestens 100 Goldstücken und eine Eulenfeder"
+    },
+    "raw": {
+      "en": "V, S, M (a pearl worth at least 100 gp and an owl feather)",
+      "de": "V, G, M (eine Perle im Wert von mindestens 100 Goldstücken und eine Eulenfeder)"
+    }
+  },
+  "description": {
+    "en": "You choose one object that you must touch throughout the casting of the spell. If it is a magic item or some other magic-imbued object, you learn its properties and how to use them, whether it requires attunement to use, and how many charges it has, if any. You learn whether any spells are affecting the item and what they are. If the item was created by a spell, you learn which spell created it. If you instead touch a creature throughout the casting, you learn what spells, if any, are currently affecting it.",
+    "de": "Du wählst einen Gegenstand, den du während der gesamten Wirkungsdauer des Zaubers berühren musst. Falls es ein magischer Gegenstand oder ein anderweitig magisch durchdrungenes Objekt ist, erkennst du seine Eigenschaften und ihre Anwendung, ob die Nutzung eine Einstimmung erfordert und wie viele Ladungen es besitzt, falls zutreffend. Du erfährst, ob Zauber auf das Objekt wirken, und wenn ja, welche Zauber. Falls das Objekt durch einen Zauber erzeugt wurde, erfährst du, durch welchen Zauber. Wenn du stattdessen eine Kreatur beim Wirken des Zaubers durchgehend berührst, erfährst du, von welchen Zaubern sie derzeit betroffen ist, falls vorhanden."
+  },
+  "image": "identify",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

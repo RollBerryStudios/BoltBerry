@@ -1,0 +1,60 @@
+{
+  "id": 61,
+  "slug": "purify-food-and-drink",
+  "name": "Purify Food and Drink",
+  "nameDe": "Nahrung und Wasser reinigen",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "druid",
+      "paladin"
+    ],
+    "de": [
+      "Kleriker",
+      "Druide",
+      "Paladin"
+    ]
+  },
+  "type": {
+    "en": "1st-level transmutation",
+    "de": "Stufe 1 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "10 feet",
+    "de": "3 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "All nonmagical food and drink within a 5-foot radius sphere centered on a point of your choice within range is purified and rendered free of poison and disease.",
+    "de": "Alle nichtmagischen Nahrungsmittel und Getränke in einer Sphäre mit einem Radius von 1,5 Metern, die auf einen Punkt deiner Wahl in Reichweite zentriert ist, werden von Giften und Krankheiten gereinigt."
+  },
+  "image": "transmutation",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

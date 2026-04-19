@@ -1,0 +1,180 @@
+{
+  "id": 253,
+  "slug": "scorpion",
+  "name": "Scorpion",
+  "nameDe": "Skorpion",
+  "source": "SRD",
+  "meta": {
+    "en": "Tiny beast, unaligned",
+    "de": "Winzige Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "11 (Natural Armor)",
+    "de": "11 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "1 (1d4 - 1)",
+    "de": "1 (1W4-1)"
+  },
+  "str": 2,
+  "dex": 11,
+  "con": 8,
+  "int": 1,
+  "wis": 8,
+  "cha": 2,
+  "strMod": -4,
+  "dexMod": 0,
+  "conMod": -1,
+  "intMod": -5,
+  "wisMod": -1,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 10 ft.",
+      "passive perception 9"
+    ],
+    "de": [
+      "Blindsicht 3 m",
+      "Passive Wahrnehmung 9"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Sting",
+        "text": "Melee Weapon Attack: +2 to hit, reach 5 ft., one creature. Hit: 1 piercing damage, and the target must make a DC 9 Constitution saving throw, taking 4 (1d8) poison damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Stachel",
+        "text": "Nahkampfwaffenangriff: +2 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 1 Stichschaden, und das Ziel muss einen SG-9-Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet das Ziel 4 (1W8) Giftschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Winziges"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Scorpion (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Scorpion (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Scorpion (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,66 @@
+{
+  "id": 228,
+  "slug": "cone-of-cold",
+  "name": "Cone of Cold",
+  "nameDe": "Kältekegel",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "5th-level evocation",
+    "de": "Stufe 5 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self (60-foot cone)",
+    "de": "Selbst (18 Meter Kegel)"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a small crystal or a glass cone",
+      "de": "ein kleiner Kristall oder ein Glaskegel"
+    },
+    "raw": {
+      "en": "V, S, M (a small crystal or a glass cone)",
+      "de": "V, G, M (ein kleiner Kristall oder ein Glaskegel)"
+    }
+  },
+  "description": {
+    "en": "A blast of cold air erupts from your hands. Each creature in a 60-foot cone must make a constitution saving throw. A creature takes 8d8 cold damage on a failed save, or half as much damage on a successful one. A creature killed by this spell becomes a frozen statue until it thaws.",
+    "de": "Eiskalte Luft strömt aus deinen Händen. Jede Kreatur in einem Kegel von 18 Metern muss einen Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet die Kreatur 8W8 Kälteschaden, anderenfalls die Hälfte. Wird eine Kreatur durch diesen Zauber getötet, wird sie zu einer gefrorenen Statue, bis sie auftaut. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 5. um 1W8."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 5. um 1W8."
+  },
+  "image": "ray-of-frost",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

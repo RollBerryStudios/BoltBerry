@@ -1,0 +1,202 @@
+{
+  "id": 35,
+  "slug": "azer",
+  "name": "Azer",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium elemental, lawful neutral",
+    "de": "Mittleres Elementar, rechtschaffen neutral"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "17 (Natural Armor, Shield)",
+    "de": "17 (Natürliche Rüstung, Schild)"
+  },
+  "hp": {
+    "en": "39 (6d8 + 12)",
+    "de": "39 (6W8 + 12)"
+  },
+  "str": 17,
+  "dex": 12,
+  "con": 15,
+  "int": 12,
+  "wis": 13,
+  "cha": 10,
+  "strMod": 3,
+  "dexMod": 1,
+  "conMod": 2,
+  "intMod": 1,
+  "wisMod": 1,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 11"
+    ],
+    "de": [
+      "Passive Wahrnehmung 11"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Ignan"
+    ],
+    "de": [
+      "Ignal"
+    ]
+  },
+  "savingThrows": [
+    "Kon +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Heated Body",
+        "text": "A creature that touches the azer or hits it with a melee attack while within 5 ft. of it takes 5 (1d10) fire damage."
+      },
+      {
+        "name": "Heated Weapons",
+        "text": "When the azer hits with a metal melee weapon, it deals an extra 3 (1d6) fire damage (included in the attack)."
+      },
+      {
+        "name": "Illumination",
+        "text": "The azer sheds bright light in a 10-foot radius and dim light for an additional 10 ft.."
+      }
+    ],
+    "de": [
+      {
+        "name": "Beleuchtung",
+        "text": "Der Azer spendet im Radius von drei Metern helles Licht und im Radius von weiteren drei Metern dämmriges Licht."
+      },
+      {
+        "name": "Heiße Waffen",
+        "text": "Wenn der Azer mit einer metallischen Nahkampfwaffe trifft, bewirkt diese zusätzlich 3 (1W6) Feuerschaden (im Angriff enthalten)."
+      },
+      {
+        "name": "Heißer Körper",
+        "text": "Eine Kreatur, die den Azer berührt oder mit einem Nahkampfangriff trifft, während sie sich im Abstand von bis zu 1,5 Metern von ihm befindet, erleidet 5 (1W10) Feuerschaden."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Warhammer",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) bludgeoning damage, or 8 (1d10 + 3) bludgeoning damage if used with two hands to make a melee attack, plus 3 (1d6) fire damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Kriegshammer",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 7 (1W8+3) Wuchtschaden oder 8 (1W10+3) Wuchtschaden bei zweihändiger Führung und Nahkampfangriff, plus 3 (1W6) Feuerschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/171/1000/1000/636252761112348397.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "mittel"
+  },
+  "type": {
+    "en": "elemental",
+    "de": "Elementar"
+  },
+  "alignment": {
+    "en": "lawful neutral",
+    "de": "rechtschaffen neutral"
+  },
+  "token": {
+    "file": "Azer (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Azer (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Azer (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

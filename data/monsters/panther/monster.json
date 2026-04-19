@@ -1,0 +1,212 @@
+{
+  "id": 222,
+  "slug": "panther",
+  "name": "Panther",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": "12",
+  "hp": {
+    "en": "13 (3d8)",
+    "de": "13 (3W8)"
+  },
+  "str": 14,
+  "dex": 15,
+  "con": 10,
+  "int": 3,
+  "wis": 14,
+  "cha": 7,
+  "strMod": 2,
+  "dexMod": 2,
+  "conMod": 0,
+  "intMod": -4,
+  "wisMod": 2,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 50,
+      "de": 15
+    },
+    "climb": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 14"
+    ],
+    "de": [
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +6",
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Smell",
+        "text": "The panther has advantage on Wisdom (Perception) checks that rely on smell."
+      },
+      {
+        "name": "Pounce",
+        "text": "If the panther moves at least 20 ft. straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a DC 12 Strength saving throw or be knocked prone. If the target is prone, the panther can make one bite attack against it as a bonus action."
+      }
+    ],
+    "de": [
+      {
+        "name": "Anspringen",
+        "text": "Wenn der Panther sich mindestens sechs Meter weit direkt auf eine Kreatur zubewegt und sie dann im selben Zug mit einem Klauenangriff trifft, muss das Ziel einen SG-12-Stärkerettungswurf bestehen, oder es wird umgestoßen. Wenn das Ziel liegt, kann der Panther als Bonusaktion einen Bissangriff gegen es ausführen."
+      },
+      {
+        "name": "Scharfer Geruchssinn",
+        "text": "Die Panther ist bei Weisheitswürfen (Wahrnehmung), die auf Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      },
+      {
+        "name": "Claw",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) slashing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W6+2) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 4 (1W4+2) Hiebschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "medium",
+    "de": "mittel"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Bestie"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "ohne Ausrichtung"
+  },
+  "token": {
+    "file": "Panther (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Panther (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Panther (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

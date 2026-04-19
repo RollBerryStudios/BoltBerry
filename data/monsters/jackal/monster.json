@@ -1,0 +1,235 @@
+{
+  "id": 181,
+  "slug": "jackal",
+  "name": "Jackal",
+  "nameDe": "Schakal",
+  "source": "SRD",
+  "meta": {
+    "en": "Small beast, unaligned",
+    "de": "Kleine Bestie, ohne Gesinnung"
+  },
+  "challenge": "0",
+  "xp": 10,
+  "ac": {
+    "en": "12",
+    "de": "12"
+  },
+  "hp": {
+    "en": "3 (1d6)",
+    "de": "3 (1W6)"
+  },
+  "str": 8,
+  "dex": 15,
+  "con": 11,
+  "int": 3,
+  "wis": 12,
+  "cha": 6,
+  "strMod": -1,
+  "dexMod": 2,
+  "conMod": 0,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Hearing and Smell",
+        "text": "The jackal has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+      },
+      {
+        "name": "Pack Tactics",
+        "text": "The jackal has advantage on an attack roll against a creature if at least one of the jackal's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+      }
+    ],
+    "de": [
+      {
+        "name": "Rudeltaktik",
+        "text": "Der Schakal ist bei Angriffswürfen gegen eine Kreatur im Vorteil, wenn sich mindestens einer seiner Verbündeten, der nicht kampfunfähig ist, im Abstand von bis zu 1,5 Metern von der Kreatur befindet."
+      },
+      {
+        "name": "Scharfes Gehör und scharfer Geruchssinn",
+        "text": "Der Schakal ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör oder Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +1 to hit, reach 5 ft., one target. Hit: 1 (1d4 - 1) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +1 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 1 (1W4-1) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Kleines"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "JackalDesert (1).webp",
+    "variant": "desert"
+  },
+  "tokens": [
+    {
+      "file": "JackalDesert (10).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "JackalDesert (11).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "JackalDesert (12).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "JackalDesert (13).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "JackalDesert (14).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "JackalDesert (15).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "JackalDesert (16).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "JackalDesert (2).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "JackalDesert (3).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "JackalDesert (4).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "JackalDesert (5).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "JackalDesert (6).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "JackalDesert (7).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "JackalDesert (8).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "JackalDesert (9).webp",
+      "variant": "desert"
+    },
+    {
+      "file": "JackalSteppe (1).webp",
+      "variant": "steppe"
+    },
+    {
+      "file": "JackalSteppe (10).webp",
+      "variant": "steppe"
+    },
+    {
+      "file": "JackalSteppe (11).webp",
+      "variant": "steppe"
+    },
+    {
+      "file": "JackalSteppe (12).webp",
+      "variant": "steppe"
+    },
+    {
+      "file": "JackalSteppe (13).webp",
+      "variant": "steppe"
+    },
+    {
+      "file": "JackalSteppe (14).webp",
+      "variant": "steppe"
+    },
+    {
+      "file": "JackalSteppe (15).webp",
+      "variant": "steppe"
+    },
+    {
+      "file": "JackalSteppe (2).webp",
+      "variant": "steppe"
+    },
+    {
+      "file": "JackalSteppe (3).webp",
+      "variant": "steppe"
+    },
+    {
+      "file": "JackalSteppe (4).webp",
+      "variant": "steppe"
+    },
+    {
+      "file": "JackalSteppe (5).webp",
+      "variant": "steppe"
+    },
+    {
+      "file": "JackalSteppe (6).webp",
+      "variant": "steppe"
+    },
+    {
+      "file": "JackalSteppe (7).webp",
+      "variant": "steppe"
+    },
+    {
+      "file": "JackalSteppe (8).webp",
+      "variant": "steppe"
+    },
+    {
+      "file": "JackalSteppe (9).webp",
+      "variant": "steppe"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

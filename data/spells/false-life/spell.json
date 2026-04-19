@@ -1,0 +1,66 @@
+{
+  "id": 29,
+  "slug": "false-life",
+  "name": "False Life",
+  "nameDe": "Falsches Leben",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Necromancy",
+    "de": "Nekromantie"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level necromancy",
+    "de": "Stufe 1 Nekromantie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a small amount of alcohol or distilled spirits",
+      "de": "eine kleine Menge Alkohol oder Branntwein"
+    },
+    "raw": {
+      "en": "V, S, M (a small amount of alcohol or distilled spirits)",
+      "de": "V, G, M (eine kleine Menge Alkohol oder Branntwein)"
+    }
+  },
+  "description": {
+    "en": "Bolstering yourself with a necromantic facsimile of life, you gain 1d4 + 4 temporary hit points for the duration.",
+    "de": "Du stärkst dich selbst mit einer nekromantischen Nachahmung des Lebens und erhältst für die Wirkungsdauer 1W4+4 temporäre Trefferpunkte. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, erhältst du für jeden Grad über dem 1. zusätzliche 5 temporäre Trefferpunkte."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 2nd level or higher, you gain 5 additional temporary hit points for each slot level above 1st.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 2. Grades oder höher nutzt, erhältst du für jeden Grad über dem 1. zusätzliche 5 temporäre Trefferpunkte."
+  },
+  "image": "false-life",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

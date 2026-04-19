@@ -1,0 +1,26 @@
+{
+  "id": 198,
+  "slug": "potion-of-healing",
+  "name": "Potion of Healing",
+  "nameDe": "Heiltrank",
+  "category": {
+    "en": "POTIONS_OILS",
+    "de": "Tränke & Öle"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 5000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Potion, varies You regain hit points when you drink this potion. The number of hit points depends on the potion's rarity, as shown in the Potions of Healing table. Whatever its potency, the potion's red liquid glimmers when agitated. Potions of Healing (table)",
+    "de": "Wenn du diesen Trank trinkst, erhältst du Trefferpunkte zurück. Die Anzahl der wiederhergestellten Trefferpunkte hängt von der Seltenheit des Tranks entsprechend der Tabelle 'Heiltränke' ab. Unabhängig von ihrer Stärke bestehen Heiltränke aus roter Flüssigkeit, die schimmert, wenn sie bewegt wird."
+  },
+  "image": "health-potion",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

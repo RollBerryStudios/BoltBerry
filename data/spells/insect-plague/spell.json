@@ -1,0 +1,68 @@
+{
+  "id": 279,
+  "slug": "insect-plague",
+  "name": "Insect Plague",
+  "nameDe": "Insektenplage",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "druid",
+      "sorcerer"
+    ],
+    "de": [
+      "Kleriker",
+      "Druide",
+      "Zauberer"
+    ]
+  },
+  "type": {
+    "en": "5th-level conjuration",
+    "de": "Stufe 5 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "300 feet",
+    "de": "90 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a few grains of sugar, some kernels of grain, and a smear of fat",
+      "de": "ein paar Zuckerkörner, ein paar Getreidekörner und einen Klecks Fett"
+    },
+    "raw": {
+      "en": "V, S, M (a few grains of sugar, some kernels of grain, and a smear of fat)",
+      "de": "V, G, M (ein paar Zuckerkörner, ein paar Getreidekörner und einen Klecks Fett)"
+    }
+  },
+  "description": {
+    "en": "Swarming, biting locusts fill a 20-foot-radius sphere centered on a point you choose within range. The sphere spreads around corners. The sphere remains for the duration, and its area is lightly obscured. The sphere's area is difficult terrain. When the area appears, each creature in it must make a constitution saving throw. A creature takes 4d10 piercing damage on a failed save, or half as much damage on a successful one. A creature must also make this saving throw when it enters the spell's area for the first time on a turn or ends its turn there.",
+    "de": "Schwärmende, beißende Heuschrecken erscheinen in einer Sphäre mit einem Radius von sechs Metern, die um einen Punkt deiner Wahl in Reichweite zentriert ist. Die Sphäre breitet sich um Ecken aus. Die Sphäre bleibt für die Wirkungsdauer bestehen und ihr Bereich ist leicht verschleiert. Der Bereich der Sphäre ist schwieriges Gelände. Wenn der Bereich erscheint, muss jede Kreatur darin einen Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet die Kreatur 4W10 Stichschaden, anderenfalls die Hälfte. Wenn eine Kreatur den Bereich des Zaubers in einem Zug erstmals betritt oder ihren Zug darin beendet, muss sie diesen Rettungswurf ebenfalls ausführen. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 5. um 1W10."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d10 for each slot level above 5th.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 5. um 1W10."
+  },
+  "image": "insect-plague",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

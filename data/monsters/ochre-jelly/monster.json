@@ -1,0 +1,246 @@
+{
+  "id": 213,
+  "slug": "ochre-jelly",
+  "name": "Ochre Jelly",
+  "nameDe": "Ockergallerte",
+  "source": "SRD",
+  "meta": {
+    "en": "Large ooze, unaligned",
+    "de": "Großer Schleim, ohne Gesinnung"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "8",
+    "de": "8"
+  },
+  "hp": {
+    "en": "45 (6d10 + 12)",
+    "de": "45 (6W10+12)"
+  },
+  "str": 15,
+  "dex": 6,
+  "con": 14,
+  "int": 2,
+  "wis": 6,
+  "cha": 1,
+  "strMod": 2,
+  "dexMod": -2,
+  "conMod": 2,
+  "intMod": -4,
+  "wisMod": -2,
+  "chaMod": -5,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "climb": {
+      "en": 10,
+      "de": 3
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 60 ft. (blind beyond this radius)",
+      "passive perception 8"
+    ],
+    "de": [
+      "Blindsicht 18 m (blind außerhalb des Radius)",
+      "Passive Wahrnehmung 8"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Amorphous",
+        "text": "The jelly can move through a space as narrow as 1 inch wide without squeezing."
+      },
+      {
+        "name": "Spider Climb",
+        "text": "The jelly can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amorph",
+        "text": "Die Gallerte kann sich durch enge Bereiche mit einer Breite von nur 2,5 Zentimetern bewegen, ohne sich quetschen zu müssen."
+      },
+      {
+        "name": "Spinnenklettern",
+        "text": "Die Gallerte kann an schwierigen Oberflächen klettern, auch kopfüber an der Decke, ohne einen Attributswurf ausführen zu müssen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Pseudopod",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) bludgeoning damage plus 3 (1d6) acid damage."
+      },
+      {
+        "name": "Split",
+        "text": "When a jelly that is Medium or larger is subjected to lightning or slashing damage, it splits into two new jellies if it has at least 10 hit points. Each new jelly has hit points equal to half the current jelly's, rounded down. New jellies are one size smaller than the original jelly."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scheinfuß",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 9 (2W6+2) Wuchtschaden plus 3 (1W6) Säureschaden."
+      },
+      {
+        "name": "Teilen",
+        "text": "Wenn eine mindestens mittelgroße Gallerte Blitz- oder Hiebschaden erleidet, teilt sie sich in zwei neue Gallerten, sofern sie mindestens 10 Trefferpunkte hat. Jede neue Gallerte hat halb so viele Trefferpunkte wie die ursprüngliche Gallerte (abgerundet). Neue Gallerten sind eine Größenkategorie kleiner als die ursprüngliche Gallerte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/279/1000/1000/636252770058723674.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Groß"
+  },
+  "type": {
+    "en": "ooze",
+    "de": "Schlick"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "OchreJelly (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "OchreJelly (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (31).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "OchreJelly (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

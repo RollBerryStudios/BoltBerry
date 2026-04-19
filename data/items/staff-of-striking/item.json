@@ -1,0 +1,30 @@
+{
+  "id": 403,
+  "slug": "staff-of-striking",
+  "name": "Staff of Striking",
+  "nameDe": "Stab des Schlagens",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 2100000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Staff, very rare (requires attunement) This staff can be wielded as a magic quarterstaff that grants a +3 bonus to attack and damage rolls made with it. The staff has 10 charges. When you hit with a melee attack using it, you can expend up to 3 of its charges. For each charge you expend, the target takes an extra 1d6 force damage. The staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff becomes a nonmagical quarterstaff.",
+    "de": "Dieser Stab kann als magischer Kampfstab geführt werden, der einen Bonus von +3 auf Angriffs- und Schadenswürfe verleiht, die du mit ihm ausführst. Der Stab hat zehn Ladungen. Wenn du mit ihm einen erfolgreichen Nahkampfangriff ausführst, kannst du bis zu drei seiner Ladungen verbrauchen. Das Ziel erleidet für jede verbrauchte Ladung zusätzlich 1W6 Energieschaden. Der Stab erhält täglich im Morgengrauen 1W6+4 verbrauchte Ladungen zurück. Wenn du die letzte Ladung verbraucht hast, würfle mit einem W20. Bei einer 1 wird der Stab zu einem nichtmagischen Kampfstab."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "staff",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

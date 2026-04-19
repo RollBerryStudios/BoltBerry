@@ -1,0 +1,66 @@
+{
+  "id": 239,
+  "slug": "disintegrate",
+  "name": "Disintegrate",
+  "nameDe": "Auflösung",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "6th-level transmutation",
+    "de": "Stufe 6 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a lodestone and a pinch of dust",
+      "de": "ein Magnetstein und eine Prise Staub"
+    },
+    "raw": {
+      "en": "V, S, M (a lodestone and a pinch of dust)",
+      "de": "V, G, M (ein Magnetstein und eine Prise Staub)"
+    }
+  },
+  "description": {
+    "en": "A thin green ray springs from your pointing finger to a target that you can see within range. The target can be a creature, an object, or a creation of magical force, such as the wall created by wall of force. A creature targeted by this spell must make a dexterity saving throw. On a failed save, the target takes 10d6 + 40 force damage. If this damage reduces the target to 0 hit points, it is disintegrated. A disintegrated creature and everything it is wearing and carrying, except magic items, are reduced to a pile of fine gray dust. The creature can be restored to life only by means of a true resurrection or a wish spell. This spell automatically disintegrates a Large or smaller nonmagical object or a creation of magical force. If the target is a Huge or larger object or creation of force, this spell disintegrates a 10-foot-cube portion of it. A magic item is unaffected by this spell.",
+    "de": "Ein dünner grüner Strahl schießt von deinem ausgestreckten Finger auf ein Ziel in Reichweite, das du sehen kannst. Dabei kann es sich um eine Kreatur, einen Gegenstand oder ein Gebilde aus magischer Energie handeln, wie die Wand durch den Zauber Energiewand . Eine Kreatur, die zum Ziel dieses Zaubers wird, muss einen Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet das Ziel 10W6+40 Energieschaden. Werden durch diesen Schaden die Trefferpunkte des Ziels auf 0 verringert, wird es aufgelöst. Eine aufgelöste Kreatur und ihre gesamte Ausrüstung (mit Ausnahme von magischen Gegenständen) zerfällt zu feinem, grauen Staub. Sie kann nur durch die Zauber Wahre Auferstehung  oder Wunsch  wiedererweckt werden. Ein maximal großer nichtmagischer Gegenstand oder ein Gebilde aus magischer Energie wird von diesem Zauber automatisch aufgelöst. Handelt es sich bei dem Ziel um einen mindestens riesigen Gegenstand oder ein Gebilde aus magischer Energie, löst dieser Zauber einen Würfel mit drei Metern Kantenlänge davon auf. Ein magischer Gegenstand ist von diesem Zauber nicht betroffen. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 7. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 6. um 3W6."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 7th level or higher, the damage increases by 3d6 for each slot level above 6th.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 7. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 6. um 3W6."
+  },
+  "image": "desintegrate",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

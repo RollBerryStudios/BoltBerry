@@ -1,0 +1,60 @@
+{
+  "id": 266,
+  "slug": "greater-invisibility",
+  "name": "Greater Invisibility",
+  "nameDe": "Mächtige Unsichtbarkeit",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard",
+      "bard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier",
+      "Barde"
+    ]
+  },
+  "type": {
+    "en": "4th-level illusion",
+    "de": "Stufe 4 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "You or a creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target's person.",
+    "de": "Du - oder eine Kreatur, die du berührst - wirst unsichtbar, bis der Zauber endet. Alles, was das Ziel trägt, ist unsichtbar, solange es an der Person bleibt."
+  },
+  "image": "invisibility",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

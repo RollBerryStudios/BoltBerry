@@ -1,0 +1,66 @@
+{
+  "id": 19,
+  "slug": "detect-poison-and-disease",
+  "name": "Detect Poison and Disease",
+  "nameDe": "Gift und Krankheit entdecken",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "druid",
+      "paladin",
+      "ranger"
+    ],
+    "de": [
+      "Kleriker",
+      "Druide",
+      "Paladin",
+      "Waldläufer"
+    ]
+  },
+  "type": {
+    "en": "1st-level divination (Ritual)",
+    "de": "Stufe 1 Erkenntnismagie (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a yew leaf",
+      "de": "ein Eibenblatt"
+    },
+    "raw": {
+      "en": "V, S, M (a yew leaf)",
+      "de": "V, G, M (ein Eibenblatt)"
+    }
+  },
+  "description": {
+    "en": "For the duration, you can sense the presence and location of poisons, poisonous creatures, and diseases within 30 feet of you. You also identify the kind of poison, poisonous creature, or disease in each case. The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.",
+    "de": "Dieser Zauber durchdringt die meisten Barrieren, wird aber von 30 Zentimetern Stein, 2,5 Zentimetern gewöhnlichem Metall, dünnem Bleiblech sowie von einem Meter Holz oder Erde blockiert."
+  },
+  "image": "detect",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

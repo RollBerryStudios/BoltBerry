@@ -1,0 +1,30 @@
+{
+  "id": 390,
+  "slug": "staff-of-fire",
+  "name": "Staff of Fire",
+  "nameDe": "Stab des Feuers",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 1600000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Staff, very rare (requires attunement by a druid, sorcerer, warlock, or wizard) You have resistance to fire damage while you hold this staff. The staff has 10 charges. While holding it, you can use an action to expend 1 or more of its charges to cast one of the following spells from it, using your spell save DC: burning hands (1 charge), fireball (3 charges), or wall of fire (4 charges). The staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff blackens, crumbles into cinders, and is destroyed.",
+    "de": "Wenn du diesen Stab hältst, bist du gegen Feuerschaden resistent. Der Stab hat zehn Ladungen. Wenn du ihn hältst, kannst du als Aktion eine oder mehrere Ladungen verbrauchen, um einen der folgenden Zauber mit ihm zu wirken, wobei du deinen Zauberrettungswurf-SG verwendest: Brennende Hände  (eine Ladung), Feuerball  (drei Ladungen) oder Feuerwand  (vier Ladungen). Der Stab erhält täglich im Morgengrauen 1W6+4 verbrauchte Ladungen zurück. Wenn du die letzte Ladung verbraucht hast, würfle mit einem W20. Bei einer 1 wird der Stab schwarz, zerfällt zu Asche und ist damit zerstört."
+  },
+  "properties": {
+    "en": "requires attunement by a druid",
+    "de": "erfordert einstimmung eines druiden"
+  },
+  "image": "staff",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

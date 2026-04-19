@@ -1,0 +1,500 @@
+{
+  "id": 184,
+  "slug": "kobold",
+  "name": "Kobold",
+  "source": "SRD",
+  "meta": {
+    "en": "Small humanoid, lawful evil",
+    "de": "Kleiner humanoid, rechtschaffen böse"
+  },
+  "challenge": "1/8",
+  "xp": 25,
+  "ac": "12",
+  "hp": {
+    "en": "5 (2d6 - 2)",
+    "de": "5 (2W6 - 2)"
+  },
+  "str": 7,
+  "dex": 15,
+  "con": 9,
+  "int": 8,
+  "wis": 7,
+  "cha": 8,
+  "strMod": -2,
+  "dexMod": 2,
+  "conMod": -1,
+  "intMod": -1,
+  "wisMod": -2,
+  "chaMod": -1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 8"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 8"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Draconic"
+    ],
+    "de": [
+      "Drakonisch",
+      "Gemeinsprache"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Sunlight Sensitivity",
+        "text": "While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+      },
+      {
+        "name": "Pack Tactics",
+        "text": "The kobold has advantage on an attack roll against a creature if at least one of the kobold's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+      }
+    ],
+    "de": [
+      {
+        "name": "Empfindlich gegenüber Sonnenlicht",
+        "text": "Im Sonnenlicht ist der Kobold bei Angriffswürfen sowie bei Weisheitswürfen (Wahrnehmung), die Sicht erfordern, im Nachteil."
+      },
+      {
+        "name": "Rudeltaktik",
+        "text": "Der Kobold ist bei Angriffswürfen gegen eine Kreatur im Vorteil, wenn sich mindestens einer seiner Verbündeten, der nicht kampfunfähig ist, im Abstand von bis zu 1,5 Metern von der Kreatur befindet."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Dagger",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) piercing damage."
+      },
+      {
+        "name": "Sling",
+        "text": "Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit: 4 (1d4 + 2) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Dolch",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 4 (1W4+2) Stichschaden."
+      },
+      {
+        "name": "Schleuder",
+        "text": "Fernkampfwaffenangriff: +4 auf Treffer, Reichweite 9/36 m, ein Ziel. Treffer: 4 (1W4+2) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/379/1000/1000/636252780450300625.jpeg",
+  "size": {
+    "en": "small",
+    "de": "klein"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoid"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "KoboldArctic (1).webp",
+    "variant": "arctic"
+  },
+  "tokens": [
+    {
+      "file": "KoboldArctic (2).webp",
+      "variant": "arctic"
+    },
+    {
+      "file": "KoboldArctic (3).webp",
+      "variant": "arctic"
+    },
+    {
+      "file": "KoboldArctic (4).webp",
+      "variant": "arctic"
+    },
+    {
+      "file": "KoboldForest (1).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "KoboldForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "KoboldForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "KoboldForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "KoboldForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "KoboldForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "KoboldMountains (1).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "KoboldMountains (2).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "KoboldMountains (3).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "KoboldMountains (4).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "KoboldMountains (5).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "KoboldMountains (6).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "KoboldMountains (7).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "KoboldMountains (8).webp",
+      "variant": "mountains"
+    },
+    {
+      "file": "KoboldUnderdark (1).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (10).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (11).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (12).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (13).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (14).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (15).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (16).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (17).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (18).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (19).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (2).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (20).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (21).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (22).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (23).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (24).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (25).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (26).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (27).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (28).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (29).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (3).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (30).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (31).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (32).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (33).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (4).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (5).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (6).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (7).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (8).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUnderdark (9).webp",
+      "variant": "underdark"
+    },
+    {
+      "file": "KoboldUrban (1).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (10).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (11).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (12).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (13).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (14).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (15).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (16).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (17).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (18).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (19).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (2).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (20).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (21).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (22).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (23).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (24).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (25).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (26).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (27).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (28).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (29).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (3).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (30).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (31).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (32).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (33).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (34).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (35).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (36).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (37).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (38).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (39).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (4).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (40).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (41).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (42).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (43).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (44).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (45).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (5).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (6).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (7).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (8).webp",
+      "variant": "urban"
+    },
+    {
+      "file": "KoboldUrban (9).webp",
+      "variant": "urban"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

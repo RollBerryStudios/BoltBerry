@@ -1,0 +1,53 @@
+{
+  "id": 268,
+  "slug": "guardian-of-faith",
+  "name": "Guardian of Faith",
+  "nameDe": "Hüter des Glaubens",
+  "level": {
+    "en": "4",
+    "de": "Grad 4"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "4th-level conjuration",
+    "de": "Stufe 4 Beschwörung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "8 hours",
+    "de": "8 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "A Large spectral guardian appears and hovers for the duration in an unoccupied space of your choice that you can see within range. The guardian occupies that space and is indistinct except for a gleaming sword and shield emblazoned with the symbol of your deity. Any creature hostile to you that moves to a space within 10 feet of the guardian for the first time on a turn must succeed on a dexterity saving throw. The creature takes 20 radiant damage on a failed save, or half as much damage on a successful one. The guardian vanishes when it has dealt a total of 60 damage.",
+    "de": "Ein großer, geisterhafter Wächter erscheint in Reichweite an einer freien Stelle deiner Wahl, die du sehen kannst. Er schwebt dort für die Wirkungsdauer. Der Wächter besetzt diesen Bereich und ist bis auf ein leuchtendes Schwert und einen Schild mit dem Symbol deiner Gottheit nicht zu erkennen. Alle Kreaturen, die dir feindlich gesinnt sind und sich dem Wächter in einem Zug erstmals auf bis zu drei Meter nähern, müssen einen Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet die Kreatur 20 gleißenden Schaden, anderenfalls die Hälfte. Der Wächter verschwindet, wenn er insgesamt 60 Schaden verursacht hat."
+  },
+  "image": "guardian-of-faith",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

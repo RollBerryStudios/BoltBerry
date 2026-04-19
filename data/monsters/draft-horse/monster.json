@@ -1,0 +1,202 @@
+{
+  "id": 88,
+  "slug": "draft-horse",
+  "name": "Draft Horse",
+  "nameDe": "Zugpferd",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "10",
+    "de": "10"
+  },
+  "hp": {
+    "en": "19 (3d10 + 3)",
+    "de": "19 (3W10+3)"
+  },
+  "str": 18,
+  "dex": 10,
+  "con": 12,
+  "int": 2,
+  "wis": 11,
+  "cha": 7,
+  "strMod": 4,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": -4,
+  "wisMod": 0,
+  "chaMod": -2,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 10"
+    ],
+    "de": [
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Hooves",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 9 (2d4 + 4) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Hufe",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 9 (2W4+4) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "DraftHorseSummer (1).webp",
+    "variant": "summer"
+  },
+  "tokens": [
+    {
+      "file": "DraftHorseSummer (10).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DraftHorseSummer (11).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DraftHorseSummer (12).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DraftHorseSummer (13).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DraftHorseSummer (14).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DraftHorseSummer (2).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DraftHorseSummer (3).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DraftHorseSummer (4).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DraftHorseSummer (5).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DraftHorseSummer (6).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DraftHorseSummer (7).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DraftHorseSummer (8).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DraftHorseSummer (9).webp",
+      "variant": "summer"
+    },
+    {
+      "file": "DraftHorseWinter (1).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DraftHorseWinter (10).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DraftHorseWinter (11).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DraftHorseWinter (12).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DraftHorseWinter (13).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DraftHorseWinter (14).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DraftHorseWinter (15).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DraftHorseWinter (2).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DraftHorseWinter (3).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DraftHorseWinter (4).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DraftHorseWinter (5).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DraftHorseWinter (6).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DraftHorseWinter (7).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DraftHorseWinter (8).webp",
+      "variant": "winter"
+    },
+    {
+      "file": "DraftHorseWinter (9).webp",
+      "variant": "winter"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

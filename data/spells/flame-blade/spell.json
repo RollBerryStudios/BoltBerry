@@ -1,0 +1,64 @@
+{
+  "id": 254,
+  "slug": "flame-blade",
+  "name": "Flame Blade",
+  "nameDe": "Flammenklinge",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid"
+    ],
+    "de": [
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "2nd-level evocation",
+    "de": "Stufe 2 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 bonus action",
+    "de": "1 Bonusaktion"
+  },
+  "range": {
+    "en": "Self",
+    "de": "Selbst"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "leaf of sumac",
+      "de": "Sumachblatt"
+    },
+    "raw": {
+      "en": "V, S, M (leaf of sumac)",
+      "de": "V, G, M (Sumachblatt)"
+    }
+  },
+  "description": {
+    "en": "You evoke a fiery blade in your free hand. The blade is similar in size and shape to a scimitar, and it lasts for the duration. If you let go of the blade, it disappears, but you can evoke the blade again as a bonus action. You can use your action to make a melee spell attack with the fiery blade. On a hit, the target takes 3d6 fire damage. The flaming blade sheds bright light in a 10-foot radius and dim light for an additional 10 feet.",
+    "de": "Du erschaffst eine feurige Klinge in deiner freien Hand. Die Klinge ähnelt einem Krummsäbel und bleibt für die Wirkungsdauer bestehen. Lässt du die Klinge los, verschwindet sie. Du kannst sie jedoch als Bonusaktion wieder beschwören. Du kannst eine Aktion verwenden, um einen Nahkampf-Zauberangriff mit der Flammenklinge auszuführen. Bei einem Treffer erleidet das Ziel 3W6 Feuerschaden. Die Flammenklinge erhellt einen Radius von drei Metern mit hellem Licht und weitere drei Meter mit dämmrigem Licht. Auf höheren Graden:  Wenn du diesen Zauber wirkst, indem du einen Zauberplatz des 4. Grades oder höher nutzt, steigt der Schaden alle zwei Grade über dem 2. um 1W6."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for every two slot levels above 2nd.",
+    "de": "Wenn du diesen Zauber wirkst, indem du einen Zauberplatz des 4. Grades oder höher nutzt, steigt der Schaden alle zwei Grade über dem 2. um 1W6."
+  },
+  "image": "flame-blade",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

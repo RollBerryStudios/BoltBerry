@@ -1,0 +1,3655 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-04-18T17:37:34.901Z",
+  "monsterCount": 263,
+  "totalTokens": 13176,
+  "monsters": [
+    {
+      "id": 1,
+      "slug": "aboleth",
+      "name": "Aboleth",
+      "nameDe": "Aboleth",
+      "type": {
+        "en": "aberration",
+        "de": "Aberration"
+      },
+      "challenge": "10",
+      "size": "large",
+      "tokenDefault": "AbolethAberration (1).webp",
+      "tokenCount": 33
+    },
+    {
+      "id": 2,
+      "slug": "acolyte",
+      "name": "Acolyte",
+      "nameDe": "Akolyth",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (jedes Volk)"
+      },
+      "challenge": "1/4",
+      "size": "medium",
+      "tokenDefault": "AcolyteDarkDragonborn (1).webp",
+      "tokenCount": 486
+    },
+    {
+      "id": 13,
+      "slug": "air-elemental",
+      "name": "Air Elemental",
+      "nameDe": "Luftelementar",
+      "type": {
+        "en": "elemental",
+        "de": "Elementar"
+      },
+      "challenge": "5",
+      "size": "large",
+      "tokenDefault": "AirElementalDessert (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 26,
+      "slug": "animated-armor",
+      "name": "Animated Armor",
+      "nameDe": "Belebte Rüstung",
+      "type": {
+        "en": "construct",
+        "de": "Konstrukt"
+      },
+      "challenge": "1",
+      "size": "medium",
+      "tokenDefault": "AnimatedArmor (1).webp",
+      "tokenCount": 13
+    },
+    {
+      "id": 27,
+      "slug": "ankheg",
+      "name": "Ankheg",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "2",
+      "size": "large",
+      "tokenDefault": "Ankheg (1).webp",
+      "tokenCount": 16
+    },
+    {
+      "id": 29,
+      "slug": "ape",
+      "name": "Ape",
+      "nameDe": "Menschenaffe",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/2",
+      "size": "medium",
+      "tokenDefault": "Ape (1).webp",
+      "tokenCount": 14
+    },
+    {
+      "id": 31,
+      "slug": "assassin",
+      "name": "Assassin",
+      "nameDe": "Assassine",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (jedes Volk)"
+      },
+      "challenge": "8",
+      "size": "medium",
+      "tokenDefault": "Assassin (1).webp",
+      "tokenCount": 19
+    },
+    {
+      "id": 32,
+      "slug": "awakened-shrub",
+      "name": "Awakened Shrub",
+      "nameDe": "Erwachter Busch",
+      "type": {
+        "en": "plant",
+        "de": "Pflanze"
+      },
+      "challenge": "0",
+      "size": "small",
+      "tokenDefault": "AwakenedShrub (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 33,
+      "slug": "awakened-tree",
+      "name": "Awakened Tree",
+      "nameDe": "Erwachter Baum",
+      "type": {
+        "en": "plant",
+        "de": "Pflanze"
+      },
+      "challenge": "2",
+      "size": "huge",
+      "tokenDefault": "AwakenedTree (1).webp",
+      "tokenCount": 18
+    },
+    {
+      "id": 34,
+      "slug": "axe-beak",
+      "name": "Axe Beak",
+      "nameDe": "Axtschnabel",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/4",
+      "size": "large",
+      "tokenDefault": "AxeBeak (1).webp",
+      "tokenCount": 8
+    },
+    {
+      "id": 35,
+      "slug": "azer",
+      "name": "Azer",
+      "type": {
+        "en": "elemental",
+        "de": "Elementar"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "Azer (1).webp",
+      "tokenCount": 21
+    },
+    {
+      "id": 36,
+      "slug": "baboon",
+      "name": "Baboon",
+      "nameDe": "Pavian",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "small",
+      "tokenDefault": "Baboon (1).webp",
+      "tokenCount": 19
+    },
+    {
+      "id": 37,
+      "slug": "badger",
+      "name": "Badger",
+      "nameDe": "Dachs",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "tiny",
+      "tokenDefault": "Badger (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 39,
+      "slug": "bandit",
+      "name": "Bandit",
+      "nameDe": "Bandit",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (jedes Volk)"
+      },
+      "challenge": "1/8",
+      "size": "medium",
+      "tokenDefault": "BanditDragonbornArcticMelee (1).webp",
+      "tokenCount": 1009
+    },
+    {
+      "id": 40,
+      "slug": "bandit-captain",
+      "name": "Bandit Captain",
+      "nameDe": "Banditenhauptmann",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (jedes Volk)"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "BanditCaptainDragonbornArctic (1).webp",
+      "tokenCount": 550
+    },
+    {
+      "id": 41,
+      "slug": "banshee",
+      "name": "Banshee",
+      "nameDe": "Todesfee",
+      "type": {
+        "en": "undead",
+        "de": "Untot"
+      },
+      "challenge": "4",
+      "size": "medium",
+      "tokenDefault": "BansheeCoast (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 42,
+      "slug": "barbed-devil",
+      "name": "Barbed Devil",
+      "nameDe": "Klingenteufel",
+      "type": {
+        "en": "fiend",
+        "de": "Unhold (Teufel)"
+      },
+      "challenge": "5",
+      "size": "medium",
+      "tokenDefault": "BarbedDevil (1).webp",
+      "tokenCount": 32
+    },
+    {
+      "id": 43,
+      "slug": "basilisk",
+      "name": "Basilisk",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "3",
+      "size": "medium",
+      "tokenDefault": "Basilisk (1).webp",
+      "tokenCount": 19
+    },
+    {
+      "id": 44,
+      "slug": "bat",
+      "name": "Bat",
+      "nameDe": "Fledermaus",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "tiny",
+      "tokenDefault": "Bat (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 45,
+      "slug": "bearded-devil",
+      "name": "Bearded Devil",
+      "nameDe": "Bartteufel",
+      "type": {
+        "en": "fiend",
+        "de": "Unhold (Teufel)"
+      },
+      "challenge": "3",
+      "size": "medium",
+      "tokenDefault": "BeardedDevil (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 47,
+      "slug": "berserker",
+      "name": "Berserker",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoid"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "BerserkerDragonborn (1).webp",
+      "tokenCount": 64
+    },
+    {
+      "id": 48,
+      "slug": "black-bear",
+      "name": "Black Bear",
+      "nameDe": "Schwarzbär",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/2",
+      "size": "medium",
+      "tokenDefault": "BlackBearAgressive (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 49,
+      "slug": "black-dragon-wyrmling",
+      "name": "Black Dragon Wyrmling",
+      "nameDe": "Schwarzer Drachennestling",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "BlackDragonWyrmling (1).webp",
+      "tokenCount": 21
+    },
+    {
+      "id": 50,
+      "slug": "black-pudding",
+      "name": "Black Pudding",
+      "nameDe": "Schwarzer Blob",
+      "type": {
+        "en": "ooze",
+        "de": "Schlick"
+      },
+      "challenge": "4",
+      "size": "large",
+      "tokenDefault": "BlackPudding (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 51,
+      "slug": "blink-dog",
+      "name": "Blink Dog",
+      "nameDe": "Flimmerhund",
+      "type": {
+        "en": "fey",
+        "de": "Feenwesen"
+      },
+      "challenge": "1/4",
+      "size": "medium",
+      "tokenDefault": "BlinkDogRunning (1).webp",
+      "tokenCount": 18
+    },
+    {
+      "id": 52,
+      "slug": "blood-hawk",
+      "name": "Blood Hawk",
+      "nameDe": "Blutfalke",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/8",
+      "size": "small",
+      "tokenDefault": "BloodHawk (1).webp",
+      "tokenCount": 21
+    },
+    {
+      "id": 53,
+      "slug": "blue-dragon-wyrmling",
+      "name": "Blue Dragon Wyrmling",
+      "nameDe": "Blauer Drachennestling",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "3",
+      "size": "medium",
+      "tokenDefault": "BlueDragonWyrmling (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 54,
+      "slug": "boar",
+      "name": "Boar",
+      "nameDe": "Eber",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/4",
+      "size": "medium",
+      "tokenDefault": "BoarField (1).webp",
+      "tokenCount": 25
+    },
+    {
+      "id": 55,
+      "slug": "bone-devil",
+      "name": "Bone Devil",
+      "nameDe": "Knochenteufel",
+      "type": {
+        "en": "fiend",
+        "de": "Unhold (Teufel)"
+      },
+      "challenge": "9",
+      "size": "large",
+      "tokenDefault": "BoneDevil (1).webp",
+      "tokenCount": 46
+    },
+    {
+      "id": 56,
+      "slug": "brass-dragon-wyrmling",
+      "name": "Brass Dragon Wyrmling",
+      "nameDe": "Messingdrachennestling",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "1",
+      "size": "medium",
+      "tokenDefault": "BrassDragonWyrmling (1).webp",
+      "tokenCount": 17
+    },
+    {
+      "id": 57,
+      "slug": "bronze-dragon-wyrmling",
+      "name": "Bronze Dragon Wyrmling",
+      "nameDe": "Bronzedrachennestling",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "BronzeDragonWyrmling (1).webp",
+      "tokenCount": 32
+    },
+    {
+      "id": 58,
+      "slug": "brown-bear",
+      "name": "Brown Bear",
+      "nameDe": "Braunbär",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1",
+      "size": "large",
+      "tokenDefault": "BrownBearCave (1).webp",
+      "tokenCount": 24
+    },
+    {
+      "id": 59,
+      "slug": "bugbear",
+      "name": "Bugbear",
+      "nameDe": "Grottenschrat",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (Goblinoide)"
+      },
+      "challenge": "1",
+      "size": "medium",
+      "tokenDefault": "Bugbear (1).webp",
+      "tokenCount": 30
+    },
+    {
+      "id": 60,
+      "slug": "bulette",
+      "name": "Bulette",
+      "nameDe": "Landhai",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "5",
+      "size": "large",
+      "tokenDefault": "Bulette (1).webp",
+      "tokenCount": 12
+    },
+    {
+      "id": 61,
+      "slug": "camel",
+      "name": "Camel",
+      "nameDe": "Kamel",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/8",
+      "size": "large",
+      "tokenDefault": "CamelTamed (1).webp",
+      "tokenCount": 29
+    },
+    {
+      "id": 62,
+      "slug": "cat",
+      "name": "Cat",
+      "nameDe": "Katze",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "tiny",
+      "tokenDefault": "CatDesert (1).webp",
+      "tokenCount": 24
+    },
+    {
+      "id": 63,
+      "slug": "centaur",
+      "name": "Centaur",
+      "nameDe": "Zentaur",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "2",
+      "size": "large",
+      "tokenDefault": "CentaurFemaleMelee (1).webp",
+      "tokenCount": 40
+    },
+    {
+      "id": 64,
+      "slug": "chain-devil",
+      "name": "Chain Devil",
+      "nameDe": "Kettenteufel",
+      "type": {
+        "en": "fiend",
+        "de": "Unhold (Teufel)"
+      },
+      "challenge": "8",
+      "size": "medium",
+      "tokenDefault": "ChainDevil (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 65,
+      "slug": "chimera",
+      "name": "Chimera",
+      "nameDe": "Chimäre",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "6",
+      "size": "large",
+      "tokenDefault": "Chimera (1).webp",
+      "tokenCount": 17
+    },
+    {
+      "id": 66,
+      "slug": "chuul",
+      "name": "Chuul",
+      "type": {
+        "en": "aberration",
+        "de": "Aberration"
+      },
+      "challenge": "4",
+      "size": "large",
+      "tokenDefault": "Chuul (1).webp",
+      "tokenCount": 27
+    },
+    {
+      "id": 67,
+      "slug": "clay-golem",
+      "name": "Clay Golem",
+      "nameDe": "Lehmgolem",
+      "type": {
+        "en": "construct",
+        "de": "Konstrukt"
+      },
+      "challenge": "9",
+      "size": "large",
+      "tokenDefault": "ClayGolem (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 68,
+      "slug": "cloaker",
+      "name": "Cloaker",
+      "nameDe": "Mantler",
+      "type": {
+        "en": "aberration",
+        "de": "Aberration"
+      },
+      "challenge": "8",
+      "size": "large",
+      "tokenDefault": "Cloaker (1).webp",
+      "tokenCount": 18
+    },
+    {
+      "id": 69,
+      "slug": "cloud-giant",
+      "name": "Cloud Giant",
+      "nameDe": "Wolkenriese",
+      "type": {
+        "en": "giant",
+        "de": "Riese"
+      },
+      "challenge": "9",
+      "size": "huge",
+      "tokenDefault": "CloudGiantFemale (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 70,
+      "slug": "cockatrice",
+      "name": "Cockatrice",
+      "nameDe": "Basilisk",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "3",
+      "size": "small",
+      "tokenDefault": "Cockatrice (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 71,
+      "slug": "commoner",
+      "name": "Commoner",
+      "nameDe": "Gemeiner",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (jedes Volk)"
+      },
+      "challenge": "0",
+      "size": "medium",
+      "tokenDefault": "CommonerDragonbornArctic (1).webp",
+      "tokenCount": 837
+    },
+    {
+      "id": 72,
+      "slug": "constrictor-snake",
+      "name": "Constrictor Snake",
+      "nameDe": "Würgeschlange",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/4",
+      "size": "large",
+      "tokenDefault": "ConstrictorSnakeDesert (1).webp",
+      "tokenCount": 32
+    },
+    {
+      "id": 73,
+      "slug": "copper-dragon-wyrmling",
+      "name": "Copper Dragon Wyrmling",
+      "nameDe": "Kupferdrachennestling",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "1",
+      "size": "medium",
+      "tokenDefault": "CopperDragonWyrmling (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 74,
+      "slug": "couatl",
+      "name": "Couatl",
+      "type": {
+        "en": "celestial",
+        "de": "Himmelswesen"
+      },
+      "challenge": "4",
+      "size": "medium",
+      "tokenDefault": "CouatlDesert (1).webp",
+      "tokenCount": 19
+    },
+    {
+      "id": 75,
+      "slug": "crab",
+      "name": "Crab",
+      "nameDe": "Krabbe",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "tiny",
+      "tokenDefault": "CrabCoast (1).webp",
+      "tokenCount": 26
+    },
+    {
+      "id": 76,
+      "slug": "crocodile",
+      "name": "Crocodile",
+      "nameDe": "Krokodil",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/2",
+      "size": "large",
+      "tokenDefault": "CrocodileSewers (1).webp",
+      "tokenCount": 26
+    },
+    {
+      "id": 77,
+      "slug": "cult-fanatic",
+      "name": "Cult Fanatic",
+      "nameDe": "Kultfanatiker",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (jedes Volk)"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "CultFanaticForest (1).webp",
+      "tokenCount": 35
+    },
+    {
+      "id": 78,
+      "slug": "cultist",
+      "name": "Cultist",
+      "nameDe": "Kultist",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (jedes Volk)"
+      },
+      "challenge": "1/8",
+      "size": "medium",
+      "tokenDefault": "CultistForest (1).webp",
+      "tokenCount": 41
+    },
+    {
+      "id": 80,
+      "slug": "darkmantle",
+      "name": "Darkmantle",
+      "nameDe": "Düstermantel",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "1/2",
+      "size": "small",
+      "tokenDefault": "DarkMantleDark (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 81,
+      "slug": "death-dog",
+      "name": "Death Dog",
+      "nameDe": "Todeshund",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "1",
+      "size": "medium",
+      "tokenDefault": "DeathDog (1).webp",
+      "tokenCount": 24
+    },
+    {
+      "id": 83,
+      "slug": "deer",
+      "name": "Deer",
+      "nameDe": "Reh",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "medium",
+      "tokenDefault": "Deer (1).webp",
+      "tokenCount": 36
+    },
+    {
+      "id": 84,
+      "slug": "deva",
+      "name": "Deva",
+      "type": {
+        "en": "celestial",
+        "de": "Himmelswesen"
+      },
+      "challenge": "10",
+      "size": "medium",
+      "tokenDefault": "DevaFemale (1).webp",
+      "tokenCount": 30
+    },
+    {
+      "id": 85,
+      "slug": "dire-wolf",
+      "name": "Dire Wolf",
+      "nameDe": "Schreckenswolf",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1",
+      "size": "large",
+      "tokenDefault": "DireWolfSummer (1).webp",
+      "tokenCount": 33
+    },
+    {
+      "id": 87,
+      "slug": "doppelganger",
+      "name": "Doppelganger",
+      "nameDe": "Doppelgänger",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität (Gestaltwandler)"
+      },
+      "challenge": "3",
+      "size": "medium",
+      "tokenDefault": "Doppelganger (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 88,
+      "slug": "draft-horse",
+      "name": "Draft Horse",
+      "nameDe": "Zugpferd",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/4",
+      "size": "large",
+      "tokenDefault": "DraftHorseSummer (1).webp",
+      "tokenCount": 29
+    },
+    {
+      "id": 90,
+      "slug": "dretch",
+      "name": "Dretch",
+      "type": {
+        "en": "fiend",
+        "de": "Unhold"
+      },
+      "challenge": "1/4",
+      "size": "small",
+      "tokenDefault": "Dretch (1).webp",
+      "tokenCount": 30
+    },
+    {
+      "id": 91,
+      "slug": "drider",
+      "name": "Drider",
+      "nameDe": "Drinne",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "6",
+      "size": "large",
+      "tokenDefault": "Drider (1).webp",
+      "tokenCount": 21
+    },
+    {
+      "id": 92,
+      "slug": "drow",
+      "name": "Drow",
+      "nameDe": "Drow (Elf)",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (Elf)"
+      },
+      "challenge": "1/4",
+      "size": "medium",
+      "tokenDefault": "DrowFemaleMelee (1).webp",
+      "tokenCount": 32
+    },
+    {
+      "id": 93,
+      "slug": "druid",
+      "name": "Druid",
+      "nameDe": "Druide",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (jedes Volk)"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "DruidDwarfMale (1).webp",
+      "tokenCount": 41
+    },
+    {
+      "id": 94,
+      "slug": "dryad",
+      "name": "Dryad",
+      "nameDe": "Dryade",
+      "type": {
+        "en": "fey",
+        "de": "Feenwesen"
+      },
+      "challenge": "1",
+      "size": "medium",
+      "tokenDefault": "Dryad (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 95,
+      "slug": "duergar",
+      "name": "Duergar",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoid"
+      },
+      "challenge": "1",
+      "size": "medium",
+      "tokenDefault": "DuergarFemale (1).webp",
+      "tokenCount": 30
+    },
+    {
+      "id": 96,
+      "slug": "dust-mephit",
+      "name": "Dust Mephit",
+      "nameDe": "Staub-Mephit",
+      "type": {
+        "en": "elemental",
+        "de": "Elementar"
+      },
+      "challenge": "1/2",
+      "size": "small",
+      "tokenDefault": "DustMephit (1).webp",
+      "tokenCount": 24
+    },
+    {
+      "id": 97,
+      "slug": "eagle",
+      "name": "Eagle",
+      "nameDe": "Adler",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "small",
+      "tokenDefault": "EagleCoast (1).webp",
+      "tokenCount": 28
+    },
+    {
+      "id": 98,
+      "slug": "earth-elemental",
+      "name": "Earth Elemental",
+      "nameDe": "Erdelementar",
+      "type": {
+        "en": "elemental",
+        "de": "Elementar"
+      },
+      "challenge": "5",
+      "size": "large",
+      "tokenDefault": "EarthElemental (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 100,
+      "slug": "elephant",
+      "name": "Elephant",
+      "nameDe": "Elefant",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "4",
+      "size": "huge",
+      "tokenDefault": "ElephantGrassland (1).webp",
+      "tokenCount": 28
+    },
+    {
+      "id": 101,
+      "slug": "elk",
+      "name": "Elk",
+      "nameDe": "Elch",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/4",
+      "size": "large",
+      "tokenDefault": "ElkForest (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 103,
+      "slug": "ettercap",
+      "name": "Ettercap",
+      "nameDe": "Atterkopp",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "Ettercap (1).webp",
+      "tokenCount": 21
+    },
+    {
+      "id": 104,
+      "slug": "ettin",
+      "name": "Ettin",
+      "type": {
+        "en": "giant",
+        "de": "Riese"
+      },
+      "challenge": "4",
+      "size": "large",
+      "tokenDefault": "EttinFemale (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 105,
+      "slug": "fire-elemental",
+      "name": "Fire Elemental",
+      "nameDe": "Feuerelementar",
+      "type": {
+        "en": "elemental",
+        "de": "Elementar"
+      },
+      "challenge": "5",
+      "size": "large",
+      "tokenDefault": "FireElemental (1).webp",
+      "tokenCount": 21
+    },
+    {
+      "id": 106,
+      "slug": "fire-giant",
+      "name": "Fire Giant",
+      "nameDe": "Feuerriese",
+      "type": {
+        "en": "giant",
+        "de": "Riese"
+      },
+      "challenge": "9",
+      "size": "huge",
+      "tokenDefault": "FireGiantFemale (1).webp",
+      "tokenCount": 38
+    },
+    {
+      "id": 108,
+      "slug": "flesh-golem",
+      "name": "Flesh Golem",
+      "nameDe": "Fleischgolem",
+      "type": {
+        "en": "construct",
+        "de": "Konstrukt"
+      },
+      "challenge": "5",
+      "size": "medium",
+      "tokenDefault": "FleshGolem (1).webp",
+      "tokenCount": 31
+    },
+    {
+      "id": 109,
+      "slug": "flying-snake",
+      "name": "Flying Snake",
+      "nameDe": "Fliegende Schlange",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/8",
+      "size": "tiny",
+      "tokenDefault": "FlyingSnake (1).webp",
+      "tokenCount": 21
+    },
+    {
+      "id": 110,
+      "slug": "flying-sword",
+      "name": "Flying Sword",
+      "nameDe": "Fliegendes Schwert",
+      "type": {
+        "en": "construct",
+        "de": "Konstrukt"
+      },
+      "challenge": "1/4",
+      "size": "small",
+      "tokenDefault": "FlyingSwordMace (1).webp",
+      "tokenCount": 21
+    },
+    {
+      "id": 111,
+      "slug": "frog",
+      "name": "Frog",
+      "nameDe": "Frosch",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "tiny",
+      "tokenDefault": "Frog (1).webp",
+      "tokenCount": 43
+    },
+    {
+      "id": 112,
+      "slug": "frost-giant",
+      "name": "Frost Giant",
+      "nameDe": "Frostriese",
+      "type": {
+        "en": "giant",
+        "de": "Riese"
+      },
+      "challenge": "8",
+      "size": "huge",
+      "tokenDefault": "FrostGiantFemale (1).webp",
+      "tokenCount": 54
+    },
+    {
+      "id": 113,
+      "slug": "gargoyle",
+      "name": "Gargoyle",
+      "nameDe": "Gargyl",
+      "type": {
+        "en": "elemental",
+        "de": "Elementar"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "Gargoyle (1).webp",
+      "tokenCount": 29
+    },
+    {
+      "id": 114,
+      "slug": "gelatinous-cube",
+      "name": "Gelatinous Cube",
+      "nameDe": "Gallertwürfel",
+      "type": {
+        "en": "ooze",
+        "de": "Schlick"
+      },
+      "challenge": "2",
+      "size": "large",
+      "tokenDefault": "GelatinousCubeInvisible (1).webp",
+      "tokenCount": 14
+    },
+    {
+      "id": 115,
+      "slug": "ghast",
+      "name": "Ghast",
+      "nameDe": "Grul",
+      "type": {
+        "en": "undead",
+        "de": "Untoter"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "GhastFemale (1).webp",
+      "tokenCount": 42
+    },
+    {
+      "id": 116,
+      "slug": "ghost",
+      "name": "Ghost",
+      "nameDe": "Geist",
+      "type": {
+        "en": "undead",
+        "de": "Untoter"
+      },
+      "challenge": "4",
+      "size": "medium",
+      "tokenDefault": "Ghost (1).webp",
+      "tokenCount": 47
+    },
+    {
+      "id": 117,
+      "slug": "ghoul",
+      "name": "Ghoul",
+      "nameDe": "Ghul",
+      "type": {
+        "en": "undead",
+        "de": "Untoter"
+      },
+      "challenge": "1",
+      "size": "medium",
+      "tokenDefault": "GhoulFemale (1).webp",
+      "tokenCount": 65
+    },
+    {
+      "id": 118,
+      "slug": "giant-ape",
+      "name": "Giant Ape",
+      "nameDe": "Riesenaffe",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "7",
+      "size": "huge",
+      "tokenDefault": "GiantApeGorilla (1).webp",
+      "tokenCount": 40
+    },
+    {
+      "id": 119,
+      "slug": "giant-badger",
+      "name": "Giant Badger",
+      "nameDe": "Riesendachs",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/4",
+      "size": "medium",
+      "tokenDefault": "GiantBadgerSummer (1).webp",
+      "tokenCount": 29
+    },
+    {
+      "id": 120,
+      "slug": "giant-bat",
+      "name": "Giant Bat",
+      "nameDe": "Riesenfledermaus",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/4",
+      "size": "large",
+      "tokenDefault": "GiantBat (1).webp",
+      "tokenCount": 21
+    },
+    {
+      "id": 121,
+      "slug": "giant-boar",
+      "name": "Giant Boar",
+      "nameDe": "Rieseneber",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "2",
+      "size": "large",
+      "tokenDefault": "GiantBoarSummer (1).webp",
+      "tokenCount": 26
+    },
+    {
+      "id": 122,
+      "slug": "giant-centipede",
+      "name": "Giant Centipede",
+      "nameDe": "Riesentausendfüßler",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/4",
+      "size": "small",
+      "tokenDefault": "GiantCentipede (1).webp",
+      "tokenCount": 26
+    },
+    {
+      "id": 123,
+      "slug": "giant-constrictor-snake",
+      "name": "Giant Constrictor Snake",
+      "nameDe": "Riesenwürgeschlange",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "2",
+      "size": "huge",
+      "tokenDefault": "GiantConstrictorSnakeDesert (1).webp",
+      "tokenCount": 46
+    },
+    {
+      "id": 124,
+      "slug": "giant-crab",
+      "name": "Giant Crab",
+      "nameDe": "Riesenkrabbe",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/8",
+      "size": "medium",
+      "tokenDefault": "GiantCrab (1).webp",
+      "tokenCount": 29
+    },
+    {
+      "id": 125,
+      "slug": "giant-crocodile",
+      "name": "Giant Crocodile",
+      "nameDe": "Riesenkrokodil",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "5",
+      "size": "huge",
+      "tokenDefault": "GiantCrocodile (1).webp",
+      "tokenCount": 31
+    },
+    {
+      "id": 126,
+      "slug": "giant-eagle",
+      "name": "Giant Eagle",
+      "nameDe": "Riesenadler",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1",
+      "size": "large",
+      "tokenDefault": "GiantEagle (1).webp",
+      "tokenCount": 24
+    },
+    {
+      "id": 127,
+      "slug": "giant-elk",
+      "name": "Giant Elk",
+      "nameDe": "Riesenelch",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "2",
+      "size": "huge",
+      "tokenDefault": "GiantElkAlbinoForest (1).webp",
+      "tokenCount": 34
+    },
+    {
+      "id": 128,
+      "slug": "giant-fire-beetle",
+      "name": "Giant Fire Beetle",
+      "nameDe": "Riesenfeuerkäfer",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "small",
+      "tokenDefault": "GiantFireBeetle (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 129,
+      "slug": "giant-frog",
+      "name": "Giant Frog",
+      "nameDe": "Riesenfrosch",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/4",
+      "size": "medium",
+      "tokenDefault": "GiantFrog (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 130,
+      "slug": "giant-goat",
+      "name": "Giant Goat",
+      "nameDe": "Riesenziege",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/2",
+      "size": "large",
+      "tokenDefault": "GiantGoat (1).webp",
+      "tokenCount": 26
+    },
+    {
+      "id": 131,
+      "slug": "giant-hyena",
+      "name": "Giant Hyena",
+      "nameDe": "Riesenhyäne",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1",
+      "size": "large",
+      "tokenDefault": "GiantHyena (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 132,
+      "slug": "giant-lizard",
+      "name": "Giant Lizard",
+      "nameDe": "Rieseneidechse",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/4",
+      "size": "large",
+      "tokenDefault": "GiantLizardSwamp (1).webp",
+      "tokenCount": 57
+    },
+    {
+      "id": 133,
+      "slug": "giant-octopus",
+      "name": "Giant Octopus",
+      "nameDe": "Riesenoktopus",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1",
+      "size": "large",
+      "tokenDefault": "GiantOctopus (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 134,
+      "slug": "giant-owl",
+      "name": "Giant Owl",
+      "nameDe": "Rieseneule",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/4",
+      "size": "large",
+      "tokenDefault": "GiantOwlArctic (1).webp",
+      "tokenCount": 21
+    },
+    {
+      "id": 135,
+      "slug": "giant-poisonous-snake",
+      "name": "Giant Poisonous Snake",
+      "nameDe": "Riesengiftschlange",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/4",
+      "size": "medium",
+      "tokenDefault": "GiantPoisonousSnakeDesert (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 136,
+      "slug": "giant-rat",
+      "name": "Giant Rat",
+      "nameDe": "Riesenratte Variante: Kranke Riesenratte",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/8",
+      "size": "small",
+      "tokenDefault": "GiantRatForest (1).webp",
+      "tokenCount": 56
+    },
+    {
+      "id": 137,
+      "slug": "giant-scorpion",
+      "name": "Giant Scorpion",
+      "nameDe": "Riesenskorpion",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "3",
+      "size": "large",
+      "tokenDefault": "GiantScorpion (1).webp",
+      "tokenCount": 18
+    },
+    {
+      "id": 138,
+      "slug": "giant-sea-horse",
+      "name": "Giant Sea Horse",
+      "nameDe": "Riesenseepferdchen",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/2",
+      "size": "large",
+      "tokenDefault": "GiantSeahorse (1).webp",
+      "tokenCount": 19
+    },
+    {
+      "id": 139,
+      "slug": "giant-shark",
+      "name": "Giant Shark",
+      "nameDe": "Riesenhai",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "5",
+      "size": "huge",
+      "tokenDefault": "GiantShark (1).webp",
+      "tokenCount": 34
+    },
+    {
+      "id": 140,
+      "slug": "giant-spider",
+      "name": "Giant Spider",
+      "nameDe": "Riesenspinne",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1",
+      "size": "large",
+      "tokenDefault": "GiantSpider (1).webp",
+      "tokenCount": 72
+    },
+    {
+      "id": 141,
+      "slug": "giant-toad",
+      "name": "Giant Toad",
+      "nameDe": "Riesenkröte",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1",
+      "size": "large",
+      "tokenDefault": "GiantToadSwamp (1).webp",
+      "tokenCount": 26
+    },
+    {
+      "id": 142,
+      "slug": "giant-vulture",
+      "name": "Giant Vulture",
+      "nameDe": "Riesengeier",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1",
+      "size": "large",
+      "tokenDefault": "GiantVulture (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 143,
+      "slug": "giant-wasp",
+      "name": "Giant Wasp",
+      "nameDe": "Riesenwespe",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/2",
+      "size": "medium",
+      "tokenDefault": "GiantWaspBeehive (1).webp",
+      "tokenCount": 24
+    },
+    {
+      "id": 144,
+      "slug": "giant-weasel",
+      "name": "Giant Weasel",
+      "nameDe": "Riesenwiesel",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/8",
+      "size": "medium",
+      "tokenDefault": "GiantWeaselForest (1).webp",
+      "tokenCount": 26
+    },
+    {
+      "id": 145,
+      "slug": "giant-wolf-spider",
+      "name": "Giant Wolf Spider",
+      "nameDe": "Riesenwolfsspinne",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/4",
+      "size": "medium",
+      "tokenDefault": "GiantWolfSpiderDesert (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 146,
+      "slug": "gibbering-mouther",
+      "name": "Gibbering Mouther",
+      "nameDe": "Plapperndes Hundertmaul",
+      "type": {
+        "en": "aberration",
+        "de": "Aberration"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "GibberingMouther (1).webp",
+      "tokenCount": 26
+    },
+    {
+      "id": 147,
+      "slug": "glabrezu",
+      "name": "Glabrezu",
+      "type": {
+        "en": "fiend",
+        "de": "Unhold"
+      },
+      "challenge": "9",
+      "size": "large",
+      "tokenDefault": "Glabrezu (1).webp",
+      "tokenCount": 27
+    },
+    {
+      "id": 148,
+      "slug": "gladiator",
+      "name": "Gladiator",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoid"
+      },
+      "challenge": "5",
+      "size": "medium",
+      "tokenDefault": "GladiatorDragonborn (1).webp",
+      "tokenCount": 211
+    },
+    {
+      "id": 149,
+      "slug": "gnoll",
+      "name": "Gnoll",
+      "nameDe": "Gnoll-Rudelfürst",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoid"
+      },
+      "challenge": "1/2",
+      "size": "medium",
+      "tokenDefault": "GnollBow (1).webp",
+      "tokenCount": 26
+    },
+    {
+      "id": 150,
+      "slug": "goat",
+      "name": "Goat",
+      "nameDe": "Ziege",
+      "type": {
+        "en": "beast",
+        "de": "Bestie"
+      },
+      "challenge": "0",
+      "size": "large",
+      "tokenDefault": "GoatGrassland (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 151,
+      "slug": "goblin",
+      "name": "Goblin",
+      "nameDe": "Goblin",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (Goblinoide)"
+      },
+      "challenge": "1/4",
+      "size": "small",
+      "tokenDefault": "GoblinForestMaleGraygreenMelee (1).webp",
+      "tokenCount": 245
+    },
+    {
+      "id": 152,
+      "slug": "gold-dragon-wyrmling",
+      "name": "Gold Dragon Wyrmling",
+      "nameDe": "Golddrachennestling",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "3",
+      "size": "medium",
+      "tokenDefault": "GoldDragonWyrmling (1).webp",
+      "tokenCount": 17
+    },
+    {
+      "id": 153,
+      "slug": "gorgon",
+      "name": "Gorgon",
+      "nameDe": "Gorgone",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "5",
+      "size": "large",
+      "tokenDefault": "Gorgon (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 154,
+      "slug": "gray-ooze",
+      "name": "Gray Ooze",
+      "nameDe": "Grauschlick",
+      "type": {
+        "en": "ooze",
+        "de": "Schlick"
+      },
+      "challenge": "1/2",
+      "size": "medium",
+      "tokenDefault": "GrayOozeDissolving (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 155,
+      "slug": "green-dragon-wyrmling",
+      "name": "Green Dragon Wyrmling",
+      "nameDe": "Grüner Drachennestling",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "GreenDragonWyrmling (1).webp",
+      "tokenCount": 13
+    },
+    {
+      "id": 156,
+      "slug": "green-hag",
+      "name": "Green Hag",
+      "nameDe": "Grüne Vettel",
+      "type": {
+        "en": "fey",
+        "de": "Feenwesen"
+      },
+      "challenge": "3",
+      "size": "medium",
+      "tokenDefault": "GreenHag (1).webp",
+      "tokenCount": 26
+    },
+    {
+      "id": 158,
+      "slug": "griffon",
+      "name": "Griffon",
+      "nameDe": "Greif",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "2",
+      "size": "large",
+      "tokenDefault": "Griffon (1).webp",
+      "tokenCount": 19
+    },
+    {
+      "id": 159,
+      "slug": "grimlock",
+      "name": "Grimlock",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoid"
+      },
+      "challenge": "1/4",
+      "size": "medium",
+      "tokenDefault": "GrimlockFemale (1).webp",
+      "tokenCount": 51
+    },
+    {
+      "id": 160,
+      "slug": "guard",
+      "name": "Guard",
+      "nameDe": "Wache",
+      "type": {
+        "en": "monstrosity",
+        "de": "Humanoide (jedes Volk)"
+      },
+      "challenge": "1/8",
+      "size": "large",
+      "tokenDefault": "GuardDragonborn (1).webp",
+      "tokenCount": 258
+    },
+    {
+      "id": 161,
+      "slug": "guardian-naga",
+      "name": "Guardian Naga",
+      "nameDe": "Wächternaga",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "10",
+      "size": "large",
+      "tokenDefault": "GuradianNagaFemale (1).webp",
+      "tokenCount": 19
+    },
+    {
+      "id": 164,
+      "slug": "harpy",
+      "name": "Harpy",
+      "nameDe": "Harpyie",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "1",
+      "size": "medium",
+      "tokenDefault": "Harpy (1).webp",
+      "tokenCount": 13
+    },
+    {
+      "id": 165,
+      "slug": "hawk",
+      "name": "Hawk",
+      "nameDe": "Falke",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "small",
+      "tokenDefault": "HawkCostal (1).webp",
+      "tokenCount": 49
+    },
+    {
+      "id": 166,
+      "slug": "hell-hound",
+      "name": "Hell Hound",
+      "nameDe": "Höllenhund",
+      "type": {
+        "en": "fiend",
+        "de": "Unhold"
+      },
+      "challenge": "3",
+      "size": "medium",
+      "tokenDefault": "Hellhound (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 167,
+      "slug": "hezrou",
+      "name": "Hezrou",
+      "type": {
+        "en": "fiend",
+        "de": "Unhold"
+      },
+      "challenge": "8",
+      "size": "large",
+      "tokenDefault": "HezrouGrey (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 168,
+      "slug": "hill-giant",
+      "name": "Hill Giant",
+      "nameDe": "Hügelriese",
+      "type": {
+        "en": "giant",
+        "de": "Riese"
+      },
+      "challenge": "5",
+      "size": "huge",
+      "tokenDefault": "HillGiantFemale (1).webp",
+      "tokenCount": 36
+    },
+    {
+      "id": 169,
+      "slug": "hippogriff",
+      "name": "Hippogriff",
+      "nameDe": "Pferdegreif",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "1",
+      "size": "large",
+      "tokenDefault": "HippogriffArmored (1).webp",
+      "tokenCount": 47
+    },
+    {
+      "id": 170,
+      "slug": "hobgoblin",
+      "name": "Hobgoblin",
+      "nameDe": "Hobgoblin",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (Goblinoide)"
+      },
+      "challenge": "1/2",
+      "size": "medium",
+      "tokenDefault": "HobgoblinArmycampMelee (1).webp",
+      "tokenCount": 91
+    },
+    {
+      "id": 171,
+      "slug": "homunculus",
+      "name": "Homunculus",
+      "nameDe": "Homunkulus",
+      "type": {
+        "en": "construct",
+        "de": "Konstrukt"
+      },
+      "challenge": "0",
+      "size": "tiny",
+      "tokenDefault": "Homunculus (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 173,
+      "slug": "hunter-shark",
+      "name": "Hunter Shark",
+      "nameDe": "Jagdhai",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "2",
+      "size": "large",
+      "tokenDefault": "HunterShark (1).webp",
+      "tokenCount": 24
+    },
+    {
+      "id": 174,
+      "slug": "hydra",
+      "name": "Hydra",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "8",
+      "size": "huge",
+      "tokenDefault": "Hydra (1).webp",
+      "tokenCount": 27
+    },
+    {
+      "id": 175,
+      "slug": "hyena",
+      "name": "Hyena",
+      "nameDe": "Hyäne",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "large",
+      "tokenDefault": "Hyena (1).webp",
+      "tokenCount": 24
+    },
+    {
+      "id": 177,
+      "slug": "ice-mephit",
+      "name": "Ice Mephit",
+      "nameDe": "Eis-Mephit",
+      "type": {
+        "en": "elemental",
+        "de": "Elementar"
+      },
+      "challenge": "1/2",
+      "size": "small",
+      "tokenDefault": "IceMephit (1).webp",
+      "tokenCount": 12
+    },
+    {
+      "id": 178,
+      "slug": "imp",
+      "name": "Imp",
+      "nameDe": "Teufelchen",
+      "type": {
+        "en": "fiend",
+        "de": "Unhold (Teufel"
+      },
+      "challenge": "1",
+      "size": "tiny",
+      "tokenDefault": "Imp (1).webp",
+      "tokenCount": 26
+    },
+    {
+      "id": 179,
+      "slug": "invisible-stalker",
+      "name": "Invisible Stalker",
+      "nameDe": "Unsichtbarer Pirscher",
+      "type": {
+        "en": "elemental",
+        "de": "Elementar"
+      },
+      "challenge": "6",
+      "size": "medium",
+      "tokenDefault": "InvisibleStalker (1).webp",
+      "tokenCount": 24
+    },
+    {
+      "id": 181,
+      "slug": "jackal",
+      "name": "Jackal",
+      "nameDe": "Schakal",
+      "type": {
+        "en": "humanoid",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "medium",
+      "tokenDefault": "JackalDesert (1).webp",
+      "tokenCount": 31
+    },
+    {
+      "id": 182,
+      "slug": "killer-whale",
+      "name": "Killer Whale",
+      "nameDe": "Killerwal",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "3",
+      "size": "huge",
+      "tokenDefault": "KillerWhale (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 183,
+      "slug": "knight",
+      "name": "Knight",
+      "nameDe": "Ritter",
+      "type": {
+        "en": "undead",
+        "de": "Humanoide (jedes Volk)"
+      },
+      "challenge": "3",
+      "size": "medium",
+      "tokenDefault": "KightHalflingFemaleGood (1).webp",
+      "tokenCount": 188
+    },
+    {
+      "id": 184,
+      "slug": "kobold",
+      "name": "Kobold",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoid"
+      },
+      "challenge": "1/8",
+      "size": "small",
+      "tokenDefault": "KoboldArctic (1).webp",
+      "tokenCount": 96
+    },
+    {
+      "id": 186,
+      "slug": "lamia",
+      "name": "Lamia",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "4",
+      "size": "large",
+      "tokenDefault": "Lamia (1).webp",
+      "tokenCount": 11
+    },
+    {
+      "id": 187,
+      "slug": "lemure",
+      "name": "Lemure",
+      "type": {
+        "en": "fiend",
+        "de": "Unhold"
+      },
+      "challenge": "0",
+      "size": "medium",
+      "tokenDefault": "Lemure (1).webp",
+      "tokenCount": 59
+    },
+    {
+      "id": 189,
+      "slug": "lion",
+      "name": "Lion",
+      "nameDe": "Löwe",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1",
+      "size": "large",
+      "tokenDefault": "LionFemale (1).webp",
+      "tokenCount": 52
+    },
+    {
+      "id": 190,
+      "slug": "lizard",
+      "name": "Lizard",
+      "nameDe": "Eidechse",
+      "type": {
+        "en": "humanoid",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "medium",
+      "tokenDefault": "LizardDesert (1).webp",
+      "tokenCount": 33
+    },
+    {
+      "id": 191,
+      "slug": "lizardfolk",
+      "name": "Lizardfolk",
+      "nameDe": "Echsenmensch",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (Echsenmensch)"
+      },
+      "challenge": "1/2",
+      "size": "medium",
+      "tokenDefault": "Lizardfolk (1).webp",
+      "tokenCount": 37
+    },
+    {
+      "id": 192,
+      "slug": "mage",
+      "name": "Mage",
+      "nameDe": "Magier",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (jedes Volk)"
+      },
+      "challenge": "6",
+      "size": "medium",
+      "tokenDefault": "MageDragonborn (1).webp",
+      "tokenCount": 185
+    },
+    {
+      "id": 193,
+      "slug": "magma-mephit",
+      "name": "Magma Mephit",
+      "nameDe": "Magma-Mephit",
+      "type": {
+        "en": "elemental",
+        "de": "Elementar"
+      },
+      "challenge": "1/2",
+      "size": "small",
+      "tokenDefault": "MagmaMephit (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 194,
+      "slug": "magmin",
+      "name": "Magmin",
+      "type": {
+        "en": "elemental",
+        "de": "Elementar"
+      },
+      "challenge": "1/2",
+      "size": "small",
+      "tokenDefault": "Magmin (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 195,
+      "slug": "mammoth",
+      "name": "Mammoth",
+      "nameDe": "Mammut",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "6",
+      "size": "huge",
+      "tokenDefault": "Mammoth (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 196,
+      "slug": "manticore",
+      "name": "Manticore",
+      "nameDe": "Mantikor",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "3",
+      "size": "large",
+      "tokenDefault": "Manticore (1).webp",
+      "tokenCount": 21
+    },
+    {
+      "id": 198,
+      "slug": "mastiff",
+      "name": "Mastiff",
+      "nameDe": "Dogge",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/8",
+      "size": "medium",
+      "tokenDefault": "Mastiff (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 199,
+      "slug": "medusa",
+      "name": "Medusa",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "6",
+      "size": "medium",
+      "tokenDefault": "MedusaFemale (1).webp",
+      "tokenCount": 44
+    },
+    {
+      "id": 200,
+      "slug": "merfolk",
+      "name": "Merfolk",
+      "nameDe": "Meervolk",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (Meervolk)"
+      },
+      "challenge": "1/8",
+      "size": "medium",
+      "tokenDefault": "MerfolkFemale (1).webp",
+      "tokenCount": 29
+    },
+    {
+      "id": 201,
+      "slug": "merrow",
+      "name": "Merrow",
+      "nameDe": "Seeoger",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "2",
+      "size": "large",
+      "tokenDefault": "Merrow (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 202,
+      "slug": "mimic",
+      "name": "Mimic",
+      "nameDe": "Mimik",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität (Gestaltwandler)"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "MimicAltar (1).webp",
+      "tokenCount": 47
+    },
+    {
+      "id": 203,
+      "slug": "minotaur",
+      "name": "Minotaur",
+      "nameDe": "Minotaurus",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "3",
+      "size": "large",
+      "tokenDefault": "MinotaurFemale (1).webp",
+      "tokenCount": 25
+    },
+    {
+      "id": 204,
+      "slug": "minotaur-skeleton",
+      "name": "Minotaur Skeleton",
+      "nameDe": "Minotaurus-Skelett",
+      "type": {
+        "en": "undead",
+        "de": "Untoter"
+      },
+      "challenge": "2",
+      "size": "large",
+      "tokenDefault": "MinotaurSkeleton (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 205,
+      "slug": "mule",
+      "name": "Mule",
+      "nameDe": "Maultier",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/8",
+      "size": "medium",
+      "tokenDefault": "Mule (1).webp",
+      "tokenCount": 29
+    },
+    {
+      "id": 206,
+      "slug": "mummy",
+      "name": "Mummy",
+      "nameDe": "Mumie",
+      "type": {
+        "en": "undead",
+        "de": "Untoter"
+      },
+      "challenge": "3",
+      "size": "medium",
+      "tokenDefault": "Mummy (1).webp",
+      "tokenCount": 29
+    },
+    {
+      "id": 209,
+      "slug": "night-hag",
+      "name": "Night Hag",
+      "nameDe": "Nachtvettel",
+      "type": {
+        "en": "fiend",
+        "de": "Unhold"
+      },
+      "challenge": "5",
+      "size": "medium",
+      "tokenDefault": "NightHag (1).webp",
+      "tokenCount": 34
+    },
+    {
+      "id": 210,
+      "slug": "nightmare",
+      "name": "Nightmare",
+      "nameDe": "Nachtmahr",
+      "type": {
+        "en": "fiend",
+        "de": "Unhold"
+      },
+      "challenge": "3",
+      "size": "large",
+      "tokenDefault": "Nightmare (1).webp",
+      "tokenCount": 28
+    },
+    {
+      "id": 211,
+      "slug": "noble",
+      "name": "Noble",
+      "nameDe": "Adeliger",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (jedes Volk)"
+      },
+      "challenge": "1/8",
+      "size": "medium",
+      "tokenDefault": "NobleDragonborn (1).webp",
+      "tokenCount": 184
+    },
+    {
+      "id": 213,
+      "slug": "ochre-jelly",
+      "name": "Ochre Jelly",
+      "nameDe": "Ockergallerte",
+      "type": {
+        "en": "ooze",
+        "de": "Schlick"
+      },
+      "challenge": "2",
+      "size": "large",
+      "tokenDefault": "OchreJelly (1).webp",
+      "tokenCount": 31
+    },
+    {
+      "id": 214,
+      "slug": "octopus",
+      "name": "Octopus",
+      "nameDe": "Oktopus",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "large",
+      "tokenDefault": "Octopus (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 215,
+      "slug": "ogre",
+      "name": "Ogre",
+      "nameDe": "Oger",
+      "type": {
+        "en": "giant",
+        "de": "Riese"
+      },
+      "challenge": "2",
+      "size": "large",
+      "tokenDefault": "Ogre (1).webp",
+      "tokenCount": 36
+    },
+    {
+      "id": 216,
+      "slug": "ogre-zombie",
+      "name": "Ogre Zombie",
+      "nameDe": "Ogerzombie",
+      "type": {
+        "en": "undead",
+        "de": "Untoter"
+      },
+      "challenge": "2",
+      "size": "large",
+      "tokenDefault": "OgreZombie (1).webp",
+      "tokenCount": 25
+    },
+    {
+      "id": 217,
+      "slug": "oni",
+      "name": "Oni",
+      "nameDe": "Myconid-Spross",
+      "type": {
+        "en": "plant",
+        "de": "Pflanze"
+      },
+      "challenge": "7",
+      "size": "small",
+      "tokenDefault": "Oni (1).webp",
+      "tokenCount": 28
+    },
+    {
+      "id": 218,
+      "slug": "orc",
+      "name": "Orc",
+      "nameDe": "Ork",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (Ork)"
+      },
+      "challenge": "1/2",
+      "size": "medium",
+      "tokenDefault": "OrcArcticAxe (1).webp",
+      "tokenCount": 96
+    },
+    {
+      "id": 220,
+      "slug": "owl",
+      "name": "Owl",
+      "nameDe": "Eule",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "large",
+      "tokenDefault": "Owl (1).webp",
+      "tokenCount": 28
+    },
+    {
+      "id": 221,
+      "slug": "owlbear",
+      "name": "Owlbear",
+      "nameDe": "Eulenbär",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "3",
+      "size": "large",
+      "tokenDefault": "Owlbear (1).webp",
+      "tokenCount": 27
+    },
+    {
+      "id": 222,
+      "slug": "panther",
+      "name": "Panther",
+      "type": {
+        "en": "beast",
+        "de": "Bestie"
+      },
+      "challenge": "1/4",
+      "size": "medium",
+      "tokenDefault": "Panther (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 223,
+      "slug": "pegasus",
+      "name": "Pegasus",
+      "type": {
+        "en": "celestial",
+        "de": "Himmelswesen"
+      },
+      "challenge": "2",
+      "size": "large",
+      "tokenDefault": "PegasusForest (1).webp",
+      "tokenCount": 27
+    },
+    {
+      "id": 224,
+      "slug": "phase-spider",
+      "name": "Phase Spider",
+      "nameDe": "Phasenspinne",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "3",
+      "size": "large",
+      "tokenDefault": "PhaseSpiderForest (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 227,
+      "slug": "plesiosaurus",
+      "name": "Plesiosaurus",
+      "nameDe": "Plesiosaurier",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "2",
+      "size": "large",
+      "tokenDefault": "Plesiosaurus (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 228,
+      "slug": "poisonous-snake",
+      "name": "Poisonous Snake",
+      "nameDe": "Giftschlange",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/8",
+      "size": "medium",
+      "tokenDefault": "PoisonousSnakeDesert (1).webp",
+      "tokenCount": 24
+    },
+    {
+      "id": 229,
+      "slug": "polar-bear",
+      "name": "Polar Bear",
+      "nameDe": "Eisbär",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "2",
+      "size": "large",
+      "tokenDefault": "PolarBear (1).webp",
+      "tokenCount": 34
+    },
+    {
+      "id": 230,
+      "slug": "pony",
+      "name": "Pony",
+      "type": {
+        "en": "beast",
+        "de": "Bestie"
+      },
+      "challenge": "1/8",
+      "size": "medium",
+      "tokenDefault": "Pony (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 231,
+      "slug": "priest",
+      "name": "Priest",
+      "nameDe": "Priester",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (jedes Volk)"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "PriestDarkDwarfFemale (1).webp",
+      "tokenCount": 360
+    },
+    {
+      "id": 232,
+      "slug": "pseudodragon",
+      "name": "Pseudodragon",
+      "nameDe": "Pseudodrache",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "1/4",
+      "tokenDefault": "PseudodragonCoastal (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 235,
+      "slug": "quasit",
+      "name": "Quasit",
+      "type": {
+        "en": "fiend",
+        "de": "Unhold"
+      },
+      "challenge": "1",
+      "size": "tiny",
+      "tokenDefault": "Quasit (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 236,
+      "slug": "quipper",
+      "name": "Quipper",
+      "type": {
+        "en": "beast",
+        "de": "Bestie"
+      },
+      "challenge": "0",
+      "size": "tiny",
+      "tokenDefault": "Quipper (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 238,
+      "slug": "rat",
+      "name": "Rat",
+      "nameDe": "Ratte",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "medium",
+      "tokenDefault": "RatSwamp (1).webp",
+      "tokenCount": 34
+    },
+    {
+      "id": 239,
+      "slug": "raven",
+      "name": "Raven",
+      "nameDe": "Rabe",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "tiny",
+      "tokenDefault": "RavenForest (1).webp",
+      "tokenCount": 21
+    },
+    {
+      "id": 240,
+      "slug": "red-dragon-wyrmling",
+      "name": "Red Dragon Wyrmling",
+      "nameDe": "Roter Drachennestling",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "4",
+      "size": "medium",
+      "tokenDefault": "RedDragonWyrmling (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 241,
+      "slug": "reef-shark",
+      "name": "Reef Shark",
+      "nameDe": "Riffhai",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/2",
+      "size": "medium",
+      "tokenDefault": "ReefShark (1).webp",
+      "tokenCount": 27
+    },
+    {
+      "id": 243,
+      "slug": "rhinoceros",
+      "name": "Rhinoceros",
+      "nameDe": "Nashorn",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "2",
+      "size": "large",
+      "tokenDefault": "Rhinoceros (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 244,
+      "slug": "riding-horse",
+      "name": "Riding Horse",
+      "nameDe": "Reitpferd",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/4",
+      "size": "large",
+      "tokenDefault": "RidingHorse (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 246,
+      "slug": "roper",
+      "name": "Roper",
+      "nameDe": "Seiler",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "5",
+      "size": "large",
+      "tokenDefault": "Roper (1).webp",
+      "tokenCount": 13
+    },
+    {
+      "id": 247,
+      "slug": "rug-of-smothering",
+      "name": "Rug of Smothering",
+      "nameDe": "Teppich des Erstickens",
+      "type": {
+        "en": "construct",
+        "de": "Konstrukt"
+      },
+      "challenge": "2",
+      "size": "large",
+      "tokenDefault": "RugOfSmothering (1).webp",
+      "tokenCount": 13
+    },
+    {
+      "id": 248,
+      "slug": "rust-monster",
+      "name": "Rust Monster",
+      "nameDe": "Rostmonster",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "1/2",
+      "size": "medium",
+      "tokenDefault": "RustMonster (1).webp",
+      "tokenCount": 10
+    },
+    {
+      "id": 249,
+      "slug": "saber-toothed-tiger",
+      "name": "Saber-Toothed Tiger",
+      "nameDe": "Säbelzahntiger",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "2",
+      "size": "large",
+      "tokenDefault": "SaberToothedTigerArctic (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 250,
+      "slug": "sahuagin",
+      "name": "Sahuagin",
+      "nameDe": "Sahuagin",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (Sahuagin)"
+      },
+      "challenge": "1/2",
+      "size": "medium",
+      "tokenDefault": "Sahuagin (1).webp",
+      "tokenCount": 26
+    },
+    {
+      "id": 251,
+      "slug": "salamander",
+      "name": "Salamander",
+      "type": {
+        "en": "elemental",
+        "de": "Elementar"
+      },
+      "challenge": "5",
+      "size": "large",
+      "tokenDefault": "Salamander (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 252,
+      "slug": "satyr",
+      "name": "Satyr",
+      "nameDe": "Satyr",
+      "type": {
+        "en": "fey",
+        "de": "Feenwesen"
+      },
+      "challenge": "1/2",
+      "size": "medium",
+      "tokenDefault": "Satyr (1).webp",
+      "tokenCount": 26
+    },
+    {
+      "id": 253,
+      "slug": "scorpion",
+      "name": "Scorpion",
+      "nameDe": "Skorpion",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "large",
+      "tokenDefault": "Scorpion (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 254,
+      "slug": "scout",
+      "name": "Scout",
+      "nameDe": "Späher",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (jedes Volk)"
+      },
+      "challenge": "1/2",
+      "size": "medium",
+      "tokenDefault": "ScoutDragonbornArctic (1).webp",
+      "tokenCount": 356
+    },
+    {
+      "id": 255,
+      "slug": "sea-hag",
+      "name": "Sea Hag",
+      "nameDe": "Seevettel",
+      "type": {
+        "en": "fey",
+        "de": "Feenwesen"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "SeaHag (1).webp",
+      "tokenCount": 30
+    },
+    {
+      "id": 256,
+      "slug": "sea-horse",
+      "name": "Sea Horse",
+      "nameDe": "Seepferdchen",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "large",
+      "tokenDefault": "SeaHorse (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 257,
+      "slug": "shadow",
+      "name": "Shadow",
+      "nameDe": "Schatten",
+      "type": {
+        "en": "fiend",
+        "de": "Untoter"
+      },
+      "challenge": "1/2",
+      "size": "medium",
+      "tokenDefault": "Shadow (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 258,
+      "slug": "shambling-mound",
+      "name": "Shambling Mound",
+      "nameDe": "Modernder Schlurfer",
+      "type": {
+        "en": "plant",
+        "de": "Pflanze"
+      },
+      "challenge": "5",
+      "size": "large",
+      "tokenDefault": "ShamblingMound (1).webp",
+      "tokenCount": 24
+    },
+    {
+      "id": 259,
+      "slug": "shield-guardian",
+      "name": "Shield Guardian",
+      "nameDe": "Schildwächter",
+      "type": {
+        "en": "construct",
+        "de": "Konstrukt"
+      },
+      "challenge": "7",
+      "size": "large",
+      "tokenDefault": "ShieldGuardian (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 260,
+      "slug": "shrieker",
+      "name": "Shrieker",
+      "nameDe": "Kreischer",
+      "type": {
+        "en": "plant",
+        "de": "Pflanze"
+      },
+      "challenge": "0",
+      "size": "medium",
+      "tokenDefault": "Shrieker (1).webp",
+      "tokenCount": 29
+    },
+    {
+      "id": 261,
+      "slug": "silver-dragon-wyrmling",
+      "name": "Silver Dragon Wyrmling",
+      "nameDe": "Silberdrachennestling",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "SilverDragonWyrmling (1).webp",
+      "tokenCount": 16
+    },
+    {
+      "id": 262,
+      "slug": "skeleton",
+      "name": "Skeleton",
+      "nameDe": "Skelett",
+      "type": {
+        "en": "undead",
+        "de": "Untoter"
+      },
+      "challenge": "1/4",
+      "size": "medium",
+      "tokenDefault": "SkeletonBow (1).webp",
+      "tokenCount": 124
+    },
+    {
+      "id": 265,
+      "slug": "specter",
+      "name": "Specter",
+      "nameDe": "Schreckgespenst",
+      "type": {
+        "en": "undead",
+        "de": "Untoter"
+      },
+      "challenge": "1",
+      "size": "medium",
+      "tokenDefault": "SpecterDragonborn (1).webp",
+      "tokenCount": 41
+    },
+    {
+      "id": 266,
+      "slug": "spider",
+      "name": "Spider",
+      "nameDe": "Spinne",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "large",
+      "tokenDefault": "SpiderCave (1).webp",
+      "tokenCount": 30
+    },
+    {
+      "id": 267,
+      "slug": "spirit-naga",
+      "name": "Spirit Naga",
+      "nameDe": "Geisternaga",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "8",
+      "size": "large",
+      "tokenDefault": "SpiritNaga (1).webp",
+      "tokenCount": 19
+    },
+    {
+      "id": 268,
+      "slug": "sprite",
+      "name": "Sprite",
+      "nameDe": "Feengeist",
+      "type": {
+        "en": "fey",
+        "de": "Feenwesen"
+      },
+      "challenge": "1/4",
+      "size": "tiny",
+      "tokenDefault": "SpriteBowFemale (1).webp",
+      "tokenCount": 41
+    },
+    {
+      "id": 270,
+      "slug": "steam-mephit",
+      "name": "Steam Mephit",
+      "nameDe": "Dampf-Mephit",
+      "type": {
+        "en": "elemental",
+        "de": "Elementar"
+      },
+      "challenge": "1/4",
+      "size": "small",
+      "tokenDefault": "SteamMephit (1).webp",
+      "tokenCount": 21
+    },
+    {
+      "id": 271,
+      "slug": "stirge",
+      "name": "Stirge",
+      "nameDe": "Blutmücke",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "1/8",
+      "size": "tiny",
+      "tokenDefault": "Stirge (1).webp",
+      "tokenCount": 46
+    },
+    {
+      "id": 272,
+      "slug": "stone-giant",
+      "name": "Stone Giant",
+      "nameDe": "Steinriese",
+      "type": {
+        "en": "giant",
+        "de": "Riese"
+      },
+      "challenge": "7",
+      "size": "huge",
+      "tokenDefault": "StoneGiantFemale (1).webp",
+      "tokenCount": 27
+    },
+    {
+      "id": 273,
+      "slug": "stone-golem",
+      "name": "Stone Golem",
+      "nameDe": "Steingolem",
+      "type": {
+        "en": "construct",
+        "de": "Konstrukt"
+      },
+      "challenge": "10",
+      "size": "large",
+      "tokenDefault": "StoneGolem (1).webp",
+      "tokenCount": 33
+    },
+    {
+      "id": 276,
+      "slug": "swarm-of-bats",
+      "name": "Swarm of Bats",
+      "nameDe": "Fledermausschwarm",
+      "type": {
+        "en": "beast",
+        "de": "Schwarm winziger Tiere"
+      },
+      "challenge": "1/4",
+      "size": "medium",
+      "tokenDefault": "SwarmOfBats (1).webp",
+      "tokenCount": 39
+    },
+    {
+      "id": 277,
+      "slug": "swarm-of-insects",
+      "name": "Swarm of Insects",
+      "nameDe": "Insektenschwarm",
+      "type": {
+        "en": "beast",
+        "de": "Schwarm winziger Tiere"
+      },
+      "challenge": "1/2",
+      "size": "medium",
+      "tokenDefault": "SwarmOfInsects (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 278,
+      "slug": "swarm-of-poisonous-snakes",
+      "name": "Swarm of Poisonous Snakes",
+      "nameDe": "Giftschlangenschwarm",
+      "type": {
+        "en": "beast",
+        "de": "Schwarm winziger Tiere"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "SwarmOfPoisonousSnakes (1).webp",
+      "tokenCount": 26
+    },
+    {
+      "id": 279,
+      "slug": "swarm-of-quippers",
+      "name": "Swarm of Quippers",
+      "nameDe": "Quippernschwarm",
+      "type": {
+        "en": "beast",
+        "de": "Schwarm winziger Tiere"
+      },
+      "challenge": "1",
+      "size": "medium",
+      "tokenDefault": "SwarmOfQuippers (1).webp",
+      "tokenCount": 21
+    },
+    {
+      "id": 280,
+      "slug": "swarm-of-rats",
+      "name": "Swarm of Rats",
+      "nameDe": "Rattenschwarm",
+      "type": {
+        "en": "beast",
+        "de": "Schwarm winziger Tiere"
+      },
+      "challenge": "1/4",
+      "size": "medium",
+      "tokenDefault": "SwarmOfRats (1).webp",
+      "tokenCount": 28
+    },
+    {
+      "id": 281,
+      "slug": "swarm-of-ravens",
+      "name": "Swarm of Ravens",
+      "nameDe": "Rabenschwarm Variante: Insektenschwarm",
+      "type": {
+        "en": "beast",
+        "de": "Schwarm winziger Tiere"
+      },
+      "challenge": "1/4",
+      "size": "medium",
+      "tokenDefault": "SwarmOfRavens (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 283,
+      "slug": "thug",
+      "name": "Thug",
+      "nameDe": "Schläger",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (jedes Volk)"
+      },
+      "challenge": "1/2",
+      "size": "medium",
+      "tokenDefault": "ThugDragonbornMelee (1).webp",
+      "tokenCount": 353
+    },
+    {
+      "id": 284,
+      "slug": "tiger",
+      "name": "Tiger",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoid"
+      },
+      "challenge": "1",
+      "size": "medium",
+      "tokenDefault": "Tiger (1).webp",
+      "tokenCount": 21
+    },
+    {
+      "id": 285,
+      "slug": "treant",
+      "name": "Treant",
+      "nameDe": "Baumhirte",
+      "type": {
+        "en": "plant",
+        "de": "Pflanze"
+      },
+      "challenge": "9",
+      "size": "huge",
+      "tokenDefault": "TreantEvil (1).webp",
+      "tokenCount": 34
+    },
+    {
+      "id": 286,
+      "slug": "tribal-warrior",
+      "name": "Tribal Warrior",
+      "nameDe": "Stammeskrieger",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (jedes Volk)"
+      },
+      "challenge": "1/8",
+      "size": "medium",
+      "tokenDefault": "TribalWarriorDragonbornCoastal (1).webp",
+      "tokenCount": 362
+    },
+    {
+      "id": 287,
+      "slug": "triceratops",
+      "name": "Triceratops",
+      "type": {
+        "en": "beast",
+        "de": "Bestie"
+      },
+      "challenge": "5",
+      "size": "huge",
+      "tokenDefault": "Triceratops (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 288,
+      "slug": "troll",
+      "name": "Troll",
+      "type": {
+        "en": "giant",
+        "de": "Riese"
+      },
+      "challenge": "5",
+      "size": "large",
+      "tokenDefault": "TrollMountains (1).webp",
+      "tokenCount": 25
+    },
+    {
+      "id": 290,
+      "slug": "tyrannosaurus-rex",
+      "name": "Tyrannosaurus Rex",
+      "type": {
+        "en": "beast",
+        "de": "Bestie"
+      },
+      "challenge": "8",
+      "size": "huge",
+      "tokenDefault": "TyrannosaurusRex (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 291,
+      "slug": "unicorn",
+      "name": "Unicorn",
+      "nameDe": "Einhorn",
+      "type": {
+        "en": "celestial",
+        "de": "celestisches Wesen"
+      },
+      "challenge": "5",
+      "size": "large",
+      "tokenDefault": "Unicorn (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 293,
+      "slug": "vampire-spawn",
+      "name": "Vampire Spawn",
+      "nameDe": "Vampirbrut",
+      "type": {
+        "en": "undead",
+        "de": "Untoter"
+      },
+      "challenge": "5",
+      "size": "medium",
+      "tokenDefault": "VampireSpawnDragonborn (1).webp",
+      "tokenCount": 28
+    },
+    {
+      "id": 294,
+      "slug": "veteran",
+      "name": "Veteran",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoid"
+      },
+      "challenge": "3",
+      "size": "medium",
+      "tokenDefault": "VeteranDragonbornMelee (1).webp",
+      "tokenCount": 299
+    },
+    {
+      "id": 295,
+      "slug": "violet-fungus",
+      "name": "Violet Fungus",
+      "nameDe": "Violetter Pilz",
+      "type": {
+        "en": "plant",
+        "de": "Pflanze"
+      },
+      "challenge": "1/4",
+      "size": "medium",
+      "tokenDefault": "VioletFungus (1).webp",
+      "tokenCount": 11
+    },
+    {
+      "id": 296,
+      "slug": "vrock",
+      "name": "Vrock",
+      "type": {
+        "en": "fiend",
+        "de": "Unhold"
+      },
+      "challenge": "6",
+      "size": "large",
+      "tokenDefault": "Vrock (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 297,
+      "slug": "vulture",
+      "name": "Vulture",
+      "nameDe": "Geier",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "large",
+      "tokenDefault": "Vulture (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 298,
+      "slug": "warhorse",
+      "name": "Warhorse",
+      "nameDe": "Streitross",
+      "type": {
+        "en": "undead",
+        "de": "Tier"
+      },
+      "challenge": "1/2",
+      "size": "large",
+      "tokenDefault": "Warhorse (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 299,
+      "slug": "warhorse-skeleton",
+      "name": "Warhorse Skeleton",
+      "nameDe": "Streitross-Skelett",
+      "type": {
+        "en": "undead",
+        "de": "Untoter"
+      },
+      "challenge": "1/2",
+      "size": "large",
+      "tokenDefault": "WarhorseSkeleton (1).webp",
+      "tokenCount": 26
+    },
+    {
+      "id": 300,
+      "slug": "water-elemental",
+      "name": "Water Elemental",
+      "nameDe": "Wasserelementar",
+      "type": {
+        "en": "elemental",
+        "de": "Elementar"
+      },
+      "challenge": "5",
+      "size": "large",
+      "tokenDefault": "WaterElementalSea (1).webp",
+      "tokenCount": 23
+    },
+    {
+      "id": 301,
+      "slug": "weasel",
+      "name": "Weasel",
+      "nameDe": "Wiesel",
+      "type": {
+        "en": "beast",
+        "de": "Tier"
+      },
+      "challenge": "0",
+      "size": "medium",
+      "tokenDefault": "Weasel (1).webp",
+      "tokenCount": 21
+    },
+    {
+      "id": 302,
+      "slug": "werebear",
+      "name": "Werebear",
+      "nameDe": "Werbär",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (Mensch"
+      },
+      "challenge": "5",
+      "size": "medium",
+      "tokenDefault": "Werebear (1).webp",
+      "tokenCount": 20
+    },
+    {
+      "id": 303,
+      "slug": "wereboar",
+      "name": "Wereboar",
+      "nameDe": "Wereber",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (Mensch"
+      },
+      "challenge": "4",
+      "size": "medium",
+      "tokenDefault": "Wereboar (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 304,
+      "slug": "wererat",
+      "name": "Wererat",
+      "nameDe": "Werratte",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (Mensch"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "Wererat (1).webp",
+      "tokenCount": 26
+    },
+    {
+      "id": 305,
+      "slug": "weretiger",
+      "name": "Weretiger",
+      "nameDe": "Wertiger",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (Mensch"
+      },
+      "challenge": "4",
+      "size": "medium",
+      "tokenDefault": "WeretigerDesert (1).webp",
+      "tokenCount": 28
+    },
+    {
+      "id": 306,
+      "slug": "werewolf",
+      "name": "Werewolf",
+      "nameDe": "Werwolf",
+      "type": {
+        "en": "humanoid",
+        "de": "Humanoide (Mensch"
+      },
+      "challenge": "3",
+      "size": "medium",
+      "tokenDefault": "Werewolf (1).webp",
+      "tokenCount": 25
+    },
+    {
+      "id": 307,
+      "slug": "white-dragon-wyrmling",
+      "name": "White Dragon Wyrmling",
+      "nameDe": "Weißer Drachennestling",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "2",
+      "size": "medium",
+      "tokenDefault": "WhiteDragonWyrmling (1).webp",
+      "tokenCount": 24
+    },
+    {
+      "id": 308,
+      "slug": "wight",
+      "name": "Wight",
+      "nameDe": "Gruftschrecken",
+      "type": {
+        "en": "undead",
+        "de": "Untoter"
+      },
+      "challenge": "3",
+      "size": "medium",
+      "tokenDefault": "WightDragonborn (1).webp",
+      "tokenCount": 67
+    },
+    {
+      "id": 309,
+      "slug": "will-o-wisp",
+      "name": "Will-o'-Wisp",
+      "nameDe": "Irrlicht",
+      "type": {
+        "en": "undead",
+        "de": "Untoter"
+      },
+      "challenge": "2",
+      "size": "tiny",
+      "tokenDefault": "WillOWispBlue (1).webp",
+      "tokenCount": 22
+    },
+    {
+      "id": 310,
+      "slug": "winter-wolf",
+      "name": "Winter Wolf",
+      "nameDe": "Winterwolf",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "3",
+      "size": "large",
+      "tokenDefault": "WinterWolf (1).webp",
+      "tokenCount": 31
+    },
+    {
+      "id": 311,
+      "slug": "wolf",
+      "name": "Wolf",
+      "nameDe": "Wolf",
+      "type": {
+        "en": "humanoid",
+        "de": "Tier"
+      },
+      "challenge": "1/4",
+      "size": "medium",
+      "tokenDefault": "Wolf (1).webp",
+      "tokenCount": 30
+    },
+    {
+      "id": 312,
+      "slug": "worg",
+      "name": "Worg",
+      "type": {
+        "en": "monstrosity",
+        "de": "Monstrosität"
+      },
+      "challenge": "1/2",
+      "size": "large",
+      "tokenDefault": "Worg (1).webp",
+      "tokenCount": 33
+    },
+    {
+      "id": 314,
+      "slug": "wyvern",
+      "name": "Wyvern",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "6",
+      "size": "large",
+      "tokenDefault": "Wyvern (1).webp",
+      "tokenCount": 12
+    },
+    {
+      "id": 317,
+      "slug": "young-black-dragon",
+      "name": "Young Black Dragon",
+      "nameDe": "Junger schwarzer Drache",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "7",
+      "size": "large",
+      "tokenDefault": "YoungBlackDragon (1).webp",
+      "tokenCount": 48
+    },
+    {
+      "id": 318,
+      "slug": "young-blue-dragon",
+      "name": "Young Blue Dragon",
+      "nameDe": "Junger blauer Drache",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "9",
+      "size": "large",
+      "tokenDefault": "YoungBlueDragon (1).webp",
+      "tokenCount": 47
+    },
+    {
+      "id": 319,
+      "slug": "young-brass-dragon",
+      "name": "Young Brass Dragon",
+      "nameDe": "Junger Messingdrache",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "6",
+      "size": "large",
+      "tokenDefault": "YoungBrassDragon (1).webp",
+      "tokenCount": 25
+    },
+    {
+      "id": 320,
+      "slug": "young-bronze-dragon",
+      "name": "Young Bronze Dragon",
+      "nameDe": "Junger Bronzedrache",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "8",
+      "size": "large",
+      "tokenDefault": "YoungBronzeDragon (1).webp",
+      "tokenCount": 43
+    },
+    {
+      "id": 321,
+      "slug": "young-copper-dragon",
+      "name": "Young Copper Dragon",
+      "nameDe": "Junger Kupferdrache",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "7",
+      "size": "large",
+      "tokenDefault": "YoungCopperDragon (1).webp",
+      "tokenCount": 24
+    },
+    {
+      "id": 322,
+      "slug": "young-gold-dragon",
+      "name": "Young Gold Dragon",
+      "nameDe": "Junger Golddrache",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "10",
+      "size": "large",
+      "tokenDefault": "YoungGoldDragon (1).webp",
+      "tokenCount": 16
+    },
+    {
+      "id": 323,
+      "slug": "young-green-dragon",
+      "name": "Young Green Dragon",
+      "nameDe": "Junger grüner Drache",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "8",
+      "size": "large",
+      "tokenDefault": "YoungGreenDragon (1).webp",
+      "tokenCount": 16
+    },
+    {
+      "id": 324,
+      "slug": "young-red-dragon",
+      "name": "Young Red Dragon",
+      "nameDe": "Junger roter Drache",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "10",
+      "size": "large",
+      "tokenDefault": "YoungRedDragon (1).webp",
+      "tokenCount": 32
+    },
+    {
+      "id": 325,
+      "slug": "young-silver-dragon",
+      "name": "Young Silver Dragon",
+      "nameDe": "Junger Silberdrache",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "9",
+      "size": "large",
+      "tokenDefault": "YoungSilverDragon (1).webp",
+      "tokenCount": 9
+    },
+    {
+      "id": 326,
+      "slug": "young-white-dragon",
+      "name": "Young White Dragon",
+      "nameDe": "Junger weißer Drache",
+      "type": {
+        "en": "dragon",
+        "de": "Drache"
+      },
+      "challenge": "6",
+      "size": "large",
+      "tokenDefault": "YoungWhiteDragon (1).webp",
+      "tokenCount": 26
+    },
+    {
+      "id": 327,
+      "slug": "zombie",
+      "name": "Zombie",
+      "nameDe": "Zombie",
+      "type": {
+        "en": "undead",
+        "de": "Untoter"
+      },
+      "challenge": "1/4",
+      "size": "medium",
+      "tokenDefault": "ZombieDragonborn (1).webp",
+      "tokenCount": 381
+    }
+  ]
+}

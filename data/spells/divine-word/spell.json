@@ -1,0 +1,53 @@
+{
+  "id": 198,
+  "slug": "divine-word",
+  "name": "Divine Word",
+  "nameDe": "Göttliches Wort",
+  "level": {
+    "en": "7",
+    "de": "Grad 7"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "7th-level evocation",
+    "de": "Stufe 7 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 bonus action",
+    "de": "1 Bonusaktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": false,
+    "material": false,
+    "raw": "V"
+  },
+  "description": {
+    "en": "You utter a divine word, imbued with the power that shaped the world at the dawn of creation. Choose any number of creatures you can see within range. Each creature that can hear you must make a Charisma saving throw. On a failed save, a creature suffers an effect based on its current hit points: - 50 hit points or fewer: deafened for 1 minute - 40 hit points or fewer: deafened and blinded for 10 minutes - 30 hit points or fewer: blinded, deafened, and stunned for 1 hour - 20 hit points or fewer: killed instantly Regardless of its current hit points, a celestial, an elemental, a fey, or a fiend that fails its save is forced back to its plane of origin (if it isn't there already) and can't return to your current plane for 24 hours by any means short of a wish spell.",
+    "de": "Du sprichst ein göttliches Wort, das von der Macht erfüllt ist, die die Welt zu Beginn der Schöpfung geformt hat. Wähle eine beliebige Anzahl Kreaturen in Reichweite, die du sehen kannst. Jede Kreatur, die dich hören kann, muss einen Charismarettungswurf ausführen. Scheitert der Wurf, erleidet die Kreatur einen Effekt anhand ihrer aktuellen Trefferpunkte. Unabhängig von ihren aktuellen Trefferpunkten werden celestische Wesen, Elementare, Feenwesen oder Unholde, die bei ihrem Rettungswurf scheitern, auf ihre Heimatebene verbannt (sofern sie sich nicht bereits dort befinden). Sie können 24 Stunden lang nur mit dem Zauber Wunsch  auf deine derzeitige Ebene zurückkehren."
+  },
+  "image": "tounges",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

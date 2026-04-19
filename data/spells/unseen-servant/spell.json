@@ -1,0 +1,64 @@
+{
+  "id": 82,
+  "slug": "unseen-servant",
+  "name": "Unseen Servant",
+  "nameDe": "Unsichtbarer Diener",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Conjuration",
+    "de": "Beschwörung"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level conjuration (ritual)",
+    "de": "Stufe 1 Beschwörung (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a piece of string and a bit of wood",
+      "de": "ein Stück Schnur und ein Stück Holz"
+    },
+    "raw": {
+      "en": "V, S, M (a piece of string and a bit of wood)",
+      "de": "V, G, M (ein Stück Schnur und ein Stück Holz)"
+    }
+  },
+  "description": {
+    "en": "This spell creates an invisible, mindless, shapeless force that performs simple tasks at your command until the spell ends. The servant springs into existence in an unoccupied space on the ground within range. It has AC 10, 1 hit point, and a Strength of 2, and it can't attack. If it drops to 0 hit points, the spell ends. Once on each of your turns as a bonus action, you can mentally command the servant to move up to 15 feet and interact with an object. The servant can perform simple tasks that a human servant could do, such as fetching things, cleaning, mending, folding clothes, lighting fires, serving food, and pouring wine. Once you give the command, the servant performs the task to the best of its ability until it completes the task, then waits for your next command. If you command the servant to perform a task that would move it more than 60 feet away from you, the spell ends.",
+    "de": "Dieser Zauber erschafft eine unsichtbare, geist-und formlose Kraft, die auf deinen Befehl einfache Aufgaben erfüllt, bis der Zauber endet. Der Diener erscheint in einem freien Bereich in Reichweite auf dem Boden. Er besitzt eine RK von 10, einen Stärkewert von 2,1 Trefferpunkt und kann nicht angreifen. Wenn seine Trefferpunkte auf 0 sinken, endet der Zauber. Als Bonusaktion kannst du in jedem deiner Züge dem Diener mental befehlen, sich bis zu 4,5 Meter zu bewegen und mit einem Gegenstand zu interagieren. Der Diener kann einfache Aufgaben übernehmen, die auch ein menschlicher Diener ausführen könnte: Er kann Dinge holen, reinigen und reparieren, Kleidung Zusammenlegen, Feuer entfachen, Essen servieren und Wein einschenken. Sobald du einen Befehl erteilst, erfüllt der Diener diesen nach Kräften, bis die Aufgabe erledigt ist Dann wartet er auf deinen nächsten Befehl. Befiehlst du dem Diener, sich für eine Aufgabe mehr als 18 Meter von dir zu entfernen, endet der Zauber."
+  },
+  "image": "unseen-servant",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

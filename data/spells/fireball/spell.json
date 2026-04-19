@@ -1,0 +1,66 @@
+{
+  "id": 122,
+  "slug": "fireball",
+  "name": "Fireball",
+  "nameDe": "Feuerball",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level evocation",
+    "de": "Stufe 3 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "150 feet",
+    "de": "45 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a tiny ball of bat guano and sulfur",
+      "de": "ein kleiner Ball aus Fledermausguano und Schwefel"
+    },
+    "raw": {
+      "en": "V, S, M (a tiny ball of bat guano and sulfur)",
+      "de": "V, G, M (ein kleiner Ball aus Fledermausguano und Schwefel)"
+    }
+  },
+  "description": {
+    "en": "A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a dexterity saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one. The fire spreads around corners. It ignites flammable objects in the area that aren't being worn or carried.",
+    "de": "Ein heller Lichtstrahl schießt aus deinem deutenden Finger auf einen Punkt deiner Wahl in Reichweite und explodiert dort mit einem dumpfen Grollen in lodernden Flammen. Jede Kreatur in einer Sphäre mit einem Radius von sechs Metern um diesen Punkt muss einen Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet das Ziel 8W6 Feuerschaden, anderenfalls die Hälfte. Das Feuer breitet sich um Ecken aus. Es entzündet brennbare Gegenstände in der Umgebung, die nicht getragen oder gehalten werden. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 4. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 3. um 1W6."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 4. Grades oder höher nutzt, steigt der Schaden für jeden Grad über dem 3. um 1W6."
+  },
+  "image": "fire-bolt",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

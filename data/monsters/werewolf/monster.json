@@ -1,0 +1,236 @@
+{
+  "id": 306,
+  "slug": "werewolf",
+  "name": "Werewolf",
+  "nameDe": "Werwolf",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, chaotic evil",
+    "de": "Mittelgroßer Humanoid, chaotisch böse"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "11 In Humanoid Form, 12 In Wolf Or Hybrid Form",
+    "de": "11 (in humanoider Gestalt, 12 (natürliche Rüstung) in Wolfs- und hybrider Gestalt)"
+  },
+  "hp": {
+    "en": "58 (9d8 + 18)",
+    "de": "58 (9W8+18)"
+  },
+  "str": 15,
+  "dex": 13,
+  "con": 14,
+  "int": 10,
+  "wis": 11,
+  "cha": 10,
+  "strMod": 2,
+  "dexMod": 1,
+  "conMod": 2,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": 0,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Passive Perception 14"
+    ],
+    "de": [
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common (can't speak in wolf form)"
+    ],
+    "de": [
+      "Gemeinsprache (kann in Wolfsgestalt nicht sprechen)"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +3",
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Shapechanger",
+        "text": "The werewolf can use its action to polymorph into a wolf-humanoid hybrid or into a wolf, or back into its true form, which is humanoid. Its statistics, other than its AC, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+      },
+      {
+        "name": "Keen Hearing and Smell",
+        "text": "The werewolf has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+      }
+    ],
+    "de": [
+      {
+        "name": "Gestaltwandler",
+        "text": "Der Werwolf kann seine Aktion verwenden, um sich in eine hybride Gestalt aus Wolf und Humanoide oder in einen Wolf zu verwandeln - oder um wieder seine wahre, humanoide Gestalt anzunehmen. Seine Spielwerte sind abgesehen von der RK in beiden Gestalten gleich. Ausrüstung, die er trägt oder hält, wird nicht verwandelt. Wenn er stirbt, nimmt er seine wahre Gestalt an."
+      },
+      {
+        "name": "Scharfes Gehör und scharfer Geruchssinn",
+        "text": "Der Werwolf ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör oder Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack (Humanoid or Hybrid Form Only)",
+        "text": "The werewolf makes two attacks: two with its spear (humanoid form) or one with its bite and one with its claws (hybrid form)."
+      },
+      {
+        "name": "Bite (Wolf or Hybrid Form Only)",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) piercing damage. If the target is a humanoid, it must succeed on a DC 12 Constitution saving throw or be cursed with werewolf lycanthropy."
+      },
+      {
+        "name": "Claws (Hybrid Form Only)",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 7 (2d4 + 2) slashing damage."
+      },
+      {
+        "name": "Spear (Humanoid Form Only)",
+        "text": "Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one creature. Hit: 5 (1d6 + 2) piercing damage, or 6 (1d8 + 2) piercing damage if used with two hands to make a melee attack."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff (nur humanoide oder hybride Gestalt)",
+        "text": "Der Werwolf führt zwei Angriffe aus: einen Biss- und einen Klauen- oder Speerangriff."
+      },
+      {
+        "name": "Biss (nur Wolfs- oder hybride Gestalt)",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 6 (1W8+2) Stichschaden. Wenn das Ziel ein Humanoide ist, muss es einen SG-12-Konstitutionsrettungswurf bestehen, um nicht mit Werwolf-Lykanthropie verflucht zu werden."
+      },
+      {
+        "name": "Klauen (nur hybrider Gestalt)",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 7 (2W4+2) Hiebschaden."
+      },
+      {
+        "name": "Speer (nur humanoide Gestalt)",
+        "text": "Nah- oder Fernkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m oder Reichweite 6/18 m, eine Kreatur. Treffer: 5 (1W6+2) Stichschaden oder 6 (1W8+2) Stichschaden bei zweihändiger Führung und Nahkampfangriff."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/74/1000/1000/636252734224239957.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (Mensch"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "Gestaltwandler), chaotisch böse"
+  },
+  "token": {
+    "file": "Werewolf (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Werewolf (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Werewolf (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

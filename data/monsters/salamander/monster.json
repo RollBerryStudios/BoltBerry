@@ -1,0 +1,205 @@
+{
+  "id": 251,
+  "slug": "salamander",
+  "name": "Salamander",
+  "source": "SRD",
+  "meta": {
+    "en": "Large elemental, neutral evil",
+    "de": "Großes Elementar, neutral böse"
+  },
+  "challenge": "5",
+  "xp": 1800,
+  "ac": {
+    "en": "15 (Natural Armor)",
+    "de": "15 (Natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "90 (12d10 + 24)",
+    "de": "90 (12W10 + 24)"
+  },
+  "str": 18,
+  "dex": 14,
+  "con": 15,
+  "int": 11,
+  "wis": 10,
+  "cha": 12,
+  "strMod": 4,
+  "dexMod": 2,
+  "conMod": 2,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 10"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 10"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Ignan"
+    ],
+    "de": [
+      "Ignal"
+    ]
+  },
+  "traits": {
+    "en": [
+      {
+        "name": "Heated Body",
+        "text": "A creature that touches the salamander or hits it with a melee attack while within 5 ft. of it takes 7 (2d6) fire damage."
+      },
+      {
+        "name": "Heated Weapons",
+        "text": "Any metal melee weapon the salamander wields deals an extra 3 (1d6) fire damage on a hit (included in the attack)."
+      }
+    ],
+    "de": [
+      {
+        "name": "Heiße Waffen",
+        "text": "Jede Nahkampfwaffe aus Metall, die der Salamander führt, bewirkt bei einem Treffer zusätzlich 3 (1W6) Feuerschaden (im Angriff enthalten)."
+      },
+      {
+        "name": "Heißer Körper",
+        "text": "Eine Kreatur, die den Salamander berührt oder mit einem Nahkampfangriff trifft, während sie sich im Abstand von bis zu 1,5 Metern von ihm befindet, erleidet 7 (2W6) Feuerschaden."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The salamander makes two attacks: one with its spear and one with its tail."
+      },
+      {
+        "name": "Spear",
+        "text": "Melee or Ranged Weapon Attack: +7 to hit, reach 5 ft. or range 20 ft./60 ft., one target. Hit: 11 (2d6 + 4) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack, plus 3 (1d6) fire damage."
+      },
+      {
+        "name": "Tail",
+        "text": "Melee Weapon Attack: +7 to hit, reach 10 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage plus 7 (2d6) fire damage, and the target is grappled (escape DC 14). Until this grapple ends, the target is restrained, the salamander can automatically hit the target with its tail, and the salamander can't make tail attacks against other targets."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Salamander führt zwei Angriffe aus: einen Speer- und einen Schwanzangriff."
+      },
+      {
+        "name": "Schwanz",
+        "text": "Nahkampfwaffenangriff: +7 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 11 (2W6+4) Wuchtschaden plus 7 (2W6) Feuerschaden, und das Ziel wird gepackt (Rettungswurf-SG 14). Solange es gepackt bleibt, ist es festgesetzt. Der Salamander kann es automatisch mit dem Schwanz treffen, jedoch keine Schwanzangriffe gegen andere Ziele ausführen."
+      },
+      {
+        "name": "Speer",
+        "text": "Nah- oder Fernkampfwaffenangriff: +7 auf Treffer, Reichweite 1,5 m oder Reichweite 6/18 m, ein Ziel. Treffer: 11 (2W6+4) Stichschaden oder 13 (2W8+4) Stichschaden bei zweihändiger Führung und Nahkampfangriff, plus 3 (1W6) Feuerschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/173/1000/1000/636252761197608364.jpeg",
+  "size": {
+    "en": "large",
+    "de": "groß"
+  },
+  "type": {
+    "en": "elemental",
+    "de": "Elementar"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "Salamander (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Salamander (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Salamander (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

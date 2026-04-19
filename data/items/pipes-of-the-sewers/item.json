@@ -1,0 +1,30 @@
+{
+  "id": 268,
+  "slug": "pipes-of-the-sewers",
+  "name": "Pipes of the Sewers",
+  "nameDe": "Flöte des Rattenfängers",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 200000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon (requires attunement) You must be proficient with wind instruments to use these pipes. While you are attuned to the pipes, ordinary rats and giant rats are indifferent toward you and will not attack you unless you threaten or harm them. The pipes have 3 charges. If you play the pipes as an action, you can use a bonus action to expend 1 to 3 charges, calling forth one swarm of rats with each expended charge, provided that enough rats are within half a mile of you to be called in this fashion (as determined by the GM). If there aren't enough rats to form a swarm, the charge is wasted. Called swarms move toward the music by the shortest available route but aren't under your control otherwise. The pipes regain 1d3 expended charges daily at dawn. Whenever a swarm of rats that isn't under another creature's control comes within 30 feet of you while you are playing the pipes, you can make a Charisma check contested by the swarm's Wisdom check. If you lose the contest, the swarm behaves as it normally would and can't be swayed by the pipes' music for the next 24 hours. If you win the contest, the swarm is swayed by the pipes' music and becomes friendly to you and your companions for as long as you continue to play the pipes each round as an action. A friendly swarm obeys your commands. If you issue no commands to a friendly swarm, it defends itself but otherwise takes no actions. If a friendly swarm starts its turn and can't hear the pipes' music, your control over that swarm ends, and the swarm behaves as it normally would and can't be swayed by the pipes' music for the next 24 hours.",
+    "de": "Du musst im Umgang mit Blasinstrumenten geübt sein, um diese Flöte zu verwenden. Solange du auf die Flöte eingestimmt bist, verhalten sich normale Ratten und Riesenratten dir gegenüber gleichgültig und greifen dich nicht an - es sei denn, du bedrohst sie oder fügst ihnen Schaden zu. Die Flöte hat drei Ladungen. Wenn du die Flöte als Aktion spielst, kannst du eine Bonusaktion verwenden, um eine bis drei Ladungen zu verbrauchen. Mit jeder verbrauchten Ladung rufst du einen Rattenschwarm herbei, sofern sich im Abstand von bis zu 800 Metern genug Ratten befinden, die du herbeirufen kannst (dies wird vom SL festgelegt). Wenn nicht genug Ratten für einen Schwarm vorhanden sind, ist die Ladung verloren. Herbeigerufene Schwärme bewegen sich so direkt wie möglich auf die Musik zu, sind jedoch ansonsten nicht unter deiner Kontrolle. Die Flöte erhält täglich im Morgengrauen 1W3 verbrauchte Ladungen zurück. Wenn ein Rattenschwarm, der nicht von einer anderen Kreatur kontrolliert wird, sich dir im Abstand von bis zu neun Metern oder weniger nähert, während du die Flöte spielst, kannst du einen vergleichenden Charismawurf gegen den Weisheitswurf des Schwarms ausführen. Wenn du den Vergleich verlierst, verhält sich der Schwarm normal und kann für die nächsten 24 Stunden nicht von der Musik der Flöte beeinflusst werden. Gewinnst du den Vergleich, wird der Schwarm von der Musik der Flöte beeinflusst. Er verhält sich dir und deinen Verbündeten gegenüber freundlich, solange du die Flöte in jeder Runde als Aktion spielst Ein freundlicher Schwarm gehorcht deinen Befehlen. Wenn du einem freundlichen Schwarm keine Befehle erteilst, verteidigt er sich, führt aber keine anderen Aktionen aus. Wenn ein freundlicher Schwarm zu Beginn seines Zugs die Flötenmusik nicht hören kann, endet deine Kontrolle über den Schwarm. Er verhält sich dann normal und kann für die nächsten 24 Stunden nicht von der Musik der Flöte beeinflusst werden."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

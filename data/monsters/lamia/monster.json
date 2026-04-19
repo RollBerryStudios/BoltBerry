@@ -1,0 +1,200 @@
+{
+  "id": 186,
+  "slug": "lamia",
+  "name": "Lamia",
+  "source": "SRD",
+  "meta": {
+    "en": "Large monstrosity, chaotic evil",
+    "de": "Große Monstrosität, chaotisch böse"
+  },
+  "challenge": "4",
+  "xp": 1100,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (Natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "97 (13d10 + 26)",
+    "de": "97 (13W10 + 26)"
+  },
+  "str": 16,
+  "dex": 13,
+  "con": 15,
+  "int": 14,
+  "wis": 15,
+  "cha": 16,
+  "strMod": 3,
+  "dexMod": 1,
+  "conMod": 2,
+  "intMod": 2,
+  "wisMod": 2,
+  "chaMod": 3,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 12"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Abyssal",
+      "Common"
+    ],
+    "de": [
+      "Abyssisch",
+      "Gemeinsprache"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +3",
+    "Motiv erkennen +4",
+    "Täuschen +7"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Innate Spellcasting",
+        "text": "The lamia's innate spellcasting ability is Charisma (spell save DC 13). The lamia can innately cast the following spells, requiring no material components:"
+      },
+      {
+        "name": "At will",
+        "text": "disguise self, major image"
+      },
+      {
+        "name": "3/day",
+        "text": "charm person, mirror image, scrying, suggestion"
+      },
+      {
+        "name": "1/day",
+        "text": "geas"
+      }
+    ],
+    "de": [
+      {
+        "name": "Angeborenes Zauberwirken",
+        "text": "Die Zauberfähigkeit der Lamia ist Charisma (Zauberrettungswurf SG 13). Sie kann von Natur aus die folgenden Zauber wirken und benötigt dafür keine materiellen Komponenten."
+      },
+      {
+        "name": "Nach Belieben",
+        "text": "Selbstverkleidung (jegliche humanoide Form), Mächtiges Trugbild"
+      },
+      {
+        "name": "Je 3/Tag",
+        "text": "Person bezaubern, Spiegelbilder, Ausspähung, Einflüsterung"
+      },
+      {
+        "name": "1/day",
+        "text": "Geas"
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The lamia makes two attacks: one with its claws and one with its dagger or Intoxicating Touch."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 14 (2d10 + 3) slashing damage."
+      },
+      {
+        "name": "Dagger",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 5 (1d4 + 3) piercing damage."
+      },
+      {
+        "name": "Intoxicating Touch",
+        "text": "Melee Spell Attack: +5 to hit, reach 5 ft., one creature. Hit: The target is magically cursed for 1 hour. Until the curse ends, the target has disadvantage on Wisdom saving throws and all ability checks."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Die Lamia führt zwei Angriffe aus: einen Klauenangriff und einen mit ihrem Dolch, oder Vergiftende Berührung."
+      },
+      {
+        "name": "Dolch",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W4+3) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 14 (2W10+3) Hiebschaden."
+      },
+      {
+        "name": "Vergiftende Berührung",
+        "text": "Nahkampf-Zauberangriff: +5 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: Das Ziel ist eine Stunde lang magisch verflucht. Bis der Fluch endet, ist das Ziel bei Weisheitsrettungswürfen und allen Attributswürfen im Nachteil."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/385/315/315/636252780906064244.jpeg",
+  "size": {
+    "en": "large",
+    "de": "groß"
+  },
+  "type": {
+    "en": "monstrosity",
+    "de": "Monstrosität"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "Lamia (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Lamia (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lamia (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lamia (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lamia (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lamia (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lamia (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lamia (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lamia (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lamia (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Lamia (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

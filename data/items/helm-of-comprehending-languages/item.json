@@ -1,0 +1,26 @@
+{
+  "id": 237,
+  "slug": "helm-of-comprehending-languages",
+  "name": "Helm of Comprehending Languages",
+  "nameDe": "Helm des Sprachenverstehens",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 50000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon While wearing this helm, you can use an action to cast the comprehend languages spell from it at will.",
+    "de": "Wenn du diesen Helm trägst, kannst du als Aktion mit dem Helm beliebig oft den Zauber Sprachen verstehen  wirken."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

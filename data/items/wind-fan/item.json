@@ -1,0 +1,26 @@
+{
+  "id": 256,
+  "slug": "wind-fan",
+  "name": "Wind Fan",
+  "nameDe": "Windfächer",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "UNCOMMON",
+    "de": "Ungewöhnlich"
+  },
+  "cost": 150000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, uncommon While holding this fan, you can use an action to cast the gust of wind spell (save DC 13) from it. Once used, the fan shouldn't be used again until the next dawn. Each time it is used again before then, it has a cumulative 20 percent chance of not working and tearing into useless, nonmagical tatters.",
+    "de": "Wenn du diesen Fächer hältst, kannst du als Aktion den Zauber Windstoß  (Rettungswurf-SG 13) mit ihm wirken. Nachdem er verwendet wurde, kann der Fächer erst im nächsten Morgengrauen wiederverwendet werden. Jedes Mal, wenn er vor diesem Zeitpunkt wiederverwendet wird, besteht eine kumulative Chance von 20 Prozent, dass er nicht funktioniert und in nutzlose, nichtmagische Fetzen zerfällt."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

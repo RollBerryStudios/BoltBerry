@@ -1,0 +1,36 @@
+{
+  "id": 333,
+  "slug": "arrow-catching-shield",
+  "name": "Arrow-Catching Shield",
+  "nameDe": "Pfeilfangender Schild",
+  "category": {
+    "en": "ARMOR",
+    "de": "Rüstung"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 600000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Armor (shield), rare (requires attunement) You gain a +2 bonus to AC against ranged attacks while you wield this shield. This bonus is in addition to the shield's normal bonus to AC. In addition, whenever an attacker makes a ranged attack against a target within 5 feet of you, you can use your reaction to become the target of the attack instead.",
+    "de": "Wenn du diesen Schild trägst, erhältst du einen Bonus von +2 gegen Fernkampfangriffe auf deine RK Dieser Bonus des Schildes wirkt zusätzlich zu seinem normalen Bonus auf die RK Wenn ein Angreifer einen Fernkampfangriff gegen ein Ziel im Abstand von bis zu 1,5 Metern von dir ausführt, kannst du außerdem als Reaktion selbst das Ziel werden."
+  },
+  "weight": 6,
+  "classification": {
+    "en": "Shield",
+    "de": "Schild"
+  },
+  "ac": "+2",
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "armor",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

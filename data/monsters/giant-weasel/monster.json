@@ -1,0 +1,210 @@
+{
+  "id": 144,
+  "slug": "giant-weasel",
+  "name": "Giant Weasel",
+  "nameDe": "Riesenwiesel",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium beast, unaligned",
+    "de": "Mittlere Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/8",
+  "xp": 25,
+  "ac": {
+    "en": "13",
+    "de": "13"
+  },
+  "hp": {
+    "en": "9 (2d8)",
+    "de": "9 (2W8)"
+  },
+  "str": 11,
+  "dex": 16,
+  "con": 10,
+  "int": 4,
+  "wis": 12,
+  "cha": 5,
+  "strMod": 0,
+  "dexMod": 3,
+  "conMod": 0,
+  "intMod": -3,
+  "wisMod": 1,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 13"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +5",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Keen Hearing and Smell",
+        "text": "The weasel has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+      }
+    ],
+    "de": [
+      {
+        "name": "Scharfes Gehör und scharfer Geruchssinn",
+        "text": "Das Wiesel ist bei Weisheitswürfen (Wahrnehmung), die auf Gehör oder Geruchssinn basieren, im Vorteil."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 5 (1d4 + 3) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (1W4+3) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantWeaselForest (1).webp",
+    "variant": "forest"
+  },
+  "tokens": [
+    {
+      "file": "GiantWeaselForest (10).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (11).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (12).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (13).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (14).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (15).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (16).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (17).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (18).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (19).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (2).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (20).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (21).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (22).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (23).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (3).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (4).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (5).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (6).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (7).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (8).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselForest (9).webp",
+      "variant": "forest"
+    },
+    {
+      "file": "GiantWeaselSaddle (1).webp",
+      "variant": "saddle"
+    },
+    {
+      "file": "GiantWeaselSaddle (2).webp",
+      "variant": "saddle"
+    },
+    {
+      "file": "GiantWeaselSaddle (3).webp",
+      "variant": "saddle"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

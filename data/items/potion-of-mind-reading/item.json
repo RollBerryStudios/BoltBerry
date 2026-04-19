@@ -1,0 +1,26 @@
+{
+  "id": 207,
+  "slug": "potion-of-mind-reading",
+  "name": "Potion of Mind Reading",
+  "nameDe": "Trank des Gedankenlesens",
+  "category": {
+    "en": "POTIONS_OILS",
+    "de": "Tränke & Öle"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 18000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Potion, rare When you drink this potion, you gain the effect of the detect thoughts spell (save DC 13). The potion's dense, purple liquid has an ovoid cloud of pink floating in it.",
+    "de": "Wenn du diesen Trank trinkst, erhältst du den Effekt des Zaubers Gedanken wahrnehmen  (Rettungswurf-SG 13), In der dickflüssigen, violetten Flüssigkeit des Tranks treibt eine ovale, rosafarbene Wolke."
+  },
+  "image": "potions-and-oils",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

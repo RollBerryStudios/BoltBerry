@@ -1,0 +1,23 @@
+{
+  "id": 83,
+  "slug": "clothes-costume",
+  "name": "Clothes, Costume",
+  "nameDe": "Kleidung, Kostüm",
+  "category": {
+    "en": "ADVENTURING_GEAR",
+    "de": "Ausrüstung"
+  },
+  "rarity": {
+    "en": "COMMON",
+    "de": "Gewöhnlich"
+  },
+  "cost": 500,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "weight": 4,
+  "image": "adventuring-gear",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

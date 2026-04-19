@@ -1,0 +1,56 @@
+{
+  "id": 24,
+  "slug": "eldritch-blast",
+  "name": "Eldritch Blast",
+  "nameDe": "Unheimlicher Strahl",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "warlock"
+    ],
+    "de": [
+      "Hexenmeister"
+    ]
+  },
+  "type": {
+    "en": "Evocation cantrip",
+    "de": "Hervorrufung Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "A beam of crackling energy streaks toward a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 force damage. The spell creates more than one beam when you reach higher levels: two beams at 5th level, three beams at 11th level, and four beams at 17th level. You can direct the beams at the same target or at different ones. Make a separate attack roll for each beam.",
+    "de": "Ein Strahl aus knisternder Energie schießt auf eine Kreatur in Reichweite zu. Führe einen Fernkampf-Zauberangriff gegen das Ziel aus. Bei einem Treffer erleidet das Ziel 1W10 Energieschaden. Auf höheren Stufen erschafft der Zauber mehr als einen Strahl: zwei Strahlen auf der 5. Stufe, drei Strahlen auf der 11. Stufe und vier Strahlen auf der 17. Stufe. Du kannst die Strahlen auf dasselbe oder auf unterschiedliche Ziele lenken. Führe für jeden Strahl einen eigenen Angriffswurf aus."
+  },
+  "image": "eldritch-blast",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

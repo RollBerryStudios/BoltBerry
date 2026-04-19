@@ -1,0 +1,61 @@
+{
+  "id": 1,
+  "slug": "alarm",
+  "name": "Alarm",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": true,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "ranger",
+      "wizard"
+    ],
+    "de": [
+      "Waldläufer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "1st-level abjuration (ritual)",
+    "de": "Stufe 1 Bannmagie (Ritual)"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "8 hours",
+    "de": "8 Stunden"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a tiny bell and a piece of fine silver wire",
+      "de": "eine kleine Glocke und ein Stück feiner Silberdraht"
+    },
+    "raw": {
+      "en": "V, S, M (a tiny bell and a piece of fine silver wire)",
+      "de": "V, G, M (eine kleine Glocke und ein Stück feiner Silberdraht)"
+    }
+  },
+  "description": {
+    "en": "You set an alarm against unwanted intrusion. Choose a door, a window, or an area within range that is no larger than a 20-foot cube. Until the spell ends, an alarm alerts you whenever a Tiny or larger creature touches or enters the warded area. When you cast the spell, you can designate creatures that won't set off the alarm. You also choose whether the alarm is mental or audible. A mental alarm alerts you with a ping in your mind if you are within 1 mile of the warded area. This ping awakens you if you are sleeping. An audible alarm produces the sound of a hand bell for 10 seconds within 60 feet.",
+    "de": "Du erschaffst einen Alarm gegen unerwünschtes Eindringen. Wähle eine Tür, ein Fenster oder einen Bereich in Reichweite, der nicht größer als ein Würfel von sechs Metern Kantenlänge sein darf. Bis der Zauber endet, warnt dich ein Alarm, wenn eine mindestens winzige Kreatur den geschützten Bereich berührt oder in ihn eindringt. Wenn du den Zauber wirkst, kannst du Kreaturen bestimmen, die den Alarm nicht auslösen. Du legst zudem fest, ob der Alarm mental oder hörbar ist. Ein mentaler Alarm macht sich als Klingeln in deinem Kopf bemerkbar, wenn du dich im Abstand von bis zu 1,6 Kilometern vom geschützten Bereich befindest. Er weckt dich auch aus dem Schlaf. Ein hörbarer Alarm erzeugt im Abstand von bis zu 18 Metern zehn Sekunden lang das Geräusch einer Handglocke."
+  },
+  "image": "alarm",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

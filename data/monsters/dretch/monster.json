@@ -1,0 +1,234 @@
+{
+  "id": 90,
+  "slug": "dretch",
+  "name": "Dretch",
+  "source": "SRD",
+  "meta": {
+    "en": "Small fiend, chaotic evil",
+    "de": "Kleiner Unhold, chaotisch böse"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "11 (Natural Armor)",
+    "de": "11 (Natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "18 (4d6 + 4)",
+    "de": "18 (4W6 + 4)"
+  },
+  "str": 11,
+  "dex": 11,
+  "con": 12,
+  "int": 5,
+  "wis": 8,
+  "cha": 3,
+  "strMod": 0,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": -3,
+  "wisMod": -1,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 9"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 9"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Abyssal",
+      "telepathy 60 ft. (works only with creatures that understand Abyssal)"
+    ],
+    "de": [
+      "Abyssisch",
+      "Telepathie auf 18 m (nur mit Kreaturen",
+      "die Abyssisch verstehen)"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The dretch makes two attacks: one with its bite and one with its claws."
+      },
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 3 (1d6) piercing damage."
+      },
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 5 (2d4) slashing damage."
+      },
+      {
+        "name": "Fetid Cloud",
+        "text": "A 10-foot radius of disgusting green gas extends out from the dretch. The gas spreads around corners, and its area is lightly obscured. It lasts for 1 minute or until a strong wind disperses it. Any creature that starts its turn in that area must succeed on a DC 11 Constitution saving throw or be poisoned until the start of its next turn. While poisoned in this way, the target can take either an action or a bonus action on its turn, not both, and can't take reactions."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Dretch führt zwei Angriffe aus: einen Biss- und einen Klauenangriff."
+      },
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +2 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 3 (1W6) Stichschaden."
+      },
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +2 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 5 (2W4) Hiebschaden."
+      },
+      {
+        "name": "Stinkwolke (1-mal täglich)",
+        "text": "Widerliches grünes Gas geht im Radius von drei Metern vom Dretch aus. Es breitet sich um Ecken aus, und sein Bereich ist leicht verschleiert. Das Gas bleibt eine Minute lang bestehen, oder bis ein starker Wind es verteilt. Alle Kreaturen, die ihren Zug in dem Bereich beginnen, müssen einen SG-11-Konstitutionsrettungswurf bestehen, oder sie sind bis zum Beginn ihres nächsten Zugs vergiftet. Auf diese Art vergiftete Ziele können keine Reaktionen ausführen, und sie können in ihrem Zug entweder eine Aktion oder eine Bonusaktion, aber nicht beides ausführen."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/293/1000/1000/636252771253285096.jpeg",
+  "size": {
+    "en": "small",
+    "de": "klein"
+  },
+  "type": {
+    "en": "fiend",
+    "de": "Unhold"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "Dretch (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Dretch (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (28).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (29).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (30).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Dretch (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

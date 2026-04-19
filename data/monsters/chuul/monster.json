@@ -1,0 +1,241 @@
+{
+  "id": 66,
+  "slug": "chuul",
+  "name": "Chuul",
+  "source": "SRD",
+  "meta": {
+    "en": "Large aberration, chaotic evil",
+    "de": "Große Aberration, chaotisch böse"
+  },
+  "challenge": "4",
+  "xp": 1100,
+  "ac": {
+    "en": "16 (Natural Armor)",
+    "de": "16 (Natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "93 (11d10 + 33)",
+    "de": "93 (11W10 + 33)"
+  },
+  "str": 19,
+  "dex": 10,
+  "con": 16,
+  "int": 5,
+  "wis": 11,
+  "cha": 5,
+  "strMod": 4,
+  "dexMod": 0,
+  "conMod": 3,
+  "intMod": -3,
+  "wisMod": 0,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "swim": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "understands Deep Speech but can't speak"
+    ],
+    "de": [
+      "Versteht Tiefensprache",
+      "aber kann nicht sprechen"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Amphibious",
+        "text": "The chuul can breathe air and water."
+      },
+      {
+        "name": "Sense Magic",
+        "text": "The chuul senses magic within 120 feet of it at will. This trait otherwise works like the detect magic spell but isn't itself magical."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amphibisch",
+        "text": "Der Chuul kann Luft und Wasser atmen."
+      },
+      {
+        "name": "Magie spüren",
+        "text": "Der Chuul spürt beliebig oft Magie im Abstand von bis zu 36 Metern von sich. Ansonsten funktioniert dieses Merkmal wie der Zauber Magie entdecken, aber ist selbst nicht magisch."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The chuul makes two pincer attacks. If the chuul is grappling a creature, the chuul can also use its tentacles once."
+      },
+      {
+        "name": "Pincer",
+        "text": "Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage. The target is grappled (escape DC 14) if it is a Large or smaller creature and the chuul doesn't have two other creatures grappled."
+      },
+      {
+        "name": "Tentacles",
+        "text": "One creature grappled by the chuul must succeed on a DC 13 Constitution saving throw or be poisoned for 1 minute. Until this poison ends, the target is paralyzed. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Chuul führt zwei Zangenangriffe aus. Wenn der Chuul eine Kreatur gepackt hält, kann er auch einmal seine Tentakel einsetzen."
+      },
+      {
+        "name": "Zange",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 11 (2W6+4) Wuchtschaden. Das Ziel wird gepackt (Rettungswurf-SG 14), sofern es sich um eine höchstens große Kreatur handelt und der Chuul nicht schon zwei andere Kreaturen gepackt hält."
+      },
+      {
+        "name": "Tentakel",
+        "text": "Eine vom Chuul gepackte Kreatur muss einen SG-13-Konstitutionsrettungswurf bestehen, oder sie ist eine Minute lang vergiftet. Bis zum Ende der Vergiftung ist das Ziel gelähmt. Das Ziel kann den Rettungswurf am Ende jedes seiner Züge wiederholen und den Effekt bei einem Erfolg beenden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/241/1000/1000/636252767122656355.jpeg",
+  "size": {
+    "en": "large",
+    "de": "groß"
+  },
+  "type": {
+    "en": "aberration",
+    "de": "Aberration"
+  },
+  "alignment": {
+    "en": "chaotic evil",
+    "de": "chaotisch böse"
+  },
+  "token": {
+    "file": "Chuul (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Chuul (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (27).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Chuul (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

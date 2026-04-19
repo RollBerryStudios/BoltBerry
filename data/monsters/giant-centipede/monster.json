@@ -1,0 +1,196 @@
+{
+  "id": 122,
+  "slug": "giant-centipede",
+  "name": "Giant Centipede",
+  "nameDe": "Riesentausendfüßler",
+  "source": "SRD",
+  "meta": {
+    "en": "Small beast, unaligned",
+    "de": "Kleine Bestie, ohne Gesinnung"
+  },
+  "challenge": "1/4",
+  "xp": 50,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "4 (1d6 + 1)",
+    "de": "4 (1W6+1)"
+  },
+  "str": 5,
+  "dex": 14,
+  "con": 12,
+  "int": 1,
+  "wis": 7,
+  "cha": 3,
+  "strMod": -3,
+  "dexMod": 2,
+  "conMod": 1,
+  "intMod": -5,
+  "wisMod": -2,
+  "chaMod": -4,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "climb": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 30 ft.",
+      "passive perception 8"
+    ],
+    "de": [
+      "Blindsicht 9 m",
+      "Passive Wahrnehmung 8"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 4 (1d4 + 2) piercing damage, and the target must succeed on a DC 11 Constitution saving throw or take 10 (3d6) poison damage. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +4 auf Treffer, Reichweite 1,5 m, eine Kreatur. Treffer: 4 (1W4+2) Stichschaden, und das Ziel muss einen SG-11-Konstitutionsrettungswurf bestehen, oder es erleidet 10 (3W6) Giftschaden. Wenn die Trefferpunkte des Ziels durch den Giftschaden auf 0 sinken, ist das Ziel stabil, aber eine Stunde lang vergiftet sowie gelähmt, selbst wenn es Trefferpunkte zurückgewinnt."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/648/beast.jpg",
+  "size": {
+    "en": "small",
+    "de": "Kleines"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "GiantCentipede (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GiantCentipede (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (24).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (25).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (26).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GiantCentipede (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

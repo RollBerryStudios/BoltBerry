@@ -1,0 +1,240 @@
+{
+  "id": 156,
+  "slug": "green-hag",
+  "name": "Green Hag",
+  "nameDe": "Grüne Vettel",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium fey, neutral evil",
+    "de": "Mittelgroße Fee, neutral böse"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "17 (Natural Armor)",
+    "de": "17 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "82 (11d8 + 33)",
+    "de": "82 (11W8+33)"
+  },
+  "str": 18,
+  "dex": 12,
+  "con": 16,
+  "int": 13,
+  "wis": 14,
+  "cha": 14,
+  "strMod": 4,
+  "dexMod": 1,
+  "conMod": 3,
+  "intMod": 1,
+  "wisMod": 2,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Common",
+      "Draconic",
+      "Sylvan"
+    ],
+    "de": [
+      "Drakonisch",
+      "Gemeinsprache",
+      "Sylvanisch"
+    ]
+  },
+  "skills": [
+    "Arkane Kunde +3",
+    "Heimlichkeit +3",
+    "Täuschen +4",
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Amphibious",
+        "text": "The hag can breathe air and water."
+      },
+      {
+        "name": "Mimicry",
+        "text": "The hag can mimic animal sounds and humanoid voices. A creature that hears the sounds can tell they are imitations with a successful DC 14 Wisdom (Insight) check."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amphibisch",
+        "text": "Die Vettel kann Luft und Wasser atmen."
+      },
+      {
+        "name": "Stimmen nachahmen",
+        "text": "Die Vettel kann Tierlaute und menschliche Stimmen nachahmen. Ein Kreatur, die diese Geräusche hört, erkennt sie als Imitation, sofern sie einen SG-14-Weisheitswurf (Motiv erkennen) besteht."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Claws",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) slashing damage."
+      },
+      {
+        "name": "Illusory Appearance",
+        "text": "The hag covers herself and anything she is wearing or carrying with a magical illusion that makes her look like another creature of her general size and humanoid shape. The illusion ends if the hag takes a bonus action to end it or if she dies.\nThe changes wrought by this effect fail to hold up to physical inspection. For example, the hag could appear to have smooth skin, but someone touching her would feel her rough flesh. Otherwise, a creature must take an action to visually inspect the illusion and succeed on a DC 20 Intelligence (Investigation) check to discern that the hag is disguised."
+      },
+      {
+        "name": "Invisible Passage",
+        "text": "The hag magically turns invisible until she attacks or casts a spell, or until her concentration ends (as if concentrating on a spell). While invisible, she leaves no physical evidence of her passage, so she can be tracked only by magic. Any equipment she wears or carries is invisible with her."
+      }
+    ],
+    "de": [
+      {
+        "name": "Klauen",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 13 (2W8+4) Hiebschaden."
+      },
+      {
+        "name": "Illusionäres Erscheinungsbild",
+        "text": "Die Vettel hüllt sich und alles, was sie trägt oder hält, in eine magische Illusion, die sie wie eine andere Kreatur von ihrer ungefähren Größe sowie von humanoider Gestalt erscheinen lässt. Die Illusion endet, wenn die Vettel sie mit einer Bonusaktion beendet oder ihre Trefferpunkte auf 0 sinken. Die Veränderungen durch diese Illusion halten einer genauen körperlichen Untersuchung nicht stand. Beispiel: Die Vettel könnte sich illusionär glatte Haut verleihen, doch jemand, der sie berührt, würde ihre Falten spüren. Anderenfalls muss eine Kreatur eine Aktion ausführen, um die Illusion visuell zu untersuchen und einen SG-20-Intelligenzwurf (Nachforschungen) auszuführen. Bei einem Erfolg bemerkt die Kreatur die Tarnung der Vettel."
+      },
+      {
+        "name": "Unsichtbare Passage",
+        "text": "Die Vettel wird magisch unsichtbar, bis sie angreift oder ihre Konzentration endet (wie bei einem Zauber). Solange sie unsichtbar ist, hinterlässt sie keine physischen Spuren und kann nur durch Magie gefunden werden. Ausrüstung, die sie trägt oder hält, ist ebenfalls unsichtbar."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/365/315/315/636252778948574879.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroßes"
+  },
+  "type": {
+    "en": "fey",
+    "de": "Feenwesen"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "neutral böse"
+  },
+  "token": {
+    "file": "GreenHag (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GreenHag (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (23).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHag (9).webp",
+      "variant": ""
+    },
+    {
+      "file": "GreenHagNSFW (1).webp",
+      "variant": "nSFW"
+    },
+    {
+      "file": "GreenHagNSFW (2).webp",
+      "variant": "nSFW"
+    },
+    {
+      "file": "GreenHagNSFW (3).webp",
+      "variant": "nSFW"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

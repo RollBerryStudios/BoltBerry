@@ -1,0 +1,64 @@
+{
+  "id": 320,
+  "slug": "sunbeam",
+  "name": "Sunbeam",
+  "nameDe": "Sonnenstrahl",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "sorcerer",
+      "wizard"
+    ],
+    "de": [
+      "Druide",
+      "Zauberer",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "6th-level evocation",
+    "de": "Stufe 6 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Self (60-foot line)",
+    "de": "Selbst (18 Meter Gerade)"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a magnifying glass",
+      "de": "ein Vergrößerungsglas"
+    },
+    "raw": {
+      "en": "V, S, M (a magnifying glass)",
+      "de": "V, G, M (ein Vergrößerungsglas)"
+    }
+  },
+  "description": {
+    "en": "A beam of brilliant light flashes out from your hand in a 5-foot-wide, 60-foot-long line. Each creature in the line must make a constitution saving throw. On a failed save, a creature takes 6d8 radiant damage and is blinded until your next turn. On a successful save, it takes half as much damage and isn't blinded by this spell. Undead and oozes have disadvantage on this saving throw. You can create a new line of radiance as your action on any turn until the spell ends. For the duration, a mote of brilliant radiance shines in your hand. It sheds bright light in a 30-foot radius and dim light for an additional 30 feet. This light is sunlight.",
+    "de": "Ein heller Lichtstrahl schießt in einer 1,5 Meter breiten und 18 Meter langen Linie aus deiner Hand. Jede Kreatur in der Linie muss einen Konstitutionsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 6W8 gleißenden Schaden und ist bis zu deinem nächsten Zug blind. Bei einem erfolgreichen Rettungswurf erleidet sie halb so viel Schaden und wird nicht blind. Untote und Schlicke sind bei diesem Rettungswurf im Nachteil. Als Aktion kannst du in jedem deiner Züge eine neue Linie aus Licht erschaffen, bis der Zauber endet. Für die Wirkungsdauer erstrahlt ein heller Funke in deiner Hand. Er spendet in einem Radius von neun Metern helles Licht und von weiteren neun Metern dämmriges Licht. Beim Licht handelt es sich um Sonnenlicht."
+  },
+  "image": "sunbeam",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

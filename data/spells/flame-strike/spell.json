@@ -1,0 +1,64 @@
+{
+  "id": 255,
+  "slug": "flame-strike",
+  "name": "Flame Strike",
+  "nameDe": "Flammenschlag",
+  "level": {
+    "en": "5",
+    "de": "Grad 5"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "5th-level evocation",
+    "de": "Stufe 5 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "pinch of sulfur",
+      "de": "Prise Schwefel"
+    },
+    "raw": {
+      "en": "V, S, M (pinch of sulfur)",
+      "de": "V, G, M (Prise Schwefel)"
+    }
+  },
+  "description": {
+    "en": "A vertical column of divine fire roars down from the heavens in a location you specify. Each creature in a 10-foot-radius, 40-foot-high cylinder centered on a point within range must make a dexterity saving throw. A creature takes 4d6 fire damage and 4d6 radiant damage on a failed save, or half as much damage on a successful one.",
+    "de": "Eine vertikale Säule aus göttlichem Feuer fährt an einem Ort deiner Wahl vom Himmel herab. Jede Kreatur in einem zwölf Meter hohen Zylinder mit einem Radius von drei Metern, der um einen Punkt in Reichweite zentriert ist, muss einen Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet eine Kreatur 4W6 Feuerschaden und 4W6 gleißenden Schaden, anderenfalls die Hälfte. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, steigt der Feuerschaden oder der gleißende Schaden (deine Wahl) für jeden Grad über dem 5. um 1W6."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 6th level or higher, the fire damage or the radiant damage (your choice) increases by 1d6 for each slot level above 5th.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, steigt der Feuerschaden oder der gleißende Schaden (deine Wahl) für jeden Grad über dem 5. um 1W6."
+  },
+  "image": "flame-strike",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

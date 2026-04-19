@@ -1,0 +1,68 @@
+{
+  "id": 327,
+  "slug": "true-seeing",
+  "name": "True Seeing",
+  "nameDe": "Wahrer Blick",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Divination",
+    "de": "Erkenntnis"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "cleric",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Kleriker",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "6th-level divination",
+    "de": "Stufe 6 Erkenntnismagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "1 hour",
+    "de": "1 Stunde"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "an ointment for the eyes that costs 25 gp, is made from mushroom powder, saffron, and fat, and is consumed by the spell",
+      "de": "eine Salbe für die Augen, die 25 Goldstücke kostet, aus Pilzpulver, Safran und Fett hergestellt wird und durch den Zauberspruch verbraucht wird"
+    },
+    "raw": {
+      "en": "V, S, M (an ointment for the eyes that costs 25 gp, is made from mushroom powder, saffron, and fat, and is consumed by the spell)",
+      "de": "V, G, M (eine Salbe für die Augen, die 25 Goldstücke kostet, aus Pilzpulver, Safran und Fett hergestellt wird und durch den Zauberspruch verbraucht wird)"
+    }
+  },
+  "description": {
+    "en": "This spell gives the willing creature you touch the ability to see things as they actually are. For the duration, the creature has truesight, notices secret doors hidden by magic, and can see into the Ethereal Plane, all out to a range of 120 feet.",
+    "de": "Berührst du mit diesem Zauber eine bereitwillige Kreatur, sieht sie die Dinge so, wie sie wirklich sind. Für die Wirkungsdauer verfügt die Kreatur über Wahrer Blick, bemerkt von Magie verborgene Geheimtüren und kann bis zu einer Reichweite von 36 Metern in die Ätherebene blicken."
+  },
+  "image": "detect-thoughts",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

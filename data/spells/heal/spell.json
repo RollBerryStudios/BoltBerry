@@ -1,0 +1,62 @@
+{
+  "id": 275,
+  "slug": "heal",
+  "name": "Heal",
+  "nameDe": "Heilung",
+  "level": {
+    "en": "6",
+    "de": "Grad 6"
+  },
+  "school": {
+    "en": "Evocation",
+    "de": "Hervorrufung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "druid"
+    ],
+    "de": [
+      "Kleriker",
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "6th-level evocation",
+    "de": "Stufe 6 Hervorrufung"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Instantaneous",
+    "de": "Unmittelbar"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "Choose a creature that you can see within range. A surge of positive energy washes through the creature, causing it to regain 70 hit points. This spell also ends blindness, deafness, and any diseases affecting the target. This spell has no effect on constructs or undead.",
+    "de": "Wähle eine Kreatur in Reichweite, die du sehen kannst. Eine Welle positiver Energie durchströmt das Ziel und stellt 70 Trefferpunkte wieder her. Der Zauber beendet zudem die Zustände Blindheit und Taubheit, sowie alle Krankheiten, unter denen das Ziel leidet. Dieser Zauber wirkt nicht auf Untote oder Konstrukte. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 7. Grades oder höher nutzt, steigt die Heilung für jeden Grad über dem 6. um 10."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 7th level or higher, the amount of healing increases by 10 for each slot level above 6th.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 7. Grades oder höher nutzt, steigt die Heilung für jeden Grad über dem 6. um 10."
+  },
+  "image": "heal",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

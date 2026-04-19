@@ -1,0 +1,188 @@
+{
+  "id": 227,
+  "slug": "plesiosaurus",
+  "name": "Plesiosaurus",
+  "source": "SRD",
+  "meta": {
+    "en": "Large beast, unaligned",
+    "de": "Große Bestie, ohne Gesinnung"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "13 (Natural Armor)",
+    "de": "13 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "68 (8d10 + 24)",
+    "de": "68 (8W10+24)"
+  },
+  "str": 18,
+  "dex": 15,
+  "con": 16,
+  "int": 2,
+  "wis": 12,
+  "cha": 5,
+  "strMod": 4,
+  "dexMod": 2,
+  "conMod": 3,
+  "intMod": -4,
+  "wisMod": 1,
+  "chaMod": -3,
+  "speed": {
+    "run": {
+      "en": 20,
+      "de": 6
+    },
+    "swim": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "--"
+    ],
+    "de": [
+      "-"
+    ]
+  },
+  "skills": [
+    "Heimlichkeit +4",
+    "Wahrnehmung +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Hold Breath",
+        "text": "The plesiosaurus can hold its breath for 1 hour."
+      }
+    ],
+    "de": [
+      {
+        "name": "Atem anhalten",
+        "text": "Der Plesiosaurier kann eine Stunde lang den Atem anhalten."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 14 (3d6 + 4) piercing damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 14 (3W6+4) Stichschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/16/488/315/315/636376304583147024.jpeg",
+  "size": {
+    "en": "large",
+    "de": "Großes"
+  },
+  "type": {
+    "en": "beast",
+    "de": "Tier"
+  },
+  "alignment": {
+    "en": "unaligned",
+    "de": "gesinnungslos"
+  },
+  "token": {
+    "file": "Plesiosaurus (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "Plesiosaurus (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "Plesiosaurus (9).webp",
+      "variant": ""
+    }
+  ],
+  "nameDe": "Plesiosaurier",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,70 @@
+{
+  "id": 129,
+  "slug": "major-image",
+  "name": "Major Image",
+  "nameDe": "Mächtiges Trugbild",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Illusion",
+    "de": "Illusion"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "bard",
+      "sorcerer",
+      "warlock",
+      "wizard"
+    ],
+    "de": [
+      "Barde",
+      "Zauberer",
+      "Hexenmeister",
+      "Magier"
+    ]
+  },
+  "type": {
+    "en": "3rd-level illusion",
+    "de": "Stufe 3 Illusionsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "120 feet",
+    "de": "36 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a bit of fleece",
+      "de": "ein bisschen Vlies"
+    },
+    "raw": {
+      "en": "V, S, M (a bit of fleece)",
+      "de": "V, G, M (ein bisschen Vlies)"
+    }
+  },
+  "description": {
+    "en": "You create the image of an object, a creature, or some other visible phenomenon that is no larger than a 20-foot cube. The image appears at a spot that you can see within range and lasts for the duration. It seems completely real, including sounds, smells, and temperature appropriate to the thing depicted. You can't create sufficient heat or cold to cause damage, a sound loud enough to deal thunder damage or deafen a creature, or a smell that might sicken a creature (like a troglodyte's stench). As long as you are within range of the illusion, you can use your action to cause the image to move to any other spot within range. As the image changes location, you can alter its appearance so that its movements appear natural for the image. For example, if you create an image of a creature and move it, you can alter the image so that it appears to be walking. Similarly, you can cause the illusion to make different sounds at different times, even making it carry on a conversation, for example. Physical interaction with the image reveals it to be an illusion, because things can pass through it. A creature that uses its action to examine the image can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image, and its other sensory qualities become faint to the creature.",
+    "de": "Du erschaffst ein Abbild eines Objekts, einer Kreatur oder eines anderen sichtbaren Phänomens, das nicht größer als ein Würfel mit sechs Metern Kantenlänge sein darf. Das Abbild erscheint an einem Punkt in Reichweite und bleibt während der Wirkungsdauer bestehen. Es ist von der Realität nicht zu unterscheiden und simuliert auch die dazu passenden Geräusche, Gerüche und Temperatur. Da die Hitze oder Kälte eine Illusion ist, verursacht sie keinen Schaden. Du kannst keine Geräusche erzeugen, die laut genug sind, um Schallschaden zu verursachen oder eine Kreatur zu betäuben, und keinen Geruch, der Übelkeit auslösen könnte - wie den Gestank eines Troglodyten. Solange du dich in der Reichweite der Illusion befindest, kannst du mit deiner Aktion das Abbild an einen anderen Ort deiner Wahl in Reichweite bewegen. Dabei kannst du das Bild so verändern, dass seine Bewegung natürlich erscheint. Beispiel: Wenn du das Abbild einer Kreatur erstellst und bewegst, kannst du es so verändern, dass es zu laufen scheint. Außerdem kann die Illusion verschiedene Geräusche machen oder sogar ein Gespräch führen. Physische Interaktionen mit dem Abbild enttarnen es als Illusion, da Dinge es einfach durchdringen können. Eine Kreatur, die ihre Aktion verwendet, um das Abbild zu untersuchen, kann einen Intelligenzwurf (Nachforschungen) gegen deinen Zauberrettungswurf-SG ausführen. Bei einem Erfolg erkennt eine Kreatur das Abbild als Illusion und es wird für sie durchscheinend. Die anderen sensorischen Eigenschaften werden ebenfalls abgeschwächt. Auf höheren Graden:  Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, bleibt der Zauber bestehen, bis er gebannt wird und erfordert keine Konzentration deinerseits."
+  },
+  "higherLevels": {
+    "en": "When you cast this spell using a spell slot of 6th level or higher, the spell lasts until dispelled, without requiring your concentration.",
+    "de": "Wirkst du diesen Zauber, indem du einen Zauberplatz des 6. Grades oder höher nutzt, bleibt der Zauber bestehen, bis er gebannt wird und erfordert keine Konzentration deinerseits."
+  },
+  "image": "thaumaturgy",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

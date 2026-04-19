@@ -1,0 +1,26 @@
+{
+  "id": 240,
+  "slug": "bead-of-force",
+  "name": "Bead of Force",
+  "nameDe": "Perle der Kraft",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 96000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Wondrous item, rare This small black Sphere measures 3/4 of an inch in diameter and weighs an ounce. Typically, 1d4 + 4 beads of force are found together. You can use an action to throw the bead up to 60 feet. The bead explodes on impact and is destroyed. Each creature within a 10-foot radius of where the bead landed must succeed on a DC 15 Dexterity saving throw or take 5d4 force damage. A Sphere of transparent force then encloses the area for 1 minute. Any creature that failed the save and is completely within the area is trapped inside this Sphere. Creatures that succeeded on the save, or are partially within the area, are pushed away from the center of the Sphere until they are no longer inside it. Only breathable air can pass through the sphere's wall. No Attack or other Effect can. An enclosed creature can use its action to push against the sphere's wall, moving the Sphere up to half the creature's walking speed. The Sphere can be picked up, and its magic causes it to weigh only 1 pound, regardless of the weight of creatures inside.",
+    "de": "Diese kleine schwarze Kugel hat einen Durchmesser von etwa zwei Zentimetern und wiegt rund 30 Gramm. Üblicherweise finden sich 1W4+4 Perlen der Kraft auf einmal. Du kannst die Perle als Aktion bis zu 18 Meter weit werfen. Die Perle explodiert beim Aufprall und wird zerstört Jede Kreatur in einem Radius von drei Metern um den Punkt, an dem die Perle aufgetroffen ist, muss einen SG-15-Geschicklichkeitsrettungswurfbestehen, oder sie erleidet 5W4 Energieschaden. Dann umschließt eine Sphäre aus transparenter Energie den Bereich eine Minute lang. Jede Kreatur, deren Rettungswurf scheitert und die sich vollständig im betroffenen Bereich befindet, ist in der Sphäre gefangen. Kreaturen, die ihren Rettungswurf bestehen oder die sich nur teilweise im betroffenen Bereich befinden, werden vom Zentrum der Sphäre weggestoßen, bis sie außerhalb ihres Bereichs sind. Nur Atemluft kann die Wand der Sphäre passieren. Angriffe oder andere Effekte bleiben außen vor. Eine gefangene Kreatur kann sich als Aktion gegen die Wand der Sphäre lehnen und die Sphäre so bis zur halben Schrittbewegungsrate der Kreatur bewegen. Die Sphäre kann aufgehoben werden. Dank ihrer Magie wiegt sie unabhängig vom Gewicht der Kreaturen in ihrem Inneren nur 0,5 Kilogramm."
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

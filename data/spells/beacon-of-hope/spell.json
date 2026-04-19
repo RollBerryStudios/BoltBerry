@@ -1,0 +1,56 @@
+{
+  "id": 103,
+  "slug": "beacon-of-hope",
+  "name": "Beacon of Hope",
+  "nameDe": "Leuchtfeuer der Hoffnung",
+  "level": {
+    "en": "3",
+    "de": "Grad 3"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric"
+    ],
+    "de": [
+      "Kleriker"
+    ]
+  },
+  "type": {
+    "en": "3rd-level abjuration",
+    "de": "Stufe 3 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "30 feet",
+    "de": "9 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false,
+    "raw": {
+      "en": "V, S",
+      "de": "V, G"
+    }
+  },
+  "description": {
+    "en": "This spell bestows hope and vitality. Choose any number of creatures within range. For the duration, each target has advantage on wisdom saving throws and death saving throws, and regains the maximum number of hit points possible from any healing.",
+    "de": "Dieser Zauber verleiht Hoffnung und Lebenskraft. Wähle eine beliebige Anzahl Kreaturen in Reichweite aus. Während der Wirkungsdauer ist jedes Ziel bei Weisheits- und Todesrettungswürfen im Vorteil und gewinnt durch Heilung die maximal mögliche Anzahl an Trefferpunkten zurück."
+  },
+  "image": "beacon-hope",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

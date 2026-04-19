@@ -1,0 +1,225 @@
+{
+  "id": 200,
+  "slug": "merfolk",
+  "name": "Merfolk",
+  "nameDe": "Meervolk",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, neutral",
+    "de": "Mittelgroßer Humanoid, neutral"
+  },
+  "challenge": "1/8",
+  "xp": 25,
+  "ac": {
+    "en": "11",
+    "de": "11"
+  },
+  "hp": {
+    "en": "11 (2d8 + 2)",
+    "de": "11 (2W8+2)"
+  },
+  "str": 10,
+  "dex": 13,
+  "con": 12,
+  "int": 11,
+  "wis": 11,
+  "cha": 12,
+  "strMod": 0,
+  "dexMod": 1,
+  "conMod": 1,
+  "intMod": 0,
+  "wisMod": 0,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 10,
+      "de": 3
+    },
+    "swim": {
+      "en": 40,
+      "de": 12
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 12"
+    ],
+    "de": [
+      "Passive Wahrnehmung 12"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Aquan",
+      "Common"
+    ],
+    "de": [
+      "Aqual",
+      "Gemeinsprache"
+    ]
+  },
+  "skills": [
+    "Wahrnehmung +2"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Amphibious",
+        "text": "The merfolk can breathe air and water."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amphibisch",
+        "text": "Der Meervolk-Humanoide kann Luft und Wasser atmen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Spear",
+        "text": "Melee or Ranged Weapon Attack: +2 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 3 (1d6) piercing damage, or 4 (1d8) piercing damage if used with two hands to make a melee attack."
+      }
+    ],
+    "de": [
+      {
+        "name": "Speer",
+        "text": "Nah- oder Fernkampfwaffenangriff: +2 auf Treffer, Reichweite 1,5 m oder Reichweite 6/18 m, ein Ziel. Treffer: 3 (1W6) Stichschaden oder 4 (1W8) Stichschaden bei zweihändiger Führung und Nahkampfangriff."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/197/1000/1000/636252763841141413.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (Meervolk)"
+  },
+  "alignment": {
+    "en": "neutral",
+    "de": "neutral"
+  },
+  "token": {
+    "file": "MerfolkFemale (1).webp",
+    "variant": "female"
+  },
+  "tokens": [
+    {
+      "file": "MerfolkFemale (10).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MerfolkFemale (11).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MerfolkFemale (12).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MerfolkFemale (13).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MerfolkFemale (14).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MerfolkFemale (2).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MerfolkFemale (3).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MerfolkFemale (4).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MerfolkFemale (5).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MerfolkFemale (6).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MerfolkFemale (7).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MerfolkFemale (8).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MerfolkFemale (9).webp",
+      "variant": "female"
+    },
+    {
+      "file": "MerfolkMale (1).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MerfolkMale (10).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MerfolkMale (11).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MerfolkMale (12).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MerfolkMale (13).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MerfolkMale (14).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MerfolkMale (15).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MerfolkMale (2).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MerfolkMale (3).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MerfolkMale (4).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MerfolkMale (5).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MerfolkMale (6).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MerfolkMale (7).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MerfolkMale (8).webp",
+      "variant": "male"
+    },
+    {
+      "file": "MerfolkMale (9).webp",
+      "variant": "male"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

@@ -1,0 +1,204 @@
+{
+  "id": 53,
+  "slug": "blue-dragon-wyrmling",
+  "name": "Blue Dragon Wyrmling",
+  "nameDe": "Blauer Drachennestling",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium dragon, lawful evil",
+    "de": "Mittelgroßer Drache, rechtschaffen böse"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "17 (Natural Armor)",
+    "de": "17 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "52 (8d8 + 16)",
+    "de": "52 (8W8+16)"
+  },
+  "str": 17,
+  "dex": 10,
+  "con": 15,
+  "int": 12,
+  "wis": 11,
+  "cha": 15,
+  "strMod": 3,
+  "dexMod": 0,
+  "conMod": 2,
+  "intMod": 1,
+  "wisMod": 0,
+  "chaMod": 2,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    },
+    "burrow": {
+      "en": 15,
+      "de": 4
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 10 ft.",
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Blindsicht 3 m",
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Draconic"
+    ],
+    "de": [
+      "Drakonisch"
+    ]
+  },
+  "savingThrows": [
+    "Ges +2",
+    "Kon +4",
+    "Wei +2",
+    "Cha +4"
+  ],
+  "skills": [
+    "Heimlichkeit +2",
+    "Wahrnehmung +4"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (1d10 + 3) piercing damage plus 3 (1d6) lightning damage."
+      },
+      {
+        "name": "Lightning Breath",
+        "text": "The dragon exhales lightning in a 30-foot line that is 5 feet wide. Each creature in that line must make a DC 12 Dexterity saving throw, taking 22 (4d10) lightning damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +5 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 8 (1W10+3) Stichschaden plus 3 (1W6) Blitzschaden."
+      },
+      {
+        "name": "Blitzodem (Aufladung 5–6)",
+        "text": "Der Drache atmet einen Blitzstrahl in einer neun Meter langen, 1,5 Meter breiten Linie aus. Jede Kreatur in der Linie muss einen SG-12-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 22 (4W10) Blitzschaden, anderenfalls die Hälfte."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/209/1000/1000/636252764637244026.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "dragon",
+    "de": "Drache"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "BlueDragonWyrmling (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "BlueDragonWyrmling (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlueDragonWyrmling (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlueDragonWyrmling (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlueDragonWyrmling (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlueDragonWyrmling (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlueDragonWyrmling (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlueDragonWyrmling (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlueDragonWyrmling (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlueDragonWyrmling (18).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlueDragonWyrmling (19).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlueDragonWyrmling (20).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlueDragonWyrmling (21).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlueDragonWyrmling (22).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlueDragonWyrmling (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlueDragonWyrmling (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlueDragonWyrmling (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlueDragonWyrmling (9).webp",
+      "variant": ""
+    },
+    {
+      "file": "BlueDragonWyrmlingCute (1).webp",
+      "variant": "cute"
+    },
+    {
+      "file": "BlueDragonWyrmlingCute (2).webp",
+      "variant": "cute"
+    },
+    {
+      "file": "BlueDragonWyrmlingCute (3).webp",
+      "variant": "cute"
+    },
+    {
+      "file": "BlueDragonWyrmlingCute (4).webp",
+      "variant": "cute"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

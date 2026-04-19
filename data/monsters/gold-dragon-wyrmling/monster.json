@@ -1,0 +1,214 @@
+{
+  "id": 152,
+  "slug": "gold-dragon-wyrmling",
+  "name": "Gold Dragon Wyrmling",
+  "nameDe": "Golddrachennestling",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium dragon, lawful good",
+    "de": "Mittelgroßer Drache, rechtschaffen gut"
+  },
+  "challenge": "3",
+  "xp": 700,
+  "ac": {
+    "en": "17 Natural Armor",
+    "de": "17 (natürliche Rüstung)"
+  },
+  "hp": {
+    "en": "60 (8d8 + 24)",
+    "de": "60 (8W8+24)"
+  },
+  "str": 19,
+  "dex": 14,
+  "con": 17,
+  "int": 14,
+  "wis": 11,
+  "cha": 16,
+  "strMod": 4,
+  "dexMod": 2,
+  "conMod": 3,
+  "intMod": 2,
+  "wisMod": 0,
+  "chaMod": 3,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    },
+    "swim": {
+      "en": 30,
+      "de": 9
+    },
+    "fly": {
+      "en": 60,
+      "de": 18
+    }
+  },
+  "senses": {
+    "en": [
+      "blindsight 10 ft.",
+      "Darkvision 60 ft.",
+      "passive perception 14"
+    ],
+    "de": [
+      "Blindsicht 3 m",
+      "Dunkelsicht 18 m",
+      "Passive Wahrnehmung 14"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Draconic"
+    ],
+    "de": [
+      "Drakonisch"
+    ]
+  },
+  "savingThrows": [
+    "Ges +4",
+    "Kon +5",
+    "Wei +2",
+    "Cha +5"
+  ],
+  "skills": [
+    "Heimlichkeit +4",
+    "Wahrnehmung +4"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Amphibious",
+        "text": "The dragon can breathe air and water."
+      }
+    ],
+    "de": [
+      {
+        "name": "Amphibisch",
+        "text": "Der Drache kann Luft und Wasser atmen."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Bite",
+        "text": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 9 (1d10 + 4) piercing damage."
+      },
+      {
+        "name": "Breath Weapons (Recharge 5-6)",
+        "text": "The dragon uses one of the following breath weapons:"
+      },
+      {
+        "name": "Fire Breath",
+        "text": "The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC 13 Dexterity saving throw, taking 22 (4d10) fire damage on a failed save, or half as much damage on a successful one."
+      },
+      {
+        "name": "Weakening Breath",
+        "text": "The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC 13 Strength saving throw or have disadvantage on Strength-based attack rolls, Strength checks, and Strength saving throws for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+      }
+    ],
+    "de": [
+      {
+        "name": "Biss",
+        "text": "Nahkampfwaffenangriff: +6 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 9 (1W10+4) Stichschaden."
+      },
+      {
+        "name": "Odemwaffen (Aufladung 5–6)",
+        "text": "Der Drache setzt eine der folgenden Odemwaffen ein:"
+      },
+      {
+        "name": "Feuerodem",
+        "text": "Der Drache atmet Feuer in einem Kegel von 4,5 Metern aus. Jede Kreatur in diesem Bereich muss einen SG-13-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet sie 22 (4W10) Feuerschaden, anderenfalls die Hälfte."
+      },
+      {
+        "name": "Schwächender Odem",
+        "text": "Der Drache atmet Gas in einem Kegel von 4,5 Metern aus. Jede Kreatur in diesem Bereich muss einen SG-13-Stärkerettungswurf bestehen, oder sie ist eine Minute lang bei stärkebasierten Angriffswürfen, bei Stärkewürfen und Stärkerettungswürfen im Nachteil. Eine Kreatur kann den Rettungswurf am Ende jedes ihrer Züge wiederholen und den Effekt bei einem Erfolg beenden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/7/516/315/315/636285466148376212.jpeg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "dragon",
+    "de": "Drache"
+  },
+  "alignment": {
+    "en": "lawful good",
+    "de": "rechtschaffen gut"
+  },
+  "token": {
+    "file": "GoldDragonWyrmling (1).webp",
+    "variant": ""
+  },
+  "tokens": [
+    {
+      "file": "GoldDragonWyrmling (10).webp",
+      "variant": ""
+    },
+    {
+      "file": "GoldDragonWyrmling (11).webp",
+      "variant": ""
+    },
+    {
+      "file": "GoldDragonWyrmling (12).webp",
+      "variant": ""
+    },
+    {
+      "file": "GoldDragonWyrmling (13).webp",
+      "variant": ""
+    },
+    {
+      "file": "GoldDragonWyrmling (14).webp",
+      "variant": ""
+    },
+    {
+      "file": "GoldDragonWyrmling (15).webp",
+      "variant": ""
+    },
+    {
+      "file": "GoldDragonWyrmling (16).webp",
+      "variant": ""
+    },
+    {
+      "file": "GoldDragonWyrmling (17).webp",
+      "variant": ""
+    },
+    {
+      "file": "GoldDragonWyrmling (2).webp",
+      "variant": ""
+    },
+    {
+      "file": "GoldDragonWyrmling (3).webp",
+      "variant": ""
+    },
+    {
+      "file": "GoldDragonWyrmling (4).webp",
+      "variant": ""
+    },
+    {
+      "file": "GoldDragonWyrmling (5).webp",
+      "variant": ""
+    },
+    {
+      "file": "GoldDragonWyrmling (6).webp",
+      "variant": ""
+    },
+    {
+      "file": "GoldDragonWyrmling (7).webp",
+      "variant": ""
+    },
+    {
+      "file": "GoldDragonWyrmling (8).webp",
+      "variant": ""
+    },
+    {
+      "file": "GoldDragonWyrmling (9).webp",
+      "variant": ""
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

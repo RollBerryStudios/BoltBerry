@@ -1,0 +1,263 @@
+{
+  "id": 106,
+  "slug": "fire-giant",
+  "name": "Fire Giant",
+  "nameDe": "Feuerriese",
+  "source": "SRD",
+  "meta": {
+    "en": "Huge giant, lawful evil",
+    "de": "Großer Riese, rechtschaffen böse"
+  },
+  "challenge": "9",
+  "xp": 5000,
+  "ac": {
+    "en": "18 (Ritterrüstung)",
+    "de": "18 (Ritterrüstung)"
+  },
+  "hp": {
+    "en": "162 (13d12 + 78)",
+    "de": "162 (13W12+78)"
+  },
+  "str": 25,
+  "dex": 9,
+  "con": 23,
+  "int": 10,
+  "wis": 14,
+  "cha": 13,
+  "strMod": 7,
+  "dexMod": -1,
+  "conMod": 6,
+  "intMod": 0,
+  "wisMod": 2,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 30,
+      "de": 9
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 16"
+    ],
+    "de": [
+      "Passive Wahrnehmung 16"
+    ]
+  },
+  "languages": {
+    "en": [
+      "Giant"
+    ],
+    "de": [
+      "Riesisch"
+    ]
+  },
+  "savingThrows": [
+    "Ges +3",
+    "Kon +10",
+    "Cha +5"
+  ],
+  "skills": [
+    "Athletik +11",
+    "Wahrnehmung +6"
+  ],
+  "actions": {
+    "en": [
+      {
+        "name": "Multiattack",
+        "text": "The giant makes two greatsword attacks."
+      },
+      {
+        "name": "Greatsword",
+        "text": "Melee Weapon Attack: +11 to hit, reach 10 ft., one target. Hit: 28 (6d6 + 7) slashing damage."
+      },
+      {
+        "name": "Rock",
+        "text": "Ranged Weapon Attack: +11 to hit, range 60/240 ft., one target. Hit: 29 (4d10 + 7) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Mehrfachangriff",
+        "text": "Der Riese führt zwei Angriffe mit dem Großschwert aus."
+      },
+      {
+        "name": "Zweihandschwert",
+        "text": "Nahkampfwaffenangriff: +11 auf Treffer, Reichweite 3 m, ein Ziel. Treffer: 28 (6W6+7) Hiebschaden."
+      },
+      {
+        "name": "Felsblock",
+        "text": "Fernkampfwaffenangriff: +11 auf Treffer, Reichweite 18/72 m, ein Ziel. Treffer: 29 (4W10+7) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/357/1000/1000/636252778143767005.jpeg",
+  "size": {
+    "en": "huge",
+    "de": "Riesig"
+  },
+  "type": {
+    "en": "giant",
+    "de": "Riese"
+  },
+  "alignment": {
+    "en": "lawful evil",
+    "de": "rechtschaffen böse"
+  },
+  "token": {
+    "file": "FireGiantFemale (1).webp",
+    "variant": "female"
+  },
+  "tokens": [
+    {
+      "file": "FireGiantFemale (10).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (11).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (12).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (13).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (14).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (15).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (16).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (17).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (18).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (19).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (2).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (20).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (3).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (4).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (5).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (6).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (7).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (8).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantFemale (9).webp",
+      "variant": "female"
+    },
+    {
+      "file": "FireGiantMale (1).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FireGiantMale (10).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FireGiantMale (11).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FireGiantMale (12).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FireGiantMale (13).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FireGiantMale (14).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FireGiantMale (15).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FireGiantMale (16).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FireGiantMale (17).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FireGiantMale (18).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FireGiantMale (2).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FireGiantMale (3).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FireGiantMale (4).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FireGiantMale (5).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FireGiantMale (6).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FireGiantMale (7).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FireGiantMale (8).webp",
+      "variant": "male"
+    },
+    {
+      "file": "FireGiantMale (9).webp",
+      "variant": "male"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

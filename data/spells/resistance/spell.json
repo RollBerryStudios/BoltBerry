@@ -1,0 +1,62 @@
+{
+  "id": 65,
+  "slug": "resistance",
+  "name": "Resistance",
+  "nameDe": "Widerstand",
+  "level": {
+    "en": "cantrip",
+    "de": "Zaubertrick"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "druid"
+    ],
+    "de": [
+      "Kleriker",
+      "Druide"
+    ]
+  },
+  "type": {
+    "en": "Abjuration cantrip",
+    "de": "Bannmagie Zaubertrick"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "Touch",
+    "de": "Berührung"
+  },
+  "duration": {
+    "en": "Concentration, up to 1 minute",
+    "de": "Konzentration, bis zu 1 Minute"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a miniature cloak",
+      "de": "ein Miniatur Mantel"
+    },
+    "raw": {
+      "en": "V, S, M (a miniature cloak)",
+      "de": "V, G, M (ein Miniatur Mantel)"
+    }
+  },
+  "description": {
+    "en": "You touch one willing creature. Once before the spell ends, the target can roll a d4 and add the number rolled to one saving throw of its choice. It can roll the die before or after making the saving throw. The spell then ends.",
+    "de": "Du berührst eine bereitwillige Kreatur. Einmal vor dem Ende des Zaubers kann das Ziel mit einem W4 würfeln und das Ergebnis zu einem Rettungswurf seiner Wahl addieren. Der Würfel kann vor oder nach dem Rettungswurf geworfen werden. Dann endet der Zauber. * im Spielerhandbuch ist der Zauber mit 'Resistenz' übersetzt worden"
+  },
+  "image": "resistance",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

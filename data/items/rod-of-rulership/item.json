@@ -1,0 +1,30 @@
+{
+  "id": 395,
+  "slug": "rod-of-rulership",
+  "name": "Rod of Rulership",
+  "nameDe": "Zepter der Herrschaft",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 1600000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Rod, rare (requires attunement) You can use an action to present the rod and command obedience from each creature of your choice that you can see within 120 feet of you. Each target must succeed on a DC 15 Wisdom saving throw or be charmed by you for 8 hours. While charmed in this way, the creature regards you as its trusted leader. If harmed by you or your companions, or commanded to do something contrary to its nature, a target ceases to be charmed in this way. The rod can't be used again until the next dawn.",
+    "de": "Du kannst als Aktion das Zepter präsentieren und von jeder Kreatur deiner Wahl, die du im Abstand von bis zu 36 Metern von dir sehen kannst, Gehorsam verlangen. Jedes Ziel muss einen SG-15-Weisheitsrettungswurf bestehen, oder es ist für acht Stunden von dir bezaubert. Auf diese Art bezauberte Kreaturen betrachten dich als vertrauenswürdigen Anführer. Wenn ihnen von dir oder deinen Verbündeten Schaden zugefügt wird oder sie einen Befehl erhalten, der ihrer Natur widerspricht, endet die Bezauberung für die entsprechenden Ziele. Das Zepter kann erst im nächsten Morgengrauen wiederverwendet werden."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "wondrous-item",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

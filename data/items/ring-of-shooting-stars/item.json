@@ -1,0 +1,30 @@
+{
+  "id": 386,
+  "slug": "ring-of-shooting-stars",
+  "name": "Ring of Shooting Stars",
+  "nameDe": "Ring der Sternschnuppen",
+  "category": {
+    "en": "WONDROUS_ITEMS",
+    "de": "Wundersame Gegenstände"
+  },
+  "rarity": {
+    "en": "VERY_RARE",
+    "de": "Sehr selten"
+  },
+  "cost": 1400000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Ring, very rare (requires attunement outdoors at night) While wearing this ring in dim light or darkness, you can cast dancing lights and light from the ring at will. Casting either spell from the ring requires an action. The ring has 6 charges for the following other properties. The ring regains 1d6 expended charges daily at dawn. ***Faerie Fire.*** You can expend 1 charge as an action to cast faerie fire from the ring. ***Ball Lightning.*** You can expend 2 charges as an action to create one to four 3-foot-diameter spheres of lightning. The more spheres you create, the less powerful each sphere is individually. Each sphere appears in an unoccupied space you can see within 120 feet of you. The spheres last as long as you concentrate (as if concentrating on a spell), up to 1 minute. Each sphere sheds dim light in a 30-foot radius. As a bonus action, you can move each sphere up to 30 feet, but no farther than 120 feet away from you. When a creature other than you comes within 5 feet of a sphere, the sphere discharges lightning at that creature and disappears. That creature must make a DC 15 Dexterity saving throw. On a failed save, the creature takes lightning damage based on the number of spheres you created. ***Shooting Stars.*** You can expend 1 to 3 charges as an action. For every charge you expend, you launch a glowing mote of light from the ring at a point you can see within 60 feet of you. Each creature within a 15-foot cube originating from that point is showered in sparks and must make a DC 15 Dexterity saving throw, taking 5d4 fire damage on a failed save, or half as much damage on a successful one.",
+    "de": "Wenn du diesen Ring in dämmrigem Licht oder Dunkelheit trägst, kannst du beliebig oft Tanzende Lichter  und Licht  mit dem Ring wirken. Das Wirken dieser Zauber mithilfe des Rings erfordert eine Aktion. Der Ring hat sechs Ladungen für die folgenden weiteren Eigenschaften. Der Ring erhält täglich im Morgengrauen 1W6 verbrauchte Ladungen zurück. Feenfeuer:  Du kannst als Aktion eine Ladung verbrauchen, um Feenfeuer  mit dem Ring zu wirken. Kugelblitz:  Du kannst als Aktion zwei Ladungen verbrauchen, um einen bis vier Kugelblitze mit einem Durchmesser von einem Meter mit dem Ring zu wirken. Je mehr Kugelblitze du erzeugst, desto weniger Energie hat jeder einzelne Kugelblitz. Jeder Kugelblitz erscheint an einer freien Stelle im Abstand von bis zu 36 Metern von dir, die du sehen kannst. Die Kugelblitze bleiben bis zu eine Minute lang bestehen, solange du dich konzentrierst (wie bei einem Zauber), Jede Kugel spendet in einem Radius von neun Metern dämmriges Licht. Als Bonusaktion kannst du jede Kugel um bis zu neun Meter bewegen, sie können sich jedoch nicht weiter als 36 Meter von dir entfernen. Wenn eine Kreatur außer dir selbst sich einer Kugel auf bis zu 1,5 Meter nähert, entlädt sich die Kugel als Blitz auf die Kreatur und verschwindet. Die Kreatur muss einen SG-15-Geschicklichkeitsrettungswurf ausführen. Scheitert der Wurf, erleidet die Kreatur abhängig von der Anzahl der erzeugten Kugeln Blitzschaden. Sternschnuppen:  Du kannst als Aktion eine bis drei Ladungen verbrauchen. Für jede verbrauchte Ladung verschießt der Ring einen Lichtfunken an einen Punkt im Abstand von bis zu 18 Metern von dir, den du sehen kannst. Auf jede Kreatur innerhalb eines Würfels mit einer Kantenlänge von 4,5 Metern, der von diesem Punkt ausgeht, regnen Funken herab, und die Kreaturen müssen einen SG-15-Geschicklichkeitsrettungswurf bestehen. Scheitert der Wurf, erleidet die jeweilige Kreatur 5W4 Feuerschaden, anderenfalls die Hälfte."
+  },
+  "properties": {
+    "en": "requires attunement",
+    "de": "erfordert einstimmung"
+  },
+  "image": "ring",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

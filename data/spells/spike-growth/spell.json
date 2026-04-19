@@ -1,0 +1,62 @@
+{
+  "id": 317,
+  "slug": "spike-growth",
+  "name": "Spike Growth",
+  "nameDe": "Dornenwuchs",
+  "level": {
+    "en": "2",
+    "de": "Grad 2"
+  },
+  "school": {
+    "en": "Transmutation",
+    "de": "Verwandlung"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "druid",
+      "ranger"
+    ],
+    "de": [
+      "Druide",
+      "Waldläufer"
+    ]
+  },
+  "type": {
+    "en": "2nd-level transmutation",
+    "de": "Stufe 2 Verwandlungsmagie"
+  },
+  "castingTime": {
+    "en": "1 action",
+    "de": "1 Aktion"
+  },
+  "range": {
+    "en": "150 feet",
+    "de": "45 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "seven sharp thorns or seven small twigs, each sharpened to a point",
+      "de": "sieben scharfe Dornen oder sieben kleine Zweige, die jeweils zu einer Spitze geschärft sind"
+    },
+    "raw": {
+      "en": "V, S, M (seven sharp thorns or seven small twigs, each sharpened to a point)",
+      "de": "V, G, M (sieben scharfe Dornen oder sieben kleine Zweige, die jeweils zu einer Spitze geschärft sind)"
+    }
+  },
+  "description": {
+    "en": "The ground in a 20-foot radius centered on a point within range twists and sprouts hard spikes and thorns. The area becomes difficult terrain for the duration. When a creature moves into or within the area, it takes 2d4 piercing damage for every 5 feet it travels. The transformation of the ground is camouflaged to look natural. Any creature that can't see the area at the time the spell is cast can make a Wisdom (Perception) check against your spell save DC to recognize the terrain as hazardous before entering it.",
+    "de": "Der Boden in einem Radius von sechs Metern, der auf einen Punkt in Reichweite zentriert ist, wird von harten Stacheln und Dornen überwuchert Der Bereich wird für die Wirkungsdauer zu schwierigem Gelände. Bewegt sich eine Kreatur in den Bereich oder innerhalb davon, erleidet sie pro zurückgelegten 1,5 Metern 2W4 Stichschaden. Die Verwandlung des Bodens ist getarnt und sieht natürlich aus. Jede Kreatur, die den Bereich nicht sehen kann, wenn der Zauber gewirkt wird, muss einen Weisheitswurf (Wahrnehmung) gegen deinen Zauberrettungswurf-SG ausführen. Bei einem Erfolg erkennt sie das Gelände vor dem Betreten als gefährlich."
+  },
+  "image": "spike-growth",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

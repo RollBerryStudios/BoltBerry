@@ -1,0 +1,35 @@
+{
+  "id": 304,
+  "slug": "elven-chain",
+  "name": "Elven Chain",
+  "nameDe": "Elfenrüstung",
+  "category": {
+    "en": "ARMOR",
+    "de": "Rüstung"
+  },
+  "rarity": {
+    "en": "RARE",
+    "de": "Selten"
+  },
+  "cost": 400000,
+  "source": {
+    "en": "SRD",
+    "de": "SRD"
+  },
+  "description": {
+    "en": "Armor (chain shirt), rare You gain a +1 bonus to AC while you wear this armor. You are considered proficient with this armor even if you lack proficiency with medium armor.",
+    "de": "Wenn du diese Rüstung trägst, erhältst du einen Bonus von +1 auf deine RK. Du giltst als im Umgang mit dieser Rüstung geübt, auch wenn du keine Übung im Umgang mit mittelschwerer Rüstung hast."
+  },
+  "weight": 20,
+  "classification": {
+    "en": "Medium Armor",
+    "de": "Mittelschwere Rüstung"
+  },
+  "ac": {
+    "en": "13 + Dex + 1",
+    "de": "13+ Geschicklichkeit + 1"
+  },
+  "image": "armor",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); DE from SRD 5.1 DE (openrpg.de/nesges); EN from 5e API (dnd5eapi.co)"
+}

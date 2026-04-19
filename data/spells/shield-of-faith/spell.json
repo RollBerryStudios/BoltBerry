@@ -1,0 +1,62 @@
+{
+  "id": 68,
+  "slug": "shield-of-faith",
+  "name": "Shield of Faith",
+  "nameDe": "Schild des Glaubens",
+  "level": {
+    "en": "1",
+    "de": "Grad 1"
+  },
+  "school": {
+    "en": "Abjuration",
+    "de": "Bann"
+  },
+  "ritual": false,
+  "source": "SRD",
+  "classes": {
+    "en": [
+      "cleric",
+      "paladin"
+    ],
+    "de": [
+      "Kleriker",
+      "Paladin"
+    ]
+  },
+  "type": {
+    "en": "1st-level abjuration",
+    "de": "Stufe 1 Bannmagie"
+  },
+  "castingTime": {
+    "en": "1 bonus action",
+    "de": "1 Bonusaktion"
+  },
+  "range": {
+    "en": "60 feet",
+    "de": "18 Meter"
+  },
+  "duration": {
+    "en": "Concentration, up to 10 minutes",
+    "de": "Konzentration, bis zu 10 Minuten"
+  },
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialsNeeded": {
+      "en": "a small parchment with a bit of holy text written on it",
+      "de": "ein kleines Pergament, auf dem ein heiliger Text steht"
+    },
+    "raw": {
+      "en": "V, S, M (a small parchment with a bit of holy text written on it)",
+      "de": "V, G, M (ein kleines Pergament, auf dem ein heiliger Text steht)"
+    }
+  },
+  "description": {
+    "en": "A shimmering field appears and surrounds a creature of your choice within range, granting it a +2 bonus to AC for the duration.",
+    "de": "Ein schimmerndes Feld erscheint, umgibt eine Kreatur deiner Wahl in Reichweite und gewährt ihr für die Wirkungsdauer einen Bonus von +2 auf ihre RK."
+  },
+  "image": "abjuration",
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}

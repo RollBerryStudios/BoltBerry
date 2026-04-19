@@ -1,0 +1,1545 @@
+{
+  "id": 231,
+  "slug": "priest",
+  "name": "Priest",
+  "nameDe": "Priester",
+  "source": "SRD",
+  "meta": {
+    "en": "Medium humanoid, any",
+    "de": "Mittelgroßer Humanoid, jegliche Gesinnung"
+  },
+  "challenge": "2",
+  "xp": 450,
+  "ac": {
+    "en": "13 (Chain Shirt)",
+    "de": "13 (Kettenhemd)"
+  },
+  "hp": {
+    "en": "27 (5d8 + 5)",
+    "de": "27 (5W8+5)"
+  },
+  "str": 10,
+  "dex": 10,
+  "con": 12,
+  "int": 13,
+  "wis": 16,
+  "cha": 13,
+  "strMod": 0,
+  "dexMod": 0,
+  "conMod": 1,
+  "intMod": 1,
+  "wisMod": 3,
+  "chaMod": 1,
+  "speed": {
+    "run": {
+      "en": 25,
+      "de": 7
+    }
+  },
+  "senses": {
+    "en": [
+      "passive perception 13"
+    ],
+    "de": [
+      "Passive Wahrnehmung 13"
+    ]
+  },
+  "languages": {
+    "en": [
+      "any two languages"
+    ],
+    "de": [
+      "Zwei beliebige Sprachen"
+    ]
+  },
+  "skills": [
+    "Heilkunde +7",
+    "Religion +4",
+    "Überzeugen +3"
+  ],
+  "traits": {
+    "en": [
+      {
+        "name": "Divine Eminence",
+        "text": "As a bonus action, the priest can expend a spell slot to cause its melee weapon attacks to magically deal an extra 7 (2d6) radiant damage to a target on a hit. This benefit lasts until the end of the turn. If the priest expends a spell slot of 2nd level or higher, the extra damage increases by 1d6 per slot level above 1st."
+      }
+    ],
+    "de": [
+      {
+        "name": "Göttliche Eminenz",
+        "text": "Als Bonusaktion kann der Priester einen Zauberplatz verwenden, um seine Nahkampf-Waffenangriffe bei einem Treffer magisch mit zusätzlich 10 (3W6) gleißendem Schaden zu versehen. Dieser Vorzug bleibt bis zum Ende des Zugs erhalten. Wenn der Priester einen Zauberplatz mindestens des 2. Grades verwendet, wird der Extraschaden für jeden Grad über dem ersten um 1W6 erhöht."
+      }
+    ]
+  },
+  "actions": {
+    "en": [
+      {
+        "name": "Mace",
+        "text": "Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 3 (1d6) bludgeoning damage."
+      }
+    ],
+    "de": [
+      {
+        "name": "Streitkolben",
+        "text": "Nahkampfwaffenangriff: +2 auf Treffer, Reichweite 1,5 m, ein Ziel. Treffer: 3 (1W6) Wuchtschaden."
+      }
+    ]
+  },
+  "img": "https://media-waterdeep.cursecdn.com/attachments/2/656/humanoid.jpg",
+  "size": {
+    "en": "medium",
+    "de": "Mittelgroß"
+  },
+  "type": {
+    "en": "humanoid",
+    "de": "Humanoide (jedes Volk)"
+  },
+  "alignment": {
+    "en": "neutral evil",
+    "de": "jede Gesinnung"
+  },
+  "token": {
+    "file": "PriestDarkDwarfFemale (1).webp",
+    "variant": "darkDwarfFemale"
+  },
+  "tokens": [
+    {
+      "file": "PriestDarkDwarfFemale (2).webp",
+      "variant": "darkDwarfFemale"
+    },
+    {
+      "file": "PriestDarkDwarfFemale (3).webp",
+      "variant": "darkDwarfFemale"
+    },
+    {
+      "file": "PriestDarkDwarfMale (1).webp",
+      "variant": "darkDwarfMale"
+    },
+    {
+      "file": "PriestDarkDwarfMale (2).webp",
+      "variant": "darkDwarfMale"
+    },
+    {
+      "file": "PriestDarkDwarfMale (3).webp",
+      "variant": "darkDwarfMale"
+    },
+    {
+      "file": "PriestDarkDwarfMale (4).webp",
+      "variant": "darkDwarfMale"
+    },
+    {
+      "file": "PriestDarkDwarfMale (5).webp",
+      "variant": "darkDwarfMale"
+    },
+    {
+      "file": "PriestDarkDwarfMale (6).webp",
+      "variant": "darkDwarfMale"
+    },
+    {
+      "file": "PriestDarkDwarfMale.webp",
+      "variant": "darkDwarfMale"
+    },
+    {
+      "file": "PriestDarkElfFemale (1).webp",
+      "variant": "darkElfFemale"
+    },
+    {
+      "file": "PriestDarkElfFemale (2).webp",
+      "variant": "darkElfFemale"
+    },
+    {
+      "file": "PriestDarkElfFemale (3).webp",
+      "variant": "darkElfFemale"
+    },
+    {
+      "file": "PriestDarkElfFemale (4).webp",
+      "variant": "darkElfFemale"
+    },
+    {
+      "file": "PriestDarkElfFemale (5).webp",
+      "variant": "darkElfFemale"
+    },
+    {
+      "file": "PriestDarkElfFemale (6).webp",
+      "variant": "darkElfFemale"
+    },
+    {
+      "file": "PriestDarkElfFemale (7).webp",
+      "variant": "darkElfFemale"
+    },
+    {
+      "file": "PriestDarkElfFemale (8).webp",
+      "variant": "darkElfFemale"
+    },
+    {
+      "file": "PriestDarkElfMale (1).webp",
+      "variant": "darkElfMale"
+    },
+    {
+      "file": "PriestDarkElfMale (10).webp",
+      "variant": "darkElfMale"
+    },
+    {
+      "file": "PriestDarkElfMale (2).webp",
+      "variant": "darkElfMale"
+    },
+    {
+      "file": "PriestDarkElfMale (3).webp",
+      "variant": "darkElfMale"
+    },
+    {
+      "file": "PriestDarkElfMale (4).webp",
+      "variant": "darkElfMale"
+    },
+    {
+      "file": "PriestDarkElfMale (5).webp",
+      "variant": "darkElfMale"
+    },
+    {
+      "file": "PriestDarkElfMale (6).webp",
+      "variant": "darkElfMale"
+    },
+    {
+      "file": "PriestDarkElfMale (7).webp",
+      "variant": "darkElfMale"
+    },
+    {
+      "file": "PriestDarkElfMale (8).webp",
+      "variant": "darkElfMale"
+    },
+    {
+      "file": "PriestDarkElfMale (9).webp",
+      "variant": "darkElfMale"
+    },
+    {
+      "file": "PriestDarkGnomeFemale (1).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "PriestDarkGnomeFemale (10).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "PriestDarkGnomeFemale (11).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "PriestDarkGnomeFemale (12).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "PriestDarkGnomeFemale (13).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "PriestDarkGnomeFemale (14).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "PriestDarkGnomeFemale (15).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "PriestDarkGnomeFemale (2).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "PriestDarkGnomeFemale (3).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "PriestDarkGnomeFemale (4).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "PriestDarkGnomeFemale (5).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "PriestDarkGnomeFemale (6).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "PriestDarkGnomeFemale (7).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "PriestDarkGnomeFemale (8).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "PriestDarkGnomeFemale (9).webp",
+      "variant": "darkGnomeFemale"
+    },
+    {
+      "file": "PriestDarkGnomeMale (1).webp",
+      "variant": "darkGnomeMale"
+    },
+    {
+      "file": "PriestDarkGnomeMale (2).webp",
+      "variant": "darkGnomeMale"
+    },
+    {
+      "file": "PriestDarkGnomeMale (3).webp",
+      "variant": "darkGnomeMale"
+    },
+    {
+      "file": "PriestDarkHalfElfFemale (1).webp",
+      "variant": "darkHalfElfFemale"
+    },
+    {
+      "file": "PriestDarkHalfElfFemale (2).webp",
+      "variant": "darkHalfElfFemale"
+    },
+    {
+      "file": "PriestDarkHalfElfFemale (3).webp",
+      "variant": "darkHalfElfFemale"
+    },
+    {
+      "file": "PriestDarkHalfElfFemale (4).webp",
+      "variant": "darkHalfElfFemale"
+    },
+    {
+      "file": "PriestDarkHalfElfMale.webp",
+      "variant": "darkHalfElfMale"
+    },
+    {
+      "file": "PriestDarkHalflingFemale (1).webp",
+      "variant": "darkHalflingFemale"
+    },
+    {
+      "file": "PriestDarkHalflingFemale (2).webp",
+      "variant": "darkHalflingFemale"
+    },
+    {
+      "file": "PriestDarkHalflingFemale (3).webp",
+      "variant": "darkHalflingFemale"
+    },
+    {
+      "file": "PriestDarkHalflingMale (1).webp",
+      "variant": "darkHalflingMale"
+    },
+    {
+      "file": "PriestDarkHalflingMale (2).webp",
+      "variant": "darkHalflingMale"
+    },
+    {
+      "file": "PriestDarkHalflingMale (3).webp",
+      "variant": "darkHalflingMale"
+    },
+    {
+      "file": "PriestDarkHalflingMale (4).webp",
+      "variant": "darkHalflingMale"
+    },
+    {
+      "file": "PriestDarkHalfOrcMale (1).webp",
+      "variant": "darkHalfOrcMale"
+    },
+    {
+      "file": "PriestDarkHalfOrcMale (2).webp",
+      "variant": "darkHalfOrcMale"
+    },
+    {
+      "file": "PriestDarkHalfOrcMale (3).webp",
+      "variant": "darkHalfOrcMale"
+    },
+    {
+      "file": "PriestDarkHalfOrcMale (4).webp",
+      "variant": "darkHalfOrcMale"
+    },
+    {
+      "file": "PriestDarkHumanFemale (1).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "PriestDarkHumanFemale (2).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "PriestDarkHumanFemale (3).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "PriestDarkHumanFemale (4).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "PriestDarkHumanFemale (5).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "PriestDarkHumanFemale (6).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "PriestDarkHumanFemale (7).webp",
+      "variant": "darkHumanFemale"
+    },
+    {
+      "file": "PriestDarkHumanMale (1).webp",
+      "variant": "darkHumanMale"
+    },
+    {
+      "file": "PriestDarkHumanMale (2).webp",
+      "variant": "darkHumanMale"
+    },
+    {
+      "file": "PriestDarkHumanMale (3).webp",
+      "variant": "darkHumanMale"
+    },
+    {
+      "file": "PriestDarkHumanMale (4).webp",
+      "variant": "darkHumanMale"
+    },
+    {
+      "file": "PriestDarkHumanMale (5).webp",
+      "variant": "darkHumanMale"
+    },
+    {
+      "file": "PriestDarkTieflingFemale (1).webp",
+      "variant": "darkTieflingFemale"
+    },
+    {
+      "file": "PriestDarkTieflingFemale (10).webp",
+      "variant": "darkTieflingFemale"
+    },
+    {
+      "file": "PriestDarkTieflingFemale (11).webp",
+      "variant": "darkTieflingFemale"
+    },
+    {
+      "file": "PriestDarkTieflingFemale (2).webp",
+      "variant": "darkTieflingFemale"
+    },
+    {
+      "file": "PriestDarkTieflingFemale (3).webp",
+      "variant": "darkTieflingFemale"
+    },
+    {
+      "file": "PriestDarkTieflingFemale (4).webp",
+      "variant": "darkTieflingFemale"
+    },
+    {
+      "file": "PriestDarkTieflingFemale (5).webp",
+      "variant": "darkTieflingFemale"
+    },
+    {
+      "file": "PriestDarkTieflingFemale (6).webp",
+      "variant": "darkTieflingFemale"
+    },
+    {
+      "file": "PriestDarkTieflingFemale (7).webp",
+      "variant": "darkTieflingFemale"
+    },
+    {
+      "file": "PriestDarkTieflingFemale (8).webp",
+      "variant": "darkTieflingFemale"
+    },
+    {
+      "file": "PriestDarkTieflingFemale (9).webp",
+      "variant": "darkTieflingFemale"
+    },
+    {
+      "file": "PriestDarkTieflingMale (1).webp",
+      "variant": "darkTieflingMale"
+    },
+    {
+      "file": "PriestDarkTieflingMale (2).webp",
+      "variant": "darkTieflingMale"
+    },
+    {
+      "file": "PriestDarkTieflingMale (3).webp",
+      "variant": "darkTieflingMale"
+    },
+    {
+      "file": "PriestDarkTieflingMale (4).webp",
+      "variant": "darkTieflingMale"
+    },
+    {
+      "file": "PriestDarkTieflingMale (5).webp",
+      "variant": "darkTieflingMale"
+    },
+    {
+      "file": "PriestDarkTieflingMale (6).webp",
+      "variant": "darkTieflingMale"
+    },
+    {
+      "file": "PriestDarkTieflingMale (7).webp",
+      "variant": "darkTieflingMale"
+    },
+    {
+      "file": "PriestDarkTieflingMale (8).webp",
+      "variant": "darkTieflingMale"
+    },
+    {
+      "file": "PriestFireDragonborn (1).webp",
+      "variant": "fireDragonborn"
+    },
+    {
+      "file": "PriestFireDragonborn (2).webp",
+      "variant": "fireDragonborn"
+    },
+    {
+      "file": "PriestFireDwarfMale (1).webp",
+      "variant": "fireDwarfMale"
+    },
+    {
+      "file": "PriestFireDwarfMale (2).webp",
+      "variant": "fireDwarfMale"
+    },
+    {
+      "file": "PriestFireDwarfMale (3).webp",
+      "variant": "fireDwarfMale"
+    },
+    {
+      "file": "PriestFireDwarfMale (4).webp",
+      "variant": "fireDwarfMale"
+    },
+    {
+      "file": "PriestFireHalfOrcFemale (1).webp",
+      "variant": "fireHalfOrcFemale"
+    },
+    {
+      "file": "PriestFireHalfOrcFemale (2).webp",
+      "variant": "fireHalfOrcFemale"
+    },
+    {
+      "file": "PriestFireHalfOrcMale (1).webp",
+      "variant": "fireHalfOrcMale"
+    },
+    {
+      "file": "PriestFireHumanFemale (1).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "PriestFireHumanFemale (2).webp",
+      "variant": "fireHumanFemale"
+    },
+    {
+      "file": "PriestFireTieflingFemale (1).webp",
+      "variant": "fireTieflingFemale"
+    },
+    {
+      "file": "PriestFireTieflingFemale (2).webp",
+      "variant": "fireTieflingFemale"
+    },
+    {
+      "file": "PriestFireTieflingFemale (3).webp",
+      "variant": "fireTieflingFemale"
+    },
+    {
+      "file": "PriestFireTieflingFemale (4).webp",
+      "variant": "fireTieflingFemale"
+    },
+    {
+      "file": "PriestFireTieflingFemale (5).webp",
+      "variant": "fireTieflingFemale"
+    },
+    {
+      "file": "PriestFireTieflingFemale (6).webp",
+      "variant": "fireTieflingFemale"
+    },
+    {
+      "file": "PriestLightDragonborn (1).webp",
+      "variant": "lightDragonborn"
+    },
+    {
+      "file": "PriestLightDragonborn (2).webp",
+      "variant": "lightDragonborn"
+    },
+    {
+      "file": "PriestLightDragonborn (3).webp",
+      "variant": "lightDragonborn"
+    },
+    {
+      "file": "PriestLightDwarf (1).webp",
+      "variant": "lightDwarf"
+    },
+    {
+      "file": "PriestLightDwarf (2).webp",
+      "variant": "lightDwarf"
+    },
+    {
+      "file": "PriestLightDwarf (3).webp",
+      "variant": "lightDwarf"
+    },
+    {
+      "file": "PriestLightDwarf (4).webp",
+      "variant": "lightDwarf"
+    },
+    {
+      "file": "PriestLightDwarf (5).webp",
+      "variant": "lightDwarf"
+    },
+    {
+      "file": "PriestLightDwarfFemale (1).webp",
+      "variant": "lightDwarfFemale"
+    },
+    {
+      "file": "PriestLightDwarfFemale (2).webp",
+      "variant": "lightDwarfFemale"
+    },
+    {
+      "file": "PriestLightDwarfFemale (3).webp",
+      "variant": "lightDwarfFemale"
+    },
+    {
+      "file": "PriestLightDwarfFemale (4).webp",
+      "variant": "lightDwarfFemale"
+    },
+    {
+      "file": "PriestLightDwarfFemale (5).webp",
+      "variant": "lightDwarfFemale"
+    },
+    {
+      "file": "PriestLightDwarfMale (1).webp",
+      "variant": "lightDwarfMale"
+    },
+    {
+      "file": "PriestLightDwarfMale (2).webp",
+      "variant": "lightDwarfMale"
+    },
+    {
+      "file": "PriestLightDwarfMale (3).webp",
+      "variant": "lightDwarfMale"
+    },
+    {
+      "file": "PriestLightDwarfMale (4).webp",
+      "variant": "lightDwarfMale"
+    },
+    {
+      "file": "PriestLightDwarfMale (5).webp",
+      "variant": "lightDwarfMale"
+    },
+    {
+      "file": "PriestLightDwarfMale (6).webp",
+      "variant": "lightDwarfMale"
+    },
+    {
+      "file": "PriestLightDwarfMale (7).webp",
+      "variant": "lightDwarfMale"
+    },
+    {
+      "file": "PriestLightDwarfMale (8).webp",
+      "variant": "lightDwarfMale"
+    },
+    {
+      "file": "PriestLightDwarfMale (9).webp",
+      "variant": "lightDwarfMale"
+    },
+    {
+      "file": "PriestLightElfFemale (1).webp",
+      "variant": "lightElfFemale"
+    },
+    {
+      "file": "PriestLightElfFemale (2).webp",
+      "variant": "lightElfFemale"
+    },
+    {
+      "file": "PriestLightElfFemale (3).webp",
+      "variant": "lightElfFemale"
+    },
+    {
+      "file": "PriestLightElfFemale (4).webp",
+      "variant": "lightElfFemale"
+    },
+    {
+      "file": "PriestLightElfFemale (5).webp",
+      "variant": "lightElfFemale"
+    },
+    {
+      "file": "PriestLightElfMale (1).webp",
+      "variant": "lightElfMale"
+    },
+    {
+      "file": "PriestLightElfMale (10).webp",
+      "variant": "lightElfMale"
+    },
+    {
+      "file": "PriestLightElfMale (11).webp",
+      "variant": "lightElfMale"
+    },
+    {
+      "file": "PriestLightElfMale (2).webp",
+      "variant": "lightElfMale"
+    },
+    {
+      "file": "PriestLightElfMale (3).webp",
+      "variant": "lightElfMale"
+    },
+    {
+      "file": "PriestLightElfMale (4).webp",
+      "variant": "lightElfMale"
+    },
+    {
+      "file": "PriestLightElfMale (5).webp",
+      "variant": "lightElfMale"
+    },
+    {
+      "file": "PriestLightElfMale (6).webp",
+      "variant": "lightElfMale"
+    },
+    {
+      "file": "PriestLightElfMale (7).webp",
+      "variant": "lightElfMale"
+    },
+    {
+      "file": "PriestLightElfMale (8).webp",
+      "variant": "lightElfMale"
+    },
+    {
+      "file": "PriestLightElfMale (9).webp",
+      "variant": "lightElfMale"
+    },
+    {
+      "file": "PriestLightGnomeFemale (1).webp",
+      "variant": "lightGnomeFemale"
+    },
+    {
+      "file": "PriestLightGnomeFemale (2).webp",
+      "variant": "lightGnomeFemale"
+    },
+    {
+      "file": "PriestLightGnomeFemale (3).webp",
+      "variant": "lightGnomeFemale"
+    },
+    {
+      "file": "PriestLightGnomeFemale (4).webp",
+      "variant": "lightGnomeFemale"
+    },
+    {
+      "file": "PriestLightGnomeFemale (5).webp",
+      "variant": "lightGnomeFemale"
+    },
+    {
+      "file": "PriestLightGnomeMale (1).webp",
+      "variant": "lightGnomeMale"
+    },
+    {
+      "file": "PriestLightGnomeMale (2).webp",
+      "variant": "lightGnomeMale"
+    },
+    {
+      "file": "PriestLightGnomeMale (3).webp",
+      "variant": "lightGnomeMale"
+    },
+    {
+      "file": "PriestLightHalfElfFemale (1).webp",
+      "variant": "lightHalfElfFemale"
+    },
+    {
+      "file": "PriestLightHalfElfFemale (2).webp",
+      "variant": "lightHalfElfFemale"
+    },
+    {
+      "file": "PriestLightHalfElfFemale (3).webp",
+      "variant": "lightHalfElfFemale"
+    },
+    {
+      "file": "PriestLightHalfElfFemale (4).webp",
+      "variant": "lightHalfElfFemale"
+    },
+    {
+      "file": "PriestLightHalfElfFemale (5).webp",
+      "variant": "lightHalfElfFemale"
+    },
+    {
+      "file": "PriestLightHalfElfMale.webp",
+      "variant": "lightHalfElfMale"
+    },
+    {
+      "file": "PriestLightHalflingFemale (1).webp",
+      "variant": "lightHalflingFemale"
+    },
+    {
+      "file": "PriestLightHalflingFemale (2).webp",
+      "variant": "lightHalflingFemale"
+    },
+    {
+      "file": "PriestLightHalflingFemale (3).webp",
+      "variant": "lightHalflingFemale"
+    },
+    {
+      "file": "PriestLightHalflingFemale (4).webp",
+      "variant": "lightHalflingFemale"
+    },
+    {
+      "file": "PriestLightHalflingFemale (5).webp",
+      "variant": "lightHalflingFemale"
+    },
+    {
+      "file": "PriestLightHalflingFemale (6).webp",
+      "variant": "lightHalflingFemale"
+    },
+    {
+      "file": "PriestLightHalflingFemale (7).webp",
+      "variant": "lightHalflingFemale"
+    },
+    {
+      "file": "PriestLightHalflingMale (1).webp",
+      "variant": "lightHalflingMale"
+    },
+    {
+      "file": "PriestLightHalflingMale (2).webp",
+      "variant": "lightHalflingMale"
+    },
+    {
+      "file": "PriestLightHalflingMale (3).webp",
+      "variant": "lightHalflingMale"
+    },
+    {
+      "file": "PriestLightHalflingMale (4).webp",
+      "variant": "lightHalflingMale"
+    },
+    {
+      "file": "PriestLightHalflingMale (5).webp",
+      "variant": "lightHalflingMale"
+    },
+    {
+      "file": "PriestLightHalfOrcFemale (1).webp",
+      "variant": "lightHalfOrcFemale"
+    },
+    {
+      "file": "PriestLightHalfOrcFemale (2).webp",
+      "variant": "lightHalfOrcFemale"
+    },
+    {
+      "file": "PriestLightHalfOrcFemale (3).webp",
+      "variant": "lightHalfOrcFemale"
+    },
+    {
+      "file": "PriestLightHalfOrcFemale (4).webp",
+      "variant": "lightHalfOrcFemale"
+    },
+    {
+      "file": "PriestLightHalfOrcFemale (5).webp",
+      "variant": "lightHalfOrcFemale"
+    },
+    {
+      "file": "PriestLightHalfOrcFemale (6).webp",
+      "variant": "lightHalfOrcFemale"
+    },
+    {
+      "file": "PriestLightHalfOrcFemale (7).webp",
+      "variant": "lightHalfOrcFemale"
+    },
+    {
+      "file": "PriestLightHalfOrcMale (1).webp",
+      "variant": "lightHalfOrcMale"
+    },
+    {
+      "file": "PriestLightHalfOrcMale (2).webp",
+      "variant": "lightHalfOrcMale"
+    },
+    {
+      "file": "PriestLightHalfOrcMale (3).webp",
+      "variant": "lightHalfOrcMale"
+    },
+    {
+      "file": "PriestLightHalfOrcMale (4).webp",
+      "variant": "lightHalfOrcMale"
+    },
+    {
+      "file": "PriestLightHalfOrcMale (5).webp",
+      "variant": "lightHalfOrcMale"
+    },
+    {
+      "file": "PriestLightHalfOrcMale (6).webp",
+      "variant": "lightHalfOrcMale"
+    },
+    {
+      "file": "PriestLightHalfOrcMale (7).webp",
+      "variant": "lightHalfOrcMale"
+    },
+    {
+      "file": "PriestLightHumanFemale (1).webp",
+      "variant": "lightHumanFemale"
+    },
+    {
+      "file": "PriestLightHumanFemale (2).webp",
+      "variant": "lightHumanFemale"
+    },
+    {
+      "file": "PriestLightHumanFemale (3).webp",
+      "variant": "lightHumanFemale"
+    },
+    {
+      "file": "PriestLightHumanFemale (4).webp",
+      "variant": "lightHumanFemale"
+    },
+    {
+      "file": "PriestLightHumanFemale (5).webp",
+      "variant": "lightHumanFemale"
+    },
+    {
+      "file": "PriestLightHumanFemale (6).webp",
+      "variant": "lightHumanFemale"
+    },
+    {
+      "file": "PriestLightHumanMale (1).webp",
+      "variant": "lightHumanMale"
+    },
+    {
+      "file": "PriestLightHumanMale (2).webp",
+      "variant": "lightHumanMale"
+    },
+    {
+      "file": "PriestLightHumanMale (3).webp",
+      "variant": "lightHumanMale"
+    },
+    {
+      "file": "PriestLightHumanMale (4).webp",
+      "variant": "lightHumanMale"
+    },
+    {
+      "file": "PriestLightHumanMale (5).webp",
+      "variant": "lightHumanMale"
+    },
+    {
+      "file": "PriestLightHumanMale (6).webp",
+      "variant": "lightHumanMale"
+    },
+    {
+      "file": "PriestLightHumanMale.webp",
+      "variant": "lightHumanMale"
+    },
+    {
+      "file": "PriestLightningTieflingFemale (1).webp",
+      "variant": "lightningTieflingFemale"
+    },
+    {
+      "file": "PriestLightningTieflingMale (1).webp",
+      "variant": "lightningTieflingMale"
+    },
+    {
+      "file": "PriestLightningTieflingMale (2).webp",
+      "variant": "lightningTieflingMale"
+    },
+    {
+      "file": "PriestLightTieflingFemale (1).webp",
+      "variant": "lightTieflingFemale"
+    },
+    {
+      "file": "PriestLightTieflingFemale (2).webp",
+      "variant": "lightTieflingFemale"
+    },
+    {
+      "file": "PriestLightTieflingFemale (3).webp",
+      "variant": "lightTieflingFemale"
+    },
+    {
+      "file": "PriestLightTieflingFemale (4).webp",
+      "variant": "lightTieflingFemale"
+    },
+    {
+      "file": "PriestLightTieflingFemale (5).webp",
+      "variant": "lightTieflingFemale"
+    },
+    {
+      "file": "PriestLightTieflingFemale (6).webp",
+      "variant": "lightTieflingFemale"
+    },
+    {
+      "file": "PriestLightTieflingFemale (7).webp",
+      "variant": "lightTieflingFemale"
+    },
+    {
+      "file": "PriestLightTieflingMale (1).webp",
+      "variant": "lightTieflingMale"
+    },
+    {
+      "file": "PriestLightTieflingMale (2).webp",
+      "variant": "lightTieflingMale"
+    },
+    {
+      "file": "PriestLightTieflingMale (3).webp",
+      "variant": "lightTieflingMale"
+    },
+    {
+      "file": "PriestLightTieflingMale (4).webp",
+      "variant": "lightTieflingMale"
+    },
+    {
+      "file": "PriestLightTieflingMale (5).webp",
+      "variant": "lightTieflingMale"
+    },
+    {
+      "file": "PriestNatureDragonborn (1).webp",
+      "variant": "natureDragonborn"
+    },
+    {
+      "file": "PriestNatureElfFemale (1).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "PriestNatureElfFemale (10).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "PriestNatureElfFemale (2).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "PriestNatureElfFemale (3).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "PriestNatureElfFemale (4).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "PriestNatureElfFemale (5).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "PriestNatureElfFemale (6).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "PriestNatureElfFemale (7).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "PriestNatureElfFemale (8).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "PriestNatureElfFemale (9).webp",
+      "variant": "natureElfFemale"
+    },
+    {
+      "file": "PriestNatureElfMale (1).webp",
+      "variant": "natureElfMale"
+    },
+    {
+      "file": "PriestNatureElfMale (2).webp",
+      "variant": "natureElfMale"
+    },
+    {
+      "file": "PriestNatureElfMale (3).webp",
+      "variant": "natureElfMale"
+    },
+    {
+      "file": "PriestNatureElfMale (4).webp",
+      "variant": "natureElfMale"
+    },
+    {
+      "file": "PriestNatureElfMale (5).webp",
+      "variant": "natureElfMale"
+    },
+    {
+      "file": "PriestNatureGnomeFemale (1).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "PriestNatureGnomeFemale (10).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "PriestNatureGnomeFemale (11).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "PriestNatureGnomeFemale (12).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "PriestNatureGnomeFemale (13).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "PriestNatureGnomeFemale (14).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "PriestNatureGnomeFemale (15).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "PriestNatureGnomeFemale (16).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "PriestNatureGnomeFemale (17).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "PriestNatureGnomeFemale (2).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "PriestNatureGnomeFemale (3).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "PriestNatureGnomeFemale (4).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "PriestNatureGnomeFemale (5).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "PriestNatureGnomeFemale (6).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "PriestNatureGnomeFemale (7).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "PriestNatureGnomeFemale (8).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "PriestNatureGnomeFemale (9).webp",
+      "variant": "natureGnomeFemale"
+    },
+    {
+      "file": "PriestNatureGnomeMale (1).webp",
+      "variant": "natureGnomeMale"
+    },
+    {
+      "file": "PriestNatureGnomeMale (2).webp",
+      "variant": "natureGnomeMale"
+    },
+    {
+      "file": "PriestNatureGnomeMale (3).webp",
+      "variant": "natureGnomeMale"
+    },
+    {
+      "file": "PriestNatureGnomeMale (4).webp",
+      "variant": "natureGnomeMale"
+    },
+    {
+      "file": "PriestNatureGnomeMale (5).webp",
+      "variant": "natureGnomeMale"
+    },
+    {
+      "file": "PriestNatureHalfElfFemale (1).webp",
+      "variant": "natureHalfElfFemale"
+    },
+    {
+      "file": "PriestNatureHalfElfFemale (2).webp",
+      "variant": "natureHalfElfFemale"
+    },
+    {
+      "file": "PriestNatureHalfElfFemale (3).webp",
+      "variant": "natureHalfElfFemale"
+    },
+    {
+      "file": "PriestNatureHalfElfFemale (4).webp",
+      "variant": "natureHalfElfFemale"
+    },
+    {
+      "file": "PriestNatureHalfElfFemale (5).webp",
+      "variant": "natureHalfElfFemale"
+    },
+    {
+      "file": "PriestNatureHalfElfFemale(1).webp",
+      "variant": "natureHalfElfFemale"
+    },
+    {
+      "file": "PriestNatureHalfElfMale (1).webp",
+      "variant": "natureHalfElfMale"
+    },
+    {
+      "file": "PriestNatureHalfElfMale (2).webp",
+      "variant": "natureHalfElfMale"
+    },
+    {
+      "file": "PriestNatureHalflingFemale (1).webp",
+      "variant": "natureHalflingFemale"
+    },
+    {
+      "file": "PriestNatureHalflingFemale (2).webp",
+      "variant": "natureHalflingFemale"
+    },
+    {
+      "file": "PriestNatureHalflingFemale (3).webp",
+      "variant": "natureHalflingFemale"
+    },
+    {
+      "file": "PriestNatureHalflingFemale (4).webp",
+      "variant": "natureHalflingFemale"
+    },
+    {
+      "file": "PriestNatureHalflingFemale (5).webp",
+      "variant": "natureHalflingFemale"
+    },
+    {
+      "file": "PriestNatureHalflingFemale (6).webp",
+      "variant": "natureHalflingFemale"
+    },
+    {
+      "file": "PriestNatureHalflingFemale (7).webp",
+      "variant": "natureHalflingFemale"
+    },
+    {
+      "file": "PriestNatureHalflingFemale (8).webp",
+      "variant": "natureHalflingFemale"
+    },
+    {
+      "file": "PriestNatureHalflingMale (1).webp",
+      "variant": "natureHalflingMale"
+    },
+    {
+      "file": "PriestNatureHalflingMale (2).webp",
+      "variant": "natureHalflingMale"
+    },
+    {
+      "file": "PriestNatureHalflingMale (3).webp",
+      "variant": "natureHalflingMale"
+    },
+    {
+      "file": "PriestNatureHalflingMale (4).webp",
+      "variant": "natureHalflingMale"
+    },
+    {
+      "file": "PriestNatureHalflingMale (5).webp",
+      "variant": "natureHalflingMale"
+    },
+    {
+      "file": "PriestNatureHalflingMale (6).webp",
+      "variant": "natureHalflingMale"
+    },
+    {
+      "file": "PriestNatureHalfOrcFemale (1).webp",
+      "variant": "natureHalfOrcFemale"
+    },
+    {
+      "file": "PriestNatureHalfOrcFemale (2).webp",
+      "variant": "natureHalfOrcFemale"
+    },
+    {
+      "file": "PriestNatureHalfOrcFemale (3).webp",
+      "variant": "natureHalfOrcFemale"
+    },
+    {
+      "file": "PriestNatureHalfOrcFemale (4).webp",
+      "variant": "natureHalfOrcFemale"
+    },
+    {
+      "file": "PriestNatureHalfOrcFemale (5).webp",
+      "variant": "natureHalfOrcFemale"
+    },
+    {
+      "file": "PriestNatureHalfOrcFemale (6).webp",
+      "variant": "natureHalfOrcFemale"
+    },
+    {
+      "file": "PriestNatureHumanFemale (1).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "PriestNatureHumanFemale (2).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "PriestNatureHumanFemale (3).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "PriestNatureHumanFemale (4).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "PriestNatureHumanFemale (5).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "PriestNatureHumanFemale (6).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "PriestNatureHumanFemale (7).webp",
+      "variant": "natureHumanFemale"
+    },
+    {
+      "file": "PriestNatureHumanMale (1).webp",
+      "variant": "natureHumanMale"
+    },
+    {
+      "file": "PriestNatureHumanMale (2).webp",
+      "variant": "natureHumanMale"
+    },
+    {
+      "file": "PriestNatureTieflingFemale (1).webp",
+      "variant": "natureTieflingFemale"
+    },
+    {
+      "file": "PriestNatureTieflingFemale (2).webp",
+      "variant": "natureTieflingFemale"
+    },
+    {
+      "file": "PriestNatureTieflingMale (1).webp",
+      "variant": "natureTieflingMale"
+    },
+    {
+      "file": "PriestNatureTieflingMale (2).webp",
+      "variant": "natureTieflingMale"
+    },
+    {
+      "file": "PriestWarDragonborn (1).webp",
+      "variant": "warDragonborn"
+    },
+    {
+      "file": "PriestWarDragonborn (2).webp",
+      "variant": "warDragonborn"
+    },
+    {
+      "file": "PriestWarHalfElfFemale (1).webp",
+      "variant": "warHalfElfFemale"
+    },
+    {
+      "file": "PriestWarHalfElfFemale.webp",
+      "variant": "warHalfElfFemale"
+    },
+    {
+      "file": "PriestWarHalfOrcFemale (1).webp",
+      "variant": "warHalfOrcFemale"
+    },
+    {
+      "file": "PriestWarHalfOrcFemale (2).webp",
+      "variant": "warHalfOrcFemale"
+    },
+    {
+      "file": "PriestWarHalfOrcFemale (3).webp",
+      "variant": "warHalfOrcFemale"
+    },
+    {
+      "file": "PriestWarHalfOrcFemale (4).webp",
+      "variant": "warHalfOrcFemale"
+    },
+    {
+      "file": "PriestWarHalfOrcFemale (5).webp",
+      "variant": "warHalfOrcFemale"
+    },
+    {
+      "file": "PriestWarHalfOrcFemale (6).webp",
+      "variant": "warHalfOrcFemale"
+    },
+    {
+      "file": "PriestWarHalfOrcFemale (7).webp",
+      "variant": "warHalfOrcFemale"
+    },
+    {
+      "file": "PriestWarHalfOrcFemale (8).webp",
+      "variant": "warHalfOrcFemale"
+    },
+    {
+      "file": "PriestWarHalfOrcMale (1).webp",
+      "variant": "warHalfOrcMale"
+    },
+    {
+      "file": "PriestWarHalfOrcMale (2).webp",
+      "variant": "warHalfOrcMale"
+    },
+    {
+      "file": "PriestWarHalfOrcMale (3).webp",
+      "variant": "warHalfOrcMale"
+    },
+    {
+      "file": "PriestWarHalfOrcMale (4).webp",
+      "variant": "warHalfOrcMale"
+    },
+    {
+      "file": "PriestWarHumanFemale (1).webp",
+      "variant": "warHumanFemale"
+    },
+    {
+      "file": "PriestWarHumanFemale (2).webp",
+      "variant": "warHumanFemale"
+    },
+    {
+      "file": "PriestWarHumanFemale (3).webp",
+      "variant": "warHumanFemale"
+    },
+    {
+      "file": "PriestWarHumanFemale (4).webp",
+      "variant": "warHumanFemale"
+    },
+    {
+      "file": "PriestWarHumanFemale (5).webp",
+      "variant": "warHumanFemale"
+    },
+    {
+      "file": "PriestWarHumanFemale (6).webp",
+      "variant": "warHumanFemale"
+    },
+    {
+      "file": "PriestWarHumanFemale (7).webp",
+      "variant": "warHumanFemale"
+    },
+    {
+      "file": "PriestWarHumanFemale (8).webp",
+      "variant": "warHumanFemale"
+    },
+    {
+      "file": "PriestWarHumanMale (1).webp",
+      "variant": "warHumanMale"
+    },
+    {
+      "file": "PriestWarHumanMale (2).webp",
+      "variant": "warHumanMale"
+    },
+    {
+      "file": "PriestWarTieflingMale (1).webp",
+      "variant": "warTieflingMale"
+    },
+    {
+      "file": "PriestWarTieflingMale (2).webp",
+      "variant": "warTieflingMale"
+    },
+    {
+      "file": "PriestWaterDragonborn (1).webp",
+      "variant": "waterDragonborn"
+    },
+    {
+      "file": "PriestWaterDragonborn (2).webp",
+      "variant": "waterDragonborn"
+    },
+    {
+      "file": "PriestWaterHalfOrcMale (1).webp",
+      "variant": "waterHalfOrcMale"
+    },
+    {
+      "file": "PriestWaterTieflingFemale (1).webp",
+      "variant": "waterTieflingFemale"
+    },
+    {
+      "file": "PriestWaterTieflingFemale (2).webp",
+      "variant": "waterTieflingFemale"
+    },
+    {
+      "file": "PriestWorkshopDwarfFemale (1).webp",
+      "variant": "workshopDwarfFemale"
+    },
+    {
+      "file": "PriestWorkshopDwarfFemale (2).webp",
+      "variant": "workshopDwarfFemale"
+    },
+    {
+      "file": "PriestWorkshopDwarfFemale (3).webp",
+      "variant": "workshopDwarfFemale"
+    },
+    {
+      "file": "PriestWorkshopDwarfFemale (4).webp",
+      "variant": "workshopDwarfFemale"
+    },
+    {
+      "file": "PriestWorkshopDwarfFemale (5).webp",
+      "variant": "workshopDwarfFemale"
+    },
+    {
+      "file": "PriestWorkshopDwarfFemale (6).webp",
+      "variant": "workshopDwarfFemale"
+    },
+    {
+      "file": "PriestWorkshopDwarfFemale (7).webp",
+      "variant": "workshopDwarfFemale"
+    },
+    {
+      "file": "PriestWorkshopDwarfFemale (8).webp",
+      "variant": "workshopDwarfFemale"
+    },
+    {
+      "file": "PriestWorkshopDwarfMale (1).webp",
+      "variant": "workshopDwarfMale"
+    },
+    {
+      "file": "PriestWorkshopDwarfMale (10).webp",
+      "variant": "workshopDwarfMale"
+    },
+    {
+      "file": "PriestWorkshopDwarfMale (11).webp",
+      "variant": "workshopDwarfMale"
+    },
+    {
+      "file": "PriestWorkshopDwarfMale (12).webp",
+      "variant": "workshopDwarfMale"
+    },
+    {
+      "file": "PriestWorkshopDwarfMale (13).webp",
+      "variant": "workshopDwarfMale"
+    },
+    {
+      "file": "PriestWorkshopDwarfMale (2).webp",
+      "variant": "workshopDwarfMale"
+    },
+    {
+      "file": "PriestWorkshopDwarfMale (3).webp",
+      "variant": "workshopDwarfMale"
+    },
+    {
+      "file": "PriestWorkshopDwarfMale (4).webp",
+      "variant": "workshopDwarfMale"
+    },
+    {
+      "file": "PriestWorkshopDwarfMale (5).webp",
+      "variant": "workshopDwarfMale"
+    },
+    {
+      "file": "PriestWorkshopDwarfMale (6).webp",
+      "variant": "workshopDwarfMale"
+    },
+    {
+      "file": "PriestWorkshopDwarfMale (7).webp",
+      "variant": "workshopDwarfMale"
+    },
+    {
+      "file": "PriestWorkshopDwarfMale (8).webp",
+      "variant": "workshopDwarfMale"
+    },
+    {
+      "file": "PriestWorkshopDwarfMale (9).webp",
+      "variant": "workshopDwarfMale"
+    },
+    {
+      "file": "PriestWorkshopHalfElfFemale (1).webp",
+      "variant": "workshopHalfElfFemale"
+    },
+    {
+      "file": "PriestWorkshopHalfElfFemale (2).webp",
+      "variant": "workshopHalfElfFemale"
+    },
+    {
+      "file": "PriestWorkshopHalfElfFemale (3).webp",
+      "variant": "workshopHalfElfFemale"
+    },
+    {
+      "file": "PriestWorkshopHalfElfFemale (4).webp",
+      "variant": "workshopHalfElfFemale"
+    },
+    {
+      "file": "PriestWorkshopHalfElfFemale (5).webp",
+      "variant": "workshopHalfElfFemale"
+    },
+    {
+      "file": "PriestWorkshopHalflingFemale (1).webp",
+      "variant": "workshopHalflingFemale"
+    },
+    {
+      "file": "PriestWorkshopHalflingFemale (2).webp",
+      "variant": "workshopHalflingFemale"
+    },
+    {
+      "file": "PriestWorkshopHalflingFemale (3).webp",
+      "variant": "workshopHalflingFemale"
+    },
+    {
+      "file": "PriestWorkshopHalflingFemale (4).webp",
+      "variant": "workshopHalflingFemale"
+    },
+    {
+      "file": "PriestWorkshopHalflingFemale (5).webp",
+      "variant": "workshopHalflingFemale"
+    },
+    {
+      "file": "PriestWorkshopHalflingFemale (6).webp",
+      "variant": "workshopHalflingFemale"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseSource": "SRD 5.1 (Wizards of the Coast); EN from 5e API (dnd5eapi.co); DE from SRD 5.1 DE (openrpg.de/nesges)"
+}
