@@ -13,6 +13,7 @@ import { computeVisibilityPolygon } from '../../utils/losEngine'
 import type { MapRecord, TokenRecord } from '@shared/ipc-types'
 import { useImage } from '../../hooks/useImage'
 import { findMonsterSlugByName } from '../bestiary/actions'
+import { showToast } from '../shared/Toast'
 
 function factionColor(faction: string): string {
   switch (faction) {
@@ -649,7 +650,12 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   async function handleOpenInBestiarium(token: TokenRecord) {
     closeContextMenu()
     const slug = await findMonsterSlugByName(token.name)
-    if (!slug) return
+    if (!slug) {
+      // Failed match — usually a heavily renamed token. Surface the
+      // miss so the DM doesn't think the menu just did nothing.
+      showToast(`Kein Bestiarium-Eintrag für „${token.name}" gefunden`, 'info')
+      return
+    }
     useUIStore.getState().openBestiary({ tab: 'monsters', slug })
   }
 

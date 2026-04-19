@@ -539,7 +539,8 @@
     "noMap": "Select a map to track initiative",
     "noCombat": "No active combat",
     "removeEntry": "Remove",
-    "openInBestiary": "Open in bestiarium"
+    "openInBestiary": "Open in bestiarium",
+    "bestiaryMiss": "No bestiarium entry found for \u201E{{name}}\u201C"
   },
   "notes": {
     "campaignNotes": "Campaign Notes",

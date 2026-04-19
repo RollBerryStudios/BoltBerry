@@ -106,23 +106,24 @@ export async function spawnMonsterOnMap(opts: {
 // ───────── "Send to player" handouts for the three entity types ───────
 
 export function monsterHandout(m: MonsterRecord, lang: AppLanguage, imageDataUrl: string | null): PlayerHandout {
+  const L = HANDOUT_LABELS[lang]
   const subtitle = `${localized(m.size, lang)} · ${localized(m.type, lang)} · ${localized(m.alignment, lang)}`
   const lines: string[] = [
     subtitle,
     '',
-    `CR ${m.challenge}    XP ${m.xp.toLocaleString()}`,
-    `AC ${stripParens(localized(m.ac, lang))}    HP ${stripParens(localized(m.hp, lang))}`,
+    `${L.cr} ${m.challenge}    XP ${m.xp.toLocaleString()}`,
+    `${L.ac} ${stripParens(localized(m.ac, lang))}    ${L.hp} ${stripParens(localized(m.hp, lang))}`,
     `STR ${m.str}  DEX ${m.dex}  CON ${m.con}  INT ${m.int}  WIS ${m.wis}  CHA ${m.cha}`,
   ]
   const senses = localizedArray(m.senses, lang).join(', ')
-  if (senses) lines.push('', `Senses: ${senses}`)
+  if (senses) lines.push('', `${L.senses}: ${senses}`)
   const langs = localizedArray(m.languages, lang).join(', ')
-  if (langs) lines.push(`Languages: ${langs}`)
+  if (langs) lines.push(`${L.languages}: ${langs}`)
 
-  appendNamedSection(lines, 'Traits', getNamed(m.traits, lang))
-  appendNamedSection(lines, 'Actions', getNamed(m.actions, lang))
-  appendNamedSection(lines, 'Legendary Actions', getNamed(m.legendaryActions, lang))
-  appendNamedSection(lines, 'Reactions', getNamed(m.reactions, lang))
+  appendNamedSection(lines, L.traits, getNamed(m.traits, lang))
+  appendNamedSection(lines, L.actions, getNamed(m.actions, lang))
+  appendNamedSection(lines, L.legendary, getNamed(m.legendaryActions, lang))
+  appendNamedSection(lines, L.reactions, getNamed(m.reactions, lang))
 
   return {
     title: pickName(m, lang),
@@ -131,18 +132,55 @@ export function monsterHandout(m: MonsterRecord, lang: AppLanguage, imageDataUrl
   }
 }
 
+// Bilingual labels for handout body composition. Kept inline rather than
+// going through i18next because PlayerHandout.textContent is plain text
+// destined for the player window, where re-pulling i18n adds no value
+// (the player sees the DM's chosen language for the card body anyway).
+const HANDOUT_LABELS: Record<AppLanguage, {
+  cr: string; ac: string; hp: string
+  senses: string; languages: string
+  traits: string; actions: string; legendary: string; reactions: string
+  cost: string; weight: string; type: string; ac2: string; damage: string; properties: string
+  castingTime: string; range: string; duration: string; components: string; classes: string
+  higherLevels: string
+}> = {
+  en: {
+    cr: 'CR', ac: 'AC', hp: 'HP',
+    senses: 'Senses', languages: 'Languages',
+    traits: 'Traits', actions: 'Actions',
+    legendary: 'Legendary Actions', reactions: 'Reactions',
+    cost: 'Cost', weight: 'Weight', type: 'Type', ac2: 'AC',
+    damage: 'Damage', properties: 'Properties',
+    castingTime: 'Casting time', range: 'Range', duration: 'Duration',
+    components: 'Components', classes: 'Classes',
+    higherLevels: 'At higher levels',
+  },
+  de: {
+    cr: 'HG', ac: 'RK', hp: 'TP',
+    senses: 'Sinne', languages: 'Sprachen',
+    traits: 'Merkmale', actions: 'Aktionen',
+    legendary: 'Legendäre Aktionen', reactions: 'Reaktionen',
+    cost: 'Kosten', weight: 'Gewicht', type: 'Art', ac2: 'RK',
+    damage: 'Schaden', properties: 'Eigenschaften',
+    castingTime: 'Zeitaufwand', range: 'Reichweite', duration: 'Wirkungsdauer',
+    components: 'Komponenten', classes: 'Klassen',
+    higherLevels: 'Auf höheren Graden',
+  },
+}
+
 export function itemHandout(it: ItemRecord, lang: AppLanguage): PlayerHandout {
+  const L = HANDOUT_LABELS[lang]
   const lines: string[] = [
     `${localized(it.category, lang)} · ${localized(it.rarity, lang)}`,
     '',
   ]
-  if (it.cost != null) lines.push(`Cost: ${it.cost} gp`)
-  if (it.weight != null) lines.push(`Weight: ${it.weight} lb`)
-  if (it.classification) lines.push(`Type: ${localized(it.classification, lang)}`)
-  if (it.ac) lines.push(`AC: ${it.ac}`)
-  if (it.damageType) lines.push(`Damage: ${localized(it.damageType, lang)}`)
+  if (it.cost != null) lines.push(`${L.cost}: ${it.cost} gp`)
+  if (it.weight != null) lines.push(`${L.weight}: ${it.weight} lb`)
+  if (it.classification) lines.push(`${L.type}: ${localized(it.classification, lang)}`)
+  if (it.ac) lines.push(`${L.ac2}: ${it.ac}`)
+  if (it.damageType) lines.push(`${L.damage}: ${localized(it.damageType, lang)}`)
   const props = localizedArray(it.properties, lang)
-  if (props.length > 0) lines.push(`Properties: ${props.join(', ')}`)
+  if (props.length > 0) lines.push(`${L.properties}: ${props.join(', ')}`)
   const desc = localized(it.description, lang)
   if (desc) {
     lines.push('', desc)
@@ -155,20 +193,22 @@ export function itemHandout(it: ItemRecord, lang: AppLanguage): PlayerHandout {
 }
 
 export function spellHandout(sp: SpellRecord, lang: AppLanguage): PlayerHandout {
+  const L = HANDOUT_LABELS[lang]
+  const ritualLabel = lang === 'de' ? 'Ritual' : 'ritual'
   const lines: string[] = [
-    `${localized(sp.level, lang)} · ${localized(sp.school, lang)}${sp.ritual ? ' (ritual)' : ''}`,
+    `${localized(sp.level, lang)} · ${localized(sp.school, lang)}${sp.ritual ? ` (${ritualLabel})` : ''}`,
     '',
   ]
-  if (sp.castingTime) lines.push(`Casting time: ${localized(sp.castingTime, lang)}`)
-  if (sp.range) lines.push(`Range: ${localized(sp.range, lang)}`)
-  if (sp.duration) lines.push(`Duration: ${localized(sp.duration, lang)}`)
-  if (sp.components?.raw) lines.push(`Components: ${localized(sp.components.raw, lang)}`)
+  if (sp.castingTime) lines.push(`${L.castingTime}: ${localized(sp.castingTime, lang)}`)
+  if (sp.range) lines.push(`${L.range}: ${localized(sp.range, lang)}`)
+  if (sp.duration) lines.push(`${L.duration}: ${localized(sp.duration, lang)}`)
+  if (sp.components?.raw) lines.push(`${L.components}: ${localized(sp.components.raw, lang)}`)
   const classes = localizedArray(sp.classes, lang).join(', ')
-  if (classes) lines.push(`Classes: ${classes}`)
+  if (classes) lines.push(`${L.classes}: ${classes}`)
   const desc = localized(sp.description, lang)
   if (desc) lines.push('', desc)
   const higher = localized(sp.higherLevels, lang)
-  if (higher) lines.push('', `At higher levels: ${higher}`)
+  if (higher) lines.push('', `${L.higherLevels}: ${higher}`)
   return {
     title: pickName(sp, lang),
     imagePath: null,

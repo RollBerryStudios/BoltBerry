@@ -285,7 +285,7 @@ function MonsterActions({
   const { t } = useTranslation()
   const activeMapId = useCampaignStore((s) => s.activeMapId)
   const activeMaps = useCampaignStore((s) => s.activeMaps)
-  const playerConnected = usePlayerConnected()
+  const playerConnected = useUIStore((s) => s.playerConnected)
   const [busy, setBusy] = useState(false)
 
   const map = useMemo(() => {
@@ -346,6 +346,3 @@ function MonsterActions({
   )
 }
 
-function usePlayerConnected(): boolean {
-  return useUIStore((s) => s.playerConnected)
-}

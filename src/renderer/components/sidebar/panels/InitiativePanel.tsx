@@ -7,6 +7,7 @@ import { useTokenStore } from '../../../stores/tokenStore'
 import { useUndoStore, nextCommandId } from '../../../stores/undoStore'
 import { EmptyState } from '../../EmptyState'
 import { findMonsterSlugByName } from '../../bestiary/actions'
+import { showToast } from '../../shared/Toast'
 
 const FACTION_COLORS: Record<string, string> = {
   enemy: '#ef4444',
@@ -549,7 +550,10 @@ export function InitiativePanel() {
                     style={{ background: 'var(--bg-overlay)', border: '1px solid var(--border-subtle)', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 10, padding: '1px 4px', lineHeight: 1, borderRadius: 3 }}
                     onClick={async () => {
                       const slug = await findMonsterSlugByName(entry.combatantName)
-                      if (!slug) return
+                      if (!slug) {
+                        showToast(t('initiative.bestiaryMiss', { name: entry.combatantName }), 'info')
+                        return
+                      }
                       useUIStore.getState().openBestiary({ tab: 'monsters', slug })
                     }}
                     title={t('initiative.openInBestiary')}

@@ -539,7 +539,8 @@
     "noMap": "Karte auswählen um Initiative zu tracken",
     "noCombat": "Kein Kampf aktiv",
     "removeEntry": "Entfernen",
-    "openInBestiary": "Im Bestiarium öffnen"
+    "openInBestiary": "Im Bestiarium öffnen",
+    "bestiaryMiss": "Kein Bestiarium-Eintrag für \u201E{{name}}\u201C"
   },
   "notes": {
     "campaignNotes": "Kampagnen-Notizen",

@@ -33,16 +33,20 @@ export function BestiaryView() {
     }
   })
   const [query, setQuery] = useState('')
-  // When the view is opened with a deep-link, seed the active tab + slug
-  // and immediately consume the target so a follow-up nav resets cleanly.
-  const [pendingSlug, setPendingSlug] = useState<string | null>(null)
+  // Pending deep-link: stored as { tab, slug } so a stale slug from a
+  // monster deep-link can't bleed into the items / spells tab if the user
+  // manually switches tabs before the tab consumes it.
+  const [pending, setPending] = useState<{ tab: BestiaryTab; slug: string } | null>(null)
   useEffect(() => {
     if (!target) return
     setTab(target.tab)
-    setPendingSlug(target.slug)
+    setPending({ tab: target.tab, slug: target.slug })
     setQuery('')
     clearTarget()
   }, [target, clearTarget])
+
+  const slugForTab = (current: BestiaryTab): string | null =>
+    pending && pending.tab === current ? pending.slug : null
 
   useEffect(() => {
     try { localStorage.setItem('boltberry-bestiary-tab', tab) } catch { /* noop */ }
@@ -145,24 +149,24 @@ export function BestiaryView() {
           <MonstersTab
             query={query}
             language={language}
-            initialSlug={tab === 'monsters' ? pendingSlug : null}
-            onConsumeInitial={() => setPendingSlug(null)}
+            initialSlug={slugForTab('monsters')}
+            onConsumeInitial={() => setPending(null)}
           />
         )}
         {tab === 'items' && (
           <ItemsTab
             query={query}
             language={language}
-            initialSlug={tab === 'items' ? pendingSlug : null}
-            onConsumeInitial={() => setPendingSlug(null)}
+            initialSlug={slugForTab('items')}
+            onConsumeInitial={() => setPending(null)}
           />
         )}
         {tab === 'spells' && (
           <SpellsTab
             query={query}
             language={language}
-            initialSlug={tab === 'spells' ? pendingSlug : null}
-            onConsumeInitial={() => setPendingSlug(null)}
+            initialSlug={slugForTab('spells')}
+            onConsumeInitial={() => setPending(null)}
           />
         )}
       </div>
