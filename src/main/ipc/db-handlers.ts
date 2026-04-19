@@ -18,7 +18,7 @@ const ALLOWED_TABLES = new Set([
   'campaigns', 'maps', 'tokens', 'initiative', 'notes', 'handouts',
   'gm_pins', 'drawings', 'walls', 'rooms', 'encounters', 'assets',
   'character_sheets', 'audio_boards', 'audio_board_slots', 'fog_state',
-  'schema_version',
+  'schema_version', 'token_templates',
 ])
 
 /**
