@@ -16,6 +16,12 @@ import type {
   PlayerWallState,
   CompendiumFile,
   TokenVariant,
+  MonsterIndexEntry,
+  MonsterRecord,
+  ItemIndexEntry,
+  ItemRecord,
+  SpellIndexEntry,
+  SpellRecord,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -131,6 +137,22 @@ export const dmApi = {
   > => ipcRenderer.invoke(IPC.TOKEN_VARIANTS_IMPORT, slug),
   openTokenVariantsFolder: (slug?: string): Promise<void> =>
     ipcRenderer.invoke(IPC.TOKEN_VARIANTS_OPEN_FOLDER, slug),
+
+  // Bestiarium data (SRD 5.1 monsters, items, spells)
+  listMonsters: (): Promise<MonsterIndexEntry[]> =>
+    ipcRenderer.invoke(IPC.DATA_LIST_MONSTERS),
+  getMonster: (slug: string): Promise<(MonsterRecord & { tokenDefaultUrl: string | null }) | null> =>
+    ipcRenderer.invoke(IPC.DATA_GET_MONSTER, slug),
+  getMonsterTokenUrl: (slug: string, file: string): Promise<string | null> =>
+    ipcRenderer.invoke(IPC.DATA_GET_MONSTER_TOKEN, slug, file),
+  listItems: (): Promise<ItemIndexEntry[]> =>
+    ipcRenderer.invoke(IPC.DATA_LIST_ITEMS),
+  getItem: (slug: string): Promise<ItemRecord | null> =>
+    ipcRenderer.invoke(IPC.DATA_GET_ITEM, slug),
+  listSpells: (): Promise<SpellIndexEntry[]> =>
+    ipcRenderer.invoke(IPC.DATA_LIST_SPELLS),
+  getSpell: (slug: string): Promise<SpellRecord | null> =>
+    ipcRenderer.invoke(IPC.DATA_GET_SPELL, slug),
 
   // Native application menu bridge
   setMenuLanguage: (lang: 'de' | 'en') =>

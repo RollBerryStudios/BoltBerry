@@ -13,9 +13,9 @@ import {
   MIGRATE_V21_TO_V22, MIGRATE_V22_TO_V23, MIGRATE_V23_TO_V24,
   MIGRATE_V24_TO_V25, MIGRATE_V25_TO_V26, MIGRATE_V26_TO_V27,
   MIGRATE_V27_TO_V28, MIGRATE_V28_TO_V29, MIGRATE_V29_TO_V30,
-  MIGRATE_V30_TO_V31, MIGRATE_V31_TO_V32,
+  MIGRATE_V30_TO_V31, MIGRATE_V31_TO_V32, MIGRATE_V32_TO_V33,
 } from './schema'
-import { SRD_MONSTERS } from './srd-monsters'
+import { loadMonstersIndexSync, loadMonsterRecordSync } from '../ipc/data-handlers'
 
 let db: Database.Database | null = null
 
@@ -43,6 +43,7 @@ const MIGRATIONS: ReadonlyArray<readonly [target: number, sql: string]> = [
   [29, MIGRATE_V28_TO_V29], [30, MIGRATE_V29_TO_V30],
   [31, MIGRATE_V30_TO_V31],
   [32, MIGRATE_V31_TO_V32],
+  [33, MIGRATE_V32_TO_V33],
 ]
 
 export class SchemaTooNewError extends Error {
@@ -153,9 +154,9 @@ export function initDatabase(): Database.Database {
     // "no such column" before the migration gets a chance to add it.
     db.exec(CREATE_POST_MIGRATION_INDEXES_SQL)
 
-    // Seed SRD monsters into token_templates. Idempotent via
-    // UNIQUE(source, name) — a user who deleted a seeded row keeps it
-    // gone (INSERT OR IGNORE), which is the right behavior.
+    // Seed the SRD 5.1 monster library from resources/data/. Idempotent
+    // via UNIQUE(source, name) — a user who deleted a seeded row keeps
+    // it gone (INSERT OR IGNORE) across restarts.
     seedSrdMonsters(db)
   } catch (err) {
     db.close()
@@ -171,12 +172,23 @@ export function getDb(): Database.Database {
   return db
 }
 
-// Seeds the D&D 5e SRD creature library into token_templates. Runs on every
-// startup but UNIQUE(source, name) makes the INSERT a no-op for rows that
-// already exist, so user-scoped tweaks (source='user') are never touched.
-// A user who explicitly deleted a seeded row keeps it deleted — we don't
-// re-insert because the WHERE clause on INSERT OR IGNORE matches by UNIQUE.
+// Seeds the D&D 5e SRD creature library into token_templates from the
+// bilingual dataset shipped at resources/data/. Runs on every startup but
+// UNIQUE(source, name) makes the INSERT a no-op for rows that already
+// exist, so user-scoped tweaks (source='user') are never touched. A user
+// who explicitly deleted a seeded row keeps it deleted — INSERT OR IGNORE
+// will match the existing UNIQUE index, because the row-was-deleted case
+// is indistinguishable from a fresh install after migration v33 wipes
+// source='srd' rows on schema upgrade.
 function seedSrdMonsters(database: Database.Database) {
+  const index = loadMonstersIndexSync()
+  if (index.length === 0) {
+    // Nothing to seed — packaged build without data resources or dev setup
+    // before data was staged. Log once, don't fail startup.
+    console.warn('[Database] Bestiary index is empty — skipping SRD seed')
+    return
+  }
+
   const insert = database.prepare(
     `INSERT OR IGNORE INTO token_templates
       (category, source, name, image_path, size, hp_max, ac, speed, cr,
@@ -186,34 +198,89 @@ function seedSrdMonsters(database: Database.Database) {
        @creature_type, @faction, @marker_color, NULL, @stat_block, @slug,
        datetime('now'))`,
   )
-  // Backfill slug for rows seeded before v26 (inserted as INSERT OR IGNORE
-  // above is a no-op for them, but they're missing the new column). Only
-  // touches rows where slug IS NULL so user edits (even renames) are safe.
-  const backfill = database.prepare(
-    `UPDATE token_templates
-     SET slug = @slug
-     WHERE source = 'srd' AND name = @name AND slug IS NULL`,
-  )
-  const tx = database.transaction((rows: typeof SRD_MONSTERS) => {
-    for (const m of rows) {
+
+  const tx = database.transaction(() => {
+    for (const entry of index) {
+      const full = loadMonsterRecordSync(entry.slug)
+      if (!full) continue
       const payload = {
-        name: m.name_de,
-        size: m.size,
-        hp_max: m.hp_max,
-        ac: m.ac,
-        speed: m.speed,
-        cr: m.cr,
-        creature_type: m.creature_type,
-        faction: m.faction,
-        marker_color: m.marker_color,
-        stat_block: JSON.stringify(m.stat_block),
-        slug: m.slug,
+        // Prefer the German name when present — the app's default locale is
+        // DE and the Token Library's uniqueness key is the `name` column.
+        name: entry.nameDe?.trim() || entry.name,
+        size: gridSizeFromLabel(entry.size),
+        hp_max: parseHpMax(full.hp?.en) ?? 10,
+        ac: parseAc(full.ac?.en) ?? 10,
+        speed: parseSpeed(full.speed?.run?.en) ?? 30,
+        cr: full.challenge,
+        creature_type: entry.type.en,
+        faction: factionForType(entry.type.en),
+        marker_color: markerColorForType(entry.type.en),
+        stat_block: JSON.stringify({
+          str: full.str, dex: full.dex, con: full.con,
+          int: full.int, wis: full.wis, cha: full.cha,
+          attacks: [], traits: [],
+        }),
+        slug: entry.slug,
       }
       insert.run(payload)
-      if (m.slug !== null) backfill.run({ name: m.name_de, slug: m.slug })
     }
   })
-  tx(SRD_MONSTERS)
+  tx()
+}
+
+function gridSizeFromLabel(label: string): number {
+  switch ((label ?? '').toLowerCase()) {
+    case 'tiny':
+    case 'small':
+    case 'medium': return 1
+    case 'large': return 2
+    case 'huge': return 3
+    case 'gargantuan': return 4
+    default: return 1
+  }
+}
+
+// Extracts the leading integer from strings like "135 (18d10 + 36)".
+function parseHpMax(hp: string | undefined): number | null {
+  if (!hp) return null
+  const m = hp.match(/\d+/)
+  return m ? parseInt(m[0], 10) : null
+}
+
+// Extracts the leading integer from strings like "17 (Natural Armor)".
+function parseAc(ac: string | undefined): number | null {
+  if (!ac) return null
+  const m = ac.match(/\d+/)
+  return m ? parseInt(m[0], 10) : null
+}
+
+function parseSpeed(n: number | undefined): number | null {
+  return typeof n === 'number' && Number.isFinite(n) ? n : null
+}
+
+// Rough first-pass faction guess keyed on the creature type. Users can
+// flip this inline via the Token Library edit surface.
+function factionForType(type: string): string {
+  const t = (type ?? '').toLowerCase()
+  if (t.includes('humanoid') || t.includes('celestial')) return 'neutral'
+  return 'enemy'
+}
+
+function markerColorForType(type: string): string {
+  const t = (type ?? '').toLowerCase()
+  if (t.includes('undead')) return '#a78bfa'
+  if (t.includes('fiend')) return '#991b1b'
+  if (t.includes('dragon')) return '#dc2626'
+  if (t.includes('beast')) return '#b45309'
+  if (t.includes('elemental')) return '#f59e0b'
+  if (t.includes('plant')) return '#22c55e'
+  if (t.includes('construct')) return '#64748b'
+  if (t.includes('celestial')) return '#f4f6fa'
+  if (t.includes('fey')) return '#ec4899'
+  if (t.includes('aberration')) return '#7c3aed'
+  if (t.includes('giant')) return '#78350f'
+  if (t.includes('ooze')) return '#06b6d4'
+  return '#ef4444'
 }
 
 export function closeDatabase(): void {

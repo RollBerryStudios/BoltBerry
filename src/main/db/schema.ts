@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 32
+export const SCHEMA_VERSION = 33
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -754,6 +754,18 @@ ALTER TABLE maps ADD COLUMN grid_visible   INTEGER NOT NULL DEFAULT 1;
 ALTER TABLE maps ADD COLUMN grid_thickness REAL    NOT NULL DEFAULT 1.0;
 ALTER TABLE maps ADD COLUMN grid_color     TEXT    NOT NULL DEFAULT 'rgba(255,255,255,0.34)';
 UPDATE schema_version SET version = 32;
+`
+
+// Migration: v32 → v33 — retire the hand-curated 25-creature SRD seed and
+// let the new data-driven seeder (reading from resources/data/) populate
+// token_templates from the full 263-creature bilingual SRD dataset. We
+// purge only rows where the user hasn't touched the name (a rename bumps
+// the row out of the predicate), so anyone who tweaked a seeded row keeps
+// their copy. The new seeder runs at startup and is idempotent via
+// UNIQUE(source, name).
+export const MIGRATE_V32_TO_V33 = `
+DELETE FROM token_templates WHERE source = 'srd';
+UPDATE schema_version SET version = 33;
 `
 
 // Use the SCHEMA_VERSION constant directly so there's a single source of truth.

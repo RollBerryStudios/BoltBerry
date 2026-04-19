@@ -40,6 +40,13 @@ extraResources:
   - from: resources/token-variants
     to: token-variants
     filter: ["**/*.{webp,png,jpg,jpeg}"]
+  # Game data: bilingual SRD 5.1 monsters, items, and spells plus the token
+  # artwork that ships with each creature. Served at runtime from
+  # process.resourcesPath/data/** via the data:list-* / data:get-* IPC
+  # handlers and the local-asset protocol for token images.
+  - from: resources/data
+    to: data
+    filter: ["**/*.{json,webp,png,jpg,jpeg}"]
 
 # ─── Windows ──────────────────────────────────────────────────────────────────
 win:

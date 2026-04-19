@@ -6,6 +6,7 @@ import { AppLayout } from './components/AppLayout'
 import { CampaignView } from './components/CampaignView'
 import { Welcome } from './components/Welcome'
 import { CompendiumView } from './components/CompendiumView'
+import { BestiaryView } from './components/BestiaryView'
 import { AboutDialog } from './components/AboutDialog'
 import { SetupWizard } from './components/SetupWizard'
 import { ShortcutOverlay } from './components/ShortcutOverlay'
@@ -153,6 +154,8 @@ export default function App() {
         <SetupWizard onComplete={() => { /* isSetupComplete set inside wizard */ }} />
       ) : topView === 'compendium' ? (
         <CompendiumView />
+      ) : topView === 'bestiary' ? (
+        <BestiaryView />
       ) : !activeCampaignId ? (
         <Welcome />
       ) : (

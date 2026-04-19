@@ -331,6 +331,14 @@ function RightPane({
         <button
           type="button"
           className="bb-welcome-compendium-btn"
+          onClick={() => useUIStore.getState().setTopView('bestiary')}
+          title={t('welcome.openBestiary')}
+        >
+          👹 {t('welcome.openBestiary')}
+        </button>
+        <button
+          type="button"
+          className="bb-welcome-compendium-btn"
           onClick={() => useUIStore.getState().setTopView('compendium')}
         >
           📚 {t('welcome.openCompendium')}

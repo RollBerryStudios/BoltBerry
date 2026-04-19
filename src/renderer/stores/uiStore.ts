@@ -36,9 +36,9 @@ export type SessionMode = 'session' | 'prep'
 export type WorkMode = 'prep' | 'play' | 'combat' | 'player-preview' | 'fog-edit'
 export type AppLanguage = 'de' | 'en'
 /** Top-level screen override. When set to a non-'main' value, the named
- *  overlay view (e.g. compendium) takes over the whole window; 'main'
- *  falls through to the regular Welcome / Workspace / Map routing. */
-export type TopView = 'main' | 'compendium'
+ *  overlay view (e.g. compendium, bestiary) takes over the whole window;
+ *  'main' falls through to the regular Welcome / Workspace / Map routing. */
+export type TopView = 'main' | 'compendium' | 'bestiary'
 
 const FLOATING_PANELS: ReadonlySet<string> = new Set(['audio', 'overlay', 'dice'])
 export function isFloatingPanel(id: string): id is FloatingPanel {

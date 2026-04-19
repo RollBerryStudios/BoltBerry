@@ -7,6 +7,7 @@ import { logger } from './logger'
 import { createDMWindow, getDMWindow } from './windows'
 import { registerPlayerBridgeHandlers } from './ipc/player-bridge'
 import { registerAppHandlers } from './ipc/app-handlers'
+import { registerDataHandlers } from './ipc/data-handlers'
 import { registerDbHandlers } from './ipc/db-handlers'
 import { registerExportImportHandlers } from './ipc/export-import'
 import { buildAppMenu } from './menu'
@@ -88,6 +89,7 @@ app.whenReady().then(() => {
 
   registerPlayerBridgeHandlers()
   registerAppHandlers()
+  registerDataHandlers()
   registerDbHandlers()
   registerExportImportHandlers()
 

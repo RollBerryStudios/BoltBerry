@@ -91,6 +91,18 @@ export const IPC = {
   TOKEN_VARIANTS_LIST: 'token-variants:list',
   TOKEN_VARIANTS_IMPORT: 'token-variants:import',
   TOKEN_VARIANTS_OPEN_FOLDER: 'token-variants:open-folder',
+
+  // Bestiarium / reference data — bilingual SRD 5.1 monsters, items, spells.
+  // The renderer never touches the JSON files directly; all reads go through
+  // these handlers so the main process can resolve paths safely against
+  // process.resourcesPath/data (packaged) or resources/data (dev).
+  DATA_LIST_MONSTERS: 'data:list-monsters',
+  DATA_GET_MONSTER: 'data:get-monster',
+  DATA_GET_MONSTER_TOKEN: 'data:get-monster-token',
+  DATA_LIST_ITEMS: 'data:list-items',
+  DATA_GET_ITEM: 'data:get-item',
+  DATA_LIST_SPELLS: 'data:list-spells',
+  DATA_GET_SPELL: 'data:get-spell',
 } as const
 
 export interface TokenVariant {
@@ -103,6 +115,163 @@ export interface TokenVariant {
   size: number
   /** Distinguishes bundled seed art from user-added files. */
   source: 'bundled' | 'user'
+}
+
+// ─── Bestiarium data types (read-only SRD compendium) ─────────────────────
+// Matches the schema written by the data-pipeline that produced
+// resources/data/{monsters,items,spells}. Every human-readable string is
+// bilingual (en/de) so the renderer can render either language without
+// round-tripping through i18n.
+
+export interface L10n {
+  en: string
+  de: string
+}
+
+export interface L10nArray {
+  en: string[]
+  de: string[]
+}
+
+export interface NamedText {
+  name: string
+  text: string
+}
+
+/** Row in resources/data/index.json — one per monster. Enough to render a
+ *  list or filter the catalogue without opening the full JSON. */
+export interface MonsterIndexEntry {
+  id: number
+  slug: string
+  name: string
+  nameDe?: string
+  type: L10n
+  challenge: string
+  size: string
+  tokenDefault: string | null
+  tokenCount: number
+}
+
+/** Row in resources/data/items-index.json. */
+export interface ItemIndexEntry {
+  id: number
+  slug: string
+  name: string
+  nameDe?: string
+  category: L10n
+  rarity: L10n
+  cost?: number | null
+}
+
+/** Row in resources/data/spells-index.json. */
+export interface SpellIndexEntry {
+  id: number
+  slug: string
+  name: string
+  nameDe?: string
+  level: L10n
+  school: L10n
+  classes?: L10nArray
+}
+
+/** Full monster.json. Legendary-action entries include a leading intro
+ *  string in the EN locale, so the array is a union of strings and named
+ *  entries — consumers should check typeof on each element. */
+export interface MonsterRecord {
+  id: number
+  slug: string
+  name: string
+  nameDe?: string
+  source: string
+  meta: L10n
+  challenge: string
+  xp: number
+  ac: L10n
+  hp: L10n
+  str: number; dex: number; con: number
+  int: number; wis: number; cha: number
+  strMod?: number; dexMod?: number; conMod?: number
+  intMod?: number; wisMod?: number; chaMod?: number
+  speed?: Partial<{
+    run: { en: number; de: number }
+    fly: { en: number; de: number }
+    swim: { en: number; de: number }
+    climb: { en: number; de: number }
+    burrow: { en: number; de: number }
+  }>
+  senses?: L10nArray
+  languages?: L10nArray
+  savingThrows?: string[]
+  skills?: string[]
+  traits?: { en: NamedText[]; de: NamedText[] }
+  actions?: { en: Array<NamedText | string>; de: Array<NamedText | string> }
+  legendaryActions?: { en: Array<NamedText | string>; de: Array<NamedText | string> }
+  reactions?: { en: NamedText[]; de: NamedText[] }
+  img?: string
+  size: L10n
+  type: L10n
+  alignment: L10n
+  token?: { file: string; variant: string }
+  tokens?: Array<{ file: string; variant: string }>
+  license: string
+  licenseSource: string
+}
+
+export interface ItemRecord {
+  id: number
+  slug: string
+  name: string
+  nameDe?: string
+  category: L10n
+  rarity: L10n
+  cost?: number | null
+  source?: L10n
+  weight?: number | null
+  classification?: L10n
+  description?: L10n
+  damageType?: L10n
+  properties?: L10nArray
+  stealth?: string
+  ac?: string
+  image?: string
+  license: string
+  licenseSource: string
+}
+
+export interface SpellRecord {
+  id: number
+  slug: string
+  name: string
+  nameDe?: string
+  level: L10n
+  school: L10n
+  ritual?: boolean
+  source?: string
+  classes?: L10nArray
+  type?: L10n
+  castingTime?: L10n
+  range?: L10n
+  duration?: L10n
+  components?: {
+    verbal?: boolean
+    somatic?: boolean
+    material?: boolean
+    raw?: L10n
+  }
+  description?: L10n
+  higherLevels?: L10n
+  image?: string
+  license: string
+  licenseSource: string
+}
+
+/** A single token image belonging to a monster. `path` is the
+ *  local-asset protocol URL so it can be used directly as an <img src>. */
+export interface MonsterToken {
+  file: string
+  variant: string
+  /** Safe URL loaded through the local-asset protocol. */
+  path: string
 }
 
 export interface CompendiumFile {
