@@ -6,6 +6,7 @@ import { useUIStore } from '../../../stores/uiStore'
 import { useTokenStore } from '../../../stores/tokenStore'
 import { useUndoStore, nextCommandId } from '../../../stores/undoStore'
 import { EmptyState } from '../../EmptyState'
+import { findMonsterSlugByName } from '../../bestiary/actions'
 
 const FACTION_COLORS: Record<string, string> = {
   enemy: '#ef4444',
@@ -544,6 +545,16 @@ export function InitiativePanel() {
                       RK{linkedToken.ac}
                     </span>
                   )}
+                  <button
+                    style={{ background: 'var(--bg-overlay)', border: '1px solid var(--border-subtle)', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 10, padding: '1px 4px', lineHeight: 1, borderRadius: 3 }}
+                    onClick={async () => {
+                      const slug = await findMonsterSlugByName(entry.combatantName)
+                      if (!slug) return
+                      useUIStore.getState().openBestiary({ tab: 'monsters', slug })
+                    }}
+                    title={t('initiative.openInBestiary')}
+                    aria-label={t('initiative.openInBestiary')}
+                  >📖</button>
                   <button
                     style={{ background: timerEntryId === entry.id ? 'var(--accent-blue-dim)' : 'var(--bg-overlay)', border: `1px solid ${timerEntryId === entry.id ? 'var(--accent-blue)' : 'var(--border-subtle)'}`, color: timerEntryId === entry.id ? 'var(--accent-blue-light)' : 'var(--text-muted)', cursor: 'pointer', fontSize: 10, padding: '1px 4px', lineHeight: 1, borderRadius: 3 }}
                     onClick={() => setTimerEntryId(timerEntryId === entry.id ? null : entry.id)}

@@ -9,7 +9,17 @@ import { MonsterDetail } from './MonsterDetail'
    the detail is fetched on-demand via DATA_GET_MONSTER and cached so
    flipping between monsters stays instant. */
 
-export function MonstersTab({ query, language }: { query: string; language: AppLanguage }) {
+export function MonstersTab({
+  query,
+  language,
+  initialSlug,
+  onConsumeInitial,
+}: {
+  query: string
+  language: AppLanguage
+  initialSlug?: string | null
+  onConsumeInitial?: () => void
+}) {
   const { t } = useTranslation()
   const [index, setIndex] = useState<MonsterIndexEntry[] | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -69,13 +79,23 @@ export function MonstersTab({ query, language }: { query: string; language: AppL
       })
   }, [index, query, language, crFilter, typeFilter])
 
+  // Apply a deep-link target the first time the index loads. Forces the
+  // selection even if the entry is filtered out — caller can still tell
+  // the detail pane to render it.
+  useEffect(() => {
+    if (!initialSlug || !index) return
+    setSelectedSlug(initialSlug)
+    onConsumeInitial?.()
+  }, [initialSlug, index, onConsumeInitial])
+
   // Auto-select the first row whenever the filter changes, so the detail
   // pane never ends up stuck on an entry that's no longer in the list.
   useEffect(() => {
     if (filtered.length === 0) { setSelectedSlug(null); return }
     if (selectedSlug && filtered.some((m) => m.slug === selectedSlug)) return
+    if (selectedSlug && index?.some((m) => m.slug === selectedSlug)) return
     setSelectedSlug(filtered[0].slug)
-  }, [filtered, selectedSlug])
+  }, [filtered, index, selectedSlug])
 
   const handleSelect = useCallback((slug: string) => setSelectedSlug(slug), [])
 

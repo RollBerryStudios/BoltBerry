@@ -40,6 +40,17 @@ export type AppLanguage = 'de' | 'en'
  *  'main' falls through to the regular Welcome / Workspace / Map routing. */
 export type TopView = 'main' | 'compendium' | 'bestiary'
 
+export type BestiaryTab = 'monsters' | 'items' | 'spells'
+
+/** Deep-link target for the Bestiarium view. When set, BestiaryView opens
+ *  the requested tab and pre-selects the matching slug. Consumed once by
+ *  the view, then cleared via `clearBestiaryTarget()` so re-opening the
+ *  view from the nav doesn't re-target the same entry. */
+export interface BestiaryTarget {
+  tab: BestiaryTab
+  slug: string
+}
+
 const FLOATING_PANELS: ReadonlySet<string> = new Set(['audio', 'overlay', 'dice'])
 export function isFloatingPanel(id: string): id is FloatingPanel {
   return FLOATING_PANELS.has(id)
@@ -92,6 +103,8 @@ interface UIState {
   activeWeather: string
   drawingClearTick: number
   topView: TopView
+  /** Pending deep-link the next time topView flips to 'bestiary'. */
+  bestiaryTarget: BestiaryTarget | null
   /** v1 Conservative dock prefs — persisted to localStorage. */
   dockLabels: boolean
   dockAutoHide: boolean
@@ -162,6 +175,10 @@ interface UIState {
   }>) => void
 
   setTopView: (view: TopView) => void
+  /** Sets a deep-link and flips topView='bestiary' in one shot. */
+  openBestiary: (target?: BestiaryTarget) => void
+  /** Called by BestiaryView once it has applied the target. */
+  clearBestiaryTarget: () => void
   toggleDockLabels: () => void
   toggleDockAutoHide: () => void
 }
@@ -197,6 +214,7 @@ export const useUIStore = create<UIState>((set) => ({
   drawingClearTick: 0,
   clipboardTokens: [],
   topView: 'main',
+  bestiaryTarget: null,
   dockLabels: (() => { try { return localStorage.getItem('boltberry-dock-labels') === 'true' } catch { return false } })(),
   dockAutoHide: (() => { try { return localStorage.getItem('boltberry-dock-auto-hide') === 'true' } catch { return false } })(),
 
@@ -308,6 +326,9 @@ export const useUIStore = create<UIState>((set) => ({
   setActiveWeather: (activeWeather) => set({ activeWeather }),
   incrementDrawingClearTick: () => set((s) => ({ drawingClearTick: s.drawingClearTick + 1 })),
   setTopView: (topView) => set({ topView }),
+  openBestiary: (target) =>
+    set({ topView: 'bestiary', bestiaryTarget: target ?? null }),
+  clearBestiaryTarget: () => set({ bestiaryTarget: null }),
   toggleDockLabels: () =>
     set((s) => {
       const next = !s.dockLabels

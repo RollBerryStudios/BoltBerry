@@ -5,6 +5,7 @@ import { MonstersTab } from './bestiary/MonstersTab'
 import { ItemsTab } from './bestiary/ItemsTab'
 import { SpellsTab } from './bestiary/SpellsTab'
 import { BestiaryStyles } from './bestiary/BestiaryStyles'
+import type { BestiaryTab } from '../stores/uiStore'
 
 /* Bestiarium / Compendium data browser.
 
@@ -15,13 +16,13 @@ import { BestiaryStyles } from './bestiary/BestiaryStyles'
    Kept visually aligned with CompendiumView so the two top-level reference
    surfaces feel like siblings in the app. */
 
-type BestiaryTab = 'monsters' | 'items' | 'spells'
-
 export function BestiaryView() {
   const { t } = useTranslation()
   const setTopView = useUIStore((s) => s.setTopView)
   const language = useUIStore((s) => s.language)
   const toggleLanguage = useUIStore((s) => s.toggleLanguage)
+  const target = useUIStore((s) => s.bestiaryTarget)
+  const clearTarget = useUIStore((s) => s.clearBestiaryTarget)
 
   const [tab, setTab] = useState<BestiaryTab>(() => {
     try {
@@ -32,6 +33,16 @@ export function BestiaryView() {
     }
   })
   const [query, setQuery] = useState('')
+  // When the view is opened with a deep-link, seed the active tab + slug
+  // and immediately consume the target so a follow-up nav resets cleanly.
+  const [pendingSlug, setPendingSlug] = useState<string | null>(null)
+  useEffect(() => {
+    if (!target) return
+    setTab(target.tab)
+    setPendingSlug(target.slug)
+    setQuery('')
+    clearTarget()
+  }, [target, clearTarget])
 
   useEffect(() => {
     try { localStorage.setItem('boltberry-bestiary-tab', tab) } catch { /* noop */ }
@@ -130,9 +141,30 @@ export function BestiaryView() {
 
       {/* Active tab */}
       <div className="bb-best-body">
-        {tab === 'monsters' && <MonstersTab query={query} language={language} />}
-        {tab === 'items' && <ItemsTab query={query} language={language} />}
-        {tab === 'spells' && <SpellsTab query={query} language={language} />}
+        {tab === 'monsters' && (
+          <MonstersTab
+            query={query}
+            language={language}
+            initialSlug={tab === 'monsters' ? pendingSlug : null}
+            onConsumeInitial={() => setPendingSlug(null)}
+          />
+        )}
+        {tab === 'items' && (
+          <ItemsTab
+            query={query}
+            language={language}
+            initialSlug={tab === 'items' ? pendingSlug : null}
+            onConsumeInitial={() => setPendingSlug(null)}
+          />
+        )}
+        {tab === 'spells' && (
+          <SpellsTab
+            query={query}
+            language={language}
+            initialSlug={tab === 'spells' ? pendingSlug : null}
+            onConsumeInitial={() => setPendingSlug(null)}
+          />
+        )}
       </div>
     </div>
   )

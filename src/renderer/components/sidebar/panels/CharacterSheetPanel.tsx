@@ -2,13 +2,25 @@ import { useState, useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCharacterStore, rowToSheet } from '../../../stores/characterStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
+import { useUIStore } from '../../../stores/uiStore'
 import type { CharacterSheet, CharacterAttack } from '@shared/ipc-types'
 import { EmptyState } from '../../EmptyState'
+import { BestiaryPicker } from '../../bestiary/BestiaryPicker'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function modifier(score: number): number {
   return Math.floor((score - 10) / 2)
+}
+
+// Maps the bestiary's `spell.level.en` string to a numeric slot 0-9.
+// Accepts "cantrip", "cantrip (0)", "1", "3", … The dataset is terse but
+// inconsistent, so we default to 0 when parsing fails rather than throwing.
+function parseSpellLevel(level: string): number {
+  const s = (level ?? '').trim().toLowerCase()
+  if (!s || s.startsWith('cantrip') || s.startsWith('zauber')) return 0
+  const n = parseInt(s, 10)
+  return Number.isFinite(n) && n >= 0 && n <= 9 ? n : 0
 }
 
 function modStr(score: number): string {
@@ -160,6 +172,81 @@ function TextInput({ value, onChange, placeholder, style }: {
   )
 }
 
+// Inline spellbook — renders the CharacterSheet.spells JSON ({ [level]: name[] })
+// as collapsible level groups with inline delete + a single "Add from
+// Bestiarium" picker shared across levels (spell.level decides the bucket).
+function SpellbookSection({
+  spells,
+  onRemove,
+  onOpenPicker,
+}: {
+  spells: { [level: number]: string[] }
+  onRemove: (level: number, i: number) => void
+  onOpenPicker: () => void
+}) {
+  const { t } = useTranslation()
+  // Always show the canonical 0-9 buckets so DMs can see at a glance
+  // which levels are still empty and which need spell-slot tracking.
+  const LEVELS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  return (
+    <Section title={t('characters.sectionSpells')} defaultOpen={false}>
+      <button
+        type="button"
+        className="btn btn-ghost"
+        style={{ marginBottom: 8, fontSize: 'var(--text-xs)' }}
+        onClick={onOpenPicker}
+      >
+        ✨ {t('characters.addSpellFromBestiary')}
+      </button>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+        {LEVELS.map((lvl) => {
+          const list = spells[lvl] ?? []
+          if (list.length === 0) return null
+          return (
+            <div key={lvl}>
+              <div style={{
+                fontSize: 9, letterSpacing: '0.08em', textTransform: 'uppercase',
+                color: 'var(--text-muted)', fontWeight: 700, marginBottom: 3,
+              }}>
+                {lvl === 0 ? t('characters.cantripsLabel') : t('characters.spellLevelLabel', { level: lvl })}
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                {list.map((name, i) => (
+                  <div
+                    key={`${name}-${i}`}
+                    style={{
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                      padding: '3px 6px',
+                      background: 'var(--bg-elevated)',
+                      borderRadius: 3,
+                      fontSize: 11,
+                    }}
+                  >
+                    <span style={{ color: 'var(--text-primary)' }}>{name}</span>
+                    <button
+                      type="button"
+                      className="btn btn-ghost btn-icon"
+                      style={{ padding: 2, fontSize: 10 }}
+                      onClick={() => onRemove(lvl, i)}
+                      title={t('characters.removeSpell')}
+                      aria-label={t('characters.removeSpell')}
+                    >✕</button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        })}
+        {LEVELS.every((lvl) => (spells[lvl] ?? []).length === 0) && (
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', fontStyle: 'italic' }}>
+            {t('characters.noSpellsYet')}
+          </div>
+        )}
+      </div>
+    </Section>
+  )
+}
+
 // ─── Sheet list sidebar ───────────────────────────────────────────────────────
 
 function SheetList({ sheets, activeId, onSelect, onNew, onDelete }: {
@@ -227,11 +314,42 @@ function SheetEditor({ sheet, onUpdate }: {
   onUpdate: (patch: Partial<CharacterSheet>) => void
 }) {
   const { t } = useTranslation()
+  const language = useUIStore((s) => s.language)
   const [activeTab, setActiveTab] = useState<SheetTab>(loadInitialTab)
+  const [pickerKind, setPickerKind] = useState<'item' | 'spell' | null>(null)
 
   function selectTab(tab: SheetTab) {
     setActiveTab(tab)
     try { localStorage.setItem(SHEET_TAB_STORAGE_KEY, tab) } catch { /* noop */ }
+  }
+
+  // Append an item to the freeform equipment field. Keeps the field
+  // plain-text (no structured inventory) so existing users' data stays
+  // unchanged — the picker just saves them from typing.
+  function addItemFromPicker(name: string) {
+    const current = (sheet.equipment ?? '').trim()
+    const next = current ? `${current}\n• ${name}` : `• ${name}`
+    onUpdate({ equipment: next })
+  }
+
+  // Spells are stored as `{[level: number]: string[]}`. The bestiary gives
+  // us a spell level as a localised string ("1", "cantrip", …); we map
+  // that back to a numeric bucket here.
+  async function addSpellFromPicker(slug: string) {
+    const record = await window.electronAPI?.getSpell(slug)
+    if (!record) return
+    const lvl = parseSpellLevel(record.level.en)
+    const name = language === 'de' && record.nameDe ? record.nameDe : record.name
+    const current = sheet.spells ?? {}
+    const existing = current[lvl] ?? []
+    if (existing.includes(name)) return // no dupes
+    onUpdate({ spells: { ...current, [lvl]: [...existing, name] } })
+  }
+
+  function removeSpell(level: number, i: number) {
+    const current = sheet.spells ?? {}
+    const arr = (current[level] ?? []).filter((_, j) => j !== i)
+    onUpdate({ spells: { ...current, [level]: arr } })
   }
 
   const TABS: { id: SheetTab; labelKey: string; icon: string }[] = [
@@ -481,6 +599,14 @@ function SheetEditor({ sheet, onUpdate }: {
       {activeTab === 'inventory' && <>
       <Section title={t('characters.sectionEquipment')} defaultOpen={true}>
         <TextArea {...field('equipment')} rows={4} placeholder={t('characters.equipmentPlaceholder')} />
+        <button
+          type="button"
+          className="btn btn-ghost"
+          style={{ marginTop: 6, fontSize: 'var(--text-xs)' }}
+          onClick={() => setPickerKind('item')}
+        >
+          🗡 {t('characters.addItemFromBestiary')}
+        </button>
         <div style={{ marginTop: 6 }}>
           <label style={{ fontSize: 9, color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('characters.languages')}</label>
           <TextArea {...field('languages')} rows={2} />
@@ -491,7 +617,25 @@ function SheetEditor({ sheet, onUpdate }: {
         </div>
       </Section>
 
+      <SpellbookSection
+        spells={sheet.spells ?? {}}
+        onRemove={removeSpell}
+        onOpenPicker={() => setPickerKind('spell')}
+      />
+
       </>}
+
+      {pickerKind && (
+        <BestiaryPicker
+          kind={pickerKind}
+          onPick={(entry) => {
+            if (pickerKind === 'item') addItemFromPicker(entry.label)
+            else void addSpellFromPicker(entry.slug)
+            setPickerKind(null)
+          }}
+          onClose={() => setPickerKind(null)}
+        />
+      )}
 
       {/* ── Bio tab: Features, Personality, Backstory ── */}
       {activeTab === 'bio' && <>

@@ -264,8 +264,24 @@
     "duration": "Duration",
     "components": "Components",
     "classes": "Classes",
+    "addToMap": "Add to map",
+    "noActiveMap": "Open a map first",
+    "sendToPlayer": "Send to player",
+    "sendDisabled": "Player window not connected",
+    "spawnedOnMap": "{{name}} placed on the map",
+    "sentToPlayer": "Sent to player window",
     "attributionPrefix": "Includes SRD 5.1 content",
     "attributionSuffix": "full attribution"
+  },
+  "bestiaryPicker": {
+    "titleMonster": "Pick a monster",
+    "titleItem": "Pick an item",
+    "titleSpell": "Pick a spell",
+    "searchPlaceholder": "Type to filter…",
+    "close": "Close",
+    "hintNavigate": "navigate",
+    "hintSelect": "select",
+    "hintClose": "close"
   },
   "about": {
     "title": "About BoltBerry",
@@ -522,7 +538,8 @@
     "reset": "↺ Reset",
     "noMap": "Select a map to track initiative",
     "noCombat": "No active combat",
-    "removeEntry": "Remove"
+    "removeEntry": "Remove",
+    "openInBestiary": "Open in bestiarium"
   },
   "notes": {
     "campaignNotes": "Campaign Notes",
@@ -726,6 +743,13 @@
     "addAttack": "Add Attack",
     "sectionEquipment": "Equipment & Proficiencies",
     "equipmentPlaceholder": "List your equipment...",
+    "addItemFromBestiary": "Add item from bestiarium",
+    "addSpellFromBestiary": "Add spell from bestiarium",
+    "sectionSpells": "Spellbook",
+    "cantripsLabel": "Cantrips",
+    "spellLevelLabel": "Level {{level}}",
+    "removeSpell": "Remove spell",
+    "noSpellsYet": "No spells prepared yet — pick from the bestiarium to get started.",
     "languages": "Languages",
     "proficiencies": "Other Proficiencies",
     "sectionFeatures": "Features & Traits",

@@ -351,6 +351,43 @@ export function BestiaryStyles() {
         font-weight: 600;
       }
 
+      /* ── Action bar (Add to map / Send to player / …) ─────── */
+      .bb-best-actions-bar {
+        display: flex; gap: var(--sp-2); flex-wrap: wrap;
+        padding: var(--sp-2) 0;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+      .bb-best-action-btn {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 7px 14px;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--text-primary);
+        font-family: inherit; font-size: 12px; font-weight: 600;
+        cursor: pointer;
+        transition: border-color var(--transition), background var(--transition);
+      }
+      .bb-best-action-btn:hover:not(:disabled) {
+        border-color: var(--accent);
+        background: var(--accent-dim);
+        color: var(--accent-light);
+      }
+      .bb-best-action-btn:disabled {
+        cursor: not-allowed;
+        opacity: 0.4;
+      }
+      .bb-best-action-primary {
+        background: var(--accent);
+        color: var(--text-inverse);
+        border-color: transparent;
+      }
+      .bb-best-action-primary:hover:not(:disabled) {
+        background: var(--accent-hover);
+        color: var(--text-inverse);
+        border-color: transparent;
+      }
+
       /* ── Token strip ──────────────────────────────────────── */
       .bb-best-tokens {
         display: flex; gap: 6px;

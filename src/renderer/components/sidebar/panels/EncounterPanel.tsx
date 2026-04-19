@@ -7,6 +7,8 @@ import { useWallStore } from '../../../stores/wallStore'
 import { useUIStore } from '../../../stores/uiStore'
 import { showToast } from '../../shared/Toast'
 import { EmptyState } from '../../EmptyState'
+import { BestiaryPicker } from '../../bestiary/BestiaryPicker'
+import { spawnMonsterOnMap } from '../../bestiary/actions'
 import type { EncounterTemplate, FormationType, DifficultyLevel } from '@shared/ipc-types'
 import {
   getFormationOffsets,
@@ -115,6 +117,8 @@ function FormationPreview({ formation, count = 5 }: { formation: FormationType; 
 export function EncounterPanel() {
   const { encounters, addEncounter, removeEncounter, updateEncounter } = useEncounterStore()
   const { activeMapId, activeCampaignId } = useCampaignStore()
+  const activeMaps = useCampaignStore((s) => s.activeMaps)
+  const language = useUIStore((s) => s.language)
   const tokens = useTokenStore((s) => s.tokens)
   const walls = useWallStore((s) => s.walls)
   const { entries } = useInitiativeStore()
@@ -129,6 +133,7 @@ export function EncounterPanel() {
   // Inline name input for new encounter
   const [newNameValue, setNewNameValue] = useState('')
   const [showNewNameInput, setShowNewNameInput] = useState(false)
+  const [showBestiaryPicker, setShowBestiaryPicker] = useState(false)
   const newNameInputRef = useRef<HTMLInputElement>(null)
 
   // Inline edit for existing encounter name
@@ -171,6 +176,34 @@ export function EncounterPanel() {
     if (!activeCampaignId || !activeMapId) return
     setShowNewNameInput(true)
     setNewNameValue('Neues Encounter')
+  }
+
+  async function handleAddFromBestiary(slug: string) {
+    if (!activeMapId) { setShowBestiaryPicker(false); return }
+    const map = activeMaps.find((m) => m.id === activeMapId)
+    if (!map) { setShowBestiaryPicker(false); return }
+    try {
+      const record = await window.electronAPI?.getMonster(slug)
+      if (!record) return
+      const ok = await spawnMonsterOnMap({
+        monster: record,
+        imageDataUrl: record.tokenDefaultUrl,
+        mapId: map.id,
+        cameraX: map.cameraX,
+        cameraY: map.cameraY,
+        language,
+      })
+      if (ok) {
+        showToast(`${record.name} auf die Karte gesetzt`, 'success')
+        // The tokenStore is refreshed by the existing rescan hook that
+        // watches tokens table mutations — no manual store push here.
+      }
+    } catch (err) {
+      console.error('[EncounterPanel] bestiary spawn failed:', err)
+      showToast('Monster konnte nicht hinzugefügt werden', 'error')
+    } finally {
+      setShowBestiaryPicker(false)
+    }
   }
 
   async function commitNewEncounter() {
@@ -410,14 +443,25 @@ export function EncounterPanel() {
             <button className="btn btn-ghost" style={{ fontSize: 'var(--text-xs)', padding: '2px 6px' }} onClick={() => { setShowNewNameInput(false); setNewNameValue('') }}>✕</button>
           </div>
         ) : (
-          <button
-            className="btn btn-primary"
-            style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--text-xs)' }}
-            onClick={handleSave}
-            disabled={!activeCampaignId || mapTokens.length === 0}
-          >
-            💾 Aktuelle Gegner als Encounter speichern
-          </button>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <button
+              className="btn btn-ghost"
+              style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--text-xs)' }}
+              onClick={() => setShowBestiaryPicker(true)}
+              disabled={!activeMapId}
+              title={activeMapId ? 'Monster aus dem Bestiarium auf die Karte setzen' : 'Keine aktive Karte'}
+            >
+              ➕ Aus Bestiarium hinzufügen
+            </button>
+            <button
+              className="btn btn-primary"
+              style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--text-xs)' }}
+              onClick={handleSave}
+              disabled={!activeCampaignId || mapTokens.length === 0}
+            >
+              💾 Aktuelle Gegner als Encounter speichern
+            </button>
+          </div>
         )}
 
         {!showNewNameInput && mapTokens.length === 0 && (
@@ -645,6 +689,13 @@ export function EncounterPanel() {
           )}
         </div>
       ))()}
+      {showBestiaryPicker && (
+        <BestiaryPicker
+          kind="monster"
+          onPick={(entry) => void handleAddFromBestiary(entry.slug)}
+          onClose={() => setShowBestiaryPicker(false)}
+        />
+      )}
     </div>
   )
 }

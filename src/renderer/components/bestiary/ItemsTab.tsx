@@ -4,6 +4,9 @@ import type { AppLanguage } from '../../stores/uiStore'
 import type { ItemIndexEntry, ItemRecord } from '@shared/ipc-types'
 import { localized, localizedArray, pickName, titleCase } from './util'
 import { EmptyDetail } from './MonstersTab'
+import { itemHandout } from './actions'
+import { useUIStore } from '../../stores/uiStore'
+import { showToast } from '../shared/Toast'
 
 const RARITY_ORDER: Record<string, number> = {
   COMMON: 0, UNCOMMON: 1, RARE: 2, VERY_RARE: 3, LEGENDARY: 4, ARTIFACT: 5,
@@ -33,7 +36,17 @@ const CATEGORY_ICON: Record<string, string> = {
   AMMUNITION: '🏹',
 }
 
-export function ItemsTab({ query, language }: { query: string; language: AppLanguage }) {
+export function ItemsTab({
+  query,
+  language,
+  initialSlug,
+  onConsumeInitial,
+}: {
+  query: string
+  language: AppLanguage
+  initialSlug?: string | null
+  onConsumeInitial?: () => void
+}) {
   const { t } = useTranslation()
   const [index, setIndex] = useState<ItemIndexEntry[] | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -90,10 +103,17 @@ export function ItemsTab({ query, language }: { query: string; language: AppLang
   }, [index, query, language, categoryFilter, rarityFilter])
 
   useEffect(() => {
+    if (!initialSlug || !index) return
+    setSelectedSlug(initialSlug)
+    onConsumeInitial?.()
+  }, [initialSlug, index, onConsumeInitial])
+
+  useEffect(() => {
     if (filtered.length === 0) { setSelectedSlug(null); return }
     if (selectedSlug && filtered.some((it) => it.slug === selectedSlug)) return
+    if (selectedSlug && index?.some((it) => it.slug === selectedSlug)) return
     setSelectedSlug(filtered[0].slug)
-  }, [filtered, selectedSlug])
+  }, [filtered, index, selectedSlug])
 
   const handleSelect = useCallback((slug: string) => setSelectedSlug(slug), [])
 
@@ -229,6 +249,8 @@ function ItemDetail({ slug, language }: { slug: string; language: AppLanguage })
         </div>
       </header>
 
+      <ItemActions record={record} language={language} />
+
       {(record.classification || properties.length > 0 || record.stealth) && (
         <section className="bb-best-metagrid">
           {record.classification && (
@@ -265,6 +287,34 @@ function Chip({ label, value }: { label: string; value: string }) {
       <span className="bb-best-chip-label">{label}</span>
       <span className="bb-best-chip-value mono">{value}</span>
     </span>
+  )
+}
+
+function ItemActions({
+  record,
+  language,
+}: {
+  record: ItemRecord
+  language: AppLanguage
+}) {
+  const { t } = useTranslation()
+  const playerConnected = useUIStore((s) => s.playerConnected)
+  function handleSend() {
+    window.electronAPI?.sendHandout(itemHandout(record, language))
+    showToast(t('bestiary.sentToPlayer'), 'success')
+  }
+  return (
+    <div className="bb-best-actions-bar">
+      <button
+        type="button"
+        className="bb-best-action-btn bb-best-action-primary"
+        onClick={handleSend}
+        disabled={!playerConnected}
+        title={playerConnected ? t('bestiary.sendToPlayer') : t('bestiary.sendDisabled')}
+      >
+        📡 {t('bestiary.sendToPlayer')}
+      </button>
+    </div>
   )
 }
 

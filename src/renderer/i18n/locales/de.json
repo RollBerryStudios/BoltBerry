@@ -264,8 +264,24 @@
     "duration": "Wirkungsdauer",
     "components": "Komponenten",
     "classes": "Klassen",
+    "addToMap": "Auf Karte setzen",
+    "noActiveMap": "Erst eine Karte öffnen",
+    "sendToPlayer": "An Spieler senden",
+    "sendDisabled": "Spielerfenster nicht verbunden",
+    "spawnedOnMap": "{{name}} auf der Karte gesetzt",
+    "sentToPlayer": "An Spielerfenster gesendet",
     "attributionPrefix": "Enthält SRD 5.1-Inhalte",
     "attributionSuffix": "vollständige Attribution"
+  },
+  "bestiaryPicker": {
+    "titleMonster": "Monster auswählen",
+    "titleItem": "Gegenstand auswählen",
+    "titleSpell": "Zauber auswählen",
+    "searchPlaceholder": "Tippen zum Filtern…",
+    "close": "Schließen",
+    "hintNavigate": "navigieren",
+    "hintSelect": "auswählen",
+    "hintClose": "schließen"
   },
   "about": {
     "title": "Über BoltBerry",
@@ -522,7 +538,8 @@
     "reset": "↺ Reset",
     "noMap": "Karte auswählen um Initiative zu tracken",
     "noCombat": "Kein Kampf aktiv",
-    "removeEntry": "Entfernen"
+    "removeEntry": "Entfernen",
+    "openInBestiary": "Im Bestiarium öffnen"
   },
   "notes": {
     "campaignNotes": "Kampagnen-Notizen",
@@ -726,6 +743,13 @@
     "addAttack": "Angriff hinzufügen",
     "sectionEquipment": "Ausrüstung & Fähigkeiten",
     "equipmentPlaceholder": "Ausrüstung auflisten...",
+    "addItemFromBestiary": "Gegenstand aus Bestiarium",
+    "addSpellFromBestiary": "Zauber aus Bestiarium",
+    "sectionSpells": "Zauberbuch",
+    "cantripsLabel": "Zaubertricks",
+    "spellLevelLabel": "Grad {{level}}",
+    "removeSpell": "Zauber entfernen",
+    "noSpellsYet": "Noch keine Zauber vorbereitet — wähle aus dem Bestiarium.",
     "languages": "Sprachen",
     "proficiencies": "Sonstige Übungen",
     "sectionFeatures": "Merkmale & Züge",

@@ -4,6 +4,9 @@ import type { AppLanguage } from '../../stores/uiStore'
 import type { SpellIndexEntry, SpellRecord } from '@shared/ipc-types'
 import { localized, localizedArray, pickName, titleCase } from './util'
 import { EmptyDetail } from './MonstersTab'
+import { spellHandout } from './actions'
+import { useUIStore } from '../../stores/uiStore'
+import { showToast } from '../shared/Toast'
 
 const LEVEL_ORDER: Record<string, number> = {
   cantrip: 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5,
@@ -32,7 +35,17 @@ const SCHOOL_ICON: Record<string, string> = {
   transmutation: '🔄',
 }
 
-export function SpellsTab({ query, language }: { query: string; language: AppLanguage }) {
+export function SpellsTab({
+  query,
+  language,
+  initialSlug,
+  onConsumeInitial,
+}: {
+  query: string
+  language: AppLanguage
+  initialSlug?: string | null
+  onConsumeInitial?: () => void
+}) {
   const { t } = useTranslation()
   const [index, setIndex] = useState<SpellIndexEntry[] | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -104,10 +117,17 @@ export function SpellsTab({ query, language }: { query: string; language: AppLan
   }, [index, query, language, levelFilter, schoolFilter, classFilter])
 
   useEffect(() => {
+    if (!initialSlug || !index) return
+    setSelectedSlug(initialSlug)
+    onConsumeInitial?.()
+  }, [initialSlug, index, onConsumeInitial])
+
+  useEffect(() => {
     if (filtered.length === 0) { setSelectedSlug(null); return }
     if (selectedSlug && filtered.some((sp) => sp.slug === selectedSlug)) return
+    if (selectedSlug && index?.some((sp) => sp.slug === selectedSlug)) return
     setSelectedSlug(filtered[0].slug)
-  }, [filtered, selectedSlug])
+  }, [filtered, index, selectedSlug])
 
   const handleSelect = useCallback((slug: string) => setSelectedSlug(slug), [])
 
@@ -262,6 +282,8 @@ function SpellDetail({ slug, language }: { slug: string; language: AppLanguage }
         </div>
       </header>
 
+      <SpellActions record={record} language={language} />
+
       {classes && (
         <section className="bb-best-metagrid">
           <MetaRow label={t('bestiary.classes')} value={classes} />
@@ -297,6 +319,34 @@ function Chip({ label, value }: { label: string; value: string }) {
       <span className="bb-best-chip-label">{label}</span>
       <span className="bb-best-chip-value mono">{value}</span>
     </span>
+  )
+}
+
+function SpellActions({
+  record,
+  language,
+}: {
+  record: SpellRecord
+  language: AppLanguage
+}) {
+  const { t } = useTranslation()
+  const playerConnected = useUIStore((s) => s.playerConnected)
+  function handleSend() {
+    window.electronAPI?.sendHandout(spellHandout(record, language))
+    showToast(t('bestiary.sentToPlayer'), 'success')
+  }
+  return (
+    <div className="bb-best-actions-bar">
+      <button
+        type="button"
+        className="bb-best-action-btn bb-best-action-primary"
+        onClick={handleSend}
+        disabled={!playerConnected}
+        title={playerConnected ? t('bestiary.sendToPlayer') : t('bestiary.sendDisabled')}
+      >
+        📡 {t('bestiary.sendToPlayer')}
+      </button>
+    </div>
   )
 }
 

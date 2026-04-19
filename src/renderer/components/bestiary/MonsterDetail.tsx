@@ -2,7 +2,11 @@ import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { MonsterRecord, NamedText } from '@shared/ipc-types'
 import type { AppLanguage } from '../../stores/uiStore'
+import { useCampaignStore } from '../../stores/campaignStore'
+import { useUIStore } from '../../stores/uiStore'
+import { showToast } from '../shared/Toast'
 import { formatMod, localized, localizedArray, pickName, tokenTint } from './util'
+import { monsterHandout, spawnMonsterOnMap } from './actions'
 
 type LoadedMonster = (MonsterRecord & { tokenDefaultUrl: string | null }) | null
 
@@ -88,6 +92,9 @@ export function MonsterDetail({ slug, language }: { slug: string; language: AppL
           </div>
         </div>
       </header>
+
+      {/* Action toolbar — connects the reference card to the table. */}
+      <MonsterActions record={record} language={language} imageUrl={currentUrl ?? null} />
 
       {/* Token strip */}
       {tokens.length > 1 && (
@@ -262,4 +269,83 @@ function speedLine(record: MonsterRecord, lang: AppLanguage): string {
 
 function stripParens(s: string): string {
   return s.replace(/\s*\([^)]*\)\s*$/, '').trim() || s
+}
+
+// ───────── Action toolbar: spawn on map + send handout to player ──────
+
+function MonsterActions({
+  record,
+  language,
+  imageUrl,
+}: {
+  record: MonsterRecord & { tokenDefaultUrl: string | null }
+  language: AppLanguage
+  imageUrl: string | null
+}) {
+  const { t } = useTranslation()
+  const activeMapId = useCampaignStore((s) => s.activeMapId)
+  const activeMaps = useCampaignStore((s) => s.activeMaps)
+  const playerConnected = usePlayerConnected()
+  const [busy, setBusy] = useState(false)
+
+  const map = useMemo(() => {
+    if (!activeMapId) return activeMaps[0] ?? null
+    return activeMaps.find((m) => m.id === activeMapId) ?? activeMaps[0] ?? null
+  }, [activeMapId, activeMaps])
+
+  async function handleSpawn() {
+    if (!map) return
+    setBusy(true)
+    try {
+      const primary = imageUrl ?? record.tokenDefaultUrl
+      const ok = await spawnMonsterOnMap({
+        monster: record,
+        imageDataUrl: primary,
+        mapId: map.id,
+        cameraX: map.cameraX,
+        cameraY: map.cameraY,
+        language,
+      })
+      if (ok) {
+        showToast(t('bestiary.spawnedOnMap', { name: record.name }), 'success')
+      }
+    } catch (err) {
+      showToast(String(err), 'error')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  function handleSend() {
+    const handout = monsterHandout(record, language, imageUrl ?? record.tokenDefaultUrl)
+    window.electronAPI?.sendHandout(handout)
+    showToast(t('bestiary.sentToPlayer'), 'success')
+  }
+
+  return (
+    <div className="bb-best-actions-bar">
+      <button
+        type="button"
+        className="bb-best-action-btn bb-best-action-primary"
+        onClick={handleSpawn}
+        disabled={busy || !map}
+        title={map ? t('bestiary.addToMap') : t('bestiary.noActiveMap')}
+      >
+        ✦ {t('bestiary.addToMap')}
+      </button>
+      <button
+        type="button"
+        className="bb-best-action-btn"
+        onClick={handleSend}
+        disabled={!playerConnected}
+        title={playerConnected ? t('bestiary.sendToPlayer') : t('bestiary.sendDisabled')}
+      >
+        📡 {t('bestiary.sendToPlayer')}
+      </button>
+    </div>
+  )
+}
+
+function usePlayerConnected(): boolean {
+  return useUIStore((s) => s.playerConnected)
 }

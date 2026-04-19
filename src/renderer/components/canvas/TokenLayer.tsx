@@ -12,6 +12,7 @@ import { useWallStore } from '../../stores/wallStore'
 import { computeVisibilityPolygon } from '../../utils/losEngine'
 import type { MapRecord, TokenRecord } from '@shared/ipc-types'
 import { useImage } from '../../hooks/useImage'
+import { findMonsterSlugByName } from '../bestiary/actions'
 
 function factionColor(faction: string): string {
   switch (faction) {
@@ -645,6 +646,13 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     })
   }
 
+  async function handleOpenInBestiarium(token: TokenRecord) {
+    closeContextMenu()
+    const slug = await findMonsterSlugByName(token.name)
+    if (!slug) return
+    useUIStore.getState().openBestiary({ tab: 'monsters', slug })
+  }
+
   function handleToggleLight(token: TokenRecord) {
     closeContextMenu()
     const notes = token.notes ?? ''
@@ -963,6 +971,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     { label: '🎯 Konzentration', action: () => toggleStatusInMenu(token, 'concentrating') },
                     null,
                     { label: '⚔️ Zum Kampf hinzufügen', action: () => addToInitiative(token) },
+                    { label: '📖 Im Bestiarium öffnen', action: () => { void handleOpenInBestiarium(token) } },
                     { label: '🎯 Fokus setzen', action: () => handleFocusToken(token) },
                     { label: hasLight ? '💡 Lichtquelle deaktivieren' : '💡 Lichtquelle aktivieren', action: () => handleToggleLight(token) },
                     null,
