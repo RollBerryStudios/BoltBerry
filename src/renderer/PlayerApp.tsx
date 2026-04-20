@@ -388,11 +388,13 @@ function PlayerMapView({
   const stageRef = useRef<Konva.Stage>(null)
 
   // Player-local pan/zoom state (used when no DM camera)
+  // Local camera state — stays at defaults (1, 0, 0) in normal play
+  // because the player window is strictly read-only. The setters still
+  // fire from the camera-sync effect below so the view resets cleanly
+  // when the GM toggles camera-follow on.
   const [playerScale, setPlayerScale] = useState(1)
   const [playerOffX, setPlayerOffX] = useState(0)
   const [playerOffY, setPlayerOffY] = useState(0)
-  const isPanning = useRef(false)
-  const lastPanPos = useRef({ x: 0, y: 0 })
 
   // Notify parent when map image loads → init fog canvases
   useEffect(() => {
@@ -463,52 +465,22 @@ function PlayerMapView({
     }
   }, [camera])
 
+  // The player window is a passive display surface by design — "players
+  // have zero controls". Every input event is swallowed before it can
+  // mutate the local camera so the GM stays the sole authority on what
+  // is visible. `preventDefault` on wheel blocks native page-zoom /
+  // scroll too.
   function handleWheel(e: Konva.KonvaEventObject<WheelEvent>) {
-    if (camera) return
     e.evt.preventDefault()
-    const stage = stageRef.current
-    if (!stage) return
-    // Trackpad pinch sends ctrlKey=true with finer deltaY
-    const isPinch = e.evt.ctrlKey
-    const zoomFactor = e.evt.deltaY < 0 ? (isPinch ? 1.03 : 1.12) : (isPinch ? 1 / 1.03 : 1 / 1.12)
-    const newScale = Math.max(0.1, Math.min(8, playerScale * zoomFactor))
-    const pointer = stage.getPointerPosition()
-    if (!pointer) return
-    const fitScale = Math.min(width / natW, height / natH)
-    const oldTotalScale = fitScale * playerScale
-    const newTotalScale = fitScale * newScale
-    const dx = pointer.x - ((width - natW * oldTotalScale) / 2 + playerOffX)
-    const dy = pointer.y - ((height - natH * oldTotalScale) / 2 + playerOffY)
-    const newOffX = pointer.x - dx * (newTotalScale / oldTotalScale) - (width - natW * newTotalScale) / 2
-    const newOffY = pointer.y - dy * (newTotalScale / oldTotalScale) - (height - natH * newTotalScale) / 2
-    setPlayerScale(newScale)
-    setPlayerOffX(newOffX)
-    setPlayerOffY(newOffY)
   }
 
   function handleMouseDown(e: Konva.KonvaEventObject<MouseEvent>) {
-    if (camera) return
-    if (e.evt.button !== 0) return
-    isPanning.current = true
-    lastPanPos.current = { x: e.evt.clientX, y: e.evt.clientY }
-    if (stageRef.current) stageRef.current.container().style.cursor = 'grabbing'
+    // Prevent text selection + drag-select but do not pan.
+    e.evt.preventDefault()
   }
 
-  function handleMouseMove(e: Konva.KonvaEventObject<MouseEvent>) {
-    if (!isPanning.current) return
-    const dx = e.evt.clientX - lastPanPos.current.x
-    const dy = e.evt.clientY - lastPanPos.current.y
-    lastPanPos.current = { x: e.evt.clientX, y: e.evt.clientY }
-    setPlayerOffX((prev) => prev + dx)
-    setPlayerOffY((prev) => prev + dy)
-  }
-
-  function handleMouseUp() {
-    if (isPanning.current) {
-      isPanning.current = false
-      if (stageRef.current) stageRef.current.container().style.cursor = 'default'
-    }
-  }
+  function handleMouseMove() { /* intentional no-op */ }
+  function handleMouseUp() { /* intentional no-op */ }
 
   // Pointer pulse (imperative Konva) — track active tweens/nodes so rapid
   // pointer events cannot accumulate orphaned Konva objects on the layer.
@@ -569,7 +541,14 @@ function PlayerMapView({
     }
   }, [])
 
-  const showGrid = image && mapState.gridType !== 'none'
+  // Grid visibility + styling follow the DM's per-map settings. Fields
+  // are optional on PlayerMapState to stay back-compatible with older
+  // sync payloads — fall back to the v1 defaults (visible, 1x, the
+  // stock rgba white) when the DM build predates v32.
+  const gridVisible = mapState.gridVisible ?? true
+  const gridThickness = mapState.gridThickness ?? 1
+  const gridColor = mapState.gridColor ?? 'rgba(255,255,255,0.34)'
+  const showGrid = image && mapState.gridType !== 'none' && gridVisible
   const cellPx = showGrid ? mapState.gridSize * scale : 0
 
   return (
@@ -669,8 +648,10 @@ function PlayerMapView({
               }
 
               ;(ctx as any)._context.save()
-              ;(ctx as any)._context.strokeStyle = 'rgba(255,255,255,0.14)'
-              ;(ctx as any)._context.lineWidth = 0.5
+              ;(ctx as any)._context.strokeStyle = gridColor
+              // Multiplier semantics match the DM layer: 1 → 0.5 px
+              // auto-scaled hairline; the DM's slider tops out at ~3.
+              ;(ctx as any)._context.lineWidth = 0.5 * gridThickness
               ;(ctx as any)._context.stroke()
               ;(ctx as any)._context.restore()
             }}

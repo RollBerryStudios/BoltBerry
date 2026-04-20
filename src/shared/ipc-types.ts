@@ -413,6 +413,12 @@ export interface PlayerMapState {
   gridType: GridType
   gridSize: number
   rotation: number
+  /** Per-map grid overlay styling. Optional so pre-v32 clients that
+   *  only send the four original fields still render cleanly — the
+   *  player falls back to visible + 1x thickness + the default colour. */
+  gridVisible?: boolean
+  gridThickness?: number
+  gridColor?: string
 }
 
 export interface EncounterRecord {

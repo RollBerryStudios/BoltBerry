@@ -85,7 +85,10 @@ export function usePlayerSync() {
             imagePath: activeMap.imagePath,
             gridType: activeMap.gridType,
             gridSize: activeMap.gridSize,
-            rotation: activeMap.rotation ?? 0,
+            rotation: activeMap.rotationPlayer ?? activeMap.rotation ?? 0,
+            gridVisible: activeMap.gridVisible,
+            gridThickness: activeMap.gridThickness,
+            gridColor: activeMap.gridColor,
           }
         : null,
       tokens: playerTokens,

@@ -326,6 +326,11 @@ export function LeftSidebar() {
       gridType: m.gridType,
       gridSize: m.gridSize,
       rotation: m.rotationPlayer ?? 0,
+      // v32 grid-styling columns — without these every tweak in the
+      // sidebar (visibility / thickness / colour) stayed DM-only.
+      gridVisible: m.gridVisible,
+      gridThickness: m.gridThickness,
+      gridColor: m.gridColor,
     })
   }
 
