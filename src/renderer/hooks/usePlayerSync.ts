@@ -3,7 +3,6 @@ import { useUIStore } from '../stores/uiStore'
 import { useTokenStore } from '../stores/tokenStore'
 import { useCampaignStore } from '../stores/campaignStore'
 import { useWallStore } from '../stores/wallStore'
-import { useMapTransformStore } from '../stores/mapTransformStore'
 import type { PlayerFullState, PlayerTokenState, PlayerWallState } from '@shared/ipc-types'
 
 export function usePlayerSync() {
@@ -16,7 +15,7 @@ export function usePlayerSync() {
   // All store reads use getState() so this function never goes stale.
   const buildAndSendFullSync = useCallback(async () => {
     if (!window.electronAPI) return
-    const { appMode, blackoutActive, atmosphereImagePath, cameraFollowDM } = useUIStore.getState()
+    const { appMode, blackoutActive, atmosphereImagePath } = useUIStore.getState()
     const { activeMapId: mapId, activeMaps } = useCampaignStore.getState()
     const { tokens } = useTokenStore.getState()
 
@@ -104,16 +103,6 @@ export function usePlayerSync() {
     }
 
     window.electronAPI?.sendFullSync(state)
-
-    if (cameraFollowDM && state.mode === 'map' && state.map) {
-      const { scale, offsetX, offsetY, fitScale, canvasW, canvasH } = useMapTransformStore.getState()
-      if (fitScale && canvasW && canvasH) {
-        const imageCenterX = (canvasW / 2 - offsetX) / scale
-        const imageCenterY = (canvasH / 2 - offsetY) / scale
-        const relZoom = scale / fitScale
-        window.electronAPI?.sendCameraView({ imageCenterX, imageCenterY, relZoom })
-      }
-    }
   }, [])
 
   // ── Clear playerConnected when the player window actually closes ────────────
@@ -143,15 +132,38 @@ export function usePlayerSync() {
     return () => { unsub() }
   }, [buildAndSendFullSync, setPlayerConnected])
 
-  // ── Proactively push full state when DM starts a session ────────────────────
-  // The player may have connected in prep mode (received nothing so far).
-  // When sessionMode transitions to non-prep, push the current state immediately.
+  // ── Session start: push the current state to the player immediately ─────────
+  // The player may have connected during prep (received nothing so far);
+  // when sessionMode flips to non-prep we push the current map / fog /
+  // tokens right away so the player doesn't have to request a full sync.
   useEffect(() => {
     if (sessionMode === 'prep' || !window.electronAPI) return
     if (useUIStore.getState().playerConnected) {
       buildAndSendFullSync()
     }
   }, [sessionMode, buildAndSendFullSync])
+
+  // ── Session end: kick the player back to the idle splash ────────────────────
+  // Going from live → prep mid-session must hide whatever was on screen
+  // immediately. We push a minimal full-sync with `mode: 'idle'` which
+  // PlayerApp interprets as "wipe everything and show the BoltBerry
+  // waiting screen". The playerConnected guard means the very first
+  // mount (sessionMode='prep' before any window opens) is a no-op.
+  useEffect(() => {
+    if (sessionMode !== 'prep' || !window.electronAPI) return
+    if (!useUIStore.getState().playerConnected) return
+    window.electronAPI.sendFullSync({
+      mode: 'idle',
+      viewport: null,
+      map: null,
+      tokens: [],
+      fogBitmap: null,
+      exploredBitmap: null,
+      atmosphereImagePath: null,
+      blackout: false,
+      drawings: [],
+    })
+  }, [sessionMode])
 
   // ── Broadcast wall data whenever the active map or wall list changes ────────
   useEffect(() => {

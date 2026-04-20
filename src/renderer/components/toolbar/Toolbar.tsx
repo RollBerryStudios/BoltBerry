@@ -167,7 +167,6 @@ export function Toolbar() {
     toggleLeftSidebar, toggleRightSidebar,
     sessionMode, setSessionMode,
     toggleLanguage, language,
-    cameraFollowDM, toggleCameraFollow,
     playerViewportMode, setPlayerViewportMode, setPlayerViewport,
     gridSnap, toggleGridSnap,
     showMinimap, toggleMinimap,
@@ -180,7 +179,6 @@ export function Toolbar() {
   const [showMonitorDialog, setShowMonitorDialog] = useState(false)
   const [showSessionStartModal, setShowSessionStartModal] = useState(false)
   const [liveWarning, setLiveWarning] = useState<string | null>(null)
-  const [cameraSent, setCameraSent] = useState(false)
   const [workModeToast, setWorkModeToast] = useState<string | null>(null)
   const zoomPercent = Math.round(useMapTransformStore((s) => s.scale / s.fitScale * 100))
   const canUndo = useUndoStore((s) => s.undoStack.length > 0)
@@ -198,17 +196,6 @@ export function Toolbar() {
     useUIStore.getState().setWorkMode('prep')
     useUIStore.getState().setSessionMode('prep')
     useUIStore.getState().clearTokenSelection()
-  }
-
-  function handleShareCamera() {
-    const { scale, offsetX, offsetY, fitScale, canvasW, canvasH } = useMapTransformStore.getState()
-    if (!fitScale || !canvasW || !canvasH) return
-    const imageCenterX = (canvasW / 2 - offsetX) / scale
-    const imageCenterY = (canvasH / 2 - offsetY) / scale
-    const relZoom = scale / fitScale
-    window.electronAPI?.sendCameraView({ imageCenterX, imageCenterY, relZoom })
-    setCameraSent(true)
-    setTimeout(() => setCameraSent(false), 1200)
   }
 
   function handleSessionToggle() {
@@ -437,29 +424,10 @@ export function Toolbar() {
         <span style={{ fontSize: 8, marginLeft: 2, opacity: 0.7 }}>{playerConnected ? '●' : '○'}</span>
       </button>
 
-      {/* Camera: one-shot send */}
-      <button
-        className={clsx('tool-btn', cameraSent && 'active')}
-        title="Kamera einmalig senden — überträgt den aktuellen Bildausschnitt einmalig an das Spielerfenster"
-        onClick={handleShareCamera}
-        style={cameraSent ? { color: 'var(--success)' } : undefined}
-      >
-        📺
-      </button>
-
-      {/* Camera follow toggle */}
-      <button
-        className={clsx('tool-btn', cameraFollowDM && 'active')}
-        title={cameraFollowDM
-          ? 'Kamera-Synchronisierung AN — Spielerfenster folgt automatisch deinem Bildausschnitt (klicken zum Deaktivieren)'
-          : 'Kamera-Synchronisierung AUS — Spielerfenster bewegt sich nicht mit (klicken zum Aktivieren)'}
-        onClick={toggleCameraFollow}
-        style={cameraFollowDM ? { color: 'var(--success)' } : undefined}
-      >
-        📡
-      </button>
-
-      {/* Player Control Mode — independent framed view on the player screen */}
+      {/* Player Control Mode — independent framed view on the player screen.
+          Replaces the legacy 📡 "follow camera" + 📺 "share once" buttons.
+          The dashed rectangle on the GM canvas is the single source of
+          truth for what the player window renders. */}
       <button
         className={clsx('tool-btn', playerViewportMode && 'active')}
         title={playerViewportMode

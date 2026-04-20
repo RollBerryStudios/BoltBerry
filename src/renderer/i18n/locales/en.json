@@ -68,9 +68,7 @@
     "importCampaign": "Import campaign",
     "openCompendium": "Open compendium",
     "openBestiary": "Open wiki",
-    "openPlayerWindow": "Open player window",
-    "shareCameraOnce": "Share camera once",
-    "toggleCameraFollow": "Toggle camera follow"
+    "openPlayerWindow": "Open player window"
   },
   "startScreen": {
     "recentlyUsed": "Recently used",
@@ -458,7 +456,6 @@
       "on": "Player Control Mode ON — player window frames only the blue rectangle (Ctrl+drag / Ctrl+wheel / Ctrl+arrows)",
       "off": "Player Control Mode OFF — click to activate an independent player viewport"
     },
-    "shareCamera": "Send view to player",
     "openPlayerWindow": "Open player window",
     "shortcuts": "Shortcuts [?]",
     "themeDark": "Theme: Light",

@@ -68,9 +68,7 @@
     "importCampaign": "Kampagne importieren",
     "openCompendium": "Kompendium \u00f6ffnen",
     "openBestiary": "Wiki öffnen",
-    "openPlayerWindow": "Spielerfenster öffnen",
-    "shareCameraOnce": "Kamera einmal teilen",
-    "toggleCameraFollow": "Kamera-Folgen umschalten"
+    "openPlayerWindow": "Spielerfenster öffnen"
   },
   "startScreen": {
     "recentlyUsed": "Zuletzt verwendet",
@@ -458,7 +456,6 @@
       "on": "Player-Control-Modus AN — Spielerfenster zeigt nur das blaue Rechteck (Strg+Ziehen / Strg+Rad / Strg+Pfeile)",
       "off": "Player-Control-Modus AUS — klicken, um unabhängigen Spielerausschnitt zu aktivieren"
     },
-    "shareCamera": "Ansicht an Spieler senden",
     "openPlayerWindow": "Spieler-Fenster öffnen",
     "shortcuts": "Tastenkürzel [?]",
     "themeDark": "Theme: Hell",

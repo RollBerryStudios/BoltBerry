@@ -7,7 +7,6 @@ import type {
   FogDelta,
   PlayerFullState,
   PlayerPointer,
-  PlayerCamera,
   PlayerViewport,
   PlayerHandout,
   PlayerOverlay,
@@ -101,12 +100,6 @@ export function registerPlayerBridgeHandlers(): void {
   ipcMain.on(IPC.PLAYER_POINTER, (event, pointer: PlayerPointer) => {
     if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_POINTER, pointer)
-  })
-
-  // Camera viewport sync — DM -> Player
-  ipcMain.on(IPC.PLAYER_CAMERA, (event, camera: PlayerCamera) => {
-    if (!isFromDM(event)) return
-    getPlayerWindow()?.webContents.send(IPC.PLAYER_CAMERA, camera)
   })
 
   // Player Control Mode viewport — DM -> Player. Nullable payload

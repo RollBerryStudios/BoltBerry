@@ -103,11 +103,11 @@ interface UIState {
   atmosphereImagePath: string | null
   selectedTokenId: number | null
   selectedTokenIds: number[]
-  cameraFollowDM: boolean
   /** Player Control Mode — when true, the GM canvas renders the
    *  dashed viewport rectangle and Ctrl-based gestures manipulate it
-   *  instead of the DM's own camera. Mutually exclusive with
-   *  cameraFollowDM. */
+   *  instead of the DM's own camera. This mode supersedes the legacy
+   *  Camera Sync feature (📡 follow + 📺 one-shot send) which has
+   *  been removed entirely. */
   playerViewportMode: boolean
   /** The viewport rectangle itself. Null when the mode has never been
    *  engaged on the active map (the toolbar toggle seeds a default on
@@ -168,7 +168,6 @@ interface UIState {
   toggleTokenInSelection: (id: number) => void
   setSelectedTokens: (ids: number[]) => void
   clearTokenSelection: () => void
-  toggleCameraFollow: () => void
   setPlayerViewportMode: (on: boolean) => void
   setPlayerViewport: (rect: PlayerViewportRect | null) => void
   patchPlayerViewport: (patch: Partial<PlayerViewportRect>) => void
@@ -225,7 +224,6 @@ export const useUIStore = create<UIState>((set) => ({
   atmosphereImagePath: null,
   selectedTokenId: null,
   selectedTokenIds: [],
-  cameraFollowDM: false,
   playerViewportMode: false,
   playerViewport: null,
   gridSnap: true,
@@ -341,17 +339,8 @@ export const useUIStore = create<UIState>((set) => ({
     }),
   setSelectedTokens: (ids) => set({ selectedTokenIds: ids, selectedTokenId: ids[0] ?? null }),
   clearTokenSelection: () => set({ selectedTokenIds: [], selectedTokenId: null }),
-  toggleCameraFollow: () => set((s) => ({
-    cameraFollowDM: !s.cameraFollowDM,
-    // Turning camera-follow on exits Player Control Mode — the two
-    // camera strategies are mutually exclusive.
-    playerViewportMode: !s.cameraFollowDM ? false : s.playerViewportMode,
-  })),
   setPlayerViewportMode: (on) => set((s) => ({
     playerViewportMode: on,
-    // Flipping Player Control Mode on disables the "follow my camera"
-    // toggle so the DM is never in two conflicting modes at once.
-    cameraFollowDM: on ? false : s.cameraFollowDM,
     // Leaving the mode retires the rect so the next activation seeds a
     // fresh default rather than resuming a stale one (the rect may
     // reference a map the DM has since switched away from).

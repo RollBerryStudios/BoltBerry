@@ -46,9 +46,6 @@ export const IPC = {
   // DM → Player: pointer ping
   PLAYER_POINTER: 'player:pointer',
 
-  // DM → Player: camera viewport sync
-  PLAYER_CAMERA: 'player:camera',
-
   // DM → Player: Player Control Mode — independent viewport rectangle
   // on the GM scene that frames exactly what the player window shows.
   // Nullable payload: null exits the mode and the player falls back to
@@ -558,12 +555,6 @@ export interface PlayerPointer {
   y: number
 }
 
-export interface PlayerCamera {
-  imageCenterX: number
-  imageCenterY: number
-  relZoom: number // DM scale / DM fit-scale
-}
-
 /** Player Control Mode rectangle. All coordinates are in map-image
  *  pixels (the unrotated image space), so the frame is stable across
  *  the DM's own pan / zoom. Rotation is in degrees, clockwise, applied
@@ -580,7 +571,11 @@ export interface PlayerViewport {
 }
 
 export interface PlayerFullState {
-  mode: 'map' | 'atmosphere' | 'blackout'
+  /** 'idle' resets the player window to the BoltBerry "Warte auf den
+   *  Spielleiter…" splash. The DM enters this state by toggling the
+   *  session back to Prep mid-session — players should immediately
+   *  stop seeing whatever was on screen. */
+  mode: 'map' | 'atmosphere' | 'blackout' | 'idle'
   map: PlayerMapState | null
   tokens: PlayerTokenState[]
   fogBitmap: string | null      // base64 PNG — "covered dim" canvas

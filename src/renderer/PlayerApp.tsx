@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Stage, Layer, Image as KonvaImage, Shape, Group, Circle, Rect, Text, Line } from 'react-konva'
 import Konva from 'konva'
-import type { PlayerFullState, PlayerTokenState, PlayerMeasureState, FogDelta, PlayerMapState, PlayerPointer, PlayerCamera, PlayerViewport, PlayerOverlay, PlayerInitiativeEntry, WeatherType, GridType, PlayerDrawingState, PlayerWallState } from '@shared/ipc-types'
+import type { PlayerFullState, PlayerTokenState, PlayerMeasureState, FogDelta, PlayerMapState, PlayerPointer, PlayerViewport, PlayerOverlay, PlayerInitiativeEntry, WeatherType, GridType, PlayerDrawingState, PlayerWallState } from '@shared/ipc-types'
 import { useRotatedImage } from './hooks/useRotatedImage'
 import { WeatherCanvas } from './components/canvas/WeatherCanvas'
 import { useImageUrl } from './hooks/useImageUrl'
@@ -27,9 +27,9 @@ export default function PlayerApp() {
   const [blackout, setBlackout] = useState(false)
   const [size, setSize] = useState({ w: window.innerWidth, h: window.innerHeight })
   const [pointer, setPointer] = useState<PlayerPointer | null>(null)
-  const [camera, setCamera] = useState<PlayerCamera | null>(null)
   // Player Control Mode — when set, frames exactly this rect (in map-
-  // image coords) and overrides the camera / fit paths entirely.
+  // image coords). When null, the player window falls back to "fit
+  // map to screen". (The legacy DM-camera follow path is gone.)
   const [viewport, setViewport] = useState<PlayerViewport | null>(null)
   const [handout, setHandout] = useState<{ title: string; imagePath: string | null; textContent: string | null } | null>(null)
   const [overlay, setOverlay] = useState<PlayerOverlay | null>(null)
@@ -88,6 +88,21 @@ export default function PlayerApp() {
         // framed view back to fit.
         setViewport(state.viewport ?? null)
 
+        // 'idle' fires when the DM toggles back to Prep mid-session.
+        // Wipe everything map-related so the BoltBerry splash takes over
+        // — otherwise the last frame would linger because mapState is
+        // sticky between syncs.
+        if (state.mode === 'idle') {
+          mapStateRef.current = null
+          setMapState(null)
+          setAtmospherePath(null)
+          setMode('idle')
+          exploredCanvasRef.current = null
+          coveredCanvasRef.current = null
+          setFogVersion((v) => v + 1)
+          return
+        }
+
         if (state.mode === 'blackout') {
           setMode('blackout')
           return
@@ -121,7 +136,6 @@ export default function PlayerApp() {
         mapStateRef.current = state
         setMapState(state)
         setMode('map')
-        setCamera(null)
         setDrawingData([])
         exploredCanvasRef.current = null
         coveredCanvasRef.current = null
@@ -157,14 +171,6 @@ export default function PlayerApp() {
 
       window.playerAPI.onPlayerViewport((v) => {
         setViewport(v)
-        // Null viewport means "DM left the mode"; fall back to camera /
-        // fit. Non-null takes precedence over any active camera, so
-        // clear the camera state as a defensive measure.
-        if (v) setCamera(null)
-      }),
-
-      window.playerAPI.onCameraView((cam: PlayerCamera) => {
-        setCamera(cam)
       }),
 
       window.playerAPI.onHandout((h) => {
@@ -288,7 +294,6 @@ export default function PlayerApp() {
           width={size.w}
           height={size.h}
           pointer={pointer}
-          camera={camera}
           viewport={viewport}
           measure={measure}
           drawingData={drawingData}
@@ -388,7 +393,6 @@ interface PlayerMapViewProps {
   width: number
   height: number
   pointer: PlayerPointer | null
-  camera: PlayerCamera | null
   viewport: PlayerViewport | null
   measure: PlayerMeasureState | null
   drawingData: PlayerDrawingState[]
@@ -396,22 +400,13 @@ interface PlayerMapViewProps {
 }
 
 function PlayerMapView({
-  mapState, tokens, walls, exploredCanvasRef, coveredCanvasRef, fogVersion, width, height, pointer, camera, viewport, measure, drawingData, onMapLoaded,
+  mapState, tokens, walls, exploredCanvasRef, coveredCanvasRef, fogVersion, width, height, pointer, viewport, measure, drawingData, onMapLoaded,
 }: PlayerMapViewProps) {
   const { img: image, imgW: natW, imgH: natH } = useRotatedImage(`file://${mapState.imagePath}`, mapState.rotation ?? 0)
   const [exploredImg, setExploredImg] = useState<HTMLCanvasElement | null>(null)
   const [coveredImg, setCoveredImg]   = useState<HTMLCanvasElement | null>(null)
   const pointerLayerRef = useRef<Konva.Layer>(null)
   const stageRef = useRef<Konva.Stage>(null)
-
-  // Player-local pan/zoom state (used when no DM camera)
-  // Local camera state — stays at defaults (1, 0, 0) in normal play
-  // because the player window is strictly read-only. The setters still
-  // fire from the camera-sync effect below so the view resets cleanly
-  // when the GM toggles camera-follow on.
-  const [playerScale, setPlayerScale] = useState(1)
-  const [playerOffX, setPlayerOffX] = useState(0)
-  const [playerOffY, setPlayerOffY] = useState(0)
 
   // Notify parent when map image loads → init fog canvases
   useEffect(() => {
@@ -421,6 +416,14 @@ function PlayerMapView({
 
   // Pass fog canvases directly to Konva (no dataURL round-trip).
   // Konva accepts HTMLCanvasElement as an image prop.
+  //
+  // The DM stores the covered mask as 45% black so it can read the
+  // map underneath. On the player side we want the opposite: pure
+  // opaque black so players cannot see hidden terrain at all. We
+  // re-tint into a scratch canvas every time `fogVersion` ticks
+  // (delta paint or full-sync) using the source-in compositing trick
+  // — no per-pixel ImageData scan, so it stays cheap on huge maps.
+  const opaqueCoveredCanvasRef = useRef<HTMLCanvasElement | null>(null)
   useEffect(() => {
     const ec = exploredCanvasRef.current
     const cc = coveredCanvasRef.current
@@ -428,43 +431,38 @@ function PlayerMapView({
     if (!ec && !cc) { setExploredImg(null); setCoveredImg(null); return }
 
     setExploredImg(ec ?? null)
-    setCoveredImg(cc ?? null)
-  }, [fogVersion])
 
-  const [animScale, setAnimScale] = useState(1)
-  const [animOffX, setAnimOffX] = useState(0)
-  const [animOffY, setAnimOffY] = useState(0)
-
-  useEffect(() => {
-    if (!image || natW === 0 || natH === 0 || width === 0 || height === 0) return
-
-    const sx = width / natW
-    const sy = height / natH
-    const fitScale = Math.min(sx, sy)
-
-    let targetScale: number, targetOffX: number, targetOffY: number
-    if (camera) {
-      targetScale = fitScale * camera.relZoom
-      targetOffX = width / 2 - camera.imageCenterX * targetScale
-      targetOffY = height / 2 - camera.imageCenterY * targetScale
+    if (cc) {
+      if (!opaqueCoveredCanvasRef.current) {
+        opaqueCoveredCanvasRef.current = document.createElement('canvas')
+      }
+      const oc = opaqueCoveredCanvasRef.current
+      if (oc.width !== cc.width || oc.height !== cc.height) {
+        oc.width = cc.width
+        oc.height = cc.height
+      }
+      const ocCtx = oc.getContext('2d')!
+      ocCtx.clearRect(0, 0, oc.width, oc.height)
+      ocCtx.drawImage(cc, 0, 0)
+      ocCtx.globalCompositeOperation = 'source-in'
+      ocCtx.fillStyle = '#000000'
+      ocCtx.fillRect(0, 0, oc.width, oc.height)
+      ocCtx.globalCompositeOperation = 'source-over'
+      setCoveredImg(oc)
     } else {
-      targetScale = fitScale * playerScale
-      targetOffX = (width - natW * targetScale) / 2 + playerOffX
-      targetOffY = (height - natH * targetScale) / 2 + playerOffY
+      setCoveredImg(null)
     }
-
-    setAnimScale(targetScale)
-    setAnimOffX(targetOffX)
-    setAnimOffY(targetOffY)
-  }, [camera, playerScale, playerOffX, playerOffY, image, natW, natH, width, height])
+  }, [fogVersion])
 
   // Compute final display values.
   //
-  // Player Control Mode (viewport) wins over every other source of truth —
-  // it's the GM's explicit "show exactly this frame" instruction. When the
-  // viewport prop is non-null we fit its rect into the player window
-  // (contain) and pivot the whole map/tokens/fog layer stack around the
-  // screen center by -rotation so the framed region appears upright.
+  // Player Control Mode (viewport) wins over the default fit. When
+  // viewport is set we fit its rect into the player window (contain)
+  // and pivot the whole map/tokens/fog layer stack around the screen
+  // center by -rotation so the framed region appears upright. When
+  // viewport is null we just fit the entire map to the screen — the
+  // legacy DM-camera follow path was retired (Player Control Mode is
+  // the single source of truth).
   let scale = 1, offX = 0, offY = 0
   if (image && natW > 0 && natH > 0) {
     if (viewport) {
@@ -472,15 +470,14 @@ function PlayerMapView({
       scale = fit
       offX = width / 2 - viewport.cx * scale
       offY = height / 2 - viewport.cy * scale
-    } else if (camera) {
-      scale = animScale
-      offX = animOffX
-      offY = animOffY
     } else {
-      const fitScale = Math.min(width / natW, height / natH)
-      scale = fitScale * playerScale
-      offX = (width - natW * scale) / 2 + playerOffX
-      offY = (height - natH * scale) / 2 + playerOffY
+      // No viewport → fit the entire map to the window. The player
+      // window is a passive surface; there are no local pan / zoom
+      // controls (and the legacy DM-camera follow is gone), so the
+      // identity transform around fit-scale is all we need.
+      scale = Math.min(width / natW, height / natH)
+      offX = (width - natW * scale) / 2
+      offY = (height - natH * scale) / 2
     }
   }
 
@@ -493,15 +490,6 @@ function PlayerMapView({
   const layerXform = viewport
     ? { rotation: -viewportRotation, offsetX: width / 2, offsetY: height / 2, x: width / 2, y: height / 2 }
     : null
-
-  // Reset player pan/zoom when camera sync activates
-  useEffect(() => {
-    if (camera) {
-      setPlayerScale(1)
-      setPlayerOffX(0)
-      setPlayerOffY(0)
-    }
-  }, [camera])
 
   // The player window is a passive display surface by design — "players
   // have zero controls". Every input event is swallowed before it can

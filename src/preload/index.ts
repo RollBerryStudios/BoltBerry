@@ -6,7 +6,6 @@ import type {
   PlayerMapState,
   PlayerTokenState,
   PlayerPointer,
-  PlayerCamera,
   PlayerViewport,
   PlayerHandout,
   PlayerOverlay,
@@ -80,8 +79,6 @@ export const dmApi = {
     ipcRenderer.send('player:full-sync', state),
   sendPointer: (pointer: PlayerPointer) =>
     ipcRenderer.send('player:pointer', pointer),
-  sendCameraView: (camera: PlayerCamera) =>
-    ipcRenderer.send('player:camera', camera),
   sendPlayerViewport: (viewport: PlayerViewport | null) =>
     ipcRenderer.send(IPC.PLAYER_VIEWPORT, viewport),
   sendHandout: (handout: PlayerHandout | null) =>
@@ -226,11 +223,6 @@ export const playerApi = {
     const handler = (_: Electron.IpcRendererEvent, pointer: PlayerPointer) => cb(pointer)
     ipcRenderer.on('player:pointer', handler)
     return () => ipcRenderer.removeListener('player:pointer', handler)
-  },
-  onCameraView: (cb: (camera: PlayerCamera) => void) => {
-    const handler = (_: Electron.IpcRendererEvent, camera: PlayerCamera) => cb(camera)
-    ipcRenderer.on('player:camera', handler)
-    return () => ipcRenderer.removeListener('player:camera', handler)
   },
   onPlayerViewport: (cb: (viewport: PlayerViewport | null) => void) => {
     const handler = (_: Electron.IpcRendererEvent, viewport: PlayerViewport | null) => cb(viewport)

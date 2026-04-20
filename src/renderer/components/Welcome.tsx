@@ -938,12 +938,17 @@ function WelcomeStyles() {
       .bb-welcome-right-top {
         display: flex; justify-content: flex-end;
         align-items: center;
-        gap: 10px;
+        flex-wrap: wrap;
+        row-gap: 6px;
+        gap: 8px;
         /* Reserve room on the right for Electron's titleBarOverlay so
            the DE / EN pill does not slide under the native min / max /
            close buttons. Shares the same --titlebar-controls-w variable
            as DmTitleBar / Wiki / Compendium top bars so they all scale
-           together on high-DPI Windows. */
+           together on high-DPI Windows.
+           flex-wrap+row-gap let the buttons drop to a second row when
+           the pane is narrow (high-DPI Windows) instead of overflowing
+           and clipping the language pill. */
         padding-top: 22px;
         padding-right: calc(var(--titlebar-controls-w) + 12px);
         padding-bottom: 22px;

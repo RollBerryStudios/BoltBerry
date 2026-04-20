@@ -409,169 +409,107 @@ export function LeftSidebar() {
         <div className="sidebar-section">
           <div className="sidebar-section-title">{t('sidebar.left.gridTitle', { name: activeMap.name })}</div>
 
+          {/* Minimalist grid panel — square-only, two-colour palette,
+              no offset fields. Hex / colourful palette / offset
+              correction were rarely used and inflated the panel; the
+              square fallback handles every map currently in the data
+              set. The on/off toggle still maps to gridType: 'none' /
+              'square' so downstream renderers stay back-compat. */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)' }}>
-            {/* Grid type */}
-            <div style={{ display: 'flex', gap: 'var(--sp-1)' }}>
-              {(['none', 'square', 'hex'] as const).map((type) => (
-                <button
-                  key={type}
-                  className={`btn btn-ghost ${gridType === type ? 'btn-active' : ''}`}
-                  style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-xs)', padding: '4px' }}
-                  onClick={() => handleGridChange(type, gridSize)}
-                >
-                  {type === 'none' ? t('sidebar.left.gridOff') : type === 'square' ? '⬛' : '⭡'}
-                </button>
-              ))}
+            {/* Grid On/Off + Erkennen on the same row to keep it compact */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                className={`btn btn-ghost ${gridType === 'square' ? 'btn-active' : ''}`}
+                style={{ fontSize: 'var(--text-xs)', padding: '3px 10px' }}
+                onClick={() => handleGridChange(gridType === 'square' ? 'none' : 'square', gridSize)}
+                title="Raster ein/aus (G)"
+              >
+                {gridType === 'square' ? '⬛ AN' : '⬜ AUS'}
+              </button>
+              <button
+                className="btn btn-ghost"
+                style={{ fontSize: 'var(--text-xs)', padding: '3px 8px' }}
+                disabled={gridDetecting || !activeMap?.imagePath}
+                onClick={async () => {
+                  if (!activeMap?.imagePath) return
+                  setGridDetecting(true)
+                  setGridDetectMsg(null)
+                  try {
+                    const detected = await detectGrid(activeMap.imagePath)
+                    // Square-only mode: ignore the detector's gridType
+                    // and force 'square' on success. Drops the brittle
+                    // hex angle-histogram path that produced false
+                    // positives on noisy maps.
+                    if (detected.confidence > 0.15 && detected.gridSize > 10) {
+                      handleGridChange('square', detected.gridSize, undefined, 0, 0)
+                      setGridDetectMsg({ text: `✓ ${detected.gridSize}px`, ok: true })
+                    } else {
+                      setGridDetectMsg({ text: '✕ Kein Raster erkannt', ok: false })
+                    }
+                  } catch (err) {
+                    console.error('[LeftSidebar] grid detect failed:', err)
+                    setGridDetectMsg({ text: '✕ Fehler', ok: false })
+                  } finally {
+                    setGridDetecting(false)
+                  }
+                }}
+                title="Raster automatisch erkennen"
+              >
+                {gridDetecting ? '⏳' : '🔍'} Erkennen
+              </button>
+              {gridDetectMsg && (
+                <span style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 4,
+                  fontSize: 'var(--text-xs)',
+                  color: gridDetectMsg.ok ? 'var(--success)' : 'var(--warning)',
+                  whiteSpace: 'nowrap',
+                }}>
+                  {gridDetectMsg.text}
+                  <button
+                    onClick={() => setGridDetectMsg(null)}
+                    style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', fontSize: 9, padding: 0, lineHeight: 1, opacity: 0.7 }}
+                    title="Schließen"
+                  >✕</button>
+                </span>
+              )}
             </div>
 
-            {/* Grid size */}
-            {gridType !== 'none' && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
-                <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', flexShrink: 0 }}>
-                  Feld-px
-                </label>
-                <NumberStepper
-                  value={gridSize}
-                  onChange={(v) => handleGridChange(gridType, v)}
-                  min={10}
-                  max={500}
-                  step={1}
-                  bigStep={5}
-                  width={92}
-                  size="sm"
-                  ariaLabel="Raster-Feldgröße in Pixeln"
-                />
-                <button
-                  className="btn btn-ghost"
-                  style={{ fontSize: 'var(--text-xs)', padding: '2px 6px', marginLeft: 'var(--sp-1)' }}
-                  disabled={gridDetecting}
-                  onClick={async () => {
-                    if (!activeMap?.imagePath) return
-                    setGridDetecting(true)
-                    setGridDetectMsg(null)
-                    try {
-                      const detected = await detectGrid(activeMap.imagePath)
-                      if (detected.confidence > 0.2 && detected.gridSize > 10) {
-                        handleGridChange(detected.gridType, detected.gridSize, undefined, 0, 0)
-                        setGridDetectMsg({ text: `✓ ${detected.gridType}, ${detected.gridSize}px`, ok: true })
-                      } else {
-                        setGridDetectMsg({ text: '✕ Kein Raster erkannt', ok: false })
-                      }
-                    } catch (err) {
-                      console.error('[LeftSidebar] grid detect failed:', err)
-                      setGridDetectMsg({ text: '✕ Fehler', ok: false })
-                    } finally {
-                      setGridDetecting(false)
-                    }
-                  }}
-                  title="Raster automatisch erkennen"
-                >
-                  {gridDetecting ? '⏳' : '🔍'} Erkennen
-                </button>
-                {gridDetectMsg && (
-                  <span style={{
-                    display: 'inline-flex', alignItems: 'center', gap: 4,
-                    fontSize: 'var(--text-xs)',
-                    color: gridDetectMsg.ok ? 'var(--success)' : 'var(--warning)',
-                    whiteSpace: 'nowrap',
-                  }}>
-                    {gridDetectMsg.text}
-                    <button
-                      onClick={() => setGridDetectMsg(null)}
-                      style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', fontSize: 9, padding: 0, lineHeight: 1, opacity: 0.7 }}
-                      title="Schließen"
-                    >✕</button>
-                  </span>
-                )}
-              </div>
-            )}
-
-            {/* ft per unit */}
-            {gridType !== 'none' && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
-                <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', flexShrink: 0 }}>
-                  Einheit
-                </label>
-                <input
-                  className="input"
-                  type="number"
-                  min={1} max={100} step={1}
-                  value={ftPerUnit}
-                  onChange={(e) => {
-                    const v = parseFloat(e.target.value)
-                    if (v >= 1 && v <= 100) handleGridChange(gridType, gridSize, v)
-                  }}
-                  style={{ width: 60 }}
-                />
-                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>ft / Feld</span>
-              </div>
-            )}
-
-            {/* Offset X */}
-            {gridType !== 'none' && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
-                <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', flexShrink: 0 }}>
-                  Offset X
-                </label>
-                <input
-                  className="input"
-                  type="number"
-                  min={0} max={gridSize * 2} step={1}
-                  value={gridOffsetX}
-                  onChange={(e) => {
-                    const v = parseFloat(e.target.value)
-                    if (v >= 0 && v <= gridSize * 2) handleGridChange(gridType, gridSize, undefined, v, undefined)
-                  }}
-                  style={{ width: 70 }}
-                />
-                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>px</span>
-              </div>
-            )}
-
-            {/* Offset Y */}
-            {gridType !== 'none' && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
-                <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', flexShrink: 0 }}>
-                  Offset Y
-                </label>
-                <input
-                  className="input"
-                  type="number"
-                  min={0} max={gridSize * 2} step={1}
-                  value={gridOffsetY}
-                  onChange={(e) => {
-                    const v = parseFloat(e.target.value)
-                    if (v >= 0 && v <= gridSize * 2) handleGridChange(gridType, gridSize, undefined, undefined, v)
-                  }}
-                  style={{ width: 70 }}
-                />
-                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>px</span>
-              </div>
-            )}
-
-            {/* Grid style — visibility / thickness / colour. Hidden when
-                grid type is 'none' since there's no grid to style. */}
-            {gridType !== 'none' && activeMap && (
+            {gridType === 'square' && (
               <>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
-                  <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', flexShrink: 0 }}>
-                    Anzeige
-                  </label>
-                  <button
-                    type="button"
-                    className={`btn btn-ghost ${activeMap.gridVisible ? 'btn-active' : ''}`}
-                    style={{ fontSize: 'var(--text-xs)', padding: '3px 10px' }}
-                    onClick={() => handleGridStylePatch({ gridVisible: !activeMap.gridVisible })}
-                    title="Raster ein/aus (G)"
-                  >
-                    {activeMap.gridVisible ? '👁 sichtbar' : '🙈 versteckt'}
-                  </button>
+                {/* Feld-px + Einheit on the same row */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', flexWrap: 'wrap' }}>
+                  <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>Feld</label>
+                  <NumberStepper
+                    value={gridSize}
+                    onChange={(v) => handleGridChange('square', v)}
+                    min={10}
+                    max={500}
+                    step={1}
+                    bigStep={5}
+                    width={84}
+                    size="sm"
+                    ariaLabel="Raster-Feldgröße in Pixeln"
+                  />
+                  <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>px</span>
+                  <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginLeft: 'var(--sp-2)' }}>·</span>
+                  <input
+                    className="input"
+                    type="number"
+                    min={1} max={100} step={1}
+                    value={ftPerUnit}
+                    onChange={(e) => {
+                      const v = parseFloat(e.target.value)
+                      if (v >= 1 && v <= 100) handleGridChange('square', gridSize, v)
+                    }}
+                    style={{ width: 52 }}
+                  />
+                  <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>ft</span>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
-                  <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', flexShrink: 0 }}>
-                    Dicke
-                  </label>
+                {/* Dicke + Farbe (b/w) on the same row */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', flexWrap: 'wrap' }}>
+                  <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>Dicke</label>
                   <NumberStepper
                     value={activeMap.gridThickness}
                     onChange={(v) => handleGridStylePatch({ gridThickness: Math.max(0.25, Math.min(4, v)) })}
@@ -579,23 +517,14 @@ export function LeftSidebar() {
                     max={4}
                     step={0.25}
                     bigStep={0.5}
-                    width={92}
+                    width={84}
                     size="sm"
                     ariaLabel="Rasterlinien-Dicke"
                   />
-                  <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>×</span>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
-                  <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', flexShrink: 0 }}>
-                    Farbe
-                  </label>
+                  <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginLeft: 'var(--sp-2)' }}>·</span>
                   {[
-                    { label: 'Weiß', value: 'rgba(255,255,255,0.34)' },
-                    { label: 'Hell', value: 'rgba(255,255,255,0.6)' },
+                    { label: 'Weiß',    value: 'rgba(255,255,255,0.34)' },
                     { label: 'Schwarz', value: 'rgba(0,0,0,0.45)' },
-                    { label: 'Gelb', value: 'rgba(255,198,46,0.55)' },
-                    { label: 'Blau', value: 'rgba(96,165,250,0.55)' },
                   ].map(({ label, value }) => (
                     <button
                       key={value}

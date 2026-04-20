@@ -72,18 +72,6 @@ export function useMenuActions({ onShowShortcuts, onNewCampaign, onAbout }: UseM
         case 'end-session':
           useUIStore.getState().setSessionMode('prep')
           break
-        case 'share-camera-once': {
-          const { scale, offsetX, offsetY, fitScale, canvasW, canvasH } = useMapTransformStore.getState()
-          if (!fitScale || !canvasW || !canvasH) return
-          const imageCenterX = (canvasW / 2 - offsetX) / scale
-          const imageCenterY = (canvasH / 2 - offsetY) / scale
-          const relZoom = scale / fitScale
-          window.electronAPI?.sendCameraView({ imageCenterX, imageCenterY, relZoom })
-          break
-        }
-        case 'toggle-camera-follow':
-          useUIStore.getState().toggleCameraFollow()
-          break
         case 'atmosphere-image':
           window.electronAPI?.importFile?.('atmosphere').then((result) => {
             if (result) {

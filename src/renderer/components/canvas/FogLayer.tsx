@@ -92,6 +92,12 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
   }, [mapId, imgW, imgH])
 
   const playerPreviewCanvasRef = useRef<HTMLCanvasElement | null>(null)
+  // Reusable scratch canvas for the DM's red-tinted view of the covered
+  // mask. We never mutate `coveredCanvasRef` directly — it must stay in
+  // its on-disk format (45% black) so the existing fog-delta IPC keeps
+  // working on the player side. The tint is purely a render-time
+  // transform: copy → composite-in → fill red.
+  const tintedCoveredCanvasRef = useRef<HTMLCanvasElement | null>(null)
 
   // ── Create/update Konva.Image nodes ──────────────────────────────────
   const refreshDisplay = useCallback(() => {
@@ -110,7 +116,17 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
     kE.x(offsetX); kE.y(offsetY)
     kE.width(imgW * scale); kE.height(imgH * scale)
 
-    // In player-preview mode, boost fog to full opacity so DM sees exactly what players see
+    // The on-disk fog bitmap is always painted as 45% black so the
+    // existing delta IPC stays format-stable. We retint it at render
+    // time with one of two looks:
+    //
+    //   • Player Preview (DM toggles "show me what they see"): full-
+    //     opacity black, matching what PlayerApp renders.
+    //   • DM normal: translucent red, so the DM can still read the
+    //     map underneath but instantly sees which areas are hidden.
+    //
+    // Both paths use a scratch canvas so `coveredCanvasRef` keeps its
+    // canonical 45%-black format for IPC + DB persistence.
     let coveredSource: HTMLCanvasElement = covered
     if (playerPreview) {
       if (!playerPreviewCanvasRef.current) {
@@ -131,6 +147,25 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
       ppCtx.fillRect(0, 0, pp.width, pp.height)
       ppCtx.globalCompositeOperation = 'source-over'
       coveredSource = pp
+    } else {
+      if (!tintedCoveredCanvasRef.current) {
+        tintedCoveredCanvasRef.current = document.createElement('canvas')
+      }
+      const tc = tintedCoveredCanvasRef.current
+      if (tc.width !== covered.width || tc.height !== covered.height) {
+        tc.width = covered.width
+        tc.height = covered.height
+      }
+      const tcCtx = tc.getContext('2d')!
+      tcCtx.clearRect(0, 0, tc.width, tc.height)
+      tcCtx.drawImage(covered, 0, 0)
+      // Tint every painted pixel red, ~55 % alpha. source-in keeps the
+      // mask shape intact and overwrites only the colour channels.
+      tcCtx.globalCompositeOperation = 'source-in'
+      tcCtx.fillStyle = 'rgba(220, 38, 38, 0.55)'
+      tcCtx.fillRect(0, 0, tc.width, tc.height)
+      tcCtx.globalCompositeOperation = 'source-over'
+      coveredSource = tc
     }
 
     if (!kImgCoveredRef.current) {

@@ -1681,10 +1681,11 @@ textarea.input {
   position: relative;
   display: block;
   width: 100%;
-  /* Nearly square aspect so the card roughly matches the source webp
-     ratio — object-fit: cover on a 3:1 strip used to chop off heads and
-     tails of the character art. */
-  aspect-ratio: 16 / 11;
+  /* Strict 1:1 — the bundled SRD token webps are square portraits so
+     forcing the same ratio here means object-fit: contain shows the
+     full art with zero crop. Avoids the 16/11 letterbox problem
+     where heads or tails of taller artwork were chopped off. */
+  aspect-ratio: 1 / 1;
   padding: 0;
   border: none;
   background: var(--bg-elevated);
@@ -1697,11 +1698,11 @@ textarea.input {
 .token-card-hero img {
   width: 100%;
   height: 100%;
-  /* Anchor the crop near the top of the image: monster art typically
-     paints head/body in the upper half and stance/legs below, so a
-     25% vertical bias keeps the recognisable features visible. */
-  object-fit: cover;
-  object-position: center 25%;
+  /* contain (not cover) since the source assets are already 1:1.
+     If a non-square asset slips in we'd rather see the whole image
+     letterboxed than crop part of it away. */
+  object-fit: contain;
+  object-position: center;
   display: block;
 }
 .token-card-hero-glyph {

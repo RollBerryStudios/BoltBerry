@@ -512,11 +512,16 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
     </div>
   )
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
-
-      {layout === 'wide' ? (
-        /* ── Wide two-column layout ── */
+  // Wide is rendered inside CampaignView's own flex column (with a
+  // definite height) — the original "fill the parent" sizing works
+  // there. Narrow lives inside FloatingUtilityDock's popover whose
+  // height is *content-driven*; with `height: 100%` the inner
+  // `flex: 1` content collapsed to zero, leaving the popover as a
+  // tiny white shell. The narrow path now uses intrinsic sizing and
+  // lets the popover-body scroll if content overflows.
+  if (layout === 'wide') {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
         <div style={{
           flex: 1, overflow: 'hidden',
           display: 'grid',
@@ -549,30 +554,40 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
             {sfxContent}
           </div>
         </div>
-      ) : (
-        /* ── Narrow tabbed layout (sidebar) ── */
-        <>
-          <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', flexShrink: 0 }}>
-            {(['music', 'sfx'] as const).map((sec) => (
-              <button
-                key={sec}
-                onClick={() => setActiveSection(sec)}
-                style={{
-                  flex: 1, padding: '5px 0', background: 'none', border: 'none',
-                  borderBottom: activeSection === sec ? '2px solid var(--accent-blue)' : '2px solid transparent',
-                  color: activeSection === sec ? 'var(--accent-blue-light)' : 'var(--text-muted)',
-                  cursor: 'pointer', fontSize: 11, fontWeight: 600,
-                }}
-              >
-                {sec === 'music' ? t('audio.tabMusic') : t('audio.tabSfx')}
-              </button>
-            ))}
-          </div>
-          <div style={{ flex: 1, overflowY: 'auto', padding: '8px 10px' }}>
-            {activeSection === 'music' ? musicContent : sfxContent}
-          </div>
-        </>
-      )}
+
+        {editingSlot && (
+          <SlotEditor
+            boardId={editingSlot.boardId}
+            slot={boards.find((b) => b.id === editingSlot.boardId)?.slots.find((s) => s.slotNumber === editingSlot.slotIndex)}
+            slotIndex={editingSlot.slotIndex}
+            onClose={() => setEditingSlot(null)}
+          />
+        )}
+      </div>
+    )
+  }
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', position: 'sticky', top: 0, background: 'var(--bg-elevated)', zIndex: 1 }}>
+        {(['music', 'sfx'] as const).map((sec) => (
+          <button
+            key={sec}
+            onClick={() => setActiveSection(sec)}
+            style={{
+              flex: 1, padding: '5px 0', background: 'none', border: 'none',
+              borderBottom: activeSection === sec ? '2px solid var(--accent-blue)' : '2px solid transparent',
+              color: activeSection === sec ? 'var(--accent-blue-light)' : 'var(--text-muted)',
+              cursor: 'pointer', fontSize: 11, fontWeight: 600,
+            }}
+          >
+            {sec === 'music' ? t('audio.tabMusic') : t('audio.tabSfx')}
+          </button>
+        ))}
+      </div>
+      <div style={{ padding: '8px 10px' }}>
+        {activeSection === 'music' ? musicContent : sfxContent}
+      </div>
 
       {/* Slot editor modal */}
       {editingSlot && (
