@@ -19,10 +19,14 @@ const VOLUME_COL: Record<ChannelId, string> = {
   combat: 'combat_volume',
 }
 
-function ChannelStrip({ chId, label, activeMapId }: {
+function ChannelStrip({ chId, label, activeMapId, combatControl }: {
   chId: ChannelId
   label: string
   activeMapId: number | null
+  /** Rendered on the 'combat' strip only — integrates the combat-mode
+   *  enable/disable toggle into the Kampf card instead of floating it
+   *  between other tracks. */
+  combatControl?: { active: boolean; onToggle: () => void }
 }) {
   const { t } = useTranslation()
   const store = useAudioStore()
@@ -49,7 +53,12 @@ function ChannelStrip({ chId, label, activeMapId }: {
     ).catch(console.error)
   }
 
-  const channelClass = `audio-channel ${chId}${disabled ? ' disabled' : ''}`
+  const classes = ['audio-channel', chId]
+  if (disabled) classes.push('disabled')
+  // Kampf channel gets a 'combat-mode-on' class when the combat toggle
+  // is engaged — the CSS uses it to un-dim the file picker + controls.
+  if (chId === 'combat' && combatActive) classes.push('combat-mode-on')
+  const channelClass = classes.join(' ')
 
   return (
     <div className={channelClass}>
@@ -57,6 +66,16 @@ function ChannelStrip({ chId, label, activeMapId }: {
         <span className="audio-channel-label">{label}</span>
         {ch.playing && (
           <span className="audio-channel-badge animate-pulse">♪ {t('audio.play')}</span>
+        )}
+        {combatControl && (
+          <button
+            type="button"
+            className={`audio-channel-combat-toggle${combatControl.active ? ' active' : ''}`}
+            onClick={combatControl.onToggle}
+            title={combatControl.active ? t('audio.endCombat') : t('audio.startCombat')}
+          >
+            {combatControl.active ? `⚔️ ${t('audio.endCombat')}` : `⚔️ ${t('audio.startCombat')}`}
+          </button>
         )}
       </div>
 
@@ -66,7 +85,8 @@ function ChannelStrip({ chId, label, activeMapId }: {
         disabled={disabled}
         title={ch.filePath ?? t('audio.loadFile')}
       >
-        {ch.fileName ?? t('audio.loadFile')}
+        <span className="audio-channel-file-icon" aria-hidden="true">♪</span>
+        <span className="audio-channel-file-name">{ch.fileName ?? t('audio.loadFile')}</span>
       </button>
 
       {ch.filePath && (
@@ -421,14 +441,15 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
 
       <ChannelStrip chId="track1" label={t('audio.track1')} activeMapId={activeMapId} />
       <ChannelStrip chId="track2" label={t('audio.track2')} activeMapId={activeMapId} />
-
-      <button
-        className={`audio-combat-toggle${combatActive ? ' active' : ''}`}
-        onClick={combatActive ? deactivateCombat : activateCombat}
-      >
-        ⚔️ {combatActive ? t('audio.endCombat') : t('audio.startCombat')}
-      </button>
-      <ChannelStrip chId="combat" label={t('audio.combat')} activeMapId={activeMapId} />
+      <ChannelStrip
+        chId="combat"
+        label={t('audio.combat')}
+        activeMapId={activeMapId}
+        combatControl={{
+          active: combatActive,
+          onToggle: combatActive ? deactivateCombat : activateCombat,
+        }}
+      />
 
       {!activeCampaignId && (
         <div style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: 'var(--text-xs)', padding: '8px 0 0' }}>
@@ -458,29 +479,36 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
       )}
 
       {activeBoard ? (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 6 }}>
-          {Array.from({ length: 10 }, (_, i) => {
-            const slot = activeBoard.slots.find((s) => s.slotNumber === i)
-            return (
-              <SfxSlot
-                key={i}
-                slot={slot}
-                slotIndex={i}
-                onTrigger={() => handleTriggerSlot(i)}
-                onEdit={() => setEditingSlot({ boardId: activeBoard.id, slotIndex: i })}
-              />
-            )
-          })}
-        </div>
+        <>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 6 }}>
+            {Array.from({ length: 10 }, (_, i) => {
+              const slot = activeBoard.slots.find((s) => s.slotNumber === i)
+              return (
+                <SfxSlot
+                  key={i}
+                  slot={slot}
+                  slotIndex={i}
+                  onTrigger={() => handleTriggerSlot(i)}
+                  onEdit={() => setEditingSlot({ boardId: activeBoard.id, slotIndex: i })}
+                />
+              )
+            })}
+          </div>
+          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textAlign: 'center' }}>
+            {t('audio.sfxHint')}
+          </div>
+        </>
       ) : (
-        <div style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: 'var(--text-sm)', padding: 16 }}>
-          {activeCampaignId ? t('audio.noBoards') : t('audio.noCampaign')}
+        <div className="audio-sfx-empty">
+          <div className="audio-sfx-empty-glyph" aria-hidden="true">🎛</div>
+          <div className="audio-sfx-empty-title">
+            {activeCampaignId ? t('audio.noBoards') : t('audio.noCampaign')}
+          </div>
+          {activeCampaignId && (
+            <div className="audio-sfx-empty-hint">{t('audio.sfxHint')}</div>
+          )}
         </div>
       )}
-
-      <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textAlign: 'center' }}>
-        {t('audio.sfxHint')}
-      </div>
     </div>
   )
 

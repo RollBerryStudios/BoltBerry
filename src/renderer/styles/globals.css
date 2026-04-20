@@ -1982,20 +1982,22 @@ textarea.input {
   display: flex;
   align-items: center;
   gap: var(--sp-2);
-  padding-bottom: var(--sp-3);
+  padding: 10px 12px;
   margin-bottom: var(--sp-3);
-  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
 }
 .audio-master-label {
-  font-size: var(--text-xs);
+  font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   color: var(--text-muted);
   min-width: 56px;
 }
 .audio-master-value {
-  font-size: var(--text-xs);
+  font-size: 10px;
   color: var(--text-muted);
   font-family: var(--font-mono, monospace);
   min-width: 38px;
@@ -2007,18 +2009,27 @@ textarea.input {
   display: flex;
   flex-direction: column;
   gap: var(--sp-2);
-  padding: var(--sp-3);
+  padding: var(--sp-3) var(--sp-3) 10px;
   margin-bottom: var(--sp-3);
   background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
   border-left: 3px solid var(--audio-accent);
   border-radius: var(--radius);
-  transition: opacity var(--transition);
+  transition: opacity var(--transition), background var(--transition);
 }
 .audio-channel.disabled { opacity: 0.45; }
 .audio-channel.track1  { --audio-accent: #3b82f6; }
 .audio-channel.track2  { --audio-accent: #a78bfa; }
 .audio-channel.combat  { --audio-accent: #ef4444; }
+/* When the combat mode is off, the Kampf channel is dimmed so the DM's
+   eye doesn't land on it during normal prep. The head / combat toggle
+   stay fully opaque and remain click-able. */
+.audio-channel.combat:not(.combat-mode-on) .audio-channel-file,
+.audio-channel.combat:not(.combat-mode-on) .audio-channel-seek,
+.audio-channel.combat:not(.combat-mode-on) .audio-channel-controls,
+.audio-channel.combat:not(.combat-mode-on) .audio-channel-volume {
+  opacity: 0.55;
+}
 
 .audio-channel-head {
   display: flex;
@@ -2046,25 +2057,46 @@ textarea.input {
 }
 
 .audio-channel-file {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   width: 100%;
   text-align: left;
   background: var(--bg-base);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 5px 8px;
+  padding: 7px 10px;
   font-size: var(--text-xs);
   color: var(--text-primary);
   cursor: pointer;
   overflow: hidden;
+  transition: border-color var(--transition), background var(--transition);
+}
+.audio-channel-file-icon {
+  color: var(--audio-accent);
+  font-size: 12px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.audio-channel-file-name {
+  flex: 1;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  transition: border-color var(--transition), background var(--transition);
 }
 .audio-channel-file:hover:not(:disabled) {
   background: var(--bg-overlay);
   border-color: var(--audio-accent);
 }
-.audio-channel-file.empty { color: var(--text-muted); }
+.audio-channel-file.empty {
+  color: var(--text-muted);
+  border-style: dashed;
+}
+.audio-channel-file.empty:hover:not(:disabled) {
+  border-style: solid;
+  color: var(--text-secondary);
+}
+.audio-channel-file.empty .audio-channel-file-icon { opacity: 0.55; }
 
 .audio-channel-seek {
   display: flex;
@@ -2151,28 +2183,67 @@ textarea.input {
   text-align: right;
 }
 
-.audio-combat-toggle {
-  width: 100%;
-  display: flex;
+/* Combat-mode toggle — lives inside the Kampf channel head, not floating
+   between tracks. Small, pill-shaped, right-aligned so the card reads
+   as "this row of controls plus the toggle that switches into combat
+   mode". */
+.audio-channel-combat-toggle {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 8px;
+  gap: 5px;
+  padding: 3px 10px;
   background: transparent;
   border: 1px solid var(--danger);
-  border-radius: var(--radius);
+  border-radius: 999px;
   color: var(--danger);
   cursor: pointer;
-  font-size: var(--text-sm);
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.04em;
-  margin: var(--sp-3) 0;
   transition: background var(--transition), color var(--transition);
+  font-family: inherit;
 }
-.audio-combat-toggle:hover { background: rgba(239, 68, 68, 0.1); }
-.audio-combat-toggle.active {
-  background: rgba(239, 68, 68, 0.18);
-  color: var(--danger);
+.audio-channel-combat-toggle:hover {
+  background: rgba(239, 68, 68, 0.12);
+}
+.audio-channel-combat-toggle.active {
+  background: var(--danger);
+  color: var(--text-inverse, #0D1015);
+}
+
+/* Legacy class kept for any downstream consumer that still imports the
+   old big red bar — now hidden. The toggle moved into the Kampf channel
+   header (.audio-channel-combat-toggle above). */
+.audio-combat-toggle { display: none; }
+
+/* Empty state for the SFX column when no board exists yet. Replaces the
+   single-line grey sentence with a friendlier card so the right column
+   doesn't read as "broken" when the DM opens a fresh campaign. */
+.audio-sfx-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 28px 18px;
+  background: var(--bg-elevated);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+}
+.audio-sfx-empty-glyph {
+  font-size: 32px;
+  opacity: 0.55;
+}
+.audio-sfx-empty-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.audio-sfx-empty-hint {
+  font-size: 11px;
+  line-height: 1.5;
+  max-width: 220px;
 }
 
 /* ─── Audio strip (bottom-left, v1 Conservative) ─────────────────────────── */
