@@ -2397,6 +2397,104 @@ textarea.input {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.audio-channel-file-chev {
+  font-size: 10px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.audio-channel-file-wrap {
+  position: relative;
+}
+.audio-channel-playlist-count {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--bg-base);
+}
+/* Playlist dropdown anchored under the current-track button. Shown on
+   right-click or (when the strip already has tracks) on left-click. */
+.audio-channel-playlist {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  padding: 4px 0;
+  max-height: 240px;
+  overflow-y: auto;
+}
+.audio-channel-playlist-empty {
+  padding: 8px 12px;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-align: center;
+}
+.audio-channel-playlist-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: var(--text-xs);
+  color: var(--text-primary);
+}
+.audio-channel-playlist-item:hover { background: var(--bg-overlay); }
+.audio-channel-playlist-item.active {
+  background: rgba(59, 130, 246, 0.14);
+  color: var(--accent-blue-light);
+}
+.audio-channel-playlist-item-icon {
+  font-size: 11px;
+  color: var(--text-muted);
+  min-width: 12px;
+}
+.audio-channel-playlist-item.active .audio-channel-playlist-item-icon {
+  color: var(--accent-blue);
+}
+.audio-channel-playlist-item-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.audio-channel-playlist-item-remove {
+  width: 18px; height: 18px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  line-height: 1;
+}
+.audio-channel-playlist-item-remove:hover {
+  background: rgba(239, 68, 68, 0.14);
+  color: var(--danger);
+}
+.audio-channel-playlist-add {
+  display: block;
+  width: calc(100% - 8px);
+  margin: 4px;
+  padding: 5px 8px;
+  background: var(--bg-elevated);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  text-align: center;
+  font-family: inherit;
+}
+.audio-channel-playlist-add:hover {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue-light);
+}
 .audio-channel-file:hover:not(:disabled) {
   background: var(--bg-overlay);
   border-color: var(--audio-accent);

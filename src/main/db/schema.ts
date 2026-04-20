@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 36
+export const SCHEMA_VERSION = 37
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -464,6 +464,20 @@ CREATE TABLE IF NOT EXISTS user_wiki_entries (
 );
 CREATE INDEX IF NOT EXISTS idx_user_wiki_entries_kind ON user_wiki_entries(kind);
 
+-- Multi-track audio playlists (DM pre-assigns several tracks per
+-- channel; right-click the channel to swap the active one).
+CREATE TABLE IF NOT EXISTS channel_playlist (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  campaign_id INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+  channel     TEXT    NOT NULL CHECK (channel IN ('track1','track2','combat')),
+  path        TEXT    NOT NULL,
+  file_name   TEXT    NOT NULL,
+  position    INTEGER NOT NULL DEFAULT 0,
+  created_at  TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_channel_playlist_campaign
+  ON channel_playlist(campaign_id, channel, position);
+
 -- Schema version tracking (single-row enforced by PK constraint)
 CREATE TABLE IF NOT EXISTS schema_version (
   id      INTEGER PRIMARY KEY CHECK (id = 1),
@@ -838,6 +852,25 @@ CREATE TABLE IF NOT EXISTS user_wiki_entries (
 );
 CREATE INDEX IF NOT EXISTS idx_user_wiki_entries_kind ON user_wiki_entries(kind);
 UPDATE schema_version SET version = 36;
+`
+
+// Migration: v36 → v37 — multi-track audio per channel. DMs can now
+// pre-assign multiple tracks to each channel (track1 / track2 /
+// combat) and swap between them via a right-click menu. The table is
+// campaign-scoped so two campaigns don't share playlists.
+export const MIGRATE_V36_TO_V37 = `
+CREATE TABLE IF NOT EXISTS channel_playlist (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  campaign_id INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+  channel     TEXT    NOT NULL CHECK (channel IN ('track1','track2','combat')),
+  path        TEXT    NOT NULL,
+  file_name   TEXT    NOT NULL,
+  position    INTEGER NOT NULL DEFAULT 0,
+  created_at  TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_channel_playlist_campaign
+  ON channel_playlist(campaign_id, channel, position);
+UPDATE schema_version SET version = 37;
 `
 
 // Use the SCHEMA_VERSION constant directly so there's a single source of truth.

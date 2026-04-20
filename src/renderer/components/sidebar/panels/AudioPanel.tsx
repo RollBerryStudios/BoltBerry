@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useAudioStore, type ChannelId, type AudioBoard, type AudioBoardSlot } from '../../../stores/audioStore'
+import { useAudioStore, type ChannelId, type AudioBoard, type AudioBoardSlot, type PlaylistEntry } from '../../../stores/audioStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import { useUIStore } from '../../../stores/uiStore'
 
@@ -19,10 +19,11 @@ const VOLUME_COL: Record<ChannelId, string> = {
   combat: 'combat_volume',
 }
 
-function ChannelStrip({ chId, label, activeMapId, combatControl }: {
+function ChannelStrip({ chId, label, activeMapId, activeCampaignId, combatControl }: {
   chId: ChannelId
   label: string
   activeMapId: number | null
+  activeCampaignId: number | null
   /** Rendered on the 'combat' strip only — integrates the combat-mode
    *  enable/disable toggle into the Kampf card instead of floating it
    *  between other tracks. */
@@ -32,17 +33,77 @@ function ChannelStrip({ chId, label, activeMapId, combatControl }: {
   const store = useAudioStore()
   const ch = store[chId]
   const combatActive = useAudioStore((s) => s.combatActive)
+  const [showPlaylist, setShowPlaylist] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
 
   const disabled = chId !== 'combat' && combatActive
 
-  async function handleImport() {
-    if (!window.electronAPI) return
+  // Close the dropdown on outside click so nested context menus don't
+  // pile up. Escape-to-close is handled in the key listener below.
+  useEffect(() => {
+    if (!showPlaylist) return
+    function onClickOutside(e: MouseEvent) {
+      if (menuRef.current?.contains(e.target as Node)) return
+      setShowPlaylist(false)
+    }
+    function onKey(e: KeyboardEvent) { if (e.key === 'Escape') setShowPlaylist(false) }
+    document.addEventListener('mousedown', onClickOutside)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onClickOutside)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [showPlaylist])
+
+  // Add a track to the channel's playlist. Persists to DB and updates
+  // the store so the dropdown reflects the new entry immediately. Picks
+  // the new track as active when the playlist was previously empty so
+  // the ▶ button has something to play without requiring a second click.
+  async function handleAddTrack() {
+    if (!window.electronAPI || !activeCampaignId) return
     try {
       const result = await window.electronAPI.importFile('audio')
-      if (result) store.loadChannel(chId, result.path)
+      if (!result) return
+      const fileName = result.path.split(/[\\/]/).pop() ?? result.path
+      const position = ch.playlist.length
+      const dbResult = await window.electronAPI.dbRun(
+        `INSERT INTO channel_playlist (campaign_id, channel, path, file_name, position)
+         VALUES (?, ?, ?, ?, ?)`,
+        [activeCampaignId, chId, result.path, fileName, position],
+      )
+      const id = Number(dbResult?.lastInsertRowid ?? 0)
+      if (!id) return
+      const wasEmpty = ch.playlist.length === 0
+      store.addPlaylistEntry(chId, { id, path: result.path, fileName }, wasEmpty)
+      if (wasEmpty) store.loadChannel(chId, result.path)
     } catch (err) {
-      console.error('[AudioPanel] importFile failed:', err)
+      console.error('[AudioPanel] addTrack failed:', err)
     }
+  }
+
+  // Activate a pre-assigned track. Also closes the dropdown so the DM
+  // can ▶ immediately without a second click.
+  function handleActivate(entry: PlaylistEntry) {
+    store.loadChannel(chId, entry.path)
+    setShowPlaylist(false)
+  }
+
+  async function handleRemoveTrack(entry: PlaylistEntry, evt: React.MouseEvent) {
+    evt.stopPropagation()
+    if (!window.electronAPI) return
+    try {
+      await window.electronAPI.dbRun(
+        'DELETE FROM channel_playlist WHERE id = ?', [entry.id],
+      )
+      store.removePlaylistEntry(chId, entry.id)
+    } catch (err) {
+      console.error('[AudioPanel] removeTrack failed:', err)
+    }
+  }
+
+  function handleChannelContextMenu(e: React.MouseEvent) {
+    e.preventDefault()
+    setShowPlaylist((v) => !v)
   }
 
   async function handleSetAmbient() {
@@ -61,9 +122,17 @@ function ChannelStrip({ chId, label, activeMapId, combatControl }: {
   const channelClass = classes.join(' ')
 
   return (
-    <div className={channelClass}>
+    <div className={channelClass} onContextMenu={handleChannelContextMenu}>
       <div className="audio-channel-head">
         <span className="audio-channel-label">{label}</span>
+        {ch.playlist.length > 1 && (
+          <span
+            className="audio-channel-playlist-count"
+            title={t('audio.playlistCount', { count: ch.playlist.length })}
+          >
+            ♪ {ch.playlist.length}
+          </span>
+        )}
         {ch.playing && (
           <span className="audio-channel-badge animate-pulse">♪ {t('audio.play')}</span>
         )}
@@ -79,15 +148,64 @@ function ChannelStrip({ chId, label, activeMapId, combatControl }: {
         )}
       </div>
 
-      <button
-        className={`audio-channel-file${ch.filePath ? '' : ' empty'}`}
-        onClick={handleImport}
-        disabled={disabled}
-        title={ch.filePath ?? t('audio.loadFile')}
-      >
-        <span className="audio-channel-file-icon" aria-hidden="true">♪</span>
-        <span className="audio-channel-file-name">{ch.fileName ?? t('audio.loadFile')}</span>
-      </button>
+      {/* Current track display + playlist picker. Left-click swaps the
+          active track when there are multiple (or opens the add-file
+          picker when the playlist is empty). Right-click anywhere on
+          the strip also opens the dropdown — the contextmenu handler
+          above catches it. */}
+      <div className="audio-channel-file-wrap">
+        <button
+          className={`audio-channel-file${ch.filePath ? '' : ' empty'}`}
+          onClick={() => {
+            if (ch.playlist.length === 0) { void handleAddTrack(); return }
+            setShowPlaylist((v) => !v)
+          }}
+          disabled={disabled}
+          title={ch.filePath ?? t('audio.loadFile')}
+        >
+          <span className="audio-channel-file-icon" aria-hidden="true">♪</span>
+          <span className="audio-channel-file-name">{ch.fileName ?? t('audio.loadFile')}</span>
+          {ch.playlist.length > 0 && <span className="audio-channel-file-chev">▾</span>}
+        </button>
+        {showPlaylist && (
+          <div className="audio-channel-playlist" ref={menuRef} role="menu">
+            {ch.playlist.length === 0 && (
+              <div className="audio-channel-playlist-empty">{t('audio.playlistEmpty')}</div>
+            )}
+            {ch.playlist.map((entry) => {
+              const isActive = entry.path === ch.filePath
+              return (
+                <div
+                  key={entry.id}
+                  className={`audio-channel-playlist-item${isActive ? ' active' : ''}`}
+                  role="menuitem"
+                  onClick={() => handleActivate(entry)}
+                  title={entry.path}
+                >
+                  <span className="audio-channel-playlist-item-icon">{isActive ? '▶' : '♪'}</span>
+                  <span className="audio-channel-playlist-item-name">{entry.fileName}</span>
+                  <button
+                    type="button"
+                    className="audio-channel-playlist-item-remove"
+                    onClick={(e) => handleRemoveTrack(entry, e)}
+                    title={t('audio.removeTrack')}
+                    aria-label={t('audio.removeTrack')}
+                  >
+                    ✕
+                  </button>
+                </div>
+              )
+            })}
+            <button
+              type="button"
+              className="audio-channel-playlist-add"
+              onClick={() => { setShowPlaylist(false); void handleAddTrack() }}
+            >
+              + {t('audio.addTrack')}
+            </button>
+          </div>
+        )}
+      </div>
 
       {ch.filePath && (
         <div className="audio-channel-seek">
@@ -382,6 +500,7 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
     setMasterVolume, setSfxVolume, setActiveBoardIndex,
     activateCombat, deactivateCombat,
     triggerSfx, boards, activeBoardIndex, setBoards,
+    setChannelPlaylist, clearAllPlaylists,
   } = useAudioStore()
 
   const [editingSlot, setEditingSlot] = useState<{ boardId: number; slotIndex: number } | null>(null)
@@ -421,6 +540,40 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
 
   useEffect(() => { loadBoards() }, [loadBoards])
 
+  // Hydrate per-channel playlists when the active campaign changes so
+  // the right-click menu always reflects the DM's pre-assigned tracks.
+  // Keyed on `activeCampaignId` so campaign switches clear + reload the
+  // store cleanly (otherwise track1's playlist would bleed between
+  // campaigns because ChannelState lives in the singleton store).
+  useEffect(() => {
+    if (!activeCampaignId) { clearAllPlaylists(); return }
+    let cancelled = false
+    ;(async () => {
+      try {
+        const rows = await window.electronAPI?.dbQuery<{
+          id: number; channel: ChannelId; path: string; file_name: string
+        }>(
+          `SELECT id, channel, path, file_name
+             FROM channel_playlist
+            WHERE campaign_id = ?
+            ORDER BY channel, position, id`,
+          [activeCampaignId],
+        ) ?? []
+        if (cancelled) return
+        const byChannel: Record<ChannelId, PlaylistEntry[]> = { track1: [], track2: [], combat: [] }
+        for (const r of rows) {
+          byChannel[r.channel]?.push({ id: r.id, path: r.path, fileName: r.file_name })
+        }
+        setChannelPlaylist('track1', byChannel.track1)
+        setChannelPlaylist('track2', byChannel.track2)
+        setChannelPlaylist('combat', byChannel.combat)
+      } catch (err) {
+        console.error('[AudioPanel] loadPlaylists failed:', err)
+      }
+    })()
+    return () => { cancelled = true }
+  }, [activeCampaignId, setChannelPlaylist, clearAllPlaylists])
+
   const activeBoard = boards[activeBoardIndex] ?? null
 
   function handleTriggerSlot(slotIndex: number) {
@@ -439,8 +592,8 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
         <span className="audio-master-value">{Math.round(masterVolume * 100)}%</span>
       </div>
 
-      <ChannelStrip chId="track1" label={t('audio.track1')} activeMapId={activeMapId} />
-      <ChannelStrip chId="track2" label={t('audio.track2')} activeMapId={activeMapId} />
+      <ChannelStrip chId="track1" label={t('audio.track1')} activeMapId={activeMapId} activeCampaignId={activeCampaignId} />
+      <ChannelStrip chId="track2" label={t('audio.track2')} activeMapId={activeMapId} activeCampaignId={activeCampaignId} />
       {/* The combat-mode toggle is a gameplay action (ducks the music
           tracks and swaps to the Kampf channel). It has no place in the
           CampaignView content overview — that view only manages assets,
@@ -450,6 +603,7 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
         chId="combat"
         label={t('audio.combat')}
         activeMapId={activeMapId}
+        activeCampaignId={activeCampaignId}
         combatControl={layout === 'narrow' ? {
           active: combatActive,
           onToggle: combatActive ? deactivateCombat : activateCombat,

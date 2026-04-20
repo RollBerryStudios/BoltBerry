@@ -652,6 +652,11 @@
   "audio": {
     "title": "Background Music",
     "loadFile": "♪ Load file…",
+    "addTrack": "Add track",
+    "removeTrack": "Remove track",
+    "playlistEmpty": "No tracks assigned",
+    "playlistCount": "{{count}} tracks assigned",
+    "playlistCount_one": "{{count}} track assigned",
     "play": "Play",
     "pause": "Pause",
     "stop": "Stop / Rewind",

@@ -652,6 +652,11 @@
   "audio": {
     "title": "Hintergrundmusik",
     "loadFile": "♪ Datei laden…",
+    "addTrack": "Titel hinzufügen",
+    "removeTrack": "Titel entfernen",
+    "playlistEmpty": "Keine Titel zugeordnet",
+    "playlistCount": "{{count}} Titel zugeordnet",
+    "playlistCount_one": "{{count}} Titel zugeordnet",
     "play": "Abspielen",
     "pause": "Pause",
     "stop": "Stop / An den Anfang",

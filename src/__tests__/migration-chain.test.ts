@@ -50,6 +50,7 @@ import {
   MIGRATE_V33_TO_V34,
   MIGRATE_V34_TO_V35,
   MIGRATE_V35_TO_V36,
+  MIGRATE_V36_TO_V37,
 } from '../main/db/schema'
 
 // Ordered table of all migrations: [from, to, sql]
@@ -89,6 +90,7 @@ const CHAIN: Array<{ from: number; to: number; sql: string; name: string }> = [
   { from: 33, to: 34, sql: MIGRATE_V33_TO_V34, name: 'V33→V34'},
   { from: 34, to: 35, sql: MIGRATE_V34_TO_V35, name: 'V34→V35'},
   { from: 35, to: 36, sql: MIGRATE_V35_TO_V36, name: 'V35→V36'},
+  { from: 36, to: 37, sql: MIGRATE_V36_TO_V37, name: 'V36→V37'},
 ]
 
 describe('Migration chain', () => {
