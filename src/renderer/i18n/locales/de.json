@@ -468,6 +468,23 @@
     "cancel": "Abbrechen",
     "confirm": "Übernehmen"
   },
+  "npcWizard": {
+    "openButton": "Als NSC klonen",
+    "title": "NSC aus Monster erstellen",
+    "name": "Name",
+    "faction": "Fraktion",
+    "factionParty": "Gruppe",
+    "factionFriendly": "Freundlich",
+    "factionNeutral": "Neutral",
+    "factionEnemy": "Gegner",
+    "image": "Bild",
+    "uploadImage": "Eigenes Bild hochladen",
+    "replaceUpload": "Anderes Bild wählen",
+    "clearUpload": "Upload entfernen",
+    "save": "Speichern",
+    "saved": "„{{name}}“ in der NSC-Bibliothek gespeichert",
+    "saveFailed": "Konnte NSC nicht speichern"
+  },
   "statusBar": {
     "playerConnected": "Spieler-Monitor verbunden",
     "playerDisconnected": "Kein Spieler-Monitor",

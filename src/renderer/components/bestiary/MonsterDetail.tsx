@@ -7,6 +7,7 @@ import { useUIStore } from '../../stores/uiStore'
 import { showToast } from '../shared/Toast'
 import { formatMod, localized, localizedArray, pickName, tokenTint } from './util'
 import { monsterHandout, spawnMonsterOnMap } from './actions'
+import { NpcCloneWizard } from './NpcCloneWizard'
 
 type LoadedMonster = (MonsterRecord & {
   tokenDefaultUrl: string | null
@@ -471,6 +472,7 @@ function MonsterActions({
   const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
   const playerConnected = useUIStore((s) => s.playerConnected)
   const [busy, setBusy] = useState(false)
+  const [showNpcWizard, setShowNpcWizard] = useState(false)
 
   const map = useMemo(() => {
     if (!activeMapId) return activeMaps[0] ?? null
@@ -550,6 +552,27 @@ function MonsterActions({
       >
         {isAlreadyDefault ? '★' : '☆'} {isAlreadyDefault ? t('bestiary.clearDefault') : t('bestiary.setDefault')}
       </button>
+      {/* Clone into the NPC library — separate from the SRD monster
+          so the DM can rename / rebadge / re-skin without touching
+          the canonical source row. */}
+      <button
+        type="button"
+        className="bb-best-action-btn"
+        onClick={() => setShowNpcWizard(true)}
+        title={t('npcWizard.openButton')}
+      >
+        🧑 {t('npcWizard.openButton')}
+      </button>
+      {showNpcWizard && (
+        <NpcCloneWizard
+          monster={record}
+          language={language}
+          defaultImageUrl={imageUrl ?? record.tokenDefaultUrl}
+          defaultTokenFile={currentFile ?? record.userDefaultFile ?? null}
+          onClose={() => setShowNpcWizard(false)}
+          onSaved={() => setShowNpcWizard(false)}
+        />
+      )}
     </div>
   )
 }

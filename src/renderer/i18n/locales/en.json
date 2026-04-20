@@ -468,6 +468,23 @@
     "cancel": "Cancel",
     "confirm": "Apply"
   },
+  "npcWizard": {
+    "openButton": "Clone as NPC",
+    "title": "Create NPC from monster",
+    "name": "Name",
+    "faction": "Faction",
+    "factionParty": "Party",
+    "factionFriendly": "Friendly",
+    "factionNeutral": "Neutral",
+    "factionEnemy": "Enemy",
+    "image": "Image",
+    "uploadImage": "Upload custom image",
+    "replaceUpload": "Pick a different image",
+    "clearUpload": "Remove upload",
+    "save": "Save",
+    "saved": "Saved \"{{name}}\" to the NPC library",
+    "saveFailed": "Could not save NPC"
+  },
   "statusBar": {
     "playerConnected": "Player monitor connected",
     "playerDisconnected": "No player monitor",
