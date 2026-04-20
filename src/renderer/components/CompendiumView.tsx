@@ -621,13 +621,19 @@ function CompendiumStyles() {
       }
 
       /* ── Body ──────────────────────────────────────────────── */
+      /* Flex, not a fixed 2-column grid: when the user only has a
+         single PDF visible the sidebar does not render at all, and
+         the old 280px + 1fr grid left main stuck in the 280px column
+         with the rest of the window empty. Flex lets main reclaim
+         the full width when it is the only child. */
       .bb-comp-body {
         flex: 1; min-height: 0;
-        display: grid;
-        grid-template-columns: 280px 1fr;
+        display: flex;
         overflow: hidden;
       }
       .bb-comp-sidebar {
+        width: 280px;
+        flex-shrink: 0;
         border-right: 1px solid var(--border);
         background: var(--bg-surface);
         overflow-y: auto;
@@ -692,8 +698,8 @@ function CompendiumStyles() {
       /* ── Main area ─────────────────────────────────────────── */
       .bb-comp-main {
         position: relative;
+        flex: 1; min-width: 0; min-height: 0;
         display: flex; flex-direction: column;
-        min-width: 0; min-height: 0;
         padding: var(--sp-5);
       }
       .bb-comp-main > :not(.bb-comp-error) { flex: 1; min-height: 0; }
