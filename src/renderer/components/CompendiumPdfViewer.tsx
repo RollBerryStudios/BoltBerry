@@ -963,9 +963,9 @@ function PdfViewerStyles() {
         overflow: auto;
         padding: var(--sp-5);
         background: var(--bg-base);
-        /* `display: block` + margin auto centers the canvas when it's
+        /* display: block + margin auto centers the canvas when it's
            narrower than the viewport, but stops clipping the left edge
-           when the page is wider — `flex + justify-content: center`
+           when the page is wider — flex + justify-content: center
            anchors overflow off-screen and the user can't scroll back. */
         text-align: center;
       }
