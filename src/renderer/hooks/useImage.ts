@@ -60,12 +60,18 @@ export function useImage(src: string | null): HTMLImageElement | null {
       image.src = dataUrl
     }
 
-    if (src.startsWith('data:')) {
-      setFromData(src)
-    } else if (src.startsWith('bestiary://')) {
+    // Peel a leading `file://` so callers that unconditionally prefix it
+    // (TokenLayer, PlayerApp, TokenPanel) still reach the right scheme
+    // handler below. The full src stays the cache key so invalidation
+    // with the prefixed form keeps working.
+    const effective = src.startsWith('file://') ? src.substring(7) : src
+
+    if (effective.startsWith('data:')) {
+      setFromData(effective)
+    } else if (effective.startsWith('bestiary://')) {
       // Shipped dataset token — resolve on demand so the DB / sync
       // payload can keep the compact reference instead of a 50 KB data URL.
-      const m = src.match(/^bestiary:\/\/([^/]+)\/(.+)$/)
+      const m = effective.match(/^bestiary:\/\/([^/]+)\/(.+)$/)
       if (!m) { setImg(null); return }
       const slug = m[1]
       const file = m[2]
@@ -74,11 +80,10 @@ export function useImage(src: string | null): HTMLImageElement | null {
         .then((data) => setFromData(data))
         .catch(() => { if (!cancelled) setImg(null) })
     } else {
-      // Strip file:// prefix if present, then load relative path through main process.
-      // Player window has no window.electronAPI — fall back to window.playerAPI.
-      const relativePath = src.startsWith('file://') ? src.substring(7) : src
+      // Treat as a userData-relative path and route through the main-process
+      // asset reader. Player window has no window.electronAPI — fall back.
       const loader = window.electronAPI?.getImageAsBase64 ?? window.playerAPI?.getImageAsBase64
-      loader?.(relativePath)
+      loader?.(effective)
         .then((data) => setFromData(data))
         .catch(() => { if (!cancelled) setImg(null) })
     }

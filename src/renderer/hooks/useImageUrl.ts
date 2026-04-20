@@ -46,9 +46,15 @@ export function useImageUrl(src: string | null): string | null {
       return
     }
 
+    // Peel a leading `file://` so callers that unconditionally prefix it
+    // still reach the right scheme handler below. The full src stays the
+    // cache key so `invalidateImageUrlCache` using the prefixed form
+    // keeps working.
+    const effective = src.startsWith('file://') ? src.substring(7) : src
+
     // data: URLs are already usable directly
-    if (src.startsWith('data:')) {
-      setUrl(src)
+    if (effective.startsWith('data:')) {
+      setUrl(effective)
       return
     }
 
@@ -58,8 +64,8 @@ export function useImageUrl(src: string | null): string | null {
     // short in the DB (avoids storing 30–50 KB of base64 per token row)
     // and resolve lazily through the data handler, which returns a
     // base64 data URL the same way the asset reader does.
-    if (src.startsWith('bestiary://')) {
-      const parsed = parseBestiaryUrl(src)
+    if (effective.startsWith('bestiary://')) {
+      const parsed = parseBestiaryUrl(effective)
       if (!parsed) {
         cache.set(src, MISSING)
         setUrl(null)
@@ -84,9 +90,8 @@ export function useImageUrl(src: string | null): string | null {
       return () => { cancelled = true }
     }
 
-    // Strip file:// prefix and load through main process
-    const relativePath = src.startsWith('file://') ? src.substring(7) : src
-    window.electronAPI?.getImageAsBase64(relativePath).then((imageData) => {
+    // Route as a userData-relative path through the main process.
+    window.electronAPI?.getImageAsBase64(effective).then((imageData) => {
       if (cancelled) return
       if (imageData) {
         cache.set(src, imageData)

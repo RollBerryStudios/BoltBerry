@@ -450,7 +450,7 @@ export function TokenLibraryPanel() {
           onChange={setTypeFilter}
           label={t('library.filterType')}
           allLabel={t('library.filterAll')}
-          options={availableTypes.map((v) => ({ value: v, label: v }))}
+          options={availableTypes.map((v) => ({ value: v, label: t(`library.type_${v}`, v) }))}
         />
         <FilterSelect
           value={factionFilter}
@@ -867,7 +867,12 @@ function MonsterPreviewDialog({
   imageUrl: string | null
   onClose: () => void
 }) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  // Lazy-loaded full dataset record — filled when the template has a
+  // slug. Provides the rich bilingual traits / actions / legendary /
+  // reactions that the minimal stat_block on token_templates doesn't
+  // carry.
+  const [wikiRecord, setWikiRecord] = useState<(import('@shared/ipc-types').MonsterRecord) | null>(null)
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
@@ -875,9 +880,26 @@ function MonsterPreviewDialog({
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
 
+  useEffect(() => {
+    if (!tpl.slug || !window.electronAPI?.getMonster) return
+    let alive = true
+    ;(async () => {
+      try {
+        const row = await window.electronAPI!.getMonster!(tpl.slug!)
+        if (alive && row) setWikiRecord(row)
+      } catch { /* silent — falls back to minimal stat_block */ }
+    })()
+    return () => { alive = false }
+  }, [tpl.slug])
+
   const color = tpl.marker_color ?? 'var(--text-muted)'
   const icon = creatureTypeIcon(tpl.creature_type)
   const sb = tpl.stat_block
+  const lang: 'de' | 'en' = i18n.language === 'en' ? 'en' : 'de'
+  const wikiTraits = getNamedSection(wikiRecord?.traits, lang)
+  const wikiActions = getNamedSection(wikiRecord?.actions, lang)
+  const wikiLegendary = getNamedSection(wikiRecord?.legendaryActions, lang)
+  const wikiReactions = getNamedSection(wikiRecord?.reactions, lang)
 
   return (
     <div
@@ -934,7 +956,22 @@ function MonsterPreviewDialog({
             </div>
           )}
 
-          {sb && sb.attacks.length > 0 && (
+          {/* Prefer the bilingual dataset's actions when available
+              (every SRD creature); fall back to the minimal stat_block
+              attack list for user-authored templates. */}
+          {wikiActions.length > 0 ? (
+            <section className="monster-preview-section">
+              <h3>{t('library.actions')}</h3>
+              <ul>
+                {wikiActions.map((a, i) => (
+                  <li key={`${a.name}-${i}`}>
+                    <span className="monster-preview-attack-name">{a.name}.</span>{' '}
+                    <span>{a.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : sb && sb.attacks.length > 0 && (
             <section className="monster-preview-section">
               <h3>{t('library.attacks')}</h3>
               <ul>
@@ -949,11 +986,51 @@ function MonsterPreviewDialog({
             </section>
           )}
 
-          {sb && sb.traits.length > 0 && (
+          {wikiTraits.length > 0 ? (
+            <section className="monster-preview-section">
+              <h3>{t('library.traits')}</h3>
+              <ul>
+                {wikiTraits.map((tr, i) => (
+                  <li key={`${tr.name}-${i}`}>
+                    <span className="monster-preview-attack-name">{tr.name}.</span>{' '}
+                    <span>{tr.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : sb && sb.traits.length > 0 && (
             <section className="monster-preview-section">
               <h3>{t('library.traits')}</h3>
               <ul>
                 {sb.traits.map((tr, i) => <li key={i}>{tr}</li>)}
+              </ul>
+            </section>
+          )}
+
+          {wikiLegendary.length > 0 && (
+            <section className="monster-preview-section">
+              <h3>{t('library.legendaryActions')}</h3>
+              <ul>
+                {wikiLegendary.map((a, i) => (
+                  <li key={`${a.name}-${i}`}>
+                    <span className="monster-preview-attack-name">{a.name}.</span>{' '}
+                    <span>{a.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {wikiReactions.length > 0 && (
+            <section className="monster-preview-section">
+              <h3>{t('library.reactions')}</h3>
+              <ul>
+                {wikiReactions.map((a, i) => (
+                  <li key={`${a.name}-${i}`}>
+                    <span className="monster-preview-attack-name">{a.name}.</span>{' '}
+                    <span>{a.text}</span>
+                  </li>
+                ))}
               </ul>
             </section>
           )}
@@ -972,6 +1049,23 @@ function MonsterPreviewDialog({
 
 // Crude creature-type → glyph fallback for cards without artwork. Keeps
 // the visual language consistent (glyph stays subtle, not emoji-spam).
+// Pulls the localised [{name, text}] list out of a bilingual dataset
+// field. The dataset sometimes prefixes a descriptive string before the
+// named entries (legendaryActions.en often starts with a one-liner like
+// "The aboleth can take 3 legendary actions…") — those plain strings
+// are skipped so the preview only renders the structured named rows.
+function getNamedSection(
+  src: { en: Array<{ name: string; text: string } | string>
+       ; de: Array<{ name: string; text: string } | string> } | undefined,
+  lang: 'de' | 'en',
+): Array<{ name: string; text: string }> {
+  if (!src) return []
+  const arr = src[lang] ?? src.en ?? src.de ?? []
+  return arr.filter((x): x is { name: string; text: string } =>
+    typeof x === 'object' && x !== null && 'name' in x && 'text' in x,
+  )
+}
+
 function creatureTypeIcon(type: string | null | undefined): string {
   const t = (type ?? '').toLowerCase()
   if (t.includes('drag'))                       return '🐉'
