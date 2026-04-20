@@ -234,7 +234,6 @@ export interface ItemRecord {
   rarity: L10n
   cost?: number | null
   source?: L10n
-  weight?: number | null
   classification?: L10n | string
   description?: L10n | string
   damage?: string
