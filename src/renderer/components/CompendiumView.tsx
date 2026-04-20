@@ -27,6 +27,9 @@ export function CompendiumView() {
   const setTopView = useUIStore((s) => s.setTopView)
   const language = useUIStore((s) => s.language)
   const toggleLanguage = useUIStore((s) => s.toggleLanguage)
+  // Reserve space for OS-native window controls (matches DmTitleBar).
+  const isDarwin = typeof navigator !== 'undefined' &&
+    navigator.userAgent.toUpperCase().includes('MAC')
 
   const [files, setFiles] = useState<CompendiumFile[]>([])
   const [selectedPath, setSelectedPath] = useState<string | null>(null)
@@ -192,6 +195,7 @@ export function CompendiumView() {
 
       {/* Top bar */}
       <header className="bb-comp-topbar" style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}>
+        {isDarwin && <div className="bb-comp-traffic-space" aria-hidden="true" />}
         <button
           type="button"
           className="bb-comp-back"
@@ -249,6 +253,7 @@ export function CompendiumView() {
             ))}
           </div>
         </div>
+        {!isDarwin && <div className="bb-comp-controls-space" aria-hidden="true" />}
       </header>
 
       {/* Short visible credit in proximity to the bundled SRD PDFs.
@@ -456,6 +461,12 @@ function CompendiumStyles() {
         flex-shrink: 0;
         user-select: none;
       }
+      /* Reserve room for the OS-native window-control buttons, mirroring
+         DmTitleBar (72px traffic lights on macOS, 140px caption buttons
+         on Windows / Linux). Without this, Windows minimise / maximise /
+         close overlap the import + folder buttons. */
+      .bb-comp-traffic-space  { width: 72px;  height: 100%; flex-shrink: 0; }
+      .bb-comp-controls-space { width: 140px; height: 100%; flex-shrink: 0; }
       .bb-comp-back {
         display: inline-flex; align-items: center; gap: 6px;
         padding: 5px 12px;

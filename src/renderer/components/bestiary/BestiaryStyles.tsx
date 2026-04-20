@@ -30,6 +30,12 @@ export function BestiaryStyles() {
         flex-shrink: 0;
         user-select: none;
       }
+      /* Reserve room for the OS-native window-control buttons so the
+         search field + language pill aren't covered. Mirrors the
+         convention used by DmTitleBar (72px traffic lights on macOS,
+         140px caption buttons on Windows / Linux). */
+      .bb-best-traffic-space  { width: 72px;  height: 100%; flex-shrink: 0; }
+      .bb-best-controls-space { width: 140px; height: 100%; flex-shrink: 0; }
       .bb-best-back {
         display: inline-flex; align-items: center; gap: 6px;
         padding: 5px 12px;
@@ -349,6 +355,38 @@ export function BestiaryStyles() {
         color: var(--text-primary);
         font-size: 12px;
         font-weight: 600;
+      }
+
+      /* ── LFS-pointer hint (shown when the token webps haven't been
+            fetched yet — e.g. fresh clone without `git lfs pull`). */
+      .bb-best-lfs-hint {
+        display: flex; align-items: flex-start; gap: 10px;
+        padding: 10px 14px;
+        background: rgba(47, 107, 255, 0.08);
+        border: 1px solid var(--accent-blue);
+        border-radius: var(--radius);
+        font-size: 12px;
+        color: var(--text-secondary);
+        line-height: 1.5;
+      }
+      .bb-best-lfs-hint-icon {
+        font-size: 18px;
+        line-height: 1;
+        color: var(--accent-blue-light);
+      }
+      .bb-best-lfs-hint code {
+        display: inline-block;
+        margin-top: 2px;
+        padding: 2px 6px;
+        background: var(--bg-base);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        color: var(--text-primary);
+        font-size: 11px;
+      }
+      .bb-best-lfs-hint strong {
+        color: var(--accent-blue-light);
+        margin-right: 4px;
       }
 
       /* ── Action bar (Add to map / Send to player / …) ─────── */

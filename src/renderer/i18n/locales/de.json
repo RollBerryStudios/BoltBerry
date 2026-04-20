@@ -275,6 +275,8 @@
     "clearDefault": "Standard zurücksetzen",
     "defaultSet": "Standardportrait aktualisiert",
     "defaultCleared": "Standardportrait zurückgesetzt",
+    "tokensMissingTitle": "Token-Bilder nicht geladen.",
+    "tokensMissingBody": "Die WebP-Dateien dieses Datensatzes liegen in Git LFS. Führe einmalig",
     "attributionPrefix": "Enthält SRD 5.1-Inhalte",
     "attributionSuffix": "vollständige Attribution"
   },

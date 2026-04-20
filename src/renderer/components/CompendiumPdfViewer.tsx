@@ -962,13 +962,18 @@ function PdfViewerStyles() {
         flex: 1; min-height: 0;
         overflow: auto;
         padding: var(--sp-5);
-        display: flex; justify-content: center; align-items: flex-start;
         background: var(--bg-base);
+        /* `display: block` + margin auto centers the canvas when it's
+           narrower than the viewport, but stops clipping the left edge
+           when the page is wider — `flex + justify-content: center`
+           anchors overflow off-screen and the user can't scroll back. */
+        text-align: center;
       }
       .bb-pdf-canvas {
         background: #fff;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-        display: block;
+        display: inline-block;
+        max-width: none;
       }
 
       .bb-pdf-loading {

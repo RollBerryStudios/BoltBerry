@@ -275,6 +275,8 @@
     "clearDefault": "Reset default",
     "defaultSet": "Default portrait updated",
     "defaultCleared": "Default portrait reset",
+    "tokensMissingTitle": "Token artwork not downloaded.",
+    "tokensMissingBody": "The webp images for this dataset are stored via Git LFS. Run",
     "attributionPrefix": "Includes SRD 5.1 content",
     "attributionSuffix": "full attribution"
   },

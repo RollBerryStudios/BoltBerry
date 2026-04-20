@@ -5,7 +5,34 @@ once it hits 1.0; until then, 0.x releases may break prior assumptions.
 
 ## Unreleased
 
-(nothing yet)
+- **Wiki** — bilingual SRD 5.1 reference: 263 monsters, 203 items, 313
+  spells, 13k+ token variants. Search, filters, sort, deep-link from
+  Welcome / Command Palette / token context-menu.
+- **Default-token override** — pin any variant as a creature's
+  portrait from the Wiki; persists across sessions and applies to
+  every spawn surface (Wiki, encounter picker, Token Library).
+- **Wiki ↔ gameplay** — spawn straight onto the active map, push
+  monster / item / spell cards to the player window, "Open in Wiki"
+  on token right-click and initiative rows.
+- **`bestiary://` URL scheme** — replaces the 30–50 KB base64 data URL
+  per spawned token with a compact reference; image loaders resolve
+  on demand, slashing DB bloat.
+- **Top bars** — Wiki + Compendium reserve space for the OS-native
+  window controls (72 px on macOS traffic lights, 140 px on
+  Windows / Linux caption buttons) so the action buttons aren't
+  clipped.
+- **Compendium PDF rendering** — switched from `flex + justify-center`
+  to `text-align: center` on the canvas wrap; pages wider than the
+  viewport now scroll properly instead of clipping the left edge.
+- **Git LFS prerequisite** — token webps live in LFS; `.gitattributes`
+  now covers `resources/data/**/*.webp` and the app surfaces a hint
+  in the Wiki when it detects un-fetched LFS pointers.
+- **Schema v34** — adds `monster_defaults` for the portrait override
+  and migrates the legacy SRD seed onto the bestiary:// scheme.
+- Defensive renderers for `ac` / `savingThrows` / `properties` shape
+  drift in the dataset (some monsters store `ac` as plain strings,
+  banshee uses an object for `savingThrows`, items use L10n strings
+  for `properties` not arrays).
 
 ## 0.20.0 — 2026-04-18
 

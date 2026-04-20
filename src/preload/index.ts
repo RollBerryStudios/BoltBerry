@@ -144,6 +144,7 @@ export const dmApi = {
   getMonster: (slug: string): Promise<(MonsterRecord & {
     tokenDefaultUrl: string | null
     userDefaultFile: string | null
+    tokensMissing: boolean
   }) | null> =>
     ipcRenderer.invoke(IPC.DATA_GET_MONSTER, slug),
   getMonsterTokenUrl: (slug: string, file: string): Promise<string | null> =>

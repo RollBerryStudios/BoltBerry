@@ -23,6 +23,12 @@ export function BestiaryView() {
   const toggleLanguage = useUIStore((s) => s.toggleLanguage)
   const target = useUIStore((s) => s.bestiaryTarget)
   const clearTarget = useUIStore((s) => s.clearBestiaryTarget)
+  // Match the DmTitleBar convention: macOS reserves 72px on the LEFT
+  // for the traffic lights; Windows/Linux reserve 140px on the RIGHT
+  // for the min/max/close caption buttons. Without this, those native
+  // controls overlap the search field + language pill.
+  const isDarwin = typeof navigator !== 'undefined' &&
+    navigator.userAgent.toUpperCase().includes('MAC')
 
   const [tab, setTab] = useState<BestiaryTab>(() => {
     try {
@@ -64,6 +70,7 @@ export function BestiaryView() {
 
       {/* Top bar */}
       <header className="bb-best-topbar" style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}>
+        {isDarwin && <div className="bb-best-traffic-space" aria-hidden="true" />}
         <button
           type="button"
           className="bb-best-back"
@@ -113,6 +120,7 @@ export function BestiaryView() {
             ))}
           </div>
         </div>
+        {!isDarwin && <div className="bb-best-controls-space" aria-hidden="true" />}
       </header>
 
       {/* Attribution strip — SRD 5.1 CC-BY-4.0 is required visible near the

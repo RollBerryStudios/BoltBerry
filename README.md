@@ -72,14 +72,21 @@ Gebaut mit Electron, React, TypeScript und SQLite. Läuft auf macOS, Windows und
 
 ### Schnellstart
 
-**Voraussetzungen:** Node.js 20+, npm 10+
+**Voraussetzungen:** Node.js 20+, npm 10+, **[Git LFS](https://git-lfs.com)** (für die ~13.000 Token-WebPs des Wikis)
 
 ```bash
+git lfs install                                    # einmalig pro Account
 git clone https://github.com/RollBerry-Studios/BoltBerry.git
 cd BoltBerry
+git lfs pull                                       # holt die Token-Bilder
 npm install
 npm run dev
 ```
+
+> **Hinweis:** Ohne `git lfs pull` ersetzt LFS die WebP-Dateien durch
+> Pointer-Stubs. Die App erkennt das und blendet im Wiki einen Hinweis
+> ein — die Stat-Blocks funktionieren trotzdem, nur die Token-Bilder
+> bleiben leer.
 
 ### Builds erstellen
 
@@ -194,14 +201,21 @@ Built with Electron, React, TypeScript and SQLite. Runs on macOS, Windows and Li
 
 ### Getting Started
 
-**Prerequisites:** Node.js 20+, npm 10+
+**Prerequisites:** Node.js 20+, npm 10+, **[Git LFS](https://git-lfs.com)** (for the ~13,000 token webps that ship with the Wiki)
 
 ```bash
+git lfs install                                    # one-time per account
 git clone https://github.com/RollBerry-Studios/BoltBerry.git
 cd BoltBerry
+git lfs pull                                       # fetches the token artwork
 npm install
 npm run dev
 ```
+
+> **Heads up:** Without `git lfs pull` the webp files in
+> `resources/data/` are LFS pointer stubs. The app detects this and
+> shows a one-line hint inside the Wiki — stat blocks still work, only
+> the token artwork stays blank.
 
 ### Building
 

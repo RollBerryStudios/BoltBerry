@@ -11,6 +11,7 @@ import { monsterHandout, spawnMonsterOnMap } from './actions'
 type LoadedMonster = (MonsterRecord & {
   tokenDefaultUrl: string | null
   userDefaultFile: string | null
+  tokensMissing: boolean
 }) | null
 
 export function MonsterDetail({ slug, language }: { slug: string; language: AppLanguage }) {
@@ -114,9 +115,14 @@ export function MonsterDetail({ slug, language }: { slug: string; language: AppL
       <header className="bb-best-hero">
         <div className="bb-best-hero-portrait" style={{ borderColor: tint }}>
           {currentUrl ? (
-            <img src={currentUrl} alt={displayName} draggable={false} />
+            // The img is decorative — `alt=""` keeps the broken-image
+            // fallback (e.g. unfetched LFS pointer) from leaking the
+            // monster name across the portrait circle.
+            <img src={currentUrl} alt="" draggable={false} />
           ) : (
-            <span className="bb-best-hero-glyph" aria-hidden="true">👹</span>
+            <span className="bb-best-hero-glyph" aria-hidden="true">
+              {record.tokensMissing ? '⬇' : '👹'}
+            </span>
           )}
         </div>
         <div className="bb-best-hero-text">
@@ -136,6 +142,20 @@ export function MonsterDetail({ slug, language }: { slug: string; language: AppL
           </div>
         </div>
       </header>
+
+      {/* LFS hint — shown only when the dataset's token files are still
+          Git-LFS pointers. Saves the DM from chasing "broken images" in
+          a fresh clone. */}
+      {record.tokensMissing && (
+        <div className="bb-best-lfs-hint" role="status">
+          <span className="bb-best-lfs-hint-icon" aria-hidden="true">⬇</span>
+          <span>
+            <strong>{t('bestiary.tokensMissingTitle')}</strong>{' '}
+            {t('bestiary.tokensMissingBody')}
+            <code className="mono"> git lfs install &amp;&amp; git lfs pull</code>
+          </span>
+        </div>
+      )}
 
       {/* Action toolbar — connects the reference card to the table. */}
       <MonsterActions
