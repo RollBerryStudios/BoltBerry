@@ -179,8 +179,8 @@ export function itemHandout(it: ItemRecord, lang: AppLanguage): PlayerHandout {
   if (it.classification) lines.push(`${L.type}: ${localized(it.classification, lang)}`)
   if (it.ac) lines.push(`${L.ac2}: ${it.ac}`)
   if (it.damageType) lines.push(`${L.damage}: ${localized(it.damageType, lang)}`)
-  const props = localizedArray(it.properties, lang)
-  if (props.length > 0) lines.push(`${L.properties}: ${props.join(', ')}`)
+  const props = normaliseProperties(it.properties, lang)
+  if (props) lines.push(`${L.properties}: ${props}`)
   const desc = localized(it.description, lang)
   if (desc) {
     lines.push('', desc)
@@ -265,6 +265,22 @@ function appendNamedSection(out: string[], heading: string, entries: NamedText[]
   for (const e of entries) {
     out.push(`${e.name}. ${e.text}`)
   }
+}
+
+// Mirror of ItemsTab.propertiesAsText for the handout body — accepts either
+// the L10n object the dataset actually uses or the L10nArray shape we
+// originally typed for.
+function normaliseProperties(value: unknown, lang: AppLanguage): string {
+  if (!value) return ''
+  if (typeof value === 'string') return value
+  if (Array.isArray(value)) return (value as string[]).join(', ')
+  if (typeof value === 'object') {
+    const obj = value as Record<string, unknown>
+    const picked = obj[lang] ?? obj.en ?? obj.de
+    if (typeof picked === 'string') return picked
+    if (Array.isArray(picked)) return (picked as string[]).join(', ')
+  }
+  return ''
 }
 
 function parseLeadingInt(s: string | undefined): number | null {

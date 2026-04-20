@@ -229,8 +229,12 @@ export interface ItemRecord {
   weight?: number | null
   classification?: L10n
   description?: L10n
+  damage?: string
   damageType?: L10n
-  properties?: L10nArray
+  /** Dataset writes this as L10n (single string per locale) today, but
+   *  historically we typed it as L10nArray. Allow both — consumers
+   *  normalise via `propertiesAsText` in the renderer. */
+  properties?: L10n | L10nArray
   stealth?: string
   ac?: string
   image?: string

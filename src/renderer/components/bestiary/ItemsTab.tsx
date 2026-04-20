@@ -2,17 +2,18 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { AppLanguage } from '../../stores/uiStore'
 import type { ItemIndexEntry, ItemRecord } from '@shared/ipc-types'
-import { localized, localizedArray, pickName, titleCase } from './util'
+import { localized, pickName, titleCase } from './util'
 import { EmptyDetail } from './MonstersTab'
 import { itemHandout } from './actions'
 import { useUIStore } from '../../stores/uiStore'
 import { showToast } from '../shared/Toast'
 
 const RARITY_ORDER: Record<string, number> = {
-  COMMON: 0, UNCOMMON: 1, RARE: 2, VERY_RARE: 3, LEGENDARY: 4, ARTIFACT: 5,
+  MUNDANE: -1, COMMON: 0, UNCOMMON: 1, RARE: 2, VERY_RARE: 3, LEGENDARY: 4, ARTIFACT: 5,
 }
 
 const RARITY_COLOR: Record<string, string> = {
+  MUNDANE: '#6b7280',
   COMMON: '#94a3b8',
   UNCOMMON: '#22c55e',
   RARE: '#3b82f6',
@@ -21,19 +22,26 @@ const RARITY_COLOR: Record<string, string> = {
   ARTIFACT: '#ef4444',
 }
 
+// Keyed by the `category.en` values actually present in the dataset
+// (grep'd from resources/data/items/**/item.json). Keep the synonyms
+// (WONDROUS_ITEM etc.) so future data imports using a slightly different
+// shape still get a sensible glyph instead of the generic 📦 fallback.
 const CATEGORY_ICON: Record<string, string> = {
   WEAPON: '⚔️',
   ARMOR: '🛡️',
+  POTIONS_OILS: '🧪',
   POTION: '🧪',
   RING: '💍',
   ROD: '🪄',
   STAFF: '🪄',
   WAND: '🪄',
+  WONDROUS_ITEMS: '✨',
   WONDROUS_ITEM: '✨',
   SCROLL: '📜',
   ADVENTURING_GEAR: '🎒',
   TOOLS: '🔧',
   AMMUNITION: '🏹',
+  OTHER: '📦',
 }
 
 export function ItemsTab({
@@ -225,7 +233,11 @@ function ItemDetail({ slug, language }: { slug: string; language: AppLanguage })
   const tint = RARITY_COLOR[record.rarity.en] ?? '#94a3b8'
   const icon = CATEGORY_ICON[record.category.en] ?? '📦'
   const description = localized(record.description, language)
-  const properties = localizedArray(record.properties, language)
+  // Dataset quirk: `properties` is usually an L10n string ("versatile
+  // (1d10)") but could in principle be an L10nArray for future imports.
+  // Normalise to a display string here so either shape renders cleanly.
+  const propertiesText = propertiesAsText(record.properties, language)
+  const damage = (record as unknown as { damage?: string }).damage
 
   return (
     <article className="bb-best-detail" style={{ borderLeftColor: tint }}>
@@ -244,20 +256,21 @@ function ItemDetail({ slug, language }: { slug: string; language: AppLanguage })
             {record.cost != null && <Chip label={t('bestiary.cost')} value={`${record.cost} gp`} />}
             {record.weight != null && <Chip label={t('bestiary.weight')} value={`${record.weight} lb`} />}
             {record.ac && <Chip label="AC" value={record.ac} />}
-            {record.damageType && <Chip label={t('bestiary.damage')} value={localized(record.damageType, language)} />}
+            {damage && <Chip label={t('bestiary.damage')} value={damage} />}
+            {record.damageType && <Chip label={t('bestiary.damageType')} value={localized(record.damageType, language)} />}
           </div>
         </div>
       </header>
 
       <ItemActions record={record} language={language} />
 
-      {(record.classification || properties.length > 0 || record.stealth) && (
+      {(record.classification || propertiesText || record.stealth) && (
         <section className="bb-best-metagrid">
           {record.classification && (
             <MetaRow label={t('bestiary.classification')} value={localized(record.classification, language)} />
           )}
-          {properties.length > 0 && (
-            <MetaRow label={t('bestiary.properties')} value={properties.map(titleCase).join(', ')} />
+          {propertiesText && (
+            <MetaRow label={t('bestiary.properties')} value={propertiesText} />
           )}
           {record.stealth && (
             <MetaRow label={t('bestiary.stealth')} value={record.stealth} />
@@ -326,6 +339,25 @@ function MetaRow({ label, value }: { label: string; value: string }) {
       <div className="bb-best-metarow-value">{value}</div>
     </div>
   )
+}
+
+// Normalises `properties` (which the dataset writes as an L10n string but
+// could theoretically be an L10nArray) into a single display string. Safely
+// handles both shapes so a future data import can't crash the detail view.
+function propertiesAsText(
+  value: unknown,
+  language: AppLanguage,
+): string {
+  if (!value) return ''
+  if (typeof value === 'string') return titleCase(value)
+  if (Array.isArray(value)) return (value as string[]).map(titleCase).join(', ')
+  if (typeof value === 'object') {
+    const obj = value as Record<string, unknown>
+    const picked = obj[language] ?? obj.en ?? obj.de
+    if (typeof picked === 'string') return titleCase(picked)
+    if (Array.isArray(picked)) return (picked as string[]).map(titleCase).join(', ')
+  }
+  return ''
 }
 
 function prettyCategory(

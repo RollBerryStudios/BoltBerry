@@ -89,8 +89,12 @@ export function BestiaryPicker({ kind, initialQuery, onPick, onClose }: Bestiary
       const de = entry.nameDe?.toLowerCase() ?? ''
       return en.includes(q) || de.includes(q) || entry.slug.includes(q)
     })
-    return matched.slice(0, 200) // keep the modal snappy even with 313 spells
-  }, [index, query])
+    // Sort alphabetically by the localised name so the picker is
+    // scannable — search is by name, so ordering by name matches user
+    // intent. Cap at 200 to keep the modal snappy even with 313 spells.
+    matched.sort((a, b) => pickName(a, language).localeCompare(pickName(b, language)))
+    return matched.slice(0, 200)
+  }, [index, query, language])
 
   // Reset highlight when filtered list changes shape.
   useEffect(() => {

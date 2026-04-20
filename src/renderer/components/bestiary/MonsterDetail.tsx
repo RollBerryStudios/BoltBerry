@@ -62,7 +62,13 @@ export function MonsterDetail({ slug, language }: { slug: string; language: AppL
   const displayName = pickName(record, language)
   const tint = tokenTint(record.type.en)
   const currentToken = tokens[tokenIndex]
-  const currentUrl = currentToken ? tokenUrls[currentToken.file] : undefined
+  // The first token is also resolved server-side during getMonster and
+  // arrives on `record.tokenDefaultUrl`. Use it as a synchronous fallback
+  // so the hero paints an image on the first render instead of the glyph.
+  const currentUrl = currentToken
+    ? (tokenUrls[currentToken.file]
+        ?? (tokenIndex === 0 ? record.tokenDefaultUrl ?? undefined : undefined))
+    : record.tokenDefaultUrl ?? undefined
 
   return (
     <article className="bb-best-detail" style={{ borderLeftColor: tint }}>
