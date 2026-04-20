@@ -528,7 +528,18 @@ function WorkspaceStyles() {
       /* ── Top bar ──────────────────────────────────────────── */
       .bb-ws-topbar {
         display: flex; align-items: center; gap: var(--sp-4);
-        padding: 0 var(--sp-6); height: 56px;
+        height: 56px;
+        /* Reserve the right-hand gutter for Electron's titleBarOverlay
+           so the Spielansicht / language-toggle cluster never slides
+           under the native min / max / close buttons on Windows. Uses
+           the same --titlebar-controls-w variable as DmTitleBar / Wiki
+           / Compendium top bars so every reserved gutter scales in
+           lockstep on high-DPI displays. On macOS the traffic lights
+           sit on the left — the extra padding there is harmless. */
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: var(--sp-6);
+        padding-right: calc(var(--titlebar-controls-w) + 12px);
         background: rgba(13, 16, 21, 0.85);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
