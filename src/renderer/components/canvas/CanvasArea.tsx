@@ -8,6 +8,7 @@ import { MeasureLayer } from './MeasureLayer'
 import { MinimapOverlay } from './MinimapOverlay'
 import { DrawingLayer } from './DrawingLayer'
 import { GMPinLayer, GM_PIN_ADD_EVENT } from './GMPinLayer'
+import { PlayerViewportLayer } from './PlayerViewportLayer'
 import { LightingLayer } from './LightingLayer'
 import { WallLayer } from './WallLayer'
 import { RoomLayer } from './RoomLayer'
@@ -87,6 +88,11 @@ export function CanvasArea() {
   const [layerVisibility, setLayerVisibility] = useState<Record<string, boolean>>(DEFAULT_LAYER_VISIBILITY)
   const layerPanelRef = useRef<HTMLDivElement>(null)
   const [hudIdle, setHudIdle] = useState(false)
+  // Subscribe to the DM transform so the Player Control Mode overlay
+  // re-paints as the DM pans / zooms the canvas itself.
+  const scale = useMapTransformStore((s) => s.scale)
+  const offsetX = useMapTransformStore((s) => s.offsetX)
+  const offsetY = useMapTransformStore((s) => s.offsetY)
 
   // Close layer panel when clicking outside
   useEffect(() => {
@@ -639,6 +645,20 @@ export function CanvasArea() {
               map={activeMap}
               stageRef={stageRef}
               canvasSize={size}
+            />
+          )}
+
+          {/* Layer 12: Player Control Mode — dashed rectangle that frames
+              what the player window renders. Drawn on top of every
+              other layer so it's always visible no matter what tool
+              the DM has active. Listens to nothing (interactions live
+              in MapLayer's handlers + keyboard shortcuts). */}
+          {activeMap && (
+            <PlayerViewportLayer
+              map={activeMap}
+              scale={scale}
+              offsetX={offsetX}
+              offsetY={offsetY}
             />
           )}
         </Stage>

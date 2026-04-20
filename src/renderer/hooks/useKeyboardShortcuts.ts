@@ -45,6 +45,30 @@ export function useKeyboardShortcuts() {
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
       if (target?.isContentEditable) return
 
+      // ── Player Control Mode — runs first so Ctrl+Arrow never leaks
+      // into other handlers when the DM is rotating the player view.
+      // Escape exits the mode cleanly. Active only when the toggle is
+      // on and we're in the DM workspace, so nothing fights the
+      // bestiary / compendium overlays.
+      const ui = useUIStore.getState()
+      if (ui.playerViewportMode) {
+        if (e.key === 'Escape') {
+          e.preventDefault()
+          ui.setPlayerViewportMode(false)
+          return
+        }
+        if ((e.ctrlKey || e.metaKey) && ui.playerViewport
+            && (e.key === 'ArrowLeft' || e.key === 'ArrowRight'
+                || e.key === 'ArrowUp'   || e.key === 'ArrowDown')) {
+          e.preventDefault()
+          const stepDeg = e.shiftKey ? 15 : 5
+          const dir = (e.key === 'ArrowLeft' || e.key === 'ArrowUp') ? -1 : 1
+          const next = (ui.playerViewport.rotation + dir * stepDeg + 360) % 360
+          ui.patchPlayerViewport({ rotation: next })
+          return
+        }
+      }
+
       // ── Grid chord: `G +` / `G -` ─────────────────────────────────────────
       // Runs first so the second keystroke wins over any matching single-key
       // action (e.g. the standalone `-` zoom-out binding below).

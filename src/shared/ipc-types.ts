@@ -49,6 +49,12 @@ export const IPC = {
   // DM → Player: camera viewport sync
   PLAYER_CAMERA: 'player:camera',
 
+  // DM → Player: Player Control Mode — independent viewport rectangle
+  // on the GM scene that frames exactly what the player window shows.
+  // Nullable payload: null exits the mode and the player falls back to
+  // the camera / fit path.
+  PLAYER_VIEWPORT: 'player:viewport',
+
   // DM → Player: measurement overlay
   PLAYER_MEASURE: 'player:measure',
 
@@ -558,6 +564,21 @@ export interface PlayerCamera {
   relZoom: number // DM scale / DM fit-scale
 }
 
+/** Player Control Mode rectangle. All coordinates are in map-image
+ *  pixels (the unrotated image space), so the frame is stable across
+ *  the DM's own pan / zoom. Rotation is in degrees, clockwise, applied
+ *  to the view content inside the rectangle (player sees the content
+ *  rotated by `rotation`). The rectangle itself is axis-aligned in map
+ *  space — rotation affects only the rendered orientation, not the
+ *  hitbox of the frame on the DM canvas. */
+export interface PlayerViewport {
+  cx: number
+  cy: number
+  w: number
+  h: number
+  rotation: number
+}
+
 export interface PlayerFullState {
   mode: 'map' | 'atmosphere' | 'blackout'
   map: PlayerMapState | null
@@ -567,6 +588,9 @@ export interface PlayerFullState {
   atmosphereImagePath: string | null
   blackout: boolean
   drawings: PlayerDrawingState[]
+  /** Optional: when present, the player window frames exactly this
+   *  rectangle. Takes precedence over camera / fit on the player side. */
+  viewport?: PlayerViewport | null
 }
 
 export interface PlayerDrawingState {

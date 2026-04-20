@@ -78,8 +78,12 @@ export function usePlayerSync() {
       }
     }
 
+    const ui = useUIStore.getState()
+    const viewport = ui.playerViewportMode && ui.playerViewport ? ui.playerViewport : null
+
     const state: PlayerFullState = {
       mode,
+      viewport,
       map: activeMap
         ? {
             imagePath: activeMap.imagePath,
@@ -164,4 +168,34 @@ export function usePlayerSync() {
     if (drawingClearTick === 0 || sessionMode === 'prep' || !window.electronAPI) return
     if (useUIStore.getState().playerConnected) buildAndSendFullSync()
   }, [drawingClearTick, sessionMode, buildAndSendFullSync])
+
+  // ── Player Control Mode — viewport broadcast ────────────────────────────────
+  // Subscribes to the whole `playerViewport` object plus its mode flag so
+  // every drag / wheel / arrow update reaches the player window. rAF-
+  // throttles the send during rapid mutations (drag at 60 Hz would
+  // otherwise flood the IPC channel). Fires an explicit null when the
+  // mode turns off so the player window can fall back to camera / fit
+  // cleanly instead of sticking on the last rect.
+  const playerViewportMode = useUIStore((s) => s.playerViewportMode)
+  const playerViewport = useUIStore((s) => s.playerViewport)
+  useEffect(() => {
+    if (!window.electronAPI) return
+    let frame = 0
+    const payload = playerViewportMode ? playerViewport : null
+    // Schedule inside a single rAF so bursty updates (mouse drag) coalesce
+    // into at most one send per frame. Cleanup cancels the pending send
+    // on unmount / fast updates so payloads don't pile up.
+    frame = requestAnimationFrame(() => {
+      window.electronAPI?.sendPlayerViewport(payload)
+    })
+    return () => cancelAnimationFrame(frame)
+  }, [playerViewportMode, playerViewport])
+
+  // ── Map switch — drop any stale Player Control Mode rect ────────────────────
+  // The rect lives in map-image coords; switching maps makes those
+  // coords meaningless. Clearing the rect forces the next toolbar
+  // activation to seed a fresh default on the new map.
+  useEffect(() => {
+    useUIStore.getState().setPlayerViewport(null)
+  }, [activeMapId])
 }

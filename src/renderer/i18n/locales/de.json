@@ -454,6 +454,10 @@
     "sessionModeHint": "Sitzungsmodus: Spieler sieht Änderungen live. Klicken für Vorbereitungsmodus.",
     "prepModeHint": "Vorbereitungsmodus: Spieler-Sync gesperrt. Klicken für Sitzungsmodus.",
     "blackout": "Schwarzbild [Space]",
+    "playerControl": {
+      "on": "Player-Control-Modus AN — Spielerfenster zeigt nur das blaue Rechteck (Strg+Ziehen / Strg+Rad / Strg+Pfeile)",
+      "off": "Player-Control-Modus AUS — klicken, um unabhängigen Spielerausschnitt zu aktivieren"
+    },
     "shareCamera": "Ansicht an Spieler senden",
     "openPlayerWindow": "Spieler-Fenster öffnen",
     "shortcuts": "Tastenkürzel [?]",

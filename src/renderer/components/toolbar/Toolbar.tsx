@@ -168,6 +168,7 @@ export function Toolbar() {
     sessionMode, setSessionMode,
     toggleLanguage, language,
     cameraFollowDM, toggleCameraFollow,
+    playerViewportMode, setPlayerViewportMode, setPlayerViewport,
     gridSnap, toggleGridSnap,
     showMinimap, toggleMinimap,
     fogBrushRadius, setFogBrushRadius,
@@ -456,6 +457,33 @@ export function Toolbar() {
         style={cameraFollowDM ? { color: 'var(--success)' } : undefined}
       >
         📡
+      </button>
+
+      {/* Player Control Mode — independent framed view on the player screen */}
+      <button
+        className={clsx('tool-btn', playerViewportMode && 'active')}
+        title={playerViewportMode
+          ? t('toolbar.playerControl.on')
+          : t('toolbar.playerControl.off')}
+        onClick={() => {
+          const next = !playerViewportMode
+          if (next) {
+            const { scale, offsetX, offsetY, canvasW, canvasH } = useMapTransformStore.getState()
+            if (scale > 0 && canvasW > 0 && canvasH > 0) {
+              setPlayerViewport({
+                cx: (canvasW / 2 - offsetX) / scale,
+                cy: (canvasH / 2 - offsetY) / scale,
+                w: canvasW / scale,
+                h: canvasH / scale,
+                rotation: 0,
+              })
+            }
+          }
+          setPlayerViewportMode(next)
+        }}
+        style={playerViewportMode ? { color: 'var(--accent)' } : undefined}
+      >
+        🎯
       </button>
 
       {/* Blackout */}

@@ -454,6 +454,10 @@
     "sessionModeHint": "Session mode: Player sees changes live. Click for prep mode.",
     "prepModeHint": "Prep mode: Player sync locked. Click for session mode.",
     "blackout": "Blackout [Space]",
+    "playerControl": {
+      "on": "Player Control Mode ON — player window frames only the blue rectangle (Ctrl+drag / Ctrl+wheel / Ctrl+arrows)",
+      "off": "Player Control Mode OFF — click to activate an independent player viewport"
+    },
     "shareCamera": "Send view to player",
     "openPlayerWindow": "Open player window",
     "shortcuts": "Shortcuts [?]",

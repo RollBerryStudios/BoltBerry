@@ -4,6 +4,7 @@ import Konva from 'konva'
 import type { MapRecord } from '@shared/ipc-types'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useCampaignStore } from '../../stores/campaignStore'
+import { useUIStore } from '../../stores/uiStore'
 import { useRotatedImage } from '../../hooks/useRotatedImage'
 
 interface MapLayerProps {
@@ -127,8 +128,25 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
     }, 600)
   }
 
+  // ── Player Control Mode — Ctrl-gated gestures move / resize the
+  // dashed viewport rectangle on top of the DM canvas, independent of
+  // the DM's own pan / zoom. Guarded by `playerViewportMode` so the
+  // existing Ctrl+wheel trackpad-pinch semantics survive when the
+  // mode is off.
+  const isDraggingViewport = useRef(false)
+
   // ── Pan: middle-mouse, Alt+left-drag, or left-drag with select tool on background ─
   function handleMouseDown(e: Konva.KonvaEventObject<MouseEvent>) {
+    const ui = useUIStore.getState()
+    // Viewport drag has priority over the DM's own pan when Player
+    // Control Mode is active and the user is holding Ctrl / Cmd.
+    if (ui.playerViewportMode && e.evt.button === 0 && (e.evt.ctrlKey || e.evt.metaKey) && ui.playerViewport) {
+      e.evt.preventDefault()
+      isDraggingViewport.current = true
+      lastPointer.current = { x: e.evt.clientX, y: e.evt.clientY }
+      stageRef.current?.container().style.setProperty('cursor', 'grabbing')
+      return
+    }
     const isMiddle = e.evt.button === 1
     const isAltLeft = e.evt.button === 0 && e.evt.altKey
     const isSpacePan = e.evt.button === 0 && spaceHeld.current
@@ -140,6 +158,22 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
   }
 
   function handleMouseMove(e: Konva.KonvaEventObject<MouseEvent>) {
+    if (isDraggingViewport.current) {
+      const ui = useUIStore.getState()
+      if (!ui.playerViewport) { isDraggingViewport.current = false; return }
+      const dx = e.evt.clientX - lastPointer.current.x
+      const dy = e.evt.clientY - lastPointer.current.y
+      lastPointer.current = { x: e.evt.clientX, y: e.evt.clientY }
+      // Translate screen delta into map-image delta via the DM's own
+      // scale, so drag feels 1:1 with the cursor regardless of zoom.
+      const mapDx = dx / scale
+      const mapDy = dy / scale
+      ui.patchPlayerViewport({
+        cx: ui.playerViewport.cx + mapDx,
+        cy: ui.playerViewport.cy + mapDy,
+      })
+      return
+    }
     if (!isPanning.current) return
     const dx = e.evt.clientX - lastPointer.current.x
     const dy = e.evt.clientY - lastPointer.current.y
@@ -150,6 +184,11 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
   }
 
   function handleMouseUp(_e: Konva.KonvaEventObject<MouseEvent>) {
+    if (isDraggingViewport.current) {
+      isDraggingViewport.current = false
+      stageRef.current?.container().style.removeProperty('cursor')
+      return
+    }
     if (isPanning.current) {
       isPanning.current = false
       const cursor = spaceHeld.current ? 'grab' : undefined
@@ -164,6 +203,24 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
 
   // ── Zoom: scroll wheel or trackpad pinch ────────────────────────────────────
   function handleWheel(e: Konva.KonvaEventObject<WheelEvent>) {
+    const ui = useUIStore.getState()
+
+    // Player Control Mode: Ctrl+wheel resizes the dashed viewport rect
+    // about its own centre, preserving aspect. Only intercepts when
+    // the mode is on so trackpad pinch-zoom keeps working everywhere
+    // else (trackpad pinch also arrives with ctrlKey=true — we accept
+    // that by checking the mode flag first).
+    if (ui.playerViewportMode && ui.playerViewport && (e.evt.ctrlKey || e.evt.metaKey)) {
+      e.evt.preventDefault()
+      const step = e.evt.deltaY < 0 ? 1.08 : 1 / 1.08
+      const v = ui.playerViewport
+      const MIN = 50
+      const nextW = Math.max(MIN, v.w * step)
+      const nextH = Math.max(MIN, v.h * step)
+      ui.patchPlayerViewport({ w: nextW, h: nextH })
+      return
+    }
+
     e.evt.preventDefault()
     const stage = stageRef.current
     if (!stage) return

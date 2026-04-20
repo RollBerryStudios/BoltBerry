@@ -8,6 +8,7 @@ import type {
   PlayerFullState,
   PlayerPointer,
   PlayerCamera,
+  PlayerViewport,
   PlayerHandout,
   PlayerOverlay,
   PlayerInitiativeEntry,
@@ -106,6 +107,13 @@ export function registerPlayerBridgeHandlers(): void {
   ipcMain.on(IPC.PLAYER_CAMERA, (event, camera: PlayerCamera) => {
     if (!isFromDM(event)) return
     getPlayerWindow()?.webContents.send(IPC.PLAYER_CAMERA, camera)
+  })
+
+  // Player Control Mode viewport — DM -> Player. Nullable payload
+  // lets the DM exit the mode without inventing a magic value.
+  ipcMain.on(IPC.PLAYER_VIEWPORT, (event, viewport: PlayerViewport | null) => {
+    if (!isFromDM(event)) return
+    getPlayerWindow()?.webContents.send(IPC.PLAYER_VIEWPORT, viewport)
   })
 
   // Handout display — DM -> Player

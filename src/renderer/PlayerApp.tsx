@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Stage, Layer, Image as KonvaImage, Shape, Group, Circle, Rect, Text, Line } from 'react-konva'
 import Konva from 'konva'
-import type { PlayerFullState, PlayerTokenState, PlayerMeasureState, FogDelta, PlayerMapState, PlayerPointer, PlayerCamera, PlayerOverlay, PlayerInitiativeEntry, WeatherType, GridType, PlayerDrawingState, PlayerWallState } from '@shared/ipc-types'
+import type { PlayerFullState, PlayerTokenState, PlayerMeasureState, FogDelta, PlayerMapState, PlayerPointer, PlayerCamera, PlayerViewport, PlayerOverlay, PlayerInitiativeEntry, WeatherType, GridType, PlayerDrawingState, PlayerWallState } from '@shared/ipc-types'
 import { useRotatedImage } from './hooks/useRotatedImage'
 import { WeatherCanvas } from './components/canvas/WeatherCanvas'
 import { useImageUrl } from './hooks/useImageUrl'
@@ -28,6 +28,9 @@ export default function PlayerApp() {
   const [size, setSize] = useState({ w: window.innerWidth, h: window.innerHeight })
   const [pointer, setPointer] = useState<PlayerPointer | null>(null)
   const [camera, setCamera] = useState<PlayerCamera | null>(null)
+  // Player Control Mode — when set, frames exactly this rect (in map-
+  // image coords) and overrides the camera / fit paths entirely.
+  const [viewport, setViewport] = useState<PlayerViewport | null>(null)
   const [handout, setHandout] = useState<{ title: string; imagePath: string | null; textContent: string | null } | null>(null)
   const [overlay, setOverlay] = useState<PlayerOverlay | null>(null)
   const [initiative, setInitiative] = useState<PlayerInitiativeEntry[]>([])
@@ -80,6 +83,10 @@ export default function PlayerApp() {
         setBlackout(state.blackout)
         setTokens(state.tokens)
         setDrawingData(state.drawings ?? [])
+        // Adopt the DM's Player Control Mode rect from the handshake so
+        // re-opening the player window mid-session doesn't drop the
+        // framed view back to fit.
+        setViewport(state.viewport ?? null)
 
         if (state.mode === 'blackout') {
           setMode('blackout')
@@ -146,6 +153,14 @@ export default function PlayerApp() {
       window.playerAPI.onPointer((p: PlayerPointer) => {
         setPointer(p)
         setTimeout(() => setPointer((cur) => (cur === p ? null : cur)), 2500)
+      }),
+
+      window.playerAPI.onPlayerViewport((v) => {
+        setViewport(v)
+        // Null viewport means "DM left the mode"; fall back to camera /
+        // fit. Non-null takes precedence over any active camera, so
+        // clear the camera state as a defensive measure.
+        if (v) setCamera(null)
       }),
 
       window.playerAPI.onCameraView((cam: PlayerCamera) => {
@@ -274,6 +289,7 @@ export default function PlayerApp() {
           height={size.h}
           pointer={pointer}
           camera={camera}
+          viewport={viewport}
           measure={measure}
           drawingData={drawingData}
           onMapLoaded={(w, h) =>
@@ -373,13 +389,14 @@ interface PlayerMapViewProps {
   height: number
   pointer: PlayerPointer | null
   camera: PlayerCamera | null
+  viewport: PlayerViewport | null
   measure: PlayerMeasureState | null
   drawingData: PlayerDrawingState[]
   onMapLoaded: (naturalW: number, naturalH: number) => void
 }
 
 function PlayerMapView({
-  mapState, tokens, walls, exploredCanvasRef, coveredCanvasRef, fogVersion, width, height, pointer, camera, measure, drawingData, onMapLoaded,
+  mapState, tokens, walls, exploredCanvasRef, coveredCanvasRef, fogVersion, width, height, pointer, camera, viewport, measure, drawingData, onMapLoaded,
 }: PlayerMapViewProps) {
   const { img: image, imgW: natW, imgH: natH } = useRotatedImage(`file://${mapState.imagePath}`, mapState.rotation ?? 0)
   const [exploredImg, setExploredImg] = useState<HTMLCanvasElement | null>(null)
@@ -441,10 +458,21 @@ function PlayerMapView({
     setAnimOffY(targetOffY)
   }, [camera, playerScale, playerOffX, playerOffY, image, natW, natH, width, height])
 
-  // Compute final display values
+  // Compute final display values.
+  //
+  // Player Control Mode (viewport) wins over every other source of truth —
+  // it's the GM's explicit "show exactly this frame" instruction. When the
+  // viewport prop is non-null we fit its rect into the player window
+  // (contain) and pivot the whole map/tokens/fog layer stack around the
+  // screen center by -rotation so the framed region appears upright.
   let scale = 1, offX = 0, offY = 0
   if (image && natW > 0 && natH > 0) {
-    if (camera) {
+    if (viewport) {
+      const fit = Math.min(width / viewport.w, height / viewport.h)
+      scale = fit
+      offX = width / 2 - viewport.cx * scale
+      offY = height / 2 - viewport.cy * scale
+    } else if (camera) {
       scale = animScale
       offX = animOffX
       offY = animOffY
@@ -455,6 +483,16 @@ function PlayerMapView({
       offY = (height - natH * scale) / 2 + playerOffY
     }
   }
+
+  // Layer-level rotation pivots all children (map, grid, fog, drawings,
+  // tokens, lighting, pointer, measure) around the screen center. All the
+  // children still compute positions in "unrotated" screen coords via
+  // `x * scale + offX`; the Layer transform adds the rotation on top so
+  // we don't have to touch every coordinate formula.
+  const viewportRotation = viewport?.rotation ?? 0
+  const layerXform = viewport
+    ? { rotation: -viewportRotation, offsetX: width / 2, offsetY: height / 2, x: width / 2, y: height / 2 }
+    : null
 
   // Reset player pan/zoom when camera sync activates
   useEffect(() => {
@@ -560,7 +598,7 @@ function PlayerMapView({
       onMouseLeave={handleMouseUp}
     >
       {/* Layer 1: Map image + checkerboard */}
-      <Layer>
+      <Layer {...(layerXform ?? {})}>
         {image && (
           <>
             <Shape
@@ -605,7 +643,7 @@ function PlayerMapView({
 
       {/* Layer 2: Grid overlay */}
       {showGrid && cellPx >= 4 && (
-        <Layer listening={false}>
+        <Layer listening={false} {...(layerXform ?? {})}>
           <Shape
             listening={false}
             sceneFunc={(ctx) => {
@@ -660,7 +698,7 @@ function PlayerMapView({
       )}
 
       {/* Layer 2: "Never explored" mask */}
-      <Layer listening={false}>
+      <Layer listening={false} {...(layerXform ?? {})}>
         {exploredImg && image && (
           <KonvaImage
             image={exploredImg}
@@ -673,7 +711,7 @@ function PlayerMapView({
       </Layer>
 
       {/* Layer 3: "Explored but covered" dim overlay */}
-      <Layer listening={false}>
+      <Layer listening={false} {...(layerXform ?? {})}>
         {coveredImg && image && (
           <KonvaImage
             image={coveredImg}
@@ -687,7 +725,7 @@ function PlayerMapView({
 
       {/* Layer 3.5: Player drawings */}
       {drawingData.length > 0 && (
-        <Layer listening={false}>
+        <Layer listening={false} {...(layerXform ?? {})}>
           {drawingData.map((d) => {
             if (d.type === 'freehand' && d.points.length >= 4) {
               const screenPoints = d.points.flatMap((p: number, i: number) => i % 2 === 0 ? p * scale + offX : p * scale + offY)
@@ -723,7 +761,7 @@ function PlayerMapView({
       )}
 
       {/* Layer 4: Tokens */}
-      <Layer listening={false}>
+      <Layer listening={false} {...(layerXform ?? {})}>
         {tokens.map((token) => (
           <PlayerTokenNode
             key={token.id}
@@ -746,14 +784,15 @@ function PlayerMapView({
         gridSize={mapState.gridSize}
         imgW={natW}
         imgH={natH}
+        layerXform={layerXform}
       />
 
       {/* Layer 5: Pointer/Ping overlay */}
-      <Layer ref={pointerLayerRef} listening={false} />
+      <Layer ref={pointerLayerRef} listening={false} {...(layerXform ?? {})} />
 
       {/* Layer 6: Measurement overlay */}
       {measure && (
-        <Layer listening={false}>
+        <Layer listening={false} {...(layerXform ?? {})}>
           {renderPlayerMeasure(measure, scale, offX, offY, mapState.gridSize)}
         </Layer>
       )}
@@ -772,9 +811,10 @@ interface PlayerLightingLayerProps {
   gridSize: number
   imgW: number
   imgH: number
+  layerXform: { rotation: number; offsetX: number; offsetY: number; x: number; y: number } | null
 }
 
-function PlayerLightingLayer({ tokens, walls, scale, offX, offY, gridSize, imgW, imgH }: PlayerLightingLayerProps) {
+function PlayerLightingLayer({ tokens, walls, scale, offX, offY, gridSize, imgW, imgH, layerXform }: PlayerLightingLayerProps) {
   const segments: Segment[] = useMemo(
     () => walls.map((w) => ({ x1: w.x1, y1: w.y1, x2: w.x2, y2: w.y2, wallType: w.wallType, doorState: w.doorState })),
     [walls]
@@ -798,7 +838,7 @@ function PlayerLightingLayer({ tokens, walls, scale, offX, offY, gridSize, imgW,
   if (lights.length === 0 || imgW === 0 || imgH === 0) return null
 
   return (
-    <Layer listening={false} opacity={0.6} perfectDrawEnabled={false}>
+    <Layer listening={false} opacity={0.6} perfectDrawEnabled={false} {...(layerXform ?? {})}>
       {lights.map((l) => {
         const poly = computeVisibilityPolygon(l.cx, l.cy, l.rPx, segments, imgW, imgH)
         const screenPoly: number[] = []
