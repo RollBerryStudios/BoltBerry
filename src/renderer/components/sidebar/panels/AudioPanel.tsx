@@ -441,14 +441,19 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
 
       <ChannelStrip chId="track1" label={t('audio.track1')} activeMapId={activeMapId} />
       <ChannelStrip chId="track2" label={t('audio.track2')} activeMapId={activeMapId} />
+      {/* The combat-mode toggle is a gameplay action (ducks the music
+          tracks and swaps to the Kampf channel). It has no place in the
+          CampaignView content overview — that view only manages assets,
+          not the live session. Only the narrow layout (right sidebar
+          during play) shows the pill. */}
       <ChannelStrip
         chId="combat"
         label={t('audio.combat')}
         activeMapId={activeMapId}
-        combatControl={{
+        combatControl={layout === 'narrow' ? {
           active: combatActive,
           onToggle: combatActive ? deactivateCombat : activateCombat,
-        }}
+        } : undefined}
       />
 
       {!activeCampaignId && (

@@ -468,6 +468,7 @@ function MonsterActions({
   const { t } = useTranslation()
   const activeMapId = useCampaignStore((s) => s.activeMapId)
   const activeMaps = useCampaignStore((s) => s.activeMaps)
+  const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
   const playerConnected = useUIStore((s) => s.playerConnected)
   const [busy, setBusy] = useState(false)
 
@@ -507,17 +508,26 @@ function MonsterActions({
     showToast(t('bestiary.sentToPlayer'), 'success')
   }
 
+  // The spawn action only makes sense inside an active campaign + map
+  // context. The Wiki can be opened from the Welcome screen without any
+  // campaign selected — showing a disabled "Auf Karte platzieren" there
+  // was noise. Hide the button entirely in that mode; it reappears once
+  // a campaign + map are active.
+  const canSpawn = Boolean(activeCampaignId && map)
+
   return (
     <div className="bb-best-actions-bar">
-      <button
-        type="button"
-        className="bb-best-action-btn bb-best-action-primary"
-        onClick={handleSpawn}
-        disabled={busy || !map}
-        title={map ? t('bestiary.addToMap') : t('bestiary.noActiveMap')}
-      >
-        ✦ {t('bestiary.addToMap')}
-      </button>
+      {canSpawn && (
+        <button
+          type="button"
+          className="bb-best-action-btn bb-best-action-primary"
+          onClick={handleSpawn}
+          disabled={busy}
+          title={t('bestiary.addToMap')}
+        >
+          ✦ {t('bestiary.addToMap')}
+        </button>
+      )}
       <button
         type="button"
         className="bb-best-action-btn"

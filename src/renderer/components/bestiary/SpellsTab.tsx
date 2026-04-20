@@ -250,7 +250,12 @@ function SpellDetail({ slug, language }: { slug: string; language: AppLanguage }
   const icon = SCHOOL_ICON[schoolKey] ?? '✨'
   const description = localized(record.description, language)
   const higherLevels = localized(record.higherLevels, language)
-  const classes = localizedArray(record.classes, language).map(titleCase).join(', ')
+  // Alphabetically sorted per locale — raw SRD order (source-file order)
+  // felt arbitrary to players scanning for "does Cleric get this?".
+  const classes = localizedArray(record.classes, language)
+    .map(titleCase)
+    .sort((a, b) => a.localeCompare(b, language))
+    .join(', ')
 
   return (
     <article className="bb-best-detail" style={{ borderLeftColor: tint }}>
