@@ -30,8 +30,9 @@ BoltBerry ist ein **kostenloser, quelloffener Virtual Tabletop (VTT)**, der voll
 
 - **DM-Fenster** – vollständige Steuerung für den Spielleiter
 - **Spieler-Fenster** – überträgt Karte, Token, Handouts und Effekte in Echtzeit auf einen zweiten Bildschirm
+- **Wiki** – bilinguale SRD-5.1-Referenz mit 263 Monstern, 203 Gegenständen und 313 Zaubern, die direkt mit Karte, Initiative und Charakterbögen verdrahtet ist
 - **SQLite-basiert** – alle Kampagnendaten lokal gespeichert, keine Cloud-Abhängigkeit
-- **Mehrsprachig** – Benutzeroberfläche auf Deutsch und Englisch (DE/EN-Toggle in der Toolbar)
+- **Mehrsprachig** – Benutzeroberfläche, Wiki-Inhalte und Spieler-Karten auf Deutsch und Englisch (DE/EN-Toggle in der Toolbar)
 
 Gebaut mit Electron, React, TypeScript und SQLite. Läuft auf macOS, Windows und Linux.
 
@@ -45,15 +46,18 @@ Gebaut mit Electron, React, TypeScript und SQLite. Läuft auf macOS, Windows und
 | **Wände & Türen** | Linien-Werkzeug für Sichtlinienblocker; Türen und Fenster öffenbar/schließbar |
 | **Beleuchtung** | Pro-Token Lichtradius und Lichtfarbe; Beleuchtungsebene auf DM- und Spieler-Fenster |
 | **Token** | Drag & Drop; TP-Leiste; AC; Statuseffekte; Markierungsringe; Sichtbarkeits-Toggle; Sperren; Fraktionen |
-| **Token-Bibliothek / Bestiarium** | SRD-vorgegebene Monsterkarten mit Hero-Bild, Stat-Block-Dialog, Varianten-Artwork; eigene Templates mit CR / Typ / Größe |
-| **Charakterbögen** | Vollständiger D&D-5e-Charakterbogen pro Kampagne: Eigenschaftswerte, Rettungswürfe, Fertigkeiten, Angriffe, Ausrüstung, Persönlichkeit, Hintergeschichte |
+| **Wiki** | Bilinguale SRD-5.1-Referenz mit **263 Monstern, 203 Gegenständen und 313 Zaubern**; pro Kreatur mehrere Token-Varianten (über 13.000 insgesamt); Suche, Filter und Sortierung pro Kategorie |
+| **Bevorzugtes Portrait** | Im Wiki die Lieblingsvariante pro Monster als Standard markieren — wird überall (Hero-Bild, Token-Bibliothek, Encounter-Spawn, Karte) konsistent verwendet |
+| **Token-Bibliothek** | DM-Sidebar-Panel mit allen Monstern + eigenen Templates (CR / Typ / Größe); Drag-to-Map mit Formationen |
+| **Wiki ↔ Gameplay** | Aus dem Wiki Monster direkt auf die Karte setzen, als Handout ans Spielerfenster senden; am Token Rechtsklick → „Im Wiki öffnen"; Initiative-Einträge haben eine Stat-Block-Schaltfläche |
+| **Encounter-Builder** | Monster aus dem Wiki hinzufügen oder die aktuellen Karten-Token als wiederverwendbares Encounter speichern; Formationen und Schwierigkeitsgrade |
+| **Charakterbögen** | Vollständiger D&D-5e-Charakterbogen pro Kampagne: Eigenschaftswerte, Rettungswürfe, Fertigkeiten, Angriffe, Ausrüstung, Zauberbuch (mit Wiki-Picker), Persönlichkeit, Hintergeschichte |
 | **Initiative** | Sortierbarer Tracker mit Effekttimern; überträgt aktuellen Zug an Spieler-Overlay |
-| **Begegnungen** | Wiederverwendbare Spawn-Templates mit Formationen und Schwierigkeitsgraden |
 | **Räume** | Semantische Kartenbereiche mit Sichtbarkeit und Atmosphäre-Hinweis |
 | **Zeichnungen** | Freihand, Rechteck, Kreis und Text; werden auf DM- und Spieler-Fenster angezeigt |
 | **GM-Pins** | DM-only Kartenanmerkungen (nur im DM-Fenster sichtbar) |
 | **Notizen** | Pro-Kampagne und pro-Karte; direkt auf die Karte anheftbar |
-| **Handouts** | Bilder oder Textkarten direkt an den Spieler-Bildschirm senden |
+| **Handouts** | Bilder oder Textkarten — inkl. Wiki-Kreaturkarten, Gegenstände und Zauber — direkt ans Spielerfenster senden |
 | **Kompendium** | Integrierter PDF-Viewer mit SRD 5.2.1 (DE + EN automatisch sprachgewählt), Volltextsuche, Seite zum Spielerfenster broadcasten mit zoom-synchronem Re-Send |
 | **Audio** | Drei-Kanal-Mixer (Musik, Combat, SFX), Per-Map-Ambient-Track, Soundboards mit Slot-Grid, Master-Lautstärke |
 | **Würfelsystem** | Schnelles Würfeln mit Verlauf, Vor-/Nachteil für d20 |
@@ -64,6 +68,7 @@ Gebaut mit Electron, React, TypeScript und SQLite. Läuft auf macOS, Windows und
 | **Spieler-Vorschau** | DM-seitiger Player-Eye-Modus zum Prüfen der Spieler-Perspektive |
 | **Werkzeugleiste (v1 Conservative)** | Frei schwebende Left-Rail mit fünf Werkzeuggruppen, kontextbezogene Sub-Tool-Strip für aktive Tool-Optionen, kompakter Audio-Strip links unten, Novice-Beschriftungen und Auto-Hide einstellbar |
 | **Befehlspalette** | Cmd/Ctrl+K für schnelle Aktionen ohne Maus |
+| **Mehrsprachig** | Vollständig bilingual (DE/EN) — UI, Wiki-Inhalte, an Spieler gesendete Karten folgen der aktiven Sprache |
 
 ### Schnellstart
 
@@ -93,17 +98,21 @@ Fertige Builds liegen in `release/` und werden automatisch als [GitHub Releases]
 ```
 src/
   main/          Electron Main-Prozess (IPC, Datenbank, Fenster)
-    db/          SQLite-Schema (v20) und Migrationskette
-    ipc/         IPC-Handler (App, DB, Player-Bridge)
+    db/          SQLite-Schema (v34) und Migrationskette
+    ipc/         IPC-Handler (App, DB, Player-Bridge, Wiki-Daten)
   preload/       Context Bridge (electronAPI / playerAPI)
   renderer/      React-App (DM-Ansicht)
-    components/  UI-Komponenten (Canvas-Ebenen, Sidebar-Panels)
+    components/  UI-Komponenten (Canvas-Ebenen, Sidebar-Panels, Wiki)
     stores/      Zustand-Stores (Token, Fog, Walls, Characters, …)
     utils/       Hilfsfunktionen (losEngine, fogUtils, …)
     i18n/        Übersetzungen (DE/EN)
   shared/        Gemeinsame TypeScript-Typen und IPC-Konstanten
-resources/       App-Icons (ICNS, ICO, PNG)
-scripts/         Deployment-Hilfsskripte (Proxmox Runner-Setup)
+resources/
+  compendium/    SRD 5.2.1 PDFs (DE + EN)
+  data/          Wiki-Datensatz: 263 Monster, 203 Gegenstände, 313 Zauber + Token-Artwork
+  token-variants/  Zusätzliche Token-Varianten für die Token-Bibliothek
+  icon.*         App-Icons (ICNS, ICO, PNG)
+scripts/         Deployment-Hilfsskripte (Proxmox Runner-Setup, i18n-Check)
 ```
 
 ### Tech-Stack
@@ -114,7 +123,7 @@ scripts/         Deployment-Hilfsskripte (Proxmox Runner-Setup)
 | React 18 + TypeScript 5 | Benutzeroberfläche |
 | Vite 5 | Renderer-Bundler |
 | Zustand 5 | State-Management |
-| better-sqlite3 | Lokale Datenbank (SQLite, Schema v20) |
+| better-sqlite3 | Lokale Datenbank (SQLite, Schema v34) |
 | Konva / react-konva | Canvas-Rendering |
 | i18next / react-i18next | Mehrsprachigkeit (DE/EN) |
 | pdfjs-dist | PDF-Import für Karten |
@@ -143,8 +152,9 @@ BoltBerry is a **free, open-source, offline-first Virtual Tabletop (VTT)** for t
 
 - **DM Window** — full control panel for the game master
 - **Player Window** — sends map, tokens, handouts and effects to a second screen in real time
+- **Wiki** — bilingual SRD 5.1 reference with 263 monsters, 203 items, and 313 spells, wired directly into the canvas, initiative, and character sheets
 - **SQLite-backed** — all campaign data stored locally, no cloud dependencies
-- **Multilingual** — UI available in German and English (DE/EN toggle in the toolbar)
+- **Multilingual** — UI, Wiki content, and cards pushed to the player follow the active language (DE/EN toggle in the toolbar)
 
 Built with Electron, React, TypeScript and SQLite. Runs on macOS, Windows and Linux.
 
@@ -158,15 +168,18 @@ Built with Electron, React, TypeScript and SQLite. Runs on macOS, Windows and Li
 | **Walls & Doors** | Draw line-of-sight blockers; doors and windows can be opened/closed |
 | **Lighting** | Per-token light radius and colour; lighting layer rendered on both DM and player windows |
 | **Tokens** | Drag & drop; HP bar; AC; status effects; marker rings; visibility toggle; lock; factions |
-| **Token Library / Bestiary** | SRD-seeded monster cards with hero image, full stat-block dialog, variant artwork; custom templates with CR / type / size |
-| **Character Sheets** | Full D&D 5e sheet per campaign: ability scores, saving throws, skills, attacks, equipment, personality, backstory |
+| **Wiki** | Bilingual SRD 5.1 reference with **263 monsters, 203 items, and 313 spells**; multiple token variants per creature (13,000+ in total); per-category search, filters, and sort |
+| **Preferred Portrait** | Mark any variant as a monster's default from the Wiki — every surface (hero image, Token Library, encounter spawn, canvas) picks the same art |
+| **Token Library** | DM-sidebar panel of every monster + your own templates (CR / type / size); drag-to-map with formations |
+| **Wiki ↔ Gameplay** | Spawn a monster onto the active map straight from the Wiki, push a creature/item/spell card to the player window, right-click any token → "Open in Wiki", initiative rows carry a quick stat-block button |
+| **Encounter Builder** | Add monsters via the Wiki picker or save the current enemy tokens as a reusable encounter; formations and difficulty tiers |
+| **Character Sheets** | Full D&D 5e sheet per campaign: ability scores, saving throws, skills, attacks, equipment, spellbook (with Wiki picker), personality, backstory |
 | **Initiative** | Sortable tracker with effect timers; broadcasts current turn to player overlay |
-| **Encounters** | Reusable spawn templates with formation and difficulty options |
 | **Rooms** | Semantic map areas with visibility state and atmosphere hints |
 | **Drawings** | Freehand, rectangle, circle and text; synced to player window |
 | **GM Pins** | DM-only map annotations (never shown on player screen) |
 | **Notes** | Per-campaign and per-map; pinnable directly onto the map |
-| **Handouts** | Send images or text cards to the player screen |
+| **Handouts** | Push images or text cards — including Wiki creature, item, and spell cards — directly to the player screen |
 | **Compendium** | Built-in PDF viewer with SRD 5.2.1 (auto-selects DE or EN), full-text search, and live broadcast of the current page to the player window with zoom-synced re-send |
 | **Audio** | Three-channel mixer (music, combat, SFX), per-map ambient track, soundboards with slot grid, master volume |
 | **Dice Roller** | Quick rolls with history, advantage/disadvantage for d20 |
@@ -177,6 +190,7 @@ Built with Electron, React, TypeScript and SQLite. Runs on macOS, Windows and Li
 | **Player Preview** | DM-side player-eye mode to check the player's perspective |
 | **Toolbar (v1 Conservative)** | Floating left rail with five tool groups, contextual sub-tool strip for the active tool's options, compact audio strip bottom-left, optional novice labels + auto-hide |
 | **Command Palette** | Cmd/Ctrl+K for fast keyboard-only actions |
+| **Multilingual** | Fully bilingual (DE/EN) — UI, Wiki content, and cards sent to the player follow the active language |
 
 ### Getting Started
 
@@ -206,17 +220,21 @@ Packaged output goes to `release/`. Binaries are published automatically as [Git
 ```
 src/
   main/          Electron main process (IPC, database, windows)
-    db/          SQLite schema (v20) and migration chain
-    ipc/         IPC handlers (app, database, player bridge)
+    db/          SQLite schema (v34) and migration chain
+    ipc/         IPC handlers (app, database, player bridge, wiki data)
   preload/       Context bridge (electronAPI / playerAPI)
   renderer/      React app (DM view)
-    components/  UI components (canvas layers, sidebar panels)
+    components/  UI components (canvas layers, sidebar panels, wiki)
     stores/      Zustand stores (tokens, fog, walls, characters, …)
     utils/       Utilities (losEngine, fogUtils, …)
     i18n/        Translations (DE/EN)
   shared/        Shared TypeScript types and IPC constants
-resources/       App icons (ICNS, ICO, PNG)
-scripts/         Deployment helpers (Proxmox runner setup)
+resources/
+  compendium/    SRD 5.2.1 PDFs (DE + EN)
+  data/          Wiki dataset: 263 monsters, 203 items, 313 spells + token artwork
+  token-variants/  Extra token variants for the Token Library
+  icon.*         App icons (ICNS, ICO, PNG)
+scripts/         Deployment helpers (Proxmox runner setup, i18n check)
 ```
 
 ### Tech Stack
@@ -227,7 +245,7 @@ scripts/         Deployment helpers (Proxmox runner setup)
 | React 18 + TypeScript 5 | UI |
 | Vite 5 | Renderer bundler |
 | Zustand 5 | State management |
-| better-sqlite3 | Embedded database (SQLite, schema v20) |
+| better-sqlite3 | Embedded database (SQLite, schema v34) |
 | Konva / react-konva | Canvas rendering |
 | i18next / react-i18next | Internationalisation (DE/EN) |
 | pdfjs-dist | PDF → PNG for map import |
