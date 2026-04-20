@@ -2,6 +2,7 @@ import { ipcMain, app } from 'electron'
 import { existsSync, readFileSync, realpathSync, statSync } from 'fs'
 import { extname, join, sep } from 'path'
 import { IPC } from '../../shared/ipc-types'
+import { getDb } from '../db/database'
 import type {
   ItemIndexEntry,
   ItemRecord,
@@ -104,6 +105,32 @@ function resolveTokenUrl(slug: string, file: string): string | null {
   }
 }
 
+// Look up the user's preferred token filename for this slug. Missing
+// table (fresh DB pre-v34 migration) or query failure both resolve to
+// null so getMonster can fall back to the dataset's default token.
+function readUserDefaultToken(slug: string): string | null {
+  if (!SLUG_RE.test(slug)) return null
+  try {
+    const row = getDb().prepare(
+      'SELECT token_file FROM monster_defaults WHERE slug = ?',
+    ).get(slug) as { token_file: string } | undefined
+    return row?.token_file ?? null
+  } catch {
+    return null
+  }
+}
+
+// Whitelist the user's chosen token against the creature's actual token
+// list before we persist it — otherwise a crafted request could point a
+// slug at any file on disk (we do the realpath guard too, but checking
+// the manifest first gives us a clean "not a real variant" error path).
+function tokenFileBelongsToMonster(slug: string, file: string): boolean {
+  const raw = readSlugFile('monsters', slug, 'monster.json') as MonsterRecord | null
+  if (!raw) return false
+  if (raw.token?.file === file) return true
+  return (raw.tokens ?? []).some((t) => t.file === file)
+}
+
 export function registerDataHandlers(): void {
   ipcMain.handle(IPC.DATA_LIST_MONSTERS, (): MonsterIndexEntry[] => {
     if (!monstersIndex) {
@@ -114,13 +141,16 @@ export function registerDataHandlers(): void {
 
   ipcMain.handle(IPC.DATA_GET_MONSTER, (_event, slug: string): (MonsterRecord & {
     tokenDefaultUrl: string | null
+    userDefaultFile: string | null
   }) | null => {
     const raw = readSlugFile('monsters', slug, 'monster.json') as MonsterRecord | null
     if (!raw) return null
-    const primary = raw.token?.file ?? raw.tokens?.[0]?.file ?? null
+    const override = readUserDefaultToken(slug)
+    const primary = override ?? raw.token?.file ?? raw.tokens?.[0]?.file ?? null
     return {
       ...raw,
       tokenDefaultUrl: primary ? resolveTokenUrl(slug, primary) : null,
+      userDefaultFile: override,
     }
   })
 
@@ -129,6 +159,42 @@ export function registerDataHandlers(): void {
     slug: string,
     file: string,
   ): string | null => resolveTokenUrl(slug, file))
+
+  ipcMain.handle(IPC.DATA_SET_MONSTER_DEFAULT, (
+    _event,
+    slug: string,
+    file: string | null,
+  ): { success: boolean; error?: string } => {
+    if (!SLUG_RE.test(slug)) return { success: false, error: 'invalid-slug' }
+    try {
+      const db = getDb()
+      if (file === null) {
+        db.prepare('DELETE FROM monster_defaults WHERE slug = ?').run(slug)
+        return { success: true }
+      }
+      if (!tokenFileBelongsToMonster(slug, file)) {
+        return { success: false, error: 'unknown-variant' }
+      }
+      db.prepare(
+        'INSERT OR REPLACE INTO monster_defaults (slug, token_file) VALUES (?, ?)',
+      ).run(slug, file)
+      // Keep token_templates.image_path in sync so the Token Library panel
+      // (which reads image_path) picks up the same preferred variant on
+      // its next query. Use the compact bestiary:// scheme — the image
+      // loaders resolve it through this same handler. Best-effort: never
+      // fail the set-default call on a sync glitch.
+      try {
+        db.prepare(
+          `UPDATE token_templates
+           SET image_path = ?
+           WHERE slug = ? AND source = 'srd'`,
+        ).run(`bestiary://${slug}/${file}`, slug)
+      } catch { /* ignore */ }
+      return { success: true }
+    } catch (err) {
+      return { success: false, error: (err as Error).message }
+    }
+  })
 
   ipcMain.handle(IPC.DATA_LIST_ITEMS, (): ItemIndexEntry[] => {
     if (!itemsIndex) {

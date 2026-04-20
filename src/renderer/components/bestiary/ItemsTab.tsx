@@ -255,7 +255,7 @@ function ItemDetail({ slug, language }: { slug: string; language: AppLanguage })
           <div className="bb-best-hero-chips">
             {record.cost != null && <Chip label={t('bestiary.cost')} value={`${record.cost} gp`} />}
             {record.weight != null && <Chip label={t('bestiary.weight')} value={`${record.weight} lb`} />}
-            {record.ac && <Chip label="AC" value={record.ac} />}
+            {record.ac && <Chip label="AC" value={localized(record.ac, language)} />}
             {damage && <Chip label={t('bestiary.damage')} value={damage} />}
             {record.damageType && <Chip label={t('bestiary.damageType')} value={localized(record.damageType, language)} />}
           </div>

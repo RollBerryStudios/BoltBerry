@@ -27,9 +27,12 @@ import { localized, localizedArray, pickName, tokenTint } from './util'
  *  the player window's name plate matches the DM's UI. */
 export async function spawnMonsterOnMap(opts: {
   monster: MonsterRecord
-  /** Default token image (data URL) — pulled from monster.token in the
-   *  caller via getMonster. Falls back to a marker-only token if absent. */
-  imageDataUrl: string | null
+  /** Preferred token filename (e.g. "AbolethEel (2).webp") when the spawn
+   *  should pin to a specific variant. Optional — when omitted we fall
+   *  back to the monster's default token via the compact bestiary:// URL
+   *  scheme, which keeps tokens.image_path tiny instead of storing
+   *  30–50 KB of base64 per row. */
+  tokenFile?: string | null
   mapId: number
   /** Map camera centre — used as the spawn anchor. Caller passes the
    *  values from the active MapRecord. */
@@ -55,6 +58,13 @@ export async function spawnMonsterOnMap(opts: {
   const size = gridSizeFromLabel(m.size.en)
   const faction = opts.hostile === false ? 'neutral' : 'enemy'
 
+  // Compose the compact bestiary:// reference from the chosen variant or
+  // the monster's shipped primary. Image loaders (useImage /
+  // useImageUrl) resolve this to a data URL on demand; both the DM and
+  // the player window understand the scheme.
+  const variant = opts.tokenFile ?? m.token?.file ?? m.tokens?.[0]?.file ?? null
+  const imagePath = variant ? `bestiary://${m.slug}/${variant}` : null
+
   const res = await api.dbRun(
     `INSERT INTO tokens
        (map_id, name, image_path, x, y, size, hp_current, hp_max,
@@ -64,7 +74,7 @@ export async function spawnMonsterOnMap(opts: {
     [
       opts.mapId,
       name,
-      opts.imageDataUrl,
+      imagePath,
       cx, cy,
       size,
       hp, hp,
@@ -82,7 +92,7 @@ export async function spawnMonsterOnMap(opts: {
     id: res.lastInsertRowid,
     mapId: opts.mapId,
     name,
-    imagePath: opts.imageDataUrl,
+    imagePath,
     x: cx, y: cy,
     size,
     hpCurrent: hp, hpMax: hp,
@@ -177,7 +187,7 @@ export function itemHandout(it: ItemRecord, lang: AppLanguage): PlayerHandout {
   if (it.cost != null) lines.push(`${L.cost}: ${it.cost} gp`)
   if (it.weight != null) lines.push(`${L.weight}: ${it.weight} lb`)
   if (it.classification) lines.push(`${L.type}: ${localized(it.classification, lang)}`)
-  if (it.ac) lines.push(`${L.ac2}: ${it.ac}`)
+  if (it.ac) lines.push(`${L.ac2}: ${localized(it.ac, lang)}`)
   if (it.damageType) lines.push(`${L.damage}: ${localized(it.damageType, lang)}`)
   const props = normaliseProperties(it.properties, lang)
   if (props) lines.push(`${L.properties}: ${props}`)

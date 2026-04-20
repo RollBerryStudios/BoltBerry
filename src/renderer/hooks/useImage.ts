@@ -43,44 +43,44 @@ export function useImage(src: string | null): HTMLImageElement | null {
 
     let cancelled = false
 
-    // data: URLs load directly; everything else goes through main process
-    // (file:// URLs are unreliable in Electron due to security restrictions,
-    // and relative paths like "assets/map/foo.png" need resolving anyway)
-    if (!src.startsWith('data:')) {
-      // Strip file:// prefix if present, then load relative path through main process.
-      // Player window has no window.electronAPI — fall back to window.playerAPI.
-      const relativePath = src.startsWith('file://') ? src.substring(7) : src
-      const loader = window.electronAPI?.getImageAsBase64 ?? window.playerAPI?.getImageAsBase64
-      loader?.(relativePath).then((imageData) => {
-        if (cancelled) return
-        if (!imageData) {
-          setImg(null)
-          return
-        }
-        const image = new Image()
-        image.onload = () => {
-          if (cancelled) return
-          touchCache(src, image)
-          setImg(image)
-        }
-        image.onerror = () => {
-          if (!cancelled) setImg(null)
-        }
-        image.src = imageData
-      }).catch(() => {
-        if (!cancelled) setImg(null)
-      })
-    } else {
+    // Inline helper: decode a data URL or fetch any dataUrl-returning loader
+    // and paint the result into the cache / state. Kept local so all three
+    // loading branches (data:, bestiary://, relative path) share one code
+    // path for error + cache handling.
+    const setFromData = (dataUrl: string | null) => {
+      if (cancelled) return
+      if (!dataUrl) { setImg(null); return }
       const image = new Image()
       image.onload = () => {
         if (cancelled) return
         touchCache(src, image)
         setImg(image)
       }
-      image.onerror = () => {
-        if (!cancelled) setImg(null)
-      }
-      image.src = src
+      image.onerror = () => { if (!cancelled) setImg(null) }
+      image.src = dataUrl
+    }
+
+    if (src.startsWith('data:')) {
+      setFromData(src)
+    } else if (src.startsWith('bestiary://')) {
+      // Shipped dataset token — resolve on demand so the DB / sync
+      // payload can keep the compact reference instead of a 50 KB data URL.
+      const m = src.match(/^bestiary:\/\/([^/]+)\/(.+)$/)
+      if (!m) { setImg(null); return }
+      const slug = m[1]
+      const file = m[2]
+      const loader = window.electronAPI?.getMonsterTokenUrl ?? window.playerAPI?.getMonsterTokenUrl
+      loader?.(slug, file)
+        .then((data) => setFromData(data))
+        .catch(() => { if (!cancelled) setImg(null) })
+    } else {
+      // Strip file:// prefix if present, then load relative path through main process.
+      // Player window has no window.electronAPI — fall back to window.playerAPI.
+      const relativePath = src.startsWith('file://') ? src.substring(7) : src
+      const loader = window.electronAPI?.getImageAsBase64 ?? window.playerAPI?.getImageAsBase64
+      loader?.(relativePath)
+        .then((data) => setFromData(data))
+        .catch(() => { if (!cancelled) setImg(null) })
     }
 
     return () => {

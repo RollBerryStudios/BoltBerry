@@ -14,6 +14,7 @@ import {
   MIGRATE_V24_TO_V25, MIGRATE_V25_TO_V26, MIGRATE_V26_TO_V27,
   MIGRATE_V27_TO_V28, MIGRATE_V28_TO_V29, MIGRATE_V29_TO_V30,
   MIGRATE_V30_TO_V31, MIGRATE_V31_TO_V32, MIGRATE_V32_TO_V33,
+  MIGRATE_V33_TO_V34,
 } from './schema'
 import { loadMonstersIndexSync, loadMonsterRecordSync } from '../ipc/data-handlers'
 
@@ -44,6 +45,7 @@ const MIGRATIONS: ReadonlyArray<readonly [target: number, sql: string]> = [
   [31, MIGRATE_V30_TO_V31],
   [32, MIGRATE_V31_TO_V32],
   [33, MIGRATE_V32_TO_V33],
+  [34, MIGRATE_V33_TO_V34],
 ]
 
 export class SchemaTooNewError extends Error {
@@ -194,22 +196,43 @@ function seedSrdMonsters(database: Database.Database) {
       (category, source, name, image_path, size, hp_max, ac, speed, cr,
        creature_type, faction, marker_color, notes, stat_block, slug, created_at)
       VALUES
-      ('monster', 'srd', @name, NULL, @size, @hp_max, @ac, @speed, @cr,
+      ('monster', 'srd', @name, @image_path, @size, @hp_max, @ac, @speed, @cr,
        @creature_type, @faction, @marker_color, NULL, @stat_block, @slug,
        datetime('now'))`,
+  )
+
+  // Backfill: `INSERT OR IGNORE` is a no-op on existing rows, so an
+  // upgrade leaves older seeds with NULL image_path. Fill in the
+  // bestiary:// reference for any SRD row that still lacks one (and
+  // still has the expected slug). User-edited rows (renamed, or with
+  // image_path already set) are left alone.
+  const backfillImagePath = database.prepare(
+    `UPDATE token_templates
+     SET image_path = @image_path
+     WHERE source = 'srd' AND slug = @slug
+       AND (image_path IS NULL OR image_path = '')`,
   )
 
   const tx = database.transaction(() => {
     for (const entry of index) {
       const full = loadMonsterRecordSync(entry.slug)
       if (!full) continue
+      // Prefer the dataset's explicit `token` entry; fall back to the
+      // first variant. `bestiary://<slug>/<file>` resolves through the
+      // image loaders on both DM and player window without bloating the
+      // DB with 30–50 KB of base64.
+      const primaryFile = full.token?.file ?? full.tokens?.[0]?.file ?? null
+      const imagePath = primaryFile ? `bestiary://${entry.slug}/${primaryFile}` : null
+      const hpEn = typeof full.hp === 'object' ? full.hp?.en : undefined
+      const acEn = typeof full.ac === 'object' ? full.ac?.en : (typeof full.ac === 'string' ? full.ac : undefined)
       const payload = {
         // Prefer the German name when present — the app's default locale is
         // DE and the Token Library's uniqueness key is the `name` column.
         name: entry.nameDe?.trim() || entry.name,
+        image_path: imagePath,
         size: gridSizeFromLabel(entry.size),
-        hp_max: parseHpMax(full.hp?.en) ?? 10,
-        ac: parseAc(full.ac?.en) ?? 10,
+        hp_max: parseHpMax(hpEn) ?? 10,
+        ac: parseAc(acEn) ?? 10,
         speed: parseSpeed(full.speed?.run?.en) ?? 30,
         cr: full.challenge,
         creature_type: entry.type.en,
@@ -223,6 +246,7 @@ function seedSrdMonsters(database: Database.Database) {
         slug: entry.slug,
       }
       insert.run(payload)
+      if (imagePath) backfillImagePath.run({ slug: entry.slug, image_path: imagePath })
     }
   })
   tx()

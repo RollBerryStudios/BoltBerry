@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 33
+export const SCHEMA_VERSION = 34
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -436,6 +436,15 @@ CREATE TABLE IF NOT EXISTS sessions (
   ended_at     TEXT
 );
 
+-- Per-monster default token overrides (set from the Wiki). Maps a creature
+-- slug to the file name of the preferred portrait, e.g.
+-- ('aboleth', 'AbolethEel (3).webp'). Used by data:get-monster and by the
+-- Wiki's hero portrait + spawn helpers so every surface picks the same art.
+CREATE TABLE IF NOT EXISTS monster_defaults (
+  slug       TEXT PRIMARY KEY,
+  token_file TEXT NOT NULL
+);
+
 -- Schema version tracking (single-row enforced by PK constraint)
 CREATE TABLE IF NOT EXISTS schema_version (
   id      INTEGER PRIMARY KEY CHECK (id = 1),
@@ -766,6 +775,19 @@ UPDATE schema_version SET version = 32;
 export const MIGRATE_V32_TO_V33 = `
 DELETE FROM token_templates WHERE source = 'srd';
 UPDATE schema_version SET version = 33;
+`
+
+// Migration: v33 → v34 — per-monster default token override. DMs use the
+// Wiki to pick which variant of a creature is their canonical portrait;
+// we persist that choice here so spawning (from the Wiki, the Token
+// Library, or the Encounter builder) picks the same image and the hero
+// portrait stays consistent across sessions.
+export const MIGRATE_V33_TO_V34 = `
+CREATE TABLE IF NOT EXISTS monster_defaults (
+  slug       TEXT PRIMARY KEY,
+  token_file TEXT NOT NULL
+);
+UPDATE schema_version SET version = 34;
 `
 
 // Use the SCHEMA_VERSION constant directly so there's a single source of truth.

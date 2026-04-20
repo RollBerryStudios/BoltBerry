@@ -99,6 +99,8 @@ export const IPC = {
   DATA_LIST_MONSTERS: 'data:list-monsters',
   DATA_GET_MONSTER: 'data:get-monster',
   DATA_GET_MONSTER_TOKEN: 'data:get-monster-token',
+  /** Persist / clear the user's preferred portrait for a given slug. */
+  DATA_SET_MONSTER_DEFAULT: 'data:set-monster-default',
   DATA_LIST_ITEMS: 'data:list-items',
   DATA_GET_ITEM: 'data:get-item',
   DATA_LIST_SPELLS: 'data:list-spells',
@@ -186,7 +188,10 @@ export interface MonsterRecord {
   meta: L10n
   challenge: string
   xp: number
-  ac: L10n
+  /** Dataset writes this as L10n for most creatures but a handful
+   *  (banshee, goat, kobold, …) store a plain string like "12". Accept
+   *  either so the detail view doesn't crash. */
+  ac: L10n | string
   hp: L10n
   str: number; dex: number; con: number
   int: number; wis: number; cha: number
@@ -201,7 +206,10 @@ export interface MonsterRecord {
   }>
   senses?: L10nArray
   languages?: L10nArray
-  savingThrows?: string[]
+  /** Legacy shape: `["Kon +6", "Int +8"]` (already-formatted strings).
+   *  New shape (banshee): `{ wis: 2, cha: 5 }` (ability → bonus). The
+   *  renderer normalises via `formatSavingThrows`. */
+  savingThrows?: string[] | Record<string, number>
   skills?: string[]
   traits?: { en: NamedText[]; de: NamedText[] }
   actions?: { en: Array<NamedText | string>; de: Array<NamedText | string> }
@@ -227,16 +235,20 @@ export interface ItemRecord {
   cost?: number | null
   source?: L10n
   weight?: number | null
-  classification?: L10n
-  description?: L10n
+  classification?: L10n | string
+  description?: L10n | string
   damage?: string
-  damageType?: L10n
+  damageType?: L10n | string
   /** Dataset writes this as L10n (single string per locale) today, but
    *  historically we typed it as L10nArray. Allow both — consumers
    *  normalise via `propertiesAsText` in the renderer. */
-  properties?: L10n | L10nArray
+  properties?: L10n | L10nArray | string
   stealth?: string
-  ac?: string
+  /** Mostly "+1" / "+2" strings, but a few items (elven-chain) store
+   *  the AC as an L10n object so the DE version can read "13+ Geschick…". */
+  ac?: string | L10n
+  /** Most items use int/float lb; a minority use a string ("2 lb"). */
+  weight?: number | string | null
   image?: string
   license: string
   licenseSource: string
@@ -252,18 +264,18 @@ export interface SpellRecord {
   ritual?: boolean
   source?: string
   classes?: L10nArray
-  type?: L10n
-  castingTime?: L10n
-  range?: L10n
-  duration?: L10n
+  type?: L10n | string
+  castingTime?: L10n | string
+  range?: L10n | string
+  duration?: L10n | string
   components?: {
     verbal?: boolean
     somatic?: boolean
     material?: boolean
-    raw?: L10n
+    raw?: L10n | string
   }
-  description?: L10n
-  higherLevels?: L10n
+  description?: L10n | string
+  higherLevels?: L10n | string
   image?: string
   license: string
   licenseSource: string

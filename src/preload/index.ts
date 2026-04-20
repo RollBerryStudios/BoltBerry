@@ -141,10 +141,17 @@ export const dmApi = {
   // Bestiarium data (SRD 5.1 monsters, items, spells)
   listMonsters: (): Promise<MonsterIndexEntry[]> =>
     ipcRenderer.invoke(IPC.DATA_LIST_MONSTERS),
-  getMonster: (slug: string): Promise<(MonsterRecord & { tokenDefaultUrl: string | null }) | null> =>
+  getMonster: (slug: string): Promise<(MonsterRecord & {
+    tokenDefaultUrl: string | null
+    userDefaultFile: string | null
+  }) | null> =>
     ipcRenderer.invoke(IPC.DATA_GET_MONSTER, slug),
   getMonsterTokenUrl: (slug: string, file: string): Promise<string | null> =>
     ipcRenderer.invoke(IPC.DATA_GET_MONSTER_TOKEN, slug, file),
+  /** Persist or clear the DM's preferred portrait for a creature. Pass
+   *  null as `file` to reset to the dataset's default. */
+  setMonsterDefault: (slug: string, file: string | null): Promise<{ success: boolean; error?: string }> =>
+    ipcRenderer.invoke(IPC.DATA_SET_MONSTER_DEFAULT, slug, file),
   listItems: (): Promise<ItemIndexEntry[]> =>
     ipcRenderer.invoke(IPC.DATA_LIST_ITEMS),
   getItem: (slug: string): Promise<ItemRecord | null> =>
@@ -168,6 +175,11 @@ export const dmApi = {
 export const playerApi = {
   // Image loading — player window does not get electronAPI, but still needs images
   getImageAsBase64: (path: string) => ipcRenderer.invoke('app:get-image-as-base64', path),
+  /** Resolve a bestiary token reference (bestiary://<slug>/<file>) to a
+   *  data URL. Exposed on the player window too so broadcast tokens that
+   *  reference the shipped dataset render without the DM window. */
+  getMonsterTokenUrl: (slug: string, file: string): Promise<string | null> =>
+    ipcRenderer.invoke(IPC.DATA_GET_MONSTER_TOKEN, slug, file),
 
   onFullSync: (cb: (state: PlayerFullState) => void) => {
     const handler = (_: Electron.IpcRendererEvent, state: PlayerFullState) => cb(state)

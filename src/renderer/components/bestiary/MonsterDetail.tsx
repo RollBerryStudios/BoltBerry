@@ -8,13 +8,20 @@ import { showToast } from '../shared/Toast'
 import { formatMod, localized, localizedArray, pickName, tokenTint } from './util'
 import { monsterHandout, spawnMonsterOnMap } from './actions'
 
-type LoadedMonster = (MonsterRecord & { tokenDefaultUrl: string | null }) | null
+type LoadedMonster = (MonsterRecord & {
+  tokenDefaultUrl: string | null
+  userDefaultFile: string | null
+}) | null
 
 export function MonsterDetail({ slug, language }: { slug: string; language: AppLanguage }) {
   const { t } = useTranslation()
   const [record, setRecord] = useState<LoadedMonster>(null)
   const [tokenIndex, setTokenIndex] = useState(0)
   const [tokenUrls, setTokenUrls] = useState<Record<string, string>>({})
+  // Bumped by the "Set as default" action so the detail refetches and
+  // every surface (hero portrait, thumbnail badges, spawn image) picks up
+  // the new override without unmounting the whole pane.
+  const [refreshNonce, setRefreshNonce] = useState(0)
 
   useEffect(() => {
     let alive = true
@@ -31,12 +38,43 @@ export function MonsterDetail({ slug, language }: { slug: string; language: AppL
       }
     })()
     return () => { alive = false }
-  }, [slug])
+  }, [slug, refreshNonce])
+
+  async function handleSetDefault(file: string | null) {
+    const res = await window.electronAPI?.setMonsterDefault?.(slug, file)
+    if (res?.success) {
+      setRefreshNonce((n) => n + 1)
+      showToast(
+        file
+          ? t('bestiary.defaultSet')
+          : t('bestiary.defaultCleared'),
+        'success',
+      )
+    } else {
+      showToast(res?.error ?? 'Fehler', 'error')
+    }
+  }
 
   const tokens = useMemo(() => {
     if (!record) return [] as Array<{ file: string; variant: string }>
-    const primary = record.token ? [record.token] : []
-    return [...primary, ...(record.tokens ?? [])]
+    const all = [
+      ...(record.token ? [record.token] : []),
+      ...(record.tokens ?? []),
+    ]
+    // Deduplicate: record.token is the dataset primary and sometimes also
+    // appears in record.tokens (no existing entry is known, but it's a
+    // cheap guarantee). Then pin the user's chosen default to index 0 so
+    // the hero portrait renders it first — both on mount (sync fallback
+    // via tokenDefaultUrl) and after the async thumbnail load resolves.
+    const seen = new Set<string>()
+    const unique = all.filter((t) => (seen.has(t.file) ? false : (seen.add(t.file), true)))
+    const override = record.userDefaultFile
+    if (!override) return unique
+    const idx = unique.findIndex((t) => t.file === override)
+    if (idx <= 0) return unique
+    const [chosen] = unique.splice(idx, 1)
+    unique.unshift(chosen)
+    return unique
   }, [record])
 
   // Resolve each token filename to a local-asset URL the first time the
@@ -100,7 +138,16 @@ export function MonsterDetail({ slug, language }: { slug: string; language: AppL
       </header>
 
       {/* Action toolbar — connects the reference card to the table. */}
-      <MonsterActions record={record} language={language} imageUrl={currentUrl ?? null} />
+      <MonsterActions
+        record={record}
+        language={language}
+        imageUrl={currentUrl ?? null}
+        currentFile={currentToken?.file ?? null}
+        isAlreadyDefault={
+          currentToken?.file != null && currentToken.file === (record.userDefaultFile ?? record.token?.file ?? null)
+        }
+        onSetDefault={handleSetDefault}
+      />
 
       {/* Token strip */}
       {tokens.length > 1 && (
@@ -111,6 +158,8 @@ export function MonsterDetail({ slug, language }: { slug: string; language: AppL
           onActivate={setTokenIndex}
           urls={tokenUrls}
           onResolve={(file, url) => setTokenUrls((prev) => ({ ...prev, [file]: url }))}
+          defaultFile={record.userDefaultFile ?? record.token?.file ?? null}
+          onSetDefault={handleSetDefault}
         />
       )}
 
@@ -127,8 +176,8 @@ export function MonsterDetail({ slug, language }: { slug: string; language: AppL
       {/* Metadata grid */}
       <section className="bb-best-metagrid">
         <MetaRow label={t('bestiary.speed')} value={speedLine(record, language)} />
-        <MetaRow label={t('bestiary.savingThrows')} value={(record.savingThrows ?? []).join(', ')} />
-        <MetaRow label={t('bestiary.skills')} value={(record.skills ?? []).join(', ')} />
+        <MetaRow label={t('bestiary.savingThrows')} value={formatSavingThrows(record.savingThrows)} />
+        <MetaRow label={t('bestiary.skills')} value={formatSkills(record.skills)} />
         <MetaRow label={t('bestiary.senses')} value={localizedArray(record.senses, language).join(', ')} />
         <MetaRow label={t('bestiary.languages')} value={localizedArray(record.languages, language).join(', ')} />
       </section>
@@ -148,14 +197,26 @@ export function MonsterDetail({ slug, language }: { slug: string; language: AppL
   )
 }
 
-function TokenStrip({ slug, tokens, activeIndex, onActivate, urls, onResolve }: {
+function TokenStrip({
+  slug,
+  tokens,
+  activeIndex,
+  onActivate,
+  urls,
+  onResolve,
+  defaultFile,
+  onSetDefault,
+}: {
   slug: string
   tokens: Array<{ file: string; variant: string }>
   activeIndex: number
   onActivate: (i: number) => void
   urls: Record<string, string>
   onResolve: (file: string, url: string) => void
+  defaultFile: string | null
+  onSetDefault: (file: string | null) => void
 }) {
+  const { t } = useTranslation()
   // Resolve thumbnail URLs lazily in small batches so the strip paints
   // progressively instead of blocking on 30+ IPC calls.
   useEffect(() => {
@@ -176,21 +237,49 @@ function TokenStrip({ slug, tokens, activeIndex, onActivate, urls, onResolve }: 
 
   return (
     <div className="bb-best-tokens">
-      {tokens.map((tok, i) => (
-        <button
-          key={`${tok.file}-${i}`}
-          type="button"
-          title={tok.variant}
-          onClick={() => onActivate(i)}
-          className={i === activeIndex ? 'bb-best-token active' : 'bb-best-token'}
-        >
-          {urls[tok.file] ? (
-            <img src={urls[tok.file]} alt="" draggable={false} />
-          ) : (
-            <span className="bb-best-token-skeleton" aria-hidden="true" />
-          )}
-        </button>
-      ))}
+      {tokens.map((tok, i) => {
+        const isDefault = defaultFile === tok.file
+        return (
+          <div
+            key={`${tok.file}-${i}`}
+            className={
+              [
+                'bb-best-token-wrap',
+                i === activeIndex ? 'active' : '',
+                isDefault ? 'is-default' : '',
+              ].filter(Boolean).join(' ')
+            }
+          >
+            <button
+              type="button"
+              title={tok.variant}
+              onClick={() => onActivate(i)}
+              className="bb-best-token"
+            >
+              {urls[tok.file] ? (
+                <img src={urls[tok.file]} alt="" draggable={false} />
+              ) : (
+                <span className="bb-best-token-skeleton" aria-hidden="true" />
+              )}
+            </button>
+            {/* Star button overlay. Clicking the already-marked default
+                clears the override so the dataset's original portrait
+                comes back. */}
+            <button
+              type="button"
+              className={isDefault ? 'bb-best-token-star active' : 'bb-best-token-star'}
+              onClick={(e) => {
+                e.stopPropagation()
+                onSetDefault(isDefault ? null : tok.file)
+              }}
+              title={isDefault ? t('bestiary.clearDefault') : t('bestiary.setDefault')}
+              aria-label={isDefault ? t('bestiary.clearDefault') : t('bestiary.setDefault')}
+            >
+              {isDefault ? '★' : '☆'}
+            </button>
+          </div>
+        )
+      })}
     </div>
   )
 }
@@ -277,16 +366,47 @@ function stripParens(s: string): string {
   return s.replace(/\s*\([^)]*\)\s*$/, '').trim() || s
 }
 
+// Dataset has two saving-throw shapes:
+//   - string[]:  ["Kon +6", "Int +8", "Wei +6"]  (pre-formatted)
+//   - object:    { wis: 2, cha: 5 }              (banshee et al.)
+// Normalise to a single display string so rendering never crashes.
+function formatSavingThrows(src: MonsterRecord['savingThrows']): string {
+  if (!src) return ''
+  if (Array.isArray(src)) return src.join(', ')
+  return Object.entries(src)
+    .map(([ab, bonus]) => {
+      const n = Number(bonus)
+      const sign = n >= 0 ? '+' : ''
+      return `${ab.toUpperCase()} ${sign}${n}`
+    })
+    .join(', ')
+}
+
+function formatSkills(src: MonsterRecord['skills']): string {
+  if (!src) return ''
+  if (Array.isArray(src)) return src.join(', ')
+  // Defensive — the dataset only ships string[] today but future exports
+  // might flip to the ability-bonus object. Handle it the same way.
+  return Object.entries(src as unknown as Record<string, unknown>)
+    .map(([k, v]) => `${k}: ${v}`).join(', ')
+}
+
 // ───────── Action toolbar: spawn on map + send handout to player ──────
 
 function MonsterActions({
   record,
   language,
   imageUrl,
+  currentFile,
+  isAlreadyDefault,
+  onSetDefault,
 }: {
-  record: MonsterRecord & { tokenDefaultUrl: string | null }
+  record: MonsterRecord & { tokenDefaultUrl: string | null; userDefaultFile: string | null }
   language: AppLanguage
   imageUrl: string | null
+  currentFile: string | null
+  isAlreadyDefault: boolean
+  onSetDefault: (file: string | null) => void
 }) {
   const { t } = useTranslation()
   const activeMapId = useCampaignStore((s) => s.activeMapId)
@@ -303,10 +423,12 @@ function MonsterActions({
     if (!map) return
     setBusy(true)
     try {
-      const primary = imageUrl ?? record.tokenDefaultUrl
       const ok = await spawnMonsterOnMap({
         monster: record,
-        imageDataUrl: primary,
+        // Pin to the variant the DM is looking at (if any), otherwise let
+        // the helper fall back to the monster's default via the compact
+        // bestiary:// URL — avoids storing ~30 KB of base64 per token.
+        tokenFile: currentFile ?? record.userDefaultFile ?? null,
         mapId: map.id,
         cameraX: map.cameraX,
         cameraY: map.cameraY,
@@ -347,6 +469,19 @@ function MonsterActions({
         title={playerConnected ? t('bestiary.sendToPlayer') : t('bestiary.sendDisabled')}
       >
         📡 {t('bestiary.sendToPlayer')}
+      </button>
+      <button
+        type="button"
+        className="bb-best-action-btn"
+        onClick={() => onSetDefault(isAlreadyDefault ? null : currentFile)}
+        disabled={!currentFile}
+        title={
+          isAlreadyDefault
+            ? t('bestiary.clearDefault')
+            : t('bestiary.setDefault')
+        }
+      >
+        {isAlreadyDefault ? '★' : '☆'} {isAlreadyDefault ? t('bestiary.clearDefault') : t('bestiary.setDefault')}
       </button>
     </div>
   )

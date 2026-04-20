@@ -187,7 +187,9 @@ export function EncounterPanel() {
       if (!record) return
       const ok = await spawnMonsterOnMap({
         monster: record,
-        imageDataUrl: record.tokenDefaultUrl,
+        // Prefer the user's chosen default; the helper resolves the
+        // concrete file and stores a compact bestiary:// reference.
+        tokenFile: record.userDefaultFile ?? null,
         mapId: map.id,
         cameraX: map.cameraX,
         cameraY: map.cameraY,

@@ -397,9 +397,17 @@ export function BestiaryStyles() {
         border-radius: var(--radius-md);
         border: 1px solid var(--border-subtle);
       }
-      .bb-best-token {
+      .bb-best-token-wrap {
+        position: relative;
         flex-shrink: 0;
         width: 48px; height: 48px;
+      }
+      .bb-best-token-wrap:not(:hover) .bb-best-token-star:not(.active) {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .bb-best-token {
+        width: 100%; height: 100%;
         border-radius: var(--radius-sm);
         border: 2px solid transparent;
         background: var(--bg-base);
@@ -408,9 +416,13 @@ export function BestiaryStyles() {
         overflow: hidden;
       }
       .bb-best-token:hover { border-color: var(--border); }
-      .bb-best-token.active {
+      .bb-best-token-wrap.active .bb-best-token {
+        border-color: var(--accent-blue);
+        box-shadow: 0 0 0 2px rgba(47, 107, 255, 0.25);
+      }
+      .bb-best-token-wrap.is-default .bb-best-token {
         border-color: var(--accent);
-        box-shadow: 0 0 0 2px rgba(255, 198, 46, 0.25);
+        box-shadow: 0 0 0 2px rgba(255, 198, 46, 0.35);
       }
       .bb-best-token img {
         width: 100%; height: 100%;
@@ -428,6 +440,26 @@ export function BestiaryStyles() {
         );
         background-size: 200% 100%;
         animation: bb-best-skeleton 1.4s linear infinite;
+      }
+      .bb-best-token-star {
+        position: absolute;
+        top: -4px; right: -4px;
+        width: 18px; height: 18px;
+        display: flex; align-items: center; justify-content: center;
+        padding: 0;
+        background: var(--bg-surface);
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        color: var(--text-muted);
+        cursor: pointer;
+        font-size: 11px; line-height: 1;
+        transition: opacity var(--transition), color var(--transition), background var(--transition);
+      }
+      .bb-best-token-star:hover { color: var(--accent); }
+      .bb-best-token-star.active {
+        color: var(--accent);
+        background: var(--bg-base);
+        border-color: var(--accent);
       }
       @keyframes bb-best-skeleton {
         0%   { background-position: 200% 0; }
