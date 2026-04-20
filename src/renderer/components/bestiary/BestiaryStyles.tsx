@@ -358,7 +358,7 @@ export function BestiaryStyles() {
       }
 
       /* ── LFS-pointer hint (shown when the token webps haven't been
-            fetched yet — e.g. fresh clone without `git lfs pull`). */
+            fetched yet — e.g. fresh clone without LFS pull). */
       .bb-best-lfs-hint {
         display: flex; align-items: flex-start; gap: 10px;
         padding: 10px 14px;
