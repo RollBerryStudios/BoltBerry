@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 34
+export const SCHEMA_VERSION = 35
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -382,6 +382,9 @@ CREATE TABLE IF NOT EXISTS character_sheets (
   notes            TEXT    NOT NULL DEFAULT '',
   inspiration      INTEGER NOT NULL DEFAULT 0,
   passive_perception INTEGER NOT NULL DEFAULT 10,
+  -- Circular-crop portrait stored as a PNG data URL. Nullable; UI
+  -- falls back to the first letter of the name when absent.
+  portrait_path    TEXT,
   created_at       TEXT    NOT NULL DEFAULT (datetime('now')),
   updated_at       TEXT    NOT NULL DEFAULT (datetime('now'))
 );
@@ -788,6 +791,16 @@ CREATE TABLE IF NOT EXISTS monster_defaults (
   token_file TEXT NOT NULL
 );
 UPDATE schema_version SET version = 34;
+`
+
+// Migration: v34 → v35 — circular-crop portrait for character sheets.
+// Stored inline as a PNG data URL (typically 256 × 256 ≈ 40 KB) so the
+// portrait survives campaign export/import without needing a parallel
+// asset file. Column is nullable — pre-existing characters stay
+// portrait-less and the UI falls back to the first letter of the name.
+export const MIGRATE_V34_TO_V35 = `
+ALTER TABLE character_sheets ADD COLUMN portrait_path TEXT;
+UPDATE schema_version SET version = 35;
 `
 
 // Use the SCHEMA_VERSION constant directly so there's a single source of truth.

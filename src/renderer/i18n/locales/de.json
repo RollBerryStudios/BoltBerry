@@ -462,6 +462,12 @@
     "themeLight": "Theme: Dunkel",
     "switchLanguage": "Switch to English"
   },
+  "cropper": {
+    "title": "Bildausschnitt anpassen",
+    "zoom": "Zoom",
+    "cancel": "Abbrechen",
+    "confirm": "Übernehmen"
+  },
   "statusBar": {
     "playerConnected": "Spieler-Monitor verbunden",
     "playerDisconnected": "Kein Spieler-Monitor",
@@ -738,6 +744,7 @@
   "characters": {
     "empty": "Noch keine Charakterbögen. Erstelle einen, um loszulegen.",
     "newSheet": "Neuer Bogen",
+    "portraitEdit": "Portrait ändern",
     "noCampaign": "Öffne eine Kampagne, um Charakterbögen zu verwalten.",
     "backToList": "Alle Charaktere",
     "deleteConfirm": "Diesen Charakterbogen löschen? Dies kann nicht rückgängig gemacht werden.",

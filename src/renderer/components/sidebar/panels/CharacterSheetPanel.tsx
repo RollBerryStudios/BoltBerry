@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCharacterStore, rowToSheet } from '../../../stores/characterStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
@@ -6,6 +6,7 @@ import { useUIStore } from '../../../stores/uiStore'
 import type { CharacterSheet, CharacterAttack } from '@shared/ipc-types'
 import { EmptyState } from '../../EmptyState'
 import { BestiaryPicker } from '../../bestiary/BestiaryPicker'
+import { CircularCropper } from '../../shared/CircularCropper'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -397,7 +398,16 @@ function SheetEditor({ sheet, onUpdate }: {
     <div style={{ overflowY: 'auto', flex: 1 }}>
       {/* ── Header ── */}
       <div style={{ padding: '6px 8px', borderBottom: '1px solid var(--border)', background: 'var(--bg)' }}>
-        <TextInput {...field('name')} placeholder={t('characters.name')} style={{ fontSize: 14, fontWeight: 700 }} />
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+          <PortraitPicker
+            portrait={sheet.portraitPath}
+            fallbackInitial={(sheet.name || 'C').charAt(0).toUpperCase()}
+            onChange={(p) => onUpdate({ portraitPath: p })}
+          />
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <TextInput {...field('name')} placeholder={t('characters.name')} style={{ fontSize: 14, fontWeight: 700 }} />
+          </div>
+        </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 4, marginTop: 4 }}>
           <TextInput {...field('race')} placeholder={t('characters.race')} />
           <TextInput {...field('className')} placeholder={t('characters.class')} />
@@ -731,6 +741,7 @@ export function CharacterSheetPanel() {
       personality: 'personality', ideals: 'ideals', bonds: 'bonds', flaws: 'flaws',
       backstory: 'backstory', notes: 'notes',
       inspiration: 'inspiration', passivePerception: 'passive_perception',
+      portraitPath: 'portrait_path',
     }
     for (const [k, v] of Object.entries(patch)) {
       const col = colMap[k]
@@ -887,5 +898,86 @@ export function CharacterSheetPanel() {
         )}
       </div>
     </div>
+  )
+}
+
+// ─── Portrait picker ──────────────────────────────────────────────────────────
+// Circular thumbnail. Clicking opens a native file picker; the selected
+// image is read in-renderer (FileReader → data URL) and fed into the
+// shared CircularCropper. The cropper returns a 256×256 PNG data URL
+// which we commit directly to `character_sheets.portrait_path`.
+//
+// We intentionally don't route through the main-process importFile IPC
+// (used for map / token assets) — portraits are inline data URLs, so
+// no on-disk asset is created, and they stay attached through campaign
+// export / import without a parallel file table.
+
+function PortraitPicker({ portrait, fallbackInitial, onChange }: {
+  portrait: string | null
+  fallbackInitial: string
+  onChange: (dataUrl: string | null) => void
+}) {
+  const { t } = useTranslation()
+  const [cropSrc, setCropSrc] = useState<string | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  function openPicker() {
+    fileInputRef.current?.click()
+  }
+
+  function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    // Always clear the input value so picking the same file twice still
+    // fires `change` the second time.
+    e.target.value = ''
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => {
+      const url = typeof reader.result === 'string' ? reader.result : null
+      if (url) setCropSrc(url)
+    }
+    reader.readAsDataURL(file)
+  }
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={openPicker}
+        title={t('characters.portraitEdit')}
+        style={{
+          width: 56, height: 56, borderRadius: '50%',
+          border: '2px solid var(--border)',
+          background: 'var(--bg-elevated)',
+          padding: 0,
+          overflow: 'hidden',
+          cursor: 'pointer',
+          flexShrink: 0,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          color: 'var(--text-muted)',
+          fontWeight: 700,
+          fontSize: 22,
+        }}
+      >
+        {portrait
+          ? <img src={portrait} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          : fallbackInitial
+        }
+      </button>
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        style={{ display: 'none' }}
+        onChange={handleFile}
+      />
+      {cropSrc && (
+        <CircularCropper
+          src={cropSrc}
+          onComplete={(dataUrl) => { onChange(dataUrl); setCropSrc(null) }}
+          onCancel={() => setCropSrc(null)}
+        />
+      )}
+    </>
   )
 }

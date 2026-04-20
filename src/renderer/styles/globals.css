@@ -1978,6 +1978,95 @@ textarea.input {
   pointer-events: none;
 }
 
+/* ─── Circular image cropper ─────────────────────────────────────────────── */
+/* Modal overlay for react-easy-crop. The stage itself is a fixed 320×320
+   square so the circular mask stays visually square on all window sizes. */
+.circ-cropper-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 10, 16, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.circ-cropper-card {
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+}
+.circ-cropper-title {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+.circ-cropper-stage {
+  position: relative;
+  width: 100%;
+  /* react-easy-crop fills its container — we pin a definite aspect so
+     the round mask never turns oval. */
+  aspect-ratio: 1 / 1;
+  background: #000;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.circ-cropper-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.circ-cropper-zoom-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  min-width: 40px;
+}
+.circ-cropper-zoom {
+  flex: 1;
+}
+.circ-cropper-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-2);
+}
+.circ-cropper-btn {
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  font-family: inherit;
+}
+.circ-cropper-btn:hover {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue-light);
+}
+.circ-cropper-btn-primary {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.circ-cropper-btn-primary:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--text-inverse, #0D1015);
+}
+.circ-cropper-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 /* ─── Audio panel ─────────────────────────────────────────────────────────── */
 /* Visual language for the AudioPanel channel strips, SFX grid, and master
    controls — pulled out of inline style soup so the panel matches the rest

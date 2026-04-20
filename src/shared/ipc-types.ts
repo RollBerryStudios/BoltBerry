@@ -674,6 +674,9 @@ export interface CharacterSheet {
   backstory: string; notes: string
   inspiration: number
   passivePerception: number
+  /** Circular-crop portrait stored as a PNG data URL (nullable; UI
+   *  falls back to the first letter of the name when absent). */
+  portraitPath: string | null
   createdAt: string
   updatedAt: string
 }

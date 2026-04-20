@@ -462,6 +462,12 @@
     "themeLight": "Theme: Dark",
     "switchLanguage": "Zu Deutsch wechseln"
   },
+  "cropper": {
+    "title": "Adjust image crop",
+    "zoom": "Zoom",
+    "cancel": "Cancel",
+    "confirm": "Apply"
+  },
   "statusBar": {
     "playerConnected": "Player monitor connected",
     "playerDisconnected": "No player monitor",
@@ -738,6 +744,7 @@
   "characters": {
     "empty": "No character sheets yet. Create one to get started.",
     "newSheet": "New Sheet",
+    "portraitEdit": "Change portrait",
     "noCampaign": "Open a campaign to manage character sheets.",
     "backToList": "All Characters",
     "deleteConfirm": "Delete this character sheet? This cannot be undone.",
