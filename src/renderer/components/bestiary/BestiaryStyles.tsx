@@ -31,11 +31,11 @@ export function BestiaryStyles() {
         user-select: none;
       }
       /* Reserve room for the OS-native window-control buttons so the
-         search field + language pill aren't covered. Mirrors the
-         convention used by DmTitleBar (72px traffic lights on macOS,
-         140px caption buttons on Windows / Linux). */
-      .bb-best-traffic-space  { width: 72px;  height: 100%; flex-shrink: 0; }
-      .bb-best-controls-space { width: 140px; height: 100%; flex-shrink: 0; }
+         search field + language pill aren't covered. Uses the shared
+         --titlebar-*-w variables (globals.css) so Welcome + DmTitleBar
+         + Wiki + Compendium all scale together on high-DPI Windows. */
+      .bb-best-traffic-space  { width: var(--titlebar-traffic-w);  height: 100%; flex-shrink: 0; }
+      .bb-best-controls-space { width: var(--titlebar-controls-w); height: 100%; flex-shrink: 0; }
       .bb-best-back {
         display: inline-flex; align-items: center; gap: 6px;
         padding: 5px 12px;

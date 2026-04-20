@@ -939,11 +939,15 @@ function WelcomeStyles() {
         display: flex; justify-content: flex-end;
         align-items: center;
         gap: 10px;
-        /* Reserve ~140 px on the right so the header buttons don't slide
-           under Electron's titleBarOverlay (minimize / maximize / close)
-           on Windows/Linux. macOS keeps its native traffic lights on the
-           opposite side (top-left), so the extra gutter is harmless. */
-        padding: 22px 150px 22px 36px;
+        /* Reserve room on the right for Electron's titleBarOverlay so
+           the DE / EN pill does not slide under the native min / max /
+           close buttons. Shares the same --titlebar-controls-w variable
+           as DmTitleBar / Wiki / Compendium top bars so they all scale
+           together on high-DPI Windows. */
+        padding-top: 22px;
+        padding-right: calc(var(--titlebar-controls-w) + 12px);
+        padding-bottom: 22px;
+        padding-left: 36px;
         -webkit-app-region: drag;
       }
       .bb-welcome-right-top > * {

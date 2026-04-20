@@ -461,12 +461,12 @@ function CompendiumStyles() {
         flex-shrink: 0;
         user-select: none;
       }
-      /* Reserve room for the OS-native window-control buttons, mirroring
-         DmTitleBar (72px traffic lights on macOS, 140px caption buttons
-         on Windows / Linux). Without this, Windows minimise / maximise /
-         close overlap the import + folder buttons. */
-      .bb-comp-traffic-space  { width: 72px;  height: 100%; flex-shrink: 0; }
-      .bb-comp-controls-space { width: 140px; height: 100%; flex-shrink: 0; }
+      /* Reserve room for the OS-native window-control buttons, sharing
+         the same --titlebar-*-w variables as DmTitleBar / Welcome /
+         Wiki. Without this the import + folder buttons slide under
+         Windows' min / max / close overlay. */
+      .bb-comp-traffic-space  { width: var(--titlebar-traffic-w);  height: 100%; flex-shrink: 0; }
+      .bb-comp-controls-space { width: var(--titlebar-controls-w); height: 100%; flex-shrink: 0; }
       .bb-comp-back {
         display: inline-flex; align-items: center; gap: 6px;
         padding: 5px 12px;
