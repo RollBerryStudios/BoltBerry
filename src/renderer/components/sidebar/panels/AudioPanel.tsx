@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAudioStore, type ChannelId, type AudioBoard, type AudioBoardSlot, type PlaylistEntry } from '../../../stores/audioStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
@@ -34,7 +34,13 @@ function ChannelStrip({ chId, label, activeMapId, activeCampaignId, combatContro
   const ch = store[chId]
   const combatActive = useAudioStore((s) => s.combatActive)
   const [showPlaylist, setShowPlaylist] = useState(false)
+  // 'down' = dropdown hangs below the track button (default); 'up' =
+  // flipped above because the below-variant would overflow the viewport.
+  // Mirrors the token context menu's clamp pattern — in tight sidebar
+  // / popover layouts the playlist dropdown would otherwise be clipped.
+  const [dropdownDir, setDropdownDir] = useState<'down' | 'up'>('down')
   const menuRef = useRef<HTMLDivElement>(null)
+  const fileBtnRef = useRef<HTMLButtonElement>(null)
 
   const disabled = chId !== 'combat' && combatActive
 
@@ -54,6 +60,29 @@ function ChannelStrip({ chId, label, activeMapId, activeCampaignId, combatContro
       document.removeEventListener('keydown', onKey)
     }
   }, [showPlaylist])
+
+  // Flip the dropdown above the track button when the default "below"
+  // placement would overflow the viewport. Channels near the bottom of
+  // the right sidebar or the compact audio popover would otherwise
+  // clip the list; measuring post-mount and toggling a direction flag
+  // is cheaper + more robust than a portal.
+  useLayoutEffect(() => {
+    if (!showPlaylist) { setDropdownDir('down'); return }
+    const btn = fileBtnRef.current
+    const menu = menuRef.current
+    if (!btn || !menu) return
+    const btnRect = btn.getBoundingClientRect()
+    const menuRect = menu.getBoundingClientRect()
+    const spaceBelow = window.innerHeight - btnRect.bottom
+    const spaceAbove = btnRect.top
+    // Only flip when below is truly too tight and above has more room
+    // — prevents thrashing when both are fine.
+    if (menuRect.height > spaceBelow - 8 && spaceAbove > spaceBelow) {
+      setDropdownDir('up')
+    } else {
+      setDropdownDir('down')
+    }
+  }, [showPlaylist, ch.playlist.length])
 
   // Add a track to the channel's playlist. Persists to DB and updates
   // the store so the dropdown reflects the new entry immediately. Picks
@@ -155,20 +184,35 @@ function ChannelStrip({ chId, label, activeMapId, activeCampaignId, combatContro
           above catches it. */}
       <div className="audio-channel-file-wrap">
         <button
+          ref={fileBtnRef}
           className={`audio-channel-file${ch.filePath ? '' : ' empty'}`}
           onClick={() => {
-            if (ch.playlist.length === 0) { void handleAddTrack(); return }
+            // Empty playlist + no campaign → nothing useful to do. An
+            // empty playlist *with* a campaign opens the file picker
+            // directly to save the DM a click.
+            if (ch.playlist.length === 0) {
+              if (activeCampaignId) void handleAddTrack()
+              return
+            }
             setShowPlaylist((v) => !v)
           }}
-          disabled={disabled}
-          title={ch.filePath ?? t('audio.loadFile')}
+          disabled={disabled || (ch.playlist.length === 0 && !activeCampaignId)}
+          title={
+            ch.playlist.length === 0 && !activeCampaignId
+              ? t('audio.noCampaign')
+              : (ch.filePath ?? t('audio.loadFile'))
+          }
         >
           <span className="audio-channel-file-icon" aria-hidden="true">♪</span>
           <span className="audio-channel-file-name">{ch.fileName ?? t('audio.loadFile')}</span>
           {ch.playlist.length > 0 && <span className="audio-channel-file-chev">▾</span>}
         </button>
         {showPlaylist && (
-          <div className="audio-channel-playlist" ref={menuRef} role="menu">
+          <div
+            className={`audio-channel-playlist audio-channel-playlist-${dropdownDir}`}
+            ref={menuRef}
+            role="menu"
+          >
             {ch.playlist.length === 0 && (
               <div className="audio-channel-playlist-empty">{t('audio.playlistEmpty')}</div>
             )}
@@ -200,6 +244,8 @@ function ChannelStrip({ chId, label, activeMapId, activeCampaignId, combatContro
               type="button"
               className="audio-channel-playlist-add"
               onClick={() => { setShowPlaylist(false); void handleAddTrack() }}
+              disabled={!activeCampaignId}
+              title={activeCampaignId ? undefined : t('audio.noCampaign')}
             >
               + {t('audio.addTrack')}
             </button>

@@ -500,6 +500,7 @@
     "saveFailed": "Save failed",
     "errorNameRequired": "Name is required",
     "errorSlugInvalid": "Invalid slug (only a-z, 0-9, dashes)",
+    "slugExistsWarn": "\"{{slug}}\" already exists in Custom. Overwrite?",
     "nameEn": "Name (EN)",
     "nameDe": "Name (DE)",
     "slug": "Slug",

@@ -54,9 +54,26 @@ export function WikiEntryForm({ kind, initialRecord, onClose, onSaved }: WikiEnt
       showToast(t('wikiForm.errorSlugInvalid'), 'error')
       return
     }
+    // Dup-slug guard for new entries. The backend uses ON CONFLICT DO
+    // UPDATE so an unchecked save would silently clobber an existing
+    // user entry with the same slug — catch that early and ask the DM
+    // to confirm. SRD entries are fair game to shadow (the whole
+    // "clone" flow relies on that), so we only warn when *their own*
+    // bucket would be overwritten.
+    if (isNew) {
+      try {
+        const existing = await lookupUserSlug(kind, slug)
+        if (existing && !window.confirm(t('wikiForm.slugExistsWarn', { slug }))) {
+          return
+        }
+      } catch { /* best-effort check */ }
+    }
     setBusy(true)
     try {
-      const payload = { ...record, slug, userOwned: true }
+      // Strip empty NamedText entries so phantom `{name:'', text:''}`
+      // rows don't pollute the detail view. Only monsters have named
+      // lists — items and spells round-trip unchanged.
+      const payload = { ...cleanRecord(kind, record), slug, userOwned: true }
       const res = await window.electronAPI?.upsertWikiEntry(kind, slug, payload)
       if (!res?.success) throw new Error(res?.error || 'unknown')
       showToast(isNew ? t('wikiForm.createdSuccess') : t('wikiForm.updatedSuccess'), 'success')
@@ -374,12 +391,12 @@ function MonsterFormBody({ record, setRecord }: { record: MonsterRecord; setReco
         <NamedListEditor
           label={t('wikiForm.monsterActionsEn')}
           value={(record.actions?.en ?? []).filter(isNamed)}
-          onChange={(v) => patch({ actions: { en: v, de: (record.actions?.de ?? []).filter(isNamed) } })}
+          onChange={(v) => patch({ actions: mergeNamedWithStrings(record.actions, 'en', v) })}
         />
         <NamedListEditor
           label={t('wikiForm.monsterActionsDe')}
           value={(record.actions?.de ?? []).filter(isNamed)}
-          onChange={(v) => patch({ actions: { en: (record.actions?.en ?? []).filter(isNamed), de: v } })}
+          onChange={(v) => patch({ actions: mergeNamedWithStrings(record.actions, 'de', v) })}
         />
       </div>
     </>
@@ -499,7 +516,16 @@ function SpellFormBody({ record, setRecord }: { record: SpellRecord; setRecord: 
             className="wiki-form-input"
             placeholder={t('wikiForm.spellComponentsMaterial')}
             value={typeof comps.raw === 'string' ? comps.raw : (comps.raw?.en ?? '')}
-            onChange={(e) => patch({ components: { ...comps, raw: e.target.value } })}
+            onChange={(e) => {
+              // The dataset stores `raw` as either a plain string or
+              // L10n. Mirror whatever was there; don't flatten an L10n
+              // object into a string (that would drop the DE version
+              // silently on every edit).
+              const next = typeof comps.raw === 'object' && comps.raw !== null
+                ? { en: e.target.value, de: comps.raw.de ?? '' }
+                : e.target.value
+              patch({ components: { ...comps, raw: next } })
+            }}
             disabled={!comps.material}
           />
         </div>
@@ -637,4 +663,66 @@ function deriveSlug(explicit: string | undefined, name: string): string {
 
 function isNamed(x: NamedText | string): x is NamedText {
   return typeof x !== 'string'
+}
+
+/**
+ * Probe whether a user-authored entry already exists for this slug.
+ * We don't have a dedicated "get user entry" IPC — the list handler is
+ * already O(n) in the table size (indexed by `kind`), and homebrew
+ * tables stay small, so a single list walk is cheap and avoids adding
+ * a second IPC surface for one warning dialog.
+ */
+async function lookupUserSlug(kind: WikiKind, slug: string): Promise<boolean> {
+  if (!window.electronAPI) return false
+  const list = kind === 'monster'
+    ? await window.electronAPI.listMonsters()
+    : kind === 'item'
+      ? await window.electronAPI.listItems()
+      : await window.electronAPI.listSpells()
+  return list.some((e) => e.slug === slug && e.userOwned)
+}
+
+/**
+ * Strip empty NamedText rows ({name:'', text:''}) from monster lists
+ * so the detail view doesn't render phantom bullet points. Items /
+ * spells have no NamedText fields; they round-trip unchanged.
+ */
+function cleanRecord(kind: WikiKind, record: AnyRecord): AnyRecord {
+  if (kind !== 'monster') return record
+  const m = record as MonsterRecord
+  const clean = (arr: Array<NamedText | string> | undefined) =>
+    (arr ?? []).filter((x) => typeof x === 'string' || (x.name.trim() !== '' || x.text.trim() !== ''))
+  const cleanNamed = (arr: NamedText[] | undefined) =>
+    (arr ?? []).filter((x) => x.name.trim() !== '' || x.text.trim() !== '')
+  return {
+    ...m,
+    traits: { en: cleanNamed(m.traits?.en), de: cleanNamed(m.traits?.de) },
+    actions: { en: clean(m.actions?.en), de: clean(m.actions?.de) },
+    reactions: { en: cleanNamed(m.reactions?.en), de: cleanNamed(m.reactions?.de) },
+    legendaryActions: { en: clean(m.legendaryActions?.en), de: clean(m.legendaryActions?.de) },
+  }
+}
+
+/**
+ * Monster `actions` (and legendary / reactions in the dataset) use a
+ * mixed `Array<NamedText | string>` shape — the first entry is often
+ * a plain-string intro like "The dragon can take 3 legendary actions…".
+ * The form only edits NamedText entries (they're the meaningful ones),
+ * but we must preserve any incoming string intros so editing doesn't
+ * silently strip them. This helper spLices the edited NamedText list
+ * back in while keeping the original string entries in their original
+ * positions.
+ */
+function mergeNamedWithStrings(
+  source: { en: Array<NamedText | string>; de: Array<NamedText | string> } | undefined,
+  locale: 'en' | 'de',
+  edited: NamedText[],
+): { en: Array<NamedText | string>; de: Array<NamedText | string> } {
+  const merged = { en: source?.en ?? [], de: source?.de ?? [] }
+  const original = merged[locale]
+  const strings = original.filter((x): x is string => typeof x === 'string')
+  // Keep string intros at the front; the dataset always places them
+  // there so this matches the source ordering.
+  merged[locale] = [...strings, ...edited]
+  return merged
 }

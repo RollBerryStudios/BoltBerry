@@ -500,6 +500,7 @@
     "saveFailed": "Speichern fehlgeschlagen",
     "errorNameRequired": "Name ist erforderlich",
     "errorSlugInvalid": "Ungültiger Slug (nur a-z, 0-9, Bindestriche)",
+    "slugExistsWarn": "„{{slug}}“ existiert bereits in „Eigene“. Überschreiben?",
     "nameEn": "Name (EN)",
     "nameDe": "Name (DE)",
     "slug": "Slug",

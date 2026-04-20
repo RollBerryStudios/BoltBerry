@@ -2647,10 +2647,11 @@ textarea.input {
   background: var(--bg-base);
 }
 /* Playlist dropdown anchored under the current-track button. Shown on
-   right-click or (when the strip already has tracks) on left-click. */
+   right-click or (when the strip already has tracks) on left-click.
+   Flips above the button when the below-variant would overflow the
+   viewport (tight sidebars, floating popover). */
 .audio-channel-playlist {
   position: absolute;
-  top: calc(100% + 4px);
   left: 0;
   right: 0;
   z-index: 40;
@@ -2662,6 +2663,8 @@ textarea.input {
   max-height: 240px;
   overflow-y: auto;
 }
+.audio-channel-playlist-down { top: calc(100% + 4px); }
+.audio-channel-playlist-up   { bottom: calc(100% + 4px); }
 .audio-channel-playlist-empty {
   padding: 8px 12px;
   font-size: var(--text-xs);
@@ -2724,9 +2727,13 @@ textarea.input {
   text-align: center;
   font-family: inherit;
 }
-.audio-channel-playlist-add:hover {
+.audio-channel-playlist-add:hover:not(:disabled) {
   border-color: var(--accent-blue);
   color: var(--accent-blue-light);
+}
+.audio-channel-playlist-add:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 .audio-channel-file:hover:not(:disabled) {
   background: var(--bg-overlay);
