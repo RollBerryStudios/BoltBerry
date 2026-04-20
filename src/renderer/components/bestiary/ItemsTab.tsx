@@ -8,6 +8,7 @@ import { itemHandout } from './actions'
 import { useUIStore } from '../../stores/uiStore'
 import { showToast } from '../shared/Toast'
 import { WikiEntryControls } from './WikiEntryControls'
+import { WikiEntryForm } from './WikiEntryForm'
 
 const RARITY_ORDER: Record<string, number> = {
   MUNDANE: -1, COMMON: 0, UNCOMMON: 1, RARE: 2, VERY_RARE: 3, LEGENDARY: 4, ARTIFACT: 5,
@@ -63,6 +64,7 @@ export function ItemsTab({
   const [categoryFilter, setCategoryFilter] = useState<string>('')
   const [rarityFilter, setRarityFilter] = useState<string>('')
   const [sourceFilter, setSourceFilter] = useState<'' | 'srd' | 'user'>('')
+  const [creatingNew, setCreatingNew] = useState(false)
   const [refreshTick, setRefreshTick] = useState(0)
 
   useEffect(() => {
@@ -175,8 +177,28 @@ export function ItemsTab({
         </div>
 
         <div className="bb-best-listcount">
-          {t('bestiary.countItems', { count: filtered.length })}
+          <span>{t('bestiary.countItems', { count: filtered.length })}</span>
+          <button
+            type="button"
+            className="bb-best-list-new"
+            onClick={() => setCreatingNew(true)}
+            title={t('wikiForm.new_item')}
+          >
+            + {t('wikiForm.new')}
+          </button>
         </div>
+
+        {creatingNew && (
+          <WikiEntryForm
+            kind="item"
+            onClose={() => setCreatingNew(false)}
+            onSaved={(slug) => {
+              setCreatingNew(false)
+              setRefreshTick((n) => n + 1)
+              setSelectedSlug(slug)
+            }}
+          />
+        )}
 
         <ul className="bb-best-list">
           {filtered.map((it) => {

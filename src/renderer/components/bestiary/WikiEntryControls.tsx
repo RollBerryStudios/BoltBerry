@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { MonsterRecord, ItemRecord, SpellRecord } from '@shared/ipc-types'
 import { showToast } from '../shared/Toast'
+import { WikiEntryForm } from './WikiEntryForm'
 
 /**
  * Wiki user-entry controls — clone, rename, delete. Mounted at the
@@ -28,6 +29,7 @@ export interface WikiEntryControlsProps {
 export function WikiEntryControls({ kind, record, onChanged }: WikiEntryControlsProps) {
   const { t } = useTranslation()
   const [busy, setBusy] = useState(false)
+  const [editing, setEditing] = useState(false)
   const isUser = !!record.userOwned
 
   async function handleClone() {
@@ -120,6 +122,15 @@ export function WikiEntryControls({ kind, record, onChanged }: WikiEntryControls
           <button
             type="button"
             className="bb-best-action-btn"
+            onClick={() => setEditing(true)}
+            disabled={busy}
+            title={t('bestiary.editHint')}
+          >
+            📝 {t('bestiary.edit')}
+          </button>
+          <button
+            type="button"
+            className="bb-best-action-btn"
             onClick={handleRename}
             disabled={busy}
             title={t('bestiary.renameHint')}
@@ -136,6 +147,14 @@ export function WikiEntryControls({ kind, record, onChanged }: WikiEntryControls
             🗑 {t('bestiary.delete')}
           </button>
         </>
+      )}
+      {editing && (
+        <WikiEntryForm
+          kind={kind}
+          initialRecord={record}
+          onClose={() => setEditing(false)}
+          onSaved={(slug) => { setEditing(false); onChanged?.(slug) }}
+        />
       )}
     </div>
   )

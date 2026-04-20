@@ -2067,6 +2067,239 @@ textarea.input {
   cursor: not-allowed;
 }
 
+/* ─── Wiki entry form (create / edit custom entries) ────────────────────── */
+.bb-best-list-new {
+  padding: 3px 10px;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  font-family: inherit;
+  text-transform: none;
+}
+.bb-best-list-new:hover {
+  background: var(--accent);
+  color: var(--text-inverse, #0D1015);
+}
+
+.wiki-form-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 10, 16, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 9800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.wiki-form-card {
+  width: 640px;
+  max-width: 100%;
+  max-height: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+.wiki-form-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+.wiki-form-title {
+  flex: 1;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.wiki-form-close {
+  width: 24px; height: 24px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  border-radius: var(--radius-sm);
+}
+.wiki-form-close:hover { background: var(--bg-overlay); color: var(--text-primary); }
+
+.wiki-form-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.wiki-form-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.wiki-form-row-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+.wiki-form-input {
+  padding: 5px 9px;
+  background: var(--bg-base);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+}
+.wiki-form-input:focus { outline: none; border-color: var(--accent-blue); }
+.wiki-form-input:disabled { opacity: 0.6; cursor: not-allowed; }
+.wiki-form-input-mono { font-family: var(--font-mono, monospace); }
+
+.wiki-form-l10n {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  align-items: start;
+  gap: var(--sp-3);
+}
+.wiki-form-l10n-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.wiki-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+}
+.wiki-form-grid-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+.wiki-form-grid .wiki-form-row {
+  grid-template-columns: auto 1fr;
+}
+.wiki-form-grid-6 .wiki-form-row {
+  grid-template-columns: 1fr;
+}
+
+.wiki-form-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 8px 0;
+}
+
+.wiki-form-components {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.wiki-form-components label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+}
+.wiki-form-components .wiki-form-input {
+  flex: 1;
+  min-width: 140px;
+}
+
+.wiki-form-named-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.wiki-form-named-item {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--bg-base);
+}
+.wiki-form-named-head {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.wiki-form-named-remove {
+  width: 22px; height: 22px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.wiki-form-named-remove:hover { background: rgba(239, 68, 68, 0.14); color: var(--danger); border-color: var(--danger); }
+.wiki-form-named-add {
+  padding: 5px 10px;
+  background: var(--bg-elevated);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: center;
+}
+.wiki-form-named-add:hover { border-color: var(--accent-blue); color: var(--accent-blue-light); }
+
+.wiki-form-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  border-top: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+.wiki-form-btn {
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  font-family: inherit;
+}
+.wiki-form-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue-light); }
+.wiki-form-btn-primary {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.wiki-form-btn-primary:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--text-inverse, #0D1015);
+}
+.wiki-form-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
 /* ─── Monster → NPC wizard ───────────────────────────────────────────────── */
 .npc-wiz-modal {
   position: fixed;

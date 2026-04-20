@@ -4,6 +4,7 @@ import type { AppLanguage } from '../../stores/uiStore'
 import type { MonsterIndexEntry } from '@shared/ipc-types'
 import { localized, pickName, typeLabel, tokenTint } from './util'
 import { MonsterDetail } from './MonsterDetail'
+import { WikiEntryForm } from './WikiEntryForm'
 
 /* Monster list + detail pane. The list loads once from DATA_LIST_MONSTERS;
    the detail is fetched on-demand via DATA_GET_MONSTER and cached so
@@ -27,6 +28,7 @@ export function MonstersTab({
   const [crFilter, setCrFilter] = useState<string>('')
   const [typeFilter, setTypeFilter] = useState<string>('')
   const [sourceFilter, setSourceFilter] = useState<'' | 'srd' | 'user'>('')
+  const [creatingNew, setCreatingNew] = useState(false)
   // Tick to force re-fetch after a clone / delete without rewriting the
   // whole list-load effect.
   const [refreshTick, setRefreshTick] = useState(0)
@@ -156,8 +158,28 @@ export function MonstersTab({
         </div>
 
         <div className="bb-best-listcount">
-          {t('bestiary.countMonsters', { count: filtered.length })}
+          <span>{t('bestiary.countMonsters', { count: filtered.length })}</span>
+          <button
+            type="button"
+            className="bb-best-list-new"
+            onClick={() => setCreatingNew(true)}
+            title={t('wikiForm.new_monster')}
+          >
+            + {t('wikiForm.new')}
+          </button>
         </div>
+
+        {creatingNew && (
+          <WikiEntryForm
+            kind="monster"
+            onClose={() => setCreatingNew(false)}
+            onSaved={(slug) => {
+              setCreatingNew(false)
+              setRefreshTick((n) => n + 1)
+              setSelectedSlug(slug)
+            }}
+          />
+        )}
 
         <ul className="bb-best-list">
           {filtered.map((m) => {

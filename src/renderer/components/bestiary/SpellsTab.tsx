@@ -8,6 +8,7 @@ import { spellHandout } from './actions'
 import { useUIStore } from '../../stores/uiStore'
 import { showToast } from '../shared/Toast'
 import { WikiEntryControls } from './WikiEntryControls'
+import { WikiEntryForm } from './WikiEntryForm'
 
 const LEVEL_ORDER: Record<string, number> = {
   cantrip: 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5,
@@ -55,6 +56,7 @@ export function SpellsTab({
   const [schoolFilter, setSchoolFilter] = useState<string>('')
   const [classFilter, setClassFilter] = useState<string>('')
   const [sourceFilter, setSourceFilter] = useState<'' | 'srd' | 'user'>('')
+  const [creatingNew, setCreatingNew] = useState(false)
   const [refreshTick, setRefreshTick] = useState(0)
 
   useEffect(() => {
@@ -190,8 +192,28 @@ export function SpellsTab({
         </div>
 
         <div className="bb-best-listcount">
-          {t('bestiary.countSpells', { count: filtered.length })}
+          <span>{t('bestiary.countSpells', { count: filtered.length })}</span>
+          <button
+            type="button"
+            className="bb-best-list-new"
+            onClick={() => setCreatingNew(true)}
+            title={t('wikiForm.new_spell')}
+          >
+            + {t('wikiForm.new')}
+          </button>
         </div>
+
+        {creatingNew && (
+          <WikiEntryForm
+            kind="spell"
+            onClose={() => setCreatingNew(false)}
+            onSaved={(slug) => {
+              setCreatingNew(false)
+              setRefreshTick((n) => n + 1)
+              setSelectedSlug(slug)
+            }}
+          />
+        )}
 
         <ul className="bb-best-list">
           {filtered.map((sp) => {

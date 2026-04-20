@@ -215,7 +215,9 @@ export function BestiaryStyles() {
         cursor: pointer;
       }
       .bb-best-listcount {
-        padding: 8px var(--sp-4) 6px;
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 8px;
+        padding: 6px var(--sp-4);
         font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
         font-weight: 700;
         color: var(--text-muted);
