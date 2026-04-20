@@ -26,6 +26,10 @@ export function MonstersTab({
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null)
   const [crFilter, setCrFilter] = useState<string>('')
   const [typeFilter, setTypeFilter] = useState<string>('')
+  const [sourceFilter, setSourceFilter] = useState<'' | 'srd' | 'user'>('')
+  // Tick to force re-fetch after a clone / delete without rewriting the
+  // whole list-load effect.
+  const [refreshTick, setRefreshTick] = useState(0)
 
   useEffect(() => {
     let alive = true
@@ -39,7 +43,7 @@ export function MonstersTab({
       }
     })()
     return () => { alive = false }
-  }, [])
+  }, [refreshTick])
 
   // Distinct CR values actually present — keeps the CR filter dropdown
   // honest when the upstream dataset grows or shrinks.
@@ -64,6 +68,8 @@ export function MonstersTab({
       .filter((m) => {
         if (crFilter && m.challenge !== crFilter) return false
         if (typeFilter && m.type.en !== typeFilter) return false
+        if (sourceFilter === 'user' && !m.userOwned) return false
+        if (sourceFilter === 'srd'  &&  m.userOwned) return false
         if (!q) return true
         const name = pickName(m, language).toLowerCase()
         return name.includes(q)
@@ -77,7 +83,7 @@ export function MonstersTab({
         if (cr !== 0) return cr
         return pickName(a, language).localeCompare(pickName(b, language))
       })
-  }, [index, query, language, crFilter, typeFilter])
+  }, [index, query, language, crFilter, typeFilter, sourceFilter])
 
   // Apply a deep-link target the first time the index loads. Forces the
   // selection even if the entry is filtered out — caller can still tell
@@ -128,11 +134,21 @@ export function MonstersTab({
               label: typeLabel(typeEn, language, index),
             }))}
           />
-          {(crFilter || typeFilter) && (
+          <FilterPill
+            value={sourceFilter}
+            onChange={(v) => setSourceFilter(v as '' | 'srd' | 'user')}
+            label={t('bestiary.filterSource')}
+            allLabel={t('bestiary.filterAll')}
+            options={[
+              { value: 'srd',  label: t('library.sourceSrd') },
+              { value: 'user', label: t('library.sourceUser') },
+            ]}
+          />
+          {(crFilter || typeFilter || sourceFilter) && (
             <button
               type="button"
               className="bb-best-filter-clear"
-              onClick={() => { setCrFilter(''); setTypeFilter('') }}
+              onClick={() => { setCrFilter(''); setTypeFilter(''); setSourceFilter('') }}
             >
               ✕ {t('bestiary.clearFilters')}
             </button>
@@ -162,7 +178,14 @@ export function MonstersTab({
                 >
                   <span className="bb-best-list-chip mono">CR {m.challenge}</span>
                   <span className="bb-best-list-body">
-                    <span className="bb-best-list-name display">{displayName}</span>
+                    <span className="bb-best-list-name display">
+                      {displayName}
+                      {m.userOwned && (
+                        <span className="bb-best-user-badge" title={t('library.sourceUser')}>
+                          ★
+                        </span>
+                      )}
+                    </span>
                     <span className="bb-best-list-meta">{typeText}</span>
                   </span>
                   <span className="bb-best-list-count mono" title={t('bestiary.tokenCount')}>
@@ -180,7 +203,21 @@ export function MonstersTab({
 
       <main className="bb-best-detailpane">
         {selectedSlug ? (
-          <MonsterDetail slug={selectedSlug} language={language} />
+          <MonsterDetail
+            slug={selectedSlug}
+            language={language}
+            onUserEntryChanged={(nextSlug) => {
+              // After a clone / edit / delete, the index needs to re-fetch
+              // so the list + badges stay truthful. If the caller handed
+              // us a follow-up slug (clone target), select it so the DM
+              // lands on their new entry immediately.
+              setRefreshTick((n) => n + 1)
+              if (nextSlug) setSelectedSlug(nextSlug)
+              else if (selectedSlug && !index?.some((m) => m.slug === selectedSlug)) {
+                setSelectedSlug(null)
+              }
+            }}
+          />
         ) : (
           <EmptyDetail label={t('bestiary.noSelection')} />
         )}

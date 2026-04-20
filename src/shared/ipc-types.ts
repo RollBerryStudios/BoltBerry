@@ -108,6 +108,11 @@ export const IPC = {
   DATA_GET_ITEM: 'data:get-item',
   DATA_LIST_SPELLS: 'data:list-spells',
   DATA_GET_SPELL: 'data:get-spell',
+  /** User-authored Wiki entries — monsters / items / spells the DM
+   *  cloned from SRD or built from scratch. Shadows the bundled data
+   *  by slug when both exist. */
+  WIKI_UPSERT_USER_ENTRY: 'wiki:upsert-user-entry',
+  WIKI_DELETE_USER_ENTRY: 'wiki:delete-user-entry',
 } as const
 
 export interface TokenVariant {
@@ -155,6 +160,11 @@ export interface MonsterIndexEntry {
   size: string
   tokenDefault: string | null
   tokenCount: number
+  /** True when this entry originates from `user_wiki_entries` rather
+   *  than the bundled dataset. Added to every index + detail record by
+   *  the merge layer; the UI uses it to show the "Eigene" badge and
+   *  enable delete / edit actions. */
+  userOwned?: boolean
 }
 
 /** Row in resources/data/items-index.json. */
@@ -166,6 +176,7 @@ export interface ItemIndexEntry {
   category: L10n
   rarity: L10n
   cost?: number | null
+  userOwned?: boolean
 }
 
 /** Row in resources/data/spells-index.json. */
@@ -177,6 +188,7 @@ export interface SpellIndexEntry {
   level: L10n
   school: L10n
   classes?: L10nArray
+  userOwned?: boolean
 }
 
 /** Full monster.json. Legendary-action entries include a leading intro
@@ -226,6 +238,8 @@ export interface MonsterRecord {
   tokens?: Array<{ file: string; variant: string }>
   license: string
   licenseSource: string
+  /** True for rows loaded from user_wiki_entries. */
+  userOwned?: boolean
 }
 
 export interface ItemRecord {
@@ -254,6 +268,7 @@ export interface ItemRecord {
   image?: string
   license: string
   licenseSource: string
+  userOwned?: boolean
 }
 
 export interface SpellRecord {
@@ -281,6 +296,7 @@ export interface SpellRecord {
   image?: string
   license: string
   licenseSource: string
+  userOwned?: boolean
 }
 
 /** A single token image belonging to a monster. `path` is the

@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 35
+export const SCHEMA_VERSION = 36
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -448,6 +448,22 @@ CREATE TABLE IF NOT EXISTS monster_defaults (
   token_file TEXT NOT NULL
 );
 
+-- User-authored Wiki entries (custom monsters / items / spells). Cloned
+-- from SRD records or built from scratch; shadows the bundled data by
+-- slug when both exist. The "data" column is the full record JSON,
+-- shaped exactly like the dataset so the UI does not branch on entry
+-- source.
+CREATE TABLE IF NOT EXISTS user_wiki_entries (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  kind       TEXT    NOT NULL CHECK (kind IN ('monster','item','spell')),
+  slug       TEXT    NOT NULL,
+  data       TEXT    NOT NULL,
+  created_at TEXT    NOT NULL DEFAULT (datetime('now')),
+  updated_at TEXT    NOT NULL DEFAULT (datetime('now')),
+  UNIQUE(kind, slug)
+);
+CREATE INDEX IF NOT EXISTS idx_user_wiki_entries_kind ON user_wiki_entries(kind);
+
 -- Schema version tracking (single-row enforced by PK constraint)
 CREATE TABLE IF NOT EXISTS schema_version (
   id      INTEGER PRIMARY KEY CHECK (id = 1),
@@ -801,6 +817,27 @@ UPDATE schema_version SET version = 34;
 export const MIGRATE_V34_TO_V35 = `
 ALTER TABLE character_sheets ADD COLUMN portrait_path TEXT;
 UPDATE schema_version SET version = 35;
+`
+
+// Migration: v35 → v36 — user-authored Wiki entries. DMs can clone any
+// SRD monster / item / spell into this table ("Eigene" category) and
+// then edit / delete it without touching the bundled dataset. The
+// `data` column is the full record as JSON — exactly the same shape
+// the data-handlers return for SRD records, so the renderer doesn't
+// need to know whether an entry is user-authored except to show the
+// badge / enable the delete button.
+export const MIGRATE_V35_TO_V36 = `
+CREATE TABLE IF NOT EXISTS user_wiki_entries (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  kind       TEXT    NOT NULL CHECK (kind IN ('monster','item','spell')),
+  slug       TEXT    NOT NULL,
+  data       TEXT    NOT NULL,
+  created_at TEXT    NOT NULL DEFAULT (datetime('now')),
+  updated_at TEXT    NOT NULL DEFAULT (datetime('now')),
+  UNIQUE(kind, slug)
+);
+CREATE INDEX IF NOT EXISTS idx_user_wiki_entries_kind ON user_wiki_entries(kind);
+UPDATE schema_version SET version = 36;
 `
 
 // Use the SCHEMA_VERSION constant directly so there's a single source of truth.

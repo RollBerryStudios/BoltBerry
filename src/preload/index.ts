@@ -162,6 +162,12 @@ export const dmApi = {
   getSpell: (slug: string): Promise<SpellRecord | null> =>
     ipcRenderer.invoke(IPC.DATA_GET_SPELL, slug),
 
+  // User-authored Wiki entries
+  upsertWikiEntry: (kind: 'monster' | 'item' | 'spell', slug: string, data: unknown): Promise<{ success: boolean; error?: string }> =>
+    ipcRenderer.invoke(IPC.WIKI_UPSERT_USER_ENTRY, kind, slug, data),
+  deleteWikiEntry: (kind: 'monster' | 'item' | 'spell', slug: string): Promise<{ success: boolean; error?: string }> =>
+    ipcRenderer.invoke(IPC.WIKI_DELETE_USER_ENTRY, kind, slug),
+
   // Native application menu bridge
   setMenuLanguage: (lang: 'de' | 'en') =>
     ipcRenderer.invoke(IPC.SET_MENU_LANGUAGE, lang),

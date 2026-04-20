@@ -7,6 +7,7 @@ import { EmptyDetail } from './MonstersTab'
 import { spellHandout } from './actions'
 import { useUIStore } from '../../stores/uiStore'
 import { showToast } from '../shared/Toast'
+import { WikiEntryControls } from './WikiEntryControls'
 
 const LEVEL_ORDER: Record<string, number> = {
   cantrip: 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5,
@@ -53,6 +54,8 @@ export function SpellsTab({
   const [levelFilter, setLevelFilter] = useState<string>('')
   const [schoolFilter, setSchoolFilter] = useState<string>('')
   const [classFilter, setClassFilter] = useState<string>('')
+  const [sourceFilter, setSourceFilter] = useState<'' | 'srd' | 'user'>('')
+  const [refreshTick, setRefreshTick] = useState(0)
 
   useEffect(() => {
     let alive = true
@@ -66,7 +69,7 @@ export function SpellsTab({
       }
     })()
     return () => { alive = false }
-  }, [])
+  }, [refreshTick])
 
   const availableLevels = useMemo(() => {
     if (!index) return []
@@ -102,6 +105,8 @@ export function SpellsTab({
           const has = (sp.classes?.en ?? []).some((c) => c.toLowerCase() === classFilter)
           if (!has) return false
         }
+        if (sourceFilter === 'user' && !sp.userOwned) return false
+        if (sourceFilter === 'srd'  &&  sp.userOwned) return false
         if (!q) return true
         const name = pickName(sp, language).toLowerCase()
         return name.includes(q)
@@ -114,7 +119,7 @@ export function SpellsTab({
         if (lvl !== 0) return lvl
         return pickName(a, language).localeCompare(pickName(b, language))
       })
-  }, [index, query, language, levelFilter, schoolFilter, classFilter])
+  }, [index, query, language, levelFilter, schoolFilter, classFilter, sourceFilter])
 
   useEffect(() => {
     if (!initialSlug || !index) return
@@ -165,11 +170,19 @@ export function SpellsTab({
               ))}
             </select>
           </label>
-          {(levelFilter || schoolFilter || classFilter) && (
+          <label className="bb-best-filter">
+            <span>{t('bestiary.filterSource')}</span>
+            <select value={sourceFilter} onChange={(e) => setSourceFilter(e.target.value as '' | 'srd' | 'user')}>
+              <option value="">{t('bestiary.filterAll')}</option>
+              <option value="srd">{t('library.sourceSrd')}</option>
+              <option value="user">{t('library.sourceUser')}</option>
+            </select>
+          </label>
+          {(levelFilter || schoolFilter || classFilter || sourceFilter) && (
             <button
               type="button"
               className="bb-best-filter-clear"
-              onClick={() => { setLevelFilter(''); setSchoolFilter(''); setClassFilter('') }}
+              onClick={() => { setLevelFilter(''); setSchoolFilter(''); setClassFilter(''); setSourceFilter('') }}
             >
               ✕ {t('bestiary.clearFilters')}
             </button>
@@ -200,7 +213,12 @@ export function SpellsTab({
                 >
                   <span className="bb-best-list-chip" style={{ color: tint }}>{icon}</span>
                   <span className="bb-best-list-body">
-                    <span className="bb-best-list-name display">{name}</span>
+                    <span className="bb-best-list-name display">
+                      {name}
+                      {sp.userOwned && (
+                        <span className="bb-best-user-badge" title={t('library.sourceUser')}>★</span>
+                      )}
+                    </span>
                     <span className="bb-best-list-meta">
                       {localized(sp.level, language)}
                       {' · '}
@@ -219,7 +237,14 @@ export function SpellsTab({
 
       <main className="bb-best-detailpane">
         {selectedSlug ? (
-          <SpellDetail slug={selectedSlug} language={language} />
+          <SpellDetail
+            slug={selectedSlug}
+            language={language}
+            onUserEntryChanged={(next) => {
+              setRefreshTick((n) => n + 1)
+              if (next) setSelectedSlug(next)
+            }}
+          />
         ) : (
           <EmptyDetail label={t('bestiary.noSelection')} />
         )}
@@ -228,7 +253,11 @@ export function SpellsTab({
   )
 }
 
-function SpellDetail({ slug, language }: { slug: string; language: AppLanguage }) {
+function SpellDetail({ slug, language, onUserEntryChanged }: {
+  slug: string
+  language: AppLanguage
+  onUserEntryChanged?: (nextSlug?: string) => void
+}) {
   const { t } = useTranslation()
   const [record, setRecord] = useState<SpellRecord | null>(null)
 
@@ -288,6 +317,7 @@ function SpellDetail({ slug, language }: { slug: string; language: AppLanguage }
       </header>
 
       <SpellActions record={record} language={language} />
+      <WikiEntryControls kind="spell" record={record} onChanged={onUserEntryChanged} />
 
       {classes && (
         <section className="bb-best-metagrid">

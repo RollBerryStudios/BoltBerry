@@ -179,12 +179,93 @@ function tokenFileBelongsToMonster(slug: string, file: string): boolean {
   return (raw.tokens ?? []).some((t) => t.file === file)
 }
 
+// ── User Wiki entries merge layer ─────────────────────────────────────────
+// The SRD dataset is read-only and comes off disk. User-authored entries
+// live in the SQLite `user_wiki_entries` table; we read them on every
+// list / get call (they're tiny — name + JSON blob — and the table has
+// an index on `kind`). When a user entry and an SRD entry share a slug,
+// the user entry shadows the SRD row so edits feel "in-place" from the
+// renderer's perspective.
+
+type WikiKind = 'monster' | 'item' | 'spell'
+
+function listUserEntries(kind: WikiKind): Array<{ slug: string; data: unknown }> {
+  try {
+    const rows = getDb().prepare(
+      'SELECT slug, data FROM user_wiki_entries WHERE kind = ? ORDER BY slug',
+    ).all(kind) as Array<{ slug: string; data: string }>
+    return rows.map((r) => {
+      try {
+        return { slug: r.slug, data: JSON.parse(r.data) }
+      } catch {
+        // Corrupt row — skip rather than crash the whole list. The DM
+        // can recreate from a clone.
+        return null
+      }
+    }).filter((r): r is { slug: string; data: unknown } => r !== null)
+  } catch {
+    return []
+  }
+}
+
+function getUserEntry(kind: WikiKind, slug: string): unknown | null {
+  if (!SLUG_RE.test(slug)) return null
+  try {
+    const row = getDb().prepare(
+      'SELECT data FROM user_wiki_entries WHERE kind = ? AND slug = ?',
+    ).get(kind, slug) as { data: string } | undefined
+    if (!row) return null
+    try {
+      return JSON.parse(row.data)
+    } catch {
+      return null
+    }
+  } catch {
+    return null
+  }
+}
+
+/** Merge a user entry list with the bundled index. User slugs shadow
+ *  SRD slugs (the user's copy wins) and every returned row carries a
+ *  `userOwned` flag. */
+function mergeIndex<T extends { slug: string }>(
+  bundled: T[],
+  userEntries: Array<{ slug: string; data: unknown }>,
+  toIndexEntry: (data: unknown) => T | null,
+): (T & { userOwned?: boolean })[] {
+  const userBySlug = new Map<string, T>()
+  for (const ue of userEntries) {
+    const entry = toIndexEntry(ue.data)
+    if (entry) userBySlug.set(ue.slug, entry)
+  }
+  const srdFiltered = bundled.filter((row) => !userBySlug.has(row.slug))
+  const userRows = Array.from(userBySlug.values()).map((row) => ({ ...row, userOwned: true as const }))
+  return [...userRows, ...srdFiltered]
+}
+
 export function registerDataHandlers(): void {
   ipcMain.handle(IPC.DATA_LIST_MONSTERS, (): MonsterIndexEntry[] => {
     if (!monstersIndex) {
       monstersIndex = readIndex<{ monsters: MonsterIndexEntry[] }>('index.json')
     }
-    return monstersIndex?.monsters ?? []
+    const bundled = monstersIndex?.monsters ?? []
+    return mergeIndex(bundled, listUserEntries('monster'), (d) => {
+      // User entries store the full MonsterRecord. Project down to the
+      // index shape the renderer expects.
+      const rec = d as Partial<MonsterRecord> & { slug: string; name: string }
+      if (!rec?.slug || !rec?.name) return null
+      return {
+        id: rec.id ?? 0,
+        slug: rec.slug,
+        name: rec.name,
+        nameDe: rec.nameDe,
+        type: rec.meta ?? { en: '', de: '' },
+        challenge: rec.challenge ?? '0',
+        size: '',
+        tokenDefault: null,
+        tokenCount: 0,
+      }
+    })
   })
 
   ipcMain.handle(IPC.DATA_GET_MONSTER, (_event, slug: string): (MonsterRecord & {
@@ -196,8 +277,10 @@ export function registerDataHandlers(): void {
      *  image. */
     tokensMissing: boolean
   }) | null => {
-    const raw = readSlugFile('monsters', slug, 'monster.json') as MonsterRecord | null
+    const userOverride = getUserEntry('monster', slug) as MonsterRecord | null
+    const raw = userOverride ?? (readSlugFile('monsters', slug, 'monster.json') as MonsterRecord | null)
     if (!raw) return null
+    if (userOverride) raw.userOwned = true
     const override = readUserDefaultToken(slug)
     const primary = override ?? raw.token?.file ?? raw.tokens?.[0]?.file ?? null
     const tokenDefaultUrl = primary ? resolveTokenUrl(slug, primary) : null
@@ -258,22 +341,101 @@ export function registerDataHandlers(): void {
     if (!itemsIndex) {
       itemsIndex = readIndex<{ items: ItemIndexEntry[] }>('items-index.json')
     }
-    return itemsIndex?.items ?? []
+    const bundled = itemsIndex?.items ?? []
+    return mergeIndex(bundled, listUserEntries('item'), (d) => {
+      const rec = d as Partial<ItemRecord> & { slug: string; name: string }
+      if (!rec?.slug || !rec?.name) return null
+      return {
+        id: rec.id ?? 0,
+        slug: rec.slug,
+        name: rec.name,
+        nameDe: rec.nameDe,
+        category: rec.category ?? { en: '', de: '' },
+        rarity: rec.rarity ?? { en: '', de: '' },
+        cost: rec.cost,
+      }
+    })
   })
 
   ipcMain.handle(IPC.DATA_GET_ITEM, (_event, slug: string): ItemRecord | null => {
-    return readSlugFile('items', slug, 'item.json') as ItemRecord | null
+    const userOverride = getUserEntry('item', slug) as ItemRecord | null
+    const raw = userOverride ?? (readSlugFile('items', slug, 'item.json') as ItemRecord | null)
+    if (!raw) return null
+    if (userOverride) raw.userOwned = true
+    return raw
   })
 
   ipcMain.handle(IPC.DATA_LIST_SPELLS, (): SpellIndexEntry[] => {
     if (!spellsIndex) {
       spellsIndex = readIndex<{ spells: SpellIndexEntry[] }>('spells-index.json')
     }
-    return spellsIndex?.spells ?? []
+    const bundled = spellsIndex?.spells ?? []
+    return mergeIndex(bundled, listUserEntries('spell'), (d) => {
+      const rec = d as Partial<SpellRecord> & { slug: string; name: string }
+      if (!rec?.slug || !rec?.name) return null
+      return {
+        id: rec.id ?? 0,
+        slug: rec.slug,
+        name: rec.name,
+        nameDe: rec.nameDe,
+        level: rec.level ?? { en: '', de: '' },
+        school: rec.school ?? { en: '', de: '' },
+        classes: rec.classes,
+      }
+    })
   })
 
   ipcMain.handle(IPC.DATA_GET_SPELL, (_event, slug: string): SpellRecord | null => {
-    return readSlugFile('spells', slug, 'spell.json') as SpellRecord | null
+    const userOverride = getUserEntry('spell', slug) as SpellRecord | null
+    const raw = userOverride ?? (readSlugFile('spells', slug, 'spell.json') as SpellRecord | null)
+    if (!raw) return null
+    if (userOverride) raw.userOwned = true
+    return raw
+  })
+
+  // ── User-authored Wiki entry CRUD ─────────────────────────────────────────
+  ipcMain.handle(IPC.WIKI_UPSERT_USER_ENTRY, (
+    _event,
+    kind: WikiKind,
+    slug: string,
+    data: unknown,
+  ): { success: boolean; error?: string } => {
+    if (kind !== 'monster' && kind !== 'item' && kind !== 'spell') {
+      return { success: false, error: 'invalid-kind' }
+    }
+    if (!SLUG_RE.test(slug)) return { success: false, error: 'invalid-slug' }
+    try {
+      const json = JSON.stringify(data)
+      getDb().prepare(
+        `INSERT INTO user_wiki_entries (kind, slug, data, created_at, updated_at)
+         VALUES (?, ?, ?, datetime('now'), datetime('now'))
+         ON CONFLICT(kind, slug) DO UPDATE SET
+           data       = excluded.data,
+           updated_at = datetime('now')`,
+      ).run(kind, slug, json)
+      return { success: true }
+    } catch (err) {
+      return { success: false, error: (err as Error).message }
+    }
+  })
+
+  ipcMain.handle(IPC.WIKI_DELETE_USER_ENTRY, (
+    _event,
+    kind: WikiKind,
+    slug: string,
+  ): { success: boolean; error?: string } => {
+    if (kind !== 'monster' && kind !== 'item' && kind !== 'spell') {
+      return { success: false, error: 'invalid-kind' }
+    }
+    if (!SLUG_RE.test(slug)) return { success: false, error: 'invalid-slug' }
+    try {
+      getDb().prepare(
+        'DELETE FROM user_wiki_entries WHERE kind = ? AND slug = ?',
+      ).run(kind, slug)
+      return { success: true }
+    } catch (err) {
+      return { success: false, error: (err as Error).message }
+    }
   })
 }
 

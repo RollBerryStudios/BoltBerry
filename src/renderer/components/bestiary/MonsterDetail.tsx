@@ -8,6 +8,7 @@ import { showToast } from '../shared/Toast'
 import { formatMod, localized, localizedArray, pickName, tokenTint } from './util'
 import { monsterHandout, spawnMonsterOnMap } from './actions'
 import { NpcCloneWizard } from './NpcCloneWizard'
+import { WikiEntryControls } from './WikiEntryControls'
 
 type LoadedMonster = (MonsterRecord & {
   tokenDefaultUrl: string | null
@@ -15,7 +16,15 @@ type LoadedMonster = (MonsterRecord & {
   tokensMissing: boolean
 }) | null
 
-export function MonsterDetail({ slug, language }: { slug: string; language: AppLanguage }) {
+export function MonsterDetail({ slug, language, onUserEntryChanged }: {
+  slug: string
+  language: AppLanguage
+  /** Fires after the user clones / edits / deletes the current entry.
+   *  Pass a `nextSlug` when the list should jump to a freshly created
+   *  clone. Pass `undefined` after a plain delete / edit so the parent
+   *  just re-fetches the index. */
+  onUserEntryChanged?: (nextSlug?: string) => void
+}) {
   const { t } = useTranslation()
   const [record, setRecord] = useState<LoadedMonster>(null)
   const [tokenIndex, setTokenIndex] = useState(0)
@@ -174,6 +183,7 @@ export function MonsterDetail({ slug, language }: { slug: string; language: AppL
           currentToken?.file != null && currentToken.file === (record.userDefaultFile ?? record.token?.file ?? null)
         }
         onSetDefault={handleSetDefault}
+        onUserEntryChanged={onUserEntryChanged}
       />
 
       {/* Token strip — hidden by default so opening a monster fires one
@@ -458,8 +468,10 @@ function MonsterActions({
   currentFile,
   isAlreadyDefault,
   onSetDefault,
+  onUserEntryChanged,
 }: {
   record: MonsterRecord & { tokenDefaultUrl: string | null; userDefaultFile: string | null }
+  onUserEntryChanged?: (nextSlug?: string) => void
   language: AppLanguage
   imageUrl: string | null
   currentFile: string | null
@@ -573,6 +585,15 @@ function MonsterActions({
           onSaved={() => setShowNpcWizard(false)}
         />
       )}
+
+      {/* User-authored Wiki entry controls. Clone is always available
+          (even on SRD — that's the primary path to getting an editable
+          copy); delete + rename only show up on user-owned entries. */}
+      <WikiEntryControls
+        kind="monster"
+        record={record}
+        onChanged={onUserEntryChanged}
+      />
     </div>
   )
 }

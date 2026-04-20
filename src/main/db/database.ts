@@ -14,7 +14,7 @@ import {
   MIGRATE_V24_TO_V25, MIGRATE_V25_TO_V26, MIGRATE_V26_TO_V27,
   MIGRATE_V27_TO_V28, MIGRATE_V28_TO_V29, MIGRATE_V29_TO_V30,
   MIGRATE_V30_TO_V31, MIGRATE_V31_TO_V32, MIGRATE_V32_TO_V33,
-  MIGRATE_V33_TO_V34, MIGRATE_V34_TO_V35,
+  MIGRATE_V33_TO_V34, MIGRATE_V34_TO_V35, MIGRATE_V35_TO_V36,
 } from './schema'
 import { loadMonstersIndexSync, loadMonsterRecordSync } from '../ipc/data-handlers'
 
@@ -47,6 +47,7 @@ const MIGRATIONS: ReadonlyArray<readonly [target: number, sql: string]> = [
   [33, MIGRATE_V32_TO_V33],
   [34, MIGRATE_V33_TO_V34],
   [35, MIGRATE_V34_TO_V35],
+  [36, MIGRATE_V35_TO_V36],
 ]
 
 export class SchemaTooNewError extends Error {

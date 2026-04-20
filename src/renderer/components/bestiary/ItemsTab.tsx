@@ -7,6 +7,7 @@ import { EmptyDetail } from './MonstersTab'
 import { itemHandout } from './actions'
 import { useUIStore } from '../../stores/uiStore'
 import { showToast } from '../shared/Toast'
+import { WikiEntryControls } from './WikiEntryControls'
 
 const RARITY_ORDER: Record<string, number> = {
   MUNDANE: -1, COMMON: 0, UNCOMMON: 1, RARE: 2, VERY_RARE: 3, LEGENDARY: 4, ARTIFACT: 5,
@@ -61,6 +62,8 @@ export function ItemsTab({
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null)
   const [categoryFilter, setCategoryFilter] = useState<string>('')
   const [rarityFilter, setRarityFilter] = useState<string>('')
+  const [sourceFilter, setSourceFilter] = useState<'' | 'srd' | 'user'>('')
+  const [refreshTick, setRefreshTick] = useState(0)
 
   useEffect(() => {
     let alive = true
@@ -74,7 +77,7 @@ export function ItemsTab({
       }
     })()
     return () => { alive = false }
-  }, [])
+  }, [refreshTick])
 
   const availableCategories = useMemo(() => {
     if (!index) return []
@@ -97,6 +100,8 @@ export function ItemsTab({
       .filter((it) => {
         if (categoryFilter && it.category.en !== categoryFilter) return false
         if (rarityFilter && it.rarity.en !== rarityFilter) return false
+        if (sourceFilter === 'user' && !it.userOwned) return false
+        if (sourceFilter === 'srd'  &&  it.userOwned) return false
         if (!q) return true
         const name = pickName(it, language).toLowerCase()
         return name.includes(q)
@@ -108,7 +113,7 @@ export function ItemsTab({
         if (r !== 0) return r
         return pickName(a, language).localeCompare(pickName(b, language))
       })
-  }, [index, query, language, categoryFilter, rarityFilter])
+  }, [index, query, language, categoryFilter, rarityFilter, sourceFilter])
 
   useEffect(() => {
     if (!initialSlug || !index) return
@@ -150,11 +155,19 @@ export function ItemsTab({
               ))}
             </select>
           </label>
-          {(categoryFilter || rarityFilter) && (
+          <label className="bb-best-filter">
+            <span>{t('bestiary.filterSource')}</span>
+            <select value={sourceFilter} onChange={(e) => setSourceFilter(e.target.value as '' | 'srd' | 'user')}>
+              <option value="">{t('bestiary.filterAll')}</option>
+              <option value="srd">{t('library.sourceSrd')}</option>
+              <option value="user">{t('library.sourceUser')}</option>
+            </select>
+          </label>
+          {(categoryFilter || rarityFilter || sourceFilter) && (
             <button
               type="button"
               className="bb-best-filter-clear"
-              onClick={() => { setCategoryFilter(''); setRarityFilter('') }}
+              onClick={() => { setCategoryFilter(''); setRarityFilter(''); setSourceFilter('') }}
             >
               ✕ {t('bestiary.clearFilters')}
             </button>
@@ -185,7 +198,12 @@ export function ItemsTab({
                     {CATEGORY_ICON[it.category.en] ?? '📦'}
                   </span>
                   <span className="bb-best-list-body">
-                    <span className="bb-best-list-name display">{name}</span>
+                    <span className="bb-best-list-name display">
+                      {name}
+                      {it.userOwned && (
+                        <span className="bb-best-user-badge" title={t('library.sourceUser')}>★</span>
+                      )}
+                    </span>
                     <span className="bb-best-list-meta">
                       {localized(it.category, language)}
                       {' · '}
@@ -204,7 +222,14 @@ export function ItemsTab({
 
       <main className="bb-best-detailpane">
         {selectedSlug ? (
-          <ItemDetail slug={selectedSlug} language={language} />
+          <ItemDetail
+            slug={selectedSlug}
+            language={language}
+            onUserEntryChanged={(next) => {
+              setRefreshTick((n) => n + 1)
+              if (next) setSelectedSlug(next)
+            }}
+          />
         ) : (
           <EmptyDetail label={t('bestiary.noSelection')} />
         )}
@@ -213,7 +238,11 @@ export function ItemsTab({
   )
 }
 
-function ItemDetail({ slug, language }: { slug: string; language: AppLanguage }) {
+function ItemDetail({ slug, language, onUserEntryChanged }: {
+  slug: string
+  language: AppLanguage
+  onUserEntryChanged?: (nextSlug?: string) => void
+}) {
   const { t } = useTranslation()
   const [record, setRecord] = useState<ItemRecord | null>(null)
 
@@ -263,6 +292,7 @@ function ItemDetail({ slug, language }: { slug: string; language: AppLanguage })
       </header>
 
       <ItemActions record={record} language={language} />
+      <WikiEntryControls kind="item" record={record} onChanged={onUserEntryChanged} />
 
       {(record.classification || propertiesText || record.stealth) && (
         <section className="bb-best-metagrid">
