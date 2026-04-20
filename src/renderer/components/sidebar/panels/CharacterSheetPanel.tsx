@@ -904,21 +904,32 @@ export function CharacterSheetPanel() {
 // ─── Portrait picker ──────────────────────────────────────────────────────────
 // Circular thumbnail. Clicking opens a native file picker; the selected
 // image is read in-renderer (FileReader → data URL) and fed into the
-// shared CircularCropper. The cropper returns a 256×256 PNG data URL
-// which we commit directly to `character_sheets.portrait_path`.
+// shared CircularCropper.
 //
-// We intentionally don't route through the main-process importFile IPC
-// (used for map / token assets) — portraits are inline data URLs, so
-// no on-disk asset is created, and they stay attached through campaign
-// export / import without a parallel file table.
+// The cropped PNG is persisted via the main-process SAVE_PORTRAIT IPC
+// which writes it to `userData/assets/portrait/*.png` and returns an
+// absolute file path. `character_sheets.portrait_path` then stores the
+// path (~200 bytes) instead of the inline 40-60 KB data URL, so the DB
+// stays trim as a campaign accumulates characters.
+//
+// Legacy rows that still hold a `data:` URL continue to render fine —
+// the portrait src passes through `portraitToSrc` which detects the
+// scheme and wraps file paths in `file://`.
+
+function portraitToSrc(portrait: string): string {
+  if (portrait.startsWith('data:') || portrait.startsWith('file://')) return portrait
+  // Absolute path from the new on-disk path-based storage.
+  return `file://${portrait}`
+}
 
 function PortraitPicker({ portrait, fallbackInitial, onChange }: {
   portrait: string | null
   fallbackInitial: string
-  onChange: (dataUrl: string | null) => void
+  onChange: (path: string | null) => void
 }) {
   const { t } = useTranslation()
   const [cropSrc, setCropSrc] = useState<string | null>(null)
+  const [busy, setBusy] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   function openPicker() {
@@ -939,11 +950,31 @@ function PortraitPicker({ portrait, fallbackInitial, onChange }: {
     reader.readAsDataURL(file)
   }
 
+  async function handleCropComplete(dataUrl: string) {
+    setCropSrc(null)
+    setBusy(true)
+    try {
+      // Persist to disk and keep only the path in the DB. Falling back
+      // to the raw data URL on IPC failure keeps the feature usable —
+      // the next save attempt can retry the on-disk write.
+      const res = await window.electronAPI?.savePortrait(dataUrl)
+      if (res?.success && res.path) {
+        onChange(res.path)
+      } else {
+        console.error('[PortraitPicker] savePortrait failed:', res?.error)
+        onChange(dataUrl)
+      }
+    } finally {
+      setBusy(false)
+    }
+  }
+
   return (
     <>
       <button
         type="button"
         onClick={openPicker}
+        disabled={busy}
         title={t('characters.portraitEdit')}
         style={{
           width: 56, height: 56, borderRadius: '50%',
@@ -951,16 +982,17 @@ function PortraitPicker({ portrait, fallbackInitial, onChange }: {
           background: 'var(--bg-elevated)',
           padding: 0,
           overflow: 'hidden',
-          cursor: 'pointer',
+          cursor: busy ? 'progress' : 'pointer',
           flexShrink: 0,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           color: 'var(--text-muted)',
           fontWeight: 700,
           fontSize: 22,
+          opacity: busy ? 0.6 : 1,
         }}
       >
         {portrait
-          ? <img src={portrait} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          ? <img src={portraitToSrc(portrait)} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           : fallbackInitial
         }
       </button>
@@ -974,7 +1006,7 @@ function PortraitPicker({ portrait, fallbackInitial, onChange }: {
       {cropSrc && (
         <CircularCropper
           src={cropSrc}
-          onComplete={(dataUrl) => { onChange(dataUrl); setCropSrc(null) }}
+          onComplete={handleCropComplete}
           onCancel={() => setCropSrc(null)}
         />
       )}

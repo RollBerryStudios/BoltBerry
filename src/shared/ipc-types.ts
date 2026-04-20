@@ -24,6 +24,11 @@ export const IPC = {
   IMPORT_FILE: 'app:import-file',
   IMPORT_PDF: 'app:import-pdf',
   SAVE_ASSET_IMAGE: 'app:save-asset-image',
+  /** Persist a cropped character portrait to disk and return its
+   *  absolute path. Deliberately separate from SAVE_ASSET_IMAGE so
+   *  portraits don't pollute the `assets` table + don't carry a
+   *  campaign-id scope. */
+  SAVE_PORTRAIT: 'app:save-portrait',
   EXPORT_CAMPAIGN: 'app:export-campaign',
   IMPORT_CAMPAIGN: 'app:import-campaign',
   DUPLICATE_CAMPAIGN: 'app:duplicate-campaign',

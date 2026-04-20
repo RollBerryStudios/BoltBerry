@@ -399,6 +399,30 @@ function MonsterFormBody({ record, setRecord }: { record: MonsterRecord; setReco
           onChange={(v) => patch({ actions: mergeNamedWithStrings(record.actions, 'de', v) })}
         />
       </div>
+      <div className="wiki-form-grid">
+        <NamedListEditor
+          label={t('wikiForm.monsterReactionsEn')}
+          value={record.reactions?.en}
+          onChange={(v) => patch({ reactions: { en: v, de: record.reactions?.de ?? [] } })}
+        />
+        <NamedListEditor
+          label={t('wikiForm.monsterReactionsDe')}
+          value={record.reactions?.de}
+          onChange={(v) => patch({ reactions: { en: record.reactions?.en ?? [], de: v } })}
+        />
+      </div>
+      <div className="wiki-form-grid">
+        <NamedListEditor
+          label={t('wikiForm.monsterLegendaryEn')}
+          value={(record.legendaryActions?.en ?? []).filter(isNamed)}
+          onChange={(v) => patch({ legendaryActions: mergeNamedWithStrings(record.legendaryActions, 'en', v) })}
+        />
+        <NamedListEditor
+          label={t('wikiForm.monsterLegendaryDe')}
+          value={(record.legendaryActions?.de ?? []).filter(isNamed)}
+          onChange={(v) => patch({ legendaryActions: mergeNamedWithStrings(record.legendaryActions, 'de', v) })}
+        />
+      </div>
     </>
   )
 }

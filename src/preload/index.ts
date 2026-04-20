@@ -53,6 +53,8 @@ export const dmApi = {
     ipcRenderer.invoke('app:import-pdf', campaignId),
   saveAssetImage: (args: { dataUrl: string; originalName: string; type: 'map' | 'token'; campaignId: number }) =>
     ipcRenderer.invoke('app:save-asset-image', args),
+  savePortrait: (dataUrl: string): Promise<{ success: boolean; path?: string; error?: string }> =>
+    ipcRenderer.invoke(IPC.SAVE_PORTRAIT, dataUrl),
   exportCampaign: (campaignId: number) =>
     ipcRenderer.invoke('app:export-campaign', campaignId),
   importCampaign: () => ipcRenderer.invoke('app:import-campaign'),

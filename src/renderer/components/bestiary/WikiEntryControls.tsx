@@ -161,15 +161,15 @@ export function WikiEntryControls({ kind, record, onChanged }: WikiEntryControls
 }
 
 /**
- * Derive a new unique slug from an existing one. Appends `-copy`,
- * then `-copy-2`, `-copy-3`, … if earlier attempts already exist.
- * Runs entirely client-side; the INSERT uses `ON CONFLICT DO UPDATE`
- * as a safety net when a concurrent clone would otherwise race.
+ * Derive a new unique slug from an existing one. Appends `-copy-` +
+ * a cryptographically random 6-char token so rapid-fire clones (or
+ * two simultaneous duplicate clicks) never collide against the
+ * UNIQUE(kind, slug) constraint. `crypto.randomUUID()` is available
+ * in every Electron build we target (Chrome 92+); the 6-char slice
+ * keeps the slug readable without sacrificing the ~16M collision
+ * space needed here.
  */
 function freshSlug(source: string): string {
-  const ts = Date.now().toString(36)
-  // Include a base-36 timestamp so rapid-fire clones never collide —
-  // SQLite's UNIQUE(kind, slug) would otherwise silently overwrite the
-  // earlier clone instead of creating a new one.
-  return `${source}-copy-${ts}`
+  const uuid = crypto.randomUUID().replace(/-/g, '').slice(0, 6)
+  return `${source}-copy-${uuid}`
 }

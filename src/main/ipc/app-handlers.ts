@@ -557,6 +557,45 @@ export function registerAppHandlers(): void {
     return true
   })
 
+  // Character portrait — decodes a PNG data URL produced by the
+  // CircularCropper and writes it to `userData/assets/portrait/`. Keeps
+  // the `character_sheets.portrait_path` column under ~200 bytes
+  // (an absolute path) instead of 40-60 KB of inline base64, so the
+  // DB doesn't balloon once a campaign accumulates a few dozen
+  // characters. Path is absolute so the renderer can `file://`-wrap
+  // it without guessing the user-data root.
+  ipcMain.handle(IPC.SAVE_PORTRAIT, async (_event, dataUrl: string) => {
+    const MAX_PORTRAIT_SIZE = 2 * 1024 * 1024  // 2 MB — 256×256 PNG is ~40 KB
+    const match = dataUrl.match(/^data:image\/(png|jpeg|webp);base64,(.+)$/)
+    if (!match) return { success: false, error: 'invalid-data-url' }
+    const format = match[1]
+    const buf = Buffer.from(match[2], 'base64')
+    if (buf.length > MAX_PORTRAIT_SIZE) {
+      return { success: false, error: 'portrait-too-large' }
+    }
+    // Validate magic bytes so a mislabelled SVG / HTML can't slip in
+    const magicOK = (() => {
+      if (format === 'png')  return buf[0] === 0x89 && buf[1] === 0x50
+      if (format === 'jpeg') return buf[0] === 0xff && buf[1] === 0xd8
+      if (format === 'webp') return buf[0] === 0x52 && buf[1] === 0x49 && buf[8] === 0x57 && buf[9] === 0x45
+      return false
+    })()
+    if (!magicOK) return { success: false, error: 'format-mismatch' }
+    const ext = format === 'jpeg' ? 'jpg' : format
+    const destDir = getAssetDir('portrait')
+    // Random name (no timestamp race) keeps clone/rapid-edit flows
+    // collision-free without needing a DB lookup.
+    const rand = `${Date.now()}_${Math.random().toString(36).slice(2, 10)}`
+    const destPath = join(destDir, `${rand}.${ext}`)
+    try {
+      writeFileSync(destPath, buf)
+    } catch (err) {
+      console.error('[AppHandlers] Failed to write portrait:', err)
+      return { success: false, error: 'write-failed' }
+    }
+    return { success: true, path: destPath }
+  })
+
   // ── Compendium ────────────────────────────────────────────────────────
   // PDFs live in two folders: bundled (ships with the installer) and user
   // (per-user additions). We merge them at list time; user files override
