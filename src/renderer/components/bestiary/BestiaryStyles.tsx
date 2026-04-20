@@ -427,6 +427,54 @@ export function BestiaryStyles() {
       }
 
       /* ── Token strip ──────────────────────────────────────── */
+      .bb-best-variants-trigger {
+        display: inline-flex;
+        align-items: center; gap: 8px;
+        padding: 7px 14px;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--text-secondary);
+        font-family: inherit;
+        font-size: 12px; font-weight: 600;
+        cursor: pointer;
+        align-self: flex-start;
+        transition: border-color var(--transition), background var(--transition), color var(--transition);
+      }
+      .bb-best-variants-trigger:hover {
+        border-color: var(--accent);
+        background: var(--accent-dim);
+        color: var(--accent-light);
+      }
+      .bb-best-tokens-wrap {
+        display: flex; flex-direction: column;
+        gap: 6px;
+      }
+      .bb-best-tokens-head {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 2px 4px;
+      }
+      .bb-best-tokens-count {
+        font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+        font-weight: 700;
+        color: var(--text-muted);
+      }
+      .bb-best-tokens-collapse {
+        display: inline-flex; align-items: center; gap: 4px;
+        padding: 3px 8px;
+        background: transparent;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-sm);
+        color: var(--text-muted);
+        font-family: inherit;
+        font-size: 10px;
+        cursor: pointer;
+        transition: color var(--transition), border-color var(--transition);
+      }
+      .bb-best-tokens-collapse:hover {
+        color: var(--text-primary);
+        border-color: var(--border);
+      }
       .bb-best-tokens {
         display: flex; gap: 6px;
         overflow-x: auto;

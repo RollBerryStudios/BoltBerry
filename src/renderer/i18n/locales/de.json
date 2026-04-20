@@ -277,6 +277,10 @@
     "defaultCleared": "Standardportrait zurückgesetzt",
     "tokensMissingTitle": "Token-Bilder nicht geladen.",
     "tokensMissingBody": "Die WebP-Dateien dieses Datensatzes liegen in Git LFS. Führe einmalig",
+    "showVariants": "Varianten anzeigen ({{count}})",
+    "hideVariants": "Varianten ausblenden",
+    "variantCount": "{{count}} Varianten",
+    "variantCount_one": "{{count}} Variante",
     "attributionPrefix": "Enthält SRD 5.1-Inhalte",
     "attributionSuffix": "vollständige Attribution"
   },

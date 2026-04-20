@@ -23,12 +23,18 @@ export function MonsterDetail({ slug, language }: { slug: string; language: AppL
   // every surface (hero portrait, thumbnail badges, spawn image) picks up
   // the new override without unmounting the whole pane.
   const [refreshNonce, setRefreshNonce] = useState(0)
+  // Variant strip is hidden by default — opening a monster only fetches
+  // the hero's data URL, not the 12-thumbnail preload. The DM opts in
+  // via the "Varianten anzeigen" button. Reset on slug change so the
+  // next monster starts collapsed again.
+  const [stripOpen, setStripOpen] = useState(false)
 
   useEffect(() => {
     let alive = true
     setRecord(null)
     setTokenIndex(0)
     setTokenUrls({})
+    setStripOpen(false)
     ;(async () => {
       try {
         const row = await window.electronAPI?.getMonster?.(slug) ?? null
@@ -169,18 +175,32 @@ export function MonsterDetail({ slug, language }: { slug: string; language: AppL
         onSetDefault={handleSetDefault}
       />
 
-      {/* Token strip */}
+      {/* Token strip — hidden by default so opening a monster fires one
+          image IPC (the hero) instead of thirteen. DMs who want to pick
+          a different portrait expand the strip on demand; the lazy
+          preload inside TokenStrip kicks in only after that click. */}
       {tokens.length > 1 && (
-        <TokenStrip
-          slug={record.slug}
-          tokens={tokens}
-          activeIndex={tokenIndex}
-          onActivate={setTokenIndex}
-          urls={tokenUrls}
-          onResolve={(file, url) => setTokenUrls((prev) => ({ ...prev, [file]: url }))}
-          defaultFile={record.userDefaultFile ?? record.token?.file ?? null}
-          onSetDefault={handleSetDefault}
-        />
+        stripOpen ? (
+          <TokenStrip
+            slug={record.slug}
+            tokens={tokens}
+            activeIndex={tokenIndex}
+            onActivate={setTokenIndex}
+            urls={tokenUrls}
+            onResolve={(file, url) => setTokenUrls((prev) => ({ ...prev, [file]: url }))}
+            defaultFile={record.userDefaultFile ?? record.token?.file ?? null}
+            onSetDefault={handleSetDefault}
+            onCollapse={() => setStripOpen(false)}
+          />
+        ) : (
+          <button
+            type="button"
+            className="bb-best-variants-trigger"
+            onClick={() => setStripOpen(true)}
+          >
+            🎨 {t('bestiary.showVariants', { count: tokens.length })}
+          </button>
+        )
       )}
 
       {/* Ability scores */}
@@ -226,6 +246,7 @@ function TokenStrip({
   onResolve,
   defaultFile,
   onSetDefault,
+  onCollapse,
 }: {
   slug: string
   tokens: Array<{ file: string; variant: string }>
@@ -235,6 +256,7 @@ function TokenStrip({
   onResolve: (file: string, url: string) => void
   defaultFile: string | null
   onSetDefault: (file: string | null) => void
+  onCollapse: () => void
 }) {
   const { t } = useTranslation()
   // Resolve thumbnail URLs lazily in small batches so the strip paints
@@ -256,9 +278,23 @@ function TokenStrip({
   }, [slug, tokens])
 
   return (
-    <div className="bb-best-tokens">
-      {tokens.map((tok, i) => {
-        const isDefault = defaultFile === tok.file
+    <div className="bb-best-tokens-wrap">
+      <div className="bb-best-tokens-head">
+        <span className="bb-best-tokens-count">
+          {t('bestiary.variantCount', { count: tokens.length })}
+        </span>
+        <button
+          type="button"
+          className="bb-best-tokens-collapse"
+          onClick={onCollapse}
+          title={t('bestiary.hideVariants')}
+        >
+          ✕ {t('bestiary.hideVariants')}
+        </button>
+      </div>
+      <div className="bb-best-tokens">
+        {tokens.map((tok, i) => {
+          const isDefault = defaultFile === tok.file
         return (
           <div
             key={`${tok.file}-${i}`}
@@ -298,8 +334,9 @@ function TokenStrip({
               {isDefault ? '★' : '☆'}
             </button>
           </div>
-        )
-      })}
+          )
+        })}
+      </div>
     </div>
   )
 }
