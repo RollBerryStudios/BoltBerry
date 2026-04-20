@@ -20,6 +20,12 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+        # Pull LFS payloads so electron-builder's `extraResources` rule
+        # (resources/data/**/*.webp) bundles the actual ~13k token webps
+        # instead of 130-byte LFS pointer stubs. Without this, every
+        # released installer ships with broken Wiki portraits.
+        with:
+          lfs: true
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -52,6 +58,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          lfs: true
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -88,6 +96,8 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          lfs: true
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

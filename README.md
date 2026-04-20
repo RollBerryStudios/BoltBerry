@@ -91,12 +91,19 @@ npm run dev
 ### Builds erstellen
 
 ```bash
+git lfs pull           # Token-WebPs müssen lokal vorhanden sein —
+                       # electron-builder bündelt sie via extraResources
 npm run build          # Nur kompilieren
 npm run dist           # Installer für aktuelle Plattform
 npm run dist:mac       # macOS .dmg
 npm run dist:win       # Windows .exe (NSIS)
 npm run dist:linux     # Linux .AppImage + .deb
 ```
+
+> **Hinweis:** Ohne `git lfs pull` packt `npm run dist` 130-Byte
+> Pointer-Stubs anstelle der echten WebPs in den Installer — die App
+> würde im Wiki dauerhaft den „Token nicht geladen"-Hinweis zeigen.
+> Der Datensatz ist nach `git lfs pull` ca. 400 MB groß.
 
 Fertige Builds liegen in `release/` und werden automatisch als [GitHub Releases](https://github.com/RollBerry-Studios/BoltBerry/releases) veröffentlicht.
 
@@ -137,7 +144,7 @@ scripts/         Deployment-Hilfsskripte (Proxmox Runner-Setup, i18n-Check)
 
 ### CI/CD & Releases
 
-Builds werden vollautomatisch per GitHub Actions erstellt. Ein neues Tag (`v*.*.*`) löst den Build für alle Plattformen aus und erstellt ein GitHub Release mit allen Installer-Dateien. Proxmox-VMs können als Self-Hosted Runners eingebunden werden – Setup-Script: [`scripts/setup-proxmox-runner.sh`](scripts/setup-proxmox-runner.sh).
+Builds werden vollautomatisch per GitHub Actions erstellt. Ein neues Tag (`v*.*.*`) löst den Build für alle Plattformen aus und erstellt ein GitHub Release mit allen Installer-Dateien. Die Plattform-Builds in `release.yml` checken mit `lfs: true` aus, damit der Wiki-Datensatz (Token-WebPs) komplett im Installer landet — Forks brauchen für eigene CI-Builds eigenes LFS-Bandwidth-Budget. Proxmox-VMs können als Self-Hosted Runners eingebunden werden – Setup-Script: [`scripts/setup-proxmox-runner.sh`](scripts/setup-proxmox-runner.sh).
 
 ### Mitwirken
 
@@ -220,12 +227,19 @@ npm run dev
 ### Building
 
 ```bash
+git lfs pull           # token webps must be local — electron-builder
+                       # bundles them via extraResources
 npm run build          # Compile only
 npm run dist           # Package for current platform
 npm run dist:mac       # macOS .dmg
 npm run dist:win       # Windows .exe (NSIS)
 npm run dist:linux     # Linux .AppImage + .deb
 ```
+
+> **Heads up:** without `git lfs pull` the installer ships 130-byte
+> pointer stubs instead of the real webps and the Wiki shows the
+> "token artwork not downloaded" hint forever. The dataset is ~400 MB
+> after `git lfs pull`.
 
 Packaged output goes to `release/`. Binaries are published automatically as [GitHub Releases](https://github.com/RollBerry-Studios/BoltBerry/releases).
 
@@ -266,7 +280,7 @@ scripts/         Deployment helpers (Proxmox runner setup, i18n check)
 
 ### CI/CD & Releases
 
-Builds are fully automated via GitHub Actions. Pushing a tag (`v*.*.*`) triggers platform builds and creates a GitHub Release. Proxmox VMs can be registered as self-hosted runners — see [`scripts/setup-proxmox-runner.sh`](scripts/setup-proxmox-runner.sh).
+Builds are fully automated via GitHub Actions. Pushing a tag (`v*.*.*`) triggers platform builds and creates a GitHub Release. The platform build jobs in `release.yml` check out with `lfs: true` so the Wiki dataset (token webps) lands in every installer — forks running their own CI need their own LFS bandwidth budget. Proxmox VMs can be registered as self-hosted runners — see [`scripts/setup-proxmox-runner.sh`](scripts/setup-proxmox-runner.sh).
 
 ### Contributing
 
