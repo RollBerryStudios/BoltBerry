@@ -29,6 +29,9 @@ export const IPC = {
    *  portraits don't pollute the `assets` table + don't carry a
    *  campaign-id scope. */
   SAVE_PORTRAIT: 'app:save-portrait',
+  /** Remove a character portrait from disk. Called when the row is
+   *  deleted so orphan PNGs don't accumulate under userData. */
+  DELETE_PORTRAIT: 'app:delete-portrait',
   EXPORT_CAMPAIGN: 'app:export-campaign',
   IMPORT_CAMPAIGN: 'app:import-campaign',
   DUPLICATE_CAMPAIGN: 'app:duplicate-campaign',

@@ -28,6 +28,23 @@ function getAssetDir(type: string): string {
   return dir
 }
 
+/**
+ * Guard for DB-stored relative asset paths before we resolve + unlink
+ * them. Rejects absolute paths, parent-dir traversal, and data-URL /
+ * unrelated strings — the column could in principle contain a legacy
+ * data URL (pre-R3 portraits) or be blank, and we don't want to treat
+ * either as a file-deletion target.
+ */
+function isSafeAssetPath(p: string): boolean {
+  if (!p || typeof p !== 'string') return false
+  if (p.startsWith('data:')) return false
+  if (isAbsolute(p)) return false
+  if (p.includes('..')) return false
+  // Everything we persist lives under `assets/<type>/` so a strict
+  // prefix rules out random user-supplied strings.
+  return p.startsWith('assets/')
+}
+
 // Action names the renderer is allowed to route through SHOW_CONTEXT_MENU.
 // Derived from grep of `showContextMenu` callers in the renderer.
 const ALLOWED_CONTEXT_MENU_ACTIONS = new Set<string>([
@@ -559,12 +576,24 @@ export function registerAppHandlers(): void {
 
   // Character portrait — decodes a PNG data URL produced by the
   // CircularCropper and writes it to `userData/assets/portrait/`. Keeps
-  // the `character_sheets.portrait_path` column under ~200 bytes
-  // (an absolute path) instead of 40-60 KB of inline base64, so the
-  // DB doesn't balloon once a campaign accumulates a few dozen
-  // characters. Path is absolute so the renderer can `file://`-wrap
-  // it without guessing the user-data root.
-  ipcMain.handle(IPC.SAVE_PORTRAIT, async (_event, dataUrl: string) => {
+  // the `character_sheets.portrait_path` column under ~80 bytes (a
+  // relative path) instead of 40-60 KB of inline base64, so the DB
+  // doesn't balloon once a campaign accumulates a few dozen characters.
+  //
+  // Path is returned **relative** to userData (matching the existing
+  // `assets/...` convention used for maps and tokens) so campaign
+  // export / import can bundle the PNG and remap the path, and so
+  // moving the user-data folder across machines keeps portraits
+  // working.
+  //
+  // If `oldRelativePath` is provided we unlink it after a successful
+  // write, keeping `userData/assets/portrait/` from accreting orphans
+  // across edit cycles.
+  ipcMain.handle(IPC.SAVE_PORTRAIT, async (
+    _event,
+    dataUrl: string,
+    oldRelativePath: string | null = null,
+  ) => {
     const MAX_PORTRAIT_SIZE = 2 * 1024 * 1024  // 2 MB — 256×256 PNG is ~40 KB
     const match = dataUrl.match(/^data:image\/(png|jpeg|webp);base64,(.+)$/)
     if (!match) return { success: false, error: 'invalid-data-url' }
@@ -583,8 +612,8 @@ export function registerAppHandlers(): void {
     if (!magicOK) return { success: false, error: 'format-mismatch' }
     const ext = format === 'jpeg' ? 'jpg' : format
     const destDir = getAssetDir('portrait')
-    // Random name (no timestamp race) keeps clone/rapid-edit flows
-    // collision-free without needing a DB lookup.
+    // Random name keeps clone/rapid-edit flows collision-free without
+    // needing a DB lookup.
     const rand = `${Date.now()}_${Math.random().toString(36).slice(2, 10)}`
     const destPath = join(destDir, `${rand}.${ext}`)
     try {
@@ -593,7 +622,36 @@ export function registerAppHandlers(): void {
       console.error('[AppHandlers] Failed to write portrait:', err)
       return { success: false, error: 'write-failed' }
     }
-    return { success: true, path: destPath }
+    const userDataPath = getCustomUserDataPath() || app.getPath('userData')
+    const relativePath = relative(userDataPath, destPath).split(sep).join('/')
+    // Opportunistic cleanup of the replaced file. Must be an asset-path
+    // (rejects absolute paths, `..` traversal, data URLs, random
+    // strings) to avoid deleting arbitrary disk files.
+    if (oldRelativePath && isSafeAssetPath(oldRelativePath)) {
+      try {
+        const absOld = join(userDataPath, oldRelativePath)
+        if (existsSync(absOld)) unlinkSync(absOld)
+      } catch (err) {
+        console.warn('[AppHandlers] Failed to unlink old portrait:', err)
+      }
+    }
+    return { success: true, path: relativePath }
+  })
+
+  // Delete a portrait file from disk — used when a character is
+  // deleted so its portrait doesn't outlive the row forever. Same
+  // safety guard as the unlink branch in SAVE_PORTRAIT.
+  ipcMain.handle(IPC.DELETE_PORTRAIT, async (_event, relativePath: string) => {
+    if (!isSafeAssetPath(relativePath)) return { success: false, error: 'invalid-path' }
+    const userDataPath = getCustomUserDataPath() || app.getPath('userData')
+    const abs = join(userDataPath, relativePath)
+    try {
+      if (existsSync(abs)) unlinkSync(abs)
+      return { success: true }
+    } catch (err) {
+      console.warn('[AppHandlers] Failed to unlink portrait:', err)
+      return { success: false, error: (err as Error).message }
+    }
   })
 
   // ── Compendium ────────────────────────────────────────────────────────

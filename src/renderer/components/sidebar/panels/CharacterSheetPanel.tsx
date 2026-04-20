@@ -7,6 +7,7 @@ import type { CharacterSheet, CharacterAttack } from '@shared/ipc-types'
 import { EmptyState } from '../../EmptyState'
 import { BestiaryPicker } from '../../bestiary/BestiaryPicker'
 import { CircularCropper } from '../../shared/CircularCropper'
+import { useImageUrl } from '../../../hooks/useImageUrl'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -760,10 +761,18 @@ export function CharacterSheetPanel() {
   const handleDelete = useCallback(async (id: number) => {
     const ok = await window.electronAPI?.confirmDialog(t('characters.deleteConfirm'))
     if (!ok) return
+    // Grab the portrait path before the row disappears so we can
+    // unlink the asset file too. Any legacy data URL is rejected by
+    // the main-process safety guard, so we pass it unconditionally.
+    const sheet = sheets.find((s) => s.id === id)
+    const portraitPath = sheet?.portraitPath ?? null
     removeSheet(id)
     await window.electronAPI?.dbRun('DELETE FROM character_sheets WHERE id = ?', [id]).catch(console.error)
+    if (portraitPath) {
+      await window.electronAPI?.deletePortrait(portraitPath).catch(() => { /* best-effort */ })
+    }
     if (activeSheetId === id) setActiveSheetId(null)
-  }, [activeSheetId, removeSheet, setActiveSheetId, t])
+  }, [activeSheetId, sheets, removeSheet, setActiveSheetId, t])
 
   const activeSheet = sheets.find((s) => s.id === activeSheetId)
 
@@ -907,20 +916,15 @@ export function CharacterSheetPanel() {
 // shared CircularCropper.
 //
 // The cropped PNG is persisted via the main-process SAVE_PORTRAIT IPC
-// which writes it to `userData/assets/portrait/*.png` and returns an
-// absolute file path. `character_sheets.portrait_path` then stores the
-// path (~200 bytes) instead of the inline 40-60 KB data URL, so the DB
-// stays trim as a campaign accumulates characters.
+// which writes it to `userData/assets/portrait/*.png` and returns a
+// **relative** path (e.g. `assets/portrait/xxx.png`). The DB column now
+// holds that path, matching the existing map/token convention, so
+// campaign export/import can bundle + remap the file and moving the
+// user-data folder across machines keeps portraits intact.
 //
-// Legacy rows that still hold a `data:` URL continue to render fine —
-// the portrait src passes through `portraitToSrc` which detects the
-// scheme and wraps file paths in `file://`.
-
-function portraitToSrc(portrait: string): string {
-  if (portrait.startsWith('data:') || portrait.startsWith('file://')) return portrait
-  // Absolute path from the new on-disk path-based storage.
-  return `file://${portrait}`
-}
+// Legacy rows holding a `data:` URL keep working — useImageUrl passes
+// data URLs through unchanged; only relative paths hit the main-process
+// base64 loader.
 
 function PortraitPicker({ portrait, fallbackInitial, onChange }: {
   portrait: string | null
@@ -928,9 +932,16 @@ function PortraitPicker({ portrait, fallbackInitial, onChange }: {
   onChange: (path: string | null) => void
 }) {
   const { t } = useTranslation()
+  const resolvedUrl = useImageUrl(portrait)
   const [cropSrc, setCropSrc] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
+  const [loadFailed, setLoadFailed] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  // Reset the broken-image fallback whenever the stored path changes
+  // so recovering from a failed state (new file chosen) re-shows the
+  // image instead of the persistent initial.
+  useEffect(() => { setLoadFailed(false) }, [portrait])
 
   function openPicker() {
     fileInputRef.current?.click()
@@ -954,10 +965,12 @@ function PortraitPicker({ portrait, fallbackInitial, onChange }: {
     setCropSrc(null)
     setBusy(true)
     try {
-      // Persist to disk and keep only the path in the DB. Falling back
-      // to the raw data URL on IPC failure keeps the feature usable —
-      // the next save attempt can retry the on-disk write.
-      const res = await window.electronAPI?.savePortrait(dataUrl)
+      // Pass the current `portrait` so the main process can unlink the
+      // replaced PNG (only if it's a safe asset path — data URLs are
+      // ignored by the guard, so legacy rows are never touched). Falling
+      // back to the inline data URL on IPC failure keeps the feature
+      // usable on unexpected errors.
+      const res = await window.electronAPI?.savePortrait(dataUrl, portrait)
       if (res?.success && res.path) {
         onChange(res.path)
       } else {
@@ -968,6 +981,8 @@ function PortraitPicker({ portrait, fallbackInitial, onChange }: {
       setBusy(false)
     }
   }
+
+  const showImage = portrait && resolvedUrl && !loadFailed
 
   return (
     <>
@@ -991,8 +1006,15 @@ function PortraitPicker({ portrait, fallbackInitial, onChange }: {
           opacity: busy ? 0.6 : 1,
         }}
       >
-        {portrait
-          ? <img src={portraitToSrc(portrait)} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        {showImage
+          ? (
+            <img
+              src={resolvedUrl}
+              alt=""
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              onError={() => setLoadFailed(true)}
+            />
+          )
           : fallbackInitial
         }
       </button>
