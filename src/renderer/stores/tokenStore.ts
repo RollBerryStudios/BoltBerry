@@ -4,8 +4,6 @@ import type { TokenRecord } from '@shared/ipc-types'
 
 interface TokenState {
   tokens: TokenRecord[]
-  /** Tokens copied via Ctrl+C / context-menu copy — shared across TokenLayer and keyboard shortcuts */
-  clipboardTokens: TokenRecord[]
 
   // Actions
   setTokens: (tokens: TokenRecord[]) => void
@@ -13,13 +11,11 @@ interface TokenState {
   updateToken: (id: number, patch: Partial<TokenRecord>) => void
   removeToken: (id: number) => void
   moveToken: (id: number, x: number, y: number) => void
-  setClipboardTokens: (tokens: TokenRecord[]) => void
 }
 
 export const useTokenStore = create<TokenState>()(
   immer((set) => ({
     tokens: [],
-    clipboardTokens: [],
 
     setTokens: (tokens) =>
       set((s) => {
@@ -49,11 +45,6 @@ export const useTokenStore = create<TokenState>()(
           t.x = x
           t.y = y
         }
-      }),
-
-    setClipboardTokens: (tokens) =>
-      set((s) => {
-        s.clipboardTokens = tokens
       }),
   }))
 )

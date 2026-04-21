@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 import { useUIStore, type ActiveTool } from '../../stores/uiStore'
+import { useDockStore } from '../../stores/dockStore'
 
 /**
  * Left-rail tool dock (v1 Conservative variant from the design bundle).
@@ -109,8 +110,8 @@ export function LeftToolDock() {
   const activeTool = useUIStore((s) => s.activeTool)
   const setActiveTool = useUIStore((s) => s.setActiveTool)
   const workMode = useUIStore((s) => s.workMode)
-  const dockLabels = useUIStore((s) => s.dockLabels)
-  const dockAutoHide = useUIStore((s) => s.dockAutoHide)
+  const dockLabels = useDockStore((s) => s.dockLabels)
+  const dockAutoHide = useDockStore((s) => s.dockAutoHide)
   const [openGroup, setOpenGroup] = useState<string | null>(null)
 
   // Player-preview restricts the DM to the pointer tool — hide the rail.

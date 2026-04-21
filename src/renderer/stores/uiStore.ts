@@ -127,9 +127,6 @@ interface UIState {
   topView: TopView
   /** Pending deep-link the next time topView flips to 'bestiary'. */
   bestiaryTarget: BestiaryTarget | null
-  /** v1 Conservative dock prefs — persisted to localStorage. */
-  dockLabels: boolean
-  dockAutoHide: boolean
 
   clipboardTokens: Array<{
     name: string
@@ -204,8 +201,6 @@ interface UIState {
   openBestiary: (target?: BestiaryTarget) => void
   /** Called by BestiaryView once it has applied the target. */
   clearBestiaryTarget: () => void
-  toggleDockLabels: () => void
-  toggleDockAutoHide: () => void
 }
 
 export const useUIStore = create<UIState>((set) => ({
@@ -242,8 +237,6 @@ export const useUIStore = create<UIState>((set) => ({
   clipboardTokens: [],
   topView: 'main',
   bestiaryTarget: null,
-  dockLabels: (() => { try { return localStorage.getItem('boltberry-dock-labels') === 'true' } catch { return false } })(),
-  dockAutoHide: (() => { try { return localStorage.getItem('boltberry-dock-auto-hide') === 'true' } catch { return false } })(),
 
   setActiveTool: (activeTool) => set({ activeTool }),
   setWorkMode: (workMode: WorkMode) =>
@@ -367,18 +360,6 @@ export const useUIStore = create<UIState>((set) => ({
   openBestiary: (target) =>
     set({ topView: 'bestiary', bestiaryTarget: target ?? null }),
   clearBestiaryTarget: () => set({ bestiaryTarget: null }),
-  toggleDockLabels: () =>
-    set((s) => {
-      const next = !s.dockLabels
-      try { localStorage.setItem('boltberry-dock-labels', String(next)) } catch { /* noop */ }
-      return { dockLabels: next }
-    }),
-  toggleDockAutoHide: () =>
-    set((s) => {
-      const next = !s.dockAutoHide
-      try { localStorage.setItem('boltberry-dock-auto-hide', String(next)) } catch { /* noop */ }
-      return { dockAutoHide: next }
-    }),
   setClipboardTokens: (tokens: Array<{
     name: string
     imagePath: string | null

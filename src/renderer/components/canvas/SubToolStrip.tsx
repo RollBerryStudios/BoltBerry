@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useUIStore } from '../../stores/uiStore'
+import { useDockStore } from '../../stores/dockStore'
 
 /**
  * Contextual sub-tool strip (v1 Conservative "SubToolStrip"). A floating
@@ -27,7 +28,7 @@ export function SubToolStrip() {
   const drawColor = useUIStore((s) => s.drawColor)
   const setDrawColor = useUIStore((s) => s.setDrawColor)
   const setActiveTool = useUIStore((s) => s.setActiveTool)
-  const dockAutoHide = useUIStore((s) => s.dockAutoHide)
+  const dockAutoHide = useDockStore((s) => s.dockAutoHide)
 
   if (workMode === 'player-preview') return null
 

@@ -3,16 +3,17 @@ import { useSettingsStore } from '../../../stores/settingsStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import { useAppStore } from '../../../stores/appStore'
 import { useUIStore } from '../../../stores/uiStore'
+import { useDockStore } from '../../../stores/dockStore'
 import { showToast } from '../../shared/Toast'
 
 export function SettingsPanel() {
   const { t } = useTranslation()
   const { userDataFolder } = useSettingsStore()
   const { activeCampaignId, setActiveCampaign } = useCampaignStore()
-  const dockLabels = useUIStore((s) => s.dockLabels)
-  const dockAutoHide = useUIStore((s) => s.dockAutoHide)
-  const toggleDockLabels = useUIStore((s) => s.toggleDockLabels)
-  const toggleDockAutoHide = useUIStore((s) => s.toggleDockAutoHide)
+  const dockLabels = useDockStore((s) => s.dockLabels)
+  const dockAutoHide = useDockStore((s) => s.dockAutoHide)
+  const toggleDockLabels = useDockStore((s) => s.toggleDockLabels)
+  const toggleDockAutoHide = useDockStore((s) => s.toggleDockAutoHide)
 
   async function handleOpenContentFolder() {
     if (window.electronAPI) {

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useAudioStore, type ChannelId } from '../../stores/audioStore'
 import { useUIStore } from '../../stores/uiStore'
+import { useDockStore } from '../../stores/dockStore'
 
 /**
  * Compact bottom-left floating audio strip (v1 Conservative). Shows the
@@ -17,7 +18,7 @@ export function AudioStrip() {
   const playChannel = useAudioStore((s) => s.playChannel)
   const stopChannel = useAudioStore((s) => s.stopChannel)
   const setFloatingPanel = useUIStore((s) => s.setFloatingPanel)
-  const dockAutoHide = useUIStore((s) => s.dockAutoHide)
+  const dockAutoHide = useDockStore((s) => s.dockAutoHide)
 
   // Pick the channel worth surfacing. Playing wins; otherwise the first
   // loaded track; otherwise combat (it may be preloaded even if silent).
