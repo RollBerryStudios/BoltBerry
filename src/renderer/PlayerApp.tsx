@@ -3,6 +3,7 @@ import { Stage, Layer, Image as KonvaImage, Shape, Group, Circle, Rect, Text, Li
 import Konva from 'konva'
 import type { PlayerFullState, PlayerTokenState, PlayerMeasureState, FogDelta, PlayerMapState, PlayerPointer, PlayerViewport, PlayerOverlay, PlayerInitiativeEntry, WeatherType, GridType, PlayerDrawingState, PlayerWallState } from '@shared/ipc-types'
 import { useRotatedImage } from './hooks/useRotatedImage'
+import { useImage } from './hooks/useImage'
 import { WeatherCanvas } from './components/canvas/WeatherCanvas'
 import { useImageUrl } from './hooks/useImageUrl'
 import { applyOpToCtxPair } from './utils/fogUtils'
@@ -402,7 +403,23 @@ interface PlayerMapViewProps {
 function PlayerMapView({
   mapState, tokens, walls, exploredCanvasRef, coveredCanvasRef, fogVersion, width, height, pointer, viewport, measure, drawingData, onMapLoaded,
 }: PlayerMapViewProps) {
-  const { img: image, imgW: natW, imgH: natH } = useRotatedImage(`file://${mapState.imagePath}`, mapState.rotation ?? 0)
+  // Load the raw image in its natural orientation. Map rotation is
+  // applied at the Konva Layer level below so tokens / fog / walls /
+  // drawings / lights / measure — all of which are stored in
+  // UNROTATED map-image coordinates — visually rotate with the map
+  // instead of floating at fixed coordinates against a pre-rotated
+  // bitmap (the old pre-rotation path misaligned everything on 90°/
+  // 180°/270° rotated maps).
+  const image = useImage(`file://${mapState.imagePath}`)
+  const natW = image?.naturalWidth ?? 0
+  const natH = image?.naturalHeight ?? 0
+  const mapRot = (((mapState.rotation ?? 0) % 360) + 360) % 360
+  const isRotatedSideways = mapRot === 90 || mapRot === 270
+  // After rotation, the image's display footprint swaps width / height
+  // on 90°/270°. Used below to fit the rotated bounding box to the
+  // window.
+  const rotatedW = isRotatedSideways ? natH : natW
+  const rotatedH = isRotatedSideways ? natW : natH
   const [exploredImg, setExploredImg] = useState<HTMLCanvasElement | null>(null)
   const [coveredImg, setCoveredImg]   = useState<HTMLCanvasElement | null>(null)
   const pointerLayerRef = useRef<Konva.Layer>(null)
@@ -471,24 +488,33 @@ function PlayerMapView({
       offX = width / 2 - viewport.cx * scale
       offY = height / 2 - viewport.cy * scale
     } else {
-      // No viewport → fit the entire map to the window. The player
-      // window is a passive surface; there are no local pan / zoom
-      // controls (and the legacy DM-camera follow is gone), so the
-      // identity transform around fit-scale is all we need.
-      scale = Math.min(width / natW, height / natH)
-      offX = (width - natW * scale) / 2
-      offY = (height - natH * scale) / 2
+      // No viewport → fit the rotated bounding box to the window and
+      // place the unrotated map centre at screen centre. The Layer
+      // rotation below then pivots the whole stack around the screen
+      // centre so the rotated image's bbox matches the fit we just
+      // computed.
+      scale = Math.min(width / rotatedW, height / rotatedH)
+      offX = width / 2 - (natW / 2) * scale
+      offY = height / 2 - (natH / 2) * scale
     }
   }
 
   // Layer-level rotation pivots all children (map, grid, fog, drawings,
-  // tokens, lighting, pointer, measure) around the screen center. All the
-  // children still compute positions in "unrotated" screen coords via
-  // `x * scale + offX`; the Layer transform adds the rotation on top so
-  // we don't have to touch every coordinate formula.
+  // tokens, lighting, pointer, measure) around the screen centre. Every
+  // child still computes positions in the unrotated map-image space
+  // via `x * scale + offX`; the Layer transform adds the rotation on
+  // top so tokens stay glued to the map no matter how it's rotated.
+  //
+  // Two rotation sources compose here:
+  //   • mapRot (rotationPlayer from the DM) — the orientation the DM
+  //     wants the whole map shown in on the player side.
+  //   • viewport.rotation — the extra tilt the DM baked into the
+  //     Player Control rect; the player should see that framed
+  //     content upright, so we subtract it.
   const viewportRotation = viewport?.rotation ?? 0
-  const layerXform = viewport
-    ? { rotation: -viewportRotation, offsetX: width / 2, offsetY: height / 2, x: width / 2, y: height / 2 }
+  const totalRot = mapRot - viewportRotation
+  const layerXform = (totalRot !== 0 || viewport !== null)
+    ? { rotation: totalRot, offsetX: width / 2, offsetY: height / 2, x: width / 2, y: height / 2 }
     : null
 
   // The player window is a passive display surface by design — "players
