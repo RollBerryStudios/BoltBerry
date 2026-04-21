@@ -696,10 +696,18 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
       useTokenStore.getState().setTokens([])
       useInitiativeStore.getState().setEntries([])
       useUIStore.getState().setPlayerConnected(false)
+      // Drop the player window back to the idle splash. Sending
+      // `mode: 'map'` with `map: null` used to make PlayerApp fall
+      // through to the previous map state instead of idling out.
+      // Walls + viewport must be present so the LOS engine and the
+      // Player Control Mode frame don't keep stale geometry from the
+      // map that just got deleted.
       window.electronAPI?.sendFullSync({
-        mode: 'map',
+        mode: 'idle',
         map: null,
         tokens: [],
+        walls: [],
+        viewport: null,
         fogBitmap: null,
         exploredBitmap: null,
         atmosphereImagePath: null,

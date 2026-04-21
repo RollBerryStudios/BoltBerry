@@ -136,7 +136,12 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (!isRoomTool) return
-    if (e.key === 'Escape') {
+    if (e.key === 'Escape' && drawingPoints.length > 0) {
+      // Capture-phase + stopImmediate so the global Escape handler
+      // doesn't also fire and flip the tool to 'select' — which would
+      // drop the user out of the Room tool mid-polygon.
+      e.stopImmediatePropagation()
+      e.preventDefault()
       setDrawingPoints([])
       setPreviewPoint(null)
     } else if (e.key === 'Enter' && drawingPoints.length >= 3) {
@@ -145,8 +150,8 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
   }, [isRoomTool, drawingPoints.length, finishRoom])
 
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
+    window.addEventListener('keydown', handleKeyDown, true)
+    return () => window.removeEventListener('keydown', handleKeyDown, true)
   }, [handleKeyDown])
 
   useEffect(() => {

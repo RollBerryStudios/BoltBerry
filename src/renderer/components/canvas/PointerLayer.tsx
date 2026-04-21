@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react'
-import { Layer } from 'react-konva'
+import { Layer, Rect } from 'react-konva'
 import Konva from 'konva'
 import type { RefObject } from 'react'
 import { useUIStore } from '../../stores/uiStore'
@@ -43,6 +43,8 @@ function pulseAt(layer: Konva.Layer, screenX: number, screenY: number) {
 export function PointerLayer({ stageRef }: PointerLayerProps) {
   const activeTool = useUIStore((s) => s.activeTool)
   const screenToMap = useMapTransformStore((s) => s.screenToMap)
+  const canvasW = useMapTransformStore((s) => s.canvasW)
+  const canvasH = useMapTransformStore((s) => s.canvasH)
   const layerRef = useRef<Konva.Layer>(null)
 
   useEffect(() => {
@@ -89,11 +91,27 @@ export function PointerLayer({ stageRef }: PointerLayerProps) {
   // The Layer is always mounted so the ping-event listener has a valid
   // target for its pulse animation regardless of the active tool.
   // Click handling is still gated on the pointer tool — see handleClick.
+  // When the pointer tool is active, a transparent full-canvas hit
+  // rect gives Konva a listening shape to dispatch clicks onto. Without
+  // it, empty-canvas clicks never reach `handleClick` because all
+  // MapLayer shapes are `listening={false}`.
+  const pointerActive = activeTool === 'pointer'
   return (
     <Layer
       ref={layerRef}
-      listening={activeTool === 'pointer'}
+      listening={pointerActive}
       onClick={handleClick}
-    />
+    >
+      {pointerActive && (
+        <Rect
+          x={0}
+          y={0}
+          width={canvasW}
+          height={canvasH}
+          fill="rgba(0,0,0,0.001)"
+          listening
+        />
+      )}
+    </Layer>
   )
 }

@@ -1049,6 +1049,27 @@ async function loadMapData(mapId: number, map: MapRecord) {
         ? 'atmosphere'
         : 'map'
 
+    // Walls + viewport must ride along in every full-sync so a
+    // reconnecting player doesn't compute LOS against an empty wall
+    // set or keep a stale Player Control Mode frame from the
+    // previous map. Previously both were omitted here and the
+    // separate PLAYER_WALLS broadcast was racing the first fog /
+    // token delta.
+    const { playerViewportMode, playerViewport } = useUIStore.getState()
+    const wallsForPlayer = useWallStore.getState().walls
+      .filter((w) => w.mapId === mapId)
+      .map((w) => ({
+        id: w.id, x1: w.x1, y1: w.y1, x2: w.x2, y2: w.y2,
+        wallType: w.wallType, doorState: w.doorState,
+      }))
+    const viewportForPlayer = playerViewportMode && playerViewport
+      ? {
+          cx: playerViewport.cx, cy: playerViewport.cy,
+          w: playerViewport.w,  h: playerViewport.h,
+          rotation: playerViewport.rotation,
+        }
+      : null
+
     window.electronAPI?.sendFullSync({
       mode: syncMode,
       map: {
@@ -1077,6 +1098,8 @@ async function loadMapData(mapId: number, map: MapRecord) {
           lightRadius: t.lightRadius,
           lightColor: t.lightColor,
         })),
+      walls: wallsForPlayer,
+      viewport: viewportForPlayer,
       fogBitmap,
       exploredBitmap,
       atmosphereImagePath: appMode === 'atmosphere' ? atmosphereImagePath : null,
