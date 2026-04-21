@@ -80,6 +80,15 @@ export function usePlayerSync() {
     const ui = useUIStore.getState()
     const viewport = ui.playerViewportMode && ui.playerViewport ? ui.playerViewport : null
 
+    // Bundle walls with the full-sync payload so a player reconnecting
+    // mid-session has LOS geometry available before the next
+    // PLAYER_WALLS broadcast fires. Scoped to the active map; empty
+    // when no map is active so the previous map's walls don't leak
+    // into an atmosphere-only / idle sync.
+    const activeWalls = useWallStore.getState().walls
+      .filter((w) => w.mapId === mapId)
+      .map((w) => ({ x1: w.x1, y1: w.y1, x2: w.x2, y2: w.y2, wallType: w.wallType, doorState: w.doorState }))
+
     const state: PlayerFullState = {
       mode,
       viewport,
@@ -100,6 +109,7 @@ export function usePlayerSync() {
       atmosphereImagePath,
       blackout: blackoutActive,
       drawings: playerDrawings,
+      walls: activeWalls,
     }
 
     window.electronAPI?.sendFullSync(state)
@@ -162,6 +172,7 @@ export function usePlayerSync() {
       atmosphereImagePath: null,
       blackout: false,
       drawings: [],
+      walls: [],
     })
   }, [sessionMode])
 

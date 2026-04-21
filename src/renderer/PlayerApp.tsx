@@ -84,6 +84,11 @@ export default function PlayerApp() {
         setBlackout(state.blackout)
         setTokens(state.tokens)
         setDrawingData(state.drawings ?? [])
+        // Walls arrive bundled with full-sync now too — on a mid-
+        // session reconnect the LOS engine can't compute anything
+        // sensible until it has them, and the separate PLAYER_WALLS
+        // broadcast isn't guaranteed to arrive first.
+        setWalls(state.walls ?? [])
         // Adopt the DM's Player Control Mode rect from the handshake so
         // re-opening the player window mid-session doesn't drop the
         // framed view back to fit.
@@ -138,6 +143,12 @@ export default function PlayerApp() {
         setMapState(state)
         setMode('map')
         setDrawingData([])
+        // Walls are per-map — clear the old set so the LOS engine
+        // doesn't keep computing visibility against the previous map's
+        // geometry until the DM's PLAYER_WALLS broadcast lands. If
+        // the new map has walls, the broadcast (triggered by the map
+        // switch in usePlayerSync) replaces this [] shortly after.
+        setWalls([])
         exploredCanvasRef.current = null
         coveredCanvasRef.current = null
         setFogVersion((v) => v + 1)

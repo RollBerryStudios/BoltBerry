@@ -607,6 +607,13 @@ export interface PlayerFullState {
   atmosphereImagePath: string | null
   blackout: boolean
   drawings: PlayerDrawingState[]
+  /** Walls scoped to the active map. Included in full-sync so a player
+   *  reconnecting mid-session doesn't have to wait for the separate
+   *  PLAYER_WALLS broadcast to arrive before the LOS engine has its
+   *  geometry — without this, the lighting layer briefly computes
+   *  visibility against an empty wall set OR (after the first
+   *  broadcast) against stale walls from the previous map. */
+  walls?: PlayerWallState[]
   /** Optional: when present, the player window frames exactly this
    *  rectangle. Takes precedence over camera / fit on the player side. */
   viewport?: PlayerViewport | null
