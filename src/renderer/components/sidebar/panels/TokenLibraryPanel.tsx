@@ -55,11 +55,17 @@ const CATEGORIES: { id: Category; icon: string; i18n: string }[] = [
   { id: 'npc',     icon: '🧑', i18n: 'library.catNpc' },
 ]
 
-export function TokenLibraryPanel() {
+export function TokenLibraryPanel({ lockedCategory }: {
+  /** When set, the category tab strip is hidden and the panel only
+   *  lists entries of that category. Used by the CampaignView's
+   *  dedicated NPC's tab so the user can't accidentally switch into
+   *  the monster / player buckets from a tab that's scoped to NPCs. */
+  lockedCategory?: Category
+} = {}) {
   const { t } = useTranslation()
   const { activeCampaignId, activeMapId, activeMaps, setActiveMap } = useCampaignStore()
 
-  const [category, setCategory] = useState<Category>('monster')
+  const [category, setCategory] = useState<Category>(lockedCategory ?? 'monster')
   const [query, setQuery] = useState('')
   const [typeFilter, setTypeFilter] = useState<string>('')
   const [factionFilter, setFactionFilter] = useState<string>('')
@@ -355,8 +361,10 @@ export function TokenLibraryPanel() {
         }}>{t('library.attributionSuffix')}</span>
       </button>
 
-      {/* Category tabs */}
-      <div style={{
+      {/* Category tabs — hidden when the caller pinned a category,
+          so the NPC's view in CampaignView doesn't expose bait to
+          accidentally switch into a different bucket. */}
+      {!lockedCategory && <div style={{
         display: 'flex',
         borderBottom: '1px solid var(--border-subtle)',
         flexShrink: 0,
@@ -395,7 +403,7 @@ export function TokenLibraryPanel() {
             }}>{counts[c.id]}</span>
           </button>
         ))}
-      </div>
+      </div>}
 
       {/* Toolbar: search + new */}
       <div style={{

@@ -537,7 +537,18 @@ function BoardManager({ boards, activeBoardIndex, onSelect, campaignId, onBoards
 // `layout="wide"`: two-column (music | sfx) — used in CampaignView
 // `layout="narrow"` (default): tabbed — used in the right sidebar
 
-export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }) {
+/**
+ * AudioPanel layouts:
+ *  - 'narrow' — tabbed (Music / SFX) for the right sidebar during play.
+ *  - 'wide'   — full two-column view; music + SFX side by side.
+ *  - 'wide-music' / 'wide-sfx' — split one section into its own view.
+ *    CampaignView uses these for the separated "Audio" and "SFX" tabs
+ *    so content management stays focused while the wide layout is
+ *    still available elsewhere if needed.
+ */
+export type AudioPanelLayout = 'narrow' | 'wide' | 'wide-music' | 'wide-sfx'
+
+export function AudioPanel({ layout = 'narrow' }: { layout?: AudioPanelLayout }) {
   const { t } = useTranslation()
   const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
   const activeMapId = useCampaignStore((s) => s.activeMapId)
@@ -724,6 +735,32 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
   // `flex: 1` content collapsed to zero, leaving the popover as a
   // tiny white shell. The narrow path now uses intrinsic sizing and
   // lets the popover-body scroll if content overflows.
+  // The split layouts render a single section full-width. CampaignView
+  // uses these for the separated "Audio" and "SFX" tabs; wide (both
+  // columns) stays available if any caller wants the old side-by-side.
+  if (layout === 'wide-music' || layout === 'wide-sfx') {
+    const body = layout === 'wide-music' ? musicContent : sfxContent
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
+        <div style={{
+          flex: 1, overflowY: 'auto',
+          padding: 'var(--sp-4) var(--sp-5)',
+        }}>
+          {body}
+        </div>
+
+        {editingSlot && (
+          <SlotEditor
+            boardId={editingSlot.boardId}
+            slot={boards.find((b) => b.id === editingSlot.boardId)?.slots.find((s) => s.slotNumber === editingSlot.slotIndex)}
+            slotIndex={editingSlot.slotIndex}
+            onClose={() => setEditingSlot(null)}
+          />
+        )}
+      </div>
+    )
+  }
+
   if (layout === 'wide') {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
