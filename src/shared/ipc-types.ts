@@ -142,6 +142,13 @@ export const IPC = {
   NOTES_UPDATE: 'notes:update',
   NOTES_DELETE: 'notes:delete',
 
+  // Handouts domain — semantic replacements for raw SQL against
+  // the `handouts` table.
+  HANDOUTS_LIST_BY_CAMPAIGN: 'handouts:list-by-campaign',
+  HANDOUTS_COUNT_BY_CAMPAIGNS: 'handouts:count-by-campaigns',
+  HANDOUTS_CREATE: 'handouts:create',
+  HANDOUTS_DELETE: 'handouts:delete',
+
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
 

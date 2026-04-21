@@ -267,11 +267,7 @@ async function loadCampaignStats(campaignIds: number[]): Promise<StatsMap> {
 
   const [maps, handouts, chars, sessions] = await Promise.all([
     window.electronAPI.maps.listForStats(campaignIds),
-    window.electronAPI.dbQuery<{ campaign_id: number; n: number }>(
-      `SELECT campaign_id, COUNT(*) as n FROM handouts
-       WHERE campaign_id IN (${placeholders}) GROUP BY campaign_id`,
-      campaignIds,
-    ),
+    window.electronAPI.handouts.countByCampaigns(campaignIds),
     window.electronAPI.dbQuery<{ campaign_id: number; name: string; class_name: string; level: number }>(
       `SELECT campaign_id, name, class_name, level
        FROM character_sheets WHERE campaign_id IN (${placeholders})
@@ -296,8 +292,8 @@ async function loadCampaignStats(campaignIds: number[]): Promise<StatsMap> {
     if (entry.thumbnailPath === null) entry.thumbnailPath = row.imagePath
   }
   for (const row of handouts) {
-    const entry = out[row.campaign_id]
-    if (entry) entry.handoutCount = row.n
+    const entry = out[row.campaignId]
+    if (entry) entry.handoutCount = row.count
   }
   for (const row of chars) {
     const entry = out[row.campaign_id]

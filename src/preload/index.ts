@@ -40,6 +40,7 @@ import type {
   FogStateRecord,
   GMPinRecord,
   NoteRecord,
+  HandoutRecord,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -346,6 +347,23 @@ export const dmApi = {
       ipcRenderer.invoke(IPC.NOTES_UPDATE, id, patch),
     delete: (id: number): Promise<void> =>
       ipcRenderer.invoke(IPC.NOTES_DELETE, id),
+  },
+
+  // Handouts — semantic API for the `handouts` table
+  handouts: {
+    listByCampaign: (campaignId: number): Promise<HandoutRecord[]> =>
+      ipcRenderer.invoke(IPC.HANDOUTS_LIST_BY_CAMPAIGN, campaignId),
+    countByCampaigns: (campaignIds: number[]): Promise<Array<{ campaignId: number; count: number }>> =>
+      ipcRenderer.invoke(IPC.HANDOUTS_COUNT_BY_CAMPAIGNS, campaignIds),
+    create: (patch: {
+      campaignId: number
+      title: string
+      imagePath: string | null
+      textContent: string | null
+    }): Promise<HandoutRecord> =>
+      ipcRenderer.invoke(IPC.HANDOUTS_CREATE, patch),
+    delete: (id: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.HANDOUTS_DELETE, id),
   },
 
   // Listen for main → DM: player window was closed

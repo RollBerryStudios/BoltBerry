@@ -97,18 +97,7 @@ export function HandoutsPanel() {
   async function loadHandouts(campaignId: number) {
     if (!window.electronAPI) return
     try {
-      const rows = await window.electronAPI.dbQuery<{
-        id: number; campaign_id: number; title: string
-        image_path: string | null; text_content: string | null; created_at: string
-      }>('SELECT * FROM handouts WHERE campaign_id = ? ORDER BY created_at DESC', [campaignId])
-      setHandouts(rows.map((r) => ({
-        id: r.id,
-        campaignId: r.campaign_id,
-        title: r.title,
-        imagePath: r.image_path,
-        textContent: r.text_content,
-        createdAt: r.created_at,
-      })))
+      setHandouts(await window.electronAPI.handouts.listByCampaign(campaignId))
     } catch (err) {
       console.error('[HandoutsPanel] loadHandouts failed:', err)
     }
@@ -131,18 +120,12 @@ export function HandoutsPanel() {
     if (!activeCampaignId || !window.electronAPI) return
     const title = addingTitle.trim() || 'Handout'
     try {
-      const result = await window.electronAPI.dbRun(
-        'INSERT INTO handouts (campaign_id, title, image_path, text_content) VALUES (?, ?, ?, ?)',
-        [activeCampaignId, title, addingImagePath, addingText.trim() || null]
-      )
-      const newHandout: HandoutRecord = {
-        id: result.lastInsertRowid,
+      const newHandout = await window.electronAPI.handouts.create({
         campaignId: activeCampaignId,
         title,
         imagePath: addingImagePath,
         textContent: addingText.trim() || null,
-        createdAt: new Date().toISOString(),
-      }
+      })
       setHandouts((prev) => [newHandout, ...prev])
       setAddingTitle('')
       setAddingText('')
@@ -172,7 +155,7 @@ export function HandoutsPanel() {
     )
     if (!confirmed) return
     try {
-      await window.electronAPI.dbRun('DELETE FROM handouts WHERE id = ?', [id])
+      await window.electronAPI.handouts.delete(id)
       setHandouts((prev) => prev.filter((h) => h.id !== id))
       if (lightboxId === id) setLightboxId(null)
       if (sentId === id) {

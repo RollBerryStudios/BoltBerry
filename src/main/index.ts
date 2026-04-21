@@ -20,6 +20,7 @@ import { registerEncounterHandlers } from './ipc/encounter-handlers'
 import { registerFogHandlers } from './ipc/fog-handlers'
 import { registerGMPinHandlers } from './ipc/gm-pin-handlers'
 import { registerNoteHandlers } from './ipc/note-handlers'
+import { registerHandoutHandlers } from './ipc/handout-handlers'
 import { registerExportImportHandlers } from './ipc/export-import'
 import { buildAppMenu } from './menu'
 import { initAutoUpdater } from './updater'
@@ -113,6 +114,7 @@ app.whenReady().then(() => {
   registerFogHandlers()
   registerGMPinHandlers()
   registerNoteHandlers()
+  registerHandoutHandlers()
   registerExportImportHandlers()
 
   buildAppMenu(loadPrefs().menuLanguage)
