@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import { useImageUrl } from '../../../hooks/useImageUrl'
 import { getFormationOffsets } from '../../../utils/formationLayout'
+import { uniqueUserTemplateName } from '../../../utils/tokenTemplateName'
 import type { FormationType, MapRecord, TokenVariant } from '@shared/ipc-types'
 
 /* Token library — browsable stat blocks grouped into three categories
@@ -169,10 +170,13 @@ export function TokenLibraryPanel() {
         player:  { name: 'Neuer Spieler', faction: 'party', marker_color: '#22c55e' },
         npc:     { name: 'Neuer NSC',     faction: 'neutral', marker_color: '#f59e0b' },
       }[category]
+      // UNIQUE(source, name) — uniquify before inserting so a second
+      // "Neu"-click doesn't blow up with a constraint error.
+      const finalName = await uniqueUserTemplateName(defaults.name)
       const res = await window.electronAPI.dbRun(
         `INSERT INTO token_templates (category, source, name, size, hp_max, ac, speed, faction, marker_color)
          VALUES (?, 'user', ?, 1, 10, 10, 30, ?, ?)`,
-        [category, defaults.name, defaults.faction, defaults.marker_color],
+        [category, finalName, defaults.faction, defaults.marker_color],
       )
       await load()
       // Bring the new one into focus by scrolling the list — the name field
@@ -187,14 +191,17 @@ export function TokenLibraryPanel() {
   async function handleDuplicate(tpl: TokenTemplate) {
     if (!window.electronAPI) return
     try {
-      const copyName = `${tpl.name} (Kopie)`
+      // Same UNIQUE safeguard as handleCreate. Start from "…(Kopie)"
+      // to match the earlier convention; the uniquifier will append
+      // " (2)" / " (3)" if a previous duplicate already exists.
+      const finalName = await uniqueUserTemplateName(`${tpl.name} (Kopie)`)
       await window.electronAPI.dbRun(
         `INSERT INTO token_templates
            (category, source, name, image_path, size, hp_max, ac, speed, cr,
             creature_type, faction, marker_color, notes, stat_block)
            VALUES (?, 'user', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
-          tpl.category, copyName, tpl.image_path, tpl.size, tpl.hp_max,
+          tpl.category, finalName, tpl.image_path, tpl.size, tpl.hp_max,
           tpl.ac, tpl.speed, tpl.cr, tpl.creature_type, tpl.faction,
           tpl.marker_color, tpl.notes,
           tpl.stat_block ? JSON.stringify(tpl.stat_block) : null,

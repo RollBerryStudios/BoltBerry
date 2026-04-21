@@ -5,6 +5,7 @@ import type { MonsterIndexEntry } from '@shared/ipc-types'
 import { localized, pickName, typeLabel, tokenTint } from './util'
 import { MonsterDetail } from './MonsterDetail'
 import { WikiEntryForm } from './WikiEntryForm'
+import { WikiListMenu } from './WikiListMenu'
 
 /* Monster list + detail pane. The list loads once from DATA_LIST_MONSTERS;
    the detail is fetched on-demand via DATA_GET_MONSTER and cached so
@@ -29,6 +30,7 @@ export function MonstersTab({
   const [typeFilter, setTypeFilter] = useState<string>('')
   const [sourceFilter, setSourceFilter] = useState<'' | 'srd' | 'user'>('')
   const [creatingNew, setCreatingNew] = useState(false)
+  const [menuState, setMenuState] = useState<{ x: number; y: number; entry: MonsterIndexEntry } | null>(null)
   // Tick to force re-fetch after a clone / delete without rewriting the
   // whole list-load effect.
   const [refreshTick, setRefreshTick] = useState(0)
@@ -196,6 +198,10 @@ export function MonstersTab({
                       : 'bb-best-list-item'
                   }
                   onClick={() => handleSelect(m.slug)}
+                  onContextMenu={(e) => {
+                    e.preventDefault()
+                    setMenuState({ x: e.clientX, y: e.clientY, entry: m })
+                  }}
                   style={{ borderLeftColor: tint }}
                 >
                   <span className="bb-best-list-chip mono">CR {m.challenge}</span>
@@ -244,6 +250,20 @@ export function MonstersTab({
           <EmptyDetail label={t('bestiary.noSelection')} />
         )}
       </main>
+
+      {menuState && (
+        <WikiListMenu
+          kind="monster"
+          language={language}
+          anchor={{ x: menuState.x, y: menuState.y }}
+          entry={menuState.entry}
+          onClose={() => setMenuState(null)}
+          onChanged={(nextSlug) => {
+            setRefreshTick((n) => n + 1)
+            if (nextSlug) setSelectedSlug(nextSlug)
+          }}
+        />
+      )}
     </div>
   )
 }

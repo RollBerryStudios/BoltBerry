@@ -10,6 +10,7 @@ import { useCampaignStore } from '../../stores/campaignStore'
 import { showToast } from '../shared/Toast'
 import { WikiEntryControls } from './WikiEntryControls'
 import { WikiEntryForm } from './WikiEntryForm'
+import { WikiListMenu } from './WikiListMenu'
 
 const LEVEL_ORDER: Record<string, number> = {
   cantrip: 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5,
@@ -58,6 +59,7 @@ export function SpellsTab({
   const [classFilter, setClassFilter] = useState<string>('')
   const [sourceFilter, setSourceFilter] = useState<'' | 'srd' | 'user'>('')
   const [creatingNew, setCreatingNew] = useState(false)
+  const [menuState, setMenuState] = useState<{ x: number; y: number; entry: SpellIndexEntry } | null>(null)
   const [refreshTick, setRefreshTick] = useState(0)
 
   useEffect(() => {
@@ -232,6 +234,10 @@ export function SpellsTab({
                       : 'bb-best-list-item'
                   }
                   onClick={() => handleSelect(sp.slug)}
+                  onContextMenu={(e) => {
+                    e.preventDefault()
+                    setMenuState({ x: e.clientX, y: e.clientY, entry: sp })
+                  }}
                   style={{ borderLeftColor: tint }}
                 >
                   <span className="bb-best-list-chip" style={{ color: tint }}>{icon}</span>
@@ -272,6 +278,20 @@ export function SpellsTab({
           <EmptyDetail label={t('bestiary.noSelection')} />
         )}
       </main>
+
+      {menuState && (
+        <WikiListMenu
+          kind="spell"
+          language={language}
+          anchor={{ x: menuState.x, y: menuState.y }}
+          entry={menuState.entry}
+          onClose={() => setMenuState(null)}
+          onChanged={(nextSlug) => {
+            setRefreshTick((n) => n + 1)
+            if (nextSlug) setSelectedSlug(nextSlug)
+          }}
+        />
+      )}
     </div>
   )
 }

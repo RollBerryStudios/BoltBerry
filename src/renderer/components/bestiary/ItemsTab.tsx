@@ -10,6 +10,7 @@ import { useCampaignStore } from '../../stores/campaignStore'
 import { showToast } from '../shared/Toast'
 import { WikiEntryControls } from './WikiEntryControls'
 import { WikiEntryForm } from './WikiEntryForm'
+import { WikiListMenu } from './WikiListMenu'
 
 const RARITY_ORDER: Record<string, number> = {
   MUNDANE: -1, COMMON: 0, UNCOMMON: 1, RARE: 2, VERY_RARE: 3, LEGENDARY: 4, ARTIFACT: 5,
@@ -66,6 +67,7 @@ export function ItemsTab({
   const [rarityFilter, setRarityFilter] = useState<string>('')
   const [sourceFilter, setSourceFilter] = useState<'' | 'srd' | 'user'>('')
   const [creatingNew, setCreatingNew] = useState(false)
+  const [menuState, setMenuState] = useState<{ x: number; y: number; entry: ItemIndexEntry } | null>(null)
   const [refreshTick, setRefreshTick] = useState(0)
 
   useEffect(() => {
@@ -214,6 +216,10 @@ export function ItemsTab({
                       : 'bb-best-list-item'
                   }
                   onClick={() => handleSelect(it.slug)}
+                  onContextMenu={(e) => {
+                    e.preventDefault()
+                    setMenuState({ x: e.clientX, y: e.clientY, entry: it })
+                  }}
                   style={{ borderLeftColor: tint }}
                 >
                   <span className="bb-best-list-chip" style={{ color: tint }}>
@@ -256,6 +262,20 @@ export function ItemsTab({
           <EmptyDetail label={t('bestiary.noSelection')} />
         )}
       </main>
+
+      {menuState && (
+        <WikiListMenu
+          kind="item"
+          language={language}
+          anchor={{ x: menuState.x, y: menuState.y }}
+          entry={menuState.entry}
+          onClose={() => setMenuState(null)}
+          onChanged={(nextSlug) => {
+            setRefreshTick((n) => n + 1)
+            if (nextSlug) setSelectedSlug(nextSlug)
+          }}
+        />
+      )}
     </div>
   )
 }

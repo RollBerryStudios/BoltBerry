@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import type { MonsterRecord, TokenVariant } from '@shared/ipc-types'
 import { CircularCropper } from '../shared/CircularCropper'
 import { showToast } from '../shared/Toast'
+import { uniqueUserTemplateName } from '../../utils/tokenTemplateName'
 
 /**
  * "Als NSC" wizard — clones a Wiki monster into a user-authored
@@ -105,14 +106,20 @@ export function NpcCloneWizard({
       const cr      = monster.challenge
       const type    = parseCreatureType(monster.meta, language)
 
+      // token_templates carries UNIQUE(source, name) — the raw INSERT
+      // would explode as soon as a DM clones the same monster twice
+      // without renaming. Uniquify here so the wizard always succeeds;
+      // the DM can rename later in the Token Library.
+      const finalName = await uniqueUserTemplateName(name.trim())
+
       await window.electronAPI.dbRun(
         `INSERT INTO token_templates (
            category, source, name, image_path, size, hp_max, ac, speed,
            cr, creature_type, faction, slug
          ) VALUES ('npc', 'user', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [name.trim(), chosenImage, sizeNum, hpMax, ac, speed, cr, type, faction, monster.slug],
+        [finalName, chosenImage, sizeNum, hpMax, ac, speed, cr, type, faction, monster.slug],
       )
-      showToast(t('npcWizard.saved', { name: name.trim() }), 'success')
+      showToast(t('npcWizard.saved', { name: finalName }), 'success')
       onSaved()
     } catch (err) {
       console.error('[NpcCloneWizard] save failed:', err)

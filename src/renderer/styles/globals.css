@@ -2067,6 +2067,37 @@ textarea.input {
   cursor: not-allowed;
 }
 
+/* ─── Wiki list context menu ──────────────────────────────────────────── */
+.wiki-list-menu {
+  z-index: 9700;
+  min-width: 200px;
+  padding: 4px 0;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+.wiki-list-menu-item {
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-family: inherit;
+}
+.wiki-list-menu-item:hover:not(:disabled) { background: var(--bg-overlay); }
+.wiki-list-menu-item:disabled { opacity: 0.5; cursor: not-allowed; }
+.wiki-list-menu-danger { color: var(--danger); }
+.wiki-list-menu-sep {
+  height: 1px;
+  margin: 4px 0;
+  background: var(--border-subtle);
+}
+
 /* ─── Wiki entry form (create / edit custom entries) ────────────────────── */
 .bb-best-list-new {
   padding: 3px 10px;
