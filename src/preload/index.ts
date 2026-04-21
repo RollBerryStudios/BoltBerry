@@ -38,6 +38,8 @@ import type {
   DrawingType,
   EncounterRecord,
   FogStateRecord,
+  GMPinRecord,
+  NoteRecord,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -318,6 +320,32 @@ export const dmApi = {
       ipcRenderer.invoke(IPC.FOG_GET, mapId),
     save: (mapId: number, bitmaps: FogStateRecord): Promise<void> =>
       ipcRenderer.invoke(IPC.FOG_SAVE, mapId, bitmaps),
+  },
+
+  // GM Pins — semantic API for the `gm_pins` table
+  gmPins: {
+    listByMap: (mapId: number): Promise<GMPinRecord[]> =>
+      ipcRenderer.invoke(IPC.GM_PINS_LIST_BY_MAP, mapId),
+    create: (patch: Partial<GMPinRecord> & { mapId: number }): Promise<GMPinRecord> =>
+      ipcRenderer.invoke(IPC.GM_PINS_CREATE, patch),
+    update: (id: number, patch: Partial<GMPinRecord>): Promise<void> =>
+      ipcRenderer.invoke(IPC.GM_PINS_UPDATE, id, patch),
+    delete: (id: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.GM_PINS_DELETE, id),
+  },
+
+  // Notes — semantic API for the `notes` table
+  notes: {
+    listCategoryByCampaign: (campaignId: number): Promise<NoteRecord[]> =>
+      ipcRenderer.invoke(IPC.NOTES_LIST_CATEGORY_BY_CAMPAIGN, campaignId),
+    listCategoryByMap: (campaignId: number, mapId: number): Promise<NoteRecord[]> =>
+      ipcRenderer.invoke(IPC.NOTES_LIST_CATEGORY_BY_MAP, campaignId, mapId),
+    create: (patch: Partial<NoteRecord> & { campaignId: number }): Promise<NoteRecord> =>
+      ipcRenderer.invoke(IPC.NOTES_CREATE, patch),
+    update: (id: number, patch: Partial<NoteRecord>): Promise<void> =>
+      ipcRenderer.invoke(IPC.NOTES_UPDATE, id, patch),
+    delete: (id: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.NOTES_DELETE, id),
   },
 
   // Listen for main → DM: player window was closed

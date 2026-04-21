@@ -18,6 +18,8 @@ import { registerRoomHandlers } from './ipc/room-handlers'
 import { registerDrawingHandlers } from './ipc/drawing-handlers'
 import { registerEncounterHandlers } from './ipc/encounter-handlers'
 import { registerFogHandlers } from './ipc/fog-handlers'
+import { registerGMPinHandlers } from './ipc/gm-pin-handlers'
+import { registerNoteHandlers } from './ipc/note-handlers'
 import { registerExportImportHandlers } from './ipc/export-import'
 import { buildAppMenu } from './menu'
 import { initAutoUpdater } from './updater'
@@ -109,6 +111,8 @@ app.whenReady().then(() => {
   registerDrawingHandlers()
   registerEncounterHandlers()
   registerFogHandlers()
+  registerGMPinHandlers()
+  registerNoteHandlers()
   registerExportImportHandlers()
 
   buildAppMenu(loadPrefs().menuLanguage)

@@ -66,24 +66,26 @@ export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
     const pin = pins.find((p) => p.id === id)
     if (!pin) return
     try {
-      await window.electronAPI?.dbRun('DELETE FROM gm_pins WHERE id = ?', [id])
+      await window.electronAPI?.gmPins.delete(id)
       setPins(prev => prev.filter((p) => p.id !== id))
       useUndoStore.getState().pushCommand({
         id: nextCommandId(),
         label: 'Delete GM pin',
         undo: async () => {
-          const result = await window.electronAPI?.dbRun(
-            'INSERT INTO gm_pins (map_id, x, y, label, icon, color) VALUES (?, ?, ?, ?, ?, ?)',
-            [mapId, pin.x, pin.y, pin.label, pin.icon, pin.color],
-          )
-          if (result?.lastInsertRowid) {
-            setPins((prev) => [...prev, { ...pin, id: result.lastInsertRowid }])
-          }
+          const restored = await window.electronAPI?.gmPins.create({
+            mapId,
+            x: pin.x,
+            y: pin.y,
+            label: pin.label,
+            icon: pin.icon,
+            color: pin.color,
+          })
+          if (restored) setPins((prev) => [...prev, { ...pin, id: restored.id }])
         },
         redo: async () => {
           const current = pins.find((p) => p.label === pin.label && p.x === pin.x && p.y === pin.y)
           if (current) {
-            await window.electronAPI?.dbRun('DELETE FROM gm_pins WHERE id = ?', [current.id])
+            await window.electronAPI?.gmPins.delete(current.id)
             setPins((prev) => prev.filter((p) => p.id !== current.id))
           }
         },
@@ -95,7 +97,7 @@ export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
 
   async function handleUpdateLabel(id: number, label: string) {
     try {
-      await window.electronAPI?.dbRun('UPDATE gm_pins SET label = ? WHERE id = ?', [label, id])
+      await window.electronAPI?.gmPins.update(id, { label })
       setPins(prev => prev.map((p) => (p.id === id ? { ...p, label } : p)))
     } catch (err) {
       console.error('[GMPinLayer] update label failed:', err)
@@ -116,7 +118,7 @@ export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
               e.target.position({ x: sx, y: sy })
               setPins(prev => prev.map((p) => (p.id === pin.id ? { ...p, x: mx, y: my } : p)))
               try {
-                await window.electronAPI?.dbRun('UPDATE gm_pins SET x = ?, y = ? WHERE id = ?', [mx, my, pin.id])
+                await window.electronAPI?.gmPins.update(pin.id, { x: mx, y: my })
               } catch (err) {
                 console.error('[GMPinLayer] drag failed:', err)
               }
@@ -184,9 +186,7 @@ export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
 async function loadPins(mapId: number): Promise<GMPin[]> {
   if (!window.electronAPI) return []
   try {
-    const rows = await window.electronAPI.dbQuery<{
-      id: number; map_id: number; x: number; y: number; label: string; icon: string; color: string
-    }>('SELECT id, map_id, x, y, label, icon, color FROM gm_pins WHERE map_id = ?', [mapId])
+    const rows = await window.electronAPI.gmPins.listByMap(mapId)
     return rows.map((r) => ({ id: r.id, x: r.x, y: r.y, label: r.label, icon: r.icon, color: r.color }))
   } catch (err) {
     console.error('[GMPinLayer] loadPins failed:', err)

@@ -129,6 +129,19 @@ export const IPC = {
   FOG_GET: 'fog:get',
   FOG_SAVE: 'fog:save',
 
+  // GM Pins domain — semantic replacements for raw SQL against `gm_pins`.
+  GM_PINS_LIST_BY_MAP: 'gm-pins:list-by-map',
+  GM_PINS_CREATE: 'gm-pins:create',
+  GM_PINS_UPDATE: 'gm-pins:update',
+  GM_PINS_DELETE: 'gm-pins:delete',
+
+  // Notes domain — semantic replacements for raw SQL against `notes`.
+  NOTES_LIST_CATEGORY_BY_CAMPAIGN: 'notes:list-category-by-campaign',
+  NOTES_LIST_CATEGORY_BY_MAP: 'notes:list-category-by-map',
+  NOTES_CREATE: 'notes:create',
+  NOTES_UPDATE: 'notes:update',
+  NOTES_DELETE: 'notes:delete',
+
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
 
@@ -537,6 +550,8 @@ export interface NoteRecord {
   content: string
   pinX: number | null
   pinY: number | null
+  /** Decoded JSON; null when the row has no tags assigned. */
+  tags: string[] | null
   updatedAt: string
 }
 
@@ -553,6 +568,17 @@ export interface PlayerMapState {
   gridVisible?: boolean
   gridThickness?: number
   gridColor?: string
+}
+
+/** GM-only pin on a map, for DM-side bookmarks and ping sources. */
+export interface GMPinRecord {
+  id: number
+  mapId: number
+  x: number
+  y: number
+  label: string
+  icon: string
+  color: string
 }
 
 /** Fog and explored bitmaps for a single map, both PNG data URLs. */

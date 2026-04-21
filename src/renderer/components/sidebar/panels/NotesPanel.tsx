@@ -155,36 +155,29 @@ export function NotesPanel() {
   async function loadAllNotes(campaignId: number, mapId: number | null) {
     if (!window.electronAPI) return
     try {
-      const campaignRows = await window.electronAPI.dbQuery<{
-        id: number; category: string; title: string; content: string
-        updated_at: string; tags: string | null
-      }>(
-        `SELECT id, category, title, content, updated_at, tags
-         FROM notes
-         WHERE campaign_id = ? AND map_id IS NULL AND pin_x IS NULL AND pin_y IS NULL
-         ORDER BY updated_at DESC`,
-        [campaignId],
-      )
+      const campaignRows = await window.electronAPI.notes.listCategoryByCampaign(campaignId)
       const buckets: Record<string, NoteRow[]> = {}
       for (const cat of CAMPAIGN_CATEGORIES) buckets[cat.id] = []
       for (const row of campaignRows) {
-        const { category, tags, ...rest } = row
-        if (!buckets[category]) buckets[category] = []
-        buckets[category].push({ ...rest, tags: parseTags(tags) })
+        if (!buckets[row.category]) buckets[row.category] = []
+        buckets[row.category].push({
+          id: row.id,
+          title: row.title,
+          content: row.content,
+          updated_at: row.updatedAt,
+          tags: row.tags ?? [],
+        })
       }
 
       if (mapId) {
-        const mapRows = await window.electronAPI.dbQuery<{
-          id: number; title: string; content: string
-          updated_at: string; tags: string | null
-        }>(
-          `SELECT id, title, content, updated_at, tags
-           FROM notes
-           WHERE campaign_id = ? AND map_id = ? AND pin_x IS NULL AND pin_y IS NULL
-           ORDER BY updated_at DESC`,
-          [campaignId, mapId],
-        )
-        buckets[MAP_BUCKET] = mapRows.map(({ tags, ...r }) => ({ ...r, tags: parseTags(tags) }))
+        const mapRows = await window.electronAPI.notes.listCategoryByMap(campaignId, mapId)
+        buckets[MAP_BUCKET] = mapRows.map((r) => ({
+          id: r.id,
+          title: r.title,
+          content: r.content,
+          updated_at: r.updatedAt,
+          tags: r.tags ?? [],
+        }))
       } else {
         buckets[MAP_BUCKET] = []
       }
@@ -211,18 +204,7 @@ export function NotesPanel() {
   ) => {
     if (!window.electronAPI || !activeCampaignId) return
     try {
-      const fields: string[] = []
-      const params: unknown[] = []
-      if (patch.title !== undefined) { fields.push('title = ?'); params.push(patch.title) }
-      if (patch.content !== undefined) { fields.push('content = ?'); params.push(patch.content) }
-      if (patch.tags !== undefined) { fields.push('tags = ?'); params.push(JSON.stringify(patch.tags)) }
-      if (fields.length === 0) return
-      fields.push(`updated_at = datetime('now')`)
-      params.push(noteId)
-      await window.electronAPI.dbRun(
-        `UPDATE notes SET ${fields.join(', ')} WHERE id = ?`,
-        params,
-      )
+      await window.electronAPI.notes.update(noteId, patch)
       setNotesByBucket((prev) => ({
         ...prev,
         [bucket]: (prev[bucket] ?? []).map((n) =>
@@ -241,15 +223,22 @@ export function NotesPanel() {
     const category = bucket === MAP_BUCKET ? 'Allgemein' : bucket
     const mapId = bucket === MAP_BUCKET ? activeMapId : null
     try {
-      const result = await window.electronAPI.dbRun(
-        `INSERT INTO notes (campaign_id, map_id, category, title, content, updated_at)
-         VALUES (?, ?, ?, ?, '', datetime('now'))`,
-        [activeCampaignId, mapId, category, 'Neue Notiz'],
-      )
-      const id = result.lastInsertRowid
-      const newRow: NoteRow = { id, title: 'Neue Notiz', content: '', updated_at: new Date().toISOString(), tags: [] }
+      const created = await window.electronAPI.notes.create({
+        campaignId: activeCampaignId,
+        mapId,
+        category,
+        title: 'Neue Notiz',
+        content: '',
+      })
+      const newRow: NoteRow = {
+        id: created.id,
+        title: created.title,
+        content: created.content,
+        updated_at: created.updatedAt,
+        tags: created.tags ?? [],
+      }
       setNotesByBucket((prev) => ({ ...prev, [bucket]: [newRow, ...(prev[bucket] ?? [])] }))
-      setSelectedByBucket((prev) => ({ ...prev, [bucket]: id }))
+      setSelectedByBucket((prev) => ({ ...prev, [bucket]: created.id }))
     } catch (err) {
       console.error('[NotesPanel] createNote failed:', err)
     }
@@ -258,7 +247,7 @@ export function NotesPanel() {
   async function deleteNote(bucket: string, noteId: number) {
     if (!window.electronAPI) return
     try {
-      await window.electronAPI.dbRun('DELETE FROM notes WHERE id = ?', [noteId])
+      await window.electronAPI.notes.delete(noteId)
       setNotesByBucket((prev) => {
         const next = (prev[bucket] ?? []).filter((n) => n.id !== noteId)
         return { ...prev, [bucket]: next }
