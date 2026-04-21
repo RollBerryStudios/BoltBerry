@@ -960,6 +960,7 @@ function WelcomeStyles() {
       }
       .bb-welcome-compendium-btn {
         display: inline-flex; align-items: center; gap: 6px;
+        flex-shrink: 0;
         padding: 5px 10px;
         background: transparent;
         border: 1px solid var(--border);
@@ -979,6 +980,13 @@ function WelcomeStyles() {
         border: 1px solid var(--border);
         border-radius: var(--radius-sm);
         overflow: hidden;
+        /* Never shrink below the intrinsic DE | EN width — with
+           default flex-shrink:1 the pill was being squeezed to a 20 px
+           vertical sliver at high-DPI window sizes because the four
+           neighbouring buttons claimed the remaining row. Pinning both
+           here and on .bb-welcome-compendium-btn forces overflow to
+           wrap via the row's flex-wrap instead of collapsing anyone. */
+        flex-shrink: 0;
       }
       .bb-welcome-lang button {
         padding: 4px 10px;
