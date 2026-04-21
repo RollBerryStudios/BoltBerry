@@ -61,6 +61,15 @@ app.whenReady().then(() => {
       const url = new URL(request.url)
       const rawPath = decodeURIComponent(url.pathname)
 
+      // Explicit reject for empty / root-only paths (audit SR-4). An
+      // empty rawPath slips through `resolve(userDataPath, '')` →
+      // userData root, which could serve directory listings to a
+      // compromised renderer. Also covers bare '/' which resolves the
+      // same way after path normalisation.
+      if (!rawPath || rawPath === '/' || rawPath === '\\') {
+        return new Response('Forbidden', { status: 403 })
+      }
+
       const userDataPath = resolve(getCustomUserDataPath() || app.getPath('userData'))
       // Always resolve relative to userData; reject absolute paths and traversal
       const fullPath = resolve(userDataPath, rawPath)

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Stage, Layer, Image as KonvaImage, Shape, Group, Circle, Rect, Text, Line } from 'react-konva'
 import Konva from 'konva'
 import type { PlayerFullState, PlayerTokenState, PlayerMeasureState, FogDelta, PlayerMapState, PlayerPointer, PlayerViewport, PlayerOverlay, PlayerInitiativeEntry, WeatherType, GridType, PlayerDrawingState, PlayerWallState } from '@shared/ipc-types'
@@ -61,8 +61,15 @@ export default function PlayerApp() {
   const [drawingData, setDrawingData] = useState<PlayerDrawingState[]>([])
   const [walls, setWalls] = useState<PlayerWallState[]>([])
 
+  // Kept in a ref so the player-sync callbacks below (which run
+  // outside the render cycle when the main process broadcasts a new
+  // full-sync) can read the latest mapState without subscribing
+  // `useEffect`s to it. useLayoutEffect writes synchronously before
+  // any sibling effect runs and — unlike a bare render-body
+  // assignment — doesn't tear under React 18 concurrent rendering
+  // (audit CQ-1).
   const mapStateRef = useRef<PlayerMapState | null>(null)
-  mapStateRef.current = mapState
+  useLayoutEffect(() => { mapStateRef.current = mapState }, [mapState])
 
 
   // Dual fog canvases at map natural resolution

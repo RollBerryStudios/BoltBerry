@@ -426,8 +426,10 @@ export function registerAppHandlers(): void {
       console.error('[AppHandlers] Failed to read PDF:', err)
       return null
     }
+    // Deliberately do NOT return the absolute `srcPath` — a compromised
+    // renderer would learn the user's filesystem layout (audit SR-2).
+    // The renderer only needs the bytes + a display name.
     return {
-      path: srcPath,
       originalName: srcPath.split(/[\\/]/).pop()!,
       data: data.toString('base64'),
     }
@@ -601,18 +603,35 @@ export function registerAppHandlers(): void {
       // Enumerate every file under assets/ (recursive). Symlinks
       // ignored as a defensive measure — a malicious asset-folder
       // symlink could otherwise trick us into deleting files outside
-      // userData.
+      // userData. Per audit SR-3, also cap recursion depth and total
+      // entries so a deeply-nested tree (accidental `.git` clone, a
+      // malicious chain of directories) can't pin the main process.
+      const WALK_MAX_DEPTH = 5
+      const WALK_MAX_ENTRIES = 5000
       const allFiles: string[] = []
-      const walk = (dir: string, relPrefix: string) => {
+      let walkedEntries = 0
+      let depthOverflow = false
+      const walk = (dir: string, relPrefix: string, depth: number) => {
+        if (depth > WALK_MAX_DEPTH) {
+          depthOverflow = true
+          return
+        }
         for (const entry of readdirSync(dir, { withFileTypes: true })) {
+          if (walkedEntries >= WALK_MAX_ENTRIES) return
+          walkedEntries++
           if (entry.isSymbolicLink()) continue
           const rel = relPrefix ? `${relPrefix}/${entry.name}` : entry.name
           const abs = join(dir, entry.name)
-          if (entry.isDirectory()) walk(abs, rel)
+          if (entry.isDirectory()) walk(abs, rel, depth + 1)
           else if (entry.isFile()) allFiles.push(`assets/${rel}`)
         }
       }
-      walk(assetRoot, '')
+      walk(assetRoot, '', 0)
+      if (depthOverflow || walkedEntries >= WALK_MAX_ENTRIES) {
+        console.warn(
+          `[AppHandlers] ASSET_CLEANUP: walk truncated at depth=${WALK_MAX_DEPTH} or ${WALK_MAX_ENTRIES} entries`,
+        )
+      }
 
       // Collect every path the DB still references. Any column that
       // points at a user-data asset is queried here; if new columns

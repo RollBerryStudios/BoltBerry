@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCampaignStore } from '../stores/campaignStore'
 import { useUIStore } from '../stores/uiStore'
@@ -61,13 +61,26 @@ export function CampaignView() {
   const stats = useCampaignStats(campaignIds)
   const selfStats = activeCampaignId ? stats[activeCampaignId] : undefined
 
-  // Populate activeMaps so the "Spielansicht" button knows which map to open.
+  const loadMaps = useCallback(async (campaignId: number) => {
+    if (!window.electronAPI) return
+    try {
+      const rows = await window.electronAPI.maps.list(campaignId)
+      setActiveMaps(rows)
+    } catch (err) {
+      console.error('[CampaignView] loadMaps failed:', err)
+    } finally {
+      setMapsLoaded(true)
+    }
+  }, [setActiveMaps])
+
+  // Populate activeMaps so the "Spielansicht" button knows which
+  // map to open. loadMaps is now a stable useCallback so exhaustive-
+  // deps can include it without re-running every render (audit CQ-6).
   useEffect(() => {
     if (!activeCampaignId) return
     setMapsLoaded(false)
     loadMaps(activeCampaignId)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeCampaignId])
+  }, [activeCampaignId, loadMaps])
 
   // Command-palette → workspace tab deep-link. Lets a DM open the Bestiarium
   // via Ctrl+K from anywhere in the campaign.
@@ -79,18 +92,6 @@ export function CampaignView() {
     window.addEventListener('workspace:open-tab', onOpenTab)
     return () => window.removeEventListener('workspace:open-tab', onOpenTab)
   }, [])
-
-  async function loadMaps(campaignId: number) {
-    if (!window.electronAPI) return
-    try {
-      const rows = await window.electronAPI.maps.list(campaignId)
-      setActiveMaps(rows)
-    } catch (err) {
-      console.error('[CampaignView] loadMaps failed:', err)
-    } finally {
-      setMapsLoaded(true)
-    }
-  }
 
   async function handleImportFirstMap() {
     if (!activeCampaignId || !window.electronAPI || importing) return
