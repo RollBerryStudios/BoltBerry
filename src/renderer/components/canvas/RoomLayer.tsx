@@ -162,7 +162,14 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
 
   return (
     <Layer
-      listening={isRoomTool || selectedRoomId !== null}
+      // Listen whenever the Room tool is active (so drawing clicks
+      // register) OR whenever any room exists (so room polygons can
+      // be clicked to re-select, even when no room is currently
+      // selected). The previous `selectedRoomId !== null` gate
+      // stranded users: after deselecting via a canvas click the
+      // Layer went silent, and the user could no longer re-select
+      // the room to rename / edit it from the sidebar.
+      listening={isRoomTool || parsedRooms.length > 0}
       onClick={isRoomTool ? handleStageClick : undefined}
       onMouseMove={isRoomTool ? handleStageMouseMove : undefined}
       onDblClick={isRoomTool ? handleDoubleClick : undefined}

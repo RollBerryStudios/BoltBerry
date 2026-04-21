@@ -213,17 +213,16 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
     refreshDisplay()
     saveFogToDb(mapId, explored, covered)
 
-    // Broadcast rebuilt fog to player so their view stays in sync after undo/redo
-    if (useUIStore.getState().sessionMode !== 'prep') {
-      // PNG keeps the canvas alpha channel intact. JPEG has no alpha,
-      // so cleared fog (transparent everywhere) would encode as solid
-      // black — the player window would then render a fully opaque
-      // black overlay over the map even after the DM cleared fog.
-      window.electronAPI?.sendFogReset(
-        covered.toDataURL('image/png'),
-        explored.toDataURL('image/png'),
-      )
-    }
+    // Broadcast rebuilt fog to player so their view stays in sync
+    // after undo/redo. PNG keeps the canvas alpha channel intact;
+    // JPEG has no alpha, so cleared fog (transparent everywhere)
+    // would encode as solid black — the player window would then
+    // render a fully opaque black overlay over the map even after
+    // the DM cleared fog.
+    window.electronAPI?.sendFogReset(
+      covered.toDataURL('image/png'),
+      explored.toDataURL('image/png'),
+    )
   }, [mapId, refreshDisplay])
 
   // ── Push fog operation to global undo stack ────────────────────────
@@ -296,12 +295,10 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
             useFogStore.setState({ history: prevHistory, redoStack: [] })
             refreshDisplay()
             saveFogToDb(mapId, explored, covered)
-            if (useUIStore.getState().sessionMode !== 'prep') {
-              window.electronAPI?.sendFogReset(
-                covered.toDataURL('image/png'),
-                explored.toDataURL('image/png'),
-              )
-            }
+            window.electronAPI?.sendFogReset(
+              covered.toDataURL('image/png'),
+              explored.toDataURL('image/png'),
+            )
           },
           redo: async () => {
             ec.clearRect(0, 0, explored.width, explored.height)
@@ -721,7 +718,12 @@ export function flushFogSave(): void {
 }
 
 function sendFogDelta(op: FogOperation) {
-  if (useUIStore.getState().sessionMode === 'prep') return
+  // Fog is broadcast unconditionally. The main-process bridge silently
+  // drops the message when no player window is open, and the player
+  // renderer ignores deltas that arrive before a map is loaded. Gating
+  // on sessionMode here was stripping updates even while the DM and
+  // player windows were actively connected — the exact "fog does not
+  // update in real time" bug users reported.
   window.electronAPI?.sendFogDelta({
     type: op.type,
     shape: op.shape,

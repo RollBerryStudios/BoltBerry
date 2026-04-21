@@ -395,7 +395,11 @@
     "setCover": "Cover setzen",
     "clearCover": "Cover entfernen",
     "sessionCount": "{{count}} Sitzungen",
-    "sessionCount_one": "{{count}} Sitzung"
+    "sessionCount_one": "{{count}} Sitzung",
+    "settings": "Einstellungen",
+    "settingsLanguage": "Sprache",
+    "settingsTheme": "Design",
+    "settingsOpenFolder": "Inhaltsordner öffnen"
   },
   "dashboard": {
     "greetingMorning": "Guten Morgen",

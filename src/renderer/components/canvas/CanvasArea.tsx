@@ -8,7 +8,7 @@ import { MeasureLayer } from './MeasureLayer'
 import { MinimapOverlay } from './MinimapOverlay'
 import { DrawingLayer } from './DrawingLayer'
 import { GMPinLayer, GM_PIN_ADD_EVENT } from './GMPinLayer'
-import { PlayerViewportLayer } from './PlayerViewportLayer'
+import { PlayerViewportLayer, PlayerViewportGestures } from './PlayerViewportLayer'
 import { LightingLayer } from './LightingLayer'
 import { WallLayer } from './WallLayer'
 import { RoomLayer } from './RoomLayer'
@@ -439,6 +439,16 @@ export function CanvasArea() {
             const curRot = (map?.rotation ?? 0) as 0 | 90 | 180 | 270
             const rotLabel = (r: number) => ({ 0: '↑ 0°', 90: '→ 90°', 180: '↓ 180°', 270: '← 270°' }[r] ?? `${r}°`)
 
+            // Snapshot the pointer position NOW, before the native menu
+            // opens — by the time the handler resumes below, the user
+            // has clicked on a menu item and the Konva stage's cached
+            // pointer position may be stale or null. Used by the
+            // "add GM pin here" action.
+            const clickPos = e.target.getStage()?.getPointerPosition()
+            const clickMapPos = clickPos
+              ? useMapTransformStore.getState().screenToMap(clickPos.x, clickPos.y)
+              : null
+
             const items: Array<{ label: string; action: string } | { separator: true }> = []
 
             // ── Ansicht ────────────────────────────────────────────
@@ -521,10 +531,8 @@ export function CanvasArea() {
             // ── GM-Pin ─────────────────────────────────────────────
             } else if (action === 'add-gm-pin') {
               useUIStore.getState().setActiveTool('select')
-              const pos = e.target.getStage()?.getPointerPosition()
-              if (pos) {
-                const mapPos = useMapTransformStore.getState().screenToMap(pos.x, pos.y)
-                window.dispatchEvent(new CustomEvent(GM_PIN_ADD_EVENT, { detail: { x: mapPos.x, y: mapPos.y } }))
+              if (clickMapPos) {
+                window.dispatchEvent(new CustomEvent(GM_PIN_ADD_EVENT, { detail: { x: clickMapPos.x, y: clickMapPos.y } }))
               }
 
             // ── Zeichnungen ────────────────────────────────────────
@@ -648,6 +656,12 @@ export function CanvasArea() {
           )}
         </Stage>
       )}
+
+      {/* Player Control Mode — Ctrl+drag / Ctrl+wheel gestures. Mounted
+          outside the Stage so the window-level listeners keep working
+          even when no map is loaded (the PlayerViewportLayer above is
+          only rendered when a map exists). */}
+      <PlayerViewportGestures />
 
       {/* Player Eye HUD */}
       <PlayerEyeHUD />

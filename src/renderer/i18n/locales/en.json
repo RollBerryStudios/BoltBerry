@@ -395,7 +395,11 @@
     "setCover": "Set cover",
     "clearCover": "Clear cover",
     "sessionCount": "{{count}} sessions",
-    "sessionCount_one": "{{count}} session"
+    "sessionCount_one": "{{count}} session",
+    "settings": "Settings",
+    "settingsLanguage": "Language",
+    "settingsTheme": "Theme",
+    "settingsOpenFolder": "Open content folder"
   },
   "dashboard": {
     "greetingMorning": "Good morning",
