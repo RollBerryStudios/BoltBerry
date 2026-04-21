@@ -103,6 +103,13 @@ export const IPC = {
   WALLS_UPDATE: 'walls:update',
   WALLS_DELETE: 'walls:delete',
 
+  // Rooms domain — semantic replacements for raw SQL against `rooms`.
+  ROOMS_LIST_BY_MAP: 'rooms:list-by-map',
+  ROOMS_CREATE: 'rooms:create',
+  ROOMS_RESTORE: 'rooms:restore',
+  ROOMS_UPDATE: 'rooms:update',
+  ROOMS_DELETE: 'rooms:delete',
+
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
 

@@ -14,30 +14,6 @@ const VISIBILITY_OPTIONS: { value: RoomVisibility; label: string; icon: string }
   { value: 'dimmed', label: 'Gedimmt', icon: '🌤' },
 ]
 
-// Map each DB column to its SQLite affinity so we coerce incoming JS values
-// to a compatible shape instead of naïvely JSON.stringify()-ing everything.
-const COLUMN_TYPES: Record<string, 'text' | 'integer' | 'real' | 'nullable-integer'> = {
-  name: 'text',
-  description: 'text',
-  polygon: 'text',
-  visibility: 'text',
-  encounter_id: 'nullable-integer',
-  atmosphere_hint: 'text',
-  notes: 'text',
-  color: 'text',
-}
-
-function coerceForDb(field: string, value: unknown): any {
-  const type = COLUMN_TYPES[field]
-  if (value == null) return null
-  if (type === 'integer' || type === 'nullable-integer') {
-    return typeof value === 'number' ? value : Number(value)
-  }
-  if (type === 'real') return Number(value)
-  // text (default): keep strings as-is, stringify anything else
-  return typeof value === 'string' ? value : String(value)
-}
-
 export function RoomPanel() {
   const { rooms, selectedRoomId, setSelectedRoomId, updateRoom, removeRoom } = useRoomStore()
   const { activeMapId } = useCampaignStore()
@@ -68,21 +44,17 @@ export function RoomPanel() {
     removeRoom(id)
     if (selectedRoomId === id) setSelectedRoomId(null)
     try {
-      await window.electronAPI.dbRun('DELETE FROM rooms WHERE id = ?', [id])
+      await window.electronAPI.rooms.delete(id)
     } catch (err) {
       console.error('[RoomPanel] delete failed:', err)
     }
   }, [rooms, removeRoom, selectedRoomId, setSelectedRoomId])
 
-  const handleUpdateField = useCallback(async (id: number, field: string, value: any) => {
-    // Convert snake_case DB field name to camelCase for store update
-    const storeField = field.replace(/_([a-z])/g, (_, c: string) => c.toUpperCase())
-    const patch: Partial<RoomRecord> = {}
-    ;(patch as any)[storeField] = value
+  const handleUpdateField = useCallback(async (id: number, field: keyof RoomRecord, value: any) => {
+    const patch: Partial<RoomRecord> = { [field]: value } as Partial<RoomRecord>
     updateRoom(id, patch)
     try {
-      const dbValue = coerceForDb(field, value)
-      await window.electronAPI?.dbRun(`UPDATE rooms SET ${field} = ? WHERE id = ?`, [dbValue, id])
+      await window.electronAPI?.rooms.update(id, patch)
     } catch (err) {
       console.error('[RoomPanel] update failed:', err)
     }
@@ -294,7 +266,7 @@ export function RoomPanel() {
             </label>
             <select
               value={selected.encounterId ?? ''}
-              onChange={(e) => handleUpdateField(selected.id, 'encounter_id', e.target.value ? Number(e.target.value) : null)}
+              onChange={(e) => handleUpdateField(selected.id, 'encounterId', e.target.value ? Number(e.target.value) : null)}
               style={{
                 width: '100%', fontSize: 'var(--text-xs)', padding: '4px',
                 background: 'var(--bg-base)', border: '1px solid var(--border)',
@@ -315,7 +287,7 @@ export function RoomPanel() {
             <input
               type="text"
               value={selected.atmosphereHint ?? ''}
-              onChange={(e) => handleUpdateField(selected.id, 'atmosphere_hint', e.target.value)}
+              onChange={(e) => handleUpdateField(selected.id, 'atmosphereHint', e.target.value)}
               placeholder="z.B. Musik, Stimmung..."
               style={{
                 width: '100%', fontSize: 'var(--text-xs)', padding: '4px 8px',

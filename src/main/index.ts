@@ -14,6 +14,7 @@ import { registerMapHandlers } from './ipc/map-handlers'
 import { registerTokenHandlers } from './ipc/token-handlers'
 import { registerInitiativeHandlers } from './ipc/initiative-handlers'
 import { registerWallHandlers } from './ipc/wall-handlers'
+import { registerRoomHandlers } from './ipc/room-handlers'
 import { registerExportImportHandlers } from './ipc/export-import'
 import { buildAppMenu } from './menu'
 import { initAutoUpdater } from './updater'
@@ -101,6 +102,7 @@ app.whenReady().then(() => {
   registerTokenHandlers()
   registerInitiativeHandlers()
   registerWallHandlers()
+  registerRoomHandlers()
   registerExportImportHandlers()
 
   buildAppMenu(loadPrefs().menuLanguage)

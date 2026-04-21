@@ -860,7 +860,7 @@ async function loadMapData(mapId: number, map: MapRecord) {
     const campaignId = useCampaignStore.getState().activeCampaignId
 
     // Fire all independent DB queries in parallel for faster map load
-    const [tokens, initiative, walls, encRows, roomRows, fogRows, drawingRows] = await Promise.all([
+    const [tokens, initiative, walls, encRows, rooms, fogRows, drawingRows] = await Promise.all([
       window.electronAPI.tokens.listByMap(mapId),
 
       window.electronAPI.initiative.listByMap(mapId),
@@ -873,9 +873,7 @@ async function loadMapData(mapId: number, map: MapRecord) {
           }>('SELECT id, campaign_id, name, template_data, notes, created_at FROM encounters WHERE campaign_id = ? ORDER BY created_at DESC', [campaignId])
         : Promise.resolve([] as any[]),
 
-      window.electronAPI.dbQuery<{
-        id: number; map_id: number; name: string; description: string; polygon: string; visibility: string; encounter_id: number | null; atmosphere_hint: string | null; notes: string | null; color: string; created_at: string
-      }>('SELECT id, map_id, name, description, polygon, visibility, encounter_id, atmosphere_hint, notes, color, created_at FROM rooms WHERE map_id = ?', [mapId]),
+      window.electronAPI.rooms.listByMap(mapId),
 
       window.electronAPI.dbQuery<{
         fog_bitmap: string | null; explored_bitmap: string | null
@@ -910,19 +908,7 @@ async function loadMapData(mapId: number, map: MapRecord) {
       })))
     }
 
-    useRoomStore.getState().setRooms(roomRows.map((r) => ({
-      id: r.id,
-      mapId: r.map_id,
-      name: r.name,
-      description: r.description,
-      polygon: r.polygon,
-      visibility: r.visibility as any,
-      encounterId: r.encounter_id,
-      atmosphereHint: r.atmosphere_hint,
-      notes: r.notes,
-      color: r.color,
-      createdAt: r.created_at,
-    })))
+    useRoomStore.getState().setRooms(rooms)
 
     const fogBitmap: string | null = fogRows[0]?.fog_bitmap ?? null
     const exploredBitmap: string | null = fogRows[0]?.explored_bitmap ?? null

@@ -33,6 +33,7 @@ import type {
   WallRecord,
   WallType,
   DoorState,
+  RoomRecord,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -242,6 +243,20 @@ export const dmApi = {
       ipcRenderer.invoke(IPC.WALLS_UPDATE, id, patch),
     delete: (id: number): Promise<void> =>
       ipcRenderer.invoke(IPC.WALLS_DELETE, id),
+  },
+
+  // Rooms — semantic API for the `rooms` table
+  rooms: {
+    listByMap: (mapId: number): Promise<RoomRecord[]> =>
+      ipcRenderer.invoke(IPC.ROOMS_LIST_BY_MAP, mapId),
+    create: (patch: Partial<RoomRecord> & { mapId: number }): Promise<RoomRecord> =>
+      ipcRenderer.invoke(IPC.ROOMS_CREATE, patch),
+    restore: (room: RoomRecord): Promise<RoomRecord> =>
+      ipcRenderer.invoke(IPC.ROOMS_RESTORE, room),
+    update: (id: number, patch: Partial<RoomRecord>): Promise<void> =>
+      ipcRenderer.invoke(IPC.ROOMS_UPDATE, id, patch),
+    delete: (id: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.ROOMS_DELETE, id),
   },
 
   // Listen for main → DM: player window was closed

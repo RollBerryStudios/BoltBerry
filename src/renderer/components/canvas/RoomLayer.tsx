@@ -83,43 +83,31 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
     }
     const polygon = JSON.stringify(drawingPoints)
     try {
-      const result = await window.electronAPI?.dbRun(
-        'INSERT INTO rooms (map_id, name, polygon, visibility, color) VALUES (?, ?, ?, ?, ?)',
-        [mapId, 'Neuer Raum', polygon, 'hidden', '#3b82f6'],
-      )
-      if (result) {
-        let currentId: number = result.lastInsertRowid
-        const makeRoom = (id: number) => ({
-          id,
-          mapId,
-          name: 'Neuer Raum',
-          description: '',
-          polygon,
-          visibility: 'hidden' as const,
-          encounterId: null,
-          atmosphereHint: null,
-          notes: null,
-          color: '#3b82f6',
-          createdAt: new Date().toISOString(),
-        })
-        addRoom(makeRoom(currentId))
-        setSelectedRoomId(currentId)
+      const createPatch = {
+        mapId,
+        name: 'Neuer Raum',
+        polygon,
+        visibility: 'hidden' as const,
+        color: '#3b82f6',
+      }
+      const room = await window.electronAPI?.rooms.create(createPatch)
+      if (room) {
+        let currentRoom = room
+        addRoom(currentRoom)
+        setSelectedRoomId(currentRoom.id)
 
         useUndoStore.getState().pushCommand({
           id: nextCommandId(),
           label: 'Raum',
           undo: async () => {
-            await window.electronAPI?.dbRun('DELETE FROM rooms WHERE id = ?', [currentId])
-            useRoomStore.getState().removeRoom(currentId)
+            await window.electronAPI?.rooms.delete(currentRoom.id)
+            useRoomStore.getState().removeRoom(currentRoom.id)
           },
           redo: async () => {
-            const r = await window.electronAPI?.dbRun(
-              'INSERT INTO rooms (map_id, name, polygon, visibility, color) VALUES (?, ?, ?, ?, ?)',
-              [mapId, 'Neuer Raum', polygon, 'hidden', '#3b82f6'],
-            )
+            const r = await window.electronAPI?.rooms.create(createPatch)
             if (!r) return
-            currentId = r.lastInsertRowid
-            useRoomStore.getState().addRoom(makeRoom(currentId))
+            currentRoom = r
+            useRoomStore.getState().addRoom(r)
           },
         })
       }
