@@ -118,6 +118,13 @@ export const IPC = {
   DRAWINGS_DELETE: 'drawings:delete',
   DRAWINGS_DELETE_BY_MAP: 'drawings:delete-by-map',
 
+  // Encounters domain — semantic replacements for raw SQL against
+  // the `encounters` table.
+  ENCOUNTERS_LIST_BY_CAMPAIGN: 'encounters:list-by-campaign',
+  ENCOUNTERS_CREATE: 'encounters:create',
+  ENCOUNTERS_RENAME: 'encounters:rename',
+  ENCOUNTERS_DELETE: 'encounters:delete',
+
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
 

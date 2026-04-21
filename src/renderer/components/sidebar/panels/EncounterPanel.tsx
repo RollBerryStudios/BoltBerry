@@ -230,19 +230,13 @@ export function EncounterPanel() {
       notes: null,
     }
     try {
-      const result = await window.electronAPI?.dbRun(
-        'INSERT INTO encounters (campaign_id, name, template_data) VALUES (?, ?, ?)',
-        [activeCampaignId, name, JSON.stringify(template)]
-      )
-      if (result) {
-        addEncounter({
-          id: result.lastInsertRowid,
-          campaignId: activeCampaignId,
-          name,
-          templateData: JSON.stringify(template),
-          notes: null,
-          createdAt: new Date().toISOString(),
-        })
+      const created = await window.electronAPI?.encounters.create({
+        campaignId: activeCampaignId,
+        name,
+        templateData: JSON.stringify(template),
+      })
+      if (created) {
+        addEncounter(created)
         showToast(`Encounter „${name}" gespeichert`, 'success')
       }
     } catch (err) {
@@ -257,7 +251,7 @@ export function EncounterPanel() {
     if (!name) return
     updateEncounter(id, { name })
     try {
-      await window.electronAPI?.dbRun('UPDATE encounters SET name = ? WHERE id = ?', [name, id])
+      await window.electronAPI?.encounters.rename(id, name)
     } catch (err) {
       console.error('[EncounterPanel] rename failed:', err)
     }
@@ -383,7 +377,7 @@ export function EncounterPanel() {
     removeEncounter(id)
     if (selectedId === id) setSelectedId(null)
     try {
-      await window.electronAPI.dbRun('DELETE FROM encounters WHERE id = ?', [id])
+      await window.electronAPI.encounters.delete(id)
       showToast(`Encounter gelöscht`, 'info')
     } catch (err) {
       console.error('[EncounterPanel] delete failed:', err)

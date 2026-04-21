@@ -860,7 +860,7 @@ async function loadMapData(mapId: number, map: MapRecord) {
     const campaignId = useCampaignStore.getState().activeCampaignId
 
     // Fire all independent DB queries in parallel for faster map load
-    const [tokens, initiative, walls, encRows, rooms, fogRows, drawingRows] = await Promise.all([
+    const [tokens, initiative, walls, encounters, rooms, fogRows, drawingRows] = await Promise.all([
       window.electronAPI.tokens.listByMap(mapId),
 
       window.electronAPI.initiative.listByMap(mapId),
@@ -868,9 +868,7 @@ async function loadMapData(mapId: number, map: MapRecord) {
       window.electronAPI.walls.listByMap(mapId),
 
       campaignId
-        ? window.electronAPI.dbQuery<{
-            id: number; campaign_id: number; name: string; template_data: string; notes: string | null; created_at: string
-          }>('SELECT id, campaign_id, name, template_data, notes, created_at FROM encounters WHERE campaign_id = ? ORDER BY created_at DESC', [campaignId])
+        ? window.electronAPI.encounters.listByCampaign(campaignId)
         : Promise.resolve([] as any[]),
 
       window.electronAPI.rooms.listByMap(mapId),
@@ -895,15 +893,8 @@ async function loadMapData(mapId: number, map: MapRecord) {
 
     useWallStore.getState().setWalls(walls)
 
-    if (campaignId && encRows.length > 0) {
-      useEncounterStore.getState().setEncounters(encRows.map((r) => ({
-        id: r.id,
-        campaignId: r.campaign_id,
-        name: r.name,
-        templateData: r.template_data,
-        notes: r.notes,
-        createdAt: r.created_at,
-      })))
+    if (campaignId && encounters.length > 0) {
+      useEncounterStore.getState().setEncounters(encounters)
     }
 
     useRoomStore.getState().setRooms(rooms)

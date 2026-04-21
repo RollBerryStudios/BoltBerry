@@ -36,6 +36,7 @@ import type {
   RoomRecord,
   DrawingRecord,
   DrawingType,
+  EncounterRecord,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -291,6 +292,23 @@ export const dmApi = {
       ipcRenderer.invoke(IPC.DRAWINGS_DELETE, id),
     deleteByMap: (mapId: number): Promise<void> =>
       ipcRenderer.invoke(IPC.DRAWINGS_DELETE_BY_MAP, mapId),
+  },
+
+  // Encounters — semantic API for the `encounters` table
+  encounters: {
+    listByCampaign: (campaignId: number): Promise<EncounterRecord[]> =>
+      ipcRenderer.invoke(IPC.ENCOUNTERS_LIST_BY_CAMPAIGN, campaignId),
+    create: (patch: {
+      campaignId: number
+      name: string
+      templateData: string
+      notes?: string | null
+    }): Promise<EncounterRecord> =>
+      ipcRenderer.invoke(IPC.ENCOUNTERS_CREATE, patch),
+    rename: (id: number, name: string): Promise<void> =>
+      ipcRenderer.invoke(IPC.ENCOUNTERS_RENAME, id, name),
+    delete: (id: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.ENCOUNTERS_DELETE, id),
   },
 
   // Listen for main → DM: player window was closed
