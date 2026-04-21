@@ -15,13 +15,14 @@ import {
   useRelativeTime,
 } from './campaign-data'
 import type { MapRecord } from '@shared/ipc-types'
+import type { WorkspaceTab } from '../stores/uiStore'
 
 /* Campaign workspace — shown when a campaign is open but no map is
    active. Uses the dashboard aesthetic (Fraunces titles, dark cards,
    Bolt-yellow CTA) so that the whole "between sessions" experience —
    Welcome → Workspace → Map view — shares one visual language. */
 
-type Tab = 'maps' | 'characters' | 'npcs' | 'audio' | 'sfx' | 'handouts' | 'notes'
+type Tab = WorkspaceTab
 
 const TABS: { id: Tab; icon: string; i18nKey: string }[] = [
   { id: 'maps',       icon: '🗺️', i18nKey: 'workspace.tabMaps'       },
@@ -45,8 +46,10 @@ export function CampaignView() {
     setActiveCampaign,
   } = useCampaignStore()
   const { playerConnected, language, toggleLanguage } = useUIStore()
-
-  const [tab, setTab] = useState<Tab>('maps')
+  // Tab lives in uiStore so the workspace can unmount when a map is
+  // open (PB-5) without losing the DM's current tab selection.
+  const tab = useUIStore((s) => s.workspaceTab)
+  const setTab = useUIStore((s) => s.setWorkspaceTab)
   const [mapsLoaded, setMapsLoaded] = useState(false)
   const [importing, setImporting] = useState(false)
 

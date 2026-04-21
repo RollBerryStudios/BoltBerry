@@ -68,15 +68,31 @@ export function LightingLayer({ mapId, gridSize }: LightingLayerProps) {
       })
   }, [tokens, gridSize, mapId, activeMapId])
 
+  // LOS polygons are expensive (O(S) ray casts per light against every
+  // wall segment) and only depend on the lights + map geometry — NOT on
+  // scale / offset. Without this memo, every pan, zoom, pointer-move,
+  // or measure-tool tick re-ran all the polygons because LightingLayer
+  // re-rendered with fresh `scale` / `offsetX` / `offsetY` store
+  // subscriptions. Recompute keyed on the stuff that actually shifts
+  // the visibility geometry.
+  const polygonsByLight = useMemo(() => {
+    const m = new Map<number, number[]>()
+    for (const l of lights) {
+      m.set(l.id, computeVisibilityPolygon(l.cx, l.cy, l.rPx, segments, imgW, imgH))
+    }
+    return m
+  }, [lights, segments, imgW, imgH])
+
   if (activeMapId !== mapId || lights.length === 0) return null
 
   return (
     <Layer listening={false} opacity={0.6} perfectDrawEnabled={false}>
       {lights.map((l) => {
-        // Compute LOS polygon in map-image pixel space
-        const poly = computeVisibilityPolygon(l.cx, l.cy, l.rPx, segments, imgW, imgH)
+        const poly = polygonsByLight.get(l.id) ?? []
 
-        // Convert polygon to screen coords
+        // Convert polygon to screen coords. Cheap per-frame work — the
+        // heavy part (ray-casting against walls) stays cached in
+        // `polygonsByLight`.
         const screenPoly: number[] = []
         for (let i = 0; i < poly.length; i += 2) {
           screenPoly.push(poly[i] * scale + offsetX, poly[i + 1] * scale + offsetY)

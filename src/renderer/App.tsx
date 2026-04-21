@@ -174,13 +174,17 @@ export default function App() {
         </ErrorBoundary>
       ) : (
         <>
-          {/* CampaignView stays mounted while a campaign is open so tab state is preserved.
-              Hidden (not unmounted) when a map is active. */}
-          <div style={{ display: activeMapId ? 'none' : 'flex', flexDirection: 'column', height: '100%' }}>
+          {/* CampaignView unmounts when a map is active. Selected tab
+              is persisted in uiStore.workspaceTab so re-opening the
+              workspace lands on the same tab. Previously this tree
+              stayed in the DOM with display:none and kept receiving
+              Zustand updates + running loadMaps effects while the
+              canvas ran. */}
+          {!activeMapId && (
             <ErrorBoundary label="CampaignView">
               <CampaignView />
             </ErrorBoundary>
-          </div>
+          )}
           {/* AppLayout is only mounted when a map is open — the canvas is heavy. */}
           {activeMapId && <AppLayout />}
         </>

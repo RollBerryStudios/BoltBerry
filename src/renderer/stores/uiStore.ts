@@ -21,6 +21,7 @@ async function logSessionTransition(next: 'session' | 'prep'): Promise<void> {
 
 export type ActiveTool = 'select' | 'fog-rect' | 'fog-polygon' | 'fog-cover' | 'fog-brush' | 'fog-brush-cover' | 'token' | 'atmosphere' | 'pointer' | 'measure-line' | 'measure-circle' | 'measure-cone' | 'draw-freehand' | 'draw-rect' | 'draw-circle' | 'draw-text' | 'wall-draw' | 'wall-door' | 'room'
 export type SidebarTab = 'tokens' | 'initiative' | 'notes' | 'handouts' | 'encounters' | 'rooms' | 'characters'
+export type WorkspaceTab = 'maps' | 'characters' | 'npcs' | 'audio' | 'sfx' | 'handouts' | 'notes'
 export type SidebarDock = 'scene' | 'content'
 /** Utility panels live in a floating dock outside the right sidebar. */
 export type FloatingPanel = 'audio' | 'overlay' | 'dice'
@@ -83,6 +84,11 @@ interface UIState {
   activeTool: ActiveTool
   sidebarTab: SidebarTab
   sidebarDock: SidebarDock
+  /** Which tab the campaign workspace shows. Lifted into the store so
+   *  the workspace can unmount while a map is open (avoiding stale
+   *  Zustand subscriptions + effect churn) without losing the DM's
+   *  selected tab on return. */
+  workspaceTab: WorkspaceTab
   /** Currently-open floating utility panel (audio/overlay/dice). null = none. */
   floatingPanel: FloatingPanel | null
   leftSidebarOpen: boolean
@@ -145,6 +151,7 @@ interface UIState {
   setActiveTool: (tool: ActiveTool) => void
   setWorkMode: (mode: WorkMode) => void
   setSidebarTab: (tab: SidebarTab) => void
+  setWorkspaceTab: (tab: WorkspaceTab) => void
   setSidebarDock: (dock: SidebarDock) => void
   setFloatingPanel: (panel: FloatingPanel | null) => void
   toggleFloatingPanel: (panel: FloatingPanel) => void
@@ -205,6 +212,7 @@ export const useUIStore = create<UIState>((set) => ({
   activeTool: 'select',
   sidebarTab: (() => { try { const v = localStorage.getItem('boltberry-sidebar-tab') as SidebarTab | null; return v && v in SIDEBAR_TAB_TO_DOCK ? v : 'tokens' } catch { return 'tokens' } })(),
   sidebarDock: (() => { try { const v = localStorage.getItem('boltberry-sidebar-tab') as SidebarTab | null; return v && v in SIDEBAR_TAB_TO_DOCK ? SIDEBAR_TAB_TO_DOCK[v] : 'scene' } catch { return 'scene' } })(),
+  workspaceTab: 'maps',
   floatingPanel: null,
   leftSidebarOpen: (() => { try { const v = localStorage.getItem('boltberry-left-sidebar'); return v === null ? true : v !== 'false' } catch { return true } })(),
   rightSidebarOpen: (() => { try { const v = localStorage.getItem('boltberry-right-sidebar'); return v === null ? true : v !== 'false' } catch { return true } })(),
@@ -273,6 +281,7 @@ export const useUIStore = create<UIState>((set) => ({
     try { localStorage.setItem('boltberry-sidebar-tab', sidebarTab) } catch { /* noop */ }
     set({ sidebarTab, sidebarDock: SIDEBAR_TAB_TO_DOCK[sidebarTab] })
   },
+  setWorkspaceTab: (workspaceTab) => set({ workspaceTab }),
   setSidebarDock: (sidebarDock) => set({ sidebarDock }),
   setFloatingPanel: (floatingPanel) => set({ floatingPanel }),
   toggleFloatingPanel: (panel) =>
