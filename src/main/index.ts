@@ -24,6 +24,7 @@ import { registerHandoutHandlers } from './ipc/handout-handlers'
 import { registerCharacterSheetHandlers } from './ipc/character-sheet-handlers'
 import { registerAssetHandlers } from './ipc/asset-handlers'
 import { registerSessionHandlers } from './ipc/session-handlers'
+import { registerTokenTemplateHandlers } from './ipc/token-template-handlers'
 import { registerExportImportHandlers } from './ipc/export-import'
 import { buildAppMenu } from './menu'
 import { initAutoUpdater } from './updater'
@@ -121,6 +122,7 @@ app.whenReady().then(() => {
   registerCharacterSheetHandlers()
   registerAssetHandlers()
   registerSessionHandlers()
+  registerTokenTemplateHandlers()
   registerExportImportHandlers()
 
   buildAppMenu(loadPrefs().menuLanguage)

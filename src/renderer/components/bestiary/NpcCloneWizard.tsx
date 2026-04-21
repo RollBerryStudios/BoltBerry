@@ -112,13 +112,19 @@ export function NpcCloneWizard({
       // the DM can rename later in the Token Library.
       const finalName = await uniqueUserTemplateName(name.trim())
 
-      await window.electronAPI.dbRun(
-        `INSERT INTO token_templates (
-           category, source, name, image_path, size, hp_max, ac, speed,
-           cr, creature_type, faction, slug
-         ) VALUES ('npc', 'user', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [finalName, chosenImage, sizeNum, hpMax, ac, speed, cr, type, faction, monster.slug],
-      )
+      await window.electronAPI.tokenTemplates.create({
+        category: 'npc',
+        name: finalName,
+        image_path: chosenImage,
+        size: sizeNum,
+        hp_max: hpMax,
+        ac,
+        speed,
+        cr,
+        creature_type: type,
+        faction,
+        slug: monster.slug,
+      })
       showToast(t('npcWizard.saved', { name: finalName }), 'success')
       onSaved()
     } catch (err) {

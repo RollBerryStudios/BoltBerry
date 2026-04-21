@@ -167,6 +167,14 @@ export const IPC = {
   SESSIONS_END_OPEN: 'sessions:end-open',
   SESSIONS_STATS_BY_CAMPAIGNS: 'sessions:stats-by-campaigns',
 
+  // Token templates domain — semantic replacements for raw SQL
+  // against the `token_templates` table (the user/SRD token library).
+  TOKEN_TEMPLATES_LIST: 'token-templates:list',
+  TOKEN_TEMPLATES_LIST_USER_NAMES: 'token-templates:list-user-names',
+  TOKEN_TEMPLATES_CREATE: 'token-templates:create',
+  TOKEN_TEMPLATES_UPDATE: 'token-templates:update',
+  TOKEN_TEMPLATES_DELETE: 'token-templates:delete',
+
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
 
@@ -859,6 +867,30 @@ export interface CharacterPartyEntry {
   name: string
   className: string
   level: number
+}
+
+/** Row shape returned by the token-templates IPC. Snake_case mirrors
+ *  the DB columns so the existing Token Library render code (which
+ *  references `image_path`, `hp_max`, etc. throughout) works without
+ *  a mass rename. `stat_block` is decoded from its stored JSON form. */
+export interface TokenTemplateRow {
+  id: number
+  category: string
+  source: string
+  name: string
+  image_path: string | null
+  size: number
+  hp_max: number
+  ac: number | null
+  speed: number | null
+  cr: string | null
+  creature_type: string | null
+  faction: string
+  marker_color: string | null
+  notes: string | null
+  stat_block: unknown | null
+  slug: string | null
+  created_at: string
 }
 
 export type AssetType = 'map' | 'token' | 'atmosphere' | 'handout' | 'audio'

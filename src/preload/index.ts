@@ -45,6 +45,7 @@ import type {
   CharacterPartyEntry,
   AssetEntry,
   SessionStatsEntry,
+  TokenTemplateRow,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -400,6 +401,20 @@ export const dmApi = {
       ipcRenderer.invoke(IPC.SESSIONS_END_OPEN, campaignId),
     statsByCampaigns: (campaignIds: number[]): Promise<SessionStatsEntry[]> =>
       ipcRenderer.invoke(IPC.SESSIONS_STATS_BY_CAMPAIGNS, campaignIds),
+  },
+
+  // Token templates — semantic API for the `token_templates` table
+  tokenTemplates: {
+    list: (): Promise<TokenTemplateRow[]> =>
+      ipcRenderer.invoke(IPC.TOKEN_TEMPLATES_LIST),
+    listUserNames: (): Promise<string[]> =>
+      ipcRenderer.invoke(IPC.TOKEN_TEMPLATES_LIST_USER_NAMES),
+    create: (patch: Partial<TokenTemplateRow> & { name: string }): Promise<TokenTemplateRow> =>
+      ipcRenderer.invoke(IPC.TOKEN_TEMPLATES_CREATE, patch),
+    update: (id: number, patch: Partial<TokenTemplateRow>): Promise<void> =>
+      ipcRenderer.invoke(IPC.TOKEN_TEMPLATES_UPDATE, id, patch),
+    delete: (id: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.TOKEN_TEMPLATES_DELETE, id),
   },
 
   // Listen for main → DM: player window was closed

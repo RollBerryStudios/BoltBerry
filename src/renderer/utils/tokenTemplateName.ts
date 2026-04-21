@@ -19,10 +19,8 @@ export async function uniqueUserTemplateName(baseName: string): Promise<string> 
   if (!window.electronAPI) return base
   let taken: Set<string>
   try {
-    const rows = await window.electronAPI.dbQuery<{ name: string }>(
-      `SELECT name FROM token_templates WHERE source = 'user'`,
-    )
-    taken = new Set(rows.map((r) => r.name))
+    const names = await window.electronAPI.tokenTemplates.listUserNames()
+    taken = new Set(names)
   } catch {
     return `${base} (${Date.now().toString(36).slice(-4)})`
   }

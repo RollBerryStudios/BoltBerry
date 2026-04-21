@@ -837,11 +837,11 @@ function LibraryPicker({
 
   useEffect(() => {
     if (!window.electronAPI) return
-    void window.electronAPI.dbQuery<LibraryPickerTemplate>(
-      `SELECT id, category, source, name, image_path, size, hp_max, ac, cr,
-              creature_type, faction, marker_color, notes, slug
-       FROM token_templates ORDER BY name`,
-    ).then(setTemplates)
+    // LibraryPickerTemplate is a subset of TokenTemplateRow — types match
+    // structurally for the columns the picker actually reads.
+    void window.electronAPI.tokenTemplates.list().then((rows) => {
+      setTemplates(rows as unknown as LibraryPickerTemplate[])
+    })
   }, [])
 
   const filtered = useMemo(() => {

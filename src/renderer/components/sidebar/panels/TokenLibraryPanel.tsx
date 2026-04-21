@@ -82,40 +82,15 @@ export function TokenLibraryPanel({ lockedCategory }: {
     if (!window.electronAPI) return
     setLoading(true)
     try {
-      const rows = await window.electronAPI.dbQuery<{
-        id: number
-        category: string
-        source: string
-        name: string
-        image_path: string | null
-        size: number
-        hp_max: number
-        ac: number | null
-        speed: number | null
-        cr: string | null
-        creature_type: string | null
-        faction: string
-        marker_color: string | null
-        notes: string | null
-        stat_block: string | null
-        slug: string | null
-        created_at: string
-      }>(
-        `SELECT id, category, source, name, image_path, size, hp_max, ac, speed,
-                cr, creature_type, faction, marker_color, notes, stat_block, slug, created_at
-         FROM token_templates
-         ORDER BY
-           CASE source WHEN 'user' THEN 0 ELSE 1 END,
-           CASE
-             WHEN cr LIKE '1/8' THEN 0.125
-             WHEN cr LIKE '1/4' THEN 0.25
-             WHEN cr LIKE '1/2' THEN 0.5
-             WHEN cr GLOB '[0-9]*' THEN CAST(cr AS REAL)
-             ELSE 999
-           END,
-           name`,
-      )
-      setTemplates(rows.map(parseTemplate))
+      const rows = await window.electronAPI.tokenTemplates.list()
+      // Cast `stat_block` into the StatBlock shape the panel expects —
+      // the handler already JSON-parsed it (returns unknown).
+      setTemplates(rows.map((r) => ({
+        ...r,
+        category: r.category as Category,
+        source: r.source as Source,
+        stat_block: r.stat_block as StatBlock | null,
+      })))
     } catch (err) {
       setError(String(err))
     } finally {
@@ -179,16 +154,20 @@ export function TokenLibraryPanel({ lockedCategory }: {
       // UNIQUE(source, name) — uniquify before inserting so a second
       // "Neu"-click doesn't blow up with a constraint error.
       const finalName = await uniqueUserTemplateName(defaults.name)
-      const res = await window.electronAPI.dbRun(
-        `INSERT INTO token_templates (category, source, name, size, hp_max, ac, speed, faction, marker_color)
-         VALUES (?, 'user', ?, 1, 10, 10, 30, ?, ?)`,
-        [category, finalName, defaults.faction, defaults.marker_color],
-      )
+      await window.electronAPI.tokenTemplates.create({
+        category,
+        name: finalName,
+        size: 1,
+        hp_max: 10,
+        ac: 10,
+        speed: 30,
+        faction: defaults.faction,
+        marker_color: defaults.marker_color,
+      })
       await load()
       // Bring the new one into focus by scrolling the list — the name field
       // autoFocuses for user-source cards with a recent id.
       setQuery('')
-      void res
     } catch (err) {
       setError(String(err))
     }
@@ -201,18 +180,21 @@ export function TokenLibraryPanel({ lockedCategory }: {
       // to match the earlier convention; the uniquifier will append
       // " (2)" / " (3)" if a previous duplicate already exists.
       const finalName = await uniqueUserTemplateName(`${tpl.name} (Kopie)`)
-      await window.electronAPI.dbRun(
-        `INSERT INTO token_templates
-           (category, source, name, image_path, size, hp_max, ac, speed, cr,
-            creature_type, faction, marker_color, notes, stat_block)
-           VALUES (?, 'user', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [
-          tpl.category, finalName, tpl.image_path, tpl.size, tpl.hp_max,
-          tpl.ac, tpl.speed, tpl.cr, tpl.creature_type, tpl.faction,
-          tpl.marker_color, tpl.notes,
-          tpl.stat_block ? JSON.stringify(tpl.stat_block) : null,
-        ],
-      )
+      await window.electronAPI.tokenTemplates.create({
+        category: tpl.category,
+        name: finalName,
+        image_path: tpl.image_path,
+        size: tpl.size,
+        hp_max: tpl.hp_max,
+        ac: tpl.ac,
+        speed: tpl.speed,
+        cr: tpl.cr,
+        creature_type: tpl.creature_type,
+        faction: tpl.faction,
+        marker_color: tpl.marker_color,
+        notes: tpl.notes,
+        stat_block: tpl.stat_block,
+      })
       await load()
     } catch (err) {
       setError(String(err))
@@ -227,7 +209,7 @@ export function TokenLibraryPanel({ lockedCategory }: {
     )
     if (!confirmed) return
     try {
-      await window.electronAPI.dbRun('DELETE FROM token_templates WHERE id = ?', [tpl.id])
+      await window.electronAPI.tokenTemplates.delete(tpl.id)
       await load()
     } catch (err) {
       setError(String(err))
@@ -237,19 +219,9 @@ export function TokenLibraryPanel({ lockedCategory }: {
   async function handleEdit(tpl: TokenTemplate, patch: Partial<Pick<TokenTemplate,
     'name' | 'hp_max' | 'ac' | 'speed' | 'size' | 'cr' | 'creature_type' | 'faction' | 'marker_color'>>) {
     if (!window.electronAPI) return
-    const fields: string[] = []
-    const params: unknown[] = []
-    for (const [key, value] of Object.entries(patch)) {
-      fields.push(`${key} = ?`)
-      params.push(value)
-    }
-    if (fields.length === 0) return
-    params.push(tpl.id)
+    if (Object.keys(patch).length === 0) return
     try {
-      await window.electronAPI.dbRun(
-        `UPDATE token_templates SET ${fields.join(', ')} WHERE id = ?`,
-        params,
-      )
+      await window.electronAPI.tokenTemplates.update(tpl.id, patch)
       setTemplates((prev) => prev.map((x) => (x.id === tpl.id ? { ...x, ...patch } : x)))
     } catch (err) {
       setError(String(err))
@@ -261,28 +233,20 @@ export function TokenLibraryPanel({ lockedCategory }: {
   async function handleSaveFull(tpl: TokenTemplate, next: TokenTemplate) {
     if (!window.electronAPI) return
     try {
-      await window.electronAPI.dbRun(
-        `UPDATE token_templates
-         SET name = ?, image_path = ?, size = ?, hp_max = ?, ac = ?, speed = ?,
-             cr = ?, creature_type = ?, faction = ?, marker_color = ?,
-             notes = ?, stat_block = ?
-         WHERE id = ?`,
-        [
-          next.name,
-          next.image_path,
-          next.size,
-          next.hp_max,
-          next.ac,
-          next.speed,
-          next.cr,
-          next.creature_type,
-          next.faction,
-          next.marker_color,
-          next.notes,
-          next.stat_block ? JSON.stringify(next.stat_block) : null,
-          tpl.id,
-        ],
-      )
+      await window.electronAPI.tokenTemplates.update(tpl.id, {
+        name: next.name,
+        image_path: next.image_path,
+        size: next.size,
+        hp_max: next.hp_max,
+        ac: next.ac,
+        speed: next.speed,
+        cr: next.cr,
+        creature_type: next.creature_type,
+        faction: next.faction,
+        marker_color: next.marker_color,
+        notes: next.notes,
+        stat_block: next.stat_block,
+      })
       setTemplates((prev) => prev.map((x) => (x.id === tpl.id ? next : x)))
     } catch (err) {
       setError(String(err))
@@ -1658,26 +1622,6 @@ const variantIconBtn: React.CSSProperties = {
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────
-
-function parseTemplate(row: {
-  id: number; category: string; source: string; name: string
-  image_path: string | null; size: number; hp_max: number
-  ac: number | null; speed: number | null; cr: string | null
-  creature_type: string | null; faction: string
-  marker_color: string | null; notes: string | null
-  stat_block: string | null; slug: string | null; created_at: string
-}): TokenTemplate {
-  let parsed: StatBlock | null = null
-  if (row.stat_block) {
-    try { parsed = JSON.parse(row.stat_block) as StatBlock } catch { parsed = null }
-  }
-  return {
-    ...row,
-    category: row.category as Category,
-    source: row.source as Source,
-    stat_block: parsed,
-  }
-}
 
 function sizeLabel(size: number): string {
   if (size <= 1) return 'M'
