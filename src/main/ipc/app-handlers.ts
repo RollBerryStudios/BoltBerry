@@ -175,7 +175,11 @@ export function registerAppHandlers(): void {
       }
 
       const stat = statSync(realPath)
-      if (stat.size > 200 * 1024 * 1024) {
+      // Tightened from 200 MB to 20 MB per audit PB-3. Real-world token
+      // / map / portrait files top out at 5 MB; anything larger is
+      // almost certainly a mis-import and pegs the main process while
+      // the base64 string is built. The hard cap beats a silent freeze.
+      if (stat.size > 20 * 1024 * 1024) {
         console.warn('[AppHandlers] GET_IMAGE_AS_BASE64: file too large, refusing', realPath)
         return null
       }

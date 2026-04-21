@@ -221,10 +221,11 @@ export function initDatabase(): Database.Database {
     // "no such column" before the migration gets a chance to add it.
     db.exec(CREATE_POST_MIGRATION_INDEXES_SQL)
 
-    // Seed the SRD 5.1 monster library from resources/data/. Idempotent
-    // via UNIQUE(source, name) — a user who deleted a seeded row keeps
-    // it gone (INSERT OR IGNORE) across restarts.
-    seedSrdMonsters(db)
+    // SRD seeding deferred — see `seedSrdMonstersDeferred` below. The
+    // old sync seed blocked initDatabase (which blocks app startup) on
+    // a 263-row transaction; users saw a blank window for a tick on
+    // cold start. Now it runs on the background queue after the DM
+    // window has finished loading.
   } catch (err) {
     db.close()
     db = null
@@ -247,6 +248,26 @@ export function getDb(): Database.Database {
 // will match the existing UNIQUE index, because the row-was-deleted case
 // is indistinguishable from a fresh install after migration v33 wipes
 // source='srd' rows on schema upgrade.
+/**
+ * Defer the SRD seed off the boot path. Runs inside `setImmediate` so
+ * `initDatabase()` returns before the 263-row INSERT transaction
+ * begins, letting `app.whenReady()` create the DM window first. Seed
+ * is idempotent (INSERT OR IGNORE) so nothing relies on completion
+ * timing — if the DM opens the Token Library within the tick or two
+ * it takes, they see an empty list briefly and the seeded rows appear
+ * on next open.
+ */
+export function seedSrdMonstersDeferred(): void {
+  setImmediate(() => {
+    if (!db) return
+    try {
+      seedSrdMonsters(db)
+    } catch (err) {
+      console.error('[Database] Deferred SRD seed failed:', err)
+    }
+  })
+}
+
 function seedSrdMonsters(database: Database.Database) {
   const index = loadMonstersIndexSync()
   if (index.length === 0) {

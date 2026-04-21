@@ -22,7 +22,12 @@ import { getCustomUserDataPath } from '../db/database'
 
 const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/
 const VARIANT_EXTS = ['.webp', '.png', '.jpg', '.jpeg']
-const COMPENDIUM_MAX_BYTES = 200 * 1024 * 1024
+// Tightened from 200 MB to 50 MB per audit PB-3. Typical D&D rulebook
+// PDFs are 3–30 MB; 50 MB handles the largest shipped rulebooks with
+// headroom. 200 MB let a pathological PDF pin the main process for
+// multi-second base64 encodes + blew the renderer's JS heap on the
+// receiving end.
+const COMPENDIUM_MAX_BYTES = 50 * 1024 * 1024
 
 // ─── Compendium ────────────────────────────────────────────────────────
 

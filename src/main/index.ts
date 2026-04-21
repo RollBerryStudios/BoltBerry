@@ -2,7 +2,7 @@ import { app, BrowserWindow, dialog, net, protocol } from 'electron'
 import { pathToFileURL } from 'url'
 import { existsSync, realpathSync, lstatSync } from 'fs'
 import { resolve, join, sep } from 'path'
-import { initDatabase, closeDatabase, getCustomUserDataPath } from './db/database'
+import { initDatabase, closeDatabase, getCustomUserDataPath, seedSrdMonstersDeferred } from './db/database'
 import { logger } from './logger'
 import { createDMWindow, getDMWindow } from './windows'
 import { registerPlayerBridgeHandlers } from './ipc/player-bridge'
@@ -132,6 +132,12 @@ app.whenReady().then(() => {
   buildAppMenu(loadPrefs().menuLanguage)
 
   createDMWindow()
+
+  // Seed the SRD 5.1 bestiary after the DM window starts loading.
+  // Deferred off the boot path so initDatabase() no longer blocks on
+  // a 263-row INSERT transaction — the window paints faster, and the
+  // seed runs on the background queue.
+  seedSrdMonstersDeferred()
 
   // Start background update check (no-ops in dev)
   initAutoUpdater()
