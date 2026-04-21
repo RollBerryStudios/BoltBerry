@@ -215,9 +215,13 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
 
     // Broadcast rebuilt fog to player so their view stays in sync after undo/redo
     if (useUIStore.getState().sessionMode !== 'prep') {
+      // PNG keeps the canvas alpha channel intact. JPEG has no alpha,
+      // so cleared fog (transparent everywhere) would encode as solid
+      // black — the player window would then render a fully opaque
+      // black overlay over the map even after the DM cleared fog.
       window.electronAPI?.sendFogReset(
-        covered.toDataURL('image/jpeg', 0.85),
-        explored.toDataURL('image/jpeg', 0.85),
+        covered.toDataURL('image/png'),
+        explored.toDataURL('image/png'),
       )
     }
   }, [mapId, refreshDisplay])
@@ -619,9 +623,16 @@ function commitFogSave(
   coveredCanvas: HTMLCanvasElement,
 ) {
   try {
-    // JPEG (~4× smaller than PNG for typical fog bitmaps)
-    const fogBitmap      = coveredCanvas.toDataURL('image/jpeg', 0.85)
-    const exploredBitmap = exploredCanvas.toDataURL('image/jpeg', 0.85)
+    // PNG preserves the canvas alpha channel. We used to use JPEG for
+    // the ~4× size win, but JPEG has no alpha: a cleared fog canvas
+    // (transparent everywhere) encoded to solid black, so the player
+    // window loaded a fully-opaque black overlay over the map even
+    // after the DM cleared fog. Size-wise PNG is fine here: fog
+    // bitmaps are almost entirely uniform regions (solid-alpha covered
+    // blocks + alpha-0 cleared blocks) which PNG's DEFLATE compresses
+    // aggressively.
+    const fogBitmap      = coveredCanvas.toDataURL('image/png')
+    const exploredBitmap = exploredCanvas.toDataURL('image/png')
     // Fire-and-forget: the caller may be synchronous (beforeunload) and
     // can't await. dbRun is an ipcRenderer.invoke — the IPC send itself is
     // synchronous enough to survive the renderer shutting down.
