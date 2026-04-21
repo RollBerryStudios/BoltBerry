@@ -134,10 +134,11 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
     if (cameraSaveTimerRef.current) clearTimeout(cameraSaveTimerRef.current)
     cameraSaveTimerRef.current = setTimeout(async () => {
       try {
-        await window.electronAPI?.dbRun(
-          'UPDATE maps SET camera_x = ?, camera_y = ?, camera_scale = ? WHERE id = ?',
-          [newOffX, newOffY, newScale, map.id]
-        )
+        await window.electronAPI?.maps.setCamera(map.id, {
+          cameraX: newOffX,
+          cameraY: newOffY,
+          cameraScale: newScale,
+        })
         useCampaignStore.getState().setActiveMaps(
           useCampaignStore.getState().activeMaps.map((m) =>
             m.id === map.id ? { ...m, cameraX: newOffX, cameraY: newOffY, cameraScale: newScale } : m

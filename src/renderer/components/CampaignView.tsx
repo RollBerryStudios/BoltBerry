@@ -80,44 +80,8 @@ export function CampaignView() {
   async function loadMaps(campaignId: number) {
     if (!window.electronAPI) return
     try {
-      const rows = await window.electronAPI.dbQuery<{
-        id: number; campaign_id: number; name: string; image_path: string
-        grid_type: string; grid_size: number; ft_per_unit: number; order_index: number
-        camera_x: number | null; camera_y: number | null; camera_scale: number | null
-        rotation: number | null; grid_offset_x: number; grid_offset_y: number
-        ambient_brightness: number; ambient_track_path: string | null
-        track1_volume: number; track2_volume: number; combat_volume: number
-        rotation_player: number
-        grid_visible: number | null; grid_thickness: number | null; grid_color: string | null
-      }>(
-        'SELECT id, campaign_id, name, image_path, grid_type, grid_size, ft_per_unit, order_index, camera_x, camera_y, camera_scale, rotation, rotation_player, grid_offset_x, grid_offset_y, ambient_brightness, ambient_track_path, track1_volume, track2_volume, combat_volume, grid_visible, grid_thickness, grid_color FROM maps WHERE campaign_id = ? ORDER BY order_index',
-        [campaignId],
-      )
-      setActiveMaps(rows.map((r) => ({
-        id: r.id,
-        campaignId: r.campaign_id,
-        name: r.name,
-        imagePath: r.image_path,
-        gridType: r.grid_type as MapRecord['gridType'],
-        gridSize: r.grid_size,
-        ftPerUnit: r.ft_per_unit ?? 5,
-        orderIndex: r.order_index,
-        rotation: r.rotation ?? 0,
-        rotationPlayer: r.rotation_player ?? 0,
-        gridOffsetX: r.grid_offset_x ?? 0,
-        gridOffsetY: r.grid_offset_y ?? 0,
-        ambientBrightness: r.ambient_brightness ?? 100,
-        cameraX: r.camera_x ?? null,
-        cameraY: r.camera_y ?? null,
-        cameraScale: r.camera_scale ?? null,
-        ambientTrackPath: r.ambient_track_path ?? null,
-        track1Volume: r.track1_volume ?? 1,
-        track2Volume: r.track2_volume ?? 1,
-        combatVolume: r.combat_volume ?? 1,
-        gridVisible: (r.grid_visible ?? 1) !== 0,
-        gridThickness: r.grid_thickness ?? 1,
-        gridColor: r.grid_color ?? 'rgba(255,255,255,0.34)',
-      })))
+      const rows = await window.electronAPI.maps.list(campaignId)
+      setActiveMaps(rows)
     } catch (err) {
       console.error('[CampaignView] loadMaps failed:', err)
     } finally {
@@ -142,35 +106,11 @@ export function CampaignView() {
       const fileName = asset.path.split(/[\\/]/).pop() || ''
       const finalMapName = fileName.replace(/\.[^/.]+$/, '') || 'Neue Karte'
 
-      const result = await window.electronAPI.dbRun(
-        `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, rotation_player, grid_offset_x, grid_offset_y, ambient_brightness) VALUES (?, ?, ?, ?, 0, 0, 0, 0, 100)`,
-        [activeCampaignId, finalMapName, asset.path, activeMaps.length],
-      )
-      const newMap: MapRecord = {
-        id: result.lastInsertRowid,
+      const newMap = await window.electronAPI.maps.create({
         campaignId: activeCampaignId,
         name: finalMapName,
         imagePath: asset.path,
-        gridType: 'square',
-        gridSize: 50,
-        ftPerUnit: 5,
-        orderIndex: activeMaps.length,
-        rotation: 0,
-        rotationPlayer: 0,
-        gridOffsetX: 0,
-        gridOffsetY: 0,
-        ambientBrightness: 100,
-        cameraX: null,
-        cameraY: null,
-        cameraScale: null,
-        ambientTrackPath: null,
-        track1Volume: 1,
-        track2Volume: 1,
-        combatVolume: 1,
-        gridVisible: true,
-        gridThickness: 1,
-        gridColor: 'rgba(255,255,255,0.34)',
-      }
+      })
       addMap(newMap)
       setActiveMap(newMap.id)
     } catch (err) {
@@ -545,10 +485,7 @@ function MapsPanel({ onImport, importing, onOpen }: {
     const trimmed = name.trim()
     if (!trimmed) return
     try {
-      await window.electronAPI?.dbRun(
-        'UPDATE maps SET name = ? WHERE id = ?',
-        [trimmed, id],
-      )
+      await window.electronAPI?.maps.rename(id, trimmed)
       setActiveMaps(activeMaps.map((m) => m.id === id ? { ...m, name: trimmed } : m))
     } catch (err) {
       showToast(t('workspace.mapRenameFailed'), 'error')
@@ -559,10 +496,9 @@ function MapsPanel({ onImport, importing, onOpen }: {
   async function handleDelete(id: number, name: string) {
     if (!window.confirm(t('workspace.mapDeleteConfirm', { name }))) return
     try {
-      // CASCADE on campaign_id isn't what we need here — we delete a
-      // single map row. Tokens / drawings / fog tied to this map_id
-      // cascade via their own FKs (ON DELETE CASCADE).
-      await window.electronAPI?.dbRun('DELETE FROM maps WHERE id = ?', [id])
+      // Child tables (tokens, drawings, fog, walls, rooms, initiative)
+      // cascade via ON DELETE CASCADE in the schema.
+      await window.electronAPI?.maps.delete(id)
       setActiveMaps(activeMaps.filter((m) => m.id !== id))
       showToast(t('workspace.mapDeleteSuccess'), 'success')
     } catch (err) {
@@ -576,10 +512,6 @@ function MapsPanel({ onImport, importing, onOpen }: {
     if (idx < 0) return
     const swapIdx = dir === 'up' ? idx - 1 : idx + 1
     if (swapIdx < 0 || swapIdx >= activeMaps.length) return
-    // Swap-and-persist using the existing order_index column. We write
-    // both affected rows in sequence rather than a batch because
-    // better-sqlite3's prepared-statement pipeline is fast enough and
-    // we want the failure mode to be obvious if either UPDATE fails.
     try {
       const a = activeMaps[idx]
       const b = activeMaps[swapIdx]
@@ -587,8 +519,7 @@ function MapsPanel({ onImport, importing, onOpen }: {
       next[idx] = { ...b, orderIndex: idx }
       next[swapIdx] = { ...a, orderIndex: swapIdx }
       setActiveMaps(next)
-      await window.electronAPI?.dbRun('UPDATE maps SET order_index = ? WHERE id = ?', [swapIdx, a.id])
-      await window.electronAPI?.dbRun('UPDATE maps SET order_index = ? WHERE id = ?', [idx,    b.id])
+      await window.electronAPI?.maps.swapOrder(a.id, b.id)
     } catch (err) {
       showToast(t('workspace.mapReorderFailed'), 'error')
       console.error('[MapsPanel] reorder failed:', err)

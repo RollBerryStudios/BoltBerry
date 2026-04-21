@@ -266,11 +266,7 @@ async function loadCampaignStats(campaignIds: number[]): Promise<StatsMap> {
   const placeholders = campaignIds.map(() => '?').join(',')
 
   const [maps, handouts, chars, sessions] = await Promise.all([
-    window.electronAPI.dbQuery<{ campaign_id: number; image_path: string; order_index: number }>(
-      `SELECT campaign_id, image_path, order_index
-       FROM maps WHERE campaign_id IN (${placeholders}) ORDER BY order_index ASC`,
-      campaignIds,
-    ),
+    window.electronAPI.maps.listForStats(campaignIds),
     window.electronAPI.dbQuery<{ campaign_id: number; n: number }>(
       `SELECT campaign_id, COUNT(*) as n FROM handouts
        WHERE campaign_id IN (${placeholders}) GROUP BY campaign_id`,
@@ -294,10 +290,10 @@ async function loadCampaignStats(campaignIds: number[]): Promise<StatsMap> {
     out[id] = { mapCount: 0, handoutCount: 0, thumbnailPath: null, party: [], sessionCount: 0, lastSessionAt: null }
   }
   for (const row of maps) {
-    const entry = out[row.campaign_id]
+    const entry = out[row.campaignId]
     if (!entry) continue
     entry.mapCount += 1
-    if (entry.thumbnailPath === null) entry.thumbnailPath = row.image_path
+    if (entry.thumbnailPath === null) entry.thumbnailPath = row.imagePath
   }
   for (const row of handouts) {
     const entry = out[row.campaign_id]
@@ -321,43 +317,21 @@ async function loadCampaignStats(campaignIds: number[]): Promise<StatsMap> {
 
 async function loadRecentMaps(campaignIds: number[], limit: number): Promise<RecentMap[]> {
   if (!window.electronAPI || campaignIds.length === 0) return []
-  const placeholders = campaignIds.map(() => '?').join(',')
-  const rows = await window.electronAPI.dbQuery<{
-    id: number
-    name: string
-    image_path: string
-    campaign_id: number
-    campaign_name: string
-  }>(
-    `SELECT m.id, m.name, m.image_path, m.campaign_id, c.name as campaign_name
-     FROM maps m
-     JOIN campaigns c ON c.id = m.campaign_id
-     WHERE m.campaign_id IN (${placeholders})
-     ORDER BY m.id DESC
-     LIMIT ?`,
-    [...campaignIds, limit],
-  )
-  return rows.map((r) => ({
-    id: r.id,
-    name: r.name,
-    imagePath: r.image_path,
-    campaignId: r.campaign_id,
-    campaignName: r.campaign_name,
-  }))
+  return window.electronAPI.maps.listRecent(campaignIds, limit)
 }
 
 async function loadGlobalStats(): Promise<GlobalStats> {
   if (!window.electronAPI) {
     return { campaignCount: 0, mapCount: 0, characterCount: 0 }
   }
-  const [campaignCount, maps, chars] = await Promise.all([
+  const [campaignCount, mapCount, chars] = await Promise.all([
     window.electronAPI.campaigns.count(),
-    window.electronAPI.dbQuery<{ n: number }>('SELECT COUNT(*) as n FROM maps'),
+    window.electronAPI.maps.count(),
     window.electronAPI.dbQuery<{ n: number }>('SELECT COUNT(*) as n FROM character_sheets'),
   ])
   return {
     campaignCount,
-    mapCount: maps[0]?.n ?? 0,
+    mapCount,
     characterCount: chars[0]?.n ?? 0,
   }
 }

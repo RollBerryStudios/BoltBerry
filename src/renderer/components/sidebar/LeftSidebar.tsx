@@ -62,41 +62,8 @@ export function LeftSidebar() {
   async function loadMaps(campaignId: number) {
     if (!window.electronAPI) return
     try {
-      const rows = await window.electronAPI.dbQuery<{
-        id: number; campaign_id: number; name: string; image_path: string
-        grid_type: string; grid_size: number; ft_per_unit: number; order_index: number
-        camera_x: number | null; camera_y: number | null; camera_scale: number | null
-        rotation: number | null; rotation_player: number | null
-        grid_offset_x: number; grid_offset_y: number; ambient_brightness: number
-        ambient_track_path: string | null; track1_volume: number; track2_volume: number; combat_volume: number
-        grid_visible: number | null; grid_thickness: number | null; grid_color: string | null
-      }>('SELECT id, campaign_id, name, image_path, grid_type, grid_size, ft_per_unit, order_index, camera_x, camera_y, camera_scale, rotation, rotation_player, grid_offset_x, grid_offset_y, ambient_brightness, ambient_track_path, track1_volume, track2_volume, combat_volume, grid_visible, grid_thickness, grid_color FROM maps WHERE campaign_id = ? ORDER BY order_index', [campaignId])
-
-      setActiveMaps(rows.map((r) => ({
-        id: r.id,
-        campaignId: r.campaign_id,
-        name: r.name,
-        imagePath: r.image_path,
-        gridType: r.grid_type as MapRecord['gridType'],
-        gridSize: r.grid_size,
-        ftPerUnit: r.ft_per_unit ?? 5,
-        orderIndex: r.order_index,
-        rotation: r.rotation ?? 0,
-        rotationPlayer: r.rotation_player ?? 0,
-        gridOffsetX: r.grid_offset_x ?? 0,
-        gridOffsetY: r.grid_offset_y ?? 0,
-        ambientBrightness: r.ambient_brightness ?? 100,
-        cameraX: r.camera_x ?? null,
-        cameraY: r.camera_y ?? null,
-        cameraScale: r.camera_scale ?? null,
-        ambientTrackPath: r.ambient_track_path ?? null,
-        track1Volume: r.track1_volume ?? 1,
-        track2Volume: r.track2_volume ?? 1,
-        combatVolume: r.combat_volume ?? 1,
-        gridVisible: (r.grid_visible ?? 1) !== 0,
-        gridThickness: r.grid_thickness ?? 1,
-        gridColor: r.grid_color ?? 'rgba(255,255,255,0.34)',
-      })))
+      const rows = await window.electronAPI.maps.list(campaignId)
+      setActiveMaps(rows)
     } catch (err) {
       console.error('[LeftSidebar] loadMaps failed:', err)
     }
@@ -112,35 +79,11 @@ export function LeftSidebar() {
       const fileName = asset.path.split(/[\\/]/).pop() || ''
       const finalMapName = fileName.replace(/\.[^/.]+$/, '') || 'Neue Karte'
 
-      const result = await window.electronAPI.dbRun(
-        `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, rotation_player, grid_offset_x, grid_offset_y, ambient_brightness) VALUES (?, ?, ?, ?, 0, 0, 0, 0, 100)`,
-        [activeCampaignId, finalMapName, asset.path, activeMaps.length]
-      )
-      const newMap: MapRecord = {
-        id: result.lastInsertRowid,
+      const newMap = await window.electronAPI.maps.create({
         campaignId: activeCampaignId,
         name: finalMapName,
         imagePath: asset.path,
-        gridType: 'square',
-        gridSize: 50,
-        ftPerUnit: 5,
-        orderIndex: activeMaps.length,
-        rotation: 0,
-        rotationPlayer: 0,
-        gridOffsetX: 0,
-        gridOffsetY: 0,
-        ambientBrightness: 100,
-        cameraX: null,
-        cameraY: null,
-        cameraScale: null,
-        ambientTrackPath: null,
-        track1Volume: 1,
-        track2Volume: 1,
-        combatVolume: 1,
-        gridVisible: true,
-        gridThickness: 1,
-        gridColor: 'rgba(255,255,255,0.34)',
-      }
+      })
       addMap(newMap)
       setActiveMap(newMap.id)
       setNewMapId(newMap.id)
@@ -174,35 +117,11 @@ export function LeftSidebar() {
       // Auto-name from filename
       const finalMapName = pdfData.originalName.replace(/\.[^/.]+$/, '') || 'Neue Karte'
 
-      const result = await window.electronAPI.dbRun(
-        `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, rotation_player, grid_offset_x, grid_offset_y, ambient_brightness) VALUES (?, ?, ?, ?, 0, 0, 0, 0, 100)`,
-        [activeCampaignId, finalMapName, imagePath, activeMaps.length]
-      )
-      const newMap: MapRecord = {
-        id: result.lastInsertRowid,
+      const newMap = await window.electronAPI.maps.create({
         campaignId: activeCampaignId,
         name: finalMapName,
         imagePath,
-        gridType: 'square',
-        gridSize: 50,
-        ftPerUnit: 5,
-        orderIndex: activeMaps.length,
-        rotation: 0,
-        rotationPlayer: 0,
-        gridOffsetX: 0,
-        gridOffsetY: 0,
-        ambientBrightness: 100,
-        cameraX: null,
-        cameraY: null,
-        cameraScale: null,
-        ambientTrackPath: null,
-        track1Volume: 1,
-        track2Volume: 1,
-        combatVolume: 1,
-        gridVisible: true,
-        gridThickness: 1,
-        gridColor: 'rgba(255,255,255,0.34)',
-      }
+      })
       addMap(newMap)
       setActiveMap(newMap.id)
       setNewMapId(newMap.id)
@@ -228,10 +147,13 @@ export function LeftSidebar() {
     setGridOffsetX(newOffsetX)
     setGridOffsetY(newOffsetY)
     try {
-      await window.electronAPI.dbRun(
-        'UPDATE maps SET grid_type = ?, grid_size = ?, ft_per_unit = ?, grid_offset_x = ?, grid_offset_y = ? WHERE id = ?',
-        [type, size, newFpu, newOffsetX, newOffsetY, activeMapId]
-      )
+      await window.electronAPI.maps.setGrid(activeMapId, {
+        gridType: type,
+        gridSize: size,
+        ftPerUnit: newFpu,
+        gridOffsetX: newOffsetX,
+        gridOffsetY: newOffsetY,
+      })
       const updatedMaps = activeMaps.map((m) =>
         m.id === activeMapId ? { ...m, gridType: type, gridSize: size, ftPerUnit: newFpu, gridOffsetX: newOffsetX, gridOffsetY: newOffsetY } : m
       )
@@ -249,14 +171,7 @@ export function LeftSidebar() {
   async function handleGridStylePatch(patch: Partial<Pick<MapRecord, 'gridVisible' | 'gridThickness' | 'gridColor'>>) {
     if (!activeMapId || !window.electronAPI) return
     try {
-      const sets: string[] = []
-      const vals: Array<number | string> = []
-      if (patch.gridVisible !== undefined) { sets.push('grid_visible = ?'); vals.push(patch.gridVisible ? 1 : 0) }
-      if (patch.gridThickness !== undefined) { sets.push('grid_thickness = ?'); vals.push(patch.gridThickness) }
-      if (patch.gridColor !== undefined) { sets.push('grid_color = ?'); vals.push(patch.gridColor) }
-      if (sets.length === 0) return
-      vals.push(activeMapId)
-      await window.electronAPI.dbRun(`UPDATE maps SET ${sets.join(', ')} WHERE id = ?`, vals)
+      await window.electronAPI.maps.patchGridDisplay(activeMapId, patch)
       const updatedMaps = activeMaps.map((m) =>
         m.id === activeMapId ? { ...m, ...patch } : m,
       )
@@ -271,7 +186,7 @@ export function LeftSidebar() {
     if (!activeMapId || !window.electronAPI) return
     setRotation(rot)
     try {
-      await window.electronAPI.dbRun('UPDATE maps SET rotation = ? WHERE id = ?', [rot, activeMapId])
+      await window.electronAPI.maps.setRotation(activeMapId, rot)
       const updatedMaps = activeMaps.map((m) => m.id === activeMapId ? { ...m, rotation: rot } : m)
       useCampaignStore.getState().setActiveMaps(updatedMaps)
       // DM rotation does NOT sync to player
@@ -284,7 +199,7 @@ export function LeftSidebar() {
     if (!activeMapId || !window.electronAPI) return
     setRotationPlayer(rot)
     try {
-      await window.electronAPI.dbRun('UPDATE maps SET rotation_player = ? WHERE id = ?', [rot, activeMapId])
+      await window.electronAPI.maps.setRotationPlayer(activeMapId, rot)
       const updatedMaps = activeMaps.map((m) => m.id === activeMapId ? { ...m, rotationPlayer: rot } : m)
       useCampaignStore.getState().setActiveMaps(updatedMaps)
       syncMapStateToPlayer(updatedMaps.find((m) => m.id === activeMapId)!)
@@ -303,10 +218,7 @@ export function LeftSidebar() {
     const mapA = activeMaps[idx]
     const mapB = activeMaps[swapIdx]
     try {
-      await window.electronAPI.dbRunBatch([
-        { sql: 'UPDATE maps SET order_index = ? WHERE id = ?', params: [mapB.orderIndex, mapA.id] },
-        { sql: 'UPDATE maps SET order_index = ? WHERE id = ?', params: [mapA.orderIndex, mapB.id] },
-      ])
+      await window.electronAPI.maps.swapOrder(mapA.id, mapB.id)
       useCampaignStore.getState().setActiveMaps(
         activeMaps.map((m) => {
           if (m.id === mapA.id) return { ...m, orderIndex: mapB.orderIndex }
@@ -673,7 +585,7 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
     onAutoRenameDone?.()
     if (!window.electronAPI) return
     if (trimmed === map.name) return
-    await window.electronAPI.dbRun('UPDATE maps SET name = ? WHERE id = ?', [trimmed, map.id])
+    await window.electronAPI.maps.rename(map.id, trimmed)
     const { activeMaps, setActiveMaps } = useCampaignStore.getState()
     setActiveMaps(activeMaps.map((m) => m.id === map.id ? { ...m, name: trimmed } : m))
   }
@@ -682,15 +594,9 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
     if (!window.electronAPI) return
     const confirmed = await window.electronAPI.deleteMapConfirm(map.name)
     if (!confirmed) return
-    await window.electronAPI.dbRunBatch([
-      { sql: 'DELETE FROM tokens WHERE map_id = ?', params: [map.id] },
-      { sql: 'DELETE FROM initiative WHERE map_id = ?', params: [map.id] },
-      { sql: 'DELETE FROM fog_state WHERE map_id = ?', params: [map.id] },
-      { sql: 'DELETE FROM drawings WHERE map_id = ?', params: [map.id] },
-      { sql: 'DELETE FROM walls WHERE map_id = ?', params: [map.id] },
-      { sql: 'DELETE FROM rooms WHERE map_id = ?', params: [map.id] },
-      { sql: 'DELETE FROM maps WHERE id = ?', params: [map.id] },
-    ])
+    // Child tables (tokens, initiative, fog_state, drawings, walls,
+    // rooms) all cascade via ON DELETE CASCADE.
+    await window.electronAPI.maps.delete(map.id)
     useCampaignStore.getState().refreshCampaigns()
     if (map.id === useCampaignStore.getState().activeMapId) {
       useTokenStore.getState().setTokens([])

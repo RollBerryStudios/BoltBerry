@@ -123,35 +123,11 @@ export function CampaignMapGrid() {
       if (!asset) return
       const fileName = asset.path.split(/[\\/]/).pop() || ''
       const finalMapName = fileName.replace(/\.[^/.]+$/, '') || 'Neue Karte'
-      const result = await window.electronAPI.dbRun(
-        `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, rotation_player, grid_offset_x, grid_offset_y, ambient_brightness) VALUES (?, ?, ?, ?, 0, 0, 0, 0, 100)`,
-        [activeCampaignId, finalMapName, asset.path, activeMaps.length]
-      )
-      const newMap: MapRecord = {
-        id: result.lastInsertRowid,
+      const newMap = await window.electronAPI.maps.create({
         campaignId: activeCampaignId,
         name: finalMapName,
         imagePath: asset.path,
-        gridType: 'square',
-        gridSize: 50,
-        ftPerUnit: 5,
-        orderIndex: activeMaps.length,
-        rotation: 0,
-        rotationPlayer: 0,
-        gridOffsetX: 0,
-        gridOffsetY: 0,
-        ambientBrightness: 100,
-        cameraX: null,
-        cameraY: null,
-        cameraScale: null,
-        ambientTrackPath: null,
-        track1Volume: 1,
-        track2Volume: 1,
-        combatVolume: 1,
-        gridVisible: true,
-        gridThickness: 1,
-        gridColor: 'rgba(255,255,255,0.34)',
-      }
+      })
       useCampaignStore.getState().addMap(newMap)
       setActiveMap(newMap.id)
     } catch (err) {

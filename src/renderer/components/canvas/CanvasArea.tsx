@@ -219,44 +219,23 @@ export function CanvasArea() {
 
       // If no active map, create one from the dropped image
       if (!activeMapId) {
+        const campaignId = useCampaignStore.getState().activeCampaignId
+        if (!campaignId) return
         const assetResult = await window.electronAPI.saveAssetImage({
           dataUrl,
           originalName: file.name,
           type: 'map',
-          campaignId: useCampaignStore.getState().activeCampaignId ?? 0,
+          campaignId,
         })
         if (!assetResult) return
         const mapName = file.name.replace(/\.[^.]+$/, '') || 'Neue Karte'
-        const dbResult = await window.electronAPI.dbRun(
-          `INSERT INTO maps (campaign_id, name, image_path, order_index, rotation, rotation_player) VALUES (?, ?, ?, ?, 0, 0)`,
-          [useCampaignStore.getState().activeCampaignId, mapName, assetResult.path, useCampaignStore.getState().activeMaps.length]
-        )
-        useCampaignStore.getState().addMap({
-          id: dbResult.lastInsertRowid,
-          campaignId: useCampaignStore.getState().activeCampaignId ?? 0,
+        const newMap = await window.electronAPI.maps.create({
+          campaignId,
           name: mapName,
           imagePath: assetResult.path,
-          gridType: 'square',
-          gridSize: 50,
-          ftPerUnit: 5,
-          orderIndex: useCampaignStore.getState().activeMaps.length,
-          rotation: 0,
-          rotationPlayer: 0,
-          gridOffsetX: 0,
-          gridOffsetY: 0,
-          ambientBrightness: 100,
-          cameraX: null,
-          cameraY: null,
-          cameraScale: null,
-          ambientTrackPath: null,
-          track1Volume: 1,
-          track2Volume: 1,
-          combatVolume: 1,
-          gridVisible: true,
-          gridThickness: 1,
-          gridColor: 'rgba(255,255,255,0.34)',
         })
-        useCampaignStore.getState().setActiveMap(dbResult.lastInsertRowid)
+        useCampaignStore.getState().addMap(newMap)
+        useCampaignStore.getState().setActiveMap(newMap.id)
         return
       }
 
@@ -497,7 +476,7 @@ export function CanvasArea() {
               const rot = parseInt(action.split('-')[1]) as 0 | 90 | 180 | 270
               if (!mapId || !map) return
               try {
-                await window.electronAPI.dbRun('UPDATE maps SET rotation = ? WHERE id = ?', [rot, mapId])
+                await window.electronAPI.maps.setRotation(mapId, rot)
                 const updated = maps.map((m) => m.id === mapId ? { ...m, rotation: rot } : m)
                 useCampaignStore.getState().setActiveMaps(updated)
                 if (sessionMode !== 'prep') {

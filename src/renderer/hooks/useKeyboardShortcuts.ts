@@ -25,13 +25,7 @@ async function persistMapGridPatch(patch: Partial<{ gridVisible: boolean; gridSi
   const next = { ...map, ...patch }
   setActiveMaps(activeMaps.map((m) => (m.id === activeMapId ? next : m)))
   try {
-    const sets: string[] = []
-    const vals: Array<number | string> = []
-    if (patch.gridVisible !== undefined) { sets.push('grid_visible = ?'); vals.push(patch.gridVisible ? 1 : 0) }
-    if (patch.gridSize !== undefined) { sets.push('grid_size = ?'); vals.push(patch.gridSize) }
-    if (sets.length === 0) return
-    vals.push(activeMapId)
-    await window.electronAPI?.dbRun(`UPDATE maps SET ${sets.join(', ')} WHERE id = ?`, vals)
+    await window.electronAPI?.maps.patchGridDisplay(activeMapId, patch)
   } catch (err) {
     console.error('[useKeyboardShortcuts] grid patch persist failed:', err)
   }

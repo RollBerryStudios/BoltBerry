@@ -10,6 +10,7 @@ import { registerAppHandlers } from './ipc/app-handlers'
 import { registerDataHandlers } from './ipc/data-handlers'
 import { registerDbHandlers } from './ipc/db-handlers'
 import { registerCampaignHandlers } from './ipc/campaign-handlers'
+import { registerMapHandlers } from './ipc/map-handlers'
 import { registerExportImportHandlers } from './ipc/export-import'
 import { buildAppMenu } from './menu'
 import { initAutoUpdater } from './updater'
@@ -93,6 +94,7 @@ app.whenReady().then(() => {
   registerDataHandlers()
   registerDbHandlers()
   registerCampaignHandlers()
+  registerMapHandlers()
   registerExportImportHandlers()
 
   buildAppMenu(loadPrefs().menuLanguage)

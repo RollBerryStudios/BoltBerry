@@ -23,6 +23,11 @@ import type {
   SpellIndexEntry,
   SpellRecord,
   Campaign,
+  MapRecord,
+  MapStatsRow,
+  RecentMapEntry,
+  GridType,
+  AudioChannelKey,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -131,6 +136,49 @@ export const dmApi = {
       ipcRenderer.invoke(IPC.CAMPAIGNS_SET_COVER, id, coverPath),
     touchLastOpened: (id: number): Promise<void> =>
       ipcRenderer.invoke(IPC.CAMPAIGNS_TOUCH_LAST_OPENED, id),
+  },
+
+  // Maps — semantic API for the `maps` table
+  maps: {
+    list: (campaignId: number): Promise<MapRecord[]> =>
+      ipcRenderer.invoke(IPC.MAPS_LIST, campaignId),
+    listForStats: (campaignIds: number[]): Promise<MapStatsRow[]> =>
+      ipcRenderer.invoke(IPC.MAPS_LIST_FOR_STATS, campaignIds),
+    listRecent: (campaignIds: number[], limit: number): Promise<RecentMapEntry[]> =>
+      ipcRenderer.invoke(IPC.MAPS_LIST_RECENT, campaignIds, limit),
+    count: (): Promise<number> =>
+      ipcRenderer.invoke(IPC.MAPS_COUNT),
+    create: (args: { campaignId: number; name: string; imagePath: string }): Promise<MapRecord> =>
+      ipcRenderer.invoke(IPC.MAPS_CREATE, args),
+    rename: (id: number, name: string): Promise<void> =>
+      ipcRenderer.invoke(IPC.MAPS_RENAME, id, name),
+    delete: (id: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.MAPS_DELETE, id),
+    swapOrder: (aId: number, bId: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.MAPS_SWAP_ORDER, aId, bId),
+    setGrid: (
+      id: number,
+      patch: { gridType: GridType; gridSize: number; ftPerUnit: number; gridOffsetX: number; gridOffsetY: number },
+    ): Promise<void> =>
+      ipcRenderer.invoke(IPC.MAPS_SET_GRID, id, patch),
+    patchGridDisplay: (
+      id: number,
+      patch: Partial<{ gridVisible: boolean; gridThickness: number; gridColor: string; gridSize: number }>,
+    ): Promise<void> =>
+      ipcRenderer.invoke(IPC.MAPS_PATCH_GRID_DISPLAY, id, patch),
+    setRotation: (id: number, rotation: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.MAPS_SET_ROTATION, id, rotation),
+    setRotationPlayer: (id: number, rotation: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.MAPS_SET_ROTATION_PLAYER, id, rotation),
+    setCamera: (
+      id: number,
+      camera: { cameraX: number; cameraY: number; cameraScale: number },
+    ): Promise<void> =>
+      ipcRenderer.invoke(IPC.MAPS_SET_CAMERA, id, camera),
+    setAmbientTrack: (id: number, path: string | null): Promise<void> =>
+      ipcRenderer.invoke(IPC.MAPS_SET_AMBIENT_TRACK, id, path),
+    setChannelVolume: (id: number, channel: AudioChannelKey, volume: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.MAPS_SET_CHANNEL_VOLUME, id, channel, volume),
   },
 
   // Listen for main → DM: player window was closed

@@ -13,12 +13,6 @@ function fmt(s: number): string {
 
 // ─── Channel strip ────────────────────────────────────────────────────────────
 
-const VOLUME_COL: Record<ChannelId, string> = {
-  track1: 'track1_volume',
-  track2: 'track2_volume',
-  combat: 'combat_volume',
-}
-
 function ChannelStrip({ chId, label, activeMapId, activeCampaignId, combatControl }: {
   chId: ChannelId
   label: string
@@ -137,10 +131,9 @@ function ChannelStrip({ chId, label, activeMapId, activeCampaignId, combatContro
 
   async function handleSetAmbient() {
     if (!activeMapId || !ch.filePath) return
-    await window.electronAPI?.dbRun(
-      'UPDATE maps SET ambient_track_path = ? WHERE id = ?',
-      [ch.filePath, activeMapId]
-    ).catch(console.error)
+    await window.electronAPI?.maps
+      .setAmbientTrack(activeMapId, ch.filePath)
+      .catch(console.error)
   }
 
   const classes = ['audio-channel', chId]
@@ -303,10 +296,7 @@ function ChannelStrip({ chId, label, activeMapId, activeCampaignId, combatContro
             const vol = parseFloat(e.target.value)
             store.setChannelVolume(chId, vol)
             if (activeMapId) {
-              window.electronAPI?.dbRun(
-                `UPDATE maps SET ${VOLUME_COL[chId]} = ? WHERE id = ?`,
-                [vol, activeMapId]
-              )
+              window.electronAPI?.maps.setChannelVolume(activeMapId, chId, vol)
             }
           }}
           disabled={disabled}

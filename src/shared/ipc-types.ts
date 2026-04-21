@@ -60,6 +60,23 @@ export const IPC = {
   CAMPAIGNS_SET_COVER: 'campaigns:set-cover',
   CAMPAIGNS_TOUCH_LAST_OPENED: 'campaigns:touch-last-opened',
 
+  // Maps domain — semantic replacements for raw `FROM maps` SQL.
+  MAPS_LIST: 'maps:list',
+  MAPS_LIST_FOR_STATS: 'maps:list-for-stats',
+  MAPS_LIST_RECENT: 'maps:list-recent',
+  MAPS_COUNT: 'maps:count',
+  MAPS_CREATE: 'maps:create',
+  MAPS_RENAME: 'maps:rename',
+  MAPS_DELETE: 'maps:delete',
+  MAPS_SWAP_ORDER: 'maps:swap-order',
+  MAPS_SET_GRID: 'maps:set-grid',
+  MAPS_PATCH_GRID_DISPLAY: 'maps:patch-grid-display',
+  MAPS_SET_ROTATION: 'maps:set-rotation',
+  MAPS_SET_ROTATION_PLAYER: 'maps:set-rotation-player',
+  MAPS_SET_CAMERA: 'maps:set-camera',
+  MAPS_SET_AMBIENT_TRACK: 'maps:set-ambient-track',
+  MAPS_SET_CHANNEL_VOLUME: 'maps:set-channel-volume',
+
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
 
@@ -385,6 +402,26 @@ export interface MapRecord {
   gridThickness: number   // multiplier applied to the auto-scaled stroke
   gridColor: string       // any CSS colour string (hex or rgba)
 }
+
+/** Minimal map projection used by the campaign-dashboard stats loader —
+ *  just enough to count maps and pick the first thumbnail per campaign. */
+export interface MapStatsRow {
+  campaignId: number
+  imagePath: string
+  orderIndex: number
+}
+
+/** Minimal projection with the owning campaign's name, for the recent
+ *  maps carousel on the dashboard. */
+export interface RecentMapEntry {
+  id: number
+  name: string
+  imagePath: string
+  campaignId: number
+  campaignName: string
+}
+
+export type AudioChannelKey = 'track1' | 'track2' | 'combat'
 
 export type WallType = 'wall' | 'door' | 'window'
 export type DoorState = 'open' | 'closed' | 'locked'

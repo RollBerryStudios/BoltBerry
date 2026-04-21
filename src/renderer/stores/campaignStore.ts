@@ -83,41 +83,7 @@ export const useCampaignStore = create<CampaignState>((set) => ({
       // Reload maps for active campaign in the same tick
       let activeMaps: MapRecord[] = []
       if (activeCampaignId) {
-        const rows = await window.electronAPI.dbQuery<{
-          id: number; campaign_id: number; name: string; image_path: string
-          grid_type: string; grid_size: number; ft_per_unit: number; order_index: number
-          camera_x: number | null; camera_y: number | null; camera_scale: number | null
-          rotation: number | null; grid_offset_x: number; grid_offset_y: number; ambient_brightness: number
-          ambient_track_path: string | null; track1_volume: number; track2_volume: number; combat_volume: number
-          rotation_player: number
-          grid_visible: number | null; grid_thickness: number | null; grid_color: string | null
-        }>('SELECT id, campaign_id, name, image_path, grid_type, grid_size, ft_per_unit, order_index, camera_x, camera_y, camera_scale, rotation, rotation_player, grid_offset_x, grid_offset_y, ambient_brightness, ambient_track_path, track1_volume, track2_volume, combat_volume, grid_visible, grid_thickness, grid_color FROM maps WHERE campaign_id = ? ORDER BY order_index', [activeCampaignId])
-
-        activeMaps = rows.map(r => ({
-          id: r.id,
-          campaignId: r.campaign_id,
-          name: r.name,
-          imagePath: r.image_path,
-          gridType: r.grid_type as 'square' | 'hex' | 'none',
-          gridSize: r.grid_size,
-          ftPerUnit: r.ft_per_unit,
-          orderIndex: r.order_index,
-          rotation: r.rotation ?? 0,
-          rotationPlayer: r.rotation_player ?? 0,
-          gridOffsetX: r.grid_offset_x ?? 0,
-          gridOffsetY: r.grid_offset_y ?? 0,
-          ambientBrightness: r.ambient_brightness ?? 100,
-          cameraX: r.camera_x,
-          cameraY: r.camera_y,
-          cameraScale: r.camera_scale,
-          ambientTrackPath: r.ambient_track_path ?? null,
-          track1Volume: r.track1_volume ?? 1,
-          track2Volume: r.track2_volume ?? 1,
-          combatVolume: r.combat_volume ?? 1,
-          gridVisible: (r.grid_visible ?? 1) !== 0,
-          gridThickness: r.grid_thickness ?? 1,
-          gridColor: r.grid_color ?? 'rgba(255,255,255,0.34)',
-        }))
+        activeMaps = await window.electronAPI.maps.list(activeCampaignId)
       }
 
       // Single atomic state update. If refreshCampaigns ended up
