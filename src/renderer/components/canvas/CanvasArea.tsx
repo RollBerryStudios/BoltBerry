@@ -3,11 +3,11 @@ import { Stage, Layer } from 'react-konva'
 import { MapLayer } from './MapLayer'
 import { FogLayer } from './FogLayer'
 import { TokenLayer } from './TokenLayer'
-import { PointerLayer } from './PointerLayer'
+import { PointerLayer, POINTER_PING_EVENT, type PointerPingDetail } from './PointerLayer'
 import { MeasureLayer } from './MeasureLayer'
 import { MinimapOverlay } from './MinimapOverlay'
 import { DrawingLayer } from './DrawingLayer'
-import { GMPinLayer, GM_PIN_ADD_EVENT } from './GMPinLayer'
+import { GMPinLayer } from './GMPinLayer'
 import { PlayerViewportLayer, PlayerViewportGestures } from './PlayerViewportLayer'
 import { LightingLayer } from './LightingLayer'
 import { WallLayer } from './WallLayer'
@@ -482,7 +482,7 @@ export function CanvasArea() {
 
             // ── Karte / Zeichnungen ────────────────────────────────
             items.push({ separator: true })
-            items.push({ label: '📌  GM-Pin hier setzen',           action: 'add-gm-pin'         })
+            items.push({ label: '📡  Hier pingen',                   action: 'ping-here'          })
             items.push({ label: '✕  Zeichnungen löschen',           action: 'clear-drawings'     })
 
             const action = await window.electronAPI.showContextMenu(items)
@@ -528,11 +528,12 @@ export function CanvasArea() {
             } else if (action === 'tool-fog-rect') {
               useUIStore.getState().setActiveTool('fog-rect')
 
-            // ── GM-Pin ─────────────────────────────────────────────
-            } else if (action === 'add-gm-pin') {
-              useUIStore.getState().setActiveTool('select')
+            // ── Ping ───────────────────────────────────────────────
+            } else if (action === 'ping-here') {
               if (clickMapPos) {
-                window.dispatchEvent(new CustomEvent(GM_PIN_ADD_EVENT, { detail: { x: clickMapPos.x, y: clickMapPos.y } }))
+                window.dispatchEvent(new CustomEvent<PointerPingDetail>(POINTER_PING_EVENT, {
+                  detail: { x: clickMapPos.x, y: clickMapPos.y },
+                }))
               }
 
             // ── Zeichnungen ────────────────────────────────────────
