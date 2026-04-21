@@ -136,7 +136,12 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (!isRoomTool) return
-    if (e.key === 'Escape') {
+    if (e.key === 'Escape' && drawingPoints.length > 0) {
+      // Capture-phase + stopImmediate so the global Escape handler
+      // doesn't also fire and flip the tool to 'select' — which would
+      // drop the user out of the Room tool mid-polygon.
+      e.stopImmediatePropagation()
+      e.preventDefault()
       setDrawingPoints([])
       setPreviewPoint(null)
     } else if (e.key === 'Enter' && drawingPoints.length >= 3) {
@@ -145,8 +150,8 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
   }, [isRoomTool, drawingPoints.length, finishRoom])
 
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
+    window.addEventListener('keydown', handleKeyDown, true)
+    return () => window.removeEventListener('keydown', handleKeyDown, true)
   }, [handleKeyDown])
 
   useEffect(() => {
@@ -162,7 +167,14 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
 
   return (
     <Layer
-      listening={isRoomTool || selectedRoomId !== null}
+      // Listen whenever the Room tool is active (so drawing clicks
+      // register) OR whenever any room exists (so room polygons can
+      // be clicked to re-select, even when no room is currently
+      // selected). The previous `selectedRoomId !== null` gate
+      // stranded users: after deselecting via a canvas click the
+      // Layer went silent, and the user could no longer re-select
+      // the room to rename / edit it from the sidebar.
+      listening={isRoomTool || parsedRooms.length > 0}
       onClick={isRoomTool ? handleStageClick : undefined}
       onMouseMove={isRoomTool ? handleStageMouseMove : undefined}
       onDblClick={isRoomTool ? handleDoubleClick : undefined}

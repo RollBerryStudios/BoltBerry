@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import { Layer, Group, Rect, Line, Circle, Text } from 'react-konva'
 import { useUIStore } from '../../stores/uiStore'
+import { useMapTransformStore } from '../../stores/mapTransformStore'
 import type { MapRecord } from '@shared/ipc-types'
 
 /**
@@ -119,3 +121,89 @@ export function PlayerViewportLayer({
 
 // Silence TS in legacy files that import map-prop expectations.
 export type PlayerViewportLayerProps = Parameters<typeof PlayerViewportLayer>[0]
+
+/**
+ * Binds window-level Ctrl+drag and Ctrl+wheel gestures for Player
+ * Control Mode while the mode is active. Uses capture-phase listeners
+ * so the viewport frame wins over whatever tool layer (fog, drawing,
+ * walls, …) happens to be catching pointer events — without those
+ * layers having to know Player Control Mode exists. Previously the
+ * gestures were declared only in `MapLayer`, whose listening-shapes
+ * are all `listening={false}`, so the handlers almost never fired in
+ * practice and the user saw "shortcuts don't work".
+ *
+ * Renders nothing — it's mounted alongside `PlayerViewportLayer` in
+ * CanvasArea so the hooks run whether or not a map is loaded.
+ */
+export function PlayerViewportGestures() {
+  const active = useUIStore((s) => s.playerViewportMode)
+
+  useEffect(() => {
+    if (!active) return
+    let dragging = false
+    let lastX = 0
+    let lastY = 0
+
+    function insideCanvas(target: EventTarget | null): boolean {
+      return target instanceof HTMLElement && !!target.closest('.canvas-area')
+    }
+
+    function onMouseDown(e: MouseEvent) {
+      if (e.button !== 0) return
+      if (!(e.ctrlKey || e.metaKey)) return
+      if (!useUIStore.getState().playerViewport) return
+      if (!insideCanvas(e.target)) return
+      e.preventDefault()
+      e.stopPropagation()
+      dragging = true
+      lastX = e.clientX
+      lastY = e.clientY
+    }
+
+    function onMouseMove(e: MouseEvent) {
+      if (!dragging) return
+      e.preventDefault()
+      const cur = useUIStore.getState().playerViewport
+      if (!cur) { dragging = false; return }
+      const dx = e.clientX - lastX
+      const dy = e.clientY - lastY
+      lastX = e.clientX
+      lastY = e.clientY
+      const s = useMapTransformStore.getState().scale || 1
+      useUIStore.getState().patchPlayerViewport({
+        cx: cur.cx + dx / s,
+        cy: cur.cy + dy / s,
+      })
+    }
+
+    function onMouseUp() { dragging = false }
+
+    function onWheel(e: WheelEvent) {
+      if (!(e.ctrlKey || e.metaKey)) return
+      if (!insideCanvas(e.target)) return
+      const cur = useUIStore.getState().playerViewport
+      if (!cur) return
+      e.preventDefault()
+      e.stopPropagation()
+      const step = e.deltaY < 0 ? 1.08 : 1 / 1.08
+      const MIN = 50
+      useUIStore.getState().patchPlayerViewport({
+        w: Math.max(MIN, cur.w * step),
+        h: Math.max(MIN, cur.h * step),
+      })
+    }
+
+    window.addEventListener('mousedown', onMouseDown, true)
+    window.addEventListener('mousemove', onMouseMove, true)
+    window.addEventListener('mouseup', onMouseUp, true)
+    window.addEventListener('wheel', onWheel, { capture: true, passive: false })
+    return () => {
+      window.removeEventListener('mousedown', onMouseDown, true)
+      window.removeEventListener('mousemove', onMouseMove, true)
+      window.removeEventListener('mouseup', onMouseUp, true)
+      window.removeEventListener('wheel', onWheel, true)
+    }
+  }, [active])
+
+  return null
+}

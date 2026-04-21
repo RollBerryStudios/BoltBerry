@@ -65,7 +65,7 @@ export function StatusBar() {
         </div>
       )}
 
-      {activeWeather !== 'none' && activeWeather !== '' && (
+      {activeWeather !== 'none' && (
         <div className="statusbar-item statusbar-clickable" onClick={() => setFloatingPanel('overlay')} title={t('statusBar.weatherHint')}>
           <span style={{ color: '#3b82f6' }}>
             {activeWeather === 'rain'  ? t('statusBar.weatherRain')

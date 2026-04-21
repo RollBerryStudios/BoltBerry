@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef, RefObject } from 'react'
+import { useState, useEffect, useRef, RefObject } from 'react'
 import { Layer, Group, Text, Circle, Rect } from 'react-konva'
 import { Html } from 'react-konva-utils'
 import Konva from 'konva'
@@ -20,8 +20,6 @@ interface GMPinLayerProps {
   gridSize: number
 }
 
-export const GM_PIN_ADD_EVENT = 'gm-pin-add'
-
 export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
   const scale = useMapTransformStore((s) => s.scale)
   const offsetX = useMapTransformStore((s) => s.offsetX)
@@ -41,40 +39,24 @@ export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
     }
   }, [mapId, loadedMapId])
 
-  const addPinAt = useCallback(async (mx: number, my: number) => {
-    try {
-      const result = await window.electronAPI?.dbRun(
-        'INSERT INTO gm_pins (map_id, x, y, label, icon, color) VALUES (?, ?, ?, ?, ?, ?)',
-        [mapId, mx, my, '', '📌', '#f59e0b']
-      )
-      if (result) {
-        setPins(prev => [...prev, { id: result.lastInsertRowid, x: mx, y: my, label: '', icon: '📌', color: '#f59e0b' }])
-      }
-    } catch (err) {
-      console.error('[GMPinLayer] add pin failed:', err)
-    }
-  }, [mapId])
-
-  useEffect(() => {
-    const handler = (e: CustomEvent<{ x: number; y: number }>) => {
-      addPinAt(e.detail.x, e.detail.y)
-    }
-    window.addEventListener(GM_PIN_ADD_EVENT, handler as EventListener)
-    return () => window.removeEventListener(GM_PIN_ADD_EVENT, handler as EventListener)
-  }, [addPinAt])
-
-  // Use ref so we don't re-register the listener on every pin selection change
+  // Capture-phase so we win over the renderer-wide Delete-key handler
+  // (which deletes selected tokens). Without capture + stopImmediate,
+  // pressing Delete while *both* a pin and a token are selected would
+  // fire both paths and the DM would lose the token as a side-effect
+  // of trying to remove the pin.
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement).tagName
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
-      if (e.key === 'Delete' && selectedPinIdRef.current !== null) {
-        handleDeletePin(selectedPinIdRef.current)
-        setSelectedPinId(null)
-      }
+      if (e.key !== 'Delete') return
+      if (selectedPinIdRef.current === null) return
+      e.stopImmediatePropagation()
+      e.preventDefault()
+      handleDeletePin(selectedPinIdRef.current)
+      setSelectedPinId(null)
     }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
+    window.addEventListener('keydown', handleKeyDown, true)
+    return () => window.removeEventListener('keydown', handleKeyDown, true)
   }, [])
 
   async function handleDeletePin(id: number) {

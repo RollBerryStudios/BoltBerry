@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCampaignStore } from '../stores/campaignStore'
 import { useSettingsStore } from '../stores/settingsStore'
 import { useUIStore } from '../stores/uiStore'
 import { AboutDialog } from './AboutDialog'
+import { showToast } from './shared/Toast'
 import { formatError } from '../utils/formatError'
 import type { Campaign } from '@shared/ipc-types'
 import {
@@ -31,8 +32,6 @@ export function Welcome() {
     removeCampaign,
     updateCampaign,
   } = useCampaignStore()
-  const { language, toggleLanguage } = useUIStore()
-
   const [creating, setCreating] = useState(false)
   const [newName, setNewName] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -155,11 +154,9 @@ export function Welcome() {
       <WelcomeStyles />
       <CampaignDataStyles />
 
-      <LeftPane stats={global} />
+      <LeftPane stats={global} onOpenAbout={() => setAboutOpen(true)} />
 
       <RightPane
-        language={language}
-        onToggleLang={toggleLanguage}
         campaigns={campaigns}
         campaignStats={stats}
         onOpen={(id) => setActiveCampaign(id)}
@@ -171,7 +168,6 @@ export function Welcome() {
         onCreate={() => setCreating(true)}
         onImport={handleImport}
         onOpenProfile={() => setProfileOpen(true)}
-        onOpenAbout={() => setAboutOpen(true)}
         error={error}
       />
 
@@ -197,8 +193,10 @@ export function Welcome() {
 
 function LeftPane({
   stats,
+  onOpenAbout,
 }: {
   stats: { campaignCount: number; mapCount: number; characterCount: number }
+  onOpenAbout: () => void
 }) {
   const { t } = useTranslation()
   const displayName = useSettingsStore((s) => s.displayName)
@@ -254,8 +252,19 @@ function LeftPane({
           <span className="bb-welcome-status-dot" aria-hidden="true" />
           {t('welcome.footerStatus')}
         </span>
-        <span className="bb-welcome-version mono">
-          {t('welcome.footerVersion', { version: pkg.version })}
+        <span className="bb-welcome-version-group mono">
+          <span className="bb-welcome-version">
+            {t('welcome.footerVersion', { version: pkg.version })}
+          </span>
+          <button
+            type="button"
+            className="bb-welcome-info-btn"
+            onClick={onOpenAbout}
+            title={t('about.title')}
+            aria-label={t('about.title')}
+          >
+            ℹ
+          </button>
         </span>
       </div>
     </aside>
@@ -274,8 +283,6 @@ function Stat({ n, l, first }: { n: number; l: string; first?: boolean }) {
 // ─── Right pane: campaign picker ───────────────────────────────────────
 
 function RightPane({
-  language,
-  onToggleLang,
   campaigns,
   campaignStats,
   onOpen,
@@ -287,11 +294,8 @@ function RightPane({
   onCreate,
   onImport,
   onOpenProfile,
-  onOpenAbout,
   error,
 }: {
-  language: 'de' | 'en'
-  onToggleLang: () => void
   campaigns: Campaign[]
   campaignStats: Record<number, import('./campaign-data').CampaignStats>
   onOpen: (id: number) => void
@@ -303,7 +307,6 @@ function RightPane({
   onCreate: () => void
   onImport: () => void
   onOpenProfile: () => void
-  onOpenAbout: () => void
   error: string | null
 }) {
   const { t } = useTranslation()
@@ -312,50 +315,31 @@ function RightPane({
   return (
     <section className="bb-welcome-right">
       <div className="bb-welcome-right-top">
-        <button
-          type="button"
-          className="bb-welcome-compendium-btn"
-          onClick={onOpenAbout}
-          title={t('about.title')}
-        >
-          ℹ
-        </button>
-        <button
-          type="button"
-          className="bb-welcome-compendium-btn"
-          onClick={onOpenProfile}
-          title={t('welcome.editProfile')}
-        >
-          👤 {t('welcome.profile')}
-        </button>
-        <button
-          type="button"
-          className="bb-welcome-compendium-btn"
-          onClick={() => useUIStore.getState().setTopView('bestiary')}
-          title={t('welcome.openBestiary')}
-        >
-          👹 {t('welcome.openBestiary')}
-        </button>
-        <button
-          type="button"
-          className="bb-welcome-compendium-btn"
-          onClick={() => useUIStore.getState().setTopView('compendium')}
-        >
-          📚 {t('welcome.openCompendium')}
-        </button>
-        <div className="bb-welcome-lang" role="group" aria-label="Language">
-          {(['de', 'en'] as const).map((l) => (
-            <button
-              key={l}
-              type="button"
-              onClick={() => {
-                if (language !== l) onToggleLang()
-              }}
-              className={language === l ? 'active' : ''}
-            >
-              {l.toUpperCase()}
-            </button>
-          ))}
+        <div className="bb-welcome-topbar-row">
+          <button
+            type="button"
+            className="bb-welcome-compendium-btn"
+            onClick={onOpenProfile}
+            title={t('welcome.editProfile')}
+          >
+            👤 {t('welcome.profile')}
+          </button>
+          <button
+            type="button"
+            className="bb-welcome-compendium-btn"
+            onClick={() => useUIStore.getState().setTopView('bestiary')}
+            title={t('welcome.openBestiary')}
+          >
+            👹 {t('welcome.openBestiary')}
+          </button>
+          <button
+            type="button"
+            className="bb-welcome-compendium-btn"
+            onClick={() => useUIStore.getState().setTopView('compendium')}
+          >
+            📚 {t('welcome.openCompendium')}
+          </button>
+          <SettingsMenu />
         </div>
       </div>
 
@@ -581,6 +565,114 @@ function CampaignRow({
 }
 
 // ─── Create campaign modal ────────────────────────────────────────────
+
+// ─── Settings menu (dropdown) ─────────────────────────────────────────
+
+function SettingsMenu() {
+  const { t } = useTranslation()
+  const language = useUIStore((s) => s.language)
+  const toggleLanguage = useUIStore((s) => s.toggleLanguage)
+  const theme = useUIStore((s) => s.theme)
+  const toggleTheme = useUIStore((s) => s.toggleTheme)
+  const [open, setOpen] = useState(false)
+  const rootRef = useRef<HTMLDivElement>(null)
+
+  // Keep the HTML data-theme attribute in sync so the swatch toggle
+  // visibly retints the Welcome screen itself (not just other routes).
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('theme', theme)
+  }, [theme])
+
+  useEffect(() => {
+    if (!open) return
+    function onDocMouseDown(e: MouseEvent) {
+      if (!rootRef.current?.contains(e.target as Node)) setOpen(false)
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('mousedown', onDocMouseDown)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onDocMouseDown)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  async function handleOpenContentFolder() {
+    if (!window.electronAPI) return
+    try {
+      await window.electronAPI.openContentFolder()
+    } catch (err) {
+      showToast(formatError(err), 'error')
+    }
+  }
+
+  return (
+    <div className="bb-welcome-settings" ref={rootRef}>
+      <button
+        type="button"
+        className="bb-welcome-compendium-btn"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        title={t('welcome.settings')}
+      >
+        ⚙ {t('welcome.settings')}
+      </button>
+      {open && (
+        <div className="bb-welcome-settings-menu" role="menu">
+          <div className="bb-welcome-settings-row">
+            <span className="bb-welcome-settings-label">{t('welcome.settingsLanguage')}</span>
+            <div className="bb-welcome-lang" role="group">
+              {(['de', 'en'] as const).map((l) => (
+                <button
+                  key={l}
+                  type="button"
+                  onClick={() => { if (language !== l) toggleLanguage() }}
+                  className={language === l ? 'active' : ''}
+                >
+                  {l.toUpperCase()}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="bb-welcome-settings-row">
+            <span className="bb-welcome-settings-label">{t('welcome.settingsTheme')}</span>
+            <div className="bb-welcome-lang" role="group">
+              <button
+                type="button"
+                onClick={() => { if (theme !== 'dark') toggleTheme() }}
+                className={theme === 'dark' ? 'active' : ''}
+              >
+                🌙
+              </button>
+              <button
+                type="button"
+                onClick={() => { if (theme !== 'light') toggleTheme() }}
+                className={theme === 'light' ? 'active' : ''}
+              >
+                ☀
+              </button>
+            </div>
+          </div>
+
+          <div className="bb-welcome-settings-sep" />
+
+          <button
+            type="button"
+            className="bb-welcome-settings-item"
+            onClick={() => { setOpen(false); void handleOpenContentFolder() }}
+          >
+            📂 {t('welcome.settingsOpenFolder')}
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
 
 // ─── Profile modal ───────────────────────────────────────────────────
 
@@ -926,7 +1018,26 @@ function WelcomeStyles() {
         background: var(--success);
         box-shadow: 0 0 6px var(--success);
       }
-      .bb-welcome-version { margin-left: auto; }
+      .bb-welcome-version-group {
+        margin-left: auto;
+        display: inline-flex; align-items: center; gap: 8px;
+      }
+      .bb-welcome-info-btn {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 20px; height: 20px;
+        padding: 0;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        color: var(--text-muted);
+        font-size: 11px; font-family: inherit;
+        cursor: pointer; line-height: 1;
+        transition: border-color var(--transition), color var(--transition);
+      }
+      .bb-welcome-info-btn:hover {
+        border-color: var(--accent-blue);
+        color: var(--accent-blue-light);
+      }
 
       /* ── Right pane (campaign picker) ──────────────────────────── */
       .bb-welcome-right {
@@ -938,17 +1049,11 @@ function WelcomeStyles() {
       .bb-welcome-right-top {
         display: flex; justify-content: flex-end;
         align-items: center;
-        flex-wrap: wrap;
-        row-gap: 6px;
-        gap: 8px;
         /* Reserve room on the right for Electron's titleBarOverlay so
-           the DE / EN pill does not slide under the native min / max /
-           close buttons. Shares the same --titlebar-controls-w variable
-           as DmTitleBar / Wiki / Compendium top bars so they all scale
-           together on high-DPI Windows.
-           flex-wrap+row-gap let the buttons drop to a second row when
-           the pane is narrow (high-DPI Windows) instead of overflowing
-           and clipping the language pill. */
+           buttons do not slide under the native min / max / close
+           buttons. Shares the same --titlebar-controls-w variable as
+           DmTitleBar / Wiki / Compendium top bars so they all scale
+           together on high-DPI Windows. */
         padding-top: 22px;
         padding-right: calc(var(--titlebar-controls-w) + 12px);
         padding-bottom: 22px;
@@ -957,6 +1062,60 @@ function WelcomeStyles() {
       }
       .bb-welcome-right-top > * {
         -webkit-app-region: no-drag;
+      }
+      .bb-welcome-topbar-row {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        /* flex-wrap keeps all four buttons on one row when there's
+           room; falls back to a second row only on very narrow
+           (high-DPI) windows. */
+        flex-wrap: wrap;
+        row-gap: 6px;
+        justify-content: flex-end;
+      }
+      .bb-welcome-settings {
+        position: relative;
+        display: inline-flex;
+      }
+      .bb-welcome-settings-menu {
+        position: absolute;
+        top: calc(100% + 6px);
+        right: 0;
+        min-width: 220px;
+        padding: 8px;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+        display: flex; flex-direction: column; gap: 6px;
+        z-index: 50;
+      }
+      .bb-welcome-settings-row {
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 8px;
+        padding: 6px 8px;
+      }
+      .bb-welcome-settings-label {
+        font-size: 11px; font-weight: 600; color: var(--text-secondary);
+        letter-spacing: 0.02em;
+      }
+      .bb-welcome-settings-sep {
+        height: 1px; background: var(--border-subtle);
+        margin: 4px 2px;
+      }
+      .bb-welcome-settings-item {
+        display: flex; align-items: center; gap: 8px;
+        padding: 8px 10px;
+        background: transparent;
+        border: none; border-radius: var(--radius-sm);
+        color: var(--text-primary);
+        font-size: 12px; font-family: inherit;
+        text-align: left; cursor: pointer;
+        transition: background var(--transition);
+      }
+      .bb-welcome-settings-item:hover {
+        background: var(--bg-overlay);
       }
       .bb-welcome-compendium-btn {
         display: inline-flex; align-items: center; gap: 6px;

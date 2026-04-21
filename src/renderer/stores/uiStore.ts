@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import i18n from '../i18n'
+import type { WeatherType } from '@shared/ipc-types'
 
 // Fire a sessions row insert / close based on the mode flip. Reads the
 // active campaign from the store lazily via a dynamic import to avoid a
@@ -31,7 +32,9 @@ export type SidebarTab = 'tokens' | 'initiative' | 'notes' | 'handouts' | 'encou
 export type SidebarDock = 'scene' | 'content'
 /** Utility panels live in a floating dock outside the right sidebar. */
 export type FloatingPanel = 'audio' | 'overlay' | 'dice'
-export type AppMode = 'map' | 'atmosphere' | 'blackout'
+// Blackout is tracked independently via `blackoutActive: boolean`;
+// `AppMode` itself only covers the two normal DM canvas modes.
+export type AppMode = 'map' | 'atmosphere'
 export type SessionMode = 'session' | 'prep'
 export type WorkMode = 'prep' | 'play' | 'combat' | 'player-preview' | 'fog-edit'
 export type AppLanguage = 'de' | 'en'
@@ -121,7 +124,7 @@ interface UIState {
   workMode: WorkMode
   showPlayerEye: boolean
   overlayActive: boolean
-  activeWeather: string
+  activeWeather: WeatherType
   drawingClearTick: number
   topView: TopView
   /** Pending deep-link the next time topView flips to 'bestiary'. */
@@ -178,7 +181,7 @@ interface UIState {
   setFogBrushRadius: (radius: number) => void
   togglePlayerEye: () => void
   setOverlayActive: (active: boolean) => void
-  setActiveWeather: (weather: string) => void
+  setActiveWeather: (weather: WeatherType) => void
   incrementDrawingClearTick: () => void
   setClipboardTokens: (tokens: Array<{
     name: string

@@ -56,9 +56,10 @@ const ALLOWED_CONTEXT_MENU_ACTIONS = new Set<string>([
   'open', 'remove-pin',
   // Canvas
   'center-camera',
+  'rotate-0', 'rotate-90', 'rotate-180', 'rotate-270',
   'fog-reveal-all', 'fog-cover-all', 'fog-reveal-tokens', 'fog-reset-explored',
   'tool-measure', 'tool-draw', 'tool-fog-brush', 'tool-fog-rect',
-  'add-gm-pin', 'clear-drawings',
+  'ping-here', 'clear-drawings',
 ])
 
 // ── Token variants (artwork per creature slug) ──────────────────────────

@@ -3,12 +3,12 @@ import { Stage, Layer } from 'react-konva'
 import { MapLayer } from './MapLayer'
 import { FogLayer } from './FogLayer'
 import { TokenLayer } from './TokenLayer'
-import { PointerLayer } from './PointerLayer'
+import { PointerLayer, POINTER_PING_EVENT, type PointerPingDetail } from './PointerLayer'
 import { MeasureLayer } from './MeasureLayer'
 import { MinimapOverlay } from './MinimapOverlay'
 import { DrawingLayer } from './DrawingLayer'
-import { GMPinLayer, GM_PIN_ADD_EVENT } from './GMPinLayer'
-import { PlayerViewportLayer } from './PlayerViewportLayer'
+import { GMPinLayer } from './GMPinLayer'
+import { PlayerViewportLayer, PlayerViewportGestures } from './PlayerViewportLayer'
 import { LightingLayer } from './LightingLayer'
 import { WallLayer } from './WallLayer'
 import { RoomLayer } from './RoomLayer'
@@ -439,6 +439,16 @@ export function CanvasArea() {
             const curRot = (map?.rotation ?? 0) as 0 | 90 | 180 | 270
             const rotLabel = (r: number) => ({ 0: '↑ 0°', 90: '→ 90°', 180: '↓ 180°', 270: '← 270°' }[r] ?? `${r}°`)
 
+            // Snapshot the pointer position NOW, before the native menu
+            // opens — by the time the handler resumes below, the user
+            // has clicked on a menu item and the Konva stage's cached
+            // pointer position may be stale or null. Used by the
+            // "add GM pin here" action.
+            const clickPos = e.target.getStage()?.getPointerPosition()
+            const clickMapPos = clickPos
+              ? useMapTransformStore.getState().screenToMap(clickPos.x, clickPos.y)
+              : null
+
             const items: Array<{ label: string; action: string } | { separator: true }> = []
 
             // ── Ansicht ────────────────────────────────────────────
@@ -472,7 +482,7 @@ export function CanvasArea() {
 
             // ── Karte / Zeichnungen ────────────────────────────────
             items.push({ separator: true })
-            items.push({ label: '📌  GM-Pin hier setzen',           action: 'add-gm-pin'         })
+            items.push({ label: '📡  Hier pingen',                   action: 'ping-here'          })
             items.push({ label: '✕  Zeichnungen löschen',           action: 'clear-drawings'     })
 
             const action = await window.electronAPI.showContextMenu(items)
@@ -518,13 +528,12 @@ export function CanvasArea() {
             } else if (action === 'tool-fog-rect') {
               useUIStore.getState().setActiveTool('fog-rect')
 
-            // ── GM-Pin ─────────────────────────────────────────────
-            } else if (action === 'add-gm-pin') {
-              useUIStore.getState().setActiveTool('select')
-              const pos = e.target.getStage()?.getPointerPosition()
-              if (pos) {
-                const mapPos = useMapTransformStore.getState().screenToMap(pos.x, pos.y)
-                window.dispatchEvent(new CustomEvent(GM_PIN_ADD_EVENT, { detail: { x: mapPos.x, y: mapPos.y } }))
+            // ── Ping ───────────────────────────────────────────────
+            } else if (action === 'ping-here') {
+              if (clickMapPos) {
+                window.dispatchEvent(new CustomEvent<PointerPingDetail>(POINTER_PING_EVENT, {
+                  detail: { x: clickMapPos.x, y: clickMapPos.y },
+                }))
               }
 
             // ── Zeichnungen ────────────────────────────────────────
@@ -648,6 +657,12 @@ export function CanvasArea() {
           )}
         </Stage>
       )}
+
+      {/* Player Control Mode — Ctrl+drag / Ctrl+wheel gestures. Mounted
+          outside the Stage so the window-level listeners keep working
+          even when no map is loaded (the PlayerViewportLayer above is
+          only rendered when a map exists). */}
+      <PlayerViewportGestures />
 
       {/* Player Eye HUD */}
       <PlayerEyeHUD />
@@ -1034,6 +1049,27 @@ async function loadMapData(mapId: number, map: MapRecord) {
         ? 'atmosphere'
         : 'map'
 
+    // Walls + viewport must ride along in every full-sync so a
+    // reconnecting player doesn't compute LOS against an empty wall
+    // set or keep a stale Player Control Mode frame from the
+    // previous map. Previously both were omitted here and the
+    // separate PLAYER_WALLS broadcast was racing the first fog /
+    // token delta.
+    const { playerViewportMode, playerViewport } = useUIStore.getState()
+    const wallsForPlayer = useWallStore.getState().walls
+      .filter((w) => w.mapId === mapId)
+      .map((w) => ({
+        id: w.id, x1: w.x1, y1: w.y1, x2: w.x2, y2: w.y2,
+        wallType: w.wallType, doorState: w.doorState,
+      }))
+    const viewportForPlayer = playerViewportMode && playerViewport
+      ? {
+          cx: playerViewport.cx, cy: playerViewport.cy,
+          w: playerViewport.w,  h: playerViewport.h,
+          rotation: playerViewport.rotation,
+        }
+      : null
+
     window.electronAPI?.sendFullSync({
       mode: syncMode,
       map: {
@@ -1062,6 +1098,8 @@ async function loadMapData(mapId: number, map: MapRecord) {
           lightRadius: t.lightRadius,
           lightColor: t.lightColor,
         })),
+      walls: wallsForPlayer,
+      viewport: viewportForPlayer,
       fogBitmap,
       exploredBitmap,
       atmosphereImagePath: appMode === 'atmosphere' ? atmosphereImagePath : null,
