@@ -522,12 +522,15 @@ function MonsterActions({
     showToast(t('bestiary.sentToPlayer'), 'success')
   }
 
-  // The spawn action only makes sense inside an active campaign + map
-  // context. The Wiki can be opened from the Welcome screen without any
-  // campaign selected — showing a disabled "Auf Karte platzieren" there
-  // was noise. Hide the button entirely in that mode; it reappears once
-  // a campaign + map are active.
+  // Both spawn and send-to-player only make sense inside an active
+  // campaign — the Wiki can be opened from Welcome without any
+  // campaign selected, and showing disabled action buttons there was
+  // noise. "Auf Karte" additionally requires a map; "An Spieler
+  // senden" only needs the campaign scope (the button remains visible
+  // but disabled when no player window is connected — that's a
+  // session-time state, not a content-management one).
   const canSpawn = Boolean(activeCampaignId && map)
+  const canSendToPlayer = Boolean(activeCampaignId)
 
   return (
     <div className="bb-best-actions-bar">
@@ -542,15 +545,17 @@ function MonsterActions({
           ✦ {t('bestiary.addToMap')}
         </button>
       )}
-      <button
-        type="button"
-        className="bb-best-action-btn"
-        onClick={handleSend}
-        disabled={!playerConnected}
-        title={playerConnected ? t('bestiary.sendToPlayer') : t('bestiary.sendDisabled')}
-      >
-        📡 {t('bestiary.sendToPlayer')}
-      </button>
+      {canSendToPlayer && (
+        <button
+          type="button"
+          className="bb-best-action-btn"
+          onClick={handleSend}
+          disabled={!playerConnected}
+          title={playerConnected ? t('bestiary.sendToPlayer') : t('bestiary.sendDisabled')}
+        >
+          📡 {t('bestiary.sendToPlayer')}
+        </button>
+      )}
       <button
         type="button"
         className="bb-best-action-btn"

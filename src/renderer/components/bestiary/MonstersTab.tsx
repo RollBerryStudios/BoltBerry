@@ -80,11 +80,11 @@ export function MonstersTab({
           || m.type.de.toLowerCase().includes(q)
           || m.challenge.includes(q)
       })
-      .sort((a, b) => {
-        const cr = crValue(a.challenge) - crValue(b.challenge)
-        if (cr !== 0) return cr
-        return pickName(a, language).localeCompare(pickName(b, language))
-      })
+      // Default alphabetical sort per locale — consistent with Items
+      // and Spells tabs. CR is a secondary filter chip, not a sort
+      // axis, so starting with a name-sorted list makes scanning for
+      // a specific monster predictable.
+      .sort((a, b) => pickName(a, language).localeCompare(pickName(b, language), language))
   }, [index, query, language, crFilter, typeFilter, sourceFilter])
 
   // Apply a deep-link target the first time the index loads. Forces the

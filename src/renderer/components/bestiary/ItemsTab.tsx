@@ -6,6 +6,7 @@ import { localized, pickName, titleCase } from './util'
 import { EmptyDetail } from './MonstersTab'
 import { itemHandout } from './actions'
 import { useUIStore } from '../../stores/uiStore'
+import { useCampaignStore } from '../../stores/campaignStore'
 import { showToast } from '../shared/Toast'
 import { WikiEntryControls } from './WikiEntryControls'
 import { WikiEntryForm } from './WikiEntryForm'
@@ -110,11 +111,10 @@ export function ItemsTab({
           || it.slug.includes(q)
           || it.category.en.toLowerCase().includes(q)
       })
-      .sort((a, b) => {
-        const r = (RARITY_ORDER[a.rarity.en] ?? 99) - (RARITY_ORDER[b.rarity.en] ?? 99)
-        if (r !== 0) return r
-        return pickName(a, language).localeCompare(pickName(b, language))
-      })
+      // Default alphabetical sort per locale. Rarity remains a filter
+      // chip up top but no longer the primary sort axis — DMs scan for
+      // items by name more often than by rarity tier.
+      .sort((a, b) => pickName(a, language).localeCompare(pickName(b, language), language))
   }, [index, query, language, categoryFilter, rarityFilter, sourceFilter])
 
   useEffect(() => {
@@ -364,10 +364,16 @@ function ItemActions({
 }) {
   const { t } = useTranslation()
   const playerConnected = useUIStore((s) => s.playerConnected)
+  const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
   function handleSend() {
     window.electronAPI?.sendHandout(itemHandout(record, language))
     showToast(t('bestiary.sentToPlayer'), 'success')
   }
+  // "An Spieler senden" only exists as a concept once a campaign is
+  // loaded — without one, the Wiki is pure reference and the button
+  // would just sit disabled. Hide it entirely in that mode to match
+  // the MonsterDetail behaviour.
+  if (!activeCampaignId) return null
   return (
     <div className="bb-best-actions-bar">
       <button

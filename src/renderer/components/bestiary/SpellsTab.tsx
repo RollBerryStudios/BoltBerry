@@ -6,6 +6,7 @@ import { localized, localizedArray, pickName, titleCase } from './util'
 import { EmptyDetail } from './MonstersTab'
 import { spellHandout } from './actions'
 import { useUIStore } from '../../stores/uiStore'
+import { useCampaignStore } from '../../stores/campaignStore'
 import { showToast } from '../shared/Toast'
 import { WikiEntryControls } from './WikiEntryControls'
 import { WikiEntryForm } from './WikiEntryForm'
@@ -116,11 +117,11 @@ export function SpellsTab({
           || sp.school.en.toLowerCase().includes(q)
           || sp.school.de.toLowerCase().includes(q)
       })
-      .sort((a, b) => {
-        const lvl = (LEVEL_ORDER[a.level.en] ?? 99) - (LEVEL_ORDER[b.level.en] ?? 99)
-        if (lvl !== 0) return lvl
-        return pickName(a, language).localeCompare(pickName(b, language))
-      })
+      // Default alphabetical sort per locale. Level still works as a
+      // filter chip but the base list is name-ordered so a DM typing
+      // "fireball" finds it in one visual pass rather than scrolling
+      // past every cantrip first.
+      .sort((a, b) => pickName(a, language).localeCompare(pickName(b, language), language))
   }, [index, query, language, levelFilter, schoolFilter, classFilter, sourceFilter])
 
   useEffect(() => {
@@ -388,10 +389,14 @@ function SpellActions({
 }) {
   const { t } = useTranslation()
   const playerConnected = useUIStore((s) => s.playerConnected)
+  const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
   function handleSend() {
     window.electronAPI?.sendHandout(spellHandout(record, language))
     showToast(t('bestiary.sentToPlayer'), 'success')
   }
+  // Same reasoning as ItemActions: without a campaign the Wiki is
+  // pure reference; nothing to send to a player window.
+  if (!activeCampaignId) return null
   return (
     <div className="bb-best-actions-bar">
       <button
