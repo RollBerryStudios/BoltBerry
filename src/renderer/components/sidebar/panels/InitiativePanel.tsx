@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { EffectTimer } from '@shared/ipc-types'
 import { useInitiativeStore } from '../../../stores/initiativeStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import { useUIStore } from '../../../stores/uiStore'
@@ -155,20 +156,14 @@ export function InitiativePanel() {
     const rollVal = parseInt(roll) || 0
     const tokenId = selectedTokenId
     try {
-      const sortOrder = entries.length
-      const result = await window.electronAPI.dbRun(
-        `INSERT INTO initiative (map_id, combatant_name, roll, token_id, sort_order) VALUES (?, ?, ?, ?, ?)`,
-        [activeMapId, name.trim(), rollVal, tokenId, sortOrder]
-      )
-      addEntry({
-        id: result.lastInsertRowid,
+      const created = await window.electronAPI.initiative.create({
         mapId: activeMapId,
         combatantName: name.trim(),
         roll: rollVal,
-        currentTurn: entries.length === 0,
         tokenId,
-        effectTimers: null,
+        sortOrder: entries.length,
       })
+      addEntry(created)
       setName('')
       setRoll('')
       setSelectedTokenId(null)
@@ -182,10 +177,9 @@ export function InitiativePanel() {
   function handleSort() {
     sortEntries()
     broadcastInitiative()
-    // Persist new sort order to DB
     const { entries: sorted } = useInitiativeStore.getState()
-    window.electronAPI?.dbRunBatch(
-      sorted.map((e, i) => ({ sql: 'UPDATE initiative SET sort_order = ? WHERE id = ?', params: [i, e.id] }))
+    window.electronAPI?.initiative.updateMany(
+      sorted.map((e, i) => ({ id: e.id, patch: { sortOrder: i } })),
     )
   }
 
@@ -194,20 +188,14 @@ export function InitiativePanel() {
     broadcastInitiative()
     // Persist effect timer changes after round boundary in a single batch
     const { entries } = useInitiativeStore.getState()
-    const batch: { sql: string; params: any[] }[] = []
+    const updates: Array<{ id: number; patch: { effectTimers: EffectTimer[] | null } }> = []
     for (const entry of entries) {
       if (entry.effectTimers != null) {
-        batch.push({
-          sql: 'UPDATE initiative SET effect_timers = ? WHERE id = ?',
-          params: [
-            entry.effectTimers.length > 0 ? JSON.stringify(entry.effectTimers) : null,
-            entry.id,
-          ],
-        })
+        updates.push({ id: entry.id, patch: { effectTimers: entry.effectTimers } })
       }
     }
-    if (batch.length > 0) {
-      window.electronAPI?.dbRunBatch(batch)
+    if (updates.length > 0) {
+      window.electronAPI?.initiative.updateMany(updates)
     }
   }
 
@@ -221,7 +209,7 @@ export function InitiativePanel() {
     resetCombat()
     broadcastInitiative()
     if (activeMapId) {
-      window.electronAPI.dbRun('DELETE FROM initiative WHERE map_id = ?', [activeMapId]).catch((err: unknown) => {
+      window.electronAPI.initiative.deleteByMap(activeMapId).catch((err: unknown) => {
         console.error('[InitiativePanel] reset delete failed:', err)
       })
     }
@@ -235,15 +223,14 @@ export function InitiativePanel() {
     let sortOrderBase = entries.length
     for (const token of tokensToAdd) {
       try {
-        const result = await window.electronAPI.dbRun(
-          'INSERT INTO initiative (map_id, combatant_name, roll, current_turn, token_id, sort_order) VALUES (?, ?, 0, 0, ?, ?)',
-          [activeMapId, token.name, token.id, sortOrderBase]
-        )
-        addEntry({
-          id: result.lastInsertRowid, mapId: activeMapId,
-          combatantName: token.name, roll: 0, currentTurn: false,
-          tokenId: token.id, effectTimers: null,
+        const created = await window.electronAPI.initiative.create({
+          mapId: activeMapId,
+          combatantName: token.name,
+          roll: 0,
+          tokenId: token.id,
+          sortOrder: sortOrderBase,
         })
+        addEntry(created)
         sortOrderBase++
       } catch (err) {
         console.error('[InitiativePanel] handleAddAllTokens failed:', err)
@@ -265,7 +252,7 @@ export function InitiativePanel() {
     }
     updateEntry(entryId, { roll: newRoll })
     try {
-      await window.electronAPI?.dbRun('UPDATE initiative SET roll = ? WHERE id = ?', [newRoll, entryId])
+      await window.electronAPI?.initiative.update(entryId, { roll: newRoll })
       broadcastInitiative()
     } catch (err) {
       console.error('[InitiativePanel] commitEditRoll failed:', err)
@@ -287,10 +274,9 @@ export function InitiativePanel() {
     const { entries } = useInitiativeStore.getState()
     const entry = entries.find((e) => e.id === timerEntryId)
     if (entry) {
-      const timers = entry.effectTimers ?? []
-      window.electronAPI?.dbRun('UPDATE initiative SET effect_timers = ? WHERE id = ?', [
-        JSON.stringify(timers), entry.id,
-      ])
+      window.electronAPI?.initiative.update(entry.id, {
+        effectTimers: entry.effectTimers ?? [],
+      })
     }
     setTimerEntryId(null)
   }
@@ -452,8 +438,8 @@ export function InitiativePanel() {
                     broadcastInitiative()
                     // Persist new sort order to DB
                     const { entries: reordered } = useInitiativeStore.getState()
-                    window.electronAPI?.dbRunBatch(
-                      reordered.map((e, i) => ({ sql: 'UPDATE initiative SET sort_order = ? WHERE id = ?', params: [i, e.id] }))
+                    window.electronAPI?.initiative.updateMany(
+                      reordered.map((e, i) => ({ id: e.id, patch: { sortOrder: i } }))
                     )
                   }
                   dragIndexRef.current = null
@@ -560,7 +546,7 @@ export function InitiativePanel() {
                     title={t('initiative.removeEntry') ?? '✕'}
                     aria-label={t('initiative.removeEntry') ?? '✕'}
                     onClick={() => {
-                      window.electronAPI?.dbRun('DELETE FROM initiative WHERE id = ?', [entry.id])
+                      window.electronAPI?.initiative.delete(entry.id)
                       removeEntry(entry.id)
                       broadcastInitiative()
                     }}
@@ -639,10 +625,9 @@ export function InitiativePanel() {
                             removeTimer(entry.id, timer.effectId)
                             const { entries: ents } = useInitiativeStore.getState()
                             const updated = ents.find((e) => e.id === entry.id)
-                            const newTimers = updated?.effectTimers?.filter((t) => t.effectId !== timer.effectId) ?? null
-                            window.electronAPI?.dbRun('UPDATE initiative SET effect_timers = ? WHERE id = ?', [
-                              newTimers && newTimers.length > 0 ? JSON.stringify(newTimers) : null, entry.id,
-                            ])
+                            window.electronAPI?.initiative.update(entry.id, {
+                              effectTimers: updated?.effectTimers ?? null,
+                            })
                           }}
                           title="Timer entfernen"
                         >✕</button>

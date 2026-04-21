@@ -4,12 +4,12 @@ import type { InitiativeEntry, EffectTimer } from '@shared/ipc-types'
 
 function persistCurrentTurns(entries: InitiativeEntry[]) {
   if (typeof window === 'undefined' || !window.electronAPI) return
-  entries.forEach((e) => {
-    window.electronAPI!.dbRun(
-      'UPDATE initiative SET current_turn = ? WHERE id = ?',
-      [e.currentTurn ? 1 : 0, e.id]
-    )
-  })
+  // One atomic transaction — matches the "all at once" semantics of
+  // nextTurn, where exactly one entry flips to current and every other
+  // flips off. Previously N individual IPC round-trips.
+  window.electronAPI.initiative.updateMany(
+    entries.map((e) => ({ id: e.id, patch: { currentTurn: e.currentTurn } })),
+  )
 }
 
 interface InitiativeState {

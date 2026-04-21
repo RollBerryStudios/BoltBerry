@@ -355,14 +355,12 @@ export function useKeyboardShortcuts() {
             window.electronAPI?.sendInitiative(
               entries.map((e) => ({ name: e.combatantName, roll: e.roll, current: e.currentTurn }))
             )
-            // Persist effect timer changes after round boundary
-            for (const entry of entries) {
-              if (entry.effectTimers != null) {
-                window.electronAPI?.dbRun('UPDATE initiative SET effect_timers = ? WHERE id = ?', [
-                  entry.effectTimers.length > 0 ? JSON.stringify(entry.effectTimers) : null,
-                  entry.id,
-                ])
-              }
+            // Persist effect timer changes after round boundary in one txn
+            const timerUpdates = entries
+              .filter((e) => e.effectTimers != null)
+              .map((e) => ({ id: e.id, patch: { effectTimers: e.effectTimers } }))
+            if (timerUpdates.length > 0) {
+              window.electronAPI?.initiative.updateMany(timerUpdates)
             }
           }
           break

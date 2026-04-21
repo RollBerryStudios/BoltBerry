@@ -860,12 +860,10 @@ async function loadMapData(mapId: number, map: MapRecord) {
     const campaignId = useCampaignStore.getState().activeCampaignId
 
     // Fire all independent DB queries in parallel for faster map load
-    const [tokens, initRows, wallRows, encRows, roomRows, fogRows, drawingRows] = await Promise.all([
+    const [tokens, initiative, wallRows, encRows, roomRows, fogRows, drawingRows] = await Promise.all([
       window.electronAPI.tokens.listByMap(mapId),
 
-      window.electronAPI.dbQuery<{
-        id: number; map_id: number; combatant_name: string; roll: number; current_turn: number; token_id: number | null; effect_timers: string | null; sort_order: number
-      }>('SELECT id, map_id, combatant_name, roll, current_turn, token_id, effect_timers, sort_order FROM initiative WHERE map_id = ? ORDER BY sort_order ASC, roll DESC', [mapId]),
+      window.electronAPI.initiative.listByMap(mapId),
 
       window.electronAPI.dbQuery<{
         id: number; map_id: number; x1: number; y1: number; x2: number; y2: number; wall_type: string; door_state: string
@@ -899,15 +897,7 @@ async function loadMapData(mapId: number, map: MapRecord) {
     // Apply results to stores
     useTokenStore.getState().setTokens(tokens)
 
-    useInitiativeStore.getState().setEntries(initRows.map((r) => ({
-      id: r.id,
-      mapId: r.map_id,
-      combatantName: r.combatant_name,
-      roll: r.roll,
-      currentTurn: Boolean(r.current_turn),
-      tokenId: r.token_id ?? null,
-      effectTimers: r.effect_timers ? JSON.parse(r.effect_timers) : null,
-    })))
+    useInitiativeStore.getState().setEntries(initiative)
 
     useWallStore.getState().setWalls(wallRows.map((r) => ({
       id: r.id,

@@ -469,10 +469,11 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
       const { updateEntry } = useInitiativeStore.getState()
       for (const e of entryNames) {
         updateEntry(e.id, { combatantName: e.name })
-        await window.electronAPI?.dbRun(
-          'UPDATE initiative SET combatant_name = ? WHERE id = ?',
-          [e.name, e.id],
-        ).catch((err: any) => console.error('[TokenLayer] initiative name sync failed:', err))
+      }
+      if (entryNames.length > 0) {
+        await window.electronAPI?.initiative
+          .updateMany(entryNames.map((e) => ({ id: e.id, patch: { combatantName: e.name } })))
+          .catch((err: unknown) => console.error('[TokenLayer] initiative name sync failed:', err))
       }
     }
 
@@ -745,19 +746,15 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     if (!activeMapId || !window.electronAPI) return
     try {
       const { entries } = useInitiativeStore.getState()
-      const result = await window.electronAPI.dbRun(
-        'INSERT INTO initiative (map_id, combatant_name, roll, current_turn, token_id, sort_order) VALUES (?, ?, 0, ?, ?, ?)',
-        [activeMapId, token.name, entries.length === 0 ? 1 : 0, token.id, entries.length]
-      )
-      addEntry({
-        id: result.lastInsertRowid,
+      const created = await window.electronAPI.initiative.create({
         mapId: activeMapId,
         combatantName: token.name,
         roll: 0,
         currentTurn: entries.length === 0,
         tokenId: token.id,
-        effectTimers: null,
+        sortOrder: entries.length,
       })
+      addEntry(created)
     } catch (err) {
       console.error('[TokenLayer] addToInitiative failed:', err)
     }

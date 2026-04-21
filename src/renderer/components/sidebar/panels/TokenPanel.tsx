@@ -761,19 +761,14 @@ function AddToInitiativeButton({ token, mapId }: { token: TokenRecord; mapId: nu
     if (!mapId || !window.electronAPI) return
     try {
       const sortOrder = useInitiativeStore.getState().entries.length
-      const result = await window.electronAPI.dbRun(
-        'INSERT INTO initiative (map_id, combatant_name, roll, token_id, sort_order) VALUES (?, ?, 0, ?, ?)',
-        [mapId, token.name, token.id, sortOrder]
-      )
-      useInitiativeStore.getState().addEntry({
-        id: result.lastInsertRowid,
+      const created = await window.electronAPI.initiative.create({
         mapId,
         combatantName: token.name,
         roll: 0,
-        currentTurn: false,
         tokenId: token.id,
-        effectTimers: null,
+        sortOrder,
       })
+      useInitiativeStore.getState().addEntry(created)
       // Switch to initiative tab so user can set the roll
       useUIStore.getState().setSidebarTab('initiative')
     } catch (err) {

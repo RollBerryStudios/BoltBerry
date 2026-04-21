@@ -44,10 +44,10 @@ export const IPC = {
 
   // DB queries (renderer → main)
   // Legacy generic SQL tunnel — being phased out in favour of the
-  // domain channels below. Do not add new call sites.
+  // domain channels below. Do not add new call sites. DB_RUN_BATCH
+  // has already been retired.
   DB_QUERY: 'db:query',
   DB_RUN: 'db:run',
-  DB_RUN_BATCH: 'db:run-batch',
 
   // Campaigns domain — semantic replacements for raw `FROM campaigns`
   // / `INTO campaigns` / `UPDATE campaigns` SQL from the renderer.
@@ -86,6 +86,15 @@ export const IPC = {
   TOKENS_UPDATE_MANY: 'tokens:update-many',
   TOKENS_DELETE: 'tokens:delete',
   TOKENS_DELETE_MANY: 'tokens:delete-many',
+
+  // Initiative domain — semantic replacements for raw SQL against the
+  // `initiative` table.
+  INITIATIVE_LIST_BY_MAP: 'initiative:list-by-map',
+  INITIATIVE_CREATE: 'initiative:create',
+  INITIATIVE_UPDATE: 'initiative:update',
+  INITIATIVE_UPDATE_MANY: 'initiative:update-many',
+  INITIATIVE_DELETE: 'initiative:delete',
+  INITIATIVE_DELETE_BY_MAP: 'initiative:delete-by-map',
 
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',

@@ -29,6 +29,7 @@ import type {
   GridType,
   AudioChannelKey,
   TokenRecord,
+  InitiativeEntry,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -111,13 +112,13 @@ export const dmApi = {
 
   // DB operations
   // Legacy generic SQL tunnel — do not add new call sites. Domain
-  // namespaces (e.g. `campaigns`) are the supported path for new code.
+  // namespaces (e.g. `campaigns`, `maps`, `tokens`, `initiative`) are
+  // the supported path for new code. `dbRunBatch` has already been
+  // retired — every caller is now on a domain-specific transaction.
   dbQuery: <T>(sql: string, params?: unknown[]): Promise<T[]> =>
     ipcRenderer.invoke('db:query', sql, params),
   dbRun: (sql: string, params?: unknown[]): Promise<{ lastInsertRowid: number; changes: number }> =>
     ipcRenderer.invoke('db:run', sql, params),
-  dbRunBatch: (statements: Array<{ sql: string; params?: unknown[] }>): Promise<void> =>
-    ipcRenderer.invoke('db:run-batch', statements),
 
   // Campaigns — semantic API for the `campaigns` table
   campaigns: {
@@ -200,6 +201,22 @@ export const dmApi = {
       ipcRenderer.invoke(IPC.TOKENS_DELETE, id),
     deleteMany: (ids: number[]): Promise<void> =>
       ipcRenderer.invoke(IPC.TOKENS_DELETE_MANY, ids),
+  },
+
+  // Initiative — semantic API for the `initiative` table
+  initiative: {
+    listByMap: (mapId: number): Promise<InitiativeEntry[]> =>
+      ipcRenderer.invoke(IPC.INITIATIVE_LIST_BY_MAP, mapId),
+    create: (patch: Partial<InitiativeEntry> & { mapId: number; combatantName: string; sortOrder?: number }): Promise<InitiativeEntry> =>
+      ipcRenderer.invoke(IPC.INITIATIVE_CREATE, patch),
+    update: (id: number, patch: Partial<InitiativeEntry> & { sortOrder?: number }): Promise<void> =>
+      ipcRenderer.invoke(IPC.INITIATIVE_UPDATE, id, patch),
+    updateMany: (updates: Array<{ id: number; patch: Partial<InitiativeEntry> & { sortOrder?: number } }>): Promise<void> =>
+      ipcRenderer.invoke(IPC.INITIATIVE_UPDATE_MANY, updates),
+    delete: (id: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.INITIATIVE_DELETE, id),
+    deleteByMap: (mapId: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.INITIATIVE_DELETE_BY_MAP, mapId),
   },
 
   // Listen for main → DM: player window was closed

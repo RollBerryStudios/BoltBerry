@@ -350,15 +350,14 @@ export function EncounterPanel() {
           }) ?? null
         : null
       try {
-        const result = await window.electronAPI.dbRun(
-          'INSERT INTO initiative (map_id, combatant_name, roll, current_turn, token_id, sort_order) VALUES (?, ?, ?, 0, ?, ?)',
-          [activeMapId, init.combatantName, init.roll, linkedToken?.id ?? null, sortOrderBase]
-        )
-        useInitiativeStore.getState().addEntry({
-          id: result.lastInsertRowid, mapId: activeMapId,
-          combatantName: init.combatantName, roll: init.roll,
-          currentTurn: false, tokenId: linkedToken?.id ?? null, effectTimers: null,
+        const created = await window.electronAPI.initiative.create({
+          mapId: activeMapId,
+          combatantName: init.combatantName,
+          roll: init.roll,
+          tokenId: linkedToken?.id ?? null,
+          sortOrder: sortOrderBase,
         })
+        useInitiativeStore.getState().addEntry(created)
         sortOrderBase++
       } catch (err) {
         console.error('[EncounterPanel] spawn initiative failed:', err)

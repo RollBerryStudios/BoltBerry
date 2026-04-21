@@ -4,12 +4,15 @@ import { getDb } from '../db/database'
 import type Database from 'better-sqlite3'
 
 /**
- * Exposes SQLite to the renderer via IPC.
- * The renderer never touches the DB directly (security + contextIsolation).
+ * Legacy generic SQL tunnel. Being retired in favour of domain-scoped
+ * IPC handlers (`campaign-handlers.ts`, `map-handlers.ts`,
+ * `token-handlers.ts`, `initiative-handlers.ts`, …). New code should
+ * NOT add call sites; extend the appropriate domain handler instead.
  *
- * Security: allowlist approach — only SELECT/INSERT/UPDATE/DELETE/WITH are
- * permitted; multi-statement SQL (`;`) is rejected; mutating statements must
- * target a known table; parameters are coerced to safe SQLite types.
+ * Security while this handler is still live: allowlist approach —
+ * only SELECT/INSERT/UPDATE/DELETE/WITH are permitted; multi-statement
+ * SQL (`;`) is rejected; mutating statements must target a known table;
+ * parameters are coerced to safe SQLite types.
  */
 
 const ALLOWED_VERBS = new Set(['SELECT', 'INSERT', 'UPDATE', 'DELETE', 'WITH'])
@@ -117,17 +120,5 @@ export function registerDbHandlers(): void {
       lastInsertRowid: Number(result.lastInsertRowid),
       changes: result.changes,
     }
-  })
-
-  ipcMain.handle(IPC.DB_RUN_BATCH, (_event, statements: Array<{ sql: string; params?: unknown[] }>) => {
-    const db = getDb()
-    const txn = db.transaction(() => {
-      for (const { sql, params = [] } of statements) {
-        validateSql(sql)
-        getCachedStatement(db, sql).run(...coerceParams(params))
-      }
-    })
-    txn()
-    return true
   })
 }
