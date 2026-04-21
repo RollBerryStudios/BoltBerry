@@ -12,6 +12,7 @@ import { SetupWizard } from './components/SetupWizard'
 import { ShortcutOverlay } from './components/ShortcutOverlay'
 import { CommandPalette } from './components/CommandPalette'
 import { ToastProvider } from './components/shared/Toast'
+import { ErrorBoundary } from './components/ErrorBoundary'
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
 import { useAutoSave } from './hooks/useAutoSave'
 import { usePlayerSync } from './hooks/usePlayerSync'
@@ -150,20 +151,35 @@ export default function App() {
 
   return (
     <>
+      {/* Each top-level view gets its own ErrorBoundary so a render
+          crash in e.g. the Wiki doesn't blank the whole app — the
+          user can still navigate back and retry. AppLayout already
+          wraps its own subtree surfaces (TitleBar / Toolbar / Canvas
+          / …) for finer-grained isolation once a map is open. */}
       {!isSetupComplete ? (
-        <SetupWizard onComplete={() => { /* isSetupComplete set inside wizard */ }} />
+        <ErrorBoundary label="SetupWizard">
+          <SetupWizard onComplete={() => { /* isSetupComplete set inside wizard */ }} />
+        </ErrorBoundary>
       ) : topView === 'compendium' ? (
-        <CompendiumView />
+        <ErrorBoundary label="Compendium">
+          <CompendiumView />
+        </ErrorBoundary>
       ) : topView === 'bestiary' ? (
-        <BestiaryView />
+        <ErrorBoundary label="Wiki">
+          <BestiaryView />
+        </ErrorBoundary>
       ) : !activeCampaignId ? (
-        <Welcome />
+        <ErrorBoundary label="Welcome">
+          <Welcome />
+        </ErrorBoundary>
       ) : (
         <>
           {/* CampaignView stays mounted while a campaign is open so tab state is preserved.
               Hidden (not unmounted) when a map is active. */}
           <div style={{ display: activeMapId ? 'none' : 'flex', flexDirection: 'column', height: '100%' }}>
-            <CampaignView />
+            <ErrorBoundary label="CampaignView">
+              <CampaignView />
+            </ErrorBoundary>
           </div>
           {/* AppLayout is only mounted when a map is open — the canvas is heavy. */}
           {activeMapId && <AppLayout />}

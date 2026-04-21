@@ -84,10 +84,14 @@
   --titlebar-h:    36px;
   /* Width of the OS-native window-control area (min / max / close) on
      Windows & Linux. Electron's titleBarOverlay grows with DPI — ~138px
-     at 100%, ~173px at 125%, ~207px at 150% — so we reserve a buffer
-     that covers 125% safely. Used by every drag-region top bar
-     (DmTitleBar, Welcome right rail, Wiki, Compendium). macOS reserves
-     the mirror value on the LEFT for the traffic lights instead. */
+     at 100%, ~173px at 125%, ~207px at 150%. main.tsx overwrites this
+     value at runtime from window.devicePixelRatio so the gutter scales
+     per-monitor (Electron fires `resize` on DPI change). The static
+     176 px below is the fallback for SSR / early-render / macOS where
+     the JS hook doesn't run. Used by every drag-region top bar
+     (DmTitleBar, Welcome right rail, CampaignView, Wiki, Compendium).
+     macOS reserves the mirror value on the LEFT for the traffic
+     lights instead. */
   --titlebar-controls-w: 176px;
   --titlebar-traffic-w:   72px;
 
@@ -1681,10 +1685,11 @@ textarea.input {
   position: relative;
   display: block;
   width: 100%;
-  /* Nearly square aspect so the card roughly matches the source webp
-     ratio — object-fit: cover on a 3:1 strip used to chop off heads and
-     tails of the character art. */
-  aspect-ratio: 16 / 11;
+  /* Strict 1:1 — the bundled SRD token webps are square portraits so
+     forcing the same ratio here means object-fit: contain shows the
+     full art with zero crop. Avoids the 16/11 letterbox problem
+     where heads or tails of taller artwork were chopped off. */
+  aspect-ratio: 1 / 1;
   padding: 0;
   border: none;
   background: var(--bg-elevated);
@@ -1697,11 +1702,11 @@ textarea.input {
 .token-card-hero img {
   width: 100%;
   height: 100%;
-  /* Anchor the crop near the top of the image: monster art typically
-     paints head/body in the upper half and stance/legs below, so a
-     25% vertical bias keeps the recognisable features visible. */
-  object-fit: cover;
-  object-position: center 25%;
+  /* contain (not cover) since the source assets are already 1:1.
+     If a non-square asset slips in we'd rather see the whole image
+     letterboxed than crop part of it away. */
+  object-fit: contain;
+  object-position: center;
   display: block;
 }
 .token-card-hero-glyph {
@@ -1977,6 +1982,567 @@ textarea.input {
   pointer-events: none;
 }
 
+/* ─── Circular image cropper ─────────────────────────────────────────────── */
+/* Modal overlay for react-easy-crop. The stage itself is a fixed 320×320
+   square so the circular mask stays visually square on all window sizes. */
+.circ-cropper-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 10, 16, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.circ-cropper-card {
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+}
+.circ-cropper-title {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+.circ-cropper-stage {
+  position: relative;
+  width: 100%;
+  /* react-easy-crop fills its container — we pin a definite aspect so
+     the round mask never turns oval. */
+  aspect-ratio: 1 / 1;
+  background: #000;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.circ-cropper-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.circ-cropper-zoom-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  min-width: 40px;
+}
+.circ-cropper-zoom {
+  flex: 1;
+}
+.circ-cropper-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-2);
+}
+.circ-cropper-btn {
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  font-family: inherit;
+}
+.circ-cropper-btn:hover {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue-light);
+}
+.circ-cropper-btn-primary {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.circ-cropper-btn-primary:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--text-inverse, #0D1015);
+}
+.circ-cropper-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ─── Wiki list context menu ──────────────────────────────────────────── */
+.wiki-list-menu {
+  z-index: 9700;
+  min-width: 200px;
+  padding: 4px 0;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+.wiki-list-menu-item {
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-family: inherit;
+}
+.wiki-list-menu-item:hover:not(:disabled) { background: var(--bg-overlay); }
+.wiki-list-menu-item:disabled { opacity: 0.5; cursor: not-allowed; }
+.wiki-list-menu-danger { color: var(--danger); }
+.wiki-list-menu-sep {
+  height: 1px;
+  margin: 4px 0;
+  background: var(--border-subtle);
+}
+
+/* ─── Wiki entry form (create / edit custom entries) ────────────────────── */
+.bb-best-list-new {
+  padding: 3px 10px;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  font-family: inherit;
+  text-transform: none;
+}
+.bb-best-list-new:hover {
+  background: var(--accent);
+  color: var(--text-inverse, #0D1015);
+}
+
+.wiki-form-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 10, 16, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 9800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.wiki-form-card {
+  width: 640px;
+  max-width: 100%;
+  max-height: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+.wiki-form-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+.wiki-form-title {
+  flex: 1;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.wiki-form-close {
+  width: 24px; height: 24px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  border-radius: var(--radius-sm);
+}
+.wiki-form-close:hover { background: var(--bg-overlay); color: var(--text-primary); }
+
+.wiki-form-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.wiki-form-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.wiki-form-row-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+.wiki-form-input {
+  padding: 5px 9px;
+  background: var(--bg-base);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+}
+.wiki-form-input:focus { outline: none; border-color: var(--accent-blue); }
+.wiki-form-input:disabled { opacity: 0.6; cursor: not-allowed; }
+.wiki-form-input-mono { font-family: var(--font-mono, monospace); }
+
+.wiki-form-l10n {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  align-items: start;
+  gap: var(--sp-3);
+}
+.wiki-form-l10n-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.wiki-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+}
+.wiki-form-grid-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+.wiki-form-grid .wiki-form-row {
+  grid-template-columns: auto 1fr;
+}
+.wiki-form-grid-6 .wiki-form-row {
+  grid-template-columns: 1fr;
+}
+
+.wiki-form-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 8px 0;
+}
+
+.wiki-form-components {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.wiki-form-components label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+}
+.wiki-form-components .wiki-form-input {
+  flex: 1;
+  min-width: 140px;
+}
+
+.wiki-form-named-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.wiki-form-named-item {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--bg-base);
+}
+.wiki-form-named-head {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.wiki-form-named-remove {
+  width: 22px; height: 22px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.wiki-form-named-remove:hover { background: rgba(239, 68, 68, 0.14); color: var(--danger); border-color: var(--danger); }
+.wiki-form-named-add {
+  padding: 5px 10px;
+  background: var(--bg-elevated);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: center;
+}
+.wiki-form-named-add:hover { border-color: var(--accent-blue); color: var(--accent-blue-light); }
+
+.wiki-form-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  border-top: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+.wiki-form-btn {
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  font-family: inherit;
+}
+.wiki-form-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue-light); }
+.wiki-form-btn-primary {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.wiki-form-btn-primary:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--text-inverse, #0D1015);
+}
+.wiki-form-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ─── Monster → NPC wizard ───────────────────────────────────────────────── */
+.npc-wiz-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 10, 16, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 9500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.npc-wiz-card {
+  width: 520px;
+  max-width: 100%;
+  max-height: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+.npc-wiz-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.npc-wiz-title {
+  flex: 1;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.npc-wiz-close {
+  width: 24px; height: 24px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  border-radius: var(--radius-sm);
+}
+.npc-wiz-close:hover { background: var(--bg-overlay); color: var(--text-primary); }
+.npc-wiz-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+.npc-wiz-row {
+  display: flex;
+  gap: var(--sp-4);
+  align-items: stretch;
+}
+.npc-wiz-preview {
+  width: 96px; height: 96px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-elevated);
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.npc-wiz-preview img { width: 100%; height: 100%; object-fit: cover; }
+.npc-wiz-preview-empty {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.npc-wiz-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.npc-wiz-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.npc-wiz-input {
+  padding: 6px 10px;
+  background: var(--bg-base);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-family: inherit;
+}
+.npc-wiz-input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+}
+.npc-wiz-factions {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.npc-wiz-faction {
+  padding: 4px 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.npc-wiz-faction.active {
+  background: rgba(255, 255, 255, 0.04);
+}
+.npc-wiz-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.npc-wiz-variants {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+  gap: 6px;
+  max-height: 160px;
+  overflow-y: auto;
+  padding: 2px;
+}
+.npc-wiz-variant {
+  aspect-ratio: 1 / 1;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+}
+.npc-wiz-variant img { width: 100%; height: 100%; object-fit: cover; }
+.npc-wiz-variant.selected { border-color: var(--accent-blue); }
+.npc-wiz-upload-row {
+  display: flex;
+  gap: var(--sp-2);
+  align-items: center;
+}
+.npc-wiz-upload-btn,
+.npc-wiz-upload-clear {
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.npc-wiz-upload-btn:hover {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue-light);
+}
+.npc-wiz-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  border-top: 1px solid var(--border-subtle);
+}
+.npc-wiz-btn {
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  font-family: inherit;
+}
+.npc-wiz-btn:hover {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue-light);
+}
+.npc-wiz-btn-primary {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.npc-wiz-btn-primary:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--text-inverse, #0D1015);
+}
+.npc-wiz-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 /* ─── Audio panel ─────────────────────────────────────────────────────────── */
 /* Visual language for the AudioPanel channel strips, SFX grid, and master
    controls — pulled out of inline style soup so the panel matches the rest
@@ -2098,6 +2664,111 @@ textarea.input {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.audio-channel-file-chev {
+  font-size: 10px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.audio-channel-file-wrap {
+  position: relative;
+}
+.audio-channel-playlist-count {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--bg-base);
+}
+/* Playlist dropdown anchored under the current-track button. Shown on
+   right-click or (when the strip already has tracks) on left-click.
+   Flips above the button when the below-variant would overflow the
+   viewport (tight sidebars, floating popover). */
+.audio-channel-playlist {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  padding: 4px 0;
+  max-height: 240px;
+  overflow-y: auto;
+}
+.audio-channel-playlist-down { top: calc(100% + 4px); }
+.audio-channel-playlist-up   { bottom: calc(100% + 4px); }
+.audio-channel-playlist-empty {
+  padding: 8px 12px;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-align: center;
+}
+.audio-channel-playlist-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: var(--text-xs);
+  color: var(--text-primary);
+}
+.audio-channel-playlist-item:hover { background: var(--bg-overlay); }
+.audio-channel-playlist-item.active {
+  background: rgba(59, 130, 246, 0.14);
+  color: var(--accent-blue-light);
+}
+.audio-channel-playlist-item-icon {
+  font-size: 11px;
+  color: var(--text-muted);
+  min-width: 12px;
+}
+.audio-channel-playlist-item.active .audio-channel-playlist-item-icon {
+  color: var(--accent-blue);
+}
+.audio-channel-playlist-item-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.audio-channel-playlist-item-remove {
+  width: 18px; height: 18px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  line-height: 1;
+}
+.audio-channel-playlist-item-remove:hover {
+  background: rgba(239, 68, 68, 0.14);
+  color: var(--danger);
+}
+.audio-channel-playlist-add {
+  display: block;
+  width: calc(100% - 8px);
+  margin: 4px;
+  padding: 5px 8px;
+  background: var(--bg-elevated);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  text-align: center;
+  font-family: inherit;
+}
+.audio-channel-playlist-add:hover:not(:disabled) {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue-light);
+}
+.audio-channel-playlist-add:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 .audio-channel-file:hover:not(:disabled) {
   background: var(--bg-overlay);

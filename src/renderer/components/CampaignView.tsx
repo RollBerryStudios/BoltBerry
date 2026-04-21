@@ -21,14 +21,16 @@ import type { MapRecord } from '@shared/ipc-types'
    Bolt-yellow CTA) so that the whole "between sessions" experience —
    Welcome → Workspace → Map view — shares one visual language. */
 
-type Tab = 'notes' | 'characters' | 'library' | 'handouts' | 'audio'
+type Tab = 'maps' | 'characters' | 'npcs' | 'audio' | 'sfx' | 'handouts' | 'notes'
 
 const TABS: { id: Tab; icon: string; i18nKey: string }[] = [
-  { id: 'notes',      icon: '📝', i18nKey: 'workspace.tabNotes' },
+  { id: 'maps',       icon: '🗺️', i18nKey: 'workspace.tabMaps'       },
   { id: 'characters', icon: '👤', i18nKey: 'workspace.tabCharacters' },
-  { id: 'library',    icon: '📚', i18nKey: 'workspace.tabLibrary' },
-  { id: 'handouts',   icon: '📄', i18nKey: 'workspace.tabHandouts' },
-  { id: 'audio',      icon: '🎵', i18nKey: 'workspace.tabAudio' },
+  { id: 'npcs',       icon: '🧑', i18nKey: 'workspace.tabNpcs'       },
+  { id: 'audio',      icon: '🎵', i18nKey: 'workspace.tabAudio'      },
+  { id: 'sfx',        icon: '🎛', i18nKey: 'workspace.tabSfx'        },
+  { id: 'handouts',   icon: '📄', i18nKey: 'workspace.tabHandouts'   },
+  { id: 'notes',      icon: '📝', i18nKey: 'workspace.tabNotes'      },
 ]
 
 export function CampaignView() {
@@ -44,7 +46,7 @@ export function CampaignView() {
   } = useCampaignStore()
   const { playerConnected, language, toggleLanguage } = useUIStore()
 
-  const [tab, setTab] = useState<Tab>('notes')
+  const [tab, setTab] = useState<Tab>('maps')
   const [mapsLoaded, setMapsLoaded] = useState(false)
   const [importing, setImporting] = useState(false)
 
@@ -321,10 +323,17 @@ export function CampaignView() {
 
           {/* Tab panel — fade-in on switch binds all panels visually. */}
           <div className="bb-ws-panel" key={tab}>
-            {tab === 'notes' && (
-              <div className="bb-ws-panel-inner bb-ws-panel-notes">
-                <NotesPanel />
-              </div>
+            {tab === 'maps' && (
+              <>
+                <PanelHeader title={t('workspace.tabMaps')} hint={t('workspace.hintMaps')} />
+                <div className="bb-ws-panel-inner bb-ws-panel-maps">
+                  <MapsPanel
+                    onImport={handleImportFirstMap}
+                    importing={importing}
+                    onOpen={setActiveMap}
+                  />
+                </div>
+              </>
             )}
             {tab === 'characters' && (
               <>
@@ -334,10 +343,29 @@ export function CampaignView() {
                 </div>
               </>
             )}
-            {tab === 'library' && (
-              <div className="bb-ws-panel-inner bb-ws-panel-library">
-                <TokenLibraryPanel />
-              </div>
+            {tab === 'npcs' && (
+              <>
+                <PanelHeader title={t('workspace.tabNpcs')} hint={t('workspace.hintNpcs')} />
+                <div className="bb-ws-panel-inner bb-ws-panel-library">
+                  <TokenLibraryPanel lockedCategory="npc" />
+                </div>
+              </>
+            )}
+            {tab === 'audio' && (
+              <>
+                <PanelHeader title={t('workspace.tabAudio')} hint={t('workspace.hintAudio')} />
+                <div className="bb-ws-panel-inner bb-ws-panel-audio">
+                  <AudioPanel layout="wide-music" />
+                </div>
+              </>
+            )}
+            {tab === 'sfx' && (
+              <>
+                <PanelHeader title={t('workspace.tabSfx')} hint={t('workspace.hintSfx')} />
+                <div className="bb-ws-panel-inner bb-ws-panel-audio">
+                  <AudioPanel layout="wide-sfx" />
+                </div>
+              </>
             )}
             {tab === 'handouts' && (
               <>
@@ -347,13 +375,10 @@ export function CampaignView() {
                 </div>
               </>
             )}
-            {tab === 'audio' && (
-              <>
-                <PanelHeader title={t('workspace.tabAudio')} hint={t('workspace.hintAudio')} />
-                <div className="bb-ws-panel-inner bb-ws-panel-audio">
-                  <AudioPanel layout="wide" />
-                </div>
-              </>
+            {tab === 'notes' && (
+              <div className="bb-ws-panel-inner bb-ws-panel-notes">
+                <NotesPanel />
+              </div>
             )}
           </div>
         </div>
@@ -501,6 +526,205 @@ function PlayButton({
 // have category/tab strips at the top, so adding another header on top
 // would be visual noise.
 
+// ─── Karten-Tab ──────────────────────────────────────────────────────────
+// Dedicated CampaignView tab for full multi-map management (list + add +
+// open + rename + reorder + delete). The game-view LeftSidebar still has
+// its own compact map list for in-session context; this panel is the
+// content-management home for DMs between sessions.
+
+function MapsPanel({ onImport, importing, onOpen }: {
+  onImport: () => void
+  importing: boolean
+  onOpen: (id: number) => void
+}) {
+  const { t } = useTranslation()
+  const activeMaps = useCampaignStore((s) => s.activeMaps)
+  const setActiveMaps = useCampaignStore((s) => s.setActiveMaps)
+
+  async function handleRename(id: number, name: string) {
+    const trimmed = name.trim()
+    if (!trimmed) return
+    try {
+      await window.electronAPI?.dbRun(
+        'UPDATE maps SET name = ? WHERE id = ?',
+        [trimmed, id],
+      )
+      setActiveMaps(activeMaps.map((m) => m.id === id ? { ...m, name: trimmed } : m))
+    } catch (err) {
+      showToast(t('workspace.mapRenameFailed'), 'error')
+      console.error('[MapsPanel] rename failed:', err)
+    }
+  }
+
+  async function handleDelete(id: number, name: string) {
+    if (!window.confirm(t('workspace.mapDeleteConfirm', { name }))) return
+    try {
+      // CASCADE on campaign_id isn't what we need here — we delete a
+      // single map row. Tokens / drawings / fog tied to this map_id
+      // cascade via their own FKs (ON DELETE CASCADE).
+      await window.electronAPI?.dbRun('DELETE FROM maps WHERE id = ?', [id])
+      setActiveMaps(activeMaps.filter((m) => m.id !== id))
+      showToast(t('workspace.mapDeleteSuccess'), 'success')
+    } catch (err) {
+      showToast(t('workspace.mapDeleteFailed'), 'error')
+      console.error('[MapsPanel] delete failed:', err)
+    }
+  }
+
+  async function handleReorder(id: number, dir: 'up' | 'down') {
+    const idx = activeMaps.findIndex((m) => m.id === id)
+    if (idx < 0) return
+    const swapIdx = dir === 'up' ? idx - 1 : idx + 1
+    if (swapIdx < 0 || swapIdx >= activeMaps.length) return
+    // Swap-and-persist using the existing order_index column. We write
+    // both affected rows in sequence rather than a batch because
+    // better-sqlite3's prepared-statement pipeline is fast enough and
+    // we want the failure mode to be obvious if either UPDATE fails.
+    try {
+      const a = activeMaps[idx]
+      const b = activeMaps[swapIdx]
+      const next = [...activeMaps]
+      next[idx] = { ...b, orderIndex: idx }
+      next[swapIdx] = { ...a, orderIndex: swapIdx }
+      setActiveMaps(next)
+      await window.electronAPI?.dbRun('UPDATE maps SET order_index = ? WHERE id = ?', [swapIdx, a.id])
+      await window.electronAPI?.dbRun('UPDATE maps SET order_index = ? WHERE id = ?', [idx,    b.id])
+    } catch (err) {
+      showToast(t('workspace.mapReorderFailed'), 'error')
+      console.error('[MapsPanel] reorder failed:', err)
+    }
+  }
+
+  if (activeMaps.length === 0) {
+    return (
+      <div className="bb-ws-maps-empty">
+        <div className="bb-ws-maps-empty-glyph">🗺</div>
+        <div className="bb-ws-maps-empty-title">{t('workspace.noMapsTitle')}</div>
+        <div className="bb-ws-maps-empty-sub">{t('workspace.noMapsSub')}</div>
+        <button
+          type="button"
+          className="bb-ws-maps-empty-cta"
+          onClick={onImport}
+          disabled={importing}
+        >
+          {importing ? '…' : t('workspace.importFirstMap')}
+        </button>
+      </div>
+    )
+  }
+
+  return (
+    <div className="bb-ws-maps-grid">
+      {activeMaps.map((map, idx) => (
+        <MapCard
+          key={map.id}
+          map={map}
+          index={idx}
+          total={activeMaps.length}
+          onOpen={() => onOpen(map.id)}
+          onRename={(name) => handleRename(map.id, name)}
+          onDelete={() => handleDelete(map.id, map.name)}
+          onReorder={(dir) => handleReorder(map.id, dir)}
+        />
+      ))}
+      <button
+        type="button"
+        className="bb-ws-maps-add"
+        onClick={onImport}
+        disabled={importing}
+        title={t('workspace.importFirstMap')}
+      >
+        <div className="bb-ws-maps-add-icon">＋</div>
+        <div className="bb-ws-maps-add-label">{importing ? '…' : t('workspace.addMap')}</div>
+      </button>
+    </div>
+  )
+}
+
+function MapCard({ map, index, total, onOpen, onRename, onDelete, onReorder }: {
+  map: MapRecord
+  index: number
+  total: number
+  onOpen: () => void
+  onRename: (name: string) => void
+  onDelete: () => void
+  onReorder: (dir: 'up' | 'down') => void
+}) {
+  const { t } = useTranslation()
+  const [editing, setEditing] = useState(false)
+  const [draft, setDraft] = useState(map.name)
+
+  function commitRename() {
+    setEditing(false)
+    if (draft.trim() && draft.trim() !== map.name) onRename(draft.trim())
+    else setDraft(map.name)
+  }
+
+  return (
+    <div className="bb-ws-map-card">
+      <button
+        type="button"
+        className="bb-ws-map-card-thumb"
+        onClick={onOpen}
+        title={t('workspace.openGameView')}
+      >
+        <MapThumbnail path={map.imagePath} campaignName={map.name} />
+      </button>
+      <div className="bb-ws-map-card-body">
+        {editing ? (
+          <input
+            className="bb-ws-map-card-name-input"
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            onBlur={commitRename}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') commitRename()
+              if (e.key === 'Escape') { setEditing(false); setDraft(map.name) }
+            }}
+            autoFocus
+          />
+        ) : (
+          <button
+            type="button"
+            className="bb-ws-map-card-name"
+            onClick={() => setEditing(true)}
+            title={t('workspace.mapRename')}
+          >
+            {map.name}
+          </button>
+        )}
+        <div className="bb-ws-map-card-meta mono">
+          {map.gridType === 'none'
+            ? t('canvas.hud.noGrid')
+            : `${map.gridSize}px · ${map.ftPerUnit}ft`}
+        </div>
+        <div className="bb-ws-map-card-actions">
+          <button
+            type="button"
+            className="bb-ws-map-card-btn"
+            onClick={() => onReorder('up')}
+            disabled={index === 0}
+            title={t('workspace.mapMoveUp')}
+          >↑</button>
+          <button
+            type="button"
+            className="bb-ws-map-card-btn"
+            onClick={() => onReorder('down')}
+            disabled={index >= total - 1}
+            title={t('workspace.mapMoveDown')}
+          >↓</button>
+          <button
+            type="button"
+            className="bb-ws-map-card-btn bb-ws-map-card-btn-danger"
+            onClick={onDelete}
+            title={t('workspace.mapDelete')}
+          >🗑</button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function PanelHeader({ title, hint }: { title: string; hint: string }) {
   return (
     <div className="bb-ws-panel-header">
@@ -528,7 +752,18 @@ function WorkspaceStyles() {
       /* ── Top bar ──────────────────────────────────────────── */
       .bb-ws-topbar {
         display: flex; align-items: center; gap: var(--sp-4);
-        padding: 0 var(--sp-6); height: 56px;
+        height: 56px;
+        /* Reserve the right-hand gutter for Electron's titleBarOverlay
+           so the Spielansicht / language-toggle cluster never slides
+           under the native min / max / close buttons on Windows. Uses
+           the same --titlebar-controls-w variable as DmTitleBar / Wiki
+           / Compendium top bars so every reserved gutter scales in
+           lockstep on high-DPI displays. On macOS the traffic lights
+           sit on the left — the extra padding there is harmless. */
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: var(--sp-6);
+        padding-right: calc(var(--titlebar-controls-w) + 12px);
         background: rgba(13, 16, 21, 0.85);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
@@ -854,6 +1089,142 @@ function WorkspaceStyles() {
       .bb-ws-panel-library > *,
       .bb-ws-panel-handouts > *,
       .bb-ws-panel-audio > * { flex: 1; min-height: 0; }
+
+      /* ── Karten-Tab grid ─────────────────────────────────────── */
+      .bb-ws-panel-maps {
+        display: flex;
+        flex-direction: column;
+      }
+      .bb-ws-maps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: var(--sp-4);
+        padding: var(--sp-4);
+        overflow-y: auto;
+      }
+      .bb-ws-map-card {
+        display: flex;
+        flex-direction: column;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius);
+        overflow: hidden;
+        transition: border-color var(--transition);
+      }
+      .bb-ws-map-card:hover { border-color: var(--border); }
+      .bb-ws-map-card-thumb {
+        position: relative;
+        aspect-ratio: 16 / 10;
+        padding: 0;
+        border: none;
+        background: var(--bg-base);
+        cursor: pointer;
+        overflow: hidden;
+      }
+      .bb-ws-map-card-thumb:hover { filter: brightness(1.08); }
+      .bb-ws-map-card-body {
+        padding: var(--sp-3);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .bb-ws-map-card-name {
+        padding: 0;
+        background: none;
+        border: none;
+        text-align: left;
+        font-size: var(--text-sm);
+        font-weight: 600;
+        color: var(--text-primary);
+        cursor: text;
+        font-family: inherit;
+      }
+      .bb-ws-map-card-name:hover { color: var(--accent-blue-light); }
+      .bb-ws-map-card-name-input {
+        padding: 4px 6px;
+        background: var(--bg-base);
+        border: 1px solid var(--accent-blue);
+        border-radius: var(--radius-sm);
+        color: var(--text-primary);
+        font-size: var(--text-sm);
+        font-weight: 600;
+        font-family: inherit;
+      }
+      .bb-ws-map-card-meta {
+        font-size: 10px;
+        color: var(--text-muted);
+      }
+      .bb-ws-map-card-actions {
+        display: flex;
+        gap: 4px;
+        margin-top: 4px;
+      }
+      .bb-ws-map-card-btn {
+        flex: 1;
+        padding: 4px 6px;
+        background: var(--bg-base);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-sm);
+        color: var(--text-secondary);
+        cursor: pointer;
+        font-size: var(--text-xs);
+        font-family: inherit;
+      }
+      .bb-ws-map-card-btn:hover:not(:disabled) { border-color: var(--accent-blue); color: var(--accent-blue-light); }
+      .bb-ws-map-card-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+      .bb-ws-map-card-btn-danger:hover:not(:disabled) {
+        border-color: var(--danger);
+        color: var(--danger);
+        background: rgba(239, 68, 68, 0.08);
+      }
+      .bb-ws-maps-add {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 220px;
+        background: transparent;
+        border: 2px dashed var(--border);
+        border-radius: var(--radius);
+        color: var(--text-muted);
+        cursor: pointer;
+        font-family: inherit;
+        transition: border-color var(--transition), color var(--transition);
+      }
+      .bb-ws-maps-add:hover:not(:disabled) {
+        border-color: var(--accent-blue);
+        color: var(--accent-blue-light);
+      }
+      .bb-ws-maps-add:disabled { opacity: 0.5; cursor: not-allowed; }
+      .bb-ws-maps-add-icon { font-size: 36px; line-height: 1; }
+      .bb-ws-maps-add-label { font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; }
+      .bb-ws-maps-empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 48px 24px;
+        gap: 12px;
+        text-align: center;
+      }
+      .bb-ws-maps-empty-glyph { font-size: 56px; opacity: 0.6; }
+      .bb-ws-maps-empty-title { font-size: 18px; font-weight: 700; color: var(--text-primary); }
+      .bb-ws-maps-empty-sub { font-size: var(--text-sm); color: var(--text-muted); max-width: 400px; }
+      .bb-ws-maps-empty-cta {
+        margin-top: 16px;
+        padding: 10px 24px;
+        background: var(--accent);
+        color: var(--text-inverse, #0D1015);
+        border: none;
+        border-radius: var(--radius);
+        cursor: pointer;
+        font-size: var(--text-sm);
+        font-weight: 700;
+        font-family: inherit;
+      }
+      .bb-ws-maps-empty-cta:hover:not(:disabled) { background: var(--accent-hover); }
+      .bb-ws-maps-empty-cta:disabled { opacity: 0.5; cursor: not-allowed; }
     `}</style>
   )
 }

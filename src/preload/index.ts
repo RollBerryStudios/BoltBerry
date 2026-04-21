@@ -6,7 +6,7 @@ import type {
   PlayerMapState,
   PlayerTokenState,
   PlayerPointer,
-  PlayerCamera,
+  PlayerViewport,
   PlayerHandout,
   PlayerOverlay,
   PlayerInitiativeEntry,
@@ -53,6 +53,12 @@ export const dmApi = {
     ipcRenderer.invoke('app:import-pdf', campaignId),
   saveAssetImage: (args: { dataUrl: string; originalName: string; type: 'map' | 'token'; campaignId: number }) =>
     ipcRenderer.invoke('app:save-asset-image', args),
+  savePortrait: (dataUrl: string, oldRelativePath?: string | null): Promise<{ success: boolean; path?: string; error?: string }> =>
+    ipcRenderer.invoke(IPC.SAVE_PORTRAIT, dataUrl, oldRelativePath ?? null),
+  deletePortrait: (relativePath: string): Promise<{ success: boolean; error?: string }> =>
+    ipcRenderer.invoke(IPC.DELETE_PORTRAIT, relativePath),
+  assetCleanup: (dryRun: boolean): Promise<{ success: boolean; count: number; totalBytes: number; paths?: string[]; error?: string }> =>
+    ipcRenderer.invoke(IPC.ASSET_CLEANUP, dryRun),
   exportCampaign: (campaignId: number) =>
     ipcRenderer.invoke('app:export-campaign', campaignId),
   importCampaign: () => ipcRenderer.invoke('app:import-campaign'),
@@ -79,8 +85,8 @@ export const dmApi = {
     ipcRenderer.send('player:full-sync', state),
   sendPointer: (pointer: PlayerPointer) =>
     ipcRenderer.send('player:pointer', pointer),
-  sendCameraView: (camera: PlayerCamera) =>
-    ipcRenderer.send('player:camera', camera),
+  sendPlayerViewport: (viewport: PlayerViewport | null) =>
+    ipcRenderer.send(IPC.PLAYER_VIEWPORT, viewport),
   sendHandout: (handout: PlayerHandout | null) =>
     ipcRenderer.send('player:handout', handout),
   sendOverlay: (overlay: PlayerOverlay | null) =>
@@ -162,6 +168,12 @@ export const dmApi = {
   getSpell: (slug: string): Promise<SpellRecord | null> =>
     ipcRenderer.invoke(IPC.DATA_GET_SPELL, slug),
 
+  // User-authored Wiki entries
+  upsertWikiEntry: (kind: 'monster' | 'item' | 'spell', slug: string, data: unknown): Promise<{ success: boolean; error?: string }> =>
+    ipcRenderer.invoke(IPC.WIKI_UPSERT_USER_ENTRY, kind, slug, data),
+  deleteWikiEntry: (kind: 'monster' | 'item' | 'spell', slug: string): Promise<{ success: boolean; error?: string }> =>
+    ipcRenderer.invoke(IPC.WIKI_DELETE_USER_ENTRY, kind, slug),
+
   // Native application menu bridge
   setMenuLanguage: (lang: 'de' | 'en') =>
     ipcRenderer.invoke(IPC.SET_MENU_LANGUAGE, lang),
@@ -224,10 +236,10 @@ export const playerApi = {
     ipcRenderer.on('player:pointer', handler)
     return () => ipcRenderer.removeListener('player:pointer', handler)
   },
-  onCameraView: (cb: (camera: PlayerCamera) => void) => {
-    const handler = (_: Electron.IpcRendererEvent, camera: PlayerCamera) => cb(camera)
-    ipcRenderer.on('player:camera', handler)
-    return () => ipcRenderer.removeListener('player:camera', handler)
+  onPlayerViewport: (cb: (viewport: PlayerViewport | null) => void) => {
+    const handler = (_: Electron.IpcRendererEvent, viewport: PlayerViewport | null) => cb(viewport)
+    ipcRenderer.on(IPC.PLAYER_VIEWPORT, handler)
+    return () => ipcRenderer.removeListener(IPC.PLAYER_VIEWPORT, handler)
   },
   onHandout: (cb: (handout: PlayerHandout | null) => void) => {
     const handler = (_: Electron.IpcRendererEvent, handout: PlayerHandout | null) => cb(handout)

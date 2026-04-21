@@ -3,6 +3,7 @@ import { Layer, Line, Group, Rect, Text, Circle } from 'react-konva'
 import { useRoomStore } from '../../stores/roomStore'
 import { useUIStore, type ActiveTool } from '../../stores/uiStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
+import { useUndoStore, nextCommandId } from '../../stores/undoStore'
 
 interface Point {
   x: number
@@ -87,20 +88,40 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
         [mapId, 'Neuer Raum', polygon, 'hidden', '#3b82f6'],
       )
       if (result) {
-        addRoom({
-          id: result.lastInsertRowid,
+        let currentId: number = result.lastInsertRowid
+        const makeRoom = (id: number) => ({
+          id,
           mapId,
           name: 'Neuer Raum',
           description: '',
           polygon,
-          visibility: 'hidden',
+          visibility: 'hidden' as const,
           encounterId: null,
           atmosphereHint: null,
           notes: null,
           color: '#3b82f6',
           createdAt: new Date().toISOString(),
         })
-        setSelectedRoomId(result.lastInsertRowid)
+        addRoom(makeRoom(currentId))
+        setSelectedRoomId(currentId)
+
+        useUndoStore.getState().pushCommand({
+          id: nextCommandId(),
+          label: 'Raum',
+          undo: async () => {
+            await window.electronAPI?.dbRun('DELETE FROM rooms WHERE id = ?', [currentId])
+            useRoomStore.getState().removeRoom(currentId)
+          },
+          redo: async () => {
+            const r = await window.electronAPI?.dbRun(
+              'INSERT INTO rooms (map_id, name, polygon, visibility, color) VALUES (?, ?, ?, ?, ?)',
+              [mapId, 'Neuer Raum', polygon, 'hidden', '#3b82f6'],
+            )
+            if (!r) return
+            currentId = r.lastInsertRowid
+            useRoomStore.getState().addRoom(makeRoom(currentId))
+          },
+        })
       }
     } catch (err) {
       console.error('[RoomLayer] create room failed:', err)

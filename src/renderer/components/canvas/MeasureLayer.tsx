@@ -1,5 +1,5 @@
-import { useRef, useState, useEffect, RefObject } from 'react'
-import { Layer, Line, Circle, Text } from 'react-konva'
+import { useState, useEffect, RefObject } from 'react'
+import { Layer, Line, Circle, Rect, Text } from 'react-konva'
 import Konva from 'konva'
 import { useUIStore } from '../../stores/uiStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
@@ -8,6 +8,7 @@ interface MeasureLayerProps {
   stageRef: RefObject<Konva.Stage>
   gridSize: number
   ftPerUnit: number
+  canvasSize: { width: number; height: number }
 }
 
 interface MeasureState {
@@ -20,7 +21,7 @@ interface MeasureState {
 
 const MEASURE_TOOLS = new Set(['measure-line', 'measure-circle', 'measure-cone'])
 
-export function MeasureLayer({ stageRef, gridSize, ftPerUnit }: MeasureLayerProps) {
+export function MeasureLayer({ stageRef, gridSize, ftPerUnit, canvasSize }: MeasureLayerProps) {
   const activeTool = useUIStore((s) => s.activeTool)
   const scale = useMapTransformStore((s) => s.scale)
   const offsetX = useMapTransformStore((s) => s.offsetX)
@@ -113,6 +114,19 @@ export function MeasureLayer({ stageRef, gridSize, ftPerUnit }: MeasureLayerProp
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
+      {/* Full-canvas transparent hit target so empty clicks reach the
+          layer's mouse handlers. Konva only dispatches events on
+          shapes that are listening; without this, nothing on the
+          stage carries an event when the user just clicks empty
+          terrain to start measuring. */}
+      <Rect
+        x={0}
+        y={0}
+        width={canvasSize.width}
+        height={canvasSize.height}
+        fill="rgba(0,0,0,0.001)"
+        listening
+      />
       {measure && activeTool === 'measure-line' && (
         <>
           <Line points={[sx, sy, ex, ey]} stroke="#f59e0b" strokeWidth={2}

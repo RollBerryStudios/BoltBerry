@@ -4,6 +4,8 @@ import type { AppLanguage } from '../../stores/uiStore'
 import type { MonsterIndexEntry } from '@shared/ipc-types'
 import { localized, pickName, typeLabel, tokenTint } from './util'
 import { MonsterDetail } from './MonsterDetail'
+import { WikiEntryForm } from './WikiEntryForm'
+import { WikiListMenu } from './WikiListMenu'
 
 /* Monster list + detail pane. The list loads once from DATA_LIST_MONSTERS;
    the detail is fetched on-demand via DATA_GET_MONSTER and cached so
@@ -26,6 +28,12 @@ export function MonstersTab({
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null)
   const [crFilter, setCrFilter] = useState<string>('')
   const [typeFilter, setTypeFilter] = useState<string>('')
+  const [sourceFilter, setSourceFilter] = useState<'' | 'srd' | 'user'>('')
+  const [creatingNew, setCreatingNew] = useState(false)
+  const [menuState, setMenuState] = useState<{ x: number; y: number; entry: MonsterIndexEntry } | null>(null)
+  // Tick to force re-fetch after a clone / delete without rewriting the
+  // whole list-load effect.
+  const [refreshTick, setRefreshTick] = useState(0)
 
   useEffect(() => {
     let alive = true
@@ -39,7 +47,7 @@ export function MonstersTab({
       }
     })()
     return () => { alive = false }
-  }, [])
+  }, [refreshTick])
 
   // Distinct CR values actually present — keeps the CR filter dropdown
   // honest when the upstream dataset grows or shrinks.
@@ -64,6 +72,8 @@ export function MonstersTab({
       .filter((m) => {
         if (crFilter && m.challenge !== crFilter) return false
         if (typeFilter && m.type.en !== typeFilter) return false
+        if (sourceFilter === 'user' && !m.userOwned) return false
+        if (sourceFilter === 'srd'  &&  m.userOwned) return false
         if (!q) return true
         const name = pickName(m, language).toLowerCase()
         return name.includes(q)
@@ -72,12 +82,12 @@ export function MonstersTab({
           || m.type.de.toLowerCase().includes(q)
           || m.challenge.includes(q)
       })
-      .sort((a, b) => {
-        const cr = crValue(a.challenge) - crValue(b.challenge)
-        if (cr !== 0) return cr
-        return pickName(a, language).localeCompare(pickName(b, language))
-      })
-  }, [index, query, language, crFilter, typeFilter])
+      // Default alphabetical sort per locale — consistent with Items
+      // and Spells tabs. CR is a secondary filter chip, not a sort
+      // axis, so starting with a name-sorted list makes scanning for
+      // a specific monster predictable.
+      .sort((a, b) => pickName(a, language).localeCompare(pickName(b, language), language))
+  }, [index, query, language, crFilter, typeFilter, sourceFilter])
 
   // Apply a deep-link target the first time the index loads. Forces the
   // selection even if the entry is filtered out — caller can still tell
@@ -128,11 +138,21 @@ export function MonstersTab({
               label: typeLabel(typeEn, language, index),
             }))}
           />
-          {(crFilter || typeFilter) && (
+          <FilterPill
+            value={sourceFilter}
+            onChange={(v) => setSourceFilter(v as '' | 'srd' | 'user')}
+            label={t('bestiary.filterSource')}
+            allLabel={t('bestiary.filterAll')}
+            options={[
+              { value: 'srd',  label: t('library.sourceSrd') },
+              { value: 'user', label: t('library.sourceUser') },
+            ]}
+          />
+          {(crFilter || typeFilter || sourceFilter) && (
             <button
               type="button"
               className="bb-best-filter-clear"
-              onClick={() => { setCrFilter(''); setTypeFilter('') }}
+              onClick={() => { setCrFilter(''); setTypeFilter(''); setSourceFilter('') }}
             >
               ✕ {t('bestiary.clearFilters')}
             </button>
@@ -140,8 +160,28 @@ export function MonstersTab({
         </div>
 
         <div className="bb-best-listcount">
-          {t('bestiary.countMonsters', { count: filtered.length })}
+          <span>{t('bestiary.countMonsters', { count: filtered.length })}</span>
+          <button
+            type="button"
+            className="bb-best-list-new"
+            onClick={() => setCreatingNew(true)}
+            title={t('wikiForm.new_monster')}
+          >
+            + {t('wikiForm.new')}
+          </button>
         </div>
+
+        {creatingNew && (
+          <WikiEntryForm
+            kind="monster"
+            onClose={() => setCreatingNew(false)}
+            onSaved={(slug) => {
+              setCreatingNew(false)
+              setRefreshTick((n) => n + 1)
+              setSelectedSlug(slug)
+            }}
+          />
+        )}
 
         <ul className="bb-best-list">
           {filtered.map((m) => {
@@ -158,11 +198,22 @@ export function MonstersTab({
                       : 'bb-best-list-item'
                   }
                   onClick={() => handleSelect(m.slug)}
+                  onContextMenu={(e) => {
+                    e.preventDefault()
+                    setMenuState({ x: e.clientX, y: e.clientY, entry: m })
+                  }}
                   style={{ borderLeftColor: tint }}
                 >
                   <span className="bb-best-list-chip mono">CR {m.challenge}</span>
                   <span className="bb-best-list-body">
-                    <span className="bb-best-list-name display">{displayName}</span>
+                    <span className="bb-best-list-name display">
+                      {displayName}
+                      {m.userOwned && (
+                        <span className="bb-best-user-badge" title={t('library.sourceUser')}>
+                          ★
+                        </span>
+                      )}
+                    </span>
                     <span className="bb-best-list-meta">{typeText}</span>
                   </span>
                   <span className="bb-best-list-count mono" title={t('bestiary.tokenCount')}>
@@ -180,11 +231,39 @@ export function MonstersTab({
 
       <main className="bb-best-detailpane">
         {selectedSlug ? (
-          <MonsterDetail slug={selectedSlug} language={language} />
+          <MonsterDetail
+            slug={selectedSlug}
+            language={language}
+            onUserEntryChanged={(nextSlug) => {
+              // After a clone / edit / delete, the index needs to re-fetch
+              // so the list + badges stay truthful. If the caller handed
+              // us a follow-up slug (clone target), select it so the DM
+              // lands on their new entry immediately.
+              setRefreshTick((n) => n + 1)
+              if (nextSlug) setSelectedSlug(nextSlug)
+              else if (selectedSlug && !index?.some((m) => m.slug === selectedSlug)) {
+                setSelectedSlug(null)
+              }
+            }}
+          />
         ) : (
           <EmptyDetail label={t('bestiary.noSelection')} />
         )}
       </main>
+
+      {menuState && (
+        <WikiListMenu
+          kind="monster"
+          language={language}
+          anchor={{ x: menuState.x, y: menuState.y }}
+          entry={menuState.entry}
+          onClose={() => setMenuState(null)}
+          onChanged={(nextSlug) => {
+            setRefreshTick((n) => n + 1)
+            if (nextSlug) setSelectedSlug(nextSlug)
+          }}
+        />
+      )}
     </div>
   )
 }

@@ -362,6 +362,7 @@ interface CampaignExport {
     features: string; equipment: string; attacks: string; spells: string; spellSlots: string
     personality: string; ideals: string; bonds: string; flaws: string
     backstory: string; notes: string; inspiration: number; passivePerception: number
+    portraitPath: string | null
     createdAt: string; updatedAt: string
   }>
   audioBoards: Array<{
@@ -454,6 +455,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
     personality: cs.personality, ideals: cs.ideals, bonds: cs.bonds, flaws: cs.flaws,
     backstory: cs.backstory, notes: cs.notes,
     inspiration: cs.inspiration, passivePerception: cs.passive_perception,
+    portraitPath: cs.portrait_path ?? null,
     createdAt: cs.created_at, updatedAt: cs.updated_at,
   }))
 
@@ -592,6 +594,15 @@ function collectAssetPaths(data: CampaignExport): string[] {
   for (const b of data.audioBoards ?? []) {
     for (const s of b.slots) if (s.audioPath) paths.push(s.audioPath)
   }
+  // Character portraits live under `assets/portrait/` — bundle them
+  // alongside tokens/maps so an exported campaign carries the PNGs.
+  // Skip data-URL legacy rows (pre-R3) — they're inline in the JSON
+  // already and aren't a separate file on disk to zip up.
+  for (const cs of data.characterSheets ?? []) {
+    if (cs.portraitPath && !cs.portraitPath.startsWith('data:')) {
+      paths.push(cs.portraitPath)
+    }
+  }
   return paths
 }
 
@@ -609,6 +620,11 @@ function remapPaths(data: CampaignExport, pathMap: Map<string, string>) {
   for (const b of data.audioBoards ?? []) {
     for (const s of b.slots) {
       if (s.audioPath) s.audioPath = pathMap.get(s.audioPath) ?? s.audioPath
+    }
+  }
+  for (const cs of data.characterSheets ?? []) {
+    if (cs.portraitPath && !cs.portraitPath.startsWith('data:')) {
+      cs.portraitPath = pathMap.get(cs.portraitPath) ?? cs.portraitPath
     }
   }
 }
@@ -721,8 +737,9 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
           str, dex, con, int_score, wis, cha, hp_max, hp_current, hp_temp, ac, speed,
           initiative_bonus, proficiency_bonus, hit_dice, death_saves_success, death_saves_failure,
           saving_throws, skills, languages, proficiencies, features, equipment, attacks, spells, spell_slots,
-          personality, ideals, bonds, flaws, backstory, notes, inspiration, passive_perception, created_at, updated_at)
-         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+          personality, ideals, bonds, flaws, backstory, notes, inspiration, passive_perception,
+          portrait_path, created_at, updated_at)
+         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
       ).run(
         campaignId, remappedTokenId, cs.name, cs.race, cs.className, cs.subclass, cs.level,
         cs.background, cs.alignment, cs.experience,
@@ -734,6 +751,7 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
         cs.features, cs.equipment, cs.attacks, cs.spells, cs.spellSlots,
         cs.personality, cs.ideals, cs.bonds, cs.flaws,
         cs.backstory, cs.notes, cs.inspiration, cs.passivePerception,
+        cs.portraitPath ?? null,
         cs.createdAt ?? new Date().toISOString(), cs.updatedAt ?? new Date().toISOString(),
       )
     }

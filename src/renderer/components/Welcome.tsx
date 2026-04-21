@@ -938,12 +938,17 @@ function WelcomeStyles() {
       .bb-welcome-right-top {
         display: flex; justify-content: flex-end;
         align-items: center;
-        gap: 10px;
+        flex-wrap: wrap;
+        row-gap: 6px;
+        gap: 8px;
         /* Reserve room on the right for Electron's titleBarOverlay so
            the DE / EN pill does not slide under the native min / max /
            close buttons. Shares the same --titlebar-controls-w variable
            as DmTitleBar / Wiki / Compendium top bars so they all scale
-           together on high-DPI Windows. */
+           together on high-DPI Windows.
+           flex-wrap+row-gap let the buttons drop to a second row when
+           the pane is narrow (high-DPI Windows) instead of overflowing
+           and clipping the language pill. */
         padding-top: 22px;
         padding-right: calc(var(--titlebar-controls-w) + 12px);
         padding-bottom: 22px;
@@ -955,6 +960,7 @@ function WelcomeStyles() {
       }
       .bb-welcome-compendium-btn {
         display: inline-flex; align-items: center; gap: 6px;
+        flex-shrink: 0;
         padding: 5px 10px;
         background: transparent;
         border: 1px solid var(--border);
@@ -974,6 +980,13 @@ function WelcomeStyles() {
         border: 1px solid var(--border);
         border-radius: var(--radius-sm);
         overflow: hidden;
+        /* Never shrink below the intrinsic DE | EN width — with
+           default flex-shrink:1 the pill was being squeezed to a 20 px
+           vertical sliver at high-DPI window sizes because the four
+           neighbouring buttons claimed the remaining row. Pinning both
+           here and on .bb-welcome-compendium-btn forces overflow to
+           wrap via the row's flex-wrap instead of collapsing anyone. */
+        flex-shrink: 0;
       }
       .bb-welcome-lang button {
         padding: 4px 10px;

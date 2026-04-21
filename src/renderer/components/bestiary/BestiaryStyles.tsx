@@ -215,7 +215,9 @@ export function BestiaryStyles() {
         cursor: pointer;
       }
       .bb-best-listcount {
-        padding: 8px var(--sp-4) 6px;
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 8px;
+        padding: 6px var(--sp-4);
         font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
         font-weight: 700;
         color: var(--text-muted);
@@ -419,6 +421,26 @@ export function BestiaryStyles() {
         background: var(--accent);
         color: var(--text-inverse);
         border-color: transparent;
+      }
+      .bb-best-action-danger {
+        color: var(--danger);
+        border-color: rgba(239, 68, 68, 0.4);
+      }
+      .bb-best-action-danger:hover:not(:disabled) {
+        background: rgba(239, 68, 68, 0.14);
+        border-color: var(--danger);
+        color: var(--danger);
+      }
+      /* "Eigene" star next to user-authored entries. Sits inline with
+         the name so scanning the list reveals custom entries at a
+         glance without claiming a whole badge column. */
+      .bb-best-user-badge {
+        display: inline-block;
+        margin-left: 6px;
+        color: var(--accent);
+        font-size: 11px;
+        line-height: 1;
+        vertical-align: middle;
       }
       .bb-best-action-primary:hover:not(:disabled) {
         background: var(--accent-hover);

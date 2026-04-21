@@ -51,6 +51,18 @@ export interface BestiaryTarget {
   slug: string
 }
 
+/** Player Control Mode rectangle — a frame drawn in map-image
+ *  coordinates that defines exactly what the player window renders.
+ *  See `PlayerViewport` in ipc-types for the wire format; the two
+ *  shapes are intentionally identical. */
+export interface PlayerViewportRect {
+  cx: number
+  cy: number
+  w: number
+  h: number
+  rotation: number
+}
+
 const FLOATING_PANELS: ReadonlySet<string> = new Set(['audio', 'overlay', 'dice'])
 export function isFloatingPanel(id: string): id is FloatingPanel {
   return FLOATING_PANELS.has(id)
@@ -91,7 +103,16 @@ interface UIState {
   atmosphereImagePath: string | null
   selectedTokenId: number | null
   selectedTokenIds: number[]
-  cameraFollowDM: boolean
+  /** Player Control Mode — when true, the GM canvas renders the
+   *  dashed viewport rectangle and Ctrl-based gestures manipulate it
+   *  instead of the DM's own camera. This mode supersedes the legacy
+   *  Camera Sync feature (📡 follow + 📺 one-shot send) which has
+   *  been removed entirely. */
+  playerViewportMode: boolean
+  /** The viewport rectangle itself. Null when the mode has never been
+   *  engaged on the active map (the toolbar toggle seeds a default on
+   *  first entry). Resets to null on map switch. */
+  playerViewport: PlayerViewportRect | null
   gridSnap: boolean
   showMinimap: boolean
   drawColor: string
@@ -147,7 +168,9 @@ interface UIState {
   toggleTokenInSelection: (id: number) => void
   setSelectedTokens: (ids: number[]) => void
   clearTokenSelection: () => void
-  toggleCameraFollow: () => void
+  setPlayerViewportMode: (on: boolean) => void
+  setPlayerViewport: (rect: PlayerViewportRect | null) => void
+  patchPlayerViewport: (patch: Partial<PlayerViewportRect>) => void
   toggleGridSnap: () => void
   toggleMinimap: () => void
   setDrawColor: (color: string) => void
@@ -201,7 +224,8 @@ export const useUIStore = create<UIState>((set) => ({
   atmosphereImagePath: null,
   selectedTokenId: null,
   selectedTokenIds: [],
-  cameraFollowDM: false,
+  playerViewportMode: false,
+  playerViewport: null,
   gridSnap: true,
   showMinimap: false,
   drawColor: '#ff6b6b',
@@ -315,7 +339,17 @@ export const useUIStore = create<UIState>((set) => ({
     }),
   setSelectedTokens: (ids) => set({ selectedTokenIds: ids, selectedTokenId: ids[0] ?? null }),
   clearTokenSelection: () => set({ selectedTokenIds: [], selectedTokenId: null }),
-  toggleCameraFollow: () => set((s) => ({ cameraFollowDM: !s.cameraFollowDM })),
+  setPlayerViewportMode: (on) => set((s) => ({
+    playerViewportMode: on,
+    // Leaving the mode retires the rect so the next activation seeds a
+    // fresh default rather than resuming a stale one (the rect may
+    // reference a map the DM has since switched away from).
+    playerViewport: on ? s.playerViewport : null,
+  })),
+  setPlayerViewport: (rect) => set({ playerViewport: rect }),
+  patchPlayerViewport: (patch) => set((s) => ({
+    playerViewport: s.playerViewport ? { ...s.playerViewport, ...patch } : s.playerViewport,
+  })),
   toggleGridSnap: () => set((s) => ({ gridSnap: !s.gridSnap })),
   toggleMinimap: () => set((s) => ({ showMinimap: !s.showMinimap })),
   setDrawColor: (drawColor) => set({ drawColor }),

@@ -1,4 +1,4 @@
-import { RefObject, useState, useRef, useMemo, useCallback, useEffect, memo } from 'react'
+import { RefObject, useState, useRef, useMemo, useCallback, useEffect, useLayoutEffect, memo } from 'react'
 import { Layer, Group, Image as KonvaImage, Rect, Text, Circle, Line } from 'react-konva'
 import { Html } from 'react-konva-utils'
 import Konva from 'konva'
@@ -109,6 +109,30 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   // Ref-based context menu visibility for the wheel handler (avoids re-registering on every open/close)
   const contextMenuVisibleRef = useRef(false)
   contextMenuVisibleRef.current = contextMenu.visible
+
+  // ── Viewport clamping for the context menu ─────────────────────────────────
+  // The menu is position:fixed at the click's raw (x, y). When the click
+  // happens near the right / bottom edge, the menu can spill off-screen.
+  // We measure it after mount and shift it back into view, with an 8 px
+  // safety margin so the rounded corners don't touch the viewport edge.
+  // While the measurement hasn't happened yet we hide the menu via
+  // `visibility:hidden` to avoid a single-frame flash at the raw coords.
+  const menuRef = useRef<HTMLDivElement>(null)
+  const [menuClamp, setMenuClamp] = useState<{ x: number; y: number } | null>(null)
+  useLayoutEffect(() => {
+    if (!contextMenu.visible) { setMenuClamp(null); return }
+    const el = menuRef.current
+    if (!el) return
+    const rect = el.getBoundingClientRect()
+    const PAD = 8
+    const vw = window.innerWidth
+    const vh = window.innerHeight
+    let x = contextMenu.x
+    let y = contextMenu.y
+    if (x + rect.width  > vw - PAD) x = Math.max(PAD, vw - rect.width  - PAD)
+    if (y + rect.height > vh - PAD) y = Math.max(PAD, vh - rect.height - PAD)
+    setMenuClamp({ x, y })
+  }, [contextMenu.visible, contextMenu.x, contextMenu.y, contextMenu.tokenId, markerSubmenuId, submenuType])
 
   // Defined early so the wheel useEffect below can safely list it as a dependency.
   const closeContextMenu = useCallback(() => {
@@ -909,16 +933,20 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
               divProps={{ style: { position: 'absolute', top: 0, left: 0, pointerEvents: 'none' } }}
             >
               <div
+                ref={menuRef}
                 data-token-context-menu
                 style={{
                   position: 'fixed',
-                  left: contextMenu.x,
-                  top: contextMenu.y,
+                  left: menuClamp ? menuClamp.x : contextMenu.x,
+                  top: menuClamp ? menuClamp.y : contextMenu.y,
+                  visibility: menuClamp ? 'visible' : 'hidden',
                   background: 'var(--bg-elevated)',
                   border: '1px solid var(--border)',
                   borderRadius: 'var(--radius)',
                   padding: '4px 0',
-                  minWidth: 160,
+                  minWidth: 200,
+                  maxHeight: 'calc(100vh - 16px)',
+                  overflowY: 'auto',
                   boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
                   zIndex: 9999,
                   pointerEvents: 'all',
@@ -966,10 +994,10 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     { label: '🛡 AC bearbeiten', action: () => startEditAc(token) },
                     { label: '📝 Notiz', action: () => handleEditNotes(token) },
                     null,
-                    { label: '💚 Heilen (+5 HP)', action: () => { handleUpdate(token.id, { hpCurrent: Math.min((token.hpMax || 0) || 999, (token.hpCurrent || 0) + 5) }); closeContextMenu() } },
-                    { label: '🩸 Schaden (-5 HP)', action: () => { handleUpdate(token.id, { hpCurrent: Math.max(0, (token.hpCurrent || 0) - 5) }); closeContextMenu() } },
-                    { label: '💚 Heilen (+1 HP)', action: () => { handleUpdate(token.id, { hpCurrent: Math.min((token.hpMax || 0) || 999, (token.hpCurrent || 0) + 1) }); closeContextMenu() } },
-                    { label: '🩸 Schaden (-1 HP)', action: () => { handleUpdate(token.id, { hpCurrent: Math.max(0, (token.hpCurrent || 0) - 1) }); closeContextMenu() } },
+                    // Inline HP chip row — replaces four full-width rows with
+                    // one compact strip. Keeps all four quick-adjust actions
+                    // discoverable without pushing the menu off-screen.
+                    { kind: 'hp-chips' },
                     null,
                     { label: '⚔️ Zustände', action: null, submenu: true, submenuType: 'status' },
                     { label: '➕ Vorteil', action: () => toggleAdvantage(token, true) },
@@ -995,6 +1023,39 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                   return menuItems.map((item, i) => {
                     if (item === null) {
                       return <div key={i} style={{ height: 1, background: 'var(--border-subtle)', margin: '4px 0' }} />
+                    }
+                    if (item.kind === 'hp-chips') {
+                      const adjustHp = (delta: number) => {
+                        const max = (token.hpMax || 0) || 999
+                        const next = delta > 0
+                          ? Math.min(max, (token.hpCurrent || 0) + delta)
+                          : Math.max(0,   (token.hpCurrent || 0) + delta)
+                        handleUpdate(token.id, { hpCurrent: next })
+                        closeContextMenu()
+                      }
+                      const chipStyle = (heal: boolean): React.CSSProperties => ({
+                        flex: 1,
+                        padding: '4px 0',
+                        background: 'var(--bg-base)',
+                        border: `1px solid ${heal ? 'rgba(34,197,94,0.35)' : 'rgba(239,68,68,0.35)'}`,
+                        borderRadius: 4,
+                        color: heal ? '#22c55e' : '#ef4444',
+                        fontSize: 'var(--text-xs)',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        fontFamily: 'inherit',
+                      })
+                      return (
+                        <div key={i} style={{ padding: '2px 8px' }}>
+                          <div style={{ fontSize: 10, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 3 }}>HP</div>
+                          <div style={{ display: 'flex', gap: 4 }}>
+                            <button style={chipStyle(false)} title="−5 HP" onClick={() => adjustHp(-5)}>−5</button>
+                            <button style={chipStyle(false)} title="−1 HP" onClick={() => adjustHp(-1)}>−1</button>
+                            <button style={chipStyle(true)}  title="+1 HP" onClick={() => adjustHp(1)}>+1</button>
+                            <button style={chipStyle(true)}  title="+5 HP" onClick={() => adjustHp(5)}>+5</button>
+                          </div>
+                        </div>
+                      )
                     }
                     if (item.submenu) {
                       const isSubOpen = markerSubmenuId === token.id && submenuType === item.submenuType

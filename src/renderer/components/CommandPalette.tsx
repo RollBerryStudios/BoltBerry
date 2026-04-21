@@ -84,15 +84,6 @@ function buildCommands(t: (k: string) => string): Command[] {
 
     // ── Player window
     { id: 'player.open',         labelKey: 'palette.openPlayerWindow',   groupKey: 'palette.groupPlayer', shortcut: 'Ctrl+P', keywords: 'player window spielerfenster öffnen', run: () => { window.electronAPI?.openPlayerWindow?.() } },
-    { id: 'player.shareCamera',  labelKey: 'palette.shareCameraOnce',    groupKey: 'palette.groupPlayer', keywords: 'share camera kamera teilen snap', run: () => {
-      const { scale, offsetX, offsetY, fitScale, canvasW, canvasH } = cam()
-      if (!fitScale || !canvasW || !canvasH) return
-      const imageCenterX = (canvasW / 2 - offsetX) / scale
-      const imageCenterY = (canvasH / 2 - offsetY) / scale
-      const relZoom = scale / fitScale
-      window.electronAPI?.sendCameraView?.({ imageCenterX, imageCenterY, relZoom })
-    } },
-    { id: 'player.followCamera', labelKey: 'palette.toggleCameraFollow', groupKey: 'palette.groupPlayer', keywords: 'follow camera kamera folgen', run: () => ui().toggleCameraFollow() },
   ].map((c) => ({ ...c, keywords: `${c.keywords} ${t(c.labelKey).toLowerCase()}`.toLowerCase() }))
 }
 

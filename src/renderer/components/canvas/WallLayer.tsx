@@ -84,17 +84,40 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
 
     if (dx > minLen || dy > minLen) {
       if (!window.electronAPI || !activeMapId) { setDrawingStart(null); setPreviewEnd(null); return }
-      const result = await window.electronAPI.dbRun(
-        'INSERT INTO walls (map_id, x1, y1, x2, y2, wall_type, door_state) VALUES (?, ?, ?, ?, ?, ?, ?)',
-        [activeMapId, drawingStart.x, drawingStart.y, mapPos.x, mapPos.y, wallTypeForNew, wallTypeForNew === 'wall' ? 'closed' : 'closed']
-      )
-      addWall({
-        id: result.lastInsertRowid,
+      // Freeze the segment + map id in closure-locals so the undo
+      // command survives later state changes (map switch clears the
+      // undo stack anyway, but the closure-locals guard against
+      // subtle reorder cases).
+      const segment = {
         mapId: activeMapId,
         x1: drawingStart.x, y1: drawingStart.y,
-        x2: mapPos.x, y2: mapPos.y,
+        x2: mapPos.x,       y2: mapPos.y,
         wallType: wallTypeForNew,
-        doorState: 'closed',
+        doorState: 'closed' as const,
+      }
+      const result = await window.electronAPI.dbRun(
+        'INSERT INTO walls (map_id, x1, y1, x2, y2, wall_type, door_state) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [segment.mapId, segment.x1, segment.y1, segment.x2, segment.y2, segment.wallType, segment.doorState]
+      )
+      let currentId: number = result.lastInsertRowid
+      addWall({ id: currentId, ...segment })
+
+      useUndoStore.getState().pushCommand({
+        id: nextCommandId(),
+        label: wallTypeForNew === 'door' ? 'Tür' : 'Wand',
+        undo: async () => {
+          await window.electronAPI?.dbRun('DELETE FROM walls WHERE id = ?', [currentId])
+          useWallStore.getState().removeWall(currentId)
+        },
+        redo: async () => {
+          const r = await window.electronAPI?.dbRun(
+            'INSERT INTO walls (map_id, x1, y1, x2, y2, wall_type, door_state) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [segment.mapId, segment.x1, segment.y1, segment.x2, segment.y2, segment.wallType, segment.doorState]
+          )
+          if (!r) return
+          currentId = r.lastInsertRowid
+          useWallStore.getState().addWall({ id: currentId, ...segment })
+        },
       })
     }
 

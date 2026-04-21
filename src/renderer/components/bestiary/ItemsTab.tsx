@@ -6,7 +6,11 @@ import { localized, pickName, titleCase } from './util'
 import { EmptyDetail } from './MonstersTab'
 import { itemHandout } from './actions'
 import { useUIStore } from '../../stores/uiStore'
+import { useCampaignStore } from '../../stores/campaignStore'
 import { showToast } from '../shared/Toast'
+import { WikiEntryControls } from './WikiEntryControls'
+import { WikiEntryForm } from './WikiEntryForm'
+import { WikiListMenu } from './WikiListMenu'
 
 const RARITY_ORDER: Record<string, number> = {
   MUNDANE: -1, COMMON: 0, UNCOMMON: 1, RARE: 2, VERY_RARE: 3, LEGENDARY: 4, ARTIFACT: 5,
@@ -61,6 +65,10 @@ export function ItemsTab({
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null)
   const [categoryFilter, setCategoryFilter] = useState<string>('')
   const [rarityFilter, setRarityFilter] = useState<string>('')
+  const [sourceFilter, setSourceFilter] = useState<'' | 'srd' | 'user'>('')
+  const [creatingNew, setCreatingNew] = useState(false)
+  const [menuState, setMenuState] = useState<{ x: number; y: number; entry: ItemIndexEntry } | null>(null)
+  const [refreshTick, setRefreshTick] = useState(0)
 
   useEffect(() => {
     let alive = true
@@ -74,7 +82,7 @@ export function ItemsTab({
       }
     })()
     return () => { alive = false }
-  }, [])
+  }, [refreshTick])
 
   const availableCategories = useMemo(() => {
     if (!index) return []
@@ -97,18 +105,19 @@ export function ItemsTab({
       .filter((it) => {
         if (categoryFilter && it.category.en !== categoryFilter) return false
         if (rarityFilter && it.rarity.en !== rarityFilter) return false
+        if (sourceFilter === 'user' && !it.userOwned) return false
+        if (sourceFilter === 'srd'  &&  it.userOwned) return false
         if (!q) return true
         const name = pickName(it, language).toLowerCase()
         return name.includes(q)
           || it.slug.includes(q)
           || it.category.en.toLowerCase().includes(q)
       })
-      .sort((a, b) => {
-        const r = (RARITY_ORDER[a.rarity.en] ?? 99) - (RARITY_ORDER[b.rarity.en] ?? 99)
-        if (r !== 0) return r
-        return pickName(a, language).localeCompare(pickName(b, language))
-      })
-  }, [index, query, language, categoryFilter, rarityFilter])
+      // Default alphabetical sort per locale. Rarity remains a filter
+      // chip up top but no longer the primary sort axis — DMs scan for
+      // items by name more often than by rarity tier.
+      .sort((a, b) => pickName(a, language).localeCompare(pickName(b, language), language))
+  }, [index, query, language, categoryFilter, rarityFilter, sourceFilter])
 
   useEffect(() => {
     if (!initialSlug || !index) return
@@ -150,11 +159,19 @@ export function ItemsTab({
               ))}
             </select>
           </label>
-          {(categoryFilter || rarityFilter) && (
+          <label className="bb-best-filter">
+            <span>{t('bestiary.filterSource')}</span>
+            <select value={sourceFilter} onChange={(e) => setSourceFilter(e.target.value as '' | 'srd' | 'user')}>
+              <option value="">{t('bestiary.filterAll')}</option>
+              <option value="srd">{t('library.sourceSrd')}</option>
+              <option value="user">{t('library.sourceUser')}</option>
+            </select>
+          </label>
+          {(categoryFilter || rarityFilter || sourceFilter) && (
             <button
               type="button"
               className="bb-best-filter-clear"
-              onClick={() => { setCategoryFilter(''); setRarityFilter('') }}
+              onClick={() => { setCategoryFilter(''); setRarityFilter(''); setSourceFilter('') }}
             >
               ✕ {t('bestiary.clearFilters')}
             </button>
@@ -162,8 +179,28 @@ export function ItemsTab({
         </div>
 
         <div className="bb-best-listcount">
-          {t('bestiary.countItems', { count: filtered.length })}
+          <span>{t('bestiary.countItems', { count: filtered.length })}</span>
+          <button
+            type="button"
+            className="bb-best-list-new"
+            onClick={() => setCreatingNew(true)}
+            title={t('wikiForm.new_item')}
+          >
+            + {t('wikiForm.new')}
+          </button>
         </div>
+
+        {creatingNew && (
+          <WikiEntryForm
+            kind="item"
+            onClose={() => setCreatingNew(false)}
+            onSaved={(slug) => {
+              setCreatingNew(false)
+              setRefreshTick((n) => n + 1)
+              setSelectedSlug(slug)
+            }}
+          />
+        )}
 
         <ul className="bb-best-list">
           {filtered.map((it) => {
@@ -179,13 +216,22 @@ export function ItemsTab({
                       : 'bb-best-list-item'
                   }
                   onClick={() => handleSelect(it.slug)}
+                  onContextMenu={(e) => {
+                    e.preventDefault()
+                    setMenuState({ x: e.clientX, y: e.clientY, entry: it })
+                  }}
                   style={{ borderLeftColor: tint }}
                 >
                   <span className="bb-best-list-chip" style={{ color: tint }}>
                     {CATEGORY_ICON[it.category.en] ?? '📦'}
                   </span>
                   <span className="bb-best-list-body">
-                    <span className="bb-best-list-name display">{name}</span>
+                    <span className="bb-best-list-name display">
+                      {name}
+                      {it.userOwned && (
+                        <span className="bb-best-user-badge" title={t('library.sourceUser')}>★</span>
+                      )}
+                    </span>
                     <span className="bb-best-list-meta">
                       {localized(it.category, language)}
                       {' · '}
@@ -204,16 +250,41 @@ export function ItemsTab({
 
       <main className="bb-best-detailpane">
         {selectedSlug ? (
-          <ItemDetail slug={selectedSlug} language={language} />
+          <ItemDetail
+            slug={selectedSlug}
+            language={language}
+            onUserEntryChanged={(next) => {
+              setRefreshTick((n) => n + 1)
+              if (next) setSelectedSlug(next)
+            }}
+          />
         ) : (
           <EmptyDetail label={t('bestiary.noSelection')} />
         )}
       </main>
+
+      {menuState && (
+        <WikiListMenu
+          kind="item"
+          language={language}
+          anchor={{ x: menuState.x, y: menuState.y }}
+          entry={menuState.entry}
+          onClose={() => setMenuState(null)}
+          onChanged={(nextSlug) => {
+            setRefreshTick((n) => n + 1)
+            if (nextSlug) setSelectedSlug(nextSlug)
+          }}
+        />
+      )}
     </div>
   )
 }
 
-function ItemDetail({ slug, language }: { slug: string; language: AppLanguage }) {
+function ItemDetail({ slug, language, onUserEntryChanged }: {
+  slug: string
+  language: AppLanguage
+  onUserEntryChanged?: (nextSlug?: string) => void
+}) {
   const { t } = useTranslation()
   const [record, setRecord] = useState<ItemRecord | null>(null)
 
@@ -263,6 +334,7 @@ function ItemDetail({ slug, language }: { slug: string; language: AppLanguage })
       </header>
 
       <ItemActions record={record} language={language} />
+      <WikiEntryControls kind="item" record={record} onChanged={onUserEntryChanged} />
 
       {(record.classification || propertiesText || record.stealth) && (
         <section className="bb-best-metagrid">
@@ -312,10 +384,16 @@ function ItemActions({
 }) {
   const { t } = useTranslation()
   const playerConnected = useUIStore((s) => s.playerConnected)
+  const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
   function handleSend() {
     window.electronAPI?.sendHandout(itemHandout(record, language))
     showToast(t('bestiary.sentToPlayer'), 'success')
   }
+  // "An Spieler senden" only exists as a concept once a campaign is
+  // loaded — without one, the Wiki is pure reference and the button
+  // would just sit disabled. Hide it entirely in that mode to match
+  // the MonsterDetail behaviour.
+  if (!activeCampaignId) return null
   return (
     <div className="bb-best-actions-bar">
       <button

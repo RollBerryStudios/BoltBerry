@@ -7,6 +7,8 @@ import { useUIStore } from '../../stores/uiStore'
 import { showToast } from '../shared/Toast'
 import { formatMod, localized, localizedArray, pickName, tokenTint } from './util'
 import { monsterHandout, spawnMonsterOnMap } from './actions'
+import { NpcCloneWizard } from './NpcCloneWizard'
+import { WikiEntryControls } from './WikiEntryControls'
 
 type LoadedMonster = (MonsterRecord & {
   tokenDefaultUrl: string | null
@@ -14,7 +16,15 @@ type LoadedMonster = (MonsterRecord & {
   tokensMissing: boolean
 }) | null
 
-export function MonsterDetail({ slug, language }: { slug: string; language: AppLanguage }) {
+export function MonsterDetail({ slug, language, onUserEntryChanged }: {
+  slug: string
+  language: AppLanguage
+  /** Fires after the user clones / edits / deletes the current entry.
+   *  Pass a `nextSlug` when the list should jump to a freshly created
+   *  clone. Pass `undefined` after a plain delete / edit so the parent
+   *  just re-fetches the index. */
+  onUserEntryChanged?: (nextSlug?: string) => void
+}) {
   const { t } = useTranslation()
   const [record, setRecord] = useState<LoadedMonster>(null)
   const [tokenIndex, setTokenIndex] = useState(0)
@@ -173,6 +183,7 @@ export function MonsterDetail({ slug, language }: { slug: string; language: AppL
           currentToken?.file != null && currentToken.file === (record.userDefaultFile ?? record.token?.file ?? null)
         }
         onSetDefault={handleSetDefault}
+        onUserEntryChanged={onUserEntryChanged}
       />
 
       {/* Token strip — hidden by default so opening a monster fires one
@@ -457,8 +468,10 @@ function MonsterActions({
   currentFile,
   isAlreadyDefault,
   onSetDefault,
+  onUserEntryChanged,
 }: {
   record: MonsterRecord & { tokenDefaultUrl: string | null; userDefaultFile: string | null }
+  onUserEntryChanged?: (nextSlug?: string) => void
   language: AppLanguage
   imageUrl: string | null
   currentFile: string | null
@@ -468,8 +481,10 @@ function MonsterActions({
   const { t } = useTranslation()
   const activeMapId = useCampaignStore((s) => s.activeMapId)
   const activeMaps = useCampaignStore((s) => s.activeMaps)
+  const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
   const playerConnected = useUIStore((s) => s.playerConnected)
   const [busy, setBusy] = useState(false)
+  const [showNpcWizard, setShowNpcWizard] = useState(false)
 
   const map = useMemo(() => {
     if (!activeMapId) return activeMaps[0] ?? null
@@ -507,26 +522,40 @@ function MonsterActions({
     showToast(t('bestiary.sentToPlayer'), 'success')
   }
 
+  // Both spawn and send-to-player only make sense inside an active
+  // campaign — the Wiki can be opened from Welcome without any
+  // campaign selected, and showing disabled action buttons there was
+  // noise. "Auf Karte" additionally requires a map; "An Spieler
+  // senden" only needs the campaign scope (the button remains visible
+  // but disabled when no player window is connected — that's a
+  // session-time state, not a content-management one).
+  const canSpawn = Boolean(activeCampaignId && map)
+  const canSendToPlayer = Boolean(activeCampaignId)
+
   return (
     <div className="bb-best-actions-bar">
-      <button
-        type="button"
-        className="bb-best-action-btn bb-best-action-primary"
-        onClick={handleSpawn}
-        disabled={busy || !map}
-        title={map ? t('bestiary.addToMap') : t('bestiary.noActiveMap')}
-      >
-        ✦ {t('bestiary.addToMap')}
-      </button>
-      <button
-        type="button"
-        className="bb-best-action-btn"
-        onClick={handleSend}
-        disabled={!playerConnected}
-        title={playerConnected ? t('bestiary.sendToPlayer') : t('bestiary.sendDisabled')}
-      >
-        📡 {t('bestiary.sendToPlayer')}
-      </button>
+      {canSpawn && (
+        <button
+          type="button"
+          className="bb-best-action-btn bb-best-action-primary"
+          onClick={handleSpawn}
+          disabled={busy}
+          title={t('bestiary.addToMap')}
+        >
+          ✦ {t('bestiary.addToMap')}
+        </button>
+      )}
+      {canSendToPlayer && (
+        <button
+          type="button"
+          className="bb-best-action-btn"
+          onClick={handleSend}
+          disabled={!playerConnected}
+          title={playerConnected ? t('bestiary.sendToPlayer') : t('bestiary.sendDisabled')}
+        >
+          📡 {t('bestiary.sendToPlayer')}
+        </button>
+      )}
       <button
         type="button"
         className="bb-best-action-btn"
@@ -540,6 +569,36 @@ function MonsterActions({
       >
         {isAlreadyDefault ? '★' : '☆'} {isAlreadyDefault ? t('bestiary.clearDefault') : t('bestiary.setDefault')}
       </button>
+      {/* Clone into the NPC library — separate from the SRD monster
+          so the DM can rename / rebadge / re-skin without touching
+          the canonical source row. */}
+      <button
+        type="button"
+        className="bb-best-action-btn"
+        onClick={() => setShowNpcWizard(true)}
+        title={t('npcWizard.openButton')}
+      >
+        🧑 {t('npcWizard.openButton')}
+      </button>
+      {showNpcWizard && (
+        <NpcCloneWizard
+          monster={record}
+          language={language}
+          defaultImageUrl={imageUrl ?? record.tokenDefaultUrl}
+          defaultTokenFile={currentFile ?? record.userDefaultFile ?? null}
+          onClose={() => setShowNpcWizard(false)}
+          onSaved={() => setShowNpcWizard(false)}
+        />
+      )}
+
+      {/* User-authored Wiki entry controls. Clone is always available
+          (even on SRD — that's the primary path to getting an editable
+          copy); delete + rename only show up on user-owned entries. */}
+      <WikiEntryControls
+        kind="monster"
+        record={record}
+        onChanged={onUserEntryChanged}
+      />
     </div>
   )
 }

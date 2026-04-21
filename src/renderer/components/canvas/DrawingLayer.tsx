@@ -4,6 +4,7 @@ import { Html } from 'react-konva-utils'
 import Konva from 'konva'
 import { useUIStore } from '../../stores/uiStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
+import { useUndoStore, nextCommandId } from '../../stores/undoStore'
 
 export type DrawingType = 'freehand' | 'rect' | 'circle' | 'text'
 
@@ -136,9 +137,40 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
         'INSERT INTO drawings (map_id, type, points, color, width, text, synced) VALUES (?, ?, ?, ?, ?, ?, 1)',
         [mapId, d.type, pointsStr, d.color, d.width, d.text ?? null]
       )
-      const newDrawing: Drawing = { id: result.lastInsertRowid, type: d.type, points: d.points, color: d.color, width: d.width, text: d.text }
+      // `id` is mutable across undo→redo cycles because each redo
+      // writes a new SQLite row (INSERT autoincrements). Keeping the
+      // closure variable bound to `currentId` means the follow-up
+      // undo deletes whichever row is "current" rather than the
+      // orphaned first one.
+      let currentId: number = result.lastInsertRowid
+      const newDrawing: Drawing = { id: currentId, type: d.type, points: d.points, color: d.color, width: d.width, text: d.text }
       setDrawings(prev => [...prev, newDrawing])
       window.electronAPI?.sendDrawing(newDrawing)
+
+      useUndoStore.getState().pushCommand({
+        id: nextCommandId(),
+        label: `Zeichnung (${d.type})`,
+        undo: async () => {
+          await window.electronAPI?.dbRun('DELETE FROM drawings WHERE id = ?', [currentId])
+          setDrawings(prev => prev.filter((x) => x.id !== currentId))
+          // Re-broadcast the full drawing set so the player window
+          // drops the undone stroke. There's no per-drawing delete
+          // channel; the clear-tick triggers a usePlayerSync rebuild
+          // that re-pushes the remaining drawings in a full-sync.
+          useUIStore.getState().incrementDrawingClearTick()
+        },
+        redo: async () => {
+          const r = await window.electronAPI?.dbRun(
+            'INSERT INTO drawings (map_id, type, points, color, width, text, synced) VALUES (?, ?, ?, ?, ?, ?, 1)',
+            [mapId, d.type, pointsStr, d.color, d.width, d.text ?? null]
+          )
+          if (!r) return
+          currentId = r.lastInsertRowid
+          const restored: Drawing = { id: currentId, type: d.type, points: d.points, color: d.color, width: d.width, text: d.text }
+          setDrawings(prev => [...prev, restored])
+          window.electronAPI?.sendDrawing(restored)
+        },
+      })
     } catch (err) {
       console.error('[DrawingLayer] addDrawing failed:', err)
     }

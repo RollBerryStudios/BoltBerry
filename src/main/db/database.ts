@@ -1,7 +1,7 @@
 import Database from 'better-sqlite3'
 import { app } from 'electron'
-import { join } from 'path'
-import { existsSync, mkdirSync } from 'fs'
+import { join, basename, dirname } from 'path'
+import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync, unlinkSync } from 'fs'
 import {
   SCHEMA_VERSION,
   CREATE_TABLES_SQL, CREATE_POST_MIGRATION_INDEXES_SQL, SEED_SCHEMA_VERSION,
@@ -14,7 +14,8 @@ import {
   MIGRATE_V24_TO_V25, MIGRATE_V25_TO_V26, MIGRATE_V26_TO_V27,
   MIGRATE_V27_TO_V28, MIGRATE_V28_TO_V29, MIGRATE_V29_TO_V30,
   MIGRATE_V30_TO_V31, MIGRATE_V31_TO_V32, MIGRATE_V32_TO_V33,
-  MIGRATE_V33_TO_V34,
+  MIGRATE_V33_TO_V34, MIGRATE_V34_TO_V35, MIGRATE_V35_TO_V36,
+  MIGRATE_V36_TO_V37,
 } from './schema'
 import { loadMonstersIndexSync, loadMonsterRecordSync } from '../ipc/data-handlers'
 
@@ -46,12 +47,60 @@ const MIGRATIONS: ReadonlyArray<readonly [target: number, sql: string]> = [
   [32, MIGRATE_V31_TO_V32],
   [33, MIGRATE_V32_TO_V33],
   [34, MIGRATE_V33_TO_V34],
+  [35, MIGRATE_V34_TO_V35],
+  [36, MIGRATE_V35_TO_V36],
+  [37, MIGRATE_V36_TO_V37],
 ]
 
 export class SchemaTooNewError extends Error {
   constructor(public dbVersion: number, public appVersion: number) {
     super(`Database schema v${dbVersion} was created by a newer app build (this build supports v${appVersion}). Please update the app.`)
     this.name = 'SchemaTooNewError'
+  }
+}
+
+/**
+ * Snapshot the DB file before a migration runs, keeping the 3 most
+ * recent backups in the same `data/` folder. The transaction around
+ * the migration already rolls back on any SQL error — this guards
+ * the worse class of failures where the migration SQL commits rows
+ * the subsequent application code can't interpret (e.g. a JSON blob
+ * format drift), leaving the user with a DB that opens but misrenders.
+ * Having a timestamped .bak on disk means "restore the previous
+ * version" is a manual-but-trivial step.
+ *
+ * Filename shape: `rollberry.db.pre-v36-to-v37.2026-04-24T12-45-10.bak`
+ * so sort order by name matches creation order (ISO timestamp).
+ */
+function backupDbForMigration(dbPath: string, fromVer: number, toVer: number): void {
+  if (!existsSync(dbPath)) return
+  const stamp = new Date().toISOString().replace(/[:.]/g, '-').replace('T', 'T').replace(/Z$/, '')
+  const backupPath = `${dbPath}.pre-v${fromVer}-to-v${toVer}.${stamp}.bak`
+  copyFileSync(dbPath, backupPath)
+  console.log(`[Database] Pre-migration backup: ${backupPath}`)
+  pruneOldBackups(dbPath, 3)
+}
+
+/**
+ * Keep the N most-recent `.bak` files next to `dbPath` and delete the
+ * rest. A long-running install with dozens of migrations would
+ * otherwise accrete a whole session's worth of full DB copies under
+ * userData. We sort by filename (timestamped) so creation order is
+ * stable regardless of clock skew.
+ */
+function pruneOldBackups(dbPath: string, keep: number): void {
+  try {
+    const dir = dirname(dbPath)
+    const base = basename(dbPath)
+    const backups = readdirSync(dir)
+      .filter((f) => f.startsWith(`${base}.pre-v`) && f.endsWith('.bak'))
+      .map((f) => ({ f, mtime: statSync(join(dir, f)).mtimeMs }))
+      .sort((a, b) => b.mtime - a.mtime)
+    for (const old of backups.slice(keep)) {
+      try { unlinkSync(join(dir, old.f)) } catch { /* best-effort */ }
+    }
+  } catch (err) {
+    console.warn('[Database] Backup prune failed:', err)
   }
 }
 
@@ -128,6 +177,17 @@ export function initDatabase(): Database.Database {
     }
 
     if (currentVersion < SCHEMA_VERSION) {
+      // Snapshot the DB BEFORE we touch it so a catastrophic migration
+      // bug (one that commits corrupted rows the rollback can't undo,
+      // e.g. ALTER TABLE with a broken DEFAULT expression) leaves the
+      // user with a restorable copy on disk. Best-effort — a failed
+      // backup must not block the upgrade; we log + continue.
+      try {
+        backupDbForMigration(dbPath, currentVersion, SCHEMA_VERSION)
+      } catch (err) {
+        console.warn('[Database] Pre-migration backup failed:', err)
+      }
+
       // Wrap the entire upgrade in one transaction. If any step fails, the DB
       // rolls back to the starting version instead of landing in a half-migrated
       // state that re-triggers the same failure on next launch.

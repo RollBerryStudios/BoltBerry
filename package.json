@@ -1,7 +1,7 @@
 {
   "name": "boltberry",
   "version": "0.20.7",
-  "description": "BoltBerry \u2013 Lokale Virtual-Tabletop-App f\u00fcr Pen-and-Paper-Runden",
+  "description": "BoltBerry – Lokale Virtual-Tabletop-App für Pen-and-Paper-Runden",
   "main": "dist/main/index.js",
   "homepage": ".",
   "author": {
@@ -47,6 +47,7 @@
     "pdfjs-dist": "^4.4.168",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-easy-crop": "^5.5.7",
     "react-i18next": "^17.0.2",
     "react-konva": "^18.2.10",
     "react-konva-utils": "^2.0.0",

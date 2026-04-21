@@ -52,6 +52,7 @@ type DbRow = {
   personality: string; ideals: string; bonds: string; flaws: string
   backstory: string; notes: string
   inspiration: number; passive_perception: number
+  portrait_path: string | null
   created_at: string; updated_at: string
 }
 
@@ -97,6 +98,7 @@ export function rowToSheet(r: DbRow): CharacterSheet {
     notes: r.notes,
     inspiration: r.inspiration,
     passivePerception: r.passive_perception,
+    portraitPath: r.portrait_path ?? null,
     createdAt: r.created_at,
     updatedAt: r.updated_at,
   }

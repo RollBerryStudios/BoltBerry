@@ -92,6 +92,12 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
   }, [mapId, imgW, imgH])
 
   const playerPreviewCanvasRef = useRef<HTMLCanvasElement | null>(null)
+  // Reusable scratch canvas for the DM's red-tinted view of the covered
+  // mask. We never mutate `coveredCanvasRef` directly — it must stay in
+  // its on-disk format (45% black) so the existing fog-delta IPC keeps
+  // working on the player side. The tint is purely a render-time
+  // transform: copy → composite-in → fill red.
+  const tintedCoveredCanvasRef = useRef<HTMLCanvasElement | null>(null)
 
   // ── Create/update Konva.Image nodes ──────────────────────────────────
   const refreshDisplay = useCallback(() => {
@@ -110,7 +116,17 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
     kE.x(offsetX); kE.y(offsetY)
     kE.width(imgW * scale); kE.height(imgH * scale)
 
-    // In player-preview mode, boost fog to full opacity so DM sees exactly what players see
+    // The on-disk fog bitmap is always painted as 45% black so the
+    // existing delta IPC stays format-stable. We retint it at render
+    // time with one of two looks:
+    //
+    //   • Player Preview (DM toggles "show me what they see"): full-
+    //     opacity black, matching what PlayerApp renders.
+    //   • DM normal: translucent red, so the DM can still read the
+    //     map underneath but instantly sees which areas are hidden.
+    //
+    // Both paths use a scratch canvas so `coveredCanvasRef` keeps its
+    // canonical 45%-black format for IPC + DB persistence.
     let coveredSource: HTMLCanvasElement = covered
     if (playerPreview) {
       if (!playerPreviewCanvasRef.current) {
@@ -131,6 +147,25 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
       ppCtx.fillRect(0, 0, pp.width, pp.height)
       ppCtx.globalCompositeOperation = 'source-over'
       coveredSource = pp
+    } else {
+      if (!tintedCoveredCanvasRef.current) {
+        tintedCoveredCanvasRef.current = document.createElement('canvas')
+      }
+      const tc = tintedCoveredCanvasRef.current
+      if (tc.width !== covered.width || tc.height !== covered.height) {
+        tc.width = covered.width
+        tc.height = covered.height
+      }
+      const tcCtx = tc.getContext('2d')!
+      tcCtx.clearRect(0, 0, tc.width, tc.height)
+      tcCtx.drawImage(covered, 0, 0)
+      // Tint every painted pixel red, ~55 % alpha. source-in keeps the
+      // mask shape intact and overwrites only the colour channels.
+      tcCtx.globalCompositeOperation = 'source-in'
+      tcCtx.fillStyle = 'rgba(220, 38, 38, 0.55)'
+      tcCtx.fillRect(0, 0, tc.width, tc.height)
+      tcCtx.globalCompositeOperation = 'source-over'
+      coveredSource = tc
     }
 
     if (!kImgCoveredRef.current) {
@@ -180,9 +215,13 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
 
     // Broadcast rebuilt fog to player so their view stays in sync after undo/redo
     if (useUIStore.getState().sessionMode !== 'prep') {
+      // PNG keeps the canvas alpha channel intact. JPEG has no alpha,
+      // so cleared fog (transparent everywhere) would encode as solid
+      // black — the player window would then render a fully opaque
+      // black overlay over the map even after the DM cleared fog.
       window.electronAPI?.sendFogReset(
-        covered.toDataURL('image/jpeg', 0.85),
-        explored.toDataURL('image/jpeg', 0.85),
+        covered.toDataURL('image/png'),
+        explored.toDataURL('image/png'),
       )
     }
   }, [mapId, refreshDisplay])
@@ -226,6 +265,15 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
         const fullOp: FogOperation = { type: 'cover', shape: 'rect', points: [0, 0, covered.width, covered.height] }
         pushFogCommand(fullOp)
       } else if (detail.type === 'resetExplored') {
+        // Snapshot both bitmaps as PNG data URLs before the wipe so
+        // the undo closure can restore the pre-reset state pixel-
+        // perfect. PNG preserves alpha — JPEG would flatten cleared
+        // regions to opaque black on restore (the exact bug that
+        // made fog render black for the player earlier).
+        const prevExplored = explored.toDataURL('image/png')
+        const prevCovered  = covered.toDataURL('image/png')
+        const prevHistory  = useFogStore.getState().history.slice()
+
         ec.clearRect(0, 0, explored.width, explored.height)
         cc.clearRect(0, 0, covered.width, covered.height)
         useFogStore.getState().clearHistory()
@@ -233,6 +281,37 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
         saveFogToDb(mapId, explored, covered)
         const fullOp: FogOperation = { type: 'reveal', shape: 'rect', points: [0, 0, explored.width, explored.height] }
         sendFogDelta(fullOp)
+
+        useUndoStore.getState().pushCommand({
+          id: nextCommandId(),
+          label: 'Nebel zurücksetzen',
+          undo: async () => {
+            // Load the PNG snapshot back into both canvases. Re-use
+            // the existing loadBitmapToCanvas-style pattern via a
+            // fresh Image() to keep this commit minimal.
+            await Promise.all([
+              loadBitmapToCanvas(prevExplored, explored),
+              loadBitmapToCanvas(prevCovered,  covered),
+            ])
+            useFogStore.setState({ history: prevHistory, redoStack: [] })
+            refreshDisplay()
+            saveFogToDb(mapId, explored, covered)
+            if (useUIStore.getState().sessionMode !== 'prep') {
+              window.electronAPI?.sendFogReset(
+                covered.toDataURL('image/png'),
+                explored.toDataURL('image/png'),
+              )
+            }
+          },
+          redo: async () => {
+            ec.clearRect(0, 0, explored.width, explored.height)
+            cc.clearRect(0, 0, covered.width, covered.height)
+            useFogStore.getState().clearHistory()
+            refreshDisplay()
+            saveFogToDb(mapId, explored, covered)
+            sendFogDelta({ type: 'reveal', shape: 'rect', points: [0, 0, explored.width, explored.height] })
+          },
+        })
       } else if (detail.type === 'revealTokens') {
         const tokens = useTokenStore.getState().tokens
         const revealRadius = gridSizeProp * 1.5
@@ -584,9 +663,16 @@ function commitFogSave(
   coveredCanvas: HTMLCanvasElement,
 ) {
   try {
-    // JPEG (~4× smaller than PNG for typical fog bitmaps)
-    const fogBitmap      = coveredCanvas.toDataURL('image/jpeg', 0.85)
-    const exploredBitmap = exploredCanvas.toDataURL('image/jpeg', 0.85)
+    // PNG preserves the canvas alpha channel. We used to use JPEG for
+    // the ~4× size win, but JPEG has no alpha: a cleared fog canvas
+    // (transparent everywhere) encoded to solid black, so the player
+    // window loaded a fully-opaque black overlay over the map even
+    // after the DM cleared fog. Size-wise PNG is fine here: fog
+    // bitmaps are almost entirely uniform regions (solid-alpha covered
+    // blocks + alpha-0 cleared blocks) which PNG's DEFLATE compresses
+    // aggressively.
+    const fogBitmap      = coveredCanvas.toDataURL('image/png')
+    const exploredBitmap = exploredCanvas.toDataURL('image/png')
     // Fire-and-forget: the caller may be synchronous (beforeunload) and
     // can't await. dbRun is an ipcRenderer.invoke — the IPC send itself is
     // synchronous enough to survive the renderer shutting down.

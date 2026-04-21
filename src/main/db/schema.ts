@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 34
+export const SCHEMA_VERSION = 37
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -382,6 +382,9 @@ CREATE TABLE IF NOT EXISTS character_sheets (
   notes            TEXT    NOT NULL DEFAULT '',
   inspiration      INTEGER NOT NULL DEFAULT 0,
   passive_perception INTEGER NOT NULL DEFAULT 10,
+  -- Circular-crop portrait stored as a PNG data URL. Nullable; UI
+  -- falls back to the first letter of the name when absent.
+  portrait_path    TEXT,
   created_at       TEXT    NOT NULL DEFAULT (datetime('now')),
   updated_at       TEXT    NOT NULL DEFAULT (datetime('now'))
 );
@@ -444,6 +447,36 @@ CREATE TABLE IF NOT EXISTS monster_defaults (
   slug       TEXT PRIMARY KEY,
   token_file TEXT NOT NULL
 );
+
+-- User-authored Wiki entries (custom monsters / items / spells). Cloned
+-- from SRD records or built from scratch; shadows the bundled data by
+-- slug when both exist. The "data" column is the full record JSON,
+-- shaped exactly like the dataset so the UI does not branch on entry
+-- source.
+CREATE TABLE IF NOT EXISTS user_wiki_entries (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  kind       TEXT    NOT NULL CHECK (kind IN ('monster','item','spell')),
+  slug       TEXT    NOT NULL,
+  data       TEXT    NOT NULL,
+  created_at TEXT    NOT NULL DEFAULT (datetime('now')),
+  updated_at TEXT    NOT NULL DEFAULT (datetime('now')),
+  UNIQUE(kind, slug)
+);
+CREATE INDEX IF NOT EXISTS idx_user_wiki_entries_kind ON user_wiki_entries(kind);
+
+-- Multi-track audio playlists (DM pre-assigns several tracks per
+-- channel; right-click the channel to swap the active one).
+CREATE TABLE IF NOT EXISTS channel_playlist (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  campaign_id INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+  channel     TEXT    NOT NULL CHECK (channel IN ('track1','track2','combat')),
+  path        TEXT    NOT NULL,
+  file_name   TEXT    NOT NULL,
+  position    INTEGER NOT NULL DEFAULT 0,
+  created_at  TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_channel_playlist_campaign
+  ON channel_playlist(campaign_id, channel, position);
 
 -- Schema version tracking (single-row enforced by PK constraint)
 CREATE TABLE IF NOT EXISTS schema_version (
@@ -788,6 +821,56 @@ CREATE TABLE IF NOT EXISTS monster_defaults (
   token_file TEXT NOT NULL
 );
 UPDATE schema_version SET version = 34;
+`
+
+// Migration: v34 → v35 — circular-crop portrait for character sheets.
+// Stored inline as a PNG data URL (typically 256 × 256 ≈ 40 KB) so the
+// portrait survives campaign export/import without needing a parallel
+// asset file. Column is nullable — pre-existing characters stay
+// portrait-less and the UI falls back to the first letter of the name.
+export const MIGRATE_V34_TO_V35 = `
+ALTER TABLE character_sheets ADD COLUMN portrait_path TEXT;
+UPDATE schema_version SET version = 35;
+`
+
+// Migration: v35 → v36 — user-authored Wiki entries. DMs can clone any
+// SRD monster / item / spell into this table ("Eigene" category) and
+// then edit / delete it without touching the bundled dataset. The
+// `data` column is the full record as JSON — exactly the same shape
+// the data-handlers return for SRD records, so the renderer doesn't
+// need to know whether an entry is user-authored except to show the
+// badge / enable the delete button.
+export const MIGRATE_V35_TO_V36 = `
+CREATE TABLE IF NOT EXISTS user_wiki_entries (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  kind       TEXT    NOT NULL CHECK (kind IN ('monster','item','spell')),
+  slug       TEXT    NOT NULL,
+  data       TEXT    NOT NULL,
+  created_at TEXT    NOT NULL DEFAULT (datetime('now')),
+  updated_at TEXT    NOT NULL DEFAULT (datetime('now')),
+  UNIQUE(kind, slug)
+);
+CREATE INDEX IF NOT EXISTS idx_user_wiki_entries_kind ON user_wiki_entries(kind);
+UPDATE schema_version SET version = 36;
+`
+
+// Migration: v36 → v37 — multi-track audio per channel. DMs can now
+// pre-assign multiple tracks to each channel (track1 / track2 /
+// combat) and swap between them via a right-click menu. The table is
+// campaign-scoped so two campaigns don't share playlists.
+export const MIGRATE_V36_TO_V37 = `
+CREATE TABLE IF NOT EXISTS channel_playlist (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  campaign_id INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+  channel     TEXT    NOT NULL CHECK (channel IN ('track1','track2','combat')),
+  path        TEXT    NOT NULL,
+  file_name   TEXT    NOT NULL,
+  position    INTEGER NOT NULL DEFAULT 0,
+  created_at  TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_channel_playlist_campaign
+  ON channel_playlist(campaign_id, channel, position);
+UPDATE schema_version SET version = 37;
 `
 
 // Use the SCHEMA_VERSION constant directly so there's a single source of truth.

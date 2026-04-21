@@ -24,6 +24,19 @@ export const IPC = {
   IMPORT_FILE: 'app:import-file',
   IMPORT_PDF: 'app:import-pdf',
   SAVE_ASSET_IMAGE: 'app:save-asset-image',
+  /** Persist a cropped character portrait to disk and return its
+   *  absolute path. Deliberately separate from SAVE_ASSET_IMAGE so
+   *  portraits don't pollute the `assets` table + don't carry a
+   *  campaign-id scope. */
+  SAVE_PORTRAIT: 'app:save-portrait',
+  /** Remove a character portrait from disk. Called when the row is
+   *  deleted so orphan PNGs don't accumulate under userData. */
+  DELETE_PORTRAIT: 'app:delete-portrait',
+  /** GC pass over `userData/assets/` — finds files with no DB
+   *  reference. `dryRun: true` returns the counts without deleting
+   *  so the UI can preview + confirm; `false` unlinks the orphans.
+   *  Safe for repeat calls: referenced assets are never touched. */
+  ASSET_CLEANUP: 'app:asset-cleanup',
   EXPORT_CAMPAIGN: 'app:export-campaign',
   IMPORT_CAMPAIGN: 'app:import-campaign',
   DUPLICATE_CAMPAIGN: 'app:duplicate-campaign',
@@ -46,8 +59,11 @@ export const IPC = {
   // DM → Player: pointer ping
   PLAYER_POINTER: 'player:pointer',
 
-  // DM → Player: camera viewport sync
-  PLAYER_CAMERA: 'player:camera',
+  // DM → Player: Player Control Mode — independent viewport rectangle
+  // on the GM scene that frames exactly what the player window shows.
+  // Nullable payload: null exits the mode and the player falls back to
+  // the camera / fit path.
+  PLAYER_VIEWPORT: 'player:viewport',
 
   // DM → Player: measurement overlay
   PLAYER_MEASURE: 'player:measure',
@@ -105,6 +121,11 @@ export const IPC = {
   DATA_GET_ITEM: 'data:get-item',
   DATA_LIST_SPELLS: 'data:list-spells',
   DATA_GET_SPELL: 'data:get-spell',
+  /** User-authored Wiki entries — monsters / items / spells the DM
+   *  cloned from SRD or built from scratch. Shadows the bundled data
+   *  by slug when both exist. */
+  WIKI_UPSERT_USER_ENTRY: 'wiki:upsert-user-entry',
+  WIKI_DELETE_USER_ENTRY: 'wiki:delete-user-entry',
 } as const
 
 export interface TokenVariant {
@@ -152,6 +173,11 @@ export interface MonsterIndexEntry {
   size: string
   tokenDefault: string | null
   tokenCount: number
+  /** True when this entry originates from `user_wiki_entries` rather
+   *  than the bundled dataset. Added to every index + detail record by
+   *  the merge layer; the UI uses it to show the "Eigene" badge and
+   *  enable delete / edit actions. */
+  userOwned?: boolean
 }
 
 /** Row in resources/data/items-index.json. */
@@ -163,6 +189,7 @@ export interface ItemIndexEntry {
   category: L10n
   rarity: L10n
   cost?: number | null
+  userOwned?: boolean
 }
 
 /** Row in resources/data/spells-index.json. */
@@ -174,6 +201,7 @@ export interface SpellIndexEntry {
   level: L10n
   school: L10n
   classes?: L10nArray
+  userOwned?: boolean
 }
 
 /** Full monster.json. Legendary-action entries include a leading intro
@@ -223,6 +251,8 @@ export interface MonsterRecord {
   tokens?: Array<{ file: string; variant: string }>
   license: string
   licenseSource: string
+  /** True for rows loaded from user_wiki_entries. */
+  userOwned?: boolean
 }
 
 export interface ItemRecord {
@@ -251,6 +281,7 @@ export interface ItemRecord {
   image?: string
   license: string
   licenseSource: string
+  userOwned?: boolean
 }
 
 export interface SpellRecord {
@@ -278,6 +309,7 @@ export interface SpellRecord {
   image?: string
   license: string
   licenseSource: string
+  userOwned?: boolean
 }
 
 /** A single token image belonging to a monster. `path` is the
@@ -552,14 +584,27 @@ export interface PlayerPointer {
   y: number
 }
 
-export interface PlayerCamera {
-  imageCenterX: number
-  imageCenterY: number
-  relZoom: number // DM scale / DM fit-scale
+/** Player Control Mode rectangle. All coordinates are in map-image
+ *  pixels (the unrotated image space), so the frame is stable across
+ *  the DM's own pan / zoom. Rotation is in degrees, clockwise, applied
+ *  to the view content inside the rectangle (player sees the content
+ *  rotated by `rotation`). The rectangle itself is axis-aligned in map
+ *  space — rotation affects only the rendered orientation, not the
+ *  hitbox of the frame on the DM canvas. */
+export interface PlayerViewport {
+  cx: number
+  cy: number
+  w: number
+  h: number
+  rotation: number
 }
 
 export interface PlayerFullState {
-  mode: 'map' | 'atmosphere' | 'blackout'
+  /** 'idle' resets the player window to the BoltBerry "Warte auf den
+   *  Spielleiter…" splash. The DM enters this state by toggling the
+   *  session back to Prep mid-session — players should immediately
+   *  stop seeing whatever was on screen. */
+  mode: 'map' | 'atmosphere' | 'blackout' | 'idle'
   map: PlayerMapState | null
   tokens: PlayerTokenState[]
   fogBitmap: string | null      // base64 PNG — "covered dim" canvas
@@ -567,6 +612,16 @@ export interface PlayerFullState {
   atmosphereImagePath: string | null
   blackout: boolean
   drawings: PlayerDrawingState[]
+  /** Walls scoped to the active map. Included in full-sync so a player
+   *  reconnecting mid-session doesn't have to wait for the separate
+   *  PLAYER_WALLS broadcast to arrive before the LOS engine has its
+   *  geometry — without this, the lighting layer briefly computes
+   *  visibility against an empty wall set OR (after the first
+   *  broadcast) against stale walls from the previous map. */
+  walls?: PlayerWallState[]
+  /** Optional: when present, the player window frames exactly this
+   *  rectangle. Takes precedence over camera / fit on the player side. */
+  viewport?: PlayerViewport | null
 }
 
 export interface PlayerDrawingState {
@@ -655,6 +710,9 @@ export interface CharacterSheet {
   backstory: string; notes: string
   inspiration: number
   passivePerception: number
+  /** Circular-crop portrait stored as a PNG data URL (nullable; UI
+   *  falls back to the first letter of the name when absent). */
+  portraitPath: string | null
   createdAt: string
   updatedAt: string
 }

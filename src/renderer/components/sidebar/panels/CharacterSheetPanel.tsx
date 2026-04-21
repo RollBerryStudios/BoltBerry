@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCharacterStore, rowToSheet } from '../../../stores/characterStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
@@ -6,6 +6,8 @@ import { useUIStore } from '../../../stores/uiStore'
 import type { CharacterSheet, CharacterAttack } from '@shared/ipc-types'
 import { EmptyState } from '../../EmptyState'
 import { BestiaryPicker } from '../../bestiary/BestiaryPicker'
+import { CircularCropper } from '../../shared/CircularCropper'
+import { useImageUrl } from '../../../hooks/useImageUrl'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -397,7 +399,16 @@ function SheetEditor({ sheet, onUpdate }: {
     <div style={{ overflowY: 'auto', flex: 1 }}>
       {/* ── Header ── */}
       <div style={{ padding: '6px 8px', borderBottom: '1px solid var(--border)', background: 'var(--bg)' }}>
-        <TextInput {...field('name')} placeholder={t('characters.name')} style={{ fontSize: 14, fontWeight: 700 }} />
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+          <PortraitPicker
+            portrait={sheet.portraitPath}
+            fallbackInitial={(sheet.name || 'C').charAt(0).toUpperCase()}
+            onChange={(p) => onUpdate({ portraitPath: p })}
+          />
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <TextInput {...field('name')} placeholder={t('characters.name')} style={{ fontSize: 14, fontWeight: 700 }} />
+          </div>
+        </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 4, marginTop: 4 }}>
           <TextInput {...field('race')} placeholder={t('characters.race')} />
           <TextInput {...field('className')} placeholder={t('characters.class')} />
@@ -731,6 +742,7 @@ export function CharacterSheetPanel() {
       personality: 'personality', ideals: 'ideals', bonds: 'bonds', flaws: 'flaws',
       backstory: 'backstory', notes: 'notes',
       inspiration: 'inspiration', passivePerception: 'passive_perception',
+      portraitPath: 'portrait_path',
     }
     for (const [k, v] of Object.entries(patch)) {
       const col = colMap[k]
@@ -749,10 +761,18 @@ export function CharacterSheetPanel() {
   const handleDelete = useCallback(async (id: number) => {
     const ok = await window.electronAPI?.confirmDialog(t('characters.deleteConfirm'))
     if (!ok) return
+    // Grab the portrait path before the row disappears so we can
+    // unlink the asset file too. Any legacy data URL is rejected by
+    // the main-process safety guard, so we pass it unconditionally.
+    const sheet = sheets.find((s) => s.id === id)
+    const portraitPath = sheet?.portraitPath ?? null
     removeSheet(id)
     await window.electronAPI?.dbRun('DELETE FROM character_sheets WHERE id = ?', [id]).catch(console.error)
+    if (portraitPath) {
+      await window.electronAPI?.deletePortrait(portraitPath).catch(() => { /* best-effort */ })
+    }
     if (activeSheetId === id) setActiveSheetId(null)
-  }, [activeSheetId, removeSheet, setActiveSheetId, t])
+  }, [activeSheetId, sheets, removeSheet, setActiveSheetId, t])
 
   const activeSheet = sheets.find((s) => s.id === activeSheetId)
 
@@ -887,5 +907,131 @@ export function CharacterSheetPanel() {
         )}
       </div>
     </div>
+  )
+}
+
+// ─── Portrait picker ──────────────────────────────────────────────────────────
+// Circular thumbnail. Clicking opens a native file picker; the selected
+// image is read in-renderer (FileReader → data URL) and fed into the
+// shared CircularCropper.
+//
+// The cropped PNG is persisted via the main-process SAVE_PORTRAIT IPC
+// which writes it to `userData/assets/portrait/*.png` and returns a
+// **relative** path (e.g. `assets/portrait/xxx.png`). The DB column now
+// holds that path, matching the existing map/token convention, so
+// campaign export/import can bundle + remap the file and moving the
+// user-data folder across machines keeps portraits intact.
+//
+// Legacy rows holding a `data:` URL keep working — useImageUrl passes
+// data URLs through unchanged; only relative paths hit the main-process
+// base64 loader.
+
+function PortraitPicker({ portrait, fallbackInitial, onChange }: {
+  portrait: string | null
+  fallbackInitial: string
+  onChange: (path: string | null) => void
+}) {
+  const { t } = useTranslation()
+  const resolvedUrl = useImageUrl(portrait)
+  const [cropSrc, setCropSrc] = useState<string | null>(null)
+  const [busy, setBusy] = useState(false)
+  const [loadFailed, setLoadFailed] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  // Reset the broken-image fallback whenever the stored path changes
+  // so recovering from a failed state (new file chosen) re-shows the
+  // image instead of the persistent initial.
+  useEffect(() => { setLoadFailed(false) }, [portrait])
+
+  function openPicker() {
+    fileInputRef.current?.click()
+  }
+
+  function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    // Always clear the input value so picking the same file twice still
+    // fires `change` the second time.
+    e.target.value = ''
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => {
+      const url = typeof reader.result === 'string' ? reader.result : null
+      if (url) setCropSrc(url)
+    }
+    reader.readAsDataURL(file)
+  }
+
+  async function handleCropComplete(dataUrl: string) {
+    setCropSrc(null)
+    setBusy(true)
+    try {
+      // Pass the current `portrait` so the main process can unlink the
+      // replaced PNG (only if it's a safe asset path — data URLs are
+      // ignored by the guard, so legacy rows are never touched). Falling
+      // back to the inline data URL on IPC failure keeps the feature
+      // usable on unexpected errors.
+      const res = await window.electronAPI?.savePortrait(dataUrl, portrait)
+      if (res?.success && res.path) {
+        onChange(res.path)
+      } else {
+        console.error('[PortraitPicker] savePortrait failed:', res?.error)
+        onChange(dataUrl)
+      }
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  const showImage = portrait && resolvedUrl && !loadFailed
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={openPicker}
+        disabled={busy}
+        title={t('characters.portraitEdit')}
+        style={{
+          width: 56, height: 56, borderRadius: '50%',
+          border: '2px solid var(--border)',
+          background: 'var(--bg-elevated)',
+          padding: 0,
+          overflow: 'hidden',
+          cursor: busy ? 'progress' : 'pointer',
+          flexShrink: 0,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          color: 'var(--text-muted)',
+          fontWeight: 700,
+          fontSize: 22,
+          opacity: busy ? 0.6 : 1,
+        }}
+      >
+        {showImage
+          ? (
+            <img
+              src={resolvedUrl}
+              alt=""
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              onError={() => setLoadFailed(true)}
+            />
+          )
+          : fallbackInitial
+        }
+      </button>
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        style={{ display: 'none' }}
+        onChange={handleFile}
+      />
+      {cropSrc && (
+        <CircularCropper
+          src={cropSrc}
+          onComplete={handleCropComplete}
+          onCancel={() => setCropSrc(null)}
+        />
+      )}
+    </>
   )
 }

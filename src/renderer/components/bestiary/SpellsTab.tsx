@@ -6,7 +6,11 @@ import { localized, localizedArray, pickName, titleCase } from './util'
 import { EmptyDetail } from './MonstersTab'
 import { spellHandout } from './actions'
 import { useUIStore } from '../../stores/uiStore'
+import { useCampaignStore } from '../../stores/campaignStore'
 import { showToast } from '../shared/Toast'
+import { WikiEntryControls } from './WikiEntryControls'
+import { WikiEntryForm } from './WikiEntryForm'
+import { WikiListMenu } from './WikiListMenu'
 
 const LEVEL_ORDER: Record<string, number> = {
   cantrip: 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5,
@@ -53,6 +57,10 @@ export function SpellsTab({
   const [levelFilter, setLevelFilter] = useState<string>('')
   const [schoolFilter, setSchoolFilter] = useState<string>('')
   const [classFilter, setClassFilter] = useState<string>('')
+  const [sourceFilter, setSourceFilter] = useState<'' | 'srd' | 'user'>('')
+  const [creatingNew, setCreatingNew] = useState(false)
+  const [menuState, setMenuState] = useState<{ x: number; y: number; entry: SpellIndexEntry } | null>(null)
+  const [refreshTick, setRefreshTick] = useState(0)
 
   useEffect(() => {
     let alive = true
@@ -66,7 +74,7 @@ export function SpellsTab({
       }
     })()
     return () => { alive = false }
-  }, [])
+  }, [refreshTick])
 
   const availableLevels = useMemo(() => {
     if (!index) return []
@@ -102,6 +110,8 @@ export function SpellsTab({
           const has = (sp.classes?.en ?? []).some((c) => c.toLowerCase() === classFilter)
           if (!has) return false
         }
+        if (sourceFilter === 'user' && !sp.userOwned) return false
+        if (sourceFilter === 'srd'  &&  sp.userOwned) return false
         if (!q) return true
         const name = pickName(sp, language).toLowerCase()
         return name.includes(q)
@@ -109,12 +119,12 @@ export function SpellsTab({
           || sp.school.en.toLowerCase().includes(q)
           || sp.school.de.toLowerCase().includes(q)
       })
-      .sort((a, b) => {
-        const lvl = (LEVEL_ORDER[a.level.en] ?? 99) - (LEVEL_ORDER[b.level.en] ?? 99)
-        if (lvl !== 0) return lvl
-        return pickName(a, language).localeCompare(pickName(b, language))
-      })
-  }, [index, query, language, levelFilter, schoolFilter, classFilter])
+      // Default alphabetical sort per locale. Level still works as a
+      // filter chip but the base list is name-ordered so a DM typing
+      // "fireball" finds it in one visual pass rather than scrolling
+      // past every cantrip first.
+      .sort((a, b) => pickName(a, language).localeCompare(pickName(b, language), language))
+  }, [index, query, language, levelFilter, schoolFilter, classFilter, sourceFilter])
 
   useEffect(() => {
     if (!initialSlug || !index) return
@@ -165,11 +175,19 @@ export function SpellsTab({
               ))}
             </select>
           </label>
-          {(levelFilter || schoolFilter || classFilter) && (
+          <label className="bb-best-filter">
+            <span>{t('bestiary.filterSource')}</span>
+            <select value={sourceFilter} onChange={(e) => setSourceFilter(e.target.value as '' | 'srd' | 'user')}>
+              <option value="">{t('bestiary.filterAll')}</option>
+              <option value="srd">{t('library.sourceSrd')}</option>
+              <option value="user">{t('library.sourceUser')}</option>
+            </select>
+          </label>
+          {(levelFilter || schoolFilter || classFilter || sourceFilter) && (
             <button
               type="button"
               className="bb-best-filter-clear"
-              onClick={() => { setLevelFilter(''); setSchoolFilter(''); setClassFilter('') }}
+              onClick={() => { setLevelFilter(''); setSchoolFilter(''); setClassFilter(''); setSourceFilter('') }}
             >
               ✕ {t('bestiary.clearFilters')}
             </button>
@@ -177,8 +195,28 @@ export function SpellsTab({
         </div>
 
         <div className="bb-best-listcount">
-          {t('bestiary.countSpells', { count: filtered.length })}
+          <span>{t('bestiary.countSpells', { count: filtered.length })}</span>
+          <button
+            type="button"
+            className="bb-best-list-new"
+            onClick={() => setCreatingNew(true)}
+            title={t('wikiForm.new_spell')}
+          >
+            + {t('wikiForm.new')}
+          </button>
         </div>
+
+        {creatingNew && (
+          <WikiEntryForm
+            kind="spell"
+            onClose={() => setCreatingNew(false)}
+            onSaved={(slug) => {
+              setCreatingNew(false)
+              setRefreshTick((n) => n + 1)
+              setSelectedSlug(slug)
+            }}
+          />
+        )}
 
         <ul className="bb-best-list">
           {filtered.map((sp) => {
@@ -196,11 +234,20 @@ export function SpellsTab({
                       : 'bb-best-list-item'
                   }
                   onClick={() => handleSelect(sp.slug)}
+                  onContextMenu={(e) => {
+                    e.preventDefault()
+                    setMenuState({ x: e.clientX, y: e.clientY, entry: sp })
+                  }}
                   style={{ borderLeftColor: tint }}
                 >
                   <span className="bb-best-list-chip" style={{ color: tint }}>{icon}</span>
                   <span className="bb-best-list-body">
-                    <span className="bb-best-list-name display">{name}</span>
+                    <span className="bb-best-list-name display">
+                      {name}
+                      {sp.userOwned && (
+                        <span className="bb-best-user-badge" title={t('library.sourceUser')}>★</span>
+                      )}
+                    </span>
                     <span className="bb-best-list-meta">
                       {localized(sp.level, language)}
                       {' · '}
@@ -219,16 +266,41 @@ export function SpellsTab({
 
       <main className="bb-best-detailpane">
         {selectedSlug ? (
-          <SpellDetail slug={selectedSlug} language={language} />
+          <SpellDetail
+            slug={selectedSlug}
+            language={language}
+            onUserEntryChanged={(next) => {
+              setRefreshTick((n) => n + 1)
+              if (next) setSelectedSlug(next)
+            }}
+          />
         ) : (
           <EmptyDetail label={t('bestiary.noSelection')} />
         )}
       </main>
+
+      {menuState && (
+        <WikiListMenu
+          kind="spell"
+          language={language}
+          anchor={{ x: menuState.x, y: menuState.y }}
+          entry={menuState.entry}
+          onClose={() => setMenuState(null)}
+          onChanged={(nextSlug) => {
+            setRefreshTick((n) => n + 1)
+            if (nextSlug) setSelectedSlug(nextSlug)
+          }}
+        />
+      )}
     </div>
   )
 }
 
-function SpellDetail({ slug, language }: { slug: string; language: AppLanguage }) {
+function SpellDetail({ slug, language, onUserEntryChanged }: {
+  slug: string
+  language: AppLanguage
+  onUserEntryChanged?: (nextSlug?: string) => void
+}) {
   const { t } = useTranslation()
   const [record, setRecord] = useState<SpellRecord | null>(null)
 
@@ -250,7 +322,12 @@ function SpellDetail({ slug, language }: { slug: string; language: AppLanguage }
   const icon = SCHOOL_ICON[schoolKey] ?? '✨'
   const description = localized(record.description, language)
   const higherLevels = localized(record.higherLevels, language)
-  const classes = localizedArray(record.classes, language).map(titleCase).join(', ')
+  // Alphabetically sorted per locale — raw SRD order (source-file order)
+  // felt arbitrary to players scanning for "does Cleric get this?".
+  const classes = localizedArray(record.classes, language)
+    .map(titleCase)
+    .sort((a, b) => a.localeCompare(b, language))
+    .join(', ')
 
   return (
     <article className="bb-best-detail" style={{ borderLeftColor: tint }}>
@@ -283,6 +360,7 @@ function SpellDetail({ slug, language }: { slug: string; language: AppLanguage }
       </header>
 
       <SpellActions record={record} language={language} />
+      <WikiEntryControls kind="spell" record={record} onChanged={onUserEntryChanged} />
 
       {classes && (
         <section className="bb-best-metagrid">
@@ -331,10 +409,14 @@ function SpellActions({
 }) {
   const { t } = useTranslation()
   const playerConnected = useUIStore((s) => s.playerConnected)
+  const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
   function handleSend() {
     window.electronAPI?.sendHandout(spellHandout(record, language))
     showToast(t('bestiary.sentToPlayer'), 'success')
   }
+  // Same reasoning as ItemActions: without a campaign the Wiki is
+  // pure reference; nothing to send to a player window.
+  if (!activeCampaignId) return null
   return (
     <div className="bb-best-actions-bar">
       <button

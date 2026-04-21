@@ -56,6 +56,17 @@ export interface ChannelState {
   playing: boolean
   currentTime: number
   duration: number
+  /** Pre-assigned tracks the DM can swap between via right-click on the
+   *  channel strip. Persisted per campaign in `channel_playlist`. The
+   *  currently-playing track's path is tracked separately via
+   *  `filePath`; entries here may or may not match that path. */
+  playlist: PlaylistEntry[]
+}
+
+export interface PlaylistEntry {
+  id: number
+  path: string
+  fileName: string
 }
 
 export interface AudioBoardSlot {
@@ -104,6 +115,12 @@ interface AudioState {
   // ── Actions: combat ──
   activateCombat:    () => void
   deactivateCombat:  () => void
+
+  // ── Actions: playlist (pre-assigned tracks per channel) ──
+  setChannelPlaylist:  (ch: ChannelId, entries: PlaylistEntry[]) => void
+  addPlaylistEntry:    (ch: ChannelId, entry: PlaylistEntry, activate?: boolean) => void
+  removePlaylistEntry: (ch: ChannelId, id: number) => void
+  clearAllPlaylists:   () => void
 
   // ── Actions: SFX ──
   triggerSfx:        (audioPath: string) => void
@@ -188,7 +205,7 @@ function endDuck() {
 }
 
 function makeDefaultChannel(volume = 1): ChannelState {
-  return { filePath: null, fileName: null, volume, playing: false, currentTime: 0, duration: 0 }
+  return { filePath: null, fileName: null, volume, playing: false, currentTime: 0, duration: 0, playlist: [] }
 }
 
 function pathToUrl(path: string): string {
@@ -366,6 +383,49 @@ export const useAudioStore = create<AudioState>((set, get) => {
     setSfxVolume: (vol) => set({ sfxVolume: vol }),
 
     setActiveBoardIndex: (i) => set({ activeBoardIndex: i }),
+
+    // ── Per-channel playlists ─────────────────────────────────────
+    setChannelPlaylist: (ch, entries) =>
+      set((s) => ({ [ch]: { ...s[ch], playlist: entries } }) as Partial<AudioState>),
+
+    addPlaylistEntry: (ch, entry, activate) =>
+      set((s) => {
+        const nextPlaylist = [...s[ch].playlist, entry]
+        // If this is the first track ever added, or the caller asked
+        // to activate, we also point filePath at it so the ▶ button
+        // has something to play without needing a second right-click.
+        const shouldActivate = activate ?? nextPlaylist.length === 1
+        const next: Partial<ChannelState> = { playlist: nextPlaylist }
+        if (shouldActivate) { next.filePath = entry.path; next.fileName = entry.fileName }
+        return { [ch]: { ...s[ch], ...next } } as Partial<AudioState>
+      }),
+
+    removePlaylistEntry: (ch, id) =>
+      set((s) => {
+        const removed = s[ch].playlist.find((e) => e.id === id)
+        const nextPlaylist = s[ch].playlist.filter((e) => e.id !== id)
+        const next: Partial<ChannelState> = { playlist: nextPlaylist }
+        // If the removed track was the active one, pick the next
+        // playlist entry (if any) or clear the channel. We intentionally
+        // don't restart playback — removal is a curation action, not a
+        // "skip to next track" gesture.
+        if (removed && s[ch].filePath === removed.path) {
+          const fallback = nextPlaylist[0]
+          next.filePath = fallback?.path ?? null
+          next.fileName = fallback?.fileName ?? null
+          next.playing = false
+          next.currentTime = 0
+          next.duration = 0
+        }
+        return { [ch]: { ...s[ch], ...next } } as Partial<AudioState>
+      }),
+
+    clearAllPlaylists: () =>
+      set((s) => ({
+        track1: { ...s.track1, playlist: [] },
+        track2: { ...s.track2, playlist: [] },
+        combat: { ...s.combat, playlist: [] },
+      })),
 
     // ── Master volume ─────────────────────────────────────────────
     setMasterVolume: (vol) => {

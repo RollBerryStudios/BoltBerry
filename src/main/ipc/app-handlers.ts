@@ -28,6 +28,23 @@ function getAssetDir(type: string): string {
   return dir
 }
 
+/**
+ * Guard for DB-stored relative asset paths before we resolve + unlink
+ * them. Rejects absolute paths, parent-dir traversal, and data-URL /
+ * unrelated strings — the column could in principle contain a legacy
+ * data URL (pre-R3 portraits) or be blank, and we don't want to treat
+ * either as a file-deletion target.
+ */
+function isSafeAssetPath(p: string): boolean {
+  if (!p || typeof p !== 'string') return false
+  if (p.startsWith('data:')) return false
+  if (isAbsolute(p)) return false
+  if (p.includes('..')) return false
+  // Everything we persist lives under `assets/<type>/` so a strict
+  // prefix rules out random user-supplied strings.
+  return p.startsWith('assets/')
+}
+
 // Action names the renderer is allowed to route through SHOW_CONTEXT_MENU.
 // Derived from grep of `showContextMenu` callers in the renderer.
 const ALLOWED_CONTEXT_MENU_ACTIONS = new Set<string>([
@@ -555,6 +572,174 @@ export function registerAppHandlers(): void {
 // Save now (autosave trigger)
   ipcMain.handle(IPC.SAVE_NOW, () => {
     return true
+  })
+
+  // Character portrait — decodes a PNG data URL produced by the
+  // CircularCropper and writes it to `userData/assets/portrait/`. Keeps
+  // the `character_sheets.portrait_path` column under ~80 bytes (a
+  // relative path) instead of 40-60 KB of inline base64, so the DB
+  // doesn't balloon once a campaign accumulates a few dozen characters.
+  //
+  // Path is returned **relative** to userData (matching the existing
+  // `assets/...` convention used for maps and tokens) so campaign
+  // export / import can bundle the PNG and remap the path, and so
+  // moving the user-data folder across machines keeps portraits
+  // working.
+  //
+  // If `oldRelativePath` is provided we unlink it after a successful
+  // write, keeping `userData/assets/portrait/` from accreting orphans
+  // across edit cycles.
+  ipcMain.handle(IPC.SAVE_PORTRAIT, async (
+    _event,
+    dataUrl: string,
+    oldRelativePath: string | null = null,
+  ) => {
+    const MAX_PORTRAIT_SIZE = 2 * 1024 * 1024  // 2 MB — 256×256 PNG is ~40 KB
+    const match = dataUrl.match(/^data:image\/(png|jpeg|webp);base64,(.+)$/)
+    if (!match) return { success: false, error: 'invalid-data-url' }
+    const format = match[1]
+    const buf = Buffer.from(match[2], 'base64')
+    if (buf.length > MAX_PORTRAIT_SIZE) {
+      return { success: false, error: 'portrait-too-large' }
+    }
+    // Validate magic bytes so a mislabelled SVG / HTML can't slip in
+    const magicOK = (() => {
+      if (format === 'png')  return buf[0] === 0x89 && buf[1] === 0x50
+      if (format === 'jpeg') return buf[0] === 0xff && buf[1] === 0xd8
+      if (format === 'webp') return buf[0] === 0x52 && buf[1] === 0x49 && buf[8] === 0x57 && buf[9] === 0x45
+      return false
+    })()
+    if (!magicOK) return { success: false, error: 'format-mismatch' }
+    const ext = format === 'jpeg' ? 'jpg' : format
+    const destDir = getAssetDir('portrait')
+    // Random name keeps clone/rapid-edit flows collision-free without
+    // needing a DB lookup.
+    const rand = `${Date.now()}_${Math.random().toString(36).slice(2, 10)}`
+    const destPath = join(destDir, `${rand}.${ext}`)
+    try {
+      writeFileSync(destPath, buf)
+    } catch (err) {
+      console.error('[AppHandlers] Failed to write portrait:', err)
+      return { success: false, error: 'write-failed' }
+    }
+    const userDataPath = getCustomUserDataPath() || app.getPath('userData')
+    const relativePath = relative(userDataPath, destPath).split(sep).join('/')
+    // Opportunistic cleanup of the replaced file. Must be an asset-path
+    // (rejects absolute paths, `..` traversal, data URLs, random
+    // strings) to avoid deleting arbitrary disk files.
+    if (oldRelativePath && isSafeAssetPath(oldRelativePath)) {
+      try {
+        const absOld = join(userDataPath, oldRelativePath)
+        if (existsSync(absOld)) unlinkSync(absOld)
+      } catch (err) {
+        console.warn('[AppHandlers] Failed to unlink old portrait:', err)
+      }
+    }
+    return { success: true, path: relativePath }
+  })
+
+  // Delete a portrait file from disk — used when a character is
+  // deleted so its portrait doesn't outlive the row forever. Same
+  // safety guard as the unlink branch in SAVE_PORTRAIT.
+  ipcMain.handle(IPC.DELETE_PORTRAIT, async (_event, relativePath: string) => {
+    if (!isSafeAssetPath(relativePath)) return { success: false, error: 'invalid-path' }
+    const userDataPath = getCustomUserDataPath() || app.getPath('userData')
+    const abs = join(userDataPath, relativePath)
+    try {
+      if (existsSync(abs)) unlinkSync(abs)
+      return { success: true }
+    } catch (err) {
+      console.warn('[AppHandlers] Failed to unlink portrait:', err)
+      return { success: false, error: (err as Error).message }
+    }
+  })
+
+  // ── Asset orphan GC ──────────────────────────────────────────────────
+  // Sweeps userData/assets/** and matches every file against the set of
+  // paths still referenced by the DB. Anything unreferenced is an
+  // orphan: a file left over after a delete (map, token, handout,
+  // character portrait, audio track, …) whose row no longer points
+  // at it. Large campaigns + long usage accumulate dozens of MB of
+  // these, and without this sweep nothing ever cleans them up.
+  //
+  // Safety: we ONLY touch files under userData/assets/. Bundled SRD
+  // tokens (resources/data/monsters/<slug>/) live outside userData
+  // and are never scanned. `dryRun: true` returns the counts without
+  // deleting so the UI can preview + confirm.
+  ipcMain.handle(IPC.ASSET_CLEANUP, async (_event, dryRun: boolean) => {
+    try {
+      const userDataPath = getCustomUserDataPath() || app.getPath('userData')
+      const assetRoot = join(userDataPath, 'assets')
+      if (!existsSync(assetRoot)) {
+        return { success: true, count: 0, totalBytes: 0, paths: [] }
+      }
+
+      // Enumerate every file under assets/ (recursive). Symlinks
+      // ignored as a defensive measure — a malicious asset-folder
+      // symlink could otherwise trick us into deleting files outside
+      // userData.
+      const allFiles: string[] = []
+      const walk = (dir: string, relPrefix: string) => {
+        for (const entry of readdirSync(dir, { withFileTypes: true })) {
+          if (entry.isSymbolicLink()) continue
+          const rel = relPrefix ? `${relPrefix}/${entry.name}` : entry.name
+          const abs = join(dir, entry.name)
+          if (entry.isDirectory()) walk(abs, rel)
+          else if (entry.isFile()) allFiles.push(`assets/${rel}`)
+        }
+      }
+      walk(assetRoot, '')
+
+      // Collect every path the DB still references. Any column that
+      // points at a user-data asset is queried here; if new columns
+      // appear in future migrations, add them to the list.
+      const db = getDb()
+      const referenced = new Set<string>()
+      const pushRefs = (rows: Array<{ p: string | null }>) => {
+        for (const r of rows) {
+          if (r.p && !r.p.startsWith('data:') && !r.p.startsWith('bestiary://') && !r.p.startsWith('http')) {
+            // Normalise any accidental leading slash / backslash to
+            // the forward-slash relative form we store.
+            referenced.add(r.p.replace(/\\/g, '/').replace(/^\/+/, ''))
+          }
+        }
+      }
+      pushRefs(db.prepare('SELECT image_path AS p FROM maps').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT image_path AS p FROM tokens').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT image_path AS p FROM token_templates').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT image_path AS p FROM handouts').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT portrait_path AS p FROM character_sheets').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT ambient_track_path AS p FROM maps').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT audio_path AS p FROM audio_board_slots').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT path AS p FROM channel_playlist').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT path AS p FROM assets').all() as Array<{ p: string | null }>)
+
+      const orphans = allFiles.filter((f) => !referenced.has(f))
+
+      let totalBytes = 0
+      for (const o of orphans) {
+        try { totalBytes += statSync(join(userDataPath, o)).size } catch { /* ignore */ }
+      }
+
+      if (!dryRun) {
+        for (const o of orphans) {
+          try { unlinkSync(join(userDataPath, o)) } catch (err) {
+            console.warn('[AppHandlers] Failed to unlink orphan:', o, err)
+          }
+        }
+      }
+
+      return {
+        success: true,
+        count: orphans.length,
+        totalBytes,
+        // Cap the preview list so the IPC payload stays small on
+        // pathological cases (thousands of orphans).
+        paths: orphans.slice(0, 50),
+      }
+    } catch (err) {
+      return { success: false, count: 0, totalBytes: 0, error: (err as Error).message }
+    }
   })
 
   // ── Compendium ────────────────────────────────────────────────────────

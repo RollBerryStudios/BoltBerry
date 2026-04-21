@@ -8,6 +8,7 @@ import { MeasureLayer } from './MeasureLayer'
 import { MinimapOverlay } from './MinimapOverlay'
 import { DrawingLayer } from './DrawingLayer'
 import { GMPinLayer, GM_PIN_ADD_EVENT } from './GMPinLayer'
+import { PlayerViewportLayer } from './PlayerViewportLayer'
 import { LightingLayer } from './LightingLayer'
 import { WallLayer } from './WallLayer'
 import { RoomLayer } from './RoomLayer'
@@ -87,6 +88,11 @@ export function CanvasArea() {
   const [layerVisibility, setLayerVisibility] = useState<Record<string, boolean>>(DEFAULT_LAYER_VISIBILITY)
   const layerPanelRef = useRef<HTMLDivElement>(null)
   const [hudIdle, setHudIdle] = useState(false)
+  // Subscribe to the DM transform so the Player Control Mode overlay
+  // re-paints as the DM pans / zooms the canvas itself.
+  const scale = useMapTransformStore((s) => s.scale)
+  const offsetX = useMapTransformStore((s) => s.offsetX)
+  const offsetY = useMapTransformStore((s) => s.offsetY)
 
   // Close layer panel when clicking outside
   useEffect(() => {
@@ -156,26 +162,10 @@ export function CanvasArea() {
     return () => unsub?.()
   }, [])
 
-  // Continuous camera sync to player when follow mode is on (rAF-coalesced)
-  useEffect(() => {
-    let rafId: number | null = null
-    const unsub = useMapTransformStore.subscribe((state, prevState) => {
-      if (!useUIStore.getState().cameraFollowDM) return
-      if (state.scale !== prevState.scale || state.offsetX !== prevState.offsetX || state.offsetY !== prevState.offsetY) {
-        if (rafId !== null) cancelAnimationFrame(rafId)
-        rafId = requestAnimationFrame(() => {
-          rafId = null
-          const { scale, offsetX, offsetY, fitScale, canvasW, canvasH, imgW, imgH } = useMapTransformStore.getState()
-          if (!fitScale || !canvasW || !canvasH || !imgW || !imgH) return
-          const imageCenterX = (canvasW / 2 - offsetX) / scale
-          const imageCenterY = (canvasH / 2 - offsetY) / scale
-          const relZoom = scale / fitScale
-          window.electronAPI?.sendCameraView({ imageCenterX, imageCenterY, relZoom })
-        })
-      }
-    })
-    return () => { unsub(); if (rafId !== null) cancelAnimationFrame(rafId) }
-  }, [])
+  // Continuous camera sync was removed in favour of Player Control Mode
+  // (the dashed blue rectangle on the GM canvas). The DM's own pan / zoom
+  // no longer reaches the player window — only the explicit framed view
+  // does. See `usePlayerSync` for the replacement broadcast path.
 
   // Resize observer
   useEffect(() => {
@@ -586,6 +576,7 @@ export function CanvasArea() {
             stageRef={stageRef}
             gridSize={activeMap.gridSize}
             ftPerUnit={activeMap.ftPerUnit}
+            canvasSize={size}
           />
 
           {/* Layer 6: Drawing overlay */}
@@ -639,6 +630,20 @@ export function CanvasArea() {
               map={activeMap}
               stageRef={stageRef}
               canvasSize={size}
+            />
+          )}
+
+          {/* Layer 12: Player Control Mode — dashed rectangle that frames
+              what the player window renders. Drawn on top of every
+              other layer so it's always visible no matter what tool
+              the DM has active. Listens to nothing (interactions live
+              in MapLayer's handlers + keyboard shortcuts). */}
+          {activeMap && (
+            <PlayerViewportLayer
+              map={activeMap}
+              scale={scale}
+              offsetX={offsetX}
+              offsetY={offsetY}
             />
           )}
         </Stage>

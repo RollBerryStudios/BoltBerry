@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useAudioStore, type ChannelId, type AudioBoard, type AudioBoardSlot } from '../../../stores/audioStore'
+import { useAudioStore, type ChannelId, type AudioBoard, type AudioBoardSlot, type PlaylistEntry } from '../../../stores/audioStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import { useUIStore } from '../../../stores/uiStore'
 
@@ -19,10 +19,11 @@ const VOLUME_COL: Record<ChannelId, string> = {
   combat: 'combat_volume',
 }
 
-function ChannelStrip({ chId, label, activeMapId, combatControl }: {
+function ChannelStrip({ chId, label, activeMapId, activeCampaignId, combatControl }: {
   chId: ChannelId
   label: string
   activeMapId: number | null
+  activeCampaignId: number | null
   /** Rendered on the 'combat' strip only — integrates the combat-mode
    *  enable/disable toggle into the Kampf card instead of floating it
    *  between other tracks. */
@@ -32,17 +33,106 @@ function ChannelStrip({ chId, label, activeMapId, combatControl }: {
   const store = useAudioStore()
   const ch = store[chId]
   const combatActive = useAudioStore((s) => s.combatActive)
+  const [showPlaylist, setShowPlaylist] = useState(false)
+  // 'down' = dropdown hangs below the track button (default); 'up' =
+  // flipped above because the below-variant would overflow the viewport.
+  // Mirrors the token context menu's clamp pattern — in tight sidebar
+  // / popover layouts the playlist dropdown would otherwise be clipped.
+  const [dropdownDir, setDropdownDir] = useState<'down' | 'up'>('down')
+  const menuRef = useRef<HTMLDivElement>(null)
+  const fileBtnRef = useRef<HTMLButtonElement>(null)
 
   const disabled = chId !== 'combat' && combatActive
 
-  async function handleImport() {
-    if (!window.electronAPI) return
+  // Close the dropdown on outside click so nested context menus don't
+  // pile up. Escape-to-close is handled in the key listener below.
+  useEffect(() => {
+    if (!showPlaylist) return
+    function onClickOutside(e: MouseEvent) {
+      if (menuRef.current?.contains(e.target as Node)) return
+      setShowPlaylist(false)
+    }
+    function onKey(e: KeyboardEvent) { if (e.key === 'Escape') setShowPlaylist(false) }
+    document.addEventListener('mousedown', onClickOutside)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onClickOutside)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [showPlaylist])
+
+  // Flip the dropdown above the track button when the default "below"
+  // placement would overflow the viewport. Channels near the bottom of
+  // the right sidebar or the compact audio popover would otherwise
+  // clip the list; measuring post-mount and toggling a direction flag
+  // is cheaper + more robust than a portal.
+  useLayoutEffect(() => {
+    if (!showPlaylist) { setDropdownDir('down'); return }
+    const btn = fileBtnRef.current
+    const menu = menuRef.current
+    if (!btn || !menu) return
+    const btnRect = btn.getBoundingClientRect()
+    const menuRect = menu.getBoundingClientRect()
+    const spaceBelow = window.innerHeight - btnRect.bottom
+    const spaceAbove = btnRect.top
+    // Only flip when below is truly too tight and above has more room
+    // — prevents thrashing when both are fine.
+    if (menuRect.height > spaceBelow - 8 && spaceAbove > spaceBelow) {
+      setDropdownDir('up')
+    } else {
+      setDropdownDir('down')
+    }
+  }, [showPlaylist, ch.playlist.length])
+
+  // Add a track to the channel's playlist. Persists to DB and updates
+  // the store so the dropdown reflects the new entry immediately. Picks
+  // the new track as active when the playlist was previously empty so
+  // the ▶ button has something to play without requiring a second click.
+  async function handleAddTrack() {
+    if (!window.electronAPI || !activeCampaignId) return
     try {
       const result = await window.electronAPI.importFile('audio')
-      if (result) store.loadChannel(chId, result.path)
+      if (!result) return
+      const fileName = result.path.split(/[\\/]/).pop() ?? result.path
+      const position = ch.playlist.length
+      const dbResult = await window.electronAPI.dbRun(
+        `INSERT INTO channel_playlist (campaign_id, channel, path, file_name, position)
+         VALUES (?, ?, ?, ?, ?)`,
+        [activeCampaignId, chId, result.path, fileName, position],
+      )
+      const id = Number(dbResult?.lastInsertRowid ?? 0)
+      if (!id) return
+      const wasEmpty = ch.playlist.length === 0
+      store.addPlaylistEntry(chId, { id, path: result.path, fileName }, wasEmpty)
+      if (wasEmpty) store.loadChannel(chId, result.path)
     } catch (err) {
-      console.error('[AudioPanel] importFile failed:', err)
+      console.error('[AudioPanel] addTrack failed:', err)
     }
+  }
+
+  // Activate a pre-assigned track. Also closes the dropdown so the DM
+  // can ▶ immediately without a second click.
+  function handleActivate(entry: PlaylistEntry) {
+    store.loadChannel(chId, entry.path)
+    setShowPlaylist(false)
+  }
+
+  async function handleRemoveTrack(entry: PlaylistEntry, evt: React.MouseEvent) {
+    evt.stopPropagation()
+    if (!window.electronAPI) return
+    try {
+      await window.electronAPI.dbRun(
+        'DELETE FROM channel_playlist WHERE id = ?', [entry.id],
+      )
+      store.removePlaylistEntry(chId, entry.id)
+    } catch (err) {
+      console.error('[AudioPanel] removeTrack failed:', err)
+    }
+  }
+
+  function handleChannelContextMenu(e: React.MouseEvent) {
+    e.preventDefault()
+    setShowPlaylist((v) => !v)
   }
 
   async function handleSetAmbient() {
@@ -61,9 +151,17 @@ function ChannelStrip({ chId, label, activeMapId, combatControl }: {
   const channelClass = classes.join(' ')
 
   return (
-    <div className={channelClass}>
+    <div className={channelClass} onContextMenu={handleChannelContextMenu}>
       <div className="audio-channel-head">
         <span className="audio-channel-label">{label}</span>
+        {ch.playlist.length > 1 && (
+          <span
+            className="audio-channel-playlist-count"
+            title={t('audio.playlistCount', { count: ch.playlist.length })}
+          >
+            ♪ {ch.playlist.length}
+          </span>
+        )}
         {ch.playing && (
           <span className="audio-channel-badge animate-pulse">♪ {t('audio.play')}</span>
         )}
@@ -79,15 +177,81 @@ function ChannelStrip({ chId, label, activeMapId, combatControl }: {
         )}
       </div>
 
-      <button
-        className={`audio-channel-file${ch.filePath ? '' : ' empty'}`}
-        onClick={handleImport}
-        disabled={disabled}
-        title={ch.filePath ?? t('audio.loadFile')}
-      >
-        <span className="audio-channel-file-icon" aria-hidden="true">♪</span>
-        <span className="audio-channel-file-name">{ch.fileName ?? t('audio.loadFile')}</span>
-      </button>
+      {/* Current track display + playlist picker. Left-click swaps the
+          active track when there are multiple (or opens the add-file
+          picker when the playlist is empty). Right-click anywhere on
+          the strip also opens the dropdown — the contextmenu handler
+          above catches it. */}
+      <div className="audio-channel-file-wrap">
+        <button
+          ref={fileBtnRef}
+          className={`audio-channel-file${ch.filePath ? '' : ' empty'}`}
+          onClick={() => {
+            // Empty playlist + no campaign → nothing useful to do. An
+            // empty playlist *with* a campaign opens the file picker
+            // directly to save the DM a click.
+            if (ch.playlist.length === 0) {
+              if (activeCampaignId) void handleAddTrack()
+              return
+            }
+            setShowPlaylist((v) => !v)
+          }}
+          disabled={disabled || (ch.playlist.length === 0 && !activeCampaignId)}
+          title={
+            ch.playlist.length === 0 && !activeCampaignId
+              ? t('audio.noCampaign')
+              : (ch.filePath ?? t('audio.loadFile'))
+          }
+        >
+          <span className="audio-channel-file-icon" aria-hidden="true">♪</span>
+          <span className="audio-channel-file-name">{ch.fileName ?? t('audio.loadFile')}</span>
+          {ch.playlist.length > 0 && <span className="audio-channel-file-chev">▾</span>}
+        </button>
+        {showPlaylist && (
+          <div
+            className={`audio-channel-playlist audio-channel-playlist-${dropdownDir}`}
+            ref={menuRef}
+            role="menu"
+          >
+            {ch.playlist.length === 0 && (
+              <div className="audio-channel-playlist-empty">{t('audio.playlistEmpty')}</div>
+            )}
+            {ch.playlist.map((entry) => {
+              const isActive = entry.path === ch.filePath
+              return (
+                <div
+                  key={entry.id}
+                  className={`audio-channel-playlist-item${isActive ? ' active' : ''}`}
+                  role="menuitem"
+                  onClick={() => handleActivate(entry)}
+                  title={entry.path}
+                >
+                  <span className="audio-channel-playlist-item-icon">{isActive ? '▶' : '♪'}</span>
+                  <span className="audio-channel-playlist-item-name">{entry.fileName}</span>
+                  <button
+                    type="button"
+                    className="audio-channel-playlist-item-remove"
+                    onClick={(e) => handleRemoveTrack(entry, e)}
+                    title={t('audio.removeTrack')}
+                    aria-label={t('audio.removeTrack')}
+                  >
+                    ✕
+                  </button>
+                </div>
+              )
+            })}
+            <button
+              type="button"
+              className="audio-channel-playlist-add"
+              onClick={() => { setShowPlaylist(false); void handleAddTrack() }}
+              disabled={!activeCampaignId}
+              title={activeCampaignId ? undefined : t('audio.noCampaign')}
+            >
+              + {t('audio.addTrack')}
+            </button>
+          </div>
+        )}
+      </div>
 
       {ch.filePath && (
         <div className="audio-channel-seek">
@@ -373,7 +537,18 @@ function BoardManager({ boards, activeBoardIndex, onSelect, campaignId, onBoards
 // `layout="wide"`: two-column (music | sfx) — used in CampaignView
 // `layout="narrow"` (default): tabbed — used in the right sidebar
 
-export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }) {
+/**
+ * AudioPanel layouts:
+ *  - 'narrow' — tabbed (Music / SFX) for the right sidebar during play.
+ *  - 'wide'   — full two-column view; music + SFX side by side.
+ *  - 'wide-music' / 'wide-sfx' — split one section into its own view.
+ *    CampaignView uses these for the separated "Audio" and "SFX" tabs
+ *    so content management stays focused while the wide layout is
+ *    still available elsewhere if needed.
+ */
+export type AudioPanelLayout = 'narrow' | 'wide' | 'wide-music' | 'wide-sfx'
+
+export function AudioPanel({ layout = 'narrow' }: { layout?: AudioPanelLayout }) {
   const { t } = useTranslation()
   const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
   const activeMapId = useCampaignStore((s) => s.activeMapId)
@@ -382,6 +557,7 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
     setMasterVolume, setSfxVolume, setActiveBoardIndex,
     activateCombat, deactivateCombat,
     triggerSfx, boards, activeBoardIndex, setBoards,
+    setChannelPlaylist, clearAllPlaylists,
   } = useAudioStore()
 
   const [editingSlot, setEditingSlot] = useState<{ boardId: number; slotIndex: number } | null>(null)
@@ -421,6 +597,40 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
 
   useEffect(() => { loadBoards() }, [loadBoards])
 
+  // Hydrate per-channel playlists when the active campaign changes so
+  // the right-click menu always reflects the DM's pre-assigned tracks.
+  // Keyed on `activeCampaignId` so campaign switches clear + reload the
+  // store cleanly (otherwise track1's playlist would bleed between
+  // campaigns because ChannelState lives in the singleton store).
+  useEffect(() => {
+    if (!activeCampaignId) { clearAllPlaylists(); return }
+    let cancelled = false
+    ;(async () => {
+      try {
+        const rows = await window.electronAPI?.dbQuery<{
+          id: number; channel: ChannelId; path: string; file_name: string
+        }>(
+          `SELECT id, channel, path, file_name
+             FROM channel_playlist
+            WHERE campaign_id = ?
+            ORDER BY channel, position, id`,
+          [activeCampaignId],
+        ) ?? []
+        if (cancelled) return
+        const byChannel: Record<ChannelId, PlaylistEntry[]> = { track1: [], track2: [], combat: [] }
+        for (const r of rows) {
+          byChannel[r.channel]?.push({ id: r.id, path: r.path, fileName: r.file_name })
+        }
+        setChannelPlaylist('track1', byChannel.track1)
+        setChannelPlaylist('track2', byChannel.track2)
+        setChannelPlaylist('combat', byChannel.combat)
+      } catch (err) {
+        console.error('[AudioPanel] loadPlaylists failed:', err)
+      }
+    })()
+    return () => { cancelled = true }
+  }, [activeCampaignId, setChannelPlaylist, clearAllPlaylists])
+
   const activeBoard = boards[activeBoardIndex] ?? null
 
   function handleTriggerSlot(slotIndex: number) {
@@ -439,16 +649,22 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
         <span className="audio-master-value">{Math.round(masterVolume * 100)}%</span>
       </div>
 
-      <ChannelStrip chId="track1" label={t('audio.track1')} activeMapId={activeMapId} />
-      <ChannelStrip chId="track2" label={t('audio.track2')} activeMapId={activeMapId} />
+      <ChannelStrip chId="track1" label={t('audio.track1')} activeMapId={activeMapId} activeCampaignId={activeCampaignId} />
+      <ChannelStrip chId="track2" label={t('audio.track2')} activeMapId={activeMapId} activeCampaignId={activeCampaignId} />
+      {/* The combat-mode toggle is a gameplay action (ducks the music
+          tracks and swaps to the Kampf channel). It has no place in the
+          CampaignView content overview — that view only manages assets,
+          not the live session. Only the narrow layout (right sidebar
+          during play) shows the pill. */}
       <ChannelStrip
         chId="combat"
         label={t('audio.combat')}
         activeMapId={activeMapId}
-        combatControl={{
+        activeCampaignId={activeCampaignId}
+        combatControl={layout === 'narrow' ? {
           active: combatActive,
           onToggle: combatActive ? deactivateCombat : activateCombat,
-        }}
+        } : undefined}
       />
 
       {!activeCampaignId && (
@@ -512,11 +728,42 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
     </div>
   )
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
+  // Wide is rendered inside CampaignView's own flex column (with a
+  // definite height) — the original "fill the parent" sizing works
+  // there. Narrow lives inside FloatingUtilityDock's popover whose
+  // height is *content-driven*; with `height: 100%` the inner
+  // `flex: 1` content collapsed to zero, leaving the popover as a
+  // tiny white shell. The narrow path now uses intrinsic sizing and
+  // lets the popover-body scroll if content overflows.
+  // The split layouts render a single section full-width. CampaignView
+  // uses these for the separated "Audio" and "SFX" tabs; wide (both
+  // columns) stays available if any caller wants the old side-by-side.
+  if (layout === 'wide-music' || layout === 'wide-sfx') {
+    const body = layout === 'wide-music' ? musicContent : sfxContent
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
+        <div style={{
+          flex: 1, overflowY: 'auto',
+          padding: 'var(--sp-4) var(--sp-5)',
+        }}>
+          {body}
+        </div>
 
-      {layout === 'wide' ? (
-        /* ── Wide two-column layout ── */
+        {editingSlot && (
+          <SlotEditor
+            boardId={editingSlot.boardId}
+            slot={boards.find((b) => b.id === editingSlot.boardId)?.slots.find((s) => s.slotNumber === editingSlot.slotIndex)}
+            slotIndex={editingSlot.slotIndex}
+            onClose={() => setEditingSlot(null)}
+          />
+        )}
+      </div>
+    )
+  }
+
+  if (layout === 'wide') {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
         <div style={{
           flex: 1, overflow: 'hidden',
           display: 'grid',
@@ -549,30 +796,40 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: 'narrow' | 'wide' }
             {sfxContent}
           </div>
         </div>
-      ) : (
-        /* ── Narrow tabbed layout (sidebar) ── */
-        <>
-          <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', flexShrink: 0 }}>
-            {(['music', 'sfx'] as const).map((sec) => (
-              <button
-                key={sec}
-                onClick={() => setActiveSection(sec)}
-                style={{
-                  flex: 1, padding: '5px 0', background: 'none', border: 'none',
-                  borderBottom: activeSection === sec ? '2px solid var(--accent-blue)' : '2px solid transparent',
-                  color: activeSection === sec ? 'var(--accent-blue-light)' : 'var(--text-muted)',
-                  cursor: 'pointer', fontSize: 11, fontWeight: 600,
-                }}
-              >
-                {sec === 'music' ? t('audio.tabMusic') : t('audio.tabSfx')}
-              </button>
-            ))}
-          </div>
-          <div style={{ flex: 1, overflowY: 'auto', padding: '8px 10px' }}>
-            {activeSection === 'music' ? musicContent : sfxContent}
-          </div>
-        </>
-      )}
+
+        {editingSlot && (
+          <SlotEditor
+            boardId={editingSlot.boardId}
+            slot={boards.find((b) => b.id === editingSlot.boardId)?.slots.find((s) => s.slotNumber === editingSlot.slotIndex)}
+            slotIndex={editingSlot.slotIndex}
+            onClose={() => setEditingSlot(null)}
+          />
+        )}
+      </div>
+    )
+  }
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', position: 'sticky', top: 0, background: 'var(--bg-elevated)', zIndex: 1 }}>
+        {(['music', 'sfx'] as const).map((sec) => (
+          <button
+            key={sec}
+            onClick={() => setActiveSection(sec)}
+            style={{
+              flex: 1, padding: '5px 0', background: 'none', border: 'none',
+              borderBottom: activeSection === sec ? '2px solid var(--accent-blue)' : '2px solid transparent',
+              color: activeSection === sec ? 'var(--accent-blue-light)' : 'var(--text-muted)',
+              cursor: 'pointer', fontSize: 11, fontWeight: 600,
+            }}
+          >
+            {sec === 'music' ? t('audio.tabMusic') : t('audio.tabSfx')}
+          </button>
+        ))}
+      </div>
+      <div style={{ padding: '8px 10px' }}>
+        {activeSection === 'music' ? musicContent : sfxContent}
+      </div>
 
       {/* Slot editor modal */}
       {editingSlot && (

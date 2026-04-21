@@ -9,6 +9,7 @@ import type {
 } from '@shared/ipc-types'
 import type { AppLanguage } from '../../stores/uiStore'
 import { useTokenStore } from '../../stores/tokenStore'
+import { useUndoStore, nextCommandId } from '../../stores/undoStore'
 import { localized, localizedArray, pickName, tokenTint } from './util'
 
 /* Cross-cutting actions shared by every bestiary detail view + the four
@@ -110,6 +111,34 @@ export async function spawnMonsterOnMap(opts: {
     lightColor: '#ffffff',
   }
   useTokenStore.getState().addToken(newToken)
+
+  // Register a command so Ctrl+Z rolls back a Wiki / encounter /
+  // initiative / encounter-picker spawn the same way drag-drop
+  // spawns from CanvasArea already do. Closure-locals capture the
+  // id + restored row so redo re-inserts with matching contents.
+  let currentId: number = res.lastInsertRowid
+  useUndoStore.getState().pushCommand({
+    id: nextCommandId(),
+    label: `Spawn ${name}`,
+    undo: async () => {
+      await api.dbRun('DELETE FROM tokens WHERE id = ?', [currentId])
+      useTokenStore.getState().removeToken(currentId)
+    },
+    redo: async () => {
+      const r = await api.dbRun(
+        `INSERT INTO tokens
+           (map_id, name, image_path, x, y, size, hp_current, hp_max,
+            visible_to_players, rotation, locked, z_index, marker_color,
+            ac, notes, status_effects, faction, show_name, light_radius, light_color)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, 0, 0, 0, ?, ?, ?, NULL, ?, 1, 0, '#ffffff')`,
+        [opts.mapId, name, imagePath, cx, cy, size, hp, hp, tint, ac, null, faction],
+      )
+      if (!r) return
+      currentId = r.lastInsertRowid
+      useTokenStore.getState().addToken({ ...newToken, id: currentId })
+    },
+  })
+
   return true
 }
 

@@ -413,12 +413,17 @@ export function NotesPanel() {
 
       {/* ── Category tabs (campaign tab only) ──────────────────────────── */}
       {activeTab === 'campaign' && (
+        // Wrap to multiple rows when the sidebar is narrow so trailing
+        // categories like "Sonstiges" stay reachable. Originally this
+        // strip used `overflow-x: auto + scrollbar-width: none`, which
+        // hid both the scrollbar and any tabs that overflowed — the
+        // user couldn't reach them at all.
         <div style={{
           display: 'flex',
-          overflowX: 'auto',
+          flexWrap: 'wrap',
+          rowGap: 2,
           borderBottom: '1px solid var(--border-subtle)',
           flexShrink: 0,
-          scrollbarWidth: 'none',
         }}>
           {CAMPAIGN_CATEGORIES.map((cat) => {
             const count = notesByBucket[cat.id]?.length ?? 0

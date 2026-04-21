@@ -3,7 +3,6 @@ import { useUIStore } from '../stores/uiStore'
 import { useTokenStore } from '../stores/tokenStore'
 import { useCampaignStore } from '../stores/campaignStore'
 import { useWallStore } from '../stores/wallStore'
-import { useMapTransformStore } from '../stores/mapTransformStore'
 import type { PlayerFullState, PlayerTokenState, PlayerWallState } from '@shared/ipc-types'
 
 export function usePlayerSync() {
@@ -16,7 +15,7 @@ export function usePlayerSync() {
   // All store reads use getState() so this function never goes stale.
   const buildAndSendFullSync = useCallback(async () => {
     if (!window.electronAPI) return
-    const { appMode, blackoutActive, atmosphereImagePath, cameraFollowDM } = useUIStore.getState()
+    const { appMode, blackoutActive, atmosphereImagePath } = useUIStore.getState()
     const { activeMapId: mapId, activeMaps } = useCampaignStore.getState()
     const { tokens } = useTokenStore.getState()
 
@@ -78,8 +77,21 @@ export function usePlayerSync() {
       }
     }
 
+    const ui = useUIStore.getState()
+    const viewport = ui.playerViewportMode && ui.playerViewport ? ui.playerViewport : null
+
+    // Bundle walls with the full-sync payload so a player reconnecting
+    // mid-session has LOS geometry available before the next
+    // PLAYER_WALLS broadcast fires. Scoped to the active map; empty
+    // when no map is active so the previous map's walls don't leak
+    // into an atmosphere-only / idle sync.
+    const activeWalls = useWallStore.getState().walls
+      .filter((w) => w.mapId === mapId)
+      .map((w) => ({ x1: w.x1, y1: w.y1, x2: w.x2, y2: w.y2, wallType: w.wallType, doorState: w.doorState }))
+
     const state: PlayerFullState = {
       mode,
+      viewport,
       map: activeMap
         ? {
             imagePath: activeMap.imagePath,
@@ -97,19 +109,10 @@ export function usePlayerSync() {
       atmosphereImagePath,
       blackout: blackoutActive,
       drawings: playerDrawings,
+      walls: activeWalls,
     }
 
     window.electronAPI?.sendFullSync(state)
-
-    if (cameraFollowDM && state.mode === 'map' && state.map) {
-      const { scale, offsetX, offsetY, fitScale, canvasW, canvasH } = useMapTransformStore.getState()
-      if (fitScale && canvasW && canvasH) {
-        const imageCenterX = (canvasW / 2 - offsetX) / scale
-        const imageCenterY = (canvasH / 2 - offsetY) / scale
-        const relZoom = scale / fitScale
-        window.electronAPI?.sendCameraView({ imageCenterX, imageCenterY, relZoom })
-      }
-    }
   }, [])
 
   // ── Clear playerConnected when the player window actually closes ────────────
@@ -139,15 +142,39 @@ export function usePlayerSync() {
     return () => { unsub() }
   }, [buildAndSendFullSync, setPlayerConnected])
 
-  // ── Proactively push full state when DM starts a session ────────────────────
-  // The player may have connected in prep mode (received nothing so far).
-  // When sessionMode transitions to non-prep, push the current state immediately.
+  // ── Session start: push the current state to the player immediately ─────────
+  // The player may have connected during prep (received nothing so far);
+  // when sessionMode flips to non-prep we push the current map / fog /
+  // tokens right away so the player doesn't have to request a full sync.
   useEffect(() => {
     if (sessionMode === 'prep' || !window.electronAPI) return
     if (useUIStore.getState().playerConnected) {
       buildAndSendFullSync()
     }
   }, [sessionMode, buildAndSendFullSync])
+
+  // ── Session end: kick the player back to the idle splash ────────────────────
+  // Going from live → prep mid-session must hide whatever was on screen
+  // immediately. We push a minimal full-sync with `mode: 'idle'` which
+  // PlayerApp interprets as "wipe everything and show the BoltBerry
+  // waiting screen". The playerConnected guard means the very first
+  // mount (sessionMode='prep' before any window opens) is a no-op.
+  useEffect(() => {
+    if (sessionMode !== 'prep' || !window.electronAPI) return
+    if (!useUIStore.getState().playerConnected) return
+    window.electronAPI.sendFullSync({
+      mode: 'idle',
+      viewport: null,
+      map: null,
+      tokens: [],
+      fogBitmap: null,
+      exploredBitmap: null,
+      atmosphereImagePath: null,
+      blackout: false,
+      drawings: [],
+      walls: [],
+    })
+  }, [sessionMode])
 
   // ── Broadcast wall data whenever the active map or wall list changes ────────
   useEffect(() => {
@@ -164,4 +191,34 @@ export function usePlayerSync() {
     if (drawingClearTick === 0 || sessionMode === 'prep' || !window.electronAPI) return
     if (useUIStore.getState().playerConnected) buildAndSendFullSync()
   }, [drawingClearTick, sessionMode, buildAndSendFullSync])
+
+  // ── Player Control Mode — viewport broadcast ────────────────────────────────
+  // Subscribes to the whole `playerViewport` object plus its mode flag so
+  // every drag / wheel / arrow update reaches the player window. rAF-
+  // throttles the send during rapid mutations (drag at 60 Hz would
+  // otherwise flood the IPC channel). Fires an explicit null when the
+  // mode turns off so the player window can fall back to camera / fit
+  // cleanly instead of sticking on the last rect.
+  const playerViewportMode = useUIStore((s) => s.playerViewportMode)
+  const playerViewport = useUIStore((s) => s.playerViewport)
+  useEffect(() => {
+    if (!window.electronAPI) return
+    let frame = 0
+    const payload = playerViewportMode ? playerViewport : null
+    // Schedule inside a single rAF so bursty updates (mouse drag) coalesce
+    // into at most one send per frame. Cleanup cancels the pending send
+    // on unmount / fast updates so payloads don't pile up.
+    frame = requestAnimationFrame(() => {
+      window.electronAPI?.sendPlayerViewport(payload)
+    })
+    return () => cancelAnimationFrame(frame)
+  }, [playerViewportMode, playerViewport])
+
+  // ── Map switch — drop any stale Player Control Mode rect ────────────────────
+  // The rect lives in map-image coords; switching maps makes those
+  // coords meaningless. Clearing the rect forces the next toolbar
+  // activation to seed a fresh default on the new map.
+  useEffect(() => {
+    useUIStore.getState().setPlayerViewport(null)
+  }, [activeMapId])
 }
