@@ -84,10 +84,14 @@
   --titlebar-h:    36px;
   /* Width of the OS-native window-control area (min / max / close) on
      Windows & Linux. Electron's titleBarOverlay grows with DPI — ~138px
-     at 100%, ~173px at 125%, ~207px at 150% — so we reserve a buffer
-     that covers 125% safely. Used by every drag-region top bar
-     (DmTitleBar, Welcome right rail, Wiki, Compendium). macOS reserves
-     the mirror value on the LEFT for the traffic lights instead. */
+     at 100%, ~173px at 125%, ~207px at 150%. main.tsx overwrites this
+     value at runtime from window.devicePixelRatio so the gutter scales
+     per-monitor (Electron fires `resize` on DPI change). The static
+     176 px below is the fallback for SSR / early-render / macOS where
+     the JS hook doesn't run. Used by every drag-region top bar
+     (DmTitleBar, Welcome right rail, CampaignView, Wiki, Compendium).
+     macOS reserves the mirror value on the LEFT for the traffic
+     lights instead. */
   --titlebar-controls-w: 176px;
   --titlebar-traffic-w:   72px;
 
