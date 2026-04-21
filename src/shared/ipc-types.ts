@@ -96,6 +96,13 @@ export const IPC = {
   INITIATIVE_DELETE: 'initiative:delete',
   INITIATIVE_DELETE_BY_MAP: 'initiative:delete-by-map',
 
+  // Walls domain — semantic replacements for raw SQL against `walls`.
+  WALLS_LIST_BY_MAP: 'walls:list-by-map',
+  WALLS_CREATE: 'walls:create',
+  WALLS_RESTORE: 'walls:restore',
+  WALLS_UPDATE: 'walls:update',
+  WALLS_DELETE: 'walls:delete',
+
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
 

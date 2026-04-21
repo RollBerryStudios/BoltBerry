@@ -860,14 +860,12 @@ async function loadMapData(mapId: number, map: MapRecord) {
     const campaignId = useCampaignStore.getState().activeCampaignId
 
     // Fire all independent DB queries in parallel for faster map load
-    const [tokens, initiative, wallRows, encRows, roomRows, fogRows, drawingRows] = await Promise.all([
+    const [tokens, initiative, walls, encRows, roomRows, fogRows, drawingRows] = await Promise.all([
       window.electronAPI.tokens.listByMap(mapId),
 
       window.electronAPI.initiative.listByMap(mapId),
 
-      window.electronAPI.dbQuery<{
-        id: number; map_id: number; x1: number; y1: number; x2: number; y2: number; wall_type: string; door_state: string
-      }>('SELECT id, map_id, x1, y1, x2, y2, wall_type, door_state FROM walls WHERE map_id = ?', [mapId]),
+      window.electronAPI.walls.listByMap(mapId),
 
       campaignId
         ? window.electronAPI.dbQuery<{
@@ -899,13 +897,7 @@ async function loadMapData(mapId: number, map: MapRecord) {
 
     useInitiativeStore.getState().setEntries(initiative)
 
-    useWallStore.getState().setWalls(wallRows.map((r) => ({
-      id: r.id,
-      mapId: r.map_id,
-      x1: r.x1, y1: r.y1, x2: r.x2, y2: r.y2,
-      wallType: r.wall_type as any,
-      doorState: r.door_state as any,
-    })))
+    useWallStore.getState().setWalls(walls)
 
     if (campaignId && encRows.length > 0) {
       useEncounterStore.getState().setEncounters(encRows.map((r) => ({

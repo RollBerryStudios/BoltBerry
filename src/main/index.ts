@@ -13,6 +13,7 @@ import { registerCampaignHandlers } from './ipc/campaign-handlers'
 import { registerMapHandlers } from './ipc/map-handlers'
 import { registerTokenHandlers } from './ipc/token-handlers'
 import { registerInitiativeHandlers } from './ipc/initiative-handlers'
+import { registerWallHandlers } from './ipc/wall-handlers'
 import { registerExportImportHandlers } from './ipc/export-import'
 import { buildAppMenu } from './menu'
 import { initAutoUpdater } from './updater'
@@ -99,6 +100,7 @@ app.whenReady().then(() => {
   registerMapHandlers()
   registerTokenHandlers()
   registerInitiativeHandlers()
+  registerWallHandlers()
   registerExportImportHandlers()
 
   buildAppMenu(loadPrefs().menuLanguage)

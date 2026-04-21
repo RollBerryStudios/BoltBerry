@@ -327,15 +327,16 @@ export function EncounterPanel() {
 
     for (const w of template.walls) {
       try {
-        const result = await window.electronAPI.dbRun(
-          'INSERT INTO walls (map_id, x1, y1, x2, y2, wall_type, door_state) VALUES (?, ?, ?, ?, ?, ?, ?)',
-          [activeMapId, w.x1, w.y1, w.x2, w.y2, w.wallType, w.doorState]
-        )
-        useWallStore.getState().addWall({
-          id: result.lastInsertRowid, mapId: activeMapId,
-          x1: w.x1, y1: w.y1, x2: w.x2, y2: w.y2,
-          wallType: w.wallType as any, doorState: w.doorState as any,
+        const created = await window.electronAPI.walls.create({
+          mapId: activeMapId,
+          x1: w.x1,
+          y1: w.y1,
+          x2: w.x2,
+          y2: w.y2,
+          wallType: w.wallType as any,
+          doorState: w.doorState as any,
         })
+        useWallStore.getState().addWall(created)
       } catch (err) {
         console.error('[EncounterPanel] spawn wall failed:', err)
       }

@@ -85,9 +85,7 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
     if (dx > minLen || dy > minLen) {
       if (!window.electronAPI || !activeMapId) { setDrawingStart(null); setPreviewEnd(null); return }
       // Freeze the segment + map id in closure-locals so the undo
-      // command survives later state changes (map switch clears the
-      // undo stack anyway, but the closure-locals guard against
-      // subtle reorder cases).
+      // command survives later state changes.
       const segment = {
         mapId: activeMapId,
         x1: drawingStart.x, y1: drawingStart.y,
@@ -95,28 +93,22 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
         wallType: wallTypeForNew,
         doorState: 'closed' as const,
       }
-      const result = await window.electronAPI.dbRun(
-        'INSERT INTO walls (map_id, x1, y1, x2, y2, wall_type, door_state) VALUES (?, ?, ?, ?, ?, ?, ?)',
-        [segment.mapId, segment.x1, segment.y1, segment.x2, segment.y2, segment.wallType, segment.doorState]
-      )
-      let currentId: number = result.lastInsertRowid
-      addWall({ id: currentId, ...segment })
+      const created = await window.electronAPI.walls.create(segment)
+      let currentId: number = created.id
+      addWall(created)
 
       useUndoStore.getState().pushCommand({
         id: nextCommandId(),
         label: wallTypeForNew === 'door' ? 'Tür' : 'Wand',
         undo: async () => {
-          await window.electronAPI?.dbRun('DELETE FROM walls WHERE id = ?', [currentId])
+          await window.electronAPI?.walls.delete(currentId)
           useWallStore.getState().removeWall(currentId)
         },
         redo: async () => {
-          const r = await window.electronAPI?.dbRun(
-            'INSERT INTO walls (map_id, x1, y1, x2, y2, wall_type, door_state) VALUES (?, ?, ?, ?, ?, ?, ?)',
-            [segment.mapId, segment.x1, segment.y1, segment.x2, segment.y2, segment.wallType, segment.doorState]
-          )
+          const r = await window.electronAPI?.walls.create(segment)
           if (!r) return
-          currentId = r.lastInsertRowid
-          useWallStore.getState().addWall({ id: currentId, ...segment })
+          currentId = r.id
+          useWallStore.getState().addWall(r)
         },
       })
     }
@@ -160,24 +152,22 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
     const wallToDelete = walls.find((w) => w.id === selectedWallId)
     removeWall(selectedWallId)
     try {
-      await window.electronAPI?.dbRun('DELETE FROM walls WHERE id = ?', [selectedWallId])
+      await window.electronAPI?.walls.delete(selectedWallId)
       if (wallToDelete) {
         const deleted = wallToDelete
         useUndoStore.getState().pushCommand({
           id: nextCommandId(),
           label: 'Delete wall',
           undo: async () => {
-            const result = await window.electronAPI?.dbRun(
-              'INSERT INTO walls (map_id, x1, y1, x2, y2, wall_type, door_state) VALUES (?, ?, ?, ?, ?, ?, ?)',
-              [deleted.mapId, deleted.x1, deleted.y1, deleted.x2, deleted.y2, deleted.wallType, deleted.doorState],
-            )
-            if (result?.lastInsertRowid) {
-              useWallStore.getState().addWall({ ...deleted, id: result.lastInsertRowid })
-            }
+            // Restore with the original id so any outside reference
+            // (e.g. a cached LOS segment list that keyed on it) keeps
+            // pointing at the same row.
+            const restored = await window.electronAPI?.walls.restore(deleted)
+            if (restored) useWallStore.getState().addWall(restored)
           },
           redo: async () => {
             removeWall(deleted.id)
-            await window.electronAPI?.dbRun('DELETE FROM walls WHERE id = ?', [deleted.id])
+            await window.electronAPI?.walls.delete(deleted.id)
           },
         })
       }
@@ -195,7 +185,10 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
     const newState: string = type === 'wall' ? 'closed' : (wall.doorState ?? 'closed')
     updateWall(selectedWallId, { wallType: type, doorState: newState as any })
     try {
-      await window.electronAPI?.dbRun('UPDATE walls SET wall_type = ?, door_state = ? WHERE id = ?', [type, newState, selectedWallId])
+      await window.electronAPI?.walls.update(selectedWallId, {
+        wallType: type,
+        doorState: newState as any,
+      })
     } catch (err) {
       console.error('[WallLayer] update failed:', err)
     }
@@ -209,7 +202,7 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
     toggleDoor(selectedWallId)
     const newState = wall.doorState === 'open' ? 'closed' : 'open'
     try {
-      await window.electronAPI?.dbRun('UPDATE walls SET door_state = ? WHERE id = ?', [newState, selectedWallId])
+      await window.electronAPI?.walls.update(selectedWallId, { doorState: newState })
     } catch (err) {
       console.error('[WallLayer] toggle door failed:', err)
     }

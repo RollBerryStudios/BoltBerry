@@ -30,6 +30,9 @@ import type {
   AudioChannelKey,
   TokenRecord,
   InitiativeEntry,
+  WallRecord,
+  WallType,
+  DoorState,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -217,6 +220,28 @@ export const dmApi = {
       ipcRenderer.invoke(IPC.INITIATIVE_DELETE, id),
     deleteByMap: (mapId: number): Promise<void> =>
       ipcRenderer.invoke(IPC.INITIATIVE_DELETE_BY_MAP, mapId),
+  },
+
+  // Walls — semantic API for the `walls` table
+  walls: {
+    listByMap: (mapId: number): Promise<WallRecord[]> =>
+      ipcRenderer.invoke(IPC.WALLS_LIST_BY_MAP, mapId),
+    create: (patch: {
+      mapId: number
+      x1: number
+      y1: number
+      x2: number
+      y2: number
+      wallType: WallType
+      doorState?: DoorState
+    }): Promise<WallRecord> =>
+      ipcRenderer.invoke(IPC.WALLS_CREATE, patch),
+    restore: (wall: WallRecord): Promise<WallRecord> =>
+      ipcRenderer.invoke(IPC.WALLS_RESTORE, wall),
+    update: (id: number, patch: Partial<{ wallType: WallType; doorState: DoorState }>): Promise<void> =>
+      ipcRenderer.invoke(IPC.WALLS_UPDATE, id, patch),
+    delete: (id: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.WALLS_DELETE, id),
   },
 
   // Listen for main → DM: player window was closed
