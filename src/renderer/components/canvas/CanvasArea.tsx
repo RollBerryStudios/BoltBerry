@@ -35,6 +35,7 @@ import { useRoomStore } from '../../stores/roomStore'
 import { useUndoStore, nextCommandId } from '../../stores/undoStore'
 import { useImageUrl } from '../../hooks/useImageUrl'
 import { EmptyState } from '../EmptyState'
+import { showToast } from '../shared/Toast'
 import type Konva from 'konva'
 import type { MapRecord, PlayerFullState } from '@shared/ipc-types'
 
@@ -105,6 +106,23 @@ export function CanvasArea() {
     document.addEventListener('mousedown', handleOutside)
     return () => document.removeEventListener('mousedown', handleOutside)
   }, [layerPanelOpen])
+
+  // Keyboard shortcut: `L` toggles the layer-visibility panel (QW-9).
+  // Gated the same way the other canvas shortcuts are — ignored while
+  // the user is typing in a text field.
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key !== 'l' && e.key !== 'L') return
+      if (e.ctrlKey || e.metaKey || e.altKey) return
+      const tag = (e.target as HTMLElement)?.tagName
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
+      if ((e.target as HTMLElement)?.isContentEditable) return
+      e.preventDefault()
+      setLayerPanelOpen((v) => !v)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [])
 
   // Fade ambient HUDs (viewport chip, minimap, layer toggle) when the cursor
   // is idle over the canvas. Pointer movement, click, wheel, or focus all
@@ -204,7 +222,13 @@ export function CanvasArea() {
     // Handle OS file drops
     if (e.dataTransfer.files.length > 0) {
       const file = e.dataTransfer.files[0]
-      if (!file.type.startsWith('image/')) return
+      if (!file.type.startsWith('image/')) {
+        // Dropping a PDF / audio / random file used to silently no-op —
+        // surface the rejection so users don't think the drop target is
+        // broken (QW-11).
+        showToast('Nur Bilddateien können hier abgelegt werden', 'info', 4000)
+        return
+      }
       const arrayBuf = await file.arrayBuffer()
       const uint8 = new Uint8Array(arrayBuf)
       let binary = ''

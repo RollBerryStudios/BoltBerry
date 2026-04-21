@@ -116,6 +116,10 @@ export function WeatherCanvas({ type, width, height, className, style }: Props) 
         left: 0,
         pointerEvents: 'none',
         zIndex: 10,
+        // Hint the compositor this layer will animate so it gets its
+        // own backing bitmap — avoids repainting neighbouring layers
+        // every frame during rain/snow/wind (QW-12).
+        willChange: 'transform',
         ...style,
       }}
     />
