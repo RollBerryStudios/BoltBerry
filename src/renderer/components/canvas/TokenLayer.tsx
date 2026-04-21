@@ -7,7 +7,7 @@ import { useUIStore } from '../../stores/uiStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useInitiativeStore } from '../../stores/initiativeStore'
 import { useCampaignStore } from '../../stores/campaignStore'
-import { useUndoStore, nextCommandId } from '../../stores/undoStore'
+import { useUndoStore, nextCommandId, registerUndoAction } from '../../stores/undoStore'
 import { useWallStore } from '../../stores/wallStore'
 import { computeVisibilityPolygon } from '../../utils/losEngine'
 import type { MapRecord, TokenRecord } from '@shared/ipc-types'
@@ -279,24 +279,41 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
       }
     }
 
+    // Declarative Action form (AP-5). The forward/backward handlers
+    // are registered once at module scope (`registerUndoAction`) and
+    // the payload is pure JSON — the stack can be serialized and
+    // replayed after a crash, not just for this action but whenever
+    // more callsites migrate.
+    const payload: TokenMovePayload = {
+      positions: idsToMove.map((id, i) => ({
+        id,
+        from: { x: oldPositions[i].x, y: oldPositions[i].y },
+        to:   { x: newPositions[i].x, y: newPositions[i].y },
+      })),
+    }
+    // The forward (move-to-new) already ran during the drag — the store
+    // and DB are already at the target position. Skip the forward
+    // replay by pushing the Command directly via the registry-derived
+    // wrapper in `actionToCommand`; `pushAction` would redo the move.
     useUndoStore.getState().pushCommand({
       id: nextCommandId(),
-      label: `Move ${idsToMove.length === 1 ? 'token' : 'tokens'}`,
+      label: payload.positions.length === 1 ? 'Move token' : `Move ${payload.positions.length} tokens`,
+      action: { type: 'token.move', payload },
       undo: async () => {
-        for (const pos of oldPositions) {
-          useTokenStore.getState().moveToken(pos.id, pos.x, pos.y)
+        for (const entry of payload.positions) {
+          useTokenStore.getState().moveToken(entry.id, entry.from.x, entry.from.y)
         }
         await window.electronAPI?.tokens.updateMany(
-          oldPositions.map((p) => ({ id: p.id, patch: { x: p.x, y: p.y } })),
+          payload.positions.map((e) => ({ id: e.id, patch: { x: e.from.x, y: e.from.y } })),
         )
         broadcastTokens(useTokenStore.getState().tokens)
       },
       redo: async () => {
-        for (const pos of newPositions) {
-          useTokenStore.getState().moveToken(pos.id, pos.x, pos.y)
+        for (const entry of payload.positions) {
+          useTokenStore.getState().moveToken(entry.id, entry.to.x, entry.to.y)
         }
         await window.electronAPI?.tokens.updateMany(
-          newPositions.map((p) => ({ id: p.id, patch: { x: p.x, y: p.y } })),
+          payload.positions.map((e) => ({ id: e.id, patch: { x: e.to.x, y: e.to.y } })),
         )
         broadcastTokens(useTokenStore.getState().tokens)
       },
@@ -1503,6 +1520,44 @@ const TokenNode = memo(function TokenNode({
   prev.onDragEnd === next.onDragEnd &&
   prev.onContextMenu === next.onContextMenu
 ))
+
+/**
+ * Token move as a serializable undo action (AP-5). The payload
+ * captures the id + from/to position for every moved token. Forward
+ * and backward are symmetric pure updates — no closures over React
+ * or store state — so this action survives serialization to disk
+ * and replay after a crash.
+ *
+ * This is the concrete first example of the `registerUndoAction` /
+ * `pushAction` pattern from `undoStore.ts`. Other undo flows (wall
+ * draw, pin delete, paste-tokens) still use the closure API and can
+ * migrate incrementally as their payloads firm up.
+ */
+interface TokenMovePayload {
+  positions: Array<{ id: number; from: { x: number; y: number }; to: { x: number; y: number } }>
+}
+
+registerUndoAction<TokenMovePayload>('token.move', {
+  label: (p) => `Move ${p.positions.length === 1 ? 'token' : 'tokens'}`,
+  forward: async (p) => {
+    for (const entry of p.positions) {
+      useTokenStore.getState().moveToken(entry.id, entry.to.x, entry.to.y)
+    }
+    await window.electronAPI?.tokens.updateMany(
+      p.positions.map((e) => ({ id: e.id, patch: { x: e.to.x, y: e.to.y } })),
+    )
+    broadcastTokens(useTokenStore.getState().tokens)
+  },
+  backward: async (p) => {
+    for (const entry of p.positions) {
+      useTokenStore.getState().moveToken(entry.id, entry.from.x, entry.from.y)
+    }
+    await window.electronAPI?.tokens.updateMany(
+      p.positions.map((e) => ({ id: e.id, patch: { x: e.from.x, y: e.from.y } })),
+    )
+    broadcastTokens(useTokenStore.getState().tokens)
+  },
+})
 
 function broadcastTokens(tokens: TokenRecord[]) {
   if (useUIStore.getState().sessionMode === 'prep') return
