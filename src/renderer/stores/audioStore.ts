@@ -126,104 +126,291 @@ interface AudioState {
   setSlots:          (boardId: number, slots: AudioBoardSlot[]) => void
 }
 
-// ─── Module-level audio objects (not in Zustand — no serialisation needed) ───
-
-const CH: Record<ChannelId, HTMLAudioElement> = {
-  track1: new Audio(),
-  track2: new Audio(),
-  combat: new Audio(),
-}
-CH.track1.loop = true
-CH.track2.loop = true
-CH.combat.loop = true
-
-// SFX pool — 10 pre-allocated elements, round-robin
-const SFX_POOL_SIZE = 10
-const sfxPool: HTMLAudioElement[] = Array.from({ length: SFX_POOL_SIZE }, () => new Audio())
-let sfxPoolIndex = 0
-
-// Duck state
-let duckCount = 0
-let duckRestoreTimer: ReturnType<typeof setTimeout> | null = null
-
-// Combat frozen state
-let frozenTrack1: FrozenChannel | null = null
-let frozenTrack2: FrozenChannel | null = null
-
-// Active fades (cancel on re-trigger)
-const activeFades: Partial<Record<ChannelId, () => void>> = {}
-
-// ─── Internal helpers ─────────────────────────────────────────────────────────
-
-function effectiveVolume(userVol: number, master: number, ducked: boolean): number {
-  return userVol * master * (ducked ? 0.5 : 1)
-}
-
-function applyVolume(ch: ChannelId) {
-  const { track1, track2, combat, masterVolume } = useAudioStore.getState()
-  const state: Record<ChannelId, ChannelState> = { track1, track2, combat }
-  const ducked = duckCount > 0
-  CH[ch].volume = effectiveVolume(state[ch].volume, masterVolume, ducked)
-}
-
-function startDuck() {
-  if (duckRestoreTimer) { clearTimeout(duckRestoreTimer); duckRestoreTimer = null }
-  duckCount++
-  const { track1, track2, combat, masterVolume } = useAudioStore.getState()
-  const master = masterVolume
-  for (const ch of ['track1', 'track2', 'combat'] as ChannelId[]) {
-    const vol = ch === 'track1' ? track1.volume : ch === 'track2' ? track2.volume : combat.volume
-    activeFades[ch]?.()
-    activeFades[ch] = fadeTo(CH[ch], vol * master * 0.5)
-  }
-}
-
-function endDuck() {
-  duckCount = Math.max(0, duckCount - 1)
-  if (duckCount > 0) return
-  if (duckRestoreTimer) clearTimeout(duckRestoreTimer)
-  duckRestoreTimer = setTimeout(() => {
-    if (duckCount > 0) return
-    const { track1, track2, combat, masterVolume } = useAudioStore.getState()
-    const master = masterVolume
-    for (const ch of ['track1', 'track2', 'combat'] as ChannelId[]) {
-      const vol = ch === 'track1' ? track1.volume : ch === 'track2' ? track2.volume : combat.volume
-      activeFades[ch]?.()
-      activeFades[ch] = fadeTo(CH[ch], vol * master)
-    }
-  }, 150)
-}
-
-function makeDefaultChannel(volume = 1): ChannelState {
-  // Matches the CH[*].loop = true below so the store and the underlying
-  // <audio> element start in sync.
-  return { filePath: null, fileName: null, volume, playing: false, loop: true, currentTime: 0, duration: 0, playlist: [] }
-}
-
 function pathToUrl(path: string): string {
   const rel = path.startsWith('/') ? path.substring(1) : path
   return `local-asset://${rel}`
 }
 
-// ─── Store ────────────────────────────────────────────────────────────────────
+function makeDefaultChannel(volume = 1): ChannelState {
+  // Matches `engine.channels[ch].loop = true` in the AudioEngine
+  // constructor so the reactive mirror starts in sync with the DOM.
+  return { filePath: null, fileName: null, volume, playing: false, loop: true, currentTime: 0, duration: 0, playlist: [] }
+}
 
-export const useAudioStore = create<AudioState>((set, get) => {
-  // Wire up timeupdate on all channels (throttled to avoid excessive store updates)
-  for (const ch of ['track1', 'track2', 'combat'] as ChannelId[]) {
-    let lastUpdate = 0
-    CH[ch].ontimeupdate = () => {
-      const now = Date.now()
-      if (now - lastUpdate < 500) return
-      lastUpdate = now
-      set((s) => ({ [ch]: { ...s[ch as keyof typeof s] as ChannelState, currentTime: CH[ch].currentTime } }))
+// ─── Audio engine (owns every DOM node + fade/duck/freeze state) ─────────────
+//
+// Before this class existed the same concerns were spread across ~10
+// module-level `let`s and `const`s at the top of the file (CH, sfxPool,
+// duckCount, frozenTrack1/2, activeFades, …) and every store action
+// poked them directly. The audit called this out: "State ownership is
+// split between DOM and store, making unit testing impossible."
+//
+// The extraction is mechanical — same semantics, same timing, same
+// public surface — but the singleton now has one clear home and the
+// store below is a thin reactive mirror that calls engine methods.
+// `audioCH` remains exported for useAutoAmbient's direct-element peek.
+
+const SFX_POOL_SIZE = 10
+const DUCK_RESTORE_MS = 150
+
+class AudioEngine {
+  readonly channels: Record<ChannelId, HTMLAudioElement>
+  private readonly sfxPool: HTMLAudioElement[]
+  private sfxPoolIndex = 0
+  private duckCount = 0
+  private duckRestoreTimer: ReturnType<typeof setTimeout> | null = null
+  private frozenTrack1: FrozenChannel | null = null
+  private frozenTrack2: FrozenChannel | null = null
+  private readonly activeFades: Partial<Record<ChannelId, () => void>> = {}
+
+  constructor() {
+    this.channels = {
+      track1: new Audio(),
+      track2: new Audio(),
+      combat: new Audio(),
     }
-    CH[ch].onloadedmetadata = () => {
-      set((s) => ({ [ch]: { ...s[ch as keyof typeof s] as ChannelState, duration: CH[ch].duration } }))
-    }
-    CH[ch].onended = () => {
-      set((s) => ({ [ch]: { ...s[ch as keyof typeof s] as ChannelState, playing: false } }))
+    this.channels.track1.loop = true
+    this.channels.track2.loop = true
+    this.channels.combat.loop = true
+    this.sfxPool = Array.from({ length: SFX_POOL_SIZE }, () => new Audio())
+  }
+
+  /** Wire `timeupdate`, `loadedmetadata`, and `ended` on the three
+   *  channels so the store can mirror playback state back into Zustand.
+   *  Called once from the store factory — the handlers are set after
+   *  the store exists because they need `useAudioStore.setState`. */
+  wireChannelEvents(onTimeUpdate: (ch: ChannelId, t: number) => void,
+                    onDuration:  (ch: ChannelId, d: number) => void,
+                    onEnded:     (ch: ChannelId) => void): void {
+    for (const ch of ['track1', 'track2', 'combat'] as ChannelId[]) {
+      let lastUpdate = 0
+      const el = this.channels[ch]
+      el.ontimeupdate = () => {
+        const now = Date.now()
+        if (now - lastUpdate < 500) return
+        lastUpdate = now
+        onTimeUpdate(ch, el.currentTime)
+      }
+      el.onloadedmetadata = () => onDuration(ch, el.duration)
+      el.onended = () => onEnded(ch)
     }
   }
+
+  private get ducked(): boolean { return this.duckCount > 0 }
+
+  effectiveVolume(userVol: number, master: number): number {
+    return userVol * master * (this.ducked ? 0.5 : 1)
+  }
+
+  load(ch: ChannelId, path: string): void {
+    const el = this.channels[ch]
+    this.activeFades[ch]?.()
+    el.pause()
+    el.src = pathToUrl(path)
+    el.load()
+    el.volume = 0
+  }
+
+  play(ch: ChannelId, userVol: number, master: number): void {
+    const el = this.channels[ch]
+    if (!el.src || el.src === window.location.href) return
+    const targetVol = this.effectiveVolume(userVol, master)
+    el.play().catch(() => {})
+    this.activeFades[ch]?.()
+    this.activeFades[ch] = fadeTo(el, targetVol)
+  }
+
+  stop(ch: ChannelId): void {
+    const el = this.channels[ch]
+    this.activeFades[ch]?.()
+    this.activeFades[ch] = fadeTo(el, 0, () => {
+      el.pause()
+      el.currentTime = 0
+    })
+  }
+
+  seek(ch: ChannelId, time: number): void {
+    this.channels[ch].currentTime = time
+  }
+
+  setLoop(ch: ChannelId, loop: boolean): void {
+    this.channels[ch].loop = loop
+  }
+
+  applyChannelVolume(ch: ChannelId, userVol: number, master: number): void {
+    this.channels[ch].volume = this.effectiveVolume(userVol, master)
+  }
+
+  applyMasterVolume(
+    volumes: Record<ChannelId, number>,
+    master: number,
+    sfxVolume: number,
+  ): void {
+    for (const ch of ['track1', 'track2', 'combat'] as ChannelId[]) {
+      this.channels[ch].volume = this.effectiveVolume(volumes[ch], master)
+    }
+    const sfxEff = Math.max(0, Math.min(1, sfxVolume * master))
+    for (const el of this.sfxPool) el.volume = sfxEff
+  }
+
+  /**
+   * Combat: activate. Freezes track1 + track2 (records their current
+   * time / volume / playing state) and fades them silent, then fades
+   * in the combat channel. Returns the target pair so the store can
+   * mirror the new playing state.
+   */
+  activateCombat(
+    state: { track1: ChannelState; track2: ChannelState; combat: ChannelState; masterVolume: number },
+  ): { combatPlaying: boolean } {
+    const { track1, track2, combat, masterVolume } = state
+    this.frozenTrack1 = {
+      filePath: track1.filePath ?? '',
+      currentTime: this.channels.track1.currentTime,
+      volume: track1.volume,
+      wasPlaying: track1.playing,
+    }
+    this.frozenTrack2 = {
+      filePath: track2.filePath ?? '',
+      currentTime: this.channels.track2.currentTime,
+      volume: track2.volume,
+      wasPlaying: track2.playing,
+    }
+    this.activeFades.track1?.()
+    this.activeFades.track1 = fadeTo(this.channels.track1, 0, () => this.channels.track1.pause())
+    this.activeFades.track2?.()
+    this.activeFades.track2 = fadeTo(this.channels.track2, 0, () => this.channels.track2.pause())
+
+    let combatPlaying = false
+    if (combat.filePath) {
+      const targetVol = this.effectiveVolume(combat.volume, masterVolume)
+      this.channels.combat.volume = 0
+      this.channels.combat.play().catch(() => {})
+      this.activeFades.combat?.()
+      this.activeFades.combat = fadeTo(this.channels.combat, targetVol)
+      combatPlaying = true
+    }
+    return { combatPlaying }
+  }
+
+  /**
+   * Combat: deactivate. Fades out combat, then for each music channel
+   * restores currentTime from its frozen snapshot and resumes playback
+   * if it was playing before the freeze. The store gets told which
+   * channels ended up playing + at which volume so it can refresh
+   * the mirror.
+   */
+  deactivateCombat(masterVolume: number): {
+    track1: { volume: number; playing: boolean } | null
+    track2: { volume: number; playing: boolean } | null
+  } {
+    this.activeFades.combat?.()
+    this.activeFades.combat = fadeTo(this.channels.combat, 0, () => {
+      this.channels.combat.pause()
+      this.channels.combat.currentTime = 0
+    })
+
+    const t1Result = this.restoreFrozen('track1', this.frozenTrack1, masterVolume)
+    const t2Result = this.restoreFrozen('track2', this.frozenTrack2, masterVolume)
+    this.frozenTrack1 = null
+    this.frozenTrack2 = null
+    return { track1: t1Result, track2: t2Result }
+  }
+
+  private restoreFrozen(
+    ch: 'track1' | 'track2',
+    frozen: FrozenChannel | null,
+    masterVolume: number,
+  ): { volume: number; playing: boolean } | null {
+    if (!frozen?.filePath) return null
+    const el = this.channels[ch]
+    el.currentTime = frozen.currentTime
+    if (frozen.wasPlaying) {
+      const targetVol = this.effectiveVolume(frozen.volume, masterVolume)
+      el.play().catch(() => {})
+      this.activeFades[ch]?.()
+      this.activeFades[ch] = fadeTo(el, targetVol)
+    }
+    return { volume: frozen.volume, playing: frozen.wasPlaying }
+  }
+
+  /**
+   * SFX: round-robin through the pool and play one-shot with ducking.
+   * Ducking drops every music channel to 50 % while any SFX is active
+   * (counted via `duckCount`) and restores after a 150 ms grace period
+   * once every SFX has finished — so rapid-fire triggers don't cause
+   * ping-pong fade-in-out.
+   */
+  triggerSfx(
+    audioPath: string,
+    sfxVolume: number,
+    masterVolume: number,
+    channelVolumes: Record<ChannelId, number>,
+  ): void {
+    const el = this.sfxPool[this.sfxPoolIndex % SFX_POOL_SIZE]
+    this.sfxPoolIndex = (this.sfxPoolIndex + 1) % SFX_POOL_SIZE
+    el.pause()
+    el.src = pathToUrl(audioPath)
+    el.volume = Math.max(0, Math.min(1, sfxVolume * masterVolume))
+    el.loop = false
+    this.startDuck(channelVolumes, masterVolume)
+    el.onended = () => this.endDuck(channelVolumes, masterVolume)
+    el.onerror = () => this.endDuck(channelVolumes, masterVolume)
+    el.play().catch(() => this.endDuck(channelVolumes, masterVolume))
+  }
+
+  private startDuck(channelVolumes: Record<ChannelId, number>, master: number): void {
+    if (this.duckRestoreTimer) {
+      clearTimeout(this.duckRestoreTimer)
+      this.duckRestoreTimer = null
+    }
+    this.duckCount++
+    for (const ch of ['track1', 'track2', 'combat'] as ChannelId[]) {
+      this.activeFades[ch]?.()
+      this.activeFades[ch] = fadeTo(this.channels[ch], channelVolumes[ch] * master * 0.5)
+    }
+  }
+
+  private endDuck(channelVolumes: Record<ChannelId, number>, master: number): void {
+    this.duckCount = Math.max(0, this.duckCount - 1)
+    if (this.duckCount > 0) return
+    if (this.duckRestoreTimer) clearTimeout(this.duckRestoreTimer)
+    this.duckRestoreTimer = setTimeout(() => {
+      if (this.duckCount > 0) return
+      for (const ch of ['track1', 'track2', 'combat'] as ChannelId[]) {
+        this.activeFades[ch]?.()
+        this.activeFades[ch] = fadeTo(this.channels[ch], channelVolumes[ch] * master)
+      }
+    }, DUCK_RESTORE_MS)
+  }
+}
+
+const engine = new AudioEngine()
+
+/** Exported so `useAutoAmbient` can peek at the raw element to read
+ *  `src` and `pause()` directly. Preserved verbatim from the pre-
+ *  extraction API — the hook's two call sites still work unchanged. */
+export const audioCH = engine.channels
+
+// ─── Store ────────────────────────────────────────────────────────────────────
+//
+// The store keeps ONE job: hold the reactive mirror of what the engine
+// is doing so UI can render. Every action routes through `engine.*` —
+// no more poking module globals.
+
+function channelVolumes(get: () => AudioState): Record<ChannelId, number> {
+  const s = get()
+  return { track1: s.track1.volume, track2: s.track2.volume, combat: s.combat.volume }
+}
+
+export const useAudioStore = create<AudioState>((set, get) => {
+  engine.wireChannelEvents(
+    (ch, currentTime) =>
+      set((s) => ({ [ch]: { ...s[ch as keyof typeof s] as ChannelState, currentTime } })),
+    (ch, duration) =>
+      set((s) => ({ [ch]: { ...s[ch as keyof typeof s] as ChannelState, duration } })),
+    (ch) =>
+      set((s) => ({ [ch]: { ...s[ch as keyof typeof s] as ChannelState, playing: false } })),
+  )
 
   return {
     track1:      makeDefaultChannel(1),
@@ -237,12 +424,7 @@ export const useAudioStore = create<AudioState>((set, get) => {
 
     // ── Channel: load ──────────────────────────────────────────────
     loadChannel: (ch, path) => {
-      const el = CH[ch]
-      activeFades[ch]?.()
-      el.pause()
-      el.src = pathToUrl(path)
-      el.load()
-      el.volume = 0
+      engine.load(ch, path)
       const fileName = path.split(/[\\/]/).pop() ?? path
       set((s) => ({
         [ch]: { ...s[ch as keyof typeof s] as ChannelState, filePath: path, fileName, playing: false, currentTime: 0, duration: 0 },
@@ -251,127 +433,69 @@ export const useAudioStore = create<AudioState>((set, get) => {
 
     // ── Channel: play ──────────────────────────────────────────────
     playChannel: (ch) => {
-      const el = CH[ch]
-      if (!el.src || el.src === window.location.href) return
-      const { masterVolume, combatActive } = get()
-      const state = get()[ch]
+      const state = get()
       // combat stays silent while inactive if not the combat channel
-      if (combatActive && ch !== 'combat') return
-      const targetVol = effectiveVolume(state.volume, masterVolume, duckCount > 0)
-      el.play().catch(() => {})
-      activeFades[ch]?.()
-      activeFades[ch] = fadeTo(el, targetVol)
+      if (state.combatActive && ch !== 'combat') return
+      engine.play(ch, state[ch].volume, state.masterVolume)
       set((s) => ({ [ch]: { ...s[ch as keyof typeof s] as ChannelState, playing: true } }))
     },
 
     // ── Channel: stop ──────────────────────────────────────────────
     stopChannel: (ch) => {
-      const el = CH[ch]
-      activeFades[ch]?.()
-      activeFades[ch] = fadeTo(el, 0, () => {
-        el.pause()
-        el.currentTime = 0
-      })
+      engine.stop(ch)
       set((s) => ({ [ch]: { ...s[ch as keyof typeof s] as ChannelState, playing: false, currentTime: 0 } }))
     },
 
     // ── Channel: volume ────────────────────────────────────────────
     setChannelVolume: (ch, vol) => {
       set((s) => ({ [ch]: { ...s[ch as keyof typeof s] as ChannelState, volume: vol } }))
-      applyVolume(ch)
+      engine.applyChannelVolume(ch, vol, get().masterVolume)
     },
 
     // ── Channel: seek ──────────────────────────────────────────────
     seekChannel: (ch, time) => {
-      CH[ch].currentTime = time
+      engine.seek(ch, time)
       set((s) => ({ [ch]: { ...s[ch as keyof typeof s] as ChannelState, currentTime: time } }))
     },
 
     // ── Channel: loop ──────────────────────────────────────────────
     toggleLoop: (ch) => {
-      const next = !CH[ch].loop
-      CH[ch].loop = next
+      const next = !engine.channels[ch].loop
+      engine.setLoop(ch, next)
       set((s) => ({ [ch]: { ...s[ch as keyof typeof s] as ChannelState, loop: next } }))
     },
 
     // ── Combat: activate ──────────────────────────────────────────
     activateCombat: () => {
-      const { track1, track2, combat, masterVolume } = get()
-      // Freeze track1 & track2
-      frozenTrack1 = { filePath: track1.filePath ?? '', currentTime: CH.track1.currentTime, volume: track1.volume, wasPlaying: track1.playing }
-      frozenTrack2 = { filePath: track2.filePath ?? '', currentTime: CH.track2.currentTime, volume: track2.volume, wasPlaying: track2.playing }
-      // Fade out both music channels
-      activeFades.track1?.()
-      activeFades.track1 = fadeTo(CH.track1, 0, () => CH.track1.pause())
-      activeFades.track2?.()
-      activeFades.track2 = fadeTo(CH.track2, 0, () => CH.track2.pause())
+      const state = get()
+      const { combatPlaying } = engine.activateCombat(state)
       set((s) => ({
         combatActive: true,
         track1: { ...s.track1, playing: false },
         track2: { ...s.track2, playing: false },
+        combat: { ...s.combat, playing: combatPlaying || s.combat.playing },
       }))
-      // Fade in combat
-      if (combat.filePath) {
-        const targetVol = effectiveVolume(combat.volume, masterVolume, duckCount > 0)
-        CH.combat.volume = 0
-        CH.combat.play().catch(() => {})
-        activeFades.combat?.()
-        activeFades.combat = fadeTo(CH.combat, targetVol)
-        set((s) => ({ combat: { ...s.combat, playing: true } }))
-      }
     },
 
     // ── Combat: deactivate ─────────────────────────────────────────
     deactivateCombat: () => {
-      const { masterVolume } = get()
-      // Fade out combat
-      activeFades.combat?.()
-      activeFades.combat = fadeTo(CH.combat, 0, () => {
-        CH.combat.pause()
-        CH.combat.currentTime = 0
+      const result = engine.deactivateCombat(get().masterVolume)
+      set((s) => {
+        const patch: Partial<AudioState> = { combatActive: false, combat: { ...s.combat, playing: false } }
+        if (result.track1) {
+          patch.track1 = { ...s.track1, volume: result.track1.volume, playing: result.track1.playing }
+        }
+        if (result.track2) {
+          patch.track2 = { ...s.track2, volume: result.track2.volume, playing: result.track2.playing }
+        }
+        return patch
       })
-      set((s) => ({ combatActive: false, combat: { ...s.combat, playing: false } }))
-      // Restore track1
-      if (frozenTrack1?.filePath) {
-        const f1 = frozenTrack1
-        CH.track1.currentTime = f1.currentTime
-        if (f1.wasPlaying) {
-          const targetVol = effectiveVolume(f1.volume, masterVolume, duckCount > 0)
-          CH.track1.play().catch(() => {})
-          activeFades.track1?.()
-          activeFades.track1 = fadeTo(CH.track1, targetVol)
-        }
-        set((s) => ({ track1: { ...s.track1, volume: f1.volume, playing: f1.wasPlaying } }))
-      }
-      // Restore track2
-      if (frozenTrack2?.filePath) {
-        const f2 = frozenTrack2
-        CH.track2.currentTime = f2.currentTime
-        if (f2.wasPlaying) {
-          const targetVol = effectiveVolume(f2.volume, masterVolume, duckCount > 0)
-          CH.track2.play().catch(() => {})
-          activeFades.track2?.()
-          activeFades.track2 = fadeTo(CH.track2, targetVol)
-        }
-        set((s) => ({ track2: { ...s.track2, volume: f2.volume, playing: f2.wasPlaying } }))
-      }
-      frozenTrack1 = null
-      frozenTrack2 = null
     },
 
     // ── SFX ──────────────────────────────────────────────────────
     triggerSfx: (audioPath) => {
       const { sfxVolume, masterVolume } = get()
-      const el = sfxPool[sfxPoolIndex % SFX_POOL_SIZE]
-      sfxPoolIndex = (sfxPoolIndex + 1) % SFX_POOL_SIZE
-      el.pause()
-      el.src = pathToUrl(audioPath)
-      el.volume = Math.max(0, Math.min(1, sfxVolume * masterVolume))
-      el.loop = false
-      startDuck()
-      el.onended = () => endDuck()
-      el.onerror = () => endDuck()
-      el.play().catch(() => endDuck())
+      engine.triggerSfx(audioPath, sfxVolume, masterVolume, channelVolumes(get))
     },
 
     setSfxVolume: (vol) => set({ sfxVolume: vol }),
@@ -424,13 +548,7 @@ export const useAudioStore = create<AudioState>((set, get) => {
     // ── Master volume ─────────────────────────────────────────────
     setMasterVolume: (vol) => {
       set({ masterVolume: vol })
-      const { track1, track2, combat } = get()
-      const ducked = duckCount > 0
-      for (const ch of ['track1', 'track2', 'combat'] as ChannelId[]) {
-        const chVol = ch === 'track1' ? track1.volume : ch === 'track2' ? track2.volume : combat.volume
-        CH[ch].volume = effectiveVolume(chVol, vol, ducked)
-      }
-      sfxPool.forEach((el) => { el.volume = Math.max(0, Math.min(1, get().sfxVolume * vol)) })
+      engine.applyMasterVolume(channelVolumes(get), vol, get().sfxVolume)
     },
 
     // ── Boards ───────────────────────────────────────────────────
@@ -441,6 +559,3 @@ export const useAudioStore = create<AudioState>((set, get) => {
       set((s) => ({ boards: s.boards.map((b) => b.id === boardId ? { ...b, slots } : b) })),
   }
 })
-
-// ─── Expose CH for useAutoAmbient ─────────────────────────────────────────────
-export { CH as audioCH }
