@@ -17,6 +17,7 @@ import { registerWallHandlers } from './ipc/wall-handlers'
 import { registerRoomHandlers } from './ipc/room-handlers'
 import { registerDrawingHandlers } from './ipc/drawing-handlers'
 import { registerEncounterHandlers } from './ipc/encounter-handlers'
+import { registerFogHandlers } from './ipc/fog-handlers'
 import { registerExportImportHandlers } from './ipc/export-import'
 import { buildAppMenu } from './menu'
 import { initAutoUpdater } from './updater'
@@ -107,6 +108,7 @@ app.whenReady().then(() => {
   registerRoomHandlers()
   registerDrawingHandlers()
   registerEncounterHandlers()
+  registerFogHandlers()
   registerExportImportHandlers()
 
   buildAppMenu(loadPrefs().menuLanguage)

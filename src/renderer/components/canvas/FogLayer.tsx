@@ -610,21 +610,14 @@ async function loadFogFromDb(
   coveredCanvas: HTMLCanvasElement,
 ) {
   if (!window.electronAPI) return
-  const rows = await window.electronAPI.dbQuery<{
-    fog_bitmap: string | null
-    explored_bitmap: string | null
-  }>(
-    'SELECT fog_bitmap, explored_bitmap FROM fog_state WHERE map_id = ?',
-    [mapId]
-  )
-  if (!rows[0]) return
+  const { fogBitmap, exploredBitmap } = await window.electronAPI.fog.get(mapId)
 
   const promises: Promise<void>[] = []
-  if (rows[0].fog_bitmap) {
-    promises.push(loadBitmapToCanvas(rows[0].fog_bitmap, coveredCanvas))
+  if (fogBitmap) {
+    promises.push(loadBitmapToCanvas(fogBitmap, coveredCanvas))
   }
-  if (rows[0].explored_bitmap) {
-    promises.push(loadBitmapToCanvas(rows[0].explored_bitmap, exploredCanvas))
+  if (exploredBitmap) {
+    promises.push(loadBitmapToCanvas(exploredBitmap, exploredCanvas))
   }
   await Promise.all(promises)
 }
@@ -671,15 +664,9 @@ function commitFogSave(
     const fogBitmap      = coveredCanvas.toDataURL('image/png')
     const exploredBitmap = exploredCanvas.toDataURL('image/png')
     // Fire-and-forget: the caller may be synchronous (beforeunload) and
-    // can't await. dbRun is an ipcRenderer.invoke — the IPC send itself is
-    // synchronous enough to survive the renderer shutting down.
-    void window.electronAPI?.dbRun(
-      `INSERT INTO fog_state (map_id, fog_bitmap, explored_bitmap) VALUES (?, ?, ?)
-       ON CONFLICT(map_id) DO UPDATE SET
-         fog_bitmap      = excluded.fog_bitmap,
-         explored_bitmap = excluded.explored_bitmap`,
-      [mapId, fogBitmap, exploredBitmap]
-    )
+    // can't await. The IPC invoke itself is synchronous enough to
+    // survive the renderer shutting down.
+    void window.electronAPI?.fog.save(mapId, { fogBitmap, exploredBitmap })
   } catch (err) {
     console.error('[FogLayer] commitFogSave failed:', err)
   }

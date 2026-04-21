@@ -125,6 +125,10 @@ export const IPC = {
   ENCOUNTERS_RENAME: 'encounters:rename',
   ENCOUNTERS_DELETE: 'encounters:delete',
 
+  // Fog state — semantic replacements for raw SQL against `fog_state`.
+  FOG_GET: 'fog:get',
+  FOG_SAVE: 'fog:save',
+
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
 
@@ -549,6 +553,12 @@ export interface PlayerMapState {
   gridVisible?: boolean
   gridThickness?: number
   gridColor?: string
+}
+
+/** Fog and explored bitmaps for a single map, both PNG data URLs. */
+export interface FogStateRecord {
+  fogBitmap: string | null
+  exploredBitmap: string | null
 }
 
 export interface EncounterRecord {

@@ -24,14 +24,9 @@ export function usePlayerSync() {
     let fogBitmap: string | null = null
     let exploredBitmap: string | null = null
     if (mapId) {
-      const rows = await window.electronAPI.dbQuery<{
-        fog_bitmap: string | null
-        explored_bitmap: string | null
-      }>(
-        'SELECT fog_bitmap, explored_bitmap FROM fog_state WHERE map_id = ?', [mapId]
-      )
-      fogBitmap      = rows[0]?.fog_bitmap      ?? null
-      exploredBitmap = rows[0]?.explored_bitmap ?? null
+      const fog = await window.electronAPI.fog.get(mapId)
+      fogBitmap      = fog.fogBitmap
+      exploredBitmap = fog.exploredBitmap
     }
 
     const playerTokens: PlayerTokenState[] = tokens

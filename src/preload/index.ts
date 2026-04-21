@@ -37,6 +37,7 @@ import type {
   DrawingRecord,
   DrawingType,
   EncounterRecord,
+  FogStateRecord,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -309,6 +310,14 @@ export const dmApi = {
       ipcRenderer.invoke(IPC.ENCOUNTERS_RENAME, id, name),
     delete: (id: number): Promise<void> =>
       ipcRenderer.invoke(IPC.ENCOUNTERS_DELETE, id),
+  },
+
+  // Fog state — semantic API for the `fog_state` table
+  fog: {
+    get: (mapId: number): Promise<FogStateRecord> =>
+      ipcRenderer.invoke(IPC.FOG_GET, mapId),
+    save: (mapId: number, bitmaps: FogStateRecord): Promise<void> =>
+      ipcRenderer.invoke(IPC.FOG_SAVE, mapId, bitmaps),
   },
 
   // Listen for main → DM: player window was closed

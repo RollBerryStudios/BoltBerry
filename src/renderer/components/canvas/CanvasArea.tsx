@@ -860,7 +860,7 @@ async function loadMapData(mapId: number, map: MapRecord) {
     const campaignId = useCampaignStore.getState().activeCampaignId
 
     // Fire all independent DB queries in parallel for faster map load
-    const [tokens, initiative, walls, encounters, rooms, fogRows, drawingRows] = await Promise.all([
+    const [tokens, initiative, walls, encounters, rooms, fog, drawingRows] = await Promise.all([
       window.electronAPI.tokens.listByMap(mapId),
 
       window.electronAPI.initiative.listByMap(mapId),
@@ -873,11 +873,9 @@ async function loadMapData(mapId: number, map: MapRecord) {
 
       window.electronAPI.rooms.listByMap(mapId),
 
-      window.electronAPI.dbQuery<{
-        fog_bitmap: string | null; explored_bitmap: string | null
-      }>('SELECT fog_bitmap, explored_bitmap FROM fog_state WHERE map_id = ?', [mapId]).catch((err) => {
+      window.electronAPI.fog.get(mapId).catch((err) => {
         console.error('[CanvasArea] fog load failed:', err)
-        return [] as any[]
+        return { fogBitmap: null, exploredBitmap: null }
       }),
 
       window.electronAPI.drawings.listSyncedByMap(mapId).catch((err) => {
@@ -899,8 +897,8 @@ async function loadMapData(mapId: number, map: MapRecord) {
 
     useRoomStore.getState().setRooms(rooms)
 
-    const fogBitmap: string | null = fogRows[0]?.fog_bitmap ?? null
-    const exploredBitmap: string | null = fogRows[0]?.explored_bitmap ?? null
+    const fogBitmap: string | null = fog.fogBitmap
+    const exploredBitmap: string | null = fog.exploredBitmap
 
     const playerDrawings: Array<{ id: number; type: string; points: number[]; color: string; width: number }> =
       drawingRows.map((r) => ({
