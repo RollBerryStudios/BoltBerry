@@ -891,27 +891,6 @@ export function CanvasArea() {
   )
 }
 
-function getCursor(tool: string): string {
-  switch (tool) {
-    case 'select':       return 'default'
-    case 'fog-rect':      return 'crosshair'
-    case 'fog-polygon':   return 'crosshair'
-    case 'fog-cover':     return 'crosshair'
-    case 'fog-brush':     return 'crosshair'
-    case 'fog-brush-cover': return 'crosshair'
-    case 'token':         return 'copy'
-    case 'pointer':       return 'cell'
-    case 'measure-line':  return 'crosshair'
-    case 'measure-circle': return 'crosshair'
-    case 'measure-cone':  return 'crosshair'
-    case 'draw-freehand': return 'crosshair'
-    case 'draw-rect':    return 'crosshair'
-    case 'draw-circle':  return 'crosshair'
-    case 'draw-text':    return 'text'
-    default:              return 'default'
-  }
-}
-
 async function loadMapData(mapId: number, map: MapRecord) {
   if (!window.electronAPI) return
 

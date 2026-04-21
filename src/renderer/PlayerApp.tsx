@@ -18,6 +18,27 @@ function factionColor(faction: string): string {
   }
 }
 
+// Checker-pattern tile cache. Allocating a fresh canvas + 2D context
+// inside sceneFunc ran on every paint (pan, zoom, token drag) and
+// produced noticeable GC pressure.
+const checkerCache = new Map<number, HTMLCanvasElement>()
+function getCheckerCanvas(sz: number): HTMLCanvasElement {
+  let c = checkerCache.get(sz)
+  if (c) return c
+  c = document.createElement('canvas')
+  c.width = sz * 2
+  c.height = sz * 2
+  const pCtx = c.getContext('2d')!
+  pCtx.fillStyle = '#2a2a2a'
+  pCtx.fillRect(0, 0, sz, sz)
+  pCtx.fillRect(sz, sz, sz, sz)
+  pCtx.fillStyle = '#1a1a1a'
+  pCtx.fillRect(sz, 0, sz, sz)
+  pCtx.fillRect(0, sz, sz, sz)
+  checkerCache.set(sz, c)
+  return c
+}
+
 type Mode = 'idle' | 'map' | 'atmosphere' | 'blackout'
 
 export default function PlayerApp() {
@@ -638,18 +659,7 @@ function PlayerMapView({
                 ctx.beginPath()
                 ctx.rect(offX, offY, w, h)
                 ctx.clip()
-                // Create a 2-tile pattern once instead of per-cell fillRect
-                const patternCanvas = document.createElement('canvas')
-                patternCanvas.width = sz * 2
-                patternCanvas.height = sz * 2
-                const pCtx = patternCanvas.getContext('2d')!
-                pCtx.fillStyle = '#2a2a2a'
-                pCtx.fillRect(0, 0, sz, sz)
-                pCtx.fillRect(sz, sz, sz, sz)
-                pCtx.fillStyle = '#1a1a1a'
-                pCtx.fillRect(sz, 0, sz, sz)
-                pCtx.fillRect(0, sz, sz, sz)
-                const pattern = ctx.createPattern(patternCanvas, 'repeat')!
+                const pattern = ctx.createPattern(getCheckerCanvas(sz), 'repeat')!
                 ctx.fillStyle = pattern
                 ctx.fillRect(offX, offY, cols * sz, rows * sz)
                 ctx.restore()

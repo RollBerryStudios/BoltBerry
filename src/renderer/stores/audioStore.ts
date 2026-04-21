@@ -54,6 +54,7 @@ export interface ChannelState {
   fileName: string | null
   volume: number        // 0–1, the user-set level (before ducking)
   playing: boolean
+  loop: boolean         // mirrors HTMLAudioElement.loop so the UI can reflect it
   currentTime: number
   duration: number
   /** Pre-assigned tracks the DM can swap between via right-click on the
@@ -205,7 +206,9 @@ function endDuck() {
 }
 
 function makeDefaultChannel(volume = 1): ChannelState {
-  return { filePath: null, fileName: null, volume, playing: false, currentTime: 0, duration: 0, playlist: [] }
+  // Matches the CH[*].loop = true below so the store and the underlying
+  // <audio> element start in sync.
+  return { filePath: null, fileName: null, volume, playing: false, loop: true, currentTime: 0, duration: 0, playlist: [] }
 }
 
 function pathToUrl(path: string): string {
@@ -297,7 +300,9 @@ export const useAudioStore = create<AudioState>((set, get) => {
 
     // ── Channel: loop ──────────────────────────────────────────────
     toggleLoop: (ch) => {
-      CH[ch].loop = !CH[ch].loop
+      const next = !CH[ch].loop
+      CH[ch].loop = next
+      set((s) => ({ [ch]: { ...s[ch as keyof typeof s] as ChannelState, loop: next } }))
     },
 
     // ── Combat: activate ──────────────────────────────────────────

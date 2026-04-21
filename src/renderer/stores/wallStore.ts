@@ -35,9 +35,10 @@ export const useWallStore = create<WallState>()(
       set((s) => {
         const w = s.walls.find((w) => w.id === id)
         if (!w || (w.wallType !== 'door' && w.wallType !== 'window')) return
-        if (w.doorState === 'open') w.doorState = 'closed'
-        else if (w.doorState === 'closed') w.doorState = 'open'
-        else w.doorState = 'open'
+        // Locked doors require an explicit unlock — silently flipping
+        // them to 'open' hid the locked state from the DM.
+        if (w.doorState === 'locked') return
+        w.doorState = w.doorState === 'open' ? 'closed' : 'open'
       }),
   }))
 )

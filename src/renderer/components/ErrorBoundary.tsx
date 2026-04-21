@@ -1,4 +1,5 @@
 import { Component, type ReactNode, type ErrorInfo } from 'react'
+import i18n from '../i18n'
 
 interface Props {
   children: ReactNode
@@ -30,6 +31,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
   render() {
     if (this.state.error) {
+      const label = this.props.label ?? i18n.t('errorBoundary.fallbackLabel')
       return this.props.fallback ?? (
         <div style={{
           display: 'flex',
@@ -44,7 +46,7 @@ export class ErrorBoundary extends Component<Props, State> {
         }}>
           <div style={{ fontSize: 36 }}>⚠️</div>
           <div style={{ fontWeight: 600, color: 'var(--danger)', fontSize: 'var(--text-sm)' }}>
-            {this.props.label ?? 'Fehler'} – Komponente abgestürzt
+            {i18n.t('errorBoundary.crashed', { label })}
           </div>
           <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', maxWidth: 400, wordBreak: 'break-all' }}>
             {this.state.error.message}
@@ -54,7 +56,7 @@ export class ErrorBoundary extends Component<Props, State> {
             style={{ fontSize: 'var(--text-xs)' }}
             onClick={this.handleRetry}
           >
-            Erneut versuchen
+            {i18n.t('errorBoundary.retry')}
           </button>
         </div>
       )

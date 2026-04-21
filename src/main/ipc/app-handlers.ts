@@ -197,16 +197,14 @@ export function registerAppHandlers(): void {
 
     const previousPath = getCustomUserDataPath()
 
-    // Open the new DB BEFORE closing the old one — only close old on success
+    // setCustomUserDataPath closes the current handle, so the old DB is
+    // released before we try to open the new one. If the new path fails
+    // to initialize, the revert path re-opens at the previous location.
     try {
       setCustomUserDataPath(dataPath)
       initDatabase()
-      // New DB opened successfully — now close the old one
-      // (initDatabase already replaced the db reference, but we close
-      // the previous handle if it was separate)
     } catch (err) {
       console.error('[AppHandlers] Failed to reinitialize database at new path, reverting:', err)
-      // Revert to previous path so the DB stays open
       setCustomUserDataPath(previousPath ?? '')
       try { initDatabase() } catch { /* best-effort revert */ }
       return { success: false, error: err instanceof Error ? err.message : String(err) }

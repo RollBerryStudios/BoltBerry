@@ -27,11 +27,18 @@ export const useCampaignStore = create<CampaignState>((set) => ({
   activeMapId: null,
 
   setCampaigns: (campaigns) => set({ campaigns }),
-  setActiveCampaign: (id) => set(
-    id === null
-      ? { activeCampaignId: null, activeMaps: [], activeMapId: null }
-      : { activeCampaignId: id }
-  ),
+  setActiveCampaign: (id) => set((s) => {
+    if (id === null) {
+      return { activeCampaignId: null, activeMaps: [], activeMapId: null }
+    }
+    // Switching campaigns must also drop any open map reference — the
+    // old map belongs to the previous campaign and its id has no meaning
+    // against the new set of `activeMaps`.
+    if (s.activeCampaignId !== id) {
+      return { activeCampaignId: id, activeMapId: null }
+    }
+    return { activeCampaignId: id }
+  }),
   setActiveMaps: (maps) => set({ activeMaps: maps }),
   setActiveMap: (id) => set({ activeMapId: id }),
 
@@ -115,8 +122,12 @@ export const useCampaignStore = create<CampaignState>((set) => ({
         }))
       }
 
-      // Single atomic state update
-      set({
+      // Single atomic state update. If refreshCampaigns ended up
+      // selecting a different campaign (e.g. the previous one was
+      // deleted, or none was selected yet), drop any stale activeMapId
+      // that belonged to the old campaign.
+      const prevId = useCampaignStore.getState().activeCampaignId
+      const patch: Partial<CampaignState> = {
         campaigns: campaigns.map((c) => ({
           id: c.id,
           name: c.name,
@@ -126,7 +137,9 @@ export const useCampaignStore = create<CampaignState>((set) => ({
         })),
         activeCampaignId,
         activeMaps,
-      })
+      }
+      if (prevId !== activeCampaignId) patch.activeMapId = null
+      set(patch)
     } catch (err) {
       console.error('[CampaignStore] Failed to refresh campaigns:', err)
     }

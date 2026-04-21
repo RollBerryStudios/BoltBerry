@@ -840,7 +840,10 @@
     "waiting": "Warte auf den Spielleiter…"
   },
   "errorBoundary": {
-    "label": "Fehler in {{label}}"
+    "label": "Fehler in {{label}}",
+    "fallbackLabel": "Fehler",
+    "crashed": "{{label}} – Komponente abgestürzt",
+    "retry": "Erneut versuchen"
   },
   "toolbar.tools.drawGroup": "Zeichnen",
   "toolbar.tools.drawFreehand": "Freihand",

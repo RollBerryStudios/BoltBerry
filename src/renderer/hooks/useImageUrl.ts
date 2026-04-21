@@ -3,7 +3,31 @@ import { useState, useEffect } from 'react'
 // Sentinel stored in cache when a path was fetched but returned null (missing file).
 // Prevents repeated IPC calls for the same broken path.
 const MISSING = '__missing__'
+
+// LRU cap — a long session can easily touch hundreds of unique
+// base64-encoded token images (30–50 KB each). Without a bound, memory
+// grows monotonically. Map preserves insertion order, which we exploit
+// for an insertion-time LRU: re-set on read to bump recency, evict the
+// oldest key when full.
+const CACHE_MAX = 100
 const cache = new Map<string, string>()
+
+function cacheGet(key: string): string | undefined {
+  const v = cache.get(key)
+  if (v === undefined) return undefined
+  cache.delete(key)
+  cache.set(key, v)
+  return v
+}
+
+function cacheSet(key: string, value: string): void {
+  if (cache.has(key)) cache.delete(key)
+  cache.set(key, value)
+  if (cache.size > CACHE_MAX) {
+    const oldest = cache.keys().next().value
+    if (oldest !== undefined) cache.delete(oldest)
+  }
+}
 
 export function invalidateImageUrlCache(src: string | null) {
   if (src) cache.delete(src)
@@ -31,7 +55,7 @@ export function encodeBestiaryUrl(slug: string, file: string): string {
 
 export function useImageUrl(src: string | null): string | null {
   const [url, setUrl] = useState<string | null>(
-    src ? (cache.get(src) ?? null) : null
+    src ? (cacheGet(src) ?? null) : null
   )
 
   useEffect(() => {
@@ -40,8 +64,8 @@ export function useImageUrl(src: string | null): string | null {
       return
     }
 
-    if (cache.has(src)) {
-      const cached = cache.get(src)!
+    const cached = cacheGet(src)
+    if (cached !== undefined) {
       setUrl(cached === MISSING ? null : cached)
       return
     }
@@ -67,7 +91,7 @@ export function useImageUrl(src: string | null): string | null {
     if (effective.startsWith('bestiary://')) {
       const parsed = parseBestiaryUrl(effective)
       if (!parsed) {
-        cache.set(src, MISSING)
+        cacheSet(src, MISSING)
         setUrl(null)
         return
       }
@@ -75,15 +99,15 @@ export function useImageUrl(src: string | null): string | null {
       loader?.(parsed.slug, parsed.file).then((imageData) => {
         if (cancelled) return
         if (imageData) {
-          cache.set(src, imageData)
+          cacheSet(src, imageData)
           setUrl(imageData)
         } else {
-          cache.set(src, MISSING)
+          cacheSet(src, MISSING)
           setUrl(null)
         }
       }).catch(() => {
         if (!cancelled) {
-          cache.set(src, MISSING)
+          cacheSet(src, MISSING)
           setUrl(null)
         }
       })
@@ -94,15 +118,15 @@ export function useImageUrl(src: string | null): string | null {
     window.electronAPI?.getImageAsBase64(effective).then((imageData) => {
       if (cancelled) return
       if (imageData) {
-        cache.set(src, imageData)
+        cacheSet(src, imageData)
         setUrl(imageData)
       } else {
-        cache.set(src, MISSING)
+        cacheSet(src, MISSING)
         setUrl(null)
       }
     }).catch(() => {
       if (!cancelled) {
-        cache.set(src, MISSING)
+        cacheSet(src, MISSING)
         setUrl(null)
       }
     })

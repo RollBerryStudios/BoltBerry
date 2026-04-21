@@ -840,7 +840,10 @@
     "waiting": "Waiting for the game master…"
   },
   "errorBoundary": {
-    "label": "Error in {{label}}"
+    "label": "Error in {{label}}",
+    "fallbackLabel": "Error",
+    "crashed": "{{label}} – component crashed",
+    "retry": "Try again"
   },
   "toolbar.tools.drawGroup": "Drawing",
   "toolbar.tools.drawFreehand": "Freehand",

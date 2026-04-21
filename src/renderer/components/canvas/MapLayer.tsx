@@ -18,6 +18,27 @@ interface MapLayerProps {
 const MIN_SCALE = 0.05
 const MAX_SCALE = 12
 
+// Checker-pattern tiles are expensive to allocate — creating a fresh
+// canvas + 2D context on every paint caused significant renderer GC
+// pressure during pan/zoom. One canvas per tile size is enough.
+const checkerCache = new Map<number, HTMLCanvasElement>()
+function getCheckerCanvas(sz: number): HTMLCanvasElement {
+  let c = checkerCache.get(sz)
+  if (c) return c
+  c = document.createElement('canvas')
+  c.width = sz * 2
+  c.height = sz * 2
+  const pCtx = c.getContext('2d')!
+  pCtx.fillStyle = '#2a2a2a'
+  pCtx.fillRect(0, 0, sz, sz)
+  pCtx.fillRect(sz, sz, sz, sz)
+  pCtx.fillStyle = '#1a1a1a'
+  pCtx.fillRect(sz, 0, sz, sz)
+  pCtx.fillRect(0, sz, sz, sz)
+  checkerCache.set(sz, c)
+  return c
+}
+
 export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }: MapLayerProps) {
   const scale = useMapTransformStore((s) => s.scale)
   const offsetX = useMapTransformStore((s) => s.offsetX)
@@ -290,18 +311,7 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
               ctx.beginPath()
               ctx.rect(offsetX, offsetY, w, h)
               ctx.clip()
-              // Create a 2-tile pattern once instead of per-cell fillRect
-              const patternCanvas = document.createElement('canvas')
-              patternCanvas.width = sz * 2
-              patternCanvas.height = sz * 2
-              const pCtx = patternCanvas.getContext('2d')!
-              pCtx.fillStyle = '#2a2a2a'
-              pCtx.fillRect(0, 0, sz, sz)
-              pCtx.fillRect(sz, sz, sz, sz)
-              pCtx.fillStyle = '#1a1a1a'
-              pCtx.fillRect(sz, 0, sz, sz)
-              pCtx.fillRect(0, sz, sz, sz)
-              const pattern = ctx.createPattern(patternCanvas, 'repeat')!
+              const pattern = ctx.createPattern(getCheckerCanvas(sz), 'repeat')!
               ctx.fillStyle = pattern
               ctx.fillRect(offsetX, offsetY, cols * sz, rows * sz)
               ctx.restore()

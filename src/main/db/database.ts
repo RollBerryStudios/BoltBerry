@@ -24,6 +24,11 @@ let db: Database.Database | null = null
 let customUserDataPath: string | null = null
 
 export function setCustomUserDataPath(path: string) {
+  // SET_USER_DATA_FOLDER flips this at runtime. Without explicitly
+  // closing the open handle first, the subsequent initDatabase() call
+  // orphans it — better-sqlite3 keeps the WAL file open and locks the
+  // previous data directory until the process exits.
+  if (db) closeDatabase()
   customUserDataPath = path
 }
 
