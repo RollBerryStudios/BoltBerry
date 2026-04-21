@@ -129,16 +129,6 @@ export const dmApi = {
   sendWalls: (walls: PlayerWallState[]) =>
     ipcRenderer.send('player:walls', walls),
 
-  // DB operations
-  // Legacy generic SQL tunnel — do not add new call sites. Domain
-  // namespaces (e.g. `campaigns`, `maps`, `tokens`, `initiative`) are
-  // the supported path for new code. `dbRunBatch` has already been
-  // retired — every caller is now on a domain-specific transaction.
-  dbQuery: <T>(sql: string, params?: unknown[]): Promise<T[]> =>
-    ipcRenderer.invoke('db:query', sql, params),
-  dbRun: (sql: string, params?: unknown[]): Promise<{ lastInsertRowid: number; changes: number }> =>
-    ipcRenderer.invoke('db:run', sql, params),
-
   // Campaigns — semantic API for the `campaigns` table
   campaigns: {
     list: (): Promise<Campaign[]> =>

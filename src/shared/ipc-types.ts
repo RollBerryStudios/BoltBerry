@@ -42,13 +42,6 @@ export const IPC = {
   DUPLICATE_CAMPAIGN: 'app:duplicate-campaign',
   SAVE_NOW: 'app:save-now',
 
-  // DB queries (renderer → main)
-  // Legacy generic SQL tunnel — being phased out in favour of the
-  // domain channels below. Do not add new call sites. DB_RUN_BATCH
-  // has already been retired.
-  DB_QUERY: 'db:query',
-  DB_RUN: 'db:run',
-
   // Campaigns domain — semantic replacements for raw `FROM campaigns`
   // / `INTO campaigns` / `UPDATE campaigns` SQL from the renderer.
   CAMPAIGNS_LIST: 'campaigns:list',

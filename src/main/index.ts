@@ -8,7 +8,6 @@ import { createDMWindow, getDMWindow } from './windows'
 import { registerPlayerBridgeHandlers } from './ipc/player-bridge'
 import { registerAppHandlers } from './ipc/app-handlers'
 import { registerDataHandlers } from './ipc/data-handlers'
-import { registerDbHandlers } from './ipc/db-handlers'
 import { registerCampaignHandlers } from './ipc/campaign-handlers'
 import { registerMapHandlers } from './ipc/map-handlers'
 import { registerTokenHandlers } from './ipc/token-handlers'
@@ -107,7 +106,6 @@ app.whenReady().then(() => {
   registerPlayerBridgeHandlers()
   registerAppHandlers()
   registerDataHandlers()
-  registerDbHandlers()
   registerCampaignHandlers()
   registerMapHandlers()
   registerTokenHandlers()
