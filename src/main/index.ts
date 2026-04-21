@@ -7,6 +7,8 @@ import { logger } from './logger'
 import { createDMWindow, getDMWindow } from './windows'
 import { registerPlayerBridgeHandlers } from './ipc/player-bridge'
 import { registerAppHandlers } from './ipc/app-handlers'
+import { registerDialogHandlers } from './ipc/dialog-handlers'
+import { registerCompendiumHandlers } from './ipc/compendium-handlers'
 import { registerDataHandlers } from './ipc/data-handlers'
 import { registerCampaignHandlers } from './ipc/campaign-handlers'
 import { registerMapHandlers } from './ipc/map-handlers'
@@ -105,6 +107,8 @@ app.whenReady().then(() => {
 
   registerPlayerBridgeHandlers()
   registerAppHandlers()
+  registerDialogHandlers()
+  registerCompendiumHandlers()
   registerDataHandlers()
   registerCampaignHandlers()
   registerMapHandlers()

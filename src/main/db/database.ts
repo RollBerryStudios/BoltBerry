@@ -17,7 +17,7 @@ import {
   MIGRATE_V33_TO_V34, MIGRATE_V34_TO_V35, MIGRATE_V35_TO_V36,
   MIGRATE_V36_TO_V37,
 } from './schema'
-import { loadMonstersIndexSync, loadMonsterRecordSync } from '../ipc/data-handlers'
+import { loadMonstersIndexSync, loadMonsterRecordSync } from '../data/monsters'
 
 let db: Database.Database | null = null
 

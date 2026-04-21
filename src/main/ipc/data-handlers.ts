@@ -1,8 +1,9 @@
-import { ipcMain, app } from 'electron'
+import { ipcMain } from 'electron'
 import { closeSync, existsSync, openSync, readFileSync, readSync, realpathSync, statSync } from 'fs'
 import { extname, join, sep } from 'path'
 import { IPC } from '../../shared/ipc-types'
 import { getDb } from '../db/database'
+import { SLUG_RE, getDataRoot } from '../data/monsters'
 import type {
   ItemIndexEntry,
   ItemRecord,
@@ -17,18 +18,13 @@ import type {
    All reads are rooted at <resources>/data/ which ships via electron-builder
    extraResources. In development, that folder lives under the repo at
    resources/data/. Slugs are validated against a tight regex so nothing the
-   renderer sends can escape the data root via traversal.
+   renderer sends can escape the data root via traversal. The root resolver
+   and slug regex live in data/monsters.ts so the DB seeder can share them
+   without pulling in the whole IPC module.
 
    The index files (index.json, items-index.json, spells-index.json) are
    loaded lazily on first request and cached for the process lifetime —
    they're tiny (KB range) and never change at runtime. */
-
-const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/
-
-function getDataRoot(): string {
-  const base = app.isPackaged ? process.resourcesPath : join(app.getAppPath(), 'resources')
-  return join(base, 'data')
-}
 
 // Lazy cache for the three index files. Invalidated never — the data is
 // read-only and bundled with the installer.
@@ -439,28 +435,4 @@ export function registerDataHandlers(): void {
   })
 }
 
-// Exposed so the DB seeder can pull the monster list at startup without
-// duplicating the lookup path — single source of truth for "where does the
-// data live?".
-export function loadMonstersIndexSync(): MonsterIndexEntry[] {
-  try {
-    const full = join(getDataRoot(), 'index.json')
-    if (!existsSync(full)) return []
-    const parsed = JSON.parse(readFileSync(full, 'utf-8')) as { monsters?: MonsterIndexEntry[] }
-    return parsed.monsters ?? []
-  } catch {
-    return []
-  }
-}
-
-export function loadMonsterRecordSync(slug: string): MonsterRecord | null {
-  if (!SLUG_RE.test(slug)) return null
-  try {
-    const full = join(getDataRoot(), 'monsters', slug, 'monster.json')
-    if (!existsSync(full)) return null
-    return JSON.parse(readFileSync(full, 'utf-8')) as MonsterRecord
-  } catch {
-    return null
-  }
-}
 
