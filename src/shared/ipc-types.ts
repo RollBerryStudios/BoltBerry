@@ -175,6 +175,20 @@ export const IPC = {
   TOKEN_TEMPLATES_UPDATE: 'token-templates:update',
   TOKEN_TEMPLATES_DELETE: 'token-templates:delete',
 
+  // Audio boards + slots — soundboard CRUD.
+  AUDIO_BOARDS_LIST_BY_CAMPAIGN: 'audio-boards:list-by-campaign',
+  AUDIO_BOARDS_CREATE: 'audio-boards:create',
+  AUDIO_BOARDS_RENAME: 'audio-boards:rename',
+  AUDIO_BOARDS_DELETE: 'audio-boards:delete',
+  AUDIO_BOARDS_UPSERT_SLOT: 'audio-boards:upsert-slot',
+  AUDIO_BOARDS_DELETE_SLOT: 'audio-boards:delete-slot',
+
+  // Channel playlist — per-campaign saved tracks for the three
+  // audio channels (track1 / track2 / combat).
+  CHANNEL_PLAYLIST_LIST_BY_CAMPAIGN: 'channel-playlist:list-by-campaign',
+  CHANNEL_PLAYLIST_ADD: 'channel-playlist:add',
+  CHANNEL_PLAYLIST_REMOVE: 'channel-playlist:remove',
+
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
 
@@ -520,6 +534,28 @@ export interface RecentMapEntry {
 }
 
 export type AudioChannelKey = 'track1' | 'track2' | 'combat'
+
+export interface ChannelPlaylistEntry {
+  id: number
+  channel: AudioChannelKey
+  path: string
+  fileName: string
+}
+
+export interface AudioBoardSlot {
+  slotNumber: number   // 0–9
+  emoji: string
+  title: string
+  audioPath: string | null
+}
+
+export interface AudioBoardRecord {
+  id: number
+  campaignId: number
+  name: string
+  sortOrder: number
+  slots: AudioBoardSlot[]
+}
 
 export type WallType = 'wall' | 'door' | 'window'
 export type DoorState = 'open' | 'closed' | 'locked'

@@ -89,12 +89,13 @@ function ChannelStrip({ chId, label, activeMapId, activeCampaignId, combatContro
       if (!result) return
       const fileName = result.path.split(/[\\/]/).pop() ?? result.path
       const position = ch.playlist.length
-      const dbResult = await window.electronAPI.dbRun(
-        `INSERT INTO channel_playlist (campaign_id, channel, path, file_name, position)
-         VALUES (?, ?, ?, ?, ?)`,
-        [activeCampaignId, chId, result.path, fileName, position],
+      const { id } = await window.electronAPI.channelPlaylist.add(
+        activeCampaignId,
+        chId,
+        result.path,
+        fileName,
+        position,
       )
-      const id = Number(dbResult?.lastInsertRowid ?? 0)
       if (!id) return
       const wasEmpty = ch.playlist.length === 0
       store.addPlaylistEntry(chId, { id, path: result.path, fileName }, wasEmpty)
@@ -115,9 +116,7 @@ function ChannelStrip({ chId, label, activeMapId, activeCampaignId, combatContro
     evt.stopPropagation()
     if (!window.electronAPI) return
     try {
-      await window.electronAPI.dbRun(
-        'DELETE FROM channel_playlist WHERE id = ?', [entry.id],
-      )
+      await window.electronAPI.channelPlaylist.remove(entry.id)
       store.removePlaylistEntry(chId, entry.id)
     } catch (err) {
       console.error('[AudioPanel] removeTrack failed:', err)
@@ -374,17 +373,11 @@ function SlotEditor({ boardId, slot, slotIndex, onClose }: {
 
   async function handleSave() {
     if (!board) return
-    // Upsert slot in DB
-    await window.electronAPI?.dbRun(
-      `INSERT INTO audio_board_slots (board_id, slot_number, emoji, title, audio_path)
-       VALUES (?, ?, ?, ?, ?)
-       ON CONFLICT(board_id, slot_number) DO UPDATE SET emoji=excluded.emoji, title=excluded.title, audio_path=excluded.audio_path`,
-      [boardId, slotIndex, emoji, title, audioPath]
-    ).catch(console.error)
+    const updated: AudioBoardSlot = { slotNumber: slotIndex, emoji, title, audioPath }
+    await window.electronAPI?.audioBoards.upsertSlot(boardId, updated).catch(console.error)
     // Rebuild slots array
     const newSlots = [...(board.slots ?? [])]
     const existing = newSlots.findIndex((s) => s.slotNumber === slotIndex)
-    const updated: AudioBoardSlot = { slotNumber: slotIndex, emoji, title, audioPath }
     if (existing >= 0) newSlots[existing] = updated
     else newSlots.push(updated)
     setSlots(boardId, newSlots)
@@ -393,10 +386,7 @@ function SlotEditor({ boardId, slot, slotIndex, onClose }: {
 
   async function handleClear() {
     if (!board) return
-    await window.electronAPI?.dbRun(
-      `DELETE FROM audio_board_slots WHERE board_id = ? AND slot_number = ?`,
-      [boardId, slotIndex]
-    ).catch(console.error)
+    await window.electronAPI?.audioBoards.deleteSlot(boardId, slotIndex).catch(console.error)
     const newSlots = (board.slots ?? []).filter((s) => s.slotNumber !== slotIndex)
     setSlots(boardId, newSlots)
     onClose()
@@ -463,23 +453,22 @@ function BoardManager({ boards, activeBoardIndex, onSelect, campaignId, onBoards
   const updateBoardName = useAudioStore((s) => s.updateBoardName)
 
   async function handleAdd() {
-    const result = await window.electronAPI?.dbRun(
-      'INSERT INTO audio_boards (campaign_id, name, sort_order) VALUES (?, ?, ?)',
-      [campaignId, `Board ${boards.length + 1}`, boards.length]
-    ).catch(() => null)
-    if (result) onBoardsChanged()
+    const created = await window.electronAPI?.audioBoards
+      .create(campaignId, `Board ${boards.length + 1}`, boards.length)
+      .catch(() => null)
+    if (created) onBoardsChanged()
   }
 
   async function handleRename(id: number, name: string) {
     updateBoardName(id, name)
-    await window.electronAPI?.dbRun('UPDATE audio_boards SET name = ? WHERE id = ?', [name, id]).catch(console.error)
+    await window.electronAPI?.audioBoards.rename(id, name).catch(console.error)
     setEditing(null)
   }
 
   async function handleDelete(id: number) {
     const ok = await window.electronAPI?.confirmDialog(t('audio.deleteBoardConfirm'))
     if (!ok) return
-    await window.electronAPI?.dbRun('DELETE FROM audio_boards WHERE id = ?', [id]).catch(console.error)
+    await window.electronAPI?.audioBoards.delete(id).catch(console.error)
     onBoardsChanged()
   }
 
@@ -553,33 +542,13 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: AudioPanelLayout })
   const [editingSlot, setEditingSlot] = useState<{ boardId: number; slotIndex: number } | null>(null)
   const [activeSection, setActiveSection] = useState<'music' | 'sfx'>('music')
 
-  // Load boards for current campaign
+  // Load boards for current campaign. The handler hydrates slots in
+  // one round-trip — previous per-board slot SELECTs were N+1.
   const loadBoards = useCallback(async () => {
     if (!activeCampaignId) { setBoards([]); return }
     try {
-      const boardRows = await window.electronAPI!.dbQuery<{
-        id: number; campaign_id: number; name: string; sort_order: number
-      }>('SELECT * FROM audio_boards WHERE campaign_id = ? ORDER BY sort_order', [activeCampaignId])
-
-      const result: AudioBoard[] = []
-      for (const br of boardRows) {
-        const slotRows = await window.electronAPI!.dbQuery<{
-          id: number; board_id: number; slot_number: number; emoji: string | null; title: string | null; audio_path: string | null
-        }>('SELECT * FROM audio_board_slots WHERE board_id = ? ORDER BY slot_number', [br.id])
-        result.push({
-          id: br.id,
-          campaignId: br.campaign_id,
-          name: br.name,
-          sortOrder: br.sort_order,
-          slots: slotRows.map((s) => ({
-            slotNumber: s.slot_number,
-            emoji: s.emoji ?? '🔊',
-            title: s.title ?? '',
-            audioPath: s.audio_path,
-          })),
-        })
-      }
-      setBoards(result)
+      const boards = await window.electronAPI!.audioBoards.listByCampaign(activeCampaignId)
+      setBoards(boards)
     } catch (err) {
       console.error('[AudioPanel] loadBoards failed:', err)
     }
@@ -597,19 +566,11 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: AudioPanelLayout })
     let cancelled = false
     ;(async () => {
       try {
-        const rows = await window.electronAPI?.dbQuery<{
-          id: number; channel: ChannelId; path: string; file_name: string
-        }>(
-          `SELECT id, channel, path, file_name
-             FROM channel_playlist
-            WHERE campaign_id = ?
-            ORDER BY channel, position, id`,
-          [activeCampaignId],
-        ) ?? []
+        const rows = await window.electronAPI?.channelPlaylist.listByCampaign(activeCampaignId) ?? []
         if (cancelled) return
         const byChannel: Record<ChannelId, PlaylistEntry[]> = { track1: [], track2: [], combat: [] }
         for (const r of rows) {
-          byChannel[r.channel]?.push({ id: r.id, path: r.path, fileName: r.file_name })
+          byChannel[r.channel]?.push({ id: r.id, path: r.path, fileName: r.fileName })
         }
         setChannelPlaylist('track1', byChannel.track1)
         setChannelPlaylist('track2', byChannel.track2)

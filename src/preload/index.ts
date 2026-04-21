@@ -46,6 +46,9 @@ import type {
   AssetEntry,
   SessionStatsEntry,
   TokenTemplateRow,
+  AudioBoardRecord,
+  AudioBoardSlot,
+  ChannelPlaylistEntry,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -415,6 +418,38 @@ export const dmApi = {
       ipcRenderer.invoke(IPC.TOKEN_TEMPLATES_UPDATE, id, patch),
     delete: (id: number): Promise<void> =>
       ipcRenderer.invoke(IPC.TOKEN_TEMPLATES_DELETE, id),
+  },
+
+  // Audio boards + slots — semantic API for `audio_boards` / `audio_board_slots`
+  audioBoards: {
+    listByCampaign: (campaignId: number): Promise<AudioBoardRecord[]> =>
+      ipcRenderer.invoke(IPC.AUDIO_BOARDS_LIST_BY_CAMPAIGN, campaignId),
+    create: (campaignId: number, name: string, sortOrder: number): Promise<AudioBoardRecord> =>
+      ipcRenderer.invoke(IPC.AUDIO_BOARDS_CREATE, campaignId, name, sortOrder),
+    rename: (id: number, name: string): Promise<void> =>
+      ipcRenderer.invoke(IPC.AUDIO_BOARDS_RENAME, id, name),
+    delete: (id: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.AUDIO_BOARDS_DELETE, id),
+    upsertSlot: (boardId: number, slot: AudioBoardSlot): Promise<void> =>
+      ipcRenderer.invoke(IPC.AUDIO_BOARDS_UPSERT_SLOT, boardId, slot),
+    deleteSlot: (boardId: number, slotNumber: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.AUDIO_BOARDS_DELETE_SLOT, boardId, slotNumber),
+  },
+
+  // Channel playlist — per-campaign saved tracks for audio channels
+  channelPlaylist: {
+    listByCampaign: (campaignId: number): Promise<ChannelPlaylistEntry[]> =>
+      ipcRenderer.invoke(IPC.CHANNEL_PLAYLIST_LIST_BY_CAMPAIGN, campaignId),
+    add: (
+      campaignId: number,
+      channel: AudioChannelKey,
+      path: string,
+      fileName: string,
+      position: number,
+    ): Promise<{ id: number }> =>
+      ipcRenderer.invoke(IPC.CHANNEL_PLAYLIST_ADD, campaignId, channel, path, fileName, position),
+    remove: (id: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.CHANNEL_PLAYLIST_REMOVE, id),
   },
 
   // Listen for main → DM: player window was closed

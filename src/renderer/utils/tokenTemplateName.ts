@@ -10,7 +10,7 @@
  * ("Goblin" → "Goblin (2)" → "Goblin (3)"…) and let the caller insert
  * with confidence.
  *
- * The check is best-effort: if the dbQuery fails we fall back to a
+ * The check is best-effort: if the IPC query fails we fall back to a
  * timestamp-suffixed name so a transient IPC glitch still lets the
  * save succeed with *a* collision-free row.
  */

@@ -15,6 +15,10 @@
  */
 
 import { create } from 'zustand'
+import type { AudioBoardSlot, AudioBoardRecord } from '@shared/ipc-types'
+
+export type { AudioBoardSlot }
+export type AudioBoard = AudioBoardRecord
 
 // ─── Fade utility ─────────────────────────────────────────────────────────────
 
@@ -68,21 +72,6 @@ export interface PlaylistEntry {
   id: number
   path: string
   fileName: string
-}
-
-export interface AudioBoardSlot {
-  slotNumber: number   // 0–9
-  emoji: string
-  title: string
-  audioPath: string | null
-}
-
-export interface AudioBoard {
-  id: number
-  campaignId: number
-  name: string
-  sortOrder: number
-  slots: AudioBoardSlot[]
 }
 
 interface FrozenChannel {
