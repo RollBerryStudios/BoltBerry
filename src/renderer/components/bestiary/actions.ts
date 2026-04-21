@@ -5,7 +5,6 @@ import type {
   NamedText,
   PlayerHandout,
   SpellRecord,
-  TokenRecord,
 } from '@shared/ipc-types'
 import type { AppLanguage } from '../../stores/uiStore'
 import { useTokenStore } from '../../stores/tokenStore'
@@ -66,76 +65,45 @@ export async function spawnMonsterOnMap(opts: {
   const variant = opts.tokenFile ?? m.token?.file ?? m.tokens?.[0]?.file ?? null
   const imagePath = variant ? `bestiary://${m.slug}/${variant}` : null
 
-  const res = await api.dbRun(
-    `INSERT INTO tokens
-       (map_id, name, image_path, x, y, size, hp_current, hp_max,
-        visible_to_players, rotation, locked, z_index, marker_color,
-        ac, notes, status_effects, faction, show_name, light_radius, light_color)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, 0, 0, 0, ?, ?, ?, NULL, ?, 1, 0, '#ffffff')`,
-    [
-      opts.mapId,
-      name,
-      imagePath,
-      cx, cy,
-      size,
-      hp, hp,
-      tint,
-      ac,
-      null,                       // notes
-      faction,
-    ],
-  )
-
-  // Keep the Zustand tokens store in sync with the DB write so the new
-  // token paints on the canvas immediately, without waiting for the next
-  // full map reload. Matches the shape produced by CanvasArea.loadMapData.
-  const newToken: TokenRecord = {
-    id: res.lastInsertRowid,
+  const createPatch = {
     mapId: opts.mapId,
     name,
     imagePath,
-    x: cx, y: cy,
+    x: cx,
+    y: cy,
     size,
-    hpCurrent: hp, hpMax: hp,
-    visibleToPlayers: true,
-    rotation: 0,
-    locked: false,
-    zIndex: 0,
+    hpCurrent: hp,
+    hpMax: hp,
     markerColor: tint,
     ac,
-    notes: null,
-    statusEffects: null,
     faction,
-    showName: true,
-    lightRadius: 0,
     lightColor: '#ffffff',
   }
+
+  const newToken = await api.tokens.create(createPatch)
+
+  // Keep the Zustand tokens store in sync with the DB write so the new
+  // token paints on the canvas immediately, without waiting for the next
+  // full map reload.
   useTokenStore.getState().addToken(newToken)
 
   // Register a command so Ctrl+Z rolls back a Wiki / encounter /
   // initiative / encounter-picker spawn the same way drag-drop
   // spawns from CanvasArea already do. Closure-locals capture the
   // id + restored row so redo re-inserts with matching contents.
-  let currentId: number = res.lastInsertRowid
+  let currentId: number = newToken.id
   useUndoStore.getState().pushCommand({
     id: nextCommandId(),
     label: `Spawn ${name}`,
     undo: async () => {
-      await api.dbRun('DELETE FROM tokens WHERE id = ?', [currentId])
+      await api.tokens.delete(currentId)
       useTokenStore.getState().removeToken(currentId)
     },
     redo: async () => {
-      const r = await api.dbRun(
-        `INSERT INTO tokens
-           (map_id, name, image_path, x, y, size, hp_current, hp_max,
-            visible_to_players, rotation, locked, z_index, marker_color,
-            ac, notes, status_effects, faction, show_name, light_radius, light_color)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, 0, 0, 0, ?, ?, ?, NULL, ?, 1, 0, '#ffffff')`,
-        [opts.mapId, name, imagePath, cx, cy, size, hp, hp, tint, ac, null, faction],
-      )
+      const r = await api.tokens.create(createPatch)
       if (!r) return
-      currentId = r.lastInsertRowid
-      useTokenStore.getState().addToken({ ...newToken, id: currentId })
+      currentId = r.id
+      useTokenStore.getState().addToken(r)
     },
   })
 

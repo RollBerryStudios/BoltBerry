@@ -244,7 +244,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
       moveToken(id, newX, newY)
       newPositions.push({ id, x: newX, y: newY })
       try {
-        await window.electronAPI?.dbRun('UPDATE tokens SET x = ?, y = ? WHERE id = ?', [newX, newY, id])
+        await window.electronAPI?.tokens.update(id, { x: newX, y: newY })
       } catch (err) {
         console.error('[TokenLayer] handleDragEnd failed:', err)
       }
@@ -285,15 +285,19 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
       undo: async () => {
         for (const pos of oldPositions) {
           useTokenStore.getState().moveToken(pos.id, pos.x, pos.y)
-          await window.electronAPI?.dbRun('UPDATE tokens SET x = ?, y = ? WHERE id = ?', [pos.x, pos.y, pos.id])
         }
+        await window.electronAPI?.tokens.updateMany(
+          oldPositions.map((p) => ({ id: p.id, patch: { x: p.x, y: p.y } })),
+        )
         broadcastTokens(useTokenStore.getState().tokens)
       },
       redo: async () => {
         for (const pos of newPositions) {
           useTokenStore.getState().moveToken(pos.id, pos.x, pos.y)
-          await window.electronAPI?.dbRun('UPDATE tokens SET x = ?, y = ? WHERE id = ?', [pos.x, pos.y, pos.id])
         }
+        await window.electronAPI?.tokens.updateMany(
+          newPositions.map((p) => ({ id: p.id, patch: { x: p.x, y: p.y } })),
+        )
         broadcastTokens(useTokenStore.getState().tokens)
       },
     })
@@ -394,20 +398,10 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
       oldValues[key] = (token as any)[key]
     }
 
-    const buildSqlParts = (obj: Record<string, any>) => {
-      const cols = Object.keys(obj).map((k) => {
-        const col = k.replace(/([A-Z])/g, '_$1').toLowerCase()
-        return `${col} = ?`
-      }).join(', ')
-      const vals = Object.values(obj).map((v) => typeof v === 'boolean' ? (v ? 1 : 0) : v)
-      return { cols, vals }
-    }
-
     const applyForward = async () => {
       updateToken(id, updates)
-      const { cols, vals } = buildSqlParts(updates)
       try {
-        await window.electronAPI?.dbRun(`UPDATE tokens SET ${cols} WHERE id = ?`, [...vals, id])
+        await window.electronAPI?.tokens.update(id, updates)
         broadcastTokens(useTokenStore.getState().tokens)
       } catch (err) {
         console.error('[TokenLayer] handleUpdate failed:', err)
@@ -416,9 +410,8 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
 
     const applyBackward = async () => {
       updateToken(id, oldValues)
-      const { cols, vals } = buildSqlParts(oldValues)
       try {
-        await window.electronAPI?.dbRun(`UPDATE tokens SET ${cols} WHERE id = ?`, [...vals, id])
+        await window.electronAPI?.tokens.update(id, oldValues)
         broadcastTokens(useTokenStore.getState().tokens)
       } catch (err) {
         console.error('[TokenLayer] handleUpdate undo failed:', err)
@@ -468,7 +461,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     const applyName = async (newName: string, entryNames: Array<{ id: number; name: string }>) => {
       updateToken(id, { name: newName })
       try {
-        await window.electronAPI?.dbRun('UPDATE tokens SET name = ? WHERE id = ?', [newName, id])
+        await window.electronAPI?.tokens.update(id, { name: newName })
         broadcastTokens(useTokenStore.getState().tokens)
       } catch (err) {
         console.error('[TokenLayer] commitEdit failed:', err)
@@ -523,14 +516,8 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     })
     clearTokenSelection()
     try {
-      await window.electronAPI?.dbRun(
-        `DELETE FROM tokens WHERE id IN (${idsToDelete.map(() => '?').join(',')})`,
-        idsToDelete
-      )
-      await window.electronAPI?.dbRun(
-        `UPDATE initiative SET token_id = NULL WHERE token_id IN (${idsToDelete.map(() => '?').join(',')})`,
-        idsToDelete
-      )
+      // deleteMany handles the initiative.token_id NULL-ing atomically.
+      await window.electronAPI?.tokens.deleteMany(idsToDelete)
       broadcastTokens(useTokenStore.getState().tokens)
     } catch (err) {
       console.error('[TokenLayer] handleDelete failed:', err)
@@ -542,22 +529,13 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
         ? `Delete ${deletedTokens[0].name}`
         : `Delete ${deletedTokens.length} tokens`,
       undo: async () => {
-        for (const token of deletedTokens) {
-          try {
-            await window.electronAPI?.dbRun(
-              'INSERT INTO tokens (id, map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name, light_radius, light_color) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-              [token.id, token.mapId, token.name, token.imagePath, token.x, token.y, token.size,
-               token.hpCurrent, token.hpMax, token.visibleToPlayers ? 1 : 0,
-               token.rotation, token.locked ? 1 : 0, token.zIndex, token.markerColor,
-               token.ac, token.notes,
-               token.statusEffects ? JSON.stringify(token.statusEffects) : null,
-               token.faction ?? 'party', token.showName ? 1 : 0,
-               token.lightRadius, token.lightColor]
-            )
+        try {
+          await window.electronAPI?.tokens.restoreMany(deletedTokens)
+          for (const token of deletedTokens) {
             useTokenStore.getState().addToken(token)
-          } catch (err) {
-            console.error('[TokenLayer] undo delete failed:', err)
           }
+        } catch (err) {
+          console.error('[TokenLayer] undo delete failed:', err)
         }
         broadcastTokens(useTokenStore.getState().tokens)
       },
@@ -566,10 +544,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
           useTokenStore.getState().removeToken(did)
         }
         try {
-          await window.electronAPI?.dbRun(
-            `DELETE FROM tokens WHERE id IN (${idsToDelete.map(() => '?').join(',')})`,
-            idsToDelete
-          )
+          await window.electronAPI?.tokens.deleteMany(idsToDelete)
         } catch (err) {
           console.error('[TokenLayer] redo delete failed:', err)
         }
@@ -584,35 +559,13 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     const newX = token.x + map.gridSize
     const newY = token.y + map.gridSize
     try {
-      const row = await window.electronAPI.dbRun(
-        'INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        [token.mapId, token.name, token.imagePath, newX, newY, token.size, token.hpCurrent, token.hpMax, token.visibleToPlayers ? 1 : 0,
-         token.rotation, token.locked ? 1 : 0, token.zIndex, token.markerColor, token.ac, token.notes,
-         token.statusEffects ? JSON.stringify(token.statusEffects) : null, token.faction ?? 'party', token.showName ? 1 : 0]
-      )
-      useTokenStore.getState().addToken({
-        id: row.lastInsertRowid,
-        mapId: token.mapId,
-        name: token.name,
-        imagePath: token.imagePath,
+      const { id: _omit, ...rest } = token
+      const created = await window.electronAPI.tokens.create({
+        ...rest,
         x: newX,
         y: newY,
-        size: token.size,
-        hpCurrent: token.hpCurrent,
-        hpMax: token.hpMax,
-        visibleToPlayers: token.visibleToPlayers,
-        rotation: token.rotation,
-        locked: token.locked,
-        zIndex: token.zIndex,
-        markerColor: token.markerColor,
-        ac: token.ac,
-        notes: token.notes,
-        statusEffects: token.statusEffects,
-        faction: token.faction ?? 'party',
-        showName: token.showName,
-        lightRadius: token.lightRadius,
-        lightColor: token.lightColor,
       })
+      useTokenStore.getState().addToken(created)
       broadcastTokens(useTokenStore.getState().tokens)
     } catch (err) {
       console.error('[TokenLayer] handleDuplicate failed:', err)
@@ -624,33 +577,18 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     if (!window.electronAPI) return
     const selectedTokens = tokens.filter((t) => selectedTokenIds.includes(t.id))
     if (selectedTokens.length === 0) return
-    const firstToken = selectedTokens[0]
-    const baseX = firstToken.x
-    const baseY = firstToken.y
     const gridSize = map.gridSize
     for (const token of selectedTokens) {
-      const newX = (token.x - baseX) + baseX + gridSize
-      const newY = (token.y - baseY) + baseY + gridSize
+      const newX = token.x + gridSize
+      const newY = token.y + gridSize
       try {
-        const row = await window.electronAPI.dbRun(
-          'INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-          [token.mapId, token.name, token.imagePath, newX, newY, token.size, token.hpCurrent, token.hpMax, token.visibleToPlayers ? 1 : 0,
-           token.rotation, token.locked ? 1 : 0, token.zIndex, token.markerColor, token.ac, token.notes,
-           token.statusEffects ? JSON.stringify(token.statusEffects) : null, token.faction ?? 'party', token.showName ? 1 : 0]
-        )
-        useTokenStore.getState().addToken({
-          id: row.lastInsertRowid,
-          mapId: token.mapId,
-          name: token.name,
-          imagePath: token.imagePath,
-          x: newX, y: newY, size: token.size,
-          hpCurrent: token.hpCurrent, hpMax: token.hpMax,
-          visibleToPlayers: token.visibleToPlayers,
-          rotation: token.rotation, locked: token.locked, zIndex: token.zIndex,
-          markerColor: token.markerColor, ac: token.ac, notes: token.notes,
-          statusEffects: token.statusEffects, faction: token.faction ?? 'party', showName: token.showName,
-          lightRadius: token.lightRadius, lightColor: token.lightColor,
+        const { id: _omit, ...rest } = token
+        const created = await window.electronAPI.tokens.create({
+          ...rest,
+          x: newX,
+          y: newY,
         })
+        useTokenStore.getState().addToken(created)
       } catch (err) {
         console.error('[TokenLayer] handleDuplicateGroup failed:', err)
       }
@@ -751,22 +689,24 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
       const newX = Math.round((mapPos.x + ct.offsetX) / map.gridSize) * map.gridSize
       const newY = Math.round((mapPos.y + ct.offsetY) / map.gridSize) * map.gridSize
       try {
-        const row = await window.electronAPI.dbRun(
-          'INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-          [map.id, ct.name, ct.imagePath, newX, newY, ct.size, ct.hpCurrent, ct.hpMax, ct.visibleToPlayers ? 1 : 0,
-           0, 0, 0, ct.markerColor, ct.ac, ct.notes,
-           ct.statusEffects ? JSON.stringify(ct.statusEffects) : null, ct.faction, ct.showName ? 1 : 0]
-        )
-        useTokenStore.getState().addToken({
-          id: row.lastInsertRowid, mapId: map.id,
-          name: ct.name, imagePath: ct.imagePath,
-          x: newX, y: newY, size: ct.size,
-          hpCurrent: ct.hpCurrent, hpMax: ct.hpMax,
-          visibleToPlayers: ct.visibleToPlayers, rotation: 0, locked: false, zIndex: 0,
-          markerColor: ct.markerColor, ac: ct.ac, notes: ct.notes,
-          statusEffects: ct.statusEffects, faction: ct.faction, showName: ct.showName,
-          lightRadius: 0, lightColor: '#ffcc44',
+        const created = await window.electronAPI.tokens.create({
+          mapId: map.id,
+          name: ct.name,
+          imagePath: ct.imagePath,
+          x: newX,
+          y: newY,
+          size: ct.size,
+          hpCurrent: ct.hpCurrent,
+          hpMax: ct.hpMax,
+          visibleToPlayers: ct.visibleToPlayers,
+          markerColor: ct.markerColor,
+          ac: ct.ac,
+          notes: ct.notes,
+          statusEffects: ct.statusEffects,
+          faction: ct.faction,
+          showName: ct.showName,
         })
+        useTokenStore.getState().addToken(created)
       } catch (err) {
         console.error('[TokenLayer] handlePasteTokens failed:', err)
       }
@@ -780,7 +720,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     const v = !token.visibleToPlayers
     updateToken(token.id, { visibleToPlayers: v })
     try {
-      await window.electronAPI?.dbRun('UPDATE tokens SET visible_to_players = ? WHERE id = ?', [v ? 1 : 0, token.id])
+      await window.electronAPI?.tokens.update(token.id, { visibleToPlayers: v })
       broadcastTokens(useTokenStore.getState().tokens)
     } catch (err) {
       console.error('[TokenLayer] handleToggleVisibility failed:', err)

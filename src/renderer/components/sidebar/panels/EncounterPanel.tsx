@@ -305,20 +305,21 @@ export function EncounterPanel() {
       const spawnY = formation === 'saved' ? t.y : centerY + offset.dy
 
       try {
-        const result = await window.electronAPI.dbRun(
-          'INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, faction, show_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0, ?, 1)',
-          [activeMapId, t.name, t.imagePath, Math.round(spawnX), Math.round(spawnY), t.size, t.hpCurrent, t.hpMax, t.visibleToPlayers ? 1 : 0, t.faction]
-        )
-        const newTokenId = result.lastInsertRowid
-        useTokenStore.getState().addToken({
-          id: newTokenId, mapId: activeMapId, name: t.name, imagePath: t.imagePath,
-          x: Math.round(spawnX), y: Math.round(spawnY), size: t.size,
-          hpCurrent: t.hpCurrent, hpMax: t.hpMax, visibleToPlayers: t.visibleToPlayers,
-          rotation: 0, locked: false, zIndex: 0, markerColor: null, ac: t.ac, notes: null,
-          statusEffects: null, faction: t.faction, showName: true,
-          lightRadius: 0, lightColor: '#ffcc44',
+        const created = await window.electronAPI.tokens.create({
+          mapId: activeMapId,
+          name: t.name,
+          imagePath: t.imagePath,
+          x: Math.round(spawnX),
+          y: Math.round(spawnY),
+          size: t.size,
+          hpCurrent: t.hpCurrent,
+          hpMax: t.hpMax,
+          visibleToPlayers: t.visibleToPlayers,
+          ac: t.ac,
+          faction: t.faction,
         })
-        spawnedTokenIds.push({ name: t.name, id: newTokenId })
+        useTokenStore.getState().addToken(created)
+        spawnedTokenIds.push({ name: t.name, id: created.id })
       } catch (err) {
         console.error('[EncounterPanel] spawn token failed:', err)
       }

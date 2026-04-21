@@ -29,11 +29,10 @@ export function MultiSelectBar() {
     const { updateToken } = useTokenStore.getState()
     for (const id of selectedTokenIds) {
       updateToken(id, { visibleToPlayers: nextVisible })
-      window.electronAPI?.dbRun(
-        'UPDATE tokens SET visible_to_players = ? WHERE id = ?',
-        [nextVisible ? 1 : 0, id]
-      )
     }
+    window.electronAPI?.tokens.updateMany(
+      selectedTokenIds.map((id) => ({ id, patch: { visibleToPlayers: nextVisible } })),
+    )
   }
 
   const handleDelete = async () => {
@@ -45,8 +44,8 @@ export function MultiSelectBar() {
     const { removeToken } = useTokenStore.getState()
     for (const id of selectedTokenIds) {
       removeToken(id)
-      window.electronAPI?.dbRun('DELETE FROM tokens WHERE id = ?', [id])
     }
+    window.electronAPI?.tokens.deleteMany([...selectedTokenIds])
     clearTokenSelection()
   }
 

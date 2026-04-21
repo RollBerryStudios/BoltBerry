@@ -28,6 +28,7 @@ import type {
   RecentMapEntry,
   GridType,
   AudioChannelKey,
+  TokenRecord,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -179,6 +180,26 @@ export const dmApi = {
       ipcRenderer.invoke(IPC.MAPS_SET_AMBIENT_TRACK, id, path),
     setChannelVolume: (id: number, channel: AudioChannelKey, volume: number): Promise<void> =>
       ipcRenderer.invoke(IPC.MAPS_SET_CHANNEL_VOLUME, id, channel, volume),
+  },
+
+  // Tokens — semantic API for the `tokens` table
+  tokens: {
+    listByMap: (mapId: number): Promise<TokenRecord[]> =>
+      ipcRenderer.invoke(IPC.TOKENS_LIST_BY_MAP, mapId),
+    create: (patch: Partial<TokenRecord> & { mapId: number }): Promise<TokenRecord> =>
+      ipcRenderer.invoke(IPC.TOKENS_CREATE, patch),
+    restore: (token: TokenRecord): Promise<TokenRecord> =>
+      ipcRenderer.invoke(IPC.TOKENS_RESTORE, token),
+    restoreMany: (tokens: TokenRecord[]): Promise<TokenRecord[]> =>
+      ipcRenderer.invoke(IPC.TOKENS_RESTORE_MANY, tokens),
+    update: (id: number, patch: Partial<TokenRecord>): Promise<void> =>
+      ipcRenderer.invoke(IPC.TOKENS_UPDATE, id, patch),
+    updateMany: (updates: Array<{ id: number; patch: Partial<TokenRecord> }>): Promise<void> =>
+      ipcRenderer.invoke(IPC.TOKENS_UPDATE_MANY, updates),
+    delete: (id: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.TOKENS_DELETE, id),
+    deleteMany: (ids: number[]): Promise<void> =>
+      ipcRenderer.invoke(IPC.TOKENS_DELETE_MANY, ids),
   },
 
   // Listen for main → DM: player window was closed

@@ -1721,23 +1721,19 @@ async function insertTokenForTemplate(tpl: TokenTemplate, map: MapRecord, imageO
   if (!window.electronAPI) return
   const cx = (map.cameraX ?? 0) + dx
   const cy = (map.cameraY ?? 0) + dy
-  await window.electronAPI.dbRun(
-    `INSERT INTO tokens
-       (map_id, name, image_path, x, y, size, hp_current, hp_max,
-        visible_to_players, rotation, locked, z_index, marker_color,
-        ac, notes, status_effects, faction, show_name, light_radius, light_color)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, 0, 0, 0, ?, ?, ?, NULL, ?, 1, 0, '#ffffff')`,
-    [
-      map.id,
-      tpl.name,
-      imageOverride ?? tpl.image_path,
-      cx, cy,
-      tpl.size,
-      tpl.hp_max, tpl.hp_max,
-      tpl.marker_color,
-      tpl.ac,
-      tpl.notes,
-      tpl.faction,
-    ],
-  )
+  await window.electronAPI.tokens.create({
+    mapId: map.id,
+    name: tpl.name,
+    imagePath: imageOverride ?? tpl.image_path,
+    x: cx,
+    y: cy,
+    size: tpl.size,
+    hpCurrent: tpl.hp_max,
+    hpMax: tpl.hp_max,
+    markerColor: tpl.marker_color,
+    ac: tpl.ac,
+    notes: tpl.notes,
+    faction: tpl.faction,
+    lightColor: '#ffffff',
+  })
 }

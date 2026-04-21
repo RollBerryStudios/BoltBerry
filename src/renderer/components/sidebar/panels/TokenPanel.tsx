@@ -116,33 +116,13 @@ export function TokenPanel() {
     try {
       const asset = await window.electronAPI.importFile('token', activeMapId)
       if (!asset) return  // user cancelled the dialog
-      const result = await window.electronAPI.dbRun(
-        `INSERT INTO tokens (map_id, name, image_path, x, y, faction, show_name, light_radius, light_color) VALUES (?, ?, ?, ?, ?, 'party', 1, 0, '#ffcc44')`,
-        [activeMapId, 'Token', asset?.path ?? null, 100, 100]
-      )
-      const token: TokenRecord = {
-        id: result.lastInsertRowid,
+      const token = await window.electronAPI.tokens.create({
         mapId: activeMapId,
         name: 'Token',
         imagePath: asset?.path ?? null,
         x: 100,
         y: 100,
-        size: 1,
-        hpCurrent: 0,
-        hpMax: 0,
-        visibleToPlayers: true,
-        rotation: 0,
-        locked: false,
-        zIndex: 0,
-        markerColor: null,
-        ac: null,
-        notes: null,
-        statusEffects: null,
-        faction: 'party',
-        showName: true,
-        lightRadius: 0,
-        lightColor: '#ffcc44',
-      }
+      })
       addToken(token)
       setSelectedToken(token.id)
       broadcastTokensFromPanel()
@@ -161,12 +141,7 @@ export function TokenPanel() {
       const ac = template ? template.ac : null
       const size = template ? template.size : 1
       const faction = template ? template.faction : 'party'
-      const result = await window.electronAPI.dbRun(
-        `INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, ac, faction, visible_to_players, show_name, light_radius, light_color) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 1, 0, '#ffcc44')`,
-        [activeMapId, name, asset?.path ?? null, 100, 100, size, hp, hp, ac, faction]
-      )
-      const token: TokenRecord = {
-        id: result.lastInsertRowid,
+      const token = await window.electronAPI.tokens.create({
         mapId: activeMapId,
         name,
         imagePath: asset?.path ?? null,
@@ -175,19 +150,9 @@ export function TokenPanel() {
         size,
         hpCurrent: hp,
         hpMax: hp,
-        visibleToPlayers: true,
-        rotation: 0,
-        locked: false,
-        zIndex: 0,
-        markerColor: null,
         ac,
-        notes: null,
-        statusEffects: null,
         faction,
-        showName: true,
-        lightRadius: 0,
-        lightColor: '#ffcc44',
-      }
+      })
       addToken(token)
       setSelectedToken(token.id)
       broadcastTokensFromPanel()
@@ -203,25 +168,7 @@ export function TokenPanel() {
       invalidateImageUrlCache(patch.imagePath)
     }
     try {
-      const cols: string[] = []
-      const vals: any[] = []
-      for (const [key, val] of Object.entries(patch)) {
-        const col = key.replace(/([A-Z])/g, '_$1').toLowerCase()
-        let dbVal: unknown = val
-        if (key === 'statusEffects') {
-          dbVal = Array.isArray(val) && (val as string[]).length > 0 ? JSON.stringify(val) : null
-        } else if (key === 'visibleToPlayers' || key === 'locked') {
-          dbVal = val ? 1 : 0
-        } else if (val === null || val === undefined) {
-          dbVal = null
-        }
-        cols.push(`${col} = ?`)
-        vals.push(dbVal)
-      }
-      if (cols.length > 0) {
-        vals.push(id)
-        await window.electronAPI?.dbRun(`UPDATE tokens SET ${cols.join(', ')} WHERE id = ?`, vals)
-      }
+      await window.electronAPI?.tokens.update(id, patch)
       broadcastTokensFromPanel()
     } catch (err) {
       console.error('[TokenPanel] handleUpdate failed:', err)
@@ -746,7 +693,7 @@ export function TokenPanel() {
               removeToken(selected.id)
               setSelectedToken(null)
               try {
-                await window.electronAPI.dbRun('DELETE FROM tokens WHERE id = ?', [selected.id])
+                await window.electronAPI.tokens.delete(selected.id)
                 broadcastTokensFromPanel()
               } catch (err) {
                 console.error('[TokenPanel] delete failed:', err)
@@ -925,37 +872,22 @@ function LibraryPicker({
     }
     const cx = map.cameraX ?? 0
     const cy = map.cameraY ?? 0
-    const result = await window.electronAPI.dbRun(
-      `INSERT INTO tokens
-         (map_id, name, image_path, x, y, size, hp_current, hp_max,
-          visible_to_players, rotation, locked, z_index, marker_color,
-          ac, notes, status_effects, faction, show_name, light_radius, light_color)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, 0, 0, 0, ?, ?, ?, NULL, ?, 1, 0, '#ffffff')`,
-      [
-        mapId, tpl.name, image, cx, cy, tpl.size,
-        tpl.hp_max, tpl.hp_max,
-        tpl.marker_color, tpl.ac, tpl.notes, tpl.faction,
-      ],
-    )
-    onInserted({
-      id: result.lastInsertRowid,
+    const created = await window.electronAPI.tokens.create({
       mapId,
       name: tpl.name,
       imagePath: image,
-      x: cx, y: cy,
+      x: cx,
+      y: cy,
       size: tpl.size,
-      hpCurrent: tpl.hp_max, hpMax: tpl.hp_max,
-      visibleToPlayers: true,
-      rotation: 0, locked: false, zIndex: 0,
+      hpCurrent: tpl.hp_max,
+      hpMax: tpl.hp_max,
       markerColor: tpl.marker_color,
       ac: tpl.ac,
       notes: tpl.notes,
-      statusEffects: null,
       faction: tpl.faction,
-      showName: true,
-      lightRadius: 0,
       lightColor: '#ffffff',
     })
+    onInserted(created)
   }
 
   return (

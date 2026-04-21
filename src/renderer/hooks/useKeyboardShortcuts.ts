@@ -219,26 +219,9 @@ export function useKeyboardShortcuts() {
                   showName: ct.showName,
                 }
                 try {
-                  const row = await window.electronAPI!.dbRun(
-                    'INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                    [payload.mapId, payload.name, payload.imagePath, payload.x, payload.y, payload.size,
-                     payload.hpCurrent, payload.hpMax, payload.visibleToPlayers ? 1 : 0,
-                     0, 0, 0, payload.markerColor, payload.ac, payload.notes,
-                     payload.statusEffects ? JSON.stringify(payload.statusEffects) : null,
-                     payload.faction, payload.showName ? 1 : 0]
-                  )
-                  const newToken = {
-                    id: row.lastInsertRowid, mapId: activeMapId,
-                    name: payload.name, imagePath: payload.imagePath,
-                    x: payload.x, y: payload.y, size: payload.size,
-                    hpCurrent: payload.hpCurrent, hpMax: payload.hpMax,
-                    visibleToPlayers: payload.visibleToPlayers, rotation: 0, locked: false, zIndex: 0,
-                    markerColor: payload.markerColor, ac: payload.ac, notes: payload.notes,
-                    statusEffects: payload.statusEffects, faction: payload.faction,
-                    showName: payload.showName, lightRadius: 0, lightColor: '#ffcc44',
-                  }
+                  const newToken = await window.electronAPI!.tokens.create(payload)
                   useTokenStore.getState().addToken(newToken)
-                  pastedIds.push(row.lastInsertRowid)
+                  pastedIds.push(newToken.id)
                   pastedPayloads.push(payload)
                 } catch (err) {
                   console.error('[useKeyboardShortcuts] paste token failed:', err)
@@ -251,39 +234,19 @@ export function useKeyboardShortcuts() {
                   label: `Paste ${pastedIds.length} token${pastedIds.length > 1 ? 's' : ''}`,
                   undo: async () => {
                     for (const id of pastedIds) useTokenStore.getState().removeToken(id)
-                    await window.electronAPI?.dbRun(
-                      `DELETE FROM tokens WHERE id IN (${pastedIds.map(() => '?').join(',')})`,
-                      pastedIds
-                    )
+                    await window.electronAPI?.tokens.deleteMany(pastedIds)
                     window.electronAPI?.sendTokenUpdate?.(useTokenStore.getState().tokens)
                   },
                   redo: async () => {
-                    // Re-insert each pasted token using its preserved payload.
-                    // We cannot use dbRunBatch because we need the fresh
-                    // lastInsertRowid for each INSERT to rebuild the store state.
+                    // Re-insert each pasted token. Fresh ids come back
+                    // from the handler — tracked so the next undo can
+                    // delete them again.
                     pastedIds.length = 0
                     for (const payload of pastedPayloads) {
                       try {
-                        const row = await window.electronAPI!.dbRun(
-                          'INSERT INTO tokens (map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                          [payload.mapId, payload.name, payload.imagePath, payload.x, payload.y, payload.size,
-                           payload.hpCurrent, payload.hpMax, payload.visibleToPlayers ? 1 : 0,
-                           0, 0, 0, payload.markerColor, payload.ac, payload.notes,
-                           payload.statusEffects ? JSON.stringify(payload.statusEffects) : null,
-                           payload.faction, payload.showName ? 1 : 0]
-                        )
-                        const newToken = {
-                          id: row.lastInsertRowid, mapId: payload.mapId,
-                          name: payload.name, imagePath: payload.imagePath,
-                          x: payload.x, y: payload.y, size: payload.size,
-                          hpCurrent: payload.hpCurrent, hpMax: payload.hpMax,
-                          visibleToPlayers: payload.visibleToPlayers, rotation: 0, locked: false, zIndex: 0,
-                          markerColor: payload.markerColor, ac: payload.ac, notes: payload.notes,
-                          statusEffects: payload.statusEffects, faction: payload.faction,
-                          showName: payload.showName, lightRadius: 0, lightColor: '#ffcc44',
-                        }
+                        const newToken = await window.electronAPI!.tokens.create(payload)
                         useTokenStore.getState().addToken(newToken)
-                        pastedIds.push(row.lastInsertRowid)
+                        pastedIds.push(newToken.id)
                       } catch (err) {
                         console.error('[useKeyboardShortcuts] redo paste failed:', err)
                       }
@@ -432,14 +395,8 @@ export function useKeyboardShortcuts() {
               })
               useUIStore.getState().clearTokenSelection()
               try {
-                await window.electronAPI?.dbRun(
-                  `DELETE FROM tokens WHERE id IN (${ids.map(() => '?').join(',')})`,
-                  ids
-                )
-                await window.electronAPI?.dbRun(
-                  `UPDATE initiative SET token_id = NULL WHERE token_id IN (${ids.map(() => '?').join(',')})`,
-                  ids
-                )
+                // deleteMany nulls out initiative.token_id atomically.
+                await window.electronAPI?.tokens.deleteMany(ids)
                 window.electronAPI?.sendTokenUpdate?.(useTokenStore.getState().tokens)
               } catch (err) {
                 console.error('[useKeyboardShortcuts] token delete failed:', err)
@@ -450,32 +407,20 @@ export function useKeyboardShortcuts() {
                 id: nextCommandId(),
                 label: deletedTokens.length === 1 ? `Delete ${deletedTokens[0].name}` : `Delete ${deletedTokens.length} tokens`,
                 undo: async () => {
-                  for (const token of deletedTokens) {
-                    try {
-                      await window.electronAPI?.dbRun(
-                        'INSERT INTO tokens (id, map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name, light_radius, light_color) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                        [token.id, token.mapId, token.name, token.imagePath, token.x, token.y, token.size,
-                         token.hpCurrent, token.hpMax, token.visibleToPlayers ? 1 : 0,
-                         token.rotation, token.locked ? 1 : 0, token.zIndex, token.markerColor,
-                         token.ac, token.notes,
-                         token.statusEffects ? JSON.stringify(token.statusEffects) : null,
-                         token.faction ?? 'party', token.showName ? 1 : 0,
-                         token.lightRadius, token.lightColor]
-                      )
+                  try {
+                    await window.electronAPI?.tokens.restoreMany(deletedTokens)
+                    for (const token of deletedTokens) {
                       useTokenStore.getState().addToken(token)
-                    } catch (err) {
-                      console.error('[useKeyboardShortcuts] undo delete failed:', err)
                     }
+                  } catch (err) {
+                    console.error('[useKeyboardShortcuts] undo delete failed:', err)
                   }
                   window.electronAPI?.sendTokenUpdate?.(useTokenStore.getState().tokens)
                 },
                 redo: async () => {
                   for (const id of ids) useTokenStore.getState().removeToken(id)
                   try {
-                    await window.electronAPI?.dbRun(
-                      `DELETE FROM tokens WHERE id IN (${ids.map(() => '?').join(',')})`,
-                      ids
-                    )
+                    await window.electronAPI?.tokens.deleteMany(ids)
                     window.electronAPI?.sendTokenUpdate?.(useTokenStore.getState().tokens)
                   } catch (err) {
                     console.error('[useKeyboardShortcuts] redo delete failed:', err)

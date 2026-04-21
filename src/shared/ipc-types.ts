@@ -77,6 +77,16 @@ export const IPC = {
   MAPS_SET_AMBIENT_TRACK: 'maps:set-ambient-track',
   MAPS_SET_CHANNEL_VOLUME: 'maps:set-channel-volume',
 
+  // Tokens domain — semantic replacements for raw `FROM tokens` SQL.
+  TOKENS_LIST_BY_MAP: 'tokens:list-by-map',
+  TOKENS_CREATE: 'tokens:create',
+  TOKENS_RESTORE: 'tokens:restore',
+  TOKENS_RESTORE_MANY: 'tokens:restore-many',
+  TOKENS_UPDATE: 'tokens:update',
+  TOKENS_UPDATE_MANY: 'tokens:update-many',
+  TOKENS_DELETE: 'tokens:delete',
+  TOKENS_DELETE_MANY: 'tokens:delete-many',
+
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
 

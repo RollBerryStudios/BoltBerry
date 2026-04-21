@@ -262,22 +262,15 @@ export function CanvasArea() {
       const x = shouldSnap ? Math.round(mapPos.x / gridSize) * gridSize : mapPos.x
       const y = shouldSnap ? Math.round(mapPos.y / gridSize) * gridSize : mapPos.y
 
-      const dbResult = await window.electronAPI.dbRun(
-        `INSERT INTO tokens (map_id, name, image_path, x, y, faction, show_name) VALUES (?, ?, ?, ?, ?, 'party', 1)`,
-        [activeMapId, file.name.replace(/\.[^.]+$/, ''), result.path, x, y]
-      )
-
-      const droppedToken = {
-        id: dbResult.lastInsertRowid,
+      const droppedToken = await window.electronAPI.tokens.create({
         mapId: activeMapId,
         name: file.name.replace(/\.[^.]+$/, ''),
         imagePath: result.path,
-        x, y,
-        size: 1, hpCurrent: 0, hpMax: 0, visibleToPlayers: true,
-        rotation: 0, locked: false, zIndex: 0, markerColor: null,
-        ac: null, notes: null, statusEffects: null,
-        faction: 'party' as const, showName: true, lightRadius: 0, lightColor: '#ffcc44',
-      }
+        x,
+        y,
+        faction: 'party',
+        showName: true,
+      })
       useTokenStore.getState().addToken(droppedToken)
       broadcastTokensFromCanvas()
 
@@ -286,14 +279,11 @@ export function CanvasArea() {
         label: `Place ${droppedToken.name}`,
         undo: async () => {
           useTokenStore.getState().removeToken(droppedToken.id)
-          await window.electronAPI?.dbRun('DELETE FROM tokens WHERE id = ?', [droppedToken.id])
+          await window.electronAPI?.tokens.delete(droppedToken.id)
           broadcastTokensFromCanvas()
         },
         redo: async () => {
-          await window.electronAPI?.dbRun(
-            'INSERT INTO tokens (id, map_id, name, image_path, x, y, faction, show_name) VALUES (?, ?, ?, ?, ?, ?, \'party\', 1)',
-            [droppedToken.id, activeMapId, droppedToken.name, droppedToken.imagePath, droppedToken.x, droppedToken.y]
-          )
+          await window.electronAPI?.tokens.restore(droppedToken)
           useTokenStore.getState().addToken(droppedToken)
           broadcastTokensFromCanvas()
         },
@@ -318,21 +308,15 @@ export function CanvasArea() {
       const y = shouldSnap ? Math.round(mapPos.y / gridSize) * gridSize : mapPos.y
 
       const assetName = storedPath.split(/[\\/]/).pop()?.replace(/\.[^.]+$/, '') ?? 'Token'
-      const dbResult = await window.electronAPI.dbRun(
-        `INSERT INTO tokens (map_id, name, image_path, x, y, faction, show_name) VALUES (?, ?, ?, ?, ?, 'party', 1)`,
-        [activeMapId, assetName, storedPath, x, y]
-      )
-
-      const assetToken = {
-        id: dbResult.lastInsertRowid,
+      const assetToken = await window.electronAPI.tokens.create({
         mapId: activeMapId,
         name: assetName,
         imagePath: storedPath,
-        x, y,
-        size: 1, hpCurrent: 0, hpMax: 0, visibleToPlayers: true, rotation: 0,
-        locked: false, zIndex: 0, markerColor: null, ac: null, notes: null, statusEffects: null,
-        faction: 'party' as const, showName: true, lightRadius: 0, lightColor: '#ffcc44',
-      }
+        x,
+        y,
+        faction: 'party',
+        showName: true,
+      })
       useTokenStore.getState().addToken(assetToken)
       broadcastTokensFromCanvas()
 
@@ -341,14 +325,11 @@ export function CanvasArea() {
         label: `Place ${assetToken.name}`,
         undo: async () => {
           useTokenStore.getState().removeToken(assetToken.id)
-          await window.electronAPI?.dbRun('DELETE FROM tokens WHERE id = ?', [assetToken.id])
+          await window.electronAPI?.tokens.delete(assetToken.id)
           broadcastTokensFromCanvas()
         },
         redo: async () => {
-          await window.electronAPI?.dbRun(
-            'INSERT INTO tokens (id, map_id, name, image_path, x, y, faction, show_name) VALUES (?, ?, ?, ?, ?, ?, \'party\', 1)',
-            [assetToken.id, activeMapId, assetToken.name, assetToken.imagePath, assetToken.x, assetToken.y]
-          )
+          await window.electronAPI?.tokens.restore(assetToken)
           useTokenStore.getState().addToken(assetToken)
           broadcastTokensFromCanvas()
         },
@@ -879,15 +860,8 @@ async function loadMapData(mapId: number, map: MapRecord) {
     const campaignId = useCampaignStore.getState().activeCampaignId
 
     // Fire all independent DB queries in parallel for faster map load
-    const [tokenRows, initRows, wallRows, encRows, roomRows, fogRows, drawingRows] = await Promise.all([
-      window.electronAPI.dbQuery<{
-        id: number; map_id: number; name: string; image_path: string | null
-        x: number; y: number; size: number; hp_current: number; hp_max: number
-        visible_to_players: number; rotation: number; locked: number; z_index: number
-        marker_color: string | null; ac: number | null; notes: string | null
-        status_effects: string | null; faction: string; show_name: number
-        light_radius: number; light_color: string
-      }>('SELECT id, map_id, name, image_path, x, y, size, hp_current, hp_max, visible_to_players, rotation, locked, z_index, marker_color, ac, notes, status_effects, faction, show_name, light_radius, light_color FROM tokens WHERE map_id = ?', [mapId]),
+    const [tokens, initRows, wallRows, encRows, roomRows, fogRows, drawingRows] = await Promise.all([
+      window.electronAPI.tokens.listByMap(mapId),
 
       window.electronAPI.dbQuery<{
         id: number; map_id: number; combatant_name: string; roll: number; current_turn: number; token_id: number | null; effect_timers: string | null; sort_order: number
@@ -923,29 +897,7 @@ async function loadMapData(mapId: number, map: MapRecord) {
     ])
 
     // Apply results to stores
-    useTokenStore.getState().setTokens(tokenRows.map((r) => ({
-      id: r.id,
-      mapId: r.map_id,
-      name: r.name,
-      imagePath: r.image_path,
-      x: r.x,
-      y: r.y,
-      size: r.size,
-      hpCurrent: r.hp_current,
-      hpMax: r.hp_max,
-      visibleToPlayers: Boolean(r.visible_to_players),
-      rotation: r.rotation ?? 0,
-      locked: Boolean(r.locked),
-      zIndex: r.z_index ?? 0,
-      markerColor: r.marker_color ?? null,
-      ac: r.ac ?? null,
-      notes: r.notes ?? null,
-      statusEffects: r.status_effects ? JSON.parse(r.status_effects) : null,
-      faction: r.faction ?? 'party',
-      showName: Boolean(r.show_name ?? 1),
-      lightRadius: r.light_radius ?? 0,
-      lightColor: r.light_color ?? '#ffcc44',
-    })))
+    useTokenStore.getState().setTokens(tokens)
 
     useInitiativeStore.getState().setEntries(initRows.map((r) => ({
       id: r.id,

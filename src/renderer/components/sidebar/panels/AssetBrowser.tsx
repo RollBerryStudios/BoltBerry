@@ -67,33 +67,15 @@ export function AssetBrowser() {
       : rawY
 
     try {
-      const result = await window.electronAPI.dbRun(
-        'INSERT INTO tokens (map_id, name, image_path, x, y, rotation, locked, z_index, marker_color, ac, notes, faction, show_name) VALUES (?, ?, ?, ?, ?, 0, 0, 0, NULL, NULL, NULL, \'party\', 1)',
-        [activeMapId, asset.originalName.replace(/\.[^.]+$/, ''), asset.storedPath, centerX, centerY]
-      )
-      useTokenStore.getState().addToken({
-        id: result.lastInsertRowid,
+      const token = await window.electronAPI.tokens.create({
         mapId: activeMapId,
         name: asset.originalName.replace(/\.[^.]+$/, ''),
         imagePath: asset.storedPath,
         x: centerX,
         y: centerY,
-        size: 1,
-        hpCurrent: 0,
-        hpMax: 0,
-        visibleToPlayers: true,
-        rotation: 0,
-        locked: false,
-        zIndex: 0,
-        markerColor: null,
-        ac: null,
-        notes: null,
-        statusEffects: null,
         faction: 'party',
-        showName: true,
-        lightRadius: 0,
-        lightColor: '#ffcc44',
       })
+      useTokenStore.getState().addToken(token)
     } catch (err) {
       console.error('[AssetBrowser] token insert failed:', err)
     }
