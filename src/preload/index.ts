@@ -34,6 +34,8 @@ import type {
   WallType,
   DoorState,
   RoomRecord,
+  DrawingRecord,
+  DrawingType,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -257,6 +259,38 @@ export const dmApi = {
       ipcRenderer.invoke(IPC.ROOMS_UPDATE, id, patch),
     delete: (id: number): Promise<void> =>
       ipcRenderer.invoke(IPC.ROOMS_DELETE, id),
+  },
+
+  // Drawings — semantic API for the `drawings` table
+  drawings: {
+    listByMap: (mapId: number): Promise<DrawingRecord[]> =>
+      ipcRenderer.invoke(IPC.DRAWINGS_LIST_BY_MAP, mapId),
+    listSyncedByMap: (mapId: number): Promise<DrawingRecord[]> =>
+      ipcRenderer.invoke(IPC.DRAWINGS_LIST_SYNCED_BY_MAP, mapId),
+    create: (patch: {
+      mapId: number
+      type: DrawingType
+      points: number[]
+      color: string
+      width: number
+      text?: string | null
+      synced?: boolean
+    }): Promise<DrawingRecord> =>
+      ipcRenderer.invoke(IPC.DRAWINGS_CREATE, patch),
+    createMany: (patches: Array<{
+      mapId: number
+      type: DrawingType
+      points: number[]
+      color: string
+      width: number
+      text?: string | null
+      synced?: boolean
+    }>): Promise<DrawingRecord[]> =>
+      ipcRenderer.invoke(IPC.DRAWINGS_CREATE_MANY, patches),
+    delete: (id: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.DRAWINGS_DELETE, id),
+    deleteByMap: (mapId: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.DRAWINGS_DELETE_BY_MAP, mapId),
   },
 
   // Listen for main → DM: player window was closed

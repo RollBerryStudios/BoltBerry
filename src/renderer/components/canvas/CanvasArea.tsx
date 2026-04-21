@@ -500,7 +500,7 @@ export function CanvasArea() {
             } else if (action === 'clear-drawings') {
               if (!mapId) return
               try {
-                await window.electronAPI.dbRun('DELETE FROM drawings WHERE map_id = ?', [mapId])
+                await window.electronAPI.drawings.deleteByMap(mapId)
                 useUIStore.getState().incrementDrawingClearTick()
               } catch (err) {
                 console.error('[CanvasArea] clear drawings failed:', err)
@@ -882,9 +882,7 @@ async function loadMapData(mapId: number, map: MapRecord) {
         return [] as any[]
       }),
 
-      window.electronAPI.dbQuery<{
-        id: number; type: string; points: string; color: string; width: number
-      }>('SELECT id, type, points, color, width FROM drawings WHERE map_id = ? AND synced = 1', [mapId]).catch((err) => {
+      window.electronAPI.drawings.listSyncedByMap(mapId).catch((err) => {
         console.error('[CanvasArea] drawings load failed:', err)
         return [] as any[]
       }),
@@ -914,11 +912,9 @@ async function loadMapData(mapId: number, map: MapRecord) {
     const exploredBitmap: string | null = fogRows[0]?.explored_bitmap ?? null
 
     const playerDrawings: Array<{ id: number; type: string; points: number[]; color: string; width: number }> =
-      drawingRows.map((r) => {
-        const parsed = JSON.parse(r.points)
-        const points = Array.isArray(parsed) ? parsed : (parsed.x != null ? [parsed.x, parsed.y] : [])
-        return { id: r.id, type: r.type, points, color: r.color, width: r.width }
-      })
+      drawingRows.map((r) => ({
+        id: r.id, type: r.type, points: r.points, color: r.color, width: r.width,
+      }))
 
     const { blackoutActive, appMode, atmosphereImagePath } = useUIStore.getState()
     const syncMode: PlayerFullState['mode'] = blackoutActive

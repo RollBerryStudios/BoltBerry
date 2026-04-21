@@ -110,6 +110,14 @@ export const IPC = {
   ROOMS_UPDATE: 'rooms:update',
   ROOMS_DELETE: 'rooms:delete',
 
+  // Drawings domain — semantic replacements for raw SQL against `drawings`.
+  DRAWINGS_LIST_BY_MAP: 'drawings:list-by-map',
+  DRAWINGS_LIST_SYNCED_BY_MAP: 'drawings:list-synced-by-map',
+  DRAWINGS_CREATE: 'drawings:create',
+  DRAWINGS_CREATE_MANY: 'drawings:create-many',
+  DRAWINGS_DELETE: 'drawings:delete',
+  DRAWINGS_DELETE_BY_MAP: 'drawings:delete-by-map',
+
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
 
@@ -548,6 +556,23 @@ export interface EncounterRecord {
 export type FormationType = 'saved' | 'line' | 'circle' | 'cluster' | 'wing' | 'v-formation'
 export type DifficultyLevel = 'normal' | 'easy' | 'hard' | 'deadly'
 export type RoomVisibility = 'hidden' | 'revealed' | 'dimmed'
+
+export type DrawingType = 'freehand' | 'rect' | 'circle' | 'text'
+
+export interface DrawingRecord {
+  id: number
+  mapId: number
+  type: DrawingType
+  /** Numeric array: `[x0, y0, x1, y1, …]` for freehand, `[x0, y0, x1, y1]`
+   *  (start + end corners) for rect/circle, `[x, y]` for text. */
+  points: number[]
+  color: string
+  width: number
+  /** Only populated for `type: 'text'`. */
+  text: string | null
+  /** True when this drawing is broadcast to the player window. */
+  synced: boolean
+}
 
 export interface EncounterTemplate {
   tokens: Array<{

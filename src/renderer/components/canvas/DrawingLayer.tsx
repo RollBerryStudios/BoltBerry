@@ -5,8 +5,9 @@ import Konva from 'konva'
 import { useUIStore } from '../../stores/uiStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useUndoStore, nextCommandId } from '../../stores/undoStore'
+import type { DrawingType } from '@shared/ipc-types'
 
-export type DrawingType = 'freehand' | 'rect' | 'circle' | 'text'
+export type { DrawingType }
 
 interface Drawing {
   id: number
@@ -132,18 +133,28 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
   async function addDrawing(d: { type: DrawingType; points: number[]; color: string; width: number; text?: string }) {
     if (!window.electronAPI) return
     try {
-      const pointsStr = JSON.stringify(d.points)
-      const result = await window.electronAPI.dbRun(
-        'INSERT INTO drawings (map_id, type, points, color, width, text, synced) VALUES (?, ?, ?, ?, ?, ?, 1)',
-        [mapId, d.type, pointsStr, d.color, d.width, d.text ?? null]
-      )
-      // `id` is mutable across undo→redo cycles because each redo
-      // writes a new SQLite row (INSERT autoincrements). Keeping the
-      // closure variable bound to `currentId` means the follow-up
-      // undo deletes whichever row is "current" rather than the
-      // orphaned first one.
-      let currentId: number = result.lastInsertRowid
-      const newDrawing: Drawing = { id: currentId, type: d.type, points: d.points, color: d.color, width: d.width, text: d.text }
+      const createPatch = {
+        mapId,
+        type: d.type,
+        points: d.points,
+        color: d.color,
+        width: d.width,
+        text: d.text ?? null,
+      }
+      const created = await window.electronAPI.drawings.create(createPatch)
+      // `currentId` tracks the row through undo→redo cycles: each
+      // redo writes a fresh row (SQLite autoincrements), so the next
+      // undo must delete whichever row is "current".
+      let currentId: number = created.id
+      const toLocal = (row: typeof created): Drawing => ({
+        id: row.id,
+        type: row.type,
+        points: row.points,
+        color: row.color,
+        width: row.width,
+        text: row.text ?? undefined,
+      })
+      const newDrawing = toLocal(created)
       setDrawings(prev => [...prev, newDrawing])
       window.electronAPI?.sendDrawing(newDrawing)
 
@@ -151,7 +162,7 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
         id: nextCommandId(),
         label: `Zeichnung (${d.type})`,
         undo: async () => {
-          await window.electronAPI?.dbRun('DELETE FROM drawings WHERE id = ?', [currentId])
+          await window.electronAPI?.drawings.delete(currentId)
           setDrawings(prev => prev.filter((x) => x.id !== currentId))
           // Re-broadcast the full drawing set so the player window
           // drops the undone stroke. There's no per-drawing delete
@@ -160,13 +171,10 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
           useUIStore.getState().incrementDrawingClearTick()
         },
         redo: async () => {
-          const r = await window.electronAPI?.dbRun(
-            'INSERT INTO drawings (map_id, type, points, color, width, text, synced) VALUES (?, ?, ?, ?, ?, ?, 1)',
-            [mapId, d.type, pointsStr, d.color, d.width, d.text ?? null]
-          )
+          const r = await window.electronAPI?.drawings.create(createPatch)
           if (!r) return
-          currentId = r.lastInsertRowid
-          const restored: Drawing = { id: currentId, type: d.type, points: d.points, color: d.color, width: d.width, text: d.text }
+          currentId = r.id
+          const restored = toLocal(r)
           setDrawings(prev => [...prev, restored])
           window.electronAPI?.sendDrawing(restored)
         },
@@ -295,24 +303,18 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
 async function loadDrawings(mapId: number): Promise<Drawing[]> {
   if (!window.electronAPI) return []
   try {
-    const rows = await window.electronAPI.dbQuery<{
-      id: number; type: string; points: string; color: string; width: number; text: string | null
-    }>('SELECT id, type, points, color, width, text FROM drawings WHERE map_id = ?', [mapId])
-    return rows.map((r) => {
-      const parsed = JSON.parse(r.points)
-      let points: number[]
-      let text: string | undefined = r.text ?? undefined
-      if (Array.isArray(parsed)) {
-        points = parsed
-      } else if (parsed != null && typeof parsed === 'object' && parsed.x != null) {
-        // Legacy format: text was encoded inside points JSON
-        points = [parsed.x as number, parsed.y as number]
-        text = text ?? (parsed.text as string | undefined)
-      } else {
-        points = []
-      }
-      return { id: r.id, type: r.type as DrawingType, points, color: r.color, width: r.width, text }
-    })
+    // The handler parses both modern array-shaped and legacy
+    // `{x,y,text}` object-shaped `points` columns into the canonical
+    // numeric-array form — no more renderer-side JSON parsing.
+    const rows = await window.electronAPI.drawings.listByMap(mapId)
+    return rows.map((r) => ({
+      id: r.id,
+      type: r.type,
+      points: r.points,
+      color: r.color,
+      width: r.width,
+      text: r.text ?? undefined,
+    }))
   } catch (err) {
     console.error('[DrawingLayer] loadDrawings failed:', err)
     return []

@@ -63,11 +63,9 @@ export function OverlayPanel() {
     // text. IDs get regenerated on restore (SQLite autoincrements on
     // INSERT) so any outside reference to the old ID is gone; fine
     // because drawings are referenced by map_id only.
-    const snapshot = await window.electronAPI.dbQuery<{
-      id: number; type: string; points: string; color: string; width: number; text: string | null
-    }>('SELECT id, type, points, color, width, text FROM drawings WHERE map_id = ? ORDER BY id', [activeMapId])
+    const snapshot = await window.electronAPI.drawings.listByMap(activeMapId)
 
-    await window.electronAPI.dbRun('DELETE FROM drawings WHERE map_id = ?', [activeMapId])
+    await window.electronAPI.drawings.deleteByMap(activeMapId)
     incrementDrawingClearTick()
 
     // Only push an undo command when there was actually something
@@ -78,18 +76,25 @@ export function OverlayPanel() {
       id: nextCommandId(),
       label: `Zeichnungen (${snapshot.length}) wiederherstellen`,
       undo: async () => {
-        for (const row of snapshot) {
-          await window.electronAPI?.dbRun(
-            'INSERT INTO drawings (map_id, type, points, color, width, text, synced) VALUES (?, ?, ?, ?, ?, ?, 1)',
-            [activeMapId, row.type, row.points, row.color, row.width, row.text],
-          )
-        }
+        // One transaction via createMany, rather than N sequential
+        // round-trips — the previous dbRun loop serialised per-row.
+        await window.electronAPI?.drawings.createMany(
+          snapshot.map((row) => ({
+            mapId: activeMapId,
+            type: row.type,
+            points: row.points,
+            color: row.color,
+            width: row.width,
+            text: row.text,
+            synced: row.synced,
+          })),
+        )
         // Re-broadcast via tick so player picks up the restored set
         // (DrawingLayer re-hydrates from DB on the tick).
         incrementDrawingClearTick()
       },
       redo: async () => {
-        await window.electronAPI?.dbRun('DELETE FROM drawings WHERE map_id = ?', [activeMapId])
+        await window.electronAPI?.drawings.deleteByMap(activeMapId)
         incrementDrawingClearTick()
       },
     })

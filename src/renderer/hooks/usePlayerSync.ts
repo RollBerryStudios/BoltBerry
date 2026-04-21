@@ -64,14 +64,10 @@ export function usePlayerSync() {
     let playerDrawings: Array<{ id: number; type: string; points: number[]; color: string; width: number }> = []
     if (mapId) {
       try {
-        const drawingRows = await window.electronAPI.dbQuery<{
-          id: number; type: string; points: string; color: string; width: number
-        }>('SELECT id, type, points, color, width FROM drawings WHERE map_id = ? AND synced = 1', [mapId])
-        playerDrawings = drawingRows.map((r) => {
-          const parsed = JSON.parse(r.points)
-          const points = Array.isArray(parsed) ? parsed : (parsed.x != null ? [parsed.x, parsed.y] : [])
-          return { id: r.id, type: r.type, points, color: r.color, width: r.width }
-        })
+        const rows = await window.electronAPI.drawings.listSyncedByMap(mapId)
+        playerDrawings = rows.map((r) => ({
+          id: r.id, type: r.type, points: r.points, color: r.color, width: r.width,
+        }))
       } catch (err) {
         console.error('[usePlayerSync] drawings load failed:', err)
       }
