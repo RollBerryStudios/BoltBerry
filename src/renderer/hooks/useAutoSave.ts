@@ -37,10 +37,7 @@ async function triggerSave() {
 
   useAppStore.getState().setSaving()
   try {
-    await window.electronAPI.dbRun(
-      `UPDATE campaigns SET last_opened = datetime('now') WHERE id = ?`,
-      [activeCampaignId]
-    )
+    await window.electronAPI.campaigns.touchLastOpened(activeCampaignId)
     useAppStore.getState().setSaved()
   } catch {
     useAppStore.getState().setSaveError()

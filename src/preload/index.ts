@@ -22,6 +22,7 @@ import type {
   ItemRecord,
   SpellIndexEntry,
   SpellRecord,
+  Campaign,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -103,12 +104,34 @@ export const dmApi = {
     ipcRenderer.send('player:walls', walls),
 
   // DB operations
+  // Legacy generic SQL tunnel — do not add new call sites. Domain
+  // namespaces (e.g. `campaigns`) are the supported path for new code.
   dbQuery: <T>(sql: string, params?: unknown[]): Promise<T[]> =>
     ipcRenderer.invoke('db:query', sql, params),
   dbRun: (sql: string, params?: unknown[]): Promise<{ lastInsertRowid: number; changes: number }> =>
     ipcRenderer.invoke('db:run', sql, params),
   dbRunBatch: (statements: Array<{ sql: string; params?: unknown[] }>): Promise<void> =>
     ipcRenderer.invoke('db:run-batch', statements),
+
+  // Campaigns — semantic API for the `campaigns` table
+  campaigns: {
+    list: (): Promise<Campaign[]> =>
+      ipcRenderer.invoke(IPC.CAMPAIGNS_LIST),
+    get: (id: number): Promise<Campaign | null> =>
+      ipcRenderer.invoke(IPC.CAMPAIGNS_GET, id),
+    count: (): Promise<number> =>
+      ipcRenderer.invoke(IPC.CAMPAIGNS_COUNT),
+    create: (name: string): Promise<Campaign> =>
+      ipcRenderer.invoke(IPC.CAMPAIGNS_CREATE, name),
+    rename: (id: number, name: string): Promise<void> =>
+      ipcRenderer.invoke(IPC.CAMPAIGNS_RENAME, id, name),
+    delete: (id: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.CAMPAIGNS_DELETE, id),
+    setCover: (id: number, coverPath: string | null): Promise<void> =>
+      ipcRenderer.invoke(IPC.CAMPAIGNS_SET_COVER, id, coverPath),
+    touchLastOpened: (id: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.CAMPAIGNS_TOUCH_LAST_OPENED, id),
+  },
 
   // Listen for main → DM: player window was closed
   onPlayerWindowClosed: (cb: () => void) => {

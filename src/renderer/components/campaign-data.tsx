@@ -350,13 +350,13 @@ async function loadGlobalStats(): Promise<GlobalStats> {
   if (!window.electronAPI) {
     return { campaignCount: 0, mapCount: 0, characterCount: 0 }
   }
-  const [campaigns, maps, chars] = await Promise.all([
-    window.electronAPI.dbQuery<{ n: number }>('SELECT COUNT(*) as n FROM campaigns'),
+  const [campaignCount, maps, chars] = await Promise.all([
+    window.electronAPI.campaigns.count(),
     window.electronAPI.dbQuery<{ n: number }>('SELECT COUNT(*) as n FROM maps'),
     window.electronAPI.dbQuery<{ n: number }>('SELECT COUNT(*) as n FROM character_sheets'),
   ])
   return {
-    campaignCount: campaigns[0]?.n ?? 0,
+    campaignCount,
     mapCount: maps[0]?.n ?? 0,
     characterCount: chars[0]?.n ?? 0,
   }

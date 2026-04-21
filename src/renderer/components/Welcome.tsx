@@ -47,17 +47,7 @@ export function Welcome() {
     if (!newName.trim() || !window.electronAPI) return
     setError(null)
     try {
-      const result = await window.electronAPI.dbRun(
-        `INSERT INTO campaigns (name) VALUES (?)`,
-        [newName.trim()],
-      )
-      const campaign: Campaign = {
-        id: result.lastInsertRowid,
-        name: newName.trim(),
-        coverPath: null,
-        createdAt: new Date().toISOString(),
-        lastOpened: new Date().toISOString(),
-      }
+      const campaign = await window.electronAPI.campaigns.create(newName.trim())
       addCampaign(campaign)
       setActiveCampaign(campaign.id)
       setCreating(false)
@@ -72,11 +62,8 @@ export function Welcome() {
     try {
       const result = await window.electronAPI.importCampaign()
       if (result?.success && result.campaignId) {
-        const rows = await window.electronAPI.dbQuery<Campaign>(
-          'SELECT id, name, cover_path as coverPath, created_at as createdAt, last_opened as lastOpened FROM campaigns WHERE id = ?',
-          [result.campaignId],
-        )
-        if (rows[0]) addCampaign(rows[0])
+        const campaign = await window.electronAPI.campaigns.get(result.campaignId)
+        if (campaign) addCampaign(campaign)
       } else if (result && !result.success) {
         setError(t('dashboard.importError', { error: result.error ?? '' }))
       }
@@ -89,10 +76,7 @@ export function Welcome() {
     const name = next.trim()
     if (!name || name === campaign.name || !window.electronAPI) return
     try {
-      await window.electronAPI.dbRun('UPDATE campaigns SET name = ? WHERE id = ?', [
-        name,
-        campaign.id,
-      ])
+      await window.electronAPI.campaigns.rename(campaign.id, name)
       updateCampaign(campaign.id, { name })
     } catch (err) {
       setError(formatError(err))
@@ -107,7 +91,7 @@ export function Welcome() {
     )
     if (!confirmed) return
     try {
-      await window.electronAPI.dbRun('DELETE FROM campaigns WHERE id = ?', [campaign.id])
+      await window.electronAPI.campaigns.delete(campaign.id)
       removeCampaign(campaign.id)
     } catch (err) {
       setError(t('dashboard.deleteError', { error: formatError(err) }))
@@ -133,19 +117,13 @@ export function Welcome() {
     if (!window.electronAPI) return
     const asset = await window.electronAPI.importFile('handout', campaign.id)
     if (!asset) return
-    await window.electronAPI.dbRun(
-      'UPDATE campaigns SET cover_path = ? WHERE id = ?',
-      [asset.path, campaign.id],
-    )
+    await window.electronAPI.campaigns.setCover(campaign.id, asset.path)
     updateCampaign(campaign.id, { coverPath: asset.path })
   }
 
   async function handleClearCover(campaign: Campaign) {
     if (!window.electronAPI || !campaign.coverPath) return
-    await window.electronAPI.dbRun(
-      'UPDATE campaigns SET cover_path = NULL WHERE id = ?',
-      [campaign.id],
-    )
+    await window.electronAPI.campaigns.setCover(campaign.id, null)
     updateCampaign(campaign.id, { coverPath: null })
   }
 
