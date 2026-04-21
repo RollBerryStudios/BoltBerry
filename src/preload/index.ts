@@ -43,6 +43,8 @@ import type {
   HandoutRecord,
   CharacterSheet,
   CharacterPartyEntry,
+  AssetEntry,
+  SessionStatsEntry,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -382,6 +384,22 @@ export const dmApi = {
       ipcRenderer.invoke(IPC.CHARACTER_SHEETS_UPDATE, id, patch),
     delete: (id: number): Promise<void> =>
       ipcRenderer.invoke(IPC.CHARACTER_SHEETS_DELETE, id),
+  },
+
+  // Assets — read-only from the renderer (imports run on the main side)
+  assets: {
+    listForCampaign: (campaignId: number): Promise<AssetEntry[]> =>
+      ipcRenderer.invoke(IPC.ASSETS_LIST_FOR_CAMPAIGN, campaignId),
+  },
+
+  // Sessions — session lifecycle + dashboard stats
+  sessions: {
+    start: (campaignId: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.SESSIONS_START, campaignId),
+    endOpen: (campaignId: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.SESSIONS_END_OPEN, campaignId),
+    statsByCampaigns: (campaignIds: number[]): Promise<SessionStatsEntry[]> =>
+      ipcRenderer.invoke(IPC.SESSIONS_STATS_BY_CAMPAIGNS, campaignIds),
   },
 
   // Listen for main → DM: player window was closed

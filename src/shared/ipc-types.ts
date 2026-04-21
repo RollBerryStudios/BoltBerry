@@ -158,6 +158,15 @@ export const IPC = {
   CHARACTER_SHEETS_UPDATE: 'character-sheets:update',
   CHARACTER_SHEETS_DELETE: 'character-sheets:delete',
 
+  // Assets domain — read-only from the renderer; writes go through
+  // the existing file-import handlers in app-handlers.ts.
+  ASSETS_LIST_FOR_CAMPAIGN: 'assets:list-for-campaign',
+
+  // Sessions — session lifecycle + dashboard stats.
+  SESSIONS_START: 'sessions:start',
+  SESSIONS_END_OPEN: 'sessions:end-open',
+  SESSIONS_STATS_BY_CAMPAIGNS: 'sessions:stats-by-campaigns',
+
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
 
@@ -850,6 +859,21 @@ export interface CharacterPartyEntry {
   name: string
   className: string
   level: number
+}
+
+export type AssetType = 'map' | 'token' | 'atmosphere' | 'handout' | 'audio'
+
+export interface AssetEntry {
+  id: number
+  originalName: string
+  storedPath: string
+  type: AssetType
+}
+
+export interface SessionStatsEntry {
+  campaignId: number
+  count: number
+  lastAt: string | null
 }
 
 export interface CharacterSheet {

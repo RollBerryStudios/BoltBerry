@@ -263,17 +263,12 @@ export function CampaignDataStyles() {
 
 async function loadCampaignStats(campaignIds: number[]): Promise<StatsMap> {
   if (!window.electronAPI || campaignIds.length === 0) return {}
-  const placeholders = campaignIds.map(() => '?').join(',')
 
   const [maps, handouts, chars, sessions] = await Promise.all([
     window.electronAPI.maps.listForStats(campaignIds),
     window.electronAPI.handouts.countByCampaigns(campaignIds),
     window.electronAPI.characterSheets.listPartyByCampaigns(campaignIds),
-    window.electronAPI.dbQuery<{ campaign_id: number; n: number; last_at: string | null }>(
-      `SELECT campaign_id, COUNT(*) as n, MAX(started_at) as last_at
-       FROM sessions WHERE campaign_id IN (${placeholders}) GROUP BY campaign_id`,
-      campaignIds,
-    ),
+    window.electronAPI.sessions.statsByCampaigns(campaignIds),
   ])
 
   const out: StatsMap = {}
@@ -297,10 +292,10 @@ async function loadCampaignStats(campaignIds: number[]): Promise<StatsMap> {
     }
   }
   for (const row of sessions) {
-    const entry = out[row.campaign_id]
+    const entry = out[row.campaignId]
     if (entry) {
-      entry.sessionCount = row.n
-      entry.lastSessionAt = row.last_at
+      entry.sessionCount = row.count
+      entry.lastSessionAt = row.lastAt
     }
   }
   return out

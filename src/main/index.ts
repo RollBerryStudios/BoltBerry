@@ -22,6 +22,8 @@ import { registerGMPinHandlers } from './ipc/gm-pin-handlers'
 import { registerNoteHandlers } from './ipc/note-handlers'
 import { registerHandoutHandlers } from './ipc/handout-handlers'
 import { registerCharacterSheetHandlers } from './ipc/character-sheet-handlers'
+import { registerAssetHandlers } from './ipc/asset-handlers'
+import { registerSessionHandlers } from './ipc/session-handlers'
 import { registerExportImportHandlers } from './ipc/export-import'
 import { buildAppMenu } from './menu'
 import { initAutoUpdater } from './updater'
@@ -117,6 +119,8 @@ app.whenReady().then(() => {
   registerNoteHandlers()
   registerHandoutHandlers()
   registerCharacterSheetHandlers()
+  registerAssetHandlers()
+  registerSessionHandlers()
   registerExportImportHandlers()
 
   buildAppMenu(loadPrefs().menuLanguage)

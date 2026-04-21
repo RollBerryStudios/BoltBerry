@@ -33,19 +33,11 @@ export function AssetBrowser() {
 
   async function loadAssets() {
     if (!window.electronAPI) return
-    // Show assets for current campaign plus assets without a campaign (legacy)
-    const rows = await window.electronAPI.dbQuery<{
-      id: number; original_name: string; stored_path: string; type: string
-    }>(
-      'SELECT id, original_name, stored_path, type FROM assets WHERE (campaign_id = ? OR campaign_id IS NULL) AND type != \'handout\' ORDER BY id DESC',
-      [activeCampaignId ?? -1]
-    )
-    setAssets(rows.map((r) => ({
-      id: r.id,
-      originalName: r.original_name,
-      storedPath: r.stored_path,
-      type: r.type as AssetRow['type'],
-    })))
+    // Show assets for current campaign plus assets without a campaign (legacy).
+    // -1 is a sentinel that matches no real campaign id; handler returns
+    // the NULL-campaign legacy rows regardless.
+    const rows = await window.electronAPI.assets.listForCampaign(activeCampaignId ?? -1)
+    setAssets(rows)
   }
 
   async function handleDropTokenOnMap(asset: AssetRow) {

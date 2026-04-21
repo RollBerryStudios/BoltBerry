@@ -11,19 +11,11 @@ async function logSessionTransition(next: 'session' | 'prep'): Promise<void> {
   const campaignId = useCampaignStore.getState().activeCampaignId
   if (!campaignId) return
   if (next === 'session') {
-    // New session row — started_at defaults to datetime('now').
-    await window.electronAPI.dbRun(
-      `INSERT INTO sessions (campaign_id) VALUES (?)`,
-      [campaignId],
-    )
+    await window.electronAPI.sessions.start(campaignId)
   } else {
-    // Close whichever open row exists for this campaign. UPDATE is a no-op
-    // if there isn't one (e.g. the DB was at prep across a restart).
-    await window.electronAPI.dbRun(
-      `UPDATE sessions SET ended_at = datetime('now')
-       WHERE campaign_id = ? AND ended_at IS NULL`,
-      [campaignId],
-    )
+    // Close whichever open row exists for this campaign. No-op when none
+    // exists (e.g. DB was in prep across a restart).
+    await window.electronAPI.sessions.endOpen(campaignId)
   }
 }
 
