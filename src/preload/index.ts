@@ -41,6 +41,8 @@ import type {
   GMPinRecord,
   NoteRecord,
   HandoutRecord,
+  CharacterSheet,
+  CharacterPartyEntry,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -364,6 +366,22 @@ export const dmApi = {
       ipcRenderer.invoke(IPC.HANDOUTS_CREATE, patch),
     delete: (id: number): Promise<void> =>
       ipcRenderer.invoke(IPC.HANDOUTS_DELETE, id),
+  },
+
+  // Character sheets — semantic API for the `character_sheets` table
+  characterSheets: {
+    listByCampaign: (campaignId: number): Promise<CharacterSheet[]> =>
+      ipcRenderer.invoke(IPC.CHARACTER_SHEETS_LIST_BY_CAMPAIGN, campaignId),
+    listPartyByCampaigns: (campaignIds: number[]): Promise<CharacterPartyEntry[]> =>
+      ipcRenderer.invoke(IPC.CHARACTER_SHEETS_LIST_PARTY_BY_CAMPAIGNS, campaignIds),
+    count: (): Promise<number> =>
+      ipcRenderer.invoke(IPC.CHARACTER_SHEETS_COUNT),
+    create: (campaignId: number, name?: string): Promise<CharacterSheet> =>
+      ipcRenderer.invoke(IPC.CHARACTER_SHEETS_CREATE, campaignId, name),
+    update: (id: number, patch: Partial<CharacterSheet>): Promise<void> =>
+      ipcRenderer.invoke(IPC.CHARACTER_SHEETS_UPDATE, id, patch),
+    delete: (id: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.CHARACTER_SHEETS_DELETE, id),
   },
 
   // Listen for main → DM: player window was closed

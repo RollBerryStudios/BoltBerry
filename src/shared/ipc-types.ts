@@ -149,6 +149,15 @@ export const IPC = {
   HANDOUTS_CREATE: 'handouts:create',
   HANDOUTS_DELETE: 'handouts:delete',
 
+  // Character sheets domain — semantic replacements for raw SQL
+  // against the `character_sheets` table.
+  CHARACTER_SHEETS_LIST_BY_CAMPAIGN: 'character-sheets:list-by-campaign',
+  CHARACTER_SHEETS_LIST_PARTY_BY_CAMPAIGNS: 'character-sheets:list-party-by-campaigns',
+  CHARACTER_SHEETS_COUNT: 'character-sheets:count',
+  CHARACTER_SHEETS_CREATE: 'character-sheets:create',
+  CHARACTER_SHEETS_UPDATE: 'character-sheets:update',
+  CHARACTER_SHEETS_DELETE: 'character-sheets:delete',
+
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
 
@@ -832,6 +841,15 @@ export interface CharacterSkills {
   medicine: boolean; nature: boolean; perception: boolean
   performance: boolean; persuasion: boolean; religion: boolean
   sleightOfHand: boolean; stealth: boolean; survival: boolean
+}
+
+/** Minimal character-sheet projection used by the campaign-dashboard
+ *  party avatar strip — just enough to render name + class + level. */
+export interface CharacterPartyEntry {
+  campaignId: number
+  name: string
+  className: string
+  level: number
 }
 
 export interface CharacterSheet {

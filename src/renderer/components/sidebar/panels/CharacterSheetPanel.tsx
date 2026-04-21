@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useCharacterStore, rowToSheet } from '../../../stores/characterStore'
+import { useCharacterStore } from '../../../stores/characterStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import { useUIStore } from '../../../stores/uiStore'
 import type { CharacterSheet, CharacterAttack } from '@shared/ipc-types'
@@ -698,64 +698,26 @@ export function CharacterSheetPanel() {
   // Load sheets for current campaign
   useEffect(() => {
     if (!activeCampaignId) { setSheets([]); return }
-    window.electronAPI?.dbQuery<Parameters<typeof rowToSheet>[0]>(
-      `SELECT * FROM character_sheets WHERE campaign_id = ? ORDER BY name ASC`,
-      [activeCampaignId],
-    ).then((rows) => setSheets(rows.map(rowToSheet))).catch(console.error)
+    window.electronAPI?.characterSheets
+      .listByCampaign(activeCampaignId)
+      .then(setSheets)
+      .catch(console.error)
   }, [activeCampaignId, setSheets])
 
   const handleNew = useCallback(async () => {
     if (!activeCampaignId) return
     try {
-      const result = await window.electronAPI?.dbRun(
-        `INSERT INTO character_sheets (campaign_id, name) VALUES (?, 'Neuer Charakter')`,
-        [activeCampaignId],
-      )
-      if (!result) return
-      const rows = await window.electronAPI?.dbQuery<Parameters<typeof rowToSheet>[0]>(
-        `SELECT * FROM character_sheets WHERE id = ?`,
-        [result.lastInsertRowid],
-      )
-      if (rows && rows.length > 0) {
-        addSheet(rowToSheet(rows[0]))
-        setActiveSheetId(result.lastInsertRowid)
+      const sheet = await window.electronAPI?.characterSheets.create(activeCampaignId)
+      if (sheet) {
+        addSheet(sheet)
+        setActiveSheetId(sheet.id)
       }
     } catch (err) { console.error('[CharacterSheetPanel] new sheet failed:', err) }
   }, [activeCampaignId, addSheet, setActiveSheetId])
 
   const handleUpdate = useCallback(async (id: number, patch: Partial<CharacterSheet>) => {
     updateSheet(id, patch)
-    const sets: string[] = []
-    const vals: unknown[] = []
-    const colMap: Record<string, string> = {
-      name: 'name', race: 'race', className: 'class_name', subclass: 'subclass',
-      level: 'level', background: 'background', alignment: 'alignment', experience: 'experience',
-      str: 'str', dex: 'dex', con: 'con', intScore: 'int_score', wis: 'wis', cha: 'cha',
-      hpMax: 'hp_max', hpCurrent: 'hp_current', hpTemp: 'hp_temp',
-      ac: 'ac', speed: 'speed', initiativeBonus: 'initiative_bonus',
-      proficiencyBonus: 'proficiency_bonus', hitDice: 'hit_dice',
-      deathSavesSuccess: 'death_saves_success', deathSavesFailure: 'death_saves_failure',
-      savingThrows: 'saving_throws', skills: 'skills',
-      languages: 'languages', proficiencies: 'proficiencies',
-      features: 'features', equipment: 'equipment',
-      attacks: 'attacks', spells: 'spells', spellSlots: 'spell_slots',
-      personality: 'personality', ideals: 'ideals', bonds: 'bonds', flaws: 'flaws',
-      backstory: 'backstory', notes: 'notes',
-      inspiration: 'inspiration', passivePerception: 'passive_perception',
-      portraitPath: 'portrait_path',
-    }
-    for (const [k, v] of Object.entries(patch)) {
-      const col = colMap[k]
-      if (!col) continue
-      sets.push(`${col} = ?`)
-      vals.push(typeof v === 'object' ? JSON.stringify(v) : v)
-    }
-    if (sets.length === 0) return
-    sets.push("updated_at = datetime('now')")
-    vals.push(id)
-    await window.electronAPI?.dbRun(
-      `UPDATE character_sheets SET ${sets.join(', ')} WHERE id = ?`, vals
-    ).catch(console.error)
+    await window.electronAPI?.characterSheets.update(id, patch).catch(console.error)
   }, [updateSheet])
 
   const handleDelete = useCallback(async (id: number) => {
@@ -767,7 +729,7 @@ export function CharacterSheetPanel() {
     const sheet = sheets.find((s) => s.id === id)
     const portraitPath = sheet?.portraitPath ?? null
     removeSheet(id)
-    await window.electronAPI?.dbRun('DELETE FROM character_sheets WHERE id = ?', [id]).catch(console.error)
+    await window.electronAPI?.characterSheets.delete(id).catch(console.error)
     if (portraitPath) {
       await window.electronAPI?.deletePortrait(portraitPath).catch(() => { /* best-effort */ })
     }

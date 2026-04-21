@@ -268,12 +268,7 @@ async function loadCampaignStats(campaignIds: number[]): Promise<StatsMap> {
   const [maps, handouts, chars, sessions] = await Promise.all([
     window.electronAPI.maps.listForStats(campaignIds),
     window.electronAPI.handouts.countByCampaigns(campaignIds),
-    window.electronAPI.dbQuery<{ campaign_id: number; name: string; class_name: string; level: number }>(
-      `SELECT campaign_id, name, class_name, level
-       FROM character_sheets WHERE campaign_id IN (${placeholders})
-       ORDER BY level DESC, id ASC`,
-      campaignIds,
-    ),
+    window.electronAPI.characterSheets.listPartyByCampaigns(campaignIds),
     window.electronAPI.dbQuery<{ campaign_id: number; n: number; last_at: string | null }>(
       `SELECT campaign_id, COUNT(*) as n, MAX(started_at) as last_at
        FROM sessions WHERE campaign_id IN (${placeholders}) GROUP BY campaign_id`,
@@ -296,9 +291,9 @@ async function loadCampaignStats(campaignIds: number[]): Promise<StatsMap> {
     if (entry) entry.handoutCount = row.count
   }
   for (const row of chars) {
-    const entry = out[row.campaign_id]
+    const entry = out[row.campaignId]
     if (entry) {
-      entry.party.push({ name: row.name, className: row.class_name, level: row.level })
+      entry.party.push({ name: row.name, className: row.className, level: row.level })
     }
   }
   for (const row of sessions) {
@@ -320,14 +315,14 @@ async function loadGlobalStats(): Promise<GlobalStats> {
   if (!window.electronAPI) {
     return { campaignCount: 0, mapCount: 0, characterCount: 0 }
   }
-  const [campaignCount, mapCount, chars] = await Promise.all([
+  const [campaignCount, mapCount, characterCount] = await Promise.all([
     window.electronAPI.campaigns.count(),
     window.electronAPI.maps.count(),
-    window.electronAPI.dbQuery<{ n: number }>('SELECT COUNT(*) as n FROM character_sheets'),
+    window.electronAPI.characterSheets.count(),
   ])
   return {
     campaignCount,
     mapCount,
-    characterCount: chars[0]?.n ?? 0,
+    characterCount,
   }
 }
