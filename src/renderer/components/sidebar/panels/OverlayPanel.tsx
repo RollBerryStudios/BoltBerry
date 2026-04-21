@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useUIStore } from '../../../stores/uiStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
+import { useUndoStore, nextCommandId } from '../../../stores/undoStore'
 import type { PlayerOverlay, WeatherType } from '@shared/ipc-types'
 
 export function OverlayPanel() {
@@ -53,11 +54,45 @@ export function OverlayPanel() {
     if (!activeMapId || !window.electronAPI) return
     const confirmed = await window.electronAPI.confirmDialog(
       'Zeichnungen löschen',
-      'Alle Zeichnungen dieser Karte unwiderruflich löschen?'
+      'Alle Zeichnungen dieser Karte löschen? (Kann rückgängig gemacht werden.)'
     )
     if (!confirmed) return
+
+    // Snapshot before we nuke the rows so the undo closure can
+    // restore them in the same order with the same colour / width /
+    // text. IDs get regenerated on restore (SQLite autoincrements on
+    // INSERT) so any outside reference to the old ID is gone; fine
+    // because drawings are referenced by map_id only.
+    const snapshot = await window.electronAPI.dbQuery<{
+      id: number; type: string; points: string; color: string; width: number; text: string | null
+    }>('SELECT id, type, points, color, width, text FROM drawings WHERE map_id = ? ORDER BY id', [activeMapId])
+
     await window.electronAPI.dbRun('DELETE FROM drawings WHERE map_id = ?', [activeMapId])
     incrementDrawingClearTick()
+
+    // Only push an undo command when there was actually something
+    // to clear — a confirmed "clear" on an empty canvas shouldn't
+    // occupy an undo-stack slot.
+    if (snapshot.length === 0) return
+    useUndoStore.getState().pushCommand({
+      id: nextCommandId(),
+      label: `Zeichnungen (${snapshot.length}) wiederherstellen`,
+      undo: async () => {
+        for (const row of snapshot) {
+          await window.electronAPI?.dbRun(
+            'INSERT INTO drawings (map_id, type, points, color, width, text, synced) VALUES (?, ?, ?, ?, ?, ?, 1)',
+            [activeMapId, row.type, row.points, row.color, row.width, row.text],
+          )
+        }
+        // Re-broadcast via tick so player picks up the restored set
+        // (DrawingLayer re-hydrates from DB on the tick).
+        incrementDrawingClearTick()
+      },
+      redo: async () => {
+        await window.electronAPI?.dbRun('DELETE FROM drawings WHERE map_id = ?', [activeMapId])
+        incrementDrawingClearTick()
+      },
+    })
   }
 
   function handleWeather(type: WeatherType) {

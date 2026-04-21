@@ -265,6 +265,15 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
         const fullOp: FogOperation = { type: 'cover', shape: 'rect', points: [0, 0, covered.width, covered.height] }
         pushFogCommand(fullOp)
       } else if (detail.type === 'resetExplored') {
+        // Snapshot both bitmaps as PNG data URLs before the wipe so
+        // the undo closure can restore the pre-reset state pixel-
+        // perfect. PNG preserves alpha — JPEG would flatten cleared
+        // regions to opaque black on restore (the exact bug that
+        // made fog render black for the player earlier).
+        const prevExplored = explored.toDataURL('image/png')
+        const prevCovered  = covered.toDataURL('image/png')
+        const prevHistory  = useFogStore.getState().history.slice()
+
         ec.clearRect(0, 0, explored.width, explored.height)
         cc.clearRect(0, 0, covered.width, covered.height)
         useFogStore.getState().clearHistory()
@@ -272,6 +281,37 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
         saveFogToDb(mapId, explored, covered)
         const fullOp: FogOperation = { type: 'reveal', shape: 'rect', points: [0, 0, explored.width, explored.height] }
         sendFogDelta(fullOp)
+
+        useUndoStore.getState().pushCommand({
+          id: nextCommandId(),
+          label: 'Nebel zurücksetzen',
+          undo: async () => {
+            // Load the PNG snapshot back into both canvases. Re-use
+            // the existing loadBitmapToCanvas-style pattern via a
+            // fresh Image() to keep this commit minimal.
+            await Promise.all([
+              loadBitmapToCanvas(prevExplored, explored),
+              loadBitmapToCanvas(prevCovered,  covered),
+            ])
+            useFogStore.setState({ history: prevHistory, redoStack: [] })
+            refreshDisplay()
+            saveFogToDb(mapId, explored, covered)
+            if (useUIStore.getState().sessionMode !== 'prep') {
+              window.electronAPI?.sendFogReset(
+                covered.toDataURL('image/png'),
+                explored.toDataURL('image/png'),
+              )
+            }
+          },
+          redo: async () => {
+            ec.clearRect(0, 0, explored.width, explored.height)
+            cc.clearRect(0, 0, covered.width, covered.height)
+            useFogStore.getState().clearHistory()
+            refreshDisplay()
+            saveFogToDb(mapId, explored, covered)
+            sendFogDelta({ type: 'reveal', shape: 'rect', points: [0, 0, explored.width, explored.height] })
+          },
+        })
       } else if (detail.type === 'revealTokens') {
         const tokens = useTokenStore.getState().tokens
         const revealRadius = gridSizeProp * 1.5
