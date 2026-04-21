@@ -25,6 +25,35 @@ export function SettingsPanel() {
     }
   }
 
+  async function handleAssetCleanup() {
+    if (!window.electronAPI) return
+    // Dry run first so we can tell the user exactly what will be
+    // deleted before we touch anything. `confirm` on zero orphans
+    // short-circuits — nothing to do.
+    try {
+      const probe = await window.electronAPI.assetCleanup(true)
+      if (!probe.success) {
+        showToast('Scan fehlgeschlagen: ' + (probe.error ?? 'Unbekannter Fehler'), 'error', 7000)
+        return
+      }
+      if (probe.count === 0) {
+        showToast('Keine verwaisten Dateien gefunden', 'success')
+        return
+      }
+      const mb = (probe.totalBytes / (1024 * 1024)).toFixed(1)
+      const msg = `${probe.count} verwaiste Datei(en) gefunden (${mb} MB). Jetzt löschen?`
+      if (!window.confirm(msg)) return
+      const result = await window.electronAPI.assetCleanup(false)
+      if (result.success) {
+        showToast(`${result.count} Datei(en) aufgeräumt`, 'success', 6000)
+      } else {
+        showToast('Aufräumen fehlgeschlagen: ' + (result.error ?? 'Unbekannter Fehler'), 'error', 7000)
+      }
+    } catch (err) {
+      showToast('Aufräumen fehlgeschlagen: ' + (err instanceof Error ? err.message : String(err)), 'error', 7000)
+    }
+  }
+
   async function handleRescanContent() {
     if (!window.electronAPI) return
     showToast('Inhaltsordner wird gescannt…', 'info')
@@ -150,6 +179,14 @@ export function SettingsPanel() {
               Rescan
             </button>
           </div>
+          <button
+            className="btn btn-ghost"
+            onClick={handleAssetCleanup}
+            title="Findet und löscht Dateien im Assets-Ordner, auf die keine Karte, kein Token und keine andere Ressource mehr verweist."
+            style={{ justifyContent: 'flex-start', gap: 8 }}
+          >
+            <span>🧹</span> Speicher aufräumen
+          </button>
         </div>
       </div>
 

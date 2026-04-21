@@ -1,7 +1,7 @@
 import Database from 'better-sqlite3'
 import { app } from 'electron'
-import { join } from 'path'
-import { existsSync, mkdirSync } from 'fs'
+import { join, basename, dirname } from 'path'
+import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync, unlinkSync } from 'fs'
 import {
   SCHEMA_VERSION,
   CREATE_TABLES_SQL, CREATE_POST_MIGRATION_INDEXES_SQL, SEED_SCHEMA_VERSION,
@@ -56,6 +56,51 @@ export class SchemaTooNewError extends Error {
   constructor(public dbVersion: number, public appVersion: number) {
     super(`Database schema v${dbVersion} was created by a newer app build (this build supports v${appVersion}). Please update the app.`)
     this.name = 'SchemaTooNewError'
+  }
+}
+
+/**
+ * Snapshot the DB file before a migration runs, keeping the 3 most
+ * recent backups in the same `data/` folder. The transaction around
+ * the migration already rolls back on any SQL error — this guards
+ * the worse class of failures where the migration SQL commits rows
+ * the subsequent application code can't interpret (e.g. a JSON blob
+ * format drift), leaving the user with a DB that opens but misrenders.
+ * Having a timestamped .bak on disk means "restore the previous
+ * version" is a manual-but-trivial step.
+ *
+ * Filename shape: `rollberry.db.pre-v36-to-v37.2026-04-24T12-45-10.bak`
+ * so sort order by name matches creation order (ISO timestamp).
+ */
+function backupDbForMigration(dbPath: string, fromVer: number, toVer: number): void {
+  if (!existsSync(dbPath)) return
+  const stamp = new Date().toISOString().replace(/[:.]/g, '-').replace('T', 'T').replace(/Z$/, '')
+  const backupPath = `${dbPath}.pre-v${fromVer}-to-v${toVer}.${stamp}.bak`
+  copyFileSync(dbPath, backupPath)
+  console.log(`[Database] Pre-migration backup: ${backupPath}`)
+  pruneOldBackups(dbPath, 3)
+}
+
+/**
+ * Keep the N most-recent `.bak` files next to `dbPath` and delete the
+ * rest. A long-running install with dozens of migrations would
+ * otherwise accrete a whole session's worth of full DB copies under
+ * userData. We sort by filename (timestamped) so creation order is
+ * stable regardless of clock skew.
+ */
+function pruneOldBackups(dbPath: string, keep: number): void {
+  try {
+    const dir = dirname(dbPath)
+    const base = basename(dbPath)
+    const backups = readdirSync(dir)
+      .filter((f) => f.startsWith(`${base}.pre-v`) && f.endsWith('.bak'))
+      .map((f) => ({ f, mtime: statSync(join(dir, f)).mtimeMs }))
+      .sort((a, b) => b.mtime - a.mtime)
+    for (const old of backups.slice(keep)) {
+      try { unlinkSync(join(dir, old.f)) } catch { /* best-effort */ }
+    }
+  } catch (err) {
+    console.warn('[Database] Backup prune failed:', err)
   }
 }
 
@@ -132,6 +177,17 @@ export function initDatabase(): Database.Database {
     }
 
     if (currentVersion < SCHEMA_VERSION) {
+      // Snapshot the DB BEFORE we touch it so a catastrophic migration
+      // bug (one that commits corrupted rows the rollback can't undo,
+      // e.g. ALTER TABLE with a broken DEFAULT expression) leaves the
+      // user with a restorable copy on disk. Best-effort — a failed
+      // backup must not block the upgrade; we log + continue.
+      try {
+        backupDbForMigration(dbPath, currentVersion, SCHEMA_VERSION)
+      } catch (err) {
+        console.warn('[Database] Pre-migration backup failed:', err)
+      }
+
       // Wrap the entire upgrade in one transaction. If any step fails, the DB
       // rolls back to the starting version instead of landing in a half-migrated
       // state that re-triggers the same failure on next launch.

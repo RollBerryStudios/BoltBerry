@@ -654,6 +654,94 @@ export function registerAppHandlers(): void {
     }
   })
 
+  // ── Asset orphan GC ──────────────────────────────────────────────────
+  // Sweeps userData/assets/** and matches every file against the set of
+  // paths still referenced by the DB. Anything unreferenced is an
+  // orphan: a file left over after a delete (map, token, handout,
+  // character portrait, audio track, …) whose row no longer points
+  // at it. Large campaigns + long usage accumulate dozens of MB of
+  // these, and without this sweep nothing ever cleans them up.
+  //
+  // Safety: we ONLY touch files under userData/assets/. Bundled SRD
+  // tokens (resources/data/monsters/<slug>/) live outside userData
+  // and are never scanned. `dryRun: true` returns the counts without
+  // deleting so the UI can preview + confirm.
+  ipcMain.handle(IPC.ASSET_CLEANUP, async (_event, dryRun: boolean) => {
+    try {
+      const userDataPath = getCustomUserDataPath() || app.getPath('userData')
+      const assetRoot = join(userDataPath, 'assets')
+      if (!existsSync(assetRoot)) {
+        return { success: true, count: 0, totalBytes: 0, paths: [] }
+      }
+
+      // Enumerate every file under assets/ (recursive). Symlinks
+      // ignored as a defensive measure — a malicious asset-folder
+      // symlink could otherwise trick us into deleting files outside
+      // userData.
+      const allFiles: string[] = []
+      const walk = (dir: string, relPrefix: string) => {
+        for (const entry of readdirSync(dir, { withFileTypes: true })) {
+          if (entry.isSymbolicLink()) continue
+          const rel = relPrefix ? `${relPrefix}/${entry.name}` : entry.name
+          const abs = join(dir, entry.name)
+          if (entry.isDirectory()) walk(abs, rel)
+          else if (entry.isFile()) allFiles.push(`assets/${rel}`)
+        }
+      }
+      walk(assetRoot, '')
+
+      // Collect every path the DB still references. Any column that
+      // points at a user-data asset is queried here; if new columns
+      // appear in future migrations, add them to the list.
+      const db = getDb()
+      const referenced = new Set<string>()
+      const pushRefs = (rows: Array<{ p: string | null }>) => {
+        for (const r of rows) {
+          if (r.p && !r.p.startsWith('data:') && !r.p.startsWith('bestiary://') && !r.p.startsWith('http')) {
+            // Normalise any accidental leading slash / backslash to
+            // the forward-slash relative form we store.
+            referenced.add(r.p.replace(/\\/g, '/').replace(/^\/+/, ''))
+          }
+        }
+      }
+      pushRefs(db.prepare('SELECT image_path AS p FROM maps').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT image_path AS p FROM tokens').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT image_path AS p FROM token_templates').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT image_path AS p FROM handouts').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT portrait_path AS p FROM character_sheets').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT ambient_track_path AS p FROM maps').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT audio_path AS p FROM audio_board_slots').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT path AS p FROM channel_playlist').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT path AS p FROM assets').all() as Array<{ p: string | null }>)
+
+      const orphans = allFiles.filter((f) => !referenced.has(f))
+
+      let totalBytes = 0
+      for (const o of orphans) {
+        try { totalBytes += statSync(join(userDataPath, o)).size } catch { /* ignore */ }
+      }
+
+      if (!dryRun) {
+        for (const o of orphans) {
+          try { unlinkSync(join(userDataPath, o)) } catch (err) {
+            console.warn('[AppHandlers] Failed to unlink orphan:', o, err)
+          }
+        }
+      }
+
+      return {
+        success: true,
+        count: orphans.length,
+        totalBytes,
+        // Cap the preview list so the IPC payload stays small on
+        // pathological cases (thousands of orphans).
+        paths: orphans.slice(0, 50),
+      }
+    } catch (err) {
+      return { success: false, count: 0, totalBytes: 0, error: (err as Error).message }
+    }
+  })
+
   // ── Compendium ────────────────────────────────────────────────────────
   // PDFs live in two folders: bundled (ships with the installer) and user
   // (per-user additions). We merge them at list time; user files override

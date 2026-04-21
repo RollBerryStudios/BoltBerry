@@ -57,6 +57,8 @@ export const dmApi = {
     ipcRenderer.invoke(IPC.SAVE_PORTRAIT, dataUrl, oldRelativePath ?? null),
   deletePortrait: (relativePath: string): Promise<{ success: boolean; error?: string }> =>
     ipcRenderer.invoke(IPC.DELETE_PORTRAIT, relativePath),
+  assetCleanup: (dryRun: boolean): Promise<{ success: boolean; count: number; totalBytes: number; paths?: string[]; error?: string }> =>
+    ipcRenderer.invoke(IPC.ASSET_CLEANUP, dryRun),
   exportCampaign: (campaignId: number) =>
     ipcRenderer.invoke('app:export-campaign', campaignId),
   importCampaign: () => ipcRenderer.invoke('app:import-campaign'),

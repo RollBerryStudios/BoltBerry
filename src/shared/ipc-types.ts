@@ -32,6 +32,11 @@ export const IPC = {
   /** Remove a character portrait from disk. Called when the row is
    *  deleted so orphan PNGs don't accumulate under userData. */
   DELETE_PORTRAIT: 'app:delete-portrait',
+  /** GC pass over `userData/assets/` — finds files with no DB
+   *  reference. `dryRun: true` returns the counts without deleting
+   *  so the UI can preview + confirm; `false` unlinks the orphans.
+   *  Safe for repeat calls: referenced assets are never touched. */
+  ASSET_CLEANUP: 'app:asset-cleanup',
   EXPORT_CAMPAIGN: 'app:export-campaign',
   IMPORT_CAMPAIGN: 'app:import-campaign',
   DUPLICATE_CAMPAIGN: 'app:duplicate-campaign',
