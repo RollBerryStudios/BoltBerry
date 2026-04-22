@@ -161,6 +161,7 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
       useUndoStore.getState().pushCommand({
         id: nextCommandId(),
         label: `Zeichnung (${d.type})`,
+        action: { type: 'drawing.create', payload: { id: currentId, patch: createPatch } },
         undo: async () => {
           await window.electronAPI?.drawings.delete(currentId)
           setDrawings(prev => prev.filter((x) => x.id !== currentId))

@@ -3,7 +3,7 @@ import { Layer, Line, Group, Rect, Text, Circle } from 'react-konva'
 import { useRoomStore } from '../../stores/roomStore'
 import { useUIStore, type ActiveTool } from '../../stores/uiStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
-import { useUndoStore, nextCommandId } from '../../stores/undoStore'
+import { pushAction } from '../../stores/undoStore'
 
 interface Point {
   x: number
@@ -90,27 +90,9 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
         visibility: 'hidden' as const,
         color: '#3b82f6',
       }
-      const room = await window.electronAPI?.rooms.create(createPatch)
-      if (room) {
-        let currentRoom = room
-        addRoom(currentRoom)
-        setSelectedRoomId(currentRoom.id)
-
-        useUndoStore.getState().pushCommand({
-          id: nextCommandId(),
-          label: 'Raum',
-          undo: async () => {
-            await window.electronAPI?.rooms.delete(currentRoom.id)
-            useRoomStore.getState().removeRoom(currentRoom.id)
-          },
-          redo: async () => {
-            const r = await window.electronAPI?.rooms.create(createPatch)
-            if (!r) return
-            currentRoom = r
-            useRoomStore.getState().addRoom(r)
-          },
-        })
-      }
+      await pushAction({ type: 'room.create', payload: { patch: createPatch } })
+      const created = useRoomStore.getState().rooms[useRoomStore.getState().rooms.length - 1]
+      if (created) setSelectedRoomId(created.id)
     } catch (err) {
       console.error('[RoomLayer] create room failed:', err)
     }

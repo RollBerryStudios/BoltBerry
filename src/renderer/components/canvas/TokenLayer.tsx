@@ -439,6 +439,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     useUndoStore.getState().pushCommand({
       id: nextCommandId(),
       label: `Token ${Object.keys(updates).join(', ')}`,
+      action: { type: 'token.updateFields', payload: { id, oldValues, newValues: updates } },
       undo: applyBackward,
       redo: applyForward,
     })
@@ -499,6 +500,19 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     useUndoStore.getState().pushCommand({
       id: nextCommandId(),
       label: `Rename token`,
+      action: {
+        type: 'token.rename',
+        payload: {
+          id,
+          oldName,
+          newName: name,
+          linkedEntries: linkedEntries.map((e) => ({
+            id: e.id,
+            oldName: e.oldName,
+            newName: name,
+          })),
+        },
+      },
       undo: () => applyName(oldName, linkedEntries.map((e) => ({ id: e.id, name: e.oldName }))),
       redo: () => applyName(name, linkedEntries.map((e) => ({ id: e.id, name }))),
     })
@@ -546,6 +560,10 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
       label: deletedTokens.length === 1
         ? `Delete ${deletedTokens[0].name}`
         : `Delete ${deletedTokens.length} tokens`,
+      action: {
+        type: 'token.deleteMany',
+        payload: { ids: idsToDelete, tokens: deletedTokens },
+      },
       undo: async () => {
         try {
           await window.electronAPI?.tokens.restoreMany(deletedTokens)

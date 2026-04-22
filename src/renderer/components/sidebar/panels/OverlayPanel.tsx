@@ -75,6 +75,10 @@ export function OverlayPanel() {
     useUndoStore.getState().pushCommand({
       id: nextCommandId(),
       label: `Zeichnungen (${snapshot.length}) wiederherstellen`,
+      action: {
+        type: 'drawing.clearMap',
+        payload: { mapId: activeMapId, snapshot },
+      },
       undo: async () => {
         // One transaction via createMany, rather than N sequential
         // round-trips — the previous dbRun loop serialised per-row.

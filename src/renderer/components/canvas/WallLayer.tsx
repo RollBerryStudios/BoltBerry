@@ -7,7 +7,7 @@ import { useWallStore } from '../../stores/wallStore'
 import { useUIStore } from '../../stores/uiStore'
 import { useMapTransformStore, screenToMapPure, mapToScreenPure } from '../../stores/mapTransformStore'
 import { useCampaignStore } from '../../stores/campaignStore'
-import { useUndoStore, nextCommandId } from '../../stores/undoStore'
+import { pushAction } from '../../stores/undoStore'
 import type { WallRecord } from '@shared/ipc-types'
 
 interface WallLayerProps {
@@ -84,8 +84,8 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
 
     if (dx > minLen || dy > minLen) {
       if (!window.electronAPI || !activeMapId) { setDrawingStart(null); setPreviewEnd(null); return }
-      // Freeze the segment + map id in closure-locals so the undo
-      // command survives later state changes.
+      // AP-5: declarative action form — payload is pure JSON, survives
+      // serialization and renderer crash replay.
       const segment = {
         mapId: activeMapId,
         x1: drawingStart.x, y1: drawingStart.y,
@@ -93,24 +93,7 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
         wallType: wallTypeForNew,
         doorState: 'closed' as const,
       }
-      const created = await window.electronAPI.walls.create(segment)
-      let currentId: number = created.id
-      addWall(created)
-
-      useUndoStore.getState().pushCommand({
-        id: nextCommandId(),
-        label: wallTypeForNew === 'door' ? 'Tür' : 'Wand',
-        undo: async () => {
-          await window.electronAPI?.walls.delete(currentId)
-          useWallStore.getState().removeWall(currentId)
-        },
-        redo: async () => {
-          const r = await window.electronAPI?.walls.create(segment)
-          if (!r) return
-          currentId = r.id
-          useWallStore.getState().addWall(r)
-        },
-      })
+      await pushAction({ type: 'wall.create', payload: { segment } })
     }
 
     setDrawingStart(null)
@@ -148,32 +131,17 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
       'Wand löschen?',
       'Diese Wand wird entfernt. Sichtbarkeit kann sich für Spieler ändern.',
     )
-    if (!ok) { setSelectedWallId(null); return }
-    const wallToDelete = walls.find((w) => w.id === selectedWallId)
-    removeWall(selectedWallId)
-    try {
-      await window.electronAPI?.walls.delete(selectedWallId)
-      if (wallToDelete) {
-        const deleted = wallToDelete
-        useUndoStore.getState().pushCommand({
-          id: nextCommandId(),
-          label: 'Delete wall',
-          undo: async () => {
-            // Restore with the original id so any outside reference
-            // (e.g. a cached LOS segment list that keyed on it) keeps
-            // pointing at the same row.
-            const restored = await window.electronAPI?.walls.restore(deleted)
-            if (restored) useWallStore.getState().addWall(restored)
-          },
-          redo: async () => {
-            removeWall(deleted.id)
-            await window.electronAPI?.walls.delete(deleted.id)
-          },
-        })
+      if (!ok) { setSelectedWallId(null); return }
+      const wallToDelete = walls.find((w) => w.id === selectedWallId)
+      removeWall(selectedWallId)
+      try {
+        await window.electronAPI?.walls.delete(selectedWallId)
+        if (wallToDelete) {
+          await pushAction({ type: 'wall.delete', payload: { wall: wallToDelete } })
+        }
+      } catch (err) {
+        console.error('[WallLayer] delete failed:', err)
       }
-    } catch (err) {
-      console.error('[WallLayer] delete failed:', err)
-    }
     setSelectedWallId(null)
   }
 

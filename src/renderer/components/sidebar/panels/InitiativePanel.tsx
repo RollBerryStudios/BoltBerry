@@ -79,6 +79,7 @@ async function quickTokenUpdate(tokenId: number, updates: Record<string, any>) {
   useUndoStore.getState().pushCommand({
     id: nextCommandId(),
     label: `Token ${Object.keys(updates).join(', ')}`,
+    action: { type: 'token.updateFields', payload: { id: tokenId, oldValues, newValues: updates } },
     undo: async () => {
       updateToken(tokenId, oldValues)
       await window.electronAPI?.tokens.update(tokenId, oldValues)

@@ -95,6 +95,7 @@ export async function spawnMonsterOnMap(opts: {
   useUndoStore.getState().pushCommand({
     id: nextCommandId(),
     label: `Spawn ${name}`,
+    action: { type: 'token.place', payload: { token: newToken } },
     undo: async () => {
       await api.tokens.delete(currentId)
       useTokenStore.getState().removeToken(currentId)

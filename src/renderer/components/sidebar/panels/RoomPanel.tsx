@@ -38,13 +38,17 @@ export function RoomPanel() {
     const room = rooms.find((r) => r.id === id)
     const confirmed = await window.electronAPI.confirmDialog(
       `Raum "${room?.name ?? ''}" löschen?`,
-      'Diese Aktion kann nicht rükgängig gemacht werden.'
+      'Diese Aktion kann mit Ctrl+Z rückgängig gemacht werden.'
     )
     if (!confirmed) return
     removeRoom(id)
     if (selectedRoomId === id) setSelectedRoomId(null)
     try {
       await window.electronAPI.rooms.delete(id)
+      if (room) {
+        const { pushAction } = await import('../../../stores/undoStore')
+        await pushAction({ type: 'room.delete', payload: { room } })
+      }
     } catch (err) {
       console.error('[RoomPanel] delete failed:', err)
     }

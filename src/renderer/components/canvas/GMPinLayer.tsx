@@ -71,6 +71,12 @@ export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
       useUndoStore.getState().pushCommand({
         id: nextCommandId(),
         label: 'Delete GM pin',
+        action: {
+          type: 'gmPin.delete',
+          payload: {
+            pin: { ...pin, mapId } as import('@shared/ipc-types').GMPinRecord,
+          },
+        },
         undo: async () => {
           const restored = await window.electronAPI?.gmPins.create({
             mapId,

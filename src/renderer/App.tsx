@@ -20,6 +20,14 @@ import { useAutoAmbient } from './hooks/useAutoAmbient'
 import { useMenuActions } from './hooks/useMenuActions'
 import { showToast } from './components/shared/Toast'
 import { flushFogSave } from './components/canvas/FogLayer'
+// Side-effect registrations for AP-5 serializable undo actions.
+// Must be imported before any component pushes an action of these types.
+import './actions/wallActions'
+import './actions/roomActions'
+import './actions/gmPinActions'
+// Side-effect registrations for AP-5 serializable undo actions.
+// Must be imported before any component pushes an action of these types.
+import './actions/tokenActions'
 
 export default function App() {
   const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)

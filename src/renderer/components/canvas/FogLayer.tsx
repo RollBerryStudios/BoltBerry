@@ -233,6 +233,7 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
     useUndoStore.getState().pushCommand({
       id: nextCommandId(),
       label: `Fog ${op.type}`,
+      action: { type: 'fog.operation', payload: { mapId, op } },
       undo: () => {
         const fs = useFogStore.getState()
         fs.undo()

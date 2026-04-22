@@ -303,6 +303,7 @@ export function CanvasArea() {
       useUndoStore.getState().pushCommand({
         id: nextCommandId(),
         label: `Place ${droppedToken.name}`,
+        action: { type: 'token.place', payload: { token: droppedToken } },
         undo: async () => {
           useTokenStore.getState().removeToken(droppedToken.id)
           await window.electronAPI?.tokens.delete(droppedToken.id)
@@ -349,6 +350,7 @@ export function CanvasArea() {
       useUndoStore.getState().pushCommand({
         id: nextCommandId(),
         label: `Place ${assetToken.name}`,
+        action: { type: 'token.place', payload: { token: assetToken } },
         undo: async () => {
           useTokenStore.getState().removeToken(assetToken.id)
           await window.electronAPI?.tokens.delete(assetToken.id)

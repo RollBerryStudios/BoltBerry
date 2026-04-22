@@ -404,6 +404,10 @@ export function useKeyboardShortcuts() {
               useUndoStore.getState().pushCommand({
                 id: nextCommandId(),
                 label: deletedTokens.length === 1 ? `Delete ${deletedTokens[0].name}` : `Delete ${deletedTokens.length} tokens`,
+                action: {
+                  type: 'token.deleteMany',
+                  payload: { ids, tokens: deletedTokens },
+                },
                 undo: async () => {
                   try {
                     await window.electronAPI?.tokens.restoreMany(deletedTokens)
