@@ -34,7 +34,7 @@ test.describe('IPC bridge — database', () => {
     }
   })
 
-  test('dbQuery returns the current schema version (23)', async () => {
+  test('dbQuery returns the current schema version (37)', async () => {
     const { dmWindow, close } = await launchApp()
 
     try {
