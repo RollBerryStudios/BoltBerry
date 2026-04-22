@@ -1,9 +1,10 @@
-import { useState, useRef, useEffect, useMemo } from 'react'
+﻿import { useState, useRef, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { EffectTimer } from '@shared/ipc-types'
 import { useInitiativeStore } from '../../../stores/initiativeStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import { useUIStore } from '../../../stores/uiStore'
+import { useSessionStore } from '../../../stores/sessionStore'
 import { useTokenStore } from '../../../stores/tokenStore'
 import { useUndoStore, nextCommandId } from '../../../stores/undoStore'
 import { EmptyState } from '../../EmptyState'
@@ -18,30 +19,30 @@ const FACTION_COLORS: Record<string, string> = {
 }
 
 const COMBAT_ICONS: Record<string, string> = {
-  advantage: '▲', disadvantage: '▼', concentrating: '🎯',
-  blessed: '✨', cursed: '🔮', hasted: '⚡',
-  blinded: '🫣', charmed: '💫', dead: '💀',
-  frightened: '😱', grappled: '🤛', incapacitated: '😵',
-  invisible: '👻', paralyzed: '⚡', petrified: '🪨',
-  poisoned: '☠️', prone: '⬇️', restrained: '⛓️',
-  stunned: '⭐', unconscious: '💤', exhausted: '😫',
-  deafened: '🔇',
+  advantage: 'â–²', disadvantage: 'â–¼', concentrating: 'ðŸŽ¯',
+  blessed: 'âœ¨', cursed: 'ðŸ”®', hasted: 'âš¡',
+  blinded: 'ðŸ«£', charmed: 'ðŸ’«', dead: 'ðŸ’€',
+  frightened: 'ðŸ˜±', grappled: 'ðŸ¤›', incapacitated: 'ðŸ˜µ',
+  invisible: 'ðŸ‘»', paralyzed: 'âš¡', petrified: 'ðŸª¨',
+  poisoned: 'â˜ ï¸', prone: 'â¬‡ï¸', restrained: 'â›“ï¸',
+  stunned: 'â­', unconscious: 'ðŸ’¤', exhausted: 'ðŸ˜«',
+  deafened: 'ðŸ”‡',
 }
 
 const TIMER_PRESETS = [
-  { id: 'blessed', label: '✨ Gesegnet' },
-  { id: 'cursed', label: '🔮 Verflucht' },
-  { id: 'hasted', label: '⚡ Verlangsamt' },
-  { id: 'concentrating', label: '🎯 Konzentration' },
-  { id: 'advantage', label: '▲ Vorteil' },
-  { id: 'disadvantage', label: '▼ Nachteil' },
-  { id: 'blinded', label: '🫣 Blind' },
-  { id: 'invisible', label: '👻 Unsichtbar' },
-  { id: 'charmed', label: '💫 Bezaubert' },
+  { id: 'blessed', label: 'âœ¨ Gesegnet' },
+  { id: 'cursed', label: 'ðŸ”® Verflucht' },
+  { id: 'hasted', label: 'âš¡ Verlangsamt' },
+  { id: 'concentrating', label: 'ðŸŽ¯ Konzentration' },
+  { id: 'advantage', label: 'â–² Vorteil' },
+  { id: 'disadvantage', label: 'â–¼ Nachteil' },
+  { id: 'blinded', label: 'ðŸ«£ Blind' },
+  { id: 'invisible', label: 'ðŸ‘» Unsichtbar' },
+  { id: 'charmed', label: 'ðŸ’« Bezaubert' },
 ]
 
 function broadcastInitiative() {
-  if (useUIStore.getState().sessionMode === 'prep') return
+  if (useSessionStore.getState().sessionMode === 'prep') return
   const { entries } = useInitiativeStore.getState()
   window.electronAPI?.sendInitiative(
     entries.map((e) => ({ name: e.combatantName, roll: e.roll, current: e.currentTurn }))
@@ -49,7 +50,7 @@ function broadcastInitiative() {
 }
 
 function broadcastTokensFromInitiative() {
-  if (useUIStore.getState().sessionMode === 'prep') return
+  if (useSessionStore.getState().sessionMode === 'prep') return
   const tokens = useTokenStore.getState().tokens
   const visible = tokens
     .filter((t) => t.visibleToPlayers)
@@ -203,8 +204,8 @@ export function InitiativePanel() {
   async function handleReset() {
     if (!window.electronAPI) return
     const confirmed = await window.electronAPI.confirmDialog(
-      'Kampf zurücksetzen?',
-      'Alle Initiative-Einträge werden gelöscht. Diese Aktion kann nicht rükgängig gemacht werden.'
+      'Kampf zurÃ¼cksetzen?',
+      'Alle Initiative-EintrÃ¤ge werden gelÃ¶scht. Diese Aktion kann nicht rÃ¼kgÃ¤ngig gemacht werden.'
     )
     if (!confirmed) return
     resetCombat()
@@ -294,24 +295,24 @@ export function InitiativePanel() {
               onClick={handleSort}
               title="Sortieren"
             >
-              ↕ Sortieren
+              â†• Sortieren
             </button>
             <button
               className="btn btn-ghost"
               style={{ fontSize: 'var(--text-xs)', padding: '2px 6px' }}
               onClick={handleAddAllTokens}
-              title={`Alle ${mapTokens.length} Karten-Token zur Initiative hinzufügen`}
+              title={`Alle ${mapTokens.length} Karten-Token zur Initiative hinzufÃ¼gen`}
               disabled={mapTokens.length === 0}
             >
-              ⊕ Alle
+              âŠ• Alle
             </button>
             <button
               className="btn btn-ghost"
               style={{ fontSize: 'var(--text-xs)', padding: '2px 6px' }}
               onClick={handleNextTurn}
-              title="Nächster Kämpfer [N]"
+              title="NÃ¤chster KÃ¤mpfer [N]"
             >
-              ▶ Weiter
+              â–¶ Weiter
             </button>
             <button
               className="btn btn-ghost"
@@ -319,7 +320,7 @@ export function InitiativePanel() {
               onClick={handleReset}
               title="Kampf beenden"
             >
-              ✕
+              âœ•
             </button>
           </div>
         </div>
@@ -410,12 +411,12 @@ export function InitiativePanel() {
         {entries.length === 0 ? (
           <EmptyState
             size="sm"
-            icon="⚔️"
+            icon="âš”ï¸"
             title={t('initiative.noCombat')}
             description={<>
-              Namen eingeben &amp; + drücken.<br />
-              Token-Vorschläge erscheinen beim Tippen.<br />
-              <strong style={{ color: 'var(--text-secondary)' }}>⊕ Alle</strong> fügt alle Karten-Token auf einmal hinzu.
+              Namen eingeben &amp; + drÃ¼cken.<br />
+              Token-VorschlÃ¤ge erscheinen beim Tippen.<br />
+              <strong style={{ color: 'var(--text-secondary)' }}>âŠ• Alle</strong> fÃ¼gt alle Karten-Token auf einmal hinzu.
             </>}
           />
         ) : (
@@ -516,7 +517,7 @@ export function InitiativePanel() {
                     textOverflow: 'ellipsis',
                     whiteSpace: 'nowrap',
                   }}>
-                    {entry.currentTurn ? '▶ ' : ''}{entry.combatantName}
+                    {entry.currentTurn ? 'â–¶ ' : ''}{entry.combatantName}
                   </span>
                   {linkedToken && linkedToken.ac != null && (
                     <span style={{ fontSize: 9, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
@@ -535,24 +536,24 @@ export function InitiativePanel() {
                     }}
                     title={t('initiative.openInBestiary')}
                     aria-label={t('initiative.openInBestiary')}
-                  >📖</button>
+                  >ðŸ“–</button>
                   <button
                     style={{ background: timerEntryId === entry.id ? 'var(--accent-blue-dim)' : 'var(--bg-overlay)', border: `1px solid ${timerEntryId === entry.id ? 'var(--accent-blue)' : 'var(--border-subtle)'}`, color: timerEntryId === entry.id ? 'var(--accent-blue-light)' : 'var(--text-muted)', cursor: 'pointer', fontSize: 10, padding: '1px 4px', lineHeight: 1, borderRadius: 3 }}
                     onClick={() => setTimerEntryId(timerEntryId === entry.id ? null : entry.id)}
-                    title="Effekt-Timer hinzufügen"
-                  >⏱ Timer</button>
+                    title="Effekt-Timer hinzufÃ¼gen"
+                  >â± Timer</button>
                   <button
                     className="btn btn-ghost btn-icon"
                     style={{ fontSize: 10, padding: 2 }}
-                    title={t('initiative.removeEntry') ?? '✕'}
-                    aria-label={t('initiative.removeEntry') ?? '✕'}
+                    title={t('initiative.removeEntry') ?? 'âœ•'}
+                    aria-label={t('initiative.removeEntry') ?? 'âœ•'}
                     onClick={() => {
                       window.electronAPI?.initiative.delete(entry.id)
                       removeEntry(entry.id)
                       broadcastInitiative()
                     }}
                   >
-                    ✕
+                    âœ•
                   </button>
                 </div>
 
@@ -596,7 +597,7 @@ export function InitiativePanel() {
                 {activeEffects.length > 0 && (
                   <div style={{ fontSize: 10, marginTop: 2, letterSpacing: 0.5 }}>
                     {activeEffects.slice(0, 8).map((eff) => (
-                      <span key={eff} title={eff} style={{ marginRight: 2 }}>{COMBAT_ICONS[eff] ?? '❓'}</span>
+                      <span key={eff} title={eff} style={{ marginRight: 2 }}>{COMBAT_ICONS[eff] ?? 'â“'}</span>
                     ))}
                     {activeEffects.length > 8 && <span style={{ color: 'var(--text-muted)' }}>+{activeEffects.length - 8}</span>}
                   </div>
@@ -619,7 +620,7 @@ export function InitiativePanel() {
                           color: timer.roundsLeft <= 1 ? '#ef4444' : 'var(--text-muted)',
                         }}
                       >
-                        {COMBAT_ICONS[timer.effectId] ?? '❓'} {timer.roundsLeft}R
+                        {COMBAT_ICONS[timer.effectId] ?? 'â“'} {timer.roundsLeft}R
                         <button
                           style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 9, padding: 0, lineHeight: 1 }}
                           onClick={() => {
@@ -631,7 +632,7 @@ export function InitiativePanel() {
                             })
                           }}
                           title="Timer entfernen"
-                        >✕</button>
+                        >âœ•</button>
                       </span>
                     ))}
                   </div>
@@ -680,7 +681,7 @@ export function InitiativePanel() {
                     <button
                       style={{ fontSize: 9, padding: '0 4px', background: 'none', border: '1px solid var(--border-subtle)', borderRadius: 3, color: 'var(--text-muted)', cursor: 'pointer' }}
                       onClick={() => setTimerEntryId(null)}
-                    >✕</button>
+                    >âœ•</button>
                   </div>
                 )}
               </div>

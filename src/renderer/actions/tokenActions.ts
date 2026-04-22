@@ -1,11 +1,12 @@
-import { registerUndoAction } from '../stores/undoStore'
+﻿import { registerUndoAction } from '../stores/undoStore'
 import { useTokenStore } from '../stores/tokenStore'
 import { useInitiativeStore } from '../stores/initiativeStore'
 import { useUIStore } from '../stores/uiStore'
+import { useSessionStore } from '../stores/sessionStore'
 import type { TokenRecord } from '@shared/ipc-types'
 
 function broadcastTokens(tokens: TokenRecord[]) {
-  if (useUIStore.getState().sessionMode === 'prep') return
+  if (useSessionStore.getState().sessionMode === 'prep') return
   const visible = tokens
     .filter((t) => t.visibleToPlayers)
     .map((t) => ({
@@ -29,11 +30,11 @@ function broadcastTokens(tokens: TokenRecord[]) {
   window.electronAPI?.sendTokenUpdate(visible)
 }
 
-// ── token.place ────────────────────────────────────────────────────────────────
+// â”€â”€ token.place â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // For actions where a token was already created before the undo entry is
 // pushed (drag-drop, asset-browser, bestiary spawn). Forward restores;
 // backward deletes by the original id.
-// ───────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 interface TokenPlacePayload {
   token: TokenRecord
 }
@@ -52,7 +53,7 @@ registerUndoAction<TokenPlacePayload>('token.place', {
   },
 })
 
-// ── token.deleteMany ────────────────────────────────────────────────────────────
+// â”€â”€ token.deleteMany â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 interface TokenDeleteManyPayload {
   ids: number[]
   tokens: TokenRecord[]
@@ -82,7 +83,7 @@ registerUndoAction<TokenDeleteManyPayload>('token.deleteMany', {
   },
 })
 
-// ── token.updateFields ─────────────────────────────────────────────────────────
+// â”€â”€ token.updateFields â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 interface TokenUpdatePayload {
   id: number
   oldValues: Partial<TokenRecord>
@@ -103,7 +104,7 @@ registerUndoAction<TokenUpdatePayload>('token.updateFields', {
   },
 })
 
-// ── token.rename ───────────────────────────────────────────────────────────────
+// â”€â”€ token.rename â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 interface TokenRenamePayload {
   id: number
   oldName: string

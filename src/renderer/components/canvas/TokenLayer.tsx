@@ -1,9 +1,10 @@
-import { RefObject, useState, useRef, useMemo, useCallback, useEffect, useLayoutEffect, memo } from 'react'
+﻿import { RefObject, useState, useRef, useMemo, useCallback, useEffect, useLayoutEffect, memo } from 'react'
 import { Layer, Group, Image as KonvaImage, Rect, Text, Circle, Line } from 'react-konva'
 import { Html } from 'react-konva-utils'
 import Konva from 'konva'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useUIStore } from '../../stores/uiStore'
+import { useSessionStore } from '../../stores/sessionStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useInitiativeStore } from '../../stores/initiativeStore'
 import { useCampaignStore } from '../../stores/campaignStore'
@@ -25,28 +26,28 @@ function factionColor(faction: string): string {
 }
 
 const STATUS_EFFECTS = [
-  { id: 'blinded',       icon: '🫣', label: 'Blind' },
-  { id: 'charmed',       icon: '💫', label: 'Bezaubert' },
-  { id: 'dead',          icon: '💀', label: 'Tot' },
-  { id: 'deafened',      icon: '🔇', label: 'Taub' },
-  { id: 'exhausted',     icon: '😫', label: 'Erschöpft' },
-  { id: 'frightened',    icon: '😱', label: 'Verängstigt' },
-  { id: 'grappled',      icon: '🤛', label: 'Gepackt' },
-  { id: 'incapacitated', icon: '😵', label: 'Kampfunfähig' },
-  { id: 'invisible',     icon: '👻', label: 'Unsichtbar' },
-  { id: 'paralyzed',     icon: '⚡', label: 'Gelähmt' },
-  { id: 'petrified',     icon: '🪨', label: 'Versteinert' },
-  { id: 'poisoned',      icon: '☠️', label: 'Vergiftet' },
-  { id: 'prone',         icon: '⬇️', label: 'Liegend' },
-  { id: 'restrained',    icon: '⛓️', label: 'Gefesselt' },
-  { id: 'stunned',       icon: '⭐', label: 'Betäubt' },
-  { id: 'unconscious',   icon: '💤', label: 'Bewusstlos' },
-  { id: 'advantage',     icon: '▲', label: 'Vorteil' },
-  { id: 'disadvantage',  icon: '▼', label: 'Nachteil' },
-  { id: 'concentrating', icon: '🎯', label: 'Konzentration' },
-  { id: 'blessed',       icon: '✨', label: 'Gesegnet' },
-  { id: 'cursed',        icon: '🔮', label: 'Verflucht' },
-  { id: 'hasted',        icon: '⚡', label: 'Verlangsamt' },
+  { id: 'blinded',       icon: 'ðŸ«£', label: 'Blind' },
+  { id: 'charmed',       icon: 'ðŸ’«', label: 'Bezaubert' },
+  { id: 'dead',          icon: 'ðŸ’€', label: 'Tot' },
+  { id: 'deafened',      icon: 'ðŸ”‡', label: 'Taub' },
+  { id: 'exhausted',     icon: 'ðŸ˜«', label: 'ErschÃ¶pft' },
+  { id: 'frightened',    icon: 'ðŸ˜±', label: 'VerÃ¤ngstigt' },
+  { id: 'grappled',      icon: 'ðŸ¤›', label: 'Gepackt' },
+  { id: 'incapacitated', icon: 'ðŸ˜µ', label: 'KampfunfÃ¤hig' },
+  { id: 'invisible',     icon: 'ðŸ‘»', label: 'Unsichtbar' },
+  { id: 'paralyzed',     icon: 'âš¡', label: 'GelÃ¤hmt' },
+  { id: 'petrified',     icon: 'ðŸª¨', label: 'Versteinert' },
+  { id: 'poisoned',      icon: 'â˜ ï¸', label: 'Vergiftet' },
+  { id: 'prone',         icon: 'â¬‡ï¸', label: 'Liegend' },
+  { id: 'restrained',    icon: 'â›“ï¸', label: 'Gefesselt' },
+  { id: 'stunned',       icon: 'â­', label: 'BetÃ¤ubt' },
+  { id: 'unconscious',   icon: 'ðŸ’¤', label: 'Bewusstlos' },
+  { id: 'advantage',     icon: 'â–²', label: 'Vorteil' },
+  { id: 'disadvantage',  icon: 'â–¼', label: 'Nachteil' },
+  { id: 'concentrating', icon: 'ðŸŽ¯', label: 'Konzentration' },
+  { id: 'blessed',       icon: 'âœ¨', label: 'Gesegnet' },
+  { id: 'cursed',        icon: 'ðŸ”®', label: 'Verflucht' },
+  { id: 'hasted',        icon: 'âš¡', label: 'Verlangsamt' },
 ]
 
 const STATUS_ICON_MAP: Record<string, string> = Object.fromEntries(STATUS_EFFECTS.map(e => [e.id, e.icon]))
@@ -110,7 +111,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   const contextMenuVisibleRef = useRef(false)
   contextMenuVisibleRef.current = contextMenu.visible
 
-  // ── Viewport clamping for the context menu ─────────────────────────────────
+  // â”€â”€ Viewport clamping for the context menu â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // The menu is position:fixed at the click's raw (x, y). When the click
   // happens near the right / bottom edge, the menu can spill off-screen.
   // We measure it after mount and shift it back into view, with an 8 px
@@ -258,7 +259,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
 
     broadcastTokens(useTokenStore.getState().tokens)
 
-    // ── LOS fog reveal for light-emitting tokens ──────────────────
+    // â”€â”€ LOS fog reveal for light-emitting tokens â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     {
       const { imgW, imgH } = useMapTransformStore.getState()
       const walls = useWallStore.getState().walls
@@ -281,7 +282,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
 
     // Declarative Action form (AP-5). The forward/backward handlers
     // are registered once at module scope (`registerUndoAction`) and
-    // the payload is pure JSON — the stack can be serialized and
+    // the payload is pure JSON â€” the stack can be serialized and
     // replayed after a crash, not just for this action but whenever
     // more callsites migrate.
     const payload: TokenMovePayload = {
@@ -291,7 +292,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
         to:   { x: newPositions[i].x, y: newPositions[i].y },
       })),
     }
-    // The forward (move-to-new) already ran during the drag — the store
+    // The forward (move-to-new) already ran during the drag â€” the store
     // and DB are already at the target position. Skip the forward
     // replay by pushing the Command directly via the registry-derived
     // wrapper in `actionToCommand`; `pushAction` would redo the move.
@@ -405,7 +406,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   const handleUpdate = useCallback((id: number, updates: Record<string, any>) => {
     // Capture the prior values for each updated key so the action is
     // reversible. Without this, quick-damage in the context menu during
-    // combat (the DM's most-used destructive action) was one-way — a
+    // combat (the DM's most-used destructive action) was one-way â€” a
     // mis-click couldn't be undone. Every write that routes through
     // handleUpdate now contributes an undo entry.
     const token = useTokenStore.getState().tokens.find((t) => t.id === id)
@@ -452,7 +453,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     setEditingHpId(null)
     if (!prev || (prev.hpCurrent === hpCurrent && prev.hpMax === hpMax)) return
     // Route through handleUpdate so the inline HP edit goes through the
-    // same undo path as quick-damage/heal — a single predictable stack
+    // same undo path as quick-damage/heal â€” a single predictable stack
     // across every HP mutation.
     handleUpdate(id, { hpCurrent, hpMax })
   }, [handleUpdate])
@@ -470,7 +471,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     setEditingId(null)
     if (!prev || prev.name === name) return
     const oldName = prev.name
-    // Initiative entries mirror the token name — capture their old values
+    // Initiative entries mirror the token name â€” capture their old values
     // so undo restores both sides in one step.
     const linkedEntries = useInitiativeStore.getState().entries
       .filter((e) => e.tokenId === id)
@@ -649,9 +650,9 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     closeContextMenu()
     const slug = await findMonsterSlugByName(token.name)
     if (!slug) {
-      // Failed match — usually a heavily renamed token. Surface the
+      // Failed match â€” usually a heavily renamed token. Surface the
       // miss so the DM doesn't think the menu just did nothing.
-      showToast(`Kein Bestiarium-Eintrag für „${token.name}" gefunden`, 'info')
+      showToast(`Kein Bestiarium-Eintrag fÃ¼r â€ž${token.name}" gefunden`, 'info')
       return
     }
     useUIStore.getState().openBestiary({ tab: 'monsters', slug })
@@ -865,7 +866,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
           )
         })}
 
-        {/* Ghost snap preview — shown during token drag when grid snap is active */}
+        {/* Ghost snap preview â€” shown during token drag when grid snap is active */}
         {ghostPos && (
           <Rect
             x={ghostPos.x}
@@ -929,7 +930,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     { label: 'Keine', color: null },
                     { label: 'Rot', color: '#ef4444' },
                     { label: 'Amber', color: '#f59e0b' },
-                    { label: 'Grün', color: '#22c55e' },
+                    { label: 'GrÃ¼n', color: '#22c55e' },
                     { label: 'Blau', color: '#3b82f6' },
                     { label: 'Lila', color: '#a855f7' },
                     { label: 'Pink', color: '#ec4899' },
@@ -937,60 +938,60 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                   const isBatch = selectedTokenIds.length > 1 && selectedTokenIds.includes(token.id)
                   const hasLight = (token.notes ?? '').includes('light:')
                   const menuItems: any[] = isBatch ? [
-                    { label: `👁 Alle sichtbar machen (${selectedTokenIds.length})`, action: () => {
+                    { label: `ðŸ‘ Alle sichtbar machen (${selectedTokenIds.length})`, action: () => {
                       for (const id of selectedTokenIds) handleUpdate(id, { visibleToPlayers: true })
                       closeContextMenu()
                     }},
-                    { label: `🙈 Alle verstecken (${selectedTokenIds.length})`, action: () => {
+                    { label: `ðŸ™ˆ Alle verstecken (${selectedTokenIds.length})`, action: () => {
                       for (const id of selectedTokenIds) handleUpdate(id, { visibleToPlayers: false })
                       closeContextMenu()
                     }},
-                    { label: `🔒 Sperren (${selectedTokenIds.length})`, action: () => {
+                    { label: `ðŸ”’ Sperren (${selectedTokenIds.length})`, action: () => {
                       for (const id of selectedTokenIds) handleUpdate(id, { locked: true })
                       closeContextMenu()
                     }},
-                    { label: `🔓 Entsperren (${selectedTokenIds.length})`, action: () => {
+                    { label: `ðŸ”“ Entsperren (${selectedTokenIds.length})`, action: () => {
                       for (const id of selectedTokenIds) handleUpdate(id, { locked: false })
                       closeContextMenu()
                     }},
-                    { label: '🏷 Fraktion setzen', action: null, submenu: true, submenuType: 'faction' },
+                    { label: 'ðŸ· Fraktion setzen', action: null, submenu: true, submenuType: 'faction' },
                     null,
-                    { label: '📋 Als Gruppe duplizieren', action: () => handleDuplicateGroup() },
-                    { label: '📋 Kopieren', action: () => handleCopyTokens() },
-                    { label: clipboardTokens.length > 0 ? `📋 Einfügen (${clipboardTokens.length})` : '📋 Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
+                    { label: 'ðŸ“‹ Als Gruppe duplizieren', action: () => handleDuplicateGroup() },
+                    { label: 'ðŸ“‹ Kopieren', action: () => handleCopyTokens() },
+                    { label: clipboardTokens.length > 0 ? `ðŸ“‹ EinfÃ¼gen (${clipboardTokens.length})` : 'ðŸ“‹ EinfÃ¼gen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
                     null,
-                    { label: `❌ Alle löschen (${selectedTokenIds.length})`, action: () => handleDelete(token.id), danger: true },
+                    { label: `âŒ Alle lÃ¶schen (${selectedTokenIds.length})`, action: () => handleDelete(token.id), danger: true },
                   ] : [
-                    { label: '✏️ Umbenennen', action: () => stableStartEdit(token) },
-                    { label: '❤️ HP bearbeiten', action: () => startEditHp(token) },
-                    { label: '🛡 AC bearbeiten', action: () => startEditAc(token) },
-                    { label: '📝 Notiz', action: () => handleEditNotes(token) },
+                    { label: 'âœï¸ Umbenennen', action: () => stableStartEdit(token) },
+                    { label: 'â¤ï¸ HP bearbeiten', action: () => startEditHp(token) },
+                    { label: 'ðŸ›¡ AC bearbeiten', action: () => startEditAc(token) },
+                    { label: 'ðŸ“ Notiz', action: () => handleEditNotes(token) },
                     null,
-                    // Inline HP chip row — replaces four full-width rows with
+                    // Inline HP chip row â€” replaces four full-width rows with
                     // one compact strip. Keeps all four quick-adjust actions
                     // discoverable without pushing the menu off-screen.
                     { kind: 'hp-chips' },
                     null,
-                    { label: '⚔️ Zustände', action: null, submenu: true, submenuType: 'status' },
-                    { label: '➕ Vorteil', action: () => toggleAdvantage(token, true) },
-                    { label: '➖ Nachteil', action: () => toggleAdvantage(token, false) },
-                    { label: '🎯 Konzentration', action: () => toggleStatusInMenu(token, 'concentrating') },
+                    { label: 'âš”ï¸ ZustÃ¤nde', action: null, submenu: true, submenuType: 'status' },
+                    { label: 'âž• Vorteil', action: () => toggleAdvantage(token, true) },
+                    { label: 'âž– Nachteil', action: () => toggleAdvantage(token, false) },
+                    { label: 'ðŸŽ¯ Konzentration', action: () => toggleStatusInMenu(token, 'concentrating') },
                     null,
-                    { label: '⚔️ Zum Kampf hinzufügen', action: () => addToInitiative(token) },
-                    { label: '📖 Im Bestiarium öffnen', action: () => { void handleOpenInBestiarium(token) } },
-                    { label: '🎯 Fokus setzen', action: () => handleFocusToken(token) },
-                    { label: hasLight ? '💡 Lichtquelle deaktivieren' : '💡 Lichtquelle aktivieren', action: () => handleToggleLight(token) },
+                    { label: 'âš”ï¸ Zum Kampf hinzufÃ¼gen', action: () => addToInitiative(token) },
+                    { label: 'ðŸ“– Im Bestiarium Ã¶ffnen', action: () => { void handleOpenInBestiarium(token) } },
+                    { label: 'ðŸŽ¯ Fokus setzen', action: () => handleFocusToken(token) },
+                    { label: hasLight ? 'ðŸ’¡ Lichtquelle deaktivieren' : 'ðŸ’¡ Lichtquelle aktivieren', action: () => handleToggleLight(token) },
                     null,
-                    { label: token.visibleToPlayers ? '🙈 Verstecken' : '👁 Sichtbar machen', action: () => handleToggleVisibility(token) },
-                    { label: '📋 Kopieren', action: () => handleCopyTokens() },
-                    { label: clipboardTokens.length > 0 ? `📋 Einfügen (${clipboardTokens.length})` : '📋 Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
-                    { label: token.locked ? '🔓 Entsperren' : '🔒 Sperren', action: () => handleToggleLock(token) },
-                    { label: '🏷 Markierung', action: null, submenu: true, submenuType: 'marker' },
-                    { label: '⬆️ nach vorne', action: () => { handleUpdate(token.id, { zIndex: token.zIndex + 1 }); closeContextMenu() } },
-                    { label: '⬇️ nach hinten', action: () => { handleUpdate(token.id, { zIndex: Math.max(0, token.zIndex - 1) }); closeContextMenu() } },
-                    { label: '⏫ ganz nach vorne', action: () => { const maxZ = Math.max(...tokens.map(t => t.zIndex), 0); handleUpdate(token.id, { zIndex: maxZ + 1 }); closeContextMenu() } },
+                    { label: token.visibleToPlayers ? 'ðŸ™ˆ Verstecken' : 'ðŸ‘ Sichtbar machen', action: () => handleToggleVisibility(token) },
+                    { label: 'ðŸ“‹ Kopieren', action: () => handleCopyTokens() },
+                    { label: clipboardTokens.length > 0 ? `ðŸ“‹ EinfÃ¼gen (${clipboardTokens.length})` : 'ðŸ“‹ EinfÃ¼gen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
+                    { label: token.locked ? 'ðŸ”“ Entsperren' : 'ðŸ”’ Sperren', action: () => handleToggleLock(token) },
+                    { label: 'ðŸ· Markierung', action: null, submenu: true, submenuType: 'marker' },
+                    { label: 'â¬†ï¸ nach vorne', action: () => { handleUpdate(token.id, { zIndex: token.zIndex + 1 }); closeContextMenu() } },
+                    { label: 'â¬‡ï¸ nach hinten', action: () => { handleUpdate(token.id, { zIndex: Math.max(0, token.zIndex - 1) }); closeContextMenu() } },
+                    { label: 'â« ganz nach vorne', action: () => { const maxZ = Math.max(...tokens.map(t => t.zIndex), 0); handleUpdate(token.id, { zIndex: maxZ + 1 }); closeContextMenu() } },
                     null,
-                    { label: '❌ Löschen', action: () => handleDelete(token.id), danger: true },
+                    { label: 'âŒ LÃ¶schen', action: () => handleDelete(token.id), danger: true },
                   ]
                   return menuItems.map((item, i) => {
                     if (item === null) {
@@ -1021,8 +1022,8 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                         <div key={i} style={{ padding: '2px 8px' }}>
                           <div style={{ fontSize: 10, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 3 }}>HP</div>
                           <div style={{ display: 'flex', gap: 4 }}>
-                            <button style={chipStyle(false)} title="−5 HP" onClick={() => adjustHp(-5)}>−5</button>
-                            <button style={chipStyle(false)} title="−1 HP" onClick={() => adjustHp(-1)}>−1</button>
+                            <button style={chipStyle(false)} title="âˆ’5 HP" onClick={() => adjustHp(-5)}>âˆ’5</button>
+                            <button style={chipStyle(false)} title="âˆ’1 HP" onClick={() => adjustHp(-1)}>âˆ’1</button>
                             <button style={chipStyle(true)}  title="+1 HP" onClick={() => adjustHp(1)}>+1</button>
                             <button style={chipStyle(true)}  title="+5 HP" onClick={() => adjustHp(5)}>+5</button>
                           </div>
@@ -1034,10 +1035,10 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                       const isFaction = item.submenuType === 'faction'
                       const isStatus = item.submenuType === 'status'
                       const FACTION_OPTIONS = [
-                        { value: 'party', label: '🎮 Spieler', color: '#22c55e' },
-                        { value: 'enemy', label: '⚔️ Gegner', color: '#ef4444' },
-                        { value: 'neutral', label: '⚖️ Neutral', color: '#f59e0b' },
-                        { value: 'friendly', label: '🤝 Freundlich', color: '#3b82f6' },
+                        { value: 'party', label: 'ðŸŽ® Spieler', color: '#22c55e' },
+                        { value: 'enemy', label: 'âš”ï¸ Gegner', color: '#ef4444' },
+                        { value: 'neutral', label: 'âš–ï¸ Neutral', color: '#f59e0b' },
+                        { value: 'friendly', label: 'ðŸ¤ Freundlich', color: '#3b82f6' },
                       ]
                       return (
                         <div key={i}>
@@ -1065,7 +1066,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                             onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
                             onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
                           >
-                            {isFaction ? '🏷 Fraktion' : isStatus ? '⚔️ Zustände' : '🏷 Markierung'} {isSubOpen ? '▲' : '▶'}
+                            {isFaction ? 'ðŸ· Fraktion' : isStatus ? 'âš”ï¸ ZustÃ¤nde' : 'ðŸ· Markierung'} {isSubOpen ? 'â–²' : 'â–¶'}
                           </button>
                           {isSubOpen && isFaction && (
                             <div style={{ background: 'var(--bg-elevated)', padding: '2px 0' }}>
@@ -1125,7 +1126,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                                   >
                                     <span style={{ fontSize: 14 }}>{eff.icon}</span>
                                     {eff.label}
-                                    {isActive && <span style={{ color: 'var(--accent-blue)', marginLeft: 'auto', fontSize: 10 }}>✓</span>}
+                                    {isActive && <span style={{ color: 'var(--accent-blue)', marginLeft: 'auto', fontSize: 10 }}>âœ“</span>}
                                   </button>
                                 )
                               })}
@@ -1222,7 +1223,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   )
 }
 
-// ─── Individual Token Node ────────────────────────────────────────────────────
+// â”€â”€â”€ Individual Token Node â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 interface TokenNodeProps {
   token: TokenRecord
@@ -1338,10 +1339,10 @@ const TokenNode = memo(function TokenNode({
 
         {/* Status badges (rotate with token) */}
         {!token.visibleToPlayers && (
-          <Text x={r - 14} y={-r - 2} text="🙈" fontSize={12} listening={false} />
+          <Text x={r - 14} y={-r - 2} text="ðŸ™ˆ" fontSize={12} listening={false} />
         )}
         {token.locked && (
-          <Text x={-r} y={-r - 2} text="🔒" fontSize={10} listening={false} />
+          <Text x={-r} y={-r - 2} text="ðŸ”’" fontSize={10} listening={false} />
         )}
         {token.ac != null && (
           <>
@@ -1362,7 +1363,7 @@ const TokenNode = memo(function TokenNode({
               key={eff}
               x={-r + idx * (iconSize + 2)}
               y={-r - iconSize - 4}
-              text={icons[eff] ?? '❓'}
+              text={icons[eff] ?? 'â“'}
               fontSize={iconSize}
               listening={false}
             />
@@ -1542,8 +1543,8 @@ const TokenNode = memo(function TokenNode({
 /**
  * Token move as a serializable undo action (AP-5). The payload
  * captures the id + from/to position for every moved token. Forward
- * and backward are symmetric pure updates — no closures over React
- * or store state — so this action survives serialization to disk
+ * and backward are symmetric pure updates â€” no closures over React
+ * or store state â€” so this action survives serialization to disk
  * and replay after a crash.
  *
  * This is the concrete first example of the `registerUndoAction` /
@@ -1578,7 +1579,7 @@ registerUndoAction<TokenMovePayload>('token.move', {
 })
 
 function broadcastTokens(tokens: TokenRecord[]) {
-  if (useUIStore.getState().sessionMode === 'prep') return
+  if (useSessionStore.getState().sessionMode === 'prep') return
   const visible = tokens
     .filter((t) => t.visibleToPlayers)
     .map((t) => ({

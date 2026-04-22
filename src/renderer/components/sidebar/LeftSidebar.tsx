@@ -1,8 +1,9 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+﻿import { useState, useEffect, useCallback, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useUIStore } from '../../stores/uiStore'
+import { useSessionStore } from '../../stores/sessionStore'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useInitiativeStore } from '../../stores/initiativeStore'
 import { AssetBrowser } from './panels/AssetBrowser'
@@ -96,7 +97,7 @@ export function LeftSidebar() {
       }).catch(() => { /* ignore detection errors */ })
     } catch (err) {
       console.error('[LeftSidebar] handleAddMap failed:', err)
-      showToast(`Karte konnte nicht hinzugefügt werden: ${formatError(err)}`, 'error')
+      showToast(`Karte konnte nicht hinzugefÃ¼gt werden: ${formatError(err)}`, 'error')
     }
   }
 
@@ -232,13 +233,13 @@ export function LeftSidebar() {
   }
 
   function syncMapStateToPlayer(m: MapRecord) {
-    if (!m || useUIStore.getState().sessionMode === 'prep') return
+    if (!m || useSessionStore.getState().sessionMode === 'prep') return
     window.electronAPI?.sendMapUpdate({
       imagePath: m.imagePath,
       gridType: m.gridType,
       gridSize: m.gridSize,
       rotation: m.rotationPlayer ?? 0,
-      // v32 grid-styling columns — without these every tweak in the
+      // v32 grid-styling columns â€” without these every tweak in the
       // sidebar (visibility / thickness / colour) stayed DM-only.
       gridVisible: m.gridVisible,
       gridThickness: m.gridThickness,
@@ -248,12 +249,12 @@ export function LeftSidebar() {
 
   return (
     <div className="sidebar sidebar-left">
-      {/* ── Tab bar ────────────────────────────────────────────────────────────────── */}
+      {/* â”€â”€ Tab bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="sidebar-tab-strip">
         {([
-          ['maps', '🗺️', t('sidebar.left.tabMaps')],
-          ['assets', '🗄', t('sidebar.left.tabAssets')],
-          ['settings', '⚙️', t('settings.title')]
+          ['maps', 'ðŸ—ºï¸', t('sidebar.left.tabMaps')],
+          ['assets', 'ðŸ—„', t('sidebar.left.tabAssets')],
+          ['settings', 'âš™ï¸', t('settings.title')]
         ] as const).map(([id, icon, label]) => (
           <button
             key={id}
@@ -272,7 +273,7 @@ export function LeftSidebar() {
         {tab === 'assets' && <AssetBrowser />}
         {tab === 'settings' && <SettingsPanel />}
         {tab === 'maps' && <>
-      {/* ── Map list ─────────────────────────────────────────────────────────────── */}
+      {/* â”€â”€ Map list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="sidebar-section">
         <div className="sidebar-section-title">{t('sidebar.left.mapsTitle')}</div>
 
@@ -301,9 +302,9 @@ export function LeftSidebar() {
             className="btn btn-ghost"
             style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-xs)' }}
             onClick={handleAddMap}
-            title="Bild-Datei als Karte importieren (Name wird aus Dateiname übernommen)"
+            title="Bild-Datei als Karte importieren (Name wird aus Dateiname Ã¼bernommen)"
           >
-            🖼 {t('sidebar.left.addMap')}
+            ðŸ–¼ {t('sidebar.left.addMap')}
           </button>
           <button
             className="btn btn-ghost"
@@ -311,17 +312,17 @@ export function LeftSidebar() {
             onClick={handleAddMapFromPdf}
             title="PDF als Karte importieren"
           >
-            📄 PDF
+            ðŸ“„ PDF
           </button>
         </div>
       </div>
 
-      {/* ── Grid settings (only when a map is active) ────────────────────────────── */}
+      {/* â”€â”€ Grid settings (only when a map is active) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       {activeMap && (
         <div className="sidebar-section">
           <div className="sidebar-section-title">{t('sidebar.left.gridTitle', { name: activeMap.name })}</div>
 
-          {/* Minimalist grid panel — square-only, two-colour palette,
+          {/* Minimalist grid panel â€” square-only, two-colour palette,
               no offset fields. Hex / colourful palette / offset
               correction were rarely used and inflated the panel; the
               square fallback handles every map currently in the data
@@ -337,7 +338,7 @@ export function LeftSidebar() {
                 onClick={() => handleGridChange(gridType === 'square' ? 'none' : 'square', gridSize)}
                 title="Raster ein/aus (G)"
               >
-                {gridType === 'square' ? '⬛ AN' : '⬜ AUS'}
+                {gridType === 'square' ? 'â¬› AN' : 'â¬œ AUS'}
               </button>
               <button
                 className="btn btn-ghost"
@@ -355,20 +356,20 @@ export function LeftSidebar() {
                     // positives on noisy maps.
                     if (detected.confidence > 0.15 && detected.gridSize > 10) {
                       handleGridChange('square', detected.gridSize, undefined, 0, 0)
-                      setGridDetectMsg({ text: `✓ ${detected.gridSize}px`, ok: true })
+                      setGridDetectMsg({ text: `âœ“ ${detected.gridSize}px`, ok: true })
                     } else {
-                      setGridDetectMsg({ text: '✕ Kein Raster erkannt', ok: false })
+                      setGridDetectMsg({ text: 'âœ• Kein Raster erkannt', ok: false })
                     }
                   } catch (err) {
                     console.error('[LeftSidebar] grid detect failed:', err)
-                    setGridDetectMsg({ text: '✕ Fehler', ok: false })
+                    setGridDetectMsg({ text: 'âœ• Fehler', ok: false })
                   } finally {
                     setGridDetecting(false)
                   }
                 }}
                 title="Raster automatisch erkennen"
               >
-                {gridDetecting ? '⏳' : '🔍'} Erkennen
+                {gridDetecting ? 'â³' : 'ðŸ”'} Erkennen
               </button>
               {gridDetectMsg && (
                 <span style={{
@@ -381,8 +382,8 @@ export function LeftSidebar() {
                   <button
                     onClick={() => setGridDetectMsg(null)}
                     style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', fontSize: 9, padding: 0, lineHeight: 1, opacity: 0.7 }}
-                    title="Schließen"
-                  >✕</button>
+                    title="SchlieÃŸen"
+                  >âœ•</button>
                 </span>
               )}
             </div>
@@ -401,10 +402,10 @@ export function LeftSidebar() {
                     bigStep={5}
                     width={84}
                     size="sm"
-                    ariaLabel="Raster-Feldgröße in Pixeln"
+                    ariaLabel="Raster-FeldgrÃ¶ÃŸe in Pixeln"
                   />
                   <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>px</span>
-                  <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginLeft: 'var(--sp-2)' }}>·</span>
+                  <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginLeft: 'var(--sp-2)' }}>Â·</span>
                   <input
                     className="input"
                     type="number"
@@ -433,9 +434,9 @@ export function LeftSidebar() {
                     size="sm"
                     ariaLabel="Rasterlinien-Dicke"
                   />
-                  <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginLeft: 'var(--sp-2)' }}>·</span>
+                  <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginLeft: 'var(--sp-2)' }}>Â·</span>
                   {[
-                    { label: 'Weiß',    value: 'rgba(255,255,255,0.34)' },
+                    { label: 'WeiÃŸ',    value: 'rgba(255,255,255,0.34)' },
                     { label: 'Schwarz', value: 'rgba(0,0,0,0.45)' },
                   ].map(({ label, value }) => (
                     <button
@@ -463,7 +464,7 @@ export function LeftSidebar() {
               </>
             )}
 
-            {/* Rotation — DM view */}
+            {/* Rotation â€” DM view */}
             <div>
               <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', display: 'block', marginBottom: 'var(--sp-1)' }}>
                 Drehung (meine Ansicht)
@@ -474,15 +475,15 @@ export function LeftSidebar() {
                     key={rot}
                     className={`btn btn-ghost ${rotation === rot ? 'btn-active' : ''}`}
                     style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-xs)', padding: '3px' }}
-                    title={`DM-Ansicht: ${rot}°`}
+                    title={`DM-Ansicht: ${rot}Â°`}
                     onClick={() => handleRotationChange(rot)}
                   >
-                    {rot === 0 ? '↑' : rot === 90 ? '→' : rot === 180 ? '↓' : '←'}
+                    {rot === 0 ? 'â†‘' : rot === 90 ? 'â†’' : rot === 180 ? 'â†“' : 'â†'}
                   </button>
                 ))}
               </div>
             </div>
-            {/* Rotation — Player view */}
+            {/* Rotation â€” Player view */}
             <div>
               <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', display: 'block', marginBottom: 'var(--sp-1)' }}>
                 Drehung (Spieler-Ansicht)
@@ -493,10 +494,10 @@ export function LeftSidebar() {
                     key={rot}
                     className={`btn btn-ghost ${rotationPlayer === rot ? 'btn-active' : ''}`}
                     style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-xs)', padding: '3px' }}
-                    title={`Spieler-Ansicht: ${rot}° (wird sofort synchronisiert)`}
+                    title={`Spieler-Ansicht: ${rot}Â° (wird sofort synchronisiert)`}
                     onClick={() => handlePlayerRotationChange(rot)}
                   >
-                    {rot === 0 ? '↑' : rot === 90 ? '→' : rot === 180 ? '↓' : '←'}
+                    {rot === 0 ? 'â†‘' : rot === 90 ? 'â†’' : rot === 180 ? 'â†“' : 'â†'}
                   </button>
                 ))}
               </div>
@@ -510,7 +511,7 @@ export function LeftSidebar() {
   )
 }
 
-// ── PDF → PNG conversion (renderer-side, requires pdfjs-dist) ─────────────────────
+// â”€â”€ PDF â†’ PNG conversion (renderer-side, requires pdfjs-dist) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 async function renderPdfToImage(
   base64Data: string,
@@ -530,7 +531,7 @@ async function renderPdfToImage(
 
   const pdf = await pdfjsLib.getDocument({ data: bytes }).promise
   const page = await pdf.getPage(1)
-  const viewport = page.getViewport({ scale: 2 }) // 2× for quality
+  const viewport = page.getViewport({ scale: 2 }) // 2Ã— for quality
 
   const canvas = document.createElement('canvas')
   canvas.width = viewport.width
@@ -601,7 +602,7 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
     if (map.id === useCampaignStore.getState().activeMapId) {
       useTokenStore.getState().setTokens([])
       useInitiativeStore.getState().setEntries([])
-      useUIStore.getState().setPlayerConnected(false)
+      useSessionStore.getState().setPlayerConnected(false)
       // Drop the player window back to the idle splash. Sending
       // `mode: 'map'` with `map: null` used to make PlayerApp fall
       // through to the previous map state instead of idling out.
@@ -654,7 +655,7 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
         if (!window.electronAPI || renaming) return
         const selectedAction = await window.electronAPI.showContextMenu([
           { label: 'Umbenennen', action: 'rename' },
-          { label: 'Löschen', action: 'delete', danger: true },
+          { label: 'LÃ¶schen', action: 'delete', danger: true },
         ])
         if (selectedAction === 'rename') setRenaming(true)
         else if (selectedAction === 'delete') handleDelete()
@@ -702,14 +703,14 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
             disabled={index === 0}
             onClick={(e) => { e.stopPropagation(); onReorder(map.id, 'up') }}
             title="Nach oben"
-          >▲</button>
+          >â–²</button>
           <button
             className="btn btn-ghost"
             style={{ padding: '0 4px', fontSize: 10, lineHeight: '14px', minHeight: 14 }}
             disabled={index === total - 1}
             onClick={(e) => { e.stopPropagation(); onReorder(map.id, 'down') }}
             title="Nach unten"
-          >▼</button>
+          >â–¼</button>
         </div>
       )}
     </div>

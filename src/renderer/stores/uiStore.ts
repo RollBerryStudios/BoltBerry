@@ -382,12 +382,11 @@ export const useUIStore = create<UIState>((set) => ({
   }>) => set({ clipboardTokens: tokens }),
 }))
 
-/* ── AP-3 backward-compat aliases ───────────────────────────────────────────────
- * These fields will eventually move out of uiStore entirely.  For now we
- * keep shallow getters/setters that delegate to the canonical stores so
- * existing call sites (≈250+) don't break.  Removing a field before its
- * consumers are migrated would cause silent runtime undefineds — this
- * bridge lets us migrate incrementally.
+/* ── AP-3 backward-compat bridge ─────────────────────────────────────────────────
+ * sessionMode, workMode, playerConnected and their setters live here but
+ * **delegate to useSessionStore at runtime**.  Consumers should migrate
+ * to `useSessionStore` directly; these aliases remain so files that still
+ * import `useUIStore` compile while migration is in progress.
  * ─────────────────────────────────────────────────────────────────────────────*/
 
 // Tool state (useToolStore)

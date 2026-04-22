@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react'
+﻿import { useEffect, useCallback } from 'react'
 import { useUIStore } from '../stores/uiStore'
 import { useSessionStore } from '../stores/sessionStore'
 import { useTokenStore } from '../stores/tokenStore'
@@ -12,7 +12,7 @@ export function usePlayerSync() {
   const activeMapId = useCampaignStore((s) => s.activeMapId)
   const walls = useWallStore((s) => s.walls)
 
-  // â”€â”€ Helper: build and push full state to the player window â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Ã¢â€â‚¬Ã¢â€â‚¬ Helper: build and push full state to the player window Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   // All store reads use getState() so this function never goes stale.
   const buildAndSendFullSync = useCallback(async () => {
     if (!window.electronAPI) return
@@ -107,7 +107,7 @@ export function usePlayerSync() {
     window.electronAPI?.sendFullSync(state)
   }, [])
 
-  // â”€â”€ Clear playerConnected when the player window actually closes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Ã¢â€â‚¬Ã¢â€â‚¬ Clear playerConnected when the player window actually closes Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   // (CanvasArea also has this, but it's only mounted in game view.
   //  This hook is always active, ensuring the indicator stays accurate.)
   useEffect(() => {
@@ -116,7 +116,7 @@ export function usePlayerSync() {
     return () => { unsub() }
   }, [setPlayerConnected])
 
-  // â”€â”€ Respond to player's full-sync requests â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Ã¢â€â‚¬Ã¢â€â‚¬ Respond to player's full-sync requests Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   useEffect(() => {
     if (!window.electronAPI) return
 
@@ -134,26 +134,26 @@ export function usePlayerSync() {
     return () => { unsub() }
   }, [buildAndSendFullSync, setPlayerConnected])
 
-  // â”€â”€ Session start: push the current state to the player immediately â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Ã¢â€â‚¬Ã¢â€â‚¬ Session start: push the current state to the player immediately Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   // The player may have connected during prep (received nothing so far);
   // when sessionMode flips to non-prep we push the current map / fog /
   // tokens right away so the player doesn't have to request a full sync.
   useEffect(() => {
     if (sessionMode === 'prep' || !window.electronAPI) return
-    if (useUIStore.getState().playerConnected) {
+    if (useSessionStore.getState().playerConnected) {
       buildAndSendFullSync()
     }
   }, [sessionMode, buildAndSendFullSync])
 
-  // â”€â”€ Session end: kick the player back to the idle splash â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  // Going from live â†’ prep mid-session must hide whatever was on screen
+  // Ã¢â€â‚¬Ã¢â€â‚¬ Session end: kick the player back to the idle splash Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+  // Going from live Ã¢â€ â€™ prep mid-session must hide whatever was on screen
   // immediately. We push a minimal full-sync with `mode: 'idle'` which
   // PlayerApp interprets as "wipe everything and show the BoltBerry
   // waiting screen". The playerConnected guard means the very first
   // mount (sessionMode='prep' before any window opens) is a no-op.
   useEffect(() => {
     if (sessionMode !== 'prep' || !window.electronAPI) return
-    if (!useUIStore.getState().playerConnected) return
+    if (!useSessionStore.getState().playerConnected) return
     window.electronAPI.sendFullSync({
       mode: 'idle',
       viewport: null,
@@ -168,7 +168,7 @@ export function usePlayerSync() {
     })
   }, [sessionMode])
 
-  // â”€â”€ Broadcast wall data whenever the active map or wall list changes â”€â”€â”€â”€â”€â”€â”€â”€
+  // Ã¢â€â‚¬Ã¢â€â‚¬ Broadcast wall data whenever the active map or wall list changes Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   useEffect(() => {
     if (sessionMode === 'prep' || !window.electronAPI?.sendWalls) return
     const mapWalls: PlayerWallState[] = walls
@@ -177,14 +177,14 @@ export function usePlayerSync() {
     window.electronAPI.sendWalls(mapWalls)
   }, [activeMapId, walls, sessionMode])
 
-  // â”€â”€ Re-broadcast full state when drawings are cleared â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Ã¢â€â‚¬Ã¢â€â‚¬ Re-broadcast full state when drawings are cleared Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   const drawingClearTick = useUIStore((s) => s.drawingClearTick)
   useEffect(() => {
     if (drawingClearTick === 0 || sessionMode === 'prep' || !window.electronAPI) return
-    if (useUIStore.getState().playerConnected) buildAndSendFullSync()
+    if (useSessionStore.getState().playerConnected) buildAndSendFullSync()
   }, [drawingClearTick, sessionMode, buildAndSendFullSync])
 
-  // â”€â”€ Player Control Mode â€” viewport broadcast â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Ã¢â€â‚¬Ã¢â€â‚¬ Player Control Mode Ã¢â‚¬â€ viewport broadcast Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   // Subscribes to the whole `playerViewport` object plus its mode flag so
   // every drag / wheel / arrow update reaches the player window. rAF-
   // throttles the send during rapid mutations (drag at 60 Hz would
@@ -206,7 +206,7 @@ export function usePlayerSync() {
     return () => cancelAnimationFrame(frame)
   }, [playerViewportMode, playerViewport])
 
-  // â”€â”€ Map switch â€” drop any stale Player Control Mode rect â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Ã¢â€â‚¬Ã¢â€â‚¬ Map switch Ã¢â‚¬â€ drop any stale Player Control Mode rect Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   // The rect lives in map-image coords; switching maps makes those
   // coords meaningless. Clearing the rect forces the next toolbar
   // activation to seed a fresh default on the new map.

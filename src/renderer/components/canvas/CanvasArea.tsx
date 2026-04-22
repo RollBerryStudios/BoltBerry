@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useMemo } from 'react'
+﻿import { useEffect, useRef, useState, useMemo } from 'react'
 import { Stage, Layer } from 'react-konva'
 import { MapLayer } from './MapLayer'
 import { FogLayer } from './FogLayer'
@@ -42,7 +42,7 @@ import type Konva from 'konva'
 import type { MapRecord, PlayerFullState } from '@shared/ipc-types'
 
 function broadcastTokensFromCanvas() {
-  if (useUIStore.getState().sessionMode === 'prep') return
+  if (useSessionStore.getState().sessionMode === 'prep') return
   const tokens = useTokenStore.getState().tokens
   const visible = tokens
     .filter((t) => t.visibleToPlayers)
@@ -58,16 +58,16 @@ function broadcastTokensFromCanvas() {
   window.electronAPI?.sendTokenUpdate(visible)
 }
 
-// â”€â”€â”€ Layer visibility definitions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Layer visibility definitions Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 const LAYER_DEFS: { key: string; label: string; icon: string; canToggle: boolean }[] = [
-  { key: 'map',      label: 'Karte',        icon: 'ðŸ—º',  canToggle: false },
-  { key: 'fog',      label: 'Nebel',        icon: 'ðŸŒ«',  canToggle: true  },
-  { key: 'tokens',   label: 'Token',        icon: 'ðŸª™',  canToggle: true  },
-  { key: 'drawings', label: 'Zeichnungen',  icon: 'âœ',   canToggle: true  },
-  { key: 'gmPins',   label: 'GM-Pins',      icon: 'ðŸ“Œ',  canToggle: true  },
-  { key: 'lighting', label: 'Beleuchtung',  icon: 'ðŸ’¡',  canToggle: true  },
-  { key: 'walls',    label: 'WÃ¤nde',        icon: 'ðŸ§±',  canToggle: true  },
-  { key: 'rooms',    label: 'RÃ¤ume',        icon: 'ðŸ ',  canToggle: true  },
+  { key: 'map',      label: 'Karte',        icon: 'Ã°Å¸â€”Âº',  canToggle: false },
+  { key: 'fog',      label: 'Nebel',        icon: 'Ã°Å¸Å’Â«',  canToggle: true  },
+  { key: 'tokens',   label: 'Token',        icon: 'Ã°Å¸Âªâ„¢',  canToggle: true  },
+  { key: 'drawings', label: 'Zeichnungen',  icon: 'Ã¢Å“Â',   canToggle: true  },
+  { key: 'gmPins',   label: 'GM-Pins',      icon: 'Ã°Å¸â€œÅ’',  canToggle: true  },
+  { key: 'lighting', label: 'Beleuchtung',  icon: 'Ã°Å¸â€™Â¡',  canToggle: true  },
+  { key: 'walls',    label: 'WÃƒÂ¤nde',        icon: 'Ã°Å¸Â§Â±',  canToggle: true  },
+  { key: 'rooms',    label: 'RÃƒÂ¤ume',        icon: 'Ã°Å¸ÂÂ ',  canToggle: true  },
 ]
 
 const DEFAULT_LAYER_VISIBILITY: Record<string, boolean> = {
@@ -78,7 +78,7 @@ const DEFAULT_LAYER_VISIBILITY: Record<string, boolean> = {
 /**
  * Delay before ambient canvas HUDs (viewport chip, minimap, layer toggle) fade
  * down. 2.5s felt noisy in testing; 3.5s matches Owlbear Rodeo. Combat HUD and
- * the multi-select bar ignore this â€” they carry action-critical state.
+ * the multi-select bar ignore this Ã¢â‚¬â€ they carry action-critical state.
  */
 const HUD_IDLE_DELAY_MS = 3500
 
@@ -110,7 +110,7 @@ export function CanvasArea() {
   }, [layerPanelOpen])
 
   // Keyboard shortcut: `L` toggles the layer-visibility panel (QW-9).
-  // Gated the same way the other canvas shortcuts are â€” ignored while
+  // Gated the same way the other canvas shortcuts are Ã¢â‚¬â€ ignored while
   // the user is typing in a text field.
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -178,14 +178,14 @@ export function CanvasArea() {
   // Set playerConnected=false when the player window is closed
   useEffect(() => {
     const unsub = window.electronAPI?.onPlayerWindowClosed(() => {
-      useUIStore.getState().setPlayerConnected(false)
+      useSessionStore.getState().setPlayerConnected(false)
     })
     return () => unsub?.()
   }, [])
 
   // Continuous camera sync was removed in favour of Player Control Mode
   // (the dashed blue rectangle on the GM canvas). The DM's own pan / zoom
-  // no longer reaches the player window â€” only the explicit framed view
+  // no longer reaches the player window Ã¢â‚¬â€ only the explicit framed view
   // does. See `usePlayerSync` for the replacement broadcast path.
 
   // Resize observer
@@ -226,10 +226,10 @@ export function CanvasArea() {
     if (e.dataTransfer.files.length > 0) {
       const file = e.dataTransfer.files[0]
       if (!file.type.startsWith('image/')) {
-        // Dropping a PDF / audio / random file used to silently no-op â€”
+        // Dropping a PDF / audio / random file used to silently no-op Ã¢â‚¬â€
         // surface the rejection so users don't think the drop target is
         // broken (QW-11).
-        showToast('Nur Bilddateien kÃ¶nnen hier abgelegt werden', 'info', 4000)
+        showToast('Nur Bilddateien kÃƒÂ¶nnen hier abgelegt werden', 'info', 4000)
         return
       }
       const arrayBuf = await file.arrayBuffer()
@@ -401,14 +401,14 @@ export function CanvasArea() {
         </div>
       ) : !activeMap ? (
         <EmptyState
-          icon="ðŸ—ºï¸"
+          icon="Ã°Å¸â€”ÂºÃ¯Â¸Â"
           title="Keine Karte geladen"
           description={
             <ol style={{ textAlign: 'left', paddingLeft: 20, margin: '8px 0 0', lineHeight: 2, maxWidth: 320 }}>
-              <li>Ã–ffne die <strong>linke Sidebar</strong> (â—§ oben links)</li>
-              <li>Klicke auf <strong>ðŸ–¼ Karte hinzufÃ¼gen</strong> und wÃ¤hle ein Bild</li>
+              <li>Ãƒâ€“ffne die <strong>linke Sidebar</strong> (Ã¢â€”Â§ oben links)</li>
+              <li>Klicke auf <strong>Ã°Å¸â€“Â¼ Karte hinzufÃƒÂ¼gen</strong> und wÃƒÂ¤hle ein Bild</li>
               <li>Passe Raster &amp; Felder in den Karteneinstellungen an</li>
-              <li>Wechsle in den <strong>â–¶ Spiel-Modus</strong> und starte die Session</li>
+              <li>Wechsle in den <strong>Ã¢â€“Â¶ Spiel-Modus</strong> und starte die Session</li>
             </ol>
           }
         />
@@ -514,7 +514,7 @@ export function CanvasArea() {
             />
           )}
 
-          {/* Layer 12: Player Control Mode â€” dashed rectangle that frames
+          {/* Layer 12: Player Control Mode Ã¢â‚¬â€ dashed rectangle that frames
               what the player window renders. Drawn on top of every
               other layer so it's always visible no matter what tool
               the DM has active. Listens to nothing (interactions live
@@ -530,7 +530,7 @@ export function CanvasArea() {
         </Stage>
       )}
 
-      {/* Player Control Mode â€” Ctrl+drag / Ctrl+wheel gestures. Mounted
+      {/* Player Control Mode Ã¢â‚¬â€ Ctrl+drag / Ctrl+wheel gestures. Mounted
           outside the Stage so the window-level listeners keep working
           even when no map is loaded (the PlayerViewportLayer above is
           only rendered when a map exists). */}
@@ -553,10 +553,10 @@ export function CanvasArea() {
       <SubToolStrip />
 
       {/* Compact audio strip (bottom-left); only visible when a channel
-          is loaded. Click the â‹¯ handle to open the full AudioPanel. */}
+          is loaded. Click the Ã¢â€¹Â¯ handle to open the full AudioPanel. */}
       <AudioStrip />
 
-      {/* Weather overlay â€” preview for the DM of what the players see.
+      {/* Weather overlay Ã¢â‚¬â€ preview for the DM of what the players see.
           `activeWeather` is kept in uiStore so it persists across view
           toggles; the actual broadcast to the player window happens in
           OverlayPanel. */}
@@ -600,11 +600,11 @@ export function CanvasArea() {
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
           boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
         }}>
-          ðŸ‘ Spieler-Vorschau â€” Du siehst, was die Spieler sehen
+          Ã°Å¸â€˜Â Spieler-Vorschau Ã¢â‚¬â€ Du siehst, was die Spieler sehen
           <button
             style={{ background: 'rgba(255,255,255,0.2)', border: '1px solid rgba(255,255,255,0.4)', borderRadius: 4, color: '#fff', padding: '2px 10px', cursor: 'pointer', fontSize: 12, marginLeft: 12 }}
             onClick={() => useSessionStore.getState().setWorkMode('play')}
-          >ZurÃ¼ck zum Spiel</button>
+          >ZurÃƒÂ¼ck zum Spiel</button>
         </div>
       )}
 
@@ -634,7 +634,7 @@ export function CanvasArea() {
         <MinimapOverlay stageRef={stageRef} canvasSize={size} />
       )}
 
-      {/* â”€â”€ Layer visibility panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* Ã¢â€â‚¬Ã¢â€â‚¬ Layer visibility panel Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */}
       {activeMap && (
         <div
           ref={layerPanelRef}
@@ -721,7 +721,7 @@ export function CanvasArea() {
                     cursor: 'pointer', width: '100%', textAlign: 'left',
                   }}
                 >
-                  â†º Alle einblenden
+                  Ã¢â€ Âº Alle einblenden
                 </button>
               </div>
             </div>
@@ -747,7 +747,7 @@ export function CanvasArea() {
               boxShadow: '0 2px 8px rgba(0,0,0,0.4)',
             }}
           >
-            <span>â—«</span>
+            <span>Ã¢â€”Â«</span>
             <span>Ebenen</span>
             {/* Dot indicator if any layer is hidden */}
             {Object.entries(layerVisibility).some(([k, v]) => {
@@ -882,8 +882,8 @@ async function loadMapData(mapId: number, map: MapRecord) {
       drawings: playerDrawings,
     })
 
-    if (useUIStore.getState().sessionMode !== 'prep') {
-      useUIStore.getState().setPlayerConnected(true)
+    if (useSessionStore.getState().sessionMode !== 'prep') {
+      useSessionStore.getState().setPlayerConnected(true)
     }
   } catch (err) {
     console.error('[CanvasArea] loadMapData failed:', err)

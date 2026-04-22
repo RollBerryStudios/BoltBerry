@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+﻿import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCampaignStore } from '../stores/campaignStore'
 import { useUIStore } from '../stores/uiStore'
@@ -17,21 +17,21 @@ import {
 import type { MapRecord } from '@shared/ipc-types'
 import type { WorkspaceTab } from '../stores/uiStore'
 
-/* Campaign workspace — shown when a campaign is open but no map is
+/* Campaign workspace â€” shown when a campaign is open but no map is
    active. Uses the dashboard aesthetic (Fraunces titles, dark cards,
-   Bolt-yellow CTA) so that the whole "between sessions" experience —
-   Welcome → Workspace → Map view — shares one visual language. */
+   Bolt-yellow CTA) so that the whole "between sessions" experience â€”
+   Welcome â†’ Workspace â†’ Map view â€” shares one visual language. */
 
 type Tab = WorkspaceTab
 
 const TABS: { id: Tab; icon: string; i18nKey: string }[] = [
-  { id: 'maps',       icon: '🗺️', i18nKey: 'workspace.tabMaps'       },
-  { id: 'characters', icon: '👤', i18nKey: 'workspace.tabCharacters' },
-  { id: 'npcs',       icon: '🧑', i18nKey: 'workspace.tabNpcs'       },
-  { id: 'audio',      icon: '🎵', i18nKey: 'workspace.tabAudio'      },
-  { id: 'sfx',        icon: '🎛', i18nKey: 'workspace.tabSfx'        },
-  { id: 'handouts',   icon: '📄', i18nKey: 'workspace.tabHandouts'   },
-  { id: 'notes',      icon: '📝', i18nKey: 'workspace.tabNotes'      },
+  { id: 'maps',       icon: 'ðŸ—ºï¸', i18nKey: 'workspace.tabMaps'       },
+  { id: 'characters', icon: 'ðŸ‘¤', i18nKey: 'workspace.tabCharacters' },
+  { id: 'npcs',       icon: 'ðŸ§‘', i18nKey: 'workspace.tabNpcs'       },
+  { id: 'audio',      icon: 'ðŸŽµ', i18nKey: 'workspace.tabAudio'      },
+  { id: 'sfx',        icon: 'ðŸŽ›', i18nKey: 'workspace.tabSfx'        },
+  { id: 'handouts',   icon: 'ðŸ“„', i18nKey: 'workspace.tabHandouts'   },
+  { id: 'notes',      icon: 'ðŸ“', i18nKey: 'workspace.tabNotes'      },
 ]
 
 export function CampaignView() {
@@ -82,7 +82,7 @@ export function CampaignView() {
     loadMaps(activeCampaignId)
   }, [activeCampaignId, loadMaps])
 
-  // Command-palette → workspace tab deep-link. Lets a DM open the Bestiarium
+  // Command-palette â†’ workspace tab deep-link. Lets a DM open the Bestiarium
   // via Ctrl+K from anywhere in the campaign.
   useEffect(() => {
     function onOpenTab(e: Event) {
@@ -99,11 +99,11 @@ export function CampaignView() {
     try {
       const asset = await window.electronAPI.importFile('map', activeCampaignId)
       // importFile returns null on user-cancel; treat that as silent.
-      // Any other falsy value means the copy/read failed — toast the
+      // Any other falsy value means the copy/read failed â€” toast the
       // failure so the user doesn't think they mis-clicked.
       if (asset === null) return
       if (!asset || !asset.path) {
-        showToast('Karte konnte nicht importiert werden — Datei konnte nicht kopiert werden', 'error', 6000)
+        showToast('Karte konnte nicht importiert werden â€” Datei konnte nicht kopiert werden', 'error', 6000)
         return
       }
 
@@ -134,7 +134,7 @@ export function CampaignView() {
       <WorkspaceStyles />
       <CampaignDataStyles />
 
-      {/* ── Top bar ───────────────────────────────────────────────── */}
+      {/* â”€â”€ Top bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <header className="bb-ws-topbar" style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}>
         <button
           type="button"
@@ -142,7 +142,7 @@ export function CampaignView() {
           onClick={() => setActiveCampaign(null)}
           style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
         >
-          ◁ {t('workspace.backToCampaigns')}
+          â— {t('workspace.backToCampaigns')}
         </button>
 
         <div className="bb-ws-brand">
@@ -167,7 +167,7 @@ export function CampaignView() {
                 onClick={() => window.electronAPI?.closePlayerWindow()}
                 title={t('workspace.closePlayerWindow')}
               >
-                ✕
+                âœ•
               </button>
             </div>
           )}
@@ -188,7 +188,7 @@ export function CampaignView() {
             title={t('compendium.title')}
             onClick={() => useUIStore.getState().setTopView('compendium')}
           >
-            📚
+            ðŸ“š
           </button>
 
           <div className="bb-ws-lang" role="group" aria-label="Language">
@@ -208,7 +208,7 @@ export function CampaignView() {
         </div>
       </header>
 
-      {/* ── Main scroll area ──────────────────────────────────────── */}
+      {/* â”€â”€ Main scroll area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <main className="bb-ws-main">
         <div className="bb-ws-inner">
           {/* Greeting */}
@@ -217,13 +217,13 @@ export function CampaignView() {
             <h1 className="bb-ws-greeting-title display">{campaign?.name ?? ''}</h1>
             <div className="bb-ws-greeting-meta mono">
               {selfStats?.mapCount ?? 0} {t('dashboard.maps').toLowerCase()}
-              <span className="bb-ws-meta-sep">·</span>
+              <span className="bb-ws-meta-sep">Â·</span>
               {selfStats?.party.length ?? 0} {t('dashboard.characters').toLowerCase()}
-              <span className="bb-ws-meta-sep">·</span>
+              <span className="bb-ws-meta-sep">Â·</span>
               {selfStats?.handoutCount ?? 0} {t('dashboard.handouts').toLowerCase()}
               {typeof selfStats?.sessionCount === 'number' && selfStats.sessionCount > 0 && (
                 <>
-                  <span className="bb-ws-meta-sep">·</span>
+                  <span className="bb-ws-meta-sep">Â·</span>
                   {t('welcome.sessionCount', { count: selfStats.sessionCount })}
                 </>
               )}
@@ -265,7 +265,7 @@ export function CampaignView() {
             ))}
           </div>
 
-          {/* Tab panel — fade-in on switch binds all panels visually. */}
+          {/* Tab panel â€” fade-in on switch binds all panels visually. */}
           <div className="bb-ws-panel" key={tab}>
             {tab === 'maps' && (
               <>
@@ -331,7 +331,7 @@ export function CampaignView() {
   )
 }
 
-// ─── Hero (most-recent map card) ──────────────────────────────────────
+// â”€â”€â”€ Hero (most-recent map card) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function HeroMap({
   map,
@@ -404,7 +404,7 @@ function HeroEmpty({
 }) {
   return (
     <section className="bb-ws-hero-empty">
-      <div className="bb-ws-hero-empty-icon">🗺️</div>
+      <div className="bb-ws-hero-empty-icon">ðŸ—ºï¸</div>
       <h2 className="bb-ws-hero-empty-title display">{title}</h2>
       <p className="bb-ws-hero-empty-sub">{sub}</p>
       <button type="button" className="bb-ws-cta bb-ws-cta-lg" onClick={onImport} disabled={importing}>
@@ -417,7 +417,7 @@ function HeroEmpty({
   )
 }
 
-// ─── Play button (loading / play / import-first) ─────────────────────
+// â”€â”€â”€ Play button (loading / play / import-first) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function PlayButton({
   loading,
@@ -439,7 +439,7 @@ function PlayButton({
   if (loading) {
     return (
       <button type="button" className="bb-ws-cta" disabled>
-        <span>…</span>
+        <span>â€¦</span>
         {labelLoading}
       </button>
     )
@@ -462,15 +462,15 @@ function PlayButton({
   )
 }
 
-// ─── Scoped styles ────────────────────────────────────────────────────
+// â”€â”€â”€ Scoped styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-// ─── Panel header ────────────────────────────────────────────────────
+// â”€â”€â”€ Panel header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Dashboard-style framing for panels that lack their own sub-navigation
-// (Characters, Handouts, Audio). Notes + Library skip it — they already
+// (Characters, Handouts, Audio). Notes + Library skip it â€” they already
 // have category/tab strips at the top, so adding another header on top
 // would be visual noise.
 
-// ─── Karten-Tab ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Karten-Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Dedicated CampaignView tab for full multi-map management (list + add +
 // open + rename + reorder + delete). The game-view LeftSidebar still has
 // its own compact map list for in-session context; this panel is the
@@ -533,7 +533,7 @@ function MapsPanel({ onImport, importing, onOpen }: {
   if (activeMaps.length === 0) {
     return (
       <div className="bb-ws-maps-empty">
-        <div className="bb-ws-maps-empty-glyph">🗺</div>
+        <div className="bb-ws-maps-empty-glyph">ðŸ—º</div>
         <div className="bb-ws-maps-empty-title">{t('workspace.noMapsTitle')}</div>
         <div className="bb-ws-maps-empty-sub">{t('workspace.noMapsSub')}</div>
         <button
@@ -542,7 +542,7 @@ function MapsPanel({ onImport, importing, onOpen }: {
           onClick={onImport}
           disabled={importing}
         >
-          {importing ? '…' : t('workspace.importFirstMap')}
+          {importing ? 'â€¦' : t('workspace.importFirstMap')}
         </button>
       </div>
     )
@@ -569,8 +569,8 @@ function MapsPanel({ onImport, importing, onOpen }: {
         disabled={importing}
         title={t('workspace.importFirstMap')}
       >
-        <div className="bb-ws-maps-add-icon">＋</div>
-        <div className="bb-ws-maps-add-label">{importing ? '…' : t('workspace.addMap')}</div>
+        <div className="bb-ws-maps-add-icon">ï¼‹</div>
+        <div className="bb-ws-maps-add-label">{importing ? 'â€¦' : t('workspace.addMap')}</div>
       </button>
     </div>
   )
@@ -631,7 +631,7 @@ function MapCard({ map, index, total, onOpen, onRename, onDelete, onReorder }: {
         <div className="bb-ws-map-card-meta mono">
           {map.gridType === 'none'
             ? t('canvas.hud.noGrid')
-            : `${map.gridSize}px · ${map.ftPerUnit}ft`}
+            : `${map.gridSize}px Â· ${map.ftPerUnit}ft`}
         </div>
         <div className="bb-ws-map-card-actions">
           <button
@@ -640,20 +640,20 @@ function MapCard({ map, index, total, onOpen, onRename, onDelete, onReorder }: {
             onClick={() => onReorder('up')}
             disabled={index === 0}
             title={t('workspace.mapMoveUp')}
-          >↑</button>
+          >â†‘</button>
           <button
             type="button"
             className="bb-ws-map-card-btn"
             onClick={() => onReorder('down')}
             disabled={index >= total - 1}
             title={t('workspace.mapMoveDown')}
-          >↓</button>
+          >â†“</button>
           <button
             type="button"
             className="bb-ws-map-card-btn bb-ws-map-card-btn-danger"
             onClick={onDelete}
             title={t('workspace.mapDelete')}
-          >🗑</button>
+          >ðŸ—‘</button>
         </div>
       </div>
     </div>
@@ -684,7 +684,7 @@ function WorkspaceStyles() {
       }
       .bb-ws .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
-      /* ── Top bar ──────────────────────────────────────────── */
+      /* â”€â”€ Top bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
       .bb-ws-topbar {
         display: flex; align-items: center; gap: var(--sp-4);
         height: 56px;
@@ -694,7 +694,7 @@ function WorkspaceStyles() {
            the same --titlebar-controls-w variable as DmTitleBar / Wiki
            / Compendium top bars so every reserved gutter scales in
            lockstep on high-DPI displays. On macOS the traffic lights
-           sit on the left — the extra padding there is harmless. */
+           sit on the left â€” the extra padding there is harmless. */
         padding-top: 0;
         padding-bottom: 0;
         padding-left: var(--sp-6);
@@ -829,7 +829,7 @@ function WorkspaceStyles() {
         color: var(--accent);
       }
 
-      /* ── Main scroll area ─────────────────────────────────── */
+      /* â”€â”€ Main scroll area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
       .bb-ws-main {
         flex: 1; min-height: 0;
         overflow-y: auto;
@@ -935,7 +935,7 @@ function WorkspaceStyles() {
         margin: 0 0 var(--sp-5);
       }
 
-      /* Tab strip — dashboard-style pills */
+      /* Tab strip â€” dashboard-style pills */
       .bb-ws-tabs {
         display: flex; gap: 2px;
         padding: 4px;
@@ -1025,7 +1025,7 @@ function WorkspaceStyles() {
       .bb-ws-panel-handouts > *,
       .bb-ws-panel-audio > * { flex: 1; min-height: 0; }
 
-      /* ── Karten-Tab grid ─────────────────────────────────────── */
+      /* â”€â”€ Karten-Tab grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
       .bb-ws-panel-maps {
         display: flex;
         flex-direction: column;
