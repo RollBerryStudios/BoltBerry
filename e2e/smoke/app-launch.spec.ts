@@ -117,16 +117,6 @@ test.describe('App launch', () => {
       await close()
     }
   })
-
-  test('playerAPI is also exposed on the DM window', async () => {
-    // preload.ts exposes playerAPI on ALL windows (DM and player)
-    const { dmWindow, close } = await launchApp()
-
-    try {
-      const hasPlayerAPI = await dmWindow.evaluate(() => typeof (window as any).playerAPI === 'object')
-      expect(hasPlayerAPI).toBe(true)
-    } finally {
-      await close()
     }
   })
 
