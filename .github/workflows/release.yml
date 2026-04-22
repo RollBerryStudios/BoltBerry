@@ -111,10 +111,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Increase file descriptor limit
-        run: |
-          ulimit -n 65536
-          npx electron-builder --mac dmg zip --x64 --arm64 --publish never
+      - name: Package · macOS (dmg + zip)
+        run: npx electron-builder --mac dmg zip --x64 --arm64 --publish never
         env:
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}

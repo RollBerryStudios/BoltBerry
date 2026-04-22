@@ -80,7 +80,11 @@ mac:
   category: public.app-category.entertainment
   hardenedRuntime: true
   gatekeeperAssess: false
-  notarize: true
+  # Skip code signing on CI — no valid Developer ID identity is present,
+  # and ad-hoc signing hits EMFILE with ~13k token webps. Codesigning
+  # is done locally before distribution.
+  identity: null
+  notarize: false
   entitlements: build/entitlements.mac.plist
   entitlementsInherit: build/entitlements.mac.plist
 
