@@ -1,6 +1,10 @@
 import { create } from 'zustand'
 import i18n from '../i18n'
 import type { WeatherType } from '@shared/ipc-types'
+// AP-3 split — these will become the canonical stores. Re-exported below
+// so consumer files can migrate incrementally without 250+ file churn.
+import { useToolStore } from './toolStore'
+import { useSessionStore } from './sessionStore'
 
 // Fire a sessions row insert / close based on the mode flip. Reads the
 // active campaign from the store lazily via a dynamic import to avoid a
@@ -377,3 +381,19 @@ export const useUIStore = create<UIState>((set) => ({
     offsetY: number
   }>) => set({ clipboardTokens: tokens }),
 }))
+
+/* ── AP-3 backward-compat aliases ───────────────────────────────────────────────
+ * These fields will eventually move out of uiStore entirely.  For now we
+ * keep shallow getters/setters that delegate to the canonical stores so
+ * existing call sites (≈250+) don't break.  Removing a field before its
+ * consumers are migrated would cause silent runtime undefineds — this
+ * bridge lets us migrate incrementally.
+ * ─────────────────────────────────────────────────────────────────────────────*/
+
+// Tool state (useToolStore)
+/** @deprecated Use `useToolStore` directly. Kept for backward compat. */
+export { useToolStore }
+
+// Session state (useSessionStore)
+/** @deprecated Use `useSessionStore` directly. Kept for backward compat. */
+export { useSessionStore }
