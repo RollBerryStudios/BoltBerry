@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { showToast } from '../components/shared/Toast'
 
 /**
  * Undo commands come in two shapes.
@@ -104,11 +105,16 @@ export const useUndoStore = create<UndoState>((set, get) => ({
   redoStack: [],
   activeMapId: null,
 
-  pushCommand: (cmd) =>
+  pushCommand: (cmd) => {
+    const wasFull = get().undoStack.length >= 50
     set((s) => ({
       undoStack: [...s.undoStack.slice(-49), cmd],
       redoStack: [],
-    })),
+    }))
+    if (wasFull) {
+      showToast('Rückgängig-Stapel voll — älteste Aktionen wurden überschrieben', 'warning')
+    }
+  },
 
   undo: async () => {
     const { undoStack } = get()
