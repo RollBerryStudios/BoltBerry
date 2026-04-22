@@ -241,7 +241,7 @@ export function Toolbar() {
     <div className="toolbar">
 
       {/* ── SECTION: Navigation ─────────────────────────────────────────── */}
-      <button className="tool-btn" title={t('toolbar.leftSidebar')} onClick={toggleLeftSidebar}>◧</button>
+      <button className="tool-btn" title={t('toolbar.leftSidebar')} aria-label={t('toolbar.leftSidebar')} onClick={toggleLeftSidebar}>◧</button>
 
       {/* Breadcrumb + broadcast pill now live in the frameless title bar
           (src/renderer/components/DmTitleBar.tsx). Only the back-to-
@@ -251,6 +251,7 @@ export function Toolbar() {
         <button
           className="tool-btn"
           title={t('toolbar.backToCampaign')}
+          aria-label={t('toolbar.backToCampaign')}
           onClick={handleLeaveMap}
           style={{ color: 'var(--text-secondary)' }}
         >
@@ -351,6 +352,7 @@ export function Toolbar() {
       <button
         className={clsx('tool-btn', showPlayerEye && 'active')}
         title={showPlayerEye ? 'Spieler-Sicht ausblenden [E]' : 'Spieler-Sicht anzeigen [E]'}
+        aria-label={showPlayerEye ? 'Spieler-Sicht ausblenden' : 'Spieler-Sicht anzeigen'}
         onClick={togglePlayerEye}
         style={showPlayerEye ? { color: 'var(--success)' } : undefined}
       >
@@ -408,6 +410,7 @@ export function Toolbar() {
       <button
         className="tool-btn"
         title={t('compendium.title')}
+        aria-label={t('compendium.title')}
         onClick={() => useUIStore.getState().setTopView('compendium')}
       >
         📚
@@ -458,6 +461,7 @@ export function Toolbar() {
       <button
         className={clsx('tool-btn', blackoutActive && 'active')}
         title={`${t('toolbar.blackout')} (Ctrl+B)`}
+        aria-label={t('toolbar.blackout')}
         onClick={toggleBlackout}
         style={blackoutActive ? { color: 'var(--warning)' } : undefined}
       >
@@ -470,6 +474,7 @@ export function Toolbar() {
       <button
         className="tool-btn"
         title={canUndo ? `Rückgängig: ${lastUndoLabel} (Ctrl+Z)` : 'Nichts rückgängig zu machen'}
+        aria-label="Rückgängig"
         disabled={!canUndo}
         onClick={() => undo()}
         style={!canUndo ? { opacity: 0.35 } : undefined}
@@ -479,6 +484,7 @@ export function Toolbar() {
       <button
         className="tool-btn"
         title={canRedo ? `Wiederholen: ${lastRedoLabel} (Ctrl+Y)` : 'Nichts zu wiederholen'}
+        aria-label="Wiederholen"
         disabled={!canRedo}
         onClick={() => redo()}
         style={!canRedo ? { opacity: 0.35 } : undefined}
@@ -495,11 +501,12 @@ export function Toolbar() {
       >
         {zoomPercent}%
       </div>
-      <button className="tool-btn" title="Ansicht einpassen (0)" onClick={() => useMapTransformStore.getState().fitToScreen()}>⊡</button>
-      <button className={clsx('tool-btn', showMinimap && 'active')} title="Minimap" onClick={toggleMinimap}>🗺</button>
+      <button className="tool-btn" title="Ansicht einpassen (0)" aria-label="Ansicht einpassen" onClick={() => useMapTransformStore.getState().fitToScreen()}>⊡</button>
+      <button className={clsx('tool-btn', showMinimap && 'active')} title="Minimap" aria-label="Minimap" onClick={toggleMinimap}>🗺</button>
       <button
         className={clsx('tool-btn', gridSnap && 'active')}
         title={gridSnap ? 'Raster-Snap AN' : 'Raster-Snap AUS'}
+        aria-label={gridSnap ? 'Raster-Snap AN' : 'Raster-Snap AUS'}
         onClick={toggleGridSnap}
       >
         ⊞
@@ -524,6 +531,7 @@ export function Toolbar() {
       <button
         className="tool-btn"
         title={t('toolbar.shortcuts')}
+        aria-label={t('toolbar.shortcuts')}
         onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: '?' }))}
       >
         ?
@@ -532,6 +540,7 @@ export function Toolbar() {
       <button
         className="tool-btn"
         title={t('toolbar.switchLanguage')}
+        aria-label={t('toolbar.switchLanguage')}
         onClick={toggleLanguage}
         style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.02em' }}
       >
@@ -541,12 +550,13 @@ export function Toolbar() {
       <button
         className="tool-btn"
         title={theme === 'dark' ? t('toolbar.themeDark') : t('toolbar.themeLight')}
+        aria-label={theme === 'dark' ? t('toolbar.themeDark') : t('toolbar.themeLight')}
         onClick={toggleTheme}
       >
         {theme === 'dark' ? '☀' : '🌙'}
       </button>
 
-      <button className="tool-btn" title={t('toolbar.rightSidebar')} onClick={toggleRightSidebar}>◨</button>
+      <button className="tool-btn" title={t('toolbar.rightSidebar')} aria-label={t('toolbar.rightSidebar')} onClick={toggleRightSidebar}>◨</button>
 
       {showMonitorDialog && (
         <MonitorDialog onClose={() => setShowMonitorDialog(false)} />
