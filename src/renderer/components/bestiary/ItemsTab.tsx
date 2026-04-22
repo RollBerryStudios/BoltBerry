@@ -6,6 +6,7 @@ import { localized, pickName, titleCase } from './util'
 import { EmptyDetail } from './MonstersTab'
 import { itemHandout } from './actions'
 import { useUIStore } from '../../stores/uiStore'
+import { useSessionStore } from '../../stores/sessionStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { showToast } from '../shared/Toast'
 import { WikiEntryControls } from './WikiEntryControls'
@@ -29,23 +30,23 @@ const RARITY_COLOR: Record<string, string> = {
 // Keyed by the `category.en` values actually present in the dataset
 // (grep'd from resources/data/items/**/item.json). Keep the synonyms
 // (WONDROUS_ITEM etc.) so future data imports using a slightly different
-// shape still get a sensible glyph instead of the generic 📦 fallback.
+// shape still get a sensible glyph instead of the generic ðŸ“¦ fallback.
 const CATEGORY_ICON: Record<string, string> = {
-  WEAPON: '⚔️',
-  ARMOR: '🛡️',
-  POTIONS_OILS: '🧪',
-  POTION: '🧪',
-  RING: '💍',
-  ROD: '🪄',
-  STAFF: '🪄',
-  WAND: '🪄',
-  WONDROUS_ITEMS: '✨',
-  WONDROUS_ITEM: '✨',
-  SCROLL: '📜',
-  ADVENTURING_GEAR: '🎒',
-  TOOLS: '🔧',
-  AMMUNITION: '🏹',
-  OTHER: '📦',
+  WEAPON: 'âš”ï¸',
+  ARMOR: 'ðŸ›¡ï¸',
+  POTIONS_OILS: 'ðŸ§ª',
+  POTION: 'ðŸ§ª',
+  RING: 'ðŸ’',
+  ROD: 'ðŸª„',
+  STAFF: 'ðŸª„',
+  WAND: 'ðŸª„',
+  WONDROUS_ITEMS: 'âœ¨',
+  WONDROUS_ITEM: 'âœ¨',
+  SCROLL: 'ðŸ“œ',
+  ADVENTURING_GEAR: 'ðŸŽ’',
+  TOOLS: 'ðŸ”§',
+  AMMUNITION: 'ðŸ¹',
+  OTHER: 'ðŸ“¦',
 }
 
 export function ItemsTab({
@@ -114,7 +115,7 @@ export function ItemsTab({
           || it.category.en.toLowerCase().includes(q)
       })
       // Default alphabetical sort per locale. Rarity remains a filter
-      // chip up top but no longer the primary sort axis — DMs scan for
+      // chip up top but no longer the primary sort axis â€” DMs scan for
       // items by name more often than by rarity tier.
       .sort((a, b) => pickName(a, language).localeCompare(pickName(b, language), language))
   }, [index, query, language, categoryFilter, rarityFilter, sourceFilter])
@@ -134,8 +135,8 @@ export function ItemsTab({
 
   const handleSelect = useCallback((slug: string) => setSelectedSlug(slug), [])
 
-  if (error) return <div className="bb-best-error">⚠️ {error}</div>
-  if (!index) return <div className="bb-best-loading">…</div>
+  if (error) return <div className="bb-best-error">âš ï¸ {error}</div>
+  if (!index) return <div className="bb-best-loading">â€¦</div>
 
   return (
     <div className="bb-best-layout">
@@ -173,7 +174,7 @@ export function ItemsTab({
               className="bb-best-filter-clear"
               onClick={() => { setCategoryFilter(''); setRarityFilter(''); setSourceFilter('') }}
             >
-              ✕ {t('bestiary.clearFilters')}
+              âœ• {t('bestiary.clearFilters')}
             </button>
           )}
         </div>
@@ -223,18 +224,18 @@ export function ItemsTab({
                   style={{ borderLeftColor: tint }}
                 >
                   <span className="bb-best-list-chip" style={{ color: tint }}>
-                    {CATEGORY_ICON[it.category.en] ?? '📦'}
+                    {CATEGORY_ICON[it.category.en] ?? 'ðŸ“¦'}
                   </span>
                   <span className="bb-best-list-body">
                     <span className="bb-best-list-name display">
                       {name}
                       {it.userOwned && (
-                        <span className="bb-best-user-badge" title={t('library.sourceUser')}>★</span>
+                        <span className="bb-best-user-badge" title={t('library.sourceUser')}>â˜…</span>
                       )}
                     </span>
                     <span className="bb-best-list-meta">
                       {localized(it.category, language)}
-                      {' · '}
+                      {' Â· '}
                       <span style={{ color: tint }}>{localized(it.rarity, language)}</span>
                     </span>
                   </span>
@@ -298,11 +299,11 @@ function ItemDetail({ slug, language, onUserEntryChanged }: {
     return () => { alive = false }
   }, [slug])
 
-  if (!record) return <div className="bb-best-loading">…</div>
+  if (!record) return <div className="bb-best-loading">â€¦</div>
 
   const name = pickName(record, language)
   const tint = RARITY_COLOR[record.rarity.en] ?? '#94a3b8'
-  const icon = CATEGORY_ICON[record.category.en] ?? '📦'
+  const icon = CATEGORY_ICON[record.category.en] ?? 'ðŸ“¦'
   const description = localized(record.description, language)
   // Dataset quirk: `properties` is usually an L10n string ("versatile
   // (1d10)") but could in principle be an L10nArray for future imports.
@@ -320,7 +321,7 @@ function ItemDetail({ slug, language, onUserEntryChanged }: {
           <h2 className="bb-best-hero-name display">{name}</h2>
           <div className="bb-best-hero-sub">
             <span>{localized(record.category, language)}</span>
-            <span className="bb-best-hero-dot">·</span>
+            <span className="bb-best-hero-dot">Â·</span>
             <span style={{ color: tint }}>{localized(record.rarity, language)}</span>
           </div>
           <div className="bb-best-hero-chips">
@@ -359,7 +360,7 @@ function ItemDetail({ slug, language, onUserEntryChanged }: {
 
       <footer className="bb-best-footer">
         <span className="mono">{record.slug}</span>
-        <span className="bb-best-footer-dot">·</span>
+        <span className="bb-best-footer-dot">Â·</span>
         <span>{record.licenseSource}</span>
       </footer>
     </article>
@@ -383,14 +384,14 @@ function ItemActions({
   language: AppLanguage
 }) {
   const { t } = useTranslation()
-  const playerConnected = useUIStore((s) => s.playerConnected)
+  const playerConnected = useSessionStore((s) => s.playerConnected)
   const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
   function handleSend() {
     window.electronAPI?.sendHandout(itemHandout(record, language))
     showToast(t('bestiary.sentToPlayer'), 'success')
   }
   // "An Spieler senden" only exists as a concept once a campaign is
-  // loaded — without one, the Wiki is pure reference and the button
+  // loaded â€” without one, the Wiki is pure reference and the button
   // would just sit disabled. Hide it entirely in that mode to match
   // the MonsterDetail behaviour.
   if (!activeCampaignId) return null
@@ -403,7 +404,7 @@ function ItemActions({
         disabled={!playerConnected}
         title={playerConnected ? t('bestiary.sendToPlayer') : t('bestiary.sendDisabled')}
       >
-        📡 {t('bestiary.sendToPlayer')}
+        ðŸ“¡ {t('bestiary.sendToPlayer')}
       </button>
     </div>
   )

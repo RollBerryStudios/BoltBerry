@@ -111,8 +111,12 @@ export const useUndoStore = create<UndoState>((set, get) => ({
       undoStack: [...s.undoStack.slice(-49), cmd],
       redoStack: [],
     }))
-    if (wasFull) {
+let warnedFull = false
+
+    if (wasFull && !warnedFull) {
+      warnedFull = true
       showToast('Rückgängig-Stapel voll — älteste Aktionen wurden überschrieben', 'warning')
+      setTimeout(() => { warnedFull = false }, 5000)
     }
   },
 

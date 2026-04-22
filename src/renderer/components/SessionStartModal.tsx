@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { ReactNode } from 'react'
 import { useUIStore } from '../stores/uiStore'
+import { useSessionStore } from '../stores/sessionStore'
 import { useTokenStore } from '../stores/tokenStore'
 import { useCampaignStore } from '../stores/campaignStore'
 
@@ -11,7 +12,7 @@ interface SessionStartModalProps {
 }
 
 export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: SessionStartModalProps) {
-  const playerConnected = useUIStore((s) => s.playerConnected)
+  const playerConnected = useSessionStore((s) => s.playerConnected)
   const tokens = useTokenStore((s) => s.tokens)
   const { activeMaps, activeMapId } = useCampaignStore()
   const [confirmWarning, setConfirmWarning] = useState<string | null>(null)
@@ -21,9 +22,9 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
 
   function handleGoLive() {
     if (!playerConnected) {
-      setConfirmWarning('Das Spielerfenster ist nicht geöffnet. Trotzdem live gehen?')
+      setConfirmWarning('Das Spielerfenster ist nicht geÃ¶ffnet. Trotzdem live gehen?')
     } else if (visibleTokenCount === 0) {
-      setConfirmWarning('Keine Token sind für Spieler sichtbar. Trotzdem live gehen?')
+      setConfirmWarning('Keine Token sind fÃ¼r Spieler sichtbar. Trotzdem live gehen?')
     } else {
       onConfirm()
     }
@@ -51,22 +52,22 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
           Session starten
         </h2>
         <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 'var(--sp-5)' }}>
-          Ab jetzt werden alle Änderungen live an die Spieler gesendet.
+          Ab jetzt werden alle Ã„nderungen live an die Spieler gesendet.
         </p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)', marginBottom: 'var(--sp-5)' }}>
           {/* Player window */}
           <CheckRow
             ok={playerConnected}
-            icon="🖥"
-            label={playerConnected ? 'Spielerfenster verbunden' : 'Spielerfenster nicht geöffnet'}
+            icon="ðŸ–¥"
+            label={playerConnected ? 'Spielerfenster verbunden' : 'Spielerfenster nicht geÃ¶ffnet'}
             action={!playerConnected ? (
               <button
                 className="btn btn-ghost"
                 style={{ fontSize: 'var(--text-xs)', padding: '2px 8px' }}
                 onClick={onOpenPlayerWindow}
               >
-                Öffnen
+                Ã–ffnen
               </button>
             ) : undefined}
           />
@@ -74,7 +75,7 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
           {/* Active map */}
           <CheckRow
             ok={!!activeMap}
-            icon="🗺"
+            icon="ðŸ—º"
             label={activeMap ? `Karte: ${activeMap.name}` : 'Keine Karte geladen'}
           />
 
@@ -82,10 +83,10 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
           <CheckRow
             ok={visibleTokenCount > 0}
             warn={visibleTokenCount === 0}
-            icon="⬤"
+            icon="â¬¤"
             label={visibleTokenCount > 0
-              ? `${visibleTokenCount} Token für Spieler sichtbar`
-              : 'Keine Token für Spieler sichtbar'}
+              ? `${visibleTokenCount} Token fÃ¼r Spieler sichtbar`
+              : 'Keine Token fÃ¼r Spieler sichtbar'}
           />
         </div>
 
@@ -113,7 +114,7 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
                 style={{ fontSize: 'var(--text-xs)', background: 'rgba(34,197,94,0.2)', color: '#22c55e', borderColor: 'rgba(34,197,94,0.4)' }}
                 onClick={() => { setConfirmWarning(null); onConfirm() }}
               >
-                ▶ Trotzdem fortfahren
+                â–¶ Trotzdem fortfahren
               </button>
             </div>
           </div>
@@ -128,7 +129,7 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
             style={{ background: 'rgba(34,197,94,0.2)', color: '#22c55e', borderColor: 'rgba(34,197,94,0.4)' }}
             onClick={handleGoLive}
           >
-            ▶ Jetzt live gehen
+            â–¶ Jetzt live gehen
           </button>
         </div>
       </div>
@@ -146,7 +147,7 @@ function CheckRow({
   action?: ReactNode
 }) {
   const color = ok ? 'var(--success)' : warn ? 'var(--warning)' : 'var(--text-muted)'
-  const statusIcon = ok ? '✓' : warn ? '!' : '○'
+  const statusIcon = ok ? 'âœ“' : warn ? '!' : 'â—‹'
 
   return (
     <div style={{

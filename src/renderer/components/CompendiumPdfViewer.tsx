@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useUIStore } from '../stores/uiStore'
+import { useSessionStore } from '../stores/sessionStore'
 import type { CompendiumFile } from '@shared/ipc-types'
 
 /* PDF viewer for the Compendium. Loads a single PDF via the
@@ -61,9 +62,9 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
   const [searchQuery, setSearchQuery] = useState('')
   const [searchState, setSearchState] = useState<SearchState>({ phase: 'idle' })
 
-  // Send-to-player toast — acknowledges the page broadcast succeeded.
+  // Send-to-player toast â€” acknowledges the page broadcast succeeded.
   const [sentTick, setSentTick] = useState(0)
-  const playerConnected = useUIStore((s) => s.playerConnected)
+  const playerConnected = useSessionStore((s) => s.playerConnected)
 
   // Broadcast state: once the DM sends a page to the player window we enter
   // "broadcasting" mode. Page / zoom changes then auto re-render + re-send
@@ -169,7 +170,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
         renderTaskRef.current = task
         await task.promise
       } catch (err) {
-        // pdfjs throws a RenderingCancelledException on cancel — ignore that.
+        // pdfjs throws a RenderingCancelledException on cancel â€” ignore that.
         const name = (err as { name?: string }).name
         if (!cancelled && name !== 'RenderingCancelledException') {
           setError((err as Error).message || String(err))
@@ -251,7 +252,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
   // Lazy-build the index the first time the user opens search. Re-opening is
   // cheap: the ref is preserved across opens until the doc changes. A local
   // `cancelled` flag guards against state updates firing after the component
-  // unmounts or the user switches PDFs mid-index — without it the last
+  // unmounts or the user switches PDFs mid-index â€” without it the last
   // `setSearchState({ phase: 'ready' })` would leak against a stale doc.
   useEffect(() => {
     if (!searchOpen || !loaded) return
@@ -277,7 +278,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
         if (idx === -1) break
         const start = Math.max(0, idx - 30)
         const end = Math.min(text.length, idx + q.length + 60)
-        const snippet = (start > 0 ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : '')
+        const snippet = (start > 0 ? 'â€¦' : '') + text.slice(start, end) + (end < text.length ? 'â€¦' : '')
         hits.push({ page, snippet, offset: idx })
         from = idx + q.length
         if (hits.length >= 200) break outer
@@ -304,7 +305,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
       await page.render({ canvasContext: ctx, viewport }).promise
       const dataUrl = canvas.toDataURL('image/png')
       window.electronAPI.sendHandout({
-        title: `${file.name} · ${t('compendium.pageShort')} ${pageNum}`,
+        title: `${file.name} Â· ${t('compendium.pageShort')} ${pageNum}`,
         imagePath: dataUrl,
         textContent: null,
       })
@@ -350,7 +351,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
   if (loading || !loaded) {
     return (
       <div className="bb-pdf-loading">
-        {error ? `⚠️ ${error}` : `${t('compendium.loading')}\u2026`}
+        {error ? `âš ï¸ ${error}` : `${t('compendium.loading')}\u2026`}
       </div>
     )
   }
@@ -421,7 +422,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
           <canvas ref={canvasRef} className="bb-pdf-canvas" />
           {sentTick > 0 && (
             <div className="bb-pdf-sent-toast">
-              ✓ {t('compendium.sentToPlayer')}
+              âœ“ {t('compendium.sentToPlayer')}
             </div>
           )}
         </div>
@@ -432,7 +433,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
   )
 }
 
-// ─── Search bar + result list ────────────────────────────────────────
+// â”€â”€â”€ Search bar + result list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function SearchBar({
   query,
@@ -473,7 +474,7 @@ function SearchBar({
             state.phase === 'ready' ? t('compendium.ready') : ''}
         </span>
         <button type="button" className="bb-pdf-btn" onClick={onClose} title={t('compendium.closeSearch')}>
-          ✕
+          âœ•
         </button>
       </div>
       {state.phase === 'ready' && trimmed.length >= 2 && (
@@ -513,7 +514,7 @@ function SearchBar({
   )
 }
 
-// ─── Toolbar ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Toolbar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function PdfToolbar({
   pageNum,
@@ -571,7 +572,7 @@ function PdfToolbar({
           disabled={!hasOutline}
           title={hasOutline ? t('compendium.toggleToc') : t('compendium.noOutline')}
         >
-          ☰
+          â˜°
         </button>
         <button
           type="button"
@@ -579,13 +580,13 @@ function PdfToolbar({
           onClick={() => onSidebarMode(sidebarMode === 'thumbs' ? 'off' : 'thumbs')}
           title={t('compendium.toggleThumbs')}
         >
-          ▤
+          â–¤
         </button>
       </div>
 
       <div className="bb-pdf-group">
         <button type="button" className="bb-pdf-btn" onClick={onPrev} disabled={pageNum <= 1} title={t('compendium.prevPage')}>
-          ◀
+          â—€
         </button>
         <form
           onSubmit={(e) => {
@@ -609,13 +610,13 @@ function PdfToolbar({
           <span className="bb-pdf-page-of mono">/ {numPages}</span>
         </form>
         <button type="button" className="bb-pdf-btn" onClick={onNext} disabled={pageNum >= numPages} title={t('compendium.nextPage')}>
-          ▶
+          â–¶
         </button>
       </div>
 
       <div className="bb-pdf-group">
         <button type="button" className="bb-pdf-btn" onClick={onZoomOut} disabled={zoom <= 0.4} title={t('compendium.zoomOut')}>
-          −
+          âˆ’
         </button>
         <button type="button" className="bb-pdf-btn bb-pdf-btn-text mono" onClick={onZoomReset} title={t('compendium.zoomReset')}>
           {Math.round(zoom * 100)}%
@@ -632,7 +633,7 @@ function PdfToolbar({
           onClick={onToggleSearch}
           title={t('compendium.search') + ' (Ctrl+F)'}
         >
-          🔎
+          ðŸ”Ž
         </button>
         <button
           type="button"
@@ -645,7 +646,7 @@ function PdfToolbar({
             : t('compendium.sendToPlayer')
           }
         >
-          {broadcasting ? '🔄' : '↗'} {t('compendium.sendShort')}
+          {broadcasting ? 'ðŸ”„' : 'â†—'} {t('compendium.sendShort')}
         </button>
         {broadcasting && (
           <button
@@ -654,7 +655,7 @@ function PdfToolbar({
             onClick={onStopBroadcast}
             title={t('compendium.stopBroadcast')}
           >
-            ⏹ {t('compendium.stopShort')}
+            â¹ {t('compendium.stopShort')}
           </button>
         )}
       </div>
@@ -662,13 +663,13 @@ function PdfToolbar({
   )
 }
 
-// ─── Styles ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-// ─── Outline extraction ──────────────────────────────────────────────
+// â”€â”€â”€ Outline extraction â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // pdfjs-dist returns bookmarks as a tree of OutlineNode objects whose
 // `dest` needs to be resolved to a 1-based page number via getPageIndex.
 // A null result means the destination couldn't be resolved (e.g. external
-// links, encrypted refs) — we keep the title but disable the click.
+// links, encrypted refs) â€” we keep the title but disable the click.
 
 interface PdfOutlineItem {
   title: string
@@ -697,7 +698,7 @@ async function extractOutline(doc: unknown): Promise<OutlineEntry[]> {
           if (Number.isFinite(idx)) page = idx + 1
         }
       } catch {
-        /* unresolvable — leave page null */
+        /* unresolvable â€” leave page null */
       }
       const children = it.items && it.items.length > 0 ? await resolve(it.items) : []
       out.push({ title: it.title, page, children })
@@ -707,7 +708,7 @@ async function extractOutline(doc: unknown): Promise<OutlineEntry[]> {
   return resolve(raw)
 }
 
-// ─── TOC sidebar ─────────────────────────────────────────────────────
+// â”€â”€â”€ TOC sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function OutlineTree({
   entries,
@@ -761,7 +762,7 @@ function OutlineTree({
   )
 }
 
-// ─── Thumbnail sidebar ───────────────────────────────────────────────
+// â”€â”€â”€ Thumbnail sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function ThumbnailList({
   doc,
@@ -774,7 +775,7 @@ function ThumbnailList({
   currentPage: number
   onJump: (page: number) => void
 }) {
-  // Pre-allocate a flat array — each Thumb only renders its canvas when
+  // Pre-allocate a flat array â€” each Thumb only renders its canvas when
   // scrolled into view via IntersectionObserver. Keeps memory low on
   // long PDFs (300+ pages).
   const pages = useMemo(() => Array.from({ length: numPages }, (_, i) => i + 1), [numPages])
@@ -965,7 +966,7 @@ function PdfViewerStyles() {
         background: var(--bg-base);
         /* display: block + margin auto centers the canvas when it's
            narrower than the viewport, but stops clipping the left edge
-           when the page is wider — flex + justify-content: center
+           when the page is wider â€” flex + justify-content: center
            anchors overflow off-screen and the user can't scroll back. */
         text-align: center;
       }
@@ -1019,7 +1020,7 @@ function PdfViewerStyles() {
         color: var(--danger);
       }
 
-      /* ── Search bar ─────────────────────────────────────────── */
+      /* â”€â”€ Search bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
       .bb-pdf-search {
         background: var(--bg-elevated);
         border-bottom: 1px solid var(--border);
@@ -1100,7 +1101,7 @@ function PdfViewerStyles() {
         border-radius: 2px;
       }
 
-      /* ── Sent-to-player toast ───────────────────────────────── */
+      /* â”€â”€ Sent-to-player toast â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
       .bb-pdf-canvas-wrap { position: relative; }
       .bb-pdf-sent-toast {
         position: absolute;

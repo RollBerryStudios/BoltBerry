@@ -211,18 +211,38 @@ function ToolGroupButton({ group, activeTool, open, onToggleOpen, onClose, onSel
 
   useEffect(() => {
     if (!open) return
+    // Focus trap + initial focus on first item
+    const container = popRef.current
+    if (!container) return
+    const items = Array.from(container.querySelectorAll<HTMLElement>('[role="menuitem"]'))
+    items[0]?.focus()
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab' || items.length === 0) return
+      const idx = items.indexOf(document.activeElement as HTMLElement)
+      if (e.shiftKey) {
+        if (idx <= 0) { e.preventDefault(); items[items.length - 1].focus() }
+      } else {
+        if (idx >= items.length - 1) { e.preventDefault(); items[0].focus() }
+      }
+    }
+    container.addEventListener('keydown', onKey)
+    return () => container.removeEventListener('keydown', onKey)
+  }, [open])
+
+  useEffect(() => {
+    if (!open) return
+    const onEsc = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     const onOutside = (e: MouseEvent) => {
-      const tgt = e.target as Node
-      if (btnRef.current?.contains(tgt)) return
-      if (popRef.current?.contains(tgt)) return
+      if (btnRef.current?.contains(e.target as Node)) return
+      if (popRef.current?.contains(e.target as Node)) return
       onClose()
     }
-    const onEsc = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
-    document.addEventListener('mousedown', onOutside)
     document.addEventListener('keydown', onEsc)
+    document.addEventListener('mousedown', onOutside)
     return () => {
-      document.removeEventListener('mousedown', onOutside)
       document.removeEventListener('keydown', onEsc)
+      document.removeEventListener('mousedown', onOutside)
     }
   }, [open, onClose])
 

@@ -6,6 +6,7 @@ import { localized, localizedArray, pickName, titleCase } from './util'
 import { EmptyDetail } from './MonstersTab'
 import { spellHandout } from './actions'
 import { useUIStore } from '../../stores/uiStore'
+import { useSessionStore } from '../../stores/sessionStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { showToast } from '../shared/Toast'
 import { WikiEntryControls } from './WikiEntryControls'
@@ -29,14 +30,14 @@ const SCHOOL_COLOR: Record<string, string> = {
 }
 
 const SCHOOL_ICON: Record<string, string> = {
-  abjuration: '🛡️',
-  conjuration: '🌀',
-  divination: '🔮',
-  enchantment: '💫',
-  evocation: '💥',
-  illusion: '🎭',
-  necromancy: '💀',
-  transmutation: '🔄',
+  abjuration: 'ðŸ›¡ï¸',
+  conjuration: 'ðŸŒ€',
+  divination: 'ðŸ”®',
+  enchantment: 'ðŸ’«',
+  evocation: 'ðŸ’¥',
+  illusion: 'ðŸŽ­',
+  necromancy: 'ðŸ’€',
+  transmutation: 'ðŸ”„',
 }
 
 export function SpellsTab({
@@ -141,8 +142,8 @@ export function SpellsTab({
 
   const handleSelect = useCallback((slug: string) => setSelectedSlug(slug), [])
 
-  if (error) return <div className="bb-best-error">⚠️ {error}</div>
-  if (!index) return <div className="bb-best-loading">…</div>
+  if (error) return <div className="bb-best-error">âš ï¸ {error}</div>
+  if (!index) return <div className="bb-best-loading">â€¦</div>
 
   return (
     <div className="bb-best-layout">
@@ -189,7 +190,7 @@ export function SpellsTab({
               className="bb-best-filter-clear"
               onClick={() => { setLevelFilter(''); setSchoolFilter(''); setClassFilter(''); setSourceFilter('') }}
             >
-              ✕ {t('bestiary.clearFilters')}
+              âœ• {t('bestiary.clearFilters')}
             </button>
           )}
         </div>
@@ -223,7 +224,7 @@ export function SpellsTab({
             const name = pickName(sp, language)
             const schoolKey = sp.school.en.toLowerCase()
             const tint = SCHOOL_COLOR[schoolKey] ?? '#94a3b8'
-            const icon = SCHOOL_ICON[schoolKey] ?? '✨'
+            const icon = SCHOOL_ICON[schoolKey] ?? 'âœ¨'
             return (
               <li key={sp.slug}>
                 <button
@@ -245,12 +246,12 @@ export function SpellsTab({
                     <span className="bb-best-list-name display">
                       {name}
                       {sp.userOwned && (
-                        <span className="bb-best-user-badge" title={t('library.sourceUser')}>★</span>
+                        <span className="bb-best-user-badge" title={t('library.sourceUser')}>â˜…</span>
                       )}
                     </span>
                     <span className="bb-best-list-meta">
                       {localized(sp.level, language)}
-                      {' · '}
+                      {' Â· '}
                       <span style={{ color: tint }}>{titleCase(localized(sp.school, language))}</span>
                     </span>
                   </span>
@@ -314,15 +315,15 @@ function SpellDetail({ slug, language, onUserEntryChanged }: {
     return () => { alive = false }
   }, [slug])
 
-  if (!record) return <div className="bb-best-loading">…</div>
+  if (!record) return <div className="bb-best-loading">â€¦</div>
 
   const name = pickName(record, language)
   const schoolKey = record.school.en.toLowerCase()
   const tint = SCHOOL_COLOR[schoolKey] ?? '#94a3b8'
-  const icon = SCHOOL_ICON[schoolKey] ?? '✨'
+  const icon = SCHOOL_ICON[schoolKey] ?? 'âœ¨'
   const description = localized(record.description, language)
   const higherLevels = localized(record.higherLevels, language)
-  // Alphabetically sorted per locale — raw SRD order (source-file order)
+  // Alphabetically sorted per locale â€” raw SRD order (source-file order)
   // felt arbitrary to players scanning for "does Cleric get this?".
   const classes = localizedArray(record.classes, language)
     .map(titleCase)
@@ -339,11 +340,11 @@ function SpellDetail({ slug, language, onUserEntryChanged }: {
           <h2 className="bb-best-hero-name display">{name}</h2>
           <div className="bb-best-hero-sub">
             <span>{localized(record.level, language)}</span>
-            <span className="bb-best-hero-dot">·</span>
+            <span className="bb-best-hero-dot">Â·</span>
             <span style={{ color: tint }}>{titleCase(localized(record.school, language))}</span>
             {record.ritual && (
               <>
-                <span className="bb-best-hero-dot">·</span>
+                <span className="bb-best-hero-dot">Â·</span>
                 <span>{t('bestiary.ritual')}</span>
               </>
             )}
@@ -384,7 +385,7 @@ function SpellDetail({ slug, language, onUserEntryChanged }: {
 
       <footer className="bb-best-footer">
         <span className="mono">{record.slug}</span>
-        <span className="bb-best-footer-dot">·</span>
+        <span className="bb-best-footer-dot">Â·</span>
         <span>{record.licenseSource}</span>
       </footer>
     </article>
@@ -408,7 +409,7 @@ function SpellActions({
   language: AppLanguage
 }) {
   const { t } = useTranslation()
-  const playerConnected = useUIStore((s) => s.playerConnected)
+  const playerConnected = useSessionStore((s) => s.playerConnected)
   const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
   function handleSend() {
     window.electronAPI?.sendHandout(spellHandout(record, language))
@@ -426,7 +427,7 @@ function SpellActions({
         disabled={!playerConnected}
         title={playerConnected ? t('bestiary.sendToPlayer') : t('bestiary.sendDisabled')}
       >
-        📡 {t('bestiary.sendToPlayer')}
+        ðŸ“¡ {t('bestiary.sendToPlayer')}
       </button>
     </div>
   )

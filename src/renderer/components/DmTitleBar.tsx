@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+﻿import { useTranslation } from 'react-i18next'
 import clsx from 'clsx'
 import { useCampaignStore } from '../stores/campaignStore'
 import { useUIStore } from '../stores/uiStore'
@@ -24,7 +24,7 @@ export function DmTitleBar() {
   const { activeCampaignId, campaigns, activeMapId, activeMaps } = useCampaignStore()
   const language = useUIStore((s) => s.language)
   const toggleLanguage = useUIStore((s) => s.toggleLanguage)
-  const playerConnected = useUIStore((s) => s.playerConnected)
+  const playerConnected = useSessionStore((s) => s.playerConnected)
   const sessionMode = useSessionStore((s) => s.sessionMode)
 
   const campaignName = campaigns.find((c) => c.id === activeCampaignId)?.name ?? ''

@@ -4,6 +4,7 @@ import type { MonsterRecord, NamedText } from '@shared/ipc-types'
 import type { AppLanguage } from '../../stores/uiStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useUIStore } from '../../stores/uiStore'
+import { useSessionStore } from '../../stores/sessionStore'
 import { showToast } from '../shared/Toast'
 import { formatMod, localized, localizedArray, pickName, tokenTint } from './util'
 import { monsterHandout, spawnMonsterOnMap } from './actions'
@@ -33,7 +34,7 @@ export function MonsterDetail({ slug, language, onUserEntryChanged }: {
   // every surface (hero portrait, thumbnail badges, spawn image) picks up
   // the new override without unmounting the whole pane.
   const [refreshNonce, setRefreshNonce] = useState(0)
-  // Variant strip is hidden by default — opening a monster only fetches
+  // Variant strip is hidden by default â€” opening a monster only fetches
   // the hero's data URL, not the 12-thumbnail preload. The DM opts in
   // via the "Varianten anzeigen" button. Reset on slug change so the
   // next monster starts collapsed again.
@@ -81,7 +82,7 @@ export function MonsterDetail({ slug, language, onUserEntryChanged }: {
     // Deduplicate: record.token is the dataset primary and sometimes also
     // appears in record.tokens (no existing entry is known, but it's a
     // cheap guarantee). Then pin the user's chosen default to index 0 so
-    // the hero portrait renders it first — both on mount (sync fallback
+    // the hero portrait renders it first â€” both on mount (sync fallback
     // via tokenDefaultUrl) and after the async thumbnail load resolves.
     const seen = new Set<string>()
     const unique = all.filter((t) => (seen.has(t.file) ? false : (seen.add(t.file), true)))
@@ -111,7 +112,7 @@ export function MonsterDetail({ slug, language, onUserEntryChanged }: {
   }, [record, tokens, tokenIndex, tokenUrls])
 
   if (!record) {
-    return <div className="bb-best-loading">…</div>
+    return <div className="bb-best-loading">â€¦</div>
   }
 
   const displayName = pickName(record, language)
@@ -127,17 +128,17 @@ export function MonsterDetail({ slug, language, onUserEntryChanged }: {
 
   return (
     <article className="bb-best-detail" style={{ borderLeftColor: tint }}>
-      {/* Hero — portrait, name, subline */}
+      {/* Hero â€” portrait, name, subline */}
       <header className="bb-best-hero">
         <div className="bb-best-hero-portrait" style={{ borderColor: tint }}>
           {currentUrl ? (
-            // The img is decorative — `alt=""` keeps the broken-image
+            // The img is decorative â€” `alt=""` keeps the broken-image
             // fallback (e.g. unfetched LFS pointer) from leaking the
             // monster name across the portrait circle.
             <img src={currentUrl} alt="" draggable={false} />
           ) : (
             <span className="bb-best-hero-glyph" aria-hidden="true">
-              {record.tokensMissing ? '⬇' : '👹'}
+              {record.tokensMissing ? 'â¬‡' : 'ðŸ‘¹'}
             </span>
           )}
         </div>
@@ -145,9 +146,9 @@ export function MonsterDetail({ slug, language, onUserEntryChanged }: {
           <h2 className="bb-best-hero-name display">{displayName}</h2>
           <div className="bb-best-hero-sub">
             <span>{localized(record.size, language)}</span>
-            <span className="bb-best-hero-dot">·</span>
+            <span className="bb-best-hero-dot">Â·</span>
             <span>{localized(record.type, language)}</span>
-            <span className="bb-best-hero-dot">·</span>
+            <span className="bb-best-hero-dot">Â·</span>
             <span>{localized(record.alignment, language)}</span>
           </div>
           <div className="bb-best-hero-chips">
@@ -159,12 +160,12 @@ export function MonsterDetail({ slug, language, onUserEntryChanged }: {
         </div>
       </header>
 
-      {/* LFS hint — shown only when the dataset's token files are still
+      {/* LFS hint â€” shown only when the dataset's token files are still
           Git-LFS pointers. Saves the DM from chasing "broken images" in
           a fresh clone. */}
       {record.tokensMissing && (
         <div className="bb-best-lfs-hint" role="status">
-          <span className="bb-best-lfs-hint-icon" aria-hidden="true">⬇</span>
+          <span className="bb-best-lfs-hint-icon" aria-hidden="true">â¬‡</span>
           <span>
             <strong>{t('bestiary.tokensMissingTitle')}</strong>{' '}
             {t('bestiary.tokensMissingBody')}
@@ -173,7 +174,7 @@ export function MonsterDetail({ slug, language, onUserEntryChanged }: {
         </div>
       )}
 
-      {/* Action toolbar — connects the reference card to the table. */}
+      {/* Action toolbar â€” connects the reference card to the table. */}
       <MonsterActions
         record={record}
         language={language}
@@ -186,7 +187,7 @@ export function MonsterDetail({ slug, language, onUserEntryChanged }: {
         onUserEntryChanged={onUserEntryChanged}
       />
 
-      {/* Token strip — hidden by default so opening a monster fires one
+      {/* Token strip â€” hidden by default so opening a monster fires one
           image IPC (the hero) instead of thirteen. DMs who want to pick
           a different portrait expand the strip on demand; the lazy
           preload inside TokenStrip kicks in only after that click. */}
@@ -209,7 +210,7 @@ export function MonsterDetail({ slug, language, onUserEntryChanged }: {
             className="bb-best-variants-trigger"
             onClick={() => setStripOpen(true)}
           >
-            🎨 {t('bestiary.showVariants', { count: tokens.length })}
+            ðŸŽ¨ {t('bestiary.showVariants', { count: tokens.length })}
           </button>
         )
       )}
@@ -241,7 +242,7 @@ export function MonsterDetail({ slug, language, onUserEntryChanged }: {
 
       <footer className="bb-best-footer">
         <span className="mono">{record.slug}</span>
-        <span className="bb-best-footer-dot">·</span>
+        <span className="bb-best-footer-dot">Â·</span>
         <span>{record.licenseSource}</span>
       </footer>
     </article>
@@ -300,7 +301,7 @@ function TokenStrip({
           onClick={onCollapse}
           title={t('bestiary.hideVariants')}
         >
-          ✕ {t('bestiary.hideVariants')}
+          âœ• {t('bestiary.hideVariants')}
         </button>
       </div>
       <div className="bb-best-tokens">
@@ -342,7 +343,7 @@ function TokenStrip({
               title={isDefault ? t('bestiary.clearDefault') : t('bestiary.setDefault')}
               aria-label={isDefault ? t('bestiary.clearDefault') : t('bestiary.setDefault')}
             >
-              {isDefault ? '★' : '☆'}
+              {isDefault ? 'â˜…' : 'â˜†'}
             </button>
           </div>
           )
@@ -453,13 +454,13 @@ function formatSavingThrows(src: MonsterRecord['savingThrows']): string {
 function formatSkills(src: MonsterRecord['skills']): string {
   if (!src) return ''
   if (Array.isArray(src)) return src.join(', ')
-  // Defensive — the dataset only ships string[] today but future exports
+  // Defensive â€” the dataset only ships string[] today but future exports
   // might flip to the ability-bonus object. Handle it the same way.
   return Object.entries(src as unknown as Record<string, unknown>)
     .map(([k, v]) => `${k}: ${v}`).join(', ')
 }
 
-// ───────── Action toolbar: spawn on map + send handout to player ──────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€ Action toolbar: spawn on map + send handout to player â”€â”€â”€â”€â”€â”€
 
 function MonsterActions({
   record,
@@ -482,7 +483,7 @@ function MonsterActions({
   const activeMapId = useCampaignStore((s) => s.activeMapId)
   const activeMaps = useCampaignStore((s) => s.activeMaps)
   const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
-  const playerConnected = useUIStore((s) => s.playerConnected)
+  const playerConnected = useSessionStore((s) => s.playerConnected)
   const [busy, setBusy] = useState(false)
   const [showNpcWizard, setShowNpcWizard] = useState(false)
 
@@ -499,7 +500,7 @@ function MonsterActions({
         monster: record,
         // Pin to the variant the DM is looking at (if any), otherwise let
         // the helper fall back to the monster's default via the compact
-        // bestiary:// URL — avoids storing ~30 KB of base64 per token.
+        // bestiary:// URL â€” avoids storing ~30 KB of base64 per token.
         tokenFile: currentFile ?? record.userDefaultFile ?? null,
         mapId: map.id,
         cameraX: map.cameraX,
@@ -523,11 +524,11 @@ function MonsterActions({
   }
 
   // Both spawn and send-to-player only make sense inside an active
-  // campaign — the Wiki can be opened from Welcome without any
+  // campaign â€” the Wiki can be opened from Welcome without any
   // campaign selected, and showing disabled action buttons there was
   // noise. "Auf Karte" additionally requires a map; "An Spieler
   // senden" only needs the campaign scope (the button remains visible
-  // but disabled when no player window is connected — that's a
+  // but disabled when no player window is connected â€” that's a
   // session-time state, not a content-management one).
   const canSpawn = Boolean(activeCampaignId && map)
   const canSendToPlayer = Boolean(activeCampaignId)
@@ -542,7 +543,7 @@ function MonsterActions({
           disabled={busy}
           title={t('bestiary.addToMap')}
         >
-          ✦ {t('bestiary.addToMap')}
+          âœ¦ {t('bestiary.addToMap')}
         </button>
       )}
       {canSendToPlayer && (
@@ -553,7 +554,7 @@ function MonsterActions({
           disabled={!playerConnected}
           title={playerConnected ? t('bestiary.sendToPlayer') : t('bestiary.sendDisabled')}
         >
-          📡 {t('bestiary.sendToPlayer')}
+          ðŸ“¡ {t('bestiary.sendToPlayer')}
         </button>
       )}
       <button
@@ -567,9 +568,9 @@ function MonsterActions({
             : t('bestiary.setDefault')
         }
       >
-        {isAlreadyDefault ? '★' : '☆'} {isAlreadyDefault ? t('bestiary.clearDefault') : t('bestiary.setDefault')}
+        {isAlreadyDefault ? 'â˜…' : 'â˜†'} {isAlreadyDefault ? t('bestiary.clearDefault') : t('bestiary.setDefault')}
       </button>
-      {/* Clone into the NPC library — separate from the SRD monster
+      {/* Clone into the NPC library â€” separate from the SRD monster
           so the DM can rename / rebadge / re-skin without touching
           the canonical source row. */}
       <button
@@ -578,7 +579,7 @@ function MonsterActions({
         onClick={() => setShowNpcWizard(true)}
         title={t('npcWizard.openButton')}
       >
-        🧑 {t('npcWizard.openButton')}
+        ðŸ§‘ {t('npcWizard.openButton')}
       </button>
       {showNpcWizard && (
         <NpcCloneWizard
@@ -592,7 +593,7 @@ function MonsterActions({
       )}
 
       {/* User-authored Wiki entry controls. Clone is always available
-          (even on SRD — that's the primary path to getting an editable
+          (even on SRD â€” that's the primary path to getting an editable
           copy); delete + rename only show up on user-owned entries. */}
       <WikiEntryControls
         kind="monster"
