@@ -117,10 +117,23 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
           </div>
           <button
             className="btn btn-primary"
-            style={{ width: '100%', justifyContent: 'center', fontWeight: 700, padding: '10px 0' }}
+            style={{ width: '100%', justifyContent: 'center', fontWeight: 700, padding: '10px 0', marginBottom: 'var(--sp-2)' }}
             onClick={onComplete}
           >
             Los geht's →
+          </button>
+          <button
+            className="btn"
+            style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--text-xs)', padding: '8px 0' }}
+            onClick={() => {
+              window.electronAPI?.importCampaign()
+                .then((result: any) => {
+                  if (result?.success) onComplete()
+                })
+                .catch(() => {})
+            }}
+          >
+            📥 Kampagne importieren
           </button>
         </div>
       </div>
