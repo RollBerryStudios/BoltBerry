@@ -192,7 +192,12 @@ function ToolGroupButton({ group, activeTool, open, onToggleOpen, onClose, onSel
     const update = () => {
       const rect = btnRef.current!.getBoundingClientRect()
       // Anchor the popover to the right of the button, vertically centered.
-      setPos({ top: rect.top + rect.height / 2, left: rect.right + 8 })
+      const desiredTop = rect.top + rect.height / 2
+      const desiredLeft = rect.right + 8
+      // Clamp so the popover never overflows the right edge.
+      const vw = window.innerWidth
+      const popWidth = popRef.current?.offsetWidth ?? 200
+      setPos({ top: desiredTop, left: Math.min(desiredLeft, vw - popWidth - 8) })
     }
     update()
     window.addEventListener('resize', update)
