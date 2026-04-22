@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useUIStore, type SidebarTab } from '../stores/uiStore'
+import { useSessionStore } from '../stores/sessionStore'
 import { useMapTransformStore } from '../stores/mapTransformStore'
 import { useUndoStore } from '../stores/undoStore'
 import { useCampaignStore } from '../stores/campaignStore'
@@ -26,6 +27,7 @@ interface CommandPaletteProps {
 // Each command delegates to a store action — the palette doesn't own any business logic itself.
 function buildCommands(t: (k: string) => string): Command[] {
   const ui = useUIStore.getState
+  const session = useSessionStore.getState
   const cam = useMapTransformStore.getState
   const undo = useUndoStore.getState
   const campaign = useCampaignStore.getState
@@ -38,8 +40,8 @@ function buildCommands(t: (k: string) => string): Command[] {
 
   return [
     // ── Session
-    { id: 'session.start',    labelKey: 'palette.startSession',  groupKey: 'palette.groupSession', keywords: 'start session play begin session starten spiel', run: () => { ui().setSessionMode('session'); if (ui().workMode === 'prep') ui().setWorkMode('play') } },
-    { id: 'session.end',      labelKey: 'palette.endSession',    groupKey: 'palette.groupSession', keywords: 'end session stop prep session beenden vorbereitung',    run: () => ui().setSessionMode('prep') },
+    { id: 'session.start',    labelKey: 'palette.startSession',  groupKey: 'palette.groupSession', keywords: 'start session play begin session starten spiel', run: () => { session().setSessionMode('session'); if (session().workMode === 'prep') session().setWorkMode('play') } },
+    { id: 'session.end',      labelKey: 'palette.endSession',    groupKey: 'palette.groupSession', keywords: 'end session stop prep session beenden vorbereitung',    run: () => session().setSessionMode('prep') },
     { id: 'session.blackout', labelKey: 'palette.toggleBlackout',groupKey: 'palette.groupSession', shortcut: 'Ctrl+B', keywords: 'blackout black out verdunkeln schwarz',       run: () => ui().toggleBlackout() },
 
     // ── View

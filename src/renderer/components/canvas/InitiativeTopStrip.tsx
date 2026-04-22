@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useUIStore } from '../../stores/uiStore'
+import { useSessionStore } from '../../stores/sessionStore'
 import { useInitiativeStore } from '../../stores/initiativeStore'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useImageUrl } from '../../hooks/useImageUrl'
@@ -11,12 +12,12 @@ import type { InitiativeEntry } from '@shared/ipc-types'
  * (portrait, name, HP bar, current-turn highlight). Click a card to jump
  * the selection to that token. Initiative roll order is left-to-right.
  *
- * Inspired by Alchemy RPG's combat tracker — the goal is to surface the
+ * Inspired by Alchemy RPG's combat tracker â€” the goal is to surface the
  * full turn order without forcing the DM to open the right sidebar.
  */
 export function InitiativeTopStrip() {
   const { t } = useTranslation()
-  const workMode = useUIStore((s) => s.workMode)
+  const workMode = useSessionStore((s) => s.workMode)
   const entries = useInitiativeStore((s) => s.entries)
   const round = useInitiativeStore((s) => s.round)
 
@@ -46,7 +47,7 @@ export function InitiativeTopStrip() {
         title={t('canvas.hud.endTurn')}
         aria-label={t('canvas.hud.endTurn')}
       >
-        {t('canvas.hud.endTurn')} ›
+        {t('canvas.hud.endTurn')} â€º
       </button>
     </div>
   )
@@ -75,7 +76,7 @@ function CombatantCard({ entry }: { entry: InitiativeEntry }) {
       type="button"
       className={`initiative-card${entry.currentTurn ? ' current' : ''}`}
       onClick={handleClick}
-      title={`${entry.combatantName} · ${entry.roll}${hpMax > 0 ? ` · ${hpCurrent}/${hpMax} HP` : ''}`}
+      title={`${entry.combatantName} Â· ${entry.roll}${hpMax > 0 ? ` Â· ${hpCurrent}/${hpMax} HP` : ''}`}
     >
       <div className="initiative-card-portrait">
         {portraitUrl ? (

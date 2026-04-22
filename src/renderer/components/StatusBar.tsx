@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useUIStore } from '../stores/uiStore'
+import { useSessionStore } from '../stores/sessionStore'
 import { useInitiativeStore } from '../stores/initiativeStore'
 import { useTokenStore } from '../stores/tokenStore'
 import { useAppStore } from '../stores/appStore'
@@ -7,9 +8,9 @@ import { APP_VERSION } from '@shared/version'
 
 export function StatusBar() {
   const { t, i18n } = useTranslation()
-  const playerConnected = useUIStore((s) => s.playerConnected)
+  const playerConnected = useSessionStore((s) => s.playerConnected)
   const blackoutActive = useUIStore((s) => s.blackoutActive)
-  const sessionMode = useUIStore((s) => s.sessionMode)
+  const sessionMode = useSessionStore((s) => s.sessionMode)
   const overlayActive = useUIStore((s) => s.overlayActive)
   const activeWeather = useUIStore((s) => s.activeWeather)
   const setFloatingPanel = useUIStore((s) => s.setFloatingPanel)
@@ -24,7 +25,7 @@ export function StatusBar() {
     switch (saveState) {
       case 'saving': return { text: t('statusBar.saving'), color: 'var(--warning)' }
       case 'saved':
-        // Persistent indicator — show time of last save so DM always sees the current state
+        // Persistent indicator â€” show time of last save so DM always sees the current state
         return lastSaved
           ? {
               text: t('statusBar.savedAt', {
@@ -35,7 +36,7 @@ export function StatusBar() {
           : { text: t('statusBar.saved'), color: 'var(--success)' }
       case 'error':  return { text: t('statusBar.saveError'), color: 'var(--danger)' }
       default:
-        // idle — no save has completed yet this session
+        // idle â€” no save has completed yet this session
         return { text: t('statusBar.autosave'), color: 'var(--text-muted)' }
     }
   })()
@@ -72,7 +73,7 @@ export function StatusBar() {
              : activeWeather === 'snow' ? t('statusBar.weatherSnow')
              : activeWeather === 'fog'  ? t('statusBar.weatherFog')
              : activeWeather === 'wind' ? t('statusBar.weatherWind')
-             : `🌤 ${activeWeather}`}
+             : `ðŸŒ¤ ${activeWeather}`}
           </span>
         </div>
       )}
@@ -93,7 +94,7 @@ export function StatusBar() {
           style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-mono, monospace)' }}
           title={t('statusBar.tokenCount', { count: tokenCount })}
         >
-          ⬤ {tokenCount}
+          â¬¤ {tokenCount}
         </div>
       )}
 

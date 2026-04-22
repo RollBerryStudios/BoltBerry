@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 import { useUIStore, type ActiveTool } from '../../stores/uiStore'
+import { useSessionStore } from '../../stores/sessionStore'
 import { useDockStore } from '../../stores/dockStore'
 
 /**
@@ -13,7 +14,7 @@ import { useDockStore } from '../../stores/dockStore'
  * canvas area, so it floats on top of the map.
  */
 function truncate(s: string, max: number): string {
-  return s.length > max ? s.slice(0, max) + '…' : s
+  return s.length > max ? s.slice(0, max) + 'â€¦' : s
 }
 
 interface ToolDef {
@@ -38,15 +39,15 @@ const SECTIONS: DockSection[] = [
   {
     id: 'view',
     groups: [
-      { id: 'select',  primary: { id: 'select',  icon: '↖',  labelKey: 'toolbar.tools.select',  shortcut: 'V' } },
-      { id: 'pointer', primary: { id: 'pointer', icon: '👆', labelKey: 'toolbar.tools.pointer', shortcut: 'W' } },
+      { id: 'select',  primary: { id: 'select',  icon: 'â†–',  labelKey: 'toolbar.tools.select',  shortcut: 'V' } },
+      { id: 'pointer', primary: { id: 'pointer', icon: 'ðŸ‘†', labelKey: 'toolbar.tools.pointer', shortcut: 'W' } },
       {
         id: 'measure',
-        primary: { id: 'measure-line', icon: '📏', labelKey: 'toolbar.tools.measureLine', shortcut: 'M' },
+        primary: { id: 'measure-line', icon: 'ðŸ“', labelKey: 'toolbar.tools.measureLine', shortcut: 'M' },
         variants: [
-          { id: 'measure-line',   icon: '📏', labelKey: 'toolbar.tools.measureLine',   shortcut: 'M' },
-          { id: 'measure-circle', icon: '◎',  labelKey: 'toolbar.tools.measureCircle' },
-          { id: 'measure-cone',   icon: '◿',  labelKey: 'toolbar.tools.measureCone' },
+          { id: 'measure-line',   icon: 'ðŸ“', labelKey: 'toolbar.tools.measureLine',   shortcut: 'M' },
+          { id: 'measure-circle', icon: 'â—Ž',  labelKey: 'toolbar.tools.measureCircle' },
+          { id: 'measure-cone',   icon: 'â—¿',  labelKey: 'toolbar.tools.measureCone' },
         ],
       },
     ],
@@ -54,7 +55,7 @@ const SECTIONS: DockSection[] = [
   {
     id: 'combat',
     groups: [
-      { id: 'token', primary: { id: 'token', icon: '⬤', labelKey: 'toolbar.tools.token', shortcut: 'T' } },
+      { id: 'token', primary: { id: 'token', icon: 'â¬¤', labelKey: 'toolbar.tools.token', shortcut: 'T' } },
     ],
   },
   {
@@ -62,13 +63,13 @@ const SECTIONS: DockSection[] = [
     groups: [
       {
         id: 'fog',
-        primary: { id: 'fog-brush', icon: '🖌', labelKey: 'toolbar.tools.fogBrush', shortcut: 'B' },
+        primary: { id: 'fog-brush', icon: 'ðŸ–Œ', labelKey: 'toolbar.tools.fogBrush', shortcut: 'B' },
         variants: [
-          { id: 'fog-brush',       icon: '🖌', labelKey: 'toolbar.tools.fogBrush',       shortcut: 'B' },
-          { id: 'fog-brush-cover', icon: '✏',  labelKey: 'toolbar.tools.fogBrushCover', shortcut: 'X' },
-          { id: 'fog-rect',        icon: '▭',  labelKey: 'toolbar.tools.fogRect',        shortcut: 'F' },
-          { id: 'fog-polygon',     icon: '⬡',  labelKey: 'toolbar.tools.fogPolygon',     shortcut: 'P' },
-          { id: 'fog-cover',       icon: '▮',  labelKey: 'toolbar.tools.fogCover',       shortcut: 'C' },
+          { id: 'fog-brush',       icon: 'ðŸ–Œ', labelKey: 'toolbar.tools.fogBrush',       shortcut: 'B' },
+          { id: 'fog-brush-cover', icon: 'âœ',  labelKey: 'toolbar.tools.fogBrushCover', shortcut: 'X' },
+          { id: 'fog-rect',        icon: 'â–­',  labelKey: 'toolbar.tools.fogRect',        shortcut: 'F' },
+          { id: 'fog-polygon',     icon: 'â¬¡',  labelKey: 'toolbar.tools.fogPolygon',     shortcut: 'P' },
+          { id: 'fog-cover',       icon: 'â–®',  labelKey: 'toolbar.tools.fogCover',       shortcut: 'C' },
         ],
       },
     ],
@@ -78,20 +79,20 @@ const SECTIONS: DockSection[] = [
     groups: [
       {
         id: 'wall',
-        primary: { id: 'wall-draw', icon: '🧱', labelKey: 'toolbar.tools.wallDraw', shortcut: 'G' },
+        primary: { id: 'wall-draw', icon: 'ðŸ§±', labelKey: 'toolbar.tools.wallDraw', shortcut: 'G' },
         variants: [
-          { id: 'wall-draw', icon: '🧱', labelKey: 'toolbar.tools.wallDraw', shortcut: 'G' },
-          { id: 'wall-door', icon: '🚪', labelKey: 'toolbar.tools.wallDoor', shortcut: 'J' },
+          { id: 'wall-draw', icon: 'ðŸ§±', labelKey: 'toolbar.tools.wallDraw', shortcut: 'G' },
+          { id: 'wall-door', icon: 'ðŸšª', labelKey: 'toolbar.tools.wallDoor', shortcut: 'J' },
         ],
       },
-      { id: 'room', primary: { id: 'room', icon: '🏠', labelKey: 'toolbar.tools.room', shortcut: 'R' } },
+      { id: 'room', primary: { id: 'room', icon: 'ðŸ ', labelKey: 'toolbar.tools.room', shortcut: 'R' } },
       {
         id: 'draw',
-        primary: { id: 'draw-freehand', icon: '✏️', labelKey: 'toolbar.tools.drawFreehand', shortcut: 'D' },
+        primary: { id: 'draw-freehand', icon: 'âœï¸', labelKey: 'toolbar.tools.drawFreehand', shortcut: 'D' },
         variants: [
-          { id: 'draw-freehand', icon: '✏️', labelKey: 'toolbar.tools.drawFreehand', shortcut: 'D' },
-          { id: 'draw-rect',     icon: '▢',  labelKey: 'toolbar.tools.drawRect' },
-          { id: 'draw-circle',   icon: '○',  labelKey: 'toolbar.tools.drawCircle' },
+          { id: 'draw-freehand', icon: 'âœï¸', labelKey: 'toolbar.tools.drawFreehand', shortcut: 'D' },
+          { id: 'draw-rect',     icon: 'â–¢',  labelKey: 'toolbar.tools.drawRect' },
+          { id: 'draw-circle',   icon: 'â—‹',  labelKey: 'toolbar.tools.drawCircle' },
           { id: 'draw-text',     icon: 'T',  labelKey: 'toolbar.tools.drawText' },
         ],
       },
@@ -100,7 +101,7 @@ const SECTIONS: DockSection[] = [
   {
     id: 'present',
     groups: [
-      { id: 'atmosphere', primary: { id: 'atmosphere', icon: '🖼', labelKey: 'toolbar.tools.atmosphere' } },
+      { id: 'atmosphere', primary: { id: 'atmosphere', icon: 'ðŸ–¼', labelKey: 'toolbar.tools.atmosphere' } },
     ],
   },
 ]
@@ -109,12 +110,12 @@ export function LeftToolDock() {
   const { t } = useTranslation()
   const activeTool = useUIStore((s) => s.activeTool)
   const setActiveTool = useUIStore((s) => s.setActiveTool)
-  const workMode = useUIStore((s) => s.workMode)
+  const workMode = useSessionStore((s) => s.workMode)
   const dockLabels = useDockStore((s) => s.dockLabels)
   const dockAutoHide = useDockStore((s) => s.dockAutoHide)
   const [openGroup, setOpenGroup] = useState<string | null>(null)
 
-  // Player-preview restricts the DM to the pointer tool — hide the rail.
+  // Player-preview restricts the DM to the pointer tool â€” hide the rail.
   if (workMode === 'player-preview') return null
 
   const handleSelect = async (id: ActiveTool) => {
@@ -226,8 +227,8 @@ function ToolGroupButton({ group, activeTool, open, onToggleOpen, onClose, onSel
   }, [open, onClose])
 
   // Primary-click UX (Foundry / Owlbear pattern):
-  //  - first click on an inactive group ⇒ activate its primary tool.
-  //  - click again on the already-active group ⇒ open the variant
+  //  - first click on an inactive group â‡’ activate its primary tool.
+  //  - click again on the already-active group â‡’ open the variant
   //    popover, so users can reach variants without aiming at the
   //    ~12-px chevron. The chevron remains as an affordance for
   //    non-active groups + as a visual "there's more here" hint.
@@ -249,7 +250,7 @@ function ToolGroupButton({ group, activeTool, open, onToggleOpen, onClose, onSel
   // When a group has variants, surface the "click again for variants /
   // right-click for variants" affordance in the tooltip so users who
   // miss the small chevron still discover the second entry point.
-  const label = hasVariants ? `${baseLabel} · ▸` : baseLabel
+  const label = hasVariants ? `${baseLabel} Â· â–¸` : baseLabel
 
   return (
     <div className="left-tool-group">
@@ -277,7 +278,7 @@ function ToolGroupButton({ group, activeTool, open, onToggleOpen, onClose, onSel
             onMouseDown={(e) => e.stopPropagation()}
             onClick={handleChevron}
           >
-            ›
+            â€º
           </span>
         )}
       </button>

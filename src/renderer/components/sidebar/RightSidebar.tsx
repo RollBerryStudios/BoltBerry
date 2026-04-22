@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useUIStore, SIDEBAR_TAB_TO_DOCK, type SidebarTab, type SidebarDock } from '../../stores/uiStore'
+import { useSessionStore } from '../../stores/sessionStore'
 import { useInitiativeStore } from '../../stores/initiativeStore'
 import { TokenPanel } from './panels/TokenPanel'
 import { InitiativePanel } from './panels/InitiativePanel'
@@ -33,15 +34,15 @@ export function RightSidebar() {
   const setSidebarTab = useUIStore((s) => s.setSidebarTab)
   const setSidebarDock = useUIStore((s) => s.setSidebarDock)
   const selectedTokenId = useUIStore((s) => s.selectedTokenId)
-  const workMode = useUIStore((s) => s.workMode)
+  const workMode = useSessionStore((s) => s.workMode)
   const initiativeCount = useInitiativeStore((s) => s.entries.length)
 
   const combatActive = workMode === 'combat' || initiativeCount > 0
   const tokenSelected = selectedTokenId !== null
 
   // Auto-open the contextually-relevant section when user context changes.
-  // We track the previous "context signature" to only fire on actual transitions —
-  // not on every re-render — so the user can still manually navigate elsewhere.
+  // We track the previous "context signature" to only fire on actual transitions â€”
+  // not on every re-render â€” so the user can still manually navigate elsewhere.
   const prevContextRef = useRef<string>('')
   useEffect(() => {
     const sig = `${tokenSelected ? 't' : ''}|${combatActive ? 'c' : ''}`
@@ -58,22 +59,22 @@ export function RightSidebar() {
     {
       id: 'scene',
       labelKey: 'sidebar.right.dockScene',
-      icon: '🗺️',
+      icon: 'ðŸ—ºï¸',
       sections: [
-        { id: 'tokens',     labelKey: 'sidebar.right.tabTokens',     icon: '⬤',  render: () => <TokenPanel />,         isContextual: tokenSelected && !combatActive },
-        { id: 'initiative', labelKey: 'sidebar.right.tabInitiative', icon: '⚔️', render: () => <InitiativePanel />,    isContextual: combatActive },
-        { id: 'rooms',      labelKey: 'sidebar.right.tabRooms',      icon: '🏠', render: () => <RoomPanel /> },
+        { id: 'tokens',     labelKey: 'sidebar.right.tabTokens',     icon: 'â¬¤',  render: () => <TokenPanel />,         isContextual: tokenSelected && !combatActive },
+        { id: 'initiative', labelKey: 'sidebar.right.tabInitiative', icon: 'âš”ï¸', render: () => <InitiativePanel />,    isContextual: combatActive },
+        { id: 'rooms',      labelKey: 'sidebar.right.tabRooms',      icon: 'ðŸ ', render: () => <RoomPanel /> },
       ],
     },
     {
       id: 'content',
       labelKey: 'sidebar.right.dockContent',
-      icon: '📚',
+      icon: 'ðŸ“š',
       sections: [
-        { id: 'notes',      labelKey: 'sidebar.right.tabNotes',      icon: '📝', render: () => <NotesPanel /> },
-        { id: 'handouts',   labelKey: 'sidebar.right.tabHandouts',   icon: '📜', render: () => <HandoutsPanel /> },
-        { id: 'encounters', labelKey: 'sidebar.right.tabEncounters', icon: '👾', render: () => <EncounterPanel /> },
-        { id: 'characters', labelKey: 'sidebar.right.tabCharacters', icon: '📋', render: () => <CharacterSheetPanel /> },
+        { id: 'notes',      labelKey: 'sidebar.right.tabNotes',      icon: 'ðŸ“', render: () => <NotesPanel /> },
+        { id: 'handouts',   labelKey: 'sidebar.right.tabHandouts',   icon: 'ðŸ“œ', render: () => <HandoutsPanel /> },
+        { id: 'encounters', labelKey: 'sidebar.right.tabEncounters', icon: 'ðŸ‘¾', render: () => <EncounterPanel /> },
+        { id: 'characters', labelKey: 'sidebar.right.tabCharacters', icon: 'ðŸ“‹', render: () => <CharacterSheetPanel /> },
       ],
     },
   ]
@@ -128,7 +129,7 @@ export function RightSidebar() {
                 {section.isContextual && (
                   <span className="accordion-context-dot" aria-hidden="true" title={t('sidebar.right.contextual')} />
                 )}
-                <span className="accordion-chevron" aria-hidden="true">{isOpen ? '▾' : '▸'}</span>
+                <span className="accordion-chevron" aria-hidden="true">{isOpen ? 'â–¾' : 'â–¸'}</span>
               </button>
               {isOpen && (
                 <div

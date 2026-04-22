@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useUIStore } from '../../stores/uiStore'
+import { useSessionStore } from '../../stores/sessionStore'
 import { useDockStore } from '../../stores/dockStore'
 
 /**
@@ -7,20 +8,20 @@ import { useDockStore } from '../../stores/dockStore'
  * horizontal strip anchored top-left of the canvas, just right of the
  * LeftToolDock. Renders tool-specific option presets:
  *
- *  - fog brush / brush-cover   → size presets, reveal/cover mode
- *  - measure-*                 → shape toggle (line/circle/cone)
- *  - wall-*                    → wall/door toggle
- *  - draw-*                    → stroke-width presets, color swatches
+ *  - fog brush / brush-cover   â†’ size presets, reveal/cover mode
+ *  - measure-*                 â†’ shape toggle (line/circle/cone)
+ *  - wall-*                    â†’ wall/door toggle
+ *  - draw-*                    â†’ stroke-width presets, color swatches
  *
  * Returns null when the active tool has no configurable presets so the
  * strip never shows an empty shell. The strip is purely a convenience
- * layer on top of existing tool state — every control maps 1:1 to an
+ * layer on top of existing tool state â€” every control maps 1:1 to an
  * existing uiStore field so the toolbar / keyboard shortcuts keep working.
  */
 export function SubToolStrip() {
   const { t } = useTranslation()
   const activeTool = useUIStore((s) => s.activeTool)
-  const workMode = useUIStore((s) => s.workMode)
+  const workMode = useSessionStore((s) => s.workMode)
   const fogBrushRadius = useUIStore((s) => s.fogBrushRadius)
   const setFogBrushRadius = useUIStore((s) => s.setFogBrushRadius)
   const drawWidth = useUIStore((s) => s.drawWidth)
@@ -82,7 +83,7 @@ export function SubToolStrip() {
       )
     }
 
-    // Fog rect / polygon / cover — only need reveal/cover toggle via tool IDs.
+    // Fog rect / polygon / cover â€” only need reveal/cover toggle via tool IDs.
     if (activeTool === 'fog-rect' || activeTool === 'fog-polygon' || activeTool === 'fog-cover') {
       const isCover = activeTool === 'fog-cover'
       return (
@@ -161,7 +162,7 @@ export function SubToolStrip() {
   }
 }
 
-// ── Shared tiny primitives ────────────────────────────────────────────
+// â”€â”€ Shared tiny primitives â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 interface PillProps {
   label: string

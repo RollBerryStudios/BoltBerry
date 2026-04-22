@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useUIStore } from '../stores/uiStore'
+import { useSessionStore } from '../stores/sessionStore'
 import { useMapTransformStore } from '../stores/mapTransformStore'
 import { useUndoStore } from '../stores/undoStore'
 import { useCampaignStore } from '../stores/campaignStore'
@@ -64,13 +65,13 @@ export function useMenuActions({ onShowShortcuts, onNewCampaign, onAbout }: UseM
           useUIStore.getState().toggleBlackout()
           break
         case 'start-session':
-          useUIStore.getState().setSessionMode('session')
-          if (useUIStore.getState().workMode === 'prep') {
-            useUIStore.getState().setWorkMode('play')
+          useSessionStore.getState().setSessionMode('session')
+          if (useSessionStore.getState().workMode === 'prep') {
+            useSessionStore.getState().setWorkMode('play')
           }
           break
         case 'end-session':
-          useUIStore.getState().setSessionMode('prep')
+          useSessionStore.getState().setSessionMode('prep')
           break
         case 'atmosphere-image':
           window.electronAPI?.importFile?.('atmosphere').then((result) => {
