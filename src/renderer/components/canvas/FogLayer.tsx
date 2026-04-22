@@ -285,6 +285,15 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
         useUndoStore.getState().pushCommand({
           id: nextCommandId(),
           label: 'Nebel zurücksetzen',
+          action: {
+            type: 'fog.resetMap',
+            payload: {
+              mapId,
+              prevExplored,
+              prevCovered,
+              prevHistory,
+            },
+          },
           undo: async () => {
             // Load the PNG snapshot back into both canvases. Re-use
             // the existing loadBitmapToCanvas-style pattern via a

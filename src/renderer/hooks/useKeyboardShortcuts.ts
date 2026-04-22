@@ -1,4 +1,4 @@
-﻿import { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useUIStore } from '../stores/uiStore'
 import { useSessionStore } from '../stores/sessionStore'
 import { useFogStore } from '../stores/fogStore'
@@ -233,6 +233,10 @@ export function useKeyboardShortcuts() {
                 useUndoStore.getState().pushCommand({
                   id: nextCommandId(),
                   label: `Paste ${pastedIds.length} token${pastedIds.length > 1 ? 's' : ''}`,
+                  action: {
+                    type: 'token.paste',
+                    payload: { ids: pastedIds.slice(), payloads: pastedPayloads },
+                  },
                   undo: async () => {
                     for (const id of pastedIds) useTokenStore.getState().removeToken(id)
                     await window.electronAPI?.tokens.deleteMany(pastedIds)
