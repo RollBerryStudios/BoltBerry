@@ -1,7 +1,9 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
-import { useUIStore, type WorkMode } from '../../stores/uiStore'
+import { useUIStore } from '../../stores/uiStore'
+import { useSessionStore } from '../../stores/sessionStore'
+import type { WorkMode } from '../../stores/sessionStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useTokenStore } from '../../stores/tokenStore'
@@ -162,19 +164,17 @@ export function Toolbar() {
   const { t } = useTranslation()
   const {
     activeTool,
-    toggleBlackout, blackoutActive,
     toggleTheme, theme,
     toggleLeftSidebar, toggleRightSidebar,
-    sessionMode, setSessionMode,
     toggleLanguage, language,
     playerViewportMode, setPlayerViewportMode, setPlayerViewport,
     gridSnap, toggleGridSnap,
     showMinimap, toggleMinimap,
     fogBrushRadius, setFogBrushRadius,
-    workMode, setWorkMode,
     showPlayerEye, togglePlayerEye,
-    playerConnected,
   } = useUIStore()
+  const { sessionMode, setSessionMode, workMode, setWorkMode, playerConnected } = useSessionStore()
+  const { blackoutActive, toggleBlackout } = useUIStore()
   const { activeCampaignId } = useCampaignStore()
   const [showMonitorDialog, setShowMonitorDialog] = useState(false)
   const [showSessionStartModal, setShowSessionStartModal] = useState(false)
@@ -193,8 +193,8 @@ export function Toolbar() {
     useTokenStore.getState().setTokens([])
     useInitiativeStore.getState().setEntries([])
     useFogStore.getState().clearHistory()
-    useUIStore.getState().setWorkMode('prep')
-    useUIStore.getState().setSessionMode('prep')
+    useSessionStore.getState().setWorkMode('prep')
+    useSessionStore.getState().setSessionMode('prep')
     useUIStore.getState().clearTokenSelection()
   }
 
