@@ -113,7 +113,7 @@ jobs:
 
       - name: Increase file descriptor limit
         run: |
-          ulimit -n 4096
+          ulimit -n 65536
           npx electron-builder --mac dmg zip --x64 --arm64 --publish never
         env:
           APPLE_ID: ${{ secrets.APPLE_ID }}
