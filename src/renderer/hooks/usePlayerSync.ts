@@ -7,7 +7,7 @@ import { useWallStore } from '../stores/wallStore'
 import type { PlayerFullState, PlayerTokenState, PlayerWallState } from '@shared/ipc-types'
 
 export function usePlayerSync() {
-  const setPlayerConnected = useUIStore((s) => s.setPlayerConnected)
+  const setPlayerConnected = useSessionStore((s) => s.setPlayerConnected)
   const sessionMode = useSessionStore((s) => s.sessionMode)
   const activeMapId = useCampaignStore((s) => s.activeMapId)
   const walls = useWallStore((s) => s.walls)

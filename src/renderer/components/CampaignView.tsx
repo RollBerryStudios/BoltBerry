@@ -2,6 +2,7 @@
 import { useTranslation } from 'react-i18next'
 import { useCampaignStore } from '../stores/campaignStore'
 import { useUIStore } from '../stores/uiStore'
+import { useSessionStore } from '../stores/sessionStore'
 import { NotesPanel } from './sidebar/panels/NotesPanel'
 import { CharacterSheetPanel } from './sidebar/panels/CharacterSheetPanel'
 import { HandoutsPanel } from './sidebar/panels/HandoutsPanel'
@@ -45,7 +46,8 @@ export function CampaignView() {
     addMap,
     setActiveCampaign,
   } = useCampaignStore()
-  const { playerConnected, language, toggleLanguage } = useUIStore()
+  const { language, toggleLanguage } = useUIStore()
+  const { playerConnected } = useSessionStore()
   // Tab lives in uiStore so the workspace can unmount when a map is
   // open (PB-5) without losing the DM's current tab selection.
   const tab = useUIStore((s) => s.workspaceTab)
