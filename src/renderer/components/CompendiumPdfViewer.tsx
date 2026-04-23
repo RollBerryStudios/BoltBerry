@@ -351,7 +351,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
   if (loading || !loaded) {
     return (
       <div className="bb-pdf-loading">
-        {error ? `⚠�¸ ${error}` : `${t('compendium.loading')}\u2026`}
+        {error ? `⚠️ ${error}` : `${t('compendium.loading')}\u2026`}
       </div>
     )
   }
@@ -646,7 +646,7 @@ function PdfToolbar({
             : t('compendium.sendToPlayer')
           }
         >
-          {broadcasting ? '🔀' : 'â†—'} {t('compendium.sendShort')}
+          {broadcasting ? '🔀' : '↗'} {t('compendium.sendShort')}
         </button>
         {broadcasting && (
           <button

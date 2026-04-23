@@ -247,8 +247,8 @@ function ToolGroupButton({ group, activeTool, open, onToggleOpen, onClose, onSel
   }, [open, onClose])
 
   // Primary-click UX (Foundry / Owlbear pattern):
-  //  - first click on an inactive group â‡’ activate its primary tool.
-  //  - click again on the already-active group â‡’ open the variant
+  //  - first click on an inactive group ⇒ activate its primary tool.
+  //  - click again on the already-active group ⇒ open the variant
   //    popover, so users can reach variants without aiming at the
   //    ~12-px chevron. The chevron remains as an affordance for
   //    non-active groups + as a visual "there's more here" hint.

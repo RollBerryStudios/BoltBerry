@@ -142,7 +142,7 @@ export function CampaignView() {
           onClick={() => setActiveCampaign(null)}
           style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
         >
-          â— {t('workspace.backToCampaigns')}
+          ◁ {t('workspace.backToCampaigns')}
         </button>
 
         <div className="bb-ws-brand">

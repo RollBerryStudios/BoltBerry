@@ -24,7 +24,7 @@ const COMBAT_ICONS: Record<string, string> = {
   blinded: 'ðŸ«£', charmed: '💫', dead: '💀',
   frightened: 'ðŸ˜±', grappled: 'ðŸ¤›', incapacitated: 'ðŸ˜µ',
   invisible: 'ðŸ‘»', paralyzed: '⚡', petrified: 'ðŸª¨',
-  poisoned: '☠�¸', prone: '⬇ï¸', restrained: 'ⓓï¸',
+  poisoned: '☠️', prone: '⬇ï¸', restrained: 'ⓓï¸',
   stunned: '⍐', unconscious: 'ðŸ’¤', exhausted: 'ðŸ˜«',
   deafened: 'ðŸ”‡',
 }
@@ -541,7 +541,7 @@ export function InitiativePanel() {
                     style={{ background: timerEntryId === entry.id ? 'var(--accent-blue-dim)' : 'var(--bg-overlay)', border: `1px solid ${timerEntryId === entry.id ? 'var(--accent-blue)' : 'var(--border-subtle)'}`, color: timerEntryId === entry.id ? 'var(--accent-blue-light)' : 'var(--text-muted)', cursor: 'pointer', fontSize: 10, padding: '1px 4px', lineHeight: 1, borderRadius: 3 }}
                     onClick={() => setTimerEntryId(timerEntryId === entry.id ? null : entry.id)}
                     title="Effekt-Timer hinzufügen"
-                  >â± Timer</button>
+                  >⏱ Timer</button>
                   <button
                     className="btn btn-ghost btn-icon"
                     style={{ fontSize: 10, padding: 2 }}
@@ -597,7 +597,7 @@ export function InitiativePanel() {
                 {activeEffects.length > 0 && (
                   <div style={{ fontSize: 10, marginTop: 2, letterSpacing: 0.5 }}>
                     {activeEffects.slice(0, 8).map((eff) => (
-                      <span key={eff} title={eff} style={{ marginRight: 2 }}>{COMBAT_ICONS[eff] ?? 'â“'}</span>
+                      <span key={eff} title={eff} style={{ marginRight: 2 }}>{COMBAT_ICONS[eff] ?? '❓'}</span>
                     ))}
                     {activeEffects.length > 8 && <span style={{ color: 'var(--text-muted)' }}>+{activeEffects.length - 8}</span>}
                   </div>
@@ -620,7 +620,7 @@ export function InitiativePanel() {
                           color: timer.roundsLeft <= 1 ? '#ef4444' : 'var(--text-muted)',
                         }}
                       >
-                        {COMBAT_ICONS[timer.effectId] ?? 'â“'} {timer.roundsLeft}R
+                        {COMBAT_ICONS[timer.effectId] ?? '❓'} {timer.roundsLeft}R
                         <button
                           style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 9, padding: 0, lineHeight: 1 }}
                           onClick={() => {

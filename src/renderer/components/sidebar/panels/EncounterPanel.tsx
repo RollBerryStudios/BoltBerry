@@ -449,7 +449,7 @@ export function EncounterPanel() {
               disabled={!activeMapId}
               title={activeMapId ? 'Monster aus dem Bestiarium auf die Karte setzen' : 'Keine aktive Karte'}
             >
-              âž• Aus Bestiarium hinzufügen
+              ➕ Aus Bestiarium hinzufügen
             </button>
             <button
               className="btn btn-primary"

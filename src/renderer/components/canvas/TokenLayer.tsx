@@ -960,10 +960,10 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     { label: 'ðŸ“‹ Kopieren', action: () => handleCopyTokens() },
                     { label: clipboardTokens.length > 0 ? `ðŸ“‹ Einfügen (${clipboardTokens.length})` : 'ðŸ“‹ Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
                     null,
-                    { label: `âŒ Alle löschen (${selectedTokenIds.length})`, action: () => handleDelete(token.id), danger: true },
+                    { label: `❌ Alle löschen (${selectedTokenIds.length})`, action: () => handleDelete(token.id), danger: true },
                   ] : [
-                    { label: 'âœï¸ Umbenennen', action: () => stableStartEdit(token) },
-                    { label: 'â¤ï¸ HP bearbeiten', action: () => startEditHp(token) },
+                    { label: '✏️ Umbenennen', action: () => stableStartEdit(token) },
+                    { label: '❤️ HP bearbeiten', action: () => startEditHp(token) },
                     { label: 'ðŸ›¡ AC bearbeiten', action: () => startEditAc(token) },
                     { label: 'ðŸ“ Notiz', action: () => handleEditNotes(token) },
                     null,
@@ -973,7 +973,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     { kind: 'hp-chips' },
                     null,
                     { label: '⚔️ Zustände', action: null, submenu: true, submenuType: 'status' },
-                    { label: 'âž• Vorteil', action: () => toggleAdvantage(token, true) },
+                    { label: '➕ Vorteil', action: () => toggleAdvantage(token, true) },
                     { label: '➖ Nachteil', action: () => toggleAdvantage(token, false) },
                     { label: '🎭¯ Konzentration', action: () => toggleStatusInMenu(token, 'concentrating') },
                     null,
@@ -987,11 +987,11 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     { label: clipboardTokens.length > 0 ? `ðŸ“‹ Einfügen (${clipboardTokens.length})` : 'ðŸ“‹ Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
                     { label: token.locked ? 'ðŸ”“ Entsperren' : 'ðŸ”’ Sperren', action: () => handleToggleLock(token) },
                     { label: 'ðŸ· Markierung', action: null, submenu: true, submenuType: 'marker' },
-                    { label: 'â¬†ï¸ nach vorne', action: () => { handleUpdate(token.id, { zIndex: token.zIndex + 1 }); closeContextMenu() } },
+                    { label: '⬆️ nach vorne', action: () => { handleUpdate(token.id, { zIndex: token.zIndex + 1 }); closeContextMenu() } },
                     { label: '⬇ï¸ nach hinten', action: () => { handleUpdate(token.id, { zIndex: Math.max(0, token.zIndex - 1) }); closeContextMenu() } },
-                    { label: 'â« ganz nach vorne', action: () => { const maxZ = Math.max(...tokens.map(t => t.zIndex), 0); handleUpdate(token.id, { zIndex: maxZ + 1 }); closeContextMenu() } },
+                    { label: '⏫ ganz nach vorne', action: () => { const maxZ = Math.max(...tokens.map(t => t.zIndex), 0); handleUpdate(token.id, { zIndex: maxZ + 1 }); closeContextMenu() } },
                     null,
-                    { label: 'âŒ Löschen', action: () => handleDelete(token.id), danger: true },
+                    { label: '❌ Löschen', action: () => handleDelete(token.id), danger: true },
                   ]
                   return menuItems.map((item, i) => {
                     if (item === null) {
@@ -1022,8 +1022,8 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                         <div key={i} style={{ padding: '2px 8px' }}>
                           <div style={{ fontSize: 10, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 3 }}>HP</div>
                           <div style={{ display: 'flex', gap: 4 }}>
-                            <button style={chipStyle(false)} title="âˆ’5 HP" onClick={() => adjustHp(-5)}>âˆ’5</button>
-                            <button style={chipStyle(false)} title="âˆ’1 HP" onClick={() => adjustHp(-1)}>âˆ’1</button>
+                            <button style={chipStyle(false)} title="−5 HP" onClick={() => adjustHp(-5)}>−5</button>
+                            <button style={chipStyle(false)} title="−1 HP" onClick={() => adjustHp(-1)}>−1</button>
                             <button style={chipStyle(true)}  title="+1 HP" onClick={() => adjustHp(1)}>+1</button>
                             <button style={chipStyle(true)}  title="+5 HP" onClick={() => adjustHp(5)}>+5</button>
                           </div>
@@ -1037,7 +1037,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                       const FACTION_OPTIONS = [
                         { value: 'party', label: '🎭® Spieler', color: '#22c55e' },
                         { value: 'enemy', label: '⚔️ Gegner', color: '#ef4444' },
-                        { value: 'neutral', label: 'âš–ï¸ Neutral', color: '#f59e0b' },
+                        { value: 'neutral', label: '⚖️ Neutral', color: '#f59e0b' },
                         { value: 'friendly', label: 'ðŸ¤ Freundlich', color: '#3b82f6' },
                       ]
                       return (
@@ -1363,7 +1363,7 @@ const TokenNode = memo(function TokenNode({
               key={eff}
               x={-r + idx * (iconSize + 2)}
               y={-r - iconSize - 4}
-              text={icons[eff] ?? 'â“'}
+              text={icons[eff] ?? '❓'}
               fontSize={iconSize}
               listening={false}
             />
