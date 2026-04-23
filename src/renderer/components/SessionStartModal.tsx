@@ -59,7 +59,7 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
           {/* Player window */}
           <CheckRow
             ok={playerConnected}
-            icon="ðŸ–¥"
+            icon="🖥"
             label={playerConnected ? 'Spielerfenster verbunden' : 'Spielerfenster nicht geöffnet'}
             action={!playerConnected ? (
               <button
@@ -75,7 +75,7 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
           {/* Active map */}
           <CheckRow
             ok={!!activeMap}
-            icon="ðŸ—º"
+            icon="🗺"
             label={activeMap ? `Karte: ${activeMap.name}` : 'Keine Karte geladen'}
           />
 

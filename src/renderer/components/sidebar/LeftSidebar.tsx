@@ -369,7 +369,7 @@ export function LeftSidebar() {
                 }}
                 title="Raster automatisch erkennen"
               >
-                {gridDetecting ? 'â³' : 'ðŸ”'} Erkennen
+                {gridDetecting ? 'â³' : '🔍'} Erkennen
               </button>
               {gridDetectMsg && (
                 <span style={{

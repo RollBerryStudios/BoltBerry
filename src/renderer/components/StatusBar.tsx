@@ -73,7 +73,7 @@ export function StatusBar() {
              : activeWeather === 'snow' ? t('statusBar.weatherSnow')
              : activeWeather === 'fog'  ? t('statusBar.weatherFog')
              : activeWeather === 'wind' ? t('statusBar.weatherWind')
-             : `ðŸŒ¤ ${activeWeather}`}
+             : `🌤 ${activeWeather}`}
           </span>
         </div>
       )}

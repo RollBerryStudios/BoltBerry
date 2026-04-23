@@ -633,7 +633,7 @@ function PdfToolbar({
           onClick={onToggleSearch}
           title={t('compendium.search') + ' (Ctrl+F)'}
         >
-          ðŸ”Ž
+          🔎
         </button>
         <button
           type="button"

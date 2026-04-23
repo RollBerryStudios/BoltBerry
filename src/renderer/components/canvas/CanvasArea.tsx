@@ -406,7 +406,7 @@ export function CanvasArea() {
           description={
             <ol style={{ textAlign: 'left', paddingLeft: 20, margin: '8px 0 0', lineHeight: 2, maxWidth: 320 }}>
               <li>Öffne die <strong>linke Sidebar</strong> (Ã¢—Â§ oben links)</li>
-              <li>Klicke auf <strong>Ã°Å¸–¼ Karte hinzufügen</strong> und wÃƒÂ¤hle ein Bild</li>
+              <li>Klicke auf <strong>Ã°Å¸–¼ Karte hinzufügen</strong> und wähle ein Bild</li>
               <li>Passe Raster &amp; Felder in den Karteneinstellungen an</li>
               <li>Wechsle in den <strong>Ã¢–¶ Spiel-Modus</strong> und starte die Session</li>
             </ol>

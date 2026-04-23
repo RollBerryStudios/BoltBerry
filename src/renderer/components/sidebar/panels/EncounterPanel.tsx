@@ -457,7 +457,7 @@ export function EncounterPanel() {
               onClick={handleSave}
               disabled={!activeCampaignId || mapTokens.length === 0}
             >
-              ðŸ’¾ Aktuelle Gegner als Encounter speichern
+              💾 Aktuelle Gegner als Encounter speichern
             </button>
           </div>
         )}
