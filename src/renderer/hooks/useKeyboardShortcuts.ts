@@ -272,7 +272,7 @@ export function useKeyboardShortcuts() {
         const { boards, activeBoardIndex, triggerSfx, setActiveBoardIndex } = useAudioStore.getState()
         const board = boards[activeBoardIndex]
 
-        // 1–9 â†’ slots 0–8,  0 â†’ slot 9
+        // 1–9 → slots 0–8,  0 → slot 9
         if (/^[0-9]$/.test(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey) {
           const slotIdx = e.key === '0' ? 9 : parseInt(e.key) - 1
           const slot = board?.slots.find((s) => s.slotNumber === slotIdx)
@@ -283,7 +283,7 @@ export function useKeyboardShortcuts() {
           return
         }
 
-        // ß â†’ cycle to next board
+        // ß → cycle to next board
         if ((e.key === 'ß' || e.key === '-') && !e.ctrlKey && !e.metaKey && !e.altKey) {
           if (boards.length > 1) {
             e.preventDefault()

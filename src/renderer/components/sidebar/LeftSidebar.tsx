@@ -338,7 +338,7 @@ export function LeftSidebar() {
                 onClick={() => handleGridChange(gridType === 'square' ? 'none' : 'square', gridSize)}
                 title="Raster ein/aus (G)"
               >
-                {gridType === 'square' ? 'â¬› AN' : 'â¬œ AUS'}
+                {gridType === 'square' ? '⬛ AN' : '⬜ AUS'}
               </button>
               <button
                 className="btn btn-ghost"
@@ -356,7 +356,7 @@ export function LeftSidebar() {
                     // positives on noisy maps.
                     if (detected.confidence > 0.15 && detected.gridSize > 10) {
                       handleGridChange('square', detected.gridSize, undefined, 0, 0)
-                      setGridDetectMsg({ text: `âœ“ ${detected.gridSize}px`, ok: true })
+                      setGridDetectMsg({ text: `✓ ${detected.gridSize}px`, ok: true })
                     } else {
                       setGridDetectMsg({ text: '✕ Kein Raster erkannt', ok: false })
                     }
@@ -369,7 +369,7 @@ export function LeftSidebar() {
                 }}
                 title="Raster automatisch erkennen"
               >
-                {gridDetecting ? 'â³' : '🔍'} Erkennen
+                {gridDetecting ? '⏳ ': '🔍'} Erkennen
               </button>
               {gridDetectMsg && (
                 <span style={{
@@ -478,7 +478,7 @@ export function LeftSidebar() {
                     title={`DM-Ansicht: ${rot}°`}
                     onClick={() => handleRotationChange(rot)}
                   >
-                    {rot === 0 ? 'â†‘' : rot === 90 ? 'â†’' : rot === 180 ? 'â†“' : 'â†'}
+                    {rot === 0 ? '↑' : rot === 90 ? '→' : rot === 180 ? '↓' : '←'}
                   </button>
                 ))}
               </div>
@@ -497,7 +497,7 @@ export function LeftSidebar() {
                     title={`Spieler-Ansicht: ${rot}° (wird sofort synchronisiert)`}
                     onClick={() => handlePlayerRotationChange(rot)}
                   >
-                    {rot === 0 ? 'â†‘' : rot === 90 ? 'â†’' : rot === 180 ? 'â†“' : 'â†'}
+                    {rot === 0 ? '↑' : rot === 90 ? '→' : rot === 180 ? '↓' : '←'}
                   </button>
                 ))}
               </div>
@@ -511,7 +511,7 @@ export function LeftSidebar() {
   )
 }
 
-// ”€”€ PDF â†’ PNG conversion (renderer-side, requires pdfjs-dist) ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
+// ”€”€ PDF → PNG conversion (renderer-side, requires pdfjs-dist) ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 
 async function renderPdfToImage(
   base64Data: string,

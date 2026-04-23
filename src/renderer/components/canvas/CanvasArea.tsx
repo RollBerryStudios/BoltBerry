@@ -78,7 +78,7 @@ const DEFAULT_LAYER_VISIBILITY: Record<string, boolean> = {
 /**
  * Delay before ambient canvas HUDs (viewport chip, minimap, layer toggle) fade
  * down. 2.5s felt noisy in testing; 3.5s matches Owlbear Rodeo. Combat HUD and
- * the multi-select bar ignore this Ã¢€" they carry action-critical state.
+ * the multi-select bar ignore this — they carry action-critical state.
  */
 const HUD_IDLE_DELAY_MS = 3500
 
@@ -110,7 +110,7 @@ export function CanvasArea() {
   }, [layerPanelOpen])
 
   // Keyboard shortcut: `L` toggles the layer-visibility panel (QW-9).
-  // Gated the same way the other canvas shortcuts are Ã¢€" ignored while
+  // Gated the same way the other canvas shortcuts are — ignored while
   // the user is typing in a text field.
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -185,7 +185,7 @@ export function CanvasArea() {
 
   // Continuous camera sync was removed in favour of Player Control Mode
   // (the dashed blue rectangle on the GM canvas). The DM's own pan / zoom
-  // no longer reaches the player window Ã¢€" only the explicit framed view
+  // no longer reaches the player window — only the explicit framed view
   // does. See `usePlayerSync` for the replacement broadcast path.
 
   // Resize observer
@@ -226,7 +226,7 @@ export function CanvasArea() {
     if (e.dataTransfer.files.length > 0) {
       const file = e.dataTransfer.files[0]
       if (!file.type.startsWith('image/')) {
-        // Dropping a PDF / audio / random file used to silently no-op Ã¢€"
+        // Dropping a PDF / audio / random file used to silently no-op —
         // surface the rejection so users don't think the drop target is
         // broken (QW-11).
         showToast('Nur Bilddateien können hier abgelegt werden', 'info', 4000)
@@ -401,14 +401,14 @@ export function CanvasArea() {
         </div>
       ) : !activeMap ? (
         <EmptyState
-          icon="Ã°Å¸—ºÃ¯Â¸Â"
+          icon="🗺"
           title="Keine Karte geladen"
           description={
             <ol style={{ textAlign: 'left', paddingLeft: 20, margin: '8px 0 0', lineHeight: 2, maxWidth: 320 }}>
-              <li>Öffne die <strong>linke Sidebar</strong> (Ã¢—Â§ oben links)</li>
-              <li>Klicke auf <strong>Ã°Å¸–¼ Karte hinzufügen</strong> und wähle ein Bild</li>
+              <li>Öffne die <strong>linke Sidebar</strong> (◧ oben links)</li>
+              <li>Klicke auf <strong>🖼 Karte hinzufügen</strong> und wähle ein Bild</li>
               <li>Passe Raster &amp; Felder in den Karteneinstellungen an</li>
-              <li>Wechsle in den <strong>Ã¢–¶ Spiel-Modus</strong> und starte die Session</li>
+              <li>Wechsle in den <strong>▶ Spiel-Modus</strong> und starte die Session</li>
             </ol>
           }
         />
@@ -514,7 +514,7 @@ export function CanvasArea() {
             />
           )}
 
-          {/* Layer 12: Player Control Mode Ã¢€" dashed rectangle that frames
+          {/* Layer 12: Player Control Mode — dashed rectangle that frames
               what the player window renders. Drawn on top of every
               other layer so it's always visible no matter what tool
               the DM has active. Listens to nothing (interactions live
@@ -530,7 +530,7 @@ export function CanvasArea() {
         </Stage>
       )}
 
-      {/* Player Control Mode Ã¢€" Ctrl+drag / Ctrl+wheel gestures. Mounted
+      {/* Player Control Mode — Ctrl+drag / Ctrl+wheel gestures. Mounted
           outside the Stage so the window-level listeners keep working
           even when no map is loaded (the PlayerViewportLayer above is
           only rendered when a map exists). */}
@@ -553,10 +553,10 @@ export function CanvasArea() {
       <SubToolStrip />
 
       {/* Compact audio strip (bottom-left); only visible when a channel
-          is loaded. Click the Ã¢‹Â¯ handle to open the full AudioPanel. */}
+          is loaded. Click the ⋯ handle to open the full AudioPanel. */}
       <AudioStrip />
 
-      {/* Weather overlay Ã¢€" preview for the DM of what the players see.
+      {/* Weather overlay — preview for the DM of what the players see.
           `activeWeather` is kept in uiStore so it persists across view
           toggles; the actual broadcast to the player window happens in
           OverlayPanel. */}
@@ -600,7 +600,7 @@ export function CanvasArea() {
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
           boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
         }}>
-          Ã°Å¸‘Â Spieler-Vorschau Ã¢€" Du siehst, was die Spieler sehen
+          👁 Spieler-Vorschau — Du siehst, was die Spieler sehen
           <button
             style={{ background: 'rgba(255,255,255,0.2)', border: '1px solid rgba(255,255,255,0.4)', borderRadius: 4, color: '#fff', padding: '2px 10px', cursor: 'pointer', fontSize: 12, marginLeft: 12 }}
             onClick={() => useSessionStore.getState().setWorkMode('play')}
@@ -634,7 +634,7 @@ export function CanvasArea() {
         <MinimapOverlay stageRef={stageRef} canvasSize={size} />
       )}
 
-      {/* Ã¢"€Ã¢"€ Layer visibility panel Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€Ã¢"€ */}
+      {/* —— Layer visibility panel ——————————————————————————————————————— */}
       {activeMap && (
         <div
           ref={layerPanelRef}
@@ -721,7 +721,7 @@ export function CanvasArea() {
                     cursor: 'pointer', width: '100%', textAlign: 'left',
                   }}
                 >
-                  Ã¢ º Alle einblenden
+                  → Alle einblenden
                 </button>
               </div>
             </div>
@@ -747,7 +747,7 @@ export function CanvasArea() {
               boxShadow: '0 2px 8px rgba(0,0,0,0.4)',
             }}
           >
-            <span>Ã¢—Â«</span>
+            <span>◫</span>
             <span>Ebenen</span>
             {/* Dot indicator if any layer is hidden */}
             {Object.entries(layerVisibility).some(([k, v]) => {

@@ -94,7 +94,7 @@ export function StatusBar() {
           style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-mono, monospace)' }}
           title={t('statusBar.tokenCount', { count: tokenCount })}
         >
-          â¬¤ {tokenCount}
+          ⬤ {tokenCount}
         </div>
       )}
 

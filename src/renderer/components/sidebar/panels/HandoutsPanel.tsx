@@ -44,7 +44,7 @@ function renderMarkdown(text: string): string {
       htmlLines.push('</ul>'); inList = false
     }
 
-    // Blank line â†’ paragraph break
+    // Blank line → paragraph break
     if (line.trim() === '') {
       htmlLines.push('<br/>')
       continue
@@ -275,7 +275,7 @@ export function HandoutsPanel() {
                   transition: 'color var(--transition)',
                 }}
               >
-                {tab === 'write' ? 'âœ Schreiben' : 'ðŸ‘ Vorschau'}
+                {tab === 'write' ? '✏ Schreiben' : '👁 Vorschau'}
               </button>
             ))}
             <span style={{ flex: 1 }} />
@@ -347,7 +347,7 @@ export function HandoutsPanel() {
               style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-sm)' }}
               onClick={handleSaveHandout}
             >
-              âœ“ Speichern
+              ✓ Speichern
             </button>
             <button
               className="btn btn-ghost"
@@ -489,7 +489,7 @@ function HandoutCard({
             onClick={onZoom}
             title="Vergrößert anzeigen"
           >
-            â›¶
+            ▶
           </button>
 
           {/* Send to players — only in session mode */}
@@ -510,7 +510,7 @@ function HandoutCard({
               onClick={onSend}
               title={isSent ? 'Erneut senden' : 'An Spieler senden'}
             >
-              {isSent ? 'ðŸ“º Wird gezeigt' : 'â†’ Spieler'}
+              {isSent ? '📺 Wird gezeigt' : '→ Spieler'}
             </button>
           )}
 

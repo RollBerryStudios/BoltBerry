@@ -674,7 +674,7 @@ export function EncounterPanel() {
           {selectedTemplate.walls.length > 0 && (
             <div style={{ marginBottom: 'var(--sp-2)' }}>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>
-                ðŸ§± {selectedTemplate.walls.length} Wände/Türen
+                🧱 {selectedTemplate.walls.length} Wände/Türen
               </div>
             </div>
           )}

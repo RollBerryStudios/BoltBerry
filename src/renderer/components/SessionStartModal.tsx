@@ -83,7 +83,7 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
           <CheckRow
             ok={visibleTokenCount > 0}
             warn={visibleTokenCount === 0}
-            icon="â¬¤"
+            icon="⬤"
             label={visibleTokenCount > 0
               ? `${visibleTokenCount} Token für Spieler sichtbar`
               : 'Keine Token für Spieler sichtbar'}
@@ -147,7 +147,7 @@ function CheckRow({
   action?: ReactNode
 }) {
   const color = ok ? 'var(--success)' : warn ? 'var(--warning)' : 'var(--text-muted)'
-  const statusIcon = ok ? 'âœ“' : warn ? '!' : 'â—‹'
+  const statusIcon = ok ? '✓' : warn ? '!' : '—‹'
 
   return (
     <div style={{

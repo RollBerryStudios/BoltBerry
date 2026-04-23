@@ -351,7 +351,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
   if (loading || !loaded) {
     return (
       <div className="bb-pdf-loading">
-        {error ? `âš ï¸ ${error}` : `${t('compendium.loading')}\u2026`}
+        {error ? `⚠�¸ ${error}` : `${t('compendium.loading')}\u2026`}
       </div>
     )
   }
@@ -422,7 +422,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
           <canvas ref={canvasRef} className="bb-pdf-canvas" />
           {sentTick > 0 && (
             <div className="bb-pdf-sent-toast">
-              âœ“ {t('compendium.sentToPlayer')}
+              ✓ {t('compendium.sentToPlayer')}
             </div>
           )}
         </div>
@@ -572,7 +572,7 @@ function PdfToolbar({
           disabled={!hasOutline}
           title={hasOutline ? t('compendium.toggleToc') : t('compendium.noOutline')}
         >
-          â˜°
+          ☰
         </button>
         <button
           type="button"
@@ -586,7 +586,7 @@ function PdfToolbar({
 
       <div className="bb-pdf-group">
         <button type="button" className="bb-pdf-btn" onClick={onPrev} disabled={pageNum <= 1} title={t('compendium.prevPage')}>
-          â—€
+          ◀‬
         </button>
         <form
           onSubmit={(e) => {
@@ -616,7 +616,7 @@ function PdfToolbar({
 
       <div className="bb-pdf-group">
         <button type="button" className="bb-pdf-btn" onClick={onZoomOut} disabled={zoom <= 0.4} title={t('compendium.zoomOut')}>
-          âˆ’
+          ‒’
         </button>
         <button type="button" className="bb-pdf-btn bb-pdf-btn-text mono" onClick={onZoomReset} title={t('compendium.zoomReset')}>
           {Math.round(zoom * 100)}%
@@ -655,7 +655,7 @@ function PdfToolbar({
             onClick={onStopBroadcast}
             title={t('compendium.stopBroadcast')}
           >
-            â¹ {t('compendium.stopShort')}
+            ⏳ {t('compendium.stopShort')}
           </button>
         )}
       </div>

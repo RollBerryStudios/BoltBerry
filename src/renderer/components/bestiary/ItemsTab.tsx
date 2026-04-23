@@ -135,7 +135,7 @@ export function ItemsTab({
 
   const handleSelect = useCallback((slug: string) => setSelectedSlug(slug), [])
 
-  if (error) return <div className="bb-best-error">âš ï¸ {error}</div>
+  if (error) return <div className="bb-best-error">⚠�¸ {error}</div>
   if (!index) return <div className="bb-best-loading">…</div>
 
   return (

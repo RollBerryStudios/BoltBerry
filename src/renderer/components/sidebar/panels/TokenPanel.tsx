@@ -214,7 +214,7 @@ export function TokenPanel() {
             disabled={!activeMapId}
             title={t('tokens.fromLibrary')}
           >
-            ðŸ“š
+            📖
           </button>
         </div>
         {tokens.length > 6 && (
@@ -317,13 +317,13 @@ export function TokenPanel() {
         {tokens.length === 0 ? (
           <EmptyState
             size="sm"
-            icon="â¬¤"
+            icon="⬤"
             title={t('tokens.empty')}
             description={t('tokens.emptyDesc')}
           />
         ) : displayedTokens.length === 0 ? (
           <EmptyState
-            icon="ðŸ”"
+            icon="🔍"
             title={t('tokens.noResults')}
             description={t('tokens.noResultsDesc', { filter })}
           />
@@ -352,7 +352,7 @@ export function TokenPanel() {
               }}>
                 {token.imagePath
                   ? <TokenThumbnail path={token.imagePath} />
-                  : 'â¬¤'}
+                  : '⬤'}
               </div>
 
               <div style={{ flex: 1, overflow: 'hidden' }}>
@@ -661,7 +661,7 @@ export function TokenPanel() {
                       </div>
                     </div>
                     <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>
-                      <span style={{ color, textShadow: `0 0 6px ${color}` }}>â—‹</span> Radius {radius} Felder
+                      <span style={{ color, textShadow: `0 0 6px ${color}` }}>—‹</span> Radius {radius} Felder
                     </div>
                   </>
                 )}
@@ -780,7 +780,7 @@ function AddToInitiativeButton({ token, mapId }: { token: TokenRecord; mapId: nu
   if (alreadyIn) {
     return (
       <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 4 }}>
-        <span style={{ color: 'var(--success)' }}>âœ“</span> In Initiative
+        <span style={{ color: 'var(--success)' }}>✓</span> In Initiative
       </div>
     )
   }
@@ -918,7 +918,7 @@ function LibraryPicker({
             fontFamily: "'Fraunces', Georgia, serif",
             fontSize: 18, fontWeight: 500,
           }}>
-            ðŸ“š Aus Bibliothek
+            📖 Aus Bibliothek
           </div>
           <button
             type="button"

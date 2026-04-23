@@ -938,7 +938,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                   const isBatch = selectedTokenIds.length > 1 && selectedTokenIds.includes(token.id)
                   const hasLight = (token.notes ?? '').includes('light:')
                   const menuItems: any[] = isBatch ? [
-                    { label: `ðŸ‘ Alle sichtbar machen (${selectedTokenIds.length})`, action: () => {
+                    { label: `👁 Alle sichtbar machen (${selectedTokenIds.length})`, action: () => {
                       for (const id of selectedTokenIds) handleUpdate(id, { visibleToPlayers: true })
                       closeContextMenu()
                     }},
@@ -982,7 +982,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     { label: '🎭¯ Fokus setzen', action: () => handleFocusToken(token) },
                     { label: hasLight ? 'ðŸ’¡ Lichtquelle deaktivieren' : 'ðŸ’¡ Lichtquelle aktivieren', action: () => handleToggleLight(token) },
                     null,
-                    { label: token.visibleToPlayers ? 'ðŸ™ˆ Verstecken' : 'ðŸ‘ Sichtbar machen', action: () => handleToggleVisibility(token) },
+                    { label: token.visibleToPlayers ? 'ðŸ™ˆ Verstecken' : '👁 Sichtbar machen', action: () => handleToggleVisibility(token) },
                     { label: 'ðŸ“‹ Kopieren', action: () => handleCopyTokens() },
                     { label: clipboardTokens.length > 0 ? `ðŸ“‹ Einfügen (${clipboardTokens.length})` : 'ðŸ“‹ Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
                     { label: token.locked ? 'ðŸ”“ Entsperren' : 'ðŸ”’ Sperren', action: () => handleToggleLock(token) },
@@ -1126,7 +1126,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                                   >
                                     <span style={{ fontSize: 14 }}>{eff.icon}</span>
                                     {eff.label}
-                                    {isActive && <span style={{ color: 'var(--accent-blue)', marginLeft: 'auto', fontSize: 10 }}>âœ“</span>}
+                                    {isActive && <span style={{ color: 'var(--accent-blue)', marginLeft: 'auto', fontSize: 10 }}>✓</span>}
                                   </button>
                                 )
                               })}

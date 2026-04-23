@@ -20,7 +20,7 @@ import type { WorkspaceTab } from '../stores/uiStore'
 /* Campaign workspace — shown when a campaign is open but no map is
    active. Uses the dashboard aesthetic (Fraunces titles, dark cards,
    Bolt-yellow CTA) so that the whole "between sessions" experience —
-   Welcome â†’ Workspace â†’ Map view — shares one visual language. */
+   Welcome → Workspace → Map view — shares one visual language. */
 
 type Tab = WorkspaceTab
 
@@ -82,7 +82,7 @@ export function CampaignView() {
     loadMaps(activeCampaignId)
   }, [activeCampaignId, loadMaps])
 
-  // Command-palette â†’ workspace tab deep-link. Lets a DM open the Bestiarium
+  // Command-palette → workspace tab deep-link. Lets a DM open the Bestiarium
   // via Ctrl+K from anywhere in the campaign.
   useEffect(() => {
     function onOpenTab(e: Event) {
@@ -640,14 +640,14 @@ function MapCard({ map, index, total, onOpen, onRename, onDelete, onReorder }: {
             onClick={() => onReorder('up')}
             disabled={index === 0}
             title={t('workspace.mapMoveUp')}
-          >â†‘</button>
+          >↑</button>
           <button
             type="button"
             className="bb-ws-map-card-btn"
             onClick={() => onReorder('down')}
             disabled={index >= total - 1}
             title={t('workspace.mapMoveDown')}
-          >â†“</button>
+          >↓</button>
           <button
             type="button"
             className="bb-ws-map-card-btn bb-ws-map-card-btn-danger"

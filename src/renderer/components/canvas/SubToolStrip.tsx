@@ -8,10 +8,10 @@ import { useDockStore } from '../../stores/dockStore'
  * horizontal strip anchored top-left of the canvas, just right of the
  * LeftToolDock. Renders tool-specific option presets:
  *
- *  - fog brush / brush-cover   â†’ size presets, reveal/cover mode
- *  - measure-*                 â†’ shape toggle (line/circle/cone)
- *  - wall-*                    â†’ wall/door toggle
- *  - draw-*                    â†’ stroke-width presets, color swatches
+ *  - fog brush / brush-cover   → size presets, reveal/cover mode
+ *  - measure-*                 → shape toggle (line/circle/cone)
+ *  - wall-*                    → wall/door toggle
+ *  - draw-*                    → stroke-width presets, color swatches
  *
  * Returns null when the active tool has no configurable presets so the
  * strip never shows an empty shell. The strip is purely a convenience
