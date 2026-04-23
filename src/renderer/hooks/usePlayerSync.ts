@@ -125,7 +125,7 @@ export function usePlayerSync() {
       // This must happen BEFORE the prep guard so the close button appears.
       setPlayerConnected(true)
 
-      const { sessionMode: mode } = useUIStore.getState()
+      const mode = useSessionStore.getState().sessionMode
       if (mode === 'prep') return  // In prep, acknowledge but don't push map data yet
 
       await buildAndSendFullSync()
