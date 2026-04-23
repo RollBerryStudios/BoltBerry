@@ -3,6 +3,15 @@
 All notable changes to BoltBerry are tracked here. The app follows SemVer
 once it hits 1.0; until then, 0.x releases may break prior assumptions.
 
+## 0.20.14 — 2026-04-23
+
+### Fixed
+- **Comprehensive UTF-8 mojibake cleanup** — fixed double/triple-encoded
+  characters across 13+ source files (Wiki detail cards, sidebar panels,
+  context menus, initiative, campaign view). Separators now render as
+  `·`, arrows as `↗`, and emoji icons (⚔️ 🛡️ ⚠️ ❌ ✏️ ❤️ ⬆️ ⏫ − ⚖️)
+  display correctly instead of showing corrupted `â€“` sequences.
+
 ## Unreleased
 
 - **Wiki** — bilingual SRD 5.1 reference: 263 monsters, 203 items, 313
