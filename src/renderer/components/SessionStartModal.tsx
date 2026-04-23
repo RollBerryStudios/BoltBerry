@@ -22,9 +22,9 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
 
   function handleGoLive() {
     if (!playerConnected) {
-      setConfirmWarning('Das Spielerfenster ist nicht geÃ¶ffnet. Trotzdem live gehen?')
+      setConfirmWarning('Das Spielerfenster ist nicht geöffnet. Trotzdem live gehen?')
     } else if (visibleTokenCount === 0) {
-      setConfirmWarning('Keine Token sind fÃ¼r Spieler sichtbar. Trotzdem live gehen?')
+      setConfirmWarning('Keine Token sind für Spieler sichtbar. Trotzdem live gehen?')
     } else {
       onConfirm()
     }
@@ -52,7 +52,7 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
           Session starten
         </h2>
         <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 'var(--sp-5)' }}>
-          Ab jetzt werden alle Ã„nderungen live an die Spieler gesendet.
+          Ab jetzt werden alle Änderungen live an die Spieler gesendet.
         </p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)', marginBottom: 'var(--sp-5)' }}>
@@ -60,14 +60,14 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
           <CheckRow
             ok={playerConnected}
             icon="ðŸ–¥"
-            label={playerConnected ? 'Spielerfenster verbunden' : 'Spielerfenster nicht geÃ¶ffnet'}
+            label={playerConnected ? 'Spielerfenster verbunden' : 'Spielerfenster nicht geöffnet'}
             action={!playerConnected ? (
               <button
                 className="btn btn-ghost"
                 style={{ fontSize: 'var(--text-xs)', padding: '2px 8px' }}
                 onClick={onOpenPlayerWindow}
               >
-                Ã–ffnen
+                Öffnen
               </button>
             ) : undefined}
           />
@@ -85,8 +85,8 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
             warn={visibleTokenCount === 0}
             icon="â¬¤"
             label={visibleTokenCount > 0
-              ? `${visibleTokenCount} Token fÃ¼r Spieler sichtbar`
-              : 'Keine Token fÃ¼r Spieler sichtbar'}
+              ? `${visibleTokenCount} Token für Spieler sichtbar`
+              : 'Keine Token für Spieler sichtbar'}
           />
         </div>
 

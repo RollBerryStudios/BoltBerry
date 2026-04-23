@@ -30,14 +30,14 @@ const SCHOOL_COLOR: Record<string, string> = {
 }
 
 const SCHOOL_ICON: Record<string, string> = {
-  abjuration: 'ðŸ›¡ï¸',
-  conjuration: 'ðŸŒ€',
-  divination: 'ðŸ”®',
-  enchantment: 'ðŸ’«',
-  evocation: 'ðŸ’¥',
-  illusion: 'ðŸŽ­',
-  necromancy: 'ðŸ’€',
-  transmutation: 'ðŸ”„',
+  abjuration: '🛡️',
+  conjuration: '🌐',
+  divination: '🔮',
+  enchantment: '💫',
+  evocation: '💥',
+  illusion: '🎭­',
+  necromancy: '💀',
+  transmutation: '🔀',
 }
 
 export function SpellsTab({
@@ -143,7 +143,7 @@ export function SpellsTab({
   const handleSelect = useCallback((slug: string) => setSelectedSlug(slug), [])
 
   if (error) return <div className="bb-best-error">âš ï¸ {error}</div>
-  if (!index) return <div className="bb-best-loading">â€¦</div>
+  if (!index) return <div className="bb-best-loading">…</div>
 
   return (
     <div className="bb-best-layout">
@@ -224,7 +224,7 @@ export function SpellsTab({
             const name = pickName(sp, language)
             const schoolKey = sp.school.en.toLowerCase()
             const tint = SCHOOL_COLOR[schoolKey] ?? '#94a3b8'
-            const icon = SCHOOL_ICON[schoolKey] ?? 'âœ¨'
+            const icon = SCHOOL_ICON[schoolKey] ?? '✨'
             return (
               <li key={sp.slug}>
                 <button
@@ -315,15 +315,15 @@ function SpellDetail({ slug, language, onUserEntryChanged }: {
     return () => { alive = false }
   }, [slug])
 
-  if (!record) return <div className="bb-best-loading">â€¦</div>
+  if (!record) return <div className="bb-best-loading">…</div>
 
   const name = pickName(record, language)
   const schoolKey = record.school.en.toLowerCase()
   const tint = SCHOOL_COLOR[schoolKey] ?? '#94a3b8'
-  const icon = SCHOOL_ICON[schoolKey] ?? 'âœ¨'
+  const icon = SCHOOL_ICON[schoolKey] ?? '✨'
   const description = localized(record.description, language)
   const higherLevels = localized(record.higherLevels, language)
-  // Alphabetically sorted per locale â€” raw SRD order (source-file order)
+  // Alphabetically sorted per locale — raw SRD order (source-file order)
   // felt arbitrary to players scanning for "does Cleric get this?".
   const classes = localizedArray(record.classes, language)
     .map(titleCase)
@@ -427,7 +427,7 @@ function SpellActions({
         disabled={!playerConnected}
         title={playerConnected ? t('bestiary.sendToPlayer') : t('bestiary.sendDisabled')}
       >
-        ðŸ“¡ {t('bestiary.sendToPlayer')}
+        📋 {t('bestiary.sendToPlayer')}
       </button>
     </div>
   )

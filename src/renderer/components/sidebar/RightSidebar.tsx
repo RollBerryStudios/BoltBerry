@@ -41,8 +41,8 @@ export function RightSidebar() {
   const tokenSelected = selectedTokenId !== null
 
   // Auto-open the contextually-relevant section when user context changes.
-  // We track the previous "context signature" to only fire on actual transitions â€”
-  // not on every re-render â€” so the user can still manually navigate elsewhere.
+  // We track the previous "context signature" to only fire on actual transitions —
+  // not on every re-render — so the user can still manually navigate elsewhere.
   const prevContextRef = useRef<string>('')
   useEffect(() => {
     const sig = `${tokenSelected ? 't' : ''}|${combatActive ? 'c' : ''}`
@@ -59,10 +59,10 @@ export function RightSidebar() {
     {
       id: 'scene',
       labelKey: 'sidebar.right.dockScene',
-      icon: 'ðŸ—ºï¸',
+      icon: '🗺️',
       sections: [
         { id: 'tokens',     labelKey: 'sidebar.right.tabTokens',     icon: 'â¬¤',  render: () => <TokenPanel />,         isContextual: tokenSelected && !combatActive },
-        { id: 'initiative', labelKey: 'sidebar.right.tabInitiative', icon: 'âš”ï¸', render: () => <InitiativePanel />,    isContextual: combatActive },
+        { id: 'initiative', labelKey: 'sidebar.right.tabInitiative', icon: '⚔️', render: () => <InitiativePanel />,    isContextual: combatActive },
         { id: 'rooms',      labelKey: 'sidebar.right.tabRooms',      icon: 'ðŸ ', render: () => <RoomPanel /> },
       ],
     },
@@ -72,7 +72,7 @@ export function RightSidebar() {
       icon: 'ðŸ“š',
       sections: [
         { id: 'notes',      labelKey: 'sidebar.right.tabNotes',      icon: 'ðŸ“', render: () => <NotesPanel /> },
-        { id: 'handouts',   labelKey: 'sidebar.right.tabHandouts',   icon: 'ðŸ“œ', render: () => <HandoutsPanel /> },
+        { id: 'handouts',   labelKey: 'sidebar.right.tabHandouts',   icon: '📜', render: () => <HandoutsPanel /> },
         { id: 'encounters', labelKey: 'sidebar.right.tabEncounters', icon: 'ðŸ‘¾', render: () => <EncounterPanel /> },
         { id: 'characters', labelKey: 'sidebar.right.tabCharacters', icon: 'ðŸ“‹', render: () => <CharacterSheetPanel /> },
       ],

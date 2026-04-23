@@ -25,7 +25,7 @@ export function StatusBar() {
     switch (saveState) {
       case 'saving': return { text: t('statusBar.saving'), color: 'var(--warning)' }
       case 'saved':
-        // Persistent indicator â€” show time of last save so DM always sees the current state
+        // Persistent indicator — show time of last save so DM always sees the current state
         return lastSaved
           ? {
               text: t('statusBar.savedAt', {
@@ -36,7 +36,7 @@ export function StatusBar() {
           : { text: t('statusBar.saved'), color: 'var(--success)' }
       case 'error':  return { text: t('statusBar.saveError'), color: 'var(--danger)' }
       default:
-        // idle â€” no save has completed yet this session
+        // idle — no save has completed yet this session
         return { text: t('statusBar.autosave'), color: 'var(--text-muted)' }
     }
   })()

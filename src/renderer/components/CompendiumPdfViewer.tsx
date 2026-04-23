@@ -62,7 +62,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
   const [searchQuery, setSearchQuery] = useState('')
   const [searchState, setSearchState] = useState<SearchState>({ phase: 'idle' })
 
-  // Send-to-player toast â€” acknowledges the page broadcast succeeded.
+  // Send-to-player toast — acknowledges the page broadcast succeeded.
   const [sentTick, setSentTick] = useState(0)
   const playerConnected = useSessionStore((s) => s.playerConnected)
 
@@ -170,7 +170,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
         renderTaskRef.current = task
         await task.promise
       } catch (err) {
-        // pdfjs throws a RenderingCancelledException on cancel â€” ignore that.
+        // pdfjs throws a RenderingCancelledException on cancel — ignore that.
         const name = (err as { name?: string }).name
         if (!cancelled && name !== 'RenderingCancelledException') {
           setError((err as Error).message || String(err))
@@ -252,7 +252,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
   // Lazy-build the index the first time the user opens search. Re-opening is
   // cheap: the ref is preserved across opens until the doc changes. A local
   // `cancelled` flag guards against state updates firing after the component
-  // unmounts or the user switches PDFs mid-index â€” without it the last
+  // unmounts or the user switches PDFs mid-index — without it the last
   // `setSearchState({ phase: 'ready' })` would leak against a stale doc.
   useEffect(() => {
     if (!searchOpen || !loaded) return
@@ -278,7 +278,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
         if (idx === -1) break
         const start = Math.max(0, idx - 30)
         const end = Math.min(text.length, idx + q.length + 60)
-        const snippet = (start > 0 ? 'â€¦' : '') + text.slice(start, end) + (end < text.length ? 'â€¦' : '')
+        const snippet = (start > 0 ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : '')
         hits.push({ page, snippet, offset: idx })
         from = idx + q.length
         if (hits.length >= 200) break outer
@@ -646,7 +646,7 @@ function PdfToolbar({
             : t('compendium.sendToPlayer')
           }
         >
-          {broadcasting ? 'ðŸ”„' : 'â†—'} {t('compendium.sendShort')}
+          {broadcasting ? '🔀' : 'â†—'} {t('compendium.sendShort')}
         </button>
         {broadcasting && (
           <button
@@ -669,7 +669,7 @@ function PdfToolbar({
 // pdfjs-dist returns bookmarks as a tree of OutlineNode objects whose
 // `dest` needs to be resolved to a 1-based page number via getPageIndex.
 // A null result means the destination couldn't be resolved (e.g. external
-// links, encrypted refs) â€” we keep the title but disable the click.
+// links, encrypted refs) — we keep the title but disable the click.
 
 interface PdfOutlineItem {
   title: string
@@ -698,7 +698,7 @@ async function extractOutline(doc: unknown): Promise<OutlineEntry[]> {
           if (Number.isFinite(idx)) page = idx + 1
         }
       } catch {
-        /* unresolvable â€” leave page null */
+        /* unresolvable — leave page null */
       }
       const children = it.items && it.items.length > 0 ? await resolve(it.items) : []
       out.push({ title: it.title, page, children })
@@ -775,7 +775,7 @@ function ThumbnailList({
   currentPage: number
   onJump: (page: number) => void
 }) {
-  // Pre-allocate a flat array â€” each Thumb only renders its canvas when
+  // Pre-allocate a flat array — each Thumb only renders its canvas when
   // scrolled into view via IntersectionObserver. Keeps memory low on
   // long PDFs (300+ pages).
   const pages = useMemo(() => Array.from({ length: numPages }, (_, i) => i + 1), [numPages])
@@ -966,7 +966,7 @@ function PdfViewerStyles() {
         background: var(--bg-base);
         /* display: block + margin auto centers the canvas when it's
            narrower than the viewport, but stops clipping the left edge
-           when the page is wider â€” flex + justify-content: center
+           when the page is wider — flex + justify-content: center
            anchors overflow off-screen and the user can't scroll back. */
         text-align: center;
       }

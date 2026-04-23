@@ -39,8 +39,8 @@ const FORMATIONS: { value: FormationType; label: string; icon: string }[] = [
   { value: 'saved', label: 'Gespeichert', icon: 'ðŸ“Œ' },
   { value: 'line', label: 'Linie', icon: 'âž–' },
   { value: 'circle', label: 'Kreis', icon: 'â­•' },
-  { value: 'cluster', label: 'Haufen', icon: 'ðŸ’¥' },
-  { value: 'wing', label: 'FlÃ¼gel', icon: 'ðŸ¦…' },
+  { value: 'cluster', label: 'Haufen', icon: '💥' },
+  { value: 'wing', label: 'Flügel', icon: 'ðŸ¦…' },
   { value: 'v-formation', label: 'Keil', icon: 'ðŸ”»' },
 ]
 
@@ -48,7 +48,7 @@ const DIFFICULTIES: { value: DifficultyLevel; label: string; color: string }[] =
   { value: 'easy', label: 'Leicht', color: '#22c55e' },
   { value: 'normal', label: 'Normal', color: '#3b82f6' },
   { value: 'hard', label: 'Schwer', color: '#f59e0b' },
-  { value: 'deadly', label: 'TÃ¶dlich', color: '#ef4444' },
+  { value: 'deadly', label: 'Tödlich', color: '#ef4444' },
 ]
 
 // Tiny SVG previews for each formation
@@ -199,11 +199,11 @@ export function EncounterPanel() {
       if (ok) {
         showToast(`${record.name} auf die Karte gesetzt`, 'success')
         // The tokenStore is refreshed by the existing rescan hook that
-        // watches tokens table mutations â€” no manual store push here.
+        // watches tokens table mutations — no manual store push here.
       }
     } catch (err) {
       console.error('[EncounterPanel] bestiary spawn failed:', err)
-      showToast('Monster konnte nicht hinzugefÃ¼gt werden', 'error')
+      showToast('Monster konnte nicht hinzugefügt werden', 'error')
     } finally {
       setShowBestiaryPicker(false)
     }
@@ -371,15 +371,15 @@ export function EncounterPanel() {
     if (!window.electronAPI) return
     const enc = encounters.find((e) => e.id === id)
     const confirmed = await window.electronAPI.confirmDialog(
-      `Begegnung â€ž${enc?.name ?? ''}" lÃ¶schen?`,
-      'Diese Aktion kann nicht rÃ¼ckgÃ¤ngig gemacht werden.'
+      `Begegnung â€ž${enc?.name ?? ''}" löschen?`,
+      'Diese Aktion kann nicht rückgängig gemacht werden.'
     )
     if (!confirmed) return
     removeEncounter(id)
     if (selectedId === id) setSelectedId(null)
     try {
       await window.electronAPI.encounters.delete(id)
-      showToast(`Encounter gelÃ¶scht`, 'info')
+      showToast(`Encounter gelöscht`, 'info')
     } catch (err) {
       console.error('[EncounterPanel] delete failed:', err)
     }
@@ -430,7 +430,7 @@ export function EncounterPanel() {
                 if (e.key === 'Enter') commitNewEncounter()
                 if (e.key === 'Escape') { setShowNewNameInput(false); setNewNameValue('') }
               }}
-              placeholder="Encounter-Nameâ€¦"
+              placeholder="Encounter-Name…"
               style={{
                 flex: 1, fontSize: 'var(--text-xs)', padding: '4px 8px',
                 background: 'var(--bg-base)', border: '1px solid var(--accent-blue)',
@@ -449,7 +449,7 @@ export function EncounterPanel() {
               disabled={!activeMapId}
               title={activeMapId ? 'Monster aus dem Bestiarium auf die Karte setzen' : 'Keine aktive Karte'}
             >
-              âž• Aus Bestiarium hinzufÃ¼gen
+              âž• Aus Bestiarium hinzufügen
             </button>
             <button
               className="btn btn-primary"
@@ -476,8 +476,8 @@ export function EncounterPanel() {
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             zIndex: 10, flexDirection: 'column', gap: 8,
           }}>
-            <div style={{ fontSize: 24, animation: 'spin 0.8s linear infinite' }}>âš”ï¸</div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>Spawne Encounterâ€¦</div>
+            <div style={{ fontSize: 24, animation: 'spin 0.8s linear infinite' }}>⚔️</div>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>Spawne Encounter…</div>
             <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
           </div>
         )}
@@ -485,7 +485,7 @@ export function EncounterPanel() {
         {encounters.length === 0 ? (
           <EmptyState
             size="sm"
-            icon="âš”ï¸"
+            icon="⚔️"
             title="Keine Encounter"
             description="Platziere Gegner auf der Karte und speichere sie als Vorlage"
           />
@@ -544,13 +544,13 @@ export function EncounterPanel() {
                   title="Encounter auf der Karte spawnen"
                   disabled={isSpawning}
                 >
-                  âš”ï¸ Spawn
+                  ⚔️ Spawn
                 </button>
                 <button
                   className="btn btn-ghost btn-icon"
                   style={{ fontSize: 10, padding: 2, color: 'var(--danger)' }}
                   onClick={(e) => { e.stopPropagation(); handleDelete(enc.id) }}
-                  title="Encounter lÃ¶schen"
+                  title="Encounter löschen"
                 >
                   âœ•
                 </button>
@@ -570,7 +570,7 @@ export function EncounterPanel() {
           overflowY: 'auto',
         }}>
           <div className="sidebar-section-title" style={{ marginBottom: 'var(--sp-2)' }}>
-            {selected.name} â€” Spawn-Optionen
+            {selected.name} — Spawn-Optionen
           </div>
 
           {/* Formation selector with previews */}
@@ -629,7 +629,7 @@ export function EncounterPanel() {
           <div style={{ marginBottom: 'var(--sp-3)', display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
             <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer' }}>
               <input type="checkbox" checked={randomVariant} onChange={(e) => setRandomVariant(e.target.checked)} style={{ margin: 0 }} />
-              ZufÃ¤llige Auswahl
+              Zufällige Auswahl
             </label>
             {randomVariant && (
               <input
@@ -665,7 +665,7 @@ export function EncounterPanel() {
               ))}
               {previewTokens.length > 12 && (
                 <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', fontStyle: 'italic' }}>
-                  â€¦ und {previewTokens.length - 12} weitere
+                  … und {previewTokens.length - 12} weitere
                 </div>
               )}
             </div>
@@ -674,14 +674,14 @@ export function EncounterPanel() {
           {selectedTemplate.walls.length > 0 && (
             <div style={{ marginBottom: 'var(--sp-2)' }}>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>
-                ðŸ§± {selectedTemplate.walls.length} WÃ¤nde/TÃ¼ren
+                ðŸ§± {selectedTemplate.walls.length} Wände/Türen
               </div>
             </div>
           )}
           {selectedTemplate.initiative.length > 0 && (
             <div>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>
-                âš”ï¸ {selectedTemplate.initiative.length} Initiative-EintrÃ¤ge
+                ⚔️ {selectedTemplate.initiative.length} Initiative-Einträge
               </div>
             </div>
           )}

@@ -234,6 +234,7 @@ function LeftPane({
           <span className="bb-welcome-version">
             {t('welcome.footerVersion', { version: pkg.version })}
           </span>
+          <SettingsIconButton />
           <button
             type="button"
             className="bb-welcome-info-btn"
@@ -317,7 +318,6 @@ function RightPane({
           >
             📚 {t('welcome.openCompendium')}
           </button>
-          <SettingsMenu />
         </div>
       </div>
 
@@ -543,6 +543,111 @@ function CampaignRow({
 }
 
 // ─── Create campaign modal ────────────────────────────────────────────
+
+// ─── Settings icon button (gear icon with dropdown) ────────────────────
+
+function SettingsIconButton() {
+  const { t } = useTranslation()
+  const language = useUIStore((s) => s.language)
+  const toggleLanguage = useUIStore((s) => s.toggleLanguage)
+  const theme = useUIStore((s) => s.theme)
+  const toggleTheme = useUIStore((s) => s.toggleTheme)
+  const [open, setOpen] = useState(false)
+  const rootRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    function onDocMouseDown(e: MouseEvent) {
+      if (!rootRef.current?.contains(e.target as Node)) setOpen(false)
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('mousedown', onDocMouseDown)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onDocMouseDown)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  async function handleOpenContentFolder() {
+    if (!window.electronAPI) return
+    try {
+      await window.electronAPI.openContentFolder()
+    } catch (err) {
+      showToast(formatError(err), 'error')
+    }
+  }
+
+  return (
+    <div className="bb-welcome-settings-icon" ref={rootRef}>
+      <button
+        type="button"
+        className="bb-welcome-info-btn"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        title={t('welcome.settings')}
+        aria-label={t('welcome.settings')}
+      >
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="3" />
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+        </svg>
+      </button>
+      {open && (
+        <div className="bb-welcome-settings-menu" role="menu">
+          <div className="bb-welcome-settings-row">
+            <span className="bb-welcome-settings-label">{t('welcome.settingsLanguage')}</span>
+            <div className="bb-welcome-lang" role="group">
+              {(['de', 'en'] as const).map((l) => (
+                <button
+                  key={l}
+                  type="button"
+                  onClick={() => { if (language !== l) toggleLanguage() }}
+                  className={language === l ? 'active' : ''}
+                >
+                  {l.toUpperCase()}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="bb-welcome-settings-row">
+            <span className="bb-welcome-settings-label">{t('welcome.settingsTheme')}</span>
+            <div className="bb-welcome-lang" role="group">
+              <button
+                type="button"
+                onClick={() => { if (theme !== 'dark') toggleTheme() }}
+                className={theme === 'dark' ? 'active' : ''}
+              >
+                🌙
+              </button>
+              <button
+                type="button"
+                onClick={() => { if (theme !== 'light') toggleTheme() }}
+                className={theme === 'light' ? 'active' : ''}
+              >
+                ☀
+              </button>
+            </div>
+          </div>
+
+          <div className="bb-welcome-settings-sep" />
+
+          <button
+            type="button"
+            className="bb-welcome-settings-item"
+            onClick={() => { setOpen(false); void handleOpenContentFolder() }}
+          >
+            📂 {t('welcome.settingsOpenFolder')}
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
 
 // ─── Settings menu (dropdown) ─────────────────────────────────────────
 
@@ -1055,6 +1160,13 @@ function WelcomeStyles() {
       .bb-welcome-settings {
         position: relative;
         display: inline-flex;
+      }
+      .bb-welcome-settings-icon {
+        position: relative;
+        display: inline-flex;
+      }
+      .bb-welcome-settings-icon .bb-welcome-info-btn svg {
+        display: block;
       }
       .bb-welcome-settings-menu {
         position: absolute;

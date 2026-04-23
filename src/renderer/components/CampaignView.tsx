@@ -17,20 +17,20 @@ import {
 import type { MapRecord } from '@shared/ipc-types'
 import type { WorkspaceTab } from '../stores/uiStore'
 
-/* Campaign workspace â€” shown when a campaign is open but no map is
+/* Campaign workspace — shown when a campaign is open but no map is
    active. Uses the dashboard aesthetic (Fraunces titles, dark cards,
-   Bolt-yellow CTA) so that the whole "between sessions" experience â€”
-   Welcome â†’ Workspace â†’ Map view â€” shares one visual language. */
+   Bolt-yellow CTA) so that the whole "between sessions" experience —
+   Welcome â†’ Workspace â†’ Map view — shares one visual language. */
 
 type Tab = WorkspaceTab
 
 const TABS: { id: Tab; icon: string; i18nKey: string }[] = [
-  { id: 'maps',       icon: 'ðŸ—ºï¸', i18nKey: 'workspace.tabMaps'       },
+  { id: 'maps',       icon: '🗺️', i18nKey: 'workspace.tabMaps'       },
   { id: 'characters', icon: 'ðŸ‘¤', i18nKey: 'workspace.tabCharacters' },
-  { id: 'npcs',       icon: 'ðŸ§‘', i18nKey: 'workspace.tabNpcs'       },
-  { id: 'audio',      icon: 'ðŸŽµ', i18nKey: 'workspace.tabAudio'      },
-  { id: 'sfx',        icon: 'ðŸŽ›', i18nKey: 'workspace.tabSfx'        },
-  { id: 'handouts',   icon: 'ðŸ“„', i18nKey: 'workspace.tabHandouts'   },
+  { id: 'npcs',       icon: '🧑', i18nKey: 'workspace.tabNpcs'       },
+  { id: 'audio',      icon: '🎭µ', i18nKey: 'workspace.tabAudio'      },
+  { id: 'sfx',        icon: '🎭›', i18nKey: 'workspace.tabSfx'        },
+  { id: 'handouts',   icon: '📄', i18nKey: 'workspace.tabHandouts'   },
   { id: 'notes',      icon: 'ðŸ“', i18nKey: 'workspace.tabNotes'      },
 ]
 
@@ -99,11 +99,11 @@ export function CampaignView() {
     try {
       const asset = await window.electronAPI.importFile('map', activeCampaignId)
       // importFile returns null on user-cancel; treat that as silent.
-      // Any other falsy value means the copy/read failed â€” toast the
+      // Any other falsy value means the copy/read failed — toast the
       // failure so the user doesn't think they mis-clicked.
       if (asset === null) return
       if (!asset || !asset.path) {
-        showToast('Karte konnte nicht importiert werden â€” Datei konnte nicht kopiert werden', 'error', 6000)
+        showToast('Karte konnte nicht importiert werden — Datei konnte nicht kopiert werden', 'error', 6000)
         return
       }
 
@@ -265,7 +265,7 @@ export function CampaignView() {
             ))}
           </div>
 
-          {/* Tab panel â€” fade-in on switch binds all panels visually. */}
+          {/* Tab panel — fade-in on switch binds all panels visually. */}
           <div className="bb-ws-panel" key={tab}>
             {tab === 'maps' && (
               <>
@@ -404,7 +404,7 @@ function HeroEmpty({
 }) {
   return (
     <section className="bb-ws-hero-empty">
-      <div className="bb-ws-hero-empty-icon">ðŸ—ºï¸</div>
+      <div className="bb-ws-hero-empty-icon">🗺️</div>
       <h2 className="bb-ws-hero-empty-title display">{title}</h2>
       <p className="bb-ws-hero-empty-sub">{sub}</p>
       <button type="button" className="bb-ws-cta bb-ws-cta-lg" onClick={onImport} disabled={importing}>
@@ -439,7 +439,7 @@ function PlayButton({
   if (loading) {
     return (
       <button type="button" className="bb-ws-cta" disabled>
-        <span>â€¦</span>
+        <span>…</span>
         {labelLoading}
       </button>
     )
@@ -466,7 +466,7 @@ function PlayButton({
 
 // â”€â”€â”€ Panel header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Dashboard-style framing for panels that lack their own sub-navigation
-// (Characters, Handouts, Audio). Notes + Library skip it â€” they already
+// (Characters, Handouts, Audio). Notes + Library skip it — they already
 // have category/tab strips at the top, so adding another header on top
 // would be visual noise.
 
@@ -542,7 +542,7 @@ function MapsPanel({ onImport, importing, onOpen }: {
           onClick={onImport}
           disabled={importing}
         >
-          {importing ? 'â€¦' : t('workspace.importFirstMap')}
+          {importing ? '…' : t('workspace.importFirstMap')}
         </button>
       </div>
     )
@@ -570,7 +570,7 @@ function MapsPanel({ onImport, importing, onOpen }: {
         title={t('workspace.importFirstMap')}
       >
         <div className="bb-ws-maps-add-icon">ï¼‹</div>
-        <div className="bb-ws-maps-add-label">{importing ? 'â€¦' : t('workspace.addMap')}</div>
+        <div className="bb-ws-maps-add-label">{importing ? '…' : t('workspace.addMap')}</div>
       </button>
     </div>
   )
@@ -694,7 +694,7 @@ function WorkspaceStyles() {
            the same --titlebar-controls-w variable as DmTitleBar / Wiki
            / Compendium top bars so every reserved gutter scales in
            lockstep on high-DPI displays. On macOS the traffic lights
-           sit on the left â€” the extra padding there is harmless. */
+           sit on the left — the extra padding there is harmless. */
         padding-top: 0;
         padding-bottom: 0;
         padding-left: var(--sp-6);
@@ -935,7 +935,7 @@ function WorkspaceStyles() {
         margin: 0 0 var(--sp-5);
       }
 
-      /* Tab strip â€” dashboard-style pills */
+      /* Tab strip — dashboard-style pills */
       .bb-ws-tabs {
         display: flex; gap: 2px;
         padding: 4px;

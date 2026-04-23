@@ -14,7 +14,7 @@ import { useDockStore } from '../../stores/dockStore'
  * canvas area, so it floats on top of the map.
  */
 function truncate(s: string, max: number): string {
-  return s.length > max ? s.slice(0, max) + 'â€¦' : s
+  return s.length > max ? s.slice(0, max) + '…' : s
 }
 
 interface ToolDef {
@@ -101,7 +101,7 @@ const SECTIONS: DockSection[] = [
   {
     id: 'present',
     groups: [
-      { id: 'atmosphere', primary: { id: 'atmosphere', icon: 'ðŸ–¼', labelKey: 'toolbar.tools.atmosphere' } },
+      { id: 'atmosphere', primary: { id: 'atmosphere', icon: '🖼', labelKey: 'toolbar.tools.atmosphere' } },
     ],
   },
 ]
@@ -115,7 +115,7 @@ export function LeftToolDock() {
   const dockAutoHide = useDockStore((s) => s.dockAutoHide)
   const [openGroup, setOpenGroup] = useState<string | null>(null)
 
-  // Player-preview restricts the DM to the pointer tool â€” hide the rail.
+  // Player-preview restricts the DM to the pointer tool — hide the rail.
   if (workMode === 'player-preview') return null
 
   const handleSelect = async (id: ActiveTool) => {

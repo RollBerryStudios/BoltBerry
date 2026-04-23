@@ -15,7 +15,7 @@ import { useDockStore } from '../../stores/dockStore'
  *
  * Returns null when the active tool has no configurable presets so the
  * strip never shows an empty shell. The strip is purely a convenience
- * layer on top of existing tool state â€” every control maps 1:1 to an
+ * layer on top of existing tool state — every control maps 1:1 to an
  * existing uiStore field so the toolbar / keyboard shortcuts keep working.
  */
 export function SubToolStrip() {
@@ -83,7 +83,7 @@ export function SubToolStrip() {
       )
     }
 
-    // Fog rect / polygon / cover â€” only need reveal/cover toggle via tool IDs.
+    // Fog rect / polygon / cover — only need reveal/cover toggle via tool IDs.
     if (activeTool === 'fog-rect' || activeTool === 'fog-polygon' || activeTool === 'fog-cover') {
       const isCover = activeTool === 'fog-cover'
       return (

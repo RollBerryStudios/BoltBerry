@@ -34,26 +34,26 @@ const TOKEN_TEMPLATES = [
 
 const STATUS_EFFECTS = [
   { id: 'blinded',       icon: 'ðŸ«£', label: 'Blind' },
-  { id: 'charmed',       icon: 'ðŸ’«', label: 'Bezaubert' },
-  { id: 'dead',          icon: 'ðŸ’€', label: 'Tot' },
+  { id: 'charmed',       icon: '💫', label: 'Bezaubert' },
+  { id: 'dead',          icon: '💀', label: 'Tot' },
   { id: 'deafened',      icon: 'ðŸ”‡', label: 'Taub' },
-  { id: 'exhausted',     icon: 'ðŸ˜«', label: 'ErschÃ¶pft' },
-  { id: 'frightened',    icon: 'ðŸ˜±', label: 'VerÃ¤ngstigt' },
+  { id: 'exhausted',     icon: 'ðŸ˜«', label: 'Erschöpft' },
+  { id: 'frightened',    icon: 'ðŸ˜±', label: 'Verängstigt' },
   { id: 'grappled',      icon: 'ðŸ¤›', label: 'Gepackt' },
-  { id: 'incapacitated', icon: 'ðŸ˜µ', label: 'KampfunfÃ¤hig' },
+  { id: 'incapacitated', icon: 'ðŸ˜µ', label: 'Kampfunfähig' },
   { id: 'invisible',     icon: 'ðŸ‘»', label: 'Unsichtbar' },
-  { id: 'paralyzed',     icon: 'âš¡', label: 'GelÃ¤hmt' },
+  { id: 'paralyzed',     icon: 'âš¡', label: 'Gelähmt' },
   { id: 'petrified',     icon: 'ðŸª¨', label: 'Versteinert' },
   { id: 'poisoned',      icon: 'â˜ ï¸', label: 'Vergiftet' },
-  { id: 'prone',         icon: 'â¬‡ï¸', label: 'Liegend' },
+  { id: 'prone',         icon: '⬇ï¸', label: 'Liegend' },
   { id: 'restrained',    icon: 'â›“ï¸', label: 'Gefesselt' },
-  { id: 'stunned',       icon: 'â­', label: 'BetÃ¤ubt' },
+  { id: 'stunned',       icon: 'â­', label: 'Betäubt' },
   { id: 'unconscious',   icon: 'ðŸ’¤', label: 'Bewusstlos' },
   { id: 'advantage',     icon: 'â–²', label: 'Vorteil' },
   { id: 'disadvantage',  icon: 'â–¼', label: 'Nachteil' },
-  { id: 'concentrating', icon: 'ðŸŽ¯', label: 'Konzentration' },
-  { id: 'blessed',       icon: 'âœ¨', label: 'Gesegnet' },
-  { id: 'cursed',        icon: 'ðŸ”®', label: 'Verflucht' },
+  { id: 'concentrating', icon: '🎭¯', label: 'Konzentration' },
+  { id: 'blessed',       icon: '✨', label: 'Gesegnet' },
+  { id: 'cursed',        icon: '🔮', label: 'Verflucht' },
   { id: 'hasted',        icon: 'âš¡', label: 'Gehetzt' },
 ]
 
@@ -94,7 +94,7 @@ export function TokenPanel() {
   const [filter, setFilter] = useState('')
   const [libraryPickerOpen, setLibraryPickerOpen] = useState(false)
   const filterLower = filter.trim().toLowerCase()
-  // Filter reactively as the DM types. Matches on name only â€” faction/HP
+  // Filter reactively as the DM types. Matches on name only — faction/HP
   // etc. are visible right next to the name so a single-field substring
   // filter is enough and keeps the input-affordance minimal.
   const displayedTokens = filterLower
@@ -419,7 +419,7 @@ export function TokenPanel() {
           <SectionHeader title={t('tokens.combat')} open={secKampf} onToggle={() => setSecKampf((v) => !v)} />
           {secKampf && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)', paddingBottom: 'var(--sp-2)' }}>
-              {/* HP â€” NumberStepper gives Â±1 / ShiftÂ±5 / wheel / hold-repeat
+              {/* HP — NumberStepper gives Â±1 / ShiftÂ±5 / wheel / hold-repeat
                   which is much friendlier during combat than plain type-and-enter */}
               <div style={{ display: 'flex', gap: 'var(--sp-2)', alignItems: 'center' }}>
                 <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 20 }}>HP</label>
@@ -447,7 +447,7 @@ export function TokenPanel() {
                 <div style={{ display: 'flex', gap: 3 }}>
                   {([
                     { label: '1Ã—1', title: 'Klein/Mittel (1 Feld)', size: 1 },
-                    { label: '2Ã—2', title: 'GroÃŸ (Large)',           size: 2 },
+                    { label: '2Ã—2', title: 'Groß (Large)',           size: 2 },
                     { label: '3Ã—3', title: 'Riesig (Huge)',          size: 3 },
                     { label: '4Ã—4', title: 'Kolossal (Gargantuan)', size: 4 },
                   ] as { label: string; title: string; size: number }[]).map(({ label, title, size }) => (
@@ -480,7 +480,7 @@ export function TokenPanel() {
                   onChange={(v) => handleUpdate(selected.id, { ac: v })}
                   min={0}
                   max={40}
-                  ariaLabel="RÃ¼stungsklasse"
+                  ariaLabel="Rüstungsklasse"
                   width={90}
                   size="sm"
                 />
@@ -518,7 +518,7 @@ export function TokenPanel() {
               {/* Filter input */}
               <input
                 className="input"
-                placeholder="Filterâ€¦"
+                placeholder="Filter…"
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
                 style={{ marginBottom: 6, fontSize: 'var(--text-xs)', padding: '3px 8px', height: 24 }}
@@ -567,7 +567,7 @@ export function TokenPanel() {
                   if (asset?.path) handleUpdate(selected.id, { imagePath: asset.path })
                 }}
               >
-                ðŸ–¼ Bild ersetzen
+                🖼 Bild ersetzen
               </button>
               {/* Rotation + lock */}
               <div style={{ display: 'flex', gap: 'var(--sp-2)', alignItems: 'center' }}>
@@ -677,7 +677,7 @@ export function TokenPanel() {
                 className="input"
                 value={selected.notes ?? ''}
                 onChange={(e) => handleUpdate(selected.id, { notes: e.target.value || null })}
-                placeholder="Notizen zum Tokenâ€¦"
+                placeholder="Notizen zum Token…"
                 rows={3}
                 style={{ resize: 'none', fontSize: 'var(--text-xs)', width: '100%' }}
               />
@@ -701,7 +701,7 @@ export function TokenPanel() {
               }
             }}
           >
-            Token lÃ¶schen
+            Token löschen
           </button>
         </div>
       )}
@@ -791,9 +791,9 @@ function AddToInitiativeButton({ token, mapId }: { token: TokenRecord; mapId: nu
       style={{ fontSize: 'var(--text-xs)', justifyContent: 'flex-start', gap: 6 }}
       onClick={handleAdd}
       disabled={!mapId}
-      title="Token zur Initiative hinzufÃ¼gen und Initiative-Tab Ã¶ffnen"
+      title="Token zur Initiative hinzufügen und Initiative-Tab öffnen"
     >
-      âš”ï¸ Zur Initiative hinzufÃ¼gen
+      ⚔️ Zur Initiative hinzufügen
     </button>
   )
 }
@@ -838,7 +838,7 @@ function LibraryPicker({
 
   useEffect(() => {
     if (!window.electronAPI) return
-    // LibraryPickerTemplate is a subset of TokenTemplateRow â€” types match
+    // LibraryPickerTemplate is a subset of TokenTemplateRow — types match
     // structurally for the columns the picker actually reads.
     void window.electronAPI.tokenTemplates.list().then((rows) => {
       setTemplates(rows as unknown as LibraryPickerTemplate[])
@@ -946,7 +946,7 @@ function LibraryPicker({
                 textTransform: 'capitalize',
               }}
             >
-              {c === 'monster' ? 'ðŸ‘¹ Monster' : c === 'player' ? 'ðŸ§ Spieler' : 'ðŸ§‘ NSC'}
+              {c === 'monster' ? '👹 Monster' : c === 'player' ? 'ðŸ§ Spieler' : '🧑 NSC'}
             </button>
           ))}
         </div>
@@ -954,7 +954,7 @@ function LibraryPicker({
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Suchenâ€¦"
+          placeholder="Suchen…"
           style={{
             padding: '8px var(--sp-4)',
             background: 'var(--bg-base)',
@@ -1019,7 +1019,7 @@ function LibraryPickerRow({ tpl, onPick }: { tpl: LibraryPickerTemplate; onPick:
       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
         <div style={{ fontSize: 12, fontWeight: 600 }}>{tpl.name}</div>
         <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>
-          {tpl.creature_type ?? 'â€”'} Â· CR {tpl.cr ?? 'â€”'}
+          {tpl.creature_type ?? '—'} Â· CR {tpl.cr ?? '—'}
         </div>
       </div>
       <div style={{
@@ -1028,7 +1028,7 @@ function LibraryPickerRow({ tpl, onPick }: { tpl: LibraryPickerTemplate; onPick:
         color: 'var(--text-muted)',
         whiteSpace: 'nowrap',
       }}>
-        HP {tpl.hp_max} Â· AC {tpl.ac ?? 'â€”'}
+        HP {tpl.hp_max} Â· AC {tpl.ac ?? '—'}
       </div>
       <div style={{ fontSize: 11, color: 'var(--accent)' }}>+</div>
     </button>

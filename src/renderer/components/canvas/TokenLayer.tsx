@@ -27,26 +27,26 @@ function factionColor(faction: string): string {
 
 const STATUS_EFFECTS = [
   { id: 'blinded',       icon: 'ðŸ«£', label: 'Blind' },
-  { id: 'charmed',       icon: 'ðŸ’«', label: 'Bezaubert' },
-  { id: 'dead',          icon: 'ðŸ’€', label: 'Tot' },
+  { id: 'charmed',       icon: '💫', label: 'Bezaubert' },
+  { id: 'dead',          icon: '💀', label: 'Tot' },
   { id: 'deafened',      icon: 'ðŸ”‡', label: 'Taub' },
-  { id: 'exhausted',     icon: 'ðŸ˜«', label: 'ErschÃ¶pft' },
-  { id: 'frightened',    icon: 'ðŸ˜±', label: 'VerÃ¤ngstigt' },
+  { id: 'exhausted',     icon: 'ðŸ˜«', label: 'Erschöpft' },
+  { id: 'frightened',    icon: 'ðŸ˜±', label: 'Verängstigt' },
   { id: 'grappled',      icon: 'ðŸ¤›', label: 'Gepackt' },
-  { id: 'incapacitated', icon: 'ðŸ˜µ', label: 'KampfunfÃ¤hig' },
+  { id: 'incapacitated', icon: 'ðŸ˜µ', label: 'Kampfunfähig' },
   { id: 'invisible',     icon: 'ðŸ‘»', label: 'Unsichtbar' },
-  { id: 'paralyzed',     icon: 'âš¡', label: 'GelÃ¤hmt' },
+  { id: 'paralyzed',     icon: 'âš¡', label: 'Gelähmt' },
   { id: 'petrified',     icon: 'ðŸª¨', label: 'Versteinert' },
   { id: 'poisoned',      icon: 'â˜ ï¸', label: 'Vergiftet' },
-  { id: 'prone',         icon: 'â¬‡ï¸', label: 'Liegend' },
+  { id: 'prone',         icon: '⬇ï¸', label: 'Liegend' },
   { id: 'restrained',    icon: 'â›“ï¸', label: 'Gefesselt' },
-  { id: 'stunned',       icon: 'â­', label: 'BetÃ¤ubt' },
+  { id: 'stunned',       icon: 'â­', label: 'Betäubt' },
   { id: 'unconscious',   icon: 'ðŸ’¤', label: 'Bewusstlos' },
   { id: 'advantage',     icon: 'â–²', label: 'Vorteil' },
   { id: 'disadvantage',  icon: 'â–¼', label: 'Nachteil' },
-  { id: 'concentrating', icon: 'ðŸŽ¯', label: 'Konzentration' },
-  { id: 'blessed',       icon: 'âœ¨', label: 'Gesegnet' },
-  { id: 'cursed',        icon: 'ðŸ”®', label: 'Verflucht' },
+  { id: 'concentrating', icon: '🎭¯', label: 'Konzentration' },
+  { id: 'blessed',       icon: '✨', label: 'Gesegnet' },
+  { id: 'cursed',        icon: '🔮', label: 'Verflucht' },
   { id: 'hasted',        icon: 'âš¡', label: 'Verlangsamt' },
 ]
 
@@ -282,7 +282,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
 
     // Declarative Action form (AP-5). The forward/backward handlers
     // are registered once at module scope (`registerUndoAction`) and
-    // the payload is pure JSON â€” the stack can be serialized and
+    // the payload is pure JSON — the stack can be serialized and
     // replayed after a crash, not just for this action but whenever
     // more callsites migrate.
     const payload: TokenMovePayload = {
@@ -292,7 +292,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
         to:   { x: newPositions[i].x, y: newPositions[i].y },
       })),
     }
-    // The forward (move-to-new) already ran during the drag â€” the store
+    // The forward (move-to-new) already ran during the drag — the store
     // and DB are already at the target position. Skip the forward
     // replay by pushing the Command directly via the registry-derived
     // wrapper in `actionToCommand`; `pushAction` would redo the move.
@@ -406,7 +406,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   const handleUpdate = useCallback((id: number, updates: Record<string, any>) => {
     // Capture the prior values for each updated key so the action is
     // reversible. Without this, quick-damage in the context menu during
-    // combat (the DM's most-used destructive action) was one-way â€” a
+    // combat (the DM's most-used destructive action) was one-way — a
     // mis-click couldn't be undone. Every write that routes through
     // handleUpdate now contributes an undo entry.
     const token = useTokenStore.getState().tokens.find((t) => t.id === id)
@@ -453,7 +453,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     setEditingHpId(null)
     if (!prev || (prev.hpCurrent === hpCurrent && prev.hpMax === hpMax)) return
     // Route through handleUpdate so the inline HP edit goes through the
-    // same undo path as quick-damage/heal â€” a single predictable stack
+    // same undo path as quick-damage/heal — a single predictable stack
     // across every HP mutation.
     handleUpdate(id, { hpCurrent, hpMax })
   }, [handleUpdate])
@@ -471,7 +471,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     setEditingId(null)
     if (!prev || prev.name === name) return
     const oldName = prev.name
-    // Initiative entries mirror the token name â€” capture their old values
+    // Initiative entries mirror the token name — capture their old values
     // so undo restores both sides in one step.
     const linkedEntries = useInitiativeStore.getState().entries
       .filter((e) => e.tokenId === id)
@@ -650,9 +650,9 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     closeContextMenu()
     const slug = await findMonsterSlugByName(token.name)
     if (!slug) {
-      // Failed match â€” usually a heavily renamed token. Surface the
+      // Failed match — usually a heavily renamed token. Surface the
       // miss so the DM doesn't think the menu just did nothing.
-      showToast(`Kein Bestiarium-Eintrag fÃ¼r â€ž${token.name}" gefunden`, 'info')
+      showToast(`Kein Bestiarium-Eintrag für â€ž${token.name}" gefunden`, 'info')
       return
     }
     useUIStore.getState().openBestiary({ tab: 'monsters', slug })
@@ -866,7 +866,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
           )
         })}
 
-        {/* Ghost snap preview â€” shown during token drag when grid snap is active */}
+        {/* Ghost snap preview — shown during token drag when grid snap is active */}
         {ghostPos && (
           <Rect
             x={ghostPos.x}
@@ -930,7 +930,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     { label: 'Keine', color: null },
                     { label: 'Rot', color: '#ef4444' },
                     { label: 'Amber', color: '#f59e0b' },
-                    { label: 'GrÃ¼n', color: '#22c55e' },
+                    { label: 'Grün', color: '#22c55e' },
                     { label: 'Blau', color: '#3b82f6' },
                     { label: 'Lila', color: '#a855f7' },
                     { label: 'Pink', color: '#ec4899' },
@@ -958,40 +958,40 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     null,
                     { label: 'ðŸ“‹ Als Gruppe duplizieren', action: () => handleDuplicateGroup() },
                     { label: 'ðŸ“‹ Kopieren', action: () => handleCopyTokens() },
-                    { label: clipboardTokens.length > 0 ? `ðŸ“‹ EinfÃ¼gen (${clipboardTokens.length})` : 'ðŸ“‹ EinfÃ¼gen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
+                    { label: clipboardTokens.length > 0 ? `ðŸ“‹ Einfügen (${clipboardTokens.length})` : 'ðŸ“‹ Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
                     null,
-                    { label: `âŒ Alle lÃ¶schen (${selectedTokenIds.length})`, action: () => handleDelete(token.id), danger: true },
+                    { label: `âŒ Alle löschen (${selectedTokenIds.length})`, action: () => handleDelete(token.id), danger: true },
                   ] : [
                     { label: 'âœï¸ Umbenennen', action: () => stableStartEdit(token) },
                     { label: 'â¤ï¸ HP bearbeiten', action: () => startEditHp(token) },
                     { label: 'ðŸ›¡ AC bearbeiten', action: () => startEditAc(token) },
                     { label: 'ðŸ“ Notiz', action: () => handleEditNotes(token) },
                     null,
-                    // Inline HP chip row â€” replaces four full-width rows with
+                    // Inline HP chip row — replaces four full-width rows with
                     // one compact strip. Keeps all four quick-adjust actions
                     // discoverable without pushing the menu off-screen.
                     { kind: 'hp-chips' },
                     null,
-                    { label: 'âš”ï¸ ZustÃ¤nde', action: null, submenu: true, submenuType: 'status' },
+                    { label: '⚔️ Zustände', action: null, submenu: true, submenuType: 'status' },
                     { label: 'âž• Vorteil', action: () => toggleAdvantage(token, true) },
                     { label: 'âž– Nachteil', action: () => toggleAdvantage(token, false) },
-                    { label: 'ðŸŽ¯ Konzentration', action: () => toggleStatusInMenu(token, 'concentrating') },
+                    { label: '🎭¯ Konzentration', action: () => toggleStatusInMenu(token, 'concentrating') },
                     null,
-                    { label: 'âš”ï¸ Zum Kampf hinzufÃ¼gen', action: () => addToInitiative(token) },
-                    { label: 'ðŸ“– Im Bestiarium Ã¶ffnen', action: () => { void handleOpenInBestiarium(token) } },
-                    { label: 'ðŸŽ¯ Fokus setzen', action: () => handleFocusToken(token) },
+                    { label: '⚔️ Zum Kampf hinzufügen', action: () => addToInitiative(token) },
+                    { label: 'ðŸ“– Im Bestiarium öffnen', action: () => { void handleOpenInBestiarium(token) } },
+                    { label: '🎭¯ Fokus setzen', action: () => handleFocusToken(token) },
                     { label: hasLight ? 'ðŸ’¡ Lichtquelle deaktivieren' : 'ðŸ’¡ Lichtquelle aktivieren', action: () => handleToggleLight(token) },
                     null,
                     { label: token.visibleToPlayers ? 'ðŸ™ˆ Verstecken' : 'ðŸ‘ Sichtbar machen', action: () => handleToggleVisibility(token) },
                     { label: 'ðŸ“‹ Kopieren', action: () => handleCopyTokens() },
-                    { label: clipboardTokens.length > 0 ? `ðŸ“‹ EinfÃ¼gen (${clipboardTokens.length})` : 'ðŸ“‹ EinfÃ¼gen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
+                    { label: clipboardTokens.length > 0 ? `ðŸ“‹ Einfügen (${clipboardTokens.length})` : 'ðŸ“‹ Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
                     { label: token.locked ? 'ðŸ”“ Entsperren' : 'ðŸ”’ Sperren', action: () => handleToggleLock(token) },
                     { label: 'ðŸ· Markierung', action: null, submenu: true, submenuType: 'marker' },
                     { label: 'â¬†ï¸ nach vorne', action: () => { handleUpdate(token.id, { zIndex: token.zIndex + 1 }); closeContextMenu() } },
-                    { label: 'â¬‡ï¸ nach hinten', action: () => { handleUpdate(token.id, { zIndex: Math.max(0, token.zIndex - 1) }); closeContextMenu() } },
+                    { label: '⬇ï¸ nach hinten', action: () => { handleUpdate(token.id, { zIndex: Math.max(0, token.zIndex - 1) }); closeContextMenu() } },
                     { label: 'â« ganz nach vorne', action: () => { const maxZ = Math.max(...tokens.map(t => t.zIndex), 0); handleUpdate(token.id, { zIndex: maxZ + 1 }); closeContextMenu() } },
                     null,
-                    { label: 'âŒ LÃ¶schen', action: () => handleDelete(token.id), danger: true },
+                    { label: 'âŒ Löschen', action: () => handleDelete(token.id), danger: true },
                   ]
                   return menuItems.map((item, i) => {
                     if (item === null) {
@@ -1035,8 +1035,8 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                       const isFaction = item.submenuType === 'faction'
                       const isStatus = item.submenuType === 'status'
                       const FACTION_OPTIONS = [
-                        { value: 'party', label: 'ðŸŽ® Spieler', color: '#22c55e' },
-                        { value: 'enemy', label: 'âš”ï¸ Gegner', color: '#ef4444' },
+                        { value: 'party', label: '🎭® Spieler', color: '#22c55e' },
+                        { value: 'enemy', label: '⚔️ Gegner', color: '#ef4444' },
                         { value: 'neutral', label: 'âš–ï¸ Neutral', color: '#f59e0b' },
                         { value: 'friendly', label: 'ðŸ¤ Freundlich', color: '#3b82f6' },
                       ]
@@ -1066,7 +1066,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                             onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
                             onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
                           >
-                            {isFaction ? 'ðŸ· Fraktion' : isStatus ? 'âš”ï¸ ZustÃ¤nde' : 'ðŸ· Markierung'} {isSubOpen ? 'â–²' : 'â–¶'}
+                            {isFaction ? 'ðŸ· Fraktion' : isStatus ? '⚔️ Zustände' : 'ðŸ· Markierung'} {isSubOpen ? 'â–²' : 'â–¶'}
                           </button>
                           {isSubOpen && isFaction && (
                             <div style={{ background: 'var(--bg-elevated)', padding: '2px 0' }}>
@@ -1543,8 +1543,8 @@ const TokenNode = memo(function TokenNode({
 /**
  * Token move as a serializable undo action (AP-5). The payload
  * captures the id + from/to position for every moved token. Forward
- * and backward are symmetric pure updates â€” no closures over React
- * or store state â€” so this action survives serialization to disk
+ * and backward are symmetric pure updates — no closures over React
+ * or store state — so this action survives serialization to disk
  * and replay after a crash.
  *
  * This is the concrete first example of the `registerUndoAction` /

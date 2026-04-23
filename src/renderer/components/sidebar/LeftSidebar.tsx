@@ -97,7 +97,7 @@ export function LeftSidebar() {
       }).catch(() => { /* ignore detection errors */ })
     } catch (err) {
       console.error('[LeftSidebar] handleAddMap failed:', err)
-      showToast(`Karte konnte nicht hinzugefÃ¼gt werden: ${formatError(err)}`, 'error')
+      showToast(`Karte konnte nicht hinzugefügt werden: ${formatError(err)}`, 'error')
     }
   }
 
@@ -239,7 +239,7 @@ export function LeftSidebar() {
       gridType: m.gridType,
       gridSize: m.gridSize,
       rotation: m.rotationPlayer ?? 0,
-      // v32 grid-styling columns â€” without these every tweak in the
+      // v32 grid-styling columns — without these every tweak in the
       // sidebar (visibility / thickness / colour) stayed DM-only.
       gridVisible: m.gridVisible,
       gridThickness: m.gridThickness,
@@ -252,9 +252,9 @@ export function LeftSidebar() {
       {/* â”€â”€ Tab bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="sidebar-tab-strip">
         {([
-          ['maps', 'ðŸ—ºï¸', t('sidebar.left.tabMaps')],
-          ['assets', 'ðŸ—„', t('sidebar.left.tabAssets')],
-          ['settings', 'âš™ï¸', t('settings.title')]
+          ['maps', '🗺️', t('sidebar.left.tabMaps')],
+          ['assets', '🗄', t('sidebar.left.tabAssets')],
+          ['settings', '⚙️', t('settings.title')]
         ] as const).map(([id, icon, label]) => (
           <button
             key={id}
@@ -302,9 +302,9 @@ export function LeftSidebar() {
             className="btn btn-ghost"
             style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-xs)' }}
             onClick={handleAddMap}
-            title="Bild-Datei als Karte importieren (Name wird aus Dateiname Ã¼bernommen)"
+            title="Bild-Datei als Karte importieren (Name wird aus Dateiname übernommen)"
           >
-            ðŸ–¼ {t('sidebar.left.addMap')}
+            🖼 {t('sidebar.left.addMap')}
           </button>
           <button
             className="btn btn-ghost"
@@ -312,7 +312,7 @@ export function LeftSidebar() {
             onClick={handleAddMapFromPdf}
             title="PDF als Karte importieren"
           >
-            ðŸ“„ PDF
+            📄 PDF
           </button>
         </div>
       </div>
@@ -322,7 +322,7 @@ export function LeftSidebar() {
         <div className="sidebar-section">
           <div className="sidebar-section-title">{t('sidebar.left.gridTitle', { name: activeMap.name })}</div>
 
-          {/* Minimalist grid panel â€” square-only, two-colour palette,
+          {/* Minimalist grid panel — square-only, two-colour palette,
               no offset fields. Hex / colourful palette / offset
               correction were rarely used and inflated the panel; the
               square fallback handles every map currently in the data
@@ -382,7 +382,7 @@ export function LeftSidebar() {
                   <button
                     onClick={() => setGridDetectMsg(null)}
                     style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', fontSize: 9, padding: 0, lineHeight: 1, opacity: 0.7 }}
-                    title="SchlieÃŸen"
+                    title="Schließen"
                   >âœ•</button>
                 </span>
               )}
@@ -402,7 +402,7 @@ export function LeftSidebar() {
                     bigStep={5}
                     width={84}
                     size="sm"
-                    ariaLabel="Raster-FeldgrÃ¶ÃŸe in Pixeln"
+                    ariaLabel="Raster-Feldgröße in Pixeln"
                   />
                   <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>px</span>
                   <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginLeft: 'var(--sp-2)' }}>Â·</span>
@@ -436,7 +436,7 @@ export function LeftSidebar() {
                   />
                   <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginLeft: 'var(--sp-2)' }}>Â·</span>
                   {[
-                    { label: 'WeiÃŸ',    value: 'rgba(255,255,255,0.34)' },
+                    { label: 'Weiß',    value: 'rgba(255,255,255,0.34)' },
                     { label: 'Schwarz', value: 'rgba(0,0,0,0.45)' },
                   ].map(({ label, value }) => (
                     <button
@@ -464,7 +464,7 @@ export function LeftSidebar() {
               </>
             )}
 
-            {/* Rotation â€” DM view */}
+            {/* Rotation — DM view */}
             <div>
               <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', display: 'block', marginBottom: 'var(--sp-1)' }}>
                 Drehung (meine Ansicht)
@@ -483,7 +483,7 @@ export function LeftSidebar() {
                 ))}
               </div>
             </div>
-            {/* Rotation â€” Player view */}
+            {/* Rotation — Player view */}
             <div>
               <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', display: 'block', marginBottom: 'var(--sp-1)' }}>
                 Drehung (Spieler-Ansicht)
@@ -655,7 +655,7 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
         if (!window.electronAPI || renaming) return
         const selectedAction = await window.electronAPI.showContextMenu([
           { label: 'Umbenennen', action: 'rename' },
-          { label: 'LÃ¶schen', action: 'delete', danger: true },
+          { label: 'Löschen', action: 'delete', danger: true },
         ])
         if (selectedAction === 'rename') setRenaming(true)
         else if (selectedAction === 'delete') handleDelete()

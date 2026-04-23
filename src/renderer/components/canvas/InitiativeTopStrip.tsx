@@ -12,7 +12,7 @@ import type { InitiativeEntry } from '@shared/ipc-types'
  * (portrait, name, HP bar, current-turn highlight). Click a card to jump
  * the selection to that token. Initiative roll order is left-to-right.
  *
- * Inspired by Alchemy RPG's combat tracker â€” the goal is to surface the
+ * Inspired by Alchemy RPG's combat tracker — the goal is to surface the
  * full turn order without forcing the DM to open the right sidebar.
  */
 export function InitiativeTopStrip() {

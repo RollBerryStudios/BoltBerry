@@ -151,8 +151,8 @@ export function HandoutsPanel() {
     if (!window.electronAPI) return
     const handout = handouts.find((h) => h.id === id)
     const confirmed = await window.electronAPI.confirmDialog(
-      `Handout "${handout?.title ?? ''}" lÃ¶schen?`,
-      'Diese Aktion kann nicht rÃ¼ckgÃ¤ngig gemacht werden.'
+      `Handout "${handout?.title ?? ''}" löschen?`,
+      'Diese Aktion kann nicht rückgängig gemacht werden.'
     )
     if (!confirmed) return
     try {
@@ -211,7 +211,7 @@ export function HandoutsPanel() {
           {handouts.length} Handout{handouts.length !== 1 ? 's' : ''}
         </span>
 
-        {/* "Dismiss from players" â€” only in session mode when something is shown */}
+        {/* "Dismiss from players" — only in session mode when something is shown */}
         {isSession && sentId != null && (
           <button
             className="btn btn-ghost"
@@ -229,7 +229,7 @@ export function HandoutsPanel() {
           onClick={() => setIsAdding(true)}
           disabled={!activeCampaignId || isAdding}
         >
-          + HinzufÃ¼gen
+          + Hinzufügen
         </button>
       </div>
 
@@ -250,7 +250,7 @@ export function HandoutsPanel() {
           <input
             className="input"
             autoFocus
-            placeholder="Titelâ€¦"
+            placeholder="Titel…"
             value={addingTitle}
             onChange={(e) => setAddingTitle(e.target.value)}
             onKeyDown={(e) => { if (e.key === 'Escape') handleCancelAdding() }}
@@ -287,7 +287,7 @@ export function HandoutsPanel() {
           {composeTab === 'write' ? (
             <textarea
               className="input"
-              placeholder="Beschreibung / Notiz (optional)â€¦  Markdown: **fett**, *kursiv*, # Ãœberschrift, - Liste"
+              placeholder="Beschreibung / Notiz (optional)…  Markdown: **fett**, *kursiv*, # Überschrift, - Liste"
               value={addingText}
               onChange={(e) => setAddingText(e.target.value)}
               rows={5}
@@ -310,7 +310,7 @@ export function HandoutsPanel() {
                 <div dangerouslySetInnerHTML={{ __html: renderMarkdown(addingText) }} />
               ) : (
                 <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>
-                  Nichts zu Vorschau â€” wechsle zu â€žSchreiben" und gib Text ein.
+                  Nichts zu Vorschau — wechsle zu â€žSchreiben" und gib Text ein.
                 </span>
               )}
             </div>
@@ -322,12 +322,12 @@ export function HandoutsPanel() {
             style={{ justifyContent: 'flex-start', gap: 6, fontSize: 'var(--text-xs)' }}
             onClick={handlePickImage}
           >
-            ðŸ–¼
+            🖼
             <span style={{
               overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1,
               color: addingImagePath ? 'var(--text-primary)' : 'var(--text-muted)',
             }}>
-              {addingImagePath ? addingImageName : 'Bild wÃ¤hlen (optional)â€¦'}
+              {addingImagePath ? addingImageName : 'Bild wählen (optional)…'}
             </span>
             {addingImagePath && (
               <span
@@ -364,11 +364,11 @@ export function HandoutsPanel() {
       <div style={{ flex: 1, overflowY: 'auto', padding: 'var(--sp-4)' }}>
         {handouts.length === 0 && !isAdding ? (
           <EmptyState
-            icon="ðŸ“„"
+            icon="📄"
             title="Keine Handouts"
             description={isSession
-              ? 'Bilder und Texte fÃ¼r Spieler vorbereiten und per Klick anzeigen.'
-              : 'Bilder und Texte fÃ¼r die Spielrunde vorbereiten.'}
+              ? 'Bilder und Texte für Spieler vorbereiten und per Klick anzeigen.'
+              : 'Bilder und Texte für die Spielrunde vorbereiten.'}
           />
         ) : (
           <div style={{
@@ -418,7 +418,7 @@ function HandoutCard({
       overflow: 'hidden',
       transition: 'border-color var(--transition), background var(--transition)',
     }}>
-      {/* Thumbnail â€” click to zoom */}
+      {/* Thumbnail — click to zoom */}
       {handout.imagePath && (
         <HandoutThumbnail path={handout.imagePath} onClick={onZoom} />
       )}
@@ -482,17 +482,17 @@ function HandoutCard({
 
         {/* Actions */}
         <div style={{ display: 'flex', gap: 'var(--sp-2)', marginTop: 'auto', paddingTop: 'var(--sp-1)' }}>
-          {/* Zoom â€” always visible */}
+          {/* Zoom — always visible */}
           <button
             className="btn btn-ghost"
             style={{ flex: isSession ? undefined : 1, justifyContent: 'center', fontSize: 'var(--text-xs)', padding: '4px 8px' }}
             onClick={onZoom}
-            title="VergrÃ¶ÃŸert anzeigen"
+            title="Vergrößert anzeigen"
           >
             â›¶
           </button>
 
-          {/* Send to players â€” only in session mode */}
+          {/* Send to players — only in session mode */}
           {isSession && (
             <button
               className="btn btn-ghost"
@@ -517,7 +517,7 @@ function HandoutCard({
           <button
             className="btn btn-ghost btn-icon"
             style={{ color: 'var(--danger)', flexShrink: 0 }}
-            title="Handout lÃ¶schen"
+            title="Handout löschen"
             onClick={onDelete}
           >
             âœ•
@@ -571,7 +571,7 @@ function HandoutLightbox({ handout, onClose }: { handout: HandoutRecord; onClose
             borderRadius: '50%', width: 32, height: 32, fontSize: 16, color: '#F4F6FA',
             cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}
-          title="SchlieÃŸen (Esc)"
+          title="Schließen (Esc)"
         >
           âœ•
         </button>
@@ -635,7 +635,7 @@ function HandoutThumbnail({ path, onClick }: { path: string; onClick: () => void
         }}
         title={path}
       >
-        <span style={{ fontSize: 24, opacity: 0.6 }}>ðŸ–¼ï¸</span>
+        <span style={{ fontSize: 24, opacity: 0.6 }}>🖼ï¸</span>
         <span>Bilddatei fehlt</span>
       </div>
     )
@@ -654,7 +654,7 @@ function HandoutThumbnail({ path, onClick }: { path: string; onClick: () => void
         background: 'var(--bg-base)',
         cursor: 'zoom-in',
       }}
-      title="VergrÃ¶ÃŸert anzeigen"
+      title="Vergrößert anzeigen"
     />
   )
 }

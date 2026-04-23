@@ -30,23 +30,23 @@ const RARITY_COLOR: Record<string, string> = {
 // Keyed by the `category.en` values actually present in the dataset
 // (grep'd from resources/data/items/**/item.json). Keep the synonyms
 // (WONDROUS_ITEM etc.) so future data imports using a slightly different
-// shape still get a sensible glyph instead of the generic ðŸ“¦ fallback.
+// shape still get a sensible glyph instead of the generic 📦 fallback.
 const CATEGORY_ICON: Record<string, string> = {
-  WEAPON: 'âš”ï¸',
-  ARMOR: 'ðŸ›¡ï¸',
-  POTIONS_OILS: 'ðŸ§ª',
-  POTION: 'ðŸ§ª',
-  RING: 'ðŸ’',
-  ROD: 'ðŸª„',
-  STAFF: 'ðŸª„',
-  WAND: 'ðŸª„',
-  WONDROUS_ITEMS: 'âœ¨',
-  WONDROUS_ITEM: 'âœ¨',
-  SCROLL: 'ðŸ“œ',
-  ADVENTURING_GEAR: 'ðŸŽ’',
-  TOOLS: 'ðŸ”§',
-  AMMUNITION: 'ðŸ¹',
-  OTHER: 'ðŸ“¦',
+  WEAPON: '⚔️',
+  ARMOR: '🛡️',
+  POTIONS_OILS: '🧪',
+  POTION: '🧪',
+  RING: '💍',
+  ROD: '🪄',
+  STAFF: '🪄',
+  WAND: '🪄',
+  WONDROUS_ITEMS: '✨',
+  WONDROUS_ITEM: '✨',
+  SCROLL: '📜',
+  ADVENTURING_GEAR: '🎒',
+  TOOLS: '🔧',
+  AMMUNITION: '🏹',
+  OTHER: '📦',
 }
 
 export function ItemsTab({
@@ -115,7 +115,7 @@ export function ItemsTab({
           || it.category.en.toLowerCase().includes(q)
       })
       // Default alphabetical sort per locale. Rarity remains a filter
-      // chip up top but no longer the primary sort axis â€” DMs scan for
+      // chip up top but no longer the primary sort axis — DMs scan for
       // items by name more often than by rarity tier.
       .sort((a, b) => pickName(a, language).localeCompare(pickName(b, language), language))
   }, [index, query, language, categoryFilter, rarityFilter, sourceFilter])
@@ -136,7 +136,7 @@ export function ItemsTab({
   const handleSelect = useCallback((slug: string) => setSelectedSlug(slug), [])
 
   if (error) return <div className="bb-best-error">âš ï¸ {error}</div>
-  if (!index) return <div className="bb-best-loading">â€¦</div>
+  if (!index) return <div className="bb-best-loading">…</div>
 
   return (
     <div className="bb-best-layout">
@@ -224,7 +224,7 @@ export function ItemsTab({
                   style={{ borderLeftColor: tint }}
                 >
                   <span className="bb-best-list-chip" style={{ color: tint }}>
-                    {CATEGORY_ICON[it.category.en] ?? 'ðŸ“¦'}
+                    {CATEGORY_ICON[it.category.en] ?? '📦'}
                   </span>
                   <span className="bb-best-list-body">
                     <span className="bb-best-list-name display">
@@ -299,11 +299,11 @@ function ItemDetail({ slug, language, onUserEntryChanged }: {
     return () => { alive = false }
   }, [slug])
 
-  if (!record) return <div className="bb-best-loading">â€¦</div>
+  if (!record) return <div className="bb-best-loading">…</div>
 
   const name = pickName(record, language)
   const tint = RARITY_COLOR[record.rarity.en] ?? '#94a3b8'
-  const icon = CATEGORY_ICON[record.category.en] ?? 'ðŸ“¦'
+  const icon = CATEGORY_ICON[record.category.en] ?? '📦'
   const description = localized(record.description, language)
   // Dataset quirk: `properties` is usually an L10n string ("versatile
   // (1d10)") but could in principle be an L10nArray for future imports.
@@ -391,7 +391,7 @@ function ItemActions({
     showToast(t('bestiary.sentToPlayer'), 'success')
   }
   // "An Spieler senden" only exists as a concept once a campaign is
-  // loaded â€” without one, the Wiki is pure reference and the button
+  // loaded — without one, the Wiki is pure reference and the button
   // would just sit disabled. Hide it entirely in that mode to match
   // the MonsterDetail behaviour.
   if (!activeCampaignId) return null
@@ -404,7 +404,7 @@ function ItemActions({
         disabled={!playerConnected}
         title={playerConnected ? t('bestiary.sendToPlayer') : t('bestiary.sendDisabled')}
       >
-        ðŸ“¡ {t('bestiary.sendToPlayer')}
+        📋 {t('bestiary.sendToPlayer')}
       </button>
     </div>
   )

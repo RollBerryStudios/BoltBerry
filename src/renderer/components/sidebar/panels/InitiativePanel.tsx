@@ -19,26 +19,26 @@ const FACTION_COLORS: Record<string, string> = {
 }
 
 const COMBAT_ICONS: Record<string, string> = {
-  advantage: 'â–²', disadvantage: 'â–¼', concentrating: 'ðŸŽ¯',
-  blessed: 'âœ¨', cursed: 'ðŸ”®', hasted: 'âš¡',
-  blinded: 'ðŸ«£', charmed: 'ðŸ’«', dead: 'ðŸ’€',
+  advantage: 'â–²', disadvantage: 'â–¼', concentrating: '🎭¯',
+  blessed: '✨', cursed: '🔮', hasted: 'âš¡',
+  blinded: 'ðŸ«£', charmed: '💫', dead: '💀',
   frightened: 'ðŸ˜±', grappled: 'ðŸ¤›', incapacitated: 'ðŸ˜µ',
   invisible: 'ðŸ‘»', paralyzed: 'âš¡', petrified: 'ðŸª¨',
-  poisoned: 'â˜ ï¸', prone: 'â¬‡ï¸', restrained: 'â›“ï¸',
+  poisoned: 'â˜ ï¸', prone: '⬇ï¸', restrained: 'â›“ï¸',
   stunned: 'â­', unconscious: 'ðŸ’¤', exhausted: 'ðŸ˜«',
   deafened: 'ðŸ”‡',
 }
 
 const TIMER_PRESETS = [
-  { id: 'blessed', label: 'âœ¨ Gesegnet' },
-  { id: 'cursed', label: 'ðŸ”® Verflucht' },
+  { id: 'blessed', label: '✨ Gesegnet' },
+  { id: 'cursed', label: '🔮 Verflucht' },
   { id: 'hasted', label: 'âš¡ Verlangsamt' },
-  { id: 'concentrating', label: 'ðŸŽ¯ Konzentration' },
+  { id: 'concentrating', label: '🎭¯ Konzentration' },
   { id: 'advantage', label: 'â–² Vorteil' },
   { id: 'disadvantage', label: 'â–¼ Nachteil' },
   { id: 'blinded', label: 'ðŸ«£ Blind' },
   { id: 'invisible', label: 'ðŸ‘» Unsichtbar' },
-  { id: 'charmed', label: 'ðŸ’« Bezaubert' },
+  { id: 'charmed', label: '💫 Bezaubert' },
 ]
 
 function broadcastInitiative() {
@@ -204,8 +204,8 @@ export function InitiativePanel() {
   async function handleReset() {
     if (!window.electronAPI) return
     const confirmed = await window.electronAPI.confirmDialog(
-      'Kampf zurÃ¼cksetzen?',
-      'Alle Initiative-EintrÃ¤ge werden gelÃ¶scht. Diese Aktion kann nicht rÃ¼kgÃ¤ngig gemacht werden.'
+      'Kampf zurücksetzen?',
+      'Alle Initiative-Einträge werden gelöscht. Diese Aktion kann nicht rükgängig gemacht werden.'
     )
     if (!confirmed) return
     resetCombat()
@@ -301,7 +301,7 @@ export function InitiativePanel() {
               className="btn btn-ghost"
               style={{ fontSize: 'var(--text-xs)', padding: '2px 6px' }}
               onClick={handleAddAllTokens}
-              title={`Alle ${mapTokens.length} Karten-Token zur Initiative hinzufÃ¼gen`}
+              title={`Alle ${mapTokens.length} Karten-Token zur Initiative hinzufügen`}
               disabled={mapTokens.length === 0}
             >
               âŠ• Alle
@@ -310,7 +310,7 @@ export function InitiativePanel() {
               className="btn btn-ghost"
               style={{ fontSize: 'var(--text-xs)', padding: '2px 6px' }}
               onClick={handleNextTurn}
-              title="NÃ¤chster KÃ¤mpfer [N]"
+              title="Nächster Kämpfer [N]"
             >
               â–¶ Weiter
             </button>
@@ -411,12 +411,12 @@ export function InitiativePanel() {
         {entries.length === 0 ? (
           <EmptyState
             size="sm"
-            icon="âš”ï¸"
+            icon="⚔️"
             title={t('initiative.noCombat')}
             description={<>
-              Namen eingeben &amp; + drÃ¼cken.<br />
-              Token-VorschlÃ¤ge erscheinen beim Tippen.<br />
-              <strong style={{ color: 'var(--text-secondary)' }}>âŠ• Alle</strong> fÃ¼gt alle Karten-Token auf einmal hinzu.
+              Namen eingeben &amp; + drücken.<br />
+              Token-Vorschläge erscheinen beim Tippen.<br />
+              <strong style={{ color: 'var(--text-secondary)' }}>âŠ• Alle</strong> fügt alle Karten-Token auf einmal hinzu.
             </>}
           />
         ) : (
@@ -540,7 +540,7 @@ export function InitiativePanel() {
                   <button
                     style={{ background: timerEntryId === entry.id ? 'var(--accent-blue-dim)' : 'var(--bg-overlay)', border: `1px solid ${timerEntryId === entry.id ? 'var(--accent-blue)' : 'var(--border-subtle)'}`, color: timerEntryId === entry.id ? 'var(--accent-blue-light)' : 'var(--text-muted)', cursor: 'pointer', fontSize: 10, padding: '1px 4px', lineHeight: 1, borderRadius: 3 }}
                     onClick={() => setTimerEntryId(timerEntryId === entry.id ? null : entry.id)}
-                    title="Effekt-Timer hinzufÃ¼gen"
+                    title="Effekt-Timer hinzufügen"
                   >â± Timer</button>
                   <button
                     className="btn btn-ghost btn-icon"

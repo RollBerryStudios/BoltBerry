@@ -40,7 +40,7 @@ export function useKeyboardShortcuts() {
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
       if (target?.isContentEditable) return
 
-      // â”€â”€ Player Control Mode â€” runs first so Ctrl+Arrow never leaks
+      // â”€â”€ Player Control Mode — runs first so Ctrl+Arrow never leaks
       // into other handlers when the DM is rotating the player view.
       // Escape exits the mode cleanly. Active only when the toggle is
       // on and we're in the DM workspace, so nothing fights the
@@ -88,7 +88,7 @@ export function useKeyboardShortcuts() {
 
       // â”€â”€ Ctrl / Cmd shortcuts â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       if (e.ctrlKey || e.metaKey) {
-        // â”€â”€ Ctrl+1-9 â€” panel switching (sidebar tabs + floating utility panels) â”€
+        // â”€â”€ Ctrl+1-9 — panel switching (sidebar tabs + floating utility panels) â”€
         if (!e.shiftKey && !e.altKey) {
           type PanelTarget =
             | { kind: 'sidebar'; tab: import('../stores/uiStore').SidebarTab }
@@ -127,7 +127,7 @@ export function useKeyboardShortcuts() {
             }
             return
           case 'y':
-            // Ctrl+Y â€” redo (Windows convention, alongside Ctrl+Shift+Z)
+            // Ctrl+Y — redo (Windows convention, alongside Ctrl+Shift+Z)
             e.preventDefault()
             useUndoStore.getState().redo()
             return
@@ -140,12 +140,12 @@ export function useKeyboardShortcuts() {
             window.electronAPI?.openPlayerWindow()
             return
           case 'b':
-            // Ctrl+B â€” toggle blackout (Space is reserved for canvas panning)
+            // Ctrl+B — toggle blackout (Space is reserved for canvas panning)
             e.preventDefault()
             useUIStore.getState().toggleBlackout()
             return
           case 'c': {
-            // Ctrl+C â€” copy selected tokens to clipboard
+            // Ctrl+C — copy selected tokens to clipboard
             const { selectedTokenIds } = useUIStore.getState()
             if (selectedTokenIds.length === 0) return
             e.preventDefault()
@@ -165,7 +165,7 @@ export function useKeyboardShortcuts() {
             return
           }
           case 'v': {
-            // Ctrl+V â€” paste tokens at visible map center
+            // Ctrl+V — paste tokens at visible map center
             const clipboardTokens = useUIStore.getState().clipboardTokens
             if (clipboardTokens.length === 0) return
             const activeMapId = useCampaignStore.getState().activeMapId
@@ -244,7 +244,7 @@ export function useKeyboardShortcuts() {
                   },
                   redo: async () => {
                     // Re-insert each pasted token. Fresh ids come back
-                    // from the handler â€” tracked so the next undo can
+                    // from the handler — tracked so the next undo can
                     // delete them again.
                     pastedIds.length = 0
                     for (const payload of pastedPayloads) {
@@ -272,7 +272,7 @@ export function useKeyboardShortcuts() {
         const { boards, activeBoardIndex, triggerSfx, setActiveBoardIndex } = useAudioStore.getState()
         const board = boards[activeBoardIndex]
 
-        // 1â€“9 â†’ slots 0â€“8,  0 â†’ slot 9
+        // 1–9 â†’ slots 0–8,  0 â†’ slot 9
         if (/^[0-9]$/.test(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey) {
           const slotIdx = e.key === '0' ? 9 : parseInt(e.key) - 1
           const slot = board?.slots.find((s) => s.slotNumber === slotIdx)
@@ -283,8 +283,8 @@ export function useKeyboardShortcuts() {
           return
         }
 
-        // ÃŸ â†’ cycle to next board
-        if ((e.key === 'ÃŸ' || e.key === '-') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        // ß â†’ cycle to next board
+        if ((e.key === 'ß' || e.key === '-') && !e.ctrlKey && !e.metaKey && !e.altKey) {
           if (boards.length > 1) {
             e.preventDefault()
             setActiveBoardIndex((activeBoardIndex + 1) % boards.length)
@@ -295,7 +295,7 @@ export function useKeyboardShortcuts() {
 
       // â”€â”€ Single-key shortcuts â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       switch (e.key) {
-        // Space is intentionally NOT handled here â€” it is used by MapLayer for canvas panning.
+        // Space is intentionally NOT handled here — it is used by MapLayer for canvas panning.
         // Blackout is now Ctrl+B.
 
         case 'v': case 'V':
@@ -324,7 +324,7 @@ export function useKeyboardShortcuts() {
           break
         case 'g': case 'G':
           if (e.shiftKey) {
-            // Shift+G keeps the old wall-draw binding â€” fog/wall muscle
+            // Shift+G keeps the old wall-draw binding — fog/wall muscle
             // memory stays intact while plain G is reclaimed for grid.
             useUIStore.getState().setActiveTool('wall-draw')
           } else {
@@ -450,7 +450,7 @@ export function useKeyboardShortcuts() {
           break
 
         case '1': case '2': case '3': case '4': case '5': {
-          // Only switch maps when already inside the game view â€” pressing 1â€“5
+          // Only switch maps when already inside the game view — pressing 1–5
           // in CampaignView would accidentally navigate away from prep work.
           if (!useCampaignStore.getState().activeMapId) break
           const idx = parseInt(e.key) - 1
