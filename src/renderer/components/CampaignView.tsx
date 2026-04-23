@@ -28,8 +28,8 @@ const TABS: { id: Tab; icon: string; i18nKey: string }[] = [
   { id: 'maps',       icon: '🗺️', i18nKey: 'workspace.tabMaps'       },
   { id: 'characters', icon: '●', i18nKey: 'workspace.tabCharacters' },
   { id: 'npcs',       icon: '🧑', i18nKey: 'workspace.tabNpcs'       },
-  { id: 'audio',      icon: '🎭µ', i18nKey: 'workspace.tabAudio'      },
-  { id: 'sfx',        icon: '🎭›', i18nKey: 'workspace.tabSfx'        },
+  { id: 'audio',      icon: '🎵', i18nKey: 'workspace.tabAudio'      },
+  { id: 'sfx',        icon: '🔊', i18nKey: 'workspace.tabSfx'        },
   { id: 'handouts',   icon: '📄', i18nKey: 'workspace.tabHandouts'   },
   { id: 'notes',      icon: '●', i18nKey: 'workspace.tabNotes'      },
 ]
@@ -569,7 +569,7 @@ function MapsPanel({ onImport, importing, onOpen }: {
         disabled={importing}
         title={t('workspace.importFirstMap')}
       >
-        <div className="bb-ws-maps-add-icon">ï¼‹</div>
+        <div className="bb-ws-maps-add-icon">➕</div>
         <div className="bb-ws-maps-add-label">{importing ? '…' : t('workspace.addMap')}</div>
       </button>
     </div>
