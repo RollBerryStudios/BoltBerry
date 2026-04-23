@@ -26,13 +26,14 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4
       - name: Check for Mojibake (double-encoded UTF-8)
         run: |
-          # Scan TS/TSX files for common mojibake indicators.
+          # Scan TS/TSX icon strings for common mojibake indicators.
           # These patterns appear when UTF-8 bytes are interpreted as Latin-1
           # and re-saved, corrupting emoji and non-ASCII characters.
-          if grep -rE "[âðÃ]" src/ --include="*.tsx" --include="*.ts" -l; then
-            echo "::error::Mojibake detected! Files contain double-encoded UTF-8 characters."
+          # Only checks icon: '...' strings — avoids false positives in comments/text.
+          if grep -rn "icon: '[^']*[âðÃ][^']*'" src/ --include="*.tsx" --include="*.ts" -l; then
+            echo "::error::Mojibake detected in icon strings! Double-encoded UTF-8 found."
             echo "::error::Common cause: File opened as Latin-1 instead of UTF-8."
-            echo "::error::Run locally: grep -rE '[âðÃ]' src/ --include='*.tsx'"
+            grep -rn "icon: '[^']*[âðÃ][^']*'" src/ --include="*.tsx" --include="*.ts"
             exit 1
           fi
 
