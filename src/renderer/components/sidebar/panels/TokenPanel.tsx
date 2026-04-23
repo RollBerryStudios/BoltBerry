@@ -253,7 +253,7 @@ export function TokenPanel() {
                   lineHeight: 1,
                 }}
               >
-                Ã—
+                ×
               </button>
             )}
           </div>
@@ -419,7 +419,7 @@ export function TokenPanel() {
           <SectionHeader title={t('tokens.combat')} open={secKampf} onToggle={() => setSecKampf((v) => !v)} />
           {secKampf && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)', paddingBottom: 'var(--sp-2)' }}>
-              {/* HP — NumberStepper gives Â±1 / ShiftÂ±5 / wheel / hold-repeat
+              {/* HP — NumberStepper gives ±1 / Shift±5 / wheel / hold-repeat
                   which is much friendlier during combat than plain type-and-enter */}
               <div style={{ display: 'flex', gap: 'var(--sp-2)', alignItems: 'center' }}>
                 <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 20 }}>HP</label>
@@ -446,10 +446,10 @@ export function TokenPanel() {
                 <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>{t('tokens.size')}</label>
                 <div style={{ display: 'flex', gap: 3 }}>
                   {([
-                    { label: '1Ã—1', title: 'Klein/Mittel (1 Feld)', size: 1 },
-                    { label: '2Ã—2', title: 'Groß (Large)',           size: 2 },
-                    { label: '3Ã—3', title: 'Riesig (Huge)',          size: 3 },
-                    { label: '4Ã—4', title: 'Kolossal (Gargantuan)', size: 4 },
+                    { label: '1×1', title: 'Klein/Mittel (1 Feld)', size: 1 },
+                    { label: '2×2', title: 'Groß (Large)',           size: 2 },
+                    { label: '3×3', title: 'Riesig (Huge)',          size: 3 },
+                    { label: '4×4', title: 'Kolossal (Gargantuan)', size: 4 },
                   ] as { label: string; title: string; size: number }[]).map(({ label, title, size }) => (
                     <button
                       key={size}
@@ -571,7 +571,7 @@ export function TokenPanel() {
               </button>
               {/* Rotation + lock */}
               <div style={{ display: 'flex', gap: 'var(--sp-2)', alignItems: 'center' }}>
-                <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>Â°</label>
+                <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>°</label>
                 <input className="input" type="number" min={0} max={359} step={45}
                   value={selected.rotation}
                   onChange={(e) => handleUpdate(selected.id, { rotation: parseInt(e.target.value) || 0 })}

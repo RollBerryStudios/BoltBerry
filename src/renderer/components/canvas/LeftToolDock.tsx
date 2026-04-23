@@ -298,7 +298,7 @@ function ToolGroupButton({ group, activeTool, open, onToggleOpen, onClose, onSel
             onMouseDown={(e) => e.stopPropagation()}
             onClick={handleChevron}
           >
-            â€º
+            ›
           </span>
         )}
       </button>

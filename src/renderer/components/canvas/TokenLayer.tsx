@@ -652,7 +652,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     if (!slug) {
       // Failed match — usually a heavily renamed token. Surface the
       // miss so the DM doesn't think the menu just did nothing.
-      showToast(`Kein Bestiarium-Eintrag für â€ž${token.name}" gefunden`, 'info')
+      showToast(`Kein Bestiarium-Eintrag für ž${token.name}" gefunden`, 'info')
       return
     }
     useUIStore.getState().openBestiary({ tab: 'monsters', slug })

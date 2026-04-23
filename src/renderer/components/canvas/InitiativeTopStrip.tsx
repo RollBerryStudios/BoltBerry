@@ -47,7 +47,7 @@ export function InitiativeTopStrip() {
         title={t('canvas.hud.endTurn')}
         aria-label={t('canvas.hud.endTurn')}
       >
-        {t('canvas.hud.endTurn')} â€º
+        {t('canvas.hud.endTurn')} ›
       </button>
     </div>
   )

@@ -475,7 +475,7 @@ export function LeftSidebar() {
                     key={rot}
                     className={`btn btn-ghost ${rotation === rot ? 'btn-active' : ''}`}
                     style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-xs)', padding: '3px' }}
-                    title={`DM-Ansicht: ${rot}Â°`}
+                    title={`DM-Ansicht: ${rot}°`}
                     onClick={() => handleRotationChange(rot)}
                   >
                     {rot === 0 ? 'â†‘' : rot === 90 ? 'â†’' : rot === 180 ? 'â†“' : 'â†'}
@@ -494,7 +494,7 @@ export function LeftSidebar() {
                     key={rot}
                     className={`btn btn-ghost ${rotationPlayer === rot ? 'btn-active' : ''}`}
                     style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-xs)', padding: '3px' }}
-                    title={`Spieler-Ansicht: ${rot}Â° (wird sofort synchronisiert)`}
+                    title={`Spieler-Ansicht: ${rot}° (wird sofort synchronisiert)`}
                     onClick={() => handlePlayerRotationChange(rot)}
                   >
                     {rot === 0 ? 'â†‘' : rot === 90 ? 'â†’' : rot === 180 ? 'â†“' : 'â†'}
@@ -531,7 +531,7 @@ async function renderPdfToImage(
 
   const pdf = await pdfjsLib.getDocument({ data: bytes }).promise
   const page = await pdf.getPage(1)
-  const viewport = page.getViewport({ scale: 2 }) // 2Ã— for quality
+  const viewport = page.getViewport({ scale: 2 }) // 2× for quality
 
   const canvas = document.createElement('canvas')
   canvas.width = viewport.width

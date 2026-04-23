@@ -238,7 +238,7 @@ export function EncounterPanel() {
       })
       if (created) {
         addEncounter(created)
-        showToast(`Encounter â€ž${name}" gespeichert`, 'success')
+        showToast(`Encounter ž${name}" gespeichert`, 'success')
       }
     } catch (err) {
       console.error('[EncounterPanel] save failed:', err)
@@ -371,7 +371,7 @@ export function EncounterPanel() {
     if (!window.electronAPI) return
     const enc = encounters.find((e) => e.id === id)
     const confirmed = await window.electronAPI.confirmDialog(
-      `Begegnung â€ž${enc?.name ?? ''}" löschen?`,
+      `Begegnung ž${enc?.name ?? ''}" löschen?`,
       'Diese Aktion kann nicht rückgängig gemacht werden.'
     )
     if (!confirmed) return
