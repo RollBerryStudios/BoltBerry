@@ -76,7 +76,7 @@ function CombatantCard({ entry }: { entry: InitiativeEntry }) {
       type="button"
       className={`initiative-card${entry.currentTurn ? ' current' : ''}`}
       onClick={handleClick}
-      title={`${entry.combatantName} Â· ${entry.roll}${hpMax > 0 ? ` Â· ${hpCurrent}/${hpMax} HP` : ''}`}
+      title={`${entry.combatantName} · ${entry.roll}${hpMax > 0 ? ` · ${hpCurrent}/${hpMax} HP` : ''}`}
     >
       <div className="initiative-card-portrait">
         {portraitUrl ? (

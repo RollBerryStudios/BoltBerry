@@ -219,7 +219,7 @@ export function HandoutsPanel() {
             onClick={handleDismissFromPlayer}
             title="Handout beim Spieler ausblenden"
           >
-            âœ• Ausblenden
+            ✕ Ausblenden
           </button>
         )}
 
@@ -335,7 +335,7 @@ export function HandoutsPanel() {
                 onClick={(e) => { e.stopPropagation(); setAddingImagePath(null); setAddingImageName('') }}
                 title="Bild entfernen"
               >
-                âœ•
+                ✕
               </span>
             )}
           </button>
@@ -520,7 +520,7 @@ function HandoutCard({
             title="Handout löschen"
             onClick={onDelete}
           >
-            âœ•
+            ✕
           </button>
         </div>
       </div>
@@ -573,7 +573,7 @@ function HandoutLightbox({ handout, onClose }: { handout: HandoutRecord; onClose
           }}
           title="Schließen (Esc)"
         >
-          âœ•
+          ✕
         </button>
 
         {imageUrl && (

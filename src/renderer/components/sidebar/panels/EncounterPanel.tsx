@@ -438,7 +438,7 @@ export function EncounterPanel() {
               }}
             />
             <button className="btn btn-primary" style={{ fontSize: 'var(--text-xs)', padding: '2px 8px' }} onClick={commitNewEncounter}>OK</button>
-            <button className="btn btn-ghost" style={{ fontSize: 'var(--text-xs)', padding: '2px 6px' }} onClick={() => { setShowNewNameInput(false); setNewNameValue('') }}>âœ•</button>
+            <button className="btn btn-ghost" style={{ fontSize: 'var(--text-xs)', padding: '2px 6px' }} onClick={() => { setShowNewNameInput(false); setNewNameValue('') }}>✕</button>
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -552,7 +552,7 @@ export function EncounterPanel() {
                   onClick={(e) => { e.stopPropagation(); handleDelete(enc.id) }}
                   title="Encounter löschen"
                 >
-                  âœ•
+                  ✕
                 </button>
               </div>
             )

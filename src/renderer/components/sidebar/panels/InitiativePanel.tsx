@@ -320,7 +320,7 @@ export function InitiativePanel() {
               onClick={handleReset}
               title="Kampf beenden"
             >
-              âœ•
+              ✕
             </button>
           </div>
         </div>
@@ -545,15 +545,15 @@ export function InitiativePanel() {
                   <button
                     className="btn btn-ghost btn-icon"
                     style={{ fontSize: 10, padding: 2 }}
-                    title={t('initiative.removeEntry') ?? 'âœ•'}
-                    aria-label={t('initiative.removeEntry') ?? 'âœ•'}
+                    title={t('initiative.removeEntry') ?? '✕'}
+                    aria-label={t('initiative.removeEntry') ?? '✕'}
                     onClick={() => {
                       window.electronAPI?.initiative.delete(entry.id)
                       removeEntry(entry.id)
                       broadcastInitiative()
                     }}
                   >
-                    âœ•
+                    ✕
                   </button>
                 </div>
 
@@ -632,7 +632,7 @@ export function InitiativePanel() {
                             })
                           }}
                           title="Timer entfernen"
-                        >âœ•</button>
+                        >✕</button>
                       </span>
                     ))}
                   </div>
@@ -681,7 +681,7 @@ export function InitiativePanel() {
                     <button
                       style={{ fontSize: 9, padding: '0 4px', background: 'none', border: '1px solid var(--border-subtle)', borderRadius: 3, color: 'var(--text-muted)', cursor: 'pointer' }}
                       onClick={() => setTimerEntryId(null)}
-                    >âœ•</button>
+                    >✕</button>
                   </div>
                 )}
               </div>

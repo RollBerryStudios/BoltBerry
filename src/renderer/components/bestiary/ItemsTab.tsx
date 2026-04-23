@@ -174,7 +174,7 @@ export function ItemsTab({
               className="bb-best-filter-clear"
               onClick={() => { setCategoryFilter(''); setRarityFilter(''); setSourceFilter('') }}
             >
-              âœ• {t('bestiary.clearFilters')}
+              ✕ {t('bestiary.clearFilters')}
             </button>
           )}
         </div>
@@ -230,12 +230,12 @@ export function ItemsTab({
                     <span className="bb-best-list-name display">
                       {name}
                       {it.userOwned && (
-                        <span className="bb-best-user-badge" title={t('library.sourceUser')}>â˜…</span>
+                        <span className="bb-best-user-badge" title={t('library.sourceUser')}>★</span>
                       )}
                     </span>
                     <span className="bb-best-list-meta">
                       {localized(it.category, language)}
-                      {' Â· '}
+                      {' · '}
                       <span style={{ color: tint }}>{localized(it.rarity, language)}</span>
                     </span>
                   </span>
@@ -321,7 +321,7 @@ function ItemDetail({ slug, language, onUserEntryChanged }: {
           <h2 className="bb-best-hero-name display">{name}</h2>
           <div className="bb-best-hero-sub">
             <span>{localized(record.category, language)}</span>
-            <span className="bb-best-hero-dot">Â·</span>
+            <span className="bb-best-hero-dot">·</span>
             <span style={{ color: tint }}>{localized(record.rarity, language)}</span>
           </div>
           <div className="bb-best-hero-chips">
@@ -360,7 +360,7 @@ function ItemDetail({ slug, language, onUserEntryChanged }: {
 
       <footer className="bb-best-footer">
         <span className="mono">{record.slug}</span>
-        <span className="bb-best-footer-dot">Â·</span>
+        <span className="bb-best-footer-dot">·</span>
         <span>{record.licenseSource}</span>
       </footer>
     </article>

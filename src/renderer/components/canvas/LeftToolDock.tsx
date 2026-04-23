@@ -270,7 +270,7 @@ function ToolGroupButton({ group, activeTool, open, onToggleOpen, onClose, onSel
   // When a group has variants, surface the "click again for variants /
   // right-click for variants" affordance in the tooltip so users who
   // miss the small chevron still discover the second entry point.
-  const label = hasVariants ? `${baseLabel} Â· â–¸` : baseLabel
+  const label = hasVariants ? `${baseLabel} · ▸` : baseLabel
 
   return (
     <div className="left-tool-group">

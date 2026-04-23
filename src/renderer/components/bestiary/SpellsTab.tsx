@@ -190,7 +190,7 @@ export function SpellsTab({
               className="bb-best-filter-clear"
               onClick={() => { setLevelFilter(''); setSchoolFilter(''); setClassFilter(''); setSourceFilter('') }}
             >
-              âœ• {t('bestiary.clearFilters')}
+              ✕ {t('bestiary.clearFilters')}
             </button>
           )}
         </div>
@@ -246,12 +246,12 @@ export function SpellsTab({
                     <span className="bb-best-list-name display">
                       {name}
                       {sp.userOwned && (
-                        <span className="bb-best-user-badge" title={t('library.sourceUser')}>â˜…</span>
+                        <span className="bb-best-user-badge" title={t('library.sourceUser')}>★</span>
                       )}
                     </span>
                     <span className="bb-best-list-meta">
                       {localized(sp.level, language)}
-                      {' Â· '}
+                      {' · '}
                       <span style={{ color: tint }}>{titleCase(localized(sp.school, language))}</span>
                     </span>
                   </span>
@@ -340,11 +340,11 @@ function SpellDetail({ slug, language, onUserEntryChanged }: {
           <h2 className="bb-best-hero-name display">{name}</h2>
           <div className="bb-best-hero-sub">
             <span>{localized(record.level, language)}</span>
-            <span className="bb-best-hero-dot">Â·</span>
+            <span className="bb-best-hero-dot">·</span>
             <span style={{ color: tint }}>{titleCase(localized(record.school, language))}</span>
             {record.ritual && (
               <>
-                <span className="bb-best-hero-dot">Â·</span>
+                <span className="bb-best-hero-dot">·</span>
                 <span>{t('bestiary.ritual')}</span>
               </>
             )}
@@ -385,7 +385,7 @@ function SpellDetail({ slug, language, onUserEntryChanged }: {
 
       <footer className="bb-best-footer">
         <span className="mono">{record.slug}</span>
-        <span className="bb-best-footer-dot">Â·</span>
+        <span className="bb-best-footer-dot">·</span>
         <span>{record.licenseSource}</span>
       </footer>
     </article>

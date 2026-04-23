@@ -80,7 +80,7 @@ function SectionHeader({ title, open, onToggle }: { title: string; open: boolean
         textAlign: 'left',
       }}
     >
-      <span style={{ fontSize: 10 }}>{open ? 'â–¾' : 'â–¸'}</span>
+      <span style={{ fontSize: 10 }}>{open ? 'â–¾' : '▸'}</span>
       {title}
     </button>
   )
@@ -924,7 +924,7 @@ function LibraryPicker({
             type="button"
             onClick={onClose}
             style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 14 }}
-          >âœ•</button>
+          >✕</button>
         </div>
 
         <div style={{ display: 'flex', gap: 0, borderBottom: '1px solid var(--border-subtle)' }}>
@@ -1019,7 +1019,7 @@ function LibraryPickerRow({ tpl, onPick }: { tpl: LibraryPickerTemplate; onPick:
       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
         <div style={{ fontSize: 12, fontWeight: 600 }}>{tpl.name}</div>
         <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>
-          {tpl.creature_type ?? '—'} Â· CR {tpl.cr ?? '—'}
+          {tpl.creature_type ?? '—'} · CR {tpl.cr ?? '—'}
         </div>
       </div>
       <div style={{
@@ -1028,7 +1028,7 @@ function LibraryPickerRow({ tpl, onPick }: { tpl: LibraryPickerTemplate; onPick:
         color: 'var(--text-muted)',
         whiteSpace: 'nowrap',
       }}>
-        HP {tpl.hp_max} Â· AC {tpl.ac ?? '—'}
+        HP {tpl.hp_max} · AC {tpl.ac ?? '—'}
       </div>
       <div style={{ fontSize: 11, color: 'var(--accent)' }}>+</div>
     </button>

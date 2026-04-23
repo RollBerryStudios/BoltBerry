@@ -146,9 +146,9 @@ export function MonsterDetail({ slug, language, onUserEntryChanged }: {
           <h2 className="bb-best-hero-name display">{displayName}</h2>
           <div className="bb-best-hero-sub">
             <span>{localized(record.size, language)}</span>
-            <span className="bb-best-hero-dot">Â·</span>
+            <span className="bb-best-hero-dot">·</span>
             <span>{localized(record.type, language)}</span>
-            <span className="bb-best-hero-dot">Â·</span>
+            <span className="bb-best-hero-dot">·</span>
             <span>{localized(record.alignment, language)}</span>
           </div>
           <div className="bb-best-hero-chips">
@@ -242,7 +242,7 @@ export function MonsterDetail({ slug, language, onUserEntryChanged }: {
 
       <footer className="bb-best-footer">
         <span className="mono">{record.slug}</span>
-        <span className="bb-best-footer-dot">Â·</span>
+        <span className="bb-best-footer-dot">·</span>
         <span>{record.licenseSource}</span>
       </footer>
     </article>
@@ -301,7 +301,7 @@ function TokenStrip({
           onClick={onCollapse}
           title={t('bestiary.hideVariants')}
         >
-          âœ• {t('bestiary.hideVariants')}
+          ✕ {t('bestiary.hideVariants')}
         </button>
       </div>
       <div className="bb-best-tokens">
@@ -343,7 +343,7 @@ function TokenStrip({
               title={isDefault ? t('bestiary.clearDefault') : t('bestiary.setDefault')}
               aria-label={isDefault ? t('bestiary.clearDefault') : t('bestiary.setDefault')}
             >
-              {isDefault ? 'â˜…' : 'â˜†'}
+              {isDefault ? '★' : '☆'}
             </button>
           </div>
           )
@@ -543,7 +543,7 @@ function MonsterActions({
           disabled={busy}
           title={t('bestiary.addToMap')}
         >
-          âœ¦ {t('bestiary.addToMap')}
+          ✦ {t('bestiary.addToMap')}
         </button>
       )}
       {canSendToPlayer && (
@@ -568,7 +568,7 @@ function MonsterActions({
             : t('bestiary.setDefault')
         }
       >
-        {isAlreadyDefault ? 'â˜…' : 'â˜†'} {isAlreadyDefault ? t('bestiary.clearDefault') : t('bestiary.setDefault')}
+        {isAlreadyDefault ? '★' : '☆'} {isAlreadyDefault ? t('bestiary.clearDefault') : t('bestiary.setDefault')}
       </button>
       {/* Clone into the NPC library — separate from the SRD monster
           so the DM can rename / rebadge / re-skin without touching

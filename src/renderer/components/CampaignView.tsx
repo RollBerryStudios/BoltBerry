@@ -167,7 +167,7 @@ export function CampaignView() {
                 onClick={() => window.electronAPI?.closePlayerWindow()}
                 title={t('workspace.closePlayerWindow')}
               >
-                âœ•
+                ✕
               </button>
             </div>
           )}
@@ -217,13 +217,13 @@ export function CampaignView() {
             <h1 className="bb-ws-greeting-title display">{campaign?.name ?? ''}</h1>
             <div className="bb-ws-greeting-meta mono">
               {selfStats?.mapCount ?? 0} {t('dashboard.maps').toLowerCase()}
-              <span className="bb-ws-meta-sep">Â·</span>
+              <span className="bb-ws-meta-sep">·</span>
               {selfStats?.party.length ?? 0} {t('dashboard.characters').toLowerCase()}
-              <span className="bb-ws-meta-sep">Â·</span>
+              <span className="bb-ws-meta-sep">·</span>
               {selfStats?.handoutCount ?? 0} {t('dashboard.handouts').toLowerCase()}
               {typeof selfStats?.sessionCount === 'number' && selfStats.sessionCount > 0 && (
                 <>
-                  <span className="bb-ws-meta-sep">Â·</span>
+                  <span className="bb-ws-meta-sep">·</span>
                   {t('welcome.sessionCount', { count: selfStats.sessionCount })}
                 </>
               )}
@@ -631,7 +631,7 @@ function MapCard({ map, index, total, onOpen, onRename, onDelete, onReorder }: {
         <div className="bb-ws-map-card-meta mono">
           {map.gridType === 'none'
             ? t('canvas.hud.noGrid')
-            : `${map.gridSize}px Â· ${map.ftPerUnit}ft`}
+            : `${map.gridSize}px · ${map.ftPerUnit}ft`}
         </div>
         <div className="bb-ws-map-card-actions">
           <button

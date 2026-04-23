@@ -305,7 +305,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
       await page.render({ canvasContext: ctx, viewport }).promise
       const dataUrl = canvas.toDataURL('image/png')
       window.electronAPI.sendHandout({
-        title: `${file.name} Â· ${t('compendium.pageShort')} ${pageNum}`,
+        title: `${file.name} · ${t('compendium.pageShort')} ${pageNum}`,
         imagePath: dataUrl,
         textContent: null,
       })
@@ -474,7 +474,7 @@ function SearchBar({
             state.phase === 'ready' ? t('compendium.ready') : ''}
         </span>
         <button type="button" className="bb-pdf-btn" onClick={onClose} title={t('compendium.closeSearch')}>
-          âœ•
+          ✕
         </button>
       </div>
       {state.phase === 'ready' && trimmed.length >= 2 && (

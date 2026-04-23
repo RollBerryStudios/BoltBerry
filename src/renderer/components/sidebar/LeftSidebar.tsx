@@ -358,11 +358,11 @@ export function LeftSidebar() {
                       handleGridChange('square', detected.gridSize, undefined, 0, 0)
                       setGridDetectMsg({ text: `âœ“ ${detected.gridSize}px`, ok: true })
                     } else {
-                      setGridDetectMsg({ text: 'âœ• Kein Raster erkannt', ok: false })
+                      setGridDetectMsg({ text: '✕ Kein Raster erkannt', ok: false })
                     }
                   } catch (err) {
                     console.error('[LeftSidebar] grid detect failed:', err)
-                    setGridDetectMsg({ text: 'âœ• Fehler', ok: false })
+                    setGridDetectMsg({ text: '✕ Fehler', ok: false })
                   } finally {
                     setGridDetecting(false)
                   }
@@ -383,7 +383,7 @@ export function LeftSidebar() {
                     onClick={() => setGridDetectMsg(null)}
                     style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', fontSize: 9, padding: 0, lineHeight: 1, opacity: 0.7 }}
                     title="Schließen"
-                  >âœ•</button>
+                  >✕</button>
                 </span>
               )}
             </div>
@@ -405,7 +405,7 @@ export function LeftSidebar() {
                     ariaLabel="Raster-Feldgröße in Pixeln"
                   />
                   <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>px</span>
-                  <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginLeft: 'var(--sp-2)' }}>Â·</span>
+                  <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginLeft: 'var(--sp-2)' }}>·</span>
                   <input
                     className="input"
                     type="number"
@@ -434,7 +434,7 @@ export function LeftSidebar() {
                     size="sm"
                     ariaLabel="Rasterlinien-Dicke"
                   />
-                  <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginLeft: 'var(--sp-2)' }}>Â·</span>
+                  <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginLeft: 'var(--sp-2)' }}>·</span>
                   {[
                     { label: 'Weiß',    value: 'rgba(255,255,255,0.34)' },
                     { label: 'Schwarz', value: 'rgba(0,0,0,0.45)' },
