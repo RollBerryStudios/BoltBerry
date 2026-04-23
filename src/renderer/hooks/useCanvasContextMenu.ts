@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 import type Konva from 'konva'
 import { useUIStore } from '../stores/uiStore'
+import { useSessionStore } from '../stores/sessionStore'
 import { useCampaignStore } from '../stores/campaignStore'
 import { useMapTransformStore } from '../stores/mapTransformStore'
 import { POINTER_PING_EVENT, type PointerPingDetail } from '../components/canvas/PointerLayer'
@@ -20,7 +21,8 @@ export function useCanvasContextMenu(): (e: Konva.KonvaEventObject<MouseEvent>) 
     e.evt.preventDefault()
     if (!window.electronAPI) return
 
-    const { activeTool, sessionMode } = useUIStore.getState()
+    const { activeTool } = useUIStore.getState()
+    const { sessionMode } = useSessionStore.getState()
     const { activeMapId: mapId, activeMaps: maps } = useCampaignStore.getState()
     const map = maps.find((m) => m.id === mapId)
     const curRot = (map?.rotation ?? 0) as 0 | 90 | 180 | 270
