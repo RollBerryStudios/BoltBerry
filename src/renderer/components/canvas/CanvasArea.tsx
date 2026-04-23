@@ -229,7 +229,7 @@ export function CanvasArea() {
         // Dropping a PDF / audio / random file used to silently no-op Ã¢€"
         // surface the rejection so users don't think the drop target is
         // broken (QW-11).
-        showToast('Nur Bilddateien kÃƒ¶nnen hier abgelegt werden', 'info', 4000)
+        showToast('Nur Bilddateien können hier abgelegt werden', 'info', 4000)
         return
       }
       const arrayBuf = await file.arrayBuffer()
@@ -405,8 +405,8 @@ export function CanvasArea() {
           title="Keine Karte geladen"
           description={
             <ol style={{ textAlign: 'left', paddingLeft: 20, margin: '8px 0 0', lineHeight: 2, maxWidth: 320 }}>
-              <li>Ãƒ–ffne die <strong>linke Sidebar</strong> (Ã¢—Â§ oben links)</li>
-              <li>Klicke auf <strong>Ã°Å¸–¼ Karte hinzufÃƒ¼gen</strong> und wÃƒÂ¤hle ein Bild</li>
+              <li>Öffne die <strong>linke Sidebar</strong> (Ã¢—Â§ oben links)</li>
+              <li>Klicke auf <strong>Ã°Å¸–¼ Karte hinzufügen</strong> und wÃƒÂ¤hle ein Bild</li>
               <li>Passe Raster &amp; Felder in den Karteneinstellungen an</li>
               <li>Wechsle in den <strong>Ã¢–¶ Spiel-Modus</strong> und starte die Session</li>
             </ol>
@@ -604,7 +604,7 @@ export function CanvasArea() {
           <button
             style={{ background: 'rgba(255,255,255,0.2)', border: '1px solid rgba(255,255,255,0.4)', borderRadius: 4, color: '#fff', padding: '2px 10px', cursor: 'pointer', fontSize: 12, marginLeft: 12 }}
             onClick={() => useSessionStore.getState().setWorkMode('play')}
-          >ZurÃƒ¼ck zum Spiel</button>
+          >Zurück zum Spiel</button>
         </div>
       )}
 

@@ -80,7 +80,7 @@ function SectionHeader({ title, open, onToggle }: { title: string; open: boolean
         textAlign: 'left',
       }}
     >
-      <span style={{ fontSize: 10 }}>{open ? 'â–¾' : '▸'}</span>
+      <span style={{ fontSize: 10 }}>{open ? '–¾' : '▸'}</span>
       {title}
     </button>
   )
@@ -261,7 +261,7 @@ export function TokenPanel() {
       </div>
       {/* Token list */}
       <div style={{ flex: 1, overflowY: 'auto' }}>
-        {/* â”€â”€ Schnellerstellung (always visible) â”€â”€ */}
+        {/* ”€”€ Schnellerstellung (always visible) ”€”€ */}
         <div ref={templateRef} style={{ padding: 'var(--sp-2) var(--sp-4)', borderBottom: '1px solid var(--border-subtle)' }}>
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 'var(--sp-1)' }}>
             {t('tokens.quickCreate')}
@@ -415,7 +415,7 @@ export function TokenPanel() {
             style={{ marginBottom: 'var(--sp-2)' }}
           />
 
-          {/* â”€â”€ Kampf â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+          {/* ”€”€ Kampf ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */}
           <SectionHeader title={t('tokens.combat')} open={secKampf} onToggle={() => setSecKampf((v) => !v)} />
           {secKampf && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)', paddingBottom: 'var(--sp-2)' }}>
@@ -511,7 +511,7 @@ export function TokenPanel() {
             </div>
           )}
 
-          {/* â”€â”€ Status-Effekte â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+          {/* ”€”€ Status-Effekte ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */}
           <SectionHeader title="Status-Effekte" open={secStatus} onToggle={() => setSecStatus((v) => !v)} />
           {secStatus && (
             <div style={{ paddingBottom: 'var(--sp-2)' }}>
@@ -553,7 +553,7 @@ export function TokenPanel() {
             </div>
           )}
 
-          {/* â”€â”€ Aussehen â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+          {/* ”€”€ Aussehen ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */}
           <SectionHeader title="Aussehen" open={secAussehen} onToggle={() => setSecAussehen((v) => !v)} />
           {secAussehen && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)', paddingBottom: 'var(--sp-2)' }}>
@@ -610,7 +610,7 @@ export function TokenPanel() {
             </div>
           )}
 
-          {/* â”€â”€ Licht â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+          {/* ”€”€ Licht ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */}
           <SectionHeader title="Licht" open={secLicht} onToggle={() => setSecLicht((v) => !v)} />
           {secLicht && (() => {
             const lightOn = selected.lightRadius > 0
@@ -669,7 +669,7 @@ export function TokenPanel() {
             )
           })()}
 
-          {/* â”€â”€ Notizen â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+          {/* ”€”€ Notizen ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */}
           <SectionHeader title="Notizen" open={secNotizen} onToggle={() => setSecNotizen((v) => !v)} />
           {secNotizen && (
             <div style={{ paddingBottom: 'var(--sp-2)' }}>
@@ -752,7 +752,7 @@ function TokenThumbnail({ path }: { path: string }) {
   return <img src={url} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
 }
 
-// â”€â”€â”€ Add to Initiative Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€”€ Add to Initiative Button ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 
 function AddToInitiativeButton({ token, mapId }: { token: TokenRecord; mapId: number | null }) {
   const entries = useInitiativeStore((s) => s.entries)
@@ -798,7 +798,7 @@ function AddToInitiativeButton({ token, mapId }: { token: TokenRecord; mapId: nu
   )
 }
 
-// â”€â”€â”€ Library picker (compact) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€”€ Library picker (compact) ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 // Inline modal that lets the DM pick a template from token_templates
 // and drop it on the current map without leaving the Tokens tab.
 // Mirrors the Bestiarium's insert flow (random variant pick) but strips

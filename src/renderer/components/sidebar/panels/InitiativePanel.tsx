@@ -19,7 +19,7 @@ const FACTION_COLORS: Record<string, string> = {
 }
 
 const COMBAT_ICONS: Record<string, string> = {
-  advantage: 'â–²', disadvantage: 'â–¼', concentrating: '🎭¯',
+  advantage: '–²', disadvantage: '–¼', concentrating: '🎭¯',
   blessed: '✨', cursed: '🔮', hasted: 'âš¡',
   blinded: 'ðŸ«£', charmed: '💫', dead: '💀',
   frightened: 'ðŸ˜±', grappled: 'ðŸ¤›', incapacitated: 'ðŸ˜µ',
@@ -34,8 +34,8 @@ const TIMER_PRESETS = [
   { id: 'cursed', label: '🔮 Verflucht' },
   { id: 'hasted', label: 'âš¡ Verlangsamt' },
   { id: 'concentrating', label: '🎭¯ Konzentration' },
-  { id: 'advantage', label: 'â–² Vorteil' },
-  { id: 'disadvantage', label: 'â–¼ Nachteil' },
+  { id: 'advantage', label: '–² Vorteil' },
+  { id: 'disadvantage', label: '–¼ Nachteil' },
   { id: 'blinded', label: 'ðŸ«£ Blind' },
   { id: 'invisible', label: 'ðŸ‘» Unsichtbar' },
   { id: 'charmed', label: '💫 Bezaubert' },
@@ -312,7 +312,7 @@ export function InitiativePanel() {
               onClick={handleNextTurn}
               title="Nächster Kämpfer [N]"
             >
-              â–¶ Weiter
+              –¶ Weiter
             </button>
             <button
               className="btn btn-ghost"
@@ -517,7 +517,7 @@ export function InitiativePanel() {
                     textOverflow: 'ellipsis',
                     whiteSpace: 'nowrap',
                   }}>
-                    {entry.currentTurn ? 'â–¶ ' : ''}{entry.combatantName}
+                    {entry.currentTurn ? '–¶ ' : ''}{entry.combatantName}
                   </span>
                   {linkedToken && linkedToken.ac != null && (
                     <span style={{ fontSize: 9, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>

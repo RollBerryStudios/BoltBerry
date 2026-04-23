@@ -9,7 +9,7 @@ import { useMapTransformStore } from '../stores/mapTransformStore'
 import { useUndoStore, nextCommandId } from '../stores/undoStore'
 import { useAudioStore } from '../stores/audioStore'
 
-// â”€â”€ Grid chord state â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€ Grid chord state ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 // `G` on its own toggles the grid. `G` followed (within CHORD_WINDOW ms) by
 // `+` / `=` grows the grid by 5 px; `-` / `_` shrinks it by 5 px. Any other
 // key cancels the chord. Keeping this at module scope rather than inside
@@ -40,7 +40,7 @@ export function useKeyboardShortcuts() {
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
       if (target?.isContentEditable) return
 
-      // â”€â”€ Player Control Mode — runs first so Ctrl+Arrow never leaks
+      // ”€”€ Player Control Mode — runs first so Ctrl+Arrow never leaks
       // into other handlers when the DM is rotating the player view.
       // Escape exits the mode cleanly. Active only when the toggle is
       // on and we're in the DM workspace, so nothing fights the
@@ -64,7 +64,7 @@ export function useKeyboardShortcuts() {
         }
       }
 
-      // â”€â”€ Grid chord: `G +` / `G -` â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      // ”€”€ Grid chord: `G +` / `G -` ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
       // Runs first so the second keystroke wins over any matching single-key
       // action (e.g. the standalone `-` zoom-out binding below).
       if (performance.now() <= gridChordDeadline && !e.ctrlKey && !e.metaKey && !e.altKey) {
@@ -86,9 +86,9 @@ export function useKeyboardShortcuts() {
         // Any other key cancels the chord and falls through to normal handling.
       }
 
-      // â”€â”€ Ctrl / Cmd shortcuts â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      // ”€”€ Ctrl / Cmd shortcuts ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
       if (e.ctrlKey || e.metaKey) {
-        // â”€â”€ Ctrl+1-9 — panel switching (sidebar tabs + floating utility panels) â”€
+        // ”€”€ Ctrl+1-9 — panel switching (sidebar tabs + floating utility panels) ”€
         if (!e.shiftKey && !e.altKey) {
           type PanelTarget =
             | { kind: 'sidebar'; tab: import('../stores/uiStore').SidebarTab }
@@ -267,7 +267,7 @@ export function useKeyboardShortcuts() {
         return
       }
 
-      // â”€â”€ Audio panel: SFX board shortcuts (only when floating audio panel is open) â”€
+      // ”€”€ Audio panel: SFX board shortcuts (only when floating audio panel is open) ”€
       if (useUIStore.getState().floatingPanel === 'audio') {
         const { boards, activeBoardIndex, triggerSfx, setActiveBoardIndex } = useAudioStore.getState()
         const board = boards[activeBoardIndex]
@@ -293,7 +293,7 @@ export function useKeyboardShortcuts() {
         }
       }
 
-      // â”€â”€ Single-key shortcuts â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      // ”€”€ Single-key shortcuts ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
       switch (e.key) {
         // Space is intentionally NOT handled here — it is used by MapLayer for canvas panning.
         // Blackout is now Ctrl+B.

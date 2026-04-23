@@ -134,7 +134,7 @@ export function CampaignView() {
       <WorkspaceStyles />
       <CampaignDataStyles />
 
-      {/* â”€â”€ Top bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ”€”€ Top bar ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */}
       <header className="bb-ws-topbar" style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}>
         <button
           type="button"
@@ -188,7 +188,7 @@ export function CampaignView() {
             title={t('compendium.title')}
             onClick={() => useUIStore.getState().setTopView('compendium')}
           >
-            ðŸ“š
+            📚
           </button>
 
           <div className="bb-ws-lang" role="group" aria-label="Language">
@@ -208,7 +208,7 @@ export function CampaignView() {
         </div>
       </header>
 
-      {/* â”€â”€ Main scroll area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ”€”€ Main scroll area ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */}
       <main className="bb-ws-main">
         <div className="bb-ws-inner">
           {/* Greeting */}
@@ -331,7 +331,7 @@ export function CampaignView() {
   )
 }
 
-// â”€â”€â”€ Hero (most-recent map card) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€”€ Hero (most-recent map card) ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 
 function HeroMap({
   map,
@@ -417,7 +417,7 @@ function HeroEmpty({
   )
 }
 
-// â”€â”€â”€ Play button (loading / play / import-first) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€”€ Play button (loading / play / import-first) ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 
 function PlayButton({
   loading,
@@ -462,15 +462,15 @@ function PlayButton({
   )
 }
 
-// â”€â”€â”€ Scoped styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€”€ Scoped styles ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 
-// â”€â”€â”€ Panel header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€”€ Panel header ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 // Dashboard-style framing for panels that lack their own sub-navigation
 // (Characters, Handouts, Audio). Notes + Library skip it — they already
 // have category/tab strips at the top, so adding another header on top
 // would be visual noise.
 
-// â”€â”€â”€ Karten-Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€”€ Karten-Tab ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 // Dedicated CampaignView tab for full multi-map management (list + add +
 // open + rename + reorder + delete). The game-view LeftSidebar still has
 // its own compact map list for in-session context; this panel is the
@@ -533,7 +533,7 @@ function MapsPanel({ onImport, importing, onOpen }: {
   if (activeMaps.length === 0) {
     return (
       <div className="bb-ws-maps-empty">
-        <div className="bb-ws-maps-empty-glyph">ðŸ—º</div>
+        <div className="bb-ws-maps-empty-glyph">🗺</div>
         <div className="bb-ws-maps-empty-title">{t('workspace.noMapsTitle')}</div>
         <div className="bb-ws-maps-empty-sub">{t('workspace.noMapsSub')}</div>
         <button
@@ -653,7 +653,7 @@ function MapCard({ map, index, total, onOpen, onRename, onDelete, onReorder }: {
             className="bb-ws-map-card-btn bb-ws-map-card-btn-danger"
             onClick={onDelete}
             title={t('workspace.mapDelete')}
-          >ðŸ—‘</button>
+          >🗑</button>
         </div>
       </div>
     </div>
@@ -684,7 +684,7 @@ function WorkspaceStyles() {
       }
       .bb-ws .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
-      /* â”€â”€ Top bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      /* ”€”€ Top bar ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */
       .bb-ws-topbar {
         display: flex; align-items: center; gap: var(--sp-4);
         height: 56px;
@@ -829,7 +829,7 @@ function WorkspaceStyles() {
         color: var(--accent);
       }
 
-      /* â”€â”€ Main scroll area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      /* ”€”€ Main scroll area ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */
       .bb-ws-main {
         flex: 1; min-height: 0;
         overflow-y: auto;
@@ -1025,7 +1025,7 @@ function WorkspaceStyles() {
       .bb-ws-panel-handouts > *,
       .bb-ws-panel-audio > * { flex: 1; min-height: 0; }
 
-      /* â”€â”€ Karten-Tab grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      /* ”€”€ Karten-Tab grid ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */
       .bb-ws-panel-maps {
         display: flex;
         flex-direction: column;

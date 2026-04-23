@@ -460,7 +460,7 @@ function formatSkills(src: MonsterRecord['skills']): string {
     .map(([k, v]) => `${k}: ${v}`).join(', ')
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€ Action toolbar: spawn on map + send handout to player â”€â”€â”€â”€â”€â”€
+// ”€”€”€”€”€”€”€”€”€ Action toolbar: spawn on map + send handout to player ”€”€”€”€”€”€
 
 function MonsterActions({
   record,

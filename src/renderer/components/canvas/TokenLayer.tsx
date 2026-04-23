@@ -111,7 +111,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   const contextMenuVisibleRef = useRef(false)
   contextMenuVisibleRef.current = contextMenu.visible
 
-  // â”€â”€ Viewport clamping for the context menu â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ”€”€ Viewport clamping for the context menu ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
   // The menu is position:fixed at the click's raw (x, y). When the click
   // happens near the right / bottom edge, the menu can spill off-screen.
   // We measure it after mount and shift it back into view, with an 8 px
@@ -259,7 +259,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
 
     broadcastTokens(useTokenStore.getState().tokens)
 
-    // â”€â”€ LOS fog reveal for light-emitting tokens â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ”€”€ LOS fog reveal for light-emitting tokens ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
     {
       const { imgW, imgH } = useMapTransformStore.getState()
       const walls = useWallStore.getState().walls
@@ -1066,7 +1066,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                             onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
                             onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
                           >
-                            {isFaction ? 'ðŸ· Fraktion' : isStatus ? '⚔️ Zustände' : 'ðŸ· Markierung'} {isSubOpen ? '▲' : 'â–¶'}
+                            {isFaction ? 'ðŸ· Fraktion' : isStatus ? '⚔️ Zustände' : 'ðŸ· Markierung'} {isSubOpen ? '▲' : '–¶'}
                           </button>
                           {isSubOpen && isFaction && (
                             <div style={{ background: 'var(--bg-elevated)', padding: '2px 0' }}>
@@ -1223,7 +1223,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   )
 }
 
-// â”€â”€â”€ Individual Token Node â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€”€ Individual Token Node ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 
 interface TokenNodeProps {
   token: TokenRecord

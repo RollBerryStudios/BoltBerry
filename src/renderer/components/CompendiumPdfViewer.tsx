@@ -433,7 +433,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
   )
 }
 
-// â”€â”€â”€ Search bar + result list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€”€ Search bar + result list ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 
 function SearchBar({
   query,
@@ -514,7 +514,7 @@ function SearchBar({
   )
 }
 
-// â”€â”€â”€ Toolbar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€”€ Toolbar ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 
 function PdfToolbar({
   pageNum,
@@ -580,7 +580,7 @@ function PdfToolbar({
           onClick={() => onSidebarMode(sidebarMode === 'thumbs' ? 'off' : 'thumbs')}
           title={t('compendium.toggleThumbs')}
         >
-          â–¤
+          –¤
         </button>
       </div>
 
@@ -610,7 +610,7 @@ function PdfToolbar({
           <span className="bb-pdf-page-of mono">/ {numPages}</span>
         </form>
         <button type="button" className="bb-pdf-btn" onClick={onNext} disabled={pageNum >= numPages} title={t('compendium.nextPage')}>
-          â–¶
+          –¶
         </button>
       </div>
 
@@ -663,9 +663,9 @@ function PdfToolbar({
   )
 }
 
-// â”€â”€â”€ Styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€”€ Styles ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 
-// â”€â”€â”€ Outline extraction â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€”€ Outline extraction ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 // pdfjs-dist returns bookmarks as a tree of OutlineNode objects whose
 // `dest` needs to be resolved to a 1-based page number via getPageIndex.
 // A null result means the destination couldn't be resolved (e.g. external
@@ -708,7 +708,7 @@ async function extractOutline(doc: unknown): Promise<OutlineEntry[]> {
   return resolve(raw)
 }
 
-// â”€â”€â”€ TOC sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€”€ TOC sidebar ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 
 function OutlineTree({
   entries,
@@ -762,7 +762,7 @@ function OutlineTree({
   )
 }
 
-// â”€â”€â”€ Thumbnail sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€”€ Thumbnail sidebar ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 
 function ThumbnailList({
   doc,
@@ -1020,7 +1020,7 @@ function PdfViewerStyles() {
         color: var(--danger);
       }
 
-      /* â”€â”€ Search bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      /* ”€”€ Search bar ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */
       .bb-pdf-search {
         background: var(--bg-elevated);
         border-bottom: 1px solid var(--border);
@@ -1101,7 +1101,7 @@ function PdfViewerStyles() {
         border-radius: 2px;
       }
 
-      /* â”€â”€ Sent-to-player toast â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      /* ”€”€ Sent-to-player toast ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */
       .bb-pdf-canvas-wrap { position: relative; }
       .bb-pdf-sent-toast {
         position: absolute;

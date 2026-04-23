@@ -249,7 +249,7 @@ export function LeftSidebar() {
 
   return (
     <div className="sidebar sidebar-left">
-      {/* â”€â”€ Tab bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ”€”€ Tab bar ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */}
       <div className="sidebar-tab-strip">
         {([
           ['maps', '🗺️', t('sidebar.left.tabMaps')],
@@ -273,7 +273,7 @@ export function LeftSidebar() {
         {tab === 'assets' && <AssetBrowser />}
         {tab === 'settings' && <SettingsPanel />}
         {tab === 'maps' && <>
-      {/* â”€â”€ Map list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ”€”€ Map list ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */}
       <div className="sidebar-section">
         <div className="sidebar-section-title">{t('sidebar.left.mapsTitle')}</div>
 
@@ -317,7 +317,7 @@ export function LeftSidebar() {
         </div>
       </div>
 
-      {/* â”€â”€ Grid settings (only when a map is active) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ”€”€ Grid settings (only when a map is active) ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */}
       {activeMap && (
         <div className="sidebar-section">
           <div className="sidebar-section-title">{t('sidebar.left.gridTitle', { name: activeMap.name })}</div>
@@ -511,7 +511,7 @@ export function LeftSidebar() {
   )
 }
 
-// â”€â”€ PDF â†’ PNG conversion (renderer-side, requires pdfjs-dist) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€ PDF â†’ PNG conversion (renderer-side, requires pdfjs-dist) ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 
 async function renderPdfToImage(
   base64Data: string,
@@ -703,14 +703,14 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
             disabled={index === 0}
             onClick={(e) => { e.stopPropagation(); onReorder(map.id, 'up') }}
             title="Nach oben"
-          >â–²</button>
+          >–²</button>
           <button
             className="btn btn-ghost"
             style={{ padding: '0 4px', fontSize: 10, lineHeight: '14px', minHeight: 14 }}
             disabled={index === total - 1}
             onClick={(e) => { e.stopPropagation(); onReorder(map.id, 'down') }}
             title="Nach unten"
-          >â–¼</button>
+          >–¼</button>
         </div>
       )}
     </div>

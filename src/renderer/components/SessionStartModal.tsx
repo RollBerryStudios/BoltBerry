@@ -114,7 +114,7 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
                 style={{ fontSize: 'var(--text-xs)', background: 'rgba(34,197,94,0.2)', color: '#22c55e', borderColor: 'rgba(34,197,94,0.4)' }}
                 onClick={() => { setConfirmWarning(null); onConfirm() }}
               >
-                â–¶ Trotzdem fortfahren
+                –¶ Trotzdem fortfahren
               </button>
             </div>
           </div>
@@ -129,7 +129,7 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
             style={{ background: 'rgba(34,197,94,0.2)', color: '#22c55e', borderColor: 'rgba(34,197,94,0.4)' }}
             onClick={handleGoLive}
           >
-            â–¶ Jetzt live gehen
+            –¶ Jetzt live gehen
           </button>
         </div>
       </div>
