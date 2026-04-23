@@ -26,28 +26,28 @@ function factionColor(faction: string): string {
 }
 
 const STATUS_EFFECTS = [
-  { id: 'blinded',       icon: 'ðŸ«£', label: 'Blind' },
+  { id: 'blinded',       icon: '🫣', label: 'Blind' },
   { id: 'charmed',       icon: '💫', label: 'Bezaubert' },
   { id: 'dead',          icon: '💀', label: 'Tot' },
-  { id: 'deafened',      icon: 'ðŸ”‡', label: 'Taub' },
-  { id: 'exhausted',     icon: 'ðŸ˜«', label: 'Erschöpft' },
-  { id: 'frightened',    icon: 'ðŸ˜±', label: 'Verängstigt' },
-  { id: 'grappled',      icon: 'ðŸ¤›', label: 'Gepackt' },
-  { id: 'incapacitated', icon: 'ðŸ˜µ', label: 'Kampfunfähig' },
-  { id: 'invisible',     icon: 'ðŸ‘»', label: 'Unsichtbar' },
-  { id: 'paralyzed',     icon: 'âš¡', label: 'Gelähmt' },
-  { id: 'petrified',     icon: 'ðŸª¨', label: 'Versteinert' },
-  { id: 'poisoned',      icon: 'â˜ ï¸', label: 'Vergiftet' },
-  { id: 'prone',         icon: '⬇ï¸', label: 'Liegend' },
-  { id: 'restrained',    icon: 'â›“ï¸', label: 'Gefesselt' },
-  { id: 'stunned',       icon: 'â­', label: 'Betäubt' },
-  { id: 'unconscious',   icon: 'ðŸ’¤', label: 'Bewusstlos' },
-  { id: 'advantage',     icon: 'â–²', label: 'Vorteil' },
-  { id: 'disadvantage',  icon: 'â–¼', label: 'Nachteil' },
+  { id: 'deafened',      icon: '🔇', label: 'Taub' },
+  { id: 'exhausted',     icon: '😫', label: 'Erschöpft' },
+  { id: 'frightened',    icon: '😱', label: 'Verängstigt' },
+  { id: 'grappled',      icon: '🤝', label: 'Gepackt' },
+  { id: 'incapacitated', icon: '😵', label: 'Kampfunfähig' },
+  { id: 'invisible',     icon: '👻', label: 'Unsichtbar' },
+  { id: 'paralyzed',     icon: '⚡', label: 'Gelähmt' },
+  { id: 'petrified',     icon: '🪨', label: 'Versteinert' },
+  { id: 'poisoned',      icon: '●', label: 'Vergiftet' },
+  { id: 'prone',         icon: '●', label: 'Liegend' },
+  { id: 'restrained',    icon: '●', label: 'Gefesselt' },
+  { id: 'stunned',       icon: '●', label: 'Betäubt' },
+  { id: 'unconscious',   icon: '💤', label: 'Bewusstlos' },
+  { id: 'advantage',     icon: '▲', label: 'Vorteil' },
+  { id: 'disadvantage',  icon: '▼', label: 'Nachteil' },
   { id: 'concentrating', icon: '🎭¯', label: 'Konzentration' },
   { id: 'blessed',       icon: '✨', label: 'Gesegnet' },
   { id: 'cursed',        icon: '🔮', label: 'Verflucht' },
-  { id: 'hasted',        icon: 'âš¡', label: 'Verlangsamt' },
+  { id: 'hasted',        icon: '⚡', label: 'Verlangsamt' },
 ]
 
 const STATUS_ICON_MAP: Record<string, string> = Object.fromEntries(STATUS_EFFECTS.map(e => [e.id, e.icon]))
@@ -974,7 +974,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     null,
                     { label: '⚔️ Zustände', action: null, submenu: true, submenuType: 'status' },
                     { label: 'âž• Vorteil', action: () => toggleAdvantage(token, true) },
-                    { label: 'âž– Nachteil', action: () => toggleAdvantage(token, false) },
+                    { label: '➖ Nachteil', action: () => toggleAdvantage(token, false) },
                     { label: '🎭¯ Konzentration', action: () => toggleStatusInMenu(token, 'concentrating') },
                     null,
                     { label: '⚔️ Zum Kampf hinzufügen', action: () => addToInitiative(token) },
@@ -1066,7 +1066,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                             onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
                             onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
                           >
-                            {isFaction ? 'ðŸ· Fraktion' : isStatus ? '⚔️ Zustände' : 'ðŸ· Markierung'} {isSubOpen ? 'â–²' : 'â–¶'}
+                            {isFaction ? 'ðŸ· Fraktion' : isStatus ? '⚔️ Zustände' : 'ðŸ· Markierung'} {isSubOpen ? '▲' : 'â–¶'}
                           </button>
                           {isSubOpen && isFaction && (
                             <div style={{ background: 'var(--bg-elevated)', padding: '2px 0' }}>

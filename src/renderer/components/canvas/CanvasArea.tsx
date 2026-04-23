@@ -58,16 +58,16 @@ function broadcastTokensFromCanvas() {
   window.electronAPI?.sendTokenUpdate(visible)
 }
 
-// Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬ Layer visibility definitions Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬
+// Layer visibility definitions
 const LAYER_DEFS: { key: string; label: string; icon: string; canToggle: boolean }[] = [
-  { key: 'map',      label: 'Karte',        icon: 'Ã°Å¸—Âº',  canToggle: false },
-  { key: 'fog',      label: 'Nebel',        icon: 'Ã°Å¸Å’Â«',  canToggle: true  },
-  { key: 'tokens',   label: 'Token',        icon: 'Ã°Å¸Âªâ„¢',  canToggle: true  },
-  { key: 'drawings', label: 'Zeichnungen',  icon: 'Ã¢Å“Â',   canToggle: true  },
-  { key: 'gmPins',   label: 'GM-Pins',      icon: 'Ã°Å¸"Å’',  canToggle: true  },
-  { key: 'lighting', label: 'Beleuchtung',  icon: 'Ã°Å¸'Â¡',  canToggle: true  },
-  { key: 'walls',    label: 'WÃƒÂ¤nde',        icon: 'Ã°Å¸Â§Â±',  canToggle: true  },
-  { key: 'rooms',    label: 'RÃƒÂ¤ume',        icon: 'Ã°Å¸ÂÂ ',  canToggle: true  },
+  { key: 'map',      label: 'Karte',        icon: '🗺️',  canToggle: false },
+  { key: 'fog',      label: 'Nebel',        icon: '🌫️',  canToggle: true  },
+  { key: 'tokens',   label: 'Token',        icon: '🪙',  canToggle: true  },
+  { key: 'drawings', label: 'Zeichnungen',  icon: '✏️',   canToggle: true  },
+  { key: 'gmPins',   label: 'GM-Pins',      icon: '📌',  canToggle: true  },
+  { key: 'lighting', label: 'Beleuchtung',  icon: '💡',  canToggle: true  },
+  { key: 'walls',    label: 'Wände',        icon: '🧱',  canToggle: true  },
+  { key: 'rooms',    label: 'Räume',        icon: '🏠',  canToggle: true  },
 ]
 
 const DEFAULT_LAYER_VISIBILITY: Record<string, boolean> = {

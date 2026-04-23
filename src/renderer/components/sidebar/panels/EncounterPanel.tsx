@@ -36,12 +36,12 @@ function broadcastTokensFromPanel() {
 }
 
 const FORMATIONS: { value: FormationType; label: string; icon: string }[] = [
-  { value: 'saved', label: 'Gespeichert', icon: 'ðŸ“Œ' },
-  { value: 'line', label: 'Linie', icon: 'âž–' },
-  { value: 'circle', label: 'Kreis', icon: 'â­•' },
+  { value: 'saved', label: 'Gespeichert', icon: '📌' },
+  { value: 'line', label: 'Linie', icon: '➖' },
+  { value: 'circle', label: 'Kreis', icon: '⭕' },
   { value: 'cluster', label: 'Haufen', icon: '💥' },
-  { value: 'wing', label: 'Flügel', icon: 'ðŸ¦…' },
-  { value: 'v-formation', label: 'Keil', icon: 'ðŸ”»' },
+  { value: 'wing', label: 'Flügel', icon: '🦅' },
+  { value: 'v-formation', label: 'Keil', icon: '🔻' },
 ]
 
 const DIFFICULTIES: { value: DifficultyLevel; label: string; color: string }[] = [

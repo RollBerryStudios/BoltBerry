@@ -39,15 +39,15 @@ const SECTIONS: DockSection[] = [
   {
     id: 'view',
     groups: [
-      { id: 'select',  primary: { id: 'select',  icon: 'â†–',  labelKey: 'toolbar.tools.select',  shortcut: 'V' } },
-      { id: 'pointer', primary: { id: 'pointer', icon: 'ðŸ‘†', labelKey: 'toolbar.tools.pointer', shortcut: 'W' } },
+      { id: 'select',  primary: { id: 'select',  icon: '●',  labelKey: 'toolbar.tools.select',  shortcut: 'V' } },
+      { id: 'pointer', primary: { id: 'pointer', icon: '●', labelKey: 'toolbar.tools.pointer', shortcut: 'W' } },
       {
         id: 'measure',
-        primary: { id: 'measure-line', icon: 'ðŸ“', labelKey: 'toolbar.tools.measureLine', shortcut: 'M' },
+        primary: { id: 'measure-line', icon: '●', labelKey: 'toolbar.tools.measureLine', shortcut: 'M' },
         variants: [
-          { id: 'measure-line',   icon: 'ðŸ“', labelKey: 'toolbar.tools.measureLine',   shortcut: 'M' },
-          { id: 'measure-circle', icon: 'â—Ž',  labelKey: 'toolbar.tools.measureCircle' },
-          { id: 'measure-cone',   icon: 'â—¿',  labelKey: 'toolbar.tools.measureCone' },
+          { id: 'measure-line',   icon: '●', labelKey: 'toolbar.tools.measureLine',   shortcut: 'M' },
+          { id: 'measure-circle', icon: '●',  labelKey: 'toolbar.tools.measureCircle' },
+          { id: 'measure-cone',   icon: '●',  labelKey: 'toolbar.tools.measureCone' },
         ],
       },
     ],
@@ -55,7 +55,7 @@ const SECTIONS: DockSection[] = [
   {
     id: 'combat',
     groups: [
-      { id: 'token', primary: { id: 'token', icon: 'â¬¤', labelKey: 'toolbar.tools.token', shortcut: 'T' } },
+      { id: 'token', primary: { id: 'token', icon: '●', labelKey: 'toolbar.tools.token', shortcut: 'T' } },
     ],
   },
   {
@@ -63,13 +63,13 @@ const SECTIONS: DockSection[] = [
     groups: [
       {
         id: 'fog',
-        primary: { id: 'fog-brush', icon: 'ðŸ–Œ', labelKey: 'toolbar.tools.fogBrush', shortcut: 'B' },
+        primary: { id: 'fog-brush', icon: '●', labelKey: 'toolbar.tools.fogBrush', shortcut: 'B' },
         variants: [
-          { id: 'fog-brush',       icon: 'ðŸ–Œ', labelKey: 'toolbar.tools.fogBrush',       shortcut: 'B' },
-          { id: 'fog-brush-cover', icon: 'âœ',  labelKey: 'toolbar.tools.fogBrushCover', shortcut: 'X' },
-          { id: 'fog-rect',        icon: 'â–­',  labelKey: 'toolbar.tools.fogRect',        shortcut: 'F' },
-          { id: 'fog-polygon',     icon: 'â¬¡',  labelKey: 'toolbar.tools.fogPolygon',     shortcut: 'P' },
-          { id: 'fog-cover',       icon: 'â–®',  labelKey: 'toolbar.tools.fogCover',       shortcut: 'C' },
+          { id: 'fog-brush',       icon: '●', labelKey: 'toolbar.tools.fogBrush',       shortcut: 'B' },
+          { id: 'fog-brush-cover', icon: '●',  labelKey: 'toolbar.tools.fogBrushCover', shortcut: 'X' },
+          { id: 'fog-rect',        icon: '●',  labelKey: 'toolbar.tools.fogRect',        shortcut: 'F' },
+          { id: 'fog-polygon',     icon: '●',  labelKey: 'toolbar.tools.fogPolygon',     shortcut: 'P' },
+          { id: 'fog-cover',       icon: '●',  labelKey: 'toolbar.tools.fogCover',       shortcut: 'C' },
         ],
       },
     ],
@@ -79,20 +79,20 @@ const SECTIONS: DockSection[] = [
     groups: [
       {
         id: 'wall',
-        primary: { id: 'wall-draw', icon: 'ðŸ§±', labelKey: 'toolbar.tools.wallDraw', shortcut: 'G' },
+        primary: { id: 'wall-draw', icon: '●', labelKey: 'toolbar.tools.wallDraw', shortcut: 'G' },
         variants: [
-          { id: 'wall-draw', icon: 'ðŸ§±', labelKey: 'toolbar.tools.wallDraw', shortcut: 'G' },
-          { id: 'wall-door', icon: 'ðŸšª', labelKey: 'toolbar.tools.wallDoor', shortcut: 'J' },
+          { id: 'wall-draw', icon: '●', labelKey: 'toolbar.tools.wallDraw', shortcut: 'G' },
+          { id: 'wall-door', icon: '●', labelKey: 'toolbar.tools.wallDoor', shortcut: 'J' },
         ],
       },
-      { id: 'room', primary: { id: 'room', icon: 'ðŸ ', labelKey: 'toolbar.tools.room', shortcut: 'R' } },
+      { id: 'room', primary: { id: 'room', icon: '●', labelKey: 'toolbar.tools.room', shortcut: 'R' } },
       {
         id: 'draw',
-        primary: { id: 'draw-freehand', icon: 'âœï¸', labelKey: 'toolbar.tools.drawFreehand', shortcut: 'D' },
+        primary: { id: 'draw-freehand', icon: '●', labelKey: 'toolbar.tools.drawFreehand', shortcut: 'D' },
         variants: [
-          { id: 'draw-freehand', icon: 'âœï¸', labelKey: 'toolbar.tools.drawFreehand', shortcut: 'D' },
-          { id: 'draw-rect',     icon: 'â–¢',  labelKey: 'toolbar.tools.drawRect' },
-          { id: 'draw-circle',   icon: 'â—‹',  labelKey: 'toolbar.tools.drawCircle' },
+          { id: 'draw-freehand', icon: '●', labelKey: 'toolbar.tools.drawFreehand', shortcut: 'D' },
+          { id: 'draw-rect',     icon: '●',  labelKey: 'toolbar.tools.drawRect' },
+          { id: 'draw-circle',   icon: '●',  labelKey: 'toolbar.tools.drawCircle' },
           { id: 'draw-text',     icon: 'T',  labelKey: 'toolbar.tools.drawText' },
         ],
       },

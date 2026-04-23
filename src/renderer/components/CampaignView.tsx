@@ -26,12 +26,12 @@ type Tab = WorkspaceTab
 
 const TABS: { id: Tab; icon: string; i18nKey: string }[] = [
   { id: 'maps',       icon: '🗺️', i18nKey: 'workspace.tabMaps'       },
-  { id: 'characters', icon: 'ðŸ‘¤', i18nKey: 'workspace.tabCharacters' },
+  { id: 'characters', icon: '●', i18nKey: 'workspace.tabCharacters' },
   { id: 'npcs',       icon: '🧑', i18nKey: 'workspace.tabNpcs'       },
   { id: 'audio',      icon: '🎭µ', i18nKey: 'workspace.tabAudio'      },
   { id: 'sfx',        icon: '🎭›', i18nKey: 'workspace.tabSfx'        },
   { id: 'handouts',   icon: '📄', i18nKey: 'workspace.tabHandouts'   },
-  { id: 'notes',      icon: 'ðŸ“', i18nKey: 'workspace.tabNotes'      },
+  { id: 'notes',      icon: '●', i18nKey: 'workspace.tabNotes'      },
 ]
 
 export function CampaignView() {

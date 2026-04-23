@@ -61,20 +61,20 @@ export function RightSidebar() {
       labelKey: 'sidebar.right.dockScene',
       icon: '🗺️',
       sections: [
-        { id: 'tokens',     labelKey: 'sidebar.right.tabTokens',     icon: 'â¬¤',  render: () => <TokenPanel />,         isContextual: tokenSelected && !combatActive },
+        { id: 'tokens',     labelKey: 'sidebar.right.tabTokens',     icon: '●',  render: () => <TokenPanel />,         isContextual: tokenSelected && !combatActive },
         { id: 'initiative', labelKey: 'sidebar.right.tabInitiative', icon: '⚔️', render: () => <InitiativePanel />,    isContextual: combatActive },
-        { id: 'rooms',      labelKey: 'sidebar.right.tabRooms',      icon: 'ðŸ ', render: () => <RoomPanel /> },
+        { id: 'rooms',      labelKey: 'sidebar.right.tabRooms',      icon: '●', render: () => <RoomPanel /> },
       ],
     },
     {
       id: 'content',
       labelKey: 'sidebar.right.dockContent',
-      icon: 'ðŸ“š',
+      icon: '●',
       sections: [
-        { id: 'notes',      labelKey: 'sidebar.right.tabNotes',      icon: 'ðŸ“', render: () => <NotesPanel /> },
+        { id: 'notes',      labelKey: 'sidebar.right.tabNotes',      icon: '●', render: () => <NotesPanel /> },
         { id: 'handouts',   labelKey: 'sidebar.right.tabHandouts',   icon: '📜', render: () => <HandoutsPanel /> },
-        { id: 'encounters', labelKey: 'sidebar.right.tabEncounters', icon: 'ðŸ‘¾', render: () => <EncounterPanel /> },
-        { id: 'characters', labelKey: 'sidebar.right.tabCharacters', icon: 'ðŸ“‹', render: () => <CharacterSheetPanel /> },
+        { id: 'encounters', labelKey: 'sidebar.right.tabEncounters', icon: '●', render: () => <EncounterPanel /> },
+        { id: 'characters', labelKey: 'sidebar.right.tabCharacters', icon: '●', render: () => <CharacterSheetPanel /> },
       ],
     },
   ]
