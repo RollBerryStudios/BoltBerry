@@ -5,6 +5,7 @@ import { useUIStore } from '../stores/uiStore'
 import { useSessionStore } from '../stores/sessionStore'
 import { useTokenStore } from '../stores/tokenStore'
 import { useCampaignStore } from '../stores/campaignStore'
+import { Modal } from './shared/Modal'
 
 interface SessionStartModalProps {
   onConfirm: () => void
@@ -33,23 +34,11 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
   }
 
   return (
-    <div
-      style={{
-        position: 'fixed', inset: 0,
-        background: 'rgba(0,0,0,0.7)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        zIndex: 9000,
-      }}
-      onClick={(e) => { if (e.target === e.currentTarget) onCancel() }}
+    <Modal
+      onClose={onCancel}
+      ariaLabel={t('sessionStart.title')}
+      style={{ padding: 'var(--sp-6)', width: 380 }}
     >
-      <div style={{
-        background: 'var(--bg-surface)',
-        border: '1px solid var(--border)',
-        borderRadius: 'var(--radius-lg)',
-        padding: 'var(--sp-6)',
-        width: 380,
-        boxShadow: '0 24px 64px rgba(0,0,0,0.8)',
-      }}>
         <h2 style={{ fontSize: 'var(--text-md)', fontWeight: 700, marginBottom: 4 }}>
           {t('sessionStart.title')}
         </h2>
@@ -138,8 +127,7 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
             {t('sessionStart.goLive')}
           </button>
         </div>
-      </div>
-    </div>
+    </Modal>
   )
 }
 

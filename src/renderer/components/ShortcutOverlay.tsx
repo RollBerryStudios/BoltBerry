@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { Modal } from './shared/Modal'
 
 interface ShortcutOverlayProps {
   onClose: () => void
@@ -69,25 +70,16 @@ export function ShortcutOverlay({ onClose }: ShortcutOverlayProps) {
   ]
 
   return (
-    <div
+    <Modal
+      onClose={onClose}
+      ariaLabel={t('shortcuts.title')}
       style={{
-        position: 'fixed', inset: 0,
-        background: 'rgba(0,0,0,0.75)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        zIndex: 9000,
-      }}
-      onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
-    >
-      <div style={{
-        background: 'var(--bg-surface)',
-        border: '1px solid var(--border)',
-        borderRadius: 'var(--radius-lg)',
         padding: 'var(--sp-6)',
         width: 580,
         maxHeight: '85vh',
         overflowY: 'auto',
-        boxShadow: '0 24px 64px rgba(0,0,0,0.8)',
-      }}>
+      }}
+    >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--sp-5)' }}>
           <h2 style={{ fontSize: 'var(--text-md)', fontWeight: 600 }}>{t('shortcuts.title')}</h2>
           <button className="btn btn-ghost btn-icon" onClick={onClose}>✕</button>
@@ -149,7 +141,6 @@ export function ShortcutOverlay({ onClose }: ShortcutOverlayProps) {
         }}>
           {t('shortcuts.hint', { key1: '?', key2: 'F1' })}
         </div>
-      </div>
-    </div>
+    </Modal>
   )
 }

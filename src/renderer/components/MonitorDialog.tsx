@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Modal } from './shared/Modal'
 
 interface Display {
   id: number
@@ -41,22 +42,11 @@ export function MonitorDialog({ onClose }: MonitorDialogProps) {
   }
 
   return (
-    <div style={{
-      position: 'fixed', inset: 0,
-      background: 'rgba(0,0,0,0.7)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      zIndex: 9000,
-    }}
-      onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
+    <Modal
+      onClose={onClose}
+      ariaLabel={t('monitorDialog.title')}
+      style={{ padding: 'var(--sp-6)', width: 400 }}
     >
-      <div style={{
-        background: 'var(--bg-surface)',
-        border: '1px solid var(--border)',
-        borderRadius: 'var(--radius-lg)',
-        padding: 'var(--sp-6)',
-        width: 400,
-        boxShadow: '0 24px 64px rgba(0,0,0,0.8)',
-      }}>
         <h2 style={{ fontSize: 'var(--text-md)', fontWeight: 600, marginBottom: 'var(--sp-4)' }}>
           {t('monitorDialog.title')}
         </h2>
@@ -124,7 +114,6 @@ export function MonitorDialog({ onClose }: MonitorDialogProps) {
             {opening ? t('monitorDialog.opening') : t('monitorDialog.open')}
           </button>
         </div>
-      </div>
-    </div>
+    </Modal>
   )
 }
