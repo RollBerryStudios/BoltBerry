@@ -213,6 +213,19 @@ export default function PlayerApp() {
 
       window.playerAPI.onTokenUpdate((t) => setTokens(t)),
 
+      // Per-token delta: merge upserts by id, drop removed ids. Snapshot
+      // channel above stays authoritative for full-sync / resync paths.
+      window.playerAPI.onTokenDelta((delta) => {
+        setTokens((prev) => {
+          if (delta.upsert.length === 0 && delta.remove.length === 0) return prev
+          const byId = new Map<number, typeof prev[number]>()
+          for (const t of prev) byId.set(t.id, t)
+          for (const t of delta.upsert) byId.set(t.id, t)
+          for (const id of delta.remove) byId.delete(id)
+          return Array.from(byId.values())
+        })
+      }),
+
       window.playerAPI.onBlackout((active: boolean) => {
         setBlackout(active)
         if (active) {

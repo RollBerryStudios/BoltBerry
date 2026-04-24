@@ -13,6 +13,7 @@ import { useUndoStore, nextCommandId, registerUndoAction } from '../../stores/un
 import { useWallStore } from '../../stores/wallStore'
 import { computeVisibilityPolygon, type Segment } from '../../utils/losEngine'
 import { buildWallIndex } from '../../utils/wallIndex'
+import { broadcastTokens } from '../../utils/tokenBroadcast'
 import type { MapRecord, TokenRecord } from '@shared/ipc-types'
 import { useImage } from '../../hooks/useImage'
 import { findMonsterSlugByName } from '../bestiary/actions'
@@ -1661,27 +1662,7 @@ registerUndoAction<TokenMovePayload>('token.move', {
   },
 })
 
-function broadcastTokens(tokens: TokenRecord[]) {
-  if (useSessionStore.getState().sessionMode === 'prep') return
-  const visible = tokens
-    .filter((t) => t.visibleToPlayers)
-    .map((t) => ({
-      id: t.id,
-      name: t.name,
-      imagePath: t.imagePath,
-      x: t.x,
-      y: t.y,
-      size: t.size,
-      hpCurrent: t.hpCurrent,
-      hpMax: t.hpMax,
-      showName: t.showName,
-      rotation: t.rotation,
-      markerColor: t.markerColor,
-      statusEffects: t.statusEffects,
-      ac: t.ac,
-      faction: t.faction,
-      lightRadius: t.lightRadius,
-      lightColor: t.lightColor,
-    }))
-  window.electronAPI?.sendTokenUpdate(visible)
-}
+// `broadcastTokens` is imported at the top — implementation lives in
+// `utils/tokenBroadcast.ts` and diffs against the last snapshot so a
+// single HP / position change serialises only the changed token
+// instead of the whole roster (audit #54 / #55).

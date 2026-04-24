@@ -4,6 +4,7 @@ import { getPlayerWindow, getDMWindow } from '../windows'
 import type {
   PlayerMapState,
   PlayerTokenState,
+  PlayerTokenDelta,
   FogDelta,
   PlayerFullState,
   PlayerPointer,
@@ -112,6 +113,14 @@ export function registerPlayerBridgeHandlers(): void {
   ipcMain.on(IPC.PLAYER_TOKEN_UPDATE, (event, tokens: PlayerTokenState[]) => {
     if (!isFromDM(event)) return
     safeSendToPlayer(IPC.PLAYER_TOKEN_UPDATE, tokens)
+  })
+
+  // Per-token delta (replaces the "full roster on every mutation" pattern)
+  // — DM -> Player. Snapshot path above is still used for full-sync /
+  // resync handshakes.
+  ipcMain.on(IPC.PLAYER_TOKEN_DELTA, (event, delta: PlayerTokenDelta) => {
+    if (!isFromDM(event)) return
+    safeSendToPlayer(IPC.PLAYER_TOKEN_DELTA, delta)
   })
 
   // Blackout toggle — DM -> Player

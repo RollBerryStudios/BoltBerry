@@ -40,22 +40,10 @@ import { EmptyState } from '../EmptyState'
 import { showToast } from '../shared/Toast'
 import type Konva from 'konva'
 import type { MapRecord, PlayerFullState } from '@shared/ipc-types'
+import { broadcastTokens } from '../../utils/tokenBroadcast'
 
 function broadcastTokensFromCanvas() {
-  if (useSessionStore.getState().sessionMode === 'prep') return
-  const tokens = useTokenStore.getState().tokens
-  const visible = tokens
-    .filter((t) => t.visibleToPlayers)
-    .map((t) => ({
-      id: t.id, name: t.name, imagePath: t.imagePath,
-      x: t.x, y: t.y, size: t.size,
-      hpCurrent: t.hpCurrent, hpMax: t.hpMax, showName: t.showName,
-      rotation: t.rotation, markerColor: t.markerColor,
-      statusEffects: t.statusEffects, ac: t.ac,
-      faction: t.faction,
-      lightRadius: t.lightRadius, lightColor: t.lightColor,
-    }))
-  window.electronAPI?.sendTokenUpdate(visible)
+  broadcastTokens(useTokenStore.getState().tokens)
 }
 
 // Layer visibility definitions
