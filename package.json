@@ -1,6 +1,6 @@
 {
   "name": "boltberry",
-  "version": "0.20.20",
+  "version": "0.20.21",
   "description": "BoltBerry \u2013 Lokale Virtual-Tabletop-App f\u00fcr Pen-and-Paper-Runden",
   "main": "dist/main/index.js",
   "homepage": ".",
