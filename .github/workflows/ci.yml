@@ -6,33 +6,19 @@ on:
   pull_request:
     branches: [main]
 
-# Minimal token permissions. CI only needs to read the repo; no write
-# scope on the GITHUB_TOKEN closes the fall-back attack surface if any
-# step were to accidentally run an action that tries to push or open
-# a PR. The release workflow is separate and scopes its own perms.
 permissions:
   contents: read
 
-# Actions pinned to commit SHAs per audit QW-13. Supply-chain hardening:
-# a tag rename by an attacker (e.g. re-pointing `v4` at a malicious
-# commit) doesn't hijack our CI. Dependabot can still roll these
-# forward via PR when the maintainers tag a new release.
 jobs:
-  # ─── Encoding Check (fail fast) ──────────────────────────────────────────
   encoding-check:
     name: Check Source Encoding
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4
-      - name: Check for Mojibake (double-encoded UTF-8)
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - name: Check for Mojibake
         run: |
-          # Scan TS/TSX icon strings for common mojibake indicators.
-          # These patterns appear when UTF-8 bytes are interpreted as Latin-1
-          # and re-saved, corrupting emoji and non-ASCII characters.
-          # Only checks icon: '...' strings — avoids false positives in comments/text.
           if grep -rn "icon: '[^']*[âðÃ][^']*'" src/ --include="*.tsx" --include="*.ts" -l; then
-            echo "::error::Mojibake detected in icon strings! Double-encoded UTF-8 found."
-            echo "::error::Common cause: File opened as Latin-1 instead of UTF-8."
+            echo "::error::Mojibake detected!"
             grep -rn "icon: '[^']*[âðÃ][^']*'" src/ --include="*.tsx" --include="*.ts"
             exit 1
           fi
@@ -40,11 +26,11 @@ jobs:
   lint-and-test:
     name: Lint & Test
     needs: encoding-check
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
       - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '20'
           cache: 'npm'
@@ -60,37 +46,28 @@ jobs:
   build-check:
     name: Build & Bundle Check
     needs: encoding-check
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
       - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '20'
           cache: 'npm'
       - name: Install dependencies
         run: npm ci
-      - name: Build (main + preload + renderer)
+      - name: Build
         run: npm run build && npm run check:bundle
 
   e2e:
     name: E2E (Playwright)
     needs: encoding-check
-    runs-on: ubuntu-latest
-    # E2E tests have pre-existing failures (preload API mismatch,
-    # schema version drift, headless CI timeouts). They are not blocking
-    # the CI pipeline while being fixed separately. See issue #65.
+    runs-on: [self-hosted, Linux, X64]
     continue-on-error: true
-    # Per audit QW-14: E2E was entirely absent from CI despite the
-    # test:e2e script + global-setup existing. This job builds the app
-    # first (the e2e harness expects dist/main + dist/renderer +
-    # dist/preload to exist — see e2e/global-setup.ts) then runs
-    # Playwright. Linux needs xvfb for Electron to open a window
-    # headlessly.
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
       - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '20'
           cache: 'npm'
@@ -104,7 +81,7 @@ jobs:
         run: xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npm run test:e2e
       - name: Upload Playwright report
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: playwright-report
           path: playwright-report/
