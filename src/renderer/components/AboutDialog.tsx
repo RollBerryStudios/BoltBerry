@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import pkg from '../../../package.json'
+import { useDialogA11y } from '../hooks/useDialogA11y'
 
 /* About dialog — single authoritative surface for attributions and legal
    notices. Required by CC-BY-4.0 for the SRD content; nice-to-have for
@@ -11,18 +11,23 @@ import pkg from '../../../package.json'
 export function AboutDialog({ onClose }: { onClose: () => void }) {
   const { t } = useTranslation()
 
-  // Escape closes the dialog; matches the other modals in the app.
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') onClose()
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [onClose])
+  // Escape + focus trap + focus restoration, shared with the inline-
+  // styled <Modal> primitive so every dialog has the same keyboard
+  // behaviour (audit #27). AboutDialog keeps its custom CSS-class
+  // layout so we can't drop-in <Modal>.
+  const dialogRef = useDialogA11y<HTMLDivElement>({ onClose })
 
   return (
     <div className="bb-about-backdrop" onClick={onClose}>
-      <div className="bb-about" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="bb-about"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="bb-about-title"
+        tabIndex={-1}
+        ref={dialogRef}
+        onClick={(e) => e.stopPropagation()}
+      >
         <AboutStyles />
 
         <header className="bb-about-header">
@@ -31,7 +36,7 @@ export function AboutDialog({ onClose }: { onClose: () => void }) {
               <path d="M13 2L4 14h7l-2 8 9-12h-7l2-8z" fill="var(--accent)" />
             </svg>
             <div>
-              <div className="bb-about-title display">BoltBerry</div>
+              <div id="bb-about-title" className="bb-about-title display">BoltBerry</div>
               <div className="bb-about-sub">v{pkg.version} · {t('about.tagline')}</div>
             </div>
           </div>

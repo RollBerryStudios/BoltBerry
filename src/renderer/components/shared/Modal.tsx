@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react'
 import type { ReactNode, CSSProperties } from 'react'
+import { useDialogA11y } from '../../hooks/useDialogA11y'
 
 interface ModalProps {
   /** Fired on ESC, backdrop click, or the modal's own close control. */
@@ -42,38 +42,9 @@ export function Modal({
   style,
   className,
 }: ModalProps) {
-  const containerRef = useRef<HTMLDivElement | null>(null)
-  const previouslyFocusedRef = useRef<HTMLElement | null>(null)
-
-  useEffect(() => {
-    previouslyFocusedRef.current = document.activeElement as HTMLElement | null
-
-    // Focus the first focusable descendant on mount. Falling back to the
-    // container itself guarantees a defined initial focus (prevents
-    // screen readers from reading outside the dialog).
-    const container = containerRef.current
-    if (container) {
-      const first = getFocusable(container)[0] ?? container
-      first.focus({ preventScroll: true })
-    }
-
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.stopPropagation()
-        onClose()
-        return
-      }
-      if (e.key === 'Tab') {
-        trapFocus(e, container)
-      }
-    }
-
-    window.addEventListener('keydown', onKeyDown, true)
-    return () => {
-      window.removeEventListener('keydown', onKeyDown, true)
-      previouslyFocusedRef.current?.focus({ preventScroll: true })
-    }
-  }, [onClose])
+  // Escape handler, focus trap, and focus restoration live in a shared
+  // hook so `AboutDialog` (custom CSS layout) gets the same guarantees.
+  const containerRef = useDialogA11y<HTMLDivElement>({ onClose })
 
   return (
     <div
@@ -112,39 +83,4 @@ export function Modal({
       </div>
     </div>
   )
-}
-
-function getFocusable(root: HTMLElement): HTMLElement[] {
-  const selector = [
-    'a[href]',
-    'button:not([disabled])',
-    'input:not([disabled]):not([type="hidden"])',
-    'textarea:not([disabled])',
-    'select:not([disabled])',
-    '[tabindex]:not([tabindex="-1"])',
-  ].join(', ')
-  return Array.from(root.querySelectorAll<HTMLElement>(selector)).filter((el) => {
-    // Skip elements whose rects are zero — they're display:none / detached.
-    return el.offsetParent !== null || el === document.activeElement
-  })
-}
-
-function trapFocus(e: KeyboardEvent, container: HTMLElement | null) {
-  if (!container) return
-  const items = getFocusable(container)
-  if (items.length === 0) return
-  const first = items[0]
-  const last = items[items.length - 1]
-  const active = document.activeElement as HTMLElement | null
-  if (e.shiftKey) {
-    if (active === first || !container.contains(active)) {
-      e.preventDefault()
-      last.focus({ preventScroll: true })
-    }
-  } else {
-    if (active === last) {
-      e.preventDefault()
-      first.focus({ preventScroll: true })
-    }
-  }
 }

@@ -9,6 +9,7 @@ import { WeatherCanvas } from './components/canvas/WeatherCanvas'
 import { useImageUrl } from './hooks/useImageUrl'
 import { applyOpToCtxPair } from './utils/fogUtils'
 import { computeVisibilityPolygon, type Segment } from './utils/losEngine'
+import { buildWallIndex } from './utils/wallIndex'
 
 function factionColor(faction: string): string {
   switch (faction) {
@@ -908,6 +909,13 @@ function PlayerLightingLayer({ tokens, walls, scale, offX, offY, gridSize, imgW,
     [walls]
   )
 
+  // Spatial index — built once per geometry change and shared across
+  // every light source's polygon computation.
+  const wallIndex = useMemo(
+    () => (imgW > 0 && imgH > 0 ? buildWallIndex(segments, imgW, imgH) : undefined),
+    [segments, imgW, imgH],
+  )
+
   const lights = useMemo(
     () => tokens
       .filter((t) => t.lightRadius > 0)
@@ -928,7 +936,7 @@ function PlayerLightingLayer({ tokens, walls, scale, offX, offY, gridSize, imgW,
   return (
     <Layer listening={false} opacity={0.6} perfectDrawEnabled={false} {...(layerXform ?? {})}>
       {lights.map((l) => {
-        const poly = computeVisibilityPolygon(l.cx, l.cy, l.rPx, segments, imgW, imgH)
+        const poly = computeVisibilityPolygon(l.cx, l.cy, l.rPx, segments, imgW, imgH, wallIndex)
         const screenPoly: number[] = []
         for (let i = 0; i < poly.length; i += 2) {
           screenPoly.push(poly[i] * scale + offX, poly[i + 1] * scale + offY)

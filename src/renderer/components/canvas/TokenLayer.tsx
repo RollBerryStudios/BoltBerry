@@ -10,7 +10,8 @@ import { useInitiativeStore } from '../../stores/initiativeStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useUndoStore, nextCommandId, registerUndoAction } from '../../stores/undoStore'
 import { useWallStore } from '../../stores/wallStore'
-import { computeVisibilityPolygon } from '../../utils/losEngine'
+import { computeVisibilityPolygon, type Segment } from '../../utils/losEngine'
+import { buildWallIndex } from '../../utils/wallIndex'
 import type { MapRecord, TokenRecord } from '@shared/ipc-types'
 import { useImage } from '../../hooks/useImage'
 import { findMonsterSlugByName } from '../bestiary/actions'
@@ -287,6 +288,18 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
       const { imgW, imgH } = useMapTransformStore.getState()
       const walls = useWallStore.getState().walls
       const updatedTokens = useTokenStore.getState().tokens
+      // Convert WallRecord → Segment once and build the spatial index
+      // so a multi-token drag (selectedTokenIds.length > 1) shares one
+      // pass over the wall list instead of re-scanning per light.
+      const segments: Segment[] = walls
+        .filter((w) => w.mapId === latestRef.current.map.id)
+        .map((w) => ({
+          x1: w.x1, y1: w.y1, x2: w.x2, y2: w.y2,
+          wallType: w.wallType, doorState: w.doorState,
+        }))
+      const wallIndex = imgW > 0 && imgH > 0 && segments.length > 0
+        ? buildWallIndex(segments, imgW, imgH)
+        : undefined
       for (const pos of newPositions) {
         const t = updatedTokens.find((tok) => tok.id === pos.id)
         if (!t || t.lightRadius <= 0) continue
@@ -294,7 +307,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
         const cx = pos.x + halfSize
         const cy = pos.y + halfSize
         const radiusPx = t.lightRadius * latestRef.current.map.gridSize
-        const poly = computeVisibilityPolygon(cx, cy, radiusPx, walls, imgW, imgH)
+        const poly = computeVisibilityPolygon(cx, cy, radiusPx, segments, imgW, imgH, wallIndex)
         if (poly.length >= 6) {
           document.getElementById('root')?.dispatchEvent(
             new CustomEvent('fog:los-reveal', { detail: { poly } })
