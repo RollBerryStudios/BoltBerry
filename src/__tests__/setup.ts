@@ -86,13 +86,15 @@ class MockCanvas {
   private _pixels: Uint8ClampedArray | null = null
   getContext(type: string): unknown {
     if (type !== '2d') return null
-    const self = this
+    // Arrow functions below preserve `this` from `getContext`, so we can
+    // reach instance fields directly without the `self = this` alias
+    // that the eslint `@typescript-eslint/no-this-alias` rule rejects.
     const getBuffer = () => {
-      const size = Math.max(0, self.width) * Math.max(0, self.height) * 4
-      if (!self._pixels || self._pixels.length !== size) {
-        self._pixels = new Uint8ClampedArray(size)
+      const size = Math.max(0, this.width) * Math.max(0, this.height) * 4
+      if (!this._pixels || this._pixels.length !== size) {
+        this._pixels = new Uint8ClampedArray(size)
       }
-      return self._pixels
+      return this._pixels
     }
     let fillStyle = '#000000'
     return {
