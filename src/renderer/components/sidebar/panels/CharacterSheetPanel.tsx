@@ -115,14 +115,18 @@ function Section({ title, children, defaultOpen = true }: {
 
 // ─── Numeric input ────────────────────────────────────────────────────────────
 
-function NumInput({ value, onChange, style }: {
+function NumInput({ value, onChange, style, id, ariaLabel }: {
   value: number
   onChange: (v: number) => void
   style?: React.CSSProperties
+  id?: string
+  ariaLabel?: string
 }) {
   return (
     <input
       type="number"
+      id={id}
+      aria-label={ariaLabel}
       value={value}
       onChange={(e) => onChange(Number(e.target.value) || 0)}
       style={{
@@ -156,12 +160,16 @@ function TextArea({ value, onChange, rows = 3, placeholder }: {
 
 // ─── Short text input ─────────────────────────────────────────────────────────
 
-function TextInput({ value, onChange, placeholder, style }: {
+function TextInput({ value, onChange, placeholder, style, id, ariaLabel }: {
   value: string; onChange: (v: string) => void; placeholder?: string; style?: React.CSSProperties
+  id?: string
+  ariaLabel?: string
 }) {
   return (
     <input
       type="text"
+      id={id}
+      aria-label={ariaLabel}
       value={value}
       placeholder={placeholder}
       onChange={(e) => onChange(e.target.value)}
@@ -406,35 +414,41 @@ function SheetEditor({ sheet, onUpdate }: {
             onChange={(p) => onUpdate({ portraitPath: p })}
           />
           <div style={{ flex: 1, minWidth: 0 }}>
-            <TextInput {...field('name')} placeholder={t('characters.name')} style={{ fontSize: 14, fontWeight: 700 }} />
+            <TextInput
+              {...field('name')}
+              id="character-name"
+              ariaLabel={t('characters.name')}
+              placeholder={t('characters.name')}
+              style={{ fontSize: 14, fontWeight: 700 }}
+            />
           </div>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 4, marginTop: 4 }}>
-          <TextInput {...field('race')} placeholder={t('characters.race')} />
-          <TextInput {...field('className')} placeholder={t('characters.class')} />
-          <TextInput {...field('subclass')} placeholder={t('characters.subclass')} />
+          <TextInput {...field('race')} ariaLabel={t('characters.race')} placeholder={t('characters.race')} />
+          <TextInput {...field('className')} ariaLabel={t('characters.class')} placeholder={t('characters.class')} />
+          <TextInput {...field('subclass')} ariaLabel={t('characters.subclass')} placeholder={t('characters.subclass')} />
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 4, marginTop: 4 }}>
           <div>
-            <label style={{ fontSize: 9, color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('characters.level')}</label>
-            <NumInput {...numField('level')} style={{ width: '100%' }} />
+            <label htmlFor="character-level" style={{ fontSize: 9, color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('characters.level')}</label>
+            <NumInput {...numField('level')} id="character-level" style={{ width: '100%' }} />
           </div>
           <div>
-            <label style={{ fontSize: 9, color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('characters.profBonus')}</label>
-            <NumInput {...numField('proficiencyBonus')} style={{ width: '100%' }} />
+            <label htmlFor="character-prof-bonus" style={{ fontSize: 9, color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('characters.profBonus')}</label>
+            <NumInput {...numField('proficiencyBonus')} id="character-prof-bonus" style={{ width: '100%' }} />
           </div>
           <div>
-            <label style={{ fontSize: 9, color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('characters.xp')}</label>
-            <NumInput {...numField('experience')} style={{ width: '100%' }} />
+            <label htmlFor="character-xp" style={{ fontSize: 9, color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('characters.xp')}</label>
+            <NumInput {...numField('experience')} id="character-xp" style={{ width: '100%' }} />
           </div>
           <div>
-            <label style={{ fontSize: 9, color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('characters.inspiration')}</label>
-            <NumInput {...numField('inspiration')} style={{ width: '100%' }} />
+            <label htmlFor="character-inspiration" style={{ fontSize: 9, color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('characters.inspiration')}</label>
+            <NumInput {...numField('inspiration')} id="character-inspiration" style={{ width: '100%' }} />
           </div>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4, marginTop: 4 }}>
-          <TextInput {...field('background')} placeholder={t('characters.background')} />
-          <TextInput {...field('alignment')} placeholder={t('characters.alignment')} />
+          <TextInput {...field('background')} ariaLabel={t('characters.background')} placeholder={t('characters.background')} />
+          <TextInput {...field('alignment')} ariaLabel={t('characters.alignment')} placeholder={t('characters.alignment')} />
         </div>
       </div>
 

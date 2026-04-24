@@ -2,6 +2,7 @@
 import { Layer, Group, Image as KonvaImage, Rect, Text, Circle, Line } from 'react-konva'
 import { Html } from 'react-konva-utils'
 import Konva from 'konva'
+import { useShallow } from 'zustand/react/shallow'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useUIStore } from '../../stores/uiStore'
 import { useSessionStore } from '../../stores/sessionStore'
@@ -70,19 +71,35 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   const moveToken = useTokenStore((s) => s.moveToken)
   const updateToken = useTokenStore((s) => s.updateToken)
   const removeToken = useTokenStore((s) => s.removeToken)
-  const activeTool = useUIStore((s) => s.activeTool)
-  const selectedTokenId = useUIStore((s) => s.selectedTokenId)
-  const selectedTokenIds = useUIStore((s) => s.selectedTokenIds)
-  const setSelectedToken = useUIStore((s) => s.setSelectedToken)
-  const toggleTokenInSelection = useUIStore((s) => s.toggleTokenInSelection)
-  const setSelectedTokens = useUIStore((s) => s.setSelectedTokens)
-  const clearTokenSelection = useUIStore((s) => s.clearTokenSelection)
-  const gridSnap = useUIStore((s) => s.gridSnap)
-  const clipboardTokens = useUIStore((s) => s.clipboardTokens)
-  const setClipboardTokens = useUIStore((s) => s.setClipboardTokens)
-  const scale = useMapTransformStore((s) => s.scale)
-  const offsetX = useMapTransformStore((s) => s.offsetX)
-  const offsetY = useMapTransformStore((s) => s.offsetY)
+  // Consolidate the ~10 repeated `useUIStore((s) => s.field)` calls
+  // into one shallow-equality subscription. Each separate selector
+  // previously triggered its own re-render pipeline on any uiStore
+  // mutation — even for unrelated fields (audit #58).
+  const ui = useUIStore(useShallow((s) => ({
+    activeTool: s.activeTool,
+    selectedTokenId: s.selectedTokenId,
+    selectedTokenIds: s.selectedTokenIds,
+    setSelectedToken: s.setSelectedToken,
+    toggleTokenInSelection: s.toggleTokenInSelection,
+    setSelectedTokens: s.setSelectedTokens,
+    clearTokenSelection: s.clearTokenSelection,
+    gridSnap: s.gridSnap,
+    clipboardTokens: s.clipboardTokens,
+    setClipboardTokens: s.setClipboardTokens,
+  })))
+  const {
+    activeTool, selectedTokenId, selectedTokenIds,
+    setSelectedToken, toggleTokenInSelection, setSelectedTokens, clearTokenSelection,
+    gridSnap, clipboardTokens, setClipboardTokens,
+  } = ui
+  const transform = useMapTransformStore(useShallow((s) => ({
+    scale: s.scale,
+    offsetX: s.offsetX,
+    offsetY: s.offsetY,
+    canvasW: s.canvasW,
+    canvasH: s.canvasH,
+  })))
+  const { scale, offsetX, offsetY, canvasW, canvasH } = transform
   const [contextMenu, setContextMenu] = useState<ContextMenu>({ visible: false, x: 0, y: 0, tokenId: -1 })
   const [editingId, setEditingId] = useState<number | null>(null)
   const [editName, setEditName] = useState('')
@@ -184,6 +201,36 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
 
   const isDraggable = activeTool === 'select'
   const sortedTokens = useMemo(() => [...tokens].sort((a, b) => a.zIndex - b.zIndex), [tokens])
+
+  // Viewport culling — render only tokens whose bounding box intersects
+  // the stage rect, plus a one-token margin so tokens just off-screen
+  // slide in smoothly as the DM pans. Always include selected / editing
+  // tokens so in-flight interactions don't disappear when they drag
+  // past the viewport edge. (Audit #57 / #67.)
+  const visibleTokens = useMemo(() => {
+    if (canvasW <= 0 || canvasH <= 0 || !map.gridSize) return sortedTokens
+    const cellPx = map.gridSize * scale
+    const margin = Math.max(cellPx * 2, 64)
+    const minMx = (0 - offsetX - margin) / scale
+    const maxMx = (canvasW - offsetX + margin) / scale
+    const minMy = (0 - offsetY - margin) / scale
+    const maxMy = (canvasH - offsetY + margin) / scale
+    const keepIds = new Set<number>()
+    if (editingId != null) keepIds.add(editingId)
+    if (editingHpId != null) keepIds.add(editingHpId)
+    if (editingAcId != null) keepIds.add(editingAcId)
+    for (const id of selectedTokenIds) keepIds.add(id)
+    return sortedTokens.filter((t) => {
+      if (keepIds.has(t.id)) return true
+      const s = t.size * map.gridSize
+      if (t.x + s < minMx) return false
+      if (t.y + s < minMy) return false
+      if (t.x > maxMx) return false
+      if (t.y > maxMy) return false
+      return true
+    })
+  }, [sortedTokens, scale, offsetX, offsetY, canvasW, canvasH, map.gridSize,
+      editingId, editingHpId, editingAcId, selectedTokenIds])
 
   // Coalesces drag broadcasts to once per animation frame instead of the
   // old 100 ms (10 Hz) wall-clock throttle. rAF aligns the IPC with
@@ -865,7 +912,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
         onMouseMove={handleLayerMouseMove}
         onMouseUp={handleLayerMouseUp}
       >
-        {sortedTokens.map((token) => {
+        {visibleTokens.map((token) => {
           const sx = token.x * scale + offsetX
           const sy = token.y * scale + offsetY
           const sizePx = map.gridSize * token.size * scale
