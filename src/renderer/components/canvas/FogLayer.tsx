@@ -9,6 +9,7 @@ import { useCampaignStore } from '../../stores/campaignStore'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useUndoStore, nextCommandId } from '../../stores/undoStore'
 import { showToast } from '../shared/Toast'
+import { acquireCanvas, releaseCanvas } from '../../utils/canvasPool'
 
 interface FogLayerProps {
   mapId: number
@@ -52,12 +53,13 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
   useEffect(() => {
     if (imgW === 0 || imgH === 0) return
 
-    const explored = document.createElement('canvas')
-    explored.width = imgW; explored.height = imgH
+    // Pool off-screen canvases across map switches. Rapid map-hopping
+    // previously allocated fresh ~16 MiB bitmaps every time
+    // (audit #71); the pool reuses instances keyed on dimensions.
+    const explored = acquireCanvas(imgW, imgH)
     exploredCanvasRef.current = explored
 
-    const covered = document.createElement('canvas')
-    covered.width = imgW; covered.height = imgH
+    const covered = acquireCanvas(imgW, imgH)
     coveredCanvasRef.current = covered
 
     kImgExploredRef.current?.destroy()
@@ -88,6 +90,17 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
       kImgExploredRef.current = null
       kImgCoveredRef.current?.destroy()
       kImgCoveredRef.current = null
+      // Return the underlying bitmaps to the pool. Next time a same-sized
+      // map loads it'll reuse these instances instead of allocating.
+      releaseCanvas(exploredCanvasRef.current)
+      releaseCanvas(coveredCanvasRef.current)
+      exploredCanvasRef.current = null
+      coveredCanvasRef.current = null
+      // Scratch canvases too.
+      releaseCanvas(playerPreviewCanvasRef.current)
+      playerPreviewCanvasRef.current = null
+      releaseCanvas(tintedCoveredCanvasRef.current)
+      tintedCoveredCanvasRef.current = null
     }
   }, [mapId, imgW, imgH])
 
@@ -130,7 +143,7 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
     let coveredSource: HTMLCanvasElement = covered
     if (playerPreview) {
       if (!playerPreviewCanvasRef.current) {
-        playerPreviewCanvasRef.current = document.createElement('canvas')
+        playerPreviewCanvasRef.current = acquireCanvas(covered.width, covered.height)
       }
       const pp = playerPreviewCanvasRef.current
       if (pp.width !== covered.width || pp.height !== covered.height) {
@@ -149,7 +162,7 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
       coveredSource = pp
     } else {
       if (!tintedCoveredCanvasRef.current) {
-        tintedCoveredCanvasRef.current = document.createElement('canvas')
+        tintedCoveredCanvasRef.current = acquireCanvas(covered.width, covered.height)
       }
       const tc = tintedCoveredCanvasRef.current
       if (tc.width !== covered.width || tc.height !== covered.height) {
