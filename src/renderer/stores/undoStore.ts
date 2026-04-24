@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import i18next from 'i18next'
 import { showToast } from '../components/shared/Toast'
 
 /**
@@ -89,6 +90,12 @@ interface UndoState {
   undoStack: Command[]
   redoStack: Command[]
   activeMapId: number | null
+  /**
+   * Tracks whether the "undo stack full" toast has been shown recently.
+   * Previously a closure-local `let` that reset on every call; the toast
+   * fired on every overflowing push instead of once per warning window.
+   */
+  warnedFull: boolean
 
   pushCommand: (cmd: Command) => void
   undo: () => Promise<void>
@@ -104,6 +111,7 @@ export const useUndoStore = create<UndoState>((set, get) => ({
   undoStack: [],
   redoStack: [],
   activeMapId: null,
+  warnedFull: false,
 
   pushCommand: (cmd) => {
     const wasFull = get().undoStack.length >= 50
@@ -111,12 +119,20 @@ export const useUndoStore = create<UndoState>((set, get) => ({
       undoStack: [...s.undoStack.slice(-49), cmd],
       redoStack: [],
     }))
-let warnedFull = false
 
-    if (wasFull && !warnedFull) {
-      warnedFull = true
-      showToast('Rückgängig-Stapel voll — älteste Aktionen wurden überschrieben', 'warning')
-      setTimeout(() => { warnedFull = false }, 5000)
+    if (wasFull && !get().warnedFull) {
+      set({ warnedFull: true })
+      showToast(
+        i18next.t('undo.stackFull', {
+          defaultValue: 'Undo stack full — oldest actions were dropped',
+        }),
+        'warning',
+      )
+      setTimeout(() => {
+        if (useUndoStore.getState().warnedFull) {
+          useUndoStore.setState({ warnedFull: false })
+        }
+      }, 5000)
     }
   },
 

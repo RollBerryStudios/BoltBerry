@@ -15,7 +15,10 @@ i18n
       en: { translation: en },
     },
     lng: defaultLang,
-    fallbackLng: 'de',
+    // English is the source-of-truth locale. Falling back to DE meant
+    // English users saw German whenever a key was missing — now a
+    // missing-key warning fires instead.
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
     },

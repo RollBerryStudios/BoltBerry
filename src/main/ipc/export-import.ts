@@ -8,6 +8,7 @@ import {
 import archiver from 'archiver'
 import unzipper from 'unzipper'
 import { IPC } from '../../shared/ipc-types'
+import { DEFAULT_GRID_COLOR } from '../../shared/defaults'
 import { getDb, getCustomUserDataPath } from '../db/database'
 import { validateMagicBytes } from '../utils/magic-bytes'
 
@@ -502,7 +503,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
         combatVolume: m.combat_volume ?? 1,
         gridVisible: (m.grid_visible ?? 1) !== 0,
         gridThickness: m.grid_thickness ?? 1,
-        gridColor: m.grid_color ?? 'rgba(255,255,255,0.34)',
+        gridColor: m.grid_color ?? DEFAULT_GRID_COLOR,
         tokens: tokens.map((t: any) => ({
           id: t.id,
           name: t.name,
@@ -658,7 +659,7 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
         m.rotation ?? 0, m.rotationPlayer ?? 0, m.ftPerUnit ?? 5,
         m.gridOffsetX ?? 0, m.gridOffsetY ?? 0, m.ambientBrightness ?? 100,
         m.ambientTrackPath ?? null, m.track1Volume ?? 1, m.track2Volume ?? 1, m.combatVolume ?? 1,
-        m.gridVisible === false ? 0 : 1, m.gridThickness ?? 1, m.gridColor ?? 'rgba(255,255,255,0.34)',
+        m.gridVisible === false ? 0 : 1, m.gridThickness ?? 1, m.gridColor ?? DEFAULT_GRID_COLOR,
       )
       const mapId = Number(mapResult.lastInsertRowid)
 

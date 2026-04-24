@@ -79,13 +79,13 @@
     "campaignNamePlaceholder": "Campaign name...",
     "create": "Create",
     "newCampaign": "+ New Campaign",
-    "importCampaign": "Import campaign\u2026"
+    "importCampaign": "Import campaign…"
   },
   "library": {
     "catMonster": "Monsters",
     "catPlayer": "Players",
     "catNpc": "NPCs",
-    "searchPlaceholder": "Search name, type, CR\u2026",
+    "searchPlaceholder": "Search name, type, CR…",
     "new": "New",
     "empty": "No template in this category yet.",
     "noMatches": "No matches",
@@ -106,8 +106,8 @@
     "duplicate": "Duplicate",
     "delete": "Delete",
     "confirmDeleteTitle": "Delete template",
-    "confirmDeleteMessage": "Really delete \u201c{{name}}\u201d?",
-    "inserted": "Inserted \u201c{{name}}\u201d",
+    "confirmDeleteMessage": "Really delete “{{name}}”?",
+    "inserted": "Inserted “{{name}}”",
     "variantsLabel": "Variants",
     "noVariants": "none yet",
     "importVariants": "Import custom artwork",
@@ -118,11 +118,11 @@
     "filterAll": "All",
     "clearFilters": "Clear filters",
     "sortBy": "Sort",
-    "sortCrAsc": "CR \u2191",
-    "sortCrDesc": "CR \u2193",
-    "sortNameAsc": "Name A\u2013Z",
-    "sortHpDesc": "HP \u2193",
-    "sortAcDesc": "AC \u2193",
+    "sortCrAsc": "CR ↑",
+    "sortCrDesc": "CR ↓",
+    "sortNameAsc": "Name A–Z",
+    "sortHpDesc": "HP ↓",
+    "sortAcDesc": "AC ↓",
     "faction_enemy": "Enemy",
     "faction_neutral": "Neutral",
     "faction_friendly": "Friendly",
@@ -173,7 +173,7 @@
     "continueAtMap": "Latest map",
     "openGameView": "Play view",
     "importFirstMap": "Import first map",
-    "loading": "Loading\u2026",
+    "loading": "Loading…",
     "noMapsTitle": "No maps yet",
     "noMapsSub": "Import your first map to open the play view.",
     "tabMaps": "Maps",
@@ -214,7 +214,7 @@
     "importPdf": "Import PDF",
     "openFolder": "Open folder",
     "emptyTitle": "No PDFs yet",
-    "emptySub": "Drop PDF rulebooks into the compendium folder or import them directly \u2014 they will appear here instantly.",
+    "emptySub": "Drop PDF rulebooks into the compendium folder or import them directly — they will appear here instantly.",
     "srdHintTitle": "Tip",
     "loading": "Loading",
     "readError": "Could not read PDF",
@@ -225,7 +225,7 @@
     "zoomOut": "Zoom out",
     "zoomReset": "Reset zoom",
     "search": "Search",
-    "searchPlaceholder": "Search in PDF\u2026",
+    "searchPlaceholder": "Search in PDF…",
     "closeSearch": "Close search",
     "hits": "{{count}} hits",
     "hits_one": "{{count}} hit",
@@ -376,10 +376,10 @@
     "statCharacters": "Characters",
     "firstTimeKicker": "Welcome",
     "firstTimeBody": "Create your first campaign or import a .boltberry file — the buttons in the bottom-right will get you started.",
-    "footerStatus": "Offline \u00b7 nothing leaves this machine",
+    "footerStatus": "Offline · nothing leaves this machine",
     "footerVersion": "v{{version}}",
     "newCampaign": "New campaign",
-    "importCampaign": "Import\u2026",
+    "importCampaign": "Import…",
     "openCompendium": "Compendium",
     "openBestiary": "Wiki",
     "lastPlayed": "Last",
@@ -408,7 +408,7 @@
     "greetingNight": "Good night",
     "taglineWithCampaign": "Last working on <accent>{{name}}</accent>.",
     "taglineEmpty": "Ready for the next adventure?",
-    "searchPlaceholder": "Open command palette\u2026",
+    "searchPlaceholder": "Open command palette…",
     "yourCampaigns": "Your campaigns",
     "recentMaps": "Recent maps",
     "quickActions": "Quick actions",
@@ -424,7 +424,7 @@
     "hoursAgo": "{{count}}h ago",
     "justNow": "just now",
     "deleteTitle": "Delete campaign",
-    "deleteMessage": "Permanently delete \u201c{{name}}\u201d? All maps, tokens, and data will be lost.",
+    "deleteMessage": "Permanently delete “{{name}}”? All maps, tokens, and data will be lost.",
     "rename": "Rename",
     "duplicate": "Duplicate",
     "delete": "Delete",
@@ -433,7 +433,7 @@
     "createError": "Could not create campaign: {{error}}",
     "deleteError": "Delete failed: {{error}}",
     "importError": "Import failed: {{error}}",
-    "preloadMissing": "Preload script not loaded. The database is unreachable \u2014 please restart the app."
+    "preloadMissing": "Preload script not loaded. The database is unreachable — please restart the app."
   },
   "wallMenu": {
     "openDoor": "🚪 Open",
@@ -462,7 +462,7 @@
     "broadcastLive": "Live",
     "broadcastPrep": "Prep",
     "broadcastOffline": "Offline",
-    "broadcastLiveHint": "Session running \u2014 player window connected",
+    "broadcastLiveHint": "Session running — player window connected",
     "broadcastPrepHint": "Player window connected but session not started",
     "broadcastOfflineHint": "No player window connected",
     "rightSidebar": "Right Sidebar",
@@ -686,7 +686,7 @@
     "noCombat": "No active combat",
     "removeEntry": "Remove",
     "openInBestiary": "Open in wiki",
-    "bestiaryMiss": "No wiki entry found for \u201E{{name}}\u201C"
+    "bestiaryMiss": "No wiki entry found for „{{name}}“"
   },
   "notes": {
     "campaignNotes": "Campaign Notes",
@@ -917,5 +917,8 @@
     "flaws": "Flaws",
     "sectionBackstory": "Backstory & Notes",
     "notes": "Notes"
+  },
+  "undo": {
+    "stackFull": "Undo stack full — oldest actions were dropped"
   }
 }

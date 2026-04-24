@@ -13,14 +13,14 @@ export function useAutoSave() {
     }, AUTOSAVE_INTERVAL)
 
     const onVisibility = () => {
-      if (document.visibilityState === 'hidden') triggerSave()
+      if (document.visibilityState === 'hidden') triggerSave(true)
     }
     document.addEventListener('visibilitychange', onVisibility)
 
     // Save-now keyboard shortcut already calls window.electronAPI.saveNow()
     // which is a no-op since better-sqlite3 writes are synchronous.
     // We just need to update the UI indicator here.
-    const onSaveNow = () => triggerSave()
+    const onSaveNow = () => triggerSave(true)
     window.addEventListener('boltberry:save-now', onSaveNow)
 
     return () => {
@@ -31,9 +31,16 @@ export function useAutoSave() {
   }, [])
 }
 
-async function triggerSave() {
+async function triggerSave(force = false) {
   const { activeCampaignId } = useCampaignStore.getState()
   if (!activeCampaignId || !window.electronAPI) return
+
+  // Skip the interval path when nothing has changed since the last save
+  // — previously `touchLastOpened` hit the DB every 60 s regardless,
+  // producing needless IPC traffic + WAL churn. Manual save (save-now,
+  // visibility-change) still forces a write.
+  const { dirty } = useAppStore.getState()
+  if (!force && !dirty) return
 
   useAppStore.getState().setSaving()
   try {

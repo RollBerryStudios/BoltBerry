@@ -6,6 +6,7 @@ import { localized, pickName, typeLabel, tokenTint } from './util'
 import { MonsterDetail } from './MonsterDetail'
 import { WikiEntryForm } from './WikiEntryForm'
 import { WikiListMenu } from './WikiListMenu'
+import { useDebouncedValue } from '../../hooks/useDebouncedValue'
 
 /* Monster list + detail pane. The list loads once from DATA_LIST_MONSTERS;
    the detail is fetched on-demand via DATA_GET_MONSTER and cached so
@@ -65,9 +66,13 @@ export function MonstersTab({
     return Array.from(set).sort()
   }, [index])
 
+  // Debounce search text — 263 monsters get filter + sort on every
+  // keystroke otherwise, visibly stalling typing on slower machines.
+  const debouncedQuery = useDebouncedValue(query, 200)
+
   const filtered = useMemo(() => {
     if (!index) return []
-    const q = query.trim().toLowerCase()
+    const q = debouncedQuery.trim().toLowerCase()
     return index
       .filter((m) => {
         if (crFilter && m.challenge !== crFilter) return false
@@ -87,7 +92,7 @@ export function MonstersTab({
       // axis, so starting with a name-sorted list makes scanning for
       // a specific monster predictable.
       .sort((a, b) => pickName(a, language).localeCompare(pickName(b, language), language))
-  }, [index, query, language, crFilter, typeFilter, sourceFilter])
+  }, [index, debouncedQuery, language, crFilter, typeFilter, sourceFilter])
 
   // Apply a deep-link target the first time the index loads. Forces the
   // selection even if the entry is filtered out — caller can still tell

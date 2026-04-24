@@ -12,6 +12,7 @@ import { showToast } from '../shared/Toast'
 import { WikiEntryControls } from './WikiEntryControls'
 import { WikiEntryForm } from './WikiEntryForm'
 import { WikiListMenu } from './WikiListMenu'
+import { useDebouncedValue } from '../../hooks/useDebouncedValue'
 
 const LEVEL_ORDER: Record<string, number> = {
   cantrip: 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5,
@@ -100,9 +101,11 @@ export function SpellsTab({
     return Array.from(set).sort()
   }, [index])
 
+  const debouncedQuery = useDebouncedValue(query, 200)
+
   const filtered = useMemo(() => {
     if (!index) return []
-    const q = query.trim().toLowerCase()
+    const q = debouncedQuery.trim().toLowerCase()
     return index
       .filter((sp) => {
         if (levelFilter && sp.level.en !== levelFilter) return false
@@ -125,7 +128,7 @@ export function SpellsTab({
       // "fireball" finds it in one visual pass rather than scrolling
       // past every cantrip first.
       .sort((a, b) => pickName(a, language).localeCompare(pickName(b, language), language))
-  }, [index, query, language, levelFilter, schoolFilter, classFilter, sourceFilter])
+  }, [index, debouncedQuery, language, levelFilter, schoolFilter, classFilter, sourceFilter])
 
   useEffect(() => {
     if (!initialSlug || !index) return

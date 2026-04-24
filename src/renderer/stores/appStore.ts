@@ -5,26 +5,22 @@ type SaveState = 'idle' | 'saving' | 'saved' | 'error'
 interface AppState {
   saveState: SaveState
   lastSaved: Date | null
+  /** Tracks whether any mutation has occurred since the last successful save. */
+  dirty: boolean
   setSaving: () => void
   setSaved: () => void
   setSaveError: () => void
+  markDirty: () => void
 }
-
-let savedTimer: ReturnType<typeof setTimeout> | null = null
 
 export const useAppStore = create<AppState>((set) => ({
   saveState: 'idle',
   lastSaved: null,
+  dirty: false,
 
-  setSaving: () => {
-    if (savedTimer) { clearTimeout(savedTimer); savedTimer = null }
-    set({ saveState: 'saving' })
-  },
-  setSaved: () => {
-    // Stay in 'saved' state permanently — no revert to 'idle'.
-    // The StatusBar shows a persistent "Alle Änderungen gespeichert" indicator.
-    if (savedTimer) { clearTimeout(savedTimer); savedTimer = null }
-    set({ saveState: 'saved', lastSaved: new Date() })
-  },
+  setSaving: () => set({ saveState: 'saving' }),
+  setSaved: () =>
+    set({ saveState: 'saved', lastSaved: new Date(), dirty: false }),
   setSaveError: () => set({ saveState: 'error' }),
+  markDirty: () => set({ dirty: true }),
 }))
