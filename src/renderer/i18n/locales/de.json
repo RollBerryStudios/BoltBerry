@@ -165,7 +165,8 @@
     "formationLine": "Linie",
     "formationCircle": "Kreis",
     "formationWing": "Flügel",
-    "formationV": "V-Form"
+    "formationV": "V-Form",
+    "tablistLabel": "Bibliothek-Kategorien"
   },
   "workspace": {
     "backToCampaigns": "Kampagnen",
@@ -990,5 +991,10 @@
     "folderAudio": "Hintergrundmusik und Soundeffekte",
     "letsGo": "Los geht's →",
     "importCampaign": "Kampagne importieren"
+  },
+  "errors": {
+    "tokenInsertFailed": "Token konnte nicht eingefügt werden",
+    "tokenUpdate": "Token-Update fehlgeschlagen",
+    "imageLoad": "Bild konnte nicht geladen werden"
   }
 }

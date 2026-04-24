@@ -152,6 +152,16 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     return () => container.removeEventListener('wheel', onWheel)
   }, [closeContextMenu])
 
+  // Cancel any pending drag-broadcast rAF on unmount so the callback
+  // doesn't fire against a destroyed component.
+  useEffect(() => () => {
+    if (dragRafRef.current !== null) {
+      cancelAnimationFrame(dragRafRef.current)
+      dragRafRef.current = null
+    }
+    dragPendingRef.current = null
+  }, [])
+
   // Close the context menu on Escape or any click outside the menu
   useEffect(() => {
     if (!contextMenu.visible) return
@@ -174,7 +184,12 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   const isDraggable = activeTool === 'select'
   const sortedTokens = useMemo(() => [...tokens].sort((a, b) => a.zIndex - b.zIndex), [tokens])
 
-  const dragBroadcastLastRef = useRef(0)
+  // Coalesces drag broadcasts to once per animation frame instead of the
+  // old 100 ms (10 Hz) wall-clock throttle. rAF aligns the IPC with
+  // actual repaints, so the player window advances at the same cadence
+  // the DM sees locally — addresses audit #54.
+  const dragRafRef = useRef<number | null>(null)
+  const dragPendingRef = useRef<{ tokens: TokenRecord[] } | null>(null)
 
   // Throttled live-position broadcast during drag (100 ms interval)
   const stableHandleDragMove = useCallback((token: TokenRecord, e: Konva.KonvaEventObject<DragEvent>) => {
@@ -194,10 +209,10 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
       setGhostPosRef.current(null)
     }
 
-    // Throttle network broadcast
-    const now = Date.now()
-    if (now - dragBroadcastLastRef.current < 100) return
-    dragBroadcastLastRef.current = now
+    // Compute the latest live snapshot and queue it for the next animation
+    // frame. If another drag-move lands before the rAF fires we simply
+    // overwrite the pending payload — the renderer only needs the newest
+    // frame, not a backlog.
     const liveX = (sx - offsetX) / scale
     const liveY = (sy - offsetY) / scale
     const idsToMove = selectedTokenIds.includes(token.id) ? selectedTokenIds : [token.id]
@@ -206,7 +221,15 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     const liveTokens = tokens.map((t) =>
       idsToMove.includes(t.id) ? { ...t, x: t.x + dx, y: t.y + dy } : t
     )
-    broadcastTokens(liveTokens)
+    dragPendingRef.current = { tokens: liveTokens }
+    if (dragRafRef.current === null) {
+      dragRafRef.current = requestAnimationFrame(() => {
+        dragRafRef.current = null
+        const payload = dragPendingRef.current
+        dragPendingRef.current = null
+        if (payload) broadcastTokens(payload.tokens)
+      })
+    }
   }, [])
 
   const stableHandleDragEnd = useCallback(async (token: TokenRecord, e: Konva.KonvaEventObject<DragEvent>) => {

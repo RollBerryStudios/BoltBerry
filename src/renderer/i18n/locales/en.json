@@ -165,7 +165,8 @@
     "formationLine": "Line",
     "formationCircle": "Circle",
     "formationWing": "Wing",
-    "formationV": "V-shape"
+    "formationV": "V-shape",
+    "tablistLabel": "Library categories"
   },
   "workspace": {
     "backToCampaigns": "Campaigns",
@@ -990,5 +991,10 @@
     "folderAudio": "Background music and sound effects",
     "letsGo": "Let's go →",
     "importCampaign": "Import campaign"
+  },
+  "errors": {
+    "tokenInsertFailed": "Could not insert token",
+    "tokenUpdate": "Token update failed",
+    "imageLoad": "Image could not be loaded"
   }
 }
