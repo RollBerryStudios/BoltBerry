@@ -17,6 +17,47 @@ const EXPORT_VERSION = 9
 const MAX_IMPORT_BYTES = 2 * 1024 * 1024 * 1024 // 2 GB cumulative uncompressed
 const MAX_IMPORT_ENTRIES = 50_000
 
+/**
+ * Forward-migrations for campaign-export JSON. Each entry takes a parsed
+ * export object at version `n` and returns an equivalent object at
+ * version `n + 1`. Applied in order on import until the version matches
+ * `EXPORT_VERSION` (audit #9).
+ *
+ * When you bump `EXPORT_VERSION`, add an entry here so older archives
+ * keep importing. A missing migration for an intermediate version is a
+ * bug — `applyExportMigrations` throws if it can't reach the current
+ * version.
+ */
+type ExportMigration = (data: Record<string, unknown>) => Record<string, unknown>
+
+const EXPORT_MIGRATIONS: Record<number, ExportMigration> = {
+  // Example shape:
+  //   8: (d) => ({ ...d, audioBoards: (d.audioBoards as unknown[] | undefined) ?? [] }),
+  //
+  // Currently EXPORT_VERSION === 9 and every shipped export since the
+  // schema reached v9 has been written at v9, so there is nothing to
+  // migrate forward yet. The table exists so future bumps have an
+  // obvious home for their migration.
+}
+
+function applyExportMigrations(data: Record<string, unknown>): Record<string, unknown> {
+  let working = data
+  let current = (working.version as number | undefined) ?? 1
+  while (current < EXPORT_VERSION) {
+    const step = EXPORT_MIGRATIONS[current]
+    if (!step) {
+      throw new Error(
+        `No export migration registered for v${current} → v${current + 1}. ` +
+        `EXPORT_VERSION bumped without populating EXPORT_MIGRATIONS.`,
+      )
+    }
+    working = step(working)
+    current += 1
+    working.version = current
+  }
+  return working
+}
+
 function getEffectiveUserDataPath(): string {
   return getCustomUserDataPath() || app.getPath('userData')
 }
@@ -194,6 +235,21 @@ export function registerExportImportHandlers(): void {
     if (dataVersion > EXPORT_VERSION) {
       rmSync(importDir, { recursive: true, force: true })
       return { success: false, error: `Diese Kampagne wurde mit einer neueren App-Version exportiert (v${dataVersion}). Bitte aktualisiere BoltBerry.` }
+    }
+
+    // Forward-migrate older exports so insertCampaignData always sees
+    // the current-version shape. Today this is a no-op (no bumps yet
+    // while we're still on v9) but the hook exists so future schema
+    // changes don't silently drop fields from older archives (audit #9).
+    if (dataVersion < EXPORT_VERSION) {
+      try {
+        campaignData = applyExportMigrations(
+          campaignData as unknown as Record<string, unknown>,
+        ) as unknown as CampaignExport
+      } catch (err) {
+        rmSync(importDir, { recursive: true, force: true })
+        return { success: false, error: `Migration fehlgeschlagen: ${String(err)}` }
+      }
     }
 
     const assetsDir = path.join(importDir, 'assets')
