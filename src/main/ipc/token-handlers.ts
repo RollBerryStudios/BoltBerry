@@ -110,15 +110,16 @@ const COLUMN_MAP: Record<string, { col: string; coerce: (v: unknown) => unknown 
   imagePath: { col: 'image_path', coerce: (v) => (v == null ? null : String(v)) },
   x: { col: 'x', coerce: coerceNumber },
   y: { col: 'y', coerce: coerceNumber },
-  size: { col: 'size', coerce: coerceNumber },
-  hpCurrent: { col: 'hp_current', coerce: coerceNumber },
-  hpMax: { col: 'hp_max', coerce: coerceNumber },
+  // Integer columns — reject `1.5` etc. which SQLite would silently truncate.
+  size: { col: 'size', coerce: coerceIntStrict },
+  hpCurrent: { col: 'hp_current', coerce: coerceIntStrict },
+  hpMax: { col: 'hp_max', coerce: coerceIntStrict },
   visibleToPlayers: { col: 'visible_to_players', coerce: coerceBool },
   rotation: { col: 'rotation', coerce: coerceNumber },
   locked: { col: 'locked', coerce: coerceBool },
-  zIndex: { col: 'z_index', coerce: coerceNumber },
-  markerColor: { col: 'marker_color', coerce: (v) => (v == null ? null : String(v)) },
-  ac: { col: 'ac', coerce: (v) => (v == null ? null : coerceNumber(v)) },
+  zIndex: { col: 'z_index', coerce: coerceIntStrict },
+  markerColor: { col: 'marker_color', coerce: coerceMarkerColor },
+  ac: { col: 'ac', coerce: (v) => (v == null ? null : coerceIntStrict(v)) },
   notes: { col: 'notes', coerce: (v) => (v == null ? null : String(v)) },
   statusEffects: {
     col: 'status_effects',
@@ -131,12 +132,29 @@ const COLUMN_MAP: Record<string, { col: string; coerce: (v: unknown) => unknown 
   faction: { col: 'faction', coerce: (v) => (v == null ? null : String(v)) },
   showName: { col: 'show_name', coerce: coerceBool },
   lightRadius: { col: 'light_radius', coerce: coerceNumber },
-  lightColor: { col: 'light_color', coerce: (v) => (v == null ? null : String(v)) },
+  lightColor: { col: 'light_color', coerce: coerceMarkerColor },
 }
 
 function coerceNumber(v: unknown): number {
   if (typeof v === 'number' && Number.isFinite(v)) return v
   throw new Error('Expected finite number')
+}
+
+function coerceIntStrict(v: unknown): number {
+  if (typeof v === 'number' && Number.isInteger(v)) return v
+  throw new Error('Expected integer')
+}
+
+function coerceMarkerColor(v: unknown): string | null {
+  if (v == null) return null
+  if (typeof v !== 'string') throw new Error('Color must be a string')
+  if (v.length > 32) throw new Error('Color string too long')
+  // Accept #RGB, #RGBA, #RRGGBB, #RRGGBBAA and rgb()/rgba() — reject
+  // anything that could flow into an inline style as a URL or expression.
+  const hexOk = /^#(?:[0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$/i.test(v)
+  const rgbaOk = /^rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(?:,\s*(?:0|1|0?\.\d+)\s*)?\)$/.test(v)
+  if (!hexOk && !rgbaOk) throw new Error(`Invalid color format: ${v}`)
+  return v
 }
 
 function coerceBool(v: unknown): number {

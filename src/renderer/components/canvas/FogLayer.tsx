@@ -9,6 +9,7 @@ import { useCampaignStore } from '../../stores/campaignStore'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useUndoStore, nextCommandId } from '../../stores/undoStore'
 import { showToast } from '../shared/Toast'
+import { acquireCanvas, releaseCanvas } from '../../utils/canvasPool'
 
 interface FogLayerProps {
   mapId: number
@@ -52,12 +53,13 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
   useEffect(() => {
     if (imgW === 0 || imgH === 0) return
 
-    const explored = document.createElement('canvas')
-    explored.width = imgW; explored.height = imgH
+    // Pool off-screen canvases across map switches. Rapid map-hopping
+    // previously allocated fresh ~16 MiB bitmaps every time
+    // (audit #71); the pool reuses instances keyed on dimensions.
+    const explored = acquireCanvas(imgW, imgH)
     exploredCanvasRef.current = explored
 
-    const covered = document.createElement('canvas')
-    covered.width = imgW; covered.height = imgH
+    const covered = acquireCanvas(imgW, imgH)
     coveredCanvasRef.current = covered
 
     kImgExploredRef.current?.destroy()
@@ -88,6 +90,17 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
       kImgExploredRef.current = null
       kImgCoveredRef.current?.destroy()
       kImgCoveredRef.current = null
+      // Return the underlying bitmaps to the pool. Next time a same-sized
+      // map loads it'll reuse these instances instead of allocating.
+      releaseCanvas(exploredCanvasRef.current)
+      releaseCanvas(coveredCanvasRef.current)
+      exploredCanvasRef.current = null
+      coveredCanvasRef.current = null
+      // Scratch canvases too.
+      releaseCanvas(playerPreviewCanvasRef.current)
+      playerPreviewCanvasRef.current = null
+      releaseCanvas(tintedCoveredCanvasRef.current)
+      tintedCoveredCanvasRef.current = null
     }
   }, [mapId, imgW, imgH])
 
@@ -130,7 +143,7 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
     let coveredSource: HTMLCanvasElement = covered
     if (playerPreview) {
       if (!playerPreviewCanvasRef.current) {
-        playerPreviewCanvasRef.current = document.createElement('canvas')
+        playerPreviewCanvasRef.current = acquireCanvas(covered.width, covered.height)
       }
       const pp = playerPreviewCanvasRef.current
       if (pp.width !== covered.width || pp.height !== covered.height) {
@@ -149,7 +162,7 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
       coveredSource = pp
     } else {
       if (!tintedCoveredCanvasRef.current) {
-        tintedCoveredCanvasRef.current = document.createElement('canvas')
+        tintedCoveredCanvasRef.current = acquireCanvas(covered.width, covered.height)
       }
       const tc = tintedCoveredCanvasRef.current
       if (tc.width !== covered.width || tc.height !== covered.height) {
@@ -183,12 +196,26 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
 
   useEffect(() => { refreshDisplay() }, [refreshDisplay])
 
+  // Cached 2D contexts for the fog canvases. `getContext('2d')` is
+  // idempotent and returns the same object each call, but the lookup
+  // still shows up as a cost in the brush-stroke hot path (audit #60).
+  // We refresh the refs whenever the canvas effect re-creates the
+  // canvases (on map change / resize).
+  const exploredCtxRef = useRef<CanvasRenderingContext2D | null>(null)
+  const coveredCtxRef  = useRef<CanvasRenderingContext2D | null>(null)
+  useEffect(() => {
+    exploredCtxRef.current = exploredCanvasRef.current?.getContext('2d') ?? null
+    coveredCtxRef.current  = coveredCanvasRef.current?.getContext('2d') ?? null
+  }, [imgW, imgH, mapId])
+
   // ── Apply a fog operation ─────────────────────────────────────────
   const applyOp = useCallback((op: FogOperation) => {
     const explored = exploredCanvasRef.current
     const covered  = coveredCanvasRef.current
-    if (!explored || !covered) return
-    applyOpToCtxPair(explored.getContext('2d')!, covered.getContext('2d')!, op)
+    const ec = exploredCtxRef.current
+    const cc = coveredCtxRef.current
+    if (!explored || !covered || !ec || !cc) return
+    applyOpToCtxPair(ec, cc, op)
     refreshDisplay()
     saveFogToDb(mapId, explored, covered)
     sendFogDelta(op)
@@ -198,12 +225,11 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
   const rebuildFog = useCallback(() => {
     const explored = exploredCanvasRef.current
     const covered  = coveredCanvasRef.current
-    if (!explored || !covered) return
+    const ec = exploredCtxRef.current
+    const cc = coveredCtxRef.current
+    if (!explored || !covered || !ec || !cc) return
 
-    const ec = explored.getContext('2d')!
     ec.clearRect(0, 0, explored.width, explored.height)
-
-    const cc = covered.getContext('2d')!
     cc.clearRect(0, 0, covered.width, covered.height)
 
     useFogStore.getState().history.forEach((op) =>
@@ -254,9 +280,9 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
       const detail = (e as CustomEvent).detail as { type: string }
       const explored = exploredCanvasRef.current
       const covered  = coveredCanvasRef.current
-      if (!explored || !covered || !activeMapId) return
-      const ec = explored.getContext('2d')!
-      const cc = covered.getContext('2d')!
+      const ec = exploredCtxRef.current
+      const cc = coveredCtxRef.current
+      if (!explored || !covered || !ec || !cc || !activeMapId) return
 
       if (detail.type === 'revealAll') {
         const fullOp: FogOperation = { type: 'reveal', shape: 'rect', points: [0, 0, explored.width, explored.height] }

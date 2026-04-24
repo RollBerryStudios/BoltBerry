@@ -328,15 +328,23 @@ export function TokenLibraryPanel({ lockedCategory }: {
       {/* Category tabs — hidden when the caller pinned a category,
           so the NPC's view in CampaignView doesn't expose bait to
           accidentally switch into a different bucket. */}
-      {!lockedCategory && <div style={{
-        display: 'flex',
-        borderBottom: '1px solid var(--border-subtle)',
-        flexShrink: 0,
-      }}>
-        {CATEGORIES.map((c) => (
+      {!lockedCategory && <div
+        role="tablist"
+        aria-label={t('library.tablistLabel', { defaultValue: 'Library categories' })}
+        style={{
+          display: 'flex',
+          borderBottom: '1px solid var(--border-subtle)',
+          flexShrink: 0,
+        }}>
+        {CATEGORIES.map((c) => {
+          const active = category === c.id
+          return (
           <button
             key={c.id}
             type="button"
+            role="tab"
+            aria-selected={active}
+            tabIndex={active ? 0 : -1}
             onClick={() => setCategory(c.id)}
             style={{
               flex: 1,
@@ -347,11 +355,11 @@ export function TokenLibraryPanel({ lockedCategory }: {
               padding: '10px 12px',
               background: 'none',
               border: 'none',
-              borderBottom: category === c.id ? '2px solid var(--accent-blue)' : '2px solid transparent',
-              color: category === c.id ? 'var(--accent-blue-light)' : 'var(--text-muted)',
+              borderBottom: active ? '2px solid var(--accent-blue)' : '2px solid transparent',
+              color: active ? 'var(--accent-blue-light)' : 'var(--text-secondary)',
               cursor: 'pointer',
               fontSize: 12,
-              fontWeight: category === c.id ? 700 : 500,
+              fontWeight: active ? 700 : 500,
               fontFamily: 'inherit',
             }}
           >
@@ -366,7 +374,8 @@ export function TokenLibraryPanel({ lockedCategory }: {
               borderRadius: 8,
             }}>{counts[c.id]}</span>
           </button>
-        ))}
+          )
+        })}
       </div>}
 
       {/* Toolbar: search + new */}

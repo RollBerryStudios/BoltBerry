@@ -12,6 +12,7 @@ const HEX_COLOR_RE = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/
 function isValidHexColor(s: string): boolean { return HEX_COLOR_RE.test(s) }
 import { useCampaignStore } from '../../stores/campaignStore'
 import { computeVisibilityPolygon, type Segment } from '../../utils/losEngine'
+import { buildWallIndex } from '../../utils/wallIndex'
 
 interface LightToken {
   id: number
@@ -68,6 +69,14 @@ export function LightingLayer({ mapId, gridSize }: LightingLayerProps) {
       })
   }, [tokens, gridSize, mapId, activeMapId])
 
+  // Build the spatial index once per geometry change. The index is
+  // observer-independent so we can reuse it across every light source —
+  // and across every re-render that doesn't change the wall set.
+  const wallIndex = useMemo(
+    () => (imgW > 0 && imgH > 0 ? buildWallIndex(segments, imgW, imgH) : undefined),
+    [segments, imgW, imgH],
+  )
+
   // LOS polygons are expensive (O(S) ray casts per light against every
   // wall segment) and only depend on the lights + map geometry — NOT on
   // scale / offset. Without this memo, every pan, zoom, pointer-move,
@@ -78,10 +87,10 @@ export function LightingLayer({ mapId, gridSize }: LightingLayerProps) {
   const polygonsByLight = useMemo(() => {
     const m = new Map<number, number[]>()
     for (const l of lights) {
-      m.set(l.id, computeVisibilityPolygon(l.cx, l.cy, l.rPx, segments, imgW, imgH))
+      m.set(l.id, computeVisibilityPolygon(l.cx, l.cy, l.rPx, segments, imgW, imgH, wallIndex))
     }
     return m
-  }, [lights, segments, imgW, imgH])
+  }, [lights, segments, imgW, imgH, wallIndex])
 
   if (activeMapId !== mapId || lights.length === 0) return null
 

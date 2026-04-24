@@ -5,6 +5,7 @@ import { useTokenStore } from '../stores/tokenStore'
 import { useCampaignStore } from '../stores/campaignStore'
 import { useWallStore } from '../stores/wallStore'
 import type { PlayerFullState, PlayerTokenState, PlayerWallState } from '@shared/ipc-types'
+import { resetTokenBroadcastSnapshot } from '../utils/tokenBroadcast'
 
 export function usePlayerSync() {
   const setPlayerConnected = useSessionStore((s) => s.setPlayerConnected)
@@ -104,6 +105,10 @@ export function usePlayerSync() {
       walls: activeWalls,
     }
 
+    // A full-sync replaces the player-side token list outright, so the
+    // DM-side delta baseline is now stale. Reset it so the next delta
+    // broadcast ships a fresh baseline relative to what we just sent.
+    resetTokenBroadcastSnapshot()
     window.electronAPI?.sendFullSync(state)
   }, [])
 

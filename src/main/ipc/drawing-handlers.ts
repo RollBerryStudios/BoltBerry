@@ -26,7 +26,10 @@ interface DrawingRow {
 
 const VALID_TYPES = new Set<DrawingType>(['freehand', 'rect', 'circle', 'text'])
 
-function parsePoints(raw: string): { points: number[]; legacyText: string | null } {
+function parsePoints(
+  raw: string,
+  rowId: number,
+): { points: number[]; legacyText: string | null } {
   try {
     const parsed = JSON.parse(raw)
     if (Array.isArray(parsed)) {
@@ -39,14 +42,18 @@ function parsePoints(raw: string): { points: number[]; legacyText: string | null
         legacyText: typeof parsed.text === 'string' ? parsed.text : null,
       }
     }
-  } catch {
-    /* fall through to empty */
+    console.warn(`[drawing-handlers] drawing ${rowId} has unrecognised points shape`)
+  } catch (err) {
+    // Surface corrupted rows so users can repair / delete them, instead of
+    // silently returning an empty drawing that vanishes from the canvas
+    // while still occupying a row in the database.
+    console.warn(`[drawing-handlers] drawing ${rowId} has malformed points JSON: ${String(err)}`)
   }
   return { points: [], legacyText: null }
 }
 
 function toDrawingRecord(r: DrawingRow): DrawingRecord {
-  const { points, legacyText } = parsePoints(r.points)
+  const { points, legacyText } = parsePoints(r.points, r.id)
   return {
     id: r.id,
     mapId: r.map_id,

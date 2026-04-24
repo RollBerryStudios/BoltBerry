@@ -2,6 +2,7 @@ import { ipcMain } from 'electron'
 import { IPC } from '../../shared/ipc-types'
 import type { FogStateRecord } from '../../shared/ipc-types'
 import { getDb } from '../db/database'
+import { assertValidFogDataUrl, IpcValidationError } from './validators'
 
 /**
  * Semantic IPC channels for the `fog_state` table. One row per map,
@@ -33,21 +34,28 @@ export function registerFogHandlers(): void {
 
   ipcMain.handle(
     IPC.FOG_SAVE,
-    (_event, mapId: number, bitmaps: FogStateRecord): void => {
-      requireIntegerId(mapId)
-      const fogBitmap = bitmaps?.fogBitmap == null ? null : String(bitmaps.fogBitmap)
-      const exploredBitmap = bitmaps?.exploredBitmap == null ? null : String(bitmaps.exploredBitmap)
-      // Schema has PRIMARY KEY on map_id, so UPSERT is the natural
-      // shape — matches the renderer's previous pattern.
-      getDb()
-        .prepare(
-          `INSERT INTO fog_state (map_id, fog_bitmap, explored_bitmap)
-           VALUES (?, ?, ?)
-           ON CONFLICT(map_id) DO UPDATE SET
-             fog_bitmap      = excluded.fog_bitmap,
-             explored_bitmap = excluded.explored_bitmap`,
-        )
-        .run(mapId, fogBitmap, exploredBitmap)
+    (_event, mapId: number, bitmaps: FogStateRecord): { ok: boolean; reason?: string } => {
+      try {
+        requireIntegerId(mapId)
+        // Cap size + verify PNG prefix so a buggy or hostile renderer
+        // can't exhaust memory or stash arbitrary base64 blobs in the DB.
+        const fogBitmap = assertValidFogDataUrl(bitmaps?.fogBitmap, 'fogBitmap')
+        const exploredBitmap = assertValidFogDataUrl(bitmaps?.exploredBitmap, 'exploredBitmap')
+        getDb()
+          .prepare(
+            `INSERT INTO fog_state (map_id, fog_bitmap, explored_bitmap)
+             VALUES (?, ?, ?)
+             ON CONFLICT(map_id) DO UPDATE SET
+               fog_bitmap      = excluded.fog_bitmap,
+               explored_bitmap = excluded.explored_bitmap`,
+          )
+          .run(mapId, fogBitmap, exploredBitmap)
+        return { ok: true }
+      } catch (err) {
+        const reason = err instanceof IpcValidationError ? err.message : String(err)
+        console.error('[fog-handlers] FOG_SAVE failed:', reason)
+        return { ok: false, reason }
+      }
     },
   )
 }

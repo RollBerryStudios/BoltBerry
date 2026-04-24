@@ -5,6 +5,7 @@ import type {
   FogDelta,
   PlayerMapState,
   PlayerTokenState,
+  PlayerTokenDelta,
   PlayerPointer,
   PlayerViewport,
   PlayerHandout,
@@ -104,6 +105,8 @@ export const dmApi = {
     ipcRenderer.send('player:fog-reset', { fogBitmap, exploredBitmap }),
   sendTokenUpdate: (tokens: PlayerTokenState[]) =>
     ipcRenderer.send('player:token-update', tokens),
+  sendTokenDelta: (delta: PlayerTokenDelta) =>
+    ipcRenderer.send(IPC.PLAYER_TOKEN_DELTA, delta),
   sendBlackout: (active: boolean) =>
     ipcRenderer.send('player:blackout', active),
   sendAtmosphere: (imagePath: string | null) =>
@@ -550,6 +553,11 @@ export const playerApi = {
     const handler = (_: Electron.IpcRendererEvent, tokens: PlayerTokenState[]) => cb(tokens)
     ipcRenderer.on('player:token-update', handler)
     return () => ipcRenderer.removeListener('player:token-update', handler)
+  },
+  onTokenDelta: (cb: (delta: PlayerTokenDelta) => void) => {
+    const handler = (_: Electron.IpcRendererEvent, delta: PlayerTokenDelta) => cb(delta)
+    ipcRenderer.on(IPC.PLAYER_TOKEN_DELTA, handler)
+    return () => ipcRenderer.removeListener(IPC.PLAYER_TOKEN_DELTA, handler)
   },
   onBlackout: (cb: (active: boolean) => void) => {
     const handler = (_: Electron.IpcRendererEvent, active: boolean) => cb(active)

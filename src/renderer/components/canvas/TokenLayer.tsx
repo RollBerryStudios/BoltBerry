@@ -2,6 +2,7 @@
 import { Layer, Group, Image as KonvaImage, Rect, Text, Circle, Line } from 'react-konva'
 import { Html } from 'react-konva-utils'
 import Konva from 'konva'
+import { useShallow } from 'zustand/react/shallow'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useUIStore } from '../../stores/uiStore'
 import { useSessionStore } from '../../stores/sessionStore'
@@ -10,7 +11,9 @@ import { useInitiativeStore } from '../../stores/initiativeStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useUndoStore, nextCommandId, registerUndoAction } from '../../stores/undoStore'
 import { useWallStore } from '../../stores/wallStore'
-import { computeVisibilityPolygon } from '../../utils/losEngine'
+import { computeVisibilityPolygon, type Segment } from '../../utils/losEngine'
+import { buildWallIndex } from '../../utils/wallIndex'
+import { broadcastTokens } from '../../utils/tokenBroadcast'
 import type { MapRecord, TokenRecord } from '@shared/ipc-types'
 import { useImage } from '../../hooks/useImage'
 import { findMonsterSlugByName } from '../bestiary/actions'
@@ -69,19 +72,35 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   const moveToken = useTokenStore((s) => s.moveToken)
   const updateToken = useTokenStore((s) => s.updateToken)
   const removeToken = useTokenStore((s) => s.removeToken)
-  const activeTool = useUIStore((s) => s.activeTool)
-  const selectedTokenId = useUIStore((s) => s.selectedTokenId)
-  const selectedTokenIds = useUIStore((s) => s.selectedTokenIds)
-  const setSelectedToken = useUIStore((s) => s.setSelectedToken)
-  const toggleTokenInSelection = useUIStore((s) => s.toggleTokenInSelection)
-  const setSelectedTokens = useUIStore((s) => s.setSelectedTokens)
-  const clearTokenSelection = useUIStore((s) => s.clearTokenSelection)
-  const gridSnap = useUIStore((s) => s.gridSnap)
-  const clipboardTokens = useUIStore((s) => s.clipboardTokens)
-  const setClipboardTokens = useUIStore((s) => s.setClipboardTokens)
-  const scale = useMapTransformStore((s) => s.scale)
-  const offsetX = useMapTransformStore((s) => s.offsetX)
-  const offsetY = useMapTransformStore((s) => s.offsetY)
+  // Consolidate the ~10 repeated `useUIStore((s) => s.field)` calls
+  // into one shallow-equality subscription. Each separate selector
+  // previously triggered its own re-render pipeline on any uiStore
+  // mutation — even for unrelated fields (audit #58).
+  const ui = useUIStore(useShallow((s) => ({
+    activeTool: s.activeTool,
+    selectedTokenId: s.selectedTokenId,
+    selectedTokenIds: s.selectedTokenIds,
+    setSelectedToken: s.setSelectedToken,
+    toggleTokenInSelection: s.toggleTokenInSelection,
+    setSelectedTokens: s.setSelectedTokens,
+    clearTokenSelection: s.clearTokenSelection,
+    gridSnap: s.gridSnap,
+    clipboardTokens: s.clipboardTokens,
+    setClipboardTokens: s.setClipboardTokens,
+  })))
+  const {
+    activeTool, selectedTokenId, selectedTokenIds,
+    setSelectedToken, toggleTokenInSelection, setSelectedTokens, clearTokenSelection,
+    gridSnap, clipboardTokens, setClipboardTokens,
+  } = ui
+  const transform = useMapTransformStore(useShallow((s) => ({
+    scale: s.scale,
+    offsetX: s.offsetX,
+    offsetY: s.offsetY,
+    canvasW: s.canvasW,
+    canvasH: s.canvasH,
+  })))
+  const { scale, offsetX, offsetY, canvasW, canvasH } = transform
   const [contextMenu, setContextMenu] = useState<ContextMenu>({ visible: false, x: 0, y: 0, tokenId: -1 })
   const [editingId, setEditingId] = useState<number | null>(null)
   const [editName, setEditName] = useState('')
@@ -152,6 +171,16 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     return () => container.removeEventListener('wheel', onWheel)
   }, [closeContextMenu])
 
+  // Cancel any pending drag-broadcast rAF on unmount so the callback
+  // doesn't fire against a destroyed component.
+  useEffect(() => () => {
+    if (dragRafRef.current !== null) {
+      cancelAnimationFrame(dragRafRef.current)
+      dragRafRef.current = null
+    }
+    dragPendingRef.current = null
+  }, [])
+
   // Close the context menu on Escape or any click outside the menu
   useEffect(() => {
     if (!contextMenu.visible) return
@@ -174,7 +203,42 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   const isDraggable = activeTool === 'select'
   const sortedTokens = useMemo(() => [...tokens].sort((a, b) => a.zIndex - b.zIndex), [tokens])
 
-  const dragBroadcastLastRef = useRef(0)
+  // Viewport culling — render only tokens whose bounding box intersects
+  // the stage rect, plus a one-token margin so tokens just off-screen
+  // slide in smoothly as the DM pans. Always include selected / editing
+  // tokens so in-flight interactions don't disappear when they drag
+  // past the viewport edge. (Audit #57 / #67.)
+  const visibleTokens = useMemo(() => {
+    if (canvasW <= 0 || canvasH <= 0 || !map.gridSize) return sortedTokens
+    const cellPx = map.gridSize * scale
+    const margin = Math.max(cellPx * 2, 64)
+    const minMx = (0 - offsetX - margin) / scale
+    const maxMx = (canvasW - offsetX + margin) / scale
+    const minMy = (0 - offsetY - margin) / scale
+    const maxMy = (canvasH - offsetY + margin) / scale
+    const keepIds = new Set<number>()
+    if (editingId != null) keepIds.add(editingId)
+    if (editingHpId != null) keepIds.add(editingHpId)
+    if (editingAcId != null) keepIds.add(editingAcId)
+    for (const id of selectedTokenIds) keepIds.add(id)
+    return sortedTokens.filter((t) => {
+      if (keepIds.has(t.id)) return true
+      const s = t.size * map.gridSize
+      if (t.x + s < minMx) return false
+      if (t.y + s < minMy) return false
+      if (t.x > maxMx) return false
+      if (t.y > maxMy) return false
+      return true
+    })
+  }, [sortedTokens, scale, offsetX, offsetY, canvasW, canvasH, map.gridSize,
+      editingId, editingHpId, editingAcId, selectedTokenIds])
+
+  // Coalesces drag broadcasts to once per animation frame instead of the
+  // old 100 ms (10 Hz) wall-clock throttle. rAF aligns the IPC with
+  // actual repaints, so the player window advances at the same cadence
+  // the DM sees locally — addresses audit #54.
+  const dragRafRef = useRef<number | null>(null)
+  const dragPendingRef = useRef<{ tokens: TokenRecord[] } | null>(null)
 
   // Throttled live-position broadcast during drag (100 ms interval)
   const stableHandleDragMove = useCallback((token: TokenRecord, e: Konva.KonvaEventObject<DragEvent>) => {
@@ -194,10 +258,10 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
       setGhostPosRef.current(null)
     }
 
-    // Throttle network broadcast
-    const now = Date.now()
-    if (now - dragBroadcastLastRef.current < 100) return
-    dragBroadcastLastRef.current = now
+    // Compute the latest live snapshot and queue it for the next animation
+    // frame. If another drag-move lands before the rAF fires we simply
+    // overwrite the pending payload — the renderer only needs the newest
+    // frame, not a backlog.
     const liveX = (sx - offsetX) / scale
     const liveY = (sy - offsetY) / scale
     const idsToMove = selectedTokenIds.includes(token.id) ? selectedTokenIds : [token.id]
@@ -206,7 +270,15 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     const liveTokens = tokens.map((t) =>
       idsToMove.includes(t.id) ? { ...t, x: t.x + dx, y: t.y + dy } : t
     )
-    broadcastTokens(liveTokens)
+    dragPendingRef.current = { tokens: liveTokens }
+    if (dragRafRef.current === null) {
+      dragRafRef.current = requestAnimationFrame(() => {
+        dragRafRef.current = null
+        const payload = dragPendingRef.current
+        dragPendingRef.current = null
+        if (payload) broadcastTokens(payload.tokens)
+      })
+    }
   }, [])
 
   const stableHandleDragEnd = useCallback(async (token: TokenRecord, e: Konva.KonvaEventObject<DragEvent>) => {
@@ -264,6 +336,18 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
       const { imgW, imgH } = useMapTransformStore.getState()
       const walls = useWallStore.getState().walls
       const updatedTokens = useTokenStore.getState().tokens
+      // Convert WallRecord → Segment once and build the spatial index
+      // so a multi-token drag (selectedTokenIds.length > 1) shares one
+      // pass over the wall list instead of re-scanning per light.
+      const segments: Segment[] = walls
+        .filter((w) => w.mapId === latestRef.current.map.id)
+        .map((w) => ({
+          x1: w.x1, y1: w.y1, x2: w.x2, y2: w.y2,
+          wallType: w.wallType, doorState: w.doorState,
+        }))
+      const wallIndex = imgW > 0 && imgH > 0 && segments.length > 0
+        ? buildWallIndex(segments, imgW, imgH)
+        : undefined
       for (const pos of newPositions) {
         const t = updatedTokens.find((tok) => tok.id === pos.id)
         if (!t || t.lightRadius <= 0) continue
@@ -271,7 +355,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
         const cx = pos.x + halfSize
         const cy = pos.y + halfSize
         const radiusPx = t.lightRadius * latestRef.current.map.gridSize
-        const poly = computeVisibilityPolygon(cx, cy, radiusPx, walls, imgW, imgH)
+        const poly = computeVisibilityPolygon(cx, cy, radiusPx, segments, imgW, imgH, wallIndex)
         if (poly.length >= 6) {
           document.getElementById('root')?.dispatchEvent(
             new CustomEvent('fog:los-reveal', { detail: { poly } })
@@ -829,7 +913,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
         onMouseMove={handleLayerMouseMove}
         onMouseUp={handleLayerMouseUp}
       >
-        {sortedTokens.map((token) => {
+        {visibleTokens.map((token) => {
           const sx = token.x * scale + offsetX
           const sy = token.y * scale + offsetY
           const sizePx = map.gridSize * token.size * scale
@@ -1578,27 +1662,7 @@ registerUndoAction<TokenMovePayload>('token.move', {
   },
 })
 
-function broadcastTokens(tokens: TokenRecord[]) {
-  if (useSessionStore.getState().sessionMode === 'prep') return
-  const visible = tokens
-    .filter((t) => t.visibleToPlayers)
-    .map((t) => ({
-      id: t.id,
-      name: t.name,
-      imagePath: t.imagePath,
-      x: t.x,
-      y: t.y,
-      size: t.size,
-      hpCurrent: t.hpCurrent,
-      hpMax: t.hpMax,
-      showName: t.showName,
-      rotation: t.rotation,
-      markerColor: t.markerColor,
-      statusEffects: t.statusEffects,
-      ac: t.ac,
-      faction: t.faction,
-      lightRadius: t.lightRadius,
-      lightColor: t.lightColor,
-    }))
-  window.electronAPI?.sendTokenUpdate(visible)
-}
+// `broadcastTokens` is imported at the top — implementation lives in
+// `utils/tokenBroadcast.ts` and diffs against the last snapshot so a
+// single HP / position change serialises only the changed token
+// instead of the whole roster (audit #54 / #55).

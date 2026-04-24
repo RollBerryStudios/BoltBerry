@@ -54,7 +54,12 @@ export const useInitiativeStore = create<InitiativeState>()(
     updateEntry: (id, patch) =>
       set((s) => {
         const e = s.entries.find((e) => e.id === id)
-        if (!e) return
+        if (!e) {
+          if (process.env.NODE_ENV !== 'production') {
+            console.warn(`[initiativeStore] updateEntry: no entry with id=${id}`)
+          }
+          return
+        }
         Object.assign(e, patch)
         // Re-sort if roll changed so ordering stays consistent
         if ('roll' in patch) s.entries.sort((a, b) => b.roll - a.roll)

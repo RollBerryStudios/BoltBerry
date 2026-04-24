@@ -4,6 +4,7 @@ import { useTokenStore } from '../../../stores/tokenStore'
 import { useMapTransformStore } from '../../../stores/mapTransformStore'
 import { useImageUrl } from '../../../hooks/useImageUrl'
 import { EmptyState } from '../../EmptyState'
+import { reportError } from '../../../utils/reportError'
 
 interface AssetRow {
   id: number
@@ -69,7 +70,7 @@ export function AssetBrowser() {
       })
       useTokenStore.getState().addToken(token)
     } catch (err) {
-      console.error('[AssetBrowser] token insert failed:', err)
+      reportError('errors.tokenInsertFailed', err, 'AssetBrowser')
     }
   }
 

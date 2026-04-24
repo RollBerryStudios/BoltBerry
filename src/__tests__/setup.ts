@@ -74,3 +74,57 @@ if (typeof performance === 'undefined') {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ;(global as any).performance = { now: () => Date.now() }
 }
+
+// ─── minimal `document.createElement('canvas')` stub ─────────────────────────
+// Used by canvasPool tests. Vitest runs under node (no jsdom), so we fake
+// only the surface those tests touch: width/height fields plus a
+// no-op-but-observable 2D context that supports fillStyle/fillRect/
+// clearRect/getImageData. Anything richer belongs in a real browser test.
+class MockCanvas {
+  width = 0
+  height = 0
+  private _pixels: Uint8ClampedArray | null = null
+  getContext(type: string): unknown {
+    if (type !== '2d') return null
+    // Arrow functions below preserve `this` from `getContext`, so we can
+    // reach instance fields directly without the `self = this` alias
+    // that the eslint `@typescript-eslint/no-this-alias` rule rejects.
+    const getBuffer = () => {
+      const size = Math.max(0, this.width) * Math.max(0, this.height) * 4
+      if (!this._pixels || this._pixels.length !== size) {
+        this._pixels = new Uint8ClampedArray(size)
+      }
+      return this._pixels
+    }
+    let fillStyle = '#000000'
+    return {
+      get fillStyle() { return fillStyle },
+      set fillStyle(v: string) { fillStyle = v },
+      globalCompositeOperation: 'source-over',
+      clearRect() {
+        const buf = getBuffer()
+        buf.fill(0)
+      },
+      fillRect() {
+        /* no-op: exact pixel writes aren't needed by the pool tests */
+      },
+      drawImage() { /* no-op */ },
+      getImageData(_x: number, _y: number, w: number, h: number) {
+        const full = getBuffer()
+        const subset = new Uint8ClampedArray(Math.max(0, w) * Math.max(0, h) * 4)
+        subset.set(full.subarray(0, subset.length))
+        return { data: subset, width: w, height: h }
+      },
+    }
+  }
+}
+
+if (typeof document === 'undefined') {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ;(global as any).document = {
+    createElement(tag: string) {
+      if (tag === 'canvas') return new MockCanvas()
+      throw new Error(`document.createElement stub: '${tag}' not implemented`)
+    },
+  }
+}

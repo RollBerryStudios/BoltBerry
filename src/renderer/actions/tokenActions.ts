@@ -2,33 +2,8 @@
 import { useTokenStore } from '../stores/tokenStore'
 import { useInitiativeStore } from '../stores/initiativeStore'
 import { useUIStore } from '../stores/uiStore'
-import { useSessionStore } from '../stores/sessionStore'
 import type { TokenRecord } from '@shared/ipc-types'
-
-function broadcastTokens(tokens: TokenRecord[]) {
-  if (useSessionStore.getState().sessionMode === 'prep') return
-  const visible = tokens
-    .filter((t) => t.visibleToPlayers)
-    .map((t) => ({
-      id: t.id,
-      name: t.name,
-      imagePath: t.imagePath,
-      x: t.x,
-      y: t.y,
-      size: t.size,
-      hpCurrent: t.hpCurrent,
-      hpMax: t.hpMax,
-      showName: t.showName,
-      rotation: t.rotation,
-      markerColor: t.markerColor,
-      statusEffects: t.statusEffects,
-      ac: t.ac,
-      faction: t.faction,
-      lightRadius: t.lightRadius,
-      lightColor: t.lightColor,
-    }))
-  window.electronAPI?.sendTokenUpdate(visible)
-}
+import { broadcastTokens } from '../utils/tokenBroadcast'
 
 // ”€”€ token.place ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 // For actions where a token was already created before the undo entry is

@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { Modal } from './shared/Modal'
 
 interface ShortcutOverlayProps {
   onClose: () => void
@@ -15,79 +16,70 @@ export function ShortcutOverlay({ onClose }: ShortcutOverlayProps) {
   const SHORTCUTS: ShortcutEntry[] = [
     { section: t('shortcuts.sectionTools') },
     { key: 'V',        labelKey: 'shortcuts.keySelect' },
-    { key: 'W',        label: 'Zeiger / Kamera-Pan' },
+    { key: 'W',        labelKey: 'shortcuts.keyPointerPan' },
     { key: 'T',        labelKey: 'shortcuts.keyTokenTab' },
-    { key: 'B',        label: 'Nebel-Pinsel' },
+    { key: 'B',        labelKey: 'shortcuts.keyFogBrush' },
     { key: 'F',        labelKey: 'shortcuts.keyFogRect' },
     { key: 'P',        labelKey: 'shortcuts.keyFogPolygon' },
     { key: 'C',        labelKey: 'shortcuts.keyFogCover' },
-    { key: 'X',        label: 'Nebel-Pinsel Verdecken' },
-    { key: 'M',        label: 'Messen (Linie)' },
-    { key: 'D',        label: 'Zeichnen (Freihand)' },
-    { key: 'G',        label: 'Wand zeichnen' },
-    { key: 'J',        label: 'Tür setzen' },
+    { key: 'X',        labelKey: 'shortcuts.keyFogBrushCover' },
+    { key: 'M',        labelKey: 'shortcuts.keyMeasure' },
+    { key: 'D',        labelKey: 'shortcuts.keyDraw' },
+    { key: 'G',        labelKey: 'shortcuts.keyWall' },
+    { key: 'J',        labelKey: 'shortcuts.keyDoor' },
     { key: 'R',        labelKey: 'shortcuts.keyRoom' },
-    { key: 'E',        label: 'Spieler-Sicht ein-/ausblenden' },
+    { key: 'E',        labelKey: 'shortcuts.keyPlayerView' },
     { section: t('shortcuts.sectionMapNav') },
-    { key: 'Mausrad',  labelKey: 'shortcuts.keyMouseWheel' },
+    { key: 'Mausrad',              labelKey: 'shortcuts.keyMouseWheel' },
     { key: 'Alt + Drag',           labelKey: 'shortcuts.keyAltDrag' },
     { key: 'Mittelklick + Drag',   labelKey: 'shortcuts.keyMiddleDrag' },
-    { key: '0',        label: 'Ansicht einpassen (Fit)' },
-    { key: '1 – 5',   labelKey: 'shortcuts.keyMapSwitch' },
-    { section: 'Auswahl & Token' },
-    { key: 'Klick',          label: 'Token auswählen' },
-    { key: 'Shift + Klick',  label: 'Token zur Mehrfachauswahl hinzufügen' },
+    { key: '0',                    labelKey: 'shortcuts.keyFit' },
+    { key: '1 – 5',                labelKey: 'shortcuts.keyMapSwitch' },
+    { section: t('shortcuts.sectionTokens') },
+    { key: 'Klick',          labelKey: 'shortcuts.keyTokenSelect' },
+    { key: 'Shift + Klick',  labelKey: 'shortcuts.keyTokenMultiSelect' },
     { key: 'Delete',         labelKey: 'shortcuts.keyDeleteToken' },
-    { key: 'Ctrl + C',       label: 'Ausgewählte Token kopieren' },
-    { key: 'Ctrl + V',       label: 'Token einfügen (Kartenmitte)' },
+    { key: 'Ctrl + C',       labelKey: 'shortcuts.keyCopyToken' },
+    { key: 'Ctrl + V',       labelKey: 'shortcuts.keyPasteToken' },
     { section: t('shortcuts.sectionCombat') },
     { key: 'N',        labelKey: 'shortcuts.keyNextFighter' },
     { section: t('shortcuts.sectionFog') },
     { key: 'Doppelklick', labelKey: 'shortcuts.keyPolygonFinish' },
     { key: 'Ctrl + Z',    labelKey: 'shortcuts.keyFogUndo' },
-    { key: 'Ctrl + ⇧ + Z', labelKey: 'shortcuts.keyFogRedo' },
-    { section: 'Rechtsklick-Menüs' },
-    { key: 'Rechtsklick Karte',   label: 'Drehung, Nebel, Werkzeuge, Zeichnungen löschen' },
-    { key: 'Rechtsklick Token',   label: 'Token-Optionen (Vordergrund, Löschen…)' },
-    { key: 'Rechtsklick Karte (Liste)', label: 'Umbenennen, Löschen' },
-    { key: 'Rechtsklick Wiki-Eintrag', label: 'Duplizieren, Zu NSC klonen, Bearbeiten, Löschen' },
-    { key: 'Rechtsklick Audio-Kanal', label: 'Playlist öffnen (Titel wählen / hinzufügen)' },
-    { section: '🎯 Player Control Mode' },
-    { key: 'Strg + Ziehen',  label: 'Sicht-Rechteck auf der Karte verschieben' },
-    { key: 'Strg + Mausrad', label: 'Sicht-Rechteck vergrößern/verkleinern' },
-    { key: 'Strg + Pfeiltasten', label: 'Sicht-Rechteck rotieren (Shift für 15°)' },
-    { key: 'Escape',         label: 'Player Control Mode beenden' },
+    { key: 'Ctrl + Shift + Z', labelKey: 'shortcuts.keyFogRedo' },
+    { section: t('shortcuts.sectionContextMenus') },
+    { key: 'Rechtsklick Karte',         labelKey: 'shortcuts.keyCtxMap' },
+    { key: 'Rechtsklick Token',         labelKey: 'shortcuts.keyCtxToken' },
+    { key: 'Rechtsklick Karte (Liste)', labelKey: 'shortcuts.keyCtxMapList' },
+    { key: 'Rechtsklick Wiki-Eintrag',  labelKey: 'shortcuts.keyCtxWiki' },
+    { key: 'Rechtsklick Audio-Kanal',   labelKey: 'shortcuts.keyCtxAudio' },
+    { section: t('shortcuts.sectionPlayerControl') },
+    { key: 'Ctrl + Drag',         labelKey: 'shortcuts.keyPcDrag' },
+    { key: 'Ctrl + Mausrad',      labelKey: 'shortcuts.keyPcZoom' },
+    { key: 'Ctrl + Pfeiltasten',  labelKey: 'shortcuts.keyPcRotate' },
+    { key: 'Escape',              labelKey: 'shortcuts.keyPcExit' },
     { section: t('shortcuts.sectionGeneral') },
-    { key: 'Ctrl + K', label: 'Befehlspalette öffnen' },
+    { key: 'Ctrl + K', labelKey: 'shortcuts.keyPalette' },
     { key: 'Ctrl + B', labelKey: 'shortcuts.keyBlackout' },
-    { key: 'Ctrl + P', label: 'Spielerfenster öffnen/schließen' },
-    { key: 'Ctrl + \\', label: 'Linke Seitenleiste umschalten' },
-    { key: 'Ctrl + ⇧ + \\', label: 'Rechte Seitenleiste umschalten' },
+    { key: 'Ctrl + P', labelKey: 'shortcuts.keyPlayerWindow' },
+    { key: 'Ctrl + \\', labelKey: 'shortcuts.keyLeftSidebar' },
+    { key: 'Ctrl + Shift + \\', labelKey: 'shortcuts.keyRightSidebar' },
     { key: 'Escape',   labelKey: 'shortcuts.keyEscape' },
     { key: 'Ctrl + S', labelKey: 'shortcuts.keySave' },
-    { key: '? / F1',   label: 'Diese Übersicht öffnen' },
+    { key: '? / F1',   labelKey: 'shortcuts.keyThisOverlay' },
   ]
 
   return (
-    <div
+    <Modal
+      onClose={onClose}
+      ariaLabel={t('shortcuts.title')}
       style={{
-        position: 'fixed', inset: 0,
-        background: 'rgba(0,0,0,0.75)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        zIndex: 9000,
-      }}
-      onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
-    >
-      <div style={{
-        background: 'var(--bg-surface)',
-        border: '1px solid var(--border)',
-        borderRadius: 'var(--radius-lg)',
         padding: 'var(--sp-6)',
         width: 580,
         maxHeight: '85vh',
         overflowY: 'auto',
-        boxShadow: '0 24px 64px rgba(0,0,0,0.8)',
-      }}>
+      }}
+    >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--sp-5)' }}>
           <h2 style={{ fontSize: 'var(--text-md)', fontWeight: 600 }}>{t('shortcuts.title')}</h2>
           <button className="btn btn-ghost btn-icon" onClick={onClose}>✕</button>
@@ -149,7 +141,6 @@ export function ShortcutOverlay({ onClose }: ShortcutOverlayProps) {
         }}>
           {t('shortcuts.hint', { key1: '?', key2: 'F1' })}
         </div>
-      </div>
-    </div>
+    </Modal>
   )
 }

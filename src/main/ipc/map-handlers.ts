@@ -7,6 +7,7 @@ import type {
   RecentMapEntry,
   AudioChannelKey,
 } from '../../shared/ipc-types'
+import { DEFAULT_GRID_COLOR } from '../../shared/defaults'
 import { getDb } from '../db/database'
 
 /**
@@ -74,7 +75,7 @@ function toMapRecord(r: MapRow): MapRecord {
     combatVolume: r.combat_volume ?? 1,
     gridVisible: (r.grid_visible ?? 1) !== 0,
     gridThickness: r.grid_thickness ?? 1,
-    gridColor: r.grid_color ?? 'rgba(255,255,255,0.34)',
+    gridColor: r.grid_color ?? DEFAULT_GRID_COLOR,
   }
 }
 

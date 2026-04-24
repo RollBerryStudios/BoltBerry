@@ -12,6 +12,7 @@ import { showToast } from '../shared/Toast'
 import { WikiEntryControls } from './WikiEntryControls'
 import { WikiEntryForm } from './WikiEntryForm'
 import { WikiListMenu } from './WikiListMenu'
+import { useDebouncedValue } from '../../hooks/useDebouncedValue'
 
 const RARITY_ORDER: Record<string, number> = {
   MUNDANE: -1, COMMON: 0, UNCOMMON: 1, RARE: 2, VERY_RARE: 3, LEGENDARY: 4, ARTIFACT: 5,
@@ -99,9 +100,11 @@ export function ItemsTab({
     return Array.from(set).sort((a, b) => (RARITY_ORDER[a] ?? 99) - (RARITY_ORDER[b] ?? 99))
   }, [index])
 
+  const debouncedQuery = useDebouncedValue(query, 200)
+
   const filtered = useMemo(() => {
     if (!index) return []
-    const q = query.trim().toLowerCase()
+    const q = debouncedQuery.trim().toLowerCase()
     return index
       .filter((it) => {
         if (categoryFilter && it.category.en !== categoryFilter) return false
@@ -118,7 +121,7 @@ export function ItemsTab({
       // chip up top but no longer the primary sort axis — DMs scan for
       // items by name more often than by rarity tier.
       .sort((a, b) => pickName(a, language).localeCompare(pickName(b, language), language))
-  }, [index, query, language, categoryFilter, rarityFilter, sourceFilter])
+  }, [index, debouncedQuery, language, categoryFilter, rarityFilter, sourceFilter])
 
   useEffect(() => {
     if (!initialSlug || !index) return

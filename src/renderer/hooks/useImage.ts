@@ -46,8 +46,10 @@ export function useImage(src: string | null): HTMLImageElement | null {
     // Inline helper: decode a data URL or fetch any dataUrl-returning loader
     // and paint the result into the cache / state. Kept local so all three
     // loading branches (data:, bestiary://, relative path) share one code
-    // path for error + cache handling.
-    const setFromData = (dataUrl: string | null) => {
+    // path for error + cache handling. Retries once on error (500 ms) —
+    // the decode can fail transiently under heavy load, and leaving the
+    // user with a broken image until reload is poor UX (audit #80).
+    const setFromData = (dataUrl: string | null, attempt = 0) => {
       if (cancelled) return
       if (!dataUrl) { setImg(null); return }
       const image = new Image()
@@ -56,7 +58,14 @@ export function useImage(src: string | null): HTMLImageElement | null {
         touchCache(src, image)
         setImg(image)
       }
-      image.onerror = () => { if (!cancelled) setImg(null) }
+      image.onerror = () => {
+        if (cancelled) return
+        if (attempt === 0) {
+          setTimeout(() => { if (!cancelled) setFromData(dataUrl, 1) }, 500)
+        } else {
+          setImg(null)
+        }
+      }
       image.src = dataUrl
     }
 

@@ -13,7 +13,14 @@
  *  3. Sort the intersection points by angle and connect them as a polygon.
  *
  * Coordinate system: map-image pixels (same as WallRecord x1/y1/x2/y2).
+ *
+ * Performance: optionally accepts a `WallIndex` (see `wallIndex.ts`) so
+ * the inner ray/segment loop only tests walls in cells the ray crosses
+ * instead of every wall on the map — audit findings #56 and #70.
  */
+
+import type { WallIndex } from './wallIndex'
+import { traverseRayCells } from './wallIndex'
 
 export interface Segment {
   x1: number; y1: number
@@ -76,6 +83,7 @@ export function computeVisibilityPolygon(
   segments: Segment[],
   imgW: number,
   imgH: number,
+  index?: WallIndex,
 ): number[] {
   if (imgW <= 0 || imgH <= 0) return []
 
@@ -91,10 +99,8 @@ export function computeVisibilityPolygon(
     { x1: ox - halfW, y1: oy + halfH, x2: ox - halfW, y2: oy - halfH, wallType: 'wall', doorState: 'closed' },
   ]
 
-  const allSegs: Segment[] = [
-    ...bboxSegs,
-    ...segments.filter(isBlocking),
-  ]
+  const blockingSegs = segments.filter(isBlocking)
+  const allSegs: Segment[] = [...bboxSegs, ...blockingSegs]
 
   // Collect angles to all wall endpoints
   const angles: number[] = []
@@ -108,14 +114,39 @@ export function computeVisibilityPolygon(
   // Cast ray at each angle and collect closest hit
   const hits: { angle: number; pt: Point }[] = []
 
+  // When an index is supplied AND its segments match the input, walk
+  // the spatial buckets along the ray instead of testing every blocking
+  // segment. The bbox segments are observer-relative so they always go
+  // through the brute path. Falling back to brute force when shapes
+  // don't line up keeps the engine safe across stale-index races.
+  const useIndex = !!index && index.segments === segments
+
   for (const angle of angles) {
     const dx = Math.cos(angle)
     const dy = Math.sin(angle)
 
+    // Bbox first — small (always 4) and always relevant for the polygon.
     let minT = Infinity
-    for (const seg of allSegs) {
+    for (const seg of bboxSegs) {
       const t = raySegmentIntersect(ox, oy, dx, dy, seg.x1, seg.y1, seg.x2, seg.y2)
       if (t !== null && t < minT) minT = t
+    }
+
+    if (useIndex && index) {
+      const tested = new Set<number>()
+      for (const segId of traverseRayCells(index, ox, oy, dx, dy, minT)) {
+        if (tested.has(segId)) continue
+        tested.add(segId)
+        const seg = index.segments[segId]
+        if (!isBlocking(seg)) continue
+        const t = raySegmentIntersect(ox, oy, dx, dy, seg.x1, seg.y1, seg.x2, seg.y2)
+        if (t !== null && t < minT) minT = t
+      }
+    } else {
+      for (const seg of blockingSegs) {
+        const t = raySegmentIntersect(ox, oy, dx, dy, seg.x1, seg.y1, seg.x2, seg.y2)
+        if (t !== null && t < minT) minT = t
+      }
     }
 
     if (minT === Infinity) continue

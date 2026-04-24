@@ -153,19 +153,26 @@ export function NpcCloneWizard({
               }
             </div>
             <div className="npc-wiz-fields">
-              <label className="npc-wiz-label">{t('npcWizard.name')}</label>
+              <label className="npc-wiz-label" htmlFor="npc-wiz-name">{t('npcWizard.name')}</label>
               <input
+                id="npc-wiz-name"
                 className="npc-wiz-input"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 autoFocus
               />
-              <label className="npc-wiz-label">{t('npcWizard.faction')}</label>
-              <div className="npc-wiz-factions">
+              <div className="npc-wiz-label" id="npc-wiz-faction-label">{t('npcWizard.faction')}</div>
+              <div
+                className="npc-wiz-factions"
+                role="radiogroup"
+                aria-labelledby="npc-wiz-faction-label"
+              >
                 {FACTIONS.map((f) => (
                   <button
                     key={f.value}
                     type="button"
+                    role="radio"
+                    aria-checked={faction === f.value}
                     className={`npc-wiz-faction${faction === f.value ? ' active' : ''}`}
                     style={{ borderColor: faction === f.value ? f.color : undefined, color: f.color }}
                     onClick={() => setFaction(f.value)}

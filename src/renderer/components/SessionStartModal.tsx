@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import type { ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useUIStore } from '../stores/uiStore'
 import { useSessionStore } from '../stores/sessionStore'
 import { useTokenStore } from '../stores/tokenStore'
 import { useCampaignStore } from '../stores/campaignStore'
+import { Modal } from './shared/Modal'
 
 interface SessionStartModalProps {
   onConfirm: () => void
@@ -12,6 +14,7 @@ interface SessionStartModalProps {
 }
 
 export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: SessionStartModalProps) {
+  const { t } = useTranslation()
   const playerConnected = useSessionStore((s) => s.playerConnected)
   const tokens = useTokenStore((s) => s.tokens)
   const { activeMaps, activeMapId } = useCampaignStore()
@@ -22,37 +25,25 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
 
   function handleGoLive() {
     if (!playerConnected) {
-      setConfirmWarning('Das Spielerfenster ist nicht geöffnet. Trotzdem live gehen?')
+      setConfirmWarning(t('sessionStart.warnNoPlayerWindow'))
     } else if (visibleTokenCount === 0) {
-      setConfirmWarning('Keine Token sind für Spieler sichtbar. Trotzdem live gehen?')
+      setConfirmWarning(t('sessionStart.warnNoVisibleTokens'))
     } else {
       onConfirm()
     }
   }
 
   return (
-    <div
-      style={{
-        position: 'fixed', inset: 0,
-        background: 'rgba(0,0,0,0.7)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        zIndex: 9000,
-      }}
-      onClick={(e) => { if (e.target === e.currentTarget) onCancel() }}
+    <Modal
+      onClose={onCancel}
+      ariaLabel={t('sessionStart.title')}
+      style={{ padding: 'var(--sp-6)', width: 380 }}
     >
-      <div style={{
-        background: 'var(--bg-surface)',
-        border: '1px solid var(--border)',
-        borderRadius: 'var(--radius-lg)',
-        padding: 'var(--sp-6)',
-        width: 380,
-        boxShadow: '0 24px 64px rgba(0,0,0,0.8)',
-      }}>
         <h2 style={{ fontSize: 'var(--text-md)', fontWeight: 700, marginBottom: 4 }}>
-          Session starten
+          {t('sessionStart.title')}
         </h2>
         <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 'var(--sp-5)' }}>
-          Ab jetzt werden alle Änderungen live an die Spieler gesendet.
+          {t('sessionStart.subtitle')}
         </p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)', marginBottom: 'var(--sp-5)' }}>
@@ -60,14 +51,16 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
           <CheckRow
             ok={playerConnected}
             icon="🖥"
-            label={playerConnected ? 'Spielerfenster verbunden' : 'Spielerfenster nicht geöffnet'}
+            label={playerConnected
+              ? t('sessionStart.playerWindowConnected')
+              : t('sessionStart.playerWindowNotOpen')}
             action={!playerConnected ? (
               <button
                 className="btn btn-ghost"
                 style={{ fontSize: 'var(--text-xs)', padding: '2px 8px' }}
                 onClick={onOpenPlayerWindow}
               >
-                Öffnen
+                {t('sessionStart.open')}
               </button>
             ) : undefined}
           />
@@ -76,7 +69,9 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
           <CheckRow
             ok={!!activeMap}
             icon="🗺"
-            label={activeMap ? `Karte: ${activeMap.name}` : 'Keine Karte geladen'}
+            label={activeMap
+              ? t('sessionStart.mapLoaded', { name: activeMap.name })
+              : t('sessionStart.mapNotLoaded')}
           />
 
           {/* Visible tokens */}
@@ -85,8 +80,8 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
             warn={visibleTokenCount === 0}
             icon="⬤"
             label={visibleTokenCount > 0
-              ? `${visibleTokenCount} Token für Spieler sichtbar`
-              : 'Keine Token für Spieler sichtbar'}
+              ? t('sessionStart.tokensVisible', { count: visibleTokenCount })
+              : t('sessionStart.tokensNoneVisible')}
           />
         </div>
 
@@ -107,14 +102,14 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
                 style={{ fontSize: 'var(--text-xs)' }}
                 onClick={() => setConfirmWarning(null)}
               >
-                Abbrechen
+                {t('sessionStart.cancel')}
               </button>
               <button
                 className="btn btn-primary"
                 style={{ fontSize: 'var(--text-xs)', background: 'rgba(34,197,94,0.2)', color: '#22c55e', borderColor: 'rgba(34,197,94,0.4)' }}
                 onClick={() => { setConfirmWarning(null); onConfirm() }}
               >
-                –¶ Trotzdem fortfahren
+                {t('sessionStart.continueAnyway')}
               </button>
             </div>
           </div>
@@ -122,18 +117,17 @@ export function SessionStartModal({ onConfirm, onCancel, onOpenPlayerWindow }: S
 
         <div style={{ display: 'flex', gap: 'var(--sp-2)', justifyContent: 'flex-end' }}>
           <button className="btn btn-ghost" onClick={onCancel}>
-            Abbrechen
+            {t('sessionStart.cancel')}
           </button>
           <button
             className="btn btn-primary"
             style={{ background: 'rgba(34,197,94,0.2)', color: '#22c55e', borderColor: 'rgba(34,197,94,0.4)' }}
             onClick={handleGoLive}
           >
-            –¶ Jetzt live gehen
+            {t('sessionStart.goLive')}
           </button>
         </div>
-      </div>
-    </div>
+    </Modal>
   )
 }
 

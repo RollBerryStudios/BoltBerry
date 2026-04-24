@@ -14,7 +14,7 @@
   /* ── Text ─────────────────────────────────────────────────────────────────── */
   --text-primary:  #F4F6FA;   /* Soft White  – main working text                 */
   --text-secondary:#94A0B2;   /* Cool Gray   – metadata, helper labels           */
-  --text-muted:    #50607A;   /* Derived     – timestamps, placeholders          */
+  --text-muted:    #7388A6;   /* Derived     – timestamps, placeholders (WCAG AA contrast on --bg-base ≥ 4.5:1, audit #38) */
   --text-inverse:  #0D1015;   /* Used on Bolt Yellow buttons                     */
 
   /* ── Bolt Yellow – Primary action  (≤3% of UI surface) ──────────────────── */

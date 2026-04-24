@@ -5,6 +5,15 @@ export const IPC = {
   PLAYER_FOG_DELTA: 'player:fog-delta',
   PLAYER_FOG_RESET: 'player:fog-reset',
   PLAYER_TOKEN_UPDATE: 'player:token-update',
+  /**
+   * Per-token delta broadcast. Replaces the "send the whole roster
+   * every mutation" pattern on `PLAYER_TOKEN_UPDATE`, so a single HP
+   * change or drag frame ships ~tens of bytes instead of re-serialising
+   * every visible token. Snapshot path via `PLAYER_FULL_SYNC` /
+   * `PLAYER_TOKEN_UPDATE` is retained for the initial handshake +
+   * resync (audit #54 / #55 / WS-1).
+   */
+  PLAYER_TOKEN_DELTA: 'player:token-delta',
   PLAYER_BLACKOUT: 'player:blackout',
   PLAYER_ATMOSPHERE: 'player:atmosphere',
   PLAYER_FULL_SYNC: 'player:full-sync',
@@ -748,6 +757,19 @@ export interface PlayerTokenState {
   faction: string
   lightRadius: number
   lightColor: string
+}
+
+/**
+ * Wire format for per-token delta broadcasts on `PLAYER_TOKEN_DELTA`.
+ * `upsert` covers new + changed tokens, `remove` covers tokens that
+ * left visibility (deleted or visibleToPlayers flipped off). The
+ * player side merges upserts into its local id-keyed map and drops
+ * ids in `remove`. Snapshot-style resets still go through
+ * `PLAYER_TOKEN_UPDATE` / `PLAYER_FULL_SYNC`.
+ */
+export interface PlayerTokenDelta {
+  upsert: PlayerTokenState[]
+  remove: number[]
 }
 
 export interface PlayerMeasureState {

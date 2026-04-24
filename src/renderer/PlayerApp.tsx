@@ -2,12 +2,14 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Stage, Layer, Image as KonvaImage, Shape, Group, Circle, Rect, Text, Line } from 'react-konva'
 import Konva from 'konva'
 import type { PlayerFullState, PlayerTokenState, PlayerMeasureState, FogDelta, PlayerMapState, PlayerPointer, PlayerViewport, PlayerOverlay, PlayerInitiativeEntry, WeatherType, GridType, PlayerDrawingState, PlayerWallState } from '@shared/ipc-types'
+import { DEFAULT_GRID_COLOR } from '@shared/defaults'
 import { useRotatedImage } from './hooks/useRotatedImage'
 import { useImage } from './hooks/useImage'
 import { WeatherCanvas } from './components/canvas/WeatherCanvas'
 import { useImageUrl } from './hooks/useImageUrl'
 import { applyOpToCtxPair } from './utils/fogUtils'
 import { computeVisibilityPolygon, type Segment } from './utils/losEngine'
+import { buildWallIndex } from './utils/wallIndex'
 
 function factionColor(faction: string): string {
   switch (faction) {
@@ -76,6 +78,16 @@ export default function PlayerApp() {
   const exploredCanvasRef = useRef<HTMLCanvasElement | null>(null)
   const coveredCanvasRef  = useRef<HTMLCanvasElement | null>(null)
   const [fogVersion, setFogVersion] = useState(0)
+
+  // Fog ops that arrived before the canvases were ready. We must apply
+  // them on canvas init or the DM and player diverge (audit #6). Kept in
+  // a ref so the sync callback can mutate without triggering a render.
+  const pendingFogOpsRef = useRef<FogDelta[]>([])
+
+  // Auto-hide the DM ping pointer. Kept in a ref so we can cancel the
+  // previous hide on a new ping and on unmount instead of leaking a
+  // dangling `setTimeout` per move (audit #69).
+  const pointerHideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     const onResize = () => setSize({ w: window.innerWidth, h: window.innerHeight })
@@ -156,11 +168,28 @@ export default function PlayerApp() {
               state.exploredBitmap,
               coveredCanvasRef,
               exploredCanvasRef,
-              () => setFogVersion((v) => v + 1),
+              () => {
+                // Replay any deltas that arrived while canvases were null.
+                const queued = pendingFogOpsRef.current
+                if (queued.length > 0) {
+                  const explored = exploredCanvasRef.current
+                  const covered = coveredCanvasRef.current
+                  if (explored && covered) {
+                    const ec = explored.getContext('2d')!
+                    const cc = covered.getContext('2d')!
+                    for (const d of queued) {
+                      applyOpToCtxPair(ec, cc, { type: d.type, shape: d.shape, points: d.points })
+                    }
+                  }
+                  pendingFogOpsRef.current = []
+                }
+                setFogVersion((v) => v + 1)
+              },
             )
           } else {
             exploredCanvasRef.current = null
             coveredCanvasRef.current = null
+            pendingFogOpsRef.current = []
             setFogVersion((v) => v + 1)
           }
         }
@@ -184,6 +213,19 @@ export default function PlayerApp() {
 
       window.playerAPI.onTokenUpdate((t) => setTokens(t)),
 
+      // Per-token delta: merge upserts by id, drop removed ids. Snapshot
+      // channel above stays authoritative for full-sync / resync paths.
+      window.playerAPI.onTokenDelta((delta) => {
+        setTokens((prev) => {
+          if (delta.upsert.length === 0 && delta.remove.length === 0) return prev
+          const byId = new Map<number, typeof prev[number]>()
+          for (const t of prev) byId.set(t.id, t)
+          for (const t of delta.upsert) byId.set(t.id, t)
+          for (const id of delta.remove) byId.delete(id)
+          return Array.from(byId.values())
+        })
+      }),
+
       window.playerAPI.onBlackout((active: boolean) => {
         setBlackout(active)
         if (active) {
@@ -206,7 +248,13 @@ export default function PlayerApp() {
 
       window.playerAPI.onPointer((p: PlayerPointer) => {
         setPointer(p)
-        setTimeout(() => setPointer((cur) => (cur === p ? null : cur)), 2500)
+        if (pointerHideTimeoutRef.current) {
+          clearTimeout(pointerHideTimeoutRef.current)
+        }
+        pointerHideTimeoutRef.current = setTimeout(() => {
+          setPointer((cur) => (cur === p ? null : cur))
+          pointerHideTimeoutRef.current = null
+        }, 2500)
       }),
 
       window.playerAPI.onPlayerViewport((v) => {
@@ -232,7 +280,13 @@ export default function PlayerApp() {
       window.playerAPI.onFogDelta((delta: FogDelta) => {
         const explored = exploredCanvasRef.current
         const covered  = coveredCanvasRef.current
-        if (!explored || !covered) return
+        if (!explored || !covered) {
+          // Canvases not ready yet (mid mode-flip). Queue so `loadDualFog`
+          // can replay on init — otherwise the fog version still bumps
+          // below and DM / player drift out of sync (audit #6).
+          pendingFogOpsRef.current.push(delta)
+          return
+        }
         applyOpToCtxPair(
           explored.getContext('2d')!,
           covered.getContext('2d')!,
@@ -265,7 +319,13 @@ export default function PlayerApp() {
     ]
 
     window.playerAPI.requestFullSync()
-    return () => unsubs.forEach((fn) => fn())
+    return () => {
+      unsubs.forEach((fn) => fn())
+      if (pointerHideTimeoutRef.current) {
+        clearTimeout(pointerHideTimeoutRef.current)
+        pointerHideTimeoutRef.current = null
+      }
+    }
   }, [])
 
   if (blackout || mode === 'blackout') {
@@ -638,7 +698,7 @@ function PlayerMapView({
   // stock rgba white) when the DM build predates v32.
   const gridVisible = mapState.gridVisible ?? true
   const gridThickness = mapState.gridThickness ?? 1
-  const gridColor = mapState.gridColor ?? 'rgba(255,255,255,0.34)'
+  const gridColor = mapState.gridColor ?? DEFAULT_GRID_COLOR
   const showGrid = image && mapState.gridType !== 'none' && gridVisible
   const cellPx = showGrid ? mapState.gridSize * scale : 0
 
@@ -862,6 +922,13 @@ function PlayerLightingLayer({ tokens, walls, scale, offX, offY, gridSize, imgW,
     [walls]
   )
 
+  // Spatial index — built once per geometry change and shared across
+  // every light source's polygon computation.
+  const wallIndex = useMemo(
+    () => (imgW > 0 && imgH > 0 ? buildWallIndex(segments, imgW, imgH) : undefined),
+    [segments, imgW, imgH],
+  )
+
   const lights = useMemo(
     () => tokens
       .filter((t) => t.lightRadius > 0)
@@ -882,7 +949,7 @@ function PlayerLightingLayer({ tokens, walls, scale, offX, offY, gridSize, imgW,
   return (
     <Layer listening={false} opacity={0.6} perfectDrawEnabled={false} {...(layerXform ?? {})}>
       {lights.map((l) => {
-        const poly = computeVisibilityPolygon(l.cx, l.cy, l.rPx, segments, imgW, imgH)
+        const poly = computeVisibilityPolygon(l.cx, l.cy, l.rPx, segments, imgW, imgH, wallIndex)
         const screenPoly: number[] = []
         for (let i = 0; i < poly.length; i += 2) {
           screenPoly.push(poly[i] * scale + offX, poly[i + 1] * scale + offY)
