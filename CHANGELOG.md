@@ -3,6 +3,75 @@
 All notable changes to BoltBerry are tracked here. The app follows SemVer
 once it hits 1.0; until then, 0.x releases may break prior assumptions.
 
+## Full-QA remediation pass — 2026-04-24
+
+See `QA_REPORT_2026-04-23.md` and `QA_ACTION_PLAN_2026-04-23.md` for the
+82-finding audit; this pass closes the P0/P1 logic, IPC, i18n, perf
+and accessibility items.
+
+### Fixed (logic)
+- **appStore**: removed dead module-scoped `savedTimer` that could prematurely
+  collapse "Saved" to "Idle" under rapid saves; added `dirty` flag.
+- **undoStore**: `warnedFull` now lives in store state — previously the
+  "Undo stack full" toast either leaked across mounts or fired on every
+  overflowing push. Toast string moved to `undo.stackFull` i18n key.
+- **initiativeStore**: `updateEntry()` on an unknown id now logs a dev
+  warning instead of silently no-oping.
+- **drawing-handlers**: malformed `points` JSON is now logged per row id
+  so a corrupted drawing is visible instead of silently dropped.
+- **player-bridge**: every DM → Player and Player → DM send now routes
+  through `safeSendToPlayer` / `safeSendToDM` which guard against
+  destroyed `webContents` (prevents crashes when the player window
+  closes mid-broadcast).
+- **PlayerApp**: fog deltas arriving while the canvases are re-initialising
+  are queued and replayed on canvas-init; version counter only bumps on
+  successful apply (fixes the fog-desync-on-mode-flip bug).
+- **PlayerApp**: pointer auto-hide timeout stored in a ref so it can be
+  cancelled on the next ping and on unmount (no more stray `setTimeout`
+  leaks).
+
+### Fixed (security / IPC hardening)
+- New `src/main/ipc/validators.ts` providing `coerceInt`, `coerceColor`,
+  `assertWithinRoot`, `assertValidFogDataUrl` + `IpcValidationError`.
+- **FOG_SAVE**: 8 MiB data-URL cap, PNG-prefix check, `try/catch` with
+  structured `{ ok, reason }` response.
+- **TOKENS_UPDATE**: `size` / `hp_current` / `hp_max` / `zIndex` / `ac`
+  now reject non-integer numbers (previously silently truncated by
+  SQLite). `markerColor` / `lightColor` require a valid `#hex` / `rgba()`
+  string — blocks potential `javascript:` / `data:` injection.
+
+### Fixed (i18n)
+- `fallbackLng` flipped from `'de'` to `'en'` — English users no longer
+  see German labels when a key is missing.
+- **SessionStartModal**, **SetupWizard**, and **ShortcutOverlay** had
+  ~50 hardcoded German strings extracted into symmetric `en` / `de`
+  locale keys (`sessionStart.*`, `setupWizard.*`, `shortcuts.*`).
+
+### Fixed (accessibility)
+- New shared `Modal` primitive with built-in focus trap, ESC-to-close,
+  `role="dialog"`, `aria-modal`, and focus restoration on unmount.
+- `SessionStartModal`, `ShortcutOverlay`, `MonitorDialog` all migrated
+  onto the new primitive.
+- `--text-muted` raised from `#50607A` to `#7388A6` so muted copy meets
+  WCAG AA contrast on `--bg-base`.
+
+### Performance
+- **FogLayer**: caches `getContext('2d')` for both fog canvases; avoids
+  reacquiring on every brush stroke / undo / rebuild.
+- **useImage**: retries once on decode error before falling back to a
+  broken-image placeholder.
+- New `useDebouncedValue` hook; **MonstersTab**, **ItemsTab** and
+  **SpellsTab** now debounce search input 200 ms (was O(n·log n) on
+  every keystroke over 263-entry monster list).
+- **useAutoSave**: skips the 60 s interval write when nothing has been
+  mutated since the last save; save-now and visibility-change still
+  force a write.
+
+### Chore
+- New `src/shared/defaults.ts` centralising `DEFAULT_GRID_COLOR`; schema,
+  `map-handlers`, `export-import` and `PlayerApp` all share one source
+  of truth.
+
 ## 0.20.14 — 2026-04-23
 
 ### Fixed
