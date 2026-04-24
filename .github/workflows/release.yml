@@ -14,75 +14,58 @@ permissions:
   contents: write
 
 jobs:
-  # ─── Windows Build ────────────────────────────────────────────────────────
   build-windows:
     name: Build · Windows
-    runs-on: windows-latest
+    runs-on: [self-hosted, Windows, X64]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4
-        # Pull LFS payloads so electron-builder's `extraResources` rule
-        # (resources/data/**/*.webp) bundles the actual ~13k token webps
-        # instead of 130-byte LFS pointer stubs. Without this, every
-        # released installer ships with broken Wiki portraits.
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           lfs: true
-
       - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '20'
           cache: 'npm'
-
       - name: Install dependencies
         run: npm ci
-
       - name: Build
         run: npm run build
-
       - name: Package · Windows (NSIS)
         run: npx electron-builder --win --x64 --ia32 --publish never
         env:
           WIN_CERT_FILE: ${{ secrets.WIN_CERT_FILE }}
           WIN_CERT_PASSWORD: ${{ secrets.WIN_CERT_PASSWORD }}
-
       - name: Upload Windows artifacts
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: dist-windows
           path: release/*.exe
           retention-days: 7
 
-  # ─── Linux Build ──────────────────────────────────────────────────────────
   build-linux:
     name: Build · Linux
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           lfs: true
-
       - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '20'
           cache: 'npm'
-
       - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y rpm fakeroot dpkg
-
       - name: Install dependencies
         run: npm ci
-
       - name: Build
         run: npm run build
-
       - name: Package · Linux (AppImage + deb)
         run: npx electron-builder --linux AppImage deb --x64 --publish never
-
       - name: Upload Linux artifacts
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: dist-linux
           path: |
@@ -90,36 +73,30 @@ jobs:
             release/*.deb
           retention-days: 7
 
-  # ─── macOS Build ──────────────────────────────────────────────────────────
   build-macos:
     name: Build · macOS
-    runs-on: macos-latest
+    runs-on: [self-hosted, macOS, ARM64]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           lfs: true
-
       - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '20'
           cache: 'npm'
-
       - name: Install dependencies
         run: npm ci
-
       - name: Build
         run: npm run build
-
       - name: Package · macOS (dmg + zip)
         run: npx electron-builder --mac dmg zip --x64 --arm64 --publish never
         env:
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-
       - name: Upload macOS artifacts
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: dist-macos
           path: |
@@ -127,19 +104,16 @@ jobs:
             release/*.zip
           retention-days: 7
 
-  # ─── GitHub Release ────────────────────────────────────────────────────────
   publish-release:
     name: Publish Release
     needs: [build-windows, build-linux, build-macos]
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4
-
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
       - name: Download all artifacts
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093  # v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           path: release-artifacts
-
       - name: Determine version
         id: version
         run: |
@@ -148,9 +122,8 @@ jobs:
           else
             echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
           fi
-
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65  # v2
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65
         with:
           tag_name: ${{ steps.version.outputs.tag }}
           name: BoltBerry ${{ steps.version.outputs.tag }}
