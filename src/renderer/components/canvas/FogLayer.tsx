@@ -183,12 +183,26 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
 
   useEffect(() => { refreshDisplay() }, [refreshDisplay])
 
+  // Cached 2D contexts for the fog canvases. `getContext('2d')` is
+  // idempotent and returns the same object each call, but the lookup
+  // still shows up as a cost in the brush-stroke hot path (audit #60).
+  // We refresh the refs whenever the canvas effect re-creates the
+  // canvases (on map change / resize).
+  const exploredCtxRef = useRef<CanvasRenderingContext2D | null>(null)
+  const coveredCtxRef  = useRef<CanvasRenderingContext2D | null>(null)
+  useEffect(() => {
+    exploredCtxRef.current = exploredCanvasRef.current?.getContext('2d') ?? null
+    coveredCtxRef.current  = coveredCanvasRef.current?.getContext('2d') ?? null
+  }, [imgW, imgH, mapId])
+
   // ── Apply a fog operation ─────────────────────────────────────────
   const applyOp = useCallback((op: FogOperation) => {
     const explored = exploredCanvasRef.current
     const covered  = coveredCanvasRef.current
-    if (!explored || !covered) return
-    applyOpToCtxPair(explored.getContext('2d')!, covered.getContext('2d')!, op)
+    const ec = exploredCtxRef.current
+    const cc = coveredCtxRef.current
+    if (!explored || !covered || !ec || !cc) return
+    applyOpToCtxPair(ec, cc, op)
     refreshDisplay()
     saveFogToDb(mapId, explored, covered)
     sendFogDelta(op)
@@ -198,12 +212,11 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
   const rebuildFog = useCallback(() => {
     const explored = exploredCanvasRef.current
     const covered  = coveredCanvasRef.current
-    if (!explored || !covered) return
+    const ec = exploredCtxRef.current
+    const cc = coveredCtxRef.current
+    if (!explored || !covered || !ec || !cc) return
 
-    const ec = explored.getContext('2d')!
     ec.clearRect(0, 0, explored.width, explored.height)
-
-    const cc = covered.getContext('2d')!
     cc.clearRect(0, 0, covered.width, covered.height)
 
     useFogStore.getState().history.forEach((op) =>
@@ -254,9 +267,9 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
       const detail = (e as CustomEvent).detail as { type: string }
       const explored = exploredCanvasRef.current
       const covered  = coveredCanvasRef.current
-      if (!explored || !covered || !activeMapId) return
-      const ec = explored.getContext('2d')!
-      const cc = covered.getContext('2d')!
+      const ec = exploredCtxRef.current
+      const cc = coveredCtxRef.current
+      if (!explored || !covered || !ec || !cc || !activeMapId) return
 
       if (detail.type === 'revealAll') {
         const fullOp: FogOperation = { type: 'reveal', shape: 'rect', points: [0, 0, explored.width, explored.height] }

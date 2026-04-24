@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useSettingsStore } from '../stores/settingsStore'
 import logoSquare from '../assets/boltberry-logo.png'
 
@@ -7,6 +8,7 @@ interface SetupWizardProps {
 }
 
 export function SetupWizard({ onComplete }: SetupWizardProps) {
+  const { t } = useTranslation()
   const { setUserDataFolder, setIsSetupComplete } = useSettingsStore()
   const [tempFolder, setTempFolder] = useState('')
   const [loading, setLoading] = useState(true)
@@ -36,7 +38,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
       if (chosen) setTempFolder(chosen)
     } catch (err) {
       console.error('[SetupWizard] chooseFolder failed:', err)
-      setError('Ordnerauswahl fehlgeschlagen')
+      setError(t('setupWizard.errorChoose'))
     }
   }
 
@@ -48,7 +50,9 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
       if (window.electronAPI) {
         const result = await window.electronAPI.setUserDataFolder(folder)
         if (!result?.success) {
-          const msg = result?.error ? `Datenbank-Fehler: ${result.error}` : 'Ordner konnte nicht gesetzt werden'
+          const msg = result?.error
+            ? t('setupWizard.errorDbPrefix', { error: result.error })
+            : t('setupWizard.errorSetFolder')
           setError(msg)
           console.error('[SetupWizard] setUserDataFolder failed:', result?.error)
           return
@@ -59,7 +63,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
       setStep('success')
     } catch (err) {
       console.error('[SetupWizard] setUserDataFolder failed:', err)
-      setError('Ordner konnte nicht gesetzt werden')
+      setError(t('setupWizard.errorSetFolder'))
     }
   }
 
@@ -85,7 +89,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
         }}>
           <div style={{ fontSize: 48, marginBottom: 'var(--sp-4)' }}>🎉</div>
           <h2 style={{ marginBottom: 'var(--sp-3)', color: 'var(--text-primary)' }}>
-            Einrichtung abgeschlossen!
+            {t('setupWizard.successTitle')}
           </h2>
           <p style={{
             color: 'var(--text-muted)',
@@ -94,7 +98,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
             maxWidth: 360,
             margin: '0 auto var(--sp-2)',
           }}>
-            Dein Datenordner ist eingerichtet. Lege deine Karten-Bilder, Token-Bilder und Audio-Dateien dort ab — BoltBerry findet sie automatisch beim Import.
+            {t('setupWizard.successBody')}
           </p>
           <div style={{
             background: 'var(--bg-overlay)',
@@ -111,16 +115,16 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
             <div style={{ fontWeight: 700, marginBottom: 4, color: 'var(--text-secondary)' }}>
               📂 {tempFolder}
             </div>
-            <div>🗺 <strong>maps/</strong> — Karten-Bilder (PNG, JPG, WebP)</div>
-            <div>🪙 <strong>tokens/</strong> — Token-Bilder und Charakterbilder</div>
-            <div>🎵 <strong>audio/</strong> — Hintergrundmusik und Soundeffekte</div>
+            <div>🗺 <strong>maps/</strong> — {t('setupWizard.folderMaps')}</div>
+            <div>🪙 <strong>tokens/</strong> — {t('setupWizard.folderTokens')}</div>
+            <div>🎵 <strong>audio/</strong> — {t('setupWizard.folderAudio')}</div>
           </div>
           <button
             className="btn btn-primary"
             style={{ width: '100%', justifyContent: 'center', fontWeight: 700, padding: '10px 0', marginBottom: 'var(--sp-2)' }}
             onClick={onComplete}
           >
-            Los geht's →
+            {t('setupWizard.letsGo')}
           </button>
           <button
             className="btn"
@@ -133,7 +137,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
                 .catch(() => {})
             }}
           >
-            📥 Kampagne importieren
+            📥 {t('setupWizard.importCampaign')}
           </button>
         </div>
       </div>
@@ -164,7 +168,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
           alt="BoltBerry"
           style={{ height: 56, width: 'auto', marginBottom: 'var(--sp-3)' }}
         />
-        <h2 style={{ marginBottom: 'var(--sp-2)' }}>Willkommen bei BoltBerry!</h2>
+        <h2 style={{ marginBottom: 'var(--sp-2)' }}>{t('setupWizard.welcome')}</h2>
         <p style={{
           color: 'var(--text-muted)',
           marginBottom: 'var(--sp-4)',
@@ -172,9 +176,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
           maxWidth: 380,
           margin: '0 auto var(--sp-4)',
         }}>
-          Wähle einen Ordner, in dem BoltBerry deine Kampagnen, Karten,
-          Token und Audio-Dateien speichert. Du kannst diesen Ordner
-          später in den Einstellungen ändern.
+          {t('setupWizard.pickFolderIntro')}
         </p>
 
         {/* Asset folder explanation */}
@@ -190,12 +192,12 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
           lineHeight: 1.9,
         }}>
           <div style={{ fontWeight: 700, marginBottom: 4, color: 'var(--text-secondary)', fontSize: 'var(--text-xs)' }}>
-            Was wird in diesem Ordner gespeichert?
+            {t('setupWizard.folderExplainHeader')}
           </div>
-          <div>🗺 Karten-Bilder (PNG, JPG, WebP)</div>
-          <div>🪙 Token- und Charakterbilder</div>
-          <div>🎵 Hintergrundmusik und Soundeffekte</div>
-          <div>📄 Kampagnen-Datenbank und Handouts</div>
+          <div>🗺 {t('setupWizard.explainMaps')}</div>
+          <div>🪙 {t('setupWizard.explainTokens')}</div>
+          <div>🎵 {t('setupWizard.explainAudio')}</div>
+          <div>📄 {t('setupWizard.explainDb')}</div>
         </div>
 
         <div style={{
@@ -210,15 +212,15 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
             color: 'var(--text-muted)',
             fontWeight: 500,
           }}>
-            Datenordner
+            {t('setupWizard.dataFolder')}
           </label>
 
           <div style={{ display: 'flex', gap: 'var(--sp-2)' }}>
             <input
               className="input"
-              value={loading ? 'Lade…' : tempFolder}
+              value={loading ? t('setupWizard.loading') : tempFolder}
               onChange={(e) => setTempFolder(e.target.value)}
-              placeholder="Pfad zum Datenordner"
+              placeholder={t('setupWizard.pathPlaceholder')}
               disabled={loading}
               style={{ flex: 1 }}
             />
@@ -227,7 +229,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
               onClick={handleChooseFolder}
               disabled={loading}
             >
-              Durchsuchen
+              {t('setupWizard.browse')}
             </button>
           </div>
 
@@ -252,7 +254,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
             onClick={handleContinue}
             disabled={loading || !tempFolder.trim()}
           >
-            Weiter
+            {t('setupWizard.next')}
           </button>
         </div>
       </div>
