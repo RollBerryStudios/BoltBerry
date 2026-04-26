@@ -12,7 +12,7 @@ permissions:
 jobs:
   encoding-check:
     name: Check Source Encoding
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
       - name: Check for Mojibake
@@ -26,7 +26,7 @@ jobs:
   lint-and-test:
     name: Lint & Test
     needs: encoding-check
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
       - name: Setup Node.js
@@ -46,7 +46,7 @@ jobs:
   build-check:
     name: Build & Bundle Check
     needs: encoding-check
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
       - name: Setup Node.js
@@ -62,7 +62,7 @@ jobs:
   e2e:
     name: E2E (Playwright)
     needs: encoding-check
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: ubuntu-latest
     continue-on-error: true
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5

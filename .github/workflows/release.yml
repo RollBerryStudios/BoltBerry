@@ -85,7 +85,7 @@ jobs:
 
   build-macos:
     name: Build · macOS
-    runs-on: [self-hosted, macOS, ARM64]
+    runs-on: macos-latest
     steps:
       - name: Clean git config
         run: |
