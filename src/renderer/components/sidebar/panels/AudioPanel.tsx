@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { useAudioStore, type ChannelId, type AudioBoard, type AudioBoardSlot, type PlaylistEntry } from '../../../stores/audioStore'
 import { useCampaignStore } from '../../../stores/campaignStore'
 import { useUIStore } from '../../../stores/uiStore'
+import { showToast } from '../../shared/Toast'
+import { formatError } from '../../../utils/formatError'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -461,8 +463,13 @@ function BoardManager({ boards, activeBoardIndex, onSelect, campaignId, onBoards
 
   async function handleRename(id: number, name: string) {
     updateBoardName(id, name)
-    await window.electronAPI?.audioBoards.rename(id, name).catch(console.error)
     setEditing(null)
+    try {
+      await window.electronAPI?.audioBoards.rename(id, name)
+    } catch (err) {
+      console.error('[AudioPanel] board rename failed:', err)
+      showToast(`Soundboard konnte nicht umbenannt werden: ${formatError(err)}`, 'error')
+    }
   }
 
   async function handleDelete(id: number) {

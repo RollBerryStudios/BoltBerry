@@ -441,11 +441,21 @@ export function Toolbar() {
           if (next) {
             const { scale, offsetX, offsetY, canvasW, canvasH } = useMapTransformStore.getState()
             if (scale > 0 && canvasW > 0 && canvasH > 0) {
+              // Seed the rect with the player window's aspect ratio so
+              // the indicator on the DM canvas == what the players
+              // actually see. Falls back to 16:9 when no player window
+              // has reported yet.
+              const ws = useUIStore.getState().playerWindowSize
+              const aspect = ws && ws.w > 0 && ws.h > 0 ? ws.w / ws.h : 16 / 9
+              const viewW = canvasW / scale
+              const viewH = canvasH / scale
+              const fitH = Math.min(viewH, viewW / aspect)
+              const fitW = fitH * aspect
               setPlayerViewport({
                 cx: (canvasW / 2 - offsetX) / scale,
                 cy: (canvasH / 2 - offsetY) / scale,
-                w: canvasW / scale,
-                h: canvasH / scale,
+                w: fitW,
+                h: fitH,
                 rotation: 0,
               })
             }

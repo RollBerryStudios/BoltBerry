@@ -187,9 +187,10 @@ export function PlayerViewportGestures() {
       e.stopPropagation()
       const step = e.deltaY < 0 ? 1.08 : 1 / 1.08
       const MIN = 50
+      // Patch w only; aspect lock in the store derives h. Keeps the
+      // rect glued to the player window's true aspect ratio.
       useUIStore.getState().patchPlayerViewport({
         w: Math.max(MIN, cur.w * step),
-        h: Math.max(MIN, cur.h * step),
       })
     }
 

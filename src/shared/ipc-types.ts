@@ -24,6 +24,13 @@ export const IPC = {
   PLAYER_REQUEST_SYNC: 'player:request-sync',
   DM_REQUEST_FULL_SYNC: 'dm:request-full-sync',
   DM_PLAYER_WINDOW_CLOSED: 'dm:player-window-closed',
+  /** Player → DM. Fires on connect and on every player-window resize so
+   *  the DM-side Player Control Mode rectangle can lock to the player's
+   *  exact aspect ratio. Eliminates the letterboxing/pillarboxing that
+   *  otherwise appears when the dashed rect's aspect drifts away from
+   *  the player window's. */
+  PLAYER_WINDOW_SIZE: 'player:window-size',
+  DM_PLAYER_WINDOW_SIZE: 'dm:player-window-size',
 
   // DM ↔ Main
   GET_MONITORS: 'app:get-monitors',

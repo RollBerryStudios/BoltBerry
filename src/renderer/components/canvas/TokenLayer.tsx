@@ -47,7 +47,7 @@ const STATUS_EFFECTS = [
   { id: 'unconscious',   icon: '💤', label: 'Bewusstlos' },
   { id: 'advantage',     icon: '▲', label: 'Vorteil' },
   { id: 'disadvantage',  icon: '▼', label: 'Nachteil' },
-  { id: 'concentrating', icon: '🎭¯', label: 'Konzentration' },
+  { id: 'concentrating', icon: '🎭', label: 'Konzentration' },
   { id: 'blessed',       icon: '✨', label: 'Gesegnet' },
   { id: 'cursed',        icon: '🔮', label: 'Verflucht' },
   { id: 'hasted',        icon: '⚡', label: 'Verlangsamt' },
@@ -1026,30 +1026,30 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                       for (const id of selectedTokenIds) handleUpdate(id, { visibleToPlayers: true })
                       closeContextMenu()
                     }},
-                    { label: `ðŸ™ˆ Alle verstecken (${selectedTokenIds.length})`, action: () => {
+                    { label: `🙈 Alle verstecken (${selectedTokenIds.length})`, action: () => {
                       for (const id of selectedTokenIds) handleUpdate(id, { visibleToPlayers: false })
                       closeContextMenu()
                     }},
-                    { label: `ðŸ”’ Sperren (${selectedTokenIds.length})`, action: () => {
+                    { label: `🔒 Sperren (${selectedTokenIds.length})`, action: () => {
                       for (const id of selectedTokenIds) handleUpdate(id, { locked: true })
                       closeContextMenu()
                     }},
-                    { label: `ðŸ”“ Entsperren (${selectedTokenIds.length})`, action: () => {
+                    { label: `🔓 Entsperren (${selectedTokenIds.length})`, action: () => {
                       for (const id of selectedTokenIds) handleUpdate(id, { locked: false })
                       closeContextMenu()
                     }},
-                    { label: 'ðŸ· Fraktion setzen', action: null, submenu: true, submenuType: 'faction' },
+                    { label: '🏷 Fraktion setzen', action: null, submenu: true, submenuType: 'faction' },
                     null,
-                    { label: 'ðŸ“‹ Als Gruppe duplizieren', action: () => handleDuplicateGroup() },
-                    { label: 'ðŸ“‹ Kopieren', action: () => handleCopyTokens() },
-                    { label: clipboardTokens.length > 0 ? `ðŸ“‹ Einfügen (${clipboardTokens.length})` : 'ðŸ“‹ Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
+                    { label: '📋 Als Gruppe duplizieren', action: () => handleDuplicateGroup() },
+                    { label: '📋 Kopieren', action: () => handleCopyTokens() },
+                    { label: clipboardTokens.length > 0 ? `📋 Einfügen (${clipboardTokens.length})` : '📋 Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
                     null,
                     { label: `❌ Alle löschen (${selectedTokenIds.length})`, action: () => handleDelete(token.id), danger: true },
                   ] : [
                     { label: '✏️ Umbenennen', action: () => stableStartEdit(token) },
                     { label: '❤️ HP bearbeiten', action: () => startEditHp(token) },
-                    { label: 'ðŸ›¡ AC bearbeiten', action: () => startEditAc(token) },
-                    { label: 'ðŸ“ Notiz', action: () => handleEditNotes(token) },
+                    { label: '🛡 AC bearbeiten', action: () => startEditAc(token) },
+                    { label: '📝 Notiz', action: () => handleEditNotes(token) },
                     null,
                     // Inline HP chip row — replaces four full-width rows with
                     // one compact strip. Keeps all four quick-adjust actions
@@ -1059,20 +1059,20 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     { label: '⚔️ Zustände', action: null, submenu: true, submenuType: 'status' },
                     { label: '➕ Vorteil', action: () => toggleAdvantage(token, true) },
                     { label: '➖ Nachteil', action: () => toggleAdvantage(token, false) },
-                    { label: '🎭¯ Konzentration', action: () => toggleStatusInMenu(token, 'concentrating') },
+                    { label: '🎭 Konzentration', action: () => toggleStatusInMenu(token, 'concentrating') },
                     null,
                     { label: '⚔️ Zum Kampf hinzufügen', action: () => addToInitiative(token) },
-                    { label: 'ðŸ“– Im Bestiarium öffnen', action: () => { void handleOpenInBestiarium(token) } },
-                    { label: '🎭¯ Fokus setzen', action: () => handleFocusToken(token) },
-                    { label: hasLight ? 'ðŸ’¡ Lichtquelle deaktivieren' : 'ðŸ’¡ Lichtquelle aktivieren', action: () => handleToggleLight(token) },
+                    { label: '📖 Im Bestiarium öffnen', action: () => { void handleOpenInBestiarium(token) } },
+                    { label: '🎭 Fokus setzen', action: () => handleFocusToken(token) },
+                    { label: hasLight ? '💡 Lichtquelle deaktivieren' : '💡 Lichtquelle aktivieren', action: () => handleToggleLight(token) },
                     null,
-                    { label: token.visibleToPlayers ? 'ðŸ™ˆ Verstecken' : '👁 Sichtbar machen', action: () => handleToggleVisibility(token) },
-                    { label: 'ðŸ“‹ Kopieren', action: () => handleCopyTokens() },
-                    { label: clipboardTokens.length > 0 ? `ðŸ“‹ Einfügen (${clipboardTokens.length})` : 'ðŸ“‹ Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
-                    { label: token.locked ? 'ðŸ”“ Entsperren' : 'ðŸ”’ Sperren', action: () => handleToggleLock(token) },
-                    { label: 'ðŸ· Markierung', action: null, submenu: true, submenuType: 'marker' },
+                    { label: token.visibleToPlayers ? '🙈 Verstecken' : '👁 Sichtbar machen', action: () => handleToggleVisibility(token) },
+                    { label: '📋 Kopieren', action: () => handleCopyTokens() },
+                    { label: clipboardTokens.length > 0 ? `📋 Einfügen (${clipboardTokens.length})` : '📋 Einfügen', action: () => handlePasteTokens(), disabled: clipboardTokens.length === 0 },
+                    { label: token.locked ? '🔓 Entsperren' : '🔒 Sperren', action: () => handleToggleLock(token) },
+                    { label: '🏷 Markierung', action: null, submenu: true, submenuType: 'marker' },
                     { label: '⬆️ nach vorne', action: () => { handleUpdate(token.id, { zIndex: token.zIndex + 1 }); closeContextMenu() } },
-                    { label: '⬇ï¸ nach hinten', action: () => { handleUpdate(token.id, { zIndex: Math.max(0, token.zIndex - 1) }); closeContextMenu() } },
+                    { label: '⬇️ nach hinten', action: () => { handleUpdate(token.id, { zIndex: Math.max(0, token.zIndex - 1) }); closeContextMenu() } },
                     { label: '⏫ ganz nach vorne', action: () => { const maxZ = Math.max(...tokens.map(t => t.zIndex), 0); handleUpdate(token.id, { zIndex: maxZ + 1 }); closeContextMenu() } },
                     null,
                     { label: '❌ Löschen', action: () => handleDelete(token.id), danger: true },
@@ -1122,7 +1122,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                         { value: 'party', label: '🎭® Spieler', color: '#22c55e' },
                         { value: 'enemy', label: '⚔️ Gegner', color: '#ef4444' },
                         { value: 'neutral', label: '⚖️ Neutral', color: '#f59e0b' },
-                        { value: 'friendly', label: 'ðŸ¤ Freundlich', color: '#3b82f6' },
+                        { value: 'friendly', label: '🤝 Freundlich', color: '#3b82f6' },
                       ]
                       return (
                         <div key={i}>
@@ -1150,7 +1150,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                             onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
                             onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
                           >
-                            {isFaction ? 'ðŸ· Fraktion' : isStatus ? '⚔️ Zustände' : 'ðŸ· Markierung'} {isSubOpen ? '▲' : '–¶'}
+                            {isFaction ? '🏷 Fraktion' : isStatus ? '⚔️ Zustände' : '🏷 Markierung'} {isSubOpen ? '▲' : '▼'}
                           </button>
                           {isSubOpen && isFaction && (
                             <div style={{ background: 'var(--bg-elevated)', padding: '2px 0' }}>
@@ -1423,10 +1423,10 @@ const TokenNode = memo(function TokenNode({
 
         {/* Status badges (rotate with token) */}
         {!token.visibleToPlayers && (
-          <Text x={r - 14} y={-r - 2} text="ðŸ™ˆ" fontSize={12} listening={false} />
+          <Text x={r - 14} y={-r - 2} text="🙈" fontSize={12} listening={false} />
         )}
         {token.locked && (
-          <Text x={-r} y={-r - 2} text="ðŸ”’" fontSize={10} listening={false} />
+          <Text x={-r} y={-r - 2} text="🔒" fontSize={10} listening={false} />
         )}
         {token.ac != null && (
           <>

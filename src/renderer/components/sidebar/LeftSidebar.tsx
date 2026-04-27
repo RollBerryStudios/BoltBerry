@@ -566,6 +566,12 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
   const [renaming, setRenaming] = useState(false)
   const [renameValue, setRenameValue] = useState(map.name)
   const inputRef = useRef<HTMLInputElement>(null)
+  // Guards against double-commit when both Enter and the unmount-blur
+  // fire `commitRename` for the same edit. Without this, the second
+  // call would issue a redundant IPC + setActiveMaps round-trip and,
+  // on a slow main process, race with the first call's optimistic
+  // store update.
+  const committedRef = useRef(false)
 
   useEffect(() => {
     if (autoRename) {
@@ -574,21 +580,41 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
     }
   }, [autoRename])
 
+  // Sync renameValue with the prop when the map is renamed elsewhere
+  // (workspace, command palette, etc.) and we're not currently editing.
+  // Without this, the local draft would shadow the canonical name on
+  // the next rename attempt.
+  useEffect(() => {
+    if (!renaming) setRenameValue(map.name)
+  }, [map.name, renaming])
+
   useEffect(() => {
     if (renaming) {
-      setTimeout(() => inputRef.current?.select(), 0)
+      committedRef.current = false
+      // requestAnimationFrame is more reliable than setTimeout(0) for
+      // post-mount focus; the input is guaranteed to be in the DOM by
+      // the next frame.
+      requestAnimationFrame(() => inputRef.current?.select())
     }
   }, [renaming])
 
   async function commitRename() {
+    if (committedRef.current) return
+    committedRef.current = true
     const trimmed = renameValue.trim() || map.name
     setRenaming(false)
     onAutoRenameDone?.()
     if (!window.electronAPI) return
     if (trimmed === map.name) return
-    await window.electronAPI.maps.rename(map.id, trimmed)
-    const { activeMaps, setActiveMaps } = useCampaignStore.getState()
-    setActiveMaps(activeMaps.map((m) => m.id === map.id ? { ...m, name: trimmed } : m))
+    try {
+      await window.electronAPI.maps.rename(map.id, trimmed)
+      const { activeMaps, setActiveMaps } = useCampaignStore.getState()
+      setActiveMaps(activeMaps.map((m) => m.id === map.id ? { ...m, name: trimmed } : m))
+    } catch (err) {
+      console.error('[LeftSidebar] map rename failed:', err)
+      showToast(`Karte konnte nicht umbenannt werden: ${formatError(err)}`, 'error')
+      setRenameValue(map.name)
+    }
   }
 
   async function handleDelete() {
@@ -703,14 +729,14 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
             disabled={index === 0}
             onClick={(e) => { e.stopPropagation(); onReorder(map.id, 'up') }}
             title="Nach oben"
-          >–²</button>
+          >↑</button>
           <button
             className="btn btn-ghost"
             style={{ padding: '0 4px', fontSize: 10, lineHeight: '14px', minHeight: 14 }}
             disabled={index === total - 1}
             onClick={(e) => { e.stopPropagation(); onReorder(map.id, 'down') }}
             title="Nach unten"
-          >–¼</button>
+          >↓</button>
         </div>
       )}
     </div>

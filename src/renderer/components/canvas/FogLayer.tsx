@@ -357,6 +357,20 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
           }
           pushFogCommand(op)
         }
+      } else if (detail.type === 'revealRoom' || detail.type === 'coverRoom') {
+        // RoomPanel → reveal/cover the polygon of the selected room.
+        // The points come pre-flattened ([x0, y0, x1, y1, ...]) in
+        // map-image coordinates so we can drop them straight into a
+        // polygon op + go through the canonical pushFogCommand path
+        // (paints, persists, broadcasts, undo).
+        const roomDetail = detail as { type: string; points: number[] }
+        if (!Array.isArray(roomDetail.points) || roomDetail.points.length < 6) return
+        const op: FogOperation = {
+          type: detail.type === 'revealRoom' ? 'reveal' : 'cover',
+          shape: 'polygon',
+          points: roomDetail.points,
+        }
+        pushFogCommand(op)
       }
     }
     window.addEventListener('fog:action', handler)

@@ -51,7 +51,7 @@ const STATUS_EFFECTS = [
   { id: 'unconscious',   icon: '💤', label: 'Bewusstlos' },
   { id: 'advantage',     icon: '▲', label: 'Vorteil' },
   { id: 'disadvantage',  icon: '▼', label: 'Nachteil' },
-  { id: 'concentrating', icon: '🎭¯', label: 'Konzentration' },
+  { id: 'concentrating', icon: '🎭', label: 'Konzentration' },
   { id: 'blessed',       icon: '✨', label: 'Gesegnet' },
   { id: 'cursed',        icon: '🔮', label: 'Verflucht' },
   { id: 'hasted',        icon: '⚡', label: 'Gehetzt' },
@@ -80,7 +80,7 @@ function SectionHeader({ title, open, onToggle }: { title: string; open: boolean
         textAlign: 'left',
       }}
     >
-      <span style={{ fontSize: 10 }}>{open ? '–¾' : '▸'}</span>
+      <span style={{ fontSize: 10 }}>{open ? '▾' : '▸'}</span>
       {title}
     </button>
   )
@@ -385,7 +385,7 @@ export function TokenPanel() {
               </div>
 
               <span style={{ fontSize: 10, color: token.visibleToPlayers ? 'var(--success)' : 'var(--text-muted)' }}>
-                {token.visibleToPlayers ? 'ðŸ‘' : 'ðŸ™ˆ'}
+                {token.visibleToPlayers ? '👁' : '🙈'}
               </span>
             </div>
           ))
@@ -491,7 +491,7 @@ export function TokenPanel() {
                   style={{ fontSize: 'var(--text-xs)', marginLeft: 'auto' }}
                   onClick={() => handleUpdate(selected.id, { visibleToPlayers: !selected.visibleToPlayers })}
                 >
-                  {selected.visibleToPlayers ? 'ðŸ‘' : 'ðŸ™ˆ'}
+                  {selected.visibleToPlayers ? '👁' : '🙈'}
                 </button>
               </div>
               {/* Faction selector */}
@@ -500,10 +500,10 @@ export function TokenPanel() {
                 <select className="input" value={selected.faction}
                   onChange={(e) => handleUpdate(selected.id, { faction: e.target.value })}
                   style={{ width: 'auto' }}>
-                  <option value="party">ðŸŸ¢ Spieler</option>
-                  <option value="enemy">ðŸ”´ Gegner</option>
-                  <option value="neutral">ðŸŸ¡ Neutral</option>
-                  <option value="friendly">ðŸ”µ Freundlich</option>
+                  <option value="party">🟢 Spieler</option>
+                  <option value="enemy">🔴 Gegner</option>
+                  <option value="neutral">🟡 Neutral</option>
+                  <option value="friendly">🔵 Freundlich</option>
                 </select>
               </div>
               {/* Quick initiative add */}
@@ -583,7 +583,7 @@ export function TokenPanel() {
                   style={{ fontSize: 'var(--text-xs)', color: selected.locked ? 'var(--warning)' : undefined }}
                   onClick={() => handleUpdate(selected.id, { locked: !selected.locked })}
                 >
-                  {selected.locked ? 'ðŸ”’' : 'ðŸ”“'}
+                  {selected.locked ? '🔒' : '🔓'}
                 </button>
               </div>
               {/* Marker ring */}
@@ -627,7 +627,7 @@ export function TokenPanel() {
                     }}
                     onClick={() => handleUpdate(selected.id, { lightRadius: lightOn ? 0 : 5, lightColor: color })}
                   >
-                    ðŸ’¡ Lichtquelle {lightOn ? 'an' : 'aus'}
+                    💡 Lichtquelle {lightOn ? 'an' : 'aus'}
                   </button>
                 </div>
                 {lightOn && (
@@ -661,7 +661,7 @@ export function TokenPanel() {
                       </div>
                     </div>
                     <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>
-                      <span style={{ color, textShadow: `0 0 6px ${color}` }}>—‹</span> Radius {radius} Felder
+                      <span style={{ color, textShadow: `0 0 6px ${color}` }}>●</span> Radius {radius} Felder
                     </div>
                   </>
                 )}
@@ -946,7 +946,7 @@ function LibraryPicker({
                 textTransform: 'capitalize',
               }}
             >
-              {c === 'monster' ? '👹 Monster' : c === 'player' ? 'ðŸ§ Spieler' : '🧑 NSC'}
+              {c === 'monster' ? '👹 Monster' : c === 'player' ? '🧝 Spieler' : '🧑 NSC'}
             </button>
           ))}
         </div>

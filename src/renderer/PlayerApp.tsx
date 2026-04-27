@@ -90,7 +90,18 @@ export default function PlayerApp() {
   const pointerHideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
-    const onResize = () => setSize({ w: window.innerWidth, h: window.innerHeight })
+    const reportSize = (w: number, h: number) => {
+      try { window.playerAPI?.reportWindowSize?.({ w, h }) } catch { /* preload may not be ready */ }
+    }
+    const onResize = () => {
+      const w = window.innerWidth
+      const h = window.innerHeight
+      setSize({ w, h })
+      reportSize(w, h)
+    }
+    // Initial report so the DM-side Player Control Mode rect can lock
+    // to this aspect ratio immediately on connect.
+    reportSize(window.innerWidth, window.innerHeight)
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
   }, [])

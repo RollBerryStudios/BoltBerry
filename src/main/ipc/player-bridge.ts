@@ -189,4 +189,13 @@ export function registerPlayerBridgeHandlers(): void {
     if (!isFromDM(event)) return
     safeSendToPlayer(IPC.PLAYER_WALLS, walls)
   })
+
+  // Player → DM: window-size report. The player window publishes its
+  // inner dimensions on connect and on every resize; the DM uses the
+  // aspect ratio to lock the Player Control Mode rectangle so what the
+  // DM frames is exactly what the players see (no letterbox).
+  ipcMain.on(IPC.PLAYER_WINDOW_SIZE, (event, size: { w: number; h: number }) => {
+    if (!isFromPlayer(event)) return
+    safeSendToDM(IPC.DM_PLAYER_WINDOW_SIZE, size)
+  })
 }
