@@ -249,10 +249,18 @@ describe('Migration chain', () => {
 
   it('V37→V38 creates tracks + track_channel_assignments + extends slots', () => {
     const sql = MIGRATE_V37_TO_V38
-    expect(sql).toMatch(/CREATE\s+TABLE\s+tracks\b/i)
-    expect(sql).toMatch(/CREATE\s+TABLE\s+track_channel_assignments\b/i)
+    // Idempotency: every CREATE / DROP must use IF [NOT] EXISTS so the
+    // migration survives the case where CREATE_TABLES_SQL pre-created
+    // the v38 tables on the same launch (CREATE_TABLES_SQL runs *before*
+    // migrations) — the symptom that hit Windows installers as
+    // "table tracks already exists" on first upgrade.
+    expect(sql).toMatch(/CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\s+tracks\b/i)
+    expect(sql).toMatch(/CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\s+track_channel_assignments\b/i)
     expect(sql).toMatch(/UNIQUE\s*\(\s*campaign_id\s*,\s*path\s*\)/i)
     expect(sql).toMatch(/UNIQUE\s*\(\s*track_id\s*,\s*channel\s*\)/i)
+    // Indexes also need IF NOT EXISTS — same root cause.
+    expect(sql).toMatch(/CREATE\s+INDEX\s+IF\s+NOT\s+EXISTS\s+idx_tracks_campaign_id\b/i)
+    expect(sql).toMatch(/CREATE\s+INDEX\s+IF\s+NOT\s+EXISTS\s+idx_assignments_track\b/i)
     // Backfill must stage tracks before assignments so the join below
     // resolves; assert the required statement order textually.
     const trackInsertIdx = sql.search(/INSERT\s+OR\s+IGNORE\s+INTO\s+tracks/i)
@@ -263,8 +271,9 @@ describe('Migration chain', () => {
     expect(sql).toMatch(/ALTER\s+TABLE\s+audio_board_slots\s+ADD\s+COLUMN\s+icon_path\s+TEXT/i)
     expect(sql).toMatch(/ALTER\s+TABLE\s+audio_board_slots\s+ADD\s+COLUMN\s+volume\s+REAL\s+NOT\s+NULL\s+DEFAULT\s+1\.0/i)
     expect(sql).toMatch(/ALTER\s+TABLE\s+audio_board_slots\s+ADD\s+COLUMN\s+is_loop\s+INTEGER\s+NOT\s+NULL\s+DEFAULT\s+0/i)
-    // Old table dropped — single source of truth for music data.
-    expect(sql).toMatch(/DROP\s+TABLE\s+channel_playlist/i)
+    // Old table dropped — IF EXISTS so a partial-failure re-run doesn't
+    // trip on a missing table.
+    expect(sql).toMatch(/DROP\s+TABLE\s+IF\s+EXISTS\s+channel_playlist/i)
   })
 
   it('CREATE_TABLES_SQL for a fresh install ships the v38 audio schema', () => {

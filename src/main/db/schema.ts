@@ -923,13 +923,21 @@ UPDATE schema_version SET version = 37;
 // uploaded artwork), `volume`, and `is_loop` for the inline SFX
 // editor — the v37 schema only had `emoji + title + audio_path`.
 //
+// Idempotency note: every CREATE / DROP uses IF NOT EXISTS / IF EXISTS
+// so re-running the migration after a partial failure (or against a
+// DB whose CREATE_TABLES_SQL pre-created the v38 tables on a launch
+// that aborted before bumping schema_version) is a no-op for the
+// table-creation parts. The INSERT OR IGNORE backfills are already
+// safe to re-run; the ALTER TABLE statements rely on the runner's
+// "duplicate column name" self-heal in applyMigration.
+//
 // Backfill is loss-tolerant: GROUP BY collapses true duplicates and
 // keeps the smallest position. The legacy `channel_playlist` table
 // is dropped at the end so the new tables are the single source of
 // truth (the asset-cleanup handler and export-import already had to
 // be updated to read from `tracks`).
 export const MIGRATE_V37_TO_V38 = `
-CREATE TABLE tracks (
+CREATE TABLE IF NOT EXISTS tracks (
   id          INTEGER PRIMARY KEY AUTOINCREMENT,
   campaign_id INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
   path        TEXT    NOT NULL,
@@ -939,37 +947,36 @@ CREATE TABLE tracks (
   created_at  TEXT    NOT NULL DEFAULT (datetime('now')),
   UNIQUE (campaign_id, path)
 );
-CREATE INDEX idx_tracks_campaign_id ON tracks(campaign_id);
-CREATE INDEX idx_tracks_soundtrack ON tracks(campaign_id, soundtrack);
+CREATE INDEX IF NOT EXISTS idx_tracks_campaign_id ON tracks(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_tracks_soundtrack ON tracks(campaign_id, soundtrack);
 
-CREATE TABLE track_channel_assignments (
+CREATE TABLE IF NOT EXISTS track_channel_assignments (
   id        INTEGER PRIMARY KEY AUTOINCREMENT,
   track_id  INTEGER NOT NULL REFERENCES tracks(id) ON DELETE CASCADE,
   channel   TEXT    NOT NULL CHECK (channel IN ('track1','track2','combat')),
   position  INTEGER NOT NULL DEFAULT 0,
   UNIQUE (track_id, channel)
 );
-CREATE INDEX idx_assignments_track ON track_channel_assignments(track_id);
-CREATE INDEX idx_assignments_channel ON track_channel_assignments(channel, position);
+CREATE INDEX IF NOT EXISTS idx_assignments_track ON track_channel_assignments(track_id);
+CREATE INDEX IF NOT EXISTS idx_assignments_channel ON track_channel_assignments(channel, position);
 
--- Backfill 1: deduplicate channel_playlist into tracks. The SELECT
--- collapses by (campaign_id, path); MIN(file_name) is just a stable
--- pick so the run is reproducible.
+-- Backfill is guarded against the legacy table having been dropped
+-- already (e.g. on a re-run after the CREATE-failure case). The
+-- INSERT-from-SELECT does nothing when channel_playlist is gone or
+-- empty, so it's safe regardless.
 INSERT OR IGNORE INTO tracks (campaign_id, path, file_name)
 SELECT campaign_id, path, MIN(file_name)
 FROM channel_playlist
 WHERE path IS NOT NULL AND path != ''
 GROUP BY campaign_id, path;
 
--- Backfill 2: reconstruct assignments. GROUP BY (track_id, channel)
--- collapses any v37 duplicates so the new UNIQUE constraint holds.
 INSERT INTO track_channel_assignments (track_id, channel, position)
 SELECT t.id, cp.channel, MIN(cp.position)
 FROM channel_playlist cp
 JOIN tracks t ON t.campaign_id = cp.campaign_id AND t.path = cp.path
 GROUP BY t.id, cp.channel;
 
-DROP TABLE channel_playlist;
+DROP TABLE IF EXISTS channel_playlist;
 
 ALTER TABLE audio_board_slots ADD COLUMN icon_path TEXT;
 ALTER TABLE audio_board_slots ADD COLUMN volume    REAL    NOT NULL DEFAULT 1.0;

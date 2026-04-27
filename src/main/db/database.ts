@@ -110,24 +110,48 @@ function pruneOldBackups(dbPath: string, keep: number): void {
   }
 }
 
-// Self-healing migration runner. Applies the migration SQL in one shot.
-// When SQLite reports "duplicate column name: X" — which means an
-// ALTER TABLE ADD COLUMN in the migration hit a column that already
-// exists — we re-run the migration with the ALTER TABLE statements
-// stripped. This recovers from older dev installations that advanced the
-// schema by hand without bumping schema_version, and is a no-op on clean
-// DBs. Any other SQL error still aborts the whole migration transaction.
+// Self-healing migration runner. Applies the migration SQL in one
+// shot, then retries with offending statements stripped if SQLite
+// reports a known-recoverable error.
+//
+// Recovery cases:
+//   "duplicate column name: X" — an ALTER TABLE ADD COLUMN hit a
+//       column that already exists. Recovers older dev installations
+//       that advanced the schema by hand without bumping schema_version.
+//   "table X already exists"   — a CREATE TABLE hit a table the
+//       fresh-install CREATE_TABLES_SQL pre-created on the same launch
+//       (CREATE_TABLES_SQL runs *before* migrations, so a v(N+1) table
+//       definition added there will be in the DB by the time the
+//       v(N) → v(N+1) migration tries to CREATE it). Equally fires
+//       if a previous migration attempt failed late and committed
+//       partial CREATEs to disk before the rollback could catch up.
+//   "index X already exists"   — same root cause as table-exists.
+//
+// In every case we strip the offending DDL kind from the SQL and
+// re-run; the data-mutation statements (INSERT OR IGNORE, etc.) are
+// authored to be idempotent so re-running them is safe. Any other
+// SQL error still aborts the whole migration transaction.
 function applyMigration(db: Database.Database, sql: string): void {
   try {
     db.exec(sql)
+    return
   } catch (err) {
     const msg = (err instanceof Error ? err.message : String(err)).toLowerCase()
-    if (!msg.includes('duplicate column name')) throw err
-    const withoutAlters = sql
+    const stripPatterns: RegExp[] = []
+    if (msg.includes('duplicate column name')) {
+      stripPatterns.push(/^\s*ALTER\s+TABLE[^;]*ADD\s+COLUMN/i)
+    }
+    if (msg.includes('already exists')) {
+      // Strip any CREATE TABLE / CREATE INDEX (with or without UNIQUE
+      // / IF NOT EXISTS) so the data-migration parts can still run.
+      stripPatterns.push(/^\s*CREATE\s+(?:UNIQUE\s+)?(?:TABLE|INDEX)\b/i)
+    }
+    if (stripPatterns.length === 0) throw err
+    const cleaned = sql
       .split(';')
-      .filter((s) => !/^\s*ALTER\s+TABLE[^;]*ADD\s+COLUMN/i.test(s))
+      .filter((s) => !stripPatterns.some((re) => re.test(s)))
       .join(';')
-    db.exec(withoutAlters)
+    db.exec(cleaned)
   }
 }
 
