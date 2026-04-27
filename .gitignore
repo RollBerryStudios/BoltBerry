@@ -43,6 +43,11 @@ ehthumbs.db
 coverage/
 .nyc_output/
 
+# Playwright E2E artefacts
+test-results/
+playwright-report/
+playwright/.cache/
+
 # Temporary files
 *.tmp
 *.temp
