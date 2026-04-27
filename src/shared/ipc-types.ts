@@ -192,11 +192,22 @@ export const IPC = {
   AUDIO_BOARDS_UPSERT_SLOT: 'audio-boards:upsert-slot',
   AUDIO_BOARDS_DELETE_SLOT: 'audio-boards:delete-slot',
 
-  // Channel playlist — per-campaign saved tracks for the three
-  // audio channels (track1 / track2 / combat).
+  // Channel playlist — legacy v37 shape, kept as a compat adapter.
+  // Backed by the v38 `tracks` + `track_channel_assignments` tables.
   CHANNEL_PLAYLIST_LIST_BY_CAMPAIGN: 'channel-playlist:list-by-campaign',
   CHANNEL_PLAYLIST_ADD: 'channel-playlist:add',
   CHANNEL_PLAYLIST_REMOVE: 'channel-playlist:remove',
+
+  // Tracks domain (v38) — canonical audio-library API. Replaces the
+  // v37 channel-playlist model where a track-row was a channel-list-
+  // entry; in v38 a track is its own entity, channel memberships are
+  // a separate join table the MusicLibraryPanel renders as toggle
+  // badges.
+  TRACKS_LIST_BY_CAMPAIGN:    'tracks:list-by-campaign',
+  TRACKS_CREATE:              'tracks:create',
+  TRACKS_UPDATE:              'tracks:update',
+  TRACKS_DELETE:              'tracks:delete',
+  TRACKS_TOGGLE_ASSIGNMENT:   'tracks:toggle-assignment',
 
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
@@ -544,6 +555,13 @@ export interface RecentMapEntry {
 
 export type AudioChannelKey = 'track1' | 'track2' | 'combat'
 
+/**
+ * Legacy adapter shape — what the renderer still sees from
+ * `channelPlaylist.listByCampaign`. The `id` here is now the
+ * `track_channel_assignments.id` (surrogate key on the v38 join table)
+ * so the renderer can still call `channelPlaylist.remove(id)` to drop
+ * a single channel-membership without touching the underlying track.
+ */
 export interface ChannelPlaylistEntry {
   id: number
   channel: AudioChannelKey
@@ -551,11 +569,41 @@ export interface ChannelPlaylistEntry {
   fileName: string
 }
 
+/**
+ * v38 canonical shape: one track in a campaign's audio library. The
+ * `assignments` array is empty for unassigned tracks; otherwise it
+ * lists every channel this track is currently a member of.
+ */
+export interface TrackRecord {
+  id: number
+  campaignId: number
+  path: string
+  fileName: string
+  /** 1:N grouping ("Combat", "Wald-Ambient", …). NULL = uncategorised. */
+  soundtrack: string | null
+  /** Cached duration in seconds. NULL until the renderer plays the
+   *  track once and reports its duration back. */
+  durationS: number | null
+  /** Channel memberships. Order is stable per channel via the
+   *  `position` column; the renderer can reorder via dedicated
+   *  IPC if needed (Commit 2 will add that). */
+  assignments: AudioChannelKey[]
+}
+
 export interface AudioBoardSlot {
   slotNumber: number   // 0–9
   emoji: string
   title: string
   audioPath: string | null
+  /** v38: per-slot custom-icon image path (PNG / SVG / WebP). NULL
+   *  falls back to `emoji`. */
+  iconPath: string | null
+  /** v38: per-slot volume 0–1. Multiplies with the global SFX
+   *  volume. Default 1.0. */
+  volume: number
+  /** v38: per-slot loop flag. When true the SFX restarts from the
+   *  beginning when it finishes. Default false. */
+  isLoop: boolean
 }
 
 export interface AudioBoardRecord {

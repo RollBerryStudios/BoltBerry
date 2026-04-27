@@ -12,7 +12,7 @@ import { DEFAULT_GRID_COLOR } from '../../shared/defaults'
 import { getDb, getCustomUserDataPath } from '../db/database'
 import { validateMagicBytes } from '../utils/magic-bytes'
 
-const EXPORT_VERSION = 9
+const EXPORT_VERSION = 10
 
 const MAX_IMPORT_BYTES = 2 * 1024 * 1024 * 1024 // 2 GB cumulative uncompressed
 const MAX_IMPORT_ENTRIES = 50_000
@@ -31,13 +31,20 @@ const MAX_IMPORT_ENTRIES = 50_000
 type ExportMigration = (data: Record<string, unknown>) => Record<string, unknown>
 
 const EXPORT_MIGRATIONS: Record<number, ExportMigration> = {
-  // Example shape:
-  //   8: (d) => ({ ...d, audioBoards: (d.audioBoards as unknown[] | undefined) ?? [] }),
+  // v9 → v10: schema v37 → v38. Old exports carry no `tracks` array
+  // (the v37 channel_playlist data wasn't exported at all — see
+  // pre-existing oversight, not a regression). Newer exports carry
+  // a populated `tracks` block; older archives just get an empty
+  // library on import, equivalent to never having added any tracks
+  // to channels in that campaign.
   //
-  // Currently EXPORT_VERSION === 9 and every shipped export since the
-  // schema reached v9 has been written at v9, so there is nothing to
-  // migrate forward yet. The table exists so future bumps have an
-  // obvious home for their migration.
+  // The slot extensions (icon_path / volume / is_loop) default at
+  // the DB layer when an old slot row is reinserted, so we don't
+  // need to touch existing slot JSON shapes here.
+  9: (d) => ({
+    ...d,
+    tracks: (d.tracks as unknown[] | undefined) ?? [],
+  }),
 }
 
 function applyExportMigrations(data: Record<string, unknown>): Record<string, unknown> {
@@ -425,8 +432,24 @@ interface CampaignExport {
   audioBoards: Array<{
     name: string; sortOrder: number
     slots: Array<{
-      slotNumber: number; emoji: string | null; title: string | null; audioPath: string | null
+      slotNumber: number
+      emoji: string | null
+      title: string | null
+      audioPath: string | null
+      iconPath: string | null
+      volume: number
+      isLoop: boolean
     }>
+  }>
+  /** v38 audio library. Each track may belong to multiple channels
+   *  via `assignments`; `assignments` empty means an unattached
+   *  library entry (still kept on import). */
+  tracks: Array<{
+    path: string
+    fileName: string
+    soundtrack: string | null
+    durationS: number | null
+    assignments: Array<{ channel: 'track1' | 'track2' | 'combat'; position: number }>
   }>
 }
 
@@ -518,14 +541,62 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
 
   const boardRows = (db.prepare(`SELECT * FROM audio_boards WHERE campaign_id = ? ORDER BY sort_order`).all(campaignId) as any[])
   const audioBoards = boardRows.map((b: any) => {
-    const slots = (db.prepare(`SELECT slot_number, emoji, title, audio_path FROM audio_board_slots WHERE board_id = ? ORDER BY slot_number`).all(b.id) as any[]).map((s: any) => ({
+    const slots = (db.prepare(
+      `SELECT slot_number, emoji, title, audio_path, icon_path, volume, is_loop
+       FROM audio_board_slots WHERE board_id = ? ORDER BY slot_number`
+    ).all(b.id) as any[]).map((s: any) => ({
       slotNumber: s.slot_number,
       emoji:      s.emoji ?? null,
       title:      s.title ?? null,
       audioPath:  s.audio_path ?? null,
+      iconPath:   s.icon_path ?? null,
+      volume:     typeof s.volume === 'number' ? s.volume : 1,
+      isLoop:     s.is_loop === 1,
     }))
     return { name: b.name, sortOrder: b.sort_order, slots }
   })
+
+  // v38 track library. We pull tracks + their assignments in two
+  // queries (no per-track loop) and join client-side, same pattern as
+  // audio_boards above.
+  const trackRows = db
+    .prepare(
+      `SELECT id, path, file_name, soundtrack, duration_s
+       FROM tracks WHERE campaign_id = ? ORDER BY soundtrack IS NULL, soundtrack, file_name`,
+    )
+    .all(campaignId) as Array<{
+      id: number
+      path: string
+      file_name: string
+      soundtrack: string | null
+      duration_s: number | null
+    }>
+  const assignmentRows = trackRows.length > 0
+    ? db
+      .prepare(
+        `SELECT track_id, channel, position FROM track_channel_assignments
+         WHERE track_id IN (${trackRows.map(() => '?').join(',')})
+         ORDER BY track_id, channel, position`,
+      )
+      .all(...trackRows.map((t) => t.id)) as Array<{
+        track_id: number
+        channel: 'track1' | 'track2' | 'combat'
+        position: number
+      }>
+    : []
+  const assignmentsByTrack = new Map<number, Array<{ channel: 'track1' | 'track2' | 'combat'; position: number }>>()
+  for (const a of assignmentRows) {
+    const list = assignmentsByTrack.get(a.track_id) ?? []
+    list.push({ channel: a.channel, position: a.position })
+    assignmentsByTrack.set(a.track_id, list)
+  }
+  const tracks = trackRows.map((t) => ({
+    path: t.path,
+    fileName: t.file_name,
+    soundtrack: t.soundtrack,
+    durationS: t.duration_s,
+    assignments: assignmentsByTrack.get(t.id) ?? [],
+  }))
 
   return {
     version: EXPORT_VERSION,
@@ -626,6 +697,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
     encounters,
     characterSheets,
     audioBoards,
+    tracks,
   }
 }
 
@@ -649,7 +721,13 @@ function collectAssetPaths(data: CampaignExport): string[] {
   }
   for (const h of data.handouts) if (h.imagePath) paths.push(h.imagePath)
   for (const b of data.audioBoards ?? []) {
-    for (const s of b.slots) if (s.audioPath) paths.push(s.audioPath)
+    for (const s of b.slots) {
+      if (s.audioPath) paths.push(s.audioPath)
+      if (s.iconPath) paths.push(s.iconPath)
+    }
+  }
+  for (const t of data.tracks ?? []) {
+    if (t.path) paths.push(t.path)
   }
   // Character portraits live under `assets/portrait/` — bundle them
   // alongside tokens/maps so an exported campaign carries the PNGs.
@@ -677,7 +755,11 @@ function remapPaths(data: CampaignExport, pathMap: Map<string, string>) {
   for (const b of data.audioBoards ?? []) {
     for (const s of b.slots) {
       if (s.audioPath) s.audioPath = pathMap.get(s.audioPath) ?? s.audioPath
+      if (s.iconPath) s.iconPath = pathMap.get(s.iconPath) ?? s.iconPath
     }
+  }
+  for (const t of data.tracks ?? []) {
+    if (t.path) t.path = pathMap.get(t.path) ?? t.path
   }
   for (const cs of data.characterSheets ?? []) {
     if (cs.portraitPath && !cs.portraitPath.startsWith('data:')) {
@@ -819,9 +901,46 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
       ).run(campaignId, b.name, b.sortOrder ?? 0)
       const boardId = Number(boardResult.lastInsertRowid)
       for (const s of b.slots ?? []) {
+        // v9 archives have only emoji/title/audioPath; v10 archives
+        // also carry iconPath/volume/isLoop. Defaults match the
+        // schema-level DEFAULT clauses so v9 archives import cleanly.
+        const slotIcon = (s as any).iconPath ?? null
+        const slotVolume = typeof (s as any).volume === 'number' ? (s as any).volume : 1
+        const slotLoop = (s as any).isLoop === true ? 1 : 0
         db.prepare(
-          `INSERT INTO audio_board_slots (board_id, slot_number, emoji, title, audio_path) VALUES (?, ?, ?, ?, ?)`
-        ).run(boardId, s.slotNumber, s.emoji ?? null, s.title ?? null, s.audioPath ?? null)
+          `INSERT INTO audio_board_slots
+             (board_id, slot_number, emoji, title, audio_path, icon_path, volume, is_loop)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+        ).run(boardId, s.slotNumber, s.emoji ?? null, s.title ?? null, s.audioPath ?? null,
+              slotIcon, slotVolume, slotLoop)
+      }
+    }
+
+    // v38 track library + channel assignments. Inserting tracks first
+    // so we can resolve track ids when re-creating the assignments.
+    for (const t of data.tracks ?? []) {
+      const safePath = typeof t.path === 'string' && t.path ? t.path : null
+      if (!safePath) continue
+      const safeName = typeof t.fileName === 'string' && t.fileName ? t.fileName : safePath
+      const soundtrack = typeof t.soundtrack === 'string' && t.soundtrack.trim()
+        ? t.soundtrack.trim()
+        : null
+      const duration = typeof t.durationS === 'number' && Number.isFinite(t.durationS)
+        ? t.durationS
+        : null
+      const trackResult = db.prepare(
+        `INSERT OR IGNORE INTO tracks (campaign_id, path, file_name, soundtrack, duration_s)
+         VALUES (?, ?, ?, ?, ?)`
+      ).run(campaignId, safePath, safeName, soundtrack, duration)
+      const trackId = trackResult.changes > 0
+        ? Number(trackResult.lastInsertRowid)
+        : (db.prepare(`SELECT id FROM tracks WHERE campaign_id = ? AND path = ?`).get(campaignId, safePath) as { id: number }).id
+      for (const a of t.assignments ?? []) {
+        if (a.channel !== 'track1' && a.channel !== 'track2' && a.channel !== 'combat') continue
+        db.prepare(
+          `INSERT OR IGNORE INTO track_channel_assignments (track_id, channel, position)
+           VALUES (?, ?, ?)`
+        ).run(trackId, a.channel, Number.isInteger(a.position) ? a.position : 0)
       }
     }
 

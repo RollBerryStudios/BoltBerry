@@ -375,7 +375,19 @@ function SlotEditor({ boardId, slot, slotIndex, onClose }: {
 
   async function handleSave() {
     if (!board) return
-    const updated: AudioBoardSlot = { slotNumber: slotIndex, emoji, title, audioPath }
+    // Preserve any v38 fields the existing slot already had (icon, volume,
+    // loop) — this legacy editor only knows emoji/title/audioPath. The
+    // ProfessionalSfxPanel from Commit 3 surfaces the new fields directly.
+    const existingSlot = board.slots?.find((s) => s.slotNumber === slotIndex)
+    const updated: AudioBoardSlot = {
+      slotNumber: slotIndex,
+      emoji,
+      title,
+      audioPath,
+      iconPath: existingSlot?.iconPath ?? null,
+      volume: existingSlot?.volume ?? 1,
+      isLoop: existingSlot?.isLoop ?? false,
+    }
     await window.electronAPI?.audioBoards.upsertSlot(boardId, updated).catch(console.error)
     // Rebuild slots array
     const newSlots = [...(board.slots ?? [])]

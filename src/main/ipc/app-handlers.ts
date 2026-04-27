@@ -654,7 +654,8 @@ export function registerAppHandlers(): void {
       pushRefs(db.prepare('SELECT portrait_path AS p FROM character_sheets').all() as Array<{ p: string | null }>)
       pushRefs(db.prepare('SELECT ambient_track_path AS p FROM maps').all() as Array<{ p: string | null }>)
       pushRefs(db.prepare('SELECT audio_path AS p FROM audio_board_slots').all() as Array<{ p: string | null }>)
-      pushRefs(db.prepare('SELECT path AS p FROM channel_playlist').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT path AS p FROM tracks').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT icon_path AS p FROM audio_board_slots').all() as Array<{ p: string | null }>)
       pushRefs(db.prepare('SELECT path AS p FROM assets').all() as Array<{ p: string | null }>)
 
       const orphans = allFiles.filter((f) => !referenced.has(f))

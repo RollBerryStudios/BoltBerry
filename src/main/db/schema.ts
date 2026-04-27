@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 37
+export const SCHEMA_VERSION = 38
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -397,7 +397,9 @@ CREATE TABLE IF NOT EXISTS audio_boards (
   sort_order  INTEGER NOT NULL DEFAULT 0
 );
 
--- Audio board slots (up to 10 per board)
+-- Audio board slots (up to 10 per board). v38 added per-slot icon
+-- upload, volume, and loop fields so the inline editor can keep all
+-- per-slot tuning local instead of forcing a global SFX volume.
 CREATE TABLE IF NOT EXISTS audio_board_slots (
   id          INTEGER PRIMARY KEY AUTOINCREMENT,
   board_id    INTEGER NOT NULL REFERENCES audio_boards(id) ON DELETE CASCADE,
@@ -405,6 +407,9 @@ CREATE TABLE IF NOT EXISTS audio_board_slots (
   emoji       TEXT,
   title       TEXT,
   audio_path  TEXT,
+  icon_path   TEXT,
+  volume      REAL    NOT NULL DEFAULT 1.0,
+  is_loop     INTEGER NOT NULL DEFAULT 0,
   UNIQUE(board_id, slot_number)
 );
 
@@ -464,19 +469,46 @@ CREATE TABLE IF NOT EXISTS user_wiki_entries (
 );
 CREATE INDEX IF NOT EXISTS idx_user_wiki_entries_kind ON user_wiki_entries(kind);
 
--- Multi-track audio playlists (DM pre-assigns several tracks per
--- channel; right-click the channel to swap the active one).
-CREATE TABLE IF NOT EXISTS channel_playlist (
+-- Track library (v38). A track row is one audio file in a campaign.
+-- Replaces the v37 channel_playlist table — the old "track lives in
+-- exactly one channel-playlist" model could not represent a single
+-- file being eligible on multiple channels (Music + Combat fallback,
+-- etc.). The MusicLibraryPanel surfaces this table directly as the
+-- campaigns audio library; the legacy three-channel-playlist UI now
+-- reads via the track_channel_assignments join below.
+CREATE TABLE IF NOT EXISTS tracks (
   id          INTEGER PRIMARY KEY AUTOINCREMENT,
   campaign_id INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
-  channel     TEXT    NOT NULL CHECK (channel IN ('track1','track2','combat')),
   path        TEXT    NOT NULL,
   file_name   TEXT    NOT NULL,
-  position    INTEGER NOT NULL DEFAULT 0,
-  created_at  TEXT    NOT NULL DEFAULT (datetime('now'))
+  -- 1:N grouping (e.g. "Combat", "Wald-Ambient"). NULL = uncategorised.
+  -- Not n:m — a track lives in exactly one soundtrack at a time.
+  soundtrack  TEXT,
+  -- Cached duration in seconds, populated lazily when a track first plays.
+  -- Lets the library list show track length without round-tripping
+  -- through <audio> metadata on every render.
+  duration_s  REAL,
+  created_at  TEXT    NOT NULL DEFAULT (datetime('now')),
+  UNIQUE (campaign_id, path)
 );
-CREATE INDEX IF NOT EXISTS idx_channel_playlist_campaign
-  ON channel_playlist(campaign_id, channel, position);
+CREATE INDEX IF NOT EXISTS idx_tracks_campaign_id ON tracks(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_tracks_soundtrack ON tracks(campaign_id, soundtrack);
+
+-- Track ↔ channel assignments (n:m). A track can be in any subset of
+-- {track1, track2, combat} simultaneously — that's the membership /
+-- "this track is available on this channel" relationship the
+-- MusicLibraryPanel's T1/T2/C toggle badges represent. Playback (which
+-- track is *currently active* on each channel) is a separate concept
+-- the renderer tracks in audioStore, not here.
+CREATE TABLE IF NOT EXISTS track_channel_assignments (
+  id        INTEGER PRIMARY KEY AUTOINCREMENT,
+  track_id  INTEGER NOT NULL REFERENCES tracks(id) ON DELETE CASCADE,
+  channel   TEXT    NOT NULL CHECK (channel IN ('track1','track2','combat')),
+  position  INTEGER NOT NULL DEFAULT 0,
+  UNIQUE (track_id, channel)
+);
+CREATE INDEX IF NOT EXISTS idx_assignments_track ON track_channel_assignments(track_id);
+CREATE INDEX IF NOT EXISTS idx_assignments_channel ON track_channel_assignments(channel, position);
 
 -- Schema version tracking (single-row enforced by PK constraint)
 CREATE TABLE IF NOT EXISTS schema_version (
@@ -871,6 +903,79 @@ CREATE TABLE IF NOT EXISTS channel_playlist (
 CREATE INDEX IF NOT EXISTS idx_channel_playlist_campaign
   ON channel_playlist(campaign_id, channel, position);
 UPDATE schema_version SET version = 37;
+`
+
+// Migration: v37 → v38 — track library + channel-assignment refactor.
+//
+// Splits the v37 `channel_playlist` table (a track *is* an entry in a
+// channel-specific list) into two normal-form tables:
+//   `tracks`                       — one row per audio file per campaign
+//   `track_channel_assignments`    — n:m membership in T1 / T2 / Combat
+//
+// Same data, different shape: a file that was duplicated in v37 because
+// the DM wanted it available on two channels collapses into one
+// `tracks` row plus two `track_channel_assignments` rows. The new
+// MusicLibraryPanel renders the `tracks` table directly as the
+// campaign's audio library, with the assignment toggles wired to the
+// join table.
+//
+// Also extends `audio_board_slots` with per-slot `icon_path` (custom
+// uploaded artwork), `volume`, and `is_loop` for the inline SFX
+// editor — the v37 schema only had `emoji + title + audio_path`.
+//
+// Backfill is loss-tolerant: GROUP BY collapses true duplicates and
+// keeps the smallest position. The legacy `channel_playlist` table
+// is dropped at the end so the new tables are the single source of
+// truth (the asset-cleanup handler and export-import already had to
+// be updated to read from `tracks`).
+export const MIGRATE_V37_TO_V38 = `
+CREATE TABLE tracks (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  campaign_id INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+  path        TEXT    NOT NULL,
+  file_name   TEXT    NOT NULL,
+  soundtrack  TEXT,
+  duration_s  REAL,
+  created_at  TEXT    NOT NULL DEFAULT (datetime('now')),
+  UNIQUE (campaign_id, path)
+);
+CREATE INDEX idx_tracks_campaign_id ON tracks(campaign_id);
+CREATE INDEX idx_tracks_soundtrack ON tracks(campaign_id, soundtrack);
+
+CREATE TABLE track_channel_assignments (
+  id        INTEGER PRIMARY KEY AUTOINCREMENT,
+  track_id  INTEGER NOT NULL REFERENCES tracks(id) ON DELETE CASCADE,
+  channel   TEXT    NOT NULL CHECK (channel IN ('track1','track2','combat')),
+  position  INTEGER NOT NULL DEFAULT 0,
+  UNIQUE (track_id, channel)
+);
+CREATE INDEX idx_assignments_track ON track_channel_assignments(track_id);
+CREATE INDEX idx_assignments_channel ON track_channel_assignments(channel, position);
+
+-- Backfill 1: deduplicate channel_playlist into tracks. The SELECT
+-- collapses by (campaign_id, path); MIN(file_name) is just a stable
+-- pick so the run is reproducible.
+INSERT OR IGNORE INTO tracks (campaign_id, path, file_name)
+SELECT campaign_id, path, MIN(file_name)
+FROM channel_playlist
+WHERE path IS NOT NULL AND path != ''
+GROUP BY campaign_id, path;
+
+-- Backfill 2: reconstruct assignments. GROUP BY (track_id, channel)
+-- collapses any v37 duplicates so the new UNIQUE constraint holds.
+INSERT INTO track_channel_assignments (track_id, channel, position)
+SELECT t.id, cp.channel, MIN(cp.position)
+FROM channel_playlist cp
+JOIN tracks t ON t.campaign_id = cp.campaign_id AND t.path = cp.path
+GROUP BY t.id, cp.channel;
+
+DROP TABLE channel_playlist;
+
+ALTER TABLE audio_board_slots ADD COLUMN icon_path TEXT;
+ALTER TABLE audio_board_slots ADD COLUMN volume    REAL    NOT NULL DEFAULT 1.0;
+ALTER TABLE audio_board_slots ADD COLUMN is_loop   INTEGER NOT NULL DEFAULT 0;
+
+UPDATE schema_version SET version = 38;
 `
 
 // Use the SCHEMA_VERSION constant directly so there's a single source of truth.
