@@ -23,7 +23,7 @@ async function logSessionTransition(next: 'session' | 'prep'): Promise<void> {
   }
 }
 
-export type ActiveTool = 'select' | 'fog-rect' | 'fog-polygon' | 'fog-cover' | 'fog-brush' | 'fog-brush-cover' | 'token' | 'atmosphere' | 'pointer' | 'measure-line' | 'measure-circle' | 'measure-cone' | 'draw-freehand' | 'draw-rect' | 'draw-circle' | 'draw-text' | 'wall-draw' | 'wall-door' | 'room'
+export type ActiveTool = 'select' | 'fog-rect' | 'fog-polygon' | 'fog-cover' | 'fog-brush' | 'fog-brush-cover' | 'token' | 'atmosphere' | 'pointer' | 'measure-line' | 'measure-circle' | 'measure-cone' | 'draw-freehand' | 'draw-rect' | 'draw-circle' | 'draw-text' | 'draw-erase' | 'wall-draw' | 'wall-door' | 'room'
 export type SidebarTab = 'tokens' | 'initiative' | 'notes' | 'handouts' | 'encounters' | 'rooms' | 'characters'
 export type WorkspaceTab = 'maps' | 'characters' | 'npcs' | 'audio' | 'sfx' | 'handouts' | 'notes'
 export type SidebarDock = 'scene' | 'content'

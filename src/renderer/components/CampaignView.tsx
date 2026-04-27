@@ -590,6 +590,12 @@ function MapCard({ map, index, total, onOpen, onRename, onDelete, onReorder }: {
   const { t } = useTranslation()
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState(map.name)
+  // Sync the draft when the map is renamed elsewhere (sidebar, command
+  // palette, …) and we aren't currently editing — without this, the
+  // local draft shadows the canonical name on the next edit attempt.
+  useEffect(() => {
+    if (!editing) setDraft(map.name)
+  }, [map.name, editing])
 
   function commitRename() {
     setEditing(false)

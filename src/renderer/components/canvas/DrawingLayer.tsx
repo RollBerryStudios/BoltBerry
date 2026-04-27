@@ -25,6 +25,7 @@ interface DrawingLayerProps {
 }
 
 const DRAWING_TOOLS = new Set<string>(['draw-freehand', 'draw-rect', 'draw-circle', 'draw-text'])
+const ERASE_TOOL = 'draw-erase'
 
 export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
   const activeTool = useUIStore((s) => s.activeTool)
@@ -130,6 +131,52 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
     setCurrentPath([])
   }
 
+  async function eraseDrawing(id: number) {
+    if (!window.electronAPI) return
+    const target = drawings.find((d) => d.id === id)
+    if (!target) return
+    try {
+      await window.electronAPI.drawings.delete(id)
+      setDrawings((prev) => prev.filter((d) => d.id !== id))
+      // No per-drawing delete IPC to the player; trigger a full
+      // re-broadcast so the player view drops the erased stroke.
+      useUIStore.getState().incrementDrawingClearTick()
+
+      // Push undo so the user can recover the stroke.
+      const original = { ...target }
+      let restoredId: number = original.id
+      useUndoStore.getState().pushCommand({
+        id: nextCommandId(),
+        label: `Zeichnung löschen`,
+        action: { type: 'drawing.delete', payload: { id: original.id } },
+        undo: async () => {
+          const recreated = await window.electronAPI?.drawings.create({
+            mapId,
+            type: original.type,
+            points: original.points,
+            color: original.color,
+            width: original.width,
+            text: original.text ?? null,
+          })
+          if (!recreated) return
+          restoredId = recreated.id
+          setDrawings((prev) => [...prev, {
+            id: recreated.id, type: recreated.type, points: recreated.points,
+            color: recreated.color, width: recreated.width, text: recreated.text ?? undefined,
+          }])
+          window.electronAPI?.sendDrawing({ id: restoredId, type: original.type, points: original.points, color: original.color, width: original.width, text: original.text })
+        },
+        redo: async () => {
+          await window.electronAPI?.drawings.delete(restoredId)
+          setDrawings((prev) => prev.filter((d) => d.id !== restoredId))
+          useUIStore.getState().incrementDrawingClearTick()
+        },
+      })
+    } catch (err) {
+      console.error('[DrawingLayer] eraseDrawing failed:', err)
+    }
+  }
+
   async function addDrawing(d: { type: DrawingType; points: number[]; color: string; width: number; text?: string }) {
     if (!window.electronAPI) return
     try {
@@ -185,12 +232,29 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
     }
   }
 
-  // Memoized rendered nodes: only recompute when drawings or transform changes,
-  // not on tool/color/currentPath changes.
+  // Memoized rendered nodes: only recompute when drawings, transform,
+  // or active-tool toggle (erase vs anything else) changes. The erase
+  // tool flips `listening` on so per-shape clicks can dispatch deletes;
+  // all other tools render shapes as decorative overlays so pointer
+  // events fall through to the underlying tool layers.
+  const eraseMode = activeTool === ERASE_TOOL
+  const onErase = (id: number) => (e: Konva.KonvaEventObject<MouseEvent>) => {
+    e.cancelBubble = true
+    void eraseDrawing(id)
+  }
   const renderedDrawings = useMemo(() => drawings.map((d) => {
+    const cursor = eraseMode ? 'pointer' : 'default'
     if (d.type === 'freehand' && d.points.length >= 4) {
       const screenPoints = d.points.flatMap((p, i) => i % 2 === 0 ? p * scale + offsetX : p * scale + offsetY)
-      return <Line key={d.id} points={screenPoints} stroke={d.color} strokeWidth={d.width * scale} listening={false} />
+      // Wider hit-test stroke in erase mode so thin pen strokes are
+      // clickable; visual stroke stays at the original width.
+      return <Line key={d.id} points={screenPoints} stroke={d.color}
+        strokeWidth={d.width * scale} listening={eraseMode}
+        hitStrokeWidth={eraseMode ? Math.max(12, d.width * scale + 8) : undefined}
+        onClick={eraseMode ? onErase(d.id) : undefined}
+        onMouseEnter={eraseMode ? (e) => { const s = e.target.getStage(); if (s) s.container().style.cursor = cursor } : undefined}
+        onMouseLeave={eraseMode ? (e) => { const s = e.target.getStage(); if (s) s.container().style.cursor = '' } : undefined}
+      />
     }
     if (d.type === 'rect' && d.points.length >= 4) {
       const x1 = d.points[0] * scale + offsetX
@@ -199,7 +263,11 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
       const y2 = d.points[3] * scale + offsetY
       return <Rect key={d.id} x={Math.min(x1, x2)} y={Math.min(y1, y2)}
         width={Math.abs(x2 - x1)} height={Math.abs(y2 - y1)}
-        stroke={d.color} strokeWidth={d.width * scale} listening={false} />
+        stroke={d.color} strokeWidth={d.width * scale} listening={eraseMode}
+        onClick={eraseMode ? onErase(d.id) : undefined}
+        onMouseEnter={eraseMode ? (e) => { const s = e.target.getStage(); if (s) s.container().style.cursor = cursor } : undefined}
+        onMouseLeave={eraseMode ? (e) => { const s = e.target.getStage(); if (s) s.container().style.cursor = '' } : undefined}
+      />
     }
     if (d.type === 'circle' && d.points.length >= 4) {
       const cx = d.points[0] * scale + offsetX
@@ -208,16 +276,25 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
       const dy = d.points[3] - d.points[1]
       const radius = Math.sqrt(dx * dx + dy * dy) * scale
       return <Circle key={d.id} x={cx} y={cy} radius={radius}
-        stroke={d.color} strokeWidth={d.width * scale} listening={false} />
+        stroke={d.color} strokeWidth={d.width * scale} listening={eraseMode}
+        onClick={eraseMode ? onErase(d.id) : undefined}
+        onMouseEnter={eraseMode ? (e) => { const s = e.target.getStage(); if (s) s.container().style.cursor = cursor } : undefined}
+        onMouseLeave={eraseMode ? (e) => { const s = e.target.getStage(); if (s) s.container().style.cursor = '' } : undefined}
+      />
     }
     if (d.type === 'text' && d.points.length >= 2) {
       const tx = d.points[0] * scale + offsetX
       const ty = d.points[1] * scale + offsetY
       return <KonvaText key={d.id} x={tx} y={ty} text={d.text ?? ''}
-        fontSize={14 * scale} fill={d.color} listening={false} />
+        fontSize={14 * scale} fill={d.color} listening={eraseMode}
+        onClick={eraseMode ? onErase(d.id) : undefined}
+        onMouseEnter={eraseMode ? (e) => { const s = e.target.getStage(); if (s) s.container().style.cursor = cursor } : undefined}
+        onMouseLeave={eraseMode ? (e) => { const s = e.target.getStage(); if (s) s.container().style.cursor = '' } : undefined}
+      />
     }
     return null
-  }), [drawings, scale, offsetX, offsetY])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), [drawings, scale, offsetX, offsetY, eraseMode])
 
   function renderCurrentPath() {
     if (currentPath.length < 2) return null

@@ -304,7 +304,7 @@ export function InitiativePanel() {
               title={`Alle ${mapTokens.length} Karten-Token zur Initiative hinzufügen`}
               disabled={mapTokens.length === 0}
             >
-              ⊐ Alle
+              ⊕ Alle
             </button>
             <button
               className="btn btn-ghost"
@@ -312,7 +312,7 @@ export function InitiativePanel() {
               onClick={handleNextTurn}
               title="Nächster Kämpfer [N]"
             >
-              ▼ Weiter
+              ▶ Weiter
             </button>
             <button
               className="btn btn-ghost"
@@ -416,7 +416,7 @@ export function InitiativePanel() {
             description={<>
               Namen eingeben &amp; + drücken.<br />
               Token-Vorschläge erscheinen beim Tippen.<br />
-              <strong style={{ color: 'var(--text-secondary)' }}>⊐ Alle</strong> fügt alle Karten-Token auf einmal hinzu.
+              <strong style={{ color: 'var(--text-secondary)' }}>⊕ Alle</strong> fügt alle Karten-Token auf einmal hinzu.
             </>}
           />
         ) : (
@@ -517,7 +517,7 @@ export function InitiativePanel() {
                     textOverflow: 'ellipsis',
                     whiteSpace: 'nowrap',
                   }}>
-                    {entry.currentTurn ? '▼ ' : ''}{entry.combatantName}
+                    {entry.currentTurn ? '▶ ' : ''}{entry.combatantName}
                   </span>
                   {linkedToken && linkedToken.ac != null && (
                     <span style={{ fontSize: 9, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>

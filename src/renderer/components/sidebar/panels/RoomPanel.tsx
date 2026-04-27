@@ -4,7 +4,6 @@ import { useCampaignStore } from '../../../stores/campaignStore'
 import { useEncounterStore } from '../../../stores/encounterStore'
 import { useUIStore } from '../../../stores/uiStore'
 import { useMapTransformStore } from '../../../stores/mapTransformStore'
-import { useFogStore } from '../../../stores/fogStore'
 import { EmptyState } from '../../EmptyState'
 import type { RoomVisibility, RoomRecord } from '@shared/ipc-types'
 
@@ -64,32 +63,27 @@ export function RoomPanel() {
     }
   }, [updateRoom])
 
-  const handleRevealRoom = useCallback(async (room: RoomRecord) => {
+  const handleRevealRoom = useCallback((room: RoomRecord) => {
     let points: Array<{x: number; y: number}> = []
     try { points = JSON.parse(room.polygon) } catch { return }
     if (points.length < 3) return
-
+    // FogLayer owns the canvas + DB persistence + player broadcast +
+    // undo wiring. Just dispatch the event and let it route through
+    // the canonical pushFogCommand path.
     const flatPoints = points.flatMap((p) => [p.x, p.y])
-    const fogStore = useFogStore.getState()
-    fogStore.pushOperation({
-      type: 'reveal',
-      shape: 'polygon',
-      points: flatPoints,
-    })
+    window.dispatchEvent(new CustomEvent('fog:action', {
+      detail: { type: 'revealRoom', points: flatPoints },
+    }))
   }, [])
 
-  const handleCoverRoom = useCallback(async (room: RoomRecord) => {
+  const handleCoverRoom = useCallback((room: RoomRecord) => {
     let points: Array<{x: number; y: number}> = []
     try { points = JSON.parse(room.polygon) } catch { return }
     if (points.length < 3) return
-
     const flatPoints = points.flatMap((p) => [p.x, p.y])
-    const fogStore = useFogStore.getState()
-    fogStore.pushOperation({
-      type: 'cover',
-      shape: 'polygon',
-      points: flatPoints,
-    })
+    window.dispatchEvent(new CustomEvent('fog:action', {
+      detail: { type: 'coverRoom', points: flatPoints },
+    }))
   }, [])
 
   const handleSpawnEncounter = useCallback(async (room: RoomRecord) => {

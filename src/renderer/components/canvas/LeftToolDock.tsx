@@ -78,14 +78,18 @@ const SECTIONS: DockSection[] = [
     id: 'world',
     groups: [
       {
-        id: 'wall',
+        // Combined "Umgebung" group: walls, doors, and rooms share a
+        // single popover so the world-building tools live behind one
+        // entry instead of three sibling buttons. Room-paint is the
+        // semantic-region tool; walls/doors are LOS geometry.
+        id: 'environment',
         primary: { id: 'wall-draw', icon: '🧱', labelKey: 'toolbar.tools.wallDraw', shortcut: 'G' },
         variants: [
           { id: 'wall-draw', icon: '🧱', labelKey: 'toolbar.tools.wallDraw', shortcut: 'G' },
           { id: 'wall-door', icon: '🚪', labelKey: 'toolbar.tools.wallDoor', shortcut: 'J' },
+          { id: 'room',      icon: '🏠', labelKey: 'toolbar.tools.room',     shortcut: 'R' },
         ],
       },
-      { id: 'room', primary: { id: 'room', icon: '🏠', labelKey: 'toolbar.tools.room', shortcut: 'R' } },
       {
         id: 'draw',
         primary: { id: 'draw-freehand', icon: '✏️', labelKey: 'toolbar.tools.drawFreehand', shortcut: 'D' },
@@ -94,6 +98,7 @@ const SECTIONS: DockSection[] = [
           { id: 'draw-rect',     icon: '▢',  labelKey: 'toolbar.tools.drawRect' },
           { id: 'draw-circle',   icon: '○',  labelKey: 'toolbar.tools.drawCircle' },
           { id: 'draw-text',     icon: 'T',  labelKey: 'toolbar.tools.drawText' },
+          { id: 'draw-erase',    icon: '🩹', labelKey: 'toolbar.tools.drawErase' },
         ],
       },
     ],
@@ -122,6 +127,16 @@ export function LeftToolDock() {
     setOpenGroup(null)
     if (id === 'atmosphere') {
       if (!window.electronAPI) return
+      // Toggle: if atmosphere is currently active, clicking the
+      // button clears it (player window returns to map). Otherwise
+      // open the file picker so the DM can choose a fullscreen
+      // image (scene transitions, mood reveals, NPC portraits).
+      const currentPath = useUIStore.getState().atmosphereImagePath
+      if (currentPath) {
+        useUIStore.getState().setAtmosphereImage(null)
+        window.electronAPI.sendAtmosphere(null)
+        return
+      }
       const result = await window.electronAPI.importFile('atmosphere')
       if (result) {
         useUIStore.getState().setAtmosphereImage(result.path)
