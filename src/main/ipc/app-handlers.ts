@@ -45,6 +45,69 @@ function isSafeAssetPath(p: string): boolean {
   return p.startsWith('assets/')
 }
 
+/**
+ * Import a list of source-side audio file paths into the campaign's
+ * audio asset folder. Each file is copied with a unique destination
+ * name, magic-byte-validated, and registered in `assets`. Returns the
+ * list of accepted files (originalName + relativePath); rejected
+ * files are silently skipped — their absence in the result tells the
+ * caller they didn't make it.
+ *
+ * Deliberately does NOT insert into `tracks` here — that's the
+ * renderer's job (it owns the soundtrack-tag and duration cache).
+ * Splitting concerns this way means the same primitive can later be
+ * reused by drag-and-drop or other entry points without duplicating
+ * the file-copy logic.
+ */
+function importAudioPaths(
+  srcPaths: ReadonlyArray<string>,
+  campaignId: number | null | undefined,
+): Array<{ originalName: string; relativePath: string }> {
+  if (srcPaths.length === 0) return []
+  const audioExt = new Set(ASSET_EXTENSIONS.audio.map((e: string) => e.toLowerCase()))
+  const destDir = getAssetDir('audio')
+  const userDataPath = getCustomUserDataPath() || app.getPath('userData')
+  const out: Array<{ originalName: string; relativePath: string }> = []
+  const cId = Number.isInteger(campaignId) ? campaignId : null
+  const insertAsset = getDb().prepare(
+    `INSERT INTO assets (original_name, stored_path, type, campaign_id) VALUES (?, ?, ?, ?)`
+  )
+  for (const srcPath of srcPaths) {
+    const ext = extname(srcPath).toLowerCase()
+    if (!audioExt.has(ext)) continue
+    const originalName = srcPath.split(/[\\/]/).pop() ?? srcPath
+    const destName = `${Date.now()}_${Math.random().toString(36).slice(2)}${ext}`
+    const destPath = join(destDir, destName)
+    try {
+      copyFileSync(srcPath, destPath)
+    } catch (err) {
+      console.warn('[importAudioPaths] copy failed:', originalName, err)
+      continue
+    }
+    try {
+      if (!validateMagicBytes(destPath, ext)) {
+        try { unlinkSync(destPath) } catch { /* unreachable cleanup */ }
+        console.warn('[importAudioPaths] magic-byte rejection:', originalName)
+        continue
+      }
+    } catch (err) {
+      try { unlinkSync(destPath) } catch { /* unreachable cleanup */ }
+      console.warn('[importAudioPaths] magic-byte validation failed:', originalName, err)
+      continue
+    }
+    const relativePath = relative(userDataPath, destPath)
+    try {
+      insertAsset.run(originalName, relativePath, 'audio', cId)
+    } catch (err) {
+      console.warn('[importAudioPaths] DB insert failed:', originalName, err)
+      try { unlinkSync(destPath) } catch { /* unreachable cleanup */ }
+      continue
+    }
+    out.push({ originalName, relativePath })
+  }
+  return out
+}
+
 export function registerAppHandlers(): void {
   // Rebuild the application menu in the given language.
   ipcMain.handle(IPC.SET_MENU_LANGUAGE, (_event, lang: MenuLanguage) => {
@@ -394,6 +457,107 @@ export function registerAppHandlers(): void {
     }
   })
 
+  // Multi-select audio import. Each selected file goes through the
+  // same copy + magic-byte validation as IMPORT_FILE; failures are
+  // skipped (silent on the per-file level \u2014 caller sees them as
+  // missing entries in the returned array). Cancellation returns [].
+  ipcMain.handle(
+    IPC.IMPORT_AUDIO_FILES,
+    async (_event, campaignId: number) => {
+      const result = await dialog.showOpenDialog({
+        title: 'Audio-Dateien importieren',
+        filters: [{ name: 'Audio', extensions: ASSET_EXTENSIONS.audio.map((e: string) => e.slice(1)) }],
+        properties: ['openFile', 'multiSelections'],
+      })
+      if (result.canceled || result.filePaths.length === 0) return []
+      return importAudioPaths(result.filePaths, campaignId)
+    },
+  )
+
+  // Folder import. Recursively scans the picked directory for audio
+  // files (matching ASSET_EXTENSIONS.audio) and runs each through the
+  // same copy + validate pipeline. Returns the source folder name so
+  // the caller can use it as the auto-soundtrack tag. Returns null on
+  // cancellation, or an object with possibly-empty `files` if the
+  // folder contained no audio.
+  ipcMain.handle(
+    IPC.IMPORT_AUDIO_FOLDER,
+    async (_event, campaignId: number) => {
+      const result = await dialog.showOpenDialog({
+        title: 'Audio-Ordner importieren',
+        properties: ['openDirectory'],
+      })
+      if (result.canceled || !result.filePaths[0]) return null
+      const root = result.filePaths[0]
+      const folderName = root.split(/[\\/]/).filter(Boolean).pop() ?? 'Soundtrack'
+      const files: string[] = []
+      const stack: string[] = [root]
+      const audioExt = new Set(ASSET_EXTENSIONS.audio.map((e: string) => e.toLowerCase()))
+      while (stack.length > 0) {
+        const dir = stack.pop()!
+        let entries: string[] = []
+        try { entries = readdirSync(dir) } catch { continue }
+        for (const name of entries) {
+          const full = join(dir, name)
+          let stat
+          try { stat = lstatSync(full) } catch { continue }
+          if (stat.isSymbolicLink()) continue
+          if (stat.isDirectory()) {
+            stack.push(full)
+            continue
+          }
+          if (audioExt.has(extname(name).toLowerCase())) files.push(full)
+        }
+      }
+      const imported = importAudioPaths(files, campaignId)
+      return { folderName, files: imported }
+    },
+  )
+
+  // SFX-Slot Custom-Icon Picker. Single-image picker; copies into
+  // userData/assets/sfx-icons/ and returns the relative path. PNG /
+  // JPG / WebP / SVG are accepted (SVG kept for clean upscaling on
+  // 4K displays). On cancel returns null; the caller leaves the
+  // existing icon untouched.
+  ipcMain.handle(IPC.IMPORT_SFX_ICON, async () => {
+    const userDataPath = getCustomUserDataPath() || app.getPath('userData')
+    const destDir = join(userDataPath, 'assets', 'sfx-icons')
+    if (!existsSync(destDir)) mkdirSync(destDir, { recursive: true })
+
+    const result = await dialog.showOpenDialog({
+      title: 'Slot-Icon importieren',
+      filters: [{ name: 'Bilder', extensions: ['png', 'jpg', 'jpeg', 'webp', 'svg'] }],
+      properties: ['openFile'],
+    })
+    if (result.canceled || !result.filePaths[0]) return null
+    const srcPath = result.filePaths[0]
+    const ext = extname(srcPath).toLowerCase()
+    const destName = `${Date.now()}_${Math.random().toString(36).slice(2)}${ext}`
+    const destPath = join(destDir, destName)
+    try {
+      copyFileSync(srcPath, destPath)
+    } catch (err) {
+      console.error('[importSfxIcon] copy failed:', err)
+      return null
+    }
+    // Magic-byte check skipped for SVG (text format) \u2014 others go
+    // through the same gate as map / token uploads.
+    if (ext !== '.svg') {
+      try {
+        if (!validateMagicBytes(destPath, ext)) {
+          try { unlinkSync(destPath) } catch { /* unreachable cleanup */ }
+          console.warn('[importSfxIcon] magic-byte rejection:', srcPath)
+          return null
+        }
+      } catch (err) {
+        try { unlinkSync(destPath) } catch { /* unreachable cleanup */ }
+        console.warn('[importSfxIcon] validation failed:', err)
+        return null
+      }
+    }
+    return relative(userDataPath, destPath)
+  })
+
   // Import PDF \u2192 returns file bytes so renderer can render with pdfjs
   ipcMain.handle(IPC.IMPORT_PDF, async (_event, _campaignId: number) => {
     const result = await dialog.showOpenDialog({
@@ -654,7 +818,8 @@ export function registerAppHandlers(): void {
       pushRefs(db.prepare('SELECT portrait_path AS p FROM character_sheets').all() as Array<{ p: string | null }>)
       pushRefs(db.prepare('SELECT ambient_track_path AS p FROM maps').all() as Array<{ p: string | null }>)
       pushRefs(db.prepare('SELECT audio_path AS p FROM audio_board_slots').all() as Array<{ p: string | null }>)
-      pushRefs(db.prepare('SELECT path AS p FROM channel_playlist').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT path AS p FROM tracks').all() as Array<{ p: string | null }>)
+      pushRefs(db.prepare('SELECT icon_path AS p FROM audio_board_slots').all() as Array<{ p: string | null }>)
       pushRefs(db.prepare('SELECT path AS p FROM assets').all() as Array<{ p: string | null }>)
 
       const orphans = allFiles.filter((f) => !referenced.has(f))

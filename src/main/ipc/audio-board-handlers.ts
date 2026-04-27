@@ -4,7 +4,7 @@ import type {
   AudioBoardRecord,
   AudioBoardSlot,
   AudioChannelKey,
-  ChannelPlaylistEntry,
+  TrackRecord,
 } from '../../shared/ipc-types'
 import { getDb } from '../db/database'
 
@@ -29,6 +29,9 @@ interface SlotRow {
   emoji: string | null
   title: string | null
   audio_path: string | null
+  icon_path: string | null
+  volume: number | null
+  is_loop: number | null
 }
 
 function toAudioBoardSlot(r: SlotRow): AudioBoardSlot {
@@ -37,6 +40,9 @@ function toAudioBoardSlot(r: SlotRow): AudioBoardSlot {
     emoji: r.emoji ?? '🔊',
     title: r.title ?? '',
     audioPath: r.audio_path,
+    iconPath: r.icon_path,
+    volume: typeof r.volume === 'number' ? r.volume : 1,
+    isLoop: r.is_loop === 1,
   }
 }
 
@@ -68,7 +74,8 @@ export function registerAudioBoardHandlers(): void {
       const placeholders = boards.map(() => '?').join(',')
       const slotRows = db
         .prepare(
-          `SELECT id, board_id, slot_number, emoji, title, audio_path
+          `SELECT id, board_id, slot_number, emoji, title, audio_path,
+                  icon_path, volume, is_loop
            FROM audio_board_slots WHERE board_id IN (${placeholders})
            ORDER BY slot_number`,
         )
@@ -136,16 +143,27 @@ export function registerAudioBoardHandlers(): void {
       const emoji = slot.emoji == null ? null : String(slot.emoji)
       const title = slot.title == null ? null : String(slot.title)
       const audioPath = slot.audioPath == null ? null : String(slot.audioPath)
+      const iconPath = slot.iconPath == null ? null : String(slot.iconPath)
+      // Clamp volume to [0, 1] — the slider can't exceed it but a
+      // malicious renderer could.
+      const volume = typeof slot.volume === 'number' && Number.isFinite(slot.volume)
+        ? Math.max(0, Math.min(1, slot.volume))
+        : 1
+      const isLoop = slot.isLoop ? 1 : 0
       getDb()
         .prepare(
-          `INSERT INTO audio_board_slots (board_id, slot_number, emoji, title, audio_path)
-           VALUES (?, ?, ?, ?, ?)
+          `INSERT INTO audio_board_slots
+             (board_id, slot_number, emoji, title, audio_path, icon_path, volume, is_loop)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)
            ON CONFLICT(board_id, slot_number) DO UPDATE SET
              emoji      = excluded.emoji,
              title      = excluded.title,
-             audio_path = excluded.audio_path`,
+             audio_path = excluded.audio_path,
+             icon_path  = excluded.icon_path,
+             volume     = excluded.volume,
+             is_loop    = excluded.is_loop`,
         )
-        .run(bId, slotNumber, emoji, title, audioPath)
+        .run(bId, slotNumber, emoji, title, audioPath, iconPath, volume, isLoop)
     },
   )
 
@@ -160,61 +178,177 @@ export function registerAudioBoardHandlers(): void {
     },
   )
 
-  // ── channel_playlist ──
+  // ── Tracks domain (v38) ──
 
   ipcMain.handle(
-    IPC.CHANNEL_PLAYLIST_LIST_BY_CAMPAIGN,
-    (_event, campaignId: number): ChannelPlaylistEntry[] => {
+    IPC.TRACKS_LIST_BY_CAMPAIGN,
+    (_event, campaignId: number): TrackRecord[] => {
       requireIntegerId(campaignId, 'campaign')
-      const rows = getDb()
+      const db = getDb()
+      const trackRows = db
         .prepare(
-          `SELECT id, channel, path, file_name FROM channel_playlist
-           WHERE campaign_id = ? ORDER BY channel, position, id`,
+          `SELECT id, campaign_id, path, file_name, soundtrack, duration_s
+           FROM tracks WHERE campaign_id = ?
+           ORDER BY soundtrack IS NULL, soundtrack, file_name`,
         )
         .all(campaignId) as Array<{
           id: number
-          channel: string
+          campaign_id: number
           path: string
           file_name: string
+          soundtrack: string | null
+          duration_s: number | null
         }>
-      return rows.map((r) => ({
+      if (trackRows.length === 0) return []
+      const placeholders = trackRows.map(() => '?').join(',')
+      const assignmentRows = db
+        .prepare(
+          `SELECT track_id, channel FROM track_channel_assignments
+           WHERE track_id IN (${placeholders})`,
+        )
+        .all(...trackRows.map((r) => r.id)) as Array<{ track_id: number; channel: AudioChannelKey }>
+      const assignmentsByTrack = new Map<number, AudioChannelKey[]>()
+      for (const a of assignmentRows) {
+        const list = assignmentsByTrack.get(a.track_id) ?? []
+        list.push(a.channel)
+        assignmentsByTrack.set(a.track_id, list)
+      }
+      return trackRows.map((r) => ({
         id: r.id,
-        channel: r.channel as AudioChannelKey,
+        campaignId: r.campaign_id,
         path: r.path,
         fileName: r.file_name,
+        soundtrack: r.soundtrack,
+        durationS: r.duration_s,
+        assignments: assignmentsByTrack.get(r.id) ?? [],
       }))
     },
   )
 
   ipcMain.handle(
-    IPC.CHANNEL_PLAYLIST_ADD,
+    IPC.TRACKS_CREATE,
     (
       _event,
-      campaignId: number,
-      channel: AudioChannelKey,
-      path: string,
-      fileName: string,
-      position: number,
-    ): { id: number } => {
-      requireIntegerId(campaignId, 'campaign')
-      if (channel !== 'track1' && channel !== 'track2' && channel !== 'combat') {
-        throw new Error('Invalid channel')
-      }
-      const safePath = typeof path === 'string' && path ? path : ''
-      const safeName = typeof fileName === 'string' && fileName ? fileName : safePath
-      const pos = Number.isInteger(position) ? position : 0
-      const row = getDb()
+      args: { campaignId: number; path: string; fileName: string; soundtrack?: string | null },
+    ): TrackRecord => {
+      requireIntegerId(args?.campaignId, 'campaign')
+      const path = typeof args.path === 'string' && args.path ? args.path : ''
+      if (!path) throw new Error('Track path is required')
+      const fileName = typeof args.fileName === 'string' && args.fileName ? args.fileName : path
+      const soundtrack =
+        typeof args.soundtrack === 'string' && args.soundtrack.trim()
+          ? args.soundtrack.trim()
+          : null
+      const db = getDb()
+      // INSERT OR IGNORE lets multi-import flows be naively safe; the
+      // returned row is whichever row now exists.
+      db.prepare(
+        `INSERT OR IGNORE INTO tracks (campaign_id, path, file_name, soundtrack)
+         VALUES (?, ?, ?, ?)`,
+      ).run(args.campaignId, path, fileName, soundtrack)
+      const row = db
         .prepare(
-          `INSERT INTO channel_playlist (campaign_id, channel, path, file_name, position)
-           VALUES (?, ?, ?, ?, ?) RETURNING id`,
+          `SELECT id, campaign_id, path, file_name, soundtrack, duration_s
+           FROM tracks WHERE campaign_id = ? AND path = ?`,
         )
-        .get(campaignId, channel, safePath, safeName, pos) as { id: number }
-      return { id: row.id }
+        .get(args.campaignId, path) as {
+          id: number
+          campaign_id: number
+          path: string
+          file_name: string
+          soundtrack: string | null
+          duration_s: number | null
+        }
+      return {
+        id: row.id,
+        campaignId: row.campaign_id,
+        path: row.path,
+        fileName: row.file_name,
+        soundtrack: row.soundtrack,
+        durationS: row.duration_s,
+        assignments: [],
+      }
     },
   )
 
-  ipcMain.handle(IPC.CHANNEL_PLAYLIST_REMOVE, (_event, id: number): void => {
-    const entryId = requireIntegerId(id, 'playlist entry')
-    getDb().prepare('DELETE FROM channel_playlist WHERE id = ?').run(entryId)
+  ipcMain.handle(
+    IPC.TRACKS_UPDATE,
+    (
+      _event,
+      id: number,
+      patch: Partial<{ fileName: string; soundtrack: string | null; durationS: number | null }>,
+    ): void => {
+      const trackId = requireIntegerId(id, 'track')
+      const sets: string[] = []
+      const values: Array<string | number | null> = []
+      if (patch.fileName !== undefined) {
+        sets.push('file_name = ?')
+        values.push(typeof patch.fileName === 'string' ? patch.fileName : '')
+      }
+      if (patch.soundtrack !== undefined) {
+        sets.push('soundtrack = ?')
+        values.push(
+          typeof patch.soundtrack === 'string' && patch.soundtrack.trim()
+            ? patch.soundtrack.trim()
+            : null,
+        )
+      }
+      if (patch.durationS !== undefined) {
+        sets.push('duration_s = ?')
+        values.push(
+          typeof patch.durationS === 'number' && Number.isFinite(patch.durationS)
+            ? patch.durationS
+            : null,
+        )
+      }
+      if (sets.length === 0) return
+      values.push(trackId)
+      getDb()
+        .prepare(`UPDATE tracks SET ${sets.join(', ')} WHERE id = ?`)
+        .run(...values)
+    },
+  )
+
+  ipcMain.handle(IPC.TRACKS_DELETE, (_event, id: number): void => {
+    const trackId = requireIntegerId(id, 'track')
+    // Cascade drops every channel-assignment via the FK — no manual
+    // cleanup needed.
+    getDb().prepare('DELETE FROM tracks WHERE id = ?').run(trackId)
   })
+
+  ipcMain.handle(
+    IPC.TRACKS_TOGGLE_ASSIGNMENT,
+    (
+      _event,
+      trackId: number,
+      channel: AudioChannelKey,
+    ): { assigned: boolean } => {
+      const id = requireIntegerId(trackId, 'track')
+      if (channel !== 'track1' && channel !== 'track2' && channel !== 'combat') {
+        throw new Error('Invalid channel')
+      }
+      const db = getDb()
+      const existing = db
+        .prepare(
+          `SELECT id FROM track_channel_assignments WHERE track_id = ? AND channel = ?`,
+        )
+        .get(id, channel) as { id: number } | undefined
+      if (existing) {
+        db.prepare('DELETE FROM track_channel_assignments WHERE id = ?').run(existing.id)
+        return { assigned: false }
+      }
+      // Append at the end of the channel's order.
+      const maxRow = db
+        .prepare(
+          `SELECT COALESCE(MAX(position), -1) AS max_pos
+           FROM track_channel_assignments WHERE channel = ?`,
+        )
+        .get(channel) as { max_pos: number }
+      db.prepare(
+        `INSERT INTO track_channel_assignments (track_id, channel, position)
+         VALUES (?, ?, ?)`,
+      ).run(id, channel, (maxRow.max_pos ?? -1) + 1)
+      return { assigned: true }
+    },
+  )
 }

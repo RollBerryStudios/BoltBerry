@@ -49,7 +49,7 @@ import type {
   TokenTemplateRow,
   AudioBoardRecord,
   AudioBoardSlot,
-  ChannelPlaylistEntry,
+  TrackRecord,
 } from '../shared/ipc-types'
 
 // ─── DM Window API (exposed to renderer via window.electronAPI) ───────────────
@@ -427,22 +427,49 @@ export const dmApi = {
       ipcRenderer.invoke(IPC.AUDIO_BOARDS_UPSERT_SLOT, boardId, slot),
     deleteSlot: (boardId: number, slotNumber: number): Promise<void> =>
       ipcRenderer.invoke(IPC.AUDIO_BOARDS_DELETE_SLOT, boardId, slotNumber),
+    /** Pick a custom-icon image for a slot. Returns the relative
+     *  path of the imported file, or null on cancel/failure. The
+     *  caller persists the path via `upsertSlot`. */
+    importIcon: (): Promise<string | null> =>
+      ipcRenderer.invoke(IPC.IMPORT_SFX_ICON),
   },
 
-  // Channel playlist — per-campaign saved tracks for audio channels
-  channelPlaylist: {
-    listByCampaign: (campaignId: number): Promise<ChannelPlaylistEntry[]> =>
-      ipcRenderer.invoke(IPC.CHANNEL_PLAYLIST_LIST_BY_CAMPAIGN, campaignId),
-    add: (
-      campaignId: number,
-      channel: AudioChannelKey,
-      path: string,
-      fileName: string,
-      position: number,
-    ): Promise<{ id: number }> =>
-      ipcRenderer.invoke(IPC.CHANNEL_PLAYLIST_ADD, campaignId, channel, path, fileName, position),
-    remove: (id: number): Promise<void> =>
-      ipcRenderer.invoke(IPC.CHANNEL_PLAYLIST_REMOVE, id),
+  // Tracks — canonical audio-library API (v38). The MusicLibraryPanel
+  // renders directly off this surface; live panels read assignments
+  // through the same calls.
+  tracks: {
+    listByCampaign: (campaignId: number): Promise<TrackRecord[]> =>
+      ipcRenderer.invoke(IPC.TRACKS_LIST_BY_CAMPAIGN, campaignId),
+    create: (args: {
+      campaignId: number
+      path: string
+      fileName: string
+      soundtrack?: string | null
+    }): Promise<TrackRecord> =>
+      ipcRenderer.invoke(IPC.TRACKS_CREATE, args),
+    update: (
+      id: number,
+      patch: Partial<{ fileName: string; soundtrack: string | null; durationS: number | null }>,
+    ): Promise<void> =>
+      ipcRenderer.invoke(IPC.TRACKS_UPDATE, id, patch),
+    delete: (id: number): Promise<void> =>
+      ipcRenderer.invoke(IPC.TRACKS_DELETE, id),
+    toggleAssignment: (trackId: number, channel: AudioChannelKey): Promise<{ assigned: boolean }> =>
+      ipcRenderer.invoke(IPC.TRACKS_TOGGLE_ASSIGNMENT, trackId, channel),
+    /** Multi-select audio file picker. Returns the relative paths of
+     *  every file that was successfully copied + magic-byte-validated.
+     *  Cancellation returns an empty array. */
+    importFiles: (campaignId: number): Promise<Array<{ originalName: string; relativePath: string }>> =>
+      ipcRenderer.invoke(IPC.IMPORT_AUDIO_FILES, campaignId),
+    /** Folder picker that recursively scans for audio files and
+     *  returns the source folder name plus the imported file list.
+     *  The MusicLibraryPanel uses the folder name as the auto-
+     *  soundtrack tag for every track in the batch. */
+    importFolder: (campaignId: number): Promise<{
+      folderName: string
+      files: Array<{ originalName: string; relativePath: string }>
+    } | null> =>
+      ipcRenderer.invoke(IPC.IMPORT_AUDIO_FOLDER, campaignId),
   },
 
   // Listen for main → DM: player window was closed

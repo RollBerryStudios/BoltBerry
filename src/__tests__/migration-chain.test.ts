@@ -50,7 +50,7 @@ import {
   MIGRATE_V33_TO_V34,
   MIGRATE_V34_TO_V35,
   MIGRATE_V35_TO_V36,
-  MIGRATE_V36_TO_V37,
+  MIGRATE_V36_TO_V37, MIGRATE_V37_TO_V38,
 } from '../main/db/schema'
 
 // Ordered table of all migrations: [from, to, sql]
@@ -91,6 +91,7 @@ const CHAIN: Array<{ from: number; to: number; sql: string; name: string }> = [
   { from: 34, to: 35, sql: MIGRATE_V34_TO_V35, name: 'V34→V35'},
   { from: 35, to: 36, sql: MIGRATE_V35_TO_V36, name: 'V35→V36'},
   { from: 36, to: 37, sql: MIGRATE_V36_TO_V37, name: 'V36→V37'},
+  { from: 37, to: 38, sql: MIGRATE_V37_TO_V38, name: 'V37→V38'},
 ]
 
 describe('Migration chain', () => {
@@ -239,5 +240,44 @@ describe('Migration chain', () => {
     for (let i = 1; i < positions.length; i++) {
       expect(positions[i]).toBeGreaterThan(positions[i - 1])
     }
+  })
+
+  // ── V37 → V38 — track-library refactor ────────────────────────────
+  // Pure-string assertions to keep this file off better-sqlite3's
+  // native-binding chain. The functional roundtrip lives in
+  // `tracks-migration.test.ts`.
+
+  it('V37→V38 creates tracks + track_channel_assignments + extends slots', () => {
+    const sql = MIGRATE_V37_TO_V38
+    expect(sql).toMatch(/CREATE\s+TABLE\s+tracks\b/i)
+    expect(sql).toMatch(/CREATE\s+TABLE\s+track_channel_assignments\b/i)
+    expect(sql).toMatch(/UNIQUE\s*\(\s*campaign_id\s*,\s*path\s*\)/i)
+    expect(sql).toMatch(/UNIQUE\s*\(\s*track_id\s*,\s*channel\s*\)/i)
+    // Backfill must stage tracks before assignments so the join below
+    // resolves; assert the required statement order textually.
+    const trackInsertIdx = sql.search(/INSERT\s+OR\s+IGNORE\s+INTO\s+tracks/i)
+    const assignInsertIdx = sql.search(/INSERT\s+INTO\s+track_channel_assignments/i)
+    expect(trackInsertIdx).toBeGreaterThanOrEqual(0)
+    expect(assignInsertIdx).toBeGreaterThan(trackInsertIdx)
+    // Slot extensions
+    expect(sql).toMatch(/ALTER\s+TABLE\s+audio_board_slots\s+ADD\s+COLUMN\s+icon_path\s+TEXT/i)
+    expect(sql).toMatch(/ALTER\s+TABLE\s+audio_board_slots\s+ADD\s+COLUMN\s+volume\s+REAL\s+NOT\s+NULL\s+DEFAULT\s+1\.0/i)
+    expect(sql).toMatch(/ALTER\s+TABLE\s+audio_board_slots\s+ADD\s+COLUMN\s+is_loop\s+INTEGER\s+NOT\s+NULL\s+DEFAULT\s+0/i)
+    // Old table dropped — single source of truth for music data.
+    expect(sql).toMatch(/DROP\s+TABLE\s+channel_playlist/i)
+  })
+
+  it('CREATE_TABLES_SQL for a fresh install ships the v38 audio schema', () => {
+    expect(CREATE_TABLES_SQL).toMatch(/CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\s+tracks\b/i)
+    expect(CREATE_TABLES_SQL).toMatch(/CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\s+track_channel_assignments\b/i)
+    // The slot extensions must live on the fresh-install path too —
+    // otherwise new installs silently lose icon_path / volume / is_loop
+    // and only upgraders get them (regression risk that bit v32 grid
+    // columns before).
+    expect(CREATE_TABLES_SQL).toMatch(/audio_board_slots[\s\S]*icon_path/i)
+    expect(CREATE_TABLES_SQL).toMatch(/audio_board_slots[\s\S]*volume\s+REAL\s+NOT\s+NULL\s+DEFAULT\s+1\.0/i)
+    expect(CREATE_TABLES_SQL).toMatch(/audio_board_slots[\s\S]*is_loop\s+INTEGER\s+NOT\s+NULL\s+DEFAULT\s+0/i)
+    // Legacy table must be gone from the fresh schema.
+    expect(CREATE_TABLES_SQL).not.toMatch(/CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\s+channel_playlist\b/i)
   })
 })

@@ -15,7 +15,7 @@ import {
   MIGRATE_V27_TO_V28, MIGRATE_V28_TO_V29, MIGRATE_V29_TO_V30,
   MIGRATE_V30_TO_V31, MIGRATE_V31_TO_V32, MIGRATE_V32_TO_V33,
   MIGRATE_V33_TO_V34, MIGRATE_V34_TO_V35, MIGRATE_V35_TO_V36,
-  MIGRATE_V36_TO_V37,
+  MIGRATE_V36_TO_V37, MIGRATE_V37_TO_V38,
 } from './schema'
 import { loadMonstersIndexSync, loadMonsterRecordSync } from '../data/monsters'
 
@@ -55,6 +55,7 @@ const MIGRATIONS: ReadonlyArray<readonly [target: number, sql: string]> = [
   [35, MIGRATE_V34_TO_V35],
   [36, MIGRATE_V35_TO_V36],
   [37, MIGRATE_V36_TO_V37],
+  [38, MIGRATE_V37_TO_V38],
 ]
 
 export class SchemaTooNewError extends Error {
@@ -148,6 +149,22 @@ export function initDatabase(): Database.Database {
     db.pragma('synchronous = NORMAL')
     db.pragma('cache_size = -64000') // 64 MB cache
     db.pragma('wal_autocheckpoint = 1000')
+
+    // Fail-soft integrity check on startup: warn into the log but don't
+    // refuse to open. A genuinely corrupt DB will surface as IO errors
+    // later anyway; the check exists so a known-bad DB is *visible*
+    // instead of a silent footgun ("data disappears mysteriously"). If
+    // the result is anything other than the single string 'ok', we
+    // fingerprint it and the next quick-backup pass picks it up.
+    try {
+      const issues = db.prepare("PRAGMA integrity_check").all() as Array<{ integrity_check: string }>
+      const ok = issues.length === 1 && issues[0].integrity_check === 'ok'
+      if (!ok) {
+        console.warn('[Database] integrity_check reported issues:', issues)
+      }
+    } catch (err) {
+      console.warn('[Database] integrity_check failed to run:', err)
+    }
 
     db.exec(CREATE_TABLES_SQL)
 

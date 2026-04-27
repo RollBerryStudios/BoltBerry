@@ -192,11 +192,29 @@ export const IPC = {
   AUDIO_BOARDS_UPSERT_SLOT: 'audio-boards:upsert-slot',
   AUDIO_BOARDS_DELETE_SLOT: 'audio-boards:delete-slot',
 
-  // Channel playlist — per-campaign saved tracks for the three
-  // audio channels (track1 / track2 / combat).
-  CHANNEL_PLAYLIST_LIST_BY_CAMPAIGN: 'channel-playlist:list-by-campaign',
-  CHANNEL_PLAYLIST_ADD: 'channel-playlist:add',
-  CHANNEL_PLAYLIST_REMOVE: 'channel-playlist:remove',
+  // Tracks domain (v38) — canonical audio-library API. A track is its
+  // own entity; channel memberships live in a separate join table the
+  // MusicLibraryPanel renders as toggle badges.
+  TRACKS_LIST_BY_CAMPAIGN:    'tracks:list-by-campaign',
+  TRACKS_CREATE:              'tracks:create',
+  TRACKS_UPDATE:              'tracks:update',
+  TRACKS_DELETE:              'tracks:delete',
+  TRACKS_TOGGLE_ASSIGNMENT:   'tracks:toggle-assignment',
+  /** Open a multi-select file picker for audio files. Returns the
+   *  list of relative paths under userData/assets/audio/ for files
+   *  that were successfully copied + magic-byte-validated. Bulk
+   *  variant of IMPORT_FILE so the DM can drag in 30 tracks in one
+   *  click instead of running a 30-step file dialog dance. */
+  IMPORT_AUDIO_FILES:         'app:import-audio-files',
+  /** Open a folder picker; recursively scan for audio files; copy
+   *  each one into userData/assets/audio/. Returns
+   *  { folderName, files: [{ originalName, relativePath }] } so the
+   *  caller can use the source folder name as the auto-soundtrack
+   *  tag. */
+  IMPORT_AUDIO_FOLDER:        'app:import-audio-folder',
+  /** Single-file picker for a custom SFX slot icon. Copies into
+   *  userData/assets/sfx-icons/ and returns the relative path. */
+  IMPORT_SFX_ICON:            'app:import-sfx-icon',
 
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
@@ -544,11 +562,25 @@ export interface RecentMapEntry {
 
 export type AudioChannelKey = 'track1' | 'track2' | 'combat'
 
-export interface ChannelPlaylistEntry {
+/**
+ * v38 canonical shape: one track in a campaign's audio library. The
+ * `assignments` array is empty for unassigned tracks; otherwise it
+ * lists every channel this track is currently a member of.
+ */
+export interface TrackRecord {
   id: number
-  channel: AudioChannelKey
+  campaignId: number
   path: string
   fileName: string
+  /** 1:N grouping ("Combat", "Wald-Ambient", …). NULL = uncategorised. */
+  soundtrack: string | null
+  /** Cached duration in seconds. NULL until the renderer plays the
+   *  track once and reports its duration back. */
+  durationS: number | null
+  /** Channel memberships. Order is stable per channel via the
+   *  `position` column; the renderer can reorder via dedicated
+   *  IPC if needed (Commit 2 will add that). */
+  assignments: AudioChannelKey[]
 }
 
 export interface AudioBoardSlot {
@@ -556,6 +588,15 @@ export interface AudioBoardSlot {
   emoji: string
   title: string
   audioPath: string | null
+  /** v38: per-slot custom-icon image path (PNG / SVG / WebP). NULL
+   *  falls back to `emoji`. */
+  iconPath: string | null
+  /** v38: per-slot volume 0–1. Multiplies with the global SFX
+   *  volume. Default 1.0. */
+  volume: number
+  /** v38: per-slot loop flag. When true the SFX restarts from the
+   *  beginning when it finishes. Default false. */
+  isLoop: boolean
 }
 
 export interface AudioBoardRecord {

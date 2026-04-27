@@ -44,8 +44,15 @@ describe('CampaignExport interface', () => {
     expect(SRC).toContain(field)
   })
 
-  it('EXPORT_VERSION is 9 (schema v9 with encounter-id remap + rotation_player + pin notes)', () => {
-    expect(SRC).toMatch(/const EXPORT_VERSION\s*=\s*9/)
+  it('EXPORT_VERSION is 10 (schema v38 audio refactor)', () => {
+    expect(SRC).toMatch(/const EXPORT_VERSION\s*=\s*10/)
+  })
+
+  it('EXPORT_MIGRATIONS includes 9 → 10 backfill so old archives import cleanly', () => {
+    // Exports created at v9 (pre-track-library) carry no `tracks`
+    // array. The migration must default it to [] before the inserter
+    // dereferences `data.tracks`.
+    expect(SRC).toMatch(/9:\s*\(d\)\s*=>\s*\(\{[\s\S]*?tracks:/)
   })
 })
 

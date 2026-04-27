@@ -113,7 +113,12 @@ interface AudioState {
   clearAllPlaylists:   () => void
 
   // ── Actions: SFX ──
-  triggerSfx:        (audioPath: string) => void
+  /** Trigger a one-shot (or looped) sound effect. `slotVolume` and
+   *  `loop` mirror the per-slot fields persisted on
+   *  `audio_board_slots`; default values keep the engine compatible
+   *  with old call sites (e.g. keyboard 0–9 shortcuts that don't
+   *  thread slot config). */
+  triggerSfx:        (audioPath: string, slotVolume?: number, loop?: boolean) => void
   setSfxVolume:      (vol: number) => void
   setActiveBoardIndex: (i: number) => void
 
@@ -345,16 +350,33 @@ class AudioEngine {
     sfxVolume: number,
     masterVolume: number,
     channelVolumes: Record<ChannelId, number>,
+    /** Per-slot multiplier (v38). Defaults to 1 so old call sites
+     *  that don't pass it behave identically to before. */
+    slotVolume = 1,
+    /** Per-slot loop flag (v38). When true the SFX repeats until the
+     *  user explicitly retriggers/stops it. */
+    loop = false,
   ): void {
     const el = this.sfxPool[this.sfxPoolIndex % SFX_POOL_SIZE]
     this.sfxPoolIndex = (this.sfxPoolIndex + 1) % SFX_POOL_SIZE
     el.pause()
     el.src = pathToUrl(audioPath)
-    el.volume = Math.max(0, Math.min(1, sfxVolume * masterVolume))
-    el.loop = false
+    el.volume = Math.max(0, Math.min(1, sfxVolume * masterVolume * slotVolume))
+    el.loop = loop
     this.startDuck(channelVolumes, masterVolume)
+    // A looping SFX ducks the music for as long as it plays. We end
+    // the duck when the user re-triggers / stops, not on `ended`
+    // (which never fires for `loop=true`). Hooked via an `onpause`
+    // listener that the caller can use as the stop signal.
     el.onended = () => this.endDuck(channelVolumes, masterVolume)
     el.onerror = () => this.endDuck(channelVolumes, masterVolume)
+    if (loop) {
+      // Replace any previous pause-handler so concurrent looping SFX
+      // pool entries don't double-call endDuck.
+      el.onpause = () => this.endDuck(channelVolumes, masterVolume)
+    } else {
+      el.onpause = null
+    }
     el.play().catch(() => this.endDuck(channelVolumes, masterVolume))
   }
 
@@ -493,9 +515,9 @@ export const useAudioStore = create<AudioState>((set, get) => {
     },
 
     // ── SFX ──────────────────────────────────────────────────────
-    triggerSfx: (audioPath) => {
+    triggerSfx: (audioPath, slotVolume = 1, loop = false) => {
       const { sfxVolume, masterVolume } = get()
-      engine.triggerSfx(audioPath, sfxVolume, masterVolume, channelVolumes(get))
+      engine.triggerSfx(audioPath, sfxVolume, masterVolume, channelVolumes(get), slotVolume, loop)
     },
 
     setSfxVolume: (vol) => set({ sfxVolume: vol }),
