@@ -62,9 +62,10 @@ export interface ChannelState {
   currentTime: number
   duration: number
   /** Pre-assigned tracks the DM can swap between via right-click on the
-   *  channel strip. Persisted per campaign in `channel_playlist`. The
-   *  currently-playing track's path is tracked separately via
-   *  `filePath`; entries here may or may not match that path. */
+   *  channel strip. Hydrated from the v38 `tracks` + `track_channel_assignments`
+   *  tables on campaign load. The currently-playing track's path is
+   *  tracked separately via `filePath`; entries here are channel
+   *  memberships, not necessarily the active one. */
   playlist: PlaylistEntry[]
 }
 

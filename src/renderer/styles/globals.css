@@ -2547,7 +2547,7 @@ textarea.input {
 }
 
 /* ─── Audio panel ─────────────────────────────────────────────────────────── */
-/* Visual language for the AudioPanel channel strips, SFX grid, and master
+/* Visual language for the channel strips (MusicLivePanel) and master
    controls — pulled out of inline style soup so the panel matches the rest
    of the design system. Each strip opens with a coloured corner marker for
    the channel (blue/purple/red) and uses the --sp-* / --accent-blue
@@ -2936,9 +2936,10 @@ textarea.input {
 }
 
 /* ─── Audio strip (bottom-left, v1 Conservative) ─────────────────────────── */
-/* Compact floating audio chip anchored bottom-left. Shows the currently
-   active channel + play/stop + handle that opens the full AudioPanel.
-   Only rendered when at least one channel has a loaded track. */
+/* Compact floating audio chip anchored bottom-left. Always anchors the
+   ⚔️ combat-mode toggle; once any channel has loaded audio it also
+   shows the play/stop + track meta block; the ⋯ handle opens the full
+   audio popover (AudioFloatingPanel). */
 .audio-strip {
   position: absolute;
   /* Anchored to the bottom-left of the canvas, right of the 60-px tool
