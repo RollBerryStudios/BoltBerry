@@ -853,7 +853,7 @@
   },
   "campaignSettings": {
     "title": "Active campaign",
-    "globalHint": "App-wide settings (data folder, theme, language, toolbar, DM profile) live in the ⚙ Settings dialog (Ctrl/Cmd+,).",
+    "globalHint": "App-wide settings (data folder, theme, language, toolbar, DM profile, import campaign) live in the ⚙ Settings dialog (Ctrl/Cmd+,).",
     "rescan": "Rescan content folder",
     "rescanHint": "Read newly added maps/tokens/audio from the data folder.",
     "rescanRunning": "Scanning content folder…",
@@ -869,14 +869,7 @@
     "backupHint": "Drop a quick backup of the active campaign into the backup folder",
     "backupRunning": "Creating quick backup…",
     "backupDone": "Quick backup saved",
-    "backupFailed": "Backup failed: {{error}}",
-    "importTitle": "Import campaign",
-    "import": "Import campaign",
-    "importHint": "Import a campaign from a BoltBerry archive",
-    "importRunning": "Importing campaign…",
-    "importDone": "Campaign imported",
-    "importCanceled": "Import canceled",
-    "importFailed": "Import failed: {{error}}"
+    "backupFailed": "Backup failed: {{error}}"
   },
   "globalSettings": {
     "title": "Settings",
@@ -886,6 +879,7 @@
     "storage": "Storage",
     "appearance": "Appearance",
     "profile": "DM profile",
+    "file": "File",
     "about": "About",
     "errors": {
       "openFolder": "Could not open folder",
@@ -932,10 +926,21 @@
       "avatarHue": "Avatar colour",
       "resetHue": "Derive from name"
     },
+    "fileSec": {
+      "title": "File",
+      "hint": "App-wide file actions that aren't tied to any single active campaign.",
+      "importTitle": "Import campaign",
+      "importHint": "Import a campaign from a BoltBerry archive (.zip). It becomes the active campaign once import succeeds.",
+      "importRun": "Choose archive…",
+      "importRunning": "Importing campaign…",
+      "importDone": "Campaign imported",
+      "importCanceled": "Import canceled",
+      "importFailed": "Import failed: {{error}}"
+    },
     "about": {
       "title": "About BoltBerry",
       "tagline": "Local virtual tabletop for home sessions.",
-      "version": "Version"
+      "openFull": "Show full credits & license…"
     }
   },
   "dice": {

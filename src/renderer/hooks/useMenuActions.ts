@@ -84,6 +84,9 @@ export function useMenuActions({ onShowShortcuts, onNewCampaign, onAbout }: UseM
         case 'show-shortcuts':
           onShowShortcuts()
           break
+        case 'open-settings':
+          window.dispatchEvent(new CustomEvent('app:open-global-settings'))
+          break
         case 'about':
           onAbout()
           break

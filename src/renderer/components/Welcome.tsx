@@ -109,8 +109,16 @@ export function Welcome() {
 
   const stats = useCampaignStats(useMemo(() => campaigns.map((c) => c.id), [campaigns]))
   const global = useGlobalStats([campaigns.length])
-  const [profileOpen, setProfileOpen] = useState(false)
   const [aboutOpen, setAboutOpen] = useState(false)
+
+  // The 👤 profile button used to open a separate ProfileModal; profile
+  // editing now lives as a section inside GlobalSettingsModal so the
+  // store has a single editor surface. We deep-link straight to it.
+  function openProfileSettings() {
+    window.dispatchEvent(new CustomEvent('app:open-global-settings', {
+      detail: { section: 'profile' },
+    }))
+  }
 
   async function handleSetCover(campaign: Campaign) {
     if (!window.electronAPI) return
@@ -144,11 +152,10 @@ export function Welcome() {
         onClearCover={handleClearCover}
         onCreate={() => setCreating(true)}
         onImport={handleImport}
-        onOpenProfile={() => setProfileOpen(true)}
+        onOpenProfile={openProfileSettings}
         error={error}
       />
 
-      {profileOpen && <ProfileModal onClose={() => setProfileOpen(false)} />}
       {aboutOpen && <AboutDialog onClose={() => setAboutOpen(false)} />}
 
       {creating && (
@@ -564,86 +571,6 @@ function SettingsIconButton() {
 }
 
 // ─── Profile modal ───────────────────────────────────────────────────
-
-function ProfileModal({ onClose }: { onClose: () => void }) {
-  const { t } = useTranslation()
-  const { displayName, avatarHue, setDisplayName, setAvatarHue } = useSettingsStore()
-  const [draftName, setDraftName] = useState(displayName)
-  const [draftHue, setDraftHue] = useState<number | null>(avatarHue)
-
-  function commit() {
-    setDisplayName(draftName)
-    setAvatarHue(draftHue)
-    onClose()
-  }
-
-  return (
-    <div className="bb-welcome-modal-backdrop" onClick={onClose}>
-      <div className="bb-welcome-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="bb-welcome-modal-title display">{t('welcome.profileTitle')}</div>
-
-        <label style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <span style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: 700 }}>
-            {t('welcome.profileName')}
-          </span>
-          <input
-            className="input"
-            autoFocus
-            placeholder={t('welcome.profileNamePlaceholder')}
-            maxLength={40}
-            value={draftName}
-            onChange={(e) => setDraftName(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') commit()
-              if (e.key === 'Escape') onClose()
-            }}
-          />
-        </label>
-
-        <div>
-          <div style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: 700, marginBottom: 6 }}>
-            {t('welcome.profileAvatar')}
-          </div>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {[null, 40, 80, 140, 200, 260, 320].map((h) => {
-              const selected = draftHue === h
-              const bg = h === null ? 'var(--bg-elevated)' : `hsl(${h} 60% 45%)`
-              return (
-                <button
-                  key={String(h)}
-                  type="button"
-                  onClick={() => setDraftHue(h)}
-                  style={{
-                    width: 32, height: 32,
-                    borderRadius: '50%',
-                    background: bg,
-                    border: selected ? '2px solid var(--text-primary)' : '2px solid transparent',
-                    cursor: 'pointer',
-                    color: 'var(--text-inverse)',
-                    fontSize: 12,
-                    fontWeight: 700,
-                  }}
-                  title={h === null ? t('welcome.profileAutoHue') : `${h}°`}
-                >
-                  {h === null ? '?' : ''}
-                </button>
-              )
-            })}
-          </div>
-        </div>
-
-        <div className="bb-welcome-modal-actions">
-          <button className="bb-welcome-cta bb-welcome-cta-ghost" type="button" onClick={onClose}>
-            {t('dashboard.cancel')}
-          </button>
-          <button className="bb-welcome-cta" type="button" onClick={commit}>
-            {t('welcome.profileSave')}
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 function CreateModal({
   value,

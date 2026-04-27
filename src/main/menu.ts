@@ -27,6 +27,7 @@ export type MenuAction =
   | 'toggle-camera-follow'
   | 'atmosphere-image'
   | 'show-shortcuts'
+  | 'open-settings'
   | 'about'
 
 let currentLanguage: MenuLanguage = 'de'
@@ -81,6 +82,7 @@ interface MenuStrings {
   github: string
   reportIssue: string
   about: string
+  settings: string
   appMenu: string
   services: string
   hide: string
@@ -129,6 +131,7 @@ const STRINGS: Record<MenuLanguage, MenuStrings> = {
     github: 'BoltBerry auf GitHub',
     reportIssue: 'Problem melden',
     about: 'Über BoltBerry',
+    settings: 'Einstellungen…',
     appMenu: 'BoltBerry',
     services: 'Dienste',
     hide: 'BoltBerry ausblenden',
@@ -175,6 +178,7 @@ const STRINGS: Record<MenuLanguage, MenuStrings> = {
     github: 'BoltBerry on GitHub',
     reportIssue: 'Report an Issue',
     about: 'About BoltBerry',
+    settings: 'Settings…',
     appMenu: 'BoltBerry',
     services: 'Services',
     hide: 'Hide BoltBerry',
@@ -196,6 +200,11 @@ function buildTemplate(lang: MenuLanguage): MenuItemConstructorOptions[] {
       submenu: [
         { label: s.about, click: () => send('about') },
         { type: 'separator' },
+        // Cmd+, is the macOS-canonical Preferences shortcut. Renderer
+        // owns the same shortcut for windows that don't have native menu
+        // focus; both routes flip the same modal.
+        { label: s.settings, accelerator: 'CmdOrCtrl+,', click: () => send('open-settings') },
+        { type: 'separator' },
         { label: s.services, role: 'services' },
         { type: 'separator' },
         { label: s.hide, role: 'hide' },
@@ -216,6 +225,13 @@ function buildTemplate(lang: MenuLanguage): MenuItemConstructorOptions[] {
       { type: 'separator' },
       { label: s.exportCampaign, click: () => send('export-campaign') },
       { label: s.importCampaign, click: () => send('import-campaign') },
+      // Settings ride in File on Win/Linux per platform convention; on
+      // macOS the App-menu entry above is the canonical home so we omit
+      // it here to avoid two routes in the same menubar.
+      ...(isMac ? [] : [
+        { type: 'separator' as const },
+        { label: s.settings, accelerator: 'CmdOrCtrl+,', click: () => send('open-settings') },
+      ]),
       { type: 'separator' },
       isMac ? { role: 'close' } : { label: s.quit, role: 'quit' },
     ],

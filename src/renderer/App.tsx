@@ -11,7 +11,7 @@ import { AboutDialog } from './components/AboutDialog'
 import { SetupWizard } from './components/SetupWizard'
 import { ShortcutOverlay } from './components/ShortcutOverlay'
 import { CommandPalette } from './components/CommandPalette'
-import { GlobalSettingsModal } from './components/GlobalSettingsModal'
+import { GlobalSettingsModal, type GlobalSettingsSection } from './components/GlobalSettingsModal'
 import { ToastProvider } from './components/shared/Toast'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
@@ -38,6 +38,7 @@ export default function App() {
   const [showCommandPalette, setShowCommandPalette] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
   const [showGlobalSettings, setShowGlobalSettings] = useState(false)
+  const [globalSettingsSection, setGlobalSettingsSection] = useState<GlobalSettingsSection | undefined>(undefined)
 
   useKeyboardShortcuts()
   useAutoSave()
@@ -87,7 +88,11 @@ export default function App() {
       // Cmd/Ctrl+, → open global settings (platform convention).
       if (e.key === ',' && (e.ctrlKey || e.metaKey)) {
         e.preventDefault()
-        setShowGlobalSettings((v) => !v)
+        setShowGlobalSettings((v) => {
+          if (v) return false
+          setGlobalSettingsSection(undefined)
+          return true
+        })
         return
       }
       const tag = (e.target as HTMLElement).tagName
@@ -106,9 +111,15 @@ export default function App() {
   }, [])
 
   // Cross-component event so any chrome (Welcome, CampaignView, Toolbar
-  // titlebar) can open the global settings without prop-drilling.
+  // titlebar, native menu) can open the global settings without
+  // prop-drilling. `detail.section` lets a deep-link land on a specific
+  // section (e.g. Welcome's 👤 button → 'profile').
   useEffect(() => {
-    const onOpen = () => setShowGlobalSettings(true)
+    const onOpen = (e: Event) => {
+      const detail = (e as CustomEvent).detail as { section?: GlobalSettingsSection } | undefined
+      setGlobalSettingsSection(detail?.section)
+      setShowGlobalSettings(true)
+    }
     window.addEventListener('app:open-global-settings', onOpen)
     return () => window.removeEventListener('app:open-global-settings', onOpen)
   }, [])
@@ -216,7 +227,12 @@ export default function App() {
       {showShortcuts && <ShortcutOverlay onClose={() => setShowShortcuts(false)} />}
       {showAbout && <AboutDialog onClose={() => setShowAbout(false)} />}
       {showCommandPalette && <CommandPalette onClose={() => setShowCommandPalette(false)} />}
-      {showGlobalSettings && <GlobalSettingsModal onClose={() => setShowGlobalSettings(false)} />}
+      {showGlobalSettings && (
+        <GlobalSettingsModal
+          onClose={() => { setShowGlobalSettings(false); setGlobalSettingsSection(undefined) }}
+          initialSection={globalSettingsSection}
+        />
+      )}
       <ToastProvider />
     </>
   )

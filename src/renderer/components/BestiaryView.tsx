@@ -20,7 +20,6 @@ export function BestiaryView() {
   const { t } = useTranslation()
   const setTopView = useUIStore((s) => s.setTopView)
   const language = useUIStore((s) => s.language)
-  const toggleLanguage = useUIStore((s) => s.toggleLanguage)
   const target = useUIStore((s) => s.bestiaryTarget)
   const clearTarget = useUIStore((s) => s.clearBestiaryTarget)
   // Match the DmTitleBar convention: macOS reserves 72px on the LEFT
@@ -107,18 +106,16 @@ export function BestiaryView() {
               <button type="button" onClick={() => setQuery('')} title={t('bestiary.clearSearch')}>✕</button>
             )}
           </div>
-          <div className="bb-best-lang" role="group" aria-label="Language">
-            {(['de', 'en'] as const).map((l) => (
-              <button
-                key={l}
-                type="button"
-                onClick={() => { if (language !== l) toggleLanguage() }}
-                className={language === l ? 'active' : ''}
-              >
-                {l.toUpperCase()}
-              </button>
-            ))}
-          </div>
+          <button
+            type="button"
+            className="bb-best-back"
+            onClick={() => window.dispatchEvent(new CustomEvent('app:open-global-settings'))}
+            title={`${t('globalSettings.open')} (Ctrl/Cmd+,)`}
+            aria-label={t('globalSettings.open')}
+            style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
+          >
+            ⚙
+          </button>
         </div>
         {!isDarwin && <div className="bb-best-controls-space" aria-hidden="true" />}
       </header>

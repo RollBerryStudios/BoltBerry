@@ -26,7 +26,6 @@ export function CompendiumView() {
   const { t } = useTranslation()
   const setTopView = useUIStore((s) => s.setTopView)
   const language = useUIStore((s) => s.language)
-  const toggleLanguage = useUIStore((s) => s.toggleLanguage)
   // Reserve space for OS-native window controls (matches DmTitleBar).
   const isDarwin = typeof navigator !== 'undefined' &&
     navigator.userAgent.toUpperCase().includes('MAC')
@@ -238,20 +237,15 @@ export function CompendiumView() {
           <button type="button" className="bb-comp-cta bb-comp-cta-ghost" onClick={handleOpenFolder}>
             📁 {t('compendium.openFolder')}
           </button>
-          <div className="bb-comp-lang" role="group" aria-label="Language">
-            {(['de', 'en'] as const).map((l) => (
-              <button
-                key={l}
-                type="button"
-                onClick={() => {
-                  if (language !== l) toggleLanguage()
-                }}
-                className={language === l ? 'active' : ''}
-              >
-                {l.toUpperCase()}
-              </button>
-            ))}
-          </div>
+          <button
+            type="button"
+            className="bb-comp-cta bb-comp-cta-ghost"
+            onClick={() => window.dispatchEvent(new CustomEvent('app:open-global-settings'))}
+            title={`${t('globalSettings.open')} (Ctrl/Cmd+,)`}
+            aria-label={t('globalSettings.open')}
+          >
+            ⚙
+          </button>
         </div>
         {!isDarwin && <div className="bb-comp-controls-space" aria-hidden="true" />}
       </header>

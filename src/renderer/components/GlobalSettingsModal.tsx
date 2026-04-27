@@ -4,19 +4,24 @@ import { Modal } from './shared/Modal'
 import { useSettingsStore } from '../stores/settingsStore'
 import { useUIStore } from '../stores/uiStore'
 import { useDockStore } from '../stores/dockStore'
+import { useCampaignStore } from '../stores/campaignStore'
 import { showToast } from './shared/Toast'
+
+export type GlobalSettingsSection = 'storage' | 'appearance' | 'profile' | 'file' | 'about'
 
 interface GlobalSettingsModalProps {
   onClose: () => void
+  /** Pre-select a section so deep-links from chrome (e.g. Welcome's
+   *  👤 button) land on the right page. Defaults to 'storage'. */
+  initialSection?: GlobalSettingsSection
 }
 
-type Section = 'storage' | 'appearance' | 'profile' | 'about'
+type Section = GlobalSettingsSection
 
-const APP_VERSION = '0.1.0'
 
-export function GlobalSettingsModal({ onClose }: GlobalSettingsModalProps) {
+export function GlobalSettingsModal({ onClose, initialSection }: GlobalSettingsModalProps) {
   const { t } = useTranslation()
-  const [section, setSection] = useState<Section>('storage')
+  const [section, setSection] = useState<Section>(initialSection ?? 'storage')
 
   return (
     <Modal
@@ -61,6 +66,7 @@ export function GlobalSettingsModal({ onClose }: GlobalSettingsModalProps) {
           <SectionTab id="storage" current={section} onSelect={setSection} icon="💾" label={t('globalSettings.storage')} />
           <SectionTab id="appearance" current={section} onSelect={setSection} icon="🎨" label={t('globalSettings.appearance')} />
           <SectionTab id="profile" current={section} onSelect={setSection} icon="👤" label={t('globalSettings.profile')} />
+          <SectionTab id="file" current={section} onSelect={setSection} icon="📁" label={t('globalSettings.file')} />
           <SectionTab id="about" current={section} onSelect={setSection} icon="ℹ" label={t('globalSettings.about')} />
         </nav>
 
@@ -68,7 +74,8 @@ export function GlobalSettingsModal({ onClose }: GlobalSettingsModalProps) {
           {section === 'storage' && <StorageSection />}
           {section === 'appearance' && <AppearanceSection />}
           {section === 'profile' && <ProfileSection />}
-          {section === 'about' && <AboutSection />}
+          {section === 'file' && <FileSection onClose={onClose} />}
+          {section === 'about' && <AboutSection onClose={onClose} />}
         </div>
       </div>
     </Modal>
@@ -420,8 +427,67 @@ function ProfileSection() {
   )
 }
 
+// ─── File section ────────────────────────────────────────────────────────────
+// Cross-campaign file actions: importing another campaign archive while
+// already inside one. Per-campaign export/quick-backup live in the
+// per-campaign SettingsPanel where the active campaign is the implied
+// subject; "import any other campaign" doesn't fit that scope.
+function FileSection({ onClose }: { onClose: () => void }) {
+  const { t } = useTranslation()
+  const setActiveCampaign = useCampaignStore((s) => s.setActiveCampaign)
+
+  async function handleImport() {
+    if (!window.electronAPI) return
+    showToast(t('globalSettings.fileSec.importRunning'), 'info')
+    try {
+      const result = await window.electronAPI.importCampaign() as {
+        success: boolean; campaignId?: number; error?: string; canceled?: boolean
+      }
+      if (result.success && result.campaignId) {
+        const campaigns = await window.electronAPI.campaigns.list()
+        useCampaignStore.getState().setCampaigns(campaigns)
+        setActiveCampaign(result.campaignId)
+        showToast(t('globalSettings.fileSec.importDone'), 'success', 6000)
+        onClose()
+      } else if (result.canceled) {
+        showToast(t('globalSettings.fileSec.importCanceled'), 'info')
+      } else if (!result.success) {
+        showToast(t('globalSettings.fileSec.importFailed', { error: result.error ?? '' }), 'error', 7000)
+      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      showToast(t('globalSettings.fileSec.importFailed', { error: msg }), 'error', 7000)
+    }
+  }
+
+  return (
+    <>
+      <SectionHeader title={t('globalSettings.fileSec.title')} hint={t('globalSettings.fileSec.hint')} />
+
+      <div style={{
+        padding: 'var(--sp-3)',
+        background: 'var(--bg-overlay)',
+        borderRadius: 'var(--radius)',
+        border: '1px solid var(--border-subtle)',
+      }}>
+        <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 4 }}>
+          📥 {t('globalSettings.fileSec.importTitle')}
+        </div>
+        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 'var(--sp-2)' }}>
+          {t('globalSettings.fileSec.importHint')}
+        </div>
+        <button className="btn btn-ghost" onClick={handleImport} style={{ width: '100%' }}>
+          {t('globalSettings.fileSec.importRun')}
+        </button>
+      </div>
+    </>
+  )
+}
+
 // ─── About section ───────────────────────────────────────────────────────────
-function AboutSection() {
+// Defers to the canonical AboutDialog (SRD attribution + credits) so the
+// modal doesn't keep a parallel about copy that would drift over time.
+function AboutSection({ onClose }: { onClose: () => void }) {
   const { t } = useTranslation()
   return (
     <>
@@ -435,12 +501,18 @@ function AboutSection() {
         textAlign: 'center',
       }}>
         <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700, marginBottom: 4 }}>BoltBerry</div>
-        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 'var(--sp-3)' }}>
+        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 'var(--sp-4)' }}>
           {t('globalSettings.about.tagline')}
         </div>
-        <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
-          {t('globalSettings.about.version')} <code style={{ fontFamily: 'monospace' }}>{APP_VERSION}</code>
-        </div>
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            onClose()
+            window.dispatchEvent(new CustomEvent('app:open-about'))
+          }}
+        >
+          {t('globalSettings.about.openFull')}
+        </button>
       </div>
     </>
   )

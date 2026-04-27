@@ -6,14 +6,15 @@ import { showToast } from '../../shared/Toast'
 /**
  * Per-campaign actions panel.
  *
- * Global preferences (data folder, theme, language, dock toggles, DM
- * profile, app cleanup) live in the GlobalSettingsModal — opened via
- * the gear icon in the title bar or Ctrl/Cmd+, — so this panel is now
- * strictly scoped to the active campaign.
+ * Strictly scoped to the *active* campaign: rescan/export/quick-backup.
+ * Anything app-wide (data folder, theme, language, dock prefs, DM
+ * profile, asset cleanup, importing *another* campaign) lives in the
+ * GlobalSettingsModal — opened via the ⚙ gear in the title bar,
+ * Ctrl/Cmd+,, the native menu, or the command palette.
  */
 export function SettingsPanel() {
   const { t } = useTranslation()
-  const { activeCampaignId, setActiveCampaign } = useCampaignStore()
+  const { activeCampaignId } = useCampaignStore()
 
   async function handleRescanContent() {
     if (!window.electronAPI || !activeCampaignId) return
@@ -77,35 +78,14 @@ export function SettingsPanel() {
     }
   }
 
-  async function handleImport() {
-    if (!window.electronAPI) return
-    showToast(t('campaignSettings.importRunning'), 'info')
-    try {
-      const result = await window.electronAPI.importCampaign() as {
-        success: boolean; campaignId?: number; error?: string; canceled?: boolean
-      }
-      if (result.success && result.campaignId) {
-        const campaigns = await window.electronAPI.campaigns.list()
-        useCampaignStore.getState().setCampaigns(campaigns)
-        setActiveCampaign(result.campaignId)
-        showToast(t('campaignSettings.importDone'), 'success', 6000)
-      } else if (result.canceled) {
-        showToast(t('campaignSettings.importCanceled'), 'info')
-      } else if (!result.success) {
-        showToast(t('campaignSettings.importFailed', { error: result.error ?? '' }), 'error', 7000)
-      }
-    } catch (err) {
-      const message = err instanceof Error ? err.message : String(err)
-      showToast(t('campaignSettings.importFailed', { error: message }), 'error', 7000)
-    }
-  }
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-4)', overflowY: 'auto', padding: 'var(--sp-3)' }}>
 
       {/* Hint pointing to the global settings modal — global preferences
-          (theme/language/data folder/dock prefs) used to live here too. */}
-      <div
+          (theme/language/data folder/dock prefs/file import) live there. */}
+      <button
+        type="button"
+        onClick={() => window.dispatchEvent(new CustomEvent('app:open-global-settings'))}
         style={{
           padding: 'var(--sp-2) var(--sp-3)',
           background: 'var(--bg-overlay)',
@@ -113,10 +93,14 @@ export function SettingsPanel() {
           borderRadius: 'var(--radius)',
           fontSize: 'var(--text-xs)',
           color: 'var(--text-muted)',
+          textAlign: 'left',
+          cursor: 'pointer',
+          fontFamily: 'inherit',
         }}
+        title={t('campaignSettings.globalHint')}
       >
         ⚙ {t('campaignSettings.globalHint')}
-      </div>
+      </button>
 
       {/* ── Aktive Kampagne ───────────────────────────────────────────── */}
       {activeCampaignId && (
@@ -153,20 +137,6 @@ export function SettingsPanel() {
           </div>
         </div>
       )}
-
-      {/* ── Andere Kampagne importieren ───────────────────────────────── */}
-      <div className="sidebar-section">
-        <div className="sidebar-section-title">{t('campaignSettings.importTitle')}</div>
-
-        <button
-          className="btn btn-ghost"
-          onClick={handleImport}
-          title={t('campaignSettings.importHint')}
-          style={{ justifyContent: 'flex-start', gap: 8, width: '100%' }}
-        >
-          <span>📥</span> {t('campaignSettings.import')}
-        </button>
-      </div>
 
     </div>
   )

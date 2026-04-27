@@ -853,7 +853,7 @@
   },
   "campaignSettings": {
     "title": "Aktive Kampagne",
-    "globalHint": "App-weite Einstellungen (Datenordner, Theme, Sprache, Werkzeugleiste, DM-Profil) findest du im ⚙ Einstellungs-Dialog (Ctrl/Cmd+,).",
+    "globalHint": "App-weite Einstellungen (Datenordner, Theme, Sprache, Werkzeugleiste, DM-Profil, Kampagne importieren) findest du im ⚙ Einstellungs-Dialog (Ctrl/Cmd+,).",
     "rescan": "Inhaltsordner scannen",
     "rescanHint": "Liest neue Karten/Token/Audio-Dateien aus dem Datenordner ein.",
     "rescanRunning": "Inhaltsordner wird gescannt…",
@@ -869,14 +869,7 @@
     "backupHint": "Schnell-Backup der aktiven Kampagne im Backup-Ordner ablegen",
     "backupRunning": "Schnell-Backup wird erstellt…",
     "backupDone": "Schnell-Backup gespeichert",
-    "backupFailed": "Backup fehlgeschlagen: {{error}}",
-    "importTitle": "Kampagne importieren",
-    "import": "Kampagne importieren",
-    "importHint": "Kampagne aus BoltBerry-Archiv importieren",
-    "importRunning": "Kampagne wird importiert…",
-    "importDone": "Kampagne importiert",
-    "importCanceled": "Import abgebrochen",
-    "importFailed": "Import fehlgeschlagen: {{error}}"
+    "backupFailed": "Backup fehlgeschlagen: {{error}}"
   },
   "globalSettings": {
     "title": "Einstellungen",
@@ -886,6 +879,7 @@
     "storage": "Speicher",
     "appearance": "Darstellung",
     "profile": "DM-Profil",
+    "file": "Datei",
     "about": "Über",
     "errors": {
       "openFolder": "Ordner konnte nicht geöffnet werden",
@@ -932,10 +926,21 @@
       "avatarHue": "Avatar-Farbe",
       "resetHue": "Aus Name ableiten"
     },
+    "fileSec": {
+      "title": "Datei",
+      "hint": "App-weite Datei-Aktionen, die nicht an eine bestimmte aktive Kampagne gebunden sind.",
+      "importTitle": "Kampagne importieren",
+      "importHint": "Eine Kampagne aus einem BoltBerry-Archiv (.zip) importieren. Sie wird zur aktiven Kampagne, sobald der Import erfolgreich ist.",
+      "importRun": "Archiv auswählen…",
+      "importRunning": "Kampagne wird importiert…",
+      "importDone": "Kampagne importiert",
+      "importCanceled": "Import abgebrochen",
+      "importFailed": "Import fehlgeschlagen: {{error}}"
+    },
     "about": {
       "title": "Über BoltBerry",
       "tagline": "Lokales Virtual-Tabletop für Heim-Sessions.",
-      "version": "Version"
+      "openFull": "Vollständige Credits & Lizenz anzeigen…"
     }
   },
   "dice": {

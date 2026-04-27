@@ -375,9 +375,12 @@ export function MusicLibraryPanel() {
           <button
             className="btn btn-ghost"
             onClick={handleExportSoundtrack}
-            title="Aktuelle Soundtrack-Auswahl als JSON-Manifest exportieren"
+            title={
+              soundtrackFilter === '__all__'
+                ? 'Bitte zuerst einen Soundtrack-Filter wählen, dann exportieren'
+                : 'Aktuelle Soundtrack-Auswahl als JSON-Manifest exportieren'
+            }
             aria-label="Soundtrack exportieren"
-            disabled={soundtrackFilter === '__all__'}
           >
             📤
           </button>
