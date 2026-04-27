@@ -53,7 +53,14 @@ export function DmTitleBar() {
       {isDarwin && <div className="dm-title-bar-traffic-space" />}
 
       <div className="dm-title-bar-brand">
-        <img src={logoSquare} alt="" aria-hidden="true" width={16} height={16} />
+        <img
+          src={logoSquare}
+          alt=""
+          aria-hidden="true"
+          width={18}
+          height={18}
+          style={{ filter: 'drop-shadow(0 0 6px rgba(245, 168, 0, 0.3))' }}
+        />
         <span className="dm-title-bar-wordmark">
           BOLT<span style={{ color: 'var(--accent-blue-light)' }}>BERRY</span>
         </span>

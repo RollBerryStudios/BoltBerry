@@ -499,7 +499,9 @@
     "shortcuts": "Shortcuts [?]",
     "themeDark": "Theme: Light",
     "themeLight": "Theme: Dark",
-    "switchLanguage": "Zu Deutsch wechseln"
+    "switchLanguage": "Zu Deutsch wechseln",
+    "settings": "Settings",
+    "atmosphereOn": "active, click to clear"
   },
   "cropper": {
     "title": "Adjust image crop",

@@ -840,6 +840,24 @@ html, body {
 .workmode-btn.active-fog    { color: #60a5fa; }
 .workmode-btn.active-prev   { color: var(--success); }
 
+/* Player Cluster — visual grouping for the four "what the players
+   see" toolbar buttons (🖥 Player-Window, 🎯 Player-Control, 🏞
+   Atmosphere, 🌚 Blackout). A subtle inset background and 1-px
+   inner gap make them read as one logical unit instead of four
+   loose icons mixed with everything else. */
+.player-cluster {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  flex-shrink: 0;
+}
+.player-cluster .tool-btn { background: transparent; }
+.player-cluster .tool-btn:hover { background: var(--bg-overlay); }
+
 /* ─── Inputs ─────────────────────────────────────────────────────────────────── */
 .input {
   background: var(--bg-base);

@@ -13,7 +13,6 @@ import { useFogStore } from '../../stores/fogStore'
 import { MonitorDialog } from '../MonitorDialog'
 import { SessionStartModal } from '../SessionStartModal'
 import clsx from 'clsx'
-import logoSquare from '../../assets/boltberry-logo.png'
 
 // ─── Dropdown positioning ────────────────────────────────────────────────────
 // The toolbar is overflow:hidden vertically (to hide horizontal scroll on
@@ -150,12 +149,19 @@ function ActionGroup({ actions, groupIcon, groupLabelKey }: ActionGroupProps) {
 // toolbar only keeps session chrome, work modes, contextual fog controls,
 // and view actions (undo/redo/zoom/etc).
 
+// Three real workflow phases of a session. The legacy 'fog-edit' and
+// 'player-preview' WorkMode values still exist in the type for back-
+// compat (state restoration, command palette, render-mode discriminants
+// in CanvasArea / SubToolStrip), but they're no longer surfaced as
+// buttons here:
+//   - 'fog-edit' is reachable by clicking any fog tool in the LeftToolDock
+//     (same end state — activeTool gets set to a fog variant)
+//   - 'player-preview' is now a View-section toggle next to Player-Eye,
+//     since it's a DM-side render diagnostic, not a workflow phase.
 const WORK_MODE_CONFIG: { id: WorkMode; icon: string; label: string; shortLabel: string }[] = [
-  { id: 'prep',           icon: '✎',  label: 'Vorbereitung',    shortLabel: 'Prep'    },
-  { id: 'play',           icon: '▶',  label: 'Spiel',           shortLabel: 'Spiel'   },
-  { id: 'combat',         icon: '⚔️', label: 'Kampf',           shortLabel: 'Kampf'   },
-  { id: 'fog-edit',       icon: '🌫', label: 'Nebel bearbeiten',shortLabel: 'Fog'     },
-  { id: 'player-preview', icon: '👁', label: 'Spieler-Vorschau',shortLabel: 'Vorschau'},
+  { id: 'prep',   icon: '✎',  label: 'Vorbereitung', shortLabel: 'Prep'  },
+  { id: 'play',   icon: '▶',  label: 'Spiel',        shortLabel: 'Spiel' },
+  { id: 'combat', icon: '⚔️', label: 'Kampf',        shortLabel: 'Kampf' },
 ]
 
 // ─── Main Toolbar ──────────────────────────────────────────────────────────────
@@ -172,6 +178,7 @@ export function Toolbar() {
     showMinimap, toggleMinimap,
     fogBrushRadius, setFogBrushRadius,
     showPlayerEye, togglePlayerEye,
+    atmosphereImagePath,
   } = useUIStore()
   const { sessionMode, setSessionMode, workMode, setWorkMode, playerConnected } = useSessionStore()
   const { blackoutActive, toggleBlackout } = useUIStore()
@@ -270,10 +277,8 @@ export function Toolbar() {
               className={clsx(
                 'workmode-btn',
                 workMode === wm.id && 'active',
-                workMode === wm.id && wm.id === 'play'           && 'active-play',
-                workMode === wm.id && wm.id === 'combat'         && 'active-combat',
-                workMode === wm.id && wm.id === 'fog-edit'       && 'active-fog',
-                workMode === wm.id && wm.id === 'player-preview' && 'active-prev',
+                workMode === wm.id && wm.id === 'play'   && 'active-play',
+                workMode === wm.id && wm.id === 'combat' && 'active-combat',
               )}
               title={wm.label}
               onClick={() => {
@@ -349,20 +354,12 @@ export function Toolbar() {
         />
       )}
 
-      <button
-        className={clsx('tool-btn', showPlayerEye && 'active')}
-        title={showPlayerEye ? 'Spieler-Sicht ausblenden [E]' : 'Spieler-Sicht anzeigen [E]'}
-        aria-label={showPlayerEye ? 'Spieler-Sicht ausblenden' : 'Spieler-Sicht anzeigen'}
-        onClick={togglePlayerEye}
-        style={showPlayerEye ? { color: 'var(--success)' } : undefined}
-      >
-        👁‍🗨
-      </button>
-
       <Divider />
 
-      {/* ── SECTION: Session ─────────────────────────────────────────────── */}
-      {/* Live/Prep toggle — direct, no modal */}
+      {/* ── SECTION: Session pill ────────────────────────────────────────── */}
+      {/* Live/Prep toggle — most prominent status indicator of the app,
+          stays as a wide pill so the DM always knows whether changes
+          are live to the players. */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flexShrink: 0 }}>
         <button
           onClick={handleSessionToggle}
@@ -406,78 +403,6 @@ export function Toolbar() {
         )}
       </div>
 
-      {/* Compendium — always reachable, swaps the whole view via topView */}
-      <button
-        className="tool-btn"
-        title={t('compendium.title')}
-        aria-label={t('compendium.title')}
-        onClick={() => useUIStore.getState().setTopView('compendium')}
-      >
-        📚
-      </button>
-
-      {/* Player window */}
-      <button
-        className={clsx('tool-btn', playerConnected && 'active')}
-        title={playerConnected ? 'Spielerfenster schließen (Ctrl+P)' : `${t('toolbar.openPlayerWindow')} (Ctrl+P)`}
-        onClick={handlePlayerWindowToggle}
-        style={playerConnected ? { color: 'var(--success)' } : undefined}
-      >
-        🖥
-        <span style={{ fontSize: 8, marginLeft: 2, opacity: 0.7 }}>{playerConnected ? '●' : '○'}</span>
-      </button>
-
-      {/* Player Control Mode — independent framed view on the player screen.
-          Replaces the legacy 📡 "follow camera" + 📺 "share once" buttons.
-          The dashed rectangle on the GM canvas is the single source of
-          truth for what the player window renders. */}
-      <button
-        className={clsx('tool-btn', playerViewportMode && 'active')}
-        title={playerViewportMode
-          ? t('toolbar.playerControl.on')
-          : t('toolbar.playerControl.off')}
-        onClick={() => {
-          const next = !playerViewportMode
-          if (next) {
-            const { scale, offsetX, offsetY, canvasW, canvasH } = useMapTransformStore.getState()
-            if (scale > 0 && canvasW > 0 && canvasH > 0) {
-              // Seed the rect with the player window's aspect ratio so
-              // the indicator on the DM canvas == what the players
-              // actually see. Falls back to 16:9 when no player window
-              // has reported yet.
-              const ws = useUIStore.getState().playerWindowSize
-              const aspect = ws && ws.w > 0 && ws.h > 0 ? ws.w / ws.h : 16 / 9
-              const viewW = canvasW / scale
-              const viewH = canvasH / scale
-              const fitH = Math.min(viewH, viewW / aspect)
-              const fitW = fitH * aspect
-              setPlayerViewport({
-                cx: (canvasW / 2 - offsetX) / scale,
-                cy: (canvasH / 2 - offsetY) / scale,
-                w: fitW,
-                h: fitH,
-                rotation: 0,
-              })
-            }
-          }
-          setPlayerViewportMode(next)
-        }}
-        style={playerViewportMode ? { color: 'var(--accent)' } : undefined}
-      >
-        🎯
-      </button>
-
-      {/* Blackout */}
-      <button
-        className={clsx('tool-btn', blackoutActive && 'active')}
-        title={`${t('toolbar.blackout')} (Ctrl+B)`}
-        aria-label={t('toolbar.blackout')}
-        onClick={toggleBlackout}
-        style={blackoutActive ? { color: 'var(--warning)' } : undefined}
-      >
-        🌚
-      </button>
-
       <Divider />
 
       {/* ── SECTION: Undo / Redo ────────────────────────────────────────── */}
@@ -504,7 +429,11 @@ export function Toolbar() {
 
       <Divider />
 
-      {/* ── SECTION: View ───────────────────────────────────────────────── */}
+      {/* ── SECTION: View — DM canvas display toggles ─────────────────────
+          Both Player-Eye (overlay of what's visible to the players) and
+          Player-Preview (full DM canvas re-rendered as the player would
+          see it) are DM-side render diagnostics, not player-display
+          controls — they belong here next to zoom / minimap / grid-snap. */}
       <div
         title="Zoom (Mausrad zum Zoomen)"
         style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 36, textAlign: 'center', lineHeight: '32px', fontFamily: 'monospace', cursor: 'default' }}
@@ -521,50 +450,159 @@ export function Toolbar() {
       >
         ⊞
       </button>
+      <button
+        className={clsx('tool-btn', showPlayerEye && 'active')}
+        title={showPlayerEye ? 'Spieler-Sicht ausblenden [E]' : 'Spieler-Sicht anzeigen [E]'}
+        aria-label={showPlayerEye ? 'Spieler-Sicht ausblenden' : 'Spieler-Sicht anzeigen'}
+        onClick={togglePlayerEye}
+        style={showPlayerEye ? { color: 'var(--success)' } : undefined}
+      >
+        👁‍🗨
+      </button>
+      <button
+        className={clsx('tool-btn', workMode === 'player-preview' && 'active')}
+        title={workMode === 'player-preview'
+          ? 'Spieler-Vorschau beenden — DM-Canvas zurück zur normalen Ansicht'
+          : 'Spieler-Vorschau — DM-Canvas zeigt, was die Spieler sehen würden'}
+        aria-label="Spieler-Vorschau umschalten"
+        onClick={() => setWorkMode(workMode === 'player-preview' ? 'play' : 'player-preview')}
+        style={workMode === 'player-preview' ? { color: 'var(--success)' } : undefined}
+      >
+        👀
+      </button>
 
       <div style={{ flex: 1 }} />
 
-      {/* ── SECTION: Misc ───────────────────────────────────────────────── */}
-      {activeCampaignId && (
-        <img
-          src={logoSquare}
-          alt="BoltBerry"
-          style={{
-            height: 24,
-            width: 'auto',
-            marginRight: 'var(--sp-2)',
-            filter: 'drop-shadow(0 0 6px rgba(245, 168, 0, 0.3))',
+      {/* ── SECTION: Player Cluster ───────────────────────────────────────
+          Four buttons that all change *what the players see on their
+          display*. Wrapped in a container with subtle background so they
+          read as one logical group instead of four loose icons. */}
+      <div className="player-cluster">
+        {/* Player window open/close */}
+        <button
+          className={clsx('tool-btn', playerConnected && 'active')}
+          title={playerConnected ? 'Spielerfenster schließen (Ctrl+P)' : `${t('toolbar.openPlayerWindow')} (Ctrl+P)`}
+          onClick={handlePlayerWindowToggle}
+          style={playerConnected ? { color: 'var(--success)' } : undefined}
+        >
+          🖥
+          <span style={{ fontSize: 8, marginLeft: 2, opacity: 0.7 }}>{playerConnected ? '●' : '○'}</span>
+        </button>
+
+        {/* Player Control Mode — independent framed view on the player screen */}
+        <button
+          className={clsx('tool-btn', playerViewportMode && 'active')}
+          title={playerViewportMode
+            ? t('toolbar.playerControl.on')
+            : t('toolbar.playerControl.off')}
+          onClick={() => {
+            const next = !playerViewportMode
+            if (next) {
+              const { scale, offsetX, offsetY, canvasW, canvasH } = useMapTransformStore.getState()
+              if (scale > 0 && canvasW > 0 && canvasH > 0) {
+                // Seed the rect with the player window's aspect ratio so
+                // the indicator on the DM canvas == what the players
+                // actually see. Falls back to 16:9 when no player window
+                // has reported yet.
+                const ws = useUIStore.getState().playerWindowSize
+                const aspect = ws && ws.w > 0 && ws.h > 0 ? ws.w / ws.h : 16 / 9
+                const viewW = canvasW / scale
+                const viewH = canvasH / scale
+                const fitH = Math.min(viewH, viewW / aspect)
+                const fitW = fitH * aspect
+                setPlayerViewport({
+                  cx: (canvasW / 2 - offsetX) / scale,
+                  cy: (canvasH / 2 - offsetY) / scale,
+                  w: fitW,
+                  h: fitH,
+                  rotation: 0,
+                })
+              }
+            }
+            setPlayerViewportMode(next)
           }}
-        />
-      )}
+          style={playerViewportMode ? { color: 'var(--accent)' } : undefined}
+        >
+          🎯
+        </button>
 
+        {/* Atmosphere — fullscreen image on player display. Toggle: click
+            once to pick an image, click again (when active) to clear and
+            return to the map. New 🏞 landscape icon makes the
+            "scenic-image-on-player" intent clear at a glance. */}
+        <button
+          className={clsx('tool-btn', atmosphereImagePath && 'active')}
+          title={atmosphereImagePath
+            ? `${t('toolbar.tools.atmosphere')} — ${t('toolbar.atmosphereOn', { defaultValue: 'aktiv, klick zum Beenden' })}`
+            : t('toolbar.tools.atmosphere')}
+          aria-label="Atmosphere"
+          onClick={async () => {
+            if (!window.electronAPI) return
+            if (atmosphereImagePath) {
+              useUIStore.getState().setAtmosphereImage(null)
+              window.electronAPI.sendAtmosphere(null)
+              return
+            }
+            const result = await window.electronAPI.importFile('atmosphere')
+            if (result) {
+              useUIStore.getState().setAtmosphereImage(result.path)
+              window.electronAPI.sendAtmosphere(result.path)
+            }
+          }}
+          style={atmosphereImagePath ? { color: 'var(--accent)' } : undefined}
+        >
+          🏞
+        </button>
+
+        {/* Blackout */}
+        <button
+          className={clsx('tool-btn', blackoutActive && 'active')}
+          title={`${t('toolbar.blackout')} (Ctrl+B)`}
+          aria-label={t('toolbar.blackout')}
+          onClick={toggleBlackout}
+          style={blackoutActive ? { color: 'var(--warning)' } : undefined}
+        >
+          🌚
+        </button>
+      </div>
+
+      {/* Compendium — full-view reference, swaps topView */}
       <button
         className="tool-btn"
-        title={t('toolbar.shortcuts')}
-        aria-label={t('toolbar.shortcuts')}
-        onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: '?' }))}
+        title={t('compendium.title')}
+        aria-label={t('compendium.title')}
+        onClick={() => useUIStore.getState().setTopView('compendium')}
       >
-        ?
+        📚
       </button>
 
-      <button
-        className="tool-btn"
-        title={t('toolbar.switchLanguage')}
-        aria-label={t('toolbar.switchLanguage')}
-        onClick={toggleLanguage}
-        style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.02em' }}
-      >
-        {language === 'de' ? 'EN' : 'DE'}
-      </button>
-
-      <button
-        className="tool-btn"
-        title={theme === 'dark' ? t('toolbar.themeDark') : t('toolbar.themeLight')}
-        aria-label={theme === 'dark' ? t('toolbar.themeDark') : t('toolbar.themeLight')}
-        onClick={toggleTheme}
-      >
-        {theme === 'dark' ? '☀' : '🌙'}
-      </button>
+      {/* Settings popover — bundles rare-use chrome (theme, language,
+          shortcut help) so the working leftcourse of the toolbar isn't
+          permanently cluttered with one-time setup actions. */}
+      <ActionGroup
+        groupIcon="⋯"
+        groupLabelKey="toolbar.settings"
+        actions={[
+          {
+            id: 'theme',
+            icon: theme === 'dark' ? '☀' : '🌙',
+            labelKey: theme === 'dark' ? 'toolbar.themeDark' : 'toolbar.themeLight',
+            run: toggleTheme,
+          },
+          {
+            id: 'language',
+            icon: language === 'de' ? '🇬🇧' : '🇩🇪',
+            labelKey: 'toolbar.switchLanguage',
+            run: toggleLanguage,
+          },
+          {
+            id: 'shortcuts',
+            icon: '?',
+            labelKey: 'toolbar.shortcuts',
+            run: () => window.dispatchEvent(new KeyboardEvent('keydown', { key: '?' })),
+          },
+        ]}
+      />
 
       <button className="tool-btn" title={t('toolbar.rightSidebar')} aria-label={t('toolbar.rightSidebar')} onClick={toggleRightSidebar}>◨</button>
 

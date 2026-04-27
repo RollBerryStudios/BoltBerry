@@ -499,7 +499,9 @@
     "shortcuts": "Tastenkürzel [?]",
     "themeDark": "Theme: Hell",
     "themeLight": "Theme: Dunkel",
-    "switchLanguage": "Switch to English"
+    "switchLanguage": "Switch to English",
+    "settings": "Einstellungen",
+    "atmosphereOn": "aktiv, klick zum Beenden"
   },
   "cropper": {
     "title": "Bildausschnitt anpassen",

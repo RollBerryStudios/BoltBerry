@@ -103,12 +103,10 @@ const SECTIONS: DockSection[] = [
       },
     ],
   },
-  {
-    id: 'present',
-    groups: [
-      { id: 'atmosphere', primary: { id: 'atmosphere', icon: '🖼', labelKey: 'toolbar.tools.atmosphere' } },
-    ],
-  },
+  // The 'present' section was removed — Atmosphere now lives in the
+  // top toolbar's Player Cluster alongside Player-Window / Player-Control
+  // / Blackout, where all "what the players see" controls cluster
+  // together for faster access.
 ]
 
 export function LeftToolDock() {
@@ -123,27 +121,12 @@ export function LeftToolDock() {
   // Player-preview restricts the DM to the pointer tool — hide the rail.
   if (workMode === 'player-preview') return null
 
-  const handleSelect = async (id: ActiveTool) => {
+  const handleSelect = (id: ActiveTool) => {
     setOpenGroup(null)
-    if (id === 'atmosphere') {
-      if (!window.electronAPI) return
-      // Toggle: if atmosphere is currently active, clicking the
-      // button clears it (player window returns to map). Otherwise
-      // open the file picker so the DM can choose a fullscreen
-      // image (scene transitions, mood reveals, NPC portraits).
-      const currentPath = useUIStore.getState().atmosphereImagePath
-      if (currentPath) {
-        useUIStore.getState().setAtmosphereImage(null)
-        window.electronAPI.sendAtmosphere(null)
-        return
-      }
-      const result = await window.electronAPI.importFile('atmosphere')
-      if (result) {
-        useUIStore.getState().setAtmosphereImage(result.path)
-        window.electronAPI.sendAtmosphere(result.path)
-      }
-      return
-    }
+    // Atmosphere is no longer reachable from this dock — its toggle
+    // lives in the top-toolbar Player Cluster. We keep the
+    // ActiveTool union value because other code may still reference
+    // 'atmosphere' as a render-mode discriminant.
     setActiveTool(id)
   }
 
