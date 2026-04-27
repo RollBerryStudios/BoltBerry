@@ -10,7 +10,12 @@ import { showToast } from '../../shared/Toast'
 import { EmptyState } from '../../EmptyState'
 import { BestiaryPicker } from '../../bestiary/BestiaryPicker'
 import { spawnMonsterOnMap } from '../../bestiary/actions'
-import type { EncounterTemplate, FormationType, DifficultyLevel } from '@shared/ipc-types'
+import type { EncounterRecord, EncounterTemplate, FormationType, DifficultyLevel } from '@shared/ipc-types'
+import {
+  buildEncounterFile,
+  parseEncounterFile,
+  suggestedEncounterFilename,
+} from '../../../utils/encounterTransfer'
 import {
   getFormationOffsets,
   applyDifficultyToToken,
@@ -385,6 +390,63 @@ export function EncounterPanel() {
     }
   }
 
+  async function handleExportEncounter(encounter: EncounterRecord) {
+    if (!window.electronAPI) return
+    try {
+      const file = buildEncounterFile(encounter)
+      const result = await window.electronAPI.exportToFile({
+        suggestedName: suggestedEncounterFilename(encounter.name),
+        content: JSON.stringify(file, null, 2),
+        encoding: 'utf8',
+        filters: [{ name: 'BoltBerry-Encounter (JSON)', extensions: ['json'] }],
+        dialogTitle: 'Encounter exportieren',
+      })
+      if (result.success) {
+        showToast(`Encounter „${encounter.name}" exportiert`, 'success', 6000)
+      } else if (!result.canceled) {
+        showToast(`Export fehlgeschlagen: ${result.error ?? ''}`, 'error', 7000)
+      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      showToast(`Export fehlgeschlagen: ${msg}`, 'error', 7000)
+    }
+  }
+
+  async function handleImportEncounter() {
+    if (!activeCampaignId || !window.electronAPI) return
+    try {
+      const open = await window.electronAPI.importFromFile({
+        filters: [{ name: 'BoltBerry-Encounter (JSON)', extensions: ['json'] }],
+        encoding: 'utf8',
+      })
+      if (!open.success) {
+        if (!open.canceled) showToast(`Import fehlgeschlagen: ${open.error ?? ''}`, 'error', 7000)
+        return
+      }
+      const file = parseEncounterFile(open.content ?? '')
+      const taken = new Set(encounters.map((e) => e.name))
+      let name = file.encounter.name
+      if (taken.has(name)) {
+        for (let i = 2; i <= 99; i++) {
+          const candidate = `${file.encounter.name} (${i})`
+          if (!taken.has(candidate)) { name = candidate; break }
+        }
+      }
+      const created = await window.electronAPI.encounters.create({
+        campaignId: activeCampaignId,
+        name,
+        templateData: file.encounter.templateData,
+        notes: file.encounter.notes,
+      })
+      addEncounter(created)
+      setSelectedId(created.id)
+      showToast(`Encounter „${name}" importiert`, 'success', 6000)
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      showToast(`Import fehlgeschlagen: ${msg}`, 'error', 7000)
+    }
+  }
+
   const mapTokens = tokens.filter((t) => t.faction === 'enemy' || t.faction === 'neutral')
 
   const spawnTokenCount = useMemo(() => {
@@ -458,6 +520,15 @@ export function EncounterPanel() {
               disabled={!activeCampaignId || mapTokens.length === 0}
             >
               💾 Aktuelle Gegner als Encounter speichern
+            </button>
+            <button
+              className="btn btn-ghost"
+              style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--text-xs)' }}
+              onClick={handleImportEncounter}
+              disabled={!activeCampaignId}
+              title="Encounter aus JSON-Datei importieren"
+            >
+              📥 Encounter importieren
             </button>
           </div>
         )}
@@ -545,6 +616,15 @@ export function EncounterPanel() {
                   disabled={isSpawning}
                 >
                   ⚔️ Spawn
+                </button>
+                <button
+                  className="btn btn-ghost btn-icon"
+                  style={{ fontSize: 10, padding: 2 }}
+                  onClick={(e) => { e.stopPropagation(); handleExportEncounter(enc) }}
+                  title="Encounter als Datei exportieren"
+                  aria-label="Encounter exportieren"
+                >
+                  📤
                 </button>
                 <button
                   className="btn btn-ghost btn-icon"

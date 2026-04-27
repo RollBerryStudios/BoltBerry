@@ -9,6 +9,11 @@ import {
 import { showToast } from '../../shared/Toast'
 import { formatError } from '../../../utils/formatError'
 import type { TrackRecord, AudioChannelKey } from '@shared/ipc-types'
+import {
+  buildSoundtrackFile,
+  parseSoundtrackFile,
+  suggestedSoundtrackFilename,
+} from '../../../utils/soundtrackTransfer'
 
 /**
  * MusicLibraryPanel — Workspace inventory view for the campaign's
@@ -261,6 +266,88 @@ export function MusicLibraryPanel() {
     loadChannel(channel, track.path)
   }
 
+  // ── Soundtrack manifest export / import ────────────────────────────────
+  // Exports the current filter selection as a small JSON manifest
+  // (file names + tags + slot assignments). Audio files are NOT
+  // bundled — receivers re-import the same file names from their
+  // own audio folder. Keeps exports tiny even for hour-long lists.
+  async function handleExportSoundtrack() {
+    if (!window.electronAPI) return
+    if (soundtrackFilter === '__all__') {
+      showToast('Bitte einen Soundtrack-Filter wählen, um den Export einzugrenzen.', 'info', 6000)
+      return
+    }
+    const tag = soundtrackFilter === '__none__' ? null : soundtrackFilter
+    const subset = tracks.filter((t) => t.soundtrack === tag)
+    if (subset.length === 0) {
+      showToast('Keine Tracks im aktuellen Filter.', 'info')
+      return
+    }
+    try {
+      const file = buildSoundtrackFile(tag, subset)
+      const result = await window.electronAPI.exportToFile({
+        suggestedName: suggestedSoundtrackFilename(tag),
+        content: JSON.stringify(file, null, 2),
+        encoding: 'utf8',
+        filters: [{ name: 'BoltBerry-Soundtrack (JSON)', extensions: ['json'] }],
+        dialogTitle: 'Soundtrack exportieren',
+      })
+      if (result.success) {
+        showToast(`Soundtrack „${tag ?? 'unkategorisiert'}" exportiert (${subset.length} Tracks)`, 'success', 6000)
+      } else if (!result.canceled) {
+        showToast(`Export fehlgeschlagen: ${result.error ?? ''}`, 'error', 7000)
+      }
+    } catch (err) {
+      showToast(`Export fehlgeschlagen: ${formatError(err)}`, 'error', 7000)
+    }
+  }
+
+  async function handleImportSoundtrack() {
+    if (!window.electronAPI || !activeCampaignId) return
+    try {
+      const open = await window.electronAPI.importFromFile({
+        filters: [{ name: 'BoltBerry-Soundtrack (JSON)', extensions: ['json'] }],
+        encoding: 'utf8',
+      })
+      if (!open.success) {
+        if (!open.canceled) showToast(`Import fehlgeschlagen: ${open.error ?? ''}`, 'error', 7000)
+        return
+      }
+      const file = parseSoundtrackFile(open.content ?? '')
+      // We re-tag any *existing* tracks in the campaign whose
+      // fileName matches one in the manifest. We can't materialise
+      // missing files — they have to live in the destination's
+      // audio folder already. Report both halves so the DM knows.
+      const byFileName = new Map<string, TrackRecord>()
+      for (const t of tracks) byFileName.set(t.fileName, t)
+      let matched = 0
+      let missing = 0
+      for (const entry of file.tracks) {
+        const local = byFileName.get(entry.fileName)
+        if (!local) { missing++; continue }
+        try {
+          await window.electronAPI.tracks.update(local.id, { soundtrack: file.soundtrack })
+          matched++
+        } catch (err) {
+          console.warn('[MusicLibraryPanel] re-tag failed:', entry.fileName, err)
+        }
+      }
+      await reload()
+      const tagLabel = file.soundtrack ?? 'unkategorisiert'
+      if (missing === 0) {
+        showToast(`Soundtrack „${tagLabel}" importiert — ${matched} Tracks neu zugeordnet.`, 'success', 7000)
+      } else {
+        showToast(
+          `Soundtrack „${tagLabel}" — ${matched} zugeordnet, ${missing} Datei(en) fehlen lokal.`,
+          'info',
+          9000,
+        )
+      }
+    } catch (err) {
+      showToast(`Import fehlgeschlagen: ${formatError(err)}`, 'error', 7000)
+    }
+  }
+
   // ── Render ─────────────────────────────────────────────────────────────
 
   if (!activeCampaignId) {
@@ -284,6 +371,23 @@ export function MusicLibraryPanel() {
           </button>
           <button className="btn" onClick={handleAddFolder} title={t('musicLibrary.addFolderHint')}>
             + {t('musicLibrary.addFolder')}
+          </button>
+          <button
+            className="btn btn-ghost"
+            onClick={handleExportSoundtrack}
+            title="Aktuelle Soundtrack-Auswahl als JSON-Manifest exportieren"
+            aria-label="Soundtrack exportieren"
+            disabled={soundtrackFilter === '__all__'}
+          >
+            📤
+          </button>
+          <button
+            className="btn btn-ghost"
+            onClick={handleImportSoundtrack}
+            title="Soundtrack-Manifest importieren (matcht Tracks per Dateiname)"
+            aria-label="Soundtrack importieren"
+          >
+            📥
           </button>
           <button
             className="btn btn-ghost"
