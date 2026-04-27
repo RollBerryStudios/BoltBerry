@@ -4,7 +4,6 @@ import type {
   AudioBoardRecord,
   AudioBoardSlot,
   AudioChannelKey,
-  ChannelPlaylistEntry,
   TrackRecord,
 } from '../../shared/ipc-types'
 import { getDb } from '../db/database'
@@ -178,106 +177,6 @@ export function registerAudioBoardHandlers(): void {
         .run(bId, n)
     },
   )
-
-  // ── Legacy channel_playlist adapter ──
-  //
-  // The renderer's right-sidebar AudioPanel still calls these three
-  // methods. v38 dropped the underlying `channel_playlist` table and
-  // replaced it with `tracks` + `track_channel_assignments`. We
-  // continue to expose the v37 IPC shape so the legacy `narrow` /
-  // `wide-music` AudioPanel keeps working byte-identical until
-  // Commit 2 ships the MusicLibraryPanel that uses the new
-  // `tracks.*` IPC directly.
-  //
-  // The `id` returned from `add` and accepted by `remove` is now
-  // `track_channel_assignments.id` — that lets the renderer treat
-  // each channel-membership as the addressable unit it always
-  // thought it was.
-
-  ipcMain.handle(
-    IPC.CHANNEL_PLAYLIST_LIST_BY_CAMPAIGN,
-    (_event, campaignId: number): ChannelPlaylistEntry[] => {
-      requireIntegerId(campaignId, 'campaign')
-      const rows = getDb()
-        .prepare(
-          `SELECT a.id AS id, a.channel, t.path, t.file_name
-           FROM track_channel_assignments a
-           JOIN tracks t ON t.id = a.track_id
-           WHERE t.campaign_id = ?
-           ORDER BY a.channel, a.position, a.id`,
-        )
-        .all(campaignId) as Array<{
-          id: number
-          channel: string
-          path: string
-          file_name: string
-        }>
-      return rows.map((r) => ({
-        id: r.id,
-        channel: r.channel as AudioChannelKey,
-        path: r.path,
-        fileName: r.file_name,
-      }))
-    },
-  )
-
-  ipcMain.handle(
-    IPC.CHANNEL_PLAYLIST_ADD,
-    (
-      _event,
-      campaignId: number,
-      channel: AudioChannelKey,
-      path: string,
-      fileName: string,
-      position: number,
-    ): { id: number } => {
-      requireIntegerId(campaignId, 'campaign')
-      if (channel !== 'track1' && channel !== 'track2' && channel !== 'combat') {
-        throw new Error('Invalid channel')
-      }
-      const safePath = typeof path === 'string' && path ? path : ''
-      if (!safePath) throw new Error('Track path is required')
-      const safeName = typeof fileName === 'string' && fileName ? fileName : safePath
-      const pos = Number.isInteger(position) ? position : 0
-      const db = getDb()
-      // Two-step upsert: ensure a tracks row exists, then attach the
-      // channel-assignment. INSERT OR IGNORE keeps the duplicate-import
-      // case quiet — the existing track row simply stays.
-      const insertOrIgnoreTrack = db.prepare(
-        `INSERT OR IGNORE INTO tracks (campaign_id, path, file_name)
-         VALUES (?, ?, ?)`,
-      )
-      const selectTrackId = db.prepare(
-        `SELECT id FROM tracks WHERE campaign_id = ? AND path = ?`,
-      )
-      const insertOrIgnoreAssignment = db.prepare(
-        `INSERT OR IGNORE INTO track_channel_assignments (track_id, channel, position)
-         VALUES (?, ?, ?)`,
-      )
-      const selectAssignmentId = db.prepare(
-        `SELECT id FROM track_channel_assignments
-         WHERE track_id = ? AND channel = ?`,
-      )
-      const txn = db.transaction(() => {
-        insertOrIgnoreTrack.run(campaignId, safePath, safeName)
-        const trackRow = selectTrackId.get(campaignId, safePath) as { id: number }
-        insertOrIgnoreAssignment.run(trackRow.id, channel, pos)
-        const assignmentRow = selectAssignmentId.get(trackRow.id, channel) as { id: number }
-        return assignmentRow.id
-      })
-      return { id: txn() }
-    },
-  )
-
-  ipcMain.handle(IPC.CHANNEL_PLAYLIST_REMOVE, (_event, id: number): void => {
-    const entryId = requireIntegerId(id, 'playlist entry')
-    // Drop the channel-membership only; the underlying track row
-    // stays in the library so the user doesn't lose imports just
-    // because they removed it from one channel.
-    getDb()
-      .prepare('DELETE FROM track_channel_assignments WHERE id = ?')
-      .run(entryId)
-  })
 
   // ── Tracks domain (v38) ──
 

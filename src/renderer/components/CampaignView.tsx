@@ -7,6 +7,7 @@ import { NotesPanel } from './sidebar/panels/NotesPanel'
 import { CharacterSheetPanel } from './sidebar/panels/CharacterSheetPanel'
 import { HandoutsPanel } from './sidebar/panels/HandoutsPanel'
 import { AudioPanel } from './sidebar/panels/AudioPanel'
+import { MusicLibraryPanel } from './sidebar/panels/MusicLibraryPanel'
 import { TokenLibraryPanel } from './sidebar/panels/TokenLibraryPanel'
 import { showToast } from './shared/Toast'
 import {
@@ -301,7 +302,7 @@ export function CampaignView() {
               <>
                 <PanelHeader title={t('workspace.tabAudio')} hint={t('workspace.hintAudio')} />
                 <div className="bb-ws-panel-inner bb-ws-panel-audio">
-                  <AudioPanel layout="wide-music" />
+                  <MusicLibraryPanel />
                 </div>
               </>
             )}

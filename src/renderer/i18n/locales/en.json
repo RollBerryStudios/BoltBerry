@@ -790,6 +790,27 @@
     "strip": "Audio strip",
     "openPanel": "Open audio panel"
   },
+  "musicLibrary": {
+    "title": "Music Library",
+    "addFiles": "Add",
+    "addFilesHint": "Pick audio files from disk",
+    "addFolder": "Folder",
+    "addFolderHint": "Import an entire folder of audio files — the folder name becomes the soundtrack tag",
+    "refresh": "Refresh",
+    "soundtrackFilter": "Soundtrack filter",
+    "allSoundtracks": "All soundtracks",
+    "noSoundtrack": "(uncategorised)",
+    "searchPlaceholder": "Search title…",
+    "empty": "No tracks yet. Click “+ Add” above.",
+    "noMatches": "No tracks match the current filter/search.",
+    "preview": "Preview",
+    "addTo": "Add to {{channel}}",
+    "removeFrom": "Remove from {{channel}}",
+    "activeOn": "Currently playing on {{channel}}",
+    "setSoundtrack": "Edit soundtrack tag…",
+    "deleteTrack": "Remove from library",
+    "assignments": "Assignments"
+  },
   "settings": {
     "title": "Settings"
   },

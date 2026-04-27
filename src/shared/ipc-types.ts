@@ -192,22 +192,26 @@ export const IPC = {
   AUDIO_BOARDS_UPSERT_SLOT: 'audio-boards:upsert-slot',
   AUDIO_BOARDS_DELETE_SLOT: 'audio-boards:delete-slot',
 
-  // Channel playlist — legacy v37 shape, kept as a compat adapter.
-  // Backed by the v38 `tracks` + `track_channel_assignments` tables.
-  CHANNEL_PLAYLIST_LIST_BY_CAMPAIGN: 'channel-playlist:list-by-campaign',
-  CHANNEL_PLAYLIST_ADD: 'channel-playlist:add',
-  CHANNEL_PLAYLIST_REMOVE: 'channel-playlist:remove',
-
-  // Tracks domain (v38) — canonical audio-library API. Replaces the
-  // v37 channel-playlist model where a track-row was a channel-list-
-  // entry; in v38 a track is its own entity, channel memberships are
-  // a separate join table the MusicLibraryPanel renders as toggle
-  // badges.
+  // Tracks domain (v38) — canonical audio-library API. A track is its
+  // own entity; channel memberships live in a separate join table the
+  // MusicLibraryPanel renders as toggle badges.
   TRACKS_LIST_BY_CAMPAIGN:    'tracks:list-by-campaign',
   TRACKS_CREATE:              'tracks:create',
   TRACKS_UPDATE:              'tracks:update',
   TRACKS_DELETE:              'tracks:delete',
   TRACKS_TOGGLE_ASSIGNMENT:   'tracks:toggle-assignment',
+  /** Open a multi-select file picker for audio files. Returns the
+   *  list of relative paths under userData/assets/audio/ for files
+   *  that were successfully copied + magic-byte-validated. Bulk
+   *  variant of IMPORT_FILE so the DM can drag in 30 tracks in one
+   *  click instead of running a 30-step file dialog dance. */
+  IMPORT_AUDIO_FILES:         'app:import-audio-files',
+  /** Open a folder picker; recursively scan for audio files; copy
+   *  each one into userData/assets/audio/. Returns
+   *  { folderName, files: [{ originalName, relativePath }] } so the
+   *  caller can use the source folder name as the auto-soundtrack
+   *  tag. */
+  IMPORT_AUDIO_FOLDER:        'app:import-audio-folder',
 
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
@@ -554,20 +558,6 @@ export interface RecentMapEntry {
 }
 
 export type AudioChannelKey = 'track1' | 'track2' | 'combat'
-
-/**
- * Legacy adapter shape — what the renderer still sees from
- * `channelPlaylist.listByCampaign`. The `id` here is now the
- * `track_channel_assignments.id` (surrogate key on the v38 join table)
- * so the renderer can still call `channelPlaylist.remove(id)` to drop
- * a single channel-membership without touching the underlying track.
- */
-export interface ChannelPlaylistEntry {
-  id: number
-  channel: AudioChannelKey
-  path: string
-  fileName: string
-}
 
 /**
  * v38 canonical shape: one track in a campaign's audio library. The

@@ -90,17 +90,17 @@ function ChannelStrip({ chId, label, activeMapId, activeCampaignId, combatContro
       const result = await window.electronAPI.importFile('audio')
       if (!result) return
       const fileName = result.path.split(/[\\/]/).pop() ?? result.path
-      const position = ch.playlist.length
-      const { id } = await window.electronAPI.channelPlaylist.add(
-        activeCampaignId,
-        chId,
-        result.path,
-        fileName,
-        position,
-      )
-      if (!id) return
+      // v38: create the track row, then toggle the channel-membership
+      // on. The toggle returns the assignment surrogate id we use as
+      // the renderer-side playlist-entry handle.
+      const created = await window.electronAPI.tracks.create({
+        campaignId: activeCampaignId, path: result.path, fileName,
+      })
+      await window.electronAPI.tracks.toggleAssignment(created.id, chId)
+      // The store's PlaylistEntry handle is the track id (stable across
+      // assignments); removeTrack below routes to a track-level delete.
       const wasEmpty = ch.playlist.length === 0
-      store.addPlaylistEntry(chId, { id, path: result.path, fileName }, wasEmpty)
+      store.addPlaylistEntry(chId, { id: created.id, path: result.path, fileName }, wasEmpty)
       if (wasEmpty) store.loadChannel(chId, result.path)
     } catch (err) {
       console.error('[AudioPanel] addTrack failed:', err)
@@ -118,7 +118,10 @@ function ChannelStrip({ chId, label, activeMapId, activeCampaignId, combatContro
     evt.stopPropagation()
     if (!window.electronAPI) return
     try {
-      await window.electronAPI.channelPlaylist.remove(entry.id)
+      // v38: remove the channel-membership only, not the underlying
+      // track row. The DM's library still keeps the file so they can
+      // re-attach it to another channel without re-importing.
+      await window.electronAPI.tracks.toggleAssignment(entry.id, chId)
       store.removePlaylistEntry(chId, entry.id)
     } catch (err) {
       console.error('[AudioPanel] removeTrack failed:', err)
@@ -532,19 +535,17 @@ function BoardManager({ boards, activeBoardIndex, onSelect, campaignId, onBoards
 }
 
 // ─── Main AudioPanel ──────────────────────────────────────────────────────────
-// `layout="wide"`: two-column (music | sfx) — used in CampaignView
-// `layout="narrow"` (default): tabbed — used in the right sidebar
+//
+// Two layouts after the v38 audio refactor:
+//  - 'narrow'   — tabbed Music | SFX, used in the FloatingUtilityDock
+//                 popover during play. Live controls only — the
+//                 inventory view lives in MusicLibraryPanel.
+//  - 'wide-sfx' — full-width SFX board, used in CampaignView's SFX
+//                 tab. The legacy 'wide-music' / 'wide' layouts were
+//                 dropped; MusicLibraryPanel renders the music inventory
+//                 directly.
 
-/**
- * AudioPanel layouts:
- *  - 'narrow' — tabbed (Music / SFX) for the right sidebar during play.
- *  - 'wide'   — full two-column view; music + SFX side by side.
- *  - 'wide-music' / 'wide-sfx' — split one section into its own view.
- *    CampaignView uses these for the separated "Audio" and "SFX" tabs
- *    so content management stays focused while the wide layout is
- *    still available elsewhere if needed.
- */
-export type AudioPanelLayout = 'narrow' | 'wide' | 'wide-music' | 'wide-sfx'
+export type AudioPanelLayout = 'narrow' | 'wide-sfx'
 
 export function AudioPanel({ layout = 'narrow' }: { layout?: AudioPanelLayout }) {
   const { t } = useTranslation()
@@ -585,11 +586,16 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: AudioPanelLayout })
     let cancelled = false
     ;(async () => {
       try {
-        const rows = await window.electronAPI?.channelPlaylist.listByCampaign(activeCampaignId) ?? []
+        // v38: hydrate channel playlists from the canonical track
+        // library. We pivot from "all tracks with their assignments"
+        // to "per-channel ordered list" right here on the renderer.
+        const tracks = (await window.electronAPI?.tracks.listByCampaign(activeCampaignId)) ?? []
         if (cancelled) return
         const byChannel: Record<ChannelId, PlaylistEntry[]> = { track1: [], track2: [], combat: [] }
-        for (const r of rows) {
-          byChannel[r.channel]?.push({ id: r.id, path: r.path, fileName: r.fileName })
+        for (const t of tracks) {
+          for (const ch of t.assignments) {
+            byChannel[ch]?.push({ id: t.id, path: t.path, fileName: t.fileName })
+          }
         }
         setChannelPlaylist('track1', byChannel.track1)
         setChannelPlaylist('track2', byChannel.track2)
@@ -698,73 +704,14 @@ export function AudioPanel({ layout = 'narrow' }: { layout?: AudioPanelLayout })
     </div>
   )
 
-  // Wide is rendered inside CampaignView's own flex column (with a
-  // definite height) — the original "fill the parent" sizing works
-  // there. Narrow lives inside FloatingUtilityDock's popover whose
-  // height is *content-driven*; with `height: 100%` the inner
-  // `flex: 1` content collapsed to zero, leaving the popover as a
-  // tiny white shell. The narrow path now uses intrinsic sizing and
-  // lets the popover-body scroll if content overflows.
-  // The split layouts render a single section full-width. CampaignView
-  // uses these for the separated "Audio" and "SFX" tabs; wide (both
-  // columns) stays available if any caller wants the old side-by-side.
-  if (layout === 'wide-music' || layout === 'wide-sfx') {
-    const body = layout === 'wide-music' ? musicContent : sfxContent
+  if (layout === 'wide-sfx') {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
         <div style={{
           flex: 1, overflowY: 'auto',
           padding: 'var(--sp-4) var(--sp-5)',
         }}>
-          {body}
-        </div>
-
-        {editingSlot && (
-          <SlotEditor
-            boardId={editingSlot.boardId}
-            slot={boards.find((b) => b.id === editingSlot.boardId)?.slots.find((s) => s.slotNumber === editingSlot.slotIndex)}
-            slotIndex={editingSlot.slotIndex}
-            onClose={() => setEditingSlot(null)}
-          />
-        )}
-      </div>
-    )
-  }
-
-  if (layout === 'wide') {
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
-        <div style={{
-          flex: 1, overflow: 'hidden',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 0,
-        }}>
-          {/* Left: Music */}
-          <div style={{
-            borderRight: '1px solid var(--border)',
-            overflowY: 'auto',
-            padding: 'var(--sp-4) var(--sp-5)',
-          }}>
-            <div style={{
-              fontSize: 'var(--text-xs)', fontWeight: 700, textTransform: 'uppercase',
-              letterSpacing: '0.08em', color: 'var(--text-muted)', marginBottom: 'var(--sp-4)',
-            }}>
-              {t('audio.tabMusic')}
-            </div>
-            {musicContent}
-          </div>
-
-          {/* Right: SFX */}
-          <div style={{ overflowY: 'auto', padding: 'var(--sp-4) var(--sp-5)' }}>
-            <div style={{
-              fontSize: 'var(--text-xs)', fontWeight: 700, textTransform: 'uppercase',
-              letterSpacing: '0.08em', color: 'var(--text-muted)', marginBottom: 'var(--sp-4)',
-            }}>
-              {t('audio.tabSfx')}
-            </div>
-            {sfxContent}
-          </div>
+          {sfxContent}
         </div>
 
         {editingSlot && (
