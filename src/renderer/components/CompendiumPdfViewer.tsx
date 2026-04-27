@@ -610,7 +610,7 @@ function PdfToolbar({
           <span className="bb-pdf-page-of mono">/ {numPages}</span>
         </form>
         <button type="button" className="bb-pdf-btn" onClick={onNext} disabled={pageNum >= numPages} title={t('compendium.nextPage')}>
-          –¶
+          ▼
         </button>
       </div>
 

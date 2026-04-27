@@ -117,9 +117,25 @@ export function usePlayerSync() {
   //  This hook is always active, ensuring the indicator stays accurate.)
   useEffect(() => {
     if (!window.electronAPI) return
-    const unsub = window.electronAPI.onPlayerWindowClosed(() => setPlayerConnected(false))
+    const unsub = window.electronAPI.onPlayerWindowClosed(() => {
+      setPlayerConnected(false)
+      // Forget the player's last reported size — next session may
+      // attach to a different display with a different aspect.
+      useUIStore.getState().setPlayerWindowSize(null)
+    })
     return () => { unsub() }
   }, [setPlayerConnected])
+
+  // -- Subscribe to player-window-size reports ---------------------------------
+  // Player Control Mode locks its rect to the player's aspect ratio so
+  // the indicator on the DM canvas == what the players actually see.
+  useEffect(() => {
+    if (!window.electronAPI?.onPlayerWindowSize) return
+    const unsub = window.electronAPI.onPlayerWindowSize((size) => {
+      useUIStore.getState().setPlayerWindowSize(size)
+    })
+    return () => { unsub() }
+  }, [])
 
   // -- Respond to player's full-sync requests ----------------------------------
   useEffect(() => {

@@ -141,7 +141,7 @@ function CheckRow({
   action?: ReactNode
 }) {
   const color = ok ? 'var(--success)' : warn ? 'var(--warning)' : 'var(--text-muted)'
-  const statusIcon = ok ? '✓' : warn ? '!' : '—‹'
+  const statusIcon = ok ? '✓' : warn ? '!' : '⚠'
 
   return (
     <div style={{

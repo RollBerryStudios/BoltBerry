@@ -635,7 +635,7 @@ function HandoutThumbnail({ path, onClick }: { path: string; onClick: () => void
         }}
         title={path}
       >
-        <span style={{ fontSize: 24, opacity: 0.6 }}>🖼ï¸</span>
+        <span style={{ fontSize: 24, opacity: 0.6 }}>🖼️</span>
         <span>Bilddatei fehlt</span>
       </div>
     )

@@ -703,14 +703,14 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
             disabled={index === 0}
             onClick={(e) => { e.stopPropagation(); onReorder(map.id, 'up') }}
             title="Nach oben"
-          >–²</button>
+          >↑</button>
           <button
             className="btn btn-ghost"
             style={{ padding: '0 4px', fontSize: 10, lineHeight: '14px', minHeight: 14 }}
             disabled={index === total - 1}
             onClick={(e) => { e.stopPropagation(); onReorder(map.id, 'down') }}
             title="Nach unten"
-          >–¼</button>
+          >↓</button>
         </div>
       )}
     </div>

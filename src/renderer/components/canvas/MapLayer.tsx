@@ -224,32 +224,39 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
   }
 
   // ── Zoom: scroll wheel or trackpad pinch ────────────────────────────────────
-  function handleWheel(e: Konva.KonvaEventObject<WheelEvent>) {
+  // Bound at the Stage-container DOM level (see effect below) instead
+  // of on the Konva <Layer>. Konva layer-level onWheel only fires when
+  // the cursor is over a shape *in that layer* — wheeling over a token,
+  // fog rect, or drawing would otherwise be eaten by those layers and
+  // zoom wouldn't trigger. The DOM listener catches every wheel event
+  // inside the canvas regardless of which layer is hit.
+  function handleWheelNative(evt: WheelEvent) {
     const ui = useUIStore.getState()
 
-    // Player Control Mode: Ctrl+wheel resizes the dashed viewport rect
-    // about its own centre, preserving aspect. Only intercepts when
-    // the mode is on so trackpad pinch-zoom keeps working everywhere
-    // else (trackpad pinch also arrives with ctrlKey=true — we accept
-    // that by checking the mode flag first).
-    if (ui.playerViewportMode && ui.playerViewport && (e.evt.ctrlKey || e.evt.metaKey)) {
-      e.evt.preventDefault()
-      const step = e.evt.deltaY < 0 ? 1.08 : 1 / 1.08
+    // Player Control Mode: Ctrl+wheel resizes the dashed viewport rect.
+    // Only intercepts when the mode is on so trackpad pinch-zoom keeps
+    // working everywhere else (trackpad pinch also arrives with
+    // ctrlKey=true — we accept that by checking the mode flag first).
+    if (ui.playerViewportMode && ui.playerViewport && (evt.ctrlKey || evt.metaKey)) {
+      evt.preventDefault()
+      const step = evt.deltaY < 0 ? 1.08 : 1 / 1.08
       const v = ui.playerViewport
       const MIN = 50
+      // Patch only `w`; the store derives `h` from the player-window
+      // aspect lock so resize stays proportional and the rect always
+      // matches what the players actually see.
       const nextW = Math.max(MIN, v.w * step)
-      const nextH = Math.max(MIN, v.h * step)
-      ui.patchPlayerViewport({ w: nextW, h: nextH })
+      ui.patchPlayerViewport({ w: nextW })
       return
     }
 
-    e.evt.preventDefault()
+    evt.preventDefault()
     const stage = stageRef.current
     if (!stage) return
 
     // Trackpad pinch sends ctrlKey=true with deltaY for zoom
-    const isPinch = e.evt.ctrlKey
-    const zoomFactor = e.evt.deltaY < 0 ? (isPinch ? 1.03 : 1.12) : (isPinch ? 1 / 1.03 : 1 / 1.12)
+    const isPinch = evt.ctrlKey
+    const zoomFactor = evt.deltaY < 0 ? (isPinch ? 1.03 : 1.12) : (isPinch ? 1 / 1.03 : 1 / 1.12)
     const newScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale * zoomFactor))
 
     const pointer = stage.getPointerPosition()
@@ -263,6 +270,24 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
     setTransform({ scale: newScale, offsetX: clampedOffX, offsetY: clampedOffY })
     scheduleCameraSave(newScale, clampedOffX, clampedOffY)
   }
+
+  // Attach the wheel listener to the Stage's container element so it
+  // catches wheel events over *any* canvas layer (tokens, fog, drawings,
+  // walls, …) — not just shapes in MapLayer. `passive: false` is
+  // required so we can call `preventDefault` and stop the host page from
+  // also scrolling.
+  useEffect(() => {
+    const stage = stageRef.current
+    if (!stage) return
+    const container = stage.container()
+    if (!container) return
+    container.addEventListener('wheel', handleWheelNative, { passive: false })
+    return () => container.removeEventListener('wheel', handleWheelNative)
+    // handleWheelNative closes over scale / offsets / image dims, so we
+    // re-bind whenever those change. Cheap (one DOM listener swap) and
+    // keeps the closure values fresh.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scale, offsetX, offsetY, natW, natH, canvasSize.width, canvasSize.height, image])
 
   // ── Clamp offset so viewport doesn't drift too far from the map ─────────────────
   // Allow up to 1 viewport-width/height of empty space beyond the map edge
@@ -296,7 +321,6 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
-      onWheel={handleWheel}
     >
       {image && (
         <>

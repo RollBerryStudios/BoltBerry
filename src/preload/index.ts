@@ -459,6 +459,16 @@ export const dmApi = {
     return () => ipcRenderer.removeListener('dm:request-full-sync', handler)
   },
 
+  // Listen for main → DM: player window's inner-size report. Fires on
+  // connect and on every player-window resize. Used by Player Control
+  // Mode to lock the indicator rect's aspect ratio to the player's
+  // actual display dimensions.
+  onPlayerWindowSize: (cb: (size: { w: number; h: number }) => void) => {
+    const handler = (_: Electron.IpcRendererEvent, size: { w: number; h: number }) => cb(size)
+    ipcRenderer.on(IPC.DM_PLAYER_WINDOW_SIZE, handler)
+    return () => ipcRenderer.removeListener(IPC.DM_PLAYER_WINDOW_SIZE, handler)
+  },
+
   // Compendium (SRD + user-supplied PDFs)
   listCompendium: (): Promise<CompendiumFile[]> =>
     ipcRenderer.invoke(IPC.COMPENDIUM_LIST),
@@ -616,6 +626,11 @@ export const playerApi = {
     ipcRenderer.on('player:walls', handler)
     return () => ipcRenderer.removeListener('player:walls', handler)
   },
+  /** Player → DM: report this window's inner size so the DM-side
+   *  Player Control Mode can lock the indicator rect to the player's
+   *  actual aspect ratio. */
+  reportWindowSize: (size: { w: number; h: number }) =>
+    ipcRenderer.send(IPC.PLAYER_WINDOW_SIZE, size),
 }
 
 

@@ -118,6 +118,12 @@ interface UIState {
    *  engaged on the active map (the toolbar toggle seeds a default on
    *  first entry). Resets to null on map switch. */
   playerViewport: PlayerViewportRect | null
+  /** Inner size of the player window, reported by the player renderer
+   *  on connect and on resize. Used to lock Player Control Mode's rect
+   *  to the player's actual aspect ratio so the DM frames *exactly*
+   *  what the players see (no letterbox / pillarbox). Null when no
+   *  player window has reported yet — callers fall back to 16:9. */
+  playerWindowSize: { w: number; h: number } | null
   gridSnap: boolean
   showMinimap: boolean
   drawColor: string
@@ -174,6 +180,7 @@ interface UIState {
   setPlayerViewportMode: (on: boolean) => void
   setPlayerViewport: (rect: PlayerViewportRect | null) => void
   patchPlayerViewport: (patch: Partial<PlayerViewportRect>) => void
+  setPlayerWindowSize: (size: { w: number; h: number } | null) => void
   toggleGridSnap: () => void
   toggleMinimap: () => void
   setDrawColor: (color: string) => void
@@ -228,6 +235,7 @@ export const useUIStore = create<UIState>((set) => ({
   selectedTokenIds: [],
   playerViewportMode: false,
   playerViewport: null,
+  playerWindowSize: null,
   gridSnap: true,
   showMinimap: false,
   drawColor: '#ff6b6b',
@@ -348,9 +356,47 @@ export const useUIStore = create<UIState>((set) => ({
     playerViewport: on ? s.playerViewport : null,
   })),
   setPlayerViewport: (rect) => set({ playerViewport: rect }),
-  patchPlayerViewport: (patch) => set((s) => ({
-    playerViewport: s.playerViewport ? { ...s.playerViewport, ...patch } : s.playerViewport,
-  })),
+  patchPlayerViewport: (patch) =>
+    set((s) => {
+      if (!s.playerViewport) return {}
+      const next = { ...s.playerViewport, ...patch }
+      // Aspect-lock: if the player has reported its window size, force
+      // the rect's aspect to match the player's. We honour whichever
+      // axis the caller explicitly passed and drive the *other* axis
+      // from it. When both w and h are patched (e.g. from a Ctrl+wheel
+      // zoom), we use w as the primary so the user's gesture maps to
+      // proportional scaling.
+      const ws = s.playerWindowSize
+      if (ws && ws.w > 0 && ws.h > 0) {
+        const aspect = ws.w / ws.h
+        const wPatched = patch.w !== undefined
+        const hPatched = patch.h !== undefined
+        if (wPatched && !hPatched) {
+          next.h = next.w / aspect
+        } else if (hPatched && !wPatched) {
+          next.w = next.h * aspect
+        } else if (wPatched && hPatched) {
+          // Both passed — drive h from w to keep the lock canonical.
+          next.h = next.w / aspect
+        }
+      }
+      return { playerViewport: next }
+    }),
+  setPlayerWindowSize: (size) =>
+    set((s) => {
+      // Re-aspect the existing rect (if any) so a player-window resize
+      // mid-session updates the indicator immediately.
+      if (!size || size.w <= 0 || size.h <= 0) return { playerWindowSize: size }
+      if (!s.playerViewport) return { playerWindowSize: size }
+      const aspect = size.w / size.h
+      const cur = s.playerViewport
+      // Preserve the rect's diagonal magnitude so the on-screen size
+      // doesn't jump between aspect-squat and aspect-stretch on resize.
+      const diag = Math.hypot(cur.w, cur.h)
+      const h = diag / Math.hypot(aspect, 1)
+      const w = h * aspect
+      return { playerWindowSize: size, playerViewport: { ...cur, w, h } }
+    }),
   toggleGridSnap: () => set((s) => ({ gridSnap: !s.gridSnap })),
   toggleMinimap: () => set((s) => ({ showMinimap: !s.showMinimap })),
   setDrawColor: (drawColor) => set({ drawColor }),

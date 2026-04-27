@@ -19,25 +19,25 @@ const FACTION_COLORS: Record<string, string> = {
 }
 
 const COMBAT_ICONS: Record<string, string> = {
-  advantage: '–²', disadvantage: '–¼', concentrating: '🎭¯',
+  advantage: '↑', disadvantage: '↓', concentrating: '🎭',
   blessed: '✨', cursed: '🔮', hasted: '⚡',
-  blinded: 'ðŸ«£', charmed: '💫', dead: '💀',
-  frightened: 'ðŸ˜±', grappled: 'ðŸ¤›', incapacitated: 'ðŸ˜µ',
-  invisible: 'ðŸ‘»', paralyzed: '⚡', petrified: 'ðŸª¨',
-  poisoned: '☠️', prone: '⬇ï¸', restrained: 'ⓓï¸',
-  stunned: '⍐', unconscious: 'ðŸ’¤', exhausted: 'ðŸ˜«',
-  deafened: 'ðŸ”‡',
+  blinded: '🫣', charmed: '💫', dead: '💀',
+  frightened: '😱', grappled: '🤛', incapacitated: '😵',
+  invisible: '👻', paralyzed: '⚡', petrified: '🪨',
+  poisoned: '☠️', prone: '⬇️', restrained: '⛓️',
+  stunned: '😵‍💫', unconscious: '💤', exhausted: '😫',
+  deafened: '🔇',
 }
 
 const TIMER_PRESETS = [
   { id: 'blessed', label: '✨ Gesegnet' },
   { id: 'cursed', label: '🔮 Verflucht' },
   { id: 'hasted', label: '⚡ Verlangsamt' },
-  { id: 'concentrating', label: '🎭¯ Konzentration' },
-  { id: 'advantage', label: '–² Vorteil' },
-  { id: 'disadvantage', label: '–¼ Nachteil' },
-  { id: 'blinded', label: 'ðŸ«£ Blind' },
-  { id: 'invisible', label: 'ðŸ‘» Unsichtbar' },
+  { id: 'concentrating', label: '🎭 Konzentration' },
+  { id: 'advantage', label: '↑ Vorteil' },
+  { id: 'disadvantage', label: '↓ Nachteil' },
+  { id: 'blinded', label: '🫣 Blind' },
+  { id: 'invisible', label: '👻 Unsichtbar' },
   { id: 'charmed', label: '💫 Bezaubert' },
 ]
 
@@ -312,7 +312,7 @@ export function InitiativePanel() {
               onClick={handleNextTurn}
               title="Nächster Kämpfer [N]"
             >
-              –¶ Weiter
+              ▼ Weiter
             </button>
             <button
               className="btn btn-ghost"
@@ -517,7 +517,7 @@ export function InitiativePanel() {
                     textOverflow: 'ellipsis',
                     whiteSpace: 'nowrap',
                   }}>
-                    {entry.currentTurn ? '–¶ ' : ''}{entry.combatantName}
+                    {entry.currentTurn ? '▼ ' : ''}{entry.combatantName}
                   </span>
                   {linkedToken && linkedToken.ac != null && (
                     <span style={{ fontSize: 9, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
@@ -536,7 +536,7 @@ export function InitiativePanel() {
                     }}
                     title={t('initiative.openInBestiary')}
                     aria-label={t('initiative.openInBestiary')}
-                  >ðŸ“–</button>
+                  >📖</button>
                   <button
                     style={{ background: timerEntryId === entry.id ? 'var(--accent-blue-dim)' : 'var(--bg-overlay)', border: `1px solid ${timerEntryId === entry.id ? 'var(--accent-blue)' : 'var(--border-subtle)'}`, color: timerEntryId === entry.id ? 'var(--accent-blue-light)' : 'var(--text-muted)', cursor: 'pointer', fontSize: 10, padding: '1px 4px', lineHeight: 1, borderRadius: 3 }}
                     onClick={() => setTimerEntryId(timerEntryId === entry.id ? null : entry.id)}

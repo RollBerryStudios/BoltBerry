@@ -129,7 +129,7 @@ export function RightSidebar() {
                 {section.isContextual && (
                   <span className="accordion-context-dot" aria-hidden="true" title={t('sidebar.right.contextual')} />
                 )}
-                <span className="accordion-chevron" aria-hidden="true">{isOpen ? '–¾' : '▸'}</span>
+                <span className="accordion-chevron" aria-hidden="true">{isOpen ? '▾' : '▸'}</span>
               </button>
               {isOpen && (
                 <div
