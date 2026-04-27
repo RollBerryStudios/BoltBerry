@@ -13,6 +13,7 @@ import { WikiEntryControls } from './WikiEntryControls'
 import { WikiEntryForm } from './WikiEntryForm'
 import { WikiListMenu } from './WikiListMenu'
 import { useDebouncedValue } from '../../hooks/useDebouncedValue'
+import { importWikiEntryViaDialog } from '../../utils/wikiTransfer'
 
 const LEVEL_ORDER: Record<string, number> = {
   cantrip: 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5,
@@ -145,6 +146,20 @@ export function SpellsTab({
 
   const handleSelect = useCallback((slug: string) => setSelectedSlug(slug), [])
 
+  const handleImport = useCallback(async () => {
+    try {
+      const taken = new Set((index ?? []).map((sp) => sp.slug))
+      const imported = await importWikiEntryViaDialog('spell', taken)
+      if (!imported) return
+      showToast(t('bestiary.importSuccess', { name: imported.record.name }), 'success')
+      setRefreshTick((n) => n + 1)
+      setSelectedSlug(imported.slug)
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      showToast(t('bestiary.importFailed', { error: msg }), 'error', 7000)
+    }
+  }, [index, t])
+
   if (error) return <div className="bb-best-error">⚠️ {error}</div>
   if (!index) return <div className="bb-best-loading">…</div>
 
@@ -200,6 +215,15 @@ export function SpellsTab({
 
         <div className="bb-best-listcount">
           <span>{t('bestiary.countSpells', { count: filtered.length })}</span>
+          <button
+            type="button"
+            className="bb-best-list-new"
+            onClick={handleImport}
+            title={t('bestiary.import')}
+            aria-label={t('bestiary.import')}
+          >
+            📥
+          </button>
           <button
             type="button"
             className="bb-best-list-new"

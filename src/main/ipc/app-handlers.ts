@@ -855,6 +855,41 @@ export function registerAppHandlers(): void {
     return app.getPath('userData')
   })
 
+  // Generic file-picker for symmetric import flows. Reads the
+  // chosen file's content (UTF-8 string up to 64 MB) so the
+  // renderer can parse the JSON payload. Mirrors EXPORT_TO_FILE.
+  ipcMain.handle(IPC.IMPORT_FROM_FILE, async (event, args: {
+    filters?: Array<{ name: string; extensions: string[] }>
+    dialogTitle?: string
+    encoding?: 'utf8' | 'base64'
+  }) => {
+    try {
+      const win = BrowserWindow.fromWebContents(event.sender) ?? undefined
+      const { filePaths, canceled } = await dialog.showOpenDialog(win!, {
+        title: args.dialogTitle || 'Datei öffnen',
+        filters: args.filters && args.filters.length > 0
+          ? args.filters
+          : [{ name: 'Alle Dateien', extensions: ['*'] }],
+        properties: ['openFile'],
+      })
+      if (canceled || !filePaths[0]) {
+        return { success: false, canceled: true }
+      }
+      const path = filePaths[0]
+      const stat = statSync(path)
+      const MAX_BYTES = 64 * 1024 * 1024
+      if (stat.size > MAX_BYTES) {
+        return { success: false, error: 'Datei zu groß (max 64 MB).' }
+      }
+      const enc: BufferEncoding = args.encoding === 'base64' ? 'base64' : 'utf8'
+      const content = readFileSync(path, enc)
+      return { success: true, filePath: path, content }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err)
+      return { success: false, error: message }
+    }
+  })
+
   // Generic save-to-file used by every export flow (character,
   // encounter, map, token template, soundtrack collection, …).
   // The renderer prepares the bytes, main owns the dialog + write.

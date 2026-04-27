@@ -13,6 +13,7 @@ import { WikiEntryControls } from './WikiEntryControls'
 import { WikiEntryForm } from './WikiEntryForm'
 import { WikiListMenu } from './WikiListMenu'
 import { useDebouncedValue } from '../../hooks/useDebouncedValue'
+import { importWikiEntryViaDialog } from '../../utils/wikiTransfer'
 
 const RARITY_ORDER: Record<string, number> = {
   MUNDANE: -1, COMMON: 0, UNCOMMON: 1, RARE: 2, VERY_RARE: 3, LEGENDARY: 4, ARTIFACT: 5,
@@ -138,6 +139,20 @@ export function ItemsTab({
 
   const handleSelect = useCallback((slug: string) => setSelectedSlug(slug), [])
 
+  const handleImport = useCallback(async () => {
+    try {
+      const taken = new Set((index ?? []).map((it) => it.slug))
+      const imported = await importWikiEntryViaDialog('item', taken)
+      if (!imported) return
+      showToast(t('bestiary.importSuccess', { name: imported.record.name }), 'success')
+      setRefreshTick((n) => n + 1)
+      setSelectedSlug(imported.slug)
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      showToast(t('bestiary.importFailed', { error: msg }), 'error', 7000)
+    }
+  }, [index, t])
+
   if (error) return <div className="bb-best-error">⚠️ {error}</div>
   if (!index) return <div className="bb-best-loading">…</div>
 
@@ -184,6 +199,15 @@ export function ItemsTab({
 
         <div className="bb-best-listcount">
           <span>{t('bestiary.countItems', { count: filtered.length })}</span>
+          <button
+            type="button"
+            className="bb-best-list-new"
+            onClick={handleImport}
+            title={t('bestiary.import')}
+            aria-label={t('bestiary.import')}
+          >
+            📥
+          </button>
           <button
             type="button"
             className="bb-best-list-new"

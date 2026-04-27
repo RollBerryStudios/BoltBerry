@@ -8,6 +8,7 @@ import { showToast } from '../shared/Toast'
 import { WikiEntryForm } from './WikiEntryForm'
 import { NpcCloneWizard } from './NpcCloneWizard'
 import type { AppLanguage } from '../../stores/uiStore'
+import { buildWikiFile, suggestedWikiFilename } from '../../utils/wikiTransfer'
 
 /**
  * Right-click context menu for Wiki list items.
@@ -146,6 +147,34 @@ export function WikiListMenu({ kind, language, anchor, entry, onClose, onChanged
     }
   }
 
+  async function handleExport() {
+    if (busy || !window.electronAPI) return
+    setBusy(true)
+    try {
+      const rec = await loadFullRecord()
+      if (!rec) throw new Error('load-failed')
+      const file = buildWikiFile(kind, rec)
+      const result = await window.electronAPI.exportToFile({
+        suggestedName: suggestedWikiFilename(kind, rec.name),
+        content: JSON.stringify(file, null, 2),
+        encoding: 'utf8',
+        filters: [{ name: 'BoltBerry-Wiki (JSON)', extensions: ['json'] }],
+        dialogTitle: t('bestiary.exportDialogTitle'),
+      })
+      if (result.success) {
+        showToast(t('bestiary.exportSuccess', { name: rec.name }), 'success')
+        onClose()
+      } else if (!result.canceled) {
+        showToast(t('bestiary.exportFailed', { error: result.error ?? '' }), 'error', 7000)
+      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      showToast(t('bestiary.exportFailed', { error: msg }), 'error', 7000)
+    } finally {
+      setBusy(false)
+    }
+  }
+
   async function handleDelete() {
     if (busy || !isUser) return
     const confirmed = window.confirm(t('bestiary.deleteConfirm', { name: entry.name }))
@@ -202,6 +231,14 @@ export function WikiListMenu({ kind, language, anchor, entry, onClose, onChanged
               🧑 {t('npcWizard.openButton')}
             </button>
           )}
+          <button
+            type="button"
+            className="wiki-list-menu-item"
+            onClick={handleExport}
+            disabled={busy}
+          >
+            📤 {t('bestiary.export')}
+          </button>
           {isUser && (
             <>
               <div className="wiki-list-menu-sep" />

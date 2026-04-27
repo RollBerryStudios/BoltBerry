@@ -8,6 +8,12 @@ import { EmptyState } from '../../EmptyState'
 import { BestiaryPicker } from '../../bestiary/BestiaryPicker'
 import { CircularCropper } from '../../shared/CircularCropper'
 import { useImageUrl } from '../../../hooks/useImageUrl'
+import { showToast } from '../../shared/Toast'
+import {
+  buildCharacterFile,
+  parseCharacterFile,
+  suggestedCharacterFilename,
+} from '../../../utils/characterTransfer'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -750,6 +756,76 @@ export function CharacterSheetPanel() {
     if (activeSheetId === id) setActiveSheetId(null)
   }, [activeSheetId, sheets, removeSheet, setActiveSheetId, t])
 
+  const handleExport = useCallback(async (sheet: CharacterSheet) => {
+    if (!window.electronAPI) return
+    try {
+      const file = await buildCharacterFile(sheet)
+      if (!file) return
+      const result = await window.electronAPI.exportToFile({
+        suggestedName: suggestedCharacterFilename(sheet.name),
+        content: JSON.stringify(file, null, 2),
+        encoding: 'utf8',
+        filters: [{ name: 'BoltBerry-Charakter (JSON)', extensions: ['json'] }],
+        dialogTitle: t('characters.exportDialogTitle'),
+      })
+      if (result.success) {
+        showToast(t('characters.exportDone', { name: sheet.name }), 'success', 6000)
+      } else if (!result.canceled) {
+        showToast(t('characters.exportFailed', { error: result.error ?? '' }), 'error', 7000)
+      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      showToast(t('characters.exportFailed', { error: msg }), 'error', 7000)
+    }
+  }, [t])
+
+  const handleImport = useCallback(async () => {
+    if (!activeCampaignId || !window.electronAPI) return
+    try {
+      const open = await window.electronAPI.importFromFile({
+        filters: [{ name: 'BoltBerry-Charakter (JSON)', extensions: ['json'] }],
+        dialogTitle: t('characters.importDialogTitle'),
+        encoding: 'utf8',
+      })
+      if (!open.success) {
+        if (!open.canceled) {
+          showToast(t('characters.importFailed', { error: open.error ?? '' }), 'error', 7000)
+        }
+        return
+      }
+      const file = parseCharacterFile(open.content ?? '')
+      // Create the row first so we have an id, then patch all the
+      // sheet fields in a single update call. Two round-trips, but
+      // it reuses the existing CRUD instead of needing a new IPC.
+      const created = await window.electronAPI.characterSheets.create(activeCampaignId, file.sheet.name)
+      if (!created) throw new Error('Charakter konnte nicht erstellt werden.')
+
+      let portraitPath: string | null = null
+      if (file.portraitDataUrl) {
+        try {
+          const saved = await window.electronAPI.savePortrait(file.portraitDataUrl, null)
+          if (saved?.success && saved.path) portraitPath = saved.path
+        } catch {
+          // best-effort — character imports without portrait still
+          // succeed; the user just won't see a profile picture.
+        }
+      }
+
+      const patch: Partial<CharacterSheet> = {
+        ...file.sheet,
+        portraitPath,
+      }
+      await window.electronAPI.characterSheets.update(created.id, patch)
+      const merged: CharacterSheet = { ...created, ...patch }
+      addSheet(merged)
+      setActiveSheetId(merged.id)
+      showToast(t('characters.importDone', { name: file.sheet.name }), 'success', 6000)
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      showToast(t('characters.importFailed', { error: msg }), 'error', 7000)
+    }
+  }, [activeCampaignId, addSheet, setActiveSheetId, t])
+
   const activeSheet = sheets.find((s) => s.id === activeSheetId)
 
   if (!activeCampaignId) {
@@ -785,6 +861,15 @@ export function CharacterSheetPanel() {
           }}>
             Charaktere
           </span>
+          <button
+            onClick={handleImport}
+            className="btn btn-secondary"
+            style={{ fontSize: 'var(--text-xs)', padding: '3px 8px' }}
+            title={t('characters.import')}
+            aria-label={t('characters.import')}
+          >
+            📥
+          </button>
           <button
             onClick={handleNew}
             className="btn btn-secondary"
@@ -842,6 +927,21 @@ export function CharacterSheetPanel() {
                       Lv.{s.level} {s.className}
                     </div>
                   </div>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); handleExport(s) }}
+                    title={t('characters.export')}
+                    aria-label={t('characters.export')}
+                    style={{
+                      background: 'none', border: 'none', color: 'var(--text-muted)',
+                      cursor: 'pointer', fontSize: 12, opacity: 0, padding: '0 2px',
+                      flexShrink: 0,
+                    }}
+                    className="sheet-delete-btn"
+                    onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.color = 'var(--accent-blue-light)' }}
+                    onMouseLeave={(e) => { e.currentTarget.style.opacity = '0' }}
+                  >
+                    📤
+                  </button>
                   <button
                     onClick={(e) => { e.stopPropagation(); handleDelete(s.id) }}
                     style={{

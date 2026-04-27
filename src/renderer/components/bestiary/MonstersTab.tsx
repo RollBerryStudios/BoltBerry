@@ -7,6 +7,8 @@ import { MonsterDetail } from './MonsterDetail'
 import { WikiEntryForm } from './WikiEntryForm'
 import { WikiListMenu } from './WikiListMenu'
 import { useDebouncedValue } from '../../hooks/useDebouncedValue'
+import { importWikiEntryViaDialog } from '../../utils/wikiTransfer'
+import { showToast } from '../shared/Toast'
 
 /* Monster list + detail pane. The list loads once from DATA_LIST_MONSTERS;
    the detail is fetched on-demand via DATA_GET_MONSTER and cached so
@@ -114,6 +116,20 @@ export function MonstersTab({
 
   const handleSelect = useCallback((slug: string) => setSelectedSlug(slug), [])
 
+  const handleImport = useCallback(async () => {
+    try {
+      const taken = new Set((index ?? []).map((m) => m.slug))
+      const imported = await importWikiEntryViaDialog('monster', taken)
+      if (!imported) return
+      showToast(t('bestiary.importSuccess', { name: imported.record.name }), 'success')
+      setRefreshTick((n) => n + 1)
+      setSelectedSlug(imported.slug)
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      showToast(t('bestiary.importFailed', { error: msg }), 'error', 7000)
+    }
+  }, [index, t])
+
   if (error) {
     return <div className="bb-best-error">⚠️ {error}</div>
   }
@@ -166,6 +182,15 @@ export function MonstersTab({
 
         <div className="bb-best-listcount">
           <span>{t('bestiary.countMonsters', { count: filtered.length })}</span>
+          <button
+            type="button"
+            className="bb-best-list-new"
+            onClick={handleImport}
+            title={t('bestiary.import')}
+            aria-label={t('bestiary.import')}
+          >
+            📥
+          </button>
           <button
             type="button"
             className="bb-best-list-new"

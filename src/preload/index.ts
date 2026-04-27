@@ -102,6 +102,12 @@ export const dmApi = {
     dialogTitle?: string
   }): Promise<{ success: boolean; filePath?: string; canceled?: boolean; error?: string }> =>
     ipcRenderer.invoke(IPC.EXPORT_TO_FILE, args),
+  importFromFile: (args: {
+    filters?: Array<{ name: string; extensions: string[] }>
+    dialogTitle?: string
+    encoding?: 'utf8' | 'base64'
+  }): Promise<{ success: boolean; filePath?: string; content?: string; canceled?: boolean; error?: string }> =>
+    ipcRenderer.invoke(IPC.IMPORT_FROM_FILE, args),
   saveNow: () => ipcRenderer.invoke('app:save-now'),
 
   // Player state broadcasting

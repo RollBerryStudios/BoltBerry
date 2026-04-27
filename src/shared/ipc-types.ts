@@ -222,6 +222,10 @@ export const IPC = {
    *  dialog, writes the file and returns the resulting path. Keeps
    *  every export consistent and avoids duplicating dialog code. */
   EXPORT_TO_FILE:             'app:export-to-file',
+  /** Symmetric counterpart to EXPORT_TO_FILE. Main opens a file
+   *  picker, reads the chosen file (size-bounded), returns its bytes
+   *  to the renderer. The renderer parses + applies the payload. */
+  IMPORT_FROM_FILE:           'app:import-from-file',
 
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
