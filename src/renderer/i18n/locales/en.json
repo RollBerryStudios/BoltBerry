@@ -469,7 +469,7 @@
     "rightSidebar": "Right Sidebar",
     "tools": {
       "select": "Select / Move",
-      "pointer": "Pointer / Ping",
+      "pointer": "Pointer / Ping (or Shift+click anywhere)",
       "token": "Place Token",
       "fogRect": "Reveal Fog (Rectangle)",
       "fogPolygon": "Reveal Fog (Polygon)",
@@ -656,6 +656,7 @@
     "keyMouseWheel": "Zoom to cursor",
     "keyAltDrag": "Pan map",
     "keyMiddleDrag": "Pan map",
+    "keyPing": "Ping (attention marker, visible to players)",
     "keyMapSwitch": "Quick-switch Map 1–5",
     "keyNextFighter": "Next combatant",
     "keyPolygonFinish": "Finish polygon",

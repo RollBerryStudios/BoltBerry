@@ -33,6 +33,7 @@ export function ShortcutOverlay({ onClose }: ShortcutOverlayProps) {
     { key: 'Mausrad',              labelKey: 'shortcuts.keyMouseWheel' },
     { key: 'Alt + Drag',           labelKey: 'shortcuts.keyAltDrag' },
     { key: 'Mittelklick + Drag',   labelKey: 'shortcuts.keyMiddleDrag' },
+    { key: 'Shift + Klick',        labelKey: 'shortcuts.keyPing' },
     { key: '0',                    labelKey: 'shortcuts.keyFit' },
     { key: '1 – 5',                labelKey: 'shortcuts.keyMapSwitch' },
     { section: t('shortcuts.sectionTokens') },

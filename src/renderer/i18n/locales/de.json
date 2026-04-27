@@ -469,7 +469,7 @@
     "broadcastOfflineHint": "Kein Spielerfenster verbunden",
     "tools": {
       "select": "Auswählen / Verschieben",
-      "pointer": "Zeiger / Ping",
+      "pointer": "Zeiger / Ping (oder Shift+Klick irgendwo)",
       "token": "Token platzieren",
       "fogRect": "Fog aufdecken (Rechteck)",
       "fogPolygon": "Fog aufdecken (Polygon)",
@@ -656,6 +656,7 @@
     "keyMouseWheel": "Zoom zur Mausposition",
     "keyAltDrag": "Karte verschieben (Pan)",
     "keyMiddleDrag": "Karte verschieben (Pan)",
+    "keyPing": "Ping (Aufmerksamkeits-Marker für Spieler)",
     "keyMapSwitch": "Schnell-Wechsel Karte 1–5",
     "keyNextFighter": "Nächster Kämpfer",
     "keyPolygonFinish": "Polygon abschließen",
