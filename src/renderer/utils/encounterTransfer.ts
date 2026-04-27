@@ -34,6 +34,13 @@ export function suggestedEncounterFilename(name: string): string {
   return `BoltBerry_Encounter_${stem}_${new Date().toISOString().slice(0, 10)}.json`
 }
 
+/** Upper bound on the templateData blob. Real encounter templates are
+ *  a few KB (token snapshots + walls + initiative); 1 MB is generous
+ *  but refuses anything obviously inflated. The encounters table
+ *  scans this column on every list call, so an oversized row taxes
+ *  every future render. */
+const MAX_ENCOUNTER_TEMPLATE_BYTES = 1 * 1024 * 1024
+
 export function parseEncounterFile(json: string): EncounterFile {
   let parsed: unknown
   try {
@@ -60,6 +67,10 @@ export function parseEncounterFile(json: string): EncounterFile {
   }
   if (typeof enc.templateData !== 'string') {
     throw new Error('Encounter-Daten fehlen.')
+  }
+  if (enc.templateData.length > MAX_ENCOUNTER_TEMPLATE_BYTES) {
+    const mb = (enc.templateData.length / (1024 * 1024)).toFixed(1)
+    throw new Error(`Encounter-Daten sind zu groß (${mb} MB). Maximum: 1 MB.`)
   }
   // Round-trip the templateData JSON so we surface bad payloads at
   // import time instead of letting them break a future Spawn click.

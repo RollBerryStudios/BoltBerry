@@ -50,6 +50,13 @@ export function suggestedSoundtrackFilename(soundtrack: string | null): string {
   return `BoltBerry_Soundtrack_${stem}_${new Date().toISOString().slice(0, 10)}.json`
 }
 
+/** Upper bound on track entries per manifest. A typical session
+ *  soundtrack tag holds 10–50 tracks; 5000 covers any realistic
+ *  library and refuses obviously inflated manifests that would
+ *  translate into thousands of sequential `tracks.update` IPCs on
+ *  import (each is a DB write — measurable session lag at 10k+). */
+const MAX_SOUNDTRACK_TRACKS = 5000
+
 export function parseSoundtrackFile(json: string): SoundtrackFile {
   let parsed: unknown
   try {
@@ -69,6 +76,9 @@ export function parseSoundtrackFile(json: string): SoundtrackFile {
   }
   if (!Array.isArray(obj.tracks)) {
     throw new Error('Datei enthält keine Track-Liste.')
+  }
+  if (obj.tracks.length > MAX_SOUNDTRACK_TRACKS) {
+    throw new Error(`Zu viele Track-Einträge (${obj.tracks.length}). Maximum: ${MAX_SOUNDTRACK_TRACKS}.`)
   }
   const tracks = obj.tracks as Array<Record<string, unknown>>
   for (const t of tracks) {

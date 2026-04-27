@@ -390,6 +390,11 @@ export function registerDataHandlers(): void {
   })
 
   // ── User-authored Wiki entry CRUD ─────────────────────────────────────────
+  // 5 MB is several orders of magnitude above any realistic SRD-shape
+  // statblock (~5–50 KB). This cap exists so a hand-crafted import file
+  // can't bloat user_wiki_entries to gigabytes — every list/get scans
+  // the table, so a single oversized row taxes every read forever.
+  const MAX_WIKI_ENTRY_BYTES = 5 * 1024 * 1024
   ipcMain.handle(IPC.WIKI_UPSERT_USER_ENTRY, (
     _event,
     kind: WikiKind,
@@ -400,8 +405,29 @@ export function registerDataHandlers(): void {
       return { success: false, error: 'invalid-kind' }
     }
     if (!SLUG_RE.test(slug)) return { success: false, error: 'invalid-slug' }
+    // Minimum-viable shape sanity. The renderer (parseWikiFile +
+    // BestiaryView form) is the canonical validator; this is a
+    // defense-in-depth check at the IPC boundary so a hand-crafted
+    // import or buggy caller can't poison user_wiki_entries.
+    if (!data || typeof data !== 'object' || Array.isArray(data)) {
+      return { success: false, error: 'invalid-data' }
+    }
+    const rec = data as Record<string, unknown>
+    if (typeof rec.name !== 'string' || !rec.name.trim()) {
+      return { success: false, error: 'missing-name' }
+    }
+    // The slug embedded in the record must match the slug parameter.
+    // If a caller passes mismatched values we reject rather than silently
+    // honoring one or the other — both interpretations would surprise
+    // the user later (lookups by slug would not find what they saved).
+    if (typeof rec.slug === 'string' && rec.slug !== slug) {
+      return { success: false, error: 'slug-mismatch' }
+    }
     try {
       const json = JSON.stringify(data)
+      if (json.length > MAX_WIKI_ENTRY_BYTES) {
+        return { success: false, error: `entry-too-large (${json.length} bytes)` }
+      }
       getDb().prepare(
         `INSERT INTO user_wiki_entries (kind, slug, data, created_at, updated_at)
          VALUES (?, ?, ?, datetime('now'), datetime('now'))

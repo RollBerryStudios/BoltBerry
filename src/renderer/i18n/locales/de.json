@@ -274,6 +274,7 @@
     "exportSuccess": "„{{name}}\" exportiert",
     "exportFailed": "Export fehlgeschlagen: {{error}}",
     "import": "Wiki-Eintrag importieren",
+    "importShort": "Import",
     "importSuccess": "„{{name}}\" importiert",
     "importFailed": "Import fehlgeschlagen: {{error}}",
     "tabMonsters": "Monster",

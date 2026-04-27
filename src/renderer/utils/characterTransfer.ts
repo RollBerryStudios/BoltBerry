@@ -93,6 +93,14 @@ export function suggestedCharacterFilename(name: string): string {
   return `BoltBerry_Character_${stem}_${new Date().toISOString().slice(0, 10)}.json`
 }
 
+/** Hard cap on embedded portrait size (bytes of decoded image). The
+ *  exporter side is bounded by GET_IMAGE_AS_BASE64 (20 MB), so a
+ *  legitimate file never exceeds it; we re-check at import to refuse
+ *  hand-crafted JSONs that try to slip a giant blob past savePortrait
+ *  (which has no size guard of its own). 20 MB matches the export cap
+ *  exactly so a clean roundtrip never trips this. */
+const MAX_PORTRAIT_DATA_URL_BYTES = 20 * 1024 * 1024
+
 /** Parse + validate the on-disk format. Throws with a human message
  *  on bad input so the caller can surface a useful toast. */
 export function parseCharacterFile(json: string): CharacterFile {
@@ -115,8 +123,17 @@ export function parseCharacterFile(json: string): CharacterFile {
   if (!obj.sheet || typeof obj.sheet !== 'object') {
     throw new Error('Datei enthält keinen Charakterbogen.')
   }
-  if (obj.portraitDataUrl !== undefined && typeof obj.portraitDataUrl !== 'string') {
-    throw new Error('Portrait-Daten sind beschädigt.')
+  if (obj.portraitDataUrl !== undefined) {
+    if (typeof obj.portraitDataUrl !== 'string') {
+      throw new Error('Portrait-Daten sind beschädigt.')
+    }
+    if (!obj.portraitDataUrl.startsWith('data:image/')) {
+      throw new Error('Portrait-Daten haben ein unbekanntes Format.')
+    }
+    if (obj.portraitDataUrl.length > MAX_PORTRAIT_DATA_URL_BYTES) {
+      const mb = (obj.portraitDataUrl.length / (1024 * 1024)).toFixed(1)
+      throw new Error(`Portrait ist zu groß (${mb} MB). Maximum: 20 MB.`)
+    }
   }
   return obj as unknown as CharacterFile
 }

@@ -220,9 +220,8 @@ export function SpellsTab({
             className="bb-best-list-new"
             onClick={handleImport}
             title={t('bestiary.import')}
-            aria-label={t('bestiary.import')}
           >
-            📥
+            📥 {t('bestiary.importShort')}
           </button>
           <button
             type="button"

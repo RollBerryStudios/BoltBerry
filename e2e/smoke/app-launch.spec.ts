@@ -117,8 +117,6 @@ test.describe('App launch', () => {
       await close()
     }
   })
-    }
-  })
 
   test('window background colour is the expected dark theme value', async () => {
     // windows.ts sets backgroundColor: '#121722' — a quick sanity check
