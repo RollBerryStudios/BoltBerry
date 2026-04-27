@@ -514,6 +514,50 @@ export function registerAppHandlers(): void {
     },
   )
 
+  // SFX-Slot Custom-Icon Picker. Single-image picker; copies into
+  // userData/assets/sfx-icons/ and returns the relative path. PNG /
+  // JPG / WebP / SVG are accepted (SVG kept for clean upscaling on
+  // 4K displays). On cancel returns null; the caller leaves the
+  // existing icon untouched.
+  ipcMain.handle(IPC.IMPORT_SFX_ICON, async () => {
+    const userDataPath = getCustomUserDataPath() || app.getPath('userData')
+    const destDir = join(userDataPath, 'assets', 'sfx-icons')
+    if (!existsSync(destDir)) mkdirSync(destDir, { recursive: true })
+
+    const result = await dialog.showOpenDialog({
+      title: 'Slot-Icon importieren',
+      filters: [{ name: 'Bilder', extensions: ['png', 'jpg', 'jpeg', 'webp', 'svg'] }],
+      properties: ['openFile'],
+    })
+    if (result.canceled || !result.filePaths[0]) return null
+    const srcPath = result.filePaths[0]
+    const ext = extname(srcPath).toLowerCase()
+    const destName = `${Date.now()}_${Math.random().toString(36).slice(2)}${ext}`
+    const destPath = join(destDir, destName)
+    try {
+      copyFileSync(srcPath, destPath)
+    } catch (err) {
+      console.error('[importSfxIcon] copy failed:', err)
+      return null
+    }
+    // Magic-byte check skipped for SVG (text format) \u2014 others go
+    // through the same gate as map / token uploads.
+    if (ext !== '.svg') {
+      try {
+        if (!validateMagicBytes(destPath, ext)) {
+          try { unlinkSync(destPath) } catch { /* unreachable cleanup */ }
+          console.warn('[importSfxIcon] magic-byte rejection:', srcPath)
+          return null
+        }
+      } catch (err) {
+        try { unlinkSync(destPath) } catch { /* unreachable cleanup */ }
+        console.warn('[importSfxIcon] validation failed:', err)
+        return null
+      }
+    }
+    return relative(userDataPath, destPath)
+  })
+
   // Import PDF \u2192 returns file bytes so renderer can render with pdfjs
   ipcMain.handle(IPC.IMPORT_PDF, async (_event, _campaignId: number) => {
     const result = await dialog.showOpenDialog({

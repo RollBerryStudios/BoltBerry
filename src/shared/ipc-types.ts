@@ -212,6 +212,9 @@ export const IPC = {
    *  caller can use the source folder name as the auto-soundtrack
    *  tag. */
   IMPORT_AUDIO_FOLDER:        'app:import-audio-folder',
+  /** Single-file picker for a custom SFX slot icon. Copies into
+   *  userData/assets/sfx-icons/ and returns the relative path. */
+  IMPORT_SFX_ICON:            'app:import-sfx-icon',
 
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',

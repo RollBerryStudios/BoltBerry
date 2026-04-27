@@ -427,6 +427,11 @@ export const dmApi = {
       ipcRenderer.invoke(IPC.AUDIO_BOARDS_UPSERT_SLOT, boardId, slot),
     deleteSlot: (boardId: number, slotNumber: number): Promise<void> =>
       ipcRenderer.invoke(IPC.AUDIO_BOARDS_DELETE_SLOT, boardId, slotNumber),
+    /** Pick a custom-icon image for a slot. Returns the relative
+     *  path of the imported file, or null on cancel/failure. The
+     *  caller persists the path via `upsertSlot`. */
+    importIcon: (): Promise<string | null> =>
+      ipcRenderer.invoke(IPC.IMPORT_SFX_ICON),
   },
 
   // Tracks — canonical audio-library API (v38). The MusicLibraryPanel

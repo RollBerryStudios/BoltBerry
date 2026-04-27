@@ -6,8 +6,8 @@ import { useSessionStore } from '../stores/sessionStore'
 import { NotesPanel } from './sidebar/panels/NotesPanel'
 import { CharacterSheetPanel } from './sidebar/panels/CharacterSheetPanel'
 import { HandoutsPanel } from './sidebar/panels/HandoutsPanel'
-import { AudioPanel } from './sidebar/panels/AudioPanel'
 import { MusicLibraryPanel } from './sidebar/panels/MusicLibraryPanel'
+import { ProfessionalSfxPanel } from './sidebar/panels/ProfessionalSfxPanel'
 import { TokenLibraryPanel } from './sidebar/panels/TokenLibraryPanel'
 import { showToast } from './shared/Toast'
 import {
@@ -310,7 +310,7 @@ export function CampaignView() {
               <>
                 <PanelHeader title={t('workspace.tabSfx')} hint={t('workspace.hintSfx')} />
                 <div className="bb-ws-panel-inner bb-ws-panel-audio">
-                  <AudioPanel layout="wide-sfx" />
+                  <ProfessionalSfxPanel />
                 </div>
               </>
             )}
