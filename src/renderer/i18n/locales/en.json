@@ -844,6 +844,93 @@
   "settings": {
     "title": "Settings"
   },
+  "campaignSettings": {
+    "title": "Active campaign",
+    "globalHint": "App-wide settings (data folder, theme, language, toolbar, DM profile) live in the ⚙ Settings dialog (Ctrl/Cmd+,).",
+    "rescan": "Rescan content folder",
+    "rescanHint": "Read newly added maps/tokens/audio from the data folder.",
+    "rescanRunning": "Scanning content folder…",
+    "rescanDone": "Scan complete",
+    "rescanFailed": "Scan failed: {{error}}",
+    "export": "Export campaign",
+    "exportHint": "Export the active campaign as a BoltBerry archive",
+    "exportRunning": "Exporting campaign…",
+    "exportDone": "Campaign exported",
+    "exportCanceled": "Export canceled",
+    "exportFailed": "Export failed: {{error}}",
+    "backup": "Quick backup",
+    "backupHint": "Drop a quick backup of the active campaign into the backup folder",
+    "backupRunning": "Creating quick backup…",
+    "backupDone": "Quick backup saved",
+    "backupFailed": "Backup failed: {{error}}",
+    "importTitle": "Import campaign",
+    "import": "Import campaign",
+    "importHint": "Import a campaign from a BoltBerry archive",
+    "importRunning": "Importing campaign…",
+    "importDone": "Campaign imported",
+    "importCanceled": "Import canceled",
+    "importFailed": "Import failed: {{error}}"
+  },
+  "globalSettings": {
+    "title": "Settings",
+    "close": "Close",
+    "sections": "Sections",
+    "open": "Open app settings",
+    "storage": "Storage",
+    "appearance": "Appearance",
+    "profile": "DM profile",
+    "about": "About",
+    "errors": {
+      "openFolder": "Could not open folder",
+      "changeFolder": "Could not change data folder",
+      "changeFolderPrefix": "Data folder change failed: {{error}}",
+      "scanFailed": "Scan failed: {{error}}",
+      "cleanupFailed": "Cleanup failed: {{error}}"
+    },
+    "storage": {
+      "title": "Storage",
+      "hint": "BoltBerry stores all maps, tokens, audio files and the database in one folder. This folder applies to the whole app.",
+      "folderLabel": "Current data folder",
+      "notSet": "No folder set",
+      "openFolder": "Open in file manager",
+      "changeFolder": "Change data folder…",
+      "changedReload": "Data folder changed. Please restart BoltBerry so all content reloads.",
+      "cleanupTitle": "Clean up storage",
+      "cleanupHint": "Finds and deletes files in the assets folder that no map, token or other resource references any more.",
+      "cleanupRun": "Scan for orphaned files…",
+      "cleanupEmpty": "No orphaned files found",
+      "cleanupConfirm": "{{count}} orphaned file(s) found ({{mb}} MB). Delete now?",
+      "cleanupDone": "{{count}} file(s) cleaned up"
+    },
+    "appearance": {
+      "title": "Appearance",
+      "hint": "These settings apply to the whole app.",
+      "theme": "Theme",
+      "themeHint": "Light or dark look for the DM UI.",
+      "dark": "Dark",
+      "light": "Light",
+      "language": "Language",
+      "languageHint": "Language for the UI and the native menu.",
+      "dockTitle": "Toolbar",
+      "dockLabels": "Show labels",
+      "dockLabelsHint": "Show tool names below the icons.",
+      "dockAutoHide": "Auto-hide",
+      "dockAutoHideHint": "Dims the toolbar when the cursor rests on the map."
+    },
+    "profile": {
+      "title": "DM profile",
+      "hint": "Shown in greetings and on upcoming presence pins.",
+      "displayName": "Display name",
+      "displayNamePlaceholder": "How should BoltBerry address you?",
+      "avatarHue": "Avatar colour",
+      "resetHue": "Derive from name"
+    },
+    "about": {
+      "title": "About BoltBerry",
+      "tagline": "Local virtual tabletop for home sessions.",
+      "version": "Version"
+    }
+  },
   "dice": {
     "title": "Dice System",
     "roll": "Roll",

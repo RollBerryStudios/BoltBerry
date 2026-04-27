@@ -216,6 +216,13 @@ export const IPC = {
    *  userData/assets/sfx-icons/ and returns the relative path. */
   IMPORT_SFX_ICON:            'app:import-sfx-icon',
 
+  /** Generic save-to-disk helper used by every export flow (campaign,
+   *  character, encounter, map, token template, soundtrack collection).
+   *  Renderer hands over the prepared payload, main shows the save
+   *  dialog, writes the file and returns the resulting path. Keeps
+   *  every export consistent and avoids duplicating dialog code. */
+  EXPORT_TO_FILE:             'app:export-to-file',
+
   // Campaign backup
   QUICK_BACKUP: 'app:quick-backup',
 

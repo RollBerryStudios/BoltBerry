@@ -94,6 +94,14 @@ export const dmApi = {
     ipcRenderer.invoke('app:duplicate-campaign', campaignId),
   quickBackup: (campaignId: number) =>
     ipcRenderer.invoke('app:quick-backup', campaignId),
+  exportToFile: (args: {
+    suggestedName: string
+    content: string | ArrayBuffer | Uint8Array
+    encoding?: 'utf8' | 'base64' | 'binary'
+    filters?: Array<{ name: string; extensions: string[] }>
+    dialogTitle?: string
+  }): Promise<{ success: boolean; filePath?: string; canceled?: boolean; error?: string }> =>
+    ipcRenderer.invoke(IPC.EXPORT_TO_FILE, args),
   saveNow: () => ipcRenderer.invoke('app:save-now'),
 
   // Player state broadcasting

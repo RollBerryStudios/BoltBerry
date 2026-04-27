@@ -1,7 +1,6 @@
 ﻿import { useTranslation } from 'react-i18next'
 import clsx from 'clsx'
 import { useCampaignStore } from '../stores/campaignStore'
-import { useUIStore } from '../stores/uiStore'
 import { useSessionStore } from '../stores/sessionStore'
 import logoSquare from '../assets/boltberry-logo.png'
 
@@ -22,8 +21,6 @@ import logoSquare from '../assets/boltberry-logo.png'
 export function DmTitleBar() {
   const { t } = useTranslation()
   const { activeCampaignId, campaigns, activeMapId, activeMaps } = useCampaignStore()
-  const language = useUIStore((s) => s.language)
-  const toggleLanguage = useUIStore((s) => s.toggleLanguage)
   const playerConnected = useSessionStore((s) => s.playerConnected)
   const sessionMode = useSessionStore((s) => s.sessionMode)
 
@@ -91,23 +88,19 @@ export function DmTitleBar() {
         </div>
       )}
 
-      <div
-        className="dm-title-bar-lang"
-        role="group"
-        aria-label="Language"
+      <button
+        type="button"
+        className="dm-title-bar-settings"
+        onClick={() => window.dispatchEvent(new CustomEvent('app:open-global-settings'))}
+        title={`${t('globalSettings.open')} (Ctrl/Cmd+,)`}
+        aria-label={t('globalSettings.open')}
         style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
       >
-        {(['de', 'en'] as const).map((l) => (
-          <button
-            key={l}
-            type="button"
-            onClick={() => { if (language !== l) toggleLanguage() }}
-            className={language === l ? 'active' : ''}
-          >
-            {l.toUpperCase()}
-          </button>
-        ))}
-      </div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="3" />
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+        </svg>
+      </button>
 
       {/* Reserve space for Windows/Linux native window controls
           (titleBarOverlay renders them on the right). */}

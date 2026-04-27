@@ -1,10 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCampaignStore } from '../stores/campaignStore'
 import { useSettingsStore } from '../stores/settingsStore'
 import { useUIStore } from '../stores/uiStore'
 import { AboutDialog } from './AboutDialog'
-import { showToast } from './shared/Toast'
 import { formatError } from '../utils/formatError'
 import type { Campaign } from '@shared/ipc-types'
 import {
@@ -548,212 +547,19 @@ function CampaignRow({
 
 function SettingsIconButton() {
   const { t } = useTranslation()
-  const language = useUIStore((s) => s.language)
-  const toggleLanguage = useUIStore((s) => s.toggleLanguage)
-  const theme = useUIStore((s) => s.theme)
-  const toggleTheme = useUIStore((s) => s.toggleTheme)
-  const [open, setOpen] = useState(false)
-  const rootRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (!open) return
-    function onDocMouseDown(e: MouseEvent) {
-      if (!rootRef.current?.contains(e.target as Node)) setOpen(false)
-    }
-    function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') setOpen(false)
-    }
-    document.addEventListener('mousedown', onDocMouseDown)
-    document.addEventListener('keydown', onKey)
-    return () => {
-      document.removeEventListener('mousedown', onDocMouseDown)
-      document.removeEventListener('keydown', onKey)
-    }
-  }, [open])
-
-  async function handleOpenContentFolder() {
-    if (!window.electronAPI) return
-    try {
-      await window.electronAPI.openContentFolder()
-    } catch (err) {
-      showToast(formatError(err), 'error')
-    }
-  }
-
   return (
-    <div className="bb-welcome-settings-icon" ref={rootRef}>
-      <button
-        type="button"
-        className="bb-welcome-info-btn"
-        onClick={() => setOpen((v) => !v)}
-        aria-haspopup="menu"
-        aria-expanded={open}
-        title={t('welcome.settings')}
-        aria-label={t('welcome.settings')}
-      >
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="3" />
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
-        </svg>
-      </button>
-      {open && (
-        <div className="bb-welcome-settings-menu" role="menu">
-          <div className="bb-welcome-settings-row">
-            <span className="bb-welcome-settings-label">{t('welcome.settingsLanguage')}</span>
-            <div className="bb-welcome-lang" role="group">
-              {(['de', 'en'] as const).map((l) => (
-                <button
-                  key={l}
-                  type="button"
-                  onClick={() => { if (language !== l) toggleLanguage() }}
-                  className={language === l ? 'active' : ''}
-                >
-                  {l.toUpperCase()}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="bb-welcome-settings-row">
-            <span className="bb-welcome-settings-label">{t('welcome.settingsTheme')}</span>
-            <div className="bb-welcome-lang" role="group">
-              <button
-                type="button"
-                onClick={() => { if (theme !== 'dark') toggleTheme() }}
-                className={theme === 'dark' ? 'active' : ''}
-              >
-                🌙
-              </button>
-              <button
-                type="button"
-                onClick={() => { if (theme !== 'light') toggleTheme() }}
-                className={theme === 'light' ? 'active' : ''}
-              >
-                ☀
-              </button>
-            </div>
-          </div>
-
-          <div className="bb-welcome-settings-sep" />
-
-          <button
-            type="button"
-            className="bb-welcome-settings-item"
-            onClick={() => { setOpen(false); void handleOpenContentFolder() }}
-          >
-            📂 {t('welcome.settingsOpenFolder')}
-          </button>
-        </div>
-      )}
-    </div>
-  )
-}
-
-// ─── Settings menu (dropdown) ─────────────────────────────────────────
-
-function SettingsMenu() {
-  const { t } = useTranslation()
-  const language = useUIStore((s) => s.language)
-  const toggleLanguage = useUIStore((s) => s.toggleLanguage)
-  const theme = useUIStore((s) => s.theme)
-  const toggleTheme = useUIStore((s) => s.toggleTheme)
-  const [open, setOpen] = useState(false)
-  const rootRef = useRef<HTMLDivElement>(null)
-
-  // Keep the HTML data-theme attribute in sync so the swatch toggle
-  // visibly retints the Welcome screen itself (not just other routes).
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-    localStorage.setItem('theme', theme)
-  }, [theme])
-
-  useEffect(() => {
-    if (!open) return
-    function onDocMouseDown(e: MouseEvent) {
-      if (!rootRef.current?.contains(e.target as Node)) setOpen(false)
-    }
-    function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') setOpen(false)
-    }
-    document.addEventListener('mousedown', onDocMouseDown)
-    document.addEventListener('keydown', onKey)
-    return () => {
-      document.removeEventListener('mousedown', onDocMouseDown)
-      document.removeEventListener('keydown', onKey)
-    }
-  }, [open])
-
-  async function handleOpenContentFolder() {
-    if (!window.electronAPI) return
-    try {
-      await window.electronAPI.openContentFolder()
-    } catch (err) {
-      showToast(formatError(err), 'error')
-    }
-  }
-
-  return (
-    <div className="bb-welcome-settings" ref={rootRef}>
-      <button
-        type="button"
-        className="bb-welcome-compendium-btn"
-        onClick={() => setOpen((v) => !v)}
-        aria-haspopup="menu"
-        aria-expanded={open}
-        title={t('welcome.settings')}
-      >
-        ⚙ {t('welcome.settings')}
-      </button>
-      {open && (
-        <div className="bb-welcome-settings-menu" role="menu">
-          <div className="bb-welcome-settings-row">
-            <span className="bb-welcome-settings-label">{t('welcome.settingsLanguage')}</span>
-            <div className="bb-welcome-lang" role="group">
-              {(['de', 'en'] as const).map((l) => (
-                <button
-                  key={l}
-                  type="button"
-                  onClick={() => { if (language !== l) toggleLanguage() }}
-                  className={language === l ? 'active' : ''}
-                >
-                  {l.toUpperCase()}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="bb-welcome-settings-row">
-            <span className="bb-welcome-settings-label">{t('welcome.settingsTheme')}</span>
-            <div className="bb-welcome-lang" role="group">
-              <button
-                type="button"
-                onClick={() => { if (theme !== 'dark') toggleTheme() }}
-                className={theme === 'dark' ? 'active' : ''}
-              >
-                🌙
-              </button>
-              <button
-                type="button"
-                onClick={() => { if (theme !== 'light') toggleTheme() }}
-                className={theme === 'light' ? 'active' : ''}
-              >
-                ☀
-              </button>
-            </div>
-          </div>
-
-          <div className="bb-welcome-settings-sep" />
-
-          <button
-            type="button"
-            className="bb-welcome-settings-item"
-            onClick={() => { setOpen(false); void handleOpenContentFolder() }}
-          >
-            📂 {t('welcome.settingsOpenFolder')}
-          </button>
-        </div>
-      )}
-    </div>
+    <button
+      type="button"
+      className="bb-welcome-info-btn"
+      onClick={() => window.dispatchEvent(new CustomEvent('app:open-global-settings'))}
+      title={`${t('globalSettings.open')} (Ctrl/Cmd+,)`}
+      aria-label={t('globalSettings.open')}
+    >
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="3" />
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+      </svg>
+    </button>
   )
 }
 
@@ -1157,56 +963,6 @@ function WelcomeStyles() {
         row-gap: 6px;
         justify-content: flex-end;
       }
-      .bb-welcome-settings {
-        position: relative;
-        display: inline-flex;
-      }
-      .bb-welcome-settings-icon {
-        position: relative;
-        display: inline-flex;
-      }
-      .bb-welcome-settings-icon .bb-welcome-info-btn svg {
-        display: block;
-      }
-      .bb-welcome-settings-menu {
-        position: absolute;
-        top: calc(100% + 6px);
-        right: 0;
-        min-width: 220px;
-        padding: 8px;
-        background: var(--bg-elevated);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-md);
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
-        display: flex; flex-direction: column; gap: 6px;
-        z-index: 50;
-      }
-      .bb-welcome-settings-row {
-        display: flex; align-items: center; justify-content: space-between;
-        gap: 8px;
-        padding: 6px 8px;
-      }
-      .bb-welcome-settings-label {
-        font-size: 11px; font-weight: 600; color: var(--text-secondary);
-        letter-spacing: 0.02em;
-      }
-      .bb-welcome-settings-sep {
-        height: 1px; background: var(--border-subtle);
-        margin: 4px 2px;
-      }
-      .bb-welcome-settings-item {
-        display: flex; align-items: center; gap: 8px;
-        padding: 8px 10px;
-        background: transparent;
-        border: none; border-radius: var(--radius-sm);
-        color: var(--text-primary);
-        font-size: 12px; font-family: inherit;
-        text-align: left; cursor: pointer;
-        transition: background var(--transition);
-      }
-      .bb-welcome-settings-item:hover {
-        background: var(--bg-overlay);
-      }
       .bb-welcome-compendium-btn {
         display: inline-flex; align-items: center; gap: 6px;
         flex-shrink: 0;
@@ -1224,32 +980,6 @@ function WelcomeStyles() {
         border-color: var(--accent-blue);
         color: var(--accent-blue-light);
       }
-      .bb-welcome-lang {
-        display: flex;
-        border: 1px solid var(--border);
-        border-radius: var(--radius-sm);
-        overflow: hidden;
-        /* Never shrink below the intrinsic DE | EN width — with
-           default flex-shrink:1 the pill was being squeezed to a 20 px
-           vertical sliver at high-DPI window sizes because the four
-           neighbouring buttons claimed the remaining row. Pinning both
-           here and on .bb-welcome-compendium-btn forces overflow to
-           wrap via the row's flex-wrap instead of collapsing anyone. */
-        flex-shrink: 0;
-      }
-      .bb-welcome-lang button {
-        padding: 4px 10px;
-        font-size: 10px; font-weight: 600; letter-spacing: 0.04em;
-        background: transparent;
-        color: var(--text-muted);
-        border: none; cursor: pointer;
-        font-family: inherit;
-      }
-      .bb-welcome-lang button.active {
-        background: var(--accent-dim);
-        color: var(--accent);
-      }
-
       .bb-welcome-right-body {
         flex: 1; overflow-y: auto;
         padding: 8px 40px 16px;

@@ -844,6 +844,93 @@
   "settings": {
     "title": "Einstellungen"
   },
+  "campaignSettings": {
+    "title": "Aktive Kampagne",
+    "globalHint": "App-weite Einstellungen (Datenordner, Theme, Sprache, Werkzeugleiste, DM-Profil) findest du im ⚙ Einstellungs-Dialog (Ctrl/Cmd+,).",
+    "rescan": "Inhaltsordner scannen",
+    "rescanHint": "Liest neue Karten/Token/Audio-Dateien aus dem Datenordner ein.",
+    "rescanRunning": "Inhaltsordner wird gescannt…",
+    "rescanDone": "Scan abgeschlossen",
+    "rescanFailed": "Fehler beim Scannen: {{error}}",
+    "export": "Kampagne exportieren",
+    "exportHint": "Aktive Kampagne als BoltBerry-Archiv exportieren",
+    "exportRunning": "Kampagne wird exportiert…",
+    "exportDone": "Kampagne exportiert",
+    "exportCanceled": "Export abgebrochen",
+    "exportFailed": "Export fehlgeschlagen: {{error}}",
+    "backup": "Schnell-Backup",
+    "backupHint": "Schnell-Backup der aktiven Kampagne im Backup-Ordner ablegen",
+    "backupRunning": "Schnell-Backup wird erstellt…",
+    "backupDone": "Schnell-Backup gespeichert",
+    "backupFailed": "Backup fehlgeschlagen: {{error}}",
+    "importTitle": "Kampagne importieren",
+    "import": "Kampagne importieren",
+    "importHint": "Kampagne aus BoltBerry-Archiv importieren",
+    "importRunning": "Kampagne wird importiert…",
+    "importDone": "Kampagne importiert",
+    "importCanceled": "Import abgebrochen",
+    "importFailed": "Import fehlgeschlagen: {{error}}"
+  },
+  "globalSettings": {
+    "title": "Einstellungen",
+    "close": "Schließen",
+    "sections": "Bereiche",
+    "open": "App-Einstellungen öffnen",
+    "storage": "Speicher",
+    "appearance": "Darstellung",
+    "profile": "DM-Profil",
+    "about": "Über",
+    "errors": {
+      "openFolder": "Ordner konnte nicht geöffnet werden",
+      "changeFolder": "Datenordner konnte nicht geändert werden",
+      "changeFolderPrefix": "Datenordner-Wechsel fehlgeschlagen: {{error}}",
+      "scanFailed": "Scan fehlgeschlagen: {{error}}",
+      "cleanupFailed": "Aufräumen fehlgeschlagen: {{error}}"
+    },
+    "storage": {
+      "title": "Speicher",
+      "hint": "BoltBerry legt alle Karten, Token, Audio-Dateien und die Datenbank in einem Ordner ab. Dieser Ordner gilt für die ganze App.",
+      "folderLabel": "Aktueller Datenordner",
+      "notSet": "Kein Ordner gesetzt",
+      "openFolder": "Im Datei-Explorer öffnen",
+      "changeFolder": "Datenordner ändern…",
+      "changedReload": "Datenordner geändert. Bitte BoltBerry neu starten, damit alle Inhalte neu geladen werden.",
+      "cleanupTitle": "Speicher aufräumen",
+      "cleanupHint": "Findet und löscht Dateien im Assets-Ordner, auf die keine Karte, kein Token und keine andere Ressource mehr verweist.",
+      "cleanupRun": "Verwaiste Dateien suchen…",
+      "cleanupEmpty": "Keine verwaisten Dateien gefunden",
+      "cleanupConfirm": "{{count}} verwaiste Datei(en) gefunden ({{mb}} MB). Jetzt löschen?",
+      "cleanupDone": "{{count}} Datei(en) aufgeräumt"
+    },
+    "appearance": {
+      "title": "Darstellung",
+      "hint": "Diese Einstellungen gelten für die gesamte App.",
+      "theme": "Theme",
+      "themeHint": "Helles oder dunkles Erscheinungsbild für die DM-Oberfläche.",
+      "dark": "Dunkel",
+      "light": "Hell",
+      "language": "Sprache",
+      "languageHint": "Sprache der Oberfläche und des nativen Menüs.",
+      "dockTitle": "Werkzeugleiste",
+      "dockLabels": "Beschriftung anzeigen",
+      "dockLabelsHint": "Zeigt Werkzeugnamen unter den Icons.",
+      "dockAutoHide": "Automatisch ausblenden",
+      "dockAutoHideHint": "Dimmt die Werkzeugleiste, wenn der Cursor auf der Karte ruht."
+    },
+    "profile": {
+      "title": "DM-Profil",
+      "hint": "Erscheint in der Begrüßung und auf zukünftigen Anwesenheits-Pins.",
+      "displayName": "Anzeigename",
+      "displayNamePlaceholder": "Wie soll BoltBerry dich nennen?",
+      "avatarHue": "Avatar-Farbe",
+      "resetHue": "Aus Name ableiten"
+    },
+    "about": {
+      "title": "Über BoltBerry",
+      "tagline": "Lokales Virtual-Tabletop für Heim-Sessions.",
+      "version": "Version"
+    }
+  },
   "dice": {
     "title": "Würfelsystem",
     "roll": "Würfeln",

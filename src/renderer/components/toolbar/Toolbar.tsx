@@ -170,9 +170,7 @@ export function Toolbar() {
   const { t } = useTranslation()
   const {
     activeTool,
-    toggleTheme, theme,
     toggleLeftSidebar, toggleRightSidebar,
-    toggleLanguage, language,
     playerViewportMode, setPlayerViewportMode, setPlayerViewport,
     gridSnap, toggleGridSnap,
     showMinimap, toggleMinimap,
@@ -576,33 +574,16 @@ export function Toolbar() {
         📚
       </button>
 
-      {/* Settings popover — bundles rare-use chrome (theme, language,
-          shortcut help) so the working leftcourse of the toolbar isn't
-          permanently cluttered with one-time setup actions. */}
-      <ActionGroup
-        groupIcon="⋯"
-        groupLabelKey="toolbar.settings"
-        actions={[
-          {
-            id: 'theme',
-            icon: theme === 'dark' ? '☀' : '🌙',
-            labelKey: theme === 'dark' ? 'toolbar.themeDark' : 'toolbar.themeLight',
-            run: toggleTheme,
-          },
-          {
-            id: 'language',
-            icon: language === 'de' ? '🇬🇧' : '🇩🇪',
-            labelKey: 'toolbar.switchLanguage',
-            run: toggleLanguage,
-          },
-          {
-            id: 'shortcuts',
-            icon: '?',
-            labelKey: 'toolbar.shortcuts',
-            run: () => window.dispatchEvent(new KeyboardEvent('keydown', { key: '?' })),
-          },
-        ]}
-      />
+      {/* Shortcuts overlay — theme, language and dock prefs live in
+          the GlobalSettingsModal (Ctrl/Cmd+,, gear icon in titlebar). */}
+      <button
+        className="tool-btn"
+        title={t('toolbar.shortcuts')}
+        aria-label={t('toolbar.shortcuts')}
+        onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: '?' }))}
+      >
+        ?
+      </button>
 
       <button className="tool-btn" title={t('toolbar.rightSidebar')} aria-label={t('toolbar.rightSidebar')} onClick={toggleRightSidebar}>◨</button>
 

@@ -855,6 +855,50 @@ export function registerAppHandlers(): void {
     return app.getPath('userData')
   })
 
+  // Generic save-to-file used by every export flow (character,
+  // encounter, map, token template, soundtrack collection, …).
+  // The renderer prepares the bytes, main owns the dialog + write.
+  ipcMain.handle(IPC.EXPORT_TO_FILE, async (event, args: {
+    suggestedName: string
+    content: string | ArrayBuffer | Uint8Array
+    encoding?: 'utf8' | 'base64' | 'binary'
+    filters?: Array<{ name: string; extensions: string[] }>
+    dialogTitle?: string
+  }) => {
+    try {
+      const win = BrowserWindow.fromWebContents(event.sender) ?? undefined
+      const { filePath, canceled } = await dialog.showSaveDialog(win!, {
+        title: args.dialogTitle || 'Speichern',
+        defaultPath: args.suggestedName,
+        filters: args.filters && args.filters.length > 0
+          ? args.filters
+          : [{ name: 'Alle Dateien', extensions: ['*'] }],
+      })
+      if (canceled || !filePath) {
+        return { success: false, canceled: true }
+      }
+      let buffer: Buffer
+      if (args.content instanceof Uint8Array) {
+        buffer = Buffer.from(args.content)
+      } else if (args.content instanceof ArrayBuffer) {
+        buffer = Buffer.from(new Uint8Array(args.content))
+      } else if (typeof args.content === 'string') {
+        if (args.encoding === 'base64') {
+          buffer = Buffer.from(args.content, 'base64')
+        } else {
+          buffer = Buffer.from(args.content, 'utf8')
+        }
+      } else {
+        return { success: false, error: 'Unsupported content type' }
+      }
+      writeFileSync(filePath, buffer)
+      return { success: true, filePath }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err)
+      return { success: false, error: message }
+    }
+  })
+
   // Compendium, token variants, context menus, and confirm dialogs live
   // in `compendium-handlers.ts` + `dialog-handlers.ts` — registered
   // directly from `main/index.ts`, not through this module.

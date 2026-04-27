@@ -267,27 +267,26 @@ html, body {
 .dm-title-bar-pill {
   flex-shrink: 0;
 }
-.dm-title-bar-lang {
-  display: flex;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  flex-shrink: 0;
-}
-.dm-title-bar-lang button {
-  padding: 2px 8px;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+/* Settings (gear) button in the DM title bar — opens GlobalSettingsModal. */
+.dm-title-bar-settings {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 22px;
+  padding: 0;
+  margin-left: 6px;
   background: transparent;
   color: var(--text-muted);
-  border: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  font-family: inherit;
+  flex-shrink: 0;
+  transition: color var(--transition), border-color var(--transition);
 }
-.dm-title-bar-lang button.active {
-  background: var(--accent-dim);
-  color: var(--accent);
+.dm-title-bar-settings:hover {
+  color: var(--text-primary);
+  border-color: var(--accent);
 }
 
 /* ─── Toolbar ────────────────────────────────────────────────────────────────── */

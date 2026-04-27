@@ -47,7 +47,6 @@ export function CampaignView() {
     addMap,
     setActiveCampaign,
   } = useCampaignStore()
-  const { language, toggleLanguage } = useUIStore()
   const { playerConnected } = useSessionStore()
   // Tab lives in uiStore so the workspace can unmount when a map is
   // open (PB-5) without losing the DM's current tab selection.
@@ -194,20 +193,15 @@ export function CampaignView() {
             📚
           </button>
 
-          <div className="bb-ws-lang" role="group" aria-label="Language">
-            {(['de', 'en'] as const).map((l) => (
-              <button
-                key={l}
-                type="button"
-                onClick={() => {
-                  if (language !== l) toggleLanguage()
-                }}
-                className={language === l ? 'active' : ''}
-              >
-                {l.toUpperCase()}
-              </button>
-            ))}
-          </div>
+          <button
+            type="button"
+            className="bb-ws-compendium"
+            title={`${t('globalSettings.open')} (Ctrl/Cmd+,)`}
+            aria-label={t('globalSettings.open')}
+            onClick={() => window.dispatchEvent(new CustomEvent('app:open-global-settings'))}
+          >
+            ⚙
+          </button>
         </div>
       </header>
 
@@ -818,24 +812,6 @@ function WorkspaceStyles() {
       .bb-ws-compendium:hover {
         border-color: var(--accent-blue);
         color: var(--accent-blue-light);
-      }
-      .bb-ws-lang {
-        display: flex;
-        border: 1px solid var(--border);
-        border-radius: var(--radius-sm);
-        overflow: hidden;
-      }
-      .bb-ws-lang button {
-        padding: 4px 10px;
-        font-size: 10px; font-weight: 600; letter-spacing: 0.04em;
-        background: transparent;
-        color: var(--text-muted);
-        border: none; cursor: pointer;
-        font-family: inherit;
-      }
-      .bb-ws-lang button.active {
-        background: var(--accent-dim);
-        color: var(--accent);
       }
 
       /* ”€”€ Main scroll area ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */

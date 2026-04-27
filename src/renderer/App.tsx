@@ -11,6 +11,7 @@ import { AboutDialog } from './components/AboutDialog'
 import { SetupWizard } from './components/SetupWizard'
 import { ShortcutOverlay } from './components/ShortcutOverlay'
 import { CommandPalette } from './components/CommandPalette'
+import { GlobalSettingsModal } from './components/GlobalSettingsModal'
 import { ToastProvider } from './components/shared/Toast'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
@@ -36,6 +37,7 @@ export default function App() {
   const [showShortcuts, setShowShortcuts] = useState(false)
   const [showCommandPalette, setShowCommandPalette] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
+  const [showGlobalSettings, setShowGlobalSettings] = useState(false)
 
   useKeyboardShortcuts()
   useAutoSave()
@@ -82,6 +84,12 @@ export default function App() {
         setShowCommandPalette((v) => !v)
         return
       }
+      // Cmd/Ctrl+, → open global settings (platform convention).
+      if (e.key === ',' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault()
+        setShowGlobalSettings((v) => !v)
+        return
+      }
       const tag = (e.target as HTMLElement).tagName
       if (tag === 'INPUT' || tag === 'TEXTAREA') return
       if (e.key === '?' || e.key === 'F1') {
@@ -95,6 +103,14 @@ export default function App() {
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
+  }, [])
+
+  // Cross-component event so any chrome (Welcome, CampaignView, Toolbar
+  // titlebar) can open the global settings without prop-drilling.
+  useEffect(() => {
+    const onOpen = () => setShowGlobalSettings(true)
+    window.addEventListener('app:open-global-settings', onOpen)
+    return () => window.removeEventListener('app:open-global-settings', onOpen)
   }, [])
 
   // The Welcome / Workspace search fields open the same command palette the rest
@@ -200,6 +216,7 @@ export default function App() {
       {showShortcuts && <ShortcutOverlay onClose={() => setShowShortcuts(false)} />}
       {showAbout && <AboutDialog onClose={() => setShowAbout(false)} />}
       {showCommandPalette && <CommandPalette onClose={() => setShowCommandPalette(false)} />}
+      {showGlobalSettings && <GlobalSettingsModal onClose={() => setShowGlobalSettings(false)} />}
       <ToastProvider />
     </>
   )
