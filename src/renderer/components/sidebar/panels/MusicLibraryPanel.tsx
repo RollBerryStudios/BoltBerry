@@ -58,8 +58,8 @@ export function MusicLibraryPanel() {
       const rows = await window.electronAPI.tracks.listByCampaign(activeCampaignId)
       setTracks(rows)
       // Pivot into per-channel arrays so the audioStore stays in
-      // sync with the canonical library — the live AudioPanel reads
-      // these to render its right-click playlist.
+      // sync with the canonical library — MusicLivePanel reads these
+      // to render its right-click playlist during play.
       const byChannel: Record<ChannelId, PlaylistEntry[]> = { track1: [], track2: [], combat: [] }
       for (const tr of rows) {
         for (const ch of tr.assignments) {

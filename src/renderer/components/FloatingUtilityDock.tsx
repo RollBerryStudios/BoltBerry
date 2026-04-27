@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useUIStore, type FloatingPanel } from '../stores/uiStore'
-import { AudioPanel } from './sidebar/panels/AudioPanel'
+import { AudioFloatingPanel } from './sidebar/panels/AudioFloatingPanel'
 import { OverlayPanel } from './sidebar/panels/OverlayPanel'
 import { DiceRoller } from './sidebar/panels/DiceRoller'
 
@@ -14,7 +14,7 @@ interface DockItem {
 
 const ITEMS: DockItem[] = [
   { id: 'dice',    labelKey: 'sidebar.right.tabDice',    icon: '🎲', render: () => <DiceRoller /> },
-  { id: 'audio',   labelKey: 'sidebar.right.tabAudio',   icon: '🎵', render: () => <AudioPanel /> },
+  { id: 'audio',   labelKey: 'sidebar.right.tabAudio',   icon: '🎵', render: () => <AudioFloatingPanel /> },
   { id: 'overlay', labelKey: 'sidebar.right.tabOverlay', icon: '✦',  render: () => <OverlayPanel /> },
 ]
 

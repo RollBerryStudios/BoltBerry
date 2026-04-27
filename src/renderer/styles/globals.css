@@ -3032,6 +3032,33 @@ textarea.input {
 .audio-strip-meta { pointer-events: none; }
 .audio-strip-expand:hover { background: var(--bg-overlay); color: var(--text-primary); }
 
+/* Combat-mode toggle — sits at the strip's left edge, prominent so the
+   DM can flip the duck without opening the popover. Off = neutral
+   border; on = filled red so it reads from across the table. */
+.audio-strip-combat {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  pointer-events: auto;
+  font-size: 14px;
+  flex-shrink: 0;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+.audio-strip-combat:hover { border-color: #ef4444; color: #ef4444; }
+.audio-strip-combat.active {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+}
+
 /* ─── Sub-tool strip (contextual presets, v1 Conservative) ───────────────── */
 /* Glass pill anchored at top:12, just right of the 60-px left rail. Renders
    tool-specific option presets (fog brush size, measure shape, draw width,

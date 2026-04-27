@@ -15,6 +15,9 @@ export function AudioStrip() {
   const track1 = useAudioStore((s) => s.track1)
   const track2 = useAudioStore((s) => s.track2)
   const combat = useAudioStore((s) => s.combat)
+  const combatActive = useAudioStore((s) => s.combatActive)
+  const activateCombat = useAudioStore((s) => s.activateCombat)
+  const deactivateCombat = useAudioStore((s) => s.deactivateCombat)
   const playChannel = useAudioStore((s) => s.playChannel)
   const stopChannel = useAudioStore((s) => s.stopChannel)
   const setFloatingPanel = useUIStore((s) => s.setFloatingPanel)
@@ -29,35 +32,56 @@ export function AudioStrip() {
   ]
   const playing = channels.find((c) => c.state.playing)
   const loaded = playing ?? channels.find((c) => c.state.filePath)
-  if (!loaded) return null
 
-  const { id: activeChannel, state } = loaded
-  const isPlaying = state.playing
-  const label = state.fileName ?? ''
+  // Combat-mode toggle is also surfaced when no channel is loaded, so
+  // the DM can pre-arm the combat duck even on a fresh campaign. The
+  // strip stays mounted in that case; the play/track meta block hides
+  // until something is loaded.
+  const hasLoaded = !!loaded
 
   const classes = ['audio-strip', dockAutoHide ? 'canvas-hud-fade' : '']
     .filter(Boolean).join(' ')
 
-  const channelLabel =
-    activeChannel === 'track1' ? t('audio.track1')
-    : activeChannel === 'track2' ? t('audio.track2')
-    : t('audio.combat')
-
   return (
     <div className={classes} role="group" aria-label={t('audio.strip')}>
+      {/* Combat toggle — prominent, always visible. Ducks track1+track2
+          and brings the combat channel forward when active. Lights up
+          red when on so it's clear at a glance even without opening
+          the full audio popover. */}
       <button
         type="button"
-        className={`audio-strip-play${isPlaying ? ' playing' : ''}`}
-        onClick={() => isPlaying ? stopChannel(activeChannel) : playChannel(activeChannel)}
-        title={isPlaying ? t('audio.pause') : t('audio.play')}
-        aria-label={isPlaying ? t('audio.pause') : t('audio.play')}
+        className={`audio-strip-combat${combatActive ? ' active' : ''}`}
+        onClick={() => combatActive ? deactivateCombat() : activateCombat()}
+        title={combatActive ? t('audio.endCombat') : t('audio.startCombat')}
+        aria-pressed={combatActive}
       >
-        {isPlaying ? '■' : '▶'}
+        ⚔️
       </button>
-      <div className="audio-strip-meta">
-        <span className="audio-strip-channel">{channelLabel}</span>
-        <span className="audio-strip-track" title={label}>{label}</span>
-      </div>
+
+      {hasLoaded && (
+        <>
+          <button
+            type="button"
+            className={`audio-strip-play${loaded!.state.playing ? ' playing' : ''}`}
+            onClick={() => loaded!.state.playing ? stopChannel(loaded!.id) : playChannel(loaded!.id)}
+            title={loaded!.state.playing ? t('audio.pause') : t('audio.play')}
+            aria-label={loaded!.state.playing ? t('audio.pause') : t('audio.play')}
+          >
+            {loaded!.state.playing ? '■' : '▶'}
+          </button>
+          <div className="audio-strip-meta">
+            <span className="audio-strip-channel">
+              {loaded!.id === 'track1' ? t('audio.track1')
+                : loaded!.id === 'track2' ? t('audio.track2')
+                : t('audio.combat')}
+            </span>
+            <span className="audio-strip-track" title={loaded!.state.fileName ?? ''}>
+              {loaded!.state.fileName ?? ''}
+            </span>
+          </div>
+        </>
+      )}
+
       <button
         type="button"
         className="audio-strip-expand"

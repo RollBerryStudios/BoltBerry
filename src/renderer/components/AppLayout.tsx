@@ -8,6 +8,7 @@ import { StatusBar } from './StatusBar'
 import { ErrorBoundary } from './ErrorBoundary'
 import { Resizer } from './shared/Resizer'
 import { FloatingUtilityDock } from './FloatingUtilityDock'
+import { useSfxHotkeys } from '../hooks/useSfxHotkeys'
 
 export function AppLayout() {
   const leftSidebarOpen = useUIStore((s) => s.leftSidebarOpen)
@@ -16,6 +17,11 @@ export function AppLayout() {
   const rightSidebarWidth = useUIStore((s) => s.rightSidebarWidth)
   const setLeftSidebarWidth = useUIStore((s) => s.setLeftSidebarWidth)
   const setRightSidebarWidth = useUIStore((s) => s.setRightSidebarWidth)
+
+  // Global SFX hotkeys 1-9 / 0 trigger slots on the active board.
+  // Mounted here (not in CanvasArea) so the listener stays alive
+  // even if the canvas un-mounts during transitions.
+  useSfxHotkeys()
 
   // Grid columns: [left sidebar] [left resizer] [canvas] [right resizer] [right sidebar]
   // Resizers are 4px when the sidebar is open, 0px when closed.

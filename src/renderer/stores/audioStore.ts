@@ -125,7 +125,7 @@ interface AudioState {
   // ── Actions: master ──
   setMasterVolume:   (vol: number) => void
 
-  // ── Actions: boards (called from AudioPanel after DB ops) ──
+  // ── Actions: boards (called from ProfessionalSfxPanel after DB ops) ──
   setBoards:         (boards: AudioBoard[]) => void
   updateBoardName:   (id: number, name: string) => void
   setSlots:          (boardId: number, slots: AudioBoardSlot[]) => void

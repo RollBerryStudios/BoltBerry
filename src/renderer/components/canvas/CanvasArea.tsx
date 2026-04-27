@@ -540,8 +540,10 @@ export function CanvasArea() {
           active tool has configurable presets). */}
       <SubToolStrip />
 
-      {/* Compact audio strip (bottom-left); only visible when a channel
-          is loaded. Click the ⋯ handle to open the full AudioPanel. */}
+      {/* Compact audio strip (bottom-left). Always visible during play
+          (the combat-mode pill is its anchor); the play / track-meta
+          block only appears when a channel has loaded audio. Click the
+          ⋯ handle to open the full audio popover. */}
       <AudioStrip />
 
       {/* Weather overlay — preview for the DM of what the players see.
