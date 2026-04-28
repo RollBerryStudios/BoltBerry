@@ -47,7 +47,7 @@ import { EmptyState } from '../EmptyState'
 import { showToast } from '../shared/Toast'
 import { spawnMonsterOnMap } from '../bestiary/actions'
 import type Konva from 'konva'
-import type { MapRecord, PlayerFullState, GMPinRecord } from '@shared/ipc-types'
+import type { MapRecord, PlayerFullState, GMPinRecord, DrawingRecord } from '@shared/ipc-types'
 import { broadcastTokens } from '../../utils/tokenBroadcast'
 
 function broadcastTokensFromCanvas() {
@@ -249,6 +249,29 @@ export function CanvasArea() {
           ctxEngine.open({ primary: { kind: 'pin', pin }, under: underRooms, pos: mapPos, scenePos })
           return
         }
+      }
+
+      // Drawing JS hit-test. DrawingLayer is non-listening outside
+      // drawing/erase mode (so token-drag etc. work over strokes); we
+      // synchronously query its local state via a CustomEvent and
+      // pick the topmost drawing under the click. Tolerance is 8px in
+      // screen space — convert to map units via the current scale so
+      // it stays consistent at any zoom.
+      const screenScale = useMapTransformStore.getState().scale || 1
+      const drawingTolerance = 8 / screenScale
+      let drawingHit: DrawingRecord | null = null
+      window.dispatchEvent(
+        new CustomEvent<{
+          pos: { x: number; y: number }
+          toleranceMap: number
+          resolve: (d: DrawingRecord | null) => void
+        }>('drawing:lookup', {
+          detail: { pos: mapPos, toleranceMap: drawingTolerance, resolve: (d) => { drawingHit = d } },
+        }),
+      )
+      if (drawingHit) {
+        ctxEngine.open({ primary: { kind: 'drawing', drawing: drawingHit }, under: underRooms, pos: mapPos, scenePos })
+        return
       }
 
       // No clicked entity → if a room contains the point, it becomes

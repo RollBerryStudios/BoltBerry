@@ -11,11 +11,13 @@ export type { DrawingType }
 
 interface Drawing {
   id: number
+  mapId: number
   type: DrawingType
   points: number[]
   color: string
   width: number
-  text?: string
+  text: string | null
+  synced: boolean
 }
 
 interface DrawingLayerProps {
@@ -70,12 +72,12 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
     if (drawingClearTick > 0) setDrawings([])
   }, [drawingClearTick])
 
-  // Bridge for the shared context menu (Phase 8 §E.Drawing). Reaches
-  // here only when the user has the erase tool active (DrawingLayer
-  // is non-listening for select/other tools so token-drag etc. work).
-  // Phase 5 will add JS-side hit-testing so drawings are reachable
-  // from any tool — for now the menu is registered but only fires
-  // from erase mode, matching the "select-to-erase" mental model.
+  // Bridge for the shared context menu (Phase 8 §E.Drawing). The
+  // layer itself is non-listening outside drawing/erase mode (so
+  // token drag etc. work over drawings); the engine reaches drawings
+  // via the `drawing:lookup` CustomEvent below — this layer answers
+  // synchronously from its local state with a JS hit-test against
+  // each drawing's geometry.
   useEffect(() => {
     const onUpdate = async (ev: Event) => {
       const detail = (ev as CustomEvent).detail as { id: number; patch: Record<string, unknown> }
@@ -97,13 +99,32 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
       if (next == null) return
       setDrawings((prev) => prev.map((d) => (d.id === id ? { ...d, text: next } : d)))
     }
+    const onLookup = (ev: Event) => {
+      const detail = (ev as CustomEvent).detail as {
+        pos: { x: number; y: number }
+        toleranceMap: number
+        resolve: (d: Drawing | null) => void
+      }
+      // Walk newest-first so the topmost drawing wins (matches z-order
+      // — drawings are pushed in chronological order, last added paints
+      // on top of earlier ones).
+      for (let i = drawings.length - 1; i >= 0; i--) {
+        if (hitTestDrawing(drawings[i], detail.pos, detail.toleranceMap)) {
+          detail.resolve(drawings[i])
+          return
+        }
+      }
+      detail.resolve(null)
+    }
     window.addEventListener('drawing:update', onUpdate)
     window.addEventListener('drawing:delete', onDelete)
     window.addEventListener('drawing:edit-text', onEditText)
+    window.addEventListener('drawing:lookup', onLookup)
     return () => {
       window.removeEventListener('drawing:update', onUpdate)
       window.removeEventListener('drawing:delete', onDelete)
       window.removeEventListener('drawing:edit-text', onEditText)
+      window.removeEventListener('drawing:lookup', onLookup)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [drawings])
@@ -205,8 +226,8 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
           if (!recreated) return
           restoredId = recreated.id
           setDrawings((prev) => [...prev, {
-            id: recreated.id, type: recreated.type, points: recreated.points,
-            color: recreated.color, width: recreated.width, text: recreated.text ?? undefined,
+            id: recreated.id, mapId: recreated.mapId, type: recreated.type, points: recreated.points,
+            color: recreated.color, width: recreated.width, text: recreated.text, synced: recreated.synced,
           }])
           window.electronAPI?.sendDrawing({ id: restoredId, type: original.type, points: original.points, color: original.color, width: original.width, text: original.text })
         },
@@ -239,11 +260,13 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
       let currentId: number = created.id
       const toLocal = (row: typeof created): Drawing => ({
         id: row.id,
+        mapId: row.mapId,
         type: row.type,
         points: row.points,
         color: row.color,
         width: row.width,
-        text: row.text ?? undefined,
+        text: row.text,
+        synced: row.synced,
       })
       const newDrawing = toLocal(created)
       setDrawings(prev => [...prev, newDrawing])
@@ -422,6 +445,69 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
   )
 }
 
+/**
+ * Per-shape hit-testing for the context-menu engine. Map-space
+ * coordinates throughout (caller converts the click). `tolerance` is
+ * the half-width of the hit band, also in map units, so the same
+ * value works regardless of zoom — the caller scales it from a
+ * screen-space target tolerance (e.g. 8px) by the current map scale.
+ *
+ * Drawings are stroke-only in BoltBerry (no fill), so for rect /
+ * circle the hit means "within tolerance of the perimeter". Freehand
+ * uses point-to-segment distance; text uses a bounding-box check
+ * around the anchor point.
+ */
+function hitTestDrawing(d: Drawing, p: { x: number; y: number }, tolerance: number): boolean {
+  const tol = tolerance + d.width / 2
+  if (d.type === 'freehand') {
+    const pts = d.points
+    if (pts.length < 4) return false
+    for (let i = 0; i + 3 < pts.length; i += 2) {
+      if (distancePointToSegment(p.x, p.y, pts[i], pts[i + 1], pts[i + 2], pts[i + 3]) <= tol) return true
+    }
+    return false
+  }
+  if (d.type === 'rect' && d.points.length >= 4) {
+    const [x1, y1, x2, y2] = d.points
+    const left = Math.min(x1, x2), right = Math.max(x1, x2)
+    const top = Math.min(y1, y2), bottom = Math.max(y1, y2)
+    // Stroke-only: hit if within tol of any of the 4 sides.
+    return (
+      Math.abs(p.x - left) <= tol && p.y >= top - tol && p.y <= bottom + tol ||
+      Math.abs(p.x - right) <= tol && p.y >= top - tol && p.y <= bottom + tol ||
+      Math.abs(p.y - top) <= tol && p.x >= left - tol && p.x <= right + tol ||
+      Math.abs(p.y - bottom) <= tol && p.x >= left - tol && p.x <= right + tol
+    )
+  }
+  if (d.type === 'circle' && d.points.length >= 4) {
+    const cx = d.points[0], cy = d.points[1]
+    const dx = d.points[2] - cx, dy = d.points[3] - cy
+    const radius = Math.sqrt(dx * dx + dy * dy)
+    const dist = Math.sqrt((p.x - cx) ** 2 + (p.y - cy) ** 2)
+    return Math.abs(dist - radius) <= tol
+  }
+  if (d.type === 'text' && d.points.length >= 2) {
+    // Text drawings use a font size of 14px in screen space — bbox is
+    // approximate; the caller's tolerance covers the slop.
+    const tx = d.points[0], ty = d.points[1]
+    const text = d.text ?? ''
+    const widthEst = text.length * 8 + tol * 2
+    const heightEst = 18 + tol * 2
+    return p.x >= tx - tol && p.x <= tx + widthEst && p.y >= ty - tol && p.y <= ty + heightEst
+  }
+  return false
+}
+
+function distancePointToSegment(px: number, py: number, ax: number, ay: number, bx: number, by: number): number {
+  const dx = bx - ax, dy = by - ay
+  if (dx === 0 && dy === 0) {
+    return Math.sqrt((px - ax) ** 2 + (py - ay) ** 2)
+  }
+  const t = Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy)))
+  const cx = ax + t * dx, cy = ay + t * dy
+  return Math.sqrt((px - cx) ** 2 + (py - cy) ** 2)
+}
+
 async function loadDrawings(mapId: number): Promise<Drawing[]> {
   if (!window.electronAPI) return []
   try {
@@ -431,11 +517,13 @@ async function loadDrawings(mapId: number): Promise<Drawing[]> {
     const rows = await window.electronAPI.drawings.listByMap(mapId)
     return rows.map((r) => ({
       id: r.id,
+      mapId: r.mapId,
       type: r.type,
       points: r.points,
       color: r.color,
       width: r.width,
-      text: r.text ?? undefined,
+      text: r.text,
+      synced: r.synced,
     }))
   } catch (err) {
     console.error('[DrawingLayer] loadDrawings failed:', err)
