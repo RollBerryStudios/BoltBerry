@@ -41,6 +41,7 @@ import { registerWallMenu } from '../../contextMenu/wallMenu'
 import { registerPinMenu } from '../../contextMenu/pinMenu'
 import { registerRoomMenu } from '../../contextMenu/roomMenu'
 import { registerDrawingMenu } from '../../contextMenu/drawingMenu'
+import type { ContextTarget } from '../../contextMenu/types'
 import { ContextMenu } from '../shared/ContextMenu'
 import { EmptyState } from '../EmptyState'
 import { showToast } from '../shared/Toast'
@@ -207,6 +208,21 @@ export function CanvasArea() {
         ? { x: stageRect.left + pos.x, y: stageRect.top + pos.y }
         : { x: e.evt.clientX, y: e.evt.clientY }
 
+      // Collect "under" — every spatial entity the click point sits
+      // inside, deeper than the primary. Rooms are the obvious first
+      // case (token-inside-room → token primary + room under, so the
+      // menu shows token actions followed by an "In Room: …" section).
+      // Cheap to evaluate; rooms are typically <20 polygons per map.
+      const mapId = useCampaignStore.getState().activeMapId
+      const candidateRooms = useRoomStore.getState().rooms.filter((r) => r.mapId === mapId)
+      const underRooms: ContextTarget[] = []
+      for (const room of candidateRooms) {
+        let pts: Array<{ x: number; y: number }>
+        try { pts = JSON.parse(room.polygon) } catch { continue }
+        if (!Array.isArray(pts) || pts.length < 3) continue
+        if (pointInPolygon(mapPos, pts)) underRooms.push({ kind: 'room', room })
+      }
+
       // Prefer the deepest entity. Token uses its own onContextMenu
       // (rich inline editor, kept in TokenLayer); the engine just
       // mounts the shared menu primitive for the other kinds.
@@ -217,7 +233,7 @@ export function CanvasArea() {
           const id = parseInt((wallRoot.id() ?? '').replace('wall-', ''), 10)
           const wall = useWallStore.getState().walls.find((w) => w.id === id)
           if (!wall) return
-          ctxEngine.open({ primary: { kind: 'wall', wall }, pos: mapPos, scenePos })
+          ctxEngine.open({ primary: { kind: 'wall', wall }, under: underRooms, pos: mapPos, scenePos })
           return
         }
         const pinRoot = target.findAncestor('.pin-root', true)
@@ -230,26 +246,18 @@ export function CanvasArea() {
             }),
           )
           if (!pin) return
-          ctxEngine.open({ primary: { kind: 'pin', pin }, pos: mapPos, scenePos })
+          ctxEngine.open({ primary: { kind: 'pin', pin }, under: underRooms, pos: mapPos, scenePos })
           return
         }
       }
 
-      // Room hit-test runs on the JS side because RoomLayer is non-
-      // listening when the room tool is inactive (otherwise the room
-      // polygon's filled area would eat token-drag mousedowns). Rooms
-      // are big polygons; point-in-polygon is cheap even with a few
-      // dozen of them.
-      const mapId = useCampaignStore.getState().activeMapId
-      const rooms = useRoomStore.getState().rooms.filter((r) => r.mapId === mapId)
-      for (const room of rooms) {
-        let pts: Array<{ x: number; y: number }>
-        try { pts = JSON.parse(room.polygon) } catch { continue }
-        if (!Array.isArray(pts) || pts.length < 3) continue
-        if (pointInPolygon(mapPos, pts)) {
-          ctxEngine.open({ primary: { kind: 'room', room }, pos: mapPos, scenePos })
-          return
-        }
+      // No clicked entity → if a room contains the point, it becomes
+      // the primary; otherwise fall back to the map menu. The room
+      // primary doesn't repeat itself in `under`.
+      if (underRooms.length > 0) {
+        const [primary, ...rest] = underRooms
+        ctxEngine.open({ primary, under: rest, pos: mapPos, scenePos })
+        return
       }
 
       const map = activeMap

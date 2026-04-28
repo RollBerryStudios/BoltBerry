@@ -165,7 +165,7 @@ export function ContextMenu({ envelope, onClose }: ContextMenuProps) {
                   padding: '4px 12px 2px',
                 }}
               >
-                {t(section.headerKey)}
+                {t(section.headerKey, section.headerValues)}
               </div>
             )}
             {section.items.map((item, ii) => {

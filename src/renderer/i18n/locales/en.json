@@ -9,6 +9,9 @@
       "rename": "Rename",
       "duplicate": "Duplicate"
     },
+    "headers": {
+      "inRoom": "In room: {{name}}"
+    },
     "wall": {
       "type": "Change type",
       "typeWall": "Wall",

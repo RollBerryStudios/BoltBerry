@@ -28,19 +28,55 @@ export function clearMenuRegistry(): void {
 /**
  * Resolve sections for the envelope's primary kind, filter by `show`,
  * filter each section's items by `show`, drop any section that ends
- * up empty. Order: as the resolvers were registered.
+ * up empty. After the primary, walk `env.under[]` and append sections
+ * for each deeper target — the layered "In Room: …" pattern from the
+ * Phase 8 proposal §D.4. The first non-empty section of each under-
+ * target gets an auto-generated i18n header with the entity's name,
+ * so a token-inside-room right-click visually separates token actions
+ * from room actions.
  */
 export function resolveSections(env: ContextEnvelope): MenuSection[] {
-  const list = resolvers[env.primary.kind]
-  if (!list) return []
   const out: MenuSection[] = []
-  for (const resolver of list) {
-    for (const section of resolver(env)) {
-      if (section.show && !section.show(env)) continue
-      const items = section.items.filter((it) => !it.show || it.show(env))
-      if (items.length === 0) continue
-      out.push({ ...section, items })
-    }
+  pushKind(out, env, env.primary, null)
+  for (const under of env.under) {
+    pushKind(out, env, under, headerForUnder(under))
   }
   return out
+}
+
+interface InjectedHeader { key: string; values?: Record<string, string | number> }
+
+function pushKind(
+  out: MenuSection[],
+  env: ContextEnvelope,
+  target: ContextTarget,
+  injectedHeader: InjectedHeader | null,
+): void {
+  const list = resolvers[target.kind]
+  if (!list) return
+  const localEnv: ContextEnvelope = { ...env, primary: target }
+  let firstSection = true
+  for (const resolver of list) {
+    for (const section of resolver(localEnv)) {
+      if (section.show && !section.show(localEnv)) continue
+      const items = section.items.filter((it) => !it.show || it.show(localEnv))
+      if (items.length === 0) continue
+      out.push({
+        ...section,
+        headerKey: firstSection && injectedHeader ? injectedHeader.key : section.headerKey,
+        headerValues: firstSection && injectedHeader ? injectedHeader.values : section.headerValues,
+        items,
+      })
+      firstSection = false
+    }
+  }
+}
+
+function headerForUnder(target: ContextTarget): InjectedHeader | null {
+  switch (target.kind) {
+    case 'room':
+      return { key: 'contextMenu.headers.inRoom', values: { name: target.room.name } }
+    default:
+      return null
+  }
 }

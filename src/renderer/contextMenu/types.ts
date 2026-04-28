@@ -59,8 +59,11 @@ export interface MenuItem {
 
 export interface MenuSection {
   id: string
-  /** Optional small-caps header rendered above the section. */
+  /** i18n key for a small-caps header rendered above the section. */
   headerKey?: string
+  /** Optional i18n interpolation values for `headerKey` (e.g.
+   *  `{ name: "Crypt" }` for `headers.inRoom = "Im Raum: {{name}}"`). */
+  headerValues?: Record<string, string | number>
   /** Hide the whole section when this returns false. */
   show?: (env: ContextEnvelope) => boolean
   items: MenuItem[]

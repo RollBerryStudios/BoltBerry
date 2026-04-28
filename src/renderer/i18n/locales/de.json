@@ -9,6 +9,9 @@
       "rename": "Umbenennen",
       "duplicate": "Duplizieren"
     },
+    "headers": {
+      "inRoom": "Im Raum: {{name}}"
+    },
     "wall": {
       "type": "Typ ändern",
       "typeWall": "Wand",

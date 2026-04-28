@@ -4,6 +4,7 @@ import { Html } from 'react-konva-utils'
 import Konva from 'konva'
 import { useShallow } from 'zustand/react/shallow'
 import { useTokenStore } from '../../stores/tokenStore'
+import { useRoomStore } from '../../stores/roomStore'
 import { useUIStore } from '../../stores/uiStore'
 import { useSessionStore } from '../../stores/sessionStore'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
@@ -1107,9 +1108,85 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     null,
                     { label: '❌ Löschen', action: () => handleDelete(token.id), danger: true },
                   ]
+
+                  // Phase 4: append "In Room: …" footer if the token's
+                  // centre is inside one or more rooms. Same dispatch
+                  // pattern as the engine roomMenu — RoomLayer's
+                  // CustomEvent listeners answer.
+                  const roomsForToken = (() => {
+                    const halfSize = (token.size * map.gridSize) / 2
+                    const cx = token.x + halfSize
+                    const cy = token.y + halfSize
+                    return useRoomStore.getState().rooms.filter((r) => r.mapId === map.id).filter((r) => {
+                      let pts: Array<{ x: number; y: number }>
+                      try { pts = JSON.parse(r.polygon) } catch { return false }
+                      if (!Array.isArray(pts) || pts.length < 3) return false
+                      let inside = false
+                      for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+                        const xi = pts[i].x, yi = pts[i].y
+                        const xj = pts[j].x, yj = pts[j].y
+                        const intersect = ((yi > cy) !== (yj > cy)) &&
+                          (cx < ((xj - xi) * (cy - yi)) / ((yj - yi) || Number.EPSILON) + xi)
+                        if (intersect) inside = !inside
+                      }
+                      return inside
+                    })
+                  })()
+                  for (const room of roomsForToken) {
+                    menuItems.push({
+                      __header: `Im Raum: ${room.name}`,
+                    })
+                    menuItems.push({
+                      label: '👁 Sichtbar machen', action: () => {
+                        window.dispatchEvent(new CustomEvent('room:update', { detail: { id: room.id, patch: { visibility: 'revealed' } } }))
+                        closeContextMenu()
+                      },
+                    })
+                    menuItems.push({
+                      label: '🌑 Verstecken', action: () => {
+                        window.dispatchEvent(new CustomEvent('room:update', { detail: { id: room.id, patch: { visibility: 'hidden' } } }))
+                        closeContextMenu()
+                      },
+                    })
+                    menuItems.push({
+                      label: '👁 Nebel im Raum aufdecken', action: () => {
+                        window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'revealRoom', roomId: room.id } }))
+                        closeContextMenu()
+                      },
+                    })
+                    menuItems.push({
+                      label: '🌑 Nebel im Raum verdecken', action: () => {
+                        window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'coverRoom', roomId: room.id } }))
+                        closeContextMenu()
+                      },
+                    })
+                  }
+
                   return menuItems.map((item, i) => {
                     if (item === null) {
                       return <div key={i} style={{ height: 1, background: 'var(--border-subtle)', margin: '4px 0' }} />
+                    }
+                    if (item.__header) {
+                      // Layered "In Room: …" header inside the token
+                      // menu (Phase 4). Visually identical to the
+                      // engine's section header styling.
+                      return (
+                        <div
+                          key={i}
+                          style={{
+                            fontSize: 10,
+                            fontWeight: 700,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.06em',
+                            color: 'var(--text-muted)',
+                            padding: '8px 12px 2px',
+                            borderTop: '1px solid var(--border-subtle)',
+                            marginTop: 4,
+                          }}
+                        >
+                          {item.__header}
+                        </div>
+                      )
                     }
                     if (item.kind === 'hp-chips') {
                       const adjustHp = (delta: number) => {
