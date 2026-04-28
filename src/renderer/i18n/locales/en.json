@@ -18,10 +18,14 @@
       "typeDoor": "Door",
       "typeWindow": "Window",
       "openDoor": "Open door",
-      "closeDoor": "Close door"
+      "closeDoor": "Close door",
+      "multiHeader": "{{count}} walls selected",
+      "deleteMany": "Delete all ({{count}})"
     },
     "pin": {
-      "editLabel": "Edit label"
+      "editLabel": "Edit label",
+      "multiHeader": "{{count}} pins selected",
+      "deleteMany": "Delete all ({{count}})"
     },
     "room": {
       "visibility": "Visibility",

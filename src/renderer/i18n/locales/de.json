@@ -18,10 +18,14 @@
       "typeDoor": "Tür",
       "typeWindow": "Fenster",
       "openDoor": "Tür öffnen",
-      "closeDoor": "Tür schließen"
+      "closeDoor": "Tür schließen",
+      "multiHeader": "{{count}} Wände gewählt",
+      "deleteMany": "Alle löschen ({{count}})"
     },
     "pin": {
-      "editLabel": "Beschriftung bearbeiten"
+      "editLabel": "Beschriftung bearbeiten",
+      "multiHeader": "{{count}} Pins gewählt",
+      "deleteMany": "Alle löschen ({{count}})"
     },
     "room": {
       "visibility": "Sichtbarkeit",

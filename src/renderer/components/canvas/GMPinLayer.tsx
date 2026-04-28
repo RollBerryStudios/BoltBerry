@@ -4,6 +4,7 @@ import { Html } from 'react-konva-utils'
 import Konva from 'konva'
 import type { GMPinRecord } from '@shared/ipc-types'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
+import { useUIStore } from '../../stores/uiStore'
 import { useUndoStore, nextCommandId } from '../../stores/undoStore'
 import { showToast } from '../shared/Toast'
 
@@ -136,13 +137,22 @@ export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
       const pin = pins.find((p) => p.id === detail.id) ?? null
       detail.resolve(pin)
     }
+    const onDeleteMany = async (ev: Event) => {
+      const { ids } = (ev as CustomEvent).detail as { ids: number[] }
+      for (const id of ids) {
+        await handleDeletePin(id)
+      }
+      useUIStore.getState().setSelectedPins([])
+    }
     window.addEventListener('pin:delete', onDelete)
     window.addEventListener('pin:edit-label', onEditLabel)
     window.addEventListener('pin:lookup', onLookup)
+    window.addEventListener('pin:delete-many', onDeleteMany)
     return () => {
       window.removeEventListener('pin:delete', onDelete)
       window.removeEventListener('pin:edit-label', onEditLabel)
       window.removeEventListener('pin:lookup', onLookup)
+      window.removeEventListener('pin:delete-many', onDeleteMany)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pins])
@@ -170,8 +180,21 @@ export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
                 )
               }
             }}
-            onClick={() => setSelectedPinId(pin.id)}
-            onTap={() => setSelectedPinId(pin.id)}
+            onClick={(e) => {
+              // Shift-click toggles multi-selection (so the pin
+              // context menu can offer "delete N pins" bulk
+              // actions); plain click resets to a single selection.
+              if (e.evt.shiftKey) {
+                useUIStore.getState().togglePinInSelection(pin.id)
+              } else {
+                useUIStore.getState().setSelectedPins([pin.id])
+              }
+              setSelectedPinId(pin.id)
+            }}
+            onTap={() => {
+              useUIStore.getState().setSelectedPins([pin.id])
+              setSelectedPinId(pin.id)
+            }}
             onDblClick={() => {
               setEditingPinId(pin.id)
               setEditingLabel(pin.label)

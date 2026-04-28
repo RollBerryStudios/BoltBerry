@@ -11,8 +11,8 @@ import type { TokenRecord, WallRecord, GMPinRecord, RoomRecord, DrawingRecord, M
  */
 export type ContextTarget =
   | { kind: 'token'; token: TokenRecord; selection: number[] }
-  | { kind: 'wall'; wall: WallRecord }
-  | { kind: 'pin'; pin: GMPinRecord }
+  | { kind: 'wall'; wall: WallRecord; selection: number[] }
+  | { kind: 'pin'; pin: GMPinRecord; selection: number[] }
   | { kind: 'room'; room: RoomRecord }
   | { kind: 'drawing'; drawing: DrawingRecord }
   | { kind: 'map'; map: MapRecord }

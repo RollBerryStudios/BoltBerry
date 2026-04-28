@@ -18,6 +18,48 @@ const WALL_TYPES: Array<{ id: 'wall' | 'door' | 'window'; labelKey: string; icon
 const wallResolver: MenuResolver = (env) => {
   if (env.primary.kind !== 'wall') return []
   const wall = env.primary.wall
+  const selection = env.primary.selection
+  const isMulti = selection.length > 1
+
+  if (isMulti) {
+    // Multi-selection menu (Phase 8 §E.Wall multi). All actions
+    // operate on every selected wall, dispatched as a single batched
+    // CustomEvent so WallLayer's listener can wrap them in a
+    // transaction / undo group.
+    return [
+      {
+        id: 'multi-type',
+        headerKey: 'contextMenu.wall.multiHeader',
+        headerValues: { count: selection.length },
+        items: WALL_TYPES.map((t) => ({
+          id: `multi-type-${t.id}`,
+          labelKey: t.labelKey,
+          icon: t.icon,
+          run: () => {
+            window.dispatchEvent(
+              new CustomEvent('wall:update-many', {
+                detail: { ids: selection, patch: { wallType: t.id } },
+              }),
+            )
+          },
+        })),
+      },
+      {
+        id: 'destructive',
+        items: [
+          {
+            id: 'delete-many',
+            labelKey: 'contextMenu.wall.deleteMany',
+            icon: '🗑',
+            danger: true,
+            run: () => {
+              window.dispatchEvent(new CustomEvent('wall:delete-many', { detail: { ids: selection } }))
+            },
+          },
+        ],
+      },
+    ]
+  }
 
   const sections: MenuSection[] = [
     {

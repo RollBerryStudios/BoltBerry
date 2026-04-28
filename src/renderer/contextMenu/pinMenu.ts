@@ -10,6 +10,28 @@ import { registerMenu } from './registry'
 const pinResolver: MenuResolver = (env) => {
   if (env.primary.kind !== 'pin') return []
   const pin = env.primary.pin
+  const selection = env.primary.selection
+  const isMulti = selection.length > 1
+
+  if (isMulti) {
+    return [
+      {
+        id: 'multi-destructive',
+        headerKey: 'contextMenu.pin.multiHeader',
+        headerValues: { count: selection.length },
+        items: [
+          {
+            id: 'delete-many',
+            labelKey: 'contextMenu.pin.deleteMany',
+            icon: '🗑',
+            danger: true,
+            run: () =>
+              window.dispatchEvent(new CustomEvent('pin:delete-many', { detail: { ids: selection } })),
+          },
+        ],
+      },
+    ]
+  }
 
   const sections: MenuSection[] = [
     {

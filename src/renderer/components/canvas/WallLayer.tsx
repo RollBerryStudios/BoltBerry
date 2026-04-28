@@ -98,12 +98,16 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
   function handleWallClick(wallId: number, e: Konva.KonvaEventObject<MouseEvent>) {
     e.evt.preventDefault()
     if (!isActive) return
+    // Shift-click toggles multi-selection; plain click resets to a
+    // single selection. Mirrors TokenLayer's stableHandleSelect so
+    // the wall context menu can show "X Wände gewählt" bulk actions
+    // when 2+ walls are picked.
+    if (e.evt.shiftKey) {
+      useUIStore.getState().toggleWallInSelection(wallId)
+    } else {
+      useUIStore.getState().setSelectedWalls([wallId])
+    }
     setSelectedWallId(wallId)
-    // Right-click no longer opens an inline menu here — the canvas-
-    // level context-menu engine reads `name="wall-root"` + `id="wall-<n>"`
-    // off the parent Group on the Stage onContextMenu and opens the
-    // shared menu. We just track selection so the engine knows which
-    // wall the user targeted.
   }
 
   // Bridge between the context-menu items (which dispatch
@@ -143,11 +147,44 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
         console.error('[WallLayer] delete failed:', err)
       }
     }
+    const onUpdateMany = async (ev: Event) => {
+      const detail = (ev as CustomEvent).detail as { ids: number[]; patch: Partial<WallRecord> }
+      const patch: Partial<WallRecord> = { ...detail.patch }
+      if (patch.wallType && patch.wallType === 'wall') patch.doorState = 'closed' as any
+      for (const id of detail.ids) {
+        updateWall(id, patch)
+        try { await window.electronAPI?.walls.update(id, patch as any) }
+        catch (err) { console.error('[WallLayer] update-many failed for id', id, err) }
+      }
+    }
+    const onDeleteMany = async (ev: Event) => {
+      const { ids } = (ev as CustomEvent).detail as { ids: number[] }
+      const ok = await window.electronAPI?.confirmDialog(
+        `${ids.length} Wände löschen?`,
+        'Die Wände werden entfernt. Sichtbarkeit kann sich für Spieler ändern.',
+      )
+      if (!ok) return
+      for (const id of ids) {
+        const target = walls.find((w) => w.id === id)
+        removeWall(id)
+        try {
+          await window.electronAPI?.walls.delete(id)
+          if (target) await pushAction({ type: 'wall.delete', payload: { wall: target } })
+        } catch (err) {
+          console.error('[WallLayer] delete-many failed for id', id, err)
+        }
+      }
+      useUIStore.getState().setSelectedWalls([])
+    }
     window.addEventListener('wall:update', onUpdate)
     window.addEventListener('wall:delete', onDelete)
+    window.addEventListener('wall:update-many', onUpdateMany)
+    window.addEventListener('wall:delete-many', onDeleteMany)
     return () => {
       window.removeEventListener('wall:update', onUpdate)
       window.removeEventListener('wall:delete', onDelete)
+      window.removeEventListener('wall:update-many', onUpdateMany)
+      window.removeEventListener('wall:delete-many', onDeleteMany)
     }
   }, [walls, updateWall, removeWall, pushAction])
 

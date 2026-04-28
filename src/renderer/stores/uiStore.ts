@@ -108,6 +108,12 @@ interface UIState {
   atmosphereImagePath: string | null
   selectedTokenId: number | null
   selectedTokenIds: number[]
+  /** Multi-selection for walls. Shift-click in WallLayer toggles
+   *  membership; the wall context menu adds bulk actions when this
+   *  has 2+ ids (Phase 8 §E.Wall multi). */
+  selectedWallIds: number[]
+  /** Multi-selection for GM pins. Same shape as walls. */
+  selectedPinIds: number[]
   /** Pending bestiary-token placement. When non-null the canvas is in
    *  "click to place" mode: the next left-click anywhere on the map
    *  spawns the chosen monster at that position via spawnMonsterOnMap.
@@ -182,6 +188,10 @@ interface UIState {
   toggleTokenInSelection: (id: number) => void
   setSelectedTokens: (ids: number[]) => void
   setPendingTokenSpawn: (s: { slug: string } | null) => void
+  toggleWallInSelection: (id: number) => void
+  setSelectedWalls: (ids: number[]) => void
+  togglePinInSelection: (id: number) => void
+  setSelectedPins: (ids: number[]) => void
   clearTokenSelection: () => void
   setPlayerViewportMode: (on: boolean) => void
   setPlayerViewport: (rect: PlayerViewportRect | null) => void
@@ -239,6 +249,8 @@ export const useUIStore = create<UIState>((set) => ({
   atmosphereImagePath: null,
   selectedTokenId: null,
   selectedTokenIds: [],
+  selectedWallIds: [],
+  selectedPinIds: [],
   pendingTokenSpawn: null,
   playerViewportMode: false,
   playerViewport: null,
@@ -361,6 +373,20 @@ export const useUIStore = create<UIState>((set) => ({
       return { selectedTokenIds: ids, selectedTokenId: ids.length === 1 ? ids[0] : ids.length > 1 ? ids[0] : null }
     }),
   setSelectedTokens: (ids) => set({ selectedTokenIds: ids, selectedTokenId: ids[0] ?? null }),
+  toggleWallInSelection: (id) =>
+    set((s) => ({
+      selectedWallIds: s.selectedWallIds.includes(id)
+        ? s.selectedWallIds.filter((i) => i !== id)
+        : [...s.selectedWallIds, id],
+    })),
+  setSelectedWalls: (selectedWallIds) => set({ selectedWallIds }),
+  togglePinInSelection: (id) =>
+    set((s) => ({
+      selectedPinIds: s.selectedPinIds.includes(id)
+        ? s.selectedPinIds.filter((i) => i !== id)
+        : [...s.selectedPinIds, id],
+    })),
+  setSelectedPins: (selectedPinIds) => set({ selectedPinIds }),
   setPendingTokenSpawn: (pendingTokenSpawn) => set({ pendingTokenSpawn }),
   clearTokenSelection: () => set({ selectedTokenIds: [], selectedTokenId: null }),
   setPlayerViewportMode: (on) => set((s) => ({

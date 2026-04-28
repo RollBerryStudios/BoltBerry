@@ -233,7 +233,16 @@ export function CanvasArea() {
           const id = parseInt((wallRoot.id() ?? '').replace('wall-', ''), 10)
           const wall = useWallStore.getState().walls.find((w) => w.id === id)
           if (!wall) return
-          ctxEngine.open({ primary: { kind: 'wall', wall }, under: underRooms, pos: mapPos, scenePos })
+          // Right-click on a wall that's already in the multi-
+          // selection keeps the selection; right-click outside the
+          // selection narrows to that single wall (mirrors token
+          // and OS file-manager conventions).
+          let selection = useUIStore.getState().selectedWallIds
+          if (!selection.includes(id)) {
+            selection = [id]
+            useUIStore.getState().setSelectedWalls(selection)
+          }
+          ctxEngine.open({ primary: { kind: 'wall', wall, selection }, under: underRooms, pos: mapPos, scenePos })
           return
         }
         const pinRoot = target.findAncestor('.pin-root', true)
@@ -246,7 +255,12 @@ export function CanvasArea() {
             }),
           )
           if (!pin) return
-          ctxEngine.open({ primary: { kind: 'pin', pin }, under: underRooms, pos: mapPos, scenePos })
+          let selection = useUIStore.getState().selectedPinIds
+          if (!selection.includes(id)) {
+            selection = [id]
+            useUIStore.getState().setSelectedPins(selection)
+          }
+          ctxEngine.open({ primary: { kind: 'pin', pin, selection }, under: underRooms, pos: mapPos, scenePos })
           return
         }
       }
