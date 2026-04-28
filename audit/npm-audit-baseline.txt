@@ -1,0 +1,59 @@
+# npm audit baseline — 2026-04-28
+#
+# Captured during M1 (audit action plan). Re-run periodically and diff
+# against this file. New high/critical findings should block release.
+#
+# Commands used:
+#   npm audit --omit=dev   (production-only, returned 0)
+#   npm audit              (full tree, returned 1 = 5 moderate)
+#
+# All findings live in the dev-only chain vitest → vite-node/vite → esbuild.
+# Not shipped to end users; tracked under BB-055.
+
+## --omit=dev (production runtime only)
+
+found 0 vulnerabilities
+
+## Full tree (includes dev deps)
+
+# npm audit report
+
+esbuild  <=0.24.2
+Severity: moderate
+esbuild enables any website to send any requests to the development server and read the response - https://github.com/advisories/GHSA-67mh-4wv8-2f99
+fix available via `npm audit fix --force`
+Will install vitest@4.1.5, which is a breaking change
+node_modules/vite-node/node_modules/esbuild
+node_modules/vitest/node_modules/esbuild
+  vite  <=6.4.1
+  Depends on vulnerable versions of esbuild
+  node_modules/vite-node/node_modules/vite
+  node_modules/vitest/node_modules/vite
+    @vitest/mocker  <=3.0.0-beta.4
+    Depends on vulnerable versions of vite
+    node_modules/vitest/node_modules/@vitest/mocker
+      vitest  0.0.1 - 0.0.12 || 0.0.29 - 0.0.122 || 0.3.3 - 3.0.0-beta.4
+      Depends on vulnerable versions of @vitest/mocker
+      Depends on vulnerable versions of vite
+      Depends on vulnerable versions of vite-node
+      node_modules/vitest
+
+    vite-node  <=2.2.0-beta.2
+    Depends on vulnerable versions of vite
+    node_modules/vite-node
+
+
+5 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+## Triage
+
+| Pkg | Sev | Scope | Decision |
+|---|---|---|---|
+| esbuild ≤ 0.24.2 (via vitest) | moderate | dev-test only | Accept; resolves when M7 bumps vitest to 4.x |
+| vite ≤ 6.4.1 (via vitest) | moderate | dev-test only | Accept; transitive |
+| @vitest/mocker, vite-node, vitest | moderate | dev-test only | Accept; transitive |
+
+No production-runtime vulnerabilities. Re-evaluate after M7.

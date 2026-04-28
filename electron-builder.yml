@@ -2,6 +2,9 @@ appId: com.boltberry.boltberry
 productName: BoltBerry
 copyright: Copyright © 2026 BoltBerry
 
+# Harden packaged binary by flipping Electron fuses (BB-002, BB-005).
+afterPack: scripts/afterPack.mjs
+
 directories:
   output: release
   buildResources: resources

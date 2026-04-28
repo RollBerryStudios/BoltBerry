@@ -32,9 +32,13 @@ import { buildAppMenu } from './menu'
 import { initAutoUpdater } from './updater'
 import { loadPrefs } from './prefs'
 
-// Must be called before app.whenReady()
+// Must be called before app.whenReady().
+// Note: secure:false (BB-039). The app is offline-first and does not need
+// service-worker / SharedArrayBuffer privileges on the local-asset origin;
+// granting them would let a compromised renderer register a service worker
+// to intercept asset requests.
 protocol.registerSchemesAsPrivileged([
-  { scheme: 'local-asset', privileges: { stream: true, supportFetchAPI: true, standard: false, secure: true } },
+  { scheme: 'local-asset', privileges: { stream: true, supportFetchAPI: true, standard: false, secure: false } },
 ])
 
 // Prevent multiple instances
