@@ -135,23 +135,41 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   // happens near the right / bottom edge, the menu can spill off-screen.
   // We measure it after mount and shift it back into view, with an 8 px
   // safety margin so the rounded corners don't touch the viewport edge.
-  // While the measurement hasn't happened yet we hide the menu via
-  // `visibility:hidden` to avoid a single-frame flash at the raw coords.
+  // Clamp the menu inside the viewport on the next frame after it
+  // mounts. Previously the menu was rendered `visibility: hidden` until
+  // this effect set `menuClamp` — but the Html portal from
+  // react-konva-utils sometimes commits the DOM *after* the
+  // useLayoutEffect runs, leaving `menuRef.current === null`. The effect
+  // bailed early and the menu stayed permanently hidden, so users saw
+  // the side panel update (selection took effect) but no context menu.
+  // Show immediately at the click coords; clamp adjusts position once
+  // the DOM is measurable. Worst case: one frame at the unclamped
+  // position before snapping inside the viewport.
   const menuRef = useRef<HTMLDivElement>(null)
   const [menuClamp, setMenuClamp] = useState<{ x: number; y: number } | null>(null)
   useLayoutEffect(() => {
     if (!contextMenu.visible) { setMenuClamp(null); return }
-    const el = menuRef.current
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    const PAD = 8
-    const vw = window.innerWidth
-    const vh = window.innerHeight
-    let x = contextMenu.x
-    let y = contextMenu.y
-    if (x + rect.width  > vw - PAD) x = Math.max(PAD, vw - rect.width  - PAD)
-    if (y + rect.height > vh - PAD) y = Math.max(PAD, vh - rect.height - PAD)
-    setMenuClamp({ x, y })
+    let cancelled = false
+    const measure = () => {
+      if (cancelled) return
+      const el = menuRef.current
+      if (!el) {
+        // Portal not committed yet — retry once on the next frame.
+        requestAnimationFrame(measure)
+        return
+      }
+      const rect = el.getBoundingClientRect()
+      const PAD = 8
+      const vw = window.innerWidth
+      const vh = window.innerHeight
+      let x = contextMenu.x
+      let y = contextMenu.y
+      if (x + rect.width  > vw - PAD) x = Math.max(PAD, vw - rect.width  - PAD)
+      if (y + rect.height > vh - PAD) y = Math.max(PAD, vh - rect.height - PAD)
+      setMenuClamp({ x, y })
+    }
+    measure()
+    return () => { cancelled = true }
   }, [contextMenu.visible, contextMenu.x, contextMenu.y, contextMenu.tokenId, markerSubmenuId, submenuType])
 
   // Defined early so the wheel useEffect below can safely list it as a dependency.
@@ -1005,7 +1023,10 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                   position: 'fixed',
                   left: menuClamp ? menuClamp.x : contextMenu.x,
                   top: menuClamp ? menuClamp.y : contextMenu.y,
-                  visibility: menuClamp ? 'visible' : 'hidden',
+                  // Always visible — the rAF measure loop refines the
+                  // position once the portal commits. See the
+                  // useLayoutEffect above for the retry rationale.
+                  visibility: 'visible',
                   background: 'var(--bg-elevated)',
                   border: '1px solid var(--border)',
                   borderRadius: 'var(--radius)',

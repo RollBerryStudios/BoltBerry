@@ -11,7 +11,6 @@ import { invalidateImageUrlCache } from '../../../hooks/useImageUrl'
 import { EmptyState } from '../../EmptyState'
 import { NumberStepper } from '../../shared/NumberStepper'
 import { BestiaryPicker } from '../../bestiary/BestiaryPicker'
-import { spawnMonsterOnMap } from '../../bestiary/actions'
 import type { TokenRecord } from '@shared/ipc-types'
 
 const LIGHT_COLORS = [
@@ -81,8 +80,7 @@ export function TokenPanel() {
   const { t } = useTranslation()
   const { tokens, addToken, updateToken, removeToken } = useTokenStore()
   const { selectedTokenId, setSelectedToken } = useUIStore()
-  const language = useUIStore((s) => s.language)
-  const { activeMapId, activeMaps } = useCampaignStore()
+  const { activeMapId } = useCampaignStore()
   const [filter, setFilter] = useState('')
   const [libraryPickerOpen, setLibraryPickerOpen] = useState(false)
   const [bestiaryPickerOpen, setBestiaryPickerOpen] = useState(false)
@@ -146,31 +144,17 @@ export function TokenPanel() {
     }
   }
 
-  // Bestiarium-backed quick-create. The picker yields a monster slug; we
-  // fetch the full record (HP, AC, size, type) and hand it to the same
-  // spawnMonsterOnMap path the Wiki / encounter builder use, so the token
-  // gets the bundled artwork + correct stats automatically — no
-  // per-template hardcoding.
-  async function handleAddFromBestiary(slug: string) {
+  // Bestiarium-backed quick-create. The picker yields a monster slug;
+  // we arm a "click-to-place" mode by storing the slug in uiStore. The
+  // canvas-level listener in CanvasArea then fetches the full record
+  // and calls spawnMonsterOnMap at the click position. Previously this
+  // spawned immediately at camera-center, dropping the token off-screen
+  // for many camera positions; click-to-place matches the
+  // wiki / encounter-builder UX.
+  function handleAddFromBestiary(slug: string) {
     setBestiaryPickerOpen(false)
-    if (!activeMapId || !window.electronAPI) return
-    const map = activeMaps.find((m) => m.id === activeMapId)
-    if (!map) return
-    try {
-      const record = await window.electronAPI.getMonster(slug)
-      if (!record) return
-      await spawnMonsterOnMap({
-        monster: record,
-        tokenFile: record.userDefaultFile ?? null,
-        mapId: activeMapId,
-        cameraX: map.cameraX,
-        cameraY: map.cameraY,
-        language,
-      })
-      broadcastTokensFromPanel()
-    } catch (err) {
-      console.error('[TokenPanel] handleAddFromBestiary failed:', err)
-    }
+    if (!activeMapId) return
+    useUIStore.getState().setPendingTokenSpawn({ slug })
   }
 
   async function handleUpdate(id: number, patch: Partial<TokenRecord>) {

@@ -38,6 +38,7 @@ import { useImageUrl } from '../../hooks/useImageUrl'
 import { useCanvasContextMenu } from '../../hooks/useCanvasContextMenu'
 import { EmptyState } from '../EmptyState'
 import { showToast } from '../shared/Toast'
+import { spawnMonsterOnMap } from '../bestiary/actions'
 import type Konva from 'konva'
 import type { MapRecord, PlayerFullState } from '@shared/ipc-types'
 import { broadcastTokens } from '../../utils/tokenBroadcast'
@@ -170,6 +171,85 @@ export function CanvasArea() {
     })
     return () => unsub?.()
   }, [])
+
+  // Click-to-place for bestiary tokens. The Token panel arms this by
+  // calling setPendingTokenSpawn({ slug }); the next left-click on the
+  // canvas resolves the slug, calls spawnMonsterOnMap at the click
+  // position, and clears the pending state. Escape cancels without
+  // placing. Bound at the stage container DOM level for the same
+  // reason ping is — Konva layer-level handlers would miss clicks
+  // that land on a layer with no listening shape.
+  const pendingTokenSpawn = useUIStore((s) => s.pendingTokenSpawn)
+  const language = useUIStore((s) => s.language)
+  useEffect(() => {
+    if (!pendingTokenSpawn) return
+    const stage = stageRef.current
+    if (!stage) return
+    const container = stage.container()
+    if (!container) return
+
+    const previousCursor = container.style.cursor
+    container.style.cursor = 'crosshair'
+
+    const onClick = async (evt: MouseEvent) => {
+      if (evt.button !== 0) return
+      // Don't fire on clicks inside HTML overlays (toolbar, tooltips,
+      // open dialogs) — same guard pattern as PointerLayer's ping.
+      const target = evt.target as HTMLElement | null
+      if (target?.closest('input, textarea, button, [role="menu"], [role="dialog"]')) return
+
+      evt.preventDefault()
+      evt.stopPropagation()
+
+      const slug = pendingTokenSpawn.slug
+      // Clear pending state first so a slow IPC fetch doesn't leave the
+      // canvas armed for a second placement on accidental double-click.
+      useUIStore.getState().setPendingTokenSpawn(null)
+
+      const rect = container.getBoundingClientRect()
+      const canvasX = evt.clientX - rect.left
+      const canvasY = evt.clientY - rect.top
+      const { screenToMap } = useMapTransformStore.getState()
+      const m = screenToMap(canvasX, canvasY)
+
+      const mapId = useCampaignStore.getState().activeMapId
+      if (!mapId || !window.electronAPI) return
+      try {
+        const record = await window.electronAPI.getMonster(slug)
+        if (!record) return
+        // Spawn at the map-space click position. spawnMonsterOnMap
+        // sums (cameraX ?? 0) + (dx ?? 0) for the final x — passing
+        // the click coords as cameraX/cameraY with dx/dy left
+        // undefined puts the token directly at the cursor.
+        await spawnMonsterOnMap({
+          monster: record,
+          tokenFile: record.userDefaultFile ?? null,
+          mapId,
+          cameraX: m.x,
+          cameraY: m.y,
+          language,
+        })
+        broadcastTokensFromCanvas()
+      } catch (err) {
+        console.error('[CanvasArea] click-to-place spawn failed:', err)
+        showToast('Token konnte nicht platziert werden', 'error', 4000)
+      }
+    }
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        useUIStore.getState().setPendingTokenSpawn(null)
+      }
+    }
+
+    container.addEventListener('mousedown', onClick, true)
+    window.addEventListener('keydown', onKeyDown)
+    return () => {
+      container.style.cursor = previousCursor
+      container.removeEventListener('mousedown', onClick, true)
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [pendingTokenSpawn, language])
 
   // Continuous camera sync was removed in favour of Player Control Mode
   // (the dashed blue rectangle on the GM canvas). The DM's own pan / zoom

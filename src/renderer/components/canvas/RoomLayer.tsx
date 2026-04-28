@@ -137,14 +137,17 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
 
   return (
     <Layer
-      // Listen whenever the Room tool is active (so drawing clicks
-      // register) OR whenever any room exists (so room polygons can
-      // be clicked to re-select, even when no room is currently
-      // selected). The previous `selectedRoomId !== null` gate
-      // stranded users: after deselecting via a canvas click the
-      // Layer went silent, and the user could no longer re-select
-      // the room to rename / edit it from the sidebar.
-      listening={isRoomTool || parsedRooms.length > 0}
+      // Only listen while the Room tool is active. Previously the
+      // layer also listened whenever *any* room existed so the user
+      // could click an existing polygon to re-select it — but with
+      // listening on, the filled polygon (fill alpha ≈ 8%) was a Konva
+      // hit target sitting over the token layer, so token drag inside
+      // a room silently failed: mousedown landed on the room shape and
+      // the token's drag never armed. Selecting a room now requires
+      // entering the Room tool (matching how Wall / Door / Drawing
+      // selection works), which is the same pattern the toolbar already
+      // uses for the other geometry layers.
+      listening={isRoomTool}
       onClick={isRoomTool ? handleStageClick : undefined}
       onMouseMove={isRoomTool ? handleStageMouseMove : undefined}
       onDblClick={isRoomTool ? handleDoubleClick : undefined}

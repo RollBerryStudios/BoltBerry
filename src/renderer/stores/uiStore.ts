@@ -108,6 +108,11 @@ interface UIState {
   atmosphereImagePath: string | null
   selectedTokenId: number | null
   selectedTokenIds: number[]
+  /** Pending bestiary-token placement. When non-null the canvas is in
+   *  "click to place" mode: the next left-click anywhere on the map
+   *  spawns the chosen monster at that position via spawnMonsterOnMap.
+   *  Cleared by the click itself, by Escape, or by switching tools. */
+  pendingTokenSpawn: { slug: string } | null
   /** Player Control Mode — when true, the GM canvas renders the
    *  dashed viewport rectangle and Ctrl-based gestures manipulate it
    *  instead of the DM's own camera. This mode supersedes the legacy
@@ -176,6 +181,7 @@ interface UIState {
   setSelectedToken: (id: number | null) => void
   toggleTokenInSelection: (id: number) => void
   setSelectedTokens: (ids: number[]) => void
+  setPendingTokenSpawn: (s: { slug: string } | null) => void
   clearTokenSelection: () => void
   setPlayerViewportMode: (on: boolean) => void
   setPlayerViewport: (rect: PlayerViewportRect | null) => void
@@ -233,6 +239,7 @@ export const useUIStore = create<UIState>((set) => ({
   atmosphereImagePath: null,
   selectedTokenId: null,
   selectedTokenIds: [],
+  pendingTokenSpawn: null,
   playerViewportMode: false,
   playerViewport: null,
   playerWindowSize: null,
@@ -354,6 +361,7 @@ export const useUIStore = create<UIState>((set) => ({
       return { selectedTokenIds: ids, selectedTokenId: ids.length === 1 ? ids[0] : ids.length > 1 ? ids[0] : null }
     }),
   setSelectedTokens: (ids) => set({ selectedTokenIds: ids, selectedTokenId: ids[0] ?? null }),
+  setPendingTokenSpawn: (pendingTokenSpawn) => set({ pendingTokenSpawn }),
   clearTokenSelection: () => set({ selectedTokenIds: [], selectedTokenId: null }),
   setPlayerViewportMode: (on) => set((s) => ({
     playerViewportMode: on,
