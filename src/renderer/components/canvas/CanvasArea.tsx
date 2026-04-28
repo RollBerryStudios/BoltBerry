@@ -841,7 +841,12 @@ async function loadMapData(mapId: number, map: MapRecord) {
         imagePath: map.imagePath,
         gridType: map.gridType,
         gridSize: map.gridSize,
-        rotation: map.rotation ?? 0,
+        // Player view rotation, not DM view rotation. Other broadcast
+        // points (LeftSidebar's player-rotation control + usePlayerSync)
+        // already use `rotationPlayer`; the full-sync was the outlier
+        // and was causing the player to receive the DM's orientation
+        // on reconnect / Live-go.
+        rotation: map.rotationPlayer ?? map.rotation ?? 0,
       },
       tokens: useTokenStore.getState().tokens
         .filter((t) => t.visibleToPlayers)

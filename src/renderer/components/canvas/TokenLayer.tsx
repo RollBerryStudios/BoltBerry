@@ -1361,8 +1361,12 @@ const TokenNode = memo(function TokenNode({
   const handleAcDone = useCallback(() => onEditAcCommit(token.id), [onEditAcCommit, token.id])
 
   return (
-    // Outer group: positioned at top-left, handles drag + events
+    // Outer group: positioned at top-left, handles drag + events.
+    // `name="token-root"` lets the canvas-level context-menu hook bail
+    // when the right-click target is inside a token, so the native
+    // canvas menu doesn't masque the React-rendered token menu.
     <Group
+      name="token-root"
       x={x} y={y}
       draggable={isDraggable}
       onDragMove={handleDragMove}

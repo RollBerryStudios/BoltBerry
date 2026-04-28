@@ -21,6 +21,18 @@ export function useCanvasContextMenu(): (e: Konva.KonvaEventObject<MouseEvent>) 
     e.evt.preventDefault()
     if (!window.electronAPI) return
 
+    // Bail when the right-click hits a token. TokenNode's handleCtxMenu
+    // already opens the React-rendered token menu and sets cancelBubble,
+    // but Konva's bubble cancellation isn't always reliable across the
+    // Stage event boundary in nested groups — without this guard the
+    // native canvas menu pops up over the token menu and the user
+    // never sees their token actions.
+    const target = e.target
+    if (target && typeof target.findAncestor === 'function') {
+      const tokenRoot = target.findAncestor('.token-root', true)
+      if (tokenRoot) return
+    }
+
     const { activeTool } = useUIStore.getState()
     const { sessionMode } = useSessionStore.getState()
     const { activeMapId: mapId, activeMaps: maps } = useCampaignStore.getState()
@@ -86,8 +98,20 @@ export function useCanvasContextMenu(): (e: Konva.KonvaEventObject<MouseEvent>) 
       const rot = parseInt(action.split('-')[1]) as 0 | 90 | 180 | 270
       if (!mapId || !map) return
       try {
-        await window.electronAPI.maps.setRotation(mapId, rot)
-        const updated = maps.map((m) => m.id === mapId ? { ...m, rotation: rot } : m)
+        // The right-click "Karte drehen" is meant as a quick "rotate
+        // everyone" — persist BOTH the DM rotation and the player
+        // rotation, then broadcast. Previously only `rotation` was
+        // persisted, so the live broadcast worked but a player
+        // reconnect re-loaded the unchanged `rotationPlayer` and
+        // snapped back. The advanced separate-axis controls live in
+        // LeftSidebar for DMs who need DM-only or player-only rotation.
+        await Promise.all([
+          window.electronAPI.maps.setRotation(mapId, rot),
+          window.electronAPI.maps.setRotationPlayer(mapId, rot),
+        ])
+        const updated = maps.map((m) =>
+          m.id === mapId ? { ...m, rotation: rot, rotationPlayer: rot } : m,
+        )
         useCampaignStore.getState().setActiveMaps(updated)
         if (sessionMode !== 'prep') {
           const m = updated.find((mm) => mm.id === mapId)!
