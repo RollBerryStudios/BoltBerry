@@ -3,6 +3,7 @@ import { IPC } from '../../shared/ipc-types'
 import type { TokenRecord } from '../../shared/ipc-types'
 import { getDb } from '../db/database'
 import type Database from 'better-sqlite3'
+import { IpcValidationError } from './validators'
 
 /**
  * Semantic IPC channels for the `tokens` table. Replaces the raw
@@ -137,23 +138,23 @@ const COLUMN_MAP: Record<string, { col: string; coerce: (v: unknown) => unknown 
 
 function coerceNumber(v: unknown): number {
   if (typeof v === 'number' && Number.isFinite(v)) return v
-  throw new Error('Expected finite number')
+  throw new IpcValidationError('Expected finite number')
 }
 
 function coerceIntStrict(v: unknown): number {
   if (typeof v === 'number' && Number.isInteger(v)) return v
-  throw new Error('Expected integer')
+  throw new IpcValidationError('Expected integer')
 }
 
 function coerceMarkerColor(v: unknown): string | null {
   if (v == null) return null
-  if (typeof v !== 'string') throw new Error('Color must be a string')
-  if (v.length > 32) throw new Error('Color string too long')
+  if (typeof v !== 'string') throw new IpcValidationError('Color must be a string')
+  if (v.length > 32) throw new IpcValidationError('Color string too long')
   // Accept #RGB, #RGBA, #RRGGBB, #RRGGBBAA and rgb()/rgba() — reject
   // anything that could flow into an inline style as a URL or expression.
   const hexOk = /^#(?:[0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$/i.test(v)
   const rgbaOk = /^rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(?:,\s*(?:0|1|0?\.\d+)\s*)?\)$/.test(v)
-  if (!hexOk && !rgbaOk) throw new Error(`Invalid color format: ${v}`)
+  if (!hexOk && !rgbaOk) throw new IpcValidationError(`Invalid color format: ${v}`)
   return v
 }
 
@@ -162,7 +163,7 @@ function coerceBool(v: unknown): number {
 }
 
 function requireIntegerId(id: unknown, label = 'token'): number {
-  if (!Number.isInteger(id)) throw new Error(`Invalid ${label} id`)
+  if (!Number.isInteger(id)) throw new IpcValidationError(`Invalid ${label} id`)
   return id as number
 }
 
@@ -192,7 +193,7 @@ function buildFragments(patch: Record<string, unknown>, includeId: boolean): {
 
 function insertToken(db: Database.Database, patch: Record<string, unknown>, withId: boolean): TokenRow {
   const { cols, vals } = buildFragments(patch, withId)
-  if (!cols.includes('map_id')) throw new Error('mapId is required')
+  if (!cols.includes('map_id')) throw new IpcValidationError('mapId is required')
   const placeholders = cols.map(() => '?').join(', ')
   return db
     .prepare(
@@ -214,7 +215,7 @@ export function registerTokenHandlers(): void {
   ipcMain.handle(
     IPC.TOKENS_CREATE,
     (_event, patch: Record<string, unknown>): TokenRecord => {
-      if (!patch || typeof patch !== 'object') throw new Error('Invalid patch')
+      if (!patch || typeof patch !== 'object') throw new IpcValidationError('Invalid patch')
       const row = insertToken(getDb(), patch, false)
       return toTokenRecord(row)
     },
@@ -223,7 +224,7 @@ export function registerTokenHandlers(): void {
   ipcMain.handle(
     IPC.TOKENS_RESTORE,
     (_event, token: TokenRecord): TokenRecord => {
-      if (!token || typeof token !== 'object') throw new Error('Invalid token')
+      if (!token || typeof token !== 'object') throw new IpcValidationError('Invalid token')
       requireIntegerId(token.id, 'token')
       const row = insertToken(getDb(), token as unknown as Record<string, unknown>, true)
       return toTokenRecord(row)
