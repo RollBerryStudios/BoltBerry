@@ -71,6 +71,12 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
   }, [drawingClearTick])
 
   const isDrawingActive = DRAWING_TOOLS.has(activeTool)
+  // The eraser also needs the Layer to listen so per-shape onClick
+  // handlers reach Konva — otherwise selecting the eraser silently
+  // dropped every click because `listening={isDrawingActive}` on the
+  // Layer overrides the `listening={eraseMode}` on each shape.
+  const isEraseActive = activeTool === ERASE_TOOL
+  const isLayerListening = isDrawingActive || isEraseActive
 
   function getMapPos() {
     const stage = stageRef.current
@@ -332,7 +338,7 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
 
   return (
     <Layer
-      listening={isDrawingActive}
+      listening={isLayerListening}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
