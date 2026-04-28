@@ -21,16 +21,24 @@ export function useCanvasContextMenu(): (e: Konva.KonvaEventObject<MouseEvent>) 
     e.evt.preventDefault()
     if (!window.electronAPI) return
 
-    // Bail when the right-click hits a token. TokenNode's handleCtxMenu
-    // already opens the React-rendered token menu and sets cancelBubble,
-    // but Konva's bubble cancellation isn't always reliable across the
-    // Stage event boundary in nested groups — without this guard the
-    // native canvas menu pops up over the token menu and the user
-    // never sees their token actions.
+    // Bail when the right-click hits an entity that has its own context
+    // menu — token, GM pin, or wall. Each of these layers sets
+    // cancelBubble in its own handler, but Konva's bubble cancellation
+    // isn't always reliable across the Stage event boundary in nested
+    // groups, so without this guard the native canvas menu also pops
+    // up and masks the entity's own menu. Markers used:
+    //   • token-root  — TokenLayer outer Group
+    //   • pin-root    — GMPinLayer outer Group
+    //   • wall-root   — WallLayer per-wall Group
     const target = e.target
     if (target && typeof target.findAncestor === 'function') {
-      const tokenRoot = target.findAncestor('.token-root', true)
-      if (tokenRoot) return
+      if (
+        target.findAncestor('.token-root', true) ||
+        target.findAncestor('.pin-root', true) ||
+        target.findAncestor('.wall-root', true)
+      ) {
+        return
+      }
     }
 
     const { activeTool } = useUIStore.getState()

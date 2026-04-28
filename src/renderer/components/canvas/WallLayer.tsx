@@ -216,7 +216,7 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
           const midY = (p1.y + p2.y) / 2
 
           return (
-            <Group key={wall.id}>
+            <Group key={wall.id} name="wall-root">
               <Line
                 points={[p1.x, p1.y, p2.x, p2.y]}
                 stroke={color}

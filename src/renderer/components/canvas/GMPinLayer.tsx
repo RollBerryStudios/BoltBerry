@@ -117,7 +117,7 @@ export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
         const sx = pin.x * scale + offsetX
         const sy = pin.y * scale + offsetY
         return (
-          <Group key={pin.id} x={sx} y={sy} draggable
+          <Group key={pin.id} name="pin-root" x={sx} y={sy} draggable
             onDragEnd={async (e) => {
               const mx = (e.target.x() - offsetX) / scale
               const my = (e.target.y() - offsetY) / scale
