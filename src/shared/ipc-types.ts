@@ -161,6 +161,12 @@ export const IPC = {
   // Character sheets domain — semantic replacements for raw SQL
   // against the `character_sheets` table.
   CHARACTER_SHEETS_LIST_BY_CAMPAIGN: 'character-sheets:list-by-campaign',
+  /** Minimal-projection variant of LIST_BY_CAMPAIGN (BB-014). Returns
+   *  only the fields needed for the panel/grid header so opening a
+   *  campaign with 20+ richly populated sheets doesn't ship 1 MB of
+   *  JSON across IPC. The full sheet loads lazily via GET. */
+  CHARACTER_SHEETS_LIST_SUMMARY_BY_CAMPAIGN: 'character-sheets:list-summary-by-campaign',
+  CHARACTER_SHEETS_GET: 'character-sheets:get',
   CHARACTER_SHEETS_LIST_PARTY_BY_CAMPAIGNS: 'character-sheets:list-party-by-campaigns',
   CHARACTER_SHEETS_COUNT: 'character-sheets:count',
   CHARACTER_SHEETS_CREATE: 'character-sheets:create',
@@ -287,6 +293,10 @@ export const IPC = {
   TOKEN_VARIANTS_LIST: 'token-variants:list',
   TOKEN_VARIANTS_IMPORT: 'token-variants:import',
   TOKEN_VARIANTS_OPEN_FOLDER: 'token-variants:open-folder',
+  /** Status of the first-run token-variant seed (BB-027). Renderer polls
+   *  on startup to decide whether to surface a "library could not be
+   *  seeded" toast. */
+  TOKEN_VARIANTS_SEED_STATUS: 'token-variants:seed-status',
 
   // Bestiarium / reference data — bilingual SRD 5.1 monsters, items, spells.
   // The renderer never touches the JSON files directly; all reads go through
@@ -745,6 +755,10 @@ export interface DrawingRecord {
   text: string | null
   /** True when this drawing is broadcast to the player window. */
   synced: boolean
+  /** Set when the row's `points` JSON could not be parsed (BB-028).
+   *  The renderer can surface a "corrupted drawing" toast or repair UI
+   *  without losing the entire drawing list. Absent in the common case. */
+  corrupt?: boolean
 }
 
 export interface EncounterTemplate {
@@ -977,6 +991,26 @@ export interface CharacterPartyEntry {
   name: string
   className: string
   level: number
+}
+
+/** Lightweight projection of a CharacterSheet for the panel header /
+ *  list view (BB-014). Excludes the JSON blob columns (savingThrows,
+ *  skills, attacks, spells, spellSlots, features, equipment, notes,
+ *  backstory, etc.) so the renderer can paint the sheet picker without
+ *  paying ~50–80 KB per sheet up front. The full sheet is fetched on
+ *  demand via CHARACTER_SHEETS_GET. */
+export interface CharacterSheetSummary {
+  id: number
+  campaignId: number
+  tokenId: number | null
+  name: string
+  race: string
+  className: string
+  level: number
+  hpMax: number
+  hpCurrent: number
+  ac: number
+  portraitPath: string | null
 }
 
 /** Row shape returned by the token-templates IPC. Snake_case mirrors

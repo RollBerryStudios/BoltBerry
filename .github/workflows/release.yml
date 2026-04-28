@@ -25,7 +25,16 @@ jobs:
         continue-on-error: true
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
-          lfs: false
+          lfs: true
+      - name: Verify LFS assets are real (not pointer stubs)
+        shell: bash
+        run: |
+          stubs=$(find resources/token-variants resources/compendium -type f \( -name '*.webp' -o -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' -o -name '*.pdf' \) -size -1k 2>/dev/null | xargs -r grep -l "git-lfs" 2>/dev/null || true)
+          if [ -n "$stubs" ]; then
+            echo "::error::LFS pointer stubs found instead of real assets:"
+            echo "$stubs"
+            exit 1
+          fi
       - name: Setup Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
@@ -58,7 +67,15 @@ jobs:
         continue-on-error: true
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
-          lfs: false
+          lfs: true
+      - name: Verify LFS assets are real (not pointer stubs)
+        run: |
+          stubs=$(find resources/token-variants resources/compendium -type f \( -name '*.webp' -o -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' -o -name '*.pdf' \) -size -1k 2>/dev/null | xargs -r grep -l "git-lfs" 2>/dev/null || true)
+          if [ -n "$stubs" ]; then
+            echo "::error::LFS pointer stubs found instead of real assets:"
+            echo "$stubs"
+            exit 1
+          fi
       - name: Setup Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
@@ -94,7 +111,15 @@ jobs:
         continue-on-error: true
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
-          lfs: false
+          lfs: true
+      - name: Verify LFS assets are real (not pointer stubs)
+        run: |
+          stubs=$(find resources/token-variants resources/compendium -type f \( -name '*.webp' -o -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' -o -name '*.pdf' \) -size -1k 2>/dev/null | xargs -r grep -l "git-lfs" 2>/dev/null || true)
+          if [ -n "$stubs" ]; then
+            echo "::error::LFS pointer stubs found instead of real assets:"
+            echo "$stubs"
+            exit 1
+          fi
       - name: Setup Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:

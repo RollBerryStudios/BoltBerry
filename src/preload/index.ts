@@ -43,6 +43,7 @@ import type {
   NoteRecord,
   HandoutRecord,
   CharacterSheet,
+  CharacterSheetSummary,
   CharacterPartyEntry,
   AssetEntry,
   SessionStatsEntry,
@@ -385,6 +386,12 @@ export const dmApi = {
   characterSheets: {
     listByCampaign: (campaignId: number): Promise<CharacterSheet[]> =>
       ipcRenderer.invoke(IPC.CHARACTER_SHEETS_LIST_BY_CAMPAIGN, campaignId),
+    /** BB-014: ships only the picker-relevant columns; use `get` to
+     *  load the full sheet on demand. */
+    listSummaryByCampaign: (campaignId: number): Promise<CharacterSheetSummary[]> =>
+      ipcRenderer.invoke(IPC.CHARACTER_SHEETS_LIST_SUMMARY_BY_CAMPAIGN, campaignId),
+    get: (id: number): Promise<CharacterSheet | null> =>
+      ipcRenderer.invoke(IPC.CHARACTER_SHEETS_GET, id),
     listPartyByCampaigns: (campaignIds: number[]): Promise<CharacterPartyEntry[]> =>
       ipcRenderer.invoke(IPC.CHARACTER_SHEETS_LIST_PARTY_BY_CAMPAIGNS, campaignIds),
     count: (): Promise<number> =>
@@ -529,6 +536,16 @@ export const dmApi = {
   > => ipcRenderer.invoke(IPC.TOKEN_VARIANTS_IMPORT, slug),
   openTokenVariantsFolder: (slug?: string): Promise<void> =>
     ipcRenderer.invoke(IPC.TOKEN_VARIANTS_OPEN_FOLDER, slug),
+  /** BB-027: status of the first-run seed copy. `ok: false` means the
+   *  bundled artwork could not be copied to the user's data folder
+   *  (read-only filesystem, disk full, etc.) — the renderer should
+   *  surface a status-bar toast pointing at the error. */
+  getTokenVariantSeedStatus: (): Promise<{
+    ok: boolean
+    error: string | null
+    copiedSlugs: number
+    copiedFiles: number
+  }> => ipcRenderer.invoke(IPC.TOKEN_VARIANTS_SEED_STATUS),
 
   // Bestiarium data (SRD 5.1 monsters, items, spells)
   listMonsters: (): Promise<MonsterIndexEntry[]> =>

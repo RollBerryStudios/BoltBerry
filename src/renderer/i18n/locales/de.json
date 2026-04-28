@@ -706,7 +706,23 @@
     "keyThisOverlay": "Diese Übersicht öffnen",
     "sectionTokens": "Auswahl & Token",
     "sectionContextMenus": "Rechtsklick-Menüs",
-    "sectionPlayerControl": "🎯 Player Control Mode"
+    "sectionPlayerControl": "🎯 Player Control Mode",
+    "tk": {
+      "mouseWheel": "Mausrad",
+      "altDrag": "Alt + Ziehen",
+      "middleClickDrag": "Mittelklick + Ziehen",
+      "shiftClick": "Shift + Klick",
+      "click": "Klick",
+      "doubleClick": "Doppelklick",
+      "rightClickMap": "Rechtsklick Karte",
+      "rightClickToken": "Rechtsklick Token",
+      "rightClickMapList": "Rechtsklick Karte (Liste)",
+      "rightClickWiki": "Rechtsklick Wiki-Eintrag",
+      "rightClickAudio": "Rechtsklick Audio-Kanal",
+      "ctrlDrag": "Strg + Ziehen",
+      "ctrlMouseWheel": "Strg + Mausrad",
+      "ctrlArrows": "Strg + Pfeiltasten"
+    }
   },
   "monitorDialog": {
     "title": "🖥 Spieler-Monitor auswählen",

@@ -165,4 +165,18 @@ describe('initiativeStore', () => {
     const timers = useInitiativeStore.getState().entries.find((e) => e.id === 1)?.effectTimers
     expect(timers).toHaveLength(0)
   })
+
+  it('nextTurn does not decrement timers when starting mid-round with no current entry (BB-030)', () => {
+    // The audit raised a concern that combat starting "mid-round" could
+    // cause an early decrement. Pin that this does NOT happen: when
+    // currentTurn is unset on every entry, nextTurn just selects the
+    // first entry without flipping the round counter and without
+    // touching timers.
+    useInitiativeStore.getState().setEntries([makeEntry(1, 20), makeEntry(2, 10)])
+    useInitiativeStore.getState().addTimer(1, { effectId: 'blessed', roundsLeft: 3 })
+    useInitiativeStore.getState().nextTurn()
+    const state = useInitiativeStore.getState()
+    expect(state.round).toBe(1)
+    expect(state.entries.find((e) => e.id === 1)?.effectTimers?.[0].roundsLeft).toBe(3)
+  })
 })

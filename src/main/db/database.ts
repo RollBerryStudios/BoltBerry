@@ -1,5 +1,5 @@
 import Database from 'better-sqlite3'
-import { app } from 'electron'
+import { app, dialog, shell } from 'electron'
 import { join, basename, dirname } from 'path'
 import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync, unlinkSync } from 'fs'
 import {
@@ -174,17 +174,40 @@ export function initDatabase(): Database.Database {
     db.pragma('cache_size = -64000') // 64 MB cache
     db.pragma('wal_autocheckpoint = 1000')
 
-    // Fail-soft integrity check on startup: warn into the log but don't
-    // refuse to open. A genuinely corrupt DB will surface as IO errors
-    // later anyway; the check exists so a known-bad DB is *visible*
-    // instead of a silent footgun ("data disappears mysteriously"). If
-    // the result is anything other than the single string 'ok', we
-    // fingerprint it and the next quick-backup pass picks it up.
+    // BB-026: integrity check on startup. Previously the failure path was
+    // a silent console.warn — corrupt DBs opened anyway, then maps appeared
+    // empty and tokens vanished and users blamed the app instead of the
+    // disk. Now we block with a dialog that lets the user open the backup
+    // folder and pick the most recent .bak before any handlers register.
     try {
       const issues = db.prepare("PRAGMA integrity_check").all() as Array<{ integrity_check: string }>
       const ok = issues.length === 1 && issues[0].integrity_check === 'ok'
       if (!ok) {
+        const summary = issues.slice(0, 5).map(i => i.integrity_check).join('; ')
         console.warn('[Database] integrity_check reported issues:', issues)
+        const choice = dialog.showMessageBoxSync({
+          type: 'warning',
+          buttons: ['Trotzdem fortfahren', 'Backup-Ordner öffnen', 'Beenden'],
+          defaultId: 1,
+          cancelId: 2,
+          title: 'BoltBerry — Datenbank beschädigt',
+          message: 'Die Datenbank meldet Integritätsprobleme.',
+          detail:
+            `SQLite hat folgende Hinweise gemeldet:\n${summary}\n\n` +
+            `Wir empfehlen, das letzte Backup (.bak) wiederherzustellen, ` +
+            `bevor weitergearbeitet wird. Ohne Wiederherstellung können ` +
+            `Karten leer erscheinen oder Tokens verschwinden.`,
+        })
+        if (choice === 1) {
+          shell.showItemInFolder(dbPath)
+          app.exit(0)
+          return
+        }
+        if (choice === 2) {
+          app.exit(0)
+          return
+        }
+        // choice === 0: continue anyway. The damaged DB stays open.
       }
     } catch (err) {
       console.warn('[Database] integrity_check failed to run:', err)

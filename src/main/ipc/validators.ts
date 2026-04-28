@@ -1,4 +1,7 @@
 import path from 'path'
+import { ipcMain, IpcMainInvokeEvent } from 'electron'
+import { logger } from '../logger'
+import { getDMWindow, getPlayerWindow } from '../windows'
 
 /**
  * Shared IPC input validators. Every renderer-originated handler is an
@@ -13,6 +16,72 @@ export class IpcValidationError extends Error {
     super(message)
     this.name = 'IpcValidationError'
   }
+}
+
+/**
+ * Channels the player window is allowed to invoke. Anything not in this
+ * set may only be called from the DM window's main frame. Keep this list
+ * tight — every entry is a potential capability for a compromised player
+ * renderer.
+ *
+ * BB-003: closes the trust gap where ~115 handlers trusted any frame.
+ */
+const PLAYER_ALLOWED_INVOKE_CHANNELS: ReadonlySet<string> = new Set([
+  'app:get-image-as-base64',
+  'app:close-player-window',
+  'data:get-monster-token',
+])
+
+/** True when the event originates from the DM window's main frame. */
+export function isDMFrame(event: IpcMainInvokeEvent): boolean {
+  const dm = getDMWindow()
+  if (!dm || dm.isDestroyed()) return false
+  // event.senderFrame can be null in rare teardown races; treat as untrusted.
+  return event.senderFrame === dm.webContents.mainFrame
+}
+
+/** True when the event originates from the Player window's main frame. */
+export function isPlayerFrame(event: IpcMainInvokeEvent): boolean {
+  const player = getPlayerWindow()
+  if (!player || player.isDestroyed()) return false
+  return event.senderFrame === player.webContents.mainFrame
+}
+
+/**
+ * Installs a registration-time guard on `ipcMain.handle`: any subsequent
+ * `ipcMain.handle(channel, listener)` call gets wrapped so the listener
+ * only runs when the sender is the DM frame, or the channel is on the
+ * explicit player allowlist *and* the sender is the player frame.
+ *
+ * Must be called once, before any handler module registers. Idempotent
+ * (subsequent calls are no-ops).
+ */
+let guardInstalled = false
+export function installIpcGuard(): void {
+  if (guardInstalled) return
+  guardInstalled = true
+
+  const original = ipcMain.handle.bind(ipcMain)
+  ipcMain.handle = function guardedHandle(
+    channel: string,
+    listener: (event: IpcMainInvokeEvent, ...args: unknown[]) => unknown,
+  ): void {
+    return original(channel, async (event: IpcMainInvokeEvent, ...args: unknown[]) => {
+      const fromDM = isDMFrame(event)
+      const fromPlayer = isPlayerFrame(event)
+      const playerAllowed = PLAYER_ALLOWED_INVOKE_CHANNELS.has(channel)
+      if (!fromDM && !(fromPlayer && playerAllowed)) {
+        logger.warn(
+          `[ipc-guard] denied ${channel}: sender not authorised ` +
+            `(fromDM=${fromDM}, fromPlayer=${fromPlayer}, playerAllowed=${playerAllowed})`,
+        )
+        throw new IpcValidationError(`Channel not authorised: ${channel}`)
+      }
+      // Optional fan-out tracing — no-op unless BOLTBERRY_IPC_TRACE=1.
+      logger.ipc(channel, { fromDM, fromPlayer })
+      return listener(event, ...args)
+    }) as unknown as void
+  } as typeof ipcMain.handle
 }
 
 export interface IntOptions {

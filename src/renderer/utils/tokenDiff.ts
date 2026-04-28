@@ -1,4 +1,5 @@
 import type { PlayerTokenState } from '@shared/ipc-types'
+import { perfStart } from './perfMark'
 
 /**
  * Pure token-diff helper for the future per-token delta IPC protocol
@@ -51,6 +52,9 @@ export function diffTokens(
   prev: readonly PlayerTokenState[],
   next: readonly PlayerTokenState[],
 ): TokenDiff {
+  // F-06: instrumented to confirm whether the full-roster scan dominates
+  // CPU during heavy drag. No-op in production unless perf is on.
+  const stop = perfStart('tokenDiff')
   const prevMap = new Map<number, PlayerTokenState>()
   for (const t of prev) prevMap.set(t.id, t)
 
@@ -69,6 +73,7 @@ export function diffTokens(
     if (!seen.has(t.id)) remove.push(t.id)
   }
 
+  stop({ prev: prev.length, next: next.length, upsert: upsert.length, remove: remove.length })
   return { upsert, remove }
 }
 

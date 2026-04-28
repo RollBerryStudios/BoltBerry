@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog, net, protocol } from 'electron'
+import { app, BrowserWindow, dialog, net, protocol, session } from 'electron'
 import { pathToFileURL } from 'url'
 import { existsSync, realpathSync, lstatSync } from 'fs'
 import { resolve, join, sep } from 'path'
@@ -28,13 +28,18 @@ import { registerSessionHandlers } from './ipc/session-handlers'
 import { registerTokenTemplateHandlers } from './ipc/token-template-handlers'
 import { registerAudioBoardHandlers } from './ipc/audio-board-handlers'
 import { registerExportImportHandlers } from './ipc/export-import'
+import { installIpcGuard } from './ipc/validators'
 import { buildAppMenu } from './menu'
 import { initAutoUpdater } from './updater'
 import { loadPrefs } from './prefs'
 
-// Must be called before app.whenReady()
+// Must be called before app.whenReady().
+// Note: secure:false (BB-039). The app is offline-first and does not need
+// service-worker / SharedArrayBuffer privileges on the local-asset origin;
+// granting them would let a compromised renderer register a service worker
+// to intercept asset requests.
 protocol.registerSchemesAsPrivileged([
-  { scheme: 'local-asset', privileges: { stream: true, supportFetchAPI: true, standard: false, secure: true } },
+  { scheme: 'local-asset', privileges: { stream: true, supportFetchAPI: true, standard: false, secure: false } },
 ])
 
 // Prevent multiple instances
@@ -51,8 +56,54 @@ app.on('second-instance', () => {
   }
 })
 
+// BB-006: runtime CSP via response header. Mirrors the <meta> tag in
+// index.html / player.html so navigations, blob: URLs, and same-origin
+// window.open cannot bypass it. In dev we additionally allow the Vite
+// HMR websocket and inline scripts injected by the dev server.
+function installRuntimeCSP(): void {
+  const isDevMode = process.env.NODE_ENV === 'development'
+  const cspProd =
+    "default-src 'self'; " +
+    "script-src 'self'; " +
+    "style-src 'self' 'unsafe-inline'; " +
+    "img-src 'self' data: local-asset:; " +
+    "media-src 'self' local-asset: blob:; " +
+    "font-src 'self' data:; " +
+    "connect-src 'self' local-asset:; " +
+    "worker-src 'self' blob:; " +
+    "object-src 'none'; " +
+    "base-uri 'self'; " +
+    "form-action 'none'; " +
+    "frame-ancestors 'none'"
+  const cspDev =
+    "default-src 'self' http://localhost:5173 ws://localhost:5173; " +
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:5173; " +
+    "style-src 'self' 'unsafe-inline' http://localhost:5173; " +
+    "img-src 'self' data: local-asset: http://localhost:5173; " +
+    "media-src 'self' local-asset: blob:; " +
+    "font-src 'self' data: http://localhost:5173; " +
+    "connect-src 'self' local-asset: ws://localhost:5173 http://localhost:5173; " +
+    "worker-src 'self' blob:; " +
+    "object-src 'none'; " +
+    "base-uri 'self'; " +
+    "form-action 'none'; " +
+    "frame-ancestors 'none'"
+  const csp = isDevMode ? cspDev : cspProd
+
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    const headers = details.responseHeaders ?? {}
+    headers['Content-Security-Policy'] = [csp]
+    headers['X-Content-Type-Options'] = ['nosniff']
+    headers['X-Frame-Options'] = ['DENY']
+    headers['Referrer-Policy'] = ['no-referrer']
+    callback({ responseHeaders: headers })
+  })
+}
+
 // ─── App Lifecycle ─────────────────────────────────────────────────────────────────
 app.whenReady().then(() => {
+  installRuntimeCSP()
+
   // Register custom protocol for serving local assets (images, audio)
   const MAX_ASSET_SIZE = 200 * 1024 * 1024 // 200 MB
 
@@ -113,6 +164,13 @@ app.whenReady().then(() => {
     app.exit(1)
     return
   }
+
+  // BB-003: install the sender-frame guard before any handlers register.
+  // Every subsequent ipcMain.handle is automatically wrapped so it only
+  // accepts invocations from the DM frame (or the explicit player allowlist
+  // in validators.ts). player-bridge.ts uses ipcMain.on for relay channels
+  // and applies its own isFromDM/isFromPlayer checks.
+  installIpcGuard()
 
   registerPlayerBridgeHandlers()
   registerAppHandlers()

@@ -69,9 +69,17 @@ export function createDMWindow(): BrowserWindow {
       preload: requirePreload(dmPreloadPath(), 'DM'),
       contextIsolation: true,
       nodeIntegration: false,
+      nodeIntegrationInWorker: false,
       sandbox: true,
+      experimentalFeatures: false,
+      allowRunningInsecureContent: false,
+      webviewTag: false,
     },
   })
+
+  // Belt-and-braces: even though webviewTag:false prevents <webview>, refuse
+  // any attach attempt at runtime (BB-043).
+  dmWindow.webContents.on('will-attach-webview', (e) => e.preventDefault())
 
   dmWindow.maximize()
 
@@ -146,9 +154,15 @@ export function createPlayerWindow(): BrowserWindow | null {
       preload: requirePreload(playerPreloadPath(), 'Player'),
       contextIsolation: true,
       nodeIntegration: false,
+      nodeIntegrationInWorker: false,
       sandbox: true,
+      experimentalFeatures: false,
+      allowRunningInsecureContent: false,
+      webviewTag: false,
     },
   })
+
+  playerWindow.webContents.on('will-attach-webview', (e) => e.preventDefault())
 
   if (isDev) {
     playerWindow.loadURL(`${RENDERER_URL}/player.html`)

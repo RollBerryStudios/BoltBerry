@@ -21,6 +21,7 @@
 
 import type { WallIndex } from './wallIndex'
 import { traverseRayCells } from './wallIndex'
+import { perfStart } from './perfMark'
 
 export interface Segment {
   x1: number; y1: number
@@ -86,6 +87,10 @@ export function computeVisibilityPolygon(
   index?: WallIndex,
 ): number[] {
   if (imgW <= 0 || imgH <= 0) return []
+  // Perf instrumentation (M5, F-06). No-op in production unless the user
+  // sets localStorage 'boltberry:perf'. Stop is called below before each
+  // return so the measure includes the full algorithm.
+  const stop = perfStart('los.compute')
 
   // Bounding box clamps the polygon to the map image extents
   const r = radius > 0 ? radius : Math.max(imgW, imgH) * 2
@@ -157,7 +162,10 @@ export function computeVisibilityPolygon(
     })
   }
 
-  if (hits.length < 3) return []
+  if (hits.length < 3) {
+    stop({ segments: segments.length, useIndex, hits: hits.length, degenerate: true })
+    return []
+  }
 
   // Sort by angle
   hits.sort((a, b) => a.angle - b.angle)
@@ -168,5 +176,6 @@ export function computeVisibilityPolygon(
     poly.push(h.pt.x, h.pt.y)
   }
 
+  stop({ segments: segments.length, useIndex, hits: hits.length })
   return poly
 }
