@@ -319,7 +319,16 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
       try {
         await window.electronAPI?.tokens.update(id, { x: newX, y: newY })
       } catch (err) {
+        // Surface the failure: previously this only logged to console,
+        // so a drag that didn't persist looked successful to the user
+        // until the next reload (token snapped back). The toast tells
+        // them the move didn't hit the database.
         console.error('[TokenLayer] handleDragEnd failed:', err)
+        showToast(
+          `Token-Position konnte nicht gespeichert werden: ${err instanceof Error ? err.message : String(err)}`,
+          'error',
+          5000,
+        )
       }
     }
 

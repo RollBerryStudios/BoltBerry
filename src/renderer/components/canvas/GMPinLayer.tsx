@@ -4,6 +4,7 @@ import { Html } from 'react-konva-utils'
 import Konva from 'konva'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useUndoStore, nextCommandId } from '../../stores/undoStore'
+import { showToast } from '../shared/Toast'
 
 interface GMPin {
   id: number
@@ -126,7 +127,15 @@ export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
               try {
                 await window.electronAPI?.gmPins.update(pin.id, { x: mx, y: my })
               } catch (err) {
+                // Surface failure — same rationale as TokenLayer: the
+                // visual move makes the drag look successful even when
+                // the DB write fails, then the pin snaps back on reload.
                 console.error('[GMPinLayer] drag failed:', err)
+                showToast(
+                  `Pin-Position konnte nicht gespeichert werden: ${err instanceof Error ? err.message : String(err)}`,
+                  'error',
+                  5000,
+                )
               }
             }}
             onClick={() => setSelectedPinId(pin.id)}
