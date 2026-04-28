@@ -77,6 +77,8 @@ export function installIpcGuard(): void {
         )
         throw new IpcValidationError(`Channel not authorised: ${channel}`)
       }
+      // Optional fan-out tracing — no-op unless BOLTBERRY_IPC_TRACE=1.
+      logger.ipc(channel, { fromDM, fromPlayer })
       return listener(event, ...args)
     }) as unknown as void
   } as typeof ipcMain.handle

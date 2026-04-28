@@ -24,6 +24,7 @@
  */
 
 import type { Segment } from './losEngine'
+import { perfStart } from './perfMark'
 
 export interface WallIndex {
   cellSize: number
@@ -52,6 +53,9 @@ export function buildWallIndex(
   imgH: number,
   cellSize = DEFAULT_CELL_SIZE,
 ): WallIndex {
+  // F-09: instrumented so we can confirm or refute the audit's "O(n²) on
+  // dense wall maps" hypothesis. No-op in production unless perf is on.
+  const stop = perfStart('wallIndex.build')
   // The map origin is (0, 0) but segments may extend slightly outside
   // the bitmap (e.g. a wall drawn right up to the map edge). Pad the
   // grid by one cell on each side so we never miss one.
@@ -65,6 +69,7 @@ export function buildWallIndex(
   for (let i = 0; i < segments.length; i++) {
     rasterizeSegment(idx, i, segments[i])
   }
+  stop({ segments: segments.length, cells: cols * rows })
   return idx
 }
 
