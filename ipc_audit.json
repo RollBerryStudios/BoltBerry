@@ -1,0 +1,2095 @@
+{
+  "constants": {
+    "PLAYER_MAP_UPDATE": "player:map-update",
+    "PLAYER_FOG_DELTA": "player:fog-delta",
+    "PLAYER_FOG_RESET": "player:fog-reset",
+    "PLAYER_TOKEN_UPDATE": "player:token-update",
+    "PLAYER_TOKEN_DELTA": "player:token-delta",
+    "PLAYER_BLACKOUT": "player:blackout",
+    "PLAYER_ATMOSPHERE": "player:atmosphere",
+    "PLAYER_FULL_SYNC": "player:full-sync",
+    "PLAYER_INITIATIVE": "player:initiative",
+    "PLAYER_WEATHER": "player:weather",
+    "PLAYER_REQUEST_SYNC": "player:request-sync",
+    "DM_REQUEST_FULL_SYNC": "dm:request-full-sync",
+    "DM_PLAYER_WINDOW_CLOSED": "dm:player-window-closed",
+    "PLAYER_WINDOW_SIZE": "player:window-size",
+    "DM_PLAYER_WINDOW_SIZE": "dm:player-window-size",
+    "GET_MONITORS": "app:get-monitors",
+    "SET_PLAYER_MONITOR": "app:set-player-monitor",
+    "OPEN_PLAYER_WINDOW": "app:open-player-window",
+    "CLOSE_PLAYER_WINDOW": "app:close-player-window",
+    "IMPORT_FILE": "app:import-file",
+    "IMPORT_PDF": "app:import-pdf",
+    "SAVE_ASSET_IMAGE": "app:save-asset-image",
+    "SAVE_PORTRAIT": "app:save-portrait",
+    "DELETE_PORTRAIT": "app:delete-portrait",
+    "ASSET_CLEANUP": "app:asset-cleanup",
+    "EXPORT_CAMPAIGN": "app:export-campaign",
+    "IMPORT_CAMPAIGN": "app:import-campaign",
+    "DUPLICATE_CAMPAIGN": "app:duplicate-campaign",
+    "SAVE_NOW": "app:save-now",
+    "CAMPAIGNS_LIST": "campaigns:list",
+    "CAMPAIGNS_GET": "campaigns:get",
+    "CAMPAIGNS_COUNT": "campaigns:count",
+    "CAMPAIGNS_CREATE": "campaigns:create",
+    "CAMPAIGNS_RENAME": "campaigns:rename",
+    "CAMPAIGNS_DELETE": "campaigns:delete",
+    "CAMPAIGNS_SET_COVER": "campaigns:set-cover",
+    "CAMPAIGNS_TOUCH_LAST_OPENED": "campaigns:touch-last-opened",
+    "MAPS_LIST": "maps:list",
+    "MAPS_LIST_FOR_STATS": "maps:list-for-stats",
+    "MAPS_LIST_RECENT": "maps:list-recent",
+    "MAPS_COUNT": "maps:count",
+    "MAPS_CREATE": "maps:create",
+    "MAPS_RENAME": "maps:rename",
+    "MAPS_DELETE": "maps:delete",
+    "MAPS_SWAP_ORDER": "maps:swap-order",
+    "MAPS_SET_GRID": "maps:set-grid",
+    "MAPS_PATCH_GRID_DISPLAY": "maps:patch-grid-display",
+    "MAPS_SET_ROTATION": "maps:set-rotation",
+    "MAPS_SET_ROTATION_PLAYER": "maps:set-rotation-player",
+    "MAPS_SET_CAMERA": "maps:set-camera",
+    "MAPS_SET_AMBIENT_TRACK": "maps:set-ambient-track",
+    "MAPS_SET_CHANNEL_VOLUME": "maps:set-channel-volume",
+    "TOKENS_LIST_BY_MAP": "tokens:list-by-map",
+    "TOKENS_CREATE": "tokens:create",
+    "TOKENS_RESTORE": "tokens:restore",
+    "TOKENS_RESTORE_MANY": "tokens:restore-many",
+    "TOKENS_UPDATE": "tokens:update",
+    "TOKENS_UPDATE_MANY": "tokens:update-many",
+    "TOKENS_DELETE": "tokens:delete",
+    "TOKENS_DELETE_MANY": "tokens:delete-many",
+    "INITIATIVE_LIST_BY_MAP": "initiative:list-by-map",
+    "INITIATIVE_CREATE": "initiative:create",
+    "INITIATIVE_UPDATE": "initiative:update",
+    "INITIATIVE_UPDATE_MANY": "initiative:update-many",
+    "INITIATIVE_DELETE": "initiative:delete",
+    "INITIATIVE_DELETE_BY_MAP": "initiative:delete-by-map",
+    "WALLS_LIST_BY_MAP": "walls:list-by-map",
+    "WALLS_CREATE": "walls:create",
+    "WALLS_RESTORE": "walls:restore",
+    "WALLS_UPDATE": "walls:update",
+    "WALLS_DELETE": "walls:delete",
+    "ROOMS_LIST_BY_MAP": "rooms:list-by-map",
+    "ROOMS_CREATE": "rooms:create",
+    "ROOMS_RESTORE": "rooms:restore",
+    "ROOMS_UPDATE": "rooms:update",
+    "ROOMS_DELETE": "rooms:delete",
+    "DRAWINGS_LIST_BY_MAP": "drawings:list-by-map",
+    "DRAWINGS_LIST_SYNCED_BY_MAP": "drawings:list-synced-by-map",
+    "DRAWINGS_CREATE": "drawings:create",
+    "DRAWINGS_CREATE_MANY": "drawings:create-many",
+    "DRAWINGS_DELETE": "drawings:delete",
+    "DRAWINGS_DELETE_BY_MAP": "drawings:delete-by-map",
+    "ENCOUNTERS_LIST_BY_CAMPAIGN": "encounters:list-by-campaign",
+    "ENCOUNTERS_CREATE": "encounters:create",
+    "ENCOUNTERS_RENAME": "encounters:rename",
+    "ENCOUNTERS_DELETE": "encounters:delete",
+    "FOG_GET": "fog:get",
+    "FOG_SAVE": "fog:save",
+    "GM_PINS_LIST_BY_MAP": "gm-pins:list-by-map",
+    "GM_PINS_CREATE": "gm-pins:create",
+    "GM_PINS_UPDATE": "gm-pins:update",
+    "GM_PINS_DELETE": "gm-pins:delete",
+    "NOTES_LIST_CATEGORY_BY_CAMPAIGN": "notes:list-category-by-campaign",
+    "NOTES_LIST_CATEGORY_BY_MAP": "notes:list-category-by-map",
+    "NOTES_CREATE": "notes:create",
+    "NOTES_UPDATE": "notes:update",
+    "NOTES_DELETE": "notes:delete",
+    "HANDOUTS_LIST_BY_CAMPAIGN": "handouts:list-by-campaign",
+    "HANDOUTS_COUNT_BY_CAMPAIGNS": "handouts:count-by-campaigns",
+    "HANDOUTS_CREATE": "handouts:create",
+    "HANDOUTS_DELETE": "handouts:delete",
+    "CHARACTER_SHEETS_LIST_BY_CAMPAIGN": "character-sheets:list-by-campaign",
+    "CHARACTER_SHEETS_LIST_PARTY_BY_CAMPAIGNS": "character-sheets:list-party-by-campaigns",
+    "CHARACTER_SHEETS_COUNT": "character-sheets:count",
+    "CHARACTER_SHEETS_CREATE": "character-sheets:create",
+    "CHARACTER_SHEETS_UPDATE": "character-sheets:update",
+    "CHARACTER_SHEETS_DELETE": "character-sheets:delete",
+    "ASSETS_LIST_FOR_CAMPAIGN": "assets:list-for-campaign",
+    "SESSIONS_START": "sessions:start",
+    "SESSIONS_END_OPEN": "sessions:end-open",
+    "SESSIONS_STATS_BY_CAMPAIGNS": "sessions:stats-by-campaigns",
+    "TOKEN_TEMPLATES_LIST": "token-templates:list",
+    "TOKEN_TEMPLATES_LIST_USER_NAMES": "token-templates:list-user-names",
+    "TOKEN_TEMPLATES_CREATE": "token-templates:create",
+    "TOKEN_TEMPLATES_UPDATE": "token-templates:update",
+    "TOKEN_TEMPLATES_DELETE": "token-templates:delete",
+    "AUDIO_BOARDS_LIST_BY_CAMPAIGN": "audio-boards:list-by-campaign",
+    "AUDIO_BOARDS_CREATE": "audio-boards:create",
+    "AUDIO_BOARDS_RENAME": "audio-boards:rename",
+    "AUDIO_BOARDS_DELETE": "audio-boards:delete",
+    "AUDIO_BOARDS_UPSERT_SLOT": "audio-boards:upsert-slot",
+    "AUDIO_BOARDS_DELETE_SLOT": "audio-boards:delete-slot",
+    "TRACKS_LIST_BY_CAMPAIGN": "tracks:list-by-campaign",
+    "TRACKS_CREATE": "tracks:create",
+    "TRACKS_UPDATE": "tracks:update",
+    "TRACKS_DELETE": "tracks:delete",
+    "TRACKS_TOGGLE_ASSIGNMENT": "tracks:toggle-assignment",
+    "IMPORT_AUDIO_FILES": "app:import-audio-files",
+    "IMPORT_AUDIO_FOLDER": "app:import-audio-folder",
+    "IMPORT_SFX_ICON": "app:import-sfx-icon",
+    "EXPORT_TO_FILE": "app:export-to-file",
+    "IMPORT_FROM_FILE": "app:import-from-file",
+    "QUICK_BACKUP": "app:quick-backup",
+    "PLAYER_OVERLAY": "player:overlay",
+    "PLAYER_HANDOUT": "player:handout",
+    "PLAYER_POINTER": "player:pointer",
+    "PLAYER_VIEWPORT": "player:viewport",
+    "PLAYER_MEASURE": "player:measure",
+    "PLAYER_DRAWING": "player:drawing",
+    "PLAYER_WALLS": "player:walls",
+    "SHOW_CONTEXT_MENU": "app:show-context-menu",
+    "DELETE_TOKEN_CONFIRM": "app:delete-token-confirm",
+    "CONFIRM_DIALOG": "app:confirm-dialog",
+    "GET_DEFAULT_USER_DATA_FOLDER": "app:get-default-user-data-folder",
+    "SET_USER_DATA_FOLDER": "app:set-user-data-folder",
+    "OPEN_CONTENT_FOLDER": "app:open-content-folder",
+    "GET_IMAGE_AS_BASE64": "app:get-image-as-base64",
+    "GET_USER_DATA_PATH": "app:get-user-data-path",
+    "RESCAN_CONTENT_FOLDER": "app:rescan-content-folder",
+    "DELETE_MAP_CONFIRM": "app:delete-map-confirm",
+    "CHOOSE_FOLDER": "app:choose-folder",
+    "SET_MENU_LANGUAGE": "app:set-menu-language",
+    "MENU_ACTION": "menu:action",
+    "COMPENDIUM_LIST": "compendium:list",
+    "COMPENDIUM_READ": "compendium:read",
+    "COMPENDIUM_IMPORT": "compendium:import",
+    "COMPENDIUM_OPEN_FOLDER": "compendium:open-folder",
+    "TOKEN_VARIANTS_LIST": "token-variants:list",
+    "TOKEN_VARIANTS_IMPORT": "token-variants:import",
+    "TOKEN_VARIANTS_OPEN_FOLDER": "token-variants:open-folder",
+    "DATA_LIST_MONSTERS": "data:list-monsters",
+    "DATA_GET_MONSTER": "data:get-monster",
+    "DATA_GET_MONSTER_TOKEN": "data:get-monster-token",
+    "DATA_SET_MONSTER_DEFAULT": "data:set-monster-default",
+    "DATA_LIST_ITEMS": "data:list-items",
+    "DATA_GET_ITEM": "data:get-item",
+    "DATA_LIST_SPELLS": "data:list-spells",
+    "DATA_GET_SPELL": "data:get-spell",
+    "WIKI_UPSERT_USER_ENTRY": "wiki:upsert-user-entry",
+    "WIKI_DELETE_USER_ENTRY": "wiki:delete-user-entry"
+  },
+  "main": [
+    {
+      "key": "SET_MENU_LANGUAGE",
+      "val": "app:set-menu-language",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 113
+    },
+    {
+      "key": "GET_MONITORS",
+      "val": "app:get-monitors",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 119
+    },
+    {
+      "key": "SET_PLAYER_MONITOR",
+      "val": "app:set-player-monitor",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 122
+    },
+    {
+      "key": "OPEN_PLAYER_WINDOW",
+      "val": "app:open-player-window",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 127
+    },
+    {
+      "key": "CLOSE_PLAYER_WINDOW",
+      "val": "app:close-player-window",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 138
+    },
+    {
+      "key": "GET_DEFAULT_USER_DATA_FOLDER",
+      "val": "app:get-default-user-data-folder",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 147
+    },
+    {
+      "key": "CHOOSE_FOLDER",
+      "val": "app:choose-folder",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 152
+    },
+    {
+      "key": "SET_USER_DATA_FOLDER",
+      "val": "app:set-user-data-folder",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 165
+    },
+    {
+      "key": "OPEN_CONTENT_FOLDER",
+      "val": "app:open-content-folder",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 201
+    },
+    {
+      "key": "GET_IMAGE_AS_BASE64",
+      "val": "app:get-image-as-base64",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 213
+    },
+    {
+      "key": "RESCAN_CONTENT_FOLDER",
+      "val": "app:rescan-content-folder",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 262
+    },
+    {
+      "key": "IMPORT_FILE",
+      "val": "app:import-file",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 355
+    },
+    {
+      "key": "IMPORT_SFX_ICON",
+      "val": "app:import-sfx-icon",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 522
+    },
+    {
+      "key": "IMPORT_PDF",
+      "val": "app:import-pdf",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 562
+    },
+    {
+      "key": "SAVE_ASSET_IMAGE",
+      "val": "app:save-asset-image",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 603
+    },
+    {
+      "key": "SAVE_NOW",
+      "val": "app:save-now",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 663
+    },
+    {
+      "key": "SAVE_PORTRAIT",
+      "val": "app:save-portrait",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 682
+    },
+    {
+      "key": "DELETE_PORTRAIT",
+      "val": "app:delete-portrait",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 734
+    },
+    {
+      "key": "ASSET_CLEANUP",
+      "val": "app:asset-cleanup",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 759
+    },
+    {
+      "key": "GET_USER_DATA_PATH",
+      "val": "app:get-user-data-path",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 854
+    },
+    {
+      "key": "IMPORT_FROM_FILE",
+      "val": "app:import-from-file",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 861
+    },
+    {
+      "key": "EXPORT_TO_FILE",
+      "val": "app:export-to-file",
+      "type": "handle",
+      "file": "src/main/ipc/app-handlers.ts",
+      "line": 896
+    },
+    {
+      "key": "AUDIO_BOARDS_RENAME",
+      "val": "audio-boards:rename",
+      "type": "handle",
+      "file": "src/main/ipc/audio-board-handlers.ts",
+      "line": 126
+    },
+    {
+      "key": "AUDIO_BOARDS_DELETE",
+      "val": "audio-boards:delete",
+      "type": "handle",
+      "file": "src/main/ipc/audio-board-handlers.ts",
+      "line": 132
+    },
+    {
+      "key": "TRACKS_DELETE",
+      "val": "tracks:delete",
+      "type": "handle",
+      "file": "src/main/ipc/audio-board-handlers.ts",
+      "line": 312
+    },
+    {
+      "key": "CAMPAIGNS_LIST",
+      "val": "campaigns:list",
+      "type": "handle",
+      "file": "src/main/ipc/campaign-handlers.ts",
+      "line": 34
+    },
+    {
+      "key": "CAMPAIGNS_GET",
+      "val": "campaigns:get",
+      "type": "handle",
+      "file": "src/main/ipc/campaign-handlers.ts",
+      "line": 41
+    },
+    {
+      "key": "CAMPAIGNS_COUNT",
+      "val": "campaigns:count",
+      "type": "handle",
+      "file": "src/main/ipc/campaign-handlers.ts",
+      "line": 49
+    },
+    {
+      "key": "CAMPAIGNS_CREATE",
+      "val": "campaigns:create",
+      "type": "handle",
+      "file": "src/main/ipc/campaign-handlers.ts",
+      "line": 56
+    },
+    {
+      "key": "CAMPAIGNS_RENAME",
+      "val": "campaigns:rename",
+      "type": "handle",
+      "file": "src/main/ipc/campaign-handlers.ts",
+      "line": 67
+    },
+    {
+      "key": "CAMPAIGNS_DELETE",
+      "val": "campaigns:delete",
+      "type": "handle",
+      "file": "src/main/ipc/campaign-handlers.ts",
+      "line": 74
+    },
+    {
+      "key": "CAMPAIGNS_TOUCH_LAST_OPENED",
+      "val": "campaigns:touch-last-opened",
+      "type": "handle",
+      "file": "src/main/ipc/campaign-handlers.ts",
+      "line": 92
+    },
+    {
+      "key": "CHARACTER_SHEETS_COUNT",
+      "val": "character-sheets:count",
+      "type": "handle",
+      "file": "src/main/ipc/character-sheet-handlers.ts",
+      "line": 251
+    },
+    {
+      "key": "CHARACTER_SHEETS_DELETE",
+      "val": "character-sheets:delete",
+      "type": "handle",
+      "file": "src/main/ipc/character-sheet-handlers.ts",
+      "line": 293
+    },
+    {
+      "key": "COMPENDIUM_LIST",
+      "val": "compendium:list",
+      "type": "handle",
+      "file": "src/main/ipc/compendium-handlers.ts",
+      "line": 137
+    },
+    {
+      "key": "COMPENDIUM_READ",
+      "val": "compendium:read",
+      "type": "handle",
+      "file": "src/main/ipc/compendium-handlers.ts",
+      "line": 147
+    },
+    {
+      "key": "COMPENDIUM_IMPORT",
+      "val": "compendium:import",
+      "type": "handle",
+      "file": "src/main/ipc/compendium-handlers.ts",
+      "line": 173
+    },
+    {
+      "key": "COMPENDIUM_OPEN_FOLDER",
+      "val": "compendium:open-folder",
+      "type": "handle",
+      "file": "src/main/ipc/compendium-handlers.ts",
+      "line": 194
+    },
+    {
+      "key": "TOKEN_VARIANTS_LIST",
+      "val": "token-variants:list",
+      "type": "handle",
+      "file": "src/main/ipc/compendium-handlers.ts",
+      "line": 203
+    },
+    {
+      "key": "TOKEN_VARIANTS_IMPORT",
+      "val": "token-variants:import",
+      "type": "handle",
+      "file": "src/main/ipc/compendium-handlers.ts",
+      "line": 230
+    },
+    {
+      "key": "TOKEN_VARIANTS_OPEN_FOLDER",
+      "val": "token-variants:open-folder",
+      "type": "handle",
+      "file": "src/main/ipc/compendium-handlers.ts",
+      "line": 262
+    },
+    {
+      "key": "DATA_LIST_MONSTERS",
+      "val": "data:list-monsters",
+      "type": "handle",
+      "file": "src/main/ipc/data-handlers.ts",
+      "line": 243
+    },
+    {
+      "key": "DATA_GET_MONSTER",
+      "val": "data:get-monster",
+      "type": "handle",
+      "file": "src/main/ipc/data-handlers.ts",
+      "line": 267
+    },
+    {
+      "key": "DATA_GET_MONSTER_TOKEN",
+      "val": "data:get-monster-token",
+      "type": "handle",
+      "file": "src/main/ipc/data-handlers.ts",
+      "line": 294
+    },
+    {
+      "key": "DATA_SET_MONSTER_DEFAULT",
+      "val": "data:set-monster-default",
+      "type": "handle",
+      "file": "src/main/ipc/data-handlers.ts",
+      "line": 300
+    },
+    {
+      "key": "DATA_LIST_ITEMS",
+      "val": "data:list-items",
+      "type": "handle",
+      "file": "src/main/ipc/data-handlers.ts",
+      "line": 336
+    },
+    {
+      "key": "DATA_GET_ITEM",
+      "val": "data:get-item",
+      "type": "handle",
+      "file": "src/main/ipc/data-handlers.ts",
+      "line": 356
+    },
+    {
+      "key": "DATA_LIST_SPELLS",
+      "val": "data:list-spells",
+      "type": "handle",
+      "file": "src/main/ipc/data-handlers.ts",
+      "line": 364
+    },
+    {
+      "key": "DATA_GET_SPELL",
+      "val": "data:get-spell",
+      "type": "handle",
+      "file": "src/main/ipc/data-handlers.ts",
+      "line": 384
+    },
+    {
+      "key": "WIKI_UPSERT_USER_ENTRY",
+      "val": "wiki:upsert-user-entry",
+      "type": "handle",
+      "file": "src/main/ipc/data-handlers.ts",
+      "line": 398
+    },
+    {
+      "key": "WIKI_DELETE_USER_ENTRY",
+      "val": "wiki:delete-user-entry",
+      "type": "handle",
+      "file": "src/main/ipc/data-handlers.ts",
+      "line": 444
+    },
+    {
+      "key": "CONFIRM_DIALOG",
+      "val": "app:confirm-dialog",
+      "type": "handle",
+      "file": "src/main/ipc/dialog-handlers.ts",
+      "line": 88
+    },
+    {
+      "key": "DELETE_MAP_CONFIRM",
+      "val": "app:delete-map-confirm",
+      "type": "handle",
+      "file": "src/main/ipc/dialog-handlers.ts",
+      "line": 106
+    },
+    {
+      "key": "DELETE_TOKEN_CONFIRM",
+      "val": "app:delete-token-confirm",
+      "type": "handle",
+      "file": "src/main/ipc/dialog-handlers.ts",
+      "line": 124
+    },
+    {
+      "key": "DRAWINGS_LIST_BY_MAP",
+      "val": "drawings:list-by-map",
+      "type": "handle",
+      "file": "src/main/ipc/drawing-handlers.ts",
+      "line": 130
+    },
+    {
+      "key": "DRAWINGS_LIST_SYNCED_BY_MAP",
+      "val": "drawings:list-synced-by-map",
+      "type": "handle",
+      "file": "src/main/ipc/drawing-handlers.ts",
+      "line": 138
+    },
+    {
+      "key": "DRAWINGS_CREATE",
+      "val": "drawings:create",
+      "type": "handle",
+      "file": "src/main/ipc/drawing-handlers.ts",
+      "line": 146
+    },
+    {
+      "key": "DRAWINGS_DELETE",
+      "val": "drawings:delete",
+      "type": "handle",
+      "file": "src/main/ipc/drawing-handlers.ts",
+      "line": 166
+    },
+    {
+      "key": "DRAWINGS_DELETE_BY_MAP",
+      "val": "drawings:delete-by-map",
+      "type": "handle",
+      "file": "src/main/ipc/drawing-handlers.ts",
+      "line": 171
+    },
+    {
+      "key": "ENCOUNTERS_RENAME",
+      "val": "encounters:rename",
+      "type": "handle",
+      "file": "src/main/ipc/encounter-handlers.ts",
+      "line": 93
+    },
+    {
+      "key": "ENCOUNTERS_DELETE",
+      "val": "encounters:delete",
+      "type": "handle",
+      "file": "src/main/ipc/encounter-handlers.ts",
+      "line": 99
+    },
+    {
+      "key": "DUPLICATE_CAMPAIGN",
+      "val": "app:duplicate-campaign",
+      "type": "handle",
+      "file": "src/main/ipc/export-import.ts",
+      "line": 74
+    },
+    {
+      "key": "EXPORT_CAMPAIGN",
+      "val": "app:export-campaign",
+      "type": "handle",
+      "file": "src/main/ipc/export-import.ts",
+      "line": 95
+    },
+    {
+      "key": "QUICK_BACKUP",
+      "val": "app:quick-backup",
+      "type": "handle",
+      "file": "src/main/ipc/export-import.ts",
+      "line": 116
+    },
+    {
+      "key": "IMPORT_CAMPAIGN",
+      "val": "app:import-campaign",
+      "type": "handle",
+      "file": "src/main/ipc/export-import.ts",
+      "line": 144
+    },
+    {
+      "key": "FOG_GET",
+      "val": "fog:get",
+      "type": "handle",
+      "file": "src/main/ipc/fog-handlers.ts",
+      "line": 23
+    },
+    {
+      "key": "GM_PINS_LIST_BY_MAP",
+      "val": "gm-pins:list-by-map",
+      "type": "handle",
+      "file": "src/main/ipc/gm-pin-handlers.ts",
+      "line": 72
+    },
+    {
+      "key": "GM_PINS_DELETE",
+      "val": "gm-pins:delete",
+      "type": "handle",
+      "file": "src/main/ipc/gm-pin-handlers.ts",
+      "line": 110
+    },
+    {
+      "key": "HANDOUTS_DELETE",
+      "val": "handouts:delete",
+      "type": "handle",
+      "file": "src/main/ipc/handout-handlers.ts",
+      "line": 93
+    },
+    {
+      "key": "INITIATIVE_LIST_BY_MAP",
+      "val": "initiative:list-by-map",
+      "type": "handle",
+      "file": "src/main/ipc/initiative-handlers.ts",
+      "line": 92
+    },
+    {
+      "key": "INITIATIVE_DELETE",
+      "val": "initiative:delete",
+      "type": "handle",
+      "file": "src/main/ipc/initiative-handlers.ts",
+      "line": 155
+    },
+    {
+      "key": "INITIATIVE_DELETE_BY_MAP",
+      "val": "initiative:delete-by-map",
+      "type": "handle",
+      "file": "src/main/ipc/initiative-handlers.ts",
+      "line": 160
+    },
+    {
+      "key": "MAPS_LIST",
+      "val": "maps:list",
+      "type": "handle",
+      "file": "src/main/ipc/map-handlers.ts",
+      "line": 136
+    },
+    {
+      "key": "MAPS_COUNT",
+      "val": "maps:count",
+      "type": "handle",
+      "file": "src/main/ipc/map-handlers.ts",
+      "line": 207
+    },
+    {
+      "key": "MAPS_RENAME",
+      "val": "maps:rename",
+      "type": "handle",
+      "file": "src/main/ipc/map-handlers.ts",
+      "line": 244
+    },
+    {
+      "key": "MAPS_DELETE",
+      "val": "maps:delete",
+      "type": "handle",
+      "file": "src/main/ipc/map-handlers.ts",
+      "line": 250
+    },
+    {
+      "key": "MAPS_SET_ROTATION",
+      "val": "maps:set-rotation",
+      "type": "handle",
+      "file": "src/main/ipc/map-handlers.ts",
+      "line": 347
+    },
+    {
+      "key": "NOTES_DELETE",
+      "val": "notes:delete",
+      "type": "handle",
+      "file": "src/main/ipc/note-handlers.ts",
+      "line": 181
+    },
+    {
+      "key": "PLAYER_FULL_SYNC",
+      "val": "player:full-sync",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 82
+    },
+    {
+      "key": "PLAYER_REQUEST_SYNC",
+      "val": "player:request-sync",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 88
+    },
+    {
+      "key": "PLAYER_MAP_UPDATE",
+      "val": "player:map-update",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 95
+    },
+    {
+      "key": "PLAYER_FOG_DELTA",
+      "val": "player:fog-delta",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 101
+    },
+    {
+      "key": "PLAYER_FOG_RESET",
+      "val": "player:fog-reset",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 107
+    },
+    {
+      "key": "PLAYER_TOKEN_UPDATE",
+      "val": "player:token-update",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 113
+    },
+    {
+      "key": "PLAYER_TOKEN_DELTA",
+      "val": "player:token-delta",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 121
+    },
+    {
+      "key": "PLAYER_BLACKOUT",
+      "val": "player:blackout",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 127
+    },
+    {
+      "key": "PLAYER_ATMOSPHERE",
+      "val": "player:atmosphere",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 133
+    },
+    {
+      "key": "PLAYER_POINTER",
+      "val": "player:pointer",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 139
+    },
+    {
+      "key": "PLAYER_VIEWPORT",
+      "val": "player:viewport",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 146
+    },
+    {
+      "key": "PLAYER_HANDOUT",
+      "val": "player:handout",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 152
+    },
+    {
+      "key": "PLAYER_OVERLAY",
+      "val": "player:overlay",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 158
+    },
+    {
+      "key": "PLAYER_INITIATIVE",
+      "val": "player:initiative",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 164
+    },
+    {
+      "key": "PLAYER_WEATHER",
+      "val": "player:weather",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 170
+    },
+    {
+      "key": "PLAYER_MEASURE",
+      "val": "player:measure",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 176
+    },
+    {
+      "key": "PLAYER_DRAWING",
+      "val": "player:drawing",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 182
+    },
+    {
+      "key": "PLAYER_WALLS",
+      "val": "player:walls",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 188
+    },
+    {
+      "key": "PLAYER_WINDOW_SIZE",
+      "val": "player:window-size",
+      "type": "on",
+      "file": "src/main/ipc/player-bridge.ts",
+      "line": 197
+    },
+    {
+      "key": "ROOMS_LIST_BY_MAP",
+      "val": "rooms:list-by-map",
+      "type": "handle",
+      "file": "src/main/ipc/room-handlers.ts",
+      "line": 122
+    },
+    {
+      "key": "ROOMS_RESTORE",
+      "val": "rooms:restore",
+      "type": "handle",
+      "file": "src/main/ipc/room-handlers.ts",
+      "line": 147
+    },
+    {
+      "key": "ROOMS_DELETE",
+      "val": "rooms:delete",
+      "type": "handle",
+      "file": "src/main/ipc/room-handlers.ts",
+      "line": 188
+    },
+    {
+      "key": "SESSIONS_START",
+      "val": "sessions:start",
+      "type": "handle",
+      "file": "src/main/ipc/session-handlers.ts",
+      "line": 20
+    },
+    {
+      "key": "SESSIONS_END_OPEN",
+      "val": "sessions:end-open",
+      "type": "handle",
+      "file": "src/main/ipc/session-handlers.ts",
+      "line": 25
+    },
+    {
+      "key": "TOKENS_LIST_BY_MAP",
+      "val": "tokens:list-by-map",
+      "type": "handle",
+      "file": "src/main/ipc/token-handlers.ts",
+      "line": 206
+    },
+    {
+      "key": "TOKENS_DELETE",
+      "val": "tokens:delete",
+      "type": "handle",
+      "file": "src/main/ipc/token-handlers.ts",
+      "line": 280
+    },
+    {
+      "key": "TOKENS_DELETE_MANY",
+      "val": "tokens:delete-many",
+      "type": "handle",
+      "file": "src/main/ipc/token-handlers.ts",
+      "line": 289
+    },
+    {
+      "key": "TOKEN_TEMPLATES_LIST",
+      "val": "token-templates:list",
+      "type": "handle",
+      "file": "src/main/ipc/token-template-handlers.ts",
+      "line": 132
+    },
+    {
+      "key": "TOKEN_TEMPLATES_LIST_USER_NAMES",
+      "val": "token-templates:list-user-names",
+      "type": "handle",
+      "file": "src/main/ipc/token-template-handlers.ts",
+      "line": 137
+    },
+    {
+      "key": "TOKEN_TEMPLATES_DELETE",
+      "val": "token-templates:delete",
+      "type": "handle",
+      "file": "src/main/ipc/token-template-handlers.ts",
+      "line": 182
+    },
+    {
+      "key": "WALLS_LIST_BY_MAP",
+      "val": "walls:list-by-map",
+      "type": "handle",
+      "file": "src/main/ipc/wall-handlers.ts",
+      "line": 67
+    },
+    {
+      "key": "WALLS_RESTORE",
+      "val": "walls:restore",
+      "type": "handle",
+      "file": "src/main/ipc/wall-handlers.ts",
+      "line": 108
+    },
+    {
+      "key": "WALLS_DELETE",
+      "val": "walls:delete",
+      "type": "handle",
+      "file": "src/main/ipc/wall-handlers.ts",
+      "line": 153
+    }
+  ],
+  "preload": [
+    {
+      "key": "GET_MONITORS",
+      "val": "app:get-monitors",
+      "method": "invoke",
+      "line": 58
+    },
+    {
+      "key": "SET_PLAYER_MONITOR",
+      "val": "app:set-player-monitor",
+      "method": "invoke",
+      "line": 60
+    },
+    {
+      "key": "OPEN_PLAYER_WINDOW",
+      "val": "app:open-player-window",
+      "method": "invoke",
+      "line": 61
+    },
+    {
+      "key": "CLOSE_PLAYER_WINDOW",
+      "val": "app:close-player-window",
+      "method": "invoke",
+      "line": 62
+    },
+    {
+      "key": "GET_DEFAULT_USER_DATA_FOLDER",
+      "val": "app:get-default-user-data-folder",
+      "method": "invoke",
+      "line": 63
+    },
+    {
+      "key": "CHOOSE_FOLDER",
+      "val": "app:choose-folder",
+      "method": "invoke",
+      "line": 64
+    },
+    {
+      "key": "SET_USER_DATA_FOLDER",
+      "val": "app:set-user-data-folder",
+      "method": "invoke",
+      "line": 65
+    },
+    {
+      "key": "OPEN_CONTENT_FOLDER",
+      "val": "app:open-content-folder",
+      "method": "invoke",
+      "line": 66
+    },
+    {
+      "key": "GET_IMAGE_AS_BASE64",
+      "val": "app:get-image-as-base64",
+      "method": "invoke",
+      "line": 67
+    },
+    {
+      "key": "GET_USER_DATA_PATH",
+      "val": "app:get-user-data-path",
+      "method": "invoke",
+      "line": 68
+    },
+    {
+      "key": "RESCAN_CONTENT_FOLDER",
+      "val": "app:rescan-content-folder",
+      "method": "invoke",
+      "line": 69
+    },
+    {
+      "key": "SHOW_CONTEXT_MENU",
+      "val": "app:show-context-menu",
+      "method": "invoke",
+      "line": 71
+    },
+    {
+      "key": "DELETE_MAP_CONFIRM",
+      "val": "app:delete-map-confirm",
+      "method": "invoke",
+      "line": 72
+    },
+    {
+      "key": "DELETE_TOKEN_CONFIRM",
+      "val": "app:delete-token-confirm",
+      "method": "invoke",
+      "line": 73
+    },
+    {
+      "key": "CONFIRM_DIALOG",
+      "val": "app:confirm-dialog",
+      "method": "invoke",
+      "line": 75
+    },
+    {
+      "key": "IMPORT_FILE",
+      "val": "app:import-file",
+      "method": "invoke",
+      "line": 79
+    },
+    {
+      "key": "IMPORT_PDF",
+      "val": "app:import-pdf",
+      "method": "invoke",
+      "line": 81
+    },
+    {
+      "key": "SAVE_ASSET_IMAGE",
+      "val": "app:save-asset-image",
+      "method": "invoke",
+      "line": 83
+    },
+    {
+      "key": "SAVE_PORTRAIT",
+      "val": "app:save-portrait",
+      "method": "invoke",
+      "line": 85
+    },
+    {
+      "key": "DELETE_PORTRAIT",
+      "val": "app:delete-portrait",
+      "method": "invoke",
+      "line": 87
+    },
+    {
+      "key": "ASSET_CLEANUP",
+      "val": "app:asset-cleanup",
+      "method": "invoke",
+      "line": 89
+    },
+    {
+      "key": "EXPORT_CAMPAIGN",
+      "val": "app:export-campaign",
+      "method": "invoke",
+      "line": 91
+    },
+    {
+      "key": "IMPORT_CAMPAIGN",
+      "val": "app:import-campaign",
+      "method": "invoke",
+      "line": 92
+    },
+    {
+      "key": "DUPLICATE_CAMPAIGN",
+      "val": "app:duplicate-campaign",
+      "method": "invoke",
+      "line": 94
+    },
+    {
+      "key": "QUICK_BACKUP",
+      "val": "app:quick-backup",
+      "method": "invoke",
+      "line": 96
+    },
+    {
+      "key": "EXPORT_TO_FILE",
+      "val": "app:export-to-file",
+      "method": "invoke",
+      "line": 104
+    },
+    {
+      "key": "IMPORT_FROM_FILE",
+      "val": "app:import-from-file",
+      "method": "invoke",
+      "line": 110
+    },
+    {
+      "key": "SAVE_NOW",
+      "val": "app:save-now",
+      "method": "invoke",
+      "line": 111
+    },
+    {
+      "key": "PLAYER_MAP_UPDATE",
+      "val": "player:map-update",
+      "method": "send",
+      "line": 115
+    },
+    {
+      "key": "PLAYER_FOG_DELTA",
+      "val": "player:fog-delta",
+      "method": "send",
+      "line": 117
+    },
+    {
+      "key": "PLAYER_FOG_RESET",
+      "val": "player:fog-reset",
+      "method": "send",
+      "line": 119
+    },
+    {
+      "key": "PLAYER_TOKEN_UPDATE",
+      "val": "player:token-update",
+      "method": "send",
+      "line": 121
+    },
+    {
+      "key": "PLAYER_TOKEN_DELTA",
+      "val": "player:token-delta",
+      "method": "send",
+      "line": 123
+    },
+    {
+      "key": "PLAYER_BLACKOUT",
+      "val": "player:blackout",
+      "method": "send",
+      "line": 125
+    },
+    {
+      "key": "PLAYER_ATMOSPHERE",
+      "val": "player:atmosphere",
+      "method": "send",
+      "line": 127
+    },
+    {
+      "key": "PLAYER_FULL_SYNC",
+      "val": "player:full-sync",
+      "method": "send",
+      "line": 129
+    },
+    {
+      "key": "PLAYER_POINTER",
+      "val": "player:pointer",
+      "method": "send",
+      "line": 131
+    },
+    {
+      "key": "PLAYER_VIEWPORT",
+      "val": "player:viewport",
+      "method": "send",
+      "line": 133
+    },
+    {
+      "key": "PLAYER_HANDOUT",
+      "val": "player:handout",
+      "method": "send",
+      "line": 135
+    },
+    {
+      "key": "PLAYER_OVERLAY",
+      "val": "player:overlay",
+      "method": "send",
+      "line": 137
+    },
+    {
+      "key": "PLAYER_INITIATIVE",
+      "val": "player:initiative",
+      "method": "send",
+      "line": 139
+    },
+    {
+      "key": "PLAYER_WEATHER",
+      "val": "player:weather",
+      "method": "send",
+      "line": 141
+    },
+    {
+      "key": "PLAYER_MEASURE",
+      "val": "player:measure",
+      "method": "send",
+      "line": 143
+    },
+    {
+      "key": "PLAYER_DRAWING",
+      "val": "player:drawing",
+      "method": "send",
+      "line": 145
+    },
+    {
+      "key": "PLAYER_WALLS",
+      "val": "player:walls",
+      "method": "send",
+      "line": 147
+    },
+    {
+      "key": "CAMPAIGNS_LIST",
+      "val": "campaigns:list",
+      "method": "invoke",
+      "line": 152
+    },
+    {
+      "key": "CAMPAIGNS_GET",
+      "val": "campaigns:get",
+      "method": "invoke",
+      "line": 154
+    },
+    {
+      "key": "CAMPAIGNS_COUNT",
+      "val": "campaigns:count",
+      "method": "invoke",
+      "line": 156
+    },
+    {
+      "key": "CAMPAIGNS_CREATE",
+      "val": "campaigns:create",
+      "method": "invoke",
+      "line": 158
+    },
+    {
+      "key": "CAMPAIGNS_RENAME",
+      "val": "campaigns:rename",
+      "method": "invoke",
+      "line": 160
+    },
+    {
+      "key": "CAMPAIGNS_DELETE",
+      "val": "campaigns:delete",
+      "method": "invoke",
+      "line": 162
+    },
+    {
+      "key": "CAMPAIGNS_SET_COVER",
+      "val": "campaigns:set-cover",
+      "method": "invoke",
+      "line": 164
+    },
+    {
+      "key": "CAMPAIGNS_TOUCH_LAST_OPENED",
+      "val": "campaigns:touch-last-opened",
+      "method": "invoke",
+      "line": 166
+    },
+    {
+      "key": "MAPS_LIST",
+      "val": "maps:list",
+      "method": "invoke",
+      "line": 172
+    },
+    {
+      "key": "MAPS_LIST_FOR_STATS",
+      "val": "maps:list-for-stats",
+      "method": "invoke",
+      "line": 174
+    },
+    {
+      "key": "MAPS_LIST_RECENT",
+      "val": "maps:list-recent",
+      "method": "invoke",
+      "line": 176
+    },
+    {
+      "key": "MAPS_COUNT",
+      "val": "maps:count",
+      "method": "invoke",
+      "line": 178
+    },
+    {
+      "key": "MAPS_CREATE",
+      "val": "maps:create",
+      "method": "invoke",
+      "line": 180
+    },
+    {
+      "key": "MAPS_RENAME",
+      "val": "maps:rename",
+      "method": "invoke",
+      "line": 182
+    },
+    {
+      "key": "MAPS_DELETE",
+      "val": "maps:delete",
+      "method": "invoke",
+      "line": 184
+    },
+    {
+      "key": "MAPS_SWAP_ORDER",
+      "val": "maps:swap-order",
+      "method": "invoke",
+      "line": 186
+    },
+    {
+      "key": "MAPS_SET_GRID",
+      "val": "maps:set-grid",
+      "method": "invoke",
+      "line": 191
+    },
+    {
+      "key": "MAPS_PATCH_GRID_DISPLAY",
+      "val": "maps:patch-grid-display",
+      "method": "invoke",
+      "line": 196
+    },
+    {
+      "key": "MAPS_SET_ROTATION",
+      "val": "maps:set-rotation",
+      "method": "invoke",
+      "line": 198
+    },
+    {
+      "key": "MAPS_SET_ROTATION_PLAYER",
+      "val": "maps:set-rotation-player",
+      "method": "invoke",
+      "line": 200
+    },
+    {
+      "key": "MAPS_SET_CAMERA",
+      "val": "maps:set-camera",
+      "method": "invoke",
+      "line": 205
+    },
+    {
+      "key": "MAPS_SET_AMBIENT_TRACK",
+      "val": "maps:set-ambient-track",
+      "method": "invoke",
+      "line": 207
+    },
+    {
+      "key": "MAPS_SET_CHANNEL_VOLUME",
+      "val": "maps:set-channel-volume",
+      "method": "invoke",
+      "line": 209
+    },
+    {
+      "key": "TOKENS_LIST_BY_MAP",
+      "val": "tokens:list-by-map",
+      "method": "invoke",
+      "line": 215
+    },
+    {
+      "key": "TOKENS_CREATE",
+      "val": "tokens:create",
+      "method": "invoke",
+      "line": 217
+    },
+    {
+      "key": "TOKENS_RESTORE",
+      "val": "tokens:restore",
+      "method": "invoke",
+      "line": 219
+    },
+    {
+      "key": "TOKENS_RESTORE_MANY",
+      "val": "tokens:restore-many",
+      "method": "invoke",
+      "line": 221
+    },
+    {
+      "key": "TOKENS_UPDATE",
+      "val": "tokens:update",
+      "method": "invoke",
+      "line": 223
+    },
+    {
+      "key": "TOKENS_UPDATE_MANY",
+      "val": "tokens:update-many",
+      "method": "invoke",
+      "line": 225
+    },
+    {
+      "key": "TOKENS_DELETE",
+      "val": "tokens:delete",
+      "method": "invoke",
+      "line": 227
+    },
+    {
+      "key": "TOKENS_DELETE_MANY",
+      "val": "tokens:delete-many",
+      "method": "invoke",
+      "line": 229
+    },
+    {
+      "key": "INITIATIVE_LIST_BY_MAP",
+      "val": "initiative:list-by-map",
+      "method": "invoke",
+      "line": 235
+    },
+    {
+      "key": "INITIATIVE_CREATE",
+      "val": "initiative:create",
+      "method": "invoke",
+      "line": 237
+    },
+    {
+      "key": "INITIATIVE_UPDATE",
+      "val": "initiative:update",
+      "method": "invoke",
+      "line": 239
+    },
+    {
+      "key": "INITIATIVE_UPDATE_MANY",
+      "val": "initiative:update-many",
+      "method": "invoke",
+      "line": 241
+    },
+    {
+      "key": "INITIATIVE_DELETE",
+      "val": "initiative:delete",
+      "method": "invoke",
+      "line": 243
+    },
+    {
+      "key": "INITIATIVE_DELETE_BY_MAP",
+      "val": "initiative:delete-by-map",
+      "method": "invoke",
+      "line": 245
+    },
+    {
+      "key": "WALLS_LIST_BY_MAP",
+      "val": "walls:list-by-map",
+      "method": "invoke",
+      "line": 251
+    },
+    {
+      "key": "WALLS_CREATE",
+      "val": "walls:create",
+      "method": "invoke",
+      "line": 261
+    },
+    {
+      "key": "WALLS_RESTORE",
+      "val": "walls:restore",
+      "method": "invoke",
+      "line": 263
+    },
+    {
+      "key": "WALLS_UPDATE",
+      "val": "walls:update",
+      "method": "invoke",
+      "line": 265
+    },
+    {
+      "key": "WALLS_DELETE",
+      "val": "walls:delete",
+      "method": "invoke",
+      "line": 267
+    },
+    {
+      "key": "ROOMS_LIST_BY_MAP",
+      "val": "rooms:list-by-map",
+      "method": "invoke",
+      "line": 273
+    },
+    {
+      "key": "ROOMS_CREATE",
+      "val": "rooms:create",
+      "method": "invoke",
+      "line": 275
+    },
+    {
+      "key": "ROOMS_RESTORE",
+      "val": "rooms:restore",
+      "method": "invoke",
+      "line": 277
+    },
+    {
+      "key": "ROOMS_UPDATE",
+      "val": "rooms:update",
+      "method": "invoke",
+      "line": 279
+    },
+    {
+      "key": "ROOMS_DELETE",
+      "val": "rooms:delete",
+      "method": "invoke",
+      "line": 281
+    },
+    {
+      "key": "DRAWINGS_LIST_BY_MAP",
+      "val": "drawings:list-by-map",
+      "method": "invoke",
+      "line": 287
+    },
+    {
+      "key": "DRAWINGS_LIST_SYNCED_BY_MAP",
+      "val": "drawings:list-synced-by-map",
+      "method": "invoke",
+      "line": 289
+    },
+    {
+      "key": "DRAWINGS_CREATE",
+      "val": "drawings:create",
+      "method": "invoke",
+      "line": 299
+    },
+    {
+      "key": "DRAWINGS_CREATE_MANY",
+      "val": "drawings:create-many",
+      "method": "invoke",
+      "line": 309
+    },
+    {
+      "key": "DRAWINGS_DELETE",
+      "val": "drawings:delete",
+      "method": "invoke",
+      "line": 311
+    },
+    {
+      "key": "DRAWINGS_DELETE_BY_MAP",
+      "val": "drawings:delete-by-map",
+      "method": "invoke",
+      "line": 313
+    },
+    {
+      "key": "ENCOUNTERS_LIST_BY_CAMPAIGN",
+      "val": "encounters:list-by-campaign",
+      "method": "invoke",
+      "line": 319
+    },
+    {
+      "key": "ENCOUNTERS_CREATE",
+      "val": "encounters:create",
+      "method": "invoke",
+      "line": 326
+    },
+    {
+      "key": "ENCOUNTERS_RENAME",
+      "val": "encounters:rename",
+      "method": "invoke",
+      "line": 328
+    },
+    {
+      "key": "ENCOUNTERS_DELETE",
+      "val": "encounters:delete",
+      "method": "invoke",
+      "line": 330
+    },
+    {
+      "key": "FOG_GET",
+      "val": "fog:get",
+      "method": "invoke",
+      "line": 336
+    },
+    {
+      "key": "FOG_SAVE",
+      "val": "fog:save",
+      "method": "invoke",
+      "line": 338
+    },
+    {
+      "key": "GM_PINS_LIST_BY_MAP",
+      "val": "gm-pins:list-by-map",
+      "method": "invoke",
+      "line": 344
+    },
+    {
+      "key": "GM_PINS_CREATE",
+      "val": "gm-pins:create",
+      "method": "invoke",
+      "line": 346
+    },
+    {
+      "key": "GM_PINS_UPDATE",
+      "val": "gm-pins:update",
+      "method": "invoke",
+      "line": 348
+    },
+    {
+      "key": "GM_PINS_DELETE",
+      "val": "gm-pins:delete",
+      "method": "invoke",
+      "line": 350
+    },
+    {
+      "key": "NOTES_LIST_CATEGORY_BY_CAMPAIGN",
+      "val": "notes:list-category-by-campaign",
+      "method": "invoke",
+      "line": 356
+    },
+    {
+      "key": "NOTES_LIST_CATEGORY_BY_MAP",
+      "val": "notes:list-category-by-map",
+      "method": "invoke",
+      "line": 358
+    },
+    {
+      "key": "NOTES_CREATE",
+      "val": "notes:create",
+      "method": "invoke",
+      "line": 360
+    },
+    {
+      "key": "NOTES_UPDATE",
+      "val": "notes:update",
+      "method": "invoke",
+      "line": 362
+    },
+    {
+      "key": "NOTES_DELETE",
+      "val": "notes:delete",
+      "method": "invoke",
+      "line": 364
+    },
+    {
+      "key": "HANDOUTS_LIST_BY_CAMPAIGN",
+      "val": "handouts:list-by-campaign",
+      "method": "invoke",
+      "line": 370
+    },
+    {
+      "key": "HANDOUTS_COUNT_BY_CAMPAIGNS",
+      "val": "handouts:count-by-campaigns",
+      "method": "invoke",
+      "line": 372
+    },
+    {
+      "key": "HANDOUTS_CREATE",
+      "val": "handouts:create",
+      "method": "invoke",
+      "line": 379
+    },
+    {
+      "key": "HANDOUTS_DELETE",
+      "val": "handouts:delete",
+      "method": "invoke",
+      "line": 381
+    },
+    {
+      "key": "CHARACTER_SHEETS_LIST_BY_CAMPAIGN",
+      "val": "character-sheets:list-by-campaign",
+      "method": "invoke",
+      "line": 387
+    },
+    {
+      "key": "CHARACTER_SHEETS_LIST_PARTY_BY_CAMPAIGNS",
+      "val": "character-sheets:list-party-by-campaigns",
+      "method": "invoke",
+      "line": 389
+    },
+    {
+      "key": "CHARACTER_SHEETS_COUNT",
+      "val": "character-sheets:count",
+      "method": "invoke",
+      "line": 391
+    },
+    {
+      "key": "CHARACTER_SHEETS_CREATE",
+      "val": "character-sheets:create",
+      "method": "invoke",
+      "line": 393
+    },
+    {
+      "key": "CHARACTER_SHEETS_UPDATE",
+      "val": "character-sheets:update",
+      "method": "invoke",
+      "line": 395
+    },
+    {
+      "key": "CHARACTER_SHEETS_DELETE",
+      "val": "character-sheets:delete",
+      "method": "invoke",
+      "line": 397
+    },
+    {
+      "key": "ASSETS_LIST_FOR_CAMPAIGN",
+      "val": "assets:list-for-campaign",
+      "method": "invoke",
+      "line": 403
+    },
+    {
+      "key": "SESSIONS_START",
+      "val": "sessions:start",
+      "method": "invoke",
+      "line": 409
+    },
+    {
+      "key": "SESSIONS_END_OPEN",
+      "val": "sessions:end-open",
+      "method": "invoke",
+      "line": 411
+    },
+    {
+      "key": "SESSIONS_STATS_BY_CAMPAIGNS",
+      "val": "sessions:stats-by-campaigns",
+      "method": "invoke",
+      "line": 413
+    },
+    {
+      "key": "TOKEN_TEMPLATES_LIST",
+      "val": "token-templates:list",
+      "method": "invoke",
+      "line": 419
+    },
+    {
+      "key": "TOKEN_TEMPLATES_LIST_USER_NAMES",
+      "val": "token-templates:list-user-names",
+      "method": "invoke",
+      "line": 421
+    },
+    {
+      "key": "TOKEN_TEMPLATES_CREATE",
+      "val": "token-templates:create",
+      "method": "invoke",
+      "line": 423
+    },
+    {
+      "key": "TOKEN_TEMPLATES_UPDATE",
+      "val": "token-templates:update",
+      "method": "invoke",
+      "line": 425
+    },
+    {
+      "key": "TOKEN_TEMPLATES_DELETE",
+      "val": "token-templates:delete",
+      "method": "invoke",
+      "line": 427
+    },
+    {
+      "key": "AUDIO_BOARDS_LIST_BY_CAMPAIGN",
+      "val": "audio-boards:list-by-campaign",
+      "method": "invoke",
+      "line": 433
+    },
+    {
+      "key": "AUDIO_BOARDS_CREATE",
+      "val": "audio-boards:create",
+      "method": "invoke",
+      "line": 435
+    },
+    {
+      "key": "AUDIO_BOARDS_RENAME",
+      "val": "audio-boards:rename",
+      "method": "invoke",
+      "line": 437
+    },
+    {
+      "key": "AUDIO_BOARDS_DELETE",
+      "val": "audio-boards:delete",
+      "method": "invoke",
+      "line": 439
+    },
+    {
+      "key": "AUDIO_BOARDS_UPSERT_SLOT",
+      "val": "audio-boards:upsert-slot",
+      "method": "invoke",
+      "line": 441
+    },
+    {
+      "key": "AUDIO_BOARDS_DELETE_SLOT",
+      "val": "audio-boards:delete-slot",
+      "method": "invoke",
+      "line": 443
+    },
+    {
+      "key": "IMPORT_SFX_ICON",
+      "val": "app:import-sfx-icon",
+      "method": "invoke",
+      "line": 448
+    },
+    {
+      "key": "TRACKS_LIST_BY_CAMPAIGN",
+      "val": "tracks:list-by-campaign",
+      "method": "invoke",
+      "line": 456
+    },
+    {
+      "key": "TRACKS_CREATE",
+      "val": "tracks:create",
+      "method": "invoke",
+      "line": 463
+    },
+    {
+      "key": "TRACKS_UPDATE",
+      "val": "tracks:update",
+      "method": "invoke",
+      "line": 468
+    },
+    {
+      "key": "TRACKS_DELETE",
+      "val": "tracks:delete",
+      "method": "invoke",
+      "line": 470
+    },
+    {
+      "key": "TRACKS_TOGGLE_ASSIGNMENT",
+      "val": "tracks:toggle-assignment",
+      "method": "invoke",
+      "line": 472
+    },
+    {
+      "key": "IMPORT_AUDIO_FILES",
+      "val": "app:import-audio-files",
+      "method": "invoke",
+      "line": 477
+    },
+    {
+      "key": "IMPORT_AUDIO_FOLDER",
+      "val": "app:import-audio-folder",
+      "method": "invoke",
+      "line": 486
+    },
+    {
+      "key": "DM_PLAYER_WINDOW_CLOSED",
+      "val": "dm:player-window-closed",
+      "method": "on",
+      "line": 492
+    },
+    {
+      "key": "DM_REQUEST_FULL_SYNC",
+      "val": "dm:request-full-sync",
+      "method": "on",
+      "line": 499
+    },
+    {
+      "key": "DM_PLAYER_WINDOW_SIZE",
+      "val": "dm:player-window-size",
+      "method": "on",
+      "line": 509
+    },
+    {
+      "key": "COMPENDIUM_LIST",
+      "val": "compendium:list",
+      "method": "invoke",
+      "line": 515
+    },
+    {
+      "key": "COMPENDIUM_READ",
+      "val": "compendium:read",
+      "method": "invoke",
+      "line": 517
+    },
+    {
+      "key": "COMPENDIUM_IMPORT",
+      "val": "compendium:import",
+      "method": "invoke",
+      "line": 519
+    },
+    {
+      "key": "COMPENDIUM_OPEN_FOLDER",
+      "val": "compendium:open-folder",
+      "method": "invoke",
+      "line": 521
+    },
+    {
+      "key": "TOKEN_VARIANTS_LIST",
+      "val": "token-variants:list",
+      "method": "invoke",
+      "line": 525
+    },
+    {
+      "key": "TOKEN_VARIANTS_IMPORT",
+      "val": "token-variants:import",
+      "method": "invoke",
+      "line": 529
+    },
+    {
+      "key": "TOKEN_VARIANTS_OPEN_FOLDER",
+      "val": "token-variants:open-folder",
+      "method": "invoke",
+      "line": 531
+    },
+    {
+      "key": "DATA_LIST_MONSTERS",
+      "val": "data:list-monsters",
+      "method": "invoke",
+      "line": 535
+    },
+    {
+      "key": "DATA_GET_MONSTER",
+      "val": "data:get-monster",
+      "method": "invoke",
+      "line": 541
+    },
+    {
+      "key": "DATA_GET_MONSTER_TOKEN",
+      "val": "data:get-monster-token",
+      "method": "invoke",
+      "line": 543
+    },
+    {
+      "key": "DATA_SET_MONSTER_DEFAULT",
+      "val": "data:set-monster-default",
+      "method": "invoke",
+      "line": 547
+    },
+    {
+      "key": "DATA_LIST_ITEMS",
+      "val": "data:list-items",
+      "method": "invoke",
+      "line": 549
+    },
+    {
+      "key": "DATA_GET_ITEM",
+      "val": "data:get-item",
+      "method": "invoke",
+      "line": 551
+    },
+    {
+      "key": "DATA_LIST_SPELLS",
+      "val": "data:list-spells",
+      "method": "invoke",
+      "line": 553
+    },
+    {
+      "key": "DATA_GET_SPELL",
+      "val": "data:get-spell",
+      "method": "invoke",
+      "line": 555
+    },
+    {
+      "key": "WIKI_UPSERT_USER_ENTRY",
+      "val": "wiki:upsert-user-entry",
+      "method": "invoke",
+      "line": 559
+    },
+    {
+      "key": "WIKI_DELETE_USER_ENTRY",
+      "val": "wiki:delete-user-entry",
+      "method": "invoke",
+      "line": 561
+    },
+    {
+      "key": "SET_MENU_LANGUAGE",
+      "val": "app:set-menu-language",
+      "method": "invoke",
+      "line": 565
+    },
+    {
+      "key": "MENU_ACTION",
+      "val": "menu:action",
+      "method": "on",
+      "line": 568
+    },
+    {
+      "key": "GET_IMAGE_AS_BASE64",
+      "val": "app:get-image-as-base64",
+      "method": "invoke",
+      "line": 576
+    },
+    {
+      "key": "DATA_GET_MONSTER_TOKEN",
+      "val": "data:get-monster-token",
+      "method": "invoke",
+      "line": 581
+    },
+    {
+      "key": "PLAYER_FULL_SYNC",
+      "val": "player:full-sync",
+      "method": "on",
+      "line": 585
+    },
+    {
+      "key": "PLAYER_MAP_UPDATE",
+      "val": "player:map-update",
+      "method": "on",
+      "line": 590
+    },
+    {
+      "key": "PLAYER_FOG_DELTA",
+      "val": "player:fog-delta",
+      "method": "on",
+      "line": 595
+    },
+    {
+      "key": "PLAYER_FOG_RESET",
+      "val": "player:fog-reset",
+      "method": "on",
+      "line": 600
+    },
+    {
+      "key": "PLAYER_TOKEN_UPDATE",
+      "val": "player:token-update",
+      "method": "on",
+      "line": 605
+    },
+    {
+      "key": "PLAYER_TOKEN_DELTA",
+      "val": "player:token-delta",
+      "method": "on",
+      "line": 610
+    },
+    {
+      "key": "PLAYER_BLACKOUT",
+      "val": "player:blackout",
+      "method": "on",
+      "line": 615
+    },
+    {
+      "key": "PLAYER_ATMOSPHERE",
+      "val": "player:atmosphere",
+      "method": "on",
+      "line": 620
+    },
+    {
+      "key": "PLAYER_REQUEST_SYNC",
+      "val": "player:request-sync",
+      "method": "send",
+      "line": 623
+    },
+    {
+      "key": "CLOSE_PLAYER_WINDOW",
+      "val": "app:close-player-window",
+      "method": "invoke",
+      "line": 624
+    },
+    {
+      "key": "PLAYER_POINTER",
+      "val": "player:pointer",
+      "method": "on",
+      "line": 627
+    },
+    {
+      "key": "PLAYER_VIEWPORT",
+      "val": "player:viewport",
+      "method": "on",
+      "line": 632
+    },
+    {
+      "key": "PLAYER_HANDOUT",
+      "val": "player:handout",
+      "method": "on",
+      "line": 637
+    },
+    {
+      "key": "PLAYER_OVERLAY",
+      "val": "player:overlay",
+      "method": "on",
+      "line": 642
+    },
+    {
+      "key": "PLAYER_INITIATIVE",
+      "val": "player:initiative",
+      "method": "on",
+      "line": 647
+    },
+    {
+      "key": "PLAYER_WEATHER",
+      "val": "player:weather",
+      "method": "on",
+      "line": 652
+    },
+    {
+      "key": "PLAYER_MEASURE",
+      "val": "player:measure",
+      "method": "on",
+      "line": 657
+    },
+    {
+      "key": "PLAYER_DRAWING",
+      "val": "player:drawing",
+      "method": "on",
+      "line": 662
+    },
+    {
+      "key": "PLAYER_WALLS",
+      "val": "player:walls",
+      "method": "on",
+      "line": 667
+    },
+    {
+      "key": "PLAYER_WINDOW_SIZE",
+      "val": "player:window-size",
+      "method": "send",
+      "line": 674
+    }
+  ]
+}
