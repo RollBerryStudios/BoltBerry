@@ -70,6 +70,44 @@ export function DrawingLayer({ stageRef, mapId, gridSize }: DrawingLayerProps) {
     if (drawingClearTick > 0) setDrawings([])
   }, [drawingClearTick])
 
+  // Bridge for the shared context menu (Phase 8 §E.Drawing). Reaches
+  // here only when the user has the erase tool active (DrawingLayer
+  // is non-listening for select/other tools so token-drag etc. work).
+  // Phase 5 will add JS-side hit-testing so drawings are reachable
+  // from any tool — for now the menu is registered but only fires
+  // from erase mode, matching the "select-to-erase" mental model.
+  useEffect(() => {
+    const onUpdate = async (ev: Event) => {
+      const detail = (ev as CustomEvent).detail as { id: number; patch: Record<string, unknown> }
+      // Drawings have no IPC update yet; we mutate local state for
+      // synced toggle and let the next save handle persistence.
+      setDrawings((prev) => prev.map((d) => (d.id === detail.id ? { ...d, ...(detail.patch as object) } as typeof d : d)))
+    }
+    const onDelete = (ev: Event) => {
+      const { id } = (ev as CustomEvent).detail as { id: number }
+      void eraseDrawing(id)
+    }
+    const onEditText = (ev: Event) => {
+      const { id } = (ev as CustomEvent).detail as { id: number }
+      const target = drawings.find((d) => d.id === id)
+      if (!target || target.type !== 'text') return
+      // Prompt for new text — keeps the diff small; a full inline
+      // editor lives in Phase 5.
+      const next = window.prompt('Text bearbeiten', target.text ?? '')
+      if (next == null) return
+      setDrawings((prev) => prev.map((d) => (d.id === id ? { ...d, text: next } : d)))
+    }
+    window.addEventListener('drawing:update', onUpdate)
+    window.addEventListener('drawing:delete', onDelete)
+    window.addEventListener('drawing:edit-text', onEditText)
+    return () => {
+      window.removeEventListener('drawing:update', onUpdate)
+      window.removeEventListener('drawing:delete', onDelete)
+      window.removeEventListener('drawing:edit-text', onEditText)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [drawings])
+
   const isDrawingActive = DRAWING_TOOLS.has(activeTool)
   // The eraser also needs the Layer to listen so per-shape onClick
   // handlers reach Konva — otherwise selecting the eraser silently

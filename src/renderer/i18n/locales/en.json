@@ -20,6 +20,19 @@
     "pin": {
       "editLabel": "Edit label"
     },
+    "room": {
+      "visibility": "Visibility",
+      "visHidden": "Hidden",
+      "visDimmed": "Dimmed",
+      "visRevealed": "Revealed",
+      "revealFog": "Reveal fog inside room",
+      "coverFog": "Cover fog inside room"
+    },
+    "drawing": {
+      "editText": "Edit text",
+      "hideFromPlayers": "Hide from players",
+      "showToPlayers": "Show to players"
+    },
     "mapRow": {
       "moveUp": "Move up",
       "moveDown": "Move down"

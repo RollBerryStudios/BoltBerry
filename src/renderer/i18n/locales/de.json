@@ -20,6 +20,19 @@
     "pin": {
       "editLabel": "Beschriftung bearbeiten"
     },
+    "room": {
+      "visibility": "Sichtbarkeit",
+      "visHidden": "Versteckt",
+      "visDimmed": "Gedämpft",
+      "visRevealed": "Sichtbar",
+      "revealFog": "Nebel im Raum aufdecken",
+      "coverFog": "Nebel im Raum verdecken"
+    },
+    "drawing": {
+      "editText": "Text bearbeiten",
+      "hideFromPlayers": "Vor Spielern verbergen",
+      "showToPlayers": "Spielern zeigen"
+    },
     "mapRow": {
       "moveUp": "Nach oben",
       "moveDown": "Nach unten"

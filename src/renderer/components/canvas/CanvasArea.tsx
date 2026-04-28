@@ -39,6 +39,8 @@ import { useContextMenuEngine } from '../../contextMenu/useContextMenuEngine'
 import { registerCanvasMenu } from '../../contextMenu/canvasMenu'
 import { registerWallMenu } from '../../contextMenu/wallMenu'
 import { registerPinMenu } from '../../contextMenu/pinMenu'
+import { registerRoomMenu } from '../../contextMenu/roomMenu'
+import { registerDrawingMenu } from '../../contextMenu/drawingMenu'
 import { ContextMenu } from '../shared/ContextMenu'
 import { EmptyState } from '../EmptyState'
 import { showToast } from '../shared/Toast'
@@ -49,6 +51,23 @@ import { broadcastTokens } from '../../utils/tokenBroadcast'
 
 function broadcastTokensFromCanvas() {
   broadcastTokens(useTokenStore.getState().tokens)
+}
+
+/** Ray-cast point-in-polygon. Used by the context-menu engine to
+ *  hit-test rooms when their Konva layer is non-listening (which it
+ *  is whenever the room tool isn't active — see RoomLayer's listening
+ *  comment). Closes the polygon implicitly: the test connects the
+ *  last vertex back to the first. */
+function pointInPolygon(p: { x: number; y: number }, poly: Array<{ x: number; y: number }>): boolean {
+  let inside = false
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const xi = poly[i].x, yi = poly[i].y
+    const xj = poly[j].x, yj = poly[j].y
+    const intersect = ((yi > p.y) !== (yj > p.y)) &&
+      (p.x < ((xj - xi) * (p.y - yi)) / ((yj - yi) || Number.EPSILON) + xi)
+    if (intersect) inside = !inside
+  }
+  return inside
 }
 
 // Layer visibility definitions
@@ -173,6 +192,8 @@ export function CanvasArea() {
     registerCanvasMenu()
     registerWallMenu()
     registerPinMenu()
+    registerRoomMenu()
+    registerDrawingMenu()
   }, [])
   const handleContextMenu = useCallback(
     (e: Konva.KonvaEventObject<MouseEvent>) => {
@@ -202,8 +223,6 @@ export function CanvasArea() {
         const pinRoot = target.findAncestor('.pin-root', true)
         if (pinRoot) {
           const id = parseInt((pinRoot.id() ?? '').replace('pin-', ''), 10)
-          // GM pins live in GMPinLayer's local state; emit a
-          // request-event that GMPinLayer answers with the record.
           let pin: GMPinRecord | null = null
           window.dispatchEvent(
             new CustomEvent<{ id: number; resolve: (p: GMPinRecord | null) => void }>('pin:lookup', {
@@ -212,6 +231,23 @@ export function CanvasArea() {
           )
           if (!pin) return
           ctxEngine.open({ primary: { kind: 'pin', pin }, pos: mapPos, scenePos })
+          return
+        }
+      }
+
+      // Room hit-test runs on the JS side because RoomLayer is non-
+      // listening when the room tool is inactive (otherwise the room
+      // polygon's filled area would eat token-drag mousedowns). Rooms
+      // are big polygons; point-in-polygon is cheap even with a few
+      // dozen of them.
+      const mapId = useCampaignStore.getState().activeMapId
+      const rooms = useRoomStore.getState().rooms.filter((r) => r.mapId === mapId)
+      for (const room of rooms) {
+        let pts: Array<{ x: number; y: number }>
+        try { pts = JSON.parse(room.polygon) } catch { continue }
+        if (!Array.isArray(pts) || pts.length < 3) continue
+        if (pointInPolygon(mapPos, pts)) {
+          ctxEngine.open({ primary: { kind: 'room', room }, pos: mapPos, scenePos })
           return
         }
       }

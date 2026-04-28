@@ -131,6 +131,44 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
     }
   }, [isRoomTool])
 
+  // Bridge for the shared context menu (Phase 8 §E.Room). The engine
+  // emits these CustomEvents from items registered in roomMenu.ts;
+  // this layer keeps ownership of the IPC + selection wiring.
+  useEffect(() => {
+    const onUpdate = async (ev: Event) => {
+      const detail = (ev as CustomEvent).detail as { id: number; patch: Partial<typeof rooms[number]> }
+      updateRoom(detail.id, detail.patch)
+      try { await window.electronAPI?.rooms.update(detail.id, detail.patch as any) }
+      catch (err) { console.error('[RoomLayer] update failed:', err) }
+    }
+    const onDelete = async (ev: Event) => {
+      const { id } = (ev as CustomEvent).detail as { id: number }
+      const ok = await window.electronAPI?.confirmDialog(
+        'Raum löschen?',
+        'Der Raum wird entfernt. Tokens und Karten bleiben erhalten.',
+      )
+      if (!ok) return
+      removeRoom(id)
+      try { await window.electronAPI?.rooms.delete(id) }
+      catch (err) { console.error('[RoomLayer] delete failed:', err) }
+    }
+    const onRename = (ev: Event) => {
+      const { id } = (ev as CustomEvent).detail as { id: number }
+      // Selecting the room opens the sidebar's room editor where the
+      // user can rename it. Inline rename inside the canvas is a
+      // bigger UX change tracked in the proposal §E.Room.
+      setSelectedRoomId(id)
+    }
+    window.addEventListener('room:update', onUpdate)
+    window.addEventListener('room:delete', onDelete)
+    window.addEventListener('room:rename', onRename)
+    return () => {
+      window.removeEventListener('room:update', onUpdate)
+      window.removeEventListener('room:delete', onDelete)
+      window.removeEventListener('room:rename', onRename)
+    }
+  }, [updateRoom, removeRoom, setSelectedRoomId, rooms])
+
   const handleRoomClick = useCallback((roomId: number) => {
     setSelectedRoomId(roomId)
   }, [setSelectedRoomId])
@@ -172,7 +210,7 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
         const labelY = (pts.reduce((s, p) => s + p.y, 0) / pts.length) * scale + offsetY
 
         return (
-          <Group key={room.id} onClick={() => handleRoomClick(room.id)}>
+          <Group key={room.id} name="room-root" id={`room-${room.id}`} onClick={() => handleRoomClick(room.id)}>
             <Line
               points={screenPoints}
               closed
