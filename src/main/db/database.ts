@@ -66,6 +66,20 @@ export class SchemaTooNewError extends Error {
 }
 
 /**
+ * Thrown by `initDatabase()` when the on-startup PRAGMA integrity_check
+ * surfaces problems and the user picks "open backup folder" or "quit"
+ * in the resulting dialog (BB-026). The dialog is the user-facing
+ * surface; the caller in `main/index.ts` recognises this error and
+ * exits cleanly without double-firing a generic "Datenbankfehler" box.
+ */
+export class IntegrityCheckAbortError extends Error {
+  constructor(public action: 'open-backup' | 'quit') {
+    super(`Database integrity check failed; user chose to ${action}`)
+    this.name = 'IntegrityCheckAbortError'
+  }
+}
+
+/**
  * Snapshot the DB file before a migration runs, keeping the 3 most
  * recent backups in the same `data/` folder. The transaction around
  * the migration already rolls back on any SQL error — this guards
@@ -200,12 +214,10 @@ export function initDatabase(): Database.Database {
         })
         if (choice === 1) {
           shell.showItemInFolder(dbPath)
-          app.exit(0)
-          return
+          throw new IntegrityCheckAbortError('open-backup')
         }
         if (choice === 2) {
-          app.exit(0)
-          return
+          throw new IntegrityCheckAbortError('quit')
         }
         // choice === 0: continue anyway. The damaged DB stays open.
       }

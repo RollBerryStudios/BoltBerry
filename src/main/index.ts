@@ -2,7 +2,7 @@ import { app, BrowserWindow, dialog, net, protocol, session } from 'electron'
 import { pathToFileURL } from 'url'
 import { existsSync, realpathSync, lstatSync } from 'fs'
 import { resolve, join, sep } from 'path'
-import { initDatabase, closeDatabase, getCustomUserDataPath, seedSrdMonstersDeferred } from './db/database'
+import { initDatabase, closeDatabase, getCustomUserDataPath, seedSrdMonstersDeferred, IntegrityCheckAbortError } from './db/database'
 import { logger } from './logger'
 import { createDMWindow, getDMWindow } from './windows'
 import { registerPlayerBridgeHandlers } from './ipc/player-bridge'
@@ -156,6 +156,13 @@ app.whenReady().then(() => {
   try {
     initDatabase()
   } catch (err: any) {
+    if (err instanceof IntegrityCheckAbortError) {
+      // BB-026: the integrity-check dialog already gave the user the
+      // message and the choice; just exit cleanly without a second box.
+      logger.warn(`[Main] Integrity-check abort: ${err.action}`)
+      app.exit(0)
+      return
+    }
     logger.error('Database initialization failed', err)
     dialog.showErrorBox(
       'BoltBerry — Datenbankfehler',
