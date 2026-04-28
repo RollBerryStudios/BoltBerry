@@ -7,7 +7,6 @@ import { useSessionStore } from '../../stores/sessionStore'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useInitiativeStore } from '../../stores/initiativeStore'
 import { AssetBrowser } from './panels/AssetBrowser'
-import { SettingsPanel } from './panels/SettingsPanel'
 import { useImageUrl } from '../../hooks/useImageUrl'
 import { detectGrid } from '../../utils/gridDetect'
 import { detectMargins } from '../../utils/autoCrop'
@@ -28,7 +27,10 @@ export function LeftSidebar() {
     addMap,
   } = useCampaignStore()
 
-  const [tab, setTab] = useState<'maps' | 'assets' | 'settings'>('maps')
+  // Settings used to be a third tab here; it now lives only in the
+  // GlobalSettingsModal (reachable via the title-bar gear icon), so the
+  // tab strip is just maps/assets.
+  const [tab, setTab] = useState<'maps' | 'assets'>('maps')
   const [newMapId, setNewMapId] = useState<number | null>(null)
 
   // Current map settings
@@ -255,7 +257,6 @@ export function LeftSidebar() {
         {([
           ['maps', '🗺️', t('sidebar.left.tabMaps')],
           ['assets', '🗄', t('sidebar.left.tabAssets')],
-          ['settings', '⚙️', t('settings.title')]
         ] as const).map(([id, icon, label]) => (
           <button
             key={id}
@@ -269,10 +270,9 @@ export function LeftSidebar() {
       </div>
 
       {/* Content area: fills remaining sidebar height; AssetBrowser scrolls internally,
-          maps/settings scroll via this container */}
+          maps scroll via this container */}
       <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
         {tab === 'assets' && <AssetBrowser />}
-        {tab === 'settings' && <SettingsPanel />}
         {tab === 'maps' && <>
       {/* ”€”€ Map list ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */}
       <div className="sidebar-section">

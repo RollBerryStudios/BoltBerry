@@ -893,11 +893,6 @@
     "close": "Schließen",
     "sections": "Bereiche",
     "open": "App-Einstellungen öffnen",
-    "storage": "Speicher",
-    "appearance": "Darstellung",
-    "profile": "DM-Profil",
-    "file": "Datei",
-    "about": "Über",
     "errors": {
       "openFolder": "Ordner konnte nicht geöffnet werden",
       "changeFolder": "Datenordner konnte nicht geändert werden",

@@ -63,11 +63,15 @@ export function GlobalSettingsModal({ onClose, initialSection }: GlobalSettingsM
             overflowY: 'auto',
           }}
         >
-          <SectionTab id="storage" current={section} onSelect={setSection} icon="💾" label={t('globalSettings.storage')} />
-          <SectionTab id="appearance" current={section} onSelect={setSection} icon="🎨" label={t('globalSettings.appearance')} />
-          <SectionTab id="profile" current={section} onSelect={setSection} icon="👤" label={t('globalSettings.profile')} />
-          <SectionTab id="file" current={section} onSelect={setSection} icon="📁" label={t('globalSettings.file')} />
-          <SectionTab id="about" current={section} onSelect={setSection} icon="ℹ" label={t('globalSettings.about')} />
+          {/* Sidebar labels reuse each section's `.title` so we don't
+              maintain a parallel set of strings (and so we never re-
+              introduce the duplicate-key bug where a sidebar string and
+              a section object collide on the same JSON path). */}
+          <SectionTab id="storage" current={section} onSelect={setSection} icon="💾" label={t('globalSettings.storage.title')} />
+          <SectionTab id="appearance" current={section} onSelect={setSection} icon="🎨" label={t('globalSettings.appearance.title')} />
+          <SectionTab id="profile" current={section} onSelect={setSection} icon="👤" label={t('globalSettings.profile.title')} />
+          <SectionTab id="file" current={section} onSelect={setSection} icon="📁" label={t('globalSettings.fileSec.title')} />
+          <SectionTab id="about" current={section} onSelect={setSection} icon="ℹ" label={t('globalSettings.about.title')} />
         </nav>
 
         <div style={{ flex: 1, overflowY: 'auto', padding: 'var(--sp-5)' }}>

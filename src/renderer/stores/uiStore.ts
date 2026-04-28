@@ -273,7 +273,14 @@ export const useUIStore = create<UIState>((set) => ({
           setTab('initiative')
           break
         case 'player-preview':
-          updates.activeTool = 'pointer'
+          // Stay on `select` so drag still works and a normal click
+          // doesn't fire a player ping. The DM can still activate the
+          // pointer tool manually (`W`) when they want shift-free
+          // ping-on-click. Previously this auto-set 'pointer', which
+          // meant entering player-preview broke drag (drag is gated on
+          // activeTool==='select') and made every click broadcast a
+          // ping to the player window.
+          updates.activeTool = 'select'
           break
         case 'fog-edit':
           updates.activeTool = 'fog-brush'

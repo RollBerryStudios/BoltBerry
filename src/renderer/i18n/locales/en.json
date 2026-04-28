@@ -893,11 +893,6 @@
     "close": "Close",
     "sections": "Sections",
     "open": "Open app settings",
-    "storage": "Storage",
-    "appearance": "Appearance",
-    "profile": "DM profile",
-    "file": "File",
-    "about": "About",
     "errors": {
       "openFolder": "Could not open folder",
       "changeFolder": "Could not change data folder",

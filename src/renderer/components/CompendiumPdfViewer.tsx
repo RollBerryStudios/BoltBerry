@@ -580,13 +580,13 @@ function PdfToolbar({
           onClick={() => onSidebarMode(sidebarMode === 'thumbs' ? 'off' : 'thumbs')}
           title={t('compendium.toggleThumbs')}
         >
-          –¤
+          ▦
         </button>
       </div>
 
       <div className="bb-pdf-group">
         <button type="button" className="bb-pdf-btn" onClick={onPrev} disabled={pageNum <= 1} title={t('compendium.prevPage')}>
-          ◀‬
+          ◀
         </button>
         <form
           onSubmit={(e) => {
@@ -610,13 +610,13 @@ function PdfToolbar({
           <span className="bb-pdf-page-of mono">/ {numPages}</span>
         </form>
         <button type="button" className="bb-pdf-btn" onClick={onNext} disabled={pageNum >= numPages} title={t('compendium.nextPage')}>
-          ▼
+          ▶
         </button>
       </div>
 
       <div className="bb-pdf-group">
         <button type="button" className="bb-pdf-btn" onClick={onZoomOut} disabled={zoom <= 0.4} title={t('compendium.zoomOut')}>
-          ‒’
+          −
         </button>
         <button type="button" className="bb-pdf-btn bb-pdf-btn-text mono" onClick={onZoomReset} title={t('compendium.zoomReset')}>
           {Math.round(zoom * 100)}%
