@@ -10,6 +10,8 @@ import { invalidateImageCache } from '../../../hooks/useImage'
 import { invalidateImageUrlCache } from '../../../hooks/useImageUrl'
 import { EmptyState } from '../../EmptyState'
 import { NumberStepper } from '../../shared/NumberStepper'
+import { BestiaryPicker } from '../../bestiary/BestiaryPicker'
+import { spawnMonsterOnMap } from '../../bestiary/actions'
 import type { TokenRecord } from '@shared/ipc-types'
 
 const LIGHT_COLORS = [
@@ -19,17 +21,6 @@ const LIGHT_COLORS = [
   { id: 'green', hex: '#44ff88' },
 ]
 
-const TOKEN_TEMPLATES = [
-  { name: 'Goblin',   hp: 7,   ac: 15, size: 1, faction: 'enemy' as const },
-  { name: 'Ork',     hp: 15,  ac: 13, size: 1, faction: 'enemy' as const },
-  { name: 'Skelett', hp: 13,  ac: 13, size: 1, faction: 'enemy' as const },
-  { name: 'Zombie',   hp: 22,  ac: 8,  size: 1, faction: 'enemy' as const },
-  { name: 'Wolf',     hp: 11,  ac: 13, size: 1, faction: 'enemy' as const },
-  { name: 'Bandit',   hp: 11,  ac: 12, size: 1, faction: 'enemy' as const },
-  { name: 'Soldat',   hp: 16,  ac: 16, size: 1, faction: 'enemy' as const },
-  { name: 'Magier',   hp: 40,  ac: 12, size: 1, faction: 'enemy' as const },
-  { name: 'Drache',   hp: 200, ac: 19, size: 4, faction: 'enemy' as const },
-]
 
 
 const STATUS_EFFECTS = [
@@ -90,9 +81,11 @@ export function TokenPanel() {
   const { t } = useTranslation()
   const { tokens, addToken, updateToken, removeToken } = useTokenStore()
   const { selectedTokenId, setSelectedToken } = useUIStore()
-  const { activeMapId } = useCampaignStore()
+  const language = useUIStore((s) => s.language)
+  const { activeMapId, activeMaps } = useCampaignStore()
   const [filter, setFilter] = useState('')
   const [libraryPickerOpen, setLibraryPickerOpen] = useState(false)
+  const [bestiaryPickerOpen, setBestiaryPickerOpen] = useState(false)
   const filterLower = filter.trim().toLowerCase()
   // Filter reactively as the DM types. Matches on name only — faction/HP
   // etc. are visible right next to the name so a single-field substring
@@ -109,7 +102,6 @@ export function TokenPanel() {
   const [secStatus, setSecStatus]     = useState(true)
   const [secNotizen, setSecNotizen]   = useState(false)
   const [statusFilter, setStatusFilter] = useState('')
-  const [showTemplates, setShowTemplates] = useState(false)
   const templateRef = useRef<HTMLDivElement>(null)
 
   async function handleAddToken() {
@@ -132,33 +124,52 @@ export function TokenPanel() {
     }
   }
 
-  async function handleAddFromTemplate(template: typeof TOKEN_TEMPLATES[number] | null) {
+  // Empty-token shortcut for the "+ Leer" button. The DM picks an image,
+  // a token row is created with default stats; nothing is pulled from the
+  // bestiary. Used when the DM wants a blank token (e.g. a generic NPC).
+  async function handleAddBlankToken() {
     if (!activeMapId || !window.electronAPI) return
-    setShowTemplates(false)
     try {
       const asset = await window.electronAPI.importFile('token', activeMapId)
-      const name = template ? template.name : 'Token'
-      const hp = template ? template.hp : 0
-      const ac = template ? template.ac : null
-      const size = template ? template.size : 1
-      const faction = template ? template.faction : 'party'
       const token = await window.electronAPI.tokens.create({
         mapId: activeMapId,
-        name,
+        name: 'Token',
         imagePath: asset?.path ?? null,
         x: 100,
         y: 100,
-        size,
-        hpCurrent: hp,
-        hpMax: hp,
-        ac,
-        faction,
       })
       addToken(token)
       setSelectedToken(token.id)
       broadcastTokensFromPanel()
     } catch (err) {
-      console.error('[TokenPanel] handleAddFromTemplate failed:', err)
+      console.error('[TokenPanel] handleAddBlankToken failed:', err)
+    }
+  }
+
+  // Bestiarium-backed quick-create. The picker yields a monster slug; we
+  // fetch the full record (HP, AC, size, type) and hand it to the same
+  // spawnMonsterOnMap path the Wiki / encounter builder use, so the token
+  // gets the bundled artwork + correct stats automatically — no
+  // per-template hardcoding.
+  async function handleAddFromBestiary(slug: string) {
+    setBestiaryPickerOpen(false)
+    if (!activeMapId || !window.electronAPI) return
+    const map = activeMaps.find((m) => m.id === activeMapId)
+    if (!map) return
+    try {
+      const record = await window.electronAPI.getMonster(slug)
+      if (!record) return
+      await spawnMonsterOnMap({
+        monster: record,
+        tokenFile: record.userDefaultFile ?? null,
+        mapId: activeMapId,
+        cameraX: map.cameraX,
+        cameraY: map.cameraY,
+        language,
+      })
+      broadcastTokensFromPanel()
+    } catch (err) {
+      console.error('[TokenPanel] handleAddFromBestiary failed:', err)
     }
   }
 
@@ -261,41 +272,34 @@ export function TokenPanel() {
       </div>
       {/* Token list */}
       <div style={{ flex: 1, overflowY: 'auto' }}>
-        {/* ”€”€ Schnellerstellung (always visible) ”€”€ */}
+        {/* ”€”€ Schnellerstellung — bestiarium-backed picker + leeres Token ”€”€ */}
         <div ref={templateRef} style={{ padding: 'var(--sp-2) var(--sp-4)', borderBottom: '1px solid var(--border-subtle)' }}>
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 'var(--sp-1)' }}>
             {t('tokens.quickCreate')}
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-            {TOKEN_TEMPLATES.map((tmpl) => (
-              <button
-                key={tmpl.name}
-                disabled={!activeMapId}
-                title={tmpl.size > 1
-                  ? t('tokens.templateTooltipSize', { name: tmpl.name, hp: tmpl.hp, ac: tmpl.ac, size: tmpl.size })
-                  : t('tokens.templateTooltip', { name: tmpl.name, hp: tmpl.hp, ac: tmpl.ac })
-                }
-                onClick={() => handleAddFromTemplate(tmpl)}
-                style={{
-                  padding: '2px 8px',
-                  fontSize: 'var(--text-xs)',
-                  background: 'var(--bg-overlay)',
-                  border: '1px solid var(--border-subtle)',
-                  borderRadius: 99,
-                  color: 'var(--text-secondary)',
-                  cursor: activeMapId ? 'pointer' : 'not-allowed',
-                  whiteSpace: 'nowrap',
-                }}
-                onMouseEnter={(e) => { if (activeMapId) e.currentTarget.style.background = 'var(--bg-elevated)' }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--bg-overlay)' }}
-              >
-                {tmpl.name}
-              </button>
-            ))}
+            <button
+              disabled={!activeMapId}
+              title={t('tokens.fromBestiaryHint')}
+              onClick={() => setBestiaryPickerOpen(true)}
+              style={{
+                padding: '2px 10px',
+                fontSize: 'var(--text-xs)',
+                fontWeight: 600,
+                background: 'var(--accent-blue)',
+                border: '1px solid var(--accent-blue)',
+                borderRadius: 99,
+                color: '#fff',
+                cursor: activeMapId ? 'pointer' : 'not-allowed',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              📖 {t('tokens.fromBestiary')}
+            </button>
             <button
               disabled={!activeMapId}
               title={t('tokens.emptyTemplate')}
-              onClick={() => handleAddFromTemplate(null)}
+              onClick={handleAddBlankToken}
               style={{
                 padding: '2px 8px',
                 fontSize: 'var(--text-xs)',
@@ -714,6 +718,14 @@ export function TokenPanel() {
             addToken(token)
             broadcastTokensFromPanel()
           }}
+        />
+      )}
+
+      {bestiaryPickerOpen && activeMapId && (
+        <BestiaryPicker
+          kind="monster"
+          onPick={(picked) => { void handleAddFromBestiary(picked.slug) }}
+          onClose={() => setBestiaryPickerOpen(false)}
         />
       )}
     </div>

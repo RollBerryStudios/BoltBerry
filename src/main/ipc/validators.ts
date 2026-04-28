@@ -32,19 +32,30 @@ const PLAYER_ALLOWED_INVOKE_CHANNELS: ReadonlySet<string> = new Set([
   'data:get-monster-token',
 ])
 
-/** True when the event originates from the DM window's main frame. */
+/**
+ * True when the event originates from the DM window. Compares
+ * WebContents identity (`event.sender === dm.webContents`) — the
+ * canonical Electron pattern, mirroring `player-bridge.ts`'s isFromDM.
+ *
+ * Earlier this used WebFrameMain reference equality
+ * (`event.senderFrame === dm.webContents.mainFrame`), which is fragile:
+ * mainFrame can be replaced after HMR / DevTools attach / window reload,
+ * making the comparison fail intermittently. WebContents identity is
+ * stable across the window lifetime, so legitimate DM invokes always
+ * succeed.
+ */
 export function isDMFrame(event: IpcMainInvokeEvent): boolean {
   const dm = getDMWindow()
   if (!dm || dm.isDestroyed()) return false
-  // event.senderFrame can be null in rare teardown races; treat as untrusted.
-  return event.senderFrame === dm.webContents.mainFrame
+  return event.sender === dm.webContents
 }
 
-/** True when the event originates from the Player window's main frame. */
+/** True when the event originates from the Player window. Same rationale
+ *  as `isDMFrame`: compare WebContents identity, not WebFrameMain. */
 export function isPlayerFrame(event: IpcMainInvokeEvent): boolean {
   const player = getPlayerWindow()
   if (!player || player.isDestroyed()) return false
-  return event.senderFrame === player.webContents.mainFrame
+  return event.sender === player.webContents
 }
 
 /**
