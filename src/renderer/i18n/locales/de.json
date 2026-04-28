@@ -4,6 +4,26 @@
     "version": "BoltBerry v{{version}}"
   },
   "contextMenu": {
+    "common": {
+      "delete": "Löschen",
+      "rename": "Umbenennen",
+      "duplicate": "Duplizieren"
+    },
+    "wall": {
+      "type": "Typ ändern",
+      "typeWall": "Wand",
+      "typeDoor": "Tür",
+      "typeWindow": "Fenster",
+      "openDoor": "Tür öffnen",
+      "closeDoor": "Tür schließen"
+    },
+    "pin": {
+      "editLabel": "Beschriftung bearbeiten"
+    },
+    "mapRow": {
+      "moveUp": "Nach oben",
+      "moveDown": "Nach unten"
+    },
     "canvas": {
       "fitToScreen": "An Bildschirm anpassen",
       "rotate": "Karte drehen",

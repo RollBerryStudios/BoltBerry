@@ -37,12 +37,14 @@ import { useUndoStore, nextCommandId } from '../../stores/undoStore'
 import { useImageUrl } from '../../hooks/useImageUrl'
 import { useContextMenuEngine } from '../../contextMenu/useContextMenuEngine'
 import { registerCanvasMenu } from '../../contextMenu/canvasMenu'
+import { registerWallMenu } from '../../contextMenu/wallMenu'
+import { registerPinMenu } from '../../contextMenu/pinMenu'
 import { ContextMenu } from '../shared/ContextMenu'
 import { EmptyState } from '../EmptyState'
 import { showToast } from '../shared/Toast'
 import { spawnMonsterOnMap } from '../bestiary/actions'
 import type Konva from 'konva'
-import type { MapRecord, PlayerFullState } from '@shared/ipc-types'
+import type { MapRecord, PlayerFullState, GMPinRecord } from '@shared/ipc-types'
 import { broadcastTokens } from '../../utils/tokenBroadcast'
 
 function broadcastTokensFromCanvas() {
@@ -160,35 +162,60 @@ export function CanvasArea() {
   const showPlayerEye = useUIStore((s) => s.showPlayerEye)
   const activeWeather = useUIStore((s) => s.activeWeather)
   const workMode = useSessionStore((s) => s.workMode)
-  // Context menu engine. Phase 1 only handles the canvas (map) target;
-  // entity layers (token / wall / pin / room / drawing) keep their
-  // existing handlers and migrate in subsequent phases.
+  // Single context-menu dispatcher. The Stage's onContextMenu walks
+  // the click target's Konva ancestry, identifies the entity kind via
+  // `name="*-root"` markers, looks up the entity record in its store,
+  // and opens the shared menu engine. This is the unification step
+  // from Phase 8 §D.1 — one event path, one render primitive, one
+  // place to extend with new kinds.
   const ctxEngine = useContextMenuEngine()
-  useEffect(() => { registerCanvasMenu() }, [])
+  useEffect(() => {
+    registerCanvasMenu()
+    registerWallMenu()
+    registerPinMenu()
+  }, [])
   const handleContextMenu = useCallback(
     (e: Konva.KonvaEventObject<MouseEvent>) => {
       e.evt.preventDefault()
-      // If the click hit an entity Group (tagged in TokenLayer /
-      // GMPinLayer / WallLayer with name="*-root"), defer to that
-      // entity's own handler — it'll set cancelBubble or open its
-      // own menu. The bail check mirrors the previous useCanvasContextMenu.
       const target = e.target
-      if (target && typeof target.findAncestor === 'function') {
-        if (
-          target.findAncestor('.token-root', true) ||
-          target.findAncestor('.pin-root', true) ||
-          target.findAncestor('.wall-root', true)
-        ) {
-          return
-        }
-      }
-      const stage = e.target.getStage()
+      const stage = target.getStage()
       const pos = stage?.getPointerPosition() ?? { x: 0, y: 0 }
       const mapPos = useMapTransformStore.getState().screenToMap(pos.x, pos.y)
       const stageRect = stage?.container().getBoundingClientRect()
       const scenePos = stageRect
         ? { x: stageRect.left + pos.x, y: stageRect.top + pos.y }
         : { x: e.evt.clientX, y: e.evt.clientY }
+
+      // Prefer the deepest entity. Token uses its own onContextMenu
+      // (rich inline editor, kept in TokenLayer); the engine just
+      // mounts the shared menu primitive for the other kinds.
+      if (target && typeof target.findAncestor === 'function') {
+        if (target.findAncestor('.token-root', true)) return
+        const wallRoot = target.findAncestor('.wall-root', true)
+        if (wallRoot) {
+          const id = parseInt((wallRoot.id() ?? '').replace('wall-', ''), 10)
+          const wall = useWallStore.getState().walls.find((w) => w.id === id)
+          if (!wall) return
+          ctxEngine.open({ primary: { kind: 'wall', wall }, pos: mapPos, scenePos })
+          return
+        }
+        const pinRoot = target.findAncestor('.pin-root', true)
+        if (pinRoot) {
+          const id = parseInt((pinRoot.id() ?? '').replace('pin-', ''), 10)
+          // GM pins live in GMPinLayer's local state; emit a
+          // request-event that GMPinLayer answers with the record.
+          let pin: GMPinRecord | null = null
+          window.dispatchEvent(
+            new CustomEvent<{ id: number; resolve: (p: GMPinRecord | null) => void }>('pin:lookup', {
+              detail: { id, resolve: (p) => { pin = p } },
+            }),
+          )
+          if (!pin) return
+          ctxEngine.open({ primary: { kind: 'pin', pin }, pos: mapPos, scenePos })
+          return
+        }
+      }
+
       const map = activeMap
       if (!map) return
       ctxEngine.open({

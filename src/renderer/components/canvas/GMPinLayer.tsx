@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, RefObject } from 'react'
 import { Layer, Group, Text, Circle, Rect } from 'react-konva'
 import { Html } from 'react-konva-utils'
 import Konva from 'konva'
+import type { GMPinRecord } from '@shared/ipc-types'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useUndoStore, nextCommandId } from '../../stores/undoStore'
 import { showToast } from '../shared/Toast'
@@ -112,13 +113,47 @@ export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
     setEditingPinId(null)
   }
 
+  // Bridge for the shared context menu. The engine emits these
+  // CustomEvents from items registered in pinMenu.ts; this layer keeps
+  // ownership of the IPC + undo-stack wiring. `pin:lookup` is the
+  // synchronous read-side: CanvasArea fires it when it needs the
+  // GMPinRecord behind a pin-root Group, since pins live in this
+  // layer's local state rather than a global store.
+  useEffect(() => {
+    const onDelete = (ev: Event) => {
+      const { id } = (ev as CustomEvent).detail as { id: number }
+      handleDeletePin(id)
+    }
+    const onEditLabel = (ev: Event) => {
+      const { id } = (ev as CustomEvent).detail as { id: number }
+      const pin = pins.find((p) => p.id === id)
+      if (!pin) return
+      setEditingPinId(id)
+      setEditingLabel(pin.label)
+    }
+    const onLookup = (ev: Event) => {
+      const detail = (ev as CustomEvent).detail as { id: number; resolve: (p: GMPinRecord | null) => void }
+      const pin = pins.find((p) => p.id === detail.id) ?? null
+      detail.resolve(pin)
+    }
+    window.addEventListener('pin:delete', onDelete)
+    window.addEventListener('pin:edit-label', onEditLabel)
+    window.addEventListener('pin:lookup', onLookup)
+    return () => {
+      window.removeEventListener('pin:delete', onDelete)
+      window.removeEventListener('pin:edit-label', onEditLabel)
+      window.removeEventListener('pin:lookup', onLookup)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pins])
+
   return (
-    <Layer onContextMenu={(e) => e.evt.preventDefault()}>
+    <Layer>
       {pins.map((pin) => {
         const sx = pin.x * scale + offsetX
         const sy = pin.y * scale + offsetY
         return (
-          <Group key={pin.id} name="pin-root" x={sx} y={sy} draggable
+          <Group key={pin.id} name="pin-root" id={`pin-${pin.id}`} x={sx} y={sy} draggable
             onDragEnd={async (e) => {
               const mx = (e.target.x() - offsetX) / scale
               const my = (e.target.y() - offsetY) / scale
@@ -127,9 +162,6 @@ export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
               try {
                 await window.electronAPI?.gmPins.update(pin.id, { x: mx, y: my })
               } catch (err) {
-                // Surface failure — same rationale as TokenLayer: the
-                // visual move makes the drag look successful even when
-                // the DB write fails, then the pin snaps back on reload.
                 console.error('[GMPinLayer] drag failed:', err)
                 showToast(
                   `Pin-Position konnte nicht gespeichert werden: ${err instanceof Error ? err.message : String(err)}`,
@@ -140,20 +172,6 @@ export function GMPinLayer({ stageRef, mapId, gridSize }: GMPinLayerProps) {
             }}
             onClick={() => setSelectedPinId(pin.id)}
             onTap={() => setSelectedPinId(pin.id)}
-            onContextMenu={async (e) => {
-              e.evt.preventDefault()
-              e.cancelBubble = true
-              if (!window.electronAPI) return
-              const action = await window.electronAPI.showContextMenu([
-                { label: 'Pin löschen', action: 'delete', danger: true },
-                { label: 'Label bearbeiten', action: 'edit' },
-              ])
-              if (action === 'delete') handleDeletePin(pin.id)
-              else if (action === 'edit') {
-                setEditingPinId(pin.id)
-                setEditingLabel(pin.label)
-              }
-            }}
             onDblClick={() => {
               setEditingPinId(pin.id)
               setEditingLabel(pin.label)

@@ -1,7 +1,5 @@
 import { useRef, useState, useEffect, useMemo, RefObject } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Layer, Line, Circle, Group, Rect, Text } from 'react-konva'
-import { Html } from 'react-konva-utils'
 import Konva from 'konva'
 import { useWallStore } from '../../stores/wallStore'
 import { useUIStore } from '../../stores/uiStore'
@@ -24,8 +22,7 @@ const WALL_WIDTH = 4
 const SELECTED_COLOR = '#2F6BFF'
 
 export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
-  const { t } = useTranslation()
-  const { walls, addWall, removeWall, updateWall, toggleDoor } = useWallStore()
+  const { walls, addWall, removeWall, updateWall } = useWallStore()
   const activeTool = useUIStore((s) => s.activeTool)
   const scale = useMapTransformStore((s) => s.scale)
   const offsetX = useMapTransformStore((s) => s.offsetX)
@@ -37,7 +34,6 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
   const [selectedWallId, setSelectedWallId] = useState<number | null>(null)
   const [drawingStart, setDrawingStart] = useState<{ x: number; y: number } | null>(null)
   const [previewEnd, setPreviewEnd] = useState<{ x: number; y: number } | null>(null)
-  const [contextMenu, setContextMenu] = useState<{ x: number; y: number; wallId: number } | null>(null)
 
   const isActive = activeTool === 'wall-draw' || activeTool === 'wall-door'
   const wallTypeForNew: WallRecord['wallType'] = activeTool === 'wall-door' ? 'door' : 'wall'
@@ -46,7 +42,6 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
     setSelectedWallId(null)
     setDrawingStart(null)
     setPreviewEnd(null)
-    setContextMenu(null)
   }, [activeTool])
 
   function handleMouseDown(e: Konva.KonvaEventObject<MouseEvent>) {
@@ -104,77 +99,57 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
     e.evt.preventDefault()
     if (!isActive) return
     setSelectedWallId(wallId)
-
-    if (e.evt.button === 2) {
-      const stage = stageRef.current
-      if (!stage) return
-      const containerPos = stage.container().getBoundingClientRect()
-      setContextMenu({
-        x: e.evt.clientX - containerPos.left,
-        y: e.evt.clientY - containerPos.top,
-        wallId,
-      })
-    }
+    // Right-click no longer opens an inline menu here — the canvas-
+    // level context-menu engine reads `name="wall-root"` + `id="wall-<n>"`
+    // off the parent Group on the Stage onContextMenu and opens the
+    // shared menu. We just track selection so the engine knows which
+    // wall the user targeted.
   }
 
-  function closeContextMenu() {
-    setContextMenu(null)
-  }
-
-  async function handleDelete() {
-    if (selectedWallId == null) return
-    closeContextMenu()
-    // Wall deletion is cheap to click (right-click → Löschen) but hard to
-    // recover from — walls are what drive LOS, so a mistaken delete can
-    // silently reveal hidden rooms to the players. Confirm before acting.
-    const ok = await window.electronAPI?.confirmDialog(
-      'Wand löschen?',
-      'Diese Wand wird entfernt. Sichtbarkeit kann sich für Spieler ändern.',
-    )
-      if (!ok) { setSelectedWallId(null); return }
-      const wallToDelete = walls.find((w) => w.id === selectedWallId)
-      removeWall(selectedWallId)
+  // Bridge between the context-menu items (which dispatch
+  // `wall:update` / `wall:delete` CustomEvents) and this layer's IPC
+  // mutations + LOS / undo wiring.
+  useEffect(() => {
+    const onUpdate = async (ev: Event) => {
+      const detail = (ev as CustomEvent).detail as { id: number; patch: Partial<WallRecord> }
+      const wall = walls.find((w) => w.id === detail.id)
+      if (!wall) return
+      // Switching to/away from "wall" type also resets door state to a
+      // sane default — same logic as the old handleToggleType.
+      const patch: Partial<WallRecord> = { ...detail.patch }
+      if (patch.wallType && patch.wallType === 'wall') patch.doorState = 'closed' as any
+      updateWall(detail.id, patch)
       try {
-        await window.electronAPI?.walls.delete(selectedWallId)
+        await window.electronAPI?.walls.update(detail.id, patch as any)
+      } catch (err) {
+        console.error('[WallLayer] update failed:', err)
+      }
+    }
+    const onDelete = async (ev: Event) => {
+      const detail = (ev as CustomEvent).detail as { id: number }
+      const wallToDelete = walls.find((w) => w.id === detail.id)
+      const ok = await window.electronAPI?.confirmDialog(
+        'Wand löschen?',
+        'Diese Wand wird entfernt. Sichtbarkeit kann sich für Spieler ändern.',
+      )
+      if (!ok) return
+      removeWall(detail.id)
+      try {
+        await window.electronAPI?.walls.delete(detail.id)
         if (wallToDelete) {
           await pushAction({ type: 'wall.delete', payload: { wall: wallToDelete } })
         }
       } catch (err) {
         console.error('[WallLayer] delete failed:', err)
       }
-    setSelectedWallId(null)
-  }
-
-  async function handleToggleType(type: WallRecord['wallType']) {
-    if (selectedWallId == null) return
-    const wall = walls.find((w) => w.id === selectedWallId)
-    if (!wall) return
-    closeContextMenu()
-    const newState: string = type === 'wall' ? 'closed' : (wall.doorState ?? 'closed')
-    updateWall(selectedWallId, { wallType: type, doorState: newState as any })
-    try {
-      await window.electronAPI?.walls.update(selectedWallId, {
-        wallType: type,
-        doorState: newState as any,
-      })
-    } catch (err) {
-      console.error('[WallLayer] update failed:', err)
     }
-  }
-
-  async function handleToggleDoorState() {
-    if (selectedWallId == null) return
-    const wall = walls.find((w) => w.id === selectedWallId)
-    if (!wall) return
-    closeContextMenu()
-    toggleDoor(selectedWallId)
-    const newState = wall.doorState === 'open' ? 'closed' : 'open'
-    try {
-      await window.electronAPI?.walls.update(selectedWallId, { doorState: newState })
-    } catch (err) {
-      console.error('[WallLayer] toggle door failed:', err)
+    window.addEventListener('wall:update', onUpdate)
+    window.addEventListener('wall:delete', onDelete)
+    return () => {
+      window.removeEventListener('wall:update', onUpdate)
+      window.removeEventListener('wall:delete', onDelete)
     }
-  }
+  }, [walls, updateWall, removeWall, pushAction])
 
   function getWallColor(wall: WallRecord): string {
     if (wall.id === selectedWallId) return SELECTED_COLOR
@@ -216,7 +191,7 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
           const midY = (p1.y + p2.y) / 2
 
           return (
-            <Group key={wall.id} name="wall-root">
+            <Group key={wall.id} name="wall-root" id={`wall-${wall.id}`}>
               <Line
                 points={[p1.x, p1.y, p2.x, p2.y]}
                 stroke={color}
@@ -225,7 +200,6 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
                 hitStrokeWidth={12}
                 listening={isActive}
                 onClick={(e) => handleWallClick(wall.id, e)}
-                onContextMenu={(e) => handleWallClick(wall.id, e)}
                 onTap={(e) => handleWallClick(wall.id, e as any)}
               />
               {(wall.wallType === 'door' || wall.wallType === 'window') && (
@@ -264,76 +238,6 @@ export function WallLayer({ mapId, stageRef, gridSize }: WallLayerProps) {
           />
         )}
       </Layer>
-
-      {/* Context menu for walls */}
-      {contextMenu && isActive && (() => {
-        const wall = walls.find((w) => w.id === contextMenu.wallId)
-        if (!wall) return null
-        return (
-          <Html divProps={{ style: { position: 'absolute', top: 0, left: 0, pointerEvents: 'none' } }}>
-            <div
-              style={{
-                position: 'fixed',
-                left: contextMenu.x,
-                top: contextMenu.y,
-                background: 'var(--bg-elevated)',
-                border: '1px solid var(--border)',
-                borderRadius: 'var(--radius)',
-                padding: '4px 0',
-                minWidth: 140,
-                boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
-                zIndex: 9999,
-                pointerEvents: 'all',
-              }}
-              onMouseLeave={closeContextMenu}
-            >
-              {(wall.wallType === 'door' || wall.wallType === 'window') && (
-                <button
-                  style={{ display: 'block', width: '100%', padding: '6px 12px', background: 'none', border: 'none', textAlign: 'left', fontSize: 'var(--text-sm)', color: 'var(--text-primary)', cursor: 'pointer' }}
-                  onClick={handleToggleDoorState}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
-                >
-                  {wall.doorState === 'open' ? t('wallMenu.closeDoor') : t('wallMenu.openDoor')}
-                </button>
-              )}
-              <button
-                style={{ display: 'block', width: '100%', padding: '6px 12px', background: 'none', border: 'none', textAlign: 'left', fontSize: 'var(--text-sm)', color: 'var(--text-primary)', cursor: 'pointer' }}
-                onClick={() => handleToggleType('door')}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
-              >
-                {t('wallMenu.asDoor')}
-              </button>
-              <button
-                style={{ display: 'block', width: '100%', padding: '6px 12px', background: 'none', border: 'none', textAlign: 'left', fontSize: 'var(--text-sm)', color: 'var(--text-primary)', cursor: 'pointer' }}
-                onClick={() => handleToggleType('window')}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
-              >
-                {t('wallMenu.asWindow')}
-              </button>
-              <button
-                style={{ display: 'block', width: '100%', padding: '6px 12px', background: 'none', border: 'none', textAlign: 'left', fontSize: 'var(--text-sm)', color: 'var(--text-primary)', cursor: 'pointer' }}
-                onClick={() => handleToggleType('wall')}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
-              >
-                {t('wallMenu.asWall')}
-              </button>
-              <div style={{ height: 1, background: 'var(--border-subtle)', margin: '4px 0' }} />
-              <button
-                style={{ display: 'block', width: '100%', padding: '6px 12px', background: 'none', border: 'none', textAlign: 'left', fontSize: 'var(--text-sm)', color: 'var(--danger)', cursor: 'pointer' }}
-                onClick={handleDelete}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
-              >
-                {t('wallMenu.delete')}
-              </button>
-            </div>
-          </Html>
-        )
-      })()}
     </>
   )
 }
