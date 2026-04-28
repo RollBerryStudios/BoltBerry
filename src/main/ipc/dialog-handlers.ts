@@ -1,82 +1,16 @@
-import { ipcMain, dialog, Menu, BrowserWindow } from 'electron'
+import { ipcMain, dialog, BrowserWindow } from 'electron'
 import { IPC } from '../../shared/ipc-types'
 
 /**
- * Native confirm dialogs + right-click context menu. Extracted from
- * the former `app-handlers.ts` god file per audit AP-1.
- *
- * Context menus are especially sensitive: the renderer sends a list of
- * menu items with `action` strings, and the main process shells out to
- * Electron's native menu. An unbounded allowlist would give a
- * compromised renderer a way to trigger privileged actions by
- * fabricating an `action`. We restrict the set to the exact verbs
- * actually used by the renderer today.
+ * Native confirm dialogs. The right-click context menu used to live
+ * here too (`SHOW_CONTEXT_MENU` + `Menu.popup`) but the Phase 8
+ * rollout moved every in-app menu to a shared in-renderer primitive
+ * (<ContextMenu>) — the IPC roundtrip is gone, the allowlist is
+ * gone, and the only thing left is the OS-level confirm prompts
+ * the dialog handlers have always owned.
  */
 
-// Action names the renderer is allowed to route through SHOW_CONTEXT_MENU.
-// After the Phase 8 context-menu migration, every canvas / entity
-// menu renders in-renderer via the shared <ContextMenu> primitive,
-// so the only remaining caller is the LeftSidebar map row's right-
-// click. Keep the allowlist tight — anything else here would just be
-// dead code lying around as a future-confusion vector.
-const ALLOWED_CONTEXT_MENU_ACTIONS = new Set<string>([
-  'rename', 'delete',
-])
-
 export function registerDialogHandlers(): void {
-  // Context menu: renderer sends menu items, main process shows native
-  // menu and returns selected action. Actions are validated against an
-  // allowlist to prevent the renderer from triggering arbitrary strings.
-  ipcMain.handle(
-    IPC.SHOW_CONTEXT_MENU,
-    async (
-      event,
-      items: Array<{ label: string; action: string; danger?: boolean } | { separator: true }>,
-    ) => {
-      const win = BrowserWindow.fromWebContents(event.sender)
-      if (!win) return null
-
-      // Filter items: drop any non-separator entry whose action is not in the allowlist.
-      const validatedItems = items.filter((item) => {
-        if ('separator' in item) return true
-        if (!ALLOWED_CONTEXT_MENU_ACTIONS.has(item.action)) {
-          console.warn('[DialogHandlers] SHOW_CONTEXT_MENU: rejected unknown action:', item.action)
-          return false
-        }
-        return true
-      })
-
-      return new Promise<string | null>((resolve) => {
-        let resolved = false
-        const safeResolve = (value: string | null) => {
-          if (!resolved) {
-            resolved = true
-            resolve(value)
-          }
-        }
-
-        const menuItems = validatedItems.map((item) => {
-          if ('separator' in item) return { type: 'separator' as const }
-          return {
-            label: item.label,
-            click: () => safeResolve(item.action),
-          }
-        })
-
-        const menu = Menu.buildFromTemplate(menuItems)
-
-        // Resolve null on menu close, but defer one microtask so any
-        // click handler (which fires before `menu-will-close`) has
-        // already called safeResolve.
-        menu.once('menu-will-close', () => {
-          queueMicrotask(() => safeResolve(null))
-        })
-
-        menu.popup({ window: win })
-      })
-    },
-  )
-
   // Generic confirm dialog
   ipcMain.handle(IPC.CONFIRM_DIALOG, async (event, message: string, detail?: string) => {
     const win = BrowserWindow.fromWebContents(event.sender)

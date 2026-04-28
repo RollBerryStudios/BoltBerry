@@ -260,9 +260,6 @@ export const IPC = {
   // DM → Player: wall list for LOS computation
   PLAYER_WALLS: 'player:walls',
 
-  // Context menu
-  SHOW_CONTEXT_MENU: 'app:show-context-menu',
-
   // Token delete confirmation
   DELETE_TOKEN_CONFIRM: 'app:delete-token-confirm',
 

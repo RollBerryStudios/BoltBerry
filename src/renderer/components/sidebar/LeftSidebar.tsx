@@ -7,6 +7,10 @@ import { useSessionStore } from '../../stores/sessionStore'
 import { useTokenStore } from '../../stores/tokenStore'
 import { useInitiativeStore } from '../../stores/initiativeStore'
 import { AssetBrowser } from './panels/AssetBrowser'
+import { ContextMenu } from '../shared/ContextMenu'
+import { useContextMenuEngine } from '../../contextMenu/useContextMenuEngine'
+import { registerListRowMenu } from '../../contextMenu/listRowMenu'
+import type { MenuSection } from '../../contextMenu/types'
 import { useImageUrl } from '../../hooks/useImageUrl'
 import { detectGrid } from '../../utils/gridDetect'
 import { detectMargins } from '../../utils/autoCrop'
@@ -26,6 +30,13 @@ export function LeftSidebar() {
     setActiveMap,
     addMap,
   } = useCampaignStore()
+
+  // Sidebar context-menu engine. Hosted at the sidebar level so every
+  // list row (maps, future entries) shares one <ContextMenu> instance
+  // — keeps right-click visuals identical to canvas menus and lets us
+  // retire the SHOW_CONTEXT_MENU IPC roundtrip the row used before.
+  const ctxEngine = useContextMenuEngine()
+  useEffect(() => { registerListRowMenu() }, [])
 
   // Settings used to be a third tab here; it now lives only in the
   // GlobalSettingsModal (reachable via the title-bar gear icon), so the
@@ -295,6 +306,12 @@ export function LeftSidebar() {
             onReorder={handleReorderMap}
             autoRename={map.id === newMapId}
             onAutoRenameDone={() => setNewMapId(null)}
+            openContextMenu={(scenePos, sections) => {
+              ctxEngine.open({
+                primary: { kind: 'list-row', entity: 'map', payload: { sections } },
+                scenePos,
+              })
+            }}
           />
         ))}
 
@@ -508,6 +525,7 @@ export function LeftSidebar() {
       )}
         </>}
       </div>
+      <ContextMenu envelope={ctxEngine.envelope} onClose={ctxEngine.close} />
     </div>
   )
 }
@@ -552,7 +570,7 @@ async function renderPdfToImage(
   return result.path
 }
 
-function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRename, onAutoRenameDone }: {
+function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRename, onAutoRenameDone, openContextMenu }: {
   map: MapRecord
   index: number
   total: number
@@ -561,6 +579,10 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
   onReorder: (id: number, direction: 'up' | 'down') => void
   autoRename?: boolean
   onAutoRenameDone?: () => void
+  /** Hand the parent the menu sections to render. Sections close over
+   *  the row's local state (setRenaming, handleDelete) so we don't
+   *  need a registry-level entity payload type. */
+  openContextMenu: (scenePos: { x: number; y: number }, sections: MenuSection[]) => void
 }) {
   const { t } = useTranslation()
   const thumbnailUrl = useImageUrl(map.imagePath)
@@ -677,15 +699,37 @@ function MapListItem({ map, index, total, isActive, onSelect, onReorder, autoRen
           onSelect()
         }
       }}
-      onContextMenu={async (e) => {
+      onContextMenu={(e) => {
         e.preventDefault()
-        if (!window.electronAPI || renaming) return
-        const selectedAction = await window.electronAPI.showContextMenu([
-          { label: 'Umbenennen', action: 'rename' },
-          { label: 'Löschen', action: 'delete', danger: true },
-        ])
-        if (selectedAction === 'rename') setRenaming(true)
-        else if (selectedAction === 'delete') handleDelete()
+        if (renaming) return
+        openContextMenu(
+          { x: e.clientX, y: e.clientY },
+          [
+            {
+              id: 'edit',
+              items: [
+                {
+                  id: 'rename',
+                  labelKey: 'contextMenu.common.rename',
+                  icon: '✏',
+                  run: () => setRenaming(true),
+                },
+              ],
+            },
+            {
+              id: 'destructive',
+              items: [
+                {
+                  id: 'delete',
+                  labelKey: 'contextMenu.common.delete',
+                  icon: '🗑',
+                  danger: true,
+                  run: () => { void handleDelete() },
+                },
+              ],
+            },
+          ],
+        )
       }}
     >
       <span style={{ color: 'var(--text-muted)', fontSize: 'var(--text-xs)', minWidth: 16 }}>{index + 1}</span>
