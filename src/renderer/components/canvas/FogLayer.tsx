@@ -4,6 +4,7 @@ import Konva from 'konva'
 import { useFogStore } from '../../stores/fogStore'
 import { applyOpToCtxPair, type FogOperation } from '../../utils/fogUtils'
 import { useUIStore, type ActiveTool } from '../../stores/uiStore'
+import { useSessionStore } from '../../stores/sessionStore'
 import { useMapTransformStore, screenToMapPure, mapToScreenPure } from '../../stores/mapTransformStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useTokenStore } from '../../stores/tokenStore'
@@ -244,11 +245,14 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
     // JPEG has no alpha, so cleared fog (transparent everywhere)
     // would encode as solid black — the player window would then
     // render a fully opaque black overlay over the map even after
-    // the DM cleared fog.
-    window.electronAPI?.sendFogReset(
-      covered.toDataURL('image/png'),
-      explored.toDataURL('image/png'),
-    )
+    // the DM cleared fog. BB-013: skip the toDataURL roundtrip when
+    // no player is attached.
+    if (useSessionStore.getState().playerConnected) {
+      window.electronAPI?.sendFogReset(
+        covered.toDataURL('image/png'),
+        explored.toDataURL('image/png'),
+      )
+    }
   }, [mapId, refreshDisplay])
 
   // ── Push fog operation to global undo stack ────────────────────────
@@ -331,10 +335,12 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
             useFogStore.setState({ history: prevHistory, redoStack: [] })
             refreshDisplay()
             saveFogToDb(mapId, explored, covered)
-            window.electronAPI?.sendFogReset(
-              covered.toDataURL('image/png'),
-              explored.toDataURL('image/png'),
-            )
+            if (useSessionStore.getState().playerConnected) {
+              window.electronAPI?.sendFogReset(
+                covered.toDataURL('image/png'),
+                explored.toDataURL('image/png'),
+              )
+            }
           },
           redo: async () => {
             ec.clearRect(0, 0, explored.width, explored.height)
@@ -403,16 +409,20 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
   const lastBrushPos = useRef<{ x: number; y: number } | null>(null)
 
   function brushAt(x: number, y: number) {
-    const explored = exploredCanvasRef.current
-    const covered  = coveredCanvasRef.current
-    if (!explored || !covered) return
+    // BB-032: reuse the cached 2D contexts from refs instead of calling
+    // getContext('2d') on every interpolated circle. At 60 fps × 6
+    // circles/frame that's 360 redundant DOM lookups/sec; the refs are
+    // already kept in sync by the effect on lines 207-209.
+    const ec = exploredCtxRef.current
+    const cc = coveredCtxRef.current
+    if (!ec || !cc) return
     const r = fogBrushRadius / scale
     const op: FogOperation = {
       type: isReveal ? 'reveal' : 'cover',
       shape: 'circle',
       points: [x, y, r],
     }
-    applyOpToCtxPair(explored.getContext('2d')!, covered.getContext('2d')!, op)
+    applyOpToCtxPair(ec, cc, op)
 
     // Interpolate between last pos and current for smooth strokes
     if (lastBrushPos.current) {
@@ -433,7 +443,7 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
             shape: 'circle',
             points: [ix, iy, r],
           }
-          applyOpToCtxPair(explored.getContext('2d')!, covered.getContext('2d')!, interpOp)
+          applyOpToCtxPair(ec, cc, interpOp)
         }
       }
     }
@@ -755,12 +765,14 @@ export function flushFogSave(): void {
 }
 
 function sendFogDelta(op: FogOperation) {
-  // Fog is broadcast unconditionally. The main-process bridge silently
-  // drops the message when no player window is open, and the player
-  // renderer ignores deltas that arrive before a map is loaded. Gating
-  // on sessionMode here was stripping updates even while the DM and
-  // player windows were actively connected — the exact "fog does not
-  // update in real time" bug users reported.
+  // BB-013: skip the IPC call when no player window is attached. Earlier
+  // attempts gated on `sessionMode` and broke real-time fog updates while
+  // both windows were live — this gate is on the dedicated
+  // `playerConnected` flag (flipped by usePlayerSync only when the player
+  // actually attaches), so it's safe. The bridge would drop the message
+  // anyway, but we save the serialise + IPC roundtrip on every brush tick
+  // during prep mode.
+  if (!useSessionStore.getState().playerConnected) return
   window.electronAPI?.sendFogDelta({
     type: op.type,
     shape: op.shape,

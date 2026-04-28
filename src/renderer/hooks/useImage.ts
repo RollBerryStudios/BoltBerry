@@ -5,19 +5,46 @@ const MAX_CACHE_SIZE = 200
 // Map preserves insertion order; on access we delete+re-insert to move to end (most recent)
 const cache = new Map<string, HTMLImageElement>()
 
+/**
+ * Free the decoded pixel buffer held by an HTMLImageElement and revoke
+ * any blob: URL still attached to it. Browsers don't always release the
+ * decoded bitmap immediately when the only reference disappears — clearing
+ * `src` and removing the attribute hints the renderer that the buffer can
+ * go (BB-007).
+ */
+function disposeImage(img: HTMLImageElement): void {
+  try {
+    const url = img.src
+    if (url.startsWith('blob:')) {
+      URL.revokeObjectURL(url)
+    }
+    img.onload = null
+    img.onerror = null
+    img.src = ''
+    img.removeAttribute('src')
+  } catch {
+    // Ignore — disposal is best-effort.
+  }
+}
+
 function touchCache(key: string, img: HTMLImageElement) {
   cache.delete(key)
   cache.set(key, img)
   // Evict oldest entries (first in map) when over limit
   while (cache.size > MAX_CACHE_SIZE) {
-    const oldest = cache.keys().next().value
-    if (oldest !== undefined) cache.delete(oldest)
-    else break
+    const oldestKey = cache.keys().next().value
+    if (oldestKey === undefined) break
+    const evicted = cache.get(oldestKey)
+    cache.delete(oldestKey)
+    if (evicted) disposeImage(evicted)
   }
 }
 
 export function invalidateImageCache(src: string | null) {
-  if (src) cache.delete(src)
+  if (!src) return
+  const img = cache.get(src)
+  cache.delete(src)
+  if (img) disposeImage(img)
 }
 
 export function useImage(src: string | null): HTMLImageElement | null {

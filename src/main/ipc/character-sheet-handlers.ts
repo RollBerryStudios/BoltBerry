@@ -2,6 +2,7 @@ import { ipcMain } from 'electron'
 import { IPC } from '../../shared/ipc-types'
 import type {
   CharacterSheet,
+  CharacterSheetSummary,
   CharacterSavingThrows,
   CharacterSkills,
   CharacterAttack,
@@ -217,6 +218,63 @@ export function registerCharacterSheetHandlers(): void {
         )
         .all(campaignId) as CharacterRow[]
       return rows.map(toCharacterSheet)
+    },
+  )
+
+  // BB-014: minimal-projection list. The full LIST_BY_CAMPAIGN ships
+  // every JSON blob (skills, spells, attacks, backstory, ...) on every
+  // open; for a campaign with 20 detailed sheets that's ~1 MB across
+  // IPC just to render the picker. The summary keeps the renderer
+  // responsive; the full sheet loads on selection via CHARACTER_SHEETS_GET.
+  ipcMain.handle(
+    IPC.CHARACTER_SHEETS_LIST_SUMMARY_BY_CAMPAIGN,
+    (_event, campaignId: number): CharacterSheetSummary[] => {
+      requireIntegerId(campaignId, 'campaign')
+      const rows = getDb()
+        .prepare(
+          `SELECT id, campaign_id, token_id, name, race, class_name, level,
+                  hp_max, hp_current, ac, portrait_path
+             FROM character_sheets
+            WHERE campaign_id = ?
+            ORDER BY name ASC`,
+        )
+        .all(campaignId) as Array<{
+          id: number
+          campaign_id: number
+          token_id: number | null
+          name: string
+          race: string
+          class_name: string
+          level: number
+          hp_max: number
+          hp_current: number
+          ac: number
+          portrait_path: string | null
+        }>
+      return rows.map((r) => ({
+        id: r.id,
+        campaignId: r.campaign_id,
+        tokenId: r.token_id ?? null,
+        name: r.name,
+        race: r.race,
+        className: r.class_name,
+        level: r.level,
+        hpMax: r.hp_max,
+        hpCurrent: r.hp_current,
+        ac: r.ac,
+        portraitPath: r.portrait_path ?? null,
+      }))
+    },
+  )
+
+  ipcMain.handle(
+    IPC.CHARACTER_SHEETS_GET,
+    (_event, id: number): CharacterSheet | null => {
+      requireIntegerId(id, 'character-sheet')
+      const row = getDb()
+        .prepare(`SELECT ${SELECT_COLUMNS} FROM character_sheets WHERE id = ?`)
+        .get(id) as CharacterRow | undefined
+      return row ? toCharacterSheet(row) : null
     },
   )
 

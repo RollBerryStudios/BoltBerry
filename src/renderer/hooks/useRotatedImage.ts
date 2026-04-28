@@ -60,5 +60,18 @@ export function useRotatedImage(src: string | null, rotation: number = 0): Rotat
     return () => { cancelled = true }
   }, [source, rotation])
 
+  // BB-019: when the consumer (e.g. MapLayer) unmounts, free the rotated
+  // ImageBitmap immediately rather than waiting for GC. The replacement
+  // path inside the effect already closes the previous bitmap, but on
+  // final unmount nothing else does.
+  useEffect(() => {
+    return () => {
+      setResult((prev) => {
+        if (prev.img instanceof ImageBitmap) prev.img.close()
+        return { img: null, imgW: 0, imgH: 0 }
+      })
+    }
+  }, [])
+
   return result
 }
