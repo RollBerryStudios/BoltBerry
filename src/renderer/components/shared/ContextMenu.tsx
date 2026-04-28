@@ -33,7 +33,12 @@ export function ContextMenu({ envelope, onClose }: ContextMenuProps) {
   // section boundaries. Separator headers are not selectable.
   const navIndex = useMemo(() => {
     const out: Array<{ section: number; item: number }> = []
-    sections.forEach((s, si) => s.items.forEach((_, ii) => out.push({ section: si, item: ii })))
+    // customRender sections own their own focus, so we skip their
+    // items for arrow-key + type-to-search nav.
+    sections.forEach((s, si) => {
+      if (s.customRender) return
+      s.items?.forEach((_, ii) => out.push({ section: si, item: ii }))
+    })
     return out
   }, [sections])
 
@@ -89,8 +94,8 @@ export function ContextMenu({ envelope, onClose }: ContextMenuProps) {
       } else if (e.key === 'Enter' && activeIndex >= 0) {
         e.preventDefault()
         const ref = navIndex[activeIndex]
-        const item = sections[ref.section].items[ref.item]
-        runItem(item)
+        const item = sections[ref.section].items?.[ref.item]
+        if (item) runItem(item)
       } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
         // Type-to-search.
         const buf = typeBufferRef.current
@@ -98,8 +103,8 @@ export function ContextMenu({ envelope, onClose }: ContextMenuProps) {
         if (buf.timer) clearTimeout(buf.timer)
         buf.timer = setTimeout(() => { buf.str = '' }, 1000)
         const idx = navIndex.findIndex((ref) => {
-          const item = sections[ref.section].items[ref.item]
-          return t(item.labelKey).toLowerCase().startsWith(buf.str)
+          const item = sections[ref.section].items?.[ref.item]
+          return item ? t(item.labelKey).toLowerCase().startsWith(buf.str) : false
         })
         if (idx >= 0) setActiveIndex(idx)
       }
@@ -184,7 +189,8 @@ export function ContextMenu({ envelope, onClose }: ContextMenuProps) {
                 {t(section.headerKey, section.headerValues)}
               </div>
             )}
-            {section.items.map((item, ii) => {
+            {section.customRender && section.customRender(envelope)}
+            {section.items?.map((item, ii) => {
               runningIndex += 1
               const idx = runningIndex
               const enabled = !item.enabled || item.enabled(envelope)

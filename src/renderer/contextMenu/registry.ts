@@ -59,8 +59,19 @@ function pushKind(
   for (const resolver of list) {
     for (const section of resolver(localEnv)) {
       if (section.show && !section.show(localEnv)) continue
-      const items = section.items.filter((it) => !it.show || it.show(localEnv))
-      if (items.length === 0) continue
+      // customRender sections are passed through as-is (their content
+      // is opaque to the registry); regular item sections drop items
+      // whose `show` predicate fails and skip the whole section if
+      // every item filtered out.
+      let items: typeof section.items
+      if (section.items) {
+        const filtered = section.items.filter((it) => !it.show || it.show(localEnv))
+        if (filtered.length === 0 && !section.customRender) continue
+        items = filtered
+      } else if (!section.customRender) {
+        // Section has neither items nor customRender — nothing to render.
+        continue
+      }
       out.push({
         ...section,
         headerKey: firstSection && injectedHeader ? injectedHeader.key : section.headerKey,

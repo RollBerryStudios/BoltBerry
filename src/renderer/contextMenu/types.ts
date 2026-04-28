@@ -1,3 +1,4 @@
+import type React from 'react'
 import type { TokenRecord, WallRecord, GMPinRecord, RoomRecord, DrawingRecord, MapRecord } from '@shared/ipc-types'
 
 /**
@@ -66,7 +67,20 @@ export interface MenuSection {
   headerValues?: Record<string, string | number>
   /** Hide the whole section when this returns false. */
   show?: (env: ContextEnvelope) => boolean
-  items: MenuItem[]
+  /** Plain action items. Either this OR `customRender` is required —
+   *  most menus use items; rich menus (token's HP chips + marker grid
+   *  + status toggles) escape via customRender. */
+  items?: MenuItem[]
+  /** Escape hatch for menus that need richer UX than a flat row list:
+   *  HP chips, colour-swatch grids, status-toggle grids, etc.
+   *
+   *  When set, the engine renders this React tree inside the section
+   *  instead of mapping `items`. The custom node is responsible for
+   *  its own click handling AND for calling `env.closeMenu()` when an
+   *  action commits. Keyboard nav skips customRender sections — they
+   *  manage their own focus.
+   */
+  customRender?: (env: ContextEnvelope) => React.ReactNode
 }
 
 /** Resolves to the section list for a given target kind. */

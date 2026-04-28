@@ -32,7 +32,9 @@ Add a helper `hitTestDrawing(d, mapPos): boolean` and iterate on right-click in 
 **Risk note:** with many drawings the per-right-click iteration is O(n) but n is usually small (<100 per map). If profiling shows this matters later, add a spatial index keyed by bounding box.
 
 ### A.3 Token menu full migration
-**Effort:** L · **Risk:** 🟡 Medium · **Depends on:** Phase 8 engine (done)
+**Effort:** L · **Risk:** 🟡 Medium · **Depends on:** Phase 8 engine (done) + `customRender` slot (added in this cycle, see commit log)
+
+**Status update.** Engine extension landed: `MenuSection.customRender?: (env) => React.ReactNode` + nav skip + items-optional. The token menu can now be migrated by extracting TokenLayer's inline JSX into a `<TokenContextMenuBody>` component and registering a `tokenMenu.ts` resolver that returns one section with `customRender: (env) => <TokenContextMenuBody token={env.primary.token} />`. The full port is still L-effort because the inline editors (rename / HP / AC / notes) own coupled state in TokenLayer's closure; see the section below for the recommended split.
 
 The current inline menu has three things that don't fit a flat menu:
 1. **HP chips** (−5 / −1 / +1 / +5 buttons in a row).
