@@ -84,6 +84,16 @@ export function TokenPanel() {
   const [filter, setFilter] = useState('')
   const [libraryPickerOpen, setLibraryPickerOpen] = useState(false)
   const [bestiaryPickerOpen, setBestiaryPickerOpen] = useState(false)
+
+  // Open the picker from anywhere — the canvas right-click menu's
+  // "Add token from wiki…" entry dispatches this event so the same
+  // BestiaryPicker instance (and its click-to-place flow) is reused
+  // without lifting state up further.
+  useEffect(() => {
+    const onOpen = () => setBestiaryPickerOpen(true)
+    window.addEventListener('canvas:open-bestiary-picker', onOpen)
+    return () => window.removeEventListener('canvas:open-bestiary-picker', onOpen)
+  }, [])
   const filterLower = filter.trim().toLowerCase()
   // Filter reactively as the DM types. Matches on name only — faction/HP
   // etc. are visible right next to the name so a single-field substring

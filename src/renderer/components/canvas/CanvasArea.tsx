@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState, useMemo } from 'react'
+﻿import { useEffect, useRef, useState, useMemo, useCallback } from 'react'
 import { Stage, Layer } from 'react-konva'
 import { MapLayer } from './MapLayer'
 import { FogLayer } from './FogLayer'
@@ -35,7 +35,9 @@ import { useEncounterStore } from '../../stores/encounterStore'
 import { useRoomStore } from '../../stores/roomStore'
 import { useUndoStore, nextCommandId } from '../../stores/undoStore'
 import { useImageUrl } from '../../hooks/useImageUrl'
-import { useCanvasContextMenu } from '../../hooks/useCanvasContextMenu'
+import { useContextMenuEngine } from '../../contextMenu/useContextMenuEngine'
+import { registerCanvasMenu } from '../../contextMenu/canvasMenu'
+import { ContextMenu } from '../shared/ContextMenu'
 import { EmptyState } from '../EmptyState'
 import { showToast } from '../shared/Toast'
 import { spawnMonsterOnMap } from '../bestiary/actions'
@@ -158,7 +160,45 @@ export function CanvasArea() {
   const showPlayerEye = useUIStore((s) => s.showPlayerEye)
   const activeWeather = useUIStore((s) => s.activeWeather)
   const workMode = useSessionStore((s) => s.workMode)
-  const handleContextMenu = useCanvasContextMenu()
+  // Context menu engine. Phase 1 only handles the canvas (map) target;
+  // entity layers (token / wall / pin / room / drawing) keep their
+  // existing handlers and migrate in subsequent phases.
+  const ctxEngine = useContextMenuEngine()
+  useEffect(() => { registerCanvasMenu() }, [])
+  const handleContextMenu = useCallback(
+    (e: Konva.KonvaEventObject<MouseEvent>) => {
+      e.evt.preventDefault()
+      // If the click hit an entity Group (tagged in TokenLayer /
+      // GMPinLayer / WallLayer with name="*-root"), defer to that
+      // entity's own handler — it'll set cancelBubble or open its
+      // own menu. The bail check mirrors the previous useCanvasContextMenu.
+      const target = e.target
+      if (target && typeof target.findAncestor === 'function') {
+        if (
+          target.findAncestor('.token-root', true) ||
+          target.findAncestor('.pin-root', true) ||
+          target.findAncestor('.wall-root', true)
+        ) {
+          return
+        }
+      }
+      const stage = e.target.getStage()
+      const pos = stage?.getPointerPosition() ?? { x: 0, y: 0 }
+      const mapPos = useMapTransformStore.getState().screenToMap(pos.x, pos.y)
+      const stageRect = stage?.container().getBoundingClientRect()
+      const scenePos = stageRect
+        ? { x: stageRect.left + pos.x, y: stageRect.top + pos.y }
+        : { x: e.evt.clientX, y: e.evt.clientY }
+      const map = activeMap
+      if (!map) return
+      ctxEngine.open({
+        primary: { kind: 'map', map },
+        pos: mapPos,
+        scenePos,
+      })
+    },
+    [ctxEngine, activeMap],
+  )
   const activeMapId = useCampaignStore((s) => s.activeMapId)
   const activeMaps = useCampaignStore((s) => s.activeMaps)
   const activeMap = useMemo(() => activeMaps.find((m) => m.id === activeMapId) ?? null, [activeMaps, activeMapId])
@@ -829,6 +869,7 @@ export function CanvasArea() {
           </button>
         </div>
       )}
+      <ContextMenu envelope={ctxEngine.envelope} onClose={ctxEngine.close} />
     </div>
   )
 }

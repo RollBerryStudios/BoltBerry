@@ -3,6 +3,33 @@
     "tagline": "Your local Virtual Tabletop",
     "version": "BoltBerry v{{version}}"
   },
+  "contextMenu": {
+    "canvas": {
+      "fitToScreen": "Fit to screen",
+      "rotate": "Rotate map",
+      "rotate0": "↑ 0°",
+      "rotate90": "→ 90°",
+      "rotate180": "↓ 180°",
+      "rotate270": "← 270°",
+      "addFromWiki": "Add token from wiki…",
+      "pingHere": "Ping here",
+      "fog": "Fog",
+      "fogRevealAll": "Reveal all",
+      "fogCoverAll": "Cover all",
+      "fogRevealTokens": "Reveal under tokens",
+      "fogResetExplored": "Reset explored",
+      "tool": "Tool",
+      "toolSelect": "Select",
+      "toolPointer": "Pointer",
+      "toolMeasure": "Measure",
+      "toolDraw": "Draw",
+      "toolFogBrush": "Fog brush",
+      "toolFogRect": "Fog rectangle",
+      "toolWall": "Wall",
+      "toolRoom": "Room",
+      "clearDrawings": "Clear drawings"
+    }
+  },
   "canvas": {
     "hud": {
       "viewportLabel": "Viewport info",
