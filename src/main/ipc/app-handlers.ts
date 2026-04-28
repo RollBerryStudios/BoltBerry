@@ -246,7 +246,7 @@ export function registerAppHandlers(): void {
         console.warn('[AppHandlers] GET_IMAGE_AS_BASE64: file too large, refusing', realPath)
         return null
       }
-      const { readFile } = require('fs/promises')
+      // Hoisted from a per-call require() to a top-level import (BB-044).
       const imageBuffer = await readFile(realPath)
       const base64 = imageBuffer.toString('base64')
       const extension = realPath.toLowerCase().split('.').pop() || 'png'

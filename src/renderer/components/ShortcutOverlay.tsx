@@ -8,10 +8,13 @@ interface ShortcutOverlayProps {
 export function ShortcutOverlay({ onClose }: ShortcutOverlayProps) {
   const { t } = useTranslation()
 
+  // BB-051: every `key` field is either a literal (universal key combo)
+  // or a `keyKey` reference into shortcuts.tk.* so German speakers no
+  // longer see "Mausrad" on an English locale.
   type ShortcutEntry =
     | { section: string }
-    | { key: string; labelKey: string; label?: never }
-    | { key: string; label: string; labelKey?: never }
+    | { key: string; keyKey?: undefined; labelKey: string; label?: never }
+    | { keyKey: string; key?: undefined; labelKey: string; label?: never }
 
   const SHORTCUTS: ShortcutEntry[] = [
     { section: t('shortcuts.sectionTools') },
@@ -30,34 +33,34 @@ export function ShortcutOverlay({ onClose }: ShortcutOverlayProps) {
     { key: 'R',        labelKey: 'shortcuts.keyRoom' },
     { key: 'E',        labelKey: 'shortcuts.keyPlayerView' },
     { section: t('shortcuts.sectionMapNav') },
-    { key: 'Mausrad',              labelKey: 'shortcuts.keyMouseWheel' },
-    { key: 'Alt + Drag',           labelKey: 'shortcuts.keyAltDrag' },
-    { key: 'Mittelklick + Drag',   labelKey: 'shortcuts.keyMiddleDrag' },
-    { key: 'Shift + Klick',        labelKey: 'shortcuts.keyPing' },
+    { keyKey: 'shortcuts.tk.mouseWheel',       labelKey: 'shortcuts.keyMouseWheel' },
+    { keyKey: 'shortcuts.tk.altDrag',          labelKey: 'shortcuts.keyAltDrag' },
+    { keyKey: 'shortcuts.tk.middleClickDrag',  labelKey: 'shortcuts.keyMiddleDrag' },
+    { keyKey: 'shortcuts.tk.shiftClick',       labelKey: 'shortcuts.keyPing' },
     { key: '0',                    labelKey: 'shortcuts.keyFit' },
     { key: '1 – 5',                labelKey: 'shortcuts.keyMapSwitch' },
     { section: t('shortcuts.sectionTokens') },
-    { key: 'Klick',          labelKey: 'shortcuts.keyTokenSelect' },
-    { key: 'Shift + Klick',  labelKey: 'shortcuts.keyTokenMultiSelect' },
+    { keyKey: 'shortcuts.tk.click',       labelKey: 'shortcuts.keyTokenSelect' },
+    { keyKey: 'shortcuts.tk.shiftClick',  labelKey: 'shortcuts.keyTokenMultiSelect' },
     { key: 'Delete',         labelKey: 'shortcuts.keyDeleteToken' },
     { key: 'Ctrl + C',       labelKey: 'shortcuts.keyCopyToken' },
     { key: 'Ctrl + V',       labelKey: 'shortcuts.keyPasteToken' },
     { section: t('shortcuts.sectionCombat') },
     { key: 'N',        labelKey: 'shortcuts.keyNextFighter' },
     { section: t('shortcuts.sectionFog') },
-    { key: 'Doppelklick', labelKey: 'shortcuts.keyPolygonFinish' },
-    { key: 'Ctrl + Z',    labelKey: 'shortcuts.keyFogUndo' },
+    { keyKey: 'shortcuts.tk.doubleClick', labelKey: 'shortcuts.keyPolygonFinish' },
+    { key: 'Ctrl + Z',         labelKey: 'shortcuts.keyFogUndo' },
     { key: 'Ctrl + Shift + Z', labelKey: 'shortcuts.keyFogRedo' },
     { section: t('shortcuts.sectionContextMenus') },
-    { key: 'Rechtsklick Karte',         labelKey: 'shortcuts.keyCtxMap' },
-    { key: 'Rechtsklick Token',         labelKey: 'shortcuts.keyCtxToken' },
-    { key: 'Rechtsklick Karte (Liste)', labelKey: 'shortcuts.keyCtxMapList' },
-    { key: 'Rechtsklick Wiki-Eintrag',  labelKey: 'shortcuts.keyCtxWiki' },
-    { key: 'Rechtsklick Audio-Kanal',   labelKey: 'shortcuts.keyCtxAudio' },
+    { keyKey: 'shortcuts.tk.rightClickMap',     labelKey: 'shortcuts.keyCtxMap' },
+    { keyKey: 'shortcuts.tk.rightClickToken',   labelKey: 'shortcuts.keyCtxToken' },
+    { keyKey: 'shortcuts.tk.rightClickMapList', labelKey: 'shortcuts.keyCtxMapList' },
+    { keyKey: 'shortcuts.tk.rightClickWiki',    labelKey: 'shortcuts.keyCtxWiki' },
+    { keyKey: 'shortcuts.tk.rightClickAudio',   labelKey: 'shortcuts.keyCtxAudio' },
     { section: t('shortcuts.sectionPlayerControl') },
-    { key: 'Ctrl + Drag',         labelKey: 'shortcuts.keyPcDrag' },
-    { key: 'Ctrl + Mausrad',      labelKey: 'shortcuts.keyPcZoom' },
-    { key: 'Ctrl + Pfeiltasten',  labelKey: 'shortcuts.keyPcRotate' },
+    { keyKey: 'shortcuts.tk.ctrlDrag',       labelKey: 'shortcuts.keyPcDrag' },
+    { keyKey: 'shortcuts.tk.ctrlMouseWheel', labelKey: 'shortcuts.keyPcZoom' },
+    { keyKey: 'shortcuts.tk.ctrlArrows',     labelKey: 'shortcuts.keyPcRotate' },
     { key: 'Escape',              labelKey: 'shortcuts.keyPcExit' },
     { section: t('shortcuts.sectionGeneral') },
     { key: 'Ctrl + K', labelKey: 'shortcuts.keyPalette' },
@@ -126,7 +129,7 @@ export function ShortcutOverlay({ onClose }: ShortcutOverlayProps) {
                 whiteSpace: 'nowrap',
                 flexShrink: 0,
               }}>
-                {s.key}
+                {s.keyKey ? t(s.keyKey) : s.key}
               </kbd>
             </div>
           )

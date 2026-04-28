@@ -706,7 +706,23 @@
     "keyThisOverlay": "Open this shortcuts overlay",
     "sectionTokens": "Selection & tokens",
     "sectionContextMenus": "Right-click menus",
-    "sectionPlayerControl": "🎯 Player Control Mode"
+    "sectionPlayerControl": "🎯 Player Control Mode",
+    "tk": {
+      "mouseWheel": "Mouse wheel",
+      "altDrag": "Alt + Drag",
+      "middleClickDrag": "Middle-click + Drag",
+      "shiftClick": "Shift + Click",
+      "click": "Click",
+      "doubleClick": "Double-click",
+      "rightClickMap": "Right-click map",
+      "rightClickToken": "Right-click token",
+      "rightClickMapList": "Right-click map (list)",
+      "rightClickWiki": "Right-click wiki entry",
+      "rightClickAudio": "Right-click audio channel",
+      "ctrlDrag": "Ctrl + Drag",
+      "ctrlMouseWheel": "Ctrl + Mouse wheel",
+      "ctrlArrows": "Ctrl + Arrow keys"
+    }
   },
   "monitorDialog": {
     "title": "🖥 Select Player Monitor",
