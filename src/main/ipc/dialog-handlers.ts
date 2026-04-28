@@ -14,20 +14,13 @@ import { IPC } from '../../shared/ipc-types'
  */
 
 // Action names the renderer is allowed to route through SHOW_CONTEXT_MENU.
-// Derived from grep of `showContextMenu` callers in the renderer.
+// After the Phase 8 context-menu migration, every canvas / entity
+// menu renders in-renderer via the shared <ContextMenu> primitive,
+// so the only remaining caller is the LeftSidebar map row's right-
+// click. Keep the allowlist tight — anything else here would just be
+// dead code lying around as a future-confusion vector.
 const ALLOWED_CONTEXT_MENU_ACTIONS = new Set<string>([
-  // Sidebar / list items
-  'delete', 'duplicate', 'hide-player', 'show-player', 'edit', 'rename',
-  'cut', 'copy', 'paste',
-  'move-to-top', 'move-up', 'move-down', 'move-to-bottom',
-  // Note layer
-  'open', 'remove-pin',
-  // Canvas
-  'center-camera',
-  'rotate-0', 'rotate-90', 'rotate-180', 'rotate-270',
-  'fog-reveal-all', 'fog-cover-all', 'fog-reveal-tokens', 'fog-reset-explored',
-  'tool-measure', 'tool-draw', 'tool-fog-brush', 'tool-fog-rect',
-  'ping-here', 'clear-drawings',
+  'rename', 'delete',
 ])
 
 export function registerDialogHandlers(): void {

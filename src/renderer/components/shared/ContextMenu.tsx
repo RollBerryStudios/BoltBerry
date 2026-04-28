@@ -71,6 +71,11 @@ export function ContextMenu({ envelope, onClose }: ContextMenuProps) {
 
   // ESC + click-outside dismissal. Capture-phase mousedown so the
   // listener fires before any Konva event handler claims the click.
+  // Type-to-search: any printable key adds to a 1-second buffer; the
+  // first item whose label starts with the buffer becomes the active
+  // index. Mirrors the OS native menu's behaviour (Files / Finder /
+  // Win32 menus all support this).
+  const typeBufferRef = useRef<{ str: string; timer: ReturnType<typeof setTimeout> | null }>({ str: '', timer: null })
   useEffect(() => {
     if (!envelope) return
     const onKey = (e: KeyboardEvent) => {
@@ -86,6 +91,17 @@ export function ContextMenu({ envelope, onClose }: ContextMenuProps) {
         const ref = navIndex[activeIndex]
         const item = sections[ref.section].items[ref.item]
         runItem(item)
+      } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        // Type-to-search.
+        const buf = typeBufferRef.current
+        buf.str = (buf.str + e.key).toLowerCase()
+        if (buf.timer) clearTimeout(buf.timer)
+        buf.timer = setTimeout(() => { buf.str = '' }, 1000)
+        const idx = navIndex.findIndex((ref) => {
+          const item = sections[ref.section].items[ref.item]
+          return t(item.labelKey).toLowerCase().startsWith(buf.str)
+        })
+        if (idx >= 0) setActiveIndex(idx)
       }
     }
     const onMouseDown = (e: MouseEvent) => {
