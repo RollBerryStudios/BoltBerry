@@ -174,7 +174,14 @@ export function findTopPeaks(
   separation: number,
 ): Array<{ lag: number; value: number }> {
   const peaks: Array<{ lag: number; value: number }> = []
-  for (let x = minLag + 1; x < Math.min(maxLag, signal.length - 1); x++) {
+  // BB-033: clamp the search window into the array's valid neighbour-access
+  // range. Without this, a `signal` shorter than minLag+2 silently fell
+  // through to an empty result; for very small signals we now exit cleanly
+  // and never index out of bounds when reading signal[x-1] / signal[x+1].
+  const start = Math.max(1, minLag + 1)
+  const end = Math.min(maxLag, signal.length - 1)
+  if (start >= end) return peaks
+  for (let x = start; x < end; x++) {
     const v = signal[x]
     if (v > signal[x - 1] && v > signal[x + 1] && v > 0) {
       peaks.push({ lag: x, value: v })
@@ -199,16 +206,21 @@ export function findTopPeaks(
  */
 export function harmonicBonus(signal: Float64Array, lag: number, baseValue: number): number {
   if (baseValue <= 0) return 0
+  if (lag <= 0 || !Number.isFinite(lag)) return 0
   let sum = 0
   let counted = 0
   for (const k of [2, 3]) {
     const idx = lag * k
     if (idx >= signal.length - 1) break
     // Sample a small ±2 window so we don't miss the harmonic if it
-    // drifts by a pixel due to rounding.
+    // drifts by a pixel due to rounding. BB-033: clamp the window into
+    // [0, signal.length) so we never read past either end on signals
+    // sized close to the harmonic boundary.
     let peak = 0
-    for (let d = -2; d <= 2; d++) {
-      const v = signal[idx + d] ?? 0
+    const lo = Math.max(0, idx - 2)
+    const hi = Math.min(signal.length - 1, idx + 2)
+    for (let i = lo; i <= hi; i++) {
+      const v = signal[i]
       if (v > peak) peak = v
     }
     sum += Math.min(1, peak / baseValue)

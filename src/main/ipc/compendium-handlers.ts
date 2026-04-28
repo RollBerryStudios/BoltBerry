@@ -4,6 +4,26 @@ import { readFile } from 'fs/promises'
 import { join, sep } from 'path'
 import { IPC } from '../../shared/ipc-types'
 import { getCustomUserDataPath } from '../db/database'
+import { logger } from '../logger'
+
+/**
+ * BB-027: structured record of the last token-variant seed attempt so the
+ * DM window can surface "token library could not be seeded" errors via a
+ * status-bar toast instead of silently showing an empty library. Read via
+ * the `compendium:get-seed-status` IPC channel.
+ */
+interface TokenVariantSeedStatus {
+  ok: boolean
+  error: string | null
+  copiedSlugs: number
+  copiedFiles: number
+}
+let lastSeedStatus: TokenVariantSeedStatus = {
+  ok: true,
+  error: null,
+  copiedSlugs: 0,
+  copiedFiles: 0,
+}
 
 /**
  * Compendium + token-variants IPC. Extracted from the former
@@ -105,32 +125,72 @@ export function uniqueFileName(dir: string, fileName: string): string {
 
 export function ensureTokenVariantsSeeded(): void {
   const { bundled, user } = getTokenVariantDirs()
-  if (!existsSync(bundled)) return
+  if (!existsSync(bundled)) {
+    lastSeedStatus = { ok: true, error: null, copiedSlugs: 0, copiedFiles: 0 }
+    return
+  }
+  let copiedSlugs = 0
+  let copiedFiles = 0
+  let firstHardError: Error | null = null
   try {
     for (const slugDir of readdirSync(bundled, { withFileTypes: true })) {
       if (!slugDir.isDirectory()) continue
       const src = join(bundled, slugDir.name)
       const dst = join(user, slugDir.name)
-      if (!existsSync(dst)) mkdirSync(dst, { recursive: true })
+      try {
+        if (!existsSync(dst)) {
+          mkdirSync(dst, { recursive: true })
+          copiedSlugs++
+        }
+      } catch (err) {
+        // Read-only userData (BB-046): record + skip this slug. Other slugs
+        // may still succeed if they already exist.
+        if (!firstHardError) firstHardError = err as Error
+        continue
+      }
       for (const file of readdirSync(src)) {
         const srcPath = join(src, file)
         const dstPath = join(dst, file)
         if (existsSync(dstPath)) continue
         try {
-          // COPYFILE_EXCL doubles as a guard if two processes race.
           copyFileSync(srcPath, dstPath, 1 /* COPYFILE_EXCL */)
-        } catch {
-          // File got created between our existsSync and copyFileSync — fine.
+          copiedFiles++
+        } catch (err) {
+          // Either an EEXIST race (benign) or a real IO failure. EEXIST
+          // shows up with code 'EEXIST'; everything else is recorded.
+          const e = err as NodeJS.ErrnoException
+          if (e?.code !== 'EEXIST' && !firstHardError) firstHardError = e
         }
       }
     }
   } catch (err) {
-    console.warn('[CompendiumHandlers] token variants seed failed:', err)
+    firstHardError = err as Error
   }
+  if (firstHardError) {
+    logger.error(
+      `[CompendiumHandlers] token variants seed failed (slugs=${copiedSlugs}, files=${copiedFiles}): ${firstHardError.message ?? String(firstHardError)}`,
+    )
+    lastSeedStatus = {
+      ok: false,
+      error: firstHardError.message ?? String(firstHardError),
+      copiedSlugs,
+      copiedFiles,
+    }
+  } else {
+    lastSeedStatus = { ok: true, error: null, copiedSlugs, copiedFiles }
+  }
+}
+
+export function getTokenVariantSeedStatus(): TokenVariantSeedStatus {
+  return lastSeedStatus
 }
 
 export function registerCompendiumHandlers(): void {
   ensureTokenVariantsSeeded()
+
+  // BB-027: expose the seed status so the renderer can surface an error
+  // toast instead of silently showing an empty token library.
+  ipcMain.handle(IPC.TOKEN_VARIANTS_SEED_STATUS, () => getTokenVariantSeedStatus())
 
   // ── Compendium ──
 

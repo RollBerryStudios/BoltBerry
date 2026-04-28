@@ -529,6 +529,16 @@ export const dmApi = {
   > => ipcRenderer.invoke(IPC.TOKEN_VARIANTS_IMPORT, slug),
   openTokenVariantsFolder: (slug?: string): Promise<void> =>
     ipcRenderer.invoke(IPC.TOKEN_VARIANTS_OPEN_FOLDER, slug),
+  /** BB-027: status of the first-run seed copy. `ok: false` means the
+   *  bundled artwork could not be copied to the user's data folder
+   *  (read-only filesystem, disk full, etc.) — the renderer should
+   *  surface a status-bar toast pointing at the error. */
+  getTokenVariantSeedStatus: (): Promise<{
+    ok: boolean
+    error: string | null
+    copiedSlugs: number
+    copiedFiles: number
+  }> => ipcRenderer.invoke(IPC.TOKEN_VARIANTS_SEED_STATUS),
 
   // Bestiarium data (SRD 5.1 monsters, items, spells)
   listMonsters: (): Promise<MonsterIndexEntry[]> =>

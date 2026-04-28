@@ -64,6 +64,20 @@ describe('gridDetect.findTopPeaks', () => {
     const peaks = findTopPeaks(signal, 5, 60, 2, 4)
     expect(peaks.length).toBe(2)
   })
+
+  it('returns empty array when signal is shorter than minLag (BB-033)', () => {
+    // signal.length = 5, minLag = 10 — no valid peak window exists.
+    const signal = new Float64Array(5)
+    signal[2] = 9
+    const peaks = findTopPeaks(signal, 10, 30, 3, 2)
+    expect(peaks).toEqual([])
+  })
+
+  it('does not throw when signal.length is 0 (BB-033)', () => {
+    const signal = new Float64Array(0)
+    expect(() => findTopPeaks(signal, 5, 20, 3, 2)).not.toThrow()
+    expect(findTopPeaks(signal, 5, 20, 3, 2)).toEqual([])
+  })
 })
 
 describe('gridDetect.harmonicBonus', () => {
@@ -115,5 +129,22 @@ describe('gridDetect.harmonicBonus', () => {
     signal[30] = 100    // ditto
     const bonus = harmonicBonus(signal, 10, 10)
     expect(bonus).toBe(1)
+  })
+
+  it('does not throw when 2x lag lands at the very last index (BB-033)', () => {
+    // 2x lag = 20 = signal.length - 1; the ±2 window would otherwise
+    // read signal[20], signal[21], signal[22] — only the first is valid.
+    const signal = new Float64Array(21)
+    signal[10] = 5
+    signal[20] = 4
+    expect(() => harmonicBonus(signal, 10, 5)).not.toThrow()
+  })
+
+  it('returns 0 on non-positive lag (BB-033)', () => {
+    const signal = new Float64Array(40)
+    signal[20] = 5
+    expect(harmonicBonus(signal, 0, 5)).toBe(0)
+    expect(harmonicBonus(signal, -1, 5)).toBe(0)
+    expect(harmonicBonus(signal, NaN, 5)).toBe(0)
   })
 })

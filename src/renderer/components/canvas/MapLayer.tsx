@@ -2,6 +2,7 @@ import { useEffect, useRef, RefObject } from 'react'
 import { Layer, Image as KonvaImage, Shape } from 'react-konva'
 import Konva from 'konva'
 import type { MapRecord } from '@shared/ipc-types'
+import { DEFAULT_GRID_COLOR } from '@shared/defaults'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useUIStore } from '../../stores/uiStore'
@@ -405,7 +406,7 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
             const thickness = map.gridThickness ?? 1
             const scaledLineWidth = Math.max(0.8, Math.min(1.6, 1 / scale)) * thickness
             raw._context.save()
-            raw._context.strokeStyle = map.gridColor ?? 'rgba(255, 255, 255, 0.34)'
+            raw._context.strokeStyle = map.gridColor ?? DEFAULT_GRID_COLOR
             raw._context.lineWidth = scaledLineWidth
             raw._context.stroke()
             raw._context.restore()

@@ -2,6 +2,8 @@ import { ipcMain } from 'electron'
 import { IPC } from '../../shared/ipc-types'
 import type { DrawingRecord, DrawingType } from '../../shared/ipc-types'
 import { getDb } from '../db/database'
+import { logger } from '../logger'
+import { IpcValidationError } from './validators'
 
 /**
  * Semantic IPC channels for the `drawings` table. Replaces the raw
@@ -26,34 +28,46 @@ interface DrawingRow {
 
 const VALID_TYPES = new Set<DrawingType>(['freehand', 'rect', 'circle', 'text'])
 
+/**
+ * BB-028: prior QA #11. Corrupt JSON used to be silently swallowed
+ * (returning `points: []`), so a damaged drawing simply vanished from
+ * the canvas while still occupying a row. Now we log via the structured
+ * logger (visible to crash reporting + dev console) and tag the record
+ * as `corrupt: true` so the renderer can surface a toast / repair UI
+ * without crashing the entire list call.
+ */
 function parsePoints(
   raw: string,
   rowId: number,
-): { points: number[]; legacyText: string | null } {
+): { points: number[]; legacyText: string | null; corrupt: boolean } {
   try {
     const parsed = JSON.parse(raw)
     if (Array.isArray(parsed)) {
-      return { points: parsed.filter((n): n is number => typeof n === 'number'), legacyText: null }
+      return {
+        points: parsed.filter((n): n is number => typeof n === 'number'),
+        legacyText: null,
+        corrupt: false,
+      }
     }
     // Legacy shape: text drawings used `{x, y, text}` before v10.
     if (parsed && typeof parsed === 'object' && typeof parsed.x === 'number' && typeof parsed.y === 'number') {
       return {
         points: [parsed.x, parsed.y],
         legacyText: typeof parsed.text === 'string' ? parsed.text : null,
+        corrupt: false,
       }
     }
-    console.warn(`[drawing-handlers] drawing ${rowId} has unrecognised points shape`)
+    logger.warn(`[drawing-handlers] drawing ${rowId} has unrecognised points shape`)
   } catch (err) {
-    // Surface corrupted rows so users can repair / delete them, instead of
-    // silently returning an empty drawing that vanishes from the canvas
-    // while still occupying a row in the database.
-    console.warn(`[drawing-handlers] drawing ${rowId} has malformed points JSON: ${String(err)}`)
+    logger.warn(
+      `[drawing-handlers] drawing ${rowId} has malformed points JSON: ${err instanceof Error ? err.message : String(err)}`,
+    )
   }
-  return { points: [], legacyText: null }
+  return { points: [], legacyText: null, corrupt: true }
 }
 
 function toDrawingRecord(r: DrawingRow): DrawingRecord {
-  const { points, legacyText } = parsePoints(r.points, r.id)
+  const { points, legacyText, corrupt } = parsePoints(r.points, r.id)
   return {
     id: r.id,
     mapId: r.map_id,
@@ -63,35 +77,36 @@ function toDrawingRecord(r: DrawingRow): DrawingRecord {
     width: r.width,
     text: r.text ?? legacyText,
     synced: r.synced !== 0,
+    ...(corrupt ? { corrupt: true } : {}),
   }
 }
 
 const SELECT_COLUMNS = 'id, map_id, type, points, color, width, text, synced'
 
 function requireIntegerId(id: unknown, label = 'drawing'): number {
-  if (!Number.isInteger(id)) throw new Error(`Invalid ${label} id`)
+  if (!Number.isInteger(id)) throw new IpcValidationError(`Invalid ${label} id`)
   return id as number
 }
 
 function requireDrawingType(v: unknown): DrawingType {
   if (typeof v !== 'string' || !VALID_TYPES.has(v as DrawingType)) {
-    throw new Error('Invalid drawing type')
+    throw new IpcValidationError('Invalid drawing type')
   }
   return v as DrawingType
 }
 
 function coerceFiniteNumber(v: unknown, label: string): number {
   if (typeof v !== 'number' || !Number.isFinite(v)) {
-    throw new Error(`${label} must be a finite number`)
+    throw new IpcValidationError(`${label} must be a finite number`)
   }
   return v
 }
 
 function coercePoints(v: unknown): string {
-  if (!Array.isArray(v)) throw new Error('points must be a number array')
+  if (!Array.isArray(v)) throw new IpcValidationError('points must be a number array')
   for (const n of v) {
     if (typeof n !== 'number' || !Number.isFinite(n)) {
-      throw new Error('points must contain finite numbers only')
+      throw new IpcValidationError('points must contain finite numbers only')
     }
   }
   return JSON.stringify(v)
@@ -144,7 +159,7 @@ export function registerDrawingHandlers(): void {
   })
 
   ipcMain.handle(IPC.DRAWINGS_CREATE, (_event, patch: CreatePatch): DrawingRecord => {
-    if (!patch || typeof patch !== 'object') throw new Error('Invalid patch')
+    if (!patch || typeof patch !== 'object') throw new IpcValidationError('Invalid patch')
     return toDrawingRecord(insertDrawing(patch))
   })
 
@@ -155,7 +170,7 @@ export function registerDrawingHandlers(): void {
       const db = getDb()
       const txn = db.transaction(() =>
         patches.map((p) => {
-          if (!p || typeof p !== 'object') throw new Error('Invalid patch')
+          if (!p || typeof p !== 'object') throw new IpcValidationError('Invalid patch')
           return toDrawingRecord(insertDrawing(p))
         }),
       )

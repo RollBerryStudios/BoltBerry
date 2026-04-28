@@ -15,6 +15,7 @@ import { showToast } from '../shared/Toast'
 import { formatError } from '../../utils/formatError'
 import { NumberStepper } from '../shared/NumberStepper'
 import type { MapRecord } from '@shared/ipc-types'
+import { DEFAULT_GRID_COLOR } from '@shared/defaults'
 
 export function LeftSidebar() {
   const { t } = useTranslation()
@@ -436,7 +437,7 @@ export function LeftSidebar() {
                   />
                   <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginLeft: 'var(--sp-2)' }}>·</span>
                   {[
-                    { label: 'Weiß',    value: 'rgba(255,255,255,0.34)' },
+                    { label: 'Weiß',    value: DEFAULT_GRID_COLOR },
                     { label: 'Schwarz', value: 'rgba(0,0,0,0.45)' },
                   ].map(({ label, value }) => (
                     <button

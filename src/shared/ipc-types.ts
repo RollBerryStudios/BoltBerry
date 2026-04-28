@@ -287,6 +287,10 @@ export const IPC = {
   TOKEN_VARIANTS_LIST: 'token-variants:list',
   TOKEN_VARIANTS_IMPORT: 'token-variants:import',
   TOKEN_VARIANTS_OPEN_FOLDER: 'token-variants:open-folder',
+  /** Status of the first-run token-variant seed (BB-027). Renderer polls
+   *  on startup to decide whether to surface a "library could not be
+   *  seeded" toast. */
+  TOKEN_VARIANTS_SEED_STATUS: 'token-variants:seed-status',
 
   // Bestiarium / reference data — bilingual SRD 5.1 monsters, items, spells.
   // The renderer never touches the JSON files directly; all reads go through
@@ -745,6 +749,10 @@ export interface DrawingRecord {
   text: string | null
   /** True when this drawing is broadcast to the player window. */
   synced: boolean
+  /** Set when the row's `points` JSON could not be parsed (BB-028).
+   *  The renderer can surface a "corrupted drawing" toast or repair UI
+   *  without losing the entire drawing list. Absent in the common case. */
+  corrupt?: boolean
 }
 
 export interface EncounterTemplate {
