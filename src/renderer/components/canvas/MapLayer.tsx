@@ -158,7 +158,17 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
   // mode is off.
   const isDraggingViewport = useRef(false)
 
-  // ── Pan: middle-mouse, Alt+left-drag, or left-drag with select tool on background ─
+  // ── Pan: middle-mouse, Alt+left-drag, Space+left-drag, or right-click drag ─
+  //
+  // Right-click drag pan (Phase 10): right-mousedown arms a potential
+  // pan. We wait for the mouse to move past PAN_THRESHOLD pixels before
+  // committing so that a right-click without drag still opens the
+  // context menu unchanged. If the user dragged, mouseup installs a
+  // one-shot capture-phase contextmenu suppressor so the menu doesn't
+  // open on top of the just-completed pan.
+  const rightPanState = useRef<{ active: boolean; startX: number; startY: number } | null>(null)
+  const PAN_THRESHOLD = 5
+
   function handleMouseDown(e: Konva.KonvaEventObject<MouseEvent>) {
     const ui = useUIStore.getState()
     // Viewport drag has priority over the DM's own pan when Player
@@ -168,6 +178,12 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
       isDraggingViewport.current = true
       lastPointer.current = { x: e.evt.clientX, y: e.evt.clientY }
       stageRef.current?.container().style.setProperty('cursor', 'grabbing')
+      return
+    }
+    if (e.evt.button === 2) {
+      // Right-click: arm potential pan. Don't preventDefault yet — a
+      // click without drag still needs to open the context menu.
+      rightPanState.current = { active: false, startX: e.evt.clientX, startY: e.evt.clientY }
       return
     }
     const isMiddle = e.evt.button === 1
@@ -197,6 +213,20 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
       })
       return
     }
+    // Right-click drag: commit to pan once we've moved past the
+    // threshold. Latches `active=true` so the contextmenu suppressor
+    // fires on mouseup and so further mousemoves take the normal pan
+    // path below.
+    if (rightPanState.current && !rightPanState.current.active) {
+      const dx = Math.abs(e.evt.clientX - rightPanState.current.startX)
+      const dy = Math.abs(e.evt.clientY - rightPanState.current.startY)
+      if (dx + dy > PAN_THRESHOLD) {
+        rightPanState.current.active = true
+        isPanning.current = true
+        lastPointer.current = { x: e.evt.clientX, y: e.evt.clientY }
+        stageRef.current?.container().style.setProperty('cursor', 'grabbing')
+      }
+    }
     if (!isPanning.current) return
     const dx = e.evt.clientX - lastPointer.current.x
     const dy = e.evt.clientY - lastPointer.current.y
@@ -212,6 +242,20 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
       stageRef.current?.container().style.removeProperty('cursor')
       return
     }
+    // Right-click released — if we panned, swallow the next contextmenu
+    // event so the menu doesn't pop up on top of the drag end. Capture-
+    // phase listener on window runs before any container-level handler
+    // (Konva-bound onContextMenu, our engine dispatcher, browser
+    // default), so one well-placed preventDefault wins.
+    if (rightPanState.current?.active) {
+      const block = (ev: MouseEvent) => {
+        ev.preventDefault()
+        ev.stopPropagation()
+        window.removeEventListener('contextmenu', block, { capture: true })
+      }
+      window.addEventListener('contextmenu', block, { capture: true })
+    }
+    rightPanState.current = null
     if (isPanning.current) {
       isPanning.current = false
       const cursor = spaceHeld.current ? 'grab' : undefined

@@ -1,4 +1,4 @@
-﻿import { RefObject, useState, useRef, useMemo, useCallback, useEffect, useLayoutEffect, memo } from 'react'
+﻿import { type CSSProperties, RefObject, useState, useRef, useMemo, useCallback, useEffect, useLayoutEffect, memo } from 'react'
 import { Layer, Group, Image as KonvaImage, Rect, Text, Circle, Line } from 'react-konva'
 import { Html } from 'react-konva-utils'
 import Konva from 'konva'
@@ -112,6 +112,15 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   const [editAc, setEditAc] = useState('')
   const [markerSubmenuId, setMarkerSubmenuId] = useState<number | null>(null)
   const [submenuType, setSubmenuType] = useState<string | null>(null)
+  // Phase 10: render submenus (Fraktion / Markierung / Zustände) as
+  // floating panels positioned to the right of the trigger button
+  // instead of expanding inline within the main menu list. The main
+  // menu's `position: fixed` + `overflowY: auto` would otherwise clip
+  // an absolutely-positioned child, so we use viewport-space `fixed`
+  // coords sampled from the trigger's bounding rect when the submenu
+  // opens.
+  const submenuAnchorRef = useRef<HTMLButtonElement | null>(null)
+  const [submenuPos, setSubmenuPos] = useState<{ left: number; top: number } | null>(null)
   const [rubberBand, setRubberBand] = useState<{ x1: number; y1: number; x2: number; y2: number } | null>(null)
   const [notesEditState, setNotesEditState] = useState<{ tokenId: number; screenX: number; screenY: number; value: string } | null>(null)
   const [ghostPos, setGhostPos] = useState<{ x: number; y: number; sizePx: number } | null>(null)
@@ -200,6 +209,35 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     dragPendingRef.current = null
   }, [])
 
+  // Reposition the floating submenu panel when it opens (and clear
+  // when it closes). Uses an rAF retry to wait for the trigger button
+  // to commit to the DOM — same shape as the main-menu measure loop.
+  useLayoutEffect(() => {
+    if (markerSubmenuId == null || submenuType == null) {
+      setSubmenuPos(null)
+      return
+    }
+    let cancelled = false
+    const measure = () => {
+      if (cancelled) return
+      const el = submenuAnchorRef.current
+      if (!el) { requestAnimationFrame(measure); return }
+      const rect = el.getBoundingClientRect()
+      // Open to the right of the trigger button with a small gap; if
+      // there isn't enough horizontal room, flip to the left of the
+      // trigger so the panel stays visible at the screen edge.
+      const SUBMENU_WIDTH = 220
+      const PAD = 8
+      const vw = window.innerWidth
+      const left = rect.right + 4 + SUBMENU_WIDTH + PAD > vw
+        ? Math.max(PAD, rect.left - SUBMENU_WIDTH - 4)
+        : rect.right + 4
+      setSubmenuPos({ left, top: rect.top })
+    }
+    measure()
+    return () => { cancelled = true }
+  }, [markerSubmenuId, submenuType])
+
   // Close the context menu on Escape or any click outside the menu
   useEffect(() => {
     if (!contextMenu.visible) return
@@ -207,8 +245,17 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
       if (e.key === 'Escape') closeContextMenu()
     }
     const onMouseDown = (e: MouseEvent) => {
-      const menuEl = document.querySelector('[data-token-context-menu]')
-      if (menuEl && !menuEl.contains(e.target as Node)) closeContextMenu()
+      // Close on outside-click. The submenu panel renders OUTSIDE the
+      // main menu (position: fixed, escapes the overflow container)
+      // so checking only the main menu would treat clicks on the
+      // submenu as "outside" and close everything. Both the menu and
+      // the submenu panels carry data-token-context-menu so a single
+      // querySelectorAll covers them.
+      const menuEls = document.querySelectorAll('[data-token-context-menu]')
+      for (const el of menuEls) {
+        if (el.contains(e.target as Node)) return
+      }
+      closeContextMenu()
     }
     window.addEventListener('keydown', onKeyDown)
     // Use capture so this fires before the Konva/React event tree
@@ -1231,9 +1278,40 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                         { value: 'neutral', label: '⚖️ Neutral', color: '#f59e0b' },
                         { value: 'friendly', label: '🤝 Freundlich', color: '#3b82f6' },
                       ]
+                      const submenuPanelStyle: CSSProperties = {
+                        position: 'fixed',
+                        left: submenuPos?.left ?? -9999,
+                        top: submenuPos?.top ?? -9999,
+                        // Hide for the first frame until the layout
+                        // effect samples the trigger's bounding rect.
+                        visibility: submenuPos ? 'visible' : 'hidden',
+                        background: 'var(--bg-elevated)',
+                        border: '1px solid var(--border)',
+                        borderRadius: 'var(--radius)',
+                        padding: '4px 0',
+                        minWidth: 220,
+                        maxHeight: 'calc(100vh - 16px)',
+                        overflowY: 'auto',
+                        boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
+                        zIndex: 10000,
+                        pointerEvents: 'all',
+                      }
                       return (
                         <div key={i}>
                           <button
+                            ref={isSubOpen ? submenuAnchorRef : undefined}
+                            onMouseEnter={(e) => {
+                              // Hover-to-open mirrors the engine
+                              // ContextMenu's submenu trigger so users
+                              // don't have to click — same UX as wall /
+                              // pin / canvas menus.
+                              e.currentTarget.style.background = 'var(--bg-overlay)'
+                              if (!isSubOpen) {
+                                setMarkerSubmenuId(token.id)
+                                setSubmenuType(item.submenuType)
+                              }
+                            }}
+                            onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
                             onClick={() => {
                               if (isSubOpen) {
                                 setMarkerSubmenuId(null)
@@ -1244,23 +1322,24 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                               }
                             }}
                             style={{
-                              display: 'block',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
                               width: '100%',
                               padding: '6px 12px',
-                              background: 'none',
+                              background: isSubOpen ? 'var(--bg-overlay)' : 'none',
                               border: 'none',
                               textAlign: 'left',
                               fontSize: 'var(--text-sm)',
                               color: 'var(--text-primary)',
                               cursor: 'pointer',
                             }}
-                            onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-overlay)')}
-                            onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
                           >
-                            {isFaction ? '🏷 Fraktion' : isStatus ? '⚔️ Zustände' : '🏷 Markierung'} {isSubOpen ? '▲' : '▼'}
+                            <span>{isFaction ? '🏷 Fraktion' : isStatus ? '⚔️ Zustände' : '🏷 Markierung'}</span>
+                            <span style={{ color: 'var(--text-muted)', marginLeft: 8 }}>▶</span>
                           </button>
                           {isSubOpen && isFaction && (
-                            <div style={{ background: 'var(--bg-elevated)', padding: '2px 0' }}>
+                            <div data-token-context-menu style={submenuPanelStyle}>
                               {FACTION_OPTIONS.map((f) => (
                                 <button
                                   key={f.value}
@@ -1274,7 +1353,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                                     alignItems: 'center',
                                     gap: 6,
                                     width: '100%',
-                                    padding: '4px 12px 4px 24px',
+                                    padding: '6px 12px',
                                     background: token.faction === f.value ? 'var(--bg-overlay)' : 'none',
                                     border: 'none',
                                     textAlign: 'left',
@@ -1292,7 +1371,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                             </div>
                           )}
                           {isSubOpen && isStatus && (
-                            <div style={{ background: 'var(--bg-elevated)', padding: '2px 0', maxHeight: 200, overflowY: 'auto' }}>
+                            <div data-token-context-menu style={submenuPanelStyle}>
                               {STATUS_EFFECTS.map((eff) => {
                                 const isActive = token.statusEffects?.includes(eff.id) ?? false
                                 return (
@@ -1304,7 +1383,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                                       alignItems: 'center',
                                       gap: 6,
                                       width: '100%',
-                                      padding: '4px 12px 4px 24px',
+                                      padding: '6px 12px',
                                       background: isActive ? 'var(--accent-blue-dim)' : 'none',
                                       border: isActive ? '1px solid var(--accent-blue)' : 'none',
                                       textAlign: 'left',
@@ -1324,7 +1403,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                             </div>
                           )}
                           {isSubOpen && !isFaction && !isStatus && (
-                            <div style={{ background: 'var(--bg-elevated)', padding: '2px 0' }}>
+                            <div data-token-context-menu style={submenuPanelStyle}>
                               {MARKER_COLORS.map((mc) => (
                                 <button
                                   key={mc.color ?? 'none'}
@@ -1334,7 +1413,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                                     alignItems: 'center',
                                     gap: 6,
                                     width: '100%',
-                                    padding: '4px 12px 4px 24px',
+                                    padding: '6px 12px',
                                     background: token.markerColor === mc.color ? 'var(--bg-overlay)' : 'none',
                                     border: 'none',
                                     textAlign: 'left',
