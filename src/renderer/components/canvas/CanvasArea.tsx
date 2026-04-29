@@ -182,12 +182,23 @@ export function CanvasArea() {
   const showPlayerEye = useUIStore((s) => s.showPlayerEye)
   const activeWeather = useUIStore((s) => s.activeWeather)
   const workMode = useSessionStore((s) => s.workMode)
+  const activeMapId = useCampaignStore((s) => s.activeMapId)
+  const activeMaps = useCampaignStore((s) => s.activeMaps)
+  const activeMap = useMemo(() => activeMaps.find((m) => m.id === activeMapId) ?? null, [activeMaps, activeMapId])
+  const atmosphereUrl = useImageUrl(atmosphereImagePath)
+
   // Single context-menu dispatcher. The Stage's onContextMenu walks
   // the click target's Konva ancestry, identifies the entity kind via
   // `name="*-root"` markers, looks up the entity record in its store,
   // and opens the shared menu engine. This is the unification step
   // from Phase 8 §D.1 — one event path, one render primitive, one
   // place to extend with new kinds.
+  //
+  // NB: this useCallback's deps include `activeMap`, so its host
+  // declaration must precede it — otherwise the deps array is read
+  // during render while `activeMap` is still in TDZ, surfacing as
+  // "Cannot access 'x' before initialization" once Vite mangles the
+  // identifier.
   const ctxEngine = useContextMenuEngine()
   useEffect(() => {
     registerCanvasMenu()
@@ -307,10 +318,9 @@ export function CanvasArea() {
     },
     [ctxEngine, activeMap],
   )
-  const activeMapId = useCampaignStore((s) => s.activeMapId)
-  const activeMaps = useCampaignStore((s) => s.activeMaps)
-  const activeMap = useMemo(() => activeMaps.find((m) => m.id === activeMapId) ?? null, [activeMaps, activeMapId])
-  const atmosphereUrl = useImageUrl(atmosphereImagePath)
+  // (activeMapId / activeMaps / activeMap / atmosphereUrl moved up
+  // above the context-menu useCallback to avoid the TDZ on `activeMap`
+  // in the deps array.)
 
   // Set playerConnected=false when the player window is closed
   useEffect(() => {
