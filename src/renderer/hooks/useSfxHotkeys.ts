@@ -4,28 +4,22 @@ import { useUIStore } from '../stores/uiStore'
 import { useCampaignStore } from '../stores/campaignStore'
 
 /**
- * Global keyboard hotkeys 1–9 / 0 → trigger the corresponding slot
- * on the active SFX board. Mirrors the design-spec convention: the
- * digit's visual label on the SFX grid (1–9 across the top row,
- * 0 in the last position) maps directly to the keystroke.
+ * SFX board keyboard hotkeys. Owns digits + board-cycle key whenever
+ * the floating audio panel is open. The previous duplicate in
+ * useKeyboardShortcuts has been removed (Phase 11 C-8 / C-9).
+ *
+ *   1–9 → slots 0–8,  0 → slot 9 (visual labels on the SFX grid)
+ *   ß / -  → cycle to next board
  *
  * Gating
- *   - No input / textarea / select / contenteditable focused
- *   - No modal dialog open (aria-modal="true") — keeps text-entry
- *     fields inside dialogs from accidentally firing SFX
- *   - No floating utility popover open — the audio popover hosts
- *     a number input on the volume slider; pressing 0–9 there
- *     should adjust the slider, not blast the room
- *   - Only when a campaign + map is active (Map view) — no point
- *     triggering board sounds on the campaign-list screen
- *   - Plain digit only: ignored when any modifier is held
- *     (Ctrl/Cmd/Alt/Shift) so existing palette / OS shortcuts
- *     keep working as-is
- *
- * Slot lookup uses the audioStore's currently-active board and the
- * per-slot volume + loop fields persisted in v38. A slot with no
- * audioPath is silently skipped — pressing the corresponding key
- * is a no-op.
+ *   - Audio panel open (`floatingPanel === 'audio'`) — when the panel is
+ *     closed there is no SFX context, so digits fall through to the
+ *     map-switch handler in useKeyboardShortcuts
+ *   - No input / textarea / select / contenteditable focused — the
+ *     volume slider is a number input; typing there must not blast SFX
+ *   - No modal dialog open (aria-modal="true")
+ *   - Plain key only: ignored when any modifier is held
+ *   - Only when a campaign + map is active
  */
 export function useSfxHotkeys() {
   useEffect(() => {
@@ -33,43 +27,43 @@ export function useSfxHotkeys() {
       // Modifier keys = not a hotkey for us.
       if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return
 
-      // 1-9 / 0 only.
-      const key = e.key
-      if (!/^[0-9]$/.test(key)) return
-
       // Input-focus guard.
       const target = e.target as HTMLElement | null
       const tag = target?.tagName
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
       if (target?.isContentEditable) return
 
-      // Modal guard. A second-class screen owns the keyboard while
-      // it's open — palette, dialogs, the wiki entry form, …
+      // Modal guard.
       if (document.querySelector('[aria-modal="true"]')) return
 
-      // Floating-popover guard (audio panel, dice roller, overlay).
-      // The popover has its own number controls.
-      if (useUIStore.getState().floatingPanel !== null) return
+      // Audio panel open is the gate now — outside the panel, digits
+      // belong to map-switching and board-cycle has no context.
+      if (useUIStore.getState().floatingPanel !== 'audio') return
 
-      // Map-view guard. No active campaign + map → nothing to play
-      // against. Avoids triggering SFX while the DM is on the
-      // welcome / campaign-list screens.
+      // Map-view guard.
       const { activeCampaignId, activeMapId } = useCampaignStore.getState()
       if (!activeCampaignId || !activeMapId) return
-
-      // Resolve the slot. Visual labels: '1'..'9' = slots 0..8; '0' = slot 9.
-      const slotNumber = key === '0' ? 9 : Number(key) - 1
 
       const audio = useAudioStore.getState()
       const board = audio.boards[audio.activeBoardIndex]
       if (!board) return
-      const slot = board.slots.find((s) => s.slotNumber === slotNumber)
-      if (!slot?.audioPath) return
 
-      // Prevent the digit from also bleeding into other handlers
-      // (e.g. an unfocused canvas catching keystrokes).
-      e.preventDefault()
-      audio.triggerSfx(slot.audioPath, slot.volume ?? 1, slot.isLoop ?? false)
+      // Digit → SFX slot
+      if (/^[0-9]$/.test(e.key)) {
+        const slotNumber = e.key === '0' ? 9 : Number(e.key) - 1
+        const slot = board.slots.find((s) => s.slotNumber === slotNumber)
+        if (!slot?.audioPath) return
+        e.preventDefault()
+        audio.triggerSfx(slot.audioPath, slot.volume ?? 1, slot.isLoop ?? false)
+        return
+      }
+
+      // ß / - → cycle to next board (was in useKeyboardShortcuts;
+      // moved here so all SFX hotkeys live in one hook).
+      if ((e.key === 'ß' || e.key === '-') && audio.boards.length > 1) {
+        e.preventDefault()
+        audio.setActiveBoardIndex((audio.activeBoardIndex + 1) % audio.boards.length)
+      }
     }
 
     window.addEventListener('keydown', onKeyDown)

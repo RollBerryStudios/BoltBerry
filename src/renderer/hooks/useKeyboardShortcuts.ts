@@ -7,7 +7,6 @@ import { useTokenStore } from '../stores/tokenStore'
 import { useCampaignStore } from '../stores/campaignStore'
 import { useMapTransformStore } from '../stores/mapTransformStore'
 import { useUndoStore, nextCommandId } from '../stores/undoStore'
-import { useAudioStore } from '../stores/audioStore'
 
 // ”€”€ Grid chord state ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 // `G` on its own toggles the grid. `G` followed (within CHORD_WINDOW ms) by
@@ -64,26 +63,30 @@ export function useKeyboardShortcuts() {
         }
       }
 
-      // ”€”€ Grid chord: `G +` / `G -` ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
+      // ── Grid chord: `Shift+G` then `+` / `-` ───────────────────────
       // Runs first so the second keystroke wins over any matching single-key
-      // action (e.g. the standalone `-` zoom-out binding below).
+      // action (e.g. the standalone `-` zoom-out binding below). A bare
+      // modifier keydown (Shift on the way to typing Shift+=) is skipped so
+      // the chord doesn't self-cancel before the digit/symbol arrives.
       if (performance.now() <= gridChordDeadline && !e.ctrlKey && !e.metaKey && !e.altKey) {
-        gridChordDeadline = 0
-        if (e.key === '+' || e.key === '=') {
-          e.preventDefault()
-          const { activeMapId, activeMaps } = useCampaignStore.getState()
-          const map = activeMaps.find((m) => m.id === activeMapId)
-          if (map) void persistMapGridPatch({ gridSize: Math.min(400, map.gridSize + GRID_STEP_PX) })
-          return
+        if (e.key !== 'Shift' && e.key !== 'Control' && e.key !== 'Alt' && e.key !== 'Meta') {
+          gridChordDeadline = 0
+          if (e.key === '+' || e.key === '=') {
+            e.preventDefault()
+            const { activeMapId, activeMaps } = useCampaignStore.getState()
+            const map = activeMaps.find((m) => m.id === activeMapId)
+            if (map) void persistMapGridPatch({ gridSize: Math.min(400, map.gridSize + GRID_STEP_PX) })
+            return
+          }
+          if (e.key === '-' || e.key === '_') {
+            e.preventDefault()
+            const { activeMapId, activeMaps } = useCampaignStore.getState()
+            const map = activeMaps.find((m) => m.id === activeMapId)
+            if (map) void persistMapGridPatch({ gridSize: Math.max(10, map.gridSize - GRID_STEP_PX) })
+            return
+          }
+          // Any other non-modifier key cancels the chord and falls through.
         }
-        if (e.key === '-' || e.key === '_') {
-          e.preventDefault()
-          const { activeMapId, activeMaps } = useCampaignStore.getState()
-          const map = activeMaps.find((m) => m.id === activeMapId)
-          if (map) void persistMapGridPatch({ gridSize: Math.max(10, map.gridSize - GRID_STEP_PX) })
-          return
-        }
-        // Any other key cancels the chord and falls through to normal handling.
       }
 
       // ”€”€ Ctrl / Cmd shortcuts ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
@@ -267,33 +270,14 @@ export function useKeyboardShortcuts() {
         return
       }
 
-      // ”€”€ Audio panel: SFX board shortcuts (only when floating audio panel is open) ”€
-      if (useUIStore.getState().floatingPanel === 'audio') {
-        const { boards, activeBoardIndex, triggerSfx, setActiveBoardIndex } = useAudioStore.getState()
-        const board = boards[activeBoardIndex]
+      // ── Audio: digit/board shortcuts are owned by `useSfxHotkeys` so
+      // there is one authoritative handler for SFX. The previous in-line
+      // duplicate here contradicted useSfxHotkeys's "leave digits alone
+      // when popover is open" comment; deleting this branch resolves the
+      // contradiction. `useSfxHotkeys` now fires when the audio panel is
+      // open (see hook gating).
 
-        // 1–9 → slots 0–8,  0 → slot 9
-        if (/^[0-9]$/.test(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey) {
-          const slotIdx = e.key === '0' ? 9 : parseInt(e.key) - 1
-          const slot = board?.slots.find((s) => s.slotNumber === slotIdx)
-          if (slot?.audioPath) {
-            e.preventDefault()
-            triggerSfx(slot.audioPath)
-          }
-          return
-        }
-
-        // ß → cycle to next board
-        if ((e.key === 'ß' || e.key === '-') && !e.ctrlKey && !e.metaKey && !e.altKey) {
-          if (boards.length > 1) {
-            e.preventDefault()
-            setActiveBoardIndex((activeBoardIndex + 1) % boards.length)
-          }
-          return
-        }
-      }
-
-      // ”€”€ Single-key shortcuts ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
+      // ── Single-key shortcuts ───────────────────────────────────────
       switch (e.key) {
         // Space is intentionally NOT handled here — it is used by MapLayer for canvas panning.
         // Blackout is now Ctrl+B.
@@ -324,17 +308,17 @@ export function useKeyboardShortcuts() {
           break
         case 'g': case 'G':
           if (e.shiftKey) {
-            // Shift+G keeps the old wall-draw binding — fog/wall muscle
-            // memory stays intact while plain G is reclaimed for grid.
-            useUIStore.getState().setActiveTool('wall-draw')
-          } else {
-            // Plain G toggles grid visibility on the active map *and* arms
+            // Shift+G toggles grid visibility on the active map *and* arms
             // the chord window: press + / - within CHORD_WINDOW_MS to
             // resize the grid instead of toggling it.
             const { activeMapId, activeMaps } = useCampaignStore.getState()
             const map = activeMaps.find((m) => m.id === activeMapId)
             if (map) void persistMapGridPatch({ gridVisible: !(map.gridVisible ?? true) })
             gridChordDeadline = performance.now() + CHORD_WINDOW_MS
+          } else {
+            // Plain G activates wall-draw (matches dock + overlay + every
+            // VTT convention). Grid toggle moved to Shift+G.
+            useUIStore.getState().setActiveTool('wall-draw')
           }
           break
         case 'j': case 'J':
@@ -346,11 +330,12 @@ export function useKeyboardShortcuts() {
         case 'e': case 'E':
           useUIStore.getState().togglePlayerEye()
           break
-        case 't':
+        case 't': case 'T':
+          // T = token-place tool. The Tokens sidebar tab is on Ctrl+1
+          // (panel switching) — splitting plain-T vs Shift-T was a hidden
+          // overload that produced two different outcomes from the same
+          // visible key.
           useUIStore.getState().setActiveTool('token')
-          break
-        case 'T':
-          useUIStore.getState().setSidebarTab('tokens')
           break
         case 'n': case 'N': {
           useInitiativeStore.getState().nextTurn()
