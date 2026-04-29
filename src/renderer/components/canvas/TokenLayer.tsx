@@ -499,6 +499,12 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
 
   function handleLayerMouseDown(e: Konva.KonvaEventObject<MouseEvent>) {
     if (activeTool !== 'select') return
+    // Plain left-drag on empty canvas pans the map (handled in
+    // MapLayer); rubber-band selection moves to Shift+left-drag.
+    // Without this gate the rubber-band would arm in parallel with
+    // the pan and the user would drag a ghost rectangle while panning.
+    if (!e.evt.shiftKey) return
+    if (e.evt.button !== 0) return
     if (e.target !== e.target.getStage()) return
     const pos = e.target.getStage()?.getPointerPosition()
     if (!pos) return

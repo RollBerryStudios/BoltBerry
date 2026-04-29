@@ -167,6 +167,7 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
   // one-shot capture-phase contextmenu suppressor so the menu doesn't
   // open on top of the just-completed pan.
   const rightPanState = useRef<{ active: boolean; startX: number; startY: number } | null>(null)
+  const leftPanStart = useRef<{ x: number; y: number } | null>(null)
   const PAN_THRESHOLD = 5
 
   function handleMouseDown(e: Konva.KonvaEventObject<MouseEvent>) {
@@ -189,10 +190,33 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
     const isMiddle = e.evt.button === 1
     const isAltLeft = e.evt.button === 0 && e.evt.altKey
     const isSpacePan = e.evt.button === 0 && spaceHeld.current
-    if (!isMiddle && !isAltLeft && !isSpacePan) return
+    // Plain left-drag on empty canvas while the select tool is active
+    // = pan. Matches the Roll20 / FoundryVTT default ("the select tool
+    // is also the pan tool"). Rubber-band selection moves to Shift+
+    // drag (TokenLayer.handleLayerMouseDown). Skipped if any modifier
+    // is held so we don't intercept intentional Alt-pan / Ctrl-gesture
+    // / Shift-rubber-band.
+    const isPlainLeftSelect =
+      e.evt.button === 0 &&
+      ui.activeTool === 'select' &&
+      !e.evt.altKey &&
+      !e.evt.ctrlKey &&
+      !e.evt.metaKey &&
+      !e.evt.shiftKey &&
+      !spaceHeld.current &&
+      e.target === e.target.getStage()
+    if (!isMiddle && !isAltLeft && !isSpacePan && !isPlainLeftSelect) return
     e.evt.preventDefault()
     isPanning.current = true
     lastPointer.current = { x: e.evt.clientX, y: e.evt.clientY }
+    // For plain-left clicks we record the down-position so mouseup
+    // can tell a click (no movement → clear token selection) apart
+    // from a pan (drag → leave selection alone). Click-to-deselect
+    // used to live in TokenLayer's rubber-band path; that path now
+    // requires Shift, so we own the behaviour here.
+    if (isPlainLeftSelect) {
+      leftPanStart.current = { x: e.evt.clientX, y: e.evt.clientY }
+    }
     stageRef.current?.container().style.setProperty('cursor', 'grabbing')
   }
 
@@ -236,7 +260,7 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
     setTransform({ offsetX: clampOffsetX(newOffX), offsetY: clampOffsetY(newOffY) })
   }
 
-  function handleMouseUp(_e: Konva.KonvaEventObject<MouseEvent>) {
+  function handleMouseUp(e: Konva.KonvaEventObject<MouseEvent>) {
     if (isDraggingViewport.current) {
       isDraggingViewport.current = false
       stageRef.current?.container().style.removeProperty('cursor')
@@ -257,6 +281,17 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
     }
     rightPanState.current = null
     if (isPanning.current) {
+      // Plain-left click on empty canvas without drag → clear token
+      // selection. The original click-to-deselect lived in
+      // TokenLayer's rubber-band mouseup; that path now needs Shift,
+      // so MapLayer owns the deselect behaviour for plain clicks.
+      if (leftPanStart.current && e?.evt) {
+        const dx = Math.abs(e.evt.clientX - leftPanStart.current.x)
+        const dy = Math.abs(e.evt.clientY - leftPanStart.current.y)
+        if (dx + dy <= PAN_THRESHOLD) {
+          useUIStore.getState().clearTokenSelection()
+        }
+      }
       isPanning.current = false
       const cursor = spaceHeld.current ? 'grab' : undefined
       if (cursor) {
@@ -266,6 +301,7 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
       }
       scheduleCameraSave(scale, offsetX, offsetY)
     }
+    leftPanStart.current = null
   }
 
   // ── Zoom: scroll wheel or trackpad pinch ────────────────────────────────────
