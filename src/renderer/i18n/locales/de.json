@@ -789,6 +789,10 @@
       "mouseWheel": "Mausrad",
       "altDrag": "Alt + Ziehen",
       "middleClickDrag": "Mittelklick + Ziehen",
+      "rightClickDrag": "Rechtsklick + Ziehen",
+      "spaceDrag": "Leertaste + Ziehen",
+      "leftDragEmpty": "Linksklick + Ziehen (leer)",
+      "shiftDrag": "Shift + Ziehen",
       "shiftClick": "Shift + Klick",
       "click": "Klick",
       "doubleClick": "Doppelklick",
@@ -800,7 +804,11 @@
       "ctrlDrag": "Strg + Ziehen",
       "ctrlMouseWheel": "Strg + Mausrad",
       "ctrlArrows": "Strg + Pfeiltasten"
-    }
+    },
+    "keyRightDragPan": "Karte panen (jedes Werkzeug)",
+    "keySpaceDragPan": "Karte panen",
+    "keyLeftDragPan": "Karte panen (Auswahl-Werkzeug, leere Fläche)",
+    "keyShiftDragRubber": "Rubber-Band-Auswahl"
   },
   "monitorDialog": {
     "title": "🖥 Spieler-Monitor auswählen",

@@ -789,6 +789,10 @@
       "mouseWheel": "Mouse wheel",
       "altDrag": "Alt + Drag",
       "middleClickDrag": "Middle-click + Drag",
+      "rightClickDrag": "Right-click + Drag",
+      "spaceDrag": "Space + Drag",
+      "leftDragEmpty": "Left-Drag (empty)",
+      "shiftDrag": "Shift + Drag",
       "shiftClick": "Shift + Click",
       "click": "Click",
       "doubleClick": "Double-click",
@@ -800,7 +804,11 @@
       "ctrlDrag": "Ctrl + Drag",
       "ctrlMouseWheel": "Ctrl + Mouse wheel",
       "ctrlArrows": "Ctrl + Arrow keys"
-    }
+    },
+    "keyRightDragPan": "Pan map (any tool)",
+    "keySpaceDragPan": "Pan map",
+    "keyLeftDragPan": "Pan map (Select tool, empty canvas)",
+    "keyShiftDragRubber": "Rubber-band selection"
   },
   "monitorDialog": {
     "title": "🖥 Select Player Monitor",
