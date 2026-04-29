@@ -55,6 +55,14 @@ export function ToastProvider() {
 
   return (
     <div
+      // Phase 11 m-48: live region announces toasts to screen readers.
+      // `polite` so a screen reader finishes its current sentence before
+      // reading the toast (an `assertive` region would interrupt and is
+      // reserved for errors that demand immediate attention — see the
+      // per-toast `aria-live` override below).
+      role="status"
+      aria-live="polite"
+      aria-atomic="false"
       style={{
         position: 'fixed',
         top: 40,
@@ -68,9 +76,13 @@ export function ToastProvider() {
     >
       {toasts.map((toast) => {
         const c = COLORS[toast.type]
+        // Errors get role=alert so screen readers interrupt and announce
+        // immediately; everything else inherits the parent's polite region.
+        const a11yProps = toast.type === 'error' ? { role: 'alert', 'aria-live': 'assertive' as const } : {}
         return (
           <div
             key={toast.id}
+            {...a11yProps}
             style={{
               display: 'flex',
               alignItems: 'center',

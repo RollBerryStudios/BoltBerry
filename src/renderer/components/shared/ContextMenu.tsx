@@ -241,12 +241,32 @@ interface RowProps {
 function ContextMenuRow({ item, envelope, active, enabled, onActivate, onRun, onOpenSub, subOpen, t }: RowProps) {
   const hasSub = !!item.submenu && item.submenu.length > 0
   const danger = item.danger
+  // Phase 11 m-33: hover-intent delay (~250 ms) before opening the
+  // submenu. Without this, mousing diagonally across the menu can
+  // flash the wrong submenu open mid-traverse. Foundry uses ~400 ms;
+  // 250 ms keeps the experience snappy while filtering out incidental
+  // hovers. Mouse-leave cancels the pending open immediately.
+  const HOVER_OPEN_MS = 250
+  const openTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const clearOpenTimer = () => {
+    if (openTimerRef.current) { clearTimeout(openTimerRef.current); openTimerRef.current = null }
+  }
+  useEffect(() => () => clearOpenTimer(), [])
   return (
     <div
       role="menuitem"
       aria-disabled={!enabled}
-      onMouseEnter={() => { onActivate(); if (hasSub) onOpenSub(true) }}
-      onMouseLeave={() => { if (hasSub) onOpenSub(false) }}
+      onMouseEnter={() => {
+        onActivate()
+        if (hasSub) {
+          clearOpenTimer()
+          openTimerRef.current = setTimeout(() => onOpenSub(true), HOVER_OPEN_MS)
+        }
+      }}
+      onMouseLeave={() => {
+        clearOpenTimer()
+        if (hasSub) onOpenSub(false)
+      }}
       onClick={() => { if (enabled) onRun() }}
       style={{
         position: 'relative',

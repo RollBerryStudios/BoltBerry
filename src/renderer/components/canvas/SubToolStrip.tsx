@@ -46,8 +46,30 @@ export function SubToolStrip() {
     dockAutoHide ? 'canvas-hud-fade' : '',
   ].filter(Boolean).join(' ')
 
+  // Phase 11 m-25: ArrowLeft/ArrowRight + Home/End cycle focus among
+  // the strip's interactive children. We don't manage roving tabindex
+  // here (the strip's children are heterogeneous — pills, sliders, color
+  // swatches), but the parent delegates focus movement so keyboard users
+  // can step through the controls without a Tab per pill.
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight' && e.key !== 'Home' && e.key !== 'End') return
+    const root = e.currentTarget
+    const focusable = Array.from(root.querySelectorAll<HTMLElement>('button, input, [tabindex]:not([tabindex="-1"])'))
+    if (focusable.length === 0) return
+    const cur = focusable.indexOf(document.activeElement as HTMLElement)
+    let next = cur
+    if (e.key === 'ArrowRight') next = cur < 0 ? 0 : Math.min(focusable.length - 1, cur + 1)
+    else if (e.key === 'ArrowLeft') next = cur < 0 ? focusable.length - 1 : Math.max(0, cur - 1)
+    else if (e.key === 'Home') next = 0
+    else if (e.key === 'End') next = focusable.length - 1
+    if (next !== cur && focusable[next]) {
+      e.preventDefault()
+      focusable[next].focus()
+    }
+  }
+
   return (
-    <div className={classes} role="toolbar" aria-label={t('subtool.label')}>
+    <div className={classes} role="toolbar" aria-label={t('subtool.label')} onKeyDown={handleKeyDown}>
       {content}
     </div>
   )
