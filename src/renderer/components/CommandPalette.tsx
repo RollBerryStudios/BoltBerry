@@ -42,14 +42,14 @@ function buildCommands(t: (k: string) => string): Command[] {
     // ── Session
     { id: 'session.start',    labelKey: 'palette.startSession',  groupKey: 'palette.groupSession', keywords: 'start session play begin session starten spiel', run: () => { session().setSessionMode('session'); if (session().workMode === 'prep') session().setWorkMode('play') } },
     { id: 'session.end',      labelKey: 'palette.endSession',    groupKey: 'palette.groupSession', keywords: 'end session stop prep session beenden vorbereitung',    run: () => session().setSessionMode('prep') },
-    { id: 'session.blackout', labelKey: 'palette.toggleBlackout',groupKey: 'palette.groupSession', shortcut: 'Ctrl+B', keywords: 'blackout black out verdunkeln schwarz',       run: () => ui().toggleBlackout() },
+    { id: 'session.blackout', labelKey: 'palette.toggleBlackout',groupKey: 'palette.groupSession', shortcut: 'Ctrl+Shift+B', keywords: 'blackout black out verdunkeln schwarz',       run: () => ui().toggleBlackout() },
 
     // ── View
     { id: 'view.zoomIn',       labelKey: 'palette.zoomIn',       groupKey: 'palette.groupView', shortcut: 'Ctrl+=',  keywords: 'zoom in hineinzoomen vergrößern',            run: () => cam().zoomIn() },
     { id: 'view.zoomOut',      labelKey: 'palette.zoomOut',      groupKey: 'palette.groupView', shortcut: 'Ctrl+-',  keywords: 'zoom out herauszoomen verkleinern',          run: () => cam().zoomOut() },
     { id: 'view.fit',          labelKey: 'palette.fitToScreen',  groupKey: 'palette.groupView', shortcut: 'Ctrl+0',  keywords: 'fit screen reset camera zoom anpassen',      run: () => cam().fitToScreen() },
     { id: 'view.minimap',      labelKey: 'palette.toggleMinimap',groupKey: 'palette.groupView',                     keywords: 'minimap übersicht karte mini',               run: () => ui().toggleMinimap() },
-    { id: 'view.leftSidebar',  labelKey: 'palette.toggleLeft',   groupKey: 'palette.groupView', shortcut: 'Ctrl+\\', keywords: 'left sidebar links seitenleiste',            run: () => ui().toggleLeftSidebar() },
+    { id: 'view.leftSidebar',  labelKey: 'palette.toggleLeft',   groupKey: 'palette.groupView', shortcut: 'Ctrl+B', keywords: 'left sidebar links seitenleiste',            run: () => ui().toggleLeftSidebar() },
     { id: 'view.rightSidebar', labelKey: 'palette.toggleRight',  groupKey: 'palette.groupView', shortcut: 'Ctrl+Shift+\\', keywords: 'right sidebar rechts seitenleiste',    run: () => ui().toggleRightSidebar() },
     { id: 'view.theme',        labelKey: 'palette.toggleTheme',  groupKey: 'palette.groupView',                     keywords: 'theme dark light design hell dunkel',        run: () => ui().toggleTheme() },
     { id: 'view.language',     labelKey: 'palette.toggleLanguage',groupKey: 'palette.groupView',                    keywords: 'language sprache german english deutsch',     run: () => ui().toggleLanguage() },

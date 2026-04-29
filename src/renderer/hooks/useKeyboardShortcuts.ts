@@ -5,7 +5,8 @@ import { useFogStore } from '../stores/fogStore'
 import { useInitiativeStore } from '../stores/initiativeStore'
 import { useTokenStore } from '../stores/tokenStore'
 import { useCampaignStore } from '../stores/campaignStore'
-import { useMapTransformStore } from '../stores/mapTransformStore'
+import { useMapTransformStore, getLastCursorMap } from '../stores/mapTransformStore'
+import { showToast } from '../components/shared/Toast'
 import { useUndoStore, nextCommandId } from '../stores/undoStore'
 
 // ”€”€ Grid chord state ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
@@ -143,9 +144,18 @@ export function useKeyboardShortcuts() {
             window.electronAPI?.openPlayerWindow()
             return
           case 'b':
-            // Ctrl+B — toggle blackout (Space is reserved for canvas panning)
+            // Ctrl+B           → toggle left sidebar (matches VS Code).
+            // Ctrl+Shift+B     → toggle blackout (relocated from Ctrl+B
+            // in Phase 11 M-22 because the VS Code muscle-memory clash
+            // had users hiding the room every time they tried to hide
+            // the sidebar). The existing Ctrl+\ keeps working as an
+            // alias from the native menu.
             e.preventDefault()
-            useUIStore.getState().toggleBlackout()
+            if (e.shiftKey) {
+              useUIStore.getState().toggleBlackout()
+            } else {
+              useUIStore.getState().toggleLeftSidebar()
+            }
             return
           case 'c': {
             // Ctrl+C — copy selected tokens to clipboard
@@ -176,9 +186,13 @@ export function useKeyboardShortcuts() {
             e.preventDefault()
             const activeMap = useCampaignStore.getState().activeMaps.find((m) => m.id === activeMapId)
             const gridSize = activeMap?.gridSize ?? 50
-            // Paste anchor = current visible map center
+            // Paste anchor = cursor in map space, falling back to
+            // visible map centre if the cursor hasn't entered the canvas
+            // yet (e.g. paste fired from the command palette). Phase 11
+            // M-34: Roll20 / Foundry both anchor at cursor.
+            const cursor = getLastCursorMap()
             const { canvasW, canvasH, screenToMap } = useMapTransformStore.getState()
-            const center = screenToMap(canvasW / 2, canvasH / 2)
+            const center = cursor ?? screenToMap(canvasW / 2, canvasH / 2)
             // Track the currently active DB ids for each paste slot so undo/redo
             // can operate on the most recent set (ids change each redo cycle).
             const pastedIds: number[] = []
@@ -306,15 +320,30 @@ export function useKeyboardShortcuts() {
         case 'd': case 'D':
           useUIStore.getState().setActiveTool('draw-freehand')
           break
+        case 'm': case 'M': {
+          // Repeat-M cycles measure-line → measure-circle → measure-cone
+          // → measure-line, mirroring Foundry's "press M to cycle ruler
+          // shape" idiom. First press from any other tool jumps to line.
+          const cur = useUIStore.getState().activeTool
+          const next =
+            cur === 'measure-line'   ? 'measure-circle' :
+            cur === 'measure-circle' ? 'measure-cone'   :
+            cur === 'measure-cone'   ? 'measure-line'   : 'measure-line'
+          useUIStore.getState().setActiveTool(next)
+          break
+        }
         case 'g': case 'G':
           if (e.shiftKey) {
             // Shift+G toggles grid visibility on the active map *and* arms
             // the chord window: press + / - within CHORD_WINDOW_MS to
-            // resize the grid instead of toggling it.
+            // resize the grid instead of toggling it. The toast advertises
+            // the chord so the feature is discoverable on first use
+            // (Phase 11 M-11 / M-41).
             const { activeMapId, activeMaps } = useCampaignStore.getState()
             const map = activeMaps.find((m) => m.id === activeMapId)
             if (map) void persistMapGridPatch({ gridVisible: !(map.gridVisible ?? true) })
             gridChordDeadline = performance.now() + CHORD_WINDOW_MS
+            showToast('Grid: press + / − to resize', 'info', 1200)
           } else {
             // Plain G activates wall-draw (matches dock + overlay + every
             // VTT convention). Grid toggle moved to Shift+G.
@@ -328,7 +357,12 @@ export function useKeyboardShortcuts() {
           useUIStore.getState().setActiveTool('room')
           break
         case 'e': case 'E':
-          useUIStore.getState().togglePlayerEye()
+          if (e.shiftKey) {
+            // Shift+E = eraser tool (matches Photoshop / Figma / OBR).
+            useUIStore.getState().setActiveTool('draw-erase')
+          } else {
+            useUIStore.getState().togglePlayerEye()
+          }
           break
         case 't': case 'T':
           // T = token-place tool. The Tokens sidebar tab is on Ctrl+1
@@ -338,6 +372,12 @@ export function useKeyboardShortcuts() {
           useUIStore.getState().setActiveTool('token')
           break
         case 'n': case 'N': {
+          // Only fire when there is an active combat to advance — a stray
+          // `N` keystroke during prep or with no combatants would silently
+          // jump the round otherwise. Aligns with Foundry's gating on the
+          // active control selection.
+          const initEntries = useInitiativeStore.getState().entries
+          if (initEntries.length === 0) break
           useInitiativeStore.getState().nextTurn()
           // Broadcast to player window (same as InitiativePanel.handleNextTurn)
           if (useSessionStore.getState().sessionMode !== 'prep') {

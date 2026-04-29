@@ -302,7 +302,7 @@ function buildTemplate(lang: MenuLanguage): MenuItemConstructorOptions[] {
       { label: s.startSession, click: () => send('start-session') },
       { label: s.endSession, click: () => send('end-session') },
       { type: 'separator' },
-      { label: s.blackout, accelerator: 'CmdOrCtrl+B', click: () => send('toggle-blackout') },
+      { label: s.blackout, accelerator: 'CmdOrCtrl+Shift+B', click: () => send('toggle-blackout') },
       { label: s.shareCamera, click: () => send('share-camera-once') },
       { label: s.followCamera, click: () => send('toggle-camera-follow') },
       { label: s.atmosphere, click: () => send('atmosphere-image') },

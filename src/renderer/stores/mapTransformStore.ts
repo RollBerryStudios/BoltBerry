@@ -23,6 +23,18 @@ interface MapTransformState extends MapTransform {
   mapToScreen: (mx: number, my: number) => { x: number; y: number }
 }
 
+// Last cursor position in map space (Phase 11 M-34). Lives outside the
+// Zustand store so MapLayer's mousemove can update it ~60 times/s without
+// triggering subscriber notifications. Read by the paste handler in
+// useKeyboardShortcuts so Ctrl+V drops at the cursor.
+let lastCursorMap: { x: number; y: number } | null = null
+export function setLastCursorMap(p: { x: number; y: number } | null): void {
+  lastCursorMap = p
+}
+export function getLastCursorMap(): { x: number; y: number } | null {
+  return lastCursorMap
+}
+
 const DEFAULT: MapTransform = { scale: 1, offsetX: 0, offsetY: 0, imgW: 0, imgH: 0, fitScale: 1, canvasW: 0, canvasH: 0 }
 
 const MIN_SCALE = 0.05

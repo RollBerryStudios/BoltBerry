@@ -3,7 +3,7 @@ import { Layer, Image as KonvaImage, Shape } from 'react-konva'
 import Konva from 'konva'
 import type { MapRecord } from '@shared/ipc-types'
 import { DEFAULT_GRID_COLOR } from '@shared/defaults'
-import { useMapTransformStore } from '../../stores/mapTransformStore'
+import { useMapTransformStore, setLastCursorMap } from '../../stores/mapTransformStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useUIStore } from '../../stores/uiStore'
 import { useRotatedImage } from '../../hooks/useRotatedImage'
@@ -221,6 +221,16 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
   }
 
   function handleMouseMove(e: Konva.KonvaEventObject<MouseEvent>) {
+    // Track cursor in map space so Ctrl+V paste (Phase 11 M-34) can
+    // drop at the cursor instead of viewport centre. Module-level ref
+    // (no Zustand notification) so 60 fps mousemove stays cheap.
+    {
+      const stage = stageRef.current
+      const pos = stage?.getPointerPosition()
+      if (pos) {
+        setLastCursorMap(useMapTransformStore.getState().screenToMap(pos.x, pos.y))
+      }
+    }
     if (isDraggingViewport.current) {
       const ui = useUIStore.getState()
       if (!ui.playerViewport) { isDraggingViewport.current = false; return }

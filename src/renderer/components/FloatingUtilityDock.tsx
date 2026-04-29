@@ -9,13 +9,18 @@ interface DockItem {
   id: FloatingPanel
   labelKey: string
   icon: string
+  shortcut: string
   render: () => JSX.Element
 }
 
+// `shortcut` mirrors the Ctrl+1..9 panel switcher in
+// useKeyboardShortcuts: overlay=Ctrl+7, audio=Ctrl+8, dice=Ctrl+9.
+// Surfaced in the button tooltip so the binding is discoverable
+// without reading the help overlay (Phase 11 M-23).
 const ITEMS: DockItem[] = [
-  { id: 'dice',    labelKey: 'sidebar.right.tabDice',    icon: '🎲', render: () => <DiceRoller /> },
-  { id: 'audio',   labelKey: 'sidebar.right.tabAudio',   icon: '🎵', render: () => <AudioFloatingPanel /> },
-  { id: 'overlay', labelKey: 'sidebar.right.tabOverlay', icon: '✦',  render: () => <OverlayPanel /> },
+  { id: 'dice',    labelKey: 'sidebar.right.tabDice',    icon: '🎲', shortcut: 'Ctrl+9', render: () => <DiceRoller /> },
+  { id: 'audio',   labelKey: 'sidebar.right.tabAudio',   icon: '🎵', shortcut: 'Ctrl+8', render: () => <AudioFloatingPanel /> },
+  { id: 'overlay', labelKey: 'sidebar.right.tabOverlay', icon: '✦',  shortcut: 'Ctrl+7', render: () => <OverlayPanel /> },
 ]
 
 export function FloatingUtilityDock() {
@@ -76,7 +81,7 @@ export function FloatingUtilityDock() {
               onClick={() => toggleFloatingPanel(item.id)}
               aria-pressed={isOpen}
               aria-label={t(item.labelKey)}
-              title={t(item.labelKey)}
+              title={`${t(item.labelKey)} [${item.shortcut}]`}
             >
               <span aria-hidden="true">{item.icon}</span>
             </button>

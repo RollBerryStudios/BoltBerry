@@ -246,7 +246,7 @@ export function Toolbar() {
     <div className="toolbar">
 
       {/* ── SECTION: Navigation ─────────────────────────────────────────── */}
-      <button className="tool-btn" title={t('toolbar.leftSidebar')} aria-label={t('toolbar.leftSidebar')} onClick={toggleLeftSidebar}>◧</button>
+      <button className="tool-btn" title={`${t('toolbar.leftSidebar')} (Ctrl+B)`} aria-label={t('toolbar.leftSidebar')} onClick={toggleLeftSidebar}>◧</button>
 
       {/* Breadcrumb + broadcast pill now live in the frameless title bar
           (src/renderer/components/DmTitleBar.tsx). Only the back-to-
@@ -555,7 +555,7 @@ export function Toolbar() {
         {/* Blackout */}
         <button
           className={clsx('tool-btn', blackoutActive && 'active')}
-          title={`${t('toolbar.blackout')} (Ctrl+B)`}
+          title={`${t('toolbar.blackout')} (Ctrl+Shift+B)`}
           aria-label={t('toolbar.blackout')}
           onClick={toggleBlackout}
           style={blackoutActive ? { color: 'var(--warning)' } : undefined}
