@@ -536,9 +536,9 @@ Recommendation: **Option (1)**. Sprints 1–3 close every contradiction the user
 | **Sprint 1** — C-1, C-2, C-8/C-9, C-39 | ✅ shipped | `35cfa366` |
 | **Sprint 2** — C-16, C-17 | ✅ shipped (logic was already in MapLayer; this commit closed the documentation loop) | `d90a8866` |
 | **Sprint 3** — C-28, M-29 | ⚠ partial | M-29 verified already working via the engine's `headerForUnder` injection (`registry.ts:86–93`) + `CanvasArea.tsx:227–235` populates `underRooms` for every right-click — no code change needed for wall/pin/drawing under-room headers. C-28 (full token menu migration) **deferred** — the inline editing state (HP chips, rename, AC/notes) is tightly coupled to TokenLayer's render and needs interactive QA on the rich editing flows. |
-| **Sprint 4** — Moderate batch | next |  |
-| **Sprint 5** — Keybind editor + a11y | pending |  |
-| **Backlog** — minors | pending |  |
+| **Sprint 4** — Moderate batch | ✅ shipped | `07d197fd` |
+| **Sprint 5** — M-40 / M-44 / M-45 | ⚠ partial | M-45 LeftToolDock shipped (roving tabindex + Arrow / Home / End nav, vertical orientation, per-WAI-ARIA toolbar pattern). M-44 minimal shipped (canvas container is now tab-focusable with `role="application"` + `aria-label` so keyboard users can land on it; existing global shortcuts work from there). M-40 (keybind editor) and the deeper M-44 (per-token Tab cycling, visual focus indicator) **deferred** — both are multi-day features that need: a new `keybindStore` for overrides + conflict detection, persisted UX in GlobalSettingsModal, and integration with every keyboard handler in the app (M-40); plus a token-ordering policy, focus-visible indicator inside Konva, and interactive QA on the cycle-and-Enter flow (M-44 deeper). Tracked as their own follow-up sprint. |
+| **Backlog** — minors | next |  |
 
 ---
 

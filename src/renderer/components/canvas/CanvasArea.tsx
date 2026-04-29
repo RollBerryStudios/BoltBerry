@@ -608,7 +608,15 @@ export function CanvasArea() {
       ref={containerRef}
       className={`canvas-area${hudIdle ? ' hud-idle' : ''}`}
       data-tool={activeTool}
-      style={{ position: 'relative' }}
+      role="application"
+      aria-label="Map canvas"
+      // Tab-focusable so keyboard users can reach the canvas (Phase 11
+      // M-44 minimal). Once focused, the existing global keyboard
+      // shortcuts apply (V/M/B/F/etc., arrow-key viewport rotation in
+      // Player Control mode, Esc to deselect, etc.). Per-token keyboard
+      // cycling is tracked separately as a follow-up.
+      tabIndex={0}
+      style={{ position: 'relative', outline: 'none' }}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}

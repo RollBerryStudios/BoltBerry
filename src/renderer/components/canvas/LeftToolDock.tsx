@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { forwardRef, useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 import { useUIStore, type ActiveTool } from '../../stores/uiStore'
@@ -117,6 +117,15 @@ export function LeftToolDock() {
   const dockLabels = useDockStore((s) => s.dockLabels)
   const dockAutoHide = useDockStore((s) => s.dockAutoHide)
   const [openGroup, setOpenGroup] = useState<string | null>(null)
+  // Roving tabindex (Phase 11 M-45). The toolbar is one Tab stop; once
+  // focused, ArrowUp/ArrowDown/Home/End move between buttons. This
+  // matches the WAI-ARIA toolbar pattern. `focusedIndex` is the index
+  // of the button that currently has tabIndex=0; all others have -1.
+  const [focusedIndex, setFocusedIndex] = useState(0)
+  // Flat list of all groups in dock order, so arrow-nav can walk a
+  // single index across the section dividers.
+  const flatGroups = SECTIONS.flatMap((s) => s.groups)
+  const buttonRefs = useRef<Array<HTMLButtonElement | null>>([])
 
   // Player-preview restricts the DM to the pointer tool — hide the rail.
   if (workMode === 'player-preview') return null
@@ -130,6 +139,37 @@ export function LeftToolDock() {
     setActiveTool(id)
   }
 
+  const moveFocus = (next: number) => {
+    const clamped = Math.max(0, Math.min(flatGroups.length - 1, next))
+    setFocusedIndex(clamped)
+    // Defer focus until React commits the new tabIndex so the
+    // browser's focus model sees the right element.
+    requestAnimationFrame(() => buttonRefs.current[clamped]?.focus())
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    switch (e.key) {
+      case 'ArrowDown':
+      case 'ArrowRight':
+        e.preventDefault()
+        moveFocus(focusedIndex + 1)
+        break
+      case 'ArrowUp':
+      case 'ArrowLeft':
+        e.preventDefault()
+        moveFocus(focusedIndex - 1)
+        break
+      case 'Home':
+        e.preventDefault()
+        moveFocus(0)
+        break
+      case 'End':
+        e.preventDefault()
+        moveFocus(flatGroups.length - 1)
+        break
+    }
+  }
+
   const classes = [
     'left-tool-dock',
     dockLabels ? 'left-tool-dock--labels' : '',
@@ -139,24 +179,36 @@ export function LeftToolDock() {
     dockAutoHide ? 'canvas-hud-fade' : '',
   ].filter(Boolean).join(' ')
 
+  // Pre-compute the dock index for every group so render order is
+  // independent of React's render passes (StrictMode double-render
+  // would otherwise drift a runningIndex counter).
+  const groupIndexById = new Map<string, number>()
+  flatGroups.forEach((g, idx) => groupIndexById.set(g.id, idx))
+
   return (
-    <div className={classes} role="toolbar" aria-label={t('toolbar.tools.select')}>
+    <div className={classes} role="toolbar" aria-orientation="vertical" aria-label={t('toolbar.tools.select')} onKeyDown={handleKeyDown}>
       {SECTIONS.map((section, i) => (
         <div key={section.id} className="left-tool-dock-section">
           {i > 0 && <div className="left-tool-dock-divider" aria-hidden="true" />}
-          {section.groups.map((g) => (
-            <ToolGroupButton
-              key={g.id}
-              group={g}
-              activeTool={activeTool}
-              open={openGroup === g.id}
-              onToggleOpen={() => setOpenGroup(openGroup === g.id ? null : g.id)}
-              onClose={() => setOpenGroup(null)}
-              onSelect={handleSelect}
-              showLabel={dockLabels}
-              t={t}
-            />
-          ))}
+          {section.groups.map((g) => {
+            const idx = groupIndexById.get(g.id)!
+            return (
+              <ToolGroupButton
+                key={g.id}
+                ref={(el) => { buttonRefs.current[idx] = el }}
+                tabIndex={idx === focusedIndex ? 0 : -1}
+                onFocus={() => setFocusedIndex(idx)}
+                group={g}
+                activeTool={activeTool}
+                open={openGroup === g.id}
+                onToggleOpen={() => setOpenGroup(openGroup === g.id ? null : g.id)}
+                onClose={() => setOpenGroup(null)}
+                onSelect={handleSelect}
+                showLabel={dockLabels}
+                t={t}
+              />
+            )
+          })}
         </div>
       ))}
     </div>
@@ -172,10 +224,21 @@ interface ToolGroupButtonProps {
   onSelect: (id: ActiveTool) => void
   showLabel: boolean
   t: (k: string) => string
+  /** Roving-tabindex value injected by the parent (M-45). */
+  tabIndex: number
+  /** Notifies the parent which button is focused so the parent can
+   *  shift the roving tabindex onto it. */
+  onFocus: () => void
 }
 
-function ToolGroupButton({ group, activeTool, open, onToggleOpen, onClose, onSelect, showLabel, t }: ToolGroupButtonProps) {
+const ToolGroupButton = forwardRef<HTMLButtonElement, ToolGroupButtonProps>(function ToolGroupButton(
+  { group, activeTool, open, onToggleOpen, onClose, onSelect, showLabel, t, tabIndex, onFocus },
+  forwardedRef,
+) {
   const btnRef = useRef<HTMLButtonElement>(null)
+  // Forward the inner ref out so the parent can call .focus() during
+  // arrow-key navigation.
+  useImperativeHandle(forwardedRef, () => btnRef.current as HTMLButtonElement)
   const popRef = useRef<HTMLDivElement>(null)
   const [pos, setPos] = useState<{ top: number; left: number } | null>(null)
 
@@ -278,6 +341,8 @@ function ToolGroupButton({ group, activeTool, open, onToggleOpen, onClose, onSel
         title={label}
         aria-label={label}
         aria-pressed={groupActive}
+        tabIndex={tabIndex}
+        onFocus={onFocus}
         onClick={handleClick}
         onContextMenu={handleContext}
       >
@@ -330,4 +395,4 @@ function ToolGroupButton({ group, activeTool, open, onToggleOpen, onClose, onSel
       )}
     </div>
   )
-}
+})
