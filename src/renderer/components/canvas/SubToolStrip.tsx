@@ -71,11 +71,13 @@ export function SubToolStrip() {
           <Divider />
           <Pill
             label={t('subtool.reveal')}
+            shortcut="B"
             active={!isCover}
             onClick={() => setActiveTool('fog-brush')}
           />
           <Pill
             label={t('subtool.cover')}
+            shortcut="X"
             active={isCover}
             onClick={() => setActiveTool('fog-brush-cover')}
           />
@@ -89,23 +91,23 @@ export function SubToolStrip() {
       return (
         <>
           <Seg label={t('subtool.fogShape')} />
-          <Pill label={t('toolbar.tools.fogRect')}    active={activeTool === 'fog-rect'}    onClick={() => setActiveTool('fog-rect')} />
-          <Pill label={t('toolbar.tools.fogPolygon')} active={activeTool === 'fog-polygon'} onClick={() => setActiveTool('fog-polygon')} />
+          <Pill label={t('toolbar.tools.fogRect')}    shortcut="F" active={activeTool === 'fog-rect'}    onClick={() => setActiveTool('fog-rect')} />
+          <Pill label={t('toolbar.tools.fogPolygon')} shortcut="P" active={activeTool === 'fog-polygon'} onClick={() => setActiveTool('fog-polygon')} />
           <Divider />
           <Pill label={t('subtool.reveal')} active={!isCover} onClick={() => setActiveTool('fog-rect')} />
-          <Pill label={t('subtool.cover')}  active={isCover}  onClick={() => setActiveTool('fog-cover')} />
+          <Pill label={t('subtool.cover')}  shortcut="C" active={isCover}  onClick={() => setActiveTool('fog-cover')} />
         </>
       )
     }
 
-    // Measure shape toggle.
+    // Measure shape toggle. M cycles between them (Phase 11 M-3).
     if (activeTool === 'measure-line' || activeTool === 'measure-circle' || activeTool === 'measure-cone') {
       return (
         <>
           <Seg label={t('subtool.measure')} />
-          <Pill label={t('toolbar.tools.measureLine')}   active={activeTool === 'measure-line'}   onClick={() => setActiveTool('measure-line')} />
-          <Pill label={t('toolbar.tools.measureCircle')} active={activeTool === 'measure-circle'} onClick={() => setActiveTool('measure-circle')} />
-          <Pill label={t('toolbar.tools.measureCone')}   active={activeTool === 'measure-cone'}   onClick={() => setActiveTool('measure-cone')} />
+          <Pill label={t('toolbar.tools.measureLine')}   shortcut="M" active={activeTool === 'measure-line'}   onClick={() => setActiveTool('measure-line')} />
+          <Pill label={t('toolbar.tools.measureCircle')} shortcut="M" active={activeTool === 'measure-circle'} onClick={() => setActiveTool('measure-circle')} />
+          <Pill label={t('toolbar.tools.measureCone')}   shortcut="M" active={activeTool === 'measure-cone'}   onClick={() => setActiveTool('measure-cone')} />
         </>
       )
     }
@@ -115,8 +117,8 @@ export function SubToolStrip() {
       return (
         <>
           <Seg label={t('subtool.wall')} />
-          <Pill label={t('toolbar.tools.wallDraw')} active={activeTool === 'wall-draw'} onClick={() => setActiveTool('wall-draw')} />
-          <Pill label={t('toolbar.tools.wallDoor')} active={activeTool === 'wall-door'} onClick={() => setActiveTool('wall-door')} />
+          <Pill label={t('toolbar.tools.wallDraw')} shortcut="G" active={activeTool === 'wall-draw'} onClick={() => setActiveTool('wall-draw')} />
+          <Pill label={t('toolbar.tools.wallDoor')} shortcut="J" active={activeTool === 'wall-door'} onClick={() => setActiveTool('wall-door')} />
         </>
       )
     }
@@ -168,14 +170,18 @@ interface PillProps {
   label: string
   active: boolean
   mono?: boolean
+  /** Optional shortcut hint for the tooltip — Phase 11 m-43.
+   *  Renders as `${label} [${shortcut}]` in the title attribute. */
+  shortcut?: string
   onClick: () => void
 }
 
-function Pill({ label, active, mono, onClick }: PillProps) {
+function Pill({ label, active, mono, shortcut, onClick }: PillProps) {
   return (
     <button
       type="button"
       onClick={onClick}
+      title={shortcut ? `${label} [${shortcut}]` : label}
       className={`sub-tool-pill${active ? ' active' : ''}${mono ? ' mono' : ''}`}
     >
       {label}

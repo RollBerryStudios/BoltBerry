@@ -685,7 +685,11 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
   }, [updateToken])
 
   const stableHandleSelect = useCallback((tokenId: number, e?: Konva.KonvaEventObject<MouseEvent>) => {
-    if (e?.evt?.shiftKey) {
+    // Shift+Click and Ctrl/Cmd+Click both toggle the token in/out of
+    // the multi-selection (Phase 11 m-21). Foundry binds Ctrl+Click to
+    // "select-add"; Shift to "select-range" — we keep both as additive
+    // toggles since we don't have a "range" concept yet.
+    if (e?.evt?.shiftKey || e?.evt?.ctrlKey || e?.evt?.metaKey) {
       toggleTokenInSelection(tokenId)
     } else if (!latestRef.current.selectedTokenIds.includes(tokenId)) {
       setSelectedToken(tokenId)
@@ -772,6 +776,37 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
     } catch (err) {
       console.error('[TokenLayer] handleDuplicate failed:', err)
     }
+  }
+
+  // Phase 11 m-36: Ctrl+D from useKeyboardShortcuts triggers the same
+  // duplicate logic as the context-menu item. Reads selection / tokens
+  // through latestRef so the listener registered once on mount still
+  // sees fresh state on every fire.
+  useEffect(() => {
+    const onDuplicate = () => {
+      const { tokens: curTokens, selectedTokenIds: curSel, map: curMap } = latestRef.current
+      void duplicateTokens(curTokens, curSel, curMap.gridSize)
+    }
+    window.addEventListener('tokens:duplicate-selection', onDuplicate)
+    return () => window.removeEventListener('tokens:duplicate-selection', onDuplicate)
+  }, [])
+
+  async function duplicateTokens(curTokens: typeof tokens, curSel: number[], gridSize: number) {
+    if (!window.electronAPI) return
+    const selectedTokens = curTokens.filter((t) => curSel.includes(t.id))
+    if (selectedTokens.length === 0) return
+    for (const token of selectedTokens) {
+      const newX = token.x + gridSize
+      const newY = token.y + gridSize
+      try {
+        const { id: _omit, ...rest } = token
+        const created = await window.electronAPI.tokens.create({ ...rest, x: newX, y: newY })
+        useTokenStore.getState().addToken(created)
+      } catch (err) {
+        console.error('[TokenLayer] duplicateTokens failed:', err)
+      }
+    }
+    broadcastTokens(useTokenStore.getState().tokens)
   }
 
   async function handleDuplicateGroup() {

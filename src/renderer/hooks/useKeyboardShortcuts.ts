@@ -157,6 +157,15 @@ export function useKeyboardShortcuts() {
               useUIStore.getState().toggleLeftSidebar()
             }
             return
+          case 'd': {
+            // Ctrl+D — duplicate selected tokens (Phase 11 m-36).
+            // TokenLayer listens for this event; the same code path
+            // powers the right-click "Als Gruppe duplizieren" item.
+            if (useUIStore.getState().selectedTokenIds.length === 0) return
+            e.preventDefault()
+            window.dispatchEvent(new CustomEvent('tokens:duplicate-selection'))
+            return
+          }
           case 'c': {
             // Ctrl+C — copy selected tokens to clipboard
             const { selectedTokenIds } = useUIStore.getState()
@@ -410,7 +419,14 @@ export function useKeyboardShortcuts() {
             // Capture full token records BEFORE deletion so undo can re-insert
             const deletedTokens = ids.map((id) => tokens.find((t) => t.id === id)).filter(Boolean) as typeof tokens
             const names = deletedTokens.map((t) => t.name).join(', ')
-            window.electronAPI?.deleteTokenConfirm(names).then(async (confirmed) => {
+            // Phase 11 m-15: confirm only when batch-deleting (≥3 tokens).
+            // Roll20 / Foundry both delete silently and rely on undo as
+            // the safety net; we have undo, the confirm is friction.
+            const needsConfirm = ids.length >= 3
+            const confirmedPromise = needsConfirm
+              ? window.electronAPI!.deleteTokenConfirm(names)
+              : Promise.resolve(true)
+            confirmedPromise.then(async (confirmed) => {
               if (!confirmed) return
               for (const id of ids) {
                 useTokenStore.getState().removeToken(id)

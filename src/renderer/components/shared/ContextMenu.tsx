@@ -113,11 +113,20 @@ export function ContextMenu({ envelope, onClose }: ContextMenuProps) {
       const root = rootRef.current
       if (root && !root.contains(e.target as Node)) onClose()
     }
+    // Phase 11 m-32: close on resize / blur so the menu doesn't hover
+    // at stale screen coordinates after the window changes shape or
+    // loses focus (e.g. user alt-tabs to another app).
+    const onResize = () => onClose()
+    const onBlur = () => onClose()
     window.addEventListener('keydown', onKey)
     window.addEventListener('mousedown', onMouseDown, { capture: true })
+    window.addEventListener('resize', onResize)
+    window.addEventListener('blur', onBlur)
     return () => {
       window.removeEventListener('keydown', onKey)
       window.removeEventListener('mousedown', onMouseDown, { capture: true })
+      window.removeEventListener('resize', onResize)
+      window.removeEventListener('blur', onBlur)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [envelope, activeIndex, navIndex, sections, onClose])
