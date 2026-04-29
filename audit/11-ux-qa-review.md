@@ -341,7 +341,7 @@ Estimates are LOC and time including testing.
 | **C-9** | `useSfxHotkeys` floating-popover guard contradicts `useKeyboardShortcuts` audio branch | Same fix as C-8 — delete the duplicate. | (in C-8) |
 | **C-16** | Right-click drag does not pan; only middle / Alt / Space pan | Implement Phase 10 §A.4: button===2 mousedown arms, threshold 5 px, mouseup blocks next contextmenu via one-shot capture-phase listener. | 80 LOC, 1 hr |
 | **C-17** | Plain-left-drag on empty stage rubber-bands instead of panning when select tool active | Implement Phase 10 §A "secondary improvement": gate rubber-band on `Shift`; bare left-drag pans when target is Stage and select tool active. | 30 LOC, 30 min |
-| **C-28** | Two context-menu render paths (engine + token-legacy) | Implement Phase 10 §B.4: migrate token menu to engine with `customRender` for HP/AC/notes block. | 250 LOC, 0.5–1 day |
+| **C-28** | Two context-menu render paths (engine + token-legacy) | Implement Phase 10 §B.4: migrate token menu to engine with `customRender` for HP/AC/notes block. **Deferred to a dedicated sprint** — touching the inline editing state (HP chip ladder −5/−1/+1/+5, rename Enter/Esc/blur, AC/notes editing, 22 status effects, marker swatch grid, multi-token batch header) requires interactive QA that isn't safely doable in one batch. Tracked separately. | 250 LOC, 0.5–1 day |
 | **C-39** | ShortcutOverlay drift (8 rows) | Add missing entries: `L`, right-pan, plain-left-pan, Ctrl+1..9 panels, `Ctrl+,` settings, `G` grid+chord, audio digits, audio `ß`. Fix `T` row. | 60 LOC, 30 min |
 
 **Total Critical effort:** ~1 day.
@@ -526,6 +526,19 @@ Pick from:
 - **(4) Cherry-pick.** Tell me which IDs from §9 you want first.
 
 Recommendation: **Option (1)**. Sprints 1–3 close every contradiction the user already complained about (G key, pan, token menu length) plus the docs lie that ShortcutOverlay has been carrying. M-40 (keybind editor) is the right lever to make many Moderate items moot — but it's a bigger design conversation, worth doing as its own pass.
+
+---
+
+## Execution log
+
+| Sprint | Status | Commits |
+|---|---|---|
+| **Sprint 1** — C-1, C-2, C-8/C-9, C-39 | ✅ shipped | `35cfa366` |
+| **Sprint 2** — C-16, C-17 | ✅ shipped (logic was already in MapLayer; this commit closed the documentation loop) | `d90a8866` |
+| **Sprint 3** — C-28, M-29 | ⚠ partial | M-29 verified already working via the engine's `headerForUnder` injection (`registry.ts:86–93`) + `CanvasArea.tsx:227–235` populates `underRooms` for every right-click — no code change needed for wall/pin/drawing under-room headers. C-28 (full token menu migration) **deferred** — the inline editing state (HP chips, rename, AC/notes) is tightly coupled to TokenLayer's render and needs interactive QA on the rich editing flows. |
+| **Sprint 4** — Moderate batch | next |  |
+| **Sprint 5** — Keybind editor + a11y | pending |  |
+| **Backlog** — minors | pending |  |
 
 ---
 
