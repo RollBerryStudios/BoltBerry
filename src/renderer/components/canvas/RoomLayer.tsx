@@ -25,7 +25,7 @@ const VISIBILITY_COLORS: Record<string, { fill: string; stroke: string }> = {
 export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
   const rooms = useRoomStore((s) => s.rooms.filter((r) => r.mapId === mapId))
   const selectedRoomId = useRoomStore((s) => s.selectedRoomId)
-  const { updateRoom, setSelectedRoomId, addRoom, removeRoom } = useRoomStore()
+  const { updateRoom, setSelectedRoomId, removeRoom } = useRoomStore()
   const activeTool = useUIStore((s) => s.activeTool)
   const scale = useMapTransformStore((s) => s.scale)
 
@@ -98,7 +98,7 @@ export function RoomLayer({ mapId, stageRef, gridSize }: RoomLayerProps) {
     }
     setDrawingPoints([])
     setPreviewPoint(null)
-  }, [drawingPoints, mapId, addRoom, setSelectedRoomId])
+  }, [drawingPoints, mapId, setSelectedRoomId])
 
   const handleDoubleClick = useCallback(() => {
     if (drawingPoints.length >= 3) finishRoom()
