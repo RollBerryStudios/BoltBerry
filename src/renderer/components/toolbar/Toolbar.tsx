@@ -436,14 +436,16 @@ export function Toolbar() {
           see it) are DM-side render diagnostics, not player-display
           controls — they belong here next to zoom / minimap / grid-snap. */}
       <div
+        data-testid="toolbar-zoom-percent"
         title="Zoom (Mausrad zum Zoomen)"
         style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', minWidth: 36, textAlign: 'center', lineHeight: '32px', fontFamily: 'monospace', cursor: 'default' }}
       >
         {zoomPercent}%
       </div>
-      <button className="tool-btn" title="Ansicht einpassen (0)" aria-label="Ansicht einpassen" onClick={() => useMapTransformStore.getState().fitToScreen()}>⊡</button>
-      <button className={clsx('tool-btn', showMinimap && 'active')} title="Minimap" aria-label="Minimap" onClick={toggleMinimap}>🗺</button>
+      <button data-testid="button-zoom-fit" className="tool-btn" title="Ansicht einpassen (0)" aria-label="Ansicht einpassen" onClick={() => useMapTransformStore.getState().fitToScreen()}>⊡</button>
+      <button data-testid="button-toggle-minimap" className={clsx('tool-btn', showMinimap && 'active')} title="Minimap" aria-label="Minimap" onClick={toggleMinimap}>🗺</button>
       <button
+        data-testid="button-toggle-grid-snap"
         className={clsx('tool-btn', gridSnap && 'active')}
         title={gridSnap ? 'Raster-Snap AN' : 'Raster-Snap AUS'}
         aria-label={gridSnap ? 'Raster-Snap AN' : 'Raster-Snap AUS'}
@@ -452,6 +454,7 @@ export function Toolbar() {
         ⊞
       </button>
       <button
+        data-testid="button-toggle-player-eye"
         className={clsx('tool-btn', showPlayerEye && 'active')}
         title={showPlayerEye ? 'Spieler-Sicht ausblenden [E]' : 'Spieler-Sicht anzeigen [E]'}
         aria-label={showPlayerEye ? 'Spieler-Sicht ausblenden' : 'Spieler-Sicht anzeigen'}
@@ -461,6 +464,7 @@ export function Toolbar() {
         👁‍🗨
       </button>
       <button
+        data-testid="button-toggle-player-preview"
         className={clsx('tool-btn', workMode === 'player-preview' && 'active')}
         title={workMode === 'player-preview'
           ? 'Spieler-Vorschau beenden — DM-Canvas zurück zur normalen Ansicht'

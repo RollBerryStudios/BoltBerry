@@ -50,13 +50,14 @@ export function MultiSelectBar() {
   }
 
   return (
-    <div className="multi-select-bar" role="toolbar" aria-label={t('multiSelect.label')}>
-      <span className="multi-select-count">
+    <div className="multi-select-bar" data-testid="multi-select-bar" role="toolbar" aria-label={t('multiSelect.label')}>
+      <span className="multi-select-count" data-testid="multi-select-count">
         {t('multiSelect.countSelected', { count: selectedTokenIds.length })}
       </span>
       <div className="multi-select-divider" />
       <button
         type="button"
+        data-testid="button-multi-select-visibility"
         className="multi-select-btn"
         onClick={handleToggleVisibility}
         title={nextVisible ? t('multiSelect.showAll') : t('multiSelect.hideAll')}
@@ -66,6 +67,7 @@ export function MultiSelectBar() {
       </button>
       <button
         type="button"
+        data-testid="button-multi-select-delete"
         className="multi-select-btn multi-select-btn-danger"
         onClick={handleDelete}
         title={t('multiSelect.deleteAll')}
@@ -74,6 +76,7 @@ export function MultiSelectBar() {
       </button>
       <button
         type="button"
+        data-testid="button-multi-select-clear"
         className="multi-select-btn multi-select-btn-ghost"
         onClick={clearTokenSelection}
         title={t('multiSelect.clear')}

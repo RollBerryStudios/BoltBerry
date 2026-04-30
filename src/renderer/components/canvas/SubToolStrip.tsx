@@ -69,7 +69,7 @@ export function SubToolStrip() {
   }
 
   return (
-    <div className={classes} role="toolbar" aria-label={t('subtool.label')} onKeyDown={handleKeyDown}>
+    <div className={classes} data-testid="canvas-subtool-strip" role="toolbar" aria-label={t('subtool.label')} onKeyDown={handleKeyDown}>
       {content}
     </div>
   )
@@ -84,6 +84,7 @@ export function SubToolStrip() {
           {[20, 60, 120].map((size) => (
             <Pill
               key={size}
+              dataTestId={`button-fog-brush-size-${size}`}
               label={`${size}`}
               mono
               active={fogBrushRadius === size}
@@ -93,12 +94,14 @@ export function SubToolStrip() {
           <Divider />
           <Pill
             label={t('subtool.reveal')}
+            dataTestId="button-fog-brush-reveal"
             shortcut="B"
             active={!isCover}
             onClick={() => setActiveTool('fog-brush')}
           />
           <Pill
             label={t('subtool.cover')}
+            dataTestId="button-fog-brush-cover"
             shortcut="X"
             active={isCover}
             onClick={() => setActiveTool('fog-brush-cover')}
@@ -113,11 +116,11 @@ export function SubToolStrip() {
       return (
         <>
           <Seg label={t('subtool.fogShape')} />
-          <Pill label={t('toolbar.tools.fogRect')}    shortcut="F" active={activeTool === 'fog-rect'}    onClick={() => setActiveTool('fog-rect')} />
-          <Pill label={t('toolbar.tools.fogPolygon')} shortcut="P" active={activeTool === 'fog-polygon'} onClick={() => setActiveTool('fog-polygon')} />
+          <Pill label={t('toolbar.tools.fogRect')}    dataTestId="button-fog-shape-rect" shortcut="F" active={activeTool === 'fog-rect'}    onClick={() => setActiveTool('fog-rect')} />
+          <Pill label={t('toolbar.tools.fogPolygon')} dataTestId="button-fog-shape-polygon" shortcut="P" active={activeTool === 'fog-polygon'} onClick={() => setActiveTool('fog-polygon')} />
           <Divider />
-          <Pill label={t('subtool.reveal')} active={!isCover} onClick={() => setActiveTool('fog-rect')} />
-          <Pill label={t('subtool.cover')}  shortcut="C" active={isCover}  onClick={() => setActiveTool('fog-cover')} />
+          <Pill label={t('subtool.reveal')} dataTestId="button-fog-shape-reveal" active={!isCover} onClick={() => setActiveTool('fog-rect')} />
+          <Pill label={t('subtool.cover')}  dataTestId="button-fog-shape-cover" shortcut="C" active={isCover}  onClick={() => setActiveTool('fog-cover')} />
         </>
       )
     }
@@ -127,9 +130,9 @@ export function SubToolStrip() {
       return (
         <>
           <Seg label={t('subtool.measure')} />
-          <Pill label={t('toolbar.tools.measureLine')}   shortcut="M" active={activeTool === 'measure-line'}   onClick={() => setActiveTool('measure-line')} />
-          <Pill label={t('toolbar.tools.measureCircle')} shortcut="M" active={activeTool === 'measure-circle'} onClick={() => setActiveTool('measure-circle')} />
-          <Pill label={t('toolbar.tools.measureCone')}   shortcut="M" active={activeTool === 'measure-cone'}   onClick={() => setActiveTool('measure-cone')} />
+          <Pill label={t('toolbar.tools.measureLine')}   dataTestId="button-measure-line" shortcut="M" active={activeTool === 'measure-line'}   onClick={() => setActiveTool('measure-line')} />
+          <Pill label={t('toolbar.tools.measureCircle')} dataTestId="button-measure-circle" shortcut="M" active={activeTool === 'measure-circle'} onClick={() => setActiveTool('measure-circle')} />
+          <Pill label={t('toolbar.tools.measureCone')}   dataTestId="button-measure-cone" shortcut="M" active={activeTool === 'measure-cone'}   onClick={() => setActiveTool('measure-cone')} />
         </>
       )
     }
@@ -139,8 +142,8 @@ export function SubToolStrip() {
       return (
         <>
           <Seg label={t('subtool.wall')} />
-          <Pill label={t('toolbar.tools.wallDraw')} shortcut="G" active={activeTool === 'wall-draw'} onClick={() => setActiveTool('wall-draw')} />
-          <Pill label={t('toolbar.tools.wallDoor')} shortcut="J" active={activeTool === 'wall-door'} onClick={() => setActiveTool('wall-door')} />
+          <Pill label={t('toolbar.tools.wallDraw')} dataTestId="button-wall-draw" shortcut="G" active={activeTool === 'wall-draw'} onClick={() => setActiveTool('wall-draw')} />
+          <Pill label={t('toolbar.tools.wallDoor')} dataTestId="button-wall-door" shortcut="J" active={activeTool === 'wall-door'} onClick={() => setActiveTool('wall-door')} />
         </>
       )
     }
@@ -162,6 +165,7 @@ export function SubToolStrip() {
           {widths.map((w) => (
             <Pill
               key={w.value}
+              dataTestId={`button-draw-width-${w.value}`}
               label={w.label}
               active={drawWidth === w.value}
               onClick={() => setDrawWidth(w.value)}
@@ -171,6 +175,7 @@ export function SubToolStrip() {
           {colors.map((c) => (
             <button
               key={c}
+              data-testid={`button-draw-color-${c.replace('#', '')}`}
               className={`sub-tool-swatch${drawColor === c ? ' active' : ''}`}
               style={{ background: c }}
               onClick={() => setDrawColor(c)}
@@ -195,13 +200,15 @@ interface PillProps {
   /** Optional shortcut hint for the tooltip — Phase 11 m-43.
    *  Renders as `${label} [${shortcut}]` in the title attribute. */
   shortcut?: string
+  dataTestId?: string
   onClick: () => void
 }
 
-function Pill({ label, active, mono, shortcut, onClick }: PillProps) {
+function Pill({ label, active, mono, shortcut, dataTestId, onClick }: PillProps) {
   return (
     <button
       type="button"
+      data-testid={dataTestId}
       onClick={onClick}
       title={shortcut ? `${label} [${shortcut}]` : label}
       className={`sub-tool-pill${active ? ' active' : ''}${mono ? ' mono' : ''}`}

@@ -520,6 +520,7 @@ function HandoutCard({
           )}
 
           <button
+            data-testid="button-delete-handout"
             className="btn btn-ghost btn-icon"
             style={{ color: 'var(--danger)', flexShrink: 0 }}
             title="Handout löschen"

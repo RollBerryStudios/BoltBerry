@@ -42,6 +42,7 @@ export default defineConfig({
 
   // Global setup / teardown
   globalSetup: './e2e/global-setup.ts',
+  snapshotPathTemplate: '{testDir}/__screenshots__/{projectName}/{testFilePath}/{arg}{ext}',
 
   use: {
     // Screenshot on failure
@@ -64,6 +65,13 @@ export default defineConfig({
     {
       name: 'critical-path',
       testMatch: '**/critical-path/**/*.spec.ts',
+    },
+    {
+      name: 'visual',
+      testMatch: '**/visual/**/*.visual.spec.ts',
+      use: {
+        screenshot: 'only-on-failure',
+      },
     },
   ],
 })

@@ -721,6 +721,7 @@ function NoteRowItem({
       {hover && (
         <button
           type="button"
+          data-testid="button-delete-note"
           onClick={(e) => {
             e.stopPropagation()
             onDelete()

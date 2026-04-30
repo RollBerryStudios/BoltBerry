@@ -637,15 +637,16 @@ function Atmosphere() {
   // 20 dust particles is enough to feel alive without hurting FPS on
   // integrated GPUs. Values are frozen once so React doesn't re-roll on
   // re-render and cause the particles to jump.
+  const visualMode = typeof window !== 'undefined' && localStorage.getItem('boltberry-e2e-visual') === '1'
   const particles = useMemo(
     () =>
-      Array.from({ length: 20 }).map(() => ({
-        left: Math.random() * 100,
-        delay: Math.random() * 30,
-        duration: 25 + Math.random() * 25,
-        size: 1 + Math.random() * 2,
+      Array.from({ length: 20 }).map((_, i) => ({
+        left: visualMode ? (i * 17) % 100 : Math.random() * 100,
+        delay: visualMode ? i * 0.25 : Math.random() * 30,
+        duration: visualMode ? 32 : 25 + Math.random() * 25,
+        size: visualMode ? 1 + (i % 3) * 0.5 : 1 + Math.random() * 2,
       })),
-    [],
+    [visualMode],
   )
   return (
     <div className="bb-welcome-atmosphere" aria-hidden="true">

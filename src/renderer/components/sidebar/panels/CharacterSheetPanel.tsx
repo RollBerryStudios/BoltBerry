@@ -933,6 +933,7 @@ export function CharacterSheetPanel() {
                     </div>
                   </div>
                   <button
+                    data-testid="button-export-character-sheet"
                     onClick={(e) => { e.stopPropagation(); handleExport(s) }}
                     title={t('characters.export')}
                     aria-label={t('characters.export')}
@@ -948,6 +949,7 @@ export function CharacterSheetPanel() {
                     📤
                   </button>
                   <button
+                    data-testid="button-delete-character-sheet"
                     onClick={(e) => { e.stopPropagation(); handleDelete(s.id) }}
                     style={{
                       background: 'none', border: 'none', color: 'var(--text-muted)',

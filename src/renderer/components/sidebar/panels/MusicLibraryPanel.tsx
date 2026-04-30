@@ -407,6 +407,7 @@ export function MusicLibraryPanel() {
         <section className="music-library-list">
           <div className="music-library-filters">
             <select
+              data-testid="select-soundtrack-filter"
               className="music-library-soundtrack"
               value={soundtrackFilter}
               onChange={(e) => setSoundtrackFilter(e.target.value)}
@@ -419,6 +420,7 @@ export function MusicLibraryPanel() {
               ))}
             </select>
             <input
+              data-testid="input-track-search"
               type="text"
               className="music-library-search"
               placeholder={`🔍  ${t('musicLibrary.searchPlaceholder')}`}
@@ -483,15 +485,16 @@ export function MusicLibraryPanel() {
                       )
                     })}
                     <details
+                      data-testid="track-actions-menu"
                       className="music-library-track-menu"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <summary>⋮</summary>
                       <div className="music-library-track-menu-list">
-                        <button onClick={() => handleSetSoundtrack(tr)}>
+                        <button data-testid="button-set-track-soundtrack" onClick={() => handleSetSoundtrack(tr)}>
                           {t('musicLibrary.setSoundtrack')}
                         </button>
-                        <button onClick={() => handleDeleteTrack(tr)} className="danger">
+                        <button data-testid="button-delete-track" onClick={() => handleDeleteTrack(tr)} className="danger">
                           {t('musicLibrary.deleteTrack')}
                         </button>
                       </div>

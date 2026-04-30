@@ -807,6 +807,7 @@ function TemplateCard({
         {isUser && (
           <button
             type="button"
+            data-testid="button-edit-token-template"
             onClick={onOpenEditor}
             title={t('library.edit')}
             style={iconBtn}
@@ -814,6 +815,7 @@ function TemplateCard({
         )}
         <button
           type="button"
+          data-testid="button-duplicate-token-template"
           onClick={onDuplicate}
           title={t('library.duplicate')}
           style={iconBtn}
@@ -821,6 +823,7 @@ function TemplateCard({
         {isUser && (
           <button
             type="button"
+            data-testid="button-delete-token-template"
             onClick={onDelete}
             title={t('library.delete')}
             style={{

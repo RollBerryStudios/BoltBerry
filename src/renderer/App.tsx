@@ -158,6 +158,19 @@ export default function App() {
     return () => window.removeEventListener('beforeunload', onBeforeUnload)
   }, [])
 
+  // E2E-only testability bridge for state that is rendered inside Konva
+  // instead of normal DOM nodes. It is inert in real profiles because the
+  // launch helper is the only place that sets `boltberry-e2e-hooks`.
+  useEffect(() => {
+    if (localStorage.getItem('boltberry-e2e-hooks') !== '1') return
+    const onSetTokenSelection = (event: Event) => {
+      const detail = (event as CustomEvent<{ ids?: number[] }>).detail
+      useUIStore.getState().setSelectedTokens(Array.isArray(detail?.ids) ? detail.ids : [])
+    }
+    window.addEventListener('e2e:set-token-selection', onSetTokenSelection)
+    return () => window.removeEventListener('e2e:set-token-selection', onSetTokenSelection)
+  }, [])
+
   // Surface unhandled promise rejections from store actions / IPC calls.
   // Without this, an awaited dbRun that rejects (e.g. SQLITE_BUSY, FK
   // violation) silently swallows the failure and the UI drifts from the

@@ -917,6 +917,7 @@ export function CanvasArea() {
               {LAYER_DEFS.map((def) => (
                 <button
                   key={def.key}
+                  data-testid={`button-canvas-layer-${def.key}`}
                   onClick={() => def.canToggle && toggleLayer(def.key)}
                   style={{
                     display: 'flex',
@@ -952,6 +953,7 @@ export function CanvasArea() {
               {/* Reset all */}
               <div style={{ borderTop: '1px solid var(--border-subtle)', marginTop: 4, padding: '4px 12px 0' }}>
                 <button
+                  data-testid="button-canvas-layer-reset"
                   onClick={() => setLayerVisibility(DEFAULT_LAYER_VISIBILITY)}
                   style={{
                     background: 'none', border: 'none', padding: '3px 0',

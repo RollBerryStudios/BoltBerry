@@ -57,6 +57,20 @@ export interface LaunchOptions {
    * Default: true for launchApp(), false for launchAppWithUserDataDir().
    */
   cleanupUserDataDir?: boolean
+
+  /**
+   * Enables deterministic renderer settings for visual/a11y/performance
+   * tests: stable viewport, disabled CSS animation/transition timing,
+   * hidden caret, reduced motion, and visual-mode localStorage markers.
+   * Default: false.
+   */
+  visualTestMode?: boolean
+
+  /**
+   * BrowserWindow size used for deterministic screenshots.
+   * Default: 1920x1080 when visualTestMode is true.
+   */
+  windowSize?: { width: number; height: number }
 }
 
 // ─── Factory ──────────────────────────────────────────────────────────────────
@@ -86,7 +100,13 @@ export async function launchAppWithUserDataDir(
   userDataDir: string,
   options: LaunchOptions = {},
 ): Promise<LaunchResult> {
-  const { skipSetupWizard = true, extraArgs = [], cleanupUserDataDir = false } = options
+  const {
+    skipSetupWizard = true,
+    extraArgs = [],
+    cleanupUserDataDir = false,
+    visualTestMode = false,
+    windowSize,
+  } = options
   if (!existsSync(userDataDir)) mkdirSync(userDataDir, { recursive: true })
 
   const args: string[] = [
@@ -103,11 +123,21 @@ export async function launchAppWithUserDataDir(
       // Tell Electron to use a unique app-data path so multiple parallel
       // instances (future) don't collide.
       ELECTRON_USER_DATA: userDataDir,
+      BOLTBERRY_E2E_VISUAL: visualTestMode ? '1' : process.env.BOLTBERRY_E2E_VISUAL,
     },
   })
 
   // Wait for the first BrowserWindow to appear
   const dmWindow = await app.firstWindow()
+  if (visualTestMode || windowSize) {
+    const size = windowSize ?? { width: 1920, height: 1080 }
+    await app.evaluate(({ BrowserWindow }, nextSize) => {
+      const win = BrowserWindow.getAllWindows()[0]
+      win?.setSize(nextSize.width, nextSize.height)
+      win?.center()
+    }, size)
+    await dmWindow.setViewportSize(size).catch(() => { /* Electron viewport follows BrowserWindow */ })
+  }
   await dmWindow.waitForLoadState('domcontentloaded')
 
   // If skipping the wizard, set the same localStorage keys the current
@@ -116,13 +146,15 @@ export async function launchAppWithUserDataDir(
   // left the renderer in SetupWizard; generic input selectors then typed
   // campaign names into the data-folder field.
   if (skipSetupWizard) {
-    await dmWindow.evaluate(async (dir: string) => {
+    await dmWindow.evaluate(async ({ dir, visual }: { dir: string; visual: boolean }) => {
       localStorage.setItem('boltberry-data-folder', dir)
       localStorage.setItem('boltberry-setup-complete', '1')
       localStorage.setItem('boltberry-language', 'de')
       localStorage.setItem('boltberry-theme', 'dark')
+      localStorage.setItem('boltberry-e2e-hooks', '1')
+      if (visual) localStorage.setItem('boltberry-e2e-visual', '1')
       await (window as any).electronAPI?.setUserDataFolder?.(dir)
-    }, userDataDir)
+    }, { dir: userDataDir, visual: visualTestMode })
 
     await dmWindow.reload()
     await dmWindow.waitForLoadState('domcontentloaded')
@@ -130,6 +162,7 @@ export async function launchAppWithUserDataDir(
 
   // Wait for React app to mount (root div populated)
   await dmWindow.waitForSelector('#root > *', { timeout: 15_000 })
+  if (visualTestMode) await installDeterministicVisualMode(dmWindow)
 
   const close = async () => {
     await app.close().catch(() => { /* already closed */ })
@@ -139,6 +172,38 @@ export async function launchAppWithUserDataDir(
   }
 
   return { app, dmWindow, userDataDir, close }
+}
+
+export async function installDeterministicVisualMode(page: Page): Promise<void> {
+  await page.evaluate(() => {
+    document.documentElement.dataset.e2eVisual = 'true'
+    localStorage.setItem('boltberry-e2e-visual', '1')
+  })
+  await page.addStyleTag({
+    content: `
+      :root[data-e2e-visual="true"],
+      :root[data-e2e-visual="true"] * {
+        caret-color: transparent !important;
+        scroll-behavior: auto !important;
+      }
+      :root[data-e2e-visual="true"] *,
+      :root[data-e2e-visual="true"] *::before,
+      :root[data-e2e-visual="true"] *::after {
+        animation-duration: 0s !important;
+        animation-delay: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0s !important;
+        transition-delay: 0s !important;
+      }
+      :root[data-e2e-visual="true"] .canvas-hud-fade {
+        opacity: 1 !important;
+      }
+      :root[data-e2e-visual="true"] [role="alert"],
+      :root[data-e2e-visual="true"] [aria-live] {
+        visibility: hidden !important;
+      }
+    `,
+  })
 }
 
 /**
