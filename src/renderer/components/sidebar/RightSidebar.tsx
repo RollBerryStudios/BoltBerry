@@ -94,11 +94,12 @@ export function RightSidebar() {
     SIDEBAR_TAB_TO_DOCK[sidebarTab] === currentDock.id ? sidebarTab : currentDock.sections[0].id
 
   return (
-    <div className="sidebar sidebar-right">
-      <div className="sidebar-dock-strip">
+    <div className="sidebar sidebar-right" data-testid="sidebar-right">
+      <div className="sidebar-dock-strip" data-testid="sidebar-dock-strip">
         {docks.map((dock) => (
           <button
             key={dock.id}
+            data-testid={`button-sidebar-dock-${dock.id}`}
             className={`sidebar-dock-tab${sidebarDock === dock.id ? ' active' : ''}`}
             title={t(dock.labelKey)}
             aria-label={t(dock.labelKey)}
@@ -110,7 +111,7 @@ export function RightSidebar() {
         ))}
       </div>
 
-      <div className="sidebar-accordion">
+      <div className="sidebar-accordion" data-testid="sidebar-accordion">
         {currentDock.sections.map((section) => {
           const isOpen = section.id === expandedTab
           return (
@@ -119,6 +120,7 @@ export function RightSidebar() {
               className={`accordion-item${isOpen ? ' open' : ''}${section.isContextual ? ' contextual' : ''}`}
             >
               <button
+                data-testid={`button-sidebar-tab-${section.id}`}
                 className="accordion-header"
                 aria-expanded={isOpen}
                 aria-controls={`panel-${section.id}`}

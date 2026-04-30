@@ -41,7 +41,8 @@ The app is offline-first and stores campaign data in SQLite under the selected u
 | P2 | Map workflows | Import real image files, add second map, rename, reorder, cancel delete, confirm delete, open map canvas |
 | P2 | Top-level navigation | Profile/settings, Wiki, Compendium, workspace tabs, native picker cancel paths |
 | P2 | File workflows | Campaign export/import/backup, invalid archive, canceled import, real map/audio imports, invalid file and malformed ZIP cases |
-| P3 | Accessibility basics | Keyboard shortcuts, Escape handling, roles/names, Axe serious/critical checks on core surfaces |
+| P3 | Accessibility basics | Keyboard shortcuts, Escape handling, roles/names, Axe serious/critical checks on core surfaces, panel/tool focus reachability |
+| P3 | Performance smoke | Dashboard responsiveness with many isolated campaigns |
 | P3 | Visual regression | Not enabled; current UI has animation/dynamic canvas state, so screenshots are limited to failure diagnostics |
 
 ## Planned/Current Test Files
@@ -52,7 +53,9 @@ The app is offline-first and stores campaign data in SQLite under the selected u
 - `e2e/regression/ipc-bridge.spec.ts`: semantic IPC APIs and local-asset security behavior.
 - `e2e/regression/keyboard-shortcuts.spec.ts`: shortcut overlay and input-focus behavior.
 - `e2e/regression/accessibility.spec.ts`: Axe serious/critical checks for setup, dashboard, campaign workspace, settings modal.
+- `e2e/regression/accessibility-panels.spec.ts`: focus reachability for workspace panels, canvas toolbar, canvas area, and right sidebar tabs.
 - `e2e/regression/menu-actions.spec.ts`: registered Electron menu actions for new campaign, settings, about, export.
+- `e2e/regression/performance-smoke.spec.ts`: dashboard responsiveness with many campaigns in an isolated profile.
 - `e2e/critical-path/first-run-onboarding.spec.ts`: first-run setup and first campaign flow.
 - `e2e/critical-path/campaign-lifecycle.spec.ts`: campaign creation, open, backup, export, duplicate, error responses.
 - `e2e/critical-path/export-import.spec.ts`: ZIP round trip, quick backup, invalid/canceled imports.
@@ -60,6 +63,8 @@ The app is offline-first and stores campaign data in SQLite under the selected u
 - `e2e/critical-path/map-management-actions.spec.ts`: real map import and workspace map actions.
 - `e2e/critical-path/persistence.spec.ts`: real close/relaunch persistence for campaigns, maps, theme, language, data folder.
 - `e2e/critical-path/canvas-workflows.spec.ts`: canvas visibility, token create/delete, fog cover/undo/redo, return to campaign.
+- `e2e/critical-path/canvas-pointer-workflows.spec.ts`: real pointer-driven token drag, wall creation, drawing creation, and room creation.
+- `e2e/critical-path/deep-panel-workflows.spec.ts`: notes, handouts, character sheets, audio assignment, token library insertion, and initiative entries.
 - `e2e/critical-path/player-window.spec.ts`: player window lifecycle and security.
 - `e2e/critical-path/two-window-sync.spec.ts`: DM/player state sync regression coverage.
 - `e2e/critical-path/top-level-actions.spec.ts`: reference views, settings sections, workspace tabs.
@@ -102,6 +107,7 @@ Stable test IDs are used for the main screen and critical controls:
 - `panel-token-library`, `input-token-search`, `list-item-token-template`, `button-insert-token`
 - `panel-initiative`, `input-initiative-name`, `button-add-initiative`, `list-item-initiative`
 - `panel-audio-library`, `button-add-audio-folder`, `list-item-track`, `button-assign-track-1`
+- `sidebar-right`, `sidebar-dock-strip`, `button-sidebar-dock-*`, `sidebar-accordion`, `button-sidebar-tab-*`
 - `canvas-area`, `canvas-tool-dock`, `canvas-layer-dock`, `button-canvas-tool-*`, `button-undo`, `button-redo`
 
 Accessible roles remain useful for dialogs, headings, tabs, and controls where user-facing labels are stable and part of the UX contract.
@@ -124,5 +130,7 @@ The CI workflow has an `e2e` job using `npm run build` and `xvfb-run --auto-serv
 - Full visual regression is intentionally not enabled because map canvas rendering, weather effects, PDF rendering, and animations need additional determinism work.
 - Accessibility currently gates only `serious` and `critical` Axe violations on representative core surfaces.
 - `@axe-core/playwright` is installed, but the Electron runner uses direct `axe-core` injection because `AxeBuilder` tries to create a standard browser page, which is not supported by this Electron launch context.
-- Some workflows are covered through IPC/action-assisted E2E tests where exact native file picker or canvas pointer automation would be brittle.
+- Canvas pointer tests now cover representative token drag, wall, drawing, and room creation flows. More complex edit modes, brush variants, and visual assertions still need deterministic test helpers.
+- Some workflows are covered through IPC/action-assisted E2E tests where exact native file picker or platform UI automation would be brittle.
 - Native menu coverage invokes registered menu items through Electron APIs; OS-level visual menu traversal remains platform-dependent and out of scope.
+- Performance coverage is currently smoke-level and does not replace profiling or stress testing.

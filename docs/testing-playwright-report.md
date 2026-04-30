@@ -13,7 +13,7 @@ npm run test:e2e -- --project=regression
 npm run test:e2e -- --project=critical-path
 ```
 
-Results after this follow-up pass: 14 smoke tests passed, 32 regression tests passed, 51 critical-path tests passed.
+Results after the latest follow-up pass: 14 smoke tests passed, 35 regression tests passed, 56 critical-path tests passed.
 
 ## Follow-up Implementation Status
 
@@ -23,7 +23,9 @@ Completed the documented follow-up items from the Playwright report:
 - Restart persistence coverage now uses real Electron closes/relaunches against the same temporary `userData` directory via `launchAppWithUserDataDir()` and `relaunchApp()`.
 - New critical-path suites cover persistence, canvas workflows, and file-workflow negative cases.
 - New regression suites cover serious/critical Axe accessibility checks and native menu action dispatch.
+- Additional follow-up suites now cover deep workspace panels, real canvas pointer interactions, panel focus reachability, and a dashboard performance smoke path.
 - Deeper panel and canvas selectors now use stable domain-oriented `data-testid`s for notes, handouts, character sheets, token library, initiative, audio/music, token panel, toolbar, and canvas docks.
+- Right sidebar dock controls now expose stable IDs for focus and panel reachability checks.
 - Minimal product fixes were made where tests exposed real behavior issues: fog redo now reapplies the redone operation, the UI theme store initializes from persisted `localStorage.theme`, settings folder buttons have distinct test IDs, and two low-contrast setup texts were raised to the existing secondary text color.
 
 ## Repository Findings
@@ -67,9 +69,13 @@ Native dialogs are mocked through one-shot main-process overrides for `showOpenD
   - `e2e/critical-path/demo-production-session.spec.ts`
   - `e2e/critical-path/persistence.spec.ts`
   - `e2e/critical-path/canvas-workflows.spec.ts`
+  - `e2e/critical-path/canvas-pointer-workflows.spec.ts`
+  - `e2e/critical-path/deep-panel-workflows.spec.ts`
   - `e2e/critical-path/file-workflows.spec.ts`
   - `e2e/regression/accessibility.spec.ts`
+  - `e2e/regression/accessibility-panels.spec.ts`
   - `e2e/regression/menu-actions.spec.ts`
+  - `e2e/regression/performance-smoke.spec.ts`
   - `e2e/testcontent/**`
   - `e2e/QA_UI_ACTION_COVERAGE.md`
 
@@ -89,6 +95,7 @@ Native dialogs are mocked through one-shot main-process overrides for `showOpenD
 - `src/renderer/components/CampaignView.tsx`: added test IDs to workspace, navigation, workspace tabs, map list, map actions, and play/import controls.
 - `src/renderer/components/toolbar/Toolbar.tsx`: added test IDs for toolbar readiness, undo/redo, session toggle, and player-window toggle.
 - `src/renderer/components/sidebar/panels/*.tsx`: added stable selectors for notes, handouts, character sheets, token library, token list, initiative, and audio/music controls.
+- `src/renderer/components/sidebar/RightSidebar.tsx`: added stable selectors for the right sidebar, dock strip, dock buttons, accordion, and sidebar tabs.
 - `src/renderer/components/canvas/*.tsx`: added stable selectors for the canvas area, canvas tool dock, layer dock, and tool buttons.
 - `src/renderer/stores/uiStore.ts`: initializes theme from persisted storage so restart persistence does not overwrite the saved theme.
 - `src/renderer/components/canvas/FogLayer.tsx`: fixes fog redo to apply the operation returned by `redo()`.
@@ -107,8 +114,9 @@ Some E2E files were already modified in the working tree before this pass; those
 | File Workflows | High | Map/audio import with fixtures, campaign export/import, backup, invalid/canceled imports, invalid map images, missing paths, malformed ZIPs |
 | Settings | Medium | First-run setup and global settings sections covered |
 | Error Handling | Medium | Invalid campaign names, missing campaign export/duplicate, invalid/canceled imports |
-| Accessibility | Medium | Axe serious/critical checks for setup, dashboard, campaign workspace, and settings modal |
+| Accessibility | Medium | Axe serious/critical checks for setup, dashboard, campaign workspace, and settings modal plus focus checks for panel/tool entry points |
 | Electron Security | High | Node globals, raw IPC, DM/player preload split, local-asset traversal, player window restrictions |
+| Performance | Low | Dashboard smoke with many isolated campaigns |
 
 ## Created Test Suites
 
@@ -117,9 +125,13 @@ Some E2E files were already modified in the working tree before this pass; those
 - Critical-path suites cover first-run onboarding, export/import, campaign lifecycle, map management with real assets, player window lifecycle/security, top-level navigation, and two-window sync.
 - Persistence suite covers campaign create/rename/delete, map import, and settings across real Electron restarts with one shared temporary profile.
 - Canvas workflow suite covers map open, canvas/tool visibility, token create/delete with DB checks, fog cover state, fog undo/redo, and return to campaign map listing.
+- Canvas pointer workflow suite covers real pointer-driven token drag persistence plus wall, freehand drawing, and room creation through the canvas tools.
+- Deep panel workflow suite covers notes, handouts, character sheets, audio folder import/track assignment, token-library insertion, and initiative entries with DB assertions.
 - File workflow suite covers invalid image import, missing import paths, export cancel, ZIP without `campaign.json`, and ZIP with invalid JSON.
 - Accessibility suite uses `axe-core` injection in the Electron renderer. `@axe-core/playwright` is installed, but its `AxeBuilder` cannot create a normal browser page in this Electron context, so the test injects `axe-core` directly and fails only `serious`/`critical` violations.
+- Accessibility panel suite covers keyboard-focusable entry points for workspace panels, canvas toolbar, canvas area, and right sidebar tabs.
 - Menu actions suite invokes registered Electron menu items through `Menu.getApplicationMenu()` and verifies the renderer flows they dispatch.
+- Performance smoke suite creates many isolated campaigns through IPC and verifies the dashboard remains responsive within the configured threshold.
 
 ## Found Issues
 
@@ -132,9 +144,11 @@ Some E2E files were already modified in the working tree before this pass; those
 
 ## Remaining Gaps
 
-- Canvas freehand/drag interactions are still mostly IPC- or action-assisted where exact pointer automation would be fragile. Future coverage should add deterministic helpers for token drag, brush drawing, walls, rooms, and drawings.
+- Canvas pointer coverage now includes token drag, wall creation, drawing creation, and room creation. Remaining canvas gaps are edit-mode pointer flows, brush-size variants, selection marquee edge cases, and pixel-level visual assertions.
+- Deep panels now have happy-path coverage for core create/insert/assign actions. Remaining gaps are richer editor states, destructive actions inside those panels, bulk operations, and malformed media/library edge cases.
 - Visual regression is not enabled because animated/dynamic surfaces need deterministic visual modes.
 - Native menu tests invoke Electron's registered menu items directly. This avoids OS menu automation differences across macOS/Linux/Windows; visual native menu traversal remains intentionally out of scope.
+- Performance coverage is a smoke check only; it does not yet measure canvas stress, very large libraries, or long-running session memory behavior.
 
 ## How to Run
 
@@ -157,6 +171,7 @@ npm run test:e2e -- --project=critical-path
 
 ## Recommended Next Steps
 
-1. Add deterministic pointer helpers for token drag, wall editing, room editing, drawings, and fog brush strokes.
+1. Add deterministic coverage for canvas edit modes, fog brush variants, marquee selection, and layer visibility interactions.
 2. Expand accessibility checks beyond serious/critical baseline once existing UI contrast and labeling debt is intentionally budgeted.
-3. Consider a deterministic visual mode before adding screenshot snapshots for dashboard/workspace/canvas.
+3. Add a deterministic visual mode before introducing screenshot snapshots for dashboard/workspace/canvas.
+4. Add performance scenarios for large maps, large token libraries, and long-running sessions.

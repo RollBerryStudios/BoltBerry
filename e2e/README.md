@@ -46,10 +46,14 @@ e2e/
 │   ├── keyboard-shortcuts.spec.ts # ? / F1 / Escape overlays
 │   ├── ipc-bridge.spec.ts       # IPC channel correctness + SQL injection guard
 │   ├── accessibility.spec.ts    # Axe serious/critical accessibility baseline
-│   └── menu-actions.spec.ts     # Registered Electron menu actions
+│   ├── accessibility-panels.spec.ts # Panel/tool focus reachability
+│   ├── menu-actions.spec.ts     # Registered Electron menu actions
+│   └── performance-smoke.spec.ts # Dashboard responsiveness with many campaigns
 └── critical-path/
     ├── canvas-workflows.spec.ts  # Canvas open, token, fog, undo/redo
+    ├── canvas-pointer-workflows.spec.ts # Pointer-driven token/wall/drawing/room flows
     ├── campaign-lifecycle.spec.ts # Full DM flow: create → view → export
+    ├── deep-panel-workflows.spec.ts # Notes, handouts, sheets, audio, tokens, initiative
     ├── file-workflows.spec.ts    # Negative file/archive cases
     ├── persistence.spec.ts       # Real restart persistence
     ├── player-window.spec.ts      # Player window open/close/security
@@ -101,9 +105,21 @@ await mockOpenDialog(app, ['/path/to/file.zip'])
 
 Accessibility coverage lives in `e2e/regression/accessibility.spec.ts`. `@axe-core/playwright` is installed, but the Electron runner injects `axe-core` directly because `AxeBuilder` attempts to create a normal browser page, which Electron Playwright does not support in this launch mode. The baseline fails only `serious` and `critical` violations.
 
+`e2e/regression/accessibility-panels.spec.ts` adds focused keyboard reachability checks for workspace panels, canvas toolbar controls, the canvas itself, and right sidebar tabs.
+
 ## Menu Actions
 
 Menu coverage invokes registered menu items through Electron's `Menu.getApplicationMenu()` and verifies the renderer flow that each menu item dispatches. OS-level visual menu traversal is intentionally not used because it is platform-dependent under Playwright/Electron.
+
+## Canvas and Panel Coverage
+
+Canvas coverage is split between action/IPC-backed workflows and real pointer workflows. `canvas-workflows.spec.ts` covers map opening, token create/delete, fog cover/undo/redo, and returning to the campaign. `canvas-pointer-workflows.spec.ts` covers real mouse-driven token drag persistence plus wall, drawing, and room creation.
+
+Deep workspace panels are covered in `deep-panel-workflows.spec.ts`: notes, handouts, character sheets, audio folder import and channel assignment, token-library insertion, and initiative entry creation.
+
+## Performance Smoke
+
+`e2e/regression/performance-smoke.spec.ts` creates many campaigns in an isolated profile and verifies the dashboard remains responsive. This is a smoke guard, not a replacement for large-map or long-session profiling.
 
 ## Environment Variables
 
