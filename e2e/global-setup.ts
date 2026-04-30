@@ -10,6 +10,15 @@ import { existsSync } from 'fs'
 import { resolve } from 'path'
 
 export default async function globalSetup() {
+  if (process.env.BOLTBERRY_E2E_EXECUTABLE_PATH) {
+    const executablePath = resolve(process.env.BOLTBERRY_E2E_EXECUTABLE_PATH)
+    if (!existsSync(executablePath)) {
+      throw new Error(`\n\n❌ Packaged Electron executable not found:\n   ${executablePath}\n`)
+    }
+    console.log(`✅ Packaged Electron executable verified: ${executablePath}`)
+    return
+  }
+
   const distMain = resolve(__dirname, '../dist/main/index.js')
   const distRenderer = resolve(__dirname, '../dist/renderer/index.html')
   const distPreloadDM = resolve(__dirname, '../dist/preload/preload-dm.js')

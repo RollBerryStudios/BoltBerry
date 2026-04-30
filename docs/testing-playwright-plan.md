@@ -41,14 +41,18 @@ The app is offline-first and stores campaign data in SQLite under the selected u
 | P2 | Map workflows | Import real image files, add second map, rename, reorder, cancel delete, confirm delete, open map canvas |
 | P2 | Top-level navigation | Profile/settings, Wiki, Compendium, workspace tabs, native picker cancel paths |
 | P2 | File workflows | Campaign export/import/backup, invalid archive, canceled import, real map/audio imports, invalid file and malformed ZIP cases |
+| P2 | Fault recovery | Corrupt media, missing referenced assets, unicode/space-heavy paths, unsupported files, symlink-safe folder scans |
 | P3 | Accessibility basics | Keyboard shortcuts, Escape handling, roles/names, Axe serious/critical checks on core surfaces, panel/tool focus reachability |
 | P3 | Performance/stability smoke | Dashboard responsiveness, large token canvas, large audio library filtering, player reconnect, renderer memory guard |
 | P3 | Visual regression | Dedicated optional visual project with deterministic baselines for dashboard, workspace, DM canvas, and player view |
 | P3 | Cross-platform smoke | Optional non-blocking macOS/Windows smoke matrix in CI |
+| P3 | Packaging smoke | Optional packaged executable smoke via `BOLTBERRY_E2E_EXECUTABLE_PATH` |
+| P4 | Nightly stress | Scheduled/manual Linux stress tests for larger canvas and audio-library datasets |
 
 ## Planned/Current Test Files
 
 - `e2e/smoke/app-launch.spec.ts`: app launch, security basics, preload API surface, console errors.
+- `e2e/smoke/packaged-app.spec.ts`: optional packaged executable launch/preload smoke when `BOLTBERRY_E2E_EXECUTABLE_PATH` is set.
 - `e2e/smoke/start-screen.spec.ts`: dashboard/start screen rendering and create modal basics.
 - `e2e/regression/campaigns.spec.ts`: campaign CRUD and form validation.
 - `e2e/regression/ipc-bridge.spec.ts`: semantic IPC APIs and local-asset security behavior.
@@ -56,6 +60,7 @@ The app is offline-first and stores campaign data in SQLite under the selected u
 - `e2e/regression/accessibility.spec.ts`: Axe serious/critical checks for setup, dashboard, campaign workspace, settings modal.
 - `e2e/regression/accessibility-panels.spec.ts`: focus reachability for workspace panels, canvas toolbar, canvas area, and right sidebar tabs.
 - `e2e/regression/accessibility-keyboard.spec.ts`: keyboard entry, Escape/focus return, settings modal keyboard access, toolbar arrow movement, labelled controls, and canvas focus behavior.
+- `e2e/regression/fault-recovery.spec.ts`: unicode/space-heavy import/export paths, corrupt audio import, unsupported/symlinked audio folder scans, missing referenced map assets.
 - `e2e/regression/menu-actions.spec.ts`: registered Electron menu actions for new campaign, settings, about, export.
 - `e2e/regression/menu-accelerators.spec.ts`: registered menu accelerator contract and renderer keyboard accelerator flows.
 - `e2e/regression/panel-depth.spec.ts`: note search/edit/delete, handout and character-sheet destructive paths, audio filtering/assignment/deletion, token-template filter/duplicate/delete.
@@ -76,6 +81,7 @@ The app is offline-first and stores campaign data in SQLite under the selected u
 - `e2e/critical-path/top-level-actions.spec.ts`: reference views, settings sections, workspace tabs.
 - `e2e/critical-path/demo-production-session.spec.ts`: production-like setup with bundled map/audio content.
 - `e2e/visual/core-surfaces.visual.spec.ts`: deterministic screenshot baselines for empty dashboard, seeded workspace, seeded DM canvas, and synchronized player view.
+- `e2e/nightly/large-data.stress.spec.ts`: opt-in large canvas/audio-library stress guards.
 
 ## Test Data Strategy
 
@@ -88,6 +94,9 @@ The app is offline-first and stores campaign data in SQLite under the selected u
 - Native open/save/message dialogs are mocked in the Electron main process with one-shot helpers.
 - Tests do not read or write a developer's real BoltBerry profile.
 - Visual tests use `launchApp({ visualTestMode: true })`, fixed window sizing, deterministic dashboard atmosphere values, hidden live regions/caret, disabled animation timing, and seeded fixture data.
+- `BOLTBERRY_APP_PATH` can point the launch helper at an alternate app root.
+- `BOLTBERRY_E2E_EXECUTABLE_PATH` launches a packaged executable directly; global setup verifies the executable instead of repo `dist` artifacts.
+- Nightly stress tests are opt-in through `BOLTBERRY_RUN_NIGHTLY=1`.
 
 ## Selector Strategy
 
@@ -152,6 +161,8 @@ The default `npm run test:e2e` command runs the `smoke`, `regression`, and `crit
 
 An optional non-blocking `e2e-cross-platform-smoke` matrix runs the smoke project on macOS and Windows for early platform signal.
 
+A scheduled/manual `e2e-nightly-stress` job runs `npm run test:e2e:nightly` on Linux. It is outside the PR gate so large-data coverage can grow without slowing ordinary review.
+
 ## Known Boundaries
 
 - Visual regression is enabled for four core surfaces in a dedicated optional project. It is not part of the default PR E2E gate yet, and baselines are not split per OS.
@@ -162,3 +173,5 @@ An optional non-blocking `e2e-cross-platform-smoke` matrix runs the smoke projec
 - Native menu coverage invokes registered menu items through Electron APIs; OS-level visual menu traversal remains platform-dependent and out of scope.
 - Performance coverage is smoke-level with larger dashboard/canvas/library/reconnect cases. It does not replace profiling, very large stress tests, or long-running soak tests.
 - Cross-platform coverage is optional smoke-level on macOS/Windows; full regression/critical coverage remains Linux-gated.
+- Packaged-app smoke is optional and caller-provided; CI does not yet build platform packages and feed them into that smoke path.
+- Nightly stress coverage is scheduled/manual and still bounded; it does not yet include multi-hour soak behavior.

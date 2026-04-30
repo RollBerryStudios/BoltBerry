@@ -73,5 +73,9 @@ export default defineConfig({
         screenshot: 'only-on-failure',
       },
     },
+    {
+      name: 'nightly',
+      testMatch: '**/nightly/**/*.stress.spec.ts',
+    },
   ],
 })

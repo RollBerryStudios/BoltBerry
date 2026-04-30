@@ -23,13 +23,19 @@ npm run test:e2e:visual
 # 6. Update visual baselines intentionally
 npm run test:e2e:visual:update
 
-# 7. Run with interactive UI / headed / debug modes
+# 7. Run opt-in nightly stress checks
+npm run test:e2e:nightly
+
+# 8. Smoke-test a packaged executable
+BOLTBERRY_E2E_EXECUTABLE_PATH=/path/to/BoltBerry npm run test:e2e:packaged
+
+# 9. Run with interactive UI / headed / debug modes
 npm run test:e2e:ui
 npm run test:e2e:headed
 npm run test:e2e:debug
 npm run test:e2e:report
 
-# 8. Run a specific group
+# 10. Run a specific group
 npx playwright test --project=smoke
 npx playwright test --project=regression
 npx playwright test --project=critical-path
@@ -48,6 +54,7 @@ e2e/
 │   └── dialog-helpers.ts        # Native dialog mocking
 ├── smoke/
 │   ├── app-launch.spec.ts       # App starts, windows, security settings
+│   ├── packaged-app.spec.ts     # Optional packaged executable smoke
 │   └── start-screen.spec.ts     # StartScreen rendering
 ├── regression/
 │   ├── campaigns.spec.ts        # Campaign CRUD (create/rename/delete/duplicate)
@@ -56,6 +63,7 @@ e2e/
 │   ├── accessibility.spec.ts    # Axe serious/critical accessibility baseline
 │   ├── accessibility-keyboard.spec.ts # Keyboard/focus behavior
 │   ├── accessibility-panels.spec.ts # Panel/tool focus reachability
+│   ├── fault-recovery.spec.ts   # Corrupt media, path, and missing asset recovery
 │   ├── menu-accelerators.spec.ts # Menu accelerator contracts
 │   ├── menu-actions.spec.ts     # Registered Electron menu actions
 │   ├── panel-depth.spec.ts      # Deeper panel edit/delete/filter flows
@@ -72,8 +80,10 @@ e2e/
 │   ├── player-window.spec.ts      # Player window open/close/security
 │   ├── settings.spec.ts           # SetupWizard + data folder switching
 │   └── export-import.spec.ts      # Export → import round-trip
-└── visual/
-    └── core-surfaces.visual.spec.ts # Dashboard/workspace/canvas/player baselines
+├── visual/
+│   └── core-surfaces.visual.spec.ts # Dashboard/workspace/canvas/player baselines
+└── nightly/
+    └── large-data.stress.spec.ts # Opt-in large canvas/audio stress guards
 ```
 
 ## Test Groups
@@ -84,6 +94,7 @@ e2e/
 | `regression` | CRUD flows, shortcuts, IPC bridge | Every PR |
 | `critical-path` | Full user journeys, export/import | Before every release |
 | `visual` | Screenshot baselines for core surfaces | Optional gate / intentional updates |
+| `nightly` | Larger stress scenarios | Scheduled/manual only |
 
 ## Isolation Strategy
 
@@ -104,6 +115,8 @@ const relaunched = await relaunchApp(launch)
 These helpers reuse the same Electron `--user-data-dir`; cleanup is left to the test after the final relaunch.
 
 Shared fixture helpers in `e2e/helpers/test-data.ts` create deterministic campaigns, maps, canvas entities, workspace panel content, and fixture asset paths for critical-path, regression, and visual tests.
+
+`BOLTBERRY_APP_PATH` can point the launch helper at an alternate unpacked app root. `BOLTBERRY_E2E_EXECUTABLE_PATH` launches a packaged executable directly and makes global setup verify that executable instead of repo build artifacts.
 
 ## Visual Regression
 
@@ -156,19 +169,41 @@ Deep workspace panels are covered in `deep-panel-workflows.spec.ts`: notes, hand
 
 `panel-depth.spec.ts` adds regression coverage for note search/edit/delete, handout and character-sheet destructive cancel/confirm paths, audio empty-folder/filter/assignment/delete paths, and token-template filter/duplicate/delete paths.
 
+## Fault Recovery
+
+`e2e/regression/fault-recovery.spec.ts` covers high-value failure boundaries:
+- Unicode and space-heavy map import plus campaign export paths.
+- Corrupt audio files disguised with valid extensions.
+- Audio folder scans with unsupported files and symlinked directories.
+- Missing referenced map assets that should not break workspace recovery/removal.
+
 ## Performance And Stability
 
 `e2e/regression/performance-smoke.spec.ts` creates many campaigns in an isolated profile and verifies the dashboard remains responsive. This is a smoke guard, not a replacement for large-map or long-session profiling.
 
 `e2e/regression/performance-stability.spec.ts` adds PR-sized guards for a large token roster, large audio library filtering, player reconnects, and renderer heap size when Chromium exposes memory metrics. These remain smoke thresholds, not full profiling or soak tests.
 
+`e2e/nightly/large-data.stress.spec.ts` runs only via `npm run test:e2e:nightly` / `BOLTBERRY_RUN_NIGHTLY=1`. It covers hundreds of tokens, many geometry rows, and a larger audio library without slowing the PR gate.
+
+## Packaged App Smoke
+
+`e2e/smoke/packaged-app.spec.ts` is skipped unless `BOLTBERRY_E2E_EXECUTABLE_PATH` is set:
+
+```bash
+BOLTBERRY_E2E_EXECUTABLE_PATH=/path/to/BoltBerry npm run test:e2e:packaged
+```
+
+Use this after `electron-builder --dir` or a platform-specific package build to verify the packaged executable starts, opens one DM window, and exposes the preload bridge.
+
 ## Environment Variables
 
 | Variable | Default | Description |
 |---|---|---|
 | `BOLTBERRY_APP_PATH` | `'.'` | Override Electron entry point |
+| `BOLTBERRY_E2E_EXECUTABLE_PATH` | — | Launch a packaged executable directly |
 | `BOLTBERRY_E2E_VISUAL` | — | Enables deterministic visual mode markers |
 | `BOLTBERRY_RUN_VISUAL` | — | Allows visual specs to run |
+| `BOLTBERRY_RUN_NIGHTLY` | — | Allows nightly stress specs to run |
 | `CI` | — | If set, enables 2 retries per test |
 
 ## CI Integration
@@ -196,3 +231,5 @@ The repository workflow runs Linux E2E as a required gate with `npm run build` f
 ```
 
 The workflow also includes a non-blocking macOS/Windows smoke matrix. It is useful platform signal, but full regression and critical-path coverage remain Linux-gated.
+
+A scheduled/manual Linux nightly job runs `npm run test:e2e:nightly` outside the PR gate for larger stress checks.

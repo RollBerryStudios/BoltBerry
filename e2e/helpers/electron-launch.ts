@@ -25,7 +25,17 @@ import { existsSync, mkdirSync, rmSync } from 'fs'
 import { tmpdir } from 'os'
 import { randomBytes } from 'crypto'
 
-const APP_ROOT = resolve(__dirname, '../..')
+const DEFAULT_APP_ROOT = resolve(__dirname, '../..')
+
+function configuredAppRoot(): string {
+  return resolve(process.env.BOLTBERRY_APP_PATH ?? DEFAULT_APP_ROOT)
+}
+
+function configuredExecutablePath(): string | undefined {
+  return process.env.BOLTBERRY_E2E_EXECUTABLE_PATH
+    ? resolve(process.env.BOLTBERRY_E2E_EXECUTABLE_PATH)
+    : undefined
+}
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -109,14 +119,14 @@ export async function launchAppWithUserDataDir(
   } = options
   if (!existsSync(userDataDir)) mkdirSync(userDataDir, { recursive: true })
 
-  const args: string[] = [
-    APP_ROOT,
-    `--user-data-dir=${userDataDir}`,
-    ...extraArgs,
-  ]
+  const executablePath = configuredExecutablePath()
+  const args: string[] = executablePath
+    ? [`--user-data-dir=${userDataDir}`, ...extraArgs]
+    : [configuredAppRoot(), `--user-data-dir=${userDataDir}`, ...extraArgs]
 
   const app = await electron.launch({
     args,
+    executablePath,
     env: {
       ...process.env,
       NODE_ENV: 'production',
