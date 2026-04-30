@@ -21,7 +21,7 @@
 
 import { _electron as electron, type ElectronApplication, type Page } from '@playwright/test'
 import { resolve } from 'path'
-import { mkdirSync } from 'fs'
+import { mkdirSync, rmSync } from 'fs'
 import { tmpdir } from 'os'
 import { randomBytes } from 'crypto'
 
@@ -89,25 +89,20 @@ export async function launchApp(options: LaunchOptions = {}): Promise<LaunchResu
   const dmWindow = await app.firstWindow()
   await dmWindow.waitForLoadState('domcontentloaded')
 
-  // If skipping the wizard, inject the Zustand-persist settings into
-  // localStorage before the renderer reads it.
+  // If skipping the wizard, set the same localStorage keys the current
+  // settingsStore uses and initialise the main-process DB folder. Older
+  // tests used to write a stale "boltberry-settings" Zustand blob, which
+  // left the renderer in SetupWizard; generic input selectors then typed
+  // campaign names into the data-folder field.
   if (skipSetupWizard) {
-    await dmWindow.evaluate((dir: string) => {
-      const settingsState = {
-        state: {
-          isSetupComplete: true,
-          userDataFolder: dir,
-          language: 'de',
-          theme: 'dark',
-        },
-        version: 0,
-      }
-      localStorage.setItem('boltberry-settings', JSON.stringify(settingsState))
+    await dmWindow.evaluate(async (dir: string) => {
+      localStorage.setItem('boltberry-data-folder', dir)
+      localStorage.setItem('boltberry-setup-complete', '1')
+      localStorage.setItem('boltberry-language', 'de')
+      localStorage.setItem('boltberry-theme', 'dark')
+      await (window as any).electronAPI?.setUserDataFolder?.(dir)
     }, userDataDir)
 
-    // Tell the main process to use this userDataDir as the DB path
-    // by calling the IPC bridge that mirrors what SetupWizard would do.
-    // We do this after injecting localStorage so the app can re-read it.
     await dmWindow.reload()
     await dmWindow.waitForLoadState('domcontentloaded')
   }
@@ -117,6 +112,7 @@ export async function launchApp(options: LaunchOptions = {}): Promise<LaunchResu
 
   const close = async () => {
     await app.close().catch(() => { /* already closed */ })
+    rmSync(userDataDir, { recursive: true, force: true })
   }
 
   return { app, dmWindow, userDataDir, close }
@@ -139,14 +135,7 @@ export async function getWindowCount(app: ElectronApplication): Promise<number> 
 
 /** Wait until a second BrowserWindow appears (Player window). */
 export async function waitForPlayerWindow(app: ElectronApplication, timeout = 10_000): Promise<Page> {
-  const deadline = Date.now() + timeout
-  while (Date.now() < deadline) {
-    const windows = app.windows()
-    if (windows.length >= 2) {
-      // Player window is the second one
-      return windows[1]
-    }
-    await new Promise((r) => setTimeout(r, 300))
-  }
-  throw new Error('Player window did not appear within timeout')
+  const existing = app.windows()[1]
+  if (existing) return existing
+  return app.waitForEvent('window', { timeout })
 }

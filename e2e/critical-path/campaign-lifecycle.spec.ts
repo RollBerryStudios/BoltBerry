@@ -37,16 +37,8 @@ test.describe('Campaign creation flow', () => {
       // Act: Create a campaign
       await startScreen.createCampaign('Dragon\'s Lair')
 
-      // Assert: We should now be in CampaignView
-      // The BoltBerry start-screen logo should be hidden
-      await expect(dmWindow.locator('img[alt="BoltBerry"]')).not.toBeVisible({ timeout: 8_000 })
-
-      // Something from CampaignView must be visible — wait for any campaign UI
-      // (panel tabs, toolbar, map selector, etc.)
-      await dmWindow.waitForSelector(
-        '[class*="campaign"], [class*="Campaign"], [class*="toolbar"], [class*="Toolbar"]',
-        { timeout: 10_000 }
-      )
+      await expect(dmWindow.getByText('Dragon\'s Lair').first()).toBeVisible()
+      await expect(dmWindow.getByRole('button', { name: /Erste Karte importieren/i }).first()).toBeVisible()
     } finally {
       await close()
     }
@@ -56,11 +48,8 @@ test.describe('Campaign creation flow', () => {
     const { dmWindow, close } = await launchApp()
 
     try {
-      // Insert via IPC
       await dmWindow.evaluate(async () => {
-        await (window as any).electronAPI.dbRun(
-          'INSERT INTO campaigns (name) VALUES (?)', ['Preloaded Adventure']
-        )
+        await (window as any).electronAPI.campaigns.create('Preloaded Adventure')
       })
 
       await dmWindow.reload()
@@ -69,11 +58,10 @@ test.describe('Campaign creation flow', () => {
       await startScreen.waitFor()
 
       // Click to open
-      const campaignBtn = dmWindow.locator('button', { hasText: 'Preloaded Adventure' })
-      await campaignBtn.click()
+      await dmWindow.getByRole('button', { name: /Preloaded Adventure/i }).first().click()
 
-      // StartScreen should no longer show the logo
-      await expect(dmWindow.locator('img[alt="BoltBerry"]')).not.toBeVisible({ timeout: 8_000 })
+      await expect(dmWindow.getByText('Preloaded Adventure').first()).toBeVisible()
+      await expect(dmWindow.getByRole('button', { name: /Erste Karte importieren|Spielansicht/i }).first()).toBeVisible()
     } finally {
       await close()
     }
@@ -88,17 +76,14 @@ test.describe('Campaign backup', () => {
     const { dmWindow, close } = await launchApp()
 
     try {
-      // Insert a campaign
-      const { lastInsertRowid: campaignId } = await dmWindow.evaluate(async () =>
-        (window as any).electronAPI.dbRun(
-          'INSERT INTO campaigns (name) VALUES (?)', ['Backup Test Campaign']
-        )
+      const campaign = await dmWindow.evaluate(async () =>
+        (window as any).electronAPI.campaigns.create('Backup Test Campaign')
       )
 
       // Call quickBackup via IPC (no dialog — it auto-saves)
       const result = await dmWindow.evaluate(async (id: number) =>
         (window as any).electronAPI.quickBackup(id),
-        campaignId
+        campaign.id
       )
 
       expect(result.success).toBe(true)
@@ -118,10 +103,8 @@ test.describe('Campaign export', () => {
     const { dmWindow, app, close } = await launchApp()
 
     try {
-      const { lastInsertRowid: campaignId } = await dmWindow.evaluate(async () =>
-        (window as any).electronAPI.dbRun(
-          'INSERT INTO campaigns (name) VALUES (?)', ['Export Campaign']
-        )
+      const campaign = await dmWindow.evaluate(async () =>
+        (window as any).electronAPI.campaigns.create('Export Campaign')
       )
 
       // Mock the save dialog to return a temp path
@@ -130,7 +113,7 @@ test.describe('Campaign export', () => {
 
       const result = await dmWindow.evaluate(async (id: number) =>
         (window as any).electronAPI.exportCampaign(id),
-        campaignId
+        campaign.id
       )
 
       expect(result.success).toBe(true)
@@ -145,10 +128,8 @@ test.describe('Campaign export', () => {
     const { dmWindow, app, close } = await launchApp()
 
     try {
-      const { lastInsertRowid: campaignId } = await dmWindow.evaluate(async () =>
-        (window as any).electronAPI.dbRun(
-          'INSERT INTO campaigns (name) VALUES (?)', ['Export Cancel Test']
-        )
+      const campaign = await dmWindow.evaluate(async () =>
+        (window as any).electronAPI.campaigns.create('Export Cancel Test')
       )
 
       // Mock dialog to simulate cancel
@@ -164,7 +145,7 @@ test.describe('Campaign export', () => {
 
       const result = await dmWindow.evaluate(async (id: number) =>
         (window as any).electronAPI.exportCampaign(id),
-        campaignId
+        campaign.id
       )
 
       expect(result.canceled).toBe(true)
@@ -182,22 +163,20 @@ test.describe('Campaign duplicate via IPC', () => {
     const { dmWindow, close } = await launchApp()
 
     try {
-      const { lastInsertRowid: originalId } = await dmWindow.evaluate(async () =>
-        (window as any).electronAPI.dbRun(
-          'INSERT INTO campaigns (name) VALUES (?)', ['Original Campaign']
-        )
+      const original = await dmWindow.evaluate(async () =>
+        (window as any).electronAPI.campaigns.create('Original Campaign')
       )
 
       const result = await dmWindow.evaluate(async (id: number) =>
         (window as any).electronAPI.duplicateCampaign(id),
-        originalId
+        original.id
       )
 
       expect(result.success).toBe(true)
       // The new campaign's name should end with "(Kopie)"
       expect(result.campaign.name).toContain('(Kopie)')
       // It should have a different ID from the original
-      expect(result.campaign.id).not.toBe(originalId)
+      expect(result.campaign.id).not.toBe(original.id)
     } finally {
       await close()
     }

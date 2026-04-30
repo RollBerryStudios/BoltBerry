@@ -17,8 +17,11 @@ npm run build
 # 4. Run all E2E tests
 npm run test:e2e
 
-# 5. Run with interactive UI
-npx playwright test --ui
+# 5. Run with interactive UI / headed / debug modes
+npm run test:e2e:ui
+npm run test:e2e:headed
+npm run test:e2e:debug
+npm run test:e2e:report
 
 # 6. Run a specific group
 npx playwright test --project=smoke

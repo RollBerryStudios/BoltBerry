@@ -20,9 +20,7 @@ test.describe('StartScreen', () => {
       const startScreen = new StartScreenPage(dmWindow)
       await startScreen.waitFor()
 
-      // The logo <img alt="BoltBerry"> must be visible
-      const logo = dmWindow.locator('img[alt="BoltBerry"]')
-      await expect(logo).toBeVisible()
+      await expect(dmWindow.getByText(/BOLTBERRY/i).first()).toBeVisible()
     } finally {
       await close()
     }
@@ -35,8 +33,7 @@ test.describe('StartScreen', () => {
       const startScreen = new StartScreenPage(dmWindow)
       await startScreen.waitFor()
 
-      const heading = dmWindow.locator('h1', { hasText: 'BoltBerry' })
-      await expect(heading).toBeVisible()
+      await expect(dmWindow.getByText(/Heute Abend/i).first()).toBeVisible()
     } finally {
       await close()
     }
@@ -64,9 +61,7 @@ test.describe('StartScreen', () => {
       const startScreen = new StartScreenPage(dmWindow)
       await startScreen.waitFor()
 
-      // The primary action button (creates a campaign) must be present
-      const newBtn = dmWindow.locator('button.btn-primary').last()
-      await expect(newBtn).toBeVisible()
+      await expect(dmWindow.getByRole('button', { name: /Neue Kampagne/i }).first()).toBeVisible()
     } finally {
       await close()
     }
@@ -81,8 +76,7 @@ test.describe('StartScreen', () => {
 
       await startScreen.clickNewCampaign()
 
-      // An input with placeholder text should appear
-      const input = dmWindow.locator('input.input').last()
+      const input = dmWindow.getByPlaceholder(/Kampagnen-Name/i)
       await expect(input).toBeVisible()
       await expect(input).toBeFocused()
     } finally {
@@ -98,7 +92,7 @@ test.describe('StartScreen', () => {
       await startScreen.waitFor()
 
       await startScreen.clickNewCampaign()
-      const input = dmWindow.locator('input.input').last()
+      const input = dmWindow.getByPlaceholder(/Kampagnen-Name/i)
       await expect(input).toBeVisible()
 
       // Escape should hide the input

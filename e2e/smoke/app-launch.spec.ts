@@ -53,8 +53,7 @@ test.describe('App launch', () => {
     })
 
     try {
-      // Give the app a moment to settle
-      await dmWindow.waitForTimeout(1500)
+      await expect(dmWindow.getByTestId('button-create-campaign')).toBeVisible()
 
       // Filter out known non-critical messages
       const criticalErrors = consoleErrors.filter(
@@ -97,22 +96,35 @@ test.describe('App launch', () => {
     try {
       const apiKeys = await dmWindow.evaluate(() => Object.keys((window as any).electronAPI))
 
-      // Core methods expected from preload/index.ts
-      const requiredMethods = [
+      const requiredTopLevelMethods = [
         'getMonitors',
         'openPlayerWindow',
         'closePlayerWindow',
-        'dbQuery',
-        'dbRun',
-        'dbRunBatch',
         'exportCampaign',
         'importCampaign',
+        'quickBackup',
+        'duplicateCampaign',
         'saveNow',
       ]
 
-      for (const method of requiredMethods) {
+      for (const method of requiredTopLevelMethods) {
         expect(apiKeys).toContain(method)
       }
+
+      const apiShape = await dmWindow.evaluate(() => {
+        const api = (window as any).electronAPI
+        return {
+          campaigns: Object.keys(api.campaigns ?? {}),
+          maps: Object.keys(api.maps ?? {}),
+          tracks: Object.keys(api.tracks ?? {}),
+          sessions: Object.keys(api.sessions ?? {}),
+        }
+      })
+
+      expect(apiShape.campaigns).toEqual(expect.arrayContaining(['list', 'get', 'count', 'create', 'rename', 'delete']))
+      expect(apiShape.maps).toEqual(expect.arrayContaining(['list', 'create', 'rename', 'delete']))
+      expect(apiShape.tracks).toEqual(expect.arrayContaining(['listByCampaign', 'create', 'toggleAssignment', 'importFolder']))
+      expect(apiShape.sessions).toEqual(expect.arrayContaining(['start', 'endOpen', 'statsByCampaigns']))
     } finally {
       await close()
     }

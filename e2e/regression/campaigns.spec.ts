@@ -33,7 +33,7 @@ test.describe('Campaign creation', () => {
 
       // After creation, the app should navigate away from StartScreen.
       // The logo is no longer visible (CampaignView is shown).
-      await expect(dmWindow.locator('img[alt="BoltBerry"]')).not.toBeVisible({ timeout: 8_000 })
+      await expect(dmWindow.getByTestId('screen-campaign-workspace')).toBeVisible({ timeout: 8_000 })
     } finally {
       await close()
     }
@@ -47,14 +47,13 @@ test.describe('Campaign creation', () => {
       await startScreen.waitFor()
 
       await startScreen.clickNewCampaign()
-      const input = dmWindow.locator('input.input').last()
+      const input = dmWindow.getByTestId('input-campaign-name')
 
       // Submit without typing a name
       await input.fill('')
       await input.press('Enter')
 
-      // StartScreen (logo) should still be visible — no navigation happened
-      await expect(dmWindow.locator('img[alt="BoltBerry"]')).toBeVisible()
+      await expect(dmWindow.getByRole('button', { name: /Neue Kampagne/i }).first()).toBeVisible()
     } finally {
       await close()
     }
@@ -71,7 +70,7 @@ test.describe('Campaign creation', () => {
       await startScreen.createCampaign('   Trimmed Name   ')
 
       // App navigated → campaign was created (trim did not block it)
-      await expect(dmWindow.locator('img[alt="BoltBerry"]')).not.toBeVisible({ timeout: 6_000 })
+      await expect(dmWindow.getByTestId('screen-campaign-workspace')).toBeVisible({ timeout: 6_000 })
     } finally {
       await close()
     }
@@ -85,7 +84,7 @@ test.describe('Campaign creation', () => {
       await startScreen.waitFor()
 
       await startScreen.clickNewCampaign()
-      const input = dmWindow.locator('input.input').last()
+      const input = dmWindow.getByTestId('input-campaign-name')
 
       // Attempt to type 70 characters (input has maxLength={60})
       const longName = 'A'.repeat(70)
@@ -117,15 +116,9 @@ test.describe('Campaign list', () => {
       await startScreen.createCampaignViaButton('Dungeon Run')
       // Navigate back to StartScreen (need to find the back button in CampaignView)
       // Implementation depends on CampaignView's back button selector
-      const backBtn = dmWindow.locator('button[title*="Zurück"], button[aria-label*="back"]').first()
-      if (await backBtn.isVisible({ timeout: 3_000 }).catch(() => false)) {
-        await backBtn.click()
-        await startScreen.waitFor()
-      } else {
-        // Re-launch and check DB
-        // (Accept that navigation-back is tested in critical-path tests)
-        return
-      }
+      await dmWindow.getByTestId('nav-dashboard').click()
+      await startScreen.waitFor()
+      await expect(dmWindow.getByTestId('list-item-campaign').filter({ hasText: 'Dungeon Run' })).toBeVisible()
     } finally {
       await close()
     }
@@ -135,11 +128,8 @@ test.describe('Campaign list', () => {
     const { dmWindow, app, close } = await launchApp()
 
     try {
-      // Insert a campaign directly via IPC (faster than UI)
       await dmWindow.evaluate(async () => {
-        await (window as any).electronAPI.dbRun(
-          'INSERT INTO campaigns (name) VALUES (?)', ['Direct Insert']
-        )
+        await (window as any).electronAPI.campaigns.create('Direct Insert')
       })
 
       // Reload to re-run loadCampaigns()
@@ -164,23 +154,21 @@ test.describe('Campaign rename', () => {
     const { dmWindow, close } = await launchApp()
 
     try {
-      // Pre-create a campaign via IPC
       await dmWindow.evaluate(async () => {
-        await (window as any).electronAPI.dbRun(
-          'INSERT INTO campaigns (name) VALUES (?)', ['Rename Me']
-        )
+        await (window as any).electronAPI.campaigns.create('Rename Me')
       })
 
       await dmWindow.reload()
       await dmWindow.waitForSelector('#root > *')
       await new StartScreenPage(dmWindow).waitFor()
 
-      // Double-click the campaign name to enter rename mode
-      const nameEl = dmWindow.locator('div', { hasText: 'Rename Me' }).first()
-      await nameEl.dblclick()
+      const row = dmWindow.getByTestId('list-item-campaign').first()
+      await expect(row).toContainText('Rename Me')
+      await row.hover()
+      await row.getByTestId('button-rename-campaign').click()
 
       // An input field should now be visible with the current name
-      const input = dmWindow.locator('input.input').last()
+      const input = row.getByTestId('input-campaign-rename')
       await expect(input).toBeVisible()
       const value = await input.inputValue()
       expect(value).toBe('Rename Me')
@@ -194,20 +182,19 @@ test.describe('Campaign rename', () => {
 
     try {
       await dmWindow.evaluate(async () => {
-        await (window as any).electronAPI.dbRun(
-          'INSERT INTO campaigns (name) VALUES (?)', ['OldName']
-        )
+        await (window as any).electronAPI.campaigns.create('OldName')
       })
 
       await dmWindow.reload()
       await dmWindow.waitForSelector('#root > *')
       await new StartScreenPage(dmWindow).waitFor()
 
-      // Double-click to rename
-      const nameEl = dmWindow.locator('div', { hasText: 'OldName' }).first()
-      await nameEl.dblclick()
+      const row = dmWindow.getByTestId('list-item-campaign').first()
+      await expect(row).toContainText('OldName')
+      await row.hover()
+      await row.getByTestId('button-rename-campaign').click()
 
-      const input = dmWindow.locator('input.input').last()
+      const input = row.getByTestId('input-campaign-rename')
       await input.fill('NewName')
       await input.press('Enter')
 
@@ -223,19 +210,19 @@ test.describe('Campaign rename', () => {
 
     try {
       await dmWindow.evaluate(async () => {
-        await (window as any).electronAPI.dbRun(
-          'INSERT INTO campaigns (name) VALUES (?)', ['StayTheSame']
-        )
+        await (window as any).electronAPI.campaigns.create('StayTheSame')
       })
 
       await dmWindow.reload()
       await dmWindow.waitForSelector('#root > *')
       await new StartScreenPage(dmWindow).waitFor()
 
-      const nameEl = dmWindow.locator('div', { hasText: 'StayTheSame' }).first()
-      await nameEl.dblclick()
+      const row = dmWindow.getByTestId('list-item-campaign').first()
+      await expect(row).toContainText('StayTheSame')
+      await row.hover()
+      await row.getByTestId('button-rename-campaign').click()
 
-      const input = dmWindow.locator('input.input').last()
+      const input = row.getByTestId('input-campaign-rename')
       await input.fill('Cancelled Name')
       await input.press('Escape')
 
@@ -255,11 +242,8 @@ test.describe('Campaign delete', () => {
     const { dmWindow, app, close } = await launchApp()
 
     try {
-      // Create via IPC
       await dmWindow.evaluate(async () => {
-        await (window as any).electronAPI.dbRun(
-          'INSERT INTO campaigns (name) VALUES (?)', ['To Be Deleted']
-        )
+        await (window as any).electronAPI.campaigns.create('To Be Deleted')
       })
 
       await dmWindow.reload()
@@ -269,13 +253,12 @@ test.describe('Campaign delete', () => {
       // Mock the native confirm dialog to click OK (index 1)
       await mockConfirmDialog(app, true)
 
-      // Click the delete button
-      const deleteBtn = dmWindow.locator('button[title="Kampagne löschen"]').first()
-      await deleteBtn.click()
+      const row = dmWindow.getByTestId('list-item-campaign').filter({ hasText: 'To Be Deleted' }).first()
+      await row.hover()
+      await row.getByTestId('button-delete-campaign').click()
 
       // After deletion, the campaign row should be gone
-      const row = dmWindow.locator('div', { hasText: 'To Be Deleted' })
-      await expect(row).not.toBeVisible({ timeout: 5_000 })
+      await expect(dmWindow.getByTestId('list-item-campaign').filter({ hasText: 'To Be Deleted' })).not.toBeVisible({ timeout: 5_000 })
     } finally {
       await close()
     }
@@ -286,9 +269,7 @@ test.describe('Campaign delete', () => {
 
     try {
       await dmWindow.evaluate(async () => {
-        await (window as any).electronAPI.dbRun(
-          'INSERT INTO campaigns (name) VALUES (?)', ['Keep Me']
-        )
+        await (window as any).electronAPI.campaigns.create('Keep Me')
       })
 
       await dmWindow.reload()
@@ -298,8 +279,9 @@ test.describe('Campaign delete', () => {
       // Mock the dialog to return Cancel (index 0)
       await mockConfirmDialog(app, false)
 
-      const deleteBtn = dmWindow.locator('button[title="Kampagne löschen"]').first()
-      await deleteBtn.click()
+      const row = dmWindow.getByTestId('list-item-campaign').filter({ hasText: 'Keep Me' }).first()
+      await row.hover()
+      await row.getByTestId('button-delete-campaign').click()
 
       // Campaign should still be visible
       await expect(dmWindow.locator('div', { hasText: 'Keep Me' }).first()).toBeVisible({ timeout: 3_000 })
@@ -318,22 +300,17 @@ test.describe('Campaign duplicate', () => {
 
     try {
       await dmWindow.evaluate(async () => {
-        await (window as any).electronAPI.dbRun(
-          'INSERT INTO campaigns (name) VALUES (?)', ['Original']
-        )
+        await (window as any).electronAPI.campaigns.create('Original')
       })
 
       await dmWindow.reload()
       await dmWindow.waitForSelector('#root > *')
       await new StartScreenPage(dmWindow).waitFor()
 
-      const dupeBtn = dmWindow.locator('button[title*="Duplikat"], button[title*="Kopie"]').first()
-      if (await dupeBtn.isVisible({ timeout: 2_000 }).catch(() => false)) {
-        await dupeBtn.click()
-        // "(Kopie)" suffix should appear
-        await expect(dmWindow.locator('div', { hasText: 'Original (Kopie)' }).first()).toBeVisible({ timeout: 6_000 })
-      }
-      // If the button uses a different selector, skip gracefully
+      const row = dmWindow.getByTestId('list-item-campaign').filter({ hasText: 'Original' }).first()
+      await row.hover()
+      await row.getByTestId('button-duplicate-campaign').click()
+      await expect(dmWindow.locator('div', { hasText: 'Original (Kopie)' }).first()).toBeVisible({ timeout: 6_000 })
     } finally {
       await close()
     }

@@ -135,7 +135,7 @@ export function Welcome() {
   }
 
   return (
-    <div className="bb-welcome">
+    <div className="bb-welcome" data-testid="screen-dashboard">
       <WelcomeStyles />
       <CampaignDataStyles />
 
@@ -298,10 +298,11 @@ function RightPane({
   const empty = campaigns.length === 0
 
   return (
-    <section className="bb-welcome-right">
+    <section className="bb-welcome-right" data-testid="dashboard-campaigns">
       <div className="bb-welcome-right-top">
         <div className="bb-welcome-topbar-row">
           <button
+            data-testid="button-open-profile"
             type="button"
             className="bb-welcome-compendium-btn"
             onClick={onOpenProfile}
@@ -310,6 +311,7 @@ function RightPane({
             👤 {t('welcome.profile')}
           </button>
           <button
+            data-testid="nav-bestiary"
             type="button"
             className="bb-welcome-compendium-btn"
             onClick={() => useUIStore.getState().setTopView('bestiary')}
@@ -318,6 +320,7 @@ function RightPane({
             👹 {t('welcome.openBestiary')}
           </button>
           <button
+            data-testid="nav-compendium"
             type="button"
             className="bb-welcome-compendium-btn"
             onClick={() => useUIStore.getState().setTopView('compendium')}
@@ -342,7 +345,7 @@ function RightPane({
         )}
 
         {campaigns.length > 0 && (
-          <div className="bb-welcome-list">
+          <div className="bb-welcome-list" data-testid="campaign-list">
             {campaigns.map((c) => (
               <CampaignRow
                 key={c.id}
@@ -363,13 +366,13 @@ function RightPane({
       </div>
 
       <div className="bb-welcome-right-footer">
-        <button className="bb-welcome-cta" type="button" onClick={onCreate}>
+        <button data-testid="button-create-campaign" className="bb-welcome-cta" type="button" onClick={onCreate}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M13 2L4 14h7l-2 8 9-12h-7l2-8z" fill="currentColor" />
           </svg>
           {t('welcome.newCampaign')}
         </button>
-        <button className="bb-welcome-cta bb-welcome-cta-ghost" type="button" onClick={onImport}>
+        <button data-testid="button-import-campaign" className="bb-welcome-cta bb-welcome-cta-ghost" type="button" onClick={onImport}>
           📥 {t('welcome.importCampaign')}
         </button>
       </div>
@@ -414,6 +417,7 @@ function CampaignRow({
   return (
     <div
       className="bb-welcome-row"
+      data-testid="list-item-campaign"
       role="button"
       tabIndex={0}
       onClick={renaming ? undefined : onOpen}
@@ -437,6 +441,7 @@ function CampaignRow({
       <div className="bb-welcome-row-body">
         {renaming ? (
           <input
+            data-testid="input-campaign-rename"
             className="input bb-welcome-row-rename"
             autoFocus
             value={renameValue}
@@ -489,11 +494,12 @@ function CampaignRow({
       <div className="bb-welcome-row-actions" onClick={(e) => e.stopPropagation()}>
         {renaming ? (
           <>
-            <button type="button" className="bb-welcome-row-action" onClick={stop(commitRename)} title="✓">
+            <button data-testid="button-confirm-campaign-rename" type="button" className="bb-welcome-row-action" onClick={stop(commitRename)} title="✓">
               ✓
             </button>
             <button
               type="button"
+              data-testid="button-cancel-campaign-rename"
               className="bb-welcome-row-action"
               onClick={stop(() => {
                 setRenameValue(campaign.name)
@@ -508,6 +514,7 @@ function CampaignRow({
           <>
             <button
               type="button"
+              data-testid="button-rename-campaign"
               className="bb-welcome-row-action"
               title={t('dashboard.rename')}
               onClick={stop(() => {
@@ -519,6 +526,7 @@ function CampaignRow({
             </button>
             <button
               type="button"
+              data-testid="button-campaign-cover"
               className="bb-welcome-row-action"
               title={campaign.coverPath ? t('welcome.clearCover') : t('welcome.setCover')}
               onClick={stop(campaign.coverPath ? onClearCover : onSetCover)}
@@ -527,6 +535,7 @@ function CampaignRow({
             </button>
             <button
               type="button"
+              data-testid="button-duplicate-campaign"
               className="bb-welcome-row-action"
               title={t('dashboard.duplicate')}
               onClick={stop(onDuplicate)}
@@ -535,6 +544,7 @@ function CampaignRow({
             </button>
             <button
               type="button"
+              data-testid="button-delete-campaign"
               className="bb-welcome-row-action bb-welcome-row-action-danger"
               title={t('dashboard.delete')}
               onClick={stop(onDelete)}
@@ -556,6 +566,7 @@ function SettingsIconButton() {
   const { t } = useTranslation()
   return (
     <button
+      data-testid="button-open-settings"
       type="button"
       className="bb-welcome-info-btn"
       onClick={() => window.dispatchEvent(new CustomEvent('app:open-global-settings'))}
@@ -585,10 +596,11 @@ function CreateModal({
 }) {
   const { t } = useTranslation()
   return (
-    <div className="bb-welcome-modal-backdrop" onClick={onCancel}>
+    <div className="bb-welcome-modal-backdrop" data-testid="dialog-create-campaign" onClick={onCancel}>
       <div className="bb-welcome-modal" onClick={(e) => e.stopPropagation()}>
         <div className="bb-welcome-modal-title display">{t('welcome.newCampaign')}</div>
         <input
+          data-testid="input-campaign-name"
           className="input"
           autoFocus
           placeholder={t('startScreen.campaignNamePlaceholder')}
@@ -601,10 +613,11 @@ function CreateModal({
           }}
         />
         <div className="bb-welcome-modal-actions">
-          <button className="bb-welcome-cta bb-welcome-cta-ghost" type="button" onClick={onCancel}>
+          <button data-testid="button-cancel-create-campaign" className="bb-welcome-cta bb-welcome-cta-ghost" type="button" onClick={onCancel}>
             {t('dashboard.cancel')}
           </button>
           <button
+            data-testid="button-confirm-create-campaign"
             className="bb-welcome-cta"
             type="button"
             onClick={onConfirm}

@@ -83,3 +83,20 @@ export async function mockOpenDialog(
     filePaths,
   )
 }
+
+/**
+ * Mock dialog.showOpenDialog as if the user cancelled the native picker.
+ */
+export async function mockOpenDialogCancel(
+  app: ElectronApplication,
+): Promise<void> {
+  await app.evaluate(({ dialog }) => {
+    const original = dialog.showOpenDialog.bind(dialog)
+    // @ts-ignore
+    dialog.showOpenDialog = async (..._args: unknown[]) => {
+      // @ts-ignore
+      dialog.showOpenDialog = original
+      return { canceled: true, filePaths: [] }
+    }
+  })
+}

@@ -15,7 +15,7 @@ import { mockSaveDialog, mockOpenDialog } from '../helpers/dialog-helpers'
 import { resolve } from 'path'
 import { tmpdir } from 'os'
 import { randomBytes } from 'crypto'
-import { existsSync } from 'fs'
+import { existsSync, writeFileSync } from 'fs'
 
 test.describe('Export → Import round-trip', () => {
 
@@ -23,17 +23,14 @@ test.describe('Export → Import round-trip', () => {
     const { dmWindow, app, close } = await launchApp()
 
     try {
-      // Step 1: Create a campaign with some data
-      const { lastInsertRowid: campaignId } = await dmWindow.evaluate(async () => {
-        const camp = await (window as any).electronAPI.dbRun(
-          'INSERT INTO campaigns (name) VALUES (?)', ['Round-Trip Campaign']
-        )
-        // Add a map entry (no image file needed for the data test)
-        await (window as any).electronAPI.dbRun(
-          `INSERT INTO maps (campaign_id, name, image_path, order_index) VALUES (?, ?, ?, ?)`,
-          [camp.lastInsertRowid, 'Test Map', 'assets/map/missing.png', 0]
-        )
-        return camp
+      const campaign = await dmWindow.evaluate(async () => {
+        const created = await (window as any).electronAPI.campaigns.create('Round-Trip Campaign')
+        await (window as any).electronAPI.maps.create({
+          campaignId: created.id,
+          name: 'Test Map',
+          imagePath: 'assets/map/missing.png',
+        })
+        return created
       })
 
       // Step 2: Export to a temp file
@@ -42,7 +39,7 @@ test.describe('Export → Import round-trip', () => {
 
       const exportResult = await dmWindow.evaluate(async (id: number) =>
         (window as any).electronAPI.exportCampaign(id),
-        campaignId
+        campaign.id
       )
       expect(exportResult.success).toBe(true)
 
@@ -55,11 +52,8 @@ test.describe('Export → Import round-trip', () => {
       expect(importResult.success).toBe(true)
       expect(typeof importResult.campaignId).toBe('number')
 
-      // Step 4: Verify the imported campaign exists in the DB
-      const [imported] = await dmWindow.evaluate(async (id: number) =>
-        (window as any).electronAPI.dbQuery(
-          'SELECT name FROM campaigns WHERE id = ?', [id]
-        ),
+      const imported = await dmWindow.evaluate(async (id: number) =>
+        (window as any).electronAPI.campaigns.get(id),
         importResult.campaignId
       )
       expect(imported.name).toBe('Round-Trip Campaign')
@@ -72,15 +66,13 @@ test.describe('Export → Import round-trip', () => {
     const { dmWindow, close } = await launchApp()
 
     try {
-      const { lastInsertRowid: campaignId } = await dmWindow.evaluate(async () =>
-        (window as any).electronAPI.dbRun(
-          'INSERT INTO campaigns (name) VALUES (?)', ['Backup Test']
-        )
+      const campaign = await dmWindow.evaluate(async () =>
+        (window as any).electronAPI.campaigns.create('Backup Test')
       )
 
       const result = await dmWindow.evaluate(async (id: number) =>
         (window as any).electronAPI.quickBackup(id),
-        campaignId
+        campaign.id
       )
 
       expect(result.success).toBe(true)
@@ -103,8 +95,11 @@ test.describe('Export → Import round-trip', () => {
     const { dmWindow, app, close } = await launchApp()
 
     try {
-      // Point the dialog to a non-zip file (e.g. a text file in temp)
-      const fakePath = resolve(tmpdir(), 'notazip.txt')
+      // Point the dialog to a real, existing non-zip file. A native file
+      // picker cannot return a path that does not exist, so the mocked
+      // dialog should not do that either.
+      const fakePath = resolve(tmpdir(), `notazip-${randomBytes(4).toString('hex')}.txt`)
+      writeFileSync(fakePath, 'This is not a BoltBerry campaign archive.\n', 'utf-8')
       await mockOpenDialog(app, [fakePath])
 
       const result = await dmWindow.evaluate(async () =>

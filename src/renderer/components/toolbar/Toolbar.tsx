@@ -243,7 +243,7 @@ export function Toolbar() {
   const isLive = sessionMode === 'session'
 
   return (
-    <div className="toolbar">
+    <div className="toolbar" data-testid="toolbar">
 
       {/* ── SECTION: Navigation ─────────────────────────────────────────── */}
       <button className="tool-btn" title={`${t('toolbar.leftSidebar')} (Ctrl+B)`} aria-label={t('toolbar.leftSidebar')} onClick={toggleLeftSidebar}>◧</button>
@@ -360,6 +360,7 @@ export function Toolbar() {
           are live to the players. */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flexShrink: 0 }}>
         <button
+          data-testid="button-session-toggle"
           onClick={handleSessionToggle}
           title={isLive ? 'Session beenden' : 'Session starten — Änderungen live an Spieler senden'}
           style={{
@@ -475,9 +476,10 @@ export function Toolbar() {
           Four buttons that all change *what the players see on their
           display*. Wrapped in a container with subtle background so they
           read as one logical group instead of four loose icons. */}
-      <div className="player-cluster">
+      <div className="player-cluster" data-testid="player-cluster">
         {/* Player window open/close */}
         <button
+          data-testid="button-toggle-player-window"
           className={clsx('tool-btn', playerConnected && 'active')}
           title={playerConnected ? 'Spielerfenster schließen (Ctrl+P)' : `${t('toolbar.openPlayerWindow')} (Ctrl+P)`}
           onClick={handlePlayerWindowToggle}

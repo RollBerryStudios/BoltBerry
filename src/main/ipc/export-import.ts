@@ -150,6 +150,10 @@ export function registerExportImportHandlers(): void {
     if (canceled || !filePaths[0]) return { success: false, canceled: true }
 
     const zipPath = filePaths[0]
+    if (!existsSync(zipPath)) {
+      return { success: false, error: 'Ausgewählte Datei existiert nicht' }
+    }
+
     const userData = getEffectiveUserDataPath()
     const importDir = path.join(userData, 'imports', `import_${Date.now()}`)
     mkdirSync(importDir, { recursive: true })

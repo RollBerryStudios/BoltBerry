@@ -132,7 +132,7 @@ export function CampaignView() {
   const heroMap = hasMaps ? activeMaps[0] : null
 
   return (
-    <div className="bb-ws">
+    <div className="bb-ws" data-testid="screen-campaign-workspace">
       <WorkspaceStyles />
       <CampaignDataStyles />
 
@@ -140,6 +140,7 @@ export function CampaignView() {
       <header className="bb-ws-topbar" style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}>
         <button
           type="button"
+          data-testid="nav-dashboard"
           className="bb-ws-back"
           onClick={() => setActiveCampaign(null)}
           style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
@@ -186,6 +187,7 @@ export function CampaignView() {
 
           <button
             type="button"
+            data-testid="nav-compendium"
             className="bb-ws-compendium"
             title={t('compendium.title')}
             onClick={() => useUIStore.getState().setTopView('compendium')}
@@ -195,6 +197,7 @@ export function CampaignView() {
 
           <button
             type="button"
+            data-testid="button-open-settings"
             className="bb-ws-compendium"
             title={`${t('globalSettings.open')} (Ctrl/Cmd+,)`}
             aria-label={t('globalSettings.open')}
@@ -248,11 +251,12 @@ export function CampaignView() {
           ) : null}
 
           {/* Tab strip (dashboard-style pills) */}
-          <div className="bb-ws-tabs">
+          <div className="bb-ws-tabs" data-testid="workspace-tabs">
             {TABS.map((tb) => (
               <button
                 key={tb.id}
                 type="button"
+                data-testid={`nav-workspace-${tb.id}`}
                 className={tb.id === tab ? 'bb-ws-tab active' : 'bb-ws-tab'}
                 onClick={() => setTab(tb.id)}
               >
@@ -369,6 +373,7 @@ function HeroMap({
         </div>
         <h2 className="bb-ws-hero-title display">{map.name}</h2>
         <button
+          data-testid="button-open-game-view"
           type="button"
           className="bb-ws-cta bb-ws-cta-lg"
           onClick={(e) => {
@@ -435,7 +440,7 @@ function PlayButton({
 }) {
   if (loading) {
     return (
-      <button type="button" className="bb-ws-cta" disabled>
+      <button type="button" data-testid="button-play-loading" className="bb-ws-cta" disabled>
         <span>…</span>
         {labelLoading}
       </button>
@@ -443,14 +448,14 @@ function PlayButton({
   }
   if (!hasMaps) {
     return (
-      <button type="button" className="bb-ws-cta bb-ws-cta-ghost" onClick={onImportFirst}>
+      <button type="button" data-testid="button-import-first-map" className="bb-ws-cta bb-ws-cta-ghost" onClick={onImportFirst}>
         <span>+</span>
         {labelImport}
       </button>
     )
   }
   return (
-    <button type="button" className="bb-ws-cta" onClick={onStart}>
+    <button type="button" data-testid="button-open-game-view" className="bb-ws-cta" onClick={onStart}>
       <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M8 5v14l11-7z" />
       </svg>
@@ -535,6 +540,7 @@ function MapsPanel({ onImport, importing, onOpen }: {
         <div className="bb-ws-maps-empty-sub">{t('workspace.noMapsSub')}</div>
         <button
           type="button"
+          data-testid="button-import-map-empty"
           className="bb-ws-maps-empty-cta"
           onClick={onImport}
           disabled={importing}
@@ -546,7 +552,7 @@ function MapsPanel({ onImport, importing, onOpen }: {
   }
 
   return (
-    <div className="bb-ws-maps-grid">
+    <div className="bb-ws-maps-grid" data-testid="map-list">
       {activeMaps.map((map, idx) => (
         <MapCard
           key={map.id}
@@ -561,6 +567,7 @@ function MapsPanel({ onImport, importing, onOpen }: {
       ))}
       <button
         type="button"
+        data-testid="button-add-map"
         className="bb-ws-maps-add"
         onClick={onImport}
         disabled={importing}
@@ -599,9 +606,10 @@ function MapCard({ map, index, total, onOpen, onRename, onDelete, onReorder }: {
   }
 
   return (
-    <div className="bb-ws-map-card">
+    <div className="bb-ws-map-card" data-testid="list-item-map">
       <button
         type="button"
+        data-testid="button-open-map"
         className="bb-ws-map-card-thumb"
         onClick={onOpen}
         title={t('workspace.openGameView')}
@@ -611,6 +619,7 @@ function MapCard({ map, index, total, onOpen, onRename, onDelete, onReorder }: {
       <div className="bb-ws-map-card-body">
         {editing ? (
           <input
+            data-testid="input-map-name"
             className="bb-ws-map-card-name-input"
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
@@ -624,6 +633,7 @@ function MapCard({ map, index, total, onOpen, onRename, onDelete, onReorder }: {
         ) : (
           <button
             type="button"
+            data-testid="button-rename-map"
             className="bb-ws-map-card-name"
             onClick={() => setEditing(true)}
             title={t('workspace.mapRename')}
@@ -639,6 +649,7 @@ function MapCard({ map, index, total, onOpen, onRename, onDelete, onReorder }: {
         <div className="bb-ws-map-card-actions">
           <button
             type="button"
+            data-testid="button-map-move-up"
             className="bb-ws-map-card-btn"
             onClick={() => onReorder('up')}
             disabled={index === 0}
@@ -646,6 +657,7 @@ function MapCard({ map, index, total, onOpen, onRename, onDelete, onReorder }: {
           >↑</button>
           <button
             type="button"
+            data-testid="button-map-move-down"
             className="bb-ws-map-card-btn"
             onClick={() => onReorder('down')}
             disabled={index >= total - 1}
@@ -653,6 +665,7 @@ function MapCard({ map, index, total, onOpen, onRename, onDelete, onReorder }: {
           >↓</button>
           <button
             type="button"
+            data-testid="button-delete-map"
             className="bb-ws-map-card-btn bb-ws-map-card-btn-danger"
             onClick={onDelete}
             title={t('workspace.mapDelete')}

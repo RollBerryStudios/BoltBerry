@@ -70,7 +70,9 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
   // ── Success screen ─────────────────────────────────────────────────────────
   if (step === 'success') {
     return (
-      <div style={{
+      <div
+        data-testid="setup-wizard-success"
+        style={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -120,6 +122,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
             <div>🎵 <strong>audio/</strong> — {t('setupWizard.folderAudio')}</div>
           </div>
           <button
+            data-testid="button-setup-finish"
             className="btn btn-primary"
             style={{ width: '100%', justifyContent: 'center', fontWeight: 700, padding: '10px 0', marginBottom: 'var(--sp-2)' }}
             onClick={onComplete}
@@ -127,6 +130,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
             {t('setupWizard.letsGo')}
           </button>
           <button
+            data-testid="button-setup-import-campaign"
             className="btn"
             style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--text-xs)', padding: '8px 0' }}
             onClick={() => {
@@ -146,7 +150,9 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
 
   // ── Setup screen ───────────────────────────────────────────────────────────
   return (
-    <div style={{
+    <div
+      data-testid="setup-wizard"
+      style={{
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -217,6 +223,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
 
           <div style={{ display: 'flex', gap: 'var(--sp-2)' }}>
             <input
+              data-testid="input-setup-data-folder"
               className="input"
               value={loading ? t('setupWizard.loading') : tempFolder}
               onChange={(e) => setTempFolder(e.target.value)}
@@ -225,6 +232,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
               style={{ flex: 1 }}
             />
             <button
+              data-testid="button-setup-browse"
               className="btn btn-ghost"
               onClick={handleChooseFolder}
               disabled={loading}
@@ -250,6 +258,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
           gap: 'var(--sp-2)',
         }}>
           <button
+            data-testid="button-setup-next"
             className="btn btn-primary"
             onClick={handleContinue}
             disabled={loading || !tempFolder.trim()}

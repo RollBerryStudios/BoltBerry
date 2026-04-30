@@ -7,7 +7,7 @@
  * maintenance.
  */
 
-import type { Page, Locator } from '@playwright/test'
+import { expect, type Page, type Locator } from '@playwright/test'
 
 // ─── SetupWizard POM ──────────────────────────────────────────────────────────
 
@@ -46,41 +46,39 @@ export class StartScreenPage {
 
   /** Wait for the StartScreen to be rendered. */
   async waitFor(): Promise<void> {
-    // Logo image is present on the StartScreen
-    await this.page.waitForSelector('img[alt="BoltBerry"]', { timeout: 10_000 })
+    await expect(this.page.getByTestId('screen-dashboard')).toBeVisible({ timeout: 10_000 })
+    await expect(this.page.getByTestId('button-create-campaign')).toBeVisible()
   }
 
   /** Check if the "no campaigns" empty state is shown. */
   async hasNoCampaigns(): Promise<boolean> {
-    const emptyState = this.page.locator('.empty-state')
-    return emptyState.isVisible().catch(() => false)
+    const cards = this.page.getByTestId('list-item-campaign')
+    return (await cards.count().catch(() => 0)) === 0
   }
 
   /** Click the "New Campaign" button to enter creation mode. */
   async clickNewCampaign(): Promise<void> {
-    // The primary button that reads "Neue Kampagne" or similar
-    await this.page.locator('button.btn-primary').last().click()
+    await this.page.getByTestId('button-create-campaign').click()
   }
 
   /** Type a campaign name and confirm. Returns when the campaign is created. */
   async createCampaign(name: string): Promise<void> {
     await this.clickNewCampaign()
-    // Input appears after clicking
-    const input = this.page.locator('input.input').last()
+    const input = this.page.getByTestId('input-campaign-name')
+    await expect(input).toBeVisible()
     await input.fill(name)
-    // Press Enter to confirm
     await input.press('Enter')
-    // Wait until we leave the StartScreen (campaign opened)
-    await this.page.waitForSelector('img[alt="BoltBerry"]', { state: 'detached', timeout: 8_000 }).catch(() => {})
+    await expect(this.page.getByText(name.trim()).first()).toBeVisible({ timeout: 8_000 })
   }
 
   /** Click the "New Campaign" button, type a name, and click the Create button. */
   async createCampaignViaButton(name: string): Promise<void> {
     await this.clickNewCampaign()
-    const input = this.page.locator('input.input').last()
+    const input = this.page.getByTestId('input-campaign-name')
+    await expect(input).toBeVisible()
     await input.fill(name)
-    // Click the explicit Create button
-    await this.page.locator('button.btn-primary').last().click()
+    await this.page.getByTestId('button-confirm-create-campaign').click()
+    await expect(this.page.getByText(name.trim()).first()).toBeVisible({ timeout: 8_000 })
   }
 
   /** Open an existing campaign by name. */
@@ -93,7 +91,7 @@ export class StartScreenPage {
   async getCampaignNames(): Promise<string[]> {
     // Each campaign row has a fontWeight: 500 div with the name
     const names: string[] = []
-    const items = this.page.locator('.campaign-row-name, [style*="fontWeight: 500"]')
+    const items = this.page.getByTestId('list-item-campaign').locator('.bb-welcome-row-title')
     const count = await items.count().catch(() => 0)
     for (let i = 0; i < count; i++) {
       names.push((await items.nth(i).textContent()) ?? '')
@@ -104,11 +102,10 @@ export class StartScreenPage {
   /** Rename a campaign via the rename (pencil) button. */
   async renameCampaign(currentName: string, newName: string): Promise<void> {
     // Hover the row to reveal the rename button
-    const row = this.page.locator('div', { hasText: currentName }).first()
+    const row = this.page.getByTestId('list-item-campaign').filter({ hasText: currentName }).first()
     await row.hover()
-    // Click the rename button (pencil emoji)
-    await this.page.locator('button[title="Umbenennen"]').first().click()
-    const input = this.page.locator('input.input').last()
+    await row.getByTestId('button-rename-campaign').click()
+    const input = row.getByTestId('input-campaign-rename')
     await input.fill(newName)
     await input.press('Enter')
   }
@@ -116,10 +113,9 @@ export class StartScreenPage {
   /** Delete a campaign via the delete (trash) button.
    *  The confirmation dialog is handled by the Electron main process. */
   async deleteCampaign(name: string): Promise<void> {
-    const row = this.page.locator('div', { hasText: name }).first()
+    const row = this.page.getByTestId('list-item-campaign').filter({ hasText: name }).first()
     await row.hover()
-    // Click the delete (🗑) button
-    await this.page.locator('button[title="Kampagne löschen"]').first().click()
+    await row.getByTestId('button-delete-campaign').click()
     // Confirmation is a native dialog — respond via Electron's dialog mock
     // (see dialogHelpers.ts for how to mock native dialogs)
   }
@@ -136,14 +132,13 @@ export class CampaignViewPage {
 
   async waitFor(): Promise<void> {
     // CampaignView has a header with the campaign name
-    await this.page.waitForSelector('[class*="campaign"]', { timeout: 10_000 })
+    await expect(this.page.getByTestId('screen-campaign-workspace')).toBeVisible({ timeout: 10_000 })
   }
 
   /** Navigate back to the StartScreen. */
   async goBackToStartScreen(): Promise<void> {
     // Usually a back/home button or the BoltBerry logo
-    const homeBtn = this.page.locator('button[title*="Zurück"], button[aria-label*="home"]').first()
-    await homeBtn.click()
+    await this.page.getByTestId('nav-dashboard').click()
   }
 }
 

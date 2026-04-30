@@ -11,122 +11,101 @@
 import { test, expect } from '@playwright/test'
 import { launchApp } from '../helpers/electron-launch'
 
-test.describe('IPC bridge — database', () => {
+test.describe('IPC bridge — semantic data APIs', () => {
 
-  test('dbQuery returns an array', async () => {
+  test('raw SQL database helpers are not exposed to the renderer', async () => {
     const { dmWindow, close } = await launchApp()
 
     try {
-      // Query the schema_version table (always present after DB init)
+      const exposed = await dmWindow.evaluate(() => {
+        const api = (window as any).electronAPI
+        return {
+          dbQuery: typeof api.dbQuery,
+          dbRun: typeof api.dbRun,
+          dbRunBatch: typeof api.dbRunBatch,
+        }
+      })
+
+      expect(exposed).toEqual({
+        dbQuery: 'undefined',
+        dbRun: 'undefined',
+        dbRunBatch: 'undefined',
+      })
+    } finally {
+      await close()
+    }
+  })
+
+  test('campaign semantic API supports create, list, get, rename, and delete', async () => {
+    const { dmWindow, close } = await launchApp()
+
+    try {
       const result = await dmWindow.evaluate(async () => {
-        return (window as any).electronAPI.dbQuery(
-          'SELECT version FROM schema_version WHERE id = 1'
-        )
+        const api = (window as any).electronAPI.campaigns
+        const created = await api.create('IPC Semantic Campaign')
+        const listed = await api.list()
+        const loaded = await api.get(created.id)
+        await api.rename(created.id, 'IPC Semantic Campaign Renamed')
+        const renamed = await api.get(created.id)
+        await api.delete(created.id)
+        const afterDelete = await api.get(created.id)
+        return { created, listed, loaded, renamed, afterDelete }
       })
 
-      expect(Array.isArray(result)).toBe(true)
-      expect(result).toHaveLength(1)
-      // Schema version should be a number ≥ 1
-      expect(typeof result[0].version).toBe('number')
-      expect(result[0].version).toBeGreaterThanOrEqual(1)
+      expect(result.created.id).toBeGreaterThan(0)
+      expect(result.listed.some((campaign: { id: number }) => campaign.id === result.created.id)).toBe(true)
+      expect(result.loaded.name).toBe('IPC Semantic Campaign')
+      expect(result.renamed.name).toBe('IPC Semantic Campaign Renamed')
+      expect(result.afterDelete).toBeNull()
     } finally {
       await close()
     }
   })
 
-  test('dbQuery returns the current schema version (37)', async () => {
+  test('map semantic API supports create, list, rename, and delete', async () => {
     const { dmWindow, close } = await launchApp()
 
     try {
-      const [row] = await dmWindow.evaluate(async () =>
-        (window as any).electronAPI.dbQuery<{ version: number }>(
-          'SELECT version FROM schema_version WHERE id = 1'
-        )
-      )
-      expect(row.version).toBe(23)
-    } finally {
-      await close()
-    }
-  })
-
-  test('dbRun inserts a row and returns lastInsertRowid', async () => {
-    const { dmWindow, close } = await launchApp()
-
-    try {
-      const result = await dmWindow.evaluate(async () =>
-        (window as any).electronAPI.dbRun(
-          'INSERT INTO campaigns (name) VALUES (?)',
-          ['IPC Test Campaign']
-        )
-      )
-
-      expect(typeof result.lastInsertRowid).toBe('number')
-      expect(result.lastInsertRowid).toBeGreaterThan(0)
-      expect(result.changes).toBe(1)
-    } finally {
-      await close()
-    }
-  })
-
-  test('dbRunBatch executes multiple statements atomically', async () => {
-    const { dmWindow, close } = await launchApp()
-
-    try {
-      // Insert a campaign, then verify it exists — both in a batch
-      await dmWindow.evaluate(async () => {
-        return (window as any).electronAPI.dbRunBatch([
-          { sql: 'INSERT INTO campaigns (name) VALUES (?)', params: ['Batch Campaign 1'] },
-          { sql: 'INSERT INTO campaigns (name) VALUES (?)', params: ['Batch Campaign 2'] },
-        ])
+      const result = await dmWindow.evaluate(async () => {
+        const campaigns = (window as any).electronAPI.campaigns
+        const maps = (window as any).electronAPI.maps
+        const campaign = await campaigns.create('Map IPC Campaign')
+        const created = await maps.create({
+          campaignId: campaign.id,
+          name: 'IPC Map',
+          imagePath: 'assets/map/ipc-map.png',
+        })
+        const listed = await maps.list(campaign.id)
+        await maps.rename(created.id, 'IPC Map Renamed')
+        const renamed = (await maps.list(campaign.id)).find((map: { id: number }) => map.id === created.id)
+        await maps.delete(created.id)
+        const afterDelete = await maps.list(campaign.id)
+        return { created, listed, renamed, afterDelete }
       })
 
-      const campaigns = await dmWindow.evaluate(async () =>
-        (window as any).electronAPI.dbQuery(
-          "SELECT name FROM campaigns WHERE name LIKE 'Batch Campaign%'"
-        )
-      )
-
-      expect(campaigns).toHaveLength(2)
+      expect(result.created.id).toBeGreaterThan(0)
+      expect(result.listed.some((map: { id: number }) => map.id === result.created.id)).toBe(true)
+      expect(result.renamed.name).toBe('IPC Map Renamed')
+      expect(result.afterDelete.some((map: { id: number }) => map.id === result.created.id)).toBe(false)
     } finally {
       await close()
     }
   })
 
-  test('forbidden SQL (DROP TABLE) is rejected from renderer', async () => {
+  test('semantic API validation rejects empty campaign names', async () => {
     const { dmWindow, close } = await launchApp()
 
     try {
-      const error = await dmWindow.evaluate(async () => {
+      const message = await dmWindow.evaluate(async () => {
         try {
-          await (window as any).electronAPI.dbRun('DROP TABLE campaigns')
+          await (window as any).electronAPI.campaigns.create('   ')
           return null
         } catch (e: any) {
           return e.message ?? String(e)
         }
       })
 
-      expect(error).toBeTruthy()
-      expect(error).toMatch(/not allowed/i)
-    } finally {
-      await close()
-    }
-  })
-
-  test('forbidden SQL (ALTER TABLE) is rejected from renderer', async () => {
-    const { dmWindow, close } = await launchApp()
-
-    try {
-      const error = await dmWindow.evaluate(async () => {
-        try {
-          await (window as any).electronAPI.dbRun('ALTER TABLE campaigns ADD COLUMN evil TEXT')
-          return null
-        } catch (e: any) {
-          return e.message ?? String(e)
-        }
-      })
-
-      expect(error).toBeTruthy()
-      expect(error).toMatch(/not allowed/i)
+      expect(message).toMatch(/Campaign name is required/i)
     } finally {
       await close()
     }

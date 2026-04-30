@@ -16,6 +16,15 @@ import { launchApp } from '../helpers/electron-launch'
 import { StartScreenPage } from '../helpers/page-objects'
 
 test.describe('Keyboard shortcuts', () => {
+  async function pressAppShortcut(page: import('@playwright/test').Page, key: string): Promise<void> {
+    await page.evaluate((shortcutKey) => {
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: shortcutKey, bubbles: true, cancelable: true }))
+    }, key)
+  }
+
+  function shortcutDialog(page: import('@playwright/test').Page) {
+    return page.getByRole('dialog', { name: /Tastenkürzel|Keyboard Shortcuts/i })
+  }
 
   test('pressing ? opens the ShortcutOverlay', async () => {
     const { dmWindow, close } = await launchApp()
@@ -25,12 +34,9 @@ test.describe('Keyboard shortcuts', () => {
       await startScreen.waitFor()
 
       // Press ? key on the body (not in an input)
-      await dmWindow.keyboard.press('?')
+      await pressAppShortcut(dmWindow, '?')
 
-      // ShortcutOverlay should appear — it is rendered conditionally
-      // Look for a heading or element containing shortcut info
-      const overlay = dmWindow.locator('[class*="shortcut"], [class*="Shortcut"], [class*="overlay"]').first()
-      await expect(overlay).toBeVisible({ timeout: 3_000 })
+      await expect(shortcutDialog(dmWindow)).toBeVisible({ timeout: 3_000 })
     } finally {
       await close()
     }
@@ -43,12 +49,11 @@ test.describe('Keyboard shortcuts', () => {
       await new StartScreenPage(dmWindow).waitFor()
 
       // Open
-      await dmWindow.keyboard.press('F1')
-      const overlay = dmWindow.locator('[class*="shortcut"], [class*="Shortcut"], [class*="overlay"]').first()
+      await pressAppShortcut(dmWindow, 'F1')
+      const overlay = shortcutDialog(dmWindow)
       await expect(overlay).toBeVisible({ timeout: 3_000 })
 
-      // Close by pressing F1 again (toggle)
-      await dmWindow.keyboard.press('F1')
+      await pressAppShortcut(dmWindow, 'F1')
       await expect(overlay).not.toBeVisible({ timeout: 3_000 })
     } finally {
       await close()
@@ -62,8 +67,8 @@ test.describe('Keyboard shortcuts', () => {
       await new StartScreenPage(dmWindow).waitFor()
 
       // Open overlay
-      await dmWindow.keyboard.press('?')
-      const overlay = dmWindow.locator('[class*="shortcut"], [class*="Shortcut"], [class*="overlay"]').first()
+      await pressAppShortcut(dmWindow, '?')
+      const overlay = shortcutDialog(dmWindow)
       await expect(overlay).toBeVisible({ timeout: 3_000 })
 
       // Close with Escape
@@ -84,7 +89,7 @@ test.describe('Keyboard shortcuts', () => {
       // Open the campaign name input
       const startScreen = new StartScreenPage(dmWindow)
       await startScreen.clickNewCampaign()
-      const input = dmWindow.locator('input.input').last()
+      const input = dmWindow.getByPlaceholder(/Kampagnen-Name/i)
       await expect(input).toBeFocused()
 
       // Pressing ? while focused on input should NOT open the overlay
