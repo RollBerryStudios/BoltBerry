@@ -78,6 +78,7 @@ export function FloatingUtilityDock() {
             <button
               key={item.id}
               className={`floating-utility-btn${isOpen ? ' active' : ''}`}
+              data-testid={`button-floating-${item.id}`}
               onClick={() => toggleFloatingPanel(item.id)}
               aria-pressed={isOpen}
               aria-label={t(item.labelKey)}

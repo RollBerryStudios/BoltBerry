@@ -273,7 +273,7 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
 
   if (!activeCampaignId) {
     return (
-      <div className="sfx-panel sfx-panel-empty">
+      <div className="sfx-panel sfx-panel-empty" data-testid="panel-sfx">
         <SfxPanelStyles />
         <div className="sfx-panel-empty-glyph" aria-hidden="true">🎛</div>
         <div>{t('audio.noCampaign')}</div>
@@ -282,7 +282,7 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
   }
 
   return (
-    <div className="sfx-panel">
+    <div className="sfx-panel" data-testid="panel-sfx">
       <SfxPanelStyles />
 
       {!hideBoards && (
@@ -290,6 +290,7 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
           <span className="sfx-panel-board-label">{t('sfxPanel.board')}:</span>
           <select
             className="sfx-panel-board-select"
+            data-testid="select-sfx-board"
             value={activeBoard?.id ?? ''}
             onChange={(e) => {
               const targetId = Number(e.target.value)
@@ -307,6 +308,7 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
           </select>
           <button
             className="sfx-panel-add-board"
+            data-testid="button-add-sfx-board"
             onClick={handleAddBoard}
             title={t('sfxPanel.addBoard')}
             aria-label={t('sfxPanel.addBoard')}
@@ -317,6 +319,7 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
             type="range" min={0} max={1} step={0.01} value={sfxVolume}
             onChange={(e) => setSfxVolume(parseFloat(e.target.value))}
             className="sfx-panel-master-slider"
+            data-testid="input-sfx-master-volume"
             title={t('audio.volume')}
           />
           <span className="sfx-panel-master-value">{Math.round(sfxVolume * 100)}%</span>
@@ -330,7 +333,7 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
             <div className="sfx-panel-no-board">
               <div className="sfx-panel-no-board-glyph">🎛</div>
               <div>{t('sfxPanel.noBoardsHint')}</div>
-              <button className="btn btn-primary" onClick={handleAddBoard}>
+              <button className="btn btn-primary" data-testid="button-add-sfx-board-empty" onClick={handleAddBoard}>
                 + {t('sfxPanel.addBoard')}
               </button>
             </div>
@@ -355,6 +358,8 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
                 return (
                   <div
                     key={i}
+                    data-testid="list-item-sfx-slot"
+                    data-slot-number={i}
                     className={[
                       'sfx-slot',
                       slot?.audioPath ? 'filled' : 'empty',
@@ -388,7 +393,7 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
         </section>
 
         {/* Inline editor */}
-        <section className="sfx-panel-editor">
+        <section className="sfx-panel-editor" data-testid="panel-sfx-editor">
           {selectedSlotIndex === null ? (
             <div className="sfx-panel-editor-empty">
               <div className="sfx-panel-editor-empty-arrow">←</div>
@@ -406,6 +411,7 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
                 <div className="sfx-panel-spacer" />
                 <button
                   className="btn btn-ghost"
+                  data-testid="button-clear-sfx-slot"
                   onClick={() => void handleClearSlot(selectedSlotIndex)}
                   title={t('sfxPanel.clearSlot')}
                 >🗑</button>
@@ -416,6 +422,7 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
                 <input
                   type="text"
                   className="sfx-panel-input"
+                  data-testid="input-sfx-slot-title"
                   placeholder={t('sfxPanel.titlePlaceholder')}
                   value={editorBuffer.title}
                   onChange={(e) => setEditorBuffer((b) => ({ ...b, title: e.target.value, dirty: true }))}
@@ -439,6 +446,7 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
                   <input
                     type="text"
                     className="sfx-panel-input sfx-panel-emoji-input"
+                    data-testid="input-sfx-slot-emoji"
                     maxLength={4}
                     value={editorBuffer.emoji}
                     onChange={(e) => setEditorBuffer((b) => ({ ...b, emoji: e.target.value, dirty: true }))}
@@ -447,17 +455,20 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
                   />
                   <button
                     className="btn btn-ghost"
+                    data-testid="button-open-sfx-emoji-picker"
                     onClick={() => setIconPicker((v) => !v)}
                     title={t('sfxPanel.pickEmoji')}
                   >📦 {t('sfxPanel.library')}</button>
                   <button
                     className="btn btn-ghost"
+                    data-testid="button-upload-sfx-icon"
                     onClick={handleUploadIcon}
                     title={t('sfxPanel.uploadIconHint')}
                   >📁 {t('sfxPanel.uploadIcon')}</button>
                   {editorBuffer.iconPath && (
                     <button
                       className="btn btn-ghost"
+                      data-testid="button-clear-sfx-icon"
                       onClick={handleClearIcon}
                       title={t('sfxPanel.clearIcon')}
                     >✕</button>
@@ -469,6 +480,7 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
                       <button
                         key={`${e}-${i}`}
                         className="sfx-panel-emoji-cell"
+                        data-testid="button-sfx-emoji"
                         onClick={() => handlePickEmoji(e)}
                         title={e}
                       >{e}</button>
@@ -487,6 +499,7 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
                   </span>
                   <button
                     className="btn btn-ghost"
+                    data-testid="button-pick-sfx-audio"
                     onClick={handlePickAudio}
                     title={t('sfxPanel.pickAudio')}
                   >📁</button>
@@ -500,6 +513,7 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
                 <input
                   type="range" min={0} max={1} step={0.01}
                   value={editorBuffer.volume}
+                  data-testid="input-sfx-slot-volume"
                   onChange={(e) => setEditorBuffer((b) => ({
                     ...b, volume: parseFloat(e.target.value), dirty: true,
                   }))}
@@ -511,6 +525,7 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
                 <input
                   type="checkbox"
                   checked={editorBuffer.isLoop}
+                  data-testid="checkbox-sfx-slot-loop"
                   onChange={(e) => setEditorBuffer((b) => ({ ...b, isLoop: e.target.checked, dirty: true }))}
                 />
                 <span>{t('sfxPanel.loop')}</span>
@@ -519,12 +534,14 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
               <div className="sfx-panel-editor-actions">
                 <button
                   className="btn"
+                  data-testid="button-preview-sfx-slot"
                   onClick={handleEditorPreview}
                   disabled={!editorBuffer.audioPath}
                   title={t('sfxPanel.preview')}
                 >▶ {t('sfxPanel.preview')}</button>
                 <button
                   className="btn btn-primary"
+                  data-testid="button-save-sfx-slot"
                   onClick={handleSaveEditor}
                   disabled={!editorBuffer.dirty}
                   title={t('sfxPanel.save')}

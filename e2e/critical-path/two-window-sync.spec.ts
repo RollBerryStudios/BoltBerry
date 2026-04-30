@@ -296,4 +296,74 @@ test.describe('DM ↔ Player sync', () => {
       await close()
     }
   })
+
+  test('session broadcast matrix reaches the player bridge', async () => {
+    const { dmWindow, app, close } = await launchApp()
+
+    try {
+      await dmWindow.evaluate(() => (window as any).electronAPI.openPlayerWindow())
+      const playerWindow = await waitForPlayerWindow(app, 8_000)
+      await playerWindow.waitForLoadState('domcontentloaded')
+
+      await playerWindow.evaluate(() => {
+        ;(window as any).__broadcasts = {
+          handouts: [],
+          overlays: [],
+          initiative: [],
+          weather: [],
+          measures: [],
+          drawings: [],
+          walls: [],
+        }
+        const api = (window as any).playerAPI
+        api.onHandout((value: unknown) => (window as any).__broadcasts.handouts.push(value))
+        api.onOverlay((value: unknown) => (window as any).__broadcasts.overlays.push(value))
+        api.onInitiative((value: unknown) => (window as any).__broadcasts.initiative.push(value))
+        api.onWeather((value: unknown) => (window as any).__broadcasts.weather.push(value))
+        api.onMeasure((value: unknown) => (window as any).__broadcasts.measures.push(value))
+        api.onDrawing((value: unknown) => (window as any).__broadcasts.drawings.push(value))
+        api.onWalls((value: unknown) => (window as any).__broadcasts.walls.push(value))
+      })
+
+      await dmWindow.evaluate(() => {
+        const api = (window as any).electronAPI
+        api.sendHandout({ title: 'Secret Door', imagePath: null, textContent: 'The west wall slides open.' })
+        api.sendOverlay({ text: 'Round 2', position: 'top', style: 'subtitle' })
+        api.sendInitiative([
+          { name: 'Mira', roll: 18, current: true },
+          { name: 'Bandit', roll: 11, current: false },
+        ])
+        api.sendWeather('rain')
+        api.sendMeasure({ type: 'line', startX: 10, startY: 20, endX: 110, endY: 20, distance: 20 })
+        api.sendDrawing({ id: 7, type: 'text', points: [30, 40], color: '#f59e0b', width: 2, text: 'X' })
+        api.sendWalls([{ x1: 0, y1: 0, x2: 100, y2: 0, wallType: 'door', doorState: 'closed' }])
+      })
+
+      await playerWindow.waitForFunction(() => {
+        const b = (window as any).__broadcasts
+        return b.handouts.length === 1
+          && b.overlays.length === 1
+          && b.initiative.length === 1
+          && b.weather.length === 1
+          && b.measures.length === 1
+          && b.drawings.length === 1
+          && b.walls.length === 1
+      }, { timeout: 5_000 })
+
+      const broadcasts = await playerWindow.evaluate(() => (window as any).__broadcasts)
+      expect(broadcasts.handouts[0]).toMatchObject({ title: 'Secret Door', textContent: 'The west wall slides open.' })
+      expect(broadcasts.overlays[0]).toMatchObject({ text: 'Round 2', position: 'top', style: 'subtitle' })
+      expect(broadcasts.initiative[0]).toHaveLength(2)
+      expect(broadcasts.initiative[0][0]).toMatchObject({ name: 'Mira', current: true })
+      expect(broadcasts.weather[0]).toBe('rain')
+      expect(broadcasts.measures[0]).toMatchObject({ type: 'line', distance: 20 })
+      expect(broadcasts.drawings[0]).toMatchObject({ id: 7, type: 'text', text: 'X' })
+      expect(broadcasts.walls[0][0]).toMatchObject({ wallType: 'door', doorState: 'closed' })
+    } finally {
+      await dmWindow.evaluate(() =>
+        (window as any).electronAPI.closePlayerWindow().catch(() => {}),
+      ).catch(() => {})
+      await close()
+    }
+  })
 })

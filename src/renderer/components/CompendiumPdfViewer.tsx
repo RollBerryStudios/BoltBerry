@@ -350,14 +350,14 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
 
   if (loading || !loaded) {
     return (
-      <div className="bb-pdf-loading">
+      <div className="bb-pdf-loading" data-testid="compendium-pdf-loading">
         {error ? `⚠️ ${error}` : `${t('compendium.loading')}\u2026`}
       </div>
     )
   }
 
   return (
-    <div className="bb-pdf">
+    <div className="bb-pdf" data-testid="compendium-pdf-viewer">
       <PdfToolbar
         pageNum={pageNum}
         numPages={loaded.numPages}
@@ -419,7 +419,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
         )}
 
         <div className="bb-pdf-canvas-wrap">
-          <canvas ref={canvasRef} className="bb-pdf-canvas" />
+          <canvas ref={canvasRef} className="bb-pdf-canvas" data-testid="canvas-compendium-pdf-page" />
           {sentTick > 0 && (
             <div className="bb-pdf-sent-toast">
               ✓ {t('compendium.sentToPlayer')}
@@ -463,6 +463,7 @@ function SearchBar({
         </svg>
         <input
           className="bb-pdf-search-input"
+          data-testid="input-compendium-pdf-search"
           autoFocus
           value={query}
           placeholder={t('compendium.searchPlaceholder')}
@@ -493,6 +494,7 @@ function SearchBar({
                 <button
                   key={`${hit.page}-${hit.offset}-${i}`}
                   type="button"
+                  data-testid="list-item-compendium-pdf-search-hit"
                   className={hit.page === activePage ? 'bb-pdf-search-hit active' : 'bb-pdf-search-hit'}
                   onClick={() => onJump(hit.page)}
                 >
@@ -563,11 +565,12 @@ function PdfToolbar({
   }, [pageNum])
 
   return (
-    <div className="bb-pdf-toolbar">
+    <div className="bb-pdf-toolbar" data-testid="toolbar-compendium-pdf">
       <div className="bb-pdf-group">
         <button
           type="button"
           className={sidebarMode === 'toc' ? 'bb-pdf-btn active' : 'bb-pdf-btn'}
+          data-testid="button-compendium-pdf-toc"
           onClick={() => onSidebarMode(sidebarMode === 'toc' ? 'off' : 'toc')}
           disabled={!hasOutline}
           title={hasOutline ? t('compendium.toggleToc') : t('compendium.noOutline')}
@@ -577,6 +580,7 @@ function PdfToolbar({
         <button
           type="button"
           className={sidebarMode === 'thumbs' ? 'bb-pdf-btn active' : 'bb-pdf-btn'}
+          data-testid="button-compendium-pdf-thumbs"
           onClick={() => onSidebarMode(sidebarMode === 'thumbs' ? 'off' : 'thumbs')}
           title={t('compendium.toggleThumbs')}
         >
@@ -585,7 +589,7 @@ function PdfToolbar({
       </div>
 
       <div className="bb-pdf-group">
-        <button type="button" className="bb-pdf-btn" onClick={onPrev} disabled={pageNum <= 1} title={t('compendium.prevPage')}>
+        <button type="button" className="bb-pdf-btn" data-testid="button-compendium-pdf-prev" onClick={onPrev} disabled={pageNum <= 1} title={t('compendium.prevPage')}>
           ◀
         </button>
         <form
@@ -598,6 +602,7 @@ function PdfToolbar({
         >
           <input
             className="bb-pdf-page-input mono"
+            data-testid="input-compendium-pdf-page"
             value={pageInput}
             onChange={(e) => setPageInput(e.target.value)}
             onBlur={() => {
@@ -609,19 +614,19 @@ function PdfToolbar({
           />
           <span className="bb-pdf-page-of mono">/ {numPages}</span>
         </form>
-        <button type="button" className="bb-pdf-btn" onClick={onNext} disabled={pageNum >= numPages} title={t('compendium.nextPage')}>
+        <button type="button" className="bb-pdf-btn" data-testid="button-compendium-pdf-next" onClick={onNext} disabled={pageNum >= numPages} title={t('compendium.nextPage')}>
           ▶
         </button>
       </div>
 
       <div className="bb-pdf-group">
-        <button type="button" className="bb-pdf-btn" onClick={onZoomOut} disabled={zoom <= 0.4} title={t('compendium.zoomOut')}>
+        <button type="button" className="bb-pdf-btn" data-testid="button-compendium-pdf-zoom-out" onClick={onZoomOut} disabled={zoom <= 0.4} title={t('compendium.zoomOut')}>
           −
         </button>
-        <button type="button" className="bb-pdf-btn bb-pdf-btn-text mono" onClick={onZoomReset} title={t('compendium.zoomReset')}>
+        <button type="button" className="bb-pdf-btn bb-pdf-btn-text mono" data-testid="button-compendium-pdf-zoom-reset" onClick={onZoomReset} title={t('compendium.zoomReset')}>
           {Math.round(zoom * 100)}%
         </button>
-        <button type="button" className="bb-pdf-btn" onClick={onZoomIn} disabled={zoom >= 4} title={t('compendium.zoomIn')}>
+        <button type="button" className="bb-pdf-btn" data-testid="button-compendium-pdf-zoom-in" onClick={onZoomIn} disabled={zoom >= 4} title={t('compendium.zoomIn')}>
           +
         </button>
       </div>
@@ -630,6 +635,7 @@ function PdfToolbar({
         <button
           type="button"
           className={searchOpen ? 'bb-pdf-btn active' : 'bb-pdf-btn'}
+          data-testid="button-compendium-pdf-search"
           onClick={onToggleSearch}
           title={t('compendium.search') + ' (Ctrl+F)'}
         >
@@ -638,6 +644,7 @@ function PdfToolbar({
         <button
           type="button"
           className={broadcasting ? 'bb-pdf-btn bb-pdf-btn-send active' : 'bb-pdf-btn bb-pdf-btn-send'}
+          data-testid="button-compendium-pdf-send"
           onClick={onSendToPlayer}
           disabled={!playerConnected}
           title={
@@ -652,6 +659,7 @@ function PdfToolbar({
           <button
             type="button"
             className="bb-pdf-btn bb-pdf-btn-stop"
+            data-testid="button-compendium-pdf-stop-send"
             onClick={onStopBroadcast}
             title={t('compendium.stopBroadcast')}
           >

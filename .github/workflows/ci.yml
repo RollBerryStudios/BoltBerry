@@ -89,6 +89,38 @@ jobs:
           path: playwright-report/
           retention-days: 7
 
+  packaged-smoke-linux:
+    name: Packaged Smoke (Linux)
+    needs: [encoding-check, build-check]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          lfs: true
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+      - name: Package unpacked app
+        run: npm run pack
+      - name: Run packaged smoke
+        shell: bash
+        run: |
+          exe="$(find release -maxdepth 3 -type f -perm -111 \( -name 'BoltBerry' -o -name 'boltberry' \) | head -n 1)"
+          if [ -z "$exe" ]; then
+            echo "::error::Could not find packaged BoltBerry executable under release/"
+            find release -maxdepth 3 -type f -print
+            exit 1
+          fi
+          echo "Testing packaged executable: $exe"
+          npx @electron/fuses read --app "$exe"
+          BOLTBERRY_E2E_EXECUTABLE_PATH="$exe" xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npm run test:e2e:packaged
+
   e2e-cross-platform-smoke:
     name: E2E Smoke (${{ matrix.os }})
     needs: encoding-check

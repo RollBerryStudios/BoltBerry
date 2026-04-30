@@ -189,7 +189,7 @@ export function CompendiumView() {
   }
 
   return (
-    <div className="bb-comp">
+    <div className="bb-comp" data-testid="screen-compendium">
       <CompendiumStyles />
 
       {/* Top bar */}
@@ -223,6 +223,7 @@ export function CompendiumView() {
               <circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" />
             </svg>
             <input
+              data-testid="input-compendium-global-search"
               value={globalQuery}
               onChange={(e) => setGlobalQuery(e.target.value)}
               placeholder={t('compendium.globalSearchPlaceholder')}
@@ -231,10 +232,10 @@ export function CompendiumView() {
               <button type="button" onClick={() => setGlobalQuery('')} title={t('compendium.closeSearch')}>✕</button>
             )}
           </div>
-          <button type="button" className="bb-comp-cta bb-comp-cta-ghost" onClick={handleImport}>
+          <button type="button" className="bb-comp-cta bb-comp-cta-ghost" data-testid="button-import-compendium-pdf" onClick={handleImport}>
             📥 {t('compendium.importPdf')}
           </button>
-          <button type="button" className="bb-comp-cta bb-comp-cta-ghost" onClick={handleOpenFolder}>
+          <button type="button" className="bb-comp-cta bb-comp-cta-ghost" data-testid="button-open-compendium-folder" onClick={handleOpenFolder}>
             📁 {t('compendium.openFolder')}
           </button>
           <button
@@ -303,6 +304,7 @@ export function CompendiumView() {
                     key={`${h.file.path}-${h.page}-${i}`}
                     type="button"
                     className="bb-comp-global-hit"
+                    data-testid="list-item-compendium-global-search-hit"
                     onClick={() => jumpToHit(h)}
                   >
                     <span className="bb-comp-global-hit-file">{h.file.name}</span>
@@ -335,6 +337,7 @@ export function CompendiumView() {
                 <li key={f.path}>
                   <button
                     type="button"
+                    data-testid="list-item-compendium-pdf"
                     className={
                       f.path === selectedPath
                         ? 'bb-comp-file active'

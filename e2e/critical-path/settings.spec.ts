@@ -13,9 +13,9 @@ import { test, expect } from '@playwright/test'
 import { launchApp } from '../helpers/electron-launch'
 import { StartScreenPage } from '../helpers/page-objects'
 import { completeSetupWithFolder } from '../helpers/onboarding-helpers'
-import { mkdtempSync } from 'fs'
+import { existsSync, mkdirSync, mkdtempSync, writeFileSync } from 'fs'
 import { tmpdir } from 'os'
-import { resolve } from 'path'
+import { join, resolve } from 'path'
 
 // ─── SetupWizard (first launch) ───────────────────────────────────────────────
 
@@ -127,6 +127,77 @@ test.describe('Data folder management', () => {
       )
 
       expect(campaigns).toHaveLength(0)
+    } finally {
+      await close()
+    }
+  })
+
+  test('invalid and system data folders are rejected without switching database state', async () => {
+    const { dmWindow, close } = await launchApp()
+
+    try {
+      await dmWindow.evaluate(async () =>
+        (window as any).electronAPI.campaigns.create('Still Here')
+      )
+
+      const missingDir = resolve(tmpdir(), `boltberry-missing-${Date.now()}`)
+      const missingResult = await dmWindow.evaluate(async (dir: string) =>
+        (window as any).electronAPI.setUserDataFolder(dir),
+        missingDir,
+      )
+      expect(missingResult.success).toBe(false)
+      expect(missingResult.error).toMatch(/does not exist|not a directory/i)
+
+      if (process.platform !== 'win32') {
+        const systemResult = await dmWindow.evaluate(async () =>
+          (window as any).electronAPI.setUserDataFolder('/etc')
+        )
+        expect(systemResult.success).toBe(false)
+        expect(systemResult.error).toMatch(/system directory/i)
+      }
+
+      const campaigns = await dmWindow.evaluate(async () =>
+        (window as any).electronAPI.campaigns.list()
+      )
+      expect(campaigns.map((campaign: any) => campaign.name)).toContain('Still Here')
+    } finally {
+      await close()
+    }
+  })
+
+  test('asset cleanup removes orphaned files but preserves referenced assets', async () => {
+    const { dmWindow, close, userDataDir } = await launchApp()
+
+    try {
+      const campaign = await dmWindow.evaluate(async () =>
+        (window as any).electronAPI.campaigns.create(`Cleanup ${Date.now()}`)
+      )
+      const png1x1 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/p9sAAAAASUVORK5CYII='
+      const referenced = await dmWindow.evaluate(async ({ campaignId, png }) =>
+        (window as any).electronAPI.saveAssetImage({
+          campaignId,
+          dataUrl: png,
+          originalName: 'referenced-cleanup.png',
+          type: 'map',
+        }),
+      { campaignId: campaign.id, png: png1x1 })
+      expect(referenced.path).toBeTruthy()
+
+      const orphanDir = join(userDataDir, 'assets', 'map')
+      mkdirSync(orphanDir, { recursive: true })
+      const orphanPath = join(orphanDir, 'orphan-cleanup.bin')
+      writeFileSync(orphanPath, Buffer.from([1, 2, 3, 4]))
+
+      const dryRun = await dmWindow.evaluate(() => (window as any).electronAPI.assetCleanup(true))
+      expect(dryRun.success).toBe(true)
+      expect(dryRun.paths).toContain('assets/map/orphan-cleanup.bin')
+      expect(dryRun.paths).not.toContain(referenced.path)
+
+      const cleanup = await dmWindow.evaluate(() => (window as any).electronAPI.assetCleanup(false))
+      expect(cleanup.success).toBe(true)
+      expect(cleanup.paths).toContain('assets/map/orphan-cleanup.bin')
+      expect(existsSync(orphanPath)).toBe(false)
+      expect(existsSync(join(userDataDir, referenced.path))).toBe(true)
     } finally {
       await close()
     }

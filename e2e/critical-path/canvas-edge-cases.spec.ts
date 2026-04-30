@@ -166,4 +166,41 @@ test.describe('Canvas edge cases', () => {
       await close()
     }
   })
+
+  test('token copy and paste creates undoable duplicated map records', async () => {
+    const { app, dmWindow, close } = await launchApp()
+    try {
+      const { mapId } = await openSeededCanvas(dmWindow, app, `Canvas Copy Paste ${Date.now()}`, TEST_MAPS.bridge)
+      await seedCanvasEntities(dmWindow, mapId)
+
+      const tokenIds = await dmWindow.evaluate((id) =>
+        (window as any).electronAPI.tokens.listByMap(id).then((tokens: any[]) => tokens.map((token) => token.id)),
+      mapId)
+      expect(tokenIds).toHaveLength(2)
+      await dmWindow.evaluate((ids) => {
+        window.dispatchEvent(new CustomEvent('e2e:set-token-selection', { detail: { ids } }))
+      }, tokenIds)
+      await expect(dmWindow.getByTestId('multi-select-bar')).toBeVisible({ timeout: 8_000 })
+
+      const pastePoint = await canvasPoint(dmWindow, 0.68, 0.58)
+      await dmWindow.mouse.move(pastePoint.x, pastePoint.y)
+      const mod = process.platform === 'darwin' ? 'Meta' : 'Control'
+      await dmWindow.keyboard.press(`${mod}+C`)
+      await dmWindow.keyboard.press(`${mod}+V`)
+      await expect.poll(() => dmWindow.evaluate((id) => (window as any).electronAPI.tokens.listByMap(id), mapId))
+        .toHaveLength(4)
+
+      await expect(dmWindow.getByTestId('button-undo')).toBeEnabled()
+      await dmWindow.getByTestId('button-undo').click()
+      await expect.poll(() => dmWindow.evaluate((id) => (window as any).electronAPI.tokens.listByMap(id), mapId))
+        .toHaveLength(2)
+
+      await expect(dmWindow.getByTestId('button-redo')).toBeEnabled()
+      await dmWindow.getByTestId('button-redo').click()
+      await expect.poll(() => dmWindow.evaluate((id) => (window as any).electronAPI.tokens.listByMap(id), mapId))
+        .toHaveLength(4)
+    } finally {
+      await close()
+    }
+  })
 })

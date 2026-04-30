@@ -164,7 +164,7 @@ export function SpellsTab({
   if (!index) return <div className="bb-best-loading">…</div>
 
   return (
-    <div className="bb-best-layout">
+    <div className="bb-best-layout" data-testid="panel-bestiary-spells">
       <aside className="bb-best-listpane">
         <div className="bb-best-filterbar">
           <label className="bb-best-filter">
@@ -215,18 +215,20 @@ export function SpellsTab({
 
         <div className="bb-best-listcount">
           <span>{t('bestiary.countSpells', { count: filtered.length })}</span>
-          <button
-            type="button"
-            className="bb-best-list-new"
-            onClick={handleImport}
+            <button
+              type="button"
+              className="bb-best-list-new"
+              data-testid="button-import-wiki-spell"
+              onClick={handleImport}
             title={t('bestiary.import')}
           >
             📥 {t('bestiary.importShort')}
           </button>
-          <button
-            type="button"
-            className="bb-best-list-new"
-            onClick={() => setCreatingNew(true)}
+            <button
+              type="button"
+              className="bb-best-list-new"
+              data-testid="button-create-wiki-spell"
+              onClick={() => setCreatingNew(true)}
             title={t('wikiForm.new_spell')}
           >
             + {t('wikiForm.new')}
@@ -255,6 +257,8 @@ export function SpellsTab({
               <li key={sp.slug}>
                 <button
                   type="button"
+                  data-testid="list-item-bestiary-spell"
+                  data-slug={sp.slug}
                   className={
                     sp.slug === selectedSlug
                       ? 'bb-best-list-item active'
@@ -291,7 +295,7 @@ export function SpellsTab({
         </ul>
       </aside>
 
-      <main className="bb-best-detailpane">
+      <main className="bb-best-detailpane" data-testid="detail-bestiary-spell">
         {selectedSlug ? (
           <SpellDetail
             slug={selectedSlug}

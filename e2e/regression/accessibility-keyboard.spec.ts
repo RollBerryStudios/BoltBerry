@@ -50,8 +50,9 @@ test.describe('Accessibility keyboard coverage', () => {
       await dmWindow.getByTestId('button-canvas-tool-select').focus()
       await expect(dmWindow.getByTestId('button-canvas-tool-select')).toBeFocused()
       await dmWindow.keyboard.press('ArrowDown')
-      const focusedToolChanged = await dmWindow.evaluate(() => document.activeElement?.getAttribute('data-testid'))
-      expect(focusedToolChanged).not.toBe('button-canvas-tool-select')
+      await expect.poll(() =>
+        dmWindow.evaluate(() => document.activeElement?.getAttribute('data-testid')),
+      ).not.toBe('button-canvas-tool-select')
 
       const unlabeledIconButtons = await dmWindow.getByTestId('toolbar').locator('button').evaluateAll((buttons) =>
         buttons

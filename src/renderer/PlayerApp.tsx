@@ -340,7 +340,7 @@ export default function PlayerApp() {
   }, [])
 
   if (blackout || mode === 'blackout') {
-    return <div style={{ width: '100vw', height: '100vh', background: '#000' }} />
+    return <div data-testid="player-blackout" style={{ width: '100vw', height: '100vh', background: '#000' }} />
   }
 
   // Handout overlay (shown over map/atmosphere/idle)
@@ -350,7 +350,7 @@ export default function PlayerApp() {
         width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.92)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         padding: 40, position: 'relative',
-      }}>
+      }} data-testid="player-handout">
         <button
           onClick={() => setHandout(null)}
           style={{
@@ -366,14 +366,14 @@ export default function PlayerApp() {
           padding: 32, maxWidth: 600, width: '100%', maxHeight: '80vh', overflowY: 'auto',
           boxShadow: '0 24px 48px rgba(0,0,0,0.8)',
         }}>
-          <div style={{ fontSize: 20, fontWeight: 700, color: '#F4F6FA', marginBottom: 16 }}>
+          <div data-testid="player-handout-title" style={{ fontSize: 20, fontWeight: 700, color: '#F4F6FA', marginBottom: 16 }}>
             {handout.title}
           </div>
           {handout.imagePath && (
             <PlayerImg path={handout.imagePath} style={{ width: '100%', borderRadius: 8, marginBottom: handout.textContent ? 16 : 0 }} />
           )}
           {handout.textContent && (
-            <div style={{ fontSize: 16, color: '#94A0B2', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
+            <div data-testid="player-handout-body" style={{ fontSize: 16, color: '#94A0B2', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
               {handout.textContent}
             </div>
           )}
@@ -384,7 +384,11 @@ export default function PlayerApp() {
 
   if (mode === 'atmosphere' && atmospherePath) {
     return (
-      <div style={{ position: 'relative', width: '100vw', height: '100vh', background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div
+        data-testid="player-atmosphere-root"
+        data-weather={weather}
+        style={{ position: 'relative', width: '100vw', height: '100vh', background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      >
         <PlayerImg path={atmospherePath} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
         <WeatherCanvas type={weather} width={size.w} height={size.h} />
         <PlayerOverlayWidget overlay={overlay} />
@@ -394,7 +398,14 @@ export default function PlayerApp() {
 
   if (mode === 'map' && mapState) {
     return (
-      <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
+      <div
+        data-testid="player-map-root"
+        data-weather={weather}
+        data-measure-type={measure?.type ?? ''}
+        data-drawing-count={drawingData.length}
+        data-wall-count={walls.length}
+        style={{ position: 'relative', width: '100vw', height: '100vh' }}
+      >
         <PlayerMapView
           mapState={mapState}
           tokens={tokens}
@@ -422,7 +433,10 @@ export default function PlayerApp() {
   }
 
   return (
-    <div style={{ position: 'relative', width: '100vw', height: '100vh', background: '#08091A', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#525878', gap: 16 }}>
+    <div
+      data-testid="player-idle-root"
+      style={{ position: 'relative', width: '100vw', height: '100vh', background: '#08091A', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#525878', gap: 16 }}
+    >
       <div style={{ fontSize: 72, filter: 'drop-shadow(0 0 20px rgba(245, 168, 0, 0.4))' }}>⚡</div>
       <div style={{ fontSize: 24, fontWeight: 800, background: 'linear-gradient(135deg, #FFD044, #F5A800)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>BoltBerry</div>
       <div style={{ fontSize: 14 }}>Warte auf den Spielleiter…</div>
@@ -442,7 +456,12 @@ function PlayerOverlayWidget({ overlay }: { overlay: PlayerOverlay | null }) {
     overlay.style === 'subtitle' ? { fontSize: 32, fontWeight: 600 } :
     { fontSize: 20, fontWeight: 400 }
   return (
-    <div style={{ position: 'absolute', left: 0, right: 0, zIndex: 100, display: 'flex', justifyContent: 'center', padding: '0 64px', ...posStyle }}>
+    <div
+      data-testid="player-overlay"
+      data-position={overlay.position}
+      data-style={overlay.style}
+      style={{ position: 'absolute', left: 0, right: 0, zIndex: 100, display: 'flex', justifyContent: 'center', padding: '0 64px', ...posStyle }}
+    >
       <div style={{ ...textStyle, color: '#F4F6FA', textAlign: 'center', textShadow: '0 2px 16px rgba(0,0,0,0.95), 0 0 48px rgba(0,0,0,0.8)', maxWidth: '80%' }}>
         {overlay.text}
       </div>
@@ -454,7 +473,7 @@ function PlayerOverlayWidget({ overlay }: { overlay: PlayerOverlay | null }) {
 
 function InitiativeOverlay({ entries }: { entries: PlayerInitiativeEntry[] }) {
   return (
-    <div style={{
+    <div data-testid="player-initiative" style={{
       position: 'absolute', bottom: 24, right: 24, zIndex: 50,
       background: 'rgba(13,16,21,0.88)', backdropFilter: 'blur(8px)',
       border: '1px solid rgba(47,107,255,0.4)',
@@ -465,7 +484,7 @@ function InitiativeOverlay({ entries }: { entries: PlayerInitiativeEntry[] }) {
         Initiative
       </div>
       {entries.map((e, i) => (
-        <div key={`${e.name}-${e.roll}`} style={{
+        <div key={`${e.name}-${e.roll}`} data-testid="player-initiative-entry" style={{
           display: 'flex', alignItems: 'center', gap: 6,
           padding: '4px 10px',
           background: e.current ? 'rgba(47,107,255,0.20)' : 'transparent',

@@ -64,7 +64,7 @@ export function BestiaryView() {
   ], [t])
 
   return (
-    <div className="bb-best">
+    <div className="bb-best" data-testid="screen-bestiary">
       <BestiaryStyles />
 
       {/* Top bar */}
@@ -98,6 +98,7 @@ export function BestiaryView() {
               <circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" />
             </svg>
             <input
+              data-testid="input-bestiary-search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={t('bestiary.searchPlaceholder')}
@@ -138,6 +139,7 @@ export function BestiaryView() {
             key={tabDef.id}
             type="button"
             role="tab"
+            data-testid={`tab-bestiary-${tabDef.id}`}
             aria-selected={tab === tabDef.id}
             onClick={() => setTab(tabDef.id)}
             className={tab === tabDef.id ? 'bb-best-tab active' : 'bb-best-tab'}

@@ -139,7 +139,7 @@ export function MonstersTab({
   }
 
   return (
-    <div className="bb-best-layout">
+    <div className="bb-best-layout" data-testid="panel-bestiary-monsters">
       <aside className="bb-best-listpane">
         <div className="bb-best-filterbar">
           <FilterPill
@@ -182,18 +182,20 @@ export function MonstersTab({
 
         <div className="bb-best-listcount">
           <span>{t('bestiary.countMonsters', { count: filtered.length })}</span>
-          <button
-            type="button"
-            className="bb-best-list-new"
-            onClick={handleImport}
+            <button
+              type="button"
+              className="bb-best-list-new"
+              data-testid="button-import-wiki-monster"
+              onClick={handleImport}
             title={t('bestiary.import')}
           >
             📥 {t('bestiary.importShort')}
           </button>
-          <button
-            type="button"
-            className="bb-best-list-new"
-            onClick={() => setCreatingNew(true)}
+            <button
+              type="button"
+              className="bb-best-list-new"
+              data-testid="button-create-wiki-monster"
+              onClick={() => setCreatingNew(true)}
             title={t('wikiForm.new_monster')}
           >
             + {t('wikiForm.new')}
@@ -221,6 +223,8 @@ export function MonstersTab({
               <li key={m.slug}>
                 <button
                   type="button"
+                  data-testid="list-item-bestiary-monster"
+                  data-slug={m.slug}
                   className={
                     m.slug === selectedSlug
                       ? 'bb-best-list-item active'
@@ -258,7 +262,7 @@ export function MonstersTab({
         </ul>
       </aside>
 
-      <main className="bb-best-detailpane">
+      <main className="bb-best-detailpane" data-testid="detail-bestiary-monster">
         {selectedSlug ? (
           <MonsterDetail
             slug={selectedSlug}
@@ -338,4 +342,3 @@ function crValue(cr: string): number {
   const n = parseFloat(cr)
   return Number.isFinite(n) ? n : 9999
 }
-

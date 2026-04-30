@@ -157,7 +157,7 @@ export function ItemsTab({
   if (!index) return <div className="bb-best-loading">…</div>
 
   return (
-    <div className="bb-best-layout">
+    <div className="bb-best-layout" data-testid="panel-bestiary-items">
       <aside className="bb-best-listpane">
         <div className="bb-best-filterbar">
           <label className="bb-best-filter">
@@ -199,18 +199,20 @@ export function ItemsTab({
 
         <div className="bb-best-listcount">
           <span>{t('bestiary.countItems', { count: filtered.length })}</span>
-          <button
-            type="button"
-            className="bb-best-list-new"
-            onClick={handleImport}
+            <button
+              type="button"
+              className="bb-best-list-new"
+              data-testid="button-import-wiki-item"
+              onClick={handleImport}
             title={t('bestiary.import')}
           >
             📥 {t('bestiary.importShort')}
           </button>
-          <button
-            type="button"
-            className="bb-best-list-new"
-            onClick={() => setCreatingNew(true)}
+            <button
+              type="button"
+              className="bb-best-list-new"
+              data-testid="button-create-wiki-item"
+              onClick={() => setCreatingNew(true)}
             title={t('wikiForm.new_item')}
           >
             + {t('wikiForm.new')}
@@ -237,6 +239,8 @@ export function ItemsTab({
               <li key={it.slug}>
                 <button
                   type="button"
+                  data-testid="list-item-bestiary-item"
+                  data-slug={it.slug}
                   className={
                     it.slug === selectedSlug
                       ? 'bb-best-list-item active'
@@ -275,7 +279,7 @@ export function ItemsTab({
         </ul>
       </aside>
 
-      <main className="bb-best-detailpane">
+      <main className="bb-best-detailpane" data-testid="detail-bestiary-item">
         {selectedSlug ? (
           <ItemDetail
             slug={selectedSlug}
