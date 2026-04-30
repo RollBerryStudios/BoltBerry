@@ -8,6 +8,7 @@ import { useSessionStore } from '../../stores/sessionStore'
 import { useMapTransformStore, screenToMapPure, mapToScreenPure } from '../../stores/mapTransformStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useTokenStore } from '../../stores/tokenStore'
+import { useRoomStore } from '../../stores/roomStore'
 import { useUndoStore, nextCommandId } from '../../stores/undoStore'
 import { showToast } from '../shared/Toast'
 import { acquireCanvas, releaseCanvas } from '../../utils/canvasPool'
@@ -364,16 +365,27 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
         }
       } else if (detail.type === 'revealRoom' || detail.type === 'coverRoom') {
         // RoomPanel → reveal/cover the polygon of the selected room.
-        // The points come pre-flattened ([x0, y0, x1, y1, ...]) in
-        // map-image coordinates so we can drop them straight into a
-        // polygon op + go through the canonical pushFogCommand path
-        // (paints, persists, broadcasts, undo).
-        const roomDetail = detail as { type: string; points: number[] }
-        if (!Array.isArray(roomDetail.points) || roomDetail.points.length < 6) return
+        // The panel sends pre-flattened points, while context menus only
+        // know the room id. Resolve both through the same canonical
+        // pushFogCommand path (paints, persists, broadcasts, undo).
+        const roomDetail = detail as { type: string; points?: number[]; roomId?: number }
+        let points = roomDetail.points
+        if ((!Array.isArray(points) || points.length < 6) && roomDetail.roomId != null) {
+          const room = useRoomStore.getState().rooms.find((candidate) => candidate.id === roomDetail.roomId)
+          if (room) {
+            try {
+              const parsed = JSON.parse(room.polygon) as Array<{ x: number; y: number }>
+              points = parsed.flatMap((p) => [p.x, p.y])
+            } catch {
+              points = []
+            }
+          }
+        }
+        if (!Array.isArray(points) || points.length < 6) return
         const op: FogOperation = {
           type: detail.type === 'revealRoom' ? 'reveal' : 'cover',
           shape: 'polygon',
-          points: roomDetail.points,
+          points,
         }
         pushFogCommand(op)
       }

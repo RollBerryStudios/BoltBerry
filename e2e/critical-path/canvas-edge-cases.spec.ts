@@ -110,6 +110,34 @@ test.describe('Canvas edge cases', () => {
     }
   })
 
+  test('room fog cover and reveal actions persist polygon fog from room id', async () => {
+    const { app, dmWindow, close } = await launchApp()
+    try {
+      const { mapId } = await openSeededCanvas(dmWindow, app, `Canvas Room Fog ${Date.now()}`, TEST_MAPS.cave)
+      await seedCanvasEntities(dmWindow, mapId)
+
+      const room = await dmWindow.evaluate(async (id) => {
+        const rooms = await (window as any).electronAPI.rooms.listByMap(id)
+        return rooms[0]
+      }, mapId)
+      expect(room).toBeTruthy()
+
+      await dmWindow.evaluate((roomId) => {
+        window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'coverRoom', roomId } }))
+      }, room.id)
+      await expect.poll(() => roomFogAlphaAtCenter(dmWindow, mapId, room), { timeout: 8_000 })
+        .toBeGreaterThan(80)
+
+      await dmWindow.evaluate((roomId) => {
+        window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'revealRoom', roomId } }))
+      }, room.id)
+      await expect.poll(() => roomFogAlphaAtCenter(dmWindow, mapId, room), { timeout: 8_000 })
+        .toBeLessThan(8)
+    } finally {
+      await close()
+    }
+  })
+
   test('multi-select controls and layer toggles keep canvas usable', async () => {
     const { app, dmWindow, close } = await launchApp()
     try {
@@ -204,3 +232,31 @@ test.describe('Canvas edge cases', () => {
     }
   })
 })
+
+async function roomFogAlphaAtCenter(page: Parameters<typeof canvasPoint>[0], mapId: number, room: any): Promise<number> {
+  return page.evaluate(async ({ id, candidate }) => {
+    const points = JSON.parse(candidate.polygon) as Array<{ x: number; y: number }>
+    const x = Math.round(points.reduce((sum, p) => sum + p.x, 0) / points.length)
+    const y = Math.round(points.reduce((sum, p) => sum + p.y, 0) / points.length)
+    const fog = await (window as any).electronAPI.fog.get(id)
+    if (!fog.fogBitmap) return 0
+
+    return await new Promise<number>((resolve, reject) => {
+      const img = new Image()
+      img.onload = () => {
+        const canvas = document.createElement('canvas')
+        canvas.width = img.naturalWidth
+        canvas.height = img.naturalHeight
+        const ctx = canvas.getContext('2d')
+        if (!ctx) {
+          resolve(0)
+          return
+        }
+        ctx.drawImage(img, 0, 0)
+        resolve(ctx.getImageData(x, y, 1, 1).data[3])
+      }
+      img.onerror = () => reject(new Error('Unable to decode fog bitmap'))
+      img.src = fog.fogBitmap
+    })
+  }, { id: mapId, candidate: room })
+}
