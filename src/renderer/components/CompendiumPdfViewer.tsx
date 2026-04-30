@@ -912,7 +912,7 @@ function PdfViewerStyles() {
       }
       .bb-pdf-group { display: flex; align-items: center; gap: 4px; }
       .bb-pdf-btn {
-        min-width: 32px; height: 28px;
+        min-width: 36px; height: 32px;
         padding: 0 10px;
         background: transparent;
         border: 1px solid var(--border);

@@ -16,15 +16,21 @@ export function useMenuActions({ onShowShortcuts, onNewCampaign, onAbout }: UseM
     if (!window.electronAPI?.onMenuAction) return
 
     const unsub: () => unknown = window.electronAPI.onMenuAction((action: string) => {
+      const campaignState = useCampaignStore.getState()
+      const uiState = useUIStore.getState()
+      const hasCampaignContext = Boolean(campaignState.activeCampaignId) && uiState.topView === 'main'
+      const hasMapContext = Boolean(campaignState.activeCampaignId && campaignState.activeMapId) && uiState.topView === 'main'
       switch (action) {
         case 'new-campaign':
           onNewCampaign()
           break
         case 'save-now':
+          if (!hasCampaignContext) break
           window.electronAPI?.saveNow()
           break
         case 'export-campaign': {
-          const id = useCampaignStore.getState().activeCampaignId
+          if (!hasCampaignContext) break
+          const id = campaignState.activeCampaignId
           if (id) window.electronAPI?.exportCampaign(id)
           break
         }
@@ -38,21 +44,27 @@ export function useMenuActions({ onShowShortcuts, onNewCampaign, onAbout }: UseM
           useUndoStore.getState().redo()
           break
         case 'zoom-in':
+          if (!hasMapContext) break
           useMapTransformStore.getState().zoomIn()
           break
         case 'zoom-out':
+          if (!hasMapContext) break
           useMapTransformStore.getState().zoomOut()
           break
         case 'fit-to-screen':
+          if (!hasMapContext) break
           useMapTransformStore.getState().fitToScreen()
           break
         case 'toggle-minimap':
+          if (!hasMapContext) break
           useUIStore.getState().toggleMinimap()
           break
         case 'toggle-left-sidebar':
+          if (!hasCampaignContext) break
           useUIStore.getState().toggleLeftSidebar()
           break
         case 'toggle-right-sidebar':
+          if (!hasCampaignContext) break
           useUIStore.getState().toggleRightSidebar()
           break
         case 'toggle-theme':
@@ -62,18 +74,22 @@ export function useMenuActions({ onShowShortcuts, onNewCampaign, onAbout }: UseM
           useUIStore.getState().toggleLanguage()
           break
         case 'toggle-blackout':
+          if (!hasCampaignContext) break
           useUIStore.getState().toggleBlackout()
           break
         case 'start-session':
+          if (!hasCampaignContext) break
           useSessionStore.getState().setSessionMode('session')
           if (useSessionStore.getState().workMode === 'prep') {
             useSessionStore.getState().setWorkMode('play')
           }
           break
         case 'end-session':
+          if (!hasCampaignContext) break
           useSessionStore.getState().setSessionMode('prep')
           break
         case 'atmosphere-image':
+          if (!hasCampaignContext) break
           window.electronAPI?.importFile?.('atmosphere').then((result) => {
             if (result) {
               useUIStore.getState().setAtmosphereImage(result.path)

@@ -278,6 +278,7 @@ export const IPC = {
 
   // Native application menu
   SET_MENU_LANGUAGE: 'app:set-menu-language',
+  SET_MENU_CONTEXT: 'app:set-menu-context',
   MENU_ACTION: 'menu:action',
 
   // Compendium: bundled + user-supplied PDFs (SRD etc.)

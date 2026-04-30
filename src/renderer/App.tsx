@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useUIStore } from './stores/uiStore'
 import { useCampaignStore } from './stores/campaignStore'
+import { useSessionStore } from './stores/sessionStore'
 import { useSettingsStore } from './stores/settingsStore'
 import { AppLayout } from './components/AppLayout'
 import { CampaignView } from './components/CampaignView'
@@ -33,6 +34,9 @@ import './actions/tokenActions'
 export default function App() {
   const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
   const activeMapId = useCampaignStore((s) => s.activeMapId)
+  const topView = useUIStore((s) => s.topView)
+  const sessionMode = useSessionStore((s) => s.sessionMode)
+  const playerConnected = useSessionStore((s) => s.playerConnected)
   const { theme, blackoutActive, language } = useUIStore()
   const [showShortcuts, setShowShortcuts] = useState(false)
   const [showCommandPalette, setShowCommandPalette] = useState(false)
@@ -63,6 +67,16 @@ export default function App() {
   useEffect(() => {
     window.electronAPI?.setMenuLanguage?.(language)
   }, [language])
+
+  // Keep native menu enable/disable state aligned with the visible app context.
+  useEffect(() => {
+    window.electronAPI?.setMenuContext?.({
+      hasCampaign: Boolean(activeCampaignId) && topView === 'main',
+      hasMap: Boolean(activeCampaignId && activeMapId) && topView === 'main',
+      sessionMode,
+      playerConnected,
+    })
+  }, [activeCampaignId, activeMapId, playerConnected, sessionMode, topView])
 
   // Persist theme
   useEffect(() => {
@@ -195,7 +209,6 @@ export default function App() {
   }, [])
 
   const { isSetupComplete } = useSettingsStore()
-  const topView = useUIStore((s) => s.topView)
 
   return (
     <>

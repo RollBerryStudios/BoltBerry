@@ -321,9 +321,12 @@ export function CampaignView() {
               </>
             )}
             {tab === 'notes' && (
-              <div className="bb-ws-panel-inner bb-ws-panel-notes">
-                <NotesPanel />
-              </div>
+              <>
+                <PanelHeader title={t('workspace.tabNotes')} hint={t('workspace.hintNotes')} />
+                <div className="bb-ws-panel-inner bb-ws-panel-notes">
+                  <NotesPanel />
+                </div>
+              </>
             )}
           </div>
         </div>
@@ -724,7 +727,8 @@ function WorkspaceStyles() {
       }
       .bb-ws-back {
         display: inline-flex; align-items: center; gap: 6px;
-        padding: 5px 12px;
+        min-height: 32px;
+        padding: 6px 12px;
         background: transparent;
         border: 1px solid var(--border);
         border-radius: var(--radius);
@@ -847,9 +851,10 @@ function WorkspaceStyles() {
         margin-bottom: var(--sp-2);
       }
       .bb-ws-greeting-title {
-        font-size: 32px; line-height: 1.1;
+        font-size: 32px; line-height: 1.18;
         color: var(--text-primary);
         margin: 0 0 var(--sp-2) 0;
+        overflow-wrap: anywhere;
       }
       .bb-ws-greeting-meta {
         font-size: 12px; color: var(--text-muted);
@@ -906,9 +911,10 @@ function WorkspaceStyles() {
         box-shadow: 0 0 8px var(--accent);
       }
       .bb-ws-hero-title {
-        font-size: 28px; line-height: 1.1;
+        font-size: 28px; line-height: 1.16;
         color: var(--text-primary);
         margin: 0;
+        overflow-wrap: anywhere;
       }
       .bb-ws-hero .bb-ws-cta { align-self: flex-start; }
 
@@ -1071,6 +1077,9 @@ function WorkspaceStyles() {
         color: var(--text-primary);
         cursor: text;
         font-family: inherit;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .bb-ws-map-card-name:hover { color: var(--accent-blue-light); }
       .bb-ws-map-card-name-input {

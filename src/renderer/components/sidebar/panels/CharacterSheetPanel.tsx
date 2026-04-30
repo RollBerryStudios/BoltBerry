@@ -101,13 +101,15 @@ function Section({ title, children, defaultOpen = true }: {
   return (
     <div style={{ marginBottom: 4 }}>
       <button
+        type="button"
+        aria-expanded={open}
         onClick={() => setOpen((o) => !o)}
         style={{
           width: '100%', textAlign: 'left', background: 'var(--bg-surface)',
           border: 'none', borderBottom: '1px solid var(--border)',
-          color: 'var(--text-muted)', fontSize: 10, fontWeight: 700,
+          color: 'var(--text-secondary)', fontSize: 10, fontWeight: 700,
           letterSpacing: '0.08em', textTransform: 'uppercase',
-          padding: '4px 8px', cursor: 'pointer', display: 'flex',
+          minHeight: 32, padding: '6px 10px', cursor: 'pointer', display: 'flex',
           justifyContent: 'space-between', alignItems: 'center',
         }}
       >
@@ -138,7 +140,8 @@ function NumInput({ value, onChange, style, id, ariaLabel }: {
       style={{
         width: 44, textAlign: 'center', background: 'var(--bg-input)',
         border: '1px solid var(--border)', borderRadius: 4,
-        color: 'var(--text)', fontSize: 12, padding: '2px 4px', ...style,
+        color: 'var(--text)', fontSize: 12, minHeight: 28,
+        padding: '4px 6px', boxSizing: 'border-box', ...style,
       }}
     />
   )
@@ -157,7 +160,7 @@ function TextArea({ value, onChange, rows = 3, placeholder }: {
       onChange={(e) => onChange(e.target.value)}
       style={{
         width: '100%', background: 'var(--bg-input)', border: '1px solid var(--border)',
-        borderRadius: 4, color: 'var(--text)', fontSize: 11, padding: '4px 6px',
+        borderRadius: 4, color: 'var(--text)', fontSize: 12, padding: '7px 8px',
         resize: 'vertical', boxSizing: 'border-box',
       }}
     />
@@ -183,7 +186,7 @@ function TextInput({ value, onChange, placeholder, style, id, ariaLabel, dataTes
       onChange={(e) => onChange(e.target.value)}
       style={{
         width: '100%', background: 'var(--bg-input)', border: '1px solid var(--border)',
-        borderRadius: 4, color: 'var(--text)', fontSize: 11, padding: '3px 6px',
+        borderRadius: 4, color: 'var(--text)', fontSize: 12, minHeight: 28, padding: '5px 8px',
         boxSizing: 'border-box', ...style,
       }}
     />
@@ -511,13 +514,15 @@ function SheetEditor({ sheet, onUpdate }: {
           </div>
           <div>
             <div style={{ fontSize: 9, color: 'var(--text-muted)', marginBottom: 2 }}>{t('characters.deathSuccess')}</div>
-            <div style={{ display: 'flex', gap: 2, justifyContent: 'center' }}>
+            <div style={{ display: 'flex', gap: 4, justifyContent: 'center' }}>
               {[0, 1, 2].map((i) => (
                 <button
                   key={i}
+                  type="button"
+                  aria-label={`${t('characters.deathSuccess')} ${i + 1}`}
                   onClick={() => onUpdate({ deathSavesSuccess: sheet.deathSavesSuccess === i + 1 ? i : i + 1 })}
                   style={{
-                    width: 14, height: 14, borderRadius: '50%', border: '1px solid var(--border)',
+                    width: 28, height: 28, borderRadius: '50%', border: '1px solid var(--border)',
                     background: i < sheet.deathSavesSuccess ? '#22c55e' : 'var(--bg-input)',
                     cursor: 'pointer', padding: 0,
                   }}
@@ -542,16 +547,20 @@ function SheetEditor({ sheet, onUpdate }: {
                 <TextInput value={atk.damageType} onChange={(v) => updateAttack(i, { damageType: v })} placeholder={t('characters.atkDmgType')} />
                 <TextInput value={atk.range} onChange={(v) => updateAttack(i, { range: v })} placeholder={t('characters.atkRange')} />
                 <button
+                  type="button"
+                  aria-label={t('characters.removeAttack')}
                   onClick={() => removeAttack(i)}
-                  style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 14 }}
+                  style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 14, width: 32, height: 32 }}
                 >✕</button>
               </div>
             </div>
           ))}
           <button
+            type="button"
             onClick={addAttack}
             style={{
-              padding: '4px 8px', background: 'var(--bg-surface)', border: '1px dashed var(--border)',
+              minHeight: 34,
+              padding: '7px 10px', background: 'var(--bg-surface)', border: '1px dashed var(--border)',
               color: 'var(--text-muted)', borderRadius: 4, cursor: 'pointer', fontSize: 11,
             }}
           >
@@ -836,7 +845,7 @@ export function CharacterSheetPanel() {
   }
 
   return (
-    <div data-testid="panel-character-sheets" style={{ display: 'flex', height: '100%', overflow: 'hidden' }}>
+    <div data-testid="panel-character-sheets" style={{ display: 'flex', height: '100%', overflow: 'hidden', background: 'var(--bg-surface)' }}>
 
       {/* ── Left: character list (fixed width) ── */}
       <div style={{
@@ -866,8 +875,8 @@ export function CharacterSheetPanel() {
           </span>
           <button
             onClick={handleImport}
-            className="btn btn-secondary"
-            style={{ fontSize: 'var(--text-xs)', padding: '3px 8px' }}
+            className="btn btn-secondary btn-icon"
+            style={{ fontSize: 'var(--text-xs)', width: 34, height: 34, padding: 0 }}
             title={t('characters.import')}
             aria-label={t('characters.import')}
           >
@@ -876,9 +885,10 @@ export function CharacterSheetPanel() {
           <button
             onClick={handleNew}
             data-testid="button-create-character-sheet"
-            className="btn btn-secondary"
-            style={{ fontSize: 'var(--text-xs)', padding: '3px 8px' }}
+            className="btn btn-secondary btn-icon"
+            style={{ fontSize: 'var(--text-sm)', width: 34, height: 34, padding: 0 }}
             title={t('characters.newSheet')}
+            aria-label={t('characters.newSheet')}
           >
             +
           </button>
@@ -890,9 +900,9 @@ export function CharacterSheetPanel() {
             <div style={{
               display: 'flex', flexDirection: 'column', alignItems: 'center',
               gap: 'var(--sp-3)', padding: 'var(--sp-6) var(--sp-3)',
-              color: 'var(--text-muted)', textAlign: 'center',
+              color: 'var(--text-secondary)', textAlign: 'center',
             }}>
-              <span style={{ fontSize: 28 }}>📋</span>
+              <span style={{ fontSize: 32, opacity: 0.85 }}>📋</span>
               <p style={{ fontSize: 'var(--text-xs)', margin: 0, lineHeight: 1.5 }}>
                 {t('characters.empty')}
               </p>
@@ -903,8 +913,10 @@ export function CharacterSheetPanel() {
                 <div
                   key={s.id}
                   data-testid="list-item-character-sheet"
+                  className={`character-sheet-row${s.id === activeSheetId ? ' active' : ''}`}
                   style={{
                     display: 'flex', alignItems: 'center',
+                    minHeight: 50,
                     padding: 'var(--sp-2) var(--sp-3)',
                     borderRadius: 'var(--radius)',
                     cursor: 'pointer',
@@ -939,26 +951,30 @@ export function CharacterSheetPanel() {
                     aria-label={t('characters.export')}
                     style={{
                       background: 'none', border: 'none', color: 'var(--text-muted)',
-                      cursor: 'pointer', fontSize: 12, opacity: 0, padding: '0 2px',
+                      cursor: 'pointer', fontSize: 13, opacity: 0, padding: 0,
+                      width: 32, height: 32,
                       flexShrink: 0,
                     }}
-                    className="sheet-delete-btn"
-                    onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.color = 'var(--accent-blue-light)' }}
-                    onMouseLeave={(e) => { e.currentTarget.style.opacity = '0' }}
+                    className="sheet-row-action"
+                    onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent-blue-light)' }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-muted)' }}
                   >
                     📤
                   </button>
                   <button
                     data-testid="button-delete-character-sheet"
                     onClick={(e) => { e.stopPropagation(); handleDelete(s.id) }}
+                    title={t('characters.delete')}
+                    aria-label={t('characters.delete')}
                     style={{
                       background: 'none', border: 'none', color: 'var(--text-muted)',
-                      cursor: 'pointer', fontSize: 12, opacity: 0, padding: '0 2px',
+                      cursor: 'pointer', fontSize: 14, opacity: 0, padding: 0,
+                      width: 32, height: 32,
                       flexShrink: 0,
                     }}
-                    className="sheet-delete-btn"
-                    onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.color = 'var(--danger)' }}
-                    onMouseLeave={(e) => { e.currentTarget.style.opacity = '0' }}
+                    className="sheet-row-action"
+                    onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--danger)' }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-muted)' }}
                   >
                     ✕
                   </button>
@@ -981,8 +997,9 @@ export function CharacterSheetPanel() {
             icon="👤"
             title="Kein Charakter ausgewählt"
             description="Wähle einen Charakter aus der Liste oder erstelle einen neuen."
+            className="character-empty-state"
             actions={sheets.length === 0 ? (
-              <button className="btn btn-secondary" onClick={handleNew}>
+              <button className="btn btn-secondary" onClick={handleNew} style={{ minHeight: 36 }}>
                 {t('characters.newSheet')}
               </button>
             ) : undefined}

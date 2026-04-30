@@ -1,9 +1,15 @@
-import { Menu, MenuItemConstructorOptions, shell, BrowserWindow } from 'electron'
+import { Menu, MenuItemConstructorOptions, shell } from 'electron'
 import { IPC } from '../shared/ipc-types'
 import { getDMWindow, getPlayerWindow, createPlayerWindow } from './windows'
 import { savePrefs } from './prefs'
 
 export type MenuLanguage = 'de' | 'en'
+export interface MenuContextState {
+  hasCampaign: boolean
+  hasMap: boolean
+  sessionMode: 'prep' | 'session'
+  playerConnected: boolean
+}
 
 export type MenuAction =
   | 'new-campaign'
@@ -23,14 +29,18 @@ export type MenuAction =
   | 'toggle-blackout'
   | 'start-session'
   | 'end-session'
-  | 'share-camera-once'
-  | 'toggle-camera-follow'
   | 'atmosphere-image'
   | 'show-shortcuts'
   | 'open-settings'
   | 'about'
 
 let currentLanguage: MenuLanguage = 'de'
+let menuContextState: MenuContextState = {
+  hasCampaign: false,
+  hasMap: false,
+  sessionMode: 'prep',
+  playerConnected: false,
+}
 
 /** Current UI language — read by other main-process modules (e.g. dialog
  * warnings in app-handlers) so that their copy matches the DM's toggle. */
@@ -191,6 +201,10 @@ const STRINGS: Record<MenuLanguage, MenuStrings> = {
 function buildTemplate(lang: MenuLanguage): MenuItemConstructorOptions[] {
   const s = STRINGS[lang]
   const isMac = process.platform === 'darwin'
+  const canUseCampaign = menuContextState.hasCampaign
+  const canUseMap = menuContextState.hasMap
+  const existingPlayer = getPlayerWindow()
+  const playerOpen = menuContextState.playerConnected || Boolean(existingPlayer && !existingPlayer.isDestroyed())
 
   const template: MenuItemConstructorOptions[] = []
 
@@ -221,9 +235,9 @@ function buildTemplate(lang: MenuLanguage): MenuItemConstructorOptions[] {
     submenu: [
       { label: s.newCampaign, accelerator: 'CmdOrCtrl+N', click: () => send('new-campaign') },
       { type: 'separator' },
-      { label: s.save, accelerator: 'CmdOrCtrl+S', click: () => send('save-now') },
+      { label: s.save, accelerator: 'CmdOrCtrl+S', enabled: canUseCampaign, click: () => send('save-now') },
       { type: 'separator' },
-      { label: s.exportCampaign, click: () => send('export-campaign') },
+      { label: s.exportCampaign, enabled: canUseCampaign, click: () => send('export-campaign') },
       { label: s.importCampaign, click: () => send('import-campaign') },
       // Settings ride in File on Win/Linux per platform convention; on
       // macOS the App-menu entry above is the canonical home so we omit
@@ -260,13 +274,13 @@ function buildTemplate(lang: MenuLanguage): MenuItemConstructorOptions[] {
       // Accelerators intentionally omitted — the renderer's keyboard handler
       // owns =/-/0, and Chromium's built-in CmdOrCtrl+=/-/0 zoom also fires on
       // those keys. Binding them here would double-dispatch or collide.
-      { label: s.zoomIn, click: () => send('zoom-in') },
-      { label: s.zoomOut, click: () => send('zoom-out') },
-      { label: s.fit, click: () => send('fit-to-screen') },
+      { label: s.zoomIn, enabled: canUseMap, click: () => send('zoom-in') },
+      { label: s.zoomOut, enabled: canUseMap, click: () => send('zoom-out') },
+      { label: s.fit, enabled: canUseMap, click: () => send('fit-to-screen') },
       { type: 'separator' },
-      { label: s.minimap, click: () => send('toggle-minimap') },
-      { label: s.leftSidebar, accelerator: 'CmdOrCtrl+\\', click: () => send('toggle-left-sidebar') },
-      { label: s.rightSidebar, accelerator: 'CmdOrCtrl+Shift+\\', click: () => send('toggle-right-sidebar') },
+      { label: s.minimap, enabled: canUseMap, click: () => send('toggle-minimap') },
+      { label: s.leftSidebar, accelerator: 'CmdOrCtrl+\\', enabled: canUseCampaign, click: () => send('toggle-left-sidebar') },
+      { label: s.rightSidebar, accelerator: 'CmdOrCtrl+Shift+\\', enabled: canUseCampaign, click: () => send('toggle-right-sidebar') },
       { type: 'separator' },
       { label: s.theme, click: () => send('toggle-theme') },
       { label: s.language, click: () => send('toggle-language') },
@@ -282,6 +296,7 @@ function buildTemplate(lang: MenuLanguage): MenuItemConstructorOptions[] {
       {
         label: s.openPlayer,
         accelerator: 'CmdOrCtrl+P',
+        enabled: canUseCampaign,
         click: () => {
           const existing = getPlayerWindow()
           if (existing && !existing.isDestroyed()) {
@@ -293,19 +308,18 @@ function buildTemplate(lang: MenuLanguage): MenuItemConstructorOptions[] {
       },
       {
         label: s.closePlayer,
+        enabled: playerOpen,
         click: () => {
           const existing = getPlayerWindow()
           if (existing && !existing.isDestroyed()) existing.close()
         },
       },
       { type: 'separator' },
-      { label: s.startSession, click: () => send('start-session') },
-      { label: s.endSession, click: () => send('end-session') },
+      { label: s.startSession, enabled: canUseCampaign && menuContextState.sessionMode !== 'session', click: () => send('start-session') },
+      { label: s.endSession, enabled: canUseCampaign && menuContextState.sessionMode === 'session', click: () => send('end-session') },
       { type: 'separator' },
-      { label: s.blackout, accelerator: 'CmdOrCtrl+Shift+B', click: () => send('toggle-blackout') },
-      { label: s.shareCamera, click: () => send('share-camera-once') },
-      { label: s.followCamera, click: () => send('toggle-camera-follow') },
-      { label: s.atmosphere, click: () => send('atmosphere-image') },
+      { label: s.blackout, accelerator: 'CmdOrCtrl+Shift+B', enabled: canUseCampaign, click: () => send('toggle-blackout') },
+      { label: s.atmosphere, enabled: canUseCampaign, click: () => send('atmosphere-image') },
     ],
   })
 
@@ -340,5 +354,16 @@ export function setMenuLanguage(lang: MenuLanguage) {
   if (lang === currentLanguage) return
   currentLanguage = lang
   savePrefs({ menuLanguage: lang })
+  buildAppMenu()
+}
+
+export function setMenuContext(state: MenuContextState) {
+  const changed =
+    state.hasCampaign !== menuContextState.hasCampaign ||
+    state.hasMap !== menuContextState.hasMap ||
+    state.sessionMode !== menuContextState.sessionMode ||
+    state.playerConnected !== menuContextState.playerConnected
+  if (!changed) return
+  menuContextState = state
   buildAppMenu()
 }

@@ -319,14 +319,15 @@ export function NotesPanel() {
   }
 
   return (
-    <div data-testid="panel-notes" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <div data-testid="panel-notes" style={{ display: 'flex', flexDirection: 'column', height: '100%', background: 'var(--bg-surface)' }}>
       {/* ── Search bar ───────────────────────────────────────────────── */}
       <div style={{
-        padding: '6px 8px',
+        padding: '8px 10px',
         borderBottom: '1px solid var(--border-subtle)',
         display: 'flex', alignItems: 'center', gap: 6,
+        background: 'var(--bg-elevated)',
       }}>
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
           style={{ color: 'var(--text-muted)', marginLeft: 4 }}>
           <circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" />
         </svg>
@@ -337,21 +338,27 @@ export function NotesPanel() {
           placeholder="Alle Notizen durchsuchen…"
           style={{
             flex: 1,
-            background: 'transparent',
-            border: 'none',
+            background: 'var(--bg-base)',
+            border: '1px solid var(--border-subtle)',
+            borderRadius: 'var(--radius-sm)',
             outline: 'none',
             color: 'var(--text-primary)',
-            fontSize: 11,
+            fontSize: 12,
             fontFamily: 'inherit',
+            minHeight: 32,
+            padding: '7px 10px',
+            boxSizing: 'border-box',
           }}
         />
         {isSearching && (
           <button
             type="button"
+            aria-label="Suche schliessen"
             onClick={() => setSearchQuery('')}
             style={{
               background: 'transparent', border: 'none', cursor: 'pointer',
-              color: 'var(--text-muted)', fontSize: 12, padding: '0 4px',
+              color: 'var(--text-muted)', fontSize: 12, padding: 0,
+              width: 32, height: 32,
             }}
             title="Suche schließen"
           >
@@ -373,6 +380,7 @@ export function NotesPanel() {
             onClick={() => handleTabSwitch(tab)}
             style={{
               flex: 1,
+              minHeight: 34,
               padding: 'var(--sp-2)',
               background: 'none',
               border: 'none',
@@ -388,9 +396,10 @@ export function NotesPanel() {
         ))}
         <button
           onClick={() => setPreview((v) => !v)}
+          aria-label={preview ? 'Bearbeiten' : 'Vorschau'}
           title={preview ? 'Bearbeiten' : 'Vorschau'}
           style={{
-            padding: '4px 8px', marginRight: 4,
+            width: 34, height: 34, padding: 0, marginRight: 6,
             background: preview ? 'var(--accent-blue-dim)' : 'none',
             border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius)',
             color: preview ? 'var(--accent-blue-light)' : 'var(--text-muted)',
@@ -425,7 +434,8 @@ export function NotesPanel() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: 4,
-                  padding: '5px 10px',
+                  minHeight: 32,
+                  padding: '6px 10px',
                   background: 'none',
                   border: 'none',
                   borderBottom: activeCategory === cat.id ? '2px solid var(--accent)' : '2px solid transparent',
@@ -610,17 +620,19 @@ function NoteList({
 }) {
   return (
     <div style={{
-      width: 168,
+      width: 192,
       flexShrink: 0,
       display: 'flex',
       flexDirection: 'column',
       borderRight: '1px solid var(--border-subtle)',
+      background: 'var(--bg-elevated)',
     }}>
       <button
         type="button"
         data-testid="button-create-note"
         onClick={onCreate}
         style={{
+          minHeight: 36,
           padding: '8px 10px',
           background: 'var(--accent-dim)',
           color: 'var(--accent)',
@@ -696,7 +708,7 @@ function NoteRowItem({
           padding: '8px 10px',
           background: 'none',
           border: 'none',
-          color: active ? 'var(--accent-blue-light)' : 'var(--text-primary)',
+          color: active ? 'var(--text-primary)' : 'var(--text-primary)',
           cursor: 'pointer',
           textAlign: 'left',
           fontFamily: 'inherit',
@@ -712,13 +724,13 @@ function NoteRowItem({
         </div>
         <div style={{
           fontSize: 10,
-          color: 'var(--text-muted)',
+          color: active ? 'var(--text-secondary)' : 'var(--text-muted)',
           overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
         }}>
           {subtitle}
         </div>
       </button>
-      {hover && (
+      {(hover || active) && (
         <button
           type="button"
           data-testid="button-delete-note"
@@ -728,6 +740,7 @@ function NoteRowItem({
           }}
           title="Notiz löschen"
           style={{
+            minWidth: 32,
             padding: '0 8px',
             background: 'transparent',
             border: 'none',
@@ -805,6 +818,7 @@ function TagsEditor({ tags, onChange }: { tags: string[]; onChange: (next: strin
         placeholder={tags.length === 0 ? 'Tags…' : ''}
         style={{
           flex: 1, minWidth: 60,
+          minHeight: 28,
           background: 'transparent', border: 'none', outline: 'none',
           color: 'var(--text-primary)', fontSize: 11, fontFamily: 'inherit',
         }}

@@ -578,6 +578,8 @@ export const dmApi = {
   // Native application menu bridge
   setMenuLanguage: (lang: 'de' | 'en') =>
     ipcRenderer.invoke(IPC.SET_MENU_LANGUAGE, lang),
+  setMenuContext: (state: { hasCampaign: boolean; hasMap: boolean; sessionMode: 'prep' | 'session'; playerConnected: boolean }) =>
+    ipcRenderer.invoke(IPC.SET_MENU_CONTEXT, state),
   onMenuAction: (cb: (action: string) => void) => {
     const handler = (_: Electron.IpcRendererEvent, action: string) => cb(action)
     ipcRenderer.on(IPC.MENU_ACTION, handler)

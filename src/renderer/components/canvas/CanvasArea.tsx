@@ -901,7 +901,10 @@ export function CanvasArea() {
               padding: '8px 0',
               boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
               minWidth: 170,
-            }}>
+            }}
+              role="menu"
+              aria-label="Ebenen"
+            >
               <div style={{
                 padding: '2px 12px 6px',
                 fontSize: 9,
@@ -918,6 +921,10 @@ export function CanvasArea() {
                 <button
                   key={def.key}
                   data-testid={`button-canvas-layer-${def.key}`}
+                  role={def.canToggle ? 'menuitemcheckbox' : 'menuitem'}
+                  aria-checked={def.canToggle ? layerVisibility[def.key] : undefined}
+                  aria-label={`${def.label}: ${def.canToggle ? (layerVisibility[def.key] ? 'eingeblendet' : 'ausgeblendet') : 'immer sichtbar'}`}
+                  disabled={!def.canToggle}
                   onClick={() => def.canToggle && toggleLayer(def.key)}
                   style={{
                     display: 'flex',
@@ -954,6 +961,7 @@ export function CanvasArea() {
               <div style={{ borderTop: '1px solid var(--border-subtle)', marginTop: 4, padding: '4px 12px 0' }}>
                 <button
                   data-testid="button-canvas-layer-reset"
+                  role="menuitem"
                   onClick={() => setLayerVisibility(DEFAULT_LAYER_VISIBILITY)}
                   style={{
                     background: 'none', border: 'none', padding: '3px 0',
@@ -972,6 +980,9 @@ export function CanvasArea() {
             data-testid="button-canvas-layers"
             onClick={() => setLayerPanelOpen((v) => !v)}
             title="Ebenen ein-/ausblenden"
+            aria-haspopup="menu"
+            aria-expanded={layerPanelOpen}
+            aria-label="Ebenen ein-/ausblenden"
             style={{
               display: 'flex',
               alignItems: 'center',

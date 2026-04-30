@@ -11,7 +11,7 @@ import {
   setPlayerDisplayId,
 } from '../windows'
 import { getDb, getCustomUserDataPath, setCustomUserDataPath, initDatabase } from '../db/database'
-import { setMenuLanguage, getMenuLanguage, type MenuLanguage } from '../menu'
+import { setMenuLanguage, setMenuContext, getMenuLanguage, type MenuLanguage } from '../menu'
 
 const ASSET_EXTENSIONS = {
   map: ['.png', '.jpg', '.jpeg', '.webp'],
@@ -112,6 +112,16 @@ export function registerAppHandlers(): void {
   // Rebuild the application menu in the given language.
   ipcMain.handle(IPC.SET_MENU_LANGUAGE, (_event, lang: MenuLanguage) => {
     setMenuLanguage(lang)
+    return true
+  })
+
+  ipcMain.handle(IPC.SET_MENU_CONTEXT, (_event, state: { hasCampaign?: boolean; hasMap?: boolean; sessionMode?: string; playerConnected?: boolean }) => {
+    setMenuContext({
+      hasCampaign: Boolean(state?.hasCampaign),
+      hasMap: Boolean(state?.hasMap),
+      sessionMode: state?.sessionMode === 'session' ? 'session' : 'prep',
+      playerConnected: Boolean(state?.playerConnected),
+    })
     return true
   })
 

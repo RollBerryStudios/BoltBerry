@@ -16,6 +16,8 @@ interface Command {
   shortcut?: string
   /** Substring keywords in English + German that make this command discoverable via search. */
   keywords: string
+  /** Hidden when the current app state cannot execute the command meaningfully. */
+  available?: () => boolean
   run: () => void
 }
 
@@ -31,6 +33,8 @@ function buildCommands(t: (k: string) => string): Command[] {
   const cam = useMapTransformStore.getState
   const undo = useUndoStore.getState
   const campaign = useCampaignStore.getState
+  const hasCampaignContext = () => Boolean(campaign().activeCampaignId) && ui().topView === 'main'
+  const hasMapContext = () => Boolean(campaign().activeCampaignId && campaign().activeMapId) && ui().topView === 'main'
 
   const openTab = (tab: SidebarTab) => {
     if (!ui().rightSidebarOpen) ui().toggleRightSidebar()
@@ -40,52 +44,53 @@ function buildCommands(t: (k: string) => string): Command[] {
 
   return [
     // ── Session
-    { id: 'session.start',    labelKey: 'palette.startSession',  groupKey: 'palette.groupSession', keywords: 'start session play begin session starten spiel', run: () => { session().setSessionMode('session'); if (session().workMode === 'prep') session().setWorkMode('play') } },
-    { id: 'session.end',      labelKey: 'palette.endSession',    groupKey: 'palette.groupSession', keywords: 'end session stop prep session beenden vorbereitung',    run: () => session().setSessionMode('prep') },
-    { id: 'session.blackout', labelKey: 'palette.toggleBlackout',groupKey: 'palette.groupSession', shortcut: 'Ctrl+Shift+B', keywords: 'blackout black out verdunkeln schwarz',       run: () => ui().toggleBlackout() },
+    { id: 'session.start',    labelKey: 'palette.startSession',  groupKey: 'palette.groupSession', keywords: 'start session play begin session starten spiel', available: () => hasCampaignContext() && session().sessionMode !== 'session', run: () => { session().setSessionMode('session'); if (session().workMode === 'prep') session().setWorkMode('play') } },
+    { id: 'session.end',      labelKey: 'palette.endSession',    groupKey: 'palette.groupSession', keywords: 'end session stop prep session beenden vorbereitung', available: () => hasCampaignContext() && session().sessionMode === 'session', run: () => session().setSessionMode('prep') },
+    { id: 'session.blackout', labelKey: 'palette.toggleBlackout',groupKey: 'palette.groupSession', shortcut: 'Ctrl+Shift+B', keywords: 'blackout black out verdunkeln schwarz', available: hasCampaignContext, run: () => ui().toggleBlackout() },
 
     // ── View
-    { id: 'view.zoomIn',       labelKey: 'palette.zoomIn',       groupKey: 'palette.groupView', shortcut: 'Ctrl+=',  keywords: 'zoom in hineinzoomen vergrößern',            run: () => cam().zoomIn() },
-    { id: 'view.zoomOut',      labelKey: 'palette.zoomOut',      groupKey: 'palette.groupView', shortcut: 'Ctrl+-',  keywords: 'zoom out herauszoomen verkleinern',          run: () => cam().zoomOut() },
-    { id: 'view.fit',          labelKey: 'palette.fitToScreen',  groupKey: 'palette.groupView', shortcut: 'Ctrl+0',  keywords: 'fit screen reset camera zoom anpassen',      run: () => cam().fitToScreen() },
-    { id: 'view.minimap',      labelKey: 'palette.toggleMinimap',groupKey: 'palette.groupView',                     keywords: 'minimap übersicht karte mini',               run: () => ui().toggleMinimap() },
-    { id: 'view.leftSidebar',  labelKey: 'palette.toggleLeft',   groupKey: 'palette.groupView', shortcut: 'Ctrl+B', keywords: 'left sidebar links seitenleiste',            run: () => ui().toggleLeftSidebar() },
-    { id: 'view.rightSidebar', labelKey: 'palette.toggleRight',  groupKey: 'palette.groupView', shortcut: 'Ctrl+Shift+\\', keywords: 'right sidebar rechts seitenleiste',    run: () => ui().toggleRightSidebar() },
+    { id: 'view.zoomIn',       labelKey: 'palette.zoomIn',       groupKey: 'palette.groupView', shortcut: 'Ctrl+=',  keywords: 'zoom in hineinzoomen vergrößern', available: hasMapContext, run: () => cam().zoomIn() },
+    { id: 'view.zoomOut',      labelKey: 'palette.zoomOut',      groupKey: 'palette.groupView', shortcut: 'Ctrl+-',  keywords: 'zoom out herauszoomen verkleinern', available: hasMapContext, run: () => cam().zoomOut() },
+    { id: 'view.fit',          labelKey: 'palette.fitToScreen',  groupKey: 'palette.groupView', shortcut: 'Ctrl+0',  keywords: 'fit screen reset camera zoom anpassen', available: hasMapContext, run: () => cam().fitToScreen() },
+    { id: 'view.minimap',      labelKey: 'palette.toggleMinimap',groupKey: 'palette.groupView',                     keywords: 'minimap übersicht karte mini', available: hasMapContext, run: () => ui().toggleMinimap() },
+    { id: 'view.leftSidebar',  labelKey: 'palette.toggleLeft',   groupKey: 'palette.groupView', shortcut: 'Ctrl+B', keywords: 'left sidebar links seitenleiste', available: hasCampaignContext, run: () => ui().toggleLeftSidebar() },
+    { id: 'view.rightSidebar', labelKey: 'palette.toggleRight',  groupKey: 'palette.groupView', shortcut: 'Ctrl+Shift+\\', keywords: 'right sidebar rechts seitenleiste', available: hasCampaignContext, run: () => ui().toggleRightSidebar() },
     { id: 'view.theme',        labelKey: 'palette.toggleTheme',  groupKey: 'palette.groupView',                     keywords: 'theme dark light design hell dunkel',        run: () => ui().toggleTheme() },
     { id: 'view.language',     labelKey: 'palette.toggleLanguage',groupKey: 'palette.groupView',                    keywords: 'language sprache german english deutsch',     run: () => ui().toggleLanguage() },
 
     // ── Panels
-    { id: 'panel.tokens',     labelKey: 'palette.openTokens',     groupKey: 'palette.groupPanels', keywords: 'tokens token creatures karten',        run: () => openTab('tokens') },
-    { id: 'panel.initiative', labelKey: 'palette.openInitiative', groupKey: 'palette.groupPanels', keywords: 'initiative combat kampf reihenfolge',  run: () => openTab('initiative') },
-    { id: 'panel.rooms',      labelKey: 'palette.openRooms',      groupKey: 'palette.groupPanels', keywords: 'rooms räume zonen',                    run: () => openTab('rooms') },
-    { id: 'panel.notes',      labelKey: 'palette.openNotes',      groupKey: 'palette.groupPanels', keywords: 'notes notizen',                        run: () => openTab('notes') },
-    { id: 'panel.handouts',   labelKey: 'palette.openHandouts',   groupKey: 'palette.groupPanels', keywords: 'handouts handout',                     run: () => openTab('handouts') },
-    { id: 'panel.encounters', labelKey: 'palette.openEncounters', groupKey: 'palette.groupPanels', keywords: 'encounters begegnungen',               run: () => openTab('encounters') },
-    { id: 'panel.characters', labelKey: 'palette.openCharacters', groupKey: 'palette.groupPanels', keywords: 'characters charaktere',                run: () => openTab('characters') },
+    { id: 'panel.tokens',     labelKey: 'palette.openTokens',     groupKey: 'palette.groupPanels', keywords: 'tokens token creatures karten', available: hasCampaignContext, run: () => openTab('tokens') },
+    { id: 'panel.initiative', labelKey: 'palette.openInitiative', groupKey: 'palette.groupPanels', keywords: 'initiative combat kampf reihenfolge', available: hasCampaignContext, run: () => openTab('initiative') },
+    { id: 'panel.rooms',      labelKey: 'palette.openRooms',      groupKey: 'palette.groupPanels', keywords: 'rooms räume zonen', available: hasCampaignContext, run: () => openTab('rooms') },
+    { id: 'panel.notes',      labelKey: 'palette.openNotes',      groupKey: 'palette.groupPanels', keywords: 'notes notizen', available: hasCampaignContext, run: () => openTab('notes') },
+    { id: 'panel.handouts',   labelKey: 'palette.openHandouts',   groupKey: 'palette.groupPanels', keywords: 'handouts handout', available: hasCampaignContext, run: () => openTab('handouts') },
+    { id: 'panel.encounters', labelKey: 'palette.openEncounters', groupKey: 'palette.groupPanels', keywords: 'encounters begegnungen', available: hasCampaignContext, run: () => openTab('encounters') },
+    { id: 'panel.characters', labelKey: 'palette.openCharacters', groupKey: 'palette.groupPanels', keywords: 'characters charaktere', available: hasCampaignContext, run: () => openTab('characters') },
     { id: 'panel.library',    labelKey: 'palette.openLibrary',    groupKey: 'palette.groupPanels', keywords: 'bestiary bestiarium library bibliothek monster token srd',
+      available: hasCampaignContext,
       run: () => {
         // Bestiarium is a Workspace tab — exit the map first if needed
         // so CampaignView is the visible layer that catches the event.
         useCampaignStore.getState().setActiveMap(null)
         window.dispatchEvent(new CustomEvent('workspace:open-tab', { detail: 'library' }))
       } },
-    { id: 'panel.audio',      labelKey: 'palette.openAudio',      groupKey: 'palette.groupPanels', keywords: 'audio music sound musik',              run: () => openFloating('audio') },
-    { id: 'panel.overlay',    labelKey: 'palette.openOverlay',    groupKey: 'palette.groupPanels', keywords: 'overlay atmosphere weather wetter',    run: () => openFloating('overlay') },
-    { id: 'panel.dice',       labelKey: 'palette.openDice',       groupKey: 'palette.groupPanels', keywords: 'dice würfel roll rollen',              run: () => openFloating('dice') },
+    { id: 'panel.audio',      labelKey: 'palette.openAudio',      groupKey: 'palette.groupPanels', keywords: 'audio music sound musik', available: hasCampaignContext, run: () => openFloating('audio') },
+    { id: 'panel.overlay',    labelKey: 'palette.openOverlay',    groupKey: 'palette.groupPanels', keywords: 'overlay atmosphere weather wetter', available: hasCampaignContext, run: () => openFloating('overlay') },
+    { id: 'panel.dice',       labelKey: 'palette.openDice',       groupKey: 'palette.groupPanels', keywords: 'dice würfel roll rollen', available: hasCampaignContext, run: () => openFloating('dice') },
 
     // ── Edit
-    { id: 'edit.undo', labelKey: 'palette.undo', groupKey: 'palette.groupEdit', shortcut: 'Ctrl+Z',       keywords: 'undo rückgängig', run: () => undo().undo() },
-    { id: 'edit.redo', labelKey: 'palette.redo', groupKey: 'palette.groupEdit', shortcut: 'Ctrl+Shift+Z', keywords: 'redo wiederholen', run: () => undo().redo() },
+    { id: 'edit.undo', labelKey: 'palette.undo', groupKey: 'palette.groupEdit', shortcut: 'Ctrl+Z',       keywords: 'undo rückgängig', available: () => undo().canUndo(), run: () => undo().undo() },
+    { id: 'edit.redo', labelKey: 'palette.redo', groupKey: 'palette.groupEdit', shortcut: 'Ctrl+Shift+Z', keywords: 'redo wiederholen', available: () => undo().canRedo(), run: () => undo().redo() },
 
     // ── Campaign / File
-    { id: 'campaign.save',   labelKey: 'palette.saveNow',       groupKey: 'palette.groupFile', shortcut: 'Ctrl+S', keywords: 'save speichern', run: () => { window.electronAPI?.saveNow() } },
-    { id: 'campaign.export', labelKey: 'palette.exportCampaign',groupKey: 'palette.groupFile', keywords: 'export kampagne exportieren', run: () => { const id = campaign().activeCampaignId; if (id) window.electronAPI?.exportCampaign(id) } },
+    { id: 'campaign.save',   labelKey: 'palette.saveNow',       groupKey: 'palette.groupFile', shortcut: 'Ctrl+S', keywords: 'save speichern', available: hasCampaignContext, run: () => { window.electronAPI?.saveNow() } },
+    { id: 'campaign.export', labelKey: 'palette.exportCampaign',groupKey: 'palette.groupFile', keywords: 'export kampagne exportieren', available: hasCampaignContext, run: () => { const id = campaign().activeCampaignId; if (id) window.electronAPI?.exportCampaign(id) } },
     { id: 'campaign.import', labelKey: 'palette.importCampaign',groupKey: 'palette.groupFile', keywords: 'import kampagne importieren', run: () => { window.electronAPI?.importCampaign() } },
     { id: 'compendium.open', labelKey: 'palette.openCompendium', groupKey: 'palette.groupFile', keywords: 'compendium kompendium srd pdf regelwerk rulebook', run: () => ui().setTopView('compendium') },
     { id: 'bestiary.open',   labelKey: 'palette.openBestiary',   groupKey: 'palette.groupFile', keywords: 'bestiary bestiarium monsters items spells gegenstände zauber', run: () => ui().setTopView('bestiary') },
 
     // ── Player window
-    { id: 'player.open',         labelKey: 'palette.openPlayerWindow',   groupKey: 'palette.groupPlayer', shortcut: 'Ctrl+P', keywords: 'player window spielerfenster öffnen', run: () => { window.electronAPI?.openPlayerWindow?.() } },
+    { id: 'player.open',         labelKey: 'palette.openPlayerWindow',   groupKey: 'palette.groupPlayer', shortcut: 'Ctrl+P', keywords: 'player window spielerfenster öffnen', available: hasCampaignContext, run: () => { window.electronAPI?.openPlayerWindow?.() } },
   ].map((c) => ({ ...c, keywords: `${c.keywords} ${t(c.labelKey).toLowerCase()}`.toLowerCase() }))
 }
 
@@ -95,16 +100,32 @@ export function CommandPalette({ onClose }: CommandPaletteProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLDivElement>(null)
+  const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
+  const activeMapId = useCampaignStore((s) => s.activeMapId)
+  const topView = useUIStore((s) => s.topView)
+  const sessionMode = useSessionStore((s) => s.sessionMode)
+  const undoDepth = useUndoStore((s) => s.undoStack.length)
+  const redoDepth = useUndoStore((s) => s.redoStack.length)
+  const commandContextRevision = [
+    activeCampaignId ?? '',
+    activeMapId ?? '',
+    topView,
+    sessionMode,
+    undoDepth,
+    redoDepth,
+  ].join('|')
 
   // Rebuild on every render — cheap enough for ~30 commands, and i18n may have changed.
   const commands = useMemo(() => buildCommands(t), [t])
 
   const filtered = useMemo(() => {
+    void commandContextRevision
     const q = query.trim().toLowerCase()
-    if (!q) return commands
+    const available = commands.filter((c) => !c.available || c.available())
+    if (!q) return available
     const terms = q.split(/\s+/)
-    return commands.filter((c) => terms.every((term) => c.keywords.includes(term)))
-  }, [query, commands])
+    return available.filter((c) => terms.every((term) => c.keywords.includes(term)))
+  }, [commandContextRevision, commands, query])
 
   // Focus the input on mount; restore focus to the previously-focused element on unmount.
   const previousFocusRef = useRef<Element | null>(null)

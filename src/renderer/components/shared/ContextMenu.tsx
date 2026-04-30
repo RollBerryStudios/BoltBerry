@@ -91,11 +91,22 @@ export function ContextMenu({ envelope, onClose }: ContextMenuProps) {
       } else if (e.key === 'ArrowUp') {
         e.preventDefault()
         setActiveIndex((i) => Math.max(0, i - 1))
+      } else if (e.key === 'ArrowRight' && activeIndex >= 0) {
+        const ref = navIndex[activeIndex]
+        const item = sections[ref.section].items?.[ref.item]
+        if (item?.submenu?.length) {
+          e.preventDefault()
+          setOpenSubAt(activeIndex)
+        }
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault()
+        setOpenSubAt(null)
       } else if (e.key === 'Enter' && activeIndex >= 0) {
         e.preventDefault()
         const ref = navIndex[activeIndex]
         const item = sections[ref.section].items?.[ref.item]
-        if (item) runItem(item)
+        if (item?.submenu?.length) setOpenSubAt(activeIndex)
+        else if (item) runItem(item)
       } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
         // Type-to-search.
         const buf = typeBufferRef.current
@@ -199,7 +210,7 @@ export function ContextMenu({ envelope, onClose }: ContextMenuProps) {
               </div>
             )}
             {section.customRender && section.customRender(envelope)}
-            {section.items?.map((item, ii) => {
+            {section.items?.map((item) => {
               runningIndex += 1
               const idx = runningIndex
               const enabled = !item.enabled || item.enabled(envelope)

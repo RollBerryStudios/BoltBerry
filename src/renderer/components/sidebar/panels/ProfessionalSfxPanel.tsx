@@ -68,7 +68,9 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
   const [selectedSlotIndex, setSelectedSlotIndex] = useState<number | null>(null)
   const [editorBuffer, setEditorBuffer] = useState<EditorBuffer>(emptyBuffer())
   const [iconPicker, setIconPicker] = useState(false)
+  const [activeEmojiIndex, setActiveEmojiIndex] = useState(0)
   const previewAudioRef = useRef<HTMLAudioElement | null>(null)
+  const emojiButtonRefs = useRef<Array<HTMLButtonElement | null>>([])
 
   // Load boards when the campaign changes.
   const reloadBoards = useCallback(async () => {
@@ -244,6 +246,45 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
     setEditorBuffer((b) => ({ ...b, emoji, dirty: true }))
     setIconPicker(false)
   }
+
+  useEffect(() => {
+    if (!iconPicker) return
+    const idx = Math.max(0, CURATED_EMOJIS.findIndex((e) => e === editorBuffer.emoji))
+    setActiveEmojiIndex(idx)
+    requestAnimationFrame(() => emojiButtonRefs.current[idx]?.focus())
+  }, [editorBuffer.emoji, iconPicker])
+
+  function handleEmojiGridKeyDown(e: React.KeyboardEvent) {
+    const colCount = 8
+    const max = CURATED_EMOJIS.length - 1
+    if (e.key === 'ArrowRight') {
+      e.preventDefault()
+      setActiveEmojiIndex((i) => Math.min(max, i + 1))
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault()
+      setActiveEmojiIndex((i) => Math.max(0, i - 1))
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      setActiveEmojiIndex((i) => Math.min(max, i + colCount))
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      setActiveEmojiIndex((i) => Math.max(0, i - colCount))
+    } else if (e.key === 'Home') {
+      e.preventDefault()
+      setActiveEmojiIndex(0)
+    } else if (e.key === 'End') {
+      e.preventDefault()
+      setActiveEmojiIndex(max)
+    } else if (e.key === 'Escape') {
+      e.preventDefault()
+      setIconPicker(false)
+    }
+  }
+
+  useEffect(() => {
+    if (!iconPicker) return
+    emojiButtonRefs.current[activeEmojiIndex]?.focus()
+  }, [activeEmojiIndex, iconPicker])
 
   function handleEditorPreview() {
     if (!editorBuffer.audioPath) return
@@ -475,12 +516,22 @@ export function ProfessionalSfxPanel({ hideBoards = false }: ProfessionalSfxPane
                   )}
                 </div>
                 {iconPicker && (
-                  <div className="sfx-panel-emoji-grid">
+                  <div
+                    className="sfx-panel-emoji-grid"
+                    role="grid"
+                    aria-label={t('sfxPanel.emojiPicker')}
+                    onKeyDown={handleEmojiGridKeyDown}
+                  >
                     {CURATED_EMOJIS.map((e, i) => (
                       <button
                         key={`${e}-${i}`}
+                        ref={(el) => { emojiButtonRefs.current[i] = el }}
                         className="sfx-panel-emoji-cell"
                         data-testid="button-sfx-emoji"
+                        role="gridcell"
+                        tabIndex={activeEmojiIndex === i ? 0 : -1}
+                        aria-label={t('sfxPanel.emojiChoice', { emoji: e })}
+                        onMouseEnter={() => setActiveEmojiIndex(i)}
                         onClick={() => handlePickEmoji(e)}
                         title={e}
                       >{e}</button>
@@ -838,10 +889,14 @@ function SfxPanelStyles() {
         padding: 4px;
         cursor: pointer;
         border-radius: 4px;
+        min-width: 32px;
+        min-height: 32px;
       }
-      .sfx-panel-emoji-cell:hover {
+      .sfx-panel-emoji-cell:hover,
+      .sfx-panel-emoji-cell:focus-visible {
         background: var(--bg-overlay);
         border-color: var(--accent);
+        outline: none;
       }
 
       .sfx-panel-sound-row {

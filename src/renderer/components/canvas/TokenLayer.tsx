@@ -1108,6 +1108,8 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
               <div
                 ref={menuRef}
                 data-token-context-menu
+                role="menu"
+                aria-label={`Token ${token.name}`}
                 style={{
                   position: 'fixed',
                   left: menuClamp ? menuClamp.x : contextMenu.x,
@@ -1301,10 +1303,10 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                         <div key={i} style={{ padding: '2px 8px' }}>
                           <div style={{ fontSize: 10, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 3 }}>HP</div>
                           <div style={{ display: 'flex', gap: 4 }}>
-                            <button style={chipStyle(false)} title="−5 HP" onClick={() => adjustHp(-5)}>−5</button>
-                            <button style={chipStyle(false)} title="−1 HP" onClick={() => adjustHp(-1)}>−1</button>
-                            <button style={chipStyle(true)}  title="+1 HP" onClick={() => adjustHp(1)}>+1</button>
-                            <button style={chipStyle(true)}  title="+5 HP" onClick={() => adjustHp(5)}>+5</button>
+                            <button role="menuitem" style={chipStyle(false)} title="−5 HP" onClick={() => adjustHp(-5)}>−5</button>
+                            <button role="menuitem" style={chipStyle(false)} title="−1 HP" onClick={() => adjustHp(-1)}>−1</button>
+                            <button role="menuitem" style={chipStyle(true)}  title="+1 HP" onClick={() => adjustHp(1)}>+1</button>
+                            <button role="menuitem" style={chipStyle(true)}  title="+5 HP" onClick={() => adjustHp(5)}>+5</button>
                           </div>
                         </div>
                       )
@@ -1341,6 +1343,9 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                         <div key={i}>
                           <button
                             ref={isSubOpen ? submenuAnchorRef : undefined}
+                            role="menuitem"
+                            aria-haspopup="menu"
+                            aria-expanded={isSubOpen}
                             onMouseEnter={(e) => {
                               // Hover-to-open mirrors the engine
                               // ContextMenu's submenu trigger so users
@@ -1380,10 +1385,12 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                             <span style={{ color: 'var(--text-muted)', marginLeft: 8 }}>▶</span>
                           </button>
                           {isSubOpen && isFaction && (
-                            <div data-token-context-menu style={submenuPanelStyle}>
+                            <div data-token-context-menu role="menu" aria-label="Fraktion" style={submenuPanelStyle}>
                               {FACTION_OPTIONS.map((f) => (
                                 <button
                                   key={f.value}
+                                  role="menuitemradio"
+                                  aria-checked={token.faction === f.value}
                                   onClick={() => {
                                     const ids = isBatch ? selectedTokenIds : [token.id]
                                     for (const id of ids) handleUpdate(id, { faction: f.value })
@@ -1412,12 +1419,14 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                             </div>
                           )}
                           {isSubOpen && isStatus && (
-                            <div data-token-context-menu style={submenuPanelStyle}>
+                            <div data-token-context-menu role="menu" aria-label="Zustände" style={submenuPanelStyle}>
                               {STATUS_EFFECTS.map((eff) => {
                                 const isActive = token.statusEffects?.includes(eff.id) ?? false
                                 return (
                                   <button
                                     key={eff.id}
+                                    role="menuitemcheckbox"
+                                    aria-checked={isActive}
                                     onClick={() => toggleStatusInMenu(token, eff.id)}
                                     style={{
                                       display: 'flex',
@@ -1444,10 +1453,12 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                             </div>
                           )}
                           {isSubOpen && !isFaction && !isStatus && (
-                            <div data-token-context-menu style={submenuPanelStyle}>
+                            <div data-token-context-menu role="menu" aria-label="Markierung" style={submenuPanelStyle}>
                               {MARKER_COLORS.map((mc) => (
                                 <button
                                   key={mc.color ?? 'none'}
+                                  role="menuitemradio"
+                                  aria-checked={token.markerColor === mc.color}
                                   onClick={() => handleSetMarker(token.id, mc.color)}
                                   style={{
                                     display: 'flex',
@@ -1477,6 +1488,7 @@ export function TokenLayer({ map, stageRef }: TokenLayerProps) {
                     return (
                       <button
                         key={i}
+                        role="menuitem"
                         onClick={item.disabled ? undefined : item.action}
                         disabled={item.disabled}
                         style={{

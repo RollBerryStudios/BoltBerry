@@ -357,8 +357,7 @@ const ToolGroupButton = forwardRef<HTMLButtonElement, ToolGroupButtonProps>(func
         {hasVariants && (
           <span
             className="left-tool-btn-chevron"
-            aria-label="Expand"
-            role="button"
+            aria-hidden="true"
             onMouseDown={(e) => e.stopPropagation()}
             onClick={handleChevron}
           >

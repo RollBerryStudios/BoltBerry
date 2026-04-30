@@ -51,6 +51,8 @@ export function WikiListMenu({ kind, language, anchor, entry, onClose, onChanged
   // Full record loaded lazily when an action needs it (clone / edit).
   const [editing, setEditing] = useState<MonsterRecord | ItemRecord | SpellRecord | null>(null)
   const [npcFor, setNpcFor] = useState<MonsterRecord | null>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const itemRefs = useRef<Array<HTMLButtonElement | null>>([])
 
   useLayoutEffect(() => {
     const el = menuRef.current
@@ -82,6 +84,39 @@ export function WikiListMenu({ kind, language, anchor, entry, onClose, onChanged
   }, [onClose])
 
   const isUser = !!entry.userOwned
+  const modalMounted = editing || npcFor
+
+  useEffect(() => {
+    if (modalMounted || !pos) return
+    setActiveIndex(0)
+    requestAnimationFrame(() => itemRefs.current[0]?.focus())
+  }, [modalMounted, pos])
+
+  useEffect(() => {
+    if (modalMounted) return
+    itemRefs.current[activeIndex]?.focus()
+  }, [activeIndex, modalMounted])
+
+  function handleMenuKeyDown(e: React.KeyboardEvent) {
+    const items = itemRefs.current.filter(Boolean) as HTMLButtonElement[]
+    if (items.length === 0) return
+    if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      setActiveIndex((i) => Math.min(items.length - 1, i + 1))
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      setActiveIndex((i) => Math.max(0, i - 1))
+    } else if (e.key === 'Home') {
+      e.preventDefault()
+      setActiveIndex(0)
+    } else if (e.key === 'End') {
+      e.preventDefault()
+      setActiveIndex(items.length - 1)
+    } else if (e.key === 'Escape') {
+      e.preventDefault()
+      onClose()
+    }
+  }
 
   async function loadFullRecord(): Promise<MonsterRecord | ItemRecord | SpellRecord | null> {
     if (!window.electronAPI) return null
@@ -194,11 +229,6 @@ export function WikiListMenu({ kind, language, anchor, entry, onClose, onChanged
     }
   }
 
-  // If a secondary modal is open (edit form or NPC wizard), let it take
-  // over — the context menu itself is invisible behind it. We still
-  // keep the menu mounted so closing the modal returns focus here.
-  const modalMounted = editing || npcFor
-
   return (
     <>
       {!modalMounted && (
@@ -212,10 +242,15 @@ export function WikiListMenu({ kind, language, anchor, entry, onClose, onChanged
             left: pos?.x ?? anchor.x,
             visibility: pos ? 'visible' : 'hidden',
           }}
+          onKeyDown={handleMenuKeyDown}
         >
           <button
+            ref={(el) => { itemRefs.current[0] = el }}
             type="button"
             className="wiki-list-menu-item"
+            role="menuitem"
+            tabIndex={activeIndex === 0 ? 0 : -1}
+            onMouseEnter={() => setActiveIndex(0)}
             onClick={handleDuplicate}
             disabled={busy}
           >
@@ -223,8 +258,12 @@ export function WikiListMenu({ kind, language, anchor, entry, onClose, onChanged
           </button>
           {kind === 'monster' && (
             <button
+              ref={(el) => { itemRefs.current[1] = el }}
               type="button"
               className="wiki-list-menu-item"
+              role="menuitem"
+              tabIndex={activeIndex === 1 ? 0 : -1}
+              onMouseEnter={() => setActiveIndex(1)}
               onClick={handleOpenNpcWizard}
               disabled={busy}
             >
@@ -232,8 +271,12 @@ export function WikiListMenu({ kind, language, anchor, entry, onClose, onChanged
             </button>
           )}
           <button
+            ref={(el) => { itemRefs.current[kind === 'monster' ? 2 : 1] = el }}
             type="button"
             className="wiki-list-menu-item"
+            role="menuitem"
+            tabIndex={activeIndex === (kind === 'monster' ? 2 : 1) ? 0 : -1}
+            onMouseEnter={() => setActiveIndex(kind === 'monster' ? 2 : 1)}
             onClick={handleExport}
             disabled={busy}
           >
@@ -243,16 +286,24 @@ export function WikiListMenu({ kind, language, anchor, entry, onClose, onChanged
             <>
               <div className="wiki-list-menu-sep" />
               <button
+                ref={(el) => { itemRefs.current[kind === 'monster' ? 3 : 2] = el }}
                 type="button"
                 className="wiki-list-menu-item"
+                role="menuitem"
+                tabIndex={activeIndex === (kind === 'monster' ? 3 : 2) ? 0 : -1}
+                onMouseEnter={() => setActiveIndex(kind === 'monster' ? 3 : 2)}
                 onClick={handleEdit}
                 disabled={busy}
               >
                 📝 {t('bestiary.edit')}
               </button>
               <button
+                ref={(el) => { itemRefs.current[kind === 'monster' ? 4 : 3] = el }}
                 type="button"
                 className="wiki-list-menu-item wiki-list-menu-danger"
+                role="menuitem"
+                tabIndex={activeIndex === (kind === 'monster' ? 4 : 3) ? 0 : -1}
+                onMouseEnter={() => setActiveIndex(kind === 'monster' ? 4 : 3)}
                 onClick={handleDelete}
                 disabled={busy}
               >
