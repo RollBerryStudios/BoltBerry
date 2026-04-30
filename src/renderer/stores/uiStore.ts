@@ -244,7 +244,14 @@ export const useUIStore = create<UIState>((set) => ({
   blackoutActive: false,
   appMode: 'map',
   sessionMode: 'prep',
-  theme: 'dark',
+  theme: (() => {
+    try {
+      const saved = localStorage.getItem('theme')
+      return saved === 'light' ? 'light' : 'dark'
+    } catch {
+      return 'dark'
+    }
+  })(),
   language: (() => { try { return (localStorage.getItem('boltberry-lang') as AppLanguage | null) ?? 'de' } catch { return 'de' as AppLanguage } })(),
   atmosphereImagePath: null,
   selectedTokenId: null,

@@ -60,6 +60,7 @@
     "zustand": "^5.0.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.2",
     "@electron/fuses": "^1.8.0",
     "@electron/rebuild": "^4.0.3",
     "@playwright/test": "^1.44.0",

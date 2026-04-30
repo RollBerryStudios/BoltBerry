@@ -166,15 +166,17 @@ function TextArea({ value, onChange, rows = 3, placeholder }: {
 
 // ─── Short text input ─────────────────────────────────────────────────────────
 
-function TextInput({ value, onChange, placeholder, style, id, ariaLabel }: {
+function TextInput({ value, onChange, placeholder, style, id, ariaLabel, dataTestId }: {
   value: string; onChange: (v: string) => void; placeholder?: string; style?: React.CSSProperties
   id?: string
   ariaLabel?: string
+  dataTestId?: string
 }) {
   return (
     <input
       type="text"
       id={id}
+      data-testid={dataTestId}
       aria-label={ariaLabel}
       value={value}
       placeholder={placeholder}
@@ -422,6 +424,7 @@ function SheetEditor({ sheet, onUpdate }: {
           <div style={{ flex: 1, minWidth: 0 }}>
             <TextInput
               {...field('name')}
+              dataTestId="input-character-name"
               id="character-name"
               ariaLabel={t('characters.name')}
               placeholder={t('characters.name')}
@@ -833,7 +836,7 @@ export function CharacterSheetPanel() {
   }
 
   return (
-    <div style={{ display: 'flex', height: '100%', overflow: 'hidden' }}>
+    <div data-testid="panel-character-sheets" style={{ display: 'flex', height: '100%', overflow: 'hidden' }}>
 
       {/* ── Left: character list (fixed width) ── */}
       <div style={{
@@ -872,6 +875,7 @@ export function CharacterSheetPanel() {
           </button>
           <button
             onClick={handleNew}
+            data-testid="button-create-character-sheet"
             className="btn btn-secondary"
             style={{ fontSize: 'var(--text-xs)', padding: '3px 8px' }}
             title={t('characters.newSheet')}
@@ -898,6 +902,7 @@ export function CharacterSheetPanel() {
               {sheets.map((s) => (
                 <div
                   key={s.id}
+                  data-testid="list-item-character-sheet"
                   style={{
                     display: 'flex', alignItems: 'center',
                     padding: 'var(--sp-2) var(--sp-3)',

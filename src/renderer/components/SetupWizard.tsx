@@ -94,7 +94,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
             {t('setupWizard.successTitle')}
           </h2>
           <p style={{
-            color: 'var(--text-muted)',
+            color: 'var(--text-secondary)',
             lineHeight: 1.6,
             marginBottom: 'var(--sp-2)',
             maxWidth: 360,
@@ -111,7 +111,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
             marginTop: 'var(--sp-4)',
             textAlign: 'left',
             fontSize: 'var(--text-xs)',
-            color: 'var(--text-muted)',
+            color: 'var(--text-secondary)',
             lineHeight: 1.8,
           }}>
             <div style={{ fontWeight: 700, marginBottom: 4, color: 'var(--text-secondary)' }}>
@@ -176,7 +176,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
         />
         <h2 style={{ marginBottom: 'var(--sp-2)' }}>{t('setupWizard.welcome')}</h2>
         <p style={{
-          color: 'var(--text-muted)',
+          color: 'var(--text-secondary)',
           marginBottom: 'var(--sp-4)',
           lineHeight: 1.5,
           maxWidth: 380,
@@ -194,7 +194,7 @@ export function SetupWizard({ onComplete }: SetupWizardProps) {
           marginBottom: 'var(--sp-5)',
           textAlign: 'left',
           fontSize: 'var(--text-xs)',
-          color: 'var(--text-muted)',
+          color: 'var(--text-secondary)',
           lineHeight: 1.9,
         }}>
           <div style={{ fontWeight: 700, marginBottom: 4, color: 'var(--text-secondary)', fontSize: 'var(--text-xs)' }}>

@@ -607,6 +607,7 @@ export function CanvasArea() {
     <div
       ref={containerRef}
       className={`canvas-area${hudIdle ? ' hud-idle' : ''}`}
+      data-testid="canvas-area"
       data-tool={activeTool}
       role="application"
       aria-label="Map canvas"
@@ -874,6 +875,7 @@ export function CanvasArea() {
       {activeMap && (
         <div
           ref={layerPanelRef}
+          data-testid="canvas-layer-dock"
           className="canvas-hud-fade"
           style={{
             position: 'absolute',
@@ -965,6 +967,7 @@ export function CanvasArea() {
 
           {/* Toggle button */}
           <button
+            data-testid="button-canvas-layers"
             onClick={() => setLayerPanelOpen((v) => !v)}
             title="Ebenen ein-/ausblenden"
             style={{

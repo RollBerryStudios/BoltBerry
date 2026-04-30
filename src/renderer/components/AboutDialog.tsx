@@ -21,6 +21,7 @@ export function AboutDialog({ onClose }: { onClose: () => void }) {
     <div className="bb-about-backdrop" onClick={onClose}>
       <div
         className="bb-about"
+        data-testid="dialog-about"
         role="dialog"
         aria-modal="true"
         aria-labelledby="bb-about-title"

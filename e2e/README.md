@@ -44,9 +44,14 @@ e2e/
 ├── regression/
 │   ├── campaigns.spec.ts        # Campaign CRUD (create/rename/delete/duplicate)
 │   ├── keyboard-shortcuts.spec.ts # ? / F1 / Escape overlays
-│   └── ipc-bridge.spec.ts       # IPC channel correctness + SQL injection guard
+│   ├── ipc-bridge.spec.ts       # IPC channel correctness + SQL injection guard
+│   ├── accessibility.spec.ts    # Axe serious/critical accessibility baseline
+│   └── menu-actions.spec.ts     # Registered Electron menu actions
 └── critical-path/
+    ├── canvas-workflows.spec.ts  # Canvas open, token, fog, undo/redo
     ├── campaign-lifecycle.spec.ts # Full DM flow: create → view → export
+    ├── file-workflows.spec.ts    # Negative file/archive cases
+    ├── persistence.spec.ts       # Real restart persistence
     ├── player-window.spec.ts      # Player window open/close/security
     ├── settings.spec.ts           # SetupWizard + data folder switching
     └── export-import.spec.ts      # Export → import round-trip
@@ -67,7 +72,16 @@ Each test call to `launchApp()` creates a fresh **temporary directory** for `use
 - No shared assets or settings.
 - Tests can run in any order.
 
-The `SetupWizard` is bypassed by default (by injecting pre-completed `boltberry-settings` into `localStorage`).  Tests that specifically test the wizard use `launchApp({ skipSetupWizard: false })`.
+The `SetupWizard` is bypassed by default by setting the same setup-complete and data-folder `localStorage` keys used by the renderer. Tests that specifically test the wizard use `launchApp({ skipSetupWizard: false })`.
+
+Restart persistence tests use:
+
+```typescript
+const launch = await launchAppWithUserDataDir(userDataDir, { cleanupUserDataDir: false })
+const relaunched = await relaunchApp(launch)
+```
+
+These helpers reuse the same Electron `--user-data-dir`; cleanup is left to the test after the final relaunch.
 
 ## Mocking Native Dialogs
 
@@ -81,6 +95,16 @@ await mockSaveDialog(app, '/tmp/out.zip')
 await mockOpenDialog(app, ['/path/to/file.zip'])
 ```
 
+`mockSaveDialogCancel(app)` and `mockOpenDialogCancel(app)` cover cancel paths.
+
+## Accessibility
+
+Accessibility coverage lives in `e2e/regression/accessibility.spec.ts`. `@axe-core/playwright` is installed, but the Electron runner injects `axe-core` directly because `AxeBuilder` attempts to create a normal browser page, which Electron Playwright does not support in this launch mode. The baseline fails only `serious` and `critical` violations.
+
+## Menu Actions
+
+Menu coverage invokes registered menu items through Electron's `Menu.getApplicationMenu()` and verifies the renderer flow that each menu item dispatches. OS-level visual menu traversal is intentionally not used because it is platform-dependent under Playwright/Electron.
+
 ## Environment Variables
 
 | Variable | Default | Description |
@@ -90,7 +114,7 @@ await mockOpenDialog(app, ['/path/to/file.zip'])
 
 ## CI Integration
 
-Add to your GitHub Actions workflow:
+The repository workflow runs E2E as a gate with `npm run build` followed by `xvfb-run ... npm run test:e2e`. A representative setup is:
 
 ```yaml
 - name: Build

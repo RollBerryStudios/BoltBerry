@@ -190,7 +190,7 @@ export function TokenPanel() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <div data-testid="panel-tokens" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {/* Add token button + filter */}
       <div style={{ padding: 'var(--sp-3) var(--sp-4)', borderBottom: '1px solid var(--border)', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 'var(--sp-2)' }}>
         <div style={{ display: 'flex', gap: 6 }}>
@@ -292,6 +292,7 @@ export function TokenPanel() {
             </button>
             <button
               disabled={!activeMapId}
+              data-testid="button-create-blank-token"
               title={t('tokens.emptyTemplate')}
               onClick={handleAddBlankToken}
               style={{
@@ -329,6 +330,7 @@ export function TokenPanel() {
           displayedTokens.map((token) => (
             <div
               key={token.id}
+              data-testid="list-item-token"
               onClick={() => setSelectedToken(token.id)}
               style={{
                 display: 'flex',
@@ -684,6 +686,7 @@ export function TokenPanel() {
 
           <button
             className="btn btn-danger"
+            data-testid="button-delete-token"
             style={{ fontSize: 'var(--text-xs)', justifyContent: 'center', marginTop: 'var(--sp-2)', width: '100%' }}
             onClick={async () => {
               if (!window.electronAPI) return

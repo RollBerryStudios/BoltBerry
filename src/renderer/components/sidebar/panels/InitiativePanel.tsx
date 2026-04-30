@@ -284,7 +284,7 @@ export function InitiativePanel() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <div data-testid="panel-initiative" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div className="sidebar-section">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--sp-2)' }}>
           <div className="sidebar-section-title">{t('initiative.title', { round })}</div>
@@ -330,6 +330,7 @@ export function InitiativePanel() {
           <div style={{ position: 'relative', flex: 1 }}>
             <input
               ref={nameInputRef}
+              data-testid="input-initiative-name"
               className="input"
               placeholder={t('initiative.namePlaceholder')}
               value={name}
@@ -402,7 +403,7 @@ export function InitiativePanel() {
             onKeyDown={(e) => e.key === 'Enter' && handleAdd()}
             style={{ width: 52 }}
           />
-          <button className="btn btn-primary btn-icon" onClick={handleAdd}>+</button>
+          <button data-testid="button-add-initiative" className="btn btn-primary btn-icon" onClick={handleAdd}>+</button>
         </div>
       </div>
 
@@ -430,6 +431,7 @@ export function InitiativePanel() {
             return (
               <div
                 key={entry.id}
+                data-testid="list-item-initiative"
                 draggable
                 onDragStart={() => { dragIndexRef.current = entryIdx }}
                 onDragOver={(e) => { e.preventDefault(); setDragOverIndex(entryIdx) }}

@@ -51,6 +51,7 @@ export function GlobalSettingsModal({ onClose, initialSection }: GlobalSettingsM
 
       <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
         <nav
+          data-testid="settings-sections"
           aria-label={t('globalSettings.sections')}
           style={{
             width: 200,
@@ -103,6 +104,7 @@ function SectionTab({
   return (
     <button
       type="button"
+      data-testid={`settings-tab-${id}`}
       onClick={() => onSelect(id)}
       style={{
         display: 'flex',
@@ -219,7 +221,7 @@ function StorageSection() {
           <label style={{ display: 'block', fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 'var(--sp-1)' }}>
             {t('globalSettings.storage.folderLabel')}
           </label>
-          <div style={{
+          <div data-testid="settings-data-folder" style={{
             padding: 'var(--sp-2)',
             background: 'var(--bg-overlay)',
             borderRadius: 'var(--radius)',
@@ -234,6 +236,7 @@ function StorageSection() {
 
         <div style={{ display: 'flex', gap: 'var(--sp-2)', flexWrap: 'wrap' }}>
           <button
+            data-testid="button-open-data-folder"
             className="btn btn-ghost"
             onClick={handleOpenFolder}
             style={{ flex: '1 1 140px' }}
@@ -241,6 +244,7 @@ function StorageSection() {
             📂 {t('globalSettings.storage.openFolder')}
           </button>
           <button
+            data-testid="button-change-data-folder"
             className="btn btn-ghost"
             onClick={handleChangeFolder}
             disabled={busy}
@@ -295,6 +299,7 @@ function AppearanceSection() {
           <div style={{ display: 'flex', gap: 4 }}>
             <button
               className={`btn ${theme === 'dark' ? 'btn-primary' : 'btn-ghost'}`}
+              data-testid="button-theme-dark"
               onClick={() => { if (theme !== 'dark') toggleTheme() }}
               style={{ padding: '6px 14px' }}
             >
@@ -302,6 +307,7 @@ function AppearanceSection() {
             </button>
             <button
               className={`btn ${theme === 'light' ? 'btn-primary' : 'btn-ghost'}`}
+              data-testid="button-theme-light"
               onClick={() => { if (theme !== 'light') toggleTheme() }}
               style={{ padding: '6px 14px' }}
             >
@@ -319,6 +325,7 @@ function AppearanceSection() {
               <button
                 key={l}
                 className={`btn ${language === l ? 'btn-primary' : 'btn-ghost'}`}
+                data-testid={`button-language-${l}`}
                 onClick={() => { if (language !== l) toggleLanguage() }}
                 style={{ padding: '6px 14px', minWidth: 60 }}
               >

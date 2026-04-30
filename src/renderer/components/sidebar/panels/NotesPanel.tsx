@@ -319,7 +319,7 @@ export function NotesPanel() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <div data-testid="panel-notes" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {/* ── Search bar ───────────────────────────────────────────────── */}
       <div style={{
         padding: '6px 8px',
@@ -331,6 +331,7 @@ export function NotesPanel() {
           <circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" />
         </svg>
         <input
+          data-testid="input-note-search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Alle Notizen durchsuchen…"
@@ -536,6 +537,7 @@ export function NotesPanel() {
           ) : (
             <>
               <input
+                data-testid="input-note-title"
                 value={selectedNote.title}
                 onChange={(e) => setActiveNoteLocal(activeBucket, { title: e.target.value })}
                 onBlur={() => saveNote(activeBucket, selectedNote.id, { title: selectedNote.title })}
@@ -563,6 +565,7 @@ export function NotesPanel() {
                 <MarkdownPreview text={selectedNote.content} />
               ) : (
                 <textarea
+                  data-testid="textarea-note-body"
                   value={selectedNote.content}
                   onChange={(e) => setActiveNoteLocal(activeBucket, { content: e.target.value })}
                   onBlur={() => saveNote(activeBucket, selectedNote.id, { content: selectedNote.content })}
@@ -615,6 +618,7 @@ function NoteList({
     }}>
       <button
         type="button"
+        data-testid="button-create-note"
         onClick={onCreate}
         style={{
           padding: '8px 10px',
@@ -672,6 +676,7 @@ function NoteRowItem({
   const subtitle = note.content.split('\n')[0]?.replace(/^#+\s*/, '').slice(0, 48) || '—'
   return (
     <div
+      data-testid="list-item-note"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{

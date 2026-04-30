@@ -271,9 +271,8 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
       },
       redo: () => {
         const fs = useFogStore.getState()
-        fs.redo()
-        const lastOp = fs.history[fs.history.length - 1]
-        if (lastOp) applyOp(lastOp)
+        const op = fs.redo()
+        if (op) applyOp(op)
       },
     })
   }, [applyOp, rebuildFog])
@@ -779,4 +778,3 @@ function sendFogDelta(op: FogOperation) {
     points: op.points,
   })
 }
-

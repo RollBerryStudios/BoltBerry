@@ -407,6 +407,7 @@ export function Toolbar() {
       {/* ── SECTION: Undo / Redo ────────────────────────────────────────── */}
       <button
         className="tool-btn"
+        data-testid="button-undo"
         title={canUndo ? `Rückgängig: ${lastUndoLabel} (Ctrl+Z)` : 'Nichts rückgängig zu machen'}
         aria-label="Rückgängig"
         disabled={!canUndo}
@@ -417,6 +418,7 @@ export function Toolbar() {
       </button>
       <button
         className="tool-btn"
+        data-testid="button-redo"
         title={canRedo ? `Wiederholen: ${lastRedoLabel} (Ctrl+Y)` : 'Nichts zu wiederholen'}
         aria-label="Wiederholen"
         disabled={!canRedo}

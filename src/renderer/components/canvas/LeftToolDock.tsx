@@ -186,7 +186,7 @@ export function LeftToolDock() {
   flatGroups.forEach((g, idx) => groupIndexById.set(g.id, idx))
 
   return (
-    <div className={classes} role="toolbar" aria-orientation="vertical" aria-label={t('toolbar.tools.select')} onKeyDown={handleKeyDown}>
+    <div className={classes} data-testid="canvas-tool-dock" role="toolbar" aria-orientation="vertical" aria-label={t('toolbar.tools.select')} onKeyDown={handleKeyDown}>
       {SECTIONS.map((section, i) => (
         <div key={section.id} className="left-tool-dock-section">
           {i > 0 && <div className="left-tool-dock-divider" aria-hidden="true" />}
@@ -338,6 +338,7 @@ const ToolGroupButton = forwardRef<HTMLButtonElement, ToolGroupButtonProps>(func
       <button
         ref={btnRef}
         className={`left-tool-btn${groupActive ? ' active' : ''}`}
+        data-testid={`button-canvas-tool-${group.id}`}
         title={label}
         aria-label={label}
         aria-pressed={groupActive}
@@ -370,6 +371,7 @@ const ToolGroupButton = forwardRef<HTMLButtonElement, ToolGroupButtonProps>(func
         <div
           ref={popRef}
           className="left-tool-popover"
+          data-testid={`canvas-tool-popover-${group.id}`}
           style={{ top: pos.top, left: pos.left }}
           role="menu"
         >
@@ -379,6 +381,7 @@ const ToolGroupButton = forwardRef<HTMLButtonElement, ToolGroupButtonProps>(func
               <button
                 key={v.id}
                 className={`left-tool-popover-item${isCur ? ' active' : ''}`}
+                data-testid={`button-canvas-tool-${v.id}`}
                 onClick={() => onSelect(v.id)}
                 role="menuitem"
               >

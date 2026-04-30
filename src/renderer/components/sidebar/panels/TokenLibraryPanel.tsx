@@ -296,7 +296,7 @@ export function TokenLibraryPanel({ lockedCategory }: {
   const disabled = !activeCampaignId
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: 'var(--bg-base)' }}>
+    <div data-testid="panel-token-library" style={{ display: 'flex', flexDirection: 'column', height: '100%', background: 'var(--bg-base)' }}>
       {/* Short visible credit in proximity to the SRD-derived material.
           Click opens the About dialog with the canonical CC-BY-4.0
           attribution paragraph the licence requires. */}
@@ -386,6 +386,7 @@ export function TokenLibraryPanel({ lockedCategory }: {
       }}>
         <div style={{ position: 'relative', flex: 1 }}>
           <input
+            data-testid="input-token-search"
             className="input"
             placeholder={t('library.searchPlaceholder')}
             value={query}
@@ -588,7 +589,7 @@ function TemplateCard({
   const creatureIcon = creatureTypeIcon(tpl.creature_type)
 
   return (
-    <div style={{
+    <div data-testid="list-item-token-template" style={{
       background: 'var(--bg-surface)',
       border: '1px solid var(--border)',
       borderLeft: `3px solid ${color}`,
@@ -786,6 +787,7 @@ function TemplateCard({
         </select>
         <button
           type="button"
+          data-testid="button-insert-token"
           onClick={() => onInsert(spawnCount, spawnFormation)}
           disabled={!canInsert}
           title={canInsert ? t('library.insertOnMap') : t('library.noMapForInsert')}

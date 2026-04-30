@@ -185,7 +185,7 @@ export function HandoutsPanel() {
   const lightboxHandout = lightboxId != null ? handouts.find((h) => h.id === lightboxId) ?? null : null
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <div data-testid="panel-handouts" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
 
       {/* ”€”€ Lightbox ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€ */}
       {lightboxHandout && (
@@ -224,6 +224,7 @@ export function HandoutsPanel() {
         )}
 
         <button
+          data-testid="button-create-handout"
           className="btn btn-secondary"
           style={{ fontSize: 'var(--text-xs)', padding: '4px 10px' }}
           onClick={() => setIsAdding(true)}
@@ -248,6 +249,7 @@ export function HandoutsPanel() {
           gap: 'var(--sp-2)',
         }}>
           <input
+            data-testid="input-handout-title"
             className="input"
             autoFocus
             placeholder="Titel…"
@@ -286,6 +288,7 @@ export function HandoutsPanel() {
 
           {composeTab === 'write' ? (
             <textarea
+              data-testid="textarea-handout-body"
               className="input"
               placeholder="Beschreibung / Notiz (optional)…  Markdown: **fett**, *kursiv*, # Überschrift, - Liste"
               value={addingText}
@@ -318,6 +321,7 @@ export function HandoutsPanel() {
 
           {/* Image picker */}
           <button
+            data-testid="button-pick-handout-image"
             className="btn btn-ghost"
             style={{ justifyContent: 'flex-start', gap: 6, fontSize: 'var(--text-xs)' }}
             onClick={handlePickImage}
@@ -343,6 +347,7 @@ export function HandoutsPanel() {
           {/* Save / Cancel */}
           <div style={{ display: 'flex', gap: 'var(--sp-2)', alignItems: 'center' }}>
             <button
+              data-testid="button-save-handout"
               className="btn btn-primary"
               style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-sm)' }}
               onClick={handleSaveHandout}
@@ -409,7 +414,7 @@ function HandoutCard({
   const [expanded, setExpanded] = useState(false)
 
   return (
-    <div style={{
+    <div data-testid="list-item-handout" style={{
       display: 'flex',
       flexDirection: 'column',
       background: isSent ? 'var(--accent-dim)' : 'var(--bg-elevated)',

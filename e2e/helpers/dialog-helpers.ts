@@ -64,6 +64,23 @@ export async function mockSaveDialog(
 }
 
 /**
+ * Mock dialog.showSaveDialog as if the user cancelled the native picker.
+ */
+export async function mockSaveDialogCancel(
+  app: ElectronApplication,
+): Promise<void> {
+  await app.evaluate(({ dialog }) => {
+    const original = dialog.showSaveDialog.bind(dialog)
+    // @ts-ignore
+    dialog.showSaveDialog = async (..._args: unknown[]) => {
+      // @ts-ignore
+      dialog.showSaveDialog = original
+      return { canceled: true, filePath: undefined }
+    }
+  })
+}
+
+/**
  * Mock dialog.showOpenDialog to return preset file paths without showing UI.
  */
 export async function mockOpenDialog(

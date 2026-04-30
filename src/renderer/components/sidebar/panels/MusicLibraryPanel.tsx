@@ -360,7 +360,7 @@ export function MusicLibraryPanel() {
   }
 
   return (
-    <div className="music-library">
+    <div className="music-library" data-testid="panel-audio-library">
       <MusicLibraryStyles />
 
       <header className="music-library-header">
@@ -369,7 +369,7 @@ export function MusicLibraryPanel() {
           <button className="btn" onClick={handleAddFiles} title={t('musicLibrary.addFilesHint')}>
             + {t('musicLibrary.addFiles')}
           </button>
-          <button className="btn" onClick={handleAddFolder} title={t('musicLibrary.addFolderHint')}>
+          <button data-testid="button-add-audio-folder" className="btn" onClick={handleAddFolder} title={t('musicLibrary.addFolderHint')}>
             + {t('musicLibrary.addFolder')}
           </button>
           <button
@@ -438,7 +438,7 @@ export function MusicLibraryPanel() {
               {filteredTracks.map((tr) => {
                 const isPreview = previewPath === tr.path
                 return (
-                  <li key={tr.id} className="music-library-track">
+                  <li key={tr.id} className="music-library-track" data-testid="list-item-track">
                     <span className="music-library-track-icon" aria-hidden="true">♪</span>
                     <div className="music-library-track-info">
                       <span className="music-library-track-name" title={tr.path}>
@@ -463,6 +463,7 @@ export function MusicLibraryPanel() {
                       return (
                         <button
                           key={channel}
+                          data-testid={channel === 'track1' ? 'button-assign-track-1' : `button-assign-${channel}`}
                           className={`music-library-badge ch-${channel}${assigned ? ' assigned' : ''}${isActive ? ' active' : ''}`}
                           onClick={() => handleToggleAssignment(tr, channel)}
                           onContextMenu={(e) => {

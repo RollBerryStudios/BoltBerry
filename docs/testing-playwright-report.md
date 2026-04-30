@@ -13,7 +13,18 @@ npm run test:e2e -- --project=regression
 npm run test:e2e -- --project=critical-path
 ```
 
-Results: 14 smoke tests passed, 24 regression tests passed, 36 critical-path tests passed.
+Results after this follow-up pass: 14 smoke tests passed, 32 regression tests passed, 51 critical-path tests passed.
+
+## Follow-up Implementation Status
+
+Completed the documented follow-up items from the Playwright report:
+
+- CI E2E is now a required gate: `.github/workflows/ci.yml` no longer uses `continue-on-error: true` on the `e2e` job. The job still builds the app and runs Playwright under `xvfb-run`.
+- Restart persistence coverage now uses real Electron closes/relaunches against the same temporary `userData` directory via `launchAppWithUserDataDir()` and `relaunchApp()`.
+- New critical-path suites cover persistence, canvas workflows, and file-workflow negative cases.
+- New regression suites cover serious/critical Axe accessibility checks and native menu action dispatch.
+- Deeper panel and canvas selectors now use stable domain-oriented `data-testid`s for notes, handouts, character sheets, token library, initiative, audio/music, token panel, toolbar, and canvas docks.
+- Minimal product fixes were made where tests exposed real behavior issues: fog redo now reapplies the redone operation, the UI theme store initializes from persisted `localStorage.theme`, settings folder buttons have distinct test IDs, and two low-contrast setup texts were raised to the existing secondary text color.
 
 ## Repository Findings
 
@@ -54,6 +65,11 @@ Native dialogs are mocked through one-shot main-process overrides for `showOpenD
   - `e2e/critical-path/map-management-actions.spec.ts`
   - `e2e/critical-path/top-level-actions.spec.ts`
   - `e2e/critical-path/demo-production-session.spec.ts`
+  - `e2e/critical-path/persistence.spec.ts`
+  - `e2e/critical-path/canvas-workflows.spec.ts`
+  - `e2e/critical-path/file-workflows.spec.ts`
+  - `e2e/regression/accessibility.spec.ts`
+  - `e2e/regression/menu-actions.spec.ts`
   - `e2e/testcontent/**`
   - `e2e/QA_UI_ACTION_COVERAGE.md`
 
@@ -61,7 +77,8 @@ Native dialogs are mocked through one-shot main-process overrides for `showOpenD
 
 - `package.json`: added `test:e2e:ui`, `test:e2e:headed`, `test:e2e:debug`, and `test:e2e:report`.
 - `playwright.config.ts`: existing Electron Playwright configuration retained.
-- `e2e/helpers/electron-launch.ts`: uses current settings storage, initializes test data folder via IPC, cleans temp profiles, replaces polling sleep with `app.waitForEvent('window')`.
+- `e2e/helpers/electron-launch.ts`: uses current settings storage, initializes test data folder via IPC, cleans temp profiles, replaces polling sleep with `app.waitForEvent('window')`, and supports relaunching against an explicit reusable `userData` directory.
+- `e2e/helpers/dialog-helpers.ts`: includes open/save/message dialog mocks, including save-cancel coverage.
 - `e2e/helpers/page-objects.ts`: moved core selectors to stable `data-testid` hooks.
 - `e2e/helpers/onboarding-helpers.ts`: uses stable setup/dashboard test IDs.
 - `e2e/regression/campaigns.spec.ts`: stabilized campaign CRUD tests and fixed rename locators.
@@ -70,7 +87,11 @@ Native dialogs are mocked through one-shot main-process overrides for `showOpenD
 - `src/renderer/components/SetupWizard.tsx`: added test IDs to setup screen, input, and buttons.
 - `src/renderer/components/Welcome.tsx`: added test IDs to dashboard screen, campaign modal, list rows, and campaign actions.
 - `src/renderer/components/CampaignView.tsx`: added test IDs to workspace, navigation, workspace tabs, map list, map actions, and play/import controls.
-- `src/renderer/components/toolbar/Toolbar.tsx`: added test IDs for toolbar readiness, session toggle, and player-window toggle.
+- `src/renderer/components/toolbar/Toolbar.tsx`: added test IDs for toolbar readiness, undo/redo, session toggle, and player-window toggle.
+- `src/renderer/components/sidebar/panels/*.tsx`: added stable selectors for notes, handouts, character sheets, token library, token list, initiative, and audio/music controls.
+- `src/renderer/components/canvas/*.tsx`: added stable selectors for the canvas area, canvas tool dock, layer dock, and tool buttons.
+- `src/renderer/stores/uiStore.ts`: initializes theme from persisted storage so restart persistence does not overwrite the saved theme.
+- `src/renderer/components/canvas/FogLayer.tsx`: fixes fog redo to apply the operation returned by `redo()`.
 
 Some E2E files were already modified in the working tree before this pass; those changes were preserved and validated rather than reverted.
 
@@ -81,12 +102,12 @@ Some E2E files were already modified in the working tree before this pass; those
 | App Startup | High | Launch, window count/title, renderer readiness, console errors, preload API shape |
 | Navigation | Medium | Dashboard, campaign workspace, settings, Wiki, Compendium, workspace tabs |
 | Main User Flows | High | Onboarding, campaign CRUD, map import/manage/open, production demo session |
-| Persistence | Medium | SQLite-backed campaign/map data, folder switching, backup/export/import; full app relaunch persistence can be expanded |
+| Persistence | High | Real Electron relaunch with shared profile for campaign create/rename/delete, map import, theme, language, and data folder |
 | IPC | High | Semantic campaign/map APIs, app handlers, player sync, preload exposure checks |
-| File Workflows | High | Map/audio import with fixtures, campaign export/import, backup, invalid/canceled imports |
+| File Workflows | High | Map/audio import with fixtures, campaign export/import, backup, invalid/canceled imports, invalid map images, missing paths, malformed ZIPs |
 | Settings | Medium | First-run setup and global settings sections covered |
 | Error Handling | Medium | Invalid campaign names, missing campaign export/duplicate, invalid/canceled imports |
-| Accessibility | Low | Role/name and keyboard shortcut basics; axe-core not integrated |
+| Accessibility | Medium | Axe serious/critical checks for setup, dashboard, campaign workspace, and settings modal |
 | Electron Security | High | Node globals, raw IPC, DM/player preload split, local-asset traversal, player window restrictions |
 
 ## Created Test Suites
@@ -94,23 +115,26 @@ Some E2E files were already modified in the working tree before this pass; those
 - Smoke suites verify the app starts, the dashboard renders, the preload bridge exists, and fatal renderer errors are absent.
 - Regression suites cover campaign CRUD, validation, delete confirmations, duplicate behavior, IPC bridge behavior, and keyboard shortcuts.
 - Critical-path suites cover first-run onboarding, export/import, campaign lifecycle, map management with real assets, player window lifecycle/security, top-level navigation, and two-window sync.
+- Persistence suite covers campaign create/rename/delete, map import, and settings across real Electron restarts with one shared temporary profile.
+- Canvas workflow suite covers map open, canvas/tool visibility, token create/delete with DB checks, fog cover state, fog undo/redo, and return to campaign map listing.
+- File workflow suite covers invalid image import, missing import paths, export cancel, ZIP without `campaign.json`, and ZIP with invalid JSON.
+- Accessibility suite uses `axe-core` injection in the Electron renderer. `@axe-core/playwright` is installed, but its `AxeBuilder` cannot create a normal browser page in this Electron context, so the test injects `axe-core` directly and fails only `serious`/`critical` violations.
+- Menu actions suite invokes registered Electron menu items through `Menu.getApplicationMenu()` and verifies the renderer flows they dispatch.
 
 ## Found Issues
 
 - Test issue fixed: campaign rename tests used a row locator filtered by visible text. Once the row entered edit mode, the name moved into an input value and was no longer normal text content, so the locator reevaluated to no element.
 - Test issue fixed: map deletion in `CampaignView` uses `window.confirm`, not Electron `dialog.showMessageBox`; the test now handles it as a browser dialog.
-- Testability gap: some secondary UI surfaces still rely on titles/classes for selectors. Core flows now have `data-testid`, but deeper panels should receive IDs as their E2E coverage expands.
-- CI gap: `.github/workflows/ci.yml` has `continue-on-error: true` for E2E, so failures currently do not fail the workflow.
-
-No product bug was confirmed during the final verification run.
+- Product issue fixed: fog redo used a stale Zustand snapshot after `fs.redo()`, so the DB/UI did not return to the redone fog bitmap.
+- Product issue fixed: persisted light theme was overwritten at restart because the UI store initialized `theme` to `dark` before App persisted it again.
+- Testability issue fixed: settings storage buttons had an ambiguous/misplaced data-testid; open-folder and change-folder now have distinct IDs.
+- Accessibility issue fixed: SetupWizard helper text on overlay background did not meet Axe's contrast threshold.
 
 ## Remaining Gaps
 
-- Full restart persistence is partly covered through reloads and fresh DB reads, but should be expanded with a helper that closes and relaunches against the same temporary profile before cleanup.
-- Canvas interactions are mostly verified through import/open/sync behavior; drawing, fog brushing, wall editing, room editing, and token drag interactions need focused canvas automation.
-- Axe-based accessibility checks are not yet integrated.
+- Canvas freehand/drag interactions are still mostly IPC- or action-assisted where exact pointer automation would be fragile. Future coverage should add deterministic helpers for token drag, brush drawing, walls, rooms, and drawings.
 - Visual regression is not enabled because animated/dynamic surfaces need deterministic visual modes.
-- Native menu items are indirectly covered through renderer/menu IPC behavior, but not exhaustively exercised through menu automation.
+- Native menu tests invoke Electron's registered menu items directly. This avoids OS menu automation differences across macOS/Linux/Windows; visual native menu traversal remains intentionally out of scope.
 
 ## How to Run
 
@@ -133,9 +157,6 @@ npm run test:e2e -- --project=critical-path
 
 ## Recommended Next Steps
 
-1. Remove `continue-on-error: true` from the CI E2E job once the team is ready to make E2E release-gating.
-2. Add a `relaunchAppWithUserDataDir` helper to explicitly test close/reopen persistence for campaigns, maps, settings, and player/session state.
-3. Add stable test IDs to deeper panel workflows: notes, handouts, character sheets, token library, initiative, audio boards, and canvas toolbar controls.
-4. Add focused canvas automation for token placement, fog, walls, drawings, and undo/redo.
-5. Add a small axe-core pass for dashboard, setup, workspace, and settings dialogs.
-6. Consider a deterministic visual mode before adding screenshot snapshots for dashboard/workspace/canvas.
+1. Add deterministic pointer helpers for token drag, wall editing, room editing, drawings, and fog brush strokes.
+2. Expand accessibility checks beyond serious/critical baseline once existing UI contrast and labeling debt is intentionally budgeted.
+3. Consider a deterministic visual mode before adding screenshot snapshots for dashboard/workspace/canvas.

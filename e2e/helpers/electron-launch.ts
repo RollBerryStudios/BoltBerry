@@ -21,7 +21,7 @@
 
 import { _electron as electron, type ElectronApplication, type Page } from '@playwright/test'
 import { resolve } from 'path'
-import { mkdirSync, rmSync } from 'fs'
+import { existsSync, mkdirSync, rmSync } from 'fs'
 import { tmpdir } from 'os'
 import { randomBytes } from 'crypto'
 
@@ -51,6 +51,12 @@ export interface LaunchOptions {
    * Extra Electron app arguments forwarded as-is.
    */
   extraArgs?: string[]
+
+  /**
+   * Remove the userData directory when close() is called.
+   * Default: true for launchApp(), false for launchAppWithUserDataDir().
+   */
+  cleanupUserDataDir?: boolean
 }
 
 // ─── Factory ──────────────────────────────────────────────────────────────────
@@ -62,11 +68,26 @@ export interface LaunchOptions {
  * rendered the top-level App component (indicated by the root element).
  */
 export async function launchApp(options: LaunchOptions = {}): Promise<LaunchResult> {
-  const { skipSetupWizard = true, extraArgs = [] } = options
-
-  // Create a unique temporary directory for this test run
   const userDataDir = resolve(tmpdir(), `boltberry-e2e-${randomBytes(6).toString('hex')}`)
   mkdirSync(userDataDir, { recursive: true })
+  return launchAppWithUserDataDir(userDataDir, {
+    ...options,
+    cleanupUserDataDir: options.cleanupUserDataDir ?? true,
+  })
+}
+
+/**
+ * Launch BoltBerry against an explicit userData directory.
+ *
+ * Use this for restart/persistence tests: close the returned app without
+ * cleanup, then call this helper again with the same directory.
+ */
+export async function launchAppWithUserDataDir(
+  userDataDir: string,
+  options: LaunchOptions = {},
+): Promise<LaunchResult> {
+  const { skipSetupWizard = true, extraArgs = [], cleanupUserDataDir = false } = options
+  if (!existsSync(userDataDir)) mkdirSync(userDataDir, { recursive: true })
 
   const args: string[] = [
     APP_ROOT,
@@ -112,10 +133,29 @@ export async function launchApp(options: LaunchOptions = {}): Promise<LaunchResu
 
   const close = async () => {
     await app.close().catch(() => { /* already closed */ })
-    rmSync(userDataDir, { recursive: true, force: true })
+    if (cleanupUserDataDir) {
+      rmSync(userDataDir, { recursive: true, force: true })
+    }
   }
 
   return { app, dmWindow, userDataDir, close }
+}
+
+/**
+ * Close one Electron app instance and reopen BoltBerry with the same
+ * userData directory. Cleanup is deliberately left to the caller's final
+ * close/remove step.
+ */
+export async function relaunchApp(
+  current: Pick<LaunchResult, 'app' | 'userDataDir'>,
+  options: LaunchOptions = {},
+): Promise<LaunchResult> {
+  const userDataDir = current.userDataDir
+  await current.app.close().catch(() => { /* already closed */ })
+  return launchAppWithUserDataDir(userDataDir, {
+    ...options,
+    cleanupUserDataDir: options.cleanupUserDataDir ?? false,
+  })
 }
 
 // ─── Convenience selectors ────────────────────────────────────────────────────
