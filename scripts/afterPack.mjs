@@ -11,12 +11,48 @@
 //   npx @electron/fuses read --app release/<platform>-unpacked/<binary>
 import { flipFuses, FuseVersion, FuseV1Options } from '@electron/fuses'
 import { join } from 'node:path'
-import { existsSync } from 'node:fs'
+import { existsSync, readdirSync, statSync } from 'node:fs'
 
 const ELECTRON_BINARIES = {
-  darwin: (productName) => `${productName}.app/Contents/MacOS/${productName}`,
-  win32: (productName) => `${productName}.exe`,
-  linux: (productName) => productName,
+  darwin: (productName) => [`${productName}.app/Contents/MacOS/${productName}`],
+  win32: (productName) => [`${productName}.exe`],
+  linux: (productName, packager) => {
+    const names = [
+      productName,
+      packager.appInfo.productName,
+      packager.appInfo.sanitizedProductName,
+      packager.metadata?.name,
+    ].filter(Boolean)
+
+    return [...new Set([...names, ...names.map((name) => name.toLowerCase())])]
+  },
+}
+
+function findElectronBinary(appOutDir, candidates, platform) {
+  for (const candidate of candidates) {
+    const binary = join(appOutDir, candidate)
+    if (existsSync(binary)) {
+      return binary
+    }
+  }
+
+  if (platform !== 'linux') {
+    return null
+  }
+
+  for (const entry of readdirSync(appOutDir)) {
+    if (/^(chrome|chrome_crashpad_handler|resources|locales|swiftshader)$/i.test(entry)) {
+      continue
+    }
+
+    const binary = join(appOutDir, entry)
+    const stat = statSync(binary)
+    if (stat.isFile() && (stat.mode & 0o111) !== 0) {
+      return binary
+    }
+  }
+
+  return null
 }
 
 export default async function afterPack(context) {
@@ -29,10 +65,10 @@ export default async function afterPack(context) {
     return
   }
 
-  const electronBinary = join(appOutDir, binaryFn(productName))
+  const electronBinary = findElectronBinary(appOutDir, binaryFn(productName, packager), electronPlatformName)
 
-  if (!existsSync(electronBinary)) {
-    throw new Error(`[afterPack] Electron binary not found at ${electronBinary}`)
+  if (!electronBinary) {
+    throw new Error(`[afterPack] Electron binary not found under ${appOutDir}`)
   }
 
   console.log(`[afterPack] Flipping fuses on ${electronBinary}`)

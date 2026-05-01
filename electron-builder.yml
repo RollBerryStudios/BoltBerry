@@ -116,6 +116,6 @@ linux:
 # ─── Auto-Updater (GitHub Releases) ──────────────────────────────────────────
 publish:
   provider: github
-  owner: RollBerry-Studios
+  owner: RollBerryStudios
   repo: BoltBerry
   releaseType: release
