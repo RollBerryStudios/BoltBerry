@@ -42,6 +42,13 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'local-asset', privileges: { stream: true, supportFetchAPI: true, standard: false, secure: false } },
 ])
 
+// E2E launches provide a per-test userData path through the environment so
+// Chromium storage, Electron prefs, and the SQLite data folder stay isolated
+// even on runners that ignore app-arg-style --user-data-dir placement.
+if (process.env.ELECTRON_USER_DATA) {
+  app.setPath('userData', resolve(process.env.ELECTRON_USER_DATA))
+}
+
 // Prevent multiple instances
 const gotLock = app.requestSingleInstanceLock()
 if (!gotLock) {
