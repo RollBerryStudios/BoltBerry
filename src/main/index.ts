@@ -49,6 +49,10 @@ if (process.env.ELECTRON_USER_DATA) {
   app.setPath('userData', resolve(process.env.ELECTRON_USER_DATA))
 }
 
+if (process.env.BOLTBERRY_E2E_LANG) {
+  app.commandLine.appendSwitch('lang', process.env.BOLTBERRY_E2E_LANG)
+}
+
 // Prevent multiple instances
 const gotLock = app.requestSingleInstanceLock()
 if (!gotLock) {

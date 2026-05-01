@@ -133,6 +133,7 @@ export async function launchAppWithUserDataDir(
       // Tell Electron to use a unique app-data path so multiple parallel
       // instances (future) don't collide.
       ELECTRON_USER_DATA: userDataDir,
+      BOLTBERRY_E2E_LANG: 'de',
       BOLTBERRY_E2E_VISUAL: visualTestMode ? '1' : process.env.BOLTBERRY_E2E_VISUAL,
     },
   })
@@ -159,7 +160,7 @@ export async function launchAppWithUserDataDir(
     await dmWindow.evaluate(async ({ dir, visual }: { dir: string; visual: boolean }) => {
       localStorage.setItem('boltberry-data-folder', dir)
       localStorage.setItem('boltberry-setup-complete', '1')
-      localStorage.setItem('boltberry-language', 'de')
+      localStorage.setItem('boltberry-lang', 'de')
       localStorage.setItem('boltberry-theme', 'dark')
       localStorage.setItem('boltberry-e2e-hooks', '1')
       if (visual) localStorage.setItem('boltberry-e2e-visual', '1')
