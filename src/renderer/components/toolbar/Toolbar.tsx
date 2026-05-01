@@ -482,7 +482,7 @@ export function Toolbar() {
           Four buttons that all change *what the players see on their
           display*. Wrapped in a container with subtle background so they
           read as one logical group instead of four loose icons. */}
-      <div className="player-cluster" data-testid="player-cluster">
+      <div className="player-cluster toolbar-compact-hide" data-testid="player-cluster">
         {/* Player window open/close */}
         <button
           data-testid="button-toggle-player-window"
@@ -574,7 +574,7 @@ export function Toolbar() {
 
       {/* Compendium — full-view reference, swaps topView */}
       <button
-        className="tool-btn"
+        className="tool-btn toolbar-compact-hide"
         title={t('compendium.title')}
         aria-label={t('compendium.title')}
         onClick={() => useUIStore.getState().setTopView('compendium')}
@@ -585,7 +585,7 @@ export function Toolbar() {
       {/* Shortcuts overlay — theme, language and dock prefs live in
           the GlobalSettingsModal (Ctrl/Cmd+,, gear icon in titlebar). */}
       <button
-        className="tool-btn"
+        className="tool-btn toolbar-compact-hide"
         title={t('toolbar.shortcuts')}
         aria-label={t('toolbar.shortcuts')}
         onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: '?' }))}

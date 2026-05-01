@@ -84,6 +84,28 @@ test.describe('Menu context and accessibility contracts', () => {
     }
   })
 
+  test('sidebar map context menu becomes visible after clamping', async () => {
+    const { app, dmWindow, close } = await launchApp()
+    try {
+      await createCampaign(dmWindow, `Map Menu ${Date.now()}`)
+      await importMapAndOpenCanvas(dmWindow, app)
+
+      const mapRow = dmWindow.locator('.sidebar-left [role="button"]').first()
+      await expect(mapRow).toBeVisible()
+      await mapRow.click({ button: 'right' })
+
+      const menu = dmWindow.locator('[data-context-menu]').first()
+      await expect(menu).toBeVisible()
+      await expect(menu.getByRole('menuitem', { name: /Umbenennen/i })).toBeVisible()
+      await expect(menu.getByRole('menuitem', { name: /Löschen/i })).toBeVisible()
+
+      await dmWindow.keyboard.press('Escape')
+      await expect(menu).toHaveCount(0)
+    } finally {
+      await close()
+    }
+  })
+
   test('sfx emoji picker supports grid keyboard selection', async () => {
     const { dmWindow, close } = await launchApp()
     try {

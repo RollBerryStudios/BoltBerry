@@ -116,6 +116,8 @@ function parseTags(raw: string | null | undefined): string[] {
 export function NotesPanel() {
   const { activeCampaignId, activeMapId } = useCampaignStore()
 
+  const panelRef = useRef<HTMLDivElement>(null)
+  const [compactLayout, setCompactLayout] = useState(false)
   const [activeTab, setActiveTab] = useState<'campaign' | 'map'>('campaign')
   const [activeCategory, setActiveCategory] = useState('Allgemein')
 
@@ -144,6 +146,16 @@ export function NotesPanel() {
   useEffect(() => { activeBucketRef.current = activeBucket }, [activeBucket])
   const selectedIdRef = useRef(selectedId)
   useEffect(() => { selectedIdRef.current = selectedId }, [selectedId])
+
+  useEffect(() => {
+    const el = panelRef.current
+    if (!el) return
+    const update = () => setCompactLayout(el.getBoundingClientRect().width < 420)
+    update()
+    const ro = new ResizeObserver(update)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
 
   // Load all notes for the campaign (+ active map) whenever either changes.
   useEffect(() => {
@@ -319,7 +331,7 @@ export function NotesPanel() {
   }
 
   return (
-    <div data-testid="panel-notes" style={{ display: 'flex', flexDirection: 'column', height: '100%', background: 'var(--bg-surface)' }}>
+    <div ref={panelRef} data-testid="panel-notes" style={{ display: 'flex', flexDirection: 'column', height: '100%', background: 'var(--bg-surface)' }}>
       {/* ── Search bar ───────────────────────────────────────────────── */}
       <div style={{
         padding: '8px 10px',
@@ -520,7 +532,7 @@ export function NotesPanel() {
       )}
 
       {/* ── Main body: list + editor ─────────────────────────────────── */}
-      {!isSearching && <div style={{ flex: 1, display: 'flex', minHeight: 0, opacity: disabled ? 0.5 : 1 }}>
+      {!isSearching && <div style={{ flex: 1, display: 'flex', flexDirection: compactLayout ? 'column' : 'row', minHeight: 0, opacity: disabled ? 0.5 : 1 }}>
         {!disabled && (
           <NoteList
             notes={notes}
@@ -528,10 +540,11 @@ export function NotesPanel() {
             onSelect={(id) => setSelectedByBucket((prev) => ({ ...prev, [activeBucket]: id }))}
             onCreate={() => createNote(activeBucket)}
             onDelete={(id) => deleteNote(activeBucket, id)}
+            compact={compactLayout}
           />
         )}
 
-        <div style={{ flex: 1, padding: 'var(--sp-3)', display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+        <div style={{ flex: 1, padding: compactLayout ? 'var(--sp-2)' : 'var(--sp-3)', display: 'flex', flexDirection: 'column', minWidth: 0, minHeight: 0 }}>
           {disabled ? (
             <div style={{
               flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -562,6 +575,9 @@ export function NotesPanel() {
                   padding: '8px 10px',
                   outline: 'none',
                   marginBottom: 'var(--sp-2)',
+                  width: '100%',
+                  minWidth: 0,
+                  boxSizing: 'border-box',
                 }}
               />
               <TagsEditor
@@ -592,6 +608,7 @@ export function NotesPanel() {
                     resize: 'none',
                     outline: 'none',
                     lineHeight: 1.6,
+                    minWidth: 0,
                   }}
                 />
               )}
@@ -611,20 +628,24 @@ function NoteList({
   onSelect,
   onCreate,
   onDelete,
+  compact,
 }: {
   notes: NoteRow[]
   selectedId: number | null
   onSelect: (id: number) => void
   onCreate: () => void
   onDelete: (id: number) => void
+  compact?: boolean
 }) {
   return (
     <div style={{
-      width: 192,
+      width: compact ? '100%' : 192,
+      maxHeight: compact ? 150 : undefined,
       flexShrink: 0,
       display: 'flex',
       flexDirection: 'column',
-      borderRight: '1px solid var(--border-subtle)',
+      borderRight: compact ? 'none' : '1px solid var(--border-subtle)',
+      borderBottom: compact ? '1px solid var(--border-subtle)' : 'none',
       background: 'var(--bg-elevated)',
     }}>
       <button

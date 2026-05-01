@@ -44,7 +44,7 @@ export function ContextMenu({ envelope, onClose }: ContextMenuProps) {
 
   // Reset highlight + clamp on every open. The layout effect below
   // re-measures and snaps the menu inside the viewport.
-  useEffect(() => {
+  useLayoutEffect(() => {
     setActiveIndex(-1)
     setOpenSubAt(null)
     setClamp(null)
