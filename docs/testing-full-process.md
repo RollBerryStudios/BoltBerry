@@ -1,6 +1,6 @@
 # BoltBerry Full Testing Process
 
-Last audited: 2026-04-30
+Last audited: 2026-05-01
 
 This document is the canonical testing process for BoltBerry. It combines a code-based feature inventory with the current Playwright E2E suite and turns that into coverage ratings, gates, and the next highest-value test backlog.
 
@@ -15,10 +15,11 @@ Latest verified local baseline from the current suite:
 | `npm run check:i18n` | passed, 732 keys |
 | `npm run check:bundle` | passed |
 | `npm run build` | passed, existing Vite warnings |
-| `npm run test:e2e` | 134 passed, 1 intentional skip |
+| `npm run test:e2e` | 141 passed, 1 intentional skip |
 | `npm run test:e2e:visual` | 4 passed |
 | `npm run test:e2e:nightly` | 2 passed |
 | `npm run test:e2e:packaged` | passed against local mac-arm64 `--dir` package when `BOLTBERRY_E2E_EXECUTABLE_PATH` is set; skips intentionally without it; Linux packaged smoke is enforced in CI |
+| `git lfs pull` + asset pointer check | passed locally; Monster token files, `resources/token-variants`, and `resources/compendium` contain no LFS pointer stubs |
 
 Primary E2E groups:
 
@@ -52,8 +53,8 @@ Primary E2E groups:
 | F06 | Grid and scene settings | Grid type, grid size, feet per unit, offsets, display style, auto-detect grid, rotation for DM/player, ambient track and volume. | Indirectly in `canvas-workflows.spec.ts`, `settings.spec.ts` | 3 | Dedicated assertions for grid controls, grid detect output, rotation sync, ambient channel behavior. | PR for canvas changes |
 | F07 | Canvas navigation and tools | Pan/zoom/fit, minimap, selection, snap, player preview, tool switching, pointer, measurement, drawing, fog, walls, rooms, tokens. | `canvas-workflows.spec.ts`, `canvas-pointer-workflows.spec.ts`, `canvas-edge-cases.spec.ts`, visual canvas baseline | 4 | Marquee selection, edit-mode vertices, complex undo/redo stacks, GM pins, player viewport mode, measurement variants. | PR for canvas changes |
 | F08 | Tokens on map | Create token, drag/update/delete, select and multi-select, copy/paste, visibility, token metadata, bulk actions, token-to-player sync. | `canvas-workflows.spec.ts`, `canvas-edge-cases.spec.ts`, `two-window-sync.spec.ts` | 4 | Bulk visibility/delete, token editor field-level coverage, status markers, large token counts. | PR |
-| F09 | Fog of war | Cover/reveal with rectangle, polygon, brush, cover brush, undo/redo, reset/delta sync to player. | `canvas-workflows.spec.ts`, `canvas-edge-cases.spec.ts`, `player-window.spec.ts`, `two-window-sync.spec.ts` | 4 | Brush precision, polygon edit failures, undo/redo across map switches and reloads. | PR |
-| F10 | Walls, doors, rooms | Draw walls and doors, create rooms, edit visibility/details, delete room data, sync blocking geometry to player. | `canvas-workflows.spec.ts`, `canvas-edge-cases.spec.ts`, `two-window-sync.spec.ts` | 3 | Door toggles, room panel details, room notes/visibility sync, wall editing and deletion variants. | PR |
+| F09 | Fog of war | Cover/reveal with rectangle, polygon, brush, cover brush, room fill/clear actions, undo/redo, reset/delta sync to player. | `canvas-workflows.spec.ts`, `canvas-edge-cases.spec.ts`, `player-window.spec.ts`, `two-window-sync.spec.ts` | 4 | Brush precision, polygon edit failures, undo/redo across map switches and reloads. | PR |
+| F10 | Walls, doors, rooms | Draw walls and doors, create rooms, fill/clear room fog, edit visibility/details, delete room data, sync blocking geometry to player. | `canvas-workflows.spec.ts`, `canvas-edge-cases.spec.ts`, `two-window-sync.spec.ts` | 4 | Door toggles, deeper room panel details, room notes/visibility sync, wall editing and deletion variants. | PR |
 | F11 | Drawings and annotations | Freehand, rectangle, circle, text, erase, persist drawings, player broadcast. | `canvas-workflows.spec.ts`, `two-window-sync.spec.ts` | 3 | Text editing, erase precision, drawing style controls, replay after reload. | PR |
 | F12 | Player window and sync | Open/close/reuse player window, sync map/fog/tokens/blackout/atmosphere/pointer/viewport/handout/overlay/initiative/weather/measurement/drawings/walls, report player size. | `player-window.spec.ts`, `two-window-sync.spec.ts`, `player-render-workflows.spec.ts`, visual player baseline, `demo-production-session.spec.ts` | 5 | Pixel-level visual assertions for complex player scenes. | PR and release |
 | F13 | Notes panel | Create, edit, search/filter, tag, delete, persist notes, map/campaign note contexts. | `deep-panel-workflows.spec.ts`, `panel-depth.spec.ts` | 4 | Tag/category combinations, markdown/body formatting, validation and map-scoped notes. | PR |
@@ -66,14 +67,14 @@ Primary E2E groups:
 | F20 | Professional SFX board | Boards, SFX slots, audio/icon import, emoji/icon picker, map-context hotkeys, loop, volume, preview, trigger, clear slot. | `sfx-board-workflows.spec.ts`, top-level tab coverage | 4 | Icon upload, multi-board switching, and preview stop behavior. | PR for SFX changes |
 | F21 | Bestiary and wiki | Monsters/items/spells tabs, search/filter/detail, user monster/item/spell CRUD, duplicate/edit/export/import, clone to NPC/token, spawn/send actions. | `reference-workflows.spec.ts`, top-level reachability, indirect token/template coverage | 4 | Import/export, context menu duplicate/edit/delete, NPC clone, token variants, spawn/send actions. | PR for bestiary changes |
 | F22 | Compendium and PDFs | Import/open PDFs, SRD language matching, PDF viewer, folder access, global PDF text search, jump to page. | `reference-workflows.spec.ts`, top-level reachability and import cancellation in existing workflows | 4 | Language filter switching, corrupt PDF handling, send/stop-to-player render assertions. | PR for compendium changes |
-| F23 | Native menu and accelerators | File/Edit/View/Session/Help actions, shortcuts, theme/language, player/session controls, devtools/fullscreen. | `menu-actions.spec.ts`, `menu-accelerators.spec.ts`, `keyboard-shortcuts.spec.ts` | 4 | OS-native visual menu traversal and remaining session/view item assertions. | PR |
+| F23 | Native menu and accelerators | File/Edit/View/Session/Help actions, shortcuts, theme/language, player/session controls, devtools/fullscreen, context-sensitive enablement. | `menu-actions.spec.ts`, `menu-accelerators.spec.ts`, `keyboard-shortcuts.spec.ts`, `menu-context-a11y.spec.ts` | 4 | OS-native visual menu traversal and remaining session/view item assertions. | PR |
 | F24 | Settings | Storage folder validation, appearance theme, language, profile, file import/export, about, dry-run and destructive asset cleanup. | `settings.spec.ts`, `persistence.spec.ts`, `top-level-actions.spec.ts` | 5 | Profile-field validation and settings file import/export depth. | PR |
 | F25 | File import/export and data safety | Campaign export/import, quick backup, asset import validation, symlink/path traversal protection, local asset protocol, database persistence. | `file-workflows.spec.ts`, `export-import.spec.ts`, `fault-recovery.spec.ts`, `ipc-bridge.spec.ts` | 4 | Disk-full simulation, corrupt DB migration, oversized asset warning path, more malicious file variants. | PR and release |
 | F26 | Accessibility and keyboard | Axe serious/critical checks, focus movement, keyboard shortcuts, panel keyboard access. | `accessibility.spec.ts`, `accessibility-keyboard.spec.ts`, `accessibility-panels.spec.ts` | 3 | Full keyboard-only session flow, screen reader contracts, moderate axe issue budget, modal focus traps. | PR |
-| F27 | Visual regression | Dashboard, campaign workspace, DM canvas, player window screenshots. | `core-surfaces.visual.spec.ts` | 3 | Light theme, settings/modals, panel-heavy states, responsive sizes, per-OS baseline policy. | UI PR and release |
+| F27 | Visual regression | Dashboard, campaign workspace, DM canvas, player window screenshots, manual screenshot sweeps for dense panels and responsive menu states. | `core-surfaces.visual.spec.ts`, manual UI reports under `release/manual-ui-layout-*` | 4 | Light theme, settings/modals, per-OS baseline policy, broader localized screenshot sweep. | UI PR and release |
 | F28 | Performance and stability | Launch/runtime smoke, large data stress, panel depth, many maps/notes/tracks, no obvious UI lockups. | `performance-smoke.spec.ts`, `performance-stability.spec.ts`, `large-data.stress.spec.ts` | 3 | Long soak, memory delta thresholds, export/import stress with large assets, canvas with very high object counts. | Nightly and release |
 | F29 | Localization and i18n | Translation key completeness, language switching, menu labels, UI text persistence. | `check:i18n`, `settings.spec.ts`, `menu-actions.spec.ts` | 3 | Full German/English UI screenshot sweep and text-overflow checks. | PR for text/UI |
-| F30 | Packaging and release | Electron build, bundle sanity, CI Linux packaged smoke, signed/distributed artifact readiness. | `build`, `check:bundle`, CI `packaged-smoke-linux`, `packaged-app.spec.ts` | 4 | Installer launch, signing/notarization/update channel validation, packaged smoke on every release OS. | Release |
+| F30 | Packaging and release | Electron build, bundle sanity, LFS asset validation, CI Linux packaged smoke, signed/distributed artifact readiness, GitHub Hosted Runner release builds. | `build`, `check:bundle`, CI `packaged-smoke-linux`, `packaged-app.spec.ts`, `release.yml` LFS pointer gate | 4 | Installer launch, signing/notarization/update channel validation, packaged smoke on every release OS. | Release |
 
 ## Risk-Based Test Strategy
 
@@ -119,6 +120,7 @@ Then run targeted E2E based on touched areas:
 | Visual UI work | `npm run test:e2e:visual` |
 | Performance-sensitive work | `npx playwright test e2e/regression/performance-smoke.spec.ts e2e/regression/performance-stability.spec.ts` |
 | Release/package work | `npm run test:e2e:packaged` with `BOLTBERRY_E2E_EXECUTABLE_PATH` set |
+| Token/compendium asset work | `git lfs pull` plus the `release.yml` LFS pointer gate command against `resources/token-variants` and `resources/compendium` |
 
 ### Required PR gate
 
@@ -166,6 +168,7 @@ Recommended additions:
 Release candidate must pass:
 
 ```bash
+git lfs pull
 npm test
 npm run lint
 npm run check:i18n
@@ -182,6 +185,8 @@ Then build the release artifact and run packaged smoke:
 BOLTBERRY_E2E_EXECUTABLE_PATH=/absolute/path/to/BoltBerry npm run test:e2e:packaged
 ```
 
+Before tagging, verify that the token and compendium assets are real files, not LFS pointer stubs. The GitHub Hosted Runner release workflow performs the same class of check before packaging.
+
 Manual release checks:
 
 - Fresh install launches and completes first-run setup.
@@ -192,6 +197,7 @@ Manual release checks:
 - Switch language and theme, restart, confirm persistence.
 - Export a campaign, import it into a fresh data folder, open the imported campaign.
 - Launch the packaged app from the installed location, not only from the build folder.
+- Confirm the GitHub Actions `Release` workflow for the version tag finishes on Windows, Linux, and macOS hosted runners and publishes artifacts to the GitHub Release.
 
 ## Test Authoring Rules
 

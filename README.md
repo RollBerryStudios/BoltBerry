@@ -11,7 +11,7 @@
 
 <p align="center">
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg">
-  <img alt="Version" src="https://img.shields.io/badge/version-0.20.8-blue.svg">
+  <img alt="Version" src="https://img.shields.io/badge/version-0.20.28-blue.svg">
   <img alt="Electron" src="https://img.shields.io/badge/Electron-32-47848F?logo=electron&logoColor=white">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white">
   <img alt="React" src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white">
@@ -35,6 +35,10 @@ BoltBerry ist ein **kostenloser, quelloffener Virtual Tabletop (VTT)**, der voll
 - **Mehrsprachig** – Benutzeroberfläche, Wiki-Inhalte und Spieler-Karten auf Deutsch und Englisch (DE/EN-Toggle in der Toolbar)
 
 Gebaut mit Electron, React, TypeScript und SQLite. Läuft auf macOS, Windows und Linux.
+
+### Aktueller Release-Stand
+
+Version `0.20.28` enthält die zuletzt abgeschlossenen UI-/UX-Korrekturen für Toolbar, Notizen, Charaktere, Menüs, Dropdowns und Context-Menüs sowie zusätzliche Playwright-Abdeckung für Fog-of-War-Raumaktionen, DM-/Player-Synchronisierung und responsive Layout-Randfälle.
 
 ### Features
 
@@ -76,7 +80,7 @@ Gebaut mit Electron, React, TypeScript und SQLite. Läuft auf macOS, Windows und
 
 ```bash
 git lfs install                                    # einmalig pro Account
-git clone https://github.com/RollBerry-Studios/BoltBerry.git
+git clone https://github.com/RollBerryStudios/BoltBerry.git
 cd BoltBerry
 git lfs pull                                       # holt die Token-Bilder
 npm install
@@ -105,7 +109,7 @@ npm run dist:linux     # Linux .AppImage + .deb
 > würde im Wiki dauerhaft den „Token nicht geladen"-Hinweis zeigen.
 > Der Datensatz ist nach `git lfs pull` ca. 400 MB groß.
 
-Fertige Builds liegen in `release/` und werden automatisch als [GitHub Releases](https://github.com/RollBerry-Studios/BoltBerry/releases) veröffentlicht.
+Fertige Builds liegen in `release/` und werden automatisch als [GitHub Releases](https://github.com/RollBerryStudios/BoltBerry/releases) veröffentlicht.
 
 ### Projektstruktur
 
@@ -144,7 +148,7 @@ scripts/         Deployment-Hilfsskripte (Proxmox Runner-Setup, i18n-Check)
 
 ### CI/CD & Releases
 
-Builds werden vollautomatisch per GitHub Actions erstellt. Ein neues Tag (`v*.*.*`) löst den Build für alle Plattformen aus und erstellt ein GitHub Release mit allen Installer-Dateien. Die Plattform-Builds in `release.yml` checken mit `lfs: true` aus, damit der Wiki-Datensatz (Token-WebPs) komplett im Installer landet — Forks brauchen für eigene CI-Builds eigenes LFS-Bandwidth-Budget. Proxmox-VMs können als Self-Hosted Runners eingebunden werden – Setup-Script: [`scripts/setup-proxmox-runner.sh`](scripts/setup-proxmox-runner.sh).
+Builds werden vollautomatisch per GitHub Actions erstellt. Ein neues Tag (`v*.*.*`) oder ein manueller `release.yml`-Dispatch mit Tag löst den Build für alle Plattformen auf GitHub Hosted Runners aus und erstellt ein GitHub Release mit allen Installer-Dateien. Die Plattform-Builds checken mit `lfs: true` aus und verifizieren, dass keine LFS-Pointer-Stubs in den gebündelten Token-/Kompendium-Assets landen. Forks brauchen für eigene CI-Builds eigenes LFS-Bandwidth-Budget.
 
 ### Mitwirken
 
@@ -171,6 +175,10 @@ BoltBerry is a **free, open-source, offline-first Virtual Tabletop (VTT)** for t
 - **Multilingual** — UI, Wiki content, and cards pushed to the player follow the active language (DE/EN toggle in the toolbar)
 
 Built with Electron, React, TypeScript and SQLite. Runs on macOS, Windows and Linux.
+
+### Current Release State
+
+Version `0.20.28` includes the latest UI/UX fixes for the toolbar, notes, character sheets, menus, dropdowns, and context menus, plus expanded Playwright coverage for room-based fog-of-war actions, DM/player synchronization, and responsive layout edge cases.
 
 ### Features
 
@@ -212,7 +220,7 @@ Built with Electron, React, TypeScript and SQLite. Runs on macOS, Windows and Li
 
 ```bash
 git lfs install                                    # one-time per account
-git clone https://github.com/RollBerry-Studios/BoltBerry.git
+git clone https://github.com/RollBerryStudios/BoltBerry.git
 cd BoltBerry
 git lfs pull                                       # fetches the token artwork
 npm install
@@ -241,7 +249,7 @@ npm run dist:linux     # Linux .AppImage + .deb
 > "token artwork not downloaded" hint forever. The dataset is ~400 MB
 > after `git lfs pull`.
 
-Packaged output goes to `release/`. Binaries are published automatically as [GitHub Releases](https://github.com/RollBerry-Studios/BoltBerry/releases).
+Packaged output goes to `release/`. Binaries are published automatically as [GitHub Releases](https://github.com/RollBerryStudios/BoltBerry/releases).
 
 ### Project Structure
 
@@ -280,7 +288,7 @@ scripts/         Deployment helpers (Proxmox runner setup, i18n check)
 
 ### CI/CD & Releases
 
-Builds are fully automated via GitHub Actions. Pushing a tag (`v*.*.*`) triggers platform builds and creates a GitHub Release. The platform build jobs in `release.yml` check out with `lfs: true` so the Wiki dataset (token webps) lands in every installer — forks running their own CI need their own LFS bandwidth budget. Proxmox VMs can be registered as self-hosted runners — see [`scripts/setup-proxmox-runner.sh`](scripts/setup-proxmox-runner.sh).
+Builds are fully automated via GitHub Actions. Pushing a tag (`v*.*.*`) or manually dispatching `release.yml` with a tag triggers platform builds on GitHub Hosted Runners and creates a GitHub Release. The platform build jobs check out with `lfs: true` and verify that bundled token/compendium assets are real files rather than LFS pointer stubs. Forks running their own CI need their own LFS bandwidth budget.
 
 ### Contributing
 
