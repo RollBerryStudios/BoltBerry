@@ -11,7 +11,7 @@
 
 <p align="center">
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg">
-  <img alt="Version" src="https://img.shields.io/badge/version-0.20.28-blue.svg">
+  <img alt="Version" src="https://img.shields.io/badge/version-0.20.29-blue.svg">
   <img alt="Electron" src="https://img.shields.io/badge/Electron-32-47848F?logo=electron&logoColor=white">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white">
   <img alt="React" src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white">
@@ -38,7 +38,7 @@ Gebaut mit Electron, React, TypeScript und SQLite. Läuft auf macOS, Windows und
 
 ### Aktueller Release-Stand
 
-Version `0.20.28` enthält die zuletzt abgeschlossenen UI-/UX-Korrekturen für Toolbar, Notizen, Charaktere, Menüs, Dropdowns und Context-Menüs sowie zusätzliche Playwright-Abdeckung für Fog-of-War-Raumaktionen, DM-/Player-Synchronisierung und responsive Layout-Randfälle.
+Version `0.20.29` bündelt die erweiterte Playwright-Abdeckung für die verbliebenen High-Value-Deltas: Scene/Grid-Workflows, Encounter-Lifecycle, Panel-getriebene Player-Broadcasts, Canvas-Context-Actions, dichte Charakterbogen-Export/Import-Flows, Bestiary/Wiki-Aktionen, Compendium-Broadcast/Corrupt-PDF-Pfade und SFX-Multi-Board/Icon/Preview-Verhalten.
 
 ### Features
 
@@ -178,7 +178,7 @@ Built with Electron, React, TypeScript and SQLite. Runs on macOS, Windows and Li
 
 ### Current Release State
 
-Version `0.20.28` includes the latest UI/UX fixes for the toolbar, notes, character sheets, menus, dropdowns, and context menus, plus expanded Playwright coverage for room-based fog-of-war actions, DM/player synchronization, and responsive layout edge cases.
+Version `0.20.29` packages the expanded Playwright coverage for the remaining high-value deltas: scene/grid workflows, encounter lifecycle, panel-driven player broadcasts, canvas context actions, dense character-sheet export/import flows, Bestiary/Wiki actions, Compendium broadcast/corrupt-PDF paths, and SFX multi-board/icon/preview behavior.
 
 ### Features
 
