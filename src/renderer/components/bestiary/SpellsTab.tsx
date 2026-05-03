@@ -453,6 +453,7 @@ function SpellActions({
       <button
         type="button"
         className="bb-best-action-btn bb-best-action-primary"
+        data-testid="button-bestiary-send-spell"
         onClick={handleSend}
         disabled={!playerConnected}
         title={playerConnected ? t('bestiary.sendToPlayer') : t('bestiary.sendDisabled')}

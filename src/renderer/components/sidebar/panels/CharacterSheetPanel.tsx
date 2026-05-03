@@ -472,6 +472,7 @@ function SheetEditor({ sheet, onUpdate }: {
           <button
             key={tab.id}
             role="tab"
+            data-testid={`tab-character-sheet-${tab.id}`}
             aria-selected={activeTab === tab.id}
             className={`character-sheet-tab${activeTab === tab.id ? ' active' : ''}`}
             onClick={() => selectTab(tab.id)}
@@ -875,6 +876,7 @@ export function CharacterSheetPanel() {
           </span>
           <button
             onClick={handleImport}
+            data-testid="button-import-character-sheet"
             className="btn btn-secondary btn-icon"
             style={{ fontSize: 'var(--text-xs)', width: 34, height: 34, padding: 0 }}
             title={t('characters.import')}

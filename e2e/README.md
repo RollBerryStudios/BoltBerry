@@ -66,7 +66,9 @@ e2e/
 │   ├── fault-recovery.spec.ts   # Corrupt media, path, and missing asset recovery
 │   ├── menu-accelerators.spec.ts # Menu accelerator contracts
 │   ├── menu-actions.spec.ts     # Registered Electron menu actions
+│   ├── canvas-context-actions.spec.ts # Canvas context submenu actions
 │   ├── panel-depth.spec.ts      # Deeper panel edit/delete/filter flows
+│   ├── remaining-depth-deltas.spec.ts # Character/wiki/compendium depth deltas
 │   ├── performance-smoke.spec.ts # Dashboard responsiveness with many campaigns
 │   └── performance-stability.spec.ts # Large canvas/audio/reconnect guards
 ├── critical-path/
@@ -75,9 +77,12 @@ e2e/
 │   ├── canvas-pointer-workflows.spec.ts # Pointer-driven token/wall/drawing/room flows
 │   ├── campaign-lifecycle.spec.ts # Full DM flow: create → view → export
 │   ├── deep-panel-workflows.spec.ts # Notes, handouts, sheets, audio, tokens, initiative
+│   ├── encounter-workflows.spec.ts # Encounter save/spawn/export/import lifecycle
 │   ├── file-workflows.spec.ts    # Negative file/archive cases
+│   ├── player-panel-broadcasts.spec.ts # Handout + initiative panel sync to player
 │   ├── persistence.spec.ts       # Real restart persistence
 │   ├── player-window.spec.ts      # Player window open/close/security
+│   ├── scene-grid-workflows.spec.ts # Grid settings and DM/player scene rotation
 │   ├── settings.spec.ts           # SetupWizard + data folder switching
 │   └── export-import.spec.ts      # Export → import round-trip
 ├── visual/

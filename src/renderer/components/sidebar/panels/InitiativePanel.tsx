@@ -395,6 +395,7 @@ export function InitiativePanel() {
             )}
           </div>
           <input
+            data-testid="input-initiative-roll"
             className="input"
             placeholder={t('initiative.rollPlaceholder')}
             type="number"

@@ -430,6 +430,7 @@ function ItemActions({
       <button
         type="button"
         className="bb-best-action-btn bb-best-action-primary"
+        data-testid="button-bestiary-send-item"
         onClick={handleSend}
         disabled={!playerConnected}
         title={playerConnected ? t('bestiary.sendToPlayer') : t('bestiary.sendDisabled')}

@@ -3,7 +3,7 @@ import { existsSync } from 'fs'
 import { resolve } from 'path'
 import { launchApp } from '../helpers/electron-launch'
 import { mockOpenDialog } from '../helpers/dialog-helpers'
-import { createCampaign, importMapAndOpenCanvas } from '../helpers/test-data'
+import { createCampaign, importMapAndOpenCanvas, TEST_MAPS } from '../helpers/test-data'
 
 const TEST_SFX = resolve(__dirname, '../testcontent/sfx1/08 - spell.mp3')
 
@@ -100,6 +100,80 @@ test.describe('Professional SFX board workflows', () => {
         const boards = await dmWindow.evaluate((id) => (window as any).electronAPI.audioBoards.listByCampaign(id), campaignId)
         return boards[0]?.slots?.length ?? 0
       }).toBe(0)
+    } finally {
+      await close()
+    }
+  })
+
+  test('multiple boards, icon upload, and preview stop behavior are persisted', async () => {
+    const { app, dmWindow, close } = await launchApp()
+    try {
+      expect(existsSync(TEST_SFX), `Missing SFX fixture at ${TEST_SFX}`).toBe(true)
+      expect(existsSync(TEST_MAPS.cave), `Missing icon fixture at ${TEST_MAPS.cave}`).toBe(true)
+      const campaignId = await createCampaign(dmWindow, `SFX Depth ${Date.now()}`)
+
+      await dmWindow.getByTestId('nav-workspace-sfx').click()
+      await expect(dmWindow.getByTestId('panel-sfx')).toBeVisible()
+      await dmWindow.getByTestId('button-add-sfx-board-empty').click()
+      await expect(dmWindow.getByTestId('list-item-sfx-slot')).toHaveCount(10)
+
+      await dmWindow.getByTestId('list-item-sfx-slot').first().click()
+      await dmWindow.getByTestId('input-sfx-slot-title').fill('Board One Bell')
+      await mockOpenDialog(app, [TEST_SFX])
+      await dmWindow.getByTestId('button-pick-sfx-audio').click()
+      await dmWindow.getByTestId('button-save-sfx-slot').click()
+
+      await dmWindow.getByTestId('button-add-sfx-board').click()
+      await expect.poll(async () => {
+        const boards = await dmWindow.evaluate((id) => (window as any).electronAPI.audioBoards.listByCampaign(id), campaignId)
+        return boards.length
+      }).toBe(2)
+
+      await dmWindow.getByTestId('list-item-sfx-slot').first().click()
+      await dmWindow.getByTestId('input-sfx-slot-title').fill('Board Two Icon')
+      await mockOpenDialog(app, [TEST_SFX])
+      await dmWindow.getByTestId('button-pick-sfx-audio').click()
+      await mockOpenDialog(app, [TEST_MAPS.cave])
+      await dmWindow.getByTestId('button-upload-sfx-icon').click()
+      await dmWindow.getByTestId('input-sfx-slot-volume').fill('0.33')
+      await dmWindow.getByTestId('button-save-sfx-slot').click()
+
+      await dmWindow.evaluate(() => {
+        ;(window as any).__sfxPreviewCalls = { play: 0, pause: 0 }
+        const NativeAudio = window.Audio
+        ;(window as any).__NativeAudioForSfxPreview = NativeAudio
+        ;(window as any).Audio = class FakePreviewAudio {
+          src: string
+          volume = 1
+          loop = false
+          onended: (() => void) | null = null
+          onerror: (() => void) | null = null
+          constructor(src: string) { this.src = src }
+          play() {
+            ;(window as any).__sfxPreviewCalls.play += 1
+            return Promise.resolve()
+          }
+          pause() {
+            ;(window as any).__sfxPreviewCalls.pause += 1
+          }
+        }
+      })
+      await dmWindow.getByTestId('button-preview-sfx-slot').click()
+      await dmWindow.getByTestId('button-preview-sfx-slot').click()
+      await expect.poll(() => dmWindow.evaluate(() => (window as any).__sfxPreviewCalls))
+        .toMatchObject({ play: 1, pause: 1 })
+
+      const boards = await dmWindow.evaluate((id) => (window as any).electronAPI.audioBoards.listByCampaign(id), campaignId)
+      expect(boards[0].slots[0]).toMatchObject({ title: 'Board One Bell' })
+      expect(boards[1].slots[0]).toMatchObject({ title: 'Board Two Icon' })
+      expect(boards[1].slots[0].iconPath).toBeTruthy()
+      expect(boards[1].slots[0].volume).toBeCloseTo(0.33, 2)
+
+      await dmWindow.getByTestId('select-sfx-board').selectOption(String(boards[0].id))
+      await expect(dmWindow.getByTestId('list-item-sfx-slot').first()).toContainText('Board One Bell')
+      await dmWindow.getByTestId('select-sfx-board').selectOption(String(boards[1].id))
+      await expect(dmWindow.getByTestId('list-item-sfx-slot').first()).toContainText('Board Two Icon')
+      await expect(dmWindow.getByTestId('list-item-sfx-slot').first().locator('img.sfx-slot-icon')).toBeVisible()
     } finally {
       await close()
     }

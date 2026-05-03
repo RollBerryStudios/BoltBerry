@@ -539,6 +539,7 @@ function MonsterActions({
         <button
           type="button"
           className="bb-best-action-btn bb-best-action-primary"
+          data-testid="button-bestiary-spawn-monster"
           onClick={handleSpawn}
           disabled={busy}
           title={t('bestiary.addToMap')}
@@ -550,6 +551,7 @@ function MonsterActions({
         <button
           type="button"
           className="bb-best-action-btn"
+          data-testid="button-bestiary-send-monster"
           onClick={handleSend}
           disabled={!playerConnected}
           title={playerConnected ? t('bestiary.sendToPlayer') : t('bestiary.sendDisabled')}
@@ -560,6 +562,7 @@ function MonsterActions({
       <button
         type="button"
         className="bb-best-action-btn"
+        data-testid="button-bestiary-set-default-token"
         onClick={() => onSetDefault(isAlreadyDefault ? null : currentFile)}
         disabled={!currentFile}
         title={
@@ -576,6 +579,7 @@ function MonsterActions({
       <button
         type="button"
         className="bb-best-action-btn"
+        data-testid="button-bestiary-clone-to-npc"
         onClick={() => setShowNpcWizard(true)}
         title={t('npcWizard.openButton')}
       >
@@ -603,4 +607,3 @@ function MonsterActions({
     </div>
   )
 }
-

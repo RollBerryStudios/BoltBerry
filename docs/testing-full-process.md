@@ -1,6 +1,6 @@
 # BoltBerry Full Testing Process
 
-Last audited: 2026-05-01
+Last audited: 2026-05-03
 
 This document is the canonical testing process for BoltBerry. It combines a code-based feature inventory with the current Playwright E2E suite and turns that into coverage ratings, gates, and the next highest-value test backlog.
 
@@ -12,12 +12,13 @@ Latest verified local baseline from the current suite:
 | --- | --- |
 | `npm test` | 269 passed |
 | `npm run lint` | 0 errors, existing warnings |
-| `npm run check:i18n` | passed, 732 keys |
+| `npm run check:i18n` | passed, 738 keys |
 | `npm run check:bundle` | passed |
 | `npm run build` | passed, existing Vite warnings |
-| `npm run test:e2e` | 141 passed, 1 intentional skip |
+| `npm run test:e2e` | 150 passed, 1 intentional packaged-app skip |
 | `npm run test:e2e:visual` | 4 passed |
 | `npm run test:e2e:nightly` | 2 passed |
+| `npx playwright test --list` | 157 tests in 41 files |
 | `npm run test:e2e:packaged` | passed against local mac-arm64 `--dir` package when `BOLTBERRY_E2E_EXECUTABLE_PATH` is set; skips intentionally without it; Linux packaged smoke is enforced in CI |
 | `git lfs pull` + asset pointer check | passed locally; Monster token files, `resources/token-variants`, and `resources/compendium` contain no LFS pointer stubs |
 
@@ -27,7 +28,7 @@ Primary E2E groups:
 | --- | --- |
 | `smoke` | app launch, setup/start screen, optional packaged app smoke |
 | `regression` | campaign CRUD, IPC bridge, menu actions, keyboard/a11y, recovery, performance smoke |
-| `critical-path` | onboarding, campaign lifecycle, map/canvas workflows, file workflows, player sync, settings, export/import |
+| `critical-path` | onboarding, campaign lifecycle, map/canvas/scene workflows, panels/player sync, settings, export/import |
 | `visual` | dashboard, campaign workspace, DM canvas, player window baselines |
 | `nightly` | larger data and longer-running stress coverage |
 
@@ -50,23 +51,23 @@ Primary E2E groups:
 | F03 | Dashboard and campaign list | Empty state, create campaign, rename, duplicate, delete confirm/cancel, reopen campaigns, recently used campaign stats, profile/settings/about/wiki/compendium entry points. | `campaigns.spec.ts`, `campaign-lifecycle.spec.ts`, `start-screen.spec.ts`, `top-level-actions.spec.ts`, visual dashboard baseline | 5 | Dashboard command palette search and edge-state sorting. | PR |
 | F04 | Campaign workspace shell | Open campaign, switch workspace tabs, return dashboard, open compendium/settings/player controls, handle empty tab states. | `campaign-lifecycle.spec.ts`, `top-level-actions.spec.ts`, `deep-panel-workflows.spec.ts`, visual campaign baseline | 4 | Per-tab empty states and tab-specific summary counters. | PR |
 | F05 | Map management | Add maps from image/PDF, rename, reorder, delete confirm/cancel, open maps, import first map, map metadata. | `map-management-actions.spec.ts`, `canvas-workflows.spec.ts`, `file-workflows.spec.ts` | 4 | Real PDF map render/import assertions, failed image decode, map reorder persistence across restart. | PR |
-| F06 | Grid and scene settings | Grid type, grid size, feet per unit, offsets, display style, auto-detect grid, rotation for DM/player, ambient track and volume. | Indirectly in `canvas-workflows.spec.ts`, `settings.spec.ts` | 3 | Dedicated assertions for grid controls, grid detect output, rotation sync, ambient channel behavior. | PR for canvas changes |
-| F07 | Canvas navigation and tools | Pan/zoom/fit, minimap, selection, snap, player preview, tool switching, pointer, measurement, drawing, fog, walls, rooms, tokens. | `canvas-workflows.spec.ts`, `canvas-pointer-workflows.spec.ts`, `canvas-edge-cases.spec.ts`, visual canvas baseline | 4 | Marquee selection, edit-mode vertices, complex undo/redo stacks, GM pins, player viewport mode, measurement variants. | PR for canvas changes |
+| F06 | Grid and scene settings | Grid type, grid size, feet per unit, offsets, display style, auto-detect grid, rotation for DM/player, ambient track and volume. | `scene-grid-workflows.spec.ts`, indirect coverage in `canvas-workflows.spec.ts`, `settings.spec.ts` | 4 | Grid auto-detect result quality, offsets, and ambient channel behavior. | PR for canvas changes |
+| F07 | Canvas navigation and tools | Pan/zoom/fit, minimap, selection, snap, player preview, tool switching, pointer, measurement, drawing, fog, walls, rooms, tokens. | `canvas-workflows.spec.ts`, `canvas-pointer-workflows.spec.ts`, `canvas-edge-cases.spec.ts`, `canvas-context-actions.spec.ts`, visual canvas baseline | 4 | Marquee selection, edit-mode vertices, complex undo/redo stacks, GM pins, player viewport mode, measurement variants. | PR for canvas changes |
 | F08 | Tokens on map | Create token, drag/update/delete, select and multi-select, copy/paste, visibility, token metadata, bulk actions, token-to-player sync. | `canvas-workflows.spec.ts`, `canvas-edge-cases.spec.ts`, `two-window-sync.spec.ts` | 4 | Bulk visibility/delete, token editor field-level coverage, status markers, large token counts. | PR |
 | F09 | Fog of war | Cover/reveal with rectangle, polygon, brush, cover brush, room fill/clear actions, undo/redo, reset/delta sync to player. | `canvas-workflows.spec.ts`, `canvas-edge-cases.spec.ts`, `player-window.spec.ts`, `two-window-sync.spec.ts` | 4 | Brush precision, polygon edit failures, undo/redo across map switches and reloads. | PR |
 | F10 | Walls, doors, rooms | Draw walls and doors, create rooms, fill/clear room fog, edit visibility/details, delete room data, sync blocking geometry to player. | `canvas-workflows.spec.ts`, `canvas-edge-cases.spec.ts`, `two-window-sync.spec.ts` | 4 | Door toggles, deeper room panel details, room notes/visibility sync, wall editing and deletion variants. | PR |
 | F11 | Drawings and annotations | Freehand, rectangle, circle, text, erase, persist drawings, player broadcast. | `canvas-workflows.spec.ts`, `two-window-sync.spec.ts` | 3 | Text editing, erase precision, drawing style controls, replay after reload. | PR |
 | F12 | Player window and sync | Open/close/reuse player window, sync map/fog/tokens/blackout/atmosphere/pointer/viewport/handout/overlay/initiative/weather/measurement/drawings/walls, report player size. | `player-window.spec.ts`, `two-window-sync.spec.ts`, `player-render-workflows.spec.ts`, visual player baseline, `demo-production-session.spec.ts` | 5 | Pixel-level visual assertions for complex player scenes. | PR and release |
 | F13 | Notes panel | Create, edit, search/filter, tag, delete, persist notes, map/campaign note contexts. | `deep-panel-workflows.spec.ts`, `panel-depth.spec.ts` | 4 | Tag/category combinations, markdown/body formatting, validation and map-scoped notes. | PR |
-| F14 | Handouts panel | Create text/image handouts, send/show/clear handout to player, delete, handle missing assets. | `deep-panel-workflows.spec.ts`, `panel-depth.spec.ts`, `player-window.spec.ts` indirectly | 3 | Image handout import, send-to-player assertion, clear/broadcast behavior, broken asset recovery. | PR for handout/player changes |
-| F15 | Characters and sheets | Create/edit/delete characters, import/export sheets, portrait/assets, party workflow, open sheet from campaign. | `deep-panel-workflows.spec.ts`, `panel-depth.spec.ts` | 3 | Field-level sheet edits, import/export roundtrip, portraits, party stats, validation. | PR |
+| F14 | Handouts panel | Create text/image handouts, send/show/clear handout to player, delete, handle missing assets. | `deep-panel-workflows.spec.ts`, `panel-depth.spec.ts`, `player-panel-broadcasts.spec.ts`, `player-window.spec.ts` | 4 | Image handout import, broken asset recovery, and markdown preview edge cases. | PR for handout/player changes |
+| F15 | Characters and sheets | Create/edit/delete characters, import/export sheets, portrait/assets, party workflow, open sheet from campaign. | `deep-panel-workflows.spec.ts`, `panel-depth.spec.ts`, `remaining-depth-deltas.spec.ts` | 4 | Portrait flow, party stats, richer field validation. | PR |
 | F16 | Token library and NPC templates | Create/edit/duplicate/delete token templates, search/filter/sort, insert on map, clone from monster/NPC. | `deep-panel-workflows.spec.ts`, `panel-depth.spec.ts` | 3 | Editor field coverage, filters/sort, bestiary clone, variants folder workflow, NPC wizard branches. | PR |
-| F17 | Initiative tracker | Add entries, reorder, advance turns, update/delete entries, sync visible initiative to player. | `deep-panel-workflows.spec.ts`, `panel-depth.spec.ts` | 3 | Reorder/update/delete, current-turn persistence, player initiative broadcast. | PR |
-| F18 | Encounters | Create/edit/delete encounters, templates, import/export, link monsters/tokens, use encounter in scene. | Mostly panel reachability in `panel-depth.spec.ts` | 2 | Full encounter CRUD, template application, monster/token integration, persistence. | PR for encounter changes |
+| F17 | Initiative tracker | Add entries, reorder, advance turns, update/delete entries, sync visible initiative to player. | `deep-panel-workflows.spec.ts`, `panel-depth.spec.ts`, `player-panel-broadcasts.spec.ts` | 4 | Drag reorder, timers/status effects, and linked-token HP edge cases. | PR |
+| F18 | Encounters | Create/edit/delete encounters, templates, import/export, link monsters/tokens, use encounter in scene. | `encounter-workflows.spec.ts`, panel reachability in `panel-depth.spec.ts` | 4 | Bestiary picker branches, larger encounter templates, and import validation variants. | PR for encounter changes |
 | F19 | Music library and ambient audio | Import tracks/folders, list/filter/delete tracks, assign map channels, preview/play, soundtrack import/export, corrupt folder handling. | `file-workflows.spec.ts`, `performance-stability.spec.ts`, `deep-panel-workflows.spec.ts` | 4 | Actual preview/play controls, soundtrack import/export, channel clearing, unsupported audio variants. | PR |
-| F20 | Professional SFX board | Boards, SFX slots, audio/icon import, emoji/icon picker, map-context hotkeys, loop, volume, preview, trigger, clear slot. | `sfx-board-workflows.spec.ts`, top-level tab coverage | 4 | Icon upload, multi-board switching, and preview stop behavior. | PR for SFX changes |
-| F21 | Bestiary and wiki | Monsters/items/spells tabs, search/filter/detail, user monster/item/spell CRUD, duplicate/edit/export/import, clone to NPC/token, spawn/send actions. | `reference-workflows.spec.ts`, top-level reachability, indirect token/template coverage | 4 | Import/export, context menu duplicate/edit/delete, NPC clone, token variants, spawn/send actions. | PR for bestiary changes |
-| F22 | Compendium and PDFs | Import/open PDFs, SRD language matching, PDF viewer, folder access, global PDF text search, jump to page. | `reference-workflows.spec.ts`, top-level reachability and import cancellation in existing workflows | 4 | Language filter switching, corrupt PDF handling, send/stop-to-player render assertions. | PR for compendium changes |
+| F20 | Professional SFX board | Boards, SFX slots, audio/icon import, emoji/icon picker, map-context hotkeys, loop, volume, preview, trigger, clear slot. | `sfx-board-workflows.spec.ts`, top-level tab coverage | 4 | Broader hotkey matrix, unsupported icon/audio variants, board rename/delete edge cases. | PR for SFX changes |
+| F21 | Bestiary and wiki | Monsters/items/spells tabs, search/filter/detail, user monster/item/spell CRUD, duplicate/edit/export/import, clone to NPC/token, spawn/send actions. | `reference-workflows.spec.ts`, `remaining-depth-deltas.spec.ts`, top-level reachability, indirect token/template coverage | 4 | NPC clone wizard branches, token variants, item/spell send variants, malformed import validation. | PR for bestiary changes |
+| F22 | Compendium and PDFs | Import/open PDFs, SRD language matching, PDF viewer, folder access, global PDF text search, jump to page. | `reference-workflows.spec.ts`, `remaining-depth-deltas.spec.ts`, top-level reachability and import cancellation in existing workflows | 4 | Language filter switching, multi-PDF sidebar persistence, malformed but partially-readable PDF variants. | PR for compendium changes |
 | F23 | Native menu and accelerators | File/Edit/View/Session/Help actions, shortcuts, theme/language, player/session controls, devtools/fullscreen, context-sensitive enablement. | `menu-actions.spec.ts`, `menu-accelerators.spec.ts`, `keyboard-shortcuts.spec.ts`, `menu-context-a11y.spec.ts` | 4 | OS-native visual menu traversal and remaining session/view item assertions. | PR |
 | F24 | Settings | Storage folder validation, appearance theme, language, profile, file import/export, about, dry-run and destructive asset cleanup. | `settings.spec.ts`, `persistence.spec.ts`, `top-level-actions.spec.ts` | 5 | Profile-field validation and settings file import/export depth. | PR |
 | F25 | File import/export and data safety | Campaign export/import, quick backup, asset import validation, symlink/path traversal protection, local asset protocol, database persistence. | `file-workflows.spec.ts`, `export-import.spec.ts`, `fault-recovery.spec.ts`, `ipc-bridge.spec.ts` | 4 | Disk-full simulation, corrupt DB migration, oversized asset warning path, more malicious file variants. | PR and release |
@@ -221,11 +222,11 @@ These are the next tests that would buy the most confidence per effort.
 
 | Priority | Test suite to add or expand | Why it matters | Suggested target |
 | --- | --- | --- | --- |
-| 1 | Canvas advanced editing suite | Canvas is the highest-risk interactive surface. | Marquee selection, edit vertices, GM pins, measurement variants, complex undo/redo, map switching. |
-| 2 | Bestiary/wiki action depth | Search/detail and user CRUD are covered; live-session action paths remain. | Import/export, clone to NPC/token, token variants, spawn/send. |
-| 3 | Compendium resilience depth | Real PDF import/view/navigation/local/global search is covered; bad-input and broadcast paths remain. | Language switch, corrupt PDF recovery, send/stop-to-player. |
-| 4 | SFX depth | Board/slot flow and map-context hotkeys are covered; secondary media controls remain. | Multi-board switching, icon upload, preview stop behavior. |
-| 5 | Settings/profile depth | Storage validation and asset cleanup are covered. | Profile-field validation and settings import/export roundtrip. |
+| 1 | Canvas advanced editing suite | Canvas remains the highest-risk interactive surface. | Marquee selection, edit vertices, GM pins, measurement circle/cone, drawing text/erase/style controls, complex undo/redo, map switching. |
+| 2 | Character-sheet validation and portraits | Dense field persistence and import/export roundtrip are now covered; media and validation remain higher-risk. | Portrait crop/import/export, invalid character JSON, numeric boundary validation, party stats. |
+| 3 | Bestiary/wiki secondary branches | Spawn/send/import/export are now covered for monsters; remaining risk is in deeper branch variants. | NPC clone wizard, token variant import/defaults, item/spell send variants, malformed wiki import validation. |
+| 4 | Compendium language and multi-PDF depth | Real PDF navigation/search, corrupt import, and send/stop broadcast are covered. | Language switch assertions, multi-PDF sidebar persistence, partially-readable malformed PDF variants. |
+| 5 | SFX secondary media and board management | Multi-board switching, icon upload, and preview stop behavior are covered. | Board rename/delete, unsupported icon/audio variants, broader hotkey matrix. |
 | 6 | Visual coverage expansion | Core baselines exist, but modal/panel/theme regressions can slip. | Light theme, settings modal, dense panels, mobile-ish narrow viewport where supported. |
 | 7 | Long soak and memory tracking | Large campaigns and sessions are likely real-user stress cases. | Nightly memory delta, 60-minute canvas/player session, large asset import/export. |
 | 8 | Localization sweep | Text overflow and missing translations affect polish. | English/German screenshots for dashboard, campaign, settings, panels. |

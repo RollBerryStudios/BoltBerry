@@ -226,6 +226,7 @@ export function ContextMenu({ envelope, onClose }: ContextMenuProps) {
                   onRun={() => runItem(item)}
                   onOpenSub={(open) => setOpenSubAt(open ? idx : (cur) => (cur === idx ? null : cur))}
                   subOpen={openSubAt === idx}
+                  onClose={onClose}
                   t={t}
                 />
               )
@@ -246,10 +247,11 @@ interface RowProps {
   onRun: () => void
   onOpenSub: (open: boolean) => void
   subOpen: boolean
+  onClose: () => void
   t: (key: string, opts?: Record<string, unknown>) => string
 }
 
-function ContextMenuRow({ item, envelope, active, enabled, onActivate, onRun, onOpenSub, subOpen, t }: RowProps) {
+function ContextMenuRow({ item, envelope, active, enabled, onActivate, onRun, onOpenSub, subOpen, onClose, t }: RowProps) {
   const hasSub = !!item.submenu && item.submenu.length > 0
   const danger = item.danger
   // Phase 11 m-33: hover-intent delay (~250 ms) before opening the
@@ -303,15 +305,15 @@ function ContextMenuRow({ item, envelope, active, enabled, onActivate, onRun, on
       )}
       {hasSub && <span style={{ color: 'var(--text-muted)' }}>▶</span>}
       {hasSub && subOpen && (
-        <ContextMenuSub items={item.submenu!} envelope={envelope} t={t} onRun={onRun} />
+        <ContextMenuSub items={item.submenu!} envelope={envelope} t={t} onClose={onClose} />
       )}
     </div>
   )
 }
 
 function ContextMenuSub({
-  items, envelope, t, onRun,
-}: { items: MenuItem[]; envelope: ContextEnvelope; t: RowProps['t']; onRun: () => void }) {
+  items, envelope, t, onClose,
+}: { items: MenuItem[]; envelope: ContextEnvelope; t: RowProps['t']; onClose: () => void }) {
   return (
     <div
       role="menu"
@@ -341,7 +343,7 @@ function ContextMenuSub({
             onClick={async (e) => {
               e.stopPropagation()
               if (!enabled) return
-              try { await it.run?.(envelope) } finally { onRun() }
+              try { await it.run?.(envelope) } finally { onClose() }
             }}
             style={{
               padding: '6px 12px',

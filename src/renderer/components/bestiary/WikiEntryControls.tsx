@@ -111,6 +111,7 @@ export function WikiEntryControls({ kind, record, onChanged }: WikiEntryControls
       <button
         type="button"
         className="bb-best-action-btn"
+        data-testid={`button-wiki-${kind}-clone`}
         onClick={handleClone}
         disabled={busy}
         title={t('bestiary.cloneHint')}
@@ -122,6 +123,7 @@ export function WikiEntryControls({ kind, record, onChanged }: WikiEntryControls
           <button
             type="button"
             className="bb-best-action-btn"
+            data-testid={`button-wiki-${kind}-edit`}
             onClick={() => setEditing(true)}
             disabled={busy}
             title={t('bestiary.editHint')}
@@ -131,6 +133,7 @@ export function WikiEntryControls({ kind, record, onChanged }: WikiEntryControls
           <button
             type="button"
             className="bb-best-action-btn"
+            data-testid={`button-wiki-${kind}-rename`}
             onClick={handleRename}
             disabled={busy}
             title={t('bestiary.renameHint')}
@@ -140,6 +143,7 @@ export function WikiEntryControls({ kind, record, onChanged }: WikiEntryControls
           <button
             type="button"
             className="bb-best-action-btn bb-best-action-danger"
+            data-testid={`button-wiki-${kind}-delete`}
             onClick={handleDelete}
             disabled={busy}
             title={t('bestiary.deleteHint')}

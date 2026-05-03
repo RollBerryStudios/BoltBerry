@@ -351,6 +351,7 @@ export function LeftSidebar() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', flexWrap: 'wrap' }}>
               <button
                 type="button"
+                data-testid="button-grid-toggle"
                 className={`btn btn-ghost ${gridType === 'square' ? 'btn-active' : ''}`}
                 style={{ fontSize: 'var(--text-xs)', padding: '3px 10px' }}
                 onClick={() => handleGridChange(gridType === 'square' ? 'none' : 'square', gridSize)}
@@ -359,6 +360,7 @@ export function LeftSidebar() {
                 {gridType === 'square' ? '⬛ AN' : '⬜ AUS'}
               </button>
               <button
+                data-testid="button-grid-detect"
                 className="btn btn-ghost"
                 style={{ fontSize: 'var(--text-xs)', padding: '3px 8px' }}
                 disabled={gridDetecting || !activeMap?.imagePath}
@@ -425,6 +427,7 @@ export function LeftSidebar() {
                   <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>px</span>
                   <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginLeft: 'var(--sp-2)' }}>·</span>
                   <input
+                    data-testid="input-grid-feet-per-unit"
                     className="input"
                     type="number"
                     min={1} max={100} step={1}
@@ -460,6 +463,7 @@ export function LeftSidebar() {
                     <button
                       key={value}
                       type="button"
+                      data-testid={value === DEFAULT_GRID_COLOR ? 'button-grid-color-white' : 'button-grid-color-black'}
                       title={label}
                       onClick={() => handleGridStylePatch({ gridColor: value })}
                       style={{
@@ -491,6 +495,7 @@ export function LeftSidebar() {
                 {([0, 90, 180, 270] as const).map((rot) => (
                   <button
                     key={rot}
+                    data-testid={`button-dm-rotation-${rot}`}
                     className={`btn btn-ghost ${rotation === rot ? 'btn-active' : ''}`}
                     style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-xs)', padding: '3px' }}
                     title={`DM-Ansicht: ${rot}°`}
@@ -510,6 +515,7 @@ export function LeftSidebar() {
                 {([0, 90, 180, 270] as const).map((rot) => (
                   <button
                     key={rot}
+                    data-testid={`button-player-rotation-${rot}`}
                     className={`btn btn-ghost ${rotationPlayer === rot ? 'btn-active' : ''}`}
                     style={{ flex: 1, justifyContent: 'center', fontSize: 'var(--text-xs)', padding: '3px' }}
                     title={`Spieler-Ansicht: ${rot}° (wird sofort synchronisiert)`}

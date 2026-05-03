@@ -476,7 +476,7 @@ export function EncounterPanel() {
   }, [selectedTemplate, difficulty, randomVariant, randomCount])
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <div data-testid="panel-encounters" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div style={{ padding: 'var(--sp-3) var(--sp-4)', borderBottom: '1px solid var(--border)' }}>
         <div className="sidebar-section-title" style={{ marginBottom: 'var(--sp-2)' }}>
           Encounter-Vorlagen ({encounters.length})
@@ -485,6 +485,7 @@ export function EncounterPanel() {
         {showNewNameInput ? (
           <div style={{ display: 'flex', gap: 4 }}>
             <input
+              data-testid="input-encounter-name"
               ref={newNameInputRef}
               value={newNameValue}
               onChange={(e) => setNewNameValue(e.target.value)}
@@ -505,6 +506,7 @@ export function EncounterPanel() {
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             <button
+              data-testid="button-add-encounter-from-bestiary"
               className="btn btn-ghost"
               style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--text-xs)' }}
               onClick={() => setShowBestiaryPicker(true)}
@@ -514,6 +516,7 @@ export function EncounterPanel() {
               ➕ Aus Bestiarium hinzufügen
             </button>
             <button
+              data-testid="button-save-current-encounter"
               className="btn btn-primary"
               style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--text-xs)' }}
               onClick={handleSave}
@@ -522,6 +525,7 @@ export function EncounterPanel() {
               💾 Aktuelle Gegner als Encounter speichern
             </button>
             <button
+              data-testid="button-import-encounter"
               className="btn btn-ghost"
               style={{ width: '100%', justifyContent: 'center', fontSize: 'var(--text-xs)' }}
               onClick={handleImportEncounter}
@@ -567,6 +571,7 @@ export function EncounterPanel() {
             return (
               <div
                 key={enc.id}
+                data-testid="list-item-encounter"
                 onClick={() => setSelectedId(enc.id)}
                 style={{
                   display: 'flex',
@@ -581,6 +586,7 @@ export function EncounterPanel() {
               >
                 {editingNameId === enc.id ? (
                   <input
+                    data-testid="input-edit-encounter-name"
                     ref={editNameInputRef}
                     value={editingNameValue}
                     onChange={(e) => setEditingNameValue(e.target.value)}
@@ -609,6 +615,7 @@ export function EncounterPanel() {
                   {count} Gegner
                 </span>
                 <button
+                  data-testid="button-spawn-encounter"
                   className="btn btn-primary"
                   style={{ fontSize: 'var(--text-xs)', padding: '2px 8px' }}
                   onClick={(e) => { e.stopPropagation(); handleSpawn(enc.id) }}
@@ -618,6 +625,7 @@ export function EncounterPanel() {
                   ⚔️ Spawn
                 </button>
                 <button
+                  data-testid="button-export-encounter"
                   className="btn btn-ghost btn-icon"
                   style={{ fontSize: 10, padding: 2 }}
                   onClick={(e) => { e.stopPropagation(); handleExportEncounter(enc) }}
@@ -627,6 +635,7 @@ export function EncounterPanel() {
                   📤
                 </button>
                 <button
+                  data-testid="button-delete-encounter"
                   className="btn btn-ghost btn-icon"
                   style={{ fontSize: 10, padding: 2, color: 'var(--danger)' }}
                   onClick={(e) => { e.stopPropagation(); handleDelete(enc.id) }}
@@ -661,6 +670,7 @@ export function EncounterPanel() {
                 <button
                   key={f.value}
                   className="btn"
+                  data-testid={`button-encounter-formation-${f.value}`}
                   style={{
                     display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2,
                     padding: '4px 6px', fontSize: 'var(--text-xs)',
@@ -692,6 +702,7 @@ export function EncounterPanel() {
                 <button
                   key={d.value}
                   className="btn"
+                  data-testid={`button-encounter-difficulty-${d.value}`}
                   style={{
                     fontSize: 'var(--text-xs)', padding: '2px 8px',
                     background: difficulty === d.value ? `${d.color}22` : undefined,

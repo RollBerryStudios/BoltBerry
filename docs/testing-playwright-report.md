@@ -17,7 +17,7 @@ npm run test:e2e:visual
 npm run test:e2e:nightly
 ```
 
-Results after the latest verified pass: 269 unit tests passed; the default E2E gate reported 141 passed and 1 intentionally skipped packaged-app smoke; 4 visual-regression tests passed; and 2 nightly stress tests passed. The local LFS asset pull was also verified so token/compendium assets are real files rather than pointer stubs before release packaging.
+Results after the latest verified pass: 269 unit tests passed; the default E2E gate reported 150 passed and 1 intentionally skipped packaged-app smoke; 4 visual-regression tests passed; and 2 nightly stress tests passed. The suite lists 157 Playwright tests in 41 files. The local LFS asset pull was also verified so token/compendium assets are real files rather than pointer stubs before release packaging.
 
 ## Follow-up Implementation Status
 
@@ -27,15 +27,15 @@ Completed the documented follow-up items from the Playwright report:
 - Restart persistence coverage now uses real Electron closes/relaunches against the same temporary `userData` directory via `launchAppWithUserDataDir()` and `relaunchApp()`.
 - New critical-path suites cover persistence, canvas workflows, and file-workflow negative cases.
 - New regression suites cover serious/critical Axe accessibility checks and native menu action dispatch.
-- Additional follow-up suites now cover deep workspace panels, real canvas pointer interactions, panel focus reachability, keyboard accessibility, menu accelerator contracts, canvas edge cases, panel destructive/filtering paths, and broader performance/stability smoke paths.
-- Recent regression coverage now includes room-based fog fill/clear behavior, DM/player synchronization visibility checks, menu/context-menu accessibility, and responsive layout edge cases for dense toolbar, notes, and character-sheet surfaces.
+- Additional follow-up suites now cover deep workspace panels, real canvas pointer interactions, panel focus reachability, keyboard accessibility, menu accelerator contracts, canvas edge cases, scene/grid controls, panel destructive/filtering paths, remaining depth deltas, and broader performance/stability smoke paths.
+- Recent regression coverage now includes room-based fog fill/clear behavior, DM/player synchronization visibility checks, menu/context-menu accessibility, canvas context submenu actions, encounter lifecycle workflows, panel-driven player broadcasts, and responsive layout edge cases for dense toolbar, notes, and character-sheet surfaces.
 - A deterministic visual-test mode is available through `launchApp({ visualTestMode: true })`, `BOLTBERRY_E2E_VISUAL=1`, and the dedicated `visual` Playwright project. It stabilizes the viewport, CSS timing, caret visibility, live regions, and seeded visual data.
 - Visual baselines now cover the empty dashboard, seeded campaign workspace, seeded DM canvas, and synchronized player view under `e2e/__screenshots__/visual/`.
 - CI now includes an optional, non-blocking macOS/Windows smoke matrix for early cross-platform signal while Linux remains the required full E2E gate.
 - CI now includes a scheduled/manual Linux nightly stress job for large canvas/audio-library scenarios, kept outside the PR gate.
 - The launch helper now supports `BOLTBERRY_APP_PATH` for alternate app roots and `BOLTBERRY_E2E_EXECUTABLE_PATH` for optional packaged executable smoke tests.
 - Fault-recovery coverage now exercises unicode/space-heavy file paths, corrupt audio imports, symlink-safe audio folder scanning, and missing referenced map assets.
-- Deeper panel and canvas selectors now use stable domain-oriented `data-testid`s for notes, handouts, character sheets, token library, initiative, audio/music, token panel, toolbar, and canvas docks.
+- Deeper panel and canvas selectors now use stable domain-oriented `data-testid`s for notes, handouts, character sheets, token library, initiative, encounters, scene/grid controls, audio/music, token panel, toolbar, and canvas docks.
 - Right sidebar dock controls now expose stable IDs for focus and panel reachability checks.
 - Minimal product fixes were made where tests exposed real behavior issues: fog redo now reapplies the redone operation, the UI theme store initializes from persisted `localStorage.theme`, settings folder buttons have distinct test IDs, and two low-contrast setup texts were raised to the existing secondary text color.
 
@@ -150,19 +150,19 @@ Some E2E files were already modified in the working tree before this pass; those
 
 - Smoke suites verify the app starts, the dashboard renders, the preload bridge exists, and fatal renderer errors are absent.
 - Regression suites cover campaign CRUD, validation, delete confirmations, duplicate behavior, IPC bridge behavior, and keyboard shortcuts.
-- Critical-path suites cover first-run onboarding, export/import, campaign lifecycle, map management with real assets, player window lifecycle/security, top-level navigation, and two-window sync.
+- Critical-path suites cover first-run onboarding, export/import, campaign lifecycle, map management with real assets, scene/grid controls, encounter lifecycle, player window lifecycle/security, panel-driven broadcasts, top-level navigation, and two-window sync.
 - Persistence suite covers campaign create/rename/delete, map import, and settings across real Electron restarts with one shared temporary profile.
 - Canvas workflow suite covers map open, canvas/tool visibility, token create/delete with DB checks, fog cover state, fog undo/redo, and return to campaign map listing.
 - Canvas pointer workflow suite covers real pointer-driven token drag persistence plus wall, freehand drawing, and room creation through the canvas tools.
 - Canvas edge-case suite covers editing/deleting seeded wall/room/drawing records through canvas action paths, room fog fill/clear, fog brush reveal/cover variants, layer visibility toggles, multi-select controls, zoom, pan, and fit controls.
-- Deep panel workflow suite covers notes, handouts, character sheets, audio folder import/track assignment, token-library insertion, and initiative entries with DB assertions.
+- Deep panel workflow suite covers notes, handouts, character sheets, audio folder import/track assignment, token-library insertion, and initiative entries with DB assertions. Remaining-depth regression coverage adds dense character sheet export/import, bestiary spawn/broadcast/export/delete/import, compendium send/stop and corrupt-PDF recovery, plus SFX multi-board/icon/preview-stop behavior.
 - File workflow suite covers invalid image import, missing import paths, export cancel, ZIP without `campaign.json`, and ZIP with invalid JSON.
 - Accessibility suite uses `axe-core` injection in the Electron renderer. `@axe-core/playwright` is installed, but its `AxeBuilder` cannot create a normal browser page in this Electron context, so the test injects `axe-core` directly and fails only `serious`/`critical` violations.
 - Accessibility panel suite covers keyboard-focusable entry points for workspace panels, canvas toolbar, canvas area, and right sidebar tabs.
 - Accessibility keyboard suite covers keyboard entry/cancel/focus return for dashboard create flows, settings modal keyboard access, toolbar arrow movement, labelled icon controls, canvas focus, and shortcut overlay dismissal.
 - Fault-recovery suite covers unicode/space-heavy map import and campaign export paths, corrupt audio files, unsupported files and symlinked folders during audio folder scans, and missing referenced map assets.
 - Menu actions suite invokes registered Electron menu items through `Menu.getApplicationMenu()` and verifies the renderer flows they dispatch. Menu accelerator suite verifies accelerator registration and renderer keyboard accelerator behavior.
-- Menu/context regression coverage exercises context-sensitive native menu enablement, command-palette filtering, Wiki/context menu keyboard semantics, SFX emoji picker behavior, canvas layer popups, and clamped map context menus.
+- Menu/context regression coverage exercises context-sensitive native menu enablement, command-palette filtering, Wiki/context menu keyboard semantics, SFX emoji picker behavior, canvas layer popups, canvas context submenu actions, and clamped map context menus.
 - Panel-depth regression suite covers note search/edit/delete, handout and character-sheet destructive cancel/confirm paths, audio empty-folder/filter/assignment/delete paths, and token-template filter/duplicate/delete paths.
 - Performance smoke/stability suites create many campaigns, large token rosters, large audio libraries, repeat player reconnects, and check renderer memory where Chromium exposes heap metrics.
 - Visual suite captures deterministic screenshot baselines for the empty dashboard, seeded workspace, seeded DM canvas, and synchronized player view.
@@ -181,7 +181,7 @@ Some E2E files were already modified in the working tree before this pass; those
 ## Remaining Gaps
 
 - Canvas pointer and edge coverage now includes token drag, wall/drawing/room creation, seeded entity update/delete paths, room fog fill/clear, brush-size reveal/cover variants, multi-select controls, layer toggles, and zoom/pan/fit checks. Remaining canvas gaps are full pointer-driven edit-mode geometry manipulation, marquee selection with real pointer drag, and broader pixel assertions beyond the current core visual baselines.
-- Deep panels now have happy-path and selected destructive/filtering coverage for notes, handouts, character sheets, token library, initiative, and audio. Remaining gaps are richer editor states, bulk operations, malformed media/library edge cases, and exhaustive validation rules.
+- Deep panels now have happy-path, selected destructive/filtering coverage, dense character-sheet persistence/import-export, encounter lifecycle, player handout/initiative broadcast, and SFX multi-board/icon/preview-stop coverage. Remaining gaps are portrait flows, bulk operations, malformed media/library edge cases, and exhaustive validation rules.
 - Visual regression is enabled for core surfaces in a dedicated optional project. It is not part of the default `npm run test:e2e` gate yet, and baselines are currently Linux/local-renderer oriented rather than per-OS.
 - Native menu tests invoke Electron's registered menu items directly. This avoids OS menu automation differences across macOS/Linux/Windows; visual native menu traversal remains intentionally out of scope.
 - Performance coverage is still smoke-level. It covers larger UI data sets and reconnect/memory guards, but it does not replace profiling, long-running soak tests, or very large map/library stress runs.

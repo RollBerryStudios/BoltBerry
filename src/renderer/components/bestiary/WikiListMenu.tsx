@@ -248,6 +248,7 @@ export function WikiListMenu({ kind, language, anchor, entry, onClose, onChanged
             ref={(el) => { itemRefs.current[0] = el }}
             type="button"
             className="wiki-list-menu-item"
+            data-testid={`button-wiki-menu-${kind}-clone`}
             role="menuitem"
             tabIndex={activeIndex === 0 ? 0 : -1}
             onMouseEnter={() => setActiveIndex(0)}
@@ -261,6 +262,7 @@ export function WikiListMenu({ kind, language, anchor, entry, onClose, onChanged
               ref={(el) => { itemRefs.current[1] = el }}
               type="button"
               className="wiki-list-menu-item"
+              data-testid="button-wiki-menu-monster-clone-npc"
               role="menuitem"
               tabIndex={activeIndex === 1 ? 0 : -1}
               onMouseEnter={() => setActiveIndex(1)}
@@ -274,6 +276,7 @@ export function WikiListMenu({ kind, language, anchor, entry, onClose, onChanged
             ref={(el) => { itemRefs.current[kind === 'monster' ? 2 : 1] = el }}
             type="button"
             className="wiki-list-menu-item"
+            data-testid={`button-wiki-menu-${kind}-export`}
             role="menuitem"
             tabIndex={activeIndex === (kind === 'monster' ? 2 : 1) ? 0 : -1}
             onMouseEnter={() => setActiveIndex(kind === 'monster' ? 2 : 1)}
@@ -289,6 +292,7 @@ export function WikiListMenu({ kind, language, anchor, entry, onClose, onChanged
                 ref={(el) => { itemRefs.current[kind === 'monster' ? 3 : 2] = el }}
                 type="button"
                 className="wiki-list-menu-item"
+                data-testid={`button-wiki-menu-${kind}-edit`}
                 role="menuitem"
                 tabIndex={activeIndex === (kind === 'monster' ? 3 : 2) ? 0 : -1}
                 onMouseEnter={() => setActiveIndex(kind === 'monster' ? 3 : 2)}
@@ -301,6 +305,7 @@ export function WikiListMenu({ kind, language, anchor, entry, onClose, onChanged
                 ref={(el) => { itemRefs.current[kind === 'monster' ? 4 : 3] = el }}
                 type="button"
                 className="wiki-list-menu-item wiki-list-menu-danger"
+                data-testid={`button-wiki-menu-${kind}-delete`}
                 role="menuitem"
                 tabIndex={activeIndex === (kind === 'monster' ? 4 : 3) ? 0 : -1}
                 onMouseEnter={() => setActiveIndex(kind === 'monster' ? 4 : 3)}
