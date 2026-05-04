@@ -184,7 +184,7 @@ export function ContextMenu({ envelope, onClose }: ContextMenuProps) {
         minWidth: 220,
         maxWidth: 360,
         maxHeight: 'calc(100vh - 16px)',
-        overflowY: 'auto',
+        overflow: 'visible',
         boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
         zIndex: 9999,
         pointerEvents: 'all',
@@ -314,13 +314,36 @@ function ContextMenuRow({ item, envelope, active, enabled, onActivate, onRun, on
 function ContextMenuSub({
   items, envelope, t, onClose,
 }: { items: MenuItem[]; envelope: ContextEnvelope; t: RowProps['t']; onClose: () => void }) {
+  const subRef = useRef<HTMLDivElement>(null)
+  const [position, setPosition] = useState<{ left: string; right?: string; top: number }>(() => ({
+    left: '100%',
+    top: 0,
+  }))
+
+  useLayoutEffect(() => {
+    const el = subRef.current
+    const parent = el?.parentElement
+    if (!el || !parent) return
+    const parentRect = parent.getBoundingClientRect()
+    const subRect = el.getBoundingClientRect()
+    const PAD = 8
+    const opensRight = parentRect.right + subRect.width + 2 <= window.innerWidth - PAD
+    const maxTop = Math.max(PAD, window.innerHeight - subRect.height - PAD)
+    const top = Math.max(PAD - parentRect.top, Math.min(0, maxTop - parentRect.top))
+    setPosition(opensRight
+      ? { left: '100%', top }
+      : { left: 'auto', right: '100%', top })
+  }, [items.length])
+
   return (
     <div
+      ref={subRef}
       role="menu"
       style={{
         position: 'absolute',
-        left: '100%',
-        top: 0,
+        left: position.left,
+        right: position.right,
+        top: position.top,
         marginLeft: 2,
         background: 'var(--bg-elevated)',
         border: '1px solid var(--border)',

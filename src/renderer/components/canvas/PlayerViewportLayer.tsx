@@ -35,6 +35,8 @@ export function PlayerViewportLayer({
   const screenCy = rect.cy * scale + offsetY
   const screenW = rect.w * scale
   const screenH = rect.h * scale
+  const mapRotation = (((map.rotation ?? 0) % 360) + 360) % 360
+  const visualRotation = mapRotation + rect.rotation
 
   // Tick length in canvas px, clamped so it stays visible whatever the
   // zoom — long enough to read at 50% zoom, not ridiculous at 200%.
@@ -51,7 +53,8 @@ export function PlayerViewportLayer({
       <Group
         x={screenCx}
         y={screenCy}
-        rotation={rect.rotation}
+        rotation={visualRotation}
+        data-testid="player-viewport-control-frame"
       >
         {/* The rect itself — dashed, semi-transparent fill so the DM can
             still read the artwork underneath. */}
@@ -106,7 +109,7 @@ export function PlayerViewportLayer({
           <Text
             x={-screenW / 2 + 6}
             y={-screenH / 2 + 6}
-            text={`Spieler · ${Math.round(rect.rotation)}°`}
+            text={`Spieler · ${Math.round(visualRotation)}°`}
             fill={strokeColor}
             fontFamily="Inter, sans-serif"
             fontSize={11}

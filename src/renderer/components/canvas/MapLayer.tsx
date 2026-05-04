@@ -452,21 +452,27 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
             const y0 = offsetY
             const imgW = natW * scale
             const imgH = natH * scale
+            const x1 = x0 + imgW
+            const y1 = y0 + imgH
 
+            ctx.save()
+            ctx.beginPath()
+            ctx.rect(x0, y0, imgW, imgH)
+            ctx.clip()
             ctx.beginPath()
 
             if (map.gridType === 'square') {
-              const cols = Math.ceil(imgW / cellPx) + 1
-              const rows = Math.ceil(imgH / cellPx) + 1
-              for (let c = 0; c <= cols; c++) {
-                const x = gridOffsetX * scale + c * cellPx + offsetX
+              const gridOffsetScreenX = gridOffsetX * scale
+              const gridOffsetScreenY = gridOffsetY * scale
+              const firstX = x0 + (((gridOffsetScreenX % cellPx) + cellPx) % cellPx)
+              const firstY = y0 + (((gridOffsetScreenY % cellPx) + cellPx) % cellPx)
+              for (let x = firstX; x <= x1 + 0.5; x += cellPx) {
                 ctx.moveTo(x, y0)
-                ctx.lineTo(x, y0 + imgH)
+                ctx.lineTo(x, y1)
               }
-              for (let r = 0; r <= rows; r++) {
-                const y = gridOffsetY * scale + r * cellPx + offsetY
+              for (let y = firstY; y <= y1 + 0.5; y += cellPx) {
                 ctx.moveTo(x0, y)
-                ctx.lineTo(x0 + imgW, y)
+                ctx.lineTo(x1, y)
               }
             } else if (map.gridType === 'hex') {
               const R = cellPx / 2
@@ -500,6 +506,7 @@ export function MapLayer({ map, stageRef, canvasSize, gridOffsetX, gridOffsetY }
             raw._context.lineWidth = scaledLineWidth
             raw._context.stroke()
             raw._context.restore()
+            ctx.restore()
           }}
         />
       )}

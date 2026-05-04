@@ -1668,6 +1668,15 @@ textarea.input {
   background: var(--accent-blue-dim);
   color: var(--accent-blue-light);
 }
+.floating-utility-btn-combat.active {
+  background: #ef4444;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+}
+.floating-utility-btn-combat:hover {
+  color: #fff;
+  background: rgba(239, 68, 68, 0.78);
+}
 
 .floating-utility-popover {
   width: 320px;

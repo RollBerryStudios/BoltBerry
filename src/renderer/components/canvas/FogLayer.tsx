@@ -4,7 +4,6 @@ import Konva from 'konva'
 import { useFogStore } from '../../stores/fogStore'
 import { applyOpToCtxPair, type FogOperation } from '../../utils/fogUtils'
 import { useUIStore, type ActiveTool } from '../../stores/uiStore'
-import { useSessionStore } from '../../stores/sessionStore'
 import { useMapTransformStore, screenToMapPure, mapToScreenPure } from '../../stores/mapTransformStore'
 import { useCampaignStore } from '../../stores/campaignStore'
 import { useTokenStore } from '../../stores/tokenStore'
@@ -242,18 +241,13 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
     saveFogToDb(mapId, explored, covered)
 
     // Broadcast rebuilt fog to player so their view stays in sync
-    // after undo/redo. PNG keeps the canvas alpha channel intact;
-    // JPEG has no alpha, so cleared fog (transparent everywhere)
-    // would encode as solid black — the player window would then
-    // render a fully opaque black overlay over the map even after
-    // the DM cleared fog. BB-013: skip the toDataURL roundtrip when
-    // no player is attached.
-    if (useSessionStore.getState().playerConnected) {
-      window.electronAPI?.sendFogReset(
-        covered.toDataURL('image/png'),
-        explored.toDataURL('image/png'),
-      )
-    }
+    // after undo/redo. The bridge safely drops this when no player
+    // window exists; sending unconditionally avoids stale local
+    // `playerConnected` state hiding live fog updates.
+    window.electronAPI?.sendFogReset(
+      covered.toDataURL('image/png'),
+      explored.toDataURL('image/png'),
+    )
   }, [mapId, refreshDisplay])
 
   // ── Push fog operation to global undo stack ────────────────────────
@@ -335,12 +329,10 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
             useFogStore.setState({ history: prevHistory, redoStack: [] })
             refreshDisplay()
             saveFogToDb(mapId, explored, covered)
-            if (useSessionStore.getState().playerConnected) {
-              window.electronAPI?.sendFogReset(
-                covered.toDataURL('image/png'),
-                explored.toDataURL('image/png'),
-              )
-            }
+            window.electronAPI?.sendFogReset(
+              covered.toDataURL('image/png'),
+              explored.toDataURL('image/png'),
+            )
           },
           redo: async () => {
             ec.clearRect(0, 0, explored.width, explored.height)
@@ -527,6 +519,10 @@ export function FogLayer({ mapId, stageRef, canvasSize, activeTool, gridSize, pl
         }
         pushFogCommand({ type: isReveal ? 'reveal' : 'cover', shape: 'circle', points: [cx, cy, r] })
         saveFogToDb(mapId, explored, covered)
+        window.electronAPI?.sendFogReset(
+          covered.toDataURL('image/png'),
+          explored.toDataURL('image/png'),
+        )
       }
       return
     }
@@ -776,14 +772,10 @@ export function flushFogSave(): void {
 }
 
 function sendFogDelta(op: FogOperation) {
-  // BB-013: skip the IPC call when no player window is attached. Earlier
-  // attempts gated on `sessionMode` and broke real-time fog updates while
-  // both windows were live — this gate is on the dedicated
-  // `playerConnected` flag (flipped by usePlayerSync only when the player
-  // actually attaches), so it's safe. The bridge would drop the message
-  // anyway, but we save the serialise + IPC roundtrip on every brush tick
-  // during prep mode.
-  if (!useSessionStore.getState().playerConnected) return
+  // Send unconditionally. The main-process bridge safely drops the IPC
+  // when no player window exists, while relying on renderer-local
+  // `playerConnected` can leave a real player window without fog when
+  // the connection flag is stale during startup / monitor handoff.
   window.electronAPI?.sendFogDelta({
     type: op.type,
     shape: op.shape,

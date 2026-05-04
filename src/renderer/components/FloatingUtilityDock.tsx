@@ -4,6 +4,7 @@ import { useUIStore, type FloatingPanel } from '../stores/uiStore'
 import { AudioFloatingPanel } from './sidebar/panels/AudioFloatingPanel'
 import { OverlayPanel } from './sidebar/panels/OverlayPanel'
 import { DiceRoller } from './sidebar/panels/DiceRoller'
+import { useAudioStore } from '../stores/audioStore'
 
 interface DockItem {
   id: FloatingPanel
@@ -28,6 +29,11 @@ export function FloatingUtilityDock() {
   const floatingPanel = useUIStore((s) => s.floatingPanel)
   const setFloatingPanel = useUIStore((s) => s.setFloatingPanel)
   const toggleFloatingPanel = useUIStore((s) => s.toggleFloatingPanel)
+  const rightSidebarOpen = useUIStore((s) => s.rightSidebarOpen)
+  const rightSidebarWidth = useUIStore((s) => s.rightSidebarWidth)
+  const combatActive = useAudioStore((s) => s.combatActive)
+  const activateCombat = useAudioStore((s) => s.activateCombat)
+  const deactivateCombat = useAudioStore((s) => s.deactivateCombat)
   const popoverRef = useRef<HTMLDivElement>(null)
 
   // ESC closes the open popover.
@@ -44,9 +50,15 @@ export function FloatingUtilityDock() {
   }, [floatingPanel, setFloatingPanel])
 
   const active = ITEMS.find((i) => i.id === floatingPanel)
+  const rightOffset = rightSidebarOpen ? rightSidebarWidth + 16 : 12
 
   return (
-    <div className="floating-utility-dock" role="toolbar" aria-label={t('sidebar.right.utilityDock')}>
+    <div
+      className="floating-utility-dock"
+      role="toolbar"
+      aria-label={t('sidebar.right.utilityDock')}
+      style={{ right: rightOffset }}
+    >
       {active && (
         <div
           ref={popoverRef}
@@ -71,7 +83,18 @@ export function FloatingUtilityDock() {
         </div>
       )}
 
-      <div className="floating-utility-rail">
+      <div className="floating-utility-rail" data-testid="floating-utility-rail">
+        <button
+          type="button"
+          className={`floating-utility-btn floating-utility-btn-combat${combatActive ? ' active' : ''}`}
+          data-testid="button-floating-combat"
+          onClick={() => combatActive ? deactivateCombat() : activateCombat()}
+          aria-pressed={combatActive}
+          aria-label={combatActive ? t('audio.endCombat') : t('audio.startCombat')}
+          title={combatActive ? t('audio.endCombat') : t('audio.startCombat')}
+        >
+          <span aria-hidden="true">⚔️</span>
+        </button>
         {ITEMS.map((item) => {
           const isOpen = floatingPanel === item.id
           return (

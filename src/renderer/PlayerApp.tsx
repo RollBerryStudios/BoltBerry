@@ -404,6 +404,8 @@ export default function PlayerApp() {
         data-measure-type={measure?.type ?? ''}
         data-drawing-count={drawingData.length}
         data-wall-count={walls.length}
+        data-fog-version={fogVersion}
+        data-covered-fog-ready={coveredCanvasRef.current ? 'true' : 'false'}
         style={{ position: 'relative', width: '100vw', height: '100vh' }}
       >
         <PlayerMapView
@@ -549,8 +551,8 @@ function PlayerMapView({
   // window.
   const rotatedW = isRotatedSideways ? natH : natW
   const rotatedH = isRotatedSideways ? natW : natH
-  const [exploredImg, setExploredImg] = useState<HTMLCanvasElement | null>(null)
-  const [coveredImg, setCoveredImg]   = useState<HTMLCanvasElement | null>(null)
+  const [exploredImg, setExploredImg] = useState<{ canvas: HTMLCanvasElement; version: number } | null>(null)
+  const [coveredImg, setCoveredImg]   = useState<{ canvas: HTMLCanvasElement; version: number } | null>(null)
   const pointerLayerRef = useRef<Konva.Layer>(null)
   const stageRef = useRef<Konva.Stage>(null)
 
@@ -576,7 +578,7 @@ function PlayerMapView({
 
     if (!ec && !cc) { setExploredImg(null); setCoveredImg(null); return }
 
-    setExploredImg(ec ?? null)
+    setExploredImg(ec ? { canvas: ec, version: fogVersion } : null)
 
     if (cc) {
       if (!opaqueCoveredCanvasRef.current) {
@@ -590,11 +592,16 @@ function PlayerMapView({
       const ocCtx = oc.getContext('2d')!
       ocCtx.clearRect(0, 0, oc.width, oc.height)
       ocCtx.drawImage(cc, 0, 0)
-      ocCtx.globalCompositeOperation = 'source-in'
-      ocCtx.fillStyle = '#000000'
-      ocCtx.fillRect(0, 0, oc.width, oc.height)
-      ocCtx.globalCompositeOperation = 'source-over'
-      setCoveredImg(oc)
+      const img = ocCtx.getImageData(0, 0, oc.width, oc.height)
+      for (let i = 0; i < img.data.length; i += 4) {
+        const alpha = img.data[i + 3]
+        img.data[i] = 0
+        img.data[i + 1] = 0
+        img.data[i + 2] = 0
+        img.data[i + 3] = alpha > 0 ? 255 : 0
+      }
+      ocCtx.putImageData(img, 0, 0)
+      setCoveredImg({ canvas: oc, version: fogVersion })
     } else {
       setCoveredImg(null)
     }
@@ -783,21 +790,23 @@ function PlayerMapView({
               const y0 = offY
               const imgW = natW * scale
               const imgH = natH * scale
+              const x1 = x0 + imgW
+              const y1 = y0 + imgH
 
+              ctx.save()
+              ctx.beginPath()
+              ctx.rect(x0, y0, imgW, imgH)
+              ctx.clip()
               ctx.beginPath()
 
               if (mapState.gridType === 'square') {
-                const cols = Math.ceil(imgW / cellPx) + 1
-                const rows = Math.ceil(imgH / cellPx) + 1
-                for (let c = 0; c <= cols; c++) {
-                  const x = x0 + c * cellPx
+                for (let x = x0; x <= x1 + 0.5; x += cellPx) {
                   ctx.moveTo(x, y0)
-                  ctx.lineTo(x, y0 + imgH)
+                  ctx.lineTo(x, y1)
                 }
-                for (let r = 0; r <= rows; r++) {
-                  const y = y0 + r * cellPx
+                for (let y = y0; y <= y1 + 0.5; y += cellPx) {
                   ctx.moveTo(x0, y)
-                  ctx.lineTo(x0 + imgW, y)
+                  ctx.lineTo(x1, y)
                 }
               } else if (mapState.gridType === 'hex') {
                 const R = cellPx / 2
@@ -824,6 +833,7 @@ function PlayerMapView({
               ;(ctx as any)._context.lineWidth = 0.5 * gridThickness
               ;(ctx as any)._context.stroke()
               ;(ctx as any)._context.restore()
+              ctx.restore()
             }}
           />
         </Layer>
@@ -833,7 +843,8 @@ function PlayerMapView({
       <Layer listening={false} {...(layerXform ?? {})}>
         {exploredImg && image && (
           <KonvaImage
-            image={exploredImg}
+            key={`explored-${exploredImg.version}`}
+            image={exploredImg.canvas}
             x={offX} y={offY}
             width={natW * scale}
             height={natH * scale}
@@ -846,7 +857,8 @@ function PlayerMapView({
       <Layer listening={false} {...(layerXform ?? {})}>
         {coveredImg && image && (
           <KonvaImage
-            image={coveredImg}
+            key={`covered-${coveredImg.version}`}
+            image={coveredImg.canvas}
             x={offX} y={offY}
             width={natW * scale}
             height={natH * scale}

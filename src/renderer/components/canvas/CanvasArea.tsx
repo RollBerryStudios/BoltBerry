@@ -19,7 +19,6 @@ import { InitiativeTopStrip } from './InitiativeTopStrip'
 import { ActiveToolHUD } from './ActiveToolHUD'
 import { LeftToolDock } from './LeftToolDock'
 import { SubToolStrip } from './SubToolStrip'
-import { AudioStrip } from './AudioStrip'
 import { WeatherCanvas } from './WeatherCanvas'
 import type { WeatherType } from '@shared/ipc-types'
 import { MultiSelectBar } from '../MultiSelectBar'
@@ -109,6 +108,8 @@ export function CanvasArea() {
   const scale = useMapTransformStore((s) => s.scale)
   const offsetX = useMapTransformStore((s) => s.offsetX)
   const offsetY = useMapTransformStore((s) => s.offsetY)
+  const imgW = useMapTransformStore((s) => s.imgW)
+  const imgH = useMapTransformStore((s) => s.imgH)
 
   // Close layer panel when clicking outside
   useEffect(() => {
@@ -181,6 +182,8 @@ export function CanvasArea() {
   const showMinimap = useUIStore((s) => s.showMinimap)
   const showPlayerEye = useUIStore((s) => s.showPlayerEye)
   const activeWeather = useUIStore((s) => s.activeWeather)
+  const playerViewport = useUIStore((s) => s.playerViewport)
+  const playerViewportMode = useUIStore((s) => s.playerViewportMode)
   const workMode = useSessionStore((s) => s.workMode)
   const activeMapId = useCampaignStore((s) => s.activeMapId)
   const activeMaps = useCampaignStore((s) => s.activeMaps)
@@ -609,6 +612,16 @@ export function CanvasArea() {
       className={`canvas-area${hudIdle ? ' hud-idle' : ''}`}
       data-testid="canvas-area"
       data-tool={activeTool}
+      data-player-viewport-visual-rotation={
+        playerViewportMode && activeMap && playerViewport
+          ? ((((activeMap.rotation ?? 0) + playerViewport.rotation) % 360) + 360) % 360
+          : ''
+      }
+      data-map-screen-bounds={
+        activeMap && imgW > 0 && imgH > 0
+          ? `${offsetX},${offsetY},${offsetX + imgW * scale},${offsetY + imgH * scale}`
+          : ''
+      }
       role="application"
       aria-label="Map canvas"
       // Tab-focusable so keyboard users can reach the canvas (Phase 11
@@ -786,12 +799,6 @@ export function CanvasArea() {
       {/* Contextual sub-tool strip (appears right of the rail when the
           active tool has configurable presets). */}
       <SubToolStrip />
-
-      {/* Compact audio strip (bottom-left). Always visible during play
-          (the combat-mode pill is its anchor); the play / track-meta
-          block only appears when a channel has loaded audio. Click the
-          ⋯ handle to open the full audio popover. */}
-      <AudioStrip />
 
       {/* Weather overlay — preview for the DM of what the players see.
           `activeWeather` is kept in uiStore so it persists across view

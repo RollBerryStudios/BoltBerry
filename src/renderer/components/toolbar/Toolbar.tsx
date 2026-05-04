@@ -497,6 +497,7 @@ export function Toolbar() {
 
         {/* Player Control Mode — independent framed view on the player screen */}
         <button
+          data-testid="button-toggle-player-viewport"
           className={clsx('tool-btn', playerViewportMode && 'active')}
           title={playerViewportMode
             ? t('toolbar.playerControl.on')
