@@ -11,7 +11,7 @@
 
 <p align="center">
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg">
-  <img alt="Version" src="https://img.shields.io/badge/version-0.20.29-blue.svg">
+  <img alt="Version" src="https://img.shields.io/badge/version-0.20.30-blue.svg">
   <img alt="Electron" src="https://img.shields.io/badge/Electron-32-47848F?logo=electron&logoColor=white">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white">
   <img alt="React" src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white">
@@ -38,7 +38,7 @@ Gebaut mit Electron, React, TypeScript und SQLite. Läuft auf macOS, Windows und
 
 ### Aktueller Release-Stand
 
-Version `0.20.29` bündelt die erweiterte Playwright-Abdeckung für die verbliebenen High-Value-Deltas: Scene/Grid-Workflows, Encounter-Lifecycle, Panel-getriebene Player-Broadcasts, Canvas-Context-Actions, dichte Charakterbogen-Export/Import-Flows, Bestiary/Wiki-Aktionen, Compendium-Broadcast/Corrupt-PDF-Pfade und SFX-Multi-Board/Icon/Preview-Verhalten.
+Version `0.20.30` bündelt die Player-/UI-Regressionsfixes: sichtbarer und opaker Fog of War im Spielerfenster, rotierende Player-Viewport-Kontrolle, korrekt sichtbare Kontext-Untermenüs, integrierter Combat-Button in der rechten Utility-Leiste, korrekte Content-Symbole für Charaktere/Notizen sowie geclipptes Grid ohne graue Linien außerhalb der Kartenfläche.
 
 ### Features
 
@@ -70,7 +70,7 @@ Version `0.20.29` bündelt die erweiterte Playwright-Abdeckung für die verblieb
 | **Atmosphäre** | Vollbild-Bildmodus zwischen Begegnungen |
 | **Undo/Redo** | Vollständige Undo-History für Fog-of-War-Operationen und Token-Bewegungen |
 | **Spieler-Vorschau** | DM-seitiger Player-Eye-Modus zum Prüfen der Spieler-Perspektive |
-| **Werkzeugleiste (v1 Conservative)** | Frei schwebende Left-Rail mit fünf Werkzeuggruppen, kontextbezogene Sub-Tool-Strip für aktive Tool-Optionen, kompakter Audio-Strip links unten, Novice-Beschriftungen und Auto-Hide einstellbar |
+| **Werkzeugleiste (v1 Conservative)** | Frei schwebende Left-Rail mit fünf Werkzeuggruppen, kontextbezogene Sub-Tool-Strip für aktive Tool-Optionen, rechte Utility-Leiste für Combat, Würfel, Audio und Overlays, Novice-Beschriftungen und Auto-Hide einstellbar |
 | **Befehlspalette** | Cmd/Ctrl+K für schnelle Aktionen ohne Maus |
 | **Mehrsprachig** | Vollständig bilingual (DE/EN) — UI, Wiki-Inhalte, an Spieler gesendete Karten folgen der aktiven Sprache |
 
@@ -178,7 +178,7 @@ Built with Electron, React, TypeScript and SQLite. Runs on macOS, Windows and Li
 
 ### Current Release State
 
-Version `0.20.29` packages the expanded Playwright coverage for the remaining high-value deltas: scene/grid workflows, encounter lifecycle, panel-driven player broadcasts, canvas context actions, dense character-sheet export/import flows, Bestiary/Wiki actions, Compendium broadcast/corrupt-PDF paths, and SFX multi-board/icon/preview behavior.
+Version `0.20.30` packages the player/UI regression fixes: visible opaque fog of war in the player window, rotating player viewport control, unclipped context submenus, combat integrated into the right utility rail, correct content symbols for characters/notes, and clipped grid rendering without grey lines outside the map bounds.
 
 ### Features
 
