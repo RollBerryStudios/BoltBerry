@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="BardBerry logo">
+  <defs>
+    <linearGradient id="bg" x1="104" y1="62" x2="418" y2="456" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2c3345"/>
+      <stop offset="1" stop-color="#111722"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="143" y1="106" x2="365" y2="415" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffe08a"/>
+      <stop offset=".48" stop-color="#d2a940"/>
+      <stop offset="1" stop-color="#8d6424"/>
+    </linearGradient>
+    <linearGradient id="berry" x1="172" y1="160" x2="355" y2="374" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f6607d"/>
+      <stop offset=".45" stop-color="#b82c62"/>
+      <stop offset="1" stop-color="#5b214b"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="145%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#05070c" flood-opacity=".55"/>
+    </filter>
+  </defs>
+  <rect x="32" y="32" width="448" height="448" rx="96" fill="url(#bg)"/>
+  <path d="M148 380c71 45 154 45 225 0 8-5 11-15 7-24l-93-211c-6-15-26-15-32 0l-20 47-19-47c-7-15-27-15-33 0L88 356c-4 9 0 19 8 24Z" fill="#090d14" opacity=".45"/>
+  <g filter="url(#shadow)">
+    <path d="M147 368c70 42 148 42 218 0l-96-222c-5-12-22-12-27 0Z" fill="url(#gold)"/>
+    <path d="M155 351c63 31 134 31 197 0l-82-190c-4-9-17-9-21 0Z" fill="#161b27"/>
+    <path d="M189 324c44 22 87 22 131 0l-54-127c-4-9-17-9-21 0Z" fill="url(#berry)"/>
+    <circle cx="216" cy="272" r="21" fill="#ff8aa0"/>
+    <circle cx="265" cy="293" r="25" fill="#d83f71"/>
+    <circle cx="250" cy="239" r="18" fill="#f25b84"/>
+    <circle cx="301" cy="266" r="19" fill="#a92961"/>
+    <path d="M151 350c65 39 143 39 208 0" fill="none" stroke="#f5d26c" stroke-width="18" stroke-linecap="round"/>
+    <path d="M133 158c48-27 88-19 121 24 31-43 74-51 126-24" fill="none" stroke="#f5d26c" stroke-width="26" stroke-linecap="round"/>
+    <path d="M170 170c33-8 59 3 77 34 21-33 48-44 82-34" fill="none" stroke="#111722" stroke-width="15" stroke-linecap="round"/>
+    <path d="M251 112c34 18 53 44 57 78" fill="none" stroke="#65c47b" stroke-width="18" stroke-linecap="round"/>
+    <path d="M288 115c36 2 62 18 78 47-36 4-64-12-78-47Z" fill="#65c47b"/>
+    <path d="M244 123c-8 23-6 45 4 66" fill="none" stroke="#2a8a55" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <path d="M104 111c83-61 217-61 300 0" fill="none" stroke="#ffffff" stroke-opacity=".1" stroke-width="14" stroke-linecap="round"/>
+</svg>

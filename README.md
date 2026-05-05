@@ -104,6 +104,20 @@ npm run dist:win       # Windows .exe (NSIS)
 npm run dist:linux     # Linux .AppImage + .deb
 ```
 
+### BardBerry
+
+Dieses Repository enthält zusätzlich **BardBerry**, eine eigenständige Electron-App für lokale Musik, Ambience und SFX am Spieltisch. Sie nutzt einen dreikanaligen Live-Mixer, Combat-Freeze/Restore, lokale Audio-Imports, SFX-Boards, Slot-Hotkeys und JSON-Library-Export ohne BoltBerry-Kampagne.
+
+```bash
+cd BardBerry
+npm install
+npm run dev      # Standalone-App im Dev-Modus
+npm run build    # BardBerry kompilieren
+npm run dist     # BardBerry Installer bauen
+```
+
+Details: [`BardBerry/README.md`](BardBerry/README.md)
+
 > **Hinweis:** Ohne `git lfs pull` packt `npm run dist` 130-Byte
 > Pointer-Stubs anstelle der echten WebPs in den Installer — die App
 > würde im Wiki dauerhaft den „Token nicht geladen"-Hinweis zeigen.
@@ -243,6 +257,20 @@ npm run dist:mac       # macOS .dmg
 npm run dist:win       # Windows .exe (NSIS)
 npm run dist:linux     # Linux .AppImage + .deb
 ```
+
+### BardBerry
+
+This repository also contains **BardBerry**, a standalone Electron app for local music, ambience, and SFX at the table. It ships a three-channel live mixer, combat freeze/restore, local audio imports, SFX boards, slot hotkeys, and JSON library export without requiring a BoltBerry campaign.
+
+```bash
+cd BardBerry
+npm install
+npm run dev      # Run the standalone app in dev mode
+npm run build    # Compile BardBerry
+npm run dist     # Build BardBerry installers
+```
+
+Details: [`BardBerry/README.md`](BardBerry/README.md)
 
 > **Heads up:** without `git lfs pull` the installer ships 130-byte
 > pointer stubs instead of the real webps and the Wiki shows the
