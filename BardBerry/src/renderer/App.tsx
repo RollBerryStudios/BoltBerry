@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { BardBoard, BardBoardSlot, BardLibrary, BardTrack, ChannelId } from '../preload/preload'
 import { useBardAudio, type ChannelState } from './audioEngine'
-import logoUrl from './bardberry-logo.svg'
+import logoUrl from '../../resources/logo.png'
 
 const CHANNELS: Array<{ id: ChannelId; label: string; hint: string }> = [
   { id: 'track1', label: 'Music', hint: 'main loop' },

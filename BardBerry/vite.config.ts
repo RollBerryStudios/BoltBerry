@@ -24,5 +24,8 @@ export default defineConfig({
   },
   server: {
     port: 5174,
+    fs: {
+      allow: [resolve(__dirname, 'src/renderer'), resolve(__dirname, 'resources')],
+    },
   },
 })
