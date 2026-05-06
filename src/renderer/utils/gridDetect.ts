@@ -16,7 +16,7 @@ function fft(re: Float64Array, im: Float64Array, invert: boolean): void {
     }
     j ^= bit
     if (i < j) {
-      ;[re[i], re[j]] = [re[j], re[i]]
+      [re[i], re[j]] = [re[j], re[i]]
       ;[im[i], im[j]] = [im[j], im[i]]
     }
   }
@@ -117,7 +117,7 @@ function detectHexGrid(dir: Float64Array, mag: Float64Array, width: number, heig
     for (let x = 1; x < width - 1; x++) {
       const idx = y * width + x
       if (mag[idx] < threshold) continue
-      let angle = ((dir[idx] % Math.PI) + Math.PI) % Math.PI
+      const angle = ((dir[idx] % Math.PI) + Math.PI) % Math.PI
       const bin = Math.floor(angle / piOverBins) % bins
       histogram[bin] += mag[idx]
     }

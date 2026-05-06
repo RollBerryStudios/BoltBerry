@@ -167,7 +167,7 @@ export function CompendiumView() {
       for (const [page, text] of pages) {
         const lower = text.toLowerCase()
         let from = 0
-        while (true) {
+        for (;;) {
           const idx = lower.indexOf(q, from)
           if (idx === -1) break
           const start = Math.max(0, idx - 30)

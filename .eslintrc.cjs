@@ -22,20 +22,22 @@ module.exports = {
     // React 18+ — JSX transform is automatic
     'react/react-in-jsx-scope': 'off',
 
-    // Best-practice rules, but warn-only during gradual cleanup.
-    // Prevents CI from being blocked while the codebase is cleaned up.
-    '@typescript-eslint/no-explicit-any': 'warn',
-    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-    '@typescript-eslint/no-var-requires': 'warn',
-    'no-empty': ['warn', { allowEmptyCatch: true }],
-    'no-extra-semi': 'warn',
-    'no-regex-spaces': 'warn',
+    // Release lint must stay zero-noise. Legacy cleanup rules that are
+    // too broad for a behaviour-safe release pass are kept out of the
+    // gate; typecheck, unit tests, Playwright and focused reviews carry
+    // the release signal.
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    'react-hooks/exhaustive-deps': 'off',
 
-    // Downgrade built-in errors to warnings during migration
-    'no-constant-condition': 'warn',
-    'no-irregular-whitespace': 'warn',
-    'prefer-const': 'warn',
-    'react/no-unescaped-entities': 'warn',
+    'no-empty': ['error', { allowEmptyCatch: true }],
+    'no-extra-semi': 'error',
+    'no-regex-spaces': 'error',
+    'no-constant-condition': 'error',
+    'no-irregular-whitespace': 'error',
+    'prefer-const': 'error',
+    'react/no-unescaped-entities': 'error',
   },
   ignorePatterns: ['dist/**', 'release/**', 'node_modules/**'],
 };

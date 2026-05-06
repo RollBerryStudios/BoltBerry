@@ -4,6 +4,7 @@ import { useCampaignStore } from '../../../stores/campaignStore'
 import { useEncounterStore } from '../../../stores/encounterStore'
 import { useUIStore } from '../../../stores/uiStore'
 import { useMapTransformStore } from '../../../stores/mapTransformStore'
+import { pushAction } from '../../../stores/undoStore'
 import { EmptyState } from '../../EmptyState'
 import type { RoomVisibility, RoomRecord } from '@shared/ipc-types'
 
@@ -45,7 +46,6 @@ export function RoomPanel() {
     try {
       await window.electronAPI.rooms.delete(id)
       if (room) {
-        const { pushAction } = await import('../../../stores/undoStore')
         await pushAction({ type: 'room.delete', payload: { room } })
       }
     } catch (err) {

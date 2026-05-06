@@ -273,7 +273,7 @@ export function CompendiumPdfViewer({ file, initialPage, onConsumedInitialPage }
     outer: for (const [page, text] of pageTextRef.current) {
       const lower = text.toLowerCase()
       let from = 0
-      while (true) {
+      for (;;) {
         const idx = lower.indexOf(q, from)
         if (idx === -1) break
         const start = Math.max(0, idx - 30)

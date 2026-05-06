@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import i18n from '../i18n'
+import { useCampaignStore } from './campaignStore'
 
 export type SessionMode = 'session' | 'prep'
 export type WorkMode = 'prep' | 'play' | 'combat' | 'player-preview' | 'fog-edit'
@@ -18,13 +19,10 @@ export const SIDEBAR_TAB_TO_DOCK: Record<SidebarTab, SidebarDock> = {
 }
 
 /**
- * Fire a sessions row insert / close based on the mode flip. Reads the
- * active campaign from the store lazily via a dynamic import to avoid a
- * circular dep (campaignStore may import sessionStore-adjacent things).
+ * Fire a sessions row insert / close based on the mode flip.
  */
 async function logSessionTransition(next: 'session' | 'prep'): Promise<void> {
   if (typeof window === 'undefined' || !window.electronAPI) return
-  const { useCampaignStore } = await import('./campaignStore')
   const campaignId = useCampaignStore.getState().activeCampaignId
   if (!campaignId) return
   if (next === 'session') {

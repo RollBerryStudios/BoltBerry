@@ -1,17 +1,15 @@
 import { create } from 'zustand'
 import i18n from '../i18n'
 import type { WeatherType } from '@shared/ipc-types'
+import { useCampaignStore } from './campaignStore'
 // AP-3 split — these will become the canonical stores. Re-exported below
 // so consumer files can migrate incrementally without 250+ file churn.
 import { useToolStore } from './toolStore'
 import { useSessionStore } from './sessionStore'
 
-// Fire a sessions row insert / close based on the mode flip. Reads the
-// active campaign from the store lazily via a dynamic import to avoid a
-// circular dep (campaignStore may import uiStore-adjacent things).
+// Fire a sessions row insert / close based on the mode flip.
 async function logSessionTransition(next: 'session' | 'prep'): Promise<void> {
   if (typeof window === 'undefined' || !window.electronAPI) return
-  const { useCampaignStore } = await import('./campaignStore')
   const campaignId = useCampaignStore.getState().activeCampaignId
   if (!campaignId) return
   if (next === 'session') {

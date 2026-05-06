@@ -50,7 +50,7 @@ class MockAudio {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-;(global as any).Audio = MockAudio
+(global as any).Audio = MockAudio
 
 // ─── requestAnimationFrame / cancelAnimationFrame mocks ──────────────────────
 // audioStore's fadeTo() uses rAF; call callbacks synchronously in tests.
@@ -72,7 +72,7 @@ let rafId = 0
 // Node 16+ has globalThis.performance, but guard anyway.
 if (typeof performance === 'undefined') {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ;(global as any).performance = { now: () => Date.now() }
+  (global as any).performance = { now: () => Date.now() }
 }
 
 // ─── minimal `document.createElement('canvas')` stub ─────────────────────────
@@ -121,7 +121,7 @@ class MockCanvas {
 
 if (typeof document === 'undefined') {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ;(global as any).document = {
+  (global as any).document = {
     createElement(tag: string) {
       if (tag === 'canvas') return new MockCanvas()
       throw new Error(`document.createElement stub: '${tag}' not implemented`)

@@ -16,6 +16,7 @@ export default defineConfig({
     sourcemap: false,
     outDir: resolve(__dirname, 'dist/renderer'),
     emptyOutDir: true,
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'src/renderer/index.html'),
@@ -51,4 +52,3 @@ export default defineConfig({
     port: 5173,
   },
 })
-

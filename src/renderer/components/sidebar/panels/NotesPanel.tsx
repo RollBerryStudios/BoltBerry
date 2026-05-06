@@ -489,7 +489,7 @@ export function NotesPanel() {
         <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
           {searchResults.length === 0 ? (
             <div style={{ padding: 16, fontSize: 11, color: 'var(--text-muted)', textAlign: 'center' }}>
-              Keine Treffer für „{searchQuery}"
+              Keine Treffer für „{searchQuery}“
             </div>
           ) : (
             searchResults.map((hit) => {

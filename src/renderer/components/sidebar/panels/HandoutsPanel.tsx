@@ -313,7 +313,7 @@ export function HandoutsPanel() {
                 <div dangerouslySetInnerHTML={{ __html: renderMarkdown(addingText) }} />
               ) : (
                 <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>
-                  Nichts zu Vorschau — wechsle zu žSchreiben" und gib Text ein.
+                  Nichts zu Vorschau — wechsle zu „Schreiben“ und gib Text ein.
                 </span>
               )}
             </div>

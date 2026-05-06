@@ -833,7 +833,7 @@ function PlayerMapView({
                 }
               }
 
-              ;(ctx as any)._context.save()
+              (ctx as any)._context.save()
               ;(ctx as any)._context.strokeStyle = gridColor
               // Multiplier semantics match the DM layer: 1 → 0.5 px
               // auto-scaled hairline; the DM's slider tops out at ~3.

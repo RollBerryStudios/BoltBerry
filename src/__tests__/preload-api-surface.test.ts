@@ -57,7 +57,7 @@ function extractApiMethods(src: string, objectName: string): Set<string> {
     : src.slice(startIdx + startToken.length)
 
   // Match property keys at exactly 2-space indent: `  methodName:`
-  const keyRe = /^  ([a-zA-Z_$][a-zA-Z0-9_$]*):/gm
+  const keyRe = /^ {2}([a-zA-Z_$][a-zA-Z0-9_$]*):/gm
   let m: RegExpExecArray | null
   while ((m = keyRe.exec(body)) !== null) {
     methods.add(m[1])

@@ -11,7 +11,6 @@ directories:
 
 files:
   - dist/**/*
-  - node_modules/**/*
   - package.json
   - "!node_modules/**/{CHANGELOG.md,README.md,README,readme.md,readme}"
   - "!node_modules/**/{test,__tests__,tests,powered-test,example,examples}"
@@ -83,11 +82,10 @@ mac:
   category: public.app-category.entertainment
   hardenedRuntime: true
   gatekeeperAssess: false
-  # Skip code signing on CI — no valid Developer ID identity is present,
-  # and ad-hoc signing hits EMFILE with ~13k token webps. Codesigning
-  # is done locally before distribution.
-  identity: null
-  notarize: false
+  # Local QA packs are ad-hoc signed so arm64 builds are structurally
+  # signed without requiring a Developer ID certificate. Distribution
+  # builds can override this with a Developer ID identity in CI/local env.
+  identity: "-"
   entitlements: build/entitlements.mac.plist
   entitlementsInherit: build/entitlements.mac.plist
 

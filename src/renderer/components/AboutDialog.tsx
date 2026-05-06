@@ -124,7 +124,7 @@ export function AboutDialog({ onClose }: { onClose: () => void }) {
               .
             </p>
             <p className="bb-about-text" style={{ fontStyle: 'italic' }}>
-              "{t('about.tokenArtQuote')}"
+              &ldquo;{t('about.tokenArtQuote')}&rdquo;
             </p>
           </section>
 
