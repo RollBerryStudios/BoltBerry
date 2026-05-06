@@ -3,6 +3,7 @@ import { useSessionStore } from '../stores/sessionStore'
 import { useCampaignStore } from '../stores/campaignStore'
 import { useMapTransformStore } from '../stores/mapTransformStore'
 import { POINTER_PING_EVENT, type PointerPingDetail } from '../components/canvas/PointerLayer'
+import { NOTE_CATEGORIES } from '../notes/categories'
 import type { MenuResolver, MenuSection } from './types'
 import { registerMenu } from './registry'
 
@@ -95,6 +96,21 @@ const canvasResolver: MenuResolver = (env) => {
               }),
             )
           },
+        },
+        {
+          id: 'add-note-marker',
+          labelKey: 'contextMenu.canvas.addNoteMarker',
+          icon: '📝',
+          submenu: NOTE_CATEGORIES.map((category) => ({
+            id: `add-note-marker-${category.key}`,
+            labelKey: `notes.categories.${category.key}`,
+            icon: category.icon,
+            run: () => {
+              window.dispatchEvent(new CustomEvent('note-marker:create', {
+                detail: { x: env.pos.x, y: env.pos.y, category: category.id },
+              }))
+            },
+          })),
         },
       ],
     },

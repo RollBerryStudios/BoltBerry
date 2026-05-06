@@ -406,7 +406,7 @@ interface CampaignExport {
     exploredBitmap: string | null
     initiative: Array<{ combatantName: string; roll: number; currentTurn: number; tokenId: number | null; effectTimers: string | null; sortOrder: number }>
     notes: string
-    pinNotes: Array<{ title: string; content: string; pinX: number; pinY: number; category: string }>
+    pinNotes: Array<{ title: string; content: string; pinX: number; pinY: number; category: string; icon?: string | null }>
     rooms: Array<{
       name: string; description: string; polygon: string; visibility: string
       encounterId: number | null; atmosphereHint: string | null; notes: string | null; color: string; createdAt: string
@@ -487,7 +487,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
     ? db.prepare(`SELECT map_id, content FROM notes WHERE campaign_id = ? AND map_id IN (${ph}) AND pin_x IS NULL`).all(campaignId, ...mapIds) as any[]
     : []
   const allPinNotes = mapIds.length > 0
-    ? db.prepare(`SELECT map_id, title, content, pin_x, pin_y, category FROM notes WHERE campaign_id = ? AND map_id IN (${ph}) AND pin_x IS NOT NULL`).all(campaignId, ...mapIds) as any[]
+    ? db.prepare(`SELECT map_id, title, content, pin_x, pin_y, category, icon FROM notes WHERE campaign_id = ? AND map_id IN (${ph}) AND pin_x IS NOT NULL`).all(campaignId, ...mapIds) as any[]
     : []
   const allRooms = mapIds.length > 0
     ? db.prepare(`SELECT map_id, name, description, polygon, visibility, encounter_id, atmosphere_hint, notes, color, created_at FROM rooms WHERE map_id IN (${ph})`).all(...mapIds) as any[]
@@ -679,6 +679,7 @@ function buildCampaignExport(campaignId: number, db: ReturnType<typeof getDb>): 
           pinX: pn.pin_x,
           pinY: pn.pin_y,
           category: pn.category ?? 'Allgemein',
+          icon: pn.icon ?? null,
         })),
         rooms: rooms.map((r: any) => ({
           name: r.name,
@@ -854,8 +855,8 @@ function insertCampaignData(data: CampaignExport, db: ReturnType<typeof getDb>):
 
       for (const pn of m.pinNotes ?? []) {
         db.prepare(
-          `INSERT INTO notes (campaign_id, map_id, title, content, pin_x, pin_y, category) VALUES (?, ?, ?, ?, ?, ?, ?)`
-        ).run(campaignId, mapId, pn.title, pn.content, pn.pinX, pn.pinY, pn.category ?? 'Allgemein')
+          `INSERT INTO notes (campaign_id, map_id, title, content, pin_x, pin_y, category, icon) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+        ).run(campaignId, mapId, pn.title, pn.content, pn.pinX, pn.pinY, pn.category ?? 'Allgemein', pn.icon ?? null)
       }
 
       for (const r of m.rooms ?? []) {

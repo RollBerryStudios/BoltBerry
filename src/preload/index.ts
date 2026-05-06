@@ -355,6 +355,8 @@ export const dmApi = {
       ipcRenderer.invoke(IPC.NOTES_LIST_CATEGORY_BY_CAMPAIGN, campaignId),
     listCategoryByMap: (campaignId: number, mapId: number): Promise<NoteRecord[]> =>
       ipcRenderer.invoke(IPC.NOTES_LIST_CATEGORY_BY_MAP, campaignId, mapId),
+    listPinnedByMap: (campaignId: number, mapId: number): Promise<NoteRecord[]> =>
+      ipcRenderer.invoke(IPC.NOTES_LIST_PINNED_BY_MAP, campaignId, mapId),
     create: (patch: Partial<NoteRecord> & { campaignId: number }): Promise<NoteRecord> =>
       ipcRenderer.invoke(IPC.NOTES_CREATE, patch),
     update: (id: number, patch: Partial<NoteRecord>): Promise<void> =>

@@ -1,5 +1,5 @@
 import type React from 'react'
-import type { TokenRecord, WallRecord, GMPinRecord, RoomRecord, DrawingRecord, MapRecord } from '@shared/ipc-types'
+import type { TokenRecord, WallRecord, GMPinRecord, RoomRecord, DrawingRecord, MapRecord, NoteRecord } from '@shared/ipc-types'
 
 /**
  * Right-click target resolved by the context-menu engine. The `kind`
@@ -14,6 +14,7 @@ export type ContextTarget =
   | { kind: 'token'; token: TokenRecord; selection: number[] }
   | { kind: 'wall'; wall: WallRecord; selection: number[] }
   | { kind: 'pin'; pin: GMPinRecord; selection: number[] }
+  | { kind: 'noteMarker'; note: NoteRecord }
   | { kind: 'room'; room: RoomRecord }
   | { kind: 'drawing'; drawing: DrawingRecord }
   | { kind: 'map'; map: MapRecord }

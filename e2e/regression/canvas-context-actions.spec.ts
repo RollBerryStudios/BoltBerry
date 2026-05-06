@@ -29,6 +29,46 @@ test.describe('Canvas context menu actions', () => {
       await close()
     }
   })
+
+  test('places note markers as pinned notes with category defaults and editable icons', async () => {
+    const { app, dmWindow, close } = await launchApp()
+    try {
+      const { campaignId, mapId } = await openSeededCanvas(dmWindow, app, `Note Marker ${Date.now()}`, TEST_MAPS.cave)
+
+      await openCanvasMenu(dmWindow)
+      await openSubmenu(dmWindow, /Notizmarker|note marker/i)
+      await dmWindow.getByRole('menuitem', { name: /NSCs|NPCs/i }).click()
+      await expect(dmWindow.getByRole('menu')).toHaveCount(0)
+
+      let createdId = 0
+      await expect.poll(async () => {
+        const rows = await dmWindow.evaluate(
+          ({ cid, mid }) => (window as any).electronAPI.notes.listPinnedByMap(cid, mid),
+          { cid: campaignId, mid: mapId },
+        )
+        const note = rows[0]
+        if (note?.category === 'NSCs' && note.icon === null && note.pinX != null && note.pinY != null) {
+          createdId = note.id
+          return true
+        }
+        return false
+      }, { timeout: 5_000 }).toBe(true)
+
+      await dmWindow.evaluate(
+        ({ id }) => (window as any).electronAPI.notes.update(id, { icon: '⭐' }),
+        { id: createdId },
+      )
+      await expect.poll(async () => {
+        const rows = await dmWindow.evaluate(
+          ({ cid, mid }) => (window as any).electronAPI.notes.listPinnedByMap(cid, mid),
+          { cid: campaignId, mid: mapId },
+        )
+        return rows[0]?.icon
+      }).toBe('⭐')
+    } finally {
+      await close()
+    }
+  })
 })
 
 async function openCanvasMenu(page: Page): Promise<void> {

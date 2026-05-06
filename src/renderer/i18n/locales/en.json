@@ -27,6 +27,10 @@
       "multiHeader": "{{count}} pins selected",
       "deleteMany": "Delete all ({{count}})"
     },
+    "noteMarker": {
+      "edit": "Edit title and icon",
+      "delete": "Delete note marker"
+    },
     "room": {
       "visibility": "Visibility",
       "visHidden": "Hidden",
@@ -53,6 +57,7 @@
       "rotate270": "← 270°",
       "addFromWiki": "Add token from wiki…",
       "pingHere": "Ping here",
+      "addNoteMarker": "Place note marker",
       "fog": "Fog",
       "fogRevealAll": "Reveal all",
       "fogCoverAll": "Cover all",
@@ -834,6 +839,14 @@
     "bestiaryMiss": "No wiki entry found for „{{name}}“"
   },
   "notes": {
+    "categories": {
+      "general": "General",
+      "npcs": "NPCs",
+      "locations": "Locations",
+      "quests": "Quests",
+      "items": "Items",
+      "misc": "Misc"
+    },
     "campaignNotes": "Campaign Notes",
     "mapNotes": "Map Notes",
     "noMap": "No map active",

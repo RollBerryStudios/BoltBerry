@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, memo, useRef } from 'react'
 import { useCampaignStore } from '../../../stores/campaignStore'
+import { NOTE_CATEGORIES } from '../../../notes/categories'
 
 /* Notes panel — each category is now a folder of multiple notes.
 
@@ -79,14 +80,7 @@ const MarkdownPreview = memo(function MarkdownPreview({ text }: { text: string }
 
 // ── Campaign note categories ──────────────────────────────────────────────────
 
-const CAMPAIGN_CATEGORIES = [
-  { id: 'Allgemein',   icon: '📜' },
-  { id: 'NSCs',        icon: '🧑' },
-  { id: 'Orte',        icon: '🗺️' },
-  { id: 'Quests',      icon: '⚔️' },
-  { id: 'Gegenstände', icon: '🎒' },
-  { id: 'Sonstiges',   icon: '📌' },
-]
+const CAMPAIGN_CATEGORIES = NOTE_CATEGORIES
 
 // Sentinel used as the category key for map-scoped notes — keeps the same
 // DB category ('Allgemein') but a separate in-memory bucket from the

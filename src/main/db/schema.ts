@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 38
+export const SCHEMA_VERSION = 39
 
 // Migration: v1 → v2 — add explored_bitmap column to fog_state
 export const MIGRATE_V1_TO_V2 = `
@@ -249,6 +249,7 @@ CREATE TABLE IF NOT EXISTS notes (
   campaign_id  INTEGER NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
   map_id       INTEGER REFERENCES maps(id) ON DELETE SET NULL,
   category     TEXT    NOT NULL DEFAULT 'Allgemein',
+  icon         TEXT,
   title        TEXT    NOT NULL DEFAULT '',
   content      TEXT    NOT NULL DEFAULT '',
   pin_x        REAL,
@@ -983,6 +984,14 @@ ALTER TABLE audio_board_slots ADD COLUMN volume    REAL    NOT NULL DEFAULT 1.0;
 ALTER TABLE audio_board_slots ADD COLUMN is_loop   INTEGER NOT NULL DEFAULT 0;
 
 UPDATE schema_version SET version = 38;
+`
+
+// Migration: v38 → v39 — optional per-note marker icon. Pinned map
+// notes default to their category emoji; this override lets the DM
+// tweak an individual marker without changing the note category.
+export const MIGRATE_V38_TO_V39 = `
+ALTER TABLE notes ADD COLUMN icon TEXT;
+UPDATE schema_version SET version = 39;
 `
 
 // Use the SCHEMA_VERSION constant directly so there's a single source of truth.

@@ -8,6 +8,7 @@ import { MeasureLayer } from './MeasureLayer'
 import { MinimapOverlay } from './MinimapOverlay'
 import { DrawingLayer } from './DrawingLayer'
 import { GMPinLayer } from './GMPinLayer'
+import { NoteMarkerLayer } from './NoteMarkerLayer'
 import { PlayerViewportLayer, PlayerViewportGestures } from './PlayerViewportLayer'
 import { LightingLayer } from './LightingLayer'
 import { WallLayer } from './WallLayer'
@@ -38,6 +39,7 @@ import { useContextMenuEngine } from '../../contextMenu/useContextMenuEngine'
 import { registerCanvasMenu } from '../../contextMenu/canvasMenu'
 import { registerWallMenu } from '../../contextMenu/wallMenu'
 import { registerPinMenu } from '../../contextMenu/pinMenu'
+import { registerNoteMarkerMenu } from '../../contextMenu/noteMarkerMenu'
 import { registerRoomMenu } from '../../contextMenu/roomMenu'
 import { registerDrawingMenu } from '../../contextMenu/drawingMenu'
 import type { ContextTarget } from '../../contextMenu/types'
@@ -46,7 +48,7 @@ import { EmptyState } from '../EmptyState'
 import { showToast } from '../shared/Toast'
 import { spawnMonsterOnMap } from '../bestiary/actions'
 import type Konva from 'konva'
-import type { MapRecord, PlayerFullState, GMPinRecord, DrawingRecord } from '@shared/ipc-types'
+import type { MapRecord, PlayerFullState, GMPinRecord, DrawingRecord, NoteRecord } from '@shared/ipc-types'
 import { broadcastTokens } from '../../utils/tokenBroadcast'
 
 function broadcastTokensFromCanvas() {
@@ -76,6 +78,7 @@ const LAYER_DEFS: { key: string; label: string; icon: string; canToggle: boolean
   { key: 'fog',      label: 'Nebel',        icon: '🌫️',  canToggle: true  },
   { key: 'tokens',   label: 'Token',        icon: '🪙',  canToggle: true  },
   { key: 'drawings', label: 'Zeichnungen',  icon: '✏️',   canToggle: true  },
+  { key: 'noteMarkers', label: 'Notizen',   icon: '📝',  canToggle: true  },
   { key: 'gmPins',   label: 'GM-Pins',      icon: '📌',  canToggle: true  },
   { key: 'lighting', label: 'Beleuchtung',  icon: '💡',  canToggle: true  },
   { key: 'walls',    label: 'Wände',        icon: '🧱',  canToggle: true  },
@@ -84,7 +87,7 @@ const LAYER_DEFS: { key: string; label: string; icon: string; canToggle: boolean
 
 const DEFAULT_LAYER_VISIBILITY: Record<string, boolean> = {
   map: true, fog: true, tokens: true, drawings: true,
-  gmPins: true, lighting: true, walls: true, rooms: true,
+  noteMarkers: true, gmPins: true, lighting: true, walls: true, rooms: true,
 }
 
 /**
@@ -186,6 +189,7 @@ export function CanvasArea() {
   const playerViewportMode = useUIStore((s) => s.playerViewportMode)
   const workMode = useSessionStore((s) => s.workMode)
   const activeMapId = useCampaignStore((s) => s.activeMapId)
+  const activeCampaignId = useCampaignStore((s) => s.activeCampaignId)
   const activeMaps = useCampaignStore((s) => s.activeMaps)
   const activeMap = useMemo(() => activeMaps.find((m) => m.id === activeMapId) ?? null, [activeMaps, activeMapId])
   const atmosphereUrl = useImageUrl(atmosphereImagePath)
@@ -207,6 +211,7 @@ export function CanvasArea() {
     registerCanvasMenu()
     registerWallMenu()
     registerPinMenu()
+    registerNoteMarkerMenu()
     registerRoomMenu()
     registerDrawingMenu()
   }, [])
@@ -242,6 +247,19 @@ export function CanvasArea() {
       // mounts the shared menu primitive for the other kinds.
       if (target && typeof target.findAncestor === 'function') {
         if (target.findAncestor('.token-root', true)) return
+        const noteMarkerRoot = target.findAncestor('.note-marker-root', true)
+        if (noteMarkerRoot) {
+          const id = parseInt((noteMarkerRoot.id() ?? '').replace('note-marker-', ''), 10)
+          let note: NoteRecord | null = null
+          window.dispatchEvent(
+            new CustomEvent<{ id: number; resolve: (note: NoteRecord | null) => void }>('note-marker:lookup', {
+              detail: { id, resolve: (record) => { note = record } },
+            }),
+          )
+          if (!note) return
+          ctxEngine.open({ primary: { kind: 'noteMarker', note }, under: underRooms, pos: mapPos, scenePos })
+          return
+        }
         const wallRoot = target.findAncestor('.wall-root', true)
         if (wallRoot) {
           const id = parseInt((wallRoot.id() ?? '').replace('wall-', ''), 10)
@@ -717,7 +735,14 @@ export function CanvasArea() {
             />
           )}
 
-          {/* Layer 7: GM pins (DM only) */}
+          {/* Layer 7: note markers (DM only) */}
+          <NoteMarkerLayer
+            campaignId={activeCampaignId ?? null}
+            mapId={activeMap.id}
+            visible={layerVisibility['noteMarkers']}
+          />
+
+          {/* Layer 8: GM pins (DM only) */}
           {layerVisibility['gmPins'] && (
             <GMPinLayer
               stageRef={stageRef}
@@ -726,7 +751,7 @@ export function CanvasArea() {
             />
           )}
 
-          {/* Layer 8: Lighting overlay */}
+          {/* Layer 9: Lighting overlay */}
           {layerVisibility['lighting'] && (
             <LightingLayer
               stageRef={stageRef}
@@ -735,7 +760,7 @@ export function CanvasArea() {
             />
           )}
 
-          {/* Layer 9: Walls & doors */}
+          {/* Layer 10: Walls & doors */}
           {layerVisibility['walls'] && (
             <WallLayer
               mapId={activeMap.id}
@@ -744,7 +769,7 @@ export function CanvasArea() {
             />
           )}
 
-          {/* Layer 10: Rooms */}
+          {/* Layer 11: Rooms */}
           {layerVisibility['rooms'] && (
             <RoomLayer
               mapId={activeMap.id}
@@ -753,7 +778,7 @@ export function CanvasArea() {
             />
           )}
 
-          {/* Layer 11: Player Eye overlay (hidden tokens + stats) */}
+          {/* Layer 12: Player Eye overlay (hidden tokens + stats) */}
           {(showPlayerEye || workMode === 'player-preview') && activeMap && (
             <PlayerEyeOverlay
               map={activeMap}

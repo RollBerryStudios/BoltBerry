@@ -50,7 +50,7 @@ import {
   MIGRATE_V33_TO_V34,
   MIGRATE_V34_TO_V35,
   MIGRATE_V35_TO_V36,
-  MIGRATE_V36_TO_V37, MIGRATE_V37_TO_V38,
+  MIGRATE_V36_TO_V37, MIGRATE_V37_TO_V38, MIGRATE_V38_TO_V39,
 } from '../main/db/schema'
 
 // Ordered table of all migrations: [from, to, sql]
@@ -92,6 +92,7 @@ const CHAIN: Array<{ from: number; to: number; sql: string; name: string }> = [
   { from: 35, to: 36, sql: MIGRATE_V35_TO_V36, name: 'V35→V36'},
   { from: 36, to: 37, sql: MIGRATE_V36_TO_V37, name: 'V36→V37'},
   { from: 37, to: 38, sql: MIGRATE_V37_TO_V38, name: 'V37→V38'},
+  { from: 38, to: 39, sql: MIGRATE_V38_TO_V39, name: 'V38→V39'},
 ]
 
 describe('Migration chain', () => {
@@ -288,5 +289,10 @@ describe('Migration chain', () => {
     expect(CREATE_TABLES_SQL).toMatch(/audio_board_slots[\s\S]*is_loop\s+INTEGER\s+NOT\s+NULL\s+DEFAULT\s+0/i)
     // Legacy table must be gone from the fresh schema.
     expect(CREATE_TABLES_SQL).not.toMatch(/CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\s+channel_playlist\b/i)
+  })
+
+  it('V38→V39 adds optional note marker icons on both upgrade and fresh install paths', () => {
+    expect(MIGRATE_V38_TO_V39).toMatch(/ALTER\s+TABLE\s+notes\s+ADD\s+COLUMN\s+icon\s+TEXT/i)
+    expect(CREATE_TABLES_SQL).toMatch(/notes[\s\S]*icon\s+TEXT/i)
   })
 })

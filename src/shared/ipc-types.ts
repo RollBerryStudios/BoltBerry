@@ -147,6 +147,7 @@ export const IPC = {
   // Notes domain — semantic replacements for raw SQL against `notes`.
   NOTES_LIST_CATEGORY_BY_CAMPAIGN: 'notes:list-category-by-campaign',
   NOTES_LIST_CATEGORY_BY_MAP: 'notes:list-category-by-map',
+  NOTES_LIST_PINNED_BY_MAP: 'notes:list-pinned-by-map',
   NOTES_CREATE: 'notes:create',
   NOTES_UPDATE: 'notes:update',
   NOTES_DELETE: 'notes:delete',
@@ -684,6 +685,7 @@ export interface NoteRecord {
   campaignId: number
   mapId: number | null
   category: string
+  icon: string | null
   title: string
   content: string
   pinX: number | null

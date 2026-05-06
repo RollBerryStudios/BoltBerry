@@ -15,7 +15,7 @@ import {
   MIGRATE_V27_TO_V28, MIGRATE_V28_TO_V29, MIGRATE_V29_TO_V30,
   MIGRATE_V30_TO_V31, MIGRATE_V31_TO_V32, MIGRATE_V32_TO_V33,
   MIGRATE_V33_TO_V34, MIGRATE_V34_TO_V35, MIGRATE_V35_TO_V36,
-  MIGRATE_V36_TO_V37, MIGRATE_V37_TO_V38,
+  MIGRATE_V36_TO_V37, MIGRATE_V37_TO_V38, MIGRATE_V38_TO_V39,
 } from './schema'
 import { loadMonstersIndexSync, loadMonsterRecordSync } from '../data/monsters'
 
@@ -56,6 +56,7 @@ const MIGRATIONS: ReadonlyArray<readonly [target: number, sql: string]> = [
   [36, MIGRATE_V35_TO_V36],
   [37, MIGRATE_V36_TO_V37],
   [38, MIGRATE_V37_TO_V38],
+  [39, MIGRATE_V38_TO_V39],
 ]
 
 export class SchemaTooNewError extends Error {

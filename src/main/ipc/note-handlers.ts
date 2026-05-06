@@ -8,8 +8,7 @@ import { getDb } from '../db/database'
  *
  * The panel-level queries filter out pinned notes (those with non-null
  * `pin_x` / `pin_y`) because pinned notes are rendered as a separate
- * map-canvas layer. If/when that layer moves here, add a
- * `listPinnedByMap` channel.
+ * map-canvas layer.
  */
 
 interface NoteRow {
@@ -17,6 +16,7 @@ interface NoteRow {
   campaign_id: number
   map_id: number | null
   category: string
+  icon: string | null
   title: string
   content: string
   pin_x: number | null
@@ -45,6 +45,7 @@ function toNoteRecord(r: NoteRow): NoteRecord {
     campaignId: r.campaign_id,
     mapId: r.map_id,
     category: r.category,
+    icon: r.icon,
     title: r.title,
     content: r.content,
     pinX: r.pin_x,
@@ -55,12 +56,13 @@ function toNoteRecord(r: NoteRow): NoteRecord {
 }
 
 const SELECT_COLUMNS =
-  'id, campaign_id, map_id, category, title, content, pin_x, pin_y, tags, updated_at'
+  'id, campaign_id, map_id, category, icon, title, content, pin_x, pin_y, tags, updated_at'
 
 const COLUMN_MAP: Record<string, { col: string; coerce: (v: unknown) => unknown }> = {
   campaignId: { col: 'campaign_id', coerce: coerceInteger },
   mapId: { col: 'map_id', coerce: (v) => (v == null ? null : coerceInteger(v)) },
   category: { col: 'category', coerce: (v) => (v == null ? 'Allgemein' : String(v)) },
+  icon: { col: 'icon', coerce: (v) => (v == null ? null : String(v)) },
   title: { col: 'title', coerce: (v) => (v == null ? '' : String(v)) },
   content: { col: 'content', coerce: (v) => (v == null ? '' : String(v)) },
   pinX: { col: 'pin_x', coerce: (v) => (v == null ? null : coerceFiniteNumber(v)) },
@@ -133,6 +135,23 @@ export function registerNoteHandlers(): void {
           `SELECT ${SELECT_COLUMNS} FROM notes
            WHERE campaign_id = ? AND map_id = ?
                  AND pin_x IS NULL AND pin_y IS NULL
+           ORDER BY updated_at DESC`,
+        )
+        .all(campaignId, mapId) as NoteRow[]
+      return rows.map(toNoteRecord)
+    },
+  )
+
+  ipcMain.handle(
+    IPC.NOTES_LIST_PINNED_BY_MAP,
+    (_event, campaignId: number, mapId: number): NoteRecord[] => {
+      requireIntegerId(campaignId, 'campaign')
+      requireIntegerId(mapId, 'map')
+      const rows = getDb()
+        .prepare(
+          `SELECT ${SELECT_COLUMNS} FROM notes
+           WHERE campaign_id = ? AND map_id = ?
+                 AND pin_x IS NOT NULL AND pin_y IS NOT NULL
            ORDER BY updated_at DESC`,
         )
         .all(campaignId, mapId) as NoteRow[]

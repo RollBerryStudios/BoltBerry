@@ -27,6 +27,10 @@
       "multiHeader": "{{count}} Pins gewählt",
       "deleteMany": "Alle löschen ({{count}})"
     },
+    "noteMarker": {
+      "edit": "Titel und Symbol bearbeiten",
+      "delete": "Notizmarker löschen"
+    },
     "room": {
       "visibility": "Sichtbarkeit",
       "visHidden": "Versteckt",
@@ -53,6 +57,7 @@
       "rotate270": "← 270°",
       "addFromWiki": "Token aus Wiki einfügen…",
       "pingHere": "Hier pingen",
+      "addNoteMarker": "Notizmarker setzen",
       "fog": "Nebel",
       "fogRevealAll": "Alles aufdecken",
       "fogCoverAll": "Alles verdecken",
@@ -834,6 +839,14 @@
     "bestiaryMiss": "Kein Wiki-Eintrag für „{{name}}“"
   },
   "notes": {
+    "categories": {
+      "general": "Allgemein",
+      "npcs": "NSCs",
+      "locations": "Orte",
+      "quests": "Quests",
+      "items": "Gegenstände",
+      "misc": "Sonstiges"
+    },
     "campaignNotes": "Kampagnen-Notizen",
     "mapNotes": "Karten-Notizen",
     "noMap": "Keine Karte aktiv",
