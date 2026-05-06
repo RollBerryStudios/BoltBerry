@@ -1,41 +1,43 @@
+@import './rollberry-tokens.css';
+
 /* ─── BoltBerry Design System  ·  Brand System v1 ───────────────────────────── */
 /*     70% dark neutrals · 20% text+neutral · 7% blue · 3% yellow-orange        */
 
 :root {
   /* ── Backgrounds  (three depth layers per spec) ──────────────────────────── */
-  --bg-base:       #0D1015;   /* Near Black  – global canvas                    */
-  --bg-surface:    #121722;   /* Dark Navy   – panels, sidebars, shell           */
-  --bg-elevated:   #182130;   /* Panel Blue  – nested cards, elevated surfaces   */
-  --bg-overlay:    #1E2A3E;   /* Derived     – hover states, dropdown bg         */
+  --bg-base:       var(--rb-bg);        /* Near Black  – global canvas             */
+  --bg-surface:    var(--rb-surface);   /* Dark Navy   – panels, sidebars, shell    */
+  --bg-elevated:   var(--rb-surface-2); /* Panel Blue  – nested cards, elevated     */
+  --bg-overlay:    var(--rb-surface-3); /* Derived     – hover states, dropdown bg  */
 
-  --border:        #283550;
-  --border-subtle: #1B263A;
+  --border:        var(--rb-line);
+  --border-subtle: var(--rb-line-soft);
 
   /* ── Text ─────────────────────────────────────────────────────────────────── */
-  --text-primary:  #F4F6FA;   /* Soft White  – main working text                 */
-  --text-secondary:#94A0B2;   /* Cool Gray   – metadata, helper labels           */
-  --text-muted:    #7388A6;   /* Derived     – timestamps, placeholders (WCAG AA contrast on --bg-base ≥ 4.5:1, audit #38) */
-  --text-inverse:  #0D1015;   /* Used on Bolt Yellow buttons                     */
+  --text-primary:  var(--rb-text);      /* Soft White  – main working text          */
+  --text-secondary:var(--rb-text-2);    /* Cool Gray   – metadata, helper labels    */
+  --text-muted:    var(--rb-text-3);    /* Timestamps, placeholders                 */
+  --text-inverse:  var(--rb-text-inverse);
 
   /* ── Bolt Yellow – Primary action  (≤3% of UI surface) ──────────────────── */
-  --accent:        #FFC62E;
+  --accent:        var(--rb-app-accent);
   --accent-hover:  #FF9A1F;   /* transitions to Bolt Orange = logo gradient feel */
-  --accent-light:  #FFD966;
-  --accent-dim:    rgba(255, 198, 46, 0.12);
+  --accent-light:  color-mix(in srgb, var(--rb-app-accent) 72%, white 28%);
+  --accent-dim:    var(--rb-accent-soft);
 
   /* ── Bolt Orange – Secondary energy / companion accent ──────────────────── */
   --accent-orange: #FF9A1F;
 
   /* ── Berry Blue – Structure, selection, navigation  (≤7% of UI) ─────────── */
-  --accent-blue:       #2F6BFF;
-  --accent-blue-light: #4A86FF;
-  --accent-blue-dim:   rgba(47, 107, 255, 0.12);
+  --accent-blue:       var(--rb-app-accent-2);
+  --accent-blue-light: color-mix(in srgb, var(--rb-app-accent-2) 72%, white 28%);
+  --accent-blue-dim:   color-mix(in srgb, var(--rb-app-accent-2) 16%, transparent);
 
   /* ── Semantic  (must stay separate from brand accents) ───────────────────── */
-  --success:       #22c55e;
-  --warning:       #f59e0b;
-  --danger:        #ef4444;
-  --info:          #2F6BFF;   /* = Berry Blue */
+  --success:       var(--rb-success);
+  --warning:       var(--rb-warning);
+  --danger:        var(--rb-danger);
+  --info:          var(--rb-info);
 
   /* ── HP bar ──────────────────────────────────────────────────────────────── */
   --hp-high:       #22c55e;
@@ -47,18 +49,18 @@
   --grid-color:    rgba(255, 255, 255, 0.12);
 
   /* ── Spacing  (8px base · 8/12/16/24/32/48 increments) ──────────────────── */
-  --sp-1:  4px;
-  --sp-2:  8px;
-  --sp-3:  12px;
-  --sp-4:  16px;
-  --sp-5:  20px;
-  --sp-6:  24px;
-  --sp-8:  32px;
+  --sp-1:  var(--rb-space-1);
+  --sp-2:  var(--rb-space-2);
+  --sp-3:  var(--rb-space-3);
+  --sp-4:  var(--rb-space-4);
+  --sp-5:  var(--rb-space-5);
+  --sp-6:  var(--rb-space-6);
+  --sp-8:  var(--rb-space-8);
   --sp-12: 48px;
 
   /* ── Typography  (Inter – clean, neutral, legible) ───────────────────────── */
-  --font:         'Inter', 'Segoe UI', system-ui, sans-serif;
-  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+  --font:         var(--rb-font-sans);
+  --font-mono:    var(--rb-font-mono);
   --text-xs:      11px;
   --text-sm:      13px;
   --text-base:    14px;
@@ -67,13 +69,13 @@
   --text-xl:      22px;
 
   /* ── Radius  (friendly precision per spec) ───────────────────────────────── */
-  --radius-sm:    4px;    /* tags, tiny badges                                   */
-  --radius:       10px;   /* buttons, inputs, dropdowns                          */
-  --radius-md:    12px;   /* cards, inner panels                                 */
-  --radius-lg:    16px;   /* large surfaces, modals, sidebars top-level          */
+  --radius-sm:    var(--rb-radius-sm);
+  --radius:       var(--rb-radius);
+  --radius-md:    var(--rb-radius-lg);
+  --radius-lg:    var(--rb-radius-lg);
 
   /* ── Transitions  (120–220 ms per brand spec) ────────────────────────────── */
-  --transition:      150ms ease;
+  --transition:      var(--rb-transition);
   --transition-slow: 200ms ease;
 
   /* ── Layout dimensions ───────────────────────────────────────────────────── */
@@ -103,18 +105,18 @@
 
 /* Light Theme Override */
 [data-theme='light'] {
-  --bg-base:       #EFF1F7;
-  --bg-surface:    #FFFFFF;
-  --bg-elevated:   #E5E9F4;
-  --bg-overlay:    #D8DEEE;
-  --border:        #C0CADF;
-  --border-subtle: #D8DEEE;
-  --text-primary:  #0D1015;
-  --text-secondary:#3D4F68;
-  --text-muted:    #627592;
-  --text-inverse:  #FFFFFF;
-  --accent-dim:      rgba(255, 198, 46, 0.12);
-  --accent-blue-dim: rgba(47, 107, 255, 0.10);
+  --bg-base:       var(--rb-bg);
+  --bg-surface:    var(--rb-surface);
+  --bg-elevated:   var(--rb-surface-2);
+  --bg-overlay:    var(--rb-surface-3);
+  --border:        var(--rb-line);
+  --border-subtle: var(--rb-line-soft);
+  --text-primary:  var(--rb-text);
+  --text-secondary:var(--rb-text-2);
+  --text-muted:    var(--rb-text-3);
+  --text-inverse:  var(--rb-text-inverse);
+  --accent-dim:      var(--rb-accent-soft);
+  --accent-blue-dim: color-mix(in srgb, var(--rb-app-accent-2) 12%, transparent);
 }
 
 /* ─── Reset ───────────────────────────────────────────────────────────────────── */
