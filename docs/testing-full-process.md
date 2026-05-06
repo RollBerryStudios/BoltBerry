@@ -90,7 +90,8 @@ BoltBerry should use a layered strategy. Fast checks catch local regressions, E2
 | Critical-path E2E | Protect session workflows: onboarding, campaign/map/canvas/player/file/settings. | Every PR, mandatory before merge. | default `npm run test:e2e` |
 | Visual E2E | Detect layout and rendering regressions on core surfaces. | UI PRs and release candidates. | `npm run test:e2e:visual` |
 | Nightly stress | Catch performance, size, and long-running stability problems. | Nightly or before release. | `npm run test:e2e:nightly` |
-| Packaged smoke | Verify the hardened built app launches outside dev mode and survives startup with Electron fuses flipped. | Release branches and release candidates. | `BOLTBERRY_E2E_EXECUTABLE_PATH=... npm run test:e2e:packaged` |
+| Packaged process smoke | Verify the hardened built app launches outside dev mode, survives startup, and accepts clean shutdown with Electron fuses flipped. | Release branches and release candidates. | `BOLTBERRY_E2E_EXECUTABLE_PATH=... npm run test:e2e:packaged` |
+| Packaged UI smoke | Verify packaged DM shell and preload bridge in a Playwright-controllable artifact. Hardened release binaries with `RunAsNode` disabled cannot be driven by `_electron.launch()`. | Release candidates using the unfused QA artifact, otherwise manual signoff. | `npm run pack:qa:unfused` then `BOLTBERRY_E2E_EXECUTABLE_PATH=... npx playwright test e2e/smoke/packaged-app.spec.ts --project=smoke` |
 | Manual exploratory | Validate things automation cannot fully prove: real audio output, native dialogs, tactile canvas feel, OS installers. | Release candidate. | Manual checklist below |
 
 ## Standard Gates

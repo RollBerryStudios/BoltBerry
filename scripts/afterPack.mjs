@@ -57,6 +57,11 @@ function findElectronBinary(appOutDir, candidates, platform) {
 
 export default async function afterPack(context) {
   const { appOutDir, packager, electronPlatformName } = context
+  if (process.env.BOLTBERRY_SKIP_FUSE_FLIP === '1') {
+    console.warn(`[afterPack] BOLTBERRY_SKIP_FUSE_FLIP=1, leaving QA artifact unfused: ${appOutDir}`)
+    return
+  }
+
   const productName = packager.appInfo.productFilename
   const binaryFn = ELECTRON_BINARIES[electronPlatformName]
 

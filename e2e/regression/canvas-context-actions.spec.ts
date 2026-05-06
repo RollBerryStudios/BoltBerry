@@ -11,16 +11,14 @@ test.describe('Canvas context menu actions', () => {
       const { mapId } = await openSeededCanvas(dmWindow, app, `Canvas Context ${Date.now()}`, TEST_MAPS.cave)
 
       await openCanvasMenu(dmWindow)
-      await dmWindow.getByRole('menuitem', { name: /Drehen|Rotate/i }).hover()
-      await dmWindow.keyboard.press('ArrowRight')
+      await openSubmenu(dmWindow, /Drehen|Rotate/i)
       await dmWindow.getByRole('menuitem', { name: /90/ }).click()
       await expect(dmWindow.getByRole('menu')).toHaveCount(0)
       await expect.poll(() => mapField(dmWindow, mapId, 'rotation')).toBe(90)
       await expect.poll(() => mapField(dmWindow, mapId, 'rotationPlayer')).toBe(90)
 
       await openCanvasMenu(dmWindow)
-      await dmWindow.getByRole('menuitem', { name: /Nebel|Fog/i }).hover()
-      await dmWindow.keyboard.press('ArrowRight')
+      await openSubmenu(dmWindow, /Nebel|Fog/i)
       await dmWindow.getByRole('menuitem', { name: /Alles (?:zu|ver)decken|Cover All/i }).click()
       await expect(dmWindow.getByRole('menu')).toHaveCount(0)
       await expect.poll(async () => {
@@ -37,6 +35,12 @@ async function openCanvasMenu(page: Page): Promise<void> {
   const p = await canvasPoint(page, 0.12, 0.16)
   await page.mouse.click(p.x, p.y, { button: 'right' })
   await expect(page.getByRole('menu').first()).toBeVisible()
+}
+
+async function openSubmenu(page: Page, name: RegExp): Promise<void> {
+  const parent = page.getByRole('menuitem', { name }).first()
+  await parent.click()
+  await expect.poll(async () => page.getByRole('menu').count()).toBeGreaterThan(1)
 }
 
 async function mapField(page: Page, mapId: number, field: string) {

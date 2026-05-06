@@ -207,19 +207,26 @@ export default function PlayerApp() {
       }),
 
       window.playerAPI.onMapUpdate((state: PlayerMapState) => {
+        const previousMap = mapStateRef.current
+        const sameMap =
+          previousMap?.mapId != null && state.mapId != null
+            ? previousMap.mapId === state.mapId
+            : previousMap?.imagePath === state.imagePath
         mapStateRef.current = state
         setMapState(state)
         setMode('map')
-        setDrawingData([])
-        // Walls are per-map — clear the old set so the LOS engine
-        // doesn't keep computing visibility against the previous map's
-        // geometry until the DM's PLAYER_WALLS broadcast lands. If
-        // the new map has walls, the broadcast (triggered by the map
-        // switch in usePlayerSync) replaces this [] shortly after.
-        setWalls([])
-        exploredCanvasRef.current = null
-        coveredCanvasRef.current = null
-        setFogVersion((v) => v + 1)
+        // PLAYER_MAP_UPDATE is used for in-place map settings changes
+        // such as player rotation and grid styling. Those updates must
+        // not wipe fog/walls/drawings for the same map; the DM sends a
+        // full-sync with fresh fog/walls/drawings for real map switches.
+        if (!sameMap) {
+          setDrawingData([])
+          setWalls([])
+          exploredCanvasRef.current = null
+          coveredCanvasRef.current = null
+          pendingFogOpsRef.current = []
+          setFogVersion((v) => v + 1)
+        }
       }),
 
       window.playerAPI.onTokenUpdate((t) => setTokens(t)),
@@ -1208,7 +1215,9 @@ function initDualFogCanvas(
 ) {
   if (
     exploredRef.current?.width === w &&
-    exploredRef.current?.height === h
+    exploredRef.current?.height === h &&
+    coveredRef.current?.width === w &&
+    coveredRef.current?.height === h
   ) return
 
   const explored = document.createElement('canvas')
@@ -1233,8 +1242,20 @@ function loadDualFog(
   let pending = 0
   const tryDone = () => { if (--pending === 0) onDone() }
 
-  if (coveredDataUrl) { pending++; loadBitmapToRef(coveredDataUrl, coveredRef, tryDone) }
-  if (exploredDataUrl) { pending++; loadBitmapToRef(exploredDataUrl, exploredRef, tryDone) }
+  if (coveredDataUrl) {
+    pending++
+    loadBitmapToRef(coveredDataUrl, coveredRef, tryDone)
+  } else {
+    coveredRef.current = null
+  }
+
+  if (exploredDataUrl) {
+    pending++
+    loadBitmapToRef(exploredDataUrl, exploredRef, tryDone)
+  } else {
+    exploredRef.current = null
+  }
+
   if (pending === 0) onDone()
 }
 

@@ -17,11 +17,11 @@ Latest verified baseline:
 | `npm run lint` | 0 errors, existing warnings |
 | `npm run check:i18n` | passed, 738 keys |
 | `npm run check:bundle` | passed |
-| `npm run test:e2e` | 150 passed, 1 intentional packaged-app skip |
+| `npm run test:e2e` | 154 passed, 1 intentional packaged-app skip |
 | `npm run test:e2e:visual` | 4 passed |
 | `npm run test:e2e:nightly` | 2 passed |
 | `npx playwright test --list` | 157 tests in 41 files |
-| `npm run test:e2e:packaged` | passed against local mac-arm64 `--dir` package when `BOLTBERRY_E2E_EXECUTABLE_PATH` is set; skips intentionally without it; Linux packaged smoke is enforced in CI |
+| `npm run test:e2e:packaged` | process smoke passed against local hardened mac-arm64 `--dir` package when `BOLTBERRY_E2E_EXECUTABLE_PATH` is set; Playwright UI attach requires an unfused QA artifact |
 
 ## Highest-Value Remaining E2E Work
 

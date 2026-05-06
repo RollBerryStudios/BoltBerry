@@ -614,7 +614,7 @@ export function CanvasArea() {
       data-tool={activeTool}
       data-player-viewport-visual-rotation={
         playerViewportMode && activeMap && playerViewport
-          ? ((((activeMap.rotation ?? 0) + playerViewport.rotation) % 360) + 360) % 360
+          ? ((((activeMap.rotationPlayer ?? activeMap.rotation ?? 0) + playerViewport.rotation) % 360) + 360) % 360
           : ''
       }
       data-map-screen-bounds={
@@ -1108,6 +1108,7 @@ async function loadMapData(mapId: number, map: MapRecord) {
     window.electronAPI?.sendFullSync({
       mode: syncMode,
       map: {
+        mapId,
         imagePath: map.imagePath,
         gridType: map.gridType,
         gridSize: map.gridSize,

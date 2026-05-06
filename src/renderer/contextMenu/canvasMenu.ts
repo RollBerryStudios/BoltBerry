@@ -54,6 +54,7 @@ const canvasResolver: MenuResolver = (env) => {
               useCampaignStore.getState().setActiveMaps(updated)
               if (sessionMode !== 'prep') {
                 window.electronAPI.sendMapUpdate({
+                  mapId: map.id,
                   imagePath: map.imagePath,
                   gridType: map.gridType,
                   gridSize: map.gridSize,

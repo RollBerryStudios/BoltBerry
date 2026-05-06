@@ -10,10 +10,9 @@ import type { MapRecord } from '@shared/ipc-types'
  * is currently showing. Positioned in map-image coordinates so the
  * rect stays anchored when the DM pans / zooms their own view.
  *
- * The rectangle itself is axis-aligned in map space; `rotation` only
- * rotates the content the player sees inside it. We visualise that
- * rotation with a small "up" tick extending from the top edge so the
- * DM can tell at a glance which way is "up" for the players.
+ * The rectangle rotates with the player-side map orientation plus the
+ * Player Control rect's own tilt, so the DM can tell at a glance which
+ * way is "up" for the players.
  */
 export function PlayerViewportLayer({
   map, scale, offsetX, offsetY,
@@ -35,8 +34,8 @@ export function PlayerViewportLayer({
   const screenCy = rect.cy * scale + offsetY
   const screenW = rect.w * scale
   const screenH = rect.h * scale
-  const mapRotation = (((map.rotation ?? 0) % 360) + 360) % 360
-  const visualRotation = mapRotation + rect.rotation
+  const playerMapRotation = (((map.rotationPlayer ?? map.rotation ?? 0) % 360) + 360) % 360
+  const visualRotation = playerMapRotation + rect.rotation
 
   // Tick length in canvas px, clamped so it stays visible whatever the
   // zoom — long enough to read at 50% zoom, not ridiculous at 200%.
@@ -45,9 +44,8 @@ export function PlayerViewportLayer({
   // up the light/dark-theme variant automatically.
   const strokeColor = '#4A86FF'
 
-  // Pre-rotate the "up" indicator around the rect centre so the DM sees
-  // which direction the player has as "up". Konva handles this via a
-  // Group with rotation + offsetX/offsetY (pivot = rect centre).
+  // Rotate around the rect centre so the DM sees which direction the
+  // player has as "up". Konva handles this via a Group with rotation.
   return (
     <Layer listening={false}>
       <Group

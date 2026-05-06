@@ -26,7 +26,7 @@ npm run test:e2e:visual:update
 # 7. Run opt-in nightly stress checks
 npm run test:e2e:nightly
 
-# 8. Smoke-test a packaged executable
+# 8. Process-smoke a hardened packaged executable
 BOLTBERRY_E2E_EXECUTABLE_PATH=/path/to/BoltBerry npm run test:e2e:packaged
 
 # 9. Run with interactive UI / headed / debug modes
@@ -121,7 +121,7 @@ These helpers reuse the same Electron `--user-data-dir`; cleanup is left to the 
 
 Shared fixture helpers in `e2e/helpers/test-data.ts` create deterministic campaigns, maps, canvas entities, workspace panel content, and fixture asset paths for critical-path, regression, and visual tests.
 
-`BOLTBERRY_APP_PATH` can point the launch helper at an alternate unpacked app root. `BOLTBERRY_E2E_EXECUTABLE_PATH` launches a packaged executable directly and makes global setup verify that executable instead of repo build artifacts.
+`BOLTBERRY_APP_PATH` can point the launch helper at an alternate unpacked app root. `BOLTBERRY_E2E_EXECUTABLE_PATH` launches a packaged executable directly and makes global setup verify that executable instead of repo build artifacts. Playwright-controlled packaged UI tests require an executable that still allows Electron's automation launch path; hardened release binaries with `RunAsNode` disabled by Electron fuses are expected to time out under `_electron.launch()`.
 
 ## Visual Regression
 
@@ -192,13 +192,25 @@ Deep workspace panels are covered in `deep-panel-workflows.spec.ts`: notes, hand
 
 ## Packaged App Smoke
 
-`e2e/smoke/packaged-app.spec.ts` is skipped unless `BOLTBERRY_E2E_EXECUTABLE_PATH` is set:
+`scripts/smoke-packaged.mjs` process-smokes a hardened packaged executable without Playwright attachment:
 
 ```bash
 BOLTBERRY_E2E_EXECUTABLE_PATH=/path/to/BoltBerry npm run test:e2e:packaged
 ```
 
-Use this after `electron-builder --dir` or a platform-specific package build to verify the packaged executable starts, opens one DM window, and exposes the preload bridge.
+Use this after `electron-builder --dir` or a platform-specific package build to verify the packaged executable starts, stays alive for the smoke window, and accepts a clean shutdown.
+
+`e2e/smoke/packaged-app.spec.ts` verifies the DM shell and preload bridge through Playwright, but it is only suitable for an unfused QA build. Hardened release builds flip Electron fuses (`RunAsNode`, `NODE_OPTIONS`, and CLI inspect disabled), which prevents Playwright `_electron.launch()` from attaching to the app.
+
+Build that QA-only artifact with:
+
+```bash
+npm run pack:qa:unfused
+BOLTBERRY_E2E_EXECUTABLE_PATH=release/qa-unfused/<platform>/BoltBerry.app/Contents/MacOS/BoltBerry \
+  npx playwright test e2e/smoke/packaged-app.spec.ts --project=smoke
+```
+
+Never distribute the unfused QA package; it exists only so Playwright can inspect packaged UI behavior.
 
 ## Environment Variables
 

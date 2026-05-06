@@ -6,6 +6,7 @@ import { useCampaignStore } from '../stores/campaignStore'
 import { useWallStore } from '../stores/wallStore'
 import type { PlayerFullState, PlayerTokenState, PlayerWallState } from '@shared/ipc-types'
 import { resetTokenBroadcastSnapshot } from '../utils/tokenBroadcast'
+import { flushFogSave } from '../components/canvas/FogLayer'
 
 export function usePlayerSync() {
   const setPlayerConnected = useSessionStore((s) => s.setPlayerConnected)
@@ -26,6 +27,7 @@ export function usePlayerSync() {
     let fogBitmap: string | null = null
     let exploredBitmap: string | null = null
     if (mapId) {
+      await flushFogSave()
       const fog = await window.electronAPI.fog.get(mapId)
       fogBitmap      = fog.fogBitmap
       exploredBitmap = fog.exploredBitmap
@@ -87,6 +89,7 @@ export function usePlayerSync() {
       viewport,
       map: activeMap
         ? {
+            mapId: activeMap.id,
             imagePath: activeMap.imagePath,
             gridType: activeMap.gridType,
             gridSize: activeMap.gridSize,

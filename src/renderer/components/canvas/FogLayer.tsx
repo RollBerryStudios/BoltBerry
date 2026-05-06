@@ -713,12 +713,26 @@ let pendingSave: {
   exploredCanvas: HTMLCanvasElement
   coveredCanvas: HTMLCanvasElement
 } | null = null
+let inFlightSave: Promise<void> | null = null
 
-function commitFogSave(
+function runFogSave(
   mapId: number,
   exploredCanvas: HTMLCanvasElement,
   coveredCanvas: HTMLCanvasElement,
-) {
+): Promise<void> {
+  const save = commitFogSave(mapId, exploredCanvas, coveredCanvas)
+  inFlightSave = save
+  save.finally(() => {
+    if (inFlightSave === save) inFlightSave = null
+  })
+  return save
+}
+
+async function commitFogSave(
+  mapId: number,
+  exploredCanvas: HTMLCanvasElement,
+  coveredCanvas: HTMLCanvasElement,
+): Promise<void> {
   try {
     // PNG preserves the canvas alpha channel. We used to use JPEG for
     // the ~4× size win, but JPEG has no alpha: a cleared fog canvas
@@ -730,10 +744,7 @@ function commitFogSave(
     // aggressively.
     const fogBitmap      = coveredCanvas.toDataURL('image/png')
     const exploredBitmap = exploredCanvas.toDataURL('image/png')
-    // Fire-and-forget: the caller may be synchronous (beforeunload) and
-    // can't await. The IPC invoke itself is synchronous enough to
-    // survive the renderer shutting down.
-    void window.electronAPI?.fog.save(mapId, { fogBitmap, exploredBitmap })
+    await window.electronAPI?.fog.save(mapId, { fogBitmap, exploredBitmap })
   } catch (err) {
     console.error('[FogLayer] commitFogSave failed:', err)
   }
@@ -751,7 +762,7 @@ function saveFogToDb(
     saveTimer = null
     pendingSave = null
     if (!p) return
-    commitFogSave(p.mapId, p.exploredCanvas, p.coveredCanvas)
+    void runFogSave(p.mapId, p.exploredCanvas, p.coveredCanvas)
   }, 2000)
 }
 
@@ -760,15 +771,17 @@ function saveFogToDb(
  * `beforeunload` so we don't lose the last ~2 s of fog edits when the user
  * quits the app or closes the window.
  */
-export function flushFogSave(): void {
+export function flushFogSave(): Promise<void> {
   if (saveTimer) {
     clearTimeout(saveTimer)
     saveTimer = null
   }
-  if (!pendingSave) return
-  const { mapId, exploredCanvas, coveredCanvas } = pendingSave
-  pendingSave = null
-  commitFogSave(mapId, exploredCanvas, coveredCanvas)
+  if (pendingSave) {
+    const { mapId, exploredCanvas, coveredCanvas } = pendingSave
+    pendingSave = null
+    return runFogSave(mapId, exploredCanvas, coveredCanvas)
+  }
+  return inFlightSave ?? Promise.resolve()
 }
 
 function sendFogDelta(op: FogOperation) {

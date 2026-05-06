@@ -249,6 +249,7 @@ export function LeftSidebar() {
   function syncMapStateToPlayer(m: MapRecord) {
     if (!m || useSessionStore.getState().sessionMode === 'prep') return
     window.electronAPI?.sendMapUpdate({
+      mapId: m.id,
       imagePath: m.imagePath,
       gridType: m.gridType,
       gridSize: m.gridSize,

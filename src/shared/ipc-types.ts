@@ -696,6 +696,9 @@ export interface NoteRecord {
 // ─── Player Window State (what gets synced) ──────────────────────────────────────────
 
 export interface PlayerMapState {
+  /** Active map id when the sender knows it. Older payloads omit this;
+   *  the player falls back to imagePath comparison for compatibility. */
+  mapId?: number
   imagePath: string
   gridType: GridType
   gridSize: number

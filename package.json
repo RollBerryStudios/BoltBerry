@@ -23,6 +23,7 @@
     "electron": "electron .",
     "start": "npm run build && npm run check:bundle && npm run electron",
     "pack": "npm run build && electron-builder --dir",
+    "pack:qa:unfused": "node scripts/pack-qa-unfused.mjs",
     "dist": "npm run build && npm run check:bundle && electron-builder",
     "dist:win": "npm run build && npm run check:bundle && electron-builder --win",
     "dist:mac": "npm run build && npm run check:bundle && electron-builder --mac",

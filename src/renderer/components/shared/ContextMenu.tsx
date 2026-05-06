@@ -260,16 +260,25 @@ function ContextMenuRow({ item, envelope, active, enabled, onActivate, onRun, on
   // 250 ms keeps the experience snappy while filtering out incidental
   // hovers. Mouse-leave cancels the pending open immediately.
   const HOVER_OPEN_MS = 250
+  const HOVER_CLOSE_MS = 150
   const openTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const clearOpenTimer = () => {
     if (openTimerRef.current) { clearTimeout(openTimerRef.current); openTimerRef.current = null }
   }
-  useEffect(() => () => clearOpenTimer(), [])
+  const clearCloseTimer = () => {
+    if (closeTimerRef.current) { clearTimeout(closeTimerRef.current); closeTimerRef.current = null }
+  }
+  useEffect(() => () => {
+    clearOpenTimer()
+    clearCloseTimer()
+  }, [])
   return (
     <div
       role="menuitem"
       aria-disabled={!enabled}
       onMouseEnter={() => {
+        clearCloseTimer()
         onActivate()
         if (hasSub) {
           clearOpenTimer()
@@ -278,9 +287,19 @@ function ContextMenuRow({ item, envelope, active, enabled, onActivate, onRun, on
       }}
       onMouseLeave={() => {
         clearOpenTimer()
-        if (hasSub) onOpenSub(false)
+        if (hasSub) closeTimerRef.current = setTimeout(() => onOpenSub(false), HOVER_CLOSE_MS)
       }}
-      onClick={() => { if (enabled) onRun() }}
+      onClick={() => {
+        if (!enabled) return
+        if (hasSub) {
+          clearOpenTimer()
+          clearCloseTimer()
+          onActivate()
+          onOpenSub(true)
+          return
+        }
+        onRun()
+      }}
       style={{
         position: 'relative',
         padding: '6px 12px',

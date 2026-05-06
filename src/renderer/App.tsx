@@ -166,7 +166,7 @@ export default function App() {
   // appear they should hook into this same handler.
   useEffect(() => {
     const onBeforeUnload = () => {
-      try { flushFogSave() } catch { /* never block unload */ }
+      void flushFogSave().catch(() => { /* never block unload */ })
     }
     window.addEventListener('beforeunload', onBeforeUnload)
     return () => window.removeEventListener('beforeunload', onBeforeUnload)

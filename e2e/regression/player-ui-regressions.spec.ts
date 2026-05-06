@@ -1,6 +1,6 @@
 import { test, expect, type Page } from '@playwright/test'
 import { inflateSync } from 'zlib'
-import { launchApp, waitForPlayerWindow } from '../helpers/electron-launch'
+import { getWindowCount, launchApp, waitForPlayerWindow } from '../helpers/electron-launch'
 import {
   canvasPoint,
   createCampaign,
@@ -129,15 +129,15 @@ test.describe('Player view and UI regressions', () => {
     }
   })
 
-  test('player fog is opaque after cover/reveal and viewport control follows map rotation', async ({}, testInfo) => {
-      const { app, dmWindow, close } = await launchApp({ visualTestMode: true, windowSize: { width: 1440, height: 900 } })
+  test('player fog survives live rotation and hard player-window reconnect', async ({}, testInfo) => {
+    const { app, dmWindow, close } = await launchApp({ visualTestMode: true, windowSize: { width: 1440, height: 900 } })
     try {
       await createCampaign(dmWindow, `Player Fog ${Date.now()}`)
-      const mapId = await importMapAndOpenCanvas(dmWindow, app, TEST_MAPS.bridge)
+      await importMapAndOpenCanvas(dmWindow, app, TEST_MAPS.bridge)
 
       const playerWait = waitForPlayerWindow(app, 15_000)
       await dmWindow.evaluate(() => (window as any).electronAPI.openPlayerWindow())
-      const playerWindow = await playerWait
+      let playerWindow = await playerWait
       await playerWindow.setViewportSize({ width: 1280, height: 720 }).catch(() => {})
 
       await startSession(dmWindow)
@@ -145,32 +145,52 @@ test.describe('Player view and UI regressions', () => {
       const initialFogVersion = Number(await playerWindow.getByTestId('player-map-root').getAttribute('data-fog-version'))
 
       const beforeCover = await opaqueBlackScreenshotRatio(playerWindow)
+      // Do not wait for the debounced DB save here. The player sees
+      // coverAll via fog delta, then the hard-close/reopen path below
+      // must flush the pending save before building its full-sync.
       await dmWindow.evaluate(() => {
         window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'coverAll' } }))
       })
-      await expect.poll(async () => {
-        const fog = await dmWindow.evaluate((id) => (window as any).electronAPI.fog.get(id), mapId)
-        return !!fog.fogBitmap
-      }, { timeout: 10_000 }).toBe(true)
       await expect.poll(async () => {
         return Number(await playerWindow.getByTestId('player-map-root').getAttribute('data-fog-version'))
       }, { timeout: 10_000 }).toBeGreaterThan(initialFogVersion)
       await expect.poll(() => opaqueBlackScreenshotRatio(playerWindow), { timeout: 10_000 })
         .toBeGreaterThan(Math.max(0.25, beforeCover + 0.2))
+      const coveredRatio = await opaqueBlackScreenshotRatio(playerWindow)
       await playerWindow.screenshot({ path: testInfo.outputPath('player-fog-covered.png') })
+
+      await dmWindow.getByTestId('button-toggle-player-viewport').click()
+      await expect(dmWindow.getByTestId('canvas-area')).toHaveAttribute('data-player-viewport-visual-rotation', '0')
+      await dmWindow.getByTestId('button-player-rotation-90').click()
+      await expect(dmWindow.getByTestId('canvas-area')).toHaveAttribute('data-player-viewport-visual-rotation', '90')
+      await expect(playerWindow.getByTestId('player-map-root')).toHaveAttribute('data-covered-fog-ready', 'true')
+      await expect.poll(() => opaqueBlackScreenshotRatio(playerWindow), { timeout: 10_000 })
+        .toBeGreaterThan(Math.max(0.25, coveredRatio - 0.08))
+      await dmWindow.screenshot({ path: testInfo.outputPath('dm-player-viewport-rotated.png') })
+
+      // Simulate a hard player-display close while live. The DM must
+      // notice the disconnect, and the re-opened player window must
+      // request a full sync containing the current fog bitmaps.
+      await playerWindow.close()
+      await expect.poll(() => getWindowCount(app), { timeout: 10_000 }).toBe(1)
+      await expect(dmWindow.getByTestId('button-toggle-player-window')).toContainText('○', { timeout: 10_000 })
+
+      const reconnectWait = waitForPlayerWindow(app, 15_000)
+      await dmWindow.evaluate(() => (window as any).electronAPI.openPlayerWindow())
+      playerWindow = await reconnectWait
+      await playerWindow.setViewportSize({ width: 1280, height: 720 }).catch(() => {})
+      await expect(playerWindow.getByTestId('player-map-root')).toBeVisible({ timeout: 15_000 })
+      await expect(playerWindow.getByTestId('player-map-root')).toHaveAttribute('data-covered-fog-ready', 'true')
+      await expect.poll(() => opaqueBlackScreenshotRatio(playerWindow), { timeout: 10_000 })
+        .toBeGreaterThan(Math.max(0.25, coveredRatio - 0.08))
+      const reconnectedCoveredRatio = await opaqueBlackScreenshotRatio(playerWindow)
 
       await dmWindow.evaluate(() => {
         window.dispatchEvent(new CustomEvent('fog:action', { detail: { type: 'revealAll' } }))
       })
       await expect.poll(() => opaqueBlackScreenshotRatio(playerWindow), { timeout: 10_000 })
-        .toBeLessThan(beforeCover + 0.08)
+        .toBeLessThan(reconnectedCoveredRatio - 0.2)
       await playerWindow.screenshot({ path: testInfo.outputPath('player-fog-revealed.png') })
-
-      await dmWindow.getByTestId('button-toggle-player-viewport').click()
-      await expect(dmWindow.getByTestId('canvas-area')).toHaveAttribute('data-player-viewport-visual-rotation', '0')
-      await dmWindow.getByTestId('button-dm-rotation-90').click()
-      await expect(dmWindow.getByTestId('canvas-area')).toHaveAttribute('data-player-viewport-visual-rotation', '90')
-      await dmWindow.screenshot({ path: testInfo.outputPath('dm-player-viewport-rotated.png') })
     } finally {
       await dmWindow.evaluate(() =>
         (window as any).electronAPI?.closePlayerWindow?.().catch(() => {}),
