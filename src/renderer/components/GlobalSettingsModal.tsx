@@ -11,8 +11,8 @@ export type GlobalSettingsSection = 'storage' | 'appearance' | 'profile' | 'file
 
 interface GlobalSettingsModalProps {
   onClose: () => void
-  /** Pre-select a section so deep-links from chrome (e.g. Welcome's
-   *  👤 button) land on the right page. Defaults to 'storage'. */
+  /** Pre-select a section so deep-links from chrome land on the right
+   *  page. Defaults to 'storage'. */
   initialSection?: GlobalSettingsSection
 }
 
@@ -68,11 +68,11 @@ export function GlobalSettingsModal({ onClose, initialSection }: GlobalSettingsM
               maintain a parallel set of strings (and so we never re-
               introduce the duplicate-key bug where a sidebar string and
               a section object collide on the same JSON path). */}
-          <SectionTab id="storage" current={section} onSelect={setSection} icon="💾" label={t('globalSettings.storage.title')} />
-          <SectionTab id="appearance" current={section} onSelect={setSection} icon="🎨" label={t('globalSettings.appearance.title')} />
-          <SectionTab id="profile" current={section} onSelect={setSection} icon="👤" label={t('globalSettings.profile.title')} />
-          <SectionTab id="file" current={section} onSelect={setSection} icon="📁" label={t('globalSettings.fileSec.title')} />
-          <SectionTab id="about" current={section} onSelect={setSection} icon="ℹ" label={t('globalSettings.about.title')} />
+          <SectionTab id="storage" current={section} onSelect={setSection} label={t('globalSettings.storage.title')} />
+          <SectionTab id="appearance" current={section} onSelect={setSection} label={t('globalSettings.appearance.title')} />
+          <SectionTab id="profile" current={section} onSelect={setSection} label={t('globalSettings.profile.title')} />
+          <SectionTab id="file" current={section} onSelect={setSection} label={t('globalSettings.fileSec.title')} />
+          <SectionTab id="about" current={section} onSelect={setSection} label={t('globalSettings.about.title')} />
         </nav>
 
         <div style={{ flex: 1, overflowY: 'auto', padding: 'var(--sp-5)' }}>
@@ -91,13 +91,11 @@ function SectionTab({
   id,
   current,
   onSelect,
-  icon,
   label,
 }: {
   id: Section
   current: Section
   onSelect: (s: Section) => void
-  icon: string
   label: string
 }) {
   const active = current === id
@@ -122,7 +120,6 @@ function SectionTab({
         transition: 'all var(--transition)',
       }}
     >
-      <span style={{ fontSize: 16, width: 20, textAlign: 'center' }}>{icon}</span>
       <span>{label}</span>
     </button>
   )
@@ -241,7 +238,7 @@ function StorageSection() {
             onClick={handleOpenFolder}
             style={{ flex: '1 1 140px' }}
           >
-            📂 {t('globalSettings.storage.openFolder')}
+            {t('globalSettings.storage.openFolder')}
           </button>
           <button
             data-testid="button-change-data-folder"
@@ -250,7 +247,7 @@ function StorageSection() {
             disabled={busy}
             style={{ flex: '1 1 140px' }}
           >
-            🔀 {t('globalSettings.storage.changeFolder')}
+            {t('globalSettings.storage.changeFolder')}
           </button>
         </div>
 
@@ -261,7 +258,7 @@ function StorageSection() {
           border: '1px solid var(--border-subtle)',
         }}>
           <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 4 }}>
-            🧹 {t('globalSettings.storage.cleanupTitle')}
+          {t('globalSettings.storage.cleanupTitle')}
           </div>
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 'var(--sp-2)' }}>
             {t('globalSettings.storage.cleanupHint')}
@@ -303,7 +300,7 @@ function AppearanceSection() {
               onClick={() => { if (theme !== 'dark') toggleTheme() }}
               style={{ padding: '6px 14px' }}
             >
-              🌙 {t('globalSettings.appearance.dark')}
+              {t('globalSettings.appearance.dark')}
             </button>
             <button
               className={`btn ${theme === 'light' ? 'btn-primary' : 'btn-ghost'}`}
@@ -311,7 +308,7 @@ function AppearanceSection() {
               onClick={() => { if (theme !== 'light') toggleTheme() }}
               style={{ padding: '6px 14px' }}
             >
-              ☀ {t('globalSettings.appearance.light')}
+              {t('globalSettings.appearance.light')}
             </button>
           </div>
         </SettingRow>
@@ -482,7 +479,7 @@ function FileSection({ onClose }: { onClose: () => void }) {
         border: '1px solid var(--border-subtle)',
       }}>
         <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 4 }}>
-          📥 {t('globalSettings.fileSec.importTitle')}
+          {t('globalSettings.fileSec.importTitle')}
         </div>
         <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 'var(--sp-2)' }}>
           {t('globalSettings.fileSec.importHint')}

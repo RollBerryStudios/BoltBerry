@@ -22,6 +22,13 @@ test.describe('Visual regression — core surfaces', () => {
         caret: 'hide',
         maxDiffPixelRatio: 0.01,
       })
+      await dmWindow.getByTestId('button-open-settings').click()
+      await expect(dmWindow.getByRole('dialog', { name: /Einstellungen|Settings/i })).toBeVisible()
+      await expect(dmWindow).toHaveScreenshot('settings-dark-de.png', {
+        animations: 'disabled',
+        caret: 'hide',
+        maxDiffPixelRatio: 0.01,
+      })
     } finally {
       await close()
     }
