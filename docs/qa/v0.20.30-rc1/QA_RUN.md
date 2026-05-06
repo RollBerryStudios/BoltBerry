@@ -77,4 +77,4 @@ Run this on the packaged app before release signoff:
 
 - Manual packaged-app live-session script still recommended on the hardened release artifact because Playwright attach is intentionally blocked by Electron fuses. Automated packaged UI/live-session coverage is now available through the unfused QA artifact.
 - Release signing/notarization remains outside this local QA run; `npm run pack` intentionally produced an unsigned directory build.
-- Consider adding CI coverage for `npm run pack:qa:unfused` plus the targeted packaged UI/live-session suite on release branches.
+- CI coverage for `npm run pack:qa:unfused` plus packaged UI/live-session QA was added to `.github/workflows/ci.yml` as `Packaged QA UI (Linux)`, running on `main`, scheduled runs, and manual dispatch.

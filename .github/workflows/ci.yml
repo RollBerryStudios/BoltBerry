@@ -121,6 +121,56 @@ jobs:
           npx @electron/fuses read --app "$exe"
           BOLTBERRY_E2E_EXECUTABLE_PATH="$exe" xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npm run test:e2e:packaged
 
+  packaged-qa-ui-linux:
+    name: Packaged QA UI (Linux)
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.ref == 'refs/heads/main'
+    needs: [encoding-check, build-check]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          lfs: true
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+      - name: Package unfused QA app
+        run: npm run pack:qa:unfused
+      - name: Run packaged UI and live-session QA
+        shell: bash
+        run: |
+          exe="$(find release/qa-unfused -maxdepth 4 -type f -perm -111 \( -name 'BoltBerry' -o -name 'boltberry' \) | head -n 1)"
+          if [ -z "$exe" ]; then
+            echo "::error::Could not find unfused QA BoltBerry executable under release/qa-unfused/"
+            find release/qa-unfused -maxdepth 4 -type f -print
+            exit 1
+          fi
+          echo "Testing unfused QA executable: $exe"
+          npx @electron/fuses read --app "$exe"
+          BOLTBERRY_E2E_EXECUTABLE_PATH="$exe" xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" \
+            npx playwright test e2e/smoke/packaged-app.spec.ts --project=smoke
+          BOLTBERRY_E2E_EXECUTABLE_PATH="$exe" xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" \
+            npx playwright test \
+              e2e/critical-path/player-window.spec.ts \
+              e2e/critical-path/two-window-sync.spec.ts \
+              e2e/critical-path/player-render-workflows.spec.ts \
+              e2e/regression/player-ui-regressions.spec.ts \
+              e2e/critical-path/scene-grid-workflows.spec.ts \
+              e2e/regression/canvas-context-actions.spec.ts \
+              --project=critical-path --project=regression
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: playwright-report-packaged-qa-linux
+          path: playwright-report/
+          retention-days: 14
+
   e2e-cross-platform-smoke:
     name: E2E Smoke (${{ matrix.os }})
     needs: encoding-check

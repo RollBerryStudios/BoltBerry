@@ -249,4 +249,6 @@ The repository workflow runs Linux E2E as a required gate with `npm run build` f
 
 The workflow also includes a non-blocking macOS/Windows smoke matrix. It is useful platform signal, but full regression and critical-path coverage remain Linux-gated.
 
+On `main`, scheduled runs, and manual dispatch, CI also builds the unfused QA package and runs the packaged UI smoke plus targeted player/fog/sync live-session suite against that packaged executable. This keeps Playwright packaged UI coverage available without weakening the fused release artifact.
+
 A scheduled/manual Linux nightly job runs `npm run test:e2e:nightly` outside the PR gate for larger stress checks.

@@ -37,6 +37,9 @@ This release packages the Player View and UI regression fixes verified after the
 - `npm run test:e2e:visual` passed with 4 visual baselines.
 - `npx playwright test e2e/regression/performance-stability.spec.ts --project=regression` passed with 3 performance/stability guards.
 - `BOLTBERRY_RUN_NIGHTLY=1 npx playwright test e2e/nightly/large-data.stress.spec.ts --project=nightly` passed with 2 large-data stress guards.
+- Hardened packaged app process smoke and fuse verification passed locally.
+- Unfused packaged QA build passed locally; packaged UI smoke and the targeted 21-test player/fog/sync live-session suite passed against that QA artifact.
+- CI now includes a Linux `Packaged QA UI` job on `main`, scheduled runs, and manual dispatch to repeat the unfused packaged UI/live-session checks.
 
 ## Release Procedure
 
