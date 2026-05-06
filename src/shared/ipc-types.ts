@@ -271,6 +271,7 @@ export const IPC = {
   GET_DEFAULT_USER_DATA_FOLDER: 'app:get-default-user-data-folder',
   SET_USER_DATA_FOLDER: 'app:set-user-data-folder',
   OPEN_CONTENT_FOLDER: 'app:open-content-folder',
+  OPEN_EXTERNAL: 'app:open-external',
   GET_IMAGE_AS_BASE64: 'app:get-image-as-base64',
   GET_USER_DATA_PATH: 'app:get-user-data-path',
   RESCAN_CONTENT_FOLDER: 'app:rescan-content-folder',

@@ -1057,6 +1057,8 @@
     "about": {
       "title": "About BoltBerry",
       "tagline": "Local virtual tabletop for home sessions.",
+      "studio": "RollBerry Studios",
+      "contact": "Contact: kontakt@rollberry.de",
       "openFull": "Show full credits & license…"
     }
   },

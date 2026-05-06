@@ -55,7 +55,7 @@ export function AboutDialog({ onClose }: { onClose: () => void }) {
               {' '}
               <a
                 className="bb-about-link"
-                href="https://github.com/RollBerry-Studios/BoltBerry/blob/main/LICENSE"
+                href="https://github.com/RollBerryStudios/BoltBerry/blob/main/LICENSE"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -150,7 +150,7 @@ export function AboutDialog({ onClose }: { onClose: () => void }) {
               {t('about.fullNotice')}{' '}
               <a
                 className="bb-about-link"
-                href="https://github.com/RollBerry-Studios/BoltBerry/blob/main/NOTICE.md"
+                href="https://github.com/RollBerryStudios/BoltBerry/blob/main/NOTICE.md"
                 target="_blank"
                 rel="noreferrer"
               >

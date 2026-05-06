@@ -1057,6 +1057,8 @@
     "about": {
       "title": "Über BoltBerry",
       "tagline": "Lokales Virtual-Tabletop für Heim-Sessions.",
+      "studio": "RollBerry Studios",
+      "contact": "Kontakt: kontakt@rollberry.de",
       "openFull": "Vollständige Credits & Lizenz anzeigen…"
     }
   },

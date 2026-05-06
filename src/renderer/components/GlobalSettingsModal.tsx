@@ -500,6 +500,10 @@ function FileSection({ onClose }: { onClose: () => void }) {
 // modal doesn't keep a parallel about copy that would drift over time.
 function AboutSection({ onClose }: { onClose: () => void }) {
   const { t } = useTranslation()
+  const open = (url: string) => {
+    window.electronAPI?.openExternal(url).catch(() => {})
+  }
+
   return (
     <>
       <SectionHeader title={t('globalSettings.about.title')} />
@@ -514,6 +518,19 @@ function AboutSection({ onClose }: { onClose: () => void }) {
         <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700, marginBottom: 4 }}>BoltBerry</div>
         <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 'var(--sp-4)' }}>
           {t('globalSettings.about.tagline')}
+        </div>
+        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: 'var(--sp-3)' }}>
+          {t('globalSettings.about.studio')}
+          <br />
+          {t('globalSettings.about.contact')}
+        </div>
+        <div style={{ display: 'flex', gap: 'var(--sp-2)', justifyContent: 'center', flexWrap: 'wrap', marginBottom: 'var(--sp-3)' }}>
+          <button className="btn btn-ghost" onClick={() => open('https://github.com/RollBerryStudios/BoltBerry')}>
+            GitHub
+          </button>
+          <button className="btn btn-ghost" onClick={() => open('mailto:kontakt@rollberry.de')}>
+            kontakt@rollberry.de
+          </button>
         </div>
         <button
           className="btn btn-primary"

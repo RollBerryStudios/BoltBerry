@@ -65,6 +65,7 @@ export const dmApi = {
   chooseFolder: () => ipcRenderer.invoke('app:choose-folder'),
   setUserDataFolder: (path: string) => ipcRenderer.invoke('app:set-user-data-folder', path),
   openContentFolder: () => ipcRenderer.invoke('app:open-content-folder'),
+  openExternal: (url: string): Promise<boolean> => ipcRenderer.invoke(IPC.OPEN_EXTERNAL, url),
   getImageAsBase64: (path: string) => ipcRenderer.invoke('app:get-image-as-base64', path),
   getUserDataPath: () => ipcRenderer.invoke('app:get-user-data-path'),
   rescanContentFolder: (campaignId: number) => ipcRenderer.invoke('app:rescan-content-folder', campaignId),

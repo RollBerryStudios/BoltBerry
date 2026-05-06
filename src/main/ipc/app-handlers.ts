@@ -1,4 +1,4 @@
-import { ipcMain, dialog, app, BrowserWindow } from 'electron'
+import { ipcMain, dialog, app, BrowserWindow, shell } from 'electron'
 import { join, extname, relative, resolve, isAbsolute, sep } from 'path'
 import { copyFileSync, existsSync, mkdirSync, statSync, writeFileSync, readFileSync, unlinkSync, realpathSync, readdirSync, lstatSync } from 'fs'
 import { readFile } from 'fs/promises'
@@ -43,6 +43,26 @@ function isSafeAssetPath(p: string): boolean {
   // Everything we persist lives under `assets/<type>/` so a strict
   // prefix rules out random user-supplied strings.
   return p.startsWith('assets/')
+}
+
+function safeExternalUrl(raw: string): string | null {
+  try {
+    const url = new URL(raw)
+    if (url.protocol === 'mailto:' && url.pathname === 'kontakt@rollberry.de') {
+      return url.toString()
+    }
+    if (url.protocol !== 'https:' || url.hostname !== 'github.com') return null
+    if (
+      url.pathname === '/RollBerryStudios' ||
+      url.pathname === '/RollBerryStudios/BoltBerry' ||
+      url.pathname === '/RollBerryStudios/BoltBerry/issues/new'
+    ) {
+      return url.toString()
+    }
+  } catch {
+    return null
+  }
+  return null
 }
 
 /**
@@ -209,7 +229,6 @@ export function registerAppHandlers(): void {
 
   // Open content folder
   ipcMain.handle(IPC.OPEN_CONTENT_FOLDER, async () => {
-    const { shell } = await import('electron')
     const userDataPath = getCustomUserDataPath() || app.getPath('userData')
     const contentPath = join(userDataPath, 'assets')
     // shell.openPath resolves with '' on success, otherwise an error message.
@@ -217,6 +236,13 @@ export function registerAppHandlers(): void {
     // of letting the user click "Open folder" and see nothing happen.
     const err = await shell.openPath(contentPath)
     if (err) throw new Error(`Open path failed: ${err}`)
+  })
+
+  ipcMain.handle(IPC.OPEN_EXTERNAL, async (_event, rawUrl: string) => {
+    const safeUrl = safeExternalUrl(rawUrl)
+    if (!safeUrl) return false
+    await shell.openExternal(safeUrl)
+    return true
   })
 
   // Get image as base64 for direct embedding (e.g. PDF-to-canvas rendering)
