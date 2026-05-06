@@ -4,6 +4,7 @@ import { Html } from 'react-konva-utils'
 import type { NoteRecord } from '@shared/ipc-types'
 import { useMapTransformStore } from '../../stores/mapTransformStore'
 import { noteCategoryMeta, normalizeNoteIcon, noteMarkerIcon } from '../../notes/categories'
+import { templateForCategory } from '../../notes/templates'
 import { showToast } from '../shared/Toast'
 
 type NoteMarker = NoteRecord & { pinX: number; pinY: number }
@@ -74,17 +75,18 @@ export function NoteMarkerLayer({ campaignId, mapId, visible }: NoteMarkerLayerP
   async function createMarker(detail: CreateNoteMarkerDetail) {
     if (!window.electronAPI || !campaignId) return
     const category = noteCategoryMeta(detail.category)
+    const template = templateForCategory(category.id)
     try {
       const created = await window.electronAPI.notes.create({
         campaignId,
         mapId,
         category: category.id,
-        title: `${category.id}-Marker`,
-        content: '',
+        title: template.title,
+        content: template.content,
         pinX: detail.x,
         pinY: detail.y,
         icon: null,
-        tags: [category.key],
+        tags: template.tags,
       })
       if (created.pinX == null || created.pinY == null) return
       setMarkers((prev) => [created as NoteMarker, ...prev])

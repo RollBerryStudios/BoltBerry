@@ -845,6 +845,9 @@
       "locations": "Orte",
       "quests": "Quests",
       "items": "Gegenstände",
+      "lore": "Lore",
+      "rules": "Regeln",
+      "handouts": "Handouts",
       "misc": "Sonstiges"
     },
     "campaignNotes": "Kampagnen-Notizen",

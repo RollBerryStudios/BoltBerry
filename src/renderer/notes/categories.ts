@@ -11,6 +11,9 @@ export const NOTE_CATEGORIES: NoteCategoryMeta[] = [
   { key: 'locations', id: 'Orte', icon: '🗺️', color: '#3b82f6' },
   { key: 'quests', id: 'Quests', icon: '⚔️', color: '#ef4444' },
   { key: 'items', id: 'Gegenstände', icon: '🎒', color: '#a855f7' },
+  { key: 'lore', id: 'Lore', icon: '📜', color: '#14b8a6' },
+  { key: 'rules', id: 'Regeln', icon: '🎲', color: '#f97316' },
+  { key: 'handouts', id: 'Handouts', icon: '📣', color: '#0ea5e9' },
   { key: 'misc', id: 'Sonstiges', icon: '📌', color: '#64748b' },
 ]
 

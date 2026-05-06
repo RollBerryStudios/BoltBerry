@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useMemo, memo, useRef } from 'react'
 import { useCampaignStore } from '../../../stores/campaignStore'
-import { NOTE_CATEGORIES } from '../../../notes/categories'
+import { NOTE_CATEGORIES, noteCategoryMeta } from '../../../notes/categories'
+import { NOTE_TEMPLATES, blankTemplateForCategory, categoryFromTemplate, templateForCategory, type NoteTemplate } from '../../../notes/templates'
 
 /* Notes panel — each category is now a folder of multiple notes.
 
@@ -89,6 +90,7 @@ const MAP_BUCKET = '__map__'
 
 interface NoteRow {
   id: number
+  category: string
   title: string
   content: string
   updated_at: string
@@ -168,6 +170,7 @@ export function NotesPanel() {
         if (!buckets[row.category]) buckets[row.category] = []
         buckets[row.category].push({
           id: row.id,
+          category: row.category,
           title: row.title,
           content: row.content,
           updated_at: row.updatedAt,
@@ -179,6 +182,7 @@ export function NotesPanel() {
         const mapRows = await window.electronAPI.notes.listCategoryByMap(campaignId, mapId)
         buckets[MAP_BUCKET] = mapRows.map((r) => ({
           id: r.id,
+          category: r.category,
           title: r.title,
           content: r.content,
           updated_at: r.updatedAt,
@@ -224,27 +228,33 @@ export function NotesPanel() {
     }
   }, [activeCampaignId])
 
-  async function createNote(bucket: string) {
+  async function createNote(bucket: string, template?: NoteTemplate) {
     if (!window.electronAPI || !activeCampaignId) return
-    const category = bucket === MAP_BUCKET ? 'Allgemein' : bucket
+    const blankTemplate = blankTemplateForCategory(bucket === MAP_BUCKET ? 'Allgemein' : bucket)
+    const selectedTemplate = template ?? blankTemplate
+    const category = categoryFromTemplate(selectedTemplate)
+    const targetBucket = bucket === MAP_BUCKET ? MAP_BUCKET : category
     const mapId = bucket === MAP_BUCKET ? activeMapId : null
     try {
       const created = await window.electronAPI.notes.create({
         campaignId: activeCampaignId,
         mapId,
         category,
-        title: 'Neue Notiz',
-        content: '',
+        title: selectedTemplate.title,
+        content: selectedTemplate.content,
+        tags: selectedTemplate.tags,
       })
       const newRow: NoteRow = {
         id: created.id,
+        category: created.category,
         title: created.title,
         content: created.content,
         updated_at: created.updatedAt,
         tags: created.tags ?? [],
       }
-      setNotesByBucket((prev) => ({ ...prev, [bucket]: [newRow, ...(prev[bucket] ?? [])] }))
-      setSelectedByBucket((prev) => ({ ...prev, [bucket]: created.id }))
+      if (bucket !== MAP_BUCKET && category !== activeCategory) setActiveCategory(category)
+      setNotesByBucket((prev) => ({ ...prev, [targetBucket]: [newRow, ...(prev[targetBucket] ?? [])] }))
+      setSelectedByBucket((prev) => ({ ...prev, [targetBucket]: created.id }))
     } catch (err) {
       console.error('[NotesPanel] createNote failed:', err)
     }
@@ -532,9 +542,11 @@ export function NotesPanel() {
             notes={notes}
             selectedId={selectedId}
             onSelect={(id) => setSelectedByBucket((prev) => ({ ...prev, [activeBucket]: id }))}
-            onCreate={() => createNote(activeBucket)}
+            onCreate={() => createNote(activeBucket, blankTemplateForCategory(activeBucket === MAP_BUCKET ? 'Allgemein' : activeBucket))}
+            onCreateTemplate={(template) => createNote(activeBucket, template)}
             onDelete={(id) => deleteNote(activeBucket, id)}
             compact={compactLayout}
+            activeBucket={activeBucket}
           />
         )}
 
@@ -621,16 +633,21 @@ function NoteList({
   selectedId,
   onSelect,
   onCreate,
+  onCreateTemplate,
   onDelete,
   compact,
+  activeBucket,
 }: {
   notes: NoteRow[]
   selectedId: number | null
   onSelect: (id: number) => void
   onCreate: () => void
+  onCreateTemplate: (template: NoteTemplate) => void
   onDelete: (id: number) => void
   compact?: boolean
+  activeBucket: string
 }) {
+  const activeCategory = activeBucket === MAP_BUCKET ? 'Allgemein' : activeBucket
   return (
     <div style={{
       width: compact ? '100%' : 192,
@@ -665,8 +682,13 @@ function NoteList({
         onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255, 198, 46, 0.2)')}
         onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--accent-dim)')}
       >
-        + Neue Notiz
+        + Leere Notiz
       </button>
+      <TemplateStrip
+        activeCategory={activeCategory}
+        mapScoped={activeBucket === MAP_BUCKET}
+        onCreate={onCreateTemplate}
+      />
       <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
         {notes.length === 0 ? (
           <div style={{ padding: 12, fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.4 }}>
@@ -688,6 +710,73 @@ function NoteList({
   )
 }
 
+function TemplateStrip({
+  activeCategory,
+  mapScoped,
+  onCreate,
+}: {
+  activeCategory: string
+  mapScoped: boolean
+  onCreate: (template: NoteTemplate) => void
+}) {
+  const blank = blankTemplateForCategory(activeCategory)
+  const active = templateForCategory(activeCategory)
+  const choices = [
+    blank,
+    ...(active.id === 'blank' ? [] : [active]),
+    ...NOTE_TEMPLATES.filter((template) => template.id !== active.id),
+  ]
+
+  return (
+    <div
+      aria-label="Notizvorlagen"
+      style={{
+        display: 'flex',
+        gap: 6,
+        padding: '7px 8px',
+        borderBottom: '1px solid var(--border-subtle)',
+        overflowX: 'auto',
+        background: mapScoped ? 'rgba(59, 130, 246, 0.08)' : 'var(--bg-surface)',
+        flexShrink: 0,
+      }}
+    >
+      {choices.map((template) => (
+        <button
+          key={template.id === 'blank' ? `${template.id}-${activeCategory}` : template.id}
+          type="button"
+          onClick={() => onCreate(template)}
+          title={`${template.label} · ${template.hint}`}
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '18px minmax(0, 1fr)',
+            gridTemplateRows: 'auto auto',
+            alignItems: 'center',
+            columnGap: 5,
+            minWidth: 86,
+            maxWidth: 96,
+            padding: '6px 7px',
+            background: template.id === 'blank' ? 'var(--bg-base)' : 'var(--bg-elevated)',
+            border: '1px solid var(--border-subtle)',
+            borderRadius: 'var(--radius-sm)',
+            color: 'var(--text-primary)',
+            cursor: 'pointer',
+            textAlign: 'left',
+            fontFamily: 'inherit',
+          }}
+        >
+          <span aria-hidden="true" style={{ gridRow: '1 / 3', fontSize: 15, lineHeight: 1 }}>{template.icon}</span>
+          <strong style={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontSize: 10, lineHeight: 1.2 }}>
+            {template.label}
+          </strong>
+          <small style={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: 'var(--text-muted)', fontSize: 9, lineHeight: 1.2 }}>
+            {template.hint}
+          </small>
+        </button>
+      ))}
+    </div>
+  )
+}
+
 function NoteRowItem({
   note,
   active,
@@ -700,6 +789,7 @@ function NoteRowItem({
   onDelete: () => void
 }) {
   const [hover, setHover] = useState(false)
+  const meta = noteCategoryMeta(note.category)
   const subtitle = note.content.split('\n')[0]?.replace(/^#+\s*/, '').slice(0, 48) || '—'
   return (
     <div
@@ -731,11 +821,15 @@ function NoteRowItem({
         }}
       >
         <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 5,
           fontWeight: 600,
           overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
           marginBottom: 2,
         }}>
-          {note.title || 'Ohne Titel'}
+          <span aria-hidden="true" style={{ flexShrink: 0 }}>{meta.icon}</span>
+          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{note.title || 'Ohne Titel'}</span>
         </div>
         <div style={{
           fontSize: 10,

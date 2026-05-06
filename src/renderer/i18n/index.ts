@@ -4,8 +4,7 @@ import de from './locales/de.json'
 import en from './locales/en.json'
 
 const savedLang = localStorage.getItem('boltberry-lang')
-const browserLang = navigator.language.startsWith('de') ? 'de' : 'en'
-const defaultLang = savedLang ?? browserLang
+const defaultLang = savedLang ?? 'de'
 
 i18n
   .use(initReactI18next)
